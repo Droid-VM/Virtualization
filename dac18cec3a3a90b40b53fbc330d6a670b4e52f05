@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f07e8042_2c9dcced",
+        "filename": "tests/hostside/java/android/virt/test/VsockTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:31Z",
+      "side": 1,
+      "message": "not used",
+      "range": {
+        "startLine": 28,
+        "startChar": 40,
+        "endLine": 28,
+        "endChar": 44
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53dd29d7_33d500c1",
+        "filename": "tests/hostside/java/android/virt/test/VsockTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:31Z",
+      "side": 1,
+      "message": "nit: add suffix _MS",
+      "range": {
+        "startLine": 33,
+        "startChar": 30,
+        "endLine": 33,
+        "endChar": 57
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d34c50c1_6f62498e",
+        "filename": "tests/hostside/java/android/virt/test/VsockTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:31Z",
+      "side": 1,
+      "message": "Just curious, in what case would it need to retry to recover?  Should we just report an error here?  Could this be an infinite loop?",
+      "range": {
+        "startLine": 76,
+        "startChar": 20,
+        "endLine": 76,
+        "endChar": 62
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c62db72f_78eebb16",
+        "filename": "tests/hostside/native/vsock/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:31Z",
+      "side": 1,
+      "message": "(If you make the change to not packaging these files as a JAR resource, then...)\n\nThis is ok for now to run locally.  But later when you want to put this in VTS or run continuously, you need to use cc_test (or more ideally cc_binary_test_helper, if it supports test suites now).",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 9
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95b67f76_e13cb728",
+        "filename": "tests/hostside/native/vsock/client.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:31Z",
+      "side": 1,
+      "message": "maybe use android::base::unique_fd for RAII",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 6
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb01bc08_43557fe9",
+        "filename": "tests/hostside/native/vsock/client.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:31Z",
+      "side": 1,
+      "message": "Wrap with TEMP_FAILURE_RETRY(connect(...))",
+      "range": {
+        "startLine": 43,
+        "startChar": 10,
+        "endLine": 43,
+        "endChar": 17
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95aaf451_7a547bcf",
+        "filename": "tests/hostside/native/vsock/client.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:31Z",
+      "side": 1,
+      "message": "TEMP_FAILURE_RETRY",
+      "range": {
+        "startLine": 48,
+        "startChar": 17,
+        "endLine": 48,
+        "endChar": 21
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ff71119_e20234bd",
+        "filename": "tests/hostside/native/vsock/client.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:31Z",
+      "side": 1,
+      "message": "Maybe add a fflush(stdout)...?",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 9
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08eb1b24_2c0de8c5",
+        "filename": "tests/hostside/native/vsock/common.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:31Z",
+      "side": 1,
+      "message": "Can you use android-base/parseint.h?  I think you can link libbase statically if needed.",
+      "range": {
+        "startLine": 36,
+        "startChar": 12,
+        "endLine": 36,
+        "endChar": 22
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08dc97d6_3eb70f88",
+        "filename": "tests/hostside/native/vsock/server.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:31Z",
+      "side": 1,
+      "message": "TEMP_FAILURE_RETRY",
+      "range": {
+        "startLine": 57,
+        "startChar": 16,
+        "endLine": 57,
+        "endChar": 22
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88a3a6da_9fffd444",
+        "filename": "tests/hostside/native/vsock/server.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:31Z",
+      "side": 1,
+      "message": "TEMP_FAILURE_RETRY",
+      "range": {
+        "startLine": 63,
+        "startChar": 17,
+        "endLine": 63,
+        "endChar": 22
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b0e307a_638ded22",
+        "filename": "tests/hostside/native/vsock/server.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:31Z",
+      "side": 1,
+      "message": "android::base::WriteFully",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 62
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
