@@ -38,12 +38,14 @@ genrule {
         kernel_target_stem + "-x86_64",
         ":virt_hostside_tests_initramfs-arm64",
         ":virt_hostside_tests_initramfs-x86_64",
+        ":virt_hostside_tests_vsock_client",
     ],
     out: [
         "res/kernel-arm64",
         "res/kernel-x86_64",
         "res/ramdisk-arm64",
         "res/ramdisk-x86_64",
+        "res/bin/vsock_client",
     ],
     tool_files: [ "scripts/place_files.sh" ],
     cmd: "$(location scripts/place_files.sh) $(in) -- $(out)",
@@ -57,9 +59,11 @@ genrule {
     out: [ "initramfs.lz4" ],
     srcs: [
         ":virt_hostside_tests_guest_init",
+        ":virt_hostside_tests_vsock_server",
     ],
     cmd: "$(location scripts/place_files.sh) $(in) -- " +
                 "$(genDir)/root/init " +
+                "$(genDir)/root/bin/vsock_server " +
          "&& $(location mkbootfs) $(genDir)/root | $(location lz4) -fq - $(out)",
 }
 
