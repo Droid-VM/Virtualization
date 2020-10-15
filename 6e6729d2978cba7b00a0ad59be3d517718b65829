@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b952d7a6_86f98ad6",
+        "filename": "tests/hostside/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:25Z",
+      "side": 1,
+      "message": "Ideally we don\u0027t need to put blobs for both arch, since Android\u0027s build system assumes arch-specific lunch target.  But it looks like genrule does not support \"arch\" rule.  We\u0027ll just embed unused files then.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 39
+      },
+      "revId": "6e6729d2978cba7b00a0ad59be3d517718b65829",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab089777_0f543637",
+        "filename": "tests/hostside/java/android/virt/test/VirtTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:25Z",
+      "side": 1,
+      "message": "not used",
+      "range": {
+        "startLine": 26,
+        "startChar": 40,
+        "endLine": 26,
+        "endChar": 44
+      },
+      "revId": "6e6729d2978cba7b00a0ad59be3d517718b65829",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfad490d_8b543f46",
+        "filename": "tests/hostside/java/android/virt/test/VirtTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:25Z",
+      "side": 1,
+      "message": "not used",
+      "range": {
+        "startLine": 28,
+        "startChar": 47,
+        "endLine": 28,
+        "endChar": 70
+      },
+      "revId": "6e6729d2978cba7b00a0ad59be3d517718b65829",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f1adaba_5ecd1bac",
+        "filename": "tests/hostside/java/android/virt/test/VirtTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:25Z",
+      "side": 1,
+      "message": "not used?",
+      "range": {
+        "startLine": 57,
+        "startChar": 23,
+        "endLine": 57,
+        "endChar": 33
+      },
+      "revId": "6e6729d2978cba7b00a0ad59be3d517718b65829",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a74c8adc_d81b44a2",
+        "filename": "tests/hostside/java/android/virt/test/VirtTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:25Z",
+      "side": 1,
+      "message": "Put `\u003ctarget_preparer class\u003d\"com.android.tradefed.targetprep.RootTargetPreparer\" /\u003e` in AndroidTest.xml instead.",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 5
+      },
+      "revId": "6e6729d2978cba7b00a0ad59be3d517718b65829",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30e817f1_6b7974e2",
+        "filename": "tests/hostside/java/android/virt/test/VirtTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:25Z",
+      "side": 1,
+      "message": "do you need this?  If you use executeShellV2Command, the returned CommandResult has getStatus()",
+      "range": {
+        "startLine": 81,
+        "startChar": 47,
+        "endLine": 81,
+        "endChar": 68
+      },
+      "revId": "6e6729d2978cba7b00a0ad59be3d517718b65829",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "994481d2_809e2fd6",
+        "filename": "tests/hostside/java/android/virt/test/VirtTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-15T18:42:25Z",
+      "side": 1,
+      "message": "Instead of packaging and managing the blobs, you can simply put the files in the \"distribution\" using the \"test_suites\" property in Soong rules.  Then you only need to either call getDevice().pushFile() from the local directory manually, or use `\u003ctarget_preparer class\u003d\"com.android.tradefed.targetprep.PushFilePreparer\"\u003e` in AndroidTest.xml.\n\nIf you need to get the local file path, you can use CompatibilityBuildHelper.getTestFile(...), which locates files in a \"test suites\" directory.",
+      "range": {
+        "startLine": 121,
+        "startChar": 8,
+        "endLine": 127,
+        "endChar": 9
+      },
+      "revId": "6e6729d2978cba7b00a0ad59be3d517718b65829",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
