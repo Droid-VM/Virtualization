@@ -24,6 +24,9 @@ java_test_host {
     test_suites: ["general-tests"],
     libs: ["tradefed"],
     java_resources: [":virt_hostside_tests_res"],
+    required: [
+        "virt_hostside_tests_vsock_client",
+    ],
 }
 
 // Place Java resources in locations expected by the hostside test.
@@ -56,9 +59,11 @@ genrule {
     out: ["initramfs.lz4"],
     srcs: [
         ":virt_hostside_tests_guest_init",
+        ":virt_hostside_tests_vsock_server",
     ],
     cmd: "$(location scripts/place_files.sh) $(in) -- " +
         "$(genDir)/root/init " +
+        "$(genDir)/root/bin/vsock_server " +
         "&& $(location mkbootfs) $(genDir)/root | $(location lz4) -fq - $(out)",
 }
 
