@@ -30,6 +30,7 @@
     <!-- Push test binaries to the device. -->
     <target_preparer class="com.android.tradefed.targetprep.PushFilePreparer">
         <option name="cleanup" value="true" />
+        <option name="push-file" key="virt_hostside_tests_vsock_server" value="/data/local/tmp/virt-test" />
     </target_preparer>
 
     <!-- Root currently needed to run CrosVM. TODO: remove -->
