@@ -16,6 +16,24 @@
       "message": "If strtoul returns 0 because no valid number was found, shouldn\u0027t that also be considered an error?",
       "revId": "a8db6a53e8d2b3e8ea1f15d68ddef6f4088f6724",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d557fadb_19646747",
+        "filename": "tests/hostside/native/vsock/common.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-10-16T16:18:47Z",
+      "side": 1,
+      "message": "android::base has ParseUint [1] in C++ that handles these cases, is it worth switching languages to pick up the existing utilities?\n\n[1] -- http://cs/android/system/libbase/include/android-base/parseint.h?l\u003d35\u0026rcl\u003d4b30bc912233de9b07ae5563de17889fe40f0bee",
+      "parentUuid": "7e60c52f_e2019107",
+      "revId": "a8db6a53e8d2b3e8ea1f15d68ddef6f4088f6724",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
