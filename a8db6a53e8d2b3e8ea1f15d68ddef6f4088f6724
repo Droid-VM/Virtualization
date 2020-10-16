@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e60c52f_e2019107",
+        "filename": "tests/hostside/native/vsock/common.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2020-10-16T16:08:54Z",
+      "side": 1,
+      "message": "If strtoul returns 0 because no valid number was found, shouldn\u0027t that also be considered an error?",
+      "revId": "a8db6a53e8d2b3e8ea1f15d68ddef6f4088f6724",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
