@@ -16,6 +16,24 @@
       "message": "At least put this in there to match Android style guide:\n\n  # Limit line length.\n  linelength\u003d100",
       "revId": "1e0d4bcc1e7f12d1359cf2eed130971ac6569e33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a961a60e_4d491a73",
+        "filename": "CPPLINT.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-10-19T13:51:30Z",
+      "side": 1,
+      "message": "Are clang-format and cpplint going to conflict with each other? We should either not use clang-format (seems to be what art does) or leave all for formatting to clang-format. But I haven\u0027t used cpplint before so don\u0027t know how nicely it plays with other tools doing similar things.",
+      "parentUuid": "0ac8897f_b354d89b",
+      "revId": "1e0d4bcc1e7f12d1359cf2eed130971ac6569e33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
