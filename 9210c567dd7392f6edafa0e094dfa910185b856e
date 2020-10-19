@@ -16,6 +16,29 @@
       "message": "Let me know if someone starts to need to use a dynamic linked executable.  We\u0027ll need /system/bin/linker and some linker config setup.",
       "revId": "9210c567dd7392f6edafa0e094dfa910185b856e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3823d238_ca143efc",
+        "filename": "tests/hostside/native/init/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-10-19T10:36:57Z",
+      "side": 1,
+      "message": "I know this is a rip from first_stage_init, but is recovery something that we\u0027d have to deal with in VMs? I guess not as if the VM gets itself into a bad state it can be solved from Android by taking a VM update?",
+      "range": {
+        "startLine": 39,
+        "startChar": 35,
+        "endLine": 39,
+        "endChar": 43
+      },
+      "revId": "9210c567dd7392f6edafa0e094dfa910185b856e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
