@@ -192,6 +192,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d6ea2d9_ddd67c98",
+        "filename": "tests/hostside/java/android/virt/test/VsockTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-19T15:22:36Z",
+      "side": 1,
+      "message": "Have a look at the new PS. I\u0027ve encountered just one problem: executeShellV2Command does not allow the task to be interrupted. So if the VMM crashes, the server continue to listen until it times out. I\u0027ll file a bug with Tradefed - the underlying RunUtil class has a setting for this, it\u0027s just not enabled.",
+      "parentUuid": "3746cae5_ab6eb02f",
+      "range": {
+        "startLine": 76,
+        "startChar": 20,
+        "endLine": 76,
+        "endChar": 62
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c62db72f_78eebb16",
         "filename": "tests/hostside/native/vsock/Android.bp",
         "patchSetId": 2
