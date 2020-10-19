@@ -34,6 +34,24 @@
       "parentUuid": "7e60c52f_e2019107",
       "revId": "a8db6a53e8d2b3e8ea1f15d68ddef6f4088f6724",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dd312d2_d2376316",
+        "filename": "tests/hostside/native/vsock/common.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-19T12:15:44Z",
+      "side": 1,
+      "message": "Ok, you\u0027re right. Let\u0027s switch this to C++ and libbase + liblog. I was trying to keep it simple, which helped with debugging, but might as well use the robust tools that are available.",
+      "parentUuid": "d557fadb_19646747",
+      "revId": "a8db6a53e8d2b3e8ea1f15d68ddef6f4088f6724",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

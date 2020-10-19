@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbcabed6_0a892b97",
+        "filename": "tests/hostside/java/android/virt/test/VsockTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-19T12:15:44Z",
+      "side": 1,
+      "message": "Started using it",
+      "parentUuid": "f07e8042_2c9dcced",
+      "range": {
+        "startLine": 28,
+        "startChar": 40,
+        "endLine": 28,
+        "endChar": 44
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53dd29d7_33d500c1",
@@ -37,6 +61,30 @@
       "writtenOn": "2020-10-15T18:42:31Z",
       "side": 1,
       "message": "nit: add suffix _MS",
+      "range": {
+        "startLine": 33,
+        "startChar": 30,
+        "endLine": 33,
+        "endChar": 57
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b800cad_fcd4b3cd",
+        "filename": "tests/hostside/java/android/virt/test/VsockTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-19T12:15:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53dd29d7_33d500c1",
       "range": {
         "startLine": 33,
         "startChar": 30,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bedf7b0_f80acfb3",
+        "filename": "tests/hostside/java/android/virt/test/VsockTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-19T12:15:44Z",
+      "side": 1,
+      "message": "The thread is executed with a timeout (line 83), so it will get killed eventually. We retry because it takes a while for the VM to boot at register its vsock device. Until then the client binary reports a device-not-ready error. I\u0027ve simplified the code in the new PS - have a look. Hope it makes more sense.",
+      "parentUuid": "d34c50c1_6f62498e",
+      "range": {
+        "startLine": 76,
+        "startChar": 20,
+        "endLine": 76,
+        "endChar": 62
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c62db72f_78eebb16",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "956a41ad_e72573ed",
+        "filename": "tests/hostside/native/vsock/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-19T12:15:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c62db72f_78eebb16",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 9
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95b67f76_e13cb728",
@@ -106,6 +202,30 @@
       "writtenOn": "2020-10-15T18:42:31Z",
       "side": 1,
       "message": "maybe use android::base::unique_fd for RAII",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 6
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1620f153_1b0da8cd",
+        "filename": "tests/hostside/native/vsock/client.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-19T12:15:44Z",
+      "side": 1,
+      "message": "Done with the switch to C++",
+      "parentUuid": "95b67f76_e13cb728",
       "range": {
         "startLine": 39,
         "startChar": 4,
@@ -162,6 +282,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39fc3e8f_021a0b8e",
+        "filename": "tests/hostside/native/vsock/client.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-19T12:15:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95aaf451_7a547bcf",
+      "range": {
+        "startLine": 48,
+        "startChar": 17,
+        "endLine": 48,
+        "endChar": 21
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ff71119_e20234bd",
@@ -175,6 +319,30 @@
       "writtenOn": "2020-10-15T18:42:31Z",
       "side": 1,
       "message": "Maybe add a fflush(stdout)...?",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 9
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ffc676b_15a97cf4",
+        "filename": "tests/hostside/native/vsock/client.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-19T12:15:44Z",
+      "side": 1,
+      "message": "Not needed after the switch to C++. std::endl implicitly flushes.",
+      "parentUuid": "7ff71119_e20234bd",
       "range": {
         "startLine": 51,
         "startChar": 8,
@@ -208,6 +376,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce3dfa5c_53f2d632",
+        "filename": "tests/hostside/native/vsock/common.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-19T12:15:44Z",
+      "side": 1,
+      "message": "Done with the switch to C++",
+      "parentUuid": "08eb1b24_2c0de8c5",
+      "range": {
+        "startLine": 36,
+        "startChar": 12,
+        "endLine": 36,
+        "endChar": 22
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08dc97d6_3eb70f88",
@@ -221,6 +413,30 @@
       "writtenOn": "2020-10-15T18:42:31Z",
       "side": 1,
       "message": "TEMP_FAILURE_RETRY",
+      "range": {
+        "startLine": 57,
+        "startChar": 16,
+        "endLine": 57,
+        "endChar": 22
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf9474a7_b141cd1b",
+        "filename": "tests/hostside/native/vsock/server.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-19T12:15:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08dc97d6_3eb70f88",
       "range": {
         "startLine": 57,
         "startChar": 16,
@@ -272,6 +488,54 @@
         "startChar": 4,
         "endLine": 63,
         "endChar": 62
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fe460c1_a8b3f2ed",
+        "filename": "tests/hostside/native/vsock/server.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-19T12:15:44Z",
+      "side": 1,
+      "message": "Done with the switch to C++",
+      "parentUuid": "0b0e307a_638ded22",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 62
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "080dd8e6_4e2073a3",
+        "filename": "tests/hostside/native/vsock/server.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-19T12:15:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88a3a6da_9fffd444",
+      "range": {
+        "startLine": 63,
+        "startChar": 17,
+        "endLine": 63,
+        "endChar": 22
       },
       "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
