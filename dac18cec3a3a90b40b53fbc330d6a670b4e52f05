@@ -142,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f86424a8_95a6f7a1",
+        "filename": "tests/hostside/java/android/virt/test/VsockTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-10-19T13:31:51Z",
+      "side": 1,
+      "message": "Would there be any advantage to initially having the client in the VM that connects to the server in the host on VMADDR_CID_HOST (2)? I guess it\u0027s still a race, just a more biased one.",
+      "parentUuid": "4bedf7b0_f80acfb3",
+      "range": {
+        "startLine": 76,
+        "startChar": 20,
+        "endLine": 76,
+        "endChar": 62
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c62db72f_78eebb16",
