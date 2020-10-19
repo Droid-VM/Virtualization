@@ -168,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3746cae5_ab6eb02f",
+        "filename": "tests/hostside/java/android/virt/test/VsockTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-19T13:45:53Z",
+      "side": 1,
+      "message": "That\u0027s not a bad idea. Still the same timeout issue but at least we don\u0027t have to repeatedly run the client binary. What I\u0027ll do is have host listen but still receive the message. Otherwise I\u0027d have to extract the message from CrosVM logs.",
+      "parentUuid": "f86424a8_95a6f7a1",
+      "range": {
+        "startLine": 76,
+        "startChar": 20,
+        "endLine": 76,
+        "endChar": 62
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c62db72f_78eebb16",
         "filename": "tests/hostside/native/vsock/Android.bp",
         "patchSetId": 2
