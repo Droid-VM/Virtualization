@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2e7fd9c_8c7cff1d",
+        "filename": "tests/hostside/native/vsock/server.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-19T16:32:47Z",
+      "side": 1,
+      "message": "nit: Looks like this variable is not used later.  Maybe just pass nullptr?",
+      "range": {
+        "startLine": 66,
+        "startChar": 81,
+        "endLine": 66,
+        "endChar": 94
+      },
+      "revId": "e2da07d1be6822c73bf16062a86546e2a43ebc98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

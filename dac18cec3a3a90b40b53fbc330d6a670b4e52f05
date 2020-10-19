@@ -240,6 +240,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d7556d3_1727ca10",
+        "filename": "tests/hostside/java/android/virt/test/VsockTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-19T16:32:47Z",
+      "side": 1,
+      "message": "Looks pretty reasonable to me.",
+      "parentUuid": "ae780349_36f96f8a",
+      "range": {
+        "startLine": 76,
+        "startChar": 20,
+        "endLine": 76,
+        "endChar": 62
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c62db72f_78eebb16",
         "filename": "tests/hostside/native/vsock/Android.bp",
         "patchSetId": 2
@@ -345,6 +369,30 @@
       "writtenOn": "2020-10-15T18:42:31Z",
       "side": 1,
       "message": "Wrap with TEMP_FAILURE_RETRY(connect(...))",
+      "range": {
+        "startLine": 43,
+        "startChar": 10,
+        "endLine": 43,
+        "endChar": 17
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "438ddbb8_d7de780b",
+        "filename": "tests/hostside/native/vsock/client.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-19T16:32:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb01bc08_43557fe9",
       "range": {
         "startLine": 43,
         "startChar": 10,
@@ -632,6 +680,30 @@
         "startChar": 17,
         "endLine": 63,
         "endChar": 22
+      },
+      "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4e4a784_ad854ac2",
+        "filename": "tests/hostside/native/vsock/server.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-19T16:32:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fe460c1_a8b3f2ed",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 62
       },
       "revId": "dac18cec3a3a90b40b53fbc330d6a670b4e52f05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
