@@ -328,6 +328,30 @@
       },
       "revId": "6e6729d2978cba7b00a0ad59be3d517718b65829",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65f24114_9a844510",
+        "filename": "tests/hostside/java/android/virt/test/VirtTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-19T16:05:07Z",
+      "side": 1,
+      "message": "I didn\u0027t realize it\u0027s a different case from the vsock binary.  I should have provided an example for genrule.  I think simply adding this to java_host_test in Android.bp should work.  Could you try?\n\n  data: {\n    \":virt_hostside_tests_res\",\n  }\n\nExample: https://source.corp.google.com/android/frameworks/base/tests/ApkVerityTest/Android.bp;l\u003d26",
+      "parentUuid": "e68c80b7_66e96aee",
+      "range": {
+        "startLine": 121,
+        "startChar": 8,
+        "endLine": 127,
+        "endChar": 9
+      },
+      "revId": "6e6729d2978cba7b00a0ad59be3d517718b65829",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
