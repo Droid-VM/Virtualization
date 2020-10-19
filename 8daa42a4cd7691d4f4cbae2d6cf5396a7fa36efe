@@ -16,6 +16,69 @@
       "message": "Thanks, updated PS4 with clang-format fixes",
       "revId": "8daa42a4cd7691d4f4cbae2d6cf5396a7fa36efe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2de6d2d_769603df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-10-19T20:02:26Z",
+      "side": 1,
+      "message": "Was looking in more detail at libmodprobe. Some small points, not that important to address in this CL though.",
+      "revId": "8daa42a4cd7691d4f4cbae2d6cf5396a7fa36efe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f22844be_a4a566a0",
+        "filename": "tests/hostside/native/init/main.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-10-19T20:02:26Z",
+      "side": 1,
+      "message": "This argument says whether the function should fails as soon as any module fails to install or it should try them all and report if any failed. I guess it is tied to there being a console in first_stage_init so that you can drop into the console and debug from the first error but here it\u0027ll be fine to not pass an argument and take the default strict mode.",
+      "range": {
+        "startLine": 87,
+        "startChar": 43,
+        "endLine": 87,
+        "endChar": 55
+      },
+      "revId": "8daa42a4cd7691d4f4cbae2d6cf5396a7fa36efe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eab2270_8ba97e45",
+        "filename": "tests/hostside/native/init/main.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-10-19T20:02:26Z",
+      "side": 1,
+      "message": "This is passing the default value so isn\u0027t strictly necessary",
+      "range": {
+        "startLine": 94,
+        "startChar": 34,
+        "endLine": 94,
+        "endChar": 51
+      },
+      "revId": "8daa42a4cd7691d4f4cbae2d6cf5396a7fa36efe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
