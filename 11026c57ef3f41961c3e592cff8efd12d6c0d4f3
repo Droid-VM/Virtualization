@@ -88,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3b58e78_d423c5fa",
+        "filename": "docs/getting_started/index.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-27T15:57:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "030a2b99_53f82c8d",
+      "range": {
+        "startLine": 10,
+        "startChar": 26,
+        "endLine": 10,
+        "endChar": 31
+      },
+      "revId": "11026c57ef3f41961c3e592cff8efd12d6c0d4f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ffac697_260e6fba",
@@ -101,6 +125,30 @@
       "writtenOn": "2020-10-26T11:28:06Z",
       "side": 1,
       "message": "It wasn\u0027t clear to me (reading the MD rather than the formatted output) that this is an alternative to the section below. How about rephrasing to:\n\n1) By using \u0027adb sync\u0027\n2) By including CrosVM in the system image",
+      "range": {
+        "startLine": 20,
+        "startChar": 4,
+        "endLine": 20,
+        "endChar": 18
+      },
+      "revId": "11026c57ef3f41961c3e592cff8efd12d6c0d4f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "944ab771_886c1918",
+        "filename": "docs/getting_started/index.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-27T15:57:45Z",
+      "side": 1,
+      "message": "I\u0027ll remove this. Added a CL to my topic that should make 2) obsolete. \nhttps://android-review.googlesource.com/c/platform/build/+/1472402",
+      "parentUuid": "5ffac697_260e6fba",
       "range": {
         "startLine": 20,
         "startChar": 4,
@@ -134,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef7df81e_920321ed",
+        "filename": "docs/getting_started/index.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-27T15:57:45Z",
+      "side": 1,
+      "message": "That\u0027s how it\u0027s done! I was getting errors from overlayfs without it.",
+      "parentUuid": "1ccfd535_42c809af",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 82
+      },
+      "revId": "11026c57ef3f41961c3e592cff8efd12d6c0d4f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e58daa40_3d3a3580",
@@ -157,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "659be854_bc47b881",
+        "filename": "docs/getting_started/index.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-27T15:57:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e58daa40_3d3a3580",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 3
+      },
+      "revId": "11026c57ef3f41961c3e592cff8efd12d6c0d4f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17904d80_2976fc96",
@@ -170,6 +266,30 @@
       "writtenOn": "2020-10-27T12:27:55Z",
       "side": 1,
       "message": "nit: you can add `wait-for-device` so you don\u0027t have to watch the reboot manually",
+      "range": {
+        "startLine": 34,
+        "startChar": 5,
+        "endLine": 34,
+        "endChar": 6
+      },
+      "revId": "11026c57ef3f41961c3e592cff8efd12d6c0d4f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f4fa6d5_ec88e41f",
+        "filename": "docs/getting_started/index.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-27T15:57:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17904d80_2976fc96",
       "range": {
         "startLine": 34,
         "startChar": 5,
@@ -227,6 +347,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "804dd3e4_df69e47f",
+        "filename": "docs/getting_started/index.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-27T15:57:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9de2e4e6_b03a249d",
+      "range": {
+        "startLine": 62,
+        "startChar": 14,
+        "endLine": 62,
+        "endChar": 42
+      },
+      "revId": "11026c57ef3f41961c3e592cff8efd12d6c0d4f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b42fb94_c4091f70",
@@ -240,6 +384,30 @@
       "writtenOn": "2020-10-26T11:39:15Z",
       "side": 1,
       "message": "your own",
+      "range": {
+        "startLine": 73,
+        "startChar": 12,
+        "endLine": 73,
+        "endChar": 15
+      },
+      "revId": "11026c57ef3f41961c3e592cff8efd12d6c0d4f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ea6209e_42c96081",
+        "filename": "docs/getting_started/index.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-27T15:57:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b42fb94_c4091f70",
       "range": {
         "startLine": 73,
         "startChar": 12,
@@ -273,6 +441,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15ce336e_1498c1e7",
+        "filename": "docs/getting_started/index.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-27T15:57:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7d2de59_d98f1f94",
+      "range": {
+        "startLine": 75,
+        "startChar": 30,
+        "endLine": 75,
+        "endChar": 33
+      },
+      "revId": "11026c57ef3f41961c3e592cff8efd12d6c0d4f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b0f6252_73b2c5ae",
@@ -286,6 +478,30 @@
       "writtenOn": "2020-10-26T11:39:15Z",
       "side": 1,
       "message": "The [Khadas...",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 1
+      },
+      "revId": "11026c57ef3f41961c3e592cff8efd12d6c0d4f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0524ae36_e847d587",
+        "filename": "docs/getting_started/yukawa.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2020-10-27T15:57:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b0f6252_73b2c5ae",
       "range": {
         "startLine": 3,
         "startChar": 0,
