@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e11f64a3_b74085d9",
+        "filename": "vsock-rot13/.gitignore",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2020-11-05T20:32:09Z",
+      "side": 1,
+      "message": "build artifacts should be in $ANDROID_BUILD_TOP/out, not here\n\nIs Android.bp rust_binary creating these?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 10
+      },
+      "revId": "db83866a41952e81af344333d70ebb298b5611a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
