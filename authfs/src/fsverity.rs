@@ -1,0 +1,216 @@
+/*
+ * Copyright (C) 2020 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+use std::io;
+use thiserror::Error;
+
+use crate::crypto::{CryptoError, Sha256Hasher};
+use crate::reader::ReadOnlyDataByChunk;
+
+const ZEROS: [u8; 4096] = [0u8; 4096];
+
+#[derive(Error, Debug)]
+pub enum FsverityError {
+    #[error("Cannot verify a block")]
+    CannotVerify,
+    #[error("I/O error")]
+    Io(#[from] io::Error),
+    #[error("Crypto")]
+    UnexpectedCryptoError(#[from] CryptoError),
+}
+
+type HashBuffer = [u8; Sha256Hasher::HASH_SIZE];
+
+fn divide_roundup(dividend: u64, divisor: u64) -> u64 {
+    (dividend + divisor - 1) / divisor
+}
+
+/// Returns an array of summed area table of level size in the fs-verity verity tree.
+fn generate_offsets(mut data_size: u64, page_size: u64, hash_size: u64) -> Vec<u64> {
+    let mut sizes = Vec::new();
+
+    // Calculate offsets of all levels.
+    loop {
+        data_size = divide_roundup(data_size, page_size) * hash_size;
+        let level_size = divide_roundup(data_size, page_size) * page_size;
+        sizes.push(level_size);
+        if data_size <= page_size {
+            break;
+        }
+    }
+
+    // Calculate accumulated offsets of all levels.
+    let mut summed_area_table = Vec::with_capacity(sizes.len() + 1);
+    summed_area_table.push(0);
+    for size in sizes.iter().rev() {
+        summed_area_table.push(summed_area_table.last().unwrap() + size);
+    }
+    summed_area_table.pop();
+    summed_area_table
+}
+
+fn hash_with_padding(chunk: &[u8], pad_to: usize) -> Result<HashBuffer, CryptoError> {
+    let padding_size = pad_to - chunk.len();
+    Sha256Hasher::new()?.update(&chunk)?.update(&ZEROS[..padding_size])?.finalize()
+}
+
+fn verity_check<T: ReadOnlyDataByChunk>(
+    chunk: &[u8],
+    chunk_index: u64,
+    file_size: u64,
+    merkle_tree: &T,
+) -> Result<HashBuffer, FsverityError> {
+    // The caller should not be able to produce a chunk at the first place if `file_size` is 0. The
+    // current implementation expects to crash when a `ReadOnlyDataByChunk` implementation reads
+    // beyone the file size, including empty file.
+    assert_ne!(file_size, 0);
+
+    let chunk_hash = hash_with_padding(&chunk, T::CHUNK_SIZE as usize)?;
+
+    fsverity_walk(
+        chunk_hash,
+        chunk_index,
+        file_size,
+        merkle_tree,
+        |actual_hash, merkle_chunk, hash_offset_in_chunk| {
+            let expected_hash =
+                &merkle_chunk[hash_offset_in_chunk..hash_offset_in_chunk + Sha256Hasher::HASH_SIZE];
+            if actual_hash != expected_hash {
+                return Err(FsverityError::CannotVerify);
+            }
+            Ok(hash_with_padding(&merkle_chunk, T::CHUNK_SIZE as usize)?)
+        },
+    )
+}
+
+/// Given a chunk index and the size of the file, walk the Merkle tree from the leaf to the root.
+/// When a node is visited, the callback is invoked with the hash to be verified, the current node
+/// that contains hashes, and the hash's byte offset within the node.
+fn fsverity_walk<T, F>(
+    chunk_hash: HashBuffer,
+    chunk_index: u64,
+    file_size: u64,
+    merkle_tree: &T,
+    callback: F,
+) -> Result<HashBuffer, FsverityError>
+where
+    T: ReadOnlyDataByChunk,
+    F: Fn(HashBuffer, &[u8], usize) -> Result<HashBuffer, FsverityError>,
+{
+    let hashes_per_node = T::CHUNK_SIZE / Sha256Hasher::HASH_SIZE as u64;
+    let hash_pages = divide_roundup(file_size, hashes_per_node * T::CHUNK_SIZE as u64);
+    let max_level = divide_roundup(hash_pages.trailing_zeros() as u64, 7) as u32;
+    let root_to_leaf_steps: Vec<(u64, usize)> = (0..=max_level)
+        .rev()
+        .map(move |x| {
+            let leaves_per_hash = hashes_per_node.pow(x);
+            let leaves_size_per_hash = T::CHUNK_SIZE as u64 * leaves_per_hash;
+            let leaves_size_per_node = leaves_size_per_hash * hashes_per_node;
+            let nodes_at_level = divide_roundup(file_size, leaves_size_per_node);
+            let level_size = nodes_at_level * T::CHUNK_SIZE as u64;
+            let offset_in_level = (chunk_index / leaves_per_hash) * Sha256Hasher::HASH_SIZE as u64;
+            (level_size, offset_in_level)
+        })
+        .scan(0, |level_offset, (level_size, offset_in_level)| {
+            let this_level_offset = *level_offset;
+            *level_offset = *level_offset + level_size;
+            let global_hash_offset = this_level_offset + offset_in_level;
+            Some(global_hash_offset)
+        })
+        .map(|global_hash_offset| {
+            let chunk_index = global_hash_offset / T::CHUNK_SIZE as u64;
+            let hash_offset_in_chunk = (global_hash_offset % T::CHUNK_SIZE) as usize;
+            (chunk_index, hash_offset_in_chunk)
+        })
+        .collect();
+
+    let mut leaf_to_root_steps_iter = root_to_leaf_steps.into_iter().rev();
+    leaf_to_root_steps_iter.try_fold(
+        chunk_hash,
+        |actual_hash, (chunk_index, hash_offset_in_chunk)| {
+            let mut merkle_chunk = [0u8; 4096];
+            let _ = merkle_tree.read_chunk(chunk_index, &mut merkle_chunk)?;
+            let next_hash = callback(actual_hash, &merkle_chunk[..], hash_offset_in_chunk)?;
+            Ok(next_hash)
+        },
+    )
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::reader::ReadOnlyDataByChunk;
+    use anyhow::Result;
+
+    #[test]
+    fn fsverity_verify_full_read_4k() -> Result<()> {
+        let file = &include_bytes!("../testdata/input.4k")[..];
+        let merkle_tree = &include_bytes!("../testdata/input.4k.merkle_dump")[..];
+
+        let mut buf = [0u8; 4096];
+        for i in 0..file.total_chunk_number() {
+            let size = file.read_chunk(i, &mut buf[..])?;
+            assert!(verity_check(&buf[..size], i, file.size(), &merkle_tree).is_ok());
+        }
+        Ok(())
+    }
+
+    #[test]
+    fn fsverity_verify_full_read_4k1() -> Result<()> {
+        let file = &include_bytes!("../testdata/input.4k1")[..];
+        let merkle_tree = &include_bytes!("../testdata/input.4k1.merkle_dump")[..];
+
+        let mut buf = [0u8; 4096];
+        for i in 0..file.total_chunk_number() {
+            let size = file.read_chunk(i, &mut buf[..])?;
+            assert!(verity_check(&buf[..size], i, file.size(), &merkle_tree).is_ok());
+        }
+        Ok(())
+    }
+
+    #[test]
+    fn fsverity_verify_full_read_4m() -> Result<()> {
+        let file = &include_bytes!("../testdata/input.4m")[..];
+        let merkle_tree = &include_bytes!("../testdata/input.4m.merkle_dump")[..];
+
+        let mut buf = [0u8; 4096];
+        for i in 0..file.total_chunk_number() {
+            let size = file.read_chunk(i, &mut buf[..])?;
+            assert!(verity_check(&buf[..size], i, file.size(), &merkle_tree).is_ok());
+        }
+        Ok(())
+    }
+
+    #[test]
+    fn fsverity_verify_bad_merkle_tree() -> Result<()> {
+        let file = &include_bytes!("../testdata/input.4m")[..];
+        // First leaf node is corrupted.
+        let merkle_tree = &include_bytes!("../testdata/input.4m.merkle_dump.bad")[..];
+
+        // A lowest broken node (a 4K chunk that contains 128 sha256 hashes) will fail the read
+        // failure of the underlying chunks, but not before or after.
+        let mut buf = [0u8; 4096];
+        let num_hashes = 4096 / 32;
+        let last_index = num_hashes;
+        for i in 0..last_index {
+            let size = file.read_chunk(i, &mut buf[..])?;
+            assert!(verity_check(&buf[..size], i, file.size(), &merkle_tree).is_err());
+        }
+        let size = file.read_chunk(last_index, &mut buf[..])?;
+        assert!(verity_check(&buf[..size], last_index, file.size(), &merkle_tree).is_ok());
+        Ok(())
+    }
+}
