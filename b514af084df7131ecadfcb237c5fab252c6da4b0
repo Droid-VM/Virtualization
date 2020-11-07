@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a8e47d8_f0795b0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1620010
+      },
+      "writtenOn": "2020-11-07T00:02:46Z",
+      "side": 1,
+      "message": "A few generalized Rusty comments in case they help.",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e75a961_f749cd19",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1620010
+      },
+      "writtenOn": "2020-11-07T00:02:46Z",
+      "side": 1,
+      "message": "Does your caller need random access to chunks? Otherwise, I\u0027d have expected it was more normal to create a function which does something like:\n\nfn iterate_chunks_of_file(path: \u0026Path) -\u003e impl Iterator\u003cItem\u003d\u0026[u8]\u003e\n\nthen all of this complexity is in the iterator you create and return. Everyone in Rust seems to love iterators. I think this would require you to own a chunk-sized scratch buffer, so you may not want to go with that sort of design.\n\nOf course, any given thing exists on crates.io already - https://docs.rs/read-byte-slice/0.1.2/read_byte_slice/",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ca5c28a_1fa1d636",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1620010
+      },
+      "writtenOn": "2020-11-07T00:02:46Z",
+      "side": 1,
+      "message": "If you consider this a programmer error by the caller, you should panic.",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f723e708_29eb12d5",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1620010
+      },
+      "writtenOn": "2020-11-07T00:02:46Z",
+      "side": 1,
+      "message": "I think APIs which need take a Path tend to instead take an AsRef\u003cPath\u003e, something like this:\n\npub fn parse_file\u003cP: AsRef\u003cPath\u003e\u003e(\n    path: P) -\u003e ... \n\nso that callers can pass a PathBuf or a Path.",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ea1493e_07451ba1",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1620010
+      },
+      "writtenOn": "2020-11-07T00:02:46Z",
+      "side": 1,
+      "message": "buf[..size].copy_from_slice(\u0026self.data.chunks(CHUNK_SIZE).skip(chunk_index).next()) or something along those lines? Then chunk_index_to_range can probably be inlined into the ChunkedFileReader code, simplifying things quite a bit. Just a thought. It may not be quite that simple given the final chunk will be a different size.",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69f710fd_285e567a",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1620010
+      },
+      "writtenOn": "2020-11-07T00:02:46Z",
+      "side": 1,
+      "message": "handle.read_chunk(0, \u0026mut buf).unwrap()",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
