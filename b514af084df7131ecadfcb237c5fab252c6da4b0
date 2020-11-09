@@ -111,6 +111,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "502319ee_e5c0d7fe",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2020-11-09T14:41:46Z",
+      "side": 1,
+      "message": "What does this give you over just implementing ReadyOnlyDataByChunk for [u8]?",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ea1493e_07451ba1",
         "filename": "authfs/src/reader.rs",
         "patchSetId": 1
@@ -157,6 +174,23 @@
       "writtenOn": "2020-11-07T00:02:46Z",
       "side": 1,
       "message": "handle.read_chunk(0, \u0026mut buf).unwrap()",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62db5e3d_7826b99c",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2020-11-09T14:41:46Z",
+      "side": 1,
+      "message": "Why is this commented out?",
       "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
