@@ -16,6 +16,143 @@
       "message": "Eric, not sure if you want to review this implementation in Rust... :)",
       "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "977bc4bf_3aa8d706",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-09T09:55:28Z",
+      "side": 1,
+      "message": "The logic below seems to assume a relationship between this pages size and ReadOnlyDataByChunk::CHUNK_SIZE. If that\u0027s the case, it\u0027s be good to express that in the definitions.",
+      "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0627cc24_4c9f982c",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-09T09:55:28Z",
+      "side": 1,
+      "message": "This might be nice as an associated const of Sha256Hasher.",
+      "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10846e7e_dffe1de5",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-09T09:55:28Z",
+      "side": 1,
+      "message": "This could make use of iterators to make it look less crusty (C in Rust). I gives it a more function approach to state and avoids the need for on of the intermediate Vecs. I don\u0027t think you can avoid the final collect() unless you can check the tree hashes from the root to the leaf. Iterator would look something like:\n\n    const RANGE_OF_HASH_PAGE: u64 \u003d HASHES_PER_PAGE * PAGE_SIZE_U64;\n    const HASHES_PER_PAGE: u64 \u003d PAGE_SIZE_U64 / HASH_SIZE_U64;\n    \n    fn level_offsets(data_size: u64) -\u003e impl Iterator\u003cItem\u003du64\u003e {\n        if data_size \u003d\u003d 0 {\n            // TODO: what happens in this case? trailing_zeros() gives the bit width\n            //       for 0 so needs to be handled but what does fs-verity do?\n        }\n        let hash_pages \u003d divide_roundup(data_size, RANGE_OF_HASH_PAGE);\n        // TODO: fix casting and build time assert log_128 (HASHES_PER_PAGE\u003d128) is right\n        let max_level \u003d divide_roundup(hash_pages.trailing_zeros() as u64, 7) as u32;\n        (0..\u003dmax_level)\n            .rev()\n            .map(move |level| {\n                let level_range \u003d RANGE_OF_HASH_PAGE * HASHES_PER_PAGE.pow(level);\n                let level_hash_pages \u003d divide_roundup(data_size, level_range);\n                let level_size \u003d level_hash_pages * PAGE_SIZE_U64;\n                level_size\n            })\n            .scan(0, |sum, size| {\n                let offset \u003d *sum;\n                *sum \u003d *sum + size;\n                Some(offset)\n            })\n    }",
+      "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebf0f14c_1d9c138b",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-09T09:55:28Z",
+      "side": 1,
+      "message": "If the size is \u003c\u003d PAGE_SIZE, should offsets be empty? Currently, this function will just return Ok(()) in that case without checking any hashes. Would be good to have some basic generate_offsets test that document / check the behaviour either way.",
+      "range": {
+        "startLine": 63,
+        "startChar": 35,
+        "endLine": 63,
+        "endChar": 44
+      },
+      "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b65baec1_55eab15c",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-09T09:55:28Z",
+      "side": 1,
+      "message": "Seems big for the stack, Vec?",
+      "range": {
+        "startLine": 65,
+        "startChar": 27,
+        "endLine": 65,
+        "endChar": 38
+      },
+      "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80e5e698_f32a847d",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-09T09:55:28Z",
+      "side": 1,
+      "message": "Is there a pool of zeros this could slice from or is it stuck allocating its own each iteration?",
+      "range": {
+        "startLine": 69,
+        "startChar": 21,
+        "endLine": 69,
+        "endChar": 61
+      },
+      "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb421c7c_939dc2ae",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-09T09:55:28Z",
+      "side": 1,
+      "message": "Is this real input validation rather than just a debug check?",
+      "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
