@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a7929c8_d56d2ea3",
+        "filename": "authfs/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2020-11-09T14:51:31Z",
+      "side": 1,
+      "message": "This seems like it should be in a separate crate so that other people can use it too, rather than just here as part of your library. Or better, isn\u0027t there some standard Rust OpenSSL wrapper crate already?",
+      "revId": "408697fa1467b39996c2db14e347baa5c8610c97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65719a23_5de18263",
+        "filename": "authfs/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2020-11-09T14:51:31Z",
+      "side": 1,
+      "message": "If users of this library might want to handle the errors somehow, `anyhow` is probably not the right answer. Maybe consider `thiserror`?\n\nhttps://nick.groenen.me/posts/rust-error-handling/ is a nice overview of error handling in Rust which I recommend reading if you haven\u0027t yet.",
+      "range": {
+        "startLine": 30,
+        "startChar": 20,
+        "endLine": 30,
+        "endChar": 26
+      },
+      "revId": "408697fa1467b39996c2db14e347baa5c8610c97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9aaa2c16_ebcf6dce",
         "filename": "authfs/src/crypto.rs",
         "patchSetId": 1
