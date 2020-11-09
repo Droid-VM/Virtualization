@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7cc9b08f_c3a823fb",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-09T11:52:13Z",
+      "side": 1,
+      "message": "This is a helper for the implementation, it doesn\u0027t use self to call len() but is passed the size instead so it shouldn\u0027t be part of the trait\u0027s public interface.",
+      "range": {
+        "startLine": 43,
+        "startChar": 7,
+        "endLine": 43,
+        "endChar": 27
+      },
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ca5c28a_1fa1d636",
         "filename": "authfs/src/reader.rs",
         "patchSetId": 1
@@ -71,6 +94,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e911491_3744d076",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-09T11:52:13Z",
+      "side": 1,
+      "message": "There\u0027s a debug_assert in this impl but not in the other and the documentation on the function doesn\u0027t say any restriction on the provided buf. Can the behaviour be made explicit and consistent?",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ea1493e_07451ba1",
         "filename": "authfs/src/reader.rs",
         "patchSetId": 1
@@ -82,6 +122,24 @@
       "writtenOn": "2020-11-07T00:02:46Z",
       "side": 1,
       "message": "buf[..size].copy_from_slice(\u0026self.data.chunks(CHUNK_SIZE).skip(chunk_index).next()) or something along those lines? Then chunk_index_to_range can probably be inlined into the ChunkedFileReader code, simplifying things quite a bit. Just a thought. It may not be quite that simple given the final chunk will be a different size.",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0612ae85_49a5a300",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-09T11:52:13Z",
+      "side": 1,
+      "message": "You\u0027d want to make sure the iterator overrides nth() if you go that route so that it doesn\u0027t have to calculate every chunk before this one.",
+      "parentUuid": "9ea1493e_07451ba1",
       "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
