@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fcb4ce3c_d4972a37",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-09T12:36:57Z",
+      "side": 1,
+      "message": "Thinking some more, if this iterator generates the level offset and the offset of the hash at that level down the tree from the root, you can try_fold(), verifying the level and passing on the expected hash of the next level. If this ends Ok(chunk_hash), the tree is valid and you have the expected hash for the chunk, otherwise it\u0027ll exit early with Err(_). That removes all need for collecting.",
+      "parentUuid": "10846e7e_dffe1de5",
+      "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebf0f14c_1d9c138b",
         "filename": "authfs/src/fsverity.rs",
         "patchSetId": 1
