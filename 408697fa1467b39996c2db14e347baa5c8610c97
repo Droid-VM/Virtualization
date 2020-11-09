@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aaa2c16_ebcf6dce",
+        "filename": "authfs/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-09T10:19:35Z",
+      "side": 1,
+      "message": "It\u0027s generally the custom to comment an unsafe block to reason why it should actually be safe. In this case, you\u0027ll want to explain that SHA256_Init initializes the thing that was passed in if it returns anything that is non-zero.",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 31,
+        "endChar": 14
+      },
+      "revId": "408697fa1467b39996c2db14e347baa5c8610c97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fecf06f7_b6080112",
+        "filename": "authfs/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-09T10:19:35Z",
+      "side": 1,
+      "message": "It\u0027s also generally good to keep the scope of unsafe as small as possible. You can even wrap just an expression if that\u0027s all you need `let res \u003d unsafe { SHA256_Update(...) };`",
+      "range": {
+        "startLine": 42,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 14
+      },
+      "revId": "408697fa1467b39996c2db14e347baa5c8610c97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38b8fa38_a66bed41",
+        "filename": "authfs/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-09T10:19:35Z",
+      "side": 1,
+      "message": "You should be able to use a standard array (or abstraction around it https://docs.rs/sha2/0.4.2/sha2/trait.Digest.html#tymethod.result) rather than something heap allocated.",
+      "range": {
+        "startLine": 52,
+        "startChar": 41,
+        "endLine": 52,
+        "endChar": 48
+      },
+      "revId": "408697fa1467b39996c2db14e347baa5c8610c97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
