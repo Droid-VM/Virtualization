@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec7b576d_696eeb62",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-10T00:13:07Z",
+      "side": 1,
+      "message": "Yes, the normal access pattern in my case is random access.  But thanks for the idea!",
+      "parentUuid": "8e75a961_f749cd19",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cc9b08f_c3a823fb",
@@ -48,6 +66,30 @@
       "writtenOn": "2020-11-09T11:52:13Z",
       "side": 1,
       "message": "This is a helper for the implementation, it doesn\u0027t use self to call len() but is passed the size instead so it shouldn\u0027t be part of the trait\u0027s public interface.",
+      "range": {
+        "startLine": 43,
+        "startChar": 7,
+        "endLine": 43,
+        "endChar": 27
+      },
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9343ac51_d7f9bfa8",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-10T00:13:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cc9b08f_c3a823fb",
       "range": {
         "startLine": 43,
         "startChar": 7,
@@ -75,6 +117,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39275a00_9dd806e8",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-10T00:13:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ca5c28a_1fa1d636",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f723e708_29eb12d5",
@@ -88,6 +148,24 @@
       "writtenOn": "2020-11-07T00:02:46Z",
       "side": 1,
       "message": "I think APIs which need take a Path tend to instead take an AsRef\u003cPath\u003e, something like this:\n\npub fn parse_file\u003cP: AsRef\u003cPath\u003e\u003e(\n    path: P) -\u003e ... \n\nso that callers can pass a PathBuf or a Path.",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3a03042_e860ed91",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-10T00:13:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f723e708_29eb12d5",
       "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -109,6 +187,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1854438_7d5e48c5",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-10T00:13:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e911491_3744d076",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "502319ee_e5c0d7fe",
@@ -122,6 +218,24 @@
       "writtenOn": "2020-11-09T14:41:46Z",
       "side": 1,
       "message": "What does this give you over just implementing ReadyOnlyDataByChunk for [u8]?",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d165fb83_d3f5ebdf",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-10T00:13:07Z",
+      "side": 1,
+      "message": "Hmm.. probably nothing.  I guess I haven\u0027t got used to the ability to give a common data structure extra power, and not sure about the readability :)\n\nIf we prefer to do it that way, how would I specify the correct `len` to return in L96?  `slice::len(\u0026self)` doesn\u0027t seem to work.",
+      "parentUuid": "502319ee_e5c0d7fe",
       "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -161,6 +275,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ef929e5_7611f1da",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-10T00:13:07Z",
+      "side": 1,
+      "message": "Done.  I had to change the original behavior of both readers to make reading an empty file/array crash.  But that should be ok since the caller shouldn\u0027t make such call.",
+      "parentUuid": "0612ae85_49a5a300",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69f710fd_285e567a",
@@ -178,6 +310,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49481ffd_21277b96",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-10T00:13:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69f710fd_285e567a",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62db5e3d_7826b99c",
@@ -191,6 +341,24 @@
       "writtenOn": "2020-11-09T14:41:46Z",
       "side": 1,
       "message": "Why is this commented out?",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cfb77c9_e1a1411d",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-10T00:13:07Z",
+      "side": 1,
+      "message": "Ah, removed for now.  The test does not run on Android because it doesn\u0027t define CARGO_MANIFEST_DIR or a way to access a test file yet (b/171710847).",
+      "parentUuid": "62db5e3d_7826b99c",
       "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
