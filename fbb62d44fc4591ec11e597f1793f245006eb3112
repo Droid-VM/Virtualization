@@ -51,6 +51,29 @@
       "parentUuid": "5754dcaa_9d4274bd",
       "revId": "fbb62d44fc4591ec11e597f1793f245006eb3112",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1b65994_908da5c1",
+        "filename": "tests/hostside/java/android/virt/test/VsockTest.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2020-11-10T21:39:28Z",
+      "side": 1,
+      "message": "curious - any thought to use a single binary, fork when it starts?\n\nThat way, Java doesn\u0027t have to be started, could still run with atest, and critically you can cut out atest locally with `adb shell /data/nativetest(64)?/\u003cbin\u003e/\u003cbin\u003e` (which - if you have scripts for locally, can save ~30s or more per test run)?",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 85
+      },
+      "revId": "fbb62d44fc4591ec11e597f1793f245006eb3112",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
