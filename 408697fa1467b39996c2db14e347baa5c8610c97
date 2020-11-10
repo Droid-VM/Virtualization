@@ -130,6 +130,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2adfe74_6c80ffbe",
+        "filename": "authfs/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-10T10:12:25Z",
+      "side": 1,
+      "message": "The compiler can tell you that it might be unsafe, you\u0027re meant to be reasoning why it *is* actually safe to do i.e. why this isn\u0027t going to break all the assumptions of safety that the rest of the safe code is making.",
+      "parentUuid": "2048c48f_52fcdbb1",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 31,
+        "endChar": 14
+      },
+      "revId": "408697fa1467b39996c2db14e347baa5c8610c97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fecf06f7_b6080112",
@@ -214,6 +238,30 @@
       "side": 1,
       "message": "How about this?  I probably don\u0027t need the similar abstraction.  If we want to add an official BoringSSL binding officially, we definitely want a better interface there.",
       "parentUuid": "38b8fa38_a66bed41",
+      "range": {
+        "startLine": 52,
+        "startChar": 41,
+        "endLine": 52,
+        "endChar": 48
+      },
+      "revId": "408697fa1467b39996c2db14e347baa5c8610c97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3afc6e56_d6622543",
+        "filename": "authfs/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-10T10:12:25Z",
+      "side": 1,
+      "message": "That\u0027s what I had in mind. Both mundane and the OpenSSL wrappers return an array and porting will get any other benefits of their APIs too.",
+      "parentUuid": "8845b2a2_5bb1f0b9",
       "range": {
         "startLine": 52,
         "startChar": 41,
