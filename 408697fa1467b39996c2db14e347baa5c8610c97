@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a32ad1e_a4056f9f",
+        "filename": "authfs/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-10T01:33:00Z",
+      "side": 1,
+      "message": "I asked on the group, and I guess we can migrate once b/172687320 is done?\n\nFWIW, Android uses BoringSSL, which does not have feature parity to OpenSSL (and later I need a missing one of PKCS#7 signature verification).  Re-using the \"standard\" OpenSSL wrapper may add confusion in Android context.",
+      "parentUuid": "0a7929c8_d56d2ea3",
+      "revId": "408697fa1467b39996c2db14e347baa5c8610c97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65719a23_5de18263",
@@ -31,6 +49,30 @@
       "writtenOn": "2020-11-09T14:51:31Z",
       "side": 1,
       "message": "If users of this library might want to handle the errors somehow, `anyhow` is probably not the right answer. Maybe consider `thiserror`?\n\nhttps://nick.groenen.me/posts/rust-error-handling/ is a nice overview of error handling in Rust which I recommend reading if you haven\u0027t yet.",
+      "range": {
+        "startLine": 30,
+        "startChar": 20,
+        "endLine": 30,
+        "endChar": 26
+      },
+      "revId": "408697fa1467b39996c2db14e347baa5c8610c97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc475786_d63ab438",
+        "filename": "authfs/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-10T01:33:00Z",
+      "side": 1,
+      "message": "Indeed.  I only read it after I published this change.  Changed to thiserror.",
+      "parentUuid": "65719a23_5de18263",
       "range": {
         "startLine": 30,
         "startChar": 20,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2048c48f_52fcdbb1",
+        "filename": "authfs/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-10T01:33:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9aaa2c16_ebcf6dce",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 31,
+        "endChar": 14
+      },
+      "revId": "408697fa1467b39996c2db14e347baa5c8610c97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fecf06f7_b6080112",
@@ -87,6 +153,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dc98a0b_6211b82f",
+        "filename": "authfs/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-10T01:33:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fecf06f7_b6080112",
+      "range": {
+        "startLine": 42,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 14
+      },
+      "revId": "408697fa1467b39996c2db14e347baa5c8610c97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38b8fa38_a66bed41",
@@ -100,6 +190,30 @@
       "writtenOn": "2020-11-09T10:19:35Z",
       "side": 1,
       "message": "You should be able to use a standard array (or abstraction around it https://docs.rs/sha2/0.4.2/sha2/trait.Digest.html#tymethod.result) rather than something heap allocated.",
+      "range": {
+        "startLine": 52,
+        "startChar": 41,
+        "endLine": 52,
+        "endChar": 48
+      },
+      "revId": "408697fa1467b39996c2db14e347baa5c8610c97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8845b2a2_5bb1f0b9",
+        "filename": "authfs/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-10T01:33:00Z",
+      "side": 1,
+      "message": "How about this?  I probably don\u0027t need the similar abstraction.  If we want to add an official BoringSSL binding officially, we definitely want a better interface there.",
+      "parentUuid": "38b8fa38_a66bed41",
       "range": {
         "startLine": 52,
         "startChar": 41,
