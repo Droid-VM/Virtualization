@@ -16,6 +16,63 @@
       "message": "Looks good once\u0027s Andrew Scull\u0027s comments are resolved.",
       "revId": "32c5f890a71dfc87205aa684681193278d1cdc2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6698d99b_8a44f083",
+        "filename": "authfs/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-11-10T18:00:18Z",
+      "side": 1,
+      "message": "Can you add a TODO(b/172687320) so we know to revisit this when it\u0027s no longer needed?",
+      "revId": "32c5f890a71dfc87205aa684681193278d1cdc2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72d1cb75_1ad61811",
+        "filename": "authfs/src/crypto.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-11-10T18:00:18Z",
+      "side": 1,
+      "message": "Have you verified that SHA256_CTX is trivially movable?",
+      "revId": "32c5f890a71dfc87205aa684681193278d1cdc2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce3f2dbe_30cab098",
+        "filename": "authfs/src/crypto.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-11-10T18:00:18Z",
+      "side": 1,
+      "message": "Out of date comment? You switched to an array, which is more appropriate, but this doesn\u0027t match anymore.",
+      "range": {
+        "startLine": 65,
+        "startChar": 69,
+        "endLine": 65,
+        "endChar": 72
+      },
+      "revId": "32c5f890a71dfc87205aa684681193278d1cdc2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
