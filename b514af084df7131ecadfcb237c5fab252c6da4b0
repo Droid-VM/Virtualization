@@ -242,6 +242,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d96b45e_17f4c634",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-10T10:05:56Z",
+      "side": 1,
+      "message": "`slice::len` is a method so you\u0027d use the dot notation, `self.len()`. There will be a naming clash as `len()` is already defined for `u8. That might not be a big deal if they are defined the same way but could be avoided.\n\nGiven `ReadOnlyDataByChunk::len` is only used to calculate the number of chunks and doesn\u0027t seem to be fit as part of the `ReadOnlyDataByChunk` trait (rather than type implementing this trait), would it be better to drop it from the trait in favour of just the method for length in chunks? You could impl `ReadOnlyDataByChunk` (`ReadDataByChunk` might be a better name as the implementing type might not be read-only and the trait doesn\u0027t actually mind about that) on `File` directly as well. File would have a slightly more expensive chunk counting method, but that\u0027s not often used.",
+      "parentUuid": "d165fb83_d3f5ebdf",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ea1493e_07451ba1",
         "filename": "authfs/src/reader.rs",
         "patchSetId": 1
