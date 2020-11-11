@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c9a913fc_db1bccc2",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-11T12:33:28Z",
+      "side": 1,
+      "message": "The below passes the tests if you then compare the resulting hash against the chunk hash. It\u0027s got rough edges but is demonstrative. I\u0027m not saying this is the right or a better way to do it, just a different way.\n\nIt assumes the nodes at each level are as far left as possible but not that each level is full. I don\u0027t know if that matches the shape of the tree you\u0027re given but, if not, we\u0027ve found another test case 😊\n\n    fn get_chunk_hash\u003cT: ReadOnlyDataByChunk\u003e(\n        chunk_index: u64,\n        file_size: u64,\n        merkle_tree: \u0026T,\n    ) -\u003e Result\u003c[u8; Sha256Hasher::HASH_SIZE], FsverityError\u003e {\n        if file_size \u003d\u003d 0 {\n            // TODO: what happens in this case? trailing_zeros() gives the bit width\n            //       for 0 so needs to be handled but what does fs-verity do?\n        }\n        let hashes_per_page \u003d T::CHUNK_SIZE / Sha256Hasher::HASH_SIZE as u64;\n        let hash_pages \u003d divide_roundup(file_size, hashes_per_page  * T::CHUNK_SIZE as u64);\n        // TODO: fix the casting and build time assert that log_128 is right\n        let max_level \u003d divide_roundup(hash_pages.trailing_zeros() as u64, 7) as u32;\n        (0..\u003dmax_level)\n            .rev()\n            .map(move |x| {\n                let level_hash_chunk_range \u003d hashes_per_page.pow(x);\n                let level_hash_range \u003d T::CHUNK_SIZE as u64 * level_hash_chunk_range;\n                let level_hash_page_range \u003d level_hash_range * hashes_per_page;\n                let level_hash_pages \u003d divide_roundup(file_size, level_hash_page_range);\n                let level_size \u003d level_hash_pages * T::CHUNK_SIZE as u64;\n                let offset_in_level \u003d (chunk_index / level_hash_chunk_range) * Sha256Hasher::HASH_SIZE as u64;\n                (level_size, offset_in_level)\n            })\n            .scan(0, |level_offset, (level_size, offset_in_level)| {\n                let this_level_offset \u003d *level_offset;\n                *level_offset \u003d *level_offset + level_size;\n                let hash_offset \u003d this_level_offset + offset_in_level;\n                Some(hash_offset)\n            })\n            .map(|hash_offset| {\n                let chunk \u003d hash_offset / T::CHUNK_SIZE as u64;\n                let hash_offset_in_chunk \u003d (hash_offset % T::CHUNK_SIZE) as usize;\n                (chunk, hash_offset_in_chunk)\n            })\n            .try_fold(None, |hash, (chunk, hash_offset_in_chunk)| {\n                let mut merkle_chunk \u003d [0u8; 4096];\n                let _ \u003d merkle_tree.read_chunk(chunk, \u0026mut merkle_chunk)?;\n                if let Some(expected_hash) \u003d hash {\n                    let padding_size \u003d T::CHUNK_SIZE as usize - merkle_chunk.len();\n                    let computed_hash \u003d Sha256Hasher::new()?\n                        .update(\u0026merkle_chunk)?\n                        .update(\u0026ZEROS[..padding_size])?\n                        .finalize()?;\n                    if computed_hash !\u003d expected_hash {\n                        return Err(FsverityError::CannotVerify);\n                    }\n                }\n                let next_hash \u003d \u0026merkle_chunk[hash_offset_in_chunk..hash_offset_in_chunk + Sha256Hasher::HASH_SIZE];\n                Ok(Some(next_hash.try_into().expect(\"hash is wrong size????\")))\n            })\n            .transpose()\n            .unwrap()\n    }",
+      "parentUuid": "8114e350_2de8d535",
+      "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebf0f14c_1d9c138b",
         "filename": "authfs/src/fsverity.rs",
         "patchSetId": 1
