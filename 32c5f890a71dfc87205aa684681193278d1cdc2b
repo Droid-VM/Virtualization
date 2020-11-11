@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12960961_b708d839",
+        "filename": "authfs/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-11T00:39:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6698d99b_8a44f083",
+      "revId": "32c5f890a71dfc87205aa684681193278d1cdc2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72d1cb75_1ad61811",
@@ -52,6 +70,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ab44508_e1ff4885",
+        "filename": "authfs/src/crypto.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-11T00:39:41Z",
+      "side": 1,
+      "message": "Currently, AFAICT, there is no pointer involved.  So yes?\n\nstruct sha256_state_st {\n  uint32_t h[8];\n  uint32_t Nl, Nh;\n  uint8_t data[SHA256_CBLOCK];\n  unsigned num, md_len;\n};",
+      "parentUuid": "72d1cb75_1ad61811",
+      "revId": "32c5f890a71dfc87205aa684681193278d1cdc2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce3f2dbe_30cab098",
@@ -65,6 +101,30 @@
       "writtenOn": "2020-11-10T18:00:18Z",
       "side": 1,
       "message": "Out of date comment? You switched to an array, which is more appropriate, but this doesn\u0027t match anymore.",
+      "range": {
+        "startLine": 65,
+        "startChar": 69,
+        "endLine": 65,
+        "endChar": 72
+      },
+      "revId": "32c5f890a71dfc87205aa684681193278d1cdc2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ba94330_df546e71",
+        "filename": "authfs/src/crypto.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-11T00:39:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3f2dbe_30cab098",
       "range": {
         "startLine": 65,
         "startChar": 69,
