@@ -258,6 +258,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a74ab8b_8124f5a9",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-11T00:39:31Z",
+      "side": 1,
+      "message": "Done for \u0026[u8], and replaced `len()` with `size()` to avoid the trouble.\n\nIt\u0027s named \"ReadOnly\" because all these code is aimed to serve for the purpose of fs-verity verification.  These readers are used as a backend of fs-verity reader (aosp/1491139), which needs to know the file/data size to calculate the Merkle tree.  Since the size should remain unchanged, I name it with \"ReadOnly\" as a hint.\n\nAs of impl for `File`, I\u0027m not sure if it\u0027s good to add this expecting-to-be-readonly trait to a generally writable File.  What also bothers me is the extra error handling to get file size.  Since the file should remain unchanged, I save the file size in the current constructor for simplicity.\n\nWDYT?",
+      "parentUuid": "1d96b45e_17f4c634",
+      "revId": "b514af084df7131ecadfcb237c5fab252c6da4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ea1493e_07451ba1",
