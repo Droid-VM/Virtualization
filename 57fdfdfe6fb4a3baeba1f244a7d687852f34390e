@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb9fd576_c074a493",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-11T00:51:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "977bc4bf_3aa8d706",
+      "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0627cc24_4c9f982c",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-11-09T09:55:28Z",
       "side": 1,
       "message": "This might be nice as an associated const of Sha256Hasher.",
+      "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93e3982a_68dc129f",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-11T00:51:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0627cc24_4c9f982c",
       "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -89,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8114e350_2de8d535",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-11T00:51:34Z",
+      "side": 1,
+      "message": "Thanks, this is interesting.  Although, IIUC, this code *seems* to assume a complete tree?\n\nI spent some time on this but still haven\u0027t been able to make it work with try_fold.  I think there should be a way though... will try again tomorrow.",
+      "parentUuid": "fcb4ce3c_d4972a37",
+      "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebf0f14c_1d9c138b",
         "filename": "authfs/src/fsverity.rs",
         "patchSetId": 1
@@ -100,6 +154,30 @@
       "writtenOn": "2020-11-09T09:55:28Z",
       "side": 1,
       "message": "If the size is \u003c\u003d PAGE_SIZE, should offsets be empty? Currently, this function will just return Ok(()) in that case without checking any hashes. Would be good to have some basic generate_offsets test that document / check the behaviour either way.",
+      "range": {
+        "startLine": 63,
+        "startChar": 35,
+        "endLine": 63,
+        "endChar": 44
+      },
+      "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d00033d8_c7a1ea37",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-11T00:51:34Z",
+      "side": 1,
+      "message": "Oops, fixed.  generate_offsets should return [0].  Also added more tests.",
+      "parentUuid": "ebf0f14c_1d9c138b",
       "range": {
         "startLine": 63,
         "startChar": 35,
@@ -157,6 +235,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2513ce8_fb56f77d",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-11T00:51:34Z",
+      "side": 1,
+      "message": "I think this is fine.  We can change if we actually see some problem.",
+      "parentUuid": "59af201c_3826a710",
+      "range": {
+        "startLine": 65,
+        "startChar": 27,
+        "endLine": 65,
+        "endChar": 38
+      },
+      "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80e5e698_f32a847d",
@@ -180,6 +282,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4dbd57f_e7933336",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-11T00:51:34Z",
+      "side": 1,
+      "message": "Only the last chunk needs this extra padding.  But let\u0027s create static zeros to avoid this for each files.",
+      "parentUuid": "80e5e698_f32a847d",
+      "range": {
+        "startLine": 69,
+        "startChar": 21,
+        "endLine": 69,
+        "endChar": 61
+      },
+      "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb421c7c_939dc2ae",
@@ -193,6 +319,24 @@
       "writtenOn": "2020-11-09T09:55:28Z",
       "side": 1,
       "message": "Is this real input validation rather than just a debug check?",
+      "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b67a8c2_8acd0f56",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-11T00:51:34Z",
+      "side": 1,
+      "message": "I think it\u0027s more of a debug check / development hint?  If read_chunk would ever return an incomplete read in production (e.g. from a file), we don\u0027t want to crash, and the next line should handle it properly.",
+      "parentUuid": "eb421c7c_939dc2ae",
       "revId": "57fdfdfe6fb4a3baeba1f244a7d687852f34390e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
