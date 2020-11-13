@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71b93b30_043d4ff8",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-13T11:47:05Z",
+      "side": 1,
+      "message": "I feel a little uneasy with the guard for this being non-zero coming from another function. Might also be helpful to explain that this is being used for a logarithm e.g. with a `log128_ceil(_) -\u003e Option\u003c_\u003e` helper.",
+      "range": {
+        "startLine": 92,
+        "startChar": 46,
+        "endLine": 92,
+        "endChar": 62
+      },
+      "revId": "b3a346cc00a530cb47f06ed4cf5ce2e15ae0691e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16602571_9cfb6563",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-13T11:47:05Z",
+      "side": 1,
+      "message": "Collecting interrupts the iterator and splits the verification from being just one big loop. That\u0027s a performance thing, though, so I won\u0027t get stuck on it until it\u0027s measurably a problem but that\u0027s why I tried to avoid having to reverse again.",
+      "range": {
+        "startLine": 115,
+        "startChar": 9,
+        "endLine": 115,
+        "endChar": 16
+      },
+      "revId": "b3a346cc00a530cb47f06ed4cf5ce2e15ae0691e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84a297a3_66645065",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-13T11:47:05Z",
+      "side": 1,
+      "message": "Would returning an iterator over the node chunks be easier to reuse than the callback? Callers can then iterate over nodes of the path through the tree and apply the logic, e.g. hash checks, they need to.",
+      "range": {
+        "startLine": 123,
+        "startChar": 28,
+        "endLine": 123,
+        "endChar": 36
+      },
+      "revId": "b3a346cc00a530cb47f06ed4cf5ce2e15ae0691e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
