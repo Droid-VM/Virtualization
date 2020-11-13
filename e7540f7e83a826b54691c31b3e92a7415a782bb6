@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd38289d_39ae0416",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-13T21:46:25Z",
+      "side": 1,
+      "message": "You can make this a little less verbose with\n\n`let (merkle_chunk, hash_offset_in_chunk) \u003d result?;`",
+      "range": {
+        "startLine": 62,
+        "startChar": 30,
+        "endLine": 62,
+        "endChar": 44
+      },
+      "revId": "e7540f7e83a826b54691c31b3e92a7415a782bb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "171c45b4_2f37b094",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-13T21:46:25Z",
+      "side": 1,
+      "message": "Since the iterator being returned will capture a reference to `merkle_tree`, you need to tie the lifetime of the returned iterator to the lifetime of the `merkle_tree` you can do that by adding a `+ \u0027a` which is the lifetime annotation on `merkle_tree`.\n\n`Result\u003cimpl Iterator\u003cItem \u003d Result\u003c([u8; 4096], usize), FsverityError\u003e\u003e + \u0027a, FsverityError\u003e`\n\nWithout this extra annotation any references in the returned value would need to be \u0027static to be safe otherwise the reference might be able to outlive what is being referenced.",
+      "range": {
+        "startLine": 92,
+        "startChar": 12,
+        "endLine": 92,
+        "endChar": 76
+      },
+      "revId": "e7540f7e83a826b54691c31b3e92a7415a782bb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fff2418_a1b9642a",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-13T21:46:25Z",
+      "side": 1,
+      "message": "I moved this into the expression below",
+      "range": {
+        "startLine": 120,
+        "startChar": 4,
+        "endLine": 120,
+        "endChar": 35
+      },
+      "revId": "e7540f7e83a826b54691c31b3e92a7415a782bb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13d8e840_c838f9c0",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-13T21:46:25Z",
+      "side": 1,
+      "message": "As this lambda will be in the returned iterator, it will live longer than the function. `merkle_tree` is a function argument so won\u0027t live longer than the function. You need the lambda to take ownership of `merkle_tree` by adding the `move` keyword before the lambda.",
+      "range": {
+        "startLine": 121,
+        "startChar": 35,
+        "endLine": 121,
+        "endChar": 36
+      },
+      "revId": "e7540f7e83a826b54691c31b3e92a7415a782bb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
