@@ -52,6 +52,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fecbc15_e856a17c",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-13T17:44:43Z",
+      "side": 1,
+      "message": "I agree, fixed.",
+      "parentUuid": "cefdbe2e_95339986",
+      "revId": "00c0be36c590461ae754f12e76cfc828492c2720",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24118424_05b6838d",
@@ -65,6 +83,30 @@
       "writtenOn": "2020-11-13T17:02:56Z",
       "side": 1,
       "message": "Is there any need to include a 1.8 MiB blob in the repo and test binary? Can\u0027t the data just be generated?",
+      "range": {
+        "startLine": 112,
+        "startChar": 57,
+        "endLine": 112,
+        "endChar": 77
+      },
+      "revId": "00c0be36c590461ae754f12e76cfc828492c2720",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11195897_aead9342",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-13T17:44:43Z",
+      "side": 1,
+      "message": "Good point, removed.",
+      "parentUuid": "24118424_05b6838d",
       "range": {
         "startLine": 112,
         "startChar": 57,
