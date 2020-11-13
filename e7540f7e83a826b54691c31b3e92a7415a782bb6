@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "531ea89a_d5c38b2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-13T22:02:11Z",
+      "side": 1,
+      "message": "Thanks Andrew!  Merged to the original change.",
+      "revId": "e7540f7e83a826b54691c31b3e92a7415a782bb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd38289d_39ae0416",
@@ -14,6 +31,30 @@
       "writtenOn": "2020-11-13T21:46:25Z",
       "side": 1,
       "message": "You can make this a little less verbose with\n\n`let (merkle_chunk, hash_offset_in_chunk) \u003d result?;`",
+      "range": {
+        "startLine": 62,
+        "startChar": 30,
+        "endLine": 62,
+        "endChar": 44
+      },
+      "revId": "e7540f7e83a826b54691c31b3e92a7415a782bb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b85f0500_bb2aea13",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-13T22:02:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd38289d_39ae0416",
       "range": {
         "startLine": 62,
         "startChar": 30,
@@ -47,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27d7045f_b09dc7af",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-13T22:02:11Z",
+      "side": 1,
+      "message": "Done.  Thanks!",
+      "parentUuid": "171c45b4_2f37b094",
+      "range": {
+        "startLine": 92,
+        "startChar": 12,
+        "endLine": 92,
+        "endChar": 76
+      },
+      "revId": "e7540f7e83a826b54691c31b3e92a7415a782bb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fff2418_a1b9642a",
@@ -70,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ee96046_386c27b8",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-13T22:02:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fff2418_a1b9642a",
+      "range": {
+        "startLine": 120,
+        "startChar": 4,
+        "endLine": 120,
+        "endChar": 35
+      },
+      "revId": "e7540f7e83a826b54691c31b3e92a7415a782bb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13d8e840_c838f9c0",
@@ -83,6 +172,30 @@
       "writtenOn": "2020-11-13T21:46:25Z",
       "side": 1,
       "message": "As this lambda will be in the returned iterator, it will live longer than the function. `merkle_tree` is a function argument so won\u0027t live longer than the function. You need the lambda to take ownership of `merkle_tree` by adding the `move` keyword before the lambda.",
+      "range": {
+        "startLine": 121,
+        "startChar": 35,
+        "endLine": 121,
+        "endChar": 36
+      },
+      "revId": "e7540f7e83a826b54691c31b3e92a7415a782bb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60129a7d_6e47083f",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-13T22:02:11Z",
+      "side": 1,
+      "message": "Thanks.  Never thought about taking ownership of a reference :)",
+      "parentUuid": "13d8e840_c838f9c0",
       "range": {
         "startLine": 121,
         "startChar": 35,
