@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2cb4e31c_49c3ec18",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-13T20:36:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71b93b30_043d4ff8",
+      "range": {
+        "startLine": 92,
+        "startChar": 46,
+        "endLine": 92,
+        "endChar": 62
+      },
+      "revId": "b3a346cc00a530cb47f06ed4cf5ce2e15ae0691e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "16602571_9cfb6563",
         "filename": "authfs/src/fsverity.rs",
         "patchSetId": 6
@@ -37,6 +61,30 @@
       "writtenOn": "2020-11-13T11:47:05Z",
       "side": 1,
       "message": "Collecting interrupts the iterator and splits the verification from being just one big loop. That\u0027s a performance thing, though, so I won\u0027t get stuck on it until it\u0027s measurably a problem but that\u0027s why I tried to avoid having to reverse again.",
+      "range": {
+        "startLine": 115,
+        "startChar": 9,
+        "endLine": 115,
+        "endChar": 16
+      },
+      "revId": "b3a346cc00a530cb47f06ed4cf5ce2e15ae0691e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b41475cd_cf3e3482",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-13T20:36:18Z",
+      "side": 1,
+      "message": "Right.  My first intention was to make it reusable since we\u0027ll also have to have a leaf-to-root walk to update each node (i.e. update the Merkle tree on write).  But strictly speaking this Wnot necessary for the read case here.  Since we\u0027re talking about ~4 elements (if \u003c 256MB), so it shouldn\u0027t be a problem.",
+      "parentUuid": "16602571_9cfb6563",
       "range": {
         "startLine": 115,
         "startChar": 9,
@@ -60,6 +108,30 @@
       "writtenOn": "2020-11-13T11:47:05Z",
       "side": 1,
       "message": "Would returning an iterator over the node chunks be easier to reuse than the callback? Callers can then iterate over nodes of the path through the tree and apply the logic, e.g. hash checks, they need to.",
+      "range": {
+        "startLine": 123,
+        "startChar": 28,
+        "endLine": 123,
+        "endChar": 36
+      },
+      "revId": "b3a346cc00a530cb47f06ed4cf5ce2e15ae0691e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82d89c18_56305380",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-13T20:36:18Z",
+      "side": 1,
+      "message": "Hmm.. Iterator feels better to me, but I couldn\u0027t get the lifetime right.  IIUC, since the iterator is lazy evaluated, merkle_tree in this closure must out live the caller.  The compile error seems to suggest that it must be \u0027static (make sense for a closure to be used outside), but it isn\u0027t.\n\nI\u0027ve uploaded the snapshot to aosp/1498264 on top of this change if you want to take a look.",
+      "parentUuid": "84a297a3_66645065",
       "range": {
         "startLine": 123,
         "startChar": 28,
