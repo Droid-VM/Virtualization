@@ -57,18 +57,18 @@ fn verity_check<T: ReadOnlyDataByChunk>(
 
     let chunk_hash = hash_with_padding(&chunk, T::CHUNK_SIZE as usize)?;
 
-    fsverity_walk(
+    fsverity_walk(chunk_hash, chunk_index, file_size, merkle_tree)?.try_fold(
         chunk_hash,
-        chunk_index,
-        file_size,
-        merkle_tree,
-        |actual_hash, merkle_chunk, hash_offset_in_chunk| {
-            let expected_hash =
-                &merkle_chunk[hash_offset_in_chunk..hash_offset_in_chunk + Sha256Hasher::HASH_SIZE];
-            if actual_hash != expected_hash {
-                return Err(FsverityError::CannotVerify);
+        |actual_hash, result| match result {
+            Ok((merkle_chunk, hash_offset_in_chunk)) => {
+                let expected_hash = &merkle_chunk
+                    [hash_offset_in_chunk..hash_offset_in_chunk + Sha256Hasher::HASH_SIZE];
+                if actual_hash != expected_hash {
+                    return Err(FsverityError::CannotVerify);
+                }
+                Ok(hash_with_padding(&merkle_chunk, T::CHUNK_SIZE as usize)?)
             }
-            Ok(hash_with_padding(&merkle_chunk, T::CHUNK_SIZE as usize)?)
+            Err(e) => Err(e),
         },
     )
 }
@@ -84,17 +84,12 @@ fn log128_ceil(num: u64) -> Option<u64> {
 /// Given a chunk index and the size of the file, walk the Merkle tree from the leaf to the root.
 /// When a node is visited, the callback is invoked with the hash to be verified, the current node
 /// that contains hashes, and the hash's byte offset within the node.
-fn fsverity_walk<T, F>(
+fn fsverity_walk<'a, T: ReadOnlyDataByChunk>(
     chunk_hash: HashBuffer,
     chunk_index: u64,
     file_size: u64,
-    merkle_tree: &T,
-    callback: F,
-) -> Result<HashBuffer, FsverityError>
-where
-    T: ReadOnlyDataByChunk,
-    F: Fn(HashBuffer, &[u8], usize) -> Result<HashBuffer, FsverityError>,
-{
+    merkle_tree: &'a T,
+) -> Result<impl Iterator<Item = Result<([u8; 4096], usize), FsverityError>>, FsverityError> {
     let hashes_per_node = T::CHUNK_SIZE / Sha256Hasher::HASH_SIZE as u64;
     let hash_pages = divide_roundup(file_size, hashes_per_node * T::CHUNK_SIZE as u64);
     let max_level = log128_ceil(hash_pages).expect("file should not be empty") as u32;
@@ -123,15 +118,13 @@ where
         .collect();
 
     let mut leaf_to_root_steps_iter = root_to_leaf_steps.into_iter().rev();
-    leaf_to_root_steps_iter.try_fold(
-        chunk_hash,
-        |actual_hash, (chunk_index, hash_offset_in_chunk)| {
-            let mut merkle_chunk = [0u8; 4096];
-            let _ = merkle_tree.read_chunk(chunk_index, &mut merkle_chunk)?;
-            let next_hash = callback(actual_hash, &merkle_chunk[..], hash_offset_in_chunk)?;
-            Ok(next_hash)
-        },
-    )
+    Ok(leaf_to_root_steps_iter.map(|(chunk_index, hash_offset_in_chunk)| {
+        let mut merkle_chunk = [0u8; 4096];
+        match merkle_tree.read_chunk(chunk_index, &mut merkle_chunk) {
+            Ok(_) => Ok((merkle_chunk, hash_offset_in_chunk)),
+            Err(e) => Err(FsverityError::Io(e)),
+        }
+    }))
 }
 
 #[cfg(test)]
