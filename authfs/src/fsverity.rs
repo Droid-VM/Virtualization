@@ -168,7 +168,6 @@ pub struct FsverityChunkedFileReader<F: ReadOnlyDataByChunk, M: ReadOnlyDataByCh
 }
 
 impl<F: ReadOnlyDataByChunk, M: ReadOnlyDataByChunk> FsverityChunkedFileReader<F, M> {
-    #[allow(dead_code)]
     pub fn new<A: Authenticator>(
         authenticator: &A,
         chunked_file: F,
