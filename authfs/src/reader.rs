@@ -19,7 +19,6 @@
 use std::fs::File;
 use std::io::Result;
 use std::os::unix::fs::FileExt;
-use std::path::Path;
 
 /// A trait for reading data by chunks. The data is assumed readonly and has fixed length. Chunks
 /// can be read by specifying the chunk index. Only the last chunk may have incomplete chunk size.
@@ -50,8 +49,7 @@ pub struct ChunkedFileReader {
 impl ChunkedFileReader {
     /// Creates a `ChunkedFileReader` to read from for the specified `path`.
     #[allow(dead_code)]
-    pub fn new<P: AsRef<Path>>(path: P) -> Result<ChunkedFileReader> {
-        let file = File::open(path)?;
+    pub fn new(file: File) -> Result<ChunkedFileReader> {
         let size = file.metadata()?.len();
         Ok(ChunkedFileReader { file, size })
     }
