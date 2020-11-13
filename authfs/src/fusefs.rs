@@ -1,0 +1,311 @@
+/*
+ * Copyright (C) 2020 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+use anyhow::Result;
+use std::collections::HashMap;
+use std::convert::{TryFrom, TryInto};
+use std::ffi::CStr;
+use std::fs::OpenOptions;
+use std::io;
+use std::mem::MaybeUninit;
+use std::option::Option;
+use std::os::unix::io::AsRawFd;
+use std::path::Path;
+use std::time::Duration;
+
+use fuse::filesystem::{Context, DirEntry, DirectoryIterator, Entry, FileSystem, ZeroCopyWriter};
+use fuse::mount::MountOption;
+
+use crate::fsverity::FsverityChunkedFileReader;
+use crate::reader::{ChunkedFileReader, ReadOnlyDataByChunk};
+
+const BLOCK_SIZE: usize = 4096;
+
+const DEFAULT_METADATA_TIMEOUT: std::time::Duration = Duration::from_secs(5);
+
+pub type Inode = u64;
+type Handle = u64;
+
+// A debug only type where everything are stored as local files.
+type FileBackedFsverityChunkedFileReader =
+    FsverityChunkedFileReader<ChunkedFileReader, ChunkedFileReader>;
+
+pub enum FileConfig {
+    LocalVerifiedFile(FileBackedFsverityChunkedFileReader, u64),
+    LocalUnverifiedFile(ChunkedFileReader, u64),
+}
+
+struct AuthFs {
+    file_pool: HashMap<Inode, FileConfig>,
+    max_write: u32,
+}
+
+impl AuthFs {
+    pub fn new(file_pool: HashMap<Inode, FileConfig>, max_write: u32) -> AuthFs {
+        AuthFs { file_pool, max_write }
+    }
+
+    fn get_file_config(&self, inode: &Inode) -> io::Result<&FileConfig> {
+        self.file_pool.get(&inode).ok_or_else(|| io::Error::from_raw_os_error(libc::ENOENT))
+    }
+}
+
+fn check_access_mode(flags: u32, mode: libc::c_int) -> io::Result<()> {
+    if (flags & libc::O_ACCMODE as u32) == mode as u32 {
+        Ok(())
+    } else {
+        Err(io::Error::from_raw_os_error(libc::EACCES))
+    }
+}
+
+fn create_stat(ino: libc::ino_t, file_size: u64) -> io::Result<libc::stat64> {
+    let mut st = unsafe { MaybeUninit::<libc::stat64>::zeroed().assume_init() };
+
+    let file_size: i64 = file_size.try_into().unwrap();
+    st.st_ino = ino;
+    st.st_mode = libc::S_IFREG | libc::S_IRUSR | libc::S_IRGRP | libc::S_IROTH;
+    st.st_dev = 0;
+    st.st_nlink = 1;
+    st.st_uid = 0;
+    st.st_gid = 0;
+    st.st_rdev = 0;
+    st.st_size = file_size;
+    st.st_blksize = BLOCK_SIZE as i64;
+    st.st_blocks = (file_size + 511) / 512;
+    Ok(st)
+}
+
+/// An iterator that generates (offset, size) for a chunked read operation, where offset is the
+/// global file offset, and size is the amount of read from the offset.
+struct ChunkReadIter {
+    remaining: usize,
+    offset: u64,
+}
+
+impl ChunkReadIter {
+    pub fn new(remaining: usize, offset: u64) -> Self {
+        ChunkReadIter { remaining, offset }
+    }
+}
+
+impl Iterator for ChunkReadIter {
+    type Item = (u64, usize);
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.remaining == 0 {
+            return None;
+        }
+        let chunk_data_size =
+            std::cmp::min(self.remaining, BLOCK_SIZE - (self.offset % BLOCK_SIZE as u64) as usize);
+        let retval = (self.offset, chunk_data_size);
+        self.offset += chunk_data_size as u64;
+        self.remaining = self.remaining.saturating_sub(chunk_data_size);
+        Some(retval)
+    }
+}
+
+fn offset_to_chunk_index(offset: u64) -> u64 {
+    offset / BLOCK_SIZE as u64
+}
+
+fn read_chunks<W: io::Write, T: ReadOnlyDataByChunk>(
+    mut w: W,
+    file: &T,
+    file_size: u64,
+    offset: u64,
+    size: u32,
+) -> io::Result<usize> {
+    let size_to_read =
+        std::cmp::min(size as usize, usize::try_from(file_size - offset).unwrap_or(usize::MAX));
+    let total = ChunkReadIter::new(size_to_read, offset).try_fold(
+        0,
+        |total, (current_offset, planned_data_size)| {
+            // TODO(victorhsieh): May be able to remove this copy, if we generalize the
+            // ZeroCopyReader to accept a more general trait instead of a `io::fs::File`.
+            let mut buf = [0u8; BLOCK_SIZE];
+            let read_size = file.read_chunk(offset_to_chunk_index(current_offset), &mut buf)?;
+            if read_size < planned_data_size {
+                return Err(io::Error::from_raw_os_error(libc::ENODATA));
+            }
+
+            let begin = (current_offset % BLOCK_SIZE as u64) as usize;
+            let end = begin + planned_data_size;
+            let s = w.write(&buf[begin..end])?;
+            if s != planned_data_size {
+                return Err(io::Error::from_raw_os_error(libc::EIO));
+            }
+            Ok(total + s)
+        },
+    )?;
+
+    Ok(total)
+}
+
+// No need to support enumerating directory entries.
+struct EmptyDirectoryIterator {}
+
+impl DirectoryIterator for EmptyDirectoryIterator {
+    fn next(&mut self) -> Option<DirEntry> {
+        None
+    }
+}
+
+impl FileSystem for AuthFs {
+    type Inode = Inode;
+    type Handle = Handle;
+    type DirIter = EmptyDirectoryIterator;
+
+    fn max_buffer_size(&self) -> u32 {
+        self.max_write
+    }
+
+    fn lookup(&self, _ctx: Context, _parent: Inode, name: &CStr) -> io::Result<Entry> {
+        // Only accept file name that looks like an integrer. Files in the pool are simply exposed
+        // by their inode number. Also, there is currently no directory structure.
+        let num = name.to_str().map_err(|_| io::Error::from_raw_os_error(libc::ENOENT))?;
+        let inode = num.parse::<Inode>().map_err(|_| io::Error::from_raw_os_error(libc::ENOENT))?;
+        let st = match self.get_file_config(&inode)? {
+            FileConfig::LocalVerifiedFile(_, file_size)
+            | FileConfig::LocalUnverifiedFile(_, file_size) => create_stat(inode, *file_size)?,
+        };
+        Ok(Entry {
+            inode,
+            generation: 0,
+            attr: st,
+            entry_timeout: DEFAULT_METADATA_TIMEOUT,
+            attr_timeout: DEFAULT_METADATA_TIMEOUT,
+        })
+    }
+
+    fn getattr(
+        &self,
+        _ctx: Context,
+        inode: Inode,
+        _handle: Option<Handle>,
+    ) -> io::Result<(libc::stat64, Duration)> {
+        Ok((
+            match self.get_file_config(&inode)? {
+                FileConfig::LocalVerifiedFile(_, file_size)
+                | FileConfig::LocalUnverifiedFile(_, file_size) => create_stat(inode, *file_size)?,
+            },
+            DEFAULT_METADATA_TIMEOUT,
+        ))
+    }
+
+    fn open(
+        &self,
+        _ctx: Context,
+        inode: Self::Inode,
+        flags: u32,
+    ) -> io::Result<(Option<Self::Handle>, fuse::sys::OpenOptions)> {
+        match self.get_file_config(&inode)? {
+            FileConfig::LocalVerifiedFile(_, _) => {
+                check_access_mode(flags, libc::O_RDONLY)?;
+                // Once verified, and only if verified, the file content can be cached. This is not
+                // really needed for a local file, but is the behavior of RemoteVerifiedFile later.
+                Ok((Some(inode), fuse::sys::OpenOptions::KEEP_CACHE))
+            }
+            FileConfig::LocalUnverifiedFile(_, _) => {
+                check_access_mode(flags, libc::O_RDONLY)?;
+                // Do not cache the content. This type of file is supposed to be verified using
+                // dm-verity. The filesystem mount over dm-verity already is already cached, so use
+                // direct I/O here to avoid double cache.
+                Ok((Some(inode), fuse::sys::OpenOptions::DIRECT_IO))
+            }
+        }
+    }
+
+    fn read<W: io::Write + ZeroCopyWriter>(
+        &self,
+        _ctx: Context,
+        inode: Inode,
+        _handle: Handle,
+        w: W,
+        size: u32,
+        offset: u64,
+        _lock_owner: Option<u64>,
+        _flags: u32,
+    ) -> io::Result<usize> {
+        match self.get_file_config(&inode)? {
+            FileConfig::LocalVerifiedFile(file, file_size) => {
+                read_chunks(w, file, *file_size, offset, size)
+            }
+            FileConfig::LocalUnverifiedFile(file, file_size) => {
+                read_chunks(w, file, *file_size, offset, size)
+            }
+        }
+    }
+}
+
+/// Mount and start the FUSE instance. This requires CAP_SYS_ADMIN.
+pub fn loop_forever(
+    file_pool: HashMap<Inode, FileConfig>,
+    mountpoint: &Path,
+) -> Result<(), fuse::Error> {
+    let max_read: u32 = 65536;
+    let max_write: u32 = 65536;
+    let dev_fuse = OpenOptions::new()
+        .read(true)
+        .write(true)
+        .open("/dev/fuse")
+        .expect("Failed to open /dev/fuse");
+
+    fuse::mount(
+        mountpoint,
+        &"authfs",
+        libc::MS_NOSUID | libc::MS_NODEV,
+        &[
+            MountOption::FD(dev_fuse.as_raw_fd()),
+            MountOption::RootMode(libc::S_IFDIR | libc::S_IXUSR | libc::S_IXGRP | libc::S_IXOTH),
+            MountOption::AllowOther,
+            MountOption::UserId(0),
+            MountOption::GroupId(0),
+            MountOption::MaxRead(max_read),
+        ],
+    )
+    .expect("Failed to mount fuse");
+
+    fuse::worker::start_message_loop(
+        dev_fuse,
+        max_write,
+        max_read,
+        AuthFs::new(file_pool, max_write),
+    )
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn collect_chunk_read_iter(remaining: usize, offset: u64) -> Vec<(u64, usize)> {
+        ChunkReadIter::new(remaining, offset).collect::<Vec<_>>()
+    }
+
+    #[test]
+    fn test_chunk_read_iter() {
+        assert_eq!(collect_chunk_read_iter(4096, 0), [(0, 4096)]);
+        assert_eq!(collect_chunk_read_iter(8192, 0), [(0, 4096), (4096, 4096)]);
+        assert_eq!(collect_chunk_read_iter(8192, 4096), [(4096, 4096), (8192, 4096)]);
+
+        assert_eq!(
+            collect_chunk_read_iter(16384, 1),
+            [(1, 4095), (4096, 4096), (8192, 4096), (12288, 4096), (16384, 1)]
+        );
+
+        assert_eq!(collect_chunk_read_iter(0, 0), []);
+        assert_eq!(collect_chunk_read_iter(0, 100), []);
+    }
+}
