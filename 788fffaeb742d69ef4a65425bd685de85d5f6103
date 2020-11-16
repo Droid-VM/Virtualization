@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73d4dd9e_c905b956",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-16T18:07:00Z",
+      "side": 1,
+      "message": "Yes, we will need to check the root hash against a signature.",
+      "parentUuid": "4294cca2_a20a2a25",
+      "range": {
+        "startLine": 52,
+        "startChar": 12,
+        "endLine": 52,
+        "endChar": 22
+      },
+      "revId": "788fffaeb742d69ef4a65425bd685de85d5f6103",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96b06419_1f43376b",
@@ -37,6 +61,30 @@
       "writtenOn": "2020-11-16T09:18:00Z",
       "side": 1,
       "message": "Not any more 😊",
+      "range": {
+        "startLine": 83,
+        "startChar": 32,
+        "endLine": 83,
+        "endChar": 40
+      },
+      "revId": "788fffaeb742d69ef4a65425bd685de85d5f6103",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2278d69d_0be16bb7",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-16T18:07:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96b06419_1f43376b",
       "range": {
         "startLine": 83,
         "startChar": 32,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e6fc7c4_013a7bec",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-16T18:07:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea1ce80d_c4ce5141",
+      "range": {
+        "startLine": 91,
+        "startChar": 78,
+        "endLine": 91,
+        "endChar": 85
+      },
+      "revId": "788fffaeb742d69ef4a65425bd685de85d5f6103",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d991e8f1_ba64a1a6",
@@ -87,6 +159,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ba3bd94_b9bd4f9c",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-16T18:07:00Z",
+      "side": 1,
+      "message": "Good point. Done.",
+      "parentUuid": "d991e8f1_ba64a1a6",
+      "revId": "788fffaeb742d69ef4a65425bd685de85d5f6103",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1390ad9d_6803a61b",
@@ -100,6 +190,30 @@
       "writtenOn": "2020-11-16T09:18:00Z",
       "side": 1,
       "message": "nit: this doesn\u0027t _need_ to move anymore since the lambda\u0027s lifetime is shorter than that of its captures",
+      "range": {
+        "startLine": 95,
+        "startChar": 13,
+        "endLine": 95,
+        "endChar": 17
+      },
+      "revId": "788fffaeb742d69ef4a65425bd685de85d5f6103",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4367e970_5d868aa4",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-16T18:07:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1390ad9d_6803a61b",
       "range": {
         "startLine": 95,
         "startChar": 13,
@@ -133,6 +247,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbfb64fe_956e196e",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-16T18:07:00Z",
+      "side": 1,
+      "message": "I personally like to separate the \"step generation\" from the below.  It\u0027d be clearly that we\u0027re walking to the opposite direction (and fetch the chunk).",
+      "parentUuid": "9ed1d0e2_a5e60878",
+      "range": {
+        "startLine": 110,
+        "startChar": 9,
+        "endLine": 114,
+        "endChar": 10
+      },
+      "revId": "788fffaeb742d69ef4a65425bd685de85d5f6103",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7aa92cdf_e56b2e61",
@@ -146,6 +284,30 @@
       "writtenOn": "2020-11-16T09:18:00Z",
       "side": 1,
       "message": "Down to preference but you could replace the type annotation on line 93 with `.collect::\u003cVec\u003c_\u003e\u003e()` that, to me, reads as \"collect into a Vec\".",
+      "range": {
+        "startLine": 115,
+        "startChar": 9,
+        "endLine": 115,
+        "endChar": 18
+      },
+      "revId": "788fffaeb742d69ef4a65425bd685de85d5f6103",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dc6b8aa_6a55975d",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-16T18:07:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aa92cdf_e56b2e61",
       "range": {
         "startLine": 115,
         "startChar": 9,
@@ -179,6 +341,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32bb48bb_c64e6228",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-16T18:07:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b060475a_8be39e0e",
+      "range": {
+        "startLine": 119,
+        "startChar": 8,
+        "endLine": 122,
+        "endChar": 9
+      },
+      "revId": "788fffaeb742d69ef4a65425bd685de85d5f6103",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57b28386_3f110a02",
@@ -192,6 +378,24 @@
       "writtenOn": "2020-11-16T09:18:00Z",
       "side": 1,
       "message": "divide_round_up?",
+      "revId": "788fffaeb742d69ef4a65425bd685de85d5f6103",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f7179be_540a8aab",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-16T18:07:00Z",
+      "side": 1,
+      "message": "Since it\u0027s only used for this specific purpose in the test, I\u0027d keep the name.",
+      "parentUuid": "57b28386_3f110a02",
       "revId": "788fffaeb742d69ef4a65425bd685de85d5f6103",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
