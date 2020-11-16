@@ -22,6 +22,30 @@
       },
       "revId": "38139cd936d90055374995c1a53b9d5738a01dcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f04379af_61344804",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-16T22:31:08Z",
+      "side": 1,
+      "message": "Good catch! I was a little confused by the 63 until the algebra kicked in\n\n      (63 - (n - 1).leading_zeros() as u64) / 7 + 1\n    \u003d (63 - (n - 1).leading_zeros() as u64 + 7) / 7\n    \u003d (64 - (n - 1).leading_zeros() as u64 + 7 - 1) / 7\n    \u003d divide_roundup(64 - (n - 1).leading_zeros() as u64, 7)\n\nwhich wouldn\u0027t need a special case for 1 if choose to spell it that way. And, seeing how this function is used, it might as well return Option\u003cu32\u003e.",
+      "parentUuid": "3a6a7987_05c9df9f",
+      "range": {
+        "startLine": 78,
+        "startChar": 32,
+        "endLine": 78,
+        "endChar": 46
+      },
+      "revId": "38139cd936d90055374995c1a53b9d5738a01dcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
