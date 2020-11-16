@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a6a7987_05c9df9f",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-16T19:19:16Z",
+      "side": 1,
+      "message": "I realized this is wrong.  It doesn\u0027t work if the number is not 2^x.  I\u0027m running a lot of stress tests with different file sizes, and the new implementation is passing the tests.",
+      "range": {
+        "startLine": 78,
+        "startChar": 32,
+        "endLine": 78,
+        "endChar": 46
+      },
+      "revId": "38139cd936d90055374995c1a53b9d5738a01dcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
