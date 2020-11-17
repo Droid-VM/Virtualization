@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cdd273e_cfd0374b",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-17T01:42:13Z",
+      "side": 1,
+      "message": "Looks like now we run clippy check in the rust test.  But I guess clippy couldn\u0027t really tell this is not possible to maintain the current iteration order without a collect.",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 34
+      },
+      "revId": "ec18456ce74224bb25dfee01c6b9143796eaaebb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
