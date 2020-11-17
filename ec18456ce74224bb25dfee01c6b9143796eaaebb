@@ -22,6 +22,30 @@
       },
       "revId": "ec18456ce74224bb25dfee01c6b9143796eaaebb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e91c8b59_2d9006ff",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-17T16:44:54Z",
+      "side": 1,
+      "message": "Looks like there are quite a few issues with needless_collect and this one [1] talks about the `rev()` case. Hopefully it\u0027ll get less noisy!\n\n[1] -- https://github.com/rust-lang/rust-clippy/issues/5991",
+      "parentUuid": "2cdd273e_cfd0374b",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 34
+      },
+      "revId": "ec18456ce74224bb25dfee01c6b9143796eaaebb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
