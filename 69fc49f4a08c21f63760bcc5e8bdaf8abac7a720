@@ -16,6 +16,63 @@
       "message": "PTAL",
       "revId": "69fc49f4a08c21f63760bcc5e8bdaf8abac7a720",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d78d9ef_285760a8",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-18T21:38:57Z",
+      "side": 1,
+      "message": "I feel uncomfortable about this, especially without there being good reason. The connection between the size of the FsverityFormattedDigestSha256 array and the bytes being copied in doesn\u0027t have the type system checking that all bytes will be initialized. If it\u0027s a performance throttle then we can measure and justify it but clippy must be warning for a good reason. It\u0027s possible the compiler will work this out anyway or there is a more idiomatic way to construct this array that isn\u0027t coming to mind at the moment.",
+      "revId": "69fc49f4a08c21f63760bcc5e8bdaf8abac7a720",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bd33923_e5f83996",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-18T21:38:57Z",
+      "side": 1,
+      "message": "This is the desired behaviour even e.g. if the SHA hasher has an error? There are a few ways you can nest errors [1] but IDK what\u0027s the recommended practice.\n\n[1] -- https://doc.rust-lang.org/std/io/struct.Error.html#method.new",
+      "revId": "69fc49f4a08c21f63760bcc5e8bdaf8abac7a720",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bddf04b_8746e247",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-18T21:38:57Z",
+      "side": 1,
+      "message": "aside: is it right that the top level in the tree only contains a single hash? And then you have another hash over that top node?",
+      "range": {
+        "startLine": 211,
+        "startChar": 11,
+        "endLine": 211,
+        "endChar": 38
+      },
+      "revId": "69fc49f4a08c21f63760bcc5e8bdaf8abac7a720",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
