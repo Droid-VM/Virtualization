@@ -156,6 +156,30 @@
       },
       "revId": "69fc49f4a08c21f63760bcc5e8bdaf8abac7a720",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b04f07e_7caab791",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2020-11-19T09:04:01Z",
+      "side": 1,
+      "message": "But does that 4K root node only ever contain one hash? E.g. if the file has 2 pages, the tree would have 2 level rather than just one level with 2 hashes?",
+      "parentUuid": "38fb6fb4_46ba65cb",
+      "range": {
+        "startLine": 211,
+        "startChar": 11,
+        "endLine": 211,
+        "endChar": 38
+      },
+      "revId": "69fc49f4a08c21f63760bcc5e8bdaf8abac7a720",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
