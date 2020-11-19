@@ -18,6 +18,29 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1277ff53_1953883f",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-19T00:10:21Z",
+      "side": 1,
+      "message": "This was a missed rename.  This is to align with the recent rename in fs-verity.",
+      "range": {
+        "startLine": 159,
+        "startChar": 12,
+        "endLine": 159,
+        "endChar": 23
+      },
+      "revId": "69fc49f4a08c21f63760bcc5e8bdaf8abac7a720",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d78d9ef_285760a8",
@@ -31,6 +54,24 @@
       "writtenOn": "2020-11-18T21:38:57Z",
       "side": 1,
       "message": "I feel uncomfortable about this, especially without there being good reason. The connection between the size of the FsverityFormattedDigestSha256 array and the bytes being copied in doesn\u0027t have the type system checking that all bytes will be initialized. If it\u0027s a performance throttle then we can measure and justify it but clippy must be warning for a good reason. It\u0027s possible the compiler will work this out anyway or there is a more idiomatic way to construct this array that isn\u0027t coming to mind at the moment.",
+      "revId": "69fc49f4a08c21f63760bcc5e8bdaf8abac7a720",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26c83b65_7a3c84d5",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-19T00:10:21Z",
+      "side": 1,
+      "message": "If the compiler can optimize this, that\u0027ll be the best.  I don\u0027t think it\u0027ll be a bottleneck anyway, so changed to initialize with `[0u8; SIZE]` instead.",
+      "parentUuid": "8d78d9ef_285760a8",
       "revId": "69fc49f4a08c21f63760bcc5e8bdaf8abac7a720",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +93,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e29a87f7_488f0df9",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-19T00:10:21Z",
+      "side": 1,
+      "message": "The user of this code will be a FUSE. EIO is the desired behavior when the content does not verify.  For hash error, it doesn\u0027t have to use EIO (but is what fs-verity currently does in kernel).  We can surely use a different EIO to provide better context, but I couldn\u0027t find any errno closes to \"hash error\" (and the OpenSSL/BoringSSL API doesn\u0027t seem to provide more visibility to the actual cause).",
+      "parentUuid": "9bd33923_e5f83996",
+      "revId": "69fc49f4a08c21f63760bcc5e8bdaf8abac7a720",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9bddf04b_8746e247",
@@ -65,6 +124,30 @@
       "writtenOn": "2020-11-18T21:38:57Z",
       "side": 1,
       "message": "aside: is it right that the top level in the tree only contains a single hash? And then you have another hash over that top node?",
+      "range": {
+        "startLine": 211,
+        "startChar": 11,
+        "endLine": 211,
+        "endChar": 38
+      },
+      "revId": "69fc49f4a08c21f63760bcc5e8bdaf8abac7a720",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38fb6fb4_46ba65cb",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-19T00:10:21Z",
+      "side": 1,
+      "message": "Not the top level. root hash \u003d\u003d hash(4K root node).",
+      "parentUuid": "9bddf04b_8746e247",
       "range": {
         "startLine": 211,
         "startChar": 11,
