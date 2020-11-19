@@ -33,6 +33,24 @@
       "message": "optional: does the signature make sense as a property of the authenticator?",
       "revId": "f77c5729a65436280fe8249abff0ba709b378d9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c4ab43c_4d74f49c",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-19T18:42:53Z",
+      "side": 1,
+      "message": "I think it\u0027s ok for now, since I don\u0027t see it\u0027ll be used elsewhere once the authentication is done.",
+      "parentUuid": "0413e4df_33f354c3",
+      "revId": "f77c5729a65436280fe8249abff0ba709b378d9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

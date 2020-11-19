@@ -180,6 +180,30 @@
       },
       "revId": "69fc49f4a08c21f63760bcc5e8bdaf8abac7a720",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a8f93fb_016ba820",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-11-19T18:42:53Z",
+      "side": 1,
+      "message": "No, it\u0027s a normal node and can contain up to 128 hashes in this case.  The \"root hash\" is the hash of the root node (but not the fs-verity digest).  These sometimes confuses me, too.",
+      "parentUuid": "4b04f07e_7caab791",
+      "range": {
+        "startLine": 211,
+        "startChar": 11,
+        "endLine": 211,
+        "endChar": 38
+      },
+      "revId": "69fc49f4a08c21f63760bcc5e8bdaf8abac7a720",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
