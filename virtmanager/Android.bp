@@ -6,5 +6,8 @@ rust_binary {
     crate_name: "virtmanager",
     srcs: ["src/main.rs"],
     edition: "2018",
-    rustlibs: ["android.system.virtmanager-rust"],
+    rustlibs: [
+        "android.system.virtmanager-rust",
+        "liblog_rust",
+    ],
 }

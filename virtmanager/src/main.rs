@@ -1,7 +1,10 @@
 //! Android Virt Manager
 
-use android_system_virtmanager::aidl::android::system::virtmanager::IVirtManager::IVirtManager;
-use android_system_virtmanager::binder::{self, Interface};
+use android_system_virtmanager::aidl::android::system::virtmanager::IVirtManager::{
+    BnVirtManager, IVirtManager,
+};
+use android_system_virtmanager::binder::{self, add_service, Interface};
+use log::info;
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 
@@ -9,9 +12,15 @@ use std::sync::{Arc, Mutex};
 /// reserved for the host or other usage.
 const FIRST_GUEST_CID: Cid = 1;
 
+const BINDER_SERVICE_IDENTIFIER: &str = "android.system.virtmanager";
+
 fn main() {
     let state = Arc::new(Mutex::new(State::new()));
-    let _virt_manager = VirtManager::new(state);
+    let virt_manager = VirtManager::new(state);
+    let virt_manager = BnVirtManager::new_binder(virt_manager);
+    add_service(BINDER_SERVICE_IDENTIFIER, virt_manager.as_binder()).unwrap();
+    info!("Registered Binder service, joining threadpool.");
+    binder::ProcessState::join_thread_pool();
 }
 
 /// The unique ID of a VM used (together with a port number) for vsock communication.
