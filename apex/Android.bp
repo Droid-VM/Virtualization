@@ -1,0 +1,24 @@
+apex {
+    name: "com.android.vmm",
+
+    // TODO(jiyong): make it updatable
+    // updatable: true,
+
+    manifest: "manifest.json",
+
+    key: "com.android.vmm.key",
+    certificate: ":com.android.vmm.certificate",
+
+    min_sdk_version: "S",
+}
+
+apex_key {
+    name: "com.android.vmm.key",
+    public_key: "com.android.vmm.avbpubkey",
+    private_key: "com.android.vmm.pem",
+}
+
+android_app_certificate {
+    name: "com.android.vmm.certificate",
+    certificate: "com.android.vmm",
+}
