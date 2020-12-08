@@ -16,6 +16,24 @@
       "message": "Just a quick question on APEX. What is the API stabilization story with APEXes these days? If the VMM lives in a different APEX from the rest of our components, does there have to be a stable API between them? Any other implications here?",
       "revId": "77b901180fb0b16087a7942b0ac055355764f616",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1153df2_215f1d28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2020-12-08T08:37:46Z",
+      "side": 1,
+      "message": "Yes, interactions across the APEX boundaries should be via stable APIs: C APIs for in-process comm., stable AIDL for IPC,  @SystemApi(client\u003dMODULE_LIBRARIES) for in-process Java comms.\n\nThis APEX would be for everything that runs on the host (Android) side, and would include the IVmManager binder service.",
+      "parentUuid": "ec378543_a133cbdb",
+      "revId": "77b901180fb0b16087a7942b0ac055355764f616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
