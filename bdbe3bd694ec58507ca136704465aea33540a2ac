@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000006665328",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1509108?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "158c0982_100be60c",
+          "description": "Change to \"authfs/src/fusefs.rs\"",
+          "replacements": [
+            {
+              "path": "authfs/src/fusefs.rs",
+              "range": {
+                "startLine": 157,
+                "startChar": 44,
+                "endLine": 157,
+                "endChar": 51
+              },
+              "replacement": "entries"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "f94035dd_21fb5556",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-12-09T23:43:23Z",
+      "side": 1,
+      "message": "Common typo found: \"entires\" -- should it be \"entries\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027NO_TYPO_CHECK\u003d\u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 157,
+        "startChar": 44,
+        "endLine": 157,
+        "endChar": 51
+      },
+      "revId": "bdbe3bd694ec58507ca136704465aea33540a2ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
