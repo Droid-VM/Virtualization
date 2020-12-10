@@ -52,6 +52,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eb8703c_bdc830d9",
+        "filename": "authfs/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-12-10T20:42:32Z",
+      "side": 1,
+      "message": "This is Android specific.  Android excludes the 32-bit build on device.  Since the fuse crate then doesn\u0027t have the 32-bit variant, we need this rule to also not generate the 32-bit variant (which we won\u0027t need anyway).\n\nFor reference, here is the rule that all crates under crosvm uses, which only enable necessary build selectively.\n\nhttps://cs.android.com/android/platform/superproject/+/master:external/crosvm/Android.bp;l\u003d18-29?q\u003dcrosvm%2FAndroid.bp",
+      "parentUuid": "d87ca325_41e8b722",
+      "revId": "6ddab6e3ef4f5fc08b84b5344bbbee5f7e348841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77b3aea4_be5ed148",
@@ -65,6 +83,24 @@
       "writtenOn": "2020-12-10T07:12:16Z",
       "side": 1,
       "message": "The default hash function used by HashMap is siphash, which is designed to prevent hash collision attacks and not for performance.  So if you trust the source of the keys then you may want to change the hash function to something like fnv (using the fnv crate).\n\n\nAdditionally, since the keys are already integers in this case I suspect that a BTreeMap will likely outperform even a fnv HashMap here unless you are storing thousands of entries.",
+      "revId": "6ddab6e3ef4f5fc08b84b5344bbbee5f7e348841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a187ec5_47717ba7",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-12-10T20:42:32Z",
+      "side": 1,
+      "message": "Good call!  Changed to BTreeMap.  We could even store in an array, but I\u0027ll leave that optimization to the future if we can live with some constrains.",
+      "parentUuid": "77b3aea4_be5ed148",
       "revId": "6ddab6e3ef4f5fc08b84b5344bbbee5f7e348841",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -86,6 +122,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b89a0227_fd12589e",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-12-10T20:42:32Z",
+      "side": 1,
+      "message": "From `man 2 stat` as well as https://elixir.bootlin.com/linux/latest/source/include/linux/types.h#L124  , st_blocks has to be 512-based.",
+      "parentUuid": "1a561c27_cac5bf39",
+      "revId": "6ddab6e3ef4f5fc08b84b5344bbbee5f7e348841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af22821d_39002a3a",
@@ -99,6 +153,24 @@
       "writtenOn": "2020-12-10T07:12:16Z",
       "side": 1,
       "message": "I\u0027m not sure we\u0027ll be able to do this.  The long-term goal of the ZeroCopy{Reader,Write} traits is to avoid keeping a buffer by using the splice(2) syscall, which requires an fd. We could probably change the File requirement to a marker trait but we would still need an fd.\n\nIn the case where there is no fd, buffering like we\u0027re doing here would still be necessary but at least there would only be one copy.",
+      "revId": "6ddab6e3ef4f5fc08b84b5344bbbee5f7e348841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25f87f7c_a9cf67fb",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-12-10T20:42:32Z",
+      "side": 1,
+      "message": "Sure.  Basically it doesn\u0027t feel impossible to \"splice\" L139 and L146, but it\u0027s probably not trivial to create a reasonable interface.  For example, if the write could expose a buffer to be written into, it\u0027ll achieve this goal.  But that probably won\u0027t work with the virtio transport.\n\nUpdated the comment.",
+      "parentUuid": "af22821d_39002a3a",
       "revId": "6ddab6e3ef4f5fc08b84b5344bbbee5f7e348841",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -120,6 +192,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1763d588_8f2e8421",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-12-10T20:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be219cdf_f4416ed0",
+      "revId": "6ddab6e3ef4f5fc08b84b5344bbbee5f7e348841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3c8a63b_d5ec2290",
@@ -133,6 +223,30 @@
       "writtenOn": "2020-12-10T07:12:16Z",
       "side": 1,
       "message": "Maybe this should be EINVAL rather than ENOENT?",
+      "range": {
+        "startLine": 178,
+        "startChar": 79,
+        "endLine": 178,
+        "endChar": 85
+      },
+      "revId": "6ddab6e3ef4f5fc08b84b5344bbbee5f7e348841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b656044a_37b6a447",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-12-10T20:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3c8a63b_d5ec2290",
       "range": {
         "startLine": 178,
         "startChar": 79,
@@ -166,6 +280,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd1150bd_17f1aee1",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-12-10T20:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00d9b9b0_46c6256b",
+      "range": {
+        "startLine": 226,
+        "startChar": 20,
+        "endLine": 226,
+        "endChar": 31
+      },
+      "revId": "6ddab6e3ef4f5fc08b84b5344bbbee5f7e348841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11080919_b0d6e104",
@@ -183,6 +321,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b9e5ef7_1717f7dc",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-12-10T20:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11080919_b0d6e104",
+      "revId": "6ddab6e3ef4f5fc08b84b5344bbbee5f7e348841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c195d03_e4b86fca",
@@ -196,6 +352,30 @@
       "writtenOn": "2020-12-10T07:12:16Z",
       "side": 1,
       "message": "nit: I think a struct with named fields might be more readable here",
+      "range": {
+        "startLine": 56,
+        "startChar": 30,
+        "endLine": 56,
+        "endChar": 63
+      },
+      "revId": "6ddab6e3ef4f5fc08b84b5344bbbee5f7e348841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6885fc6_05ca8a34",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-12-10T20:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c195d03_e4b86fca",
       "range": {
         "startLine": 56,
         "startChar": 30,
@@ -225,6 +405,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a8361348_30c56158",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-12-10T20:42:32Z",
+      "side": 1,
+      "message": "Is there any advantage?  It seems \u0027?\u0027 is a bit more succinct.",
+      "parentUuid": "c5ff94c9_6d5ae189",
+      "revId": "6ddab6e3ef4f5fc08b84b5344bbbee5f7e348841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f77d29d8_8495b529",
         "filename": "authfs/src/main.rs",
         "patchSetId": 3
@@ -236,6 +434,24 @@
       "writtenOn": "2020-12-10T07:12:16Z",
       "side": 1,
       "message": "style nit: this can be merged into the for loop:\n\n    for (inode, protected_file_path, merkle_tree_dump_path, signature_path) in \u0026args.local_verified_file",
+      "revId": "6ddab6e3ef4f5fc08b84b5344bbbee5f7e348841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb058828_56e9f084",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-12-10T20:42:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f77d29d8_8495b529",
       "revId": "6ddab6e3ef4f5fc08b84b5344bbbee5f7e348841",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
