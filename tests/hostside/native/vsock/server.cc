@@ -21,20 +21,48 @@
 #include <linux/vm_sockets.h>
 
 #include <iostream>
+#include <thread>
 
 #include "android-base/file.h"
 #include "android-base/logging.h"
 #include "android-base/parseint.h"
 #include "android-base/unique_fd.h"
+#include "android/system/virtmanager/IVirtManager.h"
+#include "android/system/virtmanager/IVirtualMachine.h"
+#include "binder/IServiceManager.h"
 
+using namespace android;
 using namespace android::base;
+using namespace android::system::virtmanager;
+
+void start_vm(String16 vm_config) {
+    LOG(INFO) << "Getting virtmanager";
+    sp<IVirtManager> virt_manager;
+    status_t err = getService<IVirtManager>(String16("android.system.virtmanager"), &virt_manager);
+    if (err != 0) {
+        LOG(ERROR) << "Error getting virtmanager from servicemanager: " << err;
+        return;
+    }
+    sp<IVirtualMachine> vm;
+    binder::Status status = virt_manager->start_vm(vm_config, &vm);
+    if (!status.isOk()) {
+        LOG(ERROR) << "Error starting VM: " << status;
+    }
+    int32_t cid;
+    status = vm->get_cid(&cid);
+    if (!status.isOk()) {
+        LOG(ERROR) << "Error getting CID: " << status;
+    }
+    LOG(INFO) << "VM starting with CID " << cid;
+}
 
 int main(int argc, const char *argv[]) {
     unsigned int port;
-    if (argc != 2 || !ParseUint(argv[1], &port)) {
-        LOG(ERROR) << "Usage: " << argv[0] << " <port>";
+    if (argc != 3 || !ParseUint(argv[1], &port)) {
+        LOG(ERROR) << "Usage: " << argv[0] << " <port> <vm_config.json>";
         return EXIT_FAILURE;
     }
+    String16 vm_config(argv[2]);
 
     unique_fd server_fd(TEMP_FAILURE_RETRY(socket(AF_VSOCK, SOCK_STREAM, 0)));
     if (server_fd < 0) {
@@ -61,6 +89,9 @@ int main(int argc, const char *argv[]) {
         return EXIT_FAILURE;
     }
 
+    LOG(INFO) << "Spawning thread to start VM.";
+    std::thread start_vm_thread(start_vm, vm_config);
+
     LOG(INFO) << "Accepting connection...";
     struct sockaddr_vm client_sa;
     socklen_t client_sa_len = sizeof(client_sa);
@@ -81,6 +112,9 @@ int main(int argc, const char *argv[]) {
 
     // Print the received message to stdout.
     std::cout << msg << std::endl;
+
+    LOG(INFO) << "Joining on start VM thread.";
+    start_vm_thread.join();
 
     LOG(INFO) << "Exiting...";
     return EXIT_SUCCESS;
