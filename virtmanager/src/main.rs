@@ -6,7 +6,7 @@ use android_system_virtmanager::aidl::android::system::virtmanager::IVirtManager
 use android_system_virtmanager::aidl::android::system::virtmanager::IVirtualMachine::{
     BnVirtualMachine, IVirtualMachine,
 };
-use android_system_virtmanager::binder::{self, add_service, Interface, StatusCode};
+use android_system_virtmanager::binder::{self, add_service, Interface, StatusCode, WpIBinder};
 use anyhow::{Context, Error};
 use log::{error, info};
 use serde::{Deserialize, Serialize};
@@ -85,7 +85,7 @@ impl IVirtualMachine for VmInstance {
 /// The mutable state of the Virt Manager. There should only be one instance of this struct.
 #[derive(Debug)]
 struct State {
-    vms: HashMap<String, Box<dyn IVirtualMachine>>,
+    vms: HashMap<String, WpIBinder>,
     next_cid: Cid,
 }
 
@@ -110,18 +110,33 @@ impl Interface for VirtManager {}
 
 impl IVirtManager for VirtManager {
     fn start_vm(&self, config_path: &str) -> binder::Result<Box<dyn IVirtualMachine>> {
-        let mut state = &mut *self.state.lock().unwrap();
+        let state = &mut *self.state.lock().unwrap();
         let vm = match state.vms.entry(config_path.to_owned()) {
-            Entry::Occupied(occupied) => occupied.into_mut(),
+            Entry::Occupied(occupied) => {
+                let vm_weak = occupied.into_mut();
+                if let Some(vm_strong) = vm_weak.promote() {
+                    vm_strong.into_interface::<dyn IVirtualMachine>().unwrap()
+                } else {
+                    // TODO: Ensure that VM has actually been shut down before re-lauching it.
+                    let vm = create_vm(config_path, &mut state.next_cid)?;
+                    *vm_weak = vm.as_binder().downgrade();
+                    vm
+                }
+            }
             Entry::Vacant(vacant) => {
-                let cid = state.next_cid;
-                let instance = start_vm(config_path, cid)?;
-                state.next_cid += 1;
-                vacant.insert(Box::new(BnVirtualMachine::new_binder(instance)))
+                let vm = create_vm(config_path, &mut state.next_cid)?;
+                vacant.insert(vm.as_binder().downgrade());
+                vm
             }
         };
-        Ok(vm.to_owned())
+        Ok(vm)
     }
+}
+
+fn create_vm(config_path: &str, next_cid: &mut Cid) -> binder::Result<Box<dyn IVirtualMachine>> {
+    let instance = start_vm(config_path, *next_cid)?;
+    *next_cid += 1;
+    Ok(Box::new(BnVirtualMachine::new_binder(instance)))
 }
 
 /// Start a new VM instance from the given VM config filename. This assumes the VM is not already
