@@ -31,6 +31,7 @@ java_test_host {
         ":virt_hostside_tests_kernel",
         ":virt_hostside_tests_initramfs-arm64",
         ":virt_hostside_tests_initramfs-x86_64",
+        ":virt_hostside_tests_vm_config",
     ],
     required: [
         "virt_hostside_tests_vsock_server",
@@ -47,6 +48,22 @@ genrule {
     out: [
         "virt_hostside_tests_kernel-arm64",
         "virt_hostside_tests_kernel-x86_64",
+    ],
+    tool_files: ["scripts/place_files.sh"],
+    cmd: "$(location scripts/place_files.sh) $(in) -- $(out)",
+}
+
+// Copy config files to output directory so that AndroidTest.xml can copy them to the device.
+genrule {
+    name: "virt_hostside_tests_vm_config",
+    srcs: [
+        "vm_config.arm64.json",
+        "vm_config.x86_64.json",
+    ],
+    // If these have the same name as the srcs then mm gives an error.
+    out: [
+        "virt_hostside_tests_vm_config.arm64.json",
+        "virt_hostside_tests_vm_config.x86_64.json",
     ],
     tool_files: ["scripts/place_files.sh"],
     cmd: "$(location scripts/place_files.sh) $(in) -- $(out)",
