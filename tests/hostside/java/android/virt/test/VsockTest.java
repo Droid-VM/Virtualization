@@ -33,7 +33,6 @@ public class VsockTest extends VirtTestCase {
     private static final int      RETRIES = 0;
 
     private static final Integer  HOST_CID = 2;
-    private static final Integer  GUEST_CID = 42;
     private static final Integer  GUEST_PORT = 45678;
     private static final String   TEST_MESSAGE = "HelloWorld";
 
@@ -45,9 +44,9 @@ public class VsockTest extends VirtTestCase {
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
         final String serverPath = getDevicePathForTestBinary(SERVER_TARGET);
-        final String serverCmd = createCommand(serverPath, GUEST_PORT);
+        final String vmConfigPath = getDevicePathForTestBinary("vm_config.json");
+        final String serverCmd = createCommand(serverPath, GUEST_PORT, vmConfigPath);
         final String clientCmd = createCommand(CLIENT_PATH, HOST_CID, GUEST_PORT, TEST_MESSAGE);
-        final String vmCmd = getVmCommand(clientCmd, GUEST_CID);
 
         // Start server in Android that listens for vsock connections.
         // It will receive a message from a client in the guest VM.
@@ -57,27 +56,6 @@ public class VsockTest extends VirtTestCase {
             assertEquals(TEST_MESSAGE, res.getStdout().trim());
             return null;
         });
-
-        // Run VM that will connect to the server and send a message to it.
-        Future<?> vmTask = executor.submit(() -> {
-            CommandResult res = getDevice().executeShellV2Command(
-                    vmCmd, TIMEOUT, TIMEOUT_UNIT, RETRIES);
-            CLog.d(res.getStdout()); // print VMM output into host_log
-            assertEquals(CommandStatus.SUCCESS, res.getStatus());
-            return null;
-        });
-
-        // Wait for the VMM to finish sending the message.
-        try {
-            vmTask.get(TIMEOUT, TIMEOUT_UNIT);
-        } catch (Throwable ex) {
-            // The VMM either exited with a non-zero code or it timed out.
-            // Kill the server process, the test has failed.
-            // Note: executeShellV2Command cannot be interrupted. This will wait
-            // until `serverTask` times out.
-            executor.shutdownNow();
-            throw ex;
-        }
 
         // Wait for the server to finish processing the message.
         serverTask.get(TIMEOUT, TIMEOUT_UNIT);
