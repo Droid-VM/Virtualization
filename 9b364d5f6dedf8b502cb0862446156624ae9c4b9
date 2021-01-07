@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e335d7b7_ffc9ec46",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-07T23:35:08Z",
+      "side": 1,
+      "message": "Happy New Year!",
+      "parentUuid": "e0f2ba50_d9ae9fa5",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "9b364d5f6dedf8b502cb0862446156624ae9c4b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5e81793_b1aadd65",
@@ -75,6 +99,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b670a541_2412906f",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-07T23:35:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5e81793_b1aadd65",
+      "revId": "9b364d5f6dedf8b502cb0862446156624ae9c4b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83ed5976_bdd43c1a",
@@ -88,6 +130,30 @@
       "writtenOn": "2021-01-07T19:00:57Z",
       "side": 1,
       "message": "\u003cdel\u003efuse doesn\u0027t provide these definitions?\u003c/del\u003e Can these just be defined on AuthFs, as they are later on, and used as AuthFs::Inode?",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 0
+      },
+      "revId": "9b364d5f6dedf8b502cb0862446156624ae9c4b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95cdd9ed_5732f874",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-07T23:35:08Z",
+      "side": 1,
+      "message": "The fuse crates allow each filesystem to define their inode and handle types.\n\nAuthFs is a struct, and it looks like in Rust you can have a internal type to a struct?",
+      "parentUuid": "83ed5976_bdd43c1a",
       "range": {
         "startLine": 34,
         "startChar": 0,
@@ -121,6 +187,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f6a944a_2ad079b0",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-07T23:35:08Z",
+      "side": 1,
+      "message": "Just tried to do `libc::stat64 { ... }`, but apparently libc::stat64 has some inaccessible fields (I think things like __pad0 and __reserved) :(\n\n```\nerror: cannot construct `libc::stat64` with struct literal syntax due to inaccessible fields\n```",
+      "parentUuid": "1d7b5a2d_632590c4",
+      "range": {
+        "startLine": 83,
+        "startChar": 17,
+        "endLine": 83,
+        "endChar": 80
+      },
+      "revId": "9b364d5f6dedf8b502cb0862446156624ae9c4b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "991b89aa_2e527a45",
@@ -134,6 +224,30 @@
       "writtenOn": "2021-01-07T19:00:57Z",
       "side": 1,
       "message": "divide_round_up()? Is 512 defined as a block size anywhere usable?",
+      "range": {
+        "startLine": 95,
+        "startChar": 19,
+        "endLine": 95,
+        "endChar": 42
+      },
+      "revId": "9b364d5f6dedf8b502cb0862446156624ae9c4b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fa12045_ba04735b",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-07T23:35:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "991b89aa_2e527a45",
       "range": {
         "startLine": 95,
         "startChar": 19,
@@ -167,6 +281,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfdee9d1_70e13875",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-07T23:35:08Z",
+      "side": 1,
+      "message": "Done. Replaced with a saturating_sub.  If the return size of read is 0, it\u0027s treated as EOF by the kernel.",
+      "parentUuid": "0b9d3903_622de406",
+      "range": {
+        "startLine": 140,
+        "startChar": 53,
+        "endLine": 140,
+        "endChar": 71
+      },
+      "revId": "9b364d5f6dedf8b502cb0862446156624ae9c4b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbcd92af_2dc30bc4",
@@ -180,6 +318,30 @@
       "writtenOn": "2021-01-07T19:00:57Z",
       "side": 1,
       "message": "Would it be useful for these to be (chunk_index, offset_in_chunk, chunk_read_size) to keep all the maths on the iterator?",
+      "range": {
+        "startLine": 143,
+        "startChar": 16,
+        "endLine": 143,
+        "endChar": 51
+      },
+      "revId": "9b364d5f6dedf8b502cb0862446156624ae9c4b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb885221_ce0039a3",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-07T23:35:08Z",
+      "side": 1,
+      "message": "The minimum unit to read is a chunk, so only the chunk index matters.  But I personally feel it\u0027s more clean for ChunkReadIter to simply produce offsets.",
+      "parentUuid": "fbcd92af_2dc30bc4",
       "range": {
         "startLine": 143,
         "startChar": 16,
