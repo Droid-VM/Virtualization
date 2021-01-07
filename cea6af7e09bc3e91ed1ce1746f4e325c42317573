@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007105992",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1509656?revision\u003d8",
+      "fixSuggestions": [
+        {
+          "fixId": "063bbc29_cc319c46",
+          "description": "Change to \"virtmanager/src/main.rs\"",
+          "replacements": [
+            {
+              "path": "virtmanager/src/main.rs",
+              "range": {
+                "startLine": 168,
+                "startChar": 8,
+                "endLine": 168,
+                "endChar": 14
+              },
+              "replacement": "Returns"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "4fa4d722_96f86f53",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-07T14:35:01Z",
+      "side": 1,
+      "message": "Common typo found: \"Retuns\" -- should it be \"Returns\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 168,
+        "startChar": 8,
+        "endLine": 168,
+        "endChar": 14
+      },
+      "revId": "cea6af7e09bc3e91ed1ce1746f4e325c42317573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
