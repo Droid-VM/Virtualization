@@ -19,14 +19,13 @@
 use std::fs::File;
 use std::io::Result;
 use std::os::unix::fs::FileExt;
-
-use crate::common::COMMON_PAGE_SIZE;
+use std::path::Path;
 
 /// A trait for reading data by chunks. The data is assumed readonly and has fixed length. Chunks
 /// can be read by specifying the chunk index. Only the last chunk may have incomplete chunk size.
 pub trait ReadOnlyDataByChunk {
     /// Default chunk size.
-    const CHUNK_SIZE: u64 = COMMON_PAGE_SIZE;
+    const CHUNK_SIZE: u64 = 4096;
 
     /// Read the `chunk_index`-th chunk to `buf`. Each slice/chunk has size `CHUNK_SIZE` except for
     /// the last one, which can be an incomplete chunk. `buf` is currently required to be large
@@ -50,7 +49,9 @@ pub struct ChunkedFileReader {
 
 impl ChunkedFileReader {
     /// Creates a `ChunkedFileReader` to read from for the specified `path`.
-    pub fn new(file: File) -> Result<ChunkedFileReader> {
+    #[allow(dead_code)]
+    pub fn new<P: AsRef<Path>>(path: P) -> Result<ChunkedFileReader> {
+        let file = File::open(path)?;
         let size = file.metadata()?.len();
         Ok(ChunkedFileReader { file, size })
     }
