@@ -16,6 +16,24 @@
       "message": "q: Isn\u0027t ReadOnlyDataByChunk::CHUNK_SIZE the source of truth for this?",
       "revId": "88ac6cad507d444d472e39d84be494448532e507",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec9c541c_b4aa424d",
+        "filename": "authfs/src/common.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-11T21:32:29Z",
+      "side": 1,
+      "message": "Yes, but it\u0027s trait bounded and I can\u0027t simply use it.  Let me send you a follow-up to use this common constant in other places instead.",
+      "parentUuid": "aa61fe71_6b05bd2f",
+      "revId": "88ac6cad507d444d472e39d84be494448532e507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
