@@ -29,6 +29,9 @@ import java.util.ArrayList;
 public abstract class VirtTestCase extends DeviceTestCase implements IAbiReceiver {
 
     private static final String DEVICE_DIR = "/data/local/tmp/virt-test";
+    private static final String VIRT_APEX_DIR = "/apex/com.android.virt";
+    private static final String VIRT_APEX_BIN_DIR = VIRT_APEX_DIR + "/bin";
+    private static final String CROSVM_BIN = VIRT_APEX_BIN_DIR + "/crosvm";
 
     private static final int CID_RESERVED = 2;
 
@@ -75,7 +78,7 @@ public abstract class VirtTestCase extends DeviceTestCase implements IAbiReceive
     protected String getVmCommand(String guestCmd, Integer cid) throws Exception {
         ArrayList<String> cmd = new ArrayList<>();
 
-        cmd.add("crosvm");
+        cmd.add(CROSVM_BIN);
         cmd.add("run");
 
         cmd.add("--disable-sandbox");
