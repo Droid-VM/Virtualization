@@ -23,8 +23,8 @@
         <option name="run-command" value="ls /dev/kvm" />
         <!-- Kernel has vhost-vsock enabled. -->
         <option name="run-command" value="ls /dev/vhost-vsock" />
-        <!-- CrosVM is installed. -->
-        <option name="run-command" value="which crosvm" />
+        <!-- APEX is installed. -->
+        <option name="run-command" value="ls /apex/com.android.virt" />
     </target_preparer>
 
     <!-- Push test binaries to the device. -->
