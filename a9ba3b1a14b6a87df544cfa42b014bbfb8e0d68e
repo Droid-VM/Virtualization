@@ -96,6 +96,24 @@
       "message": "I find the use of JSON strange. Why not have this struct directly in the Binder API? You now have a Binder API and a JSON API where one points to the other.\n\nAdvantages:\n  * drop Serde from your dependencies, reduce surface,\n  * reduce risk of this code introducing deserialization vulnerabilities,\n  * users like this test could generate the configs programmatically (instead of having multiple config files with duplicated info, or dumping the JSON to a file before calling your API),\n  * users who want a static config can still deserialize a JSON (or any other format they want) and pass the struct to VirtManager,\n  * it will play much nicer with the file-opening restrictions enforced by SELinux.",
       "revId": "a9ba3b1a14b6a87df544cfa42b014bbfb8e0d68e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6918c108_4fd48960",
+        "filename": "tests/hostside/vm_config.x86_64.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-01-20T17:28:49Z",
+      "side": 1,
+      "message": "I thought of this as a placeholder for the Cuttlefish JSON config that `run_cvd` uses. Having something that can easily be deserialised from disk, and signed, also seemed useful. If file-opening restrictions become an issue then we can move to passing file descriptors, I guess?",
+      "parentUuid": "9eed021f_e97111dc",
+      "revId": "a9ba3b1a14b6a87df544cfa42b014bbfb8e0d68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
