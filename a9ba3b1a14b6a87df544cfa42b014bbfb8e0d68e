@@ -132,6 +132,24 @@
       "parentUuid": "6918c108_4fd48960",
       "revId": "a9ba3b1a14b6a87df544cfa42b014bbfb8e0d68e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95e35954_d1be4536",
+        "filename": "tests/hostside/vm_config.x86_64.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-01-20T18:07:25Z",
+      "side": 1,
+      "message": "Is there some documentation somewhere about how Android APIs do look? The Android API guidelines seem to be mostly about Java APIs; the only mention of AIDL is that AIDL interfaces should be implementation details that aren\u0027t exposed to clients. That sounds to me like an argument for using JSON or something similar rather than encoding complex structures in AIDL.",
+      "parentUuid": "414936bc_2584c056",
+      "revId": "a9ba3b1a14b6a87df544cfa42b014bbfb8e0d68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
