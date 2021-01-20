@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a37a29a_10b3a7cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-01-20T16:04:00Z",
+      "side": 1,
+      "message": "nit: subjects usually don\u0027t have fullstops",
+      "revId": "a9ba3b1a14b6a87df544cfa42b014bbfb8e0d68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0ca437e_009bd780",
+        "filename": "tests/hostside/java/android/virt/test/VsockTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-01-20T16:04:00Z",
+      "side": 1,
+      "message": "We should include this in our APEX and start assuming everywhere that that\u0027s where our tools are.\n\nAlso nit: I would put everything that\u0027s not specific to a single test to the parent class.",
+      "range": {
+        "startLine": 40,
+        "startChar": 58,
+        "endLine": 40,
+        "endChar": 69
+      },
+      "revId": "a9ba3b1a14b6a87df544cfa42b014bbfb8e0d68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac9d4a1b_81720271",
+        "filename": "tests/hostside/native/vsock/server.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-01-20T16:04:00Z",
+      "side": 1,
+      "message": "nit: VirtManager and ServiceManager? Here and elsewhere unless it is in the package name.",
+      "range": {
+        "startLine": 74,
+        "startChar": 37,
+        "endLine": 74,
+        "endChar": 48
+      },
+      "revId": "a9ba3b1a14b6a87df544cfa42b014bbfb8e0d68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72d60ecd_0b780617",
+        "filename": "tests/hostside/native/vsock/server.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-01-20T16:04:00Z",
+      "side": 1,
+      "message": "This could also be in a common library, but we can deal with that when we have more tests.",
+      "revId": "a9ba3b1a14b6a87df544cfa42b014bbfb8e0d68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eed021f_e97111dc",
+        "filename": "tests/hostside/vm_config.x86_64.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-01-20T16:04:00Z",
+      "side": 1,
+      "message": "I find the use of JSON strange. Why not have this struct directly in the Binder API? You now have a Binder API and a JSON API where one points to the other.\n\nAdvantages:\n  * drop Serde from your dependencies, reduce surface,\n  * reduce risk of this code introducing deserialization vulnerabilities,\n  * users like this test could generate the configs programmatically (instead of having multiple config files with duplicated info, or dumping the JSON to a file before calling your API),\n  * users who want a static config can still deserialize a JSON (or any other format they want) and pass the struct to VirtManager,\n  * it will play much nicer with the file-opening restrictions enforced by SELinux.",
+      "revId": "a9ba3b1a14b6a87df544cfa42b014bbfb8e0d68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
