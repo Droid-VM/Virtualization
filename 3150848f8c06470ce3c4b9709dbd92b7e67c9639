@@ -16,6 +16,23 @@
       "message": "+Stephen and Andrei if they can help review the binder part.  Thanks!",
       "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7ec2654_d8dd4978",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2021-01-26T22:17:25Z",
+      "side": 1,
+      "message": "If I\u0027m parsing this code correctly, you\u0027re doing Ok(x?) which is the same as x (in this context). I think you can remove the Ok and ?.",
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
