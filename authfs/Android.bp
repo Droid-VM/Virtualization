@@ -47,3 +47,22 @@ rust_test {
     name: "authfs_device_test_src_lib",
     defaults: ["authfs_defaults"],
 }
+
+aidl_interface {
+    name: "authfs_aidl_interface",
+    unstable: true,
+    srcs: [":authfs_aidl"],
+    backend: {
+        rust: {
+            enabled: true,
+        },
+    },
+}
+
+filegroup {
+    name: "authfs_aidl",
+    srcs: [
+        "aidl/com/android/server/virt/fs/IVirtFdService.aidl",
+    ],
+    path: "aidl",
+}
