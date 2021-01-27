@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a53d57b9_8af3d5d4",
+        "filename": "authfs/src/remote_file.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-01-27T14:05:17Z",
+      "side": 1,
+      "message": "In c++, this is often a static constant on the server class or the server class has a static method to lookup the service. Would that work here so that the name string can be hidden inside fd_server?",
+      "range": {
+        "startLine": 31,
+        "startChar": 28,
+        "endLine": 31,
+        "endChar": 42
+      },
+      "revId": "55eaa67a3fe6b70ad3ff649fc1e4b4335e3f3852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fe57620_d822fe5c",
+        "filename": "authfs/src/remote_file.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-01-27T14:05:17Z",
+      "side": 1,
+      "message": "I haven\u0027t got my hands dirty with Sync before, so bare with me.\n\nIn general you don\u0027t need to lock a binder and can use it from multiple threads and it sorts out those details for you (correct?). But you\u0027re adding a mutex so that the rust type system will let you pass it to the use worker?",
+      "range": {
+        "startLine": 66,
+        "startChar": 17,
+        "endLine": 66,
+        "endChar": 22
+      },
+      "revId": "55eaa67a3fe6b70ad3ff649fc1e4b4335e3f3852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
