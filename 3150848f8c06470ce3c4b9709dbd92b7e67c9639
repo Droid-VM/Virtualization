@@ -18,6 +18,29 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f621698_275ab05d",
+        "filename": "authfs/aidl/com/android/server/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-01-27T13:38:29Z",
+      "side": 1,
+      "message": "I don\u0027t know how these package names are chosen for non-java things, I\u0027ll assume this is the convention that\u0027s used.",
+      "range": {
+        "startLine": 17,
+        "startChar": 20,
+        "endLine": 17,
+        "endChar": 26
+      },
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff7a0d2a_3efbe5ee",
@@ -55,6 +78,150 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8d678c18_8ca32f29",
+        "filename": "authfs/aidl/com/android/server/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-01-27T13:38:29Z",
+      "side": 1,
+      "message": "The methods should start with a lower case letter, to match conventions",
+      "parentUuid": "51a91afd_34de9ef5",
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df53a68e_240edb6c",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-01-27T13:38:29Z",
+      "side": 1,
+      "message": "authfs might be more consistent with e.g. path naming",
+      "range": {
+        "startLine": 43,
+        "startChar": 29,
+        "endLine": 43,
+        "endChar": 33
+      },
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a0f785e_83026bf2",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-01-27T13:38:29Z",
+      "side": 1,
+      "message": "Is there a significance to this specific number?",
+      "range": {
+        "startLine": 46,
+        "startChar": 33,
+        "endLine": 46,
+        "endChar": 38
+      },
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f83cc980_002ffd03",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-01-27T13:38:29Z",
+      "side": 1,
+      "message": "Preferred to use the standard Status::EX_ILLEGAL_ARGUMENT",
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee53c0c0_5d2f086d",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-01-27T13:38:29Z",
+      "side": 1,
+      "message": "Isn\u0027t this far too implementation specific to return in the API? Either there was malformed data passed in which is an InvalidArgument, or you\u0027ve tried to do a conversion that failed and should probably be handling more elegantly.",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 11
+      },
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18bbc70e_0b0fe649",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-01-27T13:38:29Z",
+      "side": 1,
+      "message": "Preferred to use the standard Status::EX_UNSUPPORTED_OPERATION",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 16
+      },
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86661057_e75623b0",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-01-27T13:38:29Z",
+      "side": 1,
+      "message": "I had a feeling that you\u0027re not meant to put these application layer errors in the Binder Status. You might want to check with Steven because I have a memory of him telling me off for doing something like this once before.",
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b7ec2654_d8dd4978",
         "filename": "authfs/fd_server/src/main.rs",
         "patchSetId": 2
@@ -84,6 +251,23 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "b7ec2654_d8dd4978",
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ea17561_45c18692",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-01-27T13:38:29Z",
+      "side": 1,
+      "message": "Do we have any need to tune the thread pool size or are the defaults good?",
       "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
