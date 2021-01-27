@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7e34f82_10eca078",
+        "filename": "authfs/src/remote_file.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-27T19:09:58Z",
+      "side": 1,
+      "message": "Having something common is indeed better.  Do you know the recommended way for Rust to share code, besides creating a new crate?  I could change the layout to something like this and include common/*.rs in the build rules.\n\nauthfs/src/\n - client\n - server\n - common\n\nBut it\u0027ll only be to share this string. Or we could wait until the interface of remote binder is clearer.",
+      "parentUuid": "a53d57b9_8af3d5d4",
+      "range": {
+        "startLine": 31,
+        "startChar": 28,
+        "endLine": 31,
+        "endChar": 42
+      },
+      "revId": "55eaa67a3fe6b70ad3ff649fc1e4b4335e3f3852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4fe57620_d822fe5c",
         "filename": "authfs/src/remote_file.rs",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2021-01-27T14:05:17Z",
       "side": 1,
       "message": "I haven\u0027t got my hands dirty with Sync before, so bare with me.\n\nIn general you don\u0027t need to lock a binder and can use it from multiple threads and it sorts out those details for you (correct?). But you\u0027re adding a mutex so that the rust type system will let you pass it to the use worker?",
+      "range": {
+        "startLine": 66,
+        "startChar": 17,
+        "endLine": 66,
+        "endChar": 22
+      },
+      "revId": "55eaa67a3fe6b70ad3ff649fc1e4b4335e3f3852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12f1edb5_73c08573",
+        "filename": "authfs/src/remote_file.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-27T19:09:58Z",
+      "side": 1,
+      "message": "I asked the question at android-binder@, the Stephen said he will make Strong\u003c\u003e Sync.  I\u0027m still waiting for his CL, but this works for now.",
+      "parentUuid": "4fe57620_d822fe5c",
       "range": {
         "startLine": 66,
         "startChar": 17,
