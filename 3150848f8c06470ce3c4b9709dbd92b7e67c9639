@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c49e2489_966fe8e2",
+        "filename": "authfs/aidl/com/android/server/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-27T19:09:43Z",
+      "side": 1,
+      "message": "Ah, this should not be server. I think server is usually for services provided by system server.  I simply removed \"server\", but let me know if you have other suggestions.",
+      "parentUuid": "2f621698_275ab05d",
+      "range": {
+        "startLine": 17,
+        "startChar": 20,
+        "endLine": 17,
+        "endChar": 26
+      },
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff7a0d2a_3efbe5ee",
@@ -94,6 +118,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4222e074_4f405c8c",
+        "filename": "authfs/aidl/com/android/server/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-27T19:09:43Z",
+      "side": 1,
+      "message": "Done.  Also removed GetFileSize since it\u0027s not actually used.",
+      "parentUuid": "8d678c18_8ca32f29",
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df53a68e_240edb6c",
@@ -107,6 +149,30 @@
       "writtenOn": "2021-01-27T13:38:29Z",
       "side": 1,
       "message": "authfs might be more consistent with e.g. path naming",
+      "range": {
+        "startLine": 43,
+        "startChar": 29,
+        "endLine": 43,
+        "endChar": 33
+      },
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "366116cb_cf220b7d",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-27T19:09:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df53a68e_240edb6c",
       "range": {
         "startLine": 43,
         "startChar": 29,
@@ -140,6 +206,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6499069_ef1f8a21",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-27T19:09:43Z",
+      "side": 1,
+      "message": "Nope, \"just to avoid allocate and transfer a huge buffer\" since we don\u0027t trust the clients.",
+      "parentUuid": "7a0f785e_83026bf2",
+      "range": {
+        "startLine": 46,
+        "startChar": 33,
+        "endLine": 46,
+        "endChar": 38
+      },
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f83cc980_002ffd03",
@@ -157,6 +247,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47f13558_bed9c172",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-27T19:09:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f83cc980_002ffd03",
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee53c0c0_5d2f086d",
@@ -170,6 +278,30 @@
       "writtenOn": "2021-01-27T13:38:29Z",
       "side": 1,
       "message": "Isn\u0027t this far too implementation specific to return in the API? Either there was malformed data passed in which is an InvalidArgument, or you\u0027ve tried to do a conversion that failed and should probably be handling more elegantly.",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 11
+      },
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f236cbe_e517b655",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-27T19:09:43Z",
+      "side": 1,
+      "message": "Good point.  Changed to ILLEGAL_ARGUMENT.",
+      "parentUuid": "ee53c0c0_5d2f086d",
       "range": {
         "startLine": 53,
         "startChar": 4,
@@ -203,6 +335,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0de54c5f_8f91a16b",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-27T19:09:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18bbc70e_0b0fe649",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 16
+      },
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86661057_e75623b0",
@@ -216,6 +372,24 @@
       "writtenOn": "2021-01-27T13:38:29Z",
       "side": 1,
       "message": "I had a feeling that you\u0027re not meant to put these application layer errors in the Binder Status. You might want to check with Steven because I have a memory of him telling me off for doing something like this once before.",
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae09c4de_7b264050",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-27T19:09:43Z",
+      "side": 1,
+      "message": "+Steven for suggestion",
+      "parentUuid": "86661057_e75623b0",
       "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -268,6 +442,24 @@
       "writtenOn": "2021-01-27T13:38:29Z",
       "side": 1,
       "message": "Do we have any need to tune the thread pool size or are the defaults good?",
+      "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ede4df9_e4f34af3",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-27T19:09:43Z",
+      "side": 1,
+      "message": "TBD. I have not done any optimization yet.",
+      "parentUuid": "8ea17561_45c18692",
       "revId": "3150848f8c06470ce3c4b9709dbd92b7e67c9639",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
