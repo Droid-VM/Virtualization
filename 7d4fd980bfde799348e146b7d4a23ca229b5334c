@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9d1b58a_91dec264",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1809421
+      },
+      "writtenOn": "2021-01-28T18:54:00Z",
+      "side": 1,
+      "message": "You should include the public api via `authfs_aidl_interface::binder` and not depend directly on libbinder_rs.",
+      "revId": "7d4fd980bfde799348e146b7d4a23ca229b5334c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "391a513b_e2c3ec73",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1809421
+      },
+      "writtenOn": "2021-01-28T18:54:00Z",
+      "side": 1,
+      "message": "Why not use File::read_exact_at?",
+      "revId": "7d4fd980bfde799348e146b7d4a23ca229b5334c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
