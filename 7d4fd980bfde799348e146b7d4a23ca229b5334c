@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d2bbcef0_79e0a20e",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1809421
+      },
+      "writtenOn": "2021-01-29T22:55:01Z",
+      "side": 1,
+      "message": "I missed the need for IBinder::set_requesting_side. I\u0027ve opened b/178852354 to track adding a better interface for this to the public API for AIDL.",
+      "parentUuid": "4019a3ef_72fc8407",
+      "revId": "7d4fd980bfde799348e146b7d4a23ca229b5334c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "391a513b_e2c3ec73",
         "filename": "authfs/fd_server/src/main.rs",
         "patchSetId": 4
