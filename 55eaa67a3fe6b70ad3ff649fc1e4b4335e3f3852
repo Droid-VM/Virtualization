@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0adff45c_4c925a59",
+        "filename": "authfs/src/remote_file.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-01-29T17:13:28Z",
+      "side": 1,
+      "message": "Well, I\u0027m not sure the automatic generated name is better if it can ever change[1].  Eventually, we *might* have to add something to service_contexts in SELinux policy, but I\u0027m not sure if it\u0027s needed for a remote binder yet (I guess not?).  Since this local binder service is just temporary, I don\u0027t really mind as long as it works.  I\u0027m happy to update if you prefer one way or the other :)\n\n[1] I was following the common pattern for system services, where the string is exposed to apps and can\u0027t change.  But we may not need the same guarantee in this case.",
+      "parentUuid": "a26a9117_2c5b2567",
+      "range": {
+        "startLine": 31,
+        "startChar": 28,
+        "endLine": 31,
+        "endChar": 42
+      },
+      "revId": "55eaa67a3fe6b70ad3ff649fc1e4b4335e3f3852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fe57620_d822fe5c",
