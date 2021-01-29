@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c10ed78c_71a82462",
+        "filename": "authfs/src/remote_file.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-01-29T12:30:59Z",
+      "side": 1,
+      "message": "Checked back on how I\u0027ve done this in C++ and AIDL actually helps you out by giving a static string based on the package and interface name. In this case, I think you want `IVirtFdService::get_descriptor()` to be the name of your service, here and in the service.\n\nSee AIDL golden examples http://cs/android/system/tools/aidl/tests/golden_output/aidl-test-interface-rust-source/gen/android/aidl/tests/ITestService.rs?l\u003d13\u0026rcl\u003d4b404f898db1be0bda9c0011cdb9446479edad93",
+      "parentUuid": "b7e34f82_10eca078",
+      "range": {
+        "startLine": 31,
+        "startChar": 28,
+        "endLine": 31,
+        "endChar": 42
+      },
+      "revId": "55eaa67a3fe6b70ad3ff649fc1e4b4335e3f3852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4fe57620_d822fe5c",
         "filename": "authfs/src/remote_file.rs",
         "patchSetId": 3
