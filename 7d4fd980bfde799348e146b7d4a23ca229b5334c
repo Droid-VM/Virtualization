@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4019a3ef_72fc8407",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1809421
+      },
+      "writtenOn": "2021-01-29T21:26:59Z",
+      "side": 1,
+      "message": "I wasn\u0027t quite clear enough, sorry. All of the other imports are available from the public api via the aidl package. You shouldn\u0027t need to depend on libbinder_rs directly at all.",
+      "parentUuid": "c2386451_d7dc706d",
+      "revId": "7d4fd980bfde799348e146b7d4a23ca229b5334c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "391a513b_e2c3ec73",
         "filename": "authfs/fd_server/src/main.rs",
         "patchSetId": 4
