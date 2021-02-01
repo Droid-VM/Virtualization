@@ -1,0 +1,63 @@
+aidl_interface {
+    name: "compos_aidl_interface",
+    unstable: true,
+    srcs: [":compos_aidl"],
+    backend: {
+        rust: {
+            enabled: true,
+        },
+    },
+}
+
+filegroup {
+    name: "compos_aidl",
+    srcs: [
+        "aidl/com/android/virt/compos/InputFdAnnotation.aidl",
+        "aidl/com/android/virt/compos/ICompService.aidl",
+        "aidl/com/android/virt/compos/Metadata.aidl",
+        "aidl/com/android/virt/compos/OutputFdAnnotation.aidl",
+    ],
+    path: "aidl",
+}
+
+rust_binary {
+    name: "pvm_exec",
+    srcs: ["src/pvm_exec.rs"],
+    rustlibs: [
+        "compos_aidl_interface-rust",
+        "libanyhow",
+        "libclap",
+        "liblibc",
+        "liblog_rust",
+        "libminijail_rust",
+        "libnix",
+        "libscopeguard",
+    ],
+}
+
+rust_binary {
+    name: "compsvc",
+    srcs: ["src/compsvc.rs"],
+    rustlibs: [
+        "compos_aidl_interface-rust",
+        "libandroid_logger",
+        "libanyhow",
+        "libclap",
+        "liblog_rust",
+        "libminijail_rust",
+    ],
+}
+
+rust_binary {
+    name: "compsvc_worker",
+    srcs: ["src/compsvc_worker.rs"],
+    rustlibs: [
+        "libandroid_logger",
+        "libanyhow",
+        "libclap",
+        "liblog_rust",
+        "libminijail_rust",
+        "libnix",
+        "libscopeguard",
+    ],
+}
