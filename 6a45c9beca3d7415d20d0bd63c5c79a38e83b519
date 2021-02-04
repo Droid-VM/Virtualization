@@ -1,0 +1,418 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0bd2204_a8ce71aa",
+        "filename": "virtmanager/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-04T18:49:01Z",
+      "side": 1,
+      "message": "Should we keep this?  Cargo.toml is not checked in.  (I did the same thing until I started to depend on Android libraries :)",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 103
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53b942e9_384fc054",
+        "filename": "virtmanager/aidl/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-04T18:49:01Z",
+      "side": 1,
+      "message": "nit: 2021 (or probably remove the copyright header? Since many Android.bp don\u0027t include it already).",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "020aeabd_5c1e37e8",
+        "filename": "virtmanager/aidl/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-04T18:49:01Z",
+      "side": 1,
+      "message": "Just checking.  This would have to be stable later, right?  I imagine virtmanager would be in com.android.virt.apex, and the clients are outside.",
+      "range": {
+        "startLine": 18,
+        "startChar": 4,
+        "endLine": 18,
+        "endChar": 19
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f3b57bf_106c890c",
+        "filename": "virtmanager/aidl/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-04T18:49:01Z",
+      "side": 1,
+      "message": "Ignore me if you think this is correct (it may be).  But I have some trouble to reason what\u0027s the correct version to generate.  The same code would need to be used by Android S/T/etc.  Jiyong probably knows the best.",
+      "range": {
+        "startLine": 21,
+        "startChar": 26,
+        "endLine": 21,
+        "endChar": 40
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9966c7a_dac0f7f7",
+        "filename": "virtmanager/aidl/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-04T18:49:01Z",
+      "side": 1,
+      "message": "Let\u0027s not expose this one unless it\u0027s needed?",
+      "range": {
+        "startLine": 23,
+        "startChar": 8,
+        "endLine": 25,
+        "endChar": 10
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c68f61f4_7ec680b8",
+        "filename": "virtmanager/aidl/android/system/virtmanager/IVirtManager.aidl",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-04T18:49:01Z",
+      "side": 1,
+      "message": "nit: \"in\" is probably not necessary since String is immutable / can\u0027t be an output.\n\nAlthough, do you think the config file should be always visible to virtmanaager? An alternative would be the use a Parcelable.  We may also avoid parsing untrusted input in this process.",
+      "range": {
+        "startLine": 22,
+        "startChar": 33,
+        "endLine": 22,
+        "endChar": 35
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2db6bbaa_67bb4b18",
+        "filename": "virtmanager/aidl/android/system/virtmanager/IVirtManager.aidl",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-04T18:49:01Z",
+      "side": 1,
+      "message": "Maybe it\u0027s time us all of us to converge on the style.  So far I\u0027ve trying to use camelCase / following the other .aidls.  I wonder if we should do the same here, especially since we\u0027re generating Java API.  WDYT?",
+      "range": {
+        "startLine": 22,
+        "startChar": 24,
+        "endLine": 22,
+        "endChar": 32
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4435085e_d32db8aa",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-04T18:49:01Z",
+      "side": 1,
+      "message": "nit: 2021",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b424cd60_51f8c0d9",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-04T18:49:01Z",
+      "side": 1,
+      "message": "nit: how about reserve 10 CIDs?  I wonder if the constant would later be needed by Android later, e.g. to give \"CID \u003c 10\" more priority, privileges, different sepolicy, etc.",
+      "range": {
+        "startLine": 34,
+        "startChar": 29,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b16dc57_b49ecb32",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-04T18:49:01Z",
+      "side": 1,
+      "message": "I\u0027m guessing this is not needed since Eq implies PartialEq.",
+      "range": {
+        "startLine": 42,
+        "startChar": 40,
+        "endLine": 42,
+        "endChar": 49
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80887b6f_4a3f8e67",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-04T18:49:01Z",
+      "side": 1,
+      "message": "Hmm.. the naming is a bit confusing to me.  We\u0027re calling from start_vm -\u003e create_vm -\u003e (another) start_vm.\n\n(It might also be easier to read if you inline this to L90?)",
+      "range": {
+        "startLine": 78,
+        "startChar": 20,
+        "endLine": 78,
+        "endChar": 28
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a5528cb_b7cd7bb8",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-04T18:49:01Z",
+      "side": 1,
+      "message": "wrapping_add maybe?",
+      "range": {
+        "startLine": 79,
+        "startChar": 18,
+        "endLine": 79,
+        "endChar": 22
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1950f2d6_c0505f5c",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-04T18:49:01Z",
+      "side": 1,
+      "message": "How about `type Cid \u003d i32` to avoid overflow?",
+      "range": {
+        "startLine": 111,
+        "startChar": 29,
+        "endLine": 111,
+        "endChar": 35
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c57ec9a_4a779fdf",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-04T18:49:01Z",
+      "side": 1,
+      "message": "nit: maybe debug?  Or drop this log since something is always logged later.  The logd ring buffer is limited so we don\u0027t want to be too spamy.",
+      "range": {
+        "startLine": 133,
+        "startChar": 8,
+        "endLine": 133,
+        "endChar": 12
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a471f2d_529c3919",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-04T18:49:01Z",
+      "side": 1,
+      "message": "nit: Ok(run_vm..)",
+      "range": {
+        "startLine": 168,
+        "startChar": 6,
+        "endLine": 169,
+        "endChar": 13
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c442c0b7_a362cc6e",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-04T18:49:01Z",
+      "side": 1,
+      "message": "Cid",
+      "range": {
+        "startLine": 180,
+        "startChar": 34,
+        "endLine": 180,
+        "endChar": 37
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7efc606d_8043d416",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-04T18:49:01Z",
+      "side": 1,
+      "message": "This seems to be necessary for now (I don\u0027t know why), but do you think it\u0027ll always be the case?  Consider leave a comment/TODO.",
+      "range": {
+        "startLine": 182,
+        "startChar": 28,
+        "endLine": 182,
+        "endChar": 45
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5d7f7bb_3a25b58b",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-04T18:49:01Z",
+      "side": 1,
+      "message": "nit: just `command.spawn()`",
+      "range": {
+        "startLine": 192,
+        "startChar": 4,
+        "endLine": 193,
+        "endChar": 13
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
