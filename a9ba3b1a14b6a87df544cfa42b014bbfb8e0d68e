@@ -20,6 +20,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66d09a81_e8468a77",
+        "filename": "tests/hostside/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-02-04T15:03:18Z",
+      "side": 1,
+      "message": "I don\u0027t understand the purpose of this genrule. In my understanding, it makes the two json files as a module. But such a task is usually done by filegroup.\n\nfilegroup {\n    name: \"vm_config.arm64.json\",\n    srcs: [\"vm_config.arm64.json\"],\n}\n\n// same for x86_64 ...\n\njava_test_host {\n    data: [\n        \":vm_config.arm64.json\",\n        \":vm_config.x86_64.json\",\n    ],\n}",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 1
+      },
+      "revId": "a9ba3b1a14b6a87df544cfa42b014bbfb8e0d68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02f386c1_5a515f82",
+        "filename": "tests/hostside/AndroidTest.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-02-04T15:03:18Z",
+      "side": 1,
+      "message": "check the existence of vm manager?",
+      "range": {
+        "startLine": 27,
+        "startChar": 42,
+        "endLine": 27,
+        "endChar": 54
+      },
+      "revId": "a9ba3b1a14b6a87df544cfa42b014bbfb8e0d68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0ca437e_009bd780",
         "filename": "tests/hostside/java/android/virt/test/VsockTest.java",
         "patchSetId": 8
