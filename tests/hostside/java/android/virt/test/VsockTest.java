@@ -38,7 +38,7 @@ public class VsockTest extends VirtTestCase {
     private static final String   TEST_MESSAGE = "HelloWorld";
 
     private static final String   CLIENT_PATH = "bin/vsock_client";
-    private static final String   SERVER_TARGET = "virt_hostside_tests_vsock_server";
+    private static final String   SERVER_TARGET = "vsock_server";
 
     @Test
     public void testVsockServer() throws Exception {
