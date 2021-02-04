@@ -46,7 +46,7 @@ device is attached over ADB, you can run:
 $ adb root
 $ adb push <kernel> /data/local/tmp/kernel
 $ adb push <ramdisk> /data/local/tmp/ramdisk
-$ adb shell crosvm run --initrd /data/local/tmp/ramdisk /data/local/tmp/kernel
+$ adb shell /apex/com.android.virt/bin/crosvm run --initrd /data/local/tmp/ramdisk /data/local/tmp/kernel
 ```
 
 ### Syncing system files
@@ -67,10 +67,9 @@ $ adb wait-for-device root
 $ adb remount
 ```
 
-Now (re-)build CrosVM and sync the system files:
+Now (re-)build com.android.virt APEX (which includes CrosVM) and sync the system files:
 ``` shell
-$ m crosvm
-$ adb shell stop
+$ m com.android.virt
 $ adb sync
-$ adb shell start
+$ adb reboot
 ```

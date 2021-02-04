@@ -21,6 +21,7 @@ cc_test {
     ],
     static_executable: true,
     test_suites: ["device-tests"],
+    stem: "vsock_server",
 }
 
 cc_binary {
@@ -32,4 +33,5 @@ cc_binary {
     ],
     static_executable: true,
     installable: false,
+    stem: "vsock_client",
 }
