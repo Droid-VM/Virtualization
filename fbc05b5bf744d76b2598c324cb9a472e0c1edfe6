@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1c34485_9e4b652b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-02-04T14:35:17Z",
+      "side": 1,
+      "message": "All of this is fine by me, nice cleanup, but adding qwandor@ who expressed a preference to jump straight to using the VirtManager on a previous CL where I did some of this.\n",
+      "revId": "fbc05b5bf744d76b2598c324cb9a472e0c1edfe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0adb7c0b_4f6a8a31",
+        "filename": "docs/getting_started/index.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-02-04T14:35:17Z",
+      "side": 1,
+      "message": "nit: We should also add a section on how to `adb install` the APEX once it\u0027s in the system image. Eg. on VIM3L it is in the default build, so no need for remounting root and `adb sync`.",
+      "revId": "fbc05b5bf744d76b2598c324cb9a472e0c1edfe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bee2030_bc9f9e9a",
+        "filename": "tests/hostside/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-02-04T14:35:17Z",
+      "side": 1,
+      "message": "Could we add an uncompressed \u0027cpio\u0027 to the filesystem target? It seems odd that the build system calls mkbootfs, then compresses and immediately decompresses.",
+      "range": {
+        "startLine": 56,
+        "startChar": 11,
+        "endLine": 56,
+        "endChar": 26
+      },
+      "revId": "fbc05b5bf744d76b2598c324cb9a472e0c1edfe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
