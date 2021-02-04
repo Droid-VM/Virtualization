@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6700430e_372c14ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-02-04T14:51:36Z",
+      "side": 1,
+      "message": "virt manager is an abstraction on top of these primitives, isn\u0027t it?",
+      "parentUuid": "a1c34485_9e4b652b",
+      "revId": "fbc05b5bf744d76b2598c324cb9a472e0c1edfe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0adb7c0b_4f6a8a31",
         "filename": "docs/getting_started/index.md",
         "patchSetId": 1
@@ -49,6 +67,24 @@
       "writtenOn": "2021-02-04T14:35:17Z",
       "side": 1,
       "message": "nit: We should also add a section on how to `adb install` the APEX once it\u0027s in the system image. Eg. on VIM3L it is in the default build, so no need for remounting root and `adb sync`.",
+      "revId": "fbc05b5bf744d76b2598c324cb9a472e0c1edfe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "718be2e9_c6cce909",
+        "filename": "docs/getting_started/index.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-02-04T14:51:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0adb7c0b_4f6a8a31",
       "revId": "fbc05b5bf744d76b2598c324cb9a472e0c1edfe6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -66,6 +102,30 @@
       "writtenOn": "2021-02-04T14:35:17Z",
       "side": 1,
       "message": "Could we add an uncompressed \u0027cpio\u0027 to the filesystem target? It seems odd that the build system calls mkbootfs, then compresses and immediately decompresses.",
+      "range": {
+        "startLine": 56,
+        "startChar": 11,
+        "endLine": 56,
+        "endChar": 26
+      },
+      "revId": "fbc05b5bf744d76b2598c324cb9a472e0c1edfe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c0b1331_fa6689c3",
+        "filename": "tests/hostside/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-02-04T14:51:36Z",
+      "side": 1,
+      "message": "Yeah, I think so. Will do that as a follow-up.",
+      "parentUuid": "6bee2030_bc9f9e9a",
       "range": {
         "startLine": 56,
         "startChar": 11,
