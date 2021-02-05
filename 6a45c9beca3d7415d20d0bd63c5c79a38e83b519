@@ -191,6 +191,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a79d493d_f88ccb39",
+        "filename": "virtmanager/aidl/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-05T18:57:56Z",
+      "side": 1,
+      "message": "My understanding is that if an aidl is only used internally, i.e. by code that only released together, the API can be changed freely.  In many cases it\u0027s not.  For example, some Android AIDL needs to remain stable, otherwise a change coming with OTA can break apps.  There might be build time check for cross-package use.\n\nI\u0027m guessing module_current is similar, but APEX specific.  +Jiyong for advise (please also see L18).",
+      "parentUuid": "1280f26f_a4d5212f",
+      "range": {
+        "startLine": 21,
+        "startChar": 26,
+        "endLine": 21,
+        "endChar": 40
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f9966c7a_dac0f7f7",
         "filename": "virtmanager/aidl/Android.bp",
         "patchSetId": 13
@@ -332,6 +356,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "261e0f50_5fa75e90",
+        "filename": "virtmanager/aidl/android/system/virtmanager/IVirtManager.aidl",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-05T18:57:56Z",
+      "side": 1,
+      "message": "RE in/String: \"Primitives, String, IBinder, and AIDL-generated interfaces are in by default, and cannot be otherwise.\" according to https://developer.android.com/guide/components/aidl\n\nRE file visibility: the API is currently \"unstable\", so it\u0027s semantically fine to land this first.  I think we can\u0027t avoid thinking about this, since we\u0027ll have to add some new sepolicy rules later to allow reading from specific file contexts.",
+      "parentUuid": "c03fb405_f3f3f0e4",
+      "range": {
+        "startLine": 22,
+        "startChar": 33,
+        "endLine": 22,
+        "endChar": 35
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f759e89e_bccd8a73",
+        "filename": "virtmanager/aidl/android/system/virtmanager/IVirtManager.aidl",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-05T18:57:56Z",
+      "side": 1,
+      "message": "I can\u0027t find any, but AIDL is pretty Java-centric from what I can tell.  For example, \"All primitive types in the Java programming language\"[1], and the type names are Java-ish (e.g. char, boolean, CharSequence).  That\u0027s why I feel it makes more sense to keep .aidl in Java style.  Hope that make sense?\n\n[1] https://developer.android.com/guide/components/aidl",
+      "parentUuid": "7db1ee74_55aee7c3",
+      "range": {
+        "startLine": 22,
+        "startChar": 24,
+        "endLine": 22,
+        "endChar": 32
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4435085e_d32db8aa",
         "filename": "virtmanager/src/main.rs",
         "patchSetId": 13
@@ -343,6 +415,30 @@
       "writtenOn": "2021-02-04T18:49:01Z",
       "side": 1,
       "message": "nit: 2021",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8bd0d60_d3a7912e",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-05T18:57:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4435085e_d32db8aa",
       "range": {
         "startLine": 1,
         "startChar": 13,
@@ -390,6 +486,30 @@
       "side": 1,
       "message": "Done, but what do you expect to use them for?",
       "parentUuid": "b424cd60_51f8c0d9",
+      "range": {
+        "startLine": 34,
+        "startChar": 29,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bacfa14e_d92a951f",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-05T18:57:56Z",
+      "side": 1,
+      "message": "I don\u0027t know for sure.  Purely speculating... Maybe Android could put app CID and different system CIDs in different SELinux domains, and forbid system server to ever talk to app VM.  In any case, reserving some CIDs should only make things easier but not harder in the future (hopefully 10 is enough? ;).\n\nPS. Android\u0027s app uid starts from 10000.",
+      "parentUuid": "ddb12c88_f5027b9c",
       "range": {
         "startLine": 34,
         "startChar": 29,
@@ -494,6 +614,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23626c91_671b7f86",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-05T18:57:56Z",
+      "side": 1,
+      "message": "No strong preference, but I\u0027m thinking startVm -\u003e run_vm (inline create_vm to run_vm. Since the different is just the config format).  Up to you :)",
+      "parentUuid": "bf07e0b4_315d06cd",
+      "range": {
+        "startLine": 78,
+        "startChar": 20,
+        "endLine": 78,
+        "endChar": 28
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a5528cb_b7cd7bb8",
@@ -543,6 +687,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "937f81f6_b2bca6a3",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-05T18:57:56Z",
+      "side": 1,
+      "message": "Don\u0027t we still need to do something? An overflow will crash virtmanager.",
+      "parentUuid": "5a8b581b_d136d40c",
+      "range": {
+        "startLine": 79,
+        "startChar": 18,
+        "endLine": 79,
+        "endChar": 22
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1950f2d6_c0505f5c",
         "filename": "virtmanager/src/main.rs",
         "patchSetId": 13
@@ -578,6 +746,30 @@
       "side": 1,
       "message": "CIDs are unsigned. The problem is that AIDL doesn\u0027t seem to support unsigned integers for some reason, so we can only pass them cast as signed.",
       "parentUuid": "1950f2d6_c0505f5c",
+      "range": {
+        "startLine": 111,
+        "startChar": 29,
+        "endLine": 111,
+        "endChar": 35
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3373c8c2_072ac643",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-05T18:57:56Z",
+      "side": 1,
+      "message": "Yeah, AIDL is Java-oriented, and Java doesn\u0027t have unsigned integer as primitive type.\n\nWe should still deal with the overflow case somewhere, right?",
+      "parentUuid": "94ed7625_0ef114c7",
       "range": {
         "startLine": 111,
         "startChar": 29,
