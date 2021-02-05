@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d606334_4074d0f9",
+        "filename": "virtmanager/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-05T16:05:15Z",
+      "side": 1,
+      "message": "I can remove it if you like.",
+      "parentUuid": "e0bd2204_a8ce71aa",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 103
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53b942e9_384fc054",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-02-04T18:49:01Z",
       "side": 1,
       "message": "nit: 2021 (or probably remove the copyright header? Since many Android.bp don\u0027t include it already).",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42d9a204_2311ae09",
+        "filename": "virtmanager/aidl/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-05T16:05:15Z",
+      "side": 1,
+      "message": "It was 2020 when I wrote this! But updated.",
+      "parentUuid": "53b942e9_384fc054",
       "range": {
         "startLine": 1,
         "startChar": 13,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6a6d0319_2f411d74",
+        "filename": "virtmanager/aidl/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-05T16:05:15Z",
+      "side": 1,
+      "message": "No idea, I couldn\u0027t find any decent documentation so I just copied this from other Android.bp files.",
+      "parentUuid": "020aeabd_5c1e37e8",
+      "range": {
+        "startLine": 18,
+        "startChar": 4,
+        "endLine": 18,
+        "endChar": 19
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f3b57bf_106c890c",
         "filename": "virtmanager/aidl/Android.bp",
         "patchSetId": 13
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1280f26f_a4d5212f",
+        "filename": "virtmanager/aidl/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-05T16:05:15Z",
+      "side": 1,
+      "message": "Again, I have no idea, this was just copied from elsewhere in an attempt to get it to actually compile as I couldn\u0027t find any documentation. Happy to change it if it\u0027s wrong.",
+      "parentUuid": "2f3b57bf_106c890c",
+      "range": {
+        "startLine": 21,
+        "startChar": 26,
+        "endLine": 21,
+        "endChar": 40
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f9966c7a_dac0f7f7",
         "filename": "virtmanager/aidl/Android.bp",
         "patchSetId": 13
@@ -106,6 +202,30 @@
       "writtenOn": "2021-02-04T18:49:01Z",
       "side": 1,
       "message": "Let\u0027s not expose this one unless it\u0027s needed?",
+      "range": {
+        "startLine": 23,
+        "startChar": 8,
+        "endLine": 25,
+        "endChar": 10
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8d3df89_eba3c068",
+        "filename": "virtmanager/aidl/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-05T16:05:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9966c7a_dac0f7f7",
       "range": {
         "startLine": 23,
         "startChar": 8,
@@ -164,6 +284,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c03fb405_f3f3f0e4",
+        "filename": "virtmanager/aidl/android/system/virtmanager/IVirtManager.aidl",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-05T16:05:15Z",
+      "side": 1,
+      "message": "I\u0027m not sure what you mean about `String` being immutable; strings aren\u0027t any more or less mutable than any other type in Rust. Removed in anyway, I\u0027m not quite sure what difference it makes, it just seemed to be what other AIDL files do.\n\nDavid had the same concern. The current config file is just a placeholder until I figure out how to integrate with the Cuttlefish tools, but they currently use JSON for quite a lot. I don\u0027t think using a Parcelable would really solve the problem of file visibility, because there will also be a bunch of other files that need to be visible (the various disk images, for a start).",
+      "parentUuid": "c68f61f4_7ec680b8",
+      "range": {
+        "startLine": 22,
+        "startChar": 33,
+        "endLine": 22,
+        "endChar": 35
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7db1ee74_55aee7c3",
+        "filename": "virtmanager/aidl/android/system/virtmanager/IVirtManager.aidl",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-05T16:05:15Z",
+      "side": 1,
+      "message": "Is there a style guide for AIDL somewhere? So far I\u0027ve been trying to follow Rust style, but I\u0027m happy to follow something else as long as it\u0027s documented.",
+      "parentUuid": "2db6bbaa_67bb4b18",
+      "range": {
+        "startLine": 22,
+        "startChar": 24,
+        "endLine": 22,
+        "endChar": 32
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4435085e_d32db8aa",
         "filename": "virtmanager/src/main.rs",
         "patchSetId": 13
@@ -208,6 +376,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddb12c88_f5027b9c",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-05T16:05:15Z",
+      "side": 1,
+      "message": "Done, but what do you expect to use them for?",
+      "parentUuid": "b424cd60_51f8c0d9",
+      "range": {
+        "startLine": 34,
+        "startChar": 29,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b16dc57_b49ecb32",
@@ -221,6 +413,30 @@
       "writtenOn": "2021-02-04T18:49:01Z",
       "side": 1,
       "message": "I\u0027m guessing this is not needed since Eq implies PartialEq.",
+      "range": {
+        "startLine": 42,
+        "startChar": 40,
+        "endLine": 42,
+        "endChar": 49
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37696ac6_ebffa8fd",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-05T16:05:15Z",
+      "side": 1,
+      "message": "It\u0027s the opposite, `Eq` requires `PartialEq`. You can\u0027t derive `Eq` without first implementing (or deriving) `PartialEq`.",
+      "parentUuid": "8b16dc57_b49ecb32",
       "range": {
         "startLine": 42,
         "startChar": 40,
@@ -256,6 +472,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf07e0b4_315d06cd",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-05T16:05:15Z",
+      "side": 1,
+      "message": "Moved inline. Do you have any better ideas for names?",
+      "parentUuid": "80887b6f_4a3f8e67",
+      "range": {
+        "startLine": 78,
+        "startChar": 20,
+        "endLine": 78,
+        "endChar": 28
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a5528cb_b7cd7bb8",
         "filename": "virtmanager/src/main.rs",
         "patchSetId": 13
@@ -267,6 +507,30 @@
       "writtenOn": "2021-02-04T18:49:01Z",
       "side": 1,
       "message": "wrapping_add maybe?",
+      "range": {
+        "startLine": 79,
+        "startChar": 18,
+        "endLine": 79,
+        "endChar": 22
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a8b581b_d136d40c",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-05T16:05:15Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s safe, because it could wrap around to a CID which is already in use. If we want to reuse CIDs then we need to keep track of which ones are still in use.",
+      "parentUuid": "7a5528cb_b7cd7bb8",
       "range": {
         "startLine": 79,
         "startChar": 18,
@@ -302,6 +566,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94ed7625_0ef114c7",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-05T16:05:15Z",
+      "side": 1,
+      "message": "CIDs are unsigned. The problem is that AIDL doesn\u0027t seem to support unsigned integers for some reason, so we can only pass them cast as signed.",
+      "parentUuid": "1950f2d6_c0505f5c",
+      "range": {
+        "startLine": 111,
+        "startChar": 29,
+        "endLine": 111,
+        "endChar": 35
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0c57ec9a_4a779fdf",
         "filename": "virtmanager/src/main.rs",
         "patchSetId": 13
@@ -313,6 +601,30 @@
       "writtenOn": "2021-02-04T18:49:01Z",
       "side": 1,
       "message": "nit: maybe debug?  Or drop this log since something is always logged later.  The logd ring buffer is limited so we don\u0027t want to be too spamy.",
+      "range": {
+        "startLine": 133,
+        "startChar": 8,
+        "endLine": 133,
+        "endChar": 12
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9833ae1a_f8907e9a",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-05T16:05:15Z",
+      "side": 1,
+      "message": "Done. We can probably reduce logging in the future, but for now it\u0027s useful to me debugging what\u0027s going on.",
+      "parentUuid": "0c57ec9a_4a779fdf",
       "range": {
         "startLine": 133,
         "startChar": 8,
@@ -346,6 +658,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df58e866_e3df511c",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-05T16:05:15Z",
+      "side": 1,
+      "message": "Done, though I find that less readable because it\u0027s not obvious what the return value actually represents without giving it a name.",
+      "parentUuid": "3a471f2d_529c3919",
+      "range": {
+        "startLine": 168,
+        "startChar": 6,
+        "endLine": 169,
+        "endChar": 13
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c442c0b7_a362cc6e",
@@ -359,6 +695,30 @@
       "writtenOn": "2021-02-04T18:49:01Z",
       "side": 1,
       "message": "Cid",
+      "range": {
+        "startLine": 180,
+        "startChar": 34,
+        "endLine": 180,
+        "endChar": 37
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8494a3ba_146a701c",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-05T16:05:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c442c0b7_a362cc6e",
       "range": {
         "startLine": 180,
         "startChar": 34,
@@ -392,6 +752,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "121965db_207b772f",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-05T16:05:15Z",
+      "side": 1,
+      "message": "This is definitely not what we want to use it production, it\u0027s just a hack to make things work for now. Added a TODO.",
+      "parentUuid": "7efc606d_8043d416",
+      "range": {
+        "startLine": 182,
+        "startChar": 28,
+        "endLine": 182,
+        "endChar": 45
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5d7f7bb_3a25b58b",
@@ -405,6 +789,30 @@
       "writtenOn": "2021-02-04T18:49:01Z",
       "side": 1,
       "message": "nit: just `command.spawn()`",
+      "range": {
+        "startLine": 192,
+        "startChar": 4,
+        "endLine": 193,
+        "endChar": 13
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "824efef6_6d730cd6",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-05T16:05:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5d7f7bb_3a25b58b",
       "range": {
         "startLine": 192,
         "startChar": 4,
