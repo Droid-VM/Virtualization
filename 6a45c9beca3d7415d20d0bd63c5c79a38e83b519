@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10477270_00de0492",
+        "filename": "virtmanager/aidl/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-02-06T02:16:13Z",
+      "side": 1,
+      "message": "This can be \u0027unstable: true\u0027 if we are going to have a Java wrapper around these AIDL and make the wrapper the canonical API.\n\nIf we are going to directly expose the AIDL to the clients, this has to be \u0027unstable: false\u0027 (of left unspecified).\n\nFor now, this can be \u0027unstable: true\u0027 because we are in the very early stage.",
+      "parentUuid": "6a6d0319_2f411d74",
+      "range": {
+        "startLine": 18,
+        "startChar": 4,
+        "endLine": 18,
+        "endChar": 19
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f3b57bf_106c890c",
         "filename": "virtmanager/aidl/Android.bp",
         "patchSetId": 13
@@ -203,6 +227,30 @@
       "side": 1,
       "message": "My understanding is that if an aidl is only used internally, i.e. by code that only released together, the API can be changed freely.  In many cases it\u0027s not.  For example, some Android AIDL needs to remain stable, otherwise a change coming with OTA can break apps.  There might be build time check for cross-package use.\n\nI\u0027m guessing module_current is similar, but APEX specific.  +Jiyong for advise (please also see L18).",
       "parentUuid": "1280f26f_a4d5212f",
+      "range": {
+        "startLine": 21,
+        "startChar": 26,
+        "endLine": 21,
+        "endChar": 40
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c1cb7c7_6a8555d8",
+        "filename": "virtmanager/aidl/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-02-06T02:16:13Z",
+      "side": 1,
+      "message": "module_current is fine. This AIDL interface will be part of the virt APEX.\n\n\u003e The same code would need to be used by Android S/T/etc.\n\nFor this, we need to set the min_sdk_version property to the version which the virt APEX will firstly become updatable. For now, we can ignore this issue.",
+      "parentUuid": "a79d493d_f88ccb39",
       "range": {
         "startLine": 21,
         "startChar": 26,
@@ -392,6 +440,30 @@
       "side": 1,
       "message": "I can\u0027t find any, but AIDL is pretty Java-centric from what I can tell.  For example, \"All primitive types in the Java programming language\"[1], and the type names are Java-ish (e.g. char, boolean, CharSequence).  That\u0027s why I feel it makes more sense to keep .aidl in Java style.  Hope that make sense?\n\n[1] https://developer.android.com/guide/components/aidl",
       "parentUuid": "7db1ee74_55aee7c3",
+      "range": {
+        "startLine": 22,
+        "startChar": 24,
+        "endLine": 22,
+        "endChar": 32
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c06d8db4_ca248726",
+        "filename": "virtmanager/aidl/android/system/virtmanager/IVirtManager.aidl",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-02-06T02:16:13Z",
+      "side": 1,
+      "message": "Yes, the commonly accepted casing style for AIDL is camelCase.\n\ngo/android-aidl-guidelines",
+      "parentUuid": "f759e89e_bccd8a73",
       "range": {
         "startLine": 22,
         "startChar": 24,
