@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9978b6f7_4cd24aff",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-02-08T21:17:54Z",
+      "side": 1,
+      "message": "aside: Is this mostly common for these tests?",
+      "range": {
+        "startLine": 224,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 11
+      },
+      "revId": "1c5fde0e06df6e03221c9aec45d003beda021ebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee799860_d23d8d63",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-02-08T21:17:54Z",
+      "side": 1,
+      "message": "aside: if this is just for the `read_chunk()` that\u0027s meant to panic, you might want to go with `let _ \u003d read_chunk()` instead so future, unintentional, unused values are caught.",
+      "range": {
+        "startLine": 110,
+        "startChar": 4,
+        "endLine": 110,
+        "endChar": 29
+      },
+      "revId": "1c5fde0e06df6e03221c9aec45d003beda021ebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
