@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008022140",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1580631?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "9d26d87c_7ac515fa",
+          "description": "Change to \"authfs/src/fsverity.rs\"",
+          "replacements": [
+            {
+              "path": "authfs/src/fsverity.rs",
+              "range": {
+                "startLine": 226,
+                "startChar": 39,
+                "endLine": 226,
+                "endChar": 50
+              },
+              "replacement": "verification"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "596caa12_01d235b5",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-02-08T22:13:32Z",
+      "side": 1,
+      "message": "Common typo found: \"verifcation\" -- should it be \"verification\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 226,
+        "startChar": 39,
+        "endLine": 226,
+        "endChar": 50
+      },
+      "revId": "cce92cabde379fbb6d4818a3f617338c7e5c528d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
