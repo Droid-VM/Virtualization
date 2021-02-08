@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4c2fc27_5ae2f28e",
+        "filename": "tests/hostside/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-08T12:30:26Z",
+      "side": 1,
+      "message": "I was just copying the one above, because I wanted to achieve the same thing. But it looks like your way works too.",
+      "parentUuid": "66d09a81_e8468a77",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 1
+      },
+      "revId": "a9ba3b1a14b6a87df544cfa42b014bbfb8e0d68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02f386c1_5a515f82",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-02-04T15:03:18Z",
       "side": 1,
       "message": "check the existence of vm manager?",
+      "range": {
+        "startLine": 27,
+        "startChar": 42,
+        "endLine": 27,
+        "endChar": 54
+      },
+      "revId": "a9ba3b1a14b6a87df544cfa42b014bbfb8e0d68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0975b581_c8c39cdb",
+        "filename": "tests/hostside/AndroidTest.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-08T12:30:26Z",
+      "side": 1,
+      "message": "crosvm is the VM Manager, but I guess you mean virtmanager.",
+      "parentUuid": "02f386c1_5a515f82",
       "range": {
         "startLine": 27,
         "startChar": 42,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee8a4a19_1ec40fc5",
+        "filename": "tests/hostside/java/android/virt/test/VsockTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-08T12:30:26Z",
+      "side": 1,
+      "message": "I guess it makes sense for that move to happen in Jiyong\u0027s CL, along with crosvm?",
+      "parentUuid": "e0ca437e_009bd780",
+      "range": {
+        "startLine": 40,
+        "startChar": 58,
+        "endLine": 40,
+        "endChar": 69
+      },
+      "revId": "a9ba3b1a14b6a87df544cfa42b014bbfb8e0d68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac9d4a1b_81720271",
@@ -110,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36b28639_62245ced",
+        "filename": "tests/hostside/native/vsock/server.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-08T12:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac9d4a1b_81720271",
+      "range": {
+        "startLine": 74,
+        "startChar": 37,
+        "endLine": 74,
+        "endChar": 48
+      },
+      "revId": "a9ba3b1a14b6a87df544cfa42b014bbfb8e0d68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72d60ecd_0b780617",
@@ -123,6 +219,24 @@
       "writtenOn": "2021-01-20T16:04:00Z",
       "side": 1,
       "message": "This could also be in a common library, but we can deal with that when we have more tests.",
+      "revId": "a9ba3b1a14b6a87df544cfa42b014bbfb8e0d68e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5415ce4_909c90b4",
+        "filename": "tests/hostside/native/vsock/server.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-08T12:30:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "72d60ecd_0b780617",
       "revId": "a9ba3b1a14b6a87df544cfa42b014bbfb8e0d68e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
