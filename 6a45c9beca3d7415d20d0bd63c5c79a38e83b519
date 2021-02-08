@@ -166,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec5d50a1_6bfa099e",
+        "filename": "virtmanager/aidl/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-08T16:19:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "10477270_00de0492",
+      "range": {
+        "startLine": 18,
+        "startChar": 4,
+        "endLine": 18,
+        "endChar": 19
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f3b57bf_106c890c",
@@ -251,6 +275,30 @@
       "side": 1,
       "message": "module_current is fine. This AIDL interface will be part of the virt APEX.\n\n\u003e The same code would need to be used by Android S/T/etc.\n\nFor this, we need to set the min_sdk_version property to the version which the virt APEX will firstly become updatable. For now, we can ignore this issue.",
       "parentUuid": "a79d493d_f88ccb39",
+      "range": {
+        "startLine": 21,
+        "startChar": 26,
+        "endLine": 21,
+        "endChar": 40
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "100f6fee_f517f241",
+        "filename": "virtmanager/aidl/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-08T16:19:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8c1cb7c7_6a8555d8",
       "range": {
         "startLine": 21,
         "startChar": 26,
@@ -469,6 +517,54 @@
         "startChar": 24,
         "endLine": 22,
         "endChar": 32
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e71ed06_4fe83b2a",
+        "filename": "virtmanager/aidl/android/system/virtmanager/IVirtManager.aidl",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-08T16:19:21Z",
+      "side": 1,
+      "message": "Ack. Thanks for the link!",
+      "parentUuid": "c06d8db4_ca248726",
+      "range": {
+        "startLine": 22,
+        "startChar": 24,
+        "endLine": 22,
+        "endChar": 32
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d17b290b_8307f045",
+        "filename": "virtmanager/aidl/android/system/virtmanager/IVirtManager.aidl",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-08T16:19:21Z",
+      "side": 1,
+      "message": "Yes, we\u0027ll definitely need to think more about it. I\u0027d like to understand the full extent of the issue though, as the config file is only a minor part of the larger issue of files needed to run a VM.",
+      "parentUuid": "261e0f50_5fa75e90",
+      "range": {
+        "startLine": 22,
+        "startChar": 33,
+        "endLine": 22,
+        "endChar": 35
       },
       "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -781,6 +877,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a43be0c7_670a2851",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-08T16:19:21Z",
+      "side": 1,
+      "message": "Changed to a checked_add for now, and added a TODO to fix it properly later.",
+      "parentUuid": "937f81f6_b2bca6a3",
+      "range": {
+        "startLine": 79,
+        "startChar": 18,
+        "endLine": 79,
+        "endChar": 22
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1950f2d6_c0505f5c",
@@ -842,6 +962,30 @@
       "side": 1,
       "message": "Yeah, AIDL is Java-oriented, and Java doesn\u0027t have unsigned integer as primitive type.\n\nWe should still deal with the overflow case somewhere, right?",
       "parentUuid": "94ed7625_0ef114c7",
+      "range": {
+        "startLine": 111,
+        "startChar": 29,
+        "endLine": 111,
+        "endChar": 35
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7da1f9c9_6a483adf",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-08T16:19:21Z",
+      "side": 1,
+      "message": "Casting an unsigned type to a signed just interprets the same bits as a signed integer, so this should be safe, nothing is lost when it is later cast back to the unsigned type.",
+      "parentUuid": "3373c8c2_072ac643",
       "range": {
         "startLine": 111,
         "startChar": 29,
