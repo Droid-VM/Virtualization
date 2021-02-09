@@ -2,6 +2,33 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
+microdroid_rootdirs = [
+    "dev",
+    "proc",
+    "sys",
+    "system",
+    "system_ext",
+    "vendor",
+    "vendor_dlkm",
+    "product",
+    "odm",
+    "odm_dlkm",
+    "debug_ramdisk",
+    "acct",
+    "mnt",
+    "apex",
+    "linkerconfig",
+    "second_stage_resources",
+    "postinstall",
+]
+
+microdroid_symlinks = [
+    "bin->/system/bin",
+    "etc->/system/etc",
+    "d->/sys/kernel/debug",
+    "init->/system/bin/init",
+]
+
 android_filesystem {
     name: "microdroid",
     use_avb: true,
@@ -10,6 +37,8 @@ android_filesystem {
     deps: [
         "init_second_stage",
     ],
+    dirs: microdroid_rootdirs,
+    symlinks: microdroid_symlinks,
     file_contexts: "microdroid_file_contexts",
 }
 
