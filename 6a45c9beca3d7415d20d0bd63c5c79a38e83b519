@@ -238,6 +238,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a858fe5c_46cacfc6",
+        "filename": "virtmanager/aidl/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-02-09T12:58:15Z",
+      "side": 1,
+      "message": "No. This isn\u0027t specific to Java. We never expose AIDL-defined interface as an app-facing API, either in Java or in native. So, the AIDL interface can be kept as unstable. My understanding is that we will someday have Android public API for VirtManager.\n\nThe stable AIDL is useful when the AIDL doesn\u0027t serve for apps, but is used across updatable modules.",
+      "parentUuid": "f635113a_74ec681f",
+      "range": {
+        "startLine": 18,
+        "startChar": 4,
+        "endLine": 18,
+        "endChar": 19
+      },
+      "revId": "6a45c9beca3d7415d20d0bd63c5c79a38e83b519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f3b57bf_106c890c",
