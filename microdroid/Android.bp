@@ -56,6 +56,9 @@ bootimg {
 
 android_filesystem {
     name: "microdroid_ramdisk-5.10",
+    deps: [
+        "init_first_stage_soong",
+    ],
     arch: {
         arm64: {
             deps: ["virt_device_prebuilts_kernel_modules-5.10-arm64"],
