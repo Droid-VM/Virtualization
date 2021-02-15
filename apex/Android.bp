@@ -19,6 +19,9 @@ apex {
             binaries: [
                 "crosvm",
             ],
+            filesystems: [
+                "microdroid_vendor_boot-5.10",
+            ],
         },
         x86_64: {
             binaries: [
