@@ -33,6 +33,29 @@
       "message": "This is ready for review. PTAL.",
       "revId": "c87200b8b43eddc7e8663736e16dec4b4602334e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40de6472_09a190c8",
+        "filename": "tests/hostside/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-02-16T13:17:28Z",
+      "side": 1,
+      "message": "Why not stay consistent with other targets and disable? We should create defaults for that.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 18
+      },
+      "revId": "c87200b8b43eddc7e8663736e16dec4b4602334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
