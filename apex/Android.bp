@@ -29,7 +29,10 @@ apex {
             ],
         },
     },
-    binaries: ["assemble_cvd"],
+    binaries: [
+        "assemble_cvd",
+        "virtmanager",
+    ],
     filesystems: ["microdroid"],
 }
 
