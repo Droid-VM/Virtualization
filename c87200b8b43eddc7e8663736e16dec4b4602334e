@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b35cfe0f_7658bfb1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-02-16T14:29:15Z",
+      "side": 1,
+      "message": "Ah, yes. Your change already did this. Done.",
+      "parentUuid": "afffbba8_c38bddb1",
+      "revId": "c87200b8b43eddc7e8663736e16dec4b4602334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "33f02dd2_b2ac24ae",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 7
@@ -48,6 +66,30 @@
       "writtenOn": "2021-02-16T13:17:28Z",
       "side": 1,
       "message": "Why not stay consistent with other targets and disable? We should create defaults for that.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 18
+      },
+      "revId": "c87200b8b43eddc7e8663736e16dec4b4602334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8fb6055_38382632",
+        "filename": "tests/hostside/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-02-16T14:29:15Z",
+      "side": 1,
+      "message": "When this is disabled for other (e.g. arm, x86) arches, in a target with one of the arches, the build system complains that VirtualizationHostTestCases depends on a disabled module.\n\nNote that we don\u0027t disable virt_hostside_tests_initramfs at all. It\u0027s enabled for all (32/64 arm, 32/64 x86) arches. It just don\u0027t complain when the deps property is empty for an arch. prebuilt_etc however demands a non-empty src anyway, and that\u0027s why I have this line.",
+      "parentUuid": "40de6472_09a190c8",
       "range": {
         "startLine": 42,
         "startChar": 0,
