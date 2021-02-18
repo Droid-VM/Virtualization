@@ -33,6 +33,24 @@
       "message": "Did you get a chance to measure the throughput of this, even with local Binder, compared to using sockets directly?",
       "revId": "15428a86ebeb078759c6609906043926417aaede",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ca108ae_b95f1214",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-18T16:10:53Z",
+      "side": 1,
+      "message": "Not yet.  I plan to benchmark: sequential/random read/write against local fs, FUSE with {local file, local binder, remote binder}, and probably also throughput of pure binder.  There are many things we can do to optimize for performance, but only after I finish the core functionality.  The two major overheads are FUSE and binder, but I suspect it\u0027ll eventually be bounded by the slowest.",
+      "parentUuid": "5938a42e_ae230e41",
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
