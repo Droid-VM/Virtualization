@@ -26,6 +26,7 @@
 //! fs-verity verification, or no verification if expected to mount over dm-verity), and file ID.
 //! Regardless of the actual file name, the exposed file names through AuthFS are currently integer,
 //! e.g. /mountpoint/42.
+#![allow(clippy::unnecessary_wraps)]
 
 use anyhow::{bail, Result};
 use std::collections::BTreeMap;
