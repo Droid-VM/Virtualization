@@ -94,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "367efbd8_2ec42a8f",
+        "filename": "authfs/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-20T00:52:51Z",
+      "side": 1,
+      "message": "Not in this case.  It\u0027s intentionally to keep as private interface. The idea is to ship both executables in the core PVM APEX.  One will be visible by Android via the /apex mount, the other will be part of the main VM image.",
+      "parentUuid": "e729baa6_9d27f5bb",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 19
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbc2a5cb_75a3df11",
@@ -107,6 +131,30 @@
       "writtenOn": "2021-02-19T23:38:00Z",
       "side": 1,
       "message": "is this used somewhere? can we use the aidl_interface libs everywhere?",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 0
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da2fc9aa_11893751",
+        "filename": "authfs/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-20T00:52:51Z",
+      "side": 1,
+      "message": "It was used at L54, but now I moved aidl_interface into aidl/Android.dp and avoid this extra filegroup. Hopefully it\u0027s a more canonical approach.",
+      "parentUuid": "dbc2a5cb_75a3df11",
       "range": {
         "startLine": 62,
         "startChar": 0,
@@ -163,6 +211,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "994a87bc_a0416420",
+        "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-20T00:52:51Z",
+      "side": 1,
+      "message": "It\u0027s a blob and it doesn\u0027t matter.  The requester of the task (Android) has to trust the task service anyway, so it\u0027s ok to pass this information via binder.  The service treats the ID as a blob, since it\u0027s only used to refer back to the client, and doesn\u0027t need to trust the ID.",
+      "parentUuid": "4c313ef5_b353a899",
+      "range": {
+        "startLine": 21,
+        "startChar": 24,
+        "endLine": 21,
+        "endChar": 26
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88665b72_e0dc6280",
+        "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-20T00:52:51Z",
+      "side": 1,
+      "message": "The \"client\" here is the VM.  A service in the VM first receives ID from the request / task parameters, then set up the task to read/write the received ID/FD via authfs.  authfs here is the client of this interface.\n\nTo elaborate, Android is the role that delegate the task to the VM (via another binder service), so it is responsible to prepare the files/fds, then pass essential information (fds as numbers, which fd is for read/write, etc.) to the service in the VM.  Within the request, the service needs to configure authfs to handle the read/write requests.",
+      "parentUuid": "1bbc1030_c9a0c3ee",
+      "range": {
+        "startLine": 21,
+        "startChar": 11,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f90cb93d_f8fb101a",
@@ -176,6 +272,30 @@
       "writtenOn": "2021-02-19T23:38:00Z",
       "side": 1,
       "message": "same - how can the client know what to pass here?",
+      "range": {
+        "startLine": 22,
+        "startChar": 42,
+        "endLine": 22,
+        "endChar": 63
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21c35c91_aa9ca718",
+        "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-20T00:52:51Z",
+      "side": 1,
+      "message": "Think of this interface as a remote file server.  authfs as a client simply asks the remote to read data from this offset for certain amount.  If there is out of range, the service can simply return error.",
+      "parentUuid": "f90cb93d_f8fb101a",
       "range": {
         "startLine": 22,
         "startChar": 42,
@@ -209,6 +329,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a0b443f_59ce3f18",
+        "filename": "authfs/fd_server/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-20T00:52:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6ec28112_5eacf83c",
+      "range": {
+        "startLine": 5,
+        "startChar": 30,
+        "endLine": 5,
+        "endChar": 31
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c94235e1_dbfe5cb1",
@@ -222,6 +366,30 @@
       "writtenOn": "2021-02-19T23:38:00Z",
       "side": 1,
       "message": "declare in interface",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 39
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c720314_b43ce4ff",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-20T00:52:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c94235e1_dbfe5cb1",
       "range": {
         "startLine": 49,
         "startChar": 0,
@@ -255,6 +423,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b71cdf2a_c2f19b01",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-20T00:52:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0b092c3_ee4c8a8b",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 1
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a479069_4e968793",
@@ -268,6 +460,30 @@
       "writtenOn": "2021-02-19T23:38:00Z",
       "side": 1,
       "message": "the id is an fd?",
+      "range": {
+        "startLine": 94,
+        "startChar": 12,
+        "endLine": 94,
+        "endChar": 29
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf269a5e_4d7ffc22",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-20T00:52:51Z",
+      "side": 1,
+      "message": "The ID from the client is used as an FD.",
+      "parentUuid": "9a479069_4e968793",
       "range": {
         "startLine": 94,
         "startChar": 12,
@@ -301,6 +517,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4dd37cf_8544fcea",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-20T00:52:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e40ee944_5f33c43a",
+      "range": {
+        "startLine": 109,
+        "startChar": 17,
+        "endLine": 109,
+        "endChar": 25
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7790c1e6_c2e89eb9",
@@ -324,6 +564,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6334186e_c5813968",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-20T00:52:51Z",
+      "side": 1,
+      "message": "IIUC, we can\u0027t drop a parameter (in this case, an error). _ is the standard way to ignore the name.",
+      "parentUuid": "7790c1e6_c2e89eb9",
+      "range": {
+        "startLine": 114,
+        "startChar": 22,
+        "endLine": 114,
+        "endChar": 23
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0386414_84239eec",
@@ -337,6 +601,30 @@
       "writtenOn": "2021-02-19T23:38:00Z",
       "side": 1,
       "message": "curious - how does a library type find itself as the return value for the main function?",
+      "range": {
+        "startLine": 225,
+        "startChar": 10,
+        "endLine": 225,
+        "endChar": 24
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8217ad21_6942b268",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-20T00:52:51Z",
+      "side": 1,
+      "message": "Do you mean how this Result refers to anyhow::Result instead of std::result::Result?  If so, there\u0027s `use anyhow::{anyhow, bail, Result};` in the beginning.",
+      "parentUuid": "c0386414_84239eec",
       "range": {
         "startLine": 225,
         "startChar": 10,
