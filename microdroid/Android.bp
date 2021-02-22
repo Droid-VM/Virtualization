@@ -117,6 +117,11 @@ prebuilt_etc {
     name: "microdroid_uboot_env",
     src: ":microdroid_uboot_env_gen",
     filename: "uboot_env.img",
+    target: {
+        darwin: {
+            enabled: false,
+        },
+    },
 }
 
 genrule {
@@ -125,4 +130,10 @@ genrule {
     srcs: ["uboot-env.txt"],
     out: ["output.img"],
     cmd: "$(location mkenvimage_host) -s 4096 -o $(out) $(in)",
+    target: {
+        // the mkenvimage_host is not available for mac
+        darwin: {
+            enabled: false,
+        },
+    },
 }
