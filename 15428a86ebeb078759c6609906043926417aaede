@@ -333,6 +333,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "181e1410_7514cc9c",
+        "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-23T17:11:39Z",
+      "side": 1,
+      "message": "Do you have sample code that shows how remote binder works?  I\u0027ll take whatever you suggests to set up such a connection.\n\nConceptually, I\u0027m not sure `openSession` is needed since the transient service itself is kind of a short-lived session. Maybe some details can help: From previous security discussion, we don\u0027t want to change the existing SELinux policy for dex2oat. dex2oat is forked from installed, and does NOT have the privilege to open(2) any files.  That is, installd opens necessary files and passes the FDs to dex2oat.  To run dex2oat in the VM, we need this fd_server to serve the FDs, and fd_server doesn\u0027t need to maintain any state.  Also note that fd_server shouldn\u0027t be able to open arbitrary files on the filesystem, and is only supposed to expose files if appropriate.\n\n\u003e for very large files, we would want to load data lazily\n\nYes, that\u0027s the beauty of fs-verity :) Auth FS always load/verify data lazily. With the Merkle tree, fs-verity can verify the hash of the i-th 4K chunk matches the signed tree.  If i is out of bound, the read can simply fail.  The client of fd_service doesn\u0027t need to know the file size beforehand.\n\nLet me know if you want to talk about this over VC.",
+      "parentUuid": "337c993c_a0362b0e",
+      "range": {
+        "startLine": 21,
+        "startChar": 11,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f90cb93d_f8fb101a",
         "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
         "patchSetId": 6
@@ -842,6 +866,30 @@
       "side": 1,
       "message": "Ah, sorry.  I don\u0027t think this error contains any context.  Done with string construction in the lambdas.",
       "parentUuid": "711bc1c0_9ecc7811",
+      "range": {
+        "startLine": 114,
+        "startChar": 22,
+        "endLine": 114,
+        "endChar": 23
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e2bb786_f3823333",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-23T17:11:39Z",
+      "side": 1,
+      "message": "Updated with a minor improvement.",
+      "parentUuid": "a83b4e61_5f0a171c",
       "range": {
         "startLine": 114,
         "startChar": 22,
