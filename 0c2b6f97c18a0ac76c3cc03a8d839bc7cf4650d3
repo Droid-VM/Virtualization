@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e542c98_311c2d6b",
+        "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-02-23T00:28:57Z",
+      "side": 1,
+      "message": "should you document these are for service-specific errors? Also - which error would happen if the wrong offsets/size are used, this one?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 27
+      },
+      "revId": "0c2b6f97c18a0ac76c3cc03a8d839bc7cf4650d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b1c2459_67596bed",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-02-23T00:28:57Z",
+      "side": 1,
+      "message": "check error return?",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 42
+      },
+      "revId": "0c2b6f97c18a0ac76c3cc03a8d839bc7cf4650d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

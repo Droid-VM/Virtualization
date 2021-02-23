@@ -261,6 +261,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd116779_a105f417",
+        "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-02-23T00:28:57Z",
+      "side": 1,
+      "message": "Yes, that is my understanding, VM as client.\n\nSo then my questions are:\n- how do we obscure the FDs, so that they are per-client (maybe we want byte[] instead of int32_t for the FDs, but that could come later)\n- how do you get the size (you can\u0027t only pass the file size when you send the FD, since it may become quickly out of date, and interfaces wouldn\u0027t have more information. For instance, could you explain how fseek could work on top of this interface?)",
+      "parentUuid": "88665b72_e0dc6280",
+      "range": {
+        "startLine": 21,
+        "startChar": 11,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f90cb93d_f8fb101a",
         "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
         "patchSetId": 6
@@ -296,6 +320,30 @@
       "side": 1,
       "message": "Think of this interface as a remote file server.  authfs as a client simply asks the remote to read data from this offset for certain amount.  If there is out of range, the service can simply return error.",
       "parentUuid": "f90cb93d_f8fb101a",
+      "range": {
+        "startLine": 22,
+        "startChar": 42,
+        "endLine": 22,
+        "endChar": 63
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b64b6eb_d72abdbd",
+        "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-02-23T00:28:57Z",
+      "side": 1,
+      "message": "ack, I see this now \u003e  std::cmp::min(remaining, size as u64) as usize;\n\nShould this be documented?",
+      "parentUuid": "21c35c91_aa9ca718",
       "range": {
         "startLine": 22,
         "startChar": 42,
@@ -402,6 +450,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8fc35319_638099ce",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-02-23T00:28:57Z",
+      "side": 1,
+      "message": "I mean, in the .aidl interface itself, right? The client should also know it?",
+      "parentUuid": "9c720314_b43ce4ff",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 39
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0b092c3_ee4c8a8b",
         "filename": "authfs/fd_server/src/main.rs",
         "patchSetId": 6
@@ -484,6 +556,30 @@
       "side": 1,
       "message": "The ID from the client is used as an FD.",
       "parentUuid": "9a479069_4e968793",
+      "range": {
+        "startLine": 94,
+        "startChar": 12,
+        "endLine": 94,
+        "endChar": 29
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a29d82ae_501485af",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-02-23T00:28:57Z",
+      "side": 1,
+      "message": "What prevents one client from guessing the FD which is opened and used by another client?",
+      "parentUuid": "cf269a5e_4d7ffc22",
       "range": {
         "startLine": 94,
         "startChar": 12,
@@ -590,6 +686,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "711bc1c0_9ecc7811",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-02-23T00:28:57Z",
+      "side": 1,
+      "message": "yes - I mean - should we include the error string in the message? I thought it would be more descriptive than \"Invalid size\"",
+      "parentUuid": "6334186e_c5813968",
+      "range": {
+        "startLine": 114,
+        "startChar": 22,
+        "endLine": 114,
+        "endChar": 23
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0386414_84239eec",
         "filename": "authfs/fd_server/src/main.rs",
         "patchSetId": 6
@@ -625,6 +745,30 @@
       "side": 1,
       "message": "Do you mean how this Result refers to anyhow::Result instead of std::result::Result?  If so, there\u0027s `use anyhow::{anyhow, bail, Result};` in the beginning.",
       "parentUuid": "c0386414_84239eec",
+      "range": {
+        "startLine": 225,
+        "startChar": 10,
+        "endLine": 225,
+        "endChar": 24
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03252939_8a3a859e",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-02-23T00:28:57Z",
+      "side": 1,
+      "message": "I meant how could \u0027main\u0027 use anyhow::Result (for instance, in C++, \u0027main\u0027 must return an \u0027int\u0027, you can\u0027t have \u0027MyType main();\u0027). However, I see now that anyhow::Result is actually an instance of std::result::Result.",
+      "parentUuid": "8217ad21_6942b268",
       "range": {
         "startLine": 225,
         "startChar": 10,
