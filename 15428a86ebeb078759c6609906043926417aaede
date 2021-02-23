@@ -309,6 +309,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "337c993c_a0362b0e",
+        "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-02-23T02:25:18Z",
+      "side": 1,
+      "message": "\u003e This service will eventually be transient\n\nThis isn\u0027t super easy/clean to do with servicemanagers, based on their name (assuming we\u0027ll use this). Usually people do something like this:\n\n    interface IManager {\n        ISession openSession();\n    }\n    interface ISession {\n        .. read();\n    }\n\nThat way, sessions can be dynamic, but you can still get ahold of a single service at the top (though I\u0027m not sure if you mean that the session should be associated with each FD send, in that case we could create and send the session when we marshall an FD).\n\n\u003e Auth FS really only need is some \"data loader\" to fetch bytes from specified offset.\n\nAck - I kind of missed this detail before. Though, I feel like the size might still be important, because for very large files, we would want to load data lazily. Maybe we just don\u0027t need it now?",
+      "parentUuid": "d89c73a2_e36a2a0c",
+      "range": {
+        "startLine": 21,
+        "startChar": 11,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f90cb93d_f8fb101a",
         "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
         "patchSetId": 6
