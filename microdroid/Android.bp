@@ -91,6 +91,24 @@ prebuilt_etc {
     installable: false, // avoid collision with system partition's init.rc
 }
 
+logical_partition {
+    name: "microdroid_super",
+    sparse: true,
+    size: "104857600",
+    groups: [
+        {
+            name: "mygroup",
+            size: "80000000",
+            partitions: [
+                {
+                    name: "system",
+                    filesystem: ":microdroid",
+                },
+            ],
+        },
+    ],
+}
+
 bootimg {
     name: "microdroid_boot-5.10",
     ramdisk_module: "microdroid_ramdisk-5.10",
