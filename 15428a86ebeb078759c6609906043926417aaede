@@ -283,6 +283,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d89c73a2_e36a2a0c",
+        "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-23T01:59:07Z",
+      "side": 1,
+      "message": "This service will eventually be transient.  For example, for dex2oat to run in the VM, Android will need to start a fd_service and send the ID and it\u0027s address (TBD, still need to understand your remote binder API better) to the VM.  The task handler in the VM will then start the FUSE filesystem with parameter of backend address and file IDs.  So we won\u0027t need to worry about task accessing wrong files.\n\nThis change only adds read operation, and it\u0027s implicit here that the file is immutable. On the other side, Auth FS only implements fs-verity to verify file with *signature*. Since the VM does not trust others, it doesn\u0027t trust the information provided by this backend. Given a file\u0027s fs-verity signature (and a public key the VM can trust), Auth FS really only need is some \"data loader\" to fetch bytes from specified offset. If the data does not verify, the read must fail.\n\nRE fseek: since Android is not trusted, we wouldn\u0027t need to rely on the FD\u0027s state. We\u0027ll just always use pread (and pwrite later).\n\nLet me know if anything is unclear.",
+      "parentUuid": "fd116779_a105f417",
+      "range": {
+        "startLine": 21,
+        "startChar": 11,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f90cb93d_f8fb101a",
@@ -344,6 +368,30 @@
       "side": 1,
       "message": "ack, I see this now \u003e  std::cmp::min(remaining, size as u64) as usize;\n\nShould this be documented?",
       "parentUuid": "21c35c91_aa9ca718",
+      "range": {
+        "startLine": 22,
+        "startChar": 42,
+        "endLine": 22,
+        "endChar": 63
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cad76c26_2dfc784a",
+        "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-23T01:59:07Z",
+      "side": 1,
+      "message": "SG, document added.",
+      "parentUuid": "1b64b6eb_d72abdbd",
       "range": {
         "startLine": 22,
         "startChar": 42,
@@ -472,6 +520,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "566f2b7f_70f21818",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-23T01:59:07Z",
+      "side": 1,
+      "message": "Sounds reasonable, done. Although I currently won\u0027t need this on the client side. Since fs-verity verifies content by 4K chunk, right now I just request each chunk separately.",
+      "parentUuid": "8fc35319_638099ce",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 39
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0b092c3_ee4c8a8b",
@@ -590,6 +662,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8209e4d_9f778e42",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-23T01:59:07Z",
+      "side": 1,
+      "message": "Client and service have 1-to-1 relationship.  Other clients aren\u0027t supposed to connect to the same service (but even if they do, there\u0027s no effect to the read-only FD here).",
+      "parentUuid": "a29d82ae_501485af",
+      "range": {
+        "startLine": 94,
+        "startChar": 12,
+        "endLine": 94,
+        "endChar": 29
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e40ee944_5f33c43a",
@@ -698,6 +794,30 @@
       "side": 1,
       "message": "yes - I mean - should we include the error string in the message? I thought it would be more descriptive than \"Invalid size\"",
       "parentUuid": "6334186e_c5813968",
+      "range": {
+        "startLine": 114,
+        "startChar": 22,
+        "endLine": 114,
+        "endChar": 23
+      },
+      "revId": "15428a86ebeb078759c6609906043926417aaede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a83b4e61_5f0a171c",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-23T01:59:07Z",
+      "side": 1,
+      "message": "Ah, sorry.  I don\u0027t think this error contains any context.  Done with string construction in the lambdas.",
+      "parentUuid": "711bc1c0_9ecc7811",
       "range": {
         "startLine": 114,
         "startChar": 22,
