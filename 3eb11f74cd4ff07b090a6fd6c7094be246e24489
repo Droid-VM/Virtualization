@@ -39,6 +39,30 @@
       },
       "revId": "3eb11f74cd4ff07b090a6fd6c7094be246e24489",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b4c1472_a259389e",
+        "filename": "microdroid/fstab",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-02-24T11:35:25Z",
+      "side": 1,
+      "message": "Because that\u0027s the partition name that assemble_cvd uses. This by the way is changed to just \"system\" in a follow-up change  as we use the correct \"super.img\"\n\nhttps://android-review.googlesource.com/c/platform/packages/modules/Virtualization/+/1602173/3/microdroid/fstab",
+      "parentUuid": "a4795ccc_4cd95884",
+      "range": {
+        "startLine": 1,
+        "startChar": 19,
+        "endLine": 1,
+        "endChar": 24
+      },
+      "revId": "3eb11f74cd4ff07b090a6fd6c7094be246e24489",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
