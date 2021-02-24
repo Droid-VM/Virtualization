@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f964dfde_05c1096e",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-24T15:25:20Z",
+      "side": 1,
+      "message": "Use ? rather than unwrap() for parse errors, seeing as you are returning a Result anyway.",
+      "revId": "a4d47c52f68c3cccfa85605db20b22d5d8a1b02b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "497c19e5_9ee97443",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-24T15:25:20Z",
+      "side": 1,
+      "message": "You can use .with_context (from anyhow::Context) for this.",
+      "revId": "a4d47c52f68c3cccfa85605db20b22d5d8a1b02b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e401a14_ee711849",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-24T15:25:20Z",
+      "side": 1,
+      "message": "bail!",
+      "revId": "a4d47c52f68c3cccfa85605db20b22d5d8a1b02b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
