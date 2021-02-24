@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "873c2492_604b4aa8",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-24T18:24:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f964dfde_05c1096e",
+      "revId": "a4d47c52f68c3cccfa85605db20b22d5d8a1b02b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "497c19e5_9ee97443",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1792545_cf81fc8c",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-24T18:24:23Z",
+      "side": 1,
+      "message": "It seems the error type of `AStatus` doesn\u0027t allow this currently.\n\n97  | pub struct Status(*mut sys::AStatus);\n| -------------------------------------\n| |\n| doesn\u0027t satisfy `_: anyhow::context::ext::StdError`\n| doesn\u0027t satisfy `_: std::marker::Send`\n| doesn\u0027t satisfy `_: std::marker::Sync`\n|\n\u003d note: the method `with_context` exists but the following trait bounds were not satisfied:\n`authfs_aidl_interface::binder::Status: anyhow::context::ext::StdError`\nwhich is required by `std::result::Result\u003cstd::vec::Vec\u003cu8\u003e, authfs_aidl_interface::binder::Status\u003e: anyhow::Context\u003cstd::vec::Vec\u003cu8\u003e, authfs_aidl_interface::binder::Status\u003e`\n`authfs_aidl_interface::binder::Status: std::marker::Send`\nwhich is required by `std::result::Result\u003cstd::vec::Vec\u003cu8\u003e, authfs_aidl_interface::binder::Status\u003e: anyhow::Context\u003cstd::vec::Vec\u003cu8\u003e, authfs_aidl_interface::binder::Status\u003e`\n`authfs_aidl_interface::binder::Status: std::marker::Sync`\nwhich is required by `std::result::Result\u003cstd::vec::Vec\u003cu8\u003e, authfs_aidl_interface::binder::Status\u003e: anyhow::Context\u003cstd::vec::Vec\u003cu8\u003e, authfs_aidl_interface::binder::Status\u003e`",
+      "parentUuid": "497c19e5_9ee97443",
+      "revId": "a4d47c52f68c3cccfa85605db20b22d5d8a1b02b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e401a14_ee711849",
@@ -48,6 +84,24 @@
       "writtenOn": "2021-02-24T15:25:20Z",
       "side": 1,
       "message": "bail!",
+      "revId": "a4d47c52f68c3cccfa85605db20b22d5d8a1b02b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10e08bc9_c90e34ae",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-02-24T18:24:23Z",
+      "side": 1,
+      "message": "Done!",
+      "parentUuid": "7e401a14_ee711849",
       "revId": "a4d47c52f68c3cccfa85605db20b22d5d8a1b02b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
