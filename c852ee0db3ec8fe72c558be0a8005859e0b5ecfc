@@ -16,6 +16,24 @@
       "message": "nit: you might want to ensure that params is always with kernel",
       "revId": "c852ee0db3ec8fe72c558be0a8005859e0b5ecfc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9c94fa1_30cafbd9",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-02-25T13:46:55Z",
+      "side": 1,
+      "message": "It looks like on aarch64 it\u0027s valid to pass --params even in --bios mode, as it just gets added to the FDT either way.",
+      "parentUuid": "1cabd10f_0f33396b",
+      "revId": "c852ee0db3ec8fe72c558be0a8005859e0b5ecfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
