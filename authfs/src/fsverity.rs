@@ -19,5 +19,4 @@ mod common;
 mod sys;
 mod verifier;
 
-pub use self::builder::MerkleLeaves;
 pub use self::verifier::FsverityChunkedFileReader;
