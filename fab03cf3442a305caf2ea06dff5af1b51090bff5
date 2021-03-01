@@ -22,6 +22,30 @@
       },
       "revId": "fab03cf3442a305caf2ea06dff5af1b51090bff5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac1934ee_0388c9b7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-03-01T22:52:05Z",
+      "side": 1,
+      "message": "I haven\u0027t analyzed it yet.\n\n\u003e [   16.049063][  T143] init: cannot execv(\u0027/system/bin/servicemanager\u0027). See the \u0027Debugging init\u0027 section of init\u0027s README.md for tips: No such file or directory\n\nAbove is the log message that I got, but I am sure that the file exists.",
+      "parentUuid": "777db1c6_e985ea7a",
+      "range": {
+        "startLine": 19,
+        "startChar": 19,
+        "endLine": 19,
+        "endChar": 47
+      },
+      "revId": "fab03cf3442a305caf2ea06dff5af1b51090bff5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
