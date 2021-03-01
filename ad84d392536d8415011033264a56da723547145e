@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008545797",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1612679?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "9b91cc86_289f1e7c",
+          "description": "Change to \"authfs/src/writer.rs\"",
+          "replacements": [
+            {
+              "path": "authfs/src/writer.rs",
+              "range": {
+                "startLine": 36,
+                "startChar": 18,
+                "endLine": 36,
+                "endChar": 27
+              },
+              "replacement": "propagate"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "9ec1220d_4ada09ad",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-03-01T22:23:54Z",
+      "side": 1,
+      "message": "Common typo found: \"propogate\" -- should it be \"propagate\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 36,
+        "startChar": 18,
+        "endLine": 36,
+        "endChar": 27
+      },
+      "revId": "ad84d392536d8415011033264a56da723547145e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
