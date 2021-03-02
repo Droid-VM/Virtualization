@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d48e54f_43c06fdf",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-02T19:29:06Z",
+      "side": 1,
+      "message": "fs-verity doesn\u0027t assume trusted storage either, does it? Isn\u0027t that why it does the signature checks?",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 84
+      },
+      "revId": "2df9ca1f32a7cb8931cf907f0f5b90c727bbbd83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0fcb321_cbf9ea1e",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-02T19:29:06Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s as trivial as it sounds. Do you have something in mind for this?",
+      "range": {
+        "startLine": 53,
+        "startChar": 59,
+        "endLine": 53,
+        "endChar": 93
+      },
+      "revId": "2df9ca1f32a7cb8931cf907f0f5b90c727bbbd83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d52c363_92930701",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-02T19:29:06Z",
+      "side": 1,
+      "message": "Should this return as a successful partial write if there has already been some data written and only an error if no data has been written?",
+      "revId": "2df9ca1f32a7cb8931cf907f0f5b90c727bbbd83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4292545_bc5edf62",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-02T19:29:06Z",
+      "side": 1,
+      "message": "Is there a consistency issue if the write fails but you\u0027ve already updates the merkle_tree?",
+      "revId": "2df9ca1f32a7cb8931cf907f0f5b90c727bbbd83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63d4a325_027e6186",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-02T19:29:06Z",
+      "side": 1,
+      "message": "I\u0027m a bit confused by the locking. The file context and merkle_tree aren\u0027t locked but file_size is?",
+      "revId": "2df9ca1f32a7cb8931cf907f0f5b90c727bbbd83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
