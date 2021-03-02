@@ -15,9 +15,12 @@
  */
 
 use std::io;
+use std::mem;
+use std::slice;
 
 use thiserror::Error;
 
+use super::sys::{fsverity_descriptor, FS_VERITY_HASH_ALG_SHA256};
 use crate::common::{divide_roundup, COMMON_PAGE_SIZE};
 use crate::crypto::{CryptoError, Sha256Hash, Sha256Hasher};
 
@@ -55,20 +58,26 @@ pub fn build_fsverity_digest(
     root_hash: &Sha256Hash,
     file_size: u64,
 ) -> Result<Sha256Hash, CryptoError> {
-    Sha256Hasher::new()?
-        .update(&1u8.to_le_bytes())? // version
-        .update(&1u8.to_le_bytes())? // hash_algorithm
-        .update(&12u8.to_le_bytes())? // log_blocksize
-        .update(&0u8.to_le_bytes())? // salt_size
-        .update(&0u32.to_le_bytes())? // sig_size
-        .update(&file_size.to_le_bytes())? // data_size
-        .update(root_hash)? // root_hash, first 32 bytes
-        .update(&[0u8; 32])? // root_hash, last 32 bytes
-        .update(&[0u8; 32])? // salt
-        .update(&[0u8; 32])? // reserved
-        .update(&[0u8; 32])? // reserved
-        .update(&[0u8; 32])? // reserved
-        .update(&[0u8; 32])? // reserved
-        .update(&[0u8; 16])? // reserved
-        .finalize()
+    // The latter 32 bytes are only used with SHA512.
+    let mut root_hash_buffer = [0u8; 64];
+    root_hash_buffer[..root_hash.len()].copy_from_slice(root_hash);
+
+    let descriptor = fsverity_descriptor {
+        version: 1u8,
+        hash_algorithm: FS_VERITY_HASH_ALG_SHA256 as u8,
+        log_blocksize: 12u8, // log_2(4096)
+        salt_size: 0u8,
+        __reserved_0x04: 0u32,
+        data_size: file_size.to_le(),
+        root_hash: root_hash_buffer,
+        salt: [0u8; 32],
+        __reserved: [0u8; 144],
+    };
+
+    let ptr = &descriptor as *const fsverity_descriptor as *const u8;
+    let slice = unsafe {
+        // SAFETY: the original struct outlives the coerced slice.
+        slice::from_raw_parts(ptr, mem::size_of::<fsverity_descriptor>())
+    };
+    Sha256Hasher::new()?.update(slice)?.finalize()
 }

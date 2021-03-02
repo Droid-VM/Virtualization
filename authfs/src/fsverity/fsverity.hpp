@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-mod builder;
-mod common;
-mod sys;
-mod verifier;
+#ifndef AUTHFS_FSVERITY_WRAPPER_H
+#define AUTHFS_FSVERITY_WRAPPER_H
 
-pub use self::builder::MerkleLeaves;
-pub use self::verifier::FsverityChunkedFileReader;
+#include <linux/fsverity.h>
+
+#endif  // AUTHFS_FSVERITY_WRAPPER_H

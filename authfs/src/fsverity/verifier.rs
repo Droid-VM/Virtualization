@@ -16,17 +16,17 @@
 
 use libc::EIO;
 use std::io;
+use std::mem;
+use std::slice;
 
 use super::common::{build_fsverity_digest, merkle_tree_height, FsverityError};
+use super::sys::{fsverity_formatted_digest_sha256, FS_VERITY_HASH_ALG_SHA256};
 use crate::auth::Authenticator;
 use crate::common::{divide_roundup, COMMON_PAGE_SIZE as CHUNK_SIZE};
 use crate::crypto::{CryptoError, Sha256Hasher};
 use crate::reader::ReadOnlyDataByChunk;
 
 const ZEROS: [u8; CHUNK_SIZE as usize] = [0u8; CHUNK_SIZE as usize];
-
-// The size of `struct fsverity_formatted_digest` in Linux with SHA-256.
-const SIZE_OF_FSVERITY_FORMATTED_DIGEST_SHA256: usize = 12 + Sha256Hasher::HASH_SIZE;
 
 type HashBuffer = [u8; Sha256Hasher::HASH_SIZE];
 
@@ -112,14 +112,14 @@ fn fsverity_walk<T: ReadOnlyDataByChunk>(
 fn build_fsverity_formatted_digest(
     root_hash: &HashBuffer,
     file_size: u64,
-) -> Result<[u8; SIZE_OF_FSVERITY_FORMATTED_DIGEST_SHA256], CryptoError> {
+) -> Result<fsverity_formatted_digest_sha256, CryptoError> {
     let digest = build_fsverity_digest(root_hash, file_size)?;
-    let mut formatted_digest = [0u8; SIZE_OF_FSVERITY_FORMATTED_DIGEST_SHA256];
-    formatted_digest[0..8].copy_from_slice(b"FSVerity");
-    formatted_digest[8..10].copy_from_slice(&1u16.to_le_bytes());
-    formatted_digest[10..12].copy_from_slice(&32u16.to_le_bytes());
-    formatted_digest[12..].copy_from_slice(&digest);
-    Ok(formatted_digest)
+    Ok(fsverity_formatted_digest_sha256 {
+        magic: *b"FSVerity",
+        digest_algorithm: FS_VERITY_HASH_ALG_SHA256.to_le() as u16,
+        digest_size: Sha256Hasher::HASH_SIZE.to_le() as u16,
+        digest,
+    })
 }
 
 pub struct FsverityChunkedFileReader<F: ReadOnlyDataByChunk, M: ReadOnlyDataByChunk> {
@@ -144,6 +144,11 @@ impl<F: ReadOnlyDataByChunk, M: ReadOnlyDataByChunk> FsverityChunkedFileReader<F
         }
         let root_hash = Sha256Hasher::new()?.update(&buf[..])?.finalize()?;
         let formatted_digest = build_fsverity_formatted_digest(&root_hash, file_size)?;
+        let ptr = &formatted_digest as *const _ as *const u8;
+        let formatted_digest = unsafe {
+            // SAFETY: the original struct outlives the coerced slice.
+            slice::from_raw_parts(ptr, mem::size_of::<fsverity_formatted_digest_sha256>())
+        };
         let valid = authenticator.verify(&sig, &formatted_digest)?;
         if valid {
             Ok(FsverityChunkedFileReader { chunked_file, file_size, merkle_tree, root_hash })

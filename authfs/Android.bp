@@ -13,6 +13,7 @@ rust_defaults {
         "authfs_aidl_interface-rust",
         "libanyhow",
         "libauthfs_crypto_bindgen",
+        "libauthfs_fsverity_bindgen",
         "libcfg_if",
         "libfuse_rust",
         "liblibc",
@@ -26,6 +27,14 @@ rust_defaults {
     },
     shared_libs: ["libcrypto"],
     defaults: ["crosvm_defaults"],
+}
+
+// TODO(b/172687320): remove once there is a canonical bindgen.
+rust_bindgen {
+    name: "libauthfs_fsverity_bindgen",
+    wrapper_src: "src/fsverity/fsverity.hpp",
+    crate_name: "authfs_fsverity_bindgen",
+    source_stem: "bindings",
 }
 
 // TODO(b/172687320): remove once there is a canonical bindgen.

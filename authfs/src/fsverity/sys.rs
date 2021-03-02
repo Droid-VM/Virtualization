@@ -14,10 +14,20 @@
  * limitations under the License.
  */
 
-mod builder;
-mod common;
-mod sys;
-mod verifier;
+#![allow(non_camel_case_types)]
 
-pub use self::builder::MerkleLeaves;
-pub use self::verifier::FsverityChunkedFileReader;
+use std::os::raw::{c_uchar, c_ushort};
+
+pub use authfs_fsverity_bindgen::{fsverity_descriptor, FS_VERITY_HASH_ALG_SHA256};
+
+type __u8 = c_uchar;
+type __le16 = c_ushort;
+
+/// An Rust-friendly alternative of fsverity_formatted_digest. The original digest field is a
+/// 0-sized array, with the size specified by digest_size.
+pub struct fsverity_formatted_digest_sha256 {
+    pub magic: [__u8; 8],
+    pub digest_algorithm: __le16,
+    pub digest_size: __le16,
+    pub digest: [__u8; 32], // for sha256
+}
