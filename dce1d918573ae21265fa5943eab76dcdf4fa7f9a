@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b32fdbe2_22b14fe7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-02T18:20:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ac5580c_28bfc192",
+      "range": {
+        "startLine": 15,
+        "startChar": 40,
+        "endLine": 15,
+        "endChar": 44
+      },
+      "revId": "dce1d918573ae21265fa5943eab76dcdf4fa7f9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8c91fa48_b34d84c5",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -58,6 +82,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "752d4212_07301912",
+        "filename": "authfs/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-02T18:20:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac0db6af_8d177db3",
+      "revId": "dce1d918573ae21265fa5943eab76dcdf4fa7f9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6ed19b9_8ab28544",
@@ -71,6 +113,30 @@
       "writtenOn": "2021-03-02T15:46:53Z",
       "side": 1,
       "message": "Who is the \u0027customer\u0027?",
+      "range": {
+        "startLine": 26,
+        "startChar": 36,
+        "endLine": 26,
+        "endChar": 44
+      },
+      "revId": "dce1d918573ae21265fa5943eab76dcdf4fa7f9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3de2dae1_c8ef4c7a",
+        "filename": "authfs/src/fsverity/builder.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-02T18:20:41Z",
+      "side": 1,
+      "message": "Just the class user.  Updated to clarify.",
+      "parentUuid": "f6ed19b9_8ab28544",
       "range": {
         "startLine": 26,
         "startChar": 36,
@@ -104,6 +170,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27d43646_a9bf43fa",
+        "filename": "authfs/src/fsverity/builder.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-02T18:20:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f30af82_e8be66ca",
+      "range": {
+        "startLine": 114,
+        "startChar": 30,
+        "endLine": 114,
+        "endChar": 39
+      },
+      "revId": "dce1d918573ae21265fa5943eab76dcdf4fa7f9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b72a0605_640c6c55",
@@ -121,6 +211,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62f5681d_070208da",
+        "filename": "authfs/src/fsverity/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-02T18:20:41Z",
+      "side": 1,
+      "message": "I did it locally, but then am thinking to create an FFI for another comment of yours.  We don\u0027t actually need to allocate the struct to calculate the hash here, but it\u0027d be cleaner and safely.  If it sounds fine, I\u0027ll send you a follow-up.",
+      "parentUuid": "b72a0605_640c6c55",
+      "revId": "dce1d918573ae21265fa5943eab76dcdf4fa7f9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d83c8a42_d01d0400",
@@ -134,6 +242,24 @@
       "writtenOn": "2021-03-02T15:46:53Z",
       "side": 1,
       "message": "Why are the last 32 bytes of the hash always 0?",
+      "revId": "dce1d918573ae21265fa5943eab76dcdf4fa7f9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dece0e58_f59d49a5",
+        "filename": "authfs/src/fsverity/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-02T18:20:41Z",
+      "side": 1,
+      "message": "Just because we\u0027re always using sha256 for now.  fs-verity also supports sha512 with 64 bytes of hash.",
+      "parentUuid": "d83c8a42_d01d0400",
       "revId": "dce1d918573ae21265fa5943eab76dcdf4fa7f9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -161,6 +287,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14280e99_ba2f98b7",
+        "filename": "authfs/src/fsverity/verifier.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-02T18:20:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b0e8ba3_4152cdcb",
+      "range": {
+        "startLine": 46,
+        "startChar": 7,
+        "endLine": 46,
+        "endChar": 13
+      },
+      "revId": "dce1d918573ae21265fa5943eab76dcdf4fa7f9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "def1602d_a2b472a3",
@@ -174,6 +324,24 @@
       "writtenOn": "2021-03-02T15:46:53Z",
       "side": 1,
       "message": "Why not just remove the collect?",
+      "revId": "dce1d918573ae21265fa5943eab76dcdf4fa7f9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea19a31a_8268f004",
+        "filename": "authfs/src/fsverity/verifier.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-02T18:20:41Z",
+      "side": 1,
+      "message": "Removed. clippy seems to no longer complain it now.",
+      "parentUuid": "def1602d_a2b472a3",
       "revId": "dce1d918573ae21265fa5943eab76dcdf4fa7f9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -195,6 +363,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70671c67_9e8b9aec",
+        "filename": "authfs/src/fsverity/verifier.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-02T18:20:41Z",
+      "side": 1,
+      "message": "Added a comment to explain why it\u0027s not necessary to check.  However, I realized the implementations of ReadOnlyDataByChunk trait may not return a complete chunk by contract.  File b/181674212 to fix those.",
+      "parentUuid": "39623cbd_087e8d18",
+      "revId": "dce1d918573ae21265fa5943eab76dcdf4fa7f9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e6f54e9_248ca45c",
@@ -208,6 +394,24 @@
       "writtenOn": "2021-03-02T15:46:53Z",
       "side": 1,
       "message": "What do these numbers mean? Put them in named constants to make it clear.",
+      "revId": "dce1d918573ae21265fa5943eab76dcdf4fa7f9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5564f8f_c59ea760",
+        "filename": "authfs/src/fsverity/verifier.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-02T18:20:41Z",
+      "side": 1,
+      "message": "It\u0027s filling the bytes for the struct defined here: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/uapi/linux/fsverity.h\n\nNow I\u0027m thinking to create an FFI.  Can I do it in a followup, since this is just moved from the original file?",
+      "parentUuid": "8e6f54e9_248ca45c",
       "revId": "dce1d918573ae21265fa5943eab76dcdf4fa7f9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
