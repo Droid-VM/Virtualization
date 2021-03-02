@@ -35,6 +35,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b0447c6_6a66e461",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-02T18:20:29Z",
+      "side": 1,
+      "message": "Thanks Andrew!",
+      "revId": "e00ae66f5dee49df8c53b61b2cef3e08accbced3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93ec3d06_06d82113",
@@ -48,6 +65,24 @@
       "writtenOn": "2021-03-02T14:54:30Z",
       "side": 1,
       "message": "Brief doc comments for these methods would be nice.",
+      "revId": "e00ae66f5dee49df8c53b61b2cef3e08accbced3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecc0d150_99a78f11",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-02T18:20:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93ec3d06_06d82113",
       "revId": "e00ae66f5dee49df8c53b61b2cef3e08accbced3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -69,6 +104,47 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "890aa573_84814ab9",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-02T18:20:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81a28811_b1048a7a",
+      "revId": "e00ae66f5dee49df8c53b61b2cef3e08accbced3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbd8f809_cfc2c524",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-02T18:20:29Z",
+      "side": 1,
+      "message": "I realized this isn\u0027t needed here, so removed. Filed b/181674212 for the better fix.",
+      "range": {
+        "startLine": 110,
+        "startChar": 7,
+        "endLine": 110,
+        "endChar": 33
+      },
+      "revId": "e00ae66f5dee49df8c53b61b2cef3e08accbced3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5bad03d_32b93313",
@@ -82,6 +158,30 @@
       "writtenOn": "2021-03-02T14:54:30Z",
       "side": 1,
       "message": "an incomplete",
+      "range": {
+        "startLine": 135,
+        "startChar": 26,
+        "endLine": 135,
+        "endChar": 36
+      },
+      "revId": "e00ae66f5dee49df8c53b61b2cef3e08accbced3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7ef7808_96396f45",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-02T18:20:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5bad03d_32b93313",
       "range": {
         "startLine": 135,
         "startChar": 26,
@@ -115,6 +215,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97757c42_6c49b114",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-02T18:20:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fa1d0c0_839c1c78",
+      "range": {
+        "startLine": 141,
+        "startChar": 15,
+        "endLine": 141,
+        "endChar": 24
+      },
+      "revId": "e00ae66f5dee49df8c53b61b2cef3e08accbced3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84d87edf_1b8e7824",
@@ -128,6 +252,30 @@
       "writtenOn": "2021-03-02T14:54:30Z",
       "side": 1,
       "message": "generated",
+      "range": {
+        "startLine": 203,
+        "startChar": 30,
+        "endLine": 203,
+        "endChar": 39
+      },
+      "revId": "e00ae66f5dee49df8c53b61b2cef3e08accbced3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61883c07_2f8d2055",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-02T18:20:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84d87edf_1b8e7824",
       "range": {
         "startLine": 203,
         "startChar": 30,
