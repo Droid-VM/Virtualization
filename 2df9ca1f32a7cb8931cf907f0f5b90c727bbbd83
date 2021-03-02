@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008578707",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1612679?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "af1fcd00_a3eeeb85",
+          "description": "Change to \"authfs/src/writer.rs\"",
+          "replacements": [
+            {
+              "path": "authfs/src/writer.rs",
+              "range": {
+                "startLine": 109,
+                "startChar": 8,
+                "endLine": 109,
+                "endChar": 17
+              },
+              "replacement": "Calculates"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "f2b84d47_bed4c688",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-03-02T18:20:07Z",
+      "side": 1,
+      "message": "Common typo found: \"Calulates\" -- should it be \"Calculates\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 109,
+        "startChar": 8,
+        "endLine": 109,
+        "endChar": 17
+      },
+      "revId": "2df9ca1f32a7cb8931cf907f0f5b90c727bbbd83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
