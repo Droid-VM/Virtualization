@@ -266,6 +266,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e345e45f_a1055e04",
+        "filename": "authfs/src/fsverity/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-03T11:50:14Z",
+      "side": 1,
+      "message": "Aha, makes sense. Mention that in a comment here, something like \"last 32 bytes of hash are always 0 because we are using sh256\".",
+      "parentUuid": "dece0e58_f59d49a5",
+      "revId": "dce1d918573ae21265fa5943eab76dcdf4fa7f9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0b0e8ba3_4152cdcb",
         "filename": "authfs/src/fsverity/verifier.rs",
         "patchSetId": 1
