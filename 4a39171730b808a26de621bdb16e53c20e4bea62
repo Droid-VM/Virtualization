@@ -16,6 +16,40 @@
       "message": "Does this look better to you?",
       "revId": "4a39171730b808a26de621bdb16e53c20e4bea62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4aec31bb_d3eea30d",
+        "filename": "authfs/src/fsverity/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-03T15:34:21Z",
+      "side": 1,
+      "message": "Before you were explicitly converting each field to little-endian, now you\u0027re not. Is every Android target little-endian? Leave a comment and assertion here, at least, or explicitly convert each field.",
+      "revId": "4a39171730b808a26de621bdb16e53c20e4bea62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40d7fb78_c0fb2597",
+        "filename": "authfs/src/fsverity/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-03T15:34:21Z",
+      "side": 1,
+      "message": "What does this value mean?",
+      "revId": "4a39171730b808a26de621bdb16e53c20e4bea62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
