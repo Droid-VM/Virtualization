@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f4d0754_a6e081ab",
+        "filename": "authfs/src/fsverity/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-03T20:52:32Z",
+      "side": 1,
+      "message": "I kind of don\u0027t like this change now for the multiple conversions...  I\u0027ve added some comments to the other change for now.  Let me know if you prefer something like this.",
+      "parentUuid": "4aec31bb_d3eea30d",
+      "revId": "4a39171730b808a26de621bdb16e53c20e4bea62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "40d7fb78_c0fb2597",
         "filename": "authfs/src/fsverity/common.rs",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2021-03-03T15:34:21Z",
       "side": 1,
       "message": "What does this value mean?",
+      "revId": "4a39171730b808a26de621bdb16e53c20e4bea62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fc39285_bc6b6e79",
+        "filename": "authfs/src/fsverity/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-03T20:52:32Z",
+      "side": 1,
+      "message": "It\u0027s a field that only used by the kernel, and must be 0/ignored in userspace.\n\n#ifdef __KERNEL__\n\t__le32 sig_size;\n#else\n\t__le32 __reserved_0x04;\t/* must be 0 */\n#endif",
+      "parentUuid": "40d7fb78_c0fb2597",
       "revId": "4a39171730b808a26de621bdb16e53c20e4bea62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
