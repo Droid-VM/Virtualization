@@ -53,7 +53,41 @@ future, this shall be done via [`virtmanager`](../virtmanager/).
 
 ```
 $ adb shell 'HOME=/data/local/tmp; /apex/com.android.virt/bin/assemble_cvd < /dev/null'
-$ adb shell 'cd /data/local/tmp; /apex/com.android.virt/bin/crosvm run --disable-sandbox --bios=bootloader --serial=type=stdout --disk=cuttlefish_runtime/composite.img'
+$ adb shell 'cd /data/local/tmp; /apex/com.android.virt/bin/crosvm run --cid=5 --disable-sandbox --bios=bootloader --serial=type=stdout --disk=cuttlefish_runtime/composite.img'
 ```
 
-At this moment, this doesn't boot to the shell, but to the second-stage init.
+The CID in `--cid` parameter can be anything greater than 2 (`VMADDR_CID_HOST`).
+
+## ADB
+
+First, run the sock-vsock proxy inside the host VM. This will redirect tcp/ip
+connections from the adb client to tcp/vsock connection to the adbd running
+in microdroid.
+
+```
+$ adb shell /apex/com.android.virt/bin/socket_vsock_proxy -server=tcp -tcp_port=5556 -vsock_cid=5 -vsock_port=5555 &
+```
+
+`-tcp_port` can be anything. `-vsock_cid` should match with the `--cid`
+parameter given to `crosvm`. These two should be per VM; if you have N VMs on a
+device, you need to invoke above command N times with different `-tcp_port` and
+`-vsock_cid` values.
+
+`-vsock_port` however should always be 5555.
+
+Then configure adb server running in the workstation to connect to the proxy.
+
+```
+$ adb forward tcp:8000 tcp:5556
+$ adb connect localhost:8000
+```
+
+`5556` should match with `-tcp_port` of the proxy. `8000` can be any port
+number. When you have multiple VMs on a device, you need to do this multiple
+times with different port numbers.
+
+Done. Now you can log into microdroid. Have fun!
+
+```
+$ adb -s localhost:8000 shell
+```
