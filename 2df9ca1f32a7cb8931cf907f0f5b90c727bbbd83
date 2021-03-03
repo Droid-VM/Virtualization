@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "baf616d0_9a13a447",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-03T00:13:42Z",
+      "side": 1,
+      "message": "I think what I tried to say was the hashing process, not the verification process. Normally, the source file just sits on disk and we assume it\u0027s safe to read. I removed this sentence to avoid confusion.",
+      "parentUuid": "5d48e54f_43c06fdf",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 84
+      },
+      "revId": "2df9ca1f32a7cb8931cf907f0f5b90c727bbbd83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0fcb321_cbf9ea1e",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-03-02T19:29:06Z",
       "side": 1,
       "message": "I don\u0027t think that\u0027s as trivial as it sounds. Do you have something in mind for this?",
+      "range": {
+        "startLine": 53,
+        "startChar": 59,
+        "endLine": 53,
+        "endChar": 93
+      },
+      "revId": "2df9ca1f32a7cb8931cf907f0f5b90c727bbbd83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7df10866_9dd93113",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-03T00:13:42Z",
+      "side": 1,
+      "message": "Yes, please see the \"level 5\" requirement in go/authfs for the idea.",
+      "parentUuid": "c0fcb321_cbf9ea1e",
       "range": {
         "startLine": 53,
         "startChar": 59,
@@ -64,6 +112,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20aa0222_3f9c6641",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-03T00:13:42Z",
+      "side": 1,
+      "message": "Yup, that seems much better, especially when write can normally complete partially. When the API client calls it again, it can fail at that time.  Done with a test.",
+      "parentUuid": "9d52c363_92930701",
+      "revId": "2df9ca1f32a7cb8931cf907f0f5b90c727bbbd83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4292545_bc5edf62",
@@ -81,6 +147,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d2acfe7_0a2c919a",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-03T00:13:42Z",
+      "side": 1,
+      "message": "Swapped the order.  I first thought it might not matter, but now I want to keep the tree in a more supposedly consistent state.",
+      "parentUuid": "b4292545_bc5edf62",
+      "revId": "2df9ca1f32a7cb8931cf907f0f5b90c727bbbd83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63d4a325_027e6186",
@@ -94,6 +178,24 @@
       "writtenOn": "2021-03-02T19:29:06Z",
       "side": 1,
       "message": "I\u0027m a bit confused by the locking. The file context and merkle_tree aren\u0027t locked but file_size is?",
+      "revId": "2df9ca1f32a7cb8931cf907f0f5b90c727bbbd83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a55530f_48697314",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-03T00:13:42Z",
+      "side": 1,
+      "message": "Good catch.  Admittedly I only tried to make it fit into the fuse requirement of Sync and immutability, without really paying attention to actually locking... :(\n\nNow I think MerkleLeaves is the better place for file_size.  Updated code and comments.",
+      "parentUuid": "63d4a325_027e6186",
       "revId": "2df9ca1f32a7cb8931cf907f0f5b90c727bbbd83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
