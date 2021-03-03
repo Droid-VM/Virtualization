@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008594262",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1611032?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "dd905bf0_54ac9799",
+          "description": "Change to \"authfs/src/fsverity/builder.rs\"",
+          "replacements": [
+            {
+              "path": "authfs/src/fsverity/builder.rs",
+              "range": {
+                "startLine": 103,
+                "startChar": 37,
+                "endLine": 103,
+                "endChar": 44
+              },
+              "replacement": "and"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "3f642dbc_7b5ef8d4",
+        "filename": "authfs/src/fsverity/builder.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-03-03T00:13:50Z",
+      "side": 1,
+      "message": "Common typo found: \"and and\" -- should it be \"and\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 103,
+        "startChar": 37,
+        "endLine": 103,
+        "endChar": 44
+      },
+      "revId": "e1ccd8d4a2539481f7870aaf13d481aa8e1de3d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
