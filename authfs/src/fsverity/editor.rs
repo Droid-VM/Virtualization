@@ -57,36 +57,13 @@ use std::sync::{Arc, RwLock};
 use super::builder::MerkleLeaves;
 use crate::common::{ChunkedSizeIter, CHUNK_SIZE};
 use crate::crypto::{CryptoError, Sha256Hash, Sha256Hasher};
-use crate::reader::ReadOnlyDataByChunk;
+use crate::file::{RandomWrite, ReadOnlyDataByChunk};
 
 // Implement the conversion from `CryptoError` to `io::Error` just to avoid manual error type
 // mapping below.
 impl From<CryptoError> for io::Error {
     fn from(error: CryptoError) -> Self {
         io::Error::new(io::ErrorKind::Other, error)
-    }
-}
-
-/// A trait to write a buffer to the destination at a given offset. The implementation does not
-/// necessarily own or maintain the destination state.
-///
-/// NB: The trait is required in a member of `fusefs::AuthFs`, which is required to be Sync and
-/// immutable (this the member).
-pub trait RandomWrite {
-    /// Writes `buf` to the destination at `offset`. Returns the written size, which may not be the
-    /// full buffer.
-    fn write_at(&self, buf: &[u8], offset: u64) -> io::Result<usize>;
-
-    /// Writes the full `buf` to the destination at `offset`.
-    fn write_all_at(&self, buf: &[u8], offset: u64) -> io::Result<()> {
-        let mut input_offset = 0;
-        let mut output_offset = offset;
-        while input_offset < buf.len() {
-            let size = self.write_at(&buf[input_offset..], output_offset)?;
-            input_offset += size;
-            output_offset += size as u64;
-        }
-        Ok(())
     }
 }
 
