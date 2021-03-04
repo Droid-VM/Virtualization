@@ -15,16 +15,13 @@
  */
 package android.system.virtmanager;
 
-import android.system.virtmanager.IVirtualMachine;
-import android.system.virtmanager.VirtualMachineDebugInfo;
-
-interface IVirtManager {
-        /** Start the VM with the given config file, and return a handle to it. */
-        IVirtualMachine startVm(String configPath);
-
+/** Information about a running VM, for debug purposes only. */
+parcelable VirtualMachineDebugInfo {
+        /** The CID assigned to the VM. */
+        int cid;
         /**
-         * Get a list of all currently running VMs. This method is only intended for debug purposes,
-         * and as such is only permitted from the shell user.
+         * The filename of the config file used to start the VM. This may have changed since it was
+         * read so it shouldn't be trusted; it is only stored for debugging purposes.
          */
-        VirtualMachineDebugInfo[] debugListVms();
+        String configPath;
 }
