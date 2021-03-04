@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9d5ad87d_56222a86",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-04T17:19:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef525653_824a41d0",
+      "range": {
+        "startLine": 9,
+        "startChar": 24,
+        "endLine": 9,
+        "endChar": 29
+      },
+      "revId": "b33d8a5da8fae2b8404fba050bb3f316a5faa478",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d0a0e6d8_9c780336",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -58,6 +82,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f90bf2e_95225db1",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-04T17:19:24Z",
+      "side": 1,
+      "message": "Done.  I was on the fence since these similar words of \"page\", \"block\", \"chunk\" would each be authentic in different context.  But I\u0027m sticking with CHUNK_SIZE now.",
+      "parentUuid": "21f6501a_88c8d6ab",
+      "revId": "b33d8a5da8fae2b8404fba050bb3f316a5faa478",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1dedbfa4_df7a9f78",
@@ -71,6 +113,30 @@
       "writtenOn": "2021-03-04T16:37:38Z",
       "side": 1,
       "message": "Why does this need to be pub now?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 3
+      },
+      "revId": "b33d8a5da8fae2b8404fba050bb3f316a5faa478",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b14adc8a_174e246e",
+        "filename": "authfs/src/reader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-04T17:19:24Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "1dedbfa4_df7a9f78",
       "range": {
         "startLine": 35,
         "startChar": 0,
