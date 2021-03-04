@@ -16,7 +16,9 @@
 
 mod builder;
 mod common;
+mod editor;
 mod sys;
 mod verifier;
 
-pub use self::verifier::FsverityChunkedFileReader;
+pub use editor::VerifiedFileEditor;
+pub use verifier::VerifiedFileReader;
