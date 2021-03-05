@@ -20,7 +20,7 @@ use android_system_virtmanager::aidl::android::system::virtmanager::IVirtManager
 use android_system_virtmanager::binder::{
     get_interface, DeathRecipient, IBinder, ProcessState, Strong,
 };
-use anyhow::{anyhow, bail, Context, Error};
+use anyhow::{bail, Context, Error};
 use std::env;
 use std::process::exit;
 use sync::AtomicFlag;
@@ -51,10 +51,8 @@ fn command_run(config_filename: &str) -> Result<(), Error> {
     let virt_manager: Strong<dyn IVirtManager> =
         get_interface(VIRT_MANAGER_BINDER_SERVICE_IDENTIFIER)
             .with_context(|| "Failed to find Virt Manager service")?;
-    // TODO: Stop mapping errors once b/181225442 is fixed.
-    let vm =
-        virt_manager.startVm(config_filename).map_err(|e| anyhow!("Failed to start VM: {}", e))?;
-    let cid = vm.getCid().map_err(|e| anyhow!("Failed to get CID: {}", e))?;
+    let vm = virt_manager.startVm(config_filename).with_context(|| "Failed to start VM")?;
+    let cid = vm.getCid().with_context(|| "Failed to get CID")?;
     println!("Started VM from {} with CID {}.", config_filename, cid);
 
     // Wait until the VM dies. If we just returned immediately then the IVirtualMachine Binder
