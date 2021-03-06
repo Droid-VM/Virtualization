@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e311cea5_adf64033",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-03-06T00:16:44Z",
+      "side": 1,
+      "message": "This looks fine to me, but I don\u0027t have a good rust readability. So +1.",
+      "revId": "3bc7312ee6474fecf708b38e992ac8fb971e0cf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91efbdfa_775c6002",
+        "filename": "virtmanager/aidl/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-03-06T00:16:44Z",
+      "side": 1,
+      "message": "Can you explain why you needed this?",
+      "range": {
+        "startLine": 20,
+        "startChar": 16,
+        "endLine": 20,
+        "endChar": 44
+      },
+      "revId": "3bc7312ee6474fecf708b38e992ac8fb971e0cf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18a6ffdc_6c1050b1",
+        "filename": "vm/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-03-06T00:16:44Z",
+      "side": 1,
+      "message": "This as well.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 36
+      },
+      "revId": "3bc7312ee6474fecf708b38e992ac8fb971e0cf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d03c34a_8ea4432d",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-03-06T00:16:44Z",
+      "side": 1,
+      "message": "This should be fine for this initial version, but isn\u0027t ideal. I wish `vm` had the following commands.\n\nvm start\nvm stop\nvm list",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 58
+      },
+      "revId": "3bc7312ee6474fecf708b38e992ac8fb971e0cf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
