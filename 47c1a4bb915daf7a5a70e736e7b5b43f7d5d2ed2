@@ -317,6 +317,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f49dafc9_4fa6b61e",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T21:08:37Z",
+      "side": 1,
+      "message": "For now.  It depends on how the VM uses the files in the use case.  For example, if the VM is simply generating some output (and sign it), it won\u0027t need to read same file later.  But if the VM needs a persistent storage, then we\u0027ll (and can) definitely need to support it.\n\nFWIW, besides integrity, the VM may require confidentiality.  We\u0027ll need another layer for encryption (which should just be another transparent impl of the existing traits).",
+      "parentUuid": "be9c2c81_cfc27f82",
+      "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ee6242c_b7c18695",
