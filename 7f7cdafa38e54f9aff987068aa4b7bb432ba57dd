@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dc99d13_d3bed46a",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-08T16:01:26Z",
+      "side": 1,
+      "message": "Did we find out whether `IVirtManager::get_descriptor()` is a good or a bad way to name the service?",
+      "range": {
+        "startLine": 28,
+        "startChar": 53,
+        "endLine": 28,
+        "endChar": 81
+      },
+      "revId": "7f7cdafa38e54f9aff987068aa4b7bb432ba57dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd1f1071_50574ce0",
+        "filename": "vm/src/sync.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-08T16:01:26Z",
+      "side": 1,
+      "message": "nit: the name feels too close to AtomicBool and doesn\u0027t represent the latching or signalling properties but I haven\u0027t come up with a better one.",
+      "range": {
+        "startLine": 8,
+        "startChar": 11,
+        "endLine": 8,
+        "endChar": 21
+      },
+      "revId": "7f7cdafa38e54f9aff987068aa4b7bb432ba57dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
