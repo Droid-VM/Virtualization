@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f215feff_d06dae66",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-08T17:33:27Z",
+      "side": 1,
+      "message": "I don\u0027t know. Nobody else seems to be using it for that in Rust, except for a test.\n\nLooking at `adb shell service list`, the only service named the same as its interface is android.service.gatekeeper.IGateKeeperService. The rest are a match of single words (e.g. connectivity), CamelCase (e.g. SurfaceFlinger), snake_case (e.g. bluetooth_manager, sec_key_att_app_id_provider), dot separated which may or may not match their package name (e.g. media.camera.proxy, android.security.identity), or even a mix of several (drm.drmManager, media.resource_manager).",
+      "parentUuid": "2dc99d13_d3bed46a",
+      "range": {
+        "startLine": 28,
+        "startChar": 53,
+        "endLine": 28,
+        "endChar": 81
+      },
+      "revId": "7f7cdafa38e54f9aff987068aa4b7bb432ba57dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd1f1071_50574ce0",
         "filename": "vm/src/sync.rs",
         "patchSetId": 7
@@ -37,6 +61,30 @@
       "writtenOn": "2021-03-08T16:01:26Z",
       "side": 1,
       "message": "nit: the name feels too close to AtomicBool and doesn\u0027t represent the latching or signalling properties but I haven\u0027t come up with a better one.",
+      "range": {
+        "startLine": 8,
+        "startChar": 11,
+        "endLine": 8,
+        "endChar": 21
+      },
+      "revId": "7f7cdafa38e54f9aff987068aa4b7bb432ba57dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2b04005_8a4fb9c7",
+        "filename": "vm/src/sync.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-08T17:33:27Z",
+      "side": 1,
+      "message": "I agree that it\u0027s not great. I considered something like BinarySemaphore, but that\u0027s misleading as it doesn\u0027t implement the full semantics of a binary semaphore (because we don\u0027t need them).",
+      "parentUuid": "dd1f1071_50574ce0",
       "range": {
         "startLine": 8,
         "startChar": 11,
