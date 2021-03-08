@@ -240,6 +240,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "557998c9_ca3a5b8d",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T20:05:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7a63499_d0ed20ff",
+      "range": {
+        "startLine": 185,
+        "startChar": 57,
+        "endLine": 185,
+        "endChar": 58
+      },
+      "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0281eb3_be904b71",
@@ -253,6 +277,24 @@
       "writtenOn": "2021-03-08T15:05:51Z",
       "side": 1,
       "message": "I\u0027m probably missing some context here, but why are read-write files expected to be empty?",
+      "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a728ae2_0fcc0156",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T20:05:53Z",
+      "side": 1,
+      "message": "Because the storage/file server is not trusted.  But it\u0027s possible to support non-empty file, if the file is signed previous by us. Then we can verify with fs-verity algorithm similarly.",
+      "parentUuid": "b0281eb3_be904b71",
       "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
