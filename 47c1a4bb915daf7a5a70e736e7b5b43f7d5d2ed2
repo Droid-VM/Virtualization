@@ -16,6 +16,160 @@
       "message": "PTAL",
       "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "712e116a_205d99b8",
+        "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-08T15:05:51Z",
+      "side": 1,
+      "message": "I guess you meant the number of bytes written?",
+      "range": {
+        "startLine": 49,
+        "startChar": 79,
+        "endLine": 49,
+        "endChar": 88
+      },
+      "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f06d9f5_d06b90ba",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-08T15:05:51Z",
+      "side": 1,
+      "message": "Nit: a doc comment for the enum as a whole would be nice.",
+      "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07c5c69b_af5cbaee",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-08T15:05:51Z",
+      "side": 1,
+      "message": "associated",
+      "range": {
+        "startLine": 76,
+        "startChar": 8,
+        "endLine": 76,
+        "endChar": 19
+      },
+      "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a3f334b_ea8b41e6",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-08T15:05:51Z",
+      "side": 1,
+      "message": "Give the fields names, like they had before. It was much clearer to read that way. (An enum variant can have field names and comments and so on just the same as a struct.)",
+      "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3e96b42_d7905728",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-08T15:05:51Z",
+      "side": 1,
+      "message": "Maybe it would be helpful to implement a `file()` method on `FdConfig` which returns the file, whether it is read-only or read-write?",
+      "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7a63499_d0ed20ff",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-08T15:05:51Z",
+      "side": 1,
+      "message": "Nit: I guess this should also be a backtick.",
+      "range": {
+        "startLine": 185,
+        "startChar": 57,
+        "endLine": 185,
+        "endChar": 58
+      },
+      "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0281eb3_be904b71",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-08T15:05:51Z",
+      "side": 1,
+      "message": "I\u0027m probably missing some context here, but why are read-write files expected to be empty?",
+      "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ee6242c_b7c18695",
+        "filename": "authfs/src/remote_file.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-08T15:05:51Z",
+      "side": 1,
+      "message": "It\u0027s more typical to write this as `service.clone()`. But actually, why do you need to to clone it at all? `Mutex::lock` only needs an `\u0026self`, so doesn\u0027t that just work directly?",
+      "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
