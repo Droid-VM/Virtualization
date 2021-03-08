@@ -301,6 +301,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be9c2c81_cfc27f82",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-08T20:41:49Z",
+      "side": 1,
+      "message": "Does that mean that if the VM writes to a file, it can\u0027t then open the same file after a reboot?",
+      "parentUuid": "4a728ae2_0fcc0156",
+      "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ee6242c_b7c18695",
         "filename": "authfs/src/remote_file.rs",
         "patchSetId": 1
