@@ -16,12 +16,12 @@ pub const BINDER_SERVICE_IDENTIFIER: &str = "android.system.virtmanager";
 /// Implementation of `IVirtManager`, the entry point of the AIDL service.
 #[derive(Debug)]
 pub struct VirtManager {
-    state: Arc<Mutex<State>>,
+    state: Mutex<State>,
 }
 
 impl Default for VirtManager {
     fn default() -> Self {
-        let state = Arc::new(Mutex::new(State::default()));
+        let state = Mutex::new(State::default());
         VirtManager { state }
     }
 }
