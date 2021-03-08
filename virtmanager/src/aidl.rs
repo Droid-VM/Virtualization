@@ -23,14 +23,14 @@ use android_system_virtmanager::aidl::android::system::virtmanager::IVirtualMach
 };
 use android_system_virtmanager::binder::{self, Interface, StatusCode, Strong};
 use log::error;
-use std::sync::{Arc, Mutex};
+use std::sync::Mutex;
 
 pub const BINDER_SERVICE_IDENTIFIER: &str = "android.system.virtmanager";
 
 /// Implementation of `IVirtManager`, the entry point of the AIDL service.
 #[derive(Debug, Default)]
 pub struct VirtManager {
-    state: Arc<Mutex<State>>,
+    state: Mutex<State>,
 }
 
 impl Interface for VirtManager {}
@@ -45,18 +45,18 @@ impl IVirtManager for VirtManager {
         let instance = start_vm(config_path, cid)?;
         // TODO(qwandor): keep track of which CIDs are currently in use so that we can reuse them.
         state.next_cid = state.next_cid.checked_add(1).ok_or(StatusCode::UNKNOWN_ERROR)?;
-        Ok(VirtualMachine::create(Arc::new(instance)))
+        Ok(VirtualMachine::create(instance))
     }
 }
 
 /// Implementation of the AIDL `IVirtualMachine` interface. Used as a handle to a VM.
 #[derive(Debug)]
 struct VirtualMachine {
-    instance: Arc<VmInstance>,
+    instance: VmInstance,
 }
 
 impl VirtualMachine {
-    fn create(instance: Arc<VmInstance>) -> Strong<dyn IVirtualMachine> {
+    fn create(instance: VmInstance) -> Strong<dyn IVirtualMachine> {
         let binder = VirtualMachine { instance };
         BnVirtualMachine::new_binder(binder)
     }
