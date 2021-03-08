@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f23f0f58_29d6c047",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T19:23:11Z",
+      "side": 1,
+      "message": "nit: add AOSP license for all the new files",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "9848268f628f46467b20f24591352adbbdf34a38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd8a6dc4_8d1ae7ca",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T19:23:11Z",
+      "side": 1,
+      "message": "nit/optional: maybe inline this into the next line.",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 59
+      },
+      "revId": "9848268f628f46467b20f24591352adbbdf34a38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c2a2028_dcc05db7",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T19:23:11Z",
+      "side": 1,
+      "message": "Could this simply be VmInstance? Is Arc needed for drop to work (otherwise it seems immutable)?",
+      "range": {
+        "startLine": 48,
+        "startChar": 14,
+        "endLine": 48,
+        "endChar": 29
+      },
+      "revId": "9848268f628f46467b20f24591352adbbdf34a38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f661a04f_fccb744f",
+        "filename": "virtmanager/src/config.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T19:23:11Z",
+      "side": 1,
+      "message": "If the client is supposed to join the parameters by space, maybe mention in the comment.",
+      "range": {
+        "startLine": 15,
+        "startChar": 8,
+        "endLine": 15,
+        "endChar": 41
+      },
+      "revId": "9848268f628f46467b20f24591352adbbdf34a38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d03640db_43b41a6a",
+        "filename": "virtmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T19:23:11Z",
+      "side": 1,
+      "message": "How about add a validation function to VmConfig for these checks?",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 5
+      },
+      "revId": "9848268f628f46467b20f24591352adbbdf34a38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b9ab9f2_47faef30",
+        "filename": "virtmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T19:23:11Z",
+      "side": 1,
+      "message": "nit/optional: debug?",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 8
+      },
+      "revId": "9848268f628f46467b20f24591352adbbdf34a38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4688a9b_74305fde",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T19:23:11Z",
+      "side": 1,
+      "message": "Unrelated to this change, but you probably want to virtmanager\u0027s logs to go to logcat?",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 34,
+        "endChar": 14
+      },
+      "revId": "9848268f628f46467b20f24591352adbbdf34a38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
