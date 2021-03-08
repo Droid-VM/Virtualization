@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abda6027_ef338abb",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-03-08T03:41:58Z",
+      "side": 1,
+      "message": "nit: I found that cmdline is double-escaped. \nhttps://cs.android.com/android/platform/superproject/+/master:build/soong/filesystem/bootimg.go;l\u003d156\n\nFor now, it works fine because cmdline doesn\u0027t contain any \"unsafe chars\"(so ShellEscape is basically no-op). But I\u0027m afraid when we add any unsafe chars it will break by putting additional single quote around it. (which result in \"\u0027...\u0027\")\n\nWe probably need a different escaping for \"cmdline\" property than ShellEscape.",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 41
+      },
+      "revId": "9ecac555baedc08306790b7ef7f3b52d44122233",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
