@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f48356a_878e89c7",
+        "filename": "authfs/src/file.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T18:09:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d98a7978_883b130e",
+      "range": {
+        "startLine": 15,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 48
+      },
+      "revId": "f2390c7c29f2c8eaf7ff2436eedb76299c12d3f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f7bed8d_a3684113",
@@ -37,6 +61,24 @@
       "writtenOn": "2021-03-08T15:13:42Z",
       "side": 1,
       "message": "Why crash rather than returning an error?",
+      "revId": "f2390c7c29f2c8eaf7ff2436eedb76299c12d3f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23f78daf_aecf7d0f",
+        "filename": "authfs/src/file.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T18:09:36Z",
+      "side": 1,
+      "message": "Good question... I believe my original intention is just that, since the parameters are calculated and provided within authfs, we don\u0027t expect invalid range and it\u0027d be nice to crash early during development.  I\u0027m not very sure if this crash matters in case if the invalid input happens in production, i.e. the difference to a client process might just be that read(2) would return EIO (no crash) or ENOTCONN (crash). \n\nBut crash in production also doesn\u0027t give us anything, so filed b/182173887 to change the behavior.",
+      "parentUuid": "8f7bed8d_a3684113",
       "revId": "f2390c7c29f2c8eaf7ff2436eedb76299c12d3f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -58,6 +100,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54e3de60_02f40791",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T18:09:36Z",
+      "side": 1,
+      "message": "There are no traits in fsverity/.  These exported classes are supposed to provide traits in file/ for transparent I/O verifications.",
+      "parentUuid": "f9f25134_06157540",
+      "revId": "f2390c7c29f2c8eaf7ff2436eedb76299c12d3f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9e9b4fe_e88ce5b4",
@@ -71,6 +131,24 @@
       "writtenOn": "2021-03-08T15:13:42Z",
       "side": 1,
       "message": "It should probably be a separate change, but I\u0027d be happier if these `u64`s had names.",
+      "revId": "f2390c7c29f2c8eaf7ff2436eedb76299c12d3f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "954dd0ab_97491421",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T18:09:36Z",
+      "side": 1,
+      "message": "For sure, now that I know they can be named.  Will send you a follow-up.",
+      "parentUuid": "c9e9b4fe_e88ce5b4",
       "revId": "f2390c7c29f2c8eaf7ff2436eedb76299c12d3f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
