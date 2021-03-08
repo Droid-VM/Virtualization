@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55417690_99f21710",
+        "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T18:09:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "712e116a_205d99b8",
+      "range": {
+        "startLine": 49,
+        "startChar": 79,
+        "endLine": 49,
+        "endChar": 88
+      },
+      "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f06d9f5_d06b90ba",
@@ -54,6 +78,24 @@
       "writtenOn": "2021-03-08T15:05:51Z",
       "side": 1,
       "message": "Nit: a doc comment for the enum as a whole would be nice.",
+      "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fa52823_1054a41d",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T18:09:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f06d9f5_d06b90ba",
       "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -81,6 +123,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a149dcf1_c4212add",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T18:09:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07c5c69b_af5cbaee",
+      "range": {
+        "startLine": 76,
+        "startChar": 8,
+        "endLine": 76,
+        "endChar": 19
+      },
+      "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a3f334b_ea8b41e6",
@@ -98,6 +164,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c26fbcc_14466d7f",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T18:09:51Z",
+      "side": 1,
+      "message": "TIL.  Thanks!",
+      "parentUuid": "2a3f334b_ea8b41e6",
+      "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3e96b42_d7905728",
@@ -111,6 +195,24 @@
       "writtenOn": "2021-03-08T15:05:51Z",
       "side": 1,
       "message": "Maybe it would be helpful to implement a `file()` method on `FdConfig` which returns the file, whether it is read-only or read-write?",
+      "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0889996_0c8e5c81",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T18:09:51Z",
+      "side": 1,
+      "message": "Looks like I can just match both patterns at once.",
+      "parentUuid": "f3e96b42_d7905728",
       "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -168,6 +270,24 @@
       "writtenOn": "2021-03-08T15:05:51Z",
       "side": 1,
       "message": "It\u0027s more typical to write this as `service.clone()`. But actually, why do you need to to clone it at all? `Mutex::lock` only needs an `\u0026self`, so doesn\u0027t that just work directly?",
+      "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e832bda_3cc6a93d",
+        "filename": "authfs/src/remote_file.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-08T18:09:51Z",
+      "side": 1,
+      "message": "You\u0027re right.  Removed the clone.",
+      "parentUuid": "2ee6242c_b7c18695",
       "revId": "47c1a4bb915daf7a5a70e736e7b5b43f7d5d2ed2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
