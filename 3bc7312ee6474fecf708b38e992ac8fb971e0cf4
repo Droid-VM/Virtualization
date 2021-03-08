@@ -222,6 +222,30 @@
       },
       "revId": "3bc7312ee6474fecf708b38e992ac8fb971e0cf4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a84a5c82_e4093f27",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-03-08T18:02:54Z",
+      "side": 1,
+      "message": "Hmm, I don\u0027t understand why the management of VM should have such a restriction.\n\nSee `acloud`. We have `acloud [create|list|delete]`. See the commercial tools like virtualbox. It provides menus for users to create a VM, see the existing ones, and stop/destroy one from the list.\n\nAnyway, I think this discussion is out of scope of this CL. We can continue the discussion later on the doc, or elsewhere. :)",
+      "parentUuid": "47bcc6fb_4e4d4db4",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 58
+      },
+      "revId": "3bc7312ee6474fecf708b38e992ac8fb971e0cf4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
