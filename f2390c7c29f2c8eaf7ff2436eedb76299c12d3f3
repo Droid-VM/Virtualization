@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d98a7978_883b130e",
+        "filename": "authfs/src/file.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-08T15:13:42Z",
+      "side": 1,
+      "message": "Nit: import this function rather than fully qualifying it here.",
+      "range": {
+        "startLine": 15,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 48
+      },
+      "revId": "f2390c7c29f2c8eaf7ff2436eedb76299c12d3f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f7bed8d_a3684113",
+        "filename": "authfs/src/file.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-08T15:13:42Z",
+      "side": 1,
+      "message": "Why crash rather than returning an error?",
+      "revId": "f2390c7c29f2c8eaf7ff2436eedb76299c12d3f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9f25134_06157540",
+        "filename": "authfs/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-08T15:13:42Z",
+      "side": 1,
+      "message": "Should some of the traits also be exported publicly?",
+      "revId": "f2390c7c29f2c8eaf7ff2436eedb76299c12d3f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9e9b4fe_e88ce5b4",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-08T15:13:42Z",
+      "side": 1,
+      "message": "It should probably be a separate change, but I\u0027d be happier if these `u64`s had names.",
+      "revId": "f2390c7c29f2c8eaf7ff2436eedb76299c12d3f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
