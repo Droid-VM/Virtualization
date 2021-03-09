@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "93925861_9f0ed88f",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-09T12:04:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f23f0f58_29d6c047",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "9848268f628f46467b20f24591352adbbdf34a38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "fd8a6dc4_8d1ae7ca",
         "filename": "virtmanager/src/aidl.rs",
         "patchSetId": 5
@@ -37,6 +61,30 @@
       "writtenOn": "2021-03-08T19:23:11Z",
       "side": 1,
       "message": "nit/optional: maybe inline this into the next line.",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 59
+      },
+      "revId": "9848268f628f46467b20f24591352adbbdf34a38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70c03587_4a77cb74",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-09T12:04:27Z",
+      "side": 1,
+      "message": "In fact I can derive Default.",
+      "parentUuid": "fd8a6dc4_8d1ae7ca",
       "range": {
         "startLine": 24,
         "startChar": 8,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7571b573_e3e05aa9",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-09T12:04:27Z",
+      "side": 1,
+      "message": "You\u0027re right, thanks. This a remnant of a previous design. I\u0027ll fix it in a separate change though.",
+      "parentUuid": "9c2a2028_dcc05db7",
+      "range": {
+        "startLine": 48,
+        "startChar": 14,
+        "endLine": 48,
+        "endChar": 29
+      },
+      "revId": "9848268f628f46467b20f24591352adbbdf34a38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f661a04f_fccb744f",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-03-08T19:23:11Z",
       "side": 1,
       "message": "If the client is supposed to join the parameters by space, maybe mention in the comment.",
+      "range": {
+        "startLine": 15,
+        "startChar": 8,
+        "endLine": 15,
+        "endChar": 41
+      },
+      "revId": "9848268f628f46467b20f24591352adbbdf34a38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4225970a_e9028954",
+        "filename": "virtmanager/src/config.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-09T12:04:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f661a04f_fccb744f",
       "range": {
         "startLine": 15,
         "startChar": 8,
@@ -118,6 +214,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "51760cc7_e11466ca",
+        "filename": "virtmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-09T12:04:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d03640db_43b41a6a",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 5
+      },
+      "revId": "9848268f628f46467b20f24591352adbbdf34a38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5b9ab9f2_47faef30",
         "filename": "virtmanager/src/crosvm.rs",
         "patchSetId": 5
@@ -129,6 +249,30 @@
       "writtenOn": "2021-03-08T19:23:11Z",
       "side": 1,
       "message": "nit/optional: debug?",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 8
+      },
+      "revId": "9848268f628f46467b20f24591352adbbdf34a38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65fe054b_f72d66b6",
+        "filename": "virtmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-09T12:04:27Z",
+      "side": 1,
+      "message": "Is there any documented convention on what log level to use where? I haven\u0027t seen anything so far.",
+      "parentUuid": "5b9ab9f2_47faef30",
       "range": {
         "startLine": 78,
         "startChar": 4,
@@ -152,6 +296,30 @@
       "writtenOn": "2021-03-08T19:23:11Z",
       "side": 1,
       "message": "Unrelated to this change, but you probably want to virtmanager\u0027s logs to go to logcat?",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 34,
+        "endChar": 14
+      },
+      "revId": "9848268f628f46467b20f24591352adbbdf34a38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a889f70_36fce305",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-09T12:04:27Z",
+      "side": 1,
+      "message": "Yes, David filed b/182159441.",
+      "parentUuid": "b4688a9b_74305fde",
       "range": {
         "startLine": 34,
         "startChar": 4,
