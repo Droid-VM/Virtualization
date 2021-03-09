@@ -285,6 +285,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a68e7b99_74bda6d0",
+        "filename": "virtmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-09T17:04:05Z",
+      "side": 1,
+      "message": "Not I\u0027m aware of.  It\u0027s just that I\u0027ve heard people told me to avoid unnecessary log to reduce the pressure to the ring buffer in logd.  Then, on bugreport, the team can gather \"more\" logs.  But the specific levels are not clear to me.  If you think this can be useful to debug a bugreport from the user\u0027s device, feel free to keep it.",
+      "parentUuid": "65fe054b_f72d66b6",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 8
+      },
+      "revId": "9848268f628f46467b20f24591352adbbdf34a38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b4688a9b_74305fde",
         "filename": "virtmanager/src/main.rs",
         "patchSetId": 5
