@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fece851a_762b5db6",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-03-10T18:19:38Z",
+      "side": 1,
+      "message": "I don\u0027t think there is a better way. The UIDs are hardcoded in frameworks/base/core/java/android/os/Process.java and those constants used in various services (cs/Process.SHELL_UID). Is there Rust FFI for Java to export the constants from the Process class?",
+      "parentUuid": "1cfb6565_c7a1c464",
+      "revId": "c14ba104c8b0715ad70d507ee2023fbeea43d0fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b185f1a_ebe89ce3",
         "filename": "virtmanager/src/aidl.rs",
         "patchSetId": 3
