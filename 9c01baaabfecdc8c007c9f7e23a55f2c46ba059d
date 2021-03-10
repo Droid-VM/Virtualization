@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "36e09a91_d37a8c45",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-10T17:09:10Z",
+      "side": 1,
+      "message": "I think it is used across threads, and that\u0027s why I still need the `Mutex` around, but the point is that there is only one instance of it. The Binder library just creates multiple immutable references to it.",
+      "parentUuid": "5d3f0714_f462f01c",
+      "range": {
+        "startLine": 7,
+        "startChar": 30,
+        "endLine": 7,
+        "endChar": 57
+      },
+      "revId": "9c01baaabfecdc8c007c9f7e23a55f2c46ba059d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b8afadb0_f4e7dc1c",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
