@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4b133f4_c942b152",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-03-10T23:51:43Z",
+      "side": 1,
+      "message": "I think this could fail unless we add ${VIRT_APEX}/bin to $PATH (which was my case)",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 0
+      },
+      "revId": "ae85fd88b9fe8ac51360dac7a3eeca88e4a7c344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ede4f99_151495de",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-03-10T23:51:43Z",
+      "side": 1,
+      "message": "We need \"adb root\" to do this, right?",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 69
+      },
+      "revId": "ae85fd88b9fe8ac51360dac7a3eeca88e4a7c344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
