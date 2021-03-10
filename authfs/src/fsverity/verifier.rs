@@ -276,7 +276,8 @@ mod tests {
         let file_reader = LocalFileReader::new(File::open("testdata/input.4m")?)?;
         let file_size = file_reader.len();
         let merkle_tree = LocalFileReader::new(File::open("testdata/input.4m.merkle_dump")?)?;
-        let sig = include_bytes!("../../testdata/input.4m.fsv_sig").to_vec();
+        let mut sig = Vec::new();
+        let _ = File::open("testdata/input.4m.fsv_sig")?.read_to_end(&mut sig);
         assert!(VerifiedFileReader::new(&authenticator, file_reader, file_size, sig, merkle_tree)
             .is_err());
         Ok(())
