@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1f97ae7_c74343dc",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-03-11T02:12:15Z",
+      "side": 1,
+      "message": "nit: how about adding an assertion on exit code?",
+      "range": {
+        "startLine": 65,
+        "startChar": 22,
+        "endLine": 65,
+        "endChar": 28
+      },
+      "revId": "ae85fd88b9fe8ac51360dac7a3eeca88e4a7c344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4b133f4_c942b152",
         "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
         "patchSetId": 2
@@ -42,6 +65,29 @@
         "startChar": 0,
         "endLine": 104,
         "endChar": 69
+      },
+      "revId": "ae85fd88b9fe8ac51360dac7a3eeca88e4a7c344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4ffc9d7_916c5841",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-03-11T02:12:15Z",
+      "side": 1,
+      "message": "Multiple @Before/After methods are hard to reason about their ordering. (No guarantee).\nLet\u0027s have a single before(or setup) and a single after(or teardown).",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 11
       },
       "revId": "ae85fd88b9fe8ac51360dac7a3eeca88e4a7c344",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
