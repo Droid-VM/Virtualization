@@ -28,6 +28,8 @@ apex {
     },
     binaries: [
         "assemble_cvd",
+        "authfs", // TODO(victorhsieh): move to microdroid once we can run the test in VM.
+        "fd_server",
         "virtmanager",
         "vm",
     ],
