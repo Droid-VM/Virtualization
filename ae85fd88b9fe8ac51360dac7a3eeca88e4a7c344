@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb74589c_a3438f58",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-03-11T04:05:24Z",
+      "side": 1,
+      "message": "Originally I did that, but right now assemble_cvd fails although it correctly generates composite.img.",
+      "parentUuid": "b1f97ae7_c74343dc",
+      "range": {
+        "startLine": 65,
+        "startChar": 22,
+        "endLine": 65,
+        "endChar": 28
+      },
+      "revId": "ae85fd88b9fe8ac51360dac7a3eeca88e4a7c344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4b133f4_c942b152",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-03-10T23:51:43Z",
       "side": 1,
       "message": "I think this could fail unless we add ${VIRT_APEX}/bin to $PATH (which was my case)",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 0
+      },
+      "revId": "ae85fd88b9fe8ac51360dac7a3eeca88e4a7c344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c0842f7_55c97942",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-03-11T04:05:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4b133f4_c942b152",
       "range": {
         "startLine": 85,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d0a2a81_eaaf5d73",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-03-11T04:05:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ede4f99_151495de",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 69
+      },
+      "revId": "ae85fd88b9fe8ac51360dac7a3eeca88e4a7c344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4ffc9d7_916c5841",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-03-11T02:12:15Z",
       "side": 1,
       "message": "Multiple @Before/After methods are hard to reason about their ordering. (No guarantee).\nLet\u0027s have a single before(or setup) and a single after(or teardown).",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 11
+      },
+      "revId": "ae85fd88b9fe8ac51360dac7a3eeca88e4a7c344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d347a70_0f6f4d93",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-03-11T04:05:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4ffc9d7_916c5841",
       "range": {
         "startLine": 123,
         "startChar": 0,
