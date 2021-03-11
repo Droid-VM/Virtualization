@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dc8fc11_1743ad11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-03-11T09:08:40Z",
+      "side": 1,
+      "message": "Somewhat tangential, but... is it practical to include the adb client in the host/Android? If we eg write a test for an Android service using a VM, we wouldn\u0027t need to go via the host/PC to check the logs or some property inside the VM.",
+      "revId": "4a129aeca5e35621468cd837d6b4f01f06b58935",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae6ff7cf_d2fdb379",
+        "filename": "tests/hostside/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-03-11T09:08:40Z",
+      "side": 1,
+      "message": "Seems we should now be adding a license identifier, see aosp/1627563",
+      "revId": "4a129aeca5e35621468cd837d6b4f01f06b58935",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ca33f85_8a2b2c6a",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-03-11T09:08:40Z",
+      "side": 1,
+      "message": "I have this whole preparation section written as an AndroidTest.xml, if you\u0027d like.",
+      "range": {
+        "startLine": 71,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 62
+      },
+      "revId": "4a129aeca5e35621468cd837d6b4f01f06b58935",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c983674_4ce9a306",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-03-11T09:08:40Z",
+      "side": 1,
+      "message": "Also can be done by AndroidTest.xml",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 36
+      },
+      "revId": "4a129aeca5e35621468cd837d6b4f01f06b58935",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
