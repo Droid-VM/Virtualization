@@ -17,7 +17,11 @@
 mod sync;
 
 use android_system_virtmanager::aidl::android::system::virtmanager::IVirtManager::IVirtManager;
+use android_system_virtmanager::aidl::android::system::virtmanager::IVirtualMachineCallback::{
+    BnVirtualMachineCallback, IVirtualMachineCallback,
+};
 use android_system_virtmanager::binder::{get_interface, ProcessState, Strong};
+use android_system_virtmanager::binder::{Interface, Result as BinderResult};
 use anyhow::{bail, Context, Error};
 // TODO: Import these via android_system_virtmanager::binder once https://r.android.com/1619403 is
 // submitted.
@@ -58,10 +62,17 @@ fn command_run(virt_manager: Strong<dyn IVirtManager>, config_filename: &str) ->
     let cid = vm.getCid().context("Failed to get CID")?;
     println!("Started VM from {} with CID {}.", config_filename, cid);
 
-    // Wait until the VM dies. If we just returned immediately then the IVirtualMachine Binder
-    // object would be dropped and the VM would be killed.
-    wait_for_death(&mut vm.as_binder())?;
-    println!("VM died");
+    // Wait until the VM or VirtManager dies. If we just returned immediately then the
+    // IVirtualMachine Binder object would be dropped and the VM would be killed.
+    let dead = AtomicFlag::default();
+    let callback =
+        BnVirtualMachineCallback::new_binder(VirtualMachineCallback { dead: dead.clone() });
+    vm.registerCallback(callback.as_ref())?;
+    let death_recipient = wait_for_death(&mut vm.as_binder(), dead.clone())?;
+    dead.wait();
+    // Ensure that death_recipient isn't dropped before we wait on the flag, as it is removed from
+    // the Binder when it's dropped.
+    drop(death_recipient);
     Ok(())
 }
 
@@ -72,16 +83,29 @@ fn command_list(virt_manager: Strong<dyn IVirtManager>) -> Result<(), Error> {
     Ok(())
 }
 
-/// Block until the given Binder object dies.
-fn wait_for_death(binder: &mut impl IBinder) -> Result<(), Error> {
-    let dead = AtomicFlag::default();
-    let mut death_recipient = {
-        let dead = dead.clone();
-        DeathRecipient::new(move || {
-            dead.raise();
-        })
-    };
+/// Raise the given flag when the given Binder object dies.
+///
+/// If the returned DeathRecipient is dropped then this will no longer do anything.
+fn wait_for_death(binder: &mut impl IBinder, dead: AtomicFlag) -> Result<DeathRecipient, Error> {
+    let mut death_recipient = DeathRecipient::new(move || {
+        println!("VirtManager died");
+        dead.raise();
+    });
     binder.link_to_death(&mut death_recipient)?;
-    dead.wait();
-    Ok(())
+    Ok(death_recipient)
+}
+
+#[derive(Debug)]
+struct VirtualMachineCallback {
+    dead: AtomicFlag,
+}
+
+impl Interface for VirtualMachineCallback {}
+
+impl IVirtualMachineCallback for VirtualMachineCallback {
+    fn onDied(&self) -> BinderResult<()> {
+        println!("VM died");
+        self.dead.raise();
+        Ok(())
+    }
 }
