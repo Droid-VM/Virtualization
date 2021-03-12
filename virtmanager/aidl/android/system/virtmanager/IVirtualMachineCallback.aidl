@@ -15,23 +15,11 @@
  */
 package android.system.virtmanager;
 
-/** Information about a running VM, for debug purposes only. */
-parcelable VirtualMachineDebugInfo {
-    /** The CID assigned to the VM. */
-    int cid;
-
-    /** The UID of the process which requested the VM. */
-    int requester_uid;
-
-    /** The SID of the process which requested the VM. */
-    @nullable String requester_sid;
-
-    /**
-     * The PID of the process which requested the VM. Note that this process may no longer exist and
-     * the PID may have been reused for a different process, so this should not be trusted.
-     */
-    int requester_pid;
-
-    /** Whether the VM is still running. */
-    boolean running;
+/**
+ * An object which a client may register with the Virt Manager to get callbacks about the state of
+ * a particular VM.
+ */
+oneway interface IVirtualMachineCallback {
+    /** Called when the VM dies. */
+    void onDied();
 }
