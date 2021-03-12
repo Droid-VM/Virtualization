@@ -15,7 +15,18 @@
  */
 package android.system.virtmanager;
 
+import android.system.virtmanager.IVirtualMachineCallback;
+
 interface IVirtualMachine {
     /** Get the CID allocated to the VM. */
     int getCid();
+
+    /** Returns true if the VM is still running, or false if it has exited for any reason. */
+    boolean isRunning();
+
+    /**
+     * Register a Binder object to get callbacks when the state of the VM changes, such as if it
+     * dies.
+     */
+    void registerCallback(IVirtualMachineCallback callback);
 }
