@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87f11e26_130348c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-03-12T04:36:53Z",
+      "side": 1,
+      "message": "filed b/182527333",
+      "parentUuid": "8dc8fc11_1743ad11",
+      "revId": "4a129aeca5e35621468cd837d6b4f01f06b58935",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae6ff7cf_d2fdb379",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-03-11T09:08:40Z",
       "side": 1,
       "message": "Seems we should now be adding a license identifier, see aosp/1627563",
+      "revId": "4a129aeca5e35621468cd837d6b4f01f06b58935",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4c15ef0_b5f854ae",
+        "filename": "tests/hostside/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-03-12T04:36:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae6ff7cf_d2fdb379",
       "revId": "4a129aeca5e35621468cd837d6b4f01f06b58935",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -82,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9a7a10b_2a414e38",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-03-12T04:36:53Z",
+      "side": 1,
+      "message": "Yeah, I once tried that but wanted to have all these in the same page. These will eventually be removed; they shall be part of the virt APEX.",
+      "parentUuid": "29e38499_cebeb2a1",
+      "range": {
+        "startLine": 71,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 62
+      },
+      "revId": "4a129aeca5e35621468cd837d6b4f01f06b58935",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44eb14cf_8e401ee6",
@@ -99,6 +159,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a6f284c_2825c90d",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-03-12T04:36:53Z",
+      "side": 1,
+      "message": "No particular reason. That shall be the next step. I just wanted to directly translate the existing workflow in README.md into an automated test.",
+      "parentUuid": "44eb14cf_8e401ee6",
+      "revId": "4a129aeca5e35621468cd837d6b4f01f06b58935",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c983674_4ce9a306",
@@ -112,6 +190,30 @@
       "writtenOn": "2021-03-11T09:08:40Z",
       "side": 1,
       "message": "Also can be done by AndroidTest.xml",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 36
+      },
+      "revId": "4a129aeca5e35621468cd837d6b4f01f06b58935",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f432286_3bdeccce",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-03-12T04:36:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c983674_4ce9a306",
       "range": {
         "startLine": 130,
         "startChar": 0,
