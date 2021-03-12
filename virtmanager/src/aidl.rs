@@ -17,15 +17,17 @@
 use crate::config::VmConfig;
 use crate::crosvm::VmInstance;
 use crate::{Cid, FIRST_GUEST_CID};
+use ::binder::FromIBinder;
 use android_system_virtmanager::aidl::android::system::virtmanager::IVirtManager::IVirtManager;
 use android_system_virtmanager::aidl::android::system::virtmanager::IVirtualMachine::{
     BnVirtualMachine, IVirtualMachine,
 };
+use android_system_virtmanager::aidl::android::system::virtmanager::IVirtualMachineCallback::IVirtualMachineCallback;
 use android_system_virtmanager::aidl::android::system::virtmanager::VirtualMachineDebugInfo::VirtualMachineDebugInfo;
 use android_system_virtmanager::binder::{
     self, Interface, ParcelFileDescriptor, StatusCode, Strong, ThreadState,
 };
-use log::error;
+use log::{debug, error};
 use std::fs::File;
 use std::sync::{Arc, Mutex, Weak};
 
@@ -53,13 +55,11 @@ impl IVirtManager for VirtManager {
         log_fd: Option<&ParcelFileDescriptor>,
     ) -> binder::Result<Strong<dyn IVirtualMachine>> {
         let state = &mut *self.state.lock().unwrap();
-        let cid = state.next_cid;
+        let cid = state.get_cid()?;
         let log_fd = log_fd
             .map(|fd| fd.as_ref().try_clone().map_err(|_| StatusCode::UNKNOWN_ERROR))
             .transpose()?;
-        let instance = Arc::new(start_vm(config_path, cid, log_fd)?);
-        // TODO(qwandor): keep track of which CIDs are currently in use so that we can reuse them.
-        state.next_cid = state.next_cid.checked_add(1).ok_or(StatusCode::UNKNOWN_ERROR)?;
+        let instance = start_vm(config_path, cid, log_fd)?;
         state.add_vm(Arc::downgrade(&instance));
         Ok(VirtualMachine::create(instance))
     }
@@ -78,6 +78,7 @@ impl IVirtManager for VirtManager {
             .map(|vm| VirtualMachineDebugInfo {
                 cid: vm.cid as i32,
                 configPath: vm.config_path.clone(),
+                running: vm.running(),
             })
             .collect();
         Ok(cids)
@@ -110,6 +111,46 @@ impl IVirtualMachine for VirtualMachine {
     fn getCid(&self) -> binder::Result<i32> {
         Ok(self.instance.cid as i32)
     }
+
+    fn isRunning(&self) -> binder::Result<bool> {
+        Ok(self.instance.running())
+    }
+
+    fn registerCallback(&self, callback: &dyn IVirtualMachineCallback) -> binder::Result<()> {
+        let callback = FromIBinder::try_from(callback.as_binder()).unwrap();
+        // TODO: Should this give an error if the VM is already dead?
+        self.instance.callbacks.add(callback);
+        Ok(())
+    }
+}
+
+impl Drop for VirtualMachine {
+    fn drop(&mut self) {
+        debug!("Dropping {:?}", self);
+        self.instance.kill();
+    }
+}
+
+/// A set of Binders to be called back in response to various events on the VM, such as when it
+/// dies.
+#[derive(Debug, Default)]
+pub struct VirtualMachineCallbacks(Mutex<Vec<Strong<dyn IVirtualMachineCallback>>>);
+
+impl VirtualMachineCallbacks {
+    /// Call all registered callbacks to say that the VM has died.
+    pub fn callback_on_died(&self) {
+        let callbacks = &*self.0.lock().unwrap();
+        for callback in callbacks {
+            if let Err(e) = callback.onDied() {
+                error!("Error calling callback: {}", e);
+            }
+        }
+    }
+
+    /// Add a new callback to the set.
+    fn add(&self, callback: Strong<dyn IVirtualMachineCallback>) {
+        self.0.lock().unwrap().push(callback);
+    }
 }
 
 /// The mutable state of the Virt Manager. There should only be one instance of this struct.
@@ -126,7 +167,7 @@ struct State {
 }
 
 impl State {
-    /// Get a list of VMs which are currently running.
+    /// Get a list of VMs which still have Binder references to them.
     fn vms(&self) -> Vec<Arc<VmInstance>> {
         // Attempt to upgrade the weak pointers to strong pointers.
         self.vms.iter().filter_map(Weak::upgrade).collect()
@@ -140,6 +181,14 @@ impl State {
         // Actually add the new VM.
         self.vms.push(vm);
     }
+
+    /// Get the next available CID, or an error if we have run out.
+    fn get_cid(&mut self) -> binder::Result<Cid> {
+        // TODO(qwandor): keep track of which CIDs are currently in use so that we can reuse them.
+        let cid = self.next_cid;
+        self.next_cid = self.next_cid.checked_add(1).ok_or(StatusCode::UNKNOWN_ERROR)?;
+        Ok(cid)
+    }
 }
 
 impl Default for State {
@@ -150,7 +199,7 @@ impl Default for State {
 
 /// Start a new VM instance from the given VM config filename. This assumes the VM is not already
 /// running.
-fn start_vm(config_path: &str, cid: Cid, log_fd: Option<File>) -> binder::Result<VmInstance> {
+fn start_vm(config_path: &str, cid: Cid, log_fd: Option<File>) -> binder::Result<Arc<VmInstance>> {
     let config = VmConfig::load(config_path).map_err(|e| {
         error!("Failed to load VM config {}: {:?}", config_path, e);
         StatusCode::BAD_VALUE

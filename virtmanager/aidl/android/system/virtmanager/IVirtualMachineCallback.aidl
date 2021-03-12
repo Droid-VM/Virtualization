@@ -15,17 +15,11 @@
  */
 package android.system.virtmanager;
 
-/** Information about a running VM, for debug purposes only. */
-parcelable VirtualMachineDebugInfo {
-    /** The CID assigned to the VM. */
-    int cid;
-
-    /**
-     * The filename of the config file used to start the VM. This may have changed since it was
-     * read so it shouldn't be trusted; it is only stored for debugging purposes.
-     */
-    String configPath;
-
-    /** Whether the VM is still running. */
-    boolean running;
+/**
+ * An object which a client may register with the Virt Manager to get callbacks about the state of
+ * a particular VM.
+ */
+oneway interface IVirtualMachineCallback {
+    /** Called when the VM dies. */
+    void onDied();
 }
