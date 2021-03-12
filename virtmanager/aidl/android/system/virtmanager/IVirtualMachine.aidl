@@ -18,4 +18,7 @@ package android.system.virtmanager;
 interface IVirtualMachine {
     /** Get the CID allocated to the VM. */
     int getCid();
+
+    /** Returns true if the VM is still running, or false if it has exited for any reason. */
+    boolean isRunning();
 }

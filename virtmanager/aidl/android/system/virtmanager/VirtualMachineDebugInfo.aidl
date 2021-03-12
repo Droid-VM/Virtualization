@@ -25,4 +25,7 @@ parcelable VirtualMachineDebugInfo {
      * read so it shouldn't be trusted; it is only stored for debugging purposes.
      */
     String configPath;
+
+    /** Whether the VM is still running. */
+    boolean running;
 }

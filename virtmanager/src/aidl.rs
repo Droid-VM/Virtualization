@@ -68,6 +68,7 @@ impl IVirtManager for VirtManager {
             .map(|vm| VirtualMachineDebugInfo {
                 cid: vm.cid as i32,
                 configPath: vm.config_path.clone(),
+                running: vm.running(),
             })
             .collect();
         Ok(cids)
@@ -99,6 +100,10 @@ impl Interface for VirtualMachine {}
 impl IVirtualMachine for VirtualMachine {
     fn getCid(&self) -> binder::Result<i32> {
         Ok(self.instance.cid as i32)
+    }
+
+    fn isRunning(&self) -> binder::Result<bool> {
+        Ok(self.instance.running())
     }
 }
 

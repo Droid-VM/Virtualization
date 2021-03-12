@@ -18,7 +18,11 @@ use crate::config::VmConfig;
 use crate::Cid;
 use anyhow::Error;
 use log::{debug, error, info};
-use std::process::{Child, Command};
+use shared_child::SharedChild;
+use std::process::Command;
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::Arc;
+use std::thread::{self, JoinHandle};
 
 const CROSVM_PATH: &str = "/apex/com.android.virt/bin/crosvm";
 
@@ -26,7 +30,11 @@ const CROSVM_PATH: &str = "/apex/com.android.virt/bin/crosvm";
 #[derive(Debug)]
 pub struct VmInstance {
     /// The crosvm child process.
-    child: Child,
+    child: Arc<SharedChild>,
+    /// Thread which waits on the child process.
+    thread: JoinHandle<()>,
+    /// Whether the VM is still running.
+    running: Arc<AtomicBool>,
     /// The CID assigned to the VM for vsock communication.
     pub cid: Cid,
     /// The filename of the config file that was used to start the VM. This may have changed since
@@ -36,15 +44,35 @@ pub struct VmInstance {
 
 impl VmInstance {
     /// Create a new `VmInstance` for the given process.
-    fn new(child: Child, cid: Cid, config_path: &str) -> VmInstance {
-        VmInstance { child, cid, config_path: config_path.to_owned() }
+    fn new(
+        child: Arc<SharedChild>,
+        thread: JoinHandle<()>,
+        cid: Cid,
+        config_path: &str,
+        running: Arc<AtomicBool>,
+    ) -> VmInstance {
+        VmInstance { child, thread, cid, config_path: config_path.to_owned(), running }
     }
 
     /// Start an instance of `crosvm` to manage a new VM. The `crosvm` instance will be killed when
     /// the `VmInstance` is dropped.
     pub fn start(config: &VmConfig, cid: Cid, config_path: &str) -> Result<VmInstance, Error> {
-        let child = run_vm(config, cid)?;
-        Ok(VmInstance::new(child, cid, config_path))
+        let child = Arc::new(run_vm(config, cid)?);
+        let running = Arc::new(AtomicBool::new(true));
+        let child_clone = child.clone();
+        let running_clone = running.clone();
+        let thread = thread::spawn(move || {
+            match child_clone.wait() {
+                Err(e) => error!("Error waiting for crosvm instance to die: {}", e),
+                Ok(status) => info!("Crosvm exited with status {}", status),
+            }
+            running_clone.store(false, Ordering::Release);
+        });
+        Ok(VmInstance::new(child, thread, cid, config_path, running))
+    }
+
+    pub fn running(&self) -> bool {
+        self.running.load(Ordering::Acquire)
     }
 }
 
@@ -55,16 +83,11 @@ impl Drop for VmInstance {
         if let Err(e) = self.child.kill() {
             error!("Error killing crosvm instance: {}", e);
         }
-        // We need to wait on the process after killing it to avoid zombies.
-        match self.child.wait() {
-            Err(e) => error!("Error waiting for crosvm instance to die: {}", e),
-            Ok(status) => info!("Crosvm exited with status {}", status),
-        }
     }
 }
 
 /// Start an instance of `crosvm` to manage a new VM.
-fn run_vm(config: &VmConfig, cid: Cid) -> Result<Child, Error> {
+fn run_vm(config: &VmConfig, cid: Cid) -> Result<SharedChild, Error> {
     config.validate()?;
 
     let mut command = Command::new(CROSVM_PATH);
@@ -88,6 +111,5 @@ fn run_vm(config: &VmConfig, cid: Cid) -> Result<Child, Error> {
         command.arg(kernel);
     }
     info!("Running {:?}", command);
-    // TODO: Monitor child process, and remove from VM map if it dies.
-    Ok(command.spawn()?)
+    Ok(SharedChild::spawn(&mut command)?)
 }
