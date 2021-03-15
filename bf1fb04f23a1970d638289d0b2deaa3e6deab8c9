@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d48f9535_d88f5ea5",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-15T17:42:29Z",
+      "side": 1,
+      "message": "I don\u0027t think this is defined on device.  The equivalent is \"ro.build.type\" system property, but it looks like you need FFI for that at the moment...\n\nHow about just use the default, whatever it is?  Not sure if it\u0027s ANDROID_LOG_DEFAULT, which seems to be the lowest: https://source.corp.google.com/android/system/logging/liblog/include/android/log.h;l\u003d77",
+      "range": {
+        "startLine": 37,
+        "startChar": 17,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "bf1fb04f23a1970d638289d0b2deaa3e6deab8c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
