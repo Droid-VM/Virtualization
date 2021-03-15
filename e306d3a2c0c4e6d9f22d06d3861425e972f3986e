@@ -16,6 +16,23 @@
       "message": "I don\u0027t fully understand this change, but LGTM as far as I understand it.",
       "revId": "e306d3a2c0c4e6d9f22d06d3861425e972f3986e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ab6937e_fd44f057",
+        "filename": "authfs/src/fsverity/verifier.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-15T12:11:06Z",
+      "side": 1,
+      "message": "You can probably do this in one line with `std::fs::read`. But either way, do add a `?` to check the error rather than ignoring it.",
+      "revId": "e306d3a2c0c4e6d9f22d06d3861425e972f3986e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
