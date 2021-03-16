@@ -51,6 +51,24 @@
       "parentUuid": "3ab6937e_fd44f057",
       "revId": "e306d3a2c0c4e6d9f22d06d3861425e972f3986e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "971249a6_c7b4cfe5",
+        "filename": "authfs/src/fsverity/verifier.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-16T11:33:29Z",
+      "side": 1,
+      "message": "I don\u0027t mean the success value of the number of bytes read, I mean the error case. But you\u0027re checking it now so that\u0027s good.",
+      "parentUuid": "954a8869_0649cb02",
+      "revId": "e306d3a2c0c4e6d9f22d06d3861425e972f3986e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
