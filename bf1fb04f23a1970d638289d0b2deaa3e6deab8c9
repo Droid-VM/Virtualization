@@ -93,6 +93,30 @@
       },
       "revId": "bf1fb04f23a1970d638289d0b2deaa3e6deab8c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2d9f61c_104857ea",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-16T11:15:21Z",
+      "side": 1,
+      "message": "Victor was saying on another change that we shouldn\u0027t be too verbose to logcat, but I\u0027d still like to have plenty of logging for debugging things and tests. There was some talk in the Rusty Droids chat about making the log level controllable at run time via an environment variable (similar to how `env_logger` does it) but for now this seemed like a reasonable compromise.",
+      "parentUuid": "80240a44_07bc5876",
+      "range": {
+        "startLine": 37,
+        "startChar": 44,
+        "endLine": 37,
+        "endChar": 48
+      },
+      "revId": "bf1fb04f23a1970d638289d0b2deaa3e6deab8c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
