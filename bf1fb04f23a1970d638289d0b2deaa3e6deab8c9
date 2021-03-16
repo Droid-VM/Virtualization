@@ -141,6 +141,30 @@
       },
       "revId": "bf1fb04f23a1970d638289d0b2deaa3e6deab8c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a32e0e4_fcc9273d",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-16T11:43:01Z",
+      "side": 1,
+      "message": "I don\u0027t think it currently does that. And the filtering is done by the Rust log framework, configured by `android_logger`: https://github.com/Nercury/android_logger-rs/blob/master/src/lib.rs#L441.",
+      "parentUuid": "3eeff71b_2a44b1ca",
+      "range": {
+        "startLine": 37,
+        "startChar": 44,
+        "endLine": 37,
+        "endChar": 48
+      },
+      "revId": "bf1fb04f23a1970d638289d0b2deaa3e6deab8c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
