@@ -117,6 +117,30 @@
       },
       "revId": "bf1fb04f23a1970d638289d0b2deaa3e6deab8c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eeff71b_2a44b1ca",
+        "filename": "virtmanager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-03-16T11:17:15Z",
+      "side": 1,
+      "message": "Ack. Does this not plug into the same liblog as C++? I would expect the environment variable to be parsed there",
+      "parentUuid": "d2d9f61c_104857ea",
+      "range": {
+        "startLine": 37,
+        "startChar": 44,
+        "endLine": 37,
+        "endChar": 48
+      },
+      "revId": "bf1fb04f23a1970d638289d0b2deaa3e6deab8c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
