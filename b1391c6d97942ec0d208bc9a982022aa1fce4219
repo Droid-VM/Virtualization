@@ -51,6 +51,24 @@
       "message": "Should we keep this for the case where the client doesn\u0027t pass an FD, or just drop the console logs in that case?",
       "revId": "b1391c6d97942ec0d208bc9a982022aa1fce4219",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cf6b5f9_9fe1500c",
+        "filename": "virtmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-03-17T23:40:34Z",
+      "side": 1,
+      "message": "I think it shouldn\u0027t be by default, but would still be useful when working in console. So, can we add an option to the \u0027vm\u0027 tool to turn this on?",
+      "parentUuid": "5b016a41_10e9149c",
+      "revId": "b1391c6d97942ec0d208bc9a982022aa1fce4219",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
