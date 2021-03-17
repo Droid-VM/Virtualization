@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "042db458_e47b1b56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-17T18:37:04Z",
+      "side": 1,
+      "message": "One clarification, but otherwise LGTM",
+      "revId": "3f58a4846d487c2a018305c7593d43398dc5910b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d02affd_df318d90",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-17T18:37:04Z",
+      "side": 1,
+      "message": "Does it matter if this changes after this test? Or is that not possible?",
+      "revId": "3f58a4846d487c2a018305c7593d43398dc5910b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca9151c4_46b7a6f1",
+        "filename": "authfs/src/remote_file.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-17T18:37:04Z",
+      "side": 1,
+      "message": "Related to comment in previous CL, it seems wrong to implement this trait on something that isn\u0027t read-only.",
+      "range": {
+        "startLine": 130,
+        "startChar": 5,
+        "endLine": 130,
+        "endChar": 45
+      },
+      "revId": "3f58a4846d487c2a018305c7593d43398dc5910b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
