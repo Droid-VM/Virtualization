@@ -1,0 +1,176 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67e5c4ad_19d9691e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-17T18:08:34Z",
+      "side": 1,
+      "message": "Mostly looking good. I\u0027ve got a couple of questions on the error handling that should be answered.\n\nI\u0027ve also been questioning the traits where they sometimes get a little confusing, but that doesn\u0027t necessarily need to be addressed in this CL.",
+      "revId": "0539378fbb76fc7c9fb9d3f4668c108461cd3d0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfc0cdda_579e7ffa",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-17T18:08:34Z",
+      "side": 1,
+      "message": "typo: RPMB. But also not that Android doesn\u0027t directly expose RPMB with the current APIs so it might be better to simply state the weakness for the time being.",
+      "range": {
+        "startLine": 52,
+        "startChar": 89,
+        "endLine": 52,
+        "endChar": 93
+      },
+      "revId": "0539378fbb76fc7c9fb9d3f4668c108461cd3d0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f779c6a_5dbdd01f",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-17T18:08:34Z",
+      "side": 1,
+      "message": "I don\u0027t quite understand what this is saying. Might just need to be reworded, or removed if the type system is maintaining this invariant anyway?",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 32
+      },
+      "revId": "0539378fbb76fc7c9fb9d3f4668c108461cd3d0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e30cef7_03d14768",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-17T18:08:34Z",
+      "side": 1,
+      "message": "Was there a reason to not use the standard `Seek` and `Write` traits instead of this custom one? Or Unix\u0027s `FileExt` if the file cursor shouldn\u0027t be moving.",
+      "revId": "0539378fbb76fc7c9fb9d3f4668c108461cd3d0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "528a16e6_6d5c49b7",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-17T18:08:34Z",
+      "side": 1,
+      "message": "files are",
+      "range": {
+        "startLine": 94,
+        "startChar": 60,
+        "endLine": 94,
+        "endChar": 67
+      },
+      "revId": "0539378fbb76fc7c9fb9d3f4668c108461cd3d0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40811540_a96d1112",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-17T18:08:34Z",
+      "side": 1,
+      "message": "This sounds like a contradiction, it can\u0027t be both read-only and writable? Related to previous comment on the custom traits.",
+      "range": {
+        "startLine": 95,
+        "startChar": 33,
+        "endLine": 95,
+        "endChar": 66
+      },
+      "revId": "0539378fbb76fc7c9fb9d3f4668c108461cd3d0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27257033_5691dcdd",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-17T18:08:34Z",
+      "side": 1,
+      "message": "Should all of these error paths also be turned into partially successful writes, if that\u0027s indeed the case? Would be best to wrap the things that could error in a sub-function if that\u0027s the case.",
+      "range": {
+        "startLine": 178,
+        "startChar": 35,
+        "endLine": 178,
+        "endChar": 36
+      },
+      "revId": "0539378fbb76fc7c9fb9d3f4668c108461cd3d0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "347c657b_c02e7323",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-17T18:08:34Z",
+      "side": 1,
+      "message": "In the event of an error, there will have been a partial write to the file which will mean the block is corrupted as it won\u0027t match the hash. Should that be the documented behaviour?",
+      "range": {
+        "startLine": 185,
+        "startChar": 58,
+        "endLine": 185,
+        "endChar": 59
+      },
+      "revId": "0539378fbb76fc7c9fb9d3f4668c108461cd3d0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
