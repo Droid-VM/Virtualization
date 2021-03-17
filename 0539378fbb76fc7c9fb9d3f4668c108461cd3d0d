@@ -147,6 +147,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d39dfcd_693c171b",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-17T23:35:31Z",
+      "side": 1,
+      "message": "It confuses me that it\u0027s immutable when it\u0027s writing to mutate it. Sure the piece of memory might not mutate but the things it represents does. But it\u0027s too late to think to hard about it.",
+      "parentUuid": "4a74d5f1_7a92c597",
+      "revId": "0539378fbb76fc7c9fb9d3f4668c108461cd3d0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "528a16e6_6d5c49b7",

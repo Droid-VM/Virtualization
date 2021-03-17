@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eea0155f_717e0f69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-17T23:35:31Z",
+      "side": 1,
+      "message": "There still needs to be care taken with the error cases, with those fixed it seems fine to merge and touch other bits up later. Given how much trouble error handling is giving, could there be some tests for them? ",
+      "revId": "e15971fcb66d54dd258247c11e01c020a9350aa8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed3e40b3_a7832f8d",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-17T23:35:31Z",
+      "side": 1,
+      "message": "these too, previous iteration might have written something. This whole loop needed to be moved into the sub-function",
+      "range": {
+        "startLine": 175,
+        "startChar": 38,
+        "endLine": 175,
+        "endChar": 39
+      },
+      "revId": "e15971fcb66d54dd258247c11e01c020a9350aa8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bde92db6_811b81a2",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-17T23:35:31Z",
+      "side": 1,
+      "message": "and this",
+      "range": {
+        "startLine": 194,
+        "startChar": 13,
+        "endLine": 194,
+        "endChar": 14
+      },
+      "revId": "e15971fcb66d54dd258247c11e01c020a9350aa8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee47d939_a770c11f",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-17T23:35:31Z",
+      "side": 1,
+      "message": "IIUC, when this happens, the block becomes unreadable (hash check will fail) and can only be recovered a successful re-write of the entire block.\n\nWithin the writer, you could try writing something that would be consistent, try to update the hash to match what you actually managed to write or signal to the caller that this specific situation occurred so they know how to try and recover it.",
+      "range": {
+        "startLine": 197,
+        "startChar": 21,
+        "endLine": 198,
+        "endChar": 49
+      },
+      "revId": "e15971fcb66d54dd258247c11e01c020a9350aa8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
