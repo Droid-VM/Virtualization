@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b61f65d8_cd1cdea8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-03-18T13:44:26Z",
+      "side": 1,
+      "message": "Hey, was hoping this could be a separate binary that would daemonize itself using `setsid`. Turns out that Android does not allow that anymore. The other option was a completely separate service and that really doesn\u0027t make much sense given how small this change is. PTAL and let me know what you think.",
+      "revId": "bcc07e60e9f00d64b730b56330ec9fb032cf94ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
