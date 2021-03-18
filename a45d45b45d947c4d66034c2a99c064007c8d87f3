@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9426cf06_e2b939a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-18T09:59:45Z",
+      "side": 1,
+      "message": "There\u0027s also the renaming of ReadOnly_ trait that isn\u0027t actually used for something that\u0027s read-only, but that can go on top.",
+      "revId": "a45d45b45d947c4d66034c2a99c064007c8d87f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcef6c35_4c0a7409",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-18T09:59:45Z",
+      "side": 1,
+      "message": "Does this suit a trait for file operations with lookup, getattr, open, read.. vs matching the cases here?",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 19
+      },
+      "revId": "a45d45b45d947c4d66034c2a99c064007c8d87f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
