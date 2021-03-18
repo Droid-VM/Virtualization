@@ -175,6 +175,30 @@
       },
       "revId": "e15971fcb66d54dd258247c11e01c020a9350aa8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcbe66e3_1a24d8e0",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-18T18:33:41Z",
+      "side": 1,
+      "message": "Further reading of `man 2 write` suggests inconsistency can be expected as part of the API. So you\u0027re right that a failed write_all_at() should fail the whole operation. But if it\u0027s just the new hash generation that fails, nothing is made inconsistent so we can safely report it as a partially successful write to safely lock in the successful changes that have been made.",
+      "parentUuid": "9b3ee6bb_d78acf88",
+      "range": {
+        "startLine": 197,
+        "startChar": 21,
+        "endLine": 198,
+        "endChar": 49
+      },
+      "revId": "e15971fcb66d54dd258247c11e01c020a9350aa8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
