@@ -165,6 +165,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7110e5e_f3fdf883",
+        "filename": "authfs/src/writer.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-18T17:07:52Z",
+      "side": 1,
+      "message": "Sorry, don\u0027t mean to keep you up.  Please try to review mine during office hour :)\n\nIt\u0027s similar to FileExt.  The struct object itself has no state to change.  It only sends the data (offset, blob) to the receiver to handle.  The receiver (kernel or fd_server) eventually changes the state on disk.",
+      "parentUuid": "1d39dfcd_693c171b",
+      "revId": "0539378fbb76fc7c9fb9d3f4668c108461cd3d0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "528a16e6_6d5c49b7",
