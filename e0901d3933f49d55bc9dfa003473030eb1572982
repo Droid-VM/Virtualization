@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4af55f24_4e816e3b",
+        "filename": "authfs/fd_server/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-19T17:32:50Z",
+      "side": 1,
+      "message": "FYI, I wasn\u0027t sure if this can blow the size, but apparently there is no \"libnix\" in $OUT (make sure since I only use its macro).",
+      "range": {
+        "startLine": 16,
+        "startChar": 9,
+        "endLine": 16,
+        "endChar": 15
+      },
+      "revId": "e0901d3933f49d55bc9dfa003473030eb1572982",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
