@@ -168,6 +168,24 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
     }
 
     @Test
+    public void testReadWithFsverityVerification_TreeFromIoctl()
+            throws DeviceNotAvailableException, InterruptedException {
+        // Setup
+        runFdServerInBackground("3<input.apk", "--ro-fds 3");
+
+        String size = queryFileSize(TEST_DIR + "/input.apk");
+        runAuthFsInBackground("--remote-ro-file 11:3:" + size + ":cert.der");
+        Thread.sleep(TIME_BUDGET_AUTHFS_SETUP);
+
+        // Action
+        String actualHash = computeFileHashInGuest(MOUNT_DIR + "/11");
+
+        // Verify
+        String expectedHash = computeFileHash(TEST_DIR + "/input.apk");
+        assertEquals("Inconsistent hash from /authfs/11: ", expectedHash, actualHash);
+    }
+
+    @Test
     public void testWriteThroughCorrectly()
             throws DeviceNotAvailableException, InterruptedException {
         // Setup
@@ -247,6 +265,10 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
             CLog.e("Unrecognized output by sha256sum: " + result);
             return "";
         }
+    }
+
+    private String queryFileSize(String path) throws DeviceNotAvailableException {
+        return expectRemoteCommandToSucceed("stat -c '%s' " + path);
     }
 
     private void runAuthFsInBackground(String flags) throws DeviceNotAvailableException {
