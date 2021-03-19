@@ -22,6 +22,29 @@
       },
       "revId": "e0901d3933f49d55bc9dfa003473030eb1572982",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e92e4126_eeaefa35",
+        "filename": "authfs/fd_server/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-19T17:45:39Z",
+      "side": 1,
+      "message": "Eric, I noticed a small quirk(?) in the API of FS_VERITY_METADATA_TYPE_SIGNATURE.  Since the signature size is not a constant(?), the caller needs to prepare a large enough buffer and hope the ioctl to return the whole signature at once.  Does it sound correct?\n\nAnyway, this seems fine with the current implementation, i.e. the ioctl won\u0027t be interrupted, and always return the full size.  Do you see any problem here?",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 1
+      },
+      "revId": "e0901d3933f49d55bc9dfa003473030eb1572982",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
