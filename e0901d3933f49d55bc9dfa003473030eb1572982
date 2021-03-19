@@ -69,6 +69,30 @@
       },
       "revId": "e0901d3933f49d55bc9dfa003473030eb1572982",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbd5ff81_d42f1260",
+        "filename": "authfs/fd_server/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-19T17:59:41Z",
+      "side": 1,
+      "message": "I see.  We don\u0027t need to add extra ioctl for this simple case.  Thanks!",
+      "parentUuid": "39e81196_5d644e1a",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 1
+      },
+      "revId": "e0901d3933f49d55bc9dfa003473030eb1572982",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
