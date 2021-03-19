@@ -45,6 +45,30 @@
       },
       "revId": "e0901d3933f49d55bc9dfa003473030eb1572982",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39e81196_5d644e1a",
+        "filename": "authfs/fd_server/src/fsverity.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-03-19T17:56:40Z",
+      "side": 1,
+      "message": "The ioctl behaves like pread(), so yes it doesn\u0027t return the size.  If we needed a way to get the size ahead of time, it would need to be a separate ioctl, similar to how stat() is separate from pread().  I hoped that this would not be necessary since the sizes can either be known ahead of time or are fairly small.  If you want to handle arbitrary sizes anyway, you can just start with some buffer size and keep doubling it if the ioctl fills it completely.  But I think if you just start with a 4KB buffer, the signature won\u0027t ever fill it in practice.  The RSA-4096 signatures are less than 1KB, and ECDSA or Ed25519 signatures (if they were ever used here) would be even smaller.",
+      "parentUuid": "e92e4126_eeaefa35",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 1
+      },
+      "revId": "e0901d3933f49d55bc9dfa003473030eb1572982",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
