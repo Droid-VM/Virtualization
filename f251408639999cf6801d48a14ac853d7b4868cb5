@@ -33,6 +33,69 @@
       "message": "LGTM. I didn\u0027t +2 as I don\u0027t have a good rust readability.",
       "revId": "f251408639999cf6801d48a14ac853d7b4868cb5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1c0b748_7826c84e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-19T14:17:42Z",
+      "side": 1,
+      "message": "Thanks, I think this is a reasonable compromise.\n\nLooks good once the issues below are fixed.",
+      "revId": "f251408639999cf6801d48a14ac853d7b4868cb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2053309_99f5e09c",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-19T14:17:42Z",
+      "side": 1,
+      "message": "`None`",
+      "range": {
+        "startLine": 103,
+        "startChar": 18,
+        "endLine": 103,
+        "endChar": 22
+      },
+      "revId": "f251408639999cf6801d48a14ac853d7b4868cb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4839ef46_e5f8355b",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-19T14:17:42Z",
+      "side": 1,
+      "message": "Can you just do `vm.getCid() \u003d\u003d Ok(cid)`?\n\n(It would be nicer if we could do this without going through the Binder interface, but I\u0027m not sure if there\u0027s a way to do that.)",
+      "range": {
+        "startLine": 186,
+        "startChar": 27,
+        "endLine": 186,
+        "endChar": 73
+      },
+      "revId": "f251408639999cf6801d48a14ac853d7b4868cb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
