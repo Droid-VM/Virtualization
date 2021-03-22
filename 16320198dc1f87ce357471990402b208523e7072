@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "556304d9_6e66c96f",
+        "filename": "authfs/fd_server/src/fsverity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-22T09:50:40Z",
+      "side": 1,
+      "message": "`unreachable!()` if you\u0027re sure and don\u0027t want to consider this case",
+      "range": {
+        "startLine": 54,
+        "startChar": 66,
+        "endLine": 54,
+        "endChar": 102
+      },
+      "revId": "16320198dc1f87ce357471990402b208523e7072",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bbec25b_66d8a139",
+        "filename": "authfs/fd_server/src/fsverity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-22T09:50:40Z",
+      "side": 1,
+      "message": "nit: ..., if it exists",
+      "range": {
+        "startLine": 59,
+        "startChar": 40,
+        "endLine": 59,
+        "endChar": 52
+      },
+      "revId": "16320198dc1f87ce357471990402b208523e7072",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "776a88a7_b1d4f46f",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-22T09:50:40Z",
+      "side": 1,
+      "message": "`let arbitrary_new_value \u003d 0;` or similar? Comment says it doesn\u0027t matter, but I\u0027d still like to know what doesn\u0027t matter incase the importance changes.",
+      "range": {
+        "startLine": 148,
+        "startChar": 34,
+        "endLine": 148,
+        "endChar": 52
+      },
+      "revId": "16320198dc1f87ce357471990402b208523e7072",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42db1246_d5ec1ba7",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-22T09:50:40Z",
+      "side": 1,
+      "message": "nit: let offset \u003d 0;",
+      "range": {
+        "startLine": 167,
+        "startChar": 51,
+        "endLine": 167,
+        "endChar": 52
+      },
+      "revId": "16320198dc1f87ce357471990402b208523e7072",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ccbb821_cf98bb87",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-22T09:50:40Z",
+      "side": 1,
+      "message": "Looking in the enum, doesn\u0027t this mean no exception?",
+      "range": {
+        "startLine": 175,
+        "startChar": 64,
+        "endLine": 175,
+        "endChar": 65
+      },
+      "revId": "16320198dc1f87ce357471990402b208523e7072",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
