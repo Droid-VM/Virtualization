@@ -16,6 +16,24 @@
       "message": "aren\u0027t there already bounds checks to cover this condition?",
       "revId": "d0bb5d3c494c4741c714d87a64c835d5690b443a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1be690d3_9b514595",
+        "filename": "authfs/src/file/local_file.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-23T14:57:28Z",
+      "side": 1,
+      "message": "Yes. This is just to add some assurance that we still maintain the invariance after the calculation above.",
+      "parentUuid": "11a55c68_e3069993",
+      "revId": "d0bb5d3c494c4741c714d87a64c835d5690b443a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
