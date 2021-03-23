@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b77e3adf_fbd6092f",
+        "filename": "authfs/fd_server/src/fsverity.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-03-23T17:51:11Z",
+      "side": 1,
+      "message": "I meant taking the constant definition from the kernel headers and adding them to libc, e.g. in src/unix/linux_like/linux/mod.rs so they\u0027re defined for everyone.",
+      "parentUuid": "ed5e4e5a_7f9acce4",
+      "revId": "b5b33059448dc3ff58dbfe3f64433f01ceaa6414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b31e7f7_3ff1f145",
