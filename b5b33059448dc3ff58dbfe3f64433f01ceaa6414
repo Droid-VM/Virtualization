@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed5e4e5a_7f9acce4",
+        "filename": "authfs/fd_server/src/fsverity.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-03-23T17:32:50Z",
+      "side": 1,
+      "message": "To nix?  Not specific to the ioctl I\u0027m using here, but libc doesn\u0027t seem to provide a good way to use Linux ioctl.  For example, FS_IOC_READ_VERITY_METADATA is #defined as the following, and I have to use the macro in nix to do the work.\n\n  #define FS_IOC_READ_VERITY_METADATA \\\n\t_IOWR(\u0027f\u0027, 135, struct fsverity_read_metadata_arg)",
+      "parentUuid": "29fd1fb9_a4e3be4c",
+      "revId": "b5b33059448dc3ff58dbfe3f64433f01ceaa6414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b31e7f7_3ff1f145",
