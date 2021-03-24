@@ -86,7 +86,7 @@ impl IVirtManager for VirtManager {
 
     /// Hold a strong reference to a VM in Virt Manager. This method is only intended for debug
     /// purposes, and as such is only permitted from the shell user.
-    fn debugHoldVmRef(&self, vmref: &dyn IVirtualMachine) -> binder::Result<()> {
+    fn debugHoldVmRef(&self, vmref: &binder::Strong<dyn IVirtualMachine>) -> binder::Result<()> {
         if !debug_access_allowed() {
             return Err(StatusCode::PERMISSION_DENIED.into());
         }
