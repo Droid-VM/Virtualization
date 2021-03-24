@@ -81,32 +81,37 @@ public class MicrodroidTestCase extends BaseHostJUnit4Test {
         getDevice().executeShellCommand("mkdir -p " + TEST_ROOT + "etc/cvd_config");
         getDevice().pushString("{}", TEST_ROOT + "etc/cvd_config/cvd_config_phone.json");
 
-        // Run assemble_cvd to create composite.img
-        getDevice().executeShellCommand("HOME=" + TEST_ROOT + "; "
-                + "PATH=$PATH:" + VIRT_APEX + "bin; "
-                + VIRT_APEX + "bin/assemble_cvd -protected_vm < /dev/null");
+        // Run assemble_cvd to create os_composite.img
+        String assembleCmd = "HOME="
+                        + TEST_ROOT
+                        + "; PATH=$PATH:"
+                        + VIRT_APEX
+                        + "bin; assemble_cvd -protected_vm < /dev/null";
+        getDevice().executeShellCommand(assembleCmd);
 
-        // Make sure that composite.img is created
-        final String compositeImg = TEST_ROOT + "cuttlefish_runtime/composite.img";
+        // Make sure that os_composite.img is created
+        final String compositeImg = TEST_ROOT + "cuttlefish_runtime/os_composite.img";
         CommandResult result = getDevice().executeShellV2Command("du -b " + compositeImg);
         assertThat(result.getExitCode(), is(0));
         assertThat(result.getStdout(), is(not("")));
 
         // Start microdroid using crosvm
+        String runCmd = "cd "
+                        + TEST_ROOT
+                        + "; "
+                        + VIRT_APEX
+                        + "bin/crosvm run --cid="
+                        + TEST_VM_CID
+                        + " --disable-sandbox --bios=bootloader --serial=type=syslog --disk=cuttlefish_runtime/os_composite.img";
         ExecutorService executor = Executors.newFixedThreadPool(1);
-        executor.execute(() -> {
-            try {
-                getDevice().executeShellV2Command("cd " + TEST_ROOT + "; "
-                        + VIRT_APEX + "bin/crosvm run "
-                        + "--cid=" + TEST_VM_CID + " "
-                        + "--disable-sandbox "
-                        + "--bios=bootloader "
-                        + "--serial=type=syslog "
-                        + "--disk=cuttlefish_runtime/composite.img");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
+        executor.execute(
+                () -> {
+                    try {
+                        getDevice().executeShellV2Command(runCmd);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
         // .. and wait for microdroid to boot
         // TODO(jiyong): don't wait too long. We can wait less by monitoring log from microdroid
         Thread.sleep(MICRODROID_BOOT_TIMEOUT_MILLIS);
