@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "180baf2c_ce9bf037",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-03-24T11:11:36Z",
+      "side": 1,
+      "message": "We already import `Strong`, no need to qualify it with the module name.",
+      "range": {
+        "startLine": 89,
+        "startChar": 37,
+        "endLine": 89,
+        "endChar": 51
+      },
+      "revId": "2a2ccccf7a3e776827f33251a6846c95b907ea76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4e029fb6_91869b54",
         "filename": "virtmanager/src/aidl.rs",
         "patchSetId": 1
