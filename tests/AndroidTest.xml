@@ -39,17 +39,6 @@
         <option name="push-file" key="vsock_config.json"       value="/data/local/tmp/virt-test/vsock_config.json" />
     </target_preparer>
 
-    <!-- Root currently needed to run CrosVM.
-         TODO: Give sufficient permissions to the adb shell user (b/171240450). -->
-    <target_preparer class="com.android.tradefed.targetprep.RootTargetPreparer"/>
-
-    <!-- Run Virt Manager for the duration of the test.
-         TODO: Run Virt Manager as a system service. -->
-    <target_preparer class="com.android.tradefed.targetprep.RunCommandTargetPreparer">
-        <option name="throw-if-cmd-fail" value="true" />
-        <option name="run-command" value="start virtmanager" />
-    </target_preparer>
-
     <test class="com.android.tradefed.testtype.GTest" >
         <option name="native-test-device-path" value="/data/local/tmp/virt-test" />
         <option name="module-name" value="VirtualizationTestCases" />

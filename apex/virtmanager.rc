@@ -16,4 +16,6 @@ service virtmanager /apex/com.android.virt/bin/virtmanager
     class main
     user virtmanager
     group virtmanager
+    interface aidl android.system.virtmanager
     disabled
+    oneshot
