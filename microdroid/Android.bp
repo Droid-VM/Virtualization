@@ -119,9 +119,7 @@ logical_partition {
     size: "104857600",
     groups: [
         {
-            name: "mygroup",
-            // TODO(b/181107248): remove this hard-coded value
-            size: "80000000",
+            name: "default",
             partitions: [
                 {
                     name: "system",
