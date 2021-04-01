@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4af6cc93_e915d9fb",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-04-01T12:36:36Z",
+      "side": 1,
+      "message": "Interesting, when does this happen?",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 27
+      },
+      "revId": "64b12794666b07036d021dd4a61a60610a035183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73425308_210a2316",
+        "filename": "virtmanager/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-04-01T12:36:36Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be more useful to store the PID instead (ThreadState:: get_calling_pid)? UID and SID can be queried from `ps -eZ -p \u003cpid\u003e`",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 38
+      },
+      "revId": "64b12794666b07036d021dd4a61a60610a035183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
