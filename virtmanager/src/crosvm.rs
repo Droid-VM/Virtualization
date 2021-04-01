@@ -30,19 +30,34 @@ pub struct VmInstance {
     child: Child,
     /// The CID assigned to the VM for vsock communication.
     pub cid: Cid,
+    /// The UID of the process which requested the VM.
+    pub requester_uid: u32,
+    /// The SID of the process which requested the VM.
+    pub requester_sid: Option<String>,
 }
 
 impl VmInstance {
     /// Create a new `VmInstance` for the given process.
-    fn new(child: Child, cid: Cid) -> VmInstance {
-        VmInstance { child, cid }
+    fn new(
+        child: Child,
+        cid: Cid,
+        requester_uid: u32,
+        requester_sid: Option<String>,
+    ) -> VmInstance {
+        VmInstance { child, cid, requester_uid, requester_sid }
     }
 
     /// Start an instance of `crosvm` to manage a new VM. The `crosvm` instance will be killed when
     /// the `VmInstance` is dropped.
-    pub fn start(config: &VmConfig, cid: Cid, log_fd: Option<File>) -> Result<VmInstance, Error> {
+    pub fn start(
+        config: &VmConfig,
+        cid: Cid,
+        log_fd: Option<File>,
+        requester_uid: u32,
+        requester_sid: Option<String>,
+    ) -> Result<VmInstance, Error> {
         let child = run_vm(config, cid, log_fd)?;
-        Ok(VmInstance::new(child, cid))
+        Ok(VmInstance::new(child, cid, requester_uid, requester_sid))
     }
 }
 

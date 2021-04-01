@@ -19,4 +19,8 @@ package android.system.virtmanager;
 parcelable VirtualMachineDebugInfo {
     /** The CID assigned to the VM. */
     int cid;
+    /** The UID of the process which requested the VM. */
+    int requester_uid;
+    /** The SID of the process which requested the VM. */
+    @nullable String requester_sid;
 }
