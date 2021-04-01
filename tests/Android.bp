@@ -93,3 +93,37 @@ android_filesystem {
     ],
     type: "cpio",
 }
+
+cc_binary {
+    name: "hello_pvm_server",
+    srcs: [
+        "IHelloPVM.aidl",
+        "hello_pvm_server.cc",
+    ],
+    static_libs: [
+        "libbase",
+        "liblog",
+    ],
+    shared_libs: [
+        "libbinder",
+        "libcrypto",
+        "libutils",
+    ],
+}
+
+cc_binary {
+    name: "hello_pvm_client",
+    srcs: [
+        "IHelloPVM.aidl",
+        "hello_pvm_client.cc",
+    ],
+    static_libs: [
+        "libbase",
+        "liblog",
+    ],
+    shared_libs: [
+        "libbinder",
+        "libcrypto",
+        "libutils",
+    ],
+}
