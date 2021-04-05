@@ -298,3 +298,8 @@ vbmeta {
         "microdroid",
     ],
 }
+
+prebuilt_etc {
+    name: "microdroid.cdisk",
+    src: "microdroid.cdisk",
+}
