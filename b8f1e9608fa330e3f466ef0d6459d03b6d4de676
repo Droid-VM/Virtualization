@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b72aecc_fb86b78b",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-06T17:36:15Z",
+      "side": 1,
+      "message": "optional: not sure what\u0027s the recommended style, but I personally would prefer...\n\n```\nuse android_system_virtmanager::aidl::android::system::virtmanager::{\n    IVirtualMachineCallback::IVirtualMachineCallback, VirtualMachineDebugInfo::VirtualMachineDebugInfo,\n};\n```",
+      "range": {
+        "startLine": 25,
+        "startChar": 68,
+        "endLine": 25,
+        "endChar": 117
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7adbcef_38eaa1b2",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-06T17:36:15Z",
+      "side": 1,
+      "message": "This feels like a getter.  How about still calling the function `next_cid`?\n\nFWIW, a side effect of this change (compared to the original) is that the cid may not be used if anything failed.  But that probably doesn\u0027t matter.",
+      "range": {
+        "startLine": 59,
+        "startChar": 24,
+        "endLine": 59,
+        "endChar": 31
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68cf024f_d7a6781c",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-06T17:36:15Z",
+      "side": 1,
+      "message": "for my education, when could this fail (and do we care)?",
+      "range": {
+        "startLine": 162,
+        "startChar": 66,
+        "endLine": 162,
+        "endChar": 76
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4689623c_115700b9",
+        "filename": "virtmanager/src/crosvm.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-06T17:36:15Z",
+      "side": 1,
+      "message": "Hmm... I wonder if it could be necessary (or not) to join the thread.  If we need to guarantee the client to call back, a join would probably be needed in the situation when the main thread is existing before the callback is called.  Although this is service and isn\u0027t expected to quit.  WDYT?",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 21
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a9d3371_b920fcfa",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-06T17:36:15Z",
+      "side": 1,
+      "message": "does it make better sense to encapsulate all these in wait_for_death?",
+      "range": {
+        "startLine": 104,
+        "startChar": 8,
+        "endLine": 108,
+        "endChar": 30
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f96f5154_d8584093",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-06T17:36:15Z",
+      "side": 1,
+      "message": "nit: debug!?",
+      "range": {
+        "startLine": 134,
+        "startChar": 8,
+        "endLine": 134,
+        "endChar": 15
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "811aa3fe_d40df3af",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-06T17:36:15Z",
+      "side": 1,
+      "message": "nit: debug!?",
+      "range": {
+        "startLine": 150,
+        "startChar": 8,
+        "endLine": 150,
+        "endChar": 15
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
