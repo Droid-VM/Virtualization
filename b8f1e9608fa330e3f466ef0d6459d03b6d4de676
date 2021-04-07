@@ -425,6 +425,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4008c6f5_e7b3b393",
+        "filename": "virtmanager/src/crosvm.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-07T15:54:42Z",
+      "side": 1,
+      "message": "Steven, any insight?  I\u0027m not familiar with death notification, but sounds like it\u0027d be the right, existing way to deal with this situation (and it\u0027s expected that the client won\u0027t receive the callback).",
+      "parentUuid": "0eb33fa8_e11d7cf0",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 21
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2a9d3371_b920fcfa",
         "filename": "vm/src/main.rs",
         "patchSetId": 8
