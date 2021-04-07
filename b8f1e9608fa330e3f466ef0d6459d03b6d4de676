@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c439113_b135dc24",
+        "filename": "virtmanager/aidl/android/system/virtmanager/IVirtualMachineCallback.aidl",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-07T11:27:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61122213_a77c56cd",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 35
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37b9a6b3_8590543b",
@@ -60,6 +84,30 @@
       "writtenOn": "2021-04-06T23:52:21Z",
       "side": 1,
       "message": "nit: pass IVirtualMachine here (alt: allow cookie on registration), so that a client can use a single IVirtualMachineCallback object with multiple IVirtualMachine objects",
+      "range": {
+        "startLine": 24,
+        "startChar": 15,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7913991_bdfcbd5e",
+        "filename": "virtmanager/aidl/android/system/virtmanager/IVirtualMachineCallback.aidl",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-07T11:27:10Z",
+      "side": 1,
+      "message": "Is the CID enough? Passing the IVirtualMachine back would require keeping circular references, which is awkward.",
+      "parentUuid": "37b9a6b3_8590543b",
       "range": {
         "startLine": 24,
         "startChar": 15,
@@ -93,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "daf589ab_c623e3dd",
+        "filename": "virtmanager/aidl/android/system/virtmanager/VirtualMachineDebugInfo.aidl",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-07T11:27:10Z",
+      "side": 1,
+      "message": "I\u0027ll send you a separate change.",
+      "parentUuid": "1c6553ad_4bd62395",
+      "range": {
+        "startLine": 24,
+        "startChar": 17,
+        "endLine": 24,
+        "endChar": 19
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45d42531_2c75344b",
@@ -116,6 +188,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77ac4192_8e714415",
+        "filename": "virtmanager/aidl/android/system/virtmanager/VirtualMachineDebugInfo.aidl",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-07T11:27:10Z",
+      "side": 1,
+      "message": "`ThreadState::with_calling_sid` gives me `None` when I try on my VIM3L, so I guess so.",
+      "parentUuid": "45d42531_2c75344b",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 13
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d35eb020_283651d7",
@@ -129,6 +225,30 @@
       "writtenOn": "2021-04-06T23:52:21Z",
       "side": 1,
       "message": "I\u0027m curious, should we be exposing all this information to _all_ clients? Or just some? What is this used for?\n\nIf this is for bugreports, could you consider moving this to be DUMP_TRANSACTION w/ associated standard permission check?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 22
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b16c0399_764102b0",
+        "filename": "virtmanager/aidl/android/system/virtmanager/VirtualMachineDebugInfo.aidl",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-07T11:27:10Z",
+      "side": 1,
+      "message": "The permission check is in `debug_access_allowed`, which current only allows calls from UIDs 0 or 2000 (the shell user). If there\u0027s a better way to do it I\u0027m happy to change that, but there didn\u0027t seem to be any obvious documentation.\n\nIt\u0027s used for the `list` command of the `vm` tool, for debugging.\n\nI\u0027m not familiar with DUMP_TRANSACTION. Where can I read more about it and the standard permission check you mention?\n\nThere were added in https://r.android.com/1660251 on David\u0027s request, so it might be better to discuss there.",
+      "parentUuid": "d35eb020_283651d7",
       "range": {
         "startLine": 23,
         "startChar": 0,
@@ -185,6 +305,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d1f06ac_969fd334",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-07T11:27:10Z",
+      "side": 1,
+      "message": "Renamed to `allocate_cid` instead, to avoid having the same name as the field.\n\nI\u0027ve moved the call down to avoid dropping CIDs in some failure cases.",
+      "parentUuid": "d7adbcef_38eaa1b2",
+      "range": {
+        "startLine": 59,
+        "startChar": 24,
+        "endLine": 59,
+        "endChar": 31
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68cf024f_d7a6781c",
@@ -198,6 +342,30 @@
       "writtenOn": "2021-04-06T17:36:15Z",
       "side": 1,
       "message": "for my education, when could this fail (and do we care)?",
+      "range": {
+        "startLine": 162,
+        "startChar": 66,
+        "endLine": 162,
+        "endChar": 76
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1666a1ed_9d4c8cc0",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-07T11:27:10Z",
+      "side": 1,
+      "message": "It will only fail if the SpIBinder passed to `try_from` doesn\u0027t implement `IVirtualMachineCallback`, which is impossible here.\n\nThis line is a workaround for http://b/182890877, and will be removed once https://r.android.com/1651546 is in.",
+      "parentUuid": "68cf024f_d7a6781c",
       "range": {
         "startLine": 162,
         "startChar": 66,
@@ -233,6 +401,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0eb33fa8_e11d7cf0",
+        "filename": "virtmanager/src/crosvm.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-07T11:27:10Z",
+      "side": 1,
+      "message": "When would we join on the thread? The main thread joins on the Binder thread pool, so should only exit if it crashes, in which case we can\u0027t callback clients anyway, but they will get death notifications.",
+      "parentUuid": "4689623c_115700b9",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 21
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2a9d3371_b920fcfa",
         "filename": "vm/src/main.rs",
         "patchSetId": 8
@@ -244,6 +436,30 @@
       "writtenOn": "2021-04-06T17:36:15Z",
       "side": 1,
       "message": "does it make better sense to encapsulate all these in wait_for_death?",
+      "range": {
+        "startLine": 104,
+        "startChar": 8,
+        "endLine": 108,
+        "endChar": 30
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b6f5c13_c0c09782",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-07T11:27:10Z",
+      "side": 1,
+      "message": "Added a new function.",
+      "parentUuid": "2a9d3371_b920fcfa",
       "range": {
         "startLine": 104,
         "startChar": 8,
@@ -277,6 +493,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21fdcde1_3a9a42a2",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-07T11:27:10Z",
+      "side": 1,
+      "message": "I think println is appropriate here, as this is a command-line tool for a developer to use in the shell, and so we want to tell them what\u0027s going on.",
+      "parentUuid": "f96f5154_d8584093",
+      "range": {
+        "startLine": 134,
+        "startChar": 8,
+        "endLine": 134,
+        "endChar": 15
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "811aa3fe_d40df3af",
@@ -290,6 +530,30 @@
       "writtenOn": "2021-04-06T17:36:15Z",
       "side": 1,
       "message": "nit: debug!?",
+      "range": {
+        "startLine": 150,
+        "startChar": 8,
+        "endLine": 150,
+        "endChar": 15
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "282c510f_85a163c8",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-07T11:27:10Z",
+      "side": 1,
+      "message": "Ditto.",
+      "parentUuid": "811aa3fe_d40df3af",
       "range": {
         "startLine": 150,
         "startChar": 8,
