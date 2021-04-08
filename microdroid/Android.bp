@@ -225,6 +225,33 @@ prebuilt_etc {
 }
 
 prebuilt_etc {
+    name: "microdroid_bootloader",
+    src: ":microdroid_bootloader_gen",
+    filename: "microdroid_bootloader",
+}
+
+// See external/avb/avbtool.py
+// MAX_VBMETA_SIZE=64KB, MAX_FOOTER_SIZE=4KB
+avb_hash_footer_kb = "68"
+
+genrule {
+    name: "microdroid_bootloader_gen",
+    tools: ["avbtool"],
+    srcs: [
+        ":cuttlefish_crosvm_bootloader",
+        ":avb_testkey_rsa4096",
+    ],
+    out: ["bootloader-signed"],
+    cmd: "cp $(location :cuttlefish_crosvm_bootloader) $(out) && " +
+        "$(location avbtool) add_hash_footer " +
+        "--algorithm SHA256_RSA4096 " +
+        "--partition_name bootloader " +
+        "--key $(location :avb_testkey_rsa4096) " +
+        "--partition_size $$(( " + avb_hash_footer_kb + " * 1024 + ( $$(stat --format=%s $(out)) + 4096 - 1 ) / 4096 * 4096 )) " +
+        "--image $(out)",
+}
+
+prebuilt_etc {
     name: "microdroid_uboot_env",
     src: ":microdroid_uboot_env_gen",
     filename: "uboot_env.img",
