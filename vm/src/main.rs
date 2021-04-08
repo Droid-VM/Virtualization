@@ -14,6 +14,8 @@
 
 //! Android VM control tool.
 
+#![allow(clippy::ptr_arg)]
+
 mod sync;
 
 use android_system_virtmanager::aidl::android::system::virtmanager::IVirtManager::IVirtManager;
