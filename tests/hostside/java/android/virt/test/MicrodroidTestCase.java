@@ -69,7 +69,7 @@ public class MicrodroidTestCase extends BaseHostJUnit4Test {
     @Test
     public void testMicrodroidBoots() throws Exception {
         // Prepare input files
-        pushFile("u-boot.bin", "bootloader");
+        pushFile("microdroid_bootloader", "bootloader");
         pushFile("microdroid_super.img", "super.img");
         pushFile("microdroid_boot-5.10.img", "boot.img");
         pushFile("microdroid_vendor_boot-5.10.img", "vendor_boot.img");
