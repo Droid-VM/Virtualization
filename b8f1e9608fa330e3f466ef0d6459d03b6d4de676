@@ -142,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a22eead4_bf02bc65",
+        "filename": "virtmanager/aidl/android/system/virtmanager/IVirtualMachineCallback.aidl",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-08T10:59:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "49b20aa0_5efbdbf1",
+      "range": {
+        "startLine": 24,
+        "startChar": 15,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c6553ad_4bd62395",
@@ -262,6 +286,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a14f0bce_18223ced",
+        "filename": "virtmanager/aidl/android/system/virtmanager/VirtualMachineDebugInfo.aidl",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-08T10:59:41Z",
+      "side": 1,
+      "message": "I\u0027m not, I didn\u0027t realise that that was necessary. Why is this extra step required? However, `set_requesting_sid` isn\u0027t currently part of the public API exposed for AIDL interfaces. Should it be? Or should the AIDL codegen automatically call it as needed? Either way, it should be a separate change.",
+      "parentUuid": "cb158d7a_e080878d",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 13
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d35eb020_283651d7",
         "filename": "virtmanager/aidl/android/system/virtmanager/VirtualMachineDebugInfo.aidl",
         "patchSetId": 8
@@ -321,6 +369,30 @@
       "side": 1,
       "message": "See dump function in frameworks/native/libs/binder/rust/src/proxy.rs. The benefit is that it would automatically get dumped in bugreports.\n\nUID 0 + shell is more than good enough, great. For dump, there is a CTS test which checks that permissions are set correctly for services visible to apps.",
       "parentUuid": "b16c0399_764102b0",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 22
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05ba579a_3462b998",
+        "filename": "virtmanager/aidl/android/system/virtmanager/VirtualMachineDebugInfo.aidl",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-08T10:59:41Z",
+      "side": 1,
+      "message": "Dumping state things in bugreports sounds useful, but I\u0027m not sure how well that corresponds to how the `vm` tool uses this. I also don\u0027t see any documentation of how I should go about using or implementing the dump function. Is there some documentation or at least an example somewhere? In any case, let\u0027s discuss it somewhere other than this change because it\u0027s a separate issue.",
+      "parentUuid": "2e259c80_66ada6b5",
       "range": {
         "startLine": 23,
         "startChar": 0,
