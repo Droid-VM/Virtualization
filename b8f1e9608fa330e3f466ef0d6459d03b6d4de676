@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be7a3009_c1fcc5d1",
+        "filename": "virtmanager/aidl/android/system/virtmanager/IVirtualMachine.aidl",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-12T22:01:00Z",
+      "side": 1,
+      "message": "(ping)",
+      "parentUuid": "4f055656_28934c53",
+      "range": {
+        "startLine": 20,
+        "startChar": 10,
+        "endLine": 20,
+        "endChar": 25
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "61122213_a77c56cd",
         "filename": "virtmanager/aidl/android/system/virtmanager/IVirtualMachineCallback.aidl",
         "patchSetId": 8
@@ -310,6 +334,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "119af74f_ffe7c34b",
+        "filename": "virtmanager/aidl/android/system/virtmanager/VirtualMachineDebugInfo.aidl",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-12T22:01:00Z",
+      "side": 1,
+      "message": "There is a performance cost associated with looking up the SIDs w/ the proper locks taken, so it must be enabled conditionally per binder, rather than always being available.\n\nThis API should be exposed. AIDL can\u0027t know to call it now because there is no annotation or other signal exposing when this should be used - in fact, in general, there can be no such annotation because usage of this may be independent from interface ownership, and the same interface may theoretically be implemented with and without this (and in a secure way).",
+      "parentUuid": "a14f0bce_18223ced",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 13
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d35eb020_283651d7",
         "filename": "virtmanager/aidl/android/system/virtmanager/VirtualMachineDebugInfo.aidl",
         "patchSetId": 8
@@ -393,6 +441,30 @@
       "side": 1,
       "message": "Dumping state things in bugreports sounds useful, but I\u0027m not sure how well that corresponds to how the `vm` tool uses this. I also don\u0027t see any documentation of how I should go about using or implementing the dump function. Is there some documentation or at least an example somewhere? In any case, let\u0027s discuss it somewhere other than this change because it\u0027s a separate issue.",
       "parentUuid": "2e259c80_66ada6b5",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 22
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "399c232c_f77f4e4d",
+        "filename": "virtmanager/aidl/android/system/virtmanager/VirtualMachineDebugInfo.aidl",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-12T22:01:00Z",
+      "side": 1,
+      "message": "+1 to a separate issue.\n\nThe only existing Rust test (and example) is a bit minimal:\nhttps://cs.android.com/android/platform/superproject/+/master:frameworks/native/libs/binder/rust/tests/integration.rs;l\u003d421;drc\u003d12400d8fa2e0fe3777d93f106dd02212f645eea8\n\nIf that\u0027s not enough, please file an issue on Rust AIDL peeps.",
+      "parentUuid": "05ba579a_3462b998",
       "range": {
         "startLine": 23,
         "startChar": 0,
@@ -581,6 +653,30 @@
       "side": 1,
       "message": "Steven, any insight?  I\u0027m not familiar with death notification, but sounds like it\u0027d be the right, existing way to deal with this situation (and it\u0027s expected that the client won\u0027t receive the callback).",
       "parentUuid": "0eb33fa8_e11d7cf0",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 21
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c627e0b_b2885c06",
+        "filename": "virtmanager/src/crosvm.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-12T22:01:00Z",
+      "side": 1,
+      "message": "This appears to be monitoring a VM instance, so I\u0027m not sure how (binder) death notifications can work.\n\nTo merge these threads, you could consider using epoll. Binder also works with this (usually with Looper - see servicemanager code).",
+      "parentUuid": "4008c6f5_e7b3b393",
       "range": {
         "startLine": 86,
         "startChar": 8,
