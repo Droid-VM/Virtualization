@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaa40e00_00074f93",
+        "filename": "tests/hello_pvm_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-12T22:20:40Z",
+      "side": 1,
+      "message": "nit: you can remove this/reduce scope if you want. The BpBinder holds onto the connection.",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 27
+      },
+      "revId": "4b267dd4b08a39f3c481316a6e5f7e6d3a46ed7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0e96be1_ea1d1291",
+        "filename": "tests/hello_pvm_client.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-12T22:20:40Z",
+      "side": 1,
+      "message": "so - you should be able to call this exactly kNumThreads times here. You said it didn\u0027t work?",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 48
+      },
+      "revId": "4b267dd4b08a39f3c481316a6e5f7e6d3a46ed7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4667b35a_9c2366d1",
+        "filename": "tests/hello_pvm_server.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-12T22:20:40Z",
+      "side": 1,
+      "message": "Note, for libbase, you can do this and get even better logs:\n\nCHECK_EQ(argc, 2);",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 21
+      },
+      "revId": "4b267dd4b08a39f3c481316a6e5f7e6d3a46ed7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d58384d_031c98d7",
+        "filename": "tests/hello_pvm_server.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-12T22:20:40Z",
+      "side": 1,
+      "message": "FYI, if you want to merge this, maybe let me replace L168..L182 with a single function that can be used here and in the test. That will give us flexibility to use dynamic threadpools or combine this threadpool with the binder threadpool as necessary.",
+      "range": {
+        "startLine": 169,
+        "startChar": 16,
+        "endLine": 169,
+        "endChar": 77
+      },
+      "revId": "4b267dd4b08a39f3c481316a6e5f7e6d3a46ed7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e4cb7a4_680d8a5c",
+        "filename": "tests/hello_pvm_server.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-12T22:20:40Z",
+      "side": 1,
+      "message": "pref: sp\u003cMyHellowPVM\u003e::make()",
+      "range": {
+        "startLine": 170,
+        "startChar": 30,
+        "endLine": 170,
+        "endChar": 33
+      },
+      "revId": "4b267dd4b08a39f3c481316a6e5f7e6d3a46ed7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
