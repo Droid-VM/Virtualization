@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "658cbff5_5861f072",
+        "filename": "docs/getting_started/index.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-04-12T11:38:34Z",
+      "side": 1,
+      "message": "This could be improved by making the APEX self-contained:\n\n  TARGET_BUILD_APPS\u003d\"com.android.virt\" m\n  adb install $ANDROID_PRODUCT_OUT/system/apex/com.android.virt.apex\n  adb reboot",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 12
+      },
+      "revId": "b4154d4a6bc7f115f2b7a920e5cc504b7a1eadd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
