@@ -148,6 +148,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e9852bb_2e97ee12",
+        "filename": "microdroid/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-04-12T07:26:33Z",
+      "side": 1,
+      "message": ":1",
+      "parentUuid": "64f4b22a_295e46f3",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 92
+      },
+      "revId": "a6b817045ee4f103be16c5235bd1c3e966cc9cec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcdf5f0d_835c8ca0",
@@ -185,6 +209,30 @@
       "side": 1,
       "message": "I\u0027ve just tried, and misc is needed (even when making os_composite.img).",
       "parentUuid": "dcdf5f0d_835c8ca0",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 73
+      },
+      "revId": "a6b817045ee4f103be16c5235bd1c3e966cc9cec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19b3d18b_5d0c0665",
+        "filename": "microdroid/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-04-12T07:26:33Z",
+      "side": 1,
+      "message": "\u003e misc. This partition is used by the recovery partition and is 4 KB or larger. (from https://source.android.com/devices/bootloader/partitions)\n\nSome ideas:\n- make mk_cdisk handle it (by creating new blank images on request)\n- add \"microdroid_misc\" module\n- make it optional for microdroid in bootloader(?)\n- just reuse one of other \u003e4K img files in .cdisk (I guess its content is irrelevant in microdroid).\n- ...",
+      "parentUuid": "38e8aa31_9bffaf35",
       "range": {
         "startLine": 34,
         "startChar": 0,
