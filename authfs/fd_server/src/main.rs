@@ -37,14 +37,13 @@ use std::os::unix::fs::FileExt;
 use std::os::unix::io::{AsRawFd, FromRawFd};
 
 use anyhow::{bail, Context, Result};
-use binder::IBinderInternal; // TODO(178852354): remove once set_requesting_sid is exposed in the API.
 use log::{debug, error};
 
 use authfs_aidl_interface::aidl::com::android::virt::fs::IVirtFdService::{
     BnVirtFdService, IVirtFdService, ERROR_IO, ERROR_UNKNOWN_FD, MAX_REQUESTING_DATA,
 };
 use authfs_aidl_interface::binder::{
-    add_service, ExceptionCode, Interface, ProcessState, Result as BinderResult, Status,
+    add_service, ExceptionCode, IBinder, Interface, ProcessState, Result as BinderResult, Status,
     StatusCode, Strong,
 };
 
