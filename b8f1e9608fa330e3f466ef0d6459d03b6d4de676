@@ -783,6 +783,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd1b2063_ef614706",
+        "filename": "virtmanager/src/crosvm.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-13T17:42:23Z",
+      "side": 1,
+      "message": "I think Victor\u0027s  point is that there is no need to use multiple threads here. It should be possible to only use one. However, given the current number of VMs and the complexity setting that up could require, maybe consider it separately?",
+      "parentUuid": "6538fda9_0cf47f93",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 21
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a9d3371_b920fcfa",
