@@ -33,10 +33,10 @@ pub struct VmInstance {
     /// The UID of the process which requested the VM.
     pub requester_uid: u32,
     /// The SID of the process which requested the VM.
-    pub requester_sid: Option<String>,
+    pub requester_sid: String,
     /// The PID of the process which requested the VM. Note that this process may no longer exist
     /// and the PID may have been reused for a different process, so this should not be trusted.
-    pub requester_pid: i32,
+    pub requester_debug_pid: i32,
 }
 
 impl VmInstance {
@@ -45,10 +45,10 @@ impl VmInstance {
         child: Child,
         cid: Cid,
         requester_uid: u32,
-        requester_sid: Option<String>,
-        requester_pid: i32,
+        requester_sid: String,
+        requester_debug_pid: i32,
     ) -> VmInstance {
-        VmInstance { child, cid, requester_uid, requester_sid, requester_pid }
+        VmInstance { child, cid, requester_uid, requester_sid, requester_debug_pid }
     }
 
     /// Start an instance of `crosvm` to manage a new VM. The `crosvm` instance will be killed when
@@ -58,11 +58,11 @@ impl VmInstance {
         cid: Cid,
         log_fd: Option<File>,
         requester_uid: u32,
-        requester_sid: Option<String>,
-        requester_pid: i32,
+        requester_sid: String,
+        requester_debug_pid: i32,
     ) -> Result<VmInstance, Error> {
         let child = run_vm(config, cid, log_fd)?;
-        Ok(VmInstance::new(child, cid, requester_uid, requester_sid, requester_pid))
+        Ok(VmInstance::new(child, cid, requester_uid, requester_sid, requester_debug_pid))
     }
 }
 

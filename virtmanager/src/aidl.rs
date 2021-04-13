@@ -26,7 +26,6 @@ use android_system_virtmanager::binder::{
     self, BinderFeatures, Interface, ParcelFileDescriptor, StatusCode, Strong, ThreadState,
 };
 use log::error;
-use std::ffi::CStr;
 use std::fs::File;
 use std::sync::{Arc, Mutex, Weak};
 
@@ -60,22 +59,27 @@ impl IVirtManager for VirtManager {
             .transpose()?;
         let requester_uid = ThreadState::get_calling_uid();
         let requester_sid = ThreadState::with_calling_sid(|sid| {
-            sid.and_then(|sid: &CStr| match sid.to_str() {
-                Ok(s) => Some(s.to_owned()),
-                Err(e) => {
-                    error!("SID was not valid UTF-8: {:?}", e);
-                    None
+            if let Some(sid) = sid {
+                match sid.to_str() {
+                    Ok(sid) => Ok(sid.to_owned()),
+                    Err(e) => {
+                        error!("SID was not valid UTF-8: {:?}", e);
+                        Err(StatusCode::BAD_VALUE)
+                    }
                 }
-            })
-        });
-        let requester_pid = ThreadState::get_calling_pid();
+            } else {
+                error!("Missing SID on startVm");
+                Err(StatusCode::UNKNOWN_ERROR)
+            }
+        })?;
+        let requester_debug_pid = ThreadState::get_calling_pid();
         let instance = Arc::new(start_vm(
             config_fd.as_ref(),
             cid,
             log_fd,
             requester_uid,
             requester_sid,
-            requester_pid,
+            requester_debug_pid,
         )?);
         // TODO(qwandor): keep track of which CIDs are currently in use so that we can reuse them.
         state.next_cid = state.next_cid.checked_add(1).ok_or(StatusCode::UNKNOWN_ERROR)?;
@@ -98,7 +102,7 @@ impl IVirtManager for VirtManager {
                 cid: vm.cid as i32,
                 requesterUid: vm.requester_uid as i32,
                 requesterSid: vm.requester_sid.clone(),
-                requesterPid: vm.requester_pid,
+                requesterPid: vm.requester_debug_pid,
             })
             .collect();
         Ok(cids)
@@ -215,16 +219,16 @@ fn start_vm(
     cid: Cid,
     log_fd: Option<File>,
     requester_uid: u32,
-    requester_sid: Option<String>,
-    requester_pid: i32,
+    requester_sid: String,
+    requester_debug_pid: i32,
 ) -> binder::Result<VmInstance> {
     let config = VmConfig::load(config_file).map_err(|e| {
         error!("Failed to load VM config from {:?}: {:?}", config_file, e);
         StatusCode::BAD_VALUE
     })?;
-    Ok(VmInstance::start(&config, cid, log_fd, requester_uid, requester_sid, requester_pid)
+    Ok(VmInstance::start(&config, cid, log_fd, requester_uid, requester_sid, requester_debug_pid)
         .map_err(|e| {
-            error!("Failed to start VM from {:?}: {:?}", config_file, e);
-            StatusCode::UNKNOWN_ERROR
-        })?)
+        error!("Failed to start VM from {:?}: {:?}", config_file, e);
+        StatusCode::UNKNOWN_ERROR
+    })?)
 }
