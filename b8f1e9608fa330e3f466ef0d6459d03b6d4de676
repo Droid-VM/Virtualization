@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62484276_b45445f8",
+        "filename": "virtmanager/aidl/android/system/virtmanager/IVirtualMachine.aidl",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-13T16:05:15Z",
+      "side": 1,
+      "message": "Virt Manager is the name of the service, and I\u0027d prefer not to rename it at this point.\n\nIf we do rename it, Virtual Manager sounds weird to me, and too similar to VMM. I guess it could be something like Virtualisation Manager.\n\nIn any case, it\u0027s not related to this change, so I\u0027ll start an email thread instead.",
+      "parentUuid": "be7a3009_c1fcc5d1",
+      "range": {
+        "startLine": 20,
+        "startChar": 10,
+        "endLine": 20,
+        "endChar": 25
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61122213_a77c56cd",
@@ -356,6 +380,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d514c626_293fd710",
+        "filename": "virtmanager/aidl/android/system/virtmanager/VirtualMachineDebugInfo.aidl",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-13T16:05:15Z",
+      "side": 1,
+      "message": "Okay, sent you https://r.android.com/1674511 to expose it. There is already http://b/178852354 about this so Stephen may have opinions about how better to do it.",
+      "parentUuid": "119af74f_ffe7c34b",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 13
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d35eb020_283651d7",
@@ -465,6 +513,30 @@
       "side": 1,
       "message": "+1 to a separate issue.\n\nThe only existing Rust test (and example) is a bit minimal:\nhttps://cs.android.com/android/platform/superproject/+/master:frameworks/native/libs/binder/rust/tests/integration.rs;l\u003d421;drc\u003d12400d8fa2e0fe3777d93f106dd02212f645eea8\n\nIf that\u0027s not enough, please file an issue on Rust AIDL peeps.",
       "parentUuid": "05ba579a_3462b998",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 22
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a82950ca_faa7b0bf",
+        "filename": "virtmanager/aidl/android/system/virtmanager/VirtualMachineDebugInfo.aidl",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-13T16:05:15Z",
+      "side": 1,
+      "message": "Filed http://b/185231343 to track this.",
+      "parentUuid": "399c232c_f77f4e4d",
       "range": {
         "startLine": 23,
         "startChar": 0,
@@ -677,6 +749,30 @@
       "side": 1,
       "message": "This appears to be monitoring a VM instance, so I\u0027m not sure how (binder) death notifications can work.\n\nTo merge these threads, you could consider using epoll. Binder also works with this (usually with Looper - see servicemanager code).",
       "parentUuid": "4008c6f5_e7b3b393",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 21
+      },
+      "revId": "b8f1e9608fa330e3f466ef0d6459d03b6d4de676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6538fda9_0cf47f93",
+        "filename": "virtmanager/src/crosvm.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-13T16:05:15Z",
+      "side": 1,
+      "message": "I\u0027m still not clear on what you expect joining on the threads to achieve. The main thread should never finish unless there is a crash, in which case we want all these monitoring threads to be killed anyway, and Binder death notifications will be sent.\n\nThe monitoring thread will exit after the crosvm instance exits and it has called the callbacks. There isn\u0027t anything else the main thread needs to do in response to that.",
+      "parentUuid": "4c627e0b_b2885c06",
       "range": {
         "startLine": 86,
         "startChar": 8,
