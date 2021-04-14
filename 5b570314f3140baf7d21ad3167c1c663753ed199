@@ -66,6 +66,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "26489698_f268c354",
+        "filename": "microdroid/signature/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-14T13:38:05Z",
+      "side": 1,
+      "message": "Where is this used?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 0
+      },
+      "revId": "5b570314f3140baf7d21ad3167c1c663753ed199",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb8cfa8b_e6277b2c",
         "filename": "microdroid/signature/Android.bp",
         "patchSetId": 2
@@ -89,6 +112,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a704200_2a9e8b1c",
+        "filename": "microdroid/signature/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-14T13:38:05Z",
+      "side": 1,
+      "message": "This looks wrong. This should only be in the virt manager.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 36
+      },
+      "revId": "5b570314f3140baf7d21ad3167c1c663753ed199",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e97b5cb_b146f157",
         "filename": "microdroid/signature/Android.bp",
         "patchSetId": 2
@@ -105,6 +151,52 @@
         "startChar": 0,
         "endLine": 61,
         "endChar": 31
+      },
+      "revId": "5b570314f3140baf7d21ad3167c1c663753ed199",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0be17b1c_58341c60",
+        "filename": "microdroid/signature/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-14T13:38:05Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 36
+      },
+      "revId": "5b570314f3140baf7d21ad3167c1c663753ed199",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a3d0012_f5321eea",
+        "filename": "microdroid/signature/signature.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-14T13:38:05Z",
+      "side": 1,
+      "message": "Do we need this? The partition is shared across the host and the guest VMs and they have the same endian.",
+      "range": {
+        "startLine": 41,
+        "startChar": 11,
+        "endLine": 41,
+        "endChar": 18
       },
       "revId": "5b570314f3140baf7d21ad3167c1c663753ed199",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
