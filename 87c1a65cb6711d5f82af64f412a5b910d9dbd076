@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eca6ac0d_032c4582",
+        "filename": "microdroid/signature/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-14T09:56:20Z",
+      "side": 1,
+      "message": "Maybe not in this CL, but I think the header should have\n\n1) a magic number that allows us to abort early\n2) size of the payload\n3) size of the header\n4) and the payload version in case we introduce a totally incompatible proto in the future",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 73
+      },
+      "revId": "87c1a65cb6711d5f82af64f412a5b910d9dbd076",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7384d3d_a433fd11",
+        "filename": "microdroid/signature/microdroid_signature.proto",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-14T09:56:20Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this have a name field?",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 21
+      },
+      "revId": "87c1a65cb6711d5f82af64f412a5b910d9dbd076",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
