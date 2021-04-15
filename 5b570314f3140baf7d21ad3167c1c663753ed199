@@ -444,6 +444,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82b3b55a_efd94c9c",
+        "filename": "microdroid/signature/signature.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-15T00:18:25Z",
+      "side": 1,
+      "message": "I don\u0027t expect this file will be generated in another machine; out design doesn\u0027t have the case. Even if we have the case perhaps for debugging, arm/x86 are both LE, so no need to care about endianness in practice.",
+      "parentUuid": "4699fe96_a6bb1efb",
+      "range": {
+        "startLine": 41,
+        "startChar": 11,
+        "endLine": 41,
+        "endChar": 18
+      },
+      "revId": "5b570314f3140baf7d21ad3167c1c663753ed199",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3593170e_180191cf",
         "filename": "microdroid/signature/signature.cc",
         "patchSetId": 2
