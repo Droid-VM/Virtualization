@@ -420,6 +420,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4699fe96_a6bb1efb",
+        "filename": "microdroid/signature/signature.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-04-15T00:03:26Z",
+      "side": 1,
+      "message": "Endianness is important when you read/write a number to/from a file. A file can be generated in another machine and downloaded/pushed. Yeah this may not be the typical case (just for debugging?), but I don\u0027t see any strong reason to move away from the possibility.",
+      "parentUuid": "155dd4fa_4716bb82",
+      "range": {
+        "startLine": 41,
+        "startChar": 11,
+        "endLine": 41,
+        "endChar": 18
+      },
+      "revId": "5b570314f3140baf7d21ad3167c1c663753ed199",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3593170e_180191cf",
         "filename": "microdroid/signature/signature.cc",
         "patchSetId": 2
