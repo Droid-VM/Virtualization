@@ -39,6 +39,30 @@
       },
       "revId": "54b88d4bd967f9dffc27bebcbe2299d8605498b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c08ad9f0_55003a9f",
+        "filename": "microdroid/signature/signature.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-04-15T02:16:21Z",
+      "side": 1,
+      "message": "Oh, I should\u0027ve mention that. It\u0027s the same reason why the \"ApexSignature\" has the \"size\" field. Microdroid signature itself is a protobuf, regular file, the size of which is not aligned to a certain boundary. But when it\u0027s mapped to a partition and accessed via a block device inside the guest VM, we can\u0027t query the size of, say, /dev/block/vdc1 with lseek(SEEK_END) or ioctl(BLOCKGETSIZE64). (These return some value which is not exactly the original size of the file). That\u0027s why we need a \"length\" to read the exact protobuf message from the path.\n\nOf course, there\u0027s many alternative ways. One might be to put a fixed-sized footer at the end of \"aligned boundary\" so that every signature guarantees to have no extra bytes at the end.",
+      "parentUuid": "b48c6708_0709757d",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "54b88d4bd967f9dffc27bebcbe2299d8605498b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
