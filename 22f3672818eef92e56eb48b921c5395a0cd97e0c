@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efde8a85_4681e6f3",
+        "filename": "microdroid/linker.config.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-15T00:02:52Z",
+      "side": 1,
+      "message": "Let\u0027s keep only the libraries we have in microdroid even before the generation of this file is automated.\n\nMany libraries here - including libandroid, libRS, libjnigraphics, libmedia*, ... won\u0027t be available in microdroid.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 13
+      },
+      "revId": "22f3672818eef92e56eb48b921c5395a0cd97e0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
