@@ -16,6 +16,24 @@
       "message": "false is the default, so I\u0027m not sure why this was being called at all.",
       "revId": "8a13d2555b98757ff1cf1672b11a67c4ee256afb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f39ab774_af63f258",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-15T16:12:35Z",
+      "side": 0,
+      "message": "Huh.  I copied this setup probably from keystore, and I thought the default is the opposite (I\u0027d think sid is used within Android normally, but it may be a bad assumption).",
+      "parentUuid": "ed8f1683_127126e0",
+      "revId": "8a13d2555b98757ff1cf1672b11a67c4ee256afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

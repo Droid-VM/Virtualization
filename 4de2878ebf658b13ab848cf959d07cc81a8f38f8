@@ -16,6 +16,29 @@
       "message": "Updated, please take another look.",
       "revId": "4de2878ebf658b13ab848cf959d07cc81a8f38f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b71458f2_dbdb2009",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-15T16:12:35Z",
+      "side": 1,
+      "message": "It feels a bit weird that we have to pass in the default explicitly.  Would it be better to avoid this?  Anyways, this can be done separately if needed.",
+      "range": {
+        "startLine": 102,
+        "startChar": 59,
+        "endLine": 102,
+        "endChar": 84
+      },
+      "revId": "4de2878ebf658b13ab848cf959d07cc81a8f38f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
