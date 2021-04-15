@@ -468,6 +468,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "319cc927_9b1c0f1d",
+        "filename": "microdroid/signature/signature.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-04-15T00:23:58Z",
+      "side": 1,
+      "message": "Even in that case, I\u0027d like to be specific about endianness (so changing it to LE instead BE). It eliminates the need to know all about it: what machine types do we support (as of now, or in the near future) and these files can\u0027t be generated from other machine and ... \n\nWhy not simply saying \u00274byte unsigned integer in BE(or LE, if you want to avoid byteswaps for practicality)\u0027?",
+      "parentUuid": "82b3b55a_efd94c9c",
+      "range": {
+        "startLine": 41,
+        "startChar": 11,
+        "endLine": 41,
+        "endChar": 18
+      },
+      "revId": "5b570314f3140baf7d21ad3167c1c663753ed199",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3593170e_180191cf",
         "filename": "microdroid/signature/signature.cc",
         "patchSetId": 2
