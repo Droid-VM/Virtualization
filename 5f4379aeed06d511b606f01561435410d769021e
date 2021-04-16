@@ -150,6 +150,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5698117_2358c636",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-16T17:36:39Z",
+      "side": 1,
+      "message": "Exposing an interface that lets a client run an arbitrary executable within the VM defeats the purpose of using the VM for isolation in the first place. The VM must not trust anything outside itself, or allow arbitrary commands to be run on behalf of a client.",
+      "parentUuid": "55af01dd_2a79fb24",
+      "range": {
+        "startLine": 28,
+        "startChar": 16,
+        "endLine": 28,
+        "endChar": 81
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f3032fc_471ba108",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-16T17:36:39Z",
+      "side": 1,
+      "message": "Document what this return value means.",
+      "range": {
+        "startLine": 30,
+        "startChar": 4,
+        "endLine": 30,
+        "endChar": 8
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5fb945ae_2fbe09f4",
         "filename": "compos/src/compsvc.rs",
         "patchSetId": 3
@@ -166,6 +213,297 @@
         "startChar": 32,
         "endLine": 17,
         "endChar": 44
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f508312e_8fb80b68",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-16T17:36:39Z",
+      "side": 1,
+      "message": "If you are just going to drop the first arg, why pass it at all?",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8152c1e_3069f265",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-16T17:36:39Z",
+      "side": 1,
+      "message": "Nit: You could use .with_context(|| format!(\"...\"), SERVICE_NAME)?;",
+      "range": {
+        "startLine": 131,
+        "startChar": 77,
+        "endLine": 133,
+        "endChar": 7
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b94691d_850f2357",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-16T17:36:39Z",
+      "side": 1,
+      "message": "Above you call statfs, not statvfs. Which is correct?",
+      "range": {
+        "startLine": 46,
+        "startChar": 15,
+        "endLine": 46,
+        "endChar": 22
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf1ac490_fe049f5b",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-16T17:36:39Z",
+      "side": 1,
+      "message": "\u0027now\u0027 is no longer now. Calling it something like \u0027start\u0027 or \u0027start_time\u0027 would be more accurate.",
+      "range": {
+        "startLine": 78,
+        "startChar": 11,
+        "endLine": 78,
+        "endChar": 14
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7595fa2e_533adce8",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-16T17:36:39Z",
+      "side": 1,
+      "message": "Can this be RawFd rather than i32, so it\u0027s clearer what it means? Here and elsewhere.",
+      "range": {
+        "startLine": 90,
+        "startChar": 69,
+        "endLine": 90,
+        "endChar": 72
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d32b79b7_9c03b8fc",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-16T17:36:39Z",
+      "side": 1,
+      "message": "Optional: You could consider using structopt to derive the clap code for you, as you do in some of the other binaries.",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28ec5920_10cb2ec2",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-16T17:36:39Z",
+      "side": 1,
+      "message": "Nit: I believe you could do this as:\n\nlet out_fds \u003d matches.values_of(\"out-fd\").unwrap_or_default().into_iter().map(|arg| OutFdAnnotation { fd: arg.parse()? }).collect()?;\n\n(Possibly with some type annotations, I\u0027m not sure.)",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc9e74b6_d9f8157e",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-16T17:36:39Z",
+      "side": 1,
+      "message": "Just unwrap() or expect(...)",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cec8e3c0_aeb5dee9",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-16T17:36:39Z",
+      "side": 1,
+      "message": "I\u0027d be inclined to add an explicit `drop(authfs_lifetime)` (i.e. std::mem::drop) at the end of the main function, to make it clear that you expect it to live until then, and in case Rust gets less conservative with lifetimes in a future version.",
+      "range": {
+        "startLine": 199,
+        "startChar": 8,
+        "endLine": 199,
+        "endChar": 24
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00ec0e20_80be04ce",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-16T17:36:39Z",
+      "side": 1,
+      "message": "Don\u0027t you need to actually add the FDs to this list?",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c0be2ae_8d715053",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-16T17:36:39Z",
+      "side": 1,
+      "message": "`nix::fcntl::fcntl` is a safe wrapper around this.",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fae0991_48f6bb99",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-16T17:36:39Z",
+      "side": 1,
+      "message": "Rather than directly calling libc, can you use `nix::sys::stat::fstat`?\n\nOr File::from_raw_fd, but that\u0027s a bit more complicated because it takes ownership of the FD.",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "201a4da1_1e3568b1",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-16T17:36:39Z",
+      "side": 1,
+      "message": "You can replace the if let with .unwrap_or_default()",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a112362_ea3b0c05",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-16T17:36:39Z",
+      "side": 1,
+      "message": "unwrap()",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "306fad49_102f5bba",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-16T17:36:39Z",
+      "side": 1,
+      "message": "Again, I think it might be clearer to explicitly drop this at the end of the function.",
+      "range": {
+        "startLine": 150,
+        "startChar": 8,
+        "endLine": 150,
+        "endChar": 27
       },
       "revId": "5f4379aeed06d511b606f01561435410d769021e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
