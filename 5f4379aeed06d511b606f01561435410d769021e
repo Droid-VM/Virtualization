@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1049d028_cd4d8dba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-16T01:05:05Z",
+      "side": 1,
+      "message": "can we rename this as we expect this will be useful for non-compos use cases?",
+      "range": {
+        "startLine": 12,
+        "startChar": 3,
+        "endLine": 12,
+        "endChar": 10
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c0959b3a_766bb99f",
@@ -14,6 +37,52 @@
       "writtenOn": "2021-04-16T00:50:53Z",
       "side": 1,
       "message": "BTW, although not up to date, this diagram explains the execution flow and what the process hierarchy looks like.\nhttps://docs.google.com/document/d/1NusZOeAXYNi1R2a_RTbgN1_v3Wk7CiwZS_Kcyw6T0xo/edit#heading\u003dh.rbamnj6s5s0x",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55af01dd_2a79fb24",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-16T01:05:05Z",
+      "side": 1,
+      "message": "Why? In compos use case, it may make sense, but in general we would like to run an executable from an apk in the VM.",
+      "range": {
+        "startLine": 28,
+        "startChar": 16,
+        "endLine": 28,
+        "endChar": 81
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fb945ae_2fbe09f4",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-16T01:05:05Z",
+      "side": 1,
+      "message": "nit: computational",
+      "range": {
+        "startLine": 17,
+        "startChar": 32,
+        "endLine": 17,
+        "endChar": 44
+      },
       "revId": "5f4379aeed06d511b606f01561435410d769021e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
