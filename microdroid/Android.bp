@@ -97,6 +97,12 @@ prebuilt_root {
     installable: false,
 }
 
+linker_config {
+    name: "microdroid_linker_config",
+    src: ":linker.config.json",
+    installable: false,
+}
+
 android_filesystem {
     name: "microdroid_vendor",
     use_avb: true,
@@ -384,23 +390,5 @@ prebuilt_etc {
 linker_config {
     name: "microdroid_system_provide",
     src: "linker.config.json",
-    installable: false,
-}
-
-genrule {
-    name: "microdroid_linker_config_gen",
-    tools: ["conv_linker_config"],
-    srcs: [
-        ":system_linker_config",
-        ":microdroid_system_provide",
-    ],
-    out: ["linker.config.pb"],
-    cmd: "$(location conv_linker_config) merge -o $(out) -i $(location :system_linker_config) -i $(location :microdroid_system_provide)",
-}
-
-prebuilt_etc {
-    name: "microdroid_linker_config",
-    src: ":microdroid_linker_config_gen",
-    filename: "linker.config.pb",
     installable: false,
 }
