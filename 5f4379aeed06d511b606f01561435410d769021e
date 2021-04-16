@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec1df344_e2bcd31e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-16T17:31:23Z",
+      "side": 1,
+      "message": "We can, but \"comp\" here implies all kind of computational tasks.  For apps, I\u0027m not sure if they will have special capabilities to do other things.",
+      "parentUuid": "1049d028_cd4d8dba",
+      "range": {
+        "startLine": 12,
+        "startChar": 3,
+        "endLine": 12,
+        "endChar": 10
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c0959b3a_766bb99f",
@@ -59,6 +83,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edb4bb77_beef5fe8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-16T17:31:23Z",
+      "side": 1,
+      "message": "Jiyong, I feel you can read me mind ;)\n\n\u003e 1) we might be able to merge compservice and the worker to the same binary. \n\nI thought about it only briefly but didn\u0027t see a clear benefit.  We\u0027d need something like --mode\u003d{service,worker} and check/switch immediately in main, then run the current code.  Do you see other benefits?\n\n\u003e 2) I wish we can pass the executable to run via authfs as well\n\nIt\u0027s technically possible to merge the responsibility of the compsvc_worker into authfs, but what\u0027s an ideal architecture would depend again on what we want to achieve.  For this change, I tried to contain authfs and the executable inside the managing compsvc_worker, which creates namespaces, waits pid, will apply seccomp policies in the future.\n\n\u003e 3) I wish we can also pass paths in addition to fds.\n\nYup, I don\u0027t see why not for other use cases.  pvm_exec currently only takes fds only because that\u0027s what happens during dexopt (limited by existing SELinux policy, and we don\u0027t want to change that).",
+      "parentUuid": "0657debc_763cbcb2",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55af01dd_2a79fb24",
@@ -72,6 +114,30 @@
       "writtenOn": "2021-04-16T01:05:05Z",
       "side": 1,
       "message": "Why? In compos use case, it may make sense, but in general we would like to run an executable from an apk in the VM.",
+      "range": {
+        "startLine": 28,
+        "startChar": 16,
+        "endLine": 28,
+        "endChar": 81
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc85877c_40f2aa19",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-16T17:31:23Z",
+      "side": 1,
+      "message": "I agree. This is not yet a general enough solution for running an executable from an APK.  However, I still think the service should not open to run any executable by default.  This service itself is a big attack surface, and the developer shouldn\u0027t assume the input comes from them (although I think ideally they should be able to assume so, but it seems to be a current limitation).  So we might need a way for the app developer to configure the service somehow.\n\nTaking a step back, the SDK/API requirements are not clear to me.  We could support running executable(s) and/or native binder service(s), and the design may depend on what we really want to provide.  Also, we probably haven\u0027t thought about KeyMint for apps?\n\nSome early ideas to achieve what you want:\n * Make authfs support fd to a range within a file, e.g. an uncompressed executable in an APK may just look like an executable over authfs.\n   * Or, a executable loader in the VM to run such binaries.\n * Need a config by the app developer for the service setup.\n   * Or probably better, a programming paradigm that the developer can follow.\n\nAnyway, there are a lot of fun ahead :)",
+      "parentUuid": "55af01dd_2a79fb24",
       "range": {
         "startLine": 28,
         "startChar": 16,
