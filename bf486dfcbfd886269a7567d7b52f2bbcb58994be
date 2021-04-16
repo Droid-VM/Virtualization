@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "518115c5_a95c4249",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-16T00:43:21Z",
+      "side": 1,
+      "message": "PTAL\n\nFWIW:\n - Right now, I have in-flight improvement changes to minijail to make this compile.\n - There\u0027s also a crbug/1198756 in minijail, so the fd translation may not work correctly yet.\n - I also seem to break something else locally, but this is still ready to review.",
+      "revId": "bf486dfcbfd886269a7567d7b52f2bbcb58994be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
