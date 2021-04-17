@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c0147332_bce44d9b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-17T05:34:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ec1df344_e2bcd31e",
+      "range": {
+        "startLine": 12,
+        "startChar": 3,
+        "endLine": 12,
+        "endChar": 10
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c0959b3a_766bb99f",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -97,6 +121,24 @@
       "side": 1,
       "message": "Jiyong, I feel you can read me mind ;)\n\n\u003e 1) we might be able to merge compservice and the worker to the same binary. \n\nI thought about it only briefly but didn\u0027t see a clear benefit.  We\u0027d need something like --mode\u003d{service,worker} and check/switch immediately in main, then run the current code.  Do you see other benefits?\n\n\u003e 2) I wish we can pass the executable to run via authfs as well\n\nIt\u0027s technically possible to merge the responsibility of the compsvc_worker into authfs, but what\u0027s an ideal architecture would depend again on what we want to achieve.  For this change, I tried to contain authfs and the executable inside the managing compsvc_worker, which creates namespaces, waits pid, will apply seccomp policies in the future.\n\n\u003e 3) I wish we can also pass paths in addition to fds.\n\nYup, I don\u0027t see why not for other use cases.  pvm_exec currently only takes fds only because that\u0027s what happens during dexopt (limited by existing SELinux policy, and we don\u0027t want to change that).",
       "parentUuid": "0657debc_763cbcb2",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93a05fac_00f48d80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-17T05:34:20Z",
+      "side": 1,
+      "message": "The main motivation for (1) is size \u0026 simplicity. By merging the two binaries into one, we can save space. Also, we don\u0027t need to pass the configurations via cmdline parameter.\n\nFor (2), we have another thread with more context. Let\u0027s discuss there. Note: I am not insisting that it should be supported in this initial CL.\n\n+1 for (3).",
+      "parentUuid": "edb4bb77_beef5fe8",
       "revId": "5f4379aeed06d511b606f01561435410d769021e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -162,6 +204,30 @@
       "side": 1,
       "message": "Exposing an interface that lets a client run an arbitrary executable within the VM defeats the purpose of using the VM for isolation in the first place. The VM must not trust anything outside itself, or allow arbitrary commands to be run on behalf of a client.",
       "parentUuid": "55af01dd_2a79fb24",
+      "range": {
+        "startLine": 28,
+        "startChar": 16,
+        "endLine": 28,
+        "endChar": 81
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3598b2c_ec1abce6",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-17T05:34:20Z",
+      "side": 1,
+      "message": "Sure. Last week\u0027s discussion was all about this. When the VM starts, the client will give the hash (or digest) of the APK(s) that are allowed in the VM. Then the runtime in VM (compsvc) will configure authfs so that any executable it shares across VMs is from one of the allowed APKs.\n\nThe story is exactly the same as APEXes. App configures a VM with the set of APEXes (name/digest) that it wants to activate in the VM. Then at runtime, apexd will mount only the APEXes that matches with the name/digest pairs. See here https://source.corp.google.com/android/packages/modules/Virtualization/microdroid/signature/README.md",
+      "parentUuid": "b5698117_2358c636",
       "range": {
         "startLine": 28,
         "startChar": 16,
