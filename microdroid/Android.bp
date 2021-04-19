@@ -49,7 +49,11 @@ android_filesystem {
         "logd",
         "run-as",
         "secilc",
-        "adbd",
+
+        // "com.android.adbd" requires these,
+        "libadbd_auth",
+        "libadbd_fs",
+
         "apexd",
         "debuggerd",
         "linker",
@@ -147,6 +151,7 @@ microdroid_boot_cmdline = "rdinit=/bin/init_vendor " +
     "panic=-1 " +
     // TODO(b/181936135) make the ratelimiting conditional; ratelimiting on prod build
     "printk.devkmsg=on " +
+    "androidboot.selinux=permissive " +
     "androidboot.first_stage_console=1 " +
     "androidboot.hardware=microdroid "
 
@@ -378,6 +383,11 @@ prebuilt_etc {
 prebuilt_etc {
     name: "microdroid_cdisk_env.json",
     src: "microdroid_cdisk_env.json",
+}
+
+prebuilt_etc {
+    name: "microdroid_payload.json",
+    src: "microdroid_payload.json",
 }
 
 // TODO(b/185391776) generate at build time
