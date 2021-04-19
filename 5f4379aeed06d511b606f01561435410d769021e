@@ -264,6 +264,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98f8556d_bbc957ae",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-19T22:34:24Z",
+      "side": 1,
+      "message": "\u003e the client will give the hash (or digest) of the APK(s) that are allowed in the VM.\n\nI think hash/digest is not enough, if we want to allow apps to access their own secret. An app VM must be tied to their APK signature.  For the same reason, for apex digest is not enough.\n\nThe rest of the problem to run an executable would just be how to tell compsvc that executable is from offset X to Y in the APK.  One idea is to tell authfs to serve the file range (X, Y) as a file.  But again, I\u0027m not sure direct command is the right programming paradigm vs a native binder service.\n\n\u003e this would be the executable that is loaded by microdroid from an APK\n\nIt\u0027s not there yet.  As cool as it sounds for app developers to run an executable in the VM, I\u0027m not sure it\u0027s the right programming model.  An alternative is for them to define their own native binder service.  Either way, we need a way to tell compsvc where to locate the executable/libraries in the APK, or even some configuration to route different request types.\n\n\u003e What I don\u0027t understand is why you would give up the strongly-typed AIDL language in favour of only using it for passing command-line arguments.\n\nDo you mean file descriptor and not other flags?  We can definitely clean up the definition.  It *might* be possible to wrap FDs with ParcelFileDescriptor (or at least create another parcelable).",
+      "parentUuid": "ed2d15e8_d8a828c7",
+      "range": {
+        "startLine": 28,
+        "startChar": 16,
+        "endLine": 28,
+        "endChar": 81
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f3032fc_471ba108",
         "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
         "patchSetId": 3
@@ -275,6 +299,30 @@
       "writtenOn": "2021-04-16T17:36:39Z",
       "side": 1,
       "message": "Document what this return value means.",
+      "range": {
+        "startLine": 30,
+        "startChar": 4,
+        "endLine": 30,
+        "endChar": 8
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a186c677_476db51b",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-19T22:34:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f3032fc_471ba108",
       "range": {
         "startLine": 30,
         "startChar": 4,
@@ -308,6 +356,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8ffb0b4_a2246585",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-19T22:34:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fb945ae_2fbe09f4",
+      "range": {
+        "startLine": 17,
+        "startChar": 32,
+        "endLine": 17,
+        "endChar": 44
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f508312e_8fb80b68",
@@ -327,6 +399,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e2c18039_361cc587",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-19T22:34:24Z",
+      "side": 1,
+      "message": "\"ergonomics\"? :) I feel slightly better when the command looks like `pvm_exec ... -- sleep 60` vs `pvm_exec ... -- 60`.  But arguably the fake argument could be potentially misleading.",
+      "parentUuid": "f508312e_8fb80b68",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d8152c1e_3069f265",
         "filename": "compos/src/compsvc.rs",
         "patchSetId": 3
@@ -338,6 +428,30 @@
       "writtenOn": "2021-04-16T17:36:39Z",
       "side": 1,
       "message": "Nit: You could use .with_context(|| format!(\"...\"), SERVICE_NAME)?;",
+      "range": {
+        "startLine": 131,
+        "startChar": 77,
+        "endLine": 133,
+        "endChar": 7
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "057cf001_b5a75f25",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-19T22:34:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8152c1e_3069f265",
       "range": {
         "startLine": 131,
         "startChar": 77,
@@ -371,6 +485,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cea054f_563182ec",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-19T22:34:24Z",
+      "side": 1,
+      "message": "Fixed the message.",
+      "parentUuid": "7b94691d_850f2357",
+      "range": {
+        "startLine": 46,
+        "startChar": 15,
+        "endLine": 46,
+        "endChar": 22
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf1ac490_fe049f5b",
@@ -384,6 +522,30 @@
       "writtenOn": "2021-04-16T17:36:39Z",
       "side": 1,
       "message": "\u0027now\u0027 is no longer now. Calling it something like \u0027start\u0027 or \u0027start_time\u0027 would be more accurate.",
+      "range": {
+        "startLine": 78,
+        "startChar": 11,
+        "endLine": 78,
+        "endChar": 14
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7eb529f_10984668",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-19T22:34:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf1ac490_fe049f5b",
       "range": {
         "startLine": 78,
         "startChar": 11,
@@ -417,6 +579,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c71033ba_94154542",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-19T22:34:24Z",
+      "side": 1,
+      "message": "I created `type PseudoRawFd` since they are not really FDs.",
+      "parentUuid": "7595fa2e_533adce8",
+      "range": {
+        "startLine": 90,
+        "startChar": 69,
+        "endLine": 90,
+        "endChar": 72
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d32b79b7_9c03b8fc",
@@ -430,6 +616,24 @@
       "writtenOn": "2021-04-16T17:36:39Z",
       "side": 1,
       "message": "Optional: You could consider using structopt to derive the clap code for you, as you do in some of the other binaries.",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cd578a4_634b2859",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-19T22:34:24Z",
+      "side": 1,
+      "message": "structopt had some limitation when I used it before.  I\u0027ve been waiting for clap v3 to release, which will support structopt-like syntax.  I guess I\u0027ll switch the code I authored at once then :)",
+      "parentUuid": "d32b79b7_9c03b8fc",
       "revId": "5f4379aeed06d511b606f01561435410d769021e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -451,6 +655,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5d0fa83_0f0b8e88",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-19T22:34:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28ec5920_10cb2ec2",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc9e74b6_d9f8157e",
@@ -464,6 +686,24 @@
       "writtenOn": "2021-04-16T17:36:39Z",
       "side": 1,
       "message": "Just unwrap() or expect(...)",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c4b5b98_8f862398",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-19T22:34:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc9e74b6_d9f8157e",
       "revId": "5f4379aeed06d511b606f01561435410d769021e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -491,6 +731,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "613b2990_62f80445",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-19T22:34:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cec8e3c0_aeb5dee9",
+      "range": {
+        "startLine": 199,
+        "startChar": 8,
+        "endLine": 199,
+        "endChar": 24
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00ec0e20_80be04ce",
@@ -504,6 +768,24 @@
       "writtenOn": "2021-04-16T17:36:39Z",
       "side": 1,
       "message": "Don\u0027t you need to actually add the FDs to this list?",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c4aca6f_a4533194",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-19T22:34:24Z",
+      "side": 1,
+      "message": "Yes.  You caught the bug :)",
+      "parentUuid": "00ec0e20_80be04ce",
       "revId": "5f4379aeed06d511b606f01561435410d769021e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -525,6 +807,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc3e0c64_b46d0176",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-19T22:34:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c0be2ae_8d715053",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fae0991_48f6bb99",
@@ -538,6 +838,24 @@
       "writtenOn": "2021-04-16T17:36:39Z",
       "side": 1,
       "message": "Rather than directly calling libc, can you use `nix::sys::stat::fstat`?\n\nOr File::from_raw_fd, but that\u0027s a bit more complicated because it takes ownership of the FD.",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30d4cb4c_d732cb53",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-19T22:34:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fae0991_48f6bb99",
       "revId": "5f4379aeed06d511b606f01561435410d769021e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -559,6 +877,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a23203a_48bd5933",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-19T22:34:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "201a4da1_1e3568b1",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a112362_ea3b0c05",
@@ -576,6 +912,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94ddc040_12bff9cd",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-19T22:34:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a112362_ea3b0c05",
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "306fad49_102f5bba",
@@ -589,6 +943,30 @@
       "writtenOn": "2021-04-16T17:36:39Z",
       "side": 1,
       "message": "Again, I think it might be clearer to explicitly drop this at the end of the function.",
+      "range": {
+        "startLine": 150,
+        "startChar": 8,
+        "endLine": 150,
+        "endChar": 27
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ab97148_e1d80a25",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-19T22:34:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "306fad49_102f5bba",
       "range": {
         "startLine": 150,
         "startChar": 8,
