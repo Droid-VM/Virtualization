@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ee9a9a8_a3b74d09",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-04-19T01:50:52Z",
+      "side": 1,
+      "message": "nit: not necessary?\n\nbtw, I guess you wanted to use .json as a source and for linker_config module to fill it with provideLibs from the packaging items. If it is the case, linker.config.json should list \"requireLibs\" instead of provideLibs.\n\n\"requiredLibs\" of /system/etc/linker.config.pb tells linkerconfig what libraries the system expects from apexes. I don\u0027t think there\u0027s required libs from the system, yet. So linker.config.json for microdroid may be empty for now.",
+      "range": {
+        "startLine": 102,
+        "startChar": 10,
+        "endLine": 102,
+        "endChar": 11
+      },
+      "revId": "f42c0e5fe766393e6d5f7636917ab30317c1595b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
