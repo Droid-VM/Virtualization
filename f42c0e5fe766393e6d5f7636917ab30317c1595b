@@ -22,6 +22,30 @@
       },
       "revId": "f42c0e5fe766393e6d5f7636917ab30317c1595b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3580640_4dc8eb8c",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-04-19T01:53:54Z",
+      "side": 1,
+      "message": "\":..\" \u003c- Oh, I missed that you added a filegroup of it.\nBy the way, as you commented in this commit, we need a separate copy of it. (packages/modules/Virtualization/microdroid/linker.config.json) to list microdroid\u0027s external dependencies.",
+      "parentUuid": "2ee9a9a8_a3b74d09",
+      "range": {
+        "startLine": 102,
+        "startChar": 10,
+        "endLine": 102,
+        "endChar": 11
+      },
+      "revId": "f42c0e5fe766393e6d5f7636917ab30317c1595b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
