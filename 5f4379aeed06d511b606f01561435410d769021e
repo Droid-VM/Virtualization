@@ -240,6 +240,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed2d15e8_d8a828c7",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-04-19T14:30:04Z",
+      "side": 1,
+      "message": "Cool stuff, Victor! If I may summarize how I understand this CL (correct me if I\u0027m wrong) - this would be the executable that is loaded by microdroid from an APK (as Jiyong described) and it acts as a generic wrapper for a given executable that exposes it via RPC Binder.\n\nThat sounds compatible with our plan for packaging/spawning payloads and I do agree with writing this in a reusable manner in case others find this useful, too.\n\nWhat I don\u0027t understand is why you would give up the strongly-typed AIDL language in favour of only using it for passing command-line arguments. I would like us to encourage best practices for defining xPC interfaces, even if it means biting the bullet and writing an AIDL for dex2oat. It will save us headaches in the future.\n\nSo in my mind, we would provide the in/out FD structs to use instead of ParcelFileDescriptor, but the execute() function should be something that the user-implemented Binder server calls internally to spawn their worker. That keeps 99% of this CL intact, just leaves it up to the users to define the actual workload-specific AIDL interface and marshalling of arguments.",
+      "parentUuid": "c3598b2c_ec1abce6",
+      "range": {
+        "startLine": 28,
+        "startChar": 16,
+        "endLine": 28,
+        "endChar": 81
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f3032fc_471ba108",
         "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
         "patchSetId": 3
