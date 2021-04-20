@@ -95,6 +95,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f4ef4eb_6fc3d8c0",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-20T10:55:24Z",
+      "side": 1,
+      "message": "executable",
+      "range": {
+        "startLine": 29,
+        "startChar": 27,
+        "endLine": 29,
+        "endChar": 39
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ea6f989_361eb28a",
         "filename": "compos/aidl/com/android/virt/compos/InputFdAnnotation.aidl",
         "patchSetId": 4
@@ -197,6 +220,75 @@
         "startChar": 26,
         "endLine": 46,
         "endChar": 38
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "878b9e96_a221f7e6",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-20T10:55:24Z",
+      "side": 1,
+      "message": "Why is this an error? Maybe you just want `trace!`?",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 108,
+        "endChar": 13
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d03aa8d6_119cb619",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-20T10:55:24Z",
+      "side": 1,
+      "message": "RawFd, to match what fcntl takes",
+      "range": {
+        "startLine": 73,
+        "startChar": 19,
+        "endLine": 73,
+        "endChar": 22
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6ed0d67_d882680a",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-20T10:55:24Z",
+      "side": 1,
+      "message": "RawFd here too, though isn\u0027t it automatically inferred?",
+      "range": {
+        "startLine": 79,
+        "startChar": 25,
+        "endLine": 79,
+        "endChar": 28
       },
       "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
