@@ -288,6 +288,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ce4f626d_6b583267",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-20T00:22:20Z",
+      "side": 1,
+      "message": "Yes, APK signature would be more correct. It contains digest, so I feel fine.\n\nAnd yes, we need to pass an embedded executable in an APK as a standalone file in the VM. I think this is doable as we only need to adjust the offset and size in the fd_server side and because the executables are not compressed.\n\nI am against the native binder service idea, because that will be too cumbersome for an app developer to be able to execute something in the VM, which I believe would be the most common use case. They will be re-inventing the wheel, and it isn\u0027t something we should encourage them.",
+      "parentUuid": "98f8556d_bbc957ae",
+      "range": {
+        "startLine": 28,
+        "startChar": 16,
+        "endLine": 28,
+        "endChar": 81
+      },
+      "revId": "5f4379aeed06d511b606f01561435410d769021e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f3032fc_471ba108",
         "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
         "patchSetId": 3
