@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d8ef824_5d86751b",
+        "filename": "compos/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-20T00:01:43Z",
+      "side": 1,
+      "message": "nit: this will eventually need to be stable right, since we are using it VMs\u003c-\u003ehost? Can you mark it as such so that API review happens as the CL is added? (things like, use camel case, comment more details)",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 19
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e518ec2e_e2bece04",
+        "filename": "compos/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-20T00:01:43Z",
+      "side": 1,
+      "message": "nit: unneeded?",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 1
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "922241ca_76af6875",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-20T00:01:43Z",
+      "side": 1,
+      "message": "can we build comp service + FD passing utilities separately?",
+      "range": {
+        "startLine": 17,
+        "startChar": 25,
+        "endLine": 17,
+        "endChar": 31
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d68b78a7_20bcb8e7",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-20T00:01:43Z",
+      "side": 1,
+      "message": "any command? what do we need this for and what security guarantees do we need/want?",
+      "range": {
+        "startLine": 24,
+        "startChar": 7,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ea6f989_361eb28a",
+        "filename": "compos/aidl/com/android/virt/compos/InputFdAnnotation.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-20T00:01:43Z",
+      "side": 1,
+      "message": "On naming:\n- \u0027InputFd\u0027 avoid \u0027fd\u0027 term since this isn\u0027t a kernel fd, rather an authfs/binder file id?\n- \u0027Annotation\u0027 is this an upstream name?",
+      "range": {
+        "startLine": 20,
+        "startChar": 11,
+        "endLine": 20,
+        "endChar": 28
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12ce76a0_b37067a5",
+        "filename": "compos/aidl/com/android/virt/compos/InputFdAnnotation.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-20T00:01:43Z",
+      "side": 1,
+      "message": "nit: comment could easily become out of date",
+      "range": {
+        "startLine": 22,
+        "startChar": 59,
+        "endLine": 23,
+        "endChar": 61
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f9c6536_2c55a4a5",
+        "filename": "compos/aidl/com/android/virt/compos/InputFdAnnotation.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-20T00:01:43Z",
+      "side": 1,
+      "message": "in bytes?",
+      "range": {
+        "startLine": 27,
+        "startChar": 24,
+        "endLine": 27,
+        "endChar": 28
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0fd867e_7000b9c3",
+        "filename": "compos/aidl/com/android/virt/compos/OutputFdAnnotation.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-20T00:01:43Z",
+      "side": 1,
+      "message": "curious, why does input need size, but output doesn\u0027t?",
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74192087_7c9fa2f4",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-04-20T00:01:43Z",
+      "side": 1,
+      "message": "nit: avoid, since this should always be on the path?",
+      "range": {
+        "startLine": 46,
+        "startChar": 26,
+        "endLine": 46,
+        "endChar": 38
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
