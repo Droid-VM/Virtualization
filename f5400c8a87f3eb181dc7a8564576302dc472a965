@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fedd87d_de4d6ce4",
+        "filename": "compos/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-20T22:20:56Z",
+      "side": 1,
+      "message": "Not really.  The RPC detail is the internal implementation between compsvc and pvm_exec, both will be deployed with the same apex.  Same idea to authfs and fd_server.\n\n(so I guess we may not need to freeze binder wire format for these?)",
+      "parentUuid": "6d8ef824_5d86751b",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 19
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e518ec2e_e2bece04",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-04-20T00:01:43Z",
       "side": 1,
       "message": "nit: unneeded?",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 1
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27b70773_9b457826",
+        "filename": "compos/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-20T22:20:56Z",
+      "side": 1,
+      "message": "Merged and moved L1-21 to aidl/Android.bp",
+      "parentUuid": "e518ec2e_e2bece04",
       "range": {
         "startLine": 12,
         "startChar": 0,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2849e77c_cc02828e",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-20T22:20:56Z",
+      "side": 1,
+      "message": "(Note that authfs and fd_server are already under com.android.virt / in the pKVM apex.)\n\nYeah, we just need a clear interface.  On the client side, it needs to pass the fd to fd_server, then send the \"annotations\" to the server; on the server side, it needs to start authfs given the annotations.  These are essentially what pvm_exec and compsvc_worker do (besides parsing the command line arguments).  We could turn them into some stable libraries to ship in pKVM apex.  Any suggestions?",
+      "parentUuid": "922241ca_76af6875",
+      "range": {
+        "startLine": 17,
+        "startChar": 25,
+        "endLine": 17,
+        "endChar": 31
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d68b78a7_20bcb8e7",
         "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
         "patchSetId": 4
@@ -83,6 +155,30 @@
       "writtenOn": "2021-04-20T00:01:43Z",
       "side": 1,
       "message": "any command? what do we need this for and what security guarantees do we need/want?",
+      "range": {
+        "startLine": 24,
+        "startChar": 7,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0867c70b_918c1b0d",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-20T22:20:56Z",
+      "side": 1,
+      "message": "Clarified in the comment.",
+      "parentUuid": "d68b78a7_20bcb8e7",
       "range": {
         "startLine": 24,
         "startChar": 7,
@@ -106,6 +202,30 @@
       "writtenOn": "2021-04-20T10:55:24Z",
       "side": 1,
       "message": "executable",
+      "range": {
+        "startLine": 29,
+        "startChar": 27,
+        "endLine": 29,
+        "endChar": 39
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ce278e9_e5c87d4b",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-20T22:20:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f4ef4eb_6fc3d8c0",
       "range": {
         "startLine": 29,
         "startChar": 27,
@@ -141,6 +261,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c93326dd_d7f0a9fd",
+        "filename": "compos/aidl/com/android/virt/compos/InputFdAnnotation.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-20T22:20:56Z",
+      "side": 1,
+      "message": "Re \"fd\", I\u0027m on the fence.  Yes, the number itself is more like an ID, but it also means to be the final fd number that the executable will get.  In the rust code, I now call this \"PseudoFd\".\n\nWhat do you mean by \"upstream name\"?  I made it up myself.  It could be \"Metadata\", etc.",
+      "parentUuid": "1ea6f989_361eb28a",
+      "range": {
+        "startLine": 20,
+        "startChar": 11,
+        "endLine": 20,
+        "endChar": 28
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "12ce76a0_b37067a5",
         "filename": "compos/aidl/com/android/virt/compos/InputFdAnnotation.aidl",
         "patchSetId": 4
@@ -152,6 +296,30 @@
       "writtenOn": "2021-04-20T00:01:43Z",
       "side": 1,
       "message": "nit: comment could easily become out of date",
+      "range": {
+        "startLine": 22,
+        "startChar": 59,
+        "endLine": 23,
+        "endChar": 61
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29cdab9c_58deef64",
+        "filename": "compos/aidl/com/android/virt/compos/InputFdAnnotation.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-20T22:20:56Z",
+      "side": 1,
+      "message": "Re-phrased to be affirmative.  If we end up need to make the number differently, we could add another integer.  These are all private implementation on purpose, so this kind of change should be easy.",
+      "parentUuid": "12ce76a0_b37067a5",
       "range": {
         "startLine": 22,
         "startChar": 59,
@@ -185,6 +353,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6335c4d0_112aa7fc",
+        "filename": "compos/aidl/com/android/virt/compos/InputFdAnnotation.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-20T22:20:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f9c6536_2c55a4a5",
+      "range": {
+        "startLine": 27,
+        "startChar": 24,
+        "endLine": 27,
+        "endChar": 28
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0fd867e_7000b9c3",
@@ -202,6 +394,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbe758e5_14af7ae5",
+        "filename": "compos/aidl/com/android/virt/compos/OutputFdAnnotation.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-20T22:20:56Z",
+      "side": 1,
+      "message": "Output size can be arbitrary.\n\nFor input files, they are supposed to be read-only, and will be verified against fs-verity hash algorithm.  IIRC, size (and stat in general) is needed during the lookup of each FUSE entry.  And for fs-verity verification, we need the size to correctly walk the Merkle tree.\n\nTechnically, we could query the size on demand of each file, but in the current use cases, that only seems to complicate things.",
+      "parentUuid": "d0fd867e_7000b9c3",
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74192087_7c9fa2f4",
@@ -215,6 +425,30 @@
       "writtenOn": "2021-04-20T00:01:43Z",
       "side": 1,
       "message": "nit: avoid, since this should always be on the path?",
+      "range": {
+        "startLine": 46,
+        "startChar": 26,
+        "endLine": 46,
+        "endChar": 38
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b374f2d_821baf17",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-20T22:20:56Z",
+      "side": 1,
+      "message": "This is used in the \"exec*\" context and may depend on the internal implementation of minijail.  I\u0027d prefer absolute path for now.",
+      "parentUuid": "74192087_7c9fa2f4",
       "range": {
         "startLine": 46,
         "startChar": 26,
@@ -248,6 +482,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a3a8bf1_e2afa9a3",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-20T22:20:56Z",
+      "side": 1,
+      "message": "oops, removed.",
+      "parentUuid": "878b9e96_a221f7e6",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 108,
+        "endChar": 13
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d03aa8d6_119cb619",
@@ -271,6 +529,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "311e087b_7a95796d",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-20T22:20:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d03aa8d6_119cb619",
+      "range": {
+        "startLine": 73,
+        "startChar": 19,
+        "endLine": 73,
+        "endChar": 22
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6ed0d67_d882680a",
@@ -284,6 +566,30 @@
       "writtenOn": "2021-04-20T10:55:24Z",
       "side": 1,
       "message": "RawFd here too, though isn\u0027t it automatically inferred?",
+      "range": {
+        "startLine": 79,
+        "startChar": 25,
+        "endLine": 79,
+        "endChar": 28
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38e9564f_a1b9f23e",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-20T22:20:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6ed0d67_d882680a",
       "range": {
         "startLine": 79,
         "startChar": 25,
