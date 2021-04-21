@@ -16,6 +16,115 @@
       "message": "I added yet another mk_ tool to create a payload composite image which have a signature partition. I think mk_payload supersedes the mk_signature, but while testing, having signature-specific tool was handy, so I leave it for now. mk_payload could delegate signature-creation to mk_signature. Anyway, these should be done by Virtmanager in the end.\n",
       "revId": "a78bcff2ca73ef8c24bfe2d9332cf0b708665e21",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "126a8ad0_a049e12c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-21T13:26:46Z",
+      "side": 1,
+      "message": "Some nits, but feel free to address them in follow-up CLs.\n\nAlso note that the source of truth for the signature partition will be from the apps and the generation of the partition would be on the virt manager. Furthermore, we might have to change the layout of the signature partition very soon. See this discussion: https://docs.google.com/document/d/1PdHbR_G3hZnri9uM7dxxOP6-frYPm8EoYrd5HjFZIps/edit?disco\u003dAAAAJBToFYE\n\nNevertheless, I feel fine with this as a starter. This indeed is a great progress!",
+      "revId": "a78bcff2ca73ef8c24bfe2d9332cf0b708665e21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af94fe1e_3059d6ea",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-21T13:26:46Z",
+      "side": 1,
+      "message": "Note that this info will eventually come from apps. Should be fine to have this file in the APEX for this initial version.",
+      "range": {
+        "startLine": 387,
+        "startChar": 0,
+        "endLine": 391,
+        "endChar": 0
+      },
+      "revId": "a78bcff2ca73ef8c24bfe2d9332cf0b708665e21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "018a8b46_dd7a8a94",
+        "filename": "microdroid/signature/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-21T13:26:46Z",
+      "side": 1,
+      "message": "Calling this payload sounds a little bit weird because the entire OS is considered as payload. I don\u0027t have a suggestion though.",
+      "range": {
+        "startLine": 61,
+        "startChar": 14,
+        "endLine": 61,
+        "endChar": 21
+      },
+      "revId": "a78bcff2ca73ef8c24bfe2d9332cf0b708665e21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f323df6_7aa68706",
+        "filename": "microdroid/signature/mk_payload.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-21T13:26:46Z",
+      "side": 1,
+      "message": "I saw this function several times. Definitely out of scope of this CL, but consider adding this to libbase, libutils, or somewhere else.",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 1
+      },
+      "revId": "a78bcff2ca73ef8c24bfe2d9332cf0b708665e21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "108d59be_77c9d744",
+        "filename": "microdroid/signature/mk_payload.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-21T13:26:46Z",
+      "side": 1,
+      "message": "This name doesn\u0027t seem to represent what it actually does. dirname is not used at all when path is already absolute.",
+      "range": {
+        "startLine": 58,
+        "startChar": 12,
+        "endLine": 58,
+        "endChar": 22
+      },
+      "revId": "a78bcff2ca73ef8c24bfe2d9332cf0b708665e21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
