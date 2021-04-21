@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c7c40dd_cc704440",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-21T13:36:14Z",
+      "side": 1,
+      "message": "Not in this CL, but having two mount namespaces even in a VM makes me uncomfortable, because they are not necessary. Could you file a bug to eliminate that and add TODO  at the relevant places in this file?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 36
+      },
+      "revId": "d56936f43b2c8fbafe483123c686ce51fd0ef52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "193dbc50_5915db52",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-21T13:36:14Z",
+      "side": 1,
+      "message": "apexd should run with its own security label. I encourage you to define a service (with user/group/seclabel) and run it from here.",
+      "range": {
+        "startLine": 103,
+        "startChar": 8,
+        "endLine": 103,
+        "endChar": 9
+      },
+      "revId": "d56936f43b2c8fbafe483123c686ce51fd0ef52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
