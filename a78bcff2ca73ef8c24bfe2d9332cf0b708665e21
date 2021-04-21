@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dac232ee_8d4969cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-04-21T13:09:00Z",
+      "side": 1,
+      "message": "I added yet another mk_ tool to create a payload composite image which have a signature partition. I think mk_payload supersedes the mk_signature, but while testing, having signature-specific tool was handy, so I leave it for now. mk_payload could delegate signature-creation to mk_signature. Anyway, these should be done by Virtmanager in the end.\n",
+      "revId": "a78bcff2ca73ef8c24bfe2d9332cf0b708665e21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
