@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e906f24_033802b6",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-22T18:07:57Z",
+      "side": 1,
+      "message": "Let\u0027s figure out the details later.  For now, I think this component is probably generic enough, and we could put it in com.android.virt.apex.  I\u0027d rename the directory name to compsvc as well.  David, WDYT?",
+      "parentUuid": "2849e77c_cc02828e",
+      "range": {
+        "startLine": 17,
+        "startChar": 25,
+        "endLine": 17,
+        "endChar": 31
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d68b78a7_20bcb8e7",
         "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
         "patchSetId": 4
