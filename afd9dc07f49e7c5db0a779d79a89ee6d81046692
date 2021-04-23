@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32c8c21c_acf2557d",
+        "filename": "microdroid/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-04-23T10:19:42Z",
+      "side": 1,
+      "message": "I\u0027d like to do, but I couldn\u0027t find a way. How can we do?",
+      "parentUuid": "3e9ce345_2f554957",
+      "range": {
+        "startLine": 37,
+        "startChar": 12,
+        "endLine": 37,
+        "endChar": 79
+      },
+      "revId": "afd9dc07f49e7c5db0a779d79a89ee6d81046692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a8c802a_9d314d2d",
         "filename": "microdroid/init.rc",
         "patchSetId": 2
@@ -83,6 +107,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8758ba3e_5b53ad4b",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-04-23T10:19:42Z",
+      "side": 1,
+      "message": "After mounting, /data became unlabeled. I had to call this to fix it.",
+      "parentUuid": "6a8c802a_9d314d2d",
+      "range": {
+        "startLine": 116,
+        "startChar": 4,
+        "endLine": 116,
+        "endChar": 20
+      },
+      "revId": "afd9dc07f49e7c5db0a779d79a89ee6d81046692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06c69a80_3e413552",
         "filename": "microdroid/microdroid_cdisk_userdata.json",
         "patchSetId": 2
@@ -94,6 +142,30 @@
       "writtenOn": "2021-04-23T09:02:50Z",
       "side": 1,
       "message": "out of curiosity. Why can\u0027t you pass userdata.img directly via --rwdisk?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 0
+      },
+      "revId": "afd9dc07f49e7c5db0a779d79a89ee6d81046692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f68698ac_9c3168d3",
+        "filename": "microdroid/microdroid_cdisk_userdata.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-04-23T10:19:42Z",
+      "side": 1,
+      "message": "I wanted to refer /dev/block/by-name/userdata.",
+      "parentUuid": "06c69a80_3e413552",
       "range": {
         "startLine": 1,
         "startChar": 0,
