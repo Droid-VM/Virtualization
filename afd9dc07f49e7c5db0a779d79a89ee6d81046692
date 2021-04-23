@@ -33,6 +33,92 @@
       "message": "I lost +2. Can anyone take a look?",
       "revId": "afd9dc07f49e7c5db0a779d79a89ee6d81046692",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e9ce345_2f554957",
+        "filename": "microdroid/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-23T09:02:50Z",
+      "side": 1,
+      "message": "Consider using cow disk",
+      "range": {
+        "startLine": 37,
+        "startChar": 12,
+        "endLine": 37,
+        "endChar": 79
+      },
+      "revId": "afd9dc07f49e7c5db0a779d79a89ee6d81046692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a8c802a_9d314d2d",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-23T09:02:50Z",
+      "side": 1,
+      "message": "No need? The data should be empty and there\u0027s nothing to label.",
+      "range": {
+        "startLine": 116,
+        "startChar": 4,
+        "endLine": 116,
+        "endChar": 20
+      },
+      "revId": "afd9dc07f49e7c5db0a779d79a89ee6d81046692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06c69a80_3e413552",
+        "filename": "microdroid/microdroid_cdisk_userdata.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-23T09:02:50Z",
+      "side": 1,
+      "message": "out of curiosity. Why can\u0027t you pass userdata.img directly via --rwdisk?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 0
+      },
+      "revId": "afd9dc07f49e7c5db0a779d79a89ee6d81046692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24dd5b66_d99f15d5",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-04-23T09:02:50Z",
+      "side": 1,
+      "message": "Add a test that can verify that the data partition is mounted.",
+      "revId": "afd9dc07f49e7c5db0a779d79a89ee6d81046692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
