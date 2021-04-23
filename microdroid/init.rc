@@ -109,6 +109,9 @@ on post-fs
 
     start adbd
 
+on late-fs
+    mount_all /vendor/etc/fstab --late
+
 service ueventd /system/bin/ueventd
     class core
     critical
