@@ -70,6 +70,30 @@
       },
       "revId": "13ca2c8204baa29af4618e23fabae278ba0c33eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9249054e_7acf39c3",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-04-23T00:56:35Z",
+      "side": 1,
+      "message": "Thanks. I was curious what make it necessary. So, /etc-\u003e/system/etc seems what we needed but missed since it was done via \"make magic\" ;-)\n\nGood to see that we\u0027re revealing Android system\u0027s requirements. And I hope we could make it explicit so that any missing requirements shout out clearly.",
+      "parentUuid": "48f3081b_3e7e288f",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 20
+      },
+      "revId": "13ca2c8204baa29af4618e23fabae278ba0c33eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
