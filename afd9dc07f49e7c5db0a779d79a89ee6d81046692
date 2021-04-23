@@ -132,6 +132,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "443006c2_17ad9bc6",
+        "filename": "microdroid/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-04-23T11:37:42Z",
+      "side": 1,
+      "message": "I didn\u0027t check, but we\u0027ll have /dev/block/by-name/* symlinks because it\u0027s done by the partitions. But the difference is that qcow-format requires that sized img file while \"composite disk image\" is only a set of references to other files. I guess we can use qcow for user_data.",
+      "parentUuid": "9fddbf4f_c7bcf7a9",
+      "range": {
+        "startLine": 37,
+        "startChar": 12,
+        "endLine": 37,
+        "endChar": 79
+      },
+      "revId": "afd9dc07f49e7c5db0a779d79a89ee6d81046692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a8c802a_9d314d2d",
         "filename": "microdroid/init.rc",
         "patchSetId": 2
@@ -238,6 +262,30 @@
       "side": 1,
       "message": "Ack. I think then this can be part of os_composite.img.",
       "parentUuid": "f68698ac_9c3168d3",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 0
+      },
+      "revId": "afd9dc07f49e7c5db0a779d79a89ee6d81046692",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14bbb026_0a883422",
+        "filename": "microdroid/microdroid_cdisk_userdata.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-04-23T11:37:42Z",
+      "side": 1,
+      "message": "Yeah, I agree. But the tricky part is that we need to pass os_composite.img as \"--disk (read-only)\" because in the future it\u0027ll point to other read-only .img files. --disk won\u0027t allow a writable partition.",
+      "parentUuid": "a3205d07_207fbbc4",
       "range": {
         "startLine": 1,
         "startChar": 0,
