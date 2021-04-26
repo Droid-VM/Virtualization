@@ -168,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "01ae6161_0d8e777b",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-04-26T22:39:46Z",
+      "side": 1,
+      "message": "Sorry Victor but I do have reservations to encouraging users to build pVMs with a command line API. There may be reasons why to do it for dex2oat but we should encourage users to write a proper AIDL, build a Binder service that implements it and then give them tools that automagically help them set up the FD sharing. And once we figure out how to integrate authfs into libbinder, it will be easy to remove the magic. I know it\u0027s more work for you but would you mind splitting this up?",
+      "parentUuid": "3e906f24_033802b6",
+      "range": {
+        "startLine": 17,
+        "startChar": 25,
+        "endLine": 17,
+        "endChar": 31
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d68b78a7_20bcb8e7",
         "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
         "patchSetId": 4
