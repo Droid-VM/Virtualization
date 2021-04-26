@@ -192,6 +192,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df80319e_9a9ed2c0",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-26T23:38:02Z",
+      "side": 1,
+      "message": "I do like a binder better than a command line as a developer API, at least it feels more like a service that can be potentially accessed by anyone (my main reservation of the developer API in general is that it\u0027s not clear what we\u0027re going to tell the developers about, such as that their code in the VM can\u0027t trust their own code from the other side.  An API can inject/imply false assumption easily.).\n\nFor compos, this is already working.  I just thought this can be reused for \"executing a binary from an app inside microdroid\".  But it doesn\u0027t have to be if we think there will be a different way later.  If binder can indeed support transparent CD passing, then the developer\u0027s executable could just be an init argument (though they might need some work to run multiple executables).  It\u0027s going to take a long time to achieve that, I think.  Steven and I should talk more about the setup to make FD passing transparent.  For now, I think it\u0027s better to land this as is.",
+      "parentUuid": "01ae6161_0d8e777b",
+      "range": {
+        "startLine": 17,
+        "startChar": 25,
+        "endLine": 17,
+        "endChar": 31
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d68b78a7_20bcb8e7",
         "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
         "patchSetId": 4
