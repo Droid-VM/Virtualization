@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "498a1878_52fb88fa",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-04-27T07:53:43Z",
+      "side": 1,
+      "message": "I wanted to do \"adb -s {MICRODROID_SERIAL} shell \u0027echo MicrodroidTest \u003e /data/local/tmp/test.txt\u0027\" but it didn\u0027t work for unknown reason.\n\n    \"/system/bin/sh: echo MicrodroidTest \u003e /data/local/tmp/test.txt: inaccessible or not found\"",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 55
+      },
+      "revId": "87ba1f12a162cf44b326c6f699c842b3ac1307b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
