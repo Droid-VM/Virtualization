@@ -216,6 +216,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e447773_a6656341",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-04-27T12:28:43Z",
+      "side": 1,
+      "message": "Unfortunately it is the case that VMs cannot trust any external entity, that is just a fact of the matter, and we\u0027ll have to communicate that to users. And nudging them towards the client-server model of AIDL is the way to help them make the right decisions. So I am sorry but I don\u0027t want to land this as is.\n\nI also don\u0027t think that transparent FD passing is a prerequisite - we can expose the Input/OutputFd structs for use in the AIDL interfaces together with libraries for setting authfs up on both ends.",
+      "parentUuid": "df80319e_9a9ed2c0",
+      "range": {
+        "startLine": 17,
+        "startChar": 25,
+        "endLine": 17,
+        "endChar": 31
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d68b78a7_20bcb8e7",
         "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
         "patchSetId": 4
