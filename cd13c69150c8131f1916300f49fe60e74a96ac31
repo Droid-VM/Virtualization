@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc68f115_270ec506",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-04-27T04:02:01Z",
+      "side": 1,
+      "message": "This is needed even when we don\u0027t have anr. We have to fix tombstoned, but I\u0027ll leave this as-is for now. I\u0027ll add a comment in a follow-up CL",
+      "parentUuid": "f530f68c_5ed6fb63",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 57
+      },
+      "revId": "cd13c69150c8131f1916300f49fe60e74a96ac31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c69f289d_79c604e7",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-04-23T09:05:17Z",
       "side": 1,
       "message": "Why is this needed?",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 53
+      },
+      "revId": "cd13c69150c8131f1916300f49fe60e74a96ac31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e14a8244_a14cb1ab",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-04-27T04:02:01Z",
+      "side": 1,
+      "message": "This is not needed. I\u0027ll remove this as a follow-up CL.",
+      "parentUuid": "c69f289d_79c604e7",
       "range": {
         "startLine": 127,
         "startChar": 0,
