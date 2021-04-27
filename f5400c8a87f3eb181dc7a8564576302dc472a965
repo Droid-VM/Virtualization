@@ -240,6 +240,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82d378a6_00d3fd60",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-27T17:25:05Z",
+      "side": 1,
+      "message": "I don\u0027t think this change itself has nothing to do with the developers, and why it should be blocked.  But I understand the desire to split the common utilities here.\n\nI do think we need to know what the final architecture of FD passing will look like, before starting any refactoring here.  There are many components/roles/privileges to consider in such architecture, and I\u0027d like to get aligned first.",
+      "parentUuid": "1e447773_a6656341",
+      "range": {
+        "startLine": 17,
+        "startChar": 25,
+        "endLine": 17,
+        "endChar": 31
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d68b78a7_20bcb8e7",
         "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
         "patchSetId": 4
