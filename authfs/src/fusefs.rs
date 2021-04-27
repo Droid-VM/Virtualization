@@ -27,8 +27,8 @@ use std::path::Path;
 use std::time::Duration;
 
 use fuse::filesystem::{
-    Context, DirEntry, DirectoryIterator, Entry, FileSystem, FsOptions, ZeroCopyReader,
-    ZeroCopyWriter,
+    Context, DirEntry, DirectoryIterator, Entry, FileSystem, FsOptions, SetattrValid,
+    ZeroCopyReader, ZeroCopyWriter,
 };
 use fuse::mount::MountOption;
 
@@ -329,6 +329,31 @@ impl FileSystem for AuthFs {
                 let mut buf = vec![0; size as usize];
                 r.read_exact(&mut buf)?;
                 editor.write_at(&buf, offset)
+            }
+            _ => Err(io::Error::from_raw_os_error(libc::EBADF)),
+        }
+    }
+
+    fn setattr(
+        &self,
+        _ctx: Context,
+        inode: Inode,
+        attr: libc::stat64,
+        _handle: Option<Handle>,
+        valid: SetattrValid,
+    ) -> io::Result<(libc::stat64, Duration)> {
+        match self.get_file_config(&inode)? {
+            FileConfig::RemoteVerifiedNewFile { editor } => {
+                let mut new_attr = attr;
+                new_attr.st_mode = libc::S_IFREG;
+                // TODO: handle other cases of `SetattrValid`.
+                if valid.contains(SetattrValid::SIZE) {
+                    // st_size is i64, but the cast should be safe since kernel should not give a
+                    // negative size.
+                    debug_assert!(attr.st_size >= 0);
+                    editor.resize(attr.st_size as u64)?;
+                }
+                Ok((new_attr, DEFAULT_METADATA_TIMEOUT))
             }
             _ => Err(io::Error::from_raw_os_error(libc::EBADF)),
         }
