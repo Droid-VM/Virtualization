@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fffa71be_9a871b29",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-27T16:48:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55810100_001f30e2",
+      "range": {
+        "startLine": 13,
+        "startChar": 26,
+        "endLine": 13,
+        "endChar": 31
+      },
+      "revId": "bf3b10138ea3a10ade2147bb87c2ddd08f8a9208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2548e5c7_40d5b31d",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02239fbb_46f8e567",
+        "filename": "authfs/src/fsverity/editor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-27T16:48:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2548e5c7_40d5b31d",
+      "range": {
+        "startLine": 225,
+        "startChar": 44,
+        "endLine": 225,
+        "endChar": 50
+      },
+      "revId": "bf3b10138ea3a10ade2147bb87c2ddd08f8a9208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "038cbfba_17f1272d",
@@ -60,6 +108,24 @@
       "writtenOn": "2021-04-27T12:09:00Z",
       "side": 1,
       "message": "If there are other flags set which are not supported here, should it return an error rather than silently ignoring them?",
+      "revId": "bf3b10138ea3a10ade2147bb87c2ddd08f8a9208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d657df13_960f3461",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-27T16:48:22Z",
+      "side": 1,
+      "message": "Done, except that timestamp changes are ignored.  I believe this is fine as it should be up to a FUSE instance to implement as wishes.\n\nAlso, I read the document again and realized the first implementation is wrong, but it\u0027s now fixed.",
+      "parentUuid": "038cbfba_17f1272d",
       "revId": "bf3b10138ea3a10ade2147bb87c2ddd08f8a9208",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
