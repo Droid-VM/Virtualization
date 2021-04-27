@@ -146,6 +146,16 @@ public class MicrodroidTestCase extends BaseHostJUnit4Test {
         String prop = executeCommand("adb -s " + MICRODROID_SERIAL + " shell getprop ro.hardware");
         assertThat(prop, is("microdroid"));
 
+        // Test writing to /data partition
+        executeCommand(
+                "adb -s "
+                        + MICRODROID_SERIAL
+                        + " shell 'echo MicrodroidTest > /data/local/tmp/test.txt'");
+        String testString =
+                executeCommand(
+                        "adb -s " + MICRODROID_SERIAL + " shell cat /data/local/tmp/test.txt");
+        assertThat(testString, is("MicrodroidTest"));
+
         // Shutdown microdroid
         executeCommand("adb -s localhost:" + TEST_VM_ADB_PORT + " shell reboot");
     }
