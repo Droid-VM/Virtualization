@@ -22,6 +22,30 @@
       },
       "revId": "2c7e459e906570a66d948a79964d28b650addbc3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e7a6e55_43b63078",
+        "filename": "tests/AndroidTest.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-04-28T14:00:44Z",
+      "side": 1,
+      "message": "Seems like it, running `start virtmanager` as the non-root shell user says \"Must be root\". The next step is to have it start on demand, and that will mean the test doesn\u0027t need root, but I haven\u0027t managed to get that working yet.",
+      "parentUuid": "acd4a71a_c06db30a",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 81
+      },
+      "revId": "2c7e459e906570a66d948a79964d28b650addbc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
