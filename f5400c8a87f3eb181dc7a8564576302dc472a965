@@ -286,6 +286,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a22db15_b814d890",
+        "filename": "compos/aidl/com/android/virt/compos/ICompService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-29T20:29:37Z",
+      "side": 1,
+      "message": "I think for CompOS, it\u0027s more flexible to be agnostic to the exact command line, especially since we can\u0027t add arbitrary arguments to the API, or new/optional fields in a parcelable (or can we?).  It\u0027ll be definitely a great idea once everything has settled, then ART team can co-own this interface when they need to add/remove/redefine dex2oat flags.",
+      "parentUuid": "5e8441a9_326c3b0e",
+      "range": {
+        "startLine": 17,
+        "startChar": 25,
+        "endLine": 17,
+        "endChar": 31
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d68b78a7_20bcb8e7",

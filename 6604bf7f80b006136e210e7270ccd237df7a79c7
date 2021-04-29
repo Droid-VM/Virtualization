@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "444939b2_28b1cc61",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-29T20:29:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86104af3_ee323dc4",
+      "range": {
+        "startLine": 53,
+        "startChar": 74,
+        "endLine": 53,
+        "endChar": 77
+      },
+      "revId": "6604bf7f80b006136e210e7270ccd237df7a79c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b2927a5_92db5192",
@@ -54,6 +78,24 @@
       "writtenOn": "2021-04-29T11:23:38Z",
       "side": 1,
       "message": "As far as I can see, this won\u0027t work properly if fd_mapping contains files open with an FD which matches one of the child FDs in the list. There are two ways it can fail:\n\n1. If a file is already open with the FD to which it is mapped, then `redirect_fds` in minijail will do nothing. Rust opens all files with `O_CLOEXEC`, so the FD will be closed when minijail calls exec.\n\n2. If two files are open with the FDs to which each other are mapped, then one of them will be closed before it can be duplicated. e.g. suppose \"file1\" which currently has FD 4 is mapped to FD 5, while \"file2\" which currently has FD 5 is mapped to FD 4. `redirect_fds` will call `dup2(4, 5)`, which will close \"file2\" and duplicate the already open \"file1\" to FD 5. It will then call `dup2(5, 4)`, which will close the original reference to \"file1\", but duplicate the copy of it back to FD 4 again. The child will then end up with \"file1\" open as both FD 4 and FD 5.",
+      "revId": "6604bf7f80b006136e210e7270ccd237df7a79c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2c7eecf_7b70a23d",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-04-29T20:29:37Z",
+      "side": 1,
+      "message": "Good thinking. 1 is tracked by b/186443800. 2 should be fixed in crbug/1198756. There is 3 that minijail interally creates fds via pipe(2) that messes up the mapping.  I\u0027ll file a bug with a test case.  In any case, this call itself should not be problematic.",
+      "parentUuid": "8b2927a5_92db5192",
       "revId": "6604bf7f80b006136e210e7270ccd237df7a79c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
