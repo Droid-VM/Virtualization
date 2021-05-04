@@ -18,9 +18,11 @@ use crate::aidl::VirtualMachineCallbacks;
 use crate::config::VmConfig;
 use crate::Cid;
 use anyhow::Error;
+use command_fds::{CommandFdExt, FdMapping};
 use log::{error, info};
 use shared_child::SharedChild;
 use std::fs::File;
+use std::os::unix::io::{AsRawFd, RawFd};
 use std::process::Command;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
@@ -127,27 +129,73 @@ fn run_vm(config: &VmConfig, cid: Cid, log_fd: Option<File>) -> Result<SharedChi
     let mut command = Command::new(CROSVM_PATH);
     // TODO(qwandor): Remove --disable-sandbox.
     command.arg("run").arg("--disable-sandbox").arg("--cid").arg(cid.to_string());
+
     if let Some(log_fd) = log_fd {
         command.stdout(log_fd);
     } else {
         // Ignore console output.
         command.arg("--serial=type=sink");
     }
-    if let Some(bootloader) = &config.bootloader {
-        command.arg("--bios").arg(bootloader);
+
+    // Keep track of what file descriptors should be mapped to the crosvm process.
+    let mut fd_mappings = vec![];
+    let mut next_child_fd = 4;
+
+    let bootloader = config.bootloader.as_ref().map(File::open).transpose()?;
+    if let Some(bootloader) = &bootloader {
+        command.arg("--bios").arg(add_fd_mapping(&mut fd_mappings, &mut next_child_fd, bootloader));
     }
-    if let Some(initrd) = &config.initrd {
-        command.arg("--initrd").arg(initrd);
+
+    let initrd = config.initrd.as_ref().map(File::open).transpose()?;
+    if let Some(initrd) = &initrd {
+        command.arg("--initrd").arg(add_fd_mapping(&mut fd_mappings, &mut next_child_fd, initrd));
     }
+
     if let Some(params) = &config.params {
         command.arg("--params").arg(params);
     }
+
+    let mut disks = vec![];
     for disk in &config.disks {
-        command.arg(if disk.writable { "--rwdisk" } else { "--disk" }).arg(&disk.image);
+        let disk_file = File::open(&disk.image)?;
+        command.arg(if disk.writable { "--rwdisk" } else { "--disk" }).arg(add_fd_mapping(
+            &mut fd_mappings,
+            &mut next_child_fd,
+            &disk_file,
+        ));
+        // Move disk_file into this vector so that it isn't dropped before `spawn` duplicates it.
+        disks.push(disk_file);
     }
-    if let Some(kernel) = &config.kernel {
-        command.arg(kernel);
+
+    let kernel = config.kernel.as_ref().map(File::open).transpose()?;
+    if let Some(kernel) = &kernel {
+        command.arg(add_fd_mapping(&mut fd_mappings, &mut next_child_fd, kernel));
     }
+
+    info!("Setting mappings {:?}", fd_mappings);
+    command.fd_mappings(fd_mappings)?;
+
     info!("Running {:?}", command);
-    Ok(SharedChild::spawn(&mut command)?)
+    let result = SharedChild::spawn(&mut command)?;
+
+    // Ensure files are not closed before `spawn` duplicates them.
+    drop(bootloader);
+    drop(initrd);
+    drop(kernel);
+    drop(disks);
+
+    Ok(result)
+}
+
+/// Add a mapping from `file` to `next_child_fd` to `fd_mappings`, and increment `next_child_fd`.
+/// Returns a string of the form "/proc/self/fd/N" where N is the old value of `next_child_fd`.
+fn add_fd_mapping(
+    fd_mappings: &mut Vec<FdMapping>,
+    next_child_fd: &mut RawFd,
+    file: &File,
+) -> String {
+    let child_fd = *next_child_fd;
+    fd_mappings.push(FdMapping { parent_fd: file.as_raw_fd(), child_fd });
+    *next_child_fd += 1;
+    format!("/proc/self/fd/{}", child_fd)
 }
