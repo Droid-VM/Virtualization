@@ -21,7 +21,7 @@ use android_system_virtmanager::{
 };
 use anyhow::{bail, Context, Error};
 use serde::{Deserialize, Serialize};
-use std::fs::File;
+use std::fs::{File, OpenOptions};
 use std::io::BufReader;
 use std::path::{Path, PathBuf};
 
@@ -78,7 +78,7 @@ impl VmConfig {
                 .map(|disk| {
                     Ok(AidlDiskImage {
                         writable: disk.writable,
-                        image: Some(open_parcel_file(&disk.image)?),
+                        image: Some(open_parcel_file(&disk.image, disk.writable)?),
                     })
                 })
                 .collect::<Result<_, Error>>()?,
@@ -96,9 +96,13 @@ pub struct DiskImage {
 }
 
 /// Try to open the given file and wrap it in a [`ParcelFileDescriptor`].
-fn open_parcel_file(filename: &Path) -> Result<ParcelFileDescriptor, Error> {
+fn open_parcel_file(filename: &Path, writable: bool) -> Result<ParcelFileDescriptor, Error> {
     Ok(ParcelFileDescriptor::new(
-        File::open(filename).with_context(|| format!("Failed to open {:?}", filename))?,
+        OpenOptions::new()
+            .read(true)
+            .write(writable)
+            .open(filename)
+            .with_context(|| format!("Failed to open {:?}", filename))?,
     ))
 }
 
@@ -106,5 +110,5 @@ fn open_parcel_file(filename: &Path) -> Result<ParcelFileDescriptor, Error> {
 fn maybe_open_parcel_file(
     filename: &Option<PathBuf>,
 ) -> Result<Option<ParcelFileDescriptor>, Error> {
-    filename.as_deref().map(open_parcel_file).transpose()
+    filename.as_deref().map(|filename| open_parcel_file(filename, false)).transpose()
 }
