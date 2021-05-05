@@ -14,8 +14,6 @@ rust_binary {
         "libanyhow",
         "libcommand_fds",
         "liblog_rust",
-        "libserde_json",
-        "libserde",
         "libshared_child",
     ],
     apex_available: ["com.android.virt"],
