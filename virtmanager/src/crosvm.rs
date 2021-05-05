@@ -15,9 +15,9 @@
 //! Functions for running instances of `crosvm`.
 
 use crate::aidl::VirtualMachineCallbacks;
-use crate::config::VmConfig;
 use crate::Cid;
-use anyhow::Error;
+use android_system_virtmanager::aidl::android::system::virtmanager::VirtualMachineConfig::VirtualMachineConfig;
+use anyhow::{bail, Error};
 use command_fds::{CommandFdExt, FdMapping};
 use log::{error, info};
 use shared_child::SharedChild;
@@ -73,7 +73,7 @@ impl VmInstance {
     /// Start an instance of `crosvm` to manage a new VM. The `crosvm` instance will be killed when
     /// the `VmInstance` is dropped.
     pub fn start(
-        config: &VmConfig,
+        config: &VirtualMachineConfig,
         cid: Cid,
         log_fd: Option<File>,
         requester_uid: u32,
@@ -123,8 +123,12 @@ impl VmInstance {
 }
 
 /// Start an instance of `crosvm` to manage a new VM.
-fn run_vm(config: &VmConfig, cid: Cid, log_fd: Option<File>) -> Result<SharedChild, Error> {
-    config.validate()?;
+fn run_vm(
+    config: &VirtualMachineConfig,
+    cid: Cid,
+    log_fd: Option<File>,
+) -> Result<SharedChild, Error> {
+    validate_config(config)?;
 
     let mut command = Command::new(CROSVM_PATH);
     // TODO(qwandor): Remove --disable-sandbox.
@@ -141,35 +145,37 @@ fn run_vm(config: &VmConfig, cid: Cid, log_fd: Option<File>) -> Result<SharedChi
     let mut fd_mappings = vec![];
     let mut next_child_fd = 4;
 
-    let bootloader = config.bootloader.as_ref().map(File::open).transpose()?;
-    if let Some(bootloader) = &bootloader {
-        command.arg("--bios").arg(add_fd_mapping(&mut fd_mappings, &mut next_child_fd, bootloader));
+    if let Some(bootloader) = &config.bootloader {
+        command.arg("--bios").arg(add_fd_mapping(
+            &mut fd_mappings,
+            &mut next_child_fd,
+            bootloader.as_ref(),
+        ));
     }
 
-    let initrd = config.initrd.as_ref().map(File::open).transpose()?;
-    if let Some(initrd) = &initrd {
-        command.arg("--initrd").arg(add_fd_mapping(&mut fd_mappings, &mut next_child_fd, initrd));
+    if let Some(initrd) = &config.initrd {
+        command.arg("--initrd").arg(add_fd_mapping(
+            &mut fd_mappings,
+            &mut next_child_fd,
+            initrd.as_ref(),
+        ));
     }
 
     if let Some(params) = &config.params {
         command.arg("--params").arg(params);
     }
 
-    let mut disks = vec![];
     for disk in &config.disks {
-        let disk_file = File::open(&disk.image)?;
         command.arg(if disk.writable { "--rwdisk" } else { "--disk" }).arg(add_fd_mapping(
             &mut fd_mappings,
             &mut next_child_fd,
-            &disk_file,
+            // TODO(b/187187765): Shouldn't need to unwrap.
+            disk.image.as_ref().unwrap().as_ref(),
         ));
-        // Move disk_file into this vector so that it isn't dropped before `spawn` duplicates it.
-        disks.push(disk_file);
     }
 
-    let kernel = config.kernel.as_ref().map(File::open).transpose()?;
-    if let Some(kernel) = &kernel {
-        command.arg(add_fd_mapping(&mut fd_mappings, &mut next_child_fd, kernel));
+    if let Some(kernel) = &config.kernel {
+        command.arg(add_fd_mapping(&mut fd_mappings, &mut next_child_fd, kernel.as_ref()));
     }
 
     info!("Setting mappings {:?}", fd_mappings);
@@ -177,14 +183,18 @@ fn run_vm(config: &VmConfig, cid: Cid, log_fd: Option<File>) -> Result<SharedChi
 
     info!("Running {:?}", command);
     let result = SharedChild::spawn(&mut command)?;
-
-    // Ensure files are not closed before `spawn` duplicates them.
-    drop(bootloader);
-    drop(initrd);
-    drop(kernel);
-    drop(disks);
-
     Ok(result)
+}
+
+/// Ensure that the configuration has a valid combination of fields set, or return an error if not.
+fn validate_config(config: &VirtualMachineConfig) -> Result<(), Error> {
+    if config.bootloader.is_none() && config.kernel.is_none() {
+        bail!("VM must have either a bootloader or a kernel image.");
+    }
+    if config.bootloader.is_some() && (config.kernel.is_some() || config.initrd.is_some()) {
+        bail!("Can't have both bootloader and kernel/initrd image.");
+    }
+    Ok(())
 }
 
 /// Add a mapping from `file` to `next_child_fd` to `fd_mappings`, and increment `next_child_fd`.
