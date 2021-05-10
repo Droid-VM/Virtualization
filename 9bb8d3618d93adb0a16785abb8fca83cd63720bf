@@ -78,6 +78,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f267fa29_e8f8d43a",
+        "filename": "zipfuse/.cargo/config.toml",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "Thanks for the tip. However, changing this to `unshare` causes `Operation not permitted (os error 1)`. Changing it to `unshare -m` causes `unshare: unshare failed: Operation not permitted`.\n\nI\u0027d like to keep it in this way for now, because it doesn\u0027t hurt me much.",
+      "parentUuid": "004945db_64ec27d6",
+      "range": {
+        "startLine": 4,
+        "startChar": 10,
+        "endLine": 4,
+        "endChar": 14
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "49d2d59d_5055ef3b",
         "filename": "zipfuse/Cargo.toml",
         "patchSetId": 2
@@ -134,6 +158,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6971cb3c_55c0d207",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5813a489_4e96f07b",
+      "range": {
+        "startLine": 36,
+        "startChar": 3,
+        "endLine": 37,
+        "endChar": 18
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a64d464_f7b52539",
@@ -147,6 +195,30 @@
       "writtenOn": "2021-05-10T16:14:08Z",
       "side": 1,
       "message": "nit: \"kind\" may not be a keyword. Or actually, why not use the libc::DT_* values here directly? The only user is a conversion.",
+      "range": {
+        "startLine": 56,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 13
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46987f64_af13ef99",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "Changed to kind: InodeKind. I didn\u0027t use DT_* values directly (1) to make this sub module agnostic to fuse, and (2) to be more type safe (DT_*\u0027s are just `u8`).",
+      "parentUuid": "7a64d464_f7b52539",
       "range": {
         "startLine": 56,
         "startChar": 8,
@@ -180,6 +252,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "684fe768_33930cb7",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44cdc8b3_697acb89",
+      "range": {
+        "startLine": 91,
+        "startChar": 27,
+        "endLine": 91,
+        "endChar": 32
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32143f91_ee6c765b",
@@ -193,6 +289,30 @@
       "writtenOn": "2021-05-10T20:06:42Z",
       "side": 1,
       "message": "This returns an existing entry with the same name (if any).  Should we do anything if that happens?  Simply a warning? Or even panic to reject the bad(?) zip, which seems to be fine judging from the error handling cases elsewhere?",
+      "range": {
+        "startLine": 102,
+        "startChar": 16,
+        "endLine": 102,
+        "endChar": 32
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe3c1e5b_f060b89b",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "Yes, it can\u0027t happen because we call this only when the `name` doesn\u0027t exist in the parent inode. I\u0027ve added an extra assert anywhy.",
+      "parentUuid": "32143f91_ee6c765b",
       "range": {
         "startLine": 102,
         "startChar": 16,
@@ -252,6 +372,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5b52bc7_1ebbc892",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "I intentionally made this as assertions because they are part of the contract between this function and the `from_zip` function.",
+      "parentUuid": "b2280de6_67426f50",
+      "range": {
+        "startLine": 137,
+        "startChar": 8,
+        "endLine": 138,
+        "endChar": 40
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68ae4087_8195b9a6",
         "filename": "zipfuse/src/inode.rs",
         "patchSetId": 2
@@ -263,6 +407,30 @@
       "writtenOn": "2021-05-10T20:06:42Z",
       "side": 1,
       "message": "nit: missing `",
+      "range": {
+        "startLine": 147,
+        "startChar": 13,
+        "endLine": 147,
+        "endChar": 18
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "294cf2fb_aa0ff14c",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68ae4087_8195b9a6",
       "range": {
         "startLine": 147,
         "startChar": 13,
@@ -319,6 +487,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c4f0cef_e2c34504",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "That\u0027s exactly what I did in the beginning. However that required me to keep another hashtable (temporarily while building this tree) to keep track of all the paths we have covered. It worked, but I didn\u0027t like the look of the code. This  looks much simpler than that.",
+      "parentUuid": "eb516d9b_56068e5c",
+      "range": {
+        "startLine": 180,
+        "startChar": 12,
+        "endLine": 188,
+        "endChar": 17
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6731bff_9c60162c",
@@ -332,6 +524,30 @@
       "writtenOn": "2021-05-10T16:14:08Z",
       "side": 1,
       "message": "Is this not a constant? Do you use this anywhere?",
+      "range": {
+        "startLine": 197,
+        "startChar": 70,
+        "endLine": 197,
+        "endChar": 81
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c5077ac_8046eec3",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "Set it to zero.",
+      "parentUuid": "f6731bff_9c60162c",
       "range": {
         "startLine": 197,
         "startChar": 70,
@@ -365,6 +581,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db67bd0f_b030e9d9",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "No. This is reachable when, for example, a zip file has a file entry whose name is a/b/c/d. Then we need to create directories for a, a/b and a/b/c.",
+      "parentUuid": "772fa018_a6338521",
+      "range": {
+        "startLine": 199,
+        "startChar": 20,
+        "endLine": 199,
+        "endChar": 44
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a82613f0_0b4bed39",
@@ -378,6 +618,30 @@
       "writtenOn": "2021-05-10T20:06:42Z",
       "side": 1,
       "message": "nit: the `assert!` is redundant since the behavior without it is exactly the same with `unwrap()`.  If the intention is that the input should always be valid, how about a comment for the safety?  E.g.\n\n  let inode \u003d inode.unwrap();  // safe because ...\n\nSimilar pattern in other places.\n\nThis entire function could also be more Rust-y, e.g.\n\n  if let Some(inode) \u003d it.find(...) {\n    if let Some(inode_data) \u003d it.get(inode) {\n      return inode_data.is_dir();\n    }\n  }\n  false\n\nThen you can add some negative test cases.",
+      "range": {
+        "startLine": 232,
+        "startChar": 8,
+        "endLine": 233,
+        "endChar": 34
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8f880b1_9d8a25bf",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "This assertions are part of the test; for example, `check_dir` tests if there\u0027s an inode of name `name`.\n\nWriting negative test cases here doesn\u0027t seem to add much value here; why do we want to build an incorrect inode tree and tests if the code breaks as expected?",
+      "parentUuid": "a82613f0_0b4bed39",
       "range": {
         "startLine": 232,
         "startChar": 8,
@@ -411,6 +675,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a9f7bad_ed6938c2",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "1\u003c\u003c13 is the smallest I can get without breaking the test.",
+      "parentUuid": "bfc99c48_196d12e9",
+      "range": {
+        "startLine": 54,
+        "startChar": 32,
+        "endLine": 54,
+        "endChar": 69
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fdf19ca8_37e80b9d",
@@ -424,6 +712,30 @@
       "writtenOn": "2021-05-10T20:06:42Z",
       "side": 1,
       "message": "todo",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 14
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aba9b2c_9bb69354",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "For what?",
+      "parentUuid": "fdf19ca8_37e80b9d",
       "range": {
         "startLine": 92,
         "startChar": 4,
@@ -457,6 +769,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "682a5b2d_5aab58ad",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "Thanks. But that somehow doesn\u0027t work. FUSE panicked. I added a TODO item for this.",
+      "parentUuid": "85f2e908_891a3036",
+      "range": {
+        "startLine": 108,
+        "startChar": 16,
+        "endLine": 108,
+        "endChar": 38
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffa7441a_16a7da56",
@@ -470,6 +806,30 @@
       "writtenOn": "2021-05-10T20:06:42Z",
       "side": 1,
       "message": "I *think* st_nlink for a directory \u003d 2 + # of sub dirs (checked by stat(1)).",
+      "range": {
+        "startLine": 127,
+        "startChar": 22,
+        "endLine": 127,
+        "endChar": 23
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58cd648a_e379b157",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffa7441a_16a7da56",
       "range": {
         "startLine": 127,
         "startChar": 22,
@@ -505,6 +865,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ab807d2_bc222de9",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "We just seem to follow the mode that is stored in the zip file and it worked fine.",
+      "parentUuid": "a371258d_bdf91e0e",
+      "range": {
+        "startLine": 129,
+        "startChar": 11,
+        "endLine": 129,
+        "endChar": 18
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11384a85_66868f2b",
         "filename": "zipfuse/src/main.rs",
         "patchSetId": 2
@@ -516,6 +900,30 @@
       "writtenOn": "2021-05-10T20:06:42Z",
       "side": 1,
       "message": "nit: probably can delete this since it\u0027s already zero\u0027ed and we don\u0027t really care st_rdev.",
+      "range": {
+        "startLine": 133,
+        "startChar": 8,
+        "endLine": 133,
+        "endChar": 23
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "863f85ae_372e698b",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11384a85_66868f2b",
       "range": {
         "startLine": 133,
         "startChar": 8,
@@ -551,6 +959,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "855d654e_15bcdff7",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4589fb20_605e4a2e",
+      "range": {
+        "startLine": 134,
+        "startChar": 37,
+        "endLine": 134,
+        "endChar": 43
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "41e22f98_17b0838c",
         "filename": "zipfuse/src/main.rs",
         "patchSetId": 2
@@ -562,6 +994,30 @@
       "writtenOn": "2021-05-10T20:06:42Z",
       "side": 1,
       "message": "Too bad `by_index` is mutable... otherwise we won\u0027t need the mutex.",
+      "range": {
+        "startLine": 199,
+        "startChar": 35,
+        "endLine": 199,
+        "endChar": 55
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07c02bd1_15016ac2",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "Yeah I agree. This is mutable because it reads the local header to get more info about the file.",
+      "parentUuid": "41e22f98_17b0838c",
       "range": {
         "startLine": 199,
         "startChar": 35,
@@ -597,6 +1053,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6974b23_4d5b7d98",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "For compressed entries, yes, for uncompressed entries, no. And I\u0027d like to encourage (or even mandate) that executables are stored uncompressed to make XIP possible.\n\nThe reason to have this buffer is because we need to decompress an entry in order to support the read semantics - read `size` amount of data at `offset`. If we don\u0027t have this buffer, every read operations would require decompression of the entire entry, which would be very inefficient.",
+      "parentUuid": "7d6b65b6_2f6cdf92",
+      "range": {
+        "startLine": 200,
+        "startChar": 16,
+        "endLine": 200,
+        "endChar": 75
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c73601d2_bf16e4ba",
         "filename": "zipfuse/src/main.rs",
         "patchSetId": 2
@@ -608,6 +1088,30 @@
       "writtenOn": "2021-05-10T16:14:08Z",
       "side": 1,
       "message": "Hmm, it would be nice if we could also do random access on compressed files. Wouldn\u0027t need to keep large files in-mem. Looks like the Rust crate doesn\u0027t support it though...",
+      "range": {
+        "startLine": 201,
+        "startChar": 0,
+        "endLine": 201,
+        "endChar": 48
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c50726b_d249fb2d",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "If I am not wrong, executable code in an APK is encouraged to be stored uncompressed (and at 4k boundary) to make the XIP possible. I think we can take advantage of that.",
+      "parentUuid": "c73601d2_bf16e4ba",
       "range": {
         "startLine": 201,
         "startChar": 0,
@@ -641,6 +1145,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "310fff4f_13a31e38",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "Thanks. I\u0027ve updated the comment.",
+      "parentUuid": "44e8365f_edc04b8b",
+      "range": {
+        "startLine": 206,
+        "startChar": 8,
+        "endLine": 208,
+        "endChar": 72
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5481bd5e_bf62a732",
@@ -654,6 +1182,30 @@
       "writtenOn": "2021-05-10T20:06:42Z",
       "side": 1,
       "message": "How about EBADF?  I\u0027m not sure it\u0027s better to crash the filesystem.",
+      "range": {
+        "startLine": 253,
+        "startChar": 8,
+        "endLine": 253,
+        "endChar": 15
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cd51549_6fba586e",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5481bd5e_bf62a732",
       "range": {
         "startLine": 253,
         "startChar": 8,
@@ -689,6 +1241,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "352fb278_8fe85eef",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "I once tried that path. But I couldn\u0027t satisfy the compiler because self is currently borrowed as immutable reference.\n\nFYI: below is error that I got. I hope to fix that eventually, but this right now doesn\u0027t seem to be a big deal as directory entries are usually small.\n\n```\nerror[E0495]: cannot infer an appropriate lifetime for autoref due to conflicting requirements                                                     \n   --\u003e src/main.rs:287:39                                                                                                                          \n    |                                                                                                                                              \n287 |                 let inode_data \u003d self.find_inode(inode)?;                                                                                    \n    |                                       ^^^^^^^^^^                                                                                             \n    |                                                                                                                                              \nnote: first, the lifetime cannot outlive the anonymous lifetime #1 defined on the method body at 271:5...                                          \n   --\u003e src/main.rs:271:5                                                                                                                           \n    |                                                                                                                                              \n271 | /     fn opendir(                                                                                                                            \n272 | |         \u0026self,                                                                                                                             \n273 | |         _ctx: Context,                                                                                                                     \n274 | |         inode: Self::Inode,                                                                                                                \n275 | |         _flags: u32,                                                                                                                       \n276 | |     ) -\u003e io::Result\u003c(Option\u003cSelf::Handle\u003e, fuse::filesystem::OpenOptions)\u003e {                                                               \n    | |__________________________________________________________________________^                                                                 \nnote: ...so that reference does not outlive borrowed content                                                                                       \n   --\u003e src/main.rs:287:34                                                                                                                          \n    |                                                                                                                                              \n287 |                 let inode_data \u003d self.find_inode(inode)?;                                                                                    \n    |                                  ^^^^                                                                                                        \nnote: but, the lifetime must be valid for the lifetime `\u0027a` as defined on the impl at 145:6...                                                     \n   --\u003e src/main.rs:145:6                                                                                                                           \n    |                                                                                                                                              \n145 | impl\u003c\u0027a\u003e fuse::filesystem::FileSystem for ZipFuse\u003c\u0027a\u003e {                                                                                      \n    |      ^^                                                                                                                                      \nnote: ...so that the expression is assignable\n   --\u003e src/main.rs:294:42                                                                                                                          \n    |                                                                                                                                              \n294 |                 open_dirs.insert(handle, OpenDirBuf { open_count: 1, buf: buf.into_boxed_slice() });\n    |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    \u003d note: expected `OpenDirBuf\u003c\u0027a\u003e`\n               found `OpenDirBuf\u003c\u0027_\u003e`  \n```",
+      "parentUuid": "c18e7c1f_5027048a",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 280,
+        "endChar": 56
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e92ee96f_481aaf71",
         "filename": "zipfuse/src/main.rs",
         "patchSetId": 2
@@ -700,6 +1276,30 @@
       "writtenOn": "2021-05-10T20:06:42Z",
       "side": 1,
       "message": "ditto, EBADF instead of crash?",
+      "range": {
+        "startLine": 321,
+        "startChar": 8,
+        "endLine": 321,
+        "endChar": 37
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d447a79_9f7694ee",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e92ee96f_481aaf71",
       "range": {
         "startLine": 321,
         "startChar": 8,
@@ -723,6 +1323,30 @@
       "writtenOn": "2021-05-10T20:06:42Z",
       "side": 1,
       "message": "To echo David\u0027s comment about CString vs OsString above, you might not need this copy if the string is stored as CString.",
+      "range": {
+        "startLine": 327,
+        "startChar": 8,
+        "endLine": 328,
+        "endChar": 93
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c823133_3e41d5f3",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "I replied there. Let\u0027s talk there.",
+      "parentUuid": "f1c67011_d860d774",
       "range": {
         "startLine": 327,
         "startChar": 8,
@@ -758,6 +1382,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "aceeaf2f_a2374c15",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "Oops. Done.",
+      "parentUuid": "3c519875_a6648052",
+      "range": {
+        "startLine": 374,
+        "startChar": 11,
+        "endLine": 374,
+        "endChar": 69
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f51d73a0_35caacd1",
         "filename": "zipfuse/src/main.rs",
         "patchSetId": 2
@@ -769,6 +1417,30 @@
       "writtenOn": "2021-05-10T20:06:42Z",
       "side": 1,
       "message": "FYI, this can be done by a statfs call.  See https://android-review.googlesource.com/c/platform/packages/modules/Virtualization/+/1677191/6/compos/src/compsvc_worker.rs#72",
+      "range": {
+        "startLine": 413,
+        "startChar": 8,
+        "endLine": 413,
+        "endChar": 79
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a8c066e_d8f08664",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:45:47Z",
+      "side": 1,
+      "message": "Thanks. I shamelessly copied yours!",
+      "parentUuid": "f51d73a0_35caacd1",
       "range": {
         "startLine": 413,
         "startChar": 8,
