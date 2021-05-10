@@ -16,6 +16,40 @@
       "message": "Hi. This is the first step for running apks in microdroid. PTAL.",
       "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30600093_efe6caa6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-10T14:03:16Z",
+      "side": 1,
+      "message": "Having a fairly generally-useful Rust crate like this here, complete with Cargo.toml and everything, feels like the wrong place. Maybe it belongs under external/rust? When I recently wanted to do something similar (for the command-fds crate) the recommendation from the Rusty Droids chat was to publish it as a separate open source project, publish to crates.io, and then import back to Android under external/rust/crates using the standard process. That does have more overhead though. It would be good to talk to the Android Rust team about how best to handle situations like this, if you haven\u0027t already.",
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49d2d59d_5055ef3b",
+        "filename": "zipfuse/Cargo.toml",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-10T14:03:16Z",
+      "side": 1,
+      "message": "Give these dependencies proper version numbers, as future versions may have breaking changes.",
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
