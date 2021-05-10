@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a665433_c4edc55a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T14:52:43Z",
+      "side": 1,
+      "message": "In the future, this could evolve into a general rust implementation of fuse-over-zip, but I don\u0027t have an immediate plan to do so. Doing so will only complicate the code a lot, especially for supporting write operations. In addition, this depends on libfuse-rs which is a crate that belongs to crosvm. So, I don\u0027t think this qualifies to be in external/rust (at least yet).\n\ncargo.toml was added just to accelerate my development cycle. (`atest` is way slower than `cargo test`). That will eventually be disappear though.\n\nFurthermore, next rounds of CLs will put microdroid-specific changes like mounting zip over dm-verity. That in theory could be done in a separate program but I\u0027d like to do that in the same binary to keep the size minimal.",
+      "parentUuid": "30600093_efe6caa6",
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "49d2d59d_5055ef3b",
         "filename": "zipfuse/Cargo.toml",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2021-05-10T14:03:16Z",
       "side": 1,
       "message": "Give these dependencies proper version numbers, as future versions may have breaking changes.",
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f10072c_8a2415c8",
+        "filename": "zipfuse/Cargo.toml",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T14:52:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49d2d59d_5055ef3b",
       "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
