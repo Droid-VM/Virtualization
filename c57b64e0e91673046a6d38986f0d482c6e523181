@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "c57b64e0e91673046a6d38986f0d482c6e523181",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c72ffae_eba8d935",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-10T23:50:41Z",
+      "side": 1,
+      "message": "I don\u0027t think this is needed because liblog is already included there via the transitive dependency from logcat and others using liblog. I\u0027ve confirmed that we already have liblog. Is there any reason you added this? The linked bug is about heapprofd_client_api.so.",
+      "revId": "c57b64e0e91673046a6d38986f0d482c6e523181",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
