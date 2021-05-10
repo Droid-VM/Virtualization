@@ -22,6 +22,30 @@
       },
       "revId": "45b46834de4b703e4b1d81d708a75658d4184338",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba1c3f8e_fa109d1b",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-05-10T05:26:43Z",
+      "side": 1,
+      "message": "Cuttlefish does this by repacking bootimg with configuration(number of disks). imo, this seems to be okay for now for microdroid until we figure out a new way other than /dev/block/by-name/ symlinks.",
+      "parentUuid": "bcddabcf_916d5281",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 54
+      },
+      "revId": "45b46834de4b703e4b1d81d708a75658d4184338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
