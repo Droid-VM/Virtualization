@@ -1,0 +1,35 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_defaults {
+    name: "zipfuse.defaults",
+    crate_name: "zipfuse",
+    srcs: ["src/main.rs"],
+    edition: "2018",
+    prefer_rlib: true,
+    rustlibs: [
+        "libanyhow",
+        "libclap",
+        "libfuse_rust",
+        "liblibc",
+        "libzip",
+    ],
+}
+
+rust_binary {
+    name: "zipfuse",
+    defaults: ["zipfuse.defaults"],
+}
+
+rust_test {
+    name: "ZipFuseTest",
+    stem: "zipfuse.test",
+    defaults: ["zipfuse.defaults"],
+    compile_multilib: "first",
+    rustlibs: [
+        "libnix",
+        "libtempfile",
+    ],
+    data: [":zipfuse"],
+}
