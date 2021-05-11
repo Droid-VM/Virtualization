@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49b53dd5_7adf8d6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-11T15:29:20Z",
+      "side": 1,
+      "message": "Just FYI, but you can satisfy rustc, it would be awesome.\n\nCurrently, this is the error that I get. The entire data is within the ZipFuse struct. The references in OpenDirBuf are all towards somewhere in the ZipFuseStruct and OpenDirBuf itself is added to the same struct. I don\u0027t know why the compiler complains...\n\n```\nerror[E0495]: cannot infer an appropriate lifetime for autoref due to conflicting requirements\n   --\u003e src/main.rs:279:31\n    |\n279 |         let inode_data \u003d self.find_inode(inode)?;\n    |                               ^^^^^^^^^^\n    |\nnote: first, the lifetime cannot outlive the anonymous lifetime #1 defined on the method body at 272:5...\n   --\u003e src/main.rs:272:5\n    |\n272 | /     fn opendir(\n273 | |         \u0026self,\n274 | |         _ctx: Context,\n275 | |         inode: Self::Inode,\n276 | |         _flags: u32,\n277 | |     ) -\u003e io::Result\u003c(Option\u003cSelf::Handle\u003e, fuse::filesystem::OpenOptions)\u003e {\n    | |__________________________________________________________________________^\nnote: ...so that reference does not outlive borrowed content\n   --\u003e src/main.rs:279:26\n    |\n279 |         let inode_data \u003d self.find_inode(inode)?;\n    |                          ^^^^\nnote: but, the lifetime must be valid for the lifetime `\u0027a` as defined on the impl at 146:6...\n   --\u003e src/main.rs:146:6\n    |\n146 | impl\u003c\u0027a\u003e fuse::filesystem::FileSystem for ZipFuse\u003c\u0027a\u003e {\n    |      ^^\nnote: ...so that the expression is assignable\n   --\u003e src/main.rs:294:42\n    |\n294 |                 open_dirs.insert(handle, OpenDirBuf { open_count: 1, buf: buf.into_boxed_slice() });\n    |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    \u003d note: expected `OpenDirBuf\u003c\u0027a\u003e`\n               found `OpenDirBuf\u003c\u0027_\u003e`\n\n```",
+      "revId": "e2f8e1a4a37e934d3f948d6eefab11d3716e72ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
