@@ -499,6 +499,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09ee111c_1d4eb975",
+        "filename": "compos/aidl/com/android/virt/compos/InputFdAnnotation.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-11T21:44:24Z",
+      "side": 1,
+      "message": "Almost everything except the command line argument parsing part in compsvc_worker and pvm_exec are what will take for remote FD setup.  This diagram might help.\n\nhttps://docs.google.com/document/d/1NusZOeAXYNi1R2a_RTbgN1_v3Wk7CiwZS_Kcyw6T0xo/edit#heading\u003dh.rbamnj6s5s0x\n\nPlease let me know if this can work for you, then I can start the refactoring.",
+      "parentUuid": "2998b42c_568373c1",
+      "range": {
+        "startLine": 20,
+        "startChar": 11,
+        "endLine": 20,
+        "endChar": 28
+      },
+      "revId": "f5400c8a87f3eb181dc7a8564576302dc472a965",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12ce76a0_b37067a5",
