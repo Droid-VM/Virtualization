@@ -100,6 +100,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cfc09fa_c24907e2",
+        "filename": "zipfuse/.cargo/config.toml",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-11T19:28:05Z",
+      "side": 1,
+      "message": "Sure.  IIRC, `unshare -mUr` worked for me.",
+      "parentUuid": "f267fa29_e8f8d43a",
+      "range": {
+        "startLine": 4,
+        "startChar": 10,
+        "endLine": 4,
+        "endChar": 14
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49d2d59d_5055ef3b",
@@ -432,6 +456,30 @@
       "side": 1,
       "message": "If you want assertions, then `.unwrap()` is enough, you don\u0027t need to explicitly `assert!` as well. If you want to return `None`, then you can use the question mark operator instead.",
       "parentUuid": "e5b52bc7_1ebbc892",
+      "range": {
+        "startLine": 137,
+        "startChar": 8,
+        "endLine": 138,
+        "endChar": 40
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29441655_1462cb31",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-11T19:28:05Z",
+      "side": 1,
+      "message": "I\u0027d try leverage the type system and void manual type checking here.  For example, it might be possible to get rid of InodeDataData if InodeData is defined as the following, especially if you need to check the type everywhere anyway.\n\n  enum InodeData {\n      Directory {\n        inode_table: HashMap\u003cOsString, DirectoryEntry\u003e,\n        size: u64,\n        mode: u32,\n      },\n      File {\n        zip_index: ZipIndex,\n        size: u64,\n        mode: u32,\n      },\n  }\n\nWould this work?",
+      "parentUuid": "2b6cc98d_50ea4895",
       "range": {
         "startLine": 137,
         "startChar": 8,
@@ -820,6 +868,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "698caf08_d9e842c2",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-11T19:28:05Z",
+      "side": 1,
+      "message": "Oops, I was reminding myself to check again after I understand the code better..",
+      "parentUuid": "9aba9b2c_9bb69354",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 14
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "85f2e908_891a3036",
         "filename": "zipfuse/src/main.rs",
         "patchSetId": 2
@@ -949,6 +1021,30 @@
       "side": 1,
       "message": "We just seem to follow the mode that is stored in the zip file and it worked fine.",
       "parentUuid": "a371258d_bdf91e0e",
+      "range": {
+        "startLine": 129,
+        "startChar": 11,
+        "endLine": 129,
+        "endChar": 18
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4a87467_29085366",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-11T19:28:05Z",
+      "side": 1,
+      "message": "ok, we can come back if this becomes an issue.",
+      "parentUuid": "5ab807d2_bc222de9",
       "range": {
         "startLine": 129,
         "startChar": 11,
@@ -1147,6 +1243,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9b7e1b7_976d9390",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-11T19:28:05Z",
+      "side": 1,
+      "message": "I see.  If the compression algorithm does not support random access (which I don\u0027t know), I guess we don\u0027t really have better options.\n\nI\u0027m also thinking resource files that the executable may use.  But in any case, the same thing should be already happening / handled by the app.",
+      "parentUuid": "b6974b23_4d5b7d98",
+      "range": {
+        "startLine": 200,
+        "startChar": 16,
+        "endLine": 200,
+        "endChar": 75
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c73601d2_bf16e4ba",
@@ -1184,6 +1304,30 @@
       "side": 1,
       "message": "If I am not wrong, executable code in an APK is encouraged to be stored uncompressed (and at 4k boundary) to make the XIP possible. I think we can take advantage of that.",
       "parentUuid": "c73601d2_bf16e4ba",
+      "range": {
+        "startLine": 201,
+        "startChar": 0,
+        "endLine": 201,
+        "endChar": 48
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b894b30b_17487777",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-11T19:28:05Z",
+      "side": 1,
+      "message": "Yes, that\u0027s highly encouraged to avoid code extraction/duplication.  But that only applies to .so with bionic support.\n\nI suspect there is no existing way to exec from a slice of zip file, thus developers might still keep their executable compressed and uncompress to their private directory to run.\n\nMaybe at least a warning for developer\u0027s visibility?",
+      "parentUuid": "2c50726b_d249fb2d",
       "range": {
         "startLine": 201,
         "startChar": 0,
@@ -1348,6 +1492,30 @@
       "writtenOn": "2021-05-11T16:03:44Z",
       "side": 1,
       "message": "aosp/1703446 is my attempt which doesn\u0027t work. I\u0027d like to address this issue in a follow-up CL.",
+      "parentUuid": "352fb278_8fe85eef",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 280,
+        "endChar": 56
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b35dadc4_33c8bc8f",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-11T19:28:05Z",
+      "side": 1,
+      "message": "IIUC, the fundamental issue is that this method returns an internal reference (think: returning an internal pointer to outside), and Rust can\u0027t infer if the reference may be used after this instance is destroyed.\n\nWhat if you add some lifetime annotation like it suggests?  \n\n impl\u003c\u0027a\u003e fuse::filesystem::FileSystem for ZipFuse\u003c\u0027a\u003e {\n  ...\n open_dirs.insert(handle, OpenDirBuf\u003c\u0027a\u003e { open_count: 1, buf: buf.into_boxed_slice() });",
       "parentUuid": "352fb278_8fe85eef",
       "range": {
         "startLine": 280,
