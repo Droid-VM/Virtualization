@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afbc8ebc_c29e8aaf",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-05-11T15:30:40Z",
+      "side": 1,
+      "message": "nit: This could do with a unit test",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 32
+      },
+      "revId": "fa0e2892caebea3cb90ad4922ae46b073218cad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db3d13e7_3f67a032",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-05-11T15:30:40Z",
+      "side": 1,
+      "message": "Can we reject paths containing \u0027.\u0027 and \u0027..\u0027 for now and leave this TODO? Seems safer",
+      "range": {
+        "startLine": 185,
+        "startChar": 15,
+        "endLine": 185,
+        "endChar": 19
+      },
+      "revId": "fa0e2892caebea3cb90ad4922ae46b073218cad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7edca960_9db090f1",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-05-11T15:30:40Z",
+      "side": 1,
+      "message": "What if we are coming across a leaf entry that was previously created as non-leaf? Shouldn\u0027t this set the file mode?",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 35
+      },
+      "revId": "fa0e2892caebea3cb90ad4922ae46b073218cad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d239a9f1_c37a30c6",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-05-11T15:30:40Z",
+      "side": 1,
+      "message": "If you put a zero here, will that not make the parent directory non-listable? Could you add a comment if that\u0027s intentional?",
+      "range": {
+        "startLine": 207,
+        "startChar": 39,
+        "endLine": 207,
+        "endChar": 40
+      },
+      "revId": "fa0e2892caebea3cb90ad4922ae46b073218cad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
