@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16898a8d_0c81a1f9",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-11T20:26:20Z",
+      "side": 1,
+      "message": "What if you change these to...\n\n  let buf: Vec\u003c_\u003e \u003d directory.iter().map(|(name, dir_entry)| (name, dir_entry)).collect();\n\nI suspect the compiler thought `buf` may contain other references from `Vec::with_capacity(0)`.",
+      "range": {
+        "startLine": 290,
+        "startChar": 16,
+        "endLine": 293,
+        "endChar": 17
+      },
+      "revId": "53bedc5bdb31e2e96d1be37477be520a9891eaf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
