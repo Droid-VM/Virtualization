@@ -46,6 +46,30 @@
       },
       "revId": "53bedc5bdb31e2e96d1be37477be520a9891eaf9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2367d336_674ee148",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-11T23:48:51Z",
+      "side": 1,
+      "message": "I suspect it\u0027s because with `iter()`, we can\u0027t really preserve the lifetime annotation.  You could verify the theory (see if it compiles) by replace the whole for loop with a single buf.push() with key-value-refs returned by directory.get_key_value.",
+      "parentUuid": "56342048_8e040133",
+      "range": {
+        "startLine": 290,
+        "startChar": 16,
+        "endLine": 293,
+        "endChar": 17
+      },
+      "revId": "53bedc5bdb31e2e96d1be37477be520a9891eaf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
