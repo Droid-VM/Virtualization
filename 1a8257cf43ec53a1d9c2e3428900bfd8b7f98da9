@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28da1a5a_47688b75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-11T17:38:19Z",
+      "side": 1,
+      "message": "Reviewed for style, I haven\u0027t looked very closely at the logic.",
+      "revId": "1a8257cf43ec53a1d9c2e3428900bfd8b7f98da9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a812bee0_38d6f85b",
+        "filename": "zipfuse/Cargo.toml",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-11T17:38:19Z",
+      "side": 1,
+      "message": "Remove this line",
+      "revId": "1a8257cf43ec53a1d9c2e3428900bfd8b7f98da9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1e0dc4e_173382bd",
+        "filename": "zipfuse/Cargo.toml",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-11T17:38:19Z",
+      "side": 1,
+      "message": "Use a version number here too.",
+      "revId": "1a8257cf43ec53a1d9c2e3428900bfd8b7f98da9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "718c2222_5d8618b3",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-11T17:38:19Z",
+      "side": 1,
+      "message": "This can be a doc comment (i.e. /// rather than //).",
+      "revId": "1a8257cf43ec53a1d9c2e3428900bfd8b7f98da9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e6b5479_d8428cb4",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-11T17:38:19Z",
+      "side": 1,
+      "message": "This should be a doc comment too.",
+      "revId": "1a8257cf43ec53a1d9c2e3428900bfd8b7f98da9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f99cd69a_3b298baa",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-11T17:38:19Z",
+      "side": 1,
+      "message": "Make this a doc comment. And as a general style thing, usually the first line of a type\u0027s doc comment doesn\u0027t include the name of the type. So I\u0027d write this like:\n\n/// Holds the (decompressed) contents of a [`ZipFile`].\n///\n/// This buffer is needed because `ZipFile` is in general not seekable due to the compression.",
+      "revId": "1a8257cf43ec53a1d9c2e3428900bfd8b7f98da9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40a311ee_9d6d3b9c",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-11T17:38:19Z",
+      "side": 1,
+      "message": "Doc comment, and as above.",
+      "revId": "1a8257cf43ec53a1d9c2e3428900bfd8b7f98da9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "831cad68_fc9bf479",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-11T17:38:19Z",
+      "side": 1,
+      "message": "Style nit: it\u0027s more common to use `if let` for a case like this where there are only two match arms.",
+      "revId": "1a8257cf43ec53a1d9c2e3428900bfd8b7f98da9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa0b1500_bb9b6cb5",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-11T17:38:19Z",
+      "side": 1,
+      "message": "Style nit: `if let`",
+      "revId": "1a8257cf43ec53a1d9c2e3428900bfd8b7f98da9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
