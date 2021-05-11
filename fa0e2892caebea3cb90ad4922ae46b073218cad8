@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23627140_f3240080",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-11T16:03:44Z",
+      "side": 1,
+      "message": "Done. Added a unit test.",
+      "parentUuid": "afbc8ebc_c29e8aaf",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 32
+      },
+      "revId": "fa0e2892caebea3cb90ad4922ae46b073218cad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db3d13e7_3f67a032",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-05-11T15:30:40Z",
       "side": 1,
       "message": "Can we reject paths containing \u0027.\u0027 and \u0027..\u0027 for now and leave this TODO? Seems safer",
+      "range": {
+        "startLine": 185,
+        "startChar": 15,
+        "endLine": 185,
+        "endChar": 19
+      },
+      "revId": "fa0e2892caebea3cb90ad4922ae46b073218cad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc8a1606_bca1daed",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-11T16:03:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db3d13e7_3f67a032",
       "range": {
         "startLine": 185,
         "startChar": 15,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48e6f2be_d62579a3",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-11T16:03:44Z",
+      "side": 1,
+      "message": "Good catch. Fixed.",
+      "parentUuid": "7edca960_9db090f1",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 35
+      },
+      "revId": "fa0e2892caebea3cb90ad4922ae46b073218cad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d239a9f1_c37a30c6",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-05-11T15:30:40Z",
       "side": 1,
       "message": "If you put a zero here, will that not make the parent directory non-listable? Could you add a comment if that\u0027s intentional?",
+      "range": {
+        "startLine": 207,
+        "startChar": 39,
+        "endLine": 207,
+        "endChar": 40
+      },
+      "revId": "fa0e2892caebea3cb90ad4922ae46b073218cad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "879ff5b9_083f4f9c",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-11T16:03:44Z",
+      "side": 1,
+      "message": "It worked with mode set to zero and it definitely is odd. I should figure out why it worked. Nevertheless, this is now set to the default o500.",
+      "parentUuid": "d239a9f1_c37a30c6",
       "range": {
         "startLine": 207,
         "startChar": 39,
