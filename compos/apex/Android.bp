@@ -30,4 +30,15 @@ apex {
 
     // TODO(victorhsieh): make it updatable
     updatable: false,
+
+    binaries: [
+        "compsvc",
+        "compsvc_worker",
+        "pvm_exec",
+    ],
+
+    // TODO(victorhsieh): Add actual executables. libminijail is a dependency
+    //native_shared_libs: [
+    //    "libminijail",
+    //],
 }
