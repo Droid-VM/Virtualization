@@ -22,6 +22,30 @@
       },
       "revId": "53bedc5bdb31e2e96d1be37477be520a9891eaf9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56342048_8e040133",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-11T23:31:18Z",
+      "side": 1,
+      "message": "Thanks for looking into this. But it looks like that does the copying.\n\n```\nerror[E0308]: mismatched types\n   --\u003e src/main.rs:295:75\n    |\n295 |                 open_dirs.insert(handle, OpenDirBuf { open_count: 1, buf: buf.into_boxed_slice() });\n    |                                                                           ^^^^^^^^^^^^^^^^^^^^^^ expected struct `CStr`, found struct `CString`\n    |\n    \u003d note: expected struct `Box\u003c[(\u0026CStr, \u0026DirectoryEntry)]\u003e`\n               found struct `Box\u003c[(\u0026CString, \u0026DirectoryEntry)]\u003e`\n```\n\nWhen I changed that to `let buf: Vec\u003c_\u003e \u003d directory.iter().map(|(name, dir_entry)| (name.as_ref(), dir_entry)).collect();`, \n\nI get the same error as before.\n\nWhen I changed vector in `OpenDirBuf` to `buf: Box[(\u0026\u0027a CString, \u0026\u0027a DirectoryEntry)]`, I still get the same error.",
+      "parentUuid": "16898a8d_0c81a1f9",
+      "range": {
+        "startLine": 290,
+        "startChar": 16,
+        "endLine": 293,
+        "endChar": 17
+      },
+      "revId": "53bedc5bdb31e2e96d1be37477be520a9891eaf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
