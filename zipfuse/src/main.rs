@@ -71,11 +71,11 @@ pub fn run_fuse(zip_file: &Path, mount_point: &Path) -> Result<()> {
     Ok(fuse::worker::start_message_loop(dev_fuse, MAX_READ, MAX_WRITE, ZipFuse::new(zip_file)?)?)
 }
 
-struct ZipFuse {
+struct ZipFuse<'a> {
     zip_archive: Mutex<zip::ZipArchive<File>>,
     inode_table: InodeTable,
     open_files: Mutex<HashMap<Handle, OpenFileBuf>>,
-    open_dirs: Mutex<HashMap<Handle, OpenDirBuf>>,
+    open_dirs: Mutex<HashMap<Handle, OpenDirBuf<'a>>>,
 }
 
 // `OpenFileBuf` holds the (decompressed) contents of a `ZipFile`. This buf is needed because
@@ -88,9 +88,9 @@ struct OpenFileBuf {
 }
 
 // `OpenDirBuf` holds the directory entries in a directory opened by `opendir`.
-struct OpenDirBuf {
+struct OpenDirBuf<'a> {
     open_count: u32,
-    buf: Box<[(CString, DirectoryEntry)]>,
+    buf: Box<[(&'a CStr, &'a DirectoryEntry)]>,
 }
 
 type Handle = u64;
@@ -103,7 +103,7 @@ fn timeout_max() -> std::time::Duration {
     std::time::Duration::new(u64::MAX, 1_000_000_000 - 1)
 }
 
-impl ZipFuse {
+impl<'a> ZipFuse<'a> {
     fn new(zip_file: &Path) -> Result<ZipFuse> {
         // TODO(jiyong): Use O_DIRECT to avoid double caching.
         // `.custom_flags(nix::fcntl::OFlag::O_DIRECT.bits())` currently doesn't work.
@@ -143,10 +143,10 @@ impl ZipFuse {
     }
 }
 
-impl fuse::filesystem::FileSystem for ZipFuse {
+impl<'a> fuse::filesystem::FileSystem for ZipFuse<'a> {
     type Inode = Inode;
     type Handle = Handle;
-    type DirIter = DirIter;
+    type DirIter = DirIter<'a>;
 
     fn init(&self, _capable: FsOptions) -> std::io::Result<FsOptions> {
         // The default options added by the fuse crate are fine. We don't have additional options.
@@ -275,8 +275,9 @@ impl fuse::filesystem::FileSystem for ZipFuse {
         inode: Self::Inode,
         _flags: u32,
     ) -> io::Result<(Option<Self::Handle>, fuse::filesystem::OpenOptions)> {
-        let mut open_dirs = self.open_dirs.lock().unwrap();
         let handle = inode as Handle;
+        let inode_data = self.find_inode(inode)?;
+        let mut open_dirs = self.open_dirs.lock().unwrap();
         match open_dirs.get_mut(&handle) {
             Some(odb) => {
                 if odb.open_count == 0 {
@@ -285,12 +286,10 @@ impl fuse::filesystem::FileSystem for ZipFuse {
                 odb.open_count += 1;
             }
             None => {
-                let inode_data = self.find_inode(inode)?;
                 let directory = inode_data.get_directory().ok_or_else(ebadf)?;
-                let mut buf: Vec<(CString, DirectoryEntry)> = Vec::with_capacity(directory.len());
+                let mut buf: Vec<(&CStr, &DirectoryEntry)> = Vec::with_capacity(0);
                 for (name, dir_entry) in directory.iter() {
-                    let name = CString::new(name.as_bytes()).unwrap();
-                    buf.push((name, dir_entry.clone()));
+                    buf.push((name, dir_entry));
                 }
                 open_dirs.insert(handle, OpenDirBuf { open_count: 1, buf: buf.into_boxed_slice() });
             }
@@ -348,13 +347,13 @@ impl fuse::filesystem::FileSystem for ZipFuse {
     }
 }
 
-struct DirIter {
-    inner: Vec<(CString, DirectoryEntry)>,
+struct DirIter<'a> {
+    inner: Vec<(&'a CStr, &'a DirectoryEntry)>,
     offset: u64, // the offset where this iterator begins. `next` doesn't change this.
     cur: usize,  // the current index in `inner`. `next` advances this.
 }
 
-impl fuse::filesystem::DirectoryIterator for DirIter {
+impl<'a> fuse::filesystem::DirectoryIterator for DirIter<'a> {
     fn next(&mut self) -> Option<fuse::filesystem::DirEntry> {
         if self.cur >= self.inner.len() {
             return None;
