@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cc1443b_4eaf79ae",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-12T16:13:25Z",
+      "side": 1,
+      "message": "I should have noticed on the previous code review, but you can avoid the unwrap with something like:\n\n  st.st_nlink \u003d if let Some(directory) \u003d inode_data.get_directory() {\n    (2 + directory.len()).into()\n  } else {\n    1\n  };",
+      "revId": "18cce3518ff906136234d6f251f225146266a50b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9af2149_a41e7982",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-12T16:13:25Z",
+      "side": 1,
+      "message": "Why do you need both as libc::nlink_t and .into()?",
+      "revId": "18cce3518ff906136234d6f251f225146266a50b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
