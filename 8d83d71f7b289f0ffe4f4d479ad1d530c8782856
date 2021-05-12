@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2915a411_0dc6d191",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-12T21:15:17Z",
+      "side": 1,
+      "message": "you can probably cache the result with CACHE_DIR",
+      "range": {
+        "startLine": 287,
+        "startChar": 57,
+        "endLine": 287,
+        "endChar": 62
+      },
+      "revId": "8d83d71f7b289f0ffe4f4d479ad1d530c8782856",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a26dc1dc_cb240551",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-12T21:15:17Z",
+      "side": 1,
+      "message": "Hmm.. Are you sure this is right? IIUC, size is the output buffer size, but here it\u0027s used as the number of entries.",
+      "range": {
+        "startLine": 325,
+        "startChar": 18,
+        "endLine": 325,
+        "endChar": 30
+      },
+      "revId": "8d83d71f7b289f0ffe4f4d479ad1d530c8782856",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

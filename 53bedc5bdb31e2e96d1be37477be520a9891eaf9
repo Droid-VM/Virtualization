@@ -94,6 +94,30 @@
       },
       "revId": "53bedc5bdb31e2e96d1be37477be520a9891eaf9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a990f47a_8932cf5f",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-12T21:15:17Z",
+      "side": 1,
+      "message": "I start to think this may be working as intended.  If an entry is deleted from directory, the collected reference here will become invalid.  So maybe the copy is inevitable... which seems to be consistent to what comment of opendir describes in fuse_lowlevel.h.",
+      "parentUuid": "342b2d9e_b27ca026",
+      "range": {
+        "startLine": 290,
+        "startChar": 16,
+        "endLine": 293,
+        "endChar": 17
+      },
+      "revId": "53bedc5bdb31e2e96d1be37477be520a9891eaf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
