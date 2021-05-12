@@ -105,6 +105,24 @@
       "parentUuid": "9dfce4cc_31932a9f",
       "revId": "18cce3518ff906136234d6f251f225146266a50b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "460f44a8_581b4067",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-12T16:36:11Z",
+      "side": 1,
+      "message": "I don\u0027t know. The compiler anyway complains this in the `aosp_x86_64` target. I guess it\u0027s a library or toolchain bug? I could look into that, but right now fixing this build error is more important and this fix works.",
+      "parentUuid": "e17ca39a_88377229",
+      "revId": "18cce3518ff906136234d6f251f225146266a50b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
