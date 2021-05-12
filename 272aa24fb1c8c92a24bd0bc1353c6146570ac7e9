@@ -34,6 +34,115 @@
       "parentUuid": "2518ff77_927b4317",
       "revId": "272aa24fb1c8c92a24bd0bc1353c6146570ac7e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c16f494_1482d093",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-05-12T11:16:12Z",
+      "side": 1,
+      "message": "LGTM, just a couple of minor points.",
+      "revId": "272aa24fb1c8c92a24bd0bc1353c6146570ac7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2afaa51_55c98de2",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-05-12T11:16:12Z",
+      "side": 1,
+      "message": "I know this is temporary but you could at least include the PID in the path to allow multiple instances at the same time.",
+      "range": {
+        "startLine": 82,
+        "startChar": 12,
+        "endLine": 82,
+        "endChar": 29
+      },
+      "revId": "272aa24fb1c8c92a24bd0bc1353c6146570ac7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9914ed3_c464bbc7",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-05-12T11:16:12Z",
+      "side": 1,
+      "message": "I\u0027m guessing this will change to /system/ when running in microdroid? Or are we mounting the Virt APEX inside pVMs? :)",
+      "range": {
+        "startLine": 33,
+        "startChar": 26,
+        "endLine": 33,
+        "endChar": 59
+      },
+      "revId": "272aa24fb1c8c92a24bd0bc1353c6146570ac7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5b47014_690d8c3f",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-05-12T11:16:12Z",
+      "side": 1,
+      "message": "(Can be a follow up) Why not have the authfs child signal the parent?",
+      "range": {
+        "startLine": 72,
+        "startChar": 3,
+        "endLine": 72,
+        "endChar": 26
+      },
+      "revId": "272aa24fb1c8c92a24bd0bc1353c6146570ac7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b684d336_0817b1e9",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-05-12T11:16:12Z",
+      "side": 1,
+      "message": "nit: AFAIK, this tends to be a package name",
+      "range": {
+        "startLine": 42,
+        "startChar": 29,
+        "endLine": 42,
+        "endChar": 36
+      },
+      "revId": "272aa24fb1c8c92a24bd0bc1353c6146570ac7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
