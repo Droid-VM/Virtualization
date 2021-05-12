@@ -17,17 +17,9 @@ package android.system.virtmanager;
 
 import android.system.virtmanager.Partition;
 
-/** A disk image to be made available to the VM. */
-parcelable DiskImage {
-    /**
-     * The disk image, if it already exists. Exactly one of this and `partitions` must be specified.
-     */
-    @nullable ParcelFileDescriptor image;
-
-    /** Whether this disk should be writable by the VM. */
-    boolean writable;
-
-    /** Partition images to be assembled into a composite image. */
+/** Configuration for running a VM. */
+parcelable CompositeImageConfig {
+    /** Partition images to be included in the composite image. */
     Partition[] partitions;
 
     boolean qcow2;
