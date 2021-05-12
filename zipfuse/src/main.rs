@@ -131,7 +131,7 @@ impl ZipFuse {
         st.st_nlink = if inode_data.is_dir() {
             // 2 is for . and ..
             // unwrap is safe because of the `is_dir` check.
-            2 + inode_data.get_directory().unwrap().len() as libc::nlink_t
+            (2 + inode_data.get_directory().unwrap().len() as libc::nlink_t).into()
         } else {
             1
         };
