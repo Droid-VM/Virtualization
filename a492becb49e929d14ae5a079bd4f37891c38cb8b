@@ -16,6 +16,24 @@
       "message": "Looking at the Rust docs for OsString/CString probably not an issue, just something to keep in mind - we should be extra careful that the APKs are interpreted the same way as Android does. From libziparchive, that means decoding paths as UTF-8 with no zero bytes. That is what OsString does. But converting to and comparing as CString should be safe as long as that UTF-8 really has no zero bytes.",
       "revId": "a492becb49e929d14ae5a079bd4f37891c38cb8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ff44388_b12feba2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-12T13:58:09Z",
+      "side": 1,
+      "message": "I missed this comment. Yes, we need to be careful. If my understanding is correct, OsString does allow zero bytes in the middle (just like String does), while CString doesn\u0027t. So conversion from OsString to CString can fail (the return type of CString::new is Result) or at least lossy. But if libziparchive doesn\u0027t allow zero bytes in the middle, we are doing the same by using CString.",
+      "parentUuid": "d4af0683_0fd0e3e3",
+      "revId": "a492becb49e929d14ae5a079bd4f37891c38cb8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
