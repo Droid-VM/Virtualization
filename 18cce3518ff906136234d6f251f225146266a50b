@@ -87,6 +87,24 @@
       "parentUuid": "c27bf23b_ca35448b",
       "revId": "18cce3518ff906136234d6f251f225146266a50b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e17ca39a_88377229",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-12T16:30:09Z",
+      "side": 1,
+      "message": "That makes sense. But then why do you need the `.into()`, isn\u0027t `as libc::nlink_t` enough?",
+      "parentUuid": "9dfce4cc_31932a9f",
+      "revId": "18cce3518ff906136234d6f251f225146266a50b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
