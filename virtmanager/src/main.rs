@@ -15,6 +15,7 @@
 //! Android Virt Manager
 
 mod aidl;
+mod composite;
 mod crosvm;
 
 use crate::aidl::{VirtManager, BINDER_SERVICE_IDENTIFIER};

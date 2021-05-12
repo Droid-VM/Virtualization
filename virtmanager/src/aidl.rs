@@ -14,7 +14,8 @@
 
 //! Implementation of the AIDL interface of the Virt Manager.
 
-use crate::crosvm::VmInstance;
+use crate::composite::make_composite_image;
+use crate::crosvm::{CrosvmConfig, DiskFile, VmInstance};
 use crate::{Cid, FIRST_GUEST_CID};
 use android_system_virtmanager::aidl::android::system::virtmanager::IVirtManager::IVirtManager;
 use android_system_virtmanager::aidl::android::system::virtmanager::IVirtualMachine::{
@@ -26,7 +27,9 @@ use android_system_virtmanager::aidl::android::system::virtmanager::VirtualMachi
 use android_system_virtmanager::binder::{
     self, BinderFeatures, Interface, ParcelFileDescriptor, StatusCode, Strong, ThreadState,
 };
-use log::{debug, error};
+use log::{debug, error, warn};
+use std::fs::File;
+use std::path::PathBuf;
 use std::sync::{Arc, Mutex, Weak};
 
 pub const BINDER_SERVICE_IDENTIFIER: &str = "android.system.virtmanager";
@@ -53,9 +56,7 @@ impl IVirtManager for VirtManager {
         log_fd: Option<&ParcelFileDescriptor>,
     ) -> binder::Result<Strong<dyn IVirtualMachine>> {
         let state = &mut *self.state.lock().unwrap();
-        let log_fd = log_fd
-            .map(|fd| fd.as_ref().try_clone().map_err(|_| StatusCode::UNKNOWN_ERROR))
-            .transpose()?;
+        let log_fd = log_fd.map(clone_file).transpose()?;
         let requester_uid = ThreadState::get_calling_uid();
         let requester_sid = ThreadState::with_calling_sid(|sid| {
             if let Some(sid) = sid {
@@ -72,11 +73,59 @@ impl IVirtManager for VirtManager {
             }
         })?;
         let requester_debug_pid = ThreadState::get_calling_pid();
+
+        // Collect FD mappings for composite disk images.
+        let mut composite_disk_mappings = vec![];
+
+        // Assemble disk images if needed.
+        let disks = config
+            .disks
+            .iter()
+            .map(|disk| {
+                Ok(DiskFile {
+                    image: if !disk.partitions.is_empty() {
+                        if disk.image.is_some() {
+                            warn!("DiskImage {:?} contains both image and partitions.", disk);
+                            return Err(StatusCode::BAD_VALUE);
+                        }
+                        // TODO(qwandor): Delete this file when the VM exits.
+                        let composite_image_filename = state.make_composite_image_filename();
+                        let (image, mappings) =
+                            make_composite_image(&disk.partitions, &composite_image_filename)
+                                .map_err(|e| {
+                                    error!(
+                                        "Failed to make composite image with config {:?}: {:?}",
+                                        disk, e
+                                    );
+                                    StatusCode::UNKNOWN_ERROR
+                                })?;
+                        composite_disk_mappings.extend(mappings);
+                        image
+                    } else if let Some(image) = &disk.image {
+                        clone_file(image)?
+                    } else {
+                        warn!("DiskImage {:?} didn't contain image or partitions.", disk);
+                        return Err(StatusCode::BAD_VALUE);
+                    },
+                    writable: disk.writable,
+                })
+            })
+            .collect::<Result<Vec<DiskFile>, StatusCode>>()?;
+
+        // Actually start the VM.
         let cid = state.allocate_cid()?;
-        let instance = VmInstance::start(
-            config,
+        let crosvm_config = CrosvmConfig {
             cid,
+            bootloader: as_asref(&config.bootloader),
+            kernel: as_asref(&config.kernel),
+            initrd: as_asref(&config.initrd),
+            disks,
+            params: config.params.to_owned(),
+        };
+        let instance = VmInstance::start(
+            &crosvm_config,
             log_fd,
+            &composite_disk_mappings,
             requester_uid,
             requester_sid,
             requester_debug_pid,
@@ -221,6 +270,9 @@ struct State {
     /// Vector of strong VM references held on behalf of users that cannot hold them themselves.
     /// This is only used for debugging purposes.
     debug_held_vms: Vec<Strong<dyn IVirtualMachine>>,
+
+    /// The unique number to use for the next composite image filename.
+    next_composite_image_id: u64,
 }
 
 impl State {
@@ -257,10 +309,32 @@ impl State {
         self.next_cid = self.next_cid.checked_add(1).ok_or(StatusCode::UNKNOWN_ERROR)?;
         Ok(cid)
     }
+
+    /// Generates a unique filename to use for a composite disk image.
+    fn make_composite_image_filename(&mut self) -> PathBuf {
+        let id = self.next_composite_image_id;
+        self.next_composite_image_id += 1;
+        format!("/data/virtmanager/composite{}.img", id).into()
+    }
 }
 
 impl Default for State {
     fn default() -> Self {
-        State { next_cid: FIRST_GUEST_CID, vms: vec![], debug_held_vms: vec![] }
+        State {
+            next_cid: FIRST_GUEST_CID,
+            vms: vec![],
+            debug_held_vms: vec![],
+            next_composite_image_id: 0,
+        }
     }
+}
+
+/// Converts an `&Option<T>` to an `Option<U>` where `T` implements `AsRef<U>`.
+fn as_asref<T: AsRef<U>, U>(option: &Option<T>) -> Option<&U> {
+    option.as_ref().map(|t| t.as_ref())
+}
+
+/// Converts a `&ParcelFileDescriptor` to a `File` by cloning the file.
+fn clone_file(file: &ParcelFileDescriptor) -> Result<File, StatusCode> {
+    file.as_ref().try_clone().map_err(|_| StatusCode::UNKNOWN_ERROR)
 }

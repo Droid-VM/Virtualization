@@ -16,8 +16,7 @@
 
 use crate::aidl::VirtualMachineCallbacks;
 use crate::Cid;
-use android_system_virtmanager::aidl::android::system::virtmanager::VirtualMachineConfig::VirtualMachineConfig;
-use anyhow::{bail, Context, Error};
+use anyhow::{bail, Error};
 use command_fds::{CommandFdExt, FdMapping};
 use log::{debug, error, info};
 use shared_child::SharedChild;
@@ -29,6 +28,24 @@ use std::sync::Arc;
 use std::thread;
 
 const CROSVM_PATH: &str = "/apex/com.android.virt/bin/crosvm";
+
+/// Configuration for a VM to run with crosvm.
+#[derive(Debug)]
+pub struct CrosvmConfig<'a> {
+    pub cid: Cid,
+    pub bootloader: Option<&'a File>,
+    pub kernel: Option<&'a File>,
+    pub initrd: Option<&'a File>,
+    pub disks: Vec<DiskFile>,
+    pub params: Option<String>,
+}
+
+/// A disk image to pass to crosvm for a VM.
+#[derive(Debug)]
+pub struct DiskFile {
+    pub image: File,
+    pub writable: bool,
+}
 
 /// Information about a particular instance of a VM which is running.
 #[derive(Debug)]
@@ -73,17 +90,17 @@ impl VmInstance {
     /// Start an instance of `crosvm` to manage a new VM. The `crosvm` instance will be killed when
     /// the `VmInstance` is dropped.
     pub fn start(
-        config: &VirtualMachineConfig,
-        cid: Cid,
+        config: &CrosvmConfig,
         log_fd: Option<File>,
+        composite_disk_mappings: &[FdMapping],
         requester_uid: u32,
         requester_sid: String,
         requester_debug_pid: i32,
     ) -> Result<Arc<VmInstance>, Error> {
-        let child = run_vm(config, cid, log_fd)?;
+        let child = run_vm(config, log_fd, composite_disk_mappings)?;
         let instance = Arc::new(VmInstance::new(
             child,
-            cid,
+            config.cid,
             requester_uid,
             requester_sid,
             requester_debug_pid,
@@ -124,15 +141,15 @@ impl VmInstance {
 
 /// Start an instance of `crosvm` to manage a new VM.
 fn run_vm(
-    config: &VirtualMachineConfig,
-    cid: Cid,
+    config: &CrosvmConfig,
     log_fd: Option<File>,
+    composite_disk_mappings: &[FdMapping],
 ) -> Result<SharedChild, Error> {
     validate_config(config)?;
 
     let mut command = Command::new(CROSVM_PATH);
     // TODO(qwandor): Remove --disable-sandbox.
-    command.arg("run").arg("--disable-sandbox").arg("--cid").arg(cid.to_string());
+    command.arg("run").arg("--disable-sandbox").arg("--cid").arg(config.cid.to_string());
 
     if let Some(log_fd) = log_fd {
         command.stdout(log_fd);
@@ -142,14 +159,14 @@ fn run_vm(
     }
 
     // Keep track of what file descriptors should be mapped to the crosvm process.
-    let mut fd_mappings = vec![];
+    let mut fd_mappings = composite_disk_mappings.to_vec();
 
     if let Some(bootloader) = &config.bootloader {
-        command.arg("--bios").arg(add_fd_mapping(&mut fd_mappings, bootloader.as_ref()));
+        command.arg("--bios").arg(add_fd_mapping(&mut fd_mappings, bootloader));
     }
 
     if let Some(initrd) = &config.initrd {
-        command.arg("--initrd").arg(add_fd_mapping(&mut fd_mappings, initrd.as_ref()));
+        command.arg("--initrd").arg(add_fd_mapping(&mut fd_mappings, initrd));
     }
 
     if let Some(params) = &config.params {
@@ -157,15 +174,13 @@ fn run_vm(
     }
 
     for disk in &config.disks {
-        command.arg(if disk.writable { "--rwdisk" } else { "--disk" }).arg(add_fd_mapping(
-            &mut fd_mappings,
-            // TODO(b/187187765): This shouldn't be an Option.
-            disk.image.as_ref().context("Invalid disk image file descriptor")?.as_ref(),
-        ));
+        command
+            .arg(if disk.writable { "--rwdisk" } else { "--disk" })
+            .arg(add_fd_mapping(&mut fd_mappings, &disk.image));
     }
 
     if let Some(kernel) = &config.kernel {
-        command.arg(add_fd_mapping(&mut fd_mappings, kernel.as_ref()));
+        command.arg(add_fd_mapping(&mut fd_mappings, kernel));
     }
 
     debug!("Setting mappings {:?}", fd_mappings);
@@ -177,7 +192,7 @@ fn run_vm(
 }
 
 /// Ensure that the configuration has a valid combination of fields set, or return an error if not.
-fn validate_config(config: &VirtualMachineConfig) -> Result<(), Error> {
+fn validate_config(config: &CrosvmConfig) -> Result<(), Error> {
     if config.bootloader.is_none() && config.kernel.is_none() {
         bail!("VM must have either a bootloader or a kernel image.");
     }
