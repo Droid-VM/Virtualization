@@ -76,6 +76,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eac553ea_961e8deb",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-12T15:38:11Z",
+      "side": 1,
+      "message": "Each instance has their own mount namespace (L67), so until we need multiple authfs for a task, this isn\u0027t really necessary.",
+      "parentUuid": "c2afaa51_55c98de2",
+      "range": {
+        "startLine": 82,
+        "startChar": 12,
+        "endLine": 82,
+        "endChar": 29
+      },
+      "revId": "272aa24fb1c8c92a24bd0bc1353c6146570ac7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9914ed3_c464bbc7",
@@ -89,6 +113,30 @@
       "writtenOn": "2021-05-12T11:16:12Z",
       "side": 1,
       "message": "I\u0027m guessing this will change to /system/ when running in microdroid? Or are we mounting the Virt APEX inside pVMs? :)",
+      "range": {
+        "startLine": 33,
+        "startChar": 26,
+        "endLine": 33,
+        "endChar": 59
+      },
+      "revId": "272aa24fb1c8c92a24bd0bc1353c6146570ac7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc7e587b_441c9279",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-12T15:38:11Z",
+      "side": 1,
+      "message": "On top of my head, a benefit to put in Virt APEX is space saving.  Both host and guests can use the same authfs/fd_server binary if the other direction is needed later.  We\u0027ll see how it turns out :)",
+      "parentUuid": "b9914ed3_c464bbc7",
       "range": {
         "startLine": 33,
         "startChar": 26,
@@ -122,6 +170,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "563e6892_926cf44e",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-12T15:38:11Z",
+      "side": 1,
+      "message": "Yeah, that\u0027d be better protocol if authfs is always called by someone who can handle signal.  Or it could signal optionally per a command line flag.",
+      "parentUuid": "a5b47014_690d8c3f",
+      "range": {
+        "startLine": 72,
+        "startChar": 3,
+        "endLine": 72,
+        "endChar": 26
+      },
+      "revId": "272aa24fb1c8c92a24bd0bc1353c6146570ac7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b684d336_0817b1e9",
@@ -135,6 +207,30 @@
       "writtenOn": "2021-05-12T11:16:12Z",
       "side": 1,
       "message": "nit: AFAIK, this tends to be a package name",
+      "range": {
+        "startLine": 42,
+        "startChar": 29,
+        "endLine": 42,
+        "endChar": 36
+      },
+      "revId": "272aa24fb1c8c92a24bd0bc1353c6146570ac7e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44c33563_4eba0cf4",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-12T15:38:11Z",
+      "side": 1,
+      "message": "Not necessarily, `adb shell service list` shows most system services aren\u0027t.  Anyway, we shouldn\u0027t need this once remote binder is ready.",
+      "parentUuid": "b684d336_0817b1e9",
       "range": {
         "startLine": 42,
         "startChar": 29,
