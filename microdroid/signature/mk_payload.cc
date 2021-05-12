@@ -44,6 +44,7 @@ using com::android::apex::ApexInfoList;
 using com::android::apex::readApexInfoList;
 
 using cuttlefish::CreateCompositeDisk;
+using cuttlefish::HoleStrategy;
 using cuttlefish::ImagePartition;
 using cuttlefish::kLinuxFilesystem;
 
@@ -236,7 +237,8 @@ Result<void> MakePayload(const Config& config, const std::string& signature_file
 
     const std::string gpt_header = AppendFileName(output_file, "-header");
     const std::string gpt_footer = AppendFileName(output_file, "-footer");
-    CreateCompositeDisk(partitions, gpt_header, gpt_footer, output_file);
+    CreateCompositeDisk(partitions, gpt_header, gpt_footer, output_file,
+                        HoleStrategy::FILL_WITH_SIZE);
     return {};
 }
 
