@@ -20,6 +20,9 @@ parcelable VirtualMachineDebugInfo {
     /** The CID assigned to the VM. */
     int cid;
 
+    /** Temporary files used by the VM while it is running. */
+    String[] temporaryFiles;
+
     /** The UID of the process which requested the VM. */
     int requesterUid;
 
