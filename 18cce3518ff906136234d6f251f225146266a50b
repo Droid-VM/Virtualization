@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68ef689d_3f66bccd",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-12T16:27:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cc1443b_4eaf79ae",
+      "revId": "18cce3518ff906136234d6f251f225146266a50b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9af2149_a41e7982",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "This line is also causing a build failure in aosp_crosshatch-userdebug.  There\u0027s a compiler message that looks helpful (although I don\u0027t know Rust).",
       "parentUuid": "b9af2149_a41e7982",
+      "revId": "18cce3518ff906136234d6f251f225146266a50b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dfce4cc_31932a9f",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-12T16:27:36Z",
+      "side": 1,
+      "message": "When I omit `as libc::nlink_t` I get this.\n```\n134 |             (2 + inode_data.get_directory().unwrap().len()).into()\n    |                                                             ^^^^ the trait `std::convert::From\u003cusize\u003e` is not implemented for `u64`\n\n```",
+      "parentUuid": "c27bf23b_ca35448b",
       "revId": "18cce3518ff906136234d6f251f225146266a50b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
