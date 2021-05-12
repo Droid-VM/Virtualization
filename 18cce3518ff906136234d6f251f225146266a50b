@@ -33,6 +33,24 @@
       "message": "Why do you need both as libc::nlink_t and .into()?",
       "revId": "18cce3518ff906136234d6f251f225146266a50b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c27bf23b_ca35448b",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1623611
+      },
+      "writtenOn": "2021-05-12T16:16:26Z",
+      "side": 1,
+      "message": "This line is also causing a build failure in aosp_crosshatch-userdebug.  There\u0027s a compiler message that looks helpful (although I don\u0027t know Rust).",
+      "parentUuid": "b9af2149_a41e7982",
+      "revId": "18cce3518ff906136234d6f251f225146266a50b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
