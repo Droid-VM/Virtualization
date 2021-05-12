@@ -124,6 +124,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88540dc7_30ab2284",
+        "filename": "zipfuse/.cargo/config.toml",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-12T00:17:38Z",
+      "side": 1,
+      "message": "It worked! Thanks a lot.",
+      "parentUuid": "1cfc09fa_c24907e2",
+      "range": {
+        "startLine": 4,
+        "startChar": 10,
+        "endLine": 4,
+        "endChar": 14
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49d2d59d_5055ef3b",
@@ -480,6 +504,54 @@
       "side": 1,
       "message": "I\u0027d try leverage the type system and void manual type checking here.  For example, it might be possible to get rid of InodeDataData if InodeData is defined as the following, especially if you need to check the type everywhere anyway.\n\n  enum InodeData {\n      Directory {\n        inode_table: HashMap\u003cOsString, DirectoryEntry\u003e,\n        size: u64,\n        mode: u32,\n      },\n      File {\n        zip_index: ZipIndex,\n        size: u64,\n        mode: u32,\n      },\n  }\n\nWould this work?",
       "parentUuid": "2b6cc98d_50ea4895",
+      "range": {
+        "startLine": 137,
+        "startChar": 8,
+        "endLine": 138,
+        "endChar": 40
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7150b010_c387c34e",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-12T00:17:38Z",
+      "side": 1,
+      "message": "This is a duplicated topic. Let me resolve this and keep the discussion in the above.",
+      "parentUuid": "29441655_1462cb31",
+      "range": {
+        "startLine": 137,
+        "startChar": 8,
+        "endLine": 138,
+        "endChar": 40
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a0515b6_d57f8f84",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-12T00:17:38Z",
+      "side": 1,
+      "message": "What Victor suggested was what I did in the beginning. I left from there as I didn\u0027t want to duplicate the fields size and mode. I might add more in the future.\n\nI know that unwrap() triggers a panic as assert! does, but thought assert! makes the intention clearer. Nevertheless, I am new to Rust and if unwrap() is read as an assertion for most of the Rust programmers, I am happy with removing assert! for `is_some()`. \n\nDone.\n\nBy the way, the `is_dir()` check is still there.",
+      "parentUuid": "29441655_1462cb31",
       "range": {
         "startLine": 137,
         "startChar": 8,
@@ -1338,6 +1410,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be8fd7bf_4ba2c594",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-12T00:17:38Z",
+      "side": 1,
+      "message": "Yeah, XIP applies to *.so only. Filed b/187878241 to track that.",
+      "parentUuid": "b894b30b_17487777",
+      "range": {
+        "startLine": 201,
+        "startChar": 0,
+        "endLine": 201,
+        "endChar": 48
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44e8365f_edc04b8b",
@@ -1541,6 +1637,30 @@
       "side": 1,
       "message": "Sorry, just saw your attempt.  Let me see if I can understand the problem better...",
       "parentUuid": "b35dadc4_33c8bc8f",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 280,
+        "endChar": 56
+      },
+      "revId": "9bb8d3618d93adb0a16785abb8fca83cd63720bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17655d24_911b9795",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-12T00:17:38Z",
+      "side": 1,
+      "message": "That didn\u0027t work. \n\n```\n286 |            open_dirs.insert(handle, OpenDirBuf\u003c\u0027a\u003e { open_count: 1, buf: buf.into_boxed_slice() });\n    |                                                  ^ expected `while`, `for`, `loop` or `{` after a label\n```\n\nLet\u0027s talk in the CL. I will close this thread.",
+      "parentUuid": "c4712bc5_d09aff0f",
       "range": {
         "startLine": 280,
         "startChar": 0,

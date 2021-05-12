@@ -212,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf4c5fba_89a85683",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-12T00:17:38Z",
+      "side": 1,
+      "message": "Yes, I considered it, but it didn\u0027t seem to give much benefit because OpenDirBuf already is guarded by a mutex and we anyway need to update the hashtable when this buffer reaches zero count.",
+      "parentUuid": "0ea984d4_9cfff0e9",
+      "range": {
+        "startLine": 93,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 14
+      },
+      "revId": "fa0e2892caebea3cb90ad4922ae46b073218cad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e960ac1_598125e6",
@@ -225,6 +249,30 @@
       "writtenOn": "2021-05-11T19:28:05Z",
       "side": 1,
       "message": "nit: it\u0027d be a bit more Rust-y this way:\n\n  st.st_nlink \u003d if inode_data.is_dir() {\n    2 + ...\n  } else {\n    1\n  };",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 136,
+        "endChar": 9
+      },
+      "revId": "fa0e2892caebea3cb90ad4922ae46b073218cad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e151cec_df1d6c15",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-12T00:17:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e960ac1_598125e6",
       "range": {
         "startLine": 130,
         "startChar": 8,
@@ -258,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dc66e53_81eba181",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-12T00:17:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c85f635_19f26860",
+      "range": {
+        "startLine": 238,
+        "startChar": 16,
+        "endLine": 242,
+        "endChar": 40
+      },
+      "revId": "fa0e2892caebea3cb90ad4922ae46b073218cad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20963f8a_8862cc55",
@@ -271,6 +343,30 @@
       "writtenOn": "2021-05-11T19:28:05Z",
       "side": 1,
       "message": "if odb.checked_sub(1).ok_or_else(|_| ebadf())? {\n  open_dirs.remove(...);\n}",
+      "range": {
+        "startLine": 314,
+        "startChar": 16,
+        "endLine": 318,
+        "endChar": 40
+      },
+      "revId": "fa0e2892caebea3cb90ad4922ae46b073218cad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83a023a4_22f14c5e",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-12T00:17:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20963f8a_8862cc55",
       "range": {
         "startLine": 314,
         "startChar": 16,
