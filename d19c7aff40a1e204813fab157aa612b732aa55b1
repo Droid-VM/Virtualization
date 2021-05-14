@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c46c9c23_eb06c0a6",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-14T00:42:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64e7b264_b3cb39c6",
+      "range": {
+        "startLine": 331,
+        "startChar": 16,
+        "endLine": 331,
+        "endChar": 23
+      },
+      "revId": "d19c7aff40a1e204813fab157aa612b732aa55b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9530cb0_ca1d8788",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-05-13T17:07:09Z",
       "side": 1,
       "message": "From add_dirent, it looks like this shouldn\u0027t be needed for readdir (only for readdirplus).",
+      "range": {
+        "startLine": 337,
+        "startChar": 23,
+        "endLine": 337,
+        "endChar": 56
+      },
+      "revId": "d19c7aff40a1e204813fab157aa612b732aa55b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c435c369_029b5728",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-14T00:42:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9530cb0_ca1d8788",
       "range": {
         "startLine": 337,
         "startChar": 23,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56d2a133_37df3f4c",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-14T00:42:13Z",
+      "side": 1,
+      "message": "Cool. I learn a lot from you!",
+      "parentUuid": "97d25cc3_861199a6",
+      "range": {
+        "startLine": 471,
+        "startChar": 4,
+        "endLine": 471,
+        "endChar": 73
+      },
+      "revId": "d19c7aff40a1e204813fab157aa612b732aa55b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "347da24d_3f9d30ce",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-05-13T17:07:09Z",
       "side": 1,
       "message": "nit: we can easily avoid this mut:\n\n  let dirs_expected: Vec\u003c_\u003e \u003d (0..NUM_FILES).map(|i| format!(\"{:0100}\", i)).collect();",
+      "range": {
+        "startLine": 624,
+        "startChar": 17,
+        "endLine": 627,
+        "endChar": 17
+      },
+      "revId": "d19c7aff40a1e204813fab157aa612b732aa55b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45d02e06_5f73e41b",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-14T00:42:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "347da24d_3f9d30ce",
       "range": {
         "startLine": 624,
         "startChar": 17,
