@@ -34,6 +34,7 @@ apex {
 
     // TODO(victorhsieh): make it updatable
     updatable: false,
+    disable_symlink_optimization: true,
 
     binaries: [
         "compsvc",
