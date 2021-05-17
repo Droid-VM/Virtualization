@@ -655,4 +655,46 @@ mod tests {
         check_file(&mnt_path, "dir/file2", include_bytes!("../testdata/dir/file2"));
         assert!(nix::mount::umount2(&mnt_path, nix::mount::MntFlags::empty()).is_ok());
     }
+
+    #[cfg(not(target_os = "android"))] // Android doesn't have the loopdev crate
+    #[test]
+    fn supports_zip_on_block_device() {
+        // Write test.zip to the test directory
+        let test_dir = tempfile::TempDir::new().unwrap();
+        let zip_path = test_dir.path().join("test.zip");
+        let mut zip_file = File::create(&zip_path).unwrap();
+        let data = include_bytes!("../testdata/test.zip");
+        zip_file.write_all(data).unwrap();
+
+        // Pad 0 to test.zip so that its size is multiple of 4096.
+        const BLOCK_SIZE: usize = 4096;
+        let size = (data.len() + BLOCK_SIZE) & !BLOCK_SIZE;
+        let pad_size = size - data.len();
+        assert!(pad_size != 0);
+        let pad = vec![0; pad_size];
+        zip_file.write_all(pad.as_slice()).unwrap();
+        drop(zip_file);
+
+        // Attach test.zip to a loop device
+        let lc = loopdev::LoopControl::open().unwrap();
+        let ld = scopeguard::guard(lc.next_free().unwrap(), |ld| {
+            ld.detach().unwrap();
+        });
+        ld.attach_file(&zip_path).unwrap();
+
+        // Start zipfuse over to the loop device (not the zip file)
+        let mnt_path = test_dir.path().join("mnt");
+        assert!(fs::create_dir(&mnt_path).is_ok());
+
+        start_fuse(&ld.path().unwrap(), &mnt_path);
+
+        // Give some time for the fuse to boot up
+        assert!(wait_for_mount(&mnt_path).is_ok());
+
+        check_dir(&mnt_path, "", &[], &["dir"]);
+        check_dir(&mnt_path, "dir", &["file1", "file2"], &[]);
+        check_file(&mnt_path, "dir/file1", include_bytes!("../testdata/dir/file1"));
+        check_file(&mnt_path, "dir/file2", include_bytes!("../testdata/dir/file2"));
+        assert!(nix::mount::umount2(&mnt_path, nix::mount::MntFlags::empty()).is_ok());
+    }
 }
