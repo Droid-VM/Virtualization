@@ -34,6 +34,29 @@
       "parentUuid": "5b0c2ab1_287374dd",
       "revId": "37f14a11dff3f4880d0af1013d42ba1c7de679c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9af3117c_7cf10aa3",
+        "filename": "virtmanager/src/crosvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-17T16:15:14Z",
+      "side": 1,
+      "message": "nit: this could be a RawFd for add_\"fd\"_mapping, but up to you to consider with the next step.",
+      "range": {
+        "startLine": 192,
+        "startChar": 59,
+        "endLine": 192,
+        "endChar": 63
+      },
+      "revId": "37f14a11dff3f4880d0af1013d42ba1c7de679c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
