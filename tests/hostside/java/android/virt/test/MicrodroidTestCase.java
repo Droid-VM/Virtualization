@@ -170,6 +170,8 @@ public class MicrodroidTestCase extends BaseHostJUnit4Test {
                         "adb -s " + MICRODROID_SERIAL + " shell cat /data/local/tmp/test.txt");
         assertThat(catResult, is("MicrodroidTest"));
 
+        assertThat(executeCommand("ls /system/bin/zipfuse").is("/system/bin/zipfuse"));
+
         // Shutdown microdroid
         executeCommand("adb -s localhost:" + TEST_VM_ADB_PORT + " shell reboot");
     }
