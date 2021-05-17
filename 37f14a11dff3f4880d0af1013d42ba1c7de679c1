@@ -16,6 +16,24 @@
       "message": "Could you also update microdroid/README.md? ascull@ added instructions to disable SELinux enforcement. Should not be needed with this change.",
       "revId": "37f14a11dff3f4880d0af1013d42ba1c7de679c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "111ddf2b_b8bc7c77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-17T13:43:33Z",
+      "side": 1,
+      "message": "There is no change to the process for starting microdroid yet, and SELinux enforcement still needs to be disabled. That will hopefully change once I have composite image assembly done by the VirtualisationService.",
+      "parentUuid": "5b0c2ab1_287374dd",
+      "revId": "37f14a11dff3f4880d0af1013d42ba1c7de679c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
