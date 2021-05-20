@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9cd411f_45a9bbbf",
+        "filename": "virtmanager/aidl/android/system/virtmanager/DiskImage.aidl",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-20T18:05:35Z",
+      "side": 1,
+      "message": "qcow2 shouldn\u0027t be true when writable is false, right? If so, could you highlight that here and add a check for that?",
+      "range": {
+        "startLine": 33,
+        "startChar": 57,
+        "endLine": 33,
+        "endChar": 59
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42f968ba_12ac4752",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-20T18:05:35Z",
+      "side": 1,
+      "message": "Not in this CL, but we eventually need to distinguish creation and running of a VM. Creating a VM is defining a VM and make it persistent (until it gets deleted). Definition of a VM includes the various disk images (including the instance image and the userdata image) that the VM will use.\n\nRunning a VM is starting a crosvm process. It is stopped when either the VM voluntarily shuts itself down, or the client that started the VM goes out of scope (i.e. killed). \n\nThe disk images should be persistent; i.e. survive VM restarts and even host Android restarts. Otherwise, we wouldn\u0027t accumulate data in a pVM over a long period. They images shall be deleted when the VM is deleted, which could happen when the client explicitly requested or the client (app) is uninstalled.",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 12
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b539148_e075a4f1",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-20T18:05:35Z",
+      "side": 1,
+      "message": "(Not in this CL) This shouldn\u0027t be deleted even after VM exits.",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 55
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e3e3c18_b691146d",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-20T18:05:35Z",
+      "side": 1,
+      "message": "(Not in this CL) This shouldn\u0027t be deleted even after VM exits.",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 219,
+        "endChar": 51
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eac4f983_a91c85d6",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-20T18:05:35Z",
+      "side": 1,
+      "message": "I imagined that files for a VM are in the same sub directory. e.g.\n\n\u003cvirtmanager_root\u003e/\u003cvm_id\u003e/disk1.img\n\u003cvirtmanager_root\u003e/\u003cvm_id\u003e/disk2.img\n\u003cvirtmanager_root\u003e/\u003cvm_id\u003e/disk3.img\n...",
+      "range": {
+        "startLine": 374,
+        "startChar": 17,
+        "endLine": 374,
+        "endChar": 34
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "807f4f41_4e6f1844",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-20T18:05:35Z",
+      "side": 1,
+      "message": "Is this essentially a dup?",
+      "range": {
+        "startLine": 401,
+        "startChar": 0,
+        "endLine": 404,
+        "endChar": 1
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
