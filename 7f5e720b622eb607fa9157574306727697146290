@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98856342_6bc6ac0b",
+        "filename": "virtmanager/aidl/android/system/virtmanager/Partition.aidl",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-20T18:55:25Z",
+      "side": 1,
+      "message": "nit: Backing file descriptor of the partition image?",
+      "range": {
+        "startLine": 23,
+        "startChar": 8,
+        "endLine": 23,
+        "endChar": 28
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42f968ba_12ac4752",
         "filename": "virtmanager/src/aidl.rs",
         "patchSetId": 6
@@ -42,6 +65,29 @@
         "startChar": 0,
         "endLine": 113,
         "endChar": 12
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30507333_8ddd472c",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-20T18:55:25Z",
+      "side": 1,
+      "message": "Since this is dealing with untrsuted input, you may want to consider running in a minijail / without privileges (see go/rule-of-2).  Or probably better, make it a library to run in the client process?  No need to deal with it in this CL though.\n\nThis is also kind of aligned with Jiyong\u0027s suggestion to distinguish creation and running.",
+      "range": {
+        "startLine": 174,
+        "startChar": 3,
+        "endLine": 174,
+        "endChar": 22
       },
       "revId": "7f5e720b622eb607fa9157574306727697146290",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -134,6 +180,52 @@
         "startChar": 0,
         "endLine": 404,
         "endChar": 1
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8fd72e2_c22047b8",
+        "filename": "virtmanager/src/crosvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-20T18:55:25Z",
+      "side": 1,
+      "message": "Just curious.  This isn\u0027t a ref unlike the others.  Any insights?",
+      "range": {
+        "startLine": 40,
+        "startChar": 19,
+        "endLine": 40,
+        "endChar": 27
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50aa548d_11d8543a",
+        "filename": "virtmanager/src/qcow2.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-20T18:55:25Z",
+      "side": 1,
+      "message": "nit: license",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 3
       },
       "revId": "7f5e720b622eb607fa9157574306727697146290",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
