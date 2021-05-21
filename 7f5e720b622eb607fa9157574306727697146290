@@ -262,6 +262,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "41a87fdf_9d4b00bf",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-21T16:11:23Z",
+      "side": 1,
+      "message": "I see.  IIUC, we\u0027d need to pass one FD that the backing content refers to another FD by /proc/self/fd/$N (for the actual private image).  I guess it\u0027s still possible if we are willing to assume the FD can\u0027t change?\n\nBTW, which uid will crosvm eventually run with?  If it requires privileges to setup, could it drop privileges and change to app uid afterward?  If these are actually possible, it could make the above easier.",
+      "parentUuid": "95eb125c_11511e83",
+      "range": {
+        "startLine": 174,
+        "startChar": 3,
+        "endLine": 174,
+        "endChar": 22
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b539148_e075a4f1",
         "filename": "virtmanager/src/aidl.rs",
         "patchSetId": 6
