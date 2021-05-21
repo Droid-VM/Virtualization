@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66a03461_c2ffc3a3",
+        "filename": "virtmanager/aidl/android/system/virtmanager/DiskImage.aidl",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-21T12:34:53Z",
+      "side": 1,
+      "message": "I guess? Added.",
+      "parentUuid": "c9cd411f_45a9bbbf",
+      "range": {
+        "startLine": 33,
+        "startChar": 57,
+        "endLine": 33,
+        "endChar": 59
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98856342_6bc6ac0b",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-05-20T18:55:25Z",
       "side": 1,
       "message": "nit: Backing file descriptor of the partition image?",
+      "range": {
+        "startLine": 23,
+        "startChar": 8,
+        "endLine": 23,
+        "endChar": 28
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8cd2e45_d740a670",
+        "filename": "virtmanager/aidl/android/system/virtmanager/Partition.aidl",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-21T12:34:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98856342_6bc6ac0b",
       "range": {
         "startLine": 23,
         "startChar": 8,
@@ -119,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6bf0e5df_c7048682",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-21T12:34:53Z",
+      "side": 1,
+      "message": "That is not possible with the model of passing images as file descriptors, as file descriptors are not persistent.\n\nThat doesn\u0027t mean that you can\u0027t have persistent data in a VM though. The images you want to be persistent just need to be created in the client application or service, and then if you pass (a file descriptor to) the same image each time, you\u0027ll get the same data.",
+      "parentUuid": "42f968ba_12ac4752",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 12
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30507333_8ddd472c",
         "filename": "virtmanager/src/aidl.rs",
         "patchSetId": 6
@@ -130,6 +202,30 @@
       "writtenOn": "2021-05-20T18:55:25Z",
       "side": 1,
       "message": "Since this is dealing with untrsuted input, you may want to consider running in a minijail / without privileges (see go/rule-of-2).  Or probably better, make it a library to run in the client process?  No need to deal with it in this CL though.\n\nThis is also kind of aligned with Jiyong\u0027s suggestion to distinguish creation and running.",
+      "range": {
+        "startLine": 174,
+        "startChar": 3,
+        "endLine": 174,
+        "endChar": 22
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95eb125c_11511e83",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-21T12:34:53Z",
+      "side": 1,
+      "message": "It can\u0027t be in the client process, because it needs to refer to file descriptors in this process, to be able to pass them to crosvm.",
+      "parentUuid": "30507333_8ddd472c",
       "range": {
         "startLine": 174,
         "startChar": 3,
@@ -165,6 +261,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "817fdea3_bd43da84",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-21T12:34:53Z",
+      "side": 1,
+      "message": "Why not? It\u0027s meaningless after the VM exits, because it refers to file descriptors which will no longer be open.",
+      "parentUuid": "1b539148_e075a4f1",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 55
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e3e3c18_b691146d",
         "filename": "virtmanager/src/aidl.rs",
         "patchSetId": 6
@@ -176,6 +296,30 @@
       "writtenOn": "2021-05-20T18:05:35Z",
       "side": 1,
       "message": "(Not in this CL) This shouldn\u0027t be deleted even after VM exits.",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 219,
+        "endChar": 51
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2156194_f51a98ee",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-21T12:34:53Z",
+      "side": 1,
+      "message": "Again, I don\u0027t see any point to keeping it. It can\u0027t be reused, because it refers to file descriptors which will no longer be open.",
+      "parentUuid": "1e3e3c18_b691146d",
       "range": {
         "startLine": 218,
         "startChar": 0,
@@ -211,6 +355,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "adf3a6f6_aae99753",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-21T12:34:53Z",
+      "side": 1,
+      "message": "Is there any advantage to doing that? And what VM ID do you have in mind, just the CID?",
+      "parentUuid": "eac4f983_a91c85d6",
+      "range": {
+        "startLine": 374,
+        "startChar": 17,
+        "endLine": 374,
+        "endChar": 34
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "807f4f41_4e6f1844",
         "filename": "virtmanager/src/aidl.rs",
         "patchSetId": 6
@@ -222,6 +390,30 @@
       "writtenOn": "2021-05-20T18:05:35Z",
       "side": 1,
       "message": "Is this essentially a dup?",
+      "range": {
+        "startLine": 401,
+        "startChar": 0,
+        "endLine": 404,
+        "endChar": 1
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f421e97_bd4b448a",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-21T12:34:53Z",
+      "side": 1,
+      "message": "It appears so. This is a workaround for the fact that the Rust AIDL codegen API only gives us an `\u0026ParcelFileDescriptor`, but we need an owned `File` which won\u0027t be closed when the AIDL method returns.",
+      "parentUuid": "807f4f41_4e6f1844",
       "range": {
         "startLine": 401,
         "startChar": 0,
@@ -255,6 +447,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fa35709_9f43c12f",
+        "filename": "virtmanager/src/crosvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-21T12:34:53Z",
+      "side": 1,
+      "message": "DiskFile is constructed together with the CrosvmConfig, so it can be owned by it. The bootloader/kernel/initrd come from ParcelFileDescriptors passed over Binder, to which we only get a reference.\n\nI think this is a flaw in the Rust AIDL codegen API design and ParcelFileDescriptors should be moved to the method, but that\u0027s not how it currently works unfortunately.",
+      "parentUuid": "b8fd72e2_c22047b8",
+      "range": {
+        "startLine": 40,
+        "startChar": 19,
+        "endLine": 40,
+        "endChar": 27
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50aa548d_11d8543a",
@@ -268,6 +484,30 @@
       "writtenOn": "2021-05-20T18:55:25Z",
       "side": 1,
       "message": "nit: license",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 3
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66abdb7a_d0ea230b",
+        "filename": "virtmanager/src/qcow2.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-21T12:34:53Z",
+      "side": 1,
+      "message": "Thanks, I keep forgetting that.",
+      "parentUuid": "50aa548d_11d8543a",
       "range": {
         "startLine": 1,
         "startChar": 0,
