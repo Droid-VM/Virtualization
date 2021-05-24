@@ -239,6 +239,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21452ffb_b568a5ad",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-24T17:37:08Z",
+      "side": 1,
+      "message": "I don\u0027t see how that is possible, if we want to pass everything as file descriptors, because the composite image refers to the partition images by filename (so here I\u0027m using names of the form /proc/self/fd/N, which rely on knowing the file descriptor number, and it remaining the same between creating the image and running it). If you have a suggestion for how to do this then we can discuss it tomorrow at the userspace sync-up.",
+      "parentUuid": "13df643c_6300c519",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 12
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30507333_8ddd472c",
         "filename": "virtmanager/src/aidl.rs",
         "patchSetId": 6
@@ -310,6 +334,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58e7379c_086c8573",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-24T17:37:08Z",
+      "side": 1,
+      "message": "The part that actually creates the composite disk image is a child process (mk_cdisk) which is just passed the config and the file descriptors it needs. This code is just checking the configuration and calling down to that (and is in safe Rust, so follows the rule of 2).\n\ncrosvm runs as the virtmanager UID, but in its own SELinux domain. We did discuss running it as the client UID, but people didn\u0027t seem keen on that, and there doesn\u0027t seem much point if all the images are passed as FDs anyway.",
+      "parentUuid": "41a87fdf_9d4b00bf",
+      "range": {
+        "startLine": 174,
+        "startChar": 3,
+        "endLine": 174,
+        "endChar": 22
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b539148_e075a4f1",
         "filename": "virtmanager/src/aidl.rs",
         "patchSetId": 6
@@ -369,6 +417,30 @@
       "side": 1,
       "message": "In case when the files referenced in this composite image file are file descriptors, yes, we need to delete this and create again when the same VM is re-started.\n\nHowever, what if the referenced files are not file descriptors but real paths? e.g. /apex/com.android.virt/etc/fs/microdroid_system.img? Letting app open the files, passing it via fd and then letting virt manager read the fd seem a little bit cumbersome. Virt manager already have access to the platform-owned filesystem images, in which case it can access them directly via paths. Passing fd makes sense when the filesystem images are owned by apps (e.g. a downloaded Ubuntu distro).",
       "parentUuid": "817fdea3_bd43da84",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 55
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d7486ac_c74d87c9",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-24T17:37:08Z",
+      "side": 1,
+      "message": "True, we could use the filesystem path for images that are readable by crosvm / VirtualizationService. I\u0027d prefer not to have two different ways of passing images though, as it means more complexity, more different combinations of configuration, and more chances for bugs. Treating all images the same way keeps things simpler and easier to reason about.",
+      "parentUuid": "09ee9efc_9e96aa27",
       "range": {
         "startLine": 196,
         "startChar": 0,
@@ -452,6 +524,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00f532f9_9bb886cb",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-24T17:37:08Z",
+      "side": 1,
+      "message": "Hmm, that\u0027s going to be a problem. Let\u0027s discuss this in the sync tomorrow and try to figure out a solution.",
+      "parentUuid": "a537e2fd_75ea3223",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 219,
+        "endChar": 51
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eac4f983_a91c85d6",
         "filename": "virtmanager/src/aidl.rs",
         "patchSetId": 6
@@ -511,6 +607,30 @@
       "side": 1,
       "message": "Well.. for accounting and debuggability? By having the image files for a VM in the same directory, we can easily calculate the amount of disk that is contributed to a VM, and can easily locate and examine the files for debugging.\n\nThe ID could be anything as long as it is guaranteed to be unique.",
       "parentUuid": "adf3a6f6_aae99753",
+      "range": {
+        "startLine": 374,
+        "startChar": 17,
+        "endLine": 374,
+        "endChar": 34
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64d83740_3e48be8a",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-24T17:37:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7ea27bb_bcb6dbb6",
       "range": {
         "startLine": 374,
         "startChar": 17,
