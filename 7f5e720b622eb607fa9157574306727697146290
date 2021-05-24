@@ -356,6 +356,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "442d69a7_dd6474ba",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-05-24T18:21:38Z",
+      "side": 1,
+      "message": "mk_cdisk still runs with the same privileges as the parent process, no?  That\u0027s why I suggested to put it in minijail with multiple options to de/minimize privileges.  Or is the plan to transit into another non-privileged domain?  But of course it\u0027s only relevant if you decide to not create the composite disk image in the client process.  Maybe a TODO based on the outcome of your discussion.",
+      "parentUuid": "58e7379c_086c8573",
+      "range": {
+        "startLine": 174,
+        "startChar": 3,
+        "endLine": 174,
+        "endChar": 22
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b539148_e075a4f1",
