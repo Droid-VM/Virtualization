@@ -215,6 +215,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13df643c_6300c519",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-24T09:23:23Z",
+      "side": 1,
+      "message": "Yes, the disk images shall be passed as FDs. What I am saying here is that virt manager should provide distinct functions for creating and running a VM.\n\nDo you think that the creation of a VM (which includes the creation of the composite disk images, qcow2 images, etc.) should be done by the apps instead?",
+      "parentUuid": "6bf0e5df_c7048682",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 12
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30507333_8ddd472c",
         "filename": "virtmanager/src/aidl.rs",
         "patchSetId": 6
@@ -333,6 +357,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09ee9efc_9e96aa27",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-24T09:23:23Z",
+      "side": 1,
+      "message": "In case when the files referenced in this composite image file are file descriptors, yes, we need to delete this and create again when the same VM is re-started.\n\nHowever, what if the referenced files are not file descriptors but real paths? e.g. /apex/com.android.virt/etc/fs/microdroid_system.img? Letting app open the files, passing it via fd and then letting virt manager read the fd seem a little bit cumbersome. Virt manager already have access to the platform-owned filesystem images, in which case it can access them directly via paths. Passing fd makes sense when the filesystem images are owned by apps (e.g. a downloaded Ubuntu distro).",
+      "parentUuid": "817fdea3_bd43da84",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 55
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e3e3c18_b691146d",
         "filename": "virtmanager/src/aidl.rs",
         "patchSetId": 6
@@ -380,6 +428,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a537e2fd_75ea3223",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-24T09:23:23Z",
+      "side": 1,
+      "message": "This file has data that the app has generated while the VM is running. The data should be there after the same VM is started again in the future.",
+      "parentUuid": "b2156194_f51a98ee",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 219,
+        "endChar": 51
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eac4f983_a91c85d6",
         "filename": "virtmanager/src/aidl.rs",
         "patchSetId": 6
@@ -415,6 +487,30 @@
       "side": 1,
       "message": "Is there any advantage to doing that? And what VM ID do you have in mind, just the CID?",
       "parentUuid": "eac4f983_a91c85d6",
+      "range": {
+        "startLine": 374,
+        "startChar": 17,
+        "endLine": 374,
+        "endChar": 34
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7ea27bb_bcb6dbb6",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-24T09:23:23Z",
+      "side": 1,
+      "message": "Well.. for accounting and debuggability? By having the image files for a VM in the same directory, we can easily calculate the amount of disk that is contributed to a VM, and can easily locate and examine the files for debugging.\n\nThe ID could be anything as long as it is guaranteed to be unique.",
+      "parentUuid": "adf3a6f6_aae99753",
       "range": {
         "startLine": 374,
         "startChar": 17,
