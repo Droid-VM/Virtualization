@@ -93,6 +93,30 @@
       },
       "revId": "d4ce1da77820b8ac3b5e55a8611b602faa1b0c24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20379da1_25213b27",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-05-26T08:42:26Z",
+      "side": 1,
+      "message": "Because the keystore2 service needs hwservicemanager. (http://cs/android/system/security/keystore2/src/km_compat/km_compat.cpp?l\u003d1266\u0026rcl\u003d68410ed1773a044956cb5d47cbb68de0711edc4a) I chose to add hwservicemanager rather than patching keystore2.",
+      "parentUuid": "82db923e_06533bd0",
+      "range": {
+        "startLine": 81,
+        "startChar": 9,
+        "endLine": 81,
+        "endChar": 25
+      },
+      "revId": "d4ce1da77820b8ac3b5e55a8611b602faa1b0c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
