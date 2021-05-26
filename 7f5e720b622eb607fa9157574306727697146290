@@ -261,6 +261,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32420fc0_960ebbb8",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-26T13:36:56Z",
+      "side": 1,
+      "message": "As discussed, we don\u0027t need to wrap the composite image in a QCOW2 image. I\u0027ve updated this change to remove the QCOW2 functionality. Instead, the userdata partition can be created either as a raw disk image (relying on sparse file support in the host filesystem) or as a QCOW2 image without a backing image. In either case it will be stored under the app\u0027s data directory and passed as a file descriptor.\n\nA separate call may be added to the VirtualizationService to help create the image, if we want to use QCOW2 for it. Formatting will be done by the VM once it has booted.",
+      "parentUuid": "21452ffb_b568a5ad",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 12
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30507333_8ddd472c",
@@ -560,6 +584,30 @@
       "side": 1,
       "message": "Hmm, that\u0027s going to be a problem. Let\u0027s discuss this in the sync tomorrow and try to figure out a solution.",
       "parentUuid": "a537e2fd_75ea3223",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 219,
+        "endChar": 51
+      },
+      "revId": "7f5e720b622eb607fa9157574306727697146290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c71706e_58ec5fd7",
+        "filename": "virtmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-05-26T13:36:56Z",
+      "side": 1,
+      "message": "Resolved as above.",
+      "parentUuid": "00f532f9_9bb886cb",
       "range": {
         "startLine": 218,
         "startChar": 0,
