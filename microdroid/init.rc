@@ -59,6 +59,9 @@ on init
 
     start servicemanager
 
+    # TODO(b/185767624): remove hidl after full keymint support
+    start hwservicemanager
+
 on load_persist_props_action
     start logd
     start logd-reinit
