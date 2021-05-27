@@ -46,6 +46,30 @@
       },
       "revId": "85aea6fcc7e90daa7b2f17f7e8f3bea20a397751",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64a20978_6b8b60aa",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-27T06:47:22Z",
+      "side": 1,
+      "message": "\u003e these are supposed to be served by apexes\n\nAh, that answers why these were needed here.\n\n\u003e So does keystore2 work if we add these two APEXes?\n\nIn theory, yes, but we might have to add more APEXes that are dependencies of the two APEXes.\n\nI think the best way forward is to either cut the dependency to those libraries from keystore2, or have a mock version of the libraries in microdroid so that we don\u0027t need to have the big APEXes in microdroid.",
+      "parentUuid": "81bb313e_df789ae1",
+      "range": {
+        "startLine": 71,
+        "startChar": 3,
+        "endLine": 73,
+        "endChar": 25
+      },
+      "revId": "85aea6fcc7e90daa7b2f17f7e8f3bea20a397751",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
