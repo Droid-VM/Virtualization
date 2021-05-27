@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdc7ee59_f3212f41",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-27T18:27:26Z",
+      "side": 1,
+      "message": "why? it\u0027s already started by init.rc. I thought you would update the payload json file instead.",
+      "range": {
+        "startLine": 14,
+        "startChar": 20,
+        "endLine": 14,
+        "endChar": 64
+      },
+      "revId": "960194e64bf13f37d60e876d4ea37179c345c4ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca93204c_66de20d5",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-27T18:27:26Z",
+      "side": 1,
+      "message": "This should start earlier than zipfuse because microdroid_manager would be responsible for reading the signature partition which has the path to the block device serving the apk.",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 114,
+        "endChar": 28
+      },
+      "revId": "960194e64bf13f37d60e876d4ea37179c345c4ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65638dd9_a35c801c",
+        "filename": "microdroid/signature/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-27T18:27:26Z",
+      "side": 1,
+      "message": "not needed",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 0
+      },
+      "revId": "960194e64bf13f37d60e876d4ea37179c345c4ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aee7ff1_20af3282",
+        "filename": "microdroid_manager/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-27T18:27:26Z",
+      "side": 1,
+      "message": "no need",
+      "range": {
+        "startLine": 21,
+        "startChar": 4,
+        "endLine": 21,
+        "endChar": 41
+      },
+      "revId": "960194e64bf13f37d60e876d4ea37179c345c4ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8df3bf6_ecc71671",
+        "filename": "microdroid_manager/src/payload_config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-27T18:27:26Z",
+      "side": 1,
+      "message": "For now, I don\u0027t think so. If multiple commands are needed, one can make the main command and execute sub commands from there.",
+      "range": {
+        "startLine": 24,
+        "startChar": 22,
+        "endLine": 24,
+        "endChar": 59
+      },
+      "revId": "960194e64bf13f37d60e876d4ea37179c345c4ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cf9e683_933fb8d1",
+        "filename": "microdroid_manager/src/payload_config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-05-27T18:27:26Z",
+      "side": 1,
+      "message": "This can also be handled inside the command.",
+      "range": {
+        "startLine": 34,
+        "startChar": 21,
+        "endLine": 35,
+        "endChar": 1
+      },
+      "revId": "960194e64bf13f37d60e876d4ea37179c345c4ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
