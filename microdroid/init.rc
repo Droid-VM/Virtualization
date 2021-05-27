@@ -110,7 +110,7 @@ on post-fs
     start keystore2
 
 on late-fs
-    start vendor.keymint-default
+    start vendor.keymint-microdroid
 
     exec_start wait_for_keymaster
 
