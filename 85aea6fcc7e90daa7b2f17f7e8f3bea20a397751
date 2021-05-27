@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51dadb33_68a13e08",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-05-27T04:01:20Z",
+      "side": 1,
+      "message": "these are supposed to be served by apexes\n- libicuuc: com.android.i18n\n- libstatspull/libstatssocket: com.android.os.statsd\n\nHmm, we\u0027re adding more and more apexes as dependencies of microdroid itself.",
+      "range": {
+        "startLine": 71,
+        "startChar": 3,
+        "endLine": 73,
+        "endChar": 25
+      },
+      "revId": "85aea6fcc7e90daa7b2f17f7e8f3bea20a397751",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
