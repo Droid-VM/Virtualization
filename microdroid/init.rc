@@ -110,6 +110,9 @@ on post-fs
 
     perform_apex_config
 
+    # TODO(jooyung) move this along with apex activation
+    start microdroid_manager
+
     exec_start derive_sdk
 
     start adbd
