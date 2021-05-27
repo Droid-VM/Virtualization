@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab2bcc21_fbd24a2a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-05-27T22:47:46Z",
+      "side": 1,
+      "message": "MicrodroidHostTestCases is not modified in this change. So, to test the change, for now, I needed the followup change(WIP of compos in relation chain) and see the startup logs, or, I had to run microdroid_manager manually in the microdroid shell.\n\nI\u0027ll add a proper test case in MicrodroidHostTestCases so that it can be automated.",
+      "parentUuid": "bdc7ee59_f3212f41",
+      "range": {
+        "startLine": 14,
+        "startChar": 20,
+        "endLine": 14,
+        "endChar": 64
+      },
+      "revId": "960194e64bf13f37d60e876d4ea37179c345c4ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca93204c_66de20d5",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-05-27T18:27:26Z",
       "side": 1,
       "message": "This should start earlier than zipfuse because microdroid_manager would be responsible for reading the signature partition which has the path to the block device serving the apk.",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 114,
+        "endChar": 28
+      },
+      "revId": "960194e64bf13f37d60e876d4ea37179c345c4ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb6430cb_19be7c22",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-05-27T22:47:46Z",
+      "side": 1,
+      "message": "chicken/egg? For now, microdroid_manager should read /mnt/apk to read a VM payload config when it is in the apk.\n\n\u003e path to the block device serving the apk.\n\nCan we settle down with \"/dev/block/by-name/microdroid-apk\"? This is a symlink to the device if there is any. Or, we can make microdroid_manager start zipfuse when necessary (and, when it\u0027s ready, microdroid_manager accesses the apk\u0027s contents via zipfuse fs)",
+      "parentUuid": "ca93204c_66de20d5",
       "range": {
         "startLine": 114,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6e92eae_01de94cc",
+        "filename": "microdroid/signature/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-05-27T22:47:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65638dd9_a35c801c",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 0
+      },
+      "revId": "960194e64bf13f37d60e876d4ea37179c345c4ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8aee7ff1_20af3282",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-05-27T18:27:26Z",
       "side": 1,
       "message": "no need",
+      "range": {
+        "startLine": 21,
+        "startChar": 4,
+        "endLine": 21,
+        "endChar": 41
+      },
+      "revId": "960194e64bf13f37d60e876d4ea37179c345c4ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46962c35_edfd348b",
+        "filename": "microdroid_manager/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-05-27T22:47:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8aee7ff1_20af3282",
       "range": {
         "startLine": 21,
         "startChar": 4,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d827cdb1_cb0a8b85",
+        "filename": "microdroid_manager/src/payload_config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-05-27T22:47:46Z",
+      "side": 1,
+      "message": "Done.\n\nbtw, I didn\u0027t know that executing a task should involve \"domain transition\". Now I\u0027m thinking of delegating to init after retrieving the relevant info about the task (command/args). For now this is tested with the \"execute_no_trans\" right, but without the domain transition, microdroid_manager should have the rights for the command, which seems wrong.",
+      "parentUuid": "d8df3bf6_ecc71671",
+      "range": {
+        "startLine": 24,
+        "startChar": 22,
+        "endLine": 24,
+        "endChar": 59
+      },
+      "revId": "960194e64bf13f37d60e876d4ea37179c345c4ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6cf9e683_933fb8d1",
@@ -129,6 +249,30 @@
       "writtenOn": "2021-05-27T18:27:26Z",
       "side": 1,
       "message": "This can also be handled inside the command.",
+      "range": {
+        "startLine": 34,
+        "startChar": 21,
+        "endLine": 35,
+        "endChar": 1
+      },
+      "revId": "960194e64bf13f37d60e876d4ea37179c345c4ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c33da34_c31f2d5d",
+        "filename": "microdroid_manager/src/payload_config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-05-27T22:47:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6cf9e683_933fb8d1",
       "range": {
         "startLine": 34,
         "startChar": 21,
