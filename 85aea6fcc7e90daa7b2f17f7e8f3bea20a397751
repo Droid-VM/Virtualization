@@ -22,6 +22,30 @@
       },
       "revId": "85aea6fcc7e90daa7b2f17f7e8f3bea20a397751",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81bb313e_df789ae1",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-05-27T06:30:48Z",
+      "side": 1,
+      "message": "So does keystore2 work if we add these two APEXes? Sorry that I\u0027m not familiar with APEXes, but does the linkerconfig handle APEX so binaries can link against such libraries?",
+      "parentUuid": "51dadb33_68a13e08",
+      "range": {
+        "startLine": 71,
+        "startChar": 3,
+        "endLine": 73,
+        "endChar": 25
+      },
+      "revId": "85aea6fcc7e90daa7b2f17f7e8f3bea20a397751",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
