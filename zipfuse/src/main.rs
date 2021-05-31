@@ -20,7 +20,7 @@
 
 mod inode;
 
-use anyhow::Result;
+use anyhow::{bail, Result};
 use clap::{App, Arg};
 use fuse::filesystem::*;
 use fuse::mount::*;
@@ -39,35 +39,69 @@ use crate::inode::{DirectoryEntry, Inode, InodeData, InodeKind, InodeTable};
 
 fn main() -> Result<()> {
     let matches = App::new("zipfuse")
+        .arg(
+            Arg::with_name("options")
+                .short("o")
+                .takes_value(true)
+                .multiple(true)
+                .require_delimiter(true)
+                .help(
+                    "Comma separated list of mount options. \
+                   Supported options: context=, fscontext=, defcontext=, rootcontext=",
+                ),
+        )
         .arg(Arg::with_name("ZIPFILE").required(true))
         .arg(Arg::with_name("MOUNTPOINT").required(true))
         .get_matches();
 
     let zip_file = matches.value_of("ZIPFILE").unwrap().as_ref();
     let mount_point = matches.value_of("MOUNTPOINT").unwrap().as_ref();
-    run_fuse(zip_file, mount_point)?;
+    let options = matches.values_of("options").unwrap_or_default().collect::<Vec<_>>();
+    run_fuse(zip_file, mount_point, &options)?;
     Ok(())
 }
 
+fn str_to_mount_option(s: &str) -> Result<MountOption> {
+    // split_once would simplify this, but it's still unstable.
+    let tokens: Vec<&str> = s.splitn(2, '=').collect();
+    if tokens.len() != 2 {
+        bail!("ill-formed option: {}", s);
+    }
+    let opt = tokens[0];
+    let value = tokens[1];
+    match opt {
+        "context" => Ok(MountOption::Context(value)),
+        "fscontext" => Ok(MountOption::FsContext(value)),
+        "defcontext" => Ok(MountOption::DefContext(value)),
+        "rootcontext" => Ok(MountOption::RootContext(value)),
+        _ => bail!("unsupported option: {}", opt),
+    }
+}
+
 /// Runs a fuse filesystem by mounting `zip_file` on `mount_point`.
-pub fn run_fuse(zip_file: &Path, mount_point: &Path) -> Result<()> {
+pub fn run_fuse(zip_file: &Path, mount_point: &Path, options: &[&str]) -> Result<()> {
     const MAX_READ: u32 = 1 << 20; // TODO(jiyong): tune this
     const MAX_WRITE: u32 = 1 << 13; // This is a read-only filesystem
 
     let dev_fuse = OpenOptions::new().read(true).write(true).open("/dev/fuse")?;
 
+    let mut mount_options = vec![
+        MountOption::FD(dev_fuse.as_raw_fd()),
+        MountOption::RootMode(libc::S_IFDIR | libc::S_IXUSR | libc::S_IXGRP | libc::S_IXOTH),
+        MountOption::AllowOther,
+        MountOption::UserId(0),
+        MountOption::GroupId(0),
+        MountOption::MaxRead(MAX_READ),
+    ];
+    for opt in options {
+        mount_options.push(str_to_mount_option(opt)?);
+    }
+
     fuse::mount(
         mount_point,
         "zipfuse",
         libc::MS_NOSUID | libc::MS_NODEV | libc::MS_RDONLY,
-        &[
-            MountOption::FD(dev_fuse.as_raw_fd()),
-            MountOption::RootMode(libc::S_IFDIR | libc::S_IXUSR | libc::S_IXGRP | libc::S_IXOTH),
-            MountOption::AllowOther,
-            MountOption::UserId(0),
-            MountOption::GroupId(0),
-            MountOption::MaxRead(MAX_READ),
-        ],
+        mount_options.as_slice(),
     )?;
     Ok(fuse::worker::start_message_loop(dev_fuse, MAX_READ, MAX_WRITE, ZipFuse::new(zip_file)?)?)
 }
@@ -388,7 +422,7 @@ mod tests {
         let zip_path = PathBuf::from(zip_path);
         let mnt_path = PathBuf::from(mnt_path);
         std::thread::spawn(move || {
-            crate::run_fuse(&zip_path, &mnt_path).unwrap();
+            crate::run_fuse(&zip_path, &mnt_path, &[]).unwrap();
         });
     }
 
