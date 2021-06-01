@@ -189,6 +189,30 @@
       },
       "revId": "d4ce1da77820b8ac3b5e55a8611b602faa1b0c24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a8610ac_6b7a93b8",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-01T05:53:48Z",
+      "side": 1,
+      "message": "Okay, now I got it. Situation is a little complicated...\n\n1) keystore2 tries loading keymint strongbox implementation. This is optional. (http://cs/android/system/security/keystore2/src/service.rs?l\u003d76\u0026rcl\u003d2d31ff5483912e294f05409e9984b1a67da7c23b)\n\n2) keystore2 takes a look at {keymint_service}/strongbox. If it doesn\u0027t exist, keystore2 tries loading compat mode. (http://cs/android/system/security/keystore2/src/globals.rs?l\u003d194\u0026rcl\u003db27f58177df33ed0d827b485f43dfe743e785461)\n\n3) default keymint impl doesn\u0027t add {keymint_service}/strongbox interface. So keystore2 crashes while taking a look at compat hidl hal.\n\nSo, in our final goal this will be automatically solved, as we will have the strongbox implementation, right? In the meantime we can solve this by either\n\n1) add strongbox implementation to default implementation, or\n2) patch keystore2 so it won\u0027t crash even when hwservicemanager aren\u0027t running\n\n2) doesn\u0027t seem right, because normal Android devices have hwservicemanager. I\u0027ll try 1).",
+      "parentUuid": "8d651520_990b90b3",
+      "range": {
+        "startLine": 81,
+        "startChar": 9,
+        "endLine": 81,
+        "endChar": 25
+      },
+      "revId": "d4ce1da77820b8ac3b5e55a8611b602faa1b0c24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
