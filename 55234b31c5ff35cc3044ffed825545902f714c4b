@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cb8be01_b9263b30",
+        "filename": "microdroid_manager/src/ioutil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-01T11:28:00Z",
+      "side": 1,
+      "message": "I want it to work with both \u0026str and \u0026PathBuf.",
+      "parentUuid": "8fbf862b_53fadc4d",
+      "range": {
+        "startLine": 27,
+        "startChar": 10,
+        "endLine": 27,
+        "endChar": 11
+      },
+      "revId": "55234b31c5ff35cc3044ffed825545902f714c4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f234d06_ad46fb08",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-06-01T11:03:04Z",
       "side": 1,
       "message": "Instead of accepting a lambda, you can make this function to return anyhow::Result\u003cFile\u003e so that this can be used as ...\n\nlet file \u003d ioutil::wait_for_file(path, WAIT_TIMEOUT)?;\nOk(serde_json::from_reader(file)?))",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 18
+      },
+      "revId": "55234b31c5ff35cc3044ffed825545902f714c4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16aa9687_f53dc29c",
+        "filename": "microdroid_manager/src/ioutil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-01T11:28:00Z",
+      "side": 1,
+      "message": "Done. The benefit with a lambda was that the scope of a file is limited. (just like python\u0027s \"with as\")",
+      "parentUuid": "1f234d06_ad46fb08",
       "range": {
         "startLine": 29,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3aabec8_b12c386b",
+        "filename": "microdroid_manager/src/payload_config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-01T11:28:00Z",
+      "side": 1,
+      "message": "Done. But I still need a \u0027mod ioutil\u0027.\n\n  \n  23 | use crate::ioutil;\n     |     ^^^^^^^^^^^^^ no `ioutil` in the root",
+      "parentUuid": "761d1aa5_d7d74a3c",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 17
+      },
+      "revId": "55234b31c5ff35cc3044ffed825545902f714c4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79d6c36d_552311be",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-06-01T11:03:04Z",
       "side": 1,
       "message": "Use \u0026Path and print it with \"{:?}\" because Path implements the Debug trait.",
+      "range": {
+        "startLine": 41,
+        "startChar": 63,
+        "endLine": 41,
+        "endChar": 64
+      },
+      "revId": "55234b31c5ff35cc3044ffed825545902f714c4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2db8999b_f7004a58",
+        "filename": "microdroid_manager/src/payload_config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-01T11:28:00Z",
+      "side": 1,
+      "message": "What would be the downside of \"Display\"?",
+      "parentUuid": "79d6c36d_552311be",
       "range": {
         "startLine": 41,
         "startChar": 63,
