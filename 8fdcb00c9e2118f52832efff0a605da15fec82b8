@@ -142,6 +142,30 @@
       },
       "revId": "8fdcb00c9e2118f52832efff0a605da15fec82b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44492a44_6bf3853e",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-01T13:14:10Z",
+      "side": 1,
+      "message": "The disk itself will be prepared by virt manager in the host. microdroid_manager will be initializing the disk on the first boot and update it when a change in the payload config is detected on the subsequent boots.",
+      "parentUuid": "5349cd43_d4942b7f",
+      "range": {
+        "startLine": 54,
+        "startChar": 3,
+        "endLine": 54,
+        "endChar": 28
+      },
+      "revId": "8fdcb00c9e2118f52832efff0a605da15fec82b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
