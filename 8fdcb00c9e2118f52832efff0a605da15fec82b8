@@ -46,6 +46,30 @@
       },
       "revId": "8fdcb00c9e2118f52832efff0a605da15fec82b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28ac7555_5ebeec6e",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-01T11:22:50Z",
+      "side": 1,
+      "message": "The reason why this needs to run before apexd is that the list of APEXes are right now coming from untrusted source (i.e. the metadata partition). The list should be from the payload config. The medata partition should provide only the mapping of the (name, partition) pairs, but not the list of APEXes that need to be activated in this VM.",
+      "parentUuid": "963d81a5_8169cd78",
+      "range": {
+        "startLine": 54,
+        "startChar": 3,
+        "endLine": 54,
+        "endChar": 28
+      },
+      "revId": "8fdcb00c9e2118f52832efff0a605da15fec82b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
