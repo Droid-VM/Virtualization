@@ -94,6 +94,30 @@
       },
       "revId": "8fdcb00c9e2118f52832efff0a605da15fec82b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eadb865_934ba8b7",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-01T12:26:50Z",
+      "side": 1,
+      "message": "We could let microdroid_manager to start apexd. But the list of apexes can be passed via other means: sysprop, a file in tmpfs, etc. We can even let apexd parse the payload config by itself by providing a library doing that. The main role of microdroid_manager is to stop booting when the list of APEXes it read from the config is different from the list of APEXes it retrieved from the identity disk.\n\n\u003e zipfuse might need to be \"bootstrap\" (in Android.bp) so that it can be started before apexd.\n\nThat\u0027s correct. Or we could run apexd twice: once before microdroid_manager to activate the critical APEXes like the runtime and once again after microdroid_manager to activate the user-specified APEXes on top of the runtime APEX.",
+      "parentUuid": "b788715e_9e6a2f4d",
+      "range": {
+        "startLine": 54,
+        "startChar": 3,
+        "endLine": 54,
+        "endChar": 28
+      },
+      "revId": "8fdcb00c9e2118f52832efff0a605da15fec82b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
