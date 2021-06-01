@@ -70,6 +70,30 @@
       },
       "revId": "8fdcb00c9e2118f52832efff0a605da15fec82b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b788715e_9e6a2f4d",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-01T11:44:49Z",
+      "side": 1,
+      "message": "But isn\u0027t the path for the VM payload config retrieved from the metadata partition?\n\nBtw, if we want apexd to activate what it is said so, we could do that by passing the list of apexes to apexd with arguments(e.g. apexd --vm --apexes\u003d/dev/block/by-name/apex1:/dev/block/by-name/apex2:/dev/block/by-name/apex3...). To do that, apexd should be started by microdroid_manager as well.\n\nzipfuse might need to be \"bootstrap\" (in Android.bp) so that it can be started before apexd.\n\n* microdroid_manager reads metadata partition\n* microdroid_manager starts zipfuse: zipfuse \u003capk partition\u003e /mnt/apk\n* micordroid_manager starts apexd: apexd --vm \u003clist of apex partitions\u003e\n* (init should wait for \"apexd.status\u003dready\" to start other services)\n* ...",
+      "parentUuid": "28ac7555_5ebeec6e",
+      "range": {
+        "startLine": 54,
+        "startChar": 3,
+        "endLine": 54,
+        "endChar": 28
+      },
+      "revId": "8fdcb00c9e2118f52832efff0a605da15fec82b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
