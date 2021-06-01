@@ -14,6 +14,7 @@
 
 //! Microdroid Manager
 
+mod ioutil;
 mod payload_config;
 mod signature;
 
@@ -21,7 +22,7 @@ use android_logger::Config;
 use log::{info, Level};
 use payload_config::{Task, VmPayloadConfig};
 use std::io;
-use std::process::Command;
+use std::process::{Command, Stdio};
 
 const LOG_TAG: &str = "MicrodroidManager";
 
@@ -45,7 +46,8 @@ fn main() -> io::Result<()> {
 /// TODO(jooyung): fork a child process
 fn exec(task: &Task) -> io::Result<()> {
     info!("executing main task {} {:?}...", task.command, task.args);
-    let exit_status = Command::new(&task.command).args(&task.args).status()?;
+    let exit_status =
+        Command::new(&task.command).args(&task.args).stdout(Stdio::inherit()).status()?;
     info!("exit with {}", &exit_status);
     Ok(())
 }
