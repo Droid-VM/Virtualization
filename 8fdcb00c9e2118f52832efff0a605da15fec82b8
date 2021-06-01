@@ -22,6 +22,30 @@
       },
       "revId": "8fdcb00c9e2118f52832efff0a605da15fec82b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "963d81a5_8169cd78",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-01T11:10:15Z",
+      "side": 1,
+      "message": "Done.\n\nFor now it\u0027s difficult because apex activation should be done before any other processes except static executables like init/ueventd/linkerconfig or bootstrap binaries like apexd.\n\nWe might need to make microdroid_manager \"static\" or \"bootstrap\" so that it can start before apexd.\n\nBesides, I think that DICE derivation can be done in a separate execution mode (e.g. microdroid_manager --dice). Otherwise, microdroid_manager should do what init can do better.",
+      "parentUuid": "34b43c2e_416ae69a",
+      "range": {
+        "startLine": 54,
+        "startChar": 3,
+        "endLine": 54,
+        "endChar": 28
+      },
+      "revId": "8fdcb00c9e2118f52832efff0a605da15fec82b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
