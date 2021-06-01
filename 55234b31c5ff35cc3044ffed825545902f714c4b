@@ -143,6 +143,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2d320dd_63033ae1",
+        "filename": "microdroid_manager/src/ioutil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-01T12:49:36Z",
+      "side": 1,
+      "message": "Ideally, we want to wait until the zipfuse is mounted. That can be done by using inotify on /proc/mounts and check the existence of the a mount on /mnt/apk by reading and parsing the file. But that would be much more complicated than this and I don\u0027t see a big value there.",
+      "parentUuid": "dada47c0_64d69bef",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 18
+      },
+      "revId": "55234b31c5ff35cc3044ffed825545902f714c4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "761d1aa5_d7d74a3c",
