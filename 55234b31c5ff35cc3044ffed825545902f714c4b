@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1254842f_e623aab9",
+        "filename": "microdroid_manager/src/ioutil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-01T12:20:00Z",
+      "side": 1,
+      "message": "The problem that I saw was that this function does multiple tasks: (1) wait until the file is created, (2) open it, and then (3) run a function with the opened file. These multiple roles are not reflected in the function name either.\n\nWhat you actually need (and what the function name implies) is (1) only. And that can be implemented using the exists() function.\n\nfn wait_for_file\u003cP: AsRef\u003cPath\u003e\u003e(path: P, timeout: Duration) -\u003e Result\u003c\u003e {\n  let begin \u003d Instant::now();\n  loop {\n    if \u0026path.exists() {\n      break;\n    }\n    if begin.elapsed() \u003e timeout {\n      bail!(\"{:?} not found. timeout.\", \u0026path);\n    }\n    thread::sleep(...);\n  }\n  Ok(())\n}\n\nor if you want a shorter version\n\nlet begin \u003d Instant::now();\nwhile let Err(_) \u003d std::fs::metadata(\u0026path) {\n  if begin.elapsed() \u003e timeout {\n    bail!(\"{:?} not found. timeout.\", \u0026path);\n  }\n  thread::sleep(...);\n}\nOK(())",
+      "parentUuid": "16aa9687_f53dc29c",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 18
+      },
+      "revId": "55234b31c5ff35cc3044ffed825545902f714c4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "761d1aa5_d7d74a3c",
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "What would be the downside of \"Display\"?",
       "parentUuid": "79d6c36d_552311be",
+      "range": {
+        "startLine": 41,
+        "startChar": 63,
+        "endLine": 41,
+        "endChar": 64
+      },
+      "revId": "55234b31c5ff35cc3044ffed825545902f714c4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbe9da34_f5fea4e0",
+        "filename": "microdroid_manager/src/payload_config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-01T12:20:00Z",
+      "side": 1,
+      "message": "Path doesn\u0027t implement Display.",
+      "parentUuid": "2db8999b_f7004a58",
       "range": {
         "startLine": 41,
         "startChar": 63,
