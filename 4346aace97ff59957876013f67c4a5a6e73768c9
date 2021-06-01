@@ -69,6 +69,30 @@
       },
       "revId": "4346aace97ff59957876013f67c4a5a6e73768c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f193ce4_b71f1c2a",
+        "filename": "zipfuse/zipfuse.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-01T02:31:16Z",
+      "side": 1,
+      "message": "To run restorecon, the filesystem has to be mounted writable and we don\u0027t want to do that for the APK mount.",
+      "parentUuid": "4cda574c_6155e60f",
+      "range": {
+        "startLine": 1,
+        "startChar": 39,
+        "endLine": 1,
+        "endChar": 106
+      },
+      "revId": "4346aace97ff59957876013f67c4a5a6e73768c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
