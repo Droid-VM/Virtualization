@@ -16,6 +16,29 @@
       "message": "This has been revised. PTAL.",
       "revId": "86cef890aa2e848d4c62c846f417a7846b04680c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8484ebae_d640c500",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-02T07:51:19Z",
+      "side": 1,
+      "message": "-o options are supposed to be passed to mount(2) without any processing, right?\n\nThen, this \"help\" and commit msg sounds wrong or misleading at least to me.",
+      "range": {
+        "startLine": 48,
+        "startChar": 60,
+        "endLine": 49,
+        "endChar": 48
+      },
+      "revId": "86cef890aa2e848d4c62c846f417a7846b04680c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
