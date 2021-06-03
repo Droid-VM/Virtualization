@@ -34,7 +34,7 @@ using secureclock::TimeStampToken;
 
 class MicrodroidKeyMintDevice : public BnKeyMintDevice {
 public:
-    explicit MicrodroidKeyMintDevice(SecurityLevel securityLevel);
+    explicit MicrodroidKeyMintDevice();
     virtual ~MicrodroidKeyMintDevice();
 
     ScopedAStatus getHardwareInfo(KeyMintHardwareInfo* info) override;
