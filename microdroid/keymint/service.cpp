@@ -43,8 +43,7 @@ int main() {
     // the pool size to 1.
     ABinderProcess_setThreadPoolMaxThreadCount(0);
     // Add Keymint Service
-    std::shared_ptr<MicrodroidKeyMintDevice> keyMint =
-            addService<MicrodroidKeyMintDevice>(SecurityLevel::SOFTWARE);
+    std::shared_ptr<MicrodroidKeyMintDevice> keyMint = addService<MicrodroidKeyMintDevice>();
 
     // VMs cannot implement the Secure Clock Service
     // addService<AndroidSecureClock>(keyMint);
