@@ -98,7 +98,11 @@ android_system_image {
         },
         lib64: {
             deps: [
+                "authfs",
                 "zipfuse",
+
+                // TODO(b/184872979): Needed by authfs. Remove once the Rust API is created.
+                "libbinder_rpc_unstable",
             ],
         },
     },
