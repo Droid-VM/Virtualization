@@ -20,6 +20,7 @@ rust_defaults {
         "liblog_rust",
         "libstructopt",
         "libthiserror",
+        "librpc_binder_bindgen",
     ],
     prefer_rlib: true,
     target: {
@@ -27,8 +28,47 @@ rust_defaults {
             enabled: false,
         },
     },
-    shared_libs: ["libcrypto"],
+    shared_libs: [
+        "libbinder",
+        "libcrypto",
+        "librpc_binder_shim",
+    ],
     defaults: ["crosvm_defaults"],
+}
+
+// TODO(b/184872979): remove once the Rust API is created.
+cc_library {
+    name: "librpc_binder_shim",
+    srcs: ["src/rpc_binder_shim.cc"],
+    shared_libs: [
+        "libbase",
+        "libbinder",
+        "libbinder_ndk",
+        "libutils",
+    ],
+    apex_available: [
+        "com.android.compos",
+        "com.android.virt",
+    ],
+    defaults: ["libbinder_ndk_host_user"],
+    visibility: [
+        "//visibility:private",
+    ],
+}
+
+// TODO(b/184872979): remove once the Rust API is created.
+rust_bindgen {
+    name: "librpc_binder_bindgen",
+    wrapper_src: "src/rpc_binder.hpp",
+    crate_name: "rpc_binder_bindgen",
+    source_stem: "bindings",
+    shared_libs: [
+        "libutils",
+    ],
+    apex_available: [
+        "com.android.compos",
+        "com.android.virt",
+    ],
 }
 
 // TODO(b/172687320): remove once there is a canonical bindgen.

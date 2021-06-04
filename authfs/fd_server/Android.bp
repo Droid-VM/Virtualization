@@ -13,7 +13,12 @@ rust_binary {
         "liblibc",
         "liblog_rust",
         "libnix",
+        "librpc_binder_bindgen",
     ],
     prefer_rlib: true,
+    shared_libs: [
+        "libbinder",
+        "librpc_binder_shim",
+    ],
     apex_available: ["com.android.virt"],
 }

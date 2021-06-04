@@ -1,23 +1,55 @@
 mod local_file;
 mod remote_file;
 
+extern crate binder;
+
 pub use local_file::LocalFileReader;
 pub use remote_file::{RemoteFileEditor, RemoteFileReader, RemoteMerkleTreeReader};
 
+use binder::FromIBinder;
 use std::io;
 
 use crate::common::CHUNK_SIZE;
+use authfs_aidl_interface::aidl::com::android::virt::fs::IVirtFdService::IVirtFdService;
+use authfs_aidl_interface::binder::{get_interface, Strong, WpIBinder};
 
-use authfs_aidl_interface::aidl::com::android::virt::fs::IVirtFdService;
-use authfs_aidl_interface::binder::{get_interface, Strong};
-
-// TODO(victorhsieh): use remote binder.
-pub fn get_local_binder() -> Strong<dyn IVirtFdService::IVirtFdService> {
-    let service_name = "authfs_fd_server";
-    get_interface(&service_name).expect("Cannot reach authfs_fd_server binder service")
-}
+pub type VirtFdService = Strong<dyn IVirtFdService>;
 
 pub type ChunkBuffer = [u8; CHUNK_SIZE as usize];
+
+pub const RPC_SERVICE_PORT: u32 = 3264;
+
+fn get_local_binder() -> io::Result<VirtFdService> {
+    let service_name = "authfs_fd_server";
+    get_interface(&service_name).map_err(|e| {
+        io::Error::new(
+            io::ErrorKind::AddrNotAvailable,
+            format!("Cannot reach authfs_fd_server binder service: {}", e),
+        )
+    })
+}
+
+fn get_rpc_binder(cid: u32) -> io::Result<VirtFdService> {
+    let weak_aibinder = unsafe {
+        rpc_binder_bindgen::RpcClient(cid, RPC_SERVICE_PORT) as *mut binder::AIBinder_Weak
+    };
+    if weak_aibinder.is_null() {
+        return Err(io::Error::new(
+            io::ErrorKind::AddrNotAvailable,
+            "Cannot connect to RPC service",
+        ));
+    }
+    let wp = WpIBinder(weak_aibinder);
+    Ok(IVirtFdService::try_from(wp.promote().unwrap()).unwrap()) // FIXME
+}
+
+pub fn get_binder_service(cid: Option<u32>) -> io::Result<VirtFdService> {
+    if let Some(cid) = cid {
+        get_rpc_binder(cid)
+    } else {
+        get_local_binder()
+    }
+}
 
 /// A trait for reading data by chunks. Chunks can be read by specifying the chunk index. Only the
 /// last chunk may have incomplete chunk size.
