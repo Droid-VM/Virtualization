@@ -27,6 +27,8 @@
 
 mod fsverity;
 
+extern crate binder;
+
 use std::cmp::min;
 use std::collections::BTreeMap;
 use std::convert::TryInto;
@@ -37,6 +39,7 @@ use std::os::unix::fs::FileExt;
 use std::os::unix::io::{AsRawFd, FromRawFd};
 
 use anyhow::{bail, Context, Result};
+use binder::AsNative;
 use log::{debug, error};
 
 use authfs_aidl_interface::aidl::com::android::virt::fs::IVirtFdService::{
@@ -48,6 +51,7 @@ use authfs_aidl_interface::binder::{
 };
 
 const SERVICE_NAME: &str = "authfs_fd_server";
+const RPC_SERVICE_PORT: u32 = 3264; // TODO: support dynamic port for multiple fd_server instances
 
 fn new_binder_exception<T: AsRef<str>>(exception: ExceptionCode, message: T) -> Status {
     Status::new_exception(exception, CString::new(message.as_ref()).as_deref().ok())
@@ -275,7 +279,7 @@ fn parse_arg_rw_fds(arg: &str) -> Result<(i32, FdConfig)> {
     Ok((fd, FdConfig::ReadWrite(file)))
 }
 
-fn parse_args() -> Result<BTreeMap<i32, FdConfig>> {
+fn parse_args() -> Result<(bool, BTreeMap<i32, FdConfig>)> {
     #[rustfmt::skip]
     let matches = clap::App::new("fd_server")
         .arg(clap::Arg::with_name("ro-fds")
@@ -286,6 +290,8 @@ fn parse_args() -> Result<BTreeMap<i32, FdConfig>> {
              .long("rw-fds")
              .multiple(true)
              .number_of_values(1))
+        .arg(clap::Arg::with_name("rpc-binder")
+             .long("rpc-binder"))
         .get_matches();
 
     let mut fd_pool = BTreeMap::new();
@@ -301,7 +307,9 @@ fn parse_args() -> Result<BTreeMap<i32, FdConfig>> {
             fd_pool.insert(fd, config);
         }
     }
-    Ok(fd_pool)
+
+    let rpc_binder = matches.is_present("rpc-binder");
+    Ok((rpc_binder, fd_pool))
 }
 
 fn main() -> Result<()> {
@@ -309,14 +317,31 @@ fn main() -> Result<()> {
         android_logger::Config::default().with_tag("fd_server").with_min_level(log::Level::Debug),
     );
 
-    let fd_pool = parse_args()?;
+    let (rpc_binder, fd_pool) = parse_args()?;
 
-    ProcessState::start_thread_pool();
-
-    add_service(SERVICE_NAME, FdService::new_binder(fd_pool).as_binder())
-        .with_context(|| format!("Failed to register service {}", SERVICE_NAME))?;
-    debug!("fd_server is running.");
-
-    ProcessState::join_thread_pool();
-    bail!("Unexpected exit after join_thread_pool")
+    if rpc_binder {
+        let mut service = FdService::new_binder(fd_pool).as_binder();
+        debug!("fd_server is starting as a rpc service.");
+        // SAFETY: TODO
+        let retval = unsafe {
+            rpc_binder_bindgen::RunRpcServer(
+                service.as_native_mut() as *mut rpc_binder_bindgen::AIBinder,
+                RPC_SERVICE_PORT,
+            )
+        };
+        if retval {
+            debug!("RPC server has shut down gracefully");
+            Ok(())
+        } else {
+            bail!("Premature termination of RPC server");
+        }
+    } else {
+        ProcessState::start_thread_pool();
+        let service = FdService::new_binder(fd_pool).as_binder();
+        add_service(SERVICE_NAME, service)
+            .with_context(|| format!("Failed to register service {}", SERVICE_NAME))?;
+        debug!("fd_server is running as a local service.");
+        ProcessState::join_thread_pool();
+        bail!("Unexpected exit after join_thread_pool")
+    }
 }
