@@ -64,6 +64,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52a28d1e_7cd33013",
+        "filename": "apkverity/src/apksigv4.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T06:07:21Z",
+      "side": 1,
+      "message": "from_u32 provides the conversion from the num_[derive|traits] crates. I made these wrappers to convert Option into Rust and also to give the contextual errors when the conversion has failed. Since the error message should be different for Version and HashAlgorithm, these can\u0027t be deduped.",
+      "parentUuid": "e42f9ca5_728b5f52",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 5
+      },
+      "revId": "030ab8405dc28d9f81b65716bdb3b100554f9437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51c3b3b3_d4ad0406",
@@ -77,6 +101,30 @@
       "writtenOn": "2021-06-05T01:56:00Z",
       "side": 1,
       "message": "Why do we need this? Doesn\u0027t it limit its usability with inline data?",
+      "range": {
+        "startLine": 44,
+        "startChar": 32,
+        "endLine": 44,
+        "endChar": 36
+      },
+      "revId": "030ab8405dc28d9f81b65716bdb3b100554f9437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6124e78_94e3e452",
+        "filename": "apkverity/src/dm/verity.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T06:07:21Z",
+      "side": 1,
+      "message": "That\u0027s because this struct has references in it. We have to tell the compiler that the lifetime of the references should be longer than the lifetime of this struct.",
+      "parentUuid": "51c3b3b3_d4ad0406",
       "range": {
         "startLine": 44,
         "startChar": 32,
@@ -110,6 +158,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16d003e8_4e091b71",
+        "filename": "apkverity/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T06:07:21Z",
+      "side": 1,
+      "message": "Good point. Done.",
+      "parentUuid": "dc297d39_c8631ae4",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 61
+      },
+      "revId": "030ab8405dc28d9f81b65716bdb3b100554f9437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f001da2_b569011f",
@@ -123,6 +195,30 @@
       "writtenOn": "2021-06-05T01:56:00Z",
       "side": 1,
       "message": "move this into the loop?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 28
+      },
+      "revId": "030ab8405dc28d9f81b65716bdb3b100554f9437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de6956b1_bdc7734e",
+        "filename": "apkverity/src/util.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T06:07:21Z",
+      "side": 1,
+      "message": "Thanks for catching this. Done.",
+      "parentUuid": "7f001da2_b569011f",
       "range": {
         "startLine": 35,
         "startChar": 0,
