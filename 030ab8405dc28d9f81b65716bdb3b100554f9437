@@ -16,6 +16,121 @@
       "message": "Victor, thanks for the details review comments as always!!!",
       "revId": "030ab8405dc28d9f81b65716bdb3b100554f9437",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aef2cd2_532d8c21",
+        "filename": "apkverity/src/apksigv4.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-05T01:56:00Z",
+      "side": 1,
+      "message": "interesting, these two belong to different namespaces?",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 30
+      },
+      "revId": "030ab8405dc28d9f81b65716bdb3b100554f9437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e42f9ca5_728b5f52",
+        "filename": "apkverity/src/apksigv4.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-05T01:56:00Z",
+      "side": 1,
+      "message": "newbie question for Rust ninjas: I see a few instances of \"from\"(u32 -\u003e enum) with almost same implementation. How can we de-dup? or Doesn\u0027t rust provide a similar facility already?",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 5
+      },
+      "revId": "030ab8405dc28d9f81b65716bdb3b100554f9437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51c3b3b3_d4ad0406",
+        "filename": "apkverity/src/dm/verity.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-05T01:56:00Z",
+      "side": 1,
+      "message": "Why do we need this? Doesn\u0027t it limit its usability with inline data?",
+      "range": {
+        "startLine": 44,
+        "startChar": 32,
+        "endLine": 44,
+        "endChar": 36
+      },
+      "revId": "030ab8405dc28d9f81b65716bdb3b100554f9437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc297d39_c8631ae4",
+        "filename": "apkverity/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-05T01:56:00Z",
+      "side": 1,
+      "message": "I understand why we need to attach idsig to a loop device (it\u0027s because the offset of merkle tree is not aligned with 4096 boundary, which is required by dm-verity). But why should we do the same for APK given that APK is already passed as a block dev inside microdroid. Is it just for testing or simplicity? Can we do it optionally only when it is not a block-dev (e.g. testing)?",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 61
+      },
+      "revId": "030ab8405dc28d9f81b65716bdb3b100554f9437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f001da2_b569011f",
+        "filename": "apkverity/src/util.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-05T01:56:00Z",
+      "side": 1,
+      "message": "move this into the loop?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 28
+      },
+      "revId": "030ab8405dc28d9f81b65716bdb3b100554f9437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
