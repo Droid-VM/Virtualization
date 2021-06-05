@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6543a263_88c659df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "apkdmverity sounds fine to me. Changed to it. Actually I am thinking about merging this into zipfuse, in which case the name wouldn\u0027t matter at all.",
+      "parentUuid": "d06ea457_d1489603",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "677b9b45_2ce68433",
         "filename": "apkverity/src/apksigv4.rs",
         "patchSetId": 2
@@ -70,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb0437f1_5e9fb715",
+        "filename": "apkverity/src/apksigv4.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2728f9a_990daedd",
+      "range": {
+        "startLine": 91,
+        "startChar": 28,
+        "endLine": 91,
+        "endChar": 42
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc50ded3_20ca5d55",
@@ -93,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7b735d7_a56ceb22",
+        "filename": "apkverity/src/dm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc50ded3_20ca5d55",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 71
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43add422_648f4955",
@@ -106,6 +178,30 @@
       "writtenOn": "2021-06-04T18:50:10Z",
       "side": 1,
       "message": "shouldn\u0027t be needed?",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 17
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc4f4a1a_0f0d87a2",
+        "filename": "apkverity/src/dm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "This is to silence a lot of warnings like the below:\n\n```\nwarning: variant is never constructed: `DM_LIST_VERSIONS`\n```",
+      "parentUuid": "43add422_648f4955",
       "range": {
         "startLine": 48,
         "startChar": 8,
@@ -162,6 +258,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3404ebb_fcc8f0a4",
+        "filename": "apkverity/src/dm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7235109f_009eb268",
+      "range": {
+        "startLine": 163,
+        "startChar": 8,
+        "endLine": 163,
+        "endChar": 14
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3505ccc_da6eea12",
+        "filename": "apkverity/src/dm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "No, it doesn\u0027t work.\n\n```\nerror[E0512]: cannot transmute between types of different sizes, or dependently-sized types\n   --\u003e src/dm.rs:163:18\n    |\n163 |         unsafe { std::mem::transmute::\u003c\u0026Self, \u0026[u8]\u003e(\u0026self) }\n    |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    |\n    \u003d note: source type: `\u0026DmIoctl` (64 bits)\n    \u003d note: target type: `\u0026[u8]` (128 bits)\n```",
+      "parentUuid": "531482ed_e701b3cc",
+      "range": {
+        "startLine": 163,
+        "startChar": 17,
+        "endLine": 163,
+        "endChar": 98
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c138b48_b4fd8260",
@@ -175,6 +319,30 @@
       "writtenOn": "2021-06-04T18:50:10Z",
       "side": 1,
       "message": "\"?\" ?",
+      "range": {
+        "startLine": 175,
+        "startChar": 85,
+        "endLine": 175,
+        "endChar": 94
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a59216ea_33e7a755",
+        "filename": "apkverity/src/dm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c138b48_b4fd8260",
       "range": {
         "startLine": 175,
         "startChar": 85,
@@ -208,6 +376,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18916cc2_c2bce0ad",
+        "filename": "apkverity/src/dm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc9862d7_00d877aa",
+      "range": {
+        "startLine": 187,
+        "startChar": 8,
+        "endLine": 187,
+        "endChar": 14
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7610987f_69ccbdfd",
@@ -221,6 +413,30 @@
       "writtenOn": "2021-06-04T18:50:10Z",
       "side": 1,
       "message": "ditto, move to sys.rs",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 68
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "960e727d_25170dc9",
+        "filename": "apkverity/src/dm/verity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "Can\u0027t do that for this because the UAPI is just a string encoding format. It doesn\u0027t define any struct or constants in a header.",
+      "parentUuid": "7610987f_69ccbdfd",
       "range": {
         "startLine": 29,
         "startChar": 0,
@@ -254,6 +470,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb87a854_7702a916",
+        "filename": "apkverity/src/dm/verity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03b1c178_2f1f0f83",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 33,
+        "endChar": 17
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da586328_bd94cbb2",
@@ -267,6 +507,30 @@
       "writtenOn": "2021-06-04T18:50:10Z",
       "side": 1,
       "message": "nit: this can be `default` if you want.\n\nhttps://doc.rust-lang.org/std/default/trait.Default.html",
+      "range": {
+        "startLine": 66,
+        "startChar": 11,
+        "endLine": 66,
+        "endChar": 14
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "015c2172_d924b8d5",
+        "filename": "apkverity/src/dm/verity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da586328_bd94cbb2",
       "range": {
         "startLine": 66,
         "startChar": 11,
@@ -300,6 +564,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac738975_d1a62a34",
+        "filename": "apkverity/src/dm/verity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91fdfa92_e6bc73a0",
+      "range": {
+        "startLine": 125,
+        "startChar": 13,
+        "endLine": 125,
+        "endChar": 26
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f55fb1f_bf760092",
@@ -313,6 +601,30 @@
       "writtenOn": "2021-06-04T18:50:10Z",
       "side": 1,
       "message": "nit: probably a bit simpler this way\n\n  let root_digest \u003d if Some(root_digest) \u003d self.root_digest {\n    hexstring_from(root_digest)\n  } else {\n    bail!(\"...\")\n  };",
+      "range": {
+        "startLine": 146,
+        "startChar": 8,
+        "endLine": 150,
+        "endChar": 87
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d7717d1_f8663ee3",
+        "filename": "apkverity/src/dm/verity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f55fb1f_bf760092",
       "range": {
         "startLine": 146,
         "startChar": 8,
@@ -346,6 +658,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d1f5f63_5b166b96",
+        "filename": "apkverity/src/loopdevice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65f7716b_fbf7bf5b",
+      "range": {
+        "startLine": 35,
+        "startChar": 3,
+        "endLine": 35,
+        "endChar": 67
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3fdea1ba_ff67b6f7",
@@ -359,6 +695,30 @@
       "writtenOn": "2021-06-04T18:50:10Z",
       "side": 1,
       "message": "Seems redundant, since Path implements/implies Debug.",
+      "range": {
+        "startLine": 88,
+        "startChar": 31,
+        "endLine": 88,
+        "endChar": 36
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "618be593_4362ce37",
+        "filename": "apkverity/src/loopdevice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "Done, but that required me to use `path.as_ref()` for formattng. Otherwise, I get\n\n```\n`P` cannot be formatted using `{:?}` because it doesn\u0027t implement `Debug`\n```",
+      "parentUuid": "3fdea1ba_ff67b6f7",
       "range": {
         "startLine": 88,
         "startChar": 31,
@@ -392,6 +752,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b31f4487_45696bab",
+        "filename": "apkverity/src/loopdevice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b4f3a4a_6d89e276",
+      "range": {
+        "startLine": 122,
+        "startChar": 14,
+        "endLine": 122,
+        "endChar": 20
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d828b26b_46408c76",
@@ -405,6 +789,30 @@
       "writtenOn": "2021-06-04T18:50:10Z",
       "side": 1,
       "message": "Add a comment of \"SAFETY:\".  Also, move .context out of unsafe to minimize the unsafe block.",
+      "range": {
+        "startLine": 144,
+        "startChar": 4,
+        "endLine": 147,
+        "endChar": 6
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dd5181f_1d819968",
+        "filename": "apkverity/src/loopdevice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d828b26b_46408c76",
       "range": {
         "startLine": 144,
         "startChar": 4,
@@ -438,6 +846,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c98a2d13_1dce8ff2",
+        "filename": "apkverity/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ecdec36_b1ad6511",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 17
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25f990ad_bb2dc6c2",
@@ -451,6 +883,30 @@
       "writtenOn": "2021-06-04T18:50:10Z",
       "side": 1,
       "message": "nit: this isn\u0027t necessary since the name is same to the field",
+      "range": {
+        "startLine": 112,
+        "startChar": 19,
+        "endLine": 112,
+        "endChar": 32
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd76e99c_41a995e3",
+        "filename": "apkverity/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25f990ad_bb2dc6c2",
       "range": {
         "startLine": 112,
         "startChar": 19,
@@ -484,6 +940,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74c65135_ab93effd",
+        "filename": "apkverity/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5610ca9_64c180c8",
+      "range": {
+        "startLine": 237,
+        "startChar": 24,
+        "endLine": 237,
+        "endChar": 28
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aabf1a10_2e7d3299",
@@ -497,6 +977,30 @@
       "writtenOn": "2021-06-04T18:50:10Z",
       "side": 1,
       "message": "path.exists() ?",
+      "range": {
+        "startLine": 30,
+        "startChar": 10,
+        "endLine": 30,
+        "endChar": 47
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9b51260_a83385aa",
+        "filename": "apkverity/src/util.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-05T00:55:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aabf1a10_2e7d3299",
       "range": {
         "startLine": 30,
         "startChar": 10,
