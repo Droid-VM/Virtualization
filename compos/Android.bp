@@ -13,9 +13,14 @@ rust_binary {
         "liblog_rust",
         "libminijail_rust",
         "libnix",
+        "librpc_binder_bindgen",
         "libscopeguard",
     ],
     prefer_rlib: true,
+    shared_libs: [
+        "libbinder",
+        "librpc_binder_shim",
+    ],
     apex_available: [
         "com.android.compos",
     ],
@@ -31,8 +36,13 @@ rust_binary {
         "libclap",
         "liblog_rust",
         "libminijail_rust",
+        "librpc_binder_bindgen",
     ],
     prefer_rlib: true,
+    shared_libs: [
+        "libbinder",
+        "librpc_binder_shim",
+    ],
     apex_available: [
         "com.android.compos",
     ],

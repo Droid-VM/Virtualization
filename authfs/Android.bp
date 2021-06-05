@@ -52,7 +52,9 @@ cc_library {
     ],
     defaults: ["libbinder_ndk_host_user"],
     visibility: [
-        "//visibility:private",
+        ":__subpackages__",
+        "//packages/modules/Virtualization/compos",
+        "//packages/modules/Virtualization/microdroid",
     ],
 }
 

@@ -28,8 +28,11 @@
 //!     - authfs (fd translation)
 //!     - actual task
 
+extern crate binder;
+
 use anyhow::{bail, Context, Result};
-use log::error;
+use binder::AsNative;
+use log::{debug, error};
 use minijail::{self, Minijail};
 use std::path::PathBuf;
 
@@ -50,6 +53,7 @@ const AUTHFS_MOUNTPOINT: &str = "/data/local/tmp/authfs_mnt";
 struct CompService {
     worker_bin: PathBuf,
     task_bin: String,
+    use_rpc_binder: bool,
     debuggable: bool,
 }
 
@@ -128,11 +132,14 @@ fn parse_args() -> Result<CompService> {
              .long("debug"))
         .arg(clap::Arg::with_name("task_bin")
              .required(true))
+        .arg(clap::Arg::with_name("use_rpc_binder")
+             .long("use-rpc-binder"))
         .get_matches();
 
     Ok(CompService {
         task_bin: matches.value_of("task_bin").unwrap().to_string(),
         worker_bin: PathBuf::from(WORKER_BIN),
+        use_rpc_binder: matches.is_present("use_rpc_binder"),
         debuggable: matches.is_present("debug"),
     })
 }
@@ -144,10 +151,27 @@ fn main() -> Result<()> {
 
     let service = parse_args()?;
 
-    ProcessState::start_thread_pool();
-    // TODO: switch to remote binder
-    add_service(SERVICE_NAME, CompService::new_binder(service).as_binder())
-        .with_context(|| format!("Failed to register service {}", SERVICE_NAME))?;
-    ProcessState::join_thread_pool();
-    bail!("Unexpected exit after join_thread_pool")
+    if service.use_rpc_binder {
+        let mut service = CompService::new_binder(service).as_binder();
+        error!("compsvc is starting as a rpc service.");
+        let retval = unsafe {
+            rpc_binder_bindgen::RunRpcServer(
+                service.as_native_mut() as *mut rpc_binder_bindgen::AIBinder,
+                23456,
+            )
+        };
+        if retval {
+            debug!("RPC server has shut down gracefully");
+            Ok(())
+        } else {
+            bail!("Premature termination of RPC server");
+        }
+    } else {
+        ProcessState::start_thread_pool();
+        error!("compsvc is starting as a local service.");
+        add_service(SERVICE_NAME, CompService::new_binder(service).as_binder())
+            .with_context(|| format!("Failed to register service {}", SERVICE_NAME))?;
+        ProcessState::join_thread_pool();
+        bail!("Unexpected exit after join_thread_pool")
+    }
 }

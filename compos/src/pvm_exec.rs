@@ -24,7 +24,10 @@
 //! Note the immediate argument right after "--" (e.g. "sleep" in the example above) is not really
 //! used. It is only for ergonomics.
 
+extern crate binder;
+
 use anyhow::{bail, Context, Result};
+use binder::FromIBinder;
 use log::{error, warn};
 use minijail::Minijail;
 use nix::fcntl::{fcntl, FcntlArg::F_GETFD};
@@ -37,13 +40,23 @@ use compos_aidl_interface::aidl::com::android::compos::{
     ICompService::ICompService, InputFdAnnotation::InputFdAnnotation, Metadata::Metadata,
     OutputFdAnnotation::OutputFdAnnotation,
 };
-use compos_aidl_interface::binder::Strong;
+use compos_aidl_interface::binder::{Strong, WpIBinder};
 
 static SERVICE_NAME: &str = "compsvc";
 static FD_SERVER_BIN: &str = "/apex/com.android.virt/bin/fd_server";
 
-fn get_local_service() -> Strong<dyn ICompService> {
-    compos_aidl_interface::binder::get_interface(SERVICE_NAME).expect("Cannot reach compsvc")
+fn get_local_service() -> Result<Strong<dyn ICompService>> {
+    compos_aidl_interface::binder::get_interface(SERVICE_NAME).context("get local binder")
+}
+
+fn get_rpc_binder(cid: u32) -> Result<Strong<dyn ICompService>> {
+    let weak_aibinder =
+        unsafe { rpc_binder_bindgen::RpcClient(cid, 23456) as *mut binder::AIBinder_Weak };
+    if weak_aibinder.is_null() {
+        bail!("Cannot connect to RPC service");
+    }
+    let wp = WpIBinder(weak_aibinder);
+    Ok(ICompService::try_from(wp.promote().unwrap()).unwrap()) // FIXME
 }
 
 fn spawn_fd_server(metadata: &Metadata, debuggable: bool) -> Result<Minijail> {
@@ -86,6 +99,7 @@ fn parse_arg_fd(arg: &str) -> Result<RawFd> {
 struct Config {
     args: Vec<String>,
     metadata: Metadata,
+    cid: Option<u32>,
     debuggable: bool,
 }
 
@@ -102,6 +116,9 @@ fn parse_args() -> Result<Config> {
              .takes_value(true)
              .multiple(true)
              .use_delimiter(true))
+        .arg(clap::Arg::with_name("cid")
+             .takes_value(true)
+             .long("cid"))
         .arg(clap::Arg::with_name("debug")
              .long("debug"))
         .arg(clap::Arg::with_name("args")
@@ -132,18 +149,21 @@ fn parse_args() -> Result<Config> {
     let output_fd_annotations = results?;
 
     let args: Vec<_> = matches.values_of("args").unwrap().map(|s| s.to_string()).collect();
+    let cid =
+        if let Some(arg) = matches.value_of("cid") { Some(arg.parse::<u32>()?) } else { None };
     let debuggable = matches.is_present("debug");
 
     Ok(Config {
         args,
         metadata: Metadata { input_fd_annotations, output_fd_annotations },
+        cid,
         debuggable,
     })
 }
 
 fn main() -> Result<()> {
     // 1. Parse the command line arguments for collect execution data.
-    let Config { args, metadata, debuggable } = parse_args()?;
+    let Config { args, metadata, cid, debuggable } = parse_args()?;
 
     // 2. Spawn and configure a fd_server to serve remote read/write requests.
     let fd_server_jail = spawn_fd_server(&metadata, debuggable)?;
@@ -156,7 +176,8 @@ fn main() -> Result<()> {
     });
 
     // 3. Send the command line args to the remote to execute.
-    let exit_code = get_local_service().execute(&args, &metadata).context("Binder call failed")?;
+    let service = if let Some(cid) = cid { get_rpc_binder(cid) } else { get_local_service() }?;
+    let exit_code = service.execute(&args, &metadata).context("Binder call failed")?;
 
     // Be explicit about the lifetime, which should last at least until the task is finished.
     drop(fd_server_lifetime);
