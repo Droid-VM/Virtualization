@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "139c4d22_d46e4661",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-05T00:33:03Z",
+      "side": 1,
+      "message": "Steven, could you please help me understand if this is actually safe and why?  I don\u0027t have any insight to the implementation.",
+      "range": {
+        "startLine": 325,
+        "startChar": 19,
+        "endLine": 325,
+        "endChar": 23
+      },
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7b6129e_97dc71c9",
+        "filename": "authfs/src/rpc_binder_shim.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-05T00:33:03Z",
+      "side": 1,
+      "message": "Steven, am I doing anything wrong here?  It looks like the server is crashed when a client tries to connect.  Here is the stack trace.\n\n06-04 21:30:54.438   237   237 F DEBUG   : backtrace:                                                                                                                                           \n06-04 21:30:54.438   237   237 F DEBUG   :       #00 pc 0000000000050c28  /apex/com.android.runtime/lib64/bionic/libc.so (abort+164) (BuildId: 7eee317016204fd3c60be81fadeb197a)                \n06-04 21:30:54.438   237   237 F DEBUG   :       #01 pc 000000000006062c  /system/lib64/libbinder.so (android::Parcel::freeDataNoInit()+552) (BuildId: d63d3be670fd1dbe85fb2a90c0933ab8)\n06-04 21:30:54.438   237   237 F DEBUG   :       #02 pc 0000000000060250  /system/lib64/libbinder.so (android::Parcel::~Parcel()+16) (BuildId: d63d3be670fd1dbe85fb2a90c0933ab8)                \n06-04 21:30:54.438   237   237 F DEBUG   :       #03 pc 00000000000973a0  /system/lib64/libbinder.so (android::RpcState::processTransactInternal(android::base::unique_fd_impl\u003candroid::base::DefaultCloser\u003e const\u0026, android::sp\u003candroid::RpcSession\u003e const\u0026, android::RpcState::CommandData, android::sp\u003candroid::IBinder\u003e\u0026\u0026)+704) (BuildId: d63d3be670fd1dbe85fb2a90c0933ab8)\n06-04 21:30:54.438   237   237 F DEBUG   :       #04 pc 0000000000096c68  /system/lib64/libbinder.so (android::RpcState::processTransact(android::base::unique_fd_impl\u003candroid::base::DefaultCloser\u003e const\u0026, android::sp\u003candroid::RpcSession\u003e const\u0026, android::RpcWireHeader const\u0026)+224) (BuildId: d63d3be670fd1dbe85fb2a90c0933ab8)\n06-04 21:30:54.438   237   237 F DEBUG   :       #05 pc 0000000000096ae4  /system/lib64/libbinder.so (android::RpcState::processServerCommand(android::base::unique_fd_impl\u003candroid::base::DefaultCloser\u003e const\u0026, android::sp\u003candroid::RpcSession\u003e const\u0026, android::RpcWireHeader const\u0026)+128) (BuildId: d63d3be670fd1dbe85fb2a90c0933ab8)\n06-04 21:30:54.438   237   237 F DEBUG   :       #06 pc 0000000000092dc0  /system/lib64/libbinder.so (android::RpcState::getAndExecuteCommand(android::base::unique_fd_impl\u003candroid::base::DefaultCloser\u003e const\u0026, android::sp\u003candroid::RpcSession\u003e const\u0026)+96) (BuildId: d63d3be670fd1dbe85fb2a90c0933ab8)\n06-04 21:30:54.438   237   237 F DEBUG   :       #07 pc 0000000000092b3c  /system/lib64/libbinder.so (android::RpcSession::join(android::sp\u003candroid::RpcSession\u003e\u0026\u0026, android::base::unique_fd_impl\u003candroid::base::DefaultCloser\u003e)+108) (BuildId: d63d3be670fd1dbe85fb2a90c0933ab8)\n06-04 21:30:54.438   237   237 F DEBUG   :       #08 pc 0000000000094fa0  /system/lib64/libbinder.so (android::RpcServer::establishConnection(android::sp\u003candroid::RpcServer\u003e\u0026\u0026, android::base::unique_fd_impl\u003candroid::base::DefaultCloser\u003e)+428) (BuildId: d63d3be670fd1dbe85fb2a90c0933ab8)",
+      "range": {
+        "startLine": 36,
+        "startChar": 5,
+        "endLine": 36,
+        "endChar": 17
+      },
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
