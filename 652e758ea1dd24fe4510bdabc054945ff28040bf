@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b544528d_5adc6e02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-07T21:04:33Z",
+      "side": 1,
+      "message": "Will fix the others later.",
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "414b5fdd_5a6d7eac",
@@ -194,6 +211,30 @@
       "side": 1,
       "message": "I would need to see the actual error, before the stacktrace (w/ the error code, error message, process which fails, registers, etc...). Can you share it? One thing it might be related to is mixing up copies of libbinder.",
       "parentUuid": "f7b6129e_97dc71c9",
+      "range": {
+        "startLine": 36,
+        "startChar": 5,
+        "endLine": 36,
+        "endChar": 17
+      },
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c437700d_0cd9a451",
+        "filename": "authfs/src/rpc_binder_shim.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-07T21:04:33Z",
+      "side": 1,
+      "message": "From my terminal buffer (this happened in compsvc/compsvc_worker, but the same error happened in fd_server/authfs):\n\n--------- beginning of crash\n06-04 21:30:54.344   225   226 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 226 (compsvc), pid 225 (compsvc)\n06-04 21:30:54.363   236   236 E cutils-trace: Error opening trace file: No such file or directory (2)\n06-04 21:30:54.371   237   237 I crash_dump64: obtaining output fd from tombstoned, type: kDebuggerdTombstoneProto\n06-04 21:30:54.372   189   189 I tombstoned: received crash request for pid 226\n06-04 21:30:54.373   237   237 I crash_dump64: performing dump of process 225 (target tid \u003d 226)\n06-04 21:30:54.427   177   177 I logd    : logdr: UID\u003d0 GID\u003d0 PID\u003d237 n tail\u003d0 logMask\u003d8 pid\u003d225 start\u003d0ns deadline\u003d0ns\n06-04 21:30:54.437   237   237 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\n06-04 21:30:54.437   237   237 F DEBUG   : Build fingerprint: \u0027unknown/unknown/unknown:unknown/unknown/unknown:unknown/unknown\u0027\n06-04 21:30:54.437   237   237 F DEBUG   : Revision: \u00270\u0027\n06-04 21:30:54.437   237   237 F DEBUG   : ABI: \u0027arm64\u0027\n06-04 21:30:54.437   237   237 F DEBUG   : Timestamp: 2021-06-04 21:30:54.375189248+0000\n06-04 21:30:54.437   237   237 F DEBUG   : Process uptime: 0s\n06-04 21:30:54.438   237   237 F DEBUG   : Cmdline: /apex/com.android.compos/bin/compsvc /system/bin/sleep --use-rpc-binder\n06-04 21:30:54.438   237   237 F DEBUG   : pid: 225, tid: 226, name: compsvc  \u003e\u003e\u003e /apex/com.android.compos/bin/compsvc \u003c\u003c\u003c\n06-04 21:30:54.438   237   237 F DEBUG   : uid: 0\n06-04 21:30:54.438   237   237 F DEBUG   : tagged_addr_ctrl: 0000000000000001\n06-04 21:30:54.438   237   237 F DEBUG   : signal 6 (SIGABRT), code -1 (SI_QUEUE), fault addr --------\n06-04 21:30:54.441   177   177 I logd    : logdr: UID\u003d0 GID\u003d0 PID\u003d237 n tail\u003d0 logMask\u003d1 pid\u003d225 start\u003d0ns deadline\u003d0ns\n06-04 21:30:54.438   237   237 F DEBUG   : backtrace:\n06-04 21:30:54.438   237   237 F DEBUG   :       #00 pc 0000000000050c28  /apex/com.android.runtime/lib64/bionic/libc.so (abort+164) (BuildId: 7eee317016204fd3c60be81fadeb197a)\n06-04 21:30:54.438   237   237 F DEBUG   :       #01 pc 000000000006062c  /system/lib64/libbinder.so (android::Parcel::freeDataNoInit()+552) (BuildId: d63d3be670fd1dbe85fb2a90c0933ab8)\n06-04 21:30:54.438   237   237 F DEBUG   :       #02 pc 0000000000060250  /system/lib64/libbinder.so (android::Parcel::~Parcel()+16) (BuildId: d63d3be670fd1dbe85fb2a90c0933ab8)",
+      "parentUuid": "d8a4b00a_e0bf5934",
       "range": {
         "startLine": 36,
         "startChar": 5,
