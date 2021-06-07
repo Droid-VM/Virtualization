@@ -40,7 +40,7 @@ pub fn wait_for_path<P: AsRef<Path>>(path: P) -> Result<()> {
 
 /// Returns hexadecimal reprentation of a given byte array.
 pub fn hexstring_from(s: &[u8]) -> String {
-    s.iter().map(|byte| format!("{:02x}", byte)).reduce(|i, j| i + &j).unwrap_or(String::new())
+    s.iter().map(|byte| format!("{:02x}", byte)).reduce(|i, j| i + &j).unwrap_or_default()
 }
 
 /// fstat that accepts a path rather than FD
