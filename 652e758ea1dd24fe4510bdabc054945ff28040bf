@@ -146,6 +146,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59b85229_977cd52c",
+        "filename": "authfs/src/rpc_binder.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-07T23:43:33Z",
+      "side": 1,
+      "message": "TIL!",
+      "parentUuid": "385e50e4_36de0dee",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 27
+      },
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2391aa72_6f3a66a3",
@@ -169,6 +193,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9a58001_be5b5a97",
+        "filename": "authfs/src/rpc_binder.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-07T23:43:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2391aa72_6f3a66a3",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 5
+      },
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72376548_0856d5a3",
@@ -182,6 +230,30 @@
       "writtenOn": "2021-06-07T20:45:33Z",
       "side": 1,
       "message": "this should be imported by binder_ibinder.h?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 16
+      },
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4f5a1f0_1d4facef",
+        "filename": "authfs/src/rpc_binder_shim.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-07T23:43:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72376548_0856d5a3",
       "range": {
         "startLine": 23,
         "startChar": 0,
@@ -289,6 +361,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "abd2a461_a762bfc8",
+        "filename": "authfs/src/rpc_binder_shim.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-07T23:43:33Z",
+      "side": 1,
+      "message": "Does cuttlefish support VM now?  If not, and if we can\u0027t figure this out easily, I\u0027ll try to reproduce with TCP socket.\n\nIn the meantime, here are the logs with the latest patchset (too long for gerrit, so...):\n\nServer: https://paste.googleplex.com/4682882359492608\nClient: https://paste.googleplex.com/6571520441712640",
+      "parentUuid": "256339f2_d78bfabf",
+      "range": {
+        "startLine": 36,
+        "startChar": 5,
+        "endLine": 36,
+        "endChar": 17
+      },
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73e82b33_e7087a96",
         "filename": "authfs/src/rpc_binder_shim.cc",
         "patchSetId": 1
@@ -300,6 +396,30 @@
       "writtenOn": "2021-06-07T20:45:33Z",
       "side": 1,
       "message": "Is this comment copied from the test?",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 62
+      },
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61f401e2_d4eb862c",
+        "filename": "authfs/src/rpc_binder_shim.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-07T23:43:33Z",
+      "side": 1,
+      "message": "Yes.  Does it not make sense here?",
+      "parentUuid": "73e82b33_e7087a96",
       "range": {
         "startLine": 46,
         "startChar": 0,
@@ -333,6 +453,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "887fda12_59ea0f93",
+        "filename": "authfs/src/rpc_binder_shim.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-07T23:43:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1912b636_94850e84",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 43
+      },
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8cc61d9_8e9883fe",
@@ -346,6 +490,30 @@
       "writtenOn": "2021-06-07T20:45:33Z",
       "side": 1,
       "message": "this should be deleting the object as soon as this returns, except that the session is being leaked. Prefer to return an AIBinder* object.",
+      "range": {
+        "startLine": 58,
+        "startChar": 11,
+        "endLine": 58,
+        "endChar": 28
+      },
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "153770c8_8c081c8a",
+        "filename": "authfs/src/rpc_binder_shim.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-07T23:43:33Z",
+      "side": 1,
+      "message": "OK, then it looks like I need to open a bad door on the Rust side.  Will see if it\u0027s really necessary.  Right now, I have a local patch to have `SpIBinder::from_raw_experimental` simply calls `SpIBinder::from_raw` to make it public.",
+      "parentUuid": "b8cc61d9_8e9883fe",
       "range": {
         "startLine": 58,
         "startChar": 11,
