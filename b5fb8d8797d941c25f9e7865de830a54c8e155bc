@@ -396,6 +396,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49bf118d_407d3030",
+        "filename": "apkverity/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-07T19:09:11Z",
+      "side": 1,
+      "message": "If this was a non test code, I\u0027d use context. But I don\u0027t see it quite useful in tests where the exact line number where the panic occurred is good enough. Also, there are so many unwraps here. Having to replace them with context(\"nice reason\") would be too cumbersome and wouldn\u0027t be good for readability.",
+      "parentUuid": "5c14c332_d29a748b",
+      "range": {
+        "startLine": 271,
+        "startChar": 47,
+        "endLine": 271,
+        "endChar": 56
+      },
+      "revId": "b5fb8d8797d941c25f9e7865de830a54c8e155bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22abbb1e_af371232",
