@@ -20,6 +20,98 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "744cebf1_58ae7fc0",
+        "filename": "apkverity/src/dm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-07T17:56:08Z",
+      "side": 1,
+      "message": "Could you elaborate? IIUC, we create the new dm device using `dm`, but the new device isn\u0027t really bound to the `dm` object in the process (so destroying `dm` won\u0027t invalidate the new device).  Then, does any one need to keep track the return device/FD(?), like `File` does?  Or it could be treated as a opaque blob?",
+      "range": {
+        "startLine": 50,
+        "startChar": 15,
+        "endLine": 50,
+        "endChar": 48
+      },
+      "revId": "b5fb8d8797d941c25f9e7865de830a54c8e155bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2269ed3f_e626f58e",
+        "filename": "apkverity/src/loopdevice.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-07T17:56:08Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem to address the core concern, e.g. if the ioctl close the FD (which it won\u0027t), ctrl_file will be in an unexpected state.  For this case, I\u0027d say something like \"this ioctl is query only. \", and maybe explain why the returned device number doesn\u0027t need to be tracked safely (or does it?).",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 39
+      },
+      "revId": "b5fb8d8797d941c25f9e7865de830a54c8e155bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dc6ddac_cfc0604f",
+        "filename": "apkverity/src/loopdevice.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-07T17:56:08Z",
+      "side": 1,
+      "message": "How about something like \"this ioctl configures the device in kernel and does not change the state within this process\"?",
+      "range": {
+        "startLine": 47,
+        "startChar": 15,
+        "endLine": 47,
+        "endChar": 77
+      },
+      "revId": "b5fb8d8797d941c25f9e7865de830a54c8e155bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f01517cf_9ca02f7c",
+        "filename": "apkverity/src/loopdevice.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-07T17:56:08Z",
+      "side": 1,
+      "message": "Maybe... \"this ioctl disassociates the loop device with `device_file`, where the FD will remain available afterward\"?",
+      "range": {
+        "startLine": 52,
+        "startChar": 15,
+        "endLine": 52,
+        "endChar": 39
+      },
+      "revId": "b5fb8d8797d941c25f9e7865de830a54c8e155bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f1d6655_3f21e82d",
         "filename": "apkverity/src/main.rs",
         "patchSetId": 4
@@ -36,6 +128,52 @@
         "startChar": 0,
         "endLine": 63,
         "endChar": 51
+      },
+      "revId": "b5fb8d8797d941c25f9e7865de830a54c8e155bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dae46a54_af0ad107",
+        "filename": "apkverity/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-07T17:56:08Z",
+      "side": 1,
+      "message": "nit: Instead of unwrap everywhere in the test, I think it\u0027s more common to just use the \"?\" operator. You just need to `use anyhow::Result` and make the test fn return Result.",
+      "range": {
+        "startLine": 271,
+        "startChar": 47,
+        "endLine": 271,
+        "endChar": 56
+      },
+      "revId": "b5fb8d8797d941c25f9e7865de830a54c8e155bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22abbb1e_af371232",
+        "filename": "apkverity/src/util.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-07T17:56:08Z",
+      "side": 1,
+      "message": "nit: maybe do this after File::open, with `f.metadata()`.",
+      "range": {
+        "startLine": 59,
+        "startChar": 4,
+        "endLine": 61,
+        "endChar": 5
       },
       "revId": "b5fb8d8797d941c25f9e7865de830a54c8e155bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
