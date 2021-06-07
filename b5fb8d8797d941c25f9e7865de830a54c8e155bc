@@ -135,6 +135,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a6fc13f1_b6c585cb",
+        "filename": "apkverity/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-07T18:03:37Z",
+      "side": 1,
+      "message": "Hmm.. also, the tree is optional in idsig.\n\nIncFS does support `FS_IOC_READ_VERITY_METADATA` to retrieve the tree, but that\u0027s on the host side... :(",
+      "parentUuid": "6f1d6655_3f21e82d",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 51
+      },
+      "revId": "b5fb8d8797d941c25f9e7865de830a54c8e155bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dae46a54_af0ad107",
         "filename": "apkverity/src/main.rs",
         "patchSetId": 4
