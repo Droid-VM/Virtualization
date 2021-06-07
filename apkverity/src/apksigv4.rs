@@ -57,7 +57,7 @@ pub enum Version {
 
 impl Version {
     fn from(val: u32) -> Result<Version> {
-        Self::from_u32(val).ok_or(anyhow!("{} is an unsupported version", val))
+        Self::from_u32(val).ok_or_else(|| anyhow!("{} is an unsupported version", val))
     }
 }
 
@@ -69,7 +69,7 @@ pub enum HashAlgorithm {
 
 impl HashAlgorithm {
     fn from(val: u32) -> Result<HashAlgorithm> {
-        Self::from_u32(val).ok_or(anyhow!("{} is an unsupported hash algorithm", val))
+        Self::from_u32(val).ok_or_else(|| anyhow!("{} is an unsupported hash algorithm", val))
     }
 }
 
