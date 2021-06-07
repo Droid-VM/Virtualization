@@ -16,6 +16,29 @@
       "message": "LGTM",
       "revId": "b5fb8d8797d941c25f9e7865de830a54c8e155bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f1d6655_3f21e82d",
+        "filename": "apkverity/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-06-07T17:55:20Z",
+      "side": 1,
+      "message": "FYI: idsig file never makes it to the device. Its content is fed into the installation API, and then IncFS stores the tree/signature inside the internal data structures. Currently there\u0027s no on-device API to extract the Merkle tree back out of it.\n\nIt\u0027s fine if you\u0027re only planning on using this tool to convert newly built apk + idsig to a dmverity image on the host, but it won\u0027t work on Android",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 51
+      },
+      "revId": "b5fb8d8797d941c25f9e7865de830a54c8e155bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
