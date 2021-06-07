@@ -135,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83619f00_ea22369d",
+        "filename": "apkverity/src/dm/verity.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-07T01:37:04Z",
+      "side": 1,
+      "message": "\u003e That\u0027s because this struct has references in it.\n\nI meant that the struct can have ownerships of those fields instead of references. But I\u0027m not strong on this.",
+      "parentUuid": "f6124e78_94e3e452",
+      "range": {
+        "startLine": 44,
+        "startChar": 32,
+        "endLine": 44,
+        "endChar": 36
+      },
+      "revId": "030ab8405dc28d9f81b65716bdb3b100554f9437",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc297d39_c8631ae4",
