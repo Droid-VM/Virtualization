@@ -27,7 +27,6 @@ rust_defaults {
     // has rustc warnings
     srcs: ["src/main.rs"],
     test_suites: ["general-tests"],
-    auto_gen_config: true,
     edition: "2018",
     rustlibs: [
         "libanyhow",
@@ -49,7 +48,7 @@ rust_defaults {
 }
 
 rust_test_host {
-    name: "apkverity_host_test_src_main",
+    name: "apkdmverity.test.host",
     defaults: ["apkverity_defaults"],
     test_options: {
         unit_test: true,
@@ -57,7 +56,7 @@ rust_test_host {
 }
 
 rust_test {
-    name: "apkverity_device_test_src_main",
+    name: "apkdmverity.test",
     defaults: ["apkverity_defaults"],
 }
 
