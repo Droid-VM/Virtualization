@@ -41,18 +41,14 @@ use sys::*;
 pub use verity::*;
 
 nix::ioctl_readwrite!(_dm_dev_create, DM_IOCTL, Cmd::DM_DEV_CREATE, DmIoctl);
-nix::ioctl_readwrite!(_dm_dev_remove, DM_IOCTL, Cmd::DM_DEV_REMOVE, DmIoctl);
 nix::ioctl_readwrite!(_dm_dev_suspend, DM_IOCTL, Cmd::DM_DEV_SUSPEND, DmIoctl);
 nix::ioctl_readwrite!(_dm_table_load, DM_IOCTL, Cmd::DM_TABLE_LOAD, DmIoctl);
+#[cfg(test)]
+nix::ioctl_readwrite!(_dm_dev_remove, DM_IOCTL, Cmd::DM_DEV_REMOVE, DmIoctl);
 
 fn dm_dev_create(dm: &DeviceMapper, ioctl: *mut DmIoctl) -> Result<i32> {
     // SAFETY: `ioctl` is copied into the kernel.
     Ok(unsafe { _dm_dev_create(dm.0.as_raw_fd(), ioctl) }?)
-}
-
-fn dm_dev_remove(dm: &DeviceMapper, ioctl: *mut DmIoctl) -> Result<i32> {
-    // SAFETY: `ioctl` is copied into the kernel.
-    Ok(unsafe { _dm_dev_remove(dm.0.as_raw_fd(), ioctl) }?)
 }
 
 fn dm_dev_suspend(dm: &DeviceMapper, ioctl: *mut DmIoctl) -> Result<i32> {
@@ -63,6 +59,12 @@ fn dm_dev_suspend(dm: &DeviceMapper, ioctl: *mut DmIoctl) -> Result<i32> {
 fn dm_table_load(dm: &DeviceMapper, ioctl: *mut DmIoctl) -> Result<i32> {
     // SAFETY: `ioctl` is copied into the kernel.
     Ok(unsafe { _dm_table_load(dm.0.as_raw_fd(), ioctl) }?)
+}
+
+#[cfg(test)]
+fn dm_dev_remove(dm: &DeviceMapper, ioctl: *mut DmIoctl) -> Result<i32> {
+    // SAFETY: `ioctl` is copied into the kernel.
+    Ok(unsafe { _dm_dev_remove(dm.0.as_raw_fd(), ioctl) }?)
 }
 
 // `DmTargetSpec` is the header of the data structure for a device-mapper target. When doing the
@@ -162,6 +164,7 @@ impl DeviceMapper {
     }
 
     /// Removes a mapper device
+    #[cfg(test)]
     pub fn delete_device_deferred(&self, name: &str) -> Result<()> {
         let mut data = DmIoctl::new(&name)?;
         data.flags |= Flag::DM_DEFERRED_REMOVE;
