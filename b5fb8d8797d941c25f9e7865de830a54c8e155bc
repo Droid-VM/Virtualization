@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65aa831e_30632804",
+        "filename": "apkverity/src/dm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-07T18:37:40Z",
+      "side": 1,
+      "message": "The created dm block device (/dev/block/mapper/\u003cname\u003e) is not opened by the dm object. It just returns path to the block device. It\u0027s the job of the client to open it.\n\nAlso, as you pointed out, a block device created belongs to the kernel stats and therefore persists even when the dm object goes out of scope. The dm object is actually an open file descriptor to /dev/device-mapper which is just a control API.\n\nOne (even in another process) can use the control API again to get the list of all the block devices created and also to remove some of them.\n\nAmended the comment a little.",
+      "parentUuid": "744cebf1_58ae7fc0",
+      "range": {
+        "startLine": 50,
+        "startChar": 15,
+        "endLine": 50,
+        "endChar": 48
+      },
+      "revId": "b5fb8d8797d941c25f9e7865de830a54c8e155bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2269ed3f_e626f58e",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-06-07T17:56:08Z",
       "side": 1,
       "message": "This doesn\u0027t seem to address the core concern, e.g. if the ioctl close the FD (which it won\u0027t), ctrl_file will be in an unexpected state.  For this case, I\u0027d say something like \"this ioctl is query only. \", and maybe explain why the returned device number doesn\u0027t need to be tracked safely (or does it?).",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 39
+      },
+      "revId": "b5fb8d8797d941c25f9e7865de830a54c8e155bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a8d9936_de42c54c",
+        "filename": "apkverity/src/loopdevice.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-07T18:37:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2269ed3f_e626f58e",
       "range": {
         "startLine": 42,
         "startChar": 15,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d7a6f15_a2e19669",
+        "filename": "apkverity/src/loopdevice.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-07T18:37:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4dc6ddac_cfc0604f",
+      "range": {
+        "startLine": 47,
+        "startChar": 15,
+        "endLine": 47,
+        "endChar": 77
+      },
+      "revId": "b5fb8d8797d941c25f9e7865de830a54c8e155bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f01517cf_9ca02f7c",
@@ -100,6 +172,30 @@
       "writtenOn": "2021-06-07T17:56:08Z",
       "side": 1,
       "message": "Maybe... \"this ioctl disassociates the loop device with `device_file`, where the FD will remain available afterward\"?",
+      "range": {
+        "startLine": 52,
+        "startChar": 15,
+        "endLine": 52,
+        "endChar": 39
+      },
+      "revId": "b5fb8d8797d941c25f9e7865de830a54c8e155bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64b086b7_68c536d2",
+        "filename": "apkverity/src/loopdevice.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-07T18:37:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f01517cf_9ca02f7c",
       "range": {
         "startLine": 52,
         "startChar": 15,
@@ -159,6 +255,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c0e0bb7_462530c5",
+        "filename": "apkverity/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-07T18:37:40Z",
+      "side": 1,
+      "message": "\u003e Currently there\u0027s no on-device API to extract the Merkle tree back out of it\n\nCan we have the API in the future?\n\nOr we can make having a standalone idsig file a requirement for an app to be able to use pVM.",
+      "parentUuid": "6f1d6655_3f21e82d",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 51
+      },
+      "revId": "b5fb8d8797d941c25f9e7865de830a54c8e155bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dae46a54_af0ad107",
         "filename": "apkverity/src/main.rs",
         "patchSetId": 4
@@ -182,6 +302,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fabb3aad_9ffb33da",
+        "filename": "apkverity/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-07T18:37:40Z",
+      "side": 1,
+      "message": "Did that in the beginning, but found that it\u0027s bad for tracking where exactly the assert was broken, because all the panics then happen outside of the test routines.\n\nThese unwraps serve as asserts.",
+      "parentUuid": "dae46a54_af0ad107",
+      "range": {
+        "startLine": 271,
+        "startChar": 47,
+        "endLine": 271,
+        "endChar": 56
+      },
+      "revId": "b5fb8d8797d941c25f9e7865de830a54c8e155bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "22abbb1e_af371232",
         "filename": "apkverity/src/util.rs",
         "patchSetId": 4
@@ -193,6 +337,30 @@
       "writtenOn": "2021-06-07T17:56:08Z",
       "side": 1,
       "message": "nit: maybe do this after File::open, with `f.metadata()`.",
+      "range": {
+        "startLine": 59,
+        "startChar": 4,
+        "endLine": 61,
+        "endChar": 5
+      },
+      "revId": "b5fb8d8797d941c25f9e7865de830a54c8e155bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "200d2ed4_422ef204",
+        "filename": "apkverity/src/util.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-07T18:37:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22abbb1e_af371232",
       "range": {
         "startLine": 59,
         "startChar": 4,

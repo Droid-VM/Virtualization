@@ -332,6 +332,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1267321a_5ab316fd",
+        "filename": "apkverity/src/dm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-07T18:37:40Z",
+      "side": 1,
+      "message": "It helps to avoid the compilation error, but I was hit by another in the call site:\n\n```\nerror[E0308]: mismatched types\n   --\u003e src/dm.rs:150:35\n    |\n150 |         payload.extend_from_slice(\u0026data.as_u8_slice());\n    |                                   ^^^^^^^^^^^^^^^^^^^ expected slice, found `\u0026[u8; 312]`\n    |\n    \u003d note: expected reference `\u0026[_]`\n               found reference `\u0026\u0026[u8; 312]`\n```\n\nBy the way, what\u0027s the benefit of using transmute over from_raw_parts? To me, the description in the doc of transmute was scarier than that of from_raw_parts.",
+      "parentUuid": "96b15d7a_25f7c921",
+      "range": {
+        "startLine": 163,
+        "startChar": 17,
+        "endLine": 163,
+        "endChar": 98
+      },
+      "revId": "d3e29e30db8af2626a79b9e53461437262855a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c138b48_b4fd8260",
         "filename": "apkverity/src/dm.rs",
         "patchSetId": 2
