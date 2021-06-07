@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000011490961",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1728859?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "123fd84c_08c617f0",
+        "filename": "microdroid/sepolicy/system/private/system_server.te",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-06-07T09:46:10Z",
+      "side": 1,
+      "message": "Unrecognized finding :\npublic domain\n",
+      "range": {
+        "startLine": 112,
+        "startChar": 3,
+        "endLine": 112,
+        "endChar": 16
+      },
+      "revId": "ff43be2ca9dcc80711fc14e0bfb847951f677243",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000011490961",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1728859?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "7c0b1861_977a0217",
+        "filename": "microdroid/sepolicy/system/private/untrusted_app_all.te",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-06-07T09:46:10Z",
+      "side": 1,
+      "message": "Unrecognized finding :\nbreach\n",
+      "range": {
+        "startLine": 169,
+        "startChar": 45,
+        "endLine": 169,
+        "endChar": 51
+      },
+      "revId": "ff43be2ca9dcc80711fc14e0bfb847951f677243",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
