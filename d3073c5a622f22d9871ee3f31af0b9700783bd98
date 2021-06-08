@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9645b00c_a559ddaf",
+        "filename": "apkverity/src/dm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-08T01:01:53Z",
+      "side": 1,
+      "message": "Victor, the linter (which seems to be stronger when building for Android) forced me to do this instead.\n\n```\nerror: redundant slicing of the whole range                                                                                                        \n   --\u003e packages/modules/Virtualization/apkverity/src/dm.rs:166:35                                                                                  \n    |                                                                                                                                              \n166 |         payload.extend_from_slice(\u0026target.as_u8_slice()[..]);                                                                                \n    |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^ help: use the original slice instead: `target.as_u8_slice()`                     \n    |                                                                                                                                              \n    \u003d note: `-D clippy::redundant-slicing` implied by `-D warnings`                                                                                \n    \u003d help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#redundant_slicing         \n    ```",
+      "revId": "d3073c5a622f22d9871ee3f31af0b9700783bd98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9675843_76a48aab",
+        "filename": "apkverity/src/dm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-08T01:01:53Z",
+      "side": 1,
+      "message": "but not here. When I dropped [..], I got ...\n\n```\nerror[E0308]: mismatched types                                           \n   --\u003e packages/modules/Virtualization/apkverity/src/dm.rs:165:35\n    |                                                                    \n165 |         payload.extend_from_slice(\u0026data.as_u8_slice());\n    |                                   ^^^^^^^^^^^^^^^^^^^ expected slice, found `\u0026[u8; 312]`\n    |                                                                    \n    \u003d note: expected reference `\u0026[_]`\n               found reference `\u0026\u0026[u8; 312]`\n```",
+      "revId": "d3073c5a622f22d9871ee3f31af0b9700783bd98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21563c99_bfb58b99",
+        "filename": "apkverity/src/dm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-08T01:01:53Z",
+      "side": 1,
+      "message": "And here:\n\n```\n   --\u003e packages/modules/Virtualization/apkverity/src/dm.rs:166:35                                                                                                                                                                                                                                      \n    |                                                                                                                                                                                                                                                                                                  \n166 |         payload.extend_from_slice(\u0026target.as_u8_slice()[..]);                                                                                                                                                                                                                                    \n    |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^ help: use the original slice instead: `target.as_u8_slice()`                                                                                                                                                                         \n    |                                                                                                                                                                                                                                                                                                  \n    \u003d note: `-D clippy::redundant-slicing` implied by `-D warnings`                                                                                                                                                                                                                                    \n    \u003d help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#redundant_slicing     \n    ```",
+      "revId": "d3073c5a622f22d9871ee3f31af0b9700783bd98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
