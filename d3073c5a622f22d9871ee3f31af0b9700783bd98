@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3eab6fa3_b60f2229",
+        "filename": "apkverity/src/dm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-08T01:16:59Z",
+      "side": 1,
+      "message": "oh, I think you can remove \u0027\u0026\u0027target.  `target.as_u8_slice()` itself is a sized slice, which make the type different to the parameter of extend_from_slice.  By add `[..]`, the slice becomes a regular slice, which matches extend_from_slice.  IIUC the linker is just complaining about the extra \u0027\u0026\u0027/de-reference.",
+      "parentUuid": "9645b00c_a559ddaf",
+      "revId": "d3073c5a622f22d9871ee3f31af0b9700783bd98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9675843_76a48aab",
         "filename": "apkverity/src/dm.rs",
         "patchSetId": 6
