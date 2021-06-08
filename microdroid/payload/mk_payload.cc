@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <unistd.h>
-
 #include <fstream>
 #include <iostream>
 #include <optional>
@@ -30,17 +26,17 @@
 #include <image_aggregator.h>
 #include <json/json.h>
 
-#include "microdroid/signature.h"
+#include "microdroid/metadata.h"
 
 using android::base::Dirname;
 using android::base::ErrnoError;
 using android::base::Error;
 using android::base::Result;
 using android::base::unique_fd;
-using android::microdroid::ApexSignature;
-using android::microdroid::ApkSignature;
-using android::microdroid::MicrodroidSignature;
-using android::microdroid::WriteMicrodroidSignature;
+using android::microdroid::ApexPayload;
+using android::microdroid::ApkPayload;
+using android::microdroid::Metadata;
+using android::microdroid::WriteMetadata;
 
 using com::android::apex::ApexInfoList;
 using com::android::apex::readApexInfoList;
@@ -49,14 +45,6 @@ using cuttlefish::AlignToPartitionSize;
 using cuttlefish::CreateCompositeDisk;
 using cuttlefish::kLinuxFilesystem;
 using cuttlefish::MultipleImagePartition;
-
-Result<uint32_t> GetFileSize(const std::string& path) {
-    struct stat st;
-    if (lstat(path.c_str(), &st) == -1) {
-        return ErrnoError() << "Can't lstat " << path;
-    }
-    return static_cast<uint32_t>(st.st_size);
-}
 
 std::string ToAbsolute(const std::string& path, const std::string& dirname) {
     bool is_absolute = !path.empty() && path[0] == '/';
@@ -94,10 +82,11 @@ struct ApkConfig {
 struct Config {
     std::string dirname; // config file's direname to resolve relative paths in the config
 
+    // TODO(b/185956069) remove this when VirtualizationService can provide apex paths
     std::vector<std::string> system_apexes;
+
     std::vector<ApexConfig> apexes;
     std::optional<ApkConfig> apk;
-    std::optional<std::string> payload_config_path;
 };
 
 #define DO(expr) \
@@ -199,47 +188,40 @@ Result<void> LoadSystemApexes(Config& config) {
     return {};
 }
 
-Result<void> MakeSignature(const Config& config, const std::string& filename) {
-    MicrodroidSignature signature;
-    signature.set_version(1);
+Result<void> MakeMetadata(const Config& config, const std::string& filename) {
+    Metadata metadata;
+    metadata.set_version(1);
 
     for (const auto& apex_config : config.apexes) {
-        ApexSignature* apex_signature = signature.add_apexes();
+        auto* apex_config = metadata.add_apexes();
 
         // name
-        apex_signature->set_name(apex_config.name);
-
-        // size
-        auto file_size = GetFileSize(ToAbsolute(apex_config.path, config.dirname));
-        if (!file_size.ok()) {
-            return Error() << "I/O error: " << file_size.error();
-        }
-        apex_signature->set_size(file_size.value());
+        apex_config->set_name(apex_config.name);
 
         // publicKey
         if (apex_config.public_key.has_value()) {
-            apex_signature->set_publickey(apex_config.public_key.value());
+            apex_config->set_publickey(apex_config.public_key.value());
         }
 
         // rootDigest
         if (apex_config.root_digest.has_value()) {
-            apex_signature->set_rootdigest(apex_config.root_digest.value());
+            apex_config->set_rootdigest(apex_config.root_digest.value());
         }
     }
 
     if (config.apk.has_value()) {
-        ApkSignature* apk_signature = signature.mutable_apk();
-        apk_signature->set_name(config.apk->name);
-        apk_signature->set_payload_partition_name("microdroid-apk");
+        auto* apk_config = metadata.mutable_apk();
+        apk_config->set_name(config.apk->name);
+        apk_config->set_payload_partition_name("microdroid-apk");
         // TODO(jooyung): set idsig partition as well
     }
 
     if (config.payload_config_path.has_value()) {
-        *signature.mutable_payload_config_path() = config.payload_config_path.value();
+        *metadata.mutable_payload_config_path() = config.payload_config_path.value();
     }
 
     std::ofstream out(filename);
-    return WriteMicrodroidSignature(signature, out);
+    return WriteMetadata(metadata, out);
 }
 
 Result<void> GenerateFiller(const std::string& file_path, const std::string& filler_path) {
@@ -266,14 +248,14 @@ Result<void> GenerateFiller(const std::string& file_path, const std::string& fil
     return {};
 }
 
-Result<void> MakePayload(const Config& config, const std::string& signature_file,
+Result<void> MakePayload(const Config& config, const std::string& metadata_file,
                          const std::string& output_file) {
     std::vector<MultipleImagePartition> partitions;
 
-    // put signature at the first partition
+    // put metadata at the first partition
     partitions.push_back(MultipleImagePartition{
-            .label = "signature",
-            .image_file_paths = {signature_file},
+            .label = "metadata",
+            .image_file_paths = {metadata_file},
             .type = kLinuxFilesystem,
             .read_only = true,
     });
@@ -335,13 +317,13 @@ int main(int argc, char** argv) {
     }
 
     const std::string output_file(argv[2]);
-    const std::string signature_file = AppendFileName(output_file, "-signature");
+    const std::string metadata_file = AppendFileName(output_file, "-metadata");
 
-    if (const auto res = MakeSignature(*config, signature_file); !res.ok()) {
+    if (const auto res = MakeMetadata(*config, metadata_file); !res.ok()) {
         std::cerr << res.error() << '\n';
         return 1;
     }
-    if (const auto res = MakePayload(*config, signature_file, output_file); !res.ok()) {
+    if (const auto res = MakePayload(*config, metadata_file, output_file); !res.ok()) {
         std::cerr << res.error() << '\n';
         return 1;
     }
