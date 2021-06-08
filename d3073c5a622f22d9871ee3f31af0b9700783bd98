@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "258af108_4db3ebb5",
+        "filename": "apkverity/src/dm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-08T04:59:21Z",
+      "side": 1,
+      "message": "Let me land this as the compiler insists to not use transmute-ptr-to-ptr.\nIf you know a better way of handling this, I am open to do it in a follow-up CL.",
+      "parentUuid": "fbeee437_fd813540",
+      "revId": "d3073c5a622f22d9871ee3f31af0b9700783bd98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9675843_76a48aab",
@@ -71,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c5ed799_14196d87",
+        "filename": "apkverity/src/dm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-08T04:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9675843_76a48aab",
+      "revId": "d3073c5a622f22d9871ee3f31af0b9700783bd98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21563c99_bfb58b99",
@@ -84,6 +120,24 @@
       "writtenOn": "2021-06-08T01:01:53Z",
       "side": 1,
       "message": "And here:\n\n```\n   --\u003e packages/modules/Virtualization/apkverity/src/dm.rs:166:35                                                                                                                                                                                                                                      \n    |                                                                                                                                                                                                                                                                                                  \n166 |         payload.extend_from_slice(\u0026target.as_u8_slice()[..]);                                                                                                                                                                                                                                    \n    |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^ help: use the original slice instead: `target.as_u8_slice()`                                                                                                                                                                         \n    |                                                                                                                                                                                                                                                                                                  \n    \u003d note: `-D clippy::redundant-slicing` implied by `-D warnings`                                                                                                                                                                                                                                    \n    \u003d help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#redundant_slicing     \n    ```",
+      "revId": "d3073c5a622f22d9871ee3f31af0b9700783bd98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4028ea30_438fe870",
+        "filename": "apkverity/src/dm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-08T04:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21563c99_bfb58b99",
       "revId": "d3073c5a622f22d9871ee3f31af0b9700783bd98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
