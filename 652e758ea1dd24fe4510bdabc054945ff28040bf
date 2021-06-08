@@ -433,6 +433,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8d9c72b2_52acae2e",
+        "filename": "authfs/src/rpc_binder_shim.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-08T18:36:56Z",
+      "side": 1,
+      "message": "It crashes in the same way, whether or not the service runs in VM and client runs in Android, or the opposite.\n\nI tried to build and flash the whole image, and the result is same.\n\nHow do you incStrong a message? They are called from Rust.",
+      "parentUuid": "e1cda073_6352ebdd",
+      "range": {
+        "startLine": 36,
+        "startChar": 5,
+        "endLine": 36,
+        "endChar": 17
+      },
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73e82b33_e7087a96",
         "filename": "authfs/src/rpc_binder_shim.cc",
         "patchSetId": 1
@@ -492,6 +516,30 @@
       "side": 1,
       "message": "Does another thread call shutdown here? I would probably use \u0027// shutdown any open sessions since server failed\u0027 here",
       "parentUuid": "61f401e2_d4eb862c",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 62
+      },
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0af0cba7_f72bf926",
+        "filename": "authfs/src/rpc_binder_shim.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-08T18:36:56Z",
+      "side": 1,
+      "message": "No, the service should be long lived until the VM shuts down.",
+      "parentUuid": "981f672f_0cb14733",
       "range": {
         "startLine": 46,
         "startChar": 0,
