@@ -479,6 +479,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7c341a4_51fc83f2",
+        "filename": "authfs/src/rpc_binder_shim.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-06-08T22:58:14Z",
+      "side": 1,
+      "message": "Done - issue is that libbinder is being loaded twice.",
+      "parentUuid": "423bbaf7_acbec569",
+      "range": {
+        "startLine": 36,
+        "startChar": 5,
+        "endLine": 36,
+        "endChar": 17
+      },
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73e82b33_e7087a96",
