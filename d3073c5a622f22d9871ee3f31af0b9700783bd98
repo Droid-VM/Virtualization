@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fbeee437_fd813540",
+        "filename": "apkverity/src/dm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-08T01:32:22Z",
+      "side": 1,
+      "message": "oh no, I pasted the wrong error message. This is what I actually got with transmute.\n\n```\nerror: transmute from a reference to a reference\n  --\u003e packages/modules/Virtualization/apkverity/src/dm.rs:95:18\n   |                                                                     \n95 |         unsafe { std::mem::transmute::\u003c\u0026Self, \u0026[u8; size_of::\u003cSelf\u003e()]\u003e(\u0026self) }\n   |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: try: `\u0026*(\u0026self as *const \u0026dm::DmTargetSpec as *const [u8; 40])`\n   |                                                                     \n   \u003d note: `-D clippy::transmute-ptr-to-ptr` implied by `-D warnings`\n   \u003d help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#transmute_ptr_to_ptr\n```",
+      "parentUuid": "3eab6fa3_b60f2229",
+      "revId": "d3073c5a622f22d9871ee3f31af0b9700783bd98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9675843_76a48aab",
         "filename": "apkverity/src/dm.rs",
         "patchSetId": 6
