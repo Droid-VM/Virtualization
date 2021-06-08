@@ -170,6 +170,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "113c1d15_ab3cded6",
+        "filename": "authfs/src/rpc_binder.hpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-06-08T00:11:08Z",
+      "side": 1,
+      "message": "Despite being simpler and nicer, the main reason I suggest it is because it prevents the a;skjfd;asfalksjfd;alksjfd \u0027#ifdef AUTHFS_RPC_BINDER_H\u0027 in other parts of the codebase.",
+      "parentUuid": "59b85229_977cd52c",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 27
+      },
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2391aa72_6f3a66a3",
@@ -385,6 +409,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e1cda073_6352ebdd",
+        "filename": "authfs/src/rpc_binder_shim.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-06-08T00:11:08Z",
+      "side": 1,
+      "message": "cuttlefish will support vsock-loopback (so no VM, but still using vsock).\n\nIt seems like something is corrupting or messing up the reply Parcel.\n\nFirstly, are you 100% sure that the APEX and the test device you are using are built from the same source, and also you are synced up to include the latest source here?\n\nIs this crashing inside of the VM always? It seems like several commands work, but it is failing when a reply is sent. It\u0027s a really strange error. I would try seeing if an extra AIBinder_incStrong here fixes it (or if allocating \u0027Parcel reply\u0027 on the heap and leaking it is fixing it).",
+      "parentUuid": "abd2a461_a762bfc8",
+      "range": {
+        "startLine": 36,
+        "startChar": 5,
+        "endLine": 36,
+        "endChar": 17
+      },
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73e82b33_e7087a96",
         "filename": "authfs/src/rpc_binder_shim.cc",
         "patchSetId": 1
@@ -420,6 +468,30 @@
       "side": 1,
       "message": "Yes.  Does it not make sense here?",
       "parentUuid": "73e82b33_e7087a96",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 62
+      },
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "981f672f_0cb14733",
+        "filename": "authfs/src/rpc_binder_shim.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-06-08T00:11:08Z",
+      "side": 1,
+      "message": "Does another thread call shutdown here? I would probably use \u0027// shutdown any open sessions since server failed\u0027 here",
+      "parentUuid": "61f401e2_d4eb862c",
       "range": {
         "startLine": 46,
         "startChar": 0,
