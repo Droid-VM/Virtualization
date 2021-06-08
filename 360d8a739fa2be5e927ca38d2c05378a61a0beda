@@ -86,6 +86,24 @@
       "message": "VirtualizationService shouldn\u0027t be opening this file at all, it\u0027s opened by vsock_test and passed as a file descriptor. I also can\u0027t reproduce the issue, running `atest VirtualizationTestCases` on VIM3L I don\u0027t see any error like the one here. Any idea how I can reproduce this?",
       "revId": "360d8a739fa2be5e927ca38d2c05378a61a0beda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d531582d_8ca81108",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-08T10:47:32Z",
+      "side": 1,
+      "message": "That\u0027s because VIM3L runs permissive as default. You can try with the Pixel devices to reproduce this.",
+      "parentUuid": "51f0deb4_d0477399",
+      "revId": "360d8a739fa2be5e927ca38d2c05378a61a0beda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
