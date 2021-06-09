@@ -39,6 +39,30 @@
       },
       "revId": "3c327d2996ebbfc52c9711fbb3f55de77feae316",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46e2c64d_d68d307d",
+        "filename": "apkverity/src/loopdevice/sys.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-09T23:22:44Z",
+      "side": 1,
+      "message": "Yes. If I omit Copy, I get\n\n```\nerror[E0204]: the trait `Copy` may not be implemented for this type\n  --\u003e src/loopdevice/sys.rs:32:10\n   |\n32 | #[derive(Copy, Clone)]\n   |          ^^^^\n...\n36 |     pub info: loop_info64,\n   |     --------------------- this field does not implement `Copy`\n   |\n```\n\nI guess it\u0027s coming from https://docs.rs/data_model/0.1.0/src/data_model/lib.rs.html#17",
+      "parentUuid": "f3a6f1d5_344c475c",
+      "range": {
+        "startLine": 44,
+        "startChar": 9,
+        "endLine": 44,
+        "endChar": 13
+      },
+      "revId": "3c327d2996ebbfc52c9711fbb3f55de77feae316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
