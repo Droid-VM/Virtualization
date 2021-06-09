@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60ab8761_0e66ce8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-09T17:35:11Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "3c327d2996ebbfc52c9711fbb3f55de77feae316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3a6f1d5_344c475c",
+        "filename": "apkverity/src/loopdevice/sys.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-09T17:35:11Z",
+      "side": 1,
+      "message": "Just curious. Does anything require Copy for these structs?  This changes the semantics of `a \u003d b` or `func(a)` from move to copy, and copying a large struct may be inefficient.",
+      "range": {
+        "startLine": 44,
+        "startChar": 9,
+        "endLine": 44,
+        "endChar": 13
+      },
+      "revId": "3c327d2996ebbfc52c9711fbb3f55de77feae316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
