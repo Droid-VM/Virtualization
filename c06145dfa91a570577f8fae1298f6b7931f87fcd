@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000011583205",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1730472?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "1c759e0d_7c3dda5e",
+          "description": "Change to \"microdroid_manager/src/metadata.rs\"",
+          "replacements": [
+            {
+              "path": "microdroid_manager/src/metadata.rs",
+              "range": {
+                "startLine": 28,
+                "startChar": 27,
+                "endLine": 28,
+                "endChar": 34
+              },
+              "replacement": "metadata"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "865cb638_5ba41d29",
+        "filename": "microdroid_manager/src/metadata.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-06-09T01:07:08Z",
+      "side": 1,
+      "message": "Common typo found: \"metdata\" -- should it be \"metadata\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 28,
+        "startChar": 27,
+        "endLine": 28,
+        "endChar": 34
+      },
+      "revId": "c06145dfa91a570577f8fae1298f6b7931f87fcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
