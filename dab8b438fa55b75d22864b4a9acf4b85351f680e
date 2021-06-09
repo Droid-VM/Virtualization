@@ -69,6 +69,24 @@
       "parentUuid": "2717502a_23244fd9",
       "revId": "dab8b438fa55b75d22864b4a9acf4b85351f680e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "395d3c36_eee5ba8e",
+        "filename": "microdroid/payload/config.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-09T19:01:22Z",
+      "side": 1,
+      "message": "For now we have many schema for this and that. Among them, following two are external/public.\n- metadata partition\n- VM payload config, (especially, this is a user-facing one.)\n\nBut configs for mk_cdisk/mk_payload are accidental and should be easily replaceable at our needs.",
+      "parentUuid": "c11844a9_67a1cbb7",
+      "revId": "dab8b438fa55b75d22864b4a9acf4b85351f680e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
