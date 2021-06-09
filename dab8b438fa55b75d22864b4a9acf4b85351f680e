@@ -16,6 +16,23 @@
       "message": "So what is the protobuf used for if you actually use JSON? How can a protobuf be a schema for JSON, why not use an actual JSON schema?",
       "revId": "dab8b438fa55b75d22864b4a9acf4b85351f680e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2717502a_23244fd9",
+        "filename": "microdroid/payload/config.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-09T16:51:49Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem to quite match the format of https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/microdroid/microdroid_payload.json and parsed by mk_payload.cc. Where is it used, and what\u0027s the difference?",
+      "revId": "dab8b438fa55b75d22864b4a9acf4b85351f680e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
