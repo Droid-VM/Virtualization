@@ -36,8 +36,12 @@ message OsConfig {
 }
 
 message Task {
-  string command = 1;
-  repeated string args = 2;
+  // one of "executable", "microdroid_launcher"
+  // when the type is "microdroid_launcher", command is searched in /mnt/apk/lib/{arch}"
+  string type = 1;
+
+  string command = 2;
+  repeated string args = 3;
 }
 
 message ApexConfig {
