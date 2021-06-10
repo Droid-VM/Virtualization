@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cacede71_c4c76e8d",
+        "filename": "microdroid/payload/config/config.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-10T10:43:23Z",
+      "side": 1,
+      "message": "can this be an enum?",
+      "range": {
+        "startLine": 41,
+        "startChar": 2,
+        "endLine": 41,
+        "endChar": 8
+      },
+      "revId": "39b88d0642fb95ce5c77f0a00cc77166b5120430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91ae7980_e714fefa",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-10T10:43:23Z",
+      "side": 1,
+      "message": "This is embarrassing. We should have a common rust library for this. Can you file a bug?",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 13
+      },
+      "revId": "39b88d0642fb95ce5c77f0a00cc77166b5120430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "127e6215_630335ad",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-10T10:43:23Z",
+      "side": 1,
+      "message": "why not spawn()?",
+      "range": {
+        "startLine": 66,
+        "startChar": 23,
+        "endLine": 66,
+        "endChar": 29
+      },
+      "revId": "39b88d0642fb95ce5c77f0a00cc77166b5120430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbe19ddc_3f936134",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-10T10:43:23Z",
+      "side": 1,
+      "message": "This can be\n\n```\nCommand::new(...)\n    .args(...)\n```",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 19
+      },
+      "revId": "39b88d0642fb95ce5c77f0a00cc77166b5120430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15ae6d69_1700d476",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-10T10:43:23Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 19
+      },
+      "revId": "39b88d0642fb95ce5c77f0a00cc77166b5120430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c1cffe1_ad540f81",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-10T10:43:23Z",
+      "side": 1,
+      "message": "This API is horrible, IMO. :(",
+      "range": {
+        "startLine": 88,
+        "startChar": 24,
+        "endLine": 88,
+        "endChar": 44
+      },
+      "revId": "39b88d0642fb95ce5c77f0a00cc77166b5120430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfa3cc5a_729f699d",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-10T10:43:23Z",
+      "side": 1,
+      "message": "bail!(\"{} is not a file\", \u0026path);",
+      "range": {
+        "startLine": 94,
+        "startChar": 8,
+        "endLine": 94,
+        "endChar": 55
+      },
+      "revId": "39b88d0642fb95ce5c77f0a00cc77166b5120430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
