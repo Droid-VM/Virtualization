@@ -14,6 +14,11 @@
  * limitations under the License.
  */
 
+#include <android-base/file.h>
+#include <android-base/result.h>
+#include <com_android_apex.h>
+#include <image_aggregator.h>
+#include <json/json.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -23,12 +28,6 @@
 #include <optional>
 #include <string>
 #include <vector>
-
-#include <android-base/file.h>
-#include <android-base/result.h>
-#include <com_android_apex.h>
-#include <image_aggregator.h>
-#include <json/json.h>
 
 #include "microdroid/metadata.h"
 
@@ -92,7 +91,7 @@ struct ApkConfig {
 };
 
 struct Config {
-    std::string dirname; // config file's direname to resolve relative paths in the config
+    std::string dirname; // config file's directory name to resolve relative paths in the config
 
     // TODO(b/185956069) remove this when VirtualizationService can provide apex paths
     std::vector<std::string> system_apexes;
