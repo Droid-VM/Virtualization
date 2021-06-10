@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b665f63_686e407c",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-10T12:02:51Z",
+      "side": 1,
+      "message": "You can drop the handle without affecting the child process.\n\nDoc from https://doc.rust-lang.org/std/process/struct.Child.html\n\n```\nThere is no implementation of Drop for child processes, so if you do not ensure the Child has exited then it will continue to run, even after the Child handle to the child process has gone out of scope.\n```",
+      "parentUuid": "d9b51a62_f409f5b8",
+      "range": {
+        "startLine": 66,
+        "startChar": 23,
+        "endLine": 66,
+        "endChar": 29
+      },
+      "revId": "39b88d0642fb95ce5c77f0a00cc77166b5120430",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dbe19ddc_3f936134",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
