@@ -69,6 +69,30 @@
       },
       "revId": "d8eafa66ea3c8f2d4ad3105162c0d50a0a9163e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d486d7da_4e2cbf2b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-06-10T10:42:59Z",
+      "side": 1,
+      "message": "It doesn\u0027t look like `service` is part of microdroid. I\u0027m going to look into adding something to testbinary.cpp that connects to keystore to check its working since we don\u0027t have anything using it any more.",
+      "parentUuid": "98b03402_2a16a922",
+      "range": {
+        "startLine": 13,
+        "startChar": 6,
+        "endLine": 13,
+        "endChar": 29
+      },
+      "revId": "d8eafa66ea3c8f2d4ad3105162c0d50a0a9163e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
