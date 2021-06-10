@@ -80,7 +80,7 @@ impl IVirtualizationService for VirtualizationService {
         let temporary_directory: PathBuf = format!("{}/{}", TEMPORARY_DIRECTORY, cid).into();
         create_dir(&temporary_directory).map_err(|e| {
             error!(
-                "Failed to create temporary directory {:?} for VM files: {:?}",
+                "Failed to create temporary directory {:?} for VM files: {}",
                 temporary_directory, e
             );
             StatusCode::UNKNOWN_ERROR
@@ -126,7 +126,7 @@ impl IVirtualizationService for VirtualizationService {
             requester_debug_pid,
         )
         .map_err(|e| {
-            error!("Failed to start VM with config {:?}: {:?}", config, e);
+            error!("Failed to start VM with config {:?}: {}", config, e);
             StatusCode::UNKNOWN_ERROR
         })?;
         state.add_vm(Arc::downgrade(&instance));
@@ -220,7 +220,7 @@ fn assemble_disk_image(
             make_composite_image_filename(temporary_directory, next_temporary_image_id);
         let (image, partition_files) =
             make_composite_image(&disk.partitions, &composite_image_filename).map_err(|e| {
-                error!("Failed to make composite image with config {:?}: {:?}", disk, e);
+                error!("Failed to make composite image with config {:?}: {}", disk, e);
                 StatusCode::UNKNOWN_ERROR
             })?;
 
@@ -256,7 +256,7 @@ fn get_calling_sid() -> Result<String, StatusCode> {
             match sid.to_str() {
                 Ok(sid) => Ok(sid.to_owned()),
                 Err(e) => {
-                    error!("SID was not valid UTF-8: {:?}", e);
+                    error!("SID was not valid UTF-8: {}", e);
                     Err(StatusCode::BAD_VALUE)
                 }
             }
