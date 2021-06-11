@@ -47,7 +47,7 @@ const VSOCK_PORT: u32 = 6432;
 const SERVICE_NAME: &str = "compsvc";
 const WORKER_BIN: &str = "/apex/com.android.compos/bin/compsvc_worker";
 // TODO: Replace with a valid directory setup in the VM.
-const AUTHFS_MOUNTPOINT: &str = "/data/local/tmp/authfs_mnt";
+const AUTHFS_MOUNTPOINT: &str = "/data/local/tmp";
 
 struct CompService {
     worker_bin: PathBuf,
