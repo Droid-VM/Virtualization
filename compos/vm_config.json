@@ -1,0 +1,19 @@
+{
+  "task": {
+    "command": "/apex/com.android.compos/bin/compsvc",
+    "args": [
+      "/apex/com.android.compos/bin/compsvc",
+      "--rpc-binder",
+      "/apex/com.android.art/bin/dex2oat64"
+    ]
+  },
+  "system_apexes": [
+    "com.android.adbd",
+    "com.android.art",
+    "com.android.compos",
+    "com.android.i18n",
+    "com.android.os.statsd",
+    "com.android.sdkext"
+  ],
+  "payload_config_path": "/apex/com.android.compos/etc/vm_config.json"
+}

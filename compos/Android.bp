@@ -55,3 +55,9 @@ rust_binary {
         "com.android.compos",
     ],
 }
+
+prebuilt_etc {
+    name: "compos_vm_config",
+    src: "vm_config.json",
+    filename: "vm_config.json",
+}
