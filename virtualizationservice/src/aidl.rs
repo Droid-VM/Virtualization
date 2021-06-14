@@ -14,7 +14,7 @@
 
 //! Implementation of the AIDL interface of the VirtualizationService.
 
-use crate::composite::make_composite_image;
+use crate::composite_native::make_composite_image;
 use crate::crosvm::{CrosvmConfig, DiskFile, VmInstance};
 use crate::{Cid, FIRST_GUEST_CID};
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualizationService::IVirtualizationService;
@@ -216,13 +216,18 @@ fn assemble_disk_image(
             return Err(StatusCode::BAD_VALUE);
         }
 
-        let composite_image_filename =
-            make_composite_image_filename(temporary_directory, next_temporary_image_id);
-        let (image, partition_files) =
-            make_composite_image(&disk.partitions, &composite_image_filename).map_err(|e| {
-                error!("Failed to make composite image with config {:?}: {}", disk, e);
-                StatusCode::UNKNOWN_ERROR
-            })?;
+        let composite_image_filenames =
+            make_composite_image_filenames(temporary_directory, next_temporary_image_id);
+        let (image, partition_files) = make_composite_image(
+            &disk.partitions,
+            &composite_image_filenames.composite,
+            &composite_image_filenames.header,
+            &composite_image_filenames.footer,
+        )
+        .map_err(|e| {
+            error!("Failed to make composite image with config {:?}: {}", disk, e);
+            StatusCode::UNKNOWN_ERROR
+        })?;
 
         // Pass the file descriptors for the various partition files to crosvm when it
         // is run.
@@ -240,13 +245,24 @@ fn assemble_disk_image(
 }
 
 /// Generates a unique filename to use for a composite disk image.
-fn make_composite_image_filename(
+fn make_composite_image_filenames(
     temporary_directory: &Path,
     next_temporary_image_id: &mut u64,
-) -> PathBuf {
+) -> CompositeImageFilenames {
     let id = *next_temporary_image_id;
     *next_temporary_image_id += 1;
-    temporary_directory.join(format!("composite-{}.img", id))
+    CompositeImageFilenames {
+        composite: temporary_directory.join(format!("composite-{}.img", id)),
+        header: temporary_directory.join(format!("composite-{}-header.img", id)),
+        footer: temporary_directory.join(format!("composite-{}-footer.img", id)),
+    }
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+struct CompositeImageFilenames {
+    composite: PathBuf,
+    header: PathBuf,
+    footer: PathBuf,
 }
 
 /// Gets the calling SID of the current Binder thread.

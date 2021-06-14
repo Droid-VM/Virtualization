@@ -15,8 +15,9 @@
 //! Android VirtualizationService
 
 mod aidl;
-mod composite;
+mod composite_native;
 mod crosvm;
+mod gpt;
 
 use crate::aidl::{VirtualizationService, BINDER_SERVICE_IDENTIFIER};
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualizationService::BnVirtualizationService;
