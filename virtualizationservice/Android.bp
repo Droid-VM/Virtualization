@@ -25,11 +25,13 @@ rust_binary {
         "libanyhow",
         "libcommand_fds",
         "libcompositediskconfig",
+        "libcrc32fast",
         "libdisk",
         "liblog_rust",
         "libserde_json",
         "libserde",
         "libshared_child",
+        "libuuid",
     ],
     apex_available: ["com.android.virt"],
 }

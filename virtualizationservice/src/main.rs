@@ -16,6 +16,7 @@
 
 mod aidl;
 mod composite;
+mod composite_native;
 mod crosvm;
 
 use crate::aidl::{VirtualizationService, BINDER_SERVICE_IDENTIFIER};
