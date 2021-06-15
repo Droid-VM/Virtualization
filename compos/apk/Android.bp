@@ -1,0 +1,10 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+android_app {
+    name: "CompOSPayloadApp",
+    srcs: ["src/java/**/*.java"],
+    sdk_version: "current",
+    apex_available: ["com.android.compos"],
+}
