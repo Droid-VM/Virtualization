@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd0aace3_f490708e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-15T15:13:32Z",
+      "side": 1,
+      "message": "Thanks Jooyung!",
+      "revId": "38637e02b271d2782daf3538d2ce35927eb53f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74edd1a4_1ae2c5cb",
+        "filename": "compos/apk/AndroidManifest.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-15T15:13:32Z",
+      "side": 1,
+      "message": "I *think* this needs to be \".TestActivity\".  But if this works, maybe we don\u0027t need the class at all?  If we do, maybe either rename to \".PhonyActivity\", or see if \"android.app.Activity\" works.",
+      "range": {
+        "startLine": 18,
+        "startChar": 32,
+        "endLine": 18,
+        "endChar": 44
+      },
+      "revId": "38637e02b271d2782daf3538d2ce35927eb53f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a22fdd34_45ed87d0",
