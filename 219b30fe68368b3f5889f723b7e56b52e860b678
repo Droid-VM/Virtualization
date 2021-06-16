@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b846506_2dd5e995",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-06-16T23:17:37Z",
+      "side": 1,
+      "message": "This helps w/ code reuse in the future (compOS should be special in that it only exists on pKVM devices - other services won\u0027t have this benefit, but we want to design so that code generally works in both contexts). Sure, it may not be an auxiliary test, but it should be a goal that stuff works in Android and in microdroid without any other changes. Needing the changes here isn\u0027t so good",
+      "parentUuid": "793604fd_d7a931ff",
+      "range": {
+        "startLine": 10,
+        "startChar": 52,
+        "endLine": 11,
+        "endChar": 38
+      },
+      "revId": "219b30fe68368b3f5889f723b7e56b52e860b678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "cc926c47_9a1b6ad0",
