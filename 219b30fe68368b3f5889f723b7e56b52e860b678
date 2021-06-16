@@ -120,6 +120,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3473159e_ff97975d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-16T23:21:51Z",
+      "side": 1,
+      "message": "Yeah, this service itself can be another variant of ping-pong test, e.g. just run `compsvc /system/bin/cat` and expect the same output.  At least it\u0027s nice to keep the test running until we could re-architect this into libbinder_helper or sometihg...\n\nSo I\u0027m not sure how useful would it be to maintain the local binder support.",
+      "parentUuid": "9b846506_2dd5e995",
+      "range": {
+        "startLine": 10,
+        "startChar": 52,
+        "endLine": 11,
+        "endChar": 38
+      },
+      "revId": "219b30fe68368b3f5889f723b7e56b52e860b678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "cc926c47_9a1b6ad0",

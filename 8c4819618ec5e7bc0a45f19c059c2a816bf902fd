@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ec42f9fe_d9fcfcae",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-16T23:21:51Z",
+      "side": 1,
+      "message": "We may need to provide a working directory for application in PVM.  I\u0027m kind of waiting for that to happen (thus the TODO).  Jiyong? :)",
+      "parentUuid": "f3f4625b_edc55762",
+      "range": {
+        "startLine": 51,
+        "startChar": 47,
+        "endLine": 51,
+        "endChar": 50
+      },
+      "revId": "8c4819618ec5e7bc0a45f19c059c2a816bf902fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebaee8d2_70289a6b",
         "filename": "compos/src/compsvc_worker.rs",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2021-06-16T23:17:37Z",
       "side": 1,
       "message": "for this, should we have \u0027authfs\u0027 on the path so that it is always available? if we need to change this locally to test, it would be pretty annoying",
+      "range": {
+        "startLine": 33,
+        "startChar": 27,
+        "endLine": 33,
+        "endChar": 33
+      },
+      "revId": "8c4819618ec5e7bc0a45f19c059c2a816bf902fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c15604ca_88abb042",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-16T23:21:51Z",
+      "side": 1,
+      "message": "We don\u0027t have symlink anywhere in PATH though?",
+      "parentUuid": "ebaee8d2_70289a6b",
       "range": {
         "startLine": 33,
         "startChar": 27,
