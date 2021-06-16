@@ -16,6 +16,24 @@
       "message": "btw - where is the dependency on this file declared in the build system? I don\u0027t see it?",
       "revId": "76d45ef799cc7f6f44e9914a67188b7c9e1f1e4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51af6c58_c8f95aba",
+        "filename": "compos/src/common.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-16T23:26:06Z",
+      "side": 1,
+      "message": "I\u0027m not sure how the build system works exactly, but I\u0027m guessing it derives the exact local files from the main .rs (which imports other crates by `mod foo`), then possibly cache it somewhere...  `srcs` in rust_binary only allows one file.",
+      "parentUuid": "0d38ff8b_4827c6ff",
+      "revId": "76d45ef799cc7f6f44e9914a67188b7c9e1f1e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
