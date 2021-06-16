@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22a88068_1cd40e07",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-16T22:54:52Z",
+      "side": 1,
+      "message": "The VM is dedicated to this service, so it should be safe to not collide with any one. Maybe we\u0027ll have to allocate a range for system components in microdroid when any will start to use vsocks, but then this number should probably beyond the reserved range.",
+      "parentUuid": "9a540dc1_ed891884",
+      "range": {
+        "startLine": 46,
+        "startChar": 24,
+        "endLine": 46,
+        "endChar": 28
+      },
+      "revId": "c0902bb58b680f57e81e8727c90193a844876b08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c47fb180_738fdaef",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dda92909_fc816d56",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-16T22:54:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c47fb180_738fdaef",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 29
+      },
+      "revId": "c0902bb58b680f57e81e8727c90193a844876b08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ca0838e_9832cdec",
@@ -77,6 +125,30 @@
       "writtenOn": "2021-06-16T22:34:18Z",
       "side": 1,
       "message": "same, duplicated constants? follow-up?",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 67
+      },
+      "revId": "c0902bb58b680f57e81e8727c90193a844876b08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "409d45c8_04727683",
+        "filename": "compos/src/pvm_exec.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-16T22:54:52Z",
+      "side": 1,
+      "message": "Done except FD_SERVER_BIN, which is only used here.",
+      "parentUuid": "9ca0838e_9832cdec",
       "range": {
         "startLine": 45,
         "startChar": 0,
