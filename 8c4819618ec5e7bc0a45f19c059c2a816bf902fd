@@ -93,6 +93,30 @@
       },
       "revId": "8c4819618ec5e7bc0a45f19c059c2a816bf902fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01cb02c1_9b8c441f",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-06-16T23:28:51Z",
+      "side": 1,
+      "message": "/system/bin should be in the path, maybe not /apex/*/bin. Consider trying \u0027authfs\u0027 on the path and then falling back to /apex/*/bin/ or similar?",
+      "parentUuid": "c15604ca_88abb042",
+      "range": {
+        "startLine": 33,
+        "startChar": 27,
+        "endLine": 33,
+        "endChar": 33
+      },
+      "revId": "8c4819618ec5e7bc0a45f19c059c2a816bf902fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
