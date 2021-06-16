@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91f15a7d_56bdb3a7",
+        "filename": "apkdmverity/src/loopdevice.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-16T13:22:27Z",
+      "side": 1,
+      "message": "_loop_set_status64",
+      "range": {
+        "startLine": 41,
+        "startChar": 26,
+        "endLine": 41,
+        "endChar": 42
+      },
+      "revId": "93d07d13383d71519088efec1ee980ae583c8481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e21e3358_937ba9ef",
+        "filename": "apkdmverity/src/loopdevice.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-16T13:22:27Z",
+      "side": 1,
+      "message": "loop_set_status64",
+      "range": {
+        "startLine": 57,
+        "startChar": 3,
+        "endLine": 57,
+        "endChar": 18
+      },
+      "revId": "93d07d13383d71519088efec1ee980ae583c8481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea152423_a83244a3",
+        "filename": "apkdmverity/src/loopdevice.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-16T13:22:27Z",
+      "side": 1,
+      "message": "I am not sure if LOOP_SET_STATUS64 respects this. To use direct IO, the block size of the loop device should be set to the same size as the underlying filesystem (4096). That step is missing in this change. Before LOOP_CONFIGURE was introduced, this was done by opening the target file with O_DIRECT and set the block size of the loop device using LOOP_SET_BLOCK_SIZE",
+      "range": {
+        "startLine": 122,
+        "startChar": 27,
+        "endLine": 122,
+        "endChar": 45
+      },
+      "revId": "93d07d13383d71519088efec1ee980ae583c8481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ededc62_e86369f7",
+        "filename": "microdroid/payload/mk_payload.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-16T13:22:27Z",
+      "side": 1,
+      "message": "shouldn\u0027t we return either true or false?",
+      "range": {
+        "startLine": 297,
+        "startChar": 11,
+        "endLine": 297,
+        "endChar": 13
+      },
+      "revId": "93d07d13383d71519088efec1ee980ae583c8481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
