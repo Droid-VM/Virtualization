@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "78b72503_d4126975",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2021-06-16T23:04:44Z",
+      "side": 1,
+      "message": "yeah, though you wouldn\u0027t have the permissions for it generally.\n\nThe changes here seem to be less about binder itself though and more about the context (VM vs Android context), right? For instance, the mountpoint, it seems we could add a mkdir inside the VM as an alternative? or something like this?",
+      "parentUuid": "b868e758_3d5bae43",
+      "range": {
+        "startLine": 10,
+        "startChar": 52,
+        "endLine": 11,
+        "endChar": 38
+      },
+      "revId": "219b30fe68368b3f5889f723b7e56b52e860b678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "cc926c47_9a1b6ad0",
