@@ -16,6 +16,46 @@
       "message": "apkdmverity requires selinux permissions, which I\u0027m working on now.",
       "revId": "749eed06e10749069326baa286f1993d3e3d4ad0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3213f311_1299864a",
+        "filename": "apkdmverity/src/loopdevice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-16T12:43:47Z",
+      "side": 1,
+      "message": "This should also have a safety comment.",
+      "revId": "749eed06e10749069326baa286f1993d3e3d4ad0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b646f6fb_8c3e7dc4",
+        "filename": "apkdmverity/src/loopdevice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-16T12:43:47Z",
+      "side": 1,
+      "message": "loop_info64",
+      "range": {
+        "startLine": 111,
+        "startChar": 21,
+        "endLine": 111,
+        "endChar": 32
+      },
+      "revId": "749eed06e10749069326baa286f1993d3e3d4ad0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
