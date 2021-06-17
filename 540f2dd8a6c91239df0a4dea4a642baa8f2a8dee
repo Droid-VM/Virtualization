@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f5bbed7_2c0505d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-17T11:38:41Z",
+      "side": 1,
+      "message": "It probably makes sense to have the logic in virtualizationservice rather than `vm` if possible, though maybe the client can parse the VM config and pass a parcelable to virtualizationservice. Can all the files which will be part of the payload be opened by the client and passed as file descriptors?",
+      "parentUuid": "d9d8608f_77debf2f",
+      "revId": "540f2dd8a6c91239df0a4dea4a642baa8f2a8dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05d84a0e_05fc427a",
@@ -60,6 +78,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c09928e7_cd1d01d5",
+        "filename": "virtualizationservice/src/composite.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-17T11:38:41Z",
+      "side": 1,
+      "message": "Ah, I missed that you were adding the (used) size of the partition to it rather than just padding it out. What is that used for?",
+      "parentUuid": "05d84a0e_05fc427a",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 18
+      },
+      "revId": "540f2dd8a6c91239df0a4dea4a642baa8f2a8dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7091f138_fd57902c",
         "filename": "virtualizationservice/src/composite.rs",
         "patchSetId": 6
@@ -71,6 +113,30 @@
       "writtenOn": "2021-06-17T04:46:59Z",
       "side": 1,
       "message": "Here, we need to sum the sizes of each backing files.",
+      "range": {
+        "startLine": 312,
+        "startChar": 0,
+        "endLine": 312,
+        "endChar": 22
+      },
+      "revId": "540f2dd8a6c91239df0a4dea4a642baa8f2a8dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c17f7716_b94e3bcc",
+        "filename": "virtualizationservice/src/composite.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-17T11:38:41Z",
+      "side": 1,
+      "message": "I\u0027m not sure what you mean, each `Partition` parcelable only has one `ParcelFileDescriptor`.",
+      "parentUuid": "7091f138_fd57902c",
       "range": {
         "startLine": 312,
         "startChar": 0,
