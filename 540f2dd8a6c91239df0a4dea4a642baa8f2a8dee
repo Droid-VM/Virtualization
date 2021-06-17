@@ -125,6 +125,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aab161e_4b35b93a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-17T14:19:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "54579451_c605f0a7",
+      "revId": "540f2dd8a6c91239df0a4dea4a642baa8f2a8dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d696f85e_d14076db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-17T14:19:01Z",
+      "side": 1,
+      "message": "I can try if you like, but it seemed like it\u0027s still in flux and you were asking for things to do, so I thought it might make sense for you to do it. But either way is fine, I can look at it if you like.",
+      "parentUuid": "95b1307a_e5f633a3",
+      "revId": "540f2dd8a6c91239df0a4dea4a642baa8f2a8dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d4d9207_38e6fe90",
@@ -138,6 +174,30 @@
       "writtenOn": "2021-06-17T12:35:53Z",
       "side": 1,
       "message": "you may import this file from the top-level TEST_MAPPING file, or move line#4 to there so that this test gets executed even when something outside of this directory  (which could indirectly affect this test) is updated.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 0
+      },
+      "revId": "540f2dd8a6c91239df0a4dea4a642baa8f2a8dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ecabf27_60a81a28",
+        "filename": "virtualizationservice/TEST_MAPPING",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-17T14:19:01Z",
+      "side": 1,
+      "message": "This is the unit tests for virtualizationservice, so they shouldn\u0027t be affected by anything else in this repository, only the various Rust crates from crosvm and elsewhere which it depends on.",
+      "parentUuid": "1d4d9207_38e6fe90",
       "range": {
         "startLine": 1,
         "startChar": 0,
@@ -221,6 +281,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6cc56e45_730a87a1",
+        "filename": "virtualizationservice/src/composite.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-17T14:19:01Z",
+      "side": 1,
+      "message": "Okay, I\u0027ll add support for that in a separate change. You can\u0027t get the size from the zip header?",
+      "parentUuid": "32501590_80453cd7",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 18
+      },
+      "revId": "540f2dd8a6c91239df0a4dea4a642baa8f2a8dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7091f138_fd57902c",
         "filename": "virtualizationservice/src/composite.rs",
         "patchSetId": 6
@@ -280,6 +364,30 @@
       "side": 1,
       "message": "https://cs.android.com/android/platform/superproject/+/master:device/google/cuttlefish/host/libs/image_aggregator/image_aggregator.h;l\u003d39-44\n\nI added MultipleImagePartition which can have multiple backing files for each partition and mk_payload is using it.",
       "parentUuid": "c17f7716_b94e3bcc",
+      "range": {
+        "startLine": 312,
+        "startChar": 0,
+        "endLine": 312,
+        "endChar": 22
+      },
+      "revId": "540f2dd8a6c91239df0a4dea4a642baa8f2a8dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9c236cb_bc4bd3d7",
+        "filename": "virtualizationservice/src/composite.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-17T14:19:01Z",
+      "side": 1,
+      "message": "Right, I can add support for that to `create_composite_disk`, but that won\u0027t be relevant for this function.",
+      "parentUuid": "48cd6230_fffce10b",
       "range": {
         "startLine": 312,
         "startChar": 0,
