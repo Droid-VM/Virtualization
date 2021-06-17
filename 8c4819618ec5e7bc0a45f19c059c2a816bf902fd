@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a36bcd43_88523a44",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-17T15:54:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1d0b75bf_b75533d0",
+      "range": {
+        "startLine": 51,
+        "startChar": 47,
+        "endLine": 51,
+        "endChar": 50
+      },
+      "revId": "8c4819618ec5e7bc0a45f19c059c2a816bf902fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebaee8d2_70289a6b",
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "/system/bin should be in the path, maybe not /apex/*/bin. Consider trying \u0027authfs\u0027 on the path and then falling back to /apex/*/bin/ or similar?",
       "parentUuid": "c15604ca_88abb042",
+      "range": {
+        "startLine": 33,
+        "startChar": 27,
+        "endLine": 33,
+        "endChar": 33
+      },
+      "revId": "8c4819618ec5e7bc0a45f19c059c2a816bf902fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8a949b0_694b39b8",
+        "filename": "compos/src/compsvc_worker.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-17T15:54:01Z",
+      "side": 1,
+      "message": "I share the same desire to make it work both/all ways.  I just think it\u0027s too early to \"solve\" this particular problem before we have better visibility to the overall architecture (e.g. the relationship/dependencies between libbinder* and this, how they ship, do we need an auxiliary daemon, etc.).  For now, I\u0027d prefer to keep things simpler.  This isn\u0027t hard to fix if there is a demand.  Hope it\u0027s ok for now.",
+      "parentUuid": "01cb02c1_9b8c441f",
       "range": {
         "startLine": 33,
         "startChar": 27,
