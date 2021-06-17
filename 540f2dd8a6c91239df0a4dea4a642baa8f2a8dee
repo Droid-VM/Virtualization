@@ -53,6 +53,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95b1307a_e5f633a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-17T12:13:43Z",
+      "side": 1,
+      "message": "Okay, let me try porting mk_payload. (I thought you\u0027re going to do it. ;-)",
+      "parentUuid": "5bdb7d53_1880a5f9",
+      "revId": "540f2dd8a6c91239df0a4dea4a642baa8f2a8dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2249fd4_54fdd59e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-17T12:13:43Z",
+      "side": 1,
+      "message": "\u003e Can all the files which will be part of the payload be opened by the client and passed as file descriptors?\n\nHere\u0027s a typical layout for payload.img. (When the client passes apex1/apex2/apk/apk\u0027s idsig)\n\n  * gpt header\n  * partition #0\n    * metadata      // generated\n  * partition #1\n    * apex1\n    * apex1\u0027s size  // generated\n  * partition #2\n    * apex2\n    * apex2\u0027s size  // generated\n  * partition #3\n    * apk\n    * zero padding  // generated\n  * partition #4\n    * apk\u0027s idsig file\n  * gpt footer\n\nI\u0027m not sure if the client can open apex files because for now those apexes are \"system\" files. Other generated files belong to the VM instance, so, yeah, they can be opened by the client.\n\nJiyong, what do you think about the client opening those system apex files?",
+      "parentUuid": "2f5bbed7_2c0505d9",
+      "revId": "540f2dd8a6c91239df0a4dea4a642baa8f2a8dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05d84a0e_05fc427a",
@@ -102,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32501590_80453cd7",
+        "filename": "virtualizationservice/src/composite.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-17T12:13:43Z",
+      "side": 1,
+      "message": "It\u0027s very hacky.. Each host apex is passed to microdroid as a partition in a payload disk image. Apexd needs to know the original file\u0027s size to open it as a zip archive, but when it is passed as a block device, the size is aligned to 4k boundary (losing the original size info). At first, I encoded the size info of payload apexes in metadata partition, but making apexd to open block-device apexes by reading size from somewhere else was not easy. (Too many changes required)  That\u0027s why we put the size at the end of each block device.",
+      "parentUuid": "c09928e7_cd1d01d5",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 18
+      },
+      "revId": "540f2dd8a6c91239df0a4dea4a642baa8f2a8dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7091f138_fd57902c",
         "filename": "virtualizationservice/src/composite.rs",
         "patchSetId": 6
@@ -137,6 +197,30 @@
       "side": 1,
       "message": "I\u0027m not sure what you mean, each `Partition` parcelable only has one `ParcelFileDescriptor`.",
       "parentUuid": "7091f138_fd57902c",
+      "range": {
+        "startLine": 312,
+        "startChar": 0,
+        "endLine": 312,
+        "endChar": 22
+      },
+      "revId": "540f2dd8a6c91239df0a4dea4a642baa8f2a8dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48cd6230_fffce10b",
+        "filename": "virtualizationservice/src/composite.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-17T12:13:43Z",
+      "side": 1,
+      "message": "https://cs.android.com/android/platform/superproject/+/master:device/google/cuttlefish/host/libs/image_aggregator/image_aggregator.h;l\u003d39-44\n\nI added MultipleImagePartition which can have multiple backing files for each partition and mk_payload is using it.",
+      "parentUuid": "c17f7716_b94e3bcc",
       "range": {
         "startLine": 312,
         "startChar": 0,
