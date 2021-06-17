@@ -127,6 +127,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d4d9207_38e6fe90",
+        "filename": "virtualizationservice/TEST_MAPPING",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-17T12:35:53Z",
+      "side": 1,
+      "message": "you may import this file from the top-level TEST_MAPPING file, or move line#4 to there so that this test gets executed even when something outside of this directory  (which could indirectly affect this test) is updated.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 0
+      },
+      "revId": "540f2dd8a6c91239df0a4dea4a642baa8f2a8dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "05d84a0e_05fc427a",
         "filename": "virtualizationservice/src/composite.rs",
         "patchSetId": 6
