@@ -16,6 +16,69 @@
       "message": "I\u0027ll try to get some of this upstream into crosvm\u0027s libdisk, but for now it seems to work.\n\nPerhaps this is helpful for you if you\u0027d like to try porting mk_payload to Rust?",
       "revId": "540f2dd8a6c91239df0a4dea4a642baa8f2a8dee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9d8608f_77debf2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-17T04:46:59Z",
+      "side": 1,
+      "message": "Great!\n\nmk_payload relies on \"multiple images partition\", we might need to support it. I\u0027m okay if you want to do it in a follow up.\n\nIIUC, paths to image files are handled by vm (for now) and virtualizationservice creates composite disk images out of \"FDs\" passed via AIDL interface. If we follow the same path for mk_payload, vm should generate \"metadata\" blob and \"fillers(size/zero)\" and then pass their FDs to virtualizationservice. Or, we could just pass \"path(or FD) to APK\" and \"internal path to the VM paylaod config\" to VS so that VS reads the config and then generate \"metatdata\" and payload composite image as well.\n\nAs an interim solution, vm might need a subcommand like: `vm run --app \u003cpath to apk\u003e --config \u003cpath to config json`. For example, `vm run --app /data/MyApp.apk --config assets/my_config.json`.\n\n\n",
+      "revId": "540f2dd8a6c91239df0a4dea4a642baa8f2a8dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05d84a0e_05fc427a",
+        "filename": "virtualizationservice/src/composite.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-17T04:46:59Z",
+      "side": 1,
+      "message": "This will be used to create payload.img as well, right?\nThen we need to support a partition composed of multiple backing files. See https://android-review.googlesource.com/c/platform/packages/modules/Virtualization/+/1737644/5/microdroid/payload/mk_payload.cc",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 18
+      },
+      "revId": "540f2dd8a6c91239df0a4dea4a642baa8f2a8dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7091f138_fd57902c",
+        "filename": "virtualizationservice/src/composite.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-17T04:46:59Z",
+      "side": 1,
+      "message": "Here, we need to sum the sizes of each backing files.",
+      "range": {
+        "startLine": 312,
+        "startChar": 0,
+        "endLine": 312,
+        "endChar": 22
+      },
+      "revId": "540f2dd8a6c91239df0a4dea4a642baa8f2a8dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
