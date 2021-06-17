@@ -32,3 +32,4 @@ allow kernel vd_device:blk_file read;
 
 allow kernel kmsg_device:chr_file write;
 allow kernel gsid:fd use;
+allow kernel apkdmverity:fd use;
