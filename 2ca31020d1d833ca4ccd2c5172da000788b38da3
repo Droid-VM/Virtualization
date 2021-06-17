@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f72d8a6d_27df07f7",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-17T06:36:23Z",
+      "side": 1,
+      "message": "Yes, but that can be delegated to apexd.",
+      "parentUuid": "d6f2da0f_e75aec81",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 138
+      },
+      "revId": "2ca31020d1d833ca4ccd2c5172da000788b38da3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c653ba8_5da2c09a",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "system_file_type",
       "parentUuid": "b7a784f6_e0ed4cfd",
+      "range": {
+        "startLine": 504,
+        "startChar": 44,
+        "endLine": 504,
+        "endChar": 52
+      },
+      "revId": "2ca31020d1d833ca4ccd2c5172da000788b38da3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "897a2189_06113b61",
+        "filename": "microdroid/sepolicy/system/private/domain.te",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-17T06:36:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "264fd379_dd2b27bc",
       "range": {
         "startLine": 504,
         "startChar": 44,
