@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82657c13_e72d7c58",
+        "filename": "microdroid/payload/mk_payload.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-17T12:21:02Z",
+      "side": 1,
+      "message": "CreateCompositeDisk\u0027s filler is to make the resulting composite image \"complete\". When there\u0027s a gap, reading from the guest side fails. (I believe that could be fixed from the crosvm side, though.)\n\nHere, I wanted to add additional info (the size of the original file) as a footer of each apex partition.",
+      "parentUuid": "60209446_b4ff1d1a",
+      "revId": "7ce2e5352866e44e9499cf4dfbdee8c72ab8a7a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59f7e9df_b2b7ff52",
         "filename": "microdroid/payload/mk_payload.cc",
         "patchSetId": 5
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b92f5cf_a8764517",
+        "filename": "microdroid/payload/mk_payload.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-17T12:21:02Z",
+      "side": 1,
+      "message": "Yeah, I\u0027ll look into it. (I\u0027m not familiar with sparse files yet.;-)",
+      "parentUuid": "59f7e9df_b2b7ff52",
+      "revId": "7ce2e5352866e44e9499cf4dfbdee8c72ab8a7a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ead710c1_b8fd1cdc",
         "filename": "microdroid/payload/mk_payload.cc",
         "patchSetId": 5
@@ -48,6 +84,24 @@
       "writtenOn": "2021-06-17T12:13:22Z",
       "side": 1,
       "message": "This comment seems to be in the wrong place.",
+      "revId": "7ce2e5352866e44e9499cf4dfbdee8c72ab8a7a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecae9060_05784c00",
+        "filename": "microdroid/payload/mk_payload.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-17T12:21:02Z",
+      "side": 1,
+      "message": "Oh, I missed this one. Sorry, I\u0027ll fix it in a follow up. Thanks.",
+      "parentUuid": "ead710c1_b8fd1cdc",
       "revId": "7ce2e5352866e44e9499cf4dfbdee8c72ab8a7a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
