@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66cf7ee0_4b138292",
+        "filename": "microdroid/payload/mk_payload.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-17T14:00:07Z",
+      "side": 1,
+      "message": "Adding the additional info is what SizeFiller does, right? Though I\u0027m surprised the APEX header doesn\u0027t already have that information. As far as I can see this ZeroFiller function is just adding an empty file to pad the partition to its aligned size, which is essentially the same as what CreateCompositeDisk does for readonly partitions (see https://cs.android.com/android/platform/superproject/+/master:device/google/cuttlefish/host/libs/image_aggregator/image_aggregator.cc;l\u003d331?q\u003dCreateCompositeDisk), except that it reuses the header image rather than creating a new file for it, so it will be bogus data rather than zeroes. Reading shouldn\u0027t fail though.",
+      "parentUuid": "82657c13_e72d7c58",
+      "revId": "7ce2e5352866e44e9499cf4dfbdee8c72ab8a7a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59f7e9df_b2b7ff52",
         "filename": "microdroid/payload/mk_payload.cc",
         "patchSetId": 5
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Yeah, I\u0027ll look into it. (I\u0027m not familiar with sparse files yet.;-)",
       "parentUuid": "59f7e9df_b2b7ff52",
+      "revId": "7ce2e5352866e44e9499cf4dfbdee8c72ab8a7a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32e54fde_bb8b2ab3",
+        "filename": "microdroid/payload/mk_payload.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-17T14:00:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8b92f5cf_a8764517",
       "revId": "7ce2e5352866e44e9499cf4dfbdee8c72ab8a7a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -102,6 +138,24 @@
       "side": 1,
       "message": "Oh, I missed this one. Sorry, I\u0027ll fix it in a follow up. Thanks.",
       "parentUuid": "ead710c1_b8fd1cdc",
+      "revId": "7ce2e5352866e44e9499cf4dfbdee8c72ab8a7a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec316e1a_051d78a7",
+        "filename": "microdroid/payload/mk_payload.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-17T14:00:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ecae9060_05784c00",
       "revId": "7ce2e5352866e44e9499cf4dfbdee8c72ab8a7a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
