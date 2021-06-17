@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60209446_b4ff1d1a",
+        "filename": "microdroid/payload/mk_payload.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-17T12:13:22Z",
+      "side": 1,
+      "message": "Why is this needed at all? CreateCompositeDisk already adds fillers if necessary to pad out read-only partitions to the block size.",
+      "revId": "7ce2e5352866e44e9499cf4dfbdee8c72ab8a7a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59f7e9df_b2b7ff52",
+        "filename": "microdroid/payload/mk_payload.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-17T12:13:22Z",
+      "side": 1,
+      "message": "If you just want an empty file of a certain size, you can make it sparse and save a bit of disk space by just seeking to the end and writing one zero, rather than writing them all.",
+      "revId": "7ce2e5352866e44e9499cf4dfbdee8c72ab8a7a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ead710c1_b8fd1cdc",
+        "filename": "microdroid/payload/mk_payload.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-17T12:13:22Z",
+      "side": 1,
+      "message": "This comment seems to be in the wrong place.",
+      "revId": "7ce2e5352866e44e9499cf4dfbdee8c72ab8a7a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
