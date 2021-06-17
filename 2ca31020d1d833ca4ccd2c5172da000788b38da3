@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6f2da0f_e75aec81",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-17T05:30:47Z",
+      "side": 1,
+      "message": "Yes, apexes as well should be verified before activating (before apexd), right?",
+      "parentUuid": "a49f47c6_c0d6ebdd",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 138
+      },
+      "revId": "2ca31020d1d833ca4ccd2c5172da000788b38da3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c653ba8_5da2c09a",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-06-17T04:58:46Z",
       "side": 1,
       "message": "Do we use all of these?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 16
+      },
+      "revId": "2ca31020d1d833ca4ccd2c5172da000788b38da3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd0a2897_5c437c94",
+        "filename": "microdroid/sepolicy/system/private/apkdmverity.te",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-17T05:30:47Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "0c653ba8_5da2c09a",
       "range": {
         "startLine": 26,
         "startChar": 0,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "264fd379_dd2b27bc",
+        "filename": "microdroid/sepolicy/system/private/domain.te",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-17T05:30:47Z",
+      "side": 1,
+      "message": "system_file_type",
+      "parentUuid": "b7a784f6_e0ed4cfd",
+      "range": {
+        "startLine": 504,
+        "startChar": 44,
+        "endLine": 504,
+        "endChar": 52
+      },
+      "revId": "2ca31020d1d833ca4ccd2c5172da000788b38da3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "08faa42c_04d8404a",
         "filename": "microdroid/sepolicy/system/private/kernel.te",
         "patchSetId": 1
@@ -83,6 +155,24 @@
       "writtenOn": "2021-06-17T04:58:46Z",
       "side": 1,
       "message": "Add a reason",
+      "revId": "2ca31020d1d833ca4ccd2c5172da000788b38da3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a4c8c50_60ec9e28",
+        "filename": "microdroid/sepolicy/system/private/kernel.te",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-17T05:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08faa42c_04d8404a",
       "revId": "2ca31020d1d833ca4ccd2c5172da000788b38da3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -110,6 +200,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16260d7e_ae618111",
+        "filename": "microdroid/sepolicy/system/private/zipfuse.te",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-17T05:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2b55ea1_f0498342",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 46
+      },
+      "revId": "2ca31020d1d833ca4ccd2c5172da000788b38da3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e1cbefa_e7ee5d7b",
@@ -123,6 +237,30 @@
       "writtenOn": "2021-06-17T04:58:46Z",
       "side": 1,
       "message": "why?",
+      "range": {
+        "startLine": 25,
+        "startChar": 21,
+        "endLine": 25,
+        "endChar": 32
+      },
+      "revId": "2ca31020d1d833ca4ccd2c5172da000788b38da3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed950d2d_647942d6",
+        "filename": "microdroid/sepolicy/system/private/zipfuse.te",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-17T05:30:47Z",
+      "side": 1,
+      "message": "Removed. (Idk why it was needed.)",
+      "parentUuid": "8e1cbefa_e7ee5d7b",
       "range": {
         "startLine": 25,
         "startChar": 21,
