@@ -76,6 +76,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7de4b761_050a7d12",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-17T20:28:18Z",
+      "side": 1,
+      "message": "This is the first connection, so we probably still need a static port.  If not, we can improve this later.",
+      "parentUuid": "414b5fdd_5a6d7eac",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 98
+      },
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "139c4d22_d46e4661",
@@ -730,6 +754,30 @@
       "side": 1,
       "message": "OK, then it looks like I need to open a bad door on the Rust side.  Will see if it\u0027s really necessary.  Right now, I have a local patch to have `SpIBinder::from_raw_experimental` simply calls `SpIBinder::from_raw` to make it public.",
       "parentUuid": "b8cc61d9_8e9883fe",
+      "range": {
+        "startLine": 58,
+        "startChar": 11,
+        "endLine": 58,
+        "endChar": 28
+      },
+      "revId": "652e758ea1dd24fe4510bdabc054945ff28040bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86a6b98f_be2b35f9",
+        "filename": "authfs/src/rpc_binder_shim.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-17T20:28:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "153770c8_8c081c8a",
       "range": {
         "startLine": 58,
         "startChar": 11,
