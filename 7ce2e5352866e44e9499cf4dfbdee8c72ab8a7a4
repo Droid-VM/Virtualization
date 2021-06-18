@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "498c7abf_697b2c72",
+        "filename": "microdroid/payload/mk_payload.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-18T00:51:54Z",
+      "side": 1,
+      "message": "\u003e Adding the additional info is what SizeFiller does, right? Though I\u0027m surprised the APEX header doesn\u0027t already have that information.\n\nYes. And an APEX file (and APK as well) is just a zip file. Zip file header doesn\u0027t specify its size intentionally. (Instead it appends a \"directory\" at the end of file). Typically, a zip library searches the directory from the end of the file and we could make it that way. But for a security reason, libziparchive decided to reject the case when the exact file size doesn\u0027t match with what the directory says.\n\n\u003e As far as I can see this ZeroFiller function is just adding an empty file to pad the partition to its aligned size, which is essentially the same as what CreateCompositeDisk does for readonly partitions.\n\nFor the case of APK, it\u0027s supposed to be dm-verity mounted with merkle tree(idsig file), and dm-verity requires 4k boundary and zero padding to work properly.",
+      "parentUuid": "66cf7ee0_4b138292",
+      "revId": "7ce2e5352866e44e9499cf4dfbdee8c72ab8a7a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59f7e9df_b2b7ff52",
         "filename": "microdroid/payload/mk_payload.cc",
         "patchSetId": 5
