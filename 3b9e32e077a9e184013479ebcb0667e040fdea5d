@@ -22,6 +22,30 @@
       },
       "revId": "3b9e32e077a9e184013479ebcb0667e040fdea5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f67d7eee_b7ba873c",
+        "filename": "virtualizationservice/src/composite.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-18T09:30:32Z",
+      "side": 1,
+      "message": "Unfortunately `RepeatedField` doesn\u0027t seem to have any method like that. I filed https://github.com/stepancheg/rust-protobuf/issues/561 asking to add one.",
+      "parentUuid": "5ee73512_e4d67977",
+      "range": {
+        "startLine": 230,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 0
+      },
+      "revId": "3b9e32e077a9e184013479ebcb0667e040fdea5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
