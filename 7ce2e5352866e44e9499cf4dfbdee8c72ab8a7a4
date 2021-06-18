@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23595e2f_849459ba",
+        "filename": "microdroid/payload/mk_payload.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-18T10:18:58Z",
+      "side": 1,
+      "message": "Okay, so the issue is just that the padding needs to be zeroes rather than arbitrary data? It should still be possible to use the same file for all of these padding regions though, rather than making a new file for each one.",
+      "parentUuid": "498c7abf_697b2c72",
+      "revId": "7ce2e5352866e44e9499cf4dfbdee8c72ab8a7a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59f7e9df_b2b7ff52",
         "filename": "microdroid/payload/mk_payload.cc",
         "patchSetId": 5
