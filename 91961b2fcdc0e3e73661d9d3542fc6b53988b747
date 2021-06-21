@@ -16,6 +16,24 @@
       "message": "Just so I get this right... If somebody comes to `vm/` and hit Find Owners, they will see the root ones + qwandor?",
       "revId": "91961b2fcdc0e3e73661d9d3542fc6b53988b747",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a22aa147_49294954",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-06-21T14:02:13Z",
+      "side": 1,
+      "message": "Semantically, the owners are additive, so in theory yes.\n\nBut it looks like in practice Find Owners doesn\u0027t handle this \"named people plus wildcard\" case well - eg on aosp/1740255 I don\u0027t see any specific names listed: https://screenshot.googleplex.com/ABB49ksWxRxEYjC\n\nThat suggests to me we should put a sufficiently long list of OWNERS in the root (and perhaps still add more in subfolders).",
+      "parentUuid": "4cd6f464_9d01c62f",
+      "revId": "91961b2fcdc0e3e73661d9d3542fc6b53988b747",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
