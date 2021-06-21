@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25d13720_ec4f4ca5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-21T06:13:52Z",
+      "side": 1,
+      "message": "I tried this as a part of microdroid sepolicy separation. I\u0027m not sure I\u0027m doing a right approach, but at first I did this, because microdroid will anyway have microdroid specific file contexts.\n\nI think I can work on other contexts files in the same way. And then we may find the types actually being used in microdroid.",
+      "revId": "ea2de1228c60af963174ed3282f34d2ae6ab5090",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
