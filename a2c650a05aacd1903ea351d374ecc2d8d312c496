@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7596a513_54b328fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-21T00:39:57Z",
+      "side": 1,
+      "message": "I have a general comment:\n\nThe amount of information and code duplicated across here and mk_cdisk (and libimage_aggregator, etc.) is concerning to me. I wish we have a single source of truth if possible.\n\nIn my understanding, the difficulty you faced with spawning mk_cdisk is due to the fd passing, and not because it\u0027s implemented outside of this module.\n\nSo, have you considered having a single library that implements this, and using it for both microdroid and cuttlefish? The library could be the existing C++ one (used via the cxx crate), or a new rust library based on this implementation.\n",
+      "revId": "a2c650a05aacd1903ea351d374ecc2d8d312c496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
