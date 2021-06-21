@@ -34,6 +34,24 @@
       "parentUuid": "4cd6f464_9d01c62f",
       "revId": "91961b2fcdc0e3e73661d9d3542fc6b53988b747",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b1f01f1_4853d8db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-06-21T14:46:59Z",
+      "side": 1,
+      "message": "Hmm, so we have two options:\n1) everyone is in android-kvm-team, only some people in OWNERS\n2) everyone is in OWNERS, just some are at the top\n\nEither way, it looks like the Gerrit UI won\u0027t give us a nice list of main contacts and people have to read OWNERS manually.\n\nDunno which is better. Are there any limits on the size of OWNERS?",
+      "parentUuid": "a22aa147_49294954",
+      "revId": "91961b2fcdc0e3e73661d9d3542fc6b53988b747",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
