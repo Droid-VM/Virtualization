@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "457bf0f9_63dccb5b",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-21T12:52:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8324eb4_2f7c34ef",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 0
+      },
+      "revId": "c97302e952c6bb72139db9e86451761ef5209923",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b12c298_afe7a3b5",
@@ -81,6 +105,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29cb0d49_8b9a18ea",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-21T12:52:39Z",
+      "side": 1,
+      "message": "We can\u0027t. The exit code of `adb connect` is always 0 even when the connection can\u0027t be made.",
+      "parentUuid": "9b12c298_afe7a3b5",
+      "range": {
+        "startLine": 270,
+        "startChar": 38,
+        "endLine": 270,
+        "endChar": 81
+      },
+      "revId": "c97302e952c6bb72139db9e86451761ef5209923",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e0d7527_f06ab064",
@@ -94,6 +142,30 @@
       "writtenOn": "2021-06-21T12:31:59Z",
       "side": 1,
       "message": "nit; can we let virtualizationservice kill crosvm?",
+      "range": {
+        "startLine": 327,
+        "startChar": 0,
+        "endLine": 327,
+        "endChar": 45
+      },
+      "revId": "c97302e952c6bb72139db9e86451761ef5209923",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a97b946_838cabb4",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-21T12:52:39Z",
+      "side": 1,
+      "message": "It does. See the last statement in testMicrodroidBoot(). This however is for the case when the test methods experiences an exception.",
+      "parentUuid": "0e0d7527_f06ab064",
       "range": {
         "startLine": 327,
         "startChar": 0,
