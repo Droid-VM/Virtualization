@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "71d1ac26_9e42b43e",
+        "filename": "microdroid/sepolicy/system/private/keystore2_key_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-06-22T17:27:11Z",
+      "side": 1,
+      "message": "I\u0027ll leave that for part of the selinux rework?",
+      "parentUuid": "3efbffc8_bd8f9d4d",
+      "range": {
+        "startLine": 30,
+        "startChar": 3,
+        "endLine": 30,
+        "endChar": 15
+      },
+      "revId": "57ebef406b686d8f8b3b65fef499842b34f105ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e3c43b7_bae925c0",
         "filename": "tests/testapk/src/native/testbinary.cpp",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2021-06-22T12:29:13Z",
       "side": 1,
       "message": "There\u0027s a hard limit on the prop value length. https://source.corp.google.com/android/bionic/libc/include/sys/system_properties.h;rcl\u003d3105d049f09a35a0fe21d7a8761aae16c60d48d0;l\u003d41\n\nSo the result will likely to be truncated if it exceed the limit. I think writing a file on /data/local/tmp is a more reliable error reporting mechanism than sysprop.",
+      "range": {
+        "startLine": 177,
+        "startChar": 20,
+        "endLine": 177,
+        "endChar": 45
+      },
+      "revId": "57ebef406b686d8f8b3b65fef499842b34f105ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a66bddde_92999fb7",
+        "filename": "tests/testapk/src/native/testbinary.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-06-22T17:27:11Z",
+      "side": 1,
+      "message": "I\u0027ve also dumped the error to stdout to avoid heading too far down the path of inventing another testing framework.",
+      "parentUuid": "8e3c43b7_bae925c0",
       "range": {
         "startLine": 177,
         "startChar": 20,
