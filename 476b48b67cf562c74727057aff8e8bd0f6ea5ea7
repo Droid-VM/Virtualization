@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0df95e1_a82dfed9",
+        "filename": "microdroid/sepolicy/system/private/file_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-22T10:21:01Z",
+      "side": 0,
+      "message": "These don\u0027t exist in microdroid. We can add these when we need.",
+      "parentUuid": "09dde415_8d7c7132",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 9
+      },
+      "revId": "476b48b67cf562c74727057aff8e8bd0f6ea5ea7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e694fc53_8ccaec68",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-06-21T09:10:33Z",
       "side": 0,
       "message": "Why is this needed? These are needed for OTA.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 15
+      },
+      "revId": "476b48b67cf562c74727057aff8e8bd0f6ea5ea7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a78c645_71c5b207",
+        "filename": "microdroid/sepolicy/system/private/file_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-22T10:21:01Z",
+      "side": 0,
+      "message": "removed",
+      "parentUuid": "e694fc53_8ccaec68",
       "range": {
         "startLine": 39,
         "startChar": 0,
@@ -64,6 +112,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b68a5d2_2bbed009",
+        "filename": "microdroid/sepolicy/system/private/file_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-22T10:21:01Z",
+      "side": 0,
+      "message": "These don\u0027t exist in microdroid. We can add these when we need.",
+      "parentUuid": "357f629f_55f5fe0a",
+      "revId": "476b48b67cf562c74727057aff8e8bd0f6ea5ea7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8642ae2f_036af6d2",
@@ -77,6 +143,30 @@
       "writtenOn": "2021-06-21T09:10:33Z",
       "side": 0,
       "message": "Is there anything in microdroid that relies on this symlink?",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 20
+      },
+      "revId": "476b48b67cf562c74727057aff8e8bd0f6ea5ea7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c1f502f_cfe213b2",
+        "filename": "microdroid/sepolicy/system/private/file_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-22T10:21:01Z",
+      "side": 0,
+      "message": "It\u0027s libprocessgroup: b/185186899",
+      "parentUuid": "8642ae2f_036af6d2",
       "range": {
         "startLine": 48,
         "startChar": 0,
@@ -110,6 +200,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d87a217_0099c795",
+        "filename": "microdroid/sepolicy/system/private/file_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-22T10:21:01Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "15cbb8b3_b974b659",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 67
+      },
+      "revId": "476b48b67cf562c74727057aff8e8bd0f6ea5ea7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54d69177_c6ed8e46",
@@ -123,6 +237,30 @@
       "writtenOn": "2021-06-21T09:10:33Z",
       "side": 0,
       "message": "no need",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 40
+      },
+      "revId": "476b48b67cf562c74727057aff8e8bd0f6ea5ea7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5825670_2ebb6a5b",
+        "filename": "microdroid/sepolicy/system/private/file_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-22T10:21:01Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "54d69177_c6ed8e46",
       "range": {
         "startLine": 89,
         "startChar": 0,
@@ -156,6 +294,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7c1f54f_d27a6ac1",
+        "filename": "microdroid/sepolicy/system/private/file_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-22T10:21:01Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "dbc79302_06ef82a1",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 44
+      },
+      "revId": "476b48b67cf562c74727057aff8e8bd0f6ea5ea7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e11f17e_0de6a10f",
@@ -169,6 +331,30 @@
       "writtenOn": "2021-06-21T09:10:33Z",
       "side": 0,
       "message": "no need",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 70
+      },
+      "revId": "476b48b67cf562c74727057aff8e8bd0f6ea5ea7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bb640e7_7807362e",
+        "filename": "microdroid/sepolicy/system/private/file_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-22T10:21:01Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "4e11f17e_0de6a10f",
       "range": {
         "startLine": 98,
         "startChar": 0,
@@ -202,6 +388,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61a3d80b_6f610387",
+        "filename": "microdroid/sepolicy/system/private/file_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-22T10:21:01Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "40104477_7efcaa29",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 48
+      },
+      "revId": "476b48b67cf562c74727057aff8e8bd0f6ea5ea7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8061b5c_2663af1f",
@@ -215,6 +425,30 @@
       "writtenOn": "2021-06-21T09:10:33Z",
       "side": 0,
       "message": "I don\u0027t know what these are for",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 63
+      },
+      "revId": "476b48b67cf562c74727057aff8e8bd0f6ea5ea7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05f2994a_faccc6c7",
+        "filename": "microdroid/sepolicy/system/private/file_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-22T10:21:01Z",
+      "side": 0,
+      "message": "I see /dev/dma_heap exist in the microdroid. Let me keep this for now.",
+      "parentUuid": "c8061b5c_2663af1f",
       "range": {
         "startLine": 102,
         "startChar": 0,
@@ -248,6 +482,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfbd0980_dd73487d",
+        "filename": "microdroid/sepolicy/system/private/file_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-22T10:21:01Z",
+      "side": 0,
+      "message": "I see /dev/tun exist in the microdroid. Let me keep this for now.",
+      "parentUuid": "6caaad47_fd630de8",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 34
+      },
+      "revId": "476b48b67cf562c74727057aff8e8bd0f6ea5ea7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70f4e974_822bae2a",
@@ -261,6 +519,30 @@
       "writtenOn": "2021-06-21T09:10:33Z",
       "side": 0,
       "message": "no need?",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 52
+      },
+      "revId": "476b48b67cf562c74727057aff8e8bd0f6ea5ea7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20df43a9_b5052472",
+        "filename": "microdroid/sepolicy/system/private/file_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-22T10:21:01Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "70f4e974_822bae2a",
       "range": {
         "startLine": 195,
         "startChar": 0,
@@ -294,6 +576,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "173bbb2b_e6842675",
+        "filename": "microdroid/sepolicy/system/private/file_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-22T10:21:01Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "388c1c6b_14b3eb81",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 47
+      },
+      "revId": "476b48b67cf562c74727057aff8e8bd0f6ea5ea7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06e66275_25bcfd6d",
@@ -307,6 +613,30 @@
       "writtenOn": "2021-06-21T09:10:33Z",
       "side": 0,
       "message": "no need",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 43
+      },
+      "revId": "476b48b67cf562c74727057aff8e8bd0f6ea5ea7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "120efc05_c4b0bca9",
+        "filename": "microdroid/sepolicy/system/private/file_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-22T10:21:01Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "06e66275_25bcfd6d",
       "range": {
         "startLine": 198,
         "startChar": 0,
@@ -340,6 +670,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e3268ca_ec7ed771",
+        "filename": "microdroid/sepolicy/system/private/file_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-22T10:21:01Z",
+      "side": 0,
+      "message": "We don\u0027t. removed.",
+      "parentUuid": "f32b28a5_282654c4",
+      "range": {
+        "startLine": 650,
+        "startChar": 0,
+        "endLine": 652,
+        "endChar": 62
+      },
+      "revId": "476b48b67cf562c74727057aff8e8bd0f6ea5ea7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dba1d616_89b8d809",
@@ -353,6 +707,30 @@
       "writtenOn": "2021-06-21T09:10:33Z",
       "side": 0,
       "message": "Which in microdroid uses this?",
+      "range": {
+        "startLine": 800,
+        "startChar": 0,
+        "endLine": 800,
+        "endChar": 55
+      },
+      "revId": "476b48b67cf562c74727057aff8e8bd0f6ea5ea7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e22b3637_04a6f719",
+        "filename": "microdroid/sepolicy/system/private/file_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-22T10:21:01Z",
+      "side": 0,
+      "message": "No one uses this. Removed.",
+      "parentUuid": "dba1d616_89b8d809",
       "range": {
         "startLine": 800,
         "startChar": 0,
