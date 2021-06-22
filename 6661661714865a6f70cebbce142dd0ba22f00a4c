@@ -46,6 +46,29 @@
       },
       "revId": "6661661714865a6f70cebbce142dd0ba22f00a4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b7ad1ea_7b3b6c16",
+        "filename": "tests/testapk/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-22T02:28:22Z",
+      "side": 1,
+      "message": "This change is LGTM for now. One thought is that this is a platform library, and IMO we are still discussing whether we open such libraries to payloads for the VM.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 51
+      },
+      "revId": "6661661714865a6f70cebbce142dd0ba22f00a4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
