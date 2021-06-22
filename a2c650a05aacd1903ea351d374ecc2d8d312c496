@@ -16,6 +16,24 @@
       "message": "I have a general comment:\n\nThe amount of information and code duplicated across here and mk_cdisk (and libimage_aggregator, etc.) is concerning to me. I wish we have a single source of truth if possible.\n\nIn my understanding, the difficulty you faced with spawning mk_cdisk is due to the fd passing, and not because it\u0027s implemented outside of this module.\n\nSo, have you considered having a single library that implements this, and using it for both microdroid and cuttlefish? The library could be the existing C++ one (used via the cxx crate), or a new rust library based on this implementation.\n",
       "revId": "a2c650a05aacd1903ea351d374ecc2d8d312c496",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "198a1860_d3f97dc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-22T11:58:12Z",
+      "side": 1,
+      "message": "There were several reasons. Passing file descriptors was one issue, and it seems that the workaround of using /proc/self/fd/N wasn\u0027t working properly, so I would have had to modify mk_cdisk to change that, and also somehow to pass the header and footer image files explicitly (as currently it infers names for them based on the composite image filename). The other issue is the added complexity of serialising everything to JSON and back; it\u0027s much simpler just to have a function call. This will be even more of an issue for `mk_payload`.\n\nI think the best place for all the composite image code is in the existing `disk` crate of crosvm. That has the code which crosvm uses to read composite images (and the other formats it supports, such as QCOW2) and already has functions to create QCOW2 images, so I think it makes sense to have all the disk image reading and writing in one place there.\n\nWe already ran into one issue were `mk_cdisk` was inconsistent with crosvm, for using a QCOW2 image inside a composite disk image (crosvm supports this, but `mk_cdisk` didn\u0027t calculate the size properly when creating it because it reimplemented some of the functionality from crosvm in an inconsistent way). Jooyung fixed this particular bug in https://r.android.com/1732312, but I think having all the code in one place will help us avoid similar problems in future.\n\nThis change to put it in VirtualizationService is a temporary measure. I\u0027ve sent a change to upstream crosvm (https://chromium-review.googlesource.com/c/chromiumos/platform/crosvm/+/2972869) to add it to the `disk` crate but that will take a while to get submitted and then synced back to AOSP, so I have this as well to allow us to make progress on the payload image creation in the meantime.",
+      "parentUuid": "7596a513_54b328fb",
+      "revId": "a2c650a05aacd1903ea351d374ecc2d8d312c496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
