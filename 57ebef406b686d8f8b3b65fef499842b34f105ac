@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3efbffc8_bd8f9d4d",
+        "filename": "microdroid/sepolicy/system/private/keystore2_key_contexts",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-06-22T13:18:28Z",
+      "side": 1,
+      "message": "I wonder if we should also add this to the system policy, if only to reserve it.\n(A clash might be harmless, but could be confusing.)",
+      "range": {
+        "startLine": 30,
+        "startChar": 3,
+        "endLine": 30,
+        "endChar": 15
+      },
+      "revId": "57ebef406b686d8f8b3b65fef499842b34f105ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e3c43b7_bae925c0",
         "filename": "tests/testapk/src/native/testbinary.cpp",
         "patchSetId": 1
