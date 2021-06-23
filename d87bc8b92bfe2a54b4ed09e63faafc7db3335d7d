@@ -16,6 +16,69 @@
       "message": "This is largely untested, and technically doesn\u0027t build (I need to make ring apex-available; working on that).\n\nBut it does build locally, and is a reasonably self-contained chunk of code.\n\nI have no idea what I\u0027m doing in Rust, so if you had a chance to look at it I\u0027d be very interested in your comments.",
       "revId": "d87bc8b92bfe2a54b4ed09e63faafc7db3335d7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7be8224b_66b753a4",
+        "filename": "compos/aidl/com/android/compos/ICompOsKeyService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-06-23T10:28:09Z",
+      "side": 1,
+      "message": "Typo. Won\u0027t it be IllegalStateException? Should it just return a boolean?",
+      "range": {
+        "startLine": 37,
+        "startChar": 15,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "d87bc8b92bfe2a54b4ed09e63faafc7db3335d7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7880b418_a9ba6c7c",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-06-23T10:28:09Z",
+      "side": 1,
+      "message": "nit: this doesn\u0027t seem like the right code for most of the error cases, would SERVICE_SPECIFIC be better if you need a generic one?",
+      "range": {
+        "startLine": 67,
+        "startChar": 61,
+        "endLine": 67,
+        "endChar": 74
+      },
+      "revId": "d87bc8b92bfe2a54b4ed09e63faafc7db3335d7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de2531bd_e0af45d6",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-06-23T10:28:09Z",
+      "side": 1,
+      "message": "nit: Given these are common, would there be anything to gain from deduplicating them? Either as arrays to concat or each field like `KEY_PARAM_ALGORITHM` to add into the array?",
+      "revId": "d87bc8b92bfe2a54b4ed09e63faafc7db3335d7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
