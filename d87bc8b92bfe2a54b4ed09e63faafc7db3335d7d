@@ -79,6 +79,24 @@
       "message": "nit: Given these are common, would there be anything to gain from deduplicating them? Either as arrays to concat or each field like `KEY_PARAM_ALGORITHM` to add into the array?",
       "revId": "d87bc8b92bfe2a54b4ed09e63faafc7db3335d7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "479e49e1_04887bb6",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-06-23T10:38:21Z",
+      "side": 1,
+      "message": "Yeah, I noticed you\u0027d done something similar.\nBut KeyParameter seems a bit weird - it appears to be unsized (so I can\u0027t have const / static instances) - I don\u0027t really understand how - and it doesn\u0027t implement Copy, only Clone.\nSo my efforts in that direction failed and I gave up.\nThere\u0027s probably a way to do it though.",
+      "parentUuid": "de2531bd_e0af45d6",
+      "revId": "d87bc8b92bfe2a54b4ed09e63faafc7db3335d7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
