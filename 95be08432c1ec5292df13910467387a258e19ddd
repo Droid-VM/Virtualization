@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df9278b5_71b6c0b2",
+        "filename": "compos/aidl/com/android/compos/ICompOsKeyService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-06-24T14:37:53Z",
+      "side": 1,
+      "message": "This has a public key, the other one has a certificate (which includes a public key).\nThe asymmetry is annoying but seems to be necessary.",
+      "parentUuid": "c9362030_e9625aba",
+      "range": {
+        "startLine": 39,
+        "startChar": 26,
+        "endLine": 39,
+        "endChar": 64
+      },
+      "revId": "95be08432c1ec5292df13910467387a258e19ddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a62931a2_478c2248",
@@ -41,6 +65,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ff86f98_4c1f7006",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-06-24T14:37:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a62931a2_478c2248",
+      "revId": "95be08432c1ec5292df13910467387a258e19ddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4145518d_4a4ae250",
@@ -54,6 +96,24 @@
       "writtenOn": "2021-06-24T12:06:04Z",
       "side": 1,
       "message": "Nit: usually we don\u0027t put blank lines between imports, so that the auto-formatter can sort them.",
+      "revId": "95be08432c1ec5292df13910467387a258e19ddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38a118a1_5519e246",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-06-24T14:37:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4145518d_4a4ae250",
       "revId": "95be08432c1ec5292df13910467387a258e19ddd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
