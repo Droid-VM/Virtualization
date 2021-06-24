@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9362030_e9625aba",
+        "filename": "compos/aidl/com/android/compos/ICompOsKeyService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-24T12:06:04Z",
+      "side": 1,
+      "message": "Could this just be CompOsKeyData too? Or is it different somehow?",
+      "range": {
+        "startLine": 39,
+        "startChar": 26,
+        "endLine": 39,
+        "endChar": 64
+      },
+      "revId": "95be08432c1ec5292df13910467387a258e19ddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a62931a2_478c2248",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-24T12:06:04Z",
+      "side": 1,
+      "message": "Write a sentence about what this is, at least.",
+      "revId": "95be08432c1ec5292df13910467387a258e19ddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4145518d_4a4ae250",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-24T12:06:04Z",
+      "side": 1,
+      "message": "Nit: usually we don\u0027t put blank lines between imports, so that the auto-formatter can sort them.",
+      "revId": "95be08432c1ec5292df13910467387a258e19ddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

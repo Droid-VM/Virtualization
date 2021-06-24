@@ -3,6 +3,74 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09aacfa2_d9b66bd1",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-24T12:06:04Z",
+      "side": 1,
+      "message": "Nit: I\u0027d be inclined to do something like\n\n```\nOk(if let Err(e) \u003d self.do_verify(...) {\n  warn!(...);\n  false\n} else {\n  true\n})\n```\n\nor perhaps\n\n```\nOk(self.do_verify(...).map_err(|e| warn!(...)).is_ok())\n```",
+      "revId": "2c47b291a99459aaa9b0cae099f6e139fba90592",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d436c9ed_7001e840",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-24T12:06:04Z",
+      "side": 1,
+      "message": "Optional: Putting constants inside an impl like this is a bit unusual. I\u0027d be more inclined to put them up the top of the module.",
+      "revId": "2c47b291a99459aaa9b0cae099f6e139fba90592",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3ef15e9_7b38bda4",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-24T12:06:04Z",
+      "side": 1,
+      "message": "This looks like it could be a constant.",
+      "revId": "2c47b291a99459aaa9b0cae099f6e139fba90592",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76487345_5c31d305",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-24T12:06:04Z",
+      "side": 1,
+      "message": "This whole array could be a constant too.",
+      "revId": "2c47b291a99459aaa9b0cae099f6e139fba90592",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4b60574f_8b78a6da",
         "filename": "compos/src/compos_key_service.rs",
         "patchSetId": 3
@@ -43,6 +111,46 @@
         "startChar": 61,
         "endLine": 156,
         "endChar": 62
+      },
+      "revId": "2c47b291a99459aaa9b0cae099f6e139fba90592",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4352d179_4c98518e",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-24T12:06:04Z",
+      "side": 1,
+      "message": "Nit: usually we put all the constants up the top of the file.",
+      "revId": "2c47b291a99459aaa9b0cae099f6e139fba90592",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60303b9d_fc181739",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-24T12:06:04Z",
+      "side": 1,
+      "message": "The bit about link_to_death isn\u0027t really relevant here, I guess.",
+      "range": {
+        "startLine": 207,
+        "startChar": 80,
+        "endLine": 207,
+        "endChar": 93
       },
       "revId": "2c47b291a99459aaa9b0cae099f6e139fba90592",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
