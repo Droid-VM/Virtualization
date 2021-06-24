@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b60574f_8b78a6da",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-06-24T11:24:59Z",
+      "side": 1,
+      "message": "Does it matter that this could lead to the client getting `false` even though it was just a runtime error? I assume not in the grand scheme of things since it needs to be able to recover from and invalid key anyway.",
+      "range": {
+        "startLine": 156,
+        "startChar": 61,
+        "endLine": 156,
+        "endChar": 62
+      },
+      "revId": "2c47b291a99459aaa9b0cae099f6e139fba90592",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
