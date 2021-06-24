@@ -22,6 +22,30 @@
       },
       "revId": "908ba47e5d897baf4d165b6d096ff81393e2bb9a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f154ed28_336c35be",
+        "filename": "apex/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-06-24T08:39:06Z",
+      "side": 1,
+      "message": "The main reason for not doing so - and I admit it\u0027s a feeble one - is that then I\u0027d have to add com.android.compos to another bunch of apex_available rules. Given that this code is likely to be deleted or moved somewhere else I\u0027d prefer not to do that until I know it\u0027s necessary.",
+      "parentUuid": "f10f2327_3c0b1e8c",
+      "range": {
+        "startLine": 50,
+        "startChar": 9,
+        "endLine": 50,
+        "endChar": 23
+      },
+      "revId": "908ba47e5d897baf4d165b6d096ff81393e2bb9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
