@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4597a611_efdadc51",
+        "filename": "compos/aidl/com/android/compos/ICompOsKeyService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-06-24T11:01:34Z",
+      "side": 1,
+      "message": "Yeah, you\u0027re right on all counts. Switched it to a boolean. Unlike generate it is normal and legitimate for it to return false, and we probably shouldn\u0027t return why in any great detail; I\u0027ll log the error instead.",
+      "parentUuid": "7be8224b_66b753a4",
+      "range": {
+        "startLine": 37,
+        "startChar": 15,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "d87bc8b92bfe2a54b4ed09e63faafc7db3335d7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7880b418_a9ba6c7c",
@@ -72,6 +96,30 @@
       "writtenOn": "2021-06-23T10:28:09Z",
       "side": 1,
       "message": "nit: this doesn\u0027t seem like the right code for most of the error cases, would SERVICE_SPECIFIC be better if you need a generic one?",
+      "range": {
+        "startLine": 67,
+        "startChar": 61,
+        "endLine": 67,
+        "endChar": 74
+      },
+      "revId": "d87bc8b92bfe2a54b4ed09e63faafc7db3335d7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce94f3cf_0aaad904",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-06-24T11:01:34Z",
+      "side": 1,
+      "message": "For generate I would argue that illegal state is reasonable - it should never fail, so failure is exceptional and means something in the state of the world is broken.\nI don\u0027t need multiple error codes, and a single service specific one doesn\u0027t seem that helpful.",
+      "parentUuid": "7880b418_a9ba6c7c",
       "range": {
         "startLine": 67,
         "startChar": 61,
@@ -113,6 +161,24 @@
       "side": 1,
       "message": "Yeah, I noticed you\u0027d done something similar.\nBut KeyParameter seems a bit weird - it appears to be unsized (so I can\u0027t have const / static instances) - I don\u0027t really understand how - and it doesn\u0027t implement Copy, only Clone.\nSo my efforts in that direction failed and I gave up.\nThere\u0027s probably a way to do it though.",
       "parentUuid": "de2531bd_e0af45d6",
+      "revId": "d87bc8b92bfe2a54b4ed09e63faafc7db3335d7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1c44ed2_dc750797",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-06-24T11:01:34Z",
+      "side": 1,
+      "message": "Ah, I was being stupid. There is a fairly nice way to do it.",
+      "parentUuid": "479e49e1_04887bb6",
       "revId": "d87bc8b92bfe2a54b4ed09e63faafc7db3335d7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
