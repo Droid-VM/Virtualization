@@ -46,6 +46,30 @@
       },
       "revId": "fe5b28ef8e689be417a40af258c61306b10c5810",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f2190cb_e464af4e",
+        "filename": "launcher/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-24T03:25:56Z",
+      "side": 1,
+      "message": "IMO, libnativeloader-headers is for other libs to use private apis like android_create_namespace. Then we\u0027d better make it available so that microdroid_launcher can use it like other libs.",
+      "parentUuid": "898315d7_eddff5c9",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 14
+      },
+      "revId": "fe5b28ef8e689be417a40af258c61306b10c5810",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
