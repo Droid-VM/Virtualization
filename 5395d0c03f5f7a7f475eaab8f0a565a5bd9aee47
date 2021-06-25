@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000012273198",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1748866?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "57d5fc08_5d5652a4",
+          "description": "Change to \"vm/src/run.rs\"",
+          "replacements": [
+            {
+              "path": "vm/src/run.rs",
+              "range": {
+                "startLine": 38,
+                "startChar": 43,
+                "endLine": 38,
+                "endChar": 48
+              },
+              "replacement": "it"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "bf0395c6_74275fdb",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-06-25T20:01:13Z",
+      "side": 1,
+      "message": "Common typo found: \"it it\" -- should it be \"it\"?\nIf this is intentional you can comma separate to \u0027it, it\u0027 for better clarity.\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 38,
+        "startChar": 43,
+        "endLine": 38,
+        "endChar": 48
+      },
+      "revId": "5395d0c03f5f7a7f475eaab8f0a565a5bd9aee47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
