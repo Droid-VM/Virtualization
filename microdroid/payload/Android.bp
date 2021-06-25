@@ -44,6 +44,10 @@ rust_protobuf {
     protos: ["metadata.proto"],
     source_stem: "microdroid_metadata",
     host_supported: true,
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.virt",
+    ],
 }
 
 cc_binary {
