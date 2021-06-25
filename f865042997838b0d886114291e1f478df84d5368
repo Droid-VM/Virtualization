@@ -34,6 +34,24 @@
       "parentUuid": "5d54be1e_0342411b",
       "revId": "f865042997838b0d886114291e1f478df84d5368",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a6f86a7_3b0cc76b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-06-25T10:36:45Z",
+      "side": 1,
+      "message": "We need to build one, and would be good to do it right away.\nJiyong is already adding means of skipping tests when no virt support is available (aosp/1747940). We should extend it to also query protected mode support. We could have a tiny binary that checks using ioctls on /dev/kvm.",
+      "parentUuid": "39439a73_2ac78876",
+      "revId": "f865042997838b0d886114291e1f478df84d5368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
