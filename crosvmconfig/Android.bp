@@ -2,22 +2,17 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
-rust_binary {
-    name: "vm",
-    crate_name: "vm",
-    srcs: ["src/main.rs"],
+rust_library {
+    name: "libcrosvmconfig",
+    crate_name: "crosvmconfig",
+    srcs: ["src/lib.rs"],
     edition: "2018",
     rustlibs: [
         "android.system.virtualizationservice-rust",
         "libanyhow",
         "libcompositediskconfig",
-        "libcrosvmconfig",
-        "libenv_logger",
-        "liblibc",
-        "liblog_rust",
         "libserde_json",
         "libserde",
-        "libstructopt",
     ],
     apex_available: [
         "com.android.virt",
