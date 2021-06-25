@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#include <linux/kvm.h>
+#include <sys/ioctl.h>
 #include <sys/socket.h>
 #include <unistd.h>
 
@@ -30,6 +32,8 @@
 #include "android/system/virtualizationservice/VirtualMachineConfig.h"
 #include "virt/VirtualizationTest.h"
 
+#define KVM_CAP_ARM_PROTECTED_VM 0xffbadab1
+
 using namespace android::base;
 using namespace android::os;
 
@@ -41,7 +45,13 @@ static constexpr const char kVmInitrdPath[] = "/data/local/tmp/virt-test/initram
 static constexpr const char kVmParams[] = "rdinit=/bin/init bin/vsock_client 2 45678 HelloWorld";
 static constexpr const char kTestMessage[] = "HelloWorld";
 
-TEST_F(VirtualizationTest, TestVsock) {
+/** Returns true if the kernel supports Protected KVM. */
+bool pkvm_supported() {
+    unique_fd kvm_fd(open("/dev/kvm", O_NONBLOCK | O_CLOEXEC));
+    return ioctl(kvm_fd, KVM_CHECK_EXTENSION, KVM_CAP_ARM_PROTECTED_VM) == 1;
+}
+
+void run_test(sp<IVirtualizationService> virtualizationService, bool protected_vm) {
     binder::Status status;
 
     unique_fd server_fd(TEMP_FAILURE_RETRY(socket(AF_VSOCK, SOCK_STREAM, 0)));
@@ -64,9 +74,10 @@ TEST_F(VirtualizationTest, TestVsock) {
     config.kernel = ParcelFileDescriptor(unique_fd(open(kVmKernelPath, O_RDONLY | O_CLOEXEC)));
     config.initrd = ParcelFileDescriptor(unique_fd(open(kVmInitrdPath, O_RDONLY | O_CLOEXEC)));
     config.params = String16(kVmParams);
+    config.protected_vm = protected_vm;
 
     sp<IVirtualMachine> vm;
-    status = mVirtualizationService->startVm(config, std::nullopt, &vm);
+    status = virtualizationService->startVm(config, std::nullopt, &vm);
     ASSERT_TRUE(status.isOk()) << "Error starting VM: " << status;
 
     int32_t cid;
@@ -88,6 +99,18 @@ TEST_F(VirtualizationTest, TestVsock) {
 
     LOG(INFO) << "Received message: " << msg;
     ASSERT_EQ(msg, kTestMessage);
+}
+
+TEST_F(VirtualizationTest, TestVsock) {
+    run_test(mVirtualizationService, false);
+}
+
+TEST_F(VirtualizationTest, TestVsockProtected) {
+    if (!pkvm_supported()) {
+        GTEST_SKIP() << "Skipping as pKVM is not supported on this device.";
+    }
+
+    run_test(mVirtualizationService, true);
 }
 
 } // namespace virt
