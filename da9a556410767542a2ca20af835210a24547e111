@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f487b917_8fb1afae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-26T07:06:38Z",
+      "side": 1,
+      "message": "This revealed a bug in the AIDL compiler:\n\nexternal/libcxx/include/memory:1826:31: error: call to implicitly-deleted copy constructor of \u0027android::os::ParcelFileDescriptor\u0027\nout/soong/.intermediates/packages/modules/Virtualization/virtualizationservice/aidl/android.system.virtualizationservice-cpp-source/gen/android/system/virtualizationservice/DiskImage.cpp:36:36: note: in instantiation of function template specialization \u0027android::Parcel::readParcelableVector\u003candroid::system::virtualizationservice::Partition\u003e\u0027 requested here\n  _aidl_ret_status \u003d _aidl_parcel-\u003ereadParcelableVector(\u0026partitions);",
+      "revId": "da9a556410767542a2ca20af835210a24547e111",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
