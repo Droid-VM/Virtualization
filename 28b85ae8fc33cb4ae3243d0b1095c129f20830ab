@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "785480ce_9aede410",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-28T13:41:37Z",
+      "side": 1,
+      "message": "This is used by the subsequent change (aosp/1748866). Until we have a solution for the size of apex block device issue, we\u0027ll use this format. I guess it will be done in a couple of weeks. (b/191910129)\n\nThat being said, can we keep path and paths? (I\u0027ll remove paths when it\u0027s done)",
+      "parentUuid": "603f9769_90a14582",
+      "revId": "28b85ae8fc33cb4ae3243d0b1095c129f20830ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "230d8c07_0faf5718",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d6d687d_2153784c",
+        "filename": "compositediskconfig/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-28T13:41:37Z",
+      "side": 1,
+      "message": "see below.",
+      "parentUuid": "230d8c07_0faf5718",
+      "revId": "28b85ae8fc33cb4ae3243d0b1095c129f20830ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b039f118_7ce9f2cd",
@@ -48,6 +84,30 @@
       "writtenOn": "2021-06-28T11:39:20Z",
       "side": 1,
       "message": "images",
+      "range": {
+        "startLine": 23,
+        "startChar": 54,
+        "endLine": 23,
+        "endChar": 59
+      },
+      "revId": "28b85ae8fc33cb4ae3243d0b1095c129f20830ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03842822_7134bab9",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/Partition.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-28T13:41:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b039f118_7ce9f2cd",
       "range": {
         "startLine": 23,
         "startChar": 54,
@@ -81,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40dae0c0_cb67edcb",
+        "filename": "virtualizationservice/src/composite.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-28T13:41:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05da6dd3_770cb44d",
+      "range": {
+        "startLine": 340,
+        "startChar": 79,
+        "endLine": 340,
+        "endChar": 87
+      },
+      "revId": "28b85ae8fc33cb4ae3243d0b1095c129f20830ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db7379da_b2e5f17b",
@@ -98,6 +182,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97863a27_e5fa84b3",
+        "filename": "virtualizationservice/src/composite.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-28T13:41:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db7379da_b2e5f17b",
+      "revId": "28b85ae8fc33cb4ae3243d0b1095c129f20830ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8efbe775_a302358c",
@@ -111,6 +213,24 @@
       "writtenOn": "2021-06-28T11:39:20Z",
       "side": 1,
       "message": "crosvm is usually written all lower case (c.f. https://chromium.googlesource.com/chromiumos/platform/crosvm/). However, maybe it would be better just to describe this as \u0027VM configuration\u0027, as it\u0027s not directly tied to crosvm.",
+      "revId": "28b85ae8fc33cb4ae3243d0b1095c129f20830ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a670c007_c638fcd4",
+        "filename": "vm/src/config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-28T13:41:37Z",
+      "side": 1,
+      "message": "Done (reverted).",
+      "parentUuid": "8efbe775_a302358c",
       "revId": "28b85ae8fc33cb4ae3243d0b1095c129f20830ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
