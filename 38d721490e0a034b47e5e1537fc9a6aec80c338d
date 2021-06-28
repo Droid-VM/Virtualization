@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26308658_ab622a96",
+        "filename": "microdroid/payload/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-28T01:28:50Z",
+      "side": 1,
+      "message": "Oh, I didn\u0027t check it and just thought that way. But I found it\u0027s considered as the platform in soong world but the check is done in make world. So, even if we omitted \"//apex_available:platform\", no problems. Hmm, I removed it for now.\n\nBut imo it\u0027s a bit weird that it\u0027s platform and not available to platform but it\u0027s okay. ;-)",
+      "parentUuid": "83237fd9_72932314",
+      "revId": "38d721490e0a034b47e5e1537fc9a6aec80c338d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "803d2678_1f98dadd",
