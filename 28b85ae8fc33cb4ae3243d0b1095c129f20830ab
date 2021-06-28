@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "603f9769_90a14582",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-28T11:39:20Z",
+      "side": 1,
+      "message": "Where do you plan to use this? I thought multi-file partitions were only needed as a workaround for payload images.",
+      "revId": "28b85ae8fc33cb4ae3243d0b1095c129f20830ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "230d8c07_0faf5718",
+        "filename": "compositediskconfig/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-28T11:39:20Z",
+      "side": 1,
+      "message": "Let\u0027s just have `paths`, rather than keeping `path` as well. There\u0027s no need to maintain backward compatibility.",
+      "revId": "28b85ae8fc33cb4ae3243d0b1095c129f20830ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b039f118_7ce9f2cd",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/Partition.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-28T11:39:20Z",
+      "side": 1,
+      "message": "images",
+      "range": {
+        "startLine": 23,
+        "startChar": 54,
+        "endLine": 23,
+        "endChar": 59
+      },
+      "revId": "28b85ae8fc33cb4ae3243d0b1095c129f20830ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05da6dd3_770cb44d",
+        "filename": "virtualizationservice/src/composite.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-28T11:39:20Z",
+      "side": 1,
+      "message": "I should have fixed it in my change, but this comment is no longer correct, can you fix it?",
+      "range": {
+        "startLine": 340,
+        "startChar": 79,
+        "endLine": 340,
+        "endChar": 87
+      },
+      "revId": "28b85ae8fc33cb4ae3243d0b1095c129f20830ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db7379da_b2e5f17b",
+        "filename": "virtualizationservice/src/composite.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-28T11:39:20Z",
+      "side": 1,
+      "message": "This TODO is no longer relevant, you can remove it.",
+      "revId": "28b85ae8fc33cb4ae3243d0b1095c129f20830ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8efbe775_a302358c",
+        "filename": "vm/src/config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-28T11:39:20Z",
+      "side": 1,
+      "message": "crosvm is usually written all lower case (c.f. https://chromium.googlesource.com/chromiumos/platform/crosvm/). However, maybe it would be better just to describe this as \u0027VM configuration\u0027, as it\u0027s not directly tied to crosvm.",
+      "revId": "28b85ae8fc33cb4ae3243d0b1095c129f20830ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
