@@ -26,20 +26,19 @@ use android_system_keystore2::aidl::android::system::keystore2::{
     IKeystoreService::IKeystoreService, KeyDescriptor::KeyDescriptor,
 };
 use anyhow::{anyhow, Context, Result};
+use binder::public_api::{
+    add_service, get_interface, BinderFeatures, ExceptionCode, Interface, ProcessState,
+    Result as BinderResult, Status, Strong,
+};
 use compos_aidl_interface::aidl::com::android::compos::{
     CompOsKeyData::CompOsKeyData,
     ICompOsKeyService::{BnCompOsKeyService, ICompOsKeyService},
-};
-use compos_aidl_interface::binder::{
-    self, add_service, get_interface, BinderFeatures, ExceptionCode, Interface, ProcessState,
-    Status, Strong,
 };
 use log::{info, warn, Level};
 use ring::rand::{SecureRandom, SystemRandom};
 use ring::signature;
 use scopeguard::ScopeGuard;
 use std::ffi::CString;
-use std::sync::Mutex;
 
 const LOG_TAG: &str = "CompOsKeyService";
 const OUR_SERVICE_NAME: &str = "android.system.composkeyservice";
@@ -68,22 +67,18 @@ const KEY_DESCRIPTOR: KeyDescriptor =
 
 struct CompOsKeyService {
     random: SystemRandom,
-    state: Mutex<State>,
-}
-
-struct State {
     security_level: Strong<dyn IKeystoreSecurityLevel>,
 }
 
 impl Interface for CompOsKeyService {}
 
 impl ICompOsKeyService for CompOsKeyService {
-    fn generateSigningKey(&self) -> binder::Result<CompOsKeyData> {
+    fn generateSigningKey(&self) -> BinderResult<CompOsKeyData> {
         self.do_generate()
             .map_err(|e| new_binder_exception(ExceptionCode::ILLEGAL_STATE, e.to_string()))
     }
 
-    fn verifySigningKey(&self, key_blob: &[u8], public_key: &[u8]) -> binder::Result<bool> {
+    fn verifySigningKey(&self, key_blob: &[u8], public_key: &[u8]) -> BinderResult<bool> {
         Ok(if let Err(e) = self.do_verify(key_blob, public_key) {
             warn!("Signing key verification failed: {}", e.to_string());
             false
@@ -102,18 +97,10 @@ impl CompOsKeyService {
     fn new(keystore_service: &Strong<dyn IKeystoreService>) -> Self {
         Self {
             random: SystemRandom::new(),
-            state: Mutex::new(State {
-                security_level: keystore_service
-                    .getSecurityLevel(SecurityLevel::TRUSTED_ENVIRONMENT)
-                    .unwrap(),
-            }),
+            security_level: keystore_service
+                .getSecurityLevel(SecurityLevel::TRUSTED_ENVIRONMENT)
+                .unwrap(),
         }
-    }
-
-    fn security_level(&self) -> Strong<dyn IKeystoreSecurityLevel> {
-        // We need the Mutex because Strong<_> isn't sync. But we don't need to keep it locked
-        // to make the call, once we've cloned the pointer.
-        self.state.lock().unwrap().security_level.clone()
     }
 
     fn do_generate(&self) -> Result<CompOsKeyData> {
@@ -124,7 +111,7 @@ impl CompOsKeyService {
         let entropy = [];
 
         let key_metadata = self
-            .security_level()
+            .security_level
             .generateKey(&KEY_DESCRIPTOR, attestation_key, &key_parameters, flags, &entropy)
             .context("Generating key failed")?;
 
@@ -154,7 +141,7 @@ impl CompOsKeyService {
         let forced = false;
 
         let response = self
-            .security_level()
+            .security_level
             .createOperation(&key_descriptor, &operation_parameters, forced)
             .context("Creating key failed")?;
         let operation = scopeguard::guard(
