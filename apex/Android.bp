@@ -54,6 +54,9 @@ apex {
         "mk_cdisk",
         "mk_payload",
     ],
+    java_libs: [
+        "android.system.virtualmachine",
+    ],
     prebuilts: [
         "com.android.virt.init.rc",
         "microdroid.json",
