@@ -57,6 +57,8 @@ import java.util.zip.ZipFile;
 public class MicrodroidTestCase extends BaseHostJUnit4Test {
     private static final String TEST_ROOT = "/data/local/tmp/virt/";
     private static final String VIRT_APEX = "/apex/com.android.virt/";
+    private static final String APK_NAME = "MicrodroidTestApp.apk";
+    private static final String PACKAGE_NAME = "com.android.microdroid.test";
     private static final int TEST_VM_ADB_PORT = 8000;
     private static final String MICRODROID_SERIAL = "localhost:" + TEST_VM_ADB_PORT;
 
@@ -66,10 +68,8 @@ public class MicrodroidTestCase extends BaseHostJUnit4Test {
 
     @Test
     public void testMicrodroidBoots() throws Exception {
-        final String apkName = "MicrodroidTestApp.apk";
-        final String packageName = "com.android.microdroid.test";
         final String configPath = "assets/vm_config.json"; // path inside the APK
-        final String cid = startMicrodroid(apkName, packageName, configPath);
+        final String cid = startMicrodroid(APK_NAME, PACKAGE_NAME, configPath);
         adbConnectToMicrodroid(cid, MICRODROID_BOOT_TIMEOUT_MINUTES);
 
         // Check if it actually booted by reading a sysprop.
@@ -331,6 +331,8 @@ public class MicrodroidTestCase extends BaseHostJUnit4Test {
         // disconnect from microdroid
         tryRunOnHost("adb", "disconnect", MICRODROID_SERIAL);
 
+        getDevice().installPackage(findTestFile(APK_NAME), /* reinstall */ false);
+
         // clear the log
         tryRunOnAndroid("logcat", "-c");
     }
@@ -344,5 +346,7 @@ public class MicrodroidTestCase extends BaseHostJUnit4Test {
         tryRunOnAndroid("killall", "crosvm");
         tryRunOnAndroid("rm", "-rf", "/data/misc/virtualizationservice/*");
         tryRunOnAndroid("stop", "virtualizationservice");
+
+        getDevice().uninstallPackage(PACKAGE_NAME);
     }
 }
