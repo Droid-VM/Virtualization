@@ -16,6 +16,23 @@
       "message": "I don\u0027t have enough knowledge to review this code. From the pure language point of view, this looks fine to me (thus +1), but I don\u0027t understand what is really going on here.\n\nCan you invite a better reviewer?\n\nIn addition, it would be nice if there is any material that I can use to learn more about keymint for future understanding and reviews. Do you have a link?",
       "revId": "44b9f96fd3e92a8f22720cd4fa6a547fc0a3a79b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ddb2e90_314ffb69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-06-28T15:39:21Z",
+      "side": 1,
+      "message": "For the time being, we\u0027ll use a software KM inside the VM with keyblobs encrypted with a VM-derived secret that can be safely stored outside of the VM. This change adapts a copy of the reference implementation to use encrypted keyblob rather than the integrity assured keyblobs that are usually used. Hooking it up to that VM\u0027s secret will be a future step (see the TODOs).",
+      "revId": "44b9f96fd3e92a8f22720cd4fa6a547fc0a3a79b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
