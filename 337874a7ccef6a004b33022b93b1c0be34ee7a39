@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29824238_751e57f5",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-28T18:14:48Z",
+      "side": 1,
+      "message": "Is this optional/extra information for KM\u0027s key generation?  Or do we need to add something here later (TODO/bug would be nice in that case)?  I\u0027d think KM wouldn\u0027t generate the key deterministically, but just want to be sure.",
+      "range": {
+        "startLine": 124,
+        "startChar": 12,
+        "endLine": 124,
+        "endChar": 25
+      },
+      "revId": "337874a7ccef6a004b33022b93b1c0be34ee7a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "164f7326_4a66b8ca",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-28T18:14:48Z",
+      "side": 1,
+      "message": "I wonder where the VM identity is injected, such that only the key generated here is valid (i.e. Android can\u0027t give us another key from someone else).  Is this done by the VM\u0027s Keystore?",
+      "range": {
+        "startLine": 128,
+        "startChar": 13,
+        "endLine": 128,
+        "endChar": 24
+      },
+      "revId": "337874a7ccef6a004b33022b93b1c0be34ee7a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
