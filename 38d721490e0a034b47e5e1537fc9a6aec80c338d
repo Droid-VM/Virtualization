@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eb17f7a_44eebcb7",
+        "filename": "microdroid/payload/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-28T01:02:23Z",
+      "side": 1,
+      "message": "microdroid_manager uses this via libmicrodroid_metadata.",
+      "parentUuid": "1e74d3cb_1825b023",
+      "revId": "38d721490e0a034b47e5e1537fc9a6aec80c338d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "803d2678_1f98dadd",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c64bc7ef_cfcd9928",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-28T01:02:23Z",
+      "side": 1,
+      "message": "Oh, right. Thanks. Done.",
+      "parentUuid": "803d2678_1f98dadd",
+      "range": {
+        "startLine": 113,
+        "startChar": 28,
+        "endLine": 113,
+        "endChar": 89
+      },
+      "revId": "38d721490e0a034b47e5e1537fc9a6aec80c338d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0462d33_ed61c9d2",
@@ -54,6 +96,30 @@
       "writtenOn": "2021-06-28T00:06:08Z",
       "side": 1,
       "message": "Import anyhow::Result and use Result\u003cT\u003e instead.",
+      "range": {
+        "startLine": 30,
+        "startChar": 35,
+        "endLine": 30,
+        "endChar": 57
+      },
+      "revId": "38d721490e0a034b47e5e1537fc9a6aec80c338d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf2ca000_787af54d",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-28T01:02:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0462d33_ed61c9d2",
       "range": {
         "startLine": 30,
         "startChar": 35,
