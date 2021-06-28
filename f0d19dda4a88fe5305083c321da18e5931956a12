@@ -94,6 +94,30 @@
       },
       "revId": "f0d19dda4a88fe5305083c321da18e5931956a12",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac45f770_15a7d6d3",
+        "filename": "authfs/TEST_MAPPING",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-28T05:25:01Z",
+      "side": 0,
+      "message": "Well, seems that this was added by aosp/1708506, when root TEST_MAPPING didn\u0027t exist. After that, root TEST_MAPPING was added by aosp/1736239, and then we have had two MicrodroidHostTestCases postsubmit.\n\nOkay now this removal seems reasonable.",
+      "parentUuid": "a6174c48_25906f56",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 5
+      },
+      "revId": "f0d19dda4a88fe5305083c321da18e5931956a12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
