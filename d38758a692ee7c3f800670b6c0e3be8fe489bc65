@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06f56aa3_37d19e71",
+        "filename": "compositediskconfig/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-29T02:01:52Z",
+      "side": 1,
+      "message": "Can I remove \"path\" and \"paths\" in a separate change? It\u0027s because, in the chain of changes, at this level, changing other parts so that they work with \"paths\" would be worthless. For example, README and a few config/payload json files should be changed as well, but payload jsons will be gone in the other change. So.. it\u0027d be better I could merge this first and then remove \"path\".",
+      "parentUuid": "677fa590_1e16e8ca",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "d38758a692ee7c3f800670b6c0e3be8fe489bc65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c526e43_c984db4b",
         "filename": "compositediskconfig/src/lib.rs",
         "patchSetId": 5
