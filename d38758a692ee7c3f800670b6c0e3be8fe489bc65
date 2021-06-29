@@ -68,6 +68,30 @@
       },
       "revId": "d38758a692ee7c3f800670b6c0e3be8fe489bc65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18d3cff5_f516405b",
+        "filename": "vm/src/config.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-06-29T01:30:43Z",
+      "side": 1,
+      "message": "Yeah, I did it once, but reverted for simpler JSON. In microdroid.json, it looks weird with paths because every partition should set  `\"paths\": [\"a-single-file.img\"]`. And as Andrew pointed out, multiple-file partition is a work-around solution and in most cases a single-file-backed partition is reasonable. If you and Andrew seem to agree with simpler code than simpler JSON, I probably need to change this. ;-)",
+      "parentUuid": "3a8dc37c_c14caadd",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 5
+      },
+      "revId": "d38758a692ee7c3f800670b6c0e3be8fe489bc65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
