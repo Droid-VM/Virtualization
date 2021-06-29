@@ -16,6 +16,24 @@
       "message": "I\u0027m curious if we can fail fast. For example, when something is wrong, we should wait this much to see the failure. It would be nice when something is really wrong, then fail fast, and tolerant for the flakiness of timeout.",
       "revId": "b4ec3135cfb9ce9fcd592e6eb5bfa4a9f8db14d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4fb37b2_4b26c864",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-29T06:17:01Z",
+      "side": 1,
+      "message": "Once microdroid boots up, we can (and do) fail fast. Until then, we have to wait because we can\u0027t be sure if the failure is simply because microdroid hasn\u0027t booted up or not.",
+      "parentUuid": "fa441923_064a4d02",
+      "revId": "b4ec3135cfb9ce9fcd592e6eb5bfa4a9f8db14d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
