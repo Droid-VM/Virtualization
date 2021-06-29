@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "677fa590_1e16e8ca",
+        "filename": "compositediskconfig/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-29T01:05:11Z",
+      "side": 1,
+      "message": "Can we delete this in favor of the below?",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "d38758a692ee7c3f800670b6c0e3be8fe489bc65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c526e43_c984db4b",
+        "filename": "compositediskconfig/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-29T01:05:11Z",
+      "side": 1,
+      "message": "The description is the same as above. We should also explain when multiple files are required for a partition.",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 44
+      },
+      "revId": "d38758a692ee7c3f800670b6c0e3be8fe489bc65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a8dc37c_c14caadd",
+        "filename": "vm/src/config.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-29T01:05:11Z",
+      "side": 1,
+      "message": "We can simplify this by mandating \u0027paths\u0027 only.",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 5
+      },
+      "revId": "d38758a692ee7c3f800670b6c0e3be8fe489bc65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
