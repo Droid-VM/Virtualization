@@ -16,6 +16,75 @@
       "message": "Note that this is still blocked on ag/15127090 and aosp/1749510",
       "revId": "8fb3462d3dc61e57b713d994f4c8a46e8e0eab79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e129c0ce_6cf198c9",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-29T08:20:18Z",
+      "side": 1,
+      "message": "put this before \"logcat -c\"?",
+      "range": {
+        "startLine": 337,
+        "startChar": 0,
+        "endLine": 337,
+        "endChar": 82
+      },
+      "revId": "8fb3462d3dc61e57b713d994f4c8a46e8e0eab79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2305ba7_7c46bd6e",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-29T08:20:18Z",
+      "side": 1,
+      "message": "I\u0027m not sure how findTestFile finds the built APK, but... except for that LGTM",
+      "range": {
+        "startLine": 337,
+        "startChar": 35,
+        "endLine": 337,
+        "endChar": 47
+      },
+      "revId": "8fb3462d3dc61e57b713d994f4c8a46e8e0eab79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a0eed20_6b684686",
+        "filename": "virtualizationservice/aidl/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-06-29T08:20:18Z",
+      "side": 1,
+      "message": "via?",
+      "range": {
+        "startLine": 8,
+        "startChar": 81,
+        "endLine": 8,
+        "endChar": 84
+      },
+      "revId": "8fb3462d3dc61e57b713d994f4c8a46e8e0eab79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
