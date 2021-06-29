@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93edf9f5_3977e2e9",
+        "filename": "compositediskconfig/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-29T02:47:28Z",
+      "side": 1,
+      "message": "A separate change is fine to me.",
+      "parentUuid": "06f56aa3_37d19e71",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "d38758a692ee7c3f800670b6c0e3be8fe489bc65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c526e43_c984db4b",
@@ -108,6 +132,30 @@
       "side": 1,
       "message": "Yeah, I did it once, but reverted for simpler JSON. In microdroid.json, it looks weird with paths because every partition should set  `\"paths\": [\"a-single-file.img\"]`. And as Andrew pointed out, multiple-file partition is a work-around solution and in most cases a single-file-backed partition is reasonable. If you and Andrew seem to agree with simpler code than simpler JSON, I probably need to change this. ;-)",
       "parentUuid": "3a8dc37c_c14caadd",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 5
+      },
+      "revId": "d38758a692ee7c3f800670b6c0e3be8fe489bc65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c88083ca_d2d51e89",
+        "filename": "vm/src/config.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-29T02:47:28Z",
+      "side": 1,
+      "message": "\"path\": \"image.img\" v.s. \"paths\": [\"image.img\"]\n\nWhy is the latter considered more complicated? Only three characters more.\n\nI also don\u0027t understand why do we pursue the simplicity of the JSON, given that it\u0027s only used inside the virt APEX; it\u0027s an implementation detail. Apps are expected to use the (not-yet-existing) Java APIs (even when microdroid is not used).",
+      "parentUuid": "18d3cff5_f516405b",
       "range": {
         "startLine": 118,
         "startChar": 0,
