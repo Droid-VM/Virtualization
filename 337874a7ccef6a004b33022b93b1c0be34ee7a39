@@ -93,6 +93,30 @@
       },
       "revId": "337874a7ccef6a004b33022b93b1c0be34ee7a39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae46da09_a6f4e02d",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-06-29T08:11:35Z",
+      "side": 1,
+      "message": "In fact, it\u0027ll be one layer lower in keymint. The keyblobs it produces will be cryptographically bound to a VM secret and, as a user of keystore, you won\u0027t have to worry about it. We\u0027ll be able to replace the keymint implementation, how keyblobs are bound to the VM etc, but that will all be hidden from VM payloads using keystore.",
+      "parentUuid": "ad74a854_8d3e81ab",
+      "range": {
+        "startLine": 128,
+        "startChar": 13,
+        "endLine": 128,
+        "endChar": 24
+      },
+      "revId": "337874a7ccef6a004b33022b93b1c0be34ee7a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
