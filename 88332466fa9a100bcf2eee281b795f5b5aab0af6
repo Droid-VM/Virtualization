@@ -22,6 +22,30 @@
       },
       "revId": "88332466fa9a100bcf2eee281b795f5b5aab0af6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d04f370f_63bb597e",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-06-29T00:46:22Z",
+      "side": 1,
+      "message": "runOnAndroid throws an Exception (not just RuntimeException which is an unchecked exception), and all checked exceptions must be caught.",
+      "parentUuid": "b8774172_243c2369",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 259,
+        "endChar": 21
+      },
+      "revId": "88332466fa9a100bcf2eee281b795f5b5aab0af6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
