@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afc89688_e99e0a29",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-06-29T08:04:48Z",
+      "side": 1,
+      "message": "This is additional entropy, and it is totally optional here. (https://source.corp.google.com/android/system/hardware/interfaces/keystore2/aidl/android/system/keystore2/IKeystoreSecurityLevel.aidl;rcl\u003d421a17851da37f1c47e765001ec3d3b68d066631;l\u003d116)\nWe have a TRNG for the VM on our dependency list.",
+      "parentUuid": "29824238_751e57f5",
+      "range": {
+        "startLine": 124,
+        "startChar": 12,
+        "endLine": 124,
+        "endChar": 25
+      },
+      "revId": "337874a7ccef6a004b33022b93b1c0be34ee7a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "164f7326_4a66b8ca",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-06-28T18:14:48Z",
       "side": 1,
       "message": "I wonder where the VM identity is injected, such that only the key generated here is valid (i.e. Android can\u0027t give us another key from someone else).  Is this done by the VM\u0027s Keystore?",
+      "range": {
+        "startLine": 128,
+        "startChar": 13,
+        "endLine": 128,
+        "endChar": 24
+      },
+      "revId": "337874a7ccef6a004b33022b93b1c0be34ee7a39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad74a854_8d3e81ab",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-06-29T08:04:48Z",
+      "side": 1,
+      "message": "That\u0027s on Andrew\u0027s plate, and is a work in progress. Yeah, my understanding is it will be a part of keystore in the VM.\nSee e.g. aosp/1742970.",
+      "parentUuid": "164f7326_4a66b8ca",
       "range": {
         "startLine": 128,
         "startChar": 13,
