@@ -63,6 +63,24 @@
       "message": "Is this comment still relevant?",
       "revId": "ba0a765f7f07e2ecb9dc9648ce1a4067e719b5f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0857d7bf_b651481c",
+        "filename": "authfs/src/file/remote_file.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-06-30T21:54:37Z",
+      "side": 1,
+      "message": "Kind of. I\u0027d at least keep a reminder here since the struct needs to be Sync to be used by FUSE, which isn\u0027t obvious here a distant away.",
+      "parentUuid": "913959a1_31742ec5",
+      "revId": "ba0a765f7f07e2ecb9dc9648ce1a4067e719b5f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
