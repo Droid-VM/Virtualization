@@ -7,8 +7,8 @@ java_test_host {
     srcs: ["java/**/*.java"],
     test_suites: ["device-tests"],
     libs: [
+        "VirtualizationTestHelper",
         "tradefed",
-        "compatibility-tradefed",
     ],
     data: [":MicrodroidTestApp.signed"],
 }
