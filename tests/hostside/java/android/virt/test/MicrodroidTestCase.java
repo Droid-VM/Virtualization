@@ -29,15 +29,13 @@ import org.junit.runner.RunWith;
 
 @RunWith(DeviceJUnit4ClassRunner.class)
 public class MicrodroidTestCase extends VirtualizationTestCaseBase {
-    private static final long MICRODROID_ADB_CONNECT_TIMEOUT_MINUTES = 5;
-
     @Test
     public void testMicrodroidBoots() throws Exception {
         final String apkName = "MicrodroidTestApp.apk";
         final String packageName = "com.android.microdroid.test";
         final String configPath = "assets/vm_config.json"; // path inside the APK
         final String cid = startMicrodroid(apkName, packageName, configPath);
-        adbConnectToMicrodroid(cid, MICRODROID_ADB_CONNECT_TIMEOUT_MINUTES);
+        adbConnectToMicrodroid(cid);
 
         // Test writing to /data partition
         runOnMicrodroid("echo MicrodroidTest > /data/local/tmp/test.txt");
