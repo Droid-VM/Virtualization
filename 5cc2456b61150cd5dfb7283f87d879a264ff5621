@@ -87,6 +87,24 @@
       "message": "I think the idea is that we don\u0027t depend on this directly, only on the parts that are re-exported via the AIDL library, to avoid depending on internal implementation details.",
       "revId": "5cc2456b61150cd5dfb7283f87d879a264ff5621",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9758d28_6efa27f6",
+        "filename": "compos/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-06-30T12:36:54Z",
+      "side": 1,
+      "message": "Hmm. That is certainly what https://groups.google.com/a/google.com/g/aidl-bugs/c/HRCmgwOmkQE/m/b8aGVFOwAgAJ says.\n\nOTOH there\u0027s also http://b/184872979#comment22. (This code will be in the PVM, although it isn\u0027t yet.)\n\nI\u0027ll revert it for now anyway.\n\nMy reasons for doing it this way:\n- It seems odd to import these from one specific AIDL when I\u0027m using multiple.\n- VSCode refuses to believe the generated code exists, whereas when I directly use libbinder it works rather nicely.",
+      "parentUuid": "fb2cc640_b2aa0335",
+      "revId": "5cc2456b61150cd5dfb7283f87d879a264ff5621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
