@@ -33,6 +33,360 @@
       "message": "Andrew, can you take a look? You and Jiyong have a concern about Partition\u0027s path/paths. I\u0027ll remove path as a separate change.",
       "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d5b5de8_64b05873",
+        "filename": "microdroid/README.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T16:09:08Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be necessary anymore.",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce19cd23_012d2be6",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineAppConfig.aidl",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T16:09:08Z",
+      "side": 1,
+      "message": "Passing a path to a file within an APK here seems a bit weird. Why not just pass the config itself, as a parcelable? It could be constructed on the fly rather than in a static file, even.",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1823418a_f54d1851",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineConfig.aidl",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T16:09:08Z",
+      "side": 1,
+      "message": "Nit: No need to capitalise APP, it\u0027s not an acronym.",
+      "range": {
+        "startLine": 23,
+        "startChar": 41,
+        "endLine": 23,
+        "endChar": 44
+      },
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0bb0de6_bfe50daf",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl",
+        "patchSetId": 11
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T16:09:08Z",
+      "side": 1,
+      "message": "Nit: this shouldn\u0027t be a capital letter.",
+      "range": {
+        "startLine": 20,
+        "startChar": 8,
+        "endLine": 20,
+        "endChar": 9
+      },
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3b8a362_1c921d9a",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T16:09:08Z",
+      "side": 1,
+      "message": "This is a bit ugly, maybe you could make `config` a `Cow\u003cRawVirtualMachineConfig\u003e` instead?",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa9a61ed_e4f07506",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T16:09:08Z",
+      "side": 1,
+      "message": "I\u0027m a bit wary of unwrapping here, is there any way the Options could be `None`? If so, use `.context(...)?` instead.",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98e6f0e4_0d45e86e",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T16:09:08Z",
+      "side": 1,
+      "message": "Nit: `use zip::ZipArchive` above so don\u0027t need the package name here.",
+      "range": {
+        "startLine": 292,
+        "startChar": 22,
+        "endLine": 292,
+        "endChar": 37
+      },
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b0661c8_85874d3b",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T16:09:08Z",
+      "side": 1,
+      "message": "Constructing a `PathBuf` from untrusted input like this seems like a bad idea. What happens if `os_name` contains \"..\" or something? Using `PathBuf::set_file_name` and `set_extension` might be better, but check. An explicit allowlist would be safer.",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51eaf78d_cff10443",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T16:09:08Z",
+      "side": 1,
+      "message": "I guess this is why you needed to add `disks` to the config JSON structs. Why not just call `make_composite_image` directly to build the payload image?",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1db77c0f_3ea4b419",
+        "filename": "virtualizationservice/src/composite.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T16:09:08Z",
+      "side": 1,
+      "message": "Use this rather than calling align_to_power_of_2(..., PARTITION_SIZE_SHIFT) below.",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c46c01f_e611263b",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T16:09:08Z",
+      "side": 1,
+      "message": "If you really want to do this here, you\u0027ll need to add an SELinux policy to allow it first.",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2d2b568_a09fc300",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T16:09:08Z",
+      "side": 1,
+      "message": "This appears to be untrusted input. Is it possible for a malicious client to make `pm` do something bad with VirtualizationService\u0027s privileges by passing a bad string here?",
+      "range": {
+        "startLine": 31,
+        "startChar": 52,
+        "endLine": 31,
+        "endChar": 64
+      },
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a5662b8_e5543354",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T16:09:08Z",
+      "side": 1,
+      "message": "Document what this return value means.",
+      "range": {
+        "startLine": 39,
+        "startChar": 61,
+        "endLine": 39,
+        "endChar": 65
+      },
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d81cba60_74a5027a",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T16:09:08Z",
+      "side": 1,
+      "message": "integrity",
+      "range": {
+        "startLine": 50,
+        "startChar": 15,
+        "endLine": 50,
+        "endChar": 25
+      },
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b029489f_c8e40d32",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T16:09:08Z",
+      "side": 1,
+      "message": "You don\u0027t need to make a separate file for each partition, there can just be a single file used for all of them. Or even better, can you just use /dev/zero?",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb6e0975_75dc18d9",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T16:09:08Z",
+      "side": 1,
+      "message": "Nit: Here and below, using `.to_owned()` or `.to_string()` is neater IMO, and we use `.to_owned()` elsewhere in VirtualizationService.",
+      "range": {
+        "startLine": 86,
+        "startChar": 44,
+        "endLine": 86,
+        "endChar": 68
+      },
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff28950d_40e7f599",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T16:09:08Z",
+      "side": 1,
+      "message": "Move this out to a separate named function, it can take a reference to filler_count.",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2ecbdf7_813ee471",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T16:09:08Z",
+      "side": 1,
+      "message": "This can now be {}, can\u0027t it?",
+      "range": {
+        "startLine": 96,
+        "startChar": 30,
+        "endLine": 96,
+        "endChar": 34
+      },
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
