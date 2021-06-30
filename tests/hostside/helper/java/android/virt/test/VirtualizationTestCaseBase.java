@@ -23,6 +23,8 @@ import static org.junit.Assert.fail;
 import static org.junit.Assume.assumeThat;
 
 import com.android.compatibility.common.tradefed.build.CompatibilityBuildHelper;
+import com.android.tradefed.device.DeviceNotAvailableException;
+import com.android.tradefed.log.LogUtil.CLog;
 import com.android.tradefed.testtype.junit4.BaseHostJUnit4Test;
 import com.android.tradefed.util.CommandResult;
 import com.android.tradefed.util.CommandStatus;
@@ -96,7 +98,7 @@ public class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
     }
 
     // Run a shell command on Android. the default timeout is 2 min by tradefed
-    private String runOnAndroid(String... cmd) throws Exception {
+    public String runOnAndroid(String... cmd) throws DeviceNotAvailableException {
         CommandResult result = getDevice().executeShellV2Command(join(cmd));
         if (result.getStatus() != CommandStatus.SUCCESS) {
             fail(join(cmd) + " has failed: " + result);
@@ -104,10 +106,15 @@ public class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
         return result.getStdout().trim();
     }
 
-    // Same as runOnAndroid, but failure is not an error
-    private String tryRunOnAndroid(String... cmd) throws Exception {
+    // Same as runOnAndroid, but returns a boolean for success or error.
+    public boolean tryRunOnAndroid(String... cmd) throws DeviceNotAvailableException {
         CommandResult result = getDevice().executeShellV2Command(join(cmd));
-        return result.getStdout().trim();
+        if (result.getStatus() == CommandStatus.SUCCESS) {
+            return true;
+        } else {
+            CLog.d("Stderr: " + result.getStderr());
+            return false;
+        }
     }
 
     private String runOnAndroidWithTimeout(long timeoutMillis, String... cmd) throws Exception {
@@ -125,14 +132,28 @@ public class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
 
     // Run a shell command on Microdroid
     public String runOnMicrodroid(String... cmd) {
-        final long timeout = 30000; // 30 sec. Microdroid is extremely slow on GCE-on-CF.
-        CommandResult result =
-                RunUtil.getDefault()
-                        .runTimedCmd(timeout, "adb", "-s", MICRODROID_SERIAL, "shell", join(cmd));
+        CommandResult result = runOnMicrodroidInternal(cmd);
         if (result.getStatus() != CommandStatus.SUCCESS) {
             fail(join(cmd) + " has failed: " + result);
         }
         return result.getStdout().trim();
+    }
+
+    // Same as runOnMicrodroid, but returns null on error.
+    public String tryRunOnMicrodroid(String... cmd) {
+        CommandResult result = runOnMicrodroidInternal(cmd);
+        if (result.getStatus() == CommandStatus.SUCCESS) {
+            return result.getStdout().trim();
+        } else {
+            CLog.w(join(cmd) + " has failed (ok): " + result);
+            return null;
+        }
+    }
+
+    private CommandResult runOnMicrodroidInternal(String... cmd) {
+        final long timeout = 30000; // 30 sec. Microdroid is extremely slow on GCE-on-CF.
+        return RunUtil.getDefault()
+                .runTimedCmd(timeout, "adb", "-s", MICRODROID_SERIAL, "shell", join(cmd));
     }
 
     private String join(String... strs) {
@@ -203,6 +224,11 @@ public class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
     public void shutdownMicrodroid(String cid) throws Exception {
         // Shutdown microdroid
         runOnAndroid(VIRT_APEX + "bin/vm", "stop", cid);
+    }
+
+    public void rootMicrodroid() throws Exception {
+        runOnHost("adb", "-s", MICRODROID_SERIAL, "root");
+        runOnHost("adb", "-s", MICRODROID_SERIAL, "wait-for-device");
     }
 
     // Establish an adb connection to microdroid by letting Android forward the connection to
