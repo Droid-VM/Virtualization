@@ -70,6 +70,23 @@
       },
       "revId": "5cc2456b61150cd5dfb7283f87d879a264ff5621",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb2cc640_b2aa0335",
+        "filename": "compos/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-06-30T11:18:32Z",
+      "side": 1,
+      "message": "I think the idea is that we don\u0027t depend on this directly, only on the parts that are re-exported via the AIDL library, to avoid depending on internal implementation details.",
+      "revId": "5cc2456b61150cd5dfb7283f87d879a264ff5621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
