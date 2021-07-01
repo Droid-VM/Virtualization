@@ -570,6 +570,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1487d92b_9c661faa",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-01T12:36:02Z",
+      "side": 1,
+      "message": "Correction.\n\nThis doesn\u0027t work because some APEXes are renamed to com.google.* and PM doesn\u0027t know the com.android.* names.",
+      "parentUuid": "ee0c6b9f_ae3593fe",
+      "range": {
+        "startLine": 31,
+        "startChar": 52,
+        "endLine": 31,
+        "endChar": 64
+      },
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a5662b8_e5543354",
         "filename": "virtualizationservice/src/payload.rs",
         "patchSetId": 11
