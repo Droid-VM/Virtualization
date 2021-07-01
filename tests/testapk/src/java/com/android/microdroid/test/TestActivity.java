@@ -17,8 +17,28 @@ package com.android.microdroid.test;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.system.virtualmachine.VirtualMachine;
+import android.system.virtualmachine.VirtualMachineConfig;
+import android.system.virtualmachine.VirtualMachineException;
+import android.system.virtualmachine.VirtualMachineManager;
 
 public class TestActivity extends Activity {
+    private VirtualMachine mVm;
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {}
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        try {
+            VirtualMachineConfig config =
+                    new VirtualMachineConfig.Builder(this, "assets/vm_config.json")
+                            .setIdsigPath("/data/local/tmp/virt/MicrodroidTestApp.apk.idsig")
+                            .build();
+
+            VirtualMachineManager vmm = VirtualMachineManager.getInstance(this);
+            this.mVm = vmm.create("my_vm", config);
+            this.mVm.run();
+        } catch (VirtualMachineException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
