@@ -3,15 +3,15 @@ package {
 }
 
 rust_library {
-    name: "libmicrodroid_payload_config",
+    name: "libmicrodroid_metadata",
     host_supported: true,
-    crate_name: "microdroid_payload_config",
+    crate_name: "microdroid_metadata",
     srcs: ["src/lib.rs"],
     prefer_rlib: true,
     edition: "2018",
     rustlibs: [
-        "libserde_json",
-        "libserde",
+        "libmicrodroid_metadata_proto_rust",
+        "libprotobuf",
     ],
     apex_available: [
         "com.android.virt",
