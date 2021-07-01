@@ -18,7 +18,6 @@ package android.virt.test;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -31,25 +30,17 @@ import com.android.tradefed.util.CommandResult;
 import com.android.tradefed.util.CommandStatus;
 import com.android.tradefed.util.RunUtil;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.zip.ZipFile;
 
 @RunWith(DeviceJUnit4ClassRunner.class)
 public class MicrodroidTestCase extends BaseHostJUnit4Test {
@@ -132,7 +123,7 @@ public class MicrodroidTestCase extends BaseHostJUnit4Test {
         return result.getStdout().trim();
     }
 
-    // Run a shell command on Android
+    // Run a shell command on Android. the default timeout is 2 min by tradefed
     private String runOnAndroid(String... cmd) throws Exception {
         CommandResult result = getDevice().executeShellV2Command(join(cmd));
         if (result.getStatus() != CommandStatus.SUCCESS) {
@@ -141,9 +132,22 @@ public class MicrodroidTestCase extends BaseHostJUnit4Test {
         return result.getStdout().trim();
     }
 
-    // Same as runOnAndroid, but failutre is not an error
+    // Same as runOnAndroid, but failure is not an error
     private String tryRunOnAndroid(String... cmd) throws Exception {
         CommandResult result = getDevice().executeShellV2Command(join(cmd));
+        return result.getStdout().trim();
+    }
+
+    private String runOnAndroidWithTimeout(long timeoutMillis, String... cmd) throws Exception {
+        CommandResult result =
+                getDevice()
+                        .executeShellV2Command(
+                                join(cmd),
+                                timeoutMillis,
+                                java.util.concurrent.TimeUnit.MILLISECONDS);
+        if (result.getStatus() != CommandStatus.SUCCESS) {
+            fail(join(cmd) + " has failed: " + result);
+        }
         return result.getStdout().trim();
     }
 
@@ -163,25 +167,15 @@ public class MicrodroidTestCase extends BaseHostJUnit4Test {
         return String.join(" ", Arrays.asList(strs));
     }
 
-    private String createPayloadImage(String apkName, String packageName, String configPath)
+    private File findTestFile(String name) throws Exception {
+        return (new CompatibilityBuildHelper(getBuild())).getTestFile(name);
+    }
+
+    private String startMicrodroid(String apkName, String packageName, String configPath)
             throws Exception {
+        // Install APK
         File apkFile = findTestFile(apkName);
         getDevice().installPackage(apkFile, /* reinstall */ true);
-
-        // Read the config file from the apk and parse it to know the list of APEXes needed
-        ZipFile apkAsZip = new ZipFile(apkFile);
-        InputStream is = apkAsZip.getInputStream(apkAsZip.getEntry(configPath));
-        String configString =
-                new BufferedReader(new InputStreamReader(is))
-                        .lines()
-                        .collect(Collectors.joining("\n"));
-        JSONObject configObject = new JSONObject(configString);
-        JSONArray apexes = configObject.getJSONArray("apexes");
-        List<String> apexNames = new ArrayList<>();
-        for (int i = 0; i < apexes.length(); i++) {
-            JSONObject anApex = apexes.getJSONObject(i);
-            apexNames.add(anApex.getString("name"));
-        }
 
         // Get the path to the installed apk. Note that
         // getDevice().getAppPackageInfo(...).getCodePath() doesn't work due to the incorrect
@@ -195,53 +189,37 @@ public class MicrodroidTestCase extends BaseHostJUnit4Test {
         final String apkIdsigPath = TEST_ROOT + apkName + ".idsig";
         getDevice().pushFile(idsigOnHost, apkIdsigPath);
 
-        // Create payload.json from the gathered data
-        JSONObject payloadObject = new JSONObject();
-        payloadObject.put("system_apexes", new JSONArray(apexNames));
-        payloadObject.put("payload_config_path", "/mnt/apk/" + configPath);
-        JSONObject apkObject = new JSONObject();
-        apkObject.put("name", packageName);
-        apkObject.put("path", apkPath);
-        apkObject.put("idsig_path", apkIdsigPath);
-        payloadObject.put("apk", apkObject);
-
-        // Copy the json file to Android
-        File payloadJsonOnHost = File.createTempFile("payload", "json");
-        FileWriter writer = new FileWriter(payloadJsonOnHost);
-        writer.write(payloadObject.toString());
-        writer.close();
-        final String payloadJson = TEST_ROOT + "payload.json";
-        getDevice().pushFile(payloadJsonOnHost, payloadJson);
-
-        // Finally run mk_payload to create payload.img
-        final String mkPayload = VIRT_APEX + "bin/mk_payload";
-        final String payloadImg = TEST_ROOT + "payload.img";
-        runOnAndroid(mkPayload, payloadJson, payloadImg);
-        assertThat(runOnAndroid("du", "-b", payloadImg), is(not("")));
-
-        // The generated files are owned by root. Allow the virtualizationservice to read them.
-        runOnAndroid("chmod", "go+r", TEST_ROOT + "payload*");
-
-        return payloadImg;
-    }
-
-    private File findTestFile(String name) throws Exception {
-        return (new CompatibilityBuildHelper(getBuild())).getTestFile(name);
-    }
-
-    private String startMicrodroid(String apkName, String packageName, String configPath)
-            throws Exception {
-        // Create payload.img
-        createPayloadImage(apkName, packageName, configPath);
+        final String logPath = TEST_ROOT + "log.txt";
 
         // Run the VM
         runOnAndroid("start", "virtualizationservice");
         String ret =
                 runOnAndroid(
                         VIRT_APEX + "bin/vm",
-                        "run",
+                        "run-app",
                         "--daemonize",
-                        VIRT_APEX + "etc/microdroid.json");
+                        "--log " + logPath,
+                        apkPath,
+                        apkIdsigPath,
+                        configPath);
+
+        // Redirect log.txt to logd using logwrapper
+        ExecutorService executor = Executors.newFixedThreadPool(1);
+        executor.execute(
+                () -> {
+                    try {
+                        // Keep redirecting sufficiently long enough
+                        runOnAndroidWithTimeout(
+                                MICRODROID_BOOT_TIMEOUT_MINUTES * 60 * 1000,
+                                "logwrapper",
+                                "tail",
+                                "-f",
+                                "-n +0",
+                                logPath);
+                    } catch (Exception e) {
+                        // Consume
+                    }
+                });
 
         // Retrieve the CID from the vm tool output
         Pattern pattern = Pattern.compile("with CID (\\d+)");
