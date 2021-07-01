@@ -522,6 +522,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "83478adc_a996d1ca",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-01T11:24:20Z",
+      "side": 1,
+      "message": "That\u0027s true, but it\u0027s still an arbitrary string. What does `pm` do with it? Could it be abused somehow?",
+      "parentUuid": "b9d22f4c_c2210392",
+      "range": {
+        "startLine": 31,
+        "startChar": 52,
+        "endLine": 31,
+        "endChar": 64
+      },
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a5662b8_e5543354",
         "filename": "virtualizationservice/src/payload.rs",
         "patchSetId": 11
@@ -727,6 +751,24 @@
       "side": 1,
       "message": "Done. is lambda not recommended?",
       "parentUuid": "ff28950d_40e7f599",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9300e90_cad5c392",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-01T11:24:20Z",
+      "side": 1,
+      "message": "I just think it\u0027s easier to read as a separate function.",
+      "parentUuid": "fb0aa30f_9869d658",
       "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
