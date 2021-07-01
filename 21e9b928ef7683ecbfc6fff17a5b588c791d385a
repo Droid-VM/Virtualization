@@ -35,6 +35,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33581390_c523812b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "Andrew, aosp/1753920 ",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d5b5de8_64b05873",
@@ -48,6 +65,24 @@
       "writtenOn": "2021-06-30T16:09:08Z",
       "side": 1,
       "message": "This shouldn\u0027t be necessary anymore.",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d0605f9_4869cf36",
+        "filename": "microdroid/README.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d5b5de8_64b05873",
       "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -69,6 +104,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eacea8af_977547d6",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineAppConfig.aidl",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "afaik, we mandate the app should have a config json within the apk. So that in microdroid, it\u0027s accessed via zipfuse filesystem. And in payload disks\u0027 metadata partition should point the path to the config json. So.. I passed this as a string. But yeah we can re-think this and change if there\u0027s a better option.",
+      "parentUuid": "ce19cd23_012d2be6",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1823418a_f54d1851",
@@ -82,6 +135,30 @@
       "writtenOn": "2021-06-30T16:09:08Z",
       "side": 1,
       "message": "Nit: No need to capitalise APP, it\u0027s not an acronym.",
+      "range": {
+        "startLine": 23,
+        "startChar": 41,
+        "endLine": 23,
+        "endChar": 44
+      },
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6a3723d_29dc2388",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineConfig.aidl",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1823418a_f54d1851",
       "range": {
         "startLine": 23,
         "startChar": 41,
@@ -115,6 +192,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1a45e45_f21d4d1f",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineRawConfig.aidl",
+        "patchSetId": 11
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0bb0de6_bfe50daf",
+      "range": {
+        "startLine": 20,
+        "startChar": 8,
+        "endLine": 20,
+        "endChar": 9
+      },
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3b8a362_1c921d9a",
@@ -132,6 +233,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a33a6639_d7b54362",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "Cow requires Clone, but since config has ParcelFileDescriptor it can\u0027t be annotated with Clone. I added a small utility enum similar to Cow (can be Borrowed or Owned), but only handles AsRef.",
+      "parentUuid": "e3b8a362_1c921d9a",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa9a61ed_e4f07506",
@@ -145,6 +264,24 @@
       "writtenOn": "2021-06-30T16:09:08Z",
       "side": 1,
       "message": "I\u0027m a bit wary of unwrapping here, is there any way the Options could be `None`? If so, use `.context(...)?` instead.",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c056b9f_649682b3",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "No, there isn\u0027t. In AIDL, ParcelFileDesciptors are not @nullable.",
+      "parentUuid": "aa9a61ed_e4f07506",
       "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -172,6 +309,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "449715a8_0b72c0c5",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98e6f0e4_0d45e86e",
+      "range": {
+        "startLine": 292,
+        "startChar": 22,
+        "endLine": 292,
+        "endChar": 37
+      },
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b0661c8_85874d3b",
@@ -185,6 +346,24 @@
       "writtenOn": "2021-06-30T16:09:08Z",
       "side": 1,
       "message": "Constructing a `PathBuf` from untrusted input like this seems like a bad idea. What happens if `os_name` contains \"..\" or something? Using `PathBuf::set_file_name` and `set_extension` might be better, but check. An explicit allowlist would be safer.",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed27721e_0d773461",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "For now the only valid value would be \"microdroid\". Added the check(allowlist)",
+      "parentUuid": "6b0661c8_85874d3b",
       "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -206,6 +385,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9694fcc_158a9e5c",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "\"disks\" has been there since the beginning since VM requires multiple disks(os, data, payload...). I guess you mean \"Partition.paths(or images)\"? For now, as I explained, multiple-file partition is used by payload::make_disk_image so that we can compose \"APEX + its size\" as a single partition. My initial attempt was to call make_composite_image within payload::make_disk_image, but it turned out that this is way simpler because composite disks should have fd_mappings in any way, right?",
+      "parentUuid": "51eaf78d_cff10443",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1db77c0f_3ea4b419",
@@ -219,6 +416,24 @@
       "writtenOn": "2021-06-30T16:09:08Z",
       "side": 1,
       "message": "Use this rather than calling align_to_power_of_2(..., PARTITION_SIZE_SHIFT) below.",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e972468_ca8d8e5a",
+        "filename": "virtualizationservice/src/composite.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1db77c0f_3ea4b419",
       "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -263,6 +478,48 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9d22f4c_c2210392",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "On linux, the doc says \"Note that the argument is not passed through a shell, but given literally to the program\"\n\nBesides, this is a workaround until we have serde-xml-rs lib. (It\u0027s under review, yet).",
+      "parentUuid": "d2d2b568_a09fc300",
+      "range": {
+        "startLine": 31,
+        "startChar": 52,
+        "endLine": 31,
+        "endChar": 64
+      },
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1b1febd_6bcbf1c9",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "Running MicrodroidHostTestCases shows the following denial list. (including \"package_service\") I\u0027ll file a bug.\n\n```\n07-01 14:18:58.389  3158  3158 I Binder:3158_2: type\u003d1400 audit(0.0:157): avc: denied { read } for path\u003d\"/data/app/~~nP86FcMeD_iMcvBTw5nmBg\u003d\u003d/com.android.microdroid.test-2rueGLzSCD-DJrpuX0CNHw\u003d\u003d/base.apk\" dev\u003d\"dm-34\" ino\u003d2921 scontext\u003du:r:virtualizationservice:s0 tcontext\u003du:object_r:apk_data_file:s0 tclass\u003dfile permissive\u003d1\n07-01 14:18:58.389  3158  3158 I Binder:3158_2: type\u003d1400 audit(0.0:157): avc: denied { read } for path\u003d\"/data/local/tmp/virt/MicrodroidTestApp.apk.idsig\" dev\u003d\"dm-34\" ino\u003d2941 scontext\u003du:r:virtualizationservice:s0 tcontext\u003du:object_r:shell_data_file:s0 tclass\u003dfile permissive\u003d1\n07-01 14:18:58.389  3158  3158 I Binder:3158_2: type\u003d1400 audit(0.0:157): avc: denied { write } for path\u003d\"/data/local/tmp/virt/log.txt\" dev\u003d\"dm-34\" ino\u003d2942 scontext\u003du:r:virtualizationservice:s0 tcontext\u003du:object_r:shell_data_file:s0 tclass\u003dfile permissive\u003d1\n07-01 14:18:58.393  3161  3161 I virtualizations: type\u003d1400 audit(0.0:158): avc: denied { execute } for name\u003d\"sh\" dev\u003d\"dm-1\" ino\u003d463 scontext\u003du:r:virtualizationservice:s0 tcontext\u003du:object_r:shell_exec:s0 tclass\u003dfile permissive\u003d1\n07-01 14:18:58.393  3161  3161 I virtualizations: type\u003d1400 audit(0.0:158): avc: denied { read open } for path\u003d\"/system/bin/sh\" dev\u003d\"dm-1\" ino\u003d463 scontext\u003du:r:virtualizationservice:s0 tcontext\u003du:object_r:shell_exec:s0 tclass\u003dfile permissive\u003d1\n07-01 14:18:58.409   202   202 E SELinux : avc:  denied  { find } for pid\u003d3162 uid\u003d1081 name\u003dpackage scontext\u003du:r:virtualizationservice:s0 tcontext\u003du:object_r:package_service:s0 tclass\u003dservice_manager permissive\u003d1\n\"/apex/apex-info-list.xml\" dev\u003d\"tmpfs\" ino\u003d15 scontext\u003du:r:shell:s0 tcontext\u003du:object_r:apex_info_file:s0 tclass\u003dfile permissive\u003d0\n07-01 14:19:09.253  3179  3179 I tail    : [    9.521560] type\u003d1400 audit(1625116748.987:31): avc: denied { getattr } for comm\u003d\"microdroid_laun\" path\u003d\"socket:[11542]\" dev\u003d\"sockfs\" ino\u003d11542 scontext\u003du:r:microdroid_app:s0 tcontext\u003du:r:adbd:s0 tclass\u003dunix_stream_socket permissive\u003d0\n07-01 14:19:13.381  3177  3177 I crosvm_vcpu0: type\u003d1400 audit(0.0:175): avc: denied { write } for path\u003d\"/data/local/tmp/virt/log.txt\" dev\u003d\"dm-34\" ino\u003d2942 scontext\u003du:r:crosvm:s0 tcontext\u003du:object_r:shell_data_file:s0 tclass\u003dfile permissive\u003d1\n```",
+      "parentUuid": "2c46c01f_e611263b",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a5662b8_e5543354",
@@ -276,6 +533,30 @@
       "writtenOn": "2021-06-30T16:09:08Z",
       "side": 1,
       "message": "Document what this return value means.",
+      "range": {
+        "startLine": 39,
+        "startChar": 61,
+        "endLine": 39,
+        "endChar": 65
+      },
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c6dd84c_62481196",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a5662b8_e5543354",
       "range": {
         "startLine": 39,
         "startChar": 61,
@@ -309,6 +590,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "874bf18d_4880970b",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d81cba60_74a5027a",
+      "range": {
+        "startLine": 50,
+        "startChar": 15,
+        "endLine": 50,
+        "endChar": 25
+      },
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b029489f_c8e40d32",
@@ -322,6 +627,24 @@
       "writtenOn": "2021-06-30T16:09:08Z",
       "side": 1,
       "message": "You don\u0027t need to make a separate file for each partition, there can just be a single file used for all of them. Or even better, can you just use /dev/zero?",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5dc9371_eb01580c",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "In practice, there\u0027s only a single APK which uses this. So we don\u0027t need that for now. But yeah I agree with that. I\u0027ll change it later (I\u0027m thinking use zero filler everywhere, then we might need to reuse a single filler.)\n\nbtw, Cody once mentioned that he couldn\u0027t use /dev/zero, but he didn\u0027t figure out why. Probably we can investigate? But I think it\u0027s not urgent.",
+      "parentUuid": "b029489f_c8e40d32",
       "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -349,6 +672,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b41a1b5_deaf2bcd",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb6e0975_75dc18d9",
+      "range": {
+        "startLine": 86,
+        "startChar": 44,
+        "endLine": 86,
+        "endChar": 68
+      },
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff28950d_40e7f599",
@@ -366,6 +713,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb0aa30f_9869d658",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "Done. is lambda not recommended?",
+      "parentUuid": "ff28950d_40e7f599",
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2ecbdf7_813ee471",
@@ -379,6 +744,30 @@
       "writtenOn": "2021-06-30T16:09:08Z",
       "side": 1,
       "message": "This can now be {}, can\u0027t it?",
+      "range": {
+        "startLine": 96,
+        "startChar": 30,
+        "endLine": 96,
+        "endChar": 34
+      },
+      "revId": "21e9b928ef7683ecbfc6fff17a5b588c791d385a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a784b85f_333ccd39",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T07:56:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2ecbdf7_813ee471",
       "range": {
         "startLine": 96,
         "startChar": 30,
