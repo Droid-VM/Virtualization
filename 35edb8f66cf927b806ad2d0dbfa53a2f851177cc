@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a16d21e2_c4d589ff",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineConfig.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-01T08:21:15Z",
+      "side": 1,
+      "message": "Hmm. I\u0027m thinking about adding a separate method to IVirtualizationService rather than accepting a union and dispatching. But not sure which one would be better. thoughts?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 38
+      },
+      "revId": "35edb8f66cf927b806ad2d0dbfa53a2f851177cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
