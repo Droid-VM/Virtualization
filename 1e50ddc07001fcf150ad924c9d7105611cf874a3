@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2bb91cd3_7c40ef9c",
+        "filename": "microdroid/build.prop",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-02T07:45:53Z",
+      "side": 1,
+      "message": "As I described in the comment, ARCVM folks told me that it doesn\u0027t use dynamic partition, so those symlinks created by fsmgr (by being boot_devices) are not created. That\u0027s why I use the raw(?) path to the device/partition.",
+      "parentUuid": "843407dc_4eba5ea9",
+      "range": {
+        "startLine": 10,
+        "startChar": 35,
+        "endLine": 10,
+        "endChar": 50
+      },
+      "revId": "1e50ddc07001fcf150ad924c9d7105611cf874a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a12527cd_9650701a",
         "filename": "microdroid_manager/src/metadata.rs",
         "patchSetId": 1
