@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88dfe1ae_24f400c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-02T12:41:30Z",
+      "side": 1,
+      "message": "You\u0027re going to have to update the compat files, because you\u0027re renaming an attribute in the existing public policy (https://source.android.com/security/selinux/compatibility#compatibility-attributes).\n\nI think what you need to do (but I\u0027m far from confident in this stuff) is change this line:\nhttps://source.corp.google.com/android/system/sepolicy/private/compat/31.0/31.0.cil;rcl\u003dae3d63ae71ab275af020f96ee39d6a1a66be1ca5;l\u003d2416\n\nTo say:\n(typeattributeset vpnprofilestore_service_31_0 (legacykeystore_service))\n\nAnd the same in the older files (I think).\n",
+      "revId": "8aaf796f980f21a8acda73180a876095b960fc28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
