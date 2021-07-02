@@ -34,6 +34,24 @@
       "parentUuid": "88dfe1ae_24f400c9",
       "revId": "8aaf796f980f21a8acda73180a876095b960fc28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcf85ee8_8ca778ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-02T12:55:31Z",
+      "side": 1,
+      "message": "Aha! It looks like vpnprofilestore_service was already on the ignore list (private/compat/30.0/30.0.ignore.cil), in which case renaming it is fine - it just now gets ignored under the new name instead.\n\nAlso, rather embarrassingly, I hadn\u0027t noticed this was changing microdroid policy rather than system policy.",
+      "parentUuid": "1135f644_40ccff72",
+      "revId": "8aaf796f980f21a8acda73180a876095b960fc28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
