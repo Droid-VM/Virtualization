@@ -16,18 +16,93 @@
 
 #define LOG_TAG "android.hardware.security.keymint-service"
 
+#include <sys/system_properties.h>
+
 #include <AndroidKeyMintDevice.h>
 #include <android-base/logging.h>
+#include <android-base/properties.h>
+#include <android-base/result.h>
 #include <android/binder_manager.h>
 #include <android/binder_process.h>
+#include <keymaster/android_keymaster_utils.h>
 #include <keymaster/soft_keymaster_logger.h>
+#include <openssl/digest.h>
+#include <openssl/hkdf.h>
+#include <openssl/is_boringssl.h>
+#include <openssl/sha.h>
 
 #include "MicrodroidKeyMintDevice.h"
 
 using aidl::android::hardware::security::keymint::MicrodroidKeyMintDevice;
 using aidl::android::hardware::security::keymint::SecurityLevel;
 
+using android::base::Error;
+using android::base::Result;
+
+using keymaster::KeymasterBlob;
+using keymaster::KeymasterKeyBlob;
+
+namespace {
+
+template <typename T, class... Args>
+std::shared_ptr<T> addService(Args&&... args) {
+    std::shared_ptr<T> ser = ndk::SharedRefBase::make<T>(std::forward<Args>(args)...);
+    auto instanceName = std::string(T::descriptor) + "/default";
+    LOG(INFO) << "adding keymint service instance: " << instanceName;
+    binder_status_t status =
+            AServiceManager_addService(ser->asBinder().get(), instanceName.c_str());
+    CHECK(status == STATUS_OK);
+    return ser;
+}
+
+Result<void> getRootKey(KeymasterKeyBlob& rootKey) {
+    const std::string prop = "ro.vmsecret.keymint";
+    const std::chrono::seconds timeout(15);
+    while (!android::base::WaitForPropertyCreation(prop, timeout)) {
+        LOG(WARNING) << "waited " << timeout.count() << "seconds for " << prop
+                     << ", still waiting...";
+    }
+
+    // Read the secret directly to a buffer that will wipe itself. This is a
+    // small effort to avoid spreading the secret around too widely.
+    KeymasterBlob secret;
+    const prop_info* pi = __system_property_find(prop.c_str());
+    if (!pi) return Error() << "Failed to find " << prop;
+    __system_property_read_callback(
+            pi,
+            [](void* cookie, const char*, const char* value, uint32_t) {
+                auto secret = reinterpret_cast<KeymasterBlob*>(cookie);
+                secret->Reset(strlen(value));
+                memcpy(secret->writable_data(), value, secret->size());
+            },
+            &secret);
+    if (secret.size() < 64u) return Error() << "secret is too small";
+
+    // Derive the root key from the secret to avoid getting locked into using
+    // the secret directly.
+    rootKey.Reset(SHA512_DIGEST_LENGTH);
+    const uint8_t kRootKeyIkm[] = "keymint_root_key";
+    const uint8_t* kNoSalt = nullptr;
+    const size_t kNoSaltLen = 0;
+    if (!HKDF(rootKey.writable_data(), rootKey.size(), EVP_sha512(), (uint8_t*)secret.begin(),
+              secret.size(), kNoSalt, kNoSaltLen, kRootKeyIkm, sizeof(kRootKeyIkm))) {
+        return Error() << "Failed to derive a key";
+    }
+    if (rootKey.size() < 64u) return Error() << "root key is too small";
+
+    LOG(INFO) << "root key obtained";
+    return {};
+}
+
+} // namespace
+
 int main() {
+    KeymasterKeyBlob rootKey;
+    auto result = getRootKey(rootKey);
+    if (!result.ok()) {
+        LOG(FATAL) << "Failed to get root key: " << result.error();
+    }
+
     // Zero threads seems like a useless pool, but below we'll join this thread
     // to it, increasing the pool size to 1.
     ABinderProcess_setThreadPoolMaxThreadCount(0);
