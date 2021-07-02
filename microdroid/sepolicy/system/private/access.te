@@ -1,0 +1,113 @@
+domain_auto_trans(kernel, init_exec, init)
+
+init_daemon_domain(adbd)
+init_daemon_domain(apexd)
+init_daemon_domain(apkdmverity)
+init_daemon_domain(keystore)
+init_daemon_domain(hwservicemanager)
+init_daemon_domain(linkerconfig)
+init_daemon_domain(logd)
+init_daemon_domain(microdroid_manager)
+init_daemon_domain(servicemanager)
+init_daemon_domain(tombstoned)
+init_daemon_domain(toolbox)
+init_daemon_domain(zipfuse)
+
+allow adbd bootloader_prop:file { getattr map open read };
+allow adbd fingerprint_prop:file { getattr map open read };
+allow adbd init_service_status_prop:file { getattr map open read };
+allow adbd linkerconfig_file:dir search;
+allow adbd logcat_exec:file { execute execute_no_trans getattr map read };
+allow adbd logd:unix_stream_socket connectto;
+allow adbd logdr_socket:sock_file write;
+allow adbd owntty_device:chr_file { open read };
+allow adbd proc:dir search;
+allow adbd proc:lnk_file read;
+allow adbd proc_uptime:file { getattr open read };
+allow adbd properties_serial:file { getattr map open read };
+allow adbd random_device:chr_file read;
+allow adbd self:dir { getattr open read search };
+allow adbd self:fifo_file { read write };
+allow adbd self:file { getattr open read };
+allow adbd self:lnk_file read;
+allow adbd self:process { getattr ptrace setcurrent signal };
+allow adbd self:unix_dgram_socket { connect create write };
+allow adbd self:unix_stream_socket { ioctl shutdown };
+allow adbd self:vsock_socket { accept read setopt write };
+allow adbd shell_data_file:dir { getattr write };
+allow adbd shell_exec:file { execute execute_no_trans getattr map read };
+allow adbd shell_prop:property_service set;
+allow adbd system_data_file:dir search;
+allow adbd system_data_root_file:dir search;
+allow adbd system_file:dir { getattr read search };
+allow adbd system_lib_file:dir { getattr search };
+allow adbd system_lib_file:lnk_file read;
+allow adbd system_linker_exec:file { getattr open };
+allow adbd system_linker_exec:lnk_file read;
+allow adbd tombstone_data_file:file append;
+allow adbd tombstoned:fd use;
+allow adbd tombstoned:unix_stream_socket connectto;
+allow adbd tombstoned_crash_socket:sock_file write;
+allow adbd unlabeled:file { execute execute_no_trans getattr map read };
+allow adbd vendor_file:dir { getattr search };
+allow adbd_socket tmpfs:filesystem associate;
+allow hwservicemanager hidl_base_hwservice:hwservice_manager add;
+allow hwservicemanager hidl_manager_hwservice:hwservice_manager add;
+allow hwservicemanager vendor_configs_file:file { open getattr };
+allow keystore kernel:security compute_av;
+allow keystore keystore2_key_contexts_file:file { getattr open read };
+allow keystore keystore_data_file:dir { add_name open read remove_name search write };
+allow keystore keystore_data_file:file { create getattr ioctl lock read unlink };
+allow keystore microdroid_manager:binder transfer;
+allow keystore random_device:chr_file open;
+allow keystore self:netlink_selinux_socket { bind create };
+allow keystore self:unix_dgram_socket setopt;
+allow keystore selinuxfs:dir { getattr open read search };
+allow keystore selinuxfs:file { getattr open read write };
+allow keystore system_data_file:dir search;
+allow keystore system_data_root_file:dir search;
+allow keystore vendor_file:dir search;
+allow logd adbd:dir search;
+allow logd adbd:file { getattr open read };
+allow logd device:dir search;
+allow logd hwservicemanager:dir search;
+allow logd hwservicemanager:file { open read };
+allow logd init:dir search;
+allow logd init:fd use;
+allow logd init:file { getattr open read };
+allow logd kernel:dir search;
+allow logd kernel:file { getattr open read };
+allow logd kernel:system { syslog_mod syslog_read };
+allow logd keystore:dir search;
+allow logd keystore:file { getattr open read };
+allow logd linkerconfig_file:dir search;
+allow logd microdroid_manager:dir search;
+allow logd microdroid_manager:file { getattr open read };
+allow logd null_device:chr_file { open read };
+allow logd proc_kmsg:file read;
+allow logd self:fifo_file { read write };
+allow logd self:file { getattr open read };
+allow logd self:netlink_audit_socket getopt;
+allow logd self:unix_stream_socket { accept getopt setopt shutdown };
+allow logd servicemanager:dir search;
+allow logd servicemanager:file { open read };
+allow logd system_lib_file:dir search;
+allow logd system_lib_file:file { open read };
+allow logd tombstoned:dir search;
+allow logd tombstoned:file { getattr open read };
+allow logd ueventd:dir search;
+allow logd ueventd:file { getattr open read };
+allow microdroid_manager debug_prop:property_service set;
+allow microdroid_manager device:dir search;
+allow microdroid_manager init:fd use;
+allow microdroid_manager keystore:binder call;
+allow microdroid_manager keystore_service:service_manager find;
+allow microdroid_manager vm_payload_key:keystore2_key { rebind use };
+allow servicemanager default_android_service:service_manager add;
+allow servicemanager microdroid_manager:binder transfer;
+allow system_data_file tmpfs:filesystem associate;
+allow tombstoned self:dir search;
+allow tombstoned self:lnk_file read;
+allow tombstoned self:unix_stream_socket accept;
+allow tombstoned tombstone_data_file:dir { add_name search write };
+allow tombstoned tombstone_data_file:file { append link };

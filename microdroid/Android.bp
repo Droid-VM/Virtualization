@@ -196,7 +196,8 @@ microdroid_boot_cmdline = "panic=-1 " +
     // TODO(b/181936135) make the ratelimiting conditional; ratelimiting on prod build
     "printk.devkmsg=on " +
     "androidboot.first_stage_console=1 " +
-    "androidboot.hardware=microdroid "
+    "androidboot.hardware=microdroid " +
+    "androidboot.selinux=permissive "
 
 bootimg {
     name: "microdroid_boot-5.10",
