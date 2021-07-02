@@ -215,7 +215,7 @@ bootimg {
             cmdline: microdroid_boot_cmdline +
                 "pci=noacpi " +
                 "androidboot.boot_devices=pci0000:00/0000:00:01.0," + // os
-                "pci0000:00/0000:00:03.0", // payload
+                "pci0000:00/0000:00:03.0", // create symlinks for payload partitions
         },
     },
     dtb_prebuilt: "dummy_dtb.img",

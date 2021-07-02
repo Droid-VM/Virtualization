@@ -16,9 +16,9 @@
 
 mod ioutil;
 mod metadata;
+mod props;
 
 use anyhow::{anyhow, bail, Result};
-use keystore2_system_property::PropertyWatcher;
 use log::info;
 use microdroid_payload_config::{Task, TaskType, VmPayloadConfig};
 use std::fs;
@@ -80,8 +80,7 @@ fn build_command(task: &Task) -> Result<Command> {
 }
 
 fn find_library_path(name: &str) -> Result<String> {
-    let mut watcher = PropertyWatcher::new("ro.product.cpu.abilist")?;
-    let value = watcher.read(|_name, value| Ok(value.trim().to_string()))?;
+    let value = props::get_as_string("ro.product.cpu.abilist")?;
     let abi = value.split(',').next().ok_or_else(|| anyhow!("no abilist"))?;
     let path = format!("/mnt/apk/lib/{}/{}", abi, name);
 
