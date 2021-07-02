@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "843407dc_4eba5ea9",
+        "filename": "microdroid/build.prop",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-02T07:23:55Z",
+      "side": 1,
+      "message": "Hmm, this looks worse than a named partition. This highly depends on how the disk are constructed.",
+      "range": {
+        "startLine": 10,
+        "startChar": 35,
+        "endLine": 10,
+        "endChar": 50
+      },
+      "revId": "1e50ddc07001fcf150ad924c9d7105611cf874a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a12527cd_9650701a",
+        "filename": "microdroid_manager/src/metadata.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-02T07:23:55Z",
+      "side": 1,
+      "message": "why not /dev/block/by-name/$(ro.vm.payload_metadata_partition) ?",
+      "range": {
+        "startLine": 30,
+        "startChar": 29,
+        "endLine": 30,
+        "endChar": 40
+      },
+      "revId": "1e50ddc07001fcf150ad924c9d7105611cf874a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
