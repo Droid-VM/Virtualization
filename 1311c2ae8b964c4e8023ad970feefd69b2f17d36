@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c33639d9_26ddb0a6",
+        "filename": "microdroid/sepolicy/system/private/mls",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-02T09:04:48Z",
+      "side": 1,
+      "message": "I think you don\u0027t need most of it. As far as I know we only use it exclusively for user and (for apps) uid separation, which doesn\u0027t seem relevant here.\n\nBut some of this is just good housekeeping - e.g. the \"l2 eq h2\" restriction on dir_file_class_set.\n\nMaybe you should just set MLS_CATS to 1 in the equivalent of system/sepolicy/Android.mk, so that private/mls_decl only generates one level, and then all of this becomes irrelevant.\n\nProbably worth checking with Jeff.",
+      "parentUuid": "f8463914_41aa6fe0",
+      "revId": "1311c2ae8b964c4e8023ad970feefd69b2f17d36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19d2b0a6_c2bff223",
         "filename": "microdroid/sepolicy/system/public/attributes",
         "patchSetId": 1
