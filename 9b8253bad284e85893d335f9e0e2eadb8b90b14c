@@ -50,6 +50,24 @@
       "message": "What\u0027s the advantage of doing this here rather than in AndroidTest.xml?",
       "revId": "9b8253bad284e85893d335f9e0e2eadb8b90b14c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4967fbca_7eaf6e97",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-02T11:06:24Z",
+      "side": 1,
+      "message": "If it\u0027s in AndroidTest.xml, the test harness always tries to install the APK and if that fails, that\u0027s recorded as the test failure. \n\nThe APK, since it now has the \u003cuses-library\u003e tag, can\u0027t be installed on devices that don\u0027t have the virt APEX. We want to skip the test on those devices instead of failing.",
+      "parentUuid": "0a0e622f_96ef7ce0",
+      "revId": "9b8253bad284e85893d335f9e0e2eadb8b90b14c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
