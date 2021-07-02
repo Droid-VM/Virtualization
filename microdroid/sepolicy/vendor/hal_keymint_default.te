@@ -6,5 +6,3 @@ init_daemon_domain(hal_keymint_default)
 
 hal_attribute_service(hal_keymint, hal_secureclock_service)
 hal_attribute_service(hal_keymint, hal_sharedsecret_service)
-
-get_prop(hal_keymint_default, vendor_security_patch_level_prop);
