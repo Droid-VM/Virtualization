@@ -33,6 +33,23 @@
       "message": "Hi, Michael.\n\nI need API-review vote here, could you take a look and approve? As you can see, there\u0027s no API added yet. Only empty *.txt files were added, just because the build system asked me to have them.\n\nWe will going to add some APIs, but those will all be @hide for the time being and I will reach out to you or the bigger API council when we need to publish the APIs.",
       "revId": "9b8253bad284e85893d335f9e0e2eadb8b90b14c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a0e622f_96ef7ce0",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-02T10:56:50Z",
+      "side": 1,
+      "message": "What\u0027s the advantage of doing this here rather than in AndroidTest.xml?",
+      "revId": "9b8253bad284e85893d335f9e0e2eadb8b90b14c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
