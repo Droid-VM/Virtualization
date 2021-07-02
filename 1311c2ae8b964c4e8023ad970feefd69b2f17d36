@@ -16,6 +16,69 @@
       "message": "This is just FYI. We need more work.",
       "revId": "1311c2ae8b964c4e8023ad970feefd69b2f17d36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8463914_41aa6fe0",
+        "filename": "microdroid/sepolicy/system/private/mls",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-02T05:49:17Z",
+      "side": 1,
+      "message": "mls has always been cryptic to me. Alan, is this needed in microdroid?",
+      "revId": "1311c2ae8b964c4e8023ad970feefd69b2f17d36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19d2b0a6_c2bff223",
+        "filename": "microdroid/sepolicy/system/public/attributes",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-02T05:49:17Z",
+      "side": 1,
+      "message": "We should be able to remove most of these",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 367,
+        "endChar": 31
+      },
+      "revId": "1311c2ae8b964c4e8023ad970feefd69b2f17d36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "872199a0_c7322d5a",
+        "filename": "microdroid/sepolicy/system/public/attributes",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-02T05:49:17Z",
+      "side": 1,
+      "message": "These too",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 39
+      },
+      "revId": "1311c2ae8b964c4e8023ad970feefd69b2f17d36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
