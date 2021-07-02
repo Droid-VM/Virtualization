@@ -12,20 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! Payload metadata
-
-use crate::props;
+//! System properties
 
 use anyhow::Result;
-use log::info;
-use microdroid_metadata::{read_metadata, Metadata};
-use std::fs::File;
+use keystore2_system_property::PropertyWatcher;
 
-const VM_PAYLOAD_METADATA_PARTITION_PROP: &str = "ro.vm.payload_metadata_partition";
-
-/// loads payload metadata pointed by ro.vm.payload_metadata_partition
-pub fn load() -> Result<Metadata> {
-    info!("loading payload metadata...");
-    let partition = props::get_as_string(VM_PAYLOAD_METADATA_PARTITION_PROP)?;
-    read_metadata(File::open(&partition)?)
+pub fn get_as_string(prop: &str) -> Result<String> {
+    let mut watcher = PropertyWatcher::new(prop)?;
+    let value = watcher.read(|_name, value| Ok(value.trim().to_string()))?;
+    Ok(value)
 }
