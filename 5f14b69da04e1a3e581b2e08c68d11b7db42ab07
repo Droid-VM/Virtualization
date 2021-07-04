@@ -89,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fb14fb0_d7a6fad2",
+        "filename": "tests/hostside/helper/java/android/virt/test/VirtualizationTestCaseBase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-04T06:46:12Z",
+      "side": 1,
+      "message": "Huh, that\u0027s strange indeed. As I commented in the bug, let me try `adb disconnect` prior to `vm stop $CID`",
+      "parentUuid": "f59167c8_2ce2a8d3",
+      "range": {
+        "startLine": 74,
+        "startChar": 8,
+        "endLine": 75,
+        "endChar": 24
+      },
+      "revId": "5f14b69da04e1a3e581b2e08c68d11b7db42ab07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a125da1_a303c129",
