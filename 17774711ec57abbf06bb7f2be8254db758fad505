@@ -277,6 +277,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60a0e029_b614e5be",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-05T05:53:30Z",
+      "side": 1,
+      "message": "CID by itself doesn\u0027t provide any protection. Anyone can use any CID. It\u0027s the job of the program waiting for a connection on the CID/port to protect itself from unauthorized clients.",
+      "parentUuid": "e6b8adcd_cde31024",
+      "range": {
+        "startLine": 232,
+        "startChar": 29,
+        "endLine": 232,
+        "endChar": 35
+      },
+      "revId": "17774711ec57abbf06bb7f2be8254db758fad505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bddd5130_e520fcb3",
@@ -338,6 +362,30 @@
       "side": 1,
       "message": "I hope that the API reveals the intention (or the impact?) of changing configuration clearly so that developers can know whether changing something would lead to the changing the sealing CDI or not.",
       "parentUuid": "582cb740_954b9bec",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 55
+      },
+      "revId": "17774711ec57abbf06bb7f2be8254db758fad505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6716815_e3ee1f9b",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-05T05:53:30Z",
+      "side": 1,
+      "message": "I think the comment explains them all. Can you suggest a revise?",
+      "parentUuid": "033d0c24_2bd64d2a",
       "range": {
         "startLine": 244,
         "startChar": 0,
