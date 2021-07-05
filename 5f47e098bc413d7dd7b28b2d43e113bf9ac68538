@@ -51,6 +51,307 @@
       "message": "LGTM for the first iteration. +1 to give others(Inseob and Andrew) chance to look at it.",
       "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4813e6e2_7d9aea2d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-05T14:55:59Z",
+      "side": 1,
+      "message": "This and the other comments on fields below should be JavaDoc comments.",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "640c0239_9e64bbd9",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-05T14:55:59Z",
+      "side": 1,
+      "message": "Will this be JSON? Or what format?",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfb1dc6f_93c291e9",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-05T14:55:59Z",
+      "side": 1,
+      "message": "These paths will be the same for every VM created by an application, won\u0027t they? That seems wrong, surely they should have a unique ID, or include the name or something?",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33d681d5_0fa7018d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-05T14:55:59Z",
+      "side": 1,
+      "message": "What do you mean by \u0027exist\u0027 here? As far as I can see the name makes no difference.",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae881782_31045bbc",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-05T14:55:59Z",
+      "side": 1,
+      "message": "Would it be possible to reuse the existing pipe here rather than creating a new one every time? That way if someone starts a VM, gets the console output stream, and then restarts it, the console output stream they already have would continue working.",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c32d512_e6746e18",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-05T14:55:59Z",
+      "side": 1,
+      "message": "Why have this temporary variable, rather than assigning directly to mVirtualMachine?",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58e1ca0a_0feebc04",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-05T14:55:59Z",
+      "side": 1,
+      "message": "It might be useful to get the console output stream of a VM even after it has died, e.g. to check the logs and see why it died. So I think this should only check whether mConsoleReader is null.",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baef24c2_5c85045d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-05T14:55:59Z",
+      "side": 1,
+      "message": "Include a more helpful error message here.",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5705b3d_6016caae",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-05T14:55:59Z",
+      "side": 1,
+      "message": "If the status is DELETED then this will throw a NullPointerException.",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab67d7ec_8c631419",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-05T14:55:59Z",
+      "side": 1,
+      "message": "What does the return value mean? Is it the old config? Documented in the JavaDoc above.",
+      "range": {
+        "startLine": 258,
+        "startChar": 11,
+        "endLine": 258,
+        "endChar": 31
+      },
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7dc9bba_9f401bf7",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-05T14:55:59Z",
+      "side": 1,
+      "message": "Throw an exception rather than just silently returning.",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a3ca024_d8ba3ab1",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-05T14:55:59Z",
+      "side": 1,
+      "message": "Mention in the exception what the problem was, here and below.",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "911c71a1_7c982c87",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-05T14:55:59Z",
+      "side": 1,
+      "message": "Will this ever have more than one entry?\n\nIf so, it will keep each Context around even after there are no other references to it. Perhaps this should be a WeakHashMap, and mContext above likewise a WeakReference?",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c7da840_5b2388af",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-05T14:55:59Z",
+      "side": 1,
+      "message": "What does it mean to have two different VMs with the same name? Especially given that the new one will overwrite the old one.",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1c68d21_7ec00c42",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-05T14:55:59Z",
+      "side": 1,
+      "message": "Nit: Why the temporary variable?",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa0ea9af_8916cd3d",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/TestActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-05T14:55:59Z",
+      "side": 1,
+      "message": "Add a test that creates two VMs, either with the same name or different names.",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfce771e_8e9dd45e",
+        "filename": "virtualizationservice/aidl/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-05T14:55:59Z",
+      "side": 1,
+      "message": "Nit: capitalise Java.",
+      "range": {
+        "startLine": 8,
+        "startChar": 89,
+        "endLine": 8,
+        "endChar": 93
+      },
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
