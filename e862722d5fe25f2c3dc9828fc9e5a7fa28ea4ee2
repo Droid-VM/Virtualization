@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80cd46a6_91a6e30b",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-05T10:58:51Z",
+      "side": 1,
+      "message": "Can we move this into `os_name \u003d\u003d \"microdroid\"`. Because the only supported os is microdroid, so it is not so different, but it would be easier to read code.",
+      "range": {
+        "startLine": 339,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 5
+      },
+      "revId": "e862722d5fe25f2c3dc9828fc9e5a7fa28ea4ee2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
