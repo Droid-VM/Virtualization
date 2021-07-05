@@ -158,6 +158,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c3127e54_6110a675",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-05T01:08:43Z",
+      "side": 1,
+      "message": "nit: these can be named without \"set-\" prefix in the context of \"builder\". \n\n  new Builder().param1(...).param2(...).build();\n\nI know idsigpath will be gone or changed soon.",
+      "range": {
+        "startLine": 130,
+        "startChar": 23,
+        "endLine": 130,
+        "endChar": 35
+      },
+      "revId": "17774711ec57abbf06bb7f2be8254db758fad505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09b56e5f_b5043408",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
         "patchSetId": 1
