@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55c216d1_dcb729d5",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-05T05:19:41Z",
+      "side": 1,
+      "message": "No, I want to change the config of a VM. See setConfig() (uninplemented).",
+      "parentUuid": "129dd970_a2c1ec02",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 41
+      },
+      "revId": "17774711ec57abbf06bb7f2be8254db758fad505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4012b75_2c743da7",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-07-05T01:03:04Z",
       "side": 1,
       "message": "not used?",
+      "range": {
+        "startLine": 84,
+        "startChar": 1,
+        "endLine": 85,
+        "endChar": 21
+      },
+      "revId": "17774711ec57abbf06bb7f2be8254db758fad505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79bee9d5_972273b1",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-05T05:19:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4012b75_2c743da7",
       "range": {
         "startLine": 84,
         "startChar": 1,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85943f37_60590d93",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-05T05:19:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4254939_4d64af37",
+      "range": {
+        "startLine": 206,
+        "startChar": 35,
+        "endLine": 206,
+        "endChar": 49
+      },
+      "revId": "17774711ec57abbf06bb7f2be8254db758fad505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8fa4bea_355a06f9",
@@ -100,6 +172,30 @@
       "writtenOn": "2021-07-05T01:03:04Z",
       "side": 1,
       "message": "Can you explain more in the comments? For example: What happens to the virtual machine instance when we drop the handle to it? Can it be restarted by calling run() again?",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 38
+      },
+      "revId": "17774711ec57abbf06bb7f2be8254db758fad505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd0248fe_4bf5e059",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-05T05:19:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8fa4bea_355a06f9",
       "range": {
         "startLine": 209,
         "startChar": 0,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8932dd9_cde95a0c",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-05T05:19:41Z",
+      "side": 1,
+      "message": "To make a socket connection to a process running in the VM.",
+      "parentUuid": "2cb1eb76_a0ccd566",
+      "range": {
+        "startLine": 232,
+        "startChar": 29,
+        "endLine": 232,
+        "endChar": 35
+      },
+      "revId": "17774711ec57abbf06bb7f2be8254db758fad505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bddd5130_e520fcb3",
@@ -146,6 +266,30 @@
       "writtenOn": "2021-07-05T01:03:04Z",
       "side": 1,
       "message": "We might need to treat two kinds of config separately. a) payload-related and b) running parameters.\nFor (a), different configuration might mean a different virtual machine instance. For (b), a single instance might be configured a bit differently before running.",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 55
+      },
+      "revId": "17774711ec57abbf06bb7f2be8254db758fad505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "582cb740_954b9bec",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-05T05:19:41Z",
+      "side": 1,
+      "message": "I thought about it, but changing the payload doesn\u0027t necessarily mean that the identity of the VM is lost. There actually are many ways to change the payload without calling this method; by modifying the content of the vm_config.json file, or modifying the actual binary that runs on microdroid. Such changes are fine as long as it doesn\u0027t change the sealing CDI.\n\nRunning parameters are the same. Some changes (e.g. RAM size) wouldn\u0027t make the VM a different one. But some other changes (e.g. debug on/off) should make the VM a  different one, because this affects the sealing CDI.\n\nTherefore, there\u0027s no reason to distinguish configs related to the payload and running parameters. This function (when implemented) will compare the old and new configs and throw an exception when the new config is expected to change the sealing CDI.",
+      "parentUuid": "bddd5130_e520fcb3",
       "range": {
         "startLine": 244,
         "startChar": 0,
@@ -179,6 +323,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f96bc392_fe66d9f3",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-05T05:19:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3127e54_6110a675",
+      "range": {
+        "startLine": 130,
+        "startChar": 23,
+        "endLine": 130,
+        "endChar": 35
+      },
+      "revId": "17774711ec57abbf06bb7f2be8254db758fad505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09b56e5f_b5043408",
@@ -202,6 +370,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e03dd2a_0a495570",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-05T05:19:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09b56e5f_b5043408",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 9
+      },
+      "revId": "17774711ec57abbf06bb7f2be8254db758fad505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20138771_db42bc88",
@@ -215,6 +407,30 @@
       "writtenOn": "2021-07-05T01:03:04Z",
       "side": 1,
       "message": "VirtualMachineConfig doesn\u0027t overrides equals()",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 44
+      },
+      "revId": "17774711ec57abbf06bb7f2be8254db758fad505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56257876_7dd8b6c2",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-05T05:19:41Z",
+      "side": 1,
+      "message": "Will implement later when I implement setConfig()",
+      "parentUuid": "20138771_db42bc88",
       "range": {
         "startLine": 72,
         "startChar": 0,
