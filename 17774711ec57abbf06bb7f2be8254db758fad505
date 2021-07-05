@@ -301,6 +301,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af4079f3_d716c6a0",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-05T06:26:13Z",
+      "side": 1,
+      "message": "By \"safer\" I meant something like type-safety. From the API usability perspective, `Optional\u003cInteger\u003e` looks too primitive.",
+      "parentUuid": "60a0e029_b614e5be",
+      "range": {
+        "startLine": 232,
+        "startChar": 29,
+        "endLine": 232,
+        "endChar": 35
+      },
+      "revId": "17774711ec57abbf06bb7f2be8254db758fad505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bddd5130_e520fcb3",
@@ -386,6 +410,30 @@
       "side": 1,
       "message": "I think the comment explains them all. Can you suggest a revise?",
       "parentUuid": "033d0c24_2bd64d2a",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 55
+      },
+      "revId": "17774711ec57abbf06bb7f2be8254db758fad505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab1f48c6_d2443bd1",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-05T06:26:13Z",
+      "side": 1,
+      "message": "As far as I\u0027m concerned, I can\u0027t understand when I can call this function or what I can change without loosing bootability. For example, you mentioned that changing \"debug setting\" should make the VM a different one, then `aVM.setConfig(configWithDebugOn)` would throw an exception, right?\n\nWhen we have a better understanding of configuration change, we could introduce easier-to-use/understand APIs.",
+      "parentUuid": "b6716815_e3ee1f9b",
       "range": {
         "startLine": 244,
         "startChar": 0,
