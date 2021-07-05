@@ -325,6 +325,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d49c9611_0ed64dec",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-05T06:32:30Z",
+      "side": 1,
+      "message": "CID does not have internal structure. We could define `Cid` as a type, but I don\u0027t see a benefit of doing that yet. When we use the CID (e.g. over binder), we will anyway have to convert it to an integer.",
+      "parentUuid": "af4079f3_d716c6a0",
+      "range": {
+        "startLine": 232,
+        "startChar": 29,
+        "endLine": 232,
+        "endChar": 35
+      },
+      "revId": "17774711ec57abbf06bb7f2be8254db758fad505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bddd5130_e520fcb3",
@@ -434,6 +458,30 @@
       "side": 1,
       "message": "As far as I\u0027m concerned, I can\u0027t understand when I can call this function or what I can change without loosing bootability. For example, you mentioned that changing \"debug setting\" should make the VM a different one, then `aVM.setConfig(configWithDebugOn)` would throw an exception, right?\n\nWhen we have a better understanding of configuration change, we could introduce easier-to-use/understand APIs.",
       "parentUuid": "b6716815_e3ee1f9b",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 55
+      },
+      "revId": "17774711ec57abbf06bb7f2be8254db758fad505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb76bf58_0da55df2",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-05T06:32:30Z",
+      "side": 1,
+      "message": "\u003e `aVM.setConfig(configWithDebugOn)` would throw an exception, right?\n\nYes. And that\u0027s mentioned in the comment.",
+      "parentUuid": "ab1f48c6_d2443bd1",
       "range": {
         "startLine": 244,
         "startChar": 0,
