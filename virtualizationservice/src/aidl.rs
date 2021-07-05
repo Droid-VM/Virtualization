@@ -140,6 +140,7 @@ impl IVirtualizationService for VirtualizationService {
             disks,
             params: config.params.to_owned(),
             protected: config.protected_vm,
+            memory_mib: config.memory_mib.try_into().ok(),
         };
         let composite_disk_fds: Vec<_> =
             indirect_files.iter().map(|file| file.as_raw_fd()).collect();

@@ -40,6 +40,7 @@ pub struct CrosvmConfig<'a> {
     pub disks: Vec<DiskFile>,
     pub params: Option<String>,
     pub protected: bool,
+    pub memory_mib: Option<u32>,
 }
 
 /// A disk image to pass to crosvm for a VM.
@@ -171,6 +172,10 @@ fn run_vm(
 
     if config.protected {
         command.arg("--protected-vm");
+    }
+
+    if let Some(memory_mib) = config.memory_mib {
+        command.arg("--mem").arg(memory_mib.to_string());
     }
 
     if let Some(log_fd) = log_fd {
