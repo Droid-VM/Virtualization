@@ -253,6 +253,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6b8adcd_cde31024",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-05T05:42:06Z",
+      "side": 1,
+      "message": "I\u0027m worried that \"integer\" can be a dangling pointer or even point to an unrelated VM instance. For now I\u0027m fine, but we might need a safer way to get \"address of VM instance created by the app\".",
+      "parentUuid": "c8932dd9_cde95a0c",
+      "range": {
+        "startLine": 232,
+        "startChar": 29,
+        "endLine": 232,
+        "endChar": 35
+      },
+      "revId": "17774711ec57abbf06bb7f2be8254db758fad505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bddd5130_e520fcb3",
@@ -290,6 +314,30 @@
       "side": 1,
       "message": "I thought about it, but changing the payload doesn\u0027t necessarily mean that the identity of the VM is lost. There actually are many ways to change the payload without calling this method; by modifying the content of the vm_config.json file, or modifying the actual binary that runs on microdroid. Such changes are fine as long as it doesn\u0027t change the sealing CDI.\n\nRunning parameters are the same. Some changes (e.g. RAM size) wouldn\u0027t make the VM a different one. But some other changes (e.g. debug on/off) should make the VM a  different one, because this affects the sealing CDI.\n\nTherefore, there\u0027s no reason to distinguish configs related to the payload and running parameters. This function (when implemented) will compare the old and new configs and throw an exception when the new config is expected to change the sealing CDI.",
       "parentUuid": "bddd5130_e520fcb3",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 55
+      },
+      "revId": "17774711ec57abbf06bb7f2be8254db758fad505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "033d0c24_2bd64d2a",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-05T05:42:06Z",
+      "side": 1,
+      "message": "I hope that the API reveals the intention (or the impact?) of changing configuration clearly so that developers can know whether changing something would lead to the changing the sealing CDI or not.",
+      "parentUuid": "582cb740_954b9bec",
       "range": {
         "startLine": 244,
         "startChar": 0,
