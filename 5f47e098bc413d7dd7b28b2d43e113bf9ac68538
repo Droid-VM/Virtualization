@@ -70,6 +70,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9934c515_4c80fdba",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T00:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4813e6e2_7d9aea2d",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "640c0239_9e64bbd9",
@@ -83,6 +101,24 @@
       "writtenOn": "2021-07-05T14:55:59Z",
       "side": 1,
       "message": "Will this be JSON? Or what format?",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fd9b935_58fdc7dd",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T00:58:39Z",
+      "side": 1,
+      "message": "For now, it\u0027s PersistableBundle which is an xml file.",
+      "parentUuid": "640c0239_9e64bbd9",
       "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -104,6 +140,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb219f11_b4aa2a6b",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T00:58:39Z",
+      "side": 1,
+      "message": "Ah, I forgot to add mName to the path. Fixed.",
+      "parentUuid": "dfb1dc6f_93c291e9",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33d681d5_0fa7018d",
@@ -117,6 +171,24 @@
       "writtenOn": "2021-07-05T14:55:59Z",
       "side": 1,
       "message": "What do you mean by \u0027exist\u0027 here? As far as I can see the name makes no difference.",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1aa650ce_47073f66",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T00:58:39Z",
+      "side": 1,
+      "message": "It means that the virtual machine having the \u0027name\u0027 doesn\u0027t exist. I\u0027ve updated the comment.",
+      "parentUuid": "33d681d5_0fa7018d",
       "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -138,6 +210,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14fa7604_fcd3612f",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T00:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae881782_31045bbc",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c32d512_e6746e18",
@@ -151,6 +241,24 @@
       "writtenOn": "2021-07-05T14:55:59Z",
       "side": 1,
       "message": "Why have this temporary variable, rather than assigning directly to mVirtualMachine?",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a3c374c_3b4842f5",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T00:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c32d512_e6746e18",
       "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -172,6 +280,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70ad7837_d334acf5",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T00:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58e1ca0a_0feebc04",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baef24c2_5c85045d",
@@ -189,6 +315,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fbb0bf9_00df494c",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T00:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baef24c2_5c85045d",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5705b3d_6016caae",
@@ -202,6 +346,24 @@
       "writtenOn": "2021-07-05T14:55:59Z",
       "side": 1,
       "message": "If the status is DELETED then this will throw a NullPointerException.",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2126e7ef_6bc48e48",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T00:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5705b3d_6016caae",
       "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -229,6 +391,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9469eca0_41d18381",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T00:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab67d7ec_8c631419",
+      "range": {
+        "startLine": 258,
+        "startChar": 11,
+        "endLine": 258,
+        "endChar": 31
+      },
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7dc9bba_9f401bf7",
@@ -242,6 +428,24 @@
       "writtenOn": "2021-07-05T14:55:59Z",
       "side": 1,
       "message": "Throw an exception rather than just silently returning.",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b455bf7e_116ace8a",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T00:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7dc9bba_9f401bf7",
       "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -263,6 +467,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f85943a_88d4dbce",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T00:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a3ca024_d8ba3ab1",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "911c71a1_7c982c87",
@@ -276,6 +498,24 @@
       "writtenOn": "2021-07-05T14:55:59Z",
       "side": 1,
       "message": "Will this ever have more than one entry?\n\nIf so, it will keep each Context around even after there are no other references to it. Perhaps this should be a WeakHashMap, and mContext above likewise a WeakReference?",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "670185ef_7774cc2b",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T00:58:39Z",
+      "side": 1,
+      "message": "Done. The mContext shouldn\u0027t be a weak reference though. So, I made the reference to VirtualMachineManager inside the map a weak reference.",
+      "parentUuid": "911c71a1_7c982c87",
       "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -297,6 +537,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ab4ed0c_2b45fdd4",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T00:58:39Z",
+      "side": 1,
+      "message": "VirtualMachine vm \u003d create(\"foo\", ...);\nvm.run();\nvm.delete();\nVirtualMachine vm2 \u003d create(\"foo, ...);\n\nthen, vm and vm2 are different VMs though they have the same name.",
+      "parentUuid": "0c7da840_5b2388af",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1c68d21_7ec00c42",
@@ -310,6 +568,24 @@
       "writtenOn": "2021-07-05T14:55:59Z",
       "side": 1,
       "message": "Nit: Why the temporary variable?",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1724e7b1_0989b49a",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T00:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1c68d21_7ec00c42",
       "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -331,6 +607,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54340a6f_fc82f95c",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/TestActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T00:58:39Z",
+      "side": 1,
+      "message": "Done. But we need a whole set of new tests for these APIs, which I will do later.",
+      "parentUuid": "fa0ea9af_8916cd3d",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfce771e_8e9dd45e",
@@ -344,6 +638,30 @@
       "writtenOn": "2021-07-05T14:55:59Z",
       "side": 1,
       "message": "Nit: capitalise Java.",
+      "range": {
+        "startLine": 8,
+        "startChar": 89,
+        "endLine": 8,
+        "endChar": 93
+      },
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21609d88_2942969c",
+        "filename": "virtualizationservice/aidl/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T00:58:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfce771e_8e9dd45e",
       "range": {
         "startLine": 8,
         "startChar": 89,
