@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac627bb1_27bd507b",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T11:51:46Z",
+      "side": 1,
+      "message": "We need to have a (file-level) lock for this to be thread safe. I think that deserves a separate topic.",
+      "parentUuid": "df19e060_4a4e1c15",
+      "revId": "bf712b82241aa01e04d0da07cdd31218c5777917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f866389d_4f412915",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5187550_dfdc8087",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T11:51:46Z",
+      "side": 1,
+      "message": "Same as above.",
+      "parentUuid": "f866389d_4f412915",
+      "revId": "bf712b82241aa01e04d0da07cdd31218c5777917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8660ddb2_4adeb843",
@@ -48,6 +84,24 @@
       "writtenOn": "2021-07-06T11:04:53Z",
       "side": 1,
       "message": "As far as I can see, `get(name)` can never return `null`. It will either return a VirtualMachine or throw an exception.",
+      "revId": "bf712b82241aa01e04d0da07cdd31218c5777917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0013c75e_edb4ba03",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T11:51:46Z",
+      "side": 1,
+      "message": "get(name) shall return null on a non-existing name. I\u0027ve updated the javadoc of the method.",
+      "parentUuid": "8660ddb2_4adeb843",
       "revId": "bf712b82241aa01e04d0da07cdd31218c5777917",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
