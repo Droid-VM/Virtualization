@@ -16,6 +16,24 @@
       "message": "I guess you need to take this lock in `create` above too, because it could be called simultaneously to `getOrCreate`, and end up creating a VM after get has returned null but before the `create` call below.",
       "revId": "3a19cfc5756520ea2640d173abc7ede283e483c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42baee7c_7f257428",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-06T12:31:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e2e896c_9332fa83",
+      "revId": "3a19cfc5756520ea2640d173abc7ede283e483c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
