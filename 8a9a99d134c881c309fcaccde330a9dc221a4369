@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000012846538",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1742970?revision\u003d4",
+      "fixSuggestions": [
+        {
+          "fixId": "3835602e_6f7fe561",
+          "description": "Change to \"microdroid/keymint/MicrodroidKeymasterContext.cpp\"",
+          "replacements": [
+            {
+              "path": "microdroid/keymint/MicrodroidKeymasterContext.cpp",
+              "range": {
+                "startLine": 27,
+                "startChar": 54,
+                "endLine": 27,
+                "endChar": 67
+              },
+              "replacement": "implementation"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "958e55c9_209569d9",
+        "filename": "microdroid/keymint/MicrodroidKeymasterContext.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-07-06T16:42:46Z",
+      "side": 1,
+      "message": "Common typo found: \"implmentation\" -- should it be \"implementation\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 27,
+        "startChar": 54,
+        "endLine": 27,
+        "endChar": 67
+      },
+      "revId": "8a9a99d134c881c309fcaccde330a9dc221a4369",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
