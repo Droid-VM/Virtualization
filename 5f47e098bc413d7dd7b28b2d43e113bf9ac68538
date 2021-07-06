@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ecbe7fd5_dc976920",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-06T11:04:53Z",
+      "side": 1,
+      "message": "Okay, maybe the filename should have a `.xml` extension then?",
+      "parentUuid": "9fd9b935_58fdc7dd",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dfb1dc6f_93c291e9",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 2
@@ -569,6 +587,24 @@
       "side": 1,
       "message": "VirtualMachine vm \u003d create(\"foo\", ...);\nvm.run();\nvm.delete();\nVirtualMachine vm2 \u003d create(\"foo, ...);\n\nthen, vm and vm2 are different VMs though they have the same name.",
       "parentUuid": "0c7da840_5b2388af",
+      "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57e3c13f_e9697b8d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-06T11:04:53Z",
+      "side": 1,
+      "message": "Ah okay, if you delete it in-between. Add a note to the JavaDoc explaining that it\u0027s an error if you create a VM with the same name without first deleting the old one.",
+      "parentUuid": "9ab4ed0c_2b45fdd4",
       "revId": "5f47e098bc413d7dd7b28b2d43e113bf9ac68538",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
