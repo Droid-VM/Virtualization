@@ -34,13 +34,13 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
 use android_system_virtualizationservice::binder::{
     self, BinderFeatures, ExceptionCode, Interface, ParcelFileDescriptor, Status, Strong, ThreadState,
 };
-use anyhow::{bail, Result};
+use anyhow::{bail, Context, Result};
 use disk::QcowFile;
 use log::{debug, error, warn, info};
 use microdroid_payload_config::{ApexConfig, VmPayloadConfig};
 use std::convert::TryInto;
 use std::ffi::CString;
-use std::fs::{File, create_dir};
+use std::fs::{File, OpenOptions, create_dir};
 use std::num::NonZeroU32;
 use std::os::unix::io::{AsRawFd, FromRawFd, IntoRawFd};
 use std::path::{Path, PathBuf};
@@ -69,6 +69,10 @@ const VMADDR_CID_HOST: u32 = 2;
 /// Port number that virtualizationservice listens on connections from the guest VMs for the
 /// payload output
 const PORT_VIRT_SERVICE: u32 = 3000;
+
+/// The size of zero.img.
+/// Gaps in composite disk images are filled with a shared zero.img.
+const ZERO_FILLER_SIZE: u64 = 4096;
 
 /// Implementation of `IVirtualizationService`, the entry point of the AIDL service.
 #[derive(Debug, Default)]
@@ -130,6 +134,16 @@ impl IVirtualizationService for VirtualizationService {
         };
         let config = config.as_ref();
 
+        let zero_filler_path = temporary_directory.join("zero.img");
+        let zero_filler_file = write_zero_filler(&zero_filler_path).map_err(|e| {
+            error!("Failed to make composite image: {}", e);
+            new_binder_exception(
+                ExceptionCode::SERVICE_SPECIFIC,
+                format!("Failed to make composite image: {}", e),
+            )
+        })?;
+        indirect_files.push(zero_filler_file);
+
         // Assemble disk images if needed.
         let disks = config
             .disks
@@ -137,6 +151,7 @@ impl IVirtualizationService for VirtualizationService {
             .map(|disk| {
                 assemble_disk_image(
                     disk,
+                    &zero_filler_path,
                     &temporary_directory,
                     &mut next_temporary_image_id,
                     &mut indirect_files,
@@ -282,11 +297,23 @@ fn handle_connection_from_vm(state: Arc<Mutex<State>>) -> Result<()> {
     Ok(())
 }
 
+fn write_zero_filler(zero_filler_path: &Path) -> Result<File> {
+    let file = OpenOptions::new()
+        .create_new(true)
+        .read(true)
+        .write(true)
+        .open(zero_filler_path)
+        .with_context(|| "Failed to create zero.img")?;
+    file.set_len(ZERO_FILLER_SIZE)?;
+    Ok(file)
+}
+
 /// Given the configuration for a disk image, assembles the `DiskFile` to pass to crosvm.
 ///
 /// This may involve assembling a composite disk from a set of partition images.
 fn assemble_disk_image(
     disk: &DiskImage,
+    zero_filler_path: &Path,
     temporary_directory: &Path,
     next_temporary_image_id: &mut u64,
     indirect_files: &mut Vec<File>,
@@ -304,6 +331,7 @@ fn assemble_disk_image(
             make_composite_image_filenames(temporary_directory, next_temporary_image_id);
         let (image, partition_files) = make_composite_image(
             &disk.partitions,
+            zero_filler_path,
             &composite_image_filenames.composite,
             &composite_image_filenames.header,
             &composite_image_filenames.footer,
