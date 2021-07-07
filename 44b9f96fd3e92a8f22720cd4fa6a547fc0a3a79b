@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "413eded8_72bc8cef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1043663
+      },
+      "writtenOn": "2021-07-07T13:13:38Z",
+      "side": 1,
+      "message": "There is no security reason to be concerned about encrypting the authorization lists in the key blob.  There may be a practical reason: to prevent clients from foolishly examining the authorization lists, given that the structure is not currently standardized.",
+      "parentUuid": "622a8f48_74cb6098",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 58
+      },
+      "revId": "44b9f96fd3e92a8f22720cd4fa6a547fc0a3a79b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4f7a69af_03a56d3c",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
