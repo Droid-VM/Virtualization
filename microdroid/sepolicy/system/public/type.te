@@ -86,8 +86,6 @@ type kmsg_device, dev_type, mlstrustedobject;
 type kvm_device, dev_type;
 type labeledfs, fs_type;
 type legacykeystore_service, service_manager_type;
-type linkerconfig, domain, coredomain;
-type linkerconfig_exec, file_type, exec_type, system_file_type;
 type linkerconfig_file, file_type;
 type logcat;
 type logcat_exec, file_type, exec_type, system_file_type;

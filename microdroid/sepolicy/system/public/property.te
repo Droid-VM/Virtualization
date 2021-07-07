@@ -32,3 +32,8 @@ type usb_control_prop, property_type;
 type vendor_default_prop, property_type;
 
 allow property_type tmpfs:filesystem associate;
+
+#----------------------------------------
+type adbd_config_prop, property_type;
+
+type module_sdkextensions_prop, property_type;

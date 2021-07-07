@@ -31,9 +31,9 @@ on early-init
     perform_apex_config
     exec_start derive_sdk
 
-    exec - root system -- /system/bin/apkdmverity /dev/block/by-name/microdroid-apk /dev/block/by-name/microdroid-apk-idsig microdroid-apk
+#    exec - root system -- /system/bin/apkdmverity /dev/block/by-name/microdroid-apk /dev/block/by-name/microdroid-apk-idsig microdroid-apk
     mkdir /mnt/apk 0755 system system
-    start zipfuse
+#    start zipfuse
 
 on init
     # Mount binderfs
@@ -52,16 +52,16 @@ on init
     # Start logd before any other services run to ensure we capture all of their logs.
     start logd
 
-    start servicemanager
+   # start servicemanager
 
     # TODO(b/185767624): remove hidl after full keymint support
-    start hwservicemanager
+  #  start hwservicemanager
 
     start adbd
 
     # TODO(b/186396070) microdroid_manager starts zipfuse if necessary
     # TODO(b/186396070) move this before apexd for DICE derivation
-    start microdroid_manager
+#    start microdroid_manager
 
 on load_persist_props_action
     start logd
@@ -98,10 +98,10 @@ on post-fs
     # The bind+remount combination allows this to work in containers.
     mount rootfs rootfs / remount bind ro nodev
 
-    start keystore2
+#    start keystore2
 
 on late-fs
-    start vendor.keymint-microdroid
+#    start vendor.keymint-microdroid
 
     # TODO(b/185767624): change the hard-coded size?
     mount tmpfs tmpfs /data noatime nosuid nodev rw size=128M
@@ -127,7 +127,7 @@ on post-fs-data
     mkdir /data/tombstones 0771 system system
     mkdir /data/vendor/tombstones 0771 root root
 
-    start tombstoned
+#    start tombstoned
 
     # set up keystore directory structure first so that we can end early boot
     # and start apexd

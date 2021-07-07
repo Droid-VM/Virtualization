@@ -81,10 +81,19 @@ allow logd linkerconfig_file:dir search;
 allow logd microdroid_manager:dir search;
 allow logd microdroid_manager:file { getattr open read };
 allow logd null_device:chr_file { open read };
-allow logd proc_kmsg:file read;
+#allow logd proc_kmsg:file read;
+r_dir_file(logd, cgroup)
+r_dir_file(logd, cgroup_v2)
+r_dir_file(logd, proc_kmsg)
+r_dir_file(logd, proc_meminfo)
 allow logd self:fifo_file { read write };
 allow logd self:file { getattr open read };
-allow logd self:netlink_audit_socket getopt;
+allow logd self:global_capability_class_set { setuid setgid setpcap sys_nice audit_control };
+allow logd self:global_capability2_class_set syslog;
+#allow logd self:netlink_audit_socket getopt;
+allow logd self:netlink_audit_socket { create_socket_perms_no_ioctl nlmsg_write };
+allow logd kmsg_device:chr_file { getattr w_file_perms };
+r_dir_file(logd, domain)
 allow logd self:unix_stream_socket { accept getopt setopt shutdown };
 allow logd servicemanager:dir search;
 allow logd servicemanager:file { open read };
@@ -94,6 +103,9 @@ allow logd tombstoned:dir search;
 allow logd tombstoned:file { getattr open read };
 allow logd ueventd:dir search;
 allow logd ueventd:file { getattr open read };
+control_logd(logd)
+read_runtime_log_tags(logd)
+
 allow servicemanager default_android_service:service_manager add;
 allow servicemanager microdroid_manager:binder transfer;
 allow system_data_file tmpfs:filesystem associate;
@@ -114,3 +126,52 @@ allow file_type tmpfs:filesystem associate;
 allow file_type rootfs:filesystem associate;
 allow dev_type tmpfs:filesystem associate;
 allow proc_net proc:filesystem associate;
+
+
+#-----------------------------------------
+# Path resolution access in cgroups.
+allow domain cgroup:dir search;
+allow { domain } cgroup:dir w_dir_perms;
+allow { domain } cgroup:file w_file_perms;
+
+allow domain cgroup_v2:dir search;
+allow { domain } cgroup_v2:dir w_dir_perms;
+allow { domain } cgroup_v2:file w_file_perms;
+
+allow domain cgroup_rc_file:dir search;
+allow domain cgroup_rc_file:file r_file_perms;
+allow domain task_profiles_file:file r_file_perms;
+allow domain task_profiles_api_file:file r_file_perms;
+
+#-----------------------------------------
+allow kernel apkdmverity:fd use;
+
+#-----------------------------------------
+# Allow access to fsverity keyring.
+allow domain kernel:key search;
+
+#-----------------------------------------
+# Domain for derive_sdk
+type derive_sdk, domain, coredomain;
+type derive_sdk_exec, system_file_type, exec_type, file_type;
+init_daemon_domain(derive_sdk)
+
+# Read /apex
+allow derive_sdk apex_mnt_dir:dir r_dir_perms;
+
+# Prop rules: writable by derive_sdk, readable by bootclasspath (apps)
+set_prop(derive_sdk, module_sdkextensions_prop)
+
+#-------------------------------------------
+allow apexd kmsg_device:chr_file w_file_perms;
+
+#-----------------------------------------
+typeattribute adbd coredomain;
+typeattribute adbd mlstrustedsubject;
+allow adbd self:global_capability_class_set { setuid setgid };
+dontaudit adbd self:{ socket vsock_socket } create;
+allow adbd self:vsock_socket { create_socket_perms_no_ioctl listen accept };
+allow adbd devpts:chr_file rw_file_perms;
+domain_auto_trans(adbd, shell_exec, shell)
+net_domain(adbd)
+
