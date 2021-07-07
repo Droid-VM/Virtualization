@@ -47,6 +47,29 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "62a4a2f4_3a83b6af",
+        "filename": "microdroid/keymint/service.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-07T00:33:16Z",
+      "side": 1,
+      "message": "Reading a sysprop is not an RPC. The properties having the same context are in a tree structure which is memory-mapped to the client. The APIs below are just accessor to the sysprop.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 68
+      },
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "100d0f33_e824030e",
@@ -65,6 +88,63 @@
         "startChar": 0,
         "endLine": 78,
         "endChar": 21
+      },
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a72337c3_74c41c55",
+        "filename": "microdroid/sepolicy/system/public/property.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-07T00:33:16Z",
+      "side": 1,
+      "message": "we need two neverallow rules to make sure that this sysprop is not accessible to others:\n\nneverallow { domain -init -microdroid_manager -hal_keymint_default } vmsecret_keymint_prop:property_service set;\n\nneverallow { domain -init -microdroid_manager -hal_keymint_default } vmsecret_keymint_prop:file no_rw_file_perms;",
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c833513_db795b96",
+        "filename": "microdroid/sepolicy/vendor/hal_keymint_default.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-07T00:33:16Z",
+      "side": 1,
+      "message": "this should better have the write privilege as well so that it can be reset after read.",
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95f35580_c9c7069a",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-07T00:33:16Z",
+      "side": 1,
+      "message": "Drop this, so that this can be reset after the value is read once by the keymint.",
+      "range": {
+        "startLine": 40,
+        "startChar": 33,
+        "endLine": 40,
+        "endChar": 36
       },
       "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
