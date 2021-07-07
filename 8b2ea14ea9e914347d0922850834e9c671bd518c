@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3493c7d3_9b8eef3b",
+        "filename": "microdroid/keymint/service.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-07T00:03:21Z",
+      "side": 1,
+      "message": "Why is this at the top of others?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 34
+      },
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "827fb594_a6248c1f",
+        "filename": "microdroid/keymint/service.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-07T00:03:21Z",
+      "side": 1,
+      "message": "How about returning Result\u003cKeymasterKeyBlob\u003e?",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 52
+      },
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "100d0f33_e824030e",
+        "filename": "microdroid/keymint/service.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-07T00:03:21Z",
+      "side": 1,
+      "message": "nit: Can\u0027t we use base::GetProperty?",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 21
+      },
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4335469d_548f9154",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-07T00:03:21Z",
+      "side": 1,
+      "message": "Let\u0027s put the error in the warning log.",
+      "range": {
+        "startLine": 41,
+        "startChar": 12,
+        "endLine": 41,
+        "endChar": 44
+      },
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6cb642b_8c489de9",
+        "filename": "microdroid_manager/src/property.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-07T00:03:21Z",
+      "side": 1,
+      "message": "Style guide says unsafe block should be annotated with comments explaining safety reasoning.",
+      "range": {
+        "startLine": 25,
+        "startChar": 7,
+        "endLine": 25,
+        "endChar": 13
+      },
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
