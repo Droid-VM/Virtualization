@@ -20,10 +20,11 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import static org.junit.Assume.assumeThat;
 
 import com.android.compatibility.common.tradefed.build.CompatibilityBuildHelper;
+import com.android.tradefed.build.IBuildInfo;
 import com.android.tradefed.device.DeviceNotAvailableException;
+import com.android.tradefed.device.ITestDevice;
 import com.android.tradefed.log.LogUtil.CLog;
 import com.android.tradefed.testtype.junit4.BaseHostJUnit4Test;
 import com.android.tradefed.util.CommandResult;
@@ -50,92 +51,67 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
 
     private static final long MICRODROID_ADB_CONNECT_TIMEOUT_MINUTES = 5;
 
-    public void prepareVirtualizationTestSetup() throws DeviceNotAvailableException {
+    public static void prepareVirtualizationTestSetup(ITestDevice androidDevice)
+            throws DeviceNotAvailableException {
+        CommandRunner android = new CommandRunner(androidDevice);
+
         // kill stale crosvm processes
-        tryRunOnAndroid("killall", "crosvm");
+        android.tryRun("killall", "crosvm");
 
         // Prepare the test root
-        tryRunOnAndroid("rm", "-rf", TEST_ROOT);
-        tryRunOnAndroid("mkdir", "-p", TEST_ROOT);
+        android.tryRun("rm", "-rf", TEST_ROOT);
+        android.tryRun("mkdir", "-p", TEST_ROOT);
 
         // disconnect from microdroid
         tryRunOnHost("adb", "disconnect", MICRODROID_SERIAL);
     }
 
-    public void cleanUpVirtualizationTestSetup() throws DeviceNotAvailableException {
+    public static void cleanUpVirtualizationTestSetup(ITestDevice androidDevice)
+            throws DeviceNotAvailableException {
+        CommandRunner android = new CommandRunner(androidDevice);
+
         // disconnect from microdroid
         tryRunOnHost("adb", "disconnect", MICRODROID_SERIAL);
 
         // kill stale VMs and directories
-        tryRunOnAndroid("killall", "crosvm");
-        tryRunOnAndroid("rm", "-rf", "/data/misc/virtualizationservice/*");
-        tryRunOnAndroid("stop", "virtualizationservice");
+        android.tryRun("killall", "crosvm");
+        android.tryRun("rm", "-rf", "/data/misc/virtualizationservice/*");
+        android.tryRun("stop", "virtualizationservice");
     }
 
-    public void testIfDeviceIsCapable() throws DeviceNotAvailableException {
+    public static void testIfDeviceIsCapable(ITestDevice androidDevice)
+            throws DeviceNotAvailableException {
+        CommandRunner android = new CommandRunner(androidDevice);
+
         // Checks the preconditions to run microdroid. If the condition is not satisfied
         // don't run the test (instead of failing)
-        skipIfFail("ls /dev/kvm");
-        skipIfFail("ls /dev/vhost-vsock");
-        skipIfFail("ls /apex/com.android.virt/bin/crosvm");
+        android.assumeSuccess("ls /dev/kvm");
+        android.assumeSuccess("ls /dev/vhost-vsock");
+        android.assumeSuccess("ls /apex/com.android.virt/bin/crosvm");
     }
 
     // Run an arbitrary command in the host side and returns the result
-    private String runOnHost(String... cmd) {
+    private static String runOnHost(String... cmd) {
         return runOnHostWithTimeout(10000, cmd);
     }
 
     // Same as runOnHost, but failure is not an error
-    private String tryRunOnHost(String... cmd) {
+    private static String tryRunOnHost(String... cmd) {
         final long timeout = 10000;
         CommandResult result = RunUtil.getDefault().runTimedCmd(timeout, cmd);
         return result.getStdout().trim();
     }
 
     // Same as runOnHost, but with custom timeout
-    private String runOnHostWithTimeout(long timeoutMillis, String... cmd) {
+    private static String runOnHostWithTimeout(long timeoutMillis, String... cmd) {
         assertTrue(timeoutMillis >= 0);
         CommandResult result = RunUtil.getDefault().runTimedCmd(timeoutMillis, cmd);
         assertThat(result.getStatus(), is(CommandStatus.SUCCESS));
         return result.getStdout().trim();
     }
 
-    // Run a shell command on Android. the default timeout is 2 min by tradefed
-    public String runOnAndroid(String... cmd) throws DeviceNotAvailableException {
-        CommandResult result = getDevice().executeShellV2Command(join(cmd));
-        if (result.getStatus() != CommandStatus.SUCCESS) {
-            fail(join(cmd) + " has failed: " + result);
-        }
-        return result.getStdout().trim();
-    }
-
-    // Same as runOnAndroid, but returns null on error.
-    public String tryRunOnAndroid(String... cmd) throws DeviceNotAvailableException {
-        CommandResult result = getDevice().executeShellV2Command(join(cmd));
-        if (result.getStatus() == CommandStatus.SUCCESS) {
-            return result.getStdout().trim();
-        } else {
-            CLog.d(join(cmd) + " has failed (but ok): " + result);
-            return null;
-        }
-    }
-
-    private String runOnAndroidWithTimeout(long timeoutMillis, String... cmd)
-            throws DeviceNotAvailableException {
-        CommandResult result =
-                getDevice()
-                        .executeShellV2Command(
-                                join(cmd),
-                                timeoutMillis,
-                                java.util.concurrent.TimeUnit.MILLISECONDS);
-        if (result.getStatus() != CommandStatus.SUCCESS) {
-            fail(join(cmd) + " has failed: " + result);
-        }
-        return result.getStdout().trim();
-    }
-
     // Run a shell command on Microdroid
-    public String runOnMicrodroid(String... cmd) {
+    public static String runOnMicrodroid(String... cmd) {
         CommandResult result = runOnMicrodroidForResult(cmd);
         if (result.getStatus() != CommandStatus.SUCCESS) {
             fail(join(cmd) + " has failed: " + result);
@@ -144,7 +120,7 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
     }
 
     // Same as runOnMicrodroid, but returns null on error.
-    public String tryRunOnMicrodroid(String... cmd) {
+    public static String tryRunOnMicrodroid(String... cmd) {
         CommandResult result = runOnMicrodroidForResult(cmd);
         if (result.getStatus() == CommandStatus.SUCCESS) {
             return result.getStdout().trim();
@@ -154,51 +130,62 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
         }
     }
 
-    public CommandResult runOnMicrodroidForResult(String... cmd) {
+    public static CommandResult runOnMicrodroidForResult(String... cmd) {
         final long timeout = 30000; // 30 sec. Microdroid is extremely slow on GCE-on-CF.
         return RunUtil.getDefault()
                 .runTimedCmd(timeout, "adb", "-s", MICRODROID_SERIAL, "shell", join(cmd));
     }
 
-    private String join(String... strs) {
+    private static String join(String... strs) {
         return String.join(" ", Arrays.asList(strs));
     }
 
     public File findTestFile(String name) {
+        return findTestFile(getBuild(), name);
+    }
+
+    private static File findTestFile(IBuildInfo buildInfo, String name) {
         try {
-            return (new CompatibilityBuildHelper(getBuild())).getTestFile(name);
+            return (new CompatibilityBuildHelper(buildInfo)).getTestFile(name);
         } catch (FileNotFoundException e) {
             fail("Missing test file: " + name);
             return null;
         }
     }
 
-    public String startMicrodroid(
-            String apkName, String packageName, String configPath, boolean debug)
+    public static String startMicrodroid(
+            ITestDevice androidDevice,
+            IBuildInfo buildInfo,
+            String apkName,
+            String packageName,
+            String configPath,
+            boolean debug)
             throws DeviceNotAvailableException {
+        CommandRunner android = new CommandRunner(androidDevice);
+
         // Install APK
-        File apkFile = findTestFile(apkName);
-        getDevice().installPackage(apkFile, /* reinstall */ true);
+        File apkFile = findTestFile(buildInfo, apkName);
+        androidDevice.installPackage(apkFile, /* reinstall */ true);
 
         // Get the path to the installed apk. Note that
         // getDevice().getAppPackageInfo(...).getCodePath() doesn't work due to the incorrect
         // parsing of the "=" character. (b/190975227). So we use the `pm path` command directly.
-        String apkPath = runOnAndroid("pm", "path", packageName);
+        String apkPath = android.run("pm", "path", packageName);
         assertTrue(apkPath.startsWith("package:"));
         apkPath = apkPath.substring("package:".length());
 
         // Push the idsig file to the device
-        File idsigOnHost = findTestFile(apkName + ".idsig");
+        File idsigOnHost = findTestFile(buildInfo, apkName + ".idsig");
         final String apkIdsigPath = TEST_ROOT + apkName + ".idsig";
-        getDevice().pushFile(idsigOnHost, apkIdsigPath);
+        androidDevice.pushFile(idsigOnHost, apkIdsigPath);
 
         final String logPath = TEST_ROOT + "log.txt";
         final String debugFlag = debug ? "--debug " : "";
 
         // Run the VM
-        runOnAndroid("start", "virtualizationservice");
+        android.run("start", "virtualizationservice");
         String ret =
-                runOnAndroid(
+                android.run(
                         VIRT_APEX + "bin/vm",
                         "run-app",
                         "--daemonize",
@@ -214,7 +201,7 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
                 () -> {
                     try {
                         // Keep redirecting sufficiently long enough
-                        runOnAndroidWithTimeout(
+                        android.runWithTimeout(
                                 MICRODROID_BOOT_TIMEOUT_MINUTES * 60 * 1000,
                                 "logwrapper",
                                 "tail",
@@ -233,12 +220,15 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
         return matcher.group(1);
     }
 
-    public void shutdownMicrodroid(String cid) throws DeviceNotAvailableException {
+    public static void shutdownMicrodroid(ITestDevice androidDevice, String cid)
+            throws DeviceNotAvailableException {
+        CommandRunner android = new CommandRunner(androidDevice);
+
         // Shutdown microdroid
-        runOnAndroid(VIRT_APEX + "bin/vm", "stop", cid);
+        android.run(VIRT_APEX + "bin/vm", "stop", cid);
 
         // TODO(192660485): Figure out why shutting down the VM disconnects adb on cuttlefish
-        // temporarily. Without this wait, the rest of `runOnAndroid/skipIfFail` fails due to the
+        // temporarily. Without this wait, the rest of execution on Android fails due to the
         // connection loss, and results in assumption error exception for the rest of the tests.
         try {
             Thread.sleep(1000);
@@ -247,7 +237,7 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
         }
     }
 
-    public void rootMicrodroid() throws DeviceNotAvailableException {
+    public static void rootMicrodroid() throws DeviceNotAvailableException {
         runOnHost("adb", "-s", MICRODROID_SERIAL, "root");
 
         // TODO(192660959): Figure out the root cause and remove the sleep. For unknown reason,
@@ -262,12 +252,13 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
 
     // Establish an adb connection to microdroid by letting Android forward the connection to
     // microdroid. Wait until the connection is established and microdroid is booted.
-    public void adbConnectToMicrodroid(String cid) throws DeviceNotAvailableException {
+    public static void adbConnectToMicrodroid(ITestDevice androidDevice, String cid)
+            throws DeviceNotAvailableException {
         long start = System.currentTimeMillis();
         long timeoutMillis = MICRODROID_ADB_CONNECT_TIMEOUT_MINUTES * 60 * 1000;
         long elapsed = 0;
 
-        final String serial = getDevice().getSerialNumber();
+        final String serial = androidDevice.getSerialNumber();
         final String from = "tcp:" + TEST_VM_ADB_PORT;
         final String to = "vsock:" + cid + ":5555";
         runOnHost("adb", "-s", serial, "forward", from, to);
@@ -300,10 +291,5 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
 
         // Check if it actually booted by reading a sysprop.
         assertThat(runOnMicrodroid("getprop", "ro.hardware"), is("microdroid"));
-    }
-
-    private void skipIfFail(String command) throws DeviceNotAvailableException {
-        CommandResult result = getDevice().executeShellV2Command(command);
-        assumeThat(result.getStatus(), is(CommandStatus.SUCCESS));
     }
 }
