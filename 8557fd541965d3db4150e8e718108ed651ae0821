@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19445b62_c4ef7fe7",
+        "filename": "microdroid/keymint/MicrodroidKeyMintDevice.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1678423
+      },
+      "writtenOn": "2021-07-08T13:42:24Z",
+      "side": 1,
+      "message": "Should this be \"KM_ERROR_UNIMPLEMENTED\", just like other unsupported operations like: destroyAttestationIds, convertStorageKeyToEphemeral etc.\n\nSame for deleteKey above and deviceLocked below.",
+      "range": {
+        "startLine": 357,
+        "startChar": 33,
+        "endLine": 357,
+        "endChar": 44
+      },
+      "revId": "8557fd541965d3db4150e8e718108ed651ae0821",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a969eb8b_19deaab3",
+        "filename": "microdroid/keymint/MicrodroidKeyMintDevice.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1678423
+      },
+      "writtenOn": "2021-07-08T13:42:24Z",
+      "side": 1,
+      "message": "I thought this too might not be needed by the VMs.",
+      "range": {
+        "startLine": 398,
+        "startChar": 39,
+        "endLine": 398,
+        "endChar": 55
+      },
+      "revId": "8557fd541965d3db4150e8e718108ed651ae0821",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "435ae2f2_627cef8e",
         "filename": "microdroid/keymint/include/MicrodroidKeyMintDevice.h",
         "patchSetId": 2
