@@ -23,6 +23,11 @@ import android.system.virtualizationservice.IVirtualMachine;
  */
 oneway interface IVirtualMachineCallback {
     /**
+     * Called when the payload starts in the VM. `stdout` is the stdout of the payload.
+     */
+    void onPayloadStarted(int cid, in ParcelFileDescriptor stdout);
+
+    /**
      * Called when the VM dies.
      *
      * Note that this will not be called if the VirtualizationService itself dies, so you should

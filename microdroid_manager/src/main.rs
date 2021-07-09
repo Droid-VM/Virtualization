@@ -19,12 +19,16 @@ mod metadata;
 
 use anyhow::{anyhow, bail, Result};
 use keystore2_system_property::PropertyWatcher;
-use log::info;
+use log::{error, info};
 use microdroid_payload_config::{Task, TaskType, VmPayloadConfig};
 use std::fs;
+use std::fs::File;
+use std::os::unix::io::{FromRawFd, IntoRawFd};
 use std::path::Path;
 use std::process::Command;
+use std::str;
 use std::time::Duration;
+use vsock::VsockStream;
 
 const WAIT_TIMEOUT: Duration = Duration::from_secs(10);
 
@@ -38,7 +42,10 @@ fn main() -> Result<()> {
 
         // TODO(jooyung): wait until sys.boot_completed?
         if let Some(main_task) = &config.task {
-            exec_task(main_task)?;
+            exec_task(main_task).map_err(|e| {
+                error!("failed to execute task: {}", e);
+                e
+            })?;
         }
     }
 
@@ -51,16 +58,30 @@ fn load_config(path: &Path) -> Result<VmPayloadConfig> {
     Ok(serde_json::from_reader(file)?)
 }
 
+/// Executes the given task. Stdout of the task is piped into the vsock stream to the
+/// virtualizationservice in the host side.
 fn exec_task(task: &Task) -> Result<()> {
-    info!("executing main task {:?}...", task);
-    let exit_status = build_command(task)?.spawn()?.wait()?;
-    if exit_status.success() {
-        Ok(())
-    } else {
-        match exit_status.code() {
-            Some(code) => bail!("task exited with exit code: {}", code),
-            None => bail!("task terminated by signal"),
+    const VMADDR_CID_HOST: u32 = 2;
+    const PORT_VIRT_SVC: u32 = 3000;
+    match VsockStream::connect_with_cid_port(VMADDR_CID_HOST, PORT_VIRT_SVC) {
+        Ok(stream) => {
+            info!("executing main task {:?}...", task);
+            // SAFETY: the ownership of the underlying file descriptor is transferred from stream
+            // to the file object, and then into the Command object. When the command is finished,
+            // the file descriptor is closed.
+            let guest_to_host = unsafe { File::from_raw_fd(stream.into_raw_fd()) };
+            // TODO(jiyong): consider piping the stream into stdio (and probably stderr) as well.
+            let mut child = build_command(task)?.stdout(guest_to_host).spawn()?;
+            match child.wait()?.code() {
+                Some(0) => {
+                    info!("task successfully finished");
+                    Ok(())
+                }
+                Some(code) => bail!("task exited with exit code: {}", code),
+                None => bail!("task terminated by signal"),
+            }
         }
+        Err(e) => bail!("failed to connect to virtualization service: {}", e),
     }
 }
 
