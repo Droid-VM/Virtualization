@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77547eb1_489ed3fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-09T16:06:43Z",
+      "side": 1,
+      "message": "Looks good, just some nits.",
+      "revId": "c624aa19c3a0d9bd42175e5f6e0fd93cfd877ad7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "654e46db_2ab5780f",
+        "filename": "compos/aidl/com/android/compos/ICompOsKeyService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-09T16:06:43Z",
+      "side": 1,
+      "message": "nit: I think it\u0027s a commom pattern to use \"STOPSHIP(bug number)\". Could you file a bug for better visibility?\n\nOr rather, if this tool could be useful for debugging even after launch, we can probably keep it and just add `installable: false` to Android.bp.",
+      "range": {
+        "startLine": 49,
+        "startChar": 7,
+        "endLine": 49,
+        "endChar": 11
+      },
+      "revId": "c624aa19c3a0d9bd42175e5f6e0fd93cfd877ad7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bef59b89_913ccd52",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-09T16:06:43Z",
+      "side": 1,
+      "message": "could errno \u003d\u003d 0 when read return -1?",
+      "range": {
+        "startLine": 180,
+        "startChar": 81,
+        "endLine": 180,
+        "endChar": 87
+      },
+      "revId": "c624aa19c3a0d9bd42175e5f6e0fd93cfd877ad7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20ab55f2_5f401066",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-09T16:06:43Z",
+      "side": 1,
+      "message": "Not a big deal, but I wonder if this could simply be `free`.",
+      "range": {
+        "startLine": 189,
+        "startChar": 40,
+        "endLine": 189,
+        "endChar": 51
+      },
+      "revId": "c624aa19c3a0d9bd42175e5f6e0fd93cfd877ad7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eed169d7_415516e5",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-09T16:06:43Z",
+      "side": 1,
+      "message": "style nit: sizeof(...)  // I didn\u0027t know this works!",
+      "range": {
+        "startLine": 193,
+        "startChar": 44,
+        "endLine": 193,
+        "endChar": 50
+      },
+      "revId": "c624aa19c3a0d9bd42175e5f6e0fd93cfd877ad7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
