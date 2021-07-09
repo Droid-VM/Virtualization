@@ -43,3 +43,6 @@ allow microdroid_app vm_payload_key:keystore2_key {
     rebind
     use
 };
+
+# Write to /dev/kmsg.
+allow microdroid_app kmsg_device:chr_file rw_file_perms;
