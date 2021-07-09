@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47aadda0_87e60f35",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-09T05:29:24Z",
+      "side": 1,
+      "message": "Creating a VM with a different name would fail at this with FileAlreadyExistsException?",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 72
+      },
+      "revId": "c33a02e01d4e24833a3da21fb1cf857f03ab6c9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4893f69a_92c91306",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-09T05:29:24Z",
+      "side": 1,
+      "message": "try-with-resource",
+      "range": {
+        "startLine": 286,
+        "startChar": 12,
+        "endLine": 286,
+        "endChar": 27
+      },
+      "revId": "c33a02e01d4e24833a3da21fb1cf857f03ab6c9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9680fb9a_c9393d84",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-09T05:29:24Z",
+      "side": 1,
+      "message": "How can an app handle \"incompatible config\"? At least, we need to document this can throw \"incompatible config\" exception.",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 88
+      },
+      "revId": "c33a02e01d4e24833a3da21fb1cf857f03ab6c9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
