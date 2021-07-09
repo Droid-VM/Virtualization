@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20d7a1e6_e25d8203",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-09T20:45:21Z",
+      "side": 1,
+      "message": "Documenting some findings for `Module x86_64 MicrodroidHostTestCases only ran 2 out of 8 expected tests.` ...\n\n * The error log is not complete. When thrown from a class method, the assumption exception isn\u0027t handled by the test infra (b/37502066), which is very confusing.\n   * Added some workaround to capture the log and make the infra happy.\n * The assumptions failed silently, likely because of the adb disconnection.\n   * Adding sleep(1) back from aosp/1759889 works around the problem for me locally. But let\u0027s see if it\u0027s also the case on TH...",
+      "parentUuid": "83186155_ab7445db",
+      "revId": "4f53100ddb0bedfcb2f364a46320da13bfaad62f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b9523e2_08e74b67",
