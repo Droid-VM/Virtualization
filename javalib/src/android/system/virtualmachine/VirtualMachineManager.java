@@ -85,10 +85,7 @@ public class VirtualMachineManager {
             }
         }
 
-        if (vm.getConfig().equals(config)) {
-            return vm;
-        } else {
-            throw new VirtualMachineException("Incompatible config");
-        }
+        vm.setConfig(config);
+        return vm;
     }
 }
