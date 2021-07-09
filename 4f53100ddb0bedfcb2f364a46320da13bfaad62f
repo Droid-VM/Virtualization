@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83186155_ab7445db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-09T15:29:23Z",
+      "side": 1,
+      "message": "Looks like it\u0027s always the first test case that fails due to adb disconnection. I added a wait-for-device to hopefully fix it (until the \"root\" cause is fixed).\n\n07-08 18:05:32 I/AuthFsTestCase: Starting authfs\n07-08 18:05:32 D/RunUtil: Running command [adb, -s, localhost:8000, shell, /system/bin/authfs /data/local/tmp --remote-new-rw-file 20:3 --cid 2] with timeout: 30s\n07-08 18:05:32 D/RunUtil: Running command [adb, -s, localhost:8000, shell, stat -f -c \u0027%t\u0027 /data/local/tmp] with timeout: 30s\n07-08 18:05:32 W/AuthFsTestCase: authfs has stopped: CommandResult: exit code\u003d1, out\u003d, err\u003dadb: device offline",
+      "parentUuid": "6f937044_54162e29",
+      "revId": "4f53100ddb0bedfcb2f364a46320da13bfaad62f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b9523e2_08e74b67",
