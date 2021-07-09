@@ -2,8 +2,12 @@ typeattribute hwservicemanager coredomain;
 
 init_daemon_domain(hwservicemanager)
 
-add_hwservice(hwservicemanager, hidl_manager_hwservice)
-add_hwservice(hwservicemanager, hidl_token_hwservice)
+allow hwservicemanager hidl_base_hwservice:hwservice_manager add;
+allow hwservicemanager hidl_manager_hwservice:hwservice_manager add;
+allow hwservicemanager vendor_configs_file:file { open getattr };
 
-set_prop(hwservicemanager, ctl_interface_start_prop)
-set_prop(hwservicemanager, hwservicemanager_prop)
+allow tombstoned self:dir search;
+allow tombstoned self:lnk_file read;
+allow tombstoned self:unix_stream_socket accept;
+allow tombstoned tombstone_data_file:dir { add_name search write };
+allow tombstoned tombstone_data_file:file { append link };
