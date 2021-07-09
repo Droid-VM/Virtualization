@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0e3ac12_4cbe1119",
+        "filename": "compos/aidl/com/android/compos/ICompOsKeyService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-09T17:23:50Z",
+      "side": 1,
+      "message": "\u003e nit: I think it\u0027s a commom pattern to use \"STOPSHIP(bug number)\". Could you file a bug for better visibility?\n\nDone.\n\n\u003e \n\u003e Or rather, if this tool could be useful for debugging even after launch, we can probably keep it and just add `installable: false` to Android.bp.\n\nThe tool isn\u0027t the problem - it\u0027s exposing this API from within the VM, which allows arbitrary files to be signed.",
+      "parentUuid": "654e46db_2ab5780f",
+      "range": {
+        "startLine": 49,
+        "startChar": 7,
+        "endLine": 49,
+        "endChar": 11
+      },
+      "revId": "c624aa19c3a0d9bd42175e5f6e0fd93cfd877ad7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bef59b89_913ccd52",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-07-09T16:06:43Z",
       "side": 1,
       "message": "could errno \u003d\u003d 0 when read return -1?",
+      "range": {
+        "startLine": 180,
+        "startChar": 81,
+        "endLine": 180,
+        "endChar": 87
+      },
+      "revId": "c624aa19c3a0d9bd42175e5f6e0fd93cfd877ad7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db9649b8_6d9d4047",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-09T17:23:50Z",
+      "side": 1,
+      "message": "Hmm. that does seem overly paranoid.",
+      "parentUuid": "bef59b89_913ccd52",
       "range": {
         "startLine": 180,
         "startChar": 81,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "312ea022_7134483e",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-09T17:23:50Z",
+      "side": 1,
+      "message": "Not quite that simple, but yes, that seems better.",
+      "parentUuid": "20ab55f2_5f401066",
+      "range": {
+        "startLine": 189,
+        "startChar": 40,
+        "endLine": 189,
+        "endChar": 51
+      },
+      "revId": "c624aa19c3a0d9bd42175e5f6e0fd93cfd877ad7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eed169d7_415516e5",
@@ -100,6 +172,30 @@
       "writtenOn": "2021-07-09T16:06:43Z",
       "side": 1,
       "message": "style nit: sizeof(...)  // I didn\u0027t know this works!",
+      "range": {
+        "startLine": 193,
+        "startChar": 44,
+        "endLine": 193,
+        "endChar": 50
+      },
+      "revId": "c624aa19c3a0d9bd42175e5f6e0fd93cfd877ad7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2b02807_3877cea2",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-09T17:23:50Z",
+      "side": 1,
+      "message": "The parentheses are only needed for sizeof(type). (Which, arguably, should be avoided.)",
+      "parentUuid": "eed169d7_415516e5",
       "range": {
         "startLine": 193,
         "startChar": 44,
