@@ -1,13 +1,9 @@
-typeattribute tombstoned coredomain;
+typeattribute tombstoned mlstrustedsubject, coredomain;
 
 init_daemon_domain(tombstoned)
 
-get_prop(tombstoned, tombstone_config_prop)
-
-neverallow {
-    domain
-    -init
-    -vendor_init
-    -dumpstate
-    -tombstoned
-} tombstone_config_prop:file no_rw_file_perms;
+allow tombstoned self:dir search;
+allow tombstoned self:lnk_file read;
+allow tombstoned self:unix_stream_socket accept;
+allow tombstoned tombstone_data_file:dir { add_name search write };
+allow tombstoned tombstone_data_file:file { append link };
