@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0d277fa_56b522c2",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T16:38:13Z",
+      "side": 1,
+      "message": "I guess this and onDied should also copy mCallback to a local variable the same as onPayloadStarted.",
+      "revId": "1c65e36d7fc9bcde107500a6fe69f59670be0576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a37b2068_e56719fd",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T16:38:13Z",
+      "side": 1,
+      "message": "We already have `FIRST_GUEST_CID` in main.rs. You can move it here if you want, but let\u0027s not have the same constant in two different places.",
+      "revId": "1c65e36d7fc9bcde107500a6fe69f59670be0576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b197801_55f10900",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T16:38:13Z",
+      "side": 1,
+      "message": "This will block `handle_connection_from_vm` and prevent any connections for other VMs from being handled. Is it possible just to close the stream, and have the VM handle the resulting send errors?",
+      "revId": "1c65e36d7fc9bcde107500a6fe69f59670be0576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
