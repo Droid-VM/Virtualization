@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3edc9e13_86130f2a",
+        "filename": "microdroid/sepolicy/system/private/adbd.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-07-12T14:32:30Z",
+      "side": 1,
+      "message": "I refactored these rules based on existing private/adbd.te. It turned out that most of these rules are from domain.te, thus not needed.",
+      "parentUuid": "2d048576_7ecac708",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 58
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9759889f_4bbd685e",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-07-12T11:31:53Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 45
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c05ef4bb_f9d72ebc",
+        "filename": "microdroid/sepolicy/system/private/adbd.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-07-12T14:32:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9759889f_4bbd685e",
       "range": {
         "startLine": 31,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f943a5b5_c9bbd9f4",
+        "filename": "microdroid/sepolicy/system/private/crash_dump.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-07-12T14:32:30Z",
+      "side": 1,
+      "message": "These rules are from public/crash_dump.te.",
+      "parentUuid": "8fb3011a_0b5f7bad",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61d40352_260452b4",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3751a38e_20fadb7e",
+        "filename": "microdroid/sepolicy/system/private/dumpstate.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-07-12T14:32:30Z",
+      "side": 1,
+      "message": "I found that we don\u0027t use dumpstate for now. I removed all related rules.",
+      "parentUuid": "61d40352_260452b4",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 359
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63766569_53c4edfc",
@@ -106,6 +202,30 @@
       "writtenOn": "2021-07-12T11:31:53Z",
       "side": 1,
       "message": "why?",
+      "range": {
+        "startLine": 1,
+        "startChar": 19,
+        "endLine": 1,
+        "endChar": 36
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7c100cf_8de1f041",
+        "filename": "microdroid/sepolicy/system/private/logd.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-07-12T14:32:30Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "63766569_53c4edfc",
       "range": {
         "startLine": 1,
         "startChar": 19,
@@ -141,6 +261,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "74a6870e_a4fef008",
+        "filename": "microdroid/sepolicy/system/private/logd.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-07-12T14:32:30Z",
+      "side": 1,
+      "message": "Where? I can\u0027t find such rules.",
+      "parentUuid": "2a400dd4_35c8fff2",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 46
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cac1563b_05fa2541",
         "filename": "microdroid/sepolicy/system/private/servicemanager.te",
         "patchSetId": 6
@@ -152,6 +296,30 @@
       "writtenOn": "2021-07-12T11:31:53Z",
       "side": 1,
       "message": "why?",
+      "range": {
+        "startLine": 1,
+        "startChar": 29,
+        "endLine": 1,
+        "endChar": 46
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b94e3f1_5ec71afc",
+        "filename": "microdroid/sepolicy/system/private/servicemanager.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-07-12T14:32:30Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "cac1563b_05fa2541",
       "range": {
         "startLine": 1,
         "startChar": 29,
@@ -185,6 +353,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ba94594_e206a72c",
+        "filename": "microdroid/sepolicy/system/private/servicemanager.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-07-12T14:32:30Z",
+      "side": 1,
+      "message": "This was added at the first draft. No need now. Removed.",
+      "parentUuid": "e4d6e25b_4e7126b6",
+      "range": {
+        "startLine": 5,
+        "startChar": 21,
+        "endLine": 5,
+        "endChar": 44
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb546f51_cf9b9397",
@@ -198,6 +390,30 @@
       "writtenOn": "2021-07-12T11:31:53Z",
       "side": 1,
       "message": "why?",
+      "range": {
+        "startLine": 1,
+        "startChar": 25,
+        "endLine": 1,
+        "endChar": 42
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c7f21da_5fa08ecf",
+        "filename": "microdroid/sepolicy/system/private/tombstoned.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-07-12T14:32:30Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "bb546f51_cf9b9397",
       "range": {
         "startLine": 1,
         "startChar": 25,
