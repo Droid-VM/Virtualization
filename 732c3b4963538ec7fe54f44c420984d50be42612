@@ -20,6 +20,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9df5ccf4_7372ee3a",
+        "filename": "javalib/src/android/system/virtualmachine/IVirtualMachineCallback.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-12T09:15:37Z",
+      "side": 1,
+      "message": "In Java, we don\u0027t have to use I- prefix for interfaces.",
+      "range": {
+        "startLine": 22,
+        "startChar": 17,
+        "endLine": 22,
+        "endChar": 18
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ee99828_eb1fdfdb",
+        "filename": "javalib/src/android/system/virtualmachine/IVirtualMachineCallback.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-12T09:15:37Z",
+      "side": 1,
+      "message": "Should we use ParcelFileDescriptor? I don\u0027t know what alternative we have, but there might be a better alternative, I guess.",
+      "range": {
+        "startLine": 25,
+        "startChar": 45,
+        "endLine": 25,
+        "endChar": 72
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af98a033_af0d9418",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-12T09:15:37Z",
+      "side": 1,
+      "message": "typo: callback",
+      "range": {
+        "startLine": 192,
+        "startChar": 82,
+        "endLine": 192,
+        "endChar": 89
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a0bee07_34ee23d3",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 2
@@ -155,6 +224,75 @@
         "startChar": 62,
         "endLine": 231,
         "endChar": 89
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73805877_2e18daee",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-12T09:15:37Z",
+      "side": 1,
+      "message": "We might need a synchronized access to mCallback.",
+      "range": {
+        "startLine": 232,
+        "startChar": 32,
+        "endLine": 235,
+        "endChar": 37
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74d16f1c_f5cee0a9",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-12T09:15:37Z",
+      "side": 1,
+      "message": "nit: started?",
+      "range": {
+        "startLine": 486,
+        "startChar": 26,
+        "endLine": 486,
+        "endChar": 31
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "159c0754_a53c6adf",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-12T09:15:37Z",
+      "side": 1,
+      "message": "I think we should spawn a thread or something to forward a stream.",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 9
       },
       "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
