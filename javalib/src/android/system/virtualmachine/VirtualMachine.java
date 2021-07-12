@@ -107,6 +107,9 @@ public class VirtualMachine {
     /* package */ static VirtualMachine create(
             Context context, String name, VirtualMachineConfig config)
             throws VirtualMachineException {
+        if (config == null) {
+            throw new VirtualMachineException("null config");
+        }
         VirtualMachine vm = new VirtualMachine(context, name, config);
 
         try {
@@ -278,6 +281,10 @@ public class VirtualMachine {
         final VirtualMachineConfig oldConfig = getConfig();
         if (!oldConfig.isCompatibleWith(newConfig)) {
             throw new VirtualMachineException("incompatible config");
+        }
+        if (getStatus() == Status.RUNNING) {
+            throw new VirtualMachineException(
+                    "can't change config while virtual machine is running");
         }
 
         try {
