@@ -309,6 +309,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb750b88_dada3788",
+        "filename": "microdroid/sepolicy/system/private/logd.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-12T14:55:35Z",
+      "side": 1,
+      "message": "\u003e Where? I can\u0027t find such rules.\n\nThere are grants to domain in domain.te - e.g. https://source.corp.google.com/android/system/sepolicy/public/domain.te;rcl\u003d45bf908f53659f817b81b58dc23fb0a1d1712082;l\u003d166",
+      "parentUuid": "9977ac8a_6432f539",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 46
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cac1563b_05fa2541",
         "filename": "microdroid/sepolicy/system/private/servicemanager.te",
         "patchSetId": 6
