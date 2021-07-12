@@ -43,6 +43,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e4485e8_cbf7eb1c",
+        "filename": "javalib/src/android/system/virtualmachine/IVirtualMachineCallback.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T14:57:11Z",
+      "side": 1,
+      "message": "Maybe VirtualMachineListener would be a more idiomatic name?",
+      "range": {
+        "startLine": 22,
+        "startChar": 17,
+        "endLine": 22,
+        "endChar": 40
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0c1883e9_4b1bd104",
         "filename": "javalib/src/android/system/virtualmachine/IVirtualMachineCallback.java",
         "patchSetId": 2
@@ -277,6 +300,74 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d86514f_32434870",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T14:57:11Z",
+      "side": 1,
+      "message": "You should also link_to_death on the IVirtualMachine and call onDied from there too, in case virtualizationservice dies for some reason.",
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7feb68a9_3b77276c",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T14:57:11Z",
+      "side": 1,
+      "message": "Move these constants up to the top of the file, and write doc comments for them.",
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd8e968f_12351832",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T14:57:11Z",
+      "side": 1,
+      "message": "Log the error message. I\u0027d be inclined to avoid the unwrap() below by doing something like:\n\n```\nlet stream \u003d match stream {\n  Err(e) \u003d\u003e {\n    warn!(\"Invalid incoming connection: {}\", e);\n    continue;\n  }\n  Ok(s) \u003d\u003e s, \n};\n```",
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18b415b3_f7cf153e",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T14:57:11Z",
+      "side": 1,
+      "message": "Check `\u003c FIRST_GUEST_CID` instead.",
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74d16f1c_f5cee0a9",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 2
@@ -300,6 +391,189 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06b41be5_c7228f7e",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T14:57:11Z",
+      "side": 1,
+      "message": "This passes the same socket file descriptor to (potentially) multiple processes. What does that actually do? What happens if several processes try to read from it at the same time?",
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "257859c2_91ad4d95",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T14:57:11Z",
+      "side": 1,
+      "message": "event",
+      "range": {
+        "startLine": 493,
+        "startChar": 54,
+        "endLine": 493,
+        "endChar": 58
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c1cd1c6_c39ccb40",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T14:57:11Z",
+      "side": 1,
+      "message": "Capitalise CID.",
+      "range": {
+        "startLine": 493,
+        "startChar": 67,
+        "endLine": 493,
+        "endChar": 70
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc89ac95_e307e508",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T14:57:11Z",
+      "side": 1,
+      "message": "Capitalise CID.",
+      "range": {
+        "startLine": 503,
+        "startChar": 51,
+        "endLine": 503,
+        "endChar": 54
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ce33ae9_ce5776db",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T14:57:11Z",
+      "side": 1,
+      "message": "Just make this a `Cid`, rather than converting back and forth.",
+      "range": {
+        "startLine": 549,
+        "startChar": 26,
+        "endLine": 549,
+        "endChar": 29
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76924834_788de336",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T14:57:11Z",
+      "side": 1,
+      "message": "```\nself.vms().into_iter().find(|vm| vm.cid \u003d\u003d cid)\n```\n\nis a bit simpler.",
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa563727_46d047d5",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T14:57:11Z",
+      "side": 1,
+      "message": "Nit: combine these into\n\n```\nuse std::io::{self, BufRead, BufReader};\n```",
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f335fc71_2aa34ec5",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T14:57:11Z",
+      "side": 1,
+      "message": "I think it\u0027s still useful to tell the user that the VM was started and what the CID is, as they might want to connect to it from a different terminal, e.g. to set up the ADB proxy.",
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8176214c_cc3ff4e9",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T14:57:11Z",
+      "side": 1,
+      "message": "Use `BufReader` at the top of the file, so that you don\u0027t need to include the module name here.",
+      "range": {
+        "startLine": 153,
+        "startChar": 25,
+        "endLine": 153,
+        "endChar": 38
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "159c0754_a53c6adf",
         "filename": "vm/src/run.rs",
         "patchSetId": 2
@@ -311,6 +585,30 @@
       "writtenOn": "2021-07-12T09:15:37Z",
       "side": 1,
       "message": "I think we should spawn a thread or something to forward a stream.",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 9
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2450c668_59931475",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T14:57:11Z",
+      "side": 1,
+      "message": "Agreed, blocking the callback until the VM dies doesn\u0027t seem right.",
+      "parentUuid": "159c0754_a53c6adf",
       "range": {
         "startLine": 154,
         "startChar": 0,
