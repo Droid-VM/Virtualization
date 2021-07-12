@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d048576_7ecac708",
+        "filename": "microdroid/sepolicy/system/private/adbd.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T11:31:53Z",
+      "side": 1,
+      "message": "Please group these into similar rules. For example, you could have a group for rules for file/dir/link_files.",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 58
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9759889f_4bbd685e",
+        "filename": "microdroid/sepolicy/system/private/adbd.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T11:31:53Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 45
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fb3011a_0b5f7bad",
+        "filename": "microdroid/sepolicy/system/private/crash_dump.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T11:31:53Z",
+      "side": 1,
+      "message": "Where these new rules come from?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61d40352_260452b4",
+        "filename": "microdroid/sepolicy/system/private/dumpstate.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T11:31:53Z",
+      "side": 1,
+      "message": "can we have these in multiple lines?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 359
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63766569_53c4edfc",
+        "filename": "microdroid/sepolicy/system/private/logd.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T11:31:53Z",
+      "side": 1,
+      "message": "why?",
+      "range": {
+        "startLine": 1,
+        "startChar": 19,
+        "endLine": 1,
+        "endChar": 36
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a400dd4_35c8fff2",
+        "filename": "microdroid/sepolicy/system/private/logd.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T11:31:53Z",
+      "side": 1,
+      "message": "Why is this needed? This must have allowed to coredomain.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 46
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cac1563b_05fa2541",
+        "filename": "microdroid/sepolicy/system/private/servicemanager.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T11:31:53Z",
+      "side": 1,
+      "message": "why?",
+      "range": {
+        "startLine": 1,
+        "startChar": 29,
+        "endLine": 1,
+        "endChar": 46
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4d6e25b_4e7126b6",
+        "filename": "microdroid/sepolicy/system/private/servicemanager.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T11:31:53Z",
+      "side": 1,
+      "message": "This seems bad. Which service is registered as default_android_service?",
+      "range": {
+        "startLine": 5,
+        "startChar": 21,
+        "endLine": 5,
+        "endChar": 44
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb546f51_cf9b9397",
+        "filename": "microdroid/sepolicy/system/private/tombstoned.te",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T11:31:53Z",
+      "side": 1,
+      "message": "why?",
+      "range": {
+        "startLine": 1,
+        "startChar": 25,
+        "endLine": 1,
+        "endChar": 42
+      },
+      "revId": "52c388d91960dcd2a91f51573621dfb1d35bdf62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
