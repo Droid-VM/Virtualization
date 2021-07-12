@@ -19,6 +19,7 @@ use crate::crosvm::{CrosvmConfig, DiskFile, VmInstance};
 use crate::payload::make_payload_disk;
 use crate::{Cid, FIRST_GUEST_CID};
 
+use android_os_permissions_aidl::aidl::android::os::IPermissionController;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualizationService::IVirtualizationService;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::DiskImage::DiskImage;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualMachine::{
@@ -55,10 +56,6 @@ pub const BINDER_SERVICE_IDENTIFIER: &str = "android.system.virtualizationservic
 /// Directory in which to write disk image files used while running VMs.
 const TEMPORARY_DIRECTORY: &str = "/data/misc/virtualizationservice";
 
-// TODO(qwandor): Use PermissionController once it is available to Rust.
-/// Only processes running with one of these UIDs are allowed to call debug methods.
-const DEBUG_ALLOWED_UIDS: [u32; 2] = [0, 2000];
-
 /// The list of APEXes which microdroid requires.
 /// TODO(b/192200378) move this to microdroid.json?
 const MICRODROID_REQUIRED_APEXES: [&str; 3] =
@@ -91,6 +88,7 @@ impl IVirtualizationService for VirtualizationService {
         config: &VirtualMachineConfig,
         log_fd: Option<&ParcelFileDescriptor>,
     ) -> binder::Result<Strong<dyn IVirtualMachine>> {
+        check_manage_access()?;
         let state = &mut *self.state.lock().unwrap();
         let log_fd = log_fd.map(clone_file).transpose()?;
         let requester_uid = ThreadState::get_calling_uid();
@@ -187,6 +185,7 @@ impl IVirtualizationService for VirtualizationService {
         image_fd: &ParcelFileDescriptor,
         size: i64,
     ) -> binder::Result<()> {
+        check_manage_access()?;
         let size = size.try_into().map_err(|e| {
             new_binder_exception(
                 ExceptionCode::ILLEGAL_ARGUMENT,
@@ -435,15 +434,33 @@ fn get_calling_sid() -> Result<String, Status> {
     })
 }
 
+/// Checks whether the caller has a specific permission
+fn check_permission(perm: &str) -> binder::Result<()> {
+    let calling_pid = ThreadState::get_calling_pid();
+    let calling_uid = ThreadState::get_calling_uid();
+    // Root can do anything
+    if calling_uid == 0 {
+        return Ok(());
+    }
+    let perm_svc: Strong<dyn IPermissionController::IPermissionController> =
+        binder::get_interface("permission")?;
+    match perm_svc.checkPermission(perm, calling_pid, calling_uid as i32)? {
+        true => Ok(()),
+        false => Err(new_binder_exception(
+            ExceptionCode::SECURITY,
+            format!("does not have the {} permission", perm),
+        )),
+    }
+}
+
 /// Check whether the caller of the current Binder method is allowed to call debug methods.
 fn check_debug_access() -> binder::Result<()> {
-    let uid = ThreadState::get_calling_uid();
-    log::trace!("Debug method call from UID {}.", uid);
-    if DEBUG_ALLOWED_UIDS.contains(&uid) {
-        Ok(())
-    } else {
-        Err(new_binder_exception(ExceptionCode::SECURITY, "Debug access denied"))
-    }
+    check_permission("android.permission.DEBUG_VIRTUAL_MACHINE")
+}
+
+/// Check whether the caller of the current Binder method is allowed to manage VMs
+fn check_manage_access() -> binder::Result<()> {
+    check_permission("android.permission.MANAGE_VIRTUAL_MACHINE")
 }
 
 /// Implementation of the AIDL `IVirtualMachine` interface. Used as a handle to a VM.
@@ -463,10 +480,14 @@ impl Interface for VirtualMachine {}
 
 impl IVirtualMachine for VirtualMachine {
     fn getCid(&self) -> binder::Result<i32> {
+        // Don't check permission. The owner of the VM might have passed this binder object to
+        // others.
         Ok(self.instance.cid as i32)
     }
 
     fn isRunning(&self) -> binder::Result<bool> {
+        // Don't check permission. The owner of the VM might have passed this binder object to
+        // others.
         Ok(self.instance.running())
     }
 
@@ -474,6 +495,9 @@ impl IVirtualMachine for VirtualMachine {
         &self,
         callback: &Strong<dyn IVirtualMachineCallback>,
     ) -> binder::Result<()> {
+        // Don't check permission. The owner of the VM might have passed this binder object to
+        // others.
+        //
         // TODO: Should this give an error if the VM is already dead?
         self.instance.callbacks.add(callback.clone());
         Ok(())
