@@ -16,6 +16,40 @@
       "message": "Ping",
       "revId": "f7516cb4be778ba6ec2071d7ceba723ee34c0706",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "205542d6_32b3725a",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T11:04:02Z",
+      "side": 1,
+      "message": "Why would someone call this with a null config, rather than just calling get? If it tries to create with a null config then it will fail.",
+      "revId": "f7516cb4be778ba6ec2071d7ceba723ee34c0706",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6151cdcf_20d37601",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-12T11:04:02Z",
+      "side": 1,
+      "message": "If the VM is already running, this won\u0027t work as expected.",
+      "revId": "f7516cb4be778ba6ec2071d7ceba723ee34c0706",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
