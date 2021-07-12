@@ -111,6 +111,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f77fc38f_66987368",
+        "filename": "microdroid/keymint/service.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T14:26:57Z",
+      "side": 1,
+      "message": "What do you mean by \u0027normal accessor\u0027? GetProperty in libbase doesn\u0027t cache the result. The result is created on the stack. \n\nhttps://source.corp.google.com/android/system/libbase/properties.cpp;rcl\u003d2f02239dd832effb52fa7a9b5109a764840a4978;l\u003d109\n\n\u003e Will all the processes have the secret mapped into their memory that they could access even if the SELinux rules say they can\u0027t?\n\nNo. If the process doesn\u0027t have a permission to read the sysprop, the file is not mapped to the process.",
+      "parentUuid": "6a6a40d1_d92efebb",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 68
+      },
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "100d0f33_e824030e",
@@ -205,6 +229,30 @@
       "side": 1,
       "message": "It\u0027s not intended to be reset. Part of the reason for using a property was to persist the value for the duration of the boot of the VM so that, if keymint happened to restart for some reason, it would be able to recover without needing to reboot the whole VM. If that seems unnecessary, or there\u0027s a better way to do that then I\u0027ll change the approach.",
       "parentUuid": "95f35580_c9c7069a",
+      "range": {
+        "startLine": 40,
+        "startChar": 33,
+        "endLine": 40,
+        "endChar": 36
+      },
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91505c15_4c61679b",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T14:26:57Z",
+      "side": 1,
+      "message": "Ok. I actually don\u0027t understand why we should try to recover from such a failure, unless there\u0027s some non-determinism there. Anyway, I am fine with keeping this as it is, for the time being.",
+      "parentUuid": "9d532522_2594d05c",
       "range": {
         "startLine": 40,
         "startChar": 33,
