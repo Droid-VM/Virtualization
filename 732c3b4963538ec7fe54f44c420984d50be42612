@@ -64,6 +64,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41adef78_ed135fd8",
+        "filename": "javalib/src/android/system/virtualmachine/IVirtualMachineCallback.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "In Android, we already have many *Callback APIs.",
+      "parentUuid": "2e4485e8_cbf7eb1c",
+      "range": {
+        "startLine": 22,
+        "startChar": 17,
+        "endLine": 22,
+        "endChar": 40
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d01cefa_da577ae8",
+        "filename": "javalib/src/android/system/virtualmachine/IVirtualMachineCallback.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9df5ccf4_7372ee3a",
+      "range": {
+        "startLine": 22,
+        "startChar": 17,
+        "endLine": 22,
+        "endChar": 18
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c1883e9_4b1bd104",
@@ -77,6 +125,30 @@
       "writtenOn": "2021-07-12T11:50:10Z",
       "side": 1,
       "message": "Please add description about threading. e.g. Which thread this is called on? Is it okay to block the calling thread? ...",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 52
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fd61735_ee9c4bf3",
+        "filename": "javalib/src/android/system/virtualmachine/IVirtualMachineCallback.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c1883e9_4b1bd104",
       "range": {
         "startLine": 24,
         "startChar": 0,
@@ -110,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c619acdd_97b96b4f",
+        "filename": "javalib/src/android/system/virtualmachine/IVirtualMachineCallback.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "API council should know the answer. I will handle this when this becomes a real public API.",
+      "parentUuid": "4ee99828_eb1fdfdb",
+      "range": {
+        "startLine": 25,
+        "startChar": 45,
+        "endLine": 25,
+        "endChar": 72
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af98a033_af0d9418",
@@ -123,6 +219,30 @@
       "writtenOn": "2021-07-12T09:15:37Z",
       "side": 1,
       "message": "typo: callback",
+      "range": {
+        "startLine": 192,
+        "startChar": 82,
+        "endLine": 192,
+        "endChar": 89
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa8fcfea_7faf0c17",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af98a033_af0d9418",
       "range": {
         "startLine": 192,
         "startChar": 82,
@@ -298,6 +418,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2490127_8fcc8041",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "Done. I copied mCallback to a local variable.",
+      "parentUuid": "73805877_2e18daee",
+      "range": {
+        "startLine": 232,
+        "startChar": 32,
+        "endLine": 235,
+        "endChar": 37
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d86514f_32434870",
@@ -311,6 +455,24 @@
       "writtenOn": "2021-07-12T14:57:11Z",
       "side": 1,
       "message": "You should also link_to_death on the IVirtualMachine and call onDied from there too, in case virtualizationservice dies for some reason.",
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b16b6559_fb3c46c3",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d86514f_32434870",
       "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -332,6 +494,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3694dbe_84564935",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7feb68a9_3b77276c",
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd8e968f_12351832",
@@ -349,6 +529,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "188231ab_ebffd287",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd8e968f_12351832",
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18b415b3_f7cf153e",
@@ -362,6 +560,24 @@
       "writtenOn": "2021-07-12T14:57:11Z",
       "side": 1,
       "message": "Check `\u003c FIRST_GUEST_CID` instead.",
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "725c98e0_68b85687",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18b415b3_f7cf153e",
       "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -389,6 +605,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1cb3096_34d55e8d",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74d16f1c_f5cee0a9",
+      "range": {
+        "startLine": 486,
+        "startChar": 26,
+        "endLine": 486,
+        "endChar": 31
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06b41be5_c7228f7e",
@@ -402,6 +642,24 @@
       "writtenOn": "2021-07-12T14:57:11Z",
       "side": 1,
       "message": "This passes the same socket file descriptor to (potentially) multiple processes. What does that actually do? What happens if several processes try to read from it at the same time?",
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "710183d9_1a0bbcff",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "I haven\u0027t tried by myself, but in theory, they will compete with each other to read from the same socket. So each of them will probably get only fragments of the stream.\n\nI don\u0027t think this is a big issue as VMs are expected to be owned by a single app, not shared by multiple processes. I\u0027ve updated the java side document to clarify this behavior.",
+      "parentUuid": "06b41be5_c7228f7e",
       "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -452,6 +710,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9b548e4_98aa3c20",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "257859c2_91ad4d95",
+      "range": {
+        "startLine": 493,
+        "startChar": 54,
+        "endLine": 493,
+        "endChar": 58
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7be1a101_02936380",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c1cd1c6_c39ccb40",
+      "range": {
+        "startLine": 493,
+        "startChar": 67,
+        "endLine": 493,
+        "endChar": 70
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc89ac95_e307e508",
@@ -465,6 +771,30 @@
       "writtenOn": "2021-07-12T14:57:11Z",
       "side": 1,
       "message": "Capitalise CID.",
+      "range": {
+        "startLine": 503,
+        "startChar": 51,
+        "endLine": 503,
+        "endChar": 54
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b37ef618_a84ba765",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc89ac95_e307e508",
       "range": {
         "startLine": 503,
         "startChar": 51,
@@ -498,6 +828,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd809401_9c560aee",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ce33ae9_ce5776db",
+      "range": {
+        "startLine": 549,
+        "startChar": 26,
+        "endLine": 549,
+        "endChar": 29
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76924834_788de336",
@@ -511,6 +865,24 @@
       "writtenOn": "2021-07-12T14:57:11Z",
       "side": 1,
       "message": "```\nself.vms().into_iter().find(|vm| vm.cid \u003d\u003d cid)\n```\n\nis a bit simpler.",
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e00c333_01ddbea9",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76924834_788de336",
       "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -532,6 +904,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6d262f5_36363516",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa563727_46d047d5",
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f335fc71_2aa34ec5",
@@ -549,6 +939,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "414609b9_dc987e13",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "I thought they could use \u0027vm list\u0027 and pick the last one. Anyway, I restored the message.",
+      "parentUuid": "f335fc71_2aa34ec5",
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8176214c_cc3ff4e9",
@@ -562,6 +970,30 @@
       "writtenOn": "2021-07-12T14:57:11Z",
       "side": 1,
       "message": "Use `BufReader` at the top of the file, so that you don\u0027t need to include the module name here.",
+      "range": {
+        "startLine": 153,
+        "startChar": 25,
+        "endLine": 153,
+        "endChar": 38
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0150b54_6a6470bb",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8176214c_cc3ff4e9",
       "range": {
         "startLine": 153,
         "startChar": 25,
@@ -608,6 +1040,30 @@
       "writtenOn": "2021-07-12T14:57:11Z",
       "side": 1,
       "message": "Agreed, blocking the callback until the VM dies doesn\u0027t seem right.",
+      "parentUuid": "159c0754_a53c6adf",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 9
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36f7a3b2_7fa6b819",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T16:17:17Z",
+      "side": 1,
+      "message": "No need. This is a oneway interface. This doesn\u0027t block the caller (virtualizationservice).",
       "parentUuid": "159c0754_a53c6adf",
       "range": {
         "startLine": 154,
