@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000013074241",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1762626?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "adb68ba6_c7ccafe5",
+          "description": "Change to \"virtualizationservice/src/aidl.rs\"",
+          "replacements": [
+            {
+              "path": "virtualizationservice/src/aidl.rs",
+              "range": {
+                "startLine": 250,
+                "startChar": 53,
+                "endLine": 250,
+                "endChar": 63
+              },
+              "replacement": "connection"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "832b656d_5ecaa117",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-07-12T03:34:08Z",
+      "side": 1,
+      "message": "Common typo found: \"conneciton\" -- should it be \"connection\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 250,
+        "startChar": 53,
+        "endLine": 250,
+        "endChar": 63
+      },
+      "revId": "73405d6d4de2db976e158ef8a01710207fa2916a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
