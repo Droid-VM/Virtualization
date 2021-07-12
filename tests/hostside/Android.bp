@@ -4,7 +4,27 @@ package {
 
 java_test_host {
     name: "MicrodroidHostTestCases",
-    srcs: ["java/**/*.java"],
+    srcs: ["java/android/virt/test/MicrodroidTestCase.java"],
+    test_suites: ["device-tests"],
+    libs: [
+        "tradefed",
+        "compatibility-tradefed",
+        "compatibility-host-util",
+    ],
+    static_libs: [
+        "VirtualizationTestHelper",
+    ],
+    data: [
+        ":MicrodroidTestApp.signed",
+    ],
+}
+
+// AuthFs test still requires root privilege. When the restriction is fixed, we could merge this
+// into MicrodroidHostTestCases
+java_test_host {
+    name: "AuthFsTestCase",
+    srcs: ["java/android/virt/test/AuthFsTestCase.java"],
+    test_config: "authfs-AndroidTest.xml",
     test_suites: ["device-tests"],
     libs: [
         "tradefed",
