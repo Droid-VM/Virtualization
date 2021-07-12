@@ -83,7 +83,7 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
         // don't run the test (instead of failing)
         android.assumeSuccess("ls /dev/kvm");
         android.assumeSuccess("ls /dev/vhost-vsock");
-        android.assumeSuccess("ls /apex/com.android.virt/bin/crosvm");
+        android.assumeSuccess("ls /apex/com.android.virt");
     }
 
     // Run an arbitrary command in the host side and returns the result
@@ -179,7 +179,6 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
         final String debugFlag = debug ? "--debug " : "";
 
         // Run the VM
-        android.run("start", "virtualizationservice");
         String ret =
                 android.run(
                         VIRT_APEX + "bin/vm",
