@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5913af8_d948f31c",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T07:54:18Z",
+      "side": 1,
+      "message": "Why not? it\u0027s not harmful to have it.",
+      "parentUuid": "0a0bee07_34ee23d3",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 5
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1011b091_840873e6",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2021-07-12T07:48:50Z",
       "side": 1,
       "message": "out of curiosity: how are we going to deal with stdin and stderr? Maybe we ignore stdin?",
+      "range": {
+        "startLine": 231,
+        "startChar": 62,
+        "endLine": 231,
+        "endChar": 89
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fba0b069_93f11fb6",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-12T07:54:18Z",
+      "side": 1,
+      "message": "If needed, we could add more connections for the two. Or we could use multiplexing to carry three streams in a single connection.",
+      "parentUuid": "1011b091_840873e6",
       "range": {
         "startLine": 231,
         "startChar": 62,
