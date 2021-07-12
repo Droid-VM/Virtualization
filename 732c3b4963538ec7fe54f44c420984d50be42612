@@ -43,6 +43,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c1883e9_4b1bd104",
+        "filename": "javalib/src/android/system/virtualmachine/IVirtualMachineCallback.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-12T11:50:10Z",
+      "side": 1,
+      "message": "Please add description about threading. e.g. Which thread this is called on? Is it okay to block the calling thread? ...",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 52
+      },
+      "revId": "732c3b4963538ec7fe54f44c420984d50be42612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ee99828_eb1fdfdb",
         "filename": "javalib/src/android/system/virtualmachine/IVirtualMachineCallback.java",
         "patchSetId": 2
