@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c1b06b4_09367f45",
+        "filename": "microdroid/keymint/service.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-07-13T00:48:36Z",
+      "side": 1,
+      "message": "Just a habit of separating stdlib, system, android, local project headers into their own blocks but the formatter doesn\u0027t seem to be very opinionated. I\u0027ve merged it in with the others.",
+      "parentUuid": "3493c7d3_9b8eef3b",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 34
+      },
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "827fb594_a6248c1f",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-07-07T00:03:21Z",
       "side": 1,
       "message": "How about returning Result\u003cKeymasterKeyBlob\u003e?",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 52
+      },
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae43ce63_a55c9d44",
+        "filename": "microdroid/keymint/service.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-07-13T00:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "827fb594_a6248c1f",
       "range": {
         "startLine": 58,
         "startChar": 0,
@@ -135,6 +183,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "faf89db1_644d3ce1",
+        "filename": "microdroid/keymint/service.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-07-13T00:48:36Z",
+      "side": 1,
+      "message": "GetProperty returns a std::string so, IIUC, a piece of memory is allocated and the property value is copied into it. KeymasterBlob is almost the same, except the destructor actively zeros the allocated memory. Alternatively, we can copy it out of the string and explicitly wipe the string if that\u0027s the preferred API for properties.",
+      "parentUuid": "f77fc38f_66987368",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 68
+      },
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "100d0f33_e824030e",
@@ -177,6 +249,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f2dad2c_b5d03503",
+        "filename": "microdroid/sepolicy/system/public/property.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-07-13T00:48:36Z",
+      "side": 1,
+      "message": "Apparently dumpstate needs to have access to all properties so I needed to have that as an exclusion on the second neverallow. I didn\u0027t understand why though.",
+      "parentUuid": "a72337c3_74c41c55",
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c833513_db795b96",
         "filename": "microdroid/sepolicy/vendor/hal_keymint_default.te",
         "patchSetId": 2
@@ -188,6 +278,24 @@
       "writtenOn": "2021-07-07T00:33:16Z",
       "side": 1,
       "message": "this should better have the write privilege as well so that it can be reset after read.",
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b628dc1_cece3b8d",
+        "filename": "microdroid/sepolicy/vendor/hal_keymint_default.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-07-13T00:48:36Z",
+      "side": 1,
+      "message": "Deferring to service restart revisit.",
+      "parentUuid": "1c833513_db795b96",
       "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -263,6 +371,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2abaf84f_5f55c536",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-07-13T00:48:36Z",
+      "side": 1,
+      "message": "If we\u0027re fine with any failure, serious or not, being unrecoverable without a reboot of the VM, there\u0027s no need. We might as well make the service oneshot in that case so init doesn\u0027t try to restart it. I\u0027ll be happy to revisit.",
+      "parentUuid": "91505c15_4c61679b",
+      "range": {
+        "startLine": 40,
+        "startChar": 33,
+        "endLine": 40,
+        "endChar": 36
+      },
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4335469d_548f9154",
@@ -286,6 +418,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3d33607_751a0c2f",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-07-13T00:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4335469d_548f9154",
+      "range": {
+        "startLine": 41,
+        "startChar": 12,
+        "endLine": 41,
+        "endChar": 44
+      },
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6cb642b_8c489de9",
@@ -299,6 +455,30 @@
       "writtenOn": "2021-07-07T00:03:21Z",
       "side": 1,
       "message": "Style guide says unsafe block should be annotated with comments explaining safety reasoning.",
+      "range": {
+        "startLine": 25,
+        "startChar": 7,
+        "endLine": 25,
+        "endChar": 13
+      },
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce278fa6_53b4a618",
+        "filename": "microdroid_manager/src/property.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-07-13T00:48:36Z",
+      "side": 1,
+      "message": "keystore2_system_property has a `write()` function as of today, so I switched to using that instead.",
+      "parentUuid": "a6cb642b_8c489de9",
       "range": {
         "startLine": 25,
         "startChar": 7,
