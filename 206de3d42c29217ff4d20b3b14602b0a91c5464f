@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67ec91ac_b266353e",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-13T00:50:46Z",
+      "side": 1,
+      "message": "From the point of Java SDK, I don\u0027t see how this can happen. I guess, what Andrew pointed out was about how virtualizationservice is implemented regarding callbacks. For now, this Java callback interface can only be set, not added to a list of callbacks. So, this description might be misleading.\n\nThis description might be better attached to AIDL callback method.",
+      "range": {
+        "startLine": 32,
+        "startChar": 16,
+        "endLine": 32,
+        "endChar": 79
+      },
+      "revId": "206de3d42c29217ff4d20b3b14602b0a91c5464f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
