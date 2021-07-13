@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abdbbfba_d88474bd",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-13T00:35:18Z",
+      "side": 1,
+      "message": "Status.STOPPED seems to be the only valid state for setConfig().",
+      "range": {
+        "startLine": 337,
+        "startChar": 0,
+        "endLine": 340,
+        "endChar": 9
+      },
+      "revId": "8b0035babeccea72e33226c1b2b5cdddf703ea8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
