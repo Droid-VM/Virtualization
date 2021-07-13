@@ -233,6 +233,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "63fb1ee7_b0543e64",
+        "filename": "microdroid/keymint/service.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-07-13T13:38:17Z",
+      "side": 1,
+      "message": "Gave up making it foolproof, using GetProperty and assuming it doesn\u0027t throw after coping to the std::string it\u0027ll be cleaned up.",
+      "parentUuid": "ab9a9384_609794b7",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 68
+      },
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "100d0f33_e824030e",
         "filename": "microdroid/keymint/service.cpp",
         "patchSetId": 2
@@ -303,6 +327,24 @@
       "side": 1,
       "message": "I guess that\u0027s `get_prop(dumpstate, property_type)`?\n\nWe should exclude this property from the rule, instead of allowing dumpstate to have access to this.\n\nget_prop(dumpstats, { property_type - vmsecret_keymint_prop })",
       "parentUuid": "9f2dad2c_b5d03503",
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af8a6854_492c780e",
+        "filename": "microdroid/sepolicy/system/public/property.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-07-13T13:38:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d649a1b_03f2c094",
       "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
