@@ -51,6 +51,24 @@
       "message": "This module is now upstream in crosvm (https://source.chromium.org/chromiumos/chromiumos/codesearch/+/main:src/platform/crosvm/disk/src/composite.rs), and I was planning to delete this copy of it after the next crosvm sync. Can you please get these changes in there too? Though you can submit this version first if it\u0027s easier.",
       "revId": "6a1b0ae141df239d979c287544b6a3a74c5c1bd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cff5061_9bd6884e",
+        "filename": "virtualizationservice/src/composite.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-13T01:13:55Z",
+      "side": 1,
+      "message": "Ack. Let me submit this first. And I\u0027ll cherry-pick this to the crosvm upstream.",
+      "parentUuid": "d019b98c_31a6bb62",
+      "revId": "6a1b0ae141df239d979c287544b6a3a74c5c1bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
