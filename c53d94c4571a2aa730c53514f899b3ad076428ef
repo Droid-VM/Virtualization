@@ -16,6 +16,24 @@
       "message": "When I tried, MicrodroidHostTestCases passed without this change. Why is this needed?",
       "revId": "c53d94c4571a2aa730c53514f899b3ad076428ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e3060af_df4dc71d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-13T12:32:06Z",
+      "side": 1,
+      "message": "We have been running the tests with selinux turned off. See AndroidTest.xml.\n\nJust to be clear: we are talking about selinux in the \"host\" side, not inside microdroid.",
+      "parentUuid": "93f6748e_ea892687",
+      "revId": "c53d94c4571a2aa730c53514f899b3ad076428ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
