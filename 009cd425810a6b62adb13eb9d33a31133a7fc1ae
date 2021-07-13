@@ -396,6 +396,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "684c2cd2_07995e86",
+        "filename": "microdroid/sepolicy/system/private/zipfuse.te",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-13T05:53:30Z",
+      "side": 1,
+      "message": "What you said doesn\u0027t explain the need for these rules. These rules allow access to the logd process. That doesn\u0027t seem to enable zipfuse to write crashlog to kernel.",
+      "parentUuid": "9237013f_0d2564d4",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 18
+      },
+      "revId": "009cd425810a6b62adb13eb9d33a31133a7fc1ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6bccb359_815fc56b",
         "filename": "microdroid/sepolicy/system/private/zipfuse.te",
         "patchSetId": 8
