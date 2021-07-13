@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a74c50c5_cd3578fe",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-13T13:04:03Z",
+      "side": 1,
+      "message": "Okay, but the point was more about the check below (on line 93). I think calling getOrCreate with a null config should consistently throw an exception, rather than the current inconsistent behaviour where it will throw an exception if the VM is not running but be a silent no-op in the case where it is already running.",
+      "parentUuid": "2185ac76_9be36db9",
+      "revId": "f7516cb4be778ba6ec2071d7ceba723ee34c0706",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6151cdcf_20d37601",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
         "patchSetId": 3
