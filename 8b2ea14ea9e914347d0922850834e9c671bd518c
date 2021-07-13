@@ -207,6 +207,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab9a9384_609794b7",
+        "filename": "microdroid/keymint/service.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-13T01:38:15Z",
+      "side": 1,
+      "message": "Do you mean the buffer of std::string that is allocated on heap? Yes, you can always explicitly zero it before destructing std::string. Or you might be able to use another API in libcutils [1] which uses user-provided buffer for storing the value of the prop.\n\nhttps://source.corp.google.com/android/system/core/libcutils/include/cutils/properties.h;rcl\u003d3431b4ee870dd270ac6327c42d298069de882b69;l\u003d49",
+      "parentUuid": "faf89db1_644d3ce1",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 68
+      },
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "100d0f33_e824030e",
@@ -261,6 +285,24 @@
       "side": 1,
       "message": "Apparently dumpstate needs to have access to all properties so I needed to have that as an exclusion on the second neverallow. I didn\u0027t understand why though.",
       "parentUuid": "a72337c3_74c41c55",
+      "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d649a1b_03f2c094",
+        "filename": "microdroid/sepolicy/system/public/property.te",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-13T01:38:15Z",
+      "side": 1,
+      "message": "I guess that\u0027s `get_prop(dumpstate, property_type)`?\n\nWe should exclude this property from the rule, instead of allowing dumpstate to have access to this.\n\nget_prop(dumpstats, { property_type - vmsecret_keymint_prop })",
+      "parentUuid": "9f2dad2c_b5d03503",
       "revId": "8b2ea14ea9e914347d0922850834e9c671bd518c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
