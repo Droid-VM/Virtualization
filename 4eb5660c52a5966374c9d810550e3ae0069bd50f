@@ -16,6 +16,29 @@
       "message": "I have one insignificant comment, which can be addressed in a follow-up change.",
       "revId": "4eb5660c52a5966374c9d810550e3ae0069bd50f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a17275fb_de2f63a6",
+        "filename": "microdroid/sepolicy/system/private/mls",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-13T09:23:00Z",
+      "side": 1,
+      "message": "We can definitely get rid of mlsvendorcompat - I added it for back compat reasons which are not relevant here.\n\n(We could probably get rid of almost all of this, and only have 1 level, s0:c0, for everything.)",
+      "range": {
+        "startLine": 58,
+        "startChar": 16,
+        "endLine": 58,
+        "endChar": 31
+      },
+      "revId": "4eb5660c52a5966374c9d810550e3ae0069bd50f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
