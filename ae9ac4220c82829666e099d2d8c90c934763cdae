@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4b54e30_bae2e3ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-14T15:26:00Z",
+      "side": 1,
+      "message": "If it\u0027s about \u0027what\u0027 will be loaded/executed in the VM, it goes to the payload config. If not (e.g. mode of operation, ram size, ...), it\u0027s not part of payload config.",
+      "parentUuid": "d21c3591_5166a15c",
+      "revId": "ae9ac4220c82829666e099d2d8c90c934763cdae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d732e8a_ef8f67ff",
         "filename": "microdroid/payload/config/src/lib.rs",
         "patchSetId": 1
