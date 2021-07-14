@@ -15,6 +15,7 @@
 //! VM Payload Config
 
 use serde::{Deserialize, Serialize};
+use std::num::NonZeroU32;
 
 /// VM payload config
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
@@ -30,6 +31,11 @@ pub struct VmPayloadConfig {
     /// APEXes to activate in a VM
     #[serde(default)]
     pub apexes: Vec<ApexConfig>,
+
+    /// The amount of RAM to give the VM, in MiB. If this is not set then it will default to the
+    /// value in microdroid.json, if any, or the crosvm default.
+    #[serde(default)]
+    pub memory_mib: Option<NonZeroU32>,
 }
 
 /// OS config
