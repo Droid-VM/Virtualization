@@ -69,6 +69,24 @@
       "parentUuid": "dd014006_95547de1",
       "revId": "17ae79d45d8d9aa17122fa111e6c6cd01b67f3b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f908ba2d_531f1368",
+        "filename": "vmconfig/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-14T15:09:02Z",
+      "side": 1,
+      "message": "They shouldn\u0027t be converted to /proc/self/fd/N paths and back, nor should VirtualMachineAppConfig be converted to a `VmConfig`. `VmConfig` is intended for loading JSON config files, and we certainly don\u0027t want to allow those to contain /proc/self/fd/N paths that would map to other FDs held by virtualizationservice.\n\nDoesn\u0027t aosp/1763128 fix that?",
+      "parentUuid": "6ca78721_0ba7b291",
+      "revId": "17ae79d45d8d9aa17122fa111e6c6cd01b67f3b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
