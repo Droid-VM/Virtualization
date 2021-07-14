@@ -174,7 +174,7 @@ fn main() -> Result<()> {
     // We need to start the thread pool for Binder to work properly.
     ProcessState::start_thread_pool();
 
-    let keystore_service = get_interface::<dyn IKeystoreService>(KEYSTORE_SERVICE_NAME)
+    let keystore_service = wait_for_interface::<dyn IKeystoreService>(KEYSTORE_SERVICE_NAME)
         .context("No Keystore service")?;
     let service = CompOsKeyService::new(&keystore_service);
     let service = BnCompOsKeyService::new_binder(service, BinderFeatures::default());
