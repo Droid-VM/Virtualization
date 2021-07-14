@@ -16,6 +16,24 @@
       "message": "Would it be easier to `remove_dir_all(TEMPORARY_DIRECTORY)`?",
       "revId": "488bd079351ecd15d2008439a580195e6fa8d567",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fffe8c0e_e53970cc",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-14T14:11:54Z",
+      "side": 1,
+      "message": "The trouble with that is that it also removes the directory itself, and we don\u0027t have permission to create it.",
+      "parentUuid": "cd2ca369_4f445d65",
+      "revId": "488bd079351ecd15d2008439a580195e6fa8d567",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
