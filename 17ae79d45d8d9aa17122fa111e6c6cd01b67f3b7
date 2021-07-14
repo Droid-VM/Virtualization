@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ef5b61d_f50b0e68",
+        "filename": "vmconfig/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-14T14:55:19Z",
+      "side": 1,
+      "message": "Ok, then do you want to introduce a type like\n\n```\nenum PathOrFile {\n  Path(std::path::PathBuf),\n  File(std::io::File),\n}\n```\n\nand pass it (instead of passing Path) across aidl.rs and others? That sounds like a decent amount of refactoring, but should be doable.",
+      "parentUuid": "9cc4413e_da498eaa",
+      "revId": "17ae79d45d8d9aa17122fa111e6c6cd01b67f3b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd014006_95547de1",
         "filename": "vmconfig/src/lib.rs",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2021-07-14T14:02:33Z",
       "side": 1,
       "message": "This will result in the file descriptor being closed when the `File` is dropped. That is probably wrong, as the same file descriptor will also presumably be closed by whatever opened it in the first place. Where are these file descriptors coming from?",
+      "revId": "17ae79d45d8d9aa17122fa111e6c6cd01b67f3b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ca78721_0ba7b291",
+        "filename": "vmconfig/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-14T14:55:19Z",
+      "side": 1,
+      "message": "Those PFDs are included in VirtualMachineAppConfig which is passed from the client (the app or the vm tool).\n\nThey are converted to /proc/self/fd/N, and then converted back to PFD here, which actually doesn\u0027t sound ideal to me either.\n\nHowever, the PFDs created here are not dropped while they need to be opened. These PFDs are included in the config object which is dropped only after the crosvm is launched. https://source.corp.google.com/android/packages/modules/Virtualization/virtualizationservice/src/aidl.rs;rcl\u003d2a2a7451cdcfa01575e3db99b89396d9d8156639;l\u003d117",
+      "parentUuid": "dd014006_95547de1",
       "revId": "17ae79d45d8d9aa17122fa111e6c6cd01b67f3b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
