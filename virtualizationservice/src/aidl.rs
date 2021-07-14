@@ -382,6 +382,10 @@ fn load_app_config(
     let vm_config_file = File::open(vm_config_path)?;
     let mut vm_config = VmConfig::load(&vm_config_file)?.to_parcelable()?;
 
+    if let Some(memory_mib) = vm_payload_config.memory_mib {
+        vm_config.memory_mib = memory_mib.get().try_into().context("Invalid memory_mib")?;
+    }
+
     // Microdroid requires an additional payload disk image and the bootconfig partition.
     if os_name == "microdroid" {
         let apexes = vm_payload_config.apexes.clone();
