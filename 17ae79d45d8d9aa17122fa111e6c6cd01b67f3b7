@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cc4413e_da498eaa",
+        "filename": "vmconfig/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-14T14:02:33Z",
+      "side": 1,
+      "message": "Why is a /proc/self/fd/N path being passed to open_parcel_file in the first place? We shouldn\u0027t be writing config files containing paths like that!",
+      "revId": "17ae79d45d8d9aa17122fa111e6c6cd01b67f3b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd014006_95547de1",
+        "filename": "vmconfig/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-14T14:02:33Z",
+      "side": 1,
+      "message": "This will result in the file descriptor being closed when the `File` is dropped. That is probably wrong, as the same file descriptor will also presumably be closed by whatever opened it in the first place. Where are these file descriptors coming from?",
+      "revId": "17ae79d45d8d9aa17122fa111e6c6cd01b67f3b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
