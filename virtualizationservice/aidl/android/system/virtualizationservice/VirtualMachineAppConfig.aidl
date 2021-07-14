@@ -28,4 +28,10 @@ parcelable VirtualMachineAppConfig {
 
     /** Whether to run the VM in debug mode or not */
     boolean debug;
+
+    /**
+     * The amount of RAM to give the VM, in MiB. If this is 0 or negative then it will default to
+     * the value in microdroid.json, if any, or the crosvm default.
+     */
+    int memory_mib;
 }

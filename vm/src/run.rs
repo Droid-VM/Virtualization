@@ -52,6 +52,7 @@ pub fn command_run_app(
         idsig: ParcelFileDescriptor::new(idsig_file).into(),
         configPath: config_path.to_owned(),
         debug,
+        memory_mib: 0,
     });
     run(service, &config, &format!("{:?}!{:?}", apk, config_path), daemonize, log_path)
 }
