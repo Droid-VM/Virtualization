@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d21c3591_5166a15c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-14T15:20:41Z",
+      "side": 1,
+      "message": "How do you decide what goes in `VirtualMachineAppConfig` and what goes in `VmPayloadConfig`? It seems a bit arbitrary at the moment, is there some rule you have in mind?",
+      "parentUuid": "653d68b0_0926ade7",
+      "revId": "ae9ac4220c82829666e099d2d8c90c934763cdae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d732e8a_ef8f67ff",
         "filename": "microdroid/payload/config/src/lib.rs",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2021-07-14T15:09:59Z",
       "side": 1,
       "message": "Could the same memory config defined in both app and VM\u0027s config json?  If so, consider adding a comment for the priority.",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 49
+      },
+      "revId": "ae9ac4220c82829666e099d2d8c90c934763cdae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fb04ec7_0d487f5f",
+        "filename": "microdroid/payload/config/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-14T15:20:41Z",
+      "side": 1,
+      "message": "By \"VM\u0027s config json\" do you mean the static microdroid.json file? Added a comment.",
+      "parentUuid": "1d732e8a_ef8f67ff",
       "range": {
         "startLine": 35,
         "startChar": 4,
