@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "653d68b0_0926ade7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-14T15:10:48Z",
+      "side": 1,
+      "message": "I\u0027d like to have this as part of VirtualMachineAppConfig, which is filled by calling APIs.\n\nVirtualMachineConfig config \u003d new VirtualMachineConfig.builder().\n    .memory(256)\n    .build();\n    \nRam size and # of vCPUs don\u0027t need to be in the json file. It will just make it difficult and annoying for developers to change their values.   ",
+      "revId": "ae9ac4220c82829666e099d2d8c90c934763cdae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d732e8a_ef8f67ff",
