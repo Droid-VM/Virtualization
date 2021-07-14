@@ -27,6 +27,7 @@ use std::convert::TryInto;
 use std::fs::{File, OpenOptions};
 use std::io::BufReader;
 use std::num::NonZeroU32;
+use std::os::unix::io::{FromRawFd, RawFd};
 use std::path::{Path, PathBuf};
 
 /// Configuration for a particular VM to be started.
@@ -152,15 +153,20 @@ impl Partition {
     }
 }
 
-/// Try to open the given file and wrap it in a [`ParcelFileDescriptor`].
+/// Try to open the given file and wrap it in a [`ParcelFileDescriptor`]. If the file is of the
+/// form /proc/self/fd/N, then the file object is created from the raw fd N without opening
+/// the path, which will be translated into the open call to the actual file behind the fd.
 fn open_parcel_file(filename: &Path, writable: bool) -> Result<ParcelFileDescriptor> {
-    Ok(ParcelFileDescriptor::new(
-        OpenOptions::new()
+    let file = match raw_fd_from_path(filename)? {
+        // SAFETY: the /proc/self/fd/N path is created only when there is an fd N.
+        Some(raw_fd) => unsafe { File::from_raw_fd(raw_fd) },
+        _ => OpenOptions::new()
             .read(true)
             .write(writable)
             .open(filename)
             .with_context(|| format!("Failed to open {:?}", filename))?,
-    ))
+    };
+    Ok(ParcelFileDescriptor::new(file))
 }
 
 /// If the given filename is `Some`, try to open it and wrap it in a [`ParcelFileDescriptor`].
@@ -169,4 +175,19 @@ fn maybe_open_parcel_file(
     writable: bool,
 ) -> Result<Option<ParcelFileDescriptor>> {
     filename.as_deref().map(|filename| open_parcel_file(filename, writable)).transpose()
+}
+
+/// If the given path is of the form /proc/self/fd/N for some N, returns `Ok(Some(N))`. Otherwise
+/// returns `Ok(None)`.
+fn raw_fd_from_path(path: &Path) -> Result<Option<RawFd>> {
+    if path.parent() == Some(Path::new("/proc/self/fd")) {
+        let raw_fd = path
+            .file_name()
+            .and_then(|fd_osstr| fd_osstr.to_str())
+            .and_then(|fd_str| fd_str.parse::<RawFd>().ok())
+            .with_context(|| format!("invalid path: {:?}", path))?;
+        Ok(Some(raw_fd))
+    } else {
+        Ok(None)
+    }
 }
