@@ -19,8 +19,8 @@ Run these commands before running the app. Eventually, these won't be needed.
 
 ```
 adb root
-adb setenforce 0
-adb start virtualizationservice
+adb shell setenforce 0
+adb shell start virtualizationservice
 ```
 
 Run the app by touching the icon on the launcher. Press the `run` button to
