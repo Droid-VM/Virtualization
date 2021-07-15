@@ -29,31 +29,70 @@ use android_system_virtualizationservice::binder::{
 };
 use android_system_virtualizationservice::binder::{Interface, Result as BinderResult};
 use anyhow::{Context, Error};
-use std::fs::File;
+use std::convert::TryInto;
+use std::fs::{File, OpenOptions};
 use std::io::{self, BufRead, BufReader};
 use std::os::unix::io::{AsRawFd, FromRawFd};
 use std::path::Path;
 use vmconfig::VmConfig;
 
+/// Initialise an empty partition image of the given size to be used as a writable partition.
+pub fn command_create_partition(
+    service: Strong<dyn IVirtualizationService>,
+    image_path: &Path,
+    size: u64,
+) -> Result<(), Error> {
+    let image = OpenOptions::new()
+        .create_new(true)
+        .read(true)
+        .write(true)
+        .open(image_path)
+        .with_context(|| format!("Failed to create {:?}", image_path))?;
+    service
+        .initializeWritablePartition(&ParcelFileDescriptor::new(image), size.try_into()?)
+        .context("Failed to initialize partition with size {}, size")?;
+    Ok(())
+}
+
+/// Parameters for command_run_app. This is to avoid the clippy::too_many_arguments check.
+pub struct RunAppParams<'a> {
+    pub apk: &'a Path,
+    pub idsig: &'a Path,
+    pub instance: &'a Path,
+    pub config_path: &'a str,
+    pub daemonize: bool,
+    pub log_path: Option<&'a Path>,
+    pub debug: bool,
+}
+
 /// Run a VM from the given APK, idsig, and config.
 pub fn command_run_app(
     service: Strong<dyn IVirtualizationService>,
-    apk: &Path,
-    idsig: &Path,
-    config_path: &str,
-    daemonize: bool,
-    log_path: Option<&Path>,
-    debug: bool,
+    params: RunAppParams,
 ) -> Result<(), Error> {
-    let apk_file = File::open(apk).context("Failed to open APK file")?;
-    let idsig_file = File::open(idsig).context("Failed to open idsig file")?;
+    let apk_file = File::open(params.apk).context("Failed to open APK file")?;
+    let idsig_file = File::open(params.idsig).context("Failed to open idsig file")?;
+
+    if !params.instance.exists() {
+        const INSTANCE_FILE_SIZE: u64 = 10 * 1024 * 1024;
+        command_create_partition(service.clone(), params.instance, INSTANCE_FILE_SIZE)?;
+    }
+    let instance_file = OpenOptions::new().write(true).read(true).open(params.instance)?;
+
     let config = VirtualMachineConfig::AppConfig(VirtualMachineAppConfig {
         apk: ParcelFileDescriptor::new(apk_file).into(),
         idsig: ParcelFileDescriptor::new(idsig_file).into(),
-        configPath: config_path.to_owned(),
-        debug,
+        instanceImage: ParcelFileDescriptor::new(instance_file).into(),
+        configPath: params.config_path.to_owned(),
+        debug: params.debug,
     });
-    run(service, &config, &format!("{:?}!{:?}", apk, config_path), daemonize, log_path)
+    run(
+        service,
+        &config,
+        &format!("{:?}!{:?}", params.apk, params.config_path),
+        params.daemonize,
+        params.log_path,
+    )
 }
 
 /// Run a VM from the given configuration file.

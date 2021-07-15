@@ -17,6 +17,7 @@
 package android.system.virtualmachine;
 
 import static android.os.ParcelFileDescriptor.MODE_READ_ONLY;
+import static android.os.ParcelFileDescriptor.MODE_READ_WRITE;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -155,10 +156,11 @@ public final class VirtualMachineConfig {
      * service doesn't accept paths as it might not have permission to open app-owned files and that
      * could be abused to run a VM with software that the calling application doesn't own.
      */
-    /* package */ VirtualMachineAppConfig toParcel() throws FileNotFoundException {
+    /* package */ VirtualMachineAppConfig toParcel(File instanceFile) throws FileNotFoundException {
         VirtualMachineAppConfig parcel = new VirtualMachineAppConfig();
         parcel.apk = ParcelFileDescriptor.open(new File(mApkPath), MODE_READ_ONLY);
         parcel.idsig = ParcelFileDescriptor.open(new File(mIdsigPath), MODE_READ_ONLY);
+        parcel.instanceImage = ParcelFileDescriptor.open(instanceFile, MODE_READ_WRITE);
         parcel.configPath = mPayloadConfigPath;
         parcel.debug = mDebugMode;
         return parcel;
