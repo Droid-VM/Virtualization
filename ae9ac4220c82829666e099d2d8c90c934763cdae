@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac8a1772_d672a230",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-15T00:42:51Z",
+      "side": 1,
+      "message": "I don\u0027t understand what is the launcher. If it means the program running in the host that creates and owns a VM, then I would say that the launcher and the app (the payload that runs in the guest) are bundled.\n\nA launcher is not allowed to launch a VM with a payload that it doesn\u0027t have access to (e.g. another app\u0027s payload). That\u0027s the main reason we pass file descriptors, not paths to virtualizationservice.",
+      "parentUuid": "a206142d_fa08ddf3",
+      "revId": "ae9ac4220c82829666e099d2d8c90c934763cdae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d732e8a_ef8f67ff",
         "filename": "microdroid/payload/config/src/lib.rs",
         "patchSetId": 1
