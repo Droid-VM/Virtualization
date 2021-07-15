@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b6a4417_5f54ebe4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-15T13:10:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a28b87c4_44d1e158",
+      "range": {
+        "startLine": 10,
+        "startChar": 32,
+        "endLine": 10,
+        "endChar": 46
+      },
+      "revId": "e6750e1b25d9e56fe40043caa66c2cd1699239ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14d76eff_e35a6bae",
@@ -108,6 +132,30 @@
       "writtenOn": "2021-07-15T08:18:49Z",
       "side": 1,
       "message": "The documentation for AServiceManager_waitForService says, rather ominously, \"If the service is not declared, it will wait indefinitely.\"\n\nBut AServiceManager_isDeclared doesn\u0027t seem to be exposed from Rust, or checked in the implementation of wait_for_interface.",
+      "range": {
+        "startLine": 177,
+        "startChar": 27,
+        "endLine": 177,
+        "endChar": 45
+      },
+      "revId": "e6750e1b25d9e56fe40043caa66c2cd1699239ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a36b6e2_d92495be",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-15T13:10:43Z",
+      "side": 1,
+      "message": "I raised this on the Rusty Droids chat.",
+      "parentUuid": "05443641_203dfc03",
       "range": {
         "startLine": 177,
         "startChar": 27,
