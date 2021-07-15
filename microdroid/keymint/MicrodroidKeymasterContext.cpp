@@ -42,7 +42,8 @@ keymaster_error_t MicrodroidKeymasterContext::CreateKeyBlob(const AuthorizationS
     }
 
     error = SetKeyBlobAuthorizations(key_description, origin, os_version_, os_patchlevel_,
-                                     hw_enforced, sw_enforced);
+                                     /* vendor_patchlevel= */ std::nullopt,
+                                     /* boot_patchlevel= */ std::nullopt, hw_enforced, sw_enforced);
     if (error != KM_ERROR_OK) return error;
 
     AuthorizationSet hidden;
