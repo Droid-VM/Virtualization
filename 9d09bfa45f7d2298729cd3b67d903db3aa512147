@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d0b8f4d_1deba87d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-15T09:55:37Z",
+      "side": 1,
+      "message": "For symmetry, we\u0027d better check the existence of instance.img in load() as well.",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 9
+      },
+      "revId": "9d09bfa45f7d2298729cd3b67d903db3aa512147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1c936c3_b6463170",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-15T09:55:37Z",
+      "side": 1,
+      "message": "Passing a path to `toParcel()` looks weird. And this line of code is getting longer. Can we split this up into separate lines for readability?",
+      "range": {
+        "startLine": 255,
+        "startChar": 36,
+        "endLine": 255,
+        "endChar": 75
+      },
+      "revId": "9d09bfa45f7d2298729cd3b67d903db3aa512147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55556f4b_c9e814a3",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-15T09:55:37Z",
+      "side": 1,
+      "message": "This should EITHER point to a file created by `vm create-partition` OR not-existing, right? Or, how about removing create-partition command?",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 26
+      },
+      "revId": "9d09bfa45f7d2298729cd3b67d903db3aa512147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
