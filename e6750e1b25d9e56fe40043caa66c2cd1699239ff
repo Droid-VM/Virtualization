@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d10f62a_ec895dc1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-15T08:18:49Z",
+      "side": 1,
+      "message": "Is this the recommended approach?\nI\u0027m slightly nervous that this will AFAICT wait indefinitely.\nAIUI Keystore is not a lazy service and is started in early_hal; is it likely get_interface would fail?",
+      "range": {
+        "startLine": 10,
+        "startChar": 32,
+        "endLine": 10,
+        "endChar": 46
+      },
+      "revId": "e6750e1b25d9e56fe40043caa66c2cd1699239ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14d76eff_e35a6bae",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -19,6 +42,53 @@
         "startChar": 6,
         "endLine": 13,
         "endChar": 9
+      },
+      "revId": "e6750e1b25d9e56fe40043caa66c2cd1699239ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c022cbd9_86ba0014",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-15T08:18:49Z",
+      "side": 1,
+      "message": "Something like this:\n# /apex/com.android.compos/bin/compos_key_service \u0026\n# /apex/com.android.compos/bin/compos_key_cmd --generate /data/misc/apexdata/com.android.compos/compos_pending_key.blob /data/misc/apexdata/com.android.compos/compos_pending_key.pubkey\n# /apex/com.android.compos/bin/compos_key_cmd --verify /data/misc/apexdata/com.android.compos/compos_pending_key.blob /data/misc/apexdata/com.android.compos/compos_pending_key.pubkey\n\n(Root is currently needed due to my messing about with a keystore namespace I don\u0027t really own.)",
+      "parentUuid": "14d76eff_e35a6bae",
+      "range": {
+        "startLine": 13,
+        "startChar": 6,
+        "endLine": 13,
+        "endChar": 9
+      },
+      "revId": "e6750e1b25d9e56fe40043caa66c2cd1699239ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05443641_203dfc03",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-15T08:18:49Z",
+      "side": 1,
+      "message": "The documentation for AServiceManager_waitForService says, rather ominously, \"If the service is not declared, it will wait indefinitely.\"\n\nBut AServiceManager_isDeclared doesn\u0027t seem to be exposed from Rust, or checked in the implementation of wait_for_interface.",
+      "range": {
+        "startLine": 177,
+        "startChar": 27,
+        "endLine": 177,
+        "endChar": 45
       },
       "revId": "e6750e1b25d9e56fe40043caa66c2cd1699239ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
