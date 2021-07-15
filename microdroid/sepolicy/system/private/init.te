@@ -444,3 +444,13 @@ allow init system_bootstrap_lib_file:file { execute read open getattr map };
 allow init fuse:dir { search getattr };
 
 set_prop(init, property_type)
+
+# microdroid isn't related to F2FS, but services like keystore2 try to use it.
+dontauditxperm domain { file_type sdcard_type }:file ioctl {
+  F2FS_IOC_ABORT_VOLATILE_WRITE
+  F2FS_IOC_COMMIT_ATOMIC_WRITE
+  F2FS_IOC_GET_FEATURES
+  F2FS_IOC_GET_PIN_FILE
+  F2FS_IOC_SET_PIN_FILE
+  F2FS_IOC_START_ATOMIC_WRITE
+};
