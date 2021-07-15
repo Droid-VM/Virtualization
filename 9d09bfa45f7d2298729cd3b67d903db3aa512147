@@ -68,6 +68,57 @@
       },
       "revId": "9d09bfa45f7d2298729cd3b67d903db3aa512147",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3ea08b3_ee87f944",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-15T11:29:23Z",
+      "side": 1,
+      "message": "Nit: The idea of making `run` a separate module was to avoid having a big file with everything in it. If you don\u0027t want this to be in `main.rs`, you can create a new `create_partition` module for it.",
+      "revId": "9d09bfa45f7d2298729cd3b67d903db3aa512147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67b57c34_2c4262f5",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-15T11:29:23Z",
+      "side": 1,
+      "message": "Nit: You can just bypass the check if you want:\n\n```\n#[allow(clippy::too_many_arguments)]\npub fn command_run_app(\n```\n\nUp to you, whatever you think is more readable.",
+      "revId": "9d09bfa45f7d2298729cd3b67d903db3aa512147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc34b721_0398f226",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-15T11:29:23Z",
+      "side": 1,
+      "message": "Nit: You could use `vmconfig::open_parcel_file` for this, if you make it public.",
+      "revId": "9d09bfa45f7d2298729cd3b67d903db3aa512147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
