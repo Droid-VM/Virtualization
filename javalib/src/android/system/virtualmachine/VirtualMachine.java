@@ -16,6 +16,8 @@
 
 package android.system.virtualmachine;
 
+import static android.os.ParcelFileDescriptor.MODE_READ_WRITE;
+
 import android.content.Context;
 import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
@@ -78,8 +80,11 @@ public class VirtualMachine {
      */
     private final File mConfigFilePath;
 
-    /** Path to the instance image file for this VM. (Not implemented) */
+    /** Path to the instance image file for this VM. */
     private final File mInstanceFilePath;
+
+    /** Size of the instance image. 1MB. */
+    private static final long INSTANCE_FILE_SIZE = 1024 * 1024 * 1024;
 
     /** The configuration that is currently associated with this VM. */
     private VirtualMachineConfig mConfig;
@@ -135,7 +140,26 @@ public class VirtualMachine {
             throw new VirtualMachineException(e);
         }
 
-        // TODO(jiyong): create the instance image file
+        try {
+            vm.mInstanceFilePath.createNewFile();
+        } catch (IOException e) {
+            throw new VirtualMachineException("failed to create instance image", e);
+        }
+
+        IVirtualizationService service =
+                IVirtualizationService.Stub.asInterface(
+                        ServiceManager.waitForService(SERVICE_NAME));
+
+        try {
+            service.initializeWritablePartition(
+                    ParcelFileDescriptor.open(vm.mInstanceFilePath, MODE_READ_WRITE),
+                    INSTANCE_FILE_SIZE);
+        } catch (FileNotFoundException e) {
+            throw new VirtualMachineException("instance image missing", e);
+        } catch (RemoteException e) {
+            throw new VirtualMachineException("failed to create instance partition", e);
+        }
+
         return vm;
     }
 
@@ -228,7 +252,7 @@ public class VirtualMachine {
             mVirtualMachine =
                     service.startVm(
                             android.system.virtualizationservice.VirtualMachineConfig.appConfig(
-                                    getConfig().toParcel()),
+                                    getConfig().toParcel(mInstanceFilePath)),
                             mConsoleWriter);
 
             mVirtualMachine.registerCallback(
