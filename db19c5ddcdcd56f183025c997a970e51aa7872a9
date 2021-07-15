@@ -22,6 +22,30 @@
       },
       "revId": "db19c5ddcdcd56f183025c997a970e51aa7872a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "839cf580_288adb56",
+        "filename": "microdroid/sepolicy/system/private/init.te",
+        "patchSetId": 1
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-07-15T06:04:14Z",
+      "side": 1,
+      "message": "It\u0027s /data/misc/keystore/persistent.sqlite (http://cs/android/system/security/keystore2/src/database.rs?l\u003d835\u0026rcl\u003d8c1fa549da24fc0cbc665497bec38f45539c2396).\n\n[    6.996697][  T165] type\u003d1400 audit(1626087727.384:9): avc: denied { ioctl } for comm\u003d\"Binder:145_1\" path\u003d\"/data/misc/keystore/persistent.sqlite\" dev\u003d\"tmpfs\" ino\u003d13 ioctlcmd\u003d0xf50c scontext\u003du:r:keystore:s0 tcontext\u003du:object_r:keystore_data_file:s0 tclass\u003dfile permissive\u003d0\n\nNot 100% sure why /data/misc/keystore is related to F2FS. though.",
+      "parentUuid": "15f69e51_af956e67",
+      "range": {
+        "startLine": 448,
+        "startChar": 54,
+        "endLine": 448,
+        "endChar": 78
+      },
+      "revId": "db19c5ddcdcd56f183025c997a970e51aa7872a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
