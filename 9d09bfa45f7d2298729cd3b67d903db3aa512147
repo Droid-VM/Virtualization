@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "587560fe_cd9b4873",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-15T12:09:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d0b8f4d_1deba87d",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 9
+      },
+      "revId": "9d09bfa45f7d2298729cd3b67d903db3aa512147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1c936c3_b6463170",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-07-15T09:55:37Z",
       "side": 1,
       "message": "Passing a path to `toParcel()` looks weird. And this line of code is getting longer. Can we split this up into separate lines for readability?",
+      "range": {
+        "startLine": 255,
+        "startChar": 36,
+        "endLine": 255,
+        "endChar": 75
+      },
+      "revId": "9d09bfa45f7d2298729cd3b67d903db3aa512147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad7858fb_6ce43ce1",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-15T12:09:54Z",
+      "side": 1,
+      "message": "I intentionally didn\u0027t put instance path to the config because instance path is part of a VM (when the VM is destroyed, so does the instance image). Nevertheless, I agree with you that this looks odd. mInstanceFilePath is now set outside of the method.\n\nDone.",
+      "parentUuid": "a1c936c3_b6463170",
       "range": {
         "startLine": 255,
         "startChar": 36,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4da98f27_daa75383",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-15T12:09:54Z",
+      "side": 1,
+      "message": "This is created when the path doesn\u0027t exist. I\u0027ve revised the comment.\n\nI\u0027d like to keep the command unless there is a strong reason to remove it. Keeping it is not harmful, IMO.",
+      "parentUuid": "55556f4b_c9e814a3",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 26
+      },
+      "revId": "9d09bfa45f7d2298729cd3b67d903db3aa512147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3ea08b3_ee87f944",
@@ -83,6 +155,24 @@
       "writtenOn": "2021-07-15T11:29:23Z",
       "side": 1,
       "message": "Nit: The idea of making `run` a separate module was to avoid having a big file with everything in it. If you don\u0027t want this to be in `main.rs`, you can create a new `create_partition` module for it.",
+      "revId": "9d09bfa45f7d2298729cd3b67d903db3aa512147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12f59b7f_9d62cec2",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-15T12:09:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3ea08b3_ee87f944",
       "revId": "9d09bfa45f7d2298729cd3b67d903db3aa512147",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -104,6 +194,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7406a65d_4b62d217",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-15T12:09:54Z",
+      "side": 1,
+      "message": "Done. I thought you would dislike suppressing it.",
+      "parentUuid": "67b57c34_2c4262f5",
+      "revId": "9d09bfa45f7d2298729cd3b67d903db3aa512147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc34b721_0398f226",
@@ -117,6 +225,24 @@
       "writtenOn": "2021-07-15T11:29:23Z",
       "side": 1,
       "message": "Nit: You could use `vmconfig::open_parcel_file` for this, if you make it public.",
+      "revId": "9d09bfa45f7d2298729cd3b67d903db3aa512147",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8f76281_816a9e79",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-15T12:09:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc34b721_0398f226",
       "revId": "9d09bfa45f7d2298729cd3b67d903db3aa512147",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
