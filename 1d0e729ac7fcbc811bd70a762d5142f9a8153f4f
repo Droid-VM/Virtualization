@@ -185,6 +185,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5fbbe385_0c4c8f54",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-16T17:21:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "684f1c6e_9720582c",
+      "range": {
+        "startLine": 68,
+        "startChar": 53,
+        "endLine": 68,
+        "endChar": 60
+      },
+      "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "500b9284_44a40be4",
         "filename": "compos/src/compos_key_main.rs",
         "patchSetId": 2
@@ -277,6 +301,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8cdfff2_1de070cc",
+        "filename": "compos/src/compos_key_main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-16T17:21:35Z",
+      "side": 1,
+      "message": "Which should cover this case too :-)",
+      "parentUuid": "2dd0100d_375b4b3a",
+      "range": {
+        "startLine": 43,
+        "startChar": 11,
+        "endLine": 43,
+        "endChar": 52
+      },
+      "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e187536c_21a4b903",
@@ -290,6 +338,24 @@
       "writtenOn": "2021-07-16T14:50:42Z",
       "side": 1,
       "message": "Nit: you do this in both branches of the if, so move it up a line.",
+      "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0badb3ca_6c8f2e57",
+        "filename": "compos/src/compos_key_main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-16T17:21:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e187536c_21a4b903",
       "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -311,6 +377,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b88e0ed7_9837217d",
+        "filename": "compos/src/compos_key_main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-16T17:21:35Z",
+      "side": 1,
+      "message": "Not AFAICT - we really do just get a boolean. Hopefully it logs something.",
+      "parentUuid": "1dcd3f67_603cc1ef",
+      "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9301fb4c_2e9a1e18",
@@ -328,6 +412,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60a5f5c0_1cb288e5",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-16T17:21:35Z",
+      "side": 1,
+      "message": "I\u0027m generally against unnecessary code (YAGNI), but for a simple vocabulary type like this, and given how easy it is, I\u0027m convinced.",
+      "parentUuid": "9301fb4c_2e9a1e18",
+      "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ca6235d_872c5021",
@@ -341,6 +443,24 @@
       "writtenOn": "2021-07-16T14:50:42Z",
       "side": 1,
       "message": "What do these numbers mean / where do they come from? Add a comment explaining or linking to the source file they are copied from.",
+      "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ce8f15f_b32d46f5",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-16T17:21:35Z",
+      "side": 1,
+      "message": "I\u0027ve attempted this. (I\u0027m not linking to the microdroid one because it\u0027s about to move)",
+      "parentUuid": "0ca6235d_872c5021",
       "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -381,6 +501,24 @@
       "writtenOn": "2021-07-16T14:50:42Z",
       "side": 1,
       "message": "This feels like it should probably be an implementation of `Default` for KeyDescriptor, judging from how you\u0027re using it.",
+      "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23a95ed6_80cec2c5",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-16T17:21:35Z",
+      "side": 1,
+      "message": "Oh, interesting. But I can\u0027t implement Default (it\u0027s not my type, it\u0027s owned by the AIDL generated code). And there is actually already an implementation of Default that just isn\u0027t quite right.\n\nAnd I can\u0027t even use Default::default() here (KeyDescriptor isn\u0027t Copy, although I feel it probably should be, and a const isn\u0027t allowed to call a destructor).",
+      "parentUuid": "cdea9f55_b20a77ce",
       "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
