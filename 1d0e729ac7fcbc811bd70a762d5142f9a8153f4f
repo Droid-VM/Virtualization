@@ -140,6 +140,91 @@
       },
       "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e187536c_21a4b903",
+        "filename": "compos/src/compos_key_main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-16T14:50:42Z",
+      "side": 1,
+      "message": "Nit: you do this in both branches of the if, so move it up a line.",
+      "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dcd3f67_603cc1ef",
+        "filename": "compos/src/compos_key_main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-16T14:50:42Z",
+      "side": 1,
+      "message": "Is there any way we can find out why it failed?",
+      "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9301fb4c_2e9a1e18",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-16T14:50:42Z",
+      "side": 1,
+      "message": "Nit: I usually add Debug, Eq and PartialEq if possible, as they will probably be useful for tests at some point.",
+      "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ca6235d_872c5021",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-16T14:50:42Z",
+      "side": 1,
+      "message": "What do these numbers mean / where do they come from? Add a comment explaining or linking to the source file they are copied from.",
+      "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdea9f55_b20a77ce",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-16T14:50:42Z",
+      "side": 1,
+      "message": "This feels like it should probably be an implementation of `Default` for KeyDescriptor, judging from how you\u0027re using it.",
+      "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
