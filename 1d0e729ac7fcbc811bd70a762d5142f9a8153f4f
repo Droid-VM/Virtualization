@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4f841bc_e0dc0e36",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-16T14:16:20Z",
+      "side": 1,
+      "message": "Totally arbitrary; I like pi. See also http://cs/android/packages/modules/Virtualization/compos/src/common.rs.\n\n(We should probably not hardwire it at all \u0026 communicate it from VM to host, but that would make testing more complicated at the moment.)",
+      "parentUuid": "fe1560ef_33f69705",
+      "range": {
+        "startLine": 53,
+        "startChar": 30,
+        "endLine": 53,
+        "endChar": 34
+      },
+      "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68cfd98e_24013698",
         "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
         "patchSetId": 2
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c15736c6_82c03138",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-16T14:16:20Z",
+      "side": 1,
+      "message": "0 is reserved for talking to the hypervisor, apparently, so can\u0027t be legitimate here. optional feels slightly like overkill here, or maybe I\u0027m just being lazy.",
+      "parentUuid": "68cfd98e_24013698",
+      "range": {
+        "startLine": 68,
+        "startChar": 53,
+        "endLine": 68,
+        "endChar": 60
+      },
+      "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31286f1e_b16d5907",
         "filename": "compos/src/compos_key_main.rs",
         "patchSetId": 2
@@ -60,6 +108,30 @@
       "writtenOn": "2021-07-16T13:56:59Z",
       "side": 1,
       "message": "Do we want the place to be more explicit that it\u0027s in a VM if it also selects the namespace. I assume you could use rpc binder and not be in microdroid? I think apexd has a flag along the lines of --vm-mode, so it would be nice if we started to have a convention.",
+      "range": {
+        "startLine": 43,
+        "startChar": 11,
+        "endLine": 43,
+        "endChar": 52
+      },
+      "revId": "1d0e729ac7fcbc811bd70a762d5142f9a8153f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0abecaef_b4b0b194",
+        "filename": "compos/src/compos_key_main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-16T14:16:20Z",
+      "side": 1,
+      "message": "I was trying to be consistent with Victor\u0027s use of rpc_binder for this (e.g. http://cs/android/packages/modules/Virtualization/compos/src/compsvc.rs?l\u003d154\u0026rcl\u003de3a1124650a2d9f4724458596822fe38cbffe8b2) - mainly because that\u0027s where I lifted a lot of this code from.\n\nIn theory you can use RPC binder \u0026 not a vsock, but only vsock is exposed to Rust at the moment (via RunRpcServer / RpcClient).\n\nWe\u0027ll need to remove the usage of the Odsign namespace at some point (which only works anyway if you run as root).",
+      "parentUuid": "31286f1e_b16d5907",
       "range": {
         "startLine": 43,
         "startChar": 11,
