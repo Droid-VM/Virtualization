@@ -16,6 +16,92 @@
       "message": "I am really bad at resisting the temptation to fiddle with things.",
       "revId": "bd0c0cd7ea2d5aa95536ff711ae2fcc1ff22e8c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1435cf81_e719072c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-19T17:15:41Z",
+      "side": 1,
+      "message": "I slightly prefer to split the test for compilation and key generation into two files.",
+      "revId": "bd0c0cd7ea2d5aa95536ff711ae2fcc1ff22e8c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88cc8fb7_d541ef5f",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-19T17:15:41Z",
+      "side": 1,
+      "message": "Forgot to upload the files to this change? Do you also need to modify AndroidTest.xml?",
+      "range": {
+        "startLine": 109,
+        "startChar": 29,
+        "endLine": 109,
+        "endChar": 42
+      },
+      "revId": "bd0c0cd7ea2d5aa95536ff711ae2fcc1ff22e8c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7f454dd_1e9c3142",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-19T17:15:41Z",
+      "side": 1,
+      "message": "How about verify that a mismatched blob/pubkey should also fail?  I.e. use another test_key.pubkey2 (not sure how different is this vs the swap case).",
+      "range": {
+        "startLine": 112,
+        "startChar": 11,
+        "endLine": 112,
+        "endChar": 17
+      },
+      "revId": "bd0c0cd7ea2d5aa95536ff711ae2fcc1ff22e8c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61a556f8_c3427300",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-19T17:15:41Z",
+      "side": 1,
+      "message": "nit: assert that mCid !\u003d null",
+      "range": {
+        "startLine": 135,
+        "startChar": 8,
+        "endLine": 135,
+        "endChar": 12
+      },
+      "revId": "bd0c0cd7ea2d5aa95536ff711ae2fcc1ff22e8c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
