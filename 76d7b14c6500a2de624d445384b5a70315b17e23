@@ -16,6 +16,24 @@
       "message": "Is this ready for review?\n(I\u0027m just trying to steal ideas from it for a compos_key_service test)",
       "revId": "76d7b14c6500a2de624d445384b5a70315b17e23",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b9df5d5_043d7add",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-19T15:36:08Z",
+      "side": 1,
+      "message": "Feel free to fork/reuse.  The test itself is fine.  I\u0027m just waiting for Andrew to finish b/192294431 (the default memory size is 256MB, which isn\u0027t sufficient).  Right now, I have this local hack in run_vm() of virtualizationservice/src/crosvm.rs:\n\n  command.arg(\"--mem\").arg(\"2048\".to_string());\n\nOnce Andrew\u0027s change is ready, we\u0027ll just need to adjust the memory size in the test, probably with a new argument to startMicrodroid.",
+      "parentUuid": "a37f3a49_dffb4cc1",
+      "revId": "76d7b14c6500a2de624d445384b5a70315b17e23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
