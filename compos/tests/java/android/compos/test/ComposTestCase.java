@@ -16,20 +16,20 @@
 
 package android.compos.test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 
 import android.platform.test.annotations.RootPermissionTest;
 import android.virt.test.CommandRunner;
 import android.virt.test.VirtualizationTestCaseBase;
 
 import com.android.compatibility.common.util.PollingCheck;
-import com.android.tradefed.device.DeviceNotAvailableException;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner;
 import com.android.tradefed.util.CommandResult;
+import com.android.tradefed.util.CommandStatus;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -50,17 +50,88 @@ public final class ComposTestCase extends VirtualizationTestCaseBase {
     private static final int OKAY = 0;
     private static final int COMPILATION_SUCCESS = 80;
 
+    // Path to compos_key_cmd tool
+    private static final String COMPOS_KEY_CMD_BIN = "/apex/com.android.compos/bin/compos_key_cmd";
+
     private String mCid;
 
     @Before
-    public void setUp() throws DeviceNotAvailableException {
+    public void setUp() throws Exception {
         testIfDeviceIsCapable(getDevice());
 
         prepareVirtualizationTestSetup(getDevice());
+    }
 
+    @After
+    public void tearDown() throws Exception {
+        if (mCid != null) {
+            shutdownMicrodroid(getDevice(), mCid);
+            mCid = null;
+        }
+
+        cleanUpVirtualizationTestSetup(getDevice());
+    }
+
+    @Test
+    @Ignore("b/192294431")
+    public void testOdrefresh() throws Exception {
+        startComposVm("assets/vm_config.json");
+        waitForServiceRunning("compsvc");
+
+        CommandRunner android = new CommandRunner(getDevice());
+
+        // Expect the compilation to finish successfully.
+        CommandResult result =
+                android.runForResultWithTimeout(
+                        ODREFRESH_TIMEOUT_MS,
+                        ODREFRESH_BIN,
+                        "--use-compilation-os=" + mCid,
+                        "--force-compile");
+        assertThat(result.getExitCode()).isEqualTo(COMPILATION_SUCCESS);
+
+        // Expect the output to be valid.
+        result = android.runForResultWithTimeout(ODREFRESH_TIMEOUT_MS, ODREFRESH_BIN, "--check");
+        assertThat(result.getExitCode()).isEqualTo(OKAY);
+    }
+
+    @Test
+    public void testKeyService() throws Exception {
+        startComposVm("assets/key_service_vm_config.json");
+        waitForServiceRunning("compos_key_main");
+
+        CommandRunner android = new CommandRunner(getDevice());
+
+        // Generate keys - should succeed
+        android.run(
+                COMPOS_KEY_CMD_BIN,
+                "--cid " + mCid,
+                "generate",
+                TEST_ROOT + "test_key.blob",
+                TEST_ROOT + "test_key.pubkey");
+
+        // Verify them - should also succeed, since we just generated them
+        android.run(
+                COMPOS_KEY_CMD_BIN,
+                "--cid " + mCid,
+                "verify",
+                TEST_ROOT + "test_key.blob",
+                TEST_ROOT + "test_key.pubkey");
+
+        // Swap public key & blob - should fail to verify
+        CommandResult result =
+                android.runForResult(
+                        COMPOS_KEY_CMD_BIN,
+                        "--cid " + mCid,
+                        "verify",
+                        TEST_ROOT + "test_key.pubkey",
+                        TEST_ROOT + "test_key.blob");
+        assertThat(result.getStatus()).isEqualTo(CommandStatus.FAILED);
+    }
+
+    /** @param configPath path inside the APK where the config resides */
+    private void startComposVm(String configPath) throws Exception {
         final String apkName = "CompOSPayloadApp.apk";
         final String packageName = "com.android.compos.payload";
-        final String configPath = "assets/vm_config.json"; // path inside the APK
         mCid =
                 startMicrodroid(
                         getDevice(),
@@ -72,45 +143,15 @@ public final class ComposTestCase extends VirtualizationTestCaseBase {
         adbConnectToMicrodroid(getDevice(), mCid);
     }
 
-    @After
-    public void tearDown() throws DeviceNotAvailableException {
-        if (mCid != null) {
-            shutdownMicrodroid(getDevice(), mCid);
-            mCid = null;
-        }
-
-        cleanUpVirtualizationTestSetup(getDevice());
-    }
-
-    @Test
-    public void testOdrefresh() throws DeviceNotAvailableException, InterruptedException {
-        waitForServiceRunning();
-
-        CommandRunner android = new CommandRunner(getDevice());
-
-        // Expect the compilation to finish successfully.
-        CommandResult result =
-                android.runForResultWithTimeout(
-                        ODREFRESH_TIMEOUT_MS,
-                        ODREFRESH_BIN,
-                        "--use-compilation-os=" + mCid,
-                        "--force-compile");
-        assertThat(result.getExitCode(), is(COMPILATION_SUCCESS));
-
-        // Expect the output to be valid.
-        result = android.runForResultWithTimeout(ODREFRESH_TIMEOUT_MS, ODREFRESH_BIN, "--check");
-        assertThat(result.getExitCode(), is(OKAY));
-    }
-
-    private void waitForServiceRunning() {
+    private void waitForServiceRunning(String serviceName) {
         try {
-            PollingCheck.waitFor(COMPSVC_READY_LATENCY_MS, () -> isServiceRunning());
+            PollingCheck.waitFor(COMPSVC_READY_LATENCY_MS, () -> isServiceRunning(serviceName));
         } catch (Exception e) {
             throw new RuntimeException("Service unavailable", e);
         }
     }
 
-    private boolean isServiceRunning() {
-        return tryRunOnMicrodroid("pidof compsvc") != null;
+    private boolean isServiceRunning(final String serviceName) {
+        return tryRunOnMicrodroid("pidof " + serviceName) != null;
     }
 }
