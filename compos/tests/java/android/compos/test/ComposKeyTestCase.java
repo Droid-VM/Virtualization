@@ -25,29 +25,31 @@ import android.virt.test.VirtualizationTestCaseBase;
 import com.android.compatibility.common.util.PollingCheck;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner;
 import com.android.tradefed.util.CommandResult;
+import com.android.tradefed.util.CommandStatus;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RootPermissionTest
 @RunWith(DeviceJUnit4ClassRunner.class)
-public final class ComposTestCase extends VirtualizationTestCaseBase {
+public final class ComposKeyTestCase extends VirtualizationTestCaseBase {
 
     /** Path to odrefresh on Microdroid */
-    private static final String ODREFRESH_BIN = "/apex/com.android.art/bin/odrefresh";
 
     /** Timeout of odrefresh to finish */
-    private static final int ODREFRESH_TIMEOUT_MS = 10 * 60 * 1000; // 10 minutes
+    // 10 minutes
 
     /** Wait time for compsvc to be ready on boot */
-    private static final int COMPSVC_READY_LATENCY_MS = 10 * 1000; // 10 seconds
+    private static final int READY_LATENCY_MS = 10 * 1000; // 10 seconds
 
     // ExitCode expanded from art/odrefresh/include/odrefresh/odrefresh.h.
     private static final int OKAY = 0;
     private static final int COMPILATION_SUCCESS = 80;
+
+    // Path to compos_key_cmd tool
+    private static final String COMPOS_KEY_CMD_BIN = "/apex/com.android.compos/bin/compos_key_cmd";
 
     private String mCid;
 
@@ -56,8 +58,6 @@ public final class ComposTestCase extends VirtualizationTestCaseBase {
         testIfDeviceIsCapable(getDevice());
 
         prepareVirtualizationTestSetup(getDevice());
-
-        startComposVm();
     }
 
     @After
@@ -71,27 +71,67 @@ public final class ComposTestCase extends VirtualizationTestCaseBase {
     }
 
     @Test
-    @Ignore("b/192294431")
-    public void testOdrefresh() throws Exception {
+    public void testKeyService() throws Exception {
+        startVm();
         waitForServiceRunning();
 
         CommandRunner android = new CommandRunner(getDevice());
+        CommandResult result;
 
-        // Expect the compilation to finish successfully.
-        CommandResult result =
-                android.runForResultWithTimeout(
-                        ODREFRESH_TIMEOUT_MS,
-                        ODREFRESH_BIN,
-                        "--use-compilation-os=" + mCid,
-                        "--force-compile");
-        assertThat(result.getExitCode()).isEqualTo(COMPILATION_SUCCESS);
+        // Generate keys - should succeed
+        android.run(
+                COMPOS_KEY_CMD_BIN,
+                "--cid " + mCid,
+                "generate",
+                TEST_ROOT + "test_key.blob",
+                TEST_ROOT + "test_key.pubkey");
 
-        // Expect the output to be valid.
-        result = android.runForResultWithTimeout(ODREFRESH_TIMEOUT_MS, ODREFRESH_BIN, "--check");
-        assertThat(result.getExitCode()).isEqualTo(OKAY);
+        // Verify them - should also succeed, since we just generated them
+        android.run(
+                COMPOS_KEY_CMD_BIN,
+                "--cid " + mCid,
+                "verify",
+                TEST_ROOT + "test_key.blob",
+                TEST_ROOT + "test_key.pubkey");
+
+        // Swap public key & blob - should fail to verify
+        result =
+                android.runForResult(
+                        COMPOS_KEY_CMD_BIN,
+                        "--cid " + mCid,
+                        "verify",
+                        TEST_ROOT + "test_key.pubkey",
+                        TEST_ROOT + "test_key.blob");
+        assertThat(result.getStatus()).isEqualTo(CommandStatus.FAILED);
+
+        // Generate another set of keys - should succeed
+        android.run(
+                COMPOS_KEY_CMD_BIN,
+                "--cid " + mCid,
+                "generate",
+                TEST_ROOT + "test_key2.blob",
+                TEST_ROOT + "test_key2.pubkey");
+
+        // They should also verify ok
+        android.run(
+                COMPOS_KEY_CMD_BIN,
+                "--cid " + mCid,
+                "verify",
+                TEST_ROOT + "test_key2.blob",
+                TEST_ROOT + "test_key2.pubkey");
+
+        // Mismatched key blob & public key should fail to verify
+        result =
+                android.runForResult(
+                        COMPOS_KEY_CMD_BIN,
+                        "--cid " + mCid,
+                        "verify",
+                        TEST_ROOT + "test_key.pubkey",
+                        TEST_ROOT + "test_key2.blob");
+        assertThat(result.getStatus()).isEqualTo(CommandStatus.FAILED);
     }
 
-    private void startComposVm() throws Exception {
+    private void startVm() throws Exception {
         final String apkName = "CompOSPayloadApp.apk";
         final String packageName = "com.android.compos.payload";
         mCid =
@@ -100,20 +140,20 @@ public final class ComposTestCase extends VirtualizationTestCaseBase {
                         getBuild(),
                         apkName,
                         packageName,
-                        "assets/vm_config.json",
+                        "assets/key_service_vm_config.json",
                         /* debug */ true);
         adbConnectToMicrodroid(getDevice(), mCid);
     }
 
     private void waitForServiceRunning() {
         try {
-            PollingCheck.waitFor(COMPSVC_READY_LATENCY_MS, this::isServiceRunning);
+            PollingCheck.waitFor(READY_LATENCY_MS, this::isServiceRunning);
         } catch (Exception e) {
             throw new RuntimeException("Service unavailable", e);
         }
     }
 
     private boolean isServiceRunning() {
-        return tryRunOnMicrodroid("pidof compsvc") != null;
+        return tryRunOnMicrodroid("pidof compos_key_main") != null;
     }
 }
