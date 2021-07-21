@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "dec00682_1a508c85",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-21T05:31:28Z",
+      "side": 1,
+      "message": "When I rebased this change and ran these tests, I got\n\n  07-21 14:14:52.086  3631  3631 W crosvm  : type\u003d1400 audit(0.0:163): avc: denied { read write } for path\u003d\"/data/misc/virtualizationservice/11/zero.img\" dev\u003d\"dm-35\" ino\u003d3164 scontext\u003du:r:crosvm:s0 tcontext\u003du:object_r:virtualizationservice_data_file:s0 tclass\u003dfile permissive\u003d0",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 65
+      },
+      "revId": "4a908a20fb8cb2e147ed06f057c66d93d9649be1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "49abbddf_65a875ca",
@@ -68,6 +91,23 @@
       "side": 1,
       "message": "That\u0027s weird. It should work: go/acloud-cloudtop\n\nIf you file a bug to the cuttlefish team, I believe they will be happy to look into it.",
       "parentUuid": "ba471604_d9007ea5",
+      "revId": "4a908a20fb8cb2e147ed06f057c66d93d9649be1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea731669_71415cfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-21T05:31:28Z",
+      "side": 1,
+      "message": "Andrew, when I ",
       "revId": "4a908a20fb8cb2e147ed06f057c66d93d9649be1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
