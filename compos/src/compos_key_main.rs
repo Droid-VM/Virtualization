@@ -16,6 +16,8 @@
 //! VM using RPC Binder.
 
 mod compos_key_service;
+mod compsvc;
+mod signer;
 
 use crate::compos_key_service::{CompOsKeyService, KeystoreNamespace};
 use anyhow::{bail, Context, Result};
