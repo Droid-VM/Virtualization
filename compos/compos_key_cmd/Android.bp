@@ -12,6 +12,7 @@ cc_binary {
     ],
 
     shared_libs: [
+        "android.system.virtualizationservice-ndk_platform",
         "compos_aidl_interface-ndk_platform",
         "libbase",
         "libbinder_rpc_unstable",
