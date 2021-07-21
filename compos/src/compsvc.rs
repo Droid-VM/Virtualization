@@ -28,11 +28,8 @@
 //!     - authfs (fd translation)
 //!     - actual task
 
+use crate::signer::Signer;
 use anyhow::Result;
-use log::error;
-use minijail::{self, Minijail};
-use std::path::PathBuf;
-
 use compos_aidl_interface::aidl::com::android::compos::ICompService::{
     BnCompService, ICompService,
 };
@@ -40,6 +37,9 @@ use compos_aidl_interface::aidl::com::android::compos::Metadata::Metadata;
 use compos_aidl_interface::binder::{
     BinderFeatures, Interface, Result as BinderResult, Status, StatusCode, Strong,
 };
+use log::error;
+use minijail::{self, Minijail};
+use std::path::PathBuf;
 
 const WORKER_BIN: &str = "/apex/com.android.compos/bin/compsvc_worker";
 
@@ -50,12 +50,22 @@ pub struct CompService {
     worker_bin: PathBuf,
     task_bin: String,
     debuggable: bool,
+    #[allow(dead_code)] // TODO: Make use of this
+    signer: Option<Box<dyn Signer>>,
 }
 
 impl CompService {
-    pub fn new_binder(task_bin: String, debuggable: bool) -> Strong<dyn ICompService> {
-        let service =
-            CompService { worker_bin: PathBuf::from(WORKER_BIN.to_owned()), task_bin, debuggable };
+    pub fn new_binder(
+        task_bin: String,
+        debuggable: bool,
+        signer: Option<Box<dyn Signer>>,
+    ) -> Strong<dyn ICompService> {
+        let service = CompService {
+            worker_bin: PathBuf::from(WORKER_BIN.to_owned()),
+            task_bin,
+            debuggable,
+            signer,
+        };
         BnCompService::new_binder(service, BinderFeatures::default())
     }
 

@@ -16,6 +16,8 @@
 //! access to Keystore in the VM, but not persistent storage; instead the host stores the key
 //! on our behalf via this service.
 
+use crate::compsvc::CompService;
+use crate::signer::Signer;
 use android_hardware_security_keymint::aidl::android::hardware::security::keymint::{
     Algorithm::Algorithm, Digest::Digest, KeyParameter::KeyParameter,
     KeyParameterValue::KeyParameterValue, KeyPurpose::KeyPurpose, PaddingMode::PaddingMode,
@@ -27,7 +29,7 @@ use android_system_keystore2::aidl::android::system::keystore2::{
 };
 use anyhow::{anyhow, Context, Result};
 use compos_aidl_interface::aidl::com::android::compos::{
-    CompOsKeyData::CompOsKeyData, ICompOsKeyService::ICompOsKeyService,
+    CompOsKeyData::CompOsKeyData, ICompOsKeyService::ICompOsKeyService, ICompService::ICompService,
 };
 use compos_aidl_interface::binder::{
     self, wait_for_interface, ExceptionCode, Interface, Status, Strong,
@@ -69,6 +71,7 @@ const NO_AUTH_REQUIRED: KeyParameter =
 const BLOB_KEY_DESCRIPTOR: KeyDescriptor =
     KeyDescriptor { domain: Domain::BLOB, nspace: 0, alias: None, blob: None };
 
+#[derive(Clone)]
 pub struct CompOsKeyService {
     namespace: KeystoreNamespace,
     random: SystemRandom,
@@ -96,11 +99,33 @@ impl ICompOsKeyService for CompOsKeyService {
         self.do_sign(key_blob, data)
             .map_err(|e| new_binder_exception(ExceptionCode::ILLEGAL_STATE, e.to_string()))
     }
+
+    fn getCompService(&self, key_blob: &[u8]) -> binder::Result<Strong<dyn ICompService>> {
+        let signer =
+            Box::new(CompOsSigner { key_blob: key_blob.to_owned(), key_service: self.clone() });
+        let debuggable = true;
+        Ok(CompService::new_binder(
+            "/apex/com.android.art/bin/dex2oat64".to_owned(),
+            debuggable,
+            Some(signer),
+        ))
+    }
 }
 
 /// Constructs a new Binder error `Status` with the given `ExceptionCode` and message.
 fn new_binder_exception<T: AsRef<str>>(exception: ExceptionCode, message: T) -> Status {
     Status::new_exception(exception, CString::new(message.as_ref()).ok().as_deref())
+}
+
+struct CompOsSigner {
+    key_blob: Vec<u8>,
+    key_service: CompOsKeyService,
+}
+
+impl Signer for CompOsSigner {
+    fn sign(&self, data: &[u8]) -> Result<Vec<u8>> {
+        self.key_service.do_sign(&self.key_blob, data)
+    }
 }
 
 impl CompOsKeyService {
