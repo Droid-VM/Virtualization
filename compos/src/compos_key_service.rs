@@ -16,6 +16,8 @@
 //! access to Keystore in the VM, but not persistent storage; instead the host stores the key
 //! on our behalf via this service.
 
+use crate::compsvc::CompService;
+use crate::signer::Signer;
 use android_hardware_security_keymint::aidl::android::hardware::security::keymint::{
     Algorithm::Algorithm, Digest::Digest, KeyParameter::KeyParameter,
     KeyParameterValue::KeyParameterValue, KeyPurpose::KeyPurpose, PaddingMode::PaddingMode,
@@ -27,7 +29,7 @@ use android_system_keystore2::aidl::android::system::keystore2::{
 };
 use anyhow::{anyhow, Context, Result};
 use compos_aidl_interface::aidl::com::android::compos::{
-    CompOsKeyData::CompOsKeyData, ICompOsKeyService::ICompOsKeyService,
+    CompOsKeyData::CompOsKeyData, ICompOsKeyService::ICompOsKeyService, ICompService::ICompService,
 };
 use compos_aidl_interface::binder::{
     self, wait_for_interface, ExceptionCode, Interface, Status, Strong,
@@ -37,6 +39,7 @@ use ring::rand::{SecureRandom, SystemRandom};
 use ring::signature;
 use scopeguard::ScopeGuard;
 use std::ffi::CString;
+use std::sync::Arc;
 
 /// Keystore2 namespace IDs, used for access control to keys.
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
@@ -69,22 +72,32 @@ const NO_AUTH_REQUIRED: KeyParameter =
 const BLOB_KEY_DESCRIPTOR: KeyDescriptor =
     KeyDescriptor { domain: Domain::BLOB, nspace: 0, alias: None, blob: None };
 
-pub struct CompOsKeyService {
+pub struct CompOsKeyService(KeyService);
+
+impl Interface for CompOsKeyService {}
+
+#[derive(Clone)]
+struct KeyService {
     namespace: KeystoreNamespace,
     random: SystemRandom,
     security_level: Strong<dyn IKeystoreSecurityLevel>,
 }
 
-impl Interface for CompOsKeyService {}
+impl CompOsKeyService {
+    pub fn new(namespace: KeystoreNamespace) -> Result<Self> {
+        Ok(Self(KeyService::new(namespace)?))
+    }
+}
 
 impl ICompOsKeyService for CompOsKeyService {
     fn generateSigningKey(&self) -> binder::Result<CompOsKeyData> {
-        self.do_generate()
+        self.0
+            .do_generate()
             .map_err(|e| new_binder_exception(ExceptionCode::ILLEGAL_STATE, e.to_string()))
     }
 
     fn verifySigningKey(&self, key_blob: &[u8], public_key: &[u8]) -> binder::Result<bool> {
-        Ok(if let Err(e) = self.do_verify(key_blob, public_key) {
+        Ok(if let Err(e) = self.0.do_verify(key_blob, public_key) {
             warn!("Signing key verification failed: {}", e.to_string());
             false
         } else {
@@ -93,8 +106,20 @@ impl ICompOsKeyService for CompOsKeyService {
     }
 
     fn sign(&self, key_blob: &[u8], data: &[u8]) -> binder::Result<Vec<u8>> {
-        self.do_sign(key_blob, data)
+        self.0
+            .do_sign(key_blob, data)
             .map_err(|e| new_binder_exception(ExceptionCode::ILLEGAL_STATE, e.to_string()))
+    }
+
+    fn getCompService(&self, key_blob: &[u8]) -> binder::Result<Strong<dyn ICompService>> {
+        let signer =
+            Arc::new(CompOsSigner { key_blob: key_blob.to_owned(), key_service: self.0.clone() });
+        let debuggable = true;
+        Ok(CompService::new_binder(
+            "/apex/com.android.art/bin/dex2oat64".to_owned(),
+            debuggable,
+            Some(signer),
+        ))
     }
 }
 
@@ -103,7 +128,18 @@ fn new_binder_exception<T: AsRef<str>>(exception: ExceptionCode, message: T) -> 
     Status::new_exception(exception, CString::new(message.as_ref()).ok().as_deref())
 }
 
-impl CompOsKeyService {
+struct CompOsSigner {
+    key_blob: Vec<u8>,
+    key_service: KeyService,
+}
+
+impl Signer for CompOsSigner {
+    fn sign(&self, data: &[u8]) -> Result<Vec<u8>> {
+        self.key_service.do_sign(&self.key_blob, data)
+    }
+}
+
+impl KeyService {
     pub fn new(namespace: KeystoreNamespace) -> Result<Self> {
         let keystore_service = wait_for_interface::<dyn IKeystoreService>(KEYSTORE_SERVICE_NAME)
             .context("No Keystore service")?;
