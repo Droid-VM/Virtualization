@@ -203,6 +203,7 @@ MicrodroidKeyMintDevice::MicrodroidKeyMintDevice(::keymaster::KeymasterKeyBlob& 
                     auto context = new MicrodroidKeymasterContext(KmVersion::KEYMINT_1, rootKey);
                     context->SetSystemVersion(::keymaster::GetOsVersion(),
                                               ::keymaster::GetOsPatchlevel());
+                    context->SetVendorPatchLevel(::keymaster::GetVendorPatchLevel());
                     return context;
                 }(),
                 kOperationTableSize)) {}
