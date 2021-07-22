@@ -23,6 +23,7 @@ import android.virt.test.CommandRunner;
 import android.virt.test.VirtualizationTestCaseBase;
 
 import com.android.compatibility.common.util.PollingCheck;
+import com.android.tradefed.device.DeviceNotAvailableException;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner;
 import com.android.tradefed.util.CommandResult;
 
@@ -39,6 +40,10 @@ public final class ComposTestCase extends VirtualizationTestCaseBase {
     /** Path to odrefresh on Microdroid */
     private static final String ODREFRESH_BIN = "/apex/com.android.art/bin/odrefresh";
 
+    /** Output directory of odrefresh */
+    private static final String ODREFRESH_OUTPUT_DIR =
+            "/data/misc/apexdata/com.android.art/dalvik-cache";
+
     /** Timeout of odrefresh to finish */
     private static final int ODREFRESH_TIMEOUT_MS = 10 * 60 * 1000; // 10 minutes
 
@@ -52,7 +57,7 @@ public final class ComposTestCase extends VirtualizationTestCaseBase {
     private String mCid;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws DeviceNotAvailableException {
         testIfDeviceIsCapable(getDevice());
 
         prepareVirtualizationTestSetup(getDevice());
@@ -61,7 +66,7 @@ public final class ComposTestCase extends VirtualizationTestCaseBase {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() throws DeviceNotAvailableException {
         if (mCid != null) {
             shutdownMicrodroid(getDevice(), mCid);
             mCid = null;
@@ -72,7 +77,7 @@ public final class ComposTestCase extends VirtualizationTestCaseBase {
 
     @Test
     @Ignore("b/192294431")
-    public void testOdrefresh() throws Exception {
+    public void testOdrefresh() throws DeviceNotAvailableException {
         waitForServiceRunning();
 
         CommandRunner android = new CommandRunner(getDevice());
@@ -86,12 +91,31 @@ public final class ComposTestCase extends VirtualizationTestCaseBase {
                         "--force-compile");
         assertThat(result.getExitCode()).isEqualTo(COMPILATION_SUCCESS);
 
+        String actualChecksumSnapshot = checksumDirectoryContent(android, ODREFRESH_OUTPUT_DIR);
+
         // Expect the output to be valid.
+        result = android.runForResultWithTimeout(ODREFRESH_TIMEOUT_MS, ODREFRESH_BIN, "--verify");
+        assertThat(result.getExitCode()).isEqualTo(OKAY);
+        // --check can delete the output, so run later.
+        result = android.runForResultWithTimeout(ODREFRESH_TIMEOUT_MS, ODREFRESH_BIN, "--check");
+        assertThat(result.getExitCode()).isEqualTo(OKAY);
+
+        // Expect the compilation locally on Android to also finish successfully.
+        result =
+                android.runForResultWithTimeout(
+                        ODREFRESH_TIMEOUT_MS, ODREFRESH_BIN, "--force-compile");
+        assertThat(result.getExitCode()).isEqualTo(COMPILATION_SUCCESS);
+
+        // Expect the output of Comp OS to be the same as compiled on Android.
+        String expectedChecksumSnapshot = checksumDirectoryContent(android, ODREFRESH_OUTPUT_DIR);
+        assertThat(actualChecksumSnapshot).isEqualTo(expectedChecksumSnapshot);
+
+        // Let --check clean up the output.
         result = android.runForResultWithTimeout(ODREFRESH_TIMEOUT_MS, ODREFRESH_BIN, "--check");
         assertThat(result.getExitCode()).isEqualTo(OKAY);
     }
 
-    private void startComposVm() throws Exception {
+    private void startComposVm() throws DeviceNotAvailableException {
         final String apkName = "CompOSPayloadApp.apk";
         final String packageName = "com.android.compos.payload";
         mCid =
@@ -115,5 +139,10 @@ public final class ComposTestCase extends VirtualizationTestCaseBase {
 
     private boolean isServiceRunning() {
         return tryRunOnMicrodroid("pidof compsvc") != null;
+    }
+
+    private String checksumDirectoryContent(CommandRunner runner, String path)
+            throws DeviceNotAvailableException {
+        return runner.run("find " + path + " -type f -exec sha256sum {} \\; | sort");
     }
 }
