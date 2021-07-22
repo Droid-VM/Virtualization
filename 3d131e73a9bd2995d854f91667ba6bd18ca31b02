@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdb5f286_9a44c1e8",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-22T18:13:40Z",
+      "side": 1,
+      "message": "nit: delete or move to compsvc_main.rs.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 31
+      },
+      "revId": "3d131e73a9bd2995d854f91667ba6bd18ca31b02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6a84de4_6d9994cd",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-22T18:13:40Z",
+      "side": 1,
+      "message": "nit: let\u0027s add some brief comments.",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 3
+      },
+      "revId": "3d131e73a9bd2995d854f91667ba6bd18ca31b02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ef13ffd_4b853daf",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-22T18:13:40Z",
+      "side": 1,
+      "message": "Since this struct is now public, it\u0027d be nice to not expose the worker_bin as an implementation detail.  It\u0027s only created to not convert the str to PathBuf on every request.  You can probably just duplicate the constant.",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 50,
+        "endChar": 24
+      },
+      "revId": "3d131e73a9bd2995d854f91667ba6bd18ca31b02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
