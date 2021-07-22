@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f9e1dc5_8374c12a",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-22T18:13:30Z",
+      "side": 1,
+      "message": "nit: prefer to not move these external crates, i.e. to keep external and internal crates separated (so probably put the Signer in this group).",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 23
+      },
+      "revId": "054b710ec67e9fd41e62aa10e35d82a0506a7aab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8873ced_62d3d808",
+        "filename": "compos/src/signer.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-22T18:13:30Z",
+      "side": 1,
+      "message": "nit: Add some doc for the trait and its function.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 3
+      },
+      "revId": "054b710ec67e9fd41e62aa10e35d82a0506a7aab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
