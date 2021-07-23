@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be2b3a6a_10872edd",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-23T11:24:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdb5f286_9a44c1e8",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 31
+      },
+      "revId": "3d131e73a9bd2995d854f91667ba6bd18ca31b02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6a84de4_6d9994cd",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c64796b6_58716ad6",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-23T11:24:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6a84de4_6d9994cd",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 3
+      },
+      "revId": "3d131e73a9bd2995d854f91667ba6bd18ca31b02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ef13ffd_4b853daf",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-07-22T18:13:40Z",
       "side": 1,
       "message": "Since this struct is now public, it\u0027d be nice to not expose the worker_bin as an implementation detail.  It\u0027s only created to not convert the str to PathBuf on every request.  You can probably just duplicate the constant.",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 50,
+        "endChar": 24
+      },
+      "revId": "3d131e73a9bd2995d854f91667ba6bd18ca31b02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc8a07ef_b09bc679",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-23T11:24:58Z",
+      "side": 1,
+      "message": "These fields are not public, only the struct is, so they\u0027re not very exposed.\nBut actually we don\u0027t need to expose the struct at all - it\u0027s only new_binder that is needed.\nWDYT?",
+      "parentUuid": "0ef13ffd_4b853daf",
       "range": {
         "startLine": 50,
         "startChar": 4,
