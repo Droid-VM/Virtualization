@@ -175,9 +175,11 @@ fn run_vm(
         command.arg("--protected-vm");
     }
 
-    if let Some(memory_mib) = config.memory_mib {
-        command.arg("--mem").arg(memory_mib.to_string());
-    }
+    // TODO(192294431): remove the option to use the smaller default (256) once it's possible to
+    // specify the memory size in the payload config.
+    // SAFETY: number is in range.
+    let default_memory_mib = unsafe { NonZeroU32::new_unchecked(2048) };
+    command.arg("--mem").arg(config.memory_mib.unwrap_or(default_memory_mib).to_string());
 
     if let Some(log_fd) = log_fd {
         command.stdout(log_fd);
