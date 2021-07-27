@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fd23158_0a56158e",
+        "filename": "microdroid/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-27T11:11:40Z",
+      "side": 1,
+      "message": "partially related to this change.\n\nThese commands need to be updated as well. For example,\n\n\n  TEST_ROOT\u003d/data/local/tmp/virt\n  adb shell mkdir TEST_ROOT\n  adb push out/dist/MyApp.apk.idsig $TEST_ROOT\n\nWithout `mkdir`, idsig file will be pushed as \"virt\"",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 0
+      },
+      "revId": "eeac692a458c2aac61289160f22884a8e1118e3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dd2c36e_5747e529",
+        "filename": "microdroid/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-07-27T11:11:40Z",
+      "side": 1,
+      "message": "q: last time, I needed to run `vm --create-partition`. I guess something\u0027s changed?\n\nAt least, we\u0027d better explain this bit.",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 25
+      },
+      "revId": "eeac692a458c2aac61289160f22884a8e1118e3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
