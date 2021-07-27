@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ced5cb8_e63d0bf2",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-27T11:23:26Z",
+      "side": 1,
+      "message": "Oh it\u0027s used by the bootloader? That makes more sense then, I assumed it was used by the payload.\n\nNot for this change, but in general: I\u0027m surprised that the partition numbers are important, can\u0027t we use the partition labels instead?",
+      "parentUuid": "d1557f6f_fbf04b12",
+      "revId": "b58f7fccce4c2048e91272a3f40669707dd59528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "139d4a3f_1db4390b",
         "filename": "virtualizationservice/src/payload.rs",
         "patchSetId": 2
