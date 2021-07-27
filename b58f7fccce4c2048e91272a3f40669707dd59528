@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d1557f6f_fbf04b12",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-27T11:17:48Z",
+      "side": 1,
+      "message": "uboot_env and this have some similarities. They carry non-executable data. They are accessed by bootloader.\n\npayload disk was initially tried. I put this as the second partition in the disk, just before the partitions for APEXes, otherwise we can\u0027t fix the partition number of this partition (we can have arbitrary number of APEX partitions). That in turn required me to make another change in apexd because it has an implicit assumption that APEX partitions starts from the second partition. In the end, it felt like this is a wrong path.\n\nA new disk is of course possible, but given the similarities with uboot_env, I\u0027d rather put them together. We could flip the decision in the future though.",
+      "parentUuid": "23333f29_50ccc2bb",
+      "revId": "b58f7fccce4c2048e91272a3f40669707dd59528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "139d4a3f_1db4390b",
         "filename": "virtualizationservice/src/payload.rs",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2021-07-27T11:04:42Z",
       "side": 1,
       "message": "If you really want this disk to be writable, then enable it in microdroid.json rather than setting writable to false then changing it here.",
+      "revId": "b58f7fccce4c2048e91272a3f40669707dd59528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65fae571_e39b73f7",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-07-27T11:17:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "139d4a3f_1db4390b",
       "revId": "b58f7fccce4c2048e91272a3f40669707dd59528",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
