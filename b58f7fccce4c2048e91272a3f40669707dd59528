@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23333f29_50ccc2bb",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-27T11:04:42Z",
+      "side": 1,
+      "message": "Why here with the uboot_env, rather than in the payload disk or even a separate disk?",
+      "revId": "b58f7fccce4c2048e91272a3f40669707dd59528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "139d4a3f_1db4390b",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-07-27T11:04:42Z",
+      "side": 1,
+      "message": "If you really want this disk to be writable, then enable it in microdroid.json rather than setting writable to false then changing it here.",
+      "revId": "b58f7fccce4c2048e91272a3f40669707dd59528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
