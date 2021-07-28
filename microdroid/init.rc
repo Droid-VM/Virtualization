@@ -22,6 +22,7 @@ on early-init
 
     start ueventd
 
+    start microdroid_manager
     # TODO(b/190343842) verify apexes/apk before mounting them.
 
     # Exec apexd in the VM mode to avoid unnecessary overhead of normal mode.
@@ -85,10 +86,6 @@ on init
     start hwservicemanager
 
     start adbd
-
-    # TODO(b/186396070) microdroid_manager starts zipfuse if necessary
-    # TODO(b/186396070) move this before apexd for DICE derivation
-    start microdroid_manager
 
 on load_persist_props_action
     start logd
@@ -178,6 +175,9 @@ service ueventd /system/bin/ueventd
     class core
     critical
     seclabel u:r:ueventd:s0
+    # "ueventd" is supposed to be run in "default" mount namespace even if it's pre-apexd
+    # to support loading firmwares from APEXes.
+    mount_namespace default
     shutdown critical
 
 service console /system/bin/sh

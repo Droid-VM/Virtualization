@@ -17,7 +17,7 @@
 mod ioutil;
 mod metadata;
 
-use anyhow::{anyhow, bail, Result};
+use anyhow::{anyhow, bail, Context, Result};
 use log::{error, info, warn};
 use microdroid_payload_config::{Task, TaskType, VmPayloadConfig};
 use std::fs::{self, File};
@@ -29,6 +29,7 @@ use std::time::Duration;
 use system_properties::PropertyWatcher;
 use vsock::VsockStream;
 
+const ABILIST_PROP: &str = "ro.product.cpu.abilist";
 const WAIT_TIMEOUT: Duration = Duration::from_secs(10);
 
 fn main() -> Result<()> {
@@ -36,21 +37,22 @@ fn main() -> Result<()> {
     info!("started.");
 
     let metadata = metadata::load()?;
-    if !metadata.payload_config_path.is_empty() {
-        let config = load_config(Path::new(&metadata.payload_config_path))?;
 
-        let fake_secret = "This is a placeholder for a value that is derived from the images that are loaded in the VM.";
-        if let Err(err) = system_properties::write("ro.vmsecret.keymint", fake_secret) {
-            warn!("failed to set ro.vmsecret.keymint: {}", err);
-        }
+    // TODO(b/190343842): verify payloads (APEXes, APK)
+    info!("verified.");
 
-        // TODO(jooyung): wait until sys.boot_completed?
-        if let Some(main_task) = &config.task {
-            exec_task(main_task).map_err(|e| {
-                error!("failed to execute task: {}", e);
-                e
-            })?;
-        }
+    let fake_secret = "This is a placeholder for a value that is derived from the images that are loaded in the VM.";
+    if let Err(err) = system_properties::write("ro.vmsecret.keymint", fake_secret) {
+        warn!("failed to set ro.vmsecret.keymint: {}", err);
+    }
+
+    let config = load_config(Path::new(&metadata.payload_config_path))?;
+    // TODO(jooyung): wait until sys.boot_completed?
+    if let Some(main_task) = &config.task {
+        exec_task(main_task).map_err(|e| {
+            error!("failed to execute task: {}", e);
+            e
+        })?;
     }
 
     Ok(())
@@ -86,8 +88,9 @@ fn exec_task(task: &Task) -> Result<()> {
     };
     info!("executing main task {:?}...", task);
     // TODO(jiyong): consider piping the stream into stdio (and probably stderr) as well.
-    let mut child = build_command(task)?.stdout(stdout).spawn()?;
-    match child.wait()?.code() {
+    let mut child =
+        build_command(task)?.stdout(stdout).spawn().context("Failed to spawn a task")?;
+    match child.wait().context("Failed to run a task")?.code() {
         Some(0) => {
             info!("task successfully finished");
             Ok(())
@@ -113,12 +116,15 @@ fn build_command(task: &Task) -> Result<Command> {
 }
 
 fn find_library_path(name: &str) -> Result<String> {
-    let mut watcher = PropertyWatcher::new("ro.product.cpu.abilist")?;
-    let value = watcher.read(|_name, value| Ok(value.trim().to_string()))?;
+    let mut watcher =
+        PropertyWatcher::new(ABILIST_PROP).context(format!("Failed to read {}", ABILIST_PROP))?;
+    let value = watcher
+        .read(|_name, value| Ok(value.trim().to_string()))
+        .context(format!("Failed to read {}", ABILIST_PROP))?;
     let abi = value.split(',').next().ok_or_else(|| anyhow!("no abilist"))?;
     let path = format!("/mnt/apk/lib/{}/{}", abi, name);
 
-    let metadata = fs::metadata(&path)?;
+    let metadata = fs::metadata(&path).context(format!("Failed to read metadata of {}", &path))?;
     if !metadata.is_file() {
         bail!("{} is not a file", &path);
     }

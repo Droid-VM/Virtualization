@@ -1,5 +1,6 @@
 service microdroid_manager /system/bin/microdroid_manager
     disabled
+    mount_namespace default
     file /dev/kmsg w
     setenv RUST_LOG info
     # TODO(jooyung) remove this when microdroid_manager becomes a daemon
