@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dabdbf87_bfb042e9",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-28T17:09:48Z",
+      "side": 1,
+      "message": "Yes, I was a little surprised that it doesn\u0027t need it so far.\nI\u0027m interested in keeping it like this until I\u0027m sure we need write. Arguably when odsign runs the VM to verify the key the instance should not need to change.",
+      "parentUuid": "a43b6c63_b2f78d39",
+      "range": {
+        "startLine": 190,
+        "startChar": 68,
+        "endLine": 190,
+        "endChar": 76
+      },
+      "revId": "222edd023bd20859dd1dee8c3dbeb2568425244e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1ea4237_9342a8c5",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-07-28T17:05:20Z",
       "side": 1,
       "message": "I set the default to 2048 in microdroid.json, but we\u0027ll restore to the original 256 later.  We should specify our need here.  I ran the test again, 1024 seems sufficient (but not 512).",
+      "range": {
+        "startLine": 202,
+        "startChar": 30,
+        "endLine": 202,
+        "endChar": 31
+      },
+      "revId": "222edd023bd20859dd1dee8c3dbeb2568425244e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc7879b8_fccf581c",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-28T17:09:48Z",
+      "side": 1,
+      "message": "For the key management operations I\u0027m running here I\u0027m pretty sure 256 is fine.",
+      "parentUuid": "e1ea4237_9342a8c5",
       "range": {
         "startLine": 202,
         "startChar": 30,
