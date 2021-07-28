@@ -316,10 +316,13 @@ pub fn make_composite_image(
         OpenOptions::new().create_new(true).read(true).write(true).open(footer_path).with_context(
             || format!("Failed to create composite image header {:?}", footer_path),
         )?;
+    let zero_filler_file = File::open(&zero_filler_path).with_context(|| {
+        format!("Failed to open composite image zero filler {:?}", zero_filler_path)
+    })?;
 
     create_composite_disk(
         &partitions,
-        zero_filler_path,
+        &fd_path_for_file(&zero_filler_file),
         &fd_path_for_file(&header_file),
         &mut header_file,
         &fd_path_for_file(&footer_file),
@@ -337,6 +340,7 @@ pub fn make_composite_image(
 
     files.push(header_file);
     files.push(footer_file);
+    files.push(zero_filler_file);
 
     Ok((composite_image, files))
 }
