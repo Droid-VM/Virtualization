@@ -16,6 +16,52 @@
       "message": "Thanks Jiyong. This now works in enforcing mode in both host \u0026 VM, which is pretty cool.",
       "revId": "222edd023bd20859dd1dee8c3dbeb2568425244e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a43b6c63_b2f78d39",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-28T17:05:20Z",
+      "side": 1,
+      "message": "I suppose the VM will need to write to the instance image?",
+      "range": {
+        "startLine": 190,
+        "startChar": 68,
+        "endLine": 190,
+        "endChar": 76
+      },
+      "revId": "222edd023bd20859dd1dee8c3dbeb2568425244e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1ea4237_9342a8c5",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-28T17:05:20Z",
+      "side": 1,
+      "message": "I set the default to 2048 in microdroid.json, but we\u0027ll restore to the original 256 later.  We should specify our need here.  I ran the test again, 1024 seems sufficient (but not 512).",
+      "range": {
+        "startLine": 202,
+        "startChar": 30,
+        "endLine": 202,
+        "endChar": 31
+      },
+      "revId": "222edd023bd20859dd1dee8c3dbeb2568425244e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
