@@ -50,6 +50,24 @@
       "message": "The problem with this CL is that it didn\u0027t actually seem to change the timeout.\n\nI am still seeing timeouts at least sometimes - see http://b/194974010#comment12. (And indeed everything from #11 onwards.)\n\n",
       "revId": "874765c9ace2c53435a99e13292f4dbd31743f65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f3d3cb0_3dda378e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-07-29T16:39:10Z",
+      "side": 1,
+      "message": "I assumed the default timeout is smaller, but it looks like the default is no limit (within the scope of this option).\nhttps://android-review.googlesource.com/c/platform/packages/modules/Virtualization/+/1780044/comments/98327b48_4a89649b\n\nThis won\u0027t help the current situation, but may still be a nice-to-have.  testOdrefresh is currently the slowest (8 minutes).  So 10~15m would be ok if we want to land this.",
+      "parentUuid": "98327b48_4a89649b",
+      "revId": "874765c9ace2c53435a99e13292f4dbd31743f65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
