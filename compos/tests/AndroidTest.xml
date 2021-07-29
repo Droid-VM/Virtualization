@@ -24,5 +24,7 @@
 
     <test class="com.android.compatibility.common.tradefed.testtype.JarHostTest" >
         <option name="jar" value="ComposHostTestCases.jar" />
-    </test>
-</configuration>
+            <!-- 20 minutes in ms; 10 minutes doesn't seem long enough -->
+            <option name="test-timeout" value="1200000" />
+        </test>
+    </configuration>
