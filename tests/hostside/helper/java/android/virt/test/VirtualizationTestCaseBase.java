@@ -60,28 +60,36 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
         android.tryRun("killall", "crosvm");
 
         // disconnect from microdroid
-        tryRunOnHost("adb", "disconnect", MICRODROID_SERIAL);
+        disconnectMicrodroid(androidDevice);
     }
 
     public static void cleanUpVirtualizationTestSetup(ITestDevice androidDevice)
             throws DeviceNotAvailableException {
+        disconnectMicrodroid(androidDevice);
+
+        // kill stale VMs and directories
+        CommandRunner android = new CommandRunner(androidDevice);
+        android.tryRun("killall", "crosvm");
+        android.tryRun("rm", "-rf", "/data/misc/virtualizationservice/*");
+        android.tryRun("stop", "virtualizationservice");
+    }
+
+    private static void disconnectMicrodroid(ITestDevice androidDevice)
+            throws DeviceNotAvailableException {
         CommandRunner android = new CommandRunner(androidDevice);
 
-        // disconnect from microdroid
+        // disconnect from microdroid. This may fail if we're already disconnected, so we
+        // ignore failure.
         tryRunOnHost("adb", "disconnect", MICRODROID_SERIAL);
 
-        // Make sure we're connected to the host adb again (b/194219111)
+        // Make sure we're connected to the host adb again - disconnect on Cuttlefish seems to
+        // destabilise the connection. (b/194219111, b/192660485, b/194974010, b/192660959, ...)
         for (int retry = 0; retry < 3; ++retry) {
             if (android.tryRun("true") != null) {
                 break;
             }
             androidDevice.waitForDeviceOnline(1000);
         }
-
-        // kill stale VMs and directories
-        android.tryRun("killall", "crosvm");
-        android.tryRun("rm", "-rf", "/data/misc/virtualizationservice/*");
-        android.tryRun("stop", "virtualizationservice");
     }
 
     public static void testIfDeviceIsCapable(ITestDevice androidDevice)
@@ -230,17 +238,13 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
             throws DeviceNotAvailableException {
         CommandRunner android = new CommandRunner(androidDevice);
 
+        // Close the connection before shutting the VM down. Otherwise, b/192660485.
+        disconnectMicrodroid(androidDevice);
+        final String serial = androidDevice.getSerialNumber();
+        tryRunOnHost("adb", "-s", serial, "forward", "--remove", "tcp:" + TEST_VM_ADB_PORT);
+
         // Shutdown the VM
         android.run(VIRT_APEX + "bin/vm", "stop", cid);
-
-        // TODO(192660485): Figure out why shutting down the VM disconnects adb on cuttlefish
-        // temporarily. Without this wait, the rest of `runOnAndroid/skipIfFail` fails due to the
-        // connection loss, and results in assumption error exception for the rest of the tests.
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
     }
 
     public static void rootMicrodroid() throws DeviceNotAvailableException {
@@ -284,8 +288,7 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
             disconnected = ret.equals("failed to connect to " + MICRODROID_SERIAL);
             if (disconnected) {
                 // adb demands us to disconnect if the prior connection was a failure.
-                // b/194375443: this somtimes fails, thus 'try*'.
-                tryRunOnHost("adb", "disconnect", MICRODROID_SERIAL);
+                disconnectMicrodroid(androidDevice);
             }
         }
 
