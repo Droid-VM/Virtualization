@@ -33,6 +33,23 @@
       "message": "Are you able to reproduce the timeout? The test has been passing on my acloud instance in about 10 minutes.  When I saw timeout, it\u0027s usually other problem. \n Anyway, 20 minutes seem reasonable.",
       "revId": "874765c9ace2c53435a99e13292f4dbd31743f65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98327b48_4a89649b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-07-29T15:59:55Z",
+      "side": 1,
+      "message": "The problem with this CL is that it didn\u0027t actually seem to change the timeout.\n\nI am still seeing timeouts at least sometimes - see http://b/194974010#comment12. (And indeed everything from #11 onwards.)\n\n",
+      "revId": "874765c9ace2c53435a99e13292f4dbd31743f65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
