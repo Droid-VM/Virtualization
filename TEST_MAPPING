@@ -4,9 +4,13 @@
       "name": "MicrodroidHostTestCases"
     },
     {
-      "name": "ComposHostTestCases"
+      "name": "ComposHostTestCases",
+      "options": [
+        {
+          "exclude-filter": "android.compos.test.ComposKeyTestCase#testOdrefresh"
+        }
+      ]
     }
-
   ],
   "postsubmit": [
     // TODO(jiyong): promote this to presubmit. That currently doesn't work because
