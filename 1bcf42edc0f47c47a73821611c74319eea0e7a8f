@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000014086373",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1785295?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "c3c5699f_7beaf0bf",
+          "description": "Change to \"authfs/service/src/main.rs\"",
+          "replacements": [
+            {
+              "path": "authfs/service/src/main.rs",
+              "range": {
+                "startLine": 17,
+                "startChar": 17,
+                "endLine": 17,
+                "endChar": 27
+              },
+              "replacement": "facilitates"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "d4eb3f75_9fcc3d99",
+        "filename": "authfs/service/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-08-03T21:25:14Z",
+      "side": 1,
+      "message": "Common typo found: \"faciliates\" -- should it be \"facilitates\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 17,
+        "startChar": 17,
+        "endLine": 17,
+        "endChar": 27
+      },
+      "revId": "1bcf42edc0f47c47a73821611c74319eea0e7a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
