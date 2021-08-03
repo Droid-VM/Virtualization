@@ -80,6 +80,10 @@ android_system_image {
         // TODO(b/185767624): remove hidl after full keymint support
         "hwservicemanager",
 
+        // Required indirectly by init (via libfs_mgr). This has to be done explicitly because the
+        // build system doesn't track the dependency to this library as it is not installable.
+        "libcrypto",
+
         "microdroid_plat_sepolicy_and_mapping.sha256",
         "microdroid_file_contexts",
         "microdroid_hwservice_contexts",
