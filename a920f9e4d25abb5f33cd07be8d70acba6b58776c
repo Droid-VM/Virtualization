@@ -52,6 +52,24 @@
       "parentUuid": "73ce2cf6_01d2c402",
       "revId": "a920f9e4d25abb5f33cd07be8d70acba6b58776c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea407f36_a1c7782c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-08-04T16:22:14Z",
+      "side": 1,
+      "message": "I asked on the other CL and they said \"Any client that makes a request, that causes keystore2 to access the database before /data is mounted will cause keystore2 to panic.\" so maybe it\u0027s related to the payload being run early? I don\u0027t think we have anything else using keystore at the moment(?)",
+      "parentUuid": "fc40b644_af1fe77a",
+      "revId": "a920f9e4d25abb5f33cd07be8d70acba6b58776c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
