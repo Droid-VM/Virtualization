@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a402db1_7bc63cff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-08-04T12:58:05Z",
+      "side": 1,
+      "message": "This looks fine for microdroid, I wonder if keystore2 could even be started in post-fs-data but I don\u0027t know what it gets used for at the early stages.\n\nI\u0027m interested how it works for Android, then, where keystore2 is started with early_hal which is also late-fs :/",
+      "revId": "a920f9e4d25abb5f33cd07be8d70acba6b58776c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
