@@ -16,6 +16,24 @@
       "message": "This looks fine for microdroid, I wonder if keystore2 could even be started in post-fs-data but I don\u0027t know what it gets used for at the early stages.\n\nI\u0027m interested how it works for Android, then, where keystore2 is started with early_hal which is also late-fs :/",
       "revId": "a920f9e4d25abb5f33cd07be8d70acba6b58776c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73ce2cf6_01d2c402",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-08-04T13:17:50Z",
+      "side": 1,
+      "message": "It was something they gave consideration to aosp/1571743 but I don\u0027t understand how this CL stops there being a problem. I guess it\u0027s still just a race to the point that `create_thread_local_db` is called in `KeystoreService::new_native_binder` since I don\u0027t see any synchronisation. It must just be biased enough in most cases not to trigger?",
+      "parentUuid": "7a402db1_7bc63cff",
+      "revId": "a920f9e4d25abb5f33cd07be8d70acba6b58776c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
