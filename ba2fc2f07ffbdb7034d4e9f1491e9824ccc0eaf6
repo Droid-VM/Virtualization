@@ -46,6 +46,30 @@
       },
       "revId": "ba2fc2f07ffbdb7034d4e9f1491e9824ccc0eaf6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e85e236_1e50ad12",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-04T05:45:33Z",
+      "side": 1,
+      "message": "`watch -n 1 -t getprop xxx.yyy | grep PASS | head -1` will return \"PASS\" when the prop starts to have the value.",
+      "parentUuid": "5a5168fe_8db898f1",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 9
+      },
+      "revId": "ba2fc2f07ffbdb7034d4e9f1491e9824ccc0eaf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
