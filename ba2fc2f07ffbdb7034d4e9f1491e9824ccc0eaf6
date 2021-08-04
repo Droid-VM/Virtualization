@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff41495a_2347e488",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-04T05:30:00Z",
+      "side": 1,
+      "message": "`watch -n 1 -t getprop debug.microdroid.test.keystore` could be used to eliminate the need for while loop and the sleep.",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 9
+      },
+      "revId": "ba2fc2f07ffbdb7034d4e9f1491e9824ccc0eaf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
