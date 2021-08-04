@@ -34,6 +34,24 @@
       "parentUuid": "7a402db1_7bc63cff",
       "revId": "a920f9e4d25abb5f33cd07be8d70acba6b58776c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc40b644_af1fe77a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-04T13:32:38Z",
+      "side": 1,
+      "message": "Yeah, I guess so. This actually is only problematic in nested virtualized environment where the CPU is too slow so `create_thread_local_db` is run before post-fs-data. In normal circumstance, post-fs-data always runs before Keystore tries to use the db.\n\nWe definitely need synchronization, but for now let me workaround like this.",
+      "parentUuid": "73ce2cf6_01d2c402",
+      "revId": "a920f9e4d25abb5f33cd07be8d70acba6b58776c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
