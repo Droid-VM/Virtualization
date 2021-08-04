@@ -31,6 +31,8 @@ public class MicrodroidTestCase extends VirtualizationTestCaseBase {
     private static final String APK_NAME = "MicrodroidTestApp.apk";
     private static final String PACKAGE_NAME = "com.android.microdroid.test";
 
+    private static final long MICRODROID_PAYLOAD_TIMEOUT_MINUTES = 5;
+
     @Test
     public void testMicrodroidBoots() throws Exception {
         final String configPath = "assets/vm_config.json"; // path inside the APK
@@ -69,14 +71,18 @@ public class MicrodroidTestCase extends VirtualizationTestCaseBase {
         assertThat(runOnMicrodroid("getprop", "debug.microdroid.app.run"), is("true"));
         assertThat(runOnMicrodroid("getprop", "debug.microdroid.app.sublib.run"), is("true"));
 
-        // Manually execute the library and check the output
-        final String microdroidLauncher = "system/bin/microdroid_launcher";
-        assertThat(
-                runOnMicrodroid(microdroidLauncher, testLib, "arg1", "arg2"),
-                is("Hello Microdroid " + testLib + " arg1 arg2"));
-
         // Check that keystore was found by the payload
-        assertThat(runOnMicrodroid("getprop", "debug.microdroid.test.keystore"), is("PASS"));
+        long threshold =
+                System.currentTimeMillis() + MICRODROID_PAYLOAD_TIMEOUT_MINUTES * 60 * 1000;
+        String keystoreResult = "";
+        while (System.currentTimeMillis() < threshold) {
+            keystoreResult = runOnMicrodroid("getprop", "debug.microdroid.test.keystore");
+            if (!keystoreResult.isEmpty()) {
+                break;
+            }
+            Thread.sleep(1000);
+        }
+        assertThat(keystoreResult, is("PASS"));
 
         shutdownMicrodroid(getDevice(), cid);
     }
