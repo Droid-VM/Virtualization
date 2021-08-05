@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ec77aed4_5958504b",
+        "filename": "authfs/aidl/com/android/virt/fs/AuthFsConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-05T01:57:23Z",
+      "side": 1,
+      "message": "Yes, let\u0027s remove it. I don\u0027t think we will ever support (direct) VM-to-VM comm.\n\nYou don\u0027t need to care about versioning as long as this interface is used inside the virt APEX.\n\nIf it is exposed to outside of virt APEX, then you can version this. Since then, you can append new fields to the end of a parcelable.",
+      "parentUuid": "e81ae81d_ce1f4224",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 12
+      },
+      "revId": "116499dfa86f8c0ee0b9e149166ecb714c18cb38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88d5c08e_533a34b5",
         "filename": "authfs/aidl/com/android/virt/fs/AuthFsConfig.aidl",
         "patchSetId": 2
@@ -367,6 +391,30 @@
       "side": 1,
       "message": "It should really use a dynamic port (instead of the hardcoded 3264) in order to support multiple instances, but I haven\u0027t made the change yet.",
       "parentUuid": "6081196c_292262d2",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 122,
+        "endChar": 89
+      },
+      "revId": "116499dfa86f8c0ee0b9e149166ecb714c18cb38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48efdf4d_ce82783a",
+        "filename": "authfs/service/src/authfs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-05T01:57:23Z",
+      "side": 1,
+      "message": "Ah, I didn\u0027t recognize that it\u0027s hard coded.",
+      "parentUuid": "ec93399a_6bdcac33",
       "range": {
         "startLine": 122,
         "startChar": 4,
