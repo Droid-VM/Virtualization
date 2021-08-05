@@ -1,0 +1,12 @@
+[package]
+name = "apkverify"
+version = "0.1.0"
+authors = ["Jooyung Han <jooyung@google.com>"]
+edition = "2018"
+
+[dependencies]
+anyhow = "1.0"
+bytes = { path = "../../../../external/rust/crates/bytes" }
+byteorder = { path = "../../../../external/rust/crates/byteorder" }
+
+[dev-dependencies]
