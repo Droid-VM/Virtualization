@@ -21,7 +21,8 @@ use byteorder::{LittleEndian, ReadBytesExt};
 use bytes::{Buf, Bytes};
 use std::io;
 use std::io::Read;
-use zip::spec::CentralDirectoryEnd as EndOfCentralDirectory;
+
+use crate::ziputil::zip_sections;
 
 const APK_SIG_BLOCK_MIN_SIZE: u32 = 32;
 const APK_SIG_BLOCK_MAGIC: u128 = 0x3234206b636f6c4220676953204b5041;
@@ -46,31 +47,20 @@ const CONTENT_DIGEST_VERITY_CHUNKED_SHA256: u32 = 3;
 const CONTENT_DIGEST_SHA256: u32 = 4;
 
 pub struct SignatureInfo {
-    pub signing_block_offset: u32,
     pub signature_block: Bytes,
-    pub eocd_offset: u32,
-    pub eocd: EndOfCentralDirectory,
 }
 
 /// Returns the APK Signature Scheme block contained in the provided file for the given ID
 /// and the additional information relevant for verifying the block against the file.
 pub fn find_signature<F: Read + io::Seek>(f: &mut F, block_id: u32) -> Result<SignatureInfo> {
-    let (eocd, eocd_offset) = EndOfCentralDirectory::find_and_parse(f)?;
-    if eocd.disk_number != eocd.disk_with_central_directory {
-        bail!("Support for multi-disk files is not implemented");
-    }
-    // TODO(jooyung): reject zip64 file
-    let (signing_block, signing_block_offset) =
-        find_signing_block(f, eocd.central_directory_offset)?;
+    let sections = zip_sections(f)?;
+
+    let (signing_block, _signing_block_offset) =
+        find_signing_block(f, sections.central_directory_offset)?;
 
     // TODO(jooyung): propagate NotFound error so that verification can fallback to V2
     let signature_scheme_block = find_signature_scheme_block(signing_block, block_id)?;
-    Ok(SignatureInfo {
-        signing_block_offset,
-        signature_block: signature_scheme_block,
-        eocd_offset: eocd_offset as u32,
-        eocd,
-    })
+    Ok(SignatureInfo { signature_block: signature_scheme_block })
 }
 
 fn find_signing_block<T: Read + io::Seek>(
