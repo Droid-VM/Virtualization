@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000014197422",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1788638?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "65c4f35b_554feae5",
+          "description": "Change to \"compos/src/compsvc.rs\"",
+          "replacements": [
+            {
+              "path": "compos/src/compsvc.rs",
+              "range": {
+                "startLine": 73,
+                "startChar": 36,
+                "endLine": 73,
+                "endChar": 43
+              },
+              "replacement": "service"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "01b83642_016d6c3b",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-08-06T21:46:21Z",
+      "side": 1,
+      "message": "Common typo found: \"serviec\" -- should it be \"service\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 73,
+        "startChar": 36,
+        "endLine": 73,
+        "endChar": 43
+      },
+      "revId": "8bbcb5180522cfd7fcf70a22bf5ab8d5cc235409",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
