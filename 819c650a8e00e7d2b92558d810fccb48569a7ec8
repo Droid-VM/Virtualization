@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54120204_4fe1ed5e",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-08-06T21:53:49Z",
+      "side": 1,
+      "message": "+Steven for input (I remember there was some discussion before?)\n\nThe types here are overlapping with that authfs_aidl_interface::binder is exposing. But mixing them seems fine (i.e. I\u0027m using compos_aidl_interface::binder::* in the context of authfs_aidl_interface). Not sure what\u0027s the best practice.",
+      "range": {
+        "startLine": 38,
+        "startChar": 27,
+        "endLine": 40,
+        "endChar": 2
+      },
+      "revId": "819c650a8e00e7d2b92558d810fccb48569a7ec8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
