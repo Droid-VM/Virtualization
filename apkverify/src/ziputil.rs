@@ -95,25 +95,3 @@ pub fn zip_sections<T: Read + io::Seek>(reader: &mut T) -> Result<ZipSections> {
     }
     bail!("Could not find central directory end")
 }
-
-#[cfg(test)]
-mod test {
-    use super::*;
-    use std::fs::File;
-
-    #[test]
-    fn test_zip_sections() -> Result<()> {
-        let mut f = File::open("tests/data/test.apex")?;
-        let section = zip_sections(&mut f)?;
-        assert_eq!(
-            section,
-            ZipSections {
-                central_directory_offset: 9224192,
-                central_directory_size: 8795,
-                eocd_offset: 9232987,
-                eocd_size: 3493,
-            }
-        );
-        Ok(())
-    }
-}
