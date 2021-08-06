@@ -16,6 +16,24 @@
       "message": "We already have the zip crate in Android, why reimplement part of it here?",
       "revId": "bf9e193358bfd052c55b4272c19f02d9820fbcf9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d8cf3bc_80a4320d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-06T15:13:14Z",
+      "side": 1,
+      "message": "zip crate doesn\u0027t expose the API(aosp/1788169). I\u0027m asking upstream to expose the API. This could be removed when the upstream exposes the API.",
+      "parentUuid": "62af1a8e_12474c5d",
+      "revId": "bf9e193358bfd052c55b4272c19f02d9820fbcf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
