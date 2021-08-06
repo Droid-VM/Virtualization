@@ -18,7 +18,9 @@ mod ioutil;
 mod metadata;
 
 use anyhow::{anyhow, bail, Result};
+use apkverify::verify;
 use log::{error, info, warn};
+use microdroid_metadata::Metadata;
 use microdroid_payload_config::{Task, TaskType, VmPayloadConfig};
 use rustutils::system_properties::PropertyWatcher;
 use std::fs::{self, File};
@@ -30,12 +32,16 @@ use std::time::Duration;
 use vsock::VsockStream;
 
 const WAIT_TIMEOUT: Duration = Duration::from_secs(10);
+const DM_MOUNTED_APK_PATH: &str = "/dev/block/mapper/microdroid-apk";
 
 fn main() -> Result<()> {
     kernlog::init()?;
     info!("started.");
 
     let metadata = metadata::load()?;
+
+    verify_payloads(&metadata)?;
+
     if !metadata.payload_config_path.is_empty() {
         let config = load_config(Path::new(&metadata.payload_config_path))?;
 
@@ -53,6 +59,21 @@ fn main() -> Result<()> {
         }
     }
 
+    Ok(())
+}
+
+// TODO(jooyung): v2/v3 full verification can be slow. Consider multithreading.
+fn verify_payloads(metadata: &Metadata) -> Result<()> {
+    // APEXes
+    for apex in metadata.apexes.iter() {
+        verify(format!("/dev/block/by-name/{}", &apex.partition_name))?;
+    }
+    // should wait APK to be dm-verity mounted by apkdmverity
+    ioutil::wait_for_file(DM_MOUNTED_APK_PATH, WAIT_TIMEOUT)?;
+    verify(DM_MOUNTED_APK_PATH)?;
+
+    // TODO(jooyung): collect public keys and store them in instance.img
+    // TODO(jooyung): should stop the boot process if verification fails
     Ok(())
 }
 
