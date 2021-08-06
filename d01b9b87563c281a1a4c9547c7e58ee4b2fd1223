@@ -16,6 +16,91 @@
       "message": "Over to Andrew",
       "revId": "d01b9b87563c281a1a4c9547c7e58ee4b2fd1223",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ccbf300_31604795",
+        "filename": "apkverify/Cargo.toml",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-06T13:49:29Z",
+      "side": 1,
+      "message": "Nit: Why give paths for some crates but not for others?",
+      "revId": "d01b9b87563c281a1a4c9547c7e58ee4b2fd1223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c661a9b7_888254cb",
+        "filename": "apkverify/Cargo.toml",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-06T13:49:29Z",
+      "side": 1,
+      "message": "Nit: You can omit this section entirely.",
+      "revId": "d01b9b87563c281a1a4c9547c7e58ee4b2fd1223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae0760bd_5e52b559",
+        "filename": "apkverify/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-06T13:49:29Z",
+      "side": 1,
+      "message": "Can\u0027t you just `pub use v3::verify`, rather than making a new function to call it?",
+      "revId": "d01b9b87563c281a1a4c9547c7e58ee4b2fd1223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "722b82b8_b7023d01",
+        "filename": "apkverify/src/v3.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-06T13:49:29Z",
+      "side": 1,
+      "message": "Put modules in separate files, as per the Android Rust style guide.",
+      "revId": "d01b9b87563c281a1a4c9547c7e58ee4b2fd1223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "633c0e8d_892e6616",
+        "filename": "apkverify/tests/data/README",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-06T13:49:29Z",
+      "side": 1,
+      "message": "Looks like this is Markdown, so call it README.md.",
+      "revId": "d01b9b87563c281a1a4c9547c7e58ee4b2fd1223",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
