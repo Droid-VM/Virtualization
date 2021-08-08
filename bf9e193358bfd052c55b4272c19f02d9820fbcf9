@@ -52,6 +52,24 @@
       "parentUuid": "3d8cf3bc_80a4320d",
       "revId": "bf9e193358bfd052c55b4272c19f02d9820fbcf9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66e3b195_868904eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-08T10:59:08Z",
+      "side": 1,
+      "message": "Because scanning EOCD is typically not required by most zip clients exposing it from zip-rs seems not a good idea. That\u0027s why I abandoned it.\n\nBesides, this isn\u0027t a full zip implementation, but a small part of it (scanning EOCD). I thought that having this as a separate impl wouldn\u0027t be a harm.\n\nBut I don\u0027t mind using it from zip-rs by exposing it. Let me restore it and use it here.",
+      "parentUuid": "9940c870_a17de218",
+      "revId": "bf9e193358bfd052c55b4272c19f02d9820fbcf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
