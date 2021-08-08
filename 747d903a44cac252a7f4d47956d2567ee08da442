@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbc5497b_908f32c4",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-08T09:04:11Z",
+      "side": 1,
+      "message": "We don\u0027t need to verify APEXes because root hashes in the files are already signed. apexd is doing the verification already.",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 5
+      },
+      "revId": "747d903a44cac252a7f4d47956d2567ee08da442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
