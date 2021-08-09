@@ -88,6 +88,24 @@
       "parentUuid": "66e3b195_868904eb",
       "revId": "bf9e193358bfd052c55b4272c19f02d9820fbcf9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2a1431d_d25dc7a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-09T17:47:09Z",
+      "side": 1,
+      "message": "Joel had a concern about exposing internal APIs because it would easily break when updating from crates.io. And I agree with him.\n\nI re-implemented zip_sections() to use zip-rs\u0027s ZipArchive::new. It still knows zip format but it\u0027s okay because we need that knowledge for APK signature verification. (For example, digesting contents would require manual update of EOCD\u0027s central_directory_offset value in byte arrays.)",
+      "parentUuid": "4134e834_332fd18b",
+      "revId": "bf9e193358bfd052c55b4272c19f02d9820fbcf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
