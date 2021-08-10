@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b971561_222c1afc",
+        "filename": "apkverify/src/sigutil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-10T16:13:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9a98238_299fe105",
+      "range": {
+        "startLine": 118,
+        "startChar": 7,
+        "endLine": 118,
+        "endChar": 15
+      },
+      "revId": "80ef88d889f4b4233191b278189e5ccef364f8ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9b40353_8ae224e6",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "699c8fa2_359efbf8",
+        "filename": "apkverify/src/sigutil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-10T16:13:04Z",
+      "side": 1,
+      "message": "I wanted to make three methods have the same signature. But I couldn\u0027t find a good way to do it. I think this is good enough for now. (Take\u003cCursor\u003cVec\u003cu8\u003e\u003e is different from Take\u003c\u0026mut File\u003e.)",
+      "parentUuid": "f9b40353_8ae224e6",
+      "range": {
+        "startLine": 132,
+        "startChar": 29,
+        "endLine": 132,
+        "endChar": 33
+      },
+      "revId": "80ef88d889f4b4233191b278189e5ccef364f8ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab4b9b7f_159936b0",
@@ -77,6 +125,30 @@
       "writtenOn": "2021-08-10T15:07:23Z",
       "side": 1,
       "message": "Add some more comment on why this is needed.",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 49
+      },
+      "revId": "80ef88d889f4b4233191b278189e5ccef364f8ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86b066d1_d4e6e7a3",
+        "filename": "apkverify/src/ziputil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-10T16:13:04Z",
+      "side": 1,
+      "message": "Added the excerpt from https://source.android.com/security/apksigning/v2#integrity-protected-contents at callsite.",
+      "parentUuid": "ab4b9b7f_159936b0",
       "range": {
         "startLine": 73,
         "startChar": 4,
