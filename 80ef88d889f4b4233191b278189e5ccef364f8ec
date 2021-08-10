@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c52c7eef_a426910b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-10T15:07:23Z",
+      "side": 1,
+      "message": "Some insignificant comments, but overall LGTM.",
+      "revId": "80ef88d889f4b4233191b278189e5ccef364f8ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9a98238_299fe105",
+        "filename": "apkverify/src/sigutil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-10T15:07:23Z",
+      "side": 1,
+      "message": "zip_entries",
+      "range": {
+        "startLine": 118,
+        "startChar": 7,
+        "endLine": 118,
+        "endChar": 15
+      },
+      "revId": "80ef88d889f4b4233191b278189e5ccef364f8ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9b40353_8ae224e6",
+        "filename": "apkverify/src/sigutil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-10T15:07:23Z",
+      "side": 1,
+      "message": "Why not wrap this with Cursor so that we don\u0027t need to have from_read and from_vec separately?",
+      "range": {
+        "startLine": 132,
+        "startChar": 29,
+        "endLine": 132,
+        "endChar": 33
+      },
+      "revId": "80ef88d889f4b4233191b278189e5ccef364f8ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab4b9b7f_159936b0",
+        "filename": "apkverify/src/ziputil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-10T15:07:23Z",
+      "side": 1,
+      "message": "Add some more comment on why this is needed.",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 49
+      },
+      "revId": "80ef88d889f4b4233191b278189e5ccef364f8ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
