@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ed7bb88_ae4f83b4",
+        "filename": "apkverify/src/sigutil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-11T01:47:21Z",
+      "side": 1,
+      "message": "That\u0027s probably because R and Cursor are (rightfully) considered as different types. You could use Box\u003cdyn Read\u003e handle them in a same way.\n\nFor zip_entries and central_directory, you could convert R into a scoped reader using a function like the below.\n\n```\nfn scoped_read\u003ca\u0027, R: Read+Seek\u003e(src: \u0026\u0027a mut R, offset, size) -\u003e Result\u003cTake\u003cBox\u003cdyn Read + \u0027a\u003e\u003e\u003e {\n  src.seek(...);\n  Ok(Read::take(Box::new(src), size))\n}\n```\n\nFor eocd, `eocd_for_verification` could return\n\n`Ok(Read::take(Box::new(Cursor::new(eocd)), size))`",
+      "parentUuid": "699c8fa2_359efbf8",
+      "range": {
+        "startLine": 132,
+        "startChar": 29,
+        "endLine": 132,
+        "endChar": 33
+      },
+      "revId": "80ef88d889f4b4233191b278189e5ccef364f8ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ab4b9b7f_159936b0",
         "filename": "apkverify/src/ziputil.rs",
         "patchSetId": 1
