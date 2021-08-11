@@ -39,6 +39,9 @@ rust_test {
     prefer_rlib: true,
     edition: "2018",
     test_suites: ["general-tests"],
-    rustlibs: ["libapkverify"],
+    rustlibs: [
+        "libapkverify",
+        "libzip",
+    ],
     data: ["tests/data/*"],
 }
