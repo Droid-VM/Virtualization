@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "454da488_b9c51480",
+        "filename": "apkverify/src/sigutil.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-12T17:05:49Z",
+      "side": 1,
+      "message": "Nit: a more descriptive variable name would be nice, it\u0027s not obvious without looking at the types what this is.",
+      "range": {
+        "startLine": 64,
+        "startChar": 17,
+        "endLine": 64,
+        "endChar": 18
+      },
+      "revId": "d83978565854ade12b333ac8043c61452db75ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bd65518_2f93ef2e",
+        "filename": "apkverify/src/sigutil.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-12T17:05:49Z",
+      "side": 1,
+      "message": "Add a use statement for `BytesMut`.",
+      "range": {
+        "startLine": 96,
+        "startChar": 36,
+        "endLine": 96,
+        "endChar": 51
+      },
+      "revId": "d83978565854ade12b333ac8043c61452db75ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ac145da_dbebae60",
+        "filename": "apkverify/src/sigutil.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-12T17:05:49Z",
+      "side": 1,
+      "message": "Nit: add a blank line between each function, here and below.",
+      "revId": "d83978565854ade12b333ac8043c61452db75ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02d8fb70_3e9962ac",
+        "filename": "apkverify/tests/apkverify_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-12T17:05:49Z",
+      "side": 1,
+      "message": "I don\u0027t really understand what you\u0027re doing here. What\u0027s the point of a match expression with only one arm? And why does this need to be a macro rather than just a function?",
+      "revId": "d83978565854ade12b333ac8043c61452db75ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
