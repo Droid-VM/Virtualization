@@ -3,6 +3,69 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "36eea314_3c1c67f3",
+        "filename": "apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-12T16:57:44Z",
+      "side": 1,
+      "message": "Importing inside a function like this is unusual. Import at the top of the file if possible.",
+      "revId": "5b4c70ec3519bfb877dfecff766c391c275c1862",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "381e4452_c8b51b42",
+        "filename": "apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-12T16:57:44Z",
+      "side": 1,
+      "message": "Add a use statement for this.",
+      "range": {
+        "startLine": 152,
+        "startChar": 24,
+        "endLine": 152,
+        "endChar": 63
+      },
+      "revId": "5b4c70ec3519bfb877dfecff766c391c275c1862",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29245452_f8e28cd9",
+        "filename": "apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-12T16:57:44Z",
+      "side": 1,
+      "message": "Ditto.",
+      "range": {
+        "startLine": 153,
+        "startChar": 31,
+        "endLine": 153,
+        "endChar": 63
+      },
+      "revId": "5b4c70ec3519bfb877dfecff766c391c275c1862",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79f34f1a_8a162ba5",
         "filename": "apkverify/src/v3.rs",
         "patchSetId": 1
@@ -43,6 +106,29 @@
         "startChar": 66,
         "endLine": 175,
         "endChar": 98
+      },
+      "revId": "5b4c70ec3519bfb877dfecff766c391c275c1862",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3cd81d5_7829ce5f",
+        "filename": "apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-12T16:57:44Z",
+      "side": 1,
+      "message": "Ditto.",
+      "range": {
+        "startLine": 175,
+        "startChar": 14,
+        "endLine": 175,
+        "endChar": 42
       },
       "revId": "5b4c70ec3519bfb877dfecff766c391c275c1862",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
