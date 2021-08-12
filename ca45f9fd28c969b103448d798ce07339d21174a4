@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c56ab31_091ec55f",
+        "filename": "idsig/Cargo.toml",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-12T02:56:31Z",
+      "side": 1,
+      "message": "You don\u0027t use this in the code.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 14
+      },
+      "revId": "ca45f9fd28c969b103448d798ce07339d21174a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61a7dc6a_32403b92",
+        "filename": "idsig/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-12T02:56:31Z",
+      "side": 1,
+      "message": "nit: hash_level_offsets.iter().enumerate() gives (level, offset)",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 44
+      },
+      "revId": "ca45f9fd28c969b103448d798ce07339d21174a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41b30df7_a65b3b81",
+        "filename": "idsig/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-12T02:56:31Z",
+      "side": 1,
+      "message": "nit: you\u0027re reusing this buf for the loop. can we re-use the buf from the outside of this function? (Hm, probably, not a big deal)",
+      "range": {
+        "startLine": 110,
+        "startChar": 4,
+        "endLine": 110,
+        "endChar": 38
+      },
+      "revId": "ca45f9fd28c969b103448d798ce07339d21174a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
