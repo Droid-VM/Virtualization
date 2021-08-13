@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17ed8587_92da59e4",
+        "filename": "idsig/src/hashtree.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-13T03:34:13Z",
+      "side": 1,
+      "message": "This might be simplified using scan.\n\n    let mut ranges \u003d level_sizes.iter().rev().scan(0, |prev_end, x| {\n        let range \u003d (*prev_end..*prev_end+x);\n        *prev_end \u003d range.end;\n        Some(range)\n    }).collect::\u003cVec\u003c_\u003e\u003e();\n    ranges.reverse();",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 18
+      },
+      "revId": "ae529a67fb6b5adb0f7274097de283657b7e9872",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
