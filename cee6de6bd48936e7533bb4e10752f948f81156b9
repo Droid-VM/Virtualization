@@ -16,6 +16,63 @@
       "message": "The presubmit failure might be a bug: filed b/196306316.\nTurning off `host_supported` for the time being.",
       "revId": "cee6de6bd48936e7533bb4e10752f948f81156b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e89625cf_dd881e30",
+        "filename": "apkverify/src/testing.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-13T11:22:10Z",
+      "side": 1,
+      "message": "Why does this need to be a macro rather than just a function?",
+      "revId": "cee6de6bd48936e7533bb4e10752f948f81156b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef6bdbdd_e2485aa4",
+        "filename": "apkverify/src/testing.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-13T11:22:10Z",
+      "side": 1,
+      "message": "What\u0027s the point of having a match statement with only one match arm?",
+      "revId": "cee6de6bd48936e7533bb4e10752f948f81156b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dac3e48c_8fa961e8",
+        "filename": "apkverify/src/ziputil.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-13T11:22:10Z",
+      "side": 1,
+      "message": "unwrap_err()",
+      "range": {
+        "startLine": 128,
+        "startChar": 29,
+        "endLine": 128,
+        "endChar": 43
+      },
+      "revId": "cee6de6bd48936e7533bb4e10752f948f81156b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
