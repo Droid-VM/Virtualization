@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fe59a42_409520aa",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-08-13T23:06:43Z",
+      "side": 1,
+      "message": "+Jiakai FYI\n\nThis file is where dex2oat is executed in the VM. A few things to note:\n* We need to prepare the \"remote FDs\" then pass to dex2oat.  It\u0027s why there are \"--in-fd\u003d\" and \"--out-fd\u003d\" in odefresh as hints to this service.  Although we can also let this parser figures the FD numbers out since the information is already there.\n* This function is (currently only) trying to identify the output FDs for signing, once dex2oat completes successfully.  We\u0027ll need to return 3 signature files back to odrefresh, which should be easy.\n* Once we define the protocol format to the odrefresh \"backend\", we can avoid the parsing here.",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 56
+      },
+      "revId": "99865a7dcf2b2b5abcba9a60c2cd155ae775d891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
