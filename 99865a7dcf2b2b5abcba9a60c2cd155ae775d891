@@ -85,6 +85,24 @@
       "message": "Consider using a library to do argument parsing. We use structopt for the `vm` tool (see vm/src/main.rs).",
       "revId": "99865a7dcf2b2b5abcba9a60c2cd155ae775d891",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23700eff_87ebb000",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-08-16T15:22:41Z",
+      "side": 1,
+      "message": "I tried to use clap, but unfortunately it doesn\u0027t seem to have an option to ignore unrecognized flags (here we only pick the ones that matters to us). But hopefully we can get rid of the parsing soon-ish.  I\u0027m looking into passing structured data now.",
+      "parentUuid": "634884f1_70f91402",
+      "revId": "99865a7dcf2b2b5abcba9a60c2cd155ae775d891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
