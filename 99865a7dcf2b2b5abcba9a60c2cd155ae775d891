@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "caa60d70_f5f42b9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-16T11:01:11Z",
+      "side": 1,
+      "message": "compiler",
+      "range": {
+        "startLine": 10,
+        "startChar": 53,
+        "endLine": 10,
+        "endChar": 61
+      },
+      "revId": "99865a7dcf2b2b5abcba9a60c2cd155ae775d891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8647eec7_addf5432",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-16T11:01:11Z",
+      "side": 1,
+      "message": "compiler",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 9
+      },
+      "revId": "99865a7dcf2b2b5abcba9a60c2cd155ae775d891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4fe59a42_409520aa",
@@ -20,6 +66,23 @@
         "endLine": 106,
         "endChar": 56
       },
+      "revId": "99865a7dcf2b2b5abcba9a60c2cd155ae775d891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "634884f1_70f91402",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-16T11:01:11Z",
+      "side": 1,
+      "message": "Consider using a library to do argument parsing. We use structopt for the `vm` tool (see vm/src/main.rs).",
       "revId": "99865a7dcf2b2b5abcba9a60c2cd155ae775d891",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
