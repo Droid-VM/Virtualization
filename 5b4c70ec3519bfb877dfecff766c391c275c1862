@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b63c10a_fa82a7b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-17T01:26:23Z",
+      "side": 1,
+      "message": "These are fixed in aosp/1794605",
+      "revId": "5b4c70ec3519bfb877dfecff766c391c275c1862",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36eea314_3c1c67f3",
@@ -14,6 +31,24 @@
       "writtenOn": "2021-08-12T16:57:44Z",
       "side": 1,
       "message": "Importing inside a function like this is unusual. Import at the top of the file if possible.",
+      "revId": "5b4c70ec3519bfb877dfecff766c391c275c1862",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6a177d0_6706b24b",
+        "filename": "apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-17T01:26:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "36eea314_3c1c67f3",
       "revId": "5b4c70ec3519bfb877dfecff766c391c275c1862",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -41,6 +76,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d09eb720_60c1211b",
+        "filename": "apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-17T01:26:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "381e4452_c8b51b42",
+      "range": {
+        "startLine": 152,
+        "startChar": 24,
+        "endLine": 152,
+        "endChar": 63
+      },
+      "revId": "5b4c70ec3519bfb877dfecff766c391c275c1862",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29245452_f8e28cd9",
@@ -54,6 +113,30 @@
       "writtenOn": "2021-08-12T16:57:44Z",
       "side": 1,
       "message": "Ditto.",
+      "range": {
+        "startLine": 153,
+        "startChar": 31,
+        "endLine": 153,
+        "endChar": 63
+      },
+      "revId": "5b4c70ec3519bfb877dfecff766c391c275c1862",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81920744_01ddadae",
+        "filename": "apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-17T01:26:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "29245452_f8e28cd9",
       "range": {
         "startLine": 153,
         "startChar": 31,
@@ -124,6 +207,30 @@
       "writtenOn": "2021-08-12T16:57:44Z",
       "side": 1,
       "message": "Ditto.",
+      "range": {
+        "startLine": 175,
+        "startChar": 14,
+        "endLine": 175,
+        "endChar": 42
+      },
+      "revId": "5b4c70ec3519bfb877dfecff766c391c275c1862",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee2bcafa_8addbabc",
+        "filename": "apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-17T01:26:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a3cd81d5_7829ce5f",
       "range": {
         "startLine": 175,
         "startChar": 14,
