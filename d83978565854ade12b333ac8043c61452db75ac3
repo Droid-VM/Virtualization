@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df05e92f_b5a7ea0e",
+        "filename": "apkverify/src/sigutil.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-17T01:27:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "454da488_b9c51480",
+      "range": {
+        "startLine": 64,
+        "startChar": 17,
+        "endLine": 64,
+        "endChar": 18
+      },
+      "revId": "d83978565854ade12b333ac8043c61452db75ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bd65518_2f93ef2e",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-08-12T17:05:49Z",
       "side": 1,
       "message": "Add a use statement for `BytesMut`.",
+      "range": {
+        "startLine": 96,
+        "startChar": 36,
+        "endLine": 96,
+        "endChar": 51
+      },
+      "revId": "d83978565854ade12b333ac8043c61452db75ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0683b5e4_8a895ffa",
+        "filename": "apkverify/src/sigutil.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-17T01:27:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bd65518_2f93ef2e",
       "range": {
         "startLine": 96,
         "startChar": 36,
@@ -64,6 +112,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2db07c9e_b61100b9",
+        "filename": "apkverify/src/sigutil.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-17T01:27:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ac145da_dbebae60",
+      "revId": "d83978565854ade12b333ac8043c61452db75ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02d8fb70_3e9962ac",
@@ -77,6 +143,24 @@
       "writtenOn": "2021-08-12T17:05:49Z",
       "side": 1,
       "message": "I don\u0027t really understand what you\u0027re doing here. What\u0027s the point of a match expression with only one arm? And why does this need to be a macro rather than just a function?",
+      "revId": "d83978565854ade12b333ac8043c61452db75ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e16e9af_5ea0e6c1",
+        "filename": "apkverify/tests/apkverify_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-17T01:27:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "02d8fb70_3e9962ac",
       "revId": "d83978565854ade12b333ac8043c61452db75ac3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
