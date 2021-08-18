@@ -163,6 +163,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b05ff05f_b325b8d0",
+        "filename": "idsig/src/apksigv4.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-18T09:53:00Z",
+      "side": 1,
+      "message": "\u003e Where in this CL `data` is causing a readability problem?\n\nI had to check twice when reading changes.\n- why \"Debug\" is removed for this? while other structs are still \"Debug\"..\n- why write_into should have self as mut? In general, write functions don\u0027t require the data as mutable. (like write_into of HashingInfo and SigningInfo)\n\nThe type itself is not straightforward as well: V4Signature\u003cR: Read + Seek\u003e. In general, we don\u0027t expect that \"signature\" of something depends on \"Read+Seek\".",
+      "parentUuid": "e39cfcfb_c03746b1",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 12
+      },
+      "revId": "bf93df5ecc2651e416b17617395851b2a9b68005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "845fb89c_e1a4c396",
         "filename": "idsig/src/hashtree.rs",
         "patchSetId": 2
