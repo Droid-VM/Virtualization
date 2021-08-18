@@ -98,6 +98,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "bff250ec_1ad6e0df",
+        "filename": "idsig/src/apksigv4.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-18T08:05:50Z",
+      "side": 1,
+      "message": "I see. But still I don\u0027t understand why V4Signature needs to keep \"data\" in it. It makes its methods a bit hard to read. For example, write_into/merkle_tree should have \"\u0026mut self\" due to \"data\", which seems to be counter-intuitive. (I guess that it\u0027s the reason for not-deriving Debug for this struct). If V4Signature::from() is for guest side and we want to avoid reading the whole merkle tree there, then, how about making it explicit by not having \"data\" in V4Signature and V4Signature::create() returns (V4Signature, Vec\u003cu8\u003e (or MerkleTree?))?",
+      "parentUuid": "58f9486d_a65d37cc",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 12
+      },
+      "revId": "bf93df5ecc2651e416b17617395851b2a9b68005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "845fb89c_e1a4c396",
         "filename": "idsig/src/hashtree.rs",
         "patchSetId": 2
