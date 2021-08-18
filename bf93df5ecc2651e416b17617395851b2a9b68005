@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f7da6847_0de11463",
+        "filename": "idsig/src/apksigv4.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-18T07:20:44Z",
+      "side": 1,
+      "message": "Understood. But given that merkle tree is not that big, having it in memory won\u0027t be a problem. In practice, V4Signature created by V4Signature::create() holds the merkle tree in memory.",
+      "parentUuid": "a4e461f5_03fa77e5",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 12
+      },
+      "revId": "bf93df5ecc2651e416b17617395851b2a9b68005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "845fb89c_e1a4c396",
         "filename": "idsig/src/hashtree.rs",
         "patchSetId": 2
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "This is required for `self`.",
       "parentUuid": "845fb89c_e1a4c396",
+      "range": {
+        "startLine": 19,
+        "startChar": 18,
+        "endLine": 19,
+        "endChar": 24
+      },
+      "revId": "bf93df5ecc2651e416b17617395851b2a9b68005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51859d2a_83be9006",
+        "filename": "idsig/src/hashtree.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-18T07:20:44Z",
+      "side": 1,
+      "message": "TIL ;-)",
+      "parentUuid": "70a8ce42_b9290b0e",
       "range": {
         "startLine": 19,
         "startChar": 18,
