@@ -139,6 +139,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e39cfcfb_c03746b1",
+        "filename": "idsig/src/apksigv4.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-18T09:29:53Z",
+      "side": 1,
+      "message": "Merkle tree is conceptually a part of V4Signature. That\u0027s why we even have the method `merkle_tree` as a member of V4Signature (although that\u0027s only for testing for now). `create()` returning merkle tree as a separate value outside of V4Signature seem to break the abstraction.\n\nWhere in this CL `data` is causing a readability problem? I could fix that in a follow-up CL if possible.",
+      "parentUuid": "bff250ec_1ad6e0df",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 12
+      },
+      "revId": "bf93df5ecc2651e416b17617395851b2a9b68005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "845fb89c_e1a4c396",
         "filename": "idsig/src/hashtree.rs",
         "patchSetId": 2
