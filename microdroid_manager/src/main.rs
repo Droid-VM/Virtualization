@@ -19,6 +19,8 @@ mod metadata;
 
 use anyhow::{anyhow, bail, Context, Result};
 use apkverify::verify;
+use binder::unstable_api::{new_spibinder, AIBinder};
+use binder::{FromIBinder, Strong};
 use log::{error, info, warn};
 use microdroid_payload_config::{Task, TaskType, VmPayloadConfig};
 use rustutils::system_properties::PropertyWatcher;
@@ -30,8 +32,33 @@ use std::str;
 use std::time::Duration;
 use vsock::VsockStream;
 
+use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualMachineService::IVirtualMachineService;
+
 const WAIT_TIMEOUT: Duration = Duration::from_secs(10);
 const DM_MOUNTED_APK_PATH: &str = "/dev/block/mapper/microdroid-apk";
+
+/// The CID representing the host VM
+const VMADDR_CID_HOST: u32 = 2;
+
+/// Port number that virtualizationservice listens on connections from the guest VMs for the
+/// VirtualMachineService binder service
+/// Sync with virtualizationservice/src/aidl.rs
+const PORT_VM_BINDER_SERVICE: u32 = 8000;
+
+fn get_vms_rpc_binder(cid: u32) -> Result<Strong<dyn IVirtualMachineService>> {
+    // SAFETY: AIBinder returned by RpcClient has correct reference count, and the ownership can be
+    // safely taken by new_spibinder.
+    let ibinder = unsafe {
+        new_spibinder(
+            binder_rpc_unstable_bindgen::RpcClient(cid, PORT_VM_BINDER_SERVICE) as *mut AIBinder
+        )
+    };
+    if let Some(ibinder) = ibinder {
+        <dyn IVirtualMachineService>::try_from(ibinder).context("Cannot connect to RPC service")
+    } else {
+        bail!("Invalid raw AIBinder")
+    }
+}
 
 fn main() -> Result<()> {
     kernlog::init()?;
@@ -42,6 +69,10 @@ fn main() -> Result<()> {
     if let Err(err) = verify_payloads() {
         error!("failed to verify payload: {}", err);
         // TODO(jooyung): should stop the boot process if verification fails
+    }
+
+    if let Err(err) = get_vms_rpc_binder(VMADDR_CID_HOST) {
+        error!("cannot connect VirtualMachineService: {}", err);
     }
 
     if !metadata.payload_config_path.is_empty() {

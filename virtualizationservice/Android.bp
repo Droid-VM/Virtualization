@@ -24,6 +24,8 @@ rust_defaults {
         "android.os.permissions_aidl-rust",
         "libandroid_logger",
         "libanyhow",
+        "libbinder_rpc_unstable_bindgen",
+        "libbinder_rs",
         "libcommand_fds",
         "libdisk",
         "liblog_rust",
@@ -37,6 +39,9 @@ rust_defaults {
         "libvmconfig",
         "libzip",
         "libvsock",
+    ],
+    shared_libs: [
+        "libbinder_rpc_unstable",
     ],
 }
 

@@ -31,11 +31,15 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     VirtualMachineConfig::VirtualMachineConfig,
     VirtualMachineRawConfig::VirtualMachineRawConfig,
 };
+use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualMachineService::{
+    BnVirtualMachineService, IVirtualMachineService,
+};
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::VirtualMachineDebugInfo::VirtualMachineDebugInfo;
 use android_system_virtualizationservice::binder::{
     self, BinderFeatures, ExceptionCode, Interface, ParcelFileDescriptor, Status, Strong, ThreadState,
 };
 use anyhow::{bail, Context, Result};
+use ::binder::unstable_api::AsNative;
 use disk::QcowFile;
 use log::{debug, error, warn, info};
 use microdroid_payload_config::VmPayloadConfig;
@@ -61,6 +65,11 @@ const VMADDR_CID_HOST: u32 = 2;
 /// Port number that virtualizationservice listens on connections from the guest VMs for the
 /// payload output
 const PORT_VIRT_SERVICE: u32 = 3000;
+
+/// Port number that virtualizationservice listens on connections from the guest VMs for the
+/// VirtualMachineService binder service
+/// Sync with microdroid_manager/src/main.rs
+const PORT_VM_BINDER_SERVICE: u32 = 8000;
 
 /// The size of zero.img.
 /// Gaps in composite disk images are filled with a shared zero.img.
@@ -254,9 +263,33 @@ impl IVirtualizationService for VirtualizationService {
 impl VirtualizationService {
     pub fn init() -> VirtualizationService {
         let service = VirtualizationService::default();
+
+        // server for payload output
         let state = service.state.clone(); // reference to state (not the state itself) is copied
         std::thread::spawn(move || {
             handle_connection_from_vm(state).unwrap();
+        });
+
+        // binder server for vm
+        let state = service.state.clone(); // reference to state (not the statei tself) is copied
+        std::thread::spawn(move || {
+            let mut service = VirtualMachineService::new_binder(state).as_binder();
+            debug!("virtual machine service is starting as a rpc service.");
+            // SAFETY: Service ownership is transferring to the server and won't be valid afterward.
+            // Plus the binder objects are threadsafe.
+            let retval = unsafe {
+                binder_rpc_unstable_bindgen::RunRpcServer(
+                    service.as_native_mut() as *mut binder_rpc_unstable_bindgen::AIBinder,
+                    PORT_VM_BINDER_SERVICE,
+                )
+            };
+            if retval {
+                debug!("RPC server has shut down gracefully");
+            } else {
+                bail!("Premature termination of RPC server");
+            }
+
+            Ok(retval)
         });
         service
     }
@@ -681,5 +714,38 @@ impl<'a, T> AsRef<T> for BorrowedOrOwned<'a, T> {
             Self::Borrowed(b) => b,
             Self::Owned(o) => o,
         }
+    }
+}
+
+/// Implementation of `IVirtualMachineService`, the entry point of the AIDL service.
+#[derive(Debug, Default)]
+struct VirtualMachineService {
+    state: Arc<Mutex<State>>,
+}
+
+impl Interface for VirtualMachineService {}
+
+impl IVirtualMachineService for VirtualMachineService {
+    fn registerRpcServer(&self, cid: i32, name: &str, port: i32) -> binder::Result<()> {
+        let cid = cid as Cid;
+        if self.state.lock().unwrap().get_vm(cid).is_none() {
+            return Err(new_binder_exception(
+                ExceptionCode::SERVICE_SPECIFIC,
+                format!("cannot find a VM with cid {}", cid),
+            ));
+        }
+        Err(new_binder_exception(
+            ExceptionCode::UNSUPPORTED_OPERATION,
+            format!("tried to register {} at {}:{}", name, cid, port),
+        ))
+    }
+}
+
+impl VirtualMachineService {
+    fn new_binder(state: Arc<Mutex<State>>) -> Strong<dyn IVirtualMachineService> {
+        BnVirtualMachineService::new_binder(
+            VirtualMachineService { state },
+            BinderFeatures::default(),
+        )
     }
 }
