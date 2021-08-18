@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "900006e4_e67b02f8",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachineService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-18T07:12:36Z",
+      "side": 1,
+      "message": "This should be a separate aidl interface module because the existing one is for local clients and this is for the remote client.",
+      "revId": "18545bf6b1d2cb16eba2107cfe02ac82e1fc1070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18ffbbe2_2fd698a2",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-18T07:12:36Z",
+      "side": 1,
+      "message": "As a next step, this could be done by the binder service",
+      "range": {
+        "startLine": 270,
+        "startChar": 12,
+        "endLine": 270,
+        "endChar": 54
+      },
+      "revId": "18545bf6b1d2cb16eba2107cfe02ac82e1fc1070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e82d7271_b7d10077",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-18T07:12:36Z",
+      "side": 1,
+      "message": "Note: the latest plan doesn\u0027t require this. The guest VM only needs to let VS know that the VM has finished booting and is ready to serve incoming commands.",
+      "range": {
+        "startLine": 729,
+        "startChar": 0,
+        "endLine": 741,
+        "endChar": 5
+      },
+      "revId": "18545bf6b1d2cb16eba2107cfe02ac82e1fc1070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
