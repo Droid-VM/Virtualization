@@ -74,6 +74,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "58f9486d_a65d37cc",
+        "filename": "idsig/src/apksigv4.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-18T07:46:35Z",
+      "side": 1,
+      "message": "Merkle tree is about 1/127 of the file that it digests when SHA256 is used. So it could be big for large APKs which often can be few hundreds of MBs.\n\nI know that V4Signature::create holds the merkle tree in memory and wish to make it better. However, it\u0027s not a big problem as the memory will soon be reclaimed after the merkle tree is written to a file. Furthermore, the function is called in the host VM where memory is not a severe concern.\n\nFor V4Signature::from case, however, we really don\u0027t have to spend time and memory for reading the input file to fill the u8 array in the guest VM. Doing so will just slow down the boot process without no gain. We need to know only the offset of the merkle tree in the file. We then construct a loop device from the offset and pass the loop device to the kernel as the \u0027tree device\u0027. The actual read of the merkel tree will be done by kernel.",
+      "parentUuid": "f7da6847_0de11463",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 12
+      },
+      "revId": "bf93df5ecc2651e416b17617395851b2a9b68005",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "845fb89c_e1a4c396",
         "filename": "idsig/src/hashtree.rs",
         "patchSetId": 2
