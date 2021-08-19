@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "076d9595_80bb4299",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-19T08:27:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3987886_6427c19e",
+      "range": {
+        "startLine": 48,
+        "startChar": 22,
+        "endLine": 48,
+        "endChar": 30
+      },
+      "revId": "18545bf6b1d2cb16eba2107cfe02ac82e1fc1070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4974057e_ea7de09b",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-08-18T07:33:37Z",
       "side": 1,
       "message": "Can you add a TODO regarding the return value(IVirtualMachineService)?\nMicrodroid_manager needs to keep it and communicate with virtualization service.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 5
+      },
+      "revId": "18545bf6b1d2cb16eba2107cfe02ac82e1fc1070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2780070b_19470f23",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-19T08:27:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4974057e_ea7de09b",
       "range": {
         "startLine": 74,
         "startChar": 0,
@@ -82,6 +130,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7dd6e43_23585e59",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachineService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-19T08:27:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3f7158d_d9601fd8",
+      "revId": "18545bf6b1d2cb16eba2107cfe02ac82e1fc1070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18ffbbe2_2fd698a2",
@@ -95,6 +161,30 @@
       "writtenOn": "2021-08-18T07:12:36Z",
       "side": 1,
       "message": "As a next step, this could be done by the binder service",
+      "range": {
+        "startLine": 270,
+        "startChar": 12,
+        "endLine": 270,
+        "endChar": 54
+      },
+      "revId": "18545bf6b1d2cb16eba2107cfe02ac82e1fc1070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f202ef5_88434384",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-19T08:27:38Z",
+      "side": 1,
+      "message": "Yes, it\u0027ll be done by a follow-up CL.",
+      "parentUuid": "18ffbbe2_2fd698a2",
       "range": {
         "startLine": 270,
         "startChar": 12,
@@ -128,6 +218,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7009b2dd_f78c1c23",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-19T08:27:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddb4931c_6ae38523",
+      "range": {
+        "startLine": 277,
+        "startChar": 59,
+        "endLine": 277,
+        "endChar": 64
+      },
+      "revId": "18545bf6b1d2cb16eba2107cfe02ac82e1fc1070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e82d7271_b7d10077",
@@ -141,6 +255,30 @@
       "writtenOn": "2021-08-18T07:12:36Z",
       "side": 1,
       "message": "Note: the latest plan doesn\u0027t require this. The guest VM only needs to let VS know that the VM has finished booting and is ready to serve incoming commands.",
+      "range": {
+        "startLine": 729,
+        "startChar": 0,
+        "endLine": 741,
+        "endChar": 5
+      },
+      "revId": "18545bf6b1d2cb16eba2107cfe02ac82e1fc1070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25625272_a7535758",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-19T08:27:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e82d7271_b7d10077",
       "range": {
         "startLine": 729,
         "startChar": 0,
