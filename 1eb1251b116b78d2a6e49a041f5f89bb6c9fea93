@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7126ba7_0d0f2063",
+        "filename": "virtualizationservice/aidl/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-19T09:24:42Z",
+      "side": 1,
+      "message": "nit: For now we don\u0027t use other backends, right?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 10
+      },
+      "revId": "1eb1251b116b78d2a6e49a041f5f89bb6c9fea93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e7daf68_50ddb2ee",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-19T09:24:42Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 274,
+        "startChar": 79,
+        "endLine": 274,
+        "endChar": 86
+      },
+      "revId": "1eb1251b116b78d2a6e49a041f5f89bb6c9fea93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ea66ce5_89ae172e",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-19T09:24:42Z",
+      "side": 1,
+      "message": "This is not called yet, right?\n\nbtw, I\u0027m curious how \"payload started\" event would be useful to virtualization service or app in the host.",
+      "range": {
+        "startLine": 730,
+        "startChar": 7,
+        "endLine": 730,
+        "endChar": 27
+      },
+      "revId": "1eb1251b116b78d2a6e49a041f5f89bb6c9fea93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a290e07b_d4f6c06b",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-19T09:24:42Z",
+      "side": 1,
+      "message": "This is the error that microdroid_manager would get. What can we do with this?",
+      "range": {
+        "startLine": 733,
+        "startChar": 0,
+        "endLine": 736,
+        "endChar": 15
+      },
+      "revId": "1eb1251b116b78d2a6e49a041f5f89bb6c9fea93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "119a8f15_dfb104d4",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-19T09:24:42Z",
+      "side": 1,
+      "message": "It looks like this is just a placeholder meaning \"not implemented yet\". For simplicity why not just return \"ok\"?",
+      "range": {
+        "startLine": 738,
+        "startChar": 0,
+        "endLine": 741,
+        "endChar": 10
+      },
+      "revId": "1eb1251b116b78d2a6e49a041f5f89bb6c9fea93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
