@@ -14,20 +14,11 @@
  * limitations under the License.
  */
 
-//! Verifies APK/APEX signing with v2/v3 scheme
+//! `idsig` provides routines for creating the idsig file that is defined for the APK signature
+//! scheme v4 and for parsing the file.
 
-mod bytes_ext;
-mod sigutil;
-#[allow(dead_code)]
-pub mod testing;
-mod v3;
-mod ziputil;
+mod apksigv4;
+mod hashtree;
 
-use anyhow::Result;
-use std::path::Path;
-
-/// Verifies APK/APEX signing with v2/v3 scheme
-pub fn verify<P: AsRef<Path>>(path: P) -> Result<()> {
-    // TODO(jooyung) fallback to v2 when v3 not found
-    v3::verify(path)
-}
+pub use crate::apksigv4::*;
+pub use crate::hashtree::*;
