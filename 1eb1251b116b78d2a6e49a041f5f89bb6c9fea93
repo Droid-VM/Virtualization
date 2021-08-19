@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52b25a7b_cb0f9c41",
+        "filename": "virtualizationservice/aidl/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-19T13:15:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7126ba7_0d0f2063",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 10
+      },
+      "revId": "1eb1251b116b78d2a6e49a041f5f89bb6c9fea93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e7daf68_50ddb2ee",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-08-19T09:24:42Z",
       "side": 1,
       "message": "typo",
+      "range": {
+        "startLine": 274,
+        "startChar": 79,
+        "endLine": 274,
+        "endChar": 86
+      },
+      "revId": "1eb1251b116b78d2a6e49a041f5f89bb6c9fea93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "053ec7cd_d7491802",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-19T13:15:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e7daf68_50ddb2ee",
       "range": {
         "startLine": 274,
         "startChar": 79,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bc65699_4788335e",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-19T13:15:32Z",
+      "side": 1,
+      "message": "This is an event from VM that tells that VM is ready. In a follow-up CL, this will result in invoking a callback function onPayloadStarted. The name can be changed in the future.",
+      "parentUuid": "3ea66ce5_89ae172e",
+      "range": {
+        "startLine": 730,
+        "startChar": 7,
+        "endLine": 730,
+        "endChar": 27
+      },
+      "revId": "1eb1251b116b78d2a6e49a041f5f89bb6c9fea93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a290e07b_d4f6c06b",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d192551_5bbcb9df",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-19T13:15:32Z",
+      "side": 1,
+      "message": "I put this just for debugging purpose. However, it seems that this log will be more useful in the host.\n\nAdded a host log.",
+      "parentUuid": "a290e07b_d4f6c06b",
+      "range": {
+        "startLine": 733,
+        "startChar": 0,
+        "endLine": 736,
+        "endChar": 15
+      },
+      "revId": "1eb1251b116b78d2a6e49a041f5f89bb6c9fea93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "119a8f15_dfb104d4",
@@ -106,6 +202,30 @@
       "writtenOn": "2021-08-19T09:24:42Z",
       "side": 1,
       "message": "It looks like this is just a placeholder meaning \"not implemented yet\". For simplicity why not just return \"ok\"?",
+      "range": {
+        "startLine": 738,
+        "startChar": 0,
+        "endLine": 741,
+        "endChar": 10
+      },
+      "revId": "1eb1251b116b78d2a6e49a041f5f89bb6c9fea93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "264681fd_22f08c5a",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-19T13:15:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "119a8f15_dfb104d4",
       "range": {
         "startLine": 738,
         "startChar": 0,
