@@ -17,7 +17,6 @@
 package android.system.virtualmachine;
 
 import android.annotation.NonNull;
-import android.os.ParcelFileDescriptor;
 
 /**
  * Callback interface to get notified with the events from the virtual machine. The methods are
@@ -28,7 +27,7 @@ import android.os.ParcelFileDescriptor;
 public interface VirtualMachineCallback {
 
     /** Called when the payload starts in the VM. */
-    void onPayloadStarted(@NonNull VirtualMachine vm, @NonNull ParcelFileDescriptor stdout);
+    void onPayloadStarted(@NonNull VirtualMachine vm);
 
     /** Called when the VM died. */
     void onDied(@NonNull VirtualMachine vm);

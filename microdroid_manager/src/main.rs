@@ -21,16 +21,20 @@ use anyhow::{anyhow, bail, Context, Result};
 use apkverify::verify;
 use binder::unstable_api::{new_spibinder, AIBinder};
 use binder::{FromIBinder, Strong};
+use libc::splice;
 use log::{error, info, warn};
 use microdroid_payload_config::{Task, TaskType, VmPayloadConfig};
+use nix::ioctl_read_bad;
 use rustutils::system_properties::PropertyWatcher;
-use std::fs::{self, File};
-use std::os::unix::io::{FromRawFd, IntoRawFd};
+use std::convert::Into;
+use std::fs::{self, OpenOptions};
+use std::os::unix::io::AsRawFd;
 use std::path::Path;
 use std::process::{Command, Stdio};
+use std::ptr::null_mut;
 use std::str;
 use std::time::Duration;
-use vsock::VsockStream;
+use vsock::VsockListener;
 
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
 
@@ -44,6 +48,10 @@ const VMADDR_CID_HOST: u32 = 2;
 /// VirtualMachineService binder service
 /// Sync with virtualizationservice/src/aidl.rs
 const PORT_VM_BINDER_SERVICE: u32 = 8000;
+
+/// Port numbers for the stdout/stderr server from the guest VM.
+const PORT_VM_STDOUT: u32 = 3001;
+const PORT_VM_STDERR: u32 = 3002;
 
 fn get_vms_rpc_binder() -> Result<Strong<dyn IVirtualMachineService>> {
     // SAFETY: AIBinder returned by RpcClient has correct reference count, and the ownership can be
@@ -59,6 +67,25 @@ fn get_vms_rpc_binder() -> Result<Strong<dyn IVirtualMachineService>> {
     } else {
         bail!("Invalid raw AIBinder")
     }
+}
+
+ioctl_read_bad!(
+    /// IOCTL_VM_SOCKETS_GET_LOCAL_CID
+    _vm_sockets_get_local_cid,
+    0x7b9,
+    u32
+);
+
+fn get_local_cid() -> Result<u32> {
+    let f = OpenOptions::new()
+        .read(true)
+        .write(false)
+        .open("/dev/vsock")
+        .context("failed to open /dev/vsock")?;
+    let mut ret = 0;
+    // SAFETY: the kernel only modifies the given u32 integer.
+    unsafe { _vm_sockets_get_local_cid(f.as_raw_fd(), &mut ret) }?;
+    Ok(ret)
 }
 
 fn main() -> Result<()> {
@@ -77,6 +104,8 @@ fn main() -> Result<()> {
         error!("cannot connect VirtualMachineService: {}", err);
     }
 
+    let service = get_vms_rpc_binder().expect("cannot connect VirtualMachineService");
+
     if !metadata.payload_config_path.is_empty() {
         let config = load_config(Path::new(&metadata.payload_config_path))?;
 
@@ -87,7 +116,7 @@ fn main() -> Result<()> {
 
         // TODO(jooyung): wait until sys.boot_completed?
         if let Some(main_task) = &config.task {
-            exec_task(main_task).map_err(|e| {
+            exec_task(main_task, &service).map_err(|e| {
                 error!("failed to execute task: {}", e);
                 e
             })?;
@@ -116,32 +145,51 @@ fn load_config(path: &Path) -> Result<VmPayloadConfig> {
     Ok(serde_json::from_reader(file)?)
 }
 
+fn forward_pipe_as_vsock(pipe: impl AsRawFd, port: u32) -> Result<()> {
+    let listener = VsockListener::bind_with_cid_port(u32::MAX, port)?;
+    info!("vsock server started listening at port {}", port);
+    let (vsock, addr) = listener.accept()?;
+    info!("vsock server accepted a connection at port {} from remote addr {}", port, addr);
+    let pipe_fd = pipe.as_raw_fd();
+    let vsock_fd = vsock.as_raw_fd();
+    loop {
+        // SAFETY: we pass null to kernel, so kernel doesn't touch anything
+        match unsafe { splice(pipe_fd, null_mut(), vsock_fd, null_mut(), 4096, 0) } {
+            0 => break,
+            -1 => return Err(std::io::Error::last_os_error().into()),
+            _ => (),
+        };
+    }
+    Ok(())
+}
+
 /// Executes the given task. Stdout of the task is piped into the vsock stream to the
 /// virtualizationservice in the host side.
-fn exec_task(task: &Task) -> Result<()> {
-    const VMADDR_CID_HOST: u32 = 2;
-    const PORT_VIRT_SVC: u32 = 3000;
-    let stdout = match VsockStream::connect_with_cid_port(VMADDR_CID_HOST, PORT_VIRT_SVC) {
-        Ok(stream) => {
-            // SAFETY: the ownership of the underlying file descriptor is transferred from stream
-            // to the file object, and then into the Command object. When the command is finished,
-            // the file descriptor is closed.
-            let f = unsafe { File::from_raw_fd(stream.into_raw_fd()) };
-            Stdio::from(f)
-        }
-        Err(e) => {
-            error!("failed to connect to virtualization service: {}", e);
-            // Don't fail hard here. Even if we failed to connect to the virtualizationservice,
-            // we keep executing the task. This can happen if the owner of the VM doesn't register
-            // callback to accept the stream. Use /dev/null as the stdout so that the task can
-            // make progress without waiting for someone to consume the output.
-            Stdio::null()
-        }
-    };
+fn exec_task(task: &Task, service: &Strong<dyn IVirtualMachineService>) -> Result<()> {
     info!("executing main task {:?}...", task);
-    // TODO(jiyong): consider piping the stream into stdio (and probably stderr) as well.
-    let mut child = build_command(task)?.stdout(stdout).spawn()?;
-    match child.wait()?.code() {
+    let mut child = build_command(task)?.stdout(Stdio::piped()).stderr(Stdio::piped()).spawn()?;
+    let stdout = child.stdout.take().unwrap();
+    let stderr = child.stderr.take().unwrap();
+    let stdout_thread = std::thread::spawn(move || forward_pipe_as_vsock(stdout, PORT_VM_STDOUT));
+    let stderr_thread = std::thread::spawn(move || forward_pipe_as_vsock(stderr, PORT_VM_STDERR));
+
+    // Wait until stdout/stderr servers listens.
+    // TODO(inseob): use synchronization method like condition variables
+    std::thread::sleep(Duration::from_secs(1));
+    info!("notifying payload started");
+    service.notifyPayloadStarted(get_local_cid()? as i32)?;
+
+    // Wait, and then join. The host may read outputs after the payload is finished.
+    let result = child.wait();
+
+    if let Err(e) = stdout_thread.join().expect("Couldn't join stdout thread") {
+        error!("stdout thread exited with error: {}", e);
+    }
+    if let Err(e) = stderr_thread.join().expect("Couldn't join stderr thread") {
+        error!("stderr thread exited with error: {}", e);
+    }
+
+    match result?.code() {
         Some(0) => {
             info!("task successfully finished");
             Ok(())

@@ -31,6 +31,7 @@ import android.system.virtualizationservice.IVirtualizationService;
 import android.system.virtualizationservice.VirtualMachineAppConfig;
 
 import java.io.File;
+import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -269,12 +270,12 @@ public class VirtualMachine {
             mVirtualMachine.registerCallback(
                     new IVirtualMachineCallback.Stub() {
                         @Override
-                        public void onPayloadStarted(int cid, ParcelFileDescriptor stream) {
+                        public void onPayloadStarted(int cid) {
                             final VirtualMachineCallback cb = mCallback;
                             if (cb == null) {
                                 return;
                             }
-                            cb.onPayloadStarted(VirtualMachine.this, stream);
+                            cb.onPayloadStarted(VirtualMachine.this);
                         }
 
                         @Override
@@ -312,6 +313,15 @@ public class VirtualMachine {
             throw new VirtualMachineException("Console output not available");
         }
         return new FileInputStream(mConsoleReader.getFileDescriptor());
+    }
+
+    /** Connects to this virtual machine's vsock and returns a file descriptor. */
+    public @NonNull FileDescriptor connectSocket(int port) throws VirtualMachineException {
+        try {
+            return mVirtualMachine.connectVsock(port).getFileDescriptor();
+        } catch (RemoteException e) {
+            throw new VirtualMachineException(e);
+        }
     }
 
     /**
