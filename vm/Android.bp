@@ -13,10 +13,12 @@ rust_binary {
         "libenv_logger",
         "liblibc",
         "liblog_rust",
+        "libnix",
         "libserde_json",
         "libserde",
         "libstructopt",
         "libvmconfig",
+        "libvsock",
     ],
     apex_available: [
         "com.android.virt",

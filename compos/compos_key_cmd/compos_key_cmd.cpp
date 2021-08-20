@@ -99,8 +99,7 @@ static std::shared_ptr<ICompOsService> getService(int cid) {
 namespace {
 class Callback : public BnVirtualMachineCallback {
 public:
-    ::ndk::ScopedAStatus onPayloadStarted(
-            int32_t in_cid, const ::ndk::ScopedFileDescriptor& /*in_stdout*/) override {
+    ::ndk::ScopedAStatus onPayloadStarted(int32_t in_cid) override {
         // TODO: Consider copying stdout somewhere useful?
         LOG(INFO) << "Payload started! cid = " << in_cid;
         {

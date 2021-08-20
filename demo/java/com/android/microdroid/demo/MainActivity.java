@@ -18,7 +18,6 @@ package com.android.microdroid.demo;
 
 import android.app.Application;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineCallback;
 import android.system.virtualmachine.VirtualMachineConfig;
@@ -139,19 +138,20 @@ public class MainActivity extends AppCompatActivity {
                 mVirtualMachine.setCallback(
                         new VirtualMachineCallback() {
                             @Override
-                            public void onPayloadStarted(
-                                    VirtualMachine vm, ParcelFileDescriptor out) {
+                            public void onPayloadStarted(VirtualMachine vm) {
                                 try {
                                     BufferedReader reader =
                                             new BufferedReader(
                                                     new InputStreamReader(
                                                             new FileInputStream(
-                                                                    out.getFileDescriptor())));
+                                                                    vm.connectSocket(3001))));
                                     String line;
                                     while ((line = reader.readLine()) != null) {
                                         mPayloadOutput.postValue(line);
                                     }
                                 } catch (IOException e) {
+                                    // Consume
+                                } catch (VirtualMachineException e) {
                                     // Consume
                                 }
                             }

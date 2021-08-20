@@ -35,6 +35,7 @@ use std::io::{self, BufRead, BufReader};
 use std::os::unix::io::{AsRawFd, FromRawFd};
 use std::path::Path;
 use vmconfig::{open_parcel_file, VmConfig};
+use vsock::VsockStream;
 
 /// Run a VM from the given APK, idsig, and config.
 #[allow(clippy::too_many_arguments)]
@@ -155,17 +156,26 @@ struct VirtualMachineCallback {
 
 impl Interface for VirtualMachineCallback {}
 
+fn print_payload_output(cid: u32) -> io::Result<()> {
+    const PORT_VM_STDOUT: u32 = 3001;
+    let stream = VsockStream::connect_with_cid_port(cid, PORT_VM_STDOUT)?;
+    let mut reader = BufReader::new(stream);
+    loop {
+        let mut s = String::new();
+        match reader.read_line(&mut s) {
+            Ok(0) => break,
+            Ok(_) => print!("{}", s),
+            Err(e) => return Err(e),
+        };
+    }
+    Ok(())
+}
+
 impl IVirtualMachineCallback for VirtualMachineCallback {
-    fn onPayloadStarted(&self, _cid: i32, stdout: &ParcelFileDescriptor) -> BinderResult<()> {
+    fn onPayloadStarted(&self, cid: i32) -> BinderResult<()> {
         // Show the stdout of the payload
-        let mut reader = BufReader::new(stdout.as_ref());
-        loop {
-            let mut s = String::new();
-            match reader.read_line(&mut s) {
-                Ok(0) => break,
-                Ok(_) => print!("{}", s),
-                Err(e) => eprintln!("error reading from virtual machine: {}", e),
-            };
+        if let Err(e) = print_payload_output(cid as u32) {
+            eprintln!("error reading from virtual machine: {}", e);
         }
         Ok(())
     }
