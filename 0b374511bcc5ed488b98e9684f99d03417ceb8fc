@@ -16,6 +16,29 @@
       "message": "I resolved all comments so far. PTAL.",
       "revId": "0b374511bcc5ed488b98e9684f99d03417ceb8fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4558dcc_b381ce1e",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-20T04:04:26Z",
+      "side": 1,
+      "message": "This and line 736 serve the same purpose. Only either of them is needed.",
+      "range": {
+        "startLine": 733,
+        "startChar": 0,
+        "endLine": 733,
+        "endChar": 81
+      },
+      "revId": "0b374511bcc5ed488b98e9684f99d03417ceb8fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
