@@ -39,6 +39,30 @@
       },
       "revId": "0b374511bcc5ed488b98e9684f99d03417ceb8fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c7f9907_62a05d97",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-20T04:10:15Z",
+      "side": 1,
+      "message": "Line 733 is for the host, and line 736 is for the guest. As this check is temporary and to be removed after the RPC binder supports querying the CID, I\u0027d like to leave this as-is, for the debugging purpose.",
+      "parentUuid": "d4558dcc_b381ce1e",
+      "range": {
+        "startLine": 733,
+        "startChar": 0,
+        "endLine": 733,
+        "endChar": 81
+      },
+      "revId": "0b374511bcc5ed488b98e9684f99d03417ceb8fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
