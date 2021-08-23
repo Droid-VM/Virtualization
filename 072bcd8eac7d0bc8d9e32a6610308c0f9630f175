@@ -520,6 +520,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b60de33_49fb303b",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-23T16:21:35Z",
+      "side": 1,
+      "message": "In general, if we have to choose between having complexity either in microdroid_manager or in virtualizationservice, I\u0027d prefer to have it in microdroid_manager if it\u0027s for something specific to Microdroid (which I think this stdout/stderr handling is). And if data passed over stdout is performance-critical, I think we\u0027ve designed the VM payload wrong, surely this should only be for logging? We could even send payload stdout/stderr to the VM\u0027s syslog (or logcat or however it works in Microdroid) so that they get included with the rest of the VM logs.",
+      "parentUuid": "85b62802_d89450e1",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 98
+      },
+      "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "853ac84a_ab1a5702",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 2
