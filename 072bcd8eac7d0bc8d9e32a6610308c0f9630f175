@@ -238,6 +238,30 @@
       },
       "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "426d793f_476ba79d",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-23T07:07:48Z",
+      "side": 1,
+      "message": "Sorry, but \"I don\u0027t like it\" can\u0027t be a reason for a design. You don\u0027t need to permanently keep the file descriptors inside VS. Once they are passed to the client, they can be freed.\n\nThe overhead for creating three connections is paid only once when the payload is started, whereas the overhead for relaying the streams is paid every time when there\u0027s something to send or receive.\n\nIf you are still concerned about having three connections, you could optimize it by sharing a single connection for in and out because a socket connection is full duplex. stderr could be merged into stdout (or just ignored) based on the configuration that the app has specified.",
+      "parentUuid": "021e8237_fcfb7bd4",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 98
+      },
+      "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
