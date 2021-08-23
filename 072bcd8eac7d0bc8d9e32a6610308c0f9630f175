@@ -262,6 +262,30 @@
       },
       "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85b62802_d89450e1",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-23T07:15:27Z",
+      "side": 1,
+      "message": "\u003e Sorry, but \"I don\u0027t like it\" can\u0027t be a reason for a design. \n\nNo need to be sorry at all.\n\n\u003e If you are still concerned about having three connections, you could optimize it by sharing a single connection for in and out because a socket connection is full duplex. stderr could be merged into stdout (or just ignored) based on the configuration that the app has specified.\n\nThis sounds reasonable. I\u0027ll work this way.",
+      "parentUuid": "426d793f_476ba79d",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 98
+      },
+      "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
