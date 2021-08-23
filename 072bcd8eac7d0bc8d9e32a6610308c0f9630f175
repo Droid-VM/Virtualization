@@ -94,6 +94,30 @@
       },
       "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f38a95f0_17468320",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-23T05:53:45Z",
+      "side": 1,
+      "message": "\u003e I think this is against our decision\n\nWe haven\u0027t made any new decision about how to pass stdin/out/err across the apps.\n\n\u003e supports passing a file descriptor\n\nThe FD should be backed by a regular file. So we wouldn\u0027t be able to rely on that for sharing stdin/out/err.",
+      "parentUuid": "9f70d324_8f941736",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 98
+      },
+      "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
