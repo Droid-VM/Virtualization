@@ -214,6 +214,30 @@
       },
       "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "021e8237_fcfb7bd4",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-23T06:48:38Z",
+      "side": 1,
+      "message": "It\u0027s not \"wrong\". I just don\u0027t like it. Especially, we can\u0027t get rid of handle_connection_from_vm() function, and virtualization service becomes complicated (because we now have to store 3 file descriptors per VM inside virtualization service).\n\nFor me, the additional context switching doesn\u0027t seem to be too expensive. Usually we\u0027ll only need stdout, and I think it\u0027s more reasonable for the VM to host an output server, because it\u0027s the VM that controls the data. Isn\u0027t it expensive too, when we have to make three more connections every time? The connection itself involves many context switching.",
+      "parentUuid": "522939c7_884c8823",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 98
+      },
+      "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
