@@ -142,6 +142,30 @@
       },
       "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29fdb496_c6c67bef",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-23T06:19:04Z",
+      "side": 1,
+      "message": "To support stdin and stderr in addition to stdout, we need more connections.\n\n\u003e microdroid manager waits until the payload is finished.\n\nThis doesn\u0027t work if the payload runs for a long time, or never stops. The reason we need stdout/stderr from the app is to see any output from the app \"in real-time\".",
+      "parentUuid": "77ebbccc_50cd972b",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 98
+      },
+      "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
