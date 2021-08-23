@@ -544,6 +544,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9f75f0c_20968e95",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-23T22:54:13Z",
+      "side": 1,
+      "message": "Complexity is not the main issue here and as I said above there are ways to keep the complexity low. And this is not specific to Microdroid. The app started in the VM is considered as a child process of the main app running on the guest side. A parent process has access to stdin/out/err of its child processes, and we provide the same (or at least similar) analogy to the apps running across VM boundaries.\n\nWhat the stdin/out/err will be used for is outside of our concern - it\u0027s determined by the app. Some could use it for debugging, but some might use it for other purpose. We just don\u0027t know and shouldn\u0027t assume a specific use case.\n\nWhat I concern the most in this CL is the fact that the stream has to be relayed by MM causing unnecessary context switches and data copies (within kernel since we are using splice).",
+      "parentUuid": "8b60de33_49fb303b",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 98
+      },
+      "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "853ac84a_ab1a5702",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 2
