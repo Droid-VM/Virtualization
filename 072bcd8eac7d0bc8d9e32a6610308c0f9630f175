@@ -22,6 +22,30 @@
       },
       "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52f538a5_4c8812b3",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-23T05:16:41Z",
+      "side": 1,
+      "message": "Well.. I don\u0027t think this code makes microdroid_manager involved in any communications. microdroid_manager just redirects payload\u0027s output, and I see no differences between this and the old implementation that microdroid_manager passes a FD for payload output.\n\nWhat I mean \"involved\" is that microdroid_manager can\u0027t affect direct communcations between apps.",
+      "parentUuid": "239265c3_b3ec1fee",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 98
+      },
+      "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
