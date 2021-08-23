@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1912f36_2b672ebe",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-23T10:43:14Z",
+      "side": 1,
+      "message": "We use port 8000 for ADB sometimes (e.g. in the Microdroid instructions https://android.googlesource.com/platform/packages/modules/Virtualization/+/refs/heads/master/microdroid/#adb). That\u0027s TCP rather than vsock, so it doesn\u0027t actually clash, but it could be confusing. Can you pick a different port?",
+      "revId": "ad0f906642648b36b3149f66938a83bac46e6c27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f34a69d1_7e8c58a7",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-23T10:43:14Z",
+      "side": 1,
+      "message": "Does the connection really happen inside `try_from`? That seems weird.",
+      "revId": "ad0f906642648b36b3149f66938a83bac46e6c27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "935f346f_6197bc77",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-23T10:43:14Z",
+      "side": 1,
+      "message": "Nit: connect to",
+      "range": {
+        "startLine": 77,
+        "startChar": 23,
+        "endLine": 77,
+        "endChar": 30
+      },
+      "revId": "ad0f906642648b36b3149f66938a83bac46e6c27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41ad778c_669de017",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-23T10:43:14Z",
+      "side": 1,
+      "message": "Huh, so this takes over the thread? That\u0027s surprising, as it\u0027s different to the regular Binder model. Is it just because we don\u0027t have the proper wrappers yet?",
+      "revId": "ad0f906642648b36b3149f66938a83bac46e6c27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
