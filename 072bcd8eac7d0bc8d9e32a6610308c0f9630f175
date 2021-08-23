@@ -118,6 +118,30 @@
       },
       "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77ebbccc_50cd972b",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-23T06:13:09Z",
+      "side": 1,
+      "message": "\u003e We haven\u0027t made any new decision about how to pass stdin/out/err across the apps.\n\nWhat I mean here is that the guest VM connects only once (for the binder connection); we don\u0027t want to make more connections, right?\n\nOne suggestion: how about this?\n\n1) the payload fully initializes the vm, and then returns.\n2) microdroid manager waits until the payload is finished.\n3) microdroid manager passes the payload\u0027s output (as a string) to the virtualization service via a parameter of onPayloadFinished() method. (renamed from onPayloadStarted)",
+      "parentUuid": "f38a95f0_17468320",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 98
+      },
+      "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
