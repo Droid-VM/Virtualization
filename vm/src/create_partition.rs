@@ -15,6 +15,7 @@
 //! Command to create an empty partition
 
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualizationService::IVirtualizationService;
+use android_system_virtualizationservice::aidl::android::system::virtualizationservice::PartitionType::PartitionType;
 use android_system_virtualizationservice::binder::{ParcelFileDescriptor, Strong};
 use anyhow::{Context, Error};
 use std::convert::TryInto;
@@ -26,6 +27,7 @@ pub fn command_create_partition(
     service: Strong<dyn IVirtualizationService>,
     image_path: &Path,
     size: u64,
+    partition_type: PartitionType,
 ) -> Result<(), Error> {
     let image = OpenOptions::new()
         .create_new(true)
@@ -34,7 +36,11 @@ pub fn command_create_partition(
         .open(image_path)
         .with_context(|| format!("Failed to create {:?}", image_path))?;
     service
-        .initializeWritablePartition(&ParcelFileDescriptor::new(image), size.try_into()?)
+        .initializeWritablePartition(
+            &ParcelFileDescriptor::new(image),
+            size.try_into()?,
+            partition_type,
+        )
         .context("Failed to initialize partition with size {}, size")?;
     Ok(())
 }

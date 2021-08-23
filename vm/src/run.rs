@@ -25,6 +25,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     VirtualMachineAppConfig::VirtualMachineAppConfig,
     VirtualMachineConfig::VirtualMachineConfig,
 };
+use android_system_virtualizationservice::aidl::android::system::virtualizationservice::PartitionType::PartitionType;
 use android_system_virtualizationservice::binder::{
     BinderFeatures, DeathRecipient, IBinder, ParcelFileDescriptor, Strong,
 };
@@ -60,7 +61,12 @@ pub fn command_run_app(
 
     if !instance.exists() {
         const INSTANCE_FILE_SIZE: u64 = 10 * 1024 * 1024;
-        command_create_partition(service.clone(), instance, INSTANCE_FILE_SIZE)?;
+        command_create_partition(
+            service.clone(),
+            instance,
+            INSTANCE_FILE_SIZE,
+            PartitionType::ANDROID_VM_INSTANCE,
+        )?;
     }
 
     let config = VirtualMachineConfig::AppConfig(VirtualMachineAppConfig {
