@@ -16,6 +16,24 @@
       "message": "Is it always necessary to create the idsig file, or will it already exist in some cases? Either from a previous time the VM was run, or something else that uses it.",
       "revId": "0a2484304d22c9350ffc0ae805c7794c9302769a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0525650d_133275f5",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-23T10:02:53Z",
+      "side": 1,
+      "message": "This will be no-op (just returns false), if the file was already created during the initial run of the VM.\n\nOnce it is created, it will never be deleted until the VM is completely destroyed. It could however be updated when the corresponding APK is updated which shall be detected by VS (not implemented yet).\n\nEven if this is forcibly deleted somehow, it will be created (by this line) which will then filled by VS.",
+      "parentUuid": "26705b21_ce02d350",
+      "revId": "0a2484304d22c9350ffc0ae805c7794c9302769a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
