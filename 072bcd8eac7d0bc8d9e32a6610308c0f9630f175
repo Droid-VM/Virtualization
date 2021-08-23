@@ -166,6 +166,30 @@
       },
       "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fa50c08_4d64eb28",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-23T06:25:17Z",
+      "side": 1,
+      "message": "\u003e The reason we need stdout/stderr from the app is to see any output from the app \"in real-time\".\n\nokay.\n\n\u003e To support stdin and stderr in addition to stdout, we need more connections.\n\nOkay. It\u0027s fine to have more connections. However, what I don\u0027t like is that the virtualization service opens a server (...which is done by handle_connection_from_vm() so far), and the guest VM has to connect to the server.",
+      "parentUuid": "29fdb496_c6c67bef",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 98
+      },
+      "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
