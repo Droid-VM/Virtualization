@@ -49,6 +49,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "73c1f81a_58f9d798",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-24T08:04:24Z",
+      "side": 1,
+      "message": "We could. But, we have to create a socket first. Depending on /dev/vsock seems clearer to me.",
+      "parentUuid": "d59e0f46_f41fcb54",
+      "range": {
+        "startLine": 74,
+        "startChar": 3,
+        "endLine": 74,
+        "endChar": 51
+      },
+      "revId": "32d6d034c1ab47233a7e5592137ac1fdca402db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "db8e5d91_5c2a2fcb",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 3
@@ -83,6 +107,30 @@
       "writtenOn": "2021-08-24T06:09:35Z",
       "side": 1,
       "message": "This is not needed.",
+      "range": {
+        "startLine": 198,
+        "startChar": 5,
+        "endLine": 198,
+        "endChar": 6
+      },
+      "revId": "32d6d034c1ab47233a7e5592137ac1fdca402db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b3d27c4_ae2c3ba1",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-24T08:04:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b38af088_97315a32",
       "range": {
         "startLine": 198,
         "startChar": 5,
@@ -154,6 +202,30 @@
       "side": 1,
       "message": "VsockStream could be added as Mutex\u003cVsockStream\u003e. Then you can get a mutable reference of VsockStream by calling lock().unwrap() on the mutex.",
       "parentUuid": "d3a181df_0305e8ec",
+      "range": {
+        "startLine": 645,
+        "startChar": 4,
+        "endLine": 645,
+        "endChar": 39
+      },
+      "revId": "32d6d034c1ab47233a7e5592137ac1fdca402db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09b81bcd_05095d60",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-24T08:04:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe4c307c_b39cac83",
       "range": {
         "startLine": 645,
         "startChar": 4,
