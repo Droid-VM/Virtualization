@@ -802,6 +802,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6fe669d2_c3e01237",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-24T08:51:55Z",
+      "side": 1,
+      "message": "\u003e VS/MM can propagate them\n\nWe don\u0027t have a means to pass an FD that is returned from pipe(2) across the VM boundaries.",
+      "parentUuid": "9eeef345_a2f2b81f",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 98
+      },
+      "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "853ac84a_ab1a5702",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 2
