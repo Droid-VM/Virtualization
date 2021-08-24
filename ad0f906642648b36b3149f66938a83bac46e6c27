@@ -73,6 +73,24 @@
       "message": "Huh, so this takes over the thread? That\u0027s surprising, as it\u0027s different to the regular Binder model. Is it just because we don\u0027t have the proper wrappers yet?",
       "revId": "ad0f906642648b36b3149f66938a83bac46e6c27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7fa4736_28ed417b",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-24T00:32:24Z",
+      "side": 1,
+      "message": "I thought that this is what the regular Binder model does. Virtualization service does the same thing\n\n    add_service(BINDER_SERVICE_IDENTIFIER, service.as_binder()).unwrap();\n    info!(\"Registered Binder service, joining threadpool.\");\n    ProcessState::join_thread_pool();\n    \nIt takes over the \"main\" thread.",
+      "parentUuid": "41ad778c_669de017",
+      "revId": "ad0f906642648b36b3149f66938a83bac46e6c27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
