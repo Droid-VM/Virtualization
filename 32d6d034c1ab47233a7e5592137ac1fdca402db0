@@ -114,6 +114,30 @@
       },
       "revId": "32d6d034c1ab47233a7e5592137ac1fdca402db0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3a181df_0305e8ec",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-24T06:21:49Z",
+      "side": 1,
+      "message": "That was the first approach. But I\u0027m not familiar with Rust and I couldn\u0027t find a way to mutate Arc\u003cVmInstance\u003e or Weak\u003cVmInstance\u003e :(",
+      "parentUuid": "11c0dbcc_35ae3704",
+      "range": {
+        "startLine": 645,
+        "startChar": 4,
+        "endLine": 645,
+        "endChar": 39
+      },
+      "revId": "32d6d034c1ab47233a7e5592137ac1fdca402db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
