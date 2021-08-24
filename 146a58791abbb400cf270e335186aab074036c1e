@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87fc7e22_5a15fcd6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-24T11:27:35Z",
+      "side": 1,
+      "message": "That doesn\u0027t seem to be what is happening: microdroid_manager is still calling onPayloadStarted as soon as the payload process has been spawned. It won\u0027t be ready to serve until some time later, or could even fail to reach a ready state if something goes wrong during its startup process.",
+      "revId": "146a58791abbb400cf270e335186aab074036c1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "065a7f60_15fe18b0",
+        "filename": "vm/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-24T11:27:35Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem to be used anywhere.",
+      "revId": "146a58791abbb400cf270e335186aab074036c1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
