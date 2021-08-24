@@ -138,6 +138,30 @@
       },
       "revId": "32d6d034c1ab47233a7e5592137ac1fdca402db0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe4c307c_b39cac83",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-24T06:46:18Z",
+      "side": 1,
+      "message": "VsockStream could be added as Mutex\u003cVsockStream\u003e. Then you can get a mutable reference of VsockStream by calling lock().unwrap() on the mutex.",
+      "parentUuid": "d3a181df_0305e8ec",
+      "range": {
+        "startLine": 645,
+        "startChar": 4,
+        "endLine": 645,
+        "endChar": 39
+      },
+      "revId": "32d6d034c1ab47233a7e5592137ac1fdca402db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
