@@ -46,6 +46,30 @@
       },
       "revId": "e4649c71f5f53ca6a697f88d4e59fe9849a7c586",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d4f5c3b_942f6cc0",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-24T08:43:25Z",
+      "side": 1,
+      "message": "I actually think the CID could/should be identified by VS. As a binder service, it should be able to know the peer address of a transaction. (similar to getCallingPid/Uid for local binder transactions). Unfortunately, such mechanism doesn\u0027t exist yet, better to file a bug to smoreland@.\n\nIn the meantime, you could create a bind socket temporarily and call https://docs.rs/vsock/0.1.4/vsock/struct.VsockListener.html#method.local_addr on it to get the CID of the current VM. My point is that you don\u0027t need to take the difficult path of using ioctl.",
+      "parentUuid": "ab6fdbbe_d907afe5",
+      "range": {
+        "startLine": 145,
+        "startChar": 8,
+        "endLine": 145,
+        "endChar": 14
+      },
+      "revId": "e4649c71f5f53ca6a697f88d4e59fe9849a7c586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
