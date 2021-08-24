@@ -844,6 +844,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68ba29c4_e8be6c17",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-24T09:20:38Z",
+      "side": 1,
+      "message": "I thought passing it via crosvm\u0027s arguments just like passing other FDs from host to vm. But I don\u0027t know the exact mechanism yet. Btw, it would be nice if we can do \"pass an FD that is returned from pipe(2) across the VM boundaries.\"",
+      "parentUuid": "6fe669d2_c3e01237",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 98
+      },
+      "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "853ac84a_ab1a5702",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 2
