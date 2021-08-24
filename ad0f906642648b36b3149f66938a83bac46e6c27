@@ -169,6 +169,24 @@
       "parentUuid": "c7fa4736_28ed417b",
       "revId": "ad0f906642648b36b3149f66938a83bac46e6c27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17a6f3da_faad29fc",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-24T10:16:18Z",
+      "side": 1,
+      "message": "The thread model is the same. `RunRpcServer` which is a temporary wrapper internally calls join on the threads.\n\nhttps://source.corp.google.com/android/frameworks/native/libs/binder/libbinder_rpc_unstable.cpp;rcl\u003d6a150b08c70df1627c416acf8eb54ab35011e538;l\u003d39",
+      "parentUuid": "cb5fb34f_8808d2ee",
+      "revId": "ad0f906642648b36b3149f66938a83bac46e6c27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
