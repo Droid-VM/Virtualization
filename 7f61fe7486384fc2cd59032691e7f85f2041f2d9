@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d040fb08_2ac78509",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-24T23:33:47Z",
+      "side": 1,
+      "message": "I guess that -1 is passed. http://cs/android/frameworks/native/libs/binder/ndk/include_cpp/android/binder_auto_utils.h?l\u003d362\u0026rcl\u003de1695a307dc95c3109a2289c60fe723253849780",
+      "parentUuid": "36400c7d_4e72167e",
+      "range": {
+        "startLine": 103,
+        "startChar": 28,
+        "endLine": 103,
+        "endChar": 62
+      },
+      "revId": "7f61fe7486384fc2cd59032691e7f85f2041f2d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a54a36b9_f47c7ee6",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f503f3f1_d432176f",
+        "filename": "demo/java/com/android/microdroid/demo/MainActivity.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-24T23:33:47Z",
+      "side": 1,
+      "message": "Right, this seems like an anti pattern. I\u0027ll fix this as a follow-up CL, as the goal of this CL was to refactor the callback mechanism.",
+      "parentUuid": "a54a36b9_f47c7ee6",
+      "range": {
+        "startLine": 157,
+        "startChar": 36,
+        "endLine": 157,
+        "endChar": 41
+      },
+      "revId": "7f61fe7486384fc2cd59032691e7f85f2041f2d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2323e32_9d6e87f5",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-08-24T13:09:36Z",
       "side": 1,
       "message": "What does it mean when it is null?\n(There\u0027s currently no documentation on this parameter at all, which seems unhelpful.)",
+      "range": {
+        "startLine": 32,
+        "startChar": 55,
+        "endLine": 32,
+        "endChar": 63
+      },
+      "revId": "7f61fe7486384fc2cd59032691e7f85f2041f2d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93c5ba49_19c51244",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-24T23:33:47Z",
+      "side": 1,
+      "message": "Null means that the guest VM didn\u0027t connect to the VS, thus we have no stream for payload input/output. I\u0027ll add the document as a follow-up CL.",
+      "parentUuid": "e2323e32_9d6e87f5",
       "range": {
         "startLine": 32,
         "startChar": 55,
