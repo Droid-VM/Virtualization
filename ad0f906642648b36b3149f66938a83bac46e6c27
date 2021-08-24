@@ -151,6 +151,24 @@
       "parentUuid": "41ad778c_669de017",
       "revId": "ad0f906642648b36b3149f66938a83bac46e6c27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb5fb34f_8808d2ee",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-24T09:31:03Z",
+      "side": 1,
+      "message": "My understand was that the Binder library maintains its own thread pool, join_thread_pool just joins on it rather than actually running anything on the main thread. But that\u0027s really a question for the Binder library, not for this CL. I was just surprised.",
+      "parentUuid": "c7fa4736_28ed417b",
+      "revId": "ad0f906642648b36b3149f66938a83bac46e6c27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
