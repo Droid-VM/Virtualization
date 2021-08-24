@@ -868,6 +868,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6403b3f5_fcfe4d7a",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-24T10:10:11Z",
+      "side": 1,
+      "message": "The closest we have is the `--serial` option. Using it we can make a file in host be seen as the input of a guest serial device, and make a file in host be used as the output of the guest serial device. However, crosvm currently accepts only paths not fds, which could of course be fixed.",
+      "parentUuid": "68ba29c4_e8be6c17",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 98
+      },
+      "revId": "072bcd8eac7d0bc8d9e32a6610308c0f9630f175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "853ac84a_ab1a5702",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 2
