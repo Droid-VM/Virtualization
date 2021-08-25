@@ -16,6 +16,24 @@
       "message": "Rather than having a catch-all case here, why not just leave it out, so if someone tries to add a new partition type without adding support for it is caught at compile-time rather than only at runtime?",
       "revId": "9dd389e8500e03d37715416830886361e76f17bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac9c23b9_0cf4aa8b",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-25T10:28:17Z",
+      "side": 1,
+      "message": "I tried that in the beginning, but got the following compilation error:\n\n```\nerror[E0004]: non-exhaustive patterns: `PartitionType(i32::MIN..\u003d-1_i32)` and `PartitionType(2_i32..\u003di32::MAX)` not covered\n   --\u003e packages/modules/Virtualization/virtualizationservice/src/aidl.rs:219:15\n    |\n219 |         match partition_type {\n    |               ^^^^^^^^^^^^^^ patterns `PartitionType(i32::MIN..\u003d-1_i32)` and `PartitionType(2_i32..\u003di32::MAX)` not covered\n    |\n```\n\n, which is probably because enum in AIDL is translated into a struct, not an enum in Rust. See https://source.corp.google.com/android/frameworks/native/libs/binder/rust/src/binder.rs;rcl\u003d9fb3df9fdcce714a5d09a93a701fc91edb8cade1;l\u003d898",
+      "parentUuid": "b5eb73ee_d1df214b",
+      "revId": "9dd389e8500e03d37715416830886361e76f17bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
