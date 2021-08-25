@@ -250,6 +250,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a50e3c56_e1d921e3",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-08-25T14:47:52Z",
+      "side": 1,
+      "message": "\u003e Couldn\u0027t we always initialize the VM / both VM instances? \nI\u0027m not against retaining \"compos_key_cmd initialize\", although I\u0027m not sure it\u0027s that useful - just that we need to be able to start the VM, initialize \u0026 sign all in one go.\n\n\u003e Do you suggest to change the `sign` API back to take a key blob? \nNo, definitely not. Just that \"compos_key_cmd sign\" should do initialize and then a bunch of signing. (Nit: that is what the usage documentation still says it does.)",
+      "parentUuid": "36213f2b_87c1d380",
+      "range": {
+        "startLine": 503,
+        "startChar": 40,
+        "endLine": 503,
+        "endChar": 50
+      },
+      "revId": "4891f4729ba0d6e89f46b4048ca2202c1f6fe317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a80976f6_09f07f48",
         "filename": "compos/src/compsvc.rs",
         "patchSetId": 1
