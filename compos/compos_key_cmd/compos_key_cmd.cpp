@@ -307,6 +307,29 @@ static Result<void> generate(TargetVm& vm, const std::string& blob_file,
     return {};
 }
 
+static Result<void> initialize(TargetVm& vm, const std::string& blob_file) {
+    auto cid = vm.resolveCid();
+    if (!cid.ok()) {
+        return cid.error();
+    }
+    auto service = getService(*cid);
+    if (!service) {
+        return Error() << "No service";
+    }
+
+    auto blob = readBytesFromFile(blob_file);
+    if (!blob.ok()) {
+        return blob.error();
+    }
+
+    auto status = service->initializeSigningKey(blob.value());
+    if (!status.isOk()) {
+        return Error() << "Failed to initialize signing key: " << status.getDescription();
+    }
+
+    return {};
+}
+
 static Result<bool> verify(TargetVm& vm, const std::string& blob_file,
                            const std::string& public_key_file) {
     auto cid = vm.resolveCid();
@@ -337,8 +360,7 @@ static Result<bool> verify(TargetVm& vm, const std::string& blob_file,
     return result;
 }
 
-static Result<void> signFile(ICompOsService* service, const std::vector<uint8_t>& key_blob,
-                             const std::string& file) {
+static Result<void> signFile(ICompOsService* service, const std::string& file) {
     unique_fd fd(TEMP_FAILURE_RETRY(open(file.c_str(), O_RDONLY | O_CLOEXEC)));
     if (!fd.ok()) {
         return ErrnoError() << "Failed to open";
@@ -386,7 +408,7 @@ static Result<void> signFile(ICompOsService* service, const std::vector<uint8_t>
     memcpy(to_be_signed->digest, digest->digest, digest->digest_size);
 
     std::vector<uint8_t> signature;
-    auto status = service->sign(key_blob, buffer, &signature);
+    auto status = service->sign(buffer, &signature);
     if (!status.isOk()) {
         return Error() << "Failed to sign: " << status.getDescription();
     }
@@ -404,8 +426,7 @@ static Result<void> signFile(ICompOsService* service, const std::vector<uint8_t>
     return {};
 }
 
-static Result<void> sign(TargetVm& vm, const std::string& blob_file,
-                         const std::vector<std::string>& files) {
+static Result<void> sign(TargetVm& vm, const std::vector<std::string>& files) {
     auto cid = vm.resolveCid();
     if (!cid.ok()) {
         return cid.error();
@@ -415,13 +436,8 @@ static Result<void> sign(TargetVm& vm, const std::string& blob_file,
         return Error() << "No service";
     }
 
-    auto blob = readBytesFromFile(blob_file);
-    if (!blob.ok()) {
-        return blob.error();
-    }
-
     for (auto& file : files) {
-        auto result = signFile(service.get(), blob.value(), file);
+        auto result = signFile(service.get(), file);
         if (!result.ok()) {
             return Error() << result.error() << ": " << file;
         }
@@ -484,6 +500,13 @@ int main(int argc, char** argv) {
         } else {
             std::cerr << result.error() << '\n';
         }
+    } else if (argc == 3 && argv[1] == "initialize"sv) {
+        auto result = initialize(vm, argv[2]);
+        if (result.ok()) {
+            return 0;
+        } else {
+            std::cerr << result.error() << '\n';
+        }
     } else if (argc == 4 && argv[1] == "verify"sv) {
         auto result = verify(vm, argv[2], argv[3]);
         if (result.ok()) {
@@ -496,9 +519,9 @@ int main(int argc, char** argv) {
         } else {
             std::cerr << result.error() << '\n';
         }
-    } else if (argc >= 4 && argv[1] == "sign"sv) {
-        const std::vector<std::string> files{&argv[3], &argv[argc]};
-        auto result = sign(vm, argv[2], files);
+    } else if (argc >= 3 && argv[1] == "sign"sv) {
+        const std::vector<std::string> files{&argv[2], &argv[argc]};
+        auto result = sign(vm, files);
         if (result.ok()) {
             std::cerr << "All signatures generated.\n";
             return 0;
@@ -516,10 +539,12 @@ int main(int argc, char** argv) {
         std::cerr << "Usage: compos_key_cmd [OPTIONS] generate|verify|sign|make-instance\n"
                   << "  generate <blob file> <public key file> Generate new key pair and write\n"
                   << "    the private key blob and public key to the specified files.\n "
+                  << "  initialize <blob file> Initialize the signing key.\n"
                   << "  verify <blob file> <public key file> Verify that the content of the\n"
                   << "    specified private key blob and public key files are valid.\n "
                   << "  sign <blob file> <files to be signed> Generate signatures for one or\n"
-                  << "    more files using the supplied private key blob.\n"
+                  << "    more files using the supplied private key blob. Signature is stored in\n"
+                  << "    <filename>.signature\n"
                   << "  make-instance <image file> Create an empty instance image file for a VM.\n"
                   << "\n"
                   << "OPTIONS: --log <log file> (--cid <cid> | --start <image file>)\n"

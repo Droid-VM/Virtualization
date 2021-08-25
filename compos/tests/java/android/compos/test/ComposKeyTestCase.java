@@ -122,6 +122,34 @@ public final class ComposKeyTestCase extends VirtualizationTestCaseBase {
         assertThat(result.getStatus()).isEqualTo(CommandStatus.FAILED);
     }
 
+    @Test
+    public void testSigning() throws Exception {
+        startVm();
+        waitForServiceRunning();
+
+        CommandRunner android = new CommandRunner(getDevice());
+
+        // Generate key - should succeed
+        android.run(
+                COMPOS_KEY_CMD_BIN,
+                "--cid " + mCid,
+                "generate",
+                TEST_ROOT + "test_key.blob",
+                TEST_ROOT + "test_key.pubkey");
+
+        // Initialize key - should succeed
+        android.run(COMPOS_KEY_CMD_BIN, "--cid " + mCid, "initialize", TEST_ROOT + "test_key.blob");
+
+        // Generate some data to sign in a writable directory
+        android.run("echo something > /data/local/tmp/something.txt");
+
+        // Sign something - should succeed
+        android.run(COMPOS_KEY_CMD_BIN, "--cid " + mCid, "sign", "/data/local/tmp/something.txt");
+
+        // Check existence of the output signature - should succeed
+        android.run("test -f /data/local/tmp/something.txt.signature");
+    }
+
     private void startVm() throws Exception {
         final String apkName = "CompOSPayloadApp.apk";
         final String packageName = "com.android.compos.payload";
