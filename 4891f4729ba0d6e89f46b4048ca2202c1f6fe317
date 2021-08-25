@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00a4c953_30d6a922",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-08-25T14:30:46Z",
+      "side": 1,
+      "message": "Looking.  It\u0027s testOdrefresh, which this change doesn\u0027t touch.  The other tests passed.",
+      "parentUuid": "9d6c1236_93c47dcf",
+      "revId": "4891f4729ba0d6e89f46b4048ca2202c1f6fe317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98aa1678_b8f3e053",
         "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2021-08-25T09:06:39Z",
       "side": 1,
       "message": "Bikeshed: setSigningKey ?",
+      "range": {
+        "startLine": 31,
+        "startChar": 9,
+        "endLine": 31,
+        "endChar": 29
+      },
+      "revId": "4891f4729ba0d6e89f46b4048ca2202c1f6fe317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2125b31d_7d8ed615",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-08-25T14:30:46Z",
+      "side": 1,
+      "message": "I\u0027d prefer initialize or init.  With \"set\", it feels like the API can be called multiple times to override the previous value.",
+      "parentUuid": "98aa1678_b8f3e053",
       "range": {
         "startLine": 31,
         "startChar": 9,
@@ -88,6 +130,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37783ef0_5c3c8525",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-08-25T14:30:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "566c7d0e_e14e7e8a",
+      "range": {
+        "startLine": 62,
+        "startChar": 12,
+        "endLine": 62,
+        "endChar": 46
+      },
+      "revId": "4891f4729ba0d6e89f46b4048ca2202c1f6fe317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a68cf2b_539584a9",
@@ -101,6 +167,30 @@
       "writtenOn": "2021-08-25T09:06:39Z",
       "side": 1,
       "message": "Document what sort of error is returned on failure?\nNot sure we need it tbh. Especially since we\u0027re going to delete this function.",
+      "range": {
+        "startLine": 65,
+        "startChar": 49,
+        "endLine": 65,
+        "endChar": 77
+      },
+      "revId": "4891f4729ba0d6e89f46b4048ca2202c1f6fe317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e06783a2_3ee8346b",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-08-25T14:30:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a68cf2b_539584a9",
       "range": {
         "startLine": 65,
         "startChar": 49,
@@ -136,6 +226,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "36213f2b_87c1d380",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-08-25T14:30:46Z",
+      "side": 1,
+      "message": "Couldn\u0027t we always initialize the VM / both VM instances?  Do you suggest to change the `sign` API back to take a key blob?  If we expect the key initialization to happen in the VM in the future, it seems better to not expose the key blob from the API.  WDYT?",
+      "parentUuid": "662c192e_8b989300",
+      "range": {
+        "startLine": 503,
+        "startChar": 40,
+        "endLine": 503,
+        "endChar": 50
+      },
+      "revId": "4891f4729ba0d6e89f46b4048ca2202c1f6fe317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a80976f6_09f07f48",
         "filename": "compos/src/compsvc.rs",
         "patchSetId": 1
@@ -147,6 +261,30 @@
       "writtenOn": "2021-08-25T09:06:39Z",
       "side": 1,
       "message": "Just for my education: why is \u0026* needed here?",
+      "range": {
+        "startLine": 107,
+        "startChar": 18,
+        "endLine": 107,
+        "endChar": 20
+      },
+      "revId": "4891f4729ba0d6e89f46b4048ca2202c1f6fe317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bf4503b_29e3c0c7",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-08-25T14:30:46Z",
+      "side": 1,
+      "message": "`unwrap` does not return the real object, so it needs to be dereferenced to `Vec\u003cu8\u003e` in this case.  Since `Vec\u003cu8\u003e` doesn\u0027t implement `Copy` (and we want to avoid a copy), we use the key as a reference.",
+      "parentUuid": "a80976f6_09f07f48",
       "range": {
         "startLine": 107,
         "startChar": 18,
