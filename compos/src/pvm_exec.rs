@@ -27,7 +27,7 @@
 use anyhow::{bail, Context, Result};
 use binder::unstable_api::{new_spibinder, AIBinder};
 use binder::FromIBinder;
-use log::{error, warn};
+use log::{debug, error, warn};
 use minijail::Minijail;
 use nix::fcntl::{fcntl, FcntlArg::F_GETFD};
 use nix::sys::stat::fstat;
@@ -51,15 +51,25 @@ fn get_local_service() -> Result<Strong<dyn ICompOsService>> {
 }
 
 fn get_rpc_binder(cid: u32) -> Result<Strong<dyn ICompOsService>> {
+    let mut ptr =
+        unsafe { binder_rpc_unstable_bindgen::RpcClient(cid, VSOCK_PORT) } as *mut AIBinder;
+    for _ in 0..10 {
+        if !ptr.is_null() {
+            break;
+        }
+        std::thread::sleep(std::time::Duration::from_millis(500));
+        ptr = unsafe { binder_rpc_unstable_bindgen::RpcClient(cid, VSOCK_PORT) } as *mut AIBinder;
+    }
+    if ptr.is_null() {
+        bail!("Can't connect to the server");
+    }
     // SAFETY: AIBinder returned by RpcClient has correct reference count, and the ownership can be
     // safely taken by new_spibinder.
-    let ibinder = unsafe {
-        new_spibinder(binder_rpc_unstable_bindgen::RpcClient(cid, VSOCK_PORT) as *mut AIBinder)
-    };
+    let ibinder = unsafe { new_spibinder(ptr) };
     if let Some(ibinder) = ibinder {
         <dyn ICompOsService>::try_from(ibinder).context("Cannot connect to RPC service")
     } else {
-        bail!("Invalid raw AIBinder")
+        bail!("Invalid raw AIBinder");
     }
 }
 
@@ -187,14 +197,22 @@ fn main() -> Result<()> {
 
     // 3. Send the command line args to the remote to execute.
     let service = if let Some(cid) = cid { get_rpc_binder(cid) } else { get_local_service() }?;
-    let exit_code = service.execute(&args, &metadata).context("Binder call failed")?;
+    let result = service.compile(&args, &metadata).context("Binder call failed")?;
+
+    // TODO: store/use the signature
+    debug!(
+        "Signature length: oat {}, vdex {}, image {}",
+        result.oatSignature.len(),
+        result.vdexSignature.len(),
+        result.imageSignature.len()
+    );
 
     // Be explicit about the lifetime, which should last at least until the task is finished.
     drop(fd_server_lifetime);
 
-    if exit_code > 0 {
-        error!("remote execution failed with exit code {}", exit_code);
-        exit(exit_code as i32);
+    if result.exitCode > 0 {
+        error!("remote execution failed with exit code {}", result.exitCode);
+        exit(result.exitCode as i32);
     }
     Ok(())
 }
