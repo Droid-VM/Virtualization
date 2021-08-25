@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64fe2a43_3d400612",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-08-25T15:04:54Z",
+      "side": 1,
+      "message": "Eurgh.\n\nIt\u0027s annoying that the nested virtualization costs so much. I suppose we could move some of the tests to postsubmit only, but that would also be painful.",
+      "parentUuid": "722f9b22_811261c4",
+      "revId": "4891f4729ba0d6e89f46b4048ca2202c1f6fe317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98aa1678_b8f3e053",
@@ -304,6 +322,30 @@
       "side": 1,
       "message": "Happy to make the change, but just want to confirm.  Isn\u0027t compos_key_cmd just for development?  Wouldn\u0027t it be easier to make the cmdline closer to the actual API?  Initializing the key in the signing operation is fine here, but it wouldn\u0027t be what we\u0027ll do in composd, right?",
       "parentUuid": "a50e3c56_e1d921e3",
+      "range": {
+        "startLine": 503,
+        "startChar": 40,
+        "endLine": 503,
+        "endChar": 50
+      },
+      "revId": "4891f4729ba0d6e89f46b4048ca2202c1f6fe317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa78e9cb_a5947a1d",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-08-25T15:04:54Z",
+      "side": 1,
+      "message": "Yes, but it is very useful for manual testing. \n\nComposd will need to call initialize, and then some time later will start doing signing, so it\u0027s not entirely dissimilar. But I agree the signing code will just assume the initialization has happened. And of course the sign() function will need to be deleted in due course.",
+      "parentUuid": "304c8805_a78bdb4f",
       "range": {
         "startLine": 503,
         "startChar": 40,
