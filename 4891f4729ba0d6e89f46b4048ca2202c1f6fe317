@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69c3d008_709d0fd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-08-25T15:20:19Z",
+      "side": 1,
+      "message": "It is.  I had some discussion with Eng Prod.  There are some possible longer term solutions. The most scalable solution requires significant cross functional work...",
+      "parentUuid": "64fe2a43_3d400612",
+      "revId": "4891f4729ba0d6e89f46b4048ca2202c1f6fe317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98aa1678_b8f3e053",
@@ -346,6 +364,30 @@
       "side": 1,
       "message": "Yes, but it is very useful for manual testing. \n\nComposd will need to call initialize, and then some time later will start doing signing, so it\u0027s not entirely dissimilar. But I agree the signing code will just assume the initialization has happened. And of course the sign() function will need to be deleted in due course.",
       "parentUuid": "304c8805_a78bdb4f",
+      "range": {
+        "startLine": 503,
+        "startChar": 40,
+        "endLine": 503,
+        "endChar": 50
+      },
+      "revId": "4891f4729ba0d6e89f46b4048ca2202c1f6fe317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a192af1_4830e420",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-08-25T15:20:19Z",
+      "side": 1,
+      "message": "Yes that makes sense.  Done!",
+      "parentUuid": "fa78e9cb_a5947a1d",
       "range": {
         "startLine": 503,
         "startChar": 40,
