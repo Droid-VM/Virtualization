@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b99576a_cff8db04",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-25T00:37:20Z",
+      "side": 1,
+      "message": "When we pass null for the type `@nullable ParcelFileDescriptor`, it\u0027s simply `0\u0027 just like other nullable parcelables. In the C++, `@nullable ParcelFileDescriptor` is mapped to `std::optional\u003cParcelFileDescriptor\u003e` and the value `0` is read as std::nullopt.",
+      "parentUuid": "d040fb08_2ac78509",
+      "range": {
+        "startLine": 103,
+        "startChar": 28,
+        "endLine": 103,
+        "endChar": 62
+      },
+      "revId": "7f61fe7486384fc2cd59032691e7f85f2041f2d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a54a36b9_f47c7ee6",
