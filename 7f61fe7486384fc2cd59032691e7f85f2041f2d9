@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3602c6ac_b64f0218",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-08-25T09:36:19Z",
+      "side": 1,
+      "message": "It doesn\u0027t seem to be mapped to std::optional - the generated signature is right here and just passes a ScopedFileDescriptor.\nThe generated code (in out/soong/.intermediates/packages/modules/Virtualization/virtualizationservice/aidl/android.system.virtualizationservice-ndk-source/gen/android/system/virtualizationservice/) uses AParcel_readRequiredParcelFileDescriptor / AParcel_writeRequiredParcelFileDescriptor which explicitly don\u0027t allow -1, and -1 seems to be the value used to signal null. (See e.g. http://cs/android/frameworks/native/libs/binder/ndk/include_cpp/android/binder_parcel_utils.h?l\u003d242)\n\nThe documentation at https://source.android.com/devices/architecture/aidl/aidl-backends#nullability isn\u0027t very helpful unfortunately.\n\nI\u0027m not convinced @nullable is actually supported here.",
+      "parentUuid": "2b99576a_cff8db04",
+      "range": {
+        "startLine": 103,
+        "startChar": 28,
+        "endLine": 103,
+        "endChar": 62
+      },
+      "revId": "7f61fe7486384fc2cd59032691e7f85f2041f2d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a54a36b9_f47c7ee6",
         "filename": "demo/java/com/android/microdroid/demo/MainActivity.java",
         "patchSetId": 8
