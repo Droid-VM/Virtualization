@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98aa1678_b8f3e053",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-08-25T09:06:39Z",
+      "side": 1,
+      "message": "Bikeshed: setSigningKey ?",
+      "range": {
+        "startLine": 31,
+        "startChar": 9,
+        "endLine": 31,
+        "endChar": 29
+      },
+      "revId": "4891f4729ba0d6e89f46b4048ca2202c1f6fe317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2f3820b_39ba0b8d",
         "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
         "patchSetId": 1
@@ -24,6 +47,99 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "566c7d0e_e14e7e8a",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-08-25T09:06:39Z",
+      "side": 1,
+      "message": "I suggest leaving this as-is. The code using this won\u0027t be doing any signing, so it can be treated as orthogonal - \"is this key/blob valid?\" vs \"use this key\".",
+      "parentUuid": "a2f3820b_39ba0b8d",
+      "range": {
+        "startLine": 62,
+        "startChar": 12,
+        "endLine": 62,
+        "endChar": 46
+      },
+      "revId": "4891f4729ba0d6e89f46b4048ca2202c1f6fe317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a68cf2b_539584a9",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-08-25T09:06:39Z",
+      "side": 1,
+      "message": "Document what sort of error is returned on failure?\nNot sure we need it tbh. Especially since we\u0027re going to delete this function.",
+      "range": {
+        "startLine": 65,
+        "startChar": 49,
+        "endLine": 65,
+        "endChar": 77
+      },
+      "revId": "4891f4729ba0d6e89f46b4048ca2202c1f6fe317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "662c192e_8b989300",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-08-25T09:06:39Z",
+      "side": 1,
+      "message": "I don\u0027t think this works. In the case where we\u0027re starting a VM, which is the fun case, the VM will be shut down again after running initialize, and so sign will never work.\nInstead can we just make the initialize call inside sign() ?\n(It already does one-off initialization before calling signFile one or more times.)",
+      "range": {
+        "startLine": 503,
+        "startChar": 40,
+        "endLine": 503,
+        "endChar": 50
+      },
+      "revId": "4891f4729ba0d6e89f46b4048ca2202c1f6fe317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a80976f6_09f07f48",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-08-25T09:06:39Z",
+      "side": 1,
+      "message": "Just for my education: why is \u0026* needed here?",
+      "range": {
+        "startLine": 107,
+        "startChar": 18,
+        "endLine": 107,
+        "endChar": 20
+      },
+      "revId": "4891f4729ba0d6e89f46b4048ca2202c1f6fe317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "da6861ac_b2159b75",
@@ -37,6 +153,30 @@
       "writtenOn": "2021-08-25T00:31:30Z",
       "side": 1,
       "message": "I can probably figure out a way to verify the signature, but I\u0027m not sure how long this test will live.",
+      "range": {
+        "startLine": 149,
+        "startChar": 11,
+        "endLine": 149,
+        "endChar": 26
+      },
+      "revId": "4891f4729ba0d6e89f46b4048ca2202c1f6fe317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "beddffb4_1d4e4c6e",
+        "filename": "compos/tests/java/android/compos/test/ComposKeyTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-08-25T09:06:39Z",
+      "side": 1,
+      "message": "Yeah. Eventually we should generate compiled artifacts \u0026 check that odsign accepts them, which is a much stronger test.",
+      "parentUuid": "da6861ac_b2159b75",
       "range": {
         "startLine": 149,
         "startChar": 11,
