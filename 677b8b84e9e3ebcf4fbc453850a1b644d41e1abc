@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e8e9b9f_e0bdc1bc",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-25T04:21:56Z",
+      "side": 1,
+      "message": "Sorry, I missed this before. Do we use a single byte for version? In practice, we won\u0027t need more than a single byte for versions, but Id\u0027 like to give it a more allowance. At least two bytes, I guess.\n\nI\u0027m fine if you deal with this in a follow-up CL.",
+      "range": {
+        "startLine": 346,
+        "startChar": 19,
+        "endLine": 346,
+        "endChar": 23
+      },
+      "revId": "677b8b84e9e3ebcf4fbc453850a1b644d41e1abc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
