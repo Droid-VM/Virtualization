@@ -144,6 +144,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a33dcb1c_e4034fff",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-08-25T09:50:08Z",
+      "side": 1,
+      "message": "I was indeed looking at the wrong generated output - sorry.\n\nThe latest version is using AParcel_readNullableParcelFileDescriptor (etc), and does indeed map null to an fd of -1. So we\u0027re good.",
+      "parentUuid": "da698d36_c96ca503",
+      "range": {
+        "startLine": 103,
+        "startChar": 28,
+        "endLine": 103,
+        "endChar": 62
+      },
+      "revId": "7f61fe7486384fc2cd59032691e7f85f2041f2d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a54a36b9_f47c7ee6",
