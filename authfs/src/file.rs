@@ -7,6 +7,9 @@ pub use remote_file::{RemoteFileEditor, RemoteFileReader, RemoteMerkleTreeReader
 use binder::unstable_api::{new_spibinder, AIBinder};
 use binder::FromIBinder;
 use std::io;
+use std::ptr;
+use std::thread::sleep;
+use std::time::Duration;
 
 use crate::common::CHUNK_SIZE;
 use authfs_aidl_interface::aidl::com::android::virt::fs::IVirtFdService::IVirtFdService;
@@ -17,6 +20,9 @@ pub type VirtFdService = Strong<dyn IVirtFdService>;
 pub type ChunkBuffer = [u8; CHUNK_SIZE as usize];
 
 pub const RPC_SERVICE_PORT: u32 = 3264;
+
+const RETRY_CONNECTION_COUNT: usize = 10;
+const RETRY_CONNECTION_MS: Duration = Duration::from_millis(500);
 
 fn get_local_binder() -> io::Result<VirtFdService> {
     let service_name = "authfs_fd_server";
@@ -29,11 +35,27 @@ fn get_local_binder() -> io::Result<VirtFdService> {
 }
 
 fn get_rpc_binder(cid: u32) -> io::Result<VirtFdService> {
+    // Retry because 1) there may be a race condition between the time the server starts and the
+    // client connects, and 2) unexpected connection reset (b/197162885). In any case, we will
+    // eventually remove these code by moving the connection out of authfs, and only pass a
+    // connected FD to authfs.
+    let mut ptr = ptr::null_mut();
+    for _ in 0..RETRY_CONNECTION_COUNT {
+        // SAFETY: RpcClient returns an AIBinder (or null), and should not have any side effect to
+        // the Rust context.
+        ptr = unsafe { binder_rpc_unstable_bindgen::RpcClient(cid, RPC_SERVICE_PORT) }
+            as *mut AIBinder;
+        if !ptr.is_null() {
+            break;
+        }
+        sleep(RETRY_CONNECTION_MS);
+    }
+    if ptr.is_null() {
+        return Err(io::Error::new(io::ErrorKind::InvalidInput, "Can't connect to the server"));
+    }
     // SAFETY: AIBinder returned by RpcClient has correct reference count, and the ownership can be
     // safely taken by new_spibinder.
-    let ibinder = unsafe {
-        new_spibinder(binder_rpc_unstable_bindgen::RpcClient(cid, RPC_SERVICE_PORT) as *mut AIBinder)
-    };
+    let ibinder = unsafe { new_spibinder(ptr) };
     if let Some(ibinder) = ibinder {
         Ok(<dyn IVirtFdService>::try_from(ibinder).map_err(|e| {
             io::Error::new(
