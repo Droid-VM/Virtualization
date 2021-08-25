@@ -126,10 +126,56 @@ public class MainActivity extends AppCompatActivity {
             mStatus.setValue(VirtualMachine.Status.DELETED);
         }
 
+        private static void postOutput(MutableLiveData<String> output, FileInputStream stream)
+                throws IOException {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                output.postValue(line);
+            }
+        }
+
         /** Runs a VM */
         public void run(boolean debug) {
             // Create a VM and run it.
             // TODO(jiyong): remove the call to idsigPath
+
+            VirtualMachineCallback callback =
+                    new VirtualMachineCallback() {
+                        @Override
+                        public void onPayloadStarted(
+                                VirtualMachine vm, ParcelFileDescriptor stream) {
+                            if (stream == null) {
+                                mPayloadOutput.postValue("(no output available)");
+                                return;
+                            }
+
+                            ExecutorService executorService = Executors.newFixedThreadPool(1);
+                            executorService.execute(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                postOutput(
+                                                        mPayloadOutput,
+                                                        new FileInputStream(
+                                                                stream.getFilleDescriptor()));
+                                            } catch (IOException e) {
+                                                Log.e(
+                                                        TAG,
+                                                        "IOException while reading payload: "
+                                                                + e.getMessage());
+                                            }
+                                        }
+                                    });
+                        }
+
+                        @Override
+                        public void onDied(VirtualMachine vm) {
+                            mStatus.postValue(VirtualMachine.Status.STOPPED);
+                        }
+                    };
+
             try {
                 VirtualMachineConfig.Builder builder =
                         new VirtualMachineConfig.Builder(getApplication(), "assets/vm_config.json")
@@ -138,36 +184,7 @@ public class MainActivity extends AppCompatActivity {
                 VirtualMachineManager vmm = VirtualMachineManager.getInstance(getApplication());
                 mVirtualMachine = vmm.getOrCreate("demo_vm", config);
                 mVirtualMachine.run();
-                mVirtualMachine.setCallback(
-                        new VirtualMachineCallback() {
-                            @Override
-                            public void onPayloadStarted(
-                                    VirtualMachine vm, ParcelFileDescriptor stream) {
-                                if (stream == null) {
-                                    mPayloadOutput.postValue("(no output available)");
-                                    return;
-                                }
-                                try {
-                                    BufferedReader reader =
-                                            new BufferedReader(
-                                                    new InputStreamReader(
-                                                            new FileInputStream(
-                                                                    stream.getFileDescriptor())));
-                                    String line;
-                                    while ((line = reader.readLine()) != null) {
-                                        mPayloadOutput.postValue(line);
-                                    }
-                                } catch (IOException e) {
-                                    Log.e(TAG, "IOException while reading payload: "
-                                            + e.getMessage());
-                                }
-                            }
-
-                            @Override
-                            public void onDied(VirtualMachine vm) {
-                                mStatus.postValue(VirtualMachine.Status.STOPPED);
-                            }
-                        });
+                mVirtualMachine.setCallback(callback);
                 mStatus.postValue(mVirtualMachine.getStatus());
             } catch (VirtualMachineException e) {
                 throw new RuntimeException(e);
@@ -180,16 +197,15 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             try {
-                                BufferedReader reader =
-                                        new BufferedReader(
-                                                new InputStreamReader(
-                                                        mVirtualMachine.getConsoleOutputStream()));
-                                while (true) {
-                                    String line = reader.readLine();
-                                    mConsoleOutput.postValue(line);
-                                }
+                                postOutput(
+                                        mConsoleOutput,
+                                        new InputStreamReader(
+                                                mVirtualMachine.getConsoleOutputStream()));
                             } catch (IOException | VirtualMachineException e) {
-                                // Consume
+                                Log.e(
+                                        TAG,
+                                        "Exception while posting console output: "
+                                                + e.getMessage());
                             }
                         }
                     });
