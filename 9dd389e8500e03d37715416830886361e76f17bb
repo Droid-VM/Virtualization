@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5eb73ee_d1df214b",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-08-25T10:21:06Z",
+      "side": 1,
+      "message": "Rather than having a catch-all case here, why not just leave it out, so if someone tries to add a new partition type without adding support for it is caught at compile-time rather than only at runtime?",
+      "revId": "9dd389e8500e03d37715416830886361e76f17bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
