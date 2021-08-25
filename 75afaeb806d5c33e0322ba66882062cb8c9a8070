@@ -46,6 +46,30 @@
       },
       "revId": "75afaeb806d5c33e0322ba66882062cb8c9a8070",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ee07b13_d7e623ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-25T07:42:28Z",
+      "side": 1,
+      "message": "On a second thought, I think this is still needed because oneway calls are serialized which means, if this call doesn\u0027t finish, other oneway calls won\u0027t have a chance to get executed (though it wouldn\u0027t block the caller anyway).",
+      "parentUuid": "92edbf09_250f3db5",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 55
+      },
+      "revId": "75afaeb806d5c33e0322ba66882062cb8c9a8070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
