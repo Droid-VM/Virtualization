@@ -16,6 +16,29 @@
       "message": "PTAL.  Turns out I still need a compos_key_cmd command to initialize the key, until we have composd.",
       "revId": "9ed2718df993f4b7ad7640ffe8e3b3f9bc8bb559",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96a4dbb7_78b66616",
+        "filename": "compos/aidl/com/android/compos/CompilationResult.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-08-26T09:50:59Z",
+      "side": 1,
+      "message": "The (existing) signature file format, and the odsign logic, need the raw digest as well as the signature on it.\nCan we return both here, to make that easier to generate?",
+      "range": {
+        "startLine": 25,
+        "startChar": 11,
+        "endLine": 25,
+        "endChar": 23
+      },
+      "revId": "9ed2718df993f4b7ad7640ffe8e3b3f9bc8bb559",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
