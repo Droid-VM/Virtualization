@@ -39,6 +39,30 @@
       },
       "revId": "9ed2718df993f4b7ad7640ffe8e3b3f9bc8bb559",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf95ee91_1d70b1fb",
+        "filename": "compos/aidl/com/android/compos/CompilationResult.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-08-26T14:48:50Z",
+      "side": 1,
+      "message": "Yes, we definitely should.  Though I suspect we need to adjust the interface later to better align with ART services, so I\u0027d add the digests once I finalize the design there.  I\u0027ve written the problem in the \"dexopt frontend\" doc, but I realized I missed something.  Will ping you in probably a day or two for review.",
+      "parentUuid": "96a4dbb7_78b66616",
+      "range": {
+        "startLine": 25,
+        "startChar": 11,
+        "endLine": 25,
+        "endChar": 23
+      },
+      "revId": "9ed2718df993f4b7ad7640ffe8e3b3f9bc8bb559",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
