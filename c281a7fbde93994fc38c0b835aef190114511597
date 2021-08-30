@@ -45,6 +45,30 @@
       },
       "revId": "c281a7fbde93994fc38c0b835aef190114511597",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfbf22b5_a1d9ad49",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-08-30T18:55:19Z",
+      "side": 1,
+      "message": "BTW, there isn\u0027t really zero copy either way. For both Write and ZeroCopyWriter, the DevFuseWriter impl needs to keep a buffer in memory (to store FUSE header, etc.), then flushes the whole data to /dev/fuse at once.  Real zero copy might have to be done with the new FUSE_PASSTHROUGH (not sure).",
+      "parentUuid": "98bbebdf_bfbf6e5b",
+      "range": {
+        "startLine": 318,
+        "startChar": 16,
+        "endLine": 327,
+        "endChar": 69
+      },
+      "revId": "c281a7fbde93994fc38c0b835aef190114511597",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
