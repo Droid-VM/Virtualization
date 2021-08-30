@@ -176,6 +176,11 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         @Override
+                        public void onPayloadFinished(VirtualMachine vm, int exitCode) {
+                            Log.i(TAG, String.format("Payload finished. exit code: %d", exitCode));
+                        }
+
+                        @Override
                         public void onDied(VirtualMachine vm) {
                             mService.shutdownNow();
                             mStatus.postValue(VirtualMachine.Status.STOPPED);
