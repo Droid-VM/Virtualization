@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dbfbee5_ef266f97",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-30T01:40:54Z",
+      "side": 1,
+      "message": "unnecessary.",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 39
+      },
+      "revId": "4b535374648e0fb28d0510b63fcbc5071f44bf5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aed7f5f8_66424b49",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-30T01:40:54Z",
+      "side": 1,
+      "message": "Oh, this means the size of both disk header and partition header? How about having a separate const even if they have the same value for now.",
+      "range": {
+        "startLine": 113,
+        "startChar": 52,
+        "endLine": 113,
+        "endChar": 63
+      },
+      "revId": "4b535374648e0fb28d0510b63fcbc5071f44bf5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d561b6ea_ad87f393",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-30T01:40:54Z",
+      "side": 1,
+      "message": "nit: Can we turn the result of open_in_place() into what we want to return?",
+      "range": {
+        "startLine": 129,
+        "startChar": 28,
+        "endLine": 129,
+        "endChar": 77
+      },
+      "revId": "4b535374648e0fb28d0510b63fcbc5071f44bf5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5c2ebf9_c6814ed0",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-30T01:40:54Z",
+      "side": 1,
+      "message": "I see there\u0027s a few references to AES_256_GCM. Can we have a variable for the algorithm and use it instead?",
+      "range": {
+        "startLine": 143,
+        "startChar": 41,
+        "endLine": 143,
+        "endChar": 52
+      },
+      "revId": "4b535374648e0fb28d0510b63fcbc5071f44bf5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8017404f_d2ae741f",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-30T01:40:54Z",
+      "side": 1,
+      "message": "write_header_at() for the symmetry.",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 63
+      },
+      "revId": "4b535374648e0fb28d0510b63fcbc5071f44bf5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3de29570_857e11a7",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-30T01:40:54Z",
+      "side": 1,
+      "message": "It sounds likes this only read 512 bytes. But code says it reads [UUID + u64(LE)] from the location(offset). Can you clarify the comment?\n\nPartitionHeader struct consists of \"uuid + offset + size\" while its serialization consists of \"uuid + size\". How about making it 1:1? It would be easier to read if serialization resembles the struct itself. The parameter \u0027header_offset\u0027 can be verified against the read value of offset.\n\nAdditionally, I\u0027d like to put \"PartitionHeader\" marker as well (just like ZIP file\u0027s local header) so that we can be sure if we\u0027re reading PartitionHeader, not a random block of memory.",
+      "range": {
+        "startLine": 176,
+        "startChar": 8,
+        "endLine": 176,
+        "endChar": 21
+      },
+      "revId": "4b535374648e0fb28d0510b63fcbc5071f44bf5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e3cd0d5_7481d0a4",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-30T01:40:54Z",
+      "side": 1,
+      "message": "This works only when unit is the power of 2. Can we add assert?",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 32
+      },
+      "revId": "4b535374648e0fb28d0510b63fcbc5071f44bf5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "089a820c_0126a68d",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-30T01:40:54Z",
+      "side": 1,
+      "message": "Result\u003c\u003e? It sounds like it may fail.",
+      "range": {
+        "startLine": 250,
+        "startChar": 16,
+        "endLine": 250,
+        "endChar": 25
+      },
+      "revId": "4b535374648e0fb28d0510b63fcbc5071f44bf5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9e3f639_a11e979a",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-30T01:40:54Z",
+      "side": 1,
+      "message": "It would be nice if the comment points to some references to understand what this does.",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 32
+      },
+      "revId": "4b535374648e0fb28d0510b63fcbc5071f44bf5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
