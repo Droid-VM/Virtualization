@@ -109,6 +109,10 @@ public class VirtualMachine {
     private @Nullable ParcelFileDescriptor mConsoleReader;
     private @Nullable ParcelFileDescriptor mConsoleWriter;
 
+    static {
+        System.loadLibrary("virtualmachine_jni");
+    }
+
     private VirtualMachine(
             @NonNull Context context, @NonNull String name, @NonNull VirtualMachineConfig config) {
         mPackageName = context.getPackageName();
@@ -428,6 +432,25 @@ public class VirtualMachine {
         mConfig = newConfig;
 
         return oldConfig;
+    }
+
+    private static native IBinder connectToVsockBinderServer(int cid, int port);
+
+    /**
+     * Connects to a VM's RPC server via vsock, and returns a root IBinder object. Guest VMs are
+     * expected to set up vsock servers in their payload. After the host app receives
+     * onPayloadFinished callback, the host app can use this method to establish an RPC session to
+     * the guest VMs.
+     */
+    public IBinder connectToBinderServer(int port) throws VirtualMachineException {
+        if (getStatus() != Status.RUNNING) {
+            throw new VirtualMachineException("VM is not running");
+        }
+        try {
+            return connectToVsockBinderServer(mVirtualMachine.getCid(), port);
+        } catch (RemoteException e) {
+            throw new VirtualMachineException(e);
+        }
     }
 
     @Override
