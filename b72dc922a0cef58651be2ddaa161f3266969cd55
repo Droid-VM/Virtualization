@@ -70,6 +70,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b61a61f9_d12e779e",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-31T13:43:46Z",
+      "side": 1,
+      "message": "It\u0027s on the caller (microdroid_manager in this case) to keep the data size the same. This can be achieved by reusing the buffer that read_microdroid_data returned.\n\nSo, failing to satisfy this condition is a programming error, not an error caused by external events (e.g. attack, data corruption, etc.) which we should have detected earlier while reading (and decrypting and authenticating) the data.",
+      "parentUuid": "4205ca52_67d79ab7",
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa9fdd66_616d7ffc",
@@ -83,6 +101,30 @@
       "writtenOn": "2021-08-31T11:00:54Z",
       "side": 1,
       "message": "If we ever write different data then we\u0027ll have reused the same IV-key pair which can be the basis for attacks on the crypto. If we\u0027re sure this will never happen, we should document how we know that. Otherwise, we should be storing a nonce with the encrypted data (e.g. [1]) that was generated at write time. It could be randomly generated (e.g. [2]) or we might be able to define a tamper-proof sequence at a later stage.\n\n[1] -- http://cs/android/system/keymaster/key_blob_utils/auth_encrypted_key_blob.cpp?l\u003d221\u0026rcl\u003d77e046ef83988b46bbcb84194c08df69c680b2c6\n[2] -- http://cs/android/system/keymaster/key_blob_utils/auth_encrypted_key_blob.cpp?l\u003d40\u0026rcl\u003d77e046ef83988b46bbcb84194c08df69c680b2c6",
+      "range": {
+        "startLine": 168,
+        "startChar": 75,
+        "endLine": 168,
+        "endChar": 90
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf625103_42869179",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-31T13:43:46Z",
+      "side": 1,
+      "message": "Good point. The seed for nonce is now stored when writing the content and read before decrypting it. The seed is randomized.",
+      "parentUuid": "fa9fdd66_616d7ffc",
       "range": {
         "startLine": 168,
         "startChar": 75,
@@ -110,6 +152,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3272795d_7dbb03e7",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-31T13:43:46Z",
+      "side": 1,
+      "message": "Added a call to flush()",
+      "parentUuid": "636c34f2_da0dd07c",
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95d23cdc_9c398d0c",
@@ -123,6 +183,30 @@
       "writtenOn": "2021-08-31T11:00:54Z",
       "side": 1,
       "message": "This means there\u0027s a standard header for each partition, which is a good thing but is it well defined what is standard and what is partitions specific? Or would that be left to what\u0027s inside the partition?\n\nIf the latter, then I think we want a version somewhere e.g. if microdroid wanted to change its algorithm (e.g. just sign without encrypting) or similar. That could be inside the partition of an extra field in this header.",
+      "range": {
+        "startLine": 219,
+        "startChar": 30,
+        "endLine": 219,
+        "endChar": 44
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6d19c09_be4c1ddf",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-31T13:43:46Z",
+      "side": 1,
+      "message": "The format of the header is not specific to each partition. It\u0027s just (UUID, size). The version number in the disk header defines the format of all partition headers on the disk.\n\nPartition-specific format is limited to the payload. The data format shall define its own version field. That version shall not be shown in the partition header, because that information is useless to other users of the instance disk.\n\nA change like stopping the encryption could (and I think should) be handled by migrating to (or forking) another UUID. There really is no ordering (or compatible conversions) between the different formats. They are just completely different formats that need to be handled separately.",
+      "parentUuid": "95d23cdc_9c398d0c",
       "range": {
         "startLine": 219,
         "startChar": 30,
@@ -156,6 +240,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f25ca60_0b28ac62",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-31T13:43:46Z",
+      "side": 1,
+      "message": "I never thought about this, but you are right. Added a check in the function which fails the invocation when the result is smaller than the input.",
+      "parentUuid": "7a0f2576_76548298",
+      "range": {
+        "startLine": 228,
+        "startChar": 31,
+        "endLine": 228,
+        "endChar": 48
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d77c7ced_9acdd8a4",
@@ -179,6 +287,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "928c91c5_3b164fbb",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-31T13:43:46Z",
+      "side": 1,
+      "message": "I intended to address this in a follow-up change, but let do it here.\n\nNonce is now a 64-bit counter (which is expanded to 96-bits) which is initialized from a random number. Overflow is detected by having another variable for counting the number of advances.",
+      "parentUuid": "d77c7ced_9acdd8a4",
+      "range": {
+        "startLine": 261,
+        "startChar": 41,
+        "endLine": 261,
+        "endChar": 51
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0d4d074_bbc0dc5b",
@@ -192,6 +324,30 @@
       "writtenOn": "2021-08-31T11:00:54Z",
       "side": 1,
       "message": "Is anything making sure the secrets/keys of early-microdroid are wiped from memory before we hand over to the payload?",
+      "range": {
+        "startLine": 267,
+        "startChar": 16,
+        "endLine": 267,
+        "endChar": 24
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f3dcb9c_ebd8ab95",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-31T13:43:46Z",
+      "side": 1,
+      "message": "Well.. careful programming? :)\n\nI think we could use https://doc.rust-lang.org/std/mem/struct.ManuallyDrop.html so that we can explictly zero it out when it goes out of scope, or use something like https://docs.rs/zeroize/1.4.1/zeroize/ if we seek for convenience.",
+      "parentUuid": "a0d4d074_bbc0dc5b",
       "range": {
         "startLine": 267,
         "startChar": 16,
@@ -227,6 +383,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b0a20ac5_169553c7",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-31T13:43:46Z",
+      "side": 1,
+      "message": "You are right. I did it in the opposite way. Fixed.",
+      "parentUuid": "c98b0c0c_19941cb2",
+      "range": {
+        "startLine": 276,
+        "startChar": 56,
+        "endLine": 276,
+        "endChar": 74
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3752d369_0fa9f1af",
         "filename": "microdroid_manager/src/instance.rs",
         "patchSetId": 5
@@ -238,6 +418,30 @@
       "writtenOn": "2021-08-31T11:00:54Z",
       "side": 1,
       "message": "There\u0027s really not a wrapper for extract-expand?! :(",
+      "range": {
+        "startLine": 284,
+        "startChar": 18,
+        "endLine": 284,
+        "endChar": 24
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "596c5616_0a74d44e",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-31T13:43:46Z",
+      "side": 1,
+      "message": "It looks like some old versions of ring had it [1], but it\u0027s not there anymore.\n\n[1] https://docs.rs/ring/0.14.6/ring/hkdf/fn.extract_and_expand.html",
+      "parentUuid": "3752d369_0fa9f1af",
       "range": {
         "startLine": 284,
         "startChar": 18,
