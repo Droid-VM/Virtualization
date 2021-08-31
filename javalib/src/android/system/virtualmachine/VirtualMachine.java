@@ -41,6 +41,7 @@ import java.io.InputStream;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.util.Optional;
+import java.util.concurrent.Executors;
 
 /**
  * A handle to the virtual machine. The virtual machine is local to the app which created the
@@ -108,6 +109,10 @@ public class VirtualMachine {
 
     private @Nullable ParcelFileDescriptor mConsoleReader;
     private @Nullable ParcelFileDescriptor mConsoleWriter;
+
+    static {
+        System.loadLibrary("virtualmachine_jni");
+    }
 
     private VirtualMachine(
             @NonNull Context context, @NonNull String name, @NonNull VirtualMachineConfig config) {
@@ -428,6 +433,45 @@ public class VirtualMachine {
         mConfig = newConfig;
 
         return oldConfig;
+    }
+
+    private native IBinder nativeConnectToVsockServer(int port);
+
+    /**
+     * Connects to a VM's RPC server via vsock, and returns a root IBinder object. Guest VMs are
+     * expected to set up vsock servers in their payload. After the host app receives onPayloadReady
+     * callback, the host app can use this method to establish an RPC session to the guest VMs.
+     *
+     * <p>If the connection succeeds, the root IBinder object will be returned via {@link
+     * VirtualMachineCallback.onVsockServerReady()}. If the connection fails, {@link
+     * VirtualMachineCallback.onVsockServerConnectionFailed()} will be called.
+     */
+    public void connectToVsockServer(int port) throws VirtualMachineException {
+        if (getStatus() != Status.RUNNING) {
+            throw new VirtualMachineException("VM is not running");
+        }
+        Executors.newFixedThreadPool(1)
+                .execute(
+                        new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    IBinder binder = nativeConnectToVsockServer(port);
+                                    final VirtualMachineCallback cb = mCallback;
+                                    if (cb == null) {
+                                        return;
+                                    }
+                                    cb.onVsockServerReady(VirtualMachine.this, port, binder);
+                                } catch (Exception e) {
+                                    final VirtualMachineCallback cb = mCallback;
+                                    if (cb == null) {
+                                        return;
+                                    }
+                                    cb.onVsockServerConnectionFailed(
+                                            VirtualMachine.this, port, e.getMessage());
+                                }
+                            }
+                        });
     }
 
     @Override
