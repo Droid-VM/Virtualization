@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30ded8a8_39013170",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-31T11:20:56Z",
+      "side": 1,
+      "message": "Yeah, my understanding was wrong. I\u0027m going to use onPayloadReady() for the \"I\u0027m ready\" purpose.\n\nI revised the commit message.",
+      "parentUuid": "36b49d55_74acccf8",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 8
+      },
+      "revId": "6a0c98f26361495a18a589a8f0688e2edb8903bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4aa7df67_7d33ed1b",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78c92d56_c53e728d",
+        "filename": "demo/java/com/android/microdroid/demo/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-31T11:20:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9182b03_df128af4",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 99
+      },
+      "revId": "6a0c98f26361495a18a589a8f0688e2edb8903bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8bf2b53b_034e591d",
@@ -94,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b5eb82a_805148a0",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-31T11:20:56Z",
+      "side": 1,
+      "message": "\u003e we won\u0027t need this to return error.\n\nDone\n\n\u003e BTW, would it make sense if we shutdown the VM instance when payload finishes? Of course we can make it optional by providing the relevant configuration which tells something like \"shutdown vm on payload-command exit\".\n\nI think it depends on the VMs, and adding config makes sense.",
+      "parentUuid": "8bf2b53b_034e591d",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 5
+      },
+      "revId": "6a0c98f26361495a18a589a8f0688e2edb8903bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bdbc6ad_7c54b895",
@@ -107,6 +179,30 @@
       "writtenOn": "2021-08-31T08:27:53Z",
       "side": 1,
       "message": "This one is called automatically by microdroid, right? And the one below is not, and has to be explicitly called by the server? Can we say that?\n\nAnd then Victor or I will have to add the call to CompOsService.",
+      "range": {
+        "startLine": 24,
+        "startChar": 9,
+        "endLine": 24,
+        "endChar": 29
+      },
+      "revId": "6a0c98f26361495a18a589a8f0688e2edb8903bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e66542a_75c1dde2",
+        "filename": "virtualizationservice/aidl/android/system/virtualmachineservice/IVirtualMachineService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-08-31T11:20:56Z",
+      "side": 1,
+      "message": "Both are called by microdroid_manager.",
+      "parentUuid": "0bdbc6ad_7c54b895",
       "range": {
         "startLine": 24,
         "startChar": 9,
