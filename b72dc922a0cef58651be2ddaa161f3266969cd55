@@ -395,6 +395,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bee8a5b8_9cf67cd9",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-31T16:47:08Z",
+      "side": 1,
+      "message": "Yeah, I think I didn\u0027t understand how nonce is used here. That makes sense. I\u0027ve switched to LessSafeKey + explicit nonce. It actually simplified code a lot.",
+      "parentUuid": "97518bb2_abcd754c",
+      "range": {
+        "startLine": 261,
+        "startChar": 41,
+        "endLine": 261,
+        "endChar": 51
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0d4d074_bbc0dc5b",
@@ -456,6 +480,30 @@
       "side": 1,
       "message": "Am I correct that, at the moment, there\u0027s no effort to wipe these? That would be a future change?\n\nKeystore2 also has ZVec [1], Android will have to converge on one of these at some point.\n\n[1] -- http://cs/android/system/security/keystore2/src/crypto/zvec.rs?l\u003d27\u0026rcl\u003d06cf9053819da2acfc8d07b3f00660f5feac76ec",
       "parentUuid": "1f3dcb9c_ebd8ab95",
+      "range": {
+        "startLine": 267,
+        "startChar": 16,
+        "endLine": 267,
+        "endChar": 24
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e18d93a5_16e06782",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-08-31T16:47:08Z",
+      "side": 1,
+      "message": "Oh, I thought you were talking about SEALING_CDI when it\u0027s correctly from the previous stage.\n\nNo. The key generated here is not zeroized and the struct `LessSafeKey` doesn\u0027t reveal the `[u8]` slice that refers to the raw bytes.\n\nI however managed to zeroize the key on drop, by overwriting the struct with the key created from zeros of the same length.",
+      "parentUuid": "d3077efd_690ea68e",
       "range": {
         "startLine": 267,
         "startChar": 16,
