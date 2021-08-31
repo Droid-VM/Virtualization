@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b510bb4_787eb7a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-08-31T14:59:20Z",
+      "side": 1,
+      "message": "Glad to hear. This batch of comments don\u0027t change the behaviour so feel free to leave them to follow-ups if you prefer.",
+      "parentUuid": "c713f211_5db41cfe",
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4205ca52_67d79ab7",
@@ -235,6 +253,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3cc35cc_8f413128",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-08-31T14:59:20Z",
+      "side": 1,
+      "message": "New format \u003d\u003e new UUID. Nice and simple!",
+      "parentUuid": "f6d19c09_be4c1ddf",
+      "range": {
+        "startLine": 219,
+        "startChar": 30,
+        "endLine": 219,
+        "endChar": 44
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a0f2576_76548298",
@@ -331,6 +373,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97518bb2_abcd754c",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-08-31T14:59:20Z",
+      "side": 1,
+      "message": "Reading around the ring API some more, I feel confident that we don\u0027t want a sequence here at all. The ring API looks to be designed for handling multiple messages that are encrypted with the same key in some sequence. Each message needs its own IV (nonce) so NonceGen is the API lets you evolve the nonce through the sequence.\n\nHowever, we explicitly only want there to be a single message: the partition contents. That means, the generator should only return the nonce once and then fail as there shouldn\u0027t be subsequent message. Or else, we use the simpler, but provocatively names, LessSafeKey API where we can directly pass the nonce we want to use.",
+      "parentUuid": "928c91c5_3b164fbb",
+      "range": {
+        "startLine": 261,
+        "startChar": 41,
+        "endLine": 261,
+        "endChar": 51
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0d4d074_bbc0dc5b",
         "filename": "microdroid_manager/src/instance.rs",
         "patchSetId": 5
@@ -366,6 +432,30 @@
       "side": 1,
       "message": "Well.. careful programming? :)\n\nI think we could use https://doc.rust-lang.org/std/mem/struct.ManuallyDrop.html so that we can explictly zero it out when it goes out of scope, or use something like https://docs.rs/zeroize/1.4.1/zeroize/ if we seek for convenience.",
       "parentUuid": "a0d4d074_bbc0dc5b",
+      "range": {
+        "startLine": 267,
+        "startChar": 16,
+        "endLine": 267,
+        "endChar": 24
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3077efd_690ea68e",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-08-31T14:59:20Z",
+      "side": 1,
+      "message": "Am I correct that, at the moment, there\u0027s no effort to wipe these? That would be a future change?\n\nKeystore2 also has ZVec [1], Android will have to converge on one of these at some point.\n\n[1] -- http://cs/android/system/security/keystore2/src/crypto/zvec.rs?l\u003d27\u0026rcl\u003d06cf9053819da2acfc8d07b3f00660f5feac76ec",
+      "parentUuid": "1f3dcb9c_ebd8ab95",
       "range": {
         "startLine": 267,
         "startChar": 16,
