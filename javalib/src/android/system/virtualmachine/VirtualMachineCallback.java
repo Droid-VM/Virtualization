@@ -18,11 +18,13 @@ package android.system.virtualmachine;
 
 import android.annotation.NonNull;
 import android.annotation.Nullable;
+import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 
 /**
  * Callback interface to get notified with the events from the virtual machine. The methods are
- * executed on a binder thread. Implementations can make blocking calls in the methods.
+ * executed on either a binder thread or an ExecutorService worker thread. Implementations can make
+ * blocking calls in the methods.
  *
  * @hide
  */
@@ -36,6 +38,12 @@ public interface VirtualMachineCallback {
 
     /** Called when the payload has finished in the VM. */
     void onPayloadFinished(@NonNull VirtualMachine vm, int exitCode);
+
+    /** Called when the requested vsock server is connected. */
+    void onVsockServerReady(@NonNull VirtualMachine vm, int port, IBinder binder);
+
+    /** Called when the connection to the requested vsock server fails. */
+    void onVsockServerConnectionFailed(@NonNull VirtualMachine vm, int port, String error);
 
     /** Called when the VM died. */
     void onDied(@NonNull VirtualMachine vm);
