@@ -33,6 +33,219 @@
       "message": "Andrew, could you take a look at this CL?",
       "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08af9f9b_61ed5ef5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-08-31T11:00:54Z",
+      "side": 1,
+      "message": "Took me a little while to start learning APIs of these libraries, but I think I\u0027ve got somewhere useful. A couple of crypto point, some clarifications on the format but otherwise it\u0027s on the right tracks.",
+      "parentUuid": "f9baafbd_2941b02d",
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4205ca52_67d79ab7",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-08-31T11:00:54Z",
+      "side": 1,
+      "message": "Is there/will there be a recovery path?",
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa9fdd66_616d7ffc",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-08-31T11:00:54Z",
+      "side": 1,
+      "message": "If we ever write different data then we\u0027ll have reused the same IV-key pair which can be the basis for attacks on the crypto. If we\u0027re sure this will never happen, we should document how we know that. Otherwise, we should be storing a nonce with the encrypted data (e.g. [1]) that was generated at write time. It could be randomly generated (e.g. [2]) or we might be able to define a tamper-proof sequence at a later stage.\n\n[1] -- http://cs/android/system/keymaster/key_blob_utils/auth_encrypted_key_blob.cpp?l\u003d221\u0026rcl\u003d77e046ef83988b46bbcb84194c08df69c680b2c6\n[2] -- http://cs/android/system/keymaster/key_blob_utils/auth_encrypted_key_blob.cpp?l\u003d40\u0026rcl\u003d77e046ef83988b46bbcb84194c08df69c680b2c6",
+      "range": {
+        "startLine": 168,
+        "startChar": 75,
+        "endLine": 168,
+        "endChar": 90
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "636c34f2_da0dd07c",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-08-31T11:00:54Z",
+      "side": 1,
+      "message": "Do we want to flush for good luck?",
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95d23cdc_9c398d0c",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-08-31T11:00:54Z",
+      "side": 1,
+      "message": "This means there\u0027s a standard header for each partition, which is a good thing but is it well defined what is standard and what is partitions specific? Or would that be left to what\u0027s inside the partition?\n\nIf the latter, then I think we want a version somewhere e.g. if microdroid wanted to change its algorithm (e.g. just sign without encrypting) or similar. That could be inside the partition of an extra field in this header.",
+      "range": {
+        "startLine": 219,
+        "startChar": 30,
+        "endLine": 219,
+        "endChar": 44
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a0f2576_76548298",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-08-31T11:00:54Z",
+      "side": 1,
+      "message": "Does anything ensure this doesn\u0027t overflow? E.g. header.payload_size\u003d0xffff_ffff_ffff_ffff",
+      "range": {
+        "startLine": 228,
+        "startChar": 31,
+        "endLine": 228,
+        "endChar": 48
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d77c7ced_9acdd8a4",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-08-31T11:00:54Z",
+      "side": 1,
+      "message": "IIUC, this will wrap after 255 (it\u0027s an array of u8) and the nonce won\u0027t be unique any more so it should error when that happens. Or make the nonce _be_ the count and error when that overflows. (Do we need more than once nonce for this application, could it just fail after the first call like [1]? Or even use the LessSafeKey API talked about in [2].)\n\n[1] -- https://github.com/briansmith/ring/blob/20582aa39a0d57ff1dac5522cbeae4abcd039bd9/tests/aead_tests.rs#L439\n[2] -- https://github.com/briansmith/ring/issues/899",
+      "range": {
+        "startLine": 261,
+        "startChar": 41,
+        "endLine": 261,
+        "endChar": 51
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0d4d074_bbc0dc5b",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-08-31T11:00:54Z",
+      "side": 1,
+      "message": "Is anything making sure the secrets/keys of early-microdroid are wiped from memory before we hand over to the payload?",
+      "range": {
+        "startLine": 267,
+        "startChar": 16,
+        "endLine": 267,
+        "endChar": 24
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c98b0c0c_19941cb2",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-08-31T11:00:54Z",
+      "side": 1,
+      "message": "Isn\u0027t this backwards? I agree with the intent of the comments, but I read the code as setting the salt to the CDI and the IKM as 0s.",
+      "range": {
+        "startLine": 276,
+        "startChar": 56,
+        "endLine": 276,
+        "endChar": 74
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3752d369_0fa9f1af",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-08-31T11:00:54Z",
+      "side": 1,
+      "message": "There\u0027s really not a wrapper for extract-expand?! :(",
+      "range": {
+        "startLine": 284,
+        "startChar": 18,
+        "endLine": 284,
+        "endChar": 24
+      },
+      "revId": "b72dc922a0cef58651be2ddaa161f3266969cd55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
