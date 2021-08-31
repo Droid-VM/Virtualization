@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4aa7df67_7d33ed1b",
+        "filename": "demo/java/com/android/microdroid/demo/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-31T02:27:00Z",
+      "side": 1,
+      "message": "Can we show some visual clue for better demo?",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 99
+      },
+      "revId": "6a0c98f26361495a18a589a8f0688e2edb8903bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bf2b53b_034e591d",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-08-31T02:27:00Z",
+      "side": 1,
+      "message": "On a second thought, we won\u0027t need this to return error. Logging them would be enough.\n\nBTW, would it make sense if we shutdown the VM instance when payload finishes? Of course we can make it optional by providing the relevant configuration which tells something like \"shutdown vm on payload-command exit\".",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 5
+      },
+      "revId": "6a0c98f26361495a18a589a8f0688e2edb8903bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
