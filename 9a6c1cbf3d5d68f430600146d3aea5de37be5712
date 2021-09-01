@@ -22,6 +22,30 @@
       },
       "revId": "9a6c1cbf3d5d68f430600146d3aea5de37be5712",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f986c1f3_d59dcfd3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-01T20:27:38Z",
+      "side": 1,
+      "message": "Err, are you using remote_device_proxy like me?  The FastbootCommandPreparer seems to connect to my $ANDROID_SERIAL, which didn\u0027t work because per go/remote-device-proxy#fastboot the port is different.  I can\u0027t verify this test as the result.\n\nI\u0027m not sure if this would happen in the lab environment though.  And if we need to add something to the FastbootCommandPreparer.\n\n+jdesprez and +mrosenfeld for suggestion.\n\nAnd I assume all the target_preparers will run, even if one failed in the middle?",
+      "parentUuid": "346c0598_d8495f32",
+      "range": {
+        "startLine": 14,
+        "startChar": 6,
+        "endLine": 14,
+        "endChar": 59
+      },
+      "revId": "9a6c1cbf3d5d68f430600146d3aea5de37be5712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
