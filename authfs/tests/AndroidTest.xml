@@ -15,6 +15,11 @@
 -->
 
 <configuration description="Config for authfs tests">
+    <target_preparer class="com.android.tradefed.targetprep.FastbootCommandPreparer">
+        <option name="command" value="oem pkvm enable" />
+        <option name="teardown-command" value="oem pkvm auto" />
+    </target_preparer>
+
     <!-- Need root to start virtualizationservice -->
     <target_preparer class="com.android.tradefed.targetprep.RootTargetPreparer"/>
 
