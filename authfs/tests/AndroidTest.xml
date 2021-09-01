@@ -15,6 +15,10 @@
 -->
 
 <configuration description="Config for authfs tests">
+    <target_preparer class="com.android.tradefed.targetprep.FastbootCommandPreparer">
+        <option name="command" value="oem pkvm enable" />
+    </target_preparer>
+
     <!-- Need root to start virtualizationservice -->
     <target_preparer class="com.android.tradefed.targetprep.RootTargetPreparer"/>
 
@@ -54,4 +58,8 @@
     <test class="com.android.compatibility.common.tradefed.testtype.JarHostTest" >
         <option name="jar" value="AuthFsHostTest.jar" />
     </test>
+
+    <target_preparer class="com.android.tradefed.targetprep.FastbootCommandPreparer">
+        <option name="command" value="oem pkvm auto" />
+    </target_preparer>
 </configuration>

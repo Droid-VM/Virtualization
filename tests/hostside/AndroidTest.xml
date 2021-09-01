@@ -14,7 +14,15 @@
      limitations under the License.
 -->
 <configuration description="Tests for microdroid">
+    <target_preparer class="com.android.tradefed.targetprep.FastbootCommandPreparer">
+        <option name="command" value="oem pkvm enable" />
+    </target_preparer>
+
     <test class="com.android.compatibility.common.tradefed.testtype.JarHostTest" >
         <option name="jar" value="MicrodroidHostTestCases.jar" />
     </test>
+
+    <target_preparer class="com.android.tradefed.targetprep.FastbootCommandPreparer">
+        <option name="command" value="oem pkvm auto" />
+    </target_preparer>
 </configuration>
