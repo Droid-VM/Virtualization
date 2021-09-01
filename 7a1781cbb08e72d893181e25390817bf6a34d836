@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00da78ca_0c56a9ce",
+        "filename": "javalib/jni/android_system_virtualmachine_VirtualMachine.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-09-01T12:31:37Z",
+      "side": 1,
+      "message": "I\u0027m not sure how RpcClient works, but yeah, you\u0027ll need to use the VirtualizationService method to connect, as SELinux policy will forbid applications from opening vsock connections directly.",
+      "parentUuid": "01faca95_c956816c",
+      "range": {
+        "startLine": 28,
+        "startChar": 38,
+        "endLine": 28,
+        "endChar": 47
+      },
+      "revId": "7a1781cbb08e72d893181e25390817bf6a34d836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e5ec7ec7_d327d97f",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 6
