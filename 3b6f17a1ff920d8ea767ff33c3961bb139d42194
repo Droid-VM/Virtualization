@@ -38,6 +38,98 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd559729_fcad78ea",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-01T18:29:39Z",
+      "side": 1,
+      "message": "nit: maybe MAX_FILE_SIZE_BYTES or MAX_FILE_BYTES",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 19
+      },
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f0a4f06_eeb39407",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-01T18:29:39Z",
+      "side": 1,
+      "message": "nit: Since the result isn\u0027t really used, consider the following, which seems to be a bit simpler:\n\n  if Err(e) \u003d verify(...) {\n    warn!(\"Removing {} due to error: {}\", ...);\n    // Not sure if the next error will appear in logcat.\n    fs::remove_dir_all(...).context(\"Failed to remove directory\")\n  } else {\n    if do_pending {\n      ...\n    } else {\n      Ok(())\n    }\n  }",
+      "range": {
+        "startLine": 73,
+        "startChar": 3,
+        "endLine": 73,
+        "endChar": 53
+      },
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bbae28b_3adda93a",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-01T18:29:39Z",
+      "side": 1,
+      "message": "info! or debug! to capture the log in production (which makes it a bit harder to debug from shell...)",
+      "range": {
+        "startLine": 77,
+        "startChar": 12,
+        "endLine": 77,
+        "endChar": 19
+      },
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "466f6085_08541249",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-01T18:29:39Z",
+      "side": 1,
+      "message": "debug!?",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 15
+      },
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4c51a13_dd7cd8bb",
         "filename": "compos/verify_key/verify_key.rs",
         "patchSetId": 1
@@ -67,6 +159,24 @@
       "side": 1,
       "message": "I wanted the metadata check, and it seems better to do it all in one?\nMind you perhaps I\u0027m being overly paranoid, I just didn\u0027t want to deal with someone creating a ludicrously big file.",
       "parentUuid": "f4c51a13_dd7cd8bb",
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8261a9f_1b6b6800",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-01T18:29:39Z",
+      "side": 1,
+      "message": "You could also do something like `File::open(file)?.take(MAX_FILE_SIZE).read_to_end(\u0026mut data)`.",
+      "parentUuid": "b96977e2_ae0d9690",
       "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

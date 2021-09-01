@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af2144e2_ca2268d0",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-01T18:29:39Z",
+      "side": 1,
+      "message": "Might worth a comment to explain what will happen if the rename failed, e.g. what concerns this program and/or the caller.",
+      "range": {
+        "startLine": 150,
+        "startChar": 4,
+        "endLine": 152,
+        "endChar": 91
+      },
+      "revId": "72662ce375978a9715842eba1aeb22c67865b874",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6caa58b_06ec72a6",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-01T18:29:39Z",
+      "side": 1,
+      "message": "nit: could the struct above simply derive Default for this?",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 0
+      },
+      "revId": "72662ce375978a9715842eba1aeb22c67865b874",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c6a41e1_9d0637fc",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-01T18:29:39Z",
+      "side": 1,
+      "message": "nit: seems redundant to do both.  Does drop actually do anything here and L195?",
+      "range": {
+        "startLine": 183,
+        "startChar": 8,
+        "endLine": 185,
+        "endChar": 20
+      },
+      "revId": "72662ce375978a9715842eba1aeb22c67865b874",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cae83569_7cb94222",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-01T18:29:39Z",
+      "side": 1,
+      "message": "Hmm... between startVm and here, would the event be queued so that we\u0027ll always get the callback?",
+      "range": {
+        "startLine": 265,
+        "startChar": 8,
+        "endLine": 265,
+        "endChar": 28
+      },
+      "revId": "72662ce375978a9715842eba1aeb22c67865b874",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81d9678b_1def907d",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-01T18:29:39Z",
+      "side": 1,
+      "message": "nit: how about debug!(\"VM {} died\", cid)",
+      "range": {
+        "startLine": 284,
+        "startChar": 8,
+        "endLine": 284,
+        "endChar": 28
+      },
+      "revId": "72662ce375978a9715842eba1aeb22c67865b874",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
