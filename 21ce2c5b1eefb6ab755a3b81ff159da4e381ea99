@@ -51,6 +51,24 @@
       "message": "I noticed that ZVec also ensures the memory isn\u0027t swapped to disk with m{un,}lock. I think we have a bit of learning to do before we know how to best to handle sensitive data like this.\n\nWe definitely want to zero. And keep out of swap? And barrier so it happens now? And flush so it\u0027s not just zero in the cache? But this sounds like a bigger topic than this CL.",
       "revId": "21ce2c5b1eefb6ab755a3b81ff159da4e381ea99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5008ad14_417aa77f",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-01T09:38:29Z",
+      "side": 1,
+      "message": "Yeah, I noticed mlock too. But microdroid doesn\u0027t use swapping at all. \n\nFor memory barrier, I see that write_volatile in Rust is guaranteed to be not reordered. [1]\n\n[1] https://doc.rust-lang.org/std/ptr/fn.write_volatile.html",
+      "parentUuid": "ed1534ff_c72fb847",
+      "revId": "21ce2c5b1eefb6ab755a3b81ff159da4e381ea99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
