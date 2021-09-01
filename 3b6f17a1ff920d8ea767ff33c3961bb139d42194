@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46520e86_5e7ba018",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-01T16:40:12Z",
+      "side": 1,
+      "message": "Thanks!\n\nYes - the private key blob can only be decrypted by the VM - and only if it\u0027s the right instance of the VM, which is part of what we\u0027re checking.\n\nWe might be able to avoid this, but we haven\u0027t figured out the detail yet.",
+      "parentUuid": "e2fdb663_11b1a868",
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4c51a13_dd7cd8bb",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-09-01T15:28:34Z",
       "side": 1,
       "message": "This looks very much like `std::fs::read`, can you use that instead?",
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b96977e2_ae0d9690",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-01T16:40:12Z",
+      "side": 1,
+      "message": "I wanted the metadata check, and it seems better to do it all in one?\nMind you perhaps I\u0027m being overly paranoid, I just didn\u0027t want to deal with someone creating a ludicrously big file.",
+      "parentUuid": "f4c51a13_dd7cd8bb",
       "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "121ec84f_27a6c4b7",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-01T16:40:12Z",
+      "side": 1,
+      "message": "Ah, that\u0027s awkward, because RpcClient wants to open the socket itself.\n\nWe discussed offline; needs a new/replacement RpcClient.",
+      "parentUuid": "567c41f8_23097ee6",
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3fd7d537_6aac185d",
         "filename": "compos/verify_key/verify_key.rs",
         "patchSetId": 1
@@ -65,6 +119,24 @@
       "writtenOn": "2021-09-01T15:28:34Z",
       "side": 1,
       "message": "Is this just to append CURRENT_DIR to COMPOS_DATA_ROOT? It seems a bit of a weird way of doing it.",
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3b12139_d5c3a26b",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-01T16:40:12Z",
+      "side": 1,
+      "message": "I stole it from https://doc.rust-lang.org/std/path/struct.PathBuf.html#examples.\n\nIt\u0027s less code (or at least messy) than constructing a pathbuf and calling push.",
+      "parentUuid": "3fd7d537_6aac185d",
       "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -92,6 +164,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "adab95c1_07210701",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-01T16:40:12Z",
+      "side": 1,
+      "message": "Ah, makes sense. I had \"constructors are called new\" in my head, but that\u0027s clearly wrong.",
+      "parentUuid": "10395445_1bbad6d0",
+      "range": {
+        "startLine": 212,
+        "startChar": 7,
+        "endLine": 212,
+        "endChar": 10
+      },
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51fa6783_f7f66849",
@@ -109,6 +205,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1d895b6_5a37a754",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-01T16:40:12Z",
+      "side": 1,
+      "message": "Well, we only need it if we decide to try to start the VM.\n\nBut yeah, it does seem a bit weird, given it has process-wide effect. Moved.",
+      "parentUuid": "51fa6783_f7f66849",
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39d2b3b2_3083c124",
@@ -122,6 +236,30 @@
       "writtenOn": "2021-09-01T15:28:34Z",
       "side": 1,
       "message": "Can\u0027t you just do `vm_state.clone()`? It\u0027s neater.",
+      "range": {
+        "startLine": 249,
+        "startChar": 29,
+        "endLine": 249,
+        "endChar": 50
+      },
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "886695fd_c824f5f7",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-01T16:40:12Z",
+      "side": 1,
+      "message": "The Arc docs used to say \"The Arc::clone(\u0026from) syntax is the most idiomatic because it conveys more explicitly the meaning of the code. In the example above, this syntax makes it easier to see that this code is creating a new reference rather than copying the whole content of foo.\"\n\nAnd the Rc docs still do, but Arc seems to have lost it. That was also the guidance in the Rust book I read.\n\nI have some sympathy with that idea, but I\u0027m not deeply wedded to it, if it is no longer considered idiomatic.",
+      "parentUuid": "39d2b3b2_3083c124",
       "range": {
         "startLine": 249,
         "startChar": 29,
