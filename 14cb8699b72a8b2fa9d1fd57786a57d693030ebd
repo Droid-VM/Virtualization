@@ -74,6 +74,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8115e074_aa189083",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-01T05:09:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "944a2d19_cc3bf50b",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 35
+      },
+      "revId": "14cb8699b72a8b2fa9d1fd57786a57d693030ebd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ccbff3fa_f21e8868",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -102,6 +126,30 @@
       "writtenOn": "2021-09-01T02:42:37Z",
       "side": 1,
       "message": "I\u0027m not sure whether this is the right abstraction. The meaning of \"readiness\" can be different per VM apps.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 33
+      },
+      "revId": "14cb8699b72a8b2fa9d1fd57786a57d693030ebd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf6a9b70_e1f8a3d5",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachineCallback.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-01T05:09:36Z",
+      "side": 1,
+      "message": "Let\u0027s see how it goes. I\u0027m fine with \"ready\" for now. (per offline-chat)",
+      "parentUuid": "bc4548f3_d21ef356",
       "range": {
         "startLine": 35,
         "startChar": 0,
