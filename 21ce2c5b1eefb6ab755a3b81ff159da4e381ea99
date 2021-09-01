@@ -16,6 +16,41 @@
       "message": "Andrew, I\u0027ve addressed your last comments as a new patchset. PTAL.\n\nI know that your prior +2 is still alive, but wanted you to take a brief look.",
       "revId": "21ce2c5b1eefb6ab755a3b81ff159da4e381ea99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20163725_c04b6694",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-09-01T08:38:36Z",
+      "side": 1,
+      "message": "I reaffirm the +2!",
+      "parentUuid": "70bf2bd6_c52f7a2a",
+      "revId": "21ce2c5b1eefb6ab755a3b81ff159da4e381ea99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed1534ff_c72fb847",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-09-01T08:38:36Z",
+      "side": 1,
+      "message": "I noticed that ZVec also ensures the memory isn\u0027t swapped to disk with m{un,}lock. I think we have a bit of learning to do before we know how to best to handle sensitive data like this.\n\nWe definitely want to zero. And keep out of swap? And barrier so it happens now? And flush so it\u0027s not just zero in the cache? But this sounds like a bigger topic than this CL.",
+      "revId": "21ce2c5b1eefb6ab755a3b81ff159da4e381ea99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
