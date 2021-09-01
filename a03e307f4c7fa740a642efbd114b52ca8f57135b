@@ -33,6 +33,24 @@
       "message": "Also consider dropping this line. https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/authfs/Android.bp;drc\u003da81194e6f0d1d38d5a082aefaf157d1b67faf5df;l\u003d56",
       "revId": "a03e307f4c7fa740a642efbd114b52ca8f57135b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "687caa95_f01e3641",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-01T00:31:19Z",
+      "side": 1,
+      "message": "Interesting.  I\u0027m not sure about this since authfs is still technically part of com.android.virt.  Would it make sense to actually require apex_available for things in microdroid image?  Otherwise I see a few other dependencies that can be removed.",
+      "parentUuid": "c583546d_0c010794",
+      "revId": "a03e307f4c7fa740a642efbd114b52ca8f57135b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
