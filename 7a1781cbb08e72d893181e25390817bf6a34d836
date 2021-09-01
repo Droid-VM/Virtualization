@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01faca95_c956816c",
+        "filename": "javalib/jni/android_system_virtualmachine_VirtualMachine.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-01T05:11:38Z",
+      "side": 1,
+      "message": "Virtualizationservice provides a method to connect to VM over vsock. https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachine.aidl;l\u003d37\n\nAndrew, how can we work this together with RpcClient?",
+      "range": {
+        "startLine": 28,
+        "startChar": 38,
+        "endLine": 28,
+        "endChar": 47
+      },
+      "revId": "7a1781cbb08e72d893181e25390817bf6a34d836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5ec7ec7_d327d97f",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-01T05:11:38Z",
+      "side": 1,
+      "message": "How about using ServiceConnection interface by which host app can get the remote service?",
+      "range": {
+        "startLine": 444,
+        "startChar": 19,
+        "endLine": 444,
+        "endChar": 40
+      },
+      "revId": "7a1781cbb08e72d893181e25390817bf6a34d836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d631ac1_62ffb0fe",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-01T05:11:38Z",
+      "side": 1,
+      "message": "IVirtualMachine\u0027s connectVsock() method returns PFD.\n\n    ParcelFileDescriptor connectVsock(int port);\n\nSteven, can we create an RpcClient with fd?",
+      "range": {
+        "startLine": 444,
+        "startChar": 0,
+        "endLine": 444,
+        "endChar": 83
+      },
+      "revId": "7a1781cbb08e72d893181e25390817bf6a34d836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
