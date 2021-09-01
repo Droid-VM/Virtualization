@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2fdb663_11b1a868",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-09-01T15:28:34Z",
+      "side": 1,
+      "message": "Looks mostly fine in terms of code (some comments below), but what\u0027s the advantage of running this in a VM, if it\u0027s only called during early boot anyway? Is there some secret the VM has access to that Android does not?",
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4c51a13_dd7cd8bb",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-09-01T15:28:34Z",
+      "side": 1,
+      "message": "This looks very much like `std::fs::read`, can you use that instead?",
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "567c41f8_23097ee6",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-09-01T15:28:34Z",
+      "side": 1,
+      "message": "Opening a vsock connection directly won\u0027t be allowed by SELinux policy. Use IVirtualMachine::connectVsock instead.",
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fd7d537_6aac185d",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-09-01T15:28:34Z",
+      "side": 1,
+      "message": "Is this just to append CURRENT_DIR to COMPOS_DATA_ROOT? It seems a bit of a weird way of doing it.",
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10395445_1bbad6d0",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-09-01T15:28:34Z",
+      "side": 1,
+      "message": "`new` methods are usually fairly lightweight and non-blocking. I\u0027d rather this were called `start` or `create` or something else.",
+      "range": {
+        "startLine": 212,
+        "startChar": 7,
+        "endLine": 212,
+        "endChar": 10
+      },
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51fa6783_f7f66849",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-09-01T15:28:34Z",
+      "side": 1,
+      "message": "This seems like it should be in the `main` function, as it\u0027s not VM-specific.",
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39d2b3b2_3083c124",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-09-01T15:28:34Z",
+      "side": 1,
+      "message": "Can\u0027t you just do `vm_state.clone()`? It\u0027s neater.",
+      "range": {
+        "startLine": 249,
+        "startChar": 29,
+        "endLine": 249,
+        "endChar": 50
+      },
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
