@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a7186fe_80e0aa95",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-02T17:09:15Z",
+      "side": 1,
+      "message": "Sorry I wasn\u0027t clear.  Let me rephrase: what if current/ is deleted, but rename failed.  Should the caller, odsign, be aware of this possible change and deal with it?  Or would it be possible to do something smart to make it a transaction (but I don\u0027t want to overkill, if the error can be recovered later, for example, with another run of odrefresh --compile).",
+      "parentUuid": "f226ba9a_9dfe1233",
+      "range": {
+        "startLine": 150,
+        "startChar": 4,
+        "endLine": 152,
+        "endChar": 91
+      },
+      "revId": "72662ce375978a9715842eba1aeb22c67865b874",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6caa58b_06ec72a6",
         "filename": "compos/verify_key/verify_key.rs",
         "patchSetId": 3
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "That is a good question. There\u0027s an interesting TODO here: http://cs/android/packages/modules/Virtualization/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachine.aidl?l\u003d31\u0026rcl\u003d9239d0380839c932ccc131c5899e755255992185\n\nIt\u0027s not an issue in practice, given the time it takes for the VM to start, but it would be nice to resolve it.\n\nEither moving the registration or queuing the notification would work.\n\nAndrew, Inseob - any thoughts?\n\nI\u0027ll add this to the next userspace sync.",
       "parentUuid": "cae83569_7cb94222",
+      "range": {
+        "startLine": 265,
+        "startChar": 8,
+        "endLine": 265,
+        "endChar": 28
+      },
+      "revId": "72662ce375978a9715842eba1aeb22c67865b874",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d017cebd_9933d5ed",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-02T17:09:15Z",
+      "side": 1,
+      "message": "I see.  Code LGTM, since it\u0027s more of a problem behind the API.",
+      "parentUuid": "5a532293_7aac77d3",
       "range": {
         "startLine": 265,
         "startChar": 8,

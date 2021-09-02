@@ -130,6 +130,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afc3e129_0252b5c0",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-02T17:09:15Z",
+      "side": 1,
+      "message": "Still, I feel we could make it easier to read. But I don\u0027t have a good answer right now.",
+      "parentUuid": "b004595a_d98efb65",
+      "range": {
+        "startLine": 73,
+        "startChar": 3,
+        "endLine": 73,
+        "endChar": 53
+      },
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8bbae28b_3adda93a",
@@ -291,6 +315,24 @@
       "side": 1,
       "message": "That would truncate rather than failing?",
       "parentUuid": "b8261a9f_1b6b6800",
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c250f69d_58ebe477",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-02T17:09:15Z",
+      "side": 1,
+      "message": "Ah yes.  I was assuming it\u0027s ok to not fail here, and let it fail during the verification.  I\u0027m file with this (consider perhaps renaming to read_file_safely, read_small_file, but up to you).",
+      "parentUuid": "70f5e5ff_fabdbecd",
       "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
