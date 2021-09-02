@@ -383,6 +383,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b6afef3_ac03a615",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-09-02T10:52:08Z",
+      "side": 1,
+      "message": "Huh okay.",
+      "parentUuid": "b3b12139_d5c3a26b",
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10395445_1bbad6d0",
@@ -420,6 +438,30 @@
       "side": 1,
       "message": "Ah, makes sense. I had \"constructors are called new\" in my head, but that\u0027s clearly wrong.",
       "parentUuid": "10395445_1bbad6d0",
+      "range": {
+        "startLine": 212,
+        "startChar": 7,
+        "endLine": 212,
+        "endChar": 10
+      },
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "930c209a_22ec54f6",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-09-02T10:52:08Z",
+      "side": 1,
+      "message": "That\u0027s a reasonable way to think about it, but you wouldn\u0027t put complicated blocking logic in a constructor in Java or C++, right?",
+      "parentUuid": "adab95c1_07210701",
       "range": {
         "startLine": 212,
         "startChar": 7,
@@ -502,6 +544,30 @@
       "side": 1,
       "message": "The Arc docs used to say \"The Arc::clone(\u0026from) syntax is the most idiomatic because it conveys more explicitly the meaning of the code. In the example above, this syntax makes it easier to see that this code is creating a new reference rather than copying the whole content of foo.\"\n\nAnd the Rc docs still do, but Arc seems to have lost it. That was also the guidance in the Rust book I read.\n\nI have some sympathy with that idea, but I\u0027m not deeply wedded to it, if it is no longer considered idiomatic.",
       "parentUuid": "39d2b3b2_3083c124",
+      "range": {
+        "startLine": 249,
+        "startChar": 29,
+        "endLine": 249,
+        "endChar": 50
+      },
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcaee9b8_2b6ff57e",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-09-02T10:52:08Z",
+      "side": 1,
+      "message": "Okay, fair enough.",
+      "parentUuid": "886695fd_c824f5f7",
       "range": {
         "startLine": 249,
         "startChar": 29,
