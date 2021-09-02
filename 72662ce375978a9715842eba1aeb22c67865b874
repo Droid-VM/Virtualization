@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f226ba9a_9dfe1233",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-02T08:44:42Z",
+      "side": 1,
+      "message": "I\u0027ve changed the message to try to say why we were trying to do this rather than what we were doing. Do you think that helps?",
+      "parentUuid": "af2144e2_ca2268d0",
+      "range": {
+        "startLine": 150,
+        "startChar": 4,
+        "endLine": 152,
+        "endChar": 91
+      },
+      "revId": "72662ce375978a9715842eba1aeb22c67865b874",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6caa58b_06ec72a6",
         "filename": "compos/verify_key/verify_key.rs",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2021-09-01T18:29:39Z",
       "side": 1,
       "message": "nit: could the struct above simply derive Default for this?",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 0
+      },
+      "revId": "72662ce375978a9715842eba1aeb22c67865b874",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caf0c026_0752ca80",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-02T08:44:42Z",
+      "side": 1,
+      "message": "Yes, I think so. But I prefer to be explicit here, especially since I think the struct will change a bit.",
+      "parentUuid": "c6caa58b_06ec72a6",
       "range": {
         "startLine": 162,
         "startChar": 0,
@@ -60,6 +108,30 @@
       "writtenOn": "2021-09-01T18:29:39Z",
       "side": 1,
       "message": "nit: seems redundant to do both.  Does drop actually do anything here and L195?",
+      "range": {
+        "startLine": 183,
+        "startChar": 8,
+        "endLine": 185,
+        "endChar": 20
+      },
+      "revId": "72662ce375978a9715842eba1aeb22c67865b874",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eea52098_aae3ebc9",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-02T08:44:42Z",
+      "side": 1,
+      "message": "It unlocks the mutex, which means that if there is a thread blocked on the condvar then it can run without immediately blocking. (state here is the mutex guard rather than the state itself, which admittedly is slightly confusing; added a comment.)\n(Which I also do on the C++ side, inspired by https://en.cppreference.com/w/cpp/thread/condition_variable.)",
+      "parentUuid": "9c6a41e1_9d0637fc",
       "range": {
         "startLine": 183,
         "startChar": 8,
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a532293_7aac77d3",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-02T08:44:42Z",
+      "side": 1,
+      "message": "That is a good question. There\u0027s an interesting TODO here: http://cs/android/packages/modules/Virtualization/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachine.aidl?l\u003d31\u0026rcl\u003d9239d0380839c932ccc131c5899e755255992185\n\nIt\u0027s not an issue in practice, given the time it takes for the VM to start, but it would be nice to resolve it.\n\nEither moving the registration or queuing the notification would work.\n\nAndrew, Inseob - any thoughts?\n\nI\u0027ll add this to the next userspace sync.",
+      "parentUuid": "cae83569_7cb94222",
+      "range": {
+        "startLine": 265,
+        "startChar": 8,
+        "endLine": 265,
+        "endChar": 28
+      },
+      "revId": "72662ce375978a9715842eba1aeb22c67865b874",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81d9678b_1def907d",
         "filename": "compos/verify_key/verify_key.rs",
         "patchSetId": 3
@@ -106,6 +202,30 @@
       "writtenOn": "2021-09-01T18:29:39Z",
       "side": 1,
       "message": "nit: how about debug!(\"VM {} died\", cid)",
+      "range": {
+        "startLine": 284,
+        "startChar": 8,
+        "endLine": 284,
+        "endChar": 28
+      },
+      "revId": "72662ce375978a9715842eba1aeb22c67865b874",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "635abc09_979f43ff",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-02T08:44:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81d9678b_1def907d",
       "range": {
         "startLine": 284,
         "startChar": 8,

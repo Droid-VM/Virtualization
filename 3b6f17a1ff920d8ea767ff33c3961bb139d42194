@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a647cb2a_fe206f5f",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-02T08:44:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd559729_fcad78ea",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 19
+      },
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f0a4f06_eeb39407",
@@ -72,6 +96,30 @@
       "writtenOn": "2021-09-01T18:29:39Z",
       "side": 1,
       "message": "nit: Since the result isn\u0027t really used, consider the following, which seems to be a bit simpler:\n\n  if Err(e) \u003d verify(...) {\n    warn!(\"Removing {} due to error: {}\", ...);\n    // Not sure if the next error will appear in logcat.\n    fs::remove_dir_all(...).context(\"Failed to remove directory\")\n  } else {\n    if do_pending {\n      ...\n    } else {\n      Ok(())\n    }\n  }",
+      "range": {
+        "startLine": 73,
+        "startChar": 3,
+        "endLine": 73,
+        "endChar": 53
+      },
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b004595a_d98efb65",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-02T08:44:42Z",
+      "side": 1,
+      "message": "That doesn\u0027t do quite the same thing - I want the remove_dir_all to happen if promote fails. (In all cases if things go wrong we delete the artifacts so we don\u0027t just keep retrying on every boot.)\n\nI had a more complex formation, but and_then() fairly neatly encapsulates what I want here.\n\nAnd result is used - at the end it tells us what went wrong.",
+      "parentUuid": "6f0a4f06_eeb39407",
       "range": {
         "startLine": 73,
         "startChar": 3,
@@ -105,6 +153,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c299594d_3dfbe16f",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-02T08:44:42Z",
+      "side": 1,
+      "message": "odsign runs things via logwrap_fork_execvp() which converts stdout and stderr to log.\n(Well, I haven\u0027t seen it work yet, but it\u0027s supposed to.)\nWhich I think gives production logging and easier debugging.",
+      "parentUuid": "8bbae28b_3adda93a",
+      "range": {
+        "startLine": 77,
+        "startChar": 12,
+        "endLine": 77,
+        "endChar": 19
+      },
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "466f6085_08541249",
@@ -118,6 +190,30 @@
       "writtenOn": "2021-09-01T18:29:39Z",
       "side": 1,
       "message": "debug!?",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 15
+      },
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6c7d3a6_d02a30b2",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-02T08:44:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "466f6085_08541249",
       "range": {
         "startLine": 86,
         "startChar": 8,
@@ -177,6 +273,24 @@
       "side": 1,
       "message": "You could also do something like `File::open(file)?.take(MAX_FILE_SIZE).read_to_end(\u0026mut data)`.",
       "parentUuid": "b96977e2_ae0d9690",
+      "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70f5e5ff_fabdbecd",
+        "filename": "compos/verify_key/verify_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-02T08:44:42Z",
+      "side": 1,
+      "message": "That would truncate rather than failing?",
+      "parentUuid": "b8261a9f_1b6b6800",
       "revId": "3b6f17a1ff920d8ea767ff33c3961bb139d42194",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
