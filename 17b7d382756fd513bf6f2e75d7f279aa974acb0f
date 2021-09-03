@@ -16,6 +16,29 @@
       "message": "Forrest result is here: https://android-build.googleplex.com/builds/abtd/run/L76300000951006789?referrer\u003demail",
       "revId": "17b7d382756fd513bf6f2e75d7f279aa974acb0f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24090d2a_b6682d35",
+        "filename": "tests/hostside/helper/java/android/virt/test/VirtualizationTestCaseBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-03T16:02:09Z",
+      "side": 1,
+      "message": "nit/optional: It\u0027s a bit confusing to me.  This seems to be an output file.  Maybe prefix the name with \"out\"?",
+      "range": {
+        "startLine": 184,
+        "startChar": 21,
+        "endLine": 184,
+        "endChar": 33
+      },
+      "revId": "17b7d382756fd513bf6f2e75d7f279aa974acb0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
