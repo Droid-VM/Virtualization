@@ -166,6 +166,30 @@
       },
       "revId": "9a6c1cbf3d5d68f430600146d3aea5de37be5712",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd5222c4_43438e95",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-03T15:55:48Z",
+      "side": 1,
+      "message": "I think the P0 for this to land is don\u0027t break TH/cuttlefish (let me kick off a TH run to check).  But if we figure out a way to not break TH (by skipping the commands), possibly we won\u0027t need to deal with fastboot over remote_device_proxy...\n\nRe fastboot over remote_device_proxy:\n\nIt looks like it\u0027s a known issue that tests with fastboot doesn\u0027t work over remote_device_proxy (b/160644613).\n\nUntil there, I guess we have to pick a side: keep go/pkvm-test-nightly green or make local testing easy... Though it seems a custom preparer could allow us to implement some heuristic to make both cases work (not entirely sure).\n\nRe fastboot over remote_device_proxy:\n\nIt doesn\u0027t use the same ANDROID_SERIAL for adb. You have to copy from the output of remote_device_proxy (look for \"fastboot -s tcp:... getvar all\".",
+      "parentUuid": "7b3e8a46_c0a4231c",
+      "range": {
+        "startLine": 14,
+        "startChar": 6,
+        "endLine": 14,
+        "endChar": 59
+      },
+      "revId": "9a6c1cbf3d5d68f430600146d3aea5de37be5712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
