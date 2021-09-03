@@ -94,6 +94,30 @@
       },
       "revId": "9a6c1cbf3d5d68f430600146d3aea5de37be5712",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa205db5_56bb9d78",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-03T14:32:52Z",
+      "side": 1,
+      "message": "I suspect the only way to optimise that would be to write your own preparer which first queries the device to see if pKVM is disabled before doing the fastboot thing.\n\nNot sure about the atest issues. Is the test device remote? I never figured out how to get that to work with fastboot - remote_device_proxy works, but tradefed doesn\u0027t like it.",
+      "parentUuid": "d5cc42de_88c91725",
+      "range": {
+        "startLine": 14,
+        "startChar": 6,
+        "endLine": 14,
+        "endChar": 59
+      },
+      "revId": "9a6c1cbf3d5d68f430600146d3aea5de37be5712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
