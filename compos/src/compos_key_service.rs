@@ -72,12 +72,15 @@ pub struct CompOsKeyService {
 }
 
 impl CompOsKeyService {
-    pub fn new(rpc_binder: bool) -> Result<Self> {
+    pub fn new(use_vm_payload_ns: bool) -> Result<Self> {
         let keystore_service = wait_for_interface::<dyn IKeystoreService>(KEYSTORE_SERVICE_NAME)
             .context("No Keystore service")?;
 
-        let namespace =
-            if rpc_binder { KeystoreNamespace::VmPayload } else { KeystoreNamespace::Odsign };
+        let namespace = if use_vm_payload_ns {
+            KeystoreNamespace::VmPayload
+        } else {
+            KeystoreNamespace::Odsign
+        };
         Ok(CompOsKeyService {
             namespace,
             random: SystemRandom::new(),
