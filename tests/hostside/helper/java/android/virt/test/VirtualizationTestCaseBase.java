@@ -179,11 +179,9 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
         assertTrue(apkPath.startsWith("package:"));
         apkPath = apkPath.substring("package:".length());
 
-        // Push the idsig file to the device
-        File idsigOnHost = findTestFile(buildInfo, apkName + ".idsig");
-        final String apkIdsigPath = TEST_ROOT + apkName + ".idsig";
-        androidDevice.pushFile(idsigOnHost, apkIdsigPath);
+        android.run("mkdir", "-p", TEST_ROOT);
 
+        final String apkIdsigPath = TEST_ROOT + apkName + ".idsig";
         final String instanceImg = TEST_ROOT + INSTANCE_IMG;
         final String logPath = TEST_ROOT + "log.txt";
         final String debugFlag = debug ? "--debug " : "";
