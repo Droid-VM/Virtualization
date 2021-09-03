@@ -142,6 +142,30 @@
       },
       "revId": "9a6c1cbf3d5d68f430600146d3aea5de37be5712",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b3e8a46_c0a4231c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-03T14:48:08Z",
+      "side": 1,
+      "message": "Yeah I can understand that. I wasn\u0027t suggesting it for this CL - let\u0027s get something that works first, then optimise.\n\nAlthough I\u0027m worried this will break my use cases (I also have a device remote from the machine the tests are on). The optimised version would avoid that risk, since I can just make sure I enable pkvm manually. (Or I can just nobble the test locally.)",
+      "parentUuid": "0e0cbce7_9042fcd0",
+      "range": {
+        "startLine": 14,
+        "startChar": 6,
+        "endLine": 14,
+        "endChar": 59
+      },
+      "revId": "9a6c1cbf3d5d68f430600146d3aea5de37be5712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
