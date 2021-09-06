@@ -16,6 +16,46 @@
       "message": "PTAL",
       "revId": "13333e84f9632c01ff85fe469bdc9f1b6d2a79ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5574b01b_f3cebfa3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-09-06T09:29:07Z",
+      "side": 1,
+      "message": "Looks good apart from naming.",
+      "revId": "13333e84f9632c01ff85fe469bdc9f1b6d2a79ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc960a8c_8a615c5d",
+        "filename": "compos/aidl/com/android/compos/FdAnnotation.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-09-06T09:29:07Z",
+      "side": 1,
+      "message": "Is \u0027annotation\u0027 still a good name for this? Before it kind of made sense, as the file size was an annotation on the file descriptor, but now it\u0027s just a couple of lists of file descriptors.",
+      "range": {
+        "startLine": 20,
+        "startChar": 11,
+        "endLine": 20,
+        "endChar": 23
+      },
+      "revId": "13333e84f9632c01ff85fe469bdc9f1b6d2a79ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
