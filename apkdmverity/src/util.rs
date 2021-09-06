@@ -17,6 +17,7 @@
 use anyhow::{bail, Result};
 use nix::sys::stat::FileStat;
 use std::fs::File;
+use std::num::ParseIntError;
 use std::os::unix::fs::FileTypeExt;
 use std::os::unix::io::AsRawFd;
 use std::path::Path;
@@ -40,6 +41,11 @@ pub fn wait_for_path<P: AsRef<Path>>(path: P) -> Result<()> {
 /// Returns hexadecimal reprentation of a given byte array.
 pub fn hexstring_from(s: &[u8]) -> String {
     s.iter().map(|byte| format!("{:02x}", byte)).reduce(|i, j| i + &j).unwrap_or_default()
+}
+
+/// Parses a hexadecimal string into a byte array
+pub fn parse_hexstring(s: &str) -> Result<Vec<u8>, ParseIntError> {
+    (0..s.len()).step_by(2).map(|i| u8::from_str_radix(&s[i..i + 2], 16)).collect()
 }
 
 /// fstat that accepts a path rather than FD
