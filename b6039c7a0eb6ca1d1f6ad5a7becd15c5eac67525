@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12b3ec19_dce2f0af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-06T15:35:22Z",
+      "side": 1,
+      "message": "There\u0027s also now-redundant code in compos_key_cmd, but that\u0027s harmless and will be deleted eventually anyway, so I suggest we ignore it for now.",
+      "revId": "b6039c7a0eb6ca1d1f6ad5a7becd15c5eac67525",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "933f3b3c_d7a54444",
@@ -14,6 +31,30 @@
       "writtenOn": "2021-09-04T00:13:21Z",
       "side": 1,
       "message": "Alan, do you still need to switch between VmPayload and Odsign namespace?  Does this make sense?",
+      "range": {
+        "startLine": 75,
+        "startChar": 15,
+        "endLine": 75,
+        "endChar": 32
+      },
+      "revId": "b6039c7a0eb6ca1d1f6ad5a7becd15c5eac67525",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f9fcac0_9abdce15",
+        "filename": "compos/src/compos_key_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-06T15:35:22Z",
+      "side": 1,
+      "message": "Not any more; the Odsign namespace was only useful for FakeCompOs which I just deleted.",
+      "parentUuid": "933f3b3c_d7a54444",
       "range": {
         "startLine": 75,
         "startChar": 15,
