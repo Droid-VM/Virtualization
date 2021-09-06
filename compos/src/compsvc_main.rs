@@ -24,10 +24,11 @@ mod compsvc;
 mod fsverity;
 mod signer;
 
-use crate::common::{SERVICE_NAME, VSOCK_PORT};
+use crate::common::SERVICE_NAME;
 use anyhow::{bail, Context, Result};
 use binder::unstable_api::AsNative;
 use compos_aidl_interface::binder::{add_service, ProcessState};
+use compos_common::COMPOS_VSOCK_PORT;
 use log::debug;
 
 struct Config {
@@ -58,7 +59,7 @@ fn main() -> Result<()> {
         let retval = unsafe {
             binder_rpc_unstable_bindgen::RunRpcServer(
                 service.as_native_mut() as *mut binder_rpc_unstable_bindgen::AIBinder,
-                VSOCK_PORT,
+                COMPOS_VSOCK_PORT,
             )
         };
         if retval {

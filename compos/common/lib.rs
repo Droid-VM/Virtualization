@@ -14,5 +14,16 @@
  * limitations under the License.
  */
 
-/// Service name of local binder. Used only for debugging purpose.
-pub const SERVICE_NAME: &str = "compsvc";
+//! Common items used by CompOs server and/or clients
+
+pub mod compos_client;
+
+/// VSock port that the CompOs server listens on for RPC binder connections. This should be out of
+/// future port range (if happens) that microdroid may reserve for system components.
+pub const COMPOS_VSOCK_PORT: u32 = 6432;
+
+/// TODO
+pub const COMPOS_APEX_ROOT: &str = "/apex/com.android.compos";
+
+/// TODO
+pub const COMPOS_DATA_ROOT: &str = "/data/misc/apexdata/com.android.compos";
