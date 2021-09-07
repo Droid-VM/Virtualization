@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90290251_8740ea97",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-09-07T10:25:24Z",
+      "side": 1,
+      "message": "nit: cloning feels like it shouldn\u0027t be needed, can the option be opened first to directly compare the arrays?",
+      "range": {
+        "startLine": 106,
+        "startChar": 47,
+        "endLine": 106,
+        "endChar": 52
+      },
+      "revId": "ea9dc7ef63388e5d79e318880964d7c7fab5a577",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "879ddeda_914d3c62",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-09-07T10:25:24Z",
+      "side": 1,
+      "message": "Looking forward, this will include the salt and the APEX versions? Is there anything else it will capture?",
+      "range": {
+        "startLine": 108,
+        "startChar": 25,
+        "endLine": 108,
+        "endChar": 67
+      },
+      "revId": "ea9dc7ef63388e5d79e318880964d7c7fab5a577",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4d8eb1b_64f52443",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-09-07T10:25:24Z",
+      "side": 1,
+      "message": "Does this mean that one VM instance will silently morph into a new instance if a new APK is passed? I expected that a failed verification like this would fail the boot.",
+      "range": {
+        "startLine": 167,
+        "startChar": 17,
+        "endLine": 167,
+        "endChar": 47
+      },
+      "revId": "ea9dc7ef63388e5d79e318880964d7c7fab5a577",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
