@@ -18,7 +18,9 @@ package com.android.microdroid.demo;
 
 import android.app.Application;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineCallback;
 import android.system.virtualmachine.VirtualMachineConfig;
@@ -37,6 +39,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.android.microdroid.testservice.ITestService;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -177,9 +181,62 @@ public class MainActivity extends AppCompatActivity {
 
                         @Override
                         public void onPayloadReady(VirtualMachine vm) {
-                            // This check doesn't 100% prevent race condition, but is fine for demo.
+                            // This check doesn't 100% prevent race condition or UI hang.
+                            // However, it's fine for demo.
                             if (!mService.isShutdown()) {
-                                mPayloadOutput.postValue("(Payload is ready)");
+                                mPayloadOutput.postValue(
+                                        "(Payload is ready. Testing VM service...)");
+
+                                try {
+                                    vm.connectToVsockServer(ITestService.SERVICE_PORT);
+                                } catch (VirtualMachineException e) {
+                                    mPayloadOutput.postValue(
+                                            String.format(
+                                                    "(Exception while connecting VM's binder"
+                                                            + " service: %s)",
+                                                    e.getMessage()));
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onVsockServerReady(
+                                VirtualMachine vm, int port, IBinder binder) {
+                            // This check doesn't 100% prevent race condition or UI hang.
+                            // However, it's fine for demo.
+                            if (!mService.isShutdown() && port == ITestService.SERVICE_PORT) {
+                                mPayloadOutput.postValue(
+                                        "(VM service connected. Testing VM service...)");
+
+                                // Test VM's binder service
+                                try {
+                                    ITestService testService =
+                                            ITestService.Stub.asInterface(binder);
+                                    int ret = testService.addInteger(123, 456);
+                                    mPayloadOutput.postValue(
+                                            String.format(
+                                                    "(VM payload service: %d + %d = %d)",
+                                                    123, 456, ret));
+                                } catch (RemoteException e) {
+                                    mPayloadOutput.postValue(
+                                            String.format(
+                                                    "(Exception while testing VM's binder service:"
+                                                            + " %s)",
+                                                    e.getMessage()));
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onVsockServerConnectionFailed(
+                                VirtualMachine vm, int port, String error) {
+                            // This check doesn't 100% prevent race condition or UI hang.
+                            // However, it's fine for demo.
+                            if (!mService.isShutdown()) {
+                                mPayloadOutput.postValue(
+                                        String.format(
+                                                "(Connection to port %d failed. Reason: %s",
+                                                port, error));
                             }
                         }
 
