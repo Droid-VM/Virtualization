@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30a8b2b2_d74f2d8a",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-07T11:10:17Z",
+      "side": 1,
+      "message": "We need to write to the instance disk also when saved_roothash \u003d\u003d None. So directly comparing the inner array isn\u0027t enough.\n\nAnyway, I managed to do this without cloning trusted_roothash.",
+      "parentUuid": "90290251_8740ea97",
+      "range": {
+        "startLine": 106,
+        "startChar": 47,
+        "endLine": 106,
+        "endChar": 52
+      },
+      "revId": "ea9dc7ef63388e5d79e318880964d7c7fab5a577",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "879ddeda_914d3c62",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe7811fa_d4c8b07c",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-07T11:10:17Z",
+      "side": 1,
+      "message": "It will have (apex_name, public_key) pairs and the public key of the APEX as well.",
+      "parentUuid": "879ddeda_914d3c62",
+      "range": {
+        "startLine": 108,
+        "startChar": 25,
+        "endLine": 108,
+        "endChar": 67
+      },
+      "revId": "ea9dc7ef63388e5d79e318880964d7c7fab5a577",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4d8eb1b_64f52443",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-09-07T10:25:24Z",
       "side": 1,
       "message": "Does this mean that one VM instance will silently morph into a new instance if a new APK is passed? I expected that a failed verification like this would fail the boot.",
+      "range": {
+        "startLine": 167,
+        "startChar": 17,
+        "endLine": 167,
+        "endChar": 47
+      },
+      "revId": "ea9dc7ef63388e5d79e318880964d7c7fab5a577",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa328eb1_1c1b40d3",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-07T11:10:17Z",
+      "side": 1,
+      "message": "Oh, we should save the public key of the APK as well so that we accept updates of the APK from the same signer, but not those from others which probably would be attackers. Unlike roothash, we should never update the public key once it is written. Let me do that as a follow-up change.",
+      "parentUuid": "a4d8eb1b_64f52443",
       "range": {
         "startLine": 167,
         "startChar": 17,
