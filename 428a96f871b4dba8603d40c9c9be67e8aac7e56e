@@ -190,6 +190,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1b23fe0_6c380d13",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-07T06:09:33Z",
+      "side": 1,
+      "message": "\u003e Therefore, I don\u0027t think the current behavior is wrong. It does not mean that the extra steps like linkerconfig, etc. are done. Those steps themselves could be triggered from apexd.status\u003dready.\n\nHmm, this differs from what I understand. AFAIK, apexd.status\u003dready is known as THE event for which other components wanting to use something from APEXes should wait. Yeah, the fact that linkerconfig generates configurations for apexes is the implementation detail, but apexd.status\u003dready should imply that as well. I mean, after apexd.status\u003dready, we should be able to \"use\" /apex even for running a binary in it.\n\nThere\u0027s apexd.status\u003dactivated which tells you can \"read\" contents from /apex, but for most cases, we only need to care about \"\u003dready\".",
+      "parentUuid": "3338ea0b_238643e8",
+      "range": {
+        "startLine": 33,
+        "startChar": 12,
+        "endLine": 33,
+        "endChar": 30
+      },
+      "revId": "428a96f871b4dba8603d40c9c9be67e8aac7e56e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29f3662e_1a063bf5",
