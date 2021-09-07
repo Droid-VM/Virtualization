@@ -89,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b181c93_d9232a58",
+        "filename": "javalib/jni/android_system_virtualmachine_VirtualMachine.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-09-07T12:33:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc163edc_8c76b811",
+      "range": {
+        "startLine": 28,
+        "startChar": 38,
+        "endLine": 28,
+        "endChar": 47
+      },
+      "revId": "7a1781cbb08e72d893181e25390817bf6a34d836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5ec7ec7_d327d97f",
@@ -130,6 +154,54 @@
         "startChar": 0,
         "endLine": 444,
         "endChar": 83
+      },
+      "revId": "7a1781cbb08e72d893181e25390817bf6a34d836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "640c2f4c_cc4a18db",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-09-07T12:33:30Z",
+      "side": 1,
+      "message": "I added RpcPreconnectedClient to use fd from connectVsock.",
+      "parentUuid": "6d631ac1_62ffb0fe",
+      "range": {
+        "startLine": 444,
+        "startChar": 0,
+        "endLine": 444,
+        "endChar": 83
+      },
+      "revId": "7a1781cbb08e72d893181e25390817bf6a34d836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e44417d_108c87ba",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-09-07T12:33:30Z",
+      "side": 1,
+      "message": "I think ServiceConnection interface can\u0027t be used as-is, because of mismatches between ServiceConnection\u0027s documentation and this VirtualMachine implementaion. Instead, I added callbacks in VirtualMachineCallback.java.",
+      "parentUuid": "e5ec7ec7_d327d97f",
+      "range": {
+        "startLine": 444,
+        "startChar": 19,
+        "endLine": 444,
+        "endChar": 40
       },
       "revId": "7a1781cbb08e72d893181e25390817bf6a34d836",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
