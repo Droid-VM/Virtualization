@@ -227,6 +227,8 @@ public class VirtualMachine {
         try {
             if (mVirtualMachine != null) {
                 switch (mVirtualMachine.getState()) {
+                    case VirtualMachineState.NOT_STARTED:
+                        return Status.STOPPED;
                     case VirtualMachineState.STARTING:
                     case VirtualMachineState.STARTED:
                     case VirtualMachineState.READY:
@@ -299,7 +301,7 @@ public class VirtualMachine {
             android.system.virtualizationservice.VirtualMachineConfig vmConfigParcel =
                     android.system.virtualizationservice.VirtualMachineConfig.appConfig(appConfig);
 
-            mVirtualMachine = service.startVm(vmConfigParcel, mConsoleWriter);
+            mVirtualMachine = service.createVm(vmConfigParcel, mConsoleWriter);
             mVirtualMachine.registerCallback(
                     new IVirtualMachineCallback.Stub() {
                         @Override
@@ -350,7 +352,7 @@ public class VirtualMachine {
                                 }
                             },
                             0);
-
+            mVirtualMachine.start();
         } catch (IOException e) {
             throw new VirtualMachineException(e);
         } catch (RemoteException e) {
