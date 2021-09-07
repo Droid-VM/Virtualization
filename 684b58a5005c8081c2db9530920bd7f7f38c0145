@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e997ee8b_d51e8730",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-07T11:35:30Z",
+      "side": 1,
+      "message": "It is definitely possible to generalize this further so it isn\u0027t CompOS specific. But I don\u0027t think I understand what the more general API should look like yet without further use cases.",
+      "revId": "684b58a5005c8081c2db9530920bd7f7f38c0145",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "765045db_3fd9c402",
+        "filename": "compos/common/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-07T11:35:30Z",
+      "side": 1,
+      "message": "Style question: if binary A uses rustlib B, and B depends on C, should A list C as a dependency as well as B?",
+      "range": {
+        "startLine": 10,
+        "startChar": 4,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "684b58a5005c8081c2db9530920bd7f7f38c0145",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
