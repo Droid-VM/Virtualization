@@ -214,6 +214,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a95f0f13_88e3a4a7",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-07T06:30:57Z",
+      "side": 1,
+      "message": "That doesn\u0027t match with the documentation [1]\n\n`perform_apex_config`\n Performs tasks after APEXes are mounted. For example, creates data directories\n  for the mounted APEXes, parses config file(s) from them, and updates linker\n  configurations. Intended to be used only once when apexd notifies the mount\n  event by setting `apexd.status` to ready.\n  \nThe document might be outdated. I think that the definition of apexd.status has evolved quite a bit but the interpretation of the sysprop seems to be differ in many places.\n  \nIf you think apexd.status\u003dready should imply linkerconfig as well, please file a new bug to make it consistent throughout Android. That change shall include the removal of linkerconfig.ready property that I am adding here. I think that is out of scope of this CL.\n  \n[1] https://source.corp.google.com/android/system/core/init/README.md;rcl\u003d3d532080727a79dbba23fed5a97adb56fe7e5ae2;l\u003d610",
+      "parentUuid": "b1b23fe0_6c380d13",
+      "range": {
+        "startLine": 33,
+        "startChar": 12,
+        "endLine": 33,
+        "endChar": 30
+      },
+      "revId": "428a96f871b4dba8603d40c9c9be67e8aac7e56e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29f3662e_1a063bf5",
