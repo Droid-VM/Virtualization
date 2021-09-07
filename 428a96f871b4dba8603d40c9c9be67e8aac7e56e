@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a96749bb_f4dacdc6",
+        "filename": "apkdmverity/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-07T05:15:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6399115_221c5b44",
+      "range": {
+        "startLine": 199,
+        "startChar": 62,
+        "endLine": 199,
+        "endChar": 66
+      },
+      "revId": "428a96f871b4dba8603d40c9c9be67e8aac7e56e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "411529c0_6c3b88a6",
         "filename": "apkdmverity/src/util.rs",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2021-09-07T01:44:02Z",
       "side": 1,
       "message": "nit: chunks? and error when s.len() is not even.",
+      "range": {
+        "startLine": 48,
+        "startChar": 5,
+        "endLine": 48,
+        "endChar": 15
+      },
+      "revId": "428a96f871b4dba8603d40c9c9be67e8aac7e56e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "635dcc58_d308f834",
+        "filename": "apkdmverity/src/util.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-07T05:15:21Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s feasible. chunks() is defined for slices, but there\u0027s no easy and efficient way to convert \u0026str into \u0026[char].\n\nI see the same questions at https://users.rust-lang.org/t/solved-how-to-split-string-into-multiple-sub-strings-with-given-length/10542\n\nI added an assert instead.",
+      "parentUuid": "411529c0_6c3b88a6",
       "range": {
         "startLine": 48,
         "startChar": 5,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e5773d5_fb39f563",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-07T05:15:21Z",
+      "side": 1,
+      "message": "apexd.status has been set by apexd. I don\u0027t think it\u0027s good to make an exception to that just to not introduce a new sysprop.",
+      "parentUuid": "e37251cf_712fe511",
+      "range": {
+        "startLine": 33,
+        "startChar": 12,
+        "endLine": 33,
+        "endChar": 30
+      },
+      "revId": "428a96f871b4dba8603d40c9c9be67e8aac7e56e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29f3662e_1a063bf5",
@@ -83,6 +155,54 @@
       "writtenOn": "2021-09-07T01:44:02Z",
       "side": 1,
       "message": "It looks like microdroid manager starts zipfuse after linkerconfig is ready. Should zipfuse be bootstrap?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 20
+      },
+      "revId": "428a96f871b4dba8603d40c9c9be67e8aac7e56e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb29ddf7_88badd4b",
+        "filename": "zipfuse/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-07T05:15:21Z",
+      "side": 1,
+      "message": "You are right. zipfuse was a bootstrap process during the early implementation of this CL, but it no longer is. Removed.",
+      "parentUuid": "29f3662e_1a063bf5",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 20
+      },
+      "revId": "428a96f871b4dba8603d40c9c9be67e8aac7e56e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7aa8eec_2d517f2e",
+        "filename": "zipfuse/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-07T05:15:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29f3662e_1a063bf5",
       "range": {
         "startLine": 32,
         "startChar": 0,
