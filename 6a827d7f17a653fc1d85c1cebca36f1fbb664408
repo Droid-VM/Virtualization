@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c913ec6f_64e9a8cd",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-07T15:07:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3474d68_ae65e021",
+      "range": {
+        "startLine": 100,
+        "startChar": 25,
+        "endLine": 100,
+        "endChar": 68
+      },
+      "revId": "6a827d7f17a653fc1d85c1cebca36f1fbb664408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c06d5f7_2897ed2b",
@@ -37,6 +61,24 @@
       "writtenOn": "2021-09-07T14:13:08Z",
       "side": 1,
       "message": "```\nif saved_roothash.is_none() {\n  // update and write\n} else {\n  // TODO: updates are prevented until rollback protection is supported\n  return Err(); // Fail to boot\n}\n```",
+      "revId": "6a827d7f17a653fc1d85c1cebca36f1fbb664408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44161e15_3ef75932",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-07T15:07:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c06d5f7_2897ed2b",
       "revId": "6a827d7f17a653fc1d85c1cebca36f1fbb664408",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
