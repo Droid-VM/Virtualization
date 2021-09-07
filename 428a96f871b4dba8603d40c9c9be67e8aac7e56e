@@ -166,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3338ea0b_238643e8",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-07T05:44:51Z",
+      "side": 1,
+      "message": "The meaning of apexd.status\u003dready has been clear. It means that APEXes are correctly mounted and can be accessed via the /apex paths [1]. Therefore, I don\u0027t think the current behavior is wrong. It does not mean that the extra steps like linkerconfig, etc. are done. Those steps themselves could be triggered from apexd.status\u003dready.\n\nIf someone wants to wait until the linkerconfig becomes ready, they should wait for the sysprop for the very event, not an event from apexd which might be an impl detail of linkerconfig.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:system/apex/apexd/apexd.cpp;drc\u003dmaster;l\u003d2945",
+      "parentUuid": "20cfbd08_b3b4ecda",
+      "range": {
+        "startLine": 33,
+        "startChar": 12,
+        "endLine": 33,
+        "endChar": 30
+      },
+      "revId": "428a96f871b4dba8603d40c9c9be67e8aac7e56e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29f3662e_1a063bf5",
