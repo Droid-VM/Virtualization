@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42d04a80_af7d0be6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-07T15:26:05Z",
+      "side": 1,
+      "message": "+2 but please wait for Andrew in case he has more thoughts",
+      "revId": "684b58a5005c8081c2db9530920bd7f7f38c0145",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "765045db_3fd9c402",
@@ -36,6 +53,99 @@
         "startChar": 4,
         "endLine": 10,
         "endChar": 12
+      },
+      "revId": "684b58a5005c8081c2db9530920bd7f7f38c0145",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d9b1197_f0edde9d",
+        "filename": "compos/common/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-07T15:26:05Z",
+      "side": 1,
+      "message": "I\u0027d think no?  If B changed its implementation to use D, A shouldn\u0027t need to be updated.\n\n(I\u0027m also wondering if libbinder_rpc_unstable should have been hidden behind _bindgen as a runtime dependency somehow, but that\u0027s orthogonal to this change)",
+      "parentUuid": "765045db_3fd9c402",
+      "range": {
+        "startLine": 10,
+        "startChar": 4,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "684b58a5005c8081c2db9530920bd7f7f38c0145",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1c65f4c_156635ea",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-07T15:26:05Z",
+      "side": 1,
+      "message": "FYI. I\u0027ll probably ask the Rust group about style guideline of use grouping.  I still prefer not to mix internal crates with others.  In any case, we can \"fix\" all of our code if they do have a preferred style.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 2
+      },
+      "revId": "684b58a5005c8081c2db9530920bd7f7f38c0145",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a96cd98e_c9faf973",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-07T15:26:05Z",
+      "side": 1,
+      "message": "nit: \u003e100 cols",
+      "range": {
+        "startLine": 112,
+        "startChar": 100,
+        "endLine": 112,
+        "endChar": 103
+      },
+      "revId": "684b58a5005c8081c2db9530920bd7f7f38c0145",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e230695_cf7470a4",
+        "filename": "compos/common/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-07T15:26:05Z",
+      "side": 1,
+      "message": "nit: remove blank line",
+      "range": {
+        "startLine": 17,
+        "startChar": 52,
+        "endLine": 19,
+        "endChar": 1
       },
       "revId": "684b58a5005c8081c2db9530920bd7f7f38c0145",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
