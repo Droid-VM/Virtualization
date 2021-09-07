@@ -140,6 +140,30 @@
       },
       "revId": "ea9dc7ef63388e5d79e318880964d7c7fab5a577",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b8cc928_bc746ec8",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-09-07T14:13:08Z",
+      "side": 1,
+      "message": "That will be needed, but in the near term we don\u0027t allow updates because we don\u0027t have rollback protection (an attacker could reply an old version of instance.img to boot an older version of the APK). We can deal with that at a higher level than this so it\u0027s easier to update the policy, see other comment.",
+      "parentUuid": "fa328eb1_1c1b40d3",
+      "range": {
+        "startLine": 167,
+        "startChar": 17,
+        "endLine": 167,
+        "endChar": 47
+      },
+      "revId": "ea9dc7ef63388e5d79e318880964d7c7fab5a577",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
