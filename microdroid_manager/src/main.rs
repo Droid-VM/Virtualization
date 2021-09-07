@@ -18,7 +18,7 @@ mod instance;
 mod ioutil;
 mod metadata;
 
-use crate::instance::InstanceDisk;
+use crate::instance::{ApkData, InstanceDisk, MicrodroidData, Roothash};
 use anyhow::{anyhow, bail, Context, Result};
 use apkverify::verify;
 use binder::unstable_api::{new_spibinder, AIBinder};
@@ -92,11 +92,10 @@ fn main() -> Result<()> {
 
     let metadata = metadata::load()?;
 
-    // Try to read roothash from the instance disk.
-    // TODO(jiyong): the data should have an internal structure.
     let mut instance = InstanceDisk::new()?;
-    let saved_roothash = instance.read_microdroid_data().context("Failed to read identity data")?;
-    let saved_roothash = saved_roothash.as_deref();
+    let data = instance.read_microdroid_data().context("Failed to read identity data")?;
+    let saved_roothash: Option<&[u8]> =
+        if let Some(data) = data.as_ref() { Some(&data.apk_data.roothash) } else { None };
 
     // Verify the payload before using it.
     let verified_roothash =
@@ -109,10 +108,8 @@ fn main() -> Result<()> {
         }
     } else {
         info!("Saving APK roothash: {}", to_hex_string(verified_roothash.as_ref()));
-        // TODO(jiyong): the data should have an internal structure.
-        instance
-            .write_microdroid_data(verified_roothash.as_ref())
-            .context("Failed to write identity data")?;
+        let data = MicrodroidData { apk_data: ApkData { roothash: verified_roothash } };
+        instance.write_microdroid_data(&data).context("Failed to write identity data")?;
     }
 
     wait_for_apex_config_done()?;
@@ -140,8 +137,6 @@ fn main() -> Result<()> {
 
     Ok(())
 }
-
-type Roothash = [u8];
 
 // Verify payload before executing it. Full verification (which is slow) is done when the roothash
 // values from the idsig file and the instance disk are different. This function returns the
