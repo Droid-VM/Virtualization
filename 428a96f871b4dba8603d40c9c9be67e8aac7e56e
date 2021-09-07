@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6399115_221c5b44",
+        "filename": "apkdmverity/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-07T01:44:02Z",
+      "side": 1,
+      "message": "Can you add a new test for \u0027Some\u0027 case?",
+      "range": {
+        "startLine": 199,
+        "startChar": 62,
+        "endLine": 199,
+        "endChar": 66
+      },
+      "revId": "428a96f871b4dba8603d40c9c9be67e8aac7e56e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "411529c0_6c3b88a6",
+        "filename": "apkdmverity/src/util.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-07T01:44:02Z",
+      "side": 1,
+      "message": "nit: chunks? and error when s.len() is not even.",
+      "range": {
+        "startLine": 48,
+        "startChar": 5,
+        "endLine": 48,
+        "endChar": 15
+      },
+      "revId": "428a96f871b4dba8603d40c9c9be67e8aac7e56e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e37251cf_712fe511",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-07T01:44:02Z",
+      "side": 1,
+      "message": "Can we re-use \u0027apexd.status\u003dready\u0027 which tells we can use contents from apexes? In a normal Android, this is set by \u0027apexd --snapshotde\u0027, which is not run in vm mode.\n\nFor now, apexd --vm sets apexd.status\u003dready[1], but it seems to be right for init to set it after running \u0027perform_apex_config\u0027, not by \u0027apexd --vm\u0027\n\n[1] https://cs.android.com/android/platform/superproject/+/master:system/apex/apexd/apexd.cpp;l\u003d3396-3398?q\u003dapexd.cpp",
+      "range": {
+        "startLine": 33,
+        "startChar": 12,
+        "endLine": 33,
+        "endChar": 30
+      },
+      "revId": "428a96f871b4dba8603d40c9c9be67e8aac7e56e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29f3662e_1a063bf5",
+        "filename": "zipfuse/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-07T01:44:02Z",
+      "side": 1,
+      "message": "It looks like microdroid manager starts zipfuse after linkerconfig is ready. Should zipfuse be bootstrap?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 20
+      },
+      "revId": "428a96f871b4dba8603d40c9c9be67e8aac7e56e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
