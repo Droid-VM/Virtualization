@@ -56,6 +56,30 @@
       },
       "revId": "13333e84f9632c01ff85fe469bdc9f1b6d2a79ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2367b22a_a3266aff",
+        "filename": "compos/aidl/com/android/compos/FdAnnotation.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-07T14:58:17Z",
+      "side": 1,
+      "message": "This additional information should be removed, hopefully in 1-2 weeks, so maybe let me just keep this for the time being.  Once my work on the ART side has done, the request from the client won\u0027t be arbitrary cmdline strings, and will become structured data.  We\u0027ll be able to collect input/output FDs from the request structure.",
+      "parentUuid": "fc960a8c_8a615c5d",
+      "range": {
+        "startLine": 20,
+        "startChar": 11,
+        "endLine": 20,
+        "endChar": 23
+      },
+      "revId": "13333e84f9632c01ff85fe469bdc9f1b6d2a79ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
