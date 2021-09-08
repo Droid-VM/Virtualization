@@ -26,6 +26,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62260f23_3abe30a7",
+        "filename": "javalib/jni/android_system_virtualmachine_VirtualMachine.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-08T01:23:12Z",
+      "side": 1,
+      "message": "Why do you call Java methods here? You can directly use libbinder_ndk to call IVirtualMachine.connectVsock",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 54
+      },
+      "revId": "dfac0414d778f519a1e1b0283eed01ff70b644f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cce51b40_f4bcba3e",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-08T01:23:12Z",
+      "side": 1,
+      "message": "Use lambda expression",
+      "range": {
+        "startLine": 455,
+        "startChar": 0,
+        "endLine": 457,
+        "endChar": 47
+      },
+      "revId": "dfac0414d778f519a1e1b0283eed01ff70b644f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "61d68163_eb615b08",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
         "patchSetId": 8
@@ -37,6 +83,29 @@
       "writtenOn": "2021-09-07T14:28:13Z",
       "side": 1,
       "message": "I guess you mean when it fails to connect.",
+      "revId": "dfac0414d778f519a1e1b0283eed01ff70b644f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da22e43c_f4beb816",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-08T01:23:12Z",
+      "side": 1,
+      "message": "These don\u0027t belong to VirtualMachineCallback. You need to define a new callback interface for rpc binder.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 0
+      },
       "revId": "dfac0414d778f519a1e1b0283eed01ff70b644f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
