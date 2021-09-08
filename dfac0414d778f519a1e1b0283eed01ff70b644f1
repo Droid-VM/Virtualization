@@ -222,6 +222,30 @@
       },
       "revId": "dfac0414d778f519a1e1b0283eed01ff70b644f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f29fb8db_9516c7bf",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-08T02:28:20Z",
+      "side": 1,
+      "message": "One interface that covers everything is a bad design.\n\nThese two methods wouldn\u0027t even needed if we make connectToVsockServer to return Future.",
+      "parentUuid": "71a88738_23e74259",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "dfac0414d778f519a1e1b0283eed01ff70b644f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
