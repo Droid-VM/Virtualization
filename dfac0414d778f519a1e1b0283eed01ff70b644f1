@@ -73,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f969973d_a4481353",
+        "filename": "javalib/jni/android_system_virtualmachine_VirtualMachine.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-09-08T06:56:47Z",
+      "side": 1,
+      "message": "Isn\u0027t it easier to just call the Java method here? How can we get the binder object from android.system.IVirtualMachine java object?",
+      "parentUuid": "62260f23_3abe30a7",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 54
+      },
+      "revId": "dfac0414d778f519a1e1b0283eed01ff70b644f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cce51b40_f4bcba3e",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 8
@@ -84,6 +108,54 @@
       "writtenOn": "2021-09-08T01:23:12Z",
       "side": 1,
       "message": "Use lambda expression",
+      "range": {
+        "startLine": 455,
+        "startChar": 0,
+        "endLine": 457,
+        "endChar": 47
+      },
+      "revId": "dfac0414d778f519a1e1b0283eed01ff70b644f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbda7827_03e77cc4",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-09-08T06:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cce51b40_f4bcba3e",
+      "range": {
+        "startLine": 455,
+        "startChar": 0,
+        "endLine": 457,
+        "endChar": 47
+      },
+      "revId": "dfac0414d778f519a1e1b0283eed01ff70b644f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbb7dd1f_2e0a275b",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-09-08T06:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cce51b40_f4bcba3e",
       "range": {
         "startLine": 455,
         "startChar": 0,
@@ -238,6 +310,30 @@
       "side": 1,
       "message": "One interface that covers everything is a bad design.\n\nThese two methods wouldn\u0027t even needed if we make connectToVsockServer to return Future.",
       "parentUuid": "71a88738_23e74259",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "dfac0414d778f519a1e1b0283eed01ff70b644f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ed5fa6d_58c4a166",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-09-08T06:56:47Z",
+      "side": 1,
+      "message": "Future seems like the best way.",
+      "parentUuid": "f29fb8db_9516c7bf",
       "range": {
         "startLine": 42,
         "startChar": 0,
