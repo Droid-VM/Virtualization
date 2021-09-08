@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "053c4b52_c0cdc5e8",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineState.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-08T11:42:14Z",
+      "side": 1,
+      "message": "Does \"UNKNOWN \u003d 0\" make sense? In AIDL, we recommend to define \"0\" value for meaningful default value.",
+      "range": {
+        "startLine": 22,
+        "startChar": 5,
+        "endLine": 22,
+        "endChar": 24
+      },
+      "revId": "0f21b62b6814cd3f7589eb4982f4df249a2ae497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93cb5787_a7a51f81",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineState.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-08T11:42:14Z",
+      "side": 1,
+      "message": "I\u0027m not sure how these two can be interpreted for non-microdroid VM instances.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 17
+      },
+      "revId": "0f21b62b6814cd3f7589eb4982f4df249a2ae497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
