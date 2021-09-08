@@ -198,6 +198,30 @@
       },
       "revId": "dfac0414d778f519a1e1b0283eed01ff70b644f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71a88738_23e74259",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-09-08T02:12:16Z",
+      "side": 1,
+      "message": "\u003e Existing methods in this callback interface are not specific to binder. They represent events that are triggered by starting a VM.\n\nI don\u0027t think VirtualMachineCallback shouldn\u0027t cover events other than starting/stopping a VM. In my understanding, VirtualMachineCallback is for callbacks triggered by methods in the VirtualMachine class.",
+      "parentUuid": "bc9f19f2_e2187469",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "dfac0414d778f519a1e1b0283eed01ff70b644f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
