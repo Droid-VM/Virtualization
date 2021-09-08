@@ -50,6 +50,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17843c55_e9eefb28",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineState.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-08T12:46:43Z",
+      "side": 1,
+      "message": "... the payload has started but has not yet ...\n?",
+      "range": {
+        "startLine": 28,
+        "startChar": 25,
+        "endLine": 28,
+        "endChar": 26
+      },
+      "revId": "0f21b62b6814cd3f7589eb4982f4df249a2ae497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "93cb5787_a7a51f81",
         "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineState.aidl",
         "patchSetId": 1
@@ -90,6 +113,29 @@
         "startChar": 0,
         "endLine": 38,
         "endChar": 17
+      },
+      "revId": "0f21b62b6814cd3f7589eb4982f4df249a2ae497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb0b0576_9e13d322",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-08T12:46:43Z",
+      "side": 1,
+      "message": "It might be useful to comment that the order is significant (in terms of allowed state transitions), to prevent future maintenance errors.",
+      "range": {
+        "startLine": 56,
+        "startChar": 33,
+        "endLine": 56,
+        "endChar": 36
       },
       "revId": "0f21b62b6814cd3f7589eb4982f4df249a2ae497",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
