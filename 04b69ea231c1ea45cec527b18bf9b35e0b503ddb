@@ -75,6 +75,30 @@
       },
       "revId": "04b69ea231c1ea45cec527b18bf9b35e0b503ddb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3abf6f0d_25699601",
+        "filename": "javalib/AndroidManifest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-08T23:26:59Z",
+      "side": 1,
+      "message": "Permission can be defined in any package. But I thought that this package android.system.virtualmachine.res should be signed with the platform key as well.",
+      "parentUuid": "a42d732e_fb618577",
+      "range": {
+        "startLine": 20,
+        "startChar": 28,
+        "endLine": 20,
+        "endChar": 69
+      },
+      "revId": "04b69ea231c1ea45cec527b18bf9b35e0b503ddb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
