@@ -150,6 +150,30 @@
       },
       "revId": "dfac0414d778f519a1e1b0283eed01ff70b644f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ea49264_29fa57fb",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-09-08T01:27:41Z",
+      "side": 1,
+      "message": "Sorry, I don\u0027t get it. We will add an API to the VirtualMachine class. Just like VirtualMacine.run will trigger VirtualMachineCallback.onPayload* and VirtualMachineCallback.onDied, VirtualMachine.connectToVsockServer will trigger VirtualMachineCallback.onVsockServer*. What problems are here?",
+      "parentUuid": "da22e43c_f4beb816",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "dfac0414d778f519a1e1b0283eed01ff70b644f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
