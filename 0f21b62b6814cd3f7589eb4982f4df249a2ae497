@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8f4895f_65cf6c15",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineState.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-08T13:12:53Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "71ac9f4a_8b07a400",
+      "range": {
+        "startLine": 22,
+        "startChar": 5,
+        "endLine": 22,
+        "endChar": 24
+      },
+      "revId": "0f21b62b6814cd3f7589eb4982f4df249a2ae497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17843c55_e9eefb28",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "Any VM is free to call the `IVirtualMachineService` methods to update its payload state if it wants to. If not, it will just use the STARTING and DIED states. I think this is fine, in the non-Microdroid case it\u0027s up to the application to decide how to use the states, but I can rename the states if you can think of some names that would be clearer.",
       "parentUuid": "93cb5787_a7a51f81",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 17
+      },
+      "revId": "0f21b62b6814cd3f7589eb4982f4df249a2ae497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c589af49_5cd88021",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineState.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-08T13:12:53Z",
+      "side": 1,
+      "message": "True, but it assumes that non-microdroid VM can call methods via Binder-over-vsock. ;-)",
+      "parentUuid": "9c757364_3aca03a3",
       "range": {
         "startLine": 31,
         "startChar": 0,
