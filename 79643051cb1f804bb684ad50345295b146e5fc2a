@@ -16,6 +16,24 @@
       "message": "LGTM, but a change for compos seems missing.\n\npackages/modules/Virtualization/compos/compos_key_cmd/compos_key_cmd.cpp:216:32: error: no member named \u0027startVm\u0027 in \u0027aidl::android::system::virtualizationservice::IVirtualizationService\u0027",
       "revId": "79643051cb1f804bb684ad50345295b146e5fc2a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daf14abe_c595792f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-09T08:00:04Z",
+      "side": 1,
+      "message": "This change will also affect compos/common/compos_client.rs",
+      "parentUuid": "546eed65_b16d690d",
+      "revId": "79643051cb1f804bb684ad50345295b146e5fc2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
