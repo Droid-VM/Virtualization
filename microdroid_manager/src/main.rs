@@ -36,6 +36,7 @@ use std::os::unix::io::{AsRawFd, FromRawFd, IntoRawFd};
 use std::path::Path;
 use std::process::{Command, Stdio};
 use std::str;
+use std::thread;
 use std::time::{Duration, SystemTime};
 use vsock::VsockStream;
 
@@ -92,6 +93,16 @@ fn main() -> Result<()> {
     kernlog::init()?;
     info!("started.");
 
+    // TODO(jooyung): make zipfuse wait for the path?
+    thread::spawn(move || -> Result<()> {
+        // start zipfuse when apkdmverity finishes its job.
+        if ioutil::wait_for_file(DM_MOUNTED_APK_PATH, WAIT_TIMEOUT).is_ok() {
+            system_properties::write("ctl.start", "zipfuse")
+        } else {
+            Ok(())
+        }
+    });
+
     let metadata = load_metadata()?;
 
     let mut instance = InstanceDisk::new()?;
@@ -111,13 +122,8 @@ fn main() -> Result<()> {
         instance.write_microdroid_data(&verified_data).context("Failed to write identity data")?;
     }
 
-    wait_for_apex_config_done()?;
-
     let service = get_vms_rpc_binder().expect("cannot connect to VirtualMachineService");
     if !metadata.payload_config_path.is_empty() {
-        // Before reading a file from the APK, start zipfuse
-        system_properties::write("ctl.start", "zipfuse")?;
-
         let config = load_config(Path::new(&metadata.payload_config_path))?;
 
         let fake_secret = "This is a placeholder for a value that is derived from the images that are loaded in the VM.";
@@ -125,7 +131,10 @@ fn main() -> Result<()> {
             warn!("failed to set ro.vmsecret.keymint: {}", err);
         }
 
+        // Wait until apex config is done. (e.g. linker configuration for apexes)
         // TODO(jooyung): wait until sys.boot_completed?
+        wait_for_apex_config_done()?;
+
         if let Some(main_task) = &config.task {
             exec_task(main_task, &service).map_err(|e| {
                 error!("failed to execute task: {}", e);
@@ -147,18 +156,12 @@ fn verify_payload(
 ) -> Result<MicrodroidData> {
     let start_time = SystemTime::now();
 
-    let root_hash = saved_data.map(|d| &d.apk_data.root_hash);
+    // get APK/APEX data from payload
     let root_hash_from_idsig = get_apk_root_hash_from_idsig()?;
-    let root_hash_trustful = root_hash == Some(&root_hash_from_idsig);
-
-    // Start apkdmverity and wait for the dm-verify block
-    system_properties::write("ctl.start", "apkdmverity")?;
-
-    // While waiting for apkdmverity to mount APK, gathers APEX pubkeys used by APEXd.
-    // These will be compared ones from instance.img.
     let apex_data_from_payload = get_apex_data_from_payload(metadata)?;
 
-    ioutil::wait_for_file(DM_MOUNTED_APK_PATH, WAIT_TIMEOUT)?;
+    let root_hash = saved_data.map(|d| &d.apk_data.root_hash);
+    let root_hash_trustful = root_hash == Some(&root_hash_from_idsig);
 
     // Do the full verification if the root_hash is un-trustful. This requires the full scanning of
     // the APK file and therefore can be very slow if the APK is large. Note that this step is
@@ -166,6 +169,7 @@ fn verify_payload(
     // of the VM or APK was updated in the host.
     // TODO(jooyung): consider multithreading to make this faster
     if !root_hash_trustful {
+        ioutil::wait_for_file(DM_MOUNTED_APK_PATH, WAIT_TIMEOUT)?;
         verify(DM_MOUNTED_APK_PATH).context(format!("failed to verify {}", DM_MOUNTED_APK_PATH))?;
     }
 

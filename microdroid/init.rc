@@ -19,6 +19,7 @@ on early-init
 
     mkdir /mnt/apk 0755 system system
     start microdroid_manager
+    start apkdmverity
 
     # Exec apexd in the VM mode to avoid unnecessary overhead of normal mode.
     # (e.g. session management)
