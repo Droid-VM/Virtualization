@@ -151,13 +151,6 @@ fn verify_payload(
     let root_hash_from_idsig = get_apk_root_hash_from_idsig()?;
     let root_hash_trustful = root_hash == Some(&root_hash_from_idsig);
 
-    // If root_hash can be trusted, pass it to apkdmverity so that it uses the passed root_hash
-    // instead of the value read from the idsig file.
-    if root_hash_trustful {
-        let root_hash = to_hex_string(root_hash.unwrap());
-        system_properties::write("microdroid_manager.apk_root_hash", &root_hash)?;
-    }
-
     // Start apkdmverity and wait for the dm-verify block
     system_properties::write("ctl.start", "apkdmverity")?;
 
@@ -288,8 +281,4 @@ fn find_library_path(name: &str) -> Result<String> {
     }
 
     Ok(path)
-}
-
-fn to_hex_string(buf: &[u8]) -> String {
-    buf.iter().map(|b| format!("{:02X}", b)).collect()
 }
