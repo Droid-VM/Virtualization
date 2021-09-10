@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db1f26f7_89015977",
+        "filename": "apex/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-10T14:30:34Z",
+      "side": 1,
+      "message": "If this isn\u0027t here, it seems to create a make rule to install /system/init.rc. Which doesn\u0027t cause any harm until some other .bp file tries to do the same thing and then they conflict with a very mysterious error message.",
+      "range": {
+        "startLine": 84,
+        "startChar": 4,
+        "endLine": 84,
+        "endChar": 23
+      },
+      "revId": "679c174a907a1a523b6c417653d7625fdb42a644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
