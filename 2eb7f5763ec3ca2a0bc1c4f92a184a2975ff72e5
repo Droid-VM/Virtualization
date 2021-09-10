@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28833185_a34348c8",
+        "filename": "microdroid/payload/metadata.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-10T08:57:27Z",
+      "side": 0,
+      "message": "I am okay with removing this because otherwise any update of an APEX via Play will break all the existing VMs. But depending on VM, it might be what the VM actually wants. So why don\u0027t we make it possible for the VM owner to select the policy?\n\nThis definitely is out of scope of this CL, so I am fine with handling this later.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 24
+      },
+      "revId": "2eb7f5763ec3ca2a0bc1c4f92a184a2975ff72e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
