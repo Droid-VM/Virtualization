@@ -33,6 +33,29 @@
       "message": "I belatedly noticed that Andrew is OOO.",
       "revId": "7e54e2904f414369054114a0d5b9ed0e6d3a23cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "897a0bb7_e3ea6e04",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-10T17:26:23Z",
+      "side": 1,
+      "message": "IVirtualizationService.aidl says debug{Hold,Drop}VmRef is only intended for debug purposes.  Is this the right place to call force_lazy_services_persist?",
+      "range": {
+        "startLine": 717,
+        "startChar": 7,
+        "endLine": 717,
+        "endChar": 12
+      },
+      "revId": "7e54e2904f414369054114a0d5b9ed0e6d3a23cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
