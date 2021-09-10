@@ -45,6 +45,30 @@
       },
       "revId": "4a9b3bf3688407fdb9040af3509758d96a841f9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8083c6f3_ebdfbf3c",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-10T10:59:37Z",
+      "side": 1,
+      "message": "/apex is tmpfs. Would that be enough to trust not to be controlled by evil host? I\u0027m open to suggestion for better alternatives. How about other IPC(e.g. socket or binder)?",
+      "parentUuid": "6572f3ff_b247de1c",
+      "range": {
+        "startLine": 176,
+        "startChar": 19,
+        "endLine": 176,
+        "endChar": 44
+      },
+      "revId": "4a9b3bf3688407fdb9040af3509758d96a841f9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
