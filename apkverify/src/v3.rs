@@ -27,7 +27,7 @@ use ring::signature::{
 };
 use std::fs::File;
 use std::io::{Read, Seek};
-use std::ops::Range;
+use std::ops::{Deref, Range};
 use std::path::Path;
 use x509_parser::{parse_x509_certificate, prelude::FromDer, x509::SubjectPublicKeyInfo};
 
@@ -44,6 +44,7 @@ const SDK_INT: u32 = 31;
 
 type Signers = LengthPrefixed<Vec<LengthPrefixed<Signer>>>;
 
+#[derive(Clone, Debug)]
 struct Signer {
     signed_data: LengthPrefixed<Bytes>, // not verified yet
     min_sdk: u32,
@@ -72,7 +73,7 @@ impl SignedData {
     }
 }
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 struct Signature {
     signature_algorithm_id: u32,
     signature: LengthPrefixed<Bytes>,
@@ -91,31 +92,36 @@ type AdditionalAttributes = Bytes;
 pub fn verify<P: AsRef<Path>>(path: P) -> Result<()> {
     let f = File::open(path.as_ref())?;
     let mut sections = ApkSections::new(f)?;
-    verify_signature(&mut sections)?;
-    Ok(())
+    get_supported_signer(&mut sections)?.verify(&mut sections)
 }
 
-/// Verifies the contents of the provided APK file against the provided APK Signature Scheme v3
-/// Block.
-fn verify_signature<R: Read + Seek>(sections: &mut ApkSections<R>) -> Result<()> {
+/// Gets the public key (in DER format) that was used to sign the given APK/APEX file
+pub fn get_public_key_der<P: AsRef<Path>>(path: P) -> Result<Box<[u8]>> {
+    let f = File::open(path.as_ref())?;
+    let mut sections = ApkSections::new(f)?;
+    let pub_key = get_supported_signer(&mut sections)?.public_key;
+    Ok(pub_key.to_vec().into_boxed_slice())
+}
+
+/// Finds the only signer that is supported by the platform
+fn get_supported_signer<R: Read + Seek>(sections: &mut ApkSections<R>) -> Result<Signer> {
     let mut block = sections.find_signature(APK_SIGNATURE_SCHEME_V3_BLOCK_ID)?;
 
     // parse v3 scheme block
     let signers = block.read::<Signers>()?;
 
     // find supported by platform
-    let mut supported =
-        signers.iter().filter(|s| s.sdk_range().contains(&SDK_INT)).collect::<Vec<_>>();
+    let supported = signers.iter().filter(|s| s.sdk_range().contains(&SDK_INT)).collect::<Vec<_>>();
 
     // there should be exactly one
     if supported.len() != 1 {
-        bail!("APK Signature Scheme V3 only supports one signer: {} signers found.", signers.len())
+        bail!(
+            "APK Signature Scheme V3 only supports one signer: {} compatible signers found.",
+            supported.len()
+        )
     }
 
-    // and it should be verified
-    supported.pop().unwrap().verify(sections)?;
-
-    Ok(())
+    Ok(supported[0].deref().clone())
 }
 
 impl Signer {
