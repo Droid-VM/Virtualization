@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8fa14c3_f48ca150",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-10T04:58:59Z",
+      "side": 1,
+      "message": "The existence of DM_MOUNTED_APK_PATH doesn\u0027t mean that the verification was successful. I\u0027d rather not execute zipfuse if the verification was a failure.",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 7
+      },
+      "revId": "072744120ce7688ea12e97b26c68cc39994a0a88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
