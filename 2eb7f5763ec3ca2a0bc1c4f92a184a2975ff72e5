@@ -94,6 +94,30 @@
       },
       "revId": "2eb7f5763ec3ca2a0bc1c4f92a184a2975ff72e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "692407b7_9ef69005",
+        "filename": "microdroid/payload/metadata.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-09-10T11:41:08Z",
+      "side": 0,
+      "message": "If it\u0027s an AVB verification that gets used for an APEX, could we use the vbmeta digest as the hash that represents the APEX? `avb_slot_verify_data_calculate_vbmeta_digest()` can be called after doing the verification to give you a value to compare/",
+      "parentUuid": "4cc1071e_19e32864",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 24
+      },
+      "revId": "2eb7f5763ec3ca2a0bc1c4f92a184a2975ff72e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
