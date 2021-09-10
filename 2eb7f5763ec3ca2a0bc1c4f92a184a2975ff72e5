@@ -118,6 +118,30 @@
       },
       "revId": "2eb7f5763ec3ca2a0bc1c4f92a184a2975ff72e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34fa5ea4_bac2fc0c",
+        "filename": "microdroid/payload/metadata.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-10T11:55:37Z",
+      "side": 0,
+      "message": "Yes. APEX is a zip and its entry \"apex_payload.img\" uses AVB verification. I\u0027m thinking that just retrieving the digest from its vbmeta\u0027s hashtree_descriptor and then a) keeping it in instance.img(at the first boot) or b) comparing it with the one in instance.img(from the second boot). The digest itself is used when an APEX is activated via dm-verity.\n\nWhat bothers me is that microdroid_manager becomes knowing too much about apex packaging internals. It\u0027d be nice if apexd has a small library for opening APEX and doing AVB stuffs so that microdroid_manager can use it.",
+      "parentUuid": "692407b7_9ef69005",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 24
+      },
+      "revId": "2eb7f5763ec3ca2a0bc1c4f92a184a2975ff72e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
