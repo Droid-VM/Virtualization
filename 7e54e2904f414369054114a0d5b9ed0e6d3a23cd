@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98bb18c1_f8fae837",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-10T10:46:26Z",
+      "side": 1,
+      "message": "PTAL.\n\nThis feels a little un-Rust-like. I could create an RAII wrapper object that would call force_persist(false) when dropped; but it would need a global atomic count, and we\u0027d then have to stash away a set of slightly bogus objects in parallel with the VM refs, which isn\u0027t obviously nicer.\n\nOTOH this does actually work, unlike the last attempt.",
+      "revId": "7e54e2904f414369054114a0d5b9ed0e6d3a23cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
