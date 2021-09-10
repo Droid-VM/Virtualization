@@ -22,6 +22,30 @@
       },
       "revId": "2eb7f5763ec3ca2a0bc1c4f92a184a2975ff72e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34754144_be4afe80",
+        "filename": "microdroid/payload/metadata.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-09-10T10:18:32Z",
+      "side": 0,
+      "message": "Ultimately, APEX updates should be rollback protected. The VM owner would defer trust to the APEX based on the public key, to allow it to upgrade but never downgrade. There may be times that the VM owner wishes that to be stricter and ensure the APEX is of a particular approved version which will be more brittle.\n\nFor the time being, I would be in favour of this being strict by default. We can\u0027t yet rollback protect the updates and our current use cases expect updates of their code to invalidate their VM instance.",
+      "parentUuid": "28833185_a34348c8",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 24
+      },
+      "revId": "2eb7f5763ec3ca2a0bc1c4f92a184a2975ff72e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
