@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "18a9f01b_be273140",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-10T17:40:46Z",
+      "side": 1,
+      "message": "Looks good.  Defer +2 to Jiyong.",
+      "revId": "679c174a907a1a523b6c417653d7625fdb42a644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "db1f26f7_89015977",
         "filename": "apex/Android.bp",
         "patchSetId": 2
@@ -19,6 +36,52 @@
         "startChar": 4,
         "endLine": 84,
         "endChar": 23
+      },
+      "revId": "679c174a907a1a523b6c417653d7625fdb42a644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df005442_83781d62",
+        "filename": "compos/composd/src/composd_main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-10T17:40:46Z",
+      "side": 1,
+      "message": "Is the error not logged if you use the `?` syntax?  I hope not.",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 6
+      },
+      "revId": "679c174a907a1a523b6c417653d7625fdb42a644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad721503_44811e98",
+        "filename": "compos/composd/src/service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-10T17:40:46Z",
+      "side": 1,
+      "message": "nit: \u003e 100 cols",
+      "range": {
+        "startLine": 17,
+        "startChar": 100,
+        "endLine": 17,
+        "endChar": 105
       },
       "revId": "679c174a907a1a523b6c417653d7625fdb42a644",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
