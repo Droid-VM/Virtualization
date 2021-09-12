@@ -56,6 +56,30 @@
       },
       "revId": "7e54e2904f414369054114a0d5b9ed0e6d3a23cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0952d7fa_b741a66c",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-12T23:56:06Z",
+      "side": 1,
+      "message": "When there\u0027s a reference is held by another, this service is not killed.\n\nSince debug_hold_vm holds a self-reference, this call seems to be needed. \n\nSteven might be able to provide a correct answer.",
+      "parentUuid": "897a0bb7_e3ea6e04",
+      "range": {
+        "startLine": 717,
+        "startChar": 7,
+        "endLine": 717,
+        "endChar": 12
+      },
+      "revId": "7e54e2904f414369054114a0d5b9ed0e6d3a23cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
