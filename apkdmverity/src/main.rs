@@ -286,7 +286,7 @@ mod tests {
             let mut buf = vec![0; 10]; // just read 10 bytes
             let ret = f.read_at(&mut buf, MODIFIED_OFFSET).map_err(|e| e.kind());
             assert!(ret.is_err());
-            assert_eq!(ret, Err(std::io::ErrorKind::Other));
+            assert_eq!(ret, Err(std::io::ErrorKind::Uncategorized));
         });
     }
 
