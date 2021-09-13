@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f717fcd4_b9769b28",
+        "filename": "apkverify/src/v3.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-13T11:22:51Z",
+      "side": 1,
+      "message": "I choose this in order to keep `supported` immutable.",
+      "parentUuid": "42d1eb60_1a5a2cd6",
+      "range": {
+        "startLine": 119,
+        "startChar": 4,
+        "endLine": 119,
+        "endChar": 31
+      },
+      "revId": "a41535be80a04e983e31e13b0617e0256cc4c963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d1318349_3e4a9c07",
         "filename": "microdroid_manager/src/instance.rs",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2021-09-13T11:08:55Z",
       "side": 1,
       "message": "I\u0027m curious why we need Box instead of Vec\u003cu8\u003e? in case I need to change Vec\u003c\u003e to Box\u003c\u003e below for ApexData.",
+      "range": {
+        "startLine": 323,
+        "startChar": 16,
+        "endLine": 323,
+        "endChar": 26
+      },
+      "revId": "a41535be80a04e983e31e13b0617e0256cc4c963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98d3f731_6e2f7172",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-13T11:22:51Z",
+      "side": 1,
+      "message": "Vec is growable, while boxed slice isn\u0027t. The `capacity` part of a vector is not only unnecessary, but also makes it possible for someone to shrink or extend the vector by mistake.",
+      "parentUuid": "d1318349_3e4a9c07",
       "range": {
         "startLine": 323,
         "startChar": 16,
