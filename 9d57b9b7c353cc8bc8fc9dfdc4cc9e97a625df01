@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5202de44_0e12c479",
+        "filename": "libs/libavb_rs/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2021-09-13T08:40:07Z",
+      "side": 1,
+      "message": "This function finds the first hashtree descriptor in the vbmeta struct and returns the root digest from that descriptor, ignoring all the others. That\u0027s a very specific to how APEX uses AVB so I think the function name should reflect that.",
+      "range": {
+        "startLine": 41,
+        "startChar": 7,
+        "endLine": 41,
+        "endChar": 13
+      },
+      "revId": "9d57b9b7c353cc8bc8fc9dfdc4cc9e97a625df01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
