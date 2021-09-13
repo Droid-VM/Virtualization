@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43b8c1cb_136b7727",
+        "filename": "apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-13T06:39:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41afb530_99f958f3",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 36
+      },
+      "revId": "ad85f8e654296ca2de6bf0288afe9d2f50dc9ce6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8166254d_c7d3c056",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-09-13T04:16:20Z",
       "side": 1,
       "message": "Hmm, can we make verify() at L191 returns something so that we don\u0027t need to parse APK signing block again here?",
+      "range": {
+        "startLine": 194,
+        "startChar": 4,
+        "endLine": 194,
+        "endChar": 62
+      },
+      "revId": "ad85f8e654296ca2de6bf0288afe9d2f50dc9ce6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9820d04b_5437d62c",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-13T06:39:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8166254d_c7d3c056",
       "range": {
         "startLine": 194,
         "startChar": 4,
