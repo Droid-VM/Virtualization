@@ -80,6 +80,30 @@
       },
       "revId": "7e54e2904f414369054114a0d5b9ed0e6d3a23cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c971fda_bafd8c1f",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-13T08:36:29Z",
+      "side": 1,
+      "message": "I believe this is the right place. \n\ndebug_hold_vm is used by \"vm --daemonize\"; something needs to hold a reference to the IVirtualMachine to prevent it being killed, and this call asks VirtualizationService itself to do so. Now we have a lazy service we also need the IVirtualizatioNService to be kept alive, which needs force_lazy_service_persist.\n\nWe don\u0027t use debug_hold_vm anywhere else, afaik, but we do make use of \"vm --daemonize\" in our tests - specifically in startMicrodroid()/stopMicrodroid().\n\nI think we could change the tests to work differently, but it could get messy since the test code runs on the host. (We might need to create an APK that the host code can call into.)",
+      "parentUuid": "0952d7fa_b741a66c",
+      "range": {
+        "startLine": 717,
+        "startChar": 7,
+        "endLine": 717,
+        "endChar": 12
+      },
+      "revId": "7e54e2904f414369054114a0d5b9ed0e6d3a23cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
