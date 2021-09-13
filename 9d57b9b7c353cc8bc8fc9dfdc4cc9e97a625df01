@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcd57ae1_441f17d4",
+        "filename": "libs/libavb_rs/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-13T09:35:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76ba6761_5a454729",
+      "range": {
+        "startLine": 34,
+        "startChar": 16,
+        "endLine": 34,
+        "endChar": 17
+      },
+      "revId": "9d57b9b7c353cc8bc8fc9dfdc4cc9e97a625df01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5202de44_0e12c479",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-09-13T08:40:07Z",
       "side": 1,
       "message": "This function finds the first hashtree descriptor in the vbmeta struct and returns the root digest from that descriptor, ignoring all the others. That\u0027s a very specific to how APEX uses AVB so I think the function name should reflect that.",
+      "range": {
+        "startLine": 41,
+        "startChar": 7,
+        "endLine": 41,
+        "endChar": 13
+      },
+      "revId": "9d57b9b7c353cc8bc8fc9dfdc4cc9e97a625df01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ac2519a_1faf41d1",
+        "filename": "libs/libavb_rs/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-13T09:35:05Z",
+      "side": 1,
+      "message": "Yeah, agreed. Since this is specific to APEX. moved this into apex.rs. We could extract some usefulness into its own wrapper library in the future.",
+      "parentUuid": "5202de44_0e12c479",
       "range": {
         "startLine": 41,
         "startChar": 7,
