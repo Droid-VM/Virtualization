@@ -241,7 +241,7 @@ mod tests {
 
         run_test(modified_apk.as_slice(), idsig.as_ref(), "incorrect_apk", |ctx| {
             let ret = fs::read(&ctx.result.mapper_device).map_err(|e| e.kind());
-            assert_eq!(ret, Err(std::io::ErrorKind::Other));
+            assert_eq!(ret, Err(std::io::ErrorKind::Uncategorized));
         });
     }
 
@@ -262,7 +262,7 @@ mod tests {
 
         run_test(apk.as_ref(), modified_idsig.as_slice(), "incorrect_merkle_tree", |ctx| {
             let ret = fs::read(&ctx.result.mapper_device).map_err(|e| e.kind());
-            assert_eq!(ret, Err(std::io::ErrorKind::Other));
+            assert_eq!(ret, Err(std::io::ErrorKind::Uncategorized));
         });
     }
 
@@ -286,7 +286,7 @@ mod tests {
             let mut buf = vec![0; 10]; // just read 10 bytes
             let ret = f.read_at(&mut buf, MODIFIED_OFFSET).map_err(|e| e.kind());
             assert!(ret.is_err());
-            assert_eq!(ret, Err(std::io::ErrorKind::Other));
+            assert_eq!(ret, Err(std::io::ErrorKind::Uncategorized));
         });
     }
 
