@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b51e7e91_73410f5a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-13T00:25:45Z",
+      "side": 1,
+      "message": "Please wrap lines",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 158
+      },
+      "revId": "679c174a907a1a523b6c417653d7625fdb42a644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "18a9f01b_be273140",
@@ -54,6 +77,30 @@
       "writtenOn": "2021-09-10T17:40:46Z",
       "side": 1,
       "message": "Is the error not logged if you use the `?` syntax?  I hope not.",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 6
+      },
+      "revId": "679c174a907a1a523b6c417653d7625fdb42a644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9bafae8_a94ca66f",
+        "filename": "compos/composd/src/composd_main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-13T00:25:45Z",
+      "side": 1,
+      "message": "I would rather catch/log all errors in the outer main. e.g.\n\n```\nfn main() {\n    if let Err(e) \u003d try_main() {\n        error!(\"{}\", e);\n        std::process::exit(1);\n    }\n}\n\nfn try_main() -\u003e Result\u003c()\u003e {\n    register_lazy_service(...).context(...)?;\n    another_function()?;    \n    ...\n}\n```",
+      "parentUuid": "df005442_83781d62",
       "range": {
         "startLine": 33,
         "startChar": 4,
