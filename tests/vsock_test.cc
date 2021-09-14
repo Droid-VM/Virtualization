@@ -43,8 +43,8 @@ using namespace android::os;
 namespace virt {
 
 static constexpr int kGuestPort = 45678;
-static constexpr const char kVmKernelPath[] = "/data/local/tmp/virt-test/kernel";
-static constexpr const char kVmInitrdPath[] = "/data/local/tmp/virt-test/initramfs";
+static constexpr const char kVmKernelPath[] = "/data/local/tests/unrestricted/virt-test/kernel";
+static constexpr const char kVmInitrdPath[] = "/data/local/tests/unrestricted/virt-test/initramfs";
 static constexpr const char kVmParams[] = "rdinit=/bin/init bin/vsock_client 2 45678 HelloWorld";
 static constexpr const char kTestMessage[] = "HelloWorld";
 
