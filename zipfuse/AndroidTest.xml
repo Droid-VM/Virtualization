@@ -20,12 +20,12 @@
 
     <target_preparer class="com.android.tradefed.targetprep.PushFilePreparer">
         <option name="cleanup" value="true" />
-        <option name="push-file" key="zipfuse.test" value="/data/local/tmp/zipfuse.test" />
-        <option name="push-file" key="zipfuse" value="/data/local/tmp/zipfuse" />
+        <option name="push-file" key="zipfuse.test" value="/data/local/tests/unrestricted/zipfuse.test" />
+        <option name="push-file" key="zipfuse" value="/data/local/tests/unrestricted/zipfuse" />
     </target_preparer>
 
     <test class="com.android.tradefed.testtype.rust.RustBinaryTest" >
-        <option name="test-device-path" value="/data/local/tmp" />
+        <option name="test-device-path" value="/data/local/tests/unrestricted" />
         <option name="module-name" value="zipfuse.test" />
     </test>
 </configuration>
