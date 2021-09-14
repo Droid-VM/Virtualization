@@ -35,6 +35,8 @@ use binder::{
 };
 use compos_aidl_interface::aidl::com::android::compos::ICompOsService::ICompOsService;
 use std::fs::File;
+use std::os::raw;
+use std::os::unix::io::IntoRawFd;
 use std::path::Path;
 use std::sync::{Arc, Condvar, Mutex};
 use std::thread;
@@ -44,6 +46,7 @@ use std::time::Duration;
 pub struct VmInstance {
     #[allow(dead_code)] // Keeps the vm alive even if we don`t touch it
     vm: Strong<dyn IVirtualMachine>,
+    #[allow(dead_code)] // Likely to be useful
     cid: i32,
 }
 
@@ -110,17 +113,59 @@ impl VmInstance {
 
     /// Create and return an RPC Binder connection to the Comp OS service in the VM.
     pub fn get_service(&self) -> Result<Strong<dyn ICompOsService>> {
-        let cid = self.cid as u32;
-        // SAFETY: AIBinder returned by RpcClient has correct reference count, and the ownership
-        // can be safely taken by new_spibinder.
+        let vsock = self.vm.connectVsock(COMPOS_VSOCK_PORT as i32)?;
+        // ParcelableFileDescriptor won't release its fd so we have to dup it.
+        let vsock = vsock.as_ref().try_clone()?;
+
+        let mut file_holder = FileHolder::new(vsock);
+        let param = file_holder.as_void_ptr();
+
         let ibinder = unsafe {
-            new_spibinder(
-                binder_rpc_unstable_bindgen::RpcClient(cid, COMPOS_VSOCK_PORT) as *mut AIBinder
-            )
-        }
-        .ok_or_else(|| anyhow!("Failed to connect to CompOS service"))?;
+            // SAFETY: AIBinder returned by RpcPreconnectedClient has correct reference count, and
+            // the ownership can be safely taken by new_spibinder.
+            // RpcPreconnectedClient does not take ownership of param, only passing it to
+            // request_fd.
+            let binder = binder_rpc_unstable_bindgen::RpcPreconnectedClient(
+                Some(FileHolder::request_fd),
+                param,
+            ) as *mut AIBinder;
+
+            new_spibinder(binder).ok_or_else(|| anyhow!("Failed to connect to CompOS service"))?
+        };
 
         FromIBinder::try_from(ibinder).context("Connecting to CompOS service")
+    }
+}
+
+struct FileHolder {
+    file: Option<File>,
+}
+
+impl FileHolder {
+    fn new(file: File) -> Self {
+        Self { file: Some(file) }
+    }
+
+    fn as_void_ptr(&mut self) -> *mut raw::c_void {
+        self as *mut _ as *mut raw::c_void
+    }
+
+    fn take_fd(&mut self) -> i32 {
+        if let Some(f) = self.file.take() {
+            // Release ownership of the fd - binder takes ownership
+            f.into_raw_fd()
+        } else {
+            // Should never happen, just in case
+            -1_i32
+        }
+    }
+
+    unsafe extern "C" fn request_fd(param: *mut raw::c_void) -> raw::c_int {
+        // SAFETY: This is only ever called by RpcPreconnectedClient, within the lifetime of the
+        // FileHolder, with param taking the value returned by as_void_ptr (so a properly aligned
+        // non-null pointer to an initialized instance).
+        let holder = param as *mut Self;
+        holder.as_mut().unwrap().take_fd()
     }
 }
 
