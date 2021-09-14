@@ -448,7 +448,7 @@ mod tests {
         // TODO(jiyong): fix this
         assert!(std::process::Command::new("sh")
             .arg("-c")
-            .arg(format!("/data/local/tmp/zipfuse {} {}", zip_path.display(), mnt_path.display()))
+            .arg(format!("/data/local/tests/unrestricted/zipfuse {} {}", zip_path.display(), mnt_path.display()))
             .spawn()
             .is_ok());
     }
