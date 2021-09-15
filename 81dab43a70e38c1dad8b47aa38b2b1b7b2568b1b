@@ -134,6 +134,30 @@
       },
       "revId": "81dab43a70e38c1dad8b47aa38b2b1b7b2568b1b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56ef1a82_574f18b0",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-15T17:24:19Z",
+      "side": 1,
+      "message": "I did - into_raw_fd() takes the File by value (so the File is dropped), so a reference doesn\u0027t work.\n\n(IIRC Andrew felt this should be fixed in PFD, but I don\u0027t know if he got anywhere trying to make that happen.)",
+      "parentUuid": "bfecfd3d_b2e768cd",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 154,
+        "endChar": 31
+      },
+      "revId": "81dab43a70e38c1dad8b47aa38b2b1b7b2568b1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
