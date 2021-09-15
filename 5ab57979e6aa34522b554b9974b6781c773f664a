@@ -16,6 +16,29 @@
       "message": "This is the first time I\u0027ve written unsafe code, and I probably don\u0027t really know what I\u0027m doing.",
       "revId": "5ab57979e6aa34522b554b9974b6781c773f664a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d4e0a68_3cf405aa",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-15T12:00:08Z",
+      "side": 1,
+      "message": "This function when called should return a new connection fd. So I think that you need to pass IVirtualizationService as param and call connectVsock within this function.",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 42
+      },
+      "revId": "5ab57979e6aa34522b554b9974b6781c773f664a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
