@@ -182,6 +182,30 @@
       },
       "revId": "81dab43a70e38c1dad8b47aa38b2b1b7b2568b1b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5e3ede2_6bff2105",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-15T17:34:17Z",
+      "side": 1,
+      "message": "Then I can\u0027t call into_raw_fd(self), although I could call as_raw_fd(\u0026self) - but I need to take ownership.\nI have tried, but can\u0027t find any way round it, and neither could Andrew.",
+      "parentUuid": "f910bbfb_9c5a8d9d",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 154,
+        "endChar": 31
+      },
+      "revId": "81dab43a70e38c1dad8b47aa38b2b1b7b2568b1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
