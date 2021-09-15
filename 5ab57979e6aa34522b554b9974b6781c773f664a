@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d48b903d_e9e5a244",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-15T15:20:42Z",
+      "side": 1,
+      "message": "Note that the amount of unsafe code is fairly small, regardless of the complexity of the impl - converting to \u0026 from a void*, plus the call into \u0026 callback from C.",
+      "parentUuid": "7012b358_dcd59343",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 31
+      },
+      "revId": "5ab57979e6aa34522b554b9974b6781c773f664a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d4e0a68_3cf405aa",
         "filename": "compos/common/compos_client.rs",
         "patchSetId": 3
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "Ah, I see.\nOddly it seems to work with just the one FD.",
       "parentUuid": "0d4e0a68_3cf405aa",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 42
+      },
+      "revId": "5ab57979e6aa34522b554b9974b6781c773f664a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8c0693e_76d58fef",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-15T15:20:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86157ca6_c12e5a45",
       "range": {
         "startLine": 164,
         "startChar": 0,
