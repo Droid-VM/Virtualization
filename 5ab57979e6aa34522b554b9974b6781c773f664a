@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "54cf029b_f770a2a3",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-15T16:09:57Z",
+      "side": 1,
+      "message": "My understanding is that FFI is inherently \"unsafe\" from Rust\u0027s perspective, since what happens behind is out of Rust\u0027s control.  It\u0027s up to the programmer to understand the API contract and make good choices.\n\nThe more ideal (to me) place to solve this would be in libbinder_rs, so that the client(s) just need to use a safe, Rust-y API without having to figure this out separately.  But that\u0027s beyond the scope here.",
+      "parentUuid": "d48b903d_e9e5a244",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 31
+      },
+      "revId": "5ab57979e6aa34522b554b9974b6781c773f664a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d4e0a68_3cf405aa",
         "filename": "compos/common/compos_client.rs",
         "patchSetId": 3
