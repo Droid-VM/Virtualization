@@ -110,6 +110,30 @@
       },
       "revId": "81dab43a70e38c1dad8b47aa38b2b1b7b2568b1b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfecfd3d_b2e768cd",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-15T17:18:04Z",
+      "side": 1,
+      "message": "Ah, missed that.  I *think* you could still convert it to a `File` then take over the ownership.  I\u0027ve done something similar in compilation.rs:\n\n  let oat_file: \u0026File \u003d parcel_fds.oat.as_ref();\n\nCould you give it a shot to see if we can avoid the dup?",
+      "parentUuid": "bd180801_81ba4800",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 154,
+        "endChar": 31
+      },
+      "revId": "81dab43a70e38c1dad8b47aa38b2b1b7b2568b1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
