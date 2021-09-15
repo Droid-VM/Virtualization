@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "007918fe_4da63359",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-15T16:24:06Z",
+      "side": 1,
+      "message": "copy-pasted, but you\u0027re right.",
+      "parentUuid": "6b07fb60_327692c9",
+      "range": {
+        "startLine": 130,
+        "startChar": 33,
+        "endLine": 130,
+        "endChar": 96
+      },
+      "revId": "81dab43a70e38c1dad8b47aa38b2b1b7b2568b1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9bc9c5c9_bd8043e1",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-09-15T16:09:57Z",
       "side": 1,
       "message": "ParcelFileDescriptor implements AsRawFd.  I think you can simply do:\n\n  Ok(vsock.as_raw_fd())",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 154,
+        "endChar": 31
+      },
+      "revId": "81dab43a70e38c1dad8b47aa38b2b1b7b2568b1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd180801_81ba4800",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-15T16:24:06Z",
+      "side": 1,
+      "message": "That doesn\u0027t transfer ownership of the fd, which is the crucial bit; without it, the fd gets closed when the PFD is dropped.\n(See also http://cs/android/packages/modules/Virtualization/virtualizationservice/src/aidl.rs?l\u003d766\u0026rcl\u003df670334b94012e08c1023f4d1f7250cad665deb4)",
+      "parentUuid": "9bc9c5c9_bd8043e1",
       "range": {
         "startLine": 152,
         "startChar": 8,
