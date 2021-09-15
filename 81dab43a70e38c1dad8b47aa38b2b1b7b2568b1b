@@ -158,6 +158,30 @@
       },
       "revId": "81dab43a70e38c1dad8b47aa38b2b1b7b2568b1b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f910bbfb_9c5a8d9d",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-15T17:29:08Z",
+      "side": 1,
+      "message": "If we can\u0027t avoid `try_clone()`, then feel free to land this.  I just thought PFD may already have a (not intuitive) way to do this, like replacing L153 with:\n\n  let vsock: \u0026File \u003d vsock.as_ref();",
+      "parentUuid": "56ef1a82_574f18b0",
+      "range": {
+        "startLine": 152,
+        "startChar": 8,
+        "endLine": 154,
+        "endChar": 31
+      },
+      "revId": "81dab43a70e38c1dad8b47aa38b2b1b7b2568b1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
