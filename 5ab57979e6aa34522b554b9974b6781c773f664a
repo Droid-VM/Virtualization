@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7012b358_dcd59343",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-15T13:17:58Z",
+      "side": 1,
+      "message": "I\u0027m probably the wrong person to ask. I don\u0027t know of a way, but I know very little about Rust \u0026 FFI.",
+      "parentUuid": "a8c28877_68a05677",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 31
+      },
+      "revId": "5ab57979e6aa34522b554b9974b6781c773f664a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d4e0a68_3cf405aa",
         "filename": "compos/common/compos_client.rs",
         "patchSetId": 3
@@ -54,6 +78,30 @@
       "writtenOn": "2021-09-15T12:00:08Z",
       "side": 1,
       "message": "This function when called should return a new connection fd. So I think that you need to pass IVirtualizationService as param and call connectVsock within this function.",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 42
+      },
+      "revId": "5ab57979e6aa34522b554b9974b6781c773f664a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86157ca6_c12e5a45",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-15T13:17:58Z",
+      "side": 1,
+      "message": "Ah, I see.\nOddly it seems to work with just the one FD.",
+      "parentUuid": "0d4e0a68_3cf405aa",
       "range": {
         "startLine": 164,
         "startChar": 0,
