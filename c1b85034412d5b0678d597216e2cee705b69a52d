@@ -16,6 +16,29 @@
       "message": "I think this is a big enough change to be worth reviewing at this point, even if it is very incomplete.\nThe next step is to add the private interface for pvm_exec to talk to composd which will also be quite big.",
       "revId": "c1b85034412d5b0678d597216e2cee705b69a52d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5191a6bd_02dad7f5",
+        "filename": "compos/apex/composd.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-16T10:40:13Z",
+      "side": 1,
+      "message": "odrefresh currently needs to run as root unfortunately (b/191857035), so we need to too.",
+      "range": {
+        "startLine": 17,
+        "startChar": 9,
+        "endLine": 17,
+        "endChar": 13
+      },
+      "revId": "c1b85034412d5b0678d597216e2cee705b69a52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
