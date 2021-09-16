@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c6b56ca3_02b5006f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-16T17:00:30Z",
+      "side": 1,
+      "message": "Looks good! Just some nits.",
+      "revId": "c1b85034412d5b0678d597216e2cee705b69a52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5191a6bd_02dad7f5",
         "filename": "compos/apex/composd.rc",
         "patchSetId": 3
@@ -36,6 +53,99 @@
         "startChar": 9,
         "endLine": 17,
         "endChar": 13
+      },
+      "revId": "c1b85034412d5b0678d597216e2cee705b69a52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8970ac4_0f0b517b",
+        "filename": "compos/apex/composd.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-16T17:00:30Z",
+      "side": 1,
+      "message": "From the bug, it looks like the problem is to check the /proc/keys, which I understand.  But I thought odrefresh doesn\u0027t handle the key?  Or is there other reason that I\u0027m missing?\n\nIf we need to use root for now, consider adding \"capabilities\" line.  Hopefully that\u0027ll just work and make it less scary.",
+      "parentUuid": "5191a6bd_02dad7f5",
+      "range": {
+        "startLine": 17,
+        "startChar": 9,
+        "endLine": 17,
+        "endChar": 13
+      },
+      "revId": "c1b85034412d5b0678d597216e2cee705b69a52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c165524_85c741a3",
+        "filename": "compos/composd/src/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-16T17:00:30Z",
+      "side": 1,
+      "message": "nit: add some description to make it easier to search/debug when something went wrong",
+      "range": {
+        "startLine": 47,
+        "startChar": 16,
+        "endLine": 47,
+        "endChar": 20
+      },
+      "revId": "c1b85034412d5b0678d597216e2cee705b69a52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de809d75_276aae4f",
+        "filename": "compos/composd/src/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-16T17:00:30Z",
+      "side": 1,
+      "message": "nit: e.to_string()?\n\nMaybe try this just to avoid the unwrap(), which crashes the process.\n  Status::new_service_specific_error(-1, CString::new(e.to_string()).ok());",
+      "range": {
+        "startLine": 48,
+        "startChar": 35,
+        "endLine": 48,
+        "endChar": 53
+      },
+      "revId": "c1b85034412d5b0678d597216e2cee705b69a52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "672225a5_11c308c4",
+        "filename": "compos/composd_cmd/composd_cmd.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-16T17:00:30Z",
+      "side": 1,
+      "message": "nit: 100 cols",
+      "range": {
+        "startLine": 19,
+        "startChar": 100,
+        "endLine": 19,
+        "endChar": 117
       },
       "revId": "c1b85034412d5b0678d597216e2cee705b69a52d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
