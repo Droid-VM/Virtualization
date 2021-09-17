@@ -70,6 +70,24 @@
       "parentUuid": "f5cf57c7_02658d5f",
       "revId": "0801338716001f4790583bfe7406a047dffdec49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dbeca03_d915871b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014491
+      },
+      "writtenOn": "2021-09-17T18:14:55Z",
+      "side": 1,
+      "message": "So the change to allow access is running against some neverallow rules:\nhttps://android-build.googleplex.com/builds/pending/P26139051/aosp_arm64-userdebug/latest/view/logs/build_error.log\nThe rules are:\nneverallow { domain -shell -init -adbd } shell_test_data_file:file_class_set no_w_file_perms;\nneverallow { domain -shell -init -adbd -heapprofd -crash_dump } shell_test_data_file:file *;\n\nI guess I could add virtualization service to the exception list but unclear whether I should ...",
+      "parentUuid": "8e11b093_ae49dca1",
+      "revId": "0801338716001f4790583bfe7406a047dffdec49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
