@@ -16,6 +16,24 @@
       "message": "I assume the failure:\nhttps://android-build.googleplex.com/builds/tests/view?invocationId\u003dI83000009984702825\u0026testResultId\u003dTR17627744960408894\u0026tab\u003dtrace\nis related to this selinux denial I found in the logcat:\n09-16 20:52:56.939  3449  3449 W VirtualizationT: type\u003d1400 audit(0.0:140): avc: denied { read } for path\u003d\"/data/local/tests/unrestricted/virt-test/kernel\" dev\u003d\"dm-37\" ino\u003d2778 scontext\u003du:r:virtualizationservice:s0 tcontext\u003du:object_r:shell_test_data_file:s0 tclass\u003dfile permissive\u003d0\nwhich is related to this change to move the test binary.\n\nBut I\u0027m not sure how sepolicy would need to be updated for this?",
       "revId": "0801338716001f4790583bfe7406a047dffdec49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d539d5c2_2aeb6074",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-17T01:11:56Z",
+      "side": 1,
+      "message": "Consider adding \n\nallow virtualizationservice shell_test_data_file:file { getattr read write };\n\nto system/sepolicy/private/virtualizationservice.te #48",
+      "parentUuid": "147cf088_e4cf692c",
+      "revId": "0801338716001f4790583bfe7406a047dffdec49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
