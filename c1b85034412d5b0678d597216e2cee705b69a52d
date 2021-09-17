@@ -99,6 +99,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3fa06b9_ce8c315c",
+        "filename": "compos/apex/composd.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-17T09:56:23Z",
+      "side": 1,
+      "message": "\u003e From the bug, it looks like the problem is to check the /proc/keys, which I understand.  But I thought odrefresh doesn\u0027t handle the key?  Or is there other reason that I\u0027m missing?\n \nodsign has to be root because it manipulates the fs-verity keyring. odrefresh  does because of file (DAC) permissions (b/191857035#comment13). That\u0027s probably solvable, but there\u0027s no great reason to solve it right now.\n \n\u003e If we need to use root for now, consider adding \"capabilities\" line.  Hopefully that\u0027ll just work and make it less scary.\n\nOmitting the capabilities line means all capabilities are removed, which is what I want.\n\nRoot isn\u0027t really that scary given the selinux constraints (including on capabilities).",
+      "parentUuid": "b8970ac4_0f0b517b",
+      "range": {
+        "startLine": 17,
+        "startChar": 9,
+        "endLine": 17,
+        "endChar": 13
+      },
+      "revId": "c1b85034412d5b0678d597216e2cee705b69a52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c165524_85c741a3",
@@ -112,6 +136,30 @@
       "writtenOn": "2021-09-16T17:00:30Z",
       "side": 1,
       "message": "nit: add some description to make it easier to search/debug when something went wrong",
+      "range": {
+        "startLine": 47,
+        "startChar": 16,
+        "endLine": 47,
+        "endChar": 20
+      },
+      "revId": "c1b85034412d5b0678d597216e2cee705b69a52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "541dadef_85c94c84",
+        "filename": "compos/composd/src/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-17T09:56:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c165524_85c741a3",
       "range": {
         "startLine": 47,
         "startChar": 16,
@@ -145,6 +193,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ace602b_71929982",
+        "filename": "compos/composd/src/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-17T09:56:23Z",
+      "side": 1,
+      "message": "\u003e nit: e.to_string()?\n\nThe docs say \u0027To print causes as well using anyhow’s default formatting of causes, use the alternate selector “{:#}”\u0027. There doesn\u0027t seem to be an equivalent function. At the moment I\u0027m interested in getting as much information as possible when things go wrong.\n\n\u003e Maybe try this just to avoid the unwrap(), which crashes the process.\n\u003e  Status::new_service_specific_error(-1, CString::new(e.to_string()).ok());\n\nOh, that\u0027s neat! Done. Although it took me ages to figure out how to make the compiler happy.",
+      "parentUuid": "de809d75_276aae4f",
+      "range": {
+        "startLine": 48,
+        "startChar": 35,
+        "endLine": 48,
+        "endChar": 53
+      },
+      "revId": "c1b85034412d5b0678d597216e2cee705b69a52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "672225a5_11c308c4",
@@ -158,6 +230,30 @@
       "writtenOn": "2021-09-16T17:00:30Z",
       "side": 1,
       "message": "nit: 100 cols",
+      "range": {
+        "startLine": 19,
+        "startChar": 100,
+        "endLine": 19,
+        "endChar": 117
+      },
+      "revId": "c1b85034412d5b0678d597216e2cee705b69a52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c05e6279_d2cb007e",
+        "filename": "compos/composd_cmd/composd_cmd.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-17T09:56:23Z",
+      "side": 1,
+      "message": "That\u0027s how rustfmt seems to want it. I assume we apply the same rule as in Java - imports can be on one line no matter how long?\nBut I re-jigged it a bit anyway.",
+      "parentUuid": "672225a5_11c308c4",
       "range": {
         "startLine": 19,
         "startChar": 100,
