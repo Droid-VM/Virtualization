@@ -88,6 +88,24 @@
       "parentUuid": "8e11b093_ae49dca1",
       "revId": "0801338716001f4790583bfe7406a047dffdec49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38dc947c_d30ead1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-18T01:42:54Z",
+      "side": 1,
+      "message": "Thanks for giving it a try. Then I think it\u0027s better to keep the kernel and the ramdisk in their original location (/data/local/tmp/virt-test/) and move only the test executables to the new location. Having the former two in the \"unrestricted\" directory wouldn\u0027t show better backtraces because they are consumed as binary blobs in the context of the host VM (Android).",
+      "parentUuid": "5dbeca03_d915871b",
+      "revId": "0801338716001f4790583bfe7406a047dffdec49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
