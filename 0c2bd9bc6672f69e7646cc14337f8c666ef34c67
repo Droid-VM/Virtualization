@@ -46,6 +46,30 @@
       },
       "revId": "0c2bd9bc6672f69e7646cc14337f8c666ef34c67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ed96759_660c76af",
+        "filename": "compos/src/compsvc_main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-21T16:55:15Z",
+      "side": 1,
+      "message": "Yes, b/199259751 is to determine the \"client\"\u0027s CID.  But aren\u0027t you trying to return the \"server\"\u0027s CID to the client?\n\nSince the client should already have an IVirtualMachine instance, I think you can just call IVirtualMachine.getCid()?  Then you could avoid the workaround and simply pass a dummy value of CID back (until the argument is removed).",
+      "parentUuid": "7d1c19fc_6bce5030",
+      "range": {
+        "startLine": 94,
+        "startChar": 40,
+        "endLine": 94,
+        "endChar": 73
+      },
+      "revId": "0c2bd9bc6672f69e7646cc14337f8c666ef34c67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
