@@ -22,6 +22,30 @@
       },
       "revId": "0c2bd9bc6672f69e7646cc14337f8c666ef34c67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d1c19fc_6bce5030",
+        "filename": "compos/src/compsvc_main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-21T16:41:40Z",
+      "side": 1,
+      "message": "\u003e Is the TODO(b/199259751) references below accurate?  The bug seems to be asking for the clients\u0027 CID, not to provide the clients CID.\n\nYes, I think so. The reason we\u0027re passing the CID to VS here is that VS doesn\u0027t currently have any way to determine the CID from its vsock. b/199259751 is asking for a mechanism to allow a server to determine the CID of the caller in a binder call; once that exists VS can use it and this parameter can be deleted. (And should be, since there\u0027s no way to trust it.)",
+      "parentUuid": "1ba7e18e_53ee1f79",
+      "range": {
+        "startLine": 94,
+        "startChar": 40,
+        "endLine": 94,
+        "endChar": 73
+      },
+      "revId": "0c2bd9bc6672f69e7646cc14337f8c666ef34c67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
