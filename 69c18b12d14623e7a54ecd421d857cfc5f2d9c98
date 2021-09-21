@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c20f6135_14cc5eab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-21T15:58:58Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "a6d8cffd_ce6a38a0",
+      "range": {
+        "startLine": 19,
+        "startChar": 27,
+        "endLine": 21,
+        "endChar": 63
+      },
+      "revId": "69c18b12d14623e7a54ecd421d857cfc5f2d9c98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74540077_9252e180",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32f305fb_bff83cc3",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-21T15:58:58Z",
+      "side": 1,
+      "message": "We can\u0027t - the AIDL call passes us an Option\u003c\u0026ParcelFileDescriptor\u003e, so we don\u0027t have ownership.\n\nIMHO this is a bit of a misdesign (although it works the same in C++, where we get a const unique_fd\u0026) - see http://b/200129208#comment2. Andrew W also complained about it.",
+      "parentUuid": "74540077_9252e180",
+      "range": {
+        "startLine": 284,
+        "startChar": 32,
+        "endLine": 284,
+        "endChar": 86
+      },
+      "revId": "69c18b12d14623e7a54ecd421d857cfc5f2d9c98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bf62035_0f375d58",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-09-21T15:49:57Z",
       "side": 1,
       "message": "nit: \\n",
+      "range": {
+        "startLine": 99,
+        "startChar": 10,
+        "endLine": 99,
+        "endChar": 11
+      },
+      "revId": "69c18b12d14623e7a54ecd421d857cfc5f2d9c98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72d86eb6_58932613",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-21T15:58:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bf62035_0f375d58",
       "range": {
         "startLine": 99,
         "startChar": 10,
