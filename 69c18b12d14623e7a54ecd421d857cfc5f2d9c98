@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6d8cffd_ce6a38a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-21T15:49:57Z",
+      "side": 1,
+      "message": "SGTM. Hopefully we\u0027ll be able to drop vm_test_config.json later easily.",
+      "range": {
+        "startLine": 19,
+        "startChar": 27,
+        "endLine": 21,
+        "endChar": 63
+      },
+      "revId": "69c18b12d14623e7a54ecd421d857cfc5f2d9c98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74540077_9252e180",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-21T15:49:57Z",
+      "side": 1,
+      "message": "With your previous into_raw_fd change, should we take the ownership in L259/260 and pass `pfd: ParcelFileDescriptor` instead?",
+      "range": {
+        "startLine": 284,
+        "startChar": 32,
+        "endLine": 284,
+        "endChar": 86
+      },
+      "revId": "69c18b12d14623e7a54ecd421d857cfc5f2d9c98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bf62035_0f375d58",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-21T15:49:57Z",
+      "side": 1,
+      "message": "nit: \\n",
+      "range": {
+        "startLine": 99,
+        "startChar": 10,
+        "endLine": 99,
+        "endChar": 11
+      },
+      "revId": "69c18b12d14623e7a54ecd421d857cfc5f2d9c98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
