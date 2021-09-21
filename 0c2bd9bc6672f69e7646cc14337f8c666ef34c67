@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ba7e18e_53ee1f79",
+        "filename": "compos/src/compsvc_main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-21T16:36:07Z",
+      "side": 1,
+      "message": "Hmm.. I don\u0027t understand this part.  The API shouldn\u0027t require the service to provide the CID to the client.  Instead, it should probably just a ping to let virtualization service call back with the CID it already knows.  I see a TODO in the AIDL.\n\n    /**\n     * Notifies that the payload is ready to serve.\n     * TODO(b/191845268): remove cid parameter\n     */\n    void notifyPayloadReady(int cid);\n\nIs the TODO(b/199259751) references below accurate?  The bug seems to be asking for the clients\u0027 CID, not to provide the clients CID.",
+      "range": {
+        "startLine": 94,
+        "startChar": 40,
+        "endLine": 94,
+        "endChar": 73
+      },
+      "revId": "0c2bd9bc6672f69e7646cc14337f8c666ef34c67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
