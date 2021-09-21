@@ -70,6 +70,30 @@
       },
       "revId": "0c2bd9bc6672f69e7646cc14337f8c666ef34c67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21b8c4d7_6233ebd7",
+        "filename": "compos/src/compsvc_main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-21T17:02:35Z",
+      "side": 1,
+      "message": "Oh, I see. \n\nI think you\u0027re right.\n\nAll the other notify* functions take a CID, but it\u0027s redundant for this one - assuming that notifyPayloadReady always arrives after notifyPayloadStarted, which I\u0027m not convinced is entirely guaranteed. But then, as you say, I could just call getCid anyway.\n\nI was a bit worried that VS might need the CID to route the notification to the right client, but that doesn\u0027t seem to be true.\n\nThanks!",
+      "parentUuid": "7ed96759_660c76af",
+      "range": {
+        "startLine": 94,
+        "startChar": 40,
+        "endLine": 94,
+        "endChar": 73
+      },
+      "revId": "0c2bd9bc6672f69e7646cc14337f8c666ef34c67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
