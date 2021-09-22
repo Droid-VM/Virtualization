@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd4b7a34_0747d71b",
+        "filename": "compos/common/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-22T17:51:44Z",
+      "side": 1,
+      "message": "nit: seems redundant",
+      "range": {
+        "startLine": 22,
+        "startChar": 34,
+        "endLine": 22,
+        "endChar": 44
+      },
+      "revId": "056849fcffdb33f15c9381f8702892f48629a485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58d78a7f_fa4ebb43",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-22T17:51:44Z",
+      "side": 1,
+      "message": "Maybe, when we need to add the VM for the app case, the two instances would just be managed in two independent state?",
+      "range": {
+        "startLine": 17,
+        "startChar": 51,
+        "endLine": 18,
+        "endChar": 11
+      },
+      "revId": "056849fcffdb33f15c9381f8702892f48629a485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5692fb3a_26e0935c",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-22T17:51:44Z",
+      "side": 1,
+      "message": "Why we couldn\u0027t/shouldn\u0027t just hold the state?  `try_start_current_instance` doesn\u0027t seem to change it.",
+      "range": {
+        "startLine": 48,
+        "startChar": 24,
+        "endLine": 48,
+        "endChar": 71
+      },
+      "revId": "056849fcffdb33f15c9381f8702892f48629a485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6951eec3_4ee28714",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-22T17:51:44Z",
+      "side": 1,
+      "message": "Optional: an alternative implementation that relies on the type system for each state definition.  Not sure it\u0027ll work nicely though.\n\nenum State {\n  Starting,\n  Started(Weak\u003cCompOsInstance\u003e),\n  Stopped,\n}\n\nimpl State {\n  fn mark_starting(\u0026mut self) -\u003e Result\u003c()\u003e {\n    // check current state, then modify self to the next state\n  }\n  ...\n}",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 98
+      },
+      "revId": "056849fcffdb33f15c9381f8702892f48629a485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07d28c1c_0e928423",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-22T17:51:44Z",
+      "side": 1,
+      "message": "`mark_stopped` maybe? and `mark_started` below?",
+      "range": {
+        "startLine": 107,
+        "startChar": 7,
+        "endLine": 107,
+        "endChar": 21
+      },
+      "revId": "056849fcffdb33f15c9381f8702892f48629a485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60610099_5ea4e333",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-22T17:51:44Z",
+      "side": 1,
+      "message": "Should we simply panic or reset gracefully?  Does init restart composd?",
+      "range": {
+        "startLine": 109,
+        "startChar": 12,
+        "endLine": 109,
+        "endChar": 18
+      },
+      "revId": "056849fcffdb33f15c9381f8702892f48629a485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
