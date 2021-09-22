@@ -94,6 +94,30 @@
       },
       "revId": "0c2bd9bc6672f69e7646cc14337f8c666ef34c67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d88d33e9_52f45c3c",
+        "filename": "compos/src/compsvc_main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-22T08:36:49Z",
+      "side": 1,
+      "message": "On the third hand: no, I was right. It\u0027s true that the ultimate client (compos_client) doesn\u0027t really need the CID. \n\nBut here compsvc is a client of VirtualizationService (via IVirtualMachineService, which we just connected to), and VS does need the CID, so it knows what VM it is coming from and hence which of its clients to notify. See http://osscs/android/platform/superproject/+/master:packages/modules/Virtualization/virtualizationservice/src/aidl.rs;drc\u003dd50a0241bb49af19d1576597fa402a7d808af79c;l\u003d848.\n\n(@Inseob: Connecting from here to VS in the host feels pretty weird; we could instead make a binder call to Microdroid inside the VM and let it proxy it to VS, using its existing connection.)",
+      "parentUuid": "21b8c4d7_6233ebd7",
+      "range": {
+        "startLine": 94,
+        "startChar": 40,
+        "endLine": 94,
+        "endChar": 73
+      },
+      "revId": "0c2bd9bc6672f69e7646cc14337f8c666ef34c67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
