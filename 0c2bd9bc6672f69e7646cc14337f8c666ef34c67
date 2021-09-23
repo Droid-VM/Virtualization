@@ -214,6 +214,30 @@
       },
       "revId": "0c2bd9bc6672f69e7646cc14337f8c666ef34c67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7872247_4fbcf16f",
+        "filename": "compos/src/compsvc_main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-23T11:18:23Z",
+      "side": 1,
+      "message": "That should say:\n\n\u003e microdroid manager calls notifyPayloadStarted after spawning the payload. A sufficiently hostile scheduler could allow the payload to run after the spawn to the point it calls notifyPayloadReady before allowing microdroid_manager to proceed to call notifyPayload*Started*. Unlikely, but not I think impossible.",
+      "parentUuid": "7217a094_139c6c4f",
+      "range": {
+        "startLine": 94,
+        "startChar": 40,
+        "endLine": 94,
+        "endChar": 73
+      },
+      "revId": "0c2bd9bc6672f69e7646cc14337f8c666ef34c67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
