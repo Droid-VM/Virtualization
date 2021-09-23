@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f36c6155_529259bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-23T16:25:24Z",
+      "side": 1,
+      "message": "I\u0027m a bit worried that this will fail horribly on GCE, because we now start \u0026 stop lots of VMs rather than doing everything with one.\n\nWe could just apply the changes to ComposTestCase (which will only run 2 VMs) and not ComposKeyTestCase (which will do a lot), but that would lose some of the benefits.",
+      "revId": "a00d792a8f7f4bca3d4deae34abbbc0dcca02f2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
