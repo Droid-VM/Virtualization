@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "21520f26_4c12b50e",
+        "filename": "compos/common/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-23T15:47:01Z",
+      "side": 1,
+      "message": "that\u0027s why! lol",
+      "parentUuid": "8bb7b13f_ece242e3",
+      "range": {
+        "startLine": 22,
+        "startChar": 34,
+        "endLine": 22,
+        "endChar": 44
+      },
+      "revId": "056849fcffdb33f15c9381f8702892f48629a485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "58d78a7f_fa4ebb43",
         "filename": "compos/composd/src/instance_manager.rs",
         "patchSetId": 1
@@ -273,6 +297,30 @@
       "side": 1,
       "message": "These errors can only occur if the code above that uses State is buggy, so panic seemed appropriate. (And it did already catch one mistake I made.) \nAFAICT no client can ever cause this to be reached.\n\nIt\u0027s a lazy service, so init won\u0027t restart it immediately, but it will be started again when the next client asks for the binder interface.",
       "parentUuid": "60610099_5ea4e333",
+      "range": {
+        "startLine": 109,
+        "startChar": 12,
+        "endLine": 109,
+        "endChar": 18
+      },
+      "revId": "056849fcffdb33f15c9381f8702892f48629a485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fed99e47_1765a7fc",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-23T15:47:01Z",
+      "side": 1,
+      "message": "I see. unreachable! may make it clearer.",
+      "parentUuid": "c80a797d_9ec5fe53",
       "range": {
         "startLine": 109,
         "startChar": 12,
