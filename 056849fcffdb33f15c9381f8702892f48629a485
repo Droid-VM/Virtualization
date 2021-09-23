@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8bb7b13f_ece242e3",
+        "filename": "compos/common/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-23T09:10:22Z",
+      "side": 1,
+      "message": "-1u32 isn\u0027t allowed - indeed neither is plain \"-1\". (See https://github.com/rust-lang/rust/issues/16313 and the rabbit-hole of related discussions.)\nThere\u0027s other ways of expressing this, but this seems the most direct translation of the official definition as -1U in C++.",
+      "parentUuid": "cd4b7a34_0747d71b",
+      "range": {
+        "startLine": 22,
+        "startChar": 34,
+        "endLine": 22,
+        "endChar": 44
+      },
+      "revId": "056849fcffdb33f15c9381f8702892f48629a485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "58d78a7f_fa4ebb43",
         "filename": "compos/composd/src/instance_manager.rs",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2021-09-22T17:51:44Z",
       "side": 1,
       "message": "Maybe, when we need to add the VM for the app case, the two instances would just be managed in two independent state?",
+      "range": {
+        "startLine": 17,
+        "startChar": 51,
+        "endLine": 18,
+        "endChar": 11
+      },
+      "revId": "056849fcffdb33f15c9381f8702892f48629a485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df312f3b_8228dead",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-23T09:10:22Z",
+      "side": 1,
+      "message": "Yes that would make some sense.",
+      "parentUuid": "58d78a7f_fa4ebb43",
       "range": {
         "startLine": 17,
         "startChar": 51,
@@ -72,6 +120,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "af0f9fda_aa68bbd0",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-23T09:10:22Z",
+      "side": 1,
+      "message": "To make sure any other callers fail-fast rather than blocking while the VM starts.\nExpanded the comment a bit.\nIt would be much easier if we did hold the lock - the only visible states would be stopped and started - but I don\u0027t like holding one for a long period of time. It\u0027ll get potentially longer when we implement the TODOs too.",
+      "parentUuid": "5692fb3a_26e0935c",
+      "range": {
+        "startLine": 48,
+        "startChar": 24,
+        "endLine": 48,
+        "endChar": 71
+      },
+      "revId": "056849fcffdb33f15c9381f8702892f48629a485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6951eec3_4ee28714",
         "filename": "compos/composd/src/instance_manager.rs",
         "patchSetId": 1
@@ -83,6 +155,30 @@
       "writtenOn": "2021-09-22T17:51:44Z",
       "side": 1,
       "message": "Optional: an alternative implementation that relies on the type system for each state definition.  Not sure it\u0027ll work nicely though.\n\nenum State {\n  Starting,\n  Started(Weak\u003cCompOsInstance\u003e),\n  Stopped,\n}\n\nimpl State {\n  fn mark_starting(\u0026mut self) -\u003e Result\u003c()\u003e {\n    // check current state, then modify self to the next state\n  }\n  ...\n}",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 98
+      },
+      "revId": "056849fcffdb33f15c9381f8702892f48629a485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de61d048_5e065f2d",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-23T09:10:22Z",
+      "side": 1,
+      "message": "I considered it, but I don\u0027t think that helps here - e.g. the implicit started to stopped transition when the strong count goes to 0.\nThis is mostly about documenting the class invariants.",
+      "parentUuid": "6951eec3_4ee28714",
       "range": {
         "startLine": 80,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f1a82c9_e94da7e5",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-23T09:10:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07d28c1c_0e928423",
+      "range": {
+        "startLine": 107,
+        "startChar": 7,
+        "endLine": 107,
+        "endChar": 21
+      },
+      "revId": "056849fcffdb33f15c9381f8702892f48629a485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60610099_5ea4e333",
@@ -129,6 +249,30 @@
       "writtenOn": "2021-09-22T17:51:44Z",
       "side": 1,
       "message": "Should we simply panic or reset gracefully?  Does init restart composd?",
+      "range": {
+        "startLine": 109,
+        "startChar": 12,
+        "endLine": 109,
+        "endChar": 18
+      },
+      "revId": "056849fcffdb33f15c9381f8702892f48629a485",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c80a797d_9ec5fe53",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-23T09:10:22Z",
+      "side": 1,
+      "message": "These errors can only occur if the code above that uses State is buggy, so panic seemed appropriate. (And it did already catch one mistake I made.) \nAFAICT no client can ever cause this to be reached.\n\nIt\u0027s a lazy service, so init won\u0027t restart it immediately, but it will be started again when the next client asks for the binder interface.",
+      "parentUuid": "60610099_5ea4e333",
       "range": {
         "startLine": 109,
         "startChar": 12,
