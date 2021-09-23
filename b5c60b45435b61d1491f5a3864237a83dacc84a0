@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5482a28b_dfdaf0a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-23T15:29:08Z",
+      "side": 1,
+      "message": "Ack - thanks!",
+      "parentUuid": "a37b16ca_2b4bd2b0",
+      "revId": "b5c60b45435b61d1491f5a3864237a83dacc84a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f3053d2_5e6221f0",
@@ -48,6 +66,30 @@
       "writtenOn": "2021-09-23T15:21:57Z",
       "side": 1,
       "message": "Couldn\u0027t this be...\n\n  let _ \u003d vm_state.wait_until_ready()?;\n  let cid \u003d vm.getCid();\n\nThen we can avoid the workaround on the service side?",
+      "range": {
+        "startLine": 109,
+        "startChar": 8,
+        "endLine": 109,
+        "endChar": 47
+      },
+      "revId": "b5c60b45435b61d1491f5a3864237a83dacc84a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0817d51_6e458ccd",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-23T15:29:08Z",
+      "side": 1,
+      "message": "It could, but it doesn\u0027t avoid the workaround; the CID being sent from Compsvc is needed by VirtualizationService, so it knows which VM is ready, not this code.\n\nThe one we get here actually comes from VirtualizationService.",
+      "parentUuid": "9f3053d2_5e6221f0",
       "range": {
         "startLine": 109,
         "startChar": 8,
