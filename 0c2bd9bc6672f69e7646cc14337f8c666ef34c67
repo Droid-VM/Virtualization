@@ -190,6 +190,30 @@
       },
       "revId": "0c2bd9bc6672f69e7646cc14337f8c666ef34c67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7217a094_139c6c4f",
+        "filename": "compos/src/compsvc_main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-23T09:25:22Z",
+      "side": 1,
+      "message": "\u003e The order notifyPayloadStarted -\u003e notifyPayloadReady should be guaranteed. I expect notifyPayloadReady is triggered by the payload. At the time notifyPayloadStarted should already be triggered.\n\nmicrodroid manager calls notifyPayloadStarted after spawning the payload. A sufficiently hostile scheduler could allow the payload to run after the spawn to the point it calls notifyPayloadReady before allowing microdroid_manager to proceed to call notifyPayloadReady. Unlikely, but not I think impossible.\n\n\u003e \n\u003e \u003e Connecting from here to VS in the host feels pretty weird; we could instead make a binder call to Microdroid inside the VM and let it proxy it to VS, using its existing connection.\n\u003e \n\u003e The existing connection is between microdroid manager and VS. We wanted to minimize microdroid manager\u0027s responsibility (including such proxy) once the payload started running.\n\nYeah, I understand, but it does put a bigger burden on the payload. Still, hopefully this will be wrapped up in a library in due course to make it easy enough not to worry about. And the local CID code will just go away.\n\n\u003e \n\u003e \u003e This seems a bit scary, since it allows one to notify another.  Maybe the API should be changed.  Inseob, WDYT?\n\u003e \n\u003e Sorry, I don\u0027t get it. What\u0027s \"it\", \"one\", and \"another\"?\n\nThe issue is that VirtualizationService has to trust the CID it receives; a VM could send a notification with a different CID, and thereby cause it to be passed on to the wrong client. If VS can get the CID directly from the socket/binder that would be prevented.\n\nAnyway, to summarize:\n- Right now we do need to send the CID for notify*.\n- We should stop doing that and have VS determine it reliably itself.\n- Sending the CID to the VM client in the various IVirtualMachineCallback on* methods is technically redundant but harmless and vaguely useful, but in any case is independent of how the notify* functions are specified.",
+      "parentUuid": "e08afe34_f6d2f856",
+      "range": {
+        "startLine": 94,
+        "startChar": 40,
+        "endLine": 94,
+        "endChar": 73
+      },
+      "revId": "0c2bd9bc6672f69e7646cc14337f8c666ef34c67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
