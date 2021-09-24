@@ -16,6 +16,24 @@
       "message": "What\u0027s the rationale for putting this here rather than in aidl::VirtualMachine? I have a slight preference for putting it there instead, as it\u0027s more AIDL/Binder-related than crosvm-related.",
       "revId": "cbc3e3532a523f4a2f67c24ac0b0c6b8d500943b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acc13699_f7247a01",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-24T12:35:40Z",
+      "side": 1,
+      "message": "That never even occurred to me.\nDone.",
+      "parentUuid": "1b0fb604_231da679",
+      "revId": "cbc3e3532a523f4a2f67c24ac0b0c6b8d500943b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
