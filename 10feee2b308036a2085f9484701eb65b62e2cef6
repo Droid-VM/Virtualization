@@ -16,6 +16,29 @@
       "message": "I\u0027m still a bit worried this will timeout on cuttlefish because of repeated VM creation.",
       "revId": "10feee2b308036a2085f9484701eb65b62e2cef6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bb05b77_f0b338d4",
+        "filename": "compos/tests/java/android/compos/test/ComposKeyTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-24T16:05:40Z",
+      "side": 1,
+      "message": "I wonder if it\u0027s possible that multiple tests are scheduled to run on the same device at the same time, since TEST_ROOT is shared among all derived classes of VirtualizationTestCaseBase.  Maybe replace with OUR_TEST_ROOT \u003d TEST_ROOT + \u0027compos_key_test/\u0027?",
+      "range": {
+        "startLine": 48,
+        "startChar": 36,
+        "endLine": 48,
+        "endChar": 51
+      },
+      "revId": "10feee2b308036a2085f9484701eb65b62e2cef6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
