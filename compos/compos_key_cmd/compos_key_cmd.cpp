@@ -156,7 +156,9 @@ public:
 
     bool waitUntilReady() {
         std::unique_lock lock(mMutex);
-        return mCv.wait_for(lock, std::chrono::seconds(20), [this] { return mReady || mDied; }) &&
+        // 10s is long enough on real hardware, but it can take 90s when using nested
+        // virtualization.
+        return mCv.wait_for(lock, std::chrono::seconds(120), [this] { return mReady || mDied; }) &&
                 !mDied;
     }
 
