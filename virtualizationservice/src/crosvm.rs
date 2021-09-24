@@ -17,6 +17,7 @@
 use crate::aidl::VirtualMachineCallbacks;
 use crate::Cid;
 use anyhow::{bail, Error};
+use binder::unstable_api::LazyServiceGuard;
 use command_fds::CommandFdExt;
 use log::{debug, error, info};
 use shared_child::SharedChild;
@@ -134,6 +135,8 @@ pub struct VmInstance {
     pub stream: Mutex<Option<VsockStream>>,
     /// The latest lifecycle state which the payload reported itself to be in.
     payload_state: Mutex<PayloadState>,
+    /// Keeps our service process running as long as this VM instance exists.
+    lazy_service_guard: LazyServiceGuard,
 }
 
 impl VmInstance {
@@ -159,6 +162,7 @@ impl VmInstance {
             callbacks: Default::default(),
             stream: Mutex::new(None),
             payload_state: Mutex::new(PayloadState::Starting),
+            lazy_service_guard: Default::default(),
         })
     }
 
