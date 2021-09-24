@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b0fb604_231da679",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-09-24T10:54:40Z",
+      "side": 1,
+      "message": "What\u0027s the rationale for putting this here rather than in aidl::VirtualMachine? I have a slight preference for putting it there instead, as it\u0027s more AIDL/Binder-related than crosvm-related.",
+      "revId": "cbc3e3532a523f4a2f67c24ac0b0c6b8d500943b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
