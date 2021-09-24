@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aab295ca_b5976347",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-24T08:13:45Z",
+      "side": 1,
+      "message": "Well, it seems to have passed presubmit. I\u0027ll try to keep an eye on it.",
+      "parentUuid": "f36c6155_529259bf",
+      "revId": "a00d792a8f7f4bca3d4deae34abbbc0dcca02f2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12105529_ada6c1f9",
@@ -96,6 +114,30 @@
       "side": 1,
       "message": "I see.  Seems like  `testIfDeviceIsCapable` is the only reason we still need `VirtualizationTestCaseBase` for now.",
       "parentUuid": "65cb4670_a4e5b9a3",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 52,
+        "endChar": 56
+      },
+      "revId": "a00d792a8f7f4bca3d4deae34abbbc0dcca02f2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b3a0a43_618faa0d",
+        "filename": "compos/tests/java/android/compos/test/ComposKeyTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-24T08:13:45Z",
+      "side": 1,
+      "message": "Yes, I think so.",
+      "parentUuid": "1c76d366_ce894445",
       "range": {
         "startLine": 47,
         "startChar": 8,
