@@ -102,7 +102,7 @@ android_system_image {
         common: {
             deps: [
                 // non-updatable & mandatory apexes
-                "com.android.runtime",
+                "com.android.runtime.64only",
 
                 "microdroid_plat_sepolicy.cil",
                 "microdroid_plat_mapping_file",
