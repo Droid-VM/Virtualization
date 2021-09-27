@@ -16,6 +16,24 @@
       "message": "It seems a bit confusing and complicated to split things between the config file and command line like this, and even to have the memory in both places. What\u0027s wrong with just using the config file? You can put the value you need for the VM there, and have different config files per architecture if you need.",
       "revId": "1512fae7d3f292edcfd501e37edc57823f804c8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa8dbfc9_7c7b6274",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-09-27T13:50:40Z",
+      "side": 1,
+      "message": "`vm` is part of the developer toolkit and therefore I think it\u0027s desirable to provide a way to override the config value without requiring developers to change the config file (followed by building and installing the app having the config). \n\nHaving arch-specific config is possible, but then we will have lots of duplication between the copies.",
+      "parentUuid": "eac0436c_34471c76",
+      "revId": "1512fae7d3f292edcfd501e37edc57823f804c8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
