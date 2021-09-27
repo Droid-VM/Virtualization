@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eac0436c_34471c76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-09-27T12:51:03Z",
+      "side": 1,
+      "message": "It seems a bit confusing and complicated to split things between the config file and command line like this, and even to have the memory in both places. What\u0027s wrong with just using the config file? You can put the value you need for the VM there, and have different config files per architecture if you need.",
+      "revId": "1512fae7d3f292edcfd501e37edc57823f804c8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
