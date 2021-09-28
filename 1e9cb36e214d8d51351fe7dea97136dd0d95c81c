@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6140e191_6c8e054d",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-28T16:54:13Z",
+      "side": 1,
+      "message": "nit: how about `start_new_instance` to be more symmetric to `start_instance`?",
+      "range": {
+        "startLine": 117,
+        "startChar": 13,
+        "endLine": 117,
+        "endChar": 28
+      },
+      "revId": "1e9cb36e214d8d51351fe7dea97136dd0d95c81c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "078b5cb8_b3f0838e",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-28T16:54:13Z",
+      "side": 1,
+      "message": "FYI, similar to this, I\u0027ll need to add a few initialization methods. Here are the pseudo code to illustrate the idea:\n\n // compsvc will authenticate the JSON file with OEM\u0027s key. The JSON file will\n // contain name-\u003edigest mapping.  Once verified, we know what a file\u0027s digest\n // is supposed to be.\n service.initializeAndroidSystemFileDigestMap(\n   fs::read(\"/system/etc/security/fsverity/digest_map.json\")?,\n   fs::read(\"/system/etc/security/fsverity/digest_map.json.sig\")?);\n\n // compsvc will use the authenticated digest to verify each .pb, then call\n // derive_classpath with them.\n service.initializeClasspaths(\n   fs::read(\"/system/etc/classpaths/bootclasspath.pb\")?,\n   fs::read(\"/system/etc/classpaths/systemserverclasspath.pb\")?);\n\nP.S. I haven\u0027t decided whether to pass the file content, or use authfs/fd_server instead.\nP.P.S. Maybe the name of \"Files\" is ok after all?",
+      "range": {
+        "startLine": 134,
+        "startChar": 8,
+        "endLine": 134,
+        "endChar": 26
+      },
+      "revId": "1e9cb36e214d8d51351fe7dea97136dd0d95c81c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13e4d7ed_5191f7b6",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-28T16:54:13Z",
+      "side": 1,
+      "message": "nit: \"...it in memory.\", just to be clear to the future readers, that the key isn\u0027t loaded from external storage, unlike the other case.",
+      "range": {
+        "startLine": 158,
+        "startChar": 68,
+        "endLine": 158,
+        "endChar": 70
+      },
+      "revId": "1e9cb36e214d8d51351fe7dea97136dd0d95c81c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
