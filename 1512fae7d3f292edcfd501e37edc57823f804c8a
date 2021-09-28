@@ -34,6 +34,24 @@
       "parentUuid": "eac0436c_34471c76",
       "revId": "1512fae7d3f292edcfd501e37edc57823f804c8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2f5d02e_4d2f45e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-09-28T02:14:31Z",
+      "side": 1,
+      "message": "This is useful when we use `run-app` (not `run`) since in `run-app` mode there\u0027s no way to set mem option. Note that, in case of App, Java SDK provides the way to set mem. IMO, vm is expected to provide what SDK provide via command-line interface.\n\nMinor correction to \"followed by building and installing the app having the config\". The config used by `vm run` is different from the config embedded in app. So we don\u0027t need to build/install the app when using `vm run \u003cconfig\u003e`.",
+      "parentUuid": "fa8dbfc9_7c7b6274",
+      "revId": "1512fae7d3f292edcfd501e37edc57823f804c8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
