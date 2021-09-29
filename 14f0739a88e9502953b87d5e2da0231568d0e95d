@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13d013f4_c8f6516e",
+        "filename": "compos/composd/native/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-29T16:14:51Z",
+      "side": 1,
+      "message": "nit: Does it worth to mention the key format (PKCS#1? which I know nothing about)?  Since it\u0027s shared to a different component by file.",
+      "range": {
+        "startLine": 23,
+        "startChar": 26,
+        "endLine": 23,
+        "endChar": 29
+      },
+      "revId": "14f0739a88e9502953b87d5e2da0231568d0e95d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c7211a_949713df",
+        "filename": "compos/composd/native/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-29T16:14:51Z",
+      "side": 1,
+      "message": "I never used cxx.  Is this circular dependency (if that\u0027s the case) correct?\n\n * composd_native.h has `#include \"lib.rs.h\"`\n * lib.rs.h is generated from lib.rs (this file), which includes composd_native.h here.",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 37
+      },
+      "revId": "14f0739a88e9502953b87d5e2da0231568d0e95d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
