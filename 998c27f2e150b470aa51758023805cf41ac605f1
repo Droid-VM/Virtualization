@@ -22,6 +22,30 @@
       },
       "revId": "998c27f2e150b470aa51758023805cf41ac605f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "351fe5a9_d54d8215",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-09-29T01:10:07Z",
+      "side": 1,
+      "message": "No, it\u0027s not. This is because microdroid_precompiled_sepolicy module is now a common arch module, contrast to existing genrule module which was primary arch. There are no changes on behavior.",
+      "parentUuid": "b8b760a6_fbae8045",
+      "range": {
+        "startLine": 185,
+        "startChar": 17,
+        "endLine": 185,
+        "endChar": 48
+      },
+      "revId": "998c27f2e150b470aa51758023805cf41ac605f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
