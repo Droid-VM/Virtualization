@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c662392a_3fdbb3c5",
+        "filename": "compos/composd/native/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-29T16:31:11Z",
+      "side": 1,
+      "message": "The format is RsaPublicKey, mentioned below. Which is defined by X.509 - see eg rfc3447.",
+      "parentUuid": "13d013f4_c8f6516e",
+      "range": {
+        "startLine": 23,
+        "startChar": 26,
+        "endLine": 23,
+        "endChar": 29
+      },
+      "revId": "14f0739a88e9502953b87d5e2da0231568d0e95d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18c7211a_949713df",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-09-29T16:14:51Z",
       "side": 1,
       "message": "I never used cxx.  Is this circular dependency (if that\u0027s the case) correct?\n\n * composd_native.h has `#include \"lib.rs.h\"`\n * lib.rs.h is generated from lib.rs (this file), which includes composd_native.h here.",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 37
+      },
+      "revId": "14f0739a88e9502953b87d5e2da0231568d0e95d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c34860f_676bcd45",
+        "filename": "compos/composd/native/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-09-29T16:31:11Z",
+      "side": 1,
+      "message": "lib.rs.h includes only the Rust parts of this file - so it gets KeyResult and the things it needs, but not this include!.\n\nThe include! actually feeds into a different header - rust/cxx.h - which I\u0027m not including or indeed generating any more (it\u0027s redundant here).\n\nMore importantly it is injected into the generated C++ source code (composd_native_cxx_generated.cc) which exposes the real ffi function to Rust and calls my implementation - there it\u0027s necessary so it can see my prototype.\n\nThere is some redundancy, but the generated code use #if guards to make sure we don\u0027t end up with duplicate definitions. And no circularity.",
+      "parentUuid": "18c7211a_949713df",
       "range": {
         "startLine": 30,
         "startChar": 8,
