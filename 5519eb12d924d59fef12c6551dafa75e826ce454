@@ -16,6 +16,40 @@
       "message": "This is based on quickly reading go/android-rust-build-cxx \u0026 the cxx docs; hopefully I haven\u0027t got it too horribly wrong.",
       "revId": "5519eb12d924d59fef12c6551dafa75e826ce454",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "963d37da_67d4214f",
+        "filename": "compos/composd/native/composd_native.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-09-29T13:00:19Z",
+      "side": 1,
+      "message": "Could you make this (and below) return a reason why it failed?",
+      "revId": "5519eb12d924d59fef12c6551dafa75e826ce454",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75ae228c_ef3f2618",
+        "filename": "compos/composd/native/composd_native.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-09-29T13:00:19Z",
+      "side": 1,
+      "message": "These headers don\u0027t seem to be used in this file, why do they need to be included?",
+      "revId": "5519eb12d924d59fef12c6551dafa75e826ce454",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
