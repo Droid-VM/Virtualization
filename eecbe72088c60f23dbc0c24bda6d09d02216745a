@@ -93,6 +93,30 @@
       },
       "revId": "eecbe72088c60f23dbc0c24bda6d09d02216745a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fe130be_15d5c24d",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-30T15:54:14Z",
+      "side": 1,
+      "message": "Ah sorry, I forgot runOnMicrodroidForResult only returns when authfs exits...\n\nThe retry brings another race condition though. MOUNT_DIR may not yet be FUSE-mounted in the retry case.  Anyway, this change already reduces the flakiness. We could fix that case separately.",
+      "parentUuid": "78d77ba1_070694f2",
+      "range": {
+        "startLine": 351,
+        "startChar": 20,
+        "endLine": 351,
+        "endChar": 44
+      },
+      "revId": "eecbe72088c60f23dbc0c24bda6d09d02216745a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
