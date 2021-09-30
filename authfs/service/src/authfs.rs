@@ -26,7 +26,6 @@ use std::process::Command;
 use std::thread::sleep;
 use std::time::{Duration, Instant};
 
-use crate::common::new_binder_exception;
 use authfs_aidl_interface::aidl::com::android::virt::fs::IAuthFs::{BnAuthFs, IAuthFs};
 use authfs_aidl_interface::aidl::com::android::virt::fs::{
     AuthFsConfig::AuthFsConfig, InputFdAnnotation::InputFdAnnotation,
@@ -35,6 +34,7 @@ use authfs_aidl_interface::aidl::com::android::virt::fs::{
 use authfs_aidl_interface::binder::{
     self, BinderFeatures, ExceptionCode, Interface, ParcelFileDescriptor, Strong,
 };
+use binder_common::new_binder_exception;
 
 const AUTHFS_BIN: &str = "/system/bin/authfs";
 const AUTHFS_SETUP_POLL_INTERVAL_MS: Duration = Duration::from_millis(50);
@@ -83,7 +83,11 @@ impl AuthFs {
             debuggable,
         )?;
         wait_until_authfs_ready(&mountpoint).map_err(|e| {
-            debug!("Wait for authfs: {:?}", child.wait());
+            debug!("wait_until_authfs_ready failing: {}", e);
+            match child.wait() {
+                Ok(status) => debug!("Wait for authfs: {}", status),
+                Err(e) => warn!("Failed to wait for child: {}", e),
+            }
             e
         })?;
 
