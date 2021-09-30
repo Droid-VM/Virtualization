@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e57271d8_d362b0c9",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-30T15:14:36Z",
+      "side": 1,
+      "message": "This is one of the reason I was hoping to pass the listening socket to fd_server.  Otherwise, we\u0027d have to retry or somehow let fd_server send IPC to the caller to signal that it\u0027s ready to serve.",
+      "range": {
+        "startLine": 349,
+        "startChar": 23,
+        "endLine": 349,
+        "endChar": 94
+      },
+      "revId": "eecbe72088c60f23dbc0c24bda6d09d02216745a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5754abab_c7381252",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-09-30T15:14:36Z",
+      "side": 1,
+      "message": "Wouldn\u0027t this fork authfs indefinitely?  Maybe we could replace L366 with a CountDownLatch#countDown() to signal a retry?  (For simplicity, the signal could be sent once, which should be sufficient)",
+      "range": {
+        "startLine": 351,
+        "startChar": 20,
+        "endLine": 351,
+        "endChar": 44
+      },
+      "revId": "eecbe72088c60f23dbc0c24bda6d09d02216745a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
