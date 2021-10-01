@@ -26,7 +26,7 @@ use std::env;
 use std::path::PathBuf;
 use std::sync::{Arc, RwLock};
 
-use crate::compilation::{compile_cmd, CompilerOutput};
+use crate::compilation::{compile, compile_cmd, CompilerOutput};
 use crate::compos_key_service::CompOsKeyService;
 use crate::fsverity;
 use authfs_aidl_interface::aidl::com::android::virt::fs::IAuthFsService::IAuthFsService;
@@ -136,8 +136,22 @@ impl ICompOsService for CompOsService {
         }
     }
 
-    fn compile(&self, _marshaled: &[u8], _fd_annotation: &FdAnnotation) -> BinderResult<i8> {
-        Err(new_binder_exception(ExceptionCode::UNSUPPORTED_OPERATION, "Not yet implemented"))
+    fn compile(&self, marshaled: &[u8], fd_annotation: &FdAnnotation) -> BinderResult<i8> {
+        let authfs_service = get_authfs_service()?;
+        let output = compile(&self.dex2oat_path, marshaled, fd_annotation, authfs_service)
+            .map_err(|e| {
+                new_binder_exception(
+                    ExceptionCode::SERVICE_SPECIFIC,
+                    format!("Compilation failed: {}", e),
+                )
+            })?;
+        match output {
+            CompilerOutput::Digests { .. } => {
+                // TODO(victorhsieh): Figure out a way to return the signatures.
+                Ok(0)
+            }
+            CompilerOutput::ExitCode(exit_code) => Ok(exit_code),
+        }
     }
 
     fn generateSigningKey(&self) -> BinderResult<CompOsKeyData> {

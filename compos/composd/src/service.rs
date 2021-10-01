@@ -53,11 +53,12 @@ impl IIsolatedCompilationService for IsolatedCompilationService {
         fd_annotation: &FdAnnotation,
     ) -> binder::Result<CompilationResult> {
         // TODO - check caller is odrefresh
-        to_binder_result(self.do_compile(args, fd_annotation))
+        to_binder_result(self.do_compile_cmd(args, fd_annotation))
     }
 
-    fn compile(&self, _marshaled: &[u8], _fd_annotation: &FdAnnotation) -> binder::Result<i8> {
-        Err(new_binder_service_specific_error(-1, "Not yet implemented"))
+    fn compile(&self, marshaled: &[u8], fd_annotation: &FdAnnotation) -> binder::Result<i8> {
+        // TODO - check caller is odrefresh
+        to_binder_result(self.do_compile(marshaled, fd_annotation))
     }
 }
 
@@ -87,12 +88,17 @@ impl IsolatedCompilationService {
         Ok(())
     }
 
-    fn do_compile(
+    fn do_compile_cmd(
         &self,
         args: &[String],
         fd_annotation: &FdAnnotation,
     ) -> Result<CompilationResult> {
         let compos = self.instance_manager.get_running_service()?;
-        compos.compile_cmd(args, fd_annotation).context("Compiling")
+        compos.compile_cmd(args, fd_annotation).context("Compiling with cmdline flags")
+    }
+
+    fn do_compile(&self, marshaled: &[u8], fd_annotation: &FdAnnotation) -> Result<i8> {
+        let compos = self.instance_manager.get_running_service()?;
+        compos.compile(marshaled, fd_annotation).context("Compiling")
     }
 }
