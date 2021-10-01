@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c1eecf9_6b1dc48f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-01T08:20:30Z",
+      "side": 1,
+      "message": "When I look at that bug, the only CL between last known good and first known bad is ag/1838093:\nhttps://android-build.googleplex.com/builds/7782843/branches/aosp-master/targets/aosp_cf_x86_64_phone-userdebug/cls?end\u003d7782829",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 94
+      },
+      "revId": "b92d9f46be6868226895fcda2cc822c557d7b56e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9a94093e_f45957d4",
@@ -14,6 +37,24 @@
       "writtenOn": "2021-09-30T23:20:28Z",
       "side": 1,
       "message": "Hmm, the failure looks nothing to do with this change.  Probably a different problem?",
+      "revId": "b92d9f46be6868226895fcda2cc822c557d7b56e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfaadbc6_19c07047",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-01T08:20:30Z",
+      "side": 1,
+      "message": "I agree.",
+      "parentUuid": "9a94093e_f45957d4",
       "revId": "b92d9f46be6868226895fcda2cc822c557d7b56e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
