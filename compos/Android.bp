@@ -22,6 +22,7 @@ rust_binary {
     ],
     prefer_rlib: true,
     shared_libs: [
+        "libbinder_ndk",
         "libbinder_rpc_unstable",
     ],
     apex_available: [
@@ -46,6 +47,7 @@ rust_binary {
         "libclap",
         "libcompos_common",
         "libenv_logger",
+        "libdexopt_bindgen",
         "liblibc",
         "liblog_rust",
         "libminijail_rust",
@@ -57,6 +59,23 @@ rust_binary {
     shared_libs: [
         "libbinder_rpc_unstable",
     ],
+    apex_available: [
+        "com.android.compos",
+    ],
+}
+
+rust_bindgen {
+    name: "libdexopt_bindgen",
+    crate_name: "dexopt_bindgen",
+    wrapper_src: "src/libdexopt.hpp",
+    source_stem: "bindings",
+    header_libs: [
+        "libdexopt_external_headers",
+    ],
+    shared_libs: [
+        "libdexopt",
+    ],
+    bindgen_flags: ["--size_t-is-usize"],
     apex_available: [
         "com.android.compos",
     ],
