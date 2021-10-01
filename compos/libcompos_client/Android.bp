@@ -1,0 +1,18 @@
+cc_library {
+    name: "libcompos_client",
+    srcs: ["libcompos_client.cc"],
+    min_sdk_version: "S", // TODO(victorhsieh): uprev when possible
+    shared_libs: [
+        "compos_aidl_interface-ndk",
+        "libbase",
+        "libbinder_ndk",
+        "libbinder_rpc_unstable",
+    ],
+    export_include_dirs: ["include"],
+    stubs: {
+        symbol_file: "libcompos_client.map.txt",
+    },
+    apex_available: [
+        "com.android.compos",
+    ],
+}
