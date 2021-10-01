@@ -33,6 +33,24 @@
       "message": "What\u0027s the advantage of doing this over just having `main` return the `Result`? Doesn\u0027t that do the same thing?",
       "revId": "6018a8c3d7cbdab1f3c01be9cfd9f92f8b9d5153",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c4d847a_325e3fdc",
+        "filename": "compos/composd/src/composd_main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-01T11:11:25Z",
+      "side": 1,
+      "message": "No - that writes the error to stderr, which quite often doesn\u0027t do anything useful.\nThis puts it in the log where we can actually see it.\n\n(We do that in various command-line tools, which is fine; stderr is the right thing there.)",
+      "parentUuid": "fb74eb27_1fff908f",
+      "revId": "6018a8c3d7cbdab1f3c01be9cfd9f92f8b9d5153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
