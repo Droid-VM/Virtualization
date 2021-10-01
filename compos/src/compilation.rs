@@ -15,9 +15,13 @@
  */
 
 use anyhow::{anyhow, bail, Context, Result};
-use log::error;
+use log::{debug, error};
 use minijail::{self, Minijail};
+use std::default::Default;
+use std::ffi::CStr;
 use std::fs::File;
+use std::iter::Iterator;
+use std::ops::Drop;
 use std::os::unix::io::{AsRawFd, RawFd};
 use std::path::Path;
 
@@ -50,6 +54,34 @@ struct CompilerOutputParcelFds {
     image: ParcelFileDescriptor,
 }
 
+struct NullTerminatedPtrIter<T> {
+    base: *const *const T,
+    index: usize,
+}
+
+impl<T> Iterator for NullTerminatedPtrIter<T> {
+    type Item = *const T;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        // SAFETY: Caller must ensure the pointer array is valid and null-terminated.
+        let current_ptr = unsafe { *self.base.add(self.index) };
+        if current_ptr.is_null() {
+            None
+        } else {
+            self.index += 1;
+            Some(current_ptr)
+        }
+    }
+}
+
+impl<T> NullTerminatedPtrIter<T> {
+    /// SAFETY: Caller is responsible to provide a pointer that points to a null-terminated pointer
+    /// arrray.
+    unsafe fn new(base: *const *const T) -> Self {
+        NullTerminatedPtrIter { base, index: 0 }
+    }
+}
+
 /// Runs the compiler with given flags with file descriptors described in `fd_annotation` retrieved
 /// via `authfs_service`. Returns exit code of the compiler process.
 pub fn compile_cmd(
@@ -70,8 +102,8 @@ pub fn compile_cmd(
     let fd_mapping =
         open_authfs_files_for_fd_mapping(&authfs, &authfs_config).context("Open on authfs")?;
 
-    let jail =
-        spawn_jailed_task(compiler_path, compiler_args, fd_mapping).context("Spawn dex2oat")?;
+    let args: Vec<_> = compiler_args.iter().map(|s| s.as_str()).collect();
+    let jail = spawn_jailed_task(compiler_path, &args, fd_mapping).context("Spawn dex2oat")?;
     let jail_result = jail.wait();
 
     let parcel_fds = parse_compiler_args(&authfs, compiler_args)?;
@@ -85,6 +117,114 @@ pub fn compile_cmd(
             vdex: fsverity::measure(vdex_file.as_raw_fd())?,
             image: fsverity::measure(image_file.as_raw_fd())?,
         }),
+        Err(minijail::Error::ReturnCode(exit_code)) => {
+            error!("dex2oat failed with exit code {}", exit_code);
+            Ok(CompilerOutput::ExitCode(exit_code as i8))
+        }
+        Err(e) => {
+            bail!("Unexpected minijail error: {}", e)
+        }
+    }
+}
+
+struct DexoptContext {
+    context: *const dexopt_bindgen::ADexoptContext,
+}
+
+impl Drop for DexoptContext {
+    fn drop(&mut self) {
+        // SAFETY: Safe to destruct the context since no one can access the context anymore.
+        unsafe {
+            dexopt_bindgen::ADexopt_DeleteDexoptContext(self.context);
+        }
+    }
+}
+
+impl DexoptContext {
+    fn new(marshaled: &[u8]) -> Result<Self> {
+        // SAFETY: The byte buffer `marshaled` comes from an untrusted world. We have to rely on
+        // ADexopt_CreateAndValidateDexoptContext to handle the unmarshalling and check safely and
+        // correctly, and only after so, returns a valid opaque context object.
+        let context = unsafe {
+            dexopt_bindgen::ADexopt_CreateAndValidateDexoptContext(
+                marshaled.as_ptr(),
+                marshaled.len(),
+            )
+        };
+        if context.is_null() {
+            bail!("Can't create dexopt context");
+        }
+        Ok(DexoptContext { context })
+    }
+
+    fn build_cmdline<'a>(&self, compiler_path: &'a str) -> Result<Vec<&'a str>> {
+        // SAFETY: The context returned earlier is assumed to be legitimate. As a result, the
+        // pointer is assumed to pointer to a C string array that ends with a nullptr.
+        let cmdline_args_iter = unsafe {
+            NullTerminatedPtrIter::new(dexopt_bindgen::ADexopt_GetCmdlineArguments(self.context))
+        };
+        let results: Result<Vec<_>, _> = cmdline_args_iter
+            .map(|ptr| {
+                // SAFETY: ptr should already point to a valid C string in the context.
+                unsafe { CStr::from_ptr(ptr) }.to_str()
+            })
+            .collect();
+
+        let mut compiler_args = vec![compiler_path];
+        compiler_args.append(&mut results?);
+        Ok(compiler_args)
+    }
+}
+
+/// Runs the compiler with given flags with file descriptors described in `fd_annotation` retrieved
+/// via `authfs_service`. Returns exit code of the compiler process.
+pub fn compile(
+    compiler_path: &Path,
+    marshaled: &[u8],
+    fd_annotation: &FdAnnotation,
+    authfs_service: Strong<dyn IAuthFsService>,
+) -> Result<CompilerOutput> {
+    // Get ready to prepare the context encoded in the marshaled bytes.
+    let dexopt_context = DexoptContext::new(marshaled)?;
+
+    // Mount authfs (via authfs_service). The authfs instance unmounts once the `authfs` variable
+    // is out of scope.
+    let authfs_config = build_authfs_config(fd_annotation);
+    let authfs = authfs_service.mount(&authfs_config)?;
+
+    // The task expects to receive FD numbers that match its flags (e.g. --zip-fd=42) prepared
+    // on the host side. Since the local FD opened from authfs (e.g. /authfs/42) may not match
+    // the task's expectation, prepare a FD mapping and let minijail prepare the correct FD
+    // setup.
+    let fd_mapping =
+        open_authfs_files_for_fd_mapping(&authfs, &authfs_config).context("Open on authfs")?;
+
+    let compiler_args = dexopt_context.build_cmdline(compiler_path.to_str().unwrap())?;
+    let jail =
+        spawn_jailed_task(compiler_path, &compiler_args, fd_mapping).context("Spawn dex2oat")?;
+    let jail_result = jail.wait();
+
+    match jail_result {
+        Ok(()) => {
+            let _digest_results: Result<Vec<_>> = fd_annotation
+                .output_fds
+                .iter()
+                .map(|fd| {
+                    let file = authfs.openFile(*fd, false)?;
+                    fsverity::measure(file.as_raw_fd())
+                })
+                .collect();
+            // TODO(victorhsieh): Figure out a better way to return signatures. This is not trivial
+            // because the information of which FDs are oat/vdex/image is not available (only ART's
+            // code knows). We may need another API from ART to tell us the FDs to sign.
+            // Separately, we also need to decide to write the signatures to output signature FDs,
+            // return by bytes, add a new ART API, or let even ART handle the signing.
+            Ok(CompilerOutput::Digests {
+                oat: Default::default(),
+                vdex: Default::default(),
+                image: Default::default(),
+            })
+        }
         Err(minijail::Error::ReturnCode(exit_code)) => {
             error!("dex2oat failed with exit code {}", exit_code);
             Ok(CompilerOutput::ExitCode(exit_code as i8))
@@ -176,9 +316,10 @@ fn open_authfs_files_for_fd_mapping(
 
 fn spawn_jailed_task(
     executable: &Path,
-    args: &[String],
+    args: &[&str],
     fd_mapping: Vec<(ParcelFileDescriptor, PseudoRawFd)>,
 ) -> Result<Minijail> {
+    debug!("Running compiler in minijail. Args: {:?}", args);
     // TODO(b/185175567): Run in a more restricted sandbox.
     let jail = Minijail::new()?;
     let preserve_fds: Vec<_> = fd_mapping.iter().map(|(f, id)| (f.as_raw_fd(), *id)).collect();
