@@ -49,7 +49,7 @@ pub fn measure(fd: RawFd) -> Result<Sha256Digest> {
         getxattr(path.as_ptr(), name.as_ptr(), buf.as_mut_ptr() as *mut libc::c_void, buf.len())
     };
     if size < 0 {
-        bail!("Failed to getxattr: {}", io::Error::last_os_error());
+        bail!("Failed to getxattr from fd {}: {}", fd, io::Error::last_os_error());
     } else if size != SHA256_HASH_SIZE as isize {
         bail!("Unexpected hash size: {}", size);
     } else {
