@@ -1,0 +1,8 @@
+LIBCOMPOS_CLIENT {
+    global:
+        AComposClient_Connect; # apex
+        AComposClient_Disconnect; # apex
+        AComposClient_Request; # apex
+    local:
+        *;
+};
