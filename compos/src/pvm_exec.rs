@@ -175,7 +175,7 @@ fn try_main() -> Result<()> {
     } else {
         // Call directly into the VM
         let compos_vm = get_rpc_binder(cid)?;
-        compos_vm.compile(&args, &fd_annotation)
+        compos_vm.compile_cmd(&args, &fd_annotation)
     };
     let result = result.context("Binder call failed")?;
 

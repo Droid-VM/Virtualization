@@ -88,6 +88,6 @@ impl IsolatedCompilationService {
         fd_annotation: &FdAnnotation,
     ) -> Result<CompilationResult> {
         let compos = self.instance_manager.get_running_service()?;
-        compos.compile(args, fd_annotation).context("Compiling")
+        compos.compile_cmd(args, fd_annotation).context("Compiling")
     }
 }
