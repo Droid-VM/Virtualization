@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000015865737",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1843637?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "6e406354_e2ef61fe",
+          "description": "Change to \"compos/apex/Android.bp\"",
+          "replacements": [
+            {
+              "path": "compos/apex/Android.bp",
+              "range": {
+                "startLine": 46,
+                "startChar": 29,
+                "endLine": 46,
+                "endChar": 39
+              },
+              "replacement": "superseded"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "c5330f28_47599c43",
+        "filename": "compos/apex/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-10-01T21:50:36Z",
+      "side": 1,
+      "message": "Common typo found: \"superceded\" -- should it be \"superseded\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 46,
+        "startChar": 29,
+        "endLine": 46,
+        "endChar": 39
+      },
+      "revId": "7f22d5b9fb00fe1298735934384dca1ec804ce95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
