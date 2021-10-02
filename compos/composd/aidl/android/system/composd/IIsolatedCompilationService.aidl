@@ -24,10 +24,10 @@ interface IIsolatedCompilationService {
 
     /**
      * Run dex2oat in the currently running instance of the CompOS VM. This is a simple proxy
-     * to ICompOsService#compile.
+     * to ICompOsService#compile_cmd.
      *
      * This method can only be called from odrefresh. If there is no currently running instance
      * an error is returned.
      */
-    CompilationResult compile(in String[] args, in FdAnnotation fd_annotation);
+    CompilationResult compile_cmd(in String[] args, in FdAnnotation fd_annotation);
 }

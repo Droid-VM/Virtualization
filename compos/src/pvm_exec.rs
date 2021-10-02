@@ -171,11 +171,11 @@ fn try_main() -> Result<()> {
     let result = if cid == VMADDR_CID_ANY {
         // Sentinel value that indicates we should use composd
         let composd = get_composd()?;
-        composd.compile(&args, &fd_annotation)
+        composd.compile_cmd(&args, &fd_annotation)
     } else {
         // Call directly into the VM
         let compos_vm = get_rpc_binder(cid)?;
-        compos_vm.compile(&args, &fd_annotation)
+        compos_vm.compile_cmd(&args, &fd_annotation)
     };
     let result = result.context("Binder call failed")?;
 
