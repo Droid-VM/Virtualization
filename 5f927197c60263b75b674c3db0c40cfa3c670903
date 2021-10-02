@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000015869260",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1843639?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "53ffbd28_c00c02a0",
+          "description": "Change to \"compos/aidl/com/android/compos/ICompOsService.aidl\"",
+          "replacements": [
+            {
+              "path": "compos/aidl/com/android/compos/ICompOsService.aidl",
+              "range": {
+                "startLine": 52,
+                "startChar": 66,
+                "endLine": 52,
+                "endChar": 74
+              },
+              "replacement": "received"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "75f2f143_2047b785",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-10-02T00:23:37Z",
+      "side": 1,
+      "message": "Common typo found: \"recieved\" -- should it be \"received\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 52,
+        "startChar": 66,
+        "endLine": 52,
+        "endChar": 74
+      },
+      "revId": "5f927197c60263b75b674c3db0c40cfa3c670903",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
