@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000015869258",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1843638?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "9a4018ee_b2b703c3",
+          "description": "Change to \"compos/src/compilation.rs\"",
+          "replacements": [
+            {
+              "path": "compos/src/compilation.rs",
+              "range": {
+                "startLine": 79,
+                "startChar": 8,
+                "endLine": 79,
+                "endChar": 14
+              },
+              "replacement": "array"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "1d2f24ec_603087b0",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-10-02T00:23:39Z",
+      "side": 1,
+      "message": "Common typo found: \"arrray\" -- should it be \"array\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 14
+      },
+      "revId": "af452dc80295684751ad2de9c901408c3a0aa608",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
