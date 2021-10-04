@@ -69,6 +69,29 @@
       "parentUuid": "4a6f57b1_181184f0",
       "revId": "6a682ff8fa2158df276d0a58249864ad86ac79db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bacfb4f7_d01d5da8",
+        "filename": "authfs/service/src/authfs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-04T15:38:26Z",
+      "side": 1,
+      "message": "This check is interesting.  If the child has exited even successfully, the FUSE should have been unmounted between after L153, and we should probably just bail regardless.  How about removing this check?",
+      "range": {
+        "startLine": 157,
+        "startChar": 12,
+        "endLine": 157,
+        "endChar": 37
+      },
+      "revId": "6a682ff8fa2158df276d0a58249864ad86ac79db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
