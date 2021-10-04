@@ -116,6 +116,30 @@
       },
       "revId": "6a682ff8fa2158df276d0a58249864ad86ac79db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0f01337_6849385d",
+        "filename": "authfs/service/src/authfs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-04T15:59:44Z",
+      "side": 1,
+      "message": "Although is that what the code is doing?  If the child has exited, shouldn\u0027t we always escape from the loop?  The success check seems to only repeat in the loop until timeout.",
+      "parentUuid": "fb5c6279_9ad5d8cb",
+      "range": {
+        "startLine": 157,
+        "startChar": 12,
+        "endLine": 157,
+        "endChar": 37
+      },
+      "revId": "6a682ff8fa2158df276d0a58249864ad86ac79db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
