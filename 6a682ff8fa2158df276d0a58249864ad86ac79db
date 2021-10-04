@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c12803bb_d824e206",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-04T14:52:23Z",
+      "side": 1,
+      "message": "Well, it\u0027s a trick I\u0027ve seen before.\nIf you have a program that\u0027s obsessed with fds, you can solve any problem by adding one more.",
+      "parentUuid": "99d11c31_ae666d9c",
+      "revId": "6a682ff8fa2158df276d0a58249864ad86ac79db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4a6f57b1_181184f0",
         "filename": "authfs/fd_server/src/main.rs",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2021-10-04T14:48:34Z",
       "side": 1,
       "message": "This looks like something we should really have a safe wrapper for in the binder crate.",
+      "revId": "6a682ff8fa2158df276d0a58249864ad86ac79db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaa7156a_0d845d05",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-04T14:52:23Z",
+      "side": 1,
+      "message": "It\u0027s on my list. We have 2 instances of this now, so easier to generalize.\nOf course this is built on the unstable API which makes that messier. But at least moving it to libbinder_common would be the next phase.",
+      "parentUuid": "4a6f57b1_181184f0",
       "revId": "6a682ff8fa2158df276d0a58249864ad86ac79db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
