@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc0de120_0be4c7da",
+        "filename": "compos/libcompos_client/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-04T15:21:14Z",
+      "side": 1,
+      "message": "And ART?",
+      "range": {
+        "startLine": 16,
+        "startChar": 9,
+        "endLine": 16,
+        "endChar": 28
+      },
+      "revId": "f4343373b1735ee1cd29895dbb1cd922d7672daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f3f34ea_86346c52",
         "filename": "compos/libcompos_client/include/libcompos_client.h",
         "patchSetId": 3
@@ -42,6 +65,29 @@
         "startChar": 15,
         "endLine": 36,
         "endChar": 36
+      },
+      "revId": "f4343373b1735ee1cd29895dbb1cd922d7672daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f7034be_b12aef62",
+        "filename": "compos/libcompos_client/libcompos_client.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-04T15:21:14Z",
+      "side": 1,
+      "message": "Could we proxy this to Rust, rather than re-implementing in C++, or is that just too much hassle?",
+      "range": {
+        "startLine": 45,
+        "startChar": 20,
+        "endLine": 45,
+        "endChar": 44
       },
       "revId": "f4343373b1735ee1cd29895dbb1cd922d7672daa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
