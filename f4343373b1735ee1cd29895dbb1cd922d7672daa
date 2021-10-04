@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44c61945_31889f00",
+        "filename": "compos/libcompos_client/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-04T21:22:24Z",
+      "side": 1,
+      "message": "Good to know \"apex_inherit\"!",
+      "parentUuid": "d63b3b8e_aa44e9c3",
+      "range": {
+        "startLine": 4,
+        "startChar": 4,
+        "endLine": 4,
+        "endChar": 19
+      },
+      "revId": "f4343373b1735ee1cd29895dbb1cd922d7672daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc0de120_0be4c7da",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-10-04T15:21:14Z",
       "side": 1,
       "message": "And ART?",
+      "range": {
+        "startLine": 16,
+        "startChar": 9,
+        "endLine": 16,
+        "endChar": 28
+      },
+      "revId": "f4343373b1735ee1cd29895dbb1cd922d7672daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75ef34c8_ef5fe8c0",
+        "filename": "compos/libcompos_client/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-04T21:22:24Z",
+      "side": 1,
+      "message": "It\u0027s not necessary to add ART because the library is made available by the stubs at L13 to all potential clients.  I added a visibility restriction just to avoid surprise.",
+      "parentUuid": "fc0de120_0be4c7da",
       "range": {
         "startLine": 16,
         "startChar": 9,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f197f5a8_2ed0068d",
+        "filename": "compos/libcompos_client/include/libcompos_client.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-04T21:22:24Z",
+      "side": 1,
+      "message": "Agreed, done.  Though we\u0027ll still need a way to distinguish the VMs when we start to compile apps.  Maybe we could replace CID with a enum/int type so that IIsolatedCompilationService knows which VMs to talk to.",
+      "parentUuid": "7f3f34ea_86346c52",
+      "range": {
+        "startLine": 36,
+        "startChar": 15,
+        "endLine": 36,
+        "endChar": 36
+      },
+      "revId": "f4343373b1735ee1cd29895dbb1cd922d7672daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f7034be_b12aef62",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-10-04T15:21:14Z",
       "side": 1,
       "message": "Could we proxy this to Rust, rather than re-implementing in C++, or is that just too much hassle?",
+      "range": {
+        "startLine": 45,
+        "startChar": 20,
+        "endLine": 45,
+        "endChar": 44
+      },
+      "revId": "f4343373b1735ee1cd29895dbb1cd922d7672daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91f37f58_0b80d48b",
+        "filename": "compos/libcompos_client/libcompos_client.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-04T21:22:24Z",
+      "side": 1,
+      "message": "We could. There is no real reason why it\u0027s done in C++, other than I didn\u0027t try to expose FFI and deal with the linkage.  Maybe it\u0027ll just work.",
+      "parentUuid": "9f7034be_b12aef62",
       "range": {
         "startLine": 45,
         "startChar": 20,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edb10c99_fd1f4eae",
+        "filename": "compos/libcompos_client/libcompos_client.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-04T21:22:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3785f0b_734d9864",
+      "range": {
+        "startLine": 72,
+        "startChar": 8,
+        "endLine": 72,
+        "endChar": 12
+      },
+      "revId": "f4343373b1735ee1cd29895dbb1cd922d7672daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "518888bb_ddf978d3",
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40929dd3_bd184c5c",
+        "filename": "compos/libcompos_client/libcompos_client.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-04T21:22:24Z",
+      "side": 1,
+      "message": "Done.  I originally had these in the API, so these are pretty primitive.",
+      "parentUuid": "518888bb_ddf978d3",
+      "range": {
+        "startLine": 83,
+        "startChar": 5,
+        "endLine": 83,
+        "endChar": 29
+      },
+      "revId": "f4343373b1735ee1cd29895dbb1cd922d7672daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55cb88ad_7b966492",
@@ -152,6 +296,30 @@
       "writtenOn": "2021-10-04T15:17:12Z",
       "side": 1,
       "message": "Please support composd here: http://cs/android/packages/modules/Virtualization/compos/src/pvm_exec.rs?l\u003d171\u0026rcl\u003d0cb3ddf3f62f21faff40a1e66d933e10c2b76758",
+      "range": {
+        "startLine": 107,
+        "startChar": 27,
+        "endLine": 107,
+        "endChar": 36
+      },
+      "revId": "f4343373b1735ee1cd29895dbb1cd922d7672daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7a39da2_d1c185d6",
+        "filename": "compos/libcompos_client/libcompos_client.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-04T21:22:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55cb88ad_7b966492",
       "range": {
         "startLine": 107,
         "startChar": 27,
