@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d63b3b8e_aa44e9c3",
+        "filename": "compos/libcompos_client/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-04T15:17:12Z",
+      "side": 1,
+      "message": "\"When not set, this property defaults to the value of sdk_version. When this is set to \"apex_inherit\", this tracks min_sdk_version of the containing APEX.\"\nWouldn\u0027t either of those work?",
+      "range": {
+        "startLine": 4,
+        "startChar": 4,
+        "endLine": 4,
+        "endChar": 19
+      },
+      "revId": "f4343373b1735ee1cd29895dbb1cd922d7672daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f3f34ea_86346c52",
+        "filename": "compos/libcompos_client/include/libcompos_client.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-04T15:17:12Z",
+      "side": 1,
+      "message": "I\u0027m not convinced you need connect/disconnect.\nIn the composd case we don\u0027t need the CID (and the only persistent connection we might want is to IIsolatedCompilationService, but I\u0027m not sure that matters).\nSo really the API is just \"please compile this\", which is AComposClient_Request below.\nTemporarily you might want to add a CID parameter there, or have a separate function to set it, but it should go away.",
+      "range": {
+        "startLine": 36,
+        "startChar": 15,
+        "endLine": 36,
+        "endChar": 36
+      },
+      "revId": "f4343373b1735ee1cd29895dbb1cd922d7672daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3785f0b_734d9864",
+        "filename": "compos/libcompos_client/libcompos_client.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-04T15:17:12Z",
+      "side": 1,
+      "message": "Can we include the changes in aosp/1842222 here?",
+      "range": {
+        "startLine": 72,
+        "startChar": 8,
+        "endLine": 72,
+        "endChar": 12
+      },
+      "revId": "f4343373b1735ee1cd29895dbb1cd922d7672daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "518888bb_ddf978d3",
+        "filename": "compos/libcompos_client/libcompos_client.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-04T15:17:12Z",
+      "side": 1,
+      "message": "Why not FileSharingSession::~FileSharingSession()  ?",
+      "range": {
+        "startLine": 83,
+        "startChar": 5,
+        "endLine": 83,
+        "endChar": 29
+      },
+      "revId": "f4343373b1735ee1cd29895dbb1cd922d7672daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55cb88ad_7b966492",
+        "filename": "compos/libcompos_client/libcompos_client.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-04T15:17:12Z",
+      "side": 1,
+      "message": "Please support composd here: http://cs/android/packages/modules/Virtualization/compos/src/pvm_exec.rs?l\u003d171\u0026rcl\u003d0cb3ddf3f62f21faff40a1e66d933e10c2b76758",
+      "range": {
+        "startLine": 107,
+        "startChar": 27,
+        "endLine": 107,
+        "endChar": 36
+      },
+      "revId": "f4343373b1735ee1cd29895dbb1cd922d7672daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
