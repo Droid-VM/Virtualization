@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acaa51c3_4a595c53",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-04T15:01:13Z",
+      "side": 1,
+      "message": "nit: typo",
+      "range": {
+        "startLine": 51,
+        "startChar": 79,
+        "endLine": 51,
+        "endChar": 88
+      },
+      "revId": "456dae8c41aca4725a2e257d0a51eb8f57d6b363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed28b209_f71263eb",
+        "filename": "compos/composd/aidl/android/system/composd/IIsolatedCompilationService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-04T15:01:13Z",
+      "side": 1,
+      "message": "We\u0027ll need to add compile() here, and in service.rs, and then eventually remove compile_cmd().\nOtherwise this will break composd (and the tests which I should get passing literally any week now).",
+      "range": {
+        "startLine": 32,
+        "startChar": 22,
+        "endLine": 32,
+        "endChar": 33
+      },
+      "revId": "456dae8c41aca4725a2e257d0a51eb8f57d6b363",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
