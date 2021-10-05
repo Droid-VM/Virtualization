@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6206298d_2ce8406f",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-05T13:48:11Z",
+      "side": 1,
+      "message": "Ah, excellent point.",
+      "parentUuid": "c28550e5_94fa2531",
+      "range": {
+        "startLine": 131,
+        "startChar": 13,
+        "endLine": 131,
+        "endChar": 14
+      },
+      "revId": "6391a6f7b78ef0cb139275cf658049653760dd94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c04f8e4_052fee06",
@@ -238,6 +262,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "36c176f6_d5eb4e76",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-05T13:48:11Z",
+      "side": 1,
+      "message": "Oh wow, I remember seeing that and thinking it was very clever, then forgot about it.\nInvisible error handling is cool, but disconcerting.",
+      "parentUuid": "bc4127cd_d5ee80b5",
+      "range": {
+        "startLine": 214,
+        "startChar": 30,
+        "endLine": 214,
+        "endChar": 37
+      },
+      "revId": "6391a6f7b78ef0cb139275cf658049653760dd94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2167fbb7_0c389a99",
         "filename": "compos/src/compilation.rs",
         "patchSetId": 3
@@ -343,6 +391,30 @@
       "side": 1,
       "message": "bindgen (in Android.bp) translates the visible C types into Rust binding.  We need everything defined in this header.",
       "parentUuid": "578c815d_e075602d",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 30
+      },
+      "revId": "6391a6f7b78ef0cb139275cf658049653760dd94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e81f483d_aca335ce",
+        "filename": "compos/src/libdexopt.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-05T13:48:11Z",
+      "side": 1,
+      "message": "I wondered why we couldn\u0027t point it directly at libdexopt_context.h rather than using the indirection. Although tbf it looks harmless and is easier to extend.",
+      "parentUuid": "964d916d_8b2c23b8",
       "range": {
         "startLine": 16,
         "startChar": 0,
