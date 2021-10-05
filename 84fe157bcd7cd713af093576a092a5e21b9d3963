@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2093fec_acd5cf37",
+        "filename": "compos/libcompos_client/libcompos_client.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-05T17:10:16Z",
+      "side": 1,
+      "message": "Done (let me know if I missed something.  I never used final for class before)",
+      "parentUuid": "7df28483_7bad3267",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 11
+      },
+      "revId": "84fe157bcd7cd713af093576a092a5e21b9d3963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc76ac97_fa4a6aa4",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-10-05T13:37:36Z",
       "side": 1,
       "message": "This won\u0027t work in the composd case - there you get an IIsolatedCompilationService, which just happens to have very similar methods.",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 81
+      },
+      "revId": "84fe157bcd7cd713af093576a092a5e21b9d3963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67a282b1_71b7a7fc",
+        "filename": "compos/libcompos_client/libcompos_client.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-05T17:10:16Z",
+      "side": 1,
+      "message": "Doh! Done!  I didn\u0027t try to deduplicate the code since the duplication is not super bad (to me) and we\u0027re removing the VM one very soon.",
+      "parentUuid": "dc76ac97_fa4a6aa4",
       "range": {
         "startLine": 136,
         "startChar": 0,
