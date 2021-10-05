@@ -423,6 +423,30 @@
       },
       "revId": "6391a6f7b78ef0cb139275cf658049653760dd94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "668c0f56_4c03b4ab",
+        "filename": "compos/src/libdexopt.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-05T17:10:32Z",
+      "side": 1,
+      "message": "So far I\u0027ve always declare the C functions I need, e.g. for openssl.  But since everything in this header is only used here, I just include it so that I don\u0027t need to maintain two copies.",
+      "parentUuid": "e81f483d_aca335ce",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 30
+      },
+      "revId": "6391a6f7b78ef0cb139275cf658049653760dd94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
