@@ -142,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73079fe8_b0c6db30",
+        "filename": "compos/libcompos_client/include/libcompos_client.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-05T13:37:36Z",
+      "side": 1,
+      "message": "Yeah, that could work.",
+      "parentUuid": "f197f5a8_2ed0068d",
+      "range": {
+        "startLine": 36,
+        "startChar": 15,
+        "endLine": 36,
+        "endChar": 36
+      },
+      "revId": "f4343373b1735ee1cd29895dbb1cd922d7672daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f7034be_b12aef62",
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "We could. There is no real reason why it\u0027s done in C++, other than I didn\u0027t try to expose FFI and deal with the linkage.  Maybe it\u0027ll just work.",
       "parentUuid": "9f7034be_b12aef62",
+      "range": {
+        "startLine": 45,
+        "startChar": 20,
+        "endLine": 45,
+        "endChar": 44
+      },
+      "revId": "f4343373b1735ee1cd29895dbb1cd922d7672daa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0c4e55d_b6867da4",
+        "filename": "compos/libcompos_client/libcompos_client.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-05T13:37:36Z",
+      "side": 1,
+      "message": "Using cxx was a lot less hassle than I expected, FWIW.\nBut no real objection to this being C++, as long as we get rid of the Rust one soon.",
+      "parentUuid": "91f37f58_0b80d48b",
       "range": {
         "startLine": 45,
         "startChar": 20,
