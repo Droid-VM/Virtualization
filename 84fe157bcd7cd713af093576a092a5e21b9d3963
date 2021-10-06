@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b54395ee_91924657",
+        "filename": "compos/libcompos_client/libcompos_client.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-06T08:25:12Z",
+      "side": 1,
+      "message": "Neither have I - all these C++11 and later features became available after I stopped writing any significant amount of C++, but it LGTM.\n\nHowever - you forgot to delete \"virtual\" here.",
+      "parentUuid": "e2093fec_acd5cf37",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 11
+      },
+      "revId": "84fe157bcd7cd713af093576a092a5e21b9d3963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dc76ac97_fa4a6aa4",
         "filename": "compos/libcompos_client/libcompos_client.cc",
         "patchSetId": 4
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Doh! Done!  I didn\u0027t try to deduplicate the code since the duplication is not super bad (to me) and we\u0027re removing the VM one very soon.",
       "parentUuid": "dc76ac97_fa4a6aa4",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 81
+      },
+      "revId": "84fe157bcd7cd713af093576a092a5e21b9d3963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7adfd646_70ed1474",
+        "filename": "compos/libcompos_client/libcompos_client.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-06T08:25:12Z",
+      "side": 1,
+      "message": "Yeah, I did much the same over in Rust - although there the amount of boilerplate was less.\n\nHave you tested with composd? Either using my WiP CL, or just running \"adb shell composd_cmd\" and watching the logcat?",
+      "parentUuid": "67a282b1_71b7a7fc",
       "range": {
         "startLine": 136,
         "startChar": 0,
