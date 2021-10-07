@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "698adc38_b62e7710",
+        "filename": "compos/libcompos_client/libcompos_client.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-07T18:30:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b54395ee_91924657",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 11
+      },
+      "revId": "84fe157bcd7cd713af093576a092a5e21b9d3963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc76ac97_fa4a6aa4",
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "Yeah, I did much the same over in Rust - although there the amount of boilerplate was less.\n\nHave you tested with composd? Either using my WiP CL, or just running \"adb shell composd_cmd\" and watching the logcat?",
       "parentUuid": "67a282b1_71b7a7fc",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 81
+      },
+      "revId": "84fe157bcd7cd713af093576a092a5e21b9d3963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b7d1469_f774e886",
+        "filename": "compos/libcompos_client/libcompos_client.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-07T18:30:11Z",
+      "side": 1,
+      "message": "Yes, composd_cmd seems work with some changes.\n * I need to change odrefresh.rs to not use (unsigned) VMADDR_CID_ANY to just \"--use-compilation-os\u003d-1\", otherwise the unsigned int is too large for the parsing to success.\n * I should have mentioned that the related ART change requires *CLASSPATH to be defined.  I had a local hack to hard-code the string manually for now.  I\u0027m working on running derive_classpath in the VM. We\u0027ll also need b/201788989.",
+      "parentUuid": "7adfd646_70ed1474",
       "range": {
         "startLine": 136,
         "startChar": 0,
