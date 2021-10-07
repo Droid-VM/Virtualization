@@ -88,7 +88,7 @@ impl VmInstance {
 
         let service = Self::connect_to_virtualization_service()?;
 
-        let vm = service.createVm(&config, Some(&log_fd)).context("Failed to create VM")?;
+        let vm = service.createVm(&config, &mut Some(log_fd)).context("Failed to create VM")?;
         let vm_state = Arc::new(VmStateMonitor::default());
 
         let vm_state_clone = Arc::clone(&vm_state);

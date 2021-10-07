@@ -95,11 +95,11 @@ impl IVirtualizationService for VirtualizationService {
     fn createVm(
         &self,
         config: &VirtualMachineConfig,
-        log_fd: Option<&ParcelFileDescriptor>,
+        log_fd: &mut Option<ParcelFileDescriptor>,
     ) -> binder::Result<Strong<dyn IVirtualMachine>> {
         check_manage_access()?;
         let state = &mut *self.state.lock().unwrap();
-        let log_fd = log_fd.map(clone_file).transpose()?;
+        let log_fd = log_fd.take().map(into_file);
         let requester_uid = ThreadState::get_calling_uid();
         let requester_sid = get_calling_sid()?;
         let requester_debug_pid = ThreadState::get_calling_pid();
@@ -768,6 +768,12 @@ fn get_state(instance: &VmInstance) -> VirtualMachineState {
         VmState::Dead => VirtualMachineState::DEAD,
         VmState::Failed => VirtualMachineState::DEAD,
     }
+}
+
+// TODO: This should obviously be a method on ParcelFileDescriptor
+fn into_file(pfd: ParcelFileDescriptor) -> File {
+    let raw_fd = pfd.into_raw_fd();
+    unsafe { File::from_raw_fd(raw_fd) }
 }
 
 /// Converts a `&ParcelFileDescriptor` to a `File` by cloning the file.

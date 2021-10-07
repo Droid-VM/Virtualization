@@ -238,7 +238,7 @@ public:
         appConfig.memoryMib = 0; // Use default
 
         LOG(INFO) << "Starting VM";
-        auto status = service->createVm(config, logFd, &mVm);
+        auto status = service->createVm(config, &logFd, &mVm);
         if (!status.isOk()) {
             return Error() << status.getDescription();
         }

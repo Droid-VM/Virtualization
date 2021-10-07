@@ -26,7 +26,7 @@ interface IVirtualizationService {
      * `logFd` is provided then console logs from the VM will be sent to it.
      */
     IVirtualMachine createVm(
-            in VirtualMachineConfig config, in @nullable ParcelFileDescriptor logFd);
+            in VirtualMachineConfig config, inout @nullable ParcelFileDescriptor logFd);
 
     /**
      * Initialise an empty partition image of the given size to be used as a writable partition.

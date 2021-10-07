@@ -124,7 +124,7 @@ fn run(
     daemonize: bool,
     log_path: Option<&Path>,
 ) -> Result<(), Error> {
-    let stdout = if let Some(log_path) = log_path {
+    let mut stdout = if let Some(log_path) = log_path {
         Some(ParcelFileDescriptor::new(
             File::create(log_path)
                 .with_context(|| format!("Failed to open log file {:?}", log_path))?,
@@ -134,7 +134,7 @@ fn run(
     } else {
         Some(ParcelFileDescriptor::new(duplicate_stdout()?))
     };
-    let vm = service.createVm(config, stdout.as_ref()).context("Failed to create VM")?;
+    let vm = service.createVm(config, &mut stdout).context("Failed to create VM")?;
 
     let cid = vm.getCid().context("Failed to get CID")?;
     println!(
