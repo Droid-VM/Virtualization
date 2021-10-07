@@ -16,6 +16,75 @@
       "message": "PTAL.\nI think I now understand all the various failure modes, and have attempted to deal with them. Hopefully TH will finally bless this version.",
       "revId": "09c363adf6a20ddcf0b7746a7e9a6c9d1c6e3ff9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2f8b158_7f8fa8f3",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-07T15:16:21Z",
+      "side": 1,
+      "message": "nit: move to setUp?",
+      "range": {
+        "startLine": 94,
+        "startChar": 8,
+        "endLine": 95,
+        "endChar": 57
+      },
+      "revId": "09c363adf6a20ddcf0b7746a7e9a6c9d1c6e3ff9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa749e9b_10f9cd36",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-07T15:16:21Z",
+      "side": 1,
+      "message": "Instead of disabling the whole check, how about add `|grep -v odex` to L141, just to maintain some confidence?",
+      "range": {
+        "startLine": 119,
+        "startChar": 8,
+        "endLine": 119,
+        "endChar": 10
+      },
+      "revId": "09c363adf6a20ddcf0b7746a7e9a6c9d1c6e3ff9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d80e1ff0_d7b2c177",
+        "filename": "tests/hostside/helper/java/android/virt/test/VirtualizationTestCaseBase.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-07T15:16:21Z",
+      "side": 1,
+      "message": "Jiyong implemented a workaround (avoid reusing CID) that I thought have worked in b/195765441.  If this is still happening, you might want to add a note to the bug.",
+      "range": {
+        "startLine": 88,
+        "startChar": 54,
+        "endLine": 89,
+        "endChar": 17
+      },
+      "revId": "09c363adf6a20ddcf0b7746a7e9a6c9d1c6e3ff9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
