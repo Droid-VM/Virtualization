@@ -129,6 +129,30 @@
       },
       "revId": "69d29dc226c2d31c04a7e3374f2fbe45a2d8bbe1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "424ad8ef_ce8f1a92",
+        "filename": "compos/libcompos_client/include/libcompos_client.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-08T20:28:45Z",
+      "side": 1,
+      "message": "\u003e Is this just connecting art-to-art?\n\nBesides connecting, CompOS is responsible to set up the facilities/resources that dex2oat expects (including APEX files, remote FDs, *CLASSPATH env variables, etc.), so that dex2oat can actually run successfully.\n\nThis diagram might help: https://docs.google.com/document/d/1xa6sSuTsKUmBLeG3oCeCrcxtVRkyxfuPQpp19Qx13ak/edit#heading\u003dh.5hwevgyzkzde",
+      "parentUuid": "887e8b71_17118359",
+      "range": {
+        "startLine": 29,
+        "startChar": 26,
+        "endLine": 30,
+        "endChar": 81
+      },
+      "revId": "69d29dc226c2d31c04a7e3374f2fbe45a2d8bbe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
