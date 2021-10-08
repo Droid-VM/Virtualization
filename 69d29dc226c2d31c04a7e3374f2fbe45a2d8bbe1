@@ -105,6 +105,30 @@
       },
       "revId": "69d29dc226c2d31c04a7e3374f2fbe45a2d8bbe1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "887e8b71_17118359",
+        "filename": "compos/libcompos_client/include/libcompos_client.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1010103
+      },
+      "writtenOn": "2021-10-08T20:23:59Z",
+      "side": 1,
+      "message": "\u003e Those \"fds\" information are actually encoded in the marshaled byte buffer.  The marshaled byte buffer can\u0027t be interpreted directly by this CompOS APEX because the format is private toe ART. \n\nIs this just connecting art-to-art? I\u0027m not entirely getting the data flow here.\n\n\u003e I assume it\u0027s fine to change the signature before the API is final?\n\nTechnically yes but that should be considered more last resort type of thing, since finding any prebuilts using the old signature is borderline impossible. Linkers only care if the method name lines up, there\u0027s no signature encoding to it.",
+      "parentUuid": "a8b7ee40_f98b82a7",
+      "range": {
+        "startLine": 29,
+        "startChar": 26,
+        "endLine": 30,
+        "endChar": 81
+      },
+      "revId": "69d29dc226c2d31c04a7e3374f2fbe45a2d8bbe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
