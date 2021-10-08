@@ -189,6 +189,30 @@
       },
       "revId": "84fe157bcd7cd713af093576a092a5e21b9d3963",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48dca4ef_33f86e14",
+        "filename": "compos/libcompos_client/libcompos_client.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-08T08:40:35Z",
+      "side": 1,
+      "message": "\u003e I need to change odrefresh.rs to not use (unsigned) VMADDR_CID_ANY to just \"--use-compilation-os\u003d-1\", otherwise the unsigned int is too large for the parsing to success.\n\nWell tbh -1 is much more elegant, but a CID should really be unsigned: https://man7.org/linux/man-pages/man7/vsock.7.html\nWe are hugely inconsistent about this though throughout the codebase.\n\n\u003e I should have mentioned that the related ART change requires *CLASSPATH to be defined.  I had a local hack to hard-code the string manually for now.  I\u0027m working on running derive_classpath in the VM. We\u0027ll also need b/201788989.\n\nAck",
+      "parentUuid": "1b7d1469_f774e886",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 81
+      },
+      "revId": "84fe157bcd7cd713af093576a092a5e21b9d3963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
