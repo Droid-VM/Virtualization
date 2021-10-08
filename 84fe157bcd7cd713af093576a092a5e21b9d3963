@@ -237,6 +237,30 @@
       },
       "revId": "84fe157bcd7cd713af093576a092a5e21b9d3963",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5663ef40_84c6d32f",
+        "filename": "compos/libcompos_client/libcompos_client.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-08T13:24:11Z",
+      "side": 1,
+      "message": "\u003e https://buganizer.corp.google.com/issues/202496301\nI remember I was intending to make it signed, then found that pvm_exec already parses it as unsigned, and decided changing that would be a little bogus.",
+      "parentUuid": "880fa66e_6be2a7d6",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 81
+      },
+      "revId": "84fe157bcd7cd713af093576a092a5e21b9d3963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
