@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23b60c34_e8599295",
+        "filename": "compos/libcompos_client/include/libcompos_client.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-08T19:47:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9031efbf_528b7f7b",
+      "revId": "69d29dc226c2d31c04a7e3374f2fbe45a2d8bbe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f48fb85_de034ccc",
@@ -55,6 +73,30 @@
       "side": 1,
       "message": "in terms of is there some reason to expect this set of parameters to not need adjustment as any changes to the params will require a new method with this design",
       "parentUuid": "8f48fb85_de034ccc",
+      "range": {
+        "startLine": 29,
+        "startChar": 26,
+        "endLine": 30,
+        "endChar": 81
+      },
+      "revId": "69d29dc226c2d31c04a7e3374f2fbe45a2d8bbe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8b7ee40_f98b82a7",
+        "filename": "compos/libcompos_client/include/libcompos_client.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-08T19:47:53Z",
+      "side": 1,
+      "message": "I don\u0027t expect the need to pass extra information.  The question I\u0027d love to have your input is whether we should get rid of those \"fds\" parameters.\n\nThose \"fds\" information are actually encoded in the marshaled byte buffer.  The marshaled byte buffer can\u0027t be interpreted directly by this CompOS APEX because the format is private toe ART.  That\u0027s why \"fds\" are duplicated here for visibility.  But technically we can remove those \"fds\" parameters later because \"compos\" can retrieve them from marshaled with a call to ART API (to be added on top of aosp/1843657).\n\nKeeping \"fds\" in this API makes sense because that\u0027s what the API implementation needs to use (in order to set up \"remote file descriptors\" for the compiler to read/write across VM boundary), before re-creating the compilation context from marshaled.  But then we can\u0027t avoid retrieving more information with a few more ART API anyway.  Since this API is kind of tailored for ART, would it be better to remove \"fds\" parameters when possible?  We can probably remove them in a few more weeks. I assume it\u0027s fine to change the signature before the API is final?",
+      "parentUuid": "f81686aa_e05644de",
       "range": {
         "startLine": 29,
         "startChar": 26,
