@@ -16,6 +16,23 @@
       "message": "This should fix some of our current test breakage.",
       "revId": "db2ae7963e6b7e540a82a8fb5923fbdd8a9891a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6dfa688_7332fc0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2021-10-11T10:06:34Z",
+      "side": 1,
+      "message": "Don\u0027t you need a change in odrefresh as well? It will treat any negative value as \"don\u0027t use compos\":\n\n  bool UseCompilationOs() const { return compilation_os_address_ \u003e\u003d 0; }\n ",
+      "revId": "db2ae7963e6b7e540a82a8fb5923fbdd8a9891a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
