@@ -34,7 +34,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     VirtualMachineState::VirtualMachineState,
 };
 use android_system_virtualizationservice::binder::{
-    self, BinderFeatures, ExceptionCode, Interface, ParcelFileDescriptor, Status, Strong,
+    self, BinderFeatures, ExceptionCode, Interface, ParcelFileDescriptor, Status, StatusCode, Strong,
     ThreadState,
 };
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::{
@@ -84,8 +84,6 @@ const ANDROID_VM_INSTANCE_VERSION: u16 = 1;
 pub struct VirtualizationService {
     state: Arc<Mutex<State>>,
 }
-
-impl Interface for VirtualizationService {}
 
 impl IVirtualizationService for VirtualizationService {
     /// Creates (but does not start) a new VM with the given configuration, assigning it the next
@@ -569,6 +567,35 @@ impl VirtualMachine {
     }
 }
 
+impl Interface for VirtualizationService {
+    /// Dump transaction handler for this Binder object.
+    fn dump(&self, file: &mut std::fs::File, _args: &[&std::ffi::CStr]) -> Result<(), StatusCode> {
+        let state = &mut *self.state.lock().unwrap();
+        let vms = state.vms();
+        writeln!(file, "Running {0} VMs:", vms.len()).expect("Unable to write file");
+
+        for vm in vms {
+            writeln!(file, "VM State: {}", get_state_debug(&vm))
+                .or(Err(StatusCode::UNKNOWN_ERROR))?;
+            writeln!(file, "CID: {0}", vm.cid.to_string()).or(Err(StatusCode::UNKNOWN_ERROR))?;
+            writeln!(file, "Protected: {}", vm.protected).or(Err(StatusCode::UNKNOWN_ERROR))?;
+            writeln!(
+                file,
+                "temporary_directory: {}",
+                vm.temporary_directory.to_string_lossy().to_string()
+            )
+            .or(Err(StatusCode::UNKNOWN_ERROR))?;
+            writeln!(file, "requester_uid: {}", vm.requester_uid)
+                .or(Err(StatusCode::UNKNOWN_ERROR))?;
+            writeln!(file, "requester_sid: {}", vm.requester_sid)
+                .or(Err(StatusCode::UNKNOWN_ERROR))?;
+            writeln!(file, "requester_debug_pid: {}", vm.requester_debug_pid)
+                .or(Err(StatusCode::UNKNOWN_ERROR))?;
+        }
+        Ok(())
+    }
+}
+
 impl Interface for VirtualMachine {}
 
 impl IVirtualMachine for VirtualMachine {
@@ -766,6 +793,20 @@ fn get_state(instance: &VmInstance) -> VirtualMachineState {
         },
         VmState::Dead => VirtualMachineState::DEAD,
         VmState::Failed => VirtualMachineState::DEAD,
+    }
+}
+/// Gets the `VirtualMachineState` (in String format) of the given `VmInstance` - only for debugging purposes
+fn get_state_debug(instance: &VmInstance) -> String {
+    match &*instance.vm_state.lock().unwrap() {
+        VmState::NotStarted { .. } => String::from("VirtualMachineState::NOT_STARTED"),
+        VmState::Running { .. } => match instance.payload_state() {
+            PayloadState::Starting => String::from("VirtualMachineState::STARTING"),
+            PayloadState::Started => String::from("VirtualMachineState::STARTED"),
+            PayloadState::Ready => String::from("VirtualMachineState::READY"),
+            PayloadState::Finished => String::from("VirtualMachineState::FINISHED"),
+        },
+        VmState::Dead => String::from("VirtualMachineState::DEAD"),
+        VmState::Failed => String::from("VirtualMachineState::DEAD"),
     }
 }
 
