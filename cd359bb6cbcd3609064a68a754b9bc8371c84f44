@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11d35a4f_f02c1193",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-11T14:37:21Z",
+      "side": 1,
+      "message": "This works, but I confess I\u0027m unsure why. The closure captures local variables by reference, and somehow the compiler seems able to be sure I\u0027m not doing anything with them after their lifetime. I\u0027m not, but I\u0027m not sure how it figures that out, with no obvious lifetime parameters involved.",
+      "revId": "cd359bb6cbcd3609064a68a754b9bc8371c84f44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
