@@ -45,6 +45,29 @@
       },
       "revId": "e88897acc36344c3203034aa360973cd8d84d750",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6bd6904_e32ce3a6",
+        "filename": "compos/libcompos_client/libcompos_client.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-11T08:37:47Z",
+      "side": 1,
+      "message": "If this is all going to be in-process to odrefresh, we could keep hold of this service, rather than requesting it from service manager each time.\nBut that potentially complicates the interface, and is only a minor optimisation, so I wouldn\u0027t worry about it for now.",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 5
+      },
+      "revId": "e88897acc36344c3203034aa360973cd8d84d750",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
