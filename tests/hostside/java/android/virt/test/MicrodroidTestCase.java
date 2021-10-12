@@ -104,6 +104,7 @@ public class MicrodroidTestCase extends VirtualizationTestCaseBase {
         shutdownMicrodroid(getDevice(), cid);
     }
 
+    @Ignore("Flaky when executed with testMicrodroidBoots. b/195765441")
     @Test
     public void testDebugMode() throws Exception {
         final String configPath = "assets/vm_config.json"; // path inside the APK
