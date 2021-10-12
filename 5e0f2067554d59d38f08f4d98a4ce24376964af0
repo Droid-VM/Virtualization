@@ -46,6 +46,30 @@
       },
       "revId": "5e0f2067554d59d38f08f4d98a4ce24376964af0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee4d4557_666182c8",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-10-12T08:52:24Z",
+      "side": 1,
+      "message": "aosp/1854319 is a preparation for the case \"(Consider an APEX which does not currently contribute to the classpath, but whose staged version does.)\"\n\nbtw, it looks like in the design doc \"StagedApeInfo\" doesn\u0027t have a field for dex2oat.",
+      "parentUuid": "35a7328c_a0ca847a",
+      "range": {
+        "startLine": 198,
+        "startChar": 14,
+        "endLine": 198,
+        "endChar": 41
+      },
+      "revId": "5e0f2067554d59d38f08f4d98a4ce24376964af0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
