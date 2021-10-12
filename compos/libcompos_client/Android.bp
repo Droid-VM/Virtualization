@@ -25,3 +25,60 @@ cc_library {
         "//art/odrefresh:__subpackages__",
     ],
 }
+
+cc_library {
+    name: "libcompos_client3",
+    whole_static_libs: ["libcompos_client2"],
+    min_sdk_version: "apex_inherit",
+    export_include_dirs: ["include"],
+    shared_libs: [
+        "libbinder_ndk",
+        "libbinder_rpc_unstable",
+        "libminijail",
+    ],
+    stubs: {
+        symbol_file: "libcompos_client.map.txt",
+    },
+    apex_available: [
+        "com.android.compos",
+    ],
+    visibility: [
+        "//packages/modules/Virtualization/compos:__subpackages__",
+        "//art/odrefresh:__subpackages__",
+    ],
+}
+
+rust_ffi {
+    name: "libcompos_client2",
+    crate_name: "compos_client2",
+    srcs: ["libcompos_client.rs"],
+    include_dirs: ["include"],
+
+    rustlibs: [
+        "android.system.composd-rust",
+        "compos_aidl_interface-rust",
+        "libandroid_logger",
+        "libanyhow",
+        "libbinder_rpc_unstable_bindgen",
+        "libbinder_rs",
+        "libcompos_common",
+        "liblibc",
+        "liblog_rust",
+        "libminijail_rust",
+        "libnix",
+        "libscopeguard",
+    ],
+    prefer_rlib: true,
+    shared_libs: [
+        "libbinder_ndk",
+        "libbinder_rpc_unstable",
+    ],
+
+    apex_available: [
+        "com.android.compos",
+    ],
+    visibility: [
+        "//packages/modules/Virtualization/compos:__subpackages__",
+        "//art/odrefresh:__subpackages__",
+    ],
+}
