@@ -22,6 +22,30 @@
       },
       "revId": "5e0f2067554d59d38f08f4d98a4ce24376964af0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35a7328c_a0ca847a",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-10-12T08:39:57Z",
+      "side": 1,
+      "message": "This runs in the host. \n\n\u003e The environment variables are likely to be different, at least in the prefer staged case.\n\u003e(Consider an APEX which does not currently contribute to the classpath, but whose staged version does.)\n\nThis will be handled in a follow up change. For now, IPackageManagerNative doesn\u0027t report staged apexes with relevant information. Samiul is working on adding them.",
+      "parentUuid": "2a9f5e5e_092238e1",
+      "range": {
+        "startLine": 198,
+        "startChar": 14,
+        "endLine": 198,
+        "endChar": 41
+      },
+      "revId": "5e0f2067554d59d38f08f4d98a4ce24376964af0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
