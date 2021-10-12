@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c81e13dd_eb3d4646",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-10-12T12:28:21Z",
+      "side": 1,
+      "message": "I think collect is a confusing name for this because it usually means something different. How about get_matching or collect_matching?",
+      "range": {
+        "startLine": 93,
+        "startChar": 7,
+        "endLine": 93,
+        "endChar": 14
+      },
+      "revId": "42b87af43be8e40a1323399beb30534534d8a555",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
