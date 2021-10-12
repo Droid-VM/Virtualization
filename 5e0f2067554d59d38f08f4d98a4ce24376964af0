@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a9f5e5e_092238e1",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-12T08:20:28Z",
+      "side": 1,
+      "message": "Is this running in the host or the VM?\nThe environment variables are likely to be different, at least in the prefer staged case.\n(Consider an APEX which does not currently contribute to the classpath, but whose staged version does.)",
+      "range": {
+        "startLine": 198,
+        "startChar": 14,
+        "endLine": 198,
+        "endChar": 41
+      },
+      "revId": "5e0f2067554d59d38f08f4d98a4ce24376964af0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
