@@ -8,6 +8,7 @@ rust_library {
     srcs: ["lib.rs"],
     edition: "2018",
     rustlibs: [
+        "libanyhow",
         "libbinder_rs",
         "libbinder_rpc_unstable_bindgen",
         "liblazy_static",
