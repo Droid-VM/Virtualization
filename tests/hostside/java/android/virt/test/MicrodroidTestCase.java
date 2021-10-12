@@ -26,6 +26,7 @@ import com.android.tradefed.testtype.DeviceJUnit4ClassRunner;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -104,6 +105,7 @@ public class MicrodroidTestCase extends VirtualizationTestCaseBase {
         shutdownMicrodroid(getDevice(), cid);
     }
 
+    @Ignore("Flaky when executed with testMicrodroidBoots. b/195765441")
     @Test
     public void testDebugMode() throws Exception {
         final String configPath = "assets/vm_config.json"; // path inside the APK
