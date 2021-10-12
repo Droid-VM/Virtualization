@@ -70,6 +70,30 @@
       },
       "revId": "5e0f2067554d59d38f08f4d98a4ce24376964af0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0bc8210_525ad38f",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-12T10:12:47Z",
+      "side": 1,
+      "message": "Thanks!\n\nIs there a mechanism or a need for abitrary APEXes to be added to the DEX2OATBOOTCLASSPATH? Victor may understand this better than me. But possible we should add it; I omitted it from my requirements doc purely from ignorance; do we need it?\n\nOn my system it contains only JARs from the ART and i18n APEXes; the latter relies on some complicated build magic (b/191127295), and seems to be included in /system/etc/classpaths/bootclasspath.pb rather than the APEXes",
+      "parentUuid": "ee4d4557_666182c8",
+      "range": {
+        "startLine": 198,
+        "startChar": 14,
+        "endLine": 198,
+        "endChar": 41
+      },
+      "revId": "5e0f2067554d59d38f08f4d98a4ce24376964af0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
