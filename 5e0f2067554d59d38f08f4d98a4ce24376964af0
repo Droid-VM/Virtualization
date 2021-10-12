@@ -94,6 +94,30 @@
       },
       "revId": "5e0f2067554d59d38f08f4d98a4ce24376964af0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c1d1c55_29f785c3",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-12T18:58:09Z",
+      "side": 1,
+      "message": "From what I can see, it\u0027s just that the build system only has the options \"bootclasspath_fragments\" and \"systemserverclasspath_fragments\", but NOT \"dex2oatbootclasspath_fragments\", even though derive_classpath supports it.\n\nI\u0027m in favor of supporting dex2oat classpath.  IIUC, a Module update build from U+ could in theory add dex2oatbootclasspath_fragments and still work on S devices.  So I\u0027m hoping we can start dex2oat classpath in T, so that theoretical U update could still work on our T code.  Hopefully the change is trivial.",
+      "parentUuid": "f0bc8210_525ad38f",
+      "range": {
+        "startLine": 198,
+        "startChar": 14,
+        "endLine": 198,
+        "endChar": 41
+      },
+      "revId": "5e0f2067554d59d38f08f4d98a4ce24376964af0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
