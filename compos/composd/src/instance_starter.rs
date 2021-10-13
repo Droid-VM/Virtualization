@@ -28,6 +28,7 @@ use compos_common::{
     COMPOS_DATA_ROOT, INSTANCE_IMAGE_FILE, PRIVATE_KEY_BLOB_FILE, PUBLIC_KEY_FILE,
 };
 use log::{info, warn};
+use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
 
@@ -101,6 +102,11 @@ impl InstanceStarter {
         // files have not been tampered with and we're good to go.
 
         service.initializeSigningKey(&key_blob).context("Loading signing key")?;
+
+        // TODO(198211396): Implement correctly.
+        service
+            .initializeClasspaths(&env::var("BOOTCLASSPATH")?, &env::var("DEX2OATBOOTCLASSPATH")?)
+            .context("Initializing *CLASSPATH")?;
 
         Ok(compos_instance)
     }
