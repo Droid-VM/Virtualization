@@ -43,6 +43,9 @@ pub fn run_forced_compile(target_dir: &str) -> Result<ExitCode> {
         .arg(format!("--use-compilation-os={}", VMADDR_CID_ANY as i32))
         .arg(format!("--dalvik-cache={}", target_dir))
         .arg("--force-compile")
+        // Need more time to finish in nested VM
+        .arg("--max-execution-seconds=480")
+        .arg("--max-child-process-seconds=150")
         .spawn()
         .context("Running odrefresh")?;
 
