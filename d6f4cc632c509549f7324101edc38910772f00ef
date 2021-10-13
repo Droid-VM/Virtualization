@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3236e8d6_d233f82d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2021-10-13T14:37:23Z",
+      "side": 1,
+      "message": "Yes, bugreporting contains much more than dumpstate from a service. I will  change the commit message.",
+      "parentUuid": "8c94e590_545e9f92",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 16
+      },
+      "revId": "d6f4cc632c509549f7324101edc38910772f00ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5431422_15c85eb1",
@@ -60,6 +84,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c1bb5d08_e406ab73",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2021-10-13T14:37:23Z",
+      "side": 1,
+      "message": "I have added function call to check_permission. I don\u0027t know how to test this though. adb bugreport is still working.",
+      "parentUuid": "d5431422_15c85eb1",
+      "revId": "d6f4cc632c509549f7324101edc38910772f00ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd4481ed_b4f7f4b3",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2021-10-13T14:37:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "caa9247d_3845186a",
+      "revId": "d6f4cc632c509549f7324101edc38910772f00ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "514bde0d_25e845b4",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 3
@@ -71,6 +131,24 @@
       "writtenOn": "2021-10-12T16:43:12Z",
       "side": 1,
       "message": "Don\u0027t panic, just return an error.",
+      "revId": "d6f4cc632c509549f7324101edc38910772f00ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29cc351a_973a896a",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2021-10-13T14:37:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "514bde0d_25e845b4",
       "revId": "d6f4cc632c509549f7324101edc38910772f00ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -88,6 +166,30 @@
       "writtenOn": "2021-10-12T16:43:12Z",
       "side": 1,
       "message": "It shouldn\u0027t be necessary to call `to_string`, `writeln!` should do that for you.",
+      "range": {
+        "startLine": 580,
+        "startChar": 46,
+        "endLine": 580,
+        "endChar": 55
+      },
+      "revId": "d6f4cc632c509549f7324101edc38910772f00ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f699d16_556d42d7",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2021-10-13T14:37:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea940849_a1c8c8a3",
       "range": {
         "startLine": 580,
         "startChar": 46,
@@ -121,6 +223,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b31a9542_989c4563",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2021-10-13T14:37:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b8c326b_b93ebd55",
+      "range": {
+        "startLine": 585,
+        "startChar": 57,
+        "endLine": 585,
+        "endChar": 68
+      },
+      "revId": "d6f4cc632c509549f7324101edc38910772f00ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2de5da0b_02a18dbf",
@@ -134,6 +260,24 @@
       "writtenOn": "2021-10-12T16:43:12Z",
       "side": 1,
       "message": "This looks like it will be hard to read if there is more than one VM running. It looks like other services use indentation to structure their dump output, and I think the same would make sense here. The CID is essentially the ID of the VM, so you could use that as a heading, and have something like:\n\n```\nVM CID 4:\n  state: RUNNING\n  ...\nVM CID 5:\n  state: READY\n  ...\n```",
+      "revId": "d6f4cc632c509549f7324101edc38910772f00ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21c37208_8419ecfe",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2021-10-13T14:37:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2de5da0b_02a18dbf",
       "revId": "d6f4cc632c509549f7324101edc38910772f00ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -155,6 +299,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a901049_1ed6e4be",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2021-10-13T14:37:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5b13452_9037596a",
+      "revId": "d6f4cc632c509549f7324101edc38910772f00ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7aef3619_2b79c9af",
@@ -172,6 +334,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7b0a55f_c88acd99",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2021-10-13T14:37:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aef3619_2b79c9af",
+      "revId": "d6f4cc632c509549f7324101edc38910772f00ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dfe2ed3e_83c7475c",
@@ -185,6 +365,24 @@
       "writtenOn": "2021-10-12T16:43:12Z",
       "side": 1,
       "message": "It could be useful to distinguish `Dead` from `Failed`, and to know the payload state even after the VM died. I think it would be simpler and more useful to just include both vm_state and payload_state in the output, and then you can just use their `Debug` implementations rather than this match expression. I.e. something like:\n\n```\nformat!(\"{:?} (payload {:?})\", instance.vm_state.lock().unwrap(), instance.payload_state())\n```\n\nAnd then the separate function is not really needed, it can just be inline in `dump`.",
+      "revId": "d6f4cc632c509549f7324101edc38910772f00ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "276c985a_66c24045",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 809,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2021-10-13T14:37:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfe2ed3e_83c7475c",
       "revId": "d6f4cc632c509549f7324101edc38910772f00ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
