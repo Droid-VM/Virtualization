@@ -16,6 +16,29 @@
       "message": "How about this?",
       "revId": "ee852055bd4be05df1e4e85622d83b94d651900e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da993e99_9713f565",
+        "filename": "compos/composd/src/odrefresh.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-14T08:36:13Z",
+      "side": 1,
+      "message": "It would be good to move this to somewhere more exposed - I\u0027d also like to use it to control the timeout in ComposClient (https://source.corp.google.com/android/packages/modules/Virtualization/compos/common/compos_client.rs;rcl\u003da58592cb0bac1991730cdba23f9d20bcdde7504f;l\u003d228).\nBut we can do that as a follow-up.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 1
+      },
+      "revId": "ee852055bd4be05df1e4e85622d83b94d651900e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
