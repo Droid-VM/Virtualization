@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e475a167_5e7009df",
+        "filename": "compos/libcompos_client/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-15T19:33:12Z",
+      "side": 1,
+      "message": "Ivan, you seems to have implemented rust_ffi, so perhaps you can give me some advise :)\n\nEssentially, I need to expose C API implemented in Rust, and provide stub for the clients to compile against.  rust_ffi doesn\u0027t seem to support stubs, so right now I have this dirty hack.\n\nShould rust_ffi support stubs/symbol_file? What could I do to avoid this hack?",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 6
+      },
+      "revId": "1adc26539852ba1bb0ac51e07b6991ae35ffb555",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
