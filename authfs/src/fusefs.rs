@@ -35,8 +35,7 @@ use fuse::mount::MountOption;
 
 use crate::common::{divide_roundup, ChunkedSizeIter, CHUNK_SIZE};
 use crate::file::{
-    LocalFileReader, RandomWrite, ReadByChunk, RemoteFileEditor, RemoteFileReader,
-    RemoteMerkleTreeReader,
+    RandomWrite, ReadByChunk, RemoteFileEditor, RemoteFileReader, RemoteMerkleTreeReader,
 };
 use crate::fsverity::{VerifiedFileEditor, VerifiedFileReader};
 
@@ -45,36 +44,28 @@ const DEFAULT_METADATA_TIMEOUT: std::time::Duration = Duration::from_secs(5);
 pub type Inode = u64;
 type Handle = u64;
 
-/// `FileConfig` defines the file type supported by AuthFS.
-pub enum FileConfig {
-    /// A file type that is verified against fs-verity signature (thus read-only). The file is
-    /// backed by a local file. Debug only.
-    LocalVerifiedReadonly {
-        reader: VerifiedFileReader<LocalFileReader, LocalFileReader>,
-        file_size: u64,
-    },
-    /// A file type that is a read-only passthrough from a local file. Debug only.
-    LocalUnverifiedReadonly { reader: LocalFileReader, file_size: u64 },
+/// `RemoteFileConfig` defines the file type supported by AuthFS.
+pub enum RemoteFileConfig {
     /// A file type that is verified against fs-verity signature (thus read-only). The file is
     /// served from a remote server.
-    RemoteVerifiedReadonly {
+    VerifiedReadonly {
         reader: VerifiedFileReader<RemoteFileReader, RemoteMerkleTreeReader>,
         file_size: u64,
     },
     /// A file type that is a read-only passthrough from a file on a remote serrver.
-    RemoteUnverifiedReadonly { reader: RemoteFileReader, file_size: u64 },
+    UnverifiedReadonly { reader: RemoteFileReader, file_size: u64 },
     /// A file type that is initially empty, and the content is stored on a remote server. File
     /// integrity is guaranteed with private Merkle tree.
-    RemoteVerifiedNew { editor: VerifiedFileEditor<RemoteFileEditor> },
+    VerifiedNew { editor: VerifiedFileEditor<RemoteFileEditor> },
 }
 
 struct AuthFs {
-    /// Store `FileConfig`s using the `Inode` number as the search index.
+    /// Store `RemoteFileConfig`s using the `Inode` number as the search index.
     ///
     /// For further optimization to minimize the search cost, since Inode is integer, we may
     /// consider storing them in a Vec if we can guarantee that the numbers are small and
     /// consecutive.
-    file_pool: BTreeMap<Inode, FileConfig>,
+    file_pool: BTreeMap<Inode, RemoteFileConfig>,
 
     /// Maximum bytes in the write transaction to the FUSE device. This limits the maximum size to
     /// a read request (including FUSE protocol overhead).
@@ -82,11 +73,11 @@ struct AuthFs {
 }
 
 impl AuthFs {
-    pub fn new(file_pool: BTreeMap<Inode, FileConfig>, max_write: u32) -> AuthFs {
+    pub fn new(file_pool: BTreeMap<Inode, RemoteFileConfig>, max_write: u32) -> AuthFs {
         AuthFs { file_pool, max_write }
     }
 
-    fn get_file_config(&self, inode: &Inode) -> io::Result<&FileConfig> {
+    fn get_file_config(&self, inode: &Inode) -> io::Result<&RemoteFileConfig> {
         self.file_pool.get(inode).ok_or_else(|| io::Error::from_raw_os_error(libc::ENOENT))
     }
 }
@@ -207,13 +198,11 @@ impl FileSystem for AuthFs {
         // be static.
         let inode = num.parse::<Inode>().map_err(|_| io::Error::from_raw_os_error(libc::ENOENT))?;
         let st = match self.get_file_config(&inode)? {
-            FileConfig::LocalVerifiedReadonly { file_size, .. }
-            | FileConfig::LocalUnverifiedReadonly { file_size, .. }
-            | FileConfig::RemoteUnverifiedReadonly { file_size, .. }
-            | FileConfig::RemoteVerifiedReadonly { file_size, .. } => {
+            RemoteFileConfig::UnverifiedReadonly { file_size, .. }
+            | RemoteFileConfig::VerifiedReadonly { file_size, .. } => {
                 create_stat(inode, *file_size, FileMode::ReadOnly)?
             }
-            FileConfig::RemoteVerifiedNew { editor } => {
+            RemoteFileConfig::VerifiedNew { editor } => {
                 create_stat(inode, editor.size(), FileMode::ReadWrite)?
             }
         };
@@ -234,13 +223,11 @@ impl FileSystem for AuthFs {
     ) -> io::Result<(libc::stat64, Duration)> {
         Ok((
             match self.get_file_config(&inode)? {
-                FileConfig::LocalVerifiedReadonly { file_size, .. }
-                | FileConfig::LocalUnverifiedReadonly { file_size, .. }
-                | FileConfig::RemoteUnverifiedReadonly { file_size, .. }
-                | FileConfig::RemoteVerifiedReadonly { file_size, .. } => {
+                RemoteFileConfig::UnverifiedReadonly { file_size, .. }
+                | RemoteFileConfig::VerifiedReadonly { file_size, .. } => {
                     create_stat(inode, *file_size, FileMode::ReadOnly)?
                 }
-                FileConfig::RemoteVerifiedNew { editor } => {
+                RemoteFileConfig::VerifiedNew { editor } => {
                     create_stat(inode, editor.size(), FileMode::ReadWrite)?
                 }
             },
@@ -257,13 +244,11 @@ impl FileSystem for AuthFs {
         // Since file handle is not really used in later operations (which use Inode directly),
         // return None as the handle.
         match self.get_file_config(&inode)? {
-            FileConfig::LocalVerifiedReadonly { .. }
-            | FileConfig::LocalUnverifiedReadonly { .. }
-            | FileConfig::RemoteVerifiedReadonly { .. }
-            | FileConfig::RemoteUnverifiedReadonly { .. } => {
+            RemoteFileConfig::VerifiedReadonly { .. }
+            | RemoteFileConfig::UnverifiedReadonly { .. } => {
                 check_access_mode(flags, libc::O_RDONLY)?;
             }
-            FileConfig::RemoteVerifiedNew { .. } => {
+            RemoteFileConfig::VerifiedNew { .. } => {
                 // No need to check access modes since all the modes are allowed to the
                 // read-writable file.
             }
@@ -285,19 +270,13 @@ impl FileSystem for AuthFs {
         _flags: u32,
     ) -> io::Result<usize> {
         match self.get_file_config(&inode)? {
-            FileConfig::LocalVerifiedReadonly { reader, file_size } => {
+            RemoteFileConfig::VerifiedReadonly { reader, file_size } => {
                 read_chunks(w, reader, *file_size, offset, size)
             }
-            FileConfig::LocalUnverifiedReadonly { reader, file_size } => {
+            RemoteFileConfig::UnverifiedReadonly { reader, file_size } => {
                 read_chunks(w, reader, *file_size, offset, size)
             }
-            FileConfig::RemoteVerifiedReadonly { reader, file_size } => {
-                read_chunks(w, reader, *file_size, offset, size)
-            }
-            FileConfig::RemoteUnverifiedReadonly { reader, file_size } => {
-                read_chunks(w, reader, *file_size, offset, size)
-            }
-            FileConfig::RemoteVerifiedNew { editor } => {
+            RemoteFileConfig::VerifiedNew { editor } => {
                 // Note that with FsOptions::WRITEBACK_CACHE, it's possible for the kernel to
                 // request a read even if the file is open with O_WRONLY.
                 read_chunks(w, editor, editor.size(), offset, size)
@@ -318,7 +297,7 @@ impl FileSystem for AuthFs {
         _flags: u32,
     ) -> io::Result<usize> {
         match self.get_file_config(&inode)? {
-            FileConfig::RemoteVerifiedNew { editor } => {
+            RemoteFileConfig::VerifiedNew { editor } => {
                 let mut buf = vec![0; size as usize];
                 r.read_exact(&mut buf)?;
                 editor.write_at(&buf, offset)
@@ -336,7 +315,7 @@ impl FileSystem for AuthFs {
         valid: SetattrValid,
     ) -> io::Result<(libc::stat64, Duration)> {
         match self.get_file_config(&inode)? {
-            FileConfig::RemoteVerifiedNew { editor } => {
+            RemoteFileConfig::VerifiedNew { editor } => {
                 // Initialize the default stat.
                 let mut new_attr = create_stat(inode, editor.size(), FileMode::ReadWrite)?;
                 // `valid` indicates what fields in `attr` are valid. Update to return correctly.
@@ -383,7 +362,7 @@ impl FileSystem for AuthFs {
         size: u32,
     ) -> io::Result<GetxattrReply> {
         match self.get_file_config(&inode)? {
-            FileConfig::RemoteVerifiedNew { editor } => {
+            RemoteFileConfig::VerifiedNew { editor } => {
                 // FUSE ioctl is limited, thus we can't implement fs-verity ioctls without a kernel
                 // change (see b/196635431). Until it's possible, use xattr to expose what we need
                 // as an authfs specific API.
@@ -410,7 +389,7 @@ impl FileSystem for AuthFs {
 
 /// Mount and start the FUSE instance. This requires CAP_SYS_ADMIN.
 pub fn loop_forever(
-    file_pool: BTreeMap<Inode, FileConfig>,
+    file_pool: BTreeMap<Inode, RemoteFileConfig>,
     mountpoint: &Path,
     extra_options: &Option<String>,
 ) -> Result<(), fuse::Error> {
