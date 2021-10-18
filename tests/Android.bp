@@ -64,6 +64,14 @@ cc_binary {
     defaults: ["virt_test_guest_binary"],
 }
 
+cc_benchmark {
+    name: "fio_benchmark",
+    srcs: [
+        "fio_benchmark.cpp",
+    ],
+    static_executable: true,
+}
+
 prebuilt_etc {
     name: "virt_test_kernel",
     src: "nofile",
