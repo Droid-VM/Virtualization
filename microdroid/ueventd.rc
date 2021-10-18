@@ -50,6 +50,9 @@ subsystem dma_heap
 # kms driver for drm based gpu
 /dev/dri/*                0666   root       graphics
 
+# Virtual console for logcat
+/dev/hvc2                 0660   logd       logd
+
 # these should not be world writable
 /dev/uhid                 0660   uhid       uhid
 /dev/uinput               0660   uhid       uhid

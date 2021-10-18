@@ -242,10 +242,11 @@ fn run_vm(config: CrosvmConfig) -> Result<SharedChild, Error> {
     let mut preserved_fds = config.indirect_files.iter().map(|file| file.as_raw_fd()).collect();
 
     // Setup the console devices. If log_fd is specified, the serial devices are linked to stdout
-    // which is redirected to log_fd. Two serial devices are created. One is an 8250 UART device
+    // which is redirected to log_fd. Three serial devices are created. One is an 8250 UART device
     // which is used as an early console. It will be used by bootloader (u-boot) which may not have
     // the virtio-console driver. The other is a virtio-console device which the linux kernel will
-    // use as a console.
+    // use as a console. The last one is also a virtio-console device which will be used as the
+    // sink for logcat.
     //
     // When log_fd is not specified, a virtio-console device is created, but its output is
     // discarded.
@@ -253,6 +254,8 @@ fn run_vm(config: CrosvmConfig) -> Result<SharedChild, Error> {
         let p = add_preserved_fd(&mut preserved_fds, log_fd);
         command.arg(format!("--serial=type=file,path={},hardware=serial,earlycon=true", p));
         command.arg(format!("--serial=type=file,path={},hardware=virtio-console,console=true", p));
+        // TODO(b/200914564) use a different fd for logcat log
+        command.arg(format!("--serial=type=file,path={},hardware=virtio-console,num=2", p));
     } else {
         command.arg("--serial=type=sink,hardware=virtio-console");
     }
