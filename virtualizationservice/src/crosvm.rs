@@ -238,6 +238,9 @@ fn run_vm(config: CrosvmConfig) -> Result<SharedChild, Error> {
         command.arg("--mem").arg(memory_mib.to_string());
     }
 
+    // Keep track of what file descriptors should be mapped to the crosvm process.
+    let mut preserved_fds = config.indirect_files.iter().map(|file| file.as_raw_fd()).collect();
+
     // Setup the console devices. If log_fd is specified, the serial devices are linked to stdout
     // which is redirected to log_fd. Two serial devices are created. One is an 8250 UART device
     // which is used as an early console. It will be used by bootloader (u-boot) which may not have
@@ -246,16 +249,13 @@ fn run_vm(config: CrosvmConfig) -> Result<SharedChild, Error> {
     //
     // When log_fd is not specified, a virtio-console device is created, but its output is
     // discarded.
-    if let Some(log_fd) = config.log_fd {
-        command.stdout(log_fd);
-        command.arg("--serial=type=stdout,hardware=serial,earlycon=true");
-        command.arg("--serial=type=stdout,hardware=virtio-console,console=true");
+    if let Some(log_fd) = &config.log_fd {
+        let p = add_preserved_fd(&mut preserved_fds, log_fd);
+        command.arg(format!("--serial=type=file,path={},hardware=serial,earlycon=true", p));
+        command.arg(format!("--serial=type=file,path={},hardware=virtio-console,console=true", p));
     } else {
         command.arg("--serial=type=sink,hardware=virtio-console");
     }
-
-    // Keep track of what file descriptors should be mapped to the crosvm process.
-    let mut preserved_fds = config.indirect_files.iter().map(|file| file.as_raw_fd()).collect();
 
     if let Some(bootloader) = &config.bootloader {
         command.arg("--bios").arg(add_preserved_fd(&mut preserved_fds, bootloader));
