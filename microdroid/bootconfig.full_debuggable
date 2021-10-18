@@ -1,1 +1,8 @@
+# Kernel messasge is exported.
 kernel.printk.devkmsg=on
+
+# ADB is supported and rooting is possible. Note that
+# ro.adb.secure is still 0 (see build.prop) which means that adbd is started
+# unrooted by default. To root, developer should explicitly execute `adb root`.
+androidboot.adb.enabled=1
+androidboot.adb.debuggable=1
