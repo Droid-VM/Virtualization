@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da7289a8_9e17ceaf",
+        "filename": "microdroid/bootconfig.full_debuggable",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-10-18T15:04:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a33364c_c1c34db9",
+      "range": {
+        "startLine": 1,
+        "startChar": 9,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "316d587f3b352e0e8f254d9ab0a4332ae66b80dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f00562d3_ed59c0e4",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13b0a24c_042589de",
+        "filename": "microdroid/bootconfig.normal",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-10-18T15:04:46Z",
+      "side": 1,
+      "message": "Good catch. Will fix in a follow-up CL. Having the APEX for the time being is not seriously harmful though.",
+      "parentUuid": "f00562d3_ed59c0e4",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 25
+      },
+      "revId": "316d587f3b352e0e8f254d9ab0a4332ae66b80dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb6e574e_e6399e55",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-10-18T10:19:29Z",
       "side": 1,
       "message": "Why is this variable is qualified with \"adb\"? Can we use \"(ro|androidboot).boot.debuggable\"? Or, how about qualifying it with \"microdroid\"?",
+      "range": {
+        "startLine": 33,
+        "startChar": 36,
+        "endLine": 33,
+        "endChar": 40
+      },
+      "revId": "316d587f3b352e0e8f254d9ab0a4332ae66b80dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8703dfe6_c50435a0",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-10-18T15:04:46Z",
+      "side": 1,
+      "message": "Changed adb to microdroid.\n\nandroidboot. is a magic keyword for boot configs that are intended to be recognized by Android. Init converts a bootconfig androidboot.foo into a system property ro.boot.foo. So we can\u0027t use androidboot here in this rc file.",
+      "parentUuid": "cb6e574e_e6399e55",
       "range": {
         "startLine": 33,
         "startChar": 36,
