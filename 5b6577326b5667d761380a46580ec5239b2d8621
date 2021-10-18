@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cc62d7d_61b73c6b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-10-18T10:49:20Z",
+      "side": 1,
+      "message": "I wanted to test PackageManager struct in payload.rs in a unit-test way by injecting dependencies. But it doesn\u0027t look quite good. My trial was to put a get_service function pointer in PackageManager, so that in test I can inject a lambda which simply returns Err.\n\nAndrew, can you give me some ideas? What would be a good test for this kind of changes? Should we have a full integration test (starting a VM with prefer_staged configuration at boot time)?",
+      "range": {
+        "startLine": 17,
+        "startChar": 6,
+        "endLine": 17,
+        "endChar": 9
+      },
+      "revId": "5b6577326b5667d761380a46580ec5239b2d8621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "638f2861_7913686d",
