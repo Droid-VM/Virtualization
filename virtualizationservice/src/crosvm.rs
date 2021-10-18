@@ -238,11 +238,20 @@ fn run_vm(config: CrosvmConfig) -> Result<SharedChild, Error> {
         command.arg("--mem").arg(memory_mib.to_string());
     }
 
+    // Setup the console devices. If log_fd is specified, the serial devices are linked to stdout
+    // which is redirected to log_fd. Two serial devices are created. One is an 8250 UART device
+    // which is used as an early console. It will be used by bootloader (u-boot) which may not have
+    // the virtio-console driver. The other is a virtio-console device which the linux kernel will
+    // use as a console.
+    //
+    // When log_fd is not specified, a virtio-console device is created, but its output is
+    // discarded.
     if let Some(log_fd) = config.log_fd {
         command.stdout(log_fd);
+        command.arg("--serial=type=stdout,hardware=serial,earlycon=true");
+        command.arg("--serial=type=stdout,hardware=virtio-console,console=true");
     } else {
-        // Ignore console output.
-        command.arg("--serial=type=sink");
+        command.arg("--serial=type=sink,hardware=virtio-console");
     }
 
     // Keep track of what file descriptors should be mapped to the crosvm process.
