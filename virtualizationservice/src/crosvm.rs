@@ -238,23 +238,27 @@ fn run_vm(config: CrosvmConfig) -> Result<SharedChild, Error> {
         command.arg("--mem").arg(memory_mib.to_string());
     }
 
+    // Keep track of what file descriptors should be mapped to the crosvm process.
+    let mut preserved_fds = config.indirect_files.iter().map(|file| file.as_raw_fd()).collect();
+
     // Setup the serial devices.
     // 1. uart device: used as the output device by bootloaders and as early console by linux
     // 2. virtio-console device: used as the console device
+    // 3. virtio-console device: used as the logcat output
     //
     // When log_fd is not specified, the devices are attached to sink, which means what's written
     // there is discarded.
-    let backend = if let Some(log_fd) = config.log_fd {
-        command.stdout(log_fd);
-        "stdout"
-    } else {
-        "sink"
-    };
-    command.arg(format!("--serial=type={},hardware=serial", backend));
-    command.arg(format!("--serial=type={},hardware=virtio-console", backend));
+    let path = config.log_fd.as_ref().map(|fd| add_preserved_fd(&mut preserved_fds, fd));
+    let backend = path.as_ref().map_or("sink", |_| "file");
+    let path_arg = path.as_ref().map_or(String::new(), |path| format!(",path={}", path));
 
-    // Keep track of what file descriptors should be mapped to the crosvm process.
-    let mut preserved_fds = config.indirect_files.iter().map(|file| file.as_raw_fd()).collect();
+    // /dev/ttyS0
+    command.arg(format!("--serial=type={}{},hardware=serial", backend, &path_arg));
+    // /dev/hvc0
+    command.arg(format!("--serial=type={}{},hardware=virtio-console,num=1", backend, &path_arg));
+    // /dev/hvc1
+    // TODO(b/200914564) use a different fd for logcat log
+    command.arg(format!("--serial=type={}{},hardware=virtio-console,num=2", backend, &path_arg));
 
     if let Some(bootloader) = &config.bootloader {
         command.arg("--bios").arg(add_preserved_fd(&mut preserved_fds, bootloader));
