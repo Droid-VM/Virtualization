@@ -39,6 +39,47 @@
       "message": "Alan, can you check this out?",
       "revId": "5b6577326b5667d761380a46580ec5239b2d8621",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9ed6bd8_3a46b66c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-18T15:04:11Z",
+      "side": 1,
+      "message": "I checked and this definitely fixes the booting issue.\n(Create valid image \u0026 key files under /data/misc/apexdata/com.android.compos/current, make sure /data/misc/odsign/compos_key.cert doesn\u0027t exist, reboot. odsign starts the VM at boot to verify the key, and this all goes through successfully.)",
+      "parentUuid": "638f2861_7913686d",
+      "revId": "5b6577326b5667d761380a46580ec5239b2d8621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b644751b_a6d5fd12",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-18T15:04:11Z",
+      "side": 1,
+      "message": "I think it would be better to fail in this case.",
+      "range": {
+        "startLine": 141,
+        "startChar": 19,
+        "endLine": 141,
+        "endChar": 95
+      },
+      "revId": "5b6577326b5667d761380a46580ec5239b2d8621",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
