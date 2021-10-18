@@ -13,20 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package android.system.composd;
+
+package com.android.server.compos;
+
+import android.annotation.SystemApi;
 
 /**
- * Interface to be implemented by clients of IIsolatedCompilationService to be notified when a
- * requested compilation task completes.
+ * Interface to be implemented by clients of {@link IsolatedCompilation} to be notified when a
+ * {@link CompilationTask} completes.
+ *
+ * @hide
  */
-oneway interface ICompilationTaskCallback {
+@SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
+public interface CompilationCallback {
     /**
-     * Called if a compilation task has ended successfully, generating all the required artifacts.
+     * Called when a {@link CompilationTask} has ended successfully, generating all the required
+     * artifacts.
      */
     void onSuccess();
 
-    /**
-     * Called if a compilation task has ended unsuccessfully.
-     */
+    /** Called when a {@link CompilationTask} has ended unsuccessfully. */
     void onFailure();
 }

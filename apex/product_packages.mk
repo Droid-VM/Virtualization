@@ -14,24 +14,9 @@
 # limitations under the License.
 #
 
-# TODO: Remove this once the APEX is included in base system.
-
 # To include the APEX in your build, insert this in your device.mk:
-#   $(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)
+#   $(call inherit-product, $(SRC_TARGET_DIR)/product/isolated_compilation.mk)
 
-PRODUCT_PACKAGES += \
-    com.android.compos \
-    com.android.virt
+# TODO(b/205977754): Inline this file at all places it is used and remove it
 
-PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
-    system/apex/com.android.compos.apex \
-    system/apex/com.android.virt.apex \
-    system/bin/crosvm \
-    system/lib64/%.dylib.so \
-    system/lib64/libfdt.so \
-    system/lib64/libgfxstream_backend.so \
-    system/lib64/libcuttlefish_allocd_utils.so \
-    system/lib64/libcuttlefish_fs.so \
-    system/lib64/libcuttlefish_utils.so
-
-$(call inherit-product, external/crosvm/seccomp/crosvm_seccomp_policy_product_packages.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/isolated_compilation.mk)
