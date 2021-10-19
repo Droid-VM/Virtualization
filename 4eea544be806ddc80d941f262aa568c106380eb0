@@ -22,6 +22,30 @@
       },
       "revId": "4eea544be806ddc80d941f262aa568c106380eb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b493f9b_31cbec13",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-10-19T07:47:15Z",
+      "side": 1,
+      "message": "In the PS1, I wanted to fallback to active apexes when package_native is not ready, but yeah, now it can be, should be wait_for_interface now.",
+      "parentUuid": "992521e8_d3b0708d",
+      "range": {
+        "startLine": 126,
+        "startChar": 21,
+        "endLine": 126,
+        "endChar": 34
+      },
+      "revId": "4eea544be806ddc80d941f262aa568c106380eb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
