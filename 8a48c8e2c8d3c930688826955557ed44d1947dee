@@ -63,6 +63,29 @@
       "message": "I think you should also now remove \u0027certificate: \"platform\"\u0027 from the Android.bp?",
       "revId": "8a48c8e2c8d3c930688826955557ed44d1947dee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56a21c60_40a29d77",
+        "filename": "javalib/AndroidManifest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-19T08:08:27Z",
+      "side": 1,
+      "message": "Do you need this one as well as MANAGE_ for the tests?",
+      "range": {
+        "startLine": 23,
+        "startChar": 47,
+        "endLine": 23,
+        "endChar": 68
+      },
+      "revId": "8a48c8e2c8d3c930688826955557ed44d1947dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
