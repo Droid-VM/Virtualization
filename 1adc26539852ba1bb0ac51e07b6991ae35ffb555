@@ -22,6 +22,30 @@
       },
       "revId": "1adc26539852ba1bb0ac51e07b6991ae35ffb555",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c57feab_1ae552b6",
+        "filename": "compos/libcompos_client/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1115178
+      },
+      "writtenOn": "2021-10-19T03:15:20Z",
+      "side": 1,
+      "message": "Apologies that I\u0027m just getting to this -- you are correct, rust_ffi doesn\u0027t yet support stubs. Something like this might unfortunately be the best way to do this at the moment. I\u0027ve opened b/203478530",
+      "parentUuid": "e475a167_5e7009df",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 6
+      },
+      "revId": "1adc26539852ba1bb0ac51e07b6991ae35ffb555",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
