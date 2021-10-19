@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5415dbd_c4040763",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-10-19T08:17:23Z",
+      "side": 1,
+      "message": "Yes, the test apk will be completely re-written.",
+      "parentUuid": "627c99a3_41e937c3",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 60
+      },
+      "revId": "8a48c8e2c8d3c930688826955557ed44d1947dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1500d523_36408a91",
@@ -89,6 +113,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d19225c_78d802d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-10-19T08:17:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1500d523_36408a91",
+      "revId": "8a48c8e2c8d3c930688826955557ed44d1947dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56a21c60_40a29d77",
@@ -102,6 +144,30 @@
       "writtenOn": "2021-10-19T08:08:27Z",
       "side": 1,
       "message": "Do you need this one as well as MANAGE_ for the tests?",
+      "range": {
+        "startLine": 23,
+        "startChar": 47,
+        "endLine": 23,
+        "endChar": 68
+      },
+      "revId": "8a48c8e2c8d3c930688826955557ed44d1947dee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83245aef_04f1d1e0",
+        "filename": "javalib/AndroidManifest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-10-19T08:17:23Z",
+      "side": 1,
+      "message": "The test/demo currently don\u0027t use this permission, but might be in the future. \n\nFor now, let me delete this.",
+      "parentUuid": "56a21c60_40a29d77",
       "range": {
         "startLine": 23,
         "startChar": 47,
