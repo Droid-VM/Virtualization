@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a9ab3dd_faa63258",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-10-19T15:28:51Z",
+      "side": 1,
+      "message": "Cuttlefish statically assigns these even when guest is not using one of them so that sepolicy rules and device paths are correctly mapped. We might need to follow the same idea.",
+      "range": {
+        "startLine": 249,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 5
+      },
+      "revId": "169cf0cd4b1659309b6746bf82543acfb321d425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
