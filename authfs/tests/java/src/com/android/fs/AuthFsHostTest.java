@@ -59,6 +59,9 @@ public final class AuthFsHostTest extends VirtualizationTestCaseBase {
     /** Path to fd_server on Android */
     private static final String FD_SERVER_BIN = "/apex/com.android.virt/bin/fd_server";
 
+    /** Path to a test helper executation on Android */
+    private static final String PREOPEN_RUN_BIN = "/data/local/tmp/authfs/open_then_run";
+
     /** Path to authfs on Microdroid */
     private static final String AUTHFS_BIN = "/system/bin/authfs";
 
@@ -154,7 +157,8 @@ public final class AuthFsHostTest extends VirtualizationTestCaseBase {
             throws DeviceNotAvailableException, InterruptedException {
         // Setup
         runFdServerOnAndroid(
-                "3<input.4m 4<input.4m.merkle_dump 5<input.4m.fsv_sig 6<input.4m",
+                "--open-ro 3:input.4m --open-ro 4:input.4m.merkle_dump --open-ro 5:input.4m.fsv_sig"
+                        + " --open-ro 6:input.4m",
                 "--ro-fds 3:4:5 --ro-fds 6");
 
         runAuthFsOnMicrodroid(
@@ -179,8 +183,9 @@ public final class AuthFsHostTest extends VirtualizationTestCaseBase {
             throws DeviceNotAvailableException, InterruptedException {
         // Setup
         runFdServerOnAndroid(
-                "3<input.4k 4<input.4k.merkle_dump 5<input.4k.fsv_sig"
-                        + " 6<input.4k1 7<input.4k1.merkle_dump 8<input.4k1.fsv_sig",
+                "--open-ro 3:input.4k --open-ro 4:input.4k.merkle_dump --open-ro"
+                    + " 5:input.4k.fsv_sig --open-ro 6:input.4k1 --open-ro 7:input.4k1.merkle_dump"
+                    + " --open-ro 8:input.4k1.fsv_sig",
                 "--ro-fds 3:4:5 --ro-fds 6:7:8");
         runAuthFsOnMicrodroid(
                 "--remote-ro-file 10:3:cert.der --remote-ro-file 11:6:cert.der --cid "
@@ -203,7 +208,9 @@ public final class AuthFsHostTest extends VirtualizationTestCaseBase {
             throws DeviceNotAvailableException, InterruptedException {
         // Setup
         runFdServerOnAndroid(
-                "3<input.4m 4<input.4m.merkle_dump.bad 5<input.4m.fsv_sig", "--ro-fds 3:4:5");
+                "--open-ro 3:input.4m --open-ro 4:input.4m.merkle_dump.bad "
+                        + "--open-ro 5:input.4m.fsv_sig",
+                "--ro-fds 3:4:5");
         runAuthFsOnMicrodroid("--remote-ro-file 10:3:cert.der --cid " + VMADDR_CID_HOST);
 
         // Verify
@@ -214,7 +221,7 @@ public final class AuthFsHostTest extends VirtualizationTestCaseBase {
     public void testWriteThroughCorrectly()
             throws DeviceNotAvailableException, InterruptedException {
         // Setup
-        runFdServerOnAndroid("3<>output", "--rw-fds 3");
+        runFdServerOnAndroid("--open-rw 3:output", "--rw-fds 3");
         runAuthFsOnMicrodroid("--remote-new-rw-file 20:3 --cid " + VMADDR_CID_HOST);
 
         // Action
@@ -232,7 +239,7 @@ public final class AuthFsHostTest extends VirtualizationTestCaseBase {
     public void testWriteFailedIfDetectsTampering()
             throws DeviceNotAvailableException, InterruptedException {
         // Setup
-        runFdServerOnAndroid("3<>output", "--rw-fds 3");
+        runFdServerOnAndroid("--open-rw 3:output", "--rw-fds 3");
         runAuthFsOnMicrodroid("--remote-new-rw-file 20:3 --cid " + VMADDR_CID_HOST);
 
         String srcPath = "/system/bin/linker64";
@@ -263,7 +270,7 @@ public final class AuthFsHostTest extends VirtualizationTestCaseBase {
     @Test
     public void testFileResize() throws DeviceNotAvailableException, InterruptedException {
         // Setup
-        runFdServerOnAndroid("3<>output", "--rw-fds 3");
+        runFdServerOnAndroid("--open-rw 3:output", "--rw-fds 3");
         runAuthFsOnMicrodroid("--remote-new-rw-file 20:3 --cid " + VMADDR_CID_HOST);
         String outputPath = MOUNT_DIR + "/20";
         String backendPath = TEST_DIR + "/output";
@@ -367,10 +374,20 @@ public final class AuthFsHostTest extends VirtualizationTestCaseBase {
         }
     }
 
-    private void runFdServerOnAndroid(String execParamsForOpeningFds, String flags)
+    private void runFdServerOnAndroid(String helperFlags, String fdServerFlags)
             throws DeviceNotAvailableException {
-        String cmd = "cd " + TEST_DIR + " && exec " + execParamsForOpeningFds + " " + FD_SERVER_BIN
-                + " " + flags;
+        String cmd =
+                "cd "
+                        + TEST_DIR
+                        + " && "
+                        + PREOPEN_RUN_BIN
+                        + " "
+                        + helperFlags
+                        + " -- "
+                        + FD_SERVER_BIN
+                        + " "
+                        + fdServerFlags;
+
         mThreadPool.submit(
                 () -> {
                     try {
