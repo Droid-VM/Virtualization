@@ -14,8 +14,31 @@ java_test_host {
         "VirtualizationTestHelper",
     ],
     test_suites: ["general-tests"],
+    target_required: ["open_then_run_module"],
     data: [
         ":authfs_test_files",
         ":MicrodroidTestApp.signed",
     ],
+}
+
+rust_test {
+    // The PushFilePreparer may upload a directory when the executable name is the same, e.g.
+    // open_then_run/<arch>/open_then_run. To make it easy to specify path on the host side test,
+    // use the trick to distinguish the names such that the prepare will upload the correct file.
+    name: "open_then_run_module",
+    stem: "open_then_run",
+
+    crate_name: "open_then_run",
+    srcs: ["open_then_run.rs"],
+    edition: "2018",
+    rustlibs: [
+        "libandroid_logger",
+        "libanyhow",
+        "libclap",
+        "libcommand_fds",
+        "liblog_rust",
+        "libnix",
+    ],
+    test_suites: ["general-tests"],
+    test_harness: false,
 }
