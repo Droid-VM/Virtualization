@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a253eb84_333dc225",
+        "filename": "compos/libcompos_client/libcompos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-20T16:50:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78bbf7b9_28d15062",
+      "revId": "7a2afe62e85d0c23260516cf2c1a1ec1fbc62246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55423a25_801b11bd",
@@ -48,6 +66,30 @@
       "writtenOn": "2021-10-20T11:10:48Z",
       "side": 1,
       "message": "Why does it need to be null terminated? You never check for nulls.",
+      "range": {
+        "startLine": 59,
+        "startChar": 72,
+        "endLine": 59,
+        "endChar": 89
+      },
+      "revId": "7a2afe62e85d0c23260516cf2c1a1ec1fbc62246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39b823e6_2f6a57a6",
+        "filename": "compos/libcompos_client/libcompos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-20T16:50:45Z",
+      "side": 1,
+      "message": "Removed the struct.  (I copied it from one of my C-string iterator elsewhere.)",
+      "parentUuid": "55423a25_801b11bd",
       "range": {
         "startLine": 59,
         "startChar": 72,
@@ -77,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16cb0b5d_711d27d9",
+        "filename": "compos/libcompos_client/libcompos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-20T16:50:45Z",
+      "side": 1,
+      "message": "I couldn\u0027t get it work.  `dyn` in the result and L89 makes it tricky.  I was trying something like:\n\n  pub fn connect_rpc_binder\u003cT: binder::FromIBinder\u003e(cid: u32, port: u32) -\u003e Result\u003cStrong\u003cT\u003e\u003e {\n\nThen replace the caller with:\n\n  connect_rpc_binder::\u003cdyn ICompOsService\u003e(cid, COMPOS_VSOCK_PORT)?;\n\nBut the compiler complains that `dyn ICompOsService` isn\u0027t `Sized`.\n\nAny idea? Would this require expanding declare_binder_interface? If it\u0027s not immediately clear, I\u0027d leave this as is.",
+      "parentUuid": "f81e646b_992d2436",
+      "revId": "7a2afe62e85d0c23260516cf2c1a1ec1fbc62246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1bdd7317_99805333",
         "filename": "compos/libcompos_client/libcompos_client.rs",
         "patchSetId": 4
@@ -88,6 +148,24 @@
       "writtenOn": "2021-10-20T11:10:48Z",
       "side": 1,
       "message": "In that case this should be an unsafe function, as it is not safe for all possible inputs.",
+      "revId": "7a2afe62e85d0c23260516cf2c1a1ec1fbc62246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea477ade_1b9a9520",
+        "filename": "compos/libcompos_client/libcompos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-20T16:50:45Z",
+      "side": 1,
+      "message": "I was trying to minimize the unsafety range, but your comment makes sense.  I now inlined this function to the caller.",
+      "parentUuid": "1bdd7317_99805333",
       "revId": "7a2afe62e85d0c23260516cf2c1a1ec1fbc62246",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -115,6 +193,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7258cd4_6c0aa23c",
+        "filename": "compos/libcompos_client/libcompos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-20T16:50:45Z",
+      "side": 1,
+      "message": "Good point, done and deleted SizedPtrIter.",
+      "parentUuid": "f4d7e0fd_27860315",
+      "range": {
+        "startLine": 184,
+        "startChar": 30,
+        "endLine": 184,
+        "endChar": 47
+      },
+      "revId": "7a2afe62e85d0c23260516cf2c1a1ec1fbc62246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23b62268_5d3df1d0",
@@ -128,6 +230,24 @@
       "writtenOn": "2021-10-20T11:10:48Z",
       "side": 1,
       "message": "This function should also be marked as unsafe.",
+      "revId": "7a2afe62e85d0c23260516cf2c1a1ec1fbc62246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c04a230_b0a730c9",
+        "filename": "compos/libcompos_client/libcompos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-20T16:50:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23b62268_5d3df1d0",
       "revId": "7a2afe62e85d0c23260516cf2c1a1ec1fbc62246",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
