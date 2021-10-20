@@ -94,6 +94,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4d7e0fd_27860315",
+        "filename": "compos/libcompos_client/libcompos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-20T12:01:51Z",
+      "side": 1,
+      "message": "Couldn\u0027t you also construct a slice here, using from_raw_parts, and then use the slice\u0027s iterator?",
+      "range": {
+        "startLine": 184,
+        "startChar": 30,
+        "endLine": 184,
+        "endChar": 47
+      },
+      "revId": "7a2afe62e85d0c23260516cf2c1a1ec1fbc62246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23b62268_5d3df1d0",
         "filename": "compos/libcompos_client/libcompos_client.rs",
         "patchSetId": 4
