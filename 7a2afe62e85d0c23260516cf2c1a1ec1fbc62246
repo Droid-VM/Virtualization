@@ -16,6 +16,97 @@
       "message": "Alan, Andrew: PTAL",
       "revId": "7a2afe62e85d0c23260516cf2c1a1ec1fbc62246",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78bbf7b9_28d15062",
+        "filename": "compos/libcompos_client/libcompos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-10-20T11:10:48Z",
+      "side": 1,
+      "message": "Nit: \"to the CompOS service\"",
+      "revId": "7a2afe62e85d0c23260516cf2c1a1ec1fbc62246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55423a25_801b11bd",
+        "filename": "compos/libcompos_client/libcompos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-10-20T11:10:48Z",
+      "side": 1,
+      "message": "Why does it need to be null terminated? You never check for nulls.",
+      "range": {
+        "startLine": 59,
+        "startChar": 72,
+        "endLine": 59,
+        "endChar": 89
+      },
+      "revId": "7a2afe62e85d0c23260516cf2c1a1ec1fbc62246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f81e646b_992d2436",
+        "filename": "compos/libcompos_client/libcompos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-10-20T11:10:48Z",
+      "side": 1,
+      "message": "This looks like it should be moved to the Rust Binder library, or at least binder_common for now.",
+      "revId": "7a2afe62e85d0c23260516cf2c1a1ec1fbc62246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bdd7317_99805333",
+        "filename": "compos/libcompos_client/libcompos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-10-20T11:10:48Z",
+      "side": 1,
+      "message": "In that case this should be an unsafe function, as it is not safe for all possible inputs.",
+      "revId": "7a2afe62e85d0c23260516cf2c1a1ec1fbc62246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23b62268_5d3df1d0",
+        "filename": "compos/libcompos_client/libcompos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-10-20T11:10:48Z",
+      "side": 1,
+      "message": "This function should also be marked as unsafe.",
+      "revId": "7a2afe62e85d0c23260516cf2c1a1ec1fbc62246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
