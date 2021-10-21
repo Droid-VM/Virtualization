@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64a4de64_2e0b02c9",
+        "filename": "authfs/tests/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-21T16:57:10Z",
+      "side": 1,
+      "message": "Never mind then.  I was avoiding resolving the path on device, but it turns out easy enough.  We have to assume the path pattern won\u0027t change, which I think should be fine.",
+      "parentUuid": "0aa66b6c_560a5fbf",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 97
+      },
+      "revId": "caea9b718eaf0b5cfd1e7abb7653947d719f0495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6179c092_3c264cf0",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-10-21T09:23:52Z",
       "side": 1,
       "message": "Add comment here too?",
+      "range": {
+        "startLine": 36,
+        "startChar": 5,
+        "endLine": 36,
+        "endChar": 6
+      },
+      "revId": "caea9b718eaf0b5cfd1e7abb7653947d719f0495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee64198e_be0da601",
+        "filename": "authfs/tests/AndroidTest.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-21T16:57:10Z",
+      "side": 1,
+      "message": "Probably not needed now?",
+      "parentUuid": "6179c092_3c264cf0",
       "range": {
         "startLine": 36,
         "startChar": 5,
@@ -94,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1351f54c_85bdb4f3",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-21T16:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "beceb2fc_616c3bcc",
+      "range": {
+        "startLine": 62,
+        "startChar": 30,
+        "endLine": 62,
+        "endChar": 41
+      },
+      "revId": "caea9b718eaf0b5cfd1e7abb7653947d719f0495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31592d77_4a031969",
@@ -107,6 +179,30 @@
       "writtenOn": "2021-10-21T09:23:52Z",
       "side": 1,
       "message": "Nit: Should it be PRE_OPEN_*?\nOr avoid entirely and call it OPEN_THEN_RUN_BIN ?",
+      "range": {
+        "startLine": 63,
+        "startChar": 32,
+        "endLine": 63,
+        "endChar": 47
+      },
+      "revId": "caea9b718eaf0b5cfd1e7abb7653947d719f0495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14855123_7364935a",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-21T16:57:10Z",
+      "side": 1,
+      "message": "Done (missed when renaming). I tried different names, and landed on open_then_run. It\u0027s kind of dumb I feel, but straightforward...",
+      "parentUuid": "31592d77_4a031969",
       "range": {
         "startLine": 63,
         "startChar": 32,
@@ -140,6 +236,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdbb8c4f_a5082ae8",
+        "filename": "authfs/tests/open_then_run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-21T16:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af802e1d_b1cd1f11",
+      "range": {
+        "startLine": 17,
+        "startChar": 76,
+        "endLine": 17,
+        "endChar": 80
+      },
+      "revId": "caea9b718eaf0b5cfd1e7abb7653947d719f0495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a55276a8_72a2cac3",
@@ -153,6 +273,30 @@
       "writtenOn": "2021-10-21T12:31:05Z",
       "side": 1,
       "message": "descriptors",
+      "range": {
+        "startLine": 18,
+        "startChar": 4,
+        "endLine": 18,
+        "endChar": 14
+      },
+      "revId": "caea9b718eaf0b5cfd1e7abb7653947d719f0495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fe9819b_e2de033c",
+        "filename": "authfs/tests/open_then_run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-21T16:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a55276a8_72a2cac3",
       "range": {
         "startLine": 18,
         "startChar": 4,
@@ -188,6 +332,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e9205e9c_b7a9dc61",
+        "filename": "authfs/tests/open_then_run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-21T16:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8a7fc48_8562f11d",
+      "range": {
+        "startLine": 30,
+        "startChar": 5,
+        "endLine": 30,
+        "endChar": 16
+      },
+      "revId": "caea9b718eaf0b5cfd1e7abb7653947d719f0495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c1f091e9_8f54e02d",
         "filename": "authfs/tests/open_then_run.rs",
         "patchSetId": 2
@@ -199,6 +367,30 @@
       "writtenOn": "2021-10-21T09:23:52Z",
       "side": 1,
       "message": "I\u0027m a little surprised that this isn\u0027t deduced.\n(And more surprised that you have to specify Error here.)\nBut my understanding of type inference is pretty shallow.",
+      "range": {
+        "startLine": 58,
+        "startChar": 20,
+        "endLine": 58,
+        "endChar": 60
+      },
+      "revId": "caea9b718eaf0b5cfd1e7abb7653947d719f0495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce4e3b53_357be563",
+        "filename": "authfs/tests/open_then_run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-21T16:57:10Z",
+      "side": 1,
+      "message": "It actually does. Fixed.",
+      "parentUuid": "c1f091e9_8f54e02d",
       "range": {
         "startLine": 58,
         "startChar": 20,
@@ -232,6 +424,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6447e48_5f9f51d8",
+        "filename": "authfs/tests/open_then_run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-21T16:57:10Z",
+      "side": 1,
+      "message": "Refactored a bit to see if it helps.",
+      "parentUuid": "136375a4_45aa6207",
+      "range": {
+        "startLine": 115,
+        "startChar": 29,
+        "endLine": 115,
+        "endChar": 35
+      },
+      "revId": "caea9b718eaf0b5cfd1e7abb7653947d719f0495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e339a49_cf01f610",
@@ -245,6 +461,30 @@
       "writtenOn": "2021-10-21T12:31:05Z",
       "side": 1,
       "message": "Why not open_then_run, to match the name of the binary?",
+      "range": {
+        "startLine": 140,
+        "startChar": 23,
+        "endLine": 140,
+        "endChar": 35
+      },
+      "revId": "caea9b718eaf0b5cfd1e7abb7653947d719f0495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8467fb77_08e3d8b7",
+        "filename": "authfs/tests/open_then_run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-21T16:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e339a49_cf01f610",
       "range": {
         "startLine": 140,
         "startChar": 23,
