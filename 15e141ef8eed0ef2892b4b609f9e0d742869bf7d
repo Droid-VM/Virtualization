@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c6d7df5e_6d135e55",
+        "filename": "binder_common/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-21T15:30:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec88cccb_89194f13",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 20
+      },
+      "revId": "15e141ef8eed0ef2892b4b609f9e0d742869bf7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4061a9b0_317da7a9",
         "filename": "binder_common/rpc_client.rs",
         "patchSetId": 6
@@ -60,6 +84,30 @@
       "writtenOn": "2021-10-21T08:58:45Z",
       "side": 1,
       "message": "Once this is in there are a few dupes we\u0027ll want to remove.\n(There\u0027s also our usage of RpcPreconnectedClient, but that\u0027s currently a one-off.)",
+      "range": {
+        "startLine": 24,
+        "startChar": 7,
+        "endLine": 24,
+        "endChar": 25
+      },
+      "revId": "15e141ef8eed0ef2892b4b609f9e0d742869bf7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3360c185_50126ab7",
+        "filename": "binder_common/rpc_client.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-21T15:30:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4061a9b0_317da7a9",
       "range": {
         "startLine": 24,
         "startChar": 7,
