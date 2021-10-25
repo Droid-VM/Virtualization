@@ -55,8 +55,10 @@ use std::ffi::CStr;
 use std::fs::{create_dir, File, OpenOptions};
 use std::io::{Error, ErrorKind, Write};
 use std::num::NonZeroU32;
+use std::os::raw;
 use std::os::unix::io::{FromRawFd, IntoRawFd};
 use std::path::{Path, PathBuf};
+use std::ptr::null_mut;
 use std::sync::{Arc, Mutex, Weak};
 use vmconfig::VmConfig;
 use vsock::{SockAddr, VsockListener, VsockStream};
@@ -335,6 +337,23 @@ impl IVirtualizationService for VirtualizationService {
 }
 
 impl VirtualizationService {
+    // SAFETY: Service ownership is held by state, and the binder objects are threadsafe.
+    unsafe extern "C" fn factory(
+        cid: Cid,
+        context: *mut raw::c_void,
+    ) -> *mut binder_rpc_unstable_bindgen::AIBinder {
+        let state_ptr = context as *mut Arc<Mutex<State>>;
+        let state = state_ptr.as_ref().unwrap();
+        if let Some(vm) = state.lock().unwrap().get_vm(cid) {
+            let mut vm_service = vm.vm_service.lock().unwrap();
+            let service = vm_service
+                .get_or_insert_with(|| VirtualMachineService::new_binder(state.clone(), cid));
+            service.as_binder().as_native_mut() as *mut binder_rpc_unstable_bindgen::AIBinder
+        } else {
+            error!("connection from cid={} is not from a guest VM", cid);
+            null_mut()
+        }
+    }
     pub fn init() -> VirtualizationService {
         let service = VirtualizationService::default();
 
@@ -345,15 +364,18 @@ impl VirtualizationService {
         });
 
         // binder server for vm
-        let state = service.state.clone(); // reference to state (not the state itself) is copied
+        let mut state = service.state.clone(); // reference to state (not the state itself) is copied
         std::thread::spawn(move || {
-            let mut service = VirtualMachineService::new_binder(state).as_binder();
+            let state_ptr = &mut state as *mut _ as *mut raw::c_void;
+
             debug!("virtual machine service is starting as an RPC service.");
-            // SAFETY: Service ownership is transferring to the server and won't be valid afterward.
-            // Plus the binder objects are threadsafe.
+            // SAFETY: factory function is only ever called by RunRpcServerWithFactory, within the
+            // lifetime of the state, with context taking the pointer value above (so a properly
+            // aligned non-null pointer to an initialized instance).
             let retval = unsafe {
-                binder_rpc_unstable_bindgen::RunRpcServer(
-                    service.as_native_mut() as *mut binder_rpc_unstable_bindgen::AIBinder,
+                binder_rpc_unstable_bindgen::RunRpcServerWithFactory(
+                    Some(Self::factory),
+                    state_ptr,
                     VM_BINDER_SERVICE_PORT as u32,
                 )
             };
@@ -846,68 +868,66 @@ impl<'a, T> AsRef<T> for BorrowedOrOwned<'a, T> {
 #[derive(Debug, Default)]
 struct VirtualMachineService {
     state: Arc<Mutex<State>>,
+    cid: Cid,
 }
 
 impl Interface for VirtualMachineService {}
 
 impl IVirtualMachineService for VirtualMachineService {
-    fn notifyPayloadStarted(&self, cid: i32) -> binder::Result<()> {
-        let cid = cid as Cid;
-        if let Some(vm) = self.state.lock().unwrap().get_vm(cid) {
-            info!("VM having CID {} started payload", cid);
+    fn notifyPayloadStarted(&self) -> binder::Result<()> {
+        if let Some(vm) = self.state.lock().unwrap().get_vm(self.cid) {
+            info!("VM having CID {} started payload", self.cid);
             vm.update_payload_state(PayloadState::Started)
                 .map_err(|e| new_binder_exception(ExceptionCode::ILLEGAL_STATE, e.to_string()))?;
             let stream = vm.stream.lock().unwrap().take();
-            vm.callbacks.notify_payload_started(cid, stream);
+            vm.callbacks.notify_payload_started(self.cid, stream);
             Ok(())
         } else {
-            error!("notifyPayloadStarted is called from an unknown cid {}", cid);
+            error!("notifyPayloadStarted is called from an unknown cid {}", self.cid);
             Err(new_binder_exception(
                 ExceptionCode::SERVICE_SPECIFIC,
-                format!("cannot find a VM with cid {}", cid),
+                format!("cannot find a VM with cid {}", self.cid),
             ))
         }
     }
 
-    fn notifyPayloadReady(&self, cid: i32) -> binder::Result<()> {
-        let cid = cid as Cid;
-        if let Some(vm) = self.state.lock().unwrap().get_vm(cid) {
-            info!("VM having CID {} payload is ready", cid);
+    fn notifyPayloadReady(&self) -> binder::Result<()> {
+        if let Some(vm) = self.state.lock().unwrap().get_vm(self.cid) {
+            info!("VM having CID {} payload is ready", self.cid);
             vm.update_payload_state(PayloadState::Ready)
                 .map_err(|e| new_binder_exception(ExceptionCode::ILLEGAL_STATE, e.to_string()))?;
-            vm.callbacks.notify_payload_ready(cid);
+            vm.callbacks.notify_payload_ready(self.cid);
             Ok(())
         } else {
-            error!("notifyPayloadReady is called from an unknown cid {}", cid);
+            error!("notifyPayloadReady is called from an unknown cid {}", self.cid);
             Err(new_binder_exception(
                 ExceptionCode::SERVICE_SPECIFIC,
-                format!("cannot find a VM with cid {}", cid),
+                format!("cannot find a VM with cid {}", self.cid),
             ))
         }
     }
 
-    fn notifyPayloadFinished(&self, cid: i32, exit_code: i32) -> binder::Result<()> {
-        let cid = cid as Cid;
-        if let Some(vm) = self.state.lock().unwrap().get_vm(cid) {
-            info!("VM having CID {} finished payload", cid);
+    fn notifyPayloadFinished(&self, exit_code: i32) -> binder::Result<()> {
+        if let Some(vm) = self.state.lock().unwrap().get_vm(self.cid) {
+            info!("VM having CID {} finished payload", self.cid);
             vm.update_payload_state(PayloadState::Finished)
                 .map_err(|e| new_binder_exception(ExceptionCode::ILLEGAL_STATE, e.to_string()))?;
-            vm.callbacks.notify_payload_finished(cid, exit_code);
+            vm.callbacks.notify_payload_finished(self.cid, exit_code);
             Ok(())
         } else {
-            error!("notifyPayloadFinished is called from an unknown cid {}", cid);
+            error!("notifyPayloadFinished is called from an unknown cid {}", self.cid);
             Err(new_binder_exception(
                 ExceptionCode::SERVICE_SPECIFIC,
-                format!("cannot find a VM with cid {}", cid),
+                format!("cannot find a VM with cid {}", self.cid),
             ))
         }
     }
 }
 
 impl VirtualMachineService {
-    fn new_binder(state: Arc<Mutex<State>>) -> Strong<dyn IVirtualMachineService> {
+    fn new_binder(state: Arc<Mutex<State>>, cid: Cid) -> Strong<dyn IVirtualMachineService> {
         BnVirtualMachineService::new_binder(
-            VirtualMachineService { state },
+            VirtualMachineService { state, cid },
             BinderFeatures::default(),
         )
     }
