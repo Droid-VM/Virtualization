@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09a77e0b_cf692aac",
+        "filename": "compos/composd/aidl/android/system/composd/ICompilationTask.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-10-25T14:02:37Z",
+      "side": 1,
+      "message": "What\u0027s the advantage of this over treating dropping the ICompilationTask as cancelling the compilation?",
+      "revId": "85953a14cac5c89427de581e2c17a86591a08ca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f42fd131_a38b1986",
+        "filename": "compos/composd/src/util.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-10-25T14:02:37Z",
+      "side": 1,
+      "message": "What does -1 mean here? Is there a constant defined for it that you could use?",
+      "range": {
+        "startLine": 26,
+        "startChar": 42,
+        "endLine": 26,
+        "endChar": 44
+      },
+      "revId": "85953a14cac5c89427de581e2c17a86591a08ca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "116b10c7_c4ea902e",
+        "filename": "compos/composd_cmd/composd_cmd.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-10-25T14:02:37Z",
+      "side": 1,
+      "message": "You can do this with link_to_death, see https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/vm/src/run.rs for an example of how to use it.",
+      "revId": "85953a14cac5c89427de581e2c17a86591a08ca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
