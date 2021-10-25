@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e1054b8_8b70d04c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-25T17:12:59Z",
+      "side": 1,
+      "message": "The notification happens purely on Android side right now, but we might need the signal from ICompOsService later.  Maybe just a the similar callback to compile_cmd/compild?",
+      "range": {
+        "startLine": 9,
+        "startChar": 10,
+        "endLine": 9,
+        "endChar": 22
+      },
+      "revId": "85953a14cac5c89427de581e2c17a86591a08ca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09a77e0b_cf692aac",
@@ -32,6 +55,93 @@
       "side": 1,
       "message": "I haven\u0027t figured out a way to deterministically drop a binder object from Java.\nAlso it\u0027s a little more explicit.",
       "parentUuid": "09a77e0b_cf692aac",
+      "revId": "85953a14cac5c89427de581e2c17a86591a08ca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11d4f692_4e0d6ba0",
+        "filename": "compos/composd/aidl/android/system/composd/ICompilationTask.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-25T17:12:59Z",
+      "side": 1,
+      "message": "I\u0027d prefer an explicit cancel, too.",
+      "parentUuid": "c406a2a3_6376ec19",
+      "revId": "85953a14cac5c89427de581e2c17a86591a08ca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53197eee_be3abc92",
+        "filename": "compos/composd/src/compilation_task.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-25T17:12:59Z",
+      "side": 1,
+      "message": "How would you imagine this handling once we move odrefresh to the VM?  Should we kill the task in the VM, or simply kill the VM?",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 9
+      },
+      "revId": "85953a14cac5c89427de581e2c17a86591a08ca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "349ec4c5_b6f96990",
+        "filename": "compos/composd/src/compilation_task.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-25T17:12:59Z",
+      "side": 1,
+      "message": "Comment (or an alternative name) that it\u0027ll return None if the task is already canceled.",
+      "range": {
+        "startLine": 48,
+        "startChar": 7,
+        "endLine": 48,
+        "endChar": 11
+      },
+      "revId": "85953a14cac5c89427de581e2c17a86591a08ca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e163fff4_9c9e6878",
+        "filename": "compos/composd/src/odrefresh.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-25T17:12:59Z",
+      "side": 1,
+      "message": "Note that we might not have odrefresh running on Android later.",
+      "range": {
+        "startLine": 68,
+        "startChar": 8,
+        "endLine": 68,
+        "endChar": 87
+      },
       "revId": "85953a14cac5c89427de581e2c17a86591a08ca3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -114,6 +224,29 @@
       "side": 1,
       "message": "Yeah, I tried that, but when I tested it (by killing composd) I didn\u0027t get any callback.\nI added a question about that to the userspace sync agenda.\nIt\u0027s a nice to have rather than necessary here, the timeout will catch it in the end.",
       "parentUuid": "116b10c7_c4ea902e",
+      "revId": "85953a14cac5c89427de581e2c17a86591a08ca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2347e1a6_91d57589",
+        "filename": "compos/composd_cmd/composd_cmd.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-25T17:12:59Z",
+      "side": 1,
+      "message": "Maybe move to compos_common since it\u0027s used twice.",
+      "range": {
+        "startLine": 118,
+        "startChar": 41,
+        "endLine": 118,
+        "endChar": 44
+      },
       "revId": "85953a14cac5c89427de581e2c17a86591a08ca3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
