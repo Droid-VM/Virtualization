@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c406a2a3_6376ec19",
+        "filename": "compos/composd/aidl/android/system/composd/ICompilationTask.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-25T14:15:44Z",
+      "side": 1,
+      "message": "I haven\u0027t figured out a way to deterministically drop a binder object from Java.\nAlso it\u0027s a little more explicit.",
+      "parentUuid": "09a77e0b_cf692aac",
+      "revId": "85953a14cac5c89427de581e2c17a86591a08ca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f42fd131_a38b1986",
         "filename": "compos/composd/src/util.rs",
         "patchSetId": 2
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc7e37f4_bbdf7901",
+        "filename": "compos/composd/src/util.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-25T14:15:44Z",
+      "side": 1,
+      "message": "It has no significance at all.\nI don\u0027t have any clients at the moment that need to distinguish different types of failure, so I\u0027m just returning the same code for everything.\n(I extracted this because I thought I was going to reuse it, and then didn\u0027t. But it seems harmless to do so.)",
+      "parentUuid": "f42fd131_a38b1986",
+      "range": {
+        "startLine": 26,
+        "startChar": 42,
+        "endLine": 26,
+        "endChar": 44
+      },
+      "revId": "85953a14cac5c89427de581e2c17a86591a08ca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "116b10c7_c4ea902e",
         "filename": "compos/composd_cmd/composd_cmd.rs",
         "patchSetId": 2
@@ -54,6 +96,24 @@
       "writtenOn": "2021-10-25T14:02:37Z",
       "side": 1,
       "message": "You can do this with link_to_death, see https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/vm/src/run.rs for an example of how to use it.",
+      "revId": "85953a14cac5c89427de581e2c17a86591a08ca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f813a4a_bd6aa0e4",
+        "filename": "compos/composd_cmd/composd_cmd.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-25T14:15:44Z",
+      "side": 1,
+      "message": "Yeah, I tried that, but when I tested it (by killing composd) I didn\u0027t get any callback.\nI added a question about that to the userspace sync agenda.\nIt\u0027s a nice to have rather than necessary here, the timeout will catch it in the end.",
+      "parentUuid": "116b10c7_c4ea902e",
       "revId": "85953a14cac5c89427de581e2c17a86591a08ca3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
