@@ -16,6 +16,29 @@
       "message": "If this is library code that other people might use, derive Clone, Eq and PartialEq as well for convenience.",
       "revId": "de3c7f99bc88bb095d23063574d3b835ff4a75b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c40f3499_4f381747",
+        "filename": "compos/composd/src/instance_starter.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-25T17:26:17Z",
+      "side": 1,
+      "message": "nit: maybe rename to virtualization_service like below, especially the name \"service\" is used for different purposes in the file.  I had to stop to track until I see this line.",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 75,
+        "endChar": 15
+      },
+      "revId": "de3c7f99bc88bb095d23063574d3b835ff4a75b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
