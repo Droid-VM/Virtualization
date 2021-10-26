@@ -45,6 +45,30 @@
       },
       "revId": "c7d28c7d78631aac6899598e48555f983921a69b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b54ee21c_89c00704",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-10-26T08:49:45Z",
+      "side": 1,
+      "message": "State holds weak references to VmInstance, so I guess it\u0027s fine.",
+      "parentUuid": "13084a9f_4e7a6873",
+      "range": {
+        "startLine": 138,
+        "startChar": 33,
+        "endLine": 138,
+        "endChar": 67
+      },
+      "revId": "c7d28c7d78631aac6899598e48555f983921a69b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
