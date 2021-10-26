@@ -33,6 +33,24 @@
       "message": "death_recipient will still get dropped when this function returns, is that a problem?",
       "revId": "3546aa6d5161a036d98abe6f8ae81b32085f4960",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bad99070_61474c64",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-26T14:47:58Z",
+      "side": 1,
+      "message": "No. The callback object still exists (which means we get logging), but apart from that we ignore all callbacks after a successful start.\n\nWe don\u0027t really need this, the start timeout covers most failure situations, but it seems slightly beneficial.",
+      "parentUuid": "fc9d8e22_d4abd36c",
+      "revId": "3546aa6d5161a036d98abe6f8ae81b32085f4960",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
