@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b60fc92_a854c449",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-26T08:53:20Z",
+      "side": 1,
+      "message": "I\u0027m always in two minds about that. It\u0027s easy and cheap and might be useful.\nOn the other hand I\u0027m a strong believer in YAGNI. It\u0027s always easier to add than to remove things from an API.\nI\u0027ve added Clone because that seems clearly useful. But I feel anyone comparing these things for equality is doing something weird.",
+      "parentUuid": "871e5971_60588b6b",
+      "revId": "de3c7f99bc88bb095d23063574d3b835ff4a75b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c40f3499_4f381747",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-10-25T17:26:17Z",
       "side": 1,
       "message": "nit: maybe rename to virtualization_service like below, especially the name \"service\" is used for different purposes in the file.  I had to stop to track until I see this line.",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 75,
+        "endChar": 15
+      },
+      "revId": "de3c7f99bc88bb095d23063574d3b835ff4a75b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d6b7fea_b3f7122d",
+        "filename": "compos/composd/src/instance_starter.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-26T08:53:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c40f3499_4f381747",
       "range": {
         "startLine": 75,
         "startChar": 8,
