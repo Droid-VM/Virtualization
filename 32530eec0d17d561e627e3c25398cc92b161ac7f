@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4d972bf_5c94a752",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-10-26T07:55:04Z",
+      "side": 1,
+      "message": "add_hash_footer erases the existing one. https://cs.android.com/android/platform/superproject/+/master:external/avb/avbtool.py;l\u003d3425?q\u003dadd_hash_footer",
+      "parentUuid": "4d8b4352_610694e6",
+      "range": {
+        "startLine": 142,
+        "startChar": 27,
+        "endLine": 142,
+        "endChar": 42
+      },
+      "revId": "32530eec0d17d561e627e3c25398cc92b161ac7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c758012_a17a07f1",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-10-26T07:42:07Z",
       "side": 1,
       "message": "You need to first erase the existing footer",
+      "range": {
+        "startLine": 159,
+        "startChar": 27,
+        "endLine": 159,
+        "endChar": 46
+      },
+      "revId": "32530eec0d17d561e627e3c25398cc92b161ac7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c03df41c_ff0930c0",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-10-26T07:55:04Z",
+      "side": 1,
+      "message": "ditto.",
+      "parentUuid": "1c758012_a17a07f1",
       "range": {
         "startLine": 159,
         "startChar": 27,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6769dac_2667d57e",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-10-26T07:55:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "615b0a14_bf45f1f9",
+      "range": {
+        "startLine": 185,
+        "startChar": 7,
+        "endLine": 185,
+        "endChar": 29
+      },
+      "revId": "32530eec0d17d561e627e3c25398cc92b161ac7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e9e0053_5146364c",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-10-26T07:42:07Z",
       "side": 1,
       "message": "Can this be outside of the `with TempDirectory()` block?",
+      "range": {
+        "startLine": 250,
+        "startChar": 8,
+        "endLine": 252,
+        "endChar": 79
+      },
+      "revId": "32530eec0d17d561e627e3c25398cc92b161ac7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2efac395_d027d707",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-10-26T07:55:04Z",
+      "side": 1,
+      "message": "It\u0027s to avoid unpacking re-signed super.img for system/vendor images. Added comments explaining why.",
+      "parentUuid": "3e9e0053_5146364c",
       "range": {
         "startLine": 250,
         "startChar": 8,
