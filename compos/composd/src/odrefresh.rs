@@ -17,7 +17,7 @@
 //! Handle the details of executing odrefresh to generate compiled artifacts.
 
 use anyhow::{bail, Context, Result};
-use compos_common::timeouts::need_extra_time;
+use compos_common::timeouts::{need_extra_time, EXTENDED_TIMEOUTS};
 use compos_common::VMADDR_CID_ANY;
 use num_derive::FromPrimitive;
 use num_traits::FromPrimitive;
@@ -48,7 +48,15 @@ impl Odrefresh {
         // We don`t need to capture stdout/stderr - odrefresh writes to the log
         let mut cmdline = Command::new(ODREFRESH_BIN);
         if need_extra_time()? {
-            cmdline.arg("--max-execution-seconds=480").arg("--max-child-process-seconds=150");
+            cmdline
+                .arg(format!(
+                    "--max-execution-seconds={}",
+                    EXTENDED_TIMEOUTS.odrefresh_max_execution_time.as_secs()
+                ))
+                .arg(format!(
+                    "--max-child-process-seconds={}",
+                    EXTENDED_TIMEOUTS.odrefresh_max_child_process_time.as_secs()
+                ));
         }
         cmdline
             .arg(format!("--use-compilation-os={}", VMADDR_CID_ANY as i32))
