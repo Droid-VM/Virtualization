@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c75364c_9d71a258",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-26T08:36:48Z",
+      "side": 1,
+      "message": "Could we extract some of this into a safe helper function, to minimize the size of the unsafe code?",
+      "range": {
+        "startLine": 920,
+        "startChar": 0,
+        "endLine": 923,
+        "endChar": 97
+      },
+      "revId": "c7d28c7d78631aac6899598e48555f983921a69b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13084a9f_4e7a6873",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-26T08:36:48Z",
+      "side": 1,
+      "message": "Does this create a circular reference between VM \u0026 VS?",
+      "range": {
+        "startLine": 138,
+        "startChar": 33,
+        "endLine": 138,
+        "endChar": 67
+      },
+      "revId": "c7d28c7d78631aac6899598e48555f983921a69b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
