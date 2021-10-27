@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "61d411b3_9741f946",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-27T16:52:12Z",
+      "side": 1,
+      "message": "Why don\u0027t we? Could we fix that?\n\nI\u0027m not entirely sure what the difference is. Then I found b/149420197 and now I\u0027m less sure.\n\nhttps://source.android.com/compatibility/tests/development/test-mapping suggests general-tests, since none of this is device specific.",
+      "range": {
+        "startLine": 10,
+        "startChar": 36,
+        "endLine": 11,
+        "endChar": 18
+      },
+      "revId": "a8eb5cf075aefa43e90da193b2c78e76d1ecbb35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0ded11e6_2c33b25e",
@@ -14,6 +37,23 @@
       "writtenOn": "2021-10-27T16:41:00Z",
       "side": 1,
       "message": "(still waiting for the result to really prove my theory, feel free to review first)",
+      "revId": "a8eb5cf075aefa43e90da193b2c78e76d1ecbb35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e7de02d_0361f94f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-27T16:52:12Z",
+      "side": 1,
+      "message": "If this fixes it then I\u0027m all for it, but it seems a bit weird.",
       "revId": "a8eb5cf075aefa43e90da193b2c78e76d1ecbb35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
