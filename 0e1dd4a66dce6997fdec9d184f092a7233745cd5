@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35ebfc33_60561c1f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-10-27T01:08:26Z",
+      "side": 1,
+      "message": "I agree. Sorry about that.",
+      "parentUuid": "02efc8d4_58126ef5",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 35
+      },
+      "revId": "0e1dd4a66dce6997fdec9d184f092a7233745cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "574f1058_19a53445",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc975270_9dc6d9da",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-10-27T01:08:26Z",
+      "side": 1,
+      "message": "The Java framework always passes FDs regardless of the debug level. Users have no control there. They get empty input streams when the debug level is low.",
+      "parentUuid": "574f1058_19a53445",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 9
+      },
+      "revId": "0e1dd4a66dce6997fdec9d184f092a7233745cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68687239_94d305e2",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-10-27T00:39:54Z",
       "side": 1,
       "message": "is it necessary?\n\nnot related to this change, but `short` options are not starting to conflict. esp, \u0027-d\u0027(daemonize, debug)",
+      "range": {
+        "startLine": 61,
+        "startChar": 20,
+        "endLine": 61,
+        "endChar": 25
+      },
+      "revId": "0e1dd4a66dce6997fdec9d184f092a7233745cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a2c2024_3723e30a",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-10-27T01:08:26Z",
+      "side": 1,
+      "message": "You are right. Removed the short options from some of the flags.",
+      "parentUuid": "68687239_94d305e2",
       "range": {
         "startLine": 61,
         "startChar": 20,
