@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c35bbb0b_72909717",
+        "filename": "authfs/tests/open_then_run.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-10-27T08:55:19Z",
+      "side": 1,
+      "message": "Don\u0027t you still need O_RDONLY?\n\nman says  \"The argument flags must include one of the following access modes: O_RDONLY, O_WRONLY, or O_RDWR\"\n\n(Linux apparently defines O_RDONLY as 0, but still.)",
+      "range": {
+        "startLine": 121,
+        "startChar": 31,
+        "endLine": 121,
+        "endChar": 42
+      },
+      "revId": "ce5465cb3c7912a02b2924bd56898fe8939fcfb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
