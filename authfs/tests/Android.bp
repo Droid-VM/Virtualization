@@ -13,7 +13,7 @@ java_test_host {
     static_libs: [
         "VirtualizationTestHelper",
     ],
-    test_suites: ["general-tests"],
+    test_suites: ["device-tests"],
     target_required: ["open_then_run"],
     data: [
         ":authfs_test_files",
@@ -34,6 +34,6 @@ rust_test {
         "liblog_rust",
         "libnix",
     ],
-    test_suites: ["general-tests"],
+    test_suites: ["device-tests"],
     test_harness: false,
 }
