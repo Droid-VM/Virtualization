@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "686d24d9_fd6e6337",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 7
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-10-27T20:35:15Z",
+      "side": 1,
+      "message": "Can you use hvc2 so you are compatible with CF? We use hvc0 for kernel dmesg, hvc1 for the androidboot.console (which is often disabled) and hvc2 for logcat. crosvm supports creating \"sink\" devices if you don\u0027t want to wire up hvc1. Thanks!",
+      "range": {
+        "startLine": 198,
+        "startChar": 70,
+        "endLine": 198,
+        "endChar": 74
+      },
+      "revId": "fa91d70fef2a6b9f27793545f3e0d3d1bdd2c7a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
