@@ -94,6 +94,30 @@
       },
       "revId": "fa91d70fef2a6b9f27793545f3e0d3d1bdd2c7a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eaf6e38_fc7472a1",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 7
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-10-28T18:35:57Z",
+      "side": 1,
+      "message": "Sorry, you\u0027re right. My confusion came from these all being in boot_devices which I thought wasn\u0027t required. But it is required to create the /dev/block/by-name/ links.",
+      "parentUuid": "b014387f_0e6b430c",
+      "range": {
+        "startLine": 198,
+        "startChar": 70,
+        "endLine": 198,
+        "endChar": 74
+      },
+      "revId": "fa91d70fef2a6b9f27793545f3e0d3d1bdd2c7a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
