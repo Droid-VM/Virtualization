@@ -22,9 +22,8 @@ use anyhow::{bail, Context, Result};
 use clap::{App, Arg, Values};
 use command_fds::{CommandFdExt, FdMapping};
 use log::{debug, error};
-use nix::{dir::Dir, fcntl::OFlag, sys::stat::Mode};
 use std::fs::{File, OpenOptions};
-use std::os::unix::io::{AsRawFd, RawFd};
+use std::os::unix::{fs::OpenOptionsExt, io::AsRawFd, io::RawFd};
 use std::process::Command;
 
 // `PseudoRawFd` is just an integer and not necessarily backed by a real FD. It is used to denote
@@ -46,7 +45,7 @@ impl<T: AsRawFd> FileMapping<T> {
 struct Args {
     ro_files: Vec<FileMapping<File>>,
     rw_files: Vec<FileMapping<File>>,
-    dir_files: Vec<FileMapping<Dir>>,
+    dir_files: Vec<FileMapping<File>>,
     cmdline_args: Vec<String>,
 }
 
@@ -118,7 +117,13 @@ fn parse_args() -> Result<Args> {
     })?;
 
     let dir_files = parse_and_create_file_mapping(matches.values_of("open-dir"), |path| {
-        Dir::open(path, OFlag::O_DIRECTORY | OFlag::O_RDONLY, Mode::S_IRWXU)
+        // The returned FD represents a path (that's supposed to be a directory), and is not really
+        // a file. It's better to use std::os::unix::io::OwnedFd but it's currently experimental.
+        // Ideally, all FDs opened by this program should be `OwnedFd` since we are only opening
+        // them for the provided program, and are not supposed to do anything else.
+        OpenOptions::new()
+            .custom_flags(libc::O_PATH | libc::O_DIRECTORY)
+            .open(path)
             .with_context(|| format!("Open {} directory", path))
     })?;
 
