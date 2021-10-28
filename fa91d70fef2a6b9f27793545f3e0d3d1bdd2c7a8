@@ -70,6 +70,30 @@
       },
       "revId": "fa91d70fef2a6b9f27793545f3e0d3d1bdd2c7a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b014387f_0e6b430c",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 7
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-10-28T18:16:29Z",
+      "side": 1,
+      "message": "\u003e 3 separate virtio-block devices \n\nI am not sure where you got this. We are still using composite disks. We use two composite disks. The disk 1 is for the microdroid along with the apexes and apk that the user has chosen. It consists of partitions like boot, vbmeta, super, etc. The disk 2 is for the apexes and apk that we load to Microdroid. The second is for the bootconfig partition and the instance partition where VM\u0027s identity is stored.",
+      "parentUuid": "c91dbed7_47f412d1",
+      "range": {
+        "startLine": 198,
+        "startChar": 70,
+        "endLine": 198,
+        "endChar": 74
+      },
+      "revId": "fa91d70fef2a6b9f27793545f3e0d3d1bdd2c7a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
