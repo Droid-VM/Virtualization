@@ -16,6 +16,23 @@
       "message": "PTAL Andrew",
       "revId": "36103b1189d52b9b269489a59a3eaf86b171266e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28833390_30ed943a",
+        "filename": "authfs/tests/open_then_run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-10-29T16:10:37Z",
+      "side": 1,
+      "message": "Opening a directory as a `File` seems wrong, most of the methods on `File` won\u0027t work on it. What was wrong with the `Dir` type you were using?",
+      "revId": "36103b1189d52b9b269489a59a3eaf86b171266e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
