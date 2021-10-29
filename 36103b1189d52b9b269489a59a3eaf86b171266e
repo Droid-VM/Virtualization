@@ -33,6 +33,24 @@
       "message": "Opening a directory as a `File` seems wrong, most of the methods on `File` won\u0027t work on it. What was wrong with the `Dir` type you were using?",
       "revId": "36103b1189d52b9b269489a59a3eaf86b171266e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78c6b6b8_089b7dc0",
+        "filename": "authfs/tests/open_then_run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-10-29T16:31:37Z",
+      "side": 1,
+      "message": "It\u0027s not a directory either.  I couldn\u0027t find something else that manages a RawFd lifetime for me (I just found `OwnedFd`, but it\u0027s not stable currently).  I added some comment for the rationale.  Would that be sufficient?",
+      "parentUuid": "28833390_30ed943a",
+      "revId": "36103b1189d52b9b269489a59a3eaf86b171266e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
