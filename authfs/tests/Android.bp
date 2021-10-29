@@ -14,7 +14,7 @@ java_test_host {
         "VirtualizationTestHelper",
     ],
     test_suites: ["general-tests"],
-    target_required: ["open_then_run"],
+    target_required: ["open_then_run_module"],
     data: [
         ":authfs_test_files",
         ":MicrodroidTestApp.signed",
@@ -22,7 +22,8 @@ java_test_host {
 }
 
 rust_test {
-    name: "open_then_run",
+    name: "open_then_run_module",
+    stem: "open_then_run",
     crate_name: "open_then_run",
     srcs: ["open_then_run.rs"],
     edition: "2018",
