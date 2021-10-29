@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13f225ea_46a2a1e7",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-10-29T07:20:05Z",
+      "side": 1,
+      "message": "Use the new filegroup. The same applies to other places where this key is mentioned.",
+      "range": {
+        "startLine": 387,
+        "startChar": 10,
+        "endLine": 387,
+        "endChar": 29
+      },
+      "revId": "d058465dae17fc903fa15f487a0199c491c084ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d13c9874_7e55940e",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-10-29T07:20:05Z",
+      "side": 1,
+      "message": "consider renaming this to microdroid_sign_key because we sign all components of microdroid - not just bootloader - with this key.",
+      "range": {
+        "startLine": 466,
+        "startChar": 11,
+        "endLine": 466,
+        "endChar": 30
+      },
+      "revId": "d058465dae17fc903fa15f487a0199c491c084ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
