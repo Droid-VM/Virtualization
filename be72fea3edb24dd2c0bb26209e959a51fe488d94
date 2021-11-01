@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bacf6f59_a0ecafb8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-01T15:23:46Z",
+      "side": 1,
+      "message": "FWIW, I can\u0027t figure out the root cause with limited log and without visibility to the test environment setup.",
+      "range": {
+        "startLine": 9,
+        "startChar": 56,
+        "endLine": 10,
+        "endChar": 71
+      },
+      "revId": "be72fea3edb24dd2c0bb26209e959a51fe488d94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "075507f2_e0d3370c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-01T15:23:46Z",
+      "side": 1,
+      "message": "PTAL\n\nI\u0027d love to understand why this only breaks on the nightly test, but in the same time, let\u0027s make the nightly test green again.  (only) the nightly test has been failing for a week. ",
+      "revId": "be72fea3edb24dd2c0bb26209e959a51fe488d94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
