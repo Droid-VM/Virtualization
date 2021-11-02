@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "369995d5_d333b6c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-02T05:58:48Z",
+      "side": 1,
+      "message": "That\u0027s too bad. How long does the test take?",
+      "range": {
+        "startLine": 9,
+        "startChar": 8,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "bda1e211fd44dee0e33d7509e82627eea2816505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57c758de_d245b597",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-02T05:58:48Z",
+      "side": 1,
+      "message": "a few nits, but LGTM",
+      "revId": "bda1e211fd44dee0e33d7509e82627eea2816505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fdca22b_62850a2f",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-02T05:58:48Z",
+      "side": 1,
+      "message": "Hmm, I\u0027m curious if we might need this provided by the SDK library. Probably useful, or too restrictive. But for now, it seems to be enough to me to notice the threading issue here.",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 21
+      },
+      "revId": "bda1e211fd44dee0e33d7509e82627eea2816505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26053792_f40bbe59",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-02T05:58:48Z",
+      "side": 1,
+      "message": "runToFinish being a method of listener look weird. But I think this code will evolve soone.",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 41
+      },
+      "revId": "bda1e211fd44dee0e33d7509e82627eea2816505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
