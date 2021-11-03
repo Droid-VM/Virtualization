@@ -16,6 +16,29 @@
       "message": "I think this should work. \n+jdesprez to confirm if there is a better way.",
       "revId": "189fe792ae4b3b3b95390cd877d08c853bc779f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c3f458d_5f3c9870",
+        "filename": "authfs/tests/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-03T14:46:37Z",
+      "side": 1,
+      "message": "I still don\u0027t understand this comment. Especially now that the module name is not the same as the executable.\n\nShould \"can upload the directory\" be \"sometimes uploads the directory\", or something? What\u0027s the problem you\u0027re working round?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 76
+      },
+      "revId": "189fe792ae4b3b3b95390cd877d08c853bc779f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
