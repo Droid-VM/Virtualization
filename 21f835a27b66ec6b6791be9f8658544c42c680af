@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67cf707c_b1d89e90",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-11-04T12:02:52Z",
+      "side": 1,
+      "message": "actual",
+      "range": {
+        "startLine": 12,
+        "startChar": 15,
+        "endLine": 12,
+        "endChar": 21
+      },
+      "revId": "21f835a27b66ec6b6791be9f8658544c42c680af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2365041_f660d075",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-11-04T12:02:52Z",
+      "side": 1,
+      "message": "Why do you need the Arc here? You don\u0027t seem to be cloning it anywhere, and `AuthFs` doesn\u0027t implement Clone either.",
+      "range": {
+        "startLine": 75,
+        "startChar": 18,
+        "endLine": 75,
+        "endChar": 21
+      },
+      "revId": "21f835a27b66ec6b6791be9f8658544c42c680af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "90a3e0df_f752a62e",
         "filename": "authfs/src/fusefs.rs",
         "patchSetId": 1
@@ -19,6 +65,29 @@
         "startChar": 0,
         "endLine": 76,
         "endChar": 0
+      },
+      "revId": "21f835a27b66ec6b6791be9f8658544c42c680af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73df3baa_2c4820c3",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-11-04T12:02:52Z",
+      "side": 1,
+      "message": "It\u0027s not clear to me what this comments means, can you clarify it? Or use checked_add, if that\u0027s what you need.",
+      "range": {
+        "startLine": 89,
+        "startChar": 32,
+        "endLine": 89,
+        "endChar": 52
       },
       "revId": "21f835a27b66ec6b6791be9f8658544c42c680af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
