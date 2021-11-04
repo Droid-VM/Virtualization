@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90a3e0df_f752a62e",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-04T10:31:35Z",
+      "side": 1,
+      "message": "Would it be better to have one mutex protecting 2 maps?\n2 mutexes seems like an invitation to deadlock (what\u0027s the locking order?), not to mention feeling slightly inefficient.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 0
+      },
+      "revId": "21f835a27b66ec6b6791be9f8658544c42c680af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "490d1de3_7ad61a80",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-04T10:31:35Z",
+      "side": 1,
+      "message": "This * is probably redundant",
+      "range": {
+        "startLine": 286,
+        "startChar": 24,
+        "endLine": 286,
+        "endChar": 25
+      },
+      "revId": "21f835a27b66ec6b6791be9f8658544c42c680af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf15e433_ac4c8c05",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-04T10:31:35Z",
+      "side": 1,
+      "message": "Extract this as a helper method?",
+      "range": {
+        "startLine": 170,
+        "startChar": 12,
+        "endLine": 170,
+        "endChar": 55
+      },
+      "revId": "21f835a27b66ec6b6791be9f8658544c42c680af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
