@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1661f252_63c05a17",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-04T22:39:56Z",
+      "side": 1,
+      "message": "Added some comment. It\u0027s `AuthFs` that needs to be `Sync`.\n\n`root_entries` doesn\u0027t need Arc\u003cMutext\u003c_\u003e\u003e since it remains constant.",
+      "parentUuid": "a2365041_f660d075",
+      "range": {
+        "startLine": 75,
+        "startChar": 18,
+        "endLine": 75,
+        "endChar": 21
+      },
+      "revId": "21f835a27b66ec6b6791be9f8658544c42c680af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90a3e0df_f752a62e",
@@ -60,6 +84,30 @@
       "writtenOn": "2021-11-04T10:31:35Z",
       "side": 1,
       "message": "Would it be better to have one mutex protecting 2 maps?\n2 mutexes seems like an invitation to deadlock (what\u0027s the locking order?), not to mention feeling slightly inefficient.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 0
+      },
+      "revId": "21f835a27b66ec6b6791be9f8658544c42c680af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b9ae07a_c9414f95",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-04T22:39:56Z",
+      "side": 1,
+      "message": "Now there is only one here.\n\nActually some AuthFsEntry can have its own mutex, but the caller has to lock inode_table first to access the entry.  So it shouldn\u0027t be a problem.",
+      "parentUuid": "90a3e0df_f752a62e",
       "range": {
         "startLine": 69,
         "startChar": 0,
@@ -93,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a019ff7_b9ff4bb9",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-04T22:39:56Z",
+      "side": 1,
+      "message": "Removed. It\u0027s supposed to be a reminder to myself to do something or nothing... This shouldn\u0027t be necessary since the input is supposed to be signature protected.",
+      "parentUuid": "73df3baa_2c4820c3",
+      "range": {
+        "startLine": 89,
+        "startChar": 32,
+        "endLine": 89,
+        "endChar": 52
+      },
+      "revId": "21f835a27b66ec6b6791be9f8658544c42c680af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "490d1de3_7ad61a80",
@@ -116,6 +188,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b6a8a8c_278d9393",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-04T22:39:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "490d1de3_7ad61a80",
+      "range": {
+        "startLine": 286,
+        "startChar": 24,
+        "endLine": 286,
+        "endChar": 25
+      },
+      "revId": "21f835a27b66ec6b6791be9f8658544c42c680af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf15e433_ac4c8c05",
@@ -129,6 +225,30 @@
       "writtenOn": "2021-11-04T10:31:35Z",
       "side": 1,
       "message": "Extract this as a helper method?",
+      "range": {
+        "startLine": 170,
+        "startChar": 12,
+        "endLine": 170,
+        "endChar": 55
+      },
+      "revId": "21f835a27b66ec6b6791be9f8658544c42c680af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3eb279e2_ed96ca55",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-04T22:39:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf15e433_ac4c8c05",
       "range": {
         "startLine": 170,
         "startChar": 12,
