@@ -22,6 +22,30 @@
       },
       "revId": "acf31b0105c2da405b856ab02724dbc976b9a99e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c175de6c_2150bebd",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-05T02:21:15Z",
+      "side": 1,
+      "message": "We need to use chained partition because the bootconfig partition can be backed by three different images each of which is for a debug level. Using `partitions` means that the signing information of \"a\" bootconfig is embedded in vbmeta. Then we wouldn\u0027t be able to switch across different bootconfig images unless we have three different vbmeta images each of which is for a bootconfig image. That only complicates things for no good reason.",
+      "parentUuid": "3cf42638_2672903f",
+      "range": {
+        "startLine": 338,
+        "startChar": 0,
+        "endLine": 348,
+        "endChar": 1
+      },
+      "revId": "acf31b0105c2da405b856ab02724dbc976b9a99e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
