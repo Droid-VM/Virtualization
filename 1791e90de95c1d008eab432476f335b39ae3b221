@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e9b2a26_d9da1cc9",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-05T11:42:33Z",
+      "side": 1,
+      "message": "I don\u0027t think you need this; From/Into isn\u0027t implemented for lossy integer conversions, so the line below would just fail to compile.",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 97
+      },
+      "revId": "1791e90de95c1d008eab432476f335b39ae3b221",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "542bb69d_080fe9ff",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-05T11:42:33Z",
+      "side": 1,
+      "message": "Weren\u0027t you going to use checked_add ?",
+      "range": {
+        "startLine": 197,
+        "startChar": 19,
+        "endLine": 197,
+        "endChar": 34
+      },
+      "revId": "1791e90de95c1d008eab432476f335b39ae3b221",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a81ed4cd_d7e119f2",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-05T11:42:33Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 269,
+        "startChar": 12,
+        "endLine": 269,
+        "endChar": 44
+      },
+      "revId": "1791e90de95c1d008eab432476f335b39ae3b221",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

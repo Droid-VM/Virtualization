@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5b64132_c23aeb5f",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-05T11:42:33Z",
+      "side": 1,
+      "message": "Mutex is Sync, so no need for the Arc?",
+      "parentUuid": "1661f252_63c05a17",
+      "range": {
+        "startLine": 75,
+        "startChar": 18,
+        "endLine": 75,
+        "endChar": 21
+      },
+      "revId": "21f835a27b66ec6b6791be9f8658544c42c680af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "90a3e0df_f752a62e",
         "filename": "authfs/src/fusefs.rs",
         "patchSetId": 1
