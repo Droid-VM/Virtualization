@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cf42638_2672903f",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-05T02:11:46Z",
+      "side": 1,
+      "message": "How does this work? I don\u0027t understand why this vbmeta has no partitions but only chained_partitions.\nIIUC, this vbmeta is added for \"bootconfig\" partition. Then should it have \"bootconfig\" as its \"partitions:\"? so that it contains vbmeta block of \"bootconfig\" partition..\n\nAnd because we have three bootconfig images to be chosen at runtime, we need three vbmeta images for each , right?",
+      "range": {
+        "startLine": 338,
+        "startChar": 0,
+        "endLine": 348,
+        "endChar": 1
+      },
+      "revId": "acf31b0105c2da405b856ab02724dbc976b9a99e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
