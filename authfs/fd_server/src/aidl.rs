@@ -25,8 +25,8 @@ use std::convert::TryInto;
 use std::fs::File;
 use std::io;
 use std::os::unix::fs::FileExt;
-use std::os::unix::io::{AsRawFd, FromRawFd};
-use std::path::MAIN_SEPARATOR;
+use std::os::unix::io::{AsRawFd, FromRawFd, RawFd};
+use std::path::{Component, Path, PathBuf, MAIN_SEPARATOR};
 use std::sync::{Arc, Mutex};
 
 use crate::fsverity;
@@ -68,6 +68,9 @@ pub enum FdConfig {
     /// A readable/writable file to serve by this server. This backing file should just be a
     /// regular file and does not have any specific property.
     ReadWrite(File),
+
+    /// A read-only directory to serve by this server.
+    InputDir(Dir),
 
     /// A writable directory to serve by this server.
     OutputDir(Dir),
@@ -132,7 +135,7 @@ impl IVirtFdService for FdService {
                     new_errno_error(Errno::EIO)
                 })
             }
-            FdConfig::OutputDir(_) => Err(new_errno_error(Errno::EISDIR)),
+            FdConfig::InputDir(_) | FdConfig::OutputDir(_) => Err(new_errno_error(Errno::EISDIR)),
         })
     }
 
@@ -165,7 +168,7 @@ impl IVirtFdService for FdService {
                 // use.
                 Err(new_errno_error(Errno::ENOSYS))
             }
-            FdConfig::OutputDir(_) => Err(new_errno_error(Errno::EISDIR)),
+            FdConfig::InputDir(_) | FdConfig::OutputDir(_) => Err(new_errno_error(Errno::EISDIR)),
         })
     }
 
@@ -195,7 +198,7 @@ impl IVirtFdService for FdService {
                 // There is no signature for a writable file.
                 Err(new_errno_error(Errno::ENOSYS))
             }
-            FdConfig::OutputDir(_) => Err(new_errno_error(Errno::EISDIR)),
+            FdConfig::InputDir(_) | FdConfig::OutputDir(_) => Err(new_errno_error(Errno::EISDIR)),
         })
     }
 
@@ -213,7 +216,7 @@ impl IVirtFdService for FdService {
                     new_errno_error(Errno::EIO)
                 })? as i32)
             }
-            FdConfig::OutputDir(_) => Err(new_errno_error(Errno::EISDIR)),
+            FdConfig::InputDir(_) | FdConfig::OutputDir(_) => Err(new_errno_error(Errno::EISDIR)),
         })
     }
 
@@ -229,7 +232,7 @@ impl IVirtFdService for FdService {
                     new_errno_error(Errno::EIO)
                 })
             }
-            FdConfig::OutputDir(_) => Err(new_errno_error(Errno::EISDIR)),
+            FdConfig::InputDir(_) | FdConfig::OutputDir(_) => Err(new_errno_error(Errno::EISDIR)),
         })
     }
 
@@ -254,7 +257,33 @@ impl IVirtFdService for FdService {
                 // for a writable file.
                 Err(new_errno_error(Errno::ENOSYS))
             }
-            FdConfig::OutputDir(_) => Err(new_errno_error(Errno::EISDIR)),
+            FdConfig::InputDir(_) | FdConfig::OutputDir(_) => Err(new_errno_error(Errno::EISDIR)),
+        })
+    }
+
+    fn openFileInDirectory(&self, fd: i32, file_path: &str) -> BinderResult<i32> {
+        let path_buf = PathBuf::from(file_path);
+        // Checks if the path is a simple, related path.
+        if path_buf.components().any(|c| !matches!(c, Component::Normal(_))) {
+            return Err(new_errno_error(Errno::EINVAL));
+        }
+
+        self.insert_new_fd(fd, |config| match config {
+            FdConfig::InputDir(dir) => {
+                let file = open_readonly_at(dir.as_raw_fd(), &path_buf).map_err(new_errno_error)?;
+
+                let fsv_meta_file_path = with_extra_file_name(&path_buf, ".fsv_meta")?;
+                let alt_merkle_tree = open_readonly_at(dir.as_raw_fd(), &fsv_meta_file_path).ok();
+
+                Ok((
+                    file.as_raw_fd(),
+                    FdConfig::Readonly { file, alt_merkle_tree, alt_signature: None },
+                ))
+            }
+            FdConfig::OutputDir(_) => {
+                Err(new_errno_error(Errno::ENOSYS)) // TODO: Implement when needed
+            }
+            _ => Err(new_errno_error(Errno::ENOTDIR)),
         })
     }
 
@@ -263,6 +292,7 @@ impl IVirtFdService for FdService {
             return Err(new_errno_error(Errno::EINVAL));
         }
         self.insert_new_fd(fd, |config| match config {
+            FdConfig::InputDir(_) => Err(new_errno_error(Errno::EACCES)),
             FdConfig::OutputDir(dir) => {
                 let new_fd = openat(
                     dir.as_raw_fd(),
@@ -286,6 +316,7 @@ impl IVirtFdService for FdService {
             return Err(new_errno_error(Errno::EINVAL));
         }
         self.insert_new_fd(dir_fd, |config| match config {
+            FdConfig::InputDir(_) => Err(new_errno_error(Errno::EACCES)),
             FdConfig::OutputDir(_) => {
                 mkdirat(dir_fd, basename, Mode::S_IRWXU).map_err(new_errno_error)?;
                 let new_dir = Dir::openat(
@@ -312,4 +343,18 @@ fn read_into_buf(file: &File, max_size: usize, offset: u64) -> io::Result<Vec<u8
 
 fn new_errno_error(errno: Errno) -> Status {
     new_binder_service_specific_error(errno as i32, errno.desc())
+}
+
+fn open_readonly_at(dir_fd: RawFd, path: &Path) -> nix::Result<File> {
+    let new_fd = openat(dir_fd, path, OFlag::O_RDONLY, Mode::empty())?;
+    // SAFETY: new_fd is just created successfully and not owned.
+    let new_file = unsafe { File::from_raw_fd(new_fd) };
+    Ok(new_file)
+}
+
+fn with_extra_file_name(path: &Path, extra_name: &str) -> BinderResult<PathBuf> {
+    let mut new_basename =
+        path.file_name().ok_or_else(|| new_errno_error(Errno::EINVAL))?.to_os_string();
+    new_basename.push(extra_name);
+    Ok(path.with_file_name(&new_basename))
 }
