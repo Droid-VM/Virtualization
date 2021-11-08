@@ -76,6 +76,8 @@ pub fn command_run_app(
         configPath: config_path.to_owned(),
         debugLevel: debug_level,
         memoryMib: mem.unwrap_or(0) as i32, // 0 means use the VM default
+        additionalApks: vec![],
+        additionalIdsigs: vec![],
     });
     run(
         service,

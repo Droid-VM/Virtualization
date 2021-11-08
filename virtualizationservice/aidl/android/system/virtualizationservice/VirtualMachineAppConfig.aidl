@@ -23,6 +23,12 @@ parcelable VirtualMachineAppConfig {
     /** idsig for an APK */
     ParcelFileDescriptor idsig;
 
+    /** Additional APKs for the VM */
+    List<ParcelFileDescriptor> additionalApks;
+
+    /** Idsig files corresponding to additionalApks */
+    List<ParcelFileDescriptor> additionalIdsigs;
+
     /** instance.img that has per-instance data */
     ParcelFileDescriptor instanceImage;
 

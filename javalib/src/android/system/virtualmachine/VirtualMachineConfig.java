@@ -49,12 +49,28 @@ public final class VirtualMachineConfig {
     private static final String KEY_CERTS = "certs";
     private static final String KEY_APKPATH = "apkPath";
     private static final String KEY_PAYLOADCONFIGPATH = "payloadConfigPath";
+    private static final String KEY_ADDITIONAL_APK_PATHS = "additionalApkPaths";
+    private static final String KEY_ADDITIONAL_IDSIG_PATHS = "additionalIdsigPaths";
     private static final String KEY_DEBUGLEVEL = "debugLevel";
     private static final String KEY_MEMORY_MIB = "memoryMib";
 
     // Paths to the APK file of this application.
     private final @NonNull String mApkPath;
     private final @NonNull Signature[] mCerts;
+
+    // An apk represents an apk - idsig pair.
+    private static class Apk {
+        final String mApk;
+        final String mIdsig;
+
+        Apk(@NonNull String apk, @NonNull String idsig) {
+            mApk = apk;
+            mIdsig = idsig;
+        }
+    }
+
+    // Paths to additional APK files to be passed to the VM.
+    private final @NonNull List<Apk> mAdditionalApks;
 
     /** A debug level defines the set of debug features that the VM can be configured to. */
     public enum DebugLevel {
@@ -95,6 +111,7 @@ public final class VirtualMachineConfig {
             @NonNull String apkPath,
             @NonNull Signature[] certs,
             @NonNull String payloadConfigPath,
+            @NonNull List<Apk> additionalApks,
             DebugLevel debugLevel,
             int memoryMib) {
         mApkPath = apkPath;
@@ -102,6 +119,7 @@ public final class VirtualMachineConfig {
         mPayloadConfigPath = payloadConfigPath;
         mDebugLevel = debugLevel;
         mMemoryMib = memoryMib;
+        mAdditionalApks = additionalApks;
     }
 
     /** Loads a config from a stream, for example a file. */
@@ -124,6 +142,21 @@ public final class VirtualMachineConfig {
         for (String s : certStrings) {
             certList.add(new Signature(s));
         }
+        final String[] additionalApkPaths = b.getStringArray(KEY_ADDITIONAL_APK_PATHS);
+        List<Apk> apks = new ArrayList<>();
+        if (additionalApkPaths != null && additionalApkPaths.length > 0) {
+            final String[] additionalIdsigPaths = b.getStringArray(KEY_ADDITIONAL_IDSIG_PATHS);
+            if (additionalIdsigPaths == null
+                    || additionalApkPaths.length != additionalIdsigPaths.length) {
+                throw new VirtualMachineException(
+                        "Mismatch between additional apks and additional idsigs");
+            }
+
+            for (int i = 0; i < additionalApkPaths.length; ++i) {
+                apks.add(new Apk(additionalApkPaths[i], additionalIdsigPaths[i]));
+            }
+        }
+
         Signature[] certs = certList.toArray(new Signature[0]);
         final String payloadConfigPath = b.getString(KEY_PAYLOADCONFIGPATH);
         if (payloadConfigPath == null) {
@@ -131,7 +164,8 @@ public final class VirtualMachineConfig {
         }
         final DebugLevel debugLevel = DebugLevel.values()[b.getInt(KEY_DEBUGLEVEL)];
         final int memoryMib = b.getInt(KEY_MEMORY_MIB);
-        return new VirtualMachineConfig(apkPath, certs, payloadConfigPath, debugLevel, memoryMib);
+        return new VirtualMachineConfig(
+                apkPath, certs, payloadConfigPath, apks, debugLevel, memoryMib);
     }
 
     /** Persists this config to a stream, for example a file. */
@@ -150,6 +184,14 @@ public final class VirtualMachineConfig {
         if (mMemoryMib > 0) {
             b.putInt(KEY_MEMORY_MIB, mMemoryMib);
         }
+        List<String> apks = new ArrayList<>();
+        List<String> idsigs = new ArrayList<>();
+        for (Apk apk : mAdditionalApks) {
+            apks.add(apk.mApk);
+            idsigs.add(apk.mIdsig);
+        }
+        b.putStringArray(KEY_ADDITIONAL_APK_PATHS, apks.toArray(new String[0]));
+        b.putStringArray(KEY_ADDITIONAL_IDSIG_PATHS, idsigs.toArray(new String[0]));
         b.writeToStream(output);
     }
 
@@ -207,6 +249,8 @@ public final class VirtualMachineConfig {
         private String mPayloadConfigPath;
         private DebugLevel mDebugLevel;
         private int mMemoryMib;
+        private List<Apk> mAdditionalApks = new ArrayList<>();
+
         // TODO(jiyong): add more items like # of cpu, size of ram, debuggability, etc.
 
         /** Creates a builder for the given context (APK), and the payload config file in APK. */
@@ -231,6 +275,12 @@ public final class VirtualMachineConfig {
             return this;
         }
 
+        /** Adds an additional apk to be passed to the VM. */
+        public Builder addApk(@NonNull String apkPath, @NonNull String idsigPath) {
+            mAdditionalApks.add(new Apk(apkPath, idsigPath));
+            return this;
+        }
+
         /** Builds an immutable {@link VirtualMachineConfig} */
         public @NonNull VirtualMachineConfig build() {
             final String apkPath = mContext.getPackageCodePath();
@@ -249,7 +299,7 @@ public final class VirtualMachineConfig {
             }
 
             return new VirtualMachineConfig(
-                    apkPath, certs, mPayloadConfigPath, mDebugLevel, mMemoryMib);
+                    apkPath, certs, mPayloadConfigPath, mAdditionalApks, mDebugLevel, mMemoryMib);
         }
     }
 }
