@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e955c0c0_3c4dd619",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-08T04:07:28Z",
+      "side": 1,
+      "message": "I\u0027m working on making a CI test to test if sign_virt_apex touches(re-signs) all files that it needs to.",
+      "revId": "832d11d478e36a9f1a08f6caad57993dabeffa30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18ed9acc_3d0384f0",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-08T04:07:28Z",
+      "side": 1,
+      "message": "When resigning vbmeta_bootconfig, pubkeys of chained partitions are replaced with new pubkeys (passed via chained_partitions param) as well.",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 56
+      },
+      "revId": "832d11d478e36a9f1a08f6caad57993dabeffa30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
