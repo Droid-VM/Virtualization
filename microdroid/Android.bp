@@ -432,14 +432,6 @@ prebuilt_etc {
 prebuilt_etc {
     name: "microdroid_bootloader",
     src: ":microdroid_bootloader_gen",
-    arch: {
-        x86_64: {
-            // For unknown reason, the signed bootloader doesn't work on x86_64. Until the problem
-            // is fixed, let's use the unsigned bootloader for the architecture.
-            // TODO(b/185115783): remove this
-            src: ":microdroid_crosvm_bootloader",
-        },
-    },
     filename: "microdroid_bootloader",
 }
 
