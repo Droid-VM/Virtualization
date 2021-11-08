@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-use std::collections::HashMap;
+use std::collections::{hash_map, HashMap};
 use std::io;
 use std::path::{Path, PathBuf};
 
@@ -104,7 +104,8 @@ impl RemoteDirEditor {
 
     fn validate_argument(&self, basename: &Path) -> io::Result<()> {
         // Kernel should only give us a basename.
-        debug_assert!(basename.parent().is_none());
+        debug_assert!(validate_basename(basename).is_ok());
+
         if self.entries.contains_key(basename) {
             Err(io::Error::from_raw_os_error(libc::EEXIST))
         } else if self.entries.len() >= MAX_ENTRIES.into() {
@@ -112,6 +113,39 @@ impl RemoteDirEditor {
         } else {
             Ok(())
         }
+    }
+}
+
+/// An in-memory directory representation of a directory structure.
+pub struct InMemoryDir(HashMap<PathBuf, Inode>);
+
+impl InMemoryDir {
+    /// Creates an empty instance of `InMemoryDir`.
+    pub fn new() -> Self {
+        // Hash map is empty since "." and ".." are excluded in entries.
+        InMemoryDir(HashMap::new())
+    }
+
+    /// Returns the number of entries in the directory (not including "." and "..").
+    pub fn number_of_entries(&self) -> u16 {
+        self.0.len() as u16
+    }
+
+    /// Adds an entry (name and the inode number) to the directory. Fails if already exists.
+    pub fn add_entry(&mut self, basename: &Path, inode: Inode) -> io::Result<()> {
+        validate_basename(basename)?;
+
+        if let hash_map::Entry::Vacant(entry) = self.0.entry(basename.to_path_buf()) {
+            entry.insert(inode);
+            Ok(())
+        } else {
+            Err(io::Error::from_raw_os_error(libc::EEXIST))
+        }
+    }
+
+    /// Looks up an entry inode by name. `None` if not found.
+    pub fn lookup_inode(&self, basename: &Path) -> Option<Inode> {
+        self.0.get(basename).copied()
     }
 }
 
