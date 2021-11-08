@@ -1,7 +1,7 @@
-mod remote_dir;
+mod dir;
 mod remote_file;
 
-pub use remote_dir::RemoteDirEditor;
+pub use dir::{InMemoryDir, RemoteDirEditor};
 pub use remote_file::{RemoteFileEditor, RemoteFileReader, RemoteMerkleTreeReader};
 
 use binder::unstable_api::{new_spibinder, AIBinder};
