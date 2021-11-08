@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b77bcef8_0f6e1312",
+        "filename": "apex/replace_bytes.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-08T09:14:17Z",
+      "side": 1,
+      "message": "Added error message",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 44
+      },
+      "revId": "d35952e0f680fe124f50199896a2757859efe958",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a67c135a_e07bfe26",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-08T09:14:17Z",
+      "side": 1,
+      "message": "Added `if` to handle \"empty\" bootloader for x86 and arm. This fixes the previous build error.",
+      "range": {
+        "startLine": 485,
+        "startChar": 0,
+        "endLine": 485,
+        "endChar": 62
+      },
+      "revId": "d35952e0f680fe124f50199896a2757859efe958",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
