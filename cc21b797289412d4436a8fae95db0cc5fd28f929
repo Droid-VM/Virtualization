@@ -111,6 +111,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "537d12eb_ad316f11",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-09T05:23:26Z",
+      "side": 1,
+      "message": "idsig is nothing to do with sealing CDI. It is a means to carry the merkle tree for an APK. The file can be created at runtime by virtualizationservice.",
+      "parentUuid": "b05e82b1_8c817eef",
+      "range": {
+        "startLine": 279,
+        "startChar": 54,
+        "endLine": 279,
+        "endChar": 80
+      },
+      "revId": "cc21b797289412d4436a8fae95db0cc5fd28f929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a62f9085_777b86a8",
