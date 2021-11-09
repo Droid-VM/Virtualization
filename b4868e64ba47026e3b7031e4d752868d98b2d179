@@ -22,6 +22,30 @@
       },
       "revId": "b4868e64ba47026e3b7031e4d752868d98b2d179",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4113bf77_38b43a16",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-09T08:43:20Z",
+      "side": 1,
+      "message": "I had to fully describe the type. Without this,\n\n39 | const MICRODROID_REQUIRED_APEXES \u003d [\"com.android.os.statsd\"];\n   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^ help: provide a type for the constant: `MICRODROID_REQUIRED_APEXES: [\u0026str; 1]`\n   \n   \n39 | const MICRODROID_REQUIRED_APEXES: [\u0026str] \u003d [\"com.android.os.statsd\"];\n   |                                   ^^^^^^ doesn\u0027t have a size known at compile-time",
+      "parentUuid": "c33f467d_bf532d91",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 72
+      },
+      "revId": "b4868e64ba47026e3b7031e4d752868d98b2d179",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
