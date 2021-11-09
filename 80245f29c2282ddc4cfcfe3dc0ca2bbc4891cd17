@@ -70,6 +70,30 @@
       },
       "revId": "80245f29c2282ddc4cfcfe3dc0ca2bbc4891cd17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59340257_81d4cc0f",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-09T12:54:46Z",
+      "side": 1,
+      "message": "More discussion : https://buganizer.corp.google.com/issues/193504286#comment11\n\nWhen that happens it can be detected easily (CI test will detect) and fixed by changing (known) pubkey with another one. So, I think this is acceptable.",
+      "parentUuid": "f47103cc_d4f69a7f",
+      "range": {
+        "startLine": 475,
+        "startChar": 0,
+        "endLine": 475,
+        "endChar": 62
+      },
+      "revId": "80245f29c2282ddc4cfcfe3dc0ca2bbc4891cd17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
