@@ -135,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab17cf6a_7b3ec82a",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-09T16:27:35Z",
+      "side": 1,
+      "message": "Right, idsig is only an optimization in a sense.  What needs to contribute to the CDI is the APK(s) themselves.  Is this work done?  Are we using some hash from APK v2/v3?  We can talk about this in the next sync-up.\n\n(Inseob, you can ignore my comment here about CDI. It\u0027s irrelevant to this change.  Sorry for hijacking this comment thread :)",
+      "parentUuid": "537d12eb_ad316f11",
+      "range": {
+        "startLine": 279,
+        "startChar": 54,
+        "endLine": 279,
+        "endChar": 80
+      },
+      "revId": "cc21b797289412d4436a8fae95db0cc5fd28f929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a62f9085_777b86a8",
