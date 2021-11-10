@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5a99f18_fbdfe060",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-10T18:32:49Z",
+      "side": 1,
+      "message": "Do you know if it\u0027s possible/easy to put the numbers on some dashboard?",
+      "revId": "39291273370a61b58503afd1292b28dc354f1b93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57c96307_220275a3",
@@ -19,6 +36,29 @@
         "startChar": 0,
         "endLine": 24,
         "endChar": 19
+      },
+      "revId": "39291273370a61b58503afd1292b28dc354f1b93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "097645bb_361e8c7f",
+        "filename": "tests/benchmark/assets/vm_config.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-10T18:32:49Z",
+      "side": 1,
+      "message": "How about this?  Then you don\u0027t need the code and the build rule.\n\n \"type\": \"executable\",\n \"command\": \"/system/bin/true\",",
+      "range": {
+        "startLine": 6,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 34
       },
       "revId": "39291273370a61b58503afd1292b28dc354f1b93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -59,6 +99,75 @@
         "startChar": 9,
         "endLine": 7,
         "endChar": 12
+      },
+      "revId": "39291273370a61b58503afd1292b28dc354f1b93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88af83a2_cb5f5755",
+        "filename": "tests/benchmark/benchmark_example.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-10T18:32:49Z",
+      "side": 1,
+      "message": "optional: you can now use `open_then_run --open-ro 3:/data/locla/tmp/testcase ... --open-rw 7:/data/local/tmp/testcase2 -- /apex/.../fd_server ...`, but there might not be a clear advantage in this case.  I added it to support opening directories.",
+      "range": {
+        "startLine": 18,
+        "startChar": 12,
+        "endLine": 18,
+        "endChar": 174
+      },
+      "revId": "39291273370a61b58503afd1292b28dc354f1b93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b526e056_1cad88f1",
+        "filename": "tests/benchmark/fs_benchmark.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-10T18:32:49Z",
+      "side": 1,
+      "message": "Maybe add a comment here or somewhere to say that the actual host file can also be in the host\u0027s cache.  The test currently runs after the host file is created (or accessed after the previous test), which is fine.  It\u0027s be interesting to see the impact when the host file is evicted from the cache, but that doesn\u0027t need to be included in this change.",
+      "range": {
+        "startLine": 47,
+        "startChar": 5,
+        "endLine": 47,
+        "endChar": 14
+      },
+      "revId": "39291273370a61b58503afd1292b28dc354f1b93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92854a26_684ed81d",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/TestActivity.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-10T18:32:49Z",
+      "side": 1,
+      "message": "nit: not necessary?",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 25,
+        "endChar": 5
       },
       "revId": "39291273370a61b58503afd1292b28dc354f1b93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
