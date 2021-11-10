@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1bb7152_58e02351",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-10T07:19:35Z",
+      "side": 1,
+      "message": "repo hook forced me to use this convention for internal fields.",
+      "parentUuid": "ac4695b5_55a3c685",
+      "range": {
+        "startLine": 63,
+        "startChar": 21,
+        "endLine": 63,
+        "endChar": 25
+      },
+      "revId": "cc21b797289412d4436a8fae95db0cc5fd28f929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60802e1a_0b06d172",
@@ -154,6 +178,30 @@
         "startChar": 54,
         "endLine": 279,
         "endChar": 80
+      },
+      "revId": "cc21b797289412d4436a8fae95db0cc5fd28f929",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "247255e0_730b2439",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-10T07:19:35Z",
+      "side": 1,
+      "message": "Then the list of APKs is fixed and immutable, right? What if an app wants to pass APKs dynamically?",
+      "parentUuid": "60802e1a_0b06d172",
+      "range": {
+        "startLine": 279,
+        "startChar": 0,
+        "endLine": 279,
+        "endChar": 83
       },
       "revId": "cc21b797289412d4436a8fae95db0cc5fd28f929",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
