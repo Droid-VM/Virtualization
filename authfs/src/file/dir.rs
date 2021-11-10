@@ -19,7 +19,7 @@ use std::io;
 use std::path::{Path, PathBuf};
 
 use super::remote_file::RemoteFileEditor;
-use super::{VirtFdService, VirtFdServiceStatus};
+use super::{validate_basename, VirtFdService, VirtFdServiceStatus};
 use crate::fsverity::VerifiedFileEditor;
 use crate::fusefs::Inode;
 
