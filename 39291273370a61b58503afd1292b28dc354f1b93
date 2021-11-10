@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57c96307_220275a3",
+        "filename": "tests/benchmark/AndroidManifest.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-10T10:07:47Z",
+      "side": 1,
+      "message": "This part is not needed because this is launched via `vm`.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 19
+      },
+      "revId": "39291273370a61b58503afd1292b28dc354f1b93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd03850d_18b1ad70",
+        "filename": "tests/benchmark/benchmark_example.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-10T10:07:47Z",
+      "side": 1,
+      "message": "Please group the commands and add some comments",
+      "revId": "39291273370a61b58503afd1292b28dc354f1b93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4bfb2bd_c23f4804",
+        "filename": "tests/benchmark/benchmark_example.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-10T10:07:47Z",
+      "side": 1,
+      "message": "Use `set -e` if you want to stop on first error",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 12
+      },
+      "revId": "39291273370a61b58503afd1292b28dc354f1b93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
