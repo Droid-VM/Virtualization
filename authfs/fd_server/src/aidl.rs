@@ -351,10 +351,3 @@ fn open_readonly_at(dir_fd: RawFd, path: &Path) -> nix::Result<File> {
     let new_file = unsafe { File::from_raw_fd(new_fd) };
     Ok(new_file)
 }
-
-fn with_extra_file_name(path: &Path, extra_name: &str) -> BinderResult<PathBuf> {
-    let mut new_basename =
-        path.file_name().ok_or_else(|| new_errno_error(Errno::EINVAL))?.to_os_string();
-    new_basename.push(extra_name);
-    Ok(path.with_file_name(&new_basename))
-}
