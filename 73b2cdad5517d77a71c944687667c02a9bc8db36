@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b42ebdf_fb9e6be6",
+        "filename": "authfs/src/file/remote_dir.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-11T11:52:03Z",
+      "side": 1,
+      "message": "No need to pass inodes by reference, they\u0027re small and Copy",
+      "range": {
+        "startLine": 65,
+        "startChar": 15,
+        "endLine": 65,
+        "endChar": 21
+      },
+      "revId": "73b2cdad5517d77a71c944687667c02a9bc8db36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3698df1f_6189589c",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-11T11:52:03Z",
+      "side": 1,
+      "message": "I think SeqCst is much stronger than you need.\nIndeed all you need here is atomicity - you don\u0027t care about the order of this increment wrt anything else - so I think Relaxed is enough. See e.g. https://en.cppreference.com/w/cpp/atomic/memory_order \"Typical use for relaxed memory ordering is incrementing counters, [...]\".\n\n(But I\u0027m also wary of accidentally introducing a subtle bug.)",
+      "range": {
+        "startLine": 144,
+        "startChar": 63,
+        "endLine": 144,
+        "endChar": 69
+      },
+      "revId": "73b2cdad5517d77a71c944687667c02a9bc8db36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "269839a8_67f40b6f",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-11T11:52:03Z",
+      "side": 1,
+      "message": "Is this comment still accurate?\n(It should mention inode rather than fd)",
+      "range": {
+        "startLine": 151,
+        "startChar": 3,
+        "endLine": 154,
+        "endChar": 44
+      },
+      "revId": "73b2cdad5517d77a71c944687667c02a9bc8db36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
