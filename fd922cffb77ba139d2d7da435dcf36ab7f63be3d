@@ -16,6 +16,40 @@
       "message": "Looks like this broke the build:\n\npackages/modules/Virtualization/tests/benchmark/fs_benchmark.cpp:175:64: error: format specifies type \u0027size_t\u0027 (aka \u0027unsigned int\u0027) but the argument has type \u0027std::uint64_t\u0027 (aka \u0027unsigned long long\u0027) [-Werror,-Wformat]\nstd::printf(\"total %zu bytes, took %.3g seconds \", res-\u003esize, elapsed_time);",
       "revId": "fd922cffb77ba139d2d7da435dcf36ab7f63be3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62def65d_ddec22f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2021-11-11T15:05:16Z",
+      "side": 1,
+      "message": "It looks like this is in the process of being reverted, so I\u0027m not going to put up a follow-up fix CL for this and add to the noise.  But when we reland this CL, perhaps we should make the change I suggest below, just to be safe.",
+      "revId": "fd922cffb77ba139d2d7da435dcf36ab7f63be3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55b44df7_9fb3f27b",
+        "filename": "tests/benchmark/fs_benchmark.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2021-11-11T15:05:16Z",
+      "side": 1,
+      "message": "Perhaps this is highly unlikely, but I think we should change this to something like:\n\n  const char *unit \u003d \"bytes\";\n\nso if \u0027speed\u0027 is less than 1000, we don\u0027t use uninitialized stack memory as a pointer in our printf() call below.",
+      "revId": "fd922cffb77ba139d2d7da435dcf36ab7f63be3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
