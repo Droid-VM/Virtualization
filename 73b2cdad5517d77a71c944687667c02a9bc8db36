@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f38d4d0_b5a2cc87",
+        "filename": "authfs/src/file/remote_dir.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-11T18:43:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b42ebdf_fb9e6be6",
+      "range": {
+        "startLine": 65,
+        "startChar": 15,
+        "endLine": 65,
+        "endChar": 21
+      },
+      "revId": "73b2cdad5517d77a71c944687667c02a9bc8db36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3698df1f_6189589c",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f373a8c0_3eb09fee",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-11T18:43:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3698df1f_6189589c",
+      "range": {
+        "startLine": 144,
+        "startChar": 63,
+        "endLine": 144,
+        "endChar": 69
+      },
+      "revId": "73b2cdad5517d77a71c944687667c02a9bc8db36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "269839a8_67f40b6f",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-11-11T11:52:03Z",
       "side": 1,
       "message": "Is this comment still accurate?\n(It should mention inode rather than fd)",
+      "range": {
+        "startLine": 151,
+        "startChar": 3,
+        "endLine": 154,
+        "endChar": 44
+      },
+      "revId": "73b2cdad5517d77a71c944687667c02a9bc8db36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0012060_e92d81cb",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-11T18:43:49Z",
+      "side": 1,
+      "message": "Done. Actually this should be unreachable.  We\u0027re only inserting the inode here (besides the initialization) right after the new inode allocation.",
+      "parentUuid": "269839a8_67f40b6f",
       "range": {
         "startLine": 151,
         "startChar": 3,
