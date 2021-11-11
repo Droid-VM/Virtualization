@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "864f17c9_5323e29e",
+        "filename": "authfs/src/file/dir.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-11T18:43:58Z",
+      "side": 1,
+      "message": "I see.  Let me think about it a bit more.  I may send a follow-up CL.",
+      "parentUuid": "ed5fcfe9_15a0e4e9",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 48
+      },
+      "revId": "65d6e1299e52dc46a7689148ed23c4dc0685c76f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15f8682c_98654657",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-11-11T12:15:09Z",
       "side": 1,
       "message": "Should you prevent adding an entry if we\u0027re about to overflow 16 bits?\nOr just don\u0027t do that?",
+      "range": {
+        "startLine": 131,
+        "startChar": 20,
+        "endLine": 131,
+        "endChar": 27
+      },
+      "revId": "65d6e1299e52dc46a7689148ed23c4dc0685c76f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdf5c85b_a3cac45c",
+        "filename": "authfs/src/file/dir.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-11T18:43:58Z",
+      "side": 1,
+      "message": "Now limited to MAX_ENTRIES",
+      "parentUuid": "15f8682c_98654657",
       "range": {
         "startLine": 131,
         "startChar": 20,
@@ -64,6 +112,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "009ea8f5_2efabd05",
+        "filename": "authfs/src/file/dir.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-11T18:43:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0f11522_f45cd4b7",
+      "revId": "65d6e1299e52dc46a7689148ed23c4dc0685c76f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e83ec38_66a5d1ff",
@@ -77,6 +143,30 @@
       "writtenOn": "2021-11-11T12:15:09Z",
       "side": 1,
       "message": "Does anything enforce this?",
+      "range": {
+        "startLine": 89,
+        "startChar": 54,
+        "endLine": 89,
+        "endChar": 78
+      },
+      "revId": "65d6e1299e52dc46a7689148ed23c4dc0685c76f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb835e65_e8111067",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-11T18:43:58Z",
+      "side": 1,
+      "message": "I was thinking to implement a build pattern, but decided to keep the change small and simple(r) for the time being.  Left a TODO.",
+      "parentUuid": "6e83ec38_66a5d1ff",
       "range": {
         "startLine": 89,
         "startChar": 54,
@@ -110,6 +200,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3489a31e_c85804be",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-11T18:43:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "795af065_1c878338",
+      "range": {
+        "startLine": 113,
+        "startChar": 60,
+        "endLine": 113,
+        "endChar": 77
+      },
+      "revId": "65d6e1299e52dc46a7689148ed23c4dc0685c76f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9031453_ffde93e6",
@@ -133,6 +247,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56655b25_fc559765",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-11T18:43:58Z",
+      "side": 1,
+      "message": "It happens that the dir method name is the same, but their types are different.",
+      "parentUuid": "b9031453_ffde93e6",
+      "range": {
+        "startLine": 383,
+        "startChar": 23,
+        "endLine": 384,
+        "endChar": 21
+      },
+      "revId": "65d6e1299e52dc46a7689148ed23c4dc0685c76f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d28fff67_595ce625",
@@ -146,6 +284,30 @@
       "writtenOn": "2021-11-11T12:15:09Z",
       "side": 1,
       "message": "Could you pass \u0026authfs here, which would guarantee no further mutation?",
+      "range": {
+        "startLine": 221,
+        "startChar": 25,
+        "endLine": 221,
+        "endChar": 31
+      },
+      "revId": "65d6e1299e52dc46a7689148ed23c4dc0685c76f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "335ec175_082e5ce2",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-11T18:43:58Z",
+      "side": 1,
+      "message": "I\u0027d prefer to delegate the decision to loop_forever, which already uses it immutably.",
+      "parentUuid": "d28fff67_595ce625",
       "range": {
         "startLine": 221,
         "startChar": 25,
