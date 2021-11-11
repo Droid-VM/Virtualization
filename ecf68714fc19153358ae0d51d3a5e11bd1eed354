@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfd2c573_81a08971",
+        "filename": "authfs/src/file/dir.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-11T18:43:39Z",
+      "side": 1,
+      "message": "Fixed. It\u0027s a rebase mistake.",
+      "parentUuid": "01620074_d9a57ec0",
+      "range": {
+        "startLine": 22,
+        "startChar": 12,
+        "endLine": 22,
+        "endChar": 29
+      },
+      "revId": "ecf68714fc19153358ae0d51d3a5e11bd1eed354",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d454ca4b_8eb8dbec",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1794fa53_f0fabc9a",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-11T18:43:39Z",
+      "side": 1,
+      "message": "Yes, because this is done only during initialization.  A read-only directory then become immutable.  I was also hoping to address this with a builder pattern somehow, which didn\u0027t happen (yet).",
+      "parentUuid": "d454ca4b_8eb8dbec",
+      "range": {
+        "startLine": 135,
+        "startChar": 24,
+        "endLine": 135,
+        "endChar": 78
+      },
+      "revId": "ecf68714fc19153358ae0d51d3a5e11bd1eed354",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40369498_bef83c3d",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-11-11T12:36:59Z",
       "side": 1,
       "message": "Combine with VerifiedNewDirectory?",
+      "range": {
+        "startLine": 384,
+        "startChar": 11,
+        "endLine": 384,
+        "endChar": 43
+      },
+      "revId": "ecf68714fc19153358ae0d51d3a5e11bd1eed354",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37e6b744_aa16b1e3",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-11T18:43:39Z",
+      "side": 1,
+      "message": "dir types are different",
+      "parentUuid": "40369498_bef83c3d",
       "range": {
         "startLine": 384,
         "startChar": 11,
