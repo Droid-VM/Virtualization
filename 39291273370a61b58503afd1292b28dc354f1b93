@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c069678b_baa10673",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-11T08:42:25Z",
+      "side": 1,
+      "message": "Hmm... sorry, I\u0027m not sure. Maybe worth filing a new bug and asking to test experts.",
+      "parentUuid": "a5a99f18_fbdfe060",
+      "revId": "39291273370a61b58503afd1292b28dc354f1b93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57c96307_220275a3",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-11-10T10:07:47Z",
       "side": 1,
       "message": "This part is not needed because this is launched via `vm`.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 19
+      },
+      "revId": "39291273370a61b58503afd1292b28dc354f1b93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb4692f8_6fda28e9",
+        "filename": "tests/benchmark/AndroidManifest.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-11T08:42:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57c96307_220275a3",
       "range": {
         "startLine": 18,
         "startChar": 0,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "155bf91c_ccf44066",
+        "filename": "tests/benchmark/assets/vm_config.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-11T08:42:25Z",
+      "side": 1,
+      "message": "Transition from microdroid_manager to toolbox isn\u0027t allowed for now.",
+      "parentUuid": "097645bb_361e8c7f",
+      "range": {
+        "startLine": 6,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "39291273370a61b58503afd1292b28dc354f1b93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd03850d_18b1ad70",
@@ -81,6 +147,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1e51b3c_95121cf1",
+        "filename": "tests/benchmark/benchmark_example.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-11T08:42:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd03850d_18b1ad70",
+      "revId": "39291273370a61b58503afd1292b28dc354f1b93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4bfb2bd_c23f4804",
@@ -94,6 +178,30 @@
       "writtenOn": "2021-11-10T10:07:47Z",
       "side": 1,
       "message": "Use `set -e` if you want to stop on first error",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 12
+      },
+      "revId": "39291273370a61b58503afd1292b28dc354f1b93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f075e1b9_125d79b5",
+        "filename": "tests/benchmark/benchmark_example.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-11T08:42:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4bfb2bd_c23f4804",
       "range": {
         "startLine": 7,
         "startChar": 9,
@@ -127,6 +235,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ca68e5f_a81864ff",
+        "filename": "tests/benchmark/benchmark_example.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-11T08:42:25Z",
+      "side": 1,
+      "message": "Thanks for the information. I\u0027ll consider it when I need to add directory support.",
+      "parentUuid": "88af83a2_cb5f5755",
+      "range": {
+        "startLine": 18,
+        "startChar": 12,
+        "endLine": 18,
+        "endChar": 174
+      },
+      "revId": "39291273370a61b58503afd1292b28dc354f1b93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b526e056_1cad88f1",
@@ -150,6 +282,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8771a6e3_3e9196bc",
+        "filename": "tests/benchmark/fs_benchmark.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-11T08:42:25Z",
+      "side": 1,
+      "message": "I added a TODO here.",
+      "parentUuid": "b526e056_1cad88f1",
+      "range": {
+        "startLine": 47,
+        "startChar": 5,
+        "endLine": 47,
+        "endChar": 14
+      },
+      "revId": "39291273370a61b58503afd1292b28dc354f1b93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92854a26_684ed81d",
@@ -163,6 +319,30 @@
       "writtenOn": "2021-11-10T18:32:49Z",
       "side": 1,
       "message": "nit: not necessary?",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 25,
+        "endChar": 5
+      },
+      "revId": "39291273370a61b58503afd1292b28dc354f1b93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c02c49ab_2b004c9a",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/TestActivity.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-11T08:42:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92854a26_684ed81d",
       "range": {
         "startLine": 22,
         "startChar": 4,
