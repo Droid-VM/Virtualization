@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b085185a_f9b86534",
+        "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-11T18:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c0ce394_4c33bf46",
+      "range": {
+        "startLine": 68,
+        "startChar": 31,
+        "endLine": 68,
+        "endChar": 37
+      },
+      "revId": "3180e16c6299825c029e68e5fe948b1b86ec3ec1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58c9d7e2_0016b282",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-11-11T12:27:49Z",
       "side": 1,
       "message": "?",
+      "range": {
+        "startLine": 280,
+        "startChar": 63,
+        "endLine": 280,
+        "endChar": 84
+      },
+      "revId": "3180e16c6299825c029e68e5fe948b1b86ec3ec1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56c90cbd_7f3b89a2",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-11T18:44:07Z",
+      "side": 1,
+      "message": "Left a TODO and remove the .fsv_meta use here, just because it\u0027s not there yet.",
+      "parentUuid": "58c9d7e2_0016b282",
       "range": {
         "startLine": 280,
         "startChar": 63,
