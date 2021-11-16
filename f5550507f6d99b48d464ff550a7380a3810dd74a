@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1277067b_0aed75ca",
+        "filename": "compos/apex/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-11-16T18:03:08Z",
+      "side": 1,
+      "message": "I would not recommend using this, as it needs to be duplicated on whatever prebuilt apex rules are created in the future. We\u0027ve wasted huge amounts of time on the sort of problems this brings",
+      "revId": "f5550507f6d99b48d464ff550a7380a3810dd74a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8da80f5a_b40979ee",
+        "filename": "compos/apex/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-11-16T18:03:08Z",
+      "side": 1,
+      "message": "Do you need this when you have the fragment? I think not",
+      "revId": "f5550507f6d99b48d464ff550a7380a3810dd74a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6bb3428_1ec3537c",
+        "filename": "compos/service/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-11-16T18:03:08Z",
+      "side": 1,
+      "message": "Maybe file a suitable bug to track the cleanup of this, if you are planning on becoming updatable.",
+      "range": {
+        "startLine": 31,
+        "startChar": 6,
+        "endLine": 33,
+        "endChar": 20
+      },
+      "revId": "f5550507f6d99b48d464ff550a7380a3810dd74a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51a33c70_da4c08cf",
+        "filename": "compos/service/api/system-server-current.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2021-11-16T18:03:08Z",
+      "side": 1,
+      "message": "Sounded to me on the email thread like you weren\u0027t going to add any APIs for now?",
+      "revId": "f5550507f6d99b48d464ff550a7380a3810dd74a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
