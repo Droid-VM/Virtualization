@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d493defd_bdf8c6aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-17T17:02:49Z",
+      "side": 1,
+      "message": "Yeah, I did consider that, but without the code changes it is hard to tell if the build changes are doing the right thing. (I\u0027ve had lots of variants that build, but don\u0027t quite build the right things.)\n\nI\u0027ve now included the bare minimum of the code, with the real implementation to follow.",
+      "parentUuid": "c2d78cfa_aaed7ded",
+      "revId": "f5550507f6d99b48d464ff550a7380a3810dd74a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1277067b_0aed75ca",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "728eb6e4_a2cd4907",
+        "filename": "compos/apex/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-17T17:02:49Z",
+      "side": 1,
+      "message": "Oh, interesting. Done.",
+      "parentUuid": "1277067b_0aed75ca",
+      "revId": "f5550507f6d99b48d464ff550a7380a3810dd74a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8da80f5a_b40979ee",
@@ -48,6 +84,24 @@
       "writtenOn": "2021-11-16T18:03:08Z",
       "side": 1,
       "message": "Do you need this when you have the fragment? I think not",
+      "revId": "f5550507f6d99b48d464ff550a7380a3810dd74a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63a50ad0_8a470a4a",
+        "filename": "compos/apex/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-17T17:02:49Z",
+      "side": 1,
+      "message": "You are quite correct.",
+      "parentUuid": "8da80f5a_b40979ee",
       "revId": "f5550507f6d99b48d464ff550a7380a3810dd74a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -75,6 +129,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfdf1749_3e99650c",
+        "filename": "compos/service/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-17T17:02:49Z",
+      "side": 1,
+      "message": "Yeah, I\u0027ve started collecting things that are needed for updatability in b/206618706.",
+      "parentUuid": "c6bb3428_1ec3537c",
+      "range": {
+        "startLine": 31,
+        "startChar": 6,
+        "endLine": 33,
+        "endChar": 20
+      },
+      "revId": "f5550507f6d99b48d464ff550a7380a3810dd74a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51a33c70_da4c08cf",
@@ -88,6 +166,24 @@
       "writtenOn": "2021-11-16T18:03:08Z",
       "side": 1,
       "message": "Sounded to me on the email thread like you weren\u0027t going to add any APIs for now?",
+      "revId": "f5550507f6d99b48d464ff550a7380a3810dd74a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93984df7_a40ca4c3",
+        "filename": "compos/service/api/system-server-current.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-17T17:02:49Z",
+      "side": 1,
+      "message": "Yes, this all needs to go.",
+      "parentUuid": "51a33c70_da4c08cf",
       "revId": "f5550507f6d99b48d464ff550a7380a3810dd74a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
