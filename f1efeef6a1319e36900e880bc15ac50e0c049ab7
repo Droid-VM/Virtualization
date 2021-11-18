@@ -3,6 +3,29 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "12a1ce4b_40b52f1e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-18T10:08:42Z",
+      "side": 1,
+      "message": "I didn\u0027t know about that!",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 51
+      },
+      "revId": "f1efeef6a1319e36900e880bc15ac50e0c049ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e821e400_6b716070",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -14,6 +37,52 @@
       "writtenOn": "2021-11-18T01:58:36Z",
       "side": 1,
       "message": "PTAL.  This is an API boundary between CompOS and Virt.  I\u0027m not proud of the current definition, and this API is something I want to revisit before making the APEX updatable.  Anyway, happy to hear any suggestions.",
+      "revId": "f1efeef6a1319e36900e880bc15ac50e0c049ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bab006d0_7b9f543e",
+        "filename": "authfs/aidl/com/android/virt/fs/AuthFsConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-18T10:08:42Z",
+      "side": 1,
+      "message": "I suspect the extraneous * in this comment and the ones below was introduced by accident.",
+      "range": {
+        "startLine": 32,
+        "startChar": 11,
+        "endLine": 32,
+        "endChar": 30
+      },
+      "revId": "f1efeef6a1319e36900e880bc15ac50e0c049ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89728d8d_7109f99d",
+        "filename": "authfs/service/src/authfs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-18T10:08:42Z",
+      "side": 1,
+      "message": "Was this temporary, or do you want to keep it?",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 42
+      },
       "revId": "f1efeef6a1319e36900e880bc15ac50e0c049ab7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
