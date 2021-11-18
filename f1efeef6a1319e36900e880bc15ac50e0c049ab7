@@ -64,6 +64,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49823214_d8d365ac",
+        "filename": "authfs/aidl/com/android/virt/fs/AuthFsConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-18T15:46:22Z",
+      "side": 1,
+      "message": "oops, done",
+      "parentUuid": "bab006d0_7b9f543e",
+      "range": {
+        "startLine": 32,
+        "startChar": 11,
+        "endLine": 32,
+        "endChar": 30
+      },
+      "revId": "f1efeef6a1319e36900e880bc15ac50e0c049ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89728d8d_7109f99d",
@@ -77,6 +101,30 @@
       "writtenOn": "2021-11-18T10:08:42Z",
       "side": 1,
       "message": "Was this temporary, or do you want to keep it?",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 42
+      },
+      "revId": "f1efeef6a1319e36900e880bc15ac50e0c049ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95e53f70_c2f68ae9",
+        "filename": "authfs/service/src/authfs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-18T15:46:22Z",
+      "side": 1,
+      "message": "I\u0027d keep it.  It\u0027s printed only with --debug.",
+      "parentUuid": "89728d8d_7109f99d",
       "range": {
         "startLine": 160,
         "startChar": 0,
