@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-use android_system_composd::binder::Result as BinderResult;
-use anyhow::Result;
+use android_system_composd::binder::Status;
 use binder_common::new_binder_service_specific_error;
 use log::error;
 
-pub fn to_binder_result<T>(result: Result<T>) -> BinderResult<T> {
-    result.map_err(|e| {
-        let message = format!("{:?}", e);
-        error!("Returning binder error: {}", &message);
-        new_binder_service_specific_error(-1, message)
-    })
+pub fn to_binder_error_with_log<T: std::fmt::Debug>(error: T) -> Status {
+    let message = format!("{:?}", error);
+    error!("Returning binder error: {}", &message);
+    new_binder_service_specific_error(-1, message)
 }
