@@ -67,6 +67,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2bc41987_50783670",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-19T05:59:58Z",
+      "side": 1,
+      "message": "I see the following line in VirtualMachineConfig.java.\n\n            final String apkPath \u003d mContext.getPackageCodePath();",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 61
+      },
+      "revId": "7bdfa4b3a71b9234148a1e9c8339de2f39ae2b48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff7cc21c_d98f003c",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-19T05:59:58Z",
+      "side": 1,
+      "message": "I guess we have an API to get an asset (here, vm_config.json?) within the current APK?",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 92
+      },
+      "revId": "7bdfa4b3a71b9234148a1e9c8339de2f39ae2b48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f909ffa_2475c162",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-19T05:59:58Z",
+      "side": 1,
+      "message": "Can you add context when wrapping an exception?",
+      "range": {
+        "startLine": 188,
+        "startChar": 22,
+        "endLine": 188,
+        "endChar": 49
+      },
+      "revId": "7bdfa4b3a71b9234148a1e9c8339de2f39ae2b48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03041efb_e09c1349",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 3
@@ -107,6 +176,29 @@
         "startChar": 0,
         "endLine": 197,
         "endChar": 0
+      },
+      "revId": "7bdfa4b3a71b9234148a1e9c8339de2f39ae2b48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9fd94eb_6517962b",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-19T05:59:58Z",
+      "side": 1,
+      "message": "nit: we\u0027d better to collect \"path\" rather than rejecting other keys. In many cases, \"json\" as configuration is extended by adding extra keys.",
+      "range": {
+        "startLine": 616,
+        "startChar": 0,
+        "endLine": 616,
+        "endChar": 51
       },
       "revId": "7bdfa4b3a71b9234148a1e9c8339de2f39ae2b48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
