@@ -189,6 +189,121 @@
       },
       "revId": "d445230de8e2dd1bace0d6f742359fb5212b0dd3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33b7de4a_ca836e14",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-19T01:28:24Z",
+      "side": 1,
+      "message": "nit/optional: You could merge the two loops by something like this, but up to you.\n\n  for (i, (extra_apk), extra_idsig)) in extra_apks.iter().zip(extra_idsig.iter()).enumerate() {\n    ...\n  }",
+      "range": {
+        "startLine": 251,
+        "startChar": 4,
+        "endLine": 251,
+        "endChar": 75
+      },
+      "revId": "d445230de8e2dd1bace0d6f742359fb5212b0dd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe85c337_00d69cce",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-19T01:28:24Z",
+      "side": 1,
+      "message": "Is this necessary? I\u0027d think default is 0, i.e. the flag is optional",
+      "range": {
+        "startLine": 81,
+        "startChar": 26,
+        "endLine": 81,
+        "endChar": 40
+      },
+      "revId": "d445230de8e2dd1bace0d6f742359fb5212b0dd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c9d4db9_df8f3aa9",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-19T01:28:24Z",
+      "side": 1,
+      "message": "nit: to be consistent with others, pass reference instead: `\u0026[PathBuf]`",
+      "range": {
+        "startLine": 53,
+        "startChar": 18,
+        "endLine": 53,
+        "endChar": 30
+      },
+      "revId": "d445230de8e2dd1bace0d6f742359fb5212b0dd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ddfc02b_1db41d7a",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-19T01:28:24Z",
+      "side": 1,
+      "message": "Rust style: You can merge them into one simple iteration, something like this:\n\n let result: Result\u003cVec\u003c_\u003e\u003e \u003d extra_idsigs.iter().map(|path| {\n    ParcelFileDescriptor::new(File::open(path)?)\n }).collect();\n let extra_idsig_fds \u003d result?;",
+      "range": {
+        "startLine": 90,
+        "startChar": 4,
+        "endLine": 91,
+        "endChar": 98
+      },
+      "revId": "d445230de8e2dd1bace0d6f742359fb5212b0dd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d316f671_500526aa",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-19T01:28:24Z",
+      "side": 1,
+      "message": "It\u0027s possible to avoid the string allocation, but I think it\u0027s not worth it in this case.",
+      "range": {
+        "startLine": 229,
+        "startChar": 69,
+        "endLine": 229,
+        "endChar": 75
+      },
+      "revId": "d445230de8e2dd1bace0d6f742359fb5212b0dd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
