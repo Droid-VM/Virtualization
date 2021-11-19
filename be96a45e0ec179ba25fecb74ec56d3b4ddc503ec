@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000017455582",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1897217?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "d2295f4c_b40bc71f",
+          "description": "Change to \"compos/aidl/com/android/compos/ICompOsService.aidl\"",
+          "replacements": [
+            {
+              "path": "compos/aidl/com/android/compos/ICompOsService.aidl",
+              "range": {
+                "startLine": 48,
+                "startChar": 67,
+                "endLine": 48,
+                "endChar": 74
+              },
+              "replacement": "the"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "21545064_c7fbe670",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-11-19T00:48:50Z",
+      "side": 1,
+      "message": "Common typo found: \"the the\" -- should it be \"the\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 48,
+        "startChar": 67,
+        "endLine": 48,
+        "endChar": 74
+      },
+      "revId": "be96a45e0ec179ba25fecb74ec56d3b4ddc503ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
