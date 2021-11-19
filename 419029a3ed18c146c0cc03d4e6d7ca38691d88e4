@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d5c0d62_89bc3ebb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-19T11:39:15Z",
+      "side": 1,
+      "message": "Hmm. Can we fix that?\nAlso I think you need sepolicy changes in the host as well - composd doesn\u0027t currently have the permission to run fd_server, odrefresh does.",
+      "range": {
+        "startLine": 19,
+        "startChar": 36,
+        "endLine": 19,
+        "endChar": 67
+      },
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22ea3af6_2cdd25f2",
+        "filename": "compos/composd/aidl/android/system/composd/IIsolatedCompilationService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-19T11:39:15Z",
+      "side": 1,
+      "message": "I\u0027d prefer if this used the async style that startTestCompile does.\nIt will have to look like that eventually. Even if this is purely temporary, presumably it will replace startTestCompile eventually?\n\nAlso I want to split this interface into \"called from odrefresh\" (which will go away) and \"called from system server\", and I don\u0027t want \"called from system server\" to depend on CompilationResult.",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 21
+      },
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bd189a4_41887b65",
+        "filename": "compos/composd/src/util.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-19T11:39:15Z",
+      "side": 1,
+      "message": "I\u0027m not convinced this is an improvement, since it requires every caller to use map_err.\n(OTOH I\u0027m now slightly surprised the original worked without the Debug constraint on T.)",
+      "range": {
+        "startLine": 21,
+        "startChar": 7,
+        "endLine": 21,
+        "endChar": 31
+      },
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
