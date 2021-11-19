@@ -22,6 +22,30 @@
       },
       "revId": "e5e1d8dad92f84d26f22a087cd3418f343c1ce64",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ba885aa_f87f32ef",
+        "filename": "compos/composd/src/internal_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-19T18:43:01Z",
+      "side": 1,
+      "message": "Sorry, I misread the change.  I thought we\u0027re putting testing only APIs in internal, to differentiate who can call what.\n\nLet me ask again.\n\nOnce I move odrefresh to the VM, I\u0027ll remove compile_cmd and compile.  Will the internal service be used for other purposed?",
+      "parentUuid": "20d08fc6_9c850152",
+      "range": {
+        "startLine": 17,
+        "startChar": 44,
+        "endLine": 17,
+        "endChar": 85
+      },
+      "revId": "e5e1d8dad92f84d26f22a087cd3418f343c1ce64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
