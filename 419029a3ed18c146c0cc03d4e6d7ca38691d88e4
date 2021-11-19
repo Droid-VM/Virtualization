@@ -49,6 +49,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aeb9541e_8a2e7fbe",
+        "filename": "compos/composd/src/service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-11-19T11:52:07Z",
+      "side": 1,
+      "message": "You have the same permission check in startTestCompile, factor it out to a helper function, so you can just do something like\n\n```\ncheck_test_permissions()?;\n```",
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3bd189a4_41887b65",
         "filename": "compos/composd/src/util.rs",
         "patchSetId": 1
@@ -66,6 +83,70 @@
         "endLine": 21,
         "endChar": 31
       },
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68c32873_0f46215e",
+        "filename": "compos/composd/src/util.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-11-19T11:52:07Z",
+      "side": 1,
+      "message": "Nit: add a `use std::fmt::Debug` rather than fully-qualifying it here.",
+      "range": {
+        "startLine": 21,
+        "startChar": 35,
+        "endLine": 21,
+        "endChar": 51
+      },
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7704b267_ef172180",
+        "filename": "compos/composd/src/util.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-11-19T11:52:07Z",
+      "side": 1,
+      "message": "I also think it\u0027s nicer to have this function to the map_err.\n\nIt worked before because it was taking an anyhow::Result, which means the error type was anyhow::Error, which implements Debug. You could keep the same approach as before while working with other error types:\n\n```\npub fn to_binder_result\u003cT, E: Debug\u003e(result: Result\u003cT, E\u003e) -\u003e BinderResult\u003cT\u003e {...}\n```",
+      "parentUuid": "3bd189a4_41887b65",
+      "range": {
+        "startLine": 21,
+        "startChar": 7,
+        "endLine": 21,
+        "endChar": 31
+      },
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3372ca29_15d7d874",
+        "filename": "compos/composd_cmd/composd_cmd.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-11-19T11:52:07Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem to do much, as the function returns shortly after.",
       "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
