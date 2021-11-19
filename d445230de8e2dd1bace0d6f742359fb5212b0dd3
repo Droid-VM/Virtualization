@@ -489,6 +489,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "afc5014b_006a0fad",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-19T16:58:48Z",
+      "side": 1,
+      "message": "Oh, it should be `Ok(ParcelFileDescriptor::new(File::open(path)?))`.  Hope it works, but if not, I don\u0027t want to block you on this.  We can follow up later.",
+      "parentUuid": "f59c841f_f984b9b7",
+      "range": {
+        "startLine": 90,
+        "startChar": 4,
+        "endLine": 91,
+        "endChar": 98
+      },
+      "revId": "d445230de8e2dd1bace0d6f742359fb5212b0dd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d316f671_500526aa",
         "filename": "vm/src/run.rs",
         "patchSetId": 2
