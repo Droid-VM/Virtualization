@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16cbb920_08503648",
+        "filename": "docs/getting_started/index.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-22T09:50:14Z",
+      "side": 1,
+      "message": "Both aosp_oriole_pkvm and aosp_raven_pkvm don\u0027t have /dev/kvm yet when they are built from aosp/master. I dropped them from the doc for now.",
+      "parentUuid": "34f6b783_e41364ce",
+      "range": {
+        "startLine": 10,
+        "startChar": 2,
+        "endLine": 10,
+        "endChar": 19
+      },
+      "revId": "dccc190a0bb1488a0e2c4c6794777af0862ca2ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b6e85fc_0fb09c58",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-11-18T10:19:24Z",
       "side": 1,
       "message": "In AOSP this builds just fine, but if you flash the device you don\u0027t get KVM because we don\u0027t have the right bootloader - see https://chat.google.com/room/AAAAYfvPZLc/TByLORapvg0",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 22
+      },
+      "revId": "dccc190a0bb1488a0e2c4c6794777af0862ca2ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d28070ca_5e31d0eb",
+        "filename": "docs/getting_started/index.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-22T09:50:14Z",
+      "side": 1,
+      "message": "You are right. Removed oriole for now.",
+      "parentUuid": "3b6e85fc_0fb09c58",
       "range": {
         "startLine": 30,
         "startChar": 0,
