@@ -27,3 +27,56 @@ license {
     ],
     // large-scale-change unable to identify any license_text files
 }
+
+// Statslog related changes
+genrule {
+    name: "statslog_virtualization_header.rs",
+    tools: ["stats-log-api-gen"],
+    cmd: "$(location stats-log-api-gen) --module virtualization --minApiLevel 34 --rustHeader $(genDir)/statslog_virtualization_header.rs",
+    out: [
+        "statslog_virtualization_header.rs",
+    ],
+}
+
+rust_library {
+    name: "libstatslog_virtualization_rust_header",
+    crate_name: "statslog_virtualization_rust_header",
+    srcs: [
+        "rust_virtualization_header_wrapper.rs",
+        ":statslog_virtualization_header.rs",
+    ],
+    rustlibs: [
+        "libstatspull_bindgen",
+        "libthiserror",
+    ],
+    apex_available: [
+        "com.android.virt",
+    ],
+
+}
+
+genrule {
+    name: "statslog_virtualization.rs",
+    tools: ["stats-log-api-gen"],
+    cmd: "$(location stats-log-api-gen) --module virtualization --minApiLevel 34 --rustHeaderCrate statslog_virtualization_rust_header --rust $(genDir)/statslog_virtualization.rs",
+    out: [
+        "statslog_virtualization.rs",
+    ],
+}
+
+rust_library {
+    name: "libstatslog_virtualization_rust",
+    crate_name: "statslog_virtualization_rust",
+    srcs: [
+        "rust_virtualization_wrapper.rs",
+        ":statslog_virtualization.rs",
+    ],
+    rustlibs: [
+        "libstatslog_virtualization_rust_header",
+        "libstatspull_bindgen",
+    ],
+    apex_available: [
+        "com.android.virt",
+    ],
+
+}
