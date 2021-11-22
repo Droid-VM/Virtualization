@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bfd30dc2_042d16ba",
+        "filename": "apex/product_packages.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-22T10:30:09Z",
+      "side": 1,
+      "message": "I don\u0027t really understand where these are coming from. The relevant libraries are:\nsystem/lib64/libbitflags.dylib.so\nsystem/lib64/libclap.dylib.so\nsystem/lib64/libstructopt.dylib.so\nsystem/lib64/libtextwrap.dylib.so\n\nEvery rust_binary under Virtualization, including the compos ones, already has prefer_rlib: true.\n(E.g. libbitflags is only referenced here: http://cs/android/packages/modules/Virtualization/apkdmverity/Android.bp?l\u003d13\u0026rcl\u003d2a6552d505fd4b55e37c91b8caf572b33ae10fab )\n\nIt\u0027s not entirely clear to me what (if any) effect prefer_rlib has on a rust_library - the documentation suggests avoiding it.\n\nThey\u0027re all referenced from our command line tools; perhaps that\u0027s relevant? But they all have prefer_rlib: true as well.",
+      "parentUuid": "b5466766_f45e5f51",
+      "range": {
+        "startLine": 28,
+        "startChar": 5,
+        "endLine": 28,
+        "endChar": 28
+      },
+      "revId": "2f0aa54f889b3063b9aa2d2fe064bb5b263863f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15a70217_bb1f887a",
         "filename": "apex/product_packages.mk",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2021-11-20T01:18:38Z",
       "side": 1,
       "message": "This probably is from one of the rust libraries. If you move them into the apex, then I expect this will move too.",
+      "range": {
+        "startLine": 29,
+        "startChar": 5,
+        "endLine": 29,
+        "endChar": 41
+      },
+      "revId": "2f0aa54f889b3063b9aa2d2fe064bb5b263863f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "527ce451_8d1b2d56",
+        "filename": "apex/product_packages.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-22T10:30:09Z",
+      "side": 1,
+      "message": "It\u0027s only referenced from crosvm AFAICT - e.g. http://cs/android/external/crosvm/devices/Android.bp?l\u003d165\u0026rcl\u003dd120b5c7a0b614fd8402a85d8bc04115326735e0.\n\nHow would I move it into the APEX?",
+      "parentUuid": "15a70217_bb1f887a",
       "range": {
         "startLine": 29,
         "startChar": 5,
