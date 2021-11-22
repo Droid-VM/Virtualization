@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f3f6b8b_9f984858",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-22T10:36:18Z",
+      "side": 1,
+      "message": "All of the dependencies here seem to be coming from the virt APEX:\n$ adb shell ls -l /apex/com.android.virt/lib64\nlrw-r--r-- 1 system system     34 1970-01-01 01:00 libbitflags.dylib.so -\u003e /system/lib64/libbitflags.dylib.so\nlrw-r--r-- 1 system system     30 1970-01-01 01:00 libclap.dylib.so -\u003e /system/lib64/libclap.dylib.so\nlrw-r--r-- 1 system system     37 1970-01-01 01:00 libgfxstream_backend.so -\u003e /system/lib64/libgfxstream_backend.so\n\n(More omitted.)\n\nBut I don\u0027t understand why yet - e.g. CompOS also uses libclap and doesn\u0027t generate this dependency.",
+      "revId": "2f0aa54f889b3063b9aa2d2fe064bb5b263863f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5466766_f45e5f51",
