@@ -346,6 +346,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23c13c8e_e0963d1f",
+        "filename": "compos/composd/src/util.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-22T18:01:06Z",
+      "side": 1,
+      "message": "Yeah - Andrew\u0027s suggestion is better than both mine \u0026 yours",
+      "parentUuid": "c1cc19de_60725c6d",
+      "range": {
+        "startLine": 21,
+        "startChar": 7,
+        "endLine": 21,
+        "endChar": 31
+      },
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3372ca29_15d7d874",
         "filename": "compos/composd_cmd/composd_cmd.rs",
         "patchSetId": 1
@@ -429,6 +453,24 @@
       "side": 1,
       "message": "\"may end earlier\" -\u003e it\u0027s our choice to make it end earlier?  If we do nothing, could we safely assume the compiler to drop it only at the end of the scope?",
       "parentUuid": "5da0cdcf_d42f344c",
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d6d7751_f7b87873",
+        "filename": "compos/composd_cmd/composd_cmd.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-22T18:01:06Z",
+      "side": 1,
+      "message": "Andrew: Yes. But in fact the drop order here is well-defined and happens at the end of the scope, regardless.\nVictor: \"End of lifetime\" and \"point at which it gets dropped\" are not the same (I know this makes no sense, but that\u0027s the way it is). Both are determined by the compiler, but roughly the lifetime ends at the last reference and the drop occurs at the end of the scope.\nSo it is safe to assume it happens at the end of the scope.",
+      "parentUuid": "a49084fa_f398c86e",
       "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
