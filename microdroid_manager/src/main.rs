@@ -50,6 +50,7 @@ const VMADDR_CID_HOST: u32 = 2;
 
 const APEX_CONFIG_DONE_PROP: &str = "apex_config.done";
 const LOGD_ENABLED_PROP: &str = "ro.boot.logd.enabled";
+const LOGD_READY_PROP: &str = "ro.logd.ready";
 
 fn get_vms_rpc_binder() -> Result<Strong<dyn IVirtualMachineService>> {
     // SAFETY: AIBinder returned by RpcClient has correct reference count, and the ownership can be
@@ -195,11 +196,16 @@ fn verify_payload(
 
 // Waits until linker config is generated
 fn wait_for_apex_config_done() -> Result<()> {
-    let mut prop = PropertyWatcher::new(APEX_CONFIG_DONE_PROP)?;
+    wait_for_prop(APEX_CONFIG_DONE_PROP, "true")
+}
+
+// Wait for the value of system property `name` to become `value`
+fn wait_for_prop(name: &str, value: &str) -> Result<()> {
+    let mut prop = PropertyWatcher::new(name)?;
     loop {
         prop.wait()?;
-        let val = system_properties::read(APEX_CONFIG_DONE_PROP)?;
-        if val == "true" {
+        let read = system_properties::read(name)?;
+        if read == value {
             break;
         }
     }
@@ -230,6 +236,7 @@ fn exec_task(task: &Task, service: &Strong<dyn IVirtualMachineService>) -> Resul
     // Start logging if enabled
     // TODO(b/200914564) set filterspec if debug_level is app_only
     if system_properties::read(LOGD_ENABLED_PROP)? == "1" {
+        wait_for_prop(LOGD_READY_PROP, "true")?;
         system_properties::write("ctl.start", "seriallogging")?;
     }
 
