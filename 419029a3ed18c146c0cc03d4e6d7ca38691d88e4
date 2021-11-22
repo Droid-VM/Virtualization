@@ -274,6 +274,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8510e772_2db41768",
+        "filename": "compos/composd/src/util.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-22T17:25:15Z",
+      "side": 1,
+      "message": "We don\u0027t have any uses where it isn\u0027t a Result though; YAGNI. Making the existing call sites simpler beats supporting the call sites that don\u0027t exist.\n(And we could have both if we do end up needing it.)",
+      "parentUuid": "02d43f7e_a817f1fe",
+      "range": {
+        "startLine": 21,
+        "startChar": 7,
+        "endLine": 21,
+        "endChar": 31
+      },
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3372ca29_15d7d874",
         "filename": "compos/composd_cmd/composd_cmd.rs",
         "patchSetId": 1
@@ -303,6 +327,24 @@
       "side": 1,
       "message": "Done\n\nNot specifically to this case, but I was worried that the compiler might optimize to drop earlier. But I can\u0027t find any reference (apparently there\u0027s no Rust specification).  Since all references say the drop happens at the end of the scope, I\u0027m gonna assume it\u0027s always the case.",
       "parentUuid": "3372ca29_15d7d874",
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5da0cdcf_d42f344c",
+        "filename": "compos/composd_cmd/composd_cmd.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-22T17:25:15Z",
+      "side": 1,
+      "message": "I dug into this once, and that is definitely true.\nThe lifetime may end earlier (at the last use of the variable - see \"non-lexical lifetimes), which allows the borrow checker to accept valid code that it otherwise wouldn\u0027t, but the actual drop occurs at the end of the scope.",
+      "parentUuid": "412d6321_79581596",
       "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
