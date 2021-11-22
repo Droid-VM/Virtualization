@@ -298,6 +298,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "53f75f73_8254f995",
+        "filename": "compos/composd/src/util.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-22T17:34:54Z",
+      "side": 1,
+      "message": "It is, though, after this change.  The reason I changed this is to make it easier to handle `create_dir` in `do_odrefresh_for_test` in service.rs.  `create_dir` returns an io::Result, but this original function assumes it\u0027s a BinderResult.  WDYT?",
+      "parentUuid": "8510e772_2db41768",
+      "range": {
+        "startLine": 21,
+        "startChar": 7,
+        "endLine": 21,
+        "endChar": 31
+      },
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3372ca29_15d7d874",
         "filename": "compos/composd_cmd/composd_cmd.rs",
         "patchSetId": 1
@@ -363,6 +387,24 @@
       "side": 1,
       "message": "But it definitely can\u0027t drop it earlier than the previous line that uses it, right?",
       "parentUuid": "412d6321_79581596",
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a49084fa_f398c86e",
+        "filename": "compos/composd_cmd/composd_cmd.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-22T17:34:54Z",
+      "side": 1,
+      "message": "\"may end earlier\" -\u003e it\u0027s our choice to make it end earlier?  If we do nothing, could we safely assume the compiler to drop it only at the end of the scope?",
+      "parentUuid": "5da0cdcf_d42f344c",
       "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
