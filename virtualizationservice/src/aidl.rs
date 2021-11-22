@@ -52,6 +52,7 @@ use idsig::{HashAlgorithm, V4Signature};
 use log::{debug, error, info, warn};
 use microdroid_payload_config::VmPayloadConfig;
 use rustutils::system_properties;
+// use statslog_rust;
 use std::convert::TryInto;
 use std::ffi::CStr;
 use std::fs::{create_dir, File, OpenOptions};
@@ -405,6 +406,17 @@ impl VirtualizationService {
 
             Ok(retval)
         });
+        match statslog_rust::vm_creation_requested::stats_write(
+            statslog_rust::vm_creation_requested::Hypervisor::Unknown,
+            true,
+            true,
+        ) {
+            Err(e) => {
+                info!("stastlog_rust fails with error: {}", e);
+            }
+            Ok(_) => info!("stastlog_rust succeeded for virtualization service"),
+        }
+
         service
     }
 }
