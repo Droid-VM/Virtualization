@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d54612a_bf0b22b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-22T17:17:43Z",
+      "side": 1,
+      "message": "It can\u0027t run successfully yet without more changes, so I\u0027d prefer to add the policy later (but very soon).",
+      "parentUuid": "4d5c0d62_89bc3ebb",
+      "range": {
+        "startLine": 19,
+        "startChar": 36,
+        "endLine": 19,
+        "endChar": 67
+      },
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22ea3af6_2cdd25f2",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a07a41ef_579e0057",
+        "filename": "compos/composd/aidl/android/system/composd/IIsolatedCompilationService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-22T17:17:43Z",
+      "side": 1,
+      "message": "Added a TODO for now per offline discussion.",
+      "parentUuid": "22ea3af6_2cdd25f2",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 21
+      },
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aeb9541e_8a2e7fbe",
@@ -60,6 +108,24 @@
       "writtenOn": "2021-11-19T11:52:07Z",
       "side": 1,
       "message": "You have the same permission check in startTestCompile, factor it out to a helper function, so you can just do something like\n\n```\ncheck_test_permissions()?;\n```",
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "418b95e3_270e2c97",
+        "filename": "compos/composd/src/service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-22T17:17:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aeb9541e_8a2e7fbe",
       "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -134,6 +200,78 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0772640_7ddba3b2",
+        "filename": "compos/composd/src/util.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-22T17:17:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68c32873_0f46215e",
+      "range": {
+        "startLine": 21,
+        "startChar": 35,
+        "endLine": 21,
+        "endChar": 51
+      },
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02d43f7e_a817f1fe",
+        "filename": "compos/composd/src/util.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-22T17:17:43Z",
+      "side": 1,
+      "message": "I think this is more reusable / has less constrain.  It\u0027ll work for E (and any Result type), whether or not it\u0027s from a Result.  In the existing case where the callers need to pass in a Result, map_err is just as good I think?",
+      "parentUuid": "7704b267_ef172180",
+      "range": {
+        "startLine": 21,
+        "startChar": 7,
+        "endLine": 21,
+        "endChar": 31
+      },
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d9c8466_62184c90",
+        "filename": "compos/composd/src/util.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-22T17:17:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68c32873_0f46215e",
+      "range": {
+        "startLine": 21,
+        "startChar": 35,
+        "endLine": 21,
+        "endChar": 51
+      },
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3372ca29_15d7d874",
@@ -147,6 +285,24 @@
       "writtenOn": "2021-11-19T11:52:07Z",
       "side": 1,
       "message": "This doesn\u0027t seem to do much, as the function returns shortly after.",
+      "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "412d6321_79581596",
+        "filename": "compos/composd_cmd/composd_cmd.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-22T17:17:43Z",
+      "side": 1,
+      "message": "Done\n\nNot specifically to this case, but I was worried that the compiler might optimize to drop earlier. But I can\u0027t find any reference (apparently there\u0027s no Rust specification).  Since all references say the drop happens at the end of the scope, I\u0027m gonna assume it\u0027s always the case.",
+      "parentUuid": "3372ca29_15d7d874",
       "revId": "419029a3ed18c146c0cc03d4e6d7ca38691d88e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
