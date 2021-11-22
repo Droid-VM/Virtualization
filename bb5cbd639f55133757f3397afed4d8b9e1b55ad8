@@ -16,6 +16,24 @@
       "message": "You\u0027ll need to deal with the merge conflicts I gave you, I\u0027m afraid.\n\n",
       "revId": "bb5cbd639f55133757f3397afed4d8b9e1b55ad8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82db15ba_a2189fe0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-22T19:07:11Z",
+      "side": 1,
+      "message": "Done.  Since CompilationResult isn\u0027t available due to a removed dependency, I made it return only the exit code.  Which is how it should be like in the future anyway, since the only result we care at the AIDL level is the exit code, other than the output files and signatures that can be found in the output directory.",
+      "parentUuid": "d7b9cc65_5a91d775",
+      "revId": "bb5cbd639f55133757f3397afed4d8b9e1b55ad8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
