@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b460cdc_594daed2",
+        "filename": "apex/product_packages.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-22T10:57:15Z",
+      "side": 1,
+      "message": "Aha!\n\n\u003e Every rust_binary under Virtualization, including the compos ones, already has prefer_rlib: true.\n\nActually, that\u0027s not true - we omitted it for the \"vm\" tool. Fixing that makes these go away. Yay!",
+      "parentUuid": "bfd30dc2_042d16ba",
+      "range": {
+        "startLine": 28,
+        "startChar": 5,
+        "endLine": 28,
+        "endChar": 28
+      },
+      "revId": "2f0aa54f889b3063b9aa2d2fe064bb5b263863f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15a70217_bb1f887a",
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "It\u0027s only referenced from crosvm AFAICT - e.g. http://cs/android/external/crosvm/devices/Android.bp?l\u003d165\u0026rcl\u003dd120b5c7a0b614fd8402a85d8bc04115326735e0.\n\nHow would I move it into the APEX?",
       "parentUuid": "15a70217_bb1f887a",
+      "range": {
+        "startLine": 29,
+        "startChar": 5,
+        "endLine": 29,
+        "endChar": 41
+      },
+      "revId": "2f0aa54f889b3063b9aa2d2fe064bb5b263863f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adad6c7f_480d7286",
+        "filename": "apex/product_packages.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-22T10:57:15Z",
+      "side": 1,
+      "message": "I opened a bug to track removing this.",
+      "parentUuid": "527ce451_8d1b2d56",
       "range": {
         "startLine": 29,
         "startChar": 5,
