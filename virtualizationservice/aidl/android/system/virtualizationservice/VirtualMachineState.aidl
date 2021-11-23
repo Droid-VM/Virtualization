@@ -42,7 +42,11 @@ enum VirtualMachineState {
      */
     FINISHED = 4,
     /**
+     * The VM encountered an error.
+     */
+    FAILED = 5,
+    /**
      * The VM has died.
      */
-    DEAD = 5,
+    DEAD = 6,
 }
