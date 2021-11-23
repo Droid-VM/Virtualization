@@ -194,6 +194,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0167bf1_95f1cd5e",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-11-23T12:17:09Z",
+      "side": 1,
+      "message": "Could it just be an enum?",
+      "parentUuid": "c5e8c080_7c8e0411",
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "03c0d617_b5c32c9e",
@@ -213,6 +231,23 @@
         "endLine": 58,
         "endChar": 38
       },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b080aea_2a966b35",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-11-23T12:17:09Z",
+      "side": 1,
+      "message": "Consider using thiserror (https://crates.io/crates/thiserror/, it\u0027s already imported to Android) to derive Display and Error for you.",
       "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -483,6 +518,52 @@
         "startChar": 11,
         "endLine": 45,
         "endChar": 24
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b6bf254_3511d763",
+        "filename": "virtualizationservice/aidl/android/system/virtualmachineservice/IVirtualMachineService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-11-23T12:17:09Z",
+      "side": 1,
+      "message": "those below",
+      "range": {
+        "startLine": 53,
+        "startChar": 46,
+        "endLine": 53,
+        "endChar": 54
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eee8bffc_9db579f1",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-11-23T12:17:09Z",
+      "side": 1,
+      "message": "Nit: CID should be uppercase in strings for consistency, here and below.",
+      "range": {
+        "startLine": 944,
+        "startChar": 67,
+        "endLine": 944,
+        "endChar": 70
       },
       "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
