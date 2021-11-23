@@ -714,6 +714,16 @@ impl VirtualMachineCallbacks {
         }
     }
 
+    /// Call all registered callbacks to say that the VM encountered an error.
+    pub fn notify_error(&self, cid: Cid, error_code: i32, message: &str) {
+        let callbacks = &*self.0.lock().unwrap();
+        for callback in callbacks {
+            if let Err(e) = callback.onError(cid as i32, error_code, message) {
+                error!("Error notifying error event from VM CID {}: {}", cid, e);
+            }
+        }
+    }
+
     /// Call all registered callbacks to say that the VM has died.
     pub fn callback_on_died(&self, cid: Cid) {
         let callbacks = &*self.0.lock().unwrap();
@@ -815,6 +825,7 @@ fn get_state(instance: &VmInstance) -> VirtualMachineState {
             PayloadState::Started => VirtualMachineState::STARTED,
             PayloadState::Ready => VirtualMachineState::READY,
             PayloadState::Finished => VirtualMachineState::FINISHED,
+            PayloadState::Failed => VirtualMachineState::FAILED,
         },
         VmState::Dead => VirtualMachineState::DEAD,
         VmState::Failed => VirtualMachineState::DEAD,
@@ -914,6 +925,23 @@ impl IVirtualMachineService for VirtualMachineService {
             Ok(())
         } else {
             error!("notifyPayloadFinished is called from an unknown cid {}", cid);
+            Err(new_binder_exception(
+                ExceptionCode::SERVICE_SPECIFIC,
+                format!("cannot find a VM with cid {}", cid),
+            ))
+        }
+    }
+
+    fn notifyError(&self, error_code: i32, message: &str) -> binder::Result<()> {
+        let cid = self.cid;
+        if let Some(vm) = self.state.lock().unwrap().get_vm(cid) {
+            info!("VM having CID {} encountered an error", cid);
+            vm.update_payload_state(PayloadState::Failed)
+                .map_err(|e| new_binder_exception(ExceptionCode::ILLEGAL_STATE, e.to_string()))?;
+            vm.callbacks.notify_error(cid, error_code, message);
+            Ok(())
+        } else {
+            error!("notifyPayloadStarted is called from an unknown cid {}", cid);
             Err(new_binder_exception(
                 ExceptionCode::SERVICE_SPECIFIC,
                 format!("cannot find a VM with cid {}", cid),

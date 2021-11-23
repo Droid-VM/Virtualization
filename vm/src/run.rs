@@ -140,6 +140,7 @@ fn state_to_str(vm_state: VirtualMachineState) -> &'static str {
         VirtualMachineState::STARTED => "STARTED",
         VirtualMachineState::READY => "READY",
         VirtualMachineState::FINISHED => "FINISHED",
+        VirtualMachineState::FAILED => "FAILED",
         VirtualMachineState::DEAD => "DEAD",
         _ => "(invalid state)",
     }
@@ -268,6 +269,11 @@ impl IVirtualMachineCallback for VirtualMachineCallback {
 
     fn onPayloadFinished(&self, _cid: i32, exit_code: i32) -> BinderResult<()> {
         eprintln!("payload finished with exit code {}", exit_code);
+        Ok(())
+    }
+
+    fn onError(&self, _cid: i32, error_code: i32, message: &str) -> BinderResult<()> {
+        eprintln!("VM encountered an error: code={}, message={}", error_code, message);
         Ok(())
     }
 
