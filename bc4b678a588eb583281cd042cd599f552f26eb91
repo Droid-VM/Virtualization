@@ -655,6 +655,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb8b240c_5fcfc139",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineState.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-23T13:20:41Z",
+      "side": 1,
+      "message": "Removed FAILED. As Alan and Andrew pointed out, it\u0027s only confusing.",
+      "parentUuid": "5ba329c3_102be0a5",
+      "range": {
+        "startLine": 45,
+        "startChar": 11,
+        "endLine": 45,
+        "endChar": 24
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b6bf254_3511d763",
@@ -810,6 +834,30 @@
       "side": 1,
       "message": "In theory, Failed can come after Finished. but practically, Failed and Finished are both terminal. For example, if microddroid_manager failed some cleanups(hypothetic..) after the VM payload finishes, then Finished -\u003e Failed transition would be possible.",
       "parentUuid": "b4dd88af_fea3b0ad",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 10
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abb9c082_46bfd16e",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-23T13:20:41Z",
+      "side": 1,
+      "message": "Removed \"Failed\".\n\nI\u0027ll upload a separate change to make sure that only one of notifyError/notifyPayloadFinished is called.",
+      "parentUuid": "aba7b713_4e613c02",
       "range": {
         "startLine": 70,
         "startChar": 4,
