@@ -161,6 +161,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88c8c573_8bd99020",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-11-23T12:21:48Z",
+      "side": 1,
+      "message": "Looks like this wasn\u0027t changed.",
+      "parentUuid": "dd6396ac_3ac5c7db",
+      "range": {
+        "startLine": 30,
+        "startChar": 47,
+        "endLine": 30,
+        "endChar": 55
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c5e8c080_7c8e0411",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
         "patchSetId": 1
@@ -513,6 +537,30 @@
       "side": 1,
       "message": "Rephrased. This should mean something wrong happened in the layer of microdroid_manager as an execution wrapper of the VM payload. The VM payload\u0027s exit code is captured and delivered as \"payload finished\" with exit_code.",
       "parentUuid": "6812cb2f_dc284b7d",
+      "range": {
+        "startLine": 45,
+        "startChar": 11,
+        "endLine": 45,
+        "endChar": 24
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c9fab4c_0a3486fa",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineState.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-11-23T12:21:48Z",
+      "side": 1,
+      "message": "But the error is in the payload, not the lower-level parts of the VM right? It\u0027s not a kernel panic, for example. This is more like the STARTED/READY/FINISHED statuses above, which are about the payload.",
+      "parentUuid": "cb0b2d74_5fc80846",
       "range": {
         "startLine": 45,
         "startChar": 11,
