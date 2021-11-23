@@ -183,6 +183,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c4185c9_4b4d5ec1",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-23T12:56:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88c8c573_8bd99020",
+      "range": {
+        "startLine": 30,
+        "startChar": 47,
+        "endLine": 30,
+        "endChar": 55
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5e8c080_7c8e0411",
@@ -597,6 +621,30 @@
       "side": 1,
       "message": "But the error is in the payload, not the lower-level parts of the VM right? It\u0027s not a kernel panic, for example. This is more like the STARTED/READY/FINISHED statuses above, which are about the payload.",
       "parentUuid": "cb0b2d74_5fc80846",
+      "range": {
+        "startLine": 45,
+        "startChar": 11,
+        "endLine": 45,
+        "endChar": 24
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ba329c3_102be0a5",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineState.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-23T12:56:18Z",
+      "side": 1,
+      "message": "Yeah, I agree. For now, this is to deliver any error of microdroid_manager. We could map it to VirtualMachineState.FINISHED. But it might be also confusing with \"Payload finished\". Hmm.",
+      "parentUuid": "9c9fab4c_0a3486fa",
       "range": {
         "startLine": 45,
         "startChar": 11,
