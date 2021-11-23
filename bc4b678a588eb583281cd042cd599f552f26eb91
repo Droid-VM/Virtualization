@@ -280,6 +280,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f6361de5_4fe6c789",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-23T14:09:02Z",
+      "side": 1,
+      "message": "The cost of a Java enum is considered too expensive for Android - they\u0027re avoided in Framework code and in most unbundled apps, I believe.",
+      "parentUuid": "b12579f5_d5dc27cb",
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "03c0d617_b5c32c9e",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
@@ -858,6 +876,30 @@
       "side": 1,
       "message": "Removed \"Failed\".\n\nI\u0027ll upload a separate change to make sure that only one of notifyError/notifyPayloadFinished is called.",
       "parentUuid": "aba7b713_4e613c02",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 10
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4137910c_0bcc6e66",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-23T14:09:02Z",
+      "side": 1,
+      "message": "You\u0027ll need to modify compos_key_cmd when you do that, of course.",
+      "parentUuid": "abb9c082_46bfd16e",
       "range": {
         "startLine": 70,
         "startChar": 4,
