@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72c4a85a_8c14dcb0",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-23T12:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07c1099c_51b0ac8c",
+      "range": {
+        "startLine": 303,
+        "startChar": 8,
+        "endLine": 303,
+        "endChar": 59
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f6c9514_007bc503",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-11-23T10:43:10Z",
       "side": 1,
       "message": "In this case I suggest we leave it like this - this exists purely for testing,  seeing all the notifications is fine and potentially helpful.",
+      "range": {
+        "startLine": 151,
+        "startChar": 7,
+        "endLine": 151,
+        "endChar": 59
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddd75c60_b74218d1",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-23T12:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f6c9514_007bc503",
       "range": {
         "startLine": 151,
         "startChar": 7,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd6396ac_3ac5c7db",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-23T12:13:43Z",
+      "side": 1,
+      "message": "Thank you, Alan. ;-)",
+      "parentUuid": "2fbecbb1_f5c3026d",
+      "range": {
+        "startLine": 30,
+        "startChar": 47,
+        "endLine": 30,
+        "endChar": 55
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5e8c080_7c8e0411",
@@ -100,6 +172,24 @@
       "writtenOn": "2021-11-23T10:43:10Z",
       "side": 1,
       "message": "Could these be in an @IntDef, so we can make it clear the errorCode below in onError is one of these codes?\n\nOtherwise, mention that in the comment for onError().",
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a852f3d0_dcdfcc2b",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-23T12:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5e8c080_7c8e0411",
       "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -140,6 +230,24 @@
       "writtenOn": "2021-11-23T10:43:10Z",
       "side": 1,
       "message": "It feels like this ought to be something like\n\nself.Debug::fmt(f)\n\nAlthough I suspect my syntax is wrong.\n\n(Why do you want Display?)",
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c52e0742_b4bbb45b",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-23T12:13:43Z",
+      "side": 1,
+      "message": "Yeah, it\u0027s just piggybacking \"Debug\" for \"Display\", which is required for MicrodroidError to be used as an error in Result\u003cV, Error\u003e.",
+      "parentUuid": "04a0de85_bf8636d9",
       "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -238,6 +346,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd853f5b_58ea8460",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-23T12:13:43Z",
+      "side": 1,
+      "message": "Thank you all for suggesting.\nSettled on \"main -\u003e try_main -\u003e try_start_payload\"",
+      "parentUuid": "a9f4c7e6_cbb0215d",
+      "range": {
+        "startLine": 120,
+        "startChar": 3,
+        "endLine": 120,
+        "endChar": 12
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6355b94e_151ad447",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-23T12:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e2c73ce_b3628271",
+      "range": {
+        "startLine": 120,
+        "startChar": 3,
+        "endLine": 120,
+        "endChar": 12
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26751f33_7def02a1",
@@ -251,6 +407,30 @@
       "writtenOn": "2021-11-23T08:04:36Z",
       "side": 1,
       "message": "nit; payload has or payloads have?",
+      "range": {
+        "startLine": 199,
+        "startChar": 63,
+        "endLine": 199,
+        "endChar": 71
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fce771c_cbbb6819",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-23T12:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26751f33_7def02a1",
       "range": {
         "startLine": 199,
         "startChar": 63,
@@ -284,6 +464,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb0b2d74_5fc80846",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineState.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-23T12:13:43Z",
+      "side": 1,
+      "message": "Rephrased. This should mean something wrong happened in the layer of microdroid_manager as an execution wrapper of the VM payload. The VM payload\u0027s exit code is captured and delivered as \"payload finished\" with exit_code.",
+      "parentUuid": "6812cb2f_dc284b7d",
+      "range": {
+        "startLine": 45,
+        "startChar": 11,
+        "endLine": 45,
+        "endChar": 24
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4dd88af_fea3b0ad",
@@ -297,6 +501,30 @@
       "writtenOn": "2021-11-23T10:43:10Z",
       "side": 1,
       "message": "Should Failed come before Finished?\nNote the comment above - with the current ordering a transition from Finished -\u003e Failed is allowed but Failed -\u003e Finished is; I think you want to allow Failed -\u003e Finished?",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 10
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aba7b713_4e613c02",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-11-23T12:13:43Z",
+      "side": 1,
+      "message": "In theory, Failed can come after Finished. but practically, Failed and Finished are both terminal. For example, if microddroid_manager failed some cleanups(hypothetic..) after the VM payload finishes, then Finished -\u003e Failed transition would be possible.",
+      "parentUuid": "b4dd88af_fea3b0ad",
       "range": {
         "startLine": 70,
         "startChar": 4,
