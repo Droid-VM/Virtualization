@@ -18,6 +18,92 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "07c1099c_51b0ac8c",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-23T10:43:10Z",
+      "side": 1,
+      "message": "I believe we should call set_died() here as we do above - we don\u0027t need to wait for any further notification.",
+      "range": {
+        "startLine": 303,
+        "startChar": 8,
+        "endLine": 303,
+        "endChar": 59
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f6c9514_007bc503",
+        "filename": "compos/compos_key_cmd/compos_key_cmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-23T10:43:10Z",
+      "side": 1,
+      "message": "In this case I suggest we leave it like this - this exists purely for testing,  seeing all the notifications is fine and potentially helpful.",
+      "range": {
+        "startLine": 151,
+        "startChar": 7,
+        "endLine": 151,
+        "endChar": 59
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fbecbb1_f5c3026d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-23T10:43:10Z",
+      "side": 1,
+      "message": "s/except belowing/not listed below/",
+      "range": {
+        "startLine": 30,
+        "startChar": 47,
+        "endLine": 30,
+        "endChar": 55
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5e8c080_7c8e0411",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-23T10:43:10Z",
+      "side": 1,
+      "message": "Could these be in an @IntDef, so we can make it clear the errorCode below in onError is one of these codes?\n\nOtherwise, mention that in the comment for onError().",
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "03c0d617_b5c32c9e",
@@ -37,6 +123,23 @@
         "endLine": 58,
         "endChar": 38
       },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04a0de85_bf8636d9",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-23T10:43:10Z",
+      "side": 1,
+      "message": "It feels like this ought to be something like\n\nself.Debug::fmt(f)\n\nAlthough I suspect my syntax is wrong.\n\n(Why do you want Display?)",
       "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -113,6 +216,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a9f4c7e6_cbb0215d",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-23T10:43:10Z",
+      "side": 1,
+      "message": "What would you call it without the try_ ?\n\ntry_start_vm, try_start_microdroid ?",
+      "parentUuid": "6709e020_ce35398c",
+      "range": {
+        "startLine": 120,
+        "startChar": 3,
+        "endLine": 120,
+        "endChar": 12
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "26751f33_7def02a1",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
@@ -129,6 +256,52 @@
         "startChar": 63,
         "endLine": 199,
         "endChar": 71
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6812cb2f_dc284b7d",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineState.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-23T10:43:10Z",
+      "side": 1,
+      "message": "I\u0027m not sure that\u0027s right\nThe VM payload has failed ... ?",
+      "range": {
+        "startLine": 45,
+        "startChar": 11,
+        "endLine": 45,
+        "endChar": 24
+      },
+      "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4dd88af_fea3b0ad",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-23T10:43:10Z",
+      "side": 1,
+      "message": "Should Failed come before Finished?\nNote the comment above - with the current ordering a transition from Finished -\u003e Failed is allowed but Failed -\u003e Finished is; I think you want to allow Failed -\u003e Finished?",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 10
       },
       "revId": "bc4b678a588eb583281cd042cd599f552f26eb91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
