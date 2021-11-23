@@ -27,6 +27,17 @@ import android.os.ParcelFileDescriptor;
  * @hide
  */
 public interface VirtualMachineCallback {
+    /** Error code for all other errors except belowing. */
+    int ERROR_UNKNOWN = 0;
+
+    /**
+     * Error code indicating that the payload can't be verified due to various reasons (e.g invalid
+     * merkle tree, invalid formats, etc).
+     */
+    int ERROR_PAYLOAD_VERIFICATION_FAILED = 1;
+
+    /** Error code indicating that the payload is verified, but has changed since the last boot. */
+    int ERROR_PAYLOAD_CHANGED = 2;
 
     /** Called when the payload starts in the VM. */
     void onPayloadStarted(@NonNull VirtualMachine vm, @Nullable ParcelFileDescriptor stream);
@@ -36,6 +47,9 @@ public interface VirtualMachineCallback {
 
     /** Called when the payload has finished in the VM. */
     void onPayloadFinished(@NonNull VirtualMachine vm, int exitCode);
+
+    /** Called when an error occurs in the VM. */
+    void onError(@NonNull VirtualMachine vm, int errorCode, @NonNull String message);
 
     /** Called when the VM died. */
     void onDied(@NonNull VirtualMachine vm);

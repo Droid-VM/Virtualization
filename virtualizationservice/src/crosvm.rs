@@ -67,6 +67,7 @@ pub enum PayloadState {
     Started,
     Ready,
     Finished,
+    Failed,
 }
 
 /// The current state of the VM itself.

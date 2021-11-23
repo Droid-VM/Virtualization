@@ -277,6 +277,7 @@ public class VirtualMachine {
                     case VirtualMachineState.STARTED:
                     case VirtualMachineState.READY:
                     case VirtualMachineState.FINISHED:
+                    case VirtualMachineState.FAILED:
                         return Status.RUNNING;
                     case VirtualMachineState.DEAD:
                         return Status.STOPPED;
@@ -398,6 +399,16 @@ public class VirtualMachine {
                             }
                             mCallbackExecutor.execute(
                                     () -> cb.onPayloadFinished(VirtualMachine.this, exitCode));
+                        }
+
+                        @Override
+                        public void onError(int cid, int errorCode, String message) {
+                            final VirtualMachineCallback cb = mCallback;
+                            if (cb == null) {
+                                return;
+                            }
+                            mCallbackExecutor.execute(
+                                    () -> cb.onError(VirtualMachine.this, errorCode, message));
                         }
 
                         @Override
