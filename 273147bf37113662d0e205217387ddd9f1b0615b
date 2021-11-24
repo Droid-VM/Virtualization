@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "102c3cf5_0f64cfb4",
+        "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-24T16:59:05Z",
+      "side": 1,
+      "message": "These all seem to be 64 bits in Linux on 64 bit platforms, should we use long here to match?\n(And also to line up with RemoteFsStats)",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 11
+      },
+      "revId": "273147bf37113662d0e205217387ddd9f1b0615b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bf629b0_acf7a6e9",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-24T16:59:05Z",
+      "side": 1,
+      "message": "Why not new_errno_error here?",
+      "range": {
+        "startLine": 339,
+        "startChar": 12,
+        "endLine": 339,
+        "endChar": 45
+      },
+      "revId": "273147bf37113662d0e205217387ddd9f1b0615b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1e09d55_a3dd9b11",
         "filename": "authfs/src/fusefs.rs",
         "patchSetId": 3
@@ -14,6 +60,30 @@
       "writtenOn": "2021-11-23T13:32:51Z",
       "side": 1,
       "message": "What does POD stand for?",
+      "range": {
+        "startLine": 688,
+        "startChar": 68,
+        "endLine": 688,
+        "endChar": 71
+      },
+      "revId": "273147bf37113662d0e205217387ddd9f1b0615b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4809857_1974e42b",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-24T16:59:05Z",
+      "side": 1,
+      "message": "In the C++ world it means Plain Old Data - no funky constructors or destructors etc. The Rust equivalent would be primitive, or Copy, maybe?\n\nI guess libc doesn\u0027t implement Default, which would be nicer?",
+      "parentUuid": "d1e09d55_a3dd9b11",
       "range": {
         "startLine": 688,
         "startChar": 68,
