@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "692017e2_3f2db418",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-24T15:28:31Z",
+      "side": 1,
+      "message": "207336449",
+      "range": {
+        "startLine": 21,
+        "startChar": 5,
+        "endLine": 21,
+        "endChar": 8
+      },
+      "revId": "286f7583559fe33a0d8cefeb62ee2231aa3bb11a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13f8299d_9b269200",
+        "filename": "apex/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-24T15:28:31Z",
+      "side": 1,
+      "message": "This could do with a comment, since the APEX is both installable and indeed installed, at least on the devices we care about.\n\nDoes this mean that we\u0027ll duplicate a lot of .so files inside the VIRT APEX, in addition to the one that was causing us problems? Isn\u0027t that a bad thing?\n\nIf we make this change, should we do the same thing for the compos APEX?\n\nWould a better fix be for the build system not to attempt this optimization in this case?",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 15
+      },
+      "revId": "286f7583559fe33a0d8cefeb62ee2231aa3bb11a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
