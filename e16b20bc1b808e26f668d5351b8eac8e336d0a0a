@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36d20fc2_95b1a807",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-11-25T13:56:27Z",
+      "side": 1,
+      "message": "Nit: you can skip the lambda and just write `.try_for_each(check_label_for_partition)`.",
+      "revId": "e16b20bc1b808e26f668d5351b8eac8e336d0a0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4230fa66_33448bb4",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-11-25T13:56:27Z",
+      "side": 1,
+      "message": "There doesn\u0027t seem that much point returning an anyhow error here that you just immediately convert to a binder error in the caller in the same file. I suggest just calling new_binder_exception directly here, so you can skip the map_err above.",
+      "revId": "e16b20bc1b808e26f668d5351b8eac8e336d0a0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4facfc66_32665bc0",
+        "filename": "virtualizationservice/src/selinux.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-11-25T13:56:27Z",
+      "side": 1,
+      "message": "Why is this pub?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 3
+      },
+      "revId": "e16b20bc1b808e26f668d5351b8eac8e336d0a0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7185a2c2_82ce5570",
+        "filename": "virtualizationservice/src/selinux.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-11-25T13:56:27Z",
+      "side": 1,
+      "message": "Two Es should be sufficient, I think. (-;",
+      "range": {
+        "startLine": 92,
+        "startChar": 82,
+        "endLine": 92,
+        "endChar": 85
+      },
+      "revId": "e16b20bc1b808e26f668d5351b8eac8e336d0a0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
