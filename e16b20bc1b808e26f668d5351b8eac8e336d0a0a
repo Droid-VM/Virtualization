@@ -18,6 +18,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7451ccee_e780f282",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-25T15:29:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36d20fc2_95b1a807",
+      "revId": "e16b20bc1b808e26f668d5351b8eac8e336d0a0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12905b56_a8d5d8e9",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-25T15:29:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36d20fc2_95b1a807",
+      "revId": "e16b20bc1b808e26f668d5351b8eac8e336d0a0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4230fa66_33448bb4",
@@ -31,6 +67,24 @@
       "writtenOn": "2021-11-25T13:56:27Z",
       "side": 1,
       "message": "There doesn\u0027t seem that much point returning an anyhow error here that you just immediately convert to a binder error in the caller in the same file. I suggest just calling new_binder_exception directly here, so you can skip the map_err above.",
+      "revId": "e16b20bc1b808e26f668d5351b8eac8e336d0a0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d96eca1_178a4068",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-25T15:29:08Z",
+      "side": 1,
+      "message": "getfilecon returns anyhow::Result which then must be mapped into binder::Result in this function. So, I don\u0027t think we can get rid of map_error completely. So, I\u0027d like leave it as it is, but if you want I am open to add map_error to #634 and convert #636 to directly return binder::Result. Let me know.",
+      "parentUuid": "4230fa66_33448bb4",
       "revId": "e16b20bc1b808e26f668d5351b8eac8e336d0a0a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -58,6 +112,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6c33936_8e0a89ae",
+        "filename": "virtualizationservice/src/selinux.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-25T15:29:08Z",
+      "side": 1,
+      "message": "Copy/pasted from the original file. Removed.",
+      "parentUuid": "4facfc66_32665bc0",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 3
+      },
+      "revId": "e16b20bc1b808e26f668d5351b8eac8e336d0a0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7185a2c2_82ce5570",
@@ -71,6 +149,30 @@
       "writtenOn": "2021-11-25T13:56:27Z",
       "side": 1,
       "message": "Two Es should be sufficient, I think. (-;",
+      "range": {
+        "startLine": 92,
+        "startChar": 82,
+        "endLine": 92,
+        "endChar": 85
+      },
+      "revId": "e16b20bc1b808e26f668d5351b8eac8e336d0a0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f25f3ba_4bcad0a2",
+        "filename": "virtualizationservice/src/selinux.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-25T15:29:08Z",
+      "side": 1,
+      "message": "Haha. Done.",
+      "parentUuid": "7185a2c2_82ce5570",
       "range": {
         "startLine": 92,
         "startChar": 82,
