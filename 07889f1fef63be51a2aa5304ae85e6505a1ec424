@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69c189c7_5c59e87f",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-25T15:48:49Z",
+      "side": 1,
+      "message": "I think that issue has to be resolved in a different way; permission. \n\nI am thinking about introducing a new platform-signed permission android.permission.USE_CUSTOM_VM_IMAGE (exact name TBD). The permission won\u0027t be grantable to apps. The permission is used to create a VM with RawConfig.\n\nDoes this make sense to you? I will file a separate bug.",
+      "parentUuid": "40f3b2ca_13a635f4",
+      "range": {
+        "startLine": 186,
+        "startChar": 12,
+        "endLine": 186,
+        "endChar": 88
+      },
+      "revId": "07889f1fef63be51a2aa5304ae85e6505a1ec424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20d8bbde_52af4de5",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 2
