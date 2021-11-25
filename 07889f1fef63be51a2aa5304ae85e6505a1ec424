@@ -137,6 +137,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6989115e_1b3bde6c",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-25T16:21:52Z",
+      "side": 1,
+      "message": "b/207769805",
+      "parentUuid": "69c189c7_5c59e87f",
+      "range": {
+        "startLine": 186,
+        "startChar": 12,
+        "endLine": 186,
+        "endChar": 88
+      },
+      "revId": "07889f1fef63be51a2aa5304ae85e6505a1ec424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20d8bbde_52af4de5",
@@ -198,6 +222,30 @@
       "side": 1,
       "message": "That is a very good point.\n\nPerhaps we should add\nneverallow crosvm {app_data_file_type -app_data_file}:file read;\n\nAlthough there\u0027s not much we can do to stop crosvm being allowed access to some other arbitrary label.",
       "parentUuid": "f755ee07_b5fd0826",
+      "range": {
+        "startLine": 193,
+        "startChar": 28,
+        "endLine": 193,
+        "endChar": 41
+      },
+      "revId": "07889f1fef63be51a2aa5304ae85e6505a1ec424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be9da1d6_aeaf734c",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-25T16:21:52Z",
+      "side": 1,
+      "message": "Good idea!\n\nUploaded aosp/1903450",
+      "parentUuid": "83cfc1ce_49d367c7",
       "range": {
         "startLine": 193,
         "startChar": 28,
