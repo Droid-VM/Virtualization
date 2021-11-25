@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ab3887a0_a2498107",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-25T02:05:11Z",
+      "side": 1,
+      "message": "I don\u0027t think we should. It can\u0027t bypass the restriction being enforced by this change as we require that \"all\" partition images to be not labeled as app_data_file when RawConfig is used.",
+      "parentUuid": "ed8dd19d_949b3cd5",
+      "range": {
+        "startLine": 186,
+        "startChar": 12,
+        "endLine": 186,
+        "endChar": 88
+      },
+      "revId": "07889f1fef63be51a2aa5304ae85e6505a1ec424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20d8bbde_52af4de5",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 2
@@ -54,6 +78,30 @@
       "writtenOn": "2021-11-24T17:38:48Z",
       "side": 1,
       "message": "Hmm. What about other app data file types, like privapp_data_file, or anything else that is app_data_file_type?\n\nTo be fair we are only allowing access from platform_app, and that is required to use app_data_file in seapp_contexts.\n\nBut things other than untrusted apps may have write access to all sorts of directories that aren\u0027t app_data_file_type at all.",
+      "range": {
+        "startLine": 193,
+        "startChar": 28,
+        "endLine": 193,
+        "endChar": 41
+      },
+      "revId": "07889f1fef63be51a2aa5304ae85e6505a1ec424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f755ee07_b5fd0826",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-25T02:05:11Z",
+      "side": 1,
+      "message": "Our sepolicy rules allow only app_data_file - for the instance disk - to crosvm. So privapp_data_file and other app_data_file_type are already prohibited by sepolicy and don\u0027t need to be checked here.",
+      "parentUuid": "20d8bbde_52af4de5",
       "range": {
         "startLine": 193,
         "startChar": 28,
@@ -81,6 +129,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dd6c775_be130d9c",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-25T02:05:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97c34dd2_f0868991",
+      "revId": "07889f1fef63be51a2aa5304ae85e6505a1ec424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "654b09f9_8669391b",
@@ -94,6 +160,30 @@
       "writtenOn": "2021-11-24T17:38:48Z",
       "side": 1,
       "message": "This seems like a lot of complexity just to avoid copying the string.\nDoes that matter to us enough?",
+      "range": {
+        "startLine": 33,
+        "startChar": 9,
+        "endLine": 33,
+        "endChar": 18
+      },
+      "revId": "07889f1fef63be51a2aa5304ae85e6505a1ec424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ecaee1d_f36a6d21",
+        "filename": "virtualizationservice/src/selinux.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-25T02:05:11Z",
+      "side": 1,
+      "message": "Yeah, if we are okay with copying the string, we can call `freecon` just after the copying is done. I feel fine with that, but why not wasting CPU cycle?",
+      "parentUuid": "654b09f9_8669391b",
       "range": {
         "startLine": 33,
         "startChar": 9,
@@ -127,6 +217,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7470e60f_cbc5cd7b",
+        "filename": "virtualizationservice/src/selinux.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-25T02:05:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38c692a4_6aa223af",
+      "range": {
+        "startLine": 52,
+        "startChar": 24,
+        "endLine": 52,
+        "endChar": 32
+      },
+      "revId": "07889f1fef63be51a2aa5304ae85e6505a1ec424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7b2fdf2_d7b0ac1a",
@@ -140,6 +254,30 @@
       "writtenOn": "2021-11-24T17:38:48Z",
       "side": 1,
       "message": "?",
+      "range": {
+        "startLine": 59,
+        "startChar": 15,
+        "endLine": 59,
+        "endChar": 52
+      },
+      "revId": "07889f1fef63be51a2aa5304ae85e6505a1ec424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d99603e5_c489ec38",
+        "filename": "virtualizationservice/src/selinux.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-25T02:05:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7b2fdf2_d7b0ac1a",
       "range": {
         "startLine": 59,
         "startChar": 15,
@@ -173,6 +311,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "950c00cc_5d367980",
+        "filename": "virtualizationservice/src/selinux.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-25T02:05:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2982a8d6_7973c63f",
+      "range": {
+        "startLine": 72,
+        "startChar": 28,
+        "endLine": 72,
+        "endChar": 58
+      },
+      "revId": "07889f1fef63be51a2aa5304ae85e6505a1ec424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42ff9922_a3529ac9",
@@ -186,6 +348,30 @@
       "writtenOn": "2021-11-24T17:38:48Z",
       "side": 1,
       "message": "And here",
+      "range": {
+        "startLine": 91,
+        "startChar": 10,
+        "endLine": 91,
+        "endChar": 16
+      },
+      "revId": "07889f1fef63be51a2aa5304ae85e6505a1ec424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30ef483e_87d6a422",
+        "filename": "virtualizationservice/src/selinux.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-25T02:05:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42ff9922_a3529ac9",
       "range": {
         "startLine": 91,
         "startChar": 10,
