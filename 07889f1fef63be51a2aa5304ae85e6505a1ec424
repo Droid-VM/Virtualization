@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "40f3b2ca_13a635f4",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-25T10:02:07Z",
+      "side": 1,
+      "message": "I\u0027m worried about apps being able to use arbitrary kernels rather than Microdroid.\nOur Java API doesn\u0027t allow it, iirc, so why not block it?\n\nThis wouldn\u0027t affect system server / native daemons / other OEM processes, just apps.",
+      "parentUuid": "ab3887a0_a2498107",
+      "range": {
+        "startLine": 186,
+        "startChar": 12,
+        "endLine": 186,
+        "endChar": 88
+      },
+      "revId": "07889f1fef63be51a2aa5304ae85e6505a1ec424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20d8bbde_52af4de5",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 2
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "Our sepolicy rules allow only app_data_file - for the instance disk - to crosvm. So privapp_data_file and other app_data_file_type are already prohibited by sepolicy and don\u0027t need to be checked here.",
       "parentUuid": "20d8bbde_52af4de5",
+      "range": {
+        "startLine": 193,
+        "startChar": 28,
+        "endLine": 193,
+        "endChar": 41
+      },
+      "revId": "07889f1fef63be51a2aa5304ae85e6505a1ec424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83cfc1ce_49d367c7",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-25T10:02:07Z",
+      "side": 1,
+      "message": "That is a very good point.\n\nPerhaps we should add\nneverallow crosvm {app_data_file_type -app_data_file}:file read;\n\nAlthough there\u0027s not much we can do to stop crosvm being allowed access to some other arbitrary label.",
+      "parentUuid": "f755ee07_b5fd0826",
       "range": {
         "startLine": 193,
         "startChar": 28,
@@ -184,6 +232,30 @@
       "side": 1,
       "message": "Yeah, if we are okay with copying the string, we can call `freecon` just after the copying is done. I feel fine with that, but why not wasting CPU cycle?",
       "parentUuid": "654b09f9_8669391b",
+      "range": {
+        "startLine": 33,
+        "startChar": 9,
+        "endLine": 33,
+        "endChar": 18
+      },
+      "revId": "07889f1fef63be51a2aa5304ae85e6505a1ec424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d855af82_dbc711c6",
+        "filename": "virtualizationservice/src/selinux.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-25T10:02:07Z",
+      "side": 1,
+      "message": "Up to you. I\u0027d like Andrew to take a look at this though, I\u0027m not sure I understand it well enough.",
+      "parentUuid": "1ecaee1d_f36a6d21",
       "range": {
         "startLine": 33,
         "startChar": 9,
