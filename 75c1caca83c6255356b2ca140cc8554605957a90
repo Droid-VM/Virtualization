@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "782236d6_691d2183",
+        "filename": "apkdmverity/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-26T10:15:43Z",
+      "side": 1,
+      "message": "Nit: extract this to a variable, outside the loop",
+      "range": {
+        "startLine": 63,
+        "startChar": 11,
+        "endLine": 63,
+        "endChar": 41
+      },
+      "revId": "75c1caca83c6255356b2ca140cc8554605957a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49bbef62_9f617ecc",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-26T10:15:43Z",
+      "side": 1,
+      "message": "Why do these need to be owned?",
+      "range": {
+        "startLine": 174,
+        "startChar": 9,
+        "endLine": 174,
+        "endChar": 16
+      },
+      "revId": "75c1caca83c6255356b2ca140cc8554605957a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f078cb97_3d9359f5",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-26T10:15:43Z",
+      "side": 1,
+      "message": "This ApkDmverityArgument looks like it should itself be const.",
+      "range": {
+        "startLine": 226,
+        "startChar": 25,
+        "endLine": 226,
+        "endChar": 44
+      },
+      "revId": "75c1caca83c6255356b2ca140cc8554605957a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad75ff74_3b62993f",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-26T10:15:43Z",
+      "side": 1,
+      "message": "No timeout?",
+      "range": {
+        "startLine": 255,
+        "startChar": 22,
+        "endLine": 255,
+        "endChar": 26
+      },
+      "revId": "75c1caca83c6255356b2ca140cc8554605957a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
