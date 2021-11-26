@@ -159,6 +159,8 @@ fn try_start_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<()>
         // TODO(jooyung): wait until sys.boot_completed?
         wait_for_apex_config_done()?;
 
+        mount_extra_apks(&config).context("Failed to mount extra apks")?;
+
         if let Some(main_task) = &config.task {
             exec_task(main_task, service).map_err(|e| {
                 error!("failed to execute task: {}", e);
@@ -276,6 +278,40 @@ fn verify_payload(
         apk_data: ApkData { root_hash: root_hash_from_idsig, pubkey: apk_pubkey },
         apex_data: apex_data_from_payload,
     })
+}
+
+fn mount_extra_apks(config: &VmPayloadConfig) -> Result<()> {
+    if config.extra_apks.is_empty() {
+        // nothing to do
+        return Ok(());
+    }
+
+    let mut dmverity_args: Vec<ApkDmverityArgument> = vec![];
+    for i in 0..config.extra_apks.len() {
+        let apk_path = format!("/dev/block/by-name/extra-apk-{}", i);
+        let idsig_path = format!("/dev/block/by-name/extra-idsig-{}", i);
+        let apk_name = format!("extra-apk-{}", i);
+
+        dmverity_args.push(ApkDmverityArgument {
+            apk: PathBuf::from(apk_path),
+            idsig: PathBuf::from(idsig_path),
+            name: apk_name,
+        });
+    }
+
+    run_apkdmverity(&dmverity_args).context("Failed to verify extra apks")?.wait()?;
+
+    for i in 0..config.extra_apks.len() {
+        // don't wait, just detach
+        run_zipfuse(
+            "fscontext=u:object_r:zipfusefs:s0,context=u:object_r:system_file:s0",
+            Path::new(&format!("/dev/block/mapper/extra-apk-{}", i)),
+            Path::new(&format!("/mnt/extra-apk-{}", i)),
+        )
+        .context("Failed to zipfuse extra apks")?;
+    }
+
+    Ok(())
 }
 
 // Waits until linker config is generated

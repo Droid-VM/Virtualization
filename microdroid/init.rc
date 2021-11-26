@@ -18,6 +18,10 @@ on early-init
     start ueventd
 
     mkdir /mnt/apk 0755 system system
+
+    # TODO(b/205224817): support arbitrary number of apks
+    mkdir /mnt/extra-apk-0 0755 system system
+
     # Microdroid_manager starts apkdmverity/zipfuse/apexd
     start microdroid_manager
 
