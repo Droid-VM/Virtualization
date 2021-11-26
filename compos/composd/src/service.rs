@@ -21,6 +21,7 @@ use crate::compilation_task::CompilationTask;
 use crate::fd_server_helper::FdServerConfig;
 use crate::instance_manager::InstanceManager;
 use crate::instance_starter::CompOsInstance;
+use crate::odrefresh_task::OdrefreshTask;
 use crate::util::to_binder_result;
 use android_system_composd::aidl::android::system::composd::{
     ICompilationTask::{BnCompilationTask, ICompilationTask},
@@ -61,6 +62,14 @@ impl IIsolatedCompilationService for IsolatedCompilationService {
         to_binder_result(self.do_start_test_compile(callback))
     }
 
+    fn startAsyncOdrefresh(
+        &self,
+        callback: &Strong<dyn ICompilationTaskCallback>,
+    ) -> binder::Result<Strong<dyn ICompilationTask>> {
+        check_test_permissions()?;
+        to_binder_result(self.do_start_async_odrefresh(callback))
+    }
+
     fn startTestOdrefresh(&self) -> binder::Result<i8> {
         check_test_permissions()?;
         to_binder_result(self.do_odrefresh_for_test())
@@ -75,6 +84,21 @@ impl IsolatedCompilationService {
         let comp_os = self.instance_manager.start_test_instance().context("Starting CompOS")?;
 
         let task = CompilationTask::start_test_compile(comp_os, callback)?;
+
+        Ok(BnCompilationTask::new_binder(task, BinderFeatures::default()))
+    }
+
+    fn do_start_async_odrefresh(
+        &self,
+        callback: &Strong<dyn ICompilationTaskCallback>,
+    ) -> Result<Strong<dyn ICompilationTask>> {
+        let mut staging_dir_path = PathBuf::from(COMPOS_DATA_ROOT);
+        staging_dir_path.push("test-artifacts");
+        to_binder_result(create_dir(&staging_dir_path))?;
+
+        let comp_os = self.instance_manager.start_test_instance().context("Starting CompOS")?;
+
+        let task = OdrefreshTask::start(comp_os, staging_dir_path, callback)?;
 
         Ok(BnCompilationTask::new_binder(task, BinderFeatures::default()))
     }
@@ -126,7 +150,7 @@ fn check_test_permissions() -> binder::Result<()> {
 
 /// Returns an owned FD of the directory path. It currently returns a `File` as a FD owner, but
 /// it's better to use `std::os::unix::io::OwnedFd` once/if it becomes standard.
-fn open_dir_path(path: &Path) -> Result<File> {
+pub fn open_dir_path(path: &Path) -> Result<File> {
     OpenOptions::new()
         .custom_flags(libc::O_PATH | libc::O_DIRECTORY)
         // The custom flags above is not taken into consideration by the unix implementation of
