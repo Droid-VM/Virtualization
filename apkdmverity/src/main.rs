@@ -45,18 +45,17 @@ fn main() -> Result<()> {
                             file must be signed using the APK signature scheme 4. The block device \
                             is created at \"/dev/mapper/<name>\".'",
         ))
+        .arg(Arg::from_usage(
+            "--no-root-hash 'Ignore saved root_hash and read root_hash from idsig.'",
+        ))
         .arg(Arg::with_name("verbose").short("v").long("verbose").help("Shows verbose output"))
         .get_matches();
 
     let apks = matches.values_of("apk").unwrap();
     assert!(apks.len() % 3 == 0);
 
-    let roothash = if let Ok(val) = system_properties::read("microdroid_manager.apk_root_hash") {
-        Some(util::parse_hexstring(&val)?)
-    } else {
-        // This failure is not an error. We will use the roothash read from the idsig file.
-        None
-    };
+    let roothash =
+        if matches.is_present("no-root-hash") { None } else { get_root_hash_from_property() };
 
     let verbose = matches.is_present("verbose");
 
@@ -70,6 +69,15 @@ fn main() -> Result<()> {
         }
     }
     Ok(())
+}
+
+fn get_root_hash_from_property() -> Option<Vec<u8>> {
+    if let Ok(val) = system_properties::read("microdroid_manager.apk_root_hash") {
+        Some(util::parse_hexstring(&val).ok()?)
+    } else {
+        // This failure is not an error. We will use the roothash read from the idsig file.
+        None
+    }
 }
 
 struct VerityResult {

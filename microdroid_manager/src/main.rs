@@ -30,7 +30,7 @@ use microdroid_payload_config::{Task, TaskType, VmPayloadConfig};
 use payload::{get_apex_data_from_payload, load_metadata, to_metadata};
 use rustutils::system_properties;
 use rustutils::system_properties::PropertyWatcher;
-use std::fs::{self, File, OpenOptions};
+use std::fs::{self, create_dir, File, OpenOptions};
 use std::os::unix::io::{FromRawFd, IntoRawFd};
 use std::path::Path;
 use std::process::{Child, Command, Stdio};
@@ -77,7 +77,7 @@ fn translate_error(err: &Error) -> (i32, String) {
             }
         }
     } else {
-        (ERROR_UNKNOWN, err.to_string())
+        (ERROR_UNKNOWN, format!("{:?}", err))
     }
 }
 
@@ -163,6 +163,8 @@ fn try_start_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<()>
         // TODO(jooyung): wait until sys.boot_completed?
         wait_for_apex_config_done()?;
 
+        mount_extra_apks(&config).context("Failed to mount extra apks")?;
+
         if let Some(main_task) = &config.task {
             exec_task(main_task, service).map_err(|e| {
                 error!("failed to execute task: {}", e);
@@ -180,13 +182,17 @@ struct ApkDmverityArgument<'a> {
     name: &'a str,
 }
 
-fn run_apkdmverity(args: &[ApkDmverityArgument]) -> Result<Child> {
+fn run_apkdmverity(args: &[ApkDmverityArgument], no_root_hash: bool) -> Result<Child> {
     let mut cmd = Command::new(APKDMVERITY_BIN);
 
     cmd.stdin(Stdio::null()).stdout(Stdio::null()).stderr(Stdio::null());
 
     for argument in args {
         cmd.arg("--apk").arg(argument.apk).arg(argument.idsig).arg(argument.name);
+    }
+
+    if no_root_hash {
+        cmd.arg("--no-root-hash");
     }
 
     cmd.spawn().context("Spawn apkdmverity")
@@ -227,7 +233,8 @@ fn verify_payload(
     }
 
     // Start apkdmverity and wait for the dm-verify block
-    let mut apkdmverity_child = run_apkdmverity(&[APK_DM_VERITY_ARGUMENT])?;
+    let mut apkdmverity_child =
+        run_apkdmverity(&[APK_DM_VERITY_ARGUMENT], false /* use saved root hash */)?;
 
     // While waiting for apkdmverity to mount APK, gathers public keys and root digests from
     // APEX payload.
@@ -276,6 +283,51 @@ fn verify_payload(
         apk_data: ApkData { root_hash: root_hash_from_idsig, pubkey: apk_pubkey },
         apex_data: apex_data_from_payload,
     })
+}
+
+fn mount_extra_apks(config: &VmPayloadConfig) -> Result<()> {
+    if config.extra_apks.is_empty() {
+        // nothing to do
+        return Ok(());
+    }
+
+    let mut apk_paths: Vec<String> = vec![];
+    let mut idsig_paths: Vec<String> = vec![];
+    let mut apk_names: Vec<String> = vec![];
+    let mut dmverity_args: Vec<ApkDmverityArgument> = vec![];
+
+    for i in 0..config.extra_apks.len() {
+        apk_paths.push(format!("/dev/block/by-name/extra-apk-{}", i));
+        idsig_paths.push(format!("/dev/block/by-name/extra-idsig-{}", i));
+        apk_names.push(format!("extra-apk-{}", i));
+    }
+
+    for i in 0..config.extra_apks.len() {
+        dmverity_args.push(ApkDmverityArgument {
+            apk: &apk_paths[i],
+            idsig: &idsig_paths[i],
+            name: &apk_names[i],
+        });
+    }
+
+    run_apkdmverity(&dmverity_args, true /* don't use saved root hash */)
+        .context("Failed to verify extra apks")?
+        .wait()?;
+
+    for i in 0..config.extra_apks.len() {
+        let mount_dir = format!("/mnt/extra-apk/{}", i);
+        create_dir(Path::new(&mount_dir)).context("Failed to create mount dir for extra apks")?;
+
+        // don't wait, just detach
+        run_zipfuse(
+            "fscontext=u:object_r:zipfusefs:s0,context=u:object_r:extra_apk_file:s0",
+            Path::new(&format!("/dev/block/mapper/extra-apk-{}", i)),
+            Path::new(&mount_dir),
+        )
+        .context("Failed to zipfuse extra apks")?;
+    }
+
+    Ok(())
 }
 
 // Waits until linker config is generated
