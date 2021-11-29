@@ -46,6 +46,30 @@
       },
       "revId": "39bab89ccd94b57ea4980ea2595051ce69e0e706",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baf8f565_68dd3525",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-11-29T04:49:40Z",
+      "side": 1,
+      "message": "Thanks. Then 256 should be fine. But I really don\u0027t understand why we need such a big amount of memory. \n\nAccording to https://blackbox.googleplex.com/testmapping?branch\u003dgit_master-throttled-nightly\u0026target\u003doriole_pkvm-userdebug\u0026folder\u003dpackages%2Fmodules%2FVirtualization\u0026subfolders\u003dtrue, I see that the uboot update started the problem.\n\nhttps://android-build.googleplex.com/builds/7849528/branches/git_master-throttled-nightly/targets/aosp_arm64-userdebug-thinlto/cls?end\u003d7848631\n\nCan you confirm that the bootloader fails with RAM smaller than 243? Or does the failure happen in later stage (i.e. Microdroid)?\n\nAlso, please file a bug so that we can reduce the RAM requirement down.",
+      "parentUuid": "9cfd6ad3_357239e7",
+      "range": {
+        "startLine": 37,
+        "startChar": 45,
+        "endLine": 37,
+        "endChar": 48
+      },
+      "revId": "39bab89ccd94b57ea4980ea2595051ce69e0e706",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
