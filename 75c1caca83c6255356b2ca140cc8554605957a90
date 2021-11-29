@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dbb3ac7_888962f3",
+        "filename": "apkdmverity/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-29T04:10:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4172f6d7_2366ca79",
+      "range": {
+        "startLine": 63,
+        "startChar": 11,
+        "endLine": 63,
+        "endChar": 41
+      },
+      "revId": "75c1caca83c6255356b2ca140cc8554605957a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61666a6a_871338d8",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4100c00_e4300937",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-29T04:10:47Z",
+      "side": 1,
+      "message": "Yes, in a follow up CL.",
+      "parentUuid": "61666a6a_871338d8",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 148,
+        "endChar": 39
+      },
+      "revId": "75c1caca83c6255356b2ca140cc8554605957a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49bbef62_9f617ecc",
@@ -84,6 +132,30 @@
       "writtenOn": "2021-11-26T10:15:43Z",
       "side": 1,
       "message": "Why do these need to be owned?",
+      "range": {
+        "startLine": 174,
+        "startChar": 9,
+        "endLine": 174,
+        "endChar": 16
+      },
+      "revId": "75c1caca83c6255356b2ca140cc8554605957a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a46ac843_8e9d1dab",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-29T04:10:47Z",
+      "side": 1,
+      "message": "It doesn\u0027t need to. Fixed to \u0026str. Thanks! (Rust is still very difficult to me :p)",
+      "parentUuid": "49bbef62_9f617ecc",
       "range": {
         "startLine": 174,
         "startChar": 9,
@@ -141,6 +213,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9dc90af_16ccf970",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-29T04:10:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12f39dcd_6bdedc49",
+      "range": {
+        "startLine": 226,
+        "startChar": 25,
+        "endLine": 226,
+        "endChar": 44
+      },
+      "revId": "75c1caca83c6255356b2ca140cc8554605957a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad75ff74_3b62993f",
@@ -154,6 +250,30 @@
       "writtenOn": "2021-11-26T10:15:43Z",
       "side": 1,
       "message": "No timeout?",
+      "range": {
+        "startLine": 255,
+        "startChar": 22,
+        "endLine": 255,
+        "endChar": 26
+      },
+      "revId": "75c1caca83c6255356b2ca140cc8554605957a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37163d68_3a13bdc1",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-29T04:10:47Z",
+      "side": 1,
+      "message": "I wanted to, but I couldn\u0027t find a way to specify timeout. Any suggestions?",
+      "parentUuid": "ad75ff74_3b62993f",
       "range": {
         "startLine": 255,
         "startChar": 22,
