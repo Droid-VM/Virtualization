@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eced9512_412fd6a2",
+        "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-29T17:31:32Z",
+      "side": 1,
+      "message": "Good catch, done.  Unfortunately, these are signed, while the actual `struct statfs` contains unsigned integers.  So they can\u0027t be fully aligned with RemoteFsStats.",
+      "parentUuid": "102c3cf5_0f64cfb4",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 11
+      },
+      "revId": "273147bf37113662d0e205217387ddd9f1b0615b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bf629b0_acf7a6e9",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-11-24T16:59:05Z",
       "side": 1,
       "message": "Why not new_errno_error here?",
+      "range": {
+        "startLine": 339,
+        "startChar": 12,
+        "endLine": 339,
+        "endChar": 45
+      },
+      "revId": "273147bf37113662d0e205217387ddd9f1b0615b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a111b6b_16f7165d",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-29T17:31:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bf629b0_acf7a6e9",
       "range": {
         "startLine": 339,
         "startChar": 12,
@@ -84,6 +132,30 @@
       "side": 1,
       "message": "In the C++ world it means Plain Old Data - no funky constructors or destructors etc. The Rust equivalent would be primitive, or Copy, maybe?\n\nI guess libc doesn\u0027t implement Default, which would be nicer?",
       "parentUuid": "d1e09d55_a3dd9b11",
+      "range": {
+        "startLine": 688,
+        "startChar": 68,
+        "endLine": 688,
+        "endChar": 71
+      },
+      "revId": "273147bf37113662d0e205217387ddd9f1b0615b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71f11512_1f17f25f",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-29T17:31:32Z",
+      "side": 1,
+      "message": "Yeah, I hope libc could make it more friendly to use.  I often see many structs (like this one) that contain private reserved field(s) for alignment, etc.  Which forces me to initialize with `zeroed`.  BTW, I copied the comment from the fuse crate.",
+      "parentUuid": "a4809857_1974e42b",
       "range": {
         "startLine": 688,
         "startChar": 68,
