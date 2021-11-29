@@ -22,6 +22,30 @@
       },
       "revId": "39bab89ccd94b57ea4980ea2595051ce69e0e706",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cfd6ad3_357239e7",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-11-29T04:35:32Z",
+      "side": 1,
+      "message": "I tested and I found that 243 is smallest. I\u0027m still worried that it would break in a near future, and IMO 256 is a reasonable number. Is it our plan to update this variable whenever needed?",
+      "parentUuid": "d9e827ec_1433f953",
+      "range": {
+        "startLine": 37,
+        "startChar": 45,
+        "endLine": 37,
+        "endChar": 48
+      },
+      "revId": "39bab89ccd94b57ea4980ea2595051ce69e0e706",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
