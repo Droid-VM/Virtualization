@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6d84c1e_8951cc81",
+        "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationJobService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-11-30T16:38:09Z",
+      "side": 0,
+      "message": "Could you help me understand why system server has crashed?  Wouldn\u0027t \"not catching\" the RuntimeException be another way to crash it?  E.g. Thread#start can throw IllegalStateException, which is a RuntimeException.",
+      "range": {
+        "startLine": 80,
+        "startChar": 14,
+        "endLine": 81,
+        "endChar": 36
+      },
+      "revId": "bc200c5a0e471fe3fdf62a9faff542ff61ee3852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
