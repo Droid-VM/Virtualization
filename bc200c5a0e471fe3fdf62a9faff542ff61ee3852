@@ -22,6 +22,30 @@
       },
       "revId": "bc200c5a0e471fe3fdf62a9faff542ff61ee3852",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce8792a4_871c2175",
+        "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationJobService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-11-30T16:48:56Z",
+      "side": 0,
+      "message": "AIUI if any thread exits with an exception that\u0027s treated as a system server crash.\n\nAnd newJob.start() can definitely throw, so we need to handle that.\n\nI agree Thread#start can in theory throw, but it definitely shouldn\u0027t in this context (unless, say, we\u0027re totally out of memory). If it ever does that\u0027s sufficiently unexpected that I want to crash system server so I find out about it.",
+      "parentUuid": "d6d84c1e_8951cc81",
+      "range": {
+        "startLine": 80,
+        "startChar": 14,
+        "endLine": 81,
+        "endChar": 36
+      },
+      "revId": "bc200c5a0e471fe3fdf62a9faff542ff61ee3852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
