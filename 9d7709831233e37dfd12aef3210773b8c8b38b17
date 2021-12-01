@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8acec30c_b4ec741d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-01T22:01:43Z",
+      "side": 1,
+      "message": "I figured this is actually wrong.\n\nI have some trouble keeping path fd for the child process (which runs in a separate SELinux domain), *after* SELinux is enforced.  Then I realized sharing the directory path as FD doesn\u0027t really mean anything, since the child process could create the same path fd by itself.  I think this is why I\u0027ve had trouble with O_PATH/O_DIRECTORY for several times before.\n\nHaving said that, the code change would be fine to land, as it only changes the fd owner type, and I could rephrase the change description.  But it doesn\u0027t really give us anything.\n\nI\u0027ll abandon this change and really fix the client to not pass a path FD instead.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 28
+      },
+      "revId": "9d7709831233e37dfd12aef3210773b8c8b38b17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "837c0395_a8b43bb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-01T22:01:43Z",
+      "side": 1,
+      "message": "This ",
+      "revId": "9d7709831233e37dfd12aef3210773b8c8b38b17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
