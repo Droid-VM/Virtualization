@@ -17,7 +17,7 @@
 use anyhow::Result;
 use log::error;
 use nix::{
-    dir::Dir, errno::Errno, fcntl::openat, fcntl::OFlag, sys::stat::mkdirat, sys::stat::Mode,
+    errno::Errno, fcntl::openat, fcntl::OFlag, sys::stat::mkdirat, sys::stat::Mode,
     sys::statvfs::statvfs, sys::statvfs::Statvfs,
 };
 use std::cmp::min;
@@ -26,11 +26,12 @@ use std::convert::TryInto;
 use std::fs::File;
 use std::io;
 use std::os::unix::fs::FileExt;
-use std::os::unix::io::{AsRawFd, FromRawFd, RawFd};
+use std::os::unix::io::{AsRawFd, FromRawFd};
 use std::path::{Component, Path, PathBuf, MAIN_SEPARATOR};
 use std::sync::{Arc, Mutex};
 
 use crate::fsverity;
+use crate::owned_fd::OwnedFd;
 use authfs_aidl_interface::aidl::com::android::virt::fs::IVirtFdService::{
     BnVirtFdService, FsStat::FsStat, IVirtFdService, MAX_REQUESTING_DATA,
 };
@@ -73,10 +74,10 @@ pub enum FdConfig {
     ReadWrite(File),
 
     /// A read-only directory to serve by this server.
-    InputDir(Dir),
+    InputDir(OwnedFd),
 
     /// A writable directory to serve by this server.
-    OutputDir(Dir),
+    OutputDir(OwnedFd),
 }
 
 pub struct FdService {
@@ -272,8 +273,8 @@ impl IVirtFdService for FdService {
         }
 
         self.insert_new_fd(fd, |config| match config {
-            FdConfig::InputDir(dir) => {
-                let file = open_readonly_at(dir.as_raw_fd(), &path_buf).map_err(new_errno_error)?;
+            FdConfig::InputDir(owned_fd) => {
+                let file = open_readonly_at(owned_fd, &path_buf).map_err(new_errno_error)?;
 
                 // TODO(205987437): Provide the corresponding ".fsv_meta" file when it's created.
                 Ok((
@@ -294,9 +295,9 @@ impl IVirtFdService for FdService {
         }
         self.insert_new_fd(fd, |config| match config {
             FdConfig::InputDir(_) => Err(new_errno_error(Errno::EACCES)),
-            FdConfig::OutputDir(dir) => {
+            FdConfig::OutputDir(owned_fd) => {
                 let new_fd = openat(
-                    dir.as_raw_fd(),
+                    owned_fd.as_raw_fd(),
                     basename,
                     // TODO(205172873): handle the case when the file already exist, e.g. truncate
                     // or fail, and possibly allow the client to specify. For now, always truncate.
@@ -320,14 +321,12 @@ impl IVirtFdService for FdService {
             FdConfig::InputDir(_) => Err(new_errno_error(Errno::EACCES)),
             FdConfig::OutputDir(_) => {
                 mkdirat(dir_fd, basename, Mode::S_IRWXU).map_err(new_errno_error)?;
-                let new_dir = Dir::openat(
-                    dir_fd,
-                    basename,
-                    OFlag::O_DIRECTORY | OFlag::O_RDONLY,
-                    Mode::empty(),
-                )
-                .map_err(new_errno_error)?;
-                Ok((new_dir.as_raw_fd(), FdConfig::OutputDir(new_dir)))
+                let new_fd =
+                    openat(dir_fd, basename, OFlag::O_DIRECTORY | OFlag::O_RDONLY, Mode::empty())
+                        .map_err(new_errno_error)?;
+                // SAFETY: FD is newly created and not owned. Assign the ownership.
+                let owned_fd = unsafe { OwnedFd::from_raw_fd(new_fd) };
+                Ok((new_fd, FdConfig::OutputDir(owned_fd)))
             }
             _ => Err(new_errno_error(Errno::ENOTDIR)),
         })
@@ -362,8 +361,8 @@ fn new_errno_error(errno: Errno) -> Status {
     new_binder_service_specific_error(errno as i32, errno.desc())
 }
 
-fn open_readonly_at(dir_fd: RawFd, path: &Path) -> nix::Result<File> {
-    let new_fd = openat(dir_fd, path, OFlag::O_RDONLY, Mode::empty())?;
+fn open_readonly_at(owned_fd: &OwnedFd, path: &Path) -> nix::Result<File> {
+    let new_fd = openat(owned_fd.as_raw_fd(), path, OFlag::O_RDONLY, Mode::empty())?;
     // SAFETY: new_fd is just created successfully and not owned.
     let new_file = unsafe { File::from_raw_fd(new_fd) };
     Ok(new_file)

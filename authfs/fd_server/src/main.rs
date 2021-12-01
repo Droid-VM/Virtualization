@@ -24,16 +24,17 @@
 
 mod aidl;
 mod fsverity;
+mod owned_fd;
 
 use anyhow::{bail, Result};
 use binder_common::rpc_server::run_rpc_server;
-use log::debug;
-use nix::dir::Dir;
+use log::{debug, error};
 use std::collections::BTreeMap;
 use std::fs::File;
 use std::os::unix::io::FromRawFd;
 
-use aidl::{FdConfig, FdService};
+use crate::aidl::{FdConfig, FdService};
+use crate::owned_fd::OwnedFd;
 
 const RPC_SERVICE_PORT: u32 = 3264; // TODO: support dynamic port for multiple fd_server instances
 
@@ -80,12 +81,16 @@ fn parse_arg_rw_fds(arg: &str) -> Result<(i32, FdConfig)> {
 
 fn parse_arg_ro_dirs(arg: &str) -> Result<(i32, FdConfig)> {
     let fd = arg.parse::<i32>()?;
-    Ok((fd, FdConfig::InputDir(Dir::from_fd(fd)?)))
+    // SAFETY: The caller is supposed to provide a valid FD to this process.
+    let owned_fd = unsafe { OwnedFd::from_raw_fd(fd) };
+    Ok((fd, FdConfig::InputDir(owned_fd)))
 }
 
 fn parse_arg_rw_dirs(arg: &str) -> Result<(i32, FdConfig)> {
     let fd = arg.parse::<i32>()?;
-    Ok((fd, FdConfig::OutputDir(Dir::from_fd(fd)?)))
+    // SAFETY: The caller is supposed to provide a valid FD to this process.
+    let owned_fd = unsafe { OwnedFd::from_raw_fd(fd) };
+    Ok((fd, FdConfig::OutputDir(owned_fd)))
 }
 
 struct Args {
@@ -151,7 +156,7 @@ fn parse_args() -> Result<Args> {
     Ok(Args { fd_pool, ready_fd })
 }
 
-fn main() -> Result<()> {
+fn try_main() -> Result<()> {
     android_logger::init_once(
         android_logger::Config::default().with_tag("fd_server").with_min_level(log::Level::Debug),
     );
@@ -173,5 +178,12 @@ fn main() -> Result<()> {
         Ok(())
     } else {
         bail!("Premature termination of RPC server");
+    }
+}
+
+fn main() {
+    if let Err(e) = try_main() {
+        error!("failed with {:?}", e);
+        std::process::exit(1);
     }
 }
