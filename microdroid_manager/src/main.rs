@@ -23,16 +23,18 @@ use anyhow::{anyhow, bail, ensure, Context, Error, Result};
 use apkverify::{get_public_key_der, verify};
 use binder::unstable_api::{new_spibinder, AIBinder};
 use binder::{FromIBinder, Strong};
+use glob::glob;
 use idsig::V4Signature;
+use itertools::sorted;
 use log::{error, info, warn};
 use microdroid_metadata::{write_metadata, Metadata};
 use microdroid_payload_config::{Task, TaskType, VmPayloadConfig};
 use payload::{get_apex_data_from_payload, load_metadata, to_metadata};
 use rustutils::system_properties;
 use rustutils::system_properties::PropertyWatcher;
-use std::fs::{self, File, OpenOptions};
+use std::fs::{self, create_dir, File, OpenOptions};
 use std::os::unix::io::{FromRawFd, IntoRawFd};
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use std::process::{Child, Command, Stdio};
 use std::str;
 use std::time::{Duration, SystemTime};
@@ -43,13 +45,17 @@ use android_system_virtualmachineservice::aidl::android::system::virtualmachines
 };
 
 const WAIT_TIMEOUT: Duration = Duration::from_secs(10);
-const APK_DM_VERITY_ARGUMENT: ApkDmverityArgument = {
+const MAIN_APK_DM_VERITY_ARGUMENT: ApkDmverityArgument = {
     ApkDmverityArgument {
         apk: "/dev/block/by-name/microdroid-apk",
         idsig: "/dev/block/by-name/microdroid-apk-idsig",
         name: "microdroid-apk",
+        root_hash: None, // To be filled in verify_payload
     }
 };
+const MAIN_APK_IDSIG_PATH: &str = "/dev/block/by-name/microdroid-apk-idsig";
+const EXTRA_APK_PATH_PATTERN: &str = "/dev/block/by-name/extra-apk-*";
+const EXTRA_IDSIG_PATH_PATTERN: &str = "/dev/block/by-name/extra-idsig-*";
 const DM_MOUNTED_APK_PATH: &str = "/dev/block/mapper/microdroid-apk";
 const APKDMVERITY_BIN: &str = "/system/bin/apkdmverity";
 const ZIPFUSE_BIN: &str = "/system/bin/zipfuse";
@@ -154,6 +160,16 @@ fn try_start_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<()>
     if !metadata.payload_config_path.is_empty() {
         let config = load_config(Path::new(&metadata.payload_config_path))?;
 
+        if config.extra_apks.len() != verified_data.extra_apks_data.len() {
+            return Err(anyhow!(
+                "config expects {} extra apks, but found only {}",
+                config.extra_apks.len(),
+                verified_data.extra_apks_data.len()
+            ));
+        }
+
+        mount_extra_apks(&config)?;
+
         let fake_secret = "This is a placeholder for a value that is derived from the images that are loaded in the VM.";
         if let Err(err) = rustutils::system_properties::write("ro.vmsecret.keymint", fake_secret) {
             warn!("failed to set ro.vmsecret.keymint: {}", err);
@@ -178,6 +194,7 @@ struct ApkDmverityArgument<'a> {
     apk: &'a str,
     idsig: &'a str,
     name: &'a str,
+    root_hash: Option<&'a RootHash>,
 }
 
 fn run_apkdmverity(args: &[ApkDmverityArgument]) -> Result<Child> {
@@ -187,6 +204,11 @@ fn run_apkdmverity(args: &[ApkDmverityArgument]) -> Result<Child> {
 
     for argument in args {
         cmd.arg("--apk").arg(argument.apk).arg(argument.idsig).arg(argument.name);
+        if let Some(root_hash) = argument.root_hash {
+            cmd.arg(&to_hex_string(root_hash));
+        } else {
+            cmd.arg("none");
+        }
     }
 
     cmd.spawn().context("Spawn apkdmverity")
@@ -215,19 +237,77 @@ fn verify_payload(
 ) -> Result<MicrodroidData> {
     let start_time = SystemTime::now();
 
+    let mut apkdmverity_arguments: Vec<ApkDmverityArgument> = vec![];
+
+    // Verify main APK
     let root_hash = saved_data.map(|d| &d.apk_data.root_hash);
-    let root_hash_from_idsig = get_apk_root_hash_from_idsig()?;
+    let root_hash_from_idsig = get_apk_root_hash_from_idsig(MAIN_APK_IDSIG_PATH)?;
     let root_hash_trustful = root_hash == Some(&root_hash_from_idsig);
 
     // If root_hash can be trusted, pass it to apkdmverity so that it uses the passed root_hash
     // instead of the value read from the idsig file.
+    let mut main_apk_argument = MAIN_APK_DM_VERITY_ARGUMENT;
     if root_hash_trustful {
-        let root_hash = to_hex_string(root_hash.unwrap());
-        system_properties::write("microdroid_manager.apk_root_hash", &root_hash)?;
+        main_apk_argument.root_hash = Some(root_hash_from_idsig.as_ref());
+    }
+    apkdmverity_arguments.push(main_apk_argument);
+
+    // Verify extra APKs
+    // For now, we can't read the payload config, so glob APKs and idsigs.
+    // Later, we'll see if it matches with the payload config.
+    let extra_apks: Vec<PathBuf> = sorted(
+        glob(EXTRA_APK_PATH_PATTERN)
+            .expect("Failed to glob extra APKs")
+            .map(|x| x.expect("Failed to read extra APKs")),
+    )
+    .collect();
+    let extra_idsigs: Vec<PathBuf> = sorted(
+        glob(EXTRA_IDSIG_PATH_PATTERN)
+            .expect("Failed to glob extra idsigs")
+            .map(|x| x.expect("Failed to read extra idsigs")),
+    )
+    .collect();
+    if extra_apks.len() != extra_idsigs.len() {
+        return Err(anyhow!(
+            "Extra apks/idsigs mismatch: {} apks but {} idsigs",
+            extra_apks.len(),
+            extra_idsigs.len()
+        ));
+    }
+    let extra_apks_count = extra_apks.len();
+
+    let mut extra_apk_names: Vec<String> = vec![];
+    let mut extra_root_hashes_from_idsig: Vec<Box<RootHash>> = vec![];
+    for (i, extra_idsig) in extra_idsigs.iter().enumerate() {
+        extra_apk_names.push(format!("extra-apk-{}", i));
+        extra_root_hashes_from_idsig
+            .push(get_apk_root_hash_from_idsig(extra_idsig.to_str().unwrap())?);
+    }
+
+    let saved_extra_apks_data = saved_data.map(|d| &d.extra_apks_data);
+    let mut extra_root_hashes_trustful: Vec<bool> = vec![];
+    for i in 0..extra_apks_count {
+        let root_hash_trustful = saved_extra_apks_data.and_then(|d| d.get(i)).map(|d| &d.root_hash)
+            == Some(&extra_root_hashes_from_idsig[i]);
+        extra_root_hashes_trustful.push(root_hash_trustful);
+
+        let argument = {
+            ApkDmverityArgument {
+                apk: extra_apks[i].to_str().unwrap(),
+                idsig: extra_idsigs[i].to_str().unwrap(),
+                name: &extra_apk_names[i],
+                root_hash: if root_hash_trustful {
+                    Some(&extra_root_hashes_from_idsig[i])
+                } else {
+                    None
+                },
+            }
+        };
+        apkdmverity_arguments.push(argument);
     }
 
     // Start apkdmverity and wait for the dm-verify block
-    let mut apkdmverity_child = run_apkdmverity(&[APK_DM_VERITY_ARGUMENT])?;
+    let mut apkdmverity_child = run_apkdmverity(&apkdmverity_arguments)?;
 
     // While waiting for apkdmverity to mount APK, gathers public keys and root digests from
     // APEX payload.
@@ -268,14 +348,47 @@ fn verify_payload(
         get_public_key_der(DM_MOUNTED_APK_PATH)?
     };
 
+    let mut extra_apks_data: Vec<ApkData> = vec![];
+    for (i, extra_root_hash) in extra_root_hashes_from_idsig.into_iter().enumerate() {
+        let mount_path = format!("/dev/block/mapper/{}", &extra_apk_names[i]);
+        let apk_pubkey = if !extra_root_hashes_trustful[i] {
+            verify(&mount_path).context(MicrodroidError::PayloadVerificationFailed(format!(
+                "failed to verify {}",
+                &mount_path
+            )))?
+        } else {
+            get_public_key_der(&mount_path)?
+        };
+        extra_apks_data.push(ApkData { root_hash: extra_root_hash, pubkey: apk_pubkey });
+    }
+
     info!("payload verification successful. took {:#?}", start_time.elapsed().unwrap());
 
     // At this point, we can ensure that the root_hash from the idsig file is trusted, either by
     // fully verifying the APK or by comparing it with the saved root_hash.
     Ok(MicrodroidData {
         apk_data: ApkData { root_hash: root_hash_from_idsig, pubkey: apk_pubkey },
+        extra_apks_data,
         apex_data: apex_data_from_payload,
     })
+}
+
+fn mount_extra_apks(config: &VmPayloadConfig) -> Result<()> {
+    // For now, only the number of apks is important, as the mount point and dm-verity name is fixed
+    for i in 0..config.extra_apks.len() {
+        let mount_dir = format!("/mnt/extra-apk/{}", i);
+        create_dir(Path::new(&mount_dir)).context("Failed to create mount dir for extra apks")?;
+
+        // don't wait, just detach
+        run_zipfuse(
+            "fscontext=u:object_r:zipfusefs:s0,context=u:object_r:extra_apk_file:s0",
+            Path::new(&format!("/dev/block/mapper/extra-apk-{}", i)),
+            Path::new(&mount_dir),
+        )
+        .context("Failed to zipfuse extra apks")?;
+    }
+
+    Ok(())
 }
 
 // Waits until linker config is generated
@@ -291,8 +404,8 @@ fn wait_for_apex_config_done() -> Result<()> {
     Ok(())
 }
 
-fn get_apk_root_hash_from_idsig() -> Result<Box<RootHash>> {
-    let mut idsig = File::open("/dev/block/by-name/microdroid-apk-idsig")?;
+fn get_apk_root_hash_from_idsig(path: &str) -> Result<Box<RootHash>> {
+    let mut idsig = File::open(path)?;
     let idsig = V4Signature::from(&mut idsig)?;
     Ok(idsig.hashing_info.raw_root_hash)
 }
