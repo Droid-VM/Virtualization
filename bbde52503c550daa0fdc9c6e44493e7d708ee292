@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8ff8a60d_afef98a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-01T09:32:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e5b14ef_e842814e",
+      "range": {
+        "startLine": 16,
+        "startChar": 3,
+        "endLine": 16,
+        "endChar": 4
+      },
+      "revId": "bbde52503c550daa0fdc9c6e44493e7d708ee292",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4403609e_4a16d8e2",
         "filename": "compos/composd/src/compilation_task.rs",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2021-11-30T19:06:41Z",
       "side": 1,
       "message": "This shares a lot of duplication with start_test_compile, but since we need to migrate soon-ish to run odrefresh in the VM, it might not worth to complicate these.\n\nBut we should start to think about the convergence separately.  With aosp/1904133, it seems odrefresh_task.rs will supersede compilation_task.rs (and we can probably delete odrefresh.rs).  But we can take it offline.",
+      "range": {
+        "startLine": 55,
+        "startChar": 11,
+        "endLine": 55,
+        "endChar": 36
+      },
+      "revId": "bbde52503c550daa0fdc9c6e44493e7d708ee292",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2776b68_3e3cf291",
+        "filename": "compos/composd/src/compilation_task.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-01T09:32:11Z",
+      "side": 1,
+      "message": "Yeah, it didn\u0027t quite hit my limit of toleration for duplication.\nAnd a lot of this will get deleted in due course.",
+      "parentUuid": "4403609e_4a16d8e2",
       "range": {
         "startLine": 55,
         "startChar": 11,
@@ -60,6 +108,30 @@
       "writtenOn": "2021-11-30T19:06:41Z",
       "side": 1,
       "message": "nit: TODO: for consistency",
+      "range": {
+        "startLine": 60,
+        "startChar": 11,
+        "endLine": 60,
+        "endChar": 17
+      },
+      "revId": "bbde52503c550daa0fdc9c6e44493e7d708ee292",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2449e2e_e72c61db",
+        "filename": "compos/composd/src/compilation_task.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-01T09:32:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e80eb3f8_df6e884e",
       "range": {
         "startLine": 60,
         "startChar": 11,
