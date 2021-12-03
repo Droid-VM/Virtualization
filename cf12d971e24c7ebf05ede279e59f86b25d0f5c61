@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82048ac2_755f2555",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-03T17:11:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ae8b05f_5f57c2d5",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 5
+      },
+      "revId": "cf12d971e24c7ebf05ede279e59f86b25d0f5c61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00f1a4e0_2efadbf3",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c7aa3ac_0c3acc48",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-03T17:11:40Z",
+      "side": 1,
+      "message": "It\u0027s only relevant to fuse, not other sibling modules. So I prefer to encapsulate it here.  The same would apply when we have chances to extract more from fusefs.rs.",
+      "parentUuid": "00f1a4e0_2efadbf3",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 10
+      },
+      "revId": "cf12d971e24c7ebf05ede279e59f86b25d0f5c61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed0947e1_44291729",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-12-03T11:24:42Z",
       "side": 1,
       "message": "The name seems like it could be improved, to give some idea of what it is doing while looping.",
+      "range": {
+        "startLine": 33,
+        "startChar": 7,
+        "endLine": 33,
+        "endChar": 19
+      },
+      "revId": "cf12d971e24c7ebf05ede279e59f86b25d0f5c61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c47abdea_b4bbf0cd",
+        "filename": "authfs/src/fusefs/mount.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-03T17:11:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed0947e1_44291729",
       "range": {
         "startLine": 33,
         "startChar": 7,
