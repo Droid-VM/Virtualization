@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "dad11331_3b5b0c3b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-03T12:00:58Z",
+      "side": 1,
+      "message": "Nit - wrap before the",
+      "range": {
+        "startLine": 15,
+        "startChar": 69,
+        "endLine": 15,
+        "endChar": 72
+      },
+      "revId": "a0e2fe1532f08e59ca7364a591a6c7a305d0265f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e63aa60c_a606548c",
@@ -14,6 +37,190 @@
       "writtenOn": "2021-12-03T04:23:16Z",
       "side": 1,
       "message": "Marking as WIP... I want to think about the design a bit more tomorrow.",
+      "revId": "a0e2fe1532f08e59ca7364a591a6c7a305d0265f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bf4edfc_f4953d3c",
+        "filename": "authfs/src/file/dir.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-03T12:00:58Z",
+      "side": 1,
+      "message": "InodeEntry? \"Entry\" is pretty much a noise word",
+      "range": {
+        "startLine": 29,
+        "startChar": 7,
+        "endLine": 29,
+        "endChar": 12
+      },
+      "revId": "a0e2fe1532f08e59ca7364a591a6c7a305d0265f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dc5b038_fb2a3c73",
+        "filename": "authfs/src/file/dir.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-03T12:00:58Z",
+      "side": 1,
+      "message": "number -\u003e entry, or even just delete",
+      "range": {
+        "startLine": 57,
+        "startChar": 58,
+        "endLine": 57,
+        "endChar": 64
+      },
+      "revId": "a0e2fe1532f08e59ca7364a591a6c7a305d0265f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e99cdcd_dbe9ff89",
+        "filename": "authfs/src/file/dir.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-03T12:00:58Z",
+      "side": 1,
+      "message": "Why \"force\"?",
+      "range": {
+        "startLine": 111,
+        "startChar": 11,
+        "endLine": 111,
+        "endChar": 28
+      },
+      "revId": "a0e2fe1532f08e59ca7364a591a6c7a305d0265f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a5d9977_80f1d415",
+        "filename": "authfs/src/file/dir.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-03T12:00:58Z",
+      "side": 1,
+      "message": "Can we check the \"and empty\" part?",
+      "range": {
+        "startLine": 123,
+        "startChar": 93,
+        "endLine": 124,
+        "endChar": 13
+      },
+      "revId": "a0e2fe1532f08e59ca7364a591a6c7a305d0265f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "703bca7e_75cf671e",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-03T12:00:58Z",
+      "side": 1,
+      "message": "s/deleting/unlinked/ ?",
+      "range": {
+        "startLine": 108,
+        "startChar": 4,
+        "endLine": 108,
+        "endChar": 12
+      },
+      "revId": "a0e2fe1532f08e59ca7364a591a6c7a305d0265f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "881bdd38_960f3387",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-03T12:00:58Z",
+      "side": 1,
+      "message": "s/result/something more expressive/\n\nshould_delete, delete_now, ... ?",
+      "range": {
+        "startLine": 470,
+        "startChar": 12,
+        "endLine": 470,
+        "endChar": 18
+      },
+      "revId": "a0e2fe1532f08e59ca7364a591a6c7a305d0265f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38ab083a_7ed6ee2d",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-03T12:00:58Z",
+      "side": 1,
+      "message": "If the ref count is currently 0 this should delete the inode here, shouldn\u0027t it?",
+      "range": {
+        "startLine": 781,
+        "startChar": 19,
+        "endLine": 781,
+        "endChar": 36
+      },
+      "revId": "a0e2fe1532f08e59ca7364a591a6c7a305d0265f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e44775f_565eefae",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-03T12:00:58Z",
+      "side": 1,
+      "message": "Line too long",
+      "range": {
+        "startLine": 816,
+        "startChar": 98,
+        "endLine": 816,
+        "endChar": 101
+      },
       "revId": "a0e2fe1532f08e59ca7364a591a6c7a305d0265f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
