@@ -16,6 +16,24 @@
       "message": "Perhaps it\u0027s time to move this library to somewhere else like frameworks/native?",
       "revId": "2eb7524f0116a15bffd610a5c70f05fc95410a97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da9316e2_fed0d2a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1891081
+      },
+      "writtenOn": "2021-12-03T19:59:49Z",
+      "side": 1,
+      "message": "I noticed that I wrongly included this library to my lib. This library is only used in this directory and there\u0027s no need to move. Will abandon this CL.",
+      "parentUuid": "e171d9dc_a81305e4",
+      "revId": "2eb7524f0116a15bffd610a5c70f05fc95410a97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
