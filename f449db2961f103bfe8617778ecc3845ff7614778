@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06540082_d8a04ceb",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-03T11:39:24Z",
+      "side": 1,
+      "message": "\"handles\"?\nfile handles, open files, fds, ... ?",
+      "range": {
+        "startLine": 79,
+        "startChar": 18,
+        "endLine": 79,
+        "endChar": 25
+      },
+      "revId": "f449db2961f103bfe8617778ecc3845ff7614778",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fe120fa_f48bc8d9",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-03T11:39:24Z",
+      "side": 1,
+      "message": "One day we should consider whether using a RwLock here would be a win.",
+      "range": {
+        "startLine": 100,
+        "startChar": 17,
+        "endLine": 100,
+        "endChar": 22
+      },
+      "revId": "f449db2961f103bfe8617778ecc3845ff7614778",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "565f600d_9de0f0b0",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-03T11:39:24Z",
+      "side": 1,
+      "message": "I suspect you should only do this if the calls below succeed.",
+      "range": {
+        "startLine": 419,
+        "startChar": 16,
+        "endLine": 419,
+        "endChar": 39
+      },
+      "revId": "f449db2961f103bfe8617778ecc3845ff7614778",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76ff5ad1_017d29a2",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-03T11:39:24Z",
+      "side": 1,
+      "message": "I would be happier if this were a panic - it indicates a fundamental error somewhere",
+      "range": {
+        "startLine": 454,
+        "startChar": 20,
+        "endLine": 454,
+        "endChar": 24
+      },
+      "revId": "f449db2961f103bfe8617778ecc3845ff7614778",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
