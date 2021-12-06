@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4d7feb3f_cdce3732",
+        "filename": "compos/composd/native/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-12-06T21:25:44Z",
+      "side": 1,
+      "message": "\u003e I believe it matches the C definition.  Admittedly I was confused when tried to make this work.\n\nFor reference the C definition is:\n\n  typedef int32_t palette_status_t;\n  /* Create the staging directory for on-device signing.                 */ \\\n  /* `staging_dir` is updated to point to a constant string in the       */ \\\n  /* palette implementation.                                             */ \\\n  /* This method is not thread-safe.                                     */\n  palette_status_t PaletteCreateOdrefreshStagingDirectory(/*out*/const char** staging_dir);\n\nI trust someone with more Rust-fu than me can verify that this DTRT.\n\n\u003e BTW, when we need to make CompOS updatable in the future, would it be better to call libartpalette instead of -system?\n\nNo, libartpalette is internal in the ART APEX; libartpalette-system is the correct choice.",
+      "parentUuid": "b24a24f7_ff4bf61c",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 52,
+        "endChar": 94
+      },
+      "revId": "6fb8b256c18b47bf9443db7ee02d25d92d404f8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9a3d37ad_ce632f6a",
         "filename": "compos/composd/native/lib.rs",
         "patchSetId": 2
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "We\u0027re logging the PALETTE_STATUS_* code, so I\u0027d think it\u0027s sufficient?  The _CHECK_ERRNO is just a special case in order to also log the actual errno.",
       "parentUuid": "9a3d37ad_ce632f6a",
+      "range": {
+        "startLine": 71,
+        "startChar": 12,
+        "endLine": 71,
+        "endChar": 71
+      },
+      "revId": "6fb8b256c18b47bf9443db7ee02d25d92d404f8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f46e2b5a_33fc31ec",
+        "filename": "compos/composd/native/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-12-06T21:25:44Z",
+      "side": 1,
+      "message": "Very likely yes, but it could in theory depend on what the new code would do.",
+      "parentUuid": "f8967f4e_a7e8d3ab",
       "range": {
         "startLine": 71,
         "startChar": 12,
