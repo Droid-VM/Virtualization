@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6237713e_b12c8aca",
+        "filename": "compos/composd/native/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-12-06T20:40:34Z",
+      "side": 1,
+      "message": "+oth FYI regarding this new use of libartpalette-system.\n\nSorry for being a Rust rookie, but is this function signature matched against the header declaration? (I suspect not, but providing it\u0027s correct here I don\u0027t see any practical problem copying it - I\u0027m just curious.)",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 52,
+        "endChar": 94
+      },
+      "revId": "6fb8b256c18b47bf9443db7ee02d25d92d404f8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a3d37ad_ce632f6a",
+        "filename": "compos/composd/native/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-12-06T20:40:34Z",
+      "side": 1,
+      "message": "You may need to add more branches here if we were to add more return statuses (cf. https://cs.android.com/android/platform/superproject/+/master:art/libartpalette/include/palette/palette_types.h). Since that would happen in platform I think we\u0027d notice in time, and the change would be backward compatible (in case CompOS is an updatable APEX then).",
+      "range": {
+        "startLine": 71,
+        "startChar": 12,
+        "endLine": 71,
+        "endChar": 71
+      },
+      "revId": "6fb8b256c18b47bf9443db7ee02d25d92d404f8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
