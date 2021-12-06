@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dde8a4f1_1c9bcb1a",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-06T23:29:15Z",
+      "side": 1,
+      "message": "Why is this different from /mnt/apk?",
+      "range": {
+        "startLine": 21,
+        "startChar": 30,
+        "endLine": 21,
+        "endChar": 34
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "16c6e264_4b9a837e",
         "filename": "microdroid/init.rc",
         "patchSetId": 3
@@ -112,6 +135,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99bae56e_7cf6d697",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-06T23:29:15Z",
+      "side": 1,
+      "message": "And you should be able to omit `: Vec\u003c...\u003e`. If you intend to make the element type clear, you could use ` \u003d Vec::\u003c...\u003e::new()`.",
+      "parentUuid": "52e2b8c2_24b6bdb5",
+      "range": {
+        "startLine": 240,
+        "startChar": 62,
+        "endLine": 240,
+        "endChar": 68
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "630c3966_3f747bae",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 3
@@ -158,6 +205,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0bb439fa_2c4fbfbe",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-06T23:29:15Z",
+      "side": 1,
+      "message": "Could you comment about this somewhere, i.e. to explain why verification has anything to do with the order?",
+      "range": {
+        "startLine": 258,
+        "startChar": 35,
+        "endLine": 258,
+        "endChar": 41
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f446e7a3_4a278fdd",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-06T23:29:15Z",
+      "side": 1,
+      "message": "why not just `?`?  Or `.context(\"Failed to glob extra APKs\")?`?",
+      "range": {
+        "startLine": 260,
+        "startChar": 12,
+        "endLine": 260,
+        "endChar": 48
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "49942382_77ec0f14",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 3
@@ -169,6 +262,30 @@
       "writtenOn": "2021-12-06T11:49:32Z",
       "side": 1,
       "message": "What is this `map` for? It\u0027s an identity mapping.",
+      "range": {
+        "startLine": 261,
+        "startChar": 17,
+        "endLine": 261,
+        "endChar": 22
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ffce51d_dd83f50d",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-06T23:29:15Z",
+      "side": 1,
+      "message": "It take the element out from the Result.  But perhaps a more Rust-y way to do this would be...\n\n let path_results: Result\u003cVec\u003c_\u003e\u003e \u003d glob(PATTERN)?.collect();\n let extra_apks \u003d sorted(path_results?);",
+      "parentUuid": "49942382_77ec0f14",
       "range": {
         "startLine": 261,
         "startChar": 17,
@@ -358,6 +475,29 @@
         "startChar": 17,
         "endLine": 303,
         "endChar": 18
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85448354_2b673620",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-06T23:29:15Z",
+      "side": 1,
+      "message": "The same (large enough) logic is duplicated to below. Extract as a method?\n\nActually, I wonder if it\u0027s possible to not handle the first/main APK in a special way.  Wouldn\u0027t it just be the first element in the vector?",
+      "range": {
+        "startLine": 342,
+        "startChar": 21,
+        "endLine": 349,
+        "endChar": 5
       },
       "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
