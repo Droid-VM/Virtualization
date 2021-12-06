@@ -71,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bcb7a71_db5fb9f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-06T12:20:55Z",
+      "side": 1,
+      "message": "You mean why should they not be?\nIt just seems neater. By creating compos-pending under the ART apexdata it gets all the right permissions and labels, so odsign (and odrefresh) naturally work with it.\n\nThat\u0027s what we\u0027ve been doing so far with odrefresh-outside-the-VM. Writing them to our apexdata with odrefresh-inside-the-VM was just a mistake.\n\nWe use CompOS\u0027s apexdata for storing instance data \u0026 keys, for which the access grants are somewhat different.",
+      "parentUuid": "a4d73270_a5213729",
+      "range": {
+        "startLine": 15,
+        "startChar": 13,
+        "endLine": 16,
+        "endChar": 27
+      },
+      "revId": "5cd2b20a2b80d03456a898fa5b43eb9115ad6a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "27eb924b_0c779a02",
