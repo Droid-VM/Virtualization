@@ -74,6 +74,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "344d6f6f_fc7325b8",
+        "filename": "compos/composd/native/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-06T21:43:04Z",
+      "side": 1,
+      "message": "Wouldn\u0027t we need to create libartpalette-compos (if we shouldn\u0027t reuse the art one) to deal with backward compatibility? Since new methods may not exist on old system?",
+      "parentUuid": "4d7feb3f_cdce3732",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 52,
+        "endChar": 94
+      },
+      "revId": "6fb8b256c18b47bf9443db7ee02d25d92d404f8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9a3d37ad_ce632f6a",
         "filename": "compos/composd/native/lib.rs",
         "patchSetId": 2
