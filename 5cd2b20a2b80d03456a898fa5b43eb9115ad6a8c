@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "47548064_66420bc9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-06T12:01:36Z",
+      "side": 1,
+      "message": "I replied somewhere else as well, but you\u0027re looking for MoveOrEraseFiles: http://cs/android/art/odrefresh/odrefresh.cc?l\u003d127\u0026rcl\u003d531fa747286c0b73a3fc063ffee485a46b5f6a13\n\nAnd it should Just Work, because it doesn\u0027t actually move the files - it copies them to the final destination (where they should inherit the final label) then deletes the original.",
+      "parentUuid": "f9e93d89_a68575f3",
+      "range": {
+        "startLine": 10,
+        "startChar": 16,
+        "endLine": 12,
+        "endChar": 10
+      },
+      "revId": "5cd2b20a2b80d03456a898fa5b43eb9115ad6a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "27eb924b_0c779a02",
@@ -37,6 +61,29 @@
       "writtenOn": "2021-12-04T01:30:07Z",
       "side": 1,
       "message": "PTAL\n\nMartin, please see if the setup has any problem. It should be enough to check Android.bp and the description.",
+      "revId": "5cd2b20a2b80d03456a898fa5b43eb9115ad6a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9400098_59f82950",
+        "filename": "compos/composd/native/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-06T12:01:36Z",
+      "side": 1,
+      "message": "s/bindings//",
+      "range": {
+        "startLine": 15,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 12
+      },
       "revId": "5cd2b20a2b80d03456a898fa5b43eb9115ad6a8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
