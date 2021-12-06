@@ -1,0 +1,389 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e4939d0_e7ba74dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-06T11:49:32Z",
+      "side": 1,
+      "message": "(sorry, I forgot to press the send button)",
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16c6e264_4b9a837e",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-06T11:49:32Z",
+      "side": 1,
+      "message": "Why don\u0027t we need this for /mnt/apk?",
+      "range": {
+        "startLine": 26,
+        "startChar": 15,
+        "endLine": 26,
+        "endChar": 29
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c740edb_6d71dd70",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-06T11:49:32Z",
+      "side": 1,
+      "message": "You are not filling into this. This is copied to a mutable struct and then filled there. If so, the struct could just be constructed when it is needed.",
+      "range": {
+        "startLine": 53,
+        "startChar": 28,
+        "endLine": 53,
+        "endChar": 40
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a08c01ed_bb7eef0e",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-06T11:49:32Z",
+      "side": 1,
+      "message": "Why is this optional?",
+      "range": {
+        "startLine": 197,
+        "startChar": 15,
+        "endLine": 197,
+        "endChar": 21
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52e2b8c2_24b6bdb5",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-06T11:49:32Z",
+      "side": 1,
+      "message": "`Vec::new()` seems to be the common way of creating an empty vector.",
+      "range": {
+        "startLine": 240,
+        "startChar": 62,
+        "endLine": 240,
+        "endChar": 68
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "630c3966_3f747bae",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-06T11:49:32Z",
+      "side": 1,
+      "message": "Let\u0027s construct main_apk_argument here and make it immutable from the beginning",
+      "range": {
+        "startLine": 249,
+        "startChar": 0,
+        "endLine": 252,
+        "endChar": 5
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed79ecd1_d3c17db1",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-06T11:49:32Z",
+      "side": 1,
+      "message": "Does this needed?",
+      "range": {
+        "startLine": 258,
+        "startChar": 18,
+        "endLine": 258,
+        "endChar": 32
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49942382_77ec0f14",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-06T11:49:32Z",
+      "side": 1,
+      "message": "What is this `map` for? It\u0027s an identity mapping.",
+      "range": {
+        "startLine": 261,
+        "startChar": 17,
+        "endLine": 261,
+        "endChar": 22
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f328e2d2_cb6e1c53",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-06T11:49:32Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 267,
+        "startChar": 17,
+        "endLine": 267,
+        "endChar": 22
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e380423_db586546",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-06T11:49:32Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 279,
+        "startChar": 43,
+        "endLine": 279,
+        "endChar": 49
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fa278d4_845d5c15",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-06T11:49:32Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 280,
+        "startChar": 63,
+        "endLine": 280,
+        "endChar": 69
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c06f4bd5_ac07f5f9",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-06T11:49:32Z",
+      "side": 1,
+      "message": "Use unzip to not make the two vectors immutable.\n\nlet (extra_apk_names, extra_root_hashes_from_idsig): (Vec\u003c_\u003e, Vec\u003c_\u003e) \u003d\n extra_idsigs.iter().enumerate()\n   .map(|(i,extra_idsig)| (\n       format!(...),\n       get_apk_root_hash_from_idsig(...))\n    ).unzip();",
+      "range": {
+        "startLine": 281,
+        "startChar": 4,
+        "endLine": 285,
+        "endChar": 5
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dba07a7c_22506fa9",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-06T11:49:32Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 288,
+        "startChar": 52,
+        "endLine": 288,
+        "endChar": 58
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bad1ad02_70929092",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-06T11:49:32Z",
+      "side": 1,
+      "message": "format the line?",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 99
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bafe4c5_6b64db17",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-06T11:49:32Z",
+      "side": 1,
+      "message": "Doesn\u0027t seem to be needed",
+      "range": {
+        "startLine": 294,
+        "startChar": 23,
+        "endLine": 294,
+        "endChar": 24
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ca90dfc_8a102ded",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-06T11:49:32Z",
+      "side": 1,
+      "message": "No. We should never mount an apk without the root hash",
+      "range": {
+        "startLine": 301,
+        "startChar": 17,
+        "endLine": 303,
+        "endChar": 18
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe54e560_1ae9b0ff",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-06T11:49:32Z",
+      "side": 1,
+      "message": "use `map(...).collect()` so that you don\u0027t need to make the vector mutable.",
+      "range": {
+        "startLine": 362,
+        "startChar": 23,
+        "endLine": 362,
+        "endChar": 28
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
