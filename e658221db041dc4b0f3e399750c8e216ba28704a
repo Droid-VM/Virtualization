@@ -16,6 +16,29 @@
       "message": "Alan, you mentioned this change would require compos_key_cmd to be modified together. https://android-review.googlesource.com/c/platform/packages/modules/Virtualization/+/1899074/1..4/virtualizationservice/src/crosvm.rs#70\n\nI don\u0027t know if compos_key_cmd needs to be modified regarding this change. Can you confirm? ",
       "revId": "e658221db041dc4b0f3e399750c8e216ba28704a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b88a9475_d6bd4235",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-06T10:00:32Z",
+      "side": 1,
+      "message": "nit: can we log these info on the VM-side as well?",
+      "range": {
+        "startLine": 130,
+        "startChar": 12,
+        "endLine": 130,
+        "endChar": 62
+      },
+      "revId": "e658221db041dc4b0f3e399750c8e216ba28704a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
