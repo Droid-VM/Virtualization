@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b24a24f7_ff4bf61c",
+        "filename": "compos/composd/native/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-06T21:12:47Z",
+      "side": 1,
+      "message": "I think so? The pointer itself is mutable, but points to immutable data. I believe it matches the C definition.  Admittedly I was confused when tried to make this work.\n\nBTW, when we need to make CompOS updatable in the future, would it be better to call libartpalette instead of -system?  If so, to not re-invent the wheel, I wonder if we would copy libartpalette.so to the CompOS APEX.",
+      "parentUuid": "6237713e_b12c8aca",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 52,
+        "endChar": 94
+      },
+      "revId": "6fb8b256c18b47bf9443db7ee02d25d92d404f8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9a3d37ad_ce632f6a",
         "filename": "compos/composd/native/lib.rs",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2021-12-06T20:40:34Z",
       "side": 1,
       "message": "You may need to add more branches here if we were to add more return statuses (cf. https://cs.android.com/android/platform/superproject/+/master:art/libartpalette/include/palette/palette_types.h). Since that would happen in platform I think we\u0027d notice in time, and the change would be backward compatible (in case CompOS is an updatable APEX then).",
+      "range": {
+        "startLine": 71,
+        "startChar": 12,
+        "endLine": 71,
+        "endChar": 71
+      },
+      "revId": "6fb8b256c18b47bf9443db7ee02d25d92d404f8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8967f4e_a7e8d3ab",
+        "filename": "compos/composd/native/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-06T21:12:47Z",
+      "side": 1,
+      "message": "We\u0027re logging the PALETTE_STATUS_* code, so I\u0027d think it\u0027s sufficient?  The _CHECK_ERRNO is just a special case in order to also log the actual errno.",
+      "parentUuid": "9a3d37ad_ce632f6a",
       "range": {
         "startLine": 71,
         "startChar": 12,
