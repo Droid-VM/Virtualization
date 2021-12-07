@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb2334fe_58f27be6",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-07T17:48:27Z",
+      "side": 1,
+      "message": "I see. I wonder if we should change /mnt/apk to be owned by root. Otherwise, consider adding a comment.",
+      "parentUuid": "1496fc79_2802528a",
+      "range": {
+        "startLine": 21,
+        "startChar": 30,
+        "endLine": 21,
+        "endChar": 34
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16c6e264_4b9a837e",
@@ -538,6 +562,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f36a4a8_26d0d755",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-07T17:48:27Z",
+      "side": 1,
+      "message": "Try changing to `let path_results: Result\u003cVec\u003c_\u003e, _\u003e \u003d glob(...)?.collect();`.  There is a mismatch in the error type.  (anyhow::)Result\u003c_\u003e requires anyhow::Error.  With that, the next \"?\" should work.\n\nYou can also do it in oneline with `.collect::\u003cResult\u003cVec\u003c_, _\u003e\u003e\u003e()?;`, like you did in the new PS.\n\nIf not, we can improve this in a follow-up.",
+      "parentUuid": "1138f540_ac8f6133",
+      "range": {
+        "startLine": 261,
+        "startChar": 17,
+        "endLine": 261,
+        "endChar": 22
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f328e2d2_cb6e1c53",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 3
@@ -855,6 +903,30 @@
       "side": 1,
       "message": "This bracket is needed. BTW, \"let argument \u003d ...\" isn\u0027t needed, so I moved this to push() below.",
       "parentUuid": "5bafe4c5_6b64db17",
+      "range": {
+        "startLine": 294,
+        "startChar": 23,
+        "endLine": 294,
+        "endChar": 24
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "566d08b5_70fb2a63",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-07T17:48:27Z",
+      "side": 1,
+      "message": "Do you know why it\u0027s needed? It seems redundant to me. I\u0027d think it\u0027s sufficient if you add a \u0027;\u0027, i.e. let arugment \u003d ApkDmVerityArgument { ... };",
+      "parentUuid": "bcf772a1_9860894c",
       "range": {
         "startLine": 294,
         "startChar": 23,

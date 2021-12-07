@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "304321ac_9110a7af",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-07T17:48:27Z",
+      "side": 1,
+      "message": "Can this crash? Is it ok to crash? Probably fine in such an early stage?\n\nYou could use \u0027?\u0027 to surface the error, or use `expect` to add more context.",
+      "range": {
+        "startLine": 302,
+        "startChar": 65,
+        "endLine": 302,
+        "endChar": 84
+      },
+      "revId": "63aca7485b8885f3266c79033adc976fc56e4bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fd5566f_570d18c7",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-07T17:48:27Z",
+      "side": 1,
+      "message": "It seems better and more readable if you could handle the `Option` part in L307, outside the loop. Then the rest is just comparing two Vec\u0027s.",
+      "range": {
+        "startLine": 313,
+        "startChar": 16,
+        "endLine": 313,
+        "endChar": 46
+      },
+      "revId": "63aca7485b8885f3266c79033adc976fc56e4bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
