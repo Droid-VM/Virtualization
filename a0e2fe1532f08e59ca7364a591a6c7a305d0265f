@@ -64,6 +64,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce614416_1650bc50",
+        "filename": "authfs/src/file/dir.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-07T01:41:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bf4edfc_f4953d3c",
+      "range": {
+        "startLine": 29,
+        "startChar": 7,
+        "endLine": 29,
+        "endChar": 12
+      },
+      "revId": "a0e2fe1532f08e59ca7364a591a6c7a305d0265f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7dc5b038_fb2a3c73",
@@ -77,6 +101,30 @@
       "writtenOn": "2021-12-03T12:00:58Z",
       "side": 1,
       "message": "number -\u003e entry, or even just delete",
+      "range": {
+        "startLine": 57,
+        "startChar": 58,
+        "endLine": 57,
+        "endChar": 64
+      },
+      "revId": "a0e2fe1532f08e59ca7364a591a6c7a305d0265f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0545d650_9401673a",
+        "filename": "authfs/src/file/dir.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-07T01:41:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7dc5b038_fb2a3c73",
       "range": {
         "startLine": 57,
         "startChar": 58,
@@ -110,6 +158,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85cf77b5_d7a25f9e",
+        "filename": "authfs/src/file/dir.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-07T01:41:17Z",
+      "side": 1,
+      "message": "Removed since it\u0027s redundant.",
+      "parentUuid": "5e99cdcd_dbe9ff89",
+      "range": {
+        "startLine": 111,
+        "startChar": 11,
+        "endLine": 111,
+        "endChar": 28
+      },
+      "revId": "a0e2fe1532f08e59ca7364a591a6c7a305d0265f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a5d9977_80f1d415",
@@ -123,6 +195,30 @@
       "writtenOn": "2021-12-03T12:00:58Z",
       "side": 1,
       "message": "Can we check the \"and empty\" part?",
+      "range": {
+        "startLine": 123,
+        "startChar": 93,
+        "endLine": 124,
+        "endChar": 13
+      },
+      "revId": "a0e2fe1532f08e59ca7364a591a6c7a305d0265f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "668198b3_b9b75d9e",
+        "filename": "authfs/src/file/dir.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-07T01:41:17Z",
+      "side": 1,
+      "message": "No. The problem is that the current directory inode only has the information of its own entry name -\u003e inode number.  Under the current code structure, it can\u0027t query the inode table to know about the exact entry.  That\u0027s why this is named \"forced\" with expectation to the caller.\n\n`rmdir` in fusefs.rs is the current sub-optimal solution.  With a lock to `inode_table`, it gets to the parent directory, then the child directory, to check its type and entry number. Then call `force_delete_directory` with one only mutable borrow to `inode_table`.\n\nI\u0027m not sure there is a better alternative with the current `BTreeMap` API.",
+      "parentUuid": "8a5d9977_80f1d415",
       "range": {
         "startLine": 123,
         "startChar": 93,
@@ -156,6 +252,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "436b773a_da2811d1",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-07T01:41:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "703bca7e_75cf671e",
+      "range": {
+        "startLine": 108,
+        "startChar": 4,
+        "endLine": 108,
+        "endChar": 12
+      },
+      "revId": "a0e2fe1532f08e59ca7364a591a6c7a305d0265f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "881bdd38_960f3387",
@@ -169,6 +289,30 @@
       "writtenOn": "2021-12-03T12:00:58Z",
       "side": 1,
       "message": "s/result/something more expressive/\n\nshould_delete, delete_now, ... ?",
+      "range": {
+        "startLine": 470,
+        "startChar": 12,
+        "endLine": 470,
+        "endChar": 18
+      },
+      "revId": "a0e2fe1532f08e59ca7364a591a6c7a305d0265f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd9b0ede_8876e45c",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-07T01:41:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "881bdd38_960f3387",
       "range": {
         "startLine": 470,
         "startChar": 12,
@@ -202,6 +346,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d0ddcc1_d24d7d7b",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-07T01:41:17Z",
+      "side": 1,
+      "message": "It sounds like a possible optimization. But since FUSE guarantees to call `forget`, where it also suggests to handle ref count there, I prefer to handle it there in a single place.",
+      "parentUuid": "38ab083a_7ed6ee2d",
+      "range": {
+        "startLine": 781,
+        "startChar": 19,
+        "endLine": 781,
+        "endChar": 36
+      },
+      "revId": "a0e2fe1532f08e59ca7364a591a6c7a305d0265f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e44775f_565eefae",
@@ -215,6 +383,30 @@
       "writtenOn": "2021-12-03T12:00:58Z",
       "side": 1,
       "message": "Line too long",
+      "range": {
+        "startLine": 816,
+        "startChar": 98,
+        "endLine": 816,
+        "endChar": 101
+      },
+      "revId": "a0e2fe1532f08e59ca7364a591a6c7a305d0265f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67f9fe1a_ed3d27da",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-07T01:41:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e44775f_565eefae",
       "range": {
         "startLine": 816,
         "startChar": 98,
