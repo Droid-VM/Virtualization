@@ -22,6 +22,30 @@
       },
       "revId": "3dccf709ad52914851c17e87dbabea7a0dbd0983",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91df0113_f144aa19",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-07T16:12:27Z",
+      "side": 1,
+      "message": "It\u0027s the number of FDs that are referring to the inode (not hardlink).  See also the doc above.",
+      "parentUuid": "e128856f_c4aba0da",
+      "range": {
+        "startLine": 92,
+        "startChar": 28,
+        "endLine": 92,
+        "endChar": 44
+      },
+      "revId": "3dccf709ad52914851c17e87dbabea7a0dbd0983",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
