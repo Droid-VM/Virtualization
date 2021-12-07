@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1496fc79_2802528a",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-07T03:42:05Z",
+      "side": 1,
+      "message": "microdroid_manager runs as root. Root needs to own this directory to avoid granting DAC permissions: https://android-review.googlesource.com/c/platform/system/sepolicy/+/1903974/1..2/microdroid/system/private/microdroid_manager.te#b78\n\nAlternatively we can make microdroid_manager system, but it\u0027s trickier than making root own /mnt/extra-apk. /mnt/extra-apk has an exclusive label, and we still can control the accessibility with selinux.",
+      "parentUuid": "dde8a4f1_1c9bcb1a",
+      "range": {
+        "startLine": 21,
+        "startChar": 30,
+        "endLine": 21,
+        "endChar": 34
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16c6e264_4b9a837e",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-12-06T11:49:32Z",
       "side": 1,
       "message": "Why don\u0027t we need this for /mnt/apk?",
+      "range": {
+        "startLine": 26,
+        "startChar": 15,
+        "endLine": 26,
+        "endChar": 29
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d41ac736_ca9e4a46",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-07T03:42:05Z",
+      "side": 1,
+      "message": "/mnt is tmpfs, and so is /mnt/apk. We don\u0027t need restorecon for /mnt/apk because zipfuse can mount on tmpfs.\n\nHowever, we don\u0027t know how many extra apks we will have, so microdroid_manager creates mount points for the extra apks. I didn\u0027t want microdroid_manager to touch tmpfs, so I created a new label for /mnt/extra-apk.",
+      "parentUuid": "16c6e264_4b9a837e",
       "range": {
         "startLine": 26,
         "startChar": 15,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32e3a07f_d7ded9eb",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-07T03:42:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c740edb_6d71dd70",
+      "range": {
+        "startLine": 53,
+        "startChar": 28,
+        "endLine": 53,
+        "endChar": 40
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a08c01ed_bb7eef0e",
@@ -100,6 +172,30 @@
       "writtenOn": "2021-12-06T11:49:32Z",
       "side": 1,
       "message": "Why is this optional?",
+      "range": {
+        "startLine": 197,
+        "startChar": 15,
+        "endLine": 197,
+        "endChar": 21
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10301b7d_1fa5b122",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-07T03:42:05Z",
+      "side": 1,
+      "message": "It\u0027s similar to the property \"microdroid_manager.apk_root_hash\". If this is None, apkdmverity reads the idsig file for the root hash. If this is not None, the root hash of the idsig file is compared to this parameter.\n\nI added this because root hashes are different for different APKs (main apk vs extra apks). For the readabaility, I changed the name to \"saved_root_hash\".",
+      "parentUuid": "a08c01ed_bb7eef0e",
       "range": {
         "startLine": 197,
         "startChar": 15,
@@ -157,6 +253,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6212dd02_5c2484fc",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-07T03:42:05Z",
+      "side": 1,
+      "message": "I moved this so I can use vec![main_apk_argument].",
+      "parentUuid": "99bae56e_7cf6d697",
+      "range": {
+        "startLine": 240,
+        "startChar": 62,
+        "endLine": 240,
+        "endChar": 68
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "630c3966_3f747bae",
@@ -170,6 +290,30 @@
       "writtenOn": "2021-12-06T11:49:32Z",
       "side": 1,
       "message": "Let\u0027s construct main_apk_argument here and make it immutable from the beginning",
+      "range": {
+        "startLine": 249,
+        "startChar": 0,
+        "endLine": 252,
+        "endChar": 5
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "759e95e9_2762d3d9",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-07T03:42:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "630c3966_3f747bae",
       "range": {
         "startLine": 249,
         "startChar": 0,
@@ -226,6 +370,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3f1217b_0453b8d5",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-07T03:42:05Z",
+      "side": 1,
+      "message": "I added a comment.",
+      "parentUuid": "0bb439fa_2c4fbfbe",
+      "range": {
+        "startLine": 258,
+        "startChar": 35,
+        "endLine": 258,
+        "endChar": 41
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9aa84815_a299b298",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-07T03:42:05Z",
+      "side": 1,
+      "message": "If I remove this, I get:\n\n```\nerror[E0282]: type annotations needed\n   --\u003e packages/modules/Virtualization/microdroid_manager/src/main.rs:269:8\n    |\n259 |     let extra_apks \u003d sorted(\n    |         ---------- consider giving `extra_apks` a type\n...\n269 |     if extra_apks.len() !\u003d extra_idsigs.len() {\n    |        ^^^^^^^^^^ cannot infer type\n    |\n    \u003d note: type must be known at this point\n\nerror: aborting due to 3 previous errors\n```\n\nBut Vec\u003c_\u003e also works, so I changed this to Vec\u003c_\u003e.",
+      "parentUuid": "ed79ecd1_d3c17db1",
+      "range": {
+        "startLine": 258,
+        "startChar": 18,
+        "endLine": 258,
+        "endChar": 32
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f446e7a3_4a278fdd",
@@ -239,6 +431,30 @@
       "writtenOn": "2021-12-06T23:29:15Z",
       "side": 1,
       "message": "why not just `?`?  Or `.context(\"Failed to glob extra APKs\")?`?",
+      "range": {
+        "startLine": 260,
+        "startChar": 12,
+        "endLine": 260,
+        "endChar": 48
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03434acb_9cec825a",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-07T03:42:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f446e7a3_4a278fdd",
       "range": {
         "startLine": 260,
         "startChar": 12,
@@ -286,6 +502,30 @@
       "side": 1,
       "message": "It take the element out from the Result.  But perhaps a more Rust-y way to do this would be...\n\n let path_results: Result\u003cVec\u003c_\u003e\u003e \u003d glob(PATTERN)?.collect();\n let extra_apks \u003d sorted(path_results?);",
       "parentUuid": "49942382_77ec0f14",
+      "range": {
+        "startLine": 261,
+        "startChar": 17,
+        "endLine": 261,
+        "endChar": 22
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1138f540_ac8f6133",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-07T03:42:05Z",
+      "side": 1,
+      "message": "glob returns an iterator containing Result\u003cPathBuf, GlobError\u003e, not PathBuf. If I follow your suggestion, it fails:\n\n```\nerror[E0277]: a value of type `std::result::Result\u003cstd::vec::Vec\u003c_\u003e, anyhow::Error\u003e` cannot be built from an iterator over elements of type `std::result::Result\u003cstd::path::PathBuf, glob::GlobError\u003e`\n   --\u003e packages/modules/Virtualization/microdroid_manager/src/main.rs:259:70\n    |\n259 |     let path_results: Result\u003cVec\u003c_\u003e\u003e \u003d glob(EXTRA_APK_PATH_PATTERN)?.collect();\n    |                                                                      ^^^^^^^ value of type `std::result::Result\u003cstd::vec::Vec\u003c_\u003e, anyhow::Error\u003e` cannot be built from `std::iter::Iterator\u003cItem\u003dstd::result::Result\u003cstd::path::PathBuf, glob::GlobError\u003e\u003e`\n    |\n    \u003d help: the trait `std::iter::FromIterator\u003cstd::result::Result\u003cstd::path::PathBuf, glob::GlobError\u003e\u003e` is not implemented for `std::result::Result\u003cstd::vec::Vec\u003c_\u003e, anyhow::Error\u003e`\n```\n\nHow can I do this better?",
+      "parentUuid": "9ffce51d_dd83f50d",
       "range": {
         "startLine": 261,
         "startChar": 17,
@@ -388,6 +628,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53ff566a_557efeed",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-07T03:42:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c06f4bd5_ac07f5f9",
+      "range": {
+        "startLine": 281,
+        "startChar": 4,
+        "endLine": 285,
+        "endChar": 5
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dba07a7c_22506fa9",
@@ -434,6 +698,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f613665_f001cd02",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-07T03:42:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bad1ad02_70929092",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 99
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5bafe4c5_6b64db17",
@@ -447,6 +735,30 @@
       "writtenOn": "2021-12-06T11:49:32Z",
       "side": 1,
       "message": "Doesn\u0027t seem to be needed",
+      "range": {
+        "startLine": 294,
+        "startChar": 23,
+        "endLine": 294,
+        "endChar": 24
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcf772a1_9860894c",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-07T03:42:05Z",
+      "side": 1,
+      "message": "This bracket is needed. BTW, \"let argument \u003d ...\" isn\u0027t needed, so I moved this to push() below.",
+      "parentUuid": "5bafe4c5_6b64db17",
       "range": {
         "startLine": 294,
         "startChar": 23,
@@ -480,6 +792,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5b8feba_747dd8a8",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-07T03:42:05Z",
+      "side": 1,
+      "message": "If we pass None, apkdmverity will use root hash inside the idsig file. I changed the argument name for better readability.",
+      "parentUuid": "0ca90dfc_8a102ded",
+      "range": {
+        "startLine": 301,
+        "startChar": 17,
+        "endLine": 303,
+        "endChar": 18
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85448354_2b673620",
@@ -503,6 +839,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd09d4fa_4c9d6912",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-07T03:42:05Z",
+      "side": 1,
+      "message": "Extracted as a method.\n\n\u003e I wonder if it\u0027s possible to not handle the first/main APK in a special way.\n\nI\u0027m not sure, but I\u0027d like to separate those two, as extra APKs need to be consistent to the main APK\u0027s vm config.",
+      "parentUuid": "85448354_2b673620",
+      "range": {
+        "startLine": 342,
+        "startChar": 21,
+        "endLine": 349,
+        "endChar": 5
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe54e560_1ae9b0ff",
@@ -516,6 +876,30 @@
       "writtenOn": "2021-12-06T11:49:32Z",
       "side": 1,
       "message": "use `map(...).collect()` so that you don\u0027t need to make the vector mutable.",
+      "range": {
+        "startLine": 362,
+        "startChar": 23,
+        "endLine": 362,
+        "endChar": 28
+      },
+      "revId": "741a469e4c4aae156dfe15db684d34c7c07ff1b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "989a3089_5dc21519",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-07T03:42:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe54e560_1ae9b0ff",
       "range": {
         "startLine": 362,
         "startChar": 23,
