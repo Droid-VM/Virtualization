@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40ff994a_b9477b95",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-07T01:41:26Z",
+      "side": 1,
+      "message": "It means to be `Handle` used in `Filesystem`. Updated.",
+      "parentUuid": "06540082_d8a04ceb",
+      "range": {
+        "startLine": 79,
+        "startChar": 18,
+        "endLine": 79,
+        "endChar": 25
+      },
+      "revId": "f449db2961f103bfe8617778ecc3845ff7614778",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fe120fa_f48bc8d9",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-12-03T11:39:24Z",
       "side": 1,
       "message": "One day we should consider whether using a RwLock here would be a win.",
+      "range": {
+        "startLine": 100,
+        "startChar": 17,
+        "endLine": 100,
+        "endChar": 22
+      },
+      "revId": "f449db2961f103bfe8617778ecc3845ff7614778",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61a69566_9b44927f",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-07T01:41:26Z",
+      "side": 1,
+      "message": "Indeed. I wanted to change it once but had some trouble (probably just my ignorance to Rust at that time). But it\u0027s a nice improvement as part of b/207727665.",
+      "parentUuid": "0fe120fa_f48bc8d9",
       "range": {
         "startLine": 100,
         "startChar": 17,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48f4588e_5b676c17",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-07T01:41:26Z",
+      "side": 1,
+      "message": "Done. Good catch.",
+      "parentUuid": "565f600d_9de0f0b0",
+      "range": {
+        "startLine": 419,
+        "startChar": 16,
+        "endLine": 419,
+        "endChar": 39
+      },
+      "revId": "f449db2961f103bfe8617778ecc3845ff7614778",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76ff5ad1_017d29a2",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-12-03T11:39:24Z",
       "side": 1,
       "message": "I would be happier if this were a panic - it indicates a fundamental error somewhere",
+      "range": {
+        "startLine": 454,
+        "startChar": 20,
+        "endLine": 454,
+        "endChar": 24
+      },
+      "revId": "f449db2961f103bfe8617778ecc3845ff7614778",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3533401e_ee247549",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-07T01:41:26Z",
+      "side": 1,
+      "message": "Done. This has helped me catch a fatal bug!  \n\n\"Every time an `Entry` is returned by a `FileSystem` trait method, this lookup count should increase by 1\".  I missed the cases in `create` and `mkdir`.",
+      "parentUuid": "76ff5ad1_017d29a2",
       "range": {
         "startLine": 454,
         "startChar": 20,
