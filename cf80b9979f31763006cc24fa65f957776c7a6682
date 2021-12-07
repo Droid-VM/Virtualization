@@ -22,6 +22,30 @@
       },
       "revId": "cf80b9979f31763006cc24fa65f957776c7a6682",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54d0837b_8fb553ca",
+        "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-07T09:44:59Z",
+      "side": 1,
+      "message": "I preferred not to special-case - this seems more future proof, since it\u0027s possible we may not contribute to the classpath in the future.",
+      "parentUuid": "977cf84b_dd610618",
+      "range": {
+        "startLine": 135,
+        "startChar": 20,
+        "endLine": 135,
+        "endChar": 22
+      },
+      "revId": "cf80b9979f31763006cc24fa65f957776c7a6682",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
