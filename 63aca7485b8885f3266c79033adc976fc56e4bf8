@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eca612f9_e6a42dda",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-08T05:12:44Z",
+      "side": 1,
+      "message": "It seems that I can\u0027t use \u0027?\u0027 inside this closure. Instead, I changed it to `expect`. It\u0027s okay to crash because an apk idsig should have its root hash.",
+      "parentUuid": "304321ac_9110a7af",
+      "range": {
+        "startLine": 302,
+        "startChar": 65,
+        "endLine": 302,
+        "endChar": 84
+      },
+      "revId": "63aca7485b8885f3266c79033adc976fc56e4bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fd5566f_570d18c7",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-12-07T17:48:27Z",
       "side": 1,
       "message": "It seems better and more readable if you could handle the `Option` part in L307, outside the loop. Then the rest is just comparing two Vec\u0027s.",
+      "range": {
+        "startLine": 313,
+        "startChar": 16,
+        "endLine": 313,
+        "endChar": 46
+      },
+      "revId": "63aca7485b8885f3266c79033adc976fc56e4bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "027f0c36_ef27eddc",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-08T05:12:44Z",
+      "side": 1,
+      "message": "I updated a code a little. I\u0027m not sure if this is best. But, let\u0027s land it and revisit later if needed.",
+      "parentUuid": "6fd5566f_570d18c7",
       "range": {
         "startLine": 313,
         "startChar": 16,
