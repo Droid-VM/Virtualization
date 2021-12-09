@@ -483,6 +483,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2e548a6_37f5a7fd",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-09T18:15:58Z",
+      "side": 1,
+      "message": "If the user process expects a POSIX compatible O_CREAT, it needs to assume the actual mode to possibly be masked.  (Although our current umask is 0)\n\nThe nuance is the actual file on Android is masked twice.  If we think the consistency of apparent mode in the VM vs the actual stored mode (subset of the former) is is important, the easiest solution would be to set umask to 0 in fd_server. That could at least give us a peace of mind?",
+      "parentUuid": "72a08bc9_a9cd5a3b",
+      "range": {
+        "startLine": 591,
+        "startChar": 20,
+        "endLine": 591,
+        "endChar": 45
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff0c72cf_191010ea",
