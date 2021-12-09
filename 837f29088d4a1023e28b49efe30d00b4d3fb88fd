@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b515d2c0_9e74bda2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-09T16:56:42Z",
+      "side": 1,
+      "message": "Yeah, for a reason that doesn\u0027t make sense to me now.  I was thinking a refactoring (after the unverified thing is gone) then adjust the structure, but it doesn\u0027t seem needed to wait. Anyway, I\u0027ll put this in my todo list.",
+      "parentUuid": "e0962f9a_4ff71b21",
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad5f98af_e49cf99c",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-12-09T10:32:30Z",
       "side": 1,
       "message": "*cough*\nSee open(2), I guess",
+      "range": {
+        "startLine": 71,
+        "startChar": 19,
+        "endLine": 71,
+        "endChar": 22
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ea5a846_36cd941c",
+        "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-09T16:56:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad5f98af_e49cf99c",
       "range": {
         "startLine": 71,
         "startChar": 19,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27e9e9a0_dadf818c",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-09T16:56:42Z",
+      "side": 1,
+      "message": "Done.  BTW, S_IFSOCK is not in nix\u0027s Mode, but SFlags. Which is sometimes very confusing.",
+      "parentUuid": "7bf2e080_6e3fb856",
+      "range": {
+        "startLine": 43,
+        "startChar": 6,
+        "endLine": 43,
+        "endChar": 21
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3836bbe2_b0ae6d71",
@@ -77,6 +143,30 @@
       "writtenOn": "2021-12-09T10:32:30Z",
       "side": 1,
       "message": "nit: I think this mode parameter is ignored, could be 0",
+      "range": {
+        "startLine": 323,
+        "startChar": 88,
+        "endLine": 323,
+        "endChar": 92
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3311f442_58209825",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-09T16:56:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3836bbe2_b0ae6d71",
       "range": {
         "startLine": 323,
         "startChar": 88,
@@ -110,6 +200,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35d2e16f_1320fe31",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-09T16:56:42Z",
+      "side": 1,
+      "message": "Changed to mode_t.  As of try_into, it shouldn\u0027t matter since these are least significant bits way below 32, and can\u0027t change as part of the POSIX standard.",
+      "parentUuid": "fe6f3f69_99925316",
+      "range": {
+        "startLine": 426,
+        "startChar": 31,
+        "endLine": 426,
+        "endChar": 42
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb27407d_eb7918cf",
@@ -123,6 +237,30 @@
       "writtenOn": "2021-12-09T10:32:30Z",
       "side": 1,
       "message": "typo",
+      "range": {
+        "startLine": 37,
+        "startChar": 41,
+        "endLine": 37,
+        "endChar": 51
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38ba535d_59e7804b",
+        "filename": "authfs/src/file/attr.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-09T16:56:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb27407d_eb7918cf",
       "range": {
         "startLine": 37,
         "startChar": 41,
@@ -156,6 +294,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a69240a_83e52e14",
+        "filename": "authfs/src/file/attr.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-09T16:56:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c0ad2be_920da2c9",
+      "range": {
+        "startLine": 38,
+        "startChar": 34,
+        "endLine": 38,
+        "endChar": 44
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5385a75_edd50313",
@@ -169,6 +331,30 @@
       "writtenOn": "2021-12-09T10:32:30Z",
       "side": 1,
       "message": "uber-nit: validate_arguments now",
+      "range": {
+        "startLine": 178,
+        "startChar": 7,
+        "endLine": 178,
+        "endChar": 24
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9365e2e5_01ed0902",
+        "filename": "authfs/src/file/dir.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-09T16:56:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5385a75_edd50313",
       "range": {
         "startLine": 178,
         "startChar": 7,
@@ -202,6 +388,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86f92e9c_b8dbaf36",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-09T16:56:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "520b1ad0_ae7715c1",
+      "range": {
+        "startLine": 349,
+        "startChar": 29,
+        "endLine": 349,
+        "endChar": 63
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1216fd32_be28b07c",
@@ -225,6 +435,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "558e6dc0_020b6036",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-09T16:56:42Z",
+      "side": 1,
+      "message": "This is working as intended I think.",
+      "parentUuid": "1216fd32_be28b07c",
+      "range": {
+        "startLine": 591,
+        "startChar": 20,
+        "endLine": 591,
+        "endChar": 45
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff0c72cf_191010ea",
@@ -238,6 +472,30 @@
       "writtenOn": "2021-12-09T10:32:30Z",
       "side": 1,
       "message": "warn ?",
+      "range": {
+        "startLine": 929,
+        "startChar": 8,
+        "endLine": 929,
+        "endChar": 13
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3453739_bbabeb9b",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-09T16:56:42Z",
+      "side": 1,
+      "message": "Not sure. The warning isn\u0027t actionable, so I\u0027d think debug is enough for the developer to do anything if necessary.",
+      "parentUuid": "ff0c72cf_191010ea",
       "range": {
         "startLine": 929,
         "startChar": 8,
