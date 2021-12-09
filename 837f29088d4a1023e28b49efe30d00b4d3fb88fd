@@ -1,0 +1,251 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0962f9a_4ff71b21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-09T10:32:30Z",
+      "side": 1,
+      "message": "My comments below are mostly trivial; feel free to punt to some future CL.\n\nPerhaps more significantly: it seems odd to have Attr separate from RemoteFileEditor, when they seem to be doing similar things (maintaining local state \u0026 sending it to the remote). Could Attr be a field of RFE?",
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad5f98af_e49cf99c",
+        "filename": "authfs/aidl/com/android/virt/fs/IVirtFdService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-09T10:32:30Z",
+      "side": 1,
+      "message": "*cough*\nSee open(2), I guess",
+      "range": {
+        "startLine": 71,
+        "startChar": 19,
+        "endLine": 71,
+        "endChar": 22
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bf2e080_6e3fb856",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-09T10:32:30Z",
+      "side": 1,
+      "message": "Perhaps better to list the allowed bits, which I think is just 0777?\n(e.g. you\u0027re not blocking S_IFSOCK, although I doubt that actually works anywhere)",
+      "range": {
+        "startLine": 43,
+        "startChar": 6,
+        "endLine": 43,
+        "endChar": 21
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3836bbe2_b0ae6d71",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-09T10:32:30Z",
+      "side": 1,
+      "message": "nit: I think this mode parameter is ignored, could be 0",
+      "range": {
+        "startLine": 323,
+        "startChar": 88,
+        "endLine": 323,
+        "endChar": 92
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe6f3f69_99925316",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-09T10:32:30Z",
+      "side": 1,
+      "message": "Should that be try_into rather than as?\nAnd should it be sys::stat::mode_t rather than u32?",
+      "range": {
+        "startLine": 426,
+        "startChar": 31,
+        "endLine": 426,
+        "endChar": 42
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb27407d_eb7918cf",
+        "filename": "authfs/src/file/attr.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-09T10:32:30Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 37,
+        "startChar": 41,
+        "endLine": 37,
+        "endChar": 51
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c0ad2be_920da2c9",
+        "filename": "authfs/src/file/attr.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-09T10:32:30Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 38,
+        "startChar": 34,
+        "endLine": 38,
+        "endChar": 44
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5385a75_edd50313",
+        "filename": "authfs/src/file/dir.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-09T10:32:30Z",
+      "side": 1,
+      "message": "uber-nit: validate_arguments now",
+      "range": {
+        "startLine": 178,
+        "startChar": 7,
+        "endLine": 178,
+        "endChar": 24
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "520b1ad0_ae7715c1",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-09T10:32:30Z",
+      "side": 1,
+      "message": "... and search to group \u0026 other",
+      "range": {
+        "startLine": 349,
+        "startChar": 29,
+        "endLine": 349,
+        "endChar": 63
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1216fd32_be28b07c",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-09T10:32:30Z",
+      "side": 1,
+      "message": "Warn if this discards any bits?",
+      "range": {
+        "startLine": 591,
+        "startChar": 20,
+        "endLine": 591,
+        "endChar": 45
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff0c72cf_191010ea",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-09T10:32:30Z",
+      "side": 1,
+      "message": "warn ?",
+      "range": {
+        "startLine": 929,
+        "startChar": 8,
+        "endLine": 929,
+        "endChar": 13
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
