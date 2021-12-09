@@ -459,6 +459,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72a08bc9_a9cd5a3b",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-09T18:04:55Z",
+      "side": 1,
+      "message": "It\u0027s definitely correct - but are we expecting the umask to affect the modes set?",
+      "parentUuid": "558e6dc0_020b6036",
+      "range": {
+        "startLine": 591,
+        "startChar": 20,
+        "endLine": 591,
+        "endChar": 45
+      },
+      "revId": "837f29088d4a1023e28b49efe30d00b4d3fb88fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff0c72cf_191010ea",
