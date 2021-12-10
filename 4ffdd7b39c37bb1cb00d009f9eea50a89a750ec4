@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09b11f1e_8a3b1ae4",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-10T17:58:04Z",
+      "side": 1,
+      "message": "It\u0027s not a problem.  I added a debug_assert! to check this assumption.  Also added more comments to explain the whole readdir. Hopefully it\u0027ll make it more understandable.",
+      "parentUuid": "1af9e973_be8e59e2",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 21
+      },
+      "revId": "4ffdd7b39c37bb1cb00d009f9eea50a89a750ec4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02d138e8_b622c619",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-12-10T14:50:45Z",
       "side": 1,
       "message": ":-(\n\nWould it be better to use one mutex for both?",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 21
+      },
+      "revId": "4ffdd7b39c37bb1cb00d009f9eea50a89a750ec4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a07da5a_08a7c14a",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-10T17:58:04Z",
+      "side": 1,
+      "message": "I feel both resources should remain independent, so I change the code to avoid locking both at the same time.\n\nNot sure what\u0027s the best practice in this situation though, so I\u0027m open to suggestions. I\u0027m thinking to perhaps centralize the locking through two functions (one per table) that returns MutexGuard, during which we check the other lock is not locked. In any case, happy to follow up afterward.",
+      "parentUuid": "02d138e8_b622c619",
       "range": {
         "startLine": 187,
         "startChar": 0,
