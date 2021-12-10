@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ce5baa0_76997837",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-10T14:50:45Z",
+      "side": 1,
+      "message": "I suspect I understand less than 50% of this.",
+      "revId": "4ffdd7b39c37bb1cb00d009f9eea50a89a750ec4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1af9e973_be8e59e2",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-10T14:50:45Z",
+      "side": 1,
+      "message": "I don\u0027t think I understand this comment.\nAre you saying there\u0027s a problem, or there isn\u0027t a problem?",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 21
+      },
+      "revId": "4ffdd7b39c37bb1cb00d009f9eea50a89a750ec4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02d138e8_b622c619",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-10T14:50:45Z",
+      "side": 1,
+      "message": ":-(\n\nWould it be better to use one mutex for both?",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 21
+      },
+      "revId": "4ffdd7b39c37bb1cb00d009f9eea50a89a750ec4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
