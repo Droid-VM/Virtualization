@@ -87,6 +87,51 @@ public final class ComposTestCase extends VirtualizationTestCaseBase {
         }
 
         // Save the expected checksum for the output directory.
+        String expectedChecksumSnapshot = checksumDirectoryContentPartial(android,
+                ODREFRESH_OUTPUT_DIR);
+
+        // --check may delete the output.
+        CommandResult result = runOdrefresh(android, "--check");
+        assertThat(result.getExitCode()).isEqualTo(OKAY);
+
+        // Make sure we generate a fresh instance and filesystem.
+        android.tryRun("rm", "-rf", COMPOS_TEST_ROOT);
+        android.tryRun("rm", "-rf", ODREFRESH_OUTPUT_DIR);
+
+        // Expect the compilation in Compilation OS to finish successfully.
+        {
+            long start = System.currentTimeMillis();
+            result =
+                    android.runForResultWithTimeout(
+                            ODREFRESH_TIMEOUT_MS, COMPOSD_CMD_BIN, "forced-odrefresh");
+            long elapsed = System.currentTimeMillis() - start;
+            assertThat(result.getExitCode()).isEqualTo(0);
+            CLog.i("Comp OS compilation took " + elapsed + "ms");
+        }
+        killVmAndReconnectAdb();
+
+        // Save the actual checksum for the output directory.
+        String actualChecksumSnapshot = checksumDirectoryContentPartial(android,
+                ODREFRESH_OUTPUT_DIR);
+
+        // Expect the output of Comp OS to be the same as compiled on Android.
+        assertThat(actualChecksumSnapshot).isEqualTo(expectedChecksumSnapshot);
+    }
+
+    @Test
+    public void testOdrefreshDeprecated() throws Exception {
+        CommandRunner android = new CommandRunner(getDevice());
+
+        // Prepare the groundtruth. The compilation on Android should finish successfully.
+        {
+            long start = System.currentTimeMillis();
+            CommandResult result = runOdrefresh(android, "--force-compile");
+            long elapsed = System.currentTimeMillis() - start;
+            assertThat(result.getExitCode()).isEqualTo(COMPILATION_SUCCESS);
+            CLog.i("Local compilation took " + elapsed + "ms");
+        }
+
+        // Save the expected checksum for the output directory.
         String expectedChecksumSnapshot = checksumDirectoryContent(android, ODREFRESH_OUTPUT_DIR);
 
         // Let --check clean up the output.
@@ -150,5 +195,15 @@ public final class ComposTestCase extends VirtualizationTestCaseBase {
     private String checksumDirectoryContent(CommandRunner runner, String path) throws Exception {
         // Sort by filename (second column) to make comparison easier.
         return runner.run("find " + path + " -type f -exec sha256sum {} \\; | sort -k2");
+    }
+
+    private String checksumDirectoryContentPartial(CommandRunner runner, String path)
+            throws Exception {
+        // Sort by filename (second column) to make comparison easier.
+        // TODO(b/210473615): Remove irrelevant APEXes (i.e. those aren't contributing to the
+        // classpaths, thus not in the VM) from cache-info.xml.
+        return runner.run("cd " + path + "; find -type f -exec sha256sum {} \\;"
+                + "| grep -v cache-info.xml"
+                + "| sort -k2");
     }
 }
