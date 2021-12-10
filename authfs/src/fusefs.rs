@@ -17,23 +17,23 @@
 mod mount;
 
 use anyhow::{anyhow, bail, Result};
+use fuse::filesystem::{
+    Context, DirEntry, DirectoryIterator, Entry, FileSystem, FsOptions, GetxattrReply,
+    SetattrValid, ZeroCopyReader, ZeroCopyWriter,
+};
+use fuse::sys::OpenOptions as FuseOpenOptions;
 use log::{debug, error, warn};
 use std::collections::{btree_map, BTreeMap};
-use std::convert::TryFrom;
-use std::ffi::{CStr, OsStr};
+use std::convert::{TryFrom, TryInto};
+use std::ffi::{CStr, CString, OsStr};
 use std::io;
 use std::mem::{zeroed, MaybeUninit};
 use std::option::Option;
 use std::os::unix::ffi::OsStrExt;
 use std::path::{Component, Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
-use std::sync::Mutex;
+use std::sync::{Arc, Mutex};
 use std::time::Duration;
-
-use fuse::filesystem::{
-    Context, DirEntry, DirectoryIterator, Entry, FileSystem, FsOptions, GetxattrReply,
-    SetattrValid, ZeroCopyReader, ZeroCopyWriter,
-};
 
 use crate::common::{divide_roundup, ChunkedSizeIter, CHUNK_SIZE};
 use crate::file::{
@@ -119,6 +119,57 @@ impl InodeState {
     }
 }
 
+/// Data type that a directory implementation should be able to present its entry to `AuthFs`.
+#[derive(Clone)]
+pub struct AuthFsDirEntry {
+    pub inode: Inode,
+    pub name: CString,
+    pub is_dir: bool,
+}
+
+type DirEntriesSnapshot = Vec<AuthFsDirEntry>;
+
+pub struct DirEntriesSnapshotIterator {
+    /// A reference to the `DirEntriesSnapshot` in `AuthFs`. The snapshot is immutable, and is
+    /// where `readdir` is reading from.
+    ///
+    /// `snapshot` is `Arc` so that the returned iterator/`Self` from `readdir` can still reference
+    /// to the snapshot in the lookup table.
+    ///
+    /// NB: It is practically not possible for `readdir` to read from a snapshot of a handle that is
+    /// already released from `releasedir` (i.e. race condition). This is because `readdir` can only
+    /// proceed with a living handle, which is lock protected. Also, the iterator is short-lived
+    /// during `readdir`. As a result, all of `DirEntriesSnapshot` instances should exist in the
+    /// lookup table.
+    snapshot: Arc<DirEntriesSnapshot>,
+    prev_offset: usize,
+}
+
+impl<'a> DirectoryIterator for DirEntriesSnapshotIterator {
+    fn next(&mut self) -> Option<DirEntry> {
+        // 0 is reserved to mean reading from the beginning, and can't be used in
+        // `fuse::filesystem::DirEntry::offset`. Let's use 1-based index for the offset.
+        let current_offset = if self.prev_offset == 0 {
+            1 // first element in the vector
+        } else {
+            self.prev_offset + 1 // next element in the vector
+        };
+        if current_offset > self.snapshot.len() {
+            None
+        } else {
+            let AuthFsDirEntry { inode, name, is_dir } = &self.snapshot[current_offset - 1];
+            let entry = DirEntry {
+                offset: current_offset as u64,
+                ino: *inode,
+                name,
+                type_: if *is_dir { libc::DT_DIR.into() } else { libc::DT_REG.into() },
+            };
+            self.prev_offset = current_offset;
+            Some(entry)
+        }
+    }
+}
+
 // AuthFS needs to be `Sync` to be accepted by fuse::worker::start_message_loop as a `FileSystem`.
 pub struct AuthFs {
     /// Table for `Inode` to `InodeState` lookup. This needs to be `Sync` to be used in
@@ -127,6 +178,18 @@ pub struct AuthFs {
 
     /// The next available inode number.
     next_inode: AtomicU64,
+
+    /// Table for `Handle` to `Arc<DirEntriesSnapshot>` lookup. On `opendir`, a new directory handle
+    /// is created and the snapshot of the current directory is created. This is not super
+    /// efficient, but is the simplest way to be compliant to the FUSE contract (see
+    /// `fuse::filesystem::readdir`).
+    ///
+    /// If the caller must lock both `inode_table` and `dir_handle_table`, `inode_table` must be
+    /// locked first.
+    dir_handle_table: Mutex<BTreeMap<Handle, Arc<DirEntriesSnapshot>>>,
+
+    /// The next available handle number.
+    next_handle: AtomicU64,
 
     /// A reader to access the remote filesystem stats, which is supposed to be of "the" output
     /// directory. We assume all output are stored in the same partition.
@@ -147,6 +210,8 @@ impl AuthFs {
         AuthFs {
             inode_table: Mutex::new(inode_table),
             next_inode: AtomicU64::new(ROOT_INODE + 1),
+            dir_handle_table: Mutex::new(BTreeMap::new()),
+            next_handle: AtomicU64::new(1),
             remote_fs_stats_reader,
         }
     }
@@ -199,7 +264,7 @@ impl AuthFs {
                                 AuthFsEntry::ReadonlyDirectory { dir: InMemoryDir::new() };
 
                             // Actually update the tables.
-                            dir.add_entry(name.as_ref(), new_inode)?;
+                            dir.add_dir(name.as_ref(), new_inode)?;
                             if inode_table
                                 .insert(new_inode, InodeState::new(new_dir_entry))
                                 .is_some()
@@ -223,13 +288,27 @@ impl AuthFs {
                 let new_inode = self.next_inode.fetch_add(1, Ordering::Relaxed);
 
                 // Actually update the tables.
-                dir.add_entry(basename.as_ref(), new_inode)?;
+                dir.add_file(basename.as_ref(), new_inode)?;
                 if inode_table.insert(new_inode, InodeState::new(entry)).is_some() {
                     bail!("Unexpected to find a duplicated inode");
                 }
                 Ok(new_inode)
             }
             _ => unreachable!("Not a ReadonlyDirectory"),
+        }
+    }
+
+    fn open_dir_store_snapshot(
+        &self,
+        dir_entries: Vec<AuthFsDirEntry>,
+    ) -> io::Result<(Option<Handle>, FuseOpenOptions)> {
+        let handle = self.next_handle.fetch_add(1, Ordering::Relaxed);
+        let mut dir_handle_table = self.dir_handle_table.lock().unwrap();
+        if let btree_map::Entry::Vacant(value) = dir_handle_table.entry(handle) {
+            value.insert(Arc::new(dir_entries));
+            Ok((Some(handle), FuseOpenOptions::empty()))
+        } else {
+            unreachable!("Unexpected to see new handle {} to existing in the table", handle);
         }
     }
 }
@@ -402,19 +481,10 @@ fn read_chunks<W: io::Write, T: ReadByChunk>(
     Ok(total)
 }
 
-// TODO(205715172): Support enumerating directory entries.
-pub struct EmptyDirectoryIterator {}
-
-impl DirectoryIterator for EmptyDirectoryIterator {
-    fn next(&mut self) -> Option<DirEntry> {
-        None
-    }
-}
-
 impl FileSystem for AuthFs {
     type Inode = Inode;
     type Handle = Handle;
-    type DirIter = EmptyDirectoryIterator;
+    type DirIter = DirEntriesSnapshotIterator;
 
     fn max_buffer_size(&self) -> u32 {
         MAX_WRITE_BYTES
@@ -546,7 +616,7 @@ impl FileSystem for AuthFs {
         _ctx: Context,
         inode: Self::Inode,
         flags: u32,
-    ) -> io::Result<(Option<Self::Handle>, fuse::sys::OpenOptions)> {
+    ) -> io::Result<(Option<Self::Handle>, FuseOpenOptions)> {
         // Since file handle is not really used in later operations (which use Inode directly),
         // return None as the handle.
         self.handle_inode(&inode, |config| {
@@ -566,7 +636,7 @@ impl FileSystem for AuthFs {
             }
             // Always cache the file content. There is currently no need to support direct I/O or
             // avoid the cache buffer. Memory mapping is only possible with cache enabled.
-            Ok((None, fuse::sys::OpenOptions::KEEP_CACHE))
+            Ok((None, FuseOpenOptions::KEEP_CACHE))
         })
     }
 
@@ -578,7 +648,7 @@ impl FileSystem for AuthFs {
         mode: u32,
         _flags: u32,
         umask: u32,
-    ) -> io::Result<(Entry, Option<Self::Handle>, fuse::sys::OpenOptions)> {
+    ) -> io::Result<(Entry, Option<Self::Handle>, FuseOpenOptions)> {
         // TODO(205172873): handle O_TRUNC and O_EXCL properly.
         let new_inode = self.create_new_entry_with_ref_count(
             parent,
@@ -606,7 +676,7 @@ impl FileSystem for AuthFs {
             },
             // See also `open`.
             /* handle */ None,
-            fuse::sys::OpenOptions::KEEP_CACHE,
+            FuseOpenOptions::KEEP_CACHE,
         ))
     }
 
@@ -851,6 +921,56 @@ impl FileSystem for AuthFs {
                 _ => unreachable!("Mismatched entry type that is just checked"),
             },
         )
+    }
+
+    fn opendir(
+        &self,
+        _ctx: Context,
+        inode: Self::Inode,
+        _flags: u32,
+    ) -> io::Result<(Option<Self::Handle>, FuseOpenOptions)> {
+        self.handle_inode(&inode, |config| match config {
+            AuthFsEntry::VerifiedNewDirectory { dir, .. } => {
+                self.open_dir_store_snapshot(dir.retrieve_entries()?)
+            }
+            AuthFsEntry::ReadonlyDirectory { dir } => {
+                self.open_dir_store_snapshot(dir.retrieve_entries()?)
+            }
+            _ => Err(io::Error::from_raw_os_error(libc::ENOTDIR)),
+        })
+    }
+
+    fn readdir(
+        &self,
+        _ctx: Context,
+        _inode: Self::Inode,
+        handle: Self::Handle,
+        _size: u32,
+        offset: u64,
+    ) -> io::Result<Self::DirIter> {
+        let dir_handle_table = self.dir_handle_table.lock().unwrap();
+        if let Some(entry) = dir_handle_table.get(&handle) {
+            Ok(DirEntriesSnapshotIterator {
+                snapshot: entry.clone(),
+                prev_offset: offset.try_into().unwrap(),
+            })
+        } else {
+            Err(io::Error::from_raw_os_error(libc::EBADF))
+        }
+    }
+
+    fn releasedir(
+        &self,
+        _ctx: Context,
+        inode: Self::Inode,
+        _flags: u32,
+        handle: Self::Handle,
+    ) -> io::Result<()> {
+        let mut dir_handle_table = self.dir_handle_table.lock().unwrap();
+        if dir_handle_table.remove(&handle).is_none() {
+            unreachable!("Unknown directory handle {}, inode {}", handle, inode);
+        }
+        Ok(())
     }
 
     fn statfs(&self, _ctx: Context, _inode: Self::Inode) -> io::Result<libc::statvfs64> {
