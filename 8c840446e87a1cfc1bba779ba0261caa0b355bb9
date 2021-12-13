@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b92b71fb_36f7e1da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-13T17:34:45Z",
+      "side": 1,
+      "message": "There\u0027s a lot of duplication here, which can be resolved once we remove the old odrefresh outside the VM code.\nThis currently requires selinux in permissive mode inside the VM, and fails if the staging dir exists, but that\u0027s also true of force-odrefresh.\nCancellation appears to work fine (I modified IsolatedCompilationJobService to test that).",
+      "revId": "8c840446e87a1cfc1bba779ba0261caa0b355bb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
