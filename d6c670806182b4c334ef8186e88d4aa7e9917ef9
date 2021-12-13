@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a8ea284b_63f27e60",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-13T10:11:53Z",
+      "side": 1,
+      "message": "Where do these magic numbers come from?",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 47,
+        "endChar": 19
+      },
+      "revId": "d6c670806182b4c334ef8186e88d4aa7e9917ef9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "059db07a_8300c93a",
         "filename": "authfs/fd_server/src/aidl.rs",
         "patchSetId": 1
@@ -31,6 +54,30 @@
       "writtenOn": "2021-12-13T09:42:32Z",
       "side": 1,
       "message": "I would rather have a struct that encapsulates a metadata file. Constructing the struct would parse metadata and merkle tree. And later you just read the parsed result.",
+      "range": {
+        "startLine": 442,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 0
+      },
+      "revId": "d6c670806182b4c334ef8186e88d4aa7e9917ef9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41ab8df3_d28b75d2",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-13T10:11:53Z",
+      "side": 1,
+      "message": "+1.\n\nAlso, can we have a link to the format of an .fsv_meta file?\n\nRust supports well-defined struct layouts that are probably capable of representing at least some of this; I would think repr(C) would do the right thing. \n\n(Using that will require some unsafe code, but I suspect will be more obviously correct than hand-parsing.)\n\nAlternatively you could at least include something like such a struct in a comment as documentation of what you\u0027re trying to parse.",
+      "parentUuid": "059db07a_8300c93a",
       "range": {
         "startLine": 442,
         "startChar": 0,
