@@ -24,6 +24,7 @@ use nix::{
 use std::cmp::min;
 use std::collections::{btree_map, BTreeMap};
 use std::convert::TryInto;
+use std::ffi::OsString;
 use std::fs::File;
 use std::io;
 use std::os::unix::fs::FileExt;
@@ -43,6 +44,10 @@ use binder_common::{new_binder_exception, new_binder_service_specific_error};
 /// Bitflags of forbidden file mode, e.g. setuid, setgid and sticky bit.
 const FORBIDDEN_MODES: Mode = Mode::from_bits_truncate(!0o777);
 
+const SIG_TYPE_NONE: u32 = 0;
+const SIG_TYPE_PKCS7: u32 = 1;
+const SIG_TYPE_RAW: u32 = 2;
+
 /// Configuration of a file descriptor to be served/exposed/shared.
 pub enum FdConfig {
     /// A read-only file to serve by this server. The file is supposed to be verifiable with the
@@ -51,13 +56,8 @@ pub enum FdConfig {
         /// The file to read from. fs-verity metadata can be retrieved from this file's FD.
         file: File,
 
-        /// Alternative Merkle tree stored in another file.
-        /// TODO(205987437): Replace with .fsv_meta file.
-        alt_merkle_tree: Option<File>,
-
-        /// Alternative signature stored in another file.
-        /// TODO(205987437): Replace with .fsv_meta file.
-        alt_signature: Option<File>,
+        // Alternative metadata file storing merkle tree and signature.
+        alt_metadata_file: Option<File>,
     },
 
     /// A readable/writable file to serve by this server. This backing file should just be a
@@ -139,9 +139,9 @@ impl IVirtFdService for FdService {
         let offset: u64 = validate_and_cast_offset(offset)?;
 
         self.handle_fd(id, |config| match config {
-            FdConfig::Readonly { file, alt_merkle_tree, .. } => {
-                if let Some(tree_file) = &alt_merkle_tree {
-                    read_into_buf(tree_file, size, offset).map_err(|e| {
+            FdConfig::Readonly { file, alt_metadata_file, .. } => {
+                if let Some(metadata_file) = &alt_metadata_file {
+                    read_merkle_tree_from_metadata(metadata_file, size, offset).map_err(|e| {
                         error!("readFsverityMerkleTree: read error: {}", e);
                         new_errno_error(Errno::EIO)
                     })
@@ -169,12 +169,9 @@ impl IVirtFdService for FdService {
 
     fn readFsveritySignature(&self, id: i32) -> BinderResult<Vec<u8>> {
         self.handle_fd(id, |config| match config {
-            FdConfig::Readonly { file, alt_signature, .. } => {
-                if let Some(sig_file) = &alt_signature {
-                    // Supposedly big enough buffer size to store signature.
-                    let size = MAX_REQUESTING_DATA as usize;
-                    let offset = 0;
-                    read_into_buf(sig_file, size, offset).map_err(|e| {
+            FdConfig::Readonly { file, alt_metadata_file, .. } => {
+                if let Some(metadata_file) = &alt_metadata_file {
+                    read_signature_from_metadata(metadata_file).map_err(|e| {
                         error!("readFsveritySignature: read error: {}", e);
                         new_errno_error(Errno::EIO)
                     })
@@ -267,10 +264,12 @@ impl IVirtFdService for FdService {
             FdConfig::InputDir(dir) => {
                 let file = open_readonly_at(dir.as_raw_fd(), &path_buf).map_err(new_errno_error)?;
 
-                // TODO(205987437): Provide the corresponding ".fsv_meta" file when it's created.
+                let metadata_path_buf = get_fsverity_metadata_path(&path_buf);
+                let metadata_file = open_readonly_at(dir.as_raw_fd(), &metadata_path_buf).ok();
+
                 Ok((
                     file.as_raw_fd(),
-                    FdConfig::Readonly { file, alt_merkle_tree: None, alt_signature: None },
+                    FdConfig::Readonly { file, alt_metadata_file: metadata_file },
                 ))
             }
             FdConfig::OutputDir(_) => {
@@ -430,5 +429,55 @@ fn validate_file_mode(mode: i32) -> BinderResult<Mode> {
         Err(new_errno_error(Errno::EPERM))
     } else {
         Ok(mode)
+    }
+}
+
+fn get_fsverity_metadata_path(path: &Path) -> PathBuf {
+    let mut os_string: OsString = path.into();
+    os_string.push(".fsv_meta");
+    os_string.into()
+}
+
+// read_merkle_tree_from_metadata
+fn read_merkle_tree_from_metadata(
+    file: &File,
+    max_size: usize,
+    offset: u64,
+) -> io::Result<Vec<u8>> {
+    // merkle tree starts from the offset 4096
+    // TODO(inseob): parse metadata and find the exact offset
+    read_into_buf(file, max_size, offset + 4096)
+}
+
+fn read_signature_from_metadata(file: &File) -> io::Result<Vec<u8>> {
+    // 1. version check
+    let offset = 0;
+    let mut buf = [0u8; 4];
+    file.read_exact_at(&mut buf, offset)?;
+    if u32::from_le_bytes(buf) != 1 {
+        return Err(io::Error::new(io::ErrorKind::Other, "unsupported metadata version"));
+    }
+
+    // 2. read descriptor size
+    let offset = 4;
+    let mut buf = [0u8; 4];
+    file.read_exact_at(&mut buf, offset)?;
+    let descriptor_size = u32::from_le_bytes(buf);
+
+    // 3. read signature type
+    let offset = offset + descriptor_size as u64 + 4;
+    let mut buf = [0u8; 4];
+    file.read_exact_at(&mut buf, offset)?;
+    let signature_type = u32::from_le_bytes(buf);
+    match signature_type {
+        SIG_TYPE_NONE => Err(io::Error::new(io::ErrorKind::Other, "no signature in metadata")),
+        SIG_TYPE_PKCS7 | SIG_TYPE_RAW => {
+            // TODO: unpad pkcs7?
+            let mut buf = [0u8; 4];
+            file.read_exact_at(&mut buf, offset + 4)?;
+            let signature_size = u32::from_le_bytes(buf) as usize;
+            read_into_buf(file, signature_size, offset + 8)
+        }
+        _ => Err(io::Error::new(io::ErrorKind::Other, "unknown signature type")),
     }
 }
