@@ -38,6 +38,7 @@ use authfs_aidl_interface::aidl::com::android::virt::fs::IVirtFdService::{
 use authfs_aidl_interface::binder::{
     BinderFeatures, ExceptionCode, Interface, Result as BinderResult, Status, StatusCode, Strong,
 };
+use authfs_fsverity_metadata::{get_fsverity_metadata_path, parse_fsverity_metadata, CHUNK_SIZE};
 use binder_common::{new_binder_exception, new_binder_service_specific_error};
 
 /// Bitflags of forbidden file mode, e.g. setuid, setgid and sticky bit.
@@ -51,13 +52,8 @@ pub enum FdConfig {
         /// The file to read from. fs-verity metadata can be retrieved from this file's FD.
         file: File,
 
-        /// Alternative Merkle tree stored in another file.
-        /// TODO(205987437): Replace with .fsv_meta file.
-        alt_merkle_tree: Option<File>,
-
-        /// Alternative signature stored in another file.
-        /// TODO(205987437): Replace with .fsv_meta file.
-        alt_signature: Option<File>,
+        // Alternative metadata file storing merkle tree and signature.
+        alt_metadata_file: Option<File>,
     },
 
     /// A readable/writable file to serve by this server. This backing file should just be a
@@ -139,9 +135,18 @@ impl IVirtFdService for FdService {
         let offset: u64 = validate_and_cast_offset(offset)?;
 
         self.handle_fd(id, |config| match config {
-            FdConfig::Readonly { file, alt_merkle_tree, .. } => {
-                if let Some(tree_file) = &alt_merkle_tree {
-                    read_into_buf(tree_file, size, offset).map_err(|e| {
+            FdConfig::Readonly { file, alt_metadata_file, .. } => {
+                if let Some(metadata_file) = &alt_metadata_file {
+                    let metadata = parse_fsverity_metadata(metadata_file).map_err(|e| {
+                        error!("readFsverityMerkleTree: read error: {}", e);
+                        new_errno_error(Errno::EIO)
+                    })?;
+                    read_into_buf(
+                        metadata_file,
+                        size,
+                        offset + CHUNK_SIZE * metadata.merkle_tree_index,
+                    )
+                    .map_err(|e| {
                         error!("readFsverityMerkleTree: read error: {}", e);
                         new_errno_error(Errno::EIO)
                     })
@@ -169,15 +174,21 @@ impl IVirtFdService for FdService {
 
     fn readFsveritySignature(&self, id: i32) -> BinderResult<Vec<u8>> {
         self.handle_fd(id, |config| match config {
-            FdConfig::Readonly { file, alt_signature, .. } => {
-                if let Some(sig_file) = &alt_signature {
-                    // Supposedly big enough buffer size to store signature.
-                    let size = MAX_REQUESTING_DATA as usize;
-                    let offset = 0;
-                    read_into_buf(sig_file, size, offset).map_err(|e| {
+            FdConfig::Readonly { file, alt_metadata_file, .. } => {
+                if let Some(metadata_file) = &alt_metadata_file {
+                    let metadata = parse_fsverity_metadata(metadata_file).map_err(|e| {
                         error!("readFsveritySignature: read error: {}", e);
                         new_errno_error(Errno::EIO)
-                    })
+                    })?;
+
+                    if let Some(signature) = metadata.signature {
+                        Ok(signature)
+                    } else {
+                        Err(new_binder_exception(
+                            ExceptionCode::SERVICE_SPECIFIC,
+                            "metadata doesn't contain a signature".to_string(),
+                        ))
+                    }
                 } else {
                     let mut buf = vec![0; MAX_REQUESTING_DATA as usize];
                     let s = fsverity::read_signature(file.as_raw_fd(), &mut buf).map_err(|e| {
@@ -267,10 +278,12 @@ impl IVirtFdService for FdService {
             FdConfig::InputDir(dir) => {
                 let file = open_readonly_at(dir.as_raw_fd(), &path_buf).map_err(new_errno_error)?;
 
-                // TODO(205987437): Provide the corresponding ".fsv_meta" file when it's created.
+                let metadata_path_buf = get_fsverity_metadata_path(&path_buf);
+                let metadata_file = open_readonly_at(dir.as_raw_fd(), &metadata_path_buf).ok();
+
                 Ok((
                     file.as_raw_fd(),
-                    FdConfig::Readonly { file, alt_merkle_tree: None, alt_signature: None },
+                    FdConfig::Readonly { file, alt_metadata_file: metadata_file },
                 ))
             }
             FdConfig::OutputDir(_) => {
