@@ -16,6 +16,52 @@
       "message": "There\u0027s a lot of duplication here, which can be resolved once we remove the old odrefresh outside the VM code.\nThis currently requires selinux in permissive mode inside the VM, and fails if the staging dir exists, but that\u0027s also true of force-odrefresh.\nCancellation appears to work fine (I modified IsolatedCompilationJobService to test that).",
       "revId": "8c840446e87a1cfc1bba779ba0261caa0b355bb9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f90d1d1_441398d6",
+        "filename": "compos/composd/src/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-13T18:15:35Z",
+      "side": 1,
+      "message": "Do you think we\u0027d need to use `composd_cmd forced-odrefresh` for TH testing in the foreseeable future?  If so, maybe we should de-duplicate these.",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 64
+      },
+      "revId": "8c840446e87a1cfc1bba779ba0261caa0b355bb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa198dcf_94871ae1",
+        "filename": "compos/composd_cmd/composd_cmd.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-13T18:15:35Z",
+      "side": 1,
+      "message": "Up to you, but I personally found it more readable if wrapped (#[rustfmt::skip])",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 98
+      },
+      "revId": "8c840446e87a1cfc1bba779ba0261caa0b355bb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
