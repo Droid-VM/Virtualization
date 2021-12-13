@@ -16,6 +16,144 @@
       "message": "I understand that the code is still draft and unclean, but I wanted to focus on implementing the feature first.\n\nI\u0027ll appreciate for any feedback.",
       "revId": "d6c670806182b4c334ef8186e88d4aa7e9917ef9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "059db07a_8300c93a",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-13T09:42:32Z",
+      "side": 1,
+      "message": "I would rather have a struct that encapsulates a metadata file. Constructing the struct would parse metadata and merkle tree. And later you just read the parsed result.",
+      "range": {
+        "startLine": 442,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 0
+      },
+      "revId": "d6c670806182b4c334ef8186e88d4aa7e9917ef9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a8378fd_6d3691bb",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-13T09:42:32Z",
+      "side": 1,
+      "message": "this is fragile. You can advance the file pointer by not using _at functions.",
+      "range": {
+        "startLine": 462,
+        "startChar": 0,
+        "endLine": 462,
+        "endChar": 19
+      },
+      "revId": "d6c670806182b4c334ef8186e88d4aa7e9917ef9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6adb1a48_2e6b48d0",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-13T09:42:32Z",
+      "side": 1,
+      "message": "document where this is from",
+      "range": {
+        "startLine": 468,
+        "startChar": 49,
+        "endLine": 468,
+        "endChar": 52
+      },
+      "revId": "d6c670806182b4c334ef8186e88d4aa7e9917ef9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02310699_b5868bc6",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-13T09:42:32Z",
+      "side": 1,
+      "message": "document",
+      "range": {
+        "startLine": 477,
+        "startChar": 48,
+        "endLine": 477,
+        "endChar": 51
+      },
+      "revId": "d6c670806182b4c334ef8186e88d4aa7e9917ef9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f406b4a9_51dc7ee3",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-13T09:42:32Z",
+      "side": 1,
+      "message": "document",
+      "range": {
+        "startLine": 479,
+        "startChar": 55,
+        "endLine": 479,
+        "endChar": 58
+      },
+      "revId": "d6c670806182b4c334ef8186e88d4aa7e9917ef9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e4422ea_c9ae8c51",
+        "filename": "authfs/src/fsverity/verifier.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2021-12-13T09:42:32Z",
+      "side": 1,
+      "message": "This is a huge code duplication. Could you dedup by creating a common struct?",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 280,
+        "endChar": 9
+      },
+      "revId": "d6c670806182b4c334ef8186e88d4aa7e9917ef9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
