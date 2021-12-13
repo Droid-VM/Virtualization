@@ -90,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a45402ab_2d940261",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-13T19:28:39Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "41ab8df3_d28b75d2",
+      "range": {
+        "startLine": 442,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 0
+      },
+      "revId": "d6c670806182b4c334ef8186e88d4aa7e9917ef9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a8378fd_6d3691bb",
         "filename": "authfs/fd_server/src/aidl.rs",
         "patchSetId": 1
@@ -182,6 +206,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25dc063b_ca310b93",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-13T19:28:39Z",
+      "side": 1,
+      "message": "nit: s/file/source/ (feel free to keep the variable name though)",
+      "range": {
+        "startLine": 64,
+        "startChar": 36,
+        "endLine": 64,
+        "endChar": 40
+      },
+      "revId": "d6c670806182b4c334ef8186e88d4aa7e9917ef9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e4422ea_c9ae8c51",
         "filename": "authfs/src/fsverity/verifier.rs",
         "patchSetId": 1
@@ -198,6 +245,53 @@
         "startChar": 0,
         "endLine": 280,
         "endChar": 9
+      },
+      "revId": "d6c670806182b4c334ef8186e88d4aa7e9917ef9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b55dc726_2b103562",
+        "filename": "authfs/src/fsverity/verifier.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-13T19:28:39Z",
+      "side": 1,
+      "message": "Or possibly create a reader library (which can potentially be used by other components in Android in the future)?",
+      "parentUuid": "1e4422ea_c9ae8c51",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 280,
+        "endChar": 9
+      },
+      "revId": "d6c670806182b4c334ef8186e88d4aa7e9917ef9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79e7eb64_2b875854",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-13T19:28:39Z",
+      "side": 1,
+      "message": "nit: looks like these could fit in one line",
+      "range": {
+        "startLine": 164,
+        "startChar": 67,
+        "endLine": 165,
+        "endChar": 27
       },
       "revId": "d6c670806182b4c334ef8186e88d4aa7e9917ef9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
