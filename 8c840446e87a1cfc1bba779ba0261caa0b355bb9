@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5c7eca44_04ce1577",
+        "filename": "compos/composd/src/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-14T09:16:05Z",
+      "side": 1,
+      "message": "async-odrefresh is intended to be a drop-in replacement, so I\u0027m expecting forced-odrefresh to go away (or be replaced with what async-odrefresh does) as soon as we\u0027re comfortable with it; I\u0027m mostly waiting to avoid disrupting development/manual testing. \n\nWe should change forced-compile-test to use the same mechanism, so we\u0027re exercising the real code in TH.",
+      "parentUuid": "7f90d1d1_441398d6",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 64
+      },
+      "revId": "8c840446e87a1cfc1bba779ba0261caa0b355bb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "fa198dcf_94871ae1",
         "filename": "compos/composd_cmd/composd_cmd.rs",
         "patchSetId": 3
