@@ -16,6 +16,52 @@
       "message": "removed two redundant files that I mistakenly added.",
       "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0cf47a2_0cf33d9a",
+        "filename": "authfs/src/fsverity/metadata/metadata.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-15T17:37:34Z",
+      "side": 1,
+      "message": "Does bindgen handle things like __le32 and packed? That\u0027s impressive.\n\nOr should you be handling the conversion from little-ended in Rust?",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 10
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "356cfce3_559530f6",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-15T17:37:34Z",
+      "side": 1,
+      "message": "nit: Expose a method to return this, rather than making the caller do it?",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 33,
+        "endChar": 59
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
