@@ -20,6 +20,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f084bad8_b88648ac",
+        "filename": "authfs/src/fsverity/metadata/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-15T19:30:48Z",
+      "side": 1,
+      "message": "nit: remove since size_t isn\u0027t used in the input file",
+      "range": {
+        "startLine": 6,
+        "startChar": 21,
+        "endLine": 6,
+        "endChar": 38
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ec4e250_9d1107fb",
+        "filename": "authfs/src/fsverity/metadata/metadata.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-15T19:30:48Z",
+      "side": 1,
+      "message": "nit: fs-verity",
+      "range": {
+        "startLine": 20,
+        "startChar": 36,
+        "endLine": 20,
+        "endChar": 44
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c024431_89a07a3b",
+        "filename": "authfs/src/fsverity/metadata/metadata.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-15T19:30:48Z",
+      "side": 1,
+      "message": "Have we documented the format somewhere yet?  Seems like a good place to describe the format.",
+      "range": {
+        "startLine": 20,
+        "startChar": 26,
+        "endLine": 20,
+        "endChar": 32
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f0cf47a2_0cf33d9a",
         "filename": "authfs/src/fsverity/metadata/metadata.hpp",
         "patchSetId": 3
@@ -43,6 +112,99 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e9776fc_5adaa354",
+        "filename": "authfs/src/fsverity/metadata/metadata.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-15T19:30:48Z",
+      "side": 1,
+      "message": "I think the conversion needs to be done in Rust, e.g. with from_le_bytes.",
+      "parentUuid": "f0cf47a2_0cf33d9a",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 10
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4ccc06a_ed52f20c",
+        "filename": "authfs/src/fsverity/metadata/metadata.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-15T19:30:48Z",
+      "side": 1,
+      "message": "Just checking, this should be consistent/portable regardless compiler version, right? Since we\u0027re storing the data on disk, it better be well-defined.  A common practice I\u0027ve seen is to add \"reserved[SIZE]\" padding manually, which could make it easier to deal with with the struct size changes (e.g. no need to read the version first to allocate buffer or decide how much to read).",
+      "range": {
+        "startLine": 40,
+        "startChar": 17,
+        "endLine": 40,
+        "endChar": 23
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bda02b85_125ca15e",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-15T19:30:48Z",
+      "side": 1,
+      "message": "nit: If this comment is about the use, \"//\" is more appropriate. But you can remove the comment since it\u0027s self-described I think?\n\nIf this is a crate document, how about \"//! A reader library for fs-verity metadata file (.fsv_meta)\\n\"?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 26
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d72c5370_97e926dd",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-15T19:30:48Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 19
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "356cfce3_559530f6",
         "filename": "authfs/src/fsverity/metadata/metadata.rs",
         "patchSetId": 3
@@ -59,6 +221,99 @@
         "startChar": 8,
         "endLine": 33,
         "endChar": 59
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11e51b51_28b2b3ac",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-15T19:30:48Z",
+      "side": 1,
+      "message": "Ideally, perhaps this should not be exposed at the first place. It seems cleaner if the client can just ask this struct to return the tree data.  Inseob, WDYT?",
+      "parentUuid": "356cfce3_559530f6",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 33,
+        "endChar": 59
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2ee97af_b1491c74",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-15T19:30:48Z",
+      "side": 1,
+      "message": "The reasoning should be why the data is initialized safely. You could say the header does not include any pointers.",
+      "range": {
+        "startLine": 60,
+        "startChar": 15,
+        "endLine": 60,
+        "endChar": 53
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "471aa0f5_d27b195b",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-15T19:30:48Z",
+      "side": 1,
+      "message": "I\u0027d do the opposite:",
+      "range": {
+        "startLine": 62,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 39
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e2c6823_d69d5e7e",
+        "filename": "authfs/src/fsverity/verifier.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-15T19:30:48Z",
+      "side": 1,
+      "message": "nit: I\u0027d call it an \"offset\" instead of index, since it\u0027s really what it is?",
+      "range": {
+        "startLine": 232,
+        "startChar": 56,
+        "endLine": 232,
+        "endChar": 73
       },
       "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
