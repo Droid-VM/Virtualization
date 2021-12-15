@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b616506a_fb8a676a",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-15T18:10:21Z",
+      "side": 1,
+      "message": "Yes. It was complaining it couldn\u0027t deduce the error type, so I need to make it clear I\u0027m using anyhow::Result, and I need to specify the parameter to make that valid for some reason.\n\nBut it looks like I don\u0027t need the u8 suffix on the 0.",
+      "parentUuid": "8a810a5c_e58e3970",
+      "range": {
+        "startLine": 139,
+        "startChar": 23,
+        "endLine": 139,
+        "endChar": 29
+      },
+      "revId": "5501e6fa94930dddda94d3348ab7e16bb61a044a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b55d081_78c8c049",
