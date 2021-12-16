@@ -178,6 +178,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa83813f_8580c530",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-12-16T17:58:27Z",
+      "side": 1,
+      "message": "Does this test still work? I don\u0027t think it still works because odrefresh no longer supports \"--verify\". However, you probably still want \"--check\" to return OKAY in you new test because that\u0027s what odsign will expect on the next reboot. Or, do you plan to cover this in the e2e test discussed in b/210473615#comment5?",
+      "parentUuid": "35ea8480_02234c22",
+      "range": {
+        "startLine": 122,
+        "startChar": 16,
+        "endLine": 122,
+        "endChar": 39
+      },
+      "revId": "b0471bcf44aa3c14120567c6290b348516dce57f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64e7f163_ba25faed",
         "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
         "patchSetId": 3
