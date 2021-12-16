@@ -104,6 +104,24 @@
       "parentUuid": "8a2963ee_fd7720e2",
       "revId": "46a1dffe28c4d393b06840ebba912143c8072a6f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5e8262f_d12b986b",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-16T16:25:07Z",
+      "side": 1,
+      "message": "It\u0027s mostly because i32 is what we get from the RPC binder. AIDL/Java unfortunately doesn\u0027t have unsigned integer.",
+      "parentUuid": "b8d2b2bc_cc3c72f5",
+      "revId": "46a1dffe28c4d393b06840ebba912143c8072a6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
