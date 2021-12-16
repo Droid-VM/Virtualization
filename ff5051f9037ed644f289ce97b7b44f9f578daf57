@@ -22,6 +22,30 @@
       },
       "revId": "ff5051f9037ed644f289ce97b7b44f9f578daf57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2486a39d_0c943c1d",
+        "filename": "compos/composd/src/odrefresh_task.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-16T16:50:10Z",
+      "side": 1,
+      "message": "Actually, it is trusted here (it\u0027s a constant in service.rs) - but it shouldn\u0027t be trusted over in compsvc. Moved it there.",
+      "parentUuid": "c91062b5_37e7fb52",
+      "range": {
+        "startLine": 112,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 5
+      },
+      "revId": "ff5051f9037ed644f289ce97b7b44f9f578daf57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
