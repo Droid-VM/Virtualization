@@ -116,6 +116,7 @@ impl ICompOsService for CompOsService {
         staging_dir_fd: i32,
         target_dir_name: &str,
         zygote_arch: &str,
+        system_server_compiler_filter: &str,
     ) -> BinderResult<i8> {
         let context = OdrefreshContext::new(
             system_dir_fd,
@@ -123,6 +124,7 @@ impl ICompOsService for CompOsService {
             staging_dir_fd,
             target_dir_name,
             zygote_arch,
+            system_server_compiler_filter,
         )
         .map_err(|e| new_binder_exception(ExceptionCode::ILLEGAL_ARGUMENT, e.to_string()))?;
 
