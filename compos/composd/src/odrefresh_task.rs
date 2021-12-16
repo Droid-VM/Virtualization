@@ -22,7 +22,7 @@ use android_system_composd::aidl::android::system::composd::{
     ICompilationTask::ICompilationTask, ICompilationTaskCallback::ICompilationTaskCallback,
 };
 use android_system_composd::binder::{Interface, Result as BinderResult, Strong};
-use anyhow::{anyhow, bail, Context, Result};
+use anyhow::{anyhow, Context, Result};
 use compos_aidl_interface::aidl::com::android::compos::ICompOsService::ICompOsService;
 use compos_common::odrefresh::ExitCode;
 use log::{error, warn};
@@ -137,11 +137,7 @@ fn run_in_vm(service: Strong<dyn ICompOsService>, target_dir_name: &str) -> Resu
     )?;
 
     drop(fd_server_raii);
-    if let Some(exit_code) = ExitCode::from_i32(exit_code.into()) {
-        Ok(exit_code)
-    } else {
-        bail!("odrefresh exited with {}", exit_code)
-    }
+    ExitCode::from_i32(exit_code.into())
 }
 
 /// Returns an owned FD of the directory. It currently returns a `File` as a FD owner, but
