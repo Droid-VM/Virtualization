@@ -296,6 +296,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce7b791f_a03b352f",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2021-12-16T18:32:10Z",
+      "side": 1,
+      "message": "Running `--check` right after `--compile` in the same variable probably doesn\u0027t have much value. I mean doing `--check` outside the VM after running odrefresh inside the VM. That has values. Or, doing an e2e test is also fine. odsign will internally run `--check` on the next reboot.",
+      "parentUuid": "9035ed87_ae1725fd",
+      "range": {
+        "startLine": 122,
+        "startChar": 16,
+        "endLine": 122,
+        "endChar": 39
+      },
+      "revId": "b0471bcf44aa3c14120567c6290b348516dce57f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64e7f163_ba25faed",
