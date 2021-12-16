@@ -344,6 +344,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e5e91e1_4ee2f4a8",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2021-12-16T18:52:03Z",
+      "side": 1,
+      "message": "I see. That kind of verifies the correctness of the filesystem/authfs. Since the hash is consistent, and the \"regular odrefresh\" is --check\u0027ed above, I think we don\u0027t need to repeat here. Let\u0027s do it in e2e test.",
+      "parentUuid": "684c8dd2_5e60911b",
+      "range": {
+        "startLine": 122,
+        "startChar": 16,
+        "endLine": 122,
+        "endChar": 39
+      },
+      "revId": "b0471bcf44aa3c14120567c6290b348516dce57f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64e7f163_ba25faed",
