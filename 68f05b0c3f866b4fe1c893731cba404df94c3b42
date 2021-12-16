@@ -136,6 +136,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c46f088_9634244a",
+        "filename": "authfs/src/fsverity/metadata/metadata.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-16T03:59:54Z",
+      "side": 1,
+      "message": "packed seems supported. In the generated code,\n\n    #[repr(C, packed)]\n    \n__le32 doesn\u0027t seem to be supported. Does it mean that we should manually parse fields one by one?",
+      "parentUuid": "1e9776fc_5adaa354",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 10
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d4ccc06a_ed52f20c",
         "filename": "authfs/src/fsverity/metadata/metadata.hpp",
         "patchSetId": 3
@@ -147,6 +171,30 @@
       "writtenOn": "2021-12-15T19:30:48Z",
       "side": 1,
       "message": "Just checking, this should be consistent/portable regardless compiler version, right? Since we\u0027re storing the data on disk, it better be well-defined.  A common practice I\u0027ve seen is to add \"reserved[SIZE]\" padding manually, which could make it easier to deal with with the struct size changes (e.g. no need to read the version first to allocate buffer or decide how much to read).",
+      "range": {
+        "startLine": 40,
+        "startChar": 17,
+        "endLine": 40,
+        "endChar": 23
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aafd549_72b5b242",
+        "filename": "authfs/src/fsverity/metadata/metadata.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-16T03:59:54Z",
+      "side": 1,
+      "message": "\u003e this should be consistent/portable regardless compiler version, right? \n\nRight. I\u0027m pretty sure that __attribute__((packed)) will be supported, at least for Android.\n\n\u003e A common practice I\u0027ve seen is to add \"reserved[SIZE]\" padding manually, which could make it easier to deal with with the struct size changes\n\nI agree. But I believe we can add it as a follow-up CL.",
+      "parentUuid": "d4ccc06a_ed52f20c",
       "range": {
         "startLine": 40,
         "startChar": 17,
