@@ -160,6 +160,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6dceb478_e871926d",
+        "filename": "authfs/src/fsverity/metadata/metadata.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-16T09:24:08Z",
+      "side": 1,
+      "message": "No, but you need to manually convert the little-endian values to \u0026 from current endianness - e.g. let version \u003d header.version.from_le()\n\nhttps://doc.rust-lang.org/std/primitive.i32.html#method.from_le\n\nAlso as I recall Rust\u0027s repr(packed) is pretty weird - you can\u0027t make references to the fields - but hopefully that doesn\u0027t get in the way.",
+      "parentUuid": "0c46f088_9634244a",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 10
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d4ccc06a_ed52f20c",
         "filename": "authfs/src/fsverity/metadata/metadata.hpp",
         "patchSetId": 3
