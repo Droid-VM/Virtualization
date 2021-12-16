@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c012023b_65be2039",
+        "filename": "compos/common/odrefresh.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-16T14:50:49Z",
+      "side": 1,
+      "message": "Also copied from odrefresh.h - but you\u0027re right. Will do.",
+      "parentUuid": "798cebf1_76210f34",
+      "revId": "46a1dffe28c4d393b06840ebba912143c8072a6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d2556d6_4f39f447",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e0528a3_9a643c0d",
+        "filename": "compos/common/odrefresh.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-16T14:50:49Z",
+      "side": 1,
+      "message": "Partly because I don\u0027t want everyone to have to directly depend on the crate, but also because I have plans to make this do more than just this.",
+      "parentUuid": "1d2556d6_4f39f447",
+      "revId": "46a1dffe28c4d393b06840ebba912143c8072a6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a2963ee_fd7720e2",
@@ -48,6 +84,24 @@
       "writtenOn": "2021-12-16T13:43:07Z",
       "side": 1,
       "message": "Why are they signed then?",
+      "revId": "46a1dffe28c4d393b06840ebba912143c8072a6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8d2b2bc_cc3c72f5",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-16T14:50:49Z",
+      "side": 1,
+      "message": "History?\nFDs are signed everywhere (e.g. RawFd is a typedef for c_int), but negative numbers cannot be valid.\nNot sure why we check here rather than just letting things fail; this is Victor\u0027s code that I moved.",
+      "parentUuid": "8a2963ee_fd7720e2",
       "revId": "46a1dffe28c4d393b06840ebba912143c8072a6f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
