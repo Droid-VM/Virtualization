@@ -70,15 +70,13 @@ impl<'a> ArtifactSigner<'a> {
 
         let signature = signer.sign(&bytes)?;
 
-        let mut file =
-            File::create(info_path).with_context(|| format!("Creating {}", info_path.display()))?;
+        let mut file = File::create(info_path)?;
         file.write_all(&bytes)?;
 
         let mut signature_name = info_path.file_name().unwrap().to_owned();
         signature_name.push(SIGNATURE_EXTENSION);
         let signature_path = info_path.with_file_name(&signature_name);
-        let mut signature_file = File::create(&signature_path)
-            .with_context(|| format!("Creating {}", signature_path.display()))?;
+        let mut signature_file = File::create(&signature_path)?;
         signature_file.write_all(&signature)?;
 
         Ok(())
