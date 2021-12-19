@@ -50,7 +50,9 @@ interface IIsolatedCompilationService {
      * and writes the results to a test directory to avoid disrupting any real artifacts in
      * existence.
      *
-     * TODO(205750213): Change the API to async.
+     * Compilation continues in the background, and success/failure is reported via the supplied
+     * callback, unless the returned ICompilationTask is cancelled. The caller should maintain
+     * a reference to the ICompilationTask until compilation completes or is cancelled.
      */
-    byte startTestOdrefresh();
+    ICompilationTask startAsyncOdrefresh(ICompilationTaskCallback callback);
 }

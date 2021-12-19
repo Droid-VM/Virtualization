@@ -16,28 +16,14 @@
 
 //! Handle the details of executing odrefresh to generate compiled artifacts.
 
+// TODO: Delete
+
 use anyhow::{bail, Context, Result};
+use compos_common::odrefresh::{ExitCode, ODREFRESH_PATH};
 use compos_common::timeouts::{need_extra_time, EXTENDED_TIMEOUTS};
 use compos_common::VMADDR_CID_ANY;
-use num_derive::FromPrimitive;
-use num_traits::FromPrimitive;
 use shared_child::SharedChild;
 use std::process::Command;
-
-// TODO: What if this changes?
-const EX_MAX: i32 = 78;
-const ODREFRESH_BIN: &str = "/apex/com.android.art/bin/odrefresh";
-
-#[derive(Debug, PartialEq, Eq, FromPrimitive)]
-#[repr(i32)]
-pub enum ExitCode {
-    // Copied from art/odrefresh/include/odrefresh/odrefresh.h
-    Okay = 0i32,
-    CompilationRequired = EX_MAX + 1,
-    CompilationSuccess = EX_MAX + 2,
-    CompilationFailed = EX_MAX + 3,
-    CleanupFailed = EX_MAX + 4,
-}
 
 pub struct Odrefresh {
     child: SharedChild,
@@ -54,7 +40,7 @@ impl Odrefresh {
 
     fn spawn_odrefresh(target_dir: &str, compile_arg: &str) -> Result<Self> {
         // We don`t need to capture stdout/stderr - odrefresh writes to the log
-        let mut cmdline = Command::new(ODREFRESH_BIN);
+        let mut cmdline = Command::new(ODREFRESH_PATH);
         if need_extra_time()? {
             cmdline
                 .arg(format!(
@@ -77,7 +63,7 @@ impl Odrefresh {
     pub fn wait_for_exit(&self) -> Result<ExitCode> {
         // No timeout here - but clients can kill the process, which will end the wait.
         let status = self.child.wait()?;
-        if let Some(exit_code) = status.code().and_then(FromPrimitive::from_i32) {
+        if let Some(exit_code) = status.code().and_then(ExitCode::from_i32) {
             Ok(exit_code)
         } else {
             bail!("odrefresh exited with {}", status)
