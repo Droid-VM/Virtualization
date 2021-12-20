@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31fc2ca4_9c080ba9",
+        "filename": "authfs/src/fsverity/metadata/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-20T09:47:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f084bad8_b88648ac",
+      "range": {
+        "startLine": 6,
+        "startChar": 21,
+        "endLine": 6,
+        "endChar": 38
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ec4e250_9d1107fb",
@@ -82,6 +106,54 @@
         "startChar": 26,
         "endLine": 20,
         "endChar": 32
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6983086d_3e353876",
+        "filename": "authfs/src/fsverity/metadata/metadata.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-20T09:47:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c024431_89a07a3b",
+      "range": {
+        "startLine": 20,
+        "startChar": 26,
+        "endLine": 20,
+        "endChar": 32
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4a3da71_7740b748",
+        "filename": "authfs/src/fsverity/metadata/metadata.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-20T09:47:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ec4e250_9d1107fb",
+      "range": {
+        "startLine": 20,
+        "startChar": 36,
+        "endLine": 20,
+        "endChar": 44
       },
       "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -184,6 +256,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3fcafb79_ae426253",
+        "filename": "authfs/src/fsverity/metadata/metadata.hpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-20T09:47:55Z",
+      "side": 1,
+      "message": "I added a code correcting endianness, but I don\u0027t think it\u0027s pretty.\n\nA friend of mine suggested to use nom, and let me try that as a follow-up CL. Is it reasonable?",
+      "parentUuid": "6dceb478_e871926d",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 10
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d4ccc06a_ed52f20c",
         "filename": "authfs/src/fsverity/metadata/metadata.hpp",
         "patchSetId": 3
@@ -252,6 +348,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef4c3fc2_3d756d54",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-20T09:47:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bda02b85_125ca15e",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 26
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d72c5370_97e926dd",
@@ -265,6 +385,30 @@
       "writtenOn": "2021-12-15T19:30:48Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 19
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4901c2c_d4e64f98",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-20T09:47:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d72c5370_97e926dd",
       "range": {
         "startLine": 24,
         "startChar": 0,
@@ -322,6 +466,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28557a7c_8e2905db",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-20T09:47:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11e51b51_28b2b3ac",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 33,
+        "endChar": 59
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2ee97af_b1491c74",
@@ -335,6 +503,30 @@
       "writtenOn": "2021-12-15T19:30:48Z",
       "side": 1,
       "message": "The reasoning should be why the data is initialized safely. You could say the header does not include any pointers.",
+      "range": {
+        "startLine": 60,
+        "startChar": 15,
+        "endLine": 60,
+        "endChar": 53
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b43fb8e_74f16227",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-20T09:47:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2ee97af_b1491c74",
       "range": {
         "startLine": 60,
         "startChar": 15,
@@ -370,6 +562,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3abdea6_e3d9d12a",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-20T09:47:55Z",
+      "side": 1,
+      "message": "I\u0027m sorry?",
+      "parentUuid": "471aa0f5_d27b195b",
+      "range": {
+        "startLine": 62,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 39
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7e2c6823_d69d5e7e",
         "filename": "authfs/src/fsverity/verifier.rs",
         "patchSetId": 3
@@ -381,6 +597,30 @@
       "writtenOn": "2021-12-15T19:30:48Z",
       "side": 1,
       "message": "nit: I\u0027d call it an \"offset\" instead of index, since it\u0027s really what it is?",
+      "range": {
+        "startLine": 232,
+        "startChar": 56,
+        "endLine": 232,
+        "endChar": 73
+      },
+      "revId": "68f05b0c3f866b4fe1c893731cba404df94c3b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd2c95dd_9be7b233",
+        "filename": "authfs/src/fsverity/verifier.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-12-20T09:47:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e2c6823_d69d5e7e",
       "range": {
         "startLine": 232,
         "startChar": 56,
