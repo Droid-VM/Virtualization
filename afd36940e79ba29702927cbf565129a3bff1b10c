@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46e1fc42_b10d6c50",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-20T13:54:45Z",
+      "side": 1,
+      "message": "I have a worry about this: verify_key by design does not have write access to this directory, so this will always fail for it.\n\nCould we add an \"is idsig file valid?\" method to VS, and only attempt to create if it fails?\n\n(Also the method is called createOrUpdateIdsigFile, but at the call sites we are truncating the existing file which would make update difficult.)",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 88,
+        "endChar": 85
+      },
+      "revId": "afd36940e79ba29702927cbf565129a3bff1b10c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
