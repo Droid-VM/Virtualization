@@ -113,7 +113,10 @@ fn run_in_vm(service: Strong<dyn ICompOsService>, target_dir_name: &str) -> Resu
     // (and can't see the existing one, since authfs doesn't show it existing files in an output
     // directory).
     let target_path = output_root.join(target_dir_name);
-    remove_dir_all(&target_path).with_context(|| anyhow!("Deleting {}", target_path.display()))?;
+    if target_path.exists() {
+        remove_dir_all(&target_path)
+            .with_context(|| anyhow!("Deleting {}", target_path.display()))?;
+    }
 
     let staging_dir = open_dir(composd_native::palette_create_odrefresh_staging_directory()?)?;
     let system_dir = open_dir(Path::new("/system"))?;
