@@ -73,8 +73,6 @@ constexpr unsigned int kRpcPort = 6432;
 
 constexpr const char* kConfigApkPath =
         "/apex/com.android.compos/app/CompOSPayloadApp/CompOSPayloadApp.apk";
-constexpr const char* kConfigApkIdsigPath =
-        "/apex/com.android.compos/etc/CompOSPayloadApp.apk.idsig";
 
 // These are paths inside the APK
 constexpr const char* kDefaultConfigFilePath = "assets/vm_config.json";
@@ -211,6 +209,8 @@ public:
             return Error() << "Can't specify both cid and image file.";
         }
 
+        // Start a new VM with a given instance.img
+
         // We need a thread pool to receive VM callbacks.
         ABinderProcess_startThreadPool();
 
@@ -242,10 +242,24 @@ public:
             return ErrnoError() << "Failed to open config APK";
         }
 
+        // Prepare an idsig file
+        std::string idsigPath = mInstanceImageFile + ".idsig";
+        {
+            ScopedFileDescriptor idsigFd(TEMP_FAILURE_RETRY(
+                    open(idsigPath.c_str(), O_RDWR | O_CREAT | O_TRUNC | O_CLOEXEC)));
+            if (idsigFd.get() == -1) {
+                return ErrnoError() << "Failed to create an idsig file";
+            }
+            auto status = service->createOrUpdateIdsigFile(apkFd, idsigFd);
+            if (!status.isOk()) {
+                return Error() << status.getDescription();
+            }
+        }
+
         ScopedFileDescriptor idsigFd(
-                TEMP_FAILURE_RETRY(open(kConfigApkIdsigPath, O_RDONLY | O_CLOEXEC)));
+                TEMP_FAILURE_RETRY(open(idsigPath.c_str(), O_RDONLY | O_CLOEXEC)));
         if (idsigFd.get() == -1) {
-            return ErrnoError() << "Failed to open config APK signature";
+            return ErrnoError() << "Failed to open an idsig file";
         }
 
         ScopedFileDescriptor instanceFd(
