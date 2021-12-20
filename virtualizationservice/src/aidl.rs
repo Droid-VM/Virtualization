@@ -172,6 +172,13 @@ impl IVirtualizationService for VirtualizationService {
         }
 
         let is_app_config = matches!(config, VirtualMachineConfig::AppConfig(_));
+        let is_debug_level_full = matches!(
+            config,
+            VirtualMachineConfig::AppConfig(VirtualMachineAppConfig {
+                debugLevel: DebugLevel::FULL,
+                ..
+            })
+        );
 
         let config = match config {
             VirtualMachineConfig::AppConfig(config) => BorrowedOrOwned::Owned(
@@ -230,6 +237,30 @@ impl IVirtualizationService for VirtualizationService {
             })
             .collect::<Result<Vec<DiskFile>, _>>()?;
 
+        // Protected VM is supported only on aarch64. For other architectures, ignore the setting.
+        #[cfg(target_arch = "aarch64")]
+        let protected = config.protectedVm;
+        #[cfg(not(target_arch = "aarch64"))]
+        let protected = {
+            if config.protectedVm {
+                warn!(
+                    "Protected VM was requested, but it isn't supported on this machine \
+                    architecture. Ignored."
+                );
+            }
+            false
+        };
+
+        // And force run in non-protected mode when debug level is FULL
+        let protected = if is_debug_level_full {
+            if protected {
+                warn!("VM will run in FULL debug level. Running in non-protected mode");
+            }
+            false
+        } else {
+            protected
+        };
+
         // Actually start the VM.
         let crosvm_config = CrosvmConfig {
             cid,
@@ -238,7 +269,7 @@ impl IVirtualizationService for VirtualizationService {
             initrd: maybe_clone_file(&config.initrd)?,
             disks,
             params: config.params.to_owned(),
-            protected: config.protectedVm,
+            protected,
             memory_mib: config.memoryMib.try_into().ok().and_then(NonZeroU32::new),
             console_fd,
             log_fd,
