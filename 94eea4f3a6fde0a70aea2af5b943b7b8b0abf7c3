@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac26c4a8_3111741f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-20T11:19:54Z",
+      "side": 1,
+      "message": "As I mentioned on the bug, compos_key_cmd.cpp also references the idsig",
+      "revId": "94eea4f3a6fde0a70aea2af5b943b7b8b0abf7c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72560d62_ab342cd9",
+        "filename": "compos/composd/src/instance_starter.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-20T11:19:54Z",
+      "side": 1,
+      "message": "I suspect this was supposed to be instance_root_path\n(My fault not yours)",
+      "range": {
+        "startLine": 63,
+        "startChar": 12,
+        "endLine": 63,
+        "endChar": 29
+      },
+      "revId": "94eea4f3a6fde0a70aea2af5b943b7b8b0abf7c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30890b20_25cc169e",
+        "filename": "compos/composd/src/instance_starter.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-20T11:19:54Z",
+      "side": 1,
+      "message": "But we\u0027ll create it if it\u0027s missing, so maybe that doesn\u0027t matter?\nThe idea here is to return false iff there is no way we could successfully start the instance and verify its key.",
+      "range": {
+        "startLine": 212,
+        "startChar": 14,
+        "endLine": 212,
+        "endChar": 31
+      },
+      "revId": "94eea4f3a6fde0a70aea2af5b943b7b8b0abf7c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6abe111c_16abd539",
+        "filename": "compos/tests/java/android/compos/test/ComposKeyTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-20T11:19:54Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 159,
+        "startChar": 24,
+        "endLine": 159,
+        "endChar": 63
+      },
+      "revId": "94eea4f3a6fde0a70aea2af5b943b7b8b0abf7c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
