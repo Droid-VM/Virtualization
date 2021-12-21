@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74514a86_51628eec",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-12-21T13:45:45Z",
+      "side": 1,
+      "message": "How do you know that protected should be true here?",
+      "range": {
+        "startLine": 148,
+        "startChar": 37,
+        "endLine": 148,
+        "endChar": 41
+      },
+      "revId": "8acb855949178be64f69e51a4ab3149f702ec16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74a4f381_c9143447",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-12-21T13:45:45Z",
+      "side": 1,
+      "message": "Use three slashes for a rustdoc comment.",
+      "range": {
+        "startLine": 417,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 2
+      },
+      "revId": "8acb855949178be64f69e51a4ab3149f702ec16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7271f05_85197a38",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-12-21T13:45:45Z",
+      "side": 1,
+      "message": "Why are you passing a reference rather than a value here? bool is Copy, like all primitive types.",
+      "range": {
+        "startLine": 418,
+        "startChar": 38,
+        "endLine": 418,
+        "endChar": 43
+      },
+      "revId": "8acb855949178be64f69e51a4ab3149f702ec16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
