@@ -46,6 +46,30 @@
       },
       "revId": "afd36940e79ba29702927cbf565129a3bff1b10c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f0871f3_1b2f460f",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-21T09:29:10Z",
+      "side": 1,
+      "message": "That\u0027s true when running verify_key.\n\nBut I think we need one more tweak - in composd we have a start_new_instance method: http://cs/android/packages/modules/Virtualization/compos/composd/src/instance_starter.rs?l\u003d121\u0026rcl\u003d25801ad43b1e438ca40e591fec2b314b97bc1ff9\n\nThat is intended to create an entirely fresh instance, since we\u0027ve decided the old one is no good. So I think we need to delete any existing idsig file there, to make sure a new one is created.\n\nAn alternative would be to move the logic for idsig files out of compos_client and back into the clients - so we\u0027d pass in a File rather than a Path, and each client would do what makes sense for them, That\u0027s where I ended up with instance_image.",
+      "parentUuid": "bce4548b_ac90e967",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 88,
+        "endChar": 85
+      },
+      "revId": "afd36940e79ba29702927cbf565129a3bff1b10c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
