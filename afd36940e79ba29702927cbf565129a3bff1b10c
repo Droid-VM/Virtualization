@@ -22,6 +22,30 @@
       },
       "revId": "afd36940e79ba29702927cbf565129a3bff1b10c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bce4548b_ac90e967",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-12-21T08:13:54Z",
+      "side": 1,
+      "message": "Just added a check if there\u0027s a idsig file before creating it. I think this would server our purpose. (assuming that we don\u0027t want to update invalid idsig into valid one when running verify_key..)",
+      "parentUuid": "46e1fc42_b10d6c50",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 88,
+        "endChar": 85
+      },
+      "revId": "afd36940e79ba29702927cbf565129a3bff1b10c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
