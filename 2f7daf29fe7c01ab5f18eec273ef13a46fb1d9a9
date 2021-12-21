@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d2c9caf_96b5c62c",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-21T09:36:13Z",
+      "side": 1,
+      "message": "This discards errors, I think? Are we ok with that?",
+      "range": {
+        "startLine": 448,
+        "startChar": 12,
+        "endLine": 448,
+        "endChar": 48
+      },
+      "revId": "2f7daf29fe7c01ab5f18eec273ef13a46fb1d9a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35b09d07_c297784b",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2021-12-21T09:36:13Z",
+      "side": 1,
+      "message": "Nit: this loses any separators between lines, which is probably harmless but does mean we can\u0027t tell the difference between files containing \"a\\nb\" and \"ab\".",
+      "range": {
+        "startLine": 450,
+        "startChar": 28,
+        "endLine": 450,
+        "endChar": 46
+      },
+      "revId": "2f7daf29fe7c01ab5f18eec273ef13a46fb1d9a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
