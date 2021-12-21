@@ -26,6 +26,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e59d7f3d_22f2595e",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-12-21T09:45:40Z",
+      "side": 1,
+      "message": "Is this just unwrap(and panic?)? Or propagate to the caller?",
+      "range": {
+        "startLine": 448,
+        "startChar": 0,
+        "endLine": 448,
+        "endChar": 48
+      },
+      "revId": "2f7daf29fe7c01ab5f18eec273ef13a46fb1d9a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b243452a_5bb300a9",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-12-21T09:45:40Z",
+      "side": 1,
+      "message": "How about adding \"\u003d\" at the end to avoid filtering out \"androidboot.vbmeta.device_other_value\u003d..\"?\n(I see an example of \"androidboot.vbmeta.device_state\u003dlocked\")",
+      "revId": "2f7daf29fe7c01ab5f18eec273ef13a46fb1d9a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "35b09d07_c297784b",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
@@ -37,6 +77,30 @@
       "writtenOn": "2021-12-21T09:36:13Z",
       "side": 1,
       "message": "Nit: this loses any separators between lines, which is probably harmless but does mean we can\u0027t tell the difference between files containing \"a\\nb\" and \"ab\".",
+      "range": {
+        "startLine": 450,
+        "startChar": 28,
+        "endLine": 450,
+        "endChar": 46
+      },
+      "revId": "2f7daf29fe7c01ab5f18eec273ef13a46fb1d9a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02dd2b28_df50e11c",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-12-21T09:45:40Z",
+      "side": 1,
+      "message": "+1, we need something like `unlines`?",
+      "parentUuid": "35b09d07_c297784b",
       "range": {
         "startLine": 450,
         "startChar": 28,
