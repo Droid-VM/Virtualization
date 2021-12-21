@@ -70,6 +70,30 @@
       },
       "revId": "afd36940e79ba29702927cbf565129a3bff1b10c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3b202bc_5372ada7",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2021-12-21T09:48:34Z",
+      "side": 1,
+      "message": "\u003e An alternative would be to move the logic for idsig files out of compos_client and back into the clients - so we\u0027d pass in a File rather than a Path, and each client would do what makes sense for them, That\u0027s where I ended up with instance_image.\n\nYeah I tried it, but it needed apk as well. Instead of moving more out of here, I\u0027ll just remove the old idsig. ;-)",
+      "parentUuid": "9f0871f3_1b2f460f",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 88,
+        "endChar": 85
+      },
+      "revId": "afd36940e79ba29702927cbf565129a3bff1b10c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
