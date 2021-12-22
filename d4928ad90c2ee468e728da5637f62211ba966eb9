@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fd7e6a9_31fd6156",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-12-22T15:36:34Z",
+      "side": 1,
+      "message": "If you move this whole block (creating the temporary directory) down below line 191 then you can use the value of protected_vm for your stats.",
+      "revId": "d4928ad90c2ee468e728da5637f62211ba966eb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27dce8c7_3ddbf99a",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-12-22T15:36:34Z",
+      "side": 1,
+      "message": "Add a use statement for this at the top of the file rather than fully-qualifying it here.",
+      "range": {
+        "startLine": 419,
+        "startChar": 10,
+        "endLine": 419,
+        "endChar": 59
+      },
+      "revId": "d4928ad90c2ee468e728da5637f62211ba966eb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acdbd653_5396dd08",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2021-12-22T15:36:34Z",
+      "side": 1,
+      "message": "Ditto.",
+      "range": {
+        "startLine": 420,
+        "startChar": 8,
+        "endLine": 420,
+        "endChar": 56
+      },
+      "revId": "d4928ad90c2ee468e728da5637f62211ba966eb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
