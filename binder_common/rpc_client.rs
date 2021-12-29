@@ -23,11 +23,14 @@ use binder::unstable_api::{new_spibinder, AIBinder};
 pub fn connect_rpc_binder<T: binder::FromIBinder + ?Sized>(
     cid: u32,
     port: u32,
+    incoming_threads: u32,
 ) -> binder::Result<Strong<T>> {
     // SAFETY: AIBinder returned by RpcClient has correct reference count, and the ownership can be
     // safely taken by new_spibinder.
     let ibinder = unsafe {
-        new_spibinder(binder_rpc_unstable_bindgen::RpcClient(cid, port) as *mut AIBinder)
+        new_spibinder(
+            binder_rpc_unstable_bindgen::RpcClient(cid, port, incoming_threads) as *mut AIBinder
+        )
     };
     if let Some(ibinder) = ibinder {
         <T>::try_from(ibinder)

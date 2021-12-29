@@ -93,6 +93,7 @@ fn get_vms_rpc_binder() -> Result<Strong<dyn IVirtualMachineService>> {
         new_spibinder(binder_rpc_unstable_bindgen::RpcClient(
             VMADDR_CID_HOST,
             VM_BINDER_SERVICE_PORT as u32,
+            /*incoming_threads=*/ 0,
         ) as *mut AIBinder)
     };
     if let Some(ibinder) = ibinder {

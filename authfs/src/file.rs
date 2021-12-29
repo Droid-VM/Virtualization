@@ -26,7 +26,11 @@ pub fn get_rpc_binder_service(cid: u32) -> io::Result<VirtFdService> {
     // SAFETY: AIBinder returned by RpcClient has correct reference count, and the ownership can be
     // safely taken by new_spibinder.
     let ibinder = unsafe {
-        new_spibinder(binder_rpc_unstable_bindgen::RpcClient(cid, RPC_SERVICE_PORT) as *mut AIBinder)
+        new_spibinder(binder_rpc_unstable_bindgen::RpcClient(
+            cid,
+            RPC_SERVICE_PORT,
+            /*incoming_threads=*/ 0,
+        ) as *mut AIBinder)
     };
     if let Some(ibinder) = ibinder {
         Ok(<dyn IVirtFdService>::try_from(ibinder).map_err(|e| {

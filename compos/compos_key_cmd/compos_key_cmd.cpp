@@ -95,7 +95,7 @@ static Result<std::vector<uint8_t>> readBytesFromFile(const std::string& path) {
 static std::shared_ptr<ICompOsService> getService(int cid) {
     LOG(INFO) << "Connecting to cid " << cid;
     ndk::SpAIBinder binder(cid == 0 ? AServiceManager_getService("android.system.composkeyservice")
-                                    : RpcClient(cid, kRpcPort));
+                                    : RpcClient(cid, kRpcPort, /*incoming_threads=*/0));
     return ICompOsService::fromBinder(binder);
 }
 

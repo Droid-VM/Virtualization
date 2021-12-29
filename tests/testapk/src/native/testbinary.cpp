@@ -210,8 +210,9 @@ Result<void> start_test_service() {
     auto callback = []([[maybe_unused]] void* param) {
         // Tell microdroid_manager that we're ready.
         // Failing to notify is not a fatal error; the payload can continue.
-        ndk::SpAIBinder binder(
-                RpcClient(VMADDR_CID_HOST, IVirtualMachineService::VM_BINDER_SERVICE_PORT));
+        ndk::SpAIBinder binder(RpcClient(VMADDR_CID_HOST,
+                                         IVirtualMachineService::VM_BINDER_SERVICE_PORT,
+                                         /*incoming_threads=*/0));
         auto virtualMachineService = IVirtualMachineService::fromBinder(binder);
         if (virtualMachineService == nullptr) {
             std::cerr << "failed to connect VirtualMachineService";
