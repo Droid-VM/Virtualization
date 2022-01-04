@@ -116,6 +116,23 @@
       },
       "revId": "d5f422fd16611e33147be669d9abe06b4970a6c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "332634f5_5ca7d2a8",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1884045
+      },
+      "writtenOn": "2022-01-04T16:04:22Z",
+      "side": 1,
+      "message": "A partner may choose to set the compiler filter to be \"verify\". I think it\u0027s fine not to check the compiler filter here because an attacker cannot use the compiler filter to do anything harmful other than degrading the performance. Performance degradation is not in the scope that we are trying to fight against.",
+      "revId": "d5f422fd16611e33147be669d9abe06b4970a6c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
