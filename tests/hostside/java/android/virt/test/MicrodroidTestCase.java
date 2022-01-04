@@ -17,19 +17,27 @@
 package android.virt.test;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import com.android.tradefed.device.DeviceNotAvailableException;
+import com.android.tradefed.device.ITestDevice;
+import com.android.tradefed.device.TestDevice;
+import com.android.tradefed.log.LogUtil;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner;
+import com.android.tradefed.util.CommandResult;
+import com.android.tradefed.util.CommandStatus;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Arrays;
+
 @RunWith(DeviceJUnit4ClassRunner.class)
+// Extending VirtualizationTestCaseBase instead of BaseHostJunit4Test to use #findTestFile() for now
 public class MicrodroidTestCase extends VirtualizationTestCaseBase {
     private static final String APK_NAME = "MicrodroidTestApp.apk";
     private static final String PACKAGE_NAME = "com.android.microdroid.test";
@@ -53,64 +61,67 @@ public class MicrodroidTestCase extends VirtualizationTestCaseBase {
     @Test
     public void testMicrodroidBoots() throws Exception {
         final String configPath = "assets/vm_config.json"; // path inside the APK
-        final String cid =
-                startMicrodroid(
-                        getDevice(),
-                        getBuild(),
-                        APK_NAME,
+        final ITestDevice microdroid =
+                ((TestDevice) getDevice()).startMicrodroid(
+                        findTestFile(APK_NAME),
                         PACKAGE_NAME,
                         configPath,
                         /* debug */ true,
                         minMemorySize());
-        adbConnectToMicrodroid(getDevice(), cid);
 
         // Wait until logd-init starts. The service is one of the last services that are started in
         // the microdroid boot procedure. Therefore, waiting for the service means that we wait for
         // the boot to complete. TODO: we need a better marker eventually.
-        tryRunOnMicrodroid("watch -e \"getprop init.svc.logd-reinit | grep '^$'\"");
+        tryRunOnMicrodroid(microdroid, "watch -e \"getprop init.svc.logd-reinit | grep '^$'\"");
 
         // Test writing to /data partition
-        runOnMicrodroid("echo MicrodroidTest > /data/local/tmp/test.txt");
-        assertThat(runOnMicrodroid("cat /data/local/tmp/test.txt"), is("MicrodroidTest"));
+        runOnMicrodroid(microdroid, "echo MicrodroidTest > /data/local/tmp/test.txt");
+        assertThat(runOnMicrodroid(microdroid, "cat /data/local/tmp/test.txt"),
+                is("MicrodroidTest"));
 
         // Check if the APK & its idsig partitions exist
         final String apkPartition = "/dev/block/by-name/microdroid-apk";
-        assertThat(runOnMicrodroid("ls", apkPartition), is(apkPartition));
+        assertThat(runOnMicrodroid(microdroid, "ls", apkPartition), is(apkPartition));
         final String apkIdsigPartition = "/dev/block/by-name/microdroid-apk-idsig";
-        assertThat(runOnMicrodroid("ls", apkIdsigPartition), is(apkIdsigPartition));
+        assertThat(runOnMicrodroid(microdroid, "ls", apkIdsigPartition),
+                is(apkIdsigPartition));
         // Check the vm-instance partition as well
         final String vmInstancePartition = "/dev/block/by-name/vm-instance";
-        assertThat(runOnMicrodroid("ls", vmInstancePartition), is(vmInstancePartition));
+        assertThat(runOnMicrodroid(microdroid, "ls", vmInstancePartition),
+                is(vmInstancePartition));
 
         // Check if the native library in the APK is has correct filesystem info
-        final String[] abis = runOnMicrodroid("getprop", "ro.product.cpu.abilist").split(",");
+        final String[] abis = runOnMicrodroid(microdroid,
+                "getprop", "ro.product.cpu.abilist").split(",");
         assertThat(abis.length, is(1));
         final String testLib = "/mnt/apk/lib/" + abis[0] + "/MicrodroidTestNativeLib.so";
         final String label = "u:object_r:system_file:s0";
-        assertThat(runOnMicrodroid("ls", "-Z", testLib), is(label + " " + testLib));
+        assertThat(runOnMicrodroid(microdroid, "ls", "-Z", testLib),
+                is(label + " " + testLib));
 
         // Check if the command in vm_config.json was executed by examining the side effect of the
         // command
-        assertThat(runOnMicrodroid("getprop", "debug.microdroid.app.run"), is("true"));
-        assertThat(runOnMicrodroid("getprop", "debug.microdroid.app.sublib.run"), is("true"));
+        assertThat(runOnMicrodroid(microdroid, "getprop", "debug.microdroid.app.run"),
+                is("true"));
+        assertThat(runOnMicrodroid(microdroid, "getprop", "debug.microdroid.app.sublib.run"),
+                is("true"));
 
         // Check that keystore was found by the payload. Wait until the property is set.
-        tryRunOnMicrodroid("watch -e \"getprop debug.microdroid.test.keystore | grep '^$'\"");
-        assertThat(runOnMicrodroid("getprop", "debug.microdroid.test.keystore"), is("PASS"));
+        tryRunOnMicrodroid(microdroid,
+                "watch -e \"getprop debug.microdroid.test.keystore | grep '^$'\"");
+        assertThat(runOnMicrodroid(microdroid, "getprop", "debug.microdroid.test.keystore"),
+                is("PASS"));
 
         // Check that no denials have happened so far
-        assertThat(runOnMicrodroid("logcat -d -e 'avc:[[:space:]]{1,2}denied'"), is(""));
+        assertThat(runOnMicrodroid(microdroid, "logcat -d -e 'avc:[[:space:]]{1,2}denied'"),
+                is(""));
 
-        shutdownMicrodroid(getDevice(), cid);
+        ((TestDevice) getDevice()).shutdownMicrodroid();
     }
 
     @Before
     public void setUp() throws Exception {
-        testIfDeviceIsCapable(getDevice());
-
-        prepareVirtualizationTestSetup(getDevice());
-
-        getDevice().installPackage(findTestFile(APK_NAME), /* reinstall */ false);
+        ((TestDevice) getDevice()).testIfDeviceSupportsMicrodroid();
 
         // clear the log
         getDevice().executeShellV2Command("logcat -c");
@@ -118,8 +129,39 @@ public class MicrodroidTestCase extends VirtualizationTestCaseBase {
 
     @After
     public void shutdown() throws Exception {
-        cleanUpVirtualizationTestSetup(getDevice());
-
         getDevice().uninstallPackage(PACKAGE_NAME);
+    }
+
+    private String join(String... strs) {
+        return String.join(" ", Arrays.asList(strs));
+    }
+
+    // Run a shell command on Microdroid
+    private String runOnMicrodroid(ITestDevice microdroid, String... cmd)
+            throws DeviceNotAvailableException {
+        CommandResult result = runOnMicrodroidForResult(microdroid, cmd);
+        if (result.getStatus() != CommandStatus.SUCCESS) {
+            fail(join(cmd) + " has failed: " + result);
+        }
+        return result.getStdout().trim();
+    }
+
+    // Same as runOnMicrodroid, but returns null on error.
+    private String tryRunOnMicrodroid(ITestDevice microdroid, String... cmd)
+            throws DeviceNotAvailableException {
+        CommandResult result = runOnMicrodroidForResult(microdroid, cmd);
+        if (result.getStatus() == CommandStatus.SUCCESS) {
+            return result.getStdout().trim();
+        } else {
+            LogUtil.CLog.d(join(cmd) + " has failed (but ok): " + result);
+            return null;
+        }
+    }
+
+    private CommandResult runOnMicrodroidForResult(ITestDevice microdroid, String... cmd)
+            throws DeviceNotAvailableException {
+        final long timeout = 30000; // 30 sec. Microdroid is extremely slow on GCE-on-CF.
+        return microdroid.executeShellV2Command(join(cmd), timeout,
+                java.util.concurrent.TimeUnit.MILLISECONDS);
     }
 }
