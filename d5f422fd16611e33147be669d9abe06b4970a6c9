@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "451fe190_1691f7b3",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-04T23:15:05Z",
+      "side": 1,
+      "message": "Indeed. I couldn\u0027t bare with one more :P So... maybe next time :P",
+      "parentUuid": "6bef7ece_f4391cdf",
+      "range": {
+        "startLine": 60,
+        "startChar": 19,
+        "endLine": 61,
+        "endChar": 64
+      },
+      "revId": "d5f422fd16611e33147be669d9abe06b4970a6c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62f990e0_6fa5352e",
@@ -131,6 +155,24 @@
       "writtenOn": "2022-01-04T16:04:22Z",
       "side": 1,
       "message": "A partner may choose to set the compiler filter to be \"verify\". I think it\u0027s fine not to check the compiler filter here because an attacker cannot use the compiler filter to do anything harmful other than degrading the performance. Performance degradation is not in the scope that we are trying to fight against.",
+      "revId": "d5f422fd16611e33147be669d9abe06b4970a6c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb8da86a_0dcf21d9",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-04T23:15:05Z",
+      "side": 1,
+      "message": "Replaced with a comment. This also allows ART team to add any new filter without changing CompOS.",
+      "parentUuid": "332634f5_5ca7d2a8",
       "revId": "d5f422fd16611e33147be669d9abe06b4970a6c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
