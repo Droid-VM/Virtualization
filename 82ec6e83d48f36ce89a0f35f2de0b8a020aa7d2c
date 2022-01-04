@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3530310_a618544b",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-04T22:11:38Z",
+      "side": 1,
+      "message": "Don\u0027t you need to add --bootclasspath-fragment\u003d/data/misc/authfs/$INSTANCE/$SYSTEM_DIR_FD/etc/classpaths/bootclasspath.pb and --systemserverclasspath-fragment\u003d... ? I added these flags for our purpose.",
+      "range": {
+        "startLine": 265,
+        "startChar": 9,
+        "endLine": 265,
+        "endChar": 12
+      },
+      "revId": "82ec6e83d48f36ce89a0f35f2de0b8a020aa7d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25a7d608_80c8b8be",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-04T22:11:38Z",
+      "side": 1,
+      "message": "nit: care",
+      "range": {
+        "startLine": 278,
+        "startChar": 55,
+        "endLine": 278,
+        "endChar": 56
+      },
+      "revId": "82ec6e83d48f36ce89a0f35f2de0b8a020aa7d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
