@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "286271cf_b7aec150",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-01-05T11:35:59Z",
+      "side": 1,
+      "message": "Nit: rather than using a regex, would it be sufficient to do `line.split(\u0027 \u0027)`?",
+      "revId": "2c2465fbbb6e4b0ca1992afc65266f0da829d366",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
