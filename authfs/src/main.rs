@@ -29,7 +29,9 @@
 
 use anyhow::{bail, Result};
 use log::error;
+use protobuf::Message;
 use std::convert::TryInto;
+use std::fs::File;
 use std::path::{Path, PathBuf};
 use structopt::StructOpt;
 
@@ -47,6 +49,7 @@ use file::{
 };
 use fsstat::RemoteFsStatsReader;
 use fsverity::{VerifiedFileEditor, VerifiedFileReader};
+use fsverity_digests_proto::fsverity_digests::FSVerityDigests;
 use fusefs::{AuthFs, AuthFsEntry};
 
 #[derive(StructOpt)]
@@ -131,8 +134,6 @@ struct OptionRemoteRoDir {
     /// A mapping file that describes the expecting file/directory structure and integrity metadata
     /// in the remote directory. The file contains serialized protobuf of
     /// android.security.fsverity.FSVerityDigests.
-    /// TODO(206869687): Really use the file when it's generated.
-    #[allow(dead_code)]
     mapping_file_path: PathBuf,
 
     prefix: PathBuf,
@@ -260,24 +261,11 @@ fn prepare_root_dir_entries(
             AuthFsEntry::ReadonlyDirectory { dir: InMemoryDir::new() },
         )?;
 
-        // TODO(206869687): Read actual path from config.mapping_file_path when it's generated.
-        let paths = vec![
-            Path::new("/system/framework/com.android.location.provider.jar"),
-            Path::new("/system/framework/ethernet-service.jar"),
-            Path::new("/system/framework/ext.jar"),
-            Path::new("/system/framework/framework-graphics.jar"),
-            Path::new("/system/framework/framework.jar"),
-            Path::new("/system/framework/ims-common.jar"),
-            Path::new("/system/framework/services.jar"),
-            Path::new("/system/framework/telephony-common.jar"),
-            Path::new("/system/framework/voip-common.jar"),
-            Path::new("/system/etc/boot-image.prof"),
-            Path::new("/system/etc/classpaths/bootclasspath.pb"),
-            Path::new("/system/etc/classpaths/systemserverclasspath.pb"),
-            Path::new("/system/etc/dirty-image-objects"),
-        ];
-
-        for path in &paths {
+        // Build the directory tree based on the mapping file.
+        let mut reader = File::open(&config.mapping_file_path)?;
+        let proto = FSVerityDigests::parse_from_reader(&mut reader)?;
+        for path in proto.digests.keys() {
+            let path = Path::new(path);
             let file_entry = {
                 // TODO(205883847): Not all files will be used. Open the remote file lazily.
                 let related_path = path.strip_prefix(&config.prefix)?;
@@ -290,11 +278,8 @@ fn prepare_root_dir_entries(
                 // TODO(206869687): Switch to VerifiedReadonly
                 AuthFsEntry::UnverifiedReadonly { reader: remote_file, file_size }
             };
-            authfs.add_entry_at_ro_dir_by_path(
-                dir_root_inode,
-                path.strip_prefix("/")?,
-                file_entry,
-            )?;
+            let rootless_path = if path.starts_with("/") { path.strip_prefix("/")? } else { path };
+            authfs.add_entry_at_ro_dir_by_path(dir_root_inode, rootless_path, file_entry)?;
         }
     }
 

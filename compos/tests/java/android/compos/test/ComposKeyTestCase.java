@@ -39,8 +39,16 @@ public final class ComposKeyTestCase extends VirtualizationTestCaseBase {
     /** Wait time for service to be ready on boot */
     private static final int READY_LATENCY_MS = 10 * 1000; // 10 seconds
 
-    // Path to compos_key_cmd tool
+    /** Path to compos_key_cmd tool */
     private static final String COMPOS_KEY_CMD_BIN = "/apex/com.android.compos/bin/compos_key_cmd";
+
+    /** Config of the test VM. This is a path inside the APK. */
+    private static final String VM_TEST_CONFIG_PATH = "assets/vm_test_config.json";
+
+    /** Idsig paths to be created for each APK in the "extra_apks" of vm_test_config.json. */
+    private static final String[] EXTRA_IDSIG_PATHS = new String[] {
+        TEST_ROOT + "BuildManifest.apk.idsig",
+    };
 
     private String mCid;
 
@@ -130,7 +138,8 @@ public final class ComposKeyTestCase extends VirtualizationTestCaseBase {
                         getBuild(),
                         /* apkName, no need to install */ null,
                         packageName,
-                        "assets/vm_test_config.json",
+                        EXTRA_IDSIG_PATHS,
+                        VM_TEST_CONFIG_PATH,
                         /* debug */ true,
                         /* use default memoryMib */ 0);
         adbConnectToMicrodroid(getDevice(), mCid);
