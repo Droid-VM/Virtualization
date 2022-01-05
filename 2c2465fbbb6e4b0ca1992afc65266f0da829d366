@@ -16,6 +16,24 @@
       "message": "Nit: rather than using a regex, would it be sufficient to do `line.split(\u0027 \u0027)`?",
       "revId": "2c2465fbbb6e4b0ca1992afc65266f0da829d366",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a6d6fd5_bcdb36a0",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-05T11:40:28Z",
+      "side": 1,
+      "message": "Yeah, but then I\u0027d have to check for exactly 3 and do the check for \"export\" myself. I marginally prefer the regex; this on at least is fairly readable.\n\n(I was trying to get it to handle the path splitting as well, but abandoned that.)",
+      "parentUuid": "286271cf_b7aec150",
+      "revId": "2c2465fbbb6e4b0ca1992afc65266f0da829d366",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
