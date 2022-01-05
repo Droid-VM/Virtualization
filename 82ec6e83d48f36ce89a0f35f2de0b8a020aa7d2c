@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86dabe21_0d8310ac",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-05T10:21:30Z",
+      "side": 1,
+      "message": "This is running in the host not the VM, so I don\u0027t think so.\nBut thanks, I will look into that for b/200808307.",
+      "parentUuid": "e3530310_a618544b",
+      "range": {
+        "startLine": 265,
+        "startChar": 9,
+        "endLine": 265,
+        "endChar": 12
+      },
+      "revId": "82ec6e83d48f36ce89a0f35f2de0b8a020aa7d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25a7d608_80c8b8be",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "113085e0_8bc2618f",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-05T10:21:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25a7d608_80c8b8be",
+      "range": {
+        "startLine": 278,
+        "startChar": 55,
+        "endLine": 278,
+        "endChar": 56
+      },
+      "revId": "82ec6e83d48f36ce89a0f35f2de0b8a020aa7d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6004a57f_40581def",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-01-05T00:44:06Z",
       "side": 1,
       "message": "Do we need to trigger an error when a line doesn\u0027t match with the regex?",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 292,
+        "endChar": 9
+      },
+      "revId": "82ec6e83d48f36ce89a0f35f2de0b8a020aa7d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a526f8ca_bc1ab986",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-05T10:21:30Z",
+      "side": 1,
+      "message": "I don\u0027t think we should treat it as an error - continuing with what we have seems better than failing utterly - but we should probably log it. (I had that, then removed it, but doing nothing seems a bad idea.)",
+      "parentUuid": "6004a57f_40581def",
       "range": {
         "startLine": 292,
         "startChar": 0,
