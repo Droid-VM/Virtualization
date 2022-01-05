@@ -69,6 +69,14 @@ public final class AuthFsHostTest extends VirtualizationTestCaseBase {
     /** Path to authfs on Microdroid */
     private static final String AUTHFS_BIN = "/system/bin/authfs";
 
+    /** Idsig paths to be created for each APK in the "extra_apks" of vm_config.json. */
+    private static final String[] EXTRA_IDSIG_PATHS = new String[] {
+        TEST_DIR + "BuildManifest.apk.idsig",
+    };
+
+    /** Build manifest path in the VM. 0 is the index of extra_apks in vm_config.json. */
+    private static final String BUILD_MANIFEST_PATH = "/mnt/extra-apk/0/assets/build_manifest.pb";
+
     /** Plenty of time for authfs to get ready */
     private static final int AUTHFS_INIT_TIMEOUT_MS = 3000;
 
@@ -117,6 +125,7 @@ public final class AuthFsHostTest extends VirtualizationTestCaseBase {
                         testInfo.getBuildInfo(),
                         apkName,
                         packageName,
+                        EXTRA_IDSIG_PATHS,
                         configPath,
                         /* debug */ true,
                         /* use default memoryMib */ 0);
@@ -488,9 +497,8 @@ public final class AuthFsHostTest extends VirtualizationTestCaseBase {
         // Setup
         String authfsInputDir = MOUNT_DIR + "/3";
         runFdServerOnAndroid("--open-dir 3:/system", "--ro-dirs 3");
-        // TODO(206869687): Replace /dev/null with real manifest file when it's generated. We
-        // currently hard-coded the files for the test manually, and ignore the integrity check.
-        runAuthFsOnMicrodroid("--remote-ro-dir 3:/dev/null:/system --cid " + VMADDR_CID_HOST);
+        runAuthFsOnMicrodroid("--remote-ro-dir 3:" + BUILD_MANIFEST_PATH + ":system/ --cid "
+                + VMADDR_CID_HOST);
 
         // Action
         String actualHash =
@@ -506,9 +514,8 @@ public final class AuthFsHostTest extends VirtualizationTestCaseBase {
         // Setup
         String authfsInputDir = MOUNT_DIR + "/3";
         runFdServerOnAndroid("--open-dir 3:/system", "--ro-dirs 3");
-        // TODO(206869687): Replace /dev/null with real manifest file when it's generated. We
-        // currently hard-coded the files for the test manually, and ignore the integrity check.
-        runAuthFsOnMicrodroid("--remote-ro-dir 3:/dev/null:/system --cid " + VMADDR_CID_HOST);
+        runAuthFsOnMicrodroid("--remote-ro-dir 3:" + BUILD_MANIFEST_PATH + ":system/ --cid "
+                + VMADDR_CID_HOST);
 
         // Verify
         runOnMicrodroid("test -f " + authfsInputDir + "/system/framework/services.jar");
