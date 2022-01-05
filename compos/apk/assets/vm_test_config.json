@@ -7,6 +7,11 @@
     "type": "executable",
     "command": "/apex/com.android.compos/bin/compsvc"
   },
+  "extra_apks": [
+    {
+      "path": "/system/etc/security/fsverity/BuildManifest.apk"
+    }
+  ],
   "apexes": [
     {
       "name": "com.android.art"
