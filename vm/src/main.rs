@@ -78,7 +78,7 @@ enum Opt {
         mem: Option<u32>,
 
         /// Paths to extra idsig files.
-        #[structopt(long)]
+        #[structopt(long = "extra-idsig")]
         extra_idsigs: Vec<PathBuf>,
     },
     /// Run a virtual machine
