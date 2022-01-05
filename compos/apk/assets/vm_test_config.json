@@ -1,27 +1,32 @@
 {
-    "version": 1,
-    "os": {
-        "name": "microdroid"
+  "version": 1,
+  "os": {
+    "name": "microdroid"
+  },
+  "task": {
+    "type": "executable",
+    "command": "/apex/com.android.compos/bin/compsvc"
+  },
+  "extra_apks": [
+    {
+      "path": "/system/etc/security/fsverity/BuildManifest.apk"
+    }
+  ],
+  "apexes": [
+    {
+      "name": "com.android.art"
     },
-    "task": {
-        "type": "executable",
-        "command": "/apex/com.android.compos/bin/compsvc"
+    {
+      "name": "com.android.compos"
     },
-    "apexes": [
-        {
-            "name": "com.android.art"
-        },
-        {
-            "name": "com.android.compos"
-        },
-        {
-            "name": "{DEX2OATBOOTCLASSPATH}"
-        },
-        {
-            "name": "{BOOTCLASSPATH}"
-        },
-        {
-            "name": "{SYSTEMSERVERCLASSPATH}"
-        }
-    ]
+    {
+      "name": "{DEX2OATBOOTCLASSPATH}"
+    },
+    {
+      "name": "{BOOTCLASSPATH}"
+    },
+    {
+      "name": "{SYSTEMSERVERCLASSPATH}"
+    }
+  ]
 }
