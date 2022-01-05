@@ -16,6 +16,69 @@
       "message": "I don\u0027t think this will do quite the right thing, due to the ro.build.* issue. But it\u0027s close.",
       "revId": "85e946ce6a44e83a84a353541c4d8311c38781ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a56014f_00bc4f3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-05T18:29:22Z",
+      "side": 1,
+      "message": "LGTM: authfs/** and compos/**",
+      "revId": "85e946ce6a44e83a84a353541c4d8311c38781ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2eb95a3_8367ed42",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-05T18:29:22Z",
+      "side": 1,
+      "message": "nit: \"export_lines\"? \"output\"?",
+      "range": {
+        "startLine": 173,
+        "startChar": 8,
+        "endLine": 173,
+        "endChar": 22
+      },
+      "revId": "85e946ce6a44e83a84a353541c4d8311c38781ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b40c457_a1468f72",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-05T18:29:22Z",
+      "side": 1,
+      "message": "Indeed. We don\u0027t want a parallel request (in the attacker scenario in this case) to affect the current state. This also applies to env::set_var of ANDROID_ROOT and ART_APEX_DATA above.\n\nLast time I checked, we need to extend minijail\u0027s Rust API to support env vars.",
+      "range": {
+        "startLine": 209,
+        "startChar": 33,
+        "endLine": 210,
+        "endChar": 24
+      },
+      "revId": "85e946ce6a44e83a84a353541c4d8311c38781ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
