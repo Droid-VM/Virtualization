@@ -26,7 +26,8 @@ use compos_aidl_interface::aidl::com::android::compos::ICompOsService::ICompOsSe
 use compos_aidl_interface::binder::{ParcelFileDescriptor, Strong};
 use compos_common::compos_client::{VmInstance, VmParameters};
 use compos_common::{
-    COMPOS_DATA_ROOT, IDSIG_FILE, INSTANCE_IMAGE_FILE, PRIVATE_KEY_BLOB_FILE, PUBLIC_KEY_FILE,
+    COMPOS_DATA_ROOT, IDSIG_EXTRA_FILE, IDSIG_FILE, INSTANCE_IMAGE_FILE, PRIVATE_KEY_BLOB_FILE,
+    PUBLIC_KEY_FILE,
 };
 use log::{info, warn};
 use std::env;
@@ -52,6 +53,7 @@ pub struct InstanceStarter {
     instance_root: PathBuf,
     instance_image: PathBuf,
     idsig: PathBuf,
+    idsig_extra: PathBuf,
     key_blob: PathBuf,
     public_key: PathBuf,
     vm_parameters: VmParameters,
@@ -63,6 +65,7 @@ impl InstanceStarter {
         let instance_root_path = instance_root.as_path();
         let instance_image = instance_root_path.join(INSTANCE_IMAGE_FILE);
         let idsig = instance_root_path.join(IDSIG_FILE);
+        let idsig_extra = instance_root_path.join(IDSIG_EXTRA_FILE);
         let key_blob = instance_root_path.join(PRIVATE_KEY_BLOB_FILE);
         let public_key = instance_root_path.join(PUBLIC_KEY_FILE);
         Self {
@@ -70,6 +73,7 @@ impl InstanceStarter {
             instance_root,
             instance_image,
             idsig,
+            idsig_extra,
             key_blob,
             public_key,
             vm_parameters,
@@ -127,8 +131,9 @@ impl InstanceStarter {
         let _ = fs::create_dir(&self.instance_root);
 
         self.create_instance_image(virtualization_service)?;
-        // Delete existing idsig file. Ignore error in case idsig doesn't exist.
+        // Delete existing idsig files. Ignore error in case idsig doesn't exist.
         let _ = fs::remove_file(&self.idsig);
+        let _ = fs::remove_file(&self.idsig_extra);
 
         let compos_instance = self.start_vm(virtualization_service)?;
         let service = &compos_instance.service;
@@ -180,6 +185,7 @@ impl InstanceStarter {
             virtualization_service,
             instance_image,
             &self.idsig,
+            &self.idsig_extra,
             &self.vm_parameters,
         )
         .context("Starting VM")?;
