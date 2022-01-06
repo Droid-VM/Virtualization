@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "dfff7358_a6be413f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-06T00:13:54Z",
+      "side": 1,
+      "message": "Jiyong, you seem to have touched fs_config before.  Do you perhaps know why TH is failing with \"failed to find system/etc/boot-image.prof.fsv_meta in canned fs_config\"?\n\nhttps://android-build.googleplex.com/builds/pending/P28657910/aosp_cf_x86_64_phone-userdebug/latest/view/logs/build_error.log\n\nDo we need to add .fsv_meta files to some file?  I can\u0027t reproduce the error locally.",
+      "revId": "42b13a8d7ad3edb7334627ae00dcdb6b37f58e84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c4776630_552fb68e",
         "filename": "compos/common/compos_client.rs",
         "patchSetId": 2
