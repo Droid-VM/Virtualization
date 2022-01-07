@@ -77,6 +77,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b87f617_2c902126",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-07T04:45:02Z",
+      "side": 1,
+      "message": "path.trim_start_matches(\u0027/\u0027)  to be shorter?",
+      "range": {
+        "startLine": 281,
+        "startChar": 32,
+        "endLine": 281,
+        "endChar": 98
+      },
+      "revId": "4c2038f38456cec45b19c179c2a54cb971ad7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "055ab5d6_0cc1a593",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-07T04:45:02Z",
+      "side": 1,
+      "message": "Why do we need to give this path, rather than let virtualizationservice (or vm) to determine by themselves?",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 6
+      },
+      "revId": "4c2038f38456cec45b19c179c2a54cb971ad7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ce3bcb9_5243a34a",
         "filename": "authfs/tests/java/src/com/android/fs/AuthFsHostTest.java",
         "patchSetId": 1
@@ -139,6 +185,29 @@
         "startChar": 0,
         "endLine": 200,
         "endChar": 26
+      },
+      "revId": "4c2038f38456cec45b19c179c2a54cb971ad7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "365ada0c_6551b659",
+        "filename": "tests/hostside/helper/java/android/virt/test/VirtualizationTestCaseBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-07T04:45:02Z",
+      "side": 1,
+      "message": "This option is new to me. Where\u0027s the CL?",
+      "range": {
+        "startLine": 240,
+        "startChar": 26,
+        "endLine": 240,
+        "endChar": 40
       },
       "revId": "4c2038f38456cec45b19c179c2a54cb971ad7d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
