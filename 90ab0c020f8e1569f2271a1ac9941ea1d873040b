@@ -87,6 +87,30 @@
       },
       "revId": "90ab0c020f8e1569f2271a1ac9941ea1d873040b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "743f5588_c3ce35c9",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-07T17:37:52Z",
+      "side": 1,
+      "message": "getProperty returns null if the property is undefined (which is why I needed to set to \"\" originally).  So if I\u0027m not mistaken, the 1 and 2 cases are the same: only restore the value if we\u0027ve actually got some string?",
+      "parentUuid": "0e0350d1_5ca813da",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 9
+      },
+      "revId": "90ab0c020f8e1569f2271a1ac9941ea1d873040b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
