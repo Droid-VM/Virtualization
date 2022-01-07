@@ -63,6 +63,30 @@
       },
       "revId": "90ab0c020f8e1569f2271a1ac9941ea1d873040b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e0350d1_5ca813da",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-07T17:15:45Z",
+      "side": 1,
+      "message": "I think you still need to map null to \"\" here?\n\n3 cases:\nnull -\u003e we never got as far as reading the old value, we should do nothing in TD\n\"\" -\u003e there wasn\u0027t an old value, we should clear in TD\nelse -\u003e we should reset to the old value in TD",
+      "parentUuid": "67c01d97_b0b14878",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 9
+      },
+      "revId": "90ab0c020f8e1569f2271a1ac9941ea1d873040b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
