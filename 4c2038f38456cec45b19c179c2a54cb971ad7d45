@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf83d67f_241c384c",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-01-07T02:17:13Z",
+      "side": 1,
+      "message": "FYI: paths in the metadata don\u0027t have a slash prefix. See https://android-review.googlesource.com/c/platform/build/+/1937129/2/tools/releasetools/fsverity_manifest_generator.py, line 76.\n\nI\u0027m not sure if it will change in the future, though,",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 99
+      },
+      "revId": "4c2038f38456cec45b19c179c2a54cb971ad7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ce3bcb9_5243a34a",
         "filename": "authfs/tests/java/src/com/android/fs/AuthFsHostTest.java",
         "patchSetId": 1
@@ -76,6 +99,29 @@
         "startChar": 51,
         "endLine": 111,
         "endChar": 65
+      },
+      "revId": "4c2038f38456cec45b19c179c2a54cb971ad7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3da0877_14a8afcc",
+        "filename": "tests/hostside/helper/java/android/virt/test/VirtualizationTestCaseBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-01-07T02:17:13Z",
+      "side": 1,
+      "message": "nit; I\u0027m worried about the long parameter list, but it may be OK as a test code.",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 200,
+        "endChar": 26
       },
       "revId": "4c2038f38456cec45b19c179c2a54cb971ad7d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
