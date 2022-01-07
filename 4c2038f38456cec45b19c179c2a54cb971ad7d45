@@ -122,6 +122,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a9388d9_999b77cc",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-07T22:45:15Z",
+      "side": 1,
+      "message": "Ack. Now the path is expected to match the prefix, so we don\u0027t need this extra work.",
+      "parentUuid": "cf83d67f_241c384c",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 99
+      },
+      "revId": "4c2038f38456cec45b19c179c2a54cb971ad7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf0a8059_20fd3640",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-07T22:45:15Z",
+      "side": 1,
+      "message": "Done differently, hopefully more intuitive. Now I made prefix a String instead of Path, and updated the caller. With Path, strip_prefix(\u0027dir/\u0027) is same as strip_prefix(\u0027dir\u0027), but doesn\u0027t seem to provide any value in this case.\n\nBTW, a path starts with \u0027/\u0027 will be rejected in the following call.",
+      "parentUuid": "753b08fd_d9011416",
+      "range": {
+        "startLine": 281,
+        "startChar": 32,
+        "endLine": 281,
+        "endChar": 98
+      },
+      "revId": "4c2038f38456cec45b19c179c2a54cb971ad7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "055ab5d6_0cc1a593",
@@ -135,6 +183,30 @@
       "writtenOn": "2022-01-07T04:45:02Z",
       "side": 1,
       "message": "Why do we need to give this path, rather than let virtualizationservice (or vm) to determine by themselves?",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 6
+      },
+      "revId": "4c2038f38456cec45b19c179c2a54cb971ad7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1cc9e5e_1d44177b",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-07T22:45:15Z",
+      "side": 1,
+      "message": "Just because vm expects to be given a path?  Similar to instance image?  If it can be maintained internally, it\u0027ll be easier to use and less error prune.  For example, right now, the number of idsig configured here must match the number of extra_apks in config.json.  But that\u0027ll be beyond the scope, if indeed possible.",
+      "parentUuid": "055ab5d6_0cc1a593",
       "range": {
         "startLine": 72,
         "startChar": 0,
@@ -168,6 +240,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93cc185b_61d22f60",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-07T22:45:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ce3bcb9_5243a34a",
+      "range": {
+        "startLine": 78,
+        "startChar": 79,
+        "endLine": 78,
+        "endChar": 93
+      },
+      "revId": "4c2038f38456cec45b19c179c2a54cb971ad7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d9109f9_f59fdd02",
@@ -181,6 +277,30 @@
       "writtenOn": "2022-01-07T01:54:44Z",
       "side": 1,
       "message": "add .pb",
+      "range": {
+        "startLine": 111,
+        "startChar": 51,
+        "endLine": 111,
+        "endChar": 65
+      },
+      "revId": "4c2038f38456cec45b19c179c2a54cb971ad7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb7282cc_2b453f4a",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-07T22:45:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d9109f9_f59fdd02",
       "range": {
         "startLine": 111,
         "startChar": 51,
@@ -323,6 +443,30 @@
       "side": 1,
       "message": "Oh I think it makes sense. Changing it must be trivial. Personally I prefer the second one.",
       "parentUuid": "a5f164e8_95ba51f4",
+      "range": {
+        "startLine": 240,
+        "startChar": 26,
+        "endLine": 240,
+        "endChar": 40
+      },
+      "revId": "4c2038f38456cec45b19c179c2a54cb971ad7d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb0e045a_967b47e6",
+        "filename": "tests/hostside/helper/java/android/virt/test/VirtualizationTestCaseBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-07T22:45:15Z",
+      "side": 1,
+      "message": "Done with the second suggestion, with a rename in vm/src/main.rs to remove \"s\".",
+      "parentUuid": "fd574972_054957b3",
       "range": {
         "startLine": 240,
         "startChar": 26,
