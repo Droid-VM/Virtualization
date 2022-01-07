@@ -16,6 +16,29 @@
       "message": "`ls /apex/com.android.virt` assumption error... trying again.",
       "revId": "90ab0c020f8e1569f2271a1ac9941ea1d873040b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "208ea115_9b371ec3",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-07T09:25:14Z",
+      "side": 1,
+      "message": "I think the TH failures here are real - buried deep in https://android-build.googleplex.com/builds/tests/view?invocationId\u003dI23800010006078548\u0026testResultId\u003dTR14327846884251861 I see:\n\n  java.lang.IllegalArgumentException: set property key or value cannot be null.\n\tat com.android.tradefed.device.NativeDevice.setProperty(NativeDevice.java:592)\n\tat android.compos.test.ComposTestCase.tearDown(ComposTestCase.java:86)\n\n\nAnd that can happen if \"testIfDeviceIsCapable\" decides it isn\u0027t - we bail in that case, but because setUp has started, tearDown is called, with mSystemServerCompilerFilter \u003d\u003d null.\n\nAnd the test logs show that:\n\nCaused by: org.junit.AssumptionViolatedException: got: \u003cFAILED\u003e, expected: is \u003cSUCCESS\u003e\n\tat org.junit.Assume.assumeThat(Assume.java:106)\n\tat android.virt.test.CommandRunner.assumeSuccess(CommandRunner.java:89)\n\tat android.virt.test.VirtualizationTestCaseBase.testIfDeviceIsCapable(VirtualizationTestCaseBase.java:106)\n\tat android.compos.test.ComposTestCase.setUp(ComposTestCase.java:64)",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 9
+      },
+      "revId": "90ab0c020f8e1569f2271a1ac9941ea1d873040b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
