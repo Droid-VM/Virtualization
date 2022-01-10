@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16c0cd5d_b03048a8",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-10T14:24:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a5ccf47_60c3e35b",
+      "range": {
+        "startLine": 282,
+        "startChar": 52,
+        "endLine": 282,
+        "endChar": 84
+      },
+      "revId": "98caf9fb6b0c4d218a54a99d9d7310a1222a5b37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16236675_68d913c4",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-01-10T14:18:17Z",
       "side": 1,
       "message": "Compile the patterns once at class initialization time?",
+      "range": {
+        "startLine": 305,
+        "startChar": 24,
+        "endLine": 305,
+        "endChar": 69
+      },
+      "revId": "98caf9fb6b0c4d218a54a99d9d7310a1222a5b37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a31681c3_a1512b2a",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-10T14:24:40Z",
+      "side": 1,
+      "message": "I didn\u0027t want to do that because then we would compile the patterns even when mCpuAffinity is null which I believe is the usual case.",
+      "parentUuid": "16236675_68d913c4",
       "range": {
         "startLine": 305,
         "startChar": 24,
