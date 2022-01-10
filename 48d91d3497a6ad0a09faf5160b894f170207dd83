@@ -16,6 +16,24 @@
       "message": "This won\u0027t work until aosp/1938803 is in",
       "revId": "48d91d3497a6ad0a09faf5160b894f170207dd83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a1b2645_a766b446",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-10T18:08:49Z",
+      "side": 1,
+      "message": "Or at least it shouldn\u0027t work. But it did - because odrefresh ignored the unknown argument.\nThat seems wrong. I\u0027ll send a CL.",
+      "parentUuid": "95bb3a01_54d995ea",
+      "revId": "48d91d3497a6ad0a09faf5160b894f170207dd83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
