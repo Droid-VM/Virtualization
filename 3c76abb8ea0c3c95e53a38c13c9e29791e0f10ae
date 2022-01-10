@@ -46,6 +46,30 @@
       },
       "revId": "3c76abb8ea0c3c95e53a38c13c9e29791e0f10ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "397b970e_d68c78de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-10T09:37:03Z",
+      "side": 1,
+      "message": "Thank you. I see the presubmit failures, but am not sure if the failures are due to the topic. The only difference from the bootloader output is\n\n\u003e Patchlevel (\u003cNULL\u003e) date format was not YYYY-MM-DD\n\n, which looks bad, but I don\u0027t know if it can make the device non-bootable.\n\nAnyway, I kicked off a test [1] with this revert topic. If that passes, I will submit this.\n\n[1] https://android-build.googleplex.com/builds/abtd/run/L91000000952530355",
+      "parentUuid": "a2d91a37_c9715d01",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 34
+      },
+      "revId": "3c76abb8ea0c3c95e53a38c13c9e29791e0f10ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
