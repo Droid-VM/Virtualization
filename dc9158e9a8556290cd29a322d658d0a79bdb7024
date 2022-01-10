@@ -16,6 +16,24 @@
       "message": "Running the failing presubmit test in Forrest here: https://android-build.googleplex.com/builds/abtd/run/L26900000952539115",
       "revId": "dc9158e9a8556290cd29a322d658d0a79bdb7024",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a89561e7_e2327d8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1644679
+      },
+      "writtenOn": "2022-01-10T19:54:10Z",
+      "side": 1,
+      "message": "The Forrest tests passed even though the build fails for this presubmit because I didn\u0027t rebuilt u-boot before uploading the other CL... Not confidence inspiring.\n\nRebuilt u-boot, updated prebuilts, build cuttlefish, ran cuttlefish, did \"adb  reboot\", made sure I could access the shell.\nKicked off another Forrest run with the latest CL:\nhttps://android-build.googleplex.com/builds/abtd/run/L54000000952543224",
+      "parentUuid": "f512aee0_d8c5caf2",
+      "revId": "dc9158e9a8556290cd29a322d658d0a79bdb7024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
