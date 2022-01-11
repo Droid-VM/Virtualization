@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b000ad02_51b80dc9",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-11T12:16:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6ce6b7e_c88b6660",
+      "range": {
+        "startLine": 55,
+        "startChar": 48,
+        "endLine": 55,
+        "endChar": 54
+      },
+      "revId": "032615f8aa6687bf7bb90877d293b676ece7f54c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d443cbe9_fe22078d",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e923e0e3_4c2dc0e7",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-11T12:16:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d443cbe9_fe22078d",
+      "range": {
+        "startLine": 299,
+        "startChar": 16,
+        "endLine": 299,
+        "endChar": 28
+      },
+      "revId": "032615f8aa6687bf7bb90877d293b676ece7f54c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d91f1e16_7ce5dcbd",
@@ -60,6 +108,24 @@
       "writtenOn": "2022-01-11T11:02:56Z",
       "side": 1,
       "message": "What happens if the number of CPUs listed in cpuAffinity doesn\u0027t match numCpus?",
+      "revId": "032615f8aa6687bf7bb90877d293b676ece7f54c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c582438a_fbb2e45d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-11T12:16:34Z",
+      "side": 1,
+      "message": "When the affinity is set as ranges (e.g. 0,1-2,5), the numbers don\u0027t need to be the same because the ranges specifies the pool of host CPUs where vCPUs can run on.\n\nWhen the affinity is set as assignments (e.g. 0\u003d0:1\u003d1:2\u003d2), it is actually put to a map\u003cvCPU,hostCPU\u003e. Having an assignment for a non-existing vCPU index (e.g. 100\u003d100) is not an error because such an assignment is simply not referenced. Not having an assignment for an existing vCPU index is not an error as well according to [1].\n\n[1] https://cs.android.com/android/platform/superproject/+/master:external/crosvm/arch/src/lib.rs;drc\u003df82f2dcfa03de997c5d5e7972afbd345d0d53edc;l\u003d73",
+      "parentUuid": "d91f1e16_7ce5dcbd",
       "revId": "032615f8aa6687bf7bb90877d293b676ece7f54c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
