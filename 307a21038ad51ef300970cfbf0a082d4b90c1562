@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fb3c768_4d537917",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-01-11T19:10:28Z",
+      "side": 1,
+      "message": "Hi Andrew!  I made some changes recommended in https://android-review.googlesource.com/c/platform/frameworks/proto_logging/+/1925959/comment/2e688581_bc491783/\nInstead of creating a wrapper inside virtualizationservice/ I created them in the top directory so that we can re-use the same wrapper for other telemetry work (like for isolated compilation). Does that sound alright, can you review?",
+      "revId": "307a21038ad51ef300970cfbf0a082d4b90c1562",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
