@@ -16,12 +16,20 @@
 
 //! Rust bindgen interface for FSVerity Metadata file (.fsv_meta)
 use authfs_fsverity_metadata_bindgen::{
-    fsverity_metadata_header, FSVERITY_SIGNATURE_TYPE_NONE, FSVERITY_SIGNATURE_TYPE_PKCS7,
-    FSVERITY_SIGNATURE_TYPE_RAW,
+    fsverity_descriptor, fsverity_metadata_header, FSVERITY_HASH_ALG_SHA256,
+    FSVERITY_SIGNATURE_TYPE_NONE, FSVERITY_SIGNATURE_TYPE_PKCS7, FSVERITY_SIGNATURE_TYPE_RAW,
 };
 
+use ring::digest::{Context, SHA256};
 use std::cmp::min;
-use std::os::unix::fs::MetadataExt;
+use std::ffi::OsString;
+use std::fs::File;
+use std::io::{self, Read, Seek};
+use std::mem::{size_of, zeroed};
+use std::os::unix::fs::{FileExt, MetadataExt};
+use std::path::{Path, PathBuf};
+use std::ptr::addr_of;
+use std::slice::{from_raw_parts, from_raw_parts_mut};
 
 /// Structure for parsed metadata.
 pub struct FSVerityMetadata {
@@ -52,15 +60,30 @@ impl FSVerityMetadata {
             Ok(read_size)
         }
     }
-}
 
-use std::ffi::OsString;
-use std::fs::File;
-use std::io::{self, Read, Seek};
-use std::mem::{size_of, zeroed};
-use std::os::unix::fs::FileExt;
-use std::path::{Path, PathBuf};
-use std::slice::from_raw_parts_mut;
+    /// Returns the fs-verity digest.
+    pub fn digest(&self) -> io::Result<Vec<u8>> {
+        // SAFETY: fsverity_descriptor is a C struct of size 256 bytes, defined in Linux UAPI. The
+        // struct should be effectively packed, so copying the pointer by the struct size is safe.
+        let bytes = unsafe {
+            from_raw_parts(
+                addr_of!(self.header.descriptor) as *const fsverity_descriptor as *const u8,
+                size_of::<fsverity_descriptor>(),
+            )
+        };
+        match self.header.descriptor.hash_algorithm {
+            FSVERITY_HASH_ALG_SHA256 => {
+                let mut context = Context::new(&SHA256);
+                context.update(bytes);
+                Ok(context.finish().as_ref().to_owned())
+            }
+            alg => Err(io::Error::new(
+                io::ErrorKind::Other,
+                format!("Unsupported hash algorithm {}, continue (likely failing soon)", alg),
+            )),
+        }
+    }
+}
 
 /// Common block and page size in Linux.
 pub const CHUNK_SIZE: u64 = authfs_fsverity_metadata_bindgen::CHUNK_SIZE;
