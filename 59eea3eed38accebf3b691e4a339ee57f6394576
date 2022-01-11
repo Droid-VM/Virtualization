@@ -22,6 +22,30 @@
       },
       "revId": "59eea3eed38accebf3b691e4a339ee57f6394576",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e48fae5e_e877324b",
+        "filename": "TEST_MAPPING",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-11T16:04:05Z",
+      "side": 1,
+      "message": "Unfortunately that runs it on a target that doesn\u0027t support pKVM, so it isn\u0027t much use for CompOS; see b/186137398#comment6.\n\nIs there a postsubmit timeout? The docs are a little unclear; I think it may only apply to presubmit tests. \n\nBut enabling it here is one way to find out ...",
+      "parentUuid": "4309ff82_0b456a21",
+      "range": {
+        "startLine": 21,
+        "startChar": 15,
+        "endLine": 21,
+        "endChar": 31
+      },
+      "revId": "59eea3eed38accebf3b691e4a339ee57f6394576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
