@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6ce6b7e_c88b6660",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-01-11T11:02:56Z",
+      "side": 1,
+      "message": "Nit: \"numCpus\", to be consistent with the field name.",
+      "range": {
+        "startLine": 55,
+        "startChar": 48,
+        "endLine": 55,
+        "endChar": 54
+      },
+      "revId": "032615f8aa6687bf7bb90877d293b676ece7f54c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d443cbe9_fe22078d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-01-11T11:02:56Z",
+      "side": 1,
+      "message": "Shouldn\u0027t 0 also be an invalid value?",
+      "range": {
+        "startLine": 299,
+        "startChar": 16,
+        "endLine": 299,
+        "endChar": 28
+      },
+      "revId": "032615f8aa6687bf7bb90877d293b676ece7f54c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d91f1e16_7ce5dcbd",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-01-11T11:02:56Z",
+      "side": 1,
+      "message": "What happens if the number of CPUs listed in cpuAffinity doesn\u0027t match numCpus?",
+      "revId": "032615f8aa6687bf7bb90877d293b676ece7f54c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
