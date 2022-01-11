@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64f8b39c_12125089",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-11T01:06:13Z",
+      "side": 1,
+      "message": "You are right. It could be \"0-2,3\" as well. Fixed. Thanks",
+      "parentUuid": "f9e88b67_5dc0cb50",
+      "range": {
+        "startLine": 305,
+        "startChar": 41,
+        "endLine": 305,
+        "endChar": 47
+      },
+      "revId": "d667da21191bf0f15dbe9614c4d0c4392f18d268",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb4f058c_59d798bb",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-01-10T18:03:55Z",
       "side": 1,
       "message": "nit: give a short example (to show in --help)",
+      "range": {
+        "startLine": 84,
+        "startChar": 8,
+        "endLine": 84,
+        "endChar": 11
+      },
+      "revId": "d667da21191bf0f15dbe9614c4d0c4392f18d268",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf19c6d7_dbb4c938",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-11T01:06:13Z",
+      "side": 1,
+      "message": "Good point. Done.",
+      "parentUuid": "eb4f058c_59d798bb",
       "range": {
         "startLine": 84,
         "startChar": 8,
