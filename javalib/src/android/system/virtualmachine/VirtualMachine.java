@@ -411,7 +411,7 @@ public class VirtualMachine {
                         }
 
                         @Override
-                        public void onDied(int cid) {
+                        public void onDied(int cid, int reason) {
                             final VirtualMachineCallback cb = mCallback;
                             if (cb == null) {
                                 return;
