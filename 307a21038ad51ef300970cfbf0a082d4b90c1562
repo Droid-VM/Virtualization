@@ -16,6 +16,74 @@
       "message": "Hi Andrew!  I made some changes recommended in https://android-review.googlesource.com/c/platform/frameworks/proto_logging/+/1925959/comment/2e688581_bc491783/\nInstead of creating a wrapper inside virtualizationservice/ I created them in the top directory so that we can re-use the same wrapper for other telemetry work (like for isolated compilation). Does that sound alright, can you review?",
       "revId": "307a21038ad51ef300970cfbf0a082d4b90c1562",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d97459f9_1f9b94ce",
+        "filename": "Android.bp",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-01-12T11:19:14Z",
+      "side": 1,
+      "message": "What do you mean by \u0027changes\u0027 here?",
+      "revId": "307a21038ad51ef300970cfbf0a082d4b90c1562",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39448328_409c1d41",
+        "filename": "Android.bp",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-01-12T11:19:14Z",
+      "side": 1,
+      "message": "I\u0027m missing a bit of background here, but what\u0027s the advantage of making this a separate library from libstatslog_virtualization_rust? Is there somewhere you will use just this and not libstatslog_virtualization_rust?",
+      "revId": "307a21038ad51ef300970cfbf0a082d4b90c1562",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b19c5f92_e20073d7",
+        "filename": "rust_virtualization_wrapper.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-01-12T11:19:14Z",
+      "side": 1,
+      "message": "Can you put this and the other wrapper and build rules under a new directory, maybe called statslog_virtualization, rather than at the top level?",
+      "revId": "307a21038ad51ef300970cfbf0a082d4b90c1562",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d8167d6_ce6cf21e",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-01-12T11:19:14Z",
+      "side": 1,
+      "message": "Remove this line rather than just commenting it out.",
+      "revId": "307a21038ad51ef300970cfbf0a082d4b90c1562",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
