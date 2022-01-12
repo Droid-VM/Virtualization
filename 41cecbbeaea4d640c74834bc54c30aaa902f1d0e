@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "83a9c09d_ff45b7dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-12T20:18:49Z",
+      "side": 1,
+      "message": "I can reproduce on my cuttlefish.  It looks like the execution of `sha256sum /path/to/authfs/system/framework/framework.jar` timed out. It\u0027s probably because of b/182827266.  Time to resume my local change...",
+      "parentUuid": "24314c34_b0122b9e",
+      "revId": "41cecbbeaea4d640c74834bc54c30aaa902f1d0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce921d0f_f93444a8",
         "filename": "authfs/src/fsverity/metadata/metadata.rs",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2022-01-12T10:45:56Z",
       "side": 1,
       "message": "Elsewhere you\u0027re using crypto::Sha256Hasher; any reason for the switch?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 36
+      },
+      "revId": "41cecbbeaea4d640c74834bc54c30aaa902f1d0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31cfee33_3fec1a2c",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-12T20:18:49Z",
+      "side": 1,
+      "message": "When I first wrote authfs, ring wasn\u0027t added to Android.  Now that it\u0027s available, I plan to switch over to avoid FFI.\n\nAlso, this file is actually a separate library (arguably it shouldn\u0027t be under authfs). So it needs to link with a new library anyway.",
+      "parentUuid": "ce921d0f_f93444a8",
       "range": {
         "startLine": 23,
         "startChar": 0,
@@ -54,6 +96,30 @@
       "writtenOn": "2022-01-12T10:45:56Z",
       "side": 1,
       "message": "Do we know that sig_size and signature are all zeros in this copy?\n(Just looking at http://cs/android/external/kernel-headers/original/uapi/linux/fsverity.h?l\u003d43\u0026rcl\u003d11249cacaf0d97f5b752a60e59c022a7322f370a)",
+      "range": {
+        "startLine": 65,
+        "startChar": 25,
+        "endLine": 65,
+        "endChar": 47
+      },
+      "revId": "41cecbbeaea4d640c74834bc54c30aaa902f1d0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d3f949b_33eedbd6",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-12T20:18:49Z",
+      "side": 1,
+      "message": "Yes. For regular fs-verity implementation, the descriptor is typically stored on disk for kernel (the specific filesystem) to use.  In the design, the signature is stored in the same struct, but the value (either during calculation by fsverity-util, or returned from the kernel through ioctl) is zero(d).",
+      "parentUuid": "0d097edd_aa7c71c8",
       "range": {
         "startLine": 65,
         "startChar": 25,
@@ -111,6 +177,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "320f4742_1da30f20",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-12T20:18:49Z",
+      "side": 1,
+      "message": "Right, this is working as intended.  Regardless of the device endian-ness, the hash calculation always uses little-endian. Think of enabling fs-verity on ext4 for an portable storage. It must work across BE/LE devices.",
+      "parentUuid": "3c91a6b9_3016a707",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 10
+      },
+      "revId": "41cecbbeaea4d640c74834bc54c30aaa902f1d0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d26b374b_14bbf422",
@@ -124,6 +214,30 @@
       "writtenOn": "2022-01-12T10:45:56Z",
       "side": 1,
       "message": "Missing comment",
+      "range": {
+        "startLine": 129,
+        "startChar": 2,
+        "endLine": 129,
+        "endChar": 7
+      },
+      "revId": "41cecbbeaea4d640c74834bc54c30aaa902f1d0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e63aacc_eb799e42",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-12T20:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d26b374b_14bbf422",
       "range": {
         "startLine": 129,
         "startChar": 2,
