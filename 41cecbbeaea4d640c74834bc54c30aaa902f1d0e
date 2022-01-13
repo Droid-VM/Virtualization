@@ -203,6 +203,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9bfbb95_2c140c2a",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-01-13T00:07:59Z",
+      "side": 1,
+      "message": "Nope, fields in this header are represented as native endian, not a little endian. FSVerityMetadata is parsed with parse_fsverity_metadata, and it converts related fields from little endian to device endian (by u32::from_le, u64::from_le). This function is called after endian conversion, so it\u0027s not guaranteed to be little endian.\n\nIs it the case that Rust always uses little endian?",
+      "parentUuid": "320f4742_1da30f20",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 10
+      },
+      "revId": "41cecbbeaea4d640c74834bc54c30aaa902f1d0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d26b374b_14bbf422",
         "filename": "authfs/src/main.rs",
         "patchSetId": 1
