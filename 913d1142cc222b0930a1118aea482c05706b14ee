@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffe141fb_1e6dc660",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-13T17:42:52Z",
+      "side": 1,
+      "message": "I feel like I\u0027m going about this the wrong way. I though I understood what to do from how the types were described by the compiler is telling me otherwise. How do you expect that something like the driver interface [1] would fit into the traits?\n\n[1] -- https://android-review.googlesource.com/c/kernel/common/+/1943619/3/drivers/misc/open-dice.c#15",
+      "revId": "913d1142cc222b0930a1118aea482c05706b14ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3ea7448_95c420c0",
+        "filename": "microdroid/dice/service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-13T17:42:52Z",
+      "side": 1,
+      "message": "I felt like I was meant to map it here and then access the map from the child processes through the impl DiceArtifacts, but pointers are serializable so is it meant to do the mapping and parsing in each of the DiceArtifacts functions?",
+      "revId": "913d1142cc222b0930a1118aea482c05706b14ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
