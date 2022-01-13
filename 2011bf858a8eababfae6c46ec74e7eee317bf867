@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd36a30b_e4dabd9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-13T14:18:34Z",
+      "side": 1,
+      "message": "Seems to have broken things. \n(But I can\u0027t see anything obviously wrong.)",
+      "revId": "2011bf858a8eababfae6c46ec74e7eee317bf867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67fc3f9e_f434fe64",
+        "filename": "authfs/src/file.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-13T14:18:34Z",
+      "side": 1,
+      "message": "Why panic rather than returning error?\n(OK, it really shouldn\u0027t happen, but ...)\nAlthough I suppose with_capacity would panic anyway",
+      "range": {
+        "startLine": 95,
+        "startChar": 51,
+        "endLine": 95,
+        "endChar": 59
+      },
+      "revId": "2011bf858a8eababfae6c46ec74e7eee317bf867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa5b7728_88144fd5",
+        "filename": "authfs/src/fsverity/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-13T14:18:34Z",
+      "side": 1,
+      "message": "If data_size is \u003c\u003d CHUNK_SIZE, isn\u0027t the size one hash?",
+      "range": {
+        "startLine": 58,
+        "startChar": 10,
+        "endLine": 58,
+        "endChar": 31
+      },
+      "revId": "2011bf858a8eababfae6c46ec74e7eee317bf867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffa3af46_45f941a8",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-13T14:18:34Z",
+      "side": 1,
+      "message": "Isn\u0027t this legit in the no Merkle tree case?",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 25
+      },
+      "revId": "2011bf858a8eababfae6c46ec74e7eee317bf867",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
