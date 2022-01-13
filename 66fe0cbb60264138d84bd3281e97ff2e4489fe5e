@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000019206526",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1948876?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "39279386_94f01cff",
+          "description": "Change to \"compos/common/lib.rs\"",
+          "replacements": [
+            {
+              "path": "compos/common/lib.rs",
+              "range": {
+                "startLine": 72,
+                "startChar": 35,
+                "endLine": 72,
+                "endChar": 42
+              },
+              "replacement": "actually"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "17225fa4_ab8fef21",
+        "filename": "compos/common/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2022-01-13T15:55:50Z",
+      "side": 1,
+      "message": "Common typo found: \"actualy\" -- should it be \"actually\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 72,
+        "startChar": 35,
+        "endLine": 72,
+        "endChar": 42
+      },
+      "revId": "66fe0cbb60264138d84bd3281e97ff2e4489fe5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
