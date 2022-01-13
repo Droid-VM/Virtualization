@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b7e0cd7_70eed1e3",
+        "filename": "Android.bp",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-01-13T16:30:35Z",
+      "side": 1,
+      "message": "Ack, Changed it to something more meaningful :\n// Autogenerate the class (and respective headers) with logging methods and constants",
+      "parentUuid": "d97459f9_1f9b94ce",
+      "revId": "307a21038ad51ef300970cfbf0a082d4b90c1562",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39448328_409c1d41",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-01-12T11:19:14Z",
       "side": 1,
       "message": "I\u0027m missing a bit of background here, but what\u0027s the advantage of making this a separate library from libstatslog_virtualization_rust? Is there somewhere you will use just this and not libstatslog_virtualization_rust?",
+      "revId": "307a21038ad51ef300970cfbf0a082d4b90c1562",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bfe61e8_50744354",
+        "filename": "Android.bp",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-01-13T16:30:35Z",
+      "side": 1,
+      "message": "stats-log-api-gen uses rust_writer.cpp which has separate write_stats_log_rust_header \u0026 write_stats_log_rust, the write_stats_log_rust will need the crate_name in order to use the header file, which we cant get without generating the libstatslog_virtualization_rust_header library. Ideally there must be a way to get away with this, but I suspect it will require a lot more code changes in rust_writer.cpp",
+      "parentUuid": "39448328_409c1d41",
       "revId": "307a21038ad51ef300970cfbf0a082d4b90c1562",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -69,6 +105,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29a14d45_7bf06989",
+        "filename": "rust_virtualization_wrapper.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-01-13T16:30:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b19c5f92_e20073d7",
+      "revId": "307a21038ad51ef300970cfbf0a082d4b90c1562",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d8167d6_ce6cf21e",
@@ -82,6 +136,24 @@
       "writtenOn": "2022-01-12T11:19:14Z",
       "side": 1,
       "message": "Remove this line rather than just commenting it out.",
+      "revId": "307a21038ad51ef300970cfbf0a082d4b90c1562",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c996aa59_301936cb",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-01-13T16:30:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d8167d6_ce6cf21e",
       "revId": "307a21038ad51ef300970cfbf0a082d4b90c1562",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
