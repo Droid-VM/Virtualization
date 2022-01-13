@@ -227,6 +227,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a8378d2_6e8b5102",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-13T00:22:48Z",
+      "side": 1,
+      "message": "Ah yes, good point.  Then I think the digest needs to be calculated during the parsing, when the raw data is still available.  I\u0027ll re-work.\n\n(And I don\u0027t think Rust handles endian implicitly, or should any programming languages do)",
+      "parentUuid": "b9bfbb95_2c140c2a",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 10
+      },
+      "revId": "41cecbbeaea4d640c74834bc54c30aaa902f1d0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d26b374b_14bbf422",
         "filename": "authfs/src/main.rs",
         "patchSetId": 1
