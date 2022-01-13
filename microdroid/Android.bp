@@ -66,6 +66,9 @@ android_system_image {
         "libadbd_auth",
         "libadbd_fs",
 
+        "diced",
+        "android.hardware.security.dice-service.microdroid",
+
         // "com.android.art" requires
         "heapprofd_client_api",
         "libartpalette-system",
