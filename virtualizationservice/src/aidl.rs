@@ -49,7 +49,6 @@ use anyhow::{anyhow, bail, Context, Result};
 use binder_common::{lazy_service::LazyServiceGuard, new_binder_exception};
 use disk::QcowFile;
 use idsig::{HashAlgorithm, V4Signature};
-use kvm::{Kvm, Cap};
 use log::{debug, error, info, warn};
 use microdroid_payload_config::VmPayloadConfig;
 use rustutils::system_properties;
@@ -173,13 +172,6 @@ impl IVirtualizationService for VirtualizationService {
         }
 
         let is_app_config = matches!(config, VirtualMachineConfig::AppConfig(_));
-        let is_debug_level_full = matches!(
-            config,
-            VirtualMachineConfig::AppConfig(VirtualMachineAppConfig {
-                debugLevel: DebugLevel::FULL,
-                ..
-            })
-        );
 
         let config = match config {
             VirtualMachineConfig::AppConfig(config) => BorrowedOrOwned::Owned(
@@ -238,24 +230,6 @@ impl IVirtualizationService for VirtualizationService {
             })
             .collect::<Result<Vec<DiskFile>, _>>()?;
 
-        let protected_vm_supported = Kvm::new()
-            .map_err(|e| new_binder_exception(ExceptionCode::SERVICE_SPECIFIC, e.to_string()))?
-            .check_extension(Cap::ArmProtectedVm);
-        let protected = config.protectedVm && protected_vm_supported;
-        if config.protectedVm && !protected_vm_supported {
-            warn!("Protected VM was requested, but it isn't supported on this machine. Ignored.");
-        }
-
-        // And force run in non-protected mode when debug level is FULL
-        let protected = if is_debug_level_full {
-            if protected {
-                warn!("VM will run in FULL debug level. Running in non-protected mode");
-            }
-            false
-        } else {
-            protected
-        };
-
         // Actually start the VM.
         let crosvm_config = CrosvmConfig {
             cid,
@@ -264,7 +238,7 @@ impl IVirtualizationService for VirtualizationService {
             initrd: maybe_clone_file(&config.initrd)?,
             disks,
             params: config.params.to_owned(),
-            protected,
+            protected: config.protectedVm,
             memory_mib: config.memoryMib.try_into().ok().and_then(NonZeroU32::new),
             console_fd,
             log_fd,
