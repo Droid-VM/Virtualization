@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aba4e3c_abd5f156",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-14T15:00:12Z",
+      "side": 1,
+      "message": "Ah, that\u0027s unfortunate. :(",
+      "parentUuid": "61faf0f8_f5976681",
+      "range": {
+        "startLine": 243,
+        "startChar": 17,
+        "endLine": 243,
+        "endChar": 19
+      },
+      "revId": "2774f0d0cd3088c09521d9c7f27a43a62f432fb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5fd25cf_00168db2",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "It\u0027s possible it hasn\u0027t, but if so we\u0027ll never know when it does die, so I think it makes sense to report something. virtualizationservice also logs it.\n\nDo you have a suggestion for less confusing names? ERROR is distinct from UNKNOWN, because in the case of UNKNOWN we do know for sure that the VM died, we just don\u0027t know why (and I guess it will only happen if there\u0027s a crosvm change we don\u0027t account for here).",
       "parentUuid": "e5fd25cf_00168db2",
+      "range": {
+        "startLine": 247,
+        "startChar": 8,
+        "endLine": 247,
+        "endChar": 26
+      },
+      "revId": "2774f0d0cd3088c09521d9c7f27a43a62f432fb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fd11c73_b091dfd6",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-14T15:00:12Z",
+      "side": 1,
+      "message": "I agree with you on that we need to anyhow report this to user, but I think what I was uncomfortable with was the fact that this is reported via VirtualMachineCallback.onDied.\n\nOn the other hand, it looks like the wait call \"in practice\" always returns Ok. I see that it goes down to waitpid(2) and the man page says that ECHILD and EINTR are only errors it can return. ECHILD can\u0027t happen because the pid is always correct, and EINTR can\u0027t happen unless SIGCHLD is handled in virtualizationservice which doesn\u0027t seem to be the case.\n\nSo, perhaps we just need to forcibly drop IVirtualMachine instance so that the user gets a death notification?\n\nOr perhaps rename ERROR to INFRA_ERROR to signify that this is not originated from the VM but from the infra around it?",
+      "parentUuid": "4ae60f45_3ba8cd10",
       "range": {
         "startLine": 247,
         "startChar": 8,
