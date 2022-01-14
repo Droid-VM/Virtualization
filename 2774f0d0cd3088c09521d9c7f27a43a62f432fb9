@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "beb327e4_bbf7d910",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-01-14T12:07:48Z",
+      "side": 1,
+      "message": "Agreed, I was going to add that in a separate change but I can do it here if you prefer.",
+      "parentUuid": "0b5e078c_9590706e",
+      "range": {
+        "startLine": 419,
+        "startChar": 63,
+        "endLine": 419,
+        "endChar": 69
+      },
+      "revId": "2774f0d0cd3088c09521d9c7f27a43a62f432fb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "057c92bc_168503c7",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61faf0f8_f5976681",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-01-14T12:07:48Z",
+      "side": 1,
+      "message": "It\u0027s just a literal here: https://source.chromium.org/chromiumos/chromiumos/codesearch/+/main:src/platform/crosvm/src/main.rs;l\u003d3145\n\nI\u0027ll add a constant for it in this file at least.",
+      "parentUuid": "057c92bc_168503c7",
+      "range": {
+        "startLine": 243,
+        "startChar": 17,
+        "endLine": 243,
+        "endChar": 19
+      },
+      "revId": "2774f0d0cd3088c09521d9c7f27a43a62f432fb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5fd25cf_00168db2",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-01-14T01:53:58Z",
       "side": 1,
       "message": "Do we want to report this to the user? The VM may not have died. I think this should be treated as an error internal to virtualizationservice. Also, this is likely to be confused with UNKNOWN.",
+      "range": {
+        "startLine": 247,
+        "startChar": 8,
+        "endLine": 247,
+        "endChar": 26
+      },
+      "revId": "2774f0d0cd3088c09521d9c7f27a43a62f432fb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ae60f45_3ba8cd10",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-01-14T12:07:48Z",
+      "side": 1,
+      "message": "It\u0027s possible it hasn\u0027t, but if so we\u0027ll never know when it does die, so I think it makes sense to report something. virtualizationservice also logs it.\n\nDo you have a suggestion for less confusing names? ERROR is distinct from UNKNOWN, because in the case of UNKNOWN we do know for sure that the VM died, we just don\u0027t know why (and I guess it will only happen if there\u0027s a crosvm change we don\u0027t account for here).",
+      "parentUuid": "e5fd25cf_00168db2",
       "range": {
         "startLine": 247,
         "startChar": 8,
