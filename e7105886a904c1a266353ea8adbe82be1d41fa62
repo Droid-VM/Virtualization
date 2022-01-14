@@ -104,6 +104,30 @@
       },
       "revId": "e7105886a904c1a266353ea8adbe82be1d41fa62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4f42457_4772e7c3",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-14T16:37:57Z",
+      "side": 1,
+      "message": "Replaced with a const.  I didn\u0027t use addr_of! (or actually from_raw_parts) just to avoid unsafe.",
+      "parentUuid": "ba48e54c_856359f2",
+      "range": {
+        "startLine": 98,
+        "startChar": 44,
+        "endLine": 98,
+        "endChar": 45
+      },
+      "revId": "e7105886a904c1a266353ea8adbe82be1d41fa62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
