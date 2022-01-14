@@ -16,6 +16,29 @@
       "message": "Ping for review",
       "revId": "d2dc83f5420ffb19c8c7ab29635302ce2bdf98f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7100effc_64cb84f6",
+        "filename": "microdroid/microdroid.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-01-14T11:01:05Z",
+      "side": 1,
+      "message": "Hi Jiyong,\n\nPlease can we temporarily revert this hunk so that Microdroid uses non-protected VMs for now? There are some upcoming crosvm and kernel changes which will enable the protected environment (currently this doesn\u0027t happen even if you request it), but the guest u-boot and kernel images need to be updated to operate in protected mode. We can re-enable protected mode once we have those working, but reverting this part now means that people can continue to develop in the meantime.",
+      "range": {
+        "startLine": 37,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 19
+      },
+      "revId": "d2dc83f5420ffb19c8c7ab29635302ce2bdf98f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
