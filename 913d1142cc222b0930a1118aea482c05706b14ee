@@ -33,6 +33,24 @@
       "message": "I felt like I was meant to map it here and then access the map from the child processes through the impl DiceArtifacts, but pointers are serializable so is it meant to do the mapping and parsing in each of the DiceArtifacts functions?",
       "revId": "913d1142cc222b0930a1118aea482c05706b14ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47297c66_2d77e9d6",
+        "filename": "microdroid/dice/service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1092085
+      },
+      "writtenOn": "2022-01-14T17:23:05Z",
+      "side": 1,
+      "message": "with_artifacts is called only by the child process. And it expects the the \u0026dyn DiceArtifacts to be valid only for the duration of the callback. So I suggest the struct that actually implements the DiceArtifacts trait to be different from the one that is serializable. The following obviously does not compile, but it should give you the gist of how I would do it within the context you gave me in the doc comment, i.e., the secrets in the kernel can only be zeroed but not replaced.\n\n // The artifacts need to have two variants to distinguish between the\n // state where the artifacts shall be loaded from the secure fs and\n // the state where they are memory resident/Owned.\n enum DriverMmapArtifacts {\n     SecureFs(PathBuffer),\n     Owned(Artifacts), // Artifacts should also implement DiceArtifacts.\n }\n \n struct MappedArtifacts {\n     mapped_region: *mut c_void,\n }\n \n impl MappedArtifacts {\n     fn new(path_to_map: \u0026Path) -\u003e Result\u003cSelf\u003e {\n         let mapped_region \u003d mmap(... path_to_map ...)?;\n         Ok(Self(mapped_region))\n     }\n     \n     fn wipe(\u0026mut self) {\n         // zero the mapped region here.\n     }\n }\n \n impl Drop for MappedArtifacts { // unmap on drop }\n \n impl DiceArtifacts for MappedArtifacts {\n     // When the trait functions get called the region is already mapped.\n     // We just have to return the correct offsets as array references.\n     // The lifetime of the mapped region is bound by the lifetime of self,\n     // so this is all safe as long as mmap succeeded at creation, and\n     // the length of the buffer is sane.\n     //\n     // If the memory layout is not compatible, I guess it would make sense\n     // parse it into an owned structure instead and pass that to the\n     // callback of with_artifacts.\n }\n \n impl UpdatableDiceArtifacts for DriverMmapArtifacts{\n    fn with_artifacts\u003cF, T\u003e(\u0026self, f: F) -\u003e Result\u003cT\u003e\n    where\n        F: FnOnce(\u0026dyn DiceArtifacts) -\u003e Result\u003cT\u003e,\n    {\n        match self {\n           Self::SecureFs(path) \u003d\u003e {\n               let artifacts \u003d MappedArtifacts::new(\u0026path)?\n               f(\u0026artifacts)\n           }\n           Self::Owned(artifacts) \u003d\u003e {\n               f(\u0026artifacts)\n           }\n        }\n    }\n    \n    fn update(self, new_artifacts: \u0026impl DiceArtifacts) -\u003e Result\u003cSelf\u003e {\n        // If self is still the mapable version, zero it here.\n        // If it is owned, it will be consumed by this function and\n        // replaced by the return value anyway.\n        if let Self::SecureFs(path) \u003d self {\n            MappedArtifacts::new(\u0026path)?.wipe()\n        }\n        \n        // Assuming impl From\u003c\u0026impl DiceArtifacts\u003e for Artifacts exists.\n        let artifacts: Artifacts \u003d new_artifacts.into()\n        Ok(DriverMmapArtifacts::Owned(artifacts))\n    }\n}",
+      "parentUuid": "b3ea7448_95c420c0",
+      "revId": "913d1142cc222b0930a1118aea482c05706b14ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
