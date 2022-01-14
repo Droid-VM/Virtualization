@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b5e078c_9590706e",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-14T01:53:58Z",
+      "side": 1,
+      "message": "I think we want to pass the reason to the user-provided callback as well.",
+      "range": {
+        "startLine": 419,
+        "startChar": 63,
+        "endLine": 419,
+        "endChar": 69
+      },
+      "revId": "2774f0d0cd3088c09521d9c7f27a43a62f432fb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "057c92bc_168503c7",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-14T01:53:58Z",
+      "side": 1,
+      "message": "Where is this from? Shouldn\u0027t this be a const from libcrosvm or similar?",
+      "range": {
+        "startLine": 243,
+        "startChar": 17,
+        "endLine": 243,
+        "endChar": 19
+      },
+      "revId": "2774f0d0cd3088c09521d9c7f27a43a62f432fb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5fd25cf_00168db2",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-14T01:53:58Z",
+      "side": 1,
+      "message": "Do we want to report this to the user? The VM may not have died. I think this should be treated as an error internal to virtualizationservice. Also, this is likely to be confused with UNKNOWN.",
+      "range": {
+        "startLine": 247,
+        "startChar": 8,
+        "endLine": 247,
+        "endChar": 26
+      },
+      "revId": "2774f0d0cd3088c09521d9c7f27a43a62f432fb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
