@@ -16,6 +16,70 @@
       "message": "Thank you for refactoring! unsafe is now much smaller and it\u0027s really satisfying.\n\nLGTM, but +1 to let other fsverity expert take a look.",
       "revId": "e7105886a904c1a266353ea8adbe82be1d41fa62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10576164_2fce0058",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-14T12:01:38Z",
+      "side": 1,
+      "message": "I\u0027m no expert, but it looks reasonable to me (modulo my comments)",
+      "parentUuid": "e9b37da9_4d76db18",
+      "revId": "e7105886a904c1a266353ea8adbe82be1d41fa62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc6aa140_59af7602",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-14T12:01:38Z",
+      "side": 1,
+      "message": "I think you need a u32::from_le here",
+      "range": {
+        "startLine": 95,
+        "startChar": 27,
+        "endLine": 95,
+        "endChar": 59
+      },
+      "revId": "e7105886a904c1a266353ea8adbe82be1d41fa62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba48e54c_856359f2",
+        "filename": "authfs/src/fsverity/metadata/metadata.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-14T12:01:38Z",
+      "side": 1,
+      "message": "Can you comment where the 4 comes from?\n(I liked the previous addr_of! version better, is there a reason to avoid it here?)",
+      "range": {
+        "startLine": 98,
+        "startChar": 44,
+        "endLine": 98,
+        "endChar": 45
+      },
+      "revId": "e7105886a904c1a266353ea8adbe82be1d41fa62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
