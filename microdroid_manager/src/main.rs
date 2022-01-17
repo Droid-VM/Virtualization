@@ -19,10 +19,14 @@ mod ioutil;
 mod payload;
 
 use crate::instance::{ApkData, InstanceDisk, MicrodroidData, RootHash};
+use android_hardware_security_dice::aidl::android::hardware::security::dice::{
+    Config::Config, InputValues::InputValues, Mode::Mode,
+};
+use android_security_dice::aidl::android::security::dice::IDiceMaintenance::IDiceMaintenance;
 use anyhow::{anyhow, bail, ensure, Context, Error, Result};
 use apkverify::{get_public_key_der, verify};
 use binder::unstable_api::{new_spibinder, AIBinder};
-use binder::{FromIBinder, Strong};
+use binder::{wait_for_interface, FromIBinder, Strong};
 use glob::glob;
 use idsig::V4Signature;
 use itertools::sorted;
@@ -31,6 +35,7 @@ use microdroid_metadata::{write_metadata, Metadata};
 use microdroid_payload_config::{Task, TaskType, VmPayloadConfig};
 use once_cell::sync::OnceCell;
 use payload::{get_apex_data_from_payload, load_metadata, to_metadata};
+use ring::digest;
 use rustutils::system_properties;
 use rustutils::system_properties::PropertyWatcher;
 use std::fs::{self, create_dir, File, OpenOptions};
@@ -182,6 +187,39 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
     }
     mount_extra_apks(&config)?;
 
+    // Calculate compound digests of code and authorities
+    let mut code_hash_ctx = digest::Context::new(&digest::SHA256);
+    let mut authority_hash_ctx = digest::Context::new(&digest::SHA256);
+    code_hash_ctx.update(verified_data.apk_data.root_hash.as_ref());
+    authority_hash_ctx.update(verified_data.apk_data.pubkey.as_ref());
+    for extra_apk in verified_data.extra_apks_data {
+        code_hash_ctx.update(extra_apk.root_hash.as_ref());
+        authority_hash_ctx.update(extra_apk.pubkey.as_ref());
+    }
+    for apex in verified_data.apex_data {
+        code_hash_ctx.update(apex.root_hash.as_ref());
+        authority_hash_ctx.update(apex.pubkey.as_ref());
+    }
+    let code_hash = code_hash_ctx.finish().as_ref().into();
+    let authority_hash = authority_hash_ctx.finish().as_ref().into();
+
+    let diced =
+        wait_for_interface::<dyn IDiceMaintenance>("android.security.dice.IDiceMaintenance")
+            .context("IDiceMaintenance service not found")?;
+    diced
+        .demoteSelf(&[InputValues {
+            codeHash: code_hash,
+            config: Config {
+                desc: vec![], // TODO: format with the component name and the config file, whatever that's for
+            },
+            authorityHash: authority_hash,
+            authorityDescriptor: None,
+            mode: Mode::NORMAL, // TODO: how to detect debug boot e.g. when adb is enabled?
+            hidden: vec![],     // TODO: a random value but no 100% necessary?
+        }])
+        .context("IDiceMaintenance::demoteSelf failed")?;
+
+    // TODO: remove after migrating from keystore to diced
     let fake_secret = "This is a placeholder for a value that is derived from the images that are loaded in the VM.";
     if let Err(err) = rustutils::system_properties::write("ro.vmsecret.keymint", fake_secret) {
         warn!("failed to set ro.vmsecret.keymint: {}", err);
