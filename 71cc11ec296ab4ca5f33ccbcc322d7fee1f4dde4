@@ -16,6 +16,24 @@
       "message": "Hard-coding this here seems slightly surprising, would you ever want to use a different file? Or run it more than once at the same time?",
       "revId": "71cc11ec296ab4ca5f33ccbcc322d7fee1f4dde4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c403de37_b60016ea",
+        "filename": "compos/composd_cmd/composd_cmd.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-17T18:12:12Z",
+      "side": 1,
+      "message": "This is only here for my benefit for manual testing, so it\u0027s good enough for now.\n(I should have put a TODO: Remove here as well)\n\nBut actually there will only ever be one current instance, so it\u0027s not totally wrong.",
+      "parentUuid": "6ab0fca7_50f92a69",
+      "revId": "71cc11ec296ab4ca5f33ccbcc322d7fee1f4dde4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
