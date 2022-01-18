@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b2f8f9b_1dc394c2",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-18T16:27:42Z",
+      "side": 1,
+      "message": "dex2oat uses all CPU by default, so you don\u0027t need this.  That is, we can just configure the VM and avoid a second configuration here.",
+      "range": {
+        "startLine": 131,
+        "startChar": 8,
+        "endLine": 134,
+        "endChar": 11
+      },
+      "revId": "165921b79b0a915dea322a568e90022601a1c0ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
