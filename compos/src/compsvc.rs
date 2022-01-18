@@ -47,6 +47,7 @@ pub fn new_binder() -> Result<Strong<dyn ICompOsService>> {
     let service = CompOsService {
         odrefresh_path: PathBuf::from(ODREFRESH_PATH),
         key_service: CompOsKeyService::new()?,
+        dice: Dice::new()?,
         key_blob: RwLock::new(Vec::new()),
     };
     Ok(BnCompOsService::new_binder(service, BinderFeatures::default()))
@@ -55,6 +56,7 @@ pub fn new_binder() -> Result<Strong<dyn ICompOsService>> {
 struct CompOsService {
     odrefresh_path: PathBuf,
     key_service: CompOsKeyService,
+    dice: Dice,
     key_blob: RwLock<Vec<u8>>,
 }
 
@@ -69,8 +71,7 @@ impl CompOsService {
     }
 
     fn get_boot_certificate_chain(&self) -> Result<Vec<u8>> {
-        let dice = Dice::new()?;
-        dice.get_boot_certificate_chain()
+        self.dice.get_boot_certificate_chain()
     }
 }
 
