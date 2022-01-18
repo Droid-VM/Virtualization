@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "221aaf0d_12c4ef16",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-18T20:11:53Z",
+      "side": 1,
+      "message": "I didn\u0027t manage to see this getting logged, but do see other logs like \"Saving verified data\". I remember issues getting the APEX to update before but not what I had to do. Currently I `m apps_only dist`, `adb install out/dist/com.android.virt.apex`, `adb reboot` but is there something else that needs to be done?",
+      "range": {
+        "startLine": 244,
+        "startChar": 4,
+        "endLine": 244,
+        "endChar": 29
+      },
+      "revId": "66ebda14309640df36e72506a7fc59615eb84086",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
