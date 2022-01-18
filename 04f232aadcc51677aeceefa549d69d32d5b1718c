@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c534478_7c2b3858",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-18T05:06:55Z",
+      "side": 1,
+      "message": "Thanks for doing this, Andrew. I was about to do this by myself, but you have beated me!",
+      "revId": "04f232aadcc51677aeceefa549d69d32d5b1718c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "813fae3a_115a2669",
@@ -49,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b985d05_be5ededc",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-18T05:06:55Z",
+      "side": 1,
+      "message": "MicrodroidData::bootconfig should be fed into this as well, because it affects the behavior too.\n\nIn addition, I think we need to add the hash (not just the path) of the config file here.",
+      "parentUuid": "1945fe54_4bf03be4",
+      "range": {
+        "startLine": 213,
+        "startChar": 78,
+        "endLine": 213,
+        "endChar": 110
+      },
+      "revId": "04f232aadcc51677aeceefa549d69d32d5b1718c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce004f9b_e47e1897",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
@@ -60,6 +101,30 @@
       "writtenOn": "2022-01-17T20:07:46Z",
       "side": 1,
       "message": "@jiyong, does microdroid_manager know whether the the payload will be debuggable in any way?",
+      "range": {
+        "startLine": 217,
+        "startChar": 35,
+        "endLine": 217,
+        "endChar": 90
+      },
+      "revId": "04f232aadcc51677aeceefa549d69d32d5b1718c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c226b670_20202972",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-18T05:06:55Z",
+      "side": 1,
+      "message": "You can read the sysprop ro.boot.microdroid.debuggable to see if it\u0027s debuggable or not. (Note that it\u0027s part of bootconfig)",
+      "parentUuid": "ce004f9b_e47e1897",
       "range": {
         "startLine": 217,
         "startChar": 35,
