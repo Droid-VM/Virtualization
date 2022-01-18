@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9af7b7df_dccdd92d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-18T16:51:33Z",
+      "side": 1,
+      "message": "xxd shows:\n```\n00000100: 0000 0000 0000 0000 0000 0000            ............\n```\n\nLooks like size of signature isn\u0027t included.  Should we fix that?  You recently change the generator to always include the signature size even if it\u0027s 0.\n\n```\n// |  0x0104   |  32-bit LE, type of signature               |     4      |\n// |           |  (0: NONE, 1: PKCS7, 2: RAW)                |            |\n// |           |                                             |            |\n// |  0x0108   |  32-bit LE, size of signature               |     4      |\n// |           |                                             |            |\n// |  0x010C   |  signature                                  | See 0x0108 |\n```",
+      "revId": "9a86ddb16c3b7130afe008197d4ae28b954e504e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
