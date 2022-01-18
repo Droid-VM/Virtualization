@@ -138,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8b461b7_0c93f9f4",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-18T18:19:43Z",
+      "side": 1,
+      "message": "It\u0027s sounding like the bootconfig should be captured by u-boot instead, especially as it affects things that happen before microdroid_manager loads anything.\n\nAnd the config file path comes from the payload-metadata partition which currently has a single field: the config path. I see.",
+      "parentUuid": "d788833a_655b7a6b",
+      "range": {
+        "startLine": 213,
+        "startChar": 78,
+        "endLine": 213,
+        "endChar": 110
+      },
+      "revId": "04f232aadcc51677aeceefa549d69d32d5b1718c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce004f9b_e47e1897",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
@@ -221,6 +245,30 @@
       "side": 1,
       "message": "The three sysprops controls different aspects of the debuggability. ro.boot.microdroid.debuggable controls if rooting is allowed or not. logd.enabled and adbd.enabled control logd and adbd respectively. See bootconfig.{normal,app_debuggable,full_debuggable} to see how they are set for the three debug modes we have.\n\nSince DICE defines only two debug modes–\"Not configured\" and \"Recovery\" can be ignored here I think–, we have to map app_debuggable to either Debug or Normal. When I suggested using ro.boot.microdroid.debuggable, I wanted to map app_debuggable to Normal because the sysprop is 0 in both bootconfig.normal and bootconfig.app_debuggable.\n\nIf you want to make only bootconfig.normal as Normal, then we could use the other two sysprops.\n\nOr, we could add a new sysprop like ro.boot.microdroid.debug_mode and set androidboot.microdroid.debug_mode to either normal, app_only, or full in the three bootconfig files. Then inside microdroid we set DICE debug mode as normal only when the sysprop is set to \"normal\".",
       "parentUuid": "d88001b1_480f3efa",
+      "range": {
+        "startLine": 217,
+        "startChar": 35,
+        "endLine": 217,
+        "endChar": 90
+      },
+      "revId": "04f232aadcc51677aeceefa549d69d32d5b1718c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9010fda_2d98f219",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-18T18:19:43Z",
+      "side": 1,
+      "message": "Perhaps u-boot should set its mode to Debug when based on androidboot.microdroid.debuggable, since that makes microdroid rootable.\n\nWhether logging and adb affect the payload sounds like a policy choice. Thinking how you have to enable adb in the debug settings on a physical device is something that makes me wonder whether adb on your payload should be something to worry about. Gaining shell is often something you don\u0027t want to happen, even if you don\u0027t yet have root.",
+      "parentUuid": "169bafcf_20ee54dd",
       "range": {
         "startLine": 217,
         "startChar": 35,
