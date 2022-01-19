@@ -70,6 +70,30 @@
       },
       "revId": "66ebda14309640df36e72506a7fc59615eb84086",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe349201_20ee0f7b",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-19T20:58:14Z",
+      "side": 1,
+      "message": "Looking through init.rc, there\u0027s a whole bunch of things that would need to be reordered. diced exposes a binder service and connects to a HAL and tried to set the cpuset, all before microdroid_manager has started.\n\nIs it an intentional move to have microdroid_manager run before all of these things have been set up?",
+      "parentUuid": "63a3f8a9_c061bf36",
+      "range": {
+        "startLine": 244,
+        "startChar": 4,
+        "endLine": 244,
+        "endChar": 29
+      },
+      "revId": "66ebda14309640df36e72506a7fc59615eb84086",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
