@@ -46,6 +46,30 @@
       },
       "revId": "66ebda14309640df36e72506a7fc59615eb84086",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63a3f8a9_c061bf36",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-19T17:17:44Z",
+      "side": 1,
+      "message": "Problem was waiting for diced leading to microdroid_manager getting signalled. I tried starting diced earlier in the init script and having m_m trigger diced to start before it\u0027s needed but it doesn\u0027t want to start\n\n```\n[    1.021227][    T1] init: starting service \u0027diced\u0027...                    \n[    1.023689][    T1] init: Control message: Processed ctl.start for \u0027diced\u0027 from pid: 130 (/system/bin/microdroid_manager)\n[    1.024908][  T133] init: failed to write pid to files: couldn\u0027t write 133 to /dev/cpuset/foreground/tasks: No such file or directory\n[    1.026487][  T133] init: cannot execv(\u0027/system/bin/diced\u0027). See the \u0027Debugging init\u0027 section of init\u0027s README.md for tips: No such file or directory\n[    1.027563][    T1] init: Service \u0027diced\u0027 (pid 133) exited with status 127 oneshot service took 0.004000 seconds in background\n[    1.027979][    T1] init: Sending signal 9 to service \u0027diced\u0027 (pid 133) process group...\n```\n\nWould you expect issues starting diced earlier?",
+      "parentUuid": "c7dfbef9_40ff1a8d",
+      "range": {
+        "startLine": 244,
+        "startChar": 4,
+        "endLine": 244,
+        "endChar": 29
+      },
+      "revId": "66ebda14309640df36e72506a7fc59615eb84086",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
