@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c9043b8_666d3adf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-19T18:19:06Z",
+      "side": 1,
+      "message": "Quick scan over, it looks the shape I would expect. I\u0027ve given some pointers to the instance.img sealing in microdroid_manager which used different ring APIs, but ultimately had the same result.",
+      "revId": "80c4d9a1485bc878915820aae631ad3821639f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd3f0411_e93084f1",
+        "filename": "compos/src/blob_encryptor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-19T18:19:06Z",
+      "side": 1,
+      "message": "We used a different API for randomness in microdroid_manager, I think the other used systemrandom in the end but might be easier to use?\n\nhttp://cs/android/packages/modules/Virtualization/microdroid_manager/src/instance.rs;l\u003d171;rcl\u003da1a7fb1bc59e16f3bc5e3e120502b30ae13476a2",
+      "revId": "80c4d9a1485bc878915820aae631ad3821639f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fff50d3a_87298eb0",
+        "filename": "compos/src/blob_encryptor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-19T18:19:06Z",
+      "side": 1,
+      "message": "We used LessSafeKey for the instance.img because there\u0027s not nonce sequence etc. The names are a little provoking but it appeared to be the intended API if there\u0027s no a sequence of messages [1]. We looked into during the instance.img review [2] which might have some background.\n\n[1] -- https://github.com/briansmith/ring/issues/899\n[2] -- https://android-review.googlesource.com/c/platform/packages/modules/Virtualization/+/1811677/comments/d77c7ced_9acdd8a4",
+      "range": {
+        "startLine": 62,
+        "startChar": 22,
+        "endLine": 62,
+        "endChar": 32
+      },
+      "revId": "80c4d9a1485bc878915820aae631ad3821639f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "827a6621_c9c93362",
+        "filename": "compos/src/blob_encryptor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-19T18:19:06Z",
+      "side": 1,
+      "message": "I\u0027m wondering if there are any identifying details of the key that might be worth dropping in here.\n\n(reminder to go and check what details keymint put there, though much won\u0027t apply here)",
+      "range": {
+        "startLine": 63,
+        "startChar": 26,
+        "endLine": 63,
+        "endChar": 38
+      },
+      "revId": "80c4d9a1485bc878915820aae631ad3821639f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49a8f154_ce55b464",
+        "filename": "compos/src/blob_encryptor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-19T18:19:06Z",
+      "side": 1,
+      "message": "As it\u0027s a data format, would some versioning be needed or is it safe to assume that unnecessary.",
+      "revId": "80c4d9a1485bc878915820aae631ad3821639f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
