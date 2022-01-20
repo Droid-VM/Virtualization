@@ -83,6 +83,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d43e4261_9ed780bc",
+        "filename": "compos/src/blob_encryptor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-20T14:21:23Z",
+      "side": 1,
+      "message": "KM\u0027s blob uses 256 [1] and given it\u0027s used for such small amounts of data, performance and key schedule aren\u0027t going to be significant.\n\n[1] -- http://cs/android/system/keymaster/key_blob_utils/auth_encrypted_key_blob.cpp;l\u003d179;rcl\u003d1ca1637a02654b283bd950629d8cbdfa50941d46",
+      "parentUuid": "15bab6db_d6ab9e2b",
+      "range": {
+        "startLine": 36,
+        "startChar": 41,
+        "endLine": 36,
+        "endChar": 44
+      },
+      "revId": "80c4d9a1485bc878915820aae631ad3821639f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd3f0411_e93084f1",
@@ -114,6 +138,24 @@
       "side": 1,
       "message": "It definitely look easier to use, although I can live with this.\n\nrand::random is reseeded from the OS every 64k (https://docs.rs/rand/latest/rand/rngs/struct.ThreadRng.html), whereas the Ring SystemRandom calls the OS for every byte (https://briansmith.org/rustdoc/ring/rand/struct.SystemRandom.html).\n\nThe latter seems marginally preferable?",
       "parentUuid": "bd3f0411_e93084f1",
+      "revId": "80c4d9a1485bc878915820aae631ad3821639f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5f19ecb_dda31712",
+        "filename": "compos/src/blob_encryptor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-20T14:21:23Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9a0ac805_f9e810bf",
       "revId": "80c4d9a1485bc878915820aae631ad3821639f66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
