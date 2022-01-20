@@ -118,6 +118,30 @@
       },
       "revId": "66ebda14309640df36e72506a7fc59615eb84086",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c9a7e43_73261c62",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-20T13:55:44Z",
+      "side": 1,
+      "message": "I don\u0027t know how to make it work. Moving servicemanager to above microdroid manager along with most of \u0027on init\u0027 to try and fix dependencies it still doesn\u0027t manage to start and I don\u0027t understand what\u0027s wrong.\n\n```\n[    1.386552][    T1] init: starting service \u0027ueventd\u0027...                                                                                                                                                                                                                                                                 \n[    1.392416][    T1] init: starting service \u0027servicemanager\u0027...                                                                                            \n[    1.399083][    T1] init: starting service \u0027hwservicemanager\u0027...                                                                                          \n[    1.405919][  T130] libprocessgroup: Failed to read task profiles from /etc/task_profiles.json                                                            \n[    1.407797][  T130] libprocessgroup: Loading /etc/task_profiles.json for [130] failed                                                                     \n[    1.408777][  T130] libprocessgroup: Failed to find ServiceCapacityLowtask profile: No such file or directory                                             \n[    1.410895][  T131] libprocessgroup: Failed to read task profiles from /etc/task_profiles.json                                                            \n[    1.412221][  T131] libprocessgroup: Loading /etc/task_profiles.json for [131] failed                                                              \n[    1.413997][    T1] init: starting service \u0027microdroid_manager\u0027...                                                                                        \n[    1.415714][    T1] init: Opened file \u0027/dev/kmsg\u0027, flags 1                                                                                                \n[    1.421105][  T131] libprocessgroup: Failed to find ServiceCapacityLowtask profile: No such file or directory                                             \n[    1.423060][  T131] libprocessgroup: Failed to find HighPerformancetask profile: No such file or directory                                     \n[    1.427092][  T130] init: cannot execv(\u0027/system/bin/servicemanager\u0027). See the \u0027Debugging init\u0027 section of init\u0027s README.md for tips: No such file or directory                                                                                                                                                          \n[    1.434012][  T131] init: cannot execv(\u0027/system/bin/hwservicemanager\u0027). See the \u0027Debugging init\u0027 section of init\u0027s README.md for tips: No such file or directory                                                                                                                                                        \n[    1.436643][    T1] init: Service \u0027servicemanager\u0027 (pid 130) exited with status 127                                                                       \n[    1.438230][    T1] init: Sending signal 9 to service \u0027servicemanager\u0027 (pid 130) process group...                                                         \n[    1.440859][    T1] libprocessgroup: Successfully killed process cgroup uid 1000 pid 130 in 0ms                                                                                                                                                                                                                         \n[    1.443834][    T1] init: starting service \u0027apexd\u0027...                                                                                                                                                                                                                                                                   \n[    1.452683][    T1] init: Command \u0027restart audioserver\u0027 action\u003donrestart (\u003cService \u0027servicemanager\u0027 onrestart\u003e:2) took 0ms and failed: service audioserver not found                                                                                                                                                    \n[    1.457659][  T129] ueventd: ueventd started!                                                                                                                                                                                                                                                                           \n[    1.459097][  T129] selinux: SELinux: Loaded file_contexts                                                                                                \n[    1.459752][  T129] selinux:    \n```",
+      "parentUuid": "3c37b79e_0830c915",
+      "range": {
+        "startLine": 244,
+        "startChar": 4,
+        "endLine": 244,
+        "endChar": 29
+      },
+      "revId": "66ebda14309640df36e72506a7fc59615eb84086",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
