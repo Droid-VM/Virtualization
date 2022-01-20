@@ -56,6 +56,30 @@
       },
       "revId": "3d130cb05498144304ff46b0103e1031f44ea227",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26ed675e_e4e52d06",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-01-20T01:43:16Z",
+      "side": 1,
+      "message": "btw, please note that lastUpdateMillis values in apex-info-list.xml is in fact \"seconds\", not \"millis\", ;-) (Probably, mis-named?)\nhttps://cs.android.com/android/platform/superproject/+/master:system/apex/apexd/apexd.cpp;l\u003d3291;drc\u003dmaster?q\u003dapexd.cpp\n\nFixing it (rename it or setting it with millis) might be out of this CL\u0027s scope, though.",
+      "parentUuid": "f4f09c91_8a4e5848",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 21
+      },
+      "revId": "3d130cb05498144304ff46b0103e1031f44ea227",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
