@@ -140,7 +140,8 @@ public class MicrodroidTests {
     @Test
     public void connectToVmService() throws VirtualMachineException, InterruptedException {
         VirtualMachineConfig.Builder builder =
-                new VirtualMachineConfig.Builder(mInner.mContext, "assets/vm_config.json");
+                new VirtualMachineConfig.Builder(mInner.mContext,
+                        "assets/vm_config_extra_apk.json");
         if (Build.SUPPORTED_ABIS.length > 0) {
             String primaryAbi = Build.SUPPORTED_ABIS[0];
             switch(primaryAbi) {
@@ -176,6 +177,9 @@ public class MicrodroidTests {
                                     "true");
                             assertEquals(
                                     testService.readProperty("debug.microdroid.test.keystore"),
+                                    "PASS");
+                            assertEquals(
+                                    testService.readProperty("debug.microdroid.test.extra_apk"),
                                     "PASS");
                         } catch (Exception e) {
                             fail("Exception while testing service: " + e.toString());
