@@ -94,6 +94,30 @@
       },
       "revId": "66ebda14309640df36e72506a7fc59615eb84086",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c37b79e_0830c915",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-20T09:09:07Z",
+      "side": 1,
+      "message": "Yeah, I think we need to set the binder infra (service_manager) before starting microdroid_manager and diced. I\u0027ve left a TODO for that. \n\nBefore this change, microdroid_manager didn\u0027t make (local) binder calls.",
+      "parentUuid": "fe349201_20ee0f7b",
+      "range": {
+        "startLine": 244,
+        "startChar": 4,
+        "endLine": 244,
+        "endChar": 29
+      },
+      "revId": "66ebda14309640df36e72506a7fc59615eb84086",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
