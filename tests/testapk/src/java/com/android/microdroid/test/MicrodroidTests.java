@@ -17,8 +17,10 @@ package com.android.microdroid.test;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNot.not;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.junit.Assume.assumeNoException;
 import static org.junit.Assume.assumeThat;
 
@@ -26,6 +28,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineCallback;
@@ -35,6 +38,8 @@ import android.system.virtualmachine.VirtualMachineException;
 import android.system.virtualmachine.VirtualMachineManager;
 
 import androidx.test.core.app.ApplicationProvider;
+
+import com.android.microdroid.testservice.ITestService;
 
 import org.junit.After;
 import org.junit.Before;
@@ -49,6 +54,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(JUnit4.class)
@@ -132,7 +138,7 @@ public class MicrodroidTests {
     private static final int MIN_MEM_X86_64 = 196;
 
     @Test
-    public void startAndStop() throws VirtualMachineException, InterruptedException {
+    public void connectToVmService() throws VirtualMachineException, InterruptedException {
         VirtualMachineConfig.Builder builder =
                 new VirtualMachineConfig.Builder(mInner.mContext, "assets/vm_config.json");
         if (Build.SUPPORTED_ABIS.length > 0) {
@@ -148,11 +154,51 @@ public class MicrodroidTests {
         }
         VirtualMachineConfig config = builder.build();
 
-        mInner.mVm = mInner.mVmm.getOrCreate("test_vm", config);
+        mInner.mVm = mInner.mVmm.getOrCreate("test_vm_extra_apk", config);
         VmEventListener listener =
                 new VmEventListener() {
-                    private boolean mPayloadReadyCalled = false;
+                    private boolean mPayloadServiceSuccess = false;
                     private boolean mPayloadStartedCalled = false;
+
+                    private void testVMService(Future<IBinder> service) {
+                        try {
+                            IBinder binder = service.get();
+
+                            ITestService testService = ITestService.Stub.asInterface(binder);
+                            assertEquals(
+                                    testService.addInteger(123, 456),
+                                    123 + 456);
+                            assertEquals(
+                                    testService.readProperty("debug.microdroid.app.run"),
+                                    "true");
+                            assertEquals(
+                                    testService.readProperty("debug.microdroid.app.sublib.run"),
+                                    "true");
+                            assertEquals(
+                                    testService.readProperty("debug.microdroid.test.keystore"),
+                                    "PASS");
+
+                            mPayloadServiceSuccess = true;
+                        } catch (Exception e) {
+                            fail("Exception while testing service: " + e.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onPayloadReady(VirtualMachine vm) {
+                        try {
+                            testVMService(vm.connectToVsockServer(ITestService.SERVICE_PORT));
+                        } catch (Exception e) {
+                            fail("Exception while connecting to service: " + e.toString());
+                        }
+
+                        // TODO(b/208639280): remove this sleep. For now, we need to wait for a few
+                        // seconds so that crosvm can actually persist instance.img.
+                        try {
+                            Thread.sleep(30 * 1000);
+                        } catch (InterruptedException e) { }
+                        forceStop(vm);
+                    }
 
                     @Override
                     public void onPayloadStarted(VirtualMachine vm, ParcelFileDescriptor stream) {
@@ -160,14 +206,8 @@ public class MicrodroidTests {
                     }
 
                     @Override
-                    public void onPayloadReady(VirtualMachine vm) {
-                        mPayloadReadyCalled = true;
-                        forceStop(vm);
-                    }
-
-                    @Override
                     public void onDied(VirtualMachine vm, @DeathReason int reason) {
-                        assertTrue(mPayloadReadyCalled);
+                        assertTrue(mPayloadServiceSuccess);
                         assertTrue(mPayloadStartedCalled);
                     }
                 };
