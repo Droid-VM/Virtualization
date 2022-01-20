@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60aafa99_5508b382",
+        "filename": "compos/src/blob_encryptor.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-01-20T12:18:01Z",
+      "side": 1,
+      "message": "Why is the salt empty? Shouldn\u0027t it be some random value?",
+      "revId": "512688d19a68310d25a449aac5cdc1f3f42acdfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf35565b_6372f8fd",
+        "filename": "compos/src/signing_key.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-01-20T12:18:01Z",
+      "side": 1,
+      "message": "Where is this used? I couldn\u0027t see any references to it in the other files.",
+      "revId": "512688d19a68310d25a449aac5cdc1f3f42acdfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
