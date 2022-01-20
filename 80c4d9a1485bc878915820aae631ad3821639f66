@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "847a0147_05c8c83b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-20T11:30:45Z",
+      "side": 1,
+      "message": "Thanks! PTAL.\n\nAre we interested in https://docs.rs/zeroize/latest/zeroize/ or something similar?",
+      "parentUuid": "7c9043b8_666d3adf",
+      "revId": "80c4d9a1485bc878915820aae631ad3821639f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad391d0a_fef01688",
         "filename": "compos/src/blob_encryptor.rs",
         "patchSetId": 2
@@ -31,6 +49,30 @@
       "writtenOn": "2022-01-19T19:36:59Z",
       "side": 1,
       "message": "Should bump this to AES_256_GCM for good measure",
+      "range": {
+        "startLine": 36,
+        "startChar": 41,
+        "endLine": 36,
+        "endChar": 44
+      },
+      "revId": "80c4d9a1485bc878915820aae631ad3821639f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15bab6db_d6ab9e2b",
+        "filename": "compos/src/blob_encryptor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-20T11:30:45Z",
+      "side": 1,
+      "message": "I thought we used 128 bit crypto pretty much everywhere?\n(No objection, just curious.)",
+      "parentUuid": "ad391d0a_fef01688",
       "range": {
         "startLine": 36,
         "startChar": 41,
@@ -60,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a0ac805_f9e810bf",
+        "filename": "compos/src/blob_encryptor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-20T11:30:45Z",
+      "side": 1,
+      "message": "It definitely look easier to use, although I can live with this.\n\nrand::random is reseeded from the OS every 64k (https://docs.rs/rand/latest/rand/rngs/struct.ThreadRng.html), whereas the Ring SystemRandom calls the OS for every byte (https://briansmith.org/rustdoc/ring/rand/struct.SystemRandom.html).\n\nThe latter seems marginally preferable?",
+      "parentUuid": "bd3f0411_e93084f1",
+      "revId": "80c4d9a1485bc878915820aae631ad3821639f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fff50d3a_87298eb0",
         "filename": "compos/src/blob_encryptor.rs",
         "patchSetId": 2
@@ -71,6 +131,30 @@
       "writtenOn": "2022-01-19T18:19:06Z",
       "side": 1,
       "message": "We used LessSafeKey for the instance.img because there\u0027s not nonce sequence etc. The names are a little provoking but it appeared to be the intended API if there\u0027s no a sequence of messages [1]. We looked into during the instance.img review [2] which might have some background.\n\n[1] -- https://github.com/briansmith/ring/issues/899\n[2] -- https://android-review.googlesource.com/c/platform/packages/modules/Virtualization/+/1811677/comments/d77c7ced_9acdd8a4",
+      "range": {
+        "startLine": 62,
+        "startChar": 22,
+        "endLine": 62,
+        "endChar": 32
+      },
+      "revId": "80c4d9a1485bc878915820aae631ad3821639f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e711a0d_4905d0a0",
+        "filename": "compos/src/blob_encryptor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-20T11:30:45Z",
+      "side": 1,
+      "message": "Ah, interesting!\n\nThe documentation is really bad at explaining how this stuff is intended to be used.",
+      "parentUuid": "fff50d3a_87298eb0",
       "range": {
         "startLine": 62,
         "startChar": 22,
@@ -151,6 +235,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e4944ec_620a5d5c",
+        "filename": "compos/src/blob_encryptor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-20T11:30:45Z",
+      "side": 1,
+      "message": "I stuck in KDF_INFO in case we want to derive some other key for some other purpose.",
+      "parentUuid": "59f6ec84_1b08427f",
+      "range": {
+        "startLine": 63,
+        "startChar": 26,
+        "endLine": 63,
+        "endChar": 38
+      },
+      "revId": "80c4d9a1485bc878915820aae631ad3821639f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7da34505_59aa09c8",
+        "filename": "compos/src/blob_encryptor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-20T11:30:45Z",
+      "side": 1,
+      "message": "Hmm, dunno how I missed that.",
+      "parentUuid": "3d9275d0_fc6fdbad",
+      "range": {
+        "startLine": 63,
+        "startChar": 12,
+        "endLine": 63,
+        "endChar": 25
+      },
+      "revId": "80c4d9a1485bc878915820aae631ad3821639f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49a8f154_ce55b464",
@@ -182,6 +314,24 @@
       "side": 1,
       "message": "Example serialized format from KM [1]: \u003cversion byte\u003e \u003cnonce\u003e \u003cciphertext + tag\u003e \u003cKM things\u003e\n\nso basically just reordered with a version number\n\n[1] -- http://cs/android/system/keymaster/key_blob_utils/auth_encrypted_key_blob.cpp;l\u003d209;rcl\u003d0c007cd31d6f8a2258ca797732648734a4884a09",
       "parentUuid": "49a8f154_ce55b464",
+      "revId": "80c4d9a1485bc878915820aae631ad3821639f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0f45301_ce1c3bf3",
+        "filename": "compos/src/blob_encryptor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-20T11:30:45Z",
+      "side": 1,
+      "message": "I put the nonce at the end purely because it made it slightly easier to write the code. But I figured out how to fix that.\n\nI don\u0027t think we need versioning - the key should always be consumed by exactly the same version of CompOS that wrote it; if there\u0027s a version mismatch then the compilation didn\u0027t do the right thing anyway so failure is fine.",
+      "parentUuid": "0427308c_79cc2338",
       "revId": "80c4d9a1485bc878915820aae631ad3821639f66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
