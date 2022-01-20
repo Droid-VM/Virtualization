@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27e967cc_65b224a0",
+        "filename": "compos/src/blob_encryptor.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-20T12:33:23Z",
+      "side": 1,
+      "message": "No - it has to be the same value every time we do the derivation (we want to make sure we get the same key if we supply the same CDI). We could generate a random number but we don\u0027t have anywhere to persist it.\nThe HKDF doesn\u0027t actually need it.",
+      "parentUuid": "60aafa99_5508b382",
+      "revId": "512688d19a68310d25a449aac5cdc1f3f42acdfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf35565b_6372f8fd",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-01-20T12:18:01Z",
       "side": 1,
       "message": "Where is this used? I couldn\u0027t see any references to it in the other files.",
+      "revId": "512688d19a68310d25a449aac5cdc1f3f42acdfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "345b461c_1d8d666d",
+        "filename": "compos/src/signing_key.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-20T12:33:23Z",
+      "side": 1,
+      "message": "It isn\u0027t yet - once it\u0027s finished it will replace compos_key_service.\nHaving it in this CL is slightly unorthodox, but it reminds me what more is needed, and has helped drive the shape of the blob encryptor.\n(Which started as a private struct in here, but I extracted it because it was big \u0026 complex enough, and also it gives me something I can test in isolation.)",
+      "parentUuid": "bf35565b_6372f8fd",
       "revId": "512688d19a68310d25a449aac5cdc1f3f42acdfb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
