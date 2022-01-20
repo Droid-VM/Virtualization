@@ -243,6 +243,11 @@ public class MainActivity extends AppCompatActivity {
                                         String.format(
                                                 "(VM payload service: %d + %d = %d)",
                                                 123, 456, ret));
+                                String prop = testService.readProperty("ro.hardware");
+                                mPayloadOutput.postValue(
+                                        String.format(
+                                                "(VM payload service: ro.hardware=%s)",
+                                                prop));
                             } catch (RemoteException e) {
                                 mPayloadOutput.postValue(
                                         String.format(

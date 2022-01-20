@@ -29,6 +29,7 @@
 #include <unistd.h>
 
 #include <binder_rpc_unstable.hpp>
+#include <string>
 
 using aidl::android::hardware::security::keymint::Algorithm;
 using aidl::android::hardware::security::keymint::Digest;
@@ -202,6 +203,25 @@ Result<void> start_test_service() {
     class TestService : public aidl::com::android::microdroid::testservice::BnTestService {
         ndk::ScopedAStatus addInteger(int32_t a, int32_t b, int32_t* out) override {
             *out = a + b;
+            return ndk::ScopedAStatus::ok();
+        }
+
+        ndk::ScopedAStatus readProperty(const std::string& prop, std::string* out) override {
+            out->clear();
+            const prop_info* pi = __system_property_find(prop.c_str());
+            if (pi) {
+                auto read_callback = [](void* cookie, const char*, const char* value, unsigned) {
+                    auto property_value = reinterpret_cast<std::string*>(cookie);
+                    *property_value = value;
+                };
+                __system_property_read_callback(pi, read_callback, out);
+            }
+            if (out->empty()) {
+                std::string msg = "cannot find property " + prop;
+                return ndk::ScopedAStatus::fromExceptionCodeWithMessage(EX_SERVICE_SPECIFIC,
+                                                                        msg.c_str());
+            }
+
             return ndk::ScopedAStatus::ok();
         }
     };
