@@ -166,6 +166,30 @@
       },
       "revId": "66ebda14309640df36e72506a7fc59615eb84086",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5af2b905_004726ea",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-21T04:57:36Z",
+      "side": 1,
+      "message": "I managed to start diced before microdroid_manager. See the parent CL and other CLs in the same topic. The call to `derive` is successful, but for some reason, I am hitting this error, which seems to be caused by this CL.\n\n```\n  T133]     ring::error::Unspecified\nVM encountered an error: code\u003d0, message\u003dFailed to read identity data\n[    6.889646][  T133] microdroid_manager[133]: Failed with Failed to read identity data\n\n```",
+      "parentUuid": "fc25daaf_1752cc5e",
+      "range": {
+        "startLine": 244,
+        "startChar": 4,
+        "endLine": 244,
+        "endChar": 29
+      },
+      "revId": "66ebda14309640df36e72506a7fc59615eb84086",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
