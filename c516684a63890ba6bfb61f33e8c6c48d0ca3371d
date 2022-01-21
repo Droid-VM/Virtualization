@@ -22,6 +22,30 @@
       },
       "revId": "c516684a63890ba6bfb61f33e8c6c48d0ca3371d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51449bee_c99db54a",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-21T16:03:25Z",
+      "side": 1,
+      "message": "Trial and error shows it isn\u0027t needed. I guess because the KM HAL had some legacy code but new HALs just use service manager.",
+      "parentUuid": "77a3b508_90807982",
+      "range": {
+        "startLine": 86,
+        "startChar": 10,
+        "endLine": 86,
+        "endChar": 26
+      },
+      "revId": "c516684a63890ba6bfb61f33e8c6c48d0ca3371d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
