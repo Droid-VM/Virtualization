@@ -32,15 +32,6 @@ impl Dice {
         Ok(Self { node: dice_service })
     }
 
-    pub fn get_boot_certificate_chain(&self) -> Result<Vec<u8>> {
-        let input_values = []; // Get our BCC, not a child's
-        let bcc = self
-            .node
-            .getAttestationChain(&input_values)
-            .context("Getting attestation chain failed")?;
-        Ok(bcc.data)
-    }
-
     pub fn get_sealing_cdi(&self) -> Result<Vec<u8>> {
         let input_values = [];
         let bcc_handover = self.node.derive(&input_values).context("Failed to retrieve CDI")?;
