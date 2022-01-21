@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "556622a6_f1869689",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-21T21:34:05Z",
+      "side": 1,
+      "message": "android-base has a more general opinions on what is true boolean [1], will the same logic be needed here? Elsewhere in this file it just does a check for \"1\" too.\n\n[1] -- http://cs/android/system/libbase/include/android-base/properties.h;l\u003d35;rcl\u003df2bee506ade5e3159cca9892b623fc18f61b27b9",
+      "range": {
+        "startLine": 188,
+        "startChar": 21,
+        "endLine": 188,
+        "endChar": 53
+      },
+      "revId": "7cb9de0d6e130b272e3deb2610045903c3e74232",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
