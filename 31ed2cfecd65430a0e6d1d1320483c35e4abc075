@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "673651b7_87c8ab5c",
+        "filename": "compos/native/compos_native.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-21T21:18:28Z",
+      "side": 1,
+      "message": "The function is documented to always uses 65537.\n\nhttp://cs/android/external/boringssl/src/include/openssl/rsa.h;l\u003d198;rcl\u003d29d55da17550581640d899cf3fceac42b4b1f49d",
+      "parentUuid": "3a043dfa_05ed5948",
+      "range": {
+        "startLine": 44,
+        "startChar": 33,
+        "endLine": 44,
+        "endChar": 38
+      },
+      "revId": "31ed2cfecd65430a0e6d1d1320483c35e4abc075",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c0ca51c_5edad2f6",
         "filename": "compos/native/compos_native.cpp",
         "patchSetId": 2
@@ -175,6 +199,30 @@
       "writtenOn": "2022-01-21T18:12:32Z",
       "side": 1,
       "message": "nit: extract constant or comment\n\nAlthough I\u0027m a bit surprised that we can\u0027t verify the key directly and have to use fake data.",
+      "range": {
+        "startLine": 55,
+        "startChar": 29,
+        "endLine": 55,
+        "endChar": 31
+      },
+      "revId": "31ed2cfecd65430a0e6d1d1320483c35e4abc075",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26246015_754836a3",
+        "filename": "compos/src/signing_key.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-21T21:18:28Z",
+      "side": 1,
+      "message": "You can extract the public key from the private key and compare it to the public key passed in here.",
+      "parentUuid": "e5ff708d_e04e89c5",
       "range": {
         "startLine": 55,
         "startChar": 29,
