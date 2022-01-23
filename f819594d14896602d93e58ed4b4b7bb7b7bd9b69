@@ -16,6 +16,40 @@
       "message": "This is a stub implementation of the HAL that will avoid the delays in diced as it currently fails to find the HAL. The values are just as useless as the ones diced falls back on.",
       "revId": "f819594d14896602d93e58ed4b4b7bb7b7bd9b69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf597918_81ad04c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-23T15:02:06Z",
+      "side": 1,
+      "message": "It would be great if we can run diced and the HAL in the same process in the future. ",
+      "revId": "f819594d14896602d93e58ed4b4b7bb7b7bd9b69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20051a96_2f8e4878",
+        "filename": "microdroid/dice/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-23T15:02:06Z",
+      "side": 1,
+      "message": "please add `prefer_rlibs: true` to make the binary smaller",
+      "revId": "f819594d14896602d93e58ed4b4b7bb7b7bd9b69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
