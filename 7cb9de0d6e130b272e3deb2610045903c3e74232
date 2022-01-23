@@ -22,6 +22,30 @@
       },
       "revId": "7cb9de0d6e130b272e3deb2610045903c3e74232",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4f52236_bffc8060",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-23T15:07:38Z",
+      "side": 1,
+      "message": "Yes, that would be a good stopgap. But it doesn\u0027t look to be in the scope of this CL I guess? We will need something like system_properties:read_as_bool which gives Result\u003cbool\u003e and fails when the string can\u0027t be converted into a boolean according to the rule in libbase.",
+      "parentUuid": "556622a6_f1869689",
+      "range": {
+        "startLine": 188,
+        "startChar": 21,
+        "endLine": 188,
+        "endChar": 53
+      },
+      "revId": "7cb9de0d6e130b272e3deb2610045903c3e74232",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
