@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1fbadba_5c2dc76c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-24T20:42:06Z",
+      "side": 1,
+      "message": "This still wants to wait until the driver lands comfortably in microdroid and the bootloader sets a DT node, but I have fakes it out from crosvm.",
+      "revId": "81b9abd15b497dd7442006af8ff86758a9f97848",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ff29d57_95c4b990",
+        "filename": "microdroid/dice/android.hardware.security.dice-service.microdroid.rc",
+        "patchSetId": 6
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-24T20:42:06Z",
+      "side": 1,
+      "message": "I reused this group to give the HAL access to the /dev node. If there\u0027s a better way, lmk.",
+      "range": {
+        "startLine": 3,
+        "startChar": 10,
+        "endLine": 3,
+        "endChar": 15
+      },
+      "revId": "81b9abd15b497dd7442006af8ff86758a9f97848",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
