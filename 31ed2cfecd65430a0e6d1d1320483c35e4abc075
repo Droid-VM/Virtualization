@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cb2fff7_e072d7db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-24T14:13:04Z",
+      "side": 1,
+      "message": "BoringSSL in Rust seems to be coming real soon now, and that\u0027s a good thing I think.\nBut I\u0027m unhappy with the use of Ring here; I feel like moving the AEAD into native code using bssl. That may happen in the next CL.",
+      "parentUuid": "aad95182_9c447aee",
+      "range": {
+        "startLine": 9,
+        "startChar": 49,
+        "endLine": 10,
+        "endChar": 48
+      },
+      "revId": "31ed2cfecd65430a0e6d1d1320483c35e4abc075",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9cfca42a_f49859b7",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-01-21T18:12:32Z",
       "side": 1,
       "message": "nit: 2022 already!",
+      "range": {
+        "startLine": 2,
+        "startChar": 20,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "31ed2cfecd65430a0e6d1d1320483c35e4abc075",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0213cab_57b563de",
+        "filename": "compos/native/compos_native.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-24T14:13:04Z",
+      "side": 1,
+      "message": "Oh I know: cl/420775215\nBut this file was created by copying composd_native.cpp and then making a bunch of changes - so I\u0027m preserving the original copyright date. Even if git doesn\u0027t think they\u0027re the same file, I do.",
+      "parentUuid": "9cfca42a_f49859b7",
       "range": {
         "startLine": 2,
         "startChar": 20,
@@ -94,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a927d2c4_f9b45a4d",
+        "filename": "compos/native/compos_native.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-24T14:13:04Z",
+      "side": 1,
+      "message": "I tried to make the comment clearer.",
+      "parentUuid": "673651b7_87c8ab5c",
+      "range": {
+        "startLine": 44,
+        "startChar": 33,
+        "endLine": 44,
+        "endChar": 38
+      },
+      "revId": "31ed2cfecd65430a0e6d1d1320483c35e4abc075",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c0ca51c_5edad2f6",
@@ -107,6 +179,30 @@
       "writtenOn": "2022-01-21T18:12:32Z",
       "side": 1,
       "message": "where is the randomness applied? inside the function?",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 78
+      },
+      "revId": "31ed2cfecd65430a0e6d1d1320483c35e4abc075",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e6a3607_26abdbee",
+        "filename": "compos/native/compos_native.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-24T14:13:04Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "2c0ca51c_5edad2f6",
       "range": {
         "startLine": 45,
         "startChar": 8,
@@ -140,6 +236,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8baf9d81_f1505a11",
+        "filename": "compos/native/compos_native.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-24T14:13:04Z",
+      "side": 1,
+      "message": "It\u0027s job is to free the buffer(s) allocated by i2d_*.\nHere we free the first buffer and take ownership of the second.\nAttempted to make that clearer.",
+      "parentUuid": "c87143c0_9dcc29c3",
+      "range": {
+        "startLine": 61,
+        "startChar": 4,
+        "endLine": 61,
+        "endChar": 10
+      },
+      "revId": "31ed2cfecd65430a0e6d1d1320483c35e4abc075",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa1c6022_9025a680",
@@ -163,6 +283,53 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8f7df73_e90fc1ec",
+        "filename": "compos/native/compos_native.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-24T14:13:04Z",
+      "side": 1,
+      "message": "key_in gets modified by the function. (bssl is horrible.)\n\u0026key_in is uint8_t const **. private_key.data() is uint8_t const *, and I can\u0027t take its address because it\u0027s not an lvalue.",
+      "parentUuid": "aa1c6022_9025a680",
+      "range": {
+        "startLine": 85,
+        "startChar": 57,
+        "endLine": 85,
+        "endChar": 63
+      },
+      "revId": "31ed2cfecd65430a0e6d1d1320483c35e4abc075",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38e91c4d_f472956c",
+        "filename": "compos/native/compos_native.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-24T14:13:04Z",
+      "side": 1,
+      "message": "I realized we already know what RSA_size() should be, so switched to a simple fixed-size array here.",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 42
+      },
+      "revId": "31ed2cfecd65430a0e6d1d1320483c35e4abc075",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b9f65b2_feb91663",
@@ -176,6 +343,30 @@
       "writtenOn": "2022-01-21T18:12:32Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "31ed2cfecd65430a0e6d1d1320483c35e4abc075",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a67f3a5f_7445df9d",
+        "filename": "compos/native/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-24T14:13:04Z",
+      "side": 1,
+      "message": "See above.",
+      "parentUuid": "7b9f65b2_feb91663",
       "range": {
         "startLine": 1,
         "startChar": 13,
@@ -223,6 +414,30 @@
       "side": 1,
       "message": "You can extract the public key from the private key and compare it to the public key passed in here.",
       "parentUuid": "e5ff708d_e04e89c5",
+      "range": {
+        "startLine": 55,
+        "startChar": 29,
+        "endLine": 55,
+        "endChar": 31
+      },
+      "revId": "31ed2cfecd65430a0e6d1d1320483c35e4abc075",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "701514ff_c7711f98",
+        "filename": "compos/src/signing_key.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-24T14:13:04Z",
+      "side": 1,
+      "message": "That\u0027s true now. But I quite like this form of verification - if nothing else the fact that the signature is accepted by an independent implementation reassures me that everything is ok.\n\nAdded more comments.",
+      "parentUuid": "26246015_754836a3",
       "range": {
         "startLine": 55,
         "startChar": 29,
