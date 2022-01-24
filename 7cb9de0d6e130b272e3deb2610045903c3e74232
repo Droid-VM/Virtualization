@@ -46,6 +46,30 @@
       },
       "revId": "7cb9de0d6e130b272e3deb2610045903c3e74232",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07ffd1c6_813a68a0",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-24T22:37:17Z",
+      "side": 1,
+      "message": "It looks as though the logd and adb properties are only check against 1 in the init scripts anyway, but the debuggable one gets more flexible treatment at other places in code after it\u0027s assigned to ro.debuggable.",
+      "parentUuid": "e4f52236_bffc8060",
+      "range": {
+        "startLine": 188,
+        "startChar": 21,
+        "endLine": 188,
+        "endChar": 53
+      },
+      "revId": "7cb9de0d6e130b272e3deb2610045903c3e74232",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
