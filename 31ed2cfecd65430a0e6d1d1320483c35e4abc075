@@ -237,6 +237,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "013a43b3_9a04ce8a",
+        "filename": "compos/native/compos_native.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-24T17:02:45Z",
+      "side": 1,
+      "message": "I realized that I asked the wrong question. Do you need to seed the randomness?",
+      "parentUuid": "4e6a3607_26abdbee",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 78
+      },
+      "revId": "31ed2cfecd65430a0e6d1d1320483c35e4abc075",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c87143c0_9dcc29c3",
@@ -369,6 +393,30 @@
       "side": 1,
       "message": "Initially it has to be a pointer to the key.\nAfter the call it will point to just after the key.\nAnd we don\u0027t care about that, so we just ignore it.\nThe variable has to exist solely so we can take its address.",
       "parentUuid": "d1f94c47_9970ccf4",
+      "range": {
+        "startLine": 85,
+        "startChar": 57,
+        "endLine": 85,
+        "endChar": 63
+      },
+      "revId": "31ed2cfecd65430a0e6d1d1320483c35e4abc075",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb9819f4_4915e27a",
+        "filename": "compos/native/compos_native.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-24T17:02:45Z",
+      "side": 1,
+      "message": "Understood. I look forward to have a nicer Rust API...",
+      "parentUuid": "a00b4c80_d97a823f",
       "range": {
         "startLine": 85,
         "startChar": 57,
