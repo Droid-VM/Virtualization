@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13d8a57c_86e9549d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-24T14:53:24Z",
+      "side": 1,
+      "message": "Maybe.",
+      "parentUuid": "eb793e71_f71a7855",
+      "range": {
+        "startLine": 9,
+        "startChar": 39,
+        "endLine": 9,
+        "endChar": 43
+      },
+      "revId": "b411fef3cab058c3e992092a7d6fcd005963bae4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "933ae2d8_e41690cb",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-01-21T18:19:32Z",
       "side": 1,
       "message": "nit: remove?",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 16
+      },
+      "revId": "b411fef3cab058c3e992092a7d6fcd005963bae4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d92a620e_0ac319b3",
+        "filename": "compos/src/signing_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-24T14:53:24Z",
+      "side": 1,
+      "message": "It\u0027s there to make sure callers use SigningKey::new() rather than just doing SigningKey{}.\nAdded a comment.",
+      "parentUuid": "933ae2d8_e41690cb",
       "range": {
         "startLine": 32,
         "startChar": 4,
