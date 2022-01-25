@@ -35,6 +35,7 @@ use android_system_virtualmachineservice::binder::Strong;
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
 
 const CROSVM_PATH: &str = "/apex/com.android.virt/bin/crosvm";
+const SECCOMP_POLICY_DIR: &str = "/apex/com.android.virt/etc/seccomp_policy/crosvm";
 
 /// The exit status which crosvm returns when it has an error starting a VM.
 const CROSVM_ERROR_STATUS: i32 = 1;
@@ -262,11 +263,11 @@ fn run_vm(config: CrosvmConfig) -> Result<SharedChild, Error> {
     validate_config(&config)?;
 
     let mut command = Command::new(CROSVM_PATH);
-    // TODO(qwandor): Remove --disable-sandbox.
     command
         .arg("--extended-status")
         .arg("run")
-        .arg("--disable-sandbox")
+        .arg("--seccomp-policy-dir")
+        .arg(SECCOMP_POLICY_DIR)
         .arg("--cid")
         .arg(config.cid.to_string());
 
