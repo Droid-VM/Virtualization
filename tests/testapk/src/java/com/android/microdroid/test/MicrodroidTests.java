@@ -36,6 +36,7 @@ import android.system.virtualmachine.VirtualMachineConfig;
 import android.system.virtualmachine.VirtualMachineConfig.DebugLevel;
 import android.system.virtualmachine.VirtualMachineException;
 import android.system.virtualmachine.VirtualMachineManager;
+import android.util.Log;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -49,8 +50,11 @@ import org.junit.rules.Timeout;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -59,6 +63,8 @@ import java.util.concurrent.TimeUnit;
 
 @RunWith(JUnit4.class)
 public class MicrodroidTests {
+    private static final String TAG = "MicrodroidTest";
+
     @Rule public Timeout globalTimeout = Timeout.seconds(300);
 
     private static class Inner {
@@ -99,23 +105,42 @@ public class MicrodroidTests {
         mInner.mVm.delete();
     }
 
+    static class Reader implements Runnable {
+        private final InputStream mStream;
+
+        Reader(InputStream stream) {
+            mStream = stream;
+        }
+
+        @Override
+        public void run() {
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(mStream));
+                String line;
+                while ((line = reader.readLine()) != null && !Thread.interrupted()) {
+                    Log.e(TAG, line);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private abstract static class VmEventListener implements VirtualMachineCallback {
-        private ExecutorService mExecutorService = Executors.newSingleThreadExecutor();
+        private ExecutorService mExecutorService = Executors.newFixedThreadPool(4);
 
         void runToFinish(VirtualMachine vm) throws VirtualMachineException, InterruptedException {
             vm.setCallback(mExecutorService, this);
             vm.run();
+            InputStream console = vm.getConsoleOutputStream();
+            InputStream log = vm.getLogOutputStream();
+            mExecutorService.submit(new Reader(log));
             mExecutorService.awaitTermination(300, TimeUnit.SECONDS);
         }
 
         void forceStop(VirtualMachine vm) {
-            try {
-                vm.stop();
-                this.onDied(vm, VirtualMachineCallback.DEATH_REASON_KILLED);
-                mExecutorService.shutdown();
-            } catch (VirtualMachineException e) {
-                throw new RuntimeException(e);
-            }
+            this.onDied(vm, VirtualMachineCallback.DEATH_REASON_KILLED);
+            mExecutorService.shutdownNow();
         }
 
         @Override
@@ -153,7 +178,7 @@ public class MicrodroidTests {
                     break;
             }
         }
-        VirtualMachineConfig config = builder.build();
+        VirtualMachineConfig config = builder.debugLevel(DebugLevel.FULL).build();
 
         mInner.mVm = mInner.mVmm.getOrCreate("test_vm_extra_apk", config);
         VmEventListener listener =
@@ -188,6 +213,7 @@ public class MicrodroidTests {
 
                     @Override
                     public void onPayloadReady(VirtualMachine vm) {
+                        Log.e(TAG, "on payload ready");
                         mPayloadReadyCalled = true;
                         try {
                             testVMService(vm.connectToVsockServer(ITestService.SERVICE_PORT));
@@ -200,11 +226,13 @@ public class MicrodroidTests {
 
                     @Override
                     public void onPayloadStarted(VirtualMachine vm, ParcelFileDescriptor stream) {
+                        Log.e(TAG, "on payload started");
                         mPayloadStartedCalled = true;
                     }
 
                     @Override
                     public void onDied(VirtualMachine vm, @DeathReason int reason) {
+                        Log.e(TAG, "on died " + reason);
                         assertTrue(mPayloadReadyCalled);
                         assertTrue(mPayloadStartedCalled);
                     }
