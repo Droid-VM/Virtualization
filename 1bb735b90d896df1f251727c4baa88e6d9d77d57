@@ -16,6 +16,24 @@
       "message": "This is causing tests to fail but I can\u0027t work out where to find more information such as logs from the VM. Running MicrodroidTestApp manually give a booted VM but using test it fails and I don\u0027t know where to look to debug. Do you have any pointers?",
       "revId": "1bb735b90d896df1f251727c4baa88e6d9d77d57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "535704f1_952be138",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-25T04:41:38Z",
+      "side": 1,
+      "message": "Hmm, I have no idea.\n\n\u003e 01-24 17:54:27.596  3278  3305 I VirtualizationService: virtualizationservice::aidl: VM having CID 10 encountered an error\n\u003e 01-24 17:54:27.731  3285  3285 D crosvm  : vcpu requested shutdown\n\nI will look into this. Perhaps we need to setup the log console for the tests.",
+      "parentUuid": "ca352f6d_261b5ee7",
+      "revId": "1bb735b90d896df1f251727c4baa88e6d9d77d57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
