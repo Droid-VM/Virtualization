@@ -276,6 +276,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ea60f56_744e7d1c",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-25T16:06:44Z",
+      "side": 1,
+      "message": "We need to capture the phases of loading so we have a full description of the code that is doing the next stage of loading. David has been looking at the u-boot part and can capture the AVB signed bootconfig. The bit that he found recently was uboot_env which controls the bootflow and is not protected by anything.\n\n pvmfw -\u003e describe u-boot (don\u0027t describe microdroid user space)\n u-boot -\u003e describes the microdroid platform, inc microdroid_manager\n microdroid_manager -\u003e describes the payload",
+      "parentUuid": "7cb5e861_9b0bc180",
+      "range": {
+        "startLine": 213,
+        "startChar": 78,
+        "endLine": 213,
+        "endChar": 110
+      },
+      "revId": "04f232aadcc51677aeceefa549d69d32d5b1718c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce004f9b_e47e1897",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
