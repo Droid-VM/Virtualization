@@ -256,13 +256,7 @@ fn run_vm(config: CrosvmConfig) -> Result<SharedChild, Error> {
     validate_config(&config)?;
 
     let mut command = Command::new(CROSVM_PATH);
-    // TODO(qwandor): Remove --disable-sandbox.
-    command
-        .arg("--extended-status")
-        .arg("run")
-        .arg("--disable-sandbox")
-        .arg("--cid")
-        .arg(config.cid.to_string());
+    command.arg("--extended-status").arg("run").arg("--cid").arg(config.cid.to_string());
 
     if config.protected {
         command.arg("--protected-vm");
