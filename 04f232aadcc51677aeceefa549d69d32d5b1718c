@@ -252,6 +252,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7cb5e861_9b0bc180",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-25T15:31:41Z",
+      "side": 1,
+      "message": "I have considered u-boot, kernel, and userspace programs in system \u0026 vendor images a combined entity. Changing the bootconfig can alter the behavior of software running after u-boot of course, but \n\n(1) u-boot doesn\u0027t accept arbitrary bootconfig; u-boot mandates that it is signed by the trusted entity and \n(2) existing three (normal, app_debug, and full_debug) pre-signed bootconfigs don\u0027t affect behavior in a way that microdroid_manager produces the same DICE input for different app payloads.",
+      "parentUuid": "c8b461b7_0c93f9f4",
+      "range": {
+        "startLine": 213,
+        "startChar": 78,
+        "endLine": 213,
+        "endChar": 110
+      },
+      "revId": "04f232aadcc51677aeceefa549d69d32d5b1718c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce004f9b_e47e1897",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
