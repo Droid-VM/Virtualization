@@ -22,6 +22,30 @@
       },
       "revId": "d650235cf4b2eaeb0373043d5f020f12f8a73de0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff3e7712_557eb3e7",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-26T17:01:56Z",
+      "side": 1,
+      "message": "We don\u0027t because that\u0027s set while parsing /apex/apex-info-list.xml into apex_info_list at line 122. The xml file already has the correct info.",
+      "parentUuid": "164cc679_d33b1b6c",
+      "range": {
+        "startLine": 143,
+        "startChar": 24,
+        "endLine": 143,
+        "endChar": 77
+      },
+      "revId": "d650235cf4b2eaeb0373043d5f020f12f8a73de0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
