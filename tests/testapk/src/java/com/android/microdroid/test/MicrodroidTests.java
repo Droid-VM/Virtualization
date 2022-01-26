@@ -36,6 +36,7 @@ import android.system.virtualmachine.VirtualMachineConfig;
 import android.system.virtualmachine.VirtualMachineConfig.DebugLevel;
 import android.system.virtualmachine.VirtualMachineException;
 import android.system.virtualmachine.VirtualMachineManager;
+import android.util.Log;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -49,8 +50,11 @@ import org.junit.rules.Timeout;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -59,6 +63,7 @@ import java.util.concurrent.TimeUnit;
 
 @RunWith(JUnit4.class)
 public class MicrodroidTests {
+    private static final String TAG = "MicrodroidTests";
     @Rule public Timeout globalTimeout = Timeout.seconds(300);
 
     private static class Inner {
@@ -160,6 +165,7 @@ public class MicrodroidTests {
                 new VmEventListener() {
                     private boolean mPayloadReadyCalled = false;
                     private boolean mPayloadStartedCalled = false;
+                    private ExecutorService mExecutorService = Executors.newFixedThreadPool(1);
 
                     private void testVMService(Future<IBinder> service) {
                         try {
@@ -201,6 +207,28 @@ public class MicrodroidTests {
                     @Override
                     public void onPayloadStarted(VirtualMachine vm, ParcelFileDescriptor stream) {
                         mPayloadStartedCalled = true;
+                        BufferedReader reader =
+                                new BufferedReader(
+                                        new InputStreamReader(
+                                                new FileInputStream(stream.getFileDescriptor())));
+                        mExecutorService.execute(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            String line;
+                                            while ((line = reader.readLine()) != null
+                                                    && !Thread.interrupted()) {
+                                                Log.d(TAG, "Payload: " + line);
+                                            }
+                                        } catch (IOException e) {
+                                            Log.d(
+                                                    TAG,
+                                                    "Exception while reading payload output: "
+                                                            + e.getMessage());
+                                        }
+                                    }
+                                });
                     }
 
                     @Override
