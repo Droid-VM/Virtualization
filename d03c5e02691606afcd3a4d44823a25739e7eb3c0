@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d118d299_9092f28e",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-26T12:27:16Z",
+      "side": 1,
+      "message": "change this to shutdownNow() so that the thread reading the stream is interrupted.",
+      "range": {
+        "startLine": 120,
+        "startChar": 33,
+        "endLine": 120,
+        "endChar": 41
+      },
+      "revId": "d03c5e02691606afcd3a4d44823a25739e7eb3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c723f5f5_54e74f75",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-26T12:27:16Z",
+      "side": 1,
+      "message": "Consider moving this to the abstract class at #107 and call super.onPayloadStared here.",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 35
+      },
+      "revId": "d03c5e02691606afcd3a4d44823a25739e7eb3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
