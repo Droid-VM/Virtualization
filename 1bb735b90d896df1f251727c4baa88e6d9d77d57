@@ -135,6 +135,30 @@
       },
       "revId": "1bb735b90d896df1f251727c4baa88e6d9d77d57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77f1cabb_097949fb",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-01-26T16:11:28Z",
+      "side": 1,
+      "message": "ro.debuggable is set after microdroid_manager and doesn\u0027t even when microdroid_manager runs. ro.boot.microdroid.debuggable covers the info we need.",
+      "parentUuid": "023d5b93_7982f859",
+      "range": {
+        "startLine": 191,
+        "startChar": 43,
+        "endLine": 191,
+        "endChar": 58
+      },
+      "revId": "1bb735b90d896df1f251727c4baa88e6d9d77d57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
