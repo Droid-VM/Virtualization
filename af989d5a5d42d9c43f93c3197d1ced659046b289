@@ -46,6 +46,30 @@
       },
       "revId": "af989d5a5d42d9c43f93c3197d1ced659046b289",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b47bd0_f7375cf9",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-26T16:15:31Z",
+      "side": 1,
+      "message": "The other option would be to make it part of compos_client so it applies to every CompOS VM start (not that key verification particularly needs it). \nOr indeed make the VS default; is there a downside to using all the CPUs not just 1?",
+      "parentUuid": "29a4e41d_c9b21842",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 10
+      },
+      "revId": "af989d5a5d42d9c43f93c3197d1ced659046b289",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
