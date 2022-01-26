@@ -111,6 +111,30 @@
       },
       "revId": "1bb735b90d896df1f251727c4baa88e6d9d77d57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "023d5b93_7982f859",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-26T05:29:22Z",
+      "side": 1,
+      "message": "It follows the value of ro.boot.microdroid.debuggable, which actually is androidboot.microdroid.debuggable in bootconfig. So yes, we should check it here.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/microdroid/init.rc;drc\u003df819594d14896602d93e58ed4b4b7bb7b7bd9b69;l\u003d84",
+      "parentUuid": "631b85b6_49318c76",
+      "range": {
+        "startLine": 191,
+        "startChar": 43,
+        "endLine": 191,
+        "endChar": 58
+      },
+      "revId": "1bb735b90d896df1f251727c4baa88e6d9d77d57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
