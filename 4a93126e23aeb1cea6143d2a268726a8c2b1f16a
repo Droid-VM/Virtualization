@@ -3,6 +3,29 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0a0af38d_93762452",
+        "filename": "compos/tests/java/android/compos/test/ComposKeyTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-26T16:21:06Z",
+      "side": 1,
+      "message": "Is this the preferred style? I personally prefer saving 2 lines per variables to have better view in terminal. But not a big deal.",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 6
+      },
+      "revId": "4a93126e23aeb1cea6143d2a268726a8c2b1f16a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4cc23442_156b11e9",
         "filename": "tests/hostside/helper/java/android/virt/test/VirtualizationTestCaseBase.java",
         "patchSetId": 1
@@ -14,6 +37,30 @@
       "writtenOn": "2022-01-26T15:16:15Z",
       "side": 1,
       "message": "\"If you have a procedure with 10 parameters, you probably missed some.\"\n\nWe should really refactor this some time.",
+      "range": {
+        "startLine": 212,
+        "startChar": 25,
+        "endLine": 212,
+        "endChar": 40
+      },
+      "revId": "4a93126e23aeb1cea6143d2a268726a8c2b1f16a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2975f16_d40e05c6",
+        "filename": "tests/hostside/helper/java/android/virt/test/VirtualizationTestCaseBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-26T16:21:06Z",
+      "side": 1,
+      "message": "Tradefed has just added an API to start/stop microdroid, and interact with it as ITestDevice.  I\u0027m asking if they can create a Builder instead.  Then we can switch to the more \"official\" API.\n\nSee b/182478337 and go/microdroid-support-one-pager",
+      "parentUuid": "4cc23442_156b11e9",
       "range": {
         "startLine": 212,
         "startChar": 25,
