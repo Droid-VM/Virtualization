@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9c95621a_b1feb353",
+        "filename": "compos/tests/java/android/compos/test/ComposKeyTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-26T16:27:12Z",
+      "side": 1,
+      "message": "The style guide allows both: https://source.android.com/setup/contribute/code-style#use-javadoc-standard-comments\n\nBut this is what my IDE did when set to us \"AndroidStyle\", and I didn\u0027t want to fight it. I reformatted the whole file slightly accidentally, to be fair.\n\nOf course given the variables are private we could just use //",
+      "parentUuid": "0a0af38d_93762452",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 6
+      },
+      "revId": "4a93126e23aeb1cea6143d2a268726a8c2b1f16a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4cc23442_156b11e9",
         "filename": "tests/hostside/helper/java/android/virt/test/VirtualizationTestCaseBase.java",
         "patchSetId": 1
