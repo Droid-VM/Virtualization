@@ -50,7 +50,6 @@ use anyhow::{anyhow, bail, Context, Result};
 use binder_common::{lazy_service::LazyServiceGuard, new_binder_exception};
 use disk::QcowFile;
 use idsig::{HashAlgorithm, V4Signature};
-use kvm::{Kvm, Cap};
 use log::{debug, error, info, warn};
 use microdroid_payload_config::VmPayloadConfig;
 use rustutils::system_properties;
@@ -248,22 +247,14 @@ impl IVirtualizationService for VirtualizationService {
             })
             .collect::<Result<Vec<DiskFile>, _>>()?;
 
-        let protected_vm_supported = Kvm::new()
-            .map_err(|e| new_binder_exception(ExceptionCode::SERVICE_SPECIFIC, e.to_string()))?
-            .check_extension(Cap::ArmProtectedVm);
-        let protected = config.protectedVm && protected_vm_supported;
-        if config.protectedVm && !protected_vm_supported {
-            warn!("Protected VM was requested, but it isn't supported on this machine. Ignored.");
-        }
-
-        // And force run in non-protected mode when debug level is FULL
+        // Force running in non-protected mode when debug level is FULL.
         let protected = if is_debug_level_full {
-            if protected {
+            if config.protectedVm {
                 warn!("VM will run in FULL debug level. Running in non-protected mode");
             }
             false
         } else {
-            protected
+            config.protectedVm
         };
 
         // Actually start the VM.
