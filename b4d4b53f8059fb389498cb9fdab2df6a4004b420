@@ -22,6 +22,30 @@
       },
       "revId": "b4d4b53f8059fb389498cb9fdab2df6a4004b420",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67c70e05_83cf7f69",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-28T00:24:18Z",
+      "side": 1,
+      "message": "yes, I think that\u0027s better.\n\nPlus, it would be great if an exception is thrown (on the client side) when VirtualMachineConfig object is built with such conflicting values.",
+      "parentUuid": "2da9cd6c_7df0216a",
+      "range": {
+        "startLine": 253,
+        "startChar": 16,
+        "endLine": 253,
+        "endChar": 88
+      },
+      "revId": "b4d4b53f8059fb389498cb9fdab2df6a4004b420",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

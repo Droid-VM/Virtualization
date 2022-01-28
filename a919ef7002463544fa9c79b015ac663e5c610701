@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cf53101_8853ec72",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-28T00:24:18Z",
+      "side": 0,
+      "message": "Please don\u0027t forget to remove the allow rule that was added for this.\n\nhttps://cs.android.com/android/platform/superproject/+/master:system/sepolicy/private/virtualizationservice.te;drc\u003d8a881c14bfffa4f7ffc02bd4552b8ea4f7b2d2b8;l\u003d64",
+      "range": {
+        "startLine": 253,
+        "startChar": 12,
+        "endLine": 253,
+        "endChar": 50
+      },
+      "revId": "a919ef7002463544fa9c79b015ac663e5c610701",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
