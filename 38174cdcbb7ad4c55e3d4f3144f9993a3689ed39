@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "098f3cb3_d5c5ad71",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-28T18:25:41Z",
+      "side": 1,
+      "message": "optional: you can now define the enum within this file.  Jooyung added that a few months ago.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 6
+      },
+      "revId": "38174cdcbb7ad4c55e3d4f3144f9993a3689ed39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39c7b81f_090c41b9",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-28T18:25:41Z",
+      "side": 1,
+      "message": "I\u0027m worried about potential security issue if we allow --force-compile, which is only expected for testing purpose.\n\nIf we must pass the extra parameter (and to be fair I don\u0027t know if we can), can we reject on user build?  ComposHostTestCases requires root, so it\u0027s fine there.  odsign_e2e_test can work without root.",
+      "range": {
+        "startLine": 51,
+        "startChar": 19,
+        "endLine": 51,
+        "endChar": 52
+      },
+      "revId": "38174cdcbb7ad4c55e3d4f3144f9993a3689ed39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e308725_c1fd81e9",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-28T18:25:41Z",
+      "side": 1,
+      "message": "I think Jiakai wants to avoid using this flag in real code.  This is real code, but we\u0027re not using it for real.  So I hope it\u0027s fine.",
+      "range": {
+        "startLine": 152,
+        "startChar": 45,
+        "endLine": 152,
+        "endChar": 60
+      },
+      "revId": "38174cdcbb7ad4c55e3d4f3144f9993a3689ed39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2179a73b_e3dec33a",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-28T18:25:41Z",
+      "side": 1,
+      "message": "nit: This should still be able to be bail!, if you\u0027re just removing {}. But not a big deal.",
+      "range": {
+        "startLine": 163,
+        "startChar": 18,
+        "endLine": 163,
+        "endChar": 28
+      },
+      "revId": "38174cdcbb7ad4c55e3d4f3144f9993a3689ed39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
