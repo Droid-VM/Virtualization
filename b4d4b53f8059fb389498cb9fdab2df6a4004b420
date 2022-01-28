@@ -94,6 +94,30 @@
       },
       "revId": "b4d4b53f8059fb389498cb9fdab2df6a4004b420",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9c8fa68_43d29e09",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-28T15:24:36Z",
+      "side": 1,
+      "message": "Yeah, I think we want the client API too. But then having the bit also in \u003cvm\u003e.json looks odd. Will we be able to remove the bit from there and move it to VirtualMachineAppConfig?",
+      "parentUuid": "b7ab973b_f5d33451",
+      "range": {
+        "startLine": 253,
+        "startChar": 16,
+        "endLine": 253,
+        "endChar": 88
+      },
+      "revId": "b4d4b53f8059fb389498cb9fdab2df6a4004b420",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
