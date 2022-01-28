@@ -17,6 +17,7 @@
 package com.android.compos;
 
 import com.android.compos.CompOsKeyData;
+import com.android.compos.CompilationMode;
 
 /** {@hide} */
 interface ICompOsService {
@@ -37,6 +38,7 @@ interface ICompOsService {
      * through systemDirFd over AuthFS), and *CLASSPATH derived in the VM, to generate the same
      * odrefresh output artifacts to the output directory (through outputDirFd).
      *
+     * @param compilationMode The type of compilation to be performed
      * @param systemDirFd An fd referring to /system
      * @param outputDirFd An fd referring to the output directory, ART_APEX_DATA
      * @param stagingDirFd An fd referring to the staging directory, e.g. ART_APEX_DATA/staging
@@ -46,8 +48,9 @@ interface ICompOsService {
      * @param systemServerCompilerFilter The compiler filter used to compile system server
      * @return odrefresh exit code
      */
-    byte odrefresh(int systemDirFd, int outputDirFd, int stagingDirFd, String targetDirName,
-            String zygoteArch, String systemServerCompilerFilter);
+    byte odrefresh(CompilationMode compilation_mode, int systemDirFd, int outputDirFd,
+            int stagingDirFd, String targetDirName, String zygoteArch,
+            String systemServerCompilerFilter);
 
     /**
      * Generate a new public/private key pair suitable for signing CompOs output files.

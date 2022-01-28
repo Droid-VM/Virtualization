@@ -35,11 +35,13 @@ use authfs_aidl_interface::aidl::com::android::virt::fs::{
     IAuthFsService::IAuthFsService,
 };
 use authfs_aidl_interface::binder::Strong;
+use compos_aidl_interface::aidl::com::android::compos::CompilationMode::CompilationMode;
 use compos_common::odrefresh::ExitCode;
 
 const FD_SERVER_PORT: i32 = 3264; // TODO: support dynamic port
 
 pub struct OdrefreshContext<'a> {
+    compilation_mode: CompilationMode,
     system_dir_fd: i32,
     output_dir_fd: i32,
     staging_dir_fd: i32,
@@ -50,6 +52,7 @@ pub struct OdrefreshContext<'a> {
 
 impl<'a> OdrefreshContext<'a> {
     pub fn new(
+        compilation_mode: CompilationMode,
         system_dir_fd: i32,
         output_dir_fd: i32,
         staging_dir_fd: i32,
@@ -75,6 +78,7 @@ impl<'a> OdrefreshContext<'a> {
         // CompOS.
 
         Ok(Self {
+            compilation_mode,
             system_dir_fd,
             output_dir_fd,
             staging_dir_fd,
@@ -143,17 +147,20 @@ pub fn odrefresh(
         ));
     }
 
-    args.push("--compile".to_string());
+    let compile_flag = match context.compilation_mode {
+        CompilationMode::NORMAL_COMPILE => Ok("--compile"),
+        CompilationMode::TEST_COMPILE => Ok("--force-compile"),
+        other => Err(anyhow!("Unknown compilation mode {:?}", other)),
+    }?;
+    args.push(compile_flag.to_string());
 
     debug!("Running odrefresh with args: {:?}", &args);
     let jail = spawn_jailed_task(odrefresh_path, &args, &odrefresh_vars.into_env())
         .context("Spawn odrefresh")?;
     let exit_code = match jail.wait() {
-        Ok(_) => Result::<u8>::Ok(0),
+        Ok(_) => Ok(0),
         Err(minijail::Error::ReturnCode(exit_code)) => Ok(exit_code),
-        Err(e) => {
-            bail!("Unexpected minijail error: {}", e)
-        }
+        Err(e) => Err(anyhow!("Unexpected minijail error: {}", e)),
     }?;
 
     let exit_code = ExitCode::from_i32(exit_code.into())?;
