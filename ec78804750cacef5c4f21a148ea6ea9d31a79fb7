@@ -16,6 +16,24 @@
       "message": "Looks fine code-wise, adding Alan to confirm CompOS doesn\u0027t need inactive APEXes.",
       "revId": "ec78804750cacef5c4f21a148ea6ea9d31a79fb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c652918_220087a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-01-28T14:51:06Z",
+      "side": 1,
+      "message": "Thanks.\nAlan, a bit of context.\nI found this when looking into the bug (b/216618545: odrefresh failing to find libartpalette.so - linkerconfig).\n- When an apex gets updated, there are active and inactive ones in apex-info-list.xml. \"inactive\" one is typically the preinstalled one and \"active\" one is actually in use. We want to use \"active\" one in VM.\n- And there\u0027s \"sharedlibs\" apexes. These are to reduce the total size of apexes by putting \"common shared libs\" in these apexes and other apexes have symlinks to them. For example, adbd uses libc++/libbase from sharedlibs apexes. So we need to pass \"sharedlibs\" apexes to VM, otherwise native modules (e.g. adbd) wouldn\u0027t work.\n- However, for \"sharedlibs\" apexes, both \"inactive\" and \"active\" ones are in use. We can\u0027t be sure which one is used by which apexes. So, we need to pass all \"sharedlibs\" apexes to VM.",
+      "parentUuid": "450d2cb4_02747557",
+      "revId": "ec78804750cacef5c4f21a148ea6ea9d31a79fb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
