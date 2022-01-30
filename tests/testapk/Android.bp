@@ -22,6 +22,7 @@ cc_library_shared {
     name: "MicrodroidTestNativeLib",
     srcs: ["src/native/testbinary.cpp"],
     shared_libs: [
+        "android.security.dice-ndk",
         "android.system.virtualmachineservice-ndk",
         "com.android.microdroid.testservice-ndk",
         "libbase",
