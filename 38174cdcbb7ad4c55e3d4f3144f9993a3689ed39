@@ -144,6 +144,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e06e9a8b_2e4cc0ec",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-31T16:21:36Z",
+      "side": 1,
+      "message": "Installing fake APEX sounds a nice-to-have.  Anyway, I\u0027m not too worried about this, since it\u0027s really test only.",
+      "parentUuid": "f901dbb8_ceb9e89e",
+      "range": {
+        "startLine": 152,
+        "startChar": 45,
+        "endLine": 152,
+        "endChar": 60
+      },
+      "revId": "38174cdcbb7ad4c55e3d4f3144f9993a3689ed39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2179a73b_e3dec33a",
         "filename": "compos/src/compilation.rs",
         "patchSetId": 1
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "This is what fixed the type deduction problem - bail! does a return so has type !, which doesn\u0027t allow the error type of the Result to be deduced.\nBut actually it can be much simpler, avoid Result entirely, \u0026 use bail; fixed.",
       "parentUuid": "2179a73b_e3dec33a",
+      "range": {
+        "startLine": 163,
+        "startChar": 18,
+        "endLine": 163,
+        "endChar": 28
+      },
+      "revId": "38174cdcbb7ad4c55e3d4f3144f9993a3689ed39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c43c838f_aee53694",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-01-31T16:21:36Z",
+      "side": 1,
+      "message": "Interesting, I\u0027d never though it has something to do with the type inference :)",
+      "parentUuid": "5f082ce0_f9c339ac",
       "range": {
         "startLine": 163,
         "startChar": 18,
