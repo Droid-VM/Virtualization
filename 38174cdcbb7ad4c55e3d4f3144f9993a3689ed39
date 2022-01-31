@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "defce1d0_3f361810",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-31T11:24:31Z",
+      "side": 1,
+      "message": "Cool - done.",
+      "parentUuid": "098f3cb3_d5c5ad71",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 6
+      },
+      "revId": "38174cdcbb7ad4c55e3d4f3144f9993a3689ed39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39c7b81f_090c41b9",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-01-28T18:25:41Z",
       "side": 1,
       "message": "I\u0027m worried about potential security issue if we allow --force-compile, which is only expected for testing purpose.\n\nIf we must pass the extra parameter (and to be fair I don\u0027t know if we can), can we reject on user build?  ComposHostTestCases requires root, so it\u0027s fine there.  odsign_e2e_test can work without root.",
+      "range": {
+        "startLine": 51,
+        "startChar": 19,
+        "endLine": 51,
+        "endChar": 52
+      },
+      "revId": "38174cdcbb7ad4c55e3d4f3144f9993a3689ed39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "724882c9_ce2badff",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-31T11:24:31Z",
+      "side": 1,
+      "message": "I\u0027ve made it only work in a debuggable VM (due to nervousness about wanting to test on user builds, and not being entirely sure how to detect one reliably inside the VM anyway). I think that\u0027s ok - the outputs of a debuggable VM will never be trusted by odsign.",
+      "parentUuid": "39c7b81f_090c41b9",
       "range": {
         "startLine": 51,
         "startChar": 19,
@@ -72,6 +120,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f901dbb8_ceb9e89e",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-31T11:24:31Z",
+      "side": 1,
+      "message": "Well, it has to match what we do outside the VM in ComposTestCase.\nWe should consider modifying both of them. (But I\u0027d rather get this in first, since it blocks the odrefresh fix.)\nPerhaps we should just install the fake ART APEX that the e2e tests use and do a normal --compile?",
+      "parentUuid": "1e308725_c1fd81e9",
+      "range": {
+        "startLine": 152,
+        "startChar": 45,
+        "endLine": 152,
+        "endChar": 60
+      },
+      "revId": "38174cdcbb7ad4c55e3d4f3144f9993a3689ed39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2179a73b_e3dec33a",
         "filename": "compos/src/compilation.rs",
         "patchSetId": 1
@@ -83,6 +155,30 @@
       "writtenOn": "2022-01-28T18:25:41Z",
       "side": 1,
       "message": "nit: This should still be able to be bail!, if you\u0027re just removing {}. But not a big deal.",
+      "range": {
+        "startLine": 163,
+        "startChar": 18,
+        "endLine": 163,
+        "endChar": 28
+      },
+      "revId": "38174cdcbb7ad4c55e3d4f3144f9993a3689ed39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f082ce0_f9c339ac",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-31T11:24:31Z",
+      "side": 1,
+      "message": "This is what fixed the type deduction problem - bail! does a return so has type !, which doesn\u0027t allow the error type of the Result to be deduced.\nBut actually it can be much simpler, avoid Result entirely, \u0026 use bail; fixed.",
+      "parentUuid": "2179a73b_e3dec33a",
       "range": {
         "startLine": 163,
         "startChar": 18,
