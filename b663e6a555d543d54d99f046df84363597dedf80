@@ -16,6 +16,24 @@
       "message": "This should have imported the prebuilt, not just added the ascipb. aosp/1967019 should do a better job but let\u0027s fix the build first.",
       "revId": "b663e6a555d543d54d99f046df84363597dedf80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7868c393_6362bfbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042793
+      },
+      "writtenOn": "2022-01-31T23:49:29Z",
+      "side": 1,
+      "message": "Thanks.\n\nAnother potential follow up would be revisiting our presubmit targets.  Seems that broken targets weren\u0027t covered in the current presubmit configuration, which might be why we could not have caught this before CLs got merged.",
+      "parentUuid": "0cf1fa4e_89aaca91",
+      "revId": "b663e6a555d543d54d99f046df84363597dedf80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
