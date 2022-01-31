@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26215628_dd670045",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-31T12:18:46Z",
+      "side": 1,
+      "message": "Yeah.\nWe need it to be at least a little different - I want to have a debuggable VM, and we want to not use staged APEXes.\nWe\u0027re comparing compilation inside \u0026 outside the VM, so we need them to do the same thing. force-compile is one way, but it\u0027s a bit deprecated.\nWe may be able to do better by staging a bogus ART APEX.",
+      "parentUuid": "ffa84332_d291ca2f",
+      "revId": "2d2e4dba53eb425c7f4914234b19aced6f21e057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cf1a2fa_e3bdb8ca",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-01-31T12:09:28Z",
       "side": 1,
       "message": "Nit: Not really part of this change so no need to fix it now, but why do you convert to an i32 and back?",
+      "range": {
+        "startLine": 174,
+        "startChar": 30,
+        "endLine": 174,
+        "endChar": 38
+      },
+      "revId": "2d2e4dba53eb425c7f4914234b19aced6f21e057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3bddd9b_13f6ce0b",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-01-31T12:18:46Z",
+      "side": 1,
+      "message": "We don\u0027t quite; we convert u8 -\u003e i32 (for no particularly good reason admittedly), and then to the ExitCode enum because that makes the subsequent code easier.\nSee compos/common/odrefresh.rs",
+      "parentUuid": "2cf1a2fa_e3bdb8ca",
       "range": {
         "startLine": 174,
         "startChar": 30,
