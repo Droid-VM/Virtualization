@@ -16,6 +16,46 @@
       "message": "PTAL",
       "revId": "2d2e4dba53eb425c7f4914234b19aced6f21e057",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffa84332_d291ca2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-01-31T12:09:28Z",
+      "side": 1,
+      "message": "This seems like a lot of test-specific code in a production service. Is there no way you can have the test run the same flow as you use in production?\n\nOther than that, looks fine.",
+      "revId": "2d2e4dba53eb425c7f4914234b19aced6f21e057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cf1a2fa_e3bdb8ca",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-01-31T12:09:28Z",
+      "side": 1,
+      "message": "Nit: Not really part of this change so no need to fix it now, but why do you convert to an i32 and back?",
+      "range": {
+        "startLine": 174,
+        "startChar": 30,
+        "endLine": 174,
+        "endChar": 38
+      },
+      "revId": "2d2e4dba53eb425c7f4914234b19aced6f21e057",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
