@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e34a3a2_59a9d389",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-02-01T16:59:19Z",
+      "side": 1,
+      "message": "yay, yay, and yay!",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 46
+      },
+      "revId": "8a61f53fdf540264f6e637216d7c834e312fbf69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e8d893f_c2708e09",
+        "filename": "compos/src/signing_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-02-01T16:59:19Z",
+      "side": 1,
+      "message": "Just curious why these are needed",
+      "range": {
+        "startLine": 38,
+        "startChar": 23,
+        "endLine": 38,
+        "endChar": 34
+      },
+      "revId": "8a61f53fdf540264f6e637216d7c834e312fbf69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73d3308c_fe5bd4e5",
+        "filename": "compos/src/signing_key.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-02-01T16:59:19Z",
+      "side": 1,
+      "message": "nit: This seems to be test only. I wonder if any of these could help limiting the visibility: https://doc.rust-lang.org/reference/visibility-and-privacy.html#pubin-path-pubcrate-pubsuper-and-pubself",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 3
+      },
+      "revId": "8a61f53fdf540264f6e637216d7c834e312fbf69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
