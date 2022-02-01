@@ -66,6 +66,7 @@ apex {
         "microdroid_bootconfig_normal",
         "microdroid_bootconfig_app_debuggable",
         "microdroid_bootconfig_full_debuggable",
+        "sandbox_dir",
     ],
     file_contexts: ":com.android.virt-file_contexts",
     canned_fs_config: "canned_fs_config",
@@ -87,6 +88,13 @@ prebuilt_etc {
     src: "virtualizationservice.rc",
     filename: "init.rc",
     installable: false,
+}
+
+// An empty directory for the crosvm sandbox.
+genrule {
+    name: "sandbox_dir",
+    out: ["sandbox_dir/empty"],
+    cmd: "mkdir -p $(genDir)/sandbox_dir; touch $(out)",
 }
 
 // Virt apex needs a custom signer for its payload
