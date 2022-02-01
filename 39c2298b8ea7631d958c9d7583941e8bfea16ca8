@@ -22,6 +22,30 @@
       },
       "revId": "39c2298b8ea7631d958c9d7583941e8bfea16ca8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a42eeef_02e5bcd9",
+        "filename": ".prebuilt_info/prebuilt_info_pvmfw_pvmfw_img.asciipb",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-02-01T13:50:15Z",
+      "side": 1,
+      "message": "They seem to be project specific and there are other projects leaving them empty (e.g. cs/master-arc-dev/device/google/trout-kernel/.prebuilt_info/prebuilt_info_5_4-arm64_Image.asciipb?l\u003d8). As we currently don\u0027t have a proper versioning scheme for pvmfw (we should, but I definitely don\u0027t want to tie it to the U-Boot version), we\u0027ll leave it empty for now.",
+      "parentUuid": "cfa64648_eb101d63",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 19
+      },
+      "revId": "39c2298b8ea7631d958c9d7583941e8bfea16ca8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
