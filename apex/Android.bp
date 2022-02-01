@@ -59,6 +59,7 @@ apex {
     ],
     prebuilts: [
         "com.android.virt.init.rc",
+        "com.android.virt_sandbox_dir",
         "microdroid.json",
         "microdroid_uboot_env",
         "microdroid_bootloader",
@@ -86,6 +87,15 @@ prebuilt_etc {
     name: "com.android.virt.init.rc",
     src: "virtualizationservice.rc",
     filename: "init.rc",
+    installable: false,
+}
+
+// An empty directory for the crosvm sandbox.
+prebuilt_etc {
+    name: "com.android.virt_sandbox_dir",
+    src: "empty_file",
+    relative_install_path: "sandbox_dir",
+    filename: "empty_file",
     installable: false,
 }
 

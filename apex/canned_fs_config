@@ -1,1 +1,3 @@
 /bin/crosvm 0 2000 0755 capabilities=0x4000
+/etc/sandbox_dir 1000 1000 0555
+/etc/sandbox_dir/empty_file 1000 1000 0444
