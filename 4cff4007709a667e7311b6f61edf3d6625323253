@@ -52,6 +52,24 @@
       "parentUuid": "ff8be11f_fe3d8f40",
       "revId": "4cff4007709a667e7311b6f61edf3d6625323253",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af16ce97_5331790c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-02T17:17:31Z",
+      "side": 1,
+      "message": "bool GetBoolProperty(const std::string\u0026 key, bool default_value); from \u003candroid-base/properties.h\u003e can be used to read properties. The thing you found sounds like it give you a more robust interface, but is also blocking at the moment.",
+      "parentUuid": "91e1bc38_226d50b9",
+      "revId": "4cff4007709a667e7311b6f61edf3d6625323253",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
