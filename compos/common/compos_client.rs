@@ -87,7 +87,7 @@ impl VmInstance {
         idsig_manifest_apk: &Path,
         parameters: &VmParameters,
     ) -> Result<VmInstance> {
-        let protected_vm = want_protected_vm(parameters.debug_mode)?;
+        let protected_vm = want_protected_vm(false)?;
 
         let instance_fd = ParcelFileDescriptor::new(instance_image);
 
