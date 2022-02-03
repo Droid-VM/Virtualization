@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d32a6933_41a11b0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-03T05:36:15Z",
+      "side": 1,
+      "message": "Sorry for leaving comments after the merge; was OOO. ",
+      "revId": "3994f0059f9916920c6efddec0bf90bff33dc04f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2028bb0_b97f94b3",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-03T05:36:15Z",
+      "side": 1,
+      "message": "changing the protected-bit would make the config incompatible",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 9
+      },
+      "revId": "3994f0059f9916920c6efddec0bf90bff33dc04f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eae51115_df79c816",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-03T05:36:15Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we trigger an error when the underlying hypervisor doesn\u0027t support protected VM but the config requests it?",
+      "revId": "3994f0059f9916920c6efddec0bf90bff33dc04f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
