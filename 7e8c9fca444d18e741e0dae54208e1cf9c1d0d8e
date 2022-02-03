@@ -63,6 +63,30 @@
       },
       "revId": "7e8c9fca444d18e741e0dae54208e1cf9c1d0d8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc73a7c7_a233b792",
+        "filename": "compos/composd/src/composd_main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-03T09:02:48Z",
+      "side": 1,
+      "message": "That\u0027s right. My testing produced this, which seems fairly complete:\n02-02 18:14:25.565  3244  3244 E composd : composd_main: panicked at \u0027attempt to add with overflow\u0027, packages/modules/Virtualization/compos/composd/src/composd_main.rs:50:9",
+      "parentUuid": "ec34f9fa_9f354c39",
+      "range": {
+        "startLine": 44,
+        "startChar": 21,
+        "endLine": 44,
+        "endChar": 23
+      },
+      "revId": "7e8c9fca444d18e741e0dae54208e1cf9c1d0d8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
