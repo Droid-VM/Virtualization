@@ -39,6 +39,30 @@
       },
       "revId": "c5292e5f713925c25204ba97e3577d79f5504ade",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9436e88d_3df0ae7f",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-04T09:15:02Z",
+      "side": 1,
+      "message": "Yes, they can. We\u0027re reading this property here because we need it in two of the conditional arms below, although in the happy case it doesn\u0027t come into play.\n\nThe logic here is:\n- If you want debug, then it has to be unprotected, regardless of build type, because VS doesn\u0027t allow protected + full debug. Don\u0027t ask for debug if you want protected.\n- Otherwise, if protected is available, then we use it.\n- Otherwise, we will fall back to unprotected but only on a debug build. I\u0027d rather not have that, but otherwise we can\u0027t test anything on CF.\n\nThis is my second attempt at the logic, but if you can see a way to make it clearer I\u0027m all for it.",
+      "parentUuid": "c6a24a8b_67c17d8e",
+      "range": {
+        "startLine": 201,
+        "startChar": 38,
+        "endLine": 201,
+        "endChar": 69
+      },
+      "revId": "c5292e5f713925c25204ba97e3577d79f5504ade",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
