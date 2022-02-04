@@ -22,6 +22,30 @@
       },
       "revId": "58c994607c531b5e31cf7d46278139a5d7fbea69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a2400ae_29beb6d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-04T14:59:58Z",
+      "side": 1,
+      "message": "\u003e I\u0027m not sure this is better than logging to logd. Microdroid has other services that log to logd, so it\u0027ll be harder to cross referencing the logs.\n\nYeah, actually that\u0027s fair. Switched to logcat always.\nIt was useful having the VM output immediately available initially, but these days I always go to the VM logs to diagnose problems.\n\n\u003e \n\u003e BTW, we probably need to include both (composd\u0027s vm.log and vm_console.log) when we implement dumpsys or some equivalent.\n\u003e \n\u003e This flag might still be useful when we attempt to do that.\n\nI\u0027m not convinced, but I guess we\u0027ll see when we get there.",
+      "parentUuid": "8df6ee73_00a0e188",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 20
+      },
+      "revId": "58c994607c531b5e31cf7d46278139a5d7fbea69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
