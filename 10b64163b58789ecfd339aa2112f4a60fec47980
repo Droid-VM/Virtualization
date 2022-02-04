@@ -33,6 +33,23 @@
       "message": "Needs aosp/1971722 and new prebuilts",
       "revId": "10b64163b58789ecfd339aa2112f4a60fec47980",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dca7d14b_255a7317",
+        "filename": "microdroid/uboot-env.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-04T05:39:01Z",
+      "side": 1,
+      "message": "See my comment at aosp/1972379\n\nDo we want to reset cbootargs to \"\" so that host (Android) can\u0027t inject arbitrary bootargs?",
+      "revId": "10b64163b58789ecfd339aa2112f4a60fec47980",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
