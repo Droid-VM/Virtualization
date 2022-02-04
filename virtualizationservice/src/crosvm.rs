@@ -265,7 +265,7 @@ fn run_vm(config: CrosvmConfig) -> Result<SharedChild, Error> {
         .arg(config.cid.to_string());
 
     if config.protected {
-        command.arg("--protected-vm");
+        command.arg("--protected-vm-without-firmware");
     }
 
     if let Some(memory_mib) = config.memory_mib {
