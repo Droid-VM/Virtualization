@@ -39,6 +39,30 @@
       },
       "revId": "809b6be690cb75d7227e0c2a2f36d0753a64ddce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "446592e2_b1d0aa0d",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-04T12:35:06Z",
+      "side": 1,
+      "message": "It\u0027s set for test-compile, which is used in the overnight dogfood run, and for testing.\nWe request FULL_DEBUG or nothing. I suppose I could change it to run protected and request APP_ONLY, but I\u0027m not sure how useful that would be.",
+      "parentUuid": "f0bf0263_afcddae7",
+      "range": {
+        "startLine": 205,
+        "startChar": 7,
+        "endLine": 205,
+        "endChar": 17
+      },
+      "revId": "809b6be690cb75d7227e0c2a2f36d0753a64ddce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
