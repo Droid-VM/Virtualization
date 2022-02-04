@@ -13,5 +13,8 @@ java_test_host {
     static_libs: [
         "VirtualizationTestHelper",
     ],
-    test_suites: ["general-tests"],
+    test_suites: [
+        "cts",
+        "general-tests",
+    ],
 }

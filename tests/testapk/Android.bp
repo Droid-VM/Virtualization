@@ -4,7 +4,10 @@ package {
 
 android_test {
     name: "MicrodroidTestApp",
-    test_suites: ["general-tests"],
+    test_suites: [
+        "cts",
+        "general-tests",
+    ],
     srcs: ["src/java/**/*.java"],
     static_libs: [
         "androidx.test.runner",
