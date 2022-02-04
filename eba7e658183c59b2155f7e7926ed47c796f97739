@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1201f401_19bfe6b4",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-04T14:46:28Z",
+      "side": 1,
+      "message": "No; it\u0027s saying don\u0027t run CompOS in an unprotected VM on user builds.\nBut allow it on non-user builds.",
+      "parentUuid": "374dfb63_5b5d34a0",
+      "revId": "eba7e658183c59b2155f7e7926ed47c796f97739",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fc19179_d6533913",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-02-04T14:40:04Z",
       "side": 1,
       "message": "This will probably stop it running on P22 at the moment, I don\u0027t think the bootloader got updated there yet. Will ask for that to happen.",
+      "revId": "eba7e658183c59b2155f7e7926ed47c796f97739",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93899fd2_3d0b1561",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-04T14:46:28Z",
+      "side": 1,
+      "message": "Yeah, David found that out. setprop ftw.",
+      "parentUuid": "0fc19179_d6533913",
       "revId": "eba7e658183c59b2155f7e7926ed47c796f97739",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -88,6 +124,30 @@
       "writtenOn": "2022-02-04T14:40:04Z",
       "side": 1,
       "message": "You don\u0027t want to bail on IO errors so you find out about the problem?",
+      "range": {
+        "startLine": 105,
+        "startChar": 45,
+        "endLine": 105,
+        "endChar": 62
+      },
+      "revId": "eba7e658183c59b2155f7e7926ed47c796f97739",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfde2b72_c94164d6",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-04T14:46:28Z",
+      "side": 1,
+      "message": "Slightly oddly read_bool returns an error if the property doesn\u0027t exist.\nBut in general I\u0027m returning false if anything is even slightly odd because that leads to denial of the request; fail safe.\n(And we should never hit this during development/testing; this is purely to prevent a possible attack.)",
+      "parentUuid": "7c9195b7_0e82c98b",
       "range": {
         "startLine": 105,
         "startChar": 45,
