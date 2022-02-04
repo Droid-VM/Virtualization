@@ -23,13 +23,17 @@ kernel_modules_stem = "virt_device_prebuilts_kernel_modules-" + kernel_version
 
 cc_test {
     name: "VirtualizationTestCases",
-    test_suites: ["general-tests"],
+    test_suites: [
+        "cts",
+        "general-tests",
+    ],
     srcs: [
         "common.cc",
         "vsock_test.cc",
     ],
     local_include_dirs: ["include"],
-    compile_multilib: "64",
+    // We support 64-bit only, but CTS demands this.
+    compile_multilib: "both",
     data: [
         ":virt_test_kernel",
         ":virt_test_initramfs",
