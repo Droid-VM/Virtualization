@@ -22,6 +22,30 @@
       },
       "revId": "0b5789f81c34dce2db3aed8dda41e33f9abaedbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ed46e5a_82c866ae",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-02-07T17:22:09Z",
+      "side": 1,
+      "message": "Yeah, this is hopefully a fairly conservative approach. I\u0027ve copied your comments above to the bug to investigate further, let\u0027s submit this for now to at least reduce the allocation a bit. A typical microdroid VM has 3 virtio block devices I think, so this will result in a swiotlb of 14 MiB rather than 64 MiB.",
+      "parentUuid": "69dae396_4180006a",
+      "range": {
+        "startLine": 276,
+        "startChar": 8,
+        "endLine": 276,
+        "endChar": 47
+      },
+      "revId": "0b5789f81c34dce2db3aed8dda41e33f9abaedbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
