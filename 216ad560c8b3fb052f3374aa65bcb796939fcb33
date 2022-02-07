@@ -16,6 +16,24 @@
       "message": "Is there no typed wrapper for this property?",
       "revId": "216ad560c8b3fb052f3374aa65bcb796939fcb33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b43d61_8451fc11",
+        "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-07T14:49:21Z",
+      "side": 1,
+      "message": "There isn\u0027t one under android.sysprop, I checked.\nBut I did find this, which seems to be an API accessible to this code.",
+      "parentUuid": "d4d2aebc_e679aa09",
+      "revId": "216ad560c8b3fb052f3374aa65bcb796939fcb33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
