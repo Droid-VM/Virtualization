@@ -19,7 +19,7 @@ package {
 kernel_version = "5.10"
 
 kernel_stem = "kernel_prebuilts-" + kernel_version
-kernel_modules_stem = "virt_device_prebuilts_kernel_modules-" + kernel_version
+kernel_modules_stem = "virt_device_prebuilts_kernel_modules_microdroid-" + kernel_version
 
 cc_test {
     name: "VirtualizationTestCases",
