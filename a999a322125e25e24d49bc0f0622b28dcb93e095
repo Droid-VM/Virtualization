@@ -22,6 +22,30 @@
       },
       "revId": "a999a322125e25e24d49bc0f0622b28dcb93e095",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46b82ad7_766a86d1",
+        "filename": "microdroid_manager/src/ioutil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-07T11:44:37Z",
+      "side": 1,
+      "message": "This macro creates a function named `_blkflsbuf`. That function accepts a raw fd and is called in the function below which accepts File.",
+      "parentUuid": "b5f94958_737beca4",
+      "range": {
+        "startLine": 53,
+        "startChar": 17,
+        "endLine": 53,
+        "endChar": 27
+      },
+      "revId": "a999a322125e25e24d49bc0f0622b28dcb93e095",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
