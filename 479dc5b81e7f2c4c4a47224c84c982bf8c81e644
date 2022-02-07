@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5be70734_93edca19",
+        "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-02-07T17:13:02Z",
+      "side": 1,
+      "message": "nit/optional: With the comment, it\u0027s slightly more readable (at least to me) if this is reordered to:\n\n if (isDebuggable()) {\n   return HypervisorPropertires...;\n }\n return false;",
+      "range": {
+        "startLine": 83,
+        "startChar": 8,
+        "endLine": 88,
+        "endChar": 76
+      },
+      "revId": "479dc5b81e7f2c4c4a47224c84c982bf8c81e644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
