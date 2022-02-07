@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69dae396_4180006a",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-02-07T16:00:09Z",
+      "side": 1,
+      "message": "This is worth a shot if it reduces the overhead below our current 64MiB, but I think it might need a little bit more investigation for fine-tuning.\n\nI\u0027d imagine console devices to be less I/O intensive than vsock and virtio-block, so we could probably reduce the allocation there. Additionally, vsock looks like it might have multiple queues and so we may need to account for that too.\n\nFinally, we could look at how much data is likely to be transmitted in a single queue entry. If, for example, vsock only transmits one packet per descriptor, then allocating 2 pages is a pretty large overhead.",
+      "range": {
+        "startLine": 276,
+        "startChar": 8,
+        "endLine": 276,
+        "endChar": 47
+      },
+      "revId": "0b5789f81c34dce2db3aed8dda41e33f9abaedbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
