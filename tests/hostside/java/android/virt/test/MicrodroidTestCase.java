@@ -17,18 +17,24 @@
 package android.virt.test;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import com.android.tradefed.device.DeviceNotAvailableException;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner;
+import com.android.tradefed.util.CommandResult;
+import com.android.tradefed.util.CommandStatus;
+import com.android.tradefed.util.FileUtil;
+import com.android.tradefed.util.RunUtil;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.File;
 import java.util.Optional;
 
 @RunWith(DeviceJUnit4ClassRunner.class)
@@ -102,6 +108,28 @@ public class MicrodroidTestCase extends VirtualizationTestCaseBase {
 
         assertThat(runOnMicrodroid("cat /proc/cpuinfo | grep processor | wc -l"),
                 is(Integer.toString(NUM_VCPUS)));
+
+        // Check neverallow rules on microdroid
+        File policyFile = FileUtil.createTempFile("microdroid_sepolicy", "");
+        pullMicrodroidFile("/sys/fs/selinux/policy", policyFile);
+
+        final File generalPolicyConfFile = findTestFile("microdroid_general_sepolicy.conf");
+        final File sepolicyAnalyzeBin = findTestFile("sepolicy-analyze");
+
+        CommandResult result =
+                RunUtil.getDefault()
+                        .runTimedCmd(
+                                10000,
+                                sepolicyAnalyzeBin.getPath(),
+                                policyFile.getPath(),
+                                "neverallow",
+                                "-w",
+                                "-f",
+                                generalPolicyConfFile.getPath());
+        assertEquals(
+                "neverallow check failed: " + result.getStderr().trim(),
+                result.getStatus(),
+                CommandStatus.SUCCESS);
 
         shutdownMicrodroid(getDevice(), cid);
     }
