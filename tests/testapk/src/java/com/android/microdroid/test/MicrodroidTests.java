@@ -188,6 +188,9 @@ public class MicrodroidTests {
                             assertEquals(
                                     testService.readProperty("debug.microdroid.test.extra_apk"),
                                     "PASS");
+                            assertEquals(
+                                    testService.readProperty("debug.microdroid.test.selinux"),
+                                    "PASS");
                         } catch (Exception e) {
                             fail("Exception while testing service: " + e.toString());
                         }
