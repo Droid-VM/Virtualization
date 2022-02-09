@@ -16,6 +16,23 @@
       "message": "I\u0027m not sure why the test fails. I\u0027m now trying nested virtualization myself. In case I\u0027m really not sure about the reason, I\u0027ll skip the test on cuttlefish.",
       "revId": "900895b430026081be15bfb4698e462bf95bb699",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e742698_8e1e8420",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-02-09T10:57:32Z",
+      "side": 1,
+      "message": "Well, the failure is indeed because of timeout (66000 ms : 66 seconds). Two VM bootings take more than 1 minute.",
+      "revId": "900895b430026081be15bfb4698e462bf95bb699",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
