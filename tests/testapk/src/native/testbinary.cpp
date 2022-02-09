@@ -24,6 +24,7 @@
 #include <fcntl.h>
 #include <fsverity_digests.pb.h>
 #include <linux/vm_sockets.h>
+#include <selinux/selinux.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <sys/ioctl.h>
@@ -136,6 +137,28 @@ Result<void> verify_apk() {
     return {};
 }
 
+Result<void> verify_selinux() {
+    int enabled = is_selinux_enabled();
+    if (enabled < 0) {
+        return ErrnoError() << "is_selinux_enabled() failed";
+    }
+
+    if (enabled == 0) {
+        return Error() << "selinux is disabled";
+    }
+
+    int enforcing = security_getenforce();
+    if (enforcing == -1) {
+        return ErrnoError() << "security_getenforce() failed";
+    }
+
+    if (enforcing == 0) {
+        return Error() << "selinux is permissive";
+    }
+
+    return {};
+}
+
 } // Anonymous namespace
 
 extern "C" int android_native_main(int argc, char* argv[]) {
@@ -157,6 +180,9 @@ extern "C" int android_native_main(int argc, char* argv[]) {
 
     // Extra apks may be missing; this is not a fatal error
     report_test("extra_apk", verify_apk());
+
+    // SELinux could be permissive (e.g. debug mode); this is not a fatal error
+    report_test("selinux", verify_selinux());
 
     __system_property_set("debug.microdroid.app.run", "true");
 
