@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "46de9a73_2c26b6b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-10T13:55:00Z",
+      "side": 1,
+      "message": "Well, I just mean, have you demonstrated that this test can fail? I.e. that it does in fact detect what we want it to.\n\nE.g. delete a neverallow, add an allow that breaks it, build \u0026 push policy, then test against vanilla policy.",
+      "parentUuid": "8b12af61_2c71be93",
+      "revId": "35e68906cf962c63d317c086bfc882c2d1e82245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "39a8a98b_0c66fe86",
         "filename": "tests/hostside/helper/java/android/virt/test/VirtualizationTestCaseBase.java",
         "patchSetId": 2
