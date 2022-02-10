@@ -33,6 +33,47 @@
       "message": "This is very unfinished - it\u0027s not wired up to anything - but I thought there was enough here to be worth looking at.\n\nI\u0027m using C++ because it\u0027s mostly calls to boringssl, and we don\u0027t have a good Rust story there yet.\n(But I\u0027m expecting to call the library code from Rust outside the VM.)",
       "revId": "a0e829c515357df106fa70ac054615197278033b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6baf02db_d9175ada",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-02-10T16:29:42Z",
+      "side": 1,
+      "message": "Hopefully we can rewrite in Rust later. It\u0027ll be interesting to see the code before and after :)",
+      "parentUuid": "6b1d1f49_552c99a7",
+      "revId": "a0e829c515357df106fa70ac054615197278033b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35735786_8bd34701",
+        "filename": "compos/compos_key_helper/compos_key_main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-02-10T16:29:42Z",
+      "side": 1,
+      "message": "Just PLOG(ERROR)?",
+      "range": {
+        "startLine": 42,
+        "startChar": 16,
+        "endLine": 42,
+        "endChar": 43
+      },
+      "revId": "a0e829c515357df106fa70ac054615197278033b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
