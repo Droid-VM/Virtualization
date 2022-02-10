@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b243891b_0c55a228",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-10T19:48:20Z",
+      "side": 1,
+      "message": "```\n[5/5] com.android.microdroid.test.MicrodroidTests#changingDebugLevelInvalidatesVmIdentity: PASSED (10.488s)\n```\n\nBut worth noting this works because microdroid_manager checks the properties that get set through the bootconfig so the payload\u0027s identity is invalidated, however the identity of microdroid itself won\u0027t be because u-boot doesn\u0027t know whether a given bootconfig means microdroid is debuggable. I\u0027ll file a bug for that because I don\u0027t know what to about it b/218890110",
+      "parentUuid": "3f34d65a_7128b0d3",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 27
+      },
+      "revId": "881d0b028f2665c0567b78545fd1919e9d9967c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e9d0a499_8647fee4",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
