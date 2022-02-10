@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e882261_d4cb6058",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-10T14:50:25Z",
+      "side": 1,
+      "message": "This is very unfinished - it\u0027s not wired up to anything - but I thought there was enough here to be worth looking at.\n\nI\u0027m using C++ because it\u0027s mostly calls to boringssl, and we don\u0027t have a good Rust story there yet.\n(But I\u0027m expecting to call the library code from Rust outside the VM.)",
+      "revId": "a0e829c515357df106fa70ac054615197278033b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
