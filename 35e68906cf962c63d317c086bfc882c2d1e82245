@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e6eaa57_3163a2c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-02-10T14:17:39Z",
+      "side": 1,
+      "message": "Yes it can! I tested it by adding `build_variant: \"user\"` to microdroid_general_sepolicy.conf, while leaving lunch target to \"userdebug\". In that way, microdroid policy will be userdebug, and the neverallow rules will be user, which has stricter neverallow rules.",
+      "parentUuid": "46de9a73_2c26b6b2",
+      "revId": "35e68906cf962c63d317c086bfc882c2d1e82245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39a8a98b_0c66fe86",
