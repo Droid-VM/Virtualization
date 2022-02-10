@@ -20,38 +20,42 @@
 use anyhow::{bail, Context, Result};
 use compos_aidl_interface::binder::ProcessState;
 use compos_common::compos_client::{VmInstance, VmParameters};
-use compos_common::{
-    COMPOS_DATA_ROOT, CURRENT_INSTANCE_DIR, IDSIG_FILE, IDSIG_MANIFEST_APK_FILE,
-    INSTANCE_IMAGE_FILE, PENDING_INSTANCE_DIR, PRIVATE_KEY_BLOB_FILE, PUBLIC_KEY_FILE,
-    TEST_INSTANCE_DIR,
+use compos_common::odrefresh::{
+    CURRENT_ARTIFACTS_SUBDIR, ODREFRESH_OUTPUT_ROOT_DIR, PENDING_ARTIFACTS_SUBDIR,
+    TEST_ARTIFACTS_SUBDIR,
 };
-use std::fs::{self, File};
+use compos_common::{
+    COMPOS_DATA_ROOT, IDSIG_FILE, IDSIG_MANIFEST_APK_FILE, INSTANCE_IMAGE_FILE,
+    PENDING_INSTANCE_DIR, TEST_INSTANCE_DIR,
+};
+use log::error;
+use std::fs::File;
 use std::io::Read;
 use std::panic;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 
-const MAX_FILE_SIZE_BYTES: u64 = 8 * 1024;
+const MAX_FILE_SIZE_BYTES: u64 = 100 * 1024;
 
 fn main() {
     android_logger::init_once(
         android_logger::Config::default()
-            .with_tag("compos_verify_key")
+            .with_tag("compos_verify")
             .with_min_level(log::Level::Info),
     );
 
     // Redirect panic messages to logcat.
     panic::set_hook(Box::new(|panic_info| {
-        log::error!("{}", panic_info);
+        error!("{}", panic_info);
     }));
 
     if let Err(e) = try_main() {
-        log::error!("{:?}", e);
-        std::process::exit(-1)
+        error!("{:?}", e);
+        std::process::exit(1)
     }
 }
 
 fn try_main() -> Result<()> {
-    let matches = clap::App::new("compos_verify_key")
+    let matches = clap::App::new("compos_verify")
         .arg(
             clap::Arg::with_name("instance")
                 .long("instance")
@@ -63,14 +67,15 @@ fn try_main() -> Result<()> {
         .get_matches();
 
     let debug_mode = matches.is_present("debug");
-    let (promote_if_valid, instance_dir) = match matches.value_of("instance").unwrap() {
-        "pending" => (true, PENDING_INSTANCE_DIR),
-        "current" => (false, CURRENT_INSTANCE_DIR),
-        "test" => (false, TEST_INSTANCE_DIR),
+    let (instance_dir, artifacts_dir) = match matches.value_of("instance").unwrap() {
+        "pending" => (PENDING_INSTANCE_DIR, PENDING_ARTIFACTS_SUBDIR),
+        "current" => (PENDING_INSTANCE_DIR, CURRENT_ARTIFACTS_SUBDIR),
+        "test" => (TEST_INSTANCE_DIR, TEST_ARTIFACTS_SUBDIR),
         _ => unreachable!("Unexpected instance name"),
     };
 
-    let instance_dir: PathBuf = [COMPOS_DATA_ROOT, instance_dir].iter().collect();
+    let instance_dir = Path::new(COMPOS_DATA_ROOT).join(instance_dir);
+    let artifacts_dir = Path::new(ODREFRESH_OUTPUT_ROOT_DIR).join(artifacts_dir);
 
     if !instance_dir.is_dir() {
         bail!("{:?} is not a directory", instance_dir);
@@ -79,38 +84,10 @@ fn try_main() -> Result<()> {
     // We need to start the thread pool to be able to receive Binder callbacks
     ProcessState::start_thread_pool();
 
-    let result = verify(debug_mode, &instance_dir).and_then(|_| {
-        log::info!("Verified {:?}", instance_dir);
-        if promote_if_valid {
-            // If the instance is ok, then it must actually match the current system state,
-            // so we promote it to current.
-            log::info!("Promoting to current");
-            promote_to_current(&instance_dir)
-        } else {
-            Ok(())
-        }
-    });
-
-    if result.is_err() {
-        // This is best efforts, and we still want to report the original error as our result
-        log::info!("Removing {:?}", instance_dir);
-        if let Err(e) = fs::remove_dir_all(&instance_dir) {
-            log::warn!("Failed to remove directory: {}", e);
-        }
-    }
-
-    result
-}
-
-fn verify(debug_mode: bool, instance_dir: &Path) -> Result<()> {
-    let blob = instance_dir.join(PRIVATE_KEY_BLOB_FILE);
-    let public_key = instance_dir.join(PUBLIC_KEY_FILE);
     let instance_image = instance_dir.join(INSTANCE_IMAGE_FILE);
     let idsig = instance_dir.join(IDSIG_FILE);
     let idsig_manifest_apk = instance_dir.join(IDSIG_MANIFEST_APK_FILE);
 
-    let blob = read_small_file(blob).context("Failed to read key blob")?;
-    let public_key = read_small_file(public_key).context("Failed to read public key")?;
     let instance_image = File::open(instance_image).context("Failed to open instance image")?;
 
     let virtualization_service = VmInstance::connect_to_virtualization_service()?;
@@ -123,32 +100,27 @@ fn verify(debug_mode: bool, instance_dir: &Path) -> Result<()> {
     )?;
     let service = vm_instance.get_service()?;
 
-    let result = service.verifySigningKey(&blob, &public_key).context("Verifying signing key")?;
+    let public_key = service.getPublicKey().context("Getting public key")?;
 
-    if !result {
-        bail!("Key files are not valid");
+    let info = artifacts_dir.join("compos.info");
+    let signature = artifacts_dir.join("compos.info.signature");
+
+    let info = read_small_file(&info)?;
+    let signature = read_small_file(&signature)?;
+
+    if !compos_verify_native::verify(&public_key, &signature, &info) {
+        bail!("Signature verification failed");
     }
 
     Ok(())
 }
 
-fn promote_to_current(instance_dir: &Path) -> Result<()> {
-    let current_dir: PathBuf = [COMPOS_DATA_ROOT, CURRENT_INSTANCE_DIR].iter().collect();
-
-    // This may fail if the directory doesn't exist - which is fine, we only care about the rename
-    // succeeding.
-    let _ = fs::remove_dir_all(&current_dir);
-
-    fs::rename(&instance_dir, &current_dir).context("Unable to promote instance to current")?;
-    Ok(())
-}
-
-fn read_small_file(file: PathBuf) -> Result<Vec<u8>> {
+fn read_small_file(file: &Path) -> Result<Vec<u8>> {
     let mut file = File::open(file)?;
     if file.metadata()?.len() > MAX_FILE_SIZE_BYTES {
         bail!("File is too big");
     }
-    let mut data = vec![];
+    let mut data = Vec::new();
     file.read_to_end(&mut data)?;
     Ok(data)
 }
