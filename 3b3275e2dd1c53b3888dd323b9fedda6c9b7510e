@@ -22,6 +22,30 @@
       },
       "revId": "3b3275e2dd1c53b3888dd323b9fedda6c9b7510e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00edb837_e415ceba",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-10T22:20:56Z",
+      "side": 1,
+      "message": "I think `changingDebugLevelInvalidatesVmIdentity()` is failing for a similar reason: the bootconfig is changed so u-boot fails to validate it and resets the VM without onError() being called.",
+      "parentUuid": "9b42702c_40c52402",
+      "range": {
+        "startLine": 414,
+        "startChar": 32,
+        "endLine": 414,
+        "endChar": 39
+      },
+      "revId": "3b3275e2dd1c53b3888dd323b9fedda6c9b7510e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
