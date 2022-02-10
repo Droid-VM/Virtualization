@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b12af61_2c71be93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-02-10T13:43:14Z",
+      "side": 1,
+      "message": "Well, what\u0027s \"bad policy\"?\n\nWe are saying that \"neverallow rules must not be modified\". That implies that partners may modify the policy, as long as the neverallow rules are consistent. Given that, I\u0027m not sure if we can define a policy as \"bad\", if the neverallow test passes.",
+      "parentUuid": "beaf72f7_bebc0ba5",
+      "revId": "35e68906cf962c63d317c086bfc882c2d1e82245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "39a8a98b_0c66fe86",
         "filename": "tests/hostside/helper/java/android/virt/test/VirtualizationTestCaseBase.java",
         "patchSetId": 2
@@ -31,6 +49,30 @@
       "writtenOn": "2022-02-10T13:37:15Z",
       "side": 1,
       "message": "nit: timeoutMs",
+      "range": {
+        "startLine": 158,
+        "startChar": 19,
+        "endLine": 158,
+        "endChar": 26
+      },
+      "revId": "35e68906cf962c63d317c086bfc882c2d1e82245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "128acd85_78fa62cd",
+        "filename": "tests/hostside/helper/java/android/virt/test/VirtualizationTestCaseBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-02-10T13:43:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39a8a98b_0c66fe86",
       "range": {
         "startLine": 158,
         "startChar": 19,
@@ -54,6 +96,30 @@
       "writtenOn": "2022-02-10T13:37:15Z",
       "side": 1,
       "message": "final for consistency?\n(TBH I\u0027d remove all the finals for the same reason; it\u0027s an Android eccentricity.)",
+      "range": {
+        "startLine": 125,
+        "startChar": 12,
+        "endLine": 125,
+        "endChar": 16
+      },
+      "revId": "35e68906cf962c63d317c086bfc882c2d1e82245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3f01fc7_59b848ad",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-02-10T13:43:14Z",
+      "side": 1,
+      "message": "Removed other 2 Finals below",
+      "parentUuid": "4b04489a_f59b993f",
       "range": {
         "startLine": 125,
         "startChar": 12,
