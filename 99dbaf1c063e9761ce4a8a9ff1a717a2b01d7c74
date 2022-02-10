@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46ddcb67_7c273444",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-02-10T16:08:23Z",
+      "side": 1,
+      "message": "Ack. That\u0027s what triggers me to do this (wanted to do it but has to postpone to prioritize those trackers). A signing change shouldn\u0027t need to involve compilation.rs anyway.",
+      "parentUuid": "1128936a_d24f36d6",
+      "revId": "99dbaf1c063e9761ce4a8a9ff1a717a2b01d7c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6f3e2b8_429e38b9",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-02-10T09:43:03Z",
       "side": 1,
       "message": "Line too long",
+      "range": {
+        "startLine": 106,
+        "startChar": 16,
+        "endLine": 106,
+        "endChar": 102
+      },
+      "revId": "99dbaf1c063e9761ce4a8a9ff1a717a2b01d7c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c255e4b8_7acd97ba",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-02-10T16:08:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6f3e2b8_429e38b9",
       "range": {
         "startLine": 106,
         "startChar": 16,
