@@ -18,35 +18,70 @@
 #include <android-base/logging.h>
 #include <unistd.h>
 
-#include <iostream>
 #include <string_view>
 
 #include "compos_key.h"
 
 using android::base::ErrnoError;
+using android::base::ReadFdToString;
 using android::base::WriteFully;
 using namespace std::literals;
+
+namespace {
+int write_public_key() {
+    auto key_pair = deriveKeyFromDice();
+    if (!key_pair.ok()) {
+        LOG(ERROR) << key_pair.error();
+        return 1;
+    }
+    if (!WriteFully(STDOUT_FILENO, key_pair->public_key.data(), key_pair->public_key.size())) {
+        PLOG(ERROR) << "Write failed";
+        return 1;
+    }
+    return 0;
+}
+
+int sign_input() {
+    std::string to_sign;
+    if (!ReadFdToString(STDIN_FILENO, &to_sign)) {
+        PLOG(ERROR) << "Read failed";
+        return 1;
+    }
+
+    auto key_pair = deriveKeyFromDice();
+    if (!key_pair.ok()) {
+        LOG(ERROR) << key_pair.error();
+        return 1;
+    }
+
+    auto signature = sign(key_pair->private_key, reinterpret_cast<const uint8_t*>(to_sign.data()),
+                          to_sign.size());
+    if (!signature.ok()) {
+        LOG(ERROR) << signature.error();
+        return 1;
+    }
+
+    if (!WriteFully(STDOUT_FILENO, signature->data(), signature->size())) {
+        PLOG(ERROR) << "Write failed";
+        return 1;
+    }
+    return 0;
+}
+} // namespace
 
 int main(int argc, char** argv) {
     android::base::InitLogging(argv, android::base::LogdLogger(android::base::SYSTEM));
 
     if (argc == 2) {
         if (argv[1] == "public_key"sv) {
-            auto key_pair = deriveKeyFromDice();
-            if (!key_pair.ok()) {
-                LOG(ERROR) << key_pair.error();
-                return 1;
-            }
-            if (!WriteFully(STDOUT_FILENO, key_pair->public_key.data(),
-                            key_pair->public_key.size())) {
-                PLOG(ERROR) << "Write failed";
-                return 1;
-            }
-            return 0;
+            return write_public_key();
+        } else if (argv[1] == "sign"sv) {
+            return sign_input();
         }
     }
 
-    std::cerr << "Usage:\n"
-                 "compos_key_helper public_key   Write current public key to stdout\n";
+    LOG(INFO) << "Usage: compos_key_helper <command>. Available commands are:\n"
+                 "public_key   Write current public key to stdout\n"
+                 "sign         Consume stdin, sign it and write signature to stdout\n";
     return 1;
 }
