@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9d0a499_8647fee4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-10T16:57:32Z",
+      "side": 1,
+      "message": "Not directly related to this CL, but IIUC the bootconfig can control debug behaviour before microdroid_manager runs, so u-boot should be setting the DICE mode depending on the contents of the bootconfig. Am I right that that\u0027s highly microdroid specific?",
+      "revId": "881d0b028f2665c0567b78545fd1919e9d9967c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
