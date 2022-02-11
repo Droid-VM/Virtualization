@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c19881a_832e495a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-11T16:14:44Z",
+      "side": 1,
+      "message": "I think we need a separate means of controlling the log level of u-boot. Bootconfig is for kernel and beyond, but for u-boot. uboot_env.img might be used for this.\n\nIt\u0027s not clear if u-boot has a dynamic log-level filtering mechanism. The existence of the CONFIG_LOGLEVEL config suggests that it\u0027s static..:( But I might be wrong.\n\nAnother problem is that reading and evaluating uboot_env.img is not the first thing that u-boot does. So we need to either *statically* silence any log (including u-boot version and fingerprint) prior to the point, or emit all the early logs anyway hoping that they don\u0027t put a pVM at risk.",
+      "parentUuid": "eed1154c_6cfb904a",
+      "range": {
+        "startLine": 10,
+        "startChar": 10,
+        "endLine": 10,
+        "endChar": 72
+      },
+      "revId": "527e577d5340974e07712193fe1b1cb83894f083",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5966e388_32807040",
