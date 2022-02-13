@@ -59,6 +59,7 @@ const MAIN_APK_DEVICE_NAME: &str = "microdroid-apk";
 const EXTRA_APK_PATH_PATTERN: &str = "/dev/block/by-name/extra-apk-*";
 const EXTRA_IDSIG_PATH_PATTERN: &str = "/dev/block/by-name/extra-idsig-*";
 const DM_MOUNTED_APK_PATH: &str = "/dev/block/mapper/microdroid-apk";
+const KMSG_SYSCTL_PATH: &str = "/proc/sys/kernel/printk_devkmsg";
 const APKDMVERITY_BIN: &str = "/system/bin/apkdmverity";
 const ZIPFUSE_BIN: &str = "/system/bin/zipfuse";
 
@@ -148,10 +149,11 @@ fn try_main() -> Result<()> {
 fn is_debuggable() -> Result<bool> {
     // Read all the properties so the behaviour is most similar between debug and non-debug boots.
     // Defensively default to debug enabled for unrecognised values.
+    let kmsg = fs::read_to_string(KMSG_SYSCTL_PATH)? != "off\n";
     let adb = system_properties::read_bool(ADBD_ENABLED_PROP, true)?;
     let logd = system_properties::read_bool(LOGD_ENABLED_PROP, true)?;
     let debuggable = system_properties::read_bool(DEBUGGABLE_PROP, true)?;
-    Ok(adb || logd || debuggable)
+    Ok(kmsg || adb || logd || debuggable)
 }
 
 fn dice_derivation(verified_data: MicrodroidData, payload_config_path: &str) -> Result<()> {
