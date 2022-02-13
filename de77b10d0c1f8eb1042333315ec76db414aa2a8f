@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4921053a_c0149e50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-13T17:18:01Z",
+      "side": 1,
+      "message": "Adding Alan as I know he\u0027s also had to look for debug mode for compos. If the test keeps getting more complex then we\u0027ll want a better way to declare it to the other components.",
+      "revId": "de77b10d0c1f8eb1042333315ec76db414aa2a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9080ce7_abeb9a71",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-13T17:18:01Z",
+      "side": 1,
+      "message": "I haven\u0027t tried this out and it looks like it\u0027s going to need sepolicy changes to genfs_contexts which looks like one of the files we want to symlink at some point. Before I get too deep into it, I\u0027ll check it\u0027s the right direction.",
+      "range": {
+        "startLine": 62,
+        "startChar": 32,
+        "endLine": 62,
+        "endChar": 64
+      },
+      "revId": "de77b10d0c1f8eb1042333315ec76db414aa2a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce02c590_7666c855",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-13T17:18:01Z",
+      "side": 1,
+      "message": "This will check that `kernel.printk.devkmsg\u003don` from fulldebug isn\u0027t set (and also that it\u0027s not just ratelimited).\n\nThere is also `kernel.console \u003d null` which I haven\u0027t look into how to check, but I\u0027m also not sure if it\u0027s doing what\u0027s intended as there are still a bunch of kernel logs being printed.",
+      "revId": "de77b10d0c1f8eb1042333315ec76db414aa2a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
