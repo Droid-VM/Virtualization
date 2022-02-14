@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "669ffd12_4045fe96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-14T11:12:35Z",
+      "side": 1,
+      "message": "Yeah, this code is getting more complicated, and is proliferating: http://cs/android/packages/modules/Virtualization/compos/src/compilation.rs?l\u003d62\u0026rcl\u003d73e2f9109fd792053d2def83cb0786a6a3489055\n\nCan we have something (Microdroid?) set a property to indicate if the VM is debuggable at all? That\u0027s what that code cares about.",
+      "parentUuid": "4921053a_c0149e50",
+      "revId": "de77b10d0c1f8eb1042333315ec76db414aa2a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9080ce7_abeb9a71",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
