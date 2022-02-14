@@ -69,6 +69,7 @@ const APEX_CONFIG_DONE_PROP: &str = "apex_config.done";
 const LOGD_ENABLED_PROP: &str = "ro.boot.logd.enabled";
 const ADBD_ENABLED_PROP: &str = "ro.boot.adb.enabled";
 const DEBUGGABLE_PROP: &str = "ro.boot.microdroid.debuggable";
+const APP_DEBUGGABLE_PROP: &str = "microdroid_manager.is_app_debuggable";
 
 #[derive(thiserror::Error, Debug)]
 enum MicrodroidError {
@@ -183,6 +184,9 @@ fn dice_derivation(verified_data: MicrodroidData, payload_config_path: &str) -> 
     encode_header(3, config_path_bytes.len().try_into().unwrap(), &mut config_desc)?;
     config_desc.extend_from_slice(config_path_bytes);
 
+    let app_debuggable = is_debuggable()?;
+    system_properties::write(APP_DEBUGGABLE_PROP, if app_debuggable { "1" } else { "0" })?;
+
     // Send the details to diced
     let diced =
         wait_for_interface::<dyn IDiceMaintenance>("android.security.dice.IDiceMaintenance")
@@ -193,7 +197,7 @@ fn dice_derivation(verified_data: MicrodroidData, payload_config_path: &str) -> 
             config: Config { desc: config_desc },
             authorityHash: authority_hash,
             authorityDescriptor: None,
-            mode: if is_debuggable()? { Mode::DEBUG } else { Mode::NORMAL },
+            mode: if app_debuggable { Mode::DEBUG } else { Mode::NORMAL },
             hidden: verified_data.salt.try_into().unwrap(),
         }])
         .context("IDiceMaintenance::demoteSelf failed")?;
