@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1815b44f_7315ad86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-14T16:12:55Z",
+      "side": 1,
+      "message": "It certainly could set a property e.g. `microdroid_manager.is_app_debuggable` which is set to false only then the DICE mode was NORMAL and is otherwise true.",
+      "parentUuid": "669ffd12_4045fe96",
+      "revId": "de77b10d0c1f8eb1042333315ec76db414aa2a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9080ce7_abeb9a71",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
@@ -85,6 +103,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "db16f884_2d3746e0",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-14T16:12:55Z",
+      "side": 1,
+      "message": "I\u0027m asking the kernel to report it\u0027s current state, and am querying the configs we try to control through bootconfig. This is to catch cases where the config doesn\u0027t do the right thing or it gets dynamically overridden.\n\nE.g. even if `console\u003dnull` is passed, a driver is probed and the console is initialized\n\n```\n[    0.089330][    T1] Serial: 8250/16550 driver, 4 ports, IRQ sharing disabled\n[    0.089538][    T1] 3f8.U6_16550A: ttyS0 at MMIO 0x3f8 (irq \u003d 13, base_baud \u003d 115200) is a 16550A\n[    0.417248][    T1] printk: console [ttyS0] enabled\n```\n\nThat doesn\u0027t seem like what what was meant to happen? Marc mentioned options to suppress the drivers like `modprobe.blacklist\u003ddrivername` or `initcall_blacklist\u003dof_platform_serial_driver_init`",
+      "parentUuid": "176ac6ed_2ed4cfad",
+      "range": {
+        "startLine": 62,
+        "startChar": 32,
+        "endLine": 62,
+        "endChar": 64
+      },
+      "revId": "de77b10d0c1f8eb1042333315ec76db414aa2a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce02c590_7666c855",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
@@ -114,6 +156,24 @@
       "side": 1,
       "message": "You may read /proc/bootconfig or /proc/cmdline.",
       "parentUuid": "ce02c590_7666c855",
+      "revId": "de77b10d0c1f8eb1042333315ec76db414aa2a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d6e939f_1d32aeb2",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-14T16:12:55Z",
+      "side": 1,
+      "message": "See other comment why I don\u0027t think we should rely on those. There looks like there\u0027s a sysfs property for the conosle. I\u0027ll test when I find what I\u0027ve messed up in my build :/",
+      "parentUuid": "64cfeeb6_77edfc70",
       "revId": "de77b10d0c1f8eb1042333315ec76db414aa2a8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
