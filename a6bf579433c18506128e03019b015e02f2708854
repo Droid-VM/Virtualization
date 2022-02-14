@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f56c6c31_bc6edab8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-14T14:54:45Z",
+      "side": 1,
+      "message": "This is helpful to me at the moment, and I think probably a good thing in general.\nIn the host we disable throttling during boot (for the \"no denials at boot\" test), and then disable it afterwards to avoid logspam. People running tests can manually run \"auditctl -r 0\" to disable the throttling.\nInside the VM I think the logs are likely to be helpful, and hopefully we won\u0027t end up with too much spam.",
+      "revId": "a6bf579433c18506128e03019b015e02f2708854",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
