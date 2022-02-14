@@ -127,6 +127,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ef9beda_88718f42",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-14T23:31:13Z",
+      "side": 1,
+      "message": "Maybe I\u0027m missing the actual intent of the kernel options that are different for the different bootconfigs now I see that the devkmsg is set to ratelimit by default. Are we just trying to make there be more logs on full debug rather than making there be less logs with the non-debug bootconfigs?",
+      "parentUuid": "db16f884_2d3746e0",
+      "range": {
+        "startLine": 62,
+        "startChar": 32,
+        "endLine": 62,
+        "endChar": 64
+      },
+      "revId": "de77b10d0c1f8eb1042333315ec76db414aa2a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce02c590_7666c855",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
