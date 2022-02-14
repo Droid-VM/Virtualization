@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "176ac6ed_2ed4cfad",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-14T01:36:46Z",
+      "side": 1,
+      "message": "It looks like this controls the logging to /dev/kmsg only from userspace clients. i.e. in-kernel logging isn\u0027t affected.\n\nWhy don\u0027t we directly read /proc/bootconfig?",
+      "parentUuid": "d9080ce7_abeb9a71",
+      "range": {
+        "startLine": 62,
+        "startChar": 32,
+        "endLine": 62,
+        "endChar": 64
+      },
+      "revId": "de77b10d0c1f8eb1042333315ec76db414aa2a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce02c590_7666c855",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
@@ -54,6 +78,24 @@
       "writtenOn": "2022-02-13T17:18:01Z",
       "side": 1,
       "message": "This will check that `kernel.printk.devkmsg\u003don` from fulldebug isn\u0027t set (and also that it\u0027s not just ratelimited).\n\nThere is also `kernel.console \u003d null` which I haven\u0027t look into how to check, but I\u0027m also not sure if it\u0027s doing what\u0027s intended as there are still a bunch of kernel logs being printed.",
+      "revId": "de77b10d0c1f8eb1042333315ec76db414aa2a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64cfeeb6_77edfc70",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-14T01:36:46Z",
+      "side": 1,
+      "message": "You may read /proc/bootconfig or /proc/cmdline.",
+      "parentUuid": "ce02c590_7666c855",
       "revId": "de77b10d0c1f8eb1042333315ec76db414aa2a8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
