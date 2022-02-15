@@ -151,6 +151,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "326259b3_b444a2b4",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-15T12:52:12Z",
+      "side": 1,
+      "message": "\u003e even if  console\u003dnull  is passed, a driver is probed and the console is initialized\n\u003e printk: console [ttyS0] enabled\n\nI think it is the earlycon. Did you add `earlycon` to the cmdline?\n\n\n\u003e Are we just trying to make there be more logs on full debug rather than making there be less logs with the non-debug bootconfigs?\n\nSorry, I don\u0027t understand this. Aren\u0027t they the same?",
+      "parentUuid": "7ef9beda_88718f42",
+      "range": {
+        "startLine": 62,
+        "startChar": 32,
+        "endLine": 62,
+        "endChar": 64
+      },
+      "revId": "de77b10d0c1f8eb1042333315ec76db414aa2a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce02c590_7666c855",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
