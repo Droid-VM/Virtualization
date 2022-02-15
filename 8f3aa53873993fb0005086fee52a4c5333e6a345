@@ -22,6 +22,30 @@
       },
       "revId": "8f3aa53873993fb0005086fee52a4c5333e6a345",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6a86a0d_cb3929a9",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-15T04:55:45Z",
+      "side": 1,
+      "message": "The test app is installed at L185 before entering this test. At L91, `runDeviceTests()` just runs the target test (`MicrodroidTests#connectToVmService`) with the command `am instrument`. (The device test itself doesn\u0027t install the test app.) So typically this line (`pm revoke`) is no-op (the test app is freshly installed), but in case the device is in a state that the test app is installed and granted the permission for some reason this line will revoke the permission before running the device test to set up the desired device state (the test app installed and not granted the permission)",
+      "parentUuid": "1eda9f70_55c392ca",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 95
+      },
+      "revId": "8f3aa53873993fb0005086fee52a4c5333e6a345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
