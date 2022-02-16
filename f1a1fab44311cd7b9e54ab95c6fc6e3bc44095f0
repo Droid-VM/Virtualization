@@ -96,6 +96,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e2d9f31_996e169a",
+        "filename": "compos/src/compos_key.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-16T18:33:14Z",
+      "side": 1,
+      "message": "I did think about that, but it looked messy.",
+      "parentUuid": "19224f12_6906ad14",
+      "range": {
+        "startLine": 38,
+        "startChar": 12,
+        "endLine": 38,
+        "endChar": 17
+      },
+      "revId": "f1a1fab44311cd7b9e54ab95c6fc6e3bc44095f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82a8af3c_02cdbfd5",
         "filename": "compos/src/compos_key.rs",
         "patchSetId": 2
@@ -107,6 +131,30 @@
       "writtenOn": "2022-02-16T18:08:02Z",
       "side": 1,
       "message": "bail in this case?",
+      "range": {
+        "startLine": 48,
+        "startChar": 13,
+        "endLine": 51,
+        "endChar": 5
+      },
+      "revId": "f1a1fab44311cd7b9e54ab95c6fc6e3bc44095f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "debe61ed_8aba2644",
+        "filename": "compos/src/compos_key.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-16T18:33:14Z",
+      "side": 1,
+      "message": "I want to make sure we do the wait below even if we get here, so we aren\u0027t left with a zombie process.\n\nThe tricky case is where the write failed, but the process exited normally. Which probably can\u0027t happen but I want to defend against it anyway.",
+      "parentUuid": "82a8af3c_02cdbfd5",
       "range": {
         "startLine": 48,
         "startChar": 13,
@@ -142,6 +190,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5162562c_f8a6f37b",
+        "filename": "compos/src/compos_key.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-16T18:33:14Z",
+      "side": 1,
+      "message": "Yeah, nor to me either TBH.\nI\u0027ll have another go.",
+      "parentUuid": "fb8b9032_08a362a8",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 32
+      },
+      "revId": "f1a1fab44311cd7b9e54ab95c6fc6e3bc44095f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "134d52ec_32cbad45",
         "filename": "compos/src/compsvc.rs",
         "patchSetId": 2
@@ -153,6 +225,30 @@
       "writtenOn": "2022-02-16T18:08:02Z",
       "side": 1,
       "message": "Remove?  IIUC, compsvc no longer has a state for key initialization.",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 9
+      },
+      "revId": "f1a1fab44311cd7b9e54ab95c6fc6e3bc44095f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcae73a3_b2e220fa",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-16T18:33:14Z",
+      "side": 1,
+      "message": "There\u0027s a lot to remove, but I want to do that in the next CL.\nCurrently the key generation \u0026 persistence is still happening, it just doesn\u0027t get used for signing.",
+      "parentUuid": "134d52ec_32cbad45",
       "range": {
         "startLine": 86,
         "startChar": 8,
