@@ -16,17 +16,10 @@
 
 #include "compos_key.h"
 
-#include <aidl/android/security/dice/IDiceNode.h>
-#include <android/binder_auto_utils.h>
-#include <android/binder_manager.h>
 #include <openssl/digest.h>
 #include <openssl/hkdf.h>
 #include <openssl/mem.h>
-#include <unistd.h>
 
-using aidl::android::hardware::security::dice::BccHandover;
-using aidl::android::hardware::security::dice::InputValues;
-using aidl::android::security::dice::IDiceNode;
 using android::base::ErrnoError;
 using android::base::Error;
 using android::base::Result;
@@ -63,23 +56,4 @@ Result<Signature> sign(const PrivateKey& private_key, const uint8_t* data, size_
 bool verify(const PublicKey& public_key, const Signature& signature, const uint8_t* data,
             size_t data_size) {
     return ED25519_verify(data, data_size, signature.data(), public_key.data()) == 1;
-}
-
-Result<Ed25519KeyPair> deriveKeyFromDice() {
-    ndk::SpAIBinder binder{AServiceManager_getService("android.security.dice.IDiceNode")};
-    auto dice_node = IDiceNode::fromBinder(binder);
-    if (!dice_node) {
-        return Error() << "Unable to connect to IDiceNode";
-    }
-
-    const std::vector<InputValues> empty_input_values;
-    BccHandover bcc;
-    auto status = dice_node->derive(empty_input_values, &bcc);
-    if (!status.isOk()) {
-        return Error() << "Derive failed: " << status.getDescription();
-    }
-
-    // We use the sealing CDI because we want stability - the key needs to be the same
-    // for any instance of the "same" VM.
-    return deriveKeyFromSecret(bcc.cdiSeal.data(), bcc.cdiSeal.size());
 }
