@@ -377,8 +377,13 @@ public class VirtualMachine {
                             if (cb == null) {
                                 return;
                             }
-                            mCallbackExecutor.execute(
-                                    () -> cb.onPayloadStarted(VirtualMachine.this, stream));
+                            final long restoreToken = Binder.clearCallingIdentity();
+                            try {
+                                mCallbackExecutor.execute(
+                                        () -> cb.onPayloadStarted(VirtualMachine.this, stream));
+                            } finally {
+                                Binder.restoreCallingIdentity(restoreToken);
+                            }
                         }
 
                         @Override
@@ -387,7 +392,13 @@ public class VirtualMachine {
                             if (cb == null) {
                                 return;
                             }
-                            mCallbackExecutor.execute(() -> cb.onPayloadReady(VirtualMachine.this));
+                            final long restoreToken = Binder.clearCallingIdentity();
+                            try {
+                                mCallbackExecutor.execute(
+                                        () -> cb.onPayloadReady(VirtualMachine.this));
+                            } finally {
+                                Binder.restoreCallingIdentity(restoreToken);
+                            }
                         }
 
                         @Override
@@ -396,8 +407,13 @@ public class VirtualMachine {
                             if (cb == null) {
                                 return;
                             }
-                            mCallbackExecutor.execute(
-                                    () -> cb.onPayloadFinished(VirtualMachine.this, exitCode));
+                            final long restoreToken = Binder.clearCallingIdentity();
+                            try {
+                                mCallbackExecutor.execute(
+                                        () -> cb.onPayloadFinished(VirtualMachine.this, exitCode));
+                            } finally {
+                                Binder.restoreCallingIdentity(restoreToken);
+                            }
                         }
 
                         @Override
@@ -406,8 +422,13 @@ public class VirtualMachine {
                             if (cb == null) {
                                 return;
                             }
-                            mCallbackExecutor.execute(
-                                    () -> cb.onError(VirtualMachine.this, errorCode, message));
+                            final long restoreToken = Binder.clearCallingIdentity();
+                            try {
+                                mCallbackExecutor.execute(
+                                        () -> cb.onError(VirtualMachine.this, errorCode, message));
+                            } finally {
+                                Binder.restoreCallingIdentity(restoreToken);
+                            }
                         }
 
                         @Override
@@ -416,7 +437,13 @@ public class VirtualMachine {
                             if (cb == null) {
                                 return;
                             }
-                            mCallbackExecutor.execute(() -> cb.onDied(VirtualMachine.this, reason));
+                            final long restoreToken = Binder.clearCallingIdentity();
+                            try {
+                                mCallbackExecutor.execute(
+                                        () -> cb.onDied(VirtualMachine.this, reason));
+                            } finally {
+                                Binder.restoreCallingIdentity(restoreToken);
+                            }
                         }
                     });
             service.asBinder()
