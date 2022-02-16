@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a1b600b_01d954e7",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-16T20:35:16Z",
+      "side": 0,
+      "message": "This is only called from microdroid_maanger but the protected VM dies in u-boot since there are DICE values prompting u-boot to save the bootconfig to the instance image.\n\nIs it enough to make sure the payload doesn\u0027t start? Or do we want more from this test.",
+      "range": {
+        "startLine": 267,
+        "startChar": 32,
+        "endLine": 267,
+        "endChar": 39
+      },
+      "revId": "c59aa32f69ce69b3cd56b17a02fc5e4fb86e22eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
