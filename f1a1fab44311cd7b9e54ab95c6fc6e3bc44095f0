@@ -46,6 +46,144 @@
       },
       "revId": "f1a1fab44311cd7b9e54ab95c6fc6e3bc44095f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52c106d0_ced6f2d2",
+        "filename": "compos/compos_key_helper/compos_key_main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-02-16T18:08:02Z",
+      "side": 1,
+      "message": "I\u0027m a bit concerned about the chance to receive and sign a partial write, or perhaps I\u0027m too paranoid. I was thinking maybe we can send the size first, followed by the whole data.  But then, an attacker can send anything anyway.  So a size prefix would only make it marginally more robust...  WDYT?",
+      "range": {
+        "startLine": 46,
+        "startChar": 9,
+        "endLine": 46,
+        "endChar": 23
+      },
+      "revId": "f1a1fab44311cd7b9e54ab95c6fc6e3bc44095f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19224f12_6906ad14",
+        "filename": "compos/src/compos_key.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-02-16T18:08:02Z",
+      "side": 1,
+      "message": "How about put this in a scopeguard?",
+      "range": {
+        "startLine": 38,
+        "startChar": 12,
+        "endLine": 38,
+        "endChar": 17
+      },
+      "revId": "f1a1fab44311cd7b9e54ab95c6fc6e3bc44095f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82a8af3c_02cdbfd5",
+        "filename": "compos/src/compos_key.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-02-16T18:08:02Z",
+      "side": 1,
+      "message": "bail in this case?",
+      "range": {
+        "startLine": 48,
+        "startChar": 13,
+        "endLine": 51,
+        "endChar": 5
+      },
+      "revId": "f1a1fab44311cd7b9e54ab95c6fc6e3bc44095f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb8b9032_08a362a8",
+        "filename": "compos/src/compos_key.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-02-16T18:08:02Z",
+      "side": 1,
+      "message": "Ok(result.stdout) if you can bail in the above.  If not, it\u0027s still nice to do something here (maybe merge the wrote error blocks).  This isn\u0027t super readable to me.",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 32
+      },
+      "revId": "f1a1fab44311cd7b9e54ab95c6fc6e3bc44095f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "134d52ec_32cbad45",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-02-16T18:08:02Z",
+      "side": 1,
+      "message": "Remove?  IIUC, compsvc no longer has a state for key initialization.",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 9
+      },
+      "revId": "f1a1fab44311cd7b9e54ab95c6fc6e3bc44095f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06cc8707_dbee1b0e",
+        "filename": "compos/verify/native/verify_native.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-02-16T18:08:02Z",
+      "side": 1,
+      "message": "nit: consider rename either `verify` (here or L36)",
+      "range": {
+        "startLine": 23,
+        "startChar": 5,
+        "endLine": 23,
+        "endChar": 11
+      },
+      "revId": "f1a1fab44311cd7b9e54ab95c6fc6e3bc44095f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
