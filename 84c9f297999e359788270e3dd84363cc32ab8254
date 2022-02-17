@@ -110,6 +110,30 @@
       },
       "revId": "84c9f297999e359788270e3dd84363cc32ab8254",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a3d7234_de2c75ea",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-17T04:20:39Z",
+      "side": 1,
+      "message": "Oh, never mind. execute() itself is a user-provided callback! So wrapping around calling execute() seems to be right.",
+      "parentUuid": "502e876d_55ade471",
+      "range": {
+        "startLine": 380,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 29
+      },
+      "revId": "84c9f297999e359788270e3dd84363cc32ab8254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
