@@ -46,6 +46,30 @@
       },
       "revId": "a86efdad97f9cd2293da9e166e1aa50d9cf4cd15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ab66a51_11b830fa",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-17T11:17:21Z",
+      "side": 1,
+      "message": "Ah, ack.\n\nI think the usual approach then is making the mutable variables as member of the outer class (MicrodroidTests in this case), and access them via `ClassName.this.varName` syntax.\n\nI think moving the variables is fine as I see that the two boolean variables are repeated in many tests.",
+      "parentUuid": "183ea578_62603478",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 82
+      },
+      "revId": "a86efdad97f9cd2293da9e166e1aa50d9cf4cd15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
