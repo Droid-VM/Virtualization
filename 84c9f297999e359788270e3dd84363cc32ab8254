@@ -18,6 +18,29 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da152008_69708a61",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-17T03:57:41Z",
+      "side": 1,
+      "message": "Could have sworn this built without when I tested it.. Added the import and ran the tests again.",
+      "range": {
+        "startLine": 380,
+        "startChar": 54,
+        "endLine": 380,
+        "endChar": 60
+      },
+      "revId": "84c9f297999e359788270e3dd84363cc32ab8254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13541aa9_5379132a",
@@ -31,6 +54,30 @@
       "writtenOn": "2022-02-17T00:54:45Z",
       "side": 1,
       "message": "Callback `cb` is called in the context of `mCallbackExecutor`. Not sure if this `try/finally` around `Executor.execute` is what we want.",
+      "range": {
+        "startLine": 380,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 29
+      },
+      "revId": "84c9f297999e359788270e3dd84363cc32ab8254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f273434_63286154",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-17T03:57:41Z",
+      "side": 1,
+      "message": "It\u0027s for the case that `Executor.execute` just runs the function directly, see  go/android-api-guidelines#provide-executor to fact-check me :)",
+      "parentUuid": "13541aa9_5379132a",
       "range": {
         "startLine": 380,
         "startChar": 0,
