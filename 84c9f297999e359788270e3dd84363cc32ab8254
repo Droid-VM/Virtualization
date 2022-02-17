@@ -86,6 +86,30 @@
       },
       "revId": "84c9f297999e359788270e3dd84363cc32ab8254",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "502e876d_55ade471",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-17T04:18:17Z",
+      "side": 1,
+      "message": "Thank you for the link.\n\n\u003e This means that when implementing APIs that take this form, your incoming binder object implementation on the app process side must call Binder.clearCallingIdentity() before invoking the app’s callback on the app-supplied Executor.\n\nBut still, I interpret this as something like following.\n\n```\nmCallbackExecutor.execute(() -\u003e {\n  final long restoreToken \u003d Binder.clearCallingIdentity();\n  try {\n    cb.onPayloadStarted(VirtualMachine.this, stream));\n  } finally {\n    Binder.restoreCallingIdentity(restoreToken);\n  }\n});\n```\n\nBut I might be wrong.",
+      "parentUuid": "5f273434_63286154",
+      "range": {
+        "startLine": 380,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 29
+      },
+      "revId": "84c9f297999e359788270e3dd84363cc32ab8254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
