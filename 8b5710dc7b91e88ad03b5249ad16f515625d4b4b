@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6b84d20_583c494a",
+        "filename": "compos/compos_key_helper/compos_key.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-17T16:59:32Z",
+      "side": 1,
+      "message": "I claim this way is strictly better (it makes declaration/definition mismatch into a compiler error rather than a linker error), but you\u0027re right it doesn\u0027t seem to be the accepted style.\nDone.",
+      "parentUuid": "8482b4ca_fed1daa8",
+      "range": {
+        "startLine": 32,
+        "startChar": 23,
+        "endLine": 32,
+        "endChar": 35
+      },
+      "revId": "8b5710dc7b91e88ad03b5249ad16f515625d4b4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1da5e465_ea5a8481",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-02-17T16:31:15Z",
       "side": 1,
       "message": "incomplete comment?",
+      "range": {
+        "startLine": 56,
+        "startChar": 56,
+        "endLine": 56,
+        "endChar": 58
+      },
+      "revId": "8b5710dc7b91e88ad03b5249ad16f515625d4b4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a77e7034_4d5aad54",
+        "filename": "compos/src/compos_key.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-17T16:59:32Z",
+      "side": 1,
+      "message": "It made sense to me, but I\u0027ve attempted to clarify.",
+      "parentUuid": "1da5e465_ea5a8481",
       "range": {
         "startLine": 56,
         "startChar": 56,
@@ -83,6 +131,54 @@
       "writtenOn": "2022-02-17T16:31:15Z",
       "side": 1,
       "message": "nit: how about \"Child exited with communication error\" or something like that?",
+      "range": {
+        "startLine": 60,
+        "startChar": 36,
+        "endLine": 60,
+        "endChar": 48
+      },
+      "revId": "8b5710dc7b91e88ad03b5249ad16f515625d4b4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9cc0224_07e985a2",
+        "filename": "compos/src/compos_key.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-17T16:59:32Z",
+      "side": 1,
+      "message": "See above.",
+      "parentUuid": "c5db3e46_2175b4c8",
+      "range": {
+        "startLine": 60,
+        "startChar": 27,
+        "endLine": 60,
+        "endChar": 33
+      },
+      "revId": "8b5710dc7b91e88ad03b5249ad16f515625d4b4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1848a36_ab5e1952",
+        "filename": "compos/src/compos_key.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-02-17T16:59:32Z",
+      "side": 1,
+      "message": "I\u0027m adding this as context to the read error, deliberately - that\u0027s the root cause, this is just potentially useful info.\n(See the example log messages I posted.)",
+      "parentUuid": "5d2514b5_09d39023",
       "range": {
         "startLine": 60,
         "startChar": 36,
