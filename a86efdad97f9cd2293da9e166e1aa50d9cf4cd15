@@ -142,6 +142,30 @@
       },
       "revId": "a86efdad97f9cd2293da9e166e1aa50d9cf4cd15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10950851_42158c7b",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-17T12:55:56Z",
+      "side": 1,
+      "message": "But verbose means better java... :p\n\nI feel like there are some helpers that can be factored out to check boot progress of a VM. Might get to that at some point and can certainly touch it up if we find a better pattern to use.",
+      "parentUuid": "22d2f504_99b4887d",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 82
+      },
+      "revId": "a86efdad97f9cd2293da9e166e1aa50d9cf4cd15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
