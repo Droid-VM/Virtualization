@@ -70,6 +70,30 @@
       },
       "revId": "c59aa32f69ce69b3cd56b17a02fc5e4fb86e22eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "344b3ec7_9d3502a9",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-17T07:10:59Z",
+      "side": 0,
+      "message": "I think both u-boot and microdroid_manager should fail in the same way, I don\u0027t have a strong opinion on whether it should be shutdown or reboot. \n\nCan a payload pass a reboot reason (or a shutdown reason) to crosvm? A (very) small pmem device could be a solution? Anyway this deserves a new bug. I am fine if that is not addressed in this CL.",
+      "parentUuid": "abf8ebea_314f3145",
+      "range": {
+        "startLine": 267,
+        "startChar": 32,
+        "endLine": 267,
+        "endChar": 39
+      },
+      "revId": "c59aa32f69ce69b3cd56b17a02fc5e4fb86e22eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
