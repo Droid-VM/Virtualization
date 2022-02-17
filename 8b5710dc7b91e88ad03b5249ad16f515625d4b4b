@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "694a4b5e_4375a025",
+        "filename": "compos/compos_key_helper/compos_key.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-02-17T18:08:35Z",
+      "side": 1,
+      "message": "Hopefully this won\u0027t matter, once we can rewrite in Rust :)",
+      "parentUuid": "b6b84d20_583c494a",
+      "range": {
+        "startLine": 32,
+        "startChar": 23,
+        "endLine": 32,
+        "endChar": 35
+      },
+      "revId": "8b5710dc7b91e88ad03b5249ad16f515625d4b4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1da5e465_ea5a8481",
@@ -184,6 +208,30 @@
         "startChar": 36,
         "endLine": 60,
         "endChar": 48
+      },
+      "revId": "8b5710dc7b91e88ad03b5249ad16f515625d4b4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a2d654f_4e2b5418",
+        "filename": "compos/src/compos_key.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-02-17T18:08:35Z",
+      "side": 1,
+      "message": "With bail! (actually not bail!, just anyhow!), wouldn\u0027t it only change the syntax?  You shouldn\u0027t need to unwrap the error manually.  The OK \u003d\u003e String part confused me at first.  I\u0027m just thinking something like:\n\n  result.with_context(|| match child.wait() {\n    Ok(exit_status) \u003d\u003e anyhow!(\"Child exited: {}\", exit_status),\n    Err(wait_err) \u003d\u003e anyhow!(\"Wait for child failed: {:?}\", wait_err),\n  })\n\nBut it\u0027s not a big deal. I don\u0027t want to block you on landing this. We can always follow up if needed.",
+      "parentUuid": "a9cc0224_07e985a2",
+      "range": {
+        "startLine": 60,
+        "startChar": 27,
+        "endLine": 60,
+        "endChar": 33
       },
       "revId": "8b5710dc7b91e88ad03b5249ad16f515625d4b4b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
