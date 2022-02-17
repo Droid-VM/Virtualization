@@ -1,2 +1,5 @@
 androidboot.first_stage_console = 1
 androidboot.hardware = microdroid
+
+# virtio-rng disabled by aosp/1973362 so rely on entropy from the CPU/firmware
+kernel.random.trust_cpu=on
