@@ -16,6 +16,24 @@
       "message": "This was meant to being the instance image to pvmfw, but I\u0027m getting a \u0027Synchronous Abort\u0027 when tring to start a pVM",
       "revId": "3b608ea116084d058f7c081365cf95705268a4e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a526fd13_e9fb8834",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-02-17T09:30:40Z",
+      "side": 1,
+      "message": "I\u0027m able to boot CF BL from the CLI using that exact build of pvmfw and mainline `microdroid_bootloader`:\n```\n/apex/com.android.virt/bin/crosvm run --disable-sandbox \\\n    --serial\u003dtype\u003dstdout,hardware\u003dvirtio-console --protected-vm \\\n    -m 512 -r \u003cunused.img\u003e --rwdisk \u003cinstance.img\u003e \\\n    --bios \u003cmicrodroid_bootloader.boot\u003e\n```\nCould you share the abort error message and the way crosvm is being called?",
+      "parentUuid": "64373509_a23a0498",
+      "revId": "3b608ea116084d058f7c081365cf95705268a4e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
