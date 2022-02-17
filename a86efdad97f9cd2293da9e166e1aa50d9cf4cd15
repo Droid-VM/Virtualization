@@ -22,6 +22,30 @@
       },
       "revId": "a86efdad97f9cd2293da9e166e1aa50d9cf4cd15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "183ea578_62603478",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-17T10:39:27Z",
+      "side": 1,
+      "message": "Because VmEventListener is an inner class, it can only refer to final variables in the outer function scope. Boolean and boolean are immutable so would not be able to be updated from the callback. They need to be wrapped in a class that is internally mutable and CompletableFuture felt applicable since it\u0027s kinda synchronous. But open to other suggestions.",
+      "parentUuid": "e9d93144_ffa08fa3",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 82
+      },
+      "revId": "a86efdad97f9cd2293da9e166e1aa50d9cf4cd15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
