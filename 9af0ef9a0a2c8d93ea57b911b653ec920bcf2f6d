@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37c3cb2a_099331ab",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-02-18T06:26:59Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand, but what I want to do is to touch various places and see all of them failing. For now there\u0027s only microdroid_manager\u0027s data, but we are going to add tests for u-boot (and/or pvmfw?).\n\nCould you please elaborate?",
+      "parentUuid": "e4e7b73b_3d1be84b",
+      "range": {
+        "startLine": 366,
+        "startChar": 7,
+        "endLine": 366,
+        "endChar": 29
+      },
+      "revId": "9af0ef9a0a2c8d93ea57b911b653ec920bcf2f6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bcf50284_20efd411",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 2
@@ -60,6 +84,30 @@
       "writtenOn": "2022-02-18T05:50:47Z",
       "side": 1,
       "message": "Is UUID at the beginning of a block?",
+      "range": {
+        "startLine": 375,
+        "startChar": 12,
+        "endLine": 375,
+        "endChar": 27
+      },
+      "revId": "9af0ef9a0a2c8d93ea57b911b653ec920bcf2f6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea2bc913_6aa358ec",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-02-18T06:26:59Z",
+      "side": 1,
+      "message": "This code is based on locate_microdroid_header (http://cs/android/packages/modules/Virtualization/microdroid_manager/src/instance.rs;l\u003d224;rcl\u003df31ed4ebc35d15252b1959aac3cb6f59e7655af9) and find_partition (https://android.googlesource.com/platform/external/u-boot/+/refs/heads/master/common/vm_instance.c#102). Based on the code, I believe each UUID should be at the beginning of a block.\n\nI\u0027m not sure about the stability of format, though. (Will it be change in the future? idk)",
+      "parentUuid": "d2027a95_23c6b956",
       "range": {
         "startLine": 375,
         "startChar": 12,
