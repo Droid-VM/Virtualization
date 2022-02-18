@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4e7b73b_3d1be84b",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-18T05:46:45Z",
+      "side": 1,
+      "message": "How about replacing instance.img with a plain blob (with 10M and formatted as an instance image) before running the VM? This way, enumerating sections(?) in the instance image would be less hacky regarding qcow format?",
+      "range": {
+        "startLine": 366,
+        "startChar": 7,
+        "endLine": 366,
+        "endChar": 29
+      },
+      "revId": "9af0ef9a0a2c8d93ea57b911b653ec920bcf2f6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcf50284_20efd411",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-18T05:46:45Z",
+      "side": 1,
+      "message": "use OptionalLong or just plain long(\u003c0 for None case)",
+      "range": {
+        "startLine": 369,
+        "startChar": 11,
+        "endLine": 369,
+        "endChar": 26
+      },
+      "revId": "9af0ef9a0a2c8d93ea57b911b653ec920bcf2f6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
