@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7fea654_754f44ac",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-02-18T07:05:46Z",
+      "side": 1,
+      "message": "Talked offline with Jooyung, and we\u0027ve decided to try a raw image (converting instance.img to raw, OR preparing a test raw image containing only headers), as a follow up task.\n\nThis change is anyway better than hard-coded offsets, so I\u0027ll merge this.",
+      "parentUuid": "37c3cb2a_099331ab",
+      "range": {
+        "startLine": 366,
+        "startChar": 7,
+        "endLine": 366,
+        "endChar": 29
+      },
+      "revId": "9af0ef9a0a2c8d93ea57b911b653ec920bcf2f6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcf50284_20efd411",
@@ -61,6 +85,30 @@
       "writtenOn": "2022-02-18T05:46:45Z",
       "side": 1,
       "message": "use OptionalLong or just plain long(\u003c0 for None case)",
+      "range": {
+        "startLine": 369,
+        "startChar": 11,
+        "endLine": 369,
+        "endChar": 26
+      },
+      "revId": "9af0ef9a0a2c8d93ea57b911b653ec920bcf2f6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12985094_423ccf0f",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-02-18T07:05:46Z",
+      "side": 1,
+      "message": "I\u0027ll resolve this as a follow up task.",
+      "parentUuid": "bcf50284_20efd411",
       "range": {
         "startLine": 369,
         "startChar": 11,
@@ -108,6 +156,30 @@
       "side": 1,
       "message": "This code is based on locate_microdroid_header (http://cs/android/packages/modules/Virtualization/microdroid_manager/src/instance.rs;l\u003d224;rcl\u003df31ed4ebc35d15252b1959aac3cb6f59e7655af9) and find_partition (https://android.googlesource.com/platform/external/u-boot/+/refs/heads/master/common/vm_instance.c#102). Based on the code, I believe each UUID should be at the beginning of a block.\n\nI\u0027m not sure about the stability of format, though. (Will it be change in the future? idk)",
       "parentUuid": "d2027a95_23c6b956",
+      "range": {
+        "startLine": 375,
+        "startChar": 12,
+        "endLine": 375,
+        "endChar": 27
+      },
+      "revId": "9af0ef9a0a2c8d93ea57b911b653ec920bcf2f6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a85d717c_05657ea6",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-02-18T07:05:46Z",
+      "side": 1,
+      "message": "marking as resolved",
+      "parentUuid": "ea2bc913_6aa358ec",
       "range": {
         "startLine": 375,
         "startChar": 12,
