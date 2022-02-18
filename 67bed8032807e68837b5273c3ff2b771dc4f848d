@@ -16,6 +16,24 @@
       "message": "Can we move this to bootconfig.common with the kernel. prefix? We have wanted to pass most of kernel cmdline paramters via bootconfig.",
       "revId": "67bed8032807e68837b5273c3ff2b771dc4f848d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7abacdbf_fbde0ee3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-02-18T15:36:24Z",
+      "side": 1,
+      "message": "Cool, didn\u0027t know about bootconfig! I\u0027ve moved it to the `arm64` one as that argument is not relevant for other architectures but as the kernel ignores arguments it doesn\u0027t support, I could still place it in `.common`, let me know if you\u0027d prefer that.",
+      "parentUuid": "4d5dd25c_8565b816",
+      "revId": "67bed8032807e68837b5273c3ff2b771dc4f848d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ef718da_cfd4ff18",
+        "filename": "microdroid/bootconfig.arm64",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-02-18T15:36:24Z",
+      "side": 1,
+      "message": "This is untested, hopefully the syntax is correct; from https://www.kernel.org/doc/html/v5.11/admin-guide/bootconfig.html:\n\n\u003e There can be a key which doesn’t have value or has an empty value. Those keys are used for checking if the key exists or not (like a boolean).",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 18
+      },
+      "revId": "66a006d64619659b6b7eb5a03a97f39cda8f6e9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
