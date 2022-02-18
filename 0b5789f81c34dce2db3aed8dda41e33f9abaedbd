@@ -46,7 +46,29 @@
       },
       "revId": "0b5789f81c34dce2db3aed8dda41e33f9abaedbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7b48cf1_d1175d94",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-18T18:32:05Z",
+      "side": 1,
+      "message": "Looks like this argument is available only for aarch64.\nhttps://cs.android.com/android/platform/superproject/+/master:external/crosvm/src/main.rs;l\u003d2678-2679?q\u003dswiotlb%20f:crosvm\n\nIs this okay for cuttlefish? When I ran the test on cuttlefish (with protected), crosvm exits with \"unknown swiotlb\".",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 67
+      },
+      "revId": "0b5789f81c34dce2db3aed8dda41e33f9abaedbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
-  ],
-  "submitRequirementResults": []
+  ]
 }
