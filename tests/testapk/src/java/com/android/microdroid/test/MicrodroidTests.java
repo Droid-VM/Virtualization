@@ -170,6 +170,12 @@ public class MicrodroidTests {
         }
     }
 
+    /** Create a new VirtualMachineConfig.Builder with the parameterized protection mode. */
+    private VirtualMachineConfig.Builder newVmConfigBuilder(String payloadConfigPath) {
+        return new VirtualMachineConfig.Builder(mInner.mContext, payloadConfigPath)
+                        .protectedVm(mProtectedVm);
+    }
+
     private static final int MIN_MEM_ARM64 = 145;
     private static final int MIN_MEM_X86_64 = 196;
 
@@ -181,8 +187,7 @@ public class MicrodroidTests {
             .isNotEqualTo("5.4");
 
         VirtualMachineConfig.Builder builder =
-                new VirtualMachineConfig.Builder(mInner.mContext, "assets/vm_config_extra_apk.json")
-                        .protectedVm(mProtectedVm);
+                newVmConfigBuilder("assets/vm_config_extra_apk.json");
         if (Build.SUPPORTED_ABIS.length > 0) {
             String primaryAbi = Build.SUPPORTED_ABIS[0];
             switch(primaryAbi) {
@@ -261,9 +266,7 @@ public class MicrodroidTests {
             .that(KERNEL_VERSION)
             .isNotEqualTo("5.4");
 
-        VirtualMachineConfig.Builder builder =
-                new VirtualMachineConfig.Builder(mInner.mContext, "assets/vm_config.json")
-                        .protectedVm(mProtectedVm);
+        VirtualMachineConfig.Builder builder = newVmConfigBuilder("assets/vm_config.json");
         VirtualMachineConfig normalConfig = builder.debugLevel(DebugLevel.NONE).build();
         mInner.mVm = mInner.mVmm.getOrCreate("test_vm", normalConfig);
         VmEventListener listener =
@@ -306,10 +309,9 @@ public class MicrodroidTests {
 
     private VmCdis launchVmAndGetCdis(String instanceName)
             throws VirtualMachineException, InterruptedException {
-        VirtualMachineConfig.Builder builder =
-                new VirtualMachineConfig.Builder(mInner.mContext, "assets/vm_config.json")
-                        .protectedVm(mProtectedVm);
-        VirtualMachineConfig normalConfig = builder.debugLevel(DebugLevel.NONE).build();
+        VirtualMachineConfig normalConfig = newVmConfigBuilder("assets/vm_config.json")
+                .debugLevel(DebugLevel.NONE)
+                .build();
         mInner.mVm = mInner.mVmm.getOrCreate(instanceName, normalConfig);
         final VmCdis vmCdis = new VmCdis();
         final CompletableFuture<Exception> exception = new CompletableFuture<>();
@@ -391,10 +393,9 @@ public class MicrodroidTests {
             .that(KERNEL_VERSION)
             .isNotEqualTo("5.4");
 
-        VirtualMachineConfig.Builder builder =
-                new VirtualMachineConfig.Builder(mInner.mContext, "assets/vm_config.json")
-                        .protectedVm(mProtectedVm);
-        VirtualMachineConfig normalConfig = builder.debugLevel(DebugLevel.NONE).build();
+        VirtualMachineConfig normalConfig = newVmConfigBuilder("assets/vm_config.json")
+                .debugLevel(DebugLevel.NONE)
+                .build();
         mInner.mVm = mInner.mVmm.getOrCreate("bcc_vm", normalConfig);
         final VmCdis vmCdis = new VmCdis();
         final CompletableFuture<byte[]> bcc = new CompletableFuture<>();
@@ -467,11 +468,9 @@ public class MicrodroidTests {
                 .that(android.os.Build.DEVICE)
                 .isNotEqualTo("vsoc_x86_64");
 
-        VirtualMachineConfig config =
-                new VirtualMachineConfig.Builder(mInner.mContext, "assets/vm_config.json")
-                        .protectedVm(mProtectedVm)
-                        .debugLevel(DebugLevel.NONE)
-                        .build();
+        VirtualMachineConfig config = newVmConfigBuilder("assets/vm_config.json")
+                .debugLevel(DebugLevel.NONE)
+                .build();
 
         // Remove any existing VM so we can start from scratch
         VirtualMachine oldVm = mInner.mVmm.getOrCreate("test_vm_integrity", config);
