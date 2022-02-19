@@ -69,6 +69,30 @@
       },
       "revId": "0b5789f81c34dce2db3aed8dda41e33f9abaedbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d918f5c_ad201f8c",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-19T02:35:26Z",
+      "side": 1,
+      "message": "Protected VM isn\u0027t supported in cuttlefish, so I think this is fine.",
+      "parentUuid": "f7b48cf1_d1175d94",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 67
+      },
+      "revId": "0b5789f81c34dce2db3aed8dda41e33f9abaedbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
