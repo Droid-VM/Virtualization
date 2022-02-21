@@ -33,6 +33,24 @@
       "message": "TH failed to find our class definition\n\n```",
       "revId": "681c18974a704acc27ce598078a9cbffc28174b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d37412e_23f844d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-21T19:45:11Z",
+      "side": 1,
+      "message": "```\n[INSTRUMENTATION_NULL_METHOD|530002|TEST_FAILURE] Runner reported an invalid method \u0027initializationError\u0027 (com.android.microdroid.test.MicrodroidTests#initializationError). Something went wrong, Skipping its reporting. Stack:java.lang.NoClassDefFoundError: Failed resolution of: Landroid/system/virtualmachine/VirtualMachineConfig$Builder;\n```\n\nbut that\u0027s not an issue when I run `atest MicrodroidTests` locally. Let\u0027s see if that automatic retry was on to something..",
+      "parentUuid": "c6ae515b_bfe88f3a",
+      "revId": "681c18974a704acc27ce598078a9cbffc28174b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
