@@ -93,6 +93,30 @@
       },
       "revId": "0b5789f81c34dce2db3aed8dda41e33f9abaedbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b9df8ec_16c7f3d5",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-02-21T13:14:33Z",
+      "side": 1,
+      "message": "Right, protected VMs are only supported on aarch64. The `--swiotlb` flag only makes sense for protected VMs.",
+      "parentUuid": "0d918f5c_ad201f8c",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 67
+      },
+      "revId": "0b5789f81c34dce2db3aed8dda41e33f9abaedbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
