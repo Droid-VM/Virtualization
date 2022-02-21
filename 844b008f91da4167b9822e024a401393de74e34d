@@ -16,6 +16,24 @@
       "message": "\u003e bootconfig cannot set early kernel params\n\nDidn\u0027t know that. Then what about setting it directly? https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/microdroid/Android.bp;drc\u003db54646f8a2ad664391cb237984cda433de739780;l\u003d212",
       "revId": "844b008f91da4167b9822e024a401393de74e34d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f70b4430_3d02733b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-02-21T08:29:06Z",
+      "side": 1,
+      "message": "I didn\u0027t know it either, and I think it\u0027s a bootconfig bug tbh (although not easily fixed). I\u0027ll mention it upstream, but in the meantime I\u0027ve fixed this problem with aosp/1991819).",
+      "parentUuid": "7959ab3c_49a0b22a",
+      "revId": "844b008f91da4167b9822e024a401393de74e34d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
