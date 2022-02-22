@@ -283,6 +283,30 @@
       },
       "revId": "b95a5f823012d997d3204d9244eb00cdd2b6676c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8b20dc1_51ae7064",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-22T08:04:42Z",
+      "side": 1,
+      "message": "AFAIK, this is okay because pvmfw boot flow only checks if bootloader\u0027s pubkey matches and for non-protected VM it doesn\u0027t. At least this reflects the current behavior, so if this is not what we want, this should be a bug.",
+      "parentUuid": "eb160b7c_694d8382",
+      "range": {
+        "startLine": 297,
+        "startChar": 16,
+        "endLine": 297,
+        "endChar": 48
+      },
+      "revId": "b95a5f823012d997d3204d9244eb00cdd2b6676c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
