@@ -331,6 +331,30 @@
       },
       "revId": "b95a5f823012d997d3204d9244eb00cdd2b6676c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "729cdc29_24af0cc9",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-02-22T10:01:58Z",
+      "side": 1,
+      "message": "For non-protected VMs, we\u0027re running regular KVM and pvmfw isn\u0027t loaded into the guest\u0027s address space so anything that can be run will be. In particular, there\u0027s no requirement for being AVB-signed.",
+      "parentUuid": "795f337a_b54545c0",
+      "range": {
+        "startLine": 297,
+        "startChar": 16,
+        "endLine": 297,
+        "endChar": 48
+      },
+      "revId": "b95a5f823012d997d3204d9244eb00cdd2b6676c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
