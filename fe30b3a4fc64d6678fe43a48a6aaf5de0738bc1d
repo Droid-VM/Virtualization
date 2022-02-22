@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "26a8fb17_4df963f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-22T23:32:57Z",
+      "side": 1,
+      "message": "Presubmit is failing with a similar error to aosp/1992928\n\n```\n[INSTRUMENTATION_NULL_METHOD|530002|TEST_FAILURE] Runner reported an invalid method \u0027initializationError\u0027 (com.android.microdroid.test.MicrodroidTests#initializationError).\nSomething went wrong, Skipping its reporting. Stack:java.lang.NoClassDefFoundError: Failed resolution of: Landroid/system/virtualmachine/VirtualMachine;\n```\n\nIt works locally when run with atest but I don\u0027t know what\u0027s wrong when it runs in presubmit. I\u0027ve been trying to ask around but haven\u0027t yet found the right people :/",
+      "revId": "fe30b3a4fc64d6678fe43a48a6aaf5de0738bc1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "654fc550_39b0a6d4",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 2
