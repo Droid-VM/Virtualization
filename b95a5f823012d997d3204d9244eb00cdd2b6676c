@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6450c4f0_952e436b",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-22T05:43:40Z",
+      "side": 1,
+      "message": "Can we re-sign only boot.img so that we can check if u-boot rejects it?",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 8
+      },
+      "revId": "b95a5f823012d997d3204d9244eb00cdd2b6676c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad797040_d8a2ba83",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-22T05:43:40Z",
+      "side": 1,
+      "message": "Could you explain more about why we can\u0027t use `vm run-app`? What is the blocker? A selinux policy?",
+      "range": {
+        "startLine": 210,
+        "startChar": 11,
+        "endLine": 210,
+        "endChar": 63
+      },
+      "revId": "b95a5f823012d997d3204d9244eb00cdd2b6676c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb160b7c_694d8382",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-02-22T05:43:40Z",
+      "side": 1,
+      "message": "Why does this have to be succcessful?",
+      "range": {
+        "startLine": 297,
+        "startChar": 16,
+        "endLine": 297,
+        "endChar": 48
+      },
+      "revId": "b95a5f823012d997d3204d9244eb00cdd2b6676c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
