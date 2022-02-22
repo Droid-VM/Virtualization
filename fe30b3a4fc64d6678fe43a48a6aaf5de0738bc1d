@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dc5767f_b476f94f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-02-22T13:31:24Z",
+      "side": 1,
+      "message": "Sorry Andrew, let me resolve your comments as a follow-up task! I recorded it in b/218461230.",
+      "revId": "fe30b3a4fc64d6678fe43a48a6aaf5de0738bc1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "654fc550_39b0a6d4",
@@ -14,6 +31,30 @@
       "writtenOn": "2022-02-22T13:16:10Z",
       "side": 1,
       "message": "The pvmfw uuid is 90d2174a-038a-4bc6-adf3-824848fc5825 and could be added when mProtectedVm is true",
+      "range": {
+        "startLine": 511,
+        "startChar": 20,
+        "endLine": 511,
+        "endChar": 26
+      },
+      "revId": "fe30b3a4fc64d6678fe43a48a6aaf5de0738bc1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6076b06_91c34910",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-02-22T13:31:24Z",
+      "side": 1,
+      "message": "Sounds good, I\u0027ll add it as a follow-up task.",
+      "parentUuid": "654fc550_39b0a6d4",
       "range": {
         "startLine": 511,
         "startChar": 20,
@@ -47,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a338a7a_546dc341",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-02-22T13:31:24Z",
+      "side": 1,
+      "message": "Yeah, this could be a follow-up, which will be much easier if we split the test cases.",
+      "parentUuid": "61eebf54_a6a40add",
+      "range": {
+        "startLine": 515,
+        "startChar": 16,
+        "endLine": 515,
+        "endChar": 17
+      },
+      "revId": "fe30b3a4fc64d6678fe43a48a6aaf5de0738bc1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30e410fd_74e79e79",
@@ -60,6 +125,24 @@
       "writtenOn": "2022-02-22T13:16:10Z",
       "side": 1,
       "message": "If it fails, I don\u0027t think we\u0027d know which component was the problem. Is it worth splitting the cases into separate @Tests that call a common function with the UUID, that way we could easily see which components are skipped, passing and failing? Or trying all the cases and storing the results in a map UUID-\u003eresult, so we can assert using containsEntry(), such that it show all the details on a failure (this wouldn\u0027t reveal the skipped cases though).",
+      "revId": "fe30b3a4fc64d6678fe43a48a6aaf5de0738bc1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb21c8a8_9962d44f",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-02-22T13:31:24Z",
+      "side": 1,
+      "message": "\u003e Is it worth splitting the cases into separate @Tests that call a common function with the UUID, that way we could easily see which components are skipped, passing and failing?\n\nThis sounds reasonable. Let me tackle it as a follow-up task.\n\n\u003e Or trying all the cases and storing the results in a map UUID-\u003eresult, so we can assert using containsEntry(), such that it show all the details on a failure (this wouldn\u0027t reveal the skipped cases though).\n\nWell, this doesn\u0027t seem better than your first idea.",
+      "parentUuid": "30e410fd_74e79e79",
       "revId": "fe30b3a4fc64d6678fe43a48a6aaf5de0738bc1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
