@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ec1634aa_38e3f435",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-02-22T11:06:33Z",
+      "side": 1,
+      "message": "Andrew?",
+      "parentUuid": "7b4ca328_f3b88c64",
+      "range": {
+        "startLine": 470,
+        "startChar": 0,
+        "endLine": 470,
+        "endChar": 84
+      },
+      "revId": "116d1f6c4c1a7e7684645596634ad4ff40d03e2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf9196a3_525ab974",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2022-02-22T10:49:49Z",
       "side": 1,
       "message": "s/VM/Vm\n\nref: naming: https://source.android.com/setup/contribute/code-style#treat-acronyms-as-words\n\n(Yes, UUID is a violation but.. ;-)",
+      "range": {
+        "startLine": 500,
+        "startChar": 19,
+        "endLine": 500,
+        "endChar": 28
+      },
+      "revId": "116d1f6c4c1a7e7684645596634ad4ff40d03e2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c893e1f8_cdc1be2d",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-02-22T11:06:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf9196a3_525ab974",
       "range": {
         "startLine": 500,
         "startChar": 19,
@@ -60,6 +108,30 @@
       "writtenOn": "2022-02-22T10:49:49Z",
       "side": 1,
       "message": "Can we merge this into the loop? Yes, \"must exist\" vs \"may or may not exist\". But \"must exist\" can be loosened in this test, I think, for the sake of simplicity. (If we want to check \"must exist\", then we could have a separate test where we wouldn\u0027t care flip/flop/boot/no-boot.. at all.)",
+      "range": {
+        "startLine": 510,
+        "startChar": 0,
+        "endLine": 516,
+        "endChar": 69
+      },
+      "revId": "116d1f6c4c1a7e7684645596634ad4ff40d03e2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28631139_b8c440b2",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-02-22T11:06:33Z",
+      "side": 1,
+      "message": "Hmm, it makes sense. As I don\u0027t have a strong opinion here... done.",
+      "parentUuid": "7a70e4fe_f5fcc877",
       "range": {
         "startLine": 510,
         "startChar": 0,
