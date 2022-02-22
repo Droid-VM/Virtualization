@@ -41,5 +41,5 @@ interface IIsolatedCompilationService {
      * callback, unless the returned ICompilationTask is cancelled. The caller should maintain
      * a reference to the ICompilationTask until compilation completes or is cancelled.
      */
-    ICompilationTask startTestCompile(ICompilationTaskCallback callback);
+    ICompilationTask startTestCompile(boolean preferStaged, ICompilationTaskCallback callback);
 }

@@ -58,10 +58,11 @@ impl IIsolatedCompilationService for IsolatedCompilationService {
 
     fn startTestCompile(
         &self,
+        prefer_staged: bool,
         callback: &Strong<dyn ICompilationTaskCallback>,
     ) -> binder::Result<Strong<dyn ICompilationTask>> {
         check_permissions()?;
-        to_binder_result(self.do_start_test_compile(callback))
+        to_binder_result(self.do_start_test_compile(prefer_staged, callback))
     }
 }
 
@@ -85,9 +86,11 @@ impl IsolatedCompilationService {
 
     fn do_start_test_compile(
         &self,
+        prefer_staged: bool,
         callback: &Strong<dyn ICompilationTaskCallback>,
     ) -> Result<Strong<dyn ICompilationTask>> {
-        let comp_os = self.instance_manager.start_test_instance().context("Starting CompOS")?;
+        let comp_os =
+            self.instance_manager.start_test_instance(prefer_staged).context("Starting CompOS")?;
 
         let target_dir_name = TEST_ARTIFACTS_SUBDIR.to_owned();
         let task = OdrefreshTask::start(

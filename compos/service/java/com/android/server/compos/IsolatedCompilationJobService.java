@@ -176,7 +176,7 @@ public class IsolatedCompilationJobService extends JobService {
             try {
                 ICompilationTask composTask;
                 if (jobId == DAILY_JOB_ID) {
-                    composTask = composd.startTestCompile(this);
+                    composTask = composd.startTestCompile(/* prefer_staged */false, this);
                 } else {
                     composTask = composd.startStagedApexCompile(this);
                 }
