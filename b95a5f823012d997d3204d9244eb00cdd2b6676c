@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "45ec2160_75615c6e",
+        "filename": "tests/hostside/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-22T06:41:41Z",
+      "side": 1,
+      "message": "I expected this would handle the dependencies, but it\u0027s not. Binaries are just put in the test root, not arch-specific bin sub directory (sh_host_test does it!). For now required libs (e.g. liblp.so) are not accessible from these tools.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 6
+      },
+      "revId": "b95a5f823012d997d3204d9244eb00cdd2b6676c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6450c4f0_952e436b",
         "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
         "patchSetId": 3
