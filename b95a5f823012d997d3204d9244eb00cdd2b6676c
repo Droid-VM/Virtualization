@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f9daf15d_03803d9d",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-22T06:57:19Z",
+      "side": 1,
+      "message": "Ack. would the test work as follows?\n- keep original bootloader (u-boot)\n- re-sign boot.img (and vbmeta..)\n- start a VM \u003d\u003e should fail\n\nAck. I\u0027ll add it too in a follow up.",
+      "parentUuid": "3c0494d8_3f4024a0",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 8
+      },
+      "revId": "b95a5f823012d997d3204d9244eb00cdd2b6676c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad797040_d8a2ba83",
         "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
         "patchSetId": 3
