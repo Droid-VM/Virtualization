@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49ec6176_24e440a8",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-22T06:10:30Z",
+      "side": 1,
+      "message": "hmm, then we need to update microdroid_vbmeta as well, which consists of several partitions. I don\u0027t know how to create a vbmeta out of them when only boot.img is signed by a different key. Probably need some time to investigate further.",
+      "parentUuid": "6450c4f0_952e436b",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 8
+      },
+      "revId": "b95a5f823012d997d3204d9244eb00cdd2b6676c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad797040_d8a2ba83",
         "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2022-02-22T05:43:40Z",
       "side": 1,
       "message": "Could you explain more about why we can\u0027t use `vm run-app`? What is the blocker? A selinux policy?",
+      "range": {
+        "startLine": 210,
+        "startChar": 11,
+        "endLine": 210,
+        "endChar": 63
+      },
+      "revId": "b95a5f823012d997d3204d9244eb00cdd2b6676c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e406dec_fe2d6f21",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-22T06:10:30Z",
+      "side": 1,
+      "message": "run-app commands accepts \"APP config\" which is by intention to deliver `os: \"microdroid\"` (which is the only supported type for now). Virtualization service uses this to determine the pre-configured OS images.\n\n- app config: for a VM app which is supposed to be run on microdroid (at least for now).\n- raw config: for a VM app which uses any bootloader OR kernel/initrd.\n\nWe could extend \"app config\" to be overridable like..\n\n```\n{\n  \"os\": \"microdroid\",            // VS uses ./etc/microdroid.json\n  \"bootloader\": \"my_bootloader\", // overrides \"bootloader\" in ./etc/microdroid.json\n  ..\n}\n```",
+      "parentUuid": "ad797040_d8a2ba83",
       "range": {
         "startLine": 210,
         "startChar": 11,
