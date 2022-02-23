@@ -70,6 +70,30 @@
       },
       "revId": "bbac5198dc94094b3aa5f8b39ef74be6d3e1cabb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc76d102_6f3e5ae2",
+        "filename": "authfs/src/fusefs/mount.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-02-23T18:53:16Z",
+      "side": 1,
+      "message": "... which is not a good idea, since AuthFS still receive requests to set atime with noatime. Added the rationale to b/220931440.",
+      "parentUuid": "cb6f2835_82157709",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 59
+      },
+      "revId": "bbac5198dc94094b3aa5f8b39ef74be6d3e1cabb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
