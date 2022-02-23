@@ -16,6 +16,29 @@
       "message": "I give up.",
       "revId": "4ed2a34e7c729af4f6ee51d275d027330b4b94c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6652f28f_e81705fa",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-02-23T09:51:55Z",
+      "side": 1,
+      "message": "This causes the problem as the test runner tries to resolve all the types in the test class. A hack would be to hide this method in an inner class where it won\u0027t get scanned. But if you have a neater idea then lmk!",
+      "range": {
+        "startLine": 467,
+        "startChar": 30,
+        "endLine": 467,
+        "endChar": 44
+      },
+      "revId": "4ed2a34e7c729af4f6ee51d275d027330b4b94c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
