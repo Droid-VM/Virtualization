@@ -28,7 +28,7 @@ use compos_common::{
     COMPOS_DATA_ROOT, CURRENT_INSTANCE_DIR, IDSIG_FILE, IDSIG_MANIFEST_APK_FILE,
     INSTANCE_IMAGE_FILE, TEST_INSTANCE_DIR,
 };
-use log::error;
+use log::{error, info};
 use std::fs::File;
 use std::io::Read;
 use std::panic;
@@ -53,6 +53,7 @@ fn main() {
         error!("{:?}", e);
         std::process::exit(1)
     }
+    info!("Done");
 }
 
 fn try_main() -> Result<()> {

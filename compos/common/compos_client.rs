@@ -37,12 +37,14 @@ use binder::{
 };
 use compos_aidl_interface::aidl::com::android::compos::ICompOsService::ICompOsService;
 use log::{info, warn};
+use nix::fcntl::OFlag;
+use nix::unistd::pipe2;
 use rustutils::system_properties;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::num::NonZeroU32;
 use std::os::raw;
-use std::os::unix::io::IntoRawFd;
+use std::os::unix::io::{FromRawFd, IntoRawFd};
 use std::path::Path;
 use std::sync::{Arc, Condvar, Mutex};
 use std::thread;
@@ -92,7 +94,7 @@ impl VmInstance {
         let instance_fd = ParcelFileDescriptor::new(instance_image);
 
         let apex_dir = Path::new(COMPOS_APEX_ROOT);
-        let data_dir = Path::new(COMPOS_DATA_ROOT);
+        let _data_dir = Path::new(COMPOS_DATA_ROOT);
 
         let apk_fd = File::open(apex_dir.join("app/CompOSPayloadApp/CompOSPayloadApp.apk"))
             .context("Failed to open config APK file")?;
@@ -106,10 +108,8 @@ impl VmInstance {
 
         let (console_fd, log_fd, debug_level) = if parameters.debug_mode {
             // Console output and the system log output from the VM are redirected to file.
-            let console_fd = File::create(data_dir.join("vm_console.log"))
-                .context("Failed to create console log file")?;
-            let log_fd = File::create(data_dir.join("vm.log"))
-                .context("Failed to create system log file")?;
+            let console_fd = spawn_logging_thread("Console")?;
+            let log_fd = spawn_logging_thread("OS")?;
             let console_fd = ParcelFileDescriptor::new(console_fd);
             let log_fd = ParcelFileDescriptor::new(log_fd);
             info!("Running in debug mode");
@@ -384,4 +384,23 @@ fn start_logging(pfd: &ParcelFileDescriptor) -> Result<()> {
         }
     });
     Ok(())
+}
+
+fn spawn_logging_thread(log_name: &str) -> Result<File> {
+    let log_name = log_name.to_owned();
+    let (raw_read, raw_write) = pipe2(OFlag::O_CLOEXEC)?;
+    let (read, write) = unsafe { (File::from_raw_fd(raw_read), File::from_raw_fd(raw_write)) };
+    let reader = BufReader::new(read);
+    thread::spawn(move || {
+        for line in reader.lines() {
+            match line {
+                Ok(line) => info!("{}: {}", log_name, line),
+                Err(e) => {
+                    warn!("Reading {} output failed: {}", log_name, e);
+                    break;
+                }
+            }
+        }
+    });
+    Ok(write)
 }
