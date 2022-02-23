@@ -37,12 +37,14 @@ use binder::{
 };
 use compos_aidl_interface::aidl::com::android::compos::ICompOsService::ICompOsService;
 use log::{info, warn};
+use nix::fcntl::OFlag;
+use nix::unistd::pipe2;
 use rustutils::system_properties;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::num::NonZeroU32;
 use std::os::raw;
-use std::os::unix::io::IntoRawFd;
+use std::os::unix::io::{FromRawFd, IntoRawFd};
 use std::path::Path;
 use std::sync::{Arc, Condvar, Mutex};
 use std::thread;
@@ -106,8 +108,9 @@ impl VmInstance {
 
         let (console_fd, log_fd, debug_level) = if parameters.debug_mode {
             // Console output and the system log output from the VM are redirected to file.
-            let console_fd = File::create(data_dir.join("vm_console.log"))
-                .context("Failed to create console log file")?;
+            let (raw_read, raw_write) = pipe2(OFlag::O_CLOEXEC)?;
+            spawn_logging_thread(unsafe { File::from_raw_fd(raw_read) });
+            let console_fd = unsafe { File::from_raw_fd(raw_write) };
             let log_fd = File::create(data_dir.join("vm.log"))
                 .context("Failed to create system log file")?;
             let console_fd = ParcelFileDescriptor::new(console_fd);
@@ -384,4 +387,19 @@ fn start_logging(pfd: &ParcelFileDescriptor) -> Result<()> {
         }
     });
     Ok(())
+}
+
+fn spawn_logging_thread(input: File) {
+    let reader = BufReader::new(input);
+    thread::spawn(move || {
+        for line in reader.lines() {
+            match line {
+                Ok(line) => info!("Console: {}", line),
+                Err(e) => {
+                    warn!("Reading console output failed: {}", e);
+                    break;
+                }
+            }
+        }
+    });
 }
