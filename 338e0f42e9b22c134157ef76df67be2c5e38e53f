@@ -22,6 +22,30 @@
       },
       "revId": "338e0f42e9b22c134157ef76df67be2c5e38e53f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "500d79c7_02a1e621",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-02-23T18:39:11Z",
+      "side": 1,
+      "message": "This was fixed in https://android.googlesource.com/platform/external/u-boot/+/feffccfe078f779735aa690a5c9d16347a55e419 but might not have reached microdroid_bootloader yet.",
+      "parentUuid": "c8f32ab9_5252a8c7",
+      "range": {
+        "startLine": 331,
+        "startChar": 35,
+        "endLine": 331,
+        "endChar": 74
+      },
+      "revId": "338e0f42e9b22c134157ef76df67be2c5e38e53f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
