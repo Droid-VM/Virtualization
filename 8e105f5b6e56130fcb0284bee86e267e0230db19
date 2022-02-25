@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41920fba_51a45c87",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-25T07:01:16Z",
+      "side": 1,
+      "message": "What\u0027s the default for VersionReq? (The comment might help)\nOr is this required? Then should we remove the attribute?",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 21
+      },
+      "revId": "8e105f5b6e56130fcb0284bee86e267e0230db19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17842fdb_3a628f3d",
+        "filename": "libs/vmconfig/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-02-25T07:01:16Z",
+      "side": 1,
+      "message": "For now `VmConfig` is the source of truth regarding \"vm\u0027s raw config\". But there\u0027s duplicate in https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/tests/hostside/java/android/virt/test/MicrodroidTestCase.java;l\u003d119-145?q\u003dstatic%20class%20VmRawConfig\u0026ss\u003dandroid%2Fplatform%2Fsuperproject\n\nI filed to remove duplication (b/221368644) but until then the Java classes should be changed accordingly. (Otherwise the test will fail. assuming this new property is mandatory)",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 37
+      },
+      "revId": "8e105f5b6e56130fcb0284bee86e267e0230db19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
