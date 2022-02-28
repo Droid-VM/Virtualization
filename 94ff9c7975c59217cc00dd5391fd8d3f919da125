@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d6ae643_22a26448",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-02-28T11:05:53Z",
+      "side": 1,
+      "message": "Reverted to patchset 1 as `ioremap_guard` is an `early_param` so can\u0027t be set from bootconfig",
+      "revId": "94ff9c7975c59217cc00dd5391fd8d3f919da125",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
