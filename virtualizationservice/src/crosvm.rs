@@ -199,6 +199,8 @@ impl VmInstance {
     /// This takes a separate reference to the `SharedChild` rather than using the one in
     /// `self.vm_state` to avoid holding the lock on `vm_state` while it is running.
     fn monitor(&self, child: Arc<SharedChild>) {
+        let x = binder_common::lazy_service::LazyServiceGuard::new();
+        info!("Monitoring crosvm");
         let result = child.wait();
         match &result {
             Err(e) => error!("Error waiting for crosvm({}) instance to die: {}", child.id(), e),
@@ -216,6 +218,7 @@ impl VmInstance {
         if let Err(e) = remove_dir_all(&self.temporary_directory) {
             error!("Error removing temporary directory {:?}: {}", self.temporary_directory, e);
         }
+        drop(x);
     }
 
     /// Returns the last reported state of the VM payload.
@@ -241,11 +244,13 @@ impl VmInstance {
         let vm_state = &*self.vm_state.lock().unwrap();
         if let VmState::Running { child } = vm_state {
             let id = child.id();
-            debug!("Killing crosvm({})", id);
+            info!("Killing crosvm({})", id);
             // TODO: Talk to crosvm to shutdown cleanly.
             if let Err(e) = child.kill() {
                 error!("Error killing crosvm({}) instance: {}", id, e);
+                return;
             }
+            info!("Killed");
         }
     }
 }

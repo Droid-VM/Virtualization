@@ -42,7 +42,7 @@ fn main() {
     android_logger::init_once(
         android_logger::Config::default()
             .with_tag(LOG_TAG)
-            .with_min_level(Level::Info)
+            .with_min_level(Level::Trace)
             .with_log_id(android_logger::LogId::System),
     );
 
