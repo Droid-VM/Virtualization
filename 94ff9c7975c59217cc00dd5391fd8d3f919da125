@@ -16,6 +16,23 @@
       "message": "Reverted to patchset 1 as `ioremap_guard` is an `early_param` so can\u0027t be set from bootconfig",
       "revId": "94ff9c7975c59217cc00dd5391fd8d3f919da125",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e6f88f2_e6ec7d2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-03-01T02:20:01Z",
+      "side": 1,
+      "message": "We prefer passing cmdline parameters via bootconfig. Do we need ioremap_guard here because it\u0027s needed before bootconfig is parsed?",
+      "revId": "94ff9c7975c59217cc00dd5391fd8d3f919da125",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
