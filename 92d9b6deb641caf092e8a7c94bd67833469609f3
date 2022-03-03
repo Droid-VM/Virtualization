@@ -16,6 +16,24 @@
       "message": "Thanks. I am fine with this, but Will seems to have a concern about the use of serial devices. b/221186281\n\nWe may have to leave this thread open until the bug is resolved.",
       "revId": "92d9b6deb641caf092e8a7c94bd67833469609f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bb03242_59df140f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-03-03T11:11:51Z",
+      "side": 1,
+      "message": "On the basis of your comment there that we will reset `CONFIG_MAGIC_SYSRQ_DEFAULT_ENABLE`, I\u0027m going to submit this as at least a temporary solution. It would still be better to use PSCI `SYSTEM_RESET2` on aarch64 but we don\u0027t have a viable alternative for x86 yet, so until we do this is hopefully good enough.",
+      "parentUuid": "6f9797e6_6081b32c",
+      "revId": "92d9b6deb641caf092e8a7c94bd67833469609f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
