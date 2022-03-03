@@ -16,6 +16,24 @@
       "message": "I\u0027m fine with this change, but just curious about how this change solves breakage due to schema change.",
       "revId": "3cf209411c7ab86a9d04674230b77a9fa8fc41a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5e1dc12_6b7f6b3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-03-03T03:14:55Z",
+      "side": 1,
+      "message": "For now, like aosp/1976386, we need to change both rust/java types for the schema change. This will **loosen** the coupling between them. So, simply adding a new key to the config object wouldn\u0027t break the test with this change. Yeah, but there\u0027s still remaining a coupling. When key names(disks/partitions/writable/etc) are changed or their types are changed, this tests will break though.",
+      "parentUuid": "23318aa5_d1e73b37",
+      "revId": "3cf209411c7ab86a9d04674230b77a9fa8fc41a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
