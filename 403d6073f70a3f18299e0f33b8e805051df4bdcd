@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf2f441f_100120ea",
+        "filename": "authfs/src/fsverity/editor.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-03-04T17:26:20Z",
+      "side": 1,
+      "message": "Great catch! I\u0027ll fix this one next.",
+      "parentUuid": "ca5d185c_a42b7b25",
+      "range": {
+        "startLine": 231,
+        "startChar": 28,
+        "endLine": 231,
+        "endChar": 37
+      },
+      "revId": "403d6073f70a3f18299e0f33b8e805051df4bdcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "619ae5c3_82957b56",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef002d04_f9818e3a",
+        "filename": "authfs/src/fsverity/editor.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-03-04T17:26:20Z",
+      "side": 1,
+      "message": "I added `read_backing_chunk{,_verified}`. Hopefully that gives more context to mitigate the problem... I can\u0027t figure out a compiler assisted way.",
+      "parentUuid": "619ae5c3_82957b56",
+      "range": {
+        "startLine": 263,
+        "startChar": 7,
+        "endLine": 263,
+        "endChar": 17
+      },
+      "revId": "403d6073f70a3f18299e0f33b8e805051df4bdcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "014cd5de_dfa12ae8",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-03-04T13:17:59Z",
       "side": 1,
       "message": "If this can\u0027t/shouldn\u0027t happen, would it be better to treat it as an error?",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 279,
+        "endChar": 55
+      },
+      "revId": "403d6073f70a3f18299e0f33b8e805051df4bdcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "390a757c_ce2fa531",
+        "filename": "authfs/src/fsverity/editor.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-03-04T17:26:20Z",
+      "side": 1,
+      "message": "We could. This is a DoS, which is our threat model anyway. On the contrary, the execution can still continue, so for now I\u0027m just logging a warning.",
+      "parentUuid": "014cd5de_dfa12ae8",
       "range": {
         "startLine": 277,
         "startChar": 0,
