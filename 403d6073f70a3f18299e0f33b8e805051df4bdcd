@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca5d185c_a42b7b25",
+        "filename": "authfs/src/fsverity/editor.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-03-04T13:17:59Z",
+      "side": 1,
+      "message": "Where does this verification happen? I don\u0027t see it below.",
+      "range": {
+        "startLine": 231,
+        "startChar": 28,
+        "endLine": 231,
+        "endChar": 37
+      },
+      "revId": "403d6073f70a3f18299e0f33b8e805051df4bdcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "619ae5c3_82957b56",
+        "filename": "authfs/src/fsverity/editor.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-03-04T13:17:59Z",
+      "side": 1,
+      "message": "It seems like an accident waiting to happen if \"read_chunk\" can mean either \"read without verification\" or \"read and verify\". Is it possible to prevent mistakes this via a different name, or some fancy type system footwork?",
+      "range": {
+        "startLine": 263,
+        "startChar": 7,
+        "endLine": 263,
+        "endChar": 17
+      },
+      "revId": "403d6073f70a3f18299e0f33b8e805051df4bdcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "014cd5de_dfa12ae8",
+        "filename": "authfs/src/fsverity/editor.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-03-04T13:17:59Z",
+      "side": 1,
+      "message": "If this can\u0027t/shouldn\u0027t happen, would it be better to treat it as an error?",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 279,
+        "endChar": 55
+      },
+      "revId": "403d6073f70a3f18299e0f33b8e805051df4bdcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
