@@ -64,6 +64,7 @@ use std::os::unix::io::{FromRawFd, IntoRawFd};
 use std::path::{Path, PathBuf};
 use std::ptr::null_mut;
 use std::sync::{Arc, Mutex, Weak};
+use sys_util::file_traits::{FileReadWriteAtVolatile, FileSync, lib::VolatileSlice};
 use vmconfig::VmConfig;
 use vsock::{SockAddr, VsockListener, VsockStream};
 use zip::ZipArchive;
@@ -457,10 +458,14 @@ fn write_zero_filler(zero_filler_path: &Path) -> Result<()> {
     Ok(())
 }
 
-fn format_as_android_vm_instance(part: &mut dyn Write) -> std::io::Result<()> {
-    part.write_all(ANDROID_VM_INSTANCE_MAGIC.as_bytes())?;
-    part.write_all(&ANDROID_VM_INSTANCE_VERSION.to_le_bytes())?;
-    part.flush()
+fn format_as_android_vm_instance(part: &mut QcowFile) -> std::io::Result<()> {
+    let mut buffer = Vec::new();
+    buffer.write_all(ANDROID_VM_INSTANCE_MAGIC.as_bytes())?;
+    buffer.write_all(&ANDROID_VM_INSTANCE_VERSION.to_le_bytes())?;
+
+    let slice = VolatileSlice::new(&mut buffer);
+    part.write_all_at_volatile(slice, 0)?;
+    part.fsync()
 }
 
 /// Given the configuration for a disk image, assembles the `DiskFile` to pass to crosvm.

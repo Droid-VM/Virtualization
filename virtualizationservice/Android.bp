@@ -50,6 +50,7 @@ rust_defaults {
         "libvsock",
         // TODO(b/202115393) stabilize the interface
         "packagemanager_aidl-rust",
+        "libsys_util",
     ],
     shared_libs: [
         "libbinder_rpc_unstable",
