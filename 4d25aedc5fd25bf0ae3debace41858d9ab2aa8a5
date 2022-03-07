@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c016246a_1582ddcb",
+        "filename": "authfs/src/fsverity/editor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-03-07T16:50:04Z",
+      "side": 1,
+      "message": "I renamed the other one to _unverified.",
+      "parentUuid": "e1076425_290fe54e",
+      "range": {
+        "startLine": 107,
+        "startChar": 7,
+        "endLine": 107,
+        "endChar": 34
+      },
+      "revId": "4d25aedc5fd25bf0ae3debace41858d9ab2aa8a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c0a8503_c88f81ca",
@@ -60,6 +84,30 @@
       "writtenOn": "2022-03-07T10:34:28Z",
       "side": 1,
       "message": "If we\u0027re going to ignore the result, maybe we should skip the call to read_backing_chunk in this case?",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 55
+      },
+      "revId": "4d25aedc5fd25bf0ae3debace41858d9ab2aa8a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99ffad02_a108a34a",
+        "filename": "authfs/src/fsverity/editor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-03-07T16:50:04Z",
+      "side": 1,
+      "message": "I\u0027ll follow up to give it a try.",
+      "parentUuid": "0c0a8503_c88f81ca",
       "range": {
         "startLine": 125,
         "startChar": 0,
