@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0e8f225_0c5f0ac4",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-03-07T10:08:52Z",
+      "side": 1,
+      "message": "I don\u0027t think so, but I guess it could be if I called different methods on the `VolatileSlice`.",
+      "parentUuid": "8e3641ec_0c787a05",
+      "range": {
+        "startLine": 466,
+        "startChar": 36,
+        "endLine": 466,
+        "endChar": 39
+      },
+      "revId": "87337abfd17ddd42402df68e8a59de54b8df75b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa20cb5e_3dcf2a5d",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-03-04T17:49:27Z",
       "side": 1,
       "message": "Just checking.  The original `write_all` always happens with `current_offset \u003d\u003d 0`?  It looks like the original implementation dealt with something other than writing, so I just want to make sure we\u0027re not missing anything necessary.",
+      "range": {
+        "startLine": 467,
+        "startChar": 38,
+        "endLine": 467,
+        "endChar": 39
+      },
+      "revId": "87337abfd17ddd42402df68e8a59de54b8df75b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a06cbf0_c8294823",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-03-07T10:08:52Z",
+      "side": 1,
+      "message": "The original implementation assumed that the cursor was at the start of the partition, yes. It\u0027s writing the header, which should be the first thing in the partition.",
+      "parentUuid": "aa20cb5e_3dcf2a5d",
       "range": {
         "startLine": 467,
         "startChar": 38,
