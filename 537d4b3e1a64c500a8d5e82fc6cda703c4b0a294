@@ -34,6 +34,24 @@
       "parentUuid": "ae06c211_0a522c47",
       "revId": "537d4b3e1a64c500a8d5e82fc6cda703c4b0a294",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d51e7344_2e96664e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1903040
+      },
+      "writtenOn": "2022-03-07T18:20:06Z",
+      "side": 1,
+      "message": "I talked with Julien about this earlier. This will require a lot of changes in other places which implements this interface. So we will probably not expose it via ITestDevice unless there\u0027s a strong need for it.\n\nYeah you can change the name to `supportsMicrodroid`. make sure to change this place too. https://cs.android.com/android/platform/superproject/+/master:tools/tradefederation/core/javatests/com/android/tradefed/device/MicrodroidFuncTest.java;l\u003d78",
+      "parentUuid": "e97502cd_ce1c85d8",
+      "revId": "537d4b3e1a64c500a8d5e82fc6cda703c4b0a294",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
