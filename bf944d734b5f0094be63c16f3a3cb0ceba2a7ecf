@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "670fe552_9e9133b7",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-03-08T11:31:53Z",
+      "side": 1,
+      "message": "Why do we use Box here, btw?\nIs it just because the metadata is liable to be quite large?",
+      "range": {
+        "startLine": 59,
+        "startChar": 29,
+        "endLine": 59,
+        "endChar": 32
+      },
+      "revId": "bf944d734b5f0094be63c16f3a3cb0ceba2a7ecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9ba062a_3debadc8",
+        "filename": "authfs/fd_server/src/common.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-03-08T11:31:53Z",
+      "side": 1,
+      "message": "We could just use File directly, but I guess we wanted to avoid the confusion of using that for a directory, and we don\u0027t want people calling random methods?",
+      "range": {
+        "startLine": 21,
+        "startChar": 11,
+        "endLine": 21,
+        "endChar": 18
+      },
+      "revId": "bf944d734b5f0094be63c16f3a3cb0ceba2a7ecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cb0f29d_d83dfd3c",
+        "filename": "authfs/fd_server/src/common.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-03-08T11:31:53Z",
+      "side": 1,
+      "message": "Document the requirements for this to be used safely?",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 10
+      },
+      "revId": "bf944d734b5f0094be63c16f3a3cb0ceba2a7ecf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
