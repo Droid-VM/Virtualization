@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07580c1d_9d48ac2d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-03-08T20:29:52Z",
+      "side": 1,
+      "message": "Doc of `get_mut` says: \"This is safe because the mutable reference guarantees that no other threads are concurrently accessing the atomic data.\"\n\nI\u0027m still intrigued.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 37
+      },
+      "revId": "5d092670e16f82a0079be5516c81a512796c670e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
