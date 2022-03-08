@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7684ce5b_3a79b25d",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-03-08T10:51:32Z",
+      "side": 1,
+      "message": "It seems a bit of a shame that lookup(), which feels like it should be a read operation, and might be quite common, needs a write lock.\n\nLooking at the code, it seems like the only reason for that is that we might have to increment an InodeState\u0027s handle_ref_count.\n\nIf we made that an atomic instead of a raw u64, then you wouldn\u0027t need \u0026mut to be able to increment it (but the increment would be marginally more expensive).\n\nDoes that seem like it might be a good tradeoff?",
+      "range": {
+        "startLine": 514,
+        "startChar": 47,
+        "endLine": 514,
+        "endChar": 52
+      },
+      "revId": "0520f447ee00f413991c8d47dfbc8c623b944d37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
