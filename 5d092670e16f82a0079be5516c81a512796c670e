@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f969f6e_8e2d517e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-03-09T17:20:40Z",
+      "side": 1,
+      "message": "The surrounding write lock shouldn\u0027t be relevant to the variable\u0027s atomicity though (the latter should work itself regardless).  IIUC, this seems to be also irrelevant to AtomicU64 either, just the fundamental data race that Rust prevents.  It\u0027s just that we can use AtomicU64 for interior mutability / read lock instead of write lock...?",
+      "parentUuid": "4a946324_d3d2e5c7",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 37
+      },
+      "revId": "5d092670e16f82a0079be5516c81a512796c670e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01b3a42a_e09c2ea9",
@@ -61,6 +85,30 @@
       "writtenOn": "2022-03-09T10:23:01Z",
       "side": 1,
       "message": "This could just be current - count, since you already checked count \u003c\u003d current.",
+      "range": {
+        "startLine": 584,
+        "startChar": 27,
+        "endLine": 584,
+        "endChar": 56
+      },
+      "revId": "5d092670e16f82a0079be5516c81a512796c670e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de6aa6cd_566150d1",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-03-09T17:20:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01b3a42a_e09c2ea9",
       "range": {
         "startLine": 584,
         "startChar": 27,
