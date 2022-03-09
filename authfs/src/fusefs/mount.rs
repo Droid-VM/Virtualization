@@ -35,6 +35,7 @@ pub fn mount_and_enter_message_loop(
     authfs: AuthFs,
     mountpoint: &Path,
     extra_options: &Option<String>,
+    threads: Option<usize>,
 ) -> Result<(), fuse::Error> {
     let dev_fuse = OpenOptions::new()
         .read(true)
@@ -64,5 +65,8 @@ pub fn mount_and_enter_message_loop(
 
     let mut config = fuse::FuseConfig::new();
     config.dev_fuse(dev_fuse).max_write(MAX_WRITE_BYTES).max_read(MAX_READ_BYTES);
+    if let Some(num) = threads {
+        config.num_threads(num);
+    }
     config.enter_message_loop(authfs)
 }

@@ -67,6 +67,10 @@ struct Args {
     #[structopt(short = "o")]
     extra_options: Option<String>,
 
+    /// Number of threads to serve FUSE requests.
+    #[structopt(short = "j")]
+    thread_number: Option<usize>,
+
     /// A read-only remote file with integrity check. Can be multiple.
     ///
     /// For example, `--remote-ro-file 5:sha256-1234abcd` tells the filesystem to associate the
@@ -312,7 +316,12 @@ fn try_main() -> Result<()> {
     let mut authfs = AuthFs::new(RemoteFsStatsReader::new(service.clone()));
     prepare_root_dir_entries(service, &mut authfs, &args)?;
 
-    fusefs::mount_and_enter_message_loop(authfs, &args.mount_point, &args.extra_options)?;
+    fusefs::mount_and_enter_message_loop(
+        authfs,
+        &args.mount_point,
+        &args.extra_options,
+        args.thread_number,
+    )?;
     bail!("Unexpected exit after the handler loop")
 }
 
