@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68f6563d_ab26c7ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-03-09T17:26:36Z",
+      "side": 1,
+      "message": "We need the atomicity in the increment case though.\n\nThe atomicity guarantee we want is that no other thread read or write can happen during an operation. If no other thread can read or write at all, which is the Rust data race guarantee, then atomicity is trivially true. So you can safely do the read modify write here, as you do, without needing the processor-level atomicity, and get a tiny performance boost.",
+      "parentUuid": "3f969f6e_8e2d517e",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 37
+      },
+      "revId": "5d092670e16f82a0079be5516c81a512796c670e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01b3a42a_e09c2ea9",
