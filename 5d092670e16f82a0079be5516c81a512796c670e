@@ -22,6 +22,53 @@
       },
       "revId": "5d092670e16f82a0079be5516c81a512796c670e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a946324_d3d2e5c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-03-09T10:23:01Z",
+      "side": 1,
+      "message": "That is interesting.\nIt does make some sense to me: if you have a mutable reference, no other thread can have any reference at all, and so we know no concurrent accesses are occurring.\nAnd when you release the surrounding write lock that will have Release semantics, so this update will then become visible to other threads which later acquire read or write locks.\n\nWe still pay the cost of the atomic increment, but with Relaxed ordering (no fences) I suspect that\u0027s fairly low.",
+      "parentUuid": "07580c1d_9d48ac2d",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 37
+      },
+      "revId": "5d092670e16f82a0079be5516c81a512796c670e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01b3a42a_e09c2ea9",
+        "filename": "authfs/src/fusefs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-03-09T10:23:01Z",
+      "side": 1,
+      "message": "This could just be current - count, since you already checked count \u003c\u003d current.",
+      "range": {
+        "startLine": 584,
+        "startChar": 27,
+        "endLine": 584,
+        "endChar": 56
+      },
+      "revId": "5d092670e16f82a0079be5516c81a512796c670e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
