@@ -61,6 +61,11 @@ android_system_image {
         "logd",
         "secilc",
 
+        "perfetto",
+        "traced",
+        "traced_perf",
+        "traced_probes",
+
         // "com.android.adbd" requires these,
         "libadbd_auth",
         "libadbd_fs",
