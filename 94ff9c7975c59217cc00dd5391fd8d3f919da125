@@ -33,6 +33,24 @@
       "message": "We prefer passing cmdline parameters via bootconfig. Do we need ioremap_guard here because it\u0027s needed before bootconfig is parsed?",
       "revId": "94ff9c7975c59217cc00dd5391fd8d3f919da125",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57a0bf47_5f9e0671",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-03-10T15:06:38Z",
+      "side": 1,
+      "message": "Yes, due to it being an `early_param`.",
+      "parentUuid": "4e6f88f2_e6ec7d2d",
+      "revId": "94ff9c7975c59217cc00dd5391fd8d3f919da125",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
