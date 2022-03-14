@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ffe44aa_22f35bbf",
+        "filename": "microdroid/bootconfig.normal",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-03-14T17:04:51Z",
+      "side": 0,
+      "message": "bootconfig.app_debuggable also tries to set it to null but I assume we don\u0027t care about the performance of that mode much?",
+      "range": {
+        "startLine": 10,
+        "startChar": 15,
+        "endLine": 10,
+        "endChar": 19
+      },
+      "revId": "5cd312a4e1c2364efc1e97aa5a96df6b00c874b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
