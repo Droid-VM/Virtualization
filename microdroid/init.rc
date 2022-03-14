@@ -83,6 +83,10 @@ on init
 
     setprop ro.debuggable ${ro.boot.microdroid.debuggable:-0}
 
+on init && property:ro.boot.microdroid.debuggable=1
+    # Mount tracefs (with GID=AID_READTRACEFS)
+    mount tracefs tracefs /sys/kernel/tracing gid=3012
+
 on init && property:ro.boot.logd.enabled=1
     # Start logd before any other services run to ensure we capture all of their logs.
     start logd
@@ -144,6 +148,12 @@ on post-fs
     mkdir /data/misc/authfs 0700 root root
     start authfs_service
 
+on late-fs && property:ro.debuggable=1
+    # Ensure that tracefs has the correct permissions.
+    # This does not work correctly if it is called in post-fs.
+    chmod 0755 /sys/kernel/tracing
+    chmod 0755 /sys/kernel/debug/tracing
+
 on post-fs-data
     mark_post_data
 
@@ -185,6 +195,8 @@ service console /system/bin/sh
     group shell log readproc
     seclabel u:r:shell:s0
     setenv HOSTNAME console
+
+service tracing /system/bin/sh
 
 service seriallogging /system/bin/logcat -b all -v threadtime -f /dev/hvc2 *:V
     disabled
