@@ -14,19 +14,21 @@
 
 //! Console driver for 8250 UART.
 
-use crate::uart::Uart;
 use core::fmt::{write, Arguments, Write};
 use spin::mutex::SpinMutex;
+use uart8250::MmioUart8250;
 
 const BASE_ADDRESS: usize = 0x3f8;
+const CLOCK: usize = 11_059_200;
+const BAUD_RATE: usize = 115200;
 
-static CONSOLE: SpinMutex<Option<Uart>> = SpinMutex::new(None);
+static CONSOLE: SpinMutex<Option<MmioUart8250<'static>>> = SpinMutex::new(None);
 
 /// Initialise a new instance of the UART driver and return it.
-pub fn create() -> Uart {
-    // Safe because BASE_ADDRESS is the base of the MMIO region for a UART and is mapped as device
-    // memory.
-    unsafe { Uart::new(BASE_ADDRESS) }
+pub fn create() -> MmioUart8250<'static> {
+    let uart = MmioUart8250::new(BASE_ADDRESS);
+    uart.init(CLOCK, BAUD_RATE);
+    uart
 }
 
 /// Initialise the global instance of the UART driver. This must be called before using

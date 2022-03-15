@@ -10,6 +10,7 @@ rust_ffi_static {
     ],
     rustlibs: [
         "libspin_nostd",
+        "libuart8250",
     ],
     enabled: false,
     target: {

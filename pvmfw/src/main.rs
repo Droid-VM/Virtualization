@@ -19,7 +19,6 @@
 
 mod console;
 mod psci;
-mod uart;
 
 use console::emergency_write_str;
 use core::panic::PanicInfo;
