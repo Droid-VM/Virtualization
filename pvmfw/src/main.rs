@@ -18,6 +18,7 @@
 #![no_std]
 
 mod console;
+mod exceptions;
 mod psci;
 
 use console::emergency_write_str;
