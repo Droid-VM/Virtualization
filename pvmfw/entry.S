@@ -147,6 +147,10 @@ entry:
 	msr cpacr_el1, x30
 	isb
 
+	/* Set up exception vector. */
+	adr x30, vector_table_el1
+	msr vbar_el1, x30
+
 	/* Call into Rust code. */
 	bl main
 
