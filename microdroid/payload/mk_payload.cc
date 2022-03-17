@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
+#include <android-base/file.h>
+#include <android-base/result.h>
+#include <image_aggregator.h>
+#include <json/json.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
 
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <optional>
 #include <string>
 #include <vector>
-
-#include <android-base/file.h>
-#include <android-base/result.h>
-#include <image_aggregator.h>
-#include <json/json.h>
 
 #include "microdroid/metadata.h"
 
@@ -268,6 +268,15 @@ Result<void> MakePayload(const Config& config, const std::string& metadata_file,
     return {};
 }
 
+bool uses_relative_paths(const Config& config) {
+    for (const auto& apex_config : config.apexes) {
+        if (std::filesystem::path(apex_config.path).is_relative()) {
+            return true;
+        }
+    }
+    return false;
+}
+
 int main(int argc, char** argv) {
     if (argc < 3 || argc > 4) {
         std::cerr << "Usage: " << argv[0] << " [--metadata-only] <config> <output>\n";
@@ -284,6 +293,25 @@ int main(int argc, char** argv) {
     if (!config.ok()) {
         std::cerr << "bad config: " << config.error() << '\n';
         return 1;
+    }
+
+    if (uses_relative_paths(*config)) {
+        // Enforce that the config and output paths are in cwd. This is necessary to
+        // use relative paths because the composite disk paths are based on cwd
+        // while the config file paths are relative to the config.
+        // Having them both be cwd forces them to be consistent.
+        namespace fs = std::filesystem;
+        auto current_path = fs::current_path();
+        auto get_parent = [&](auto file_path) -> fs::path {
+            return fs::absolute(fs::path(file_path)).parent_path();
+        };
+
+        if (!(fs::equivalent(current_path, get_parent(argv[arg_index - 1])) &&
+              fs::equivalent(current_path, get_parent(argv[arg_index])))) {
+            std::cerr << "If using relative paths, config and output files must "
+                      << "be in current working directory.\n";
+            return 1;
+        }
     }
 
     const std::string output_file(argv[arg_index++]);
