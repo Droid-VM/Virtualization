@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
+#include <android-base/file.h>
+#include <android-base/result.h>
+#include <image_aggregator.h>
+#include <json/json.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
 
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <optional>
 #include <string>
 #include <vector>
-
-#include <android-base/file.h>
-#include <android-base/result.h>
-#include <image_aggregator.h>
-#include <json/json.h>
 
 #include "microdroid/metadata.h"
 
@@ -278,6 +278,22 @@ int main(int argc, char** argv) {
     if (strcmp(argv[arg_index], "--metadata-only") == 0) {
         metadata_only = true;
         arg_index++;
+    }
+
+    // Enforce that the config and output paths are in cwd. This is necessary to
+    // use relative paths because the composite disk paths are based on cwd
+    // while the config file paths are relative to the config.
+    // Having them both be cwd forces them to be consistent.
+    namespace fs = std::filesystem;
+    auto current_path = fs::current_path();
+    auto get_parent = [&](auto file_path) -> fs::path {
+        return fs::absolute(fs::path(file_path)).parent_path();
+    };
+
+    if (!(fs::equivalent(current_path, get_parent(argv[arg_index])) &&
+          fs::equivalent(current_path, get_parent(argv[arg_index + 1])))) {
+        std::cerr << "Config and output files must be in current working directory.\n";
+        return 1;
     }
 
     auto config = LoadConfig(argv[arg_index++]);
