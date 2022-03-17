@@ -22,6 +22,30 @@
       },
       "revId": "0a773b2ea9beb4b6793d8ee7bc947072b324f2a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64e48aea_3e58fa1c",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-03-17T07:42:25Z",
+      "side": 1,
+      "message": "From what I remember there\u0027s only one source of onDied() in VS, when crosvm exits. But in the javalib it could happen either because VS reports onDied() or because VS itself died and there\u0027s a small window where those could race.",
+      "parentUuid": "54b19006_c7153e35",
+      "range": {
+        "startLine": 405,
+        "startChar": 0,
+        "endLine": 406,
+        "endChar": 66
+      },
+      "revId": "0a773b2ea9beb4b6793d8ee7bc947072b324f2a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
