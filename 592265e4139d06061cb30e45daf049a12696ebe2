@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1bc9ba6_bb7dc815",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-03-17T21:43:59Z",
+      "side": 1,
+      "message": "Hi Jooyung, it looks like mk_payload is still being used for some host side tests? I can update the tests but is this just from before or is microdroid actually using mk_payload to test still?\n\nMaybe I can update this CL so that we only force using cwd if using relative paths.",
+      "revId": "592265e4139d06061cb30e45daf049a12696ebe2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
