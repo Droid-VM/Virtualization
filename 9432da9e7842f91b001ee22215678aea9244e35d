@@ -24,6 +24,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9238414_2f6425df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-03-18T18:56:20Z",
+      "side": 1,
+      "message": "Let\u0027s come up with a consensus on the right approach first and I\u0027ll make the requested changes after!",
+      "revId": "9432da9e7842f91b001ee22215678aea9244e35d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fab7844e_122bce0e",
@@ -60,6 +77,30 @@
       "writtenOn": "2022-03-18T08:23:15Z",
       "side": 1,
       "message": "I can\u0027t follow what the intention is here.\n\nWhat about the cdisk version? Can we make it explicit for example, --use-cdisk-version\u003d2?",
+      "range": {
+        "startLine": 299,
+        "startChar": 0,
+        "endLine": 302,
+        "endChar": 64
+      },
+      "revId": "9432da9e7842f91b001ee22215678aea9244e35d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f59a9581_3b7c2ca3",
+        "filename": "microdroid/payload/mk_payload.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-03-18T18:56:20Z",
+      "side": 1,
+      "message": "Hm well the cdisk is always going to be 2 after https://android-review.googlesource.com/c/device/google/cuttlefish/+/2027645 is merged.\n\nIs that change going to affect microdroid?\n\nHm maybe I will need to rethink this, especially if microdroid may continue to use this. For background, this was just a hack to prevent someone in the future from using relative paths in a way that doesn\u0027t currently work.\n\nThe problem is that right now, when passing to image_aggregator, we convert relative paths with \n\nDirname(config)  + \"/\" + apex_path\n\n(Actually we probably shouldn\u0027t use Dirname here because the behavior depends on whether we pass the config as an absolute or relative path)\n\nAfter this conversion happens, the paths are relative to the current working directory if we assume we pass the config as a relative path. These cwd-relative paths are used to read the apex files (done in ExpandedStorageSize) and are written to the composite disk.\n\nThis means that the paths in the composite disk are always cwd-relative paths, which means that the relative paths in the config need to be based on the cwd when running mk_payload.\n\nThere\u0027s nothing actually wrong with this but it doesn\u0027t seem very intuitive. Since I didn\u0027t anticipate anyone else to run it anyway, I was going to just force both to be in cwd as a quick fix.\n\nBut anyway this is not very important as everything still works the same and it was just to prevent someone else\u0027s confusion in the future.",
+      "parentUuid": "2b7b2cd1_cb8f560f",
       "range": {
         "startLine": 299,
         "startChar": 0,
