@@ -16,6 +16,24 @@
       "message": "Hi Jooyung, it looks like mk_payload is still being used for some host side tests? I can update the tests but is this just from before or is microdroid actually using mk_payload to test still?\n\nMaybe I can update this CL so that we only force using cwd if using relative paths.",
       "revId": "592265e4139d06061cb30e45daf049a12696ebe2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d520235f_7e6b7e34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-03-18T08:23:15Z",
+      "side": 1,
+      "message": "I needed to use mk_payload for the recently added test. It only makes a metadata part, not an entire composite disk image.",
+      "parentUuid": "b1bc9ba6_bb7dc815",
+      "revId": "592265e4139d06061cb30e45daf049a12696ebe2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

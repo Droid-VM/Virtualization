@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14fad173_ecfe90a3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-03-18T08:23:15Z",
+      "side": 1,
+      "message": "Can you add a usecase demonstrating the change?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 35
+      },
+      "revId": "9432da9e7842f91b001ee22215678aea9244e35d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fab7844e_122bce0e",
+        "filename": "microdroid/payload/mk_payload.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-03-18T08:23:15Z",
+      "side": 1,
+      "message": "In Android, we follow the header orderings:\n```\n\u003cC\u003e\n\n\u003cC++\u003e\n\n\u003cANDROID\u003e\n\n\u003cproject\u003e\n```",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 22
+      },
+      "revId": "9432da9e7842f91b001ee22215678aea9244e35d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b7b2cd1_cb8f560f",
+        "filename": "microdroid/payload/mk_payload.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-03-18T08:23:15Z",
+      "side": 1,
+      "message": "I can\u0027t follow what the intention is here.\n\nWhat about the cdisk version? Can we make it explicit for example, --use-cdisk-version\u003d2?",
+      "range": {
+        "startLine": 299,
+        "startChar": 0,
+        "endLine": 302,
+        "endChar": 64
+      },
+      "revId": "9432da9e7842f91b001ee22215678aea9244e35d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
