@@ -109,6 +109,30 @@
       },
       "revId": "9432da9e7842f91b001ee22215678aea9244e35d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adfe399f_65a12253",
+        "filename": "microdroid/payload/mk_payload.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-03-19T01:13:37Z",
+      "side": 1,
+      "message": "Ack. I prefer that paths in the config are relative to \"config\" file just like paths in cdisk (v2) are relative to cdisk file.\n\n\u003e Is that change going to affect microdroid?\n\nNo. for now microdroid (and Virtualization apex) doesn\u0027t use image_aggregator. (The test using mk_payload doesn\u0027t generate a cdisk),",
+      "parentUuid": "f59a9581_3b7c2ca3",
+      "range": {
+        "startLine": 299,
+        "startChar": 0,
+        "endLine": 302,
+        "endChar": 64
+      },
+      "revId": "9432da9e7842f91b001ee22215678aea9244e35d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
