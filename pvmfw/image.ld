@@ -127,7 +127,7 @@ SECTIONS
 
 	. = ALIGN(4096);
         boot_stack_begin = .;
-        . += 4 * 4096;
+        . += 40 * 4096;
 	. = ALIGN(4096);
         boot_stack_end = .;
 
