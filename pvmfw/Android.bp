@@ -49,3 +49,18 @@ cc_binary {
     },
     apex_available: ["com.android.virt"],
 }
+
+cc_genrule {
+    name: "pvmfw_binary",
+    //tools: ["llvm-objcopy"],
+    srcs: [":pvmfw"],
+    out: ["pvmfw.bin"],
+    cmd: "llvm-objcopy -O binary $(in) $(out)",
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+    apex_available: ["com.android.virt"],
+}
