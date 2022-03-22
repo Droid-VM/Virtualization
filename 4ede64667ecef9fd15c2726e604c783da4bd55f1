@@ -34,6 +34,24 @@
       "parentUuid": "831d814e_cda5df6a",
       "revId": "4ede64667ecef9fd15c2726e604c783da4bd55f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8da9c396_031ec5ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-03-22T15:54:25Z",
+      "side": 1,
+      "message": "Actually I\u0027m wrong, it\u0027s the next patch in the stack which needs the fix, the issue isn\u0027t with libcore but with bitflags. https://r.android.com/2036445 is the patch to bitflags, but there are a bunch of other changes needed too.",
+      "parentUuid": "0b786e33_0e1182a7",
+      "revId": "4ede64667ecef9fd15c2726e604c783da4bd55f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
