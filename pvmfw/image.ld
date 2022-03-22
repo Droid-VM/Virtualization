@@ -1,0 +1,155 @@
+/*
+ * Copyright 2022 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+ * Code will start running at this symbol which is places at the start of the
+ * image.
+ */
+ENTRY(entry)
+
+/*
+ * The following would be useful to check that .init code is not called back
+ * into once it has completed but it isn't supported by ld.lld.
+ *
+ * NOCROSSREFS_TO(.init .text)
+ */
+
+DTB_MAX_SIZE = 0x200000;
+
+SECTIONS
+{
+	/*
+	 * Set the image origin to a platform specific address.
+	 */
+	. = ORIGIN_ADDRESS;
+
+	.dtb_begin = .;
+	.dtb (NOLOAD) : {
+		. += DTB_MAX_SIZE;
+	}
+	.dtb_end = .;
+
+	/*
+	 * Collect together the code. This is page aligned so it can be mapped
+	 * as executable-only.
+	 */
+	text_begin = .;
+	.init : {
+		*(.init.entry)
+		*(.init.*)
+	}
+	.text : {
+		*(.text.*)
+	}
+	text_size = ABSOLUTE(. - text_begin);
+	. = ALIGN(4096);
+	text_end = .;
+
+	/*
+	 * Collect together read-only data including relocations at the end
+	 * which are applied by the entry code. This is page aligned so it can
+	 * be mapped as read-only and non-executable.
+	 */
+	. = ALIGN(4096);
+	rodata_begin = .;
+	.rodata : {
+		*(.rodata.*)
+	}
+	/*
+	 * The linker doesn't allow .dynsym and .dynstr to be discarded, see
+	 * /DISCARD/ below, so make sure they don't get in the way.
+	 */
+	.dynsym : {
+		*(.dynsym.*)
+	}
+	.dynstr : {
+		*(.dynstr.*)
+	}
+	rodata_size = ABSOLUTE(. - rodata_begin);
+	. = ALIGN(4096);
+	rodata_end = .;
+
+	/*
+	 * Collect together the read-write data including .bss at the end which
+	 * will be zero'd by the entry code. This is page aligned so it can be
+	 * mapped as non-executable.
+	 */
+	. = ALIGN(4096);
+	data_begin = .;
+	.data : {
+		*(.data)
+	}
+	/*
+	 * The linker doesn't allow .dynamic to be discarded, see /DISCARD/
+	 * below, so make sure it doesn't get in the way.
+	 */
+	.dynamic : {
+		*(.dynamic.*)
+	}
+	/* Everything beyond this point will not be included in the binary. */
+	bin_end = .;
+	/* The entry point code assumes that .bss is 16-byte aligned. */
+	. = ALIGN(16);
+	bss_begin = .;
+	.bss : {
+		*(.bss)
+		*(COMMON)
+	}
+	. = ALIGN(16);
+	bss_end = .;
+	data_size = ABSOLUTE(. - data_begin);
+	. = ALIGN(4096);
+	data_end = .;
+
+	. = ALIGN(4096);
+        boot_stack_begin = .;
+        . += 4 * 4096;
+	. = ALIGN(4096);
+        boot_stack_end = .;
+
+	/*
+	 * Remove unused sections from the image.
+	 */
+	/DISCARD/ : {
+		/* The image loads itself so doesn't need these sections. */
+		/* ld.lld doesn't allow these to be discarded.
+		*(.dynsym)
+		*(.dynstr)
+		*(.dynamic)
+		*/
+		*(.gnu.hash)
+		*(.hash)
+		*(.interp)
+		*(.eh_frame_hdr)
+		*(.eh_frame)
+		*(.note.gnu.build-id)
+	}
+
+	/*
+	 * Make note of some useful values.
+	 */
+
+	/* Note the first page not used in the image. */
+	. = ALIGN(4096);
+	image_end = .;
+
+	/*
+	 * Calculate sizes of the binary file and image loaded into memory as
+	 * well as the text, read-only and read-write data sections.
+	 */
+	bin_size = ABSOLUTE(bin_end - ORIGIN_ADDRESS);
+	image_size = ABSOLUTE(image_end - ORIGIN_ADDRESS);
+}
