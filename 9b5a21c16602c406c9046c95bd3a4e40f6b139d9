@@ -34,6 +34,24 @@
       "parentUuid": "29f18544_c06bd7f1",
       "revId": "9b5a21c16602c406c9046c95bd3a4e40f6b139d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db36165e_d3ae2ff2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-03-22T13:27:26Z",
+      "side": 1,
+      "message": "Fair enough, although it seems like there\u0027s a lot of cruft in those files. It\u0027s a shame that more than half of the tags are unneeded.\n\nWhat does not having this file break?\n\nFor audit2allow, which as I mentioned I\u0027ve never found much use for, you can use the normal log (which Microdroid VMs can easily expose) rather than the event log. \n\nFor our development we\u0027ve just been looking at the denials we see there and crafting appropriate policy.",
+      "parentUuid": "91afee39_453f1a05",
+      "revId": "9b5a21c16602c406c9046c95bd3a4e40f6b139d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
