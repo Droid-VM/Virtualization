@@ -123,6 +123,39 @@ android_system_image {
     file_contexts: ":microdroid_file_contexts.gen",
 }
 
+genrule {
+    name: "microdroid_contents",
+    tools: [
+        "list_image",
+        "debugfs_static",
+    ],
+    srcs: [":microdroid"],
+    out: ["microdroid_contents"],
+    cmd: "$(location list_image) --debugfs_path $(location debugfs_static) $(location :microdroid) > $(out)",
+}
+
+genrule {
+    name: "diff_microdroid_contents",
+    srcs: [
+        "microdroid_contents.txt",
+        ":microdroid_contents",
+    ],
+    out: ["true.sh"],
+    cmd: "if diff $(location microdroid_contents.txt) $(location :microdroid_contents); then" +
+        "  echo true > $(out);" +
+        "else" +
+        "  echo To fix and update packages/modules/common/build/allowed_deps.txt, please run:;" +
+        "  echo   m $(location :microdroid_contents);" +
+        "  echo   cp $(location :microdroid_contents) $(location microdroid_contents.txt);" +
+        "  exit 1;" +
+        "fi;",
+}
+
+sh_test_host {
+    name: "diff_test_microdroid_contents",
+    src: ":diff_microdroid_contents",
+}
+
 prebuilt_etc {
     name: "microdroid_init_rc",
     filename: "init.rc",
