@@ -167,11 +167,16 @@ on post-fs-data
     mkdir /data/vendor/tombstones 0771 root root
 
     start tombstoned
+    start tombstone_transmit
 
     # For security reasons, /data/local/tmp should always be empty.
     # Do not place files or directories in /data/local/tmp
     mkdir /data/local 0751 root root
     mkdir /data/local/tmp 0771 shell shell
+
+service tombstone_transmit /system/bin/tombstone_transmit -cid 2 -port 2000
+    user root
+    group system
 
 service apexd-vm /system/bin/apexd --vm
     user root
