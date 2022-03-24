@@ -87,6 +87,24 @@
       "message": "Does this actually make any difference to anything?",
       "revId": "9b5a21c16602c406c9046c95bd3a4e40f6b139d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aebe588_7b25bc44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1140895
+      },
+      "writtenOn": "2022-03-24T21:14:59Z",
+      "side": 1,
+      "message": "Looks like some hardcoded dependency in some tools :/\nBesides that, we have microdroid selinux policies for the file which is not present (added by this CL).",
+      "parentUuid": "466bbd58_62e5cf22",
+      "revId": "9b5a21c16602c406c9046c95bd3a4e40f6b139d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
