@@ -17,3 +17,6 @@ androidboot.adb.enabled=1
 # logd is enabled
 # TODO(b/200914564) Filter only the log from the app
 androidboot.logd.enabled=1
+
+# tombstone_transmit is disabled. Tombstones will not be transmitted to the host
+androidboot.tombstone_transmit.enabled=1
