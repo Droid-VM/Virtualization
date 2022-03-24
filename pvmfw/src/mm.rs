@@ -12,33 +12,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! pVM firmware.
+//! Memory management code.
 
-#![no_main]
-#![no_std]
+use crate::console::emergency_write_str;
 
-mod console;
-mod exceptions;
-mod mm;
-mod psci;
-
-use core::panic::PanicInfo;
-use psci::{system_off, system_reset};
-
-/// Entry point for pVM firmware.
 #[no_mangle]
-pub extern "C" fn main() -> ! {
-    console::init();
-    println!("Hello world");
+pub static mut mm_config: Config =
+    Config { ttbr_el2: 0, vtcr_el2: 0, mair_el2: 0, tcr_el2: 0, sctlr_el1: 0 };
 
-    system_off();
-    #[allow(clippy::empty_loop)]
-    loop {}
+#[repr(C)]
+#[derive(Debug, Default, Eq, PartialEq)]
+pub struct Config {
+    ttbr_el2: u64,
+    vtcr_el2: u64,
+    mair_el2: u64,
+    tcr_el2: u64,
+    sctlr_el1: u64,
 }
 
-#[panic_handler]
-fn panic(info: &PanicInfo) -> ! {
-    eprintln!("{}", info);
-    system_reset();
-    loop {}
+/// Initialises the page table.
+///
+/// This function is called with the MMU disabled, so must not make any unaligned accesses.
+#[no_mangle]
+pub extern "C" fn init_mm() {
+    emergency_write_str("init_mm\n");
 }
