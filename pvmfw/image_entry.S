@@ -30,9 +30,54 @@ image_entry:
 	adr x30, vector_table_el1
 	msr vbar_el1, x30
 
+	/* Set up the page table. */
+	bl init_mm
+
+	/* Enable MMU and caches. */
+	bl mm_enable
+
 	/* Call into Rust code. */
 	bl main
 
 	/* Loop forever waiting for interrupts. */
 0:	wfi
 	b 0b
+
+/**
+ * Applies the memory management configuration to the CPU, preserving x0 along
+ * the way.
+ */
+mm_enable:
+	/*
+	 * Invalidate any potentially stale local TLB entries before they start
+	 * being used.
+	 */
+	tlbi alle2
+	tlbi vmalls12e1
+
+	/*
+	 * Load and apply the memory management configuration.
+	 */
+	adrp x6, mm_config
+	add x6, x6, :lo12:mm_config
+
+	ldp x1, x2, [x6]
+	ldp x3, x4, [x6, #16]
+	ldr x5, [x6, #32]
+
+	msr ttbr0_el2, x1
+	msr vtcr_el2, x2
+	msr mair_el2, x3
+	msr tcr_el2, x4
+
+	/* Ensure everything before this point has completed. */
+	dsb sy
+	isb
+
+	/*
+	 * Configure sctlr_el2 to enable MMU and cache and don't proceed until
+	 * this has completed.
+	 */
+	msr sctlr_el2, x5
+	isb
+	ret

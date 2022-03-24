@@ -19,6 +19,7 @@
 
 mod console;
 mod exceptions;
+mod mm;
 mod psci;
 
 use console::emergency_write_str;
