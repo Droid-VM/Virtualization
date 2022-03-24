@@ -22,6 +22,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -347,6 +348,42 @@ public class MicrodroidTestCase extends VirtualizationTestCaseBase {
         // Adb connection to the microdroid means that boot succeeded.
         adbConnectToMicrodroid(getDevice(), cid);
         shutdownMicrodroid(getDevice(), cid);
+    }
+
+    @Test
+    public void testTombstonesAreBeingForwarded() throws Exception {
+        // Note this test relies on logcat values being printed by tombstone_transmit on
+        // and the reeceiver on host (virtualization_service)
+        final String configPath = "assets/vm_config.json"; // path inside the APK
+        final String cid =
+                startMicrodroid(
+                        getDevice(),
+                        getBuild(),
+                        APK_NAME,
+                        PACKAGE_NAME,
+                        configPath,
+                        /* debug */ true,
+                        minMemorySize(),
+                        Optional.of(NUM_VCPUS),
+                        Optional.of(CPU_AFFINITY));
+        adbConnectToMicrodroid(getDevice(), cid);
+        // Wait until logd-init starts. The service is one of the last services that are started in
+        // the microdroid boot procedure. Therefore, waiting for the service means that we wait for
+        // the boot to complete. TODO: we need a better marker eventually.
+        tryRunOnMicrodroid("watch -e \"getprop init.svc.logd-reinit | grep '^$'\"");
+        // We need root permission to write to /data/tombstones/
+        rootMicrodroid();
+        // Write a test tombstone file in /data/tombstones
+        runOnMicrodroid("echo Just a test tombstone in VM > /data/tombstones/transmit.txt ");
+        // check if the tombstone have been tranferred from VM
+        assertNotEquals(runOnMicrodroid("timeout 15s logcat | grep -m 1 "
+                            + "'tombstone_transmit.microdroid:.*data/tombstones/transmit.txt'"),
+                "");
+        // Confirm that tombstone is received (from host logcat)
+        assertNotEquals(runOnHost("adb", "-s", getDevice().getSerialNumber(),
+                            "logcat", "-d", "-e",
+                            "Received.*bytes from guest & wrote to tombstone file.*"),
+                "");
     }
 
     @Test
