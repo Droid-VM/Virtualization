@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "695bdb0a_1225f5bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-03-25T09:49:13Z",
+      "side": 1,
+      "message": "Thanks Victor!",
+      "revId": "7f2706a95d56465e4c3ad51f81838058ccbde7c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fa02625_def0f8d7",
+        "filename": "compos/verify/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-03-25T09:49:13Z",
+      "side": 1,
+      "message": "!debug_mode\n\n(compos_verify --debug is only ever run from shell as root, but when we do we want to see the logs)",
+      "range": {
+        "startLine": 107,
+        "startChar": 47,
+        "endLine": 107,
+        "endChar": 51
+      },
+      "revId": "7f2706a95d56465e4c3ad51f81838058ccbde7c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
