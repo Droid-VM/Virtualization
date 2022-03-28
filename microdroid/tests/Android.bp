@@ -13,14 +13,30 @@ genrule {
     cmd: "$(location list_image) --debugfs_path $(location debugfs_static) $(location :microdroid) > $(out)",
 }
 
+// TODO(b/227144320) Figure out better way to distinguish arch
+prebuilt_etc {
+    name: "microdroid_contents_assume_64bit",
+    installable: false,
+    src: "skip", // To skip the diff test
+    arch: {
+        arm64: {
+            src: "64bit",
+        },
+        x86_64: {
+            src: "64bit",
+        },
+    },
+}
+
 genrule {
     name: "diff_microdroid_contents",
     srcs: [
+        ":microdroid_contents_assume_64bit",
         "microdroid_contents_golden.txt",
         ":microdroid_contents_built",
     ],
     out: ["true.sh"],
-    cmd: "if diff $(location microdroid_contents_golden.txt) $(location :microdroid_contents_built); then" +
+    cmd: "if [ $$(cat $(location :microdroid_contents_assume_64bit)) = 'skip' ] || diff $(location microdroid_contents_golden.txt) $(location :microdroid_contents_built) ; then" +
         "  echo true > $(out);" +
         "else" +
         "  echo To fix and update $(location microdroid_contents_golden.txt), please run:;" +
