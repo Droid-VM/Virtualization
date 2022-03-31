@@ -39,15 +39,65 @@ pub fn init() {
 
 pub fn write_str(s: &str) {
     // TODO: Use a Mutex?
-    unsafe { CONSOLE.as_mut() }.unwrap().write_str(s).unwrap();
+    let uart = unsafe { CONSOLE.as_mut() }.unwrap();
+    uart.write_str(s).unwrap();
 }
 
 pub fn write_args(format_args: Arguments) {
     // TODO: Use a Mutex?
-    write(unsafe { CONSOLE.as_mut() }.unwrap(), format_args).unwrap();
+    let uart = unsafe { CONSOLE.as_mut() }.unwrap();
+    write(uart, format_args).unwrap();
 }
 
 pub fn emergency_write_str(s: &str) {
     let mut uart = create();
     let _ = uart.write_str(s);
+}
+
+pub fn emergency_write_args(format_args: Arguments) {
+    let mut uart = create();
+    let _ = write(&mut uart, format_args);
+}
+
+/// Prints the given string to the console.
+///
+/// Panics if the console has not yet been initialised. May hang if used in an exception context;
+/// use `eprint!` instead.
+#[macro_export]
+macro_rules! print {
+    ($($arg:tt)*) => ($crate::console::write_args(format_args!($($arg)*)));
+}
+
+/// Prints the given formatted string to the console, followed by a newline.
+///
+/// Panics if the console has not yet been initialised. May hang if used in an exception context;
+/// use `eprintln!` instead.
+#[macro_export]
+macro_rules! println {
+    () => ($crate::console::write_str("\n"));
+    ($($arg:tt)*) => ({
+        $crate::console::write_args(format_args!($($arg)*))};
+        $crate::console::write_str("\n");
+    );
+}
+
+/// Prints the given string to the console in an emergency, such as an exception handler.
+///
+/// Never panics.
+#[macro_export]
+macro_rules! eprint {
+    ($($arg:tt)*) => ($crate::console::emergency_write_args(format_args!($($arg)*)));
+}
+
+/// Prints the given string followed by a newline to the console in an emergency, such as an
+/// exception handler.
+///
+/// Never panics.
+#[macro_export]
+macro_rules! eprintln {
+    () => ($crate::console::emergency_write_str("\n"));
+    ($($arg:tt)*) => ({
+        $crate::console::emergency_write_args(format_args!($($arg)*))};
+        $crate::console::emergency_write_str("\n");
+    );
 }
