@@ -25,6 +25,7 @@ cc_binary {
     srcs: [
         "entry.S",
         "exceptions.S",
+        "idmap.S",
     ],
     static_libs: [
         "libpvmfw",
