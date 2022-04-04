@@ -71,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92c93ca1_dfc06460",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-04-04T14:58:38Z",
+      "side": 1,
+      "message": "Added one. I\u0027ve used logcat logs to see if a \u0027mock\u0027 tombstone file is transferred from guest to host.\n\nThe thing that makes testing it end to end tricky is the fact that just because a tombstone has been written into /data/tombstones/, doesn\u0027t mean you will be able to see it there. Tombstone files are overwritten into rather quickly (after ~50 tombstones). System server upload these to dropbox as soon as they are written.",
+      "parentUuid": "7eb6875a_db644fcb",
+      "range": {
+        "startLine": 23,
+        "startChar": 22,
+        "endLine": 23,
+        "endChar": 72
+      },
+      "revId": "55f67f3613ae5fdc3daaca68084e9de9a61ef831",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21296e73_9228072f",
