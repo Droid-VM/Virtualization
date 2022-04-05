@@ -69,6 +69,24 @@
       "parentUuid": "d4028749_048b9a21",
       "revId": "68a8c165c3cefa67129e9276eeaf1abe599cbe52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4929a774_bca66729",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-04-05T17:31:05Z",
+      "side": 1,
+      "message": "I\u0027m not sure. It will depend on things like what memory they need, whether they need to be relocatable, and so on. Requirements for a kernel vs just a standalone bare-metal application will be different. I have a first cut at an entry point in the next patch is this series, but it doesn\u0027t have the MMU setup yet and that will complicate things significantly. But I\u0027d like to get something checked on so we have a base to build on.",
+      "parentUuid": "b5ff4a31_6a5cd9b6",
+      "revId": "68a8c165c3cefa67129e9276eeaf1abe599cbe52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
