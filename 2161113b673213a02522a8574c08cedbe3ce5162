@@ -406,6 +406,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5169f97d_3286d744",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-04-05T18:11:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc4a6ab4_c28de894",
+      "range": {
+        "startLine": 385,
+        "startChar": 37,
+        "endLine": 385,
+        "endChar": 39
+      },
+      "revId": "2161113b673213a02522a8574c08cedbe3ce5162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "148fa285_53cadd50",
@@ -561,6 +585,30 @@
       "side": 1,
       "message": "There\u0027s still the second suggestion ...",
       "parentUuid": "8b6a8db1_f5b7741e",
+      "range": {
+        "startLine": 406,
+        "startChar": 8,
+        "endLine": 406,
+        "endChar": 26
+      },
+      "revId": "2161113b673213a02522a8574c08cedbe3ce5162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "121665ce_bbea9e8a",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-04-05T18:11:25Z",
+      "side": 1,
+      "message": "Oh sorry missed it. Looked into it - this will mean text_output is a Result, which again will require Err checking and unwrap(), so that doesn\u0027t reduce code complexity",
+      "parentUuid": "6bbec08d_370b2cd5",
       "range": {
         "startLine": 406,
         "startChar": 8,
