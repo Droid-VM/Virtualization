@@ -177,6 +177,98 @@
       },
       "revId": "2161113b673213a02522a8574c08cedbe3ce5162",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ff57e0a_d77edc82",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-04-05T13:18:03Z",
+      "side": 1,
+      "message": "If this doesn\u0027t match, should we just exit?",
+      "range": {
+        "startLine": 399,
+        "startChar": 7,
+        "endLine": 399,
+        "endChar": 57
+      },
+      "revId": "2161113b673213a02522a8574c08cedbe3ce5162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1381d19f_0c8365b8",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-04-05T13:18:03Z",
+      "side": 1,
+      "message": "This can be shortened to just `bail!(\"message\");` - also defined in Anyhow.\n\nPerhaps even better you could do a one-liner to check for none-ness and get the value - e.g.\n\nlet text_output \u003d tb_connection.text_output.as_ref().ok_or_else(|| anyhow!(\"message\"))?;",
+      "range": {
+        "startLine": 406,
+        "startChar": 8,
+        "endLine": 406,
+        "endChar": 26
+      },
+      "revId": "2161113b673213a02522a8574c08cedbe3ce5162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7c45875_851870c9",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-04-05T13:18:03Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think you need the move here, because I don\u0027t think you\u0027re capturing anything",
+      "range": {
+        "startLine": 433,
+        "startChar": 27,
+        "endLine": 433,
+        "endChar": 31
+      },
+      "revId": "2161113b673213a02522a8574c08cedbe3ce5162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d168946a_ee57870d",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-04-05T13:18:03Z",
+      "side": 1,
+      "message": "nit: Line too long",
+      "range": {
+        "startLine": 440,
+        "startChar": 95,
+        "endLine": 440,
+        "endChar": 101
+      },
+      "revId": "2161113b673213a02522a8574c08cedbe3ce5162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
