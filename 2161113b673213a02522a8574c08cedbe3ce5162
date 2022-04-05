@@ -66,6 +66,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "63b346c2_0421279f",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-04-05T13:52:02Z",
+      "side": 1,
+      "message": "unnecessary change",
+      "revId": "2161113b673213a02522a8574c08cedbe3ce5162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdb516d9_096c6a02",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 5
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-04-05T13:52:02Z",
+      "side": 1,
+      "message": "remove this to prevent accidental start of this via the class",
+      "range": {
+        "startLine": 180,
+        "startChar": 4,
+        "endLine": 180,
+        "endChar": 20
+      },
+      "revId": "2161113b673213a02522a8574c08cedbe3ce5162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b37b98da_8b7eb68c",
         "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
         "patchSetId": 5
@@ -158,6 +198,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19f67387_544f925f",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-04-05T13:52:02Z",
+      "side": 1,
+      "message": "Yeah, why don\u0027t we check that the received tombstone is the same as #377?",
+      "parentUuid": "236c6890_5b3f2993",
+      "range": {
+        "startLine": 385,
+        "startChar": 37,
+        "endLine": 385,
+        "endChar": 39
+      },
+      "revId": "2161113b673213a02522a8574c08cedbe3ce5162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "148fa285_53cadd50",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 5
@@ -220,6 +284,98 @@
         "startChar": 8,
         "endLine": 406,
         "endChar": 26
+      },
+      "revId": "2161113b673213a02522a8574c08cedbe3ce5162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ec3c84c_4c7a6af5",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-04-05T13:52:02Z",
+      "side": 1,
+      "message": "use .context(...) to indicate that an error occurred while reading",
+      "range": {
+        "startLine": 411,
+        "startChar": 43,
+        "endLine": 411,
+        "endChar": 44
+      },
+      "revId": "2161113b673213a02522a8574c08cedbe3ce5162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c984fc0_4a379b23",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-04-05T13:52:02Z",
+      "side": 1,
+      "message": "chunk_revc.as_slice() ?",
+      "range": {
+        "startLine": 416,
+        "startChar": 62,
+        "endLine": 416,
+        "endChar": 79
+      },
+      "revId": "2161113b673213a02522a8574c08cedbe3ce5162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cd92e5b_716b74ce",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-04-05T13:52:02Z",
+      "side": 1,
+      "message": "is this always successful?",
+      "range": {
+        "startLine": 416,
+        "startChar": 42,
+        "endLine": 416,
+        "endChar": 51
+      },
+      "revId": "2161113b673213a02522a8574c08cedbe3ce5162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4c6ed38_7e5a2a25",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-04-05T13:52:02Z",
+      "side": 1,
+      "message": "use .context(...) to indicate that an error occurred while writing",
+      "range": {
+        "startLine": 416,
+        "startChar": 79,
+        "endLine": 416,
+        "endChar": 80
       },
       "revId": "2161113b673213a02522a8574c08cedbe3ce5162",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
