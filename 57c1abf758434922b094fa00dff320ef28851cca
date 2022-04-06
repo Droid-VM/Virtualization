@@ -16,6 +16,98 @@
       "message": "For now this doesn\u0027t enable the MMU, but it\u0027s enough to get started.",
       "revId": "57c1abf758434922b094fa00dff320ef28851cca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1764e43b_d3275d6f",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-04-06T08:44:17Z",
+      "side": 1,
+      "message": "Isn\u0027t there a better way to define constants than this? Linker scripts are typically parsed by the C pre-processor first but is that an option here?",
+      "range": {
+        "startLine": 34,
+        "startChar": 22,
+        "endLine": 34,
+        "endChar": 47
+      },
+      "revId": "57c1abf758434922b094fa00dff320ef28851cca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83b98f92_27cbe263",
+        "filename": "pvmfw/entry.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-04-06T08:44:17Z",
+      "side": 1,
+      "message": "To be safe, should this instead read the register and only update `FPEN`? For example, this currently zeroes `CPACR_EL1.ZEN`, which might reset to `0b11`; is this what we want?",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 44,
+        "endChar": 22
+      },
+      "revId": "57c1abf758434922b094fa00dff320ef28851cca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b4e5fdb_11167596",
+        "filename": "pvmfw/entry.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-04-06T08:44:17Z",
+      "side": 1,
+      "message": "nit: these labels aren\u0027t global and the assembler will match the first one it finds in the direction you provide so there\u0027s no need to keep counting here:\n```\n0:\twfi\n\tb 0b\n```",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 5
+      },
+      "revId": "57c1abf758434922b094fa00dff320ef28851cca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "654d9704_528f65d2",
+        "filename": "pvmfw/image.ld",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-04-06T08:44:17Z",
+      "side": 1,
+      "message": "This looks like it was added to work around the way crosvm runs a payload; I wonder if this is the right approach given that pvmfw is not intended to be run this way. Instead, `ORIGIN_ADDRESS` should probably be set to `0x80200000` when used in that way?",
+      "range": {
+        "startLine": 39,
+        "startChar": 1,
+        "endLine": 43,
+        "endChar": 14
+      },
+      "revId": "57c1abf758434922b094fa00dff320ef28851cca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
