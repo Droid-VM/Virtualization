@@ -62,6 +62,8 @@ public class IsolatedCompilationJobService extends JobService {
     }
 
     static void scheduleStagedApexJob(JobScheduler scheduler) {
+        IsolatedCompilationMetrics.onCompilationScheduled();
+
         ComponentName serviceName =
                 new ComponentName("android", IsolatedCompilationJobService.class.getName());
 
@@ -113,6 +115,11 @@ public class IsolatedCompilationJobService extends JobService {
                     newJob.start(jobId);
                 } catch (RuntimeException e) {
                     Log.e(TAG, "Starting CompilationJob failed", e);
+                    if (jobId == STAGED_APEX_JOB_ID) {
+                        new IsolatedCompilationMetrics().onCompilationEnded(
+                                IsolatedCompilationMetrics.RESULT_FAILED_TO_START,
+                                e.toString());
+                    }
                     mCurrentJob.set(null);
                     newJob.stop(); // Just in case it managed to start before failure
                     jobFinished(params, /*wantReschedule=*/ false);
@@ -153,6 +160,7 @@ public class IsolatedCompilationJobService extends JobService {
 
     static class CompilationJob extends ICompilationTaskCallback.Stub
             implements IBinder.DeathRecipient {
+        private IsolatedCompilationMetrics mMetrics;
         private final AtomicReference<ICompilationTask> mTask = new AtomicReference<>();
         private final CompilationCallback mCallback;
         private final JobParameters mParams;
@@ -179,7 +187,9 @@ public class IsolatedCompilationJobService extends JobService {
                     composTask = composd.startTestCompile(
                             IIsolatedCompilationService.ApexSource.NoStaged, this);
                 } else {
+                    mMetrics = new IsolatedCompilationMetrics();
                     composTask = composd.startStagedApexCompile(this);
+                    mMetrics.onCompilationStarted();
                 }
                 mTask.set(composTask);
                 composTask.asBinder().linkToDeath(this, 0);
@@ -206,6 +216,9 @@ public class IsolatedCompilationJobService extends JobService {
                 Log.i(TAG, "Cancelling task");
                 try {
                     task.cancel();
+                    if (mMetrics != null) {
+                        mMetrics.onCompilationEnded(IsolatedCompilationMetrics.RESULT_JOB_CANCELED);
+                    }
                 } catch (RuntimeException | RemoteException e) {
                     // If canceling failed we'll assume it means that the task has already failed;
                     // there's nothing else we can do anyway.
@@ -216,16 +229,39 @@ public class IsolatedCompilationJobService extends JobService {
 
         @Override
         public void binderDied() {
-            onFailure();
+            if (mMetrics != null) {
+                mMetrics.onCompilationEnded(IsolatedCompilationMetrics.RESULT_COMPOSD_DIED);
+            }
+            onCompletion(false);
         }
 
         @Override
         public void onSuccess() {
+            if (mMetrics != null) {
+                mMetrics.onCompilationEnded(IsolatedCompilationMetrics.RESULT_SUCCESS);
+            }
             onCompletion(true);
         }
 
         @Override
-        public void onFailure() {
+        public void onFailure(byte reason, String message) {
+            if (mMetrics != null) {
+                int result;
+                switch (reason) {
+                    case ICompilationTaskCallback.FailureReason.CompilationFailed:
+                        result = IsolatedCompilationMetrics.RESULT_COMPILATION_FAILED;
+                        break;
+
+                    case ICompilationTaskCallback.FailureReason.UnexpectedCompilationResult:
+                        result = IsolatedCompilationMetrics.RESULT_UNEXPECTED_COMPILATION_RESULT;
+                        break;
+
+                    default:
+                        result = IsolatedCompilationMetrics.RESULT_UNKNOWN;
+                        break;
+                }
+                mMetrics.onCompilationEnded(result, message);
+            }
             onCompletion(false);
         }
 
