@@ -15,28 +15,28 @@
 //! Exception handlers.
 
 use crate::console::emergency_write_str;
-use crate::psci::system_reset;
+use psci::system_reset;
 
 #[no_mangle]
 extern "C" fn sync_exception_current() {
     emergency_write_str("sync_exception_current\n");
-    system_reset();
+    system_reset().unwrap();
 }
 
 #[no_mangle]
 extern "C" fn irq_current() {
     emergency_write_str("irq_current\n");
-    system_reset();
+    system_reset().unwrap();
 }
 
 #[no_mangle]
 extern "C" fn fiq_current() {
     emergency_write_str("fiq_current\n");
-    system_reset();
+    system_reset().unwrap();
 }
 
 #[no_mangle]
 extern "C" fn serr_current() {
     emergency_write_str("serr_current\n");
-    system_reset();
+    system_reset().unwrap();
 }
