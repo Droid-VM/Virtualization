@@ -22,6 +22,29 @@
       },
       "revId": "cfe52ad3b25485da09a7c61e6c98e66e2aabaf2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec79174c_461662b8",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-04-08T12:59:48Z",
+      "side": 1,
+      "message": "usize seems quite generous! u32? u16 even?",
+      "range": {
+        "startLine": 72,
+        "startChar": 26,
+        "endLine": 72,
+        "endChar": 31
+      },
+      "revId": "cfe52ad3b25485da09a7c61e6c98e66e2aabaf2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
