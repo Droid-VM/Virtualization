@@ -133,6 +133,25 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
         return result.getStdout().trim();
     }
 
+    // Same as runOnMicrodroid, but keeps retrying on error till timeout
+    public static String runOnMicrodroidRetryingOnfailure(long timeoutMillis, String... cmd)
+            throws InterruptedException {
+        long start = System.currentTimeMillis();
+        while (true) {
+            CommandResult result = runOnMicrodroidForResult(cmd);
+            if (result.getStatus() != CommandStatus.SUCCESS) {
+                if (System.currentTimeMillis() - start > timeoutMillis) {
+                    fail(join(cmd) + " has failed even with retries: " + result);
+                }
+                Thread.sleep(500);
+                CLog.d("retrying ..");
+                continue;
+            }
+            return result.getStdout().trim();
+        }
+    }
+
+
     // Same as runOnMicrodroid, but returns null on error.
     public static String tryRunOnMicrodroid(String... cmd) {
         CommandResult result = runOnMicrodroidForResult(cmd);
@@ -330,15 +349,12 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
         android.run(VIRT_APEX + "bin/vm", "stop", cid);
     }
 
-    public static void rootMicrodroid() {
+    public static void rootMicrodroid() throws InterruptedException {
         runOnHost("adb", "-s", MICRODROID_SERIAL, "root");
-
-        runOnHostWithTimeout(
-                MICRODROID_ADB_CONNECT_TIMEOUT_MINUTES * 60 * 1000,
-                "adb",
-                "-s",
-                MICRODROID_SERIAL,
-                "wait-for-device");
+        // adb root restarts the adbd leading to failed adb shell calls immediately afterwards
+        // Hence, keep retrying till success or timeout.
+        runOnMicrodroidRetryingOnfailure(
+                MICRODROID_ADB_CONNECT_TIMEOUT_MINUTES * 60 * 1000, "true");
     }
 
     // Establish an adb connection to microdroid by letting Android forward the connection to
