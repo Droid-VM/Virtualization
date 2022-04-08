@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ae4be1c_f28cec7e",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-08T23:34:25Z",
+      "side": 1,
+      "message": "This method has both `OnMicrodroid` (this line) and `OnAndroid` (L746) variants, and can now be easily consolidated. But I\u0027m inclined to reduce the change in this CL. There are other similar examples in this file.",
+      "range": {
+        "startLine": 727,
+        "startChar": 34,
+        "endLine": 727,
+        "endChar": 46
+      },
+      "revId": "c7e451932881ff34dac24b985a3d51fe2fb71655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
