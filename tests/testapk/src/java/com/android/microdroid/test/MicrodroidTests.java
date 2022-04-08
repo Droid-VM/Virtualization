@@ -406,7 +406,7 @@ public class MicrodroidTests {
 
         ByteArrayInputStream bais = new ByteArrayInputStream(bccBytes);
         List<DataItem> dataItems = new CborDecoder(bais).decode();
-        assertThat(dataItems.size()).isEqualTo(1);
+        assertThat(dataItems.ize()).isEqualTo(1);
         assertThat(dataItems.get(0).getMajorType()).isEqualTo(MajorType.ARRAY);
         List<DataItem> rootArrayItems = ((Array) dataItems.get(0)).getDataItems();
         assertThat(rootArrayItems.size()).isAtLeast(2); // Public key and one certificate
