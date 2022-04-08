@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab07365e_d19d5333",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-04-08T14:18:18Z",
+      "side": 1,
+      "message": "This was part of an effort to make the origin address configurable at build time, but that might be premature. Making it a constant in the linker script for now.",
+      "parentUuid": "1764e43b_d3275d6f",
+      "range": {
+        "startLine": 34,
+        "startChar": 22,
+        "endLine": 34,
+        "endChar": 47
+      },
+      "revId": "57c1abf758434922b094fa00dff320ef28851cca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83b98f92_27cbe263",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-04-06T08:44:17Z",
       "side": 1,
       "message": "To be safe, should this instead read the register and only update `FPEN`? For example, this currently zeroes `CPACR_EL1.ZEN`, which might reset to `0b11`; is this what we want?",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 44,
+        "endChar": 22
+      },
+      "revId": "57c1abf758434922b094fa00dff320ef28851cca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02f7ab95_52532f84",
+        "filename": "pvmfw/entry.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-04-08T14:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83b98f92_27cbe263",
       "range": {
         "startLine": 44,
         "startChar": 1,
@@ -89,6 +137,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a386ffb_3623a30a",
+        "filename": "pvmfw/entry.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-04-08T14:18:18Z",
+      "side": 1,
+      "message": "True, I just find it easier to read if the same label doesn\u0027t occur more than once within one function. Is there a style guide suggesting otherwise?",
+      "parentUuid": "5b4e5fdb_11167596",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 5
+      },
+      "revId": "57c1abf758434922b094fa00dff320ef28851cca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "654d9704_528f65d2",
         "filename": "pvmfw/image.ld",
         "patchSetId": 2
@@ -100,6 +172,30 @@
       "writtenOn": "2022-04-06T08:44:17Z",
       "side": 1,
       "message": "This looks like it was added to work around the way crosvm runs a payload; I wonder if this is the right approach given that pvmfw is not intended to be run this way. Instead, `ORIGIN_ADDRESS` should probably be set to `0x80200000` when used in that way?",
+      "range": {
+        "startLine": 39,
+        "startChar": 1,
+        "endLine": 43,
+        "endChar": 14
+      },
+      "revId": "57c1abf758434922b094fa00dff320ef28851cca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc94a2b2_ffd4744a",
+        "filename": "pvmfw/image.ld",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-04-08T14:18:18Z",
+      "side": 1,
+      "message": "I think it\u0027s the right thing to do if we want to read the DTB, though yes, it isn\u0027t actually relevant for pvmfw. I\u0027ll need to write a different linker script when it comes time to actually build the real pvmfw binary, but for now this is good enough to allow me to prototype things.",
+      "parentUuid": "654d9704_528f65d2",
       "range": {
         "startLine": 39,
         "startChar": 1,
