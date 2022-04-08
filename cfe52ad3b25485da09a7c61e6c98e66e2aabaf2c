@@ -69,6 +69,30 @@
       },
       "revId": "cfe52ad3b25485da09a7c61e6c98e66e2aabaf2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f212a73_74639e63",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-04-08T13:10:08Z",
+      "side": 1,
+      "message": "Yeah. That\u0027s a slight hack - Option\u003cNonZeroX\u003e is the same size as X, because they can use 0 to mean None.",
+      "parentUuid": "12d416b2_885ad7a7",
+      "range": {
+        "startLine": 72,
+        "startChar": 26,
+        "endLine": 72,
+        "endChar": 31
+      },
+      "revId": "cfe52ad3b25485da09a7c61e6c98e66e2aabaf2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
