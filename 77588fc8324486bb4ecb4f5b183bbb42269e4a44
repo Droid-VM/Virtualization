@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44f922ef_0cfd1c84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-08T16:39:42Z",
+      "side": 1,
+      "message": "Just some nits...",
+      "revId": "77588fc8324486bb4ecb4f5b183bbb42269e4a44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "671836dd_8b6e69b7",
+        "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationJobService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-08T16:39:42Z",
+      "side": 1,
+      "message": "The different ways to call this class puzzled me a bit. This one is a static method call, L119 creates a temporary instance only to end, then the normal one with mMetrics.  Would it be better to always use mMetrics?",
+      "range": {
+        "startLine": 65,
+        "startChar": 8,
+        "endLine": 65,
+        "endChar": 34
+      },
+      "revId": "77588fc8324486bb4ecb4f5b183bbb42269e4a44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eb690a4_6f3d939e",
+        "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationJobService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-08T16:39:42Z",
+      "side": 1,
+      "message": "nit: If it\u0027s really easier to be done this way, consider creating a static method, something along the line with `IsolatedCompilationMetrics::Failed(...)` (I\u0027m not sure this is the cleanest).  I was wondering how this works without the `..Started` call.",
+      "range": {
+        "startLine": 119,
+        "startChar": 24,
+        "endLine": 119,
+        "endChar": 75
+      },
+      "revId": "77588fc8324486bb4ecb4f5b183bbb42269e4a44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c60f04ba_17e00a89",
+        "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationJobService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-08T16:39:42Z",
+      "side": 1,
+      "message": "I wonder if we could miss reporting anything abnormal if mMetrics can be null.  IIUC, it\u0027s only to skip the daily job.  How about creating the instance at L163, and set a disable bit at L187 (which we\u0027ll soon remove)?",
+      "range": {
+        "startLine": 248,
+        "startChar": 12,
+        "endLine": 248,
+        "endChar": 35
+      },
+      "revId": "77588fc8324486bb4ecb4f5b183bbb42269e4a44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18bdd3a9_f47ab677",
+        "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationMetrics.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-08T16:39:42Z",
+      "side": 1,
+      "message": "nit: probably not intentional to skip 2?",
+      "range": {
+        "startLine": 43,
+        "startChar": 53,
+        "endLine": 43,
+        "endChar": 54
+      },
+      "revId": "77588fc8324486bb4ecb4f5b183bbb42269e4a44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
