@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc8af248_375ad190",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-08T18:00:43Z",
+      "side": 1,
+      "message": "High level comment: If rootMicrodroid doesn\u0027t return on ready really, I\u0027d recommend adding a retry there to benefit all tests.  The retry there can simply run `adb shell true`.",
+      "revId": "d30e28d273a2dc3c39951e31c5b78c36a2e7a5f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
