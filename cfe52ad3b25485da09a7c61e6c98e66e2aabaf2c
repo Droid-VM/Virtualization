@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0bfcc2f_393ffb42",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-08T16:18:24Z",
+      "side": 1,
+      "message": "No idea yet.  My plan is to land this support first, and look deeper when perfetto in microdroid is ready to better understand the interaction between multiple processes/subsystems, including threads of authfs and dex2oat, FUSE, and binder.\n\nBTW, one thing that I\u0027m not sure would cause this problem is that, currently all threads in authfs share the same binder rpc connection. I also see only 2 threads in fd_server, presumably because of that. Do you know how binder\u0027s thread pool works?",
+      "parentUuid": "4cebbf20_21866f52",
+      "range": {
+        "startLine": 17,
+        "startChar": 6,
+        "endLine": 17,
+        "endChar": 55
+      },
+      "revId": "cfe52ad3b25485da09a7c61e6c98e66e2aabaf2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec79174c_461662b8",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Yeah. That\u0027s a slight hack - Option\u003cNonZeroX\u003e is the same size as X, because they can use 0 to mean None.",
       "parentUuid": "12d416b2_885ad7a7",
+      "range": {
+        "startLine": 72,
+        "startChar": 26,
+        "endLine": 72,
+        "endChar": 31
+      },
+      "revId": "cfe52ad3b25485da09a7c61e6c98e66e2aabaf2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "444f4125_380ff49e",
+        "filename": "authfs/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-08T16:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f212a73_74639e63",
       "range": {
         "startLine": 72,
         "startChar": 26,
