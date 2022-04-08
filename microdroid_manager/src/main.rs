@@ -41,6 +41,7 @@ use rustutils::system_properties;
 use rustutils::system_properties::PropertyWatcher;
 use std::convert::TryInto;
 use std::fs::{self, create_dir, File, OpenOptions};
+use std::io::Write;
 use std::os::unix::io::{FromRawFd, IntoRawFd};
 use std::path::Path;
 use std::process::{Child, Command, Stdio};
@@ -535,7 +536,12 @@ fn exec_task(task: &Task, service: &Strong<dyn IVirtualMachineService>) -> Resul
         system_properties::write("ctl.start", "seriallogging")?;
     }
 
-    let exit_status = command.spawn()?.wait()?;
+    let mut process = command.spawn()?;
+    {
+        let mut tasks = OpenOptions::new().append(true).open("/sys/fs/cgroup/memory/compos/tasks")?;
+        tasks.write_all(process.id().to_string().as_bytes())?;
+    }
+    let exit_status = process.wait()?;
     exit_status.code().ok_or_else(|| anyhow!("Failed to get exit_code from the paylaod."))
 }
 

@@ -52,7 +52,7 @@ pub fn timeouts() -> Result<&'static Timeouts> {
 /// The timeouts that we use normally.
 pub const NORMAL_TIMEOUTS: Timeouts = Timeouts {
     // Note: the source of truth for these odrefresh timeouts is art/odrefresh/odr_config.h.
-    odrefresh_max_execution_time: Duration::from_secs(300),
+    odrefresh_max_execution_time: Duration::from_secs(3000),
     vm_max_time_to_ready: Duration::from_secs(15),
 };
 
