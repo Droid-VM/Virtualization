@@ -378,9 +378,10 @@ public class MicrodroidTestCase extends VirtualizationTestCaseBase {
         runOnMicrodroid("logcat -c");
         // We need root permission to write to /data/tombstones/
         rootMicrodroid();
-        // Write a test tombstone file in /data/tombstones
+        // Write a test tombstone file in /data/tombstones.
         runOnMicrodroid("echo -n \'Test tombstone in VM with 34 bytes\'"
                     + "> /data/tombstones/transmit.txt");
+
         // check if the tombstone have been tranferred from VM
         assertNotEquals(runOnMicrodroid("timeout 15s logcat | grep -m 1 "
                             + "'tombstone_transmit.microdroid:.*data/tombstones/transmit.txt'"),
