@@ -133,6 +133,25 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
         return result.getStdout().trim();
     }
 
+    // Same as runOnMicrodroid, but keeps retrying on error till timeout
+    public static String runOnMicrodroidRetryingOnfailure(long timeoutMillis, String... cmd)
+            throws InterruptedException {
+        long start = System.currentTimeMillis();
+        while (true) {
+            CommandResult result = runOnMicrodroidForResult(cmd);
+            if (result.getStatus() != CommandStatus.SUCCESS) {
+                if (System.currentTimeMillis() - start > timeoutMillis) {
+                    fail(join(cmd) + " has failed even with retries: " + result);
+                }
+                Thread.sleep(500);
+                CLog.d("retrying ..");
+                continue;
+            }
+            return result.getStdout().trim();
+        }
+    }
+
+
     // Same as runOnMicrodroid, but returns null on error.
     public static String tryRunOnMicrodroid(String... cmd) {
         CommandResult result = runOnMicrodroidForResult(cmd);
