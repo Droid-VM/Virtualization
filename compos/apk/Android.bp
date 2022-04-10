@@ -7,3 +7,48 @@ android_app {
     sdk_version: "current",
     apex_available: ["com.android.compos"],
 }
+
+// m microdroid_test_avmd
+// avmdtool dump out/target/product/generic_arm64/system/etc/microdroid_test_amd.avmd
+avmd {
+    name: "compos_avmd",
+    resources: [
+        {
+            namespace: "pvmfw",
+            name: "preload",
+            module: "microdroid_bootloader_signed",
+        },
+        {
+            namespace: "abl",
+            name: "vbmeta",
+            module: "microdroid_vbmeta",
+        },
+        // TODO: microdroid_vbmeta_bootconfig.img, but it's chained..
+        // NOTE: from here, there's an overlap with vm_config.json so maybe there
+        //       could be a microdroid_payload build rule
+        // TODO: description of APEXs needs to be chained to support prefer_staged
+        {
+            namespace: "microdroid_manager",
+            name: "payload",
+            module: "CompOSPayloadApp",
+        },
+        // TODO: extra APKs
+        // TODO: BuildManifest.apk is built in Makefiles..
+        {
+            namespace: "microdroid_manager",
+            name: "com.android.art",
+            module: "com.android.art",
+        },
+        {
+            namespace: "microdroid_manager",
+            name: "com.android.compos",
+            module: "com.android.compos",
+        },
+        {
+            namespace: "microdroid_manager",
+            name: "com.android.sdkext",
+            module: "com.android.sdkext",
+        },
+        // TODO: {CLASSPATH}. Help from "platform-bootclasspath"?
+    ],
+}
