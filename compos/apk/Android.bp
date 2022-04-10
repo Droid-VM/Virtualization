@@ -7,3 +7,27 @@ android_app {
     sdk_version: "current",
     apex_available: ["com.android.compos"],
 }
+
+// m microdroid_test_avmd
+// avmdtool dump out/target/product/generic_arm64/system/etc/microdroid_test_amd.avmd
+avmd {
+    name: "microdroid_test_avmd",
+    resources: [
+        // TODO: microdroid_bootloader goes through custom genrules..
+        {
+            namespace: "abl",
+            name: "vbmeta",
+            module: "microdroid_vbmeta",
+        },
+        {
+            namespace: "microdroid_manager",
+            name: "payload",
+            module: "CompOSPayloadApp",
+        },
+        {
+            namespace: "microdroid_manager",
+            name: "com.android.compos",
+            module: "com.android.compos",
+        },
+    ],
+}
