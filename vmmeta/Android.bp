@@ -1,0 +1,44 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_defaults {
+    name: "libvmmeta_defaults",
+    crate_name: "vmmeta",
+    host_supported: true,
+    srcs: ["src/lib.rs"],
+    prefer_rlib: true,
+    edition: "2018",
+    rustlibs: [
+        "libserde",
+        "libthiserror",
+    ],
+}
+
+rust_library {
+    name: "libvmmeta",
+    defaults: ["libvmmeta_defaults"],
+}
+
+rust_test {
+    name: "libvmmeta_tests",
+    defaults: ["libvmmeta_defaults"],
+    test_suites: ["general-tests"],
+}
+
+rust_binary {
+    name: "vmmetatool",
+    srcs: ["src/main.rs"],
+    host_supported: true,
+    prefer_rlib: true,
+    edition: "2018",
+    rustlibs: [
+        "libanyhow",
+        "libapexutil_rust",
+        "libapkverify",
+        "libclap",
+        "libserde",
+        "libserde_cbor",
+        "libvmmeta",
+    ],
+}
