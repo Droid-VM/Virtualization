@@ -24,6 +24,7 @@ use bytes::Bytes;
 use openssl::hash::MessageDigest;
 use openssl::pkey::{self, PKey};
 use openssl::rsa::Padding;
+use openssl::sha::sha512;
 use openssl::sign::Verifier;
 use std::fs::File;
 use std::io::{Read, Seek};
@@ -126,6 +127,14 @@ pub fn get_public_key_der<P: AsRef<Path>>(path: P) -> Result<Box<[u8]>> {
     find_signer_and_then(&mut sections, |(signer, _)| {
         Ok(signer.public_key.to_vec().into_boxed_slice())
     })
+}
+
+/// Gets the SHA-512 digest of the APK signing block.
+pub fn get_signing_block_digest<P: AsRef<Path>>(path: P) -> Result<Box<[u8]>> {
+    let f = File::open(path.as_ref())?;
+    let mut sections = ApkSections::new(f)?;
+    let block = sections.find_signature(APK_SIGNATURE_SCHEME_V3_BLOCK_ID)?;
+    Ok(sha512(&block).to_vec().into_boxed_slice())
 }
 
 impl Signer {
