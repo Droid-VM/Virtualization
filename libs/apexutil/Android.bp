@@ -12,6 +12,7 @@ rust_defaults {
     rustlibs: [
         "libavb_bindgen",
         "liblog_rust",
+        "libopenssl",
         "libthiserror",
         "libzip",
     ],
