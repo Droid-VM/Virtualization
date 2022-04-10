@@ -92,6 +92,14 @@ fn find_root_digest(vbmeta: &VbMetaImage) -> Result<Vec<u8>, ApexParseError> {
     Err(ApexParseError::DescriptorNotHashtree)
 }
 
+/// Gets the hash of the payload's verified VBMeta image data.
+pub fn get_payload_vbmeta_image_hash(path: &str) -> Result<Vec<u8>, ApexVerificationError> {
+    let apex_file = File::open(path).map_err(ApexParseError::Io)?;
+    let (_, offset, size) = get_public_key_and_image_info(&apex_file)?;
+    let vbmeta = VbMetaImage::verify_reader_region(apex_file, offset, size)?;
+    Ok(vbmeta.hash().ok_or(ApexVerificationError::ApexPubkeyMistmatch)?.to_vec())
+}
+
 fn get_public_key_and_image_info(apex_file: &File) -> Result<(Vec<u8>, u64, u64), ApexParseError> {
     let mut z = ZipArchive::new(apex_file).map_err(|err| match err {
         ZipError::Io(err) => ApexParseError::Io(err),
