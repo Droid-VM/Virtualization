@@ -15,6 +15,7 @@
 //! Routines for handling APEX payload
 
 use avb_bindgen::*;
+use openssl::sha::sha512;
 use std::ffi::{c_void, CStr};
 use std::fs::File;
 use std::io::{self, Read, Seek, SeekFrom};
@@ -89,6 +90,14 @@ pub fn verify(path: &str) -> Result<ApexVerificationResult, ApexVerificationErro
     let (public_key, image_offset, image_size) = get_public_key_and_image_info(&apex_file)?;
     let root_digest = verify_vbmeta(apex_file, image_offset, image_size, &public_key)?;
     Ok(ApexVerificationResult { public_key, root_digest })
+}
+
+/// Gets the SHA-512 digest of the VBMeta block.
+pub fn get_payload_vbmeta_digest(path: &str) -> Result<Vec<u8>, ApexParseError> {
+    let apex_file = File::open(path).map_err(ApexParseError::Io)?;
+    let (_, offset, size) = get_public_key_and_image_info(&apex_file)?;
+    let vbmeta = VbMeta::from(apex_file, offset, size)?;
+    Ok(sha512(&vbmeta.data).to_vec())
 }
 
 fn get_public_key_and_image_info(apex_file: &File) -> Result<(Vec<u8>, u64, u64), ApexParseError> {
