@@ -14,6 +14,7 @@
 
 //! Routines for handling APEX payload
 
+use openssl::sha::sha512;
 use std::fs::File;
 use std::io::{self, Read};
 use thiserror::Error;
@@ -90,6 +91,14 @@ fn find_root_digest(vbmeta: &VbMetaImage) -> Result<Vec<u8>, ApexParseError> {
         }
     }
     Err(ApexParseError::DescriptorNotHashtree)
+}
+
+/// Gets the SHA-512 digest of the VBMeta block.
+pub fn get_payload_vbmeta_digest(path: &str) -> Result<Vec<u8>, ApexVerificationError> {
+    let apex_file = File::open(path).map_err(ApexParseError::Io)?;
+    let (_, offset, size) = get_public_key_and_image_info(&apex_file)?;
+    let vbmeta = VbMetaImage::verify_reader_region(apex_file, offset, size)?;
+    Ok(sha512(vbmeta.data()).to_vec())
 }
 
 fn get_public_key_and_image_info(apex_file: &File) -> Result<(Vec<u8>, u64, u64), ApexParseError> {

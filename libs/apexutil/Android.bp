@@ -11,6 +11,7 @@ rust_defaults {
     edition: "2018",
     rustlibs: [
         "liblog_rust",
+        "libopenssl",
         "libthiserror",
         "libvbmeta_rust",
         "libzip",
