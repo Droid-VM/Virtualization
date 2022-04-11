@@ -16,6 +16,8 @@
 
 package android.virt.test;
 
+import static android.virt.test.LogArchiever.archiveLogThenDelete;
+
 import static com.android.tradefed.testtype.DeviceJUnit4ClassRunner.TestLogData;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -30,8 +32,6 @@ import com.android.tradefed.device.DeviceNotAvailableException;
 import com.android.tradefed.device.ITestDevice;
 import com.android.tradefed.device.TestDevice;
 import com.android.tradefed.log.LogUtil.CLog;
-import com.android.tradefed.result.FileInputStreamSource;
-import com.android.tradefed.result.LogDataType;
 import com.android.tradefed.testtype.junit4.BaseHostJUnit4Test;
 import com.android.tradefed.util.CommandResult;
 import com.android.tradefed.util.CommandStatus;
@@ -96,12 +96,7 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
 
     public static void archiveLogThenDelete(TestLogData logs, ITestDevice device, String remotePath,
             String localName) throws DeviceNotAvailableException {
-        File logFile = device.pullFile(remotePath);
-        if (logFile != null) {
-            logs.addTestLog(localName, LogDataType.TEXT, new FileInputStreamSource(logFile));
-            // Delete to avoid confusing logs from a previous run, just in case.
-            device.deleteFile(remotePath);
-        }
+        archiveLogThenDelete(logs, device, remotePath, localName);
     }
 
     // Run an arbitrary command in the host side and returns the result
