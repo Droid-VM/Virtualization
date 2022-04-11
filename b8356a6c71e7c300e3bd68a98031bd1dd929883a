@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fa41068_36c242a9",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-11T20:54:21Z",
+      "side": 1,
+      "message": "Any reason to pass this in this way?  Why not adding `self` (i.e. to make it \"not static\" in other language\u0027s terminology) and simply move the original code over?",
+      "range": {
+        "startLine": 125,
+        "startChar": 4,
+        "endLine": 125,
+        "endChar": 29
+      },
+      "revId": "b8356a6c71e7c300e3bd68a98031bd1dd929883a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7482a306_0ff018ae",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-11T20:54:21Z",
+      "side": 1,
+      "message": "The value passing in is never used, so you don\u0027t need to pass this in. Declare a local variable and return it instead.  You can return a tuple like `binder::Result\u003c(.., bool)\u003e`.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 28
+      },
+      "revId": "b8356a6c71e7c300e3bd68a98031bd1dd929883a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
