@@ -177,9 +177,13 @@ public final class AuthFsHostTest extends VirtualizationTestCaseBase {
 
     @After
     public void tearDown() throws Exception {
+        if (sMicrodroid != null) {
+            sMicrodroid.tryRun("killall authfs");
+            sMicrodroid.tryRun("umount " + MOUNT_DIR);
+        }
+
+        assertNotNull(sAndroid);
         sAndroid.tryRun("killall fd_server");
-        sMicrodroid.tryRun("killall authfs");
-        sMicrodroid.tryRun("umount " + MOUNT_DIR);
 
         // Even though we only run one VM for the whole class, and could have collect the VM log
         // after all tests are done, TestLogData doesn't seem to work at class level. Hence,
