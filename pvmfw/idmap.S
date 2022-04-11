@@ -27,7 +27,9 @@
 .set .L_TT_MT_MEM, (0x1 << 2) | (0x3 << 8)	// MAIR #1 (MEM_WBWA), inner shareable
 
 .set .L_BLOCK_RO,  .L_TT_TYPE_BLOCK | .L_TT_MT_MEM | .L_TT_AF | .L_TT_RO | .L_TT_XN
+.set .L_PAGE_XIP,  .L_TT_TYPE_PAGE  | .L_TT_MT_MEM | .L_TT_AF | .L_TT_RO
 .set .L_BLOCK_DEV, .L_TT_TYPE_BLOCK | .L_TT_MT_DEV | .L_TT_AF | .L_TT_XN
+.set .L_BLOCK_MEM, .L_TT_TYPE_BLOCK | .L_TT_MT_MEM | .L_TT_AF | .L_TT_XN | .L_TT_NG
 .set .L_BLOCK_MEM_XIP, .L_TT_TYPE_BLOCK | .L_TT_MT_MEM | .L_TT_AF | .L_TT_NG
 
 .section ".rodata.idmap", "a", %progbits
