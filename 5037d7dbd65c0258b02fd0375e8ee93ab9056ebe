@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a3769f3_7344cb6d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-11T15:37:09Z",
+      "side": 1,
+      "message": "There\u0027s a convention of git comment messages.  The first line should better be limited to 50 characters, followed by a new line, then the rest of lines within 72 characters.\n\nI\u0027d remove \"[testTombstonesAreBeingForwarded]\" from the first line.  No worries in case it\u0027s still a few chars longer.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 86
+      },
+      "revId": "5037d7dbd65c0258b02fd0375e8ee93ab9056ebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b5d6bf2_007ac40f",
+        "filename": "tests/hostside/helper/java/android/virt/test/VirtualizationTestCaseBase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-11T15:37:09Z",
+      "side": 1,
+      "message": "private",
+      "range": {
+        "startLine": 137,
+        "startChar": 4,
+        "endLine": 137,
+        "endChar": 10
+      },
+      "revId": "5037d7dbd65c0258b02fd0375e8ee93ab9056ebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f94b616_b0e281ab",
+        "filename": "tests/hostside/helper/java/android/virt/test/VirtualizationTestCaseBase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-11T15:37:09Z",
+      "side": 1,
+      "message": "This simply calls `RunUtil.getDefault().runTimedCmd(...)`.  You can replace the whole function with `.runTimedCmdRetry(...)` (and you won\u0027t need to throw InterruptedException).",
+      "range": {
+        "startLine": 141,
+        "startChar": 35,
+        "endLine": 141,
+        "endChar": 59
+      },
+      "revId": "5037d7dbd65c0258b02fd0375e8ee93ab9056ebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0baa0415_ffc904ca",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-11T15:37:09Z",
+      "side": 1,
+      "message": "nit/optional: I\u0027d personally prefer to not touch this file to keep the git history cleaner, since the only changes are too trivial.",
+      "range": {
+        "startLine": 381,
+        "startChar": 58,
+        "endLine": 381,
+        "endChar": 59
+      },
+      "revId": "5037d7dbd65c0258b02fd0375e8ee93ab9056ebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

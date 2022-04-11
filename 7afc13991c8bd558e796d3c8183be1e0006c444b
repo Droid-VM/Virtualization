@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c5c9d1a_28f623ee",
+        "filename": "tests/hostside/helper/java/android/virt/test/VirtualizationTestCaseBase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-11T15:37:09Z",
+      "side": 0,
+      "message": "Let\u0027s keep this.  It is still the correct way to wait, and is supposed to be sufficient.  The retry you\u0027re adding should just be a workaround, and can be reverted until the underlying problem is fixed.",
+      "range": {
+        "startLine": 336,
+        "startChar": 8,
+        "endLine": 341,
+        "endChar": 35
+      },
+      "revId": "7afc13991c8bd558e796d3c8183be1e0006c444b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
