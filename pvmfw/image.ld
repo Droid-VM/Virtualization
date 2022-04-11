@@ -18,6 +18,7 @@ MEMORY
 {
 	dtb_region	: ORIGIN = 0x80000000, LENGTH = 2M
 	image		: ORIGIN = 0x80200000, LENGTH = 2M
+	scratch		: ORIGIN = 0x80400000, LENGTH = 2M
 }
 
 /*
@@ -95,7 +96,9 @@ SECTIONS
 		 */
 		. = ALIGN(32);
 		data_end = .;
-	} >image
+	} >scratch AT>image
+	data_lma = LOADADDR(.data);
+
 	/*
 	 * The linker doesn't allow .dynamic to be discarded, see /DISCARD/
 	 * below, so make sure it doesn't get in the way.
@@ -114,14 +117,14 @@ SECTIONS
 		*(COMMON)
 		. = ALIGN(16);
 		bss_end = .;
-	} >image
+	} >scratch
 
 	.stack (NOLOAD) : ALIGN(4096) {
 		boot_stack_begin = .;
 		. += 40 * 4096;
 		. = ALIGN(4096);
 		boot_stack_end = .;
-	} >image
+	} >scratch
 
 	/*
 	 * Remove unused sections from the image.
