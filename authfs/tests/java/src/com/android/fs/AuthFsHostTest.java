@@ -16,6 +16,8 @@
 
 package com.android.virt.fs;
 
+import static android.virt.test.LogArchiever;
+
 import static com.android.tradefed.device.TestDevice.MicrodroidBuilder;
 import static com.android.tradefed.testtype.DeviceJUnit4ClassRunner.TestLogData;
 
@@ -186,7 +188,7 @@ public final class AuthFsHostTest extends VirtualizationTestCaseBase {
         // collect recent logs manually for each test method.
         String vmRecentLog = TEST_OUTPUT_DIR + "/vm_recent.log";
         sAndroid.tryRun("tail -n 50 " + LOG_PATH + " > " + vmRecentLog);
-        archiveLogThenDelete(mTestLogs, getDevice(), vmRecentLog,
+        LogArchiever.archiveLogThenDelete(mTestLogs, getDevice(), vmRecentLog,
                 "vm_recent.log-" + mTestName.getMethodName());
 
         sAndroid.run("rm -rf " + TEST_OUTPUT_DIR);
