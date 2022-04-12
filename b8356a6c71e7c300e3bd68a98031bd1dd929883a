@@ -93,6 +93,30 @@
       },
       "revId": "b8356a6c71e7c300e3bd68a98031bd1dd929883a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "207f89a7_7146cc87",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-12T21:01:03Z",
+      "side": 1,
+      "message": "If landing this first unblocks you, feel free to. But please do the refactoring ASAP. Otherwise, I\u0027d prefer to do it now to fix a problem in the current code (PS2). At L390 is_protected isn\u0027t from the actual config value. Split the parsing/preparation steps and the actual vm creation does seem to be the cleanest.",
+      "parentUuid": "5164b49d_0e1d0fda",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 28
+      },
+      "revId": "b8356a6c71e7c300e3bd68a98031bd1dd929883a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
