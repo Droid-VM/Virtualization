@@ -26,6 +26,54 @@ use vmbase::{console, power::shutdown, println};
 pub extern "C" fn main() -> ! {
     console::init();
     println!("Hello world");
+    print_addresses();
 
     shutdown();
+}
+
+fn print_addresses() {
+    unsafe {
+        println!(
+            "dtb: {:#08x}-{:#08x}",
+            &dtb_begin as *const u8 as usize, &dtb_end as *const u8 as usize
+        );
+        println!(
+            "text: {:#08x}-{:#08x}",
+            &text_begin as *const u8 as usize, &text_end as *const u8 as usize
+        );
+        println!(
+            "rodata: {:#08x}-{:#08x}",
+            &rodata_begin as *const u8 as usize, &rodata_end as *const u8 as usize
+        );
+        println!(
+            "data: {:#08x}-{:#08x} (loaded at {:#08x})",
+            &data_begin as *const u8 as usize,
+            &data_end as *const u8 as usize,
+            &data_lma as *const u8 as usize,
+        );
+        println!(
+            "bss: {:#08x}-{:#08x}",
+            &bss_begin as *const u8 as usize, &bss_end as *const u8 as usize
+        );
+        println!(
+            "boot_stack: {:#08x}-{:#08x}",
+            &boot_stack_begin as *const u8 as usize, &boot_stack_end as *const u8 as usize
+        );
+    }
+}
+
+extern "C" {
+    static dtb_begin: u8;
+    static dtb_end: u8;
+    static text_begin: u8;
+    static text_end: u8;
+    static rodata_begin: u8;
+    static rodata_end: u8;
+    static data_begin: u8;
+    static data_end: u8;
+    static data_lma: u8;
+    static bss_begin: u8;
+    static bss_end: u8;
+    static boot_stack_begin: u8;
+    static boot_stack_end: u8;
 }
