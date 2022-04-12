@@ -15,11 +15,14 @@
 //! Exception handlers.
 
 use crate::console::emergency_write_str;
+use crate::eprintln;
+use core::arch::asm;
 use psci::system_reset;
 
 #[no_mangle]
 extern "C" fn sync_exception_current() {
     emergency_write_str("sync_exception_current\n");
+    print_esr();
     system_reset().unwrap();
 }
 
@@ -39,4 +42,13 @@ extern "C" fn fiq_current() {
 extern "C" fn serr_current() {
     emergency_write_str("serr_current\n");
     system_reset().unwrap();
+}
+
+#[inline]
+fn print_esr() {
+    let mut esr: u64;
+    unsafe {
+        asm!("mrs {esr}, esr_el1", esr = out(reg) esr);
+    }
+    eprintln!("esr={:#08x}", esr);
 }
