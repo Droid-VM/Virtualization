@@ -21,12 +21,17 @@ mod exceptions;
 
 use vmbase::{console, power::shutdown, println};
 
+static ZEROED_DATA: [u32; 10] = [0; 10];
+static INITIALISED_DATA: [u32; 4] = [1, 2, 3, 4];
+static mut MUTABLE_DATA: [u32; 4] = [1, 2, 3, 4];
+
 /// Entry point for pVM firmware.
 #[no_mangle]
 pub extern "C" fn main() -> ! {
     console::init();
     println!("Hello world");
     print_addresses();
+    check_data();
 
     shutdown();
 }
@@ -60,6 +65,31 @@ fn print_addresses() {
             &boot_stack_begin as *const u8 as usize, &boot_stack_end as *const u8 as usize
         );
     }
+}
+
+fn check_data() {
+    println!("ZEROED_DATA: {:#08x}", &ZEROED_DATA as *const u32 as usize);
+    println!("INITIALISED_DATA: {:#08x}", &INITIALISED_DATA as *const u32 as usize);
+    unsafe {
+        println!("MUTABLE_DATA: {:#08x}", &MUTABLE_DATA as *const u32 as usize);
+    }
+
+    for element in ZEROED_DATA.iter() {
+        assert_eq!(*element, 0);
+    }
+    assert_eq!(INITIALISED_DATA[0], 1);
+    assert_eq!(INITIALISED_DATA[1], 2);
+    assert_eq!(INITIALISED_DATA[2], 3);
+    assert_eq!(INITIALISED_DATA[3], 4);
+    unsafe {
+        assert_eq!(MUTABLE_DATA[0], 1);
+        assert_eq!(MUTABLE_DATA[1], 2);
+        assert_eq!(MUTABLE_DATA[2], 3);
+        assert_eq!(MUTABLE_DATA[3], 4);
+        MUTABLE_DATA[0] += 41;
+        assert_eq!(MUTABLE_DATA[0], 42);
+    }
+    println!("Data looks good");
 }
 
 extern "C" {
