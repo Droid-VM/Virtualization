@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1fb1c51_0ff19545",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-04-12T20:41:34Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "7fa41068_36c242a9",
+      "range": {
+        "startLine": 125,
+        "startChar": 4,
+        "endLine": 125,
+        "endChar": 29
+      },
+      "revId": "b8356a6c71e7c300e3bd68a98031bd1dd929883a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7482a306_0ff018ae",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-04-11T20:54:21Z",
       "side": 1,
       "message": "The value passing in is never used, so you don\u0027t need to pass this in. Declare a local variable and return it instead.  You can return a tuple like `binder::Result\u003c(.., bool)\u003e`.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 28
+      },
+      "revId": "b8356a6c71e7c300e3bd68a98031bd1dd929883a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5164b49d_0e1d0fda",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-04-12T20:41:34Z",
+      "side": 1,
+      "message": "As discussed offline, there are cases in which we are can know the value of is_protected even though create_vm_internal returns error, this would not be possible.\n\nCan we do the refactoring in a separate patch?",
+      "parentUuid": "7482a306_0ff018ae",
       "range": {
         "startLine": 129,
         "startChar": 0,
