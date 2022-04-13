@@ -146,17 +146,17 @@ fn try_main() -> Result<()> {
     }
 }
 
-fn dice_derivation(verified_data: MicrodroidData, payload_config_path: &str) -> Result<()> {
+fn dice_derivation(verified_data: &MicrodroidData, payload_config_path: &str) -> Result<()> {
     // Calculate compound digests of code and authorities
     let mut code_hash_ctx = digest::Context::new(&digest::SHA512);
     let mut authority_hash_ctx = digest::Context::new(&digest::SHA512);
     code_hash_ctx.update(verified_data.apk_data.root_hash.as_ref());
     authority_hash_ctx.update(verified_data.apk_data.pubkey.as_ref());
-    for extra_apk in verified_data.extra_apks_data {
+    for extra_apk in &verified_data.extra_apks_data {
         code_hash_ctx.update(extra_apk.root_hash.as_ref());
         authority_hash_ctx.update(extra_apk.pubkey.as_ref());
     }
-    for apex in verified_data.apex_data {
+    for apex in &verified_data.apex_data {
         code_hash_ctx.update(apex.root_digest.as_ref());
         authority_hash_ctx.update(apex.public_key.as_ref());
     }
@@ -189,7 +189,7 @@ fn dice_derivation(verified_data: MicrodroidData, payload_config_path: &str) -> 
             authorityHash: authority_hash,
             authorityDescriptor: None,
             mode: if app_debuggable { Mode::DEBUG } else { Mode::NORMAL },
-            hidden: verified_data.salt.try_into().unwrap(),
+            hidden: verified_data.salt.clone().try_into().unwrap(),
         }])
         .context("IDiceMaintenance::demoteSelf failed")?;
     Ok(())
@@ -262,9 +262,6 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
         ));
     }
     mount_extra_apks(&config)?;
-
-    info!("DICE derivation for payload");
-    dice_derivation(verified_data, &metadata.payload_config_path)?;
 
     // Wait until apex config is done. (e.g. linker configuration for apexes)
     // TODO(jooyung): wait until sys.boot_completed?
@@ -459,12 +456,19 @@ fn verify_payload(
 
     // At this point, we can ensure that the root_hash from the idsig file is trusted, either by
     // fully verifying the APK or by comparing it with the saved root_hash.
-    Ok(MicrodroidData {
+
+    let verified_data = MicrodroidData {
         salt,
         apk_data: ApkData { root_hash: root_hash_from_idsig, pubkey: main_apk_pubkey },
         extra_apks_data,
         apex_data: apex_data_from_payload,
-    })
+    };
+
+    // To minimize the exposure to untrusted data, derive dice profile as soon as possible.
+    info!("DICE derivation for payload");
+    dice_derivation(&verified_data, &metadata.payload_config_path)?;
+
+    Ok(verified_data)
 }
 
 fn mount_extra_apks(config: &VmPayloadConfig) -> Result<()> {
