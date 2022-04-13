@@ -90,6 +90,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00d6c27f_d046e760",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-13T23:35:48Z",
+      "side": 1,
+      "message": "It seems my idea only works for `code_hash_ctx` (which doesn\u0027t require accessing files in APK/APEX), but not `authority_hash`. I guess we could technically separate both in 2 passes, but that\u0027s pretty ugly...\n\nLGTM, this should be a pure improvement (not sure if this is sufficient to address Xiling\u0027s concern).",
+      "parentUuid": "a1db9c8c_54cb1733",
+      "revId": "e3422f7f83e3b39d6b8ea5b95db935329cb8df7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "691f76a7_f7f9412b",
