@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b98e81bc_3e9e80da",
+        "filename": "pvmfw/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2022-04-13T12:52:15Z",
+      "side": 1,
+      "message": "this could be simplified as follows:\n\n        mrs             x6, id_aa64mmfr0_el1\n        bfi             x3, x6, #32, #4         // Copy PArange into TCR_EL1.IPS\n\nwhich just copies this field from one sysreg to the other",
+      "revId": "f641411417b5d386e90ac3e74d27469578af8c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
