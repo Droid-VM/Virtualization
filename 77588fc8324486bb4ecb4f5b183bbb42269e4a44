@@ -89,6 +89,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "068c18e3_c7056375",
+        "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationJobService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-04-13T15:17:01Z",
+      "side": 1,
+      "message": "I think this can be RESULT_FAILURE_UNKNOWN",
+      "range": {
+        "startLine": 260,
+        "startChar": 60,
+        "endLine": 260,
+        "endChar": 74
+      },
+      "revId": "77588fc8324486bb4ecb4f5b183bbb42269e4a44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18bdd3a9_f47ab677",
         "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationMetrics.java",
         "patchSetId": 1
@@ -105,6 +128,29 @@
         "startChar": 53,
         "endLine": 43,
         "endChar": 54
+      },
+      "revId": "77588fc8324486bb4ecb4f5b183bbb42269e4a44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "980797d0_6d83db3d",
+        "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationMetrics.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-04-13T15:17:01Z",
+      "side": 1,
+      "message": "I think we can remove the message from the atom. Logging strings through westworld require privacy review. Using enum instead is encouraged. result \u003c-\u003e message have a 1:1 mapping so, I think we can just drop the message",
+      "range": {
+        "startLine": 65,
+        "startChar": 83,
+        "endLine": 65,
+        "endChar": 90
       },
       "revId": "77588fc8324486bb4ecb4f5b183bbb42269e4a44",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
