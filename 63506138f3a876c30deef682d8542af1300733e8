@@ -16,6 +16,23 @@
       "message": "Updated the linker script to use memory regions.",
       "revId": "63506138f3a876c30deef682d8542af1300733e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fc69b9a_97fc89d4",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2022-04-13T12:46:42Z",
+      "side": 1,
+      "message": "try adding -no-pie here? That should get rid of the needless .dynsym/.dynstr/.dynamic sections.",
+      "revId": "63506138f3a876c30deef682d8542af1300733e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
