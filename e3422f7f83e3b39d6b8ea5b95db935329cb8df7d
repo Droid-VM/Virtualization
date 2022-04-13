@@ -134,6 +134,24 @@
       "parentUuid": "d307fa96_fbc08000",
       "revId": "e3422f7f83e3b39d6b8ea5b95db935329cb8df7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cf740d7_ac205f9d",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-04-13T23:10:48Z",
+      "side": 1,
+      "message": "Init waits for apexd to activate(mount) APEXes and then runs init scripts in apexes:\nIt\u0027s here: https://android-review.googlesource.com/c/platform/packages/modules/Virtualization/+/2064207/2/microdroid/init.rc#75",
+      "parentUuid": "55f07622_d5af4cec",
+      "revId": "e3422f7f83e3b39d6b8ea5b95db935329cb8df7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
