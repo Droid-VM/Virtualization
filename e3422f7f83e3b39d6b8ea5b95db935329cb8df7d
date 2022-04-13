@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efd4698a_c706bc96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-04-13T22:54:09Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "df0ad3d6_fc843727",
+      "revId": "e3422f7f83e3b39d6b8ea5b95db935329cb8df7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "691f76a7_f7f9412b",
@@ -49,6 +67,30 @@
       "writtenOn": "2022-04-13T21:24:49Z",
       "side": 1,
       "message": "It may be worth adding a comment to make it more clear to future modifiers.  Something along the line with... \"To minimize the exposure to untrusted data, derive dice profile as soon as possible.\"",
+      "range": {
+        "startLine": 243,
+        "startChar": 4,
+        "endLine": 243,
+        "endChar": 5
+      },
+      "revId": "e3422f7f83e3b39d6b8ea5b95db935329cb8df7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca11c167_b1ce9f10",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-04-13T22:54:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "691f76a7_f7f9412b",
       "range": {
         "startLine": 243,
         "startChar": 4,
