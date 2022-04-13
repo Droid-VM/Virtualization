@@ -38,6 +38,11 @@ pub struct VmPayloadConfig {
     /// Tells VirtualizationService to use staged APEXes if possible
     #[serde(default)]
     pub prefer_staged: bool,
+
+    /// Whether to export the tomsbtones (VM crashes) out of VM to host
+    /// Enabled by default.
+    #[serde(default = "default_as_true")]
+    pub export_tombstones: bool,
 }
 
 /// OS config
@@ -101,4 +106,8 @@ pub struct ApexConfig {
 pub struct ApkConfig {
     /// The path of APK
     pub path: String,
+}
+
+fn default_as_true() -> bool {
+    true
 }
