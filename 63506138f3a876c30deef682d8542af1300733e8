@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dce5ac6_abe56a08",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-04-13T14:00:50Z",
+      "side": 1,
+      "message": "Clang gives a warning if I do:\n\n```\nclang-14: warning: argument unused during compilation: \u0027-no-pie\u0027 [-Wunused-command-line-argument]\n```\n\nBut actually, it doesn\u0027t seem to generate the sections anyway, so I guess it\u0027s just fine to remove them from the linker script.",
+      "parentUuid": "2fc69b9a_97fc89d4",
+      "revId": "63506138f3a876c30deef682d8542af1300733e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4d55cb7_4c618418",
@@ -58,6 +76,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91c30b09_a4286673",
+        "filename": "pvmfw/image.ld",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-04-13T14:00:50Z",
+      "side": 1,
+      "message": "Removed DTB_MAX_SIZE and just using this length instead.",
+      "parentUuid": "c4d55cb7_4c618418",
+      "range": {
+        "startLine": 19,
+        "startChar": 44,
+        "endLine": 19,
+        "endChar": 46
+      },
+      "revId": "63506138f3a876c30deef682d8542af1300733e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94fda4a2_c3221860",
@@ -71,6 +113,30 @@
       "writtenOn": "2022-04-13T12:54:48Z",
       "side": 1,
       "message": "q: does it need both?",
+      "range": {
+        "startLine": 90,
+        "startChar": 2,
+        "endLine": 91,
+        "endChar": 12
+      },
+      "revId": "63506138f3a876c30deef682d8542af1300733e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f646cfb_9be37505",
+        "filename": "pvmfw/image.ld",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-04-13T14:00:50Z",
+      "side": 1,
+      "message": "Looks like not.",
+      "parentUuid": "94fda4a2_c3221860",
       "range": {
         "startLine": 90,
         "startChar": 2,
