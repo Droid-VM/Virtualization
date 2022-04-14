@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "165a2df3_ceee0ecf",
+        "filename": "pvmfw/src/console.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2022-04-14T16:22:00Z",
+      "side": 1,
+      "message": "Should this be pub? It\u0027s only actually used in this module (for init() and emergency_print()), and calling it outside could make the regular print function become unreliable. (since someone else might use the UART at the same time).",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 3
+      },
+      "revId": "ee9f9b2461b46bd8c275bdb1f3180433baf82347",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29057fd1_cb83778d",
+        "filename": "pvmfw/src/uart.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2022-04-14T16:22:00Z",
+      "side": 1,
+      "message": "With strict-provenance, we would want to take in a `*mut u8` here, and inject the symbol with a linker script or similar rather than doing the cast. That\u0027s all nebulous future stuff and subject to change though, thus pre-resolved.",
+      "revId": "ee9f9b2461b46bd8c275bdb1f3180433baf82347",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
