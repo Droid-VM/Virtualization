@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f5c1d79_cd3aad79",
+        "filename": "pvmfw/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-04-14T17:27:40Z",
+      "side": 1,
+      "message": "What\u0027s the reasoning for copying vs page aligning in the image such that it can be mapped independently of the RO sections? Because you wan the static page tables for ease?",
+      "range": {
+        "startLine": 134,
+        "startChar": 6,
+        "endLine": 134,
+        "endChar": 27
+      },
+      "revId": "a0ecabdae4045491f9cf64108cd8d3f64d45c3e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
