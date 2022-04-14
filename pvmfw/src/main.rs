@@ -17,12 +17,9 @@
 #![no_main]
 #![no_std]
 
-mod console;
 mod exceptions;
-mod uart;
 
-use core::panic::PanicInfo;
-use psci::{system_off, system_reset};
+use vmbase::{console, power::shutdown, println};
 
 static ZEROED_DATA: [u32; 10] = [0; 10];
 static INITIALISED_DATA: [u32; 4] = [1, 2, 3, 4];
@@ -36,16 +33,7 @@ pub extern "C" fn main() -> ! {
     print_addresses();
     check_data();
 
-    system_off().unwrap();
-    #[allow(clippy::empty_loop)]
-    loop {}
-}
-
-#[panic_handler]
-fn panic(info: &PanicInfo) -> ! {
-    eprintln!("{}", info);
-    system_reset().unwrap();
-    loop {}
+    shutdown();
 }
 
 fn print_addresses() {

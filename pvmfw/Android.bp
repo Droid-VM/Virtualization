@@ -11,6 +11,7 @@ rust_ffi_static {
     rustlibs: [
         "libpsci",
         "libspin_nostd",
+        "libvmbase",
     ],
     enabled: false,
     target: {

@@ -14,10 +14,9 @@
 
 //! Exception handlers.
 
-use crate::console::emergency_write_str;
-use crate::eprintln;
 use core::arch::asm;
 use psci::system_reset;
+use vmbase::{console::emergency_write_str, eprintln};
 
 #[no_mangle]
 extern "C" fn sync_exception_current() {
