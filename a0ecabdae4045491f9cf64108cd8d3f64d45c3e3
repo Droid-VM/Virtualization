@@ -22,6 +22,30 @@
       },
       "revId": "a0ecabdae4045491f9cf64108cd8d3f64d45c3e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "567ecc46_610a9c40",
+        "filename": "pvmfw/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-04-14T17:39:00Z",
+      "side": 1,
+      "message": "This was mostly Ard\u0027s idea, but yes, basically because it\u0027s easier to use a static page table.\n\nThe alternatives I can think of would be either:\n1. Start with the MMU off, construct a suitable page table (either in assembly or in Rust), and enable it. But then we need to worry about cache flushing, which is either complicated or expensive.\n2. Don\u0027t enable WXN initially, instead start with the image mapped both writable and executable, then construct a new pagetable with the appropriate mappings, switch to it and then enable WXN.\n\nEither ends up being a lot more complicated than this.",
+      "parentUuid": "7f5c1d79_cd3aad79",
+      "range": {
+        "startLine": 134,
+        "startChar": 6,
+        "endLine": 134,
+        "endChar": 27
+      },
+      "revId": "a0ecabdae4045491f9cf64108cd8d3f64d45c3e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
