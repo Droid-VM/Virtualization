@@ -46,6 +46,30 @@
       },
       "revId": "a0ecabdae4045491f9cf64108cd8d3f64d45c3e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "447b88f3_bf0755b5",
+        "filename": "pvmfw/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2022-04-14T21:16:58Z",
+      "side": 1,
+      "message": "It\u0027s not just easier to use a static page table. By not relying on memory being accessible for anything beyond instruction fetches before the MMU is enabled, we leave room for future improvements in KVM, which currently relies on a pile of hacks to ensure guest writes to memory are visible to the hypervisor and/or the host. WXN is highly desirable as well, and is not actually something you can just flick on and off, and so this would make switching between the hardcoded minimal ID map and the Rust managed runtime ID map more complicated than necessary in terms of TLB maintenance.\n\nAlternatively, you could create static page tables that map all the way down to pages, which is feasible in principle, but much trickier: the .data/.bss sections would need to be placed at a fixed offset in the binary, in a way that leaves room for the worst case size of the preceding sections, which unavoidably means that the image is larger than needed, and this is undesirable given how the firmware image is delivered. So doing a quick copy of .data after the caches are turned on is probably the simplest approach here.",
+      "parentUuid": "567ecc46_610a9c40",
+      "range": {
+        "startLine": 134,
+        "startChar": 6,
+        "endLine": 134,
+        "endChar": 27
+      },
+      "revId": "a0ecabdae4045491f9cf64108cd8d3f64d45c3e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
