@@ -22,7 +22,7 @@ const BASE_ADDRESS: usize = 0x3f8;
 
 static CONSOLE: SpinMutex<Option<Uart>> = SpinMutex::new(None);
 
-/// Initialises a new instance of the UART driver and returns it.
+/// Initialises a new instance of the UART driver and return it.
 fn create() -> Uart {
     // Safe because BASE_ADDRESS is the base of the MMIO region for a UART and is mapped as device
     // memory.
