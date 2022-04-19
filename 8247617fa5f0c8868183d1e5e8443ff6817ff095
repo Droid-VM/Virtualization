@@ -87,6 +87,30 @@
       },
       "revId": "8247617fa5f0c8868183d1e5e8443ff6817ff095",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37160e9d_008a929e",
+        "filename": "microdroid/payload/config/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-04-19T06:06:54Z",
+      "side": 1,
+      "message": "There was a chat thread on 30 Mar where arguments were made for either side. I\u0027m now suggesting that we defer the introduction of a default (which is hard to change) by requiring this field always be set and can look to introduce a default at a later point if we feel the need.",
+      "parentUuid": "96a6e371_842a5060",
+      "range": {
+        "startLine": 44,
+        "startChar": 12,
+        "endLine": 44,
+        "endChar": 39
+      },
+      "revId": "8247617fa5f0c8868183d1e5e8443ff6817ff095",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
