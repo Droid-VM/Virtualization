@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a77a742c_50a2671b",
+        "filename": "pvmfw/exceptions.S",
+        "patchSetId": 10
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-04-19T14:45:01Z",
+      "side": 1,
+      "message": "Is this level of complexity from assumptions about cache lines and unmeasured benefits worth introducing, or would be do better to keep it simple and see if it ever proves itself to be a problem? (I don\u0027t know that there was ever any evidence this was needed in Hf)",
+      "range": {
+        "startLine": 81,
+        "startChar": 69,
+        "endLine": 83,
+        "endChar": 44
+      },
+      "revId": "bfb6bc5e11bdf6e8a36dcfac490f305a0315b1f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7944c1b6_0e140ccd",
+        "filename": "pvmfw/exceptions.S",
+        "patchSetId": 10
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-04-19T14:45:01Z",
+      "side": 1,
+      "message": "Do we want to send these to a handle that can at least print an explanation of what happened?",
+      "range": {
+        "startLine": 148,
+        "startChar": 1,
+        "endLine": 148,
+        "endChar": 4
+      },
+      "revId": "bfb6bc5e11bdf6e8a36dcfac490f305a0315b1f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
