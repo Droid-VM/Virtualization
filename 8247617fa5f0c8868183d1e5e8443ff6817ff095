@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa4878a6_c185f7c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-04-19T01:10:33Z",
+      "side": 1,
+      "message": "See the comment. Other than that LGTM.",
+      "revId": "8247617fa5f0c8868183d1e5e8443ff6817ff095",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a97cf023_739b109f",
@@ -38,6 +55,30 @@
       "side": 1,
       "message": "I was pointed towards a conversation balancing monitoring with security. My concern is that this default, either way, is going to cause a problem for either of those. VM developers have to understand the implications of both so it seems reasonable to require them to explicitly state which path they have chosen rather than have a default value at all.",
       "parentUuid": "a97cf023_739b109f",
+      "range": {
+        "startLine": 44,
+        "startChar": 12,
+        "endLine": 44,
+        "endChar": 39
+      },
+      "revId": "8247617fa5f0c8868183d1e5e8443ff6817ff095",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96a6e371_842a5060",
+        "filename": "microdroid/payload/config/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-04-19T01:10:33Z",
+      "side": 1,
+      "message": "I agree with Andrew. Why can\u0027t we default to false?",
+      "parentUuid": "e6b33c5c_5493e3a7",
       "range": {
         "startLine": 44,
         "startChar": 12,
