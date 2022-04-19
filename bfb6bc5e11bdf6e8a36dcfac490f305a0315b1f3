@@ -50,6 +50,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a4b0c46_3374322a",
+        "filename": "pvmfw/exceptions.S",
+        "patchSetId": 10
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2022-04-19T17:59:40Z",
+      "side": 1,
+      "message": "What is the significance of cache line size here? Note that 16 bytes is the architectural minimum, but in practice, cache lines are at least 64 bytes.\n\nDo you have any plans to use the timer interrupt or doing any kind of exception handling when things are working as expected? Are you actually planning to use both SP_EL0 and SP_ELx at EL1? If not, you could probably simplify this code quite a bit.",
+      "revId": "bfb6bc5e11bdf6e8a36dcfac490f305a0315b1f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "992b7e2f_ef6e1b05",
         "filename": "pvmfw/exceptions.S",
         "patchSetId": 10
