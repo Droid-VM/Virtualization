@@ -111,6 +111,30 @@
       },
       "revId": "8247617fa5f0c8868183d1e5e8443ff6817ff095",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "285b6340_7aee727d",
+        "filename": "microdroid/payload/config/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-04-19T14:47:05Z",
+      "side": 1,
+      "message": "I have removed the default value. I think we can defer the decision on default. I have also set export_tombstones to true in all assets/configs in the repo.",
+      "parentUuid": "37160e9d_008a929e",
+      "range": {
+        "startLine": 44,
+        "startChar": 12,
+        "endLine": 44,
+        "endChar": 39
+      },
+      "revId": "8247617fa5f0c8868183d1e5e8443ff6817ff095",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

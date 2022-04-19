@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14ef0dfd_1c509620",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-04-19T14:47:05Z",
+      "side": 1,
+      "message": "As per discussion in the comments, I have removed the default for export_tombstones. This value has to be specified in the assets/config.json or deserialisation fails \u0026 error is logged \u0026 sent to client",
+      "revId": "6f03c944f6434d6302809142c95538d2b7677cb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
