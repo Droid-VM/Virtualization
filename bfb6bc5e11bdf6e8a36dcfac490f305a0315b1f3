@@ -65,6 +65,48 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "610d36a8_6f157149",
+        "filename": "pvmfw/exceptions.S",
+        "patchSetId": 10
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-04-20T10:59:18Z",
+      "side": 1,
+      "message": "As noted above, the cache line optimisation is mostly just inherited from Hafnium. It might not actually matter.\n\nI don\u0027t expect to use the timer interrupt in the pVM firmware, but I do expect David\u0027s unikernel to use it, and I was hoping to make this exception vector common shared code that can be used by any bare-metal Rust binary targeting a VM.",
+      "parentUuid": "3a4b0c46_3374322a",
+      "revId": "bfb6bc5e11bdf6e8a36dcfac490f305a0315b1f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "324773bb_f9a9d117",
+        "filename": "pvmfw/exceptions.S",
+        "patchSetId": 10
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-04-20T10:59:18Z",
+      "side": 1,
+      "message": "This is mostly here because it was in Hafnium, and it seemed like the optimisation might be worthwhile for David\u0027s unikernel. But in any case the point is that we can do what we need to in 32 instructions, so how would you suggest simplifying it?",
+      "parentUuid": "4b34b704_e9a433e7",
+      "range": {
+        "startLine": 81,
+        "startChar": 69,
+        "endLine": 83,
+        "endChar": 44
+      },
+      "revId": "bfb6bc5e11bdf6e8a36dcfac490f305a0315b1f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "992b7e2f_ef6e1b05",
@@ -78,6 +120,30 @@
       "writtenOn": "2022-04-19T16:58:34Z",
       "side": 1,
       "message": "This is a current EL exception - where is this ERET-ing to?",
+      "range": {
+        "startLine": 93,
+        "startChar": 1,
+        "endLine": 93,
+        "endChar": 5
+      },
+      "revId": "bfb6bc5e11bdf6e8a36dcfac490f305a0315b1f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4c13c6a_72f3deea",
+        "filename": "pvmfw/exceptions.S",
+        "patchSetId": 10
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-04-20T10:59:18Z",
+      "side": 1,
+      "message": "Back to wherever it was executing before the exception happened, as stored in ELR_EL1.",
+      "parentUuid": "992b7e2f_ef6e1b05",
       "range": {
         "startLine": 93,
         "startChar": 1,
@@ -111,6 +177,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cbe2bd7_23bd5f54",
+        "filename": "pvmfw/exceptions.S",
+        "patchSetId": 10
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-04-20T10:59:18Z",
+      "side": 1,
+      "message": "Done, though the handler won\u0027t be able to do much with them.",
+      "parentUuid": "7944c1b6_0e140ccd",
+      "range": {
+        "startLine": 148,
+        "startChar": 1,
+        "endLine": 148,
+        "endChar": 4
+      },
+      "revId": "bfb6bc5e11bdf6e8a36dcfac490f305a0315b1f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b340f3d3_1388c250",
@@ -134,6 +224,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4cdf872_934fd0b3",
+        "filename": "pvmfw/exceptions.S",
+        "patchSetId": 10
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-04-20T10:59:18Z",
+      "side": 1,
+      "message": "Ditto, back to wherever it was before the exception.",
+      "parentUuid": "b340f3d3_1388c250",
+      "range": {
+        "startLine": 184,
+        "startChar": 1,
+        "endLine": 184,
+        "endChar": 5
+      },
+      "revId": "bfb6bc5e11bdf6e8a36dcfac490f305a0315b1f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a094c6fb_e24f4129",
@@ -147,6 +261,30 @@
       "writtenOn": "2022-04-19T16:58:34Z",
       "side": 1,
       "message": "Why not use `eprintln` here?",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 23
+      },
+      "revId": "bfb6bc5e11bdf6e8a36dcfac490f305a0315b1f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d9ff9b1_94b05bcf",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-04-20T10:59:18Z",
+      "side": 1,
+      "message": "If the stack pointer or memory map is messed up, that may result in another exception immediately. `emergency_write_str` seems to be more reliable as it doesn\u0027t write to memory.\n\nI ran into this quite a bit while debugging page table and other initialisation issues, where something would be wrong, an exception would happen, and `emergency_write_str` would work but `eprintln` wouldn\u0027t, and it was useful to at least know that an exception had happened even if I didn\u0027t get the ESR value.",
+      "parentUuid": "a094c6fb_e24f4129",
       "range": {
         "startLine": 24,
         "startChar": 4,
