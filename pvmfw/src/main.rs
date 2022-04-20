@@ -20,12 +20,19 @@
 
 mod exceptions;
 
+use aarch64_paging::{
+    idmap::IdMap,
+    paging::{Attributes, MemoryRegion},
+};
 use buddy_system_allocator::LockedHeap;
 use vmbase::{console, power::shutdown, println};
 
 static ZEROED_DATA: [u32; 10] = [0; 10];
 static INITIALISED_DATA: [u32; 4] = [1, 2, 3, 4];
 static mut MUTABLE_DATA: [u32; 4] = [1, 2, 3, 4];
+
+const ASID: usize = 1;
+const ROOT_LEVEL: usize = 1;
 
 #[global_allocator]
 static HEAP_ALLOCATOR: LockedHeap<32> = LockedHeap::<32>::new();
@@ -43,6 +50,39 @@ pub extern "C" fn main() -> ! {
     unsafe {
         HEAP_ALLOCATOR.lock().init(&mut HEAP as *mut u8 as usize, HEAP.len());
     }
+
+    let mut idmap = IdMap::new(ASID, ROOT_LEVEL);
+    let device_range = MemoryRegion::new(0, 0x80000000);
+    idmap.map_range(
+        &device_range,
+        Attributes::VALID
+            | Attributes::DEVICE_NGNRE
+            | Attributes::EXECUTE_NEVER
+            | Attributes::ACCESSED,
+    );
+    let text_range = MemoryRegion::new(0x80200000, 0x80400000);
+    idmap.map_range(
+        &text_range,
+        Attributes::VALID
+            | Attributes::NORMAL
+            | Attributes::ACCESSED
+            | Attributes::NON_GLOBAL
+            | Attributes::READ_ONLY,
+    );
+    let data_range = MemoryRegion::new(0x80400000, 0x80600000);
+    idmap.map_range(
+        &data_range,
+        Attributes::VALID
+            | Attributes::NORMAL
+            | Attributes::ACCESSED
+            | Attributes::EXECUTE_NEVER
+            | Attributes::NON_GLOBAL,
+    );
+    println!("Activating IdMap...");
+    idmap.activate();
+    println!("Activated.");
+
+    check_data();
 
     shutdown();
 }
@@ -100,6 +140,8 @@ fn check_data() {
         assert_eq!(MUTABLE_DATA[3], 4);
         MUTABLE_DATA[0] += 41;
         assert_eq!(MUTABLE_DATA[0], 42);
+        MUTABLE_DATA[0] -= 41;
+        assert_eq!(MUTABLE_DATA[0], 1);
     }
     println!("Data looks good");
 }
