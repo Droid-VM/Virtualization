@@ -16,14 +16,21 @@
 
 #![no_main]
 #![no_std]
+#![feature(default_alloc_error_handler)]
 
 mod exceptions;
 
+use buddy_system_allocator::LockedHeap;
 use vmbase::{console, power::shutdown, println};
 
 static ZEROED_DATA: [u32; 10] = [0; 10];
 static INITIALISED_DATA: [u32; 4] = [1, 2, 3, 4];
 static mut MUTABLE_DATA: [u32; 4] = [1, 2, 3, 4];
+
+#[global_allocator]
+static HEAP_ALLOCATOR: LockedHeap<32> = LockedHeap::<32>::new();
+
+static mut HEAP: [u8; 65536] = [0; 65536];
 
 /// Entry point for pVM firmware.
 #[no_mangle]
@@ -32,6 +39,10 @@ pub extern "C" fn main() -> ! {
     println!("Hello world");
     print_addresses();
     check_data();
+
+    unsafe {
+        HEAP_ALLOCATOR.lock().init(&mut HEAP as *mut u8 as usize, HEAP.len());
+    }
 
     shutdown();
 }
@@ -72,6 +83,7 @@ fn check_data() {
     println!("INITIALISED_DATA: {:#08x}", &INITIALISED_DATA as *const u32 as usize);
     unsafe {
         println!("MUTABLE_DATA: {:#08x}", &MUTABLE_DATA as *const u32 as usize);
+        println!("HEAP: {:#08x}", &HEAP as *const u8 as usize);
     }
 
     for element in ZEROED_DATA.iter() {
