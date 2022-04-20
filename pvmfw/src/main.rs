@@ -79,6 +79,7 @@ pub extern "C" fn main() -> ! {
             | Attributes::NON_GLOBAL,
     );
     println!("Activating IdMap...");
+    println!("{:?}", idmap);
     idmap.activate();
     println!("Activated.");
 
