@@ -70,6 +70,7 @@ pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
         Attributes::NORMAL | Attributes::EXECUTE_NEVER | Attributes::NON_GLOBAL,
     );
     println!("Activating IdMap...");
+    println!("{:?}", idmap);
     idmap.activate();
     println!("Activated.");
 
