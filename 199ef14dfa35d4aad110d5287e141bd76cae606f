@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "904627c0_16a61870",
+        "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationMetrics.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-04-20T13:34:48Z",
+      "side": 1,
+      "message": "Can we also include a bool field scheduling_succeeded into this atoms - r.android.com/c/platform/packages/modules/Virtualization/+/2069158/1/compos/service/java/com/android/server/compos/IsolatedCompilationJobService.java#80\n\nWe also might not want to have an empty atom with just field name.\n\nI made a rough patch on the top of yours - r.android.com/2069158",
+      "range": {
+        "startLine": 62,
+        "startChar": 35,
+        "endLine": 62,
+        "endChar": 39
+      },
+      "revId": "199ef14dfa35d4aad110d5287e141bd76cae606f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
