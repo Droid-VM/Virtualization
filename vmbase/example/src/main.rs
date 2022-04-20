@@ -22,6 +22,10 @@ mod exceptions;
 
 extern crate alloc;
 
+use aarch64_paging::{
+    idmap::IdMap,
+    paging::{Attributes, MemoryRegion},
+};
 use alloc::{
     alloc::{alloc, Layout},
     vec,
@@ -34,10 +38,20 @@ static INITIALISED_DATA: [u32; 4] = [1, 2, 3, 4];
 static mut ZEROED_DATA: [u32; 10] = [0; 10];
 static mut MUTABLE_DATA: [u32; 4] = [1, 2, 3, 4];
 
+const ASID: usize = 1;
+const ROOT_LEVEL: usize = 1;
+
 #[global_allocator]
 static HEAP_ALLOCATOR: LockedHeap<32> = LockedHeap::<32>::new();
 
 static mut HEAP: [u8; 65536] = [0; 65536];
+
+/// The first 2 GiB of memory are used for MMIO.
+const DEVICE_REGION: MemoryRegion = MemoryRegion::new(0, 0x80000000);
+/// The firmware image is loaded here.
+const TEXT_REGION: MemoryRegion = MemoryRegion::new(0x80200000, 0x80400000);
+/// Writable data.
+const DATA_REGION: MemoryRegion = MemoryRegion::new(0x80400000, 0x80600000);
 
 main!(main);
 
@@ -53,6 +67,22 @@ pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
     }
 
     check_alloc();
+
+    let mut idmap = IdMap::new(ASID, ROOT_LEVEL);
+    idmap.map_range(&DEVICE_REGION, Attributes::DEVICE_NGNRE | Attributes::EXECUTE_NEVER);
+    idmap.map_range(
+        &TEXT_REGION,
+        Attributes::NORMAL | Attributes::NON_GLOBAL | Attributes::READ_ONLY,
+    );
+    idmap.map_range(
+        &DATA_REGION,
+        Attributes::NORMAL | Attributes::EXECUTE_NEVER | Attributes::NON_GLOBAL,
+    );
+    println!("Activating IdMap...");
+    idmap.activate();
+    println!("Activated.");
+
+    check_data();
 }
 
 fn print_addresses() {
@@ -125,6 +155,8 @@ fn check_data() {
         assert_eq!(MUTABLE_DATA[3], 4);
         MUTABLE_DATA[0] += 41;
         assert_eq!(MUTABLE_DATA[0], 42);
+        MUTABLE_DATA[0] -= 41;
+        assert_eq!(MUTABLE_DATA[0], 1);
     }
     println!("Data looks good");
 }
