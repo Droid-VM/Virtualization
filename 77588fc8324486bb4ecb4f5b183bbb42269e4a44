@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc032c61_c1d0eec4",
+        "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationJobService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-04-20T15:14:05Z",
+      "side": 1,
+      "message": "I agree it\u0027s slightly weird, although I\u0027ve at least made the change to L119.\nI\u0027m reluctant to create an object here when there\u0027s no state for it to hold.",
+      "parentUuid": "671836dd_8b6e69b7",
+      "range": {
+        "startLine": 65,
+        "startChar": 8,
+        "endLine": 65,
+        "endChar": 34
+      },
+      "revId": "77588fc8324486bb4ecb4f5b183bbb42269e4a44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8eb690a4_6f3d939e",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-04-08T16:39:42Z",
       "side": 1,
       "message": "nit: If it\u0027s really easier to be done this way, consider creating a static method, something along the line with `IsolatedCompilationMetrics::Failed(...)` (I\u0027m not sure this is the cleanest).  I was wondering how this works without the `..Started` call.",
+      "range": {
+        "startLine": 119,
+        "startChar": 24,
+        "endLine": 119,
+        "endChar": 75
+      },
+      "revId": "77588fc8324486bb4ecb4f5b183bbb42269e4a44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0577c636_fca710b5",
+        "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationJobService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-04-20T15:14:05Z",
+      "side": 1,
+      "message": "I\u0027m using mMetrics now.\n\nThe onCompilationEnded call is designed to work even if onCompilationStarted never happened.",
+      "parentUuid": "8eb690a4_6f3d939e",
       "range": {
         "startLine": 119,
         "startChar": 24,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70b97ce2_05540277",
+        "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationJobService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-04-20T15:14:05Z",
+      "side": 1,
+      "message": "Yes, I like that.",
+      "parentUuid": "c60f04ba_17e00a89",
+      "range": {
+        "startLine": 248,
+        "startChar": 12,
+        "endLine": 248,
+        "endChar": 35
+      },
+      "revId": "77588fc8324486bb4ecb4f5b183bbb42269e4a44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "068c18e3_c7056375",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-04-13T15:17:01Z",
       "side": 1,
       "message": "I think this can be RESULT_FAILURE_UNKNOWN",
+      "range": {
+        "startLine": 260,
+        "startChar": 60,
+        "endLine": 260,
+        "endChar": 74
+      },
+      "revId": "77588fc8324486bb4ecb4f5b183bbb42269e4a44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a1f7702_1c6db4f7",
+        "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationJobService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-04-20T15:14:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "068c18e3_c7056375",
       "range": {
         "startLine": 260,
         "startChar": 60,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60299369_5381699c",
+        "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationMetrics.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-04-20T15:14:05Z",
+      "side": 1,
+      "message": "Lol. I think I started to add another one and then changed my mind.",
+      "parentUuid": "18bdd3a9_f47ab677",
+      "range": {
+        "startLine": 43,
+        "startChar": 53,
+        "endLine": 43,
+        "endChar": 54
+      },
+      "revId": "77588fc8324486bb4ecb4f5b183bbb42269e4a44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "980797d0_6d83db3d",
@@ -146,6 +266,30 @@
       "writtenOn": "2022-04-13T15:17:01Z",
       "side": 1,
       "message": "I think we can remove the message from the atom. Logging strings through westworld require privacy review. Using enum instead is encouraged. result \u003c-\u003e message have a 1:1 mapping so, I think we can just drop the message",
+      "range": {
+        "startLine": 65,
+        "startChar": 83,
+        "endLine": 65,
+        "endChar": 90
+      },
+      "revId": "77588fc8324486bb4ecb4f5b183bbb42269e4a44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1193d24a_d1b0b13a",
+        "filename": "compos/service/java/com/android/server/compos/IsolatedCompilationMetrics.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-04-20T15:14:05Z",
+      "side": 1,
+      "message": "\u003e result \u003c-\u003e message have a 1:1 mapping\n\nThey don\u0027t - some results have a variable message, e.g. the content of an exception.\n\nBut I agree about including strings in the atom. I suggest we send the message to logcat.",
+      "parentUuid": "980797d0_6d83db3d",
       "range": {
         "startLine": 65,
         "startChar": 83,
