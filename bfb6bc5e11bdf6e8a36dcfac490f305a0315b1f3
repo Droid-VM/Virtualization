@@ -109,6 +109,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "18767bb8_6fc36eae",
+        "filename": "pvmfw/exceptions.S",
+        "patchSetId": 10
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-04-20T11:09:17Z",
+      "side": 1,
+      "message": "At the very least, remove the wording in the comments that add restrictions that we don\u0027t have measured justification for enforcing. Then there\u0027s a lack of symmetry in the handlers for the two cases so you could inline restore_volatile_from_stack+eret in the spx case rather than branching to a handler for cache line reasons. But mainly the comments are distracting.",
+      "parentUuid": "324773bb_f9a9d117",
+      "range": {
+        "startLine": 81,
+        "startChar": 69,
+        "endLine": 83,
+        "endChar": 44
+      },
+      "revId": "bfb6bc5e11bdf6e8a36dcfac490f305a0315b1f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "992b7e2f_ef6e1b05",
         "filename": "pvmfw/exceptions.S",
         "patchSetId": 10
