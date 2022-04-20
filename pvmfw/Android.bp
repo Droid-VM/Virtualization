@@ -13,6 +13,7 @@ rust_ffi_static {
         "libcore.rust_sysroot",
     ],
     rustlibs: [
+        "libaarch64_paging",
         "libbuddy_system_allocator",
         "libvmbase",
     ],
@@ -36,9 +37,8 @@ cc_binary {
         "libpvmfw",
     ],
     static_executable: true,
-    no_libcrt: true,
     nocrt: true,
-    system_shared_libs: [],
+    system_shared_libs: ["libc"],
     stl: "none",
     ldflags: [
         "-Tpackages/modules/Virtualization/pvmfw/image.ld",
