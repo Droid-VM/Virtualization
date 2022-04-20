@@ -238,6 +238,8 @@ public final class VirtualMachineConfig {
         parcel.memoryMib = mMemoryMib;
         parcel.numCpus = mNumCpus;
         parcel.cpuAffinity = mCpuAffinity;
+        // Don't allow apps to set task profiles ... at last for now.
+        parcel.taskProfiles = new String[0];
         return parcel;
     }
 
