@@ -69,6 +69,7 @@ pub fn main() {
         Attributes::NORMAL | Attributes::EXECUTE_NEVER | Attributes::NON_GLOBAL,
     );
     println!("Activating IdMap...");
+    println!("{:?}", idmap);
     idmap.activate();
     println!("Activated.");
 
