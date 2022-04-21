@@ -20,6 +20,8 @@ import android.annotation.IntDef;
 import android.os.SystemClock;
 import android.util.Log;
 
+import com.android.internal.art.ArtStatsLog;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -37,26 +39,33 @@ class IsolatedCompilationMetrics {
             RESULT_COMPILATION_FAILED, RESULT_UNEXPECTED_COMPILATION_RESULT, RESULT_COMPOSD_DIED})
     public @interface CompilationResult {}
 
-    public static final int RESULT_SUCCESS = 0;
-    public static final int RESULT_UNKNOWN_FAILURE = 1;
-    public static final int RESULT_FAILED_TO_START = 2;
-    public static final int RESULT_JOB_CANCELED = 3;
-    public static final int RESULT_COMPILATION_FAILED = 4;
-    public static final int RESULT_UNEXPECTED_COMPILATION_RESULT = 5;
-    public static final int RESULT_COMPOSD_DIED = 6;
+    // Keep this in sync with Result enum in IsolatedCompilationEnded in
+    // frameworks/proto_logging/stats/atoms.proto
+    public static final int RESULT_UNKNOWN = 0;
+    public static final int RESULT_SUCCESS = 1;
+    public static final int RESULT_UNKNOWN_FAILURE = 2;
+    public static final int RESULT_FAILED_TO_START = 3;
+    public static final int RESULT_JOB_CANCELED = 4;
+    public static final int RESULT_COMPILATION_FAILED = 5;
+    public static final int RESULT_UNEXPECTED_COMPILATION_RESULT = 6;
+    public static final int RESULT_COMPOSD_DIED = 7;
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({SCHEDULING_SUCCESS, SCHEDULING_FAILURE})
     public @interface ScheduleJobResult {}
 
-    public static final int SCHEDULING_SUCCESS = 0;
-    public static final int SCHEDULING_FAILURE = 1;
+    // Keep this in sync with Result enum in IsolatedCompilationScheduled in
+    // frameworks/proto_logging/stats/atoms.proto
+
+    public static final int SCHEDULING_RESULT_UNKNOWN = 0;
+    public static final int SCHEDULING_SUCCESS = 1;
+    public static final int SCHEDULING_FAILURE = 2;
 
     private long mCompilationStartTimeMs = 0;
 
     public static void onCompilationScheduled(@ScheduleJobResult int result) {
         // TODO(b/218525257): write to ArtStatsLog instead of logcat
-        // ArtStatsLog.write(ArtStatsLog.ISOLATED_COMPILATION_SCHEDULED, result);
+        ArtStatsLog.write(ArtStatsLog.ISOLATED_COMPILATION_SCHEDULED, result);
         Log.i(TAG, "ISOLATED_COMPILATION_SCHEDULED: " + result);
     }
 
@@ -70,7 +79,7 @@ class IsolatedCompilationMetrics {
         mCompilationStartTimeMs = 0;
 
         // TODO(b/218525257): write to ArtStatsLog instead of logcat
-        // ArtStatsLog.write(ArtStatsLog.ISOLATED_COMPILATION_ENDED, result, compilationTime);
+        ArtStatsLog.write(ArtStatsLog.ISOLATED_COMPILATION_ENDED, compilationTime, result);
         Log.i(TAG, "ISOLATED_COMPILATION_ENDED: " + result + ", " + compilationTime);
     }
 }
