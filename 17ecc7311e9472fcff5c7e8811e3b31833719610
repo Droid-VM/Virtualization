@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d849dfe4_82797ada",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-04-22T13:31:57Z",
+      "side": 1,
+      "message": "This prebuilt seems to include changes that break pvmfw (see b/230084659); while we figure it out, aosp/2073627 drops an older prebuilt which passes those tests and will be used instead to add support for MMIO guard injected faults.\n\nI\u0027ll restart the presubmit here, OOC.",
+      "revId": "17ecc7311e9472fcff5c7e8811e3b31833719610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
