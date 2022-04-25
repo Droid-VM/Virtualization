@@ -25,7 +25,8 @@ rust_ffi_static {
 }
 
 cc_binary {
-    name: "pvmfw",
+    name: "pvmfw_elf",
+    stem: "pvmfw",
     srcs: [
         "entry.S",
         "idmap.S",
@@ -45,4 +46,10 @@ cc_binary {
         },
     },
     apex_available: ["com.android.virt"],
+}
+
+raw_binary {
+    name: "pvmfw_bin",
+    src: ":pvmfw_elf",
+    stem: "pvmfw.bin",
 }
