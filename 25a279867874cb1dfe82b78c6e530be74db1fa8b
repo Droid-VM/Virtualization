@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7c5e1ab_dd87ffc0",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-25T17:21:46Z",
+      "side": 1,
+      "message": "Not sure if it\u0027s safe.  Added a check.",
+      "parentUuid": "906616f1_3e7fedaf",
+      "range": {
+        "startLine": 131,
+        "startChar": 34,
+        "endLine": 131,
+        "endChar": 48
+      },
+      "revId": "25a279867874cb1dfe82b78c6e530be74db1fa8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b4099a9_0ffdafd0",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-04-25T17:03:13Z",
       "side": 1,
       "message": "Can you merge this on top of my aosp/2073674, which does this \u0026 also removes the @Ignore above?",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 58
+      },
+      "revId": "25a279867874cb1dfe82b78c6e530be74db1fa8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14c7f992_4d0967e3",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-25T17:21:46Z",
+      "side": 1,
+      "message": "Definitely. It\u0027s better to land yours first.",
+      "parentUuid": "1b4099a9_0ffdafd0",
       "range": {
         "startLine": 150,
         "startChar": 0,
