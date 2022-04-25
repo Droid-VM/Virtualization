@@ -26,6 +26,7 @@ rust_ffi_static {
 
 cc_binary {
     name: "pvmfw",
+    stem: "pvmfw",
     srcs: [
         "entry.S",
         "exceptions.S",
@@ -35,6 +36,8 @@ cc_binary {
         "libpvmfw",
     ],
     static_executable: true,
+    raw_binary: true,
+    install_in_etc: true,
     nocrt: true,
     system_shared_libs: ["libc"],
     stl: "none",
