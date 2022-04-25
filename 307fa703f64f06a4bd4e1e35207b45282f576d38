@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d104161_e40df029",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-04-25T15:05:11Z",
+      "side": 1,
+      "message": "Note that, although they share the same name, `INTERNAL_PREBUILT_PVMFWIMAGE` (from cs/android/packages/modules/Virtualization/pvmfw/pvmfw.img) is expected to be \"boot.img-wrapped\" but NOT AVB-signed (actual signing happens at cs/android/build/make/core/Makefile?l\u003d3947), while this will produce a \"`pvmfw.img`\" that is both wrapped and signed; could this lead to clashes and/or confusion?",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 18
+      },
+      "revId": "307fa703f64f06a4bd4e1e35207b45282f576d38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
