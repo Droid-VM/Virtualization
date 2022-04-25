@@ -16,6 +16,24 @@
       "message": "Will it be possible to specify a linker script in a different directory, somehow?",
       "revId": "a39440fedff2149524d5532641e4bcc1d27f09e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be6c8931_4066fff0",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-04-25T14:20:02Z",
+      "side": 1,
+      "message": "Absolutely - this can be a module name, so you can declare a `filegroup` somewhere else and refer to it here.\n\nAnother neat trick: if you specify a list here, the linker will concat them. So you could split this image.ld into the first `MEMORY` section (specific to the target environment) and the rest (common to all environments), and use that for parametrization of pvmfw/bios builds.",
+      "parentUuid": "df690e01_f4c2b032",
+      "revId": "a39440fedff2149524d5532641e4bcc1d27f09e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
