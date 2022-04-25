@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0e8bd54_c6deb65b",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-25T16:19:08Z",
+      "side": 1,
+      "message": "Probably not specific to this change, but we\u0027ll need to remember to validate the strings somewhere (so that the user can\u0027t pass, say \"; rm -rf *;\"), probably at the immediate receiver of the AIDL.  Consider expanding the comment in VirtualMachineConfig.java to remind ourselves.",
+      "range": {
+        "startLine": 331,
+        "startChar": 50,
+        "endLine": 331,
+        "endChar": 73
+      },
+      "revId": "e5f94f5de7e2632287edd6cfa574164678438186",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
