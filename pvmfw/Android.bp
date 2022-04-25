@@ -35,6 +35,8 @@ cc_binary {
         "libpvmfw",
     ],
     static_executable: true,
+    raw_binary: true,
+    install_in_etc: true,
     nocrt: true,
     system_shared_libs: ["libc"],
     stl: "none",
