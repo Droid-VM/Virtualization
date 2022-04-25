@@ -41,3 +41,11 @@ raw_binary {
         },
     },
 }
+
+bootimg {
+    name: "pvmfw_img",
+    kernel_prebuilt: ":pvmfw",
+    header_version: "3",
+    partition_name: "pvmfw",
+    avb_private_key: ":pvmfw_sign_key",
+}
