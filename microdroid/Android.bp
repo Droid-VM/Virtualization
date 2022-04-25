@@ -157,16 +157,22 @@ prebuilt_root {
 
 genrule {
     name: "microdroid_build_prop_gen_x86_64",
-    srcs: ["build.prop"],
+    srcs: [
+        "build.prop",
+        ":buildinfo.prop",
+    ],
     out: ["build.prop.out"],
-    cmd: "cp $(in) $(out); echo ro.product.cpu.abilist=x86_64 >> $(out)",
+    cmd: "cat $(in) > $(out) && echo ro.product.cpu.abilist=x86_64 >> $(out)",
 }
 
 genrule {
     name: "microdroid_build_prop_gen_arm64",
-    srcs: ["build.prop"],
+    srcs: [
+        "build.prop",
+        ":buildinfo.prop",
+    ],
     out: ["build.prop.out"],
-    cmd: "cp $(in) $(out); echo ro.product.cpu.abilist=arm64-v8a >> $(out)",
+    cmd: "cat $(in) > $(out) && echo ro.product.cpu.abilist=arm64-v8a >> $(out)",
 }
 
 android_filesystem {
