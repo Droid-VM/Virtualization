@@ -39,6 +39,30 @@
       },
       "revId": "07254aac8d2d303325e467b52a79c1f19b1dccf9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8673ba66_af5655b8",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-04-26T05:26:42Z",
+      "side": 1,
+      "message": "As far as I understand, we don\u0027t need all props. Currently we only need five (one is ro.product.cpu.abilist) We could grep such props like your suggestion, e.g.\n\n    cmd: \"(grep ro.build.version.sdk\\|ro.build.version.codename\\|... $(location :buildinfo.prop) \u0026\u0026 cat $(location build.prop)) \u003e $(out)\"\n    \nCurrently I\u0027m trying to land it on internal main branch first, due to merge conflicts. I\u0027ll update that change after testing.",
+      "parentUuid": "12e6f17b_ba8babb7",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 1
+      },
+      "revId": "07254aac8d2d303325e467b52a79c1f19b1dccf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
