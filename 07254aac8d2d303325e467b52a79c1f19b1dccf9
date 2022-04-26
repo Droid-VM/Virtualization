@@ -16,6 +16,29 @@
       "message": "I\u0027ll upload to tm-dev to resolve merge conflict.",
       "revId": "07254aac8d2d303325e467b52a79c1f19b1dccf9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12e6f17b_ba8babb7",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-04-26T04:24:27Z",
+      "side": 1,
+      "message": "curious if we need all props from :buildinfo.prop. How about explicitly specifying which props are required for microdroid?",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 1
+      },
+      "revId": "07254aac8d2d303325e467b52a79c1f19b1dccf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
