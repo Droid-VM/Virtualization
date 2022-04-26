@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18ccc05e_ae428b31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-04-26T10:58:45Z",
+      "side": 1,
+      "message": "There seem to be real failures here, e.g. https://android-build.googleplex.com/builds/tests/view?invocationId\u003dI87200010042439179\u0026testResultId\u003dTR99527995319999102",
+      "revId": "083090306b9453201fc87ad30078678ad349d87d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a45bc8da_2f644feb",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-04-26T10:58:45Z",
+      "side": 1,
+      "message": "This seems to be hitting an NPE, although I\u0027m not sure why",
+      "range": {
+        "startLine": 178,
+        "startChar": 8,
+        "endLine": 178,
+        "endChar": 16
+      },
+      "revId": "083090306b9453201fc87ad30078678ad349d87d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ced9d9d1_ff3af400",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-04-26T10:58:45Z",
+      "side": 1,
+      "message": "This assert is firing in tests",
+      "range": {
+        "startLine": 188,
+        "startChar": 8,
+        "endLine": 188,
+        "endChar": 31
+      },
+      "revId": "083090306b9453201fc87ad30078678ad349d87d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
