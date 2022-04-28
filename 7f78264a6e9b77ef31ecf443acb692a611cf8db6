@@ -22,6 +22,30 @@
       },
       "revId": "7f78264a6e9b77ef31ecf443acb692a611cf8db6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e427b60_ea71e0fd",
+        "filename": "libs/apexutil/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-04-28T14:08:37Z",
+      "side": 1,
+      "message": "Because libapexutil already exists. It\u0027s not a direct translation of one to the other but the names seemed vague enough to allow variation. Libraries like `liblog_rust` do similar, but now I notice they also set `stem` which I think would contain the different to just the soong name.",
+      "parentUuid": "19d69d56_17c41da4",
+      "range": {
+        "startLine": 6,
+        "startChar": 22,
+        "endLine": 6,
+        "endChar": 27
+      },
+      "revId": "7f78264a6e9b77ef31ecf443acb692a611cf8db6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
