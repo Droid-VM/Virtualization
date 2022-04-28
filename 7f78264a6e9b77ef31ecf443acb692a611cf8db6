@@ -22,6 +22,30 @@
       },
       "revId": "7f78264a6e9b77ef31ecf443acb692a611cf8db6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8283fe8d_987832e2",
+        "filename": "libs/apexutil/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-04-28T14:04:07Z",
+      "side": 0,
+      "message": "No, and it doesn\u0027t seem understood why it\u0027s a problem yet either, so I moved this to its own CL to allow other refactoring make progress in the meantime. The current presubmit error is due to the bug.",
+      "parentUuid": "21dcdac9_08e09d0b",
+      "range": {
+        "startLine": 8,
+        "startChar": 12,
+        "endLine": 8,
+        "endChar": 23
+      },
+      "revId": "7f78264a6e9b77ef31ecf443acb692a611cf8db6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
