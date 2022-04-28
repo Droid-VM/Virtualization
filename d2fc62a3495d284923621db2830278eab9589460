@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dc30502_1fb518c2",
+        "filename": "microdroid_manager/src/payload/apex.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-04-28T13:34:53Z",
+      "side": 1,
+      "message": "Should this be #[from/source] ZipError ?",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 14
+      },
+      "revId": "d2fc62a3495d284923621db2830278eab9589460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe798740_dd206424",
+        "filename": "microdroid_manager/src/payload/apex.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-04-28T13:34:53Z",
+      "side": 1,
+      "message": "We\u0027re discarding the error from HashtreeDescriptor here - should we?",
+      "range": {
+        "startLine": 145,
+        "startChar": 7,
+        "endLine": 145,
+        "endChar": 77
+      },
+      "revId": "d2fc62a3495d284923621db2830278eab9589460",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
