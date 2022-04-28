@@ -70,6 +70,30 @@
       },
       "revId": "7f78264a6e9b77ef31ecf443acb692a611cf8db6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1beb846e_c86e9ea9",
+        "filename": "libs/apexutil/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-04-28T17:13:22Z",
+      "side": 0,
+      "message": "Looks like that libraries used by the test binary are missing when running on host.\n\n```\n    target: {\n        host: {\n            data_libs: [\n                \"libc++\",\n                \"libcrypto\",\n                \"libz\",\n            ],\n        }\n    }\n```\n\nbtw, I found that rust_test (and cc_test as well) puts data_libs libraries in the same directory of the test binary, hence it fails to load libs correctly.\n\nI\u0027m testing with the fix: aosp/2080100",
+      "parentUuid": "e130d61a_db09ff69",
+      "range": {
+        "startLine": 8,
+        "startChar": 12,
+        "endLine": 8,
+        "endChar": 23
+      },
+      "revId": "7f78264a6e9b77ef31ecf443acb692a611cf8db6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
