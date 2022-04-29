@@ -22,6 +22,30 @@
       },
       "revId": "27ad779c3b19f1ef321d704467457ea0ca59fa4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b2391a1_6961dc59",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-04-29T16:52:48Z",
+      "side": 1,
+      "message": "I don\u0027t know, the actual constant is CommandStatus.FAILED and .SUCCESS.  I\u0027d keep them consistent.  Too bad it\u0027s less... symmetric in English?\n\nI use isX pattern because it looks more common in Truth.",
+      "parentUuid": "7bf3777f_f3b7d241",
+      "range": {
+        "startLine": 256,
+        "startChar": 73,
+        "endLine": 256,
+        "endChar": 81
+      },
+      "revId": "27ad779c3b19f1ef321d704467457ea0ca59fa4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
