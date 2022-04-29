@@ -24,6 +24,7 @@ use vmbase::{main, println};
 main!(main);
 
 /// Entry point for pVM firmware.
-pub fn main() {
-    println!("Hello world");
+pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
+    println!("pVM firmware");
+    println!("x0={:#010x}, x1={:#010x}, x2={:#010x}, x3={:#010x}", arg0, arg1, arg2, arg3);
 }

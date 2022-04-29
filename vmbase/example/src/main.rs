@@ -49,8 +49,9 @@ const DATA_REGION: MemoryRegion = MemoryRegion::new(0x80400000, 0x80600000);
 main!(main);
 
 /// Entry point for VM bootloader.
-pub fn main() {
+pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
     println!("Hello world");
+    println!("x0={:#010x}, x1={:#010x}, x2={:#010x}, x3={:#010x}", arg0, arg1, arg2, arg3);
     print_addresses();
     check_data();
 
