@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3cb72a6_943fba9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-04-29T07:56:20Z",
+      "side": 1,
+      "message": "I\u0027d like to deparecate mk_payload since virtualizationservice can create payload composite disks now. But it\u0027s still in use for testing. Richard\u0027s recent change to mk_payload caused a test failure. This fixes it for now.",
+      "revId": "6b26273b7878ebb80488a12e556531c0e658ed91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
