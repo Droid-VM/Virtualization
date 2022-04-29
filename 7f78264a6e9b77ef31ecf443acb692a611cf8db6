@@ -190,6 +190,30 @@
       },
       "revId": "7f78264a6e9b77ef31ecf443acb692a611cf8db6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7868cbf1_63b84ff2",
+        "filename": "libs/apexutil/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-04-29T08:32:17Z",
+      "side": 0,
+      "message": "Yeah, before `data_libs`, people (including me) had to create a zip for dependencies and extract on CI server before running the test: https://cs.android.com/android/platform/superproject/+/master:system/apex/apexer/Android.bp;l\u003d148 ;-)",
+      "parentUuid": "28e2e74c_2ccb688b",
+      "range": {
+        "startLine": 8,
+        "startChar": 12,
+        "endLine": 8,
+        "endChar": 23
+      },
+      "revId": "7f78264a6e9b77ef31ecf443acb692a611cf8db6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
