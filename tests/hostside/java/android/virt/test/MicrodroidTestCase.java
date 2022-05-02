@@ -77,16 +77,6 @@ public class MicrodroidTestCase extends VirtualizationTestCaseBase {
     @Rule public TestLogData mTestLogs = new TestLogData();
     @Rule public TestName mTestName = new TestName();
 
-    // TODO(b/176805428): remove this
-    private boolean isCuttlefish() throws Exception {
-        String productName = getDevice().getProperty("ro.product.name");
-        return (null != productName)
-                && (productName.startsWith("aosp_cf_x86")
-                        || productName.startsWith("aosp_cf_arm")
-                        || productName.startsWith("cf_x86")
-                        || productName.startsWith("cf_arm"));
-    }
-
     private int minMemorySize() throws DeviceNotAvailableException {
         CommandRunner android = new CommandRunner(getDevice());
         String abi = android.run("getprop", "ro.product.cpu.abi");
@@ -445,30 +435,27 @@ public class MicrodroidTestCase extends VirtualizationTestCaseBase {
         // Check that selinux is enabled
         assertThat(runOnMicrodroid("getenforce"), is("Enforcing"));
 
-        // TODO(b/176805428): adb is broken for nested VM
-        if (!isCuttlefish()) {
-            // Check neverallow rules on microdroid
-            File policyFile = FileUtil.createTempFile("microdroid_sepolicy", "");
-            pullMicrodroidFile("/sys/fs/selinux/policy", policyFile);
+        // Check neverallow rules on microdroid
+        File policyFile = FileUtil.createTempFile("microdroid_sepolicy", "");
+        pullMicrodroidFile("/sys/fs/selinux/policy", policyFile);
 
-            File generalPolicyConfFile = findTestFile("microdroid_general_sepolicy.conf");
-            File sepolicyAnalyzeBin = findTestFile("sepolicy-analyze");
+        File generalPolicyConfFile = findTestFile("microdroid_general_sepolicy.conf");
+        File sepolicyAnalyzeBin = findTestFile("sepolicy-analyze");
 
-            CommandResult result =
-                    RunUtil.getDefault()
-                            .runTimedCmd(
-                                    10000,
-                                    sepolicyAnalyzeBin.getPath(),
-                                    policyFile.getPath(),
-                                    "neverallow",
-                                    "-w",
-                                    "-f",
-                                    generalPolicyConfFile.getPath());
-            assertWithMessage("neverallow check failed: " + result.getStderr().trim())
-                    .about(command_results())
-                    .that(result)
-                    .isSuccess();
-        }
+        CommandResult result =
+                RunUtil.getDefault()
+                        .runTimedCmd(
+                                10000,
+                                sepolicyAnalyzeBin.getPath(),
+                                policyFile.getPath(),
+                                "neverallow",
+                                "-w",
+                                "-f",
+                                generalPolicyConfFile.getPath());
+        assertWithMessage("neverallow check failed: " + result.getStderr().trim())
+                .about(command_results())
+                .that(result)
+                .isSuccess();
 
         shutdownMicrodroid(getDevice(), cid);
     }
