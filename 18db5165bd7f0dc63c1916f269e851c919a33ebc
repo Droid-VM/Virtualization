@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b1ae67b_63ed87f8",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-05-02T23:34:11Z",
+      "side": 1,
+      "message": "Rather than granting the permission to Shell and then temporarily revoking the permission, I think manually granting/revoking the permission whenever I need would be better. That is,\n\n1) remove Line 503~504\n2) add \"pm grant SHELL android.permission.USE_CUSTOM_VIRTUAL_MACHINE\" before Line 285",
+      "range": {
+        "startLine": 495,
+        "startChar": 0,
+        "endLine": 495,
+        "endChar": 44
+      },
+      "revId": "18db5165bd7f0dc63c1916f269e851c919a33ebc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
