@@ -407,7 +407,12 @@ impl VirtualizationService {
                     )
                 })?,
             ),
-            VirtualMachineConfig::RawConfig(config) => BorrowedOrOwned::Borrowed(config),
+            VirtualMachineConfig::RawConfig(config) => {
+                if config.protectedVm {
+                    check_use_custom_virtual_machine()?;
+                }
+                BorrowedOrOwned::Borrowed(config)
+            }
         };
         let config = config.as_ref();
         *is_protected = config.protectedVm;
@@ -727,6 +732,11 @@ fn check_debug_access() -> binder::Result<()> {
 /// Check whether the caller of the current Binder method is allowed to manage VMs
 fn check_manage_access() -> binder::Result<()> {
     check_permission("android.permission.MANAGE_VIRTUAL_MACHINE")
+}
+
+/// Check whether the caller of the current Binder method is allowed to create custom VMs
+fn check_use_custom_virtual_machine() -> binder::Result<()> {
+    check_permission("android.permission.USE_CUSTOM_VIRTUAL_MACHINE")
 }
 
 /// Check if a partition has selinux labels that are not allowed
