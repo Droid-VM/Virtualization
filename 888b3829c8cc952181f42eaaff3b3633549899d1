@@ -22,6 +22,29 @@
       },
       "revId": "888b3829c8cc952181f42eaaff3b3633549899d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4444b7a0_5edc33a2",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-05-04T05:45:34Z",
+      "side": 1,
+      "message": "The reason why presubmit is failing: this line should be skipped on devices missing virt APEX.",
+      "range": {
+        "startLine": 531,
+        "startChar": 0,
+        "endLine": 531,
+        "endChar": 100
+      },
+      "revId": "888b3829c8cc952181f42eaaff3b3633549899d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
