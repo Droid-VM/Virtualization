@@ -21,6 +21,10 @@ mod exceptions;
 
 use vmbase::{main, println};
 
+static INITIALISED_DATA: [u32; 4] = [1, 2, 3, 4];
+static mut ZEROED_DATA: [u32; 10] = [0; 10];
+static mut MUTABLE_DATA: [u32; 4] = [1, 2, 3, 4];
+
 main!(main);
 
 /// Entry point for pVM firmware.
@@ -30,6 +34,11 @@ pub fn main(fdt_address: u64, payload_start: u64, payload_size: u64, arg3: u64) 
         "fdt_address={:#010x}, payload_start={:#010x}, payload_size={:#010x}, x3={:#010x}",
         fdt_address, payload_start, payload_size, arg3,
     );
+    print_addresses();
+    unsafe {
+        assert_eq!(fdt_address, &dtb_begin as *const u8 as u64);
+    }
+    check_data();
 
     println!("Starting payload...");
     // Safe because this is a function we have implemented in assembly that matches its signature
@@ -39,6 +48,95 @@ pub fn main(fdt_address: u64, payload_start: u64, payload_size: u64, arg3: u64) 
     }
 }
 
+fn print_addresses() {
+    unsafe {
+        println!(
+            "dtb:        {:#010x}-{:#010x} ({} bytes)",
+            &dtb_begin as *const u8 as usize,
+            &dtb_end as *const u8 as usize,
+            &dtb_end as *const u8 as usize - &dtb_begin as *const u8 as usize,
+        );
+        println!(
+            "text:       {:#010x}-{:#010x} ({} bytes)",
+            &text_begin as *const u8 as usize,
+            &text_end as *const u8 as usize,
+            &text_end as *const u8 as usize - &text_begin as *const u8 as usize,
+        );
+        println!(
+            "rodata:     {:#010x}-{:#010x} ({} bytes)",
+            &rodata_begin as *const u8 as usize,
+            &rodata_end as *const u8 as usize,
+            &rodata_end as *const u8 as usize - &rodata_begin as *const u8 as usize,
+        );
+        println!(
+            "data:       {:#010x}-{:#010x} ({} bytes, loaded at {:#010x})",
+            &data_begin as *const u8 as usize,
+            &data_end as *const u8 as usize,
+            &data_end as *const u8 as usize - &data_begin as *const u8 as usize,
+            &data_lma as *const u8 as usize,
+        );
+        println!(
+            "bss:        {:#010x}-{:#010x} ({} bytes)",
+            &bss_begin as *const u8 as usize,
+            &bss_end as *const u8 as usize,
+            &bss_end as *const u8 as usize - &bss_begin as *const u8 as usize,
+        );
+        println!(
+            "boot_stack: {:#010x}-{:#010x} ({} bytes)",
+            &boot_stack_begin as *const u8 as usize,
+            &boot_stack_end as *const u8 as usize,
+            &boot_stack_end as *const u8 as usize - &boot_stack_begin as *const u8 as usize,
+        );
+    }
+}
+
+fn check_data() {
+    println!("INITIALISED_DATA: {:#010x}", &INITIALISED_DATA as *const u32 as usize);
+    unsafe {
+        println!("ZEROED_DATA: {:#010x}", &ZEROED_DATA as *const u32 as usize);
+        println!("MUTABLE_DATA: {:#010x}", &MUTABLE_DATA as *const u32 as usize);
+    }
+
+    assert_eq!(INITIALISED_DATA[0], 1);
+    assert_eq!(INITIALISED_DATA[1], 2);
+    assert_eq!(INITIALISED_DATA[2], 3);
+    assert_eq!(INITIALISED_DATA[3], 4);
+
+    unsafe {
+        for element in ZEROED_DATA.iter() {
+            assert_eq!(*element, 0);
+        }
+        ZEROED_DATA[0] = 13;
+        assert_eq!(ZEROED_DATA[0], 13);
+        ZEROED_DATA[0] = 0;
+        assert_eq!(ZEROED_DATA[0], 0);
+
+        assert_eq!(MUTABLE_DATA[0], 1);
+        assert_eq!(MUTABLE_DATA[1], 2);
+        assert_eq!(MUTABLE_DATA[2], 3);
+        assert_eq!(MUTABLE_DATA[3], 4);
+        MUTABLE_DATA[0] += 41;
+        assert_eq!(MUTABLE_DATA[0], 42);
+        MUTABLE_DATA[0] -= 41;
+        assert_eq!(MUTABLE_DATA[0], 1);
+    }
+    println!("Data looks good");
+}
+
 extern "C" {
+    static dtb_begin: u8;
+    static dtb_end: u8;
+    static text_begin: u8;
+    static text_end: u8;
+    static rodata_begin: u8;
+    static rodata_end: u8;
+    static data_begin: u8;
+    static data_end: u8;
+    static data_lma: u8;
+    static bss_begin: u8;
+    static bss_end: u8;
+    static boot_stack_begin: u8;
+    static boot_stack_end: u8;
+
     fn start_payload(fdt_address: u64, payload_start: u64) -> !;
 }
