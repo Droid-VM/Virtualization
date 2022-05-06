@@ -39,6 +39,13 @@ pub fn main(fdt_address: u64, payload_start: u64, payload_size: u64, arg3: u64) 
         assert_eq!(fdt_address, &dtb_begin as *const u8 as u64);
     }
     check_data();
+
+    println!("Starting payload...");
+    // Safe because this is a function we have implemented in assembly that matches its signature
+    // here.
+    unsafe {
+        start_payload(fdt_address, payload_start);
+    }
 }
 
 fn print_addresses() {
@@ -130,4 +137,6 @@ extern "C" {
     static bss_end: u8;
     static boot_stack_begin: u8;
     static boot_stack_end: u8;
+
+    fn start_payload(fdt_address: u64, payload_start: u64) -> !;
 }
