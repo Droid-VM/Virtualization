@@ -28,6 +28,7 @@ cc_binary {
     name: "pvmfw",
     srcs: [
         "idmap.S",
+        "payload.S",
     ],
     static_libs: [
         "libpvmfw",
