@@ -180,7 +180,7 @@ fn parse_partition_type(s: &str) -> Result<PartitionType, String> {
     match s {
         "raw" => Ok(PartitionType::RAW),
         "instance" => Ok(PartitionType::ANDROID_VM_INSTANCE),
-        _ => Err(format!("Invalid partition type {}", s)),
+        _ => Err(format!("Invald partition type {}", s)),
     }
 }
 
