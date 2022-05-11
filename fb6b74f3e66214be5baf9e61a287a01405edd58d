@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f6b8f01_9ebceb2b",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-05-11T10:48:59Z",
+      "side": 1,
+      "message": "Nit: values",
+      "range": {
+        "startLine": 29,
+        "startChar": 79,
+        "endLine": 29,
+        "endChar": 84
+      },
+      "revId": "fb6b74f3e66214be5baf9e61a287a01405edd58d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b297907_6c9677f5",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-05-11T10:48:59Z",
+      "side": 1,
+      "message": "We could leave initialized uninitialized here - a second call could succeed.\nBut there\u0027s not much point because we\u0027ll never do that.",
+      "range": {
+        "startLine": 74,
+        "startChar": 12,
+        "endLine": 74,
+        "endChar": 39
+      },
+      "revId": "fb6b74f3e66214be5baf9e61a287a01405edd58d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7374f3d_c95c867c",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-05-11T10:48:59Z",
+      "side": 1,
+      "message": "However, here you\u0027re not setting initialized false, which may leave the properties partially initialized, which seems bad.\n\nIt might be easiest to unconditionally set it to false on line 72, then overwrite with true iff we get to the end.\n\nOr move the property setting into a nested function so we only need one failure path.",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 48
+      },
+      "revId": "fb6b74f3e66214be5baf9e61a287a01405edd58d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "759823ba_0f6c1b32",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-05-11T10:48:59Z",
+      "side": 1,
+      "message": "Add a message?",
+      "range": {
+        "startLine": 106,
+        "startChar": 75,
+        "endLine": 106,
+        "endChar": 79
+      },
+      "revId": "fb6b74f3e66214be5baf9e61a287a01405edd58d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
