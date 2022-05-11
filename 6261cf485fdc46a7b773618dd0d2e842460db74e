@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e64f69a_c31184ca",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-05-11T10:47:55Z",
+      "side": 1,
+      "message": "OOC, is there a cleaner way to import these addresses? In C, we can type those as `char[]` (or, in GNU, `char[0]`) and use them in a less verbose and error-prone way. But that relies on type coercion (arrays always decay into pointers), which Rust slices probably don\u0027t have.",
+      "range": {
+        "startLine": 75,
+        "startChar": 22,
+        "endLine": 75,
+        "endChar": 24
+      },
+      "revId": "6261cf485fdc46a7b773618dd0d2e842460db74e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
