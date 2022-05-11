@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0b24bce_fe3fdca1",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-05-11T10:48:38Z",
+      "side": 1,
+      "message": "As the code that follows manages to do what it needs to do using only `x28`-`x30`, let\u0027s do the same here:\n```\nadrp x30, idmap\nmsr ttbr0_el1, x30\n\nmov_i x30, .Lmairval\nmsr mair_el1, x30\n\nmov_i x30, .Ltcrval\nmrs x29, id_aa64mmfr0_el1\nbfi x30, x29, #32, #4\nmsr tcr_el1, x30\n\nmov_i x30, .Lsctlrval\n```\nIn particular, let\u0027s not pollute `x6`.",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 17
+      },
+      "revId": "c91472b443f4c7579df6f55b7dcefe98ae8aa53c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
