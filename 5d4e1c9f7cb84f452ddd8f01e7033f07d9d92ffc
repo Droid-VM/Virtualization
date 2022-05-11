@@ -22,6 +22,30 @@
       },
       "revId": "5d4e1c9f7cb84f452ddd8f01e7033f07d9d92ffc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a905094b_bb12c7ad",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-11T12:24:40Z",
+      "side": 1,
+      "message": "That would be interesting to test, but I think a bit out of scope of what I\u0027m doing here. We\u0027ll need to think more about exception handlers, as you say. Currently they don\u0027t have any way to recover and continue.",
+      "parentUuid": "b54500d3_6740d583",
+      "range": {
+        "startLine": 89,
+        "startChar": 3,
+        "endLine": 89,
+        "endChar": 12
+      },
+      "revId": "5d4e1c9f7cb84f452ddd8f01e7033f07d9d92ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
