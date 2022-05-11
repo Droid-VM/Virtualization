@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b54500d3_6740d583",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-05-11T10:48:04Z",
+      "side": 1,
+      "message": "As `INITIALISED_DATA` should end up in `.rodata`, could we somehow check here that writing to it (obv. `unsafe`) triggers an exception? We\u0027d need to handle the exception itself somehow to avoid the `reboot()` that the `vector` currently holds e.g. by registering a custom handler (needs the infrastructure for that).",
+      "range": {
+        "startLine": 89,
+        "startChar": 3,
+        "endLine": 89,
+        "endChar": 12
+      },
+      "revId": "5d4e1c9f7cb84f452ddd8f01e7033f07d9d92ffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
