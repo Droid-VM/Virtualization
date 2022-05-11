@@ -22,6 +22,30 @@
       },
       "revId": "6261cf485fdc46a7b773618dd0d2e842460db74e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8902432d_a6202adc",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-11T12:10:35Z",
+      "side": 1,
+      "message": "I haven\u0027t found a better way. Rust slices are not FFI-safe so that doesn\u0027t help us. Arrays are, but we don\u0027t know the size here so that\u0027s not much help either.",
+      "parentUuid": "4e64f69a_c31184ca",
+      "range": {
+        "startLine": 75,
+        "startChar": 22,
+        "endLine": 75,
+        "endChar": 24
+      },
+      "revId": "6261cf485fdc46a7b773618dd0d2e842460db74e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
