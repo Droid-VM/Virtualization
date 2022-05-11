@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3134e153_e82f1295",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-05-11T10:48:47Z",
+      "side": 1,
+      "message": "To be on the safe side, shouldn\u0027t we zero out as many registers as possible?",
+      "range": {
+        "startLine": 26,
+        "startChar": 53,
+        "endLine": 26,
+        "endChar": 91
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a875065_2c290d65",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-05-11T10:48:47Z",
+      "side": 1,
+      "message": "I\u0027m not exactly sure how this works but do we need a `dsb` before disabling the MMU? What if OoO leads to a `st` still being in flight at this point?",
+      "range": {
+        "startLine": 35,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 40
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff34458c_2e0f4d3f",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-05-11T10:48:47Z",
+      "side": 1,
+      "message": "That feels a bit too drastic: can\u0027t we simply flip the bits we don\u0027t want (`M` and `C`, I suppose)?",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 26
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c0ee5c3_fa3ec938",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-05-11T10:48:47Z",
+      "side": 1,
+      "message": "Do we need an `isb` in-between these 2 instructions?",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 26
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de508a2f_7c5c3fbc",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-05-11T10:48:47Z",
+      "side": 1,
+      "message": "At this point, it doesn\u0027t matter too much because we have identity mappings but should we ensure that the rest of this routine (from the point where we disable the MMU) is properly aligned to a cache line, so that it\u0027s properly fetched?",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 39,
+        "endChar": 24
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cac0c58f_db744676",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-05-11T10:48:47Z",
+      "side": 1,
+      "message": "Do we need to invalidate TLBs? Caches? Is it even our responsibility?",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 11
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
