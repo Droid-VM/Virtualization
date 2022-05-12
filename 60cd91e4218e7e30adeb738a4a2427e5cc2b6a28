@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd47076a_1a95d5d0",
+        "filename": "pvmfw/image.ld",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-12T12:39:10Z",
+      "side": 1,
+      "message": "We don\u0027t know how big the payload might be, and the linker doesn\u0027t need to put anything in it, so I don\u0027t see much value in having it in the linker script. Arguably the DTB doesn\u0027t need to be here either, it could just be hardcoded on the Rust side.",
+      "parentUuid": "5b04bcc0_69c1067f",
+      "range": {
+        "startLine": 20,
+        "startChar": 1,
+        "endLine": 20,
+        "endChar": 6
+      },
+      "revId": "60cd91e4218e7e30adeb738a4a2427e5cc2b6a28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44879b44_0018d624",
@@ -85,6 +109,30 @@
       "writtenOn": "2022-05-12T11:24:07Z",
       "side": 1,
       "message": "Super-nit: Could this be kept in-order w.r.t. `ORIGIN`? _i.e._\n```\n\timage\t\t: ORIGIN \u003d 0x7fe00000, LENGTH \u003d 2M\n\tdtb_region\t: ORIGIN \u003d 0x80000000, LENGTH \u003d 2M\n\twritable_data\t: ORIGIN \u003d 0x80400000, LENGTH \u003d 2M\n```",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 49
+      },
+      "revId": "60cd91e4218e7e30adeb738a4a2427e5cc2b6a28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd557c82_59f5178b",
+        "filename": "pvmfw/image.ld",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-12T12:39:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44879b44_0018d624",
       "range": {
         "startLine": 19,
         "startChar": 0,
