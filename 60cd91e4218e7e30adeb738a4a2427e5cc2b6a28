@@ -22,6 +22,30 @@
       },
       "revId": "60cd91e4218e7e30adeb738a4a2427e5cc2b6a28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a32d523_c20217fb",
+        "filename": "pvmfw/image.ld",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-12T10:50:03Z",
+      "side": 1,
+      "message": "I\u0027m not sure what you mean by that. The pVM firmware is currently loaded at 0x7fe00000, so that\u0027s where the code and read-only data should be linked for an image to run as pVM firmware. The payload image will start at 0x80200000, after the DTB. (And yes, the writable_data region will currently overlap that if the payload image is bigger than 2 MiB; https://r.android.com/c/2088069 will fix that.)",
+      "parentUuid": "7641a36f_bda04c0b",
+      "range": {
+        "startLine": 20,
+        "startChar": 1,
+        "endLine": 20,
+        "endChar": 6
+      },
+      "revId": "60cd91e4218e7e30adeb738a4a2427e5cc2b6a28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
