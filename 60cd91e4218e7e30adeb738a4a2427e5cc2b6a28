@@ -46,6 +46,53 @@
       },
       "revId": "60cd91e4218e7e30adeb738a4a2427e5cc2b6a28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b04bcc0_69c1067f",
+        "filename": "pvmfw/image.ld",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-05-12T11:24:07Z",
+      "side": 1,
+      "message": "I guess I was asking for us to keep the 0x80200000 memory region in the linker as we\u0027ll need it at some point but I\u0027m fine with us introducing it then, instead.",
+      "parentUuid": "1a32d523_c20217fb",
+      "range": {
+        "startLine": 20,
+        "startChar": 1,
+        "endLine": 20,
+        "endChar": 6
+      },
+      "revId": "60cd91e4218e7e30adeb738a4a2427e5cc2b6a28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44879b44_0018d624",
+        "filename": "pvmfw/image.ld",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-05-12T11:24:07Z",
+      "side": 1,
+      "message": "Super-nit: Could this be kept in-order w.r.t. `ORIGIN`? _i.e._\n```\n\timage\t\t: ORIGIN \u003d 0x7fe00000, LENGTH \u003d 2M\n\tdtb_region\t: ORIGIN \u003d 0x80000000, LENGTH \u003d 2M\n\twritable_data\t: ORIGIN \u003d 0x80400000, LENGTH \u003d 2M\n```",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 49
+      },
+      "revId": "60cd91e4218e7e30adeb738a4a2427e5cc2b6a28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
