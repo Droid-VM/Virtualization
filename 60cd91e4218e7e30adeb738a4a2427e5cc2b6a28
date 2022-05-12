@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb187e72_b4b0b06a",
+        "filename": "pvmfw/image.ld",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-05-12T12:41:50Z",
+      "side": 1,
+      "message": "I haven\u0027t checked but there might be a (soft) upper bound in crosvm. Anyhow, we still need to assume a size if we want to properly map the image in the PTs, which is necessary for AVB-verification (mapping them RO would be ideal).",
+      "parentUuid": "dd47076a_1a95d5d0",
+      "range": {
+        "startLine": 20,
+        "startChar": 1,
+        "endLine": 20,
+        "endChar": 6
+      },
+      "revId": "60cd91e4218e7e30adeb738a4a2427e5cc2b6a28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44879b44_0018d624",
