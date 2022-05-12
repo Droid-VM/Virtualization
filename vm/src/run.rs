@@ -26,9 +26,9 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     VirtualMachineState::VirtualMachineState,
 };
 use android_system_virtualizationservice::binder::{
-    BinderFeatures, DeathRecipient, IBinder, ParcelFileDescriptor, Strong,
+    BinderFeatures, DeathRecipient, IBinder, Interface, ParcelFileDescriptor,
+    Result as BinderResult, Strong,
 };
-use android_system_virtualizationservice::binder::{Interface, Result as BinderResult};
 use anyhow::{bail, Context, Error};
 use microdroid_payload_config::VmPayloadConfig;
 use std::fs::File;
