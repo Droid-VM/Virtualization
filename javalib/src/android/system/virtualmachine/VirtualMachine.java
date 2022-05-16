@@ -58,6 +58,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.zip.ZipFile;
 
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
 /**
  * A handle to the virtual machine. The virtual machine is local to the app which created the
  * virtual machine.
@@ -366,16 +369,26 @@ public class VirtualMachine {
                         ServiceManager.waitForService(SERVICE_NAME));
 
         try {
-            if (mConsoleReader == null && mConsoleWriter == null) {
-                ParcelFileDescriptor[] pipe = ParcelFileDescriptor.createPipe();
-                mConsoleReader = pipe[0];
-                mConsoleWriter = pipe[1];
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            String suffix = dtf.format(now);
+
+            // if (mConsoleReader == null && mConsoleWriter == null) {
+            //     ParcelFileDescriptor[] pipe = ParcelFileDescriptor.createPipe();
+            //     mConsoleReader = pipe[0];
+            //     mConsoleWriter = pipe[1];
+            // }
+            if (mConsoleWriter == null) {
+                mConsoleWriter = ParcelFileDescriptor.open(new File("/data/local/tmp/microdroid-test-console-" + suffix + ".txt"), ParcelFileDescriptor.MODE_WRITE_ONLY);
             }
 
-            if (mLogReader == null && mLogWriter == null) {
-                ParcelFileDescriptor[] pipe = ParcelFileDescriptor.createPipe();
-                mLogReader = pipe[0];
-                mLogWriter = pipe[1];
+            // if (mLogReader == null && mLogWriter == null) {
+            //     ParcelFileDescriptor[] pipe = ParcelFileDescriptor.createPipe();
+            //     mLogReader = pipe[0];
+            //     mLogWriter = pipe[1];
+            // }
+            if (mLogWriter == null) {
+                mLogWriter = ParcelFileDescriptor.open(new File("/data/local/tmp/microdroid-test-log-" + suffix + ".txt"), ParcelFileDescriptor.MODE_WRITE_ONLY);
             }
 
             VirtualMachineAppConfig appConfig = getConfig().toParcel();
