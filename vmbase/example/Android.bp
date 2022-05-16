@@ -74,6 +74,7 @@ rust_test {
         "libenv_logger",
         "liblibc",
         "liblog_rust",
+        "libvmclient",
     ],
     data: [
         ":vmbase_example",

@@ -2,11 +2,11 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
-rust_binary {
-    name: "vm",
-    crate_name: "vm",
-    srcs: ["src/main.rs"],
-    edition: "2018",
+rust_library {
+    name: "libvmclient",
+    crate_name: "vmclient",
+    srcs: ["src/lib.rs"],
+    edition: "2021",
     prefer_rlib: true,
     rustlibs: [
         "android.system.virtualizationservice-rust",
@@ -19,8 +19,8 @@ rust_binary {
         "libserde_json",
         "libserde",
         "libstructopt",
+        "libthiserror",
         "libvmconfig",
-        "libvmclient",
         "libzip",
     ],
     apex_available: [
