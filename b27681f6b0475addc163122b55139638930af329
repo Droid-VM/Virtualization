@@ -46,6 +46,30 @@
       },
       "revId": "b27681f6b0475addc163122b55139638930af329",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33084307_bbf6b076",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/DeathReason.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-05-16T10:55:17Z",
+      "side": 1,
+      "message": "Something generic using AVF terms instead of pKVM terms. Maybe ask on the group chat given there\u0027s a lack of clarity how AVF is defining the interface. TBH firmware is probably fine, that doesn\u0027t necessarily mean something that exactly fills the role of our pvmfw.",
+      "parentUuid": "5dcbb8a1_8f05a725",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 16
+      },
+      "revId": "b27681f6b0475addc163122b55139638930af329",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
