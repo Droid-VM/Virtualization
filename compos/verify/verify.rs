@@ -98,7 +98,7 @@ fn try_main() -> Result<()> {
     // We need to start the thread pool to be able to receive Binder callbacks
     ProcessState::start_thread_pool();
 
-    let virtualization_service = VmInstance::connect_to_virtualization_service()?;
+    let virtualization_service = vmclient::connect()?;
     let vm_instance = VmInstance::start(
         &*virtualization_service,
         instance_image,
