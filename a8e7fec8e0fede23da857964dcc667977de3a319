@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "bee119de_d638862a",
+        "filename": "compos/tests/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-05-19T15:51:07Z",
+      "side": 1,
+      "message": "I don\u0027t think so. It\u0027s not a test binary, it\u0027s a tool that happens to be used by the test, and this weird data_native_bins seems to be how one expresses that.\n\n(I should perhaps confess that I mostly copied the details here from test/vts/testcases/host/firmware_dtbo_test/Android.bp and system/libufdt/utils/src/Android.bp.)\n\nI guess presubmit will tell us?",
+      "parentUuid": "13be28d6_e935fbbf",
+      "range": {
+        "startLine": 13,
+        "startChar": 24,
+        "endLine": 13,
+        "endChar": 37
+      },
+      "revId": "a8e7fec8e0fede23da857964dcc667977de3a319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "db748b6a_327d38a3",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-19T15:38:04Z",
       "side": 1,
       "message": "Just to check my understanding.  I assume this only verifies the chain itself, and nothing about the device root since this is running on the host.  For doing the same in odsign in the future, we\u0027ll need more than this, right?",
+      "range": {
+        "startLine": 188,
+        "startChar": 46,
+        "endLine": 188,
+        "endChar": 58
+      },
+      "revId": "a8e7fec8e0fede23da857964dcc667977de3a319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1e92b26_fbadf783",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-05-19T15:51:07Z",
+      "side": 1,
+      "message": "Yes. It checks that each cert is signed with the expected key (the root key is in the chain, then each cert provides the key for the next one), and that each cert has the fields we expect and is generally well-formed.\nVerifying the contents of each cert, and the root key, is where it gets interesting.\n\nBut this is helpful right now.",
+      "parentUuid": "db748b6a_327d38a3",
       "range": {
         "startLine": 188,
         "startChar": 46,
