@@ -16,6 +16,24 @@
       "message": "It seems a shame that there\u0027s nothing forcing the messages to be updated whenever a new reason is added.",
       "revId": "e405ba03bda03e1ac53972a4003a1541f3f35625",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca3ce1c2_1a7967d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-19T16:13:43Z",
+      "side": 1,
+      "message": "Agreed, that\u0027s a consequence of the fact that the AIDL Rust codegen doesn\u0027t use Rust enums for AIDL enums. But I\u0027m looking at factoring out a Rust client library for VirtualizationService which should improve things a bit.",
+      "parentUuid": "322c61fc_ee3dd50e",
+      "revId": "e405ba03bda03e1ac53972a4003a1541f3f35625",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
