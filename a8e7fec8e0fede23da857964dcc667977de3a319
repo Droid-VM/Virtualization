@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13be28d6_e935fbbf",
+        "filename": "compos/tests/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-05-19T15:38:04Z",
+      "side": 1,
+      "message": "I\u0027m not entirely sure about it, but do you need to add `test_suites: [ \"general-tests\" ]` in the build rule of bcc_validator?  AIUI, in the test infra, the test binaries are only built for the specified test suites.  I\u0027m not sure the `test_suites` below will transitively pull the binary in.",
+      "range": {
+        "startLine": 13,
+        "startChar": 24,
+        "endLine": 13,
+        "endChar": 37
+      },
+      "revId": "a8e7fec8e0fede23da857964dcc667977de3a319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db748b6a_327d38a3",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-05-19T15:38:04Z",
+      "side": 1,
+      "message": "Just to check my understanding.  I assume this only verifies the chain itself, and nothing about the device root since this is running on the host.  For doing the same in odsign in the future, we\u0027ll need more than this, right?",
+      "range": {
+        "startLine": 188,
+        "startChar": 46,
+        "endLine": 188,
+        "endChar": 58
+      },
+      "revId": "a8e7fec8e0fede23da857964dcc667977de3a319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
