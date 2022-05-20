@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e5f9e0d_79a2cfb6",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-05-20T17:20:14Z",
+      "side": 1,
+      "message": "We should maybe rename this one.\nComposInstance, ComposVmInstance?\n\nPossibly even remove it \u0026 use your one directly, but that would orphan some useful functions.",
+      "range": {
+        "startLine": 49,
+        "startChar": 11,
+        "endLine": 49,
+        "endChar": 21
+      },
+      "revId": "1a9d5d640bcaa94d6d1c950bc41934b42ba26dd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27f604f6_a0dddc91",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-05-20T17:20:14Z",
+      "side": 1,
+      "message": ":-(",
+      "range": {
+        "startLine": 135,
+        "startChar": 8,
+        "endLine": 135,
+        "endChar": 14
+      },
+      "revId": "1a9d5d640bcaa94d6d1c950bc41934b42ba26dd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37373adf_cbc44c3d",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-05-20T17:20:14Z",
+      "side": 1,
+      "message": "Remove? There\u0027s not much point logging this.",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 264,
+        "endChar": 16
+      },
+      "revId": "1a9d5d640bcaa94d6d1c950bc41934b42ba26dd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a9e5172_2dbbada4",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-05-20T17:20:14Z",
+      "side": 1,
+      "message": "All these functions that just log: could we move these to the new helper?\nE.g. a trait that extends IVirtualMachineCallback with default impls.",
+      "range": {
+        "startLine": 270,
+        "startChar": 0,
+        "endLine": 274,
+        "endChar": 0
+      },
+      "revId": "1a9d5d640bcaa94d6d1c950bc41934b42ba26dd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ad7013c_70f10a77",
+        "filename": "vmclient/src/errors.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-05-20T17:20:14Z",
+      "side": 1,
+      "message": "Could this just be another death reason?\n(Normal finish is fine, but finish before ready should never be correct?)",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 54
+      },
+      "revId": "1a9d5d640bcaa94d6d1c950bc41934b42ba26dd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "679b44ff_63e112de",
+        "filename": "vmclient/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-05-20T17:20:14Z",
+      "side": 1,
+      "message": "Ooooooooh!",
+      "range": {
+        "startLine": 137,
+        "startChar": 10,
+        "endLine": 137,
+        "endChar": 22
+      },
+      "revId": "1a9d5d640bcaa94d6d1c950bc41934b42ba26dd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d4777d2_e8812cca",
+        "filename": "vmclient/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-05-20T17:20:14Z",
+      "side": 1,
+      "message": "We should maybe unlink_to_death, or drop _death_recipient, here, and also anywhere else where we detect the VM has failed?",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 67
+      },
+      "revId": "1a9d5d640bcaa94d6d1c950bc41934b42ba26dd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49065e4c_82cb4983",
+        "filename": "vmclient/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-05-20T17:20:14Z",
+      "side": 1,
+      "message": "Nit: drop(state) first, to unlock before notifying",
+      "range": {
+        "startLine": 168,
+        "startChar": 12,
+        "endLine": 168,
+        "endChar": 33
+      },
+      "revId": "1a9d5d640bcaa94d6d1c950bc41934b42ba26dd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aedbb72e_06ee783d",
+        "filename": "vmclient/src/sync.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-05-20T17:20:14Z",
+      "side": 1,
+      "message": "Nice!\n(Link to https://en.wikipedia.org/wiki/Monitor_(synchronization) ?)",
+      "range": {
+        "startLine": 22,
+        "startChar": 11,
+        "endLine": 22,
+        "endChar": 18
+      },
+      "revId": "1a9d5d640bcaa94d6d1c950bc41934b42ba26dd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
