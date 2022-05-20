@@ -296,11 +296,11 @@ fn run_vm(config: CrosvmConfig, failure_pipe_write: File) -> Result<SharedChild,
     validate_config(&config)?;
 
     let mut command = Command::new(CROSVM_PATH);
-    // TODO(qwandor): Remove --disable-sandbox.
     command
         .arg("--extended-status")
         .arg("run")
-        .arg("--disable-sandbox")
+        .arg("--pivot-root")
+        .arg("/")
         .arg("--cid")
         .arg(config.cid.to_string());
 
