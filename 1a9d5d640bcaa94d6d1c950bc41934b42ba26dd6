@@ -239,6 +239,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "feb1675b_759b469f",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-05-23T17:15:34Z",
+      "side": 1,
+      "message": "Mmm.\n\nOf course vm could use log, and just point the log to stderr - I was doing that for a while in some of my command-line tools; then logging becomes the generic abstraction.\n\nYou could provide the logging impl as an optional thing for those clients that want it?",
+      "parentUuid": "60a482e0_746cf0f8",
+      "range": {
+        "startLine": 270,
+        "startChar": 0,
+        "endLine": 274,
+        "endChar": 0
+      },
+      "revId": "1a9d5d640bcaa94d6d1c950bc41934b42ba26dd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ad7013c_70f10a77",
         "filename": "vmclient/src/errors.rs",
         "patchSetId": 4
