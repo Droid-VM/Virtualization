@@ -20,7 +20,7 @@ use authfs_fsverity_metadata_bindgen::{
     FSVERITY_SIGNATURE_TYPE_NONE, FSVERITY_SIGNATURE_TYPE_PKCS7, FSVERITY_SIGNATURE_TYPE_RAW,
 };
 
-use ring::digest::{Context, SHA256};
+use openssl::hash::{Hasher, MessageDigest};
 use std::cmp::min;
 use std::ffi::OsString;
 use std::fs::File;
@@ -97,12 +97,12 @@ pub fn parse_fsverity_metadata(mut metadata_file: File) -> io::Result<Box<FSVeri
         // Digest needs to be calculated with the raw value (without changing the endianness).
         let digest = match header.descriptor.hash_algorithm {
             FSVERITY_HASH_ALG_SHA256 => {
-                let mut context = Context::new(&SHA256);
+                let mut context = Hasher::new(MessageDigest::sha256())?;
                 context.update(
                     &back_buffer
                         [DESCRIPTOR_OFFSET..DESCRIPTOR_OFFSET + size_of::<fsverity_descriptor>()],
-                );
-                Ok(context.finish().as_ref().to_owned())
+                )?;
+                Ok(context.finish()?.as_ref().to_owned())
             }
             alg => Err(io::Error::new(
                 io::ErrorKind::Other,
