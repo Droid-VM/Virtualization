@@ -22,6 +22,30 @@
       },
       "revId": "f3e674a71d4d32462feb277837c859cf9187a734",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a48935e_0283fc3e",
+        "filename": "libs/apkverify/src/v3.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-05-23T05:31:25Z",
+      "side": 1,
+      "message": "Yes, DSA, RSA and EC are all supported. As are sha256 and sha512. My concern adding them would be testing, but I\u0027ve now realised we only really test one case in the integration test (but I was running the unit test :/)",
+      "parentUuid": "c72e9899_1db94e14",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 45
+      },
+      "revId": "f3e674a71d4d32462feb277837c859cf9187a734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
