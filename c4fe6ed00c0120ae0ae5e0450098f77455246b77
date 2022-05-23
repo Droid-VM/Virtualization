@@ -22,6 +22,30 @@
       },
       "revId": "c4fe6ed00c0120ae0ae5e0450098f77455246b77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d633f98a_aeaee314",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-05-23T15:35:20Z",
+      "side": 1,
+      "message": "Does this mean to be temporary (since it\u0027s on master)?  Is there a plan to make this an opt-in option, instead of enabling across the board?\n\nAttack scenario: It\u0027ll be easy for an attacker to run an arbitrary VM given an un-owned APK.  In case there\u0027s any secret in the log, the attacker can reply the RPC requests and retrieve logs via `onPayloadStarted`.  Unless the payload owner is ok with the transparency, without any secret in the log (fine to CompOS I think).",
+      "parentUuid": "0b9192bc_9c314bcc",
+      "range": {
+        "startLine": 10,
+        "startChar": 57,
+        "endLine": 13,
+        "endChar": 3
+      },
+      "revId": "c4fe6ed00c0120ae0ae5e0450098f77455246b77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
