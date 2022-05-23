@@ -113,7 +113,7 @@ impl VmInstance {
             (true, false) => DebugLevel::NONE,
         };
 
-        let (console_fd, log_fd) = if parameters.never_log || debug_level == DebugLevel::NONE {
+        let (console_fd, log_fd) = if parameters.never_log {
             (None, None)
         } else {
             // Console output and the system log output from the VM are redirected to file.

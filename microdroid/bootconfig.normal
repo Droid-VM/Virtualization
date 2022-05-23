@@ -13,5 +13,5 @@ kernel.console=hvc0
 # ADB is not enabled.
 androidboot.adb.enabled=0
 
-# logd is not enabled
-androidboot.logd.enabled=0
+# logd is enabled (b/216538816)
+androidboot.logd.enabled=1
