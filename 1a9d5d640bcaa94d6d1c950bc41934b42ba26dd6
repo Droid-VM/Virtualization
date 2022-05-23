@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0bc842f_d5873a0b",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-23T16:06:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6be644d5_1424e933",
+      "range": {
+        "startLine": 49,
+        "startChar": 11,
+        "endLine": 49,
+        "endChar": 21
+      },
+      "revId": "1a9d5d640bcaa94d6d1c950bc41934b42ba26dd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27f604f6_a0dddc91",
@@ -85,6 +109,30 @@
       "writtenOn": "2022-05-20T17:20:14Z",
       "side": 1,
       "message": ":-(",
+      "range": {
+        "startLine": 135,
+        "startChar": 8,
+        "endLine": 135,
+        "endChar": 14
+      },
+      "revId": "1a9d5d640bcaa94d6d1c950bc41934b42ba26dd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bff85d9_dea2c5bd",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-23T16:06:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27f604f6_a0dddc91",
       "range": {
         "startLine": 135,
         "startChar": 8,
@@ -155,6 +203,30 @@
       "writtenOn": "2022-05-20T17:20:14Z",
       "side": 1,
       "message": "All these functions that just log: could we move these to the new helper?\nE.g. a trait that extends IVirtualMachineCallback with default impls.",
+      "range": {
+        "startLine": 270,
+        "startChar": 0,
+        "endLine": 274,
+        "endChar": 0
+      },
+      "revId": "1a9d5d640bcaa94d6d1c950bc41934b42ba26dd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60a482e0_746cf0f8",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-23T16:06:24Z",
+      "side": 1,
+      "message": "It seems a bit application specific. e.g. the `vm` tool also logs these callbacks, but it does so to stderr rather than via the log crate. I\u0027m not sure what a generic implementation would do.",
+      "parentUuid": "2a9e5172_2dbbada4",
       "range": {
         "startLine": 270,
         "startChar": 0,
