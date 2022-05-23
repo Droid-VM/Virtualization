@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc6af22b_e685e376",
+        "filename": "libs/apkverify/src/v3.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-05-23T07:34:44Z",
+      "side": 1,
+      "message": "The interface is pretty nasty :/ I don\u0027t know what this will do with an EC signed APK. Jooyung pointed at tools/apksig/src/test/resources/com/android/apksig/ which is a collection of differently signed APKs that this library should be tested against.",
+      "range": {
+        "startLine": 233,
+        "startChar": 4,
+        "endLine": 233,
+        "endChar": 28
+      },
+      "revId": "07068a2526b93ed78a1d027a1736c888d9bf6f94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
