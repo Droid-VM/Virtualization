@@ -22,6 +22,30 @@
       },
       "revId": "c208eb4f6692f557e4ab4564e367c8009dfd3e36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbf69c7a_8465c8f4",
+        "filename": "libs/apkverify/src/v3.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-05-23T10:08:57Z",
+      "side": 1,
+      "message": "I tried this first but it\u0027s not supported with the boringssl backend, only openssl-some-version. This create is quite fiddly to use as the boringssl part is added just for Android and there are some difference from the openssl APIs. The basic things work ok.",
+      "parentUuid": "4735777b_516ecf5f",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 237,
+        "endChar": 58
+      },
+      "revId": "c208eb4f6692f557e4ab4564e367c8009dfd3e36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
