@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15ccaeb6_265aadd0",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-23T14:49:09Z",
+      "side": 1,
+      "message": "Renamed. I\u0027ll look at removing it in a separate CL.",
+      "parentUuid": "7e5f9e0d_79a2cfb6",
+      "range": {
+        "startLine": 49,
+        "startChar": 11,
+        "endLine": 49,
+        "endChar": 21
+      },
+      "revId": "1a9d5d640bcaa94d6d1c950bc41934b42ba26dd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27f604f6_a0dddc91",
@@ -60,6 +84,30 @@
       "writtenOn": "2022-05-20T17:20:14Z",
       "side": 1,
       "message": "Remove? There\u0027s not much point logging this.",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 264,
+        "endChar": 16
+      },
+      "revId": "1a9d5d640bcaa94d6d1c950bc41934b42ba26dd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46d0ebfc_a626b49c",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-23T14:49:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37373adf_cbc44c3d",
       "range": {
         "startLine": 264,
         "startChar": 0,
@@ -118,6 +166,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3fd1f792_14ee4e1c",
+        "filename": "vmclient/src/errors.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-23T14:49:09Z",
+      "side": 1,
+      "message": "Not really. Just because the payload has finished doesn\u0027t mean that the VM has died, and it presumably will still die (with some reason) after that.",
+      "parentUuid": "4ad7013c_70f10a77",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 54
+      },
+      "revId": "1a9d5d640bcaa94d6d1c950bc41934b42ba26dd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "679b44ff_63e112de",
         "filename": "vmclient/src/lib.rs",
         "patchSetId": 4
@@ -162,6 +234,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67aab907_2b16edaf",
+        "filename": "vmclient/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-23T14:49:09Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure it\u0027s not possible for a `DeathRecipient` to be called more than once, as once the Binder object has died once it can\u0027t come back and die again. But even if it were, `notify_death` would be a no-op as there is already a `DeathReason` set, so it\u0027s fine.",
+      "parentUuid": "7d4777d2_e8812cca",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 67
+      },
+      "revId": "1a9d5d640bcaa94d6d1c950bc41934b42ba26dd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49065e4c_82cb4983",
@@ -175,6 +271,30 @@
       "writtenOn": "2022-05-20T17:20:14Z",
       "side": 1,
       "message": "Nit: drop(state) first, to unlock before notifying",
+      "range": {
+        "startLine": 168,
+        "startChar": 12,
+        "endLine": 168,
+        "endChar": 33
+      },
+      "revId": "1a9d5d640bcaa94d6d1c950bc41934b42ba26dd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d568768_6ca74f6f",
+        "filename": "vmclient/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-23T14:49:09Z",
+      "side": 1,
+      "message": "Why? I can\u0027t see any mention of needing to do that in the documentation, and it seems to work fine as it is.",
+      "parentUuid": "49065e4c_82cb4983",
       "range": {
         "startLine": 168,
         "startChar": 12,
