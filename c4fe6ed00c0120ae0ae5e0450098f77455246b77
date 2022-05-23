@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b9192bc_9c314bcc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-05-23T15:21:31Z",
+      "side": 1,
+      "message": "This just seems wrong to me.\nThe developer of a VM payload shouldn\u0027t have to worry about leaking things via debug log, because an attacker should not be able to silently acquire those logs.\nThere have definitely been bugs where sensitive information has been accidentally logged and I\u0027m sure there will be more.",
+      "range": {
+        "startLine": 10,
+        "startChar": 57,
+        "endLine": 13,
+        "endChar": 3
+      },
+      "revId": "c4fe6ed00c0120ae0ae5e0450098f77455246b77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
