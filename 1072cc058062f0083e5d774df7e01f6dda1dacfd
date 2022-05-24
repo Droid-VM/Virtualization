@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f00db73_d6a4fe50",
+        "filename": "compos/common/binder.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-05-24T12:28:55Z",
+      "side": 1,
+      "message": "I\u0027m not convinced this is an improvement; there\u0027s nothing virtualization specific here. E.g. we use this in composd which handles normal Binder calls in the host.",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 40
+      },
+      "revId": "1072cc058062f0083e5d774df7e01f6dda1dacfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
