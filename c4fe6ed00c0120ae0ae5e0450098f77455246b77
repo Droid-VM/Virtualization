@@ -46,6 +46,30 @@
       },
       "revId": "c4fe6ed00c0120ae0ae5e0450098f77455246b77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fe72e82_4c9e702d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-05-24T01:24:48Z",
+      "side": 1,
+      "message": "This is for TM. I\u0027d like to cherry-pick this to tm-dev once it lands here. For U, this will be turned off again, and we will have a means to force enable logging on the guest side if the corresponding debug policy is (securely) provisioned. See go/android-avf-debugging",
+      "parentUuid": "d633f98a_aeaee314",
+      "range": {
+        "startLine": 10,
+        "startChar": 57,
+        "endLine": 13,
+        "endChar": 3
+      },
+      "revId": "c4fe6ed00c0120ae0ae5e0450098f77455246b77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
