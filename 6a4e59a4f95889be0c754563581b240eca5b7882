@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4051b681_2674b953",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-25T14:36:20Z",
+      "side": 1,
+      "message": "From what I understand the pVM firmware is responsible for zeroing out secrets from memory before starting the next stage bootloader. This should be possible from Rust, but I guess it can\u0027t easily guarantee from Rust that there aren\u0027t any secrets left in the registers, so it seems like that should be done here as Pierre suggests.",
+      "parentUuid": "b88c4958_d2d64d2d",
+      "range": {
+        "startLine": 26,
+        "startChar": 53,
+        "endLine": 26,
+        "endChar": 91
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a875065_2c290d65",
         "filename": "pvmfw/payload.S",
         "patchSetId": 4
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "Completion of the MMU disable only needs an ISB. The important thing here is to ensure is that whatever we are executing afterwards (fw code as well as payload code) is cleaned from the caches to the point of coherency (PoC) as subsequent instruction fetches won\u0027t hit in unified caches between PoU and PoC.",
       "parentUuid": "6a875065_2c290d65",
+      "range": {
+        "startLine": 35,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 40
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "864e5d50_a4d36868",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-25T14:36:20Z",
+      "side": 1,
+      "message": "Is there a problem if previous writes have not completed before the MMU and cache are disabled?",
+      "parentUuid": "0eb4d543_0fd46195",
       "range": {
         "startLine": 35,
         "startChar": 8,
@@ -214,6 +262,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "557fac8f_8cedc62b",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-25T14:36:20Z",
+      "side": 1,
+      "message": "It seems like a good idea to also clear C, SA, I, WXN and other fields which are not RES1, so I\u0027ve changed this to zero everything except for the RES1 fields.",
+      "parentUuid": "b5bee953_7ef46eeb",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 26
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c0ee5c3_fa3ec938",
@@ -227,6 +299,30 @@
       "writtenOn": "2022-05-11T10:48:47Z",
       "side": 1,
       "message": "Do we need an `isb` in-between these 2 instructions?",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 26
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0ead3e7_e9898aa1",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-25T14:36:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c0ee5c3_fa3ec938",
       "range": {
         "startLine": 36,
         "startChar": 8,
@@ -345,6 +441,30 @@
       "side": 1,
       "message": "I don\u0027t see the point of zeroing these registers. As Pierre-Clement points out, you shouldn\u0027t touch the registers that configure the translation before clearing the M bit has completed, so you at least need an ISB here. Clearing TCR and MAIR serves no real purpose, and clearing VBAR doesn\u0027t make that much sense either - if an exception is taken unexpectedly after this point, jumping to an arbitrary address that is unlikely to be covered by DRAM is not any better than jumping to the firmware\u0027s exception handler as long as it still there.",
       "parentUuid": "a7dcffba_b7a2b9f7",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 11
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b33adf17_574afe8c",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-05-25T14:36:20Z",
+      "side": 1,
+      "message": "My rationale was just that it was good to leave things in a predictable state, but okay, I\u0027ve removed most of the zeroing.",
+      "parentUuid": "27ecd046_70157f51",
       "range": {
         "startLine": 41,
         "startChar": 8,
