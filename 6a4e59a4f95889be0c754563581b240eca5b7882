@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f1a9008_29b46062",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-05-26T14:58:08Z",
+      "side": 1,
+      "message": "\u003e the payload executes at the same EL as the loader\n\nTrue but they don\u0027t execute at the same time so the loader has the opportunity to destroy any secret it holds before it starts the payload. If the compiler places (part of) a secret in a register which is never overwritten, we end up leaking it.\n\nActually, this is going to become even more relevant once we start using SIMD and the vector registers (which weren\u0027t even in scope here).",
+      "parentUuid": "4051b681_2674b953",
+      "range": {
+        "startLine": 26,
+        "startChar": 53,
+        "endLine": 26,
+        "endChar": 91
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a875065_2c290d65",
         "filename": "pvmfw/payload.S",
         "patchSetId": 4
@@ -181,6 +205,30 @@
       "side": 1,
       "message": "Is there a problem if previous writes have not completed before the MMU and cache are disabled?",
       "parentUuid": "0eb4d543_0fd46195",
+      "range": {
+        "startLine": 35,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 40
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faf2f976_9f93f814",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-05-26T14:58:08Z",
+      "side": 1,
+      "message": "+1 to the question above.\n\n\u003e as subsequent instruction fetches won\u0027t hit in unified caches between PoU and PoC.\n\nI might be missing something but is this relevant here, given that we execute in-place (both the \"loader\" (which actually doesn\u0027t load anything) and its payload) from memory pre-loaded by the VMM or HV? From the PoV of the VM, it\u0027s as if the DDR came preloaded with executable code, right?",
+      "parentUuid": "864e5d50_a4d36868",
       "range": {
         "startLine": 35,
         "startChar": 8,
