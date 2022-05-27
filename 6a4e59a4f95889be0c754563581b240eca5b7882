@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9652942c_5c21e589",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2022-05-27T13:29:23Z",
+      "side": 1,
+      "message": "Fair enough. I guess a bit of hygiene is justified here.",
+      "parentUuid": "5f1a9008_29b46062",
+      "range": {
+        "startLine": 26,
+        "startChar": 53,
+        "endLine": 26,
+        "endChar": 91
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a875065_2c290d65",
         "filename": "pvmfw/payload.S",
         "patchSetId": 4
@@ -241,6 +265,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c5e6b55_bb15b5a5",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2022-05-27T13:29:23Z",
+      "side": 1,
+      "message": "\u0027Completion\u0027 of a store is usually defined in terms of observability by other agents, but this is irrelevant here. What is relevant is that the store is issued before disabling the MMU in program order, and so the store either faults synchronously if no mapping exists, or it succeeds, and disabling the MMU has no effect on it. Whether/when other CPUs might be able to observe the store in memory is a separate question.\n\nAs for the payload: if it is guaranteed to be clean to the PoC in memory already, then no D-cache maintenance is needed, but I-cache invalidation might be. I guess putting the assumptions/guarantees in a comment here would be helpful",
+      "parentUuid": "864e5d50_a4d36868",
+      "range": {
+        "startLine": 35,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 40
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff34458c_2e0f4d3f",
         "filename": "pvmfw/payload.S",
         "patchSetId": 4
@@ -324,6 +372,30 @@
       "side": 1,
       "message": "It seems like a good idea to also clear C, SA, I, WXN and other fields which are not RES1, so I\u0027ve changed this to zero everything except for the RES1 fields.",
       "parentUuid": "b5bee953_7ef46eeb",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 26
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7601146_1494d8f7",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2022-05-27T13:29:23Z",
+      "side": 1,
+      "message": "Why is that a good idea? In fact, keeping the I-cache enabled is preferred, as it doesn\u0027t rely on the MMU like the D-cache.",
+      "parentUuid": "557fac8f_8cedc62b",
       "range": {
         "startLine": 36,
         "startChar": 8,
