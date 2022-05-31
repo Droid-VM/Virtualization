@@ -237,6 +237,7 @@ microdroid_boot_cmdline = [
     "panic=-1",
     "bootconfig",
     "ioremap_guard",
+    "8250.nr_uarts=2",
 ]
 
 bootimg {
