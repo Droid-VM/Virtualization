@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bc1f627_34784ab4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-06-01T16:47:26Z",
+      "side": 1,
+      "message": "I\u0027m hoping the APK digest will be a suitable identifier for APKs that will align with work in other contexts. The v4 signing scheme has opinions on how to select the best digest and I wanted to reuse of that. Turns out, there\u0027s a TODO that requires the same logic, so I\u0027d give it a go and see what it looked like.\n\nIt feels pretty hacky. Especially the interop between idsig and apkverify. There could definitely be better interface in future, or maybe even merge the two as they duplicate some things already.\n\n",
+      "revId": "11d53ee9c7dc273cbbe098a90cf5af4538350c60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
