@@ -46,6 +46,30 @@
       },
       "revId": "c0b2843fe509e175efd3c46deff184f528c8d4e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bb86092_297741e5",
+        "filename": "authfs/tests/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-06-06T17:45:00Z",
+      "side": 1,
+      "message": "Got a [CI error](https://android-build.googleplex.com/builds/pending/P35891492/sdk/latest/view/logs/build_error.log) using `data_device_bins_64` here:\n\n```\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nPLATFORM_VERSION_CODENAME\u003dUpsideDownCake\nPLATFORM_VERSION\u003dUpsideDownCake\nTARGET_PRODUCT\u003dsdk\nTARGET_BUILD_VARIANT\u003duserdebug\nTARGET_BUILD_TYPE\u003drelease\nTARGET_ARCH\u003dx86\nTARGET_ARCH_VARIANT\u003dx86\nHOST_ARCH\u003dx86_64\nHOST_2ND_ARCH\u003dx86\nHOST_OS\u003dlinux\nHOST_OS_EXTRA\u003dLinux-5.13.0-1024-gcp-x86_64-Ubuntu-14.04.6-LTS\nHOST_CROSS_OS\u003dwindows\nHOST_CROSS_ARCH\u003dx86\nHOST_CROSS_2ND_ARCH\u003dx86_64\nHOST_BUILD_TYPE\u003drelease\nBUILD_ID\u003dAOSP.MASTER\nOUT_DIR\u003dout\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\n\u003c...\u003e\n\nerror: packages/modules/Virtualization/authfs/tests/Android.bp:17:24: module \"AuthFsHostTest\" variant \"linux_glibc_common\": data_device_bins_64: cannot find 64bit device target. Targets: map[\"android\":[\"android_x86\"] \"common_os\":[\"common_os_common\"] \"linux_glibc\":[\"linux_glibc_x86_64\" \"linux_glibc_x86\"] \"windows\":[\"windows_x86\" \"windows_x86_64\"]]\n```\n\nIs this expected?",
+      "parentUuid": "4a837d8d_006ae740",
+      "range": {
+        "startLine": 17,
+        "startChar": 21,
+        "endLine": 17,
+        "endChar": 26
+      },
+      "revId": "c0b2843fe509e175efd3c46deff184f528c8d4e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
