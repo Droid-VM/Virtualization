@@ -94,6 +94,30 @@
       },
       "revId": "c0b2843fe509e175efd3c46deff184f528c8d4e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f06b8186_53e1a87d",
+        "filename": "authfs/tests/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-06-06T18:46:55Z",
+      "side": 1,
+      "message": "I believe the error is occurring because this particular lunch target only has a 32bit device target, and so there is no 64bit version of the `open_then_run` binary that can be built for the device.\n\nWhat should be the expected behavior for this module on a 32bit lunch target like this?",
+      "parentUuid": "0402f8f8_4e631712",
+      "range": {
+        "startLine": 17,
+        "startChar": 21,
+        "endLine": 17,
+        "endChar": 26
+      },
+      "revId": "c0b2843fe509e175efd3c46deff184f528c8d4e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
