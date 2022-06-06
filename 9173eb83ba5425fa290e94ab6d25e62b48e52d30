@@ -16,6 +16,24 @@
       "message": "Not sure how v4 is related to this. I guess, when we sign an APK with v4 scheme, it happens to be the case. But we support v3 scheme here and what about those signed with v3 scheme?",
       "revId": "9173eb83ba5425fa290e94ab6d25e62b48e52d30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "991a2fdd_fae09d1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-06-06T05:29:50Z",
+      "side": 1,
+      "message": "Nothing has changed for the v3 verification. It was already using the same selection process as used by v4, so I\u0027ve just commented that to make it explicit. Should we want to change the selection process for v3, we\u0027d need to split the functions for the different logic.",
+      "parentUuid": "ab64255c_031500d7",
+      "revId": "9173eb83ba5425fa290e94ab6d25e62b48e52d30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
