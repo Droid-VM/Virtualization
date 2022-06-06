@@ -142,6 +142,30 @@
       },
       "revId": "c0b2843fe509e175efd3c46deff184f528c8d4e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0157c260_3323add4",
+        "filename": "authfs/tests/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1932329
+      },
+      "writtenOn": "2022-06-06T20:51:27Z",
+      "side": 1,
+      "message": "I am not sure; asking around now. I tried messing with the `arch` and `compile_multilib` properties on the `AuthFsHostTest` module, but I don\u0027t know if there is a way to disable it based on device architecture... but I\u0027ll try and confirm this.\n\nWas this 32bit-only requirement enforced before? It seems that when we first introduced the `data_device_bins` property that there wasn\u0027t an explicit 64-bit requirement: aosp/1964140.",
+      "parentUuid": "6ec6b0b9_34387c7a",
+      "range": {
+        "startLine": 17,
+        "startChar": 21,
+        "endLine": 17,
+        "endChar": 26
+      },
+      "revId": "c0b2843fe509e175efd3c46deff184f528c8d4e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
