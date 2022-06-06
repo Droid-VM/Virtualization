@@ -17,6 +17,7 @@
 package com.android.server.compos;
 
 import android.annotation.IntDef;
+import android.app.job.JobParameters;
 import android.os.SystemClock;
 import android.util.Log;
 
@@ -76,7 +77,6 @@ class IsolatedCompilationMetrics {
     private long mCompilationStartTimeMs = 0;
 
     public static void onCompilationScheduled(@ScheduleJobResult int result) {
-        // TODO(b/218525257): write to ArtStatsLog instead of logcat
         ArtStatsLog.write(ArtStatsLog.ISOLATED_COMPILATION_SCHEDULED, result);
         Log.i(TAG, "ISOLATED_COMPILATION_SCHEDULED: " + result);
     }
@@ -85,13 +85,25 @@ class IsolatedCompilationMetrics {
         mCompilationStartTimeMs = SystemClock.elapsedRealtime();
     }
 
+    // In case the job is canceled, log the stop Reason - use the stopReason code defined in
+    // frameworks/base/apex/jobscheduler/framework/java/android/app/job/JobParameters.java
+    public void onCompilationJobCanceled(int jobStopReason) {
+        long compilationTime = mCompilationStartTimeMs == 0 ? -1
+                : SystemClock.elapsedRealtime() - mCompilationStartTimeMs;
+        mCompilationStartTimeMs = 0;
+        ArtStatsLog.write(ArtStatsLog.ISOLATED_COMPILATION_ENDED, compilationTime,
+                RESULT_JOB_CANCELED, jobStopReason);
+        Log.i(TAG, "ISOLATED_COMPILATION_CANCELED: " + ", "
+                + compilationTime + ',' + jobStopReason);
+    }
+
     public void onCompilationEnded(@CompilationResult int result) {
         long compilationTime = mCompilationStartTimeMs == 0 ? -1
                 : SystemClock.elapsedRealtime() - mCompilationStartTimeMs;
         mCompilationStartTimeMs = 0;
 
-        // TODO(b/218525257): write to ArtStatsLog instead of logcat
-        ArtStatsLog.write(ArtStatsLog.ISOLATED_COMPILATION_ENDED, compilationTime, result);
+        ArtStatsLog.write(ArtStatsLog.ISOLATED_COMPILATION_ENDED,
+                compilationTime, result, JobParameters.STOP_REASON_UNDEFINED);
         Log.i(TAG, "ISOLATED_COMPILATION_ENDED: " + result + ", " + compilationTime);
     }
 }
