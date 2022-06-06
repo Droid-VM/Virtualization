@@ -118,6 +118,30 @@
       },
       "revId": "c0b2843fe509e175efd3c46deff184f528c8d4e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ec6b0b9_34387c7a",
+        "filename": "authfs/tests/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-06-06T18:57:59Z",
+      "side": 1,
+      "message": "`AuthFsHostTest` is not supposed to run/pass on any 32-bit devices.  `open_then_run` technically doesn\u0027t have the same restriction, but it\u0027s only used by this 64-bit only test.\n\nIs it possible to exclude the test from a 32-bit lunch target?",
+      "parentUuid": "f06b8186_53e1a87d",
+      "range": {
+        "startLine": 17,
+        "startChar": 21,
+        "endLine": 17,
+        "endChar": 26
+      },
+      "revId": "c0b2843fe509e175efd3c46deff184f528c8d4e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
