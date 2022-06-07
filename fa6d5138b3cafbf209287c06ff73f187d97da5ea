@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff360448_af5fddf9",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-06-07T16:40:21Z",
+      "side": 1,
+      "message": "Do we have a way to statically check (at build time) that no address in use will be larger than the limit this imposes? I suppose it isn\u0027t checked by `IdMap` as `map_range()` would then probably return a `Result`, right?",
+      "range": {
+        "startLine": 38,
+        "startChar": 26,
+        "endLine": 38,
+        "endChar": 28
+      },
+      "revId": "fa6d5138b3cafbf209287c06ff73f187d97da5ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0f6adb8_476ba079",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-06-07T16:40:21Z",
+      "side": 1,
+      "message": "AFAIK, this should only cover the first GiB; beyond that is either reserved or firmware region, irrelevant to this non-protected payload.",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 19
+      },
+      "revId": "fa6d5138b3cafbf209287c06ff73f187d97da5ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1044cec3_ec3362f2",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-06-07T16:40:21Z",
+      "side": 1,
+      "message": "Use `text_begin` and `text_end`? It would be neat to have `image + LENGTH(image)`, here.",
+      "range": {
+        "startLine": 48,
+        "startChar": 52,
+        "endLine": 48,
+        "endChar": 74
+      },
+      "revId": "fa6d5138b3cafbf209287c06ff73f187d97da5ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82b54965_417f0e17",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-06-07T16:40:21Z",
+      "side": 1,
+      "message": "Use `data_begin` and `boot_stack_end`?  It would be neat to have `writable_data + LENGTH(writable_data)`, here.",
+      "range": {
+        "startLine": 50,
+        "startChar": 52,
+        "endLine": 50,
+        "endChar": 74
+      },
+      "revId": "fa6d5138b3cafbf209287c06ff73f187d97da5ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9253f1fb_aba91ebc",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-06-07T16:40:21Z",
+      "side": 1,
+      "message": "What is the reason for using this attribute? AFAICT (but might be wrong), it\u0027s relevant to distinguish between kernel and userspace mappings, right? Do we need that here?",
+      "range": {
+        "startLine": 71,
+        "startChar": 29,
+        "endLine": 71,
+        "endChar": 51
+      },
+      "revId": "fa6d5138b3cafbf209287c06ff73f187d97da5ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92340012_4b834003",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-06-07T16:40:21Z",
+      "side": 1,
+      "message": "See above",
+      "range": {
+        "startLine": 75,
+        "startChar": 57,
+        "endLine": 75,
+        "endChar": 79
+      },
+      "revId": "fa6d5138b3cafbf209287c06ff73f187d97da5ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
