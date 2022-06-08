@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2860bde8_361aef31",
+        "filename": "virtualizationservice/src/composite.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-06-08T23:51:53Z",
+      "side": 1,
+      "message": "Can this be true? Was the disk sparse or not sparse before this CL?",
+      "range": {
+        "startLine": 127,
+        "startChar": 29,
+        "endLine": 127,
+        "endChar": 34
+      },
+      "revId": "6b376a729597b5a156a35aeaa7146c9d6c68ec69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
