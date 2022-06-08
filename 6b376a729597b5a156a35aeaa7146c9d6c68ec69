@@ -22,6 +22,30 @@
       },
       "revId": "6b376a729597b5a156a35aeaa7146c9d6c68ec69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96f2125c_005bb252",
+        "filename": "virtualizationservice/src/composite.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1944405
+      },
+      "writtenOn": "2022-06-08T23:58:50Z",
+      "side": 1,
+      "message": "Before this CL, there was never a check on whether the disk was sparse or not, I don\u0027t believe this information was checked. \nThis was added with \"windows support\" -- https://chromium-review.googlesource.com/c/chromiumos/platform/crosvm/+/3654613",
+      "parentUuid": "2860bde8_361aef31",
+      "range": {
+        "startLine": 127,
+        "startChar": 29,
+        "endLine": 127,
+        "endChar": 34
+      },
+      "revId": "6b376a729597b5a156a35aeaa7146c9d6c68ec69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
