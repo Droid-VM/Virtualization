@@ -337,6 +337,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "346c6b24_bd8c5fda",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2022-06-09T12:41:45Z",
+      "side": 1,
+      "message": "There is no point in managing concurrent wrt cores that are not even up yet. Please just drop the DSB unless it serves a particular purpose.",
+      "parentUuid": "56267a4a_e4881d7d",
+      "range": {
+        "startLine": 35,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 40
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff34458c_2e0f4d3f",
         "filename": "pvmfw/payload.S",
         "patchSetId": 4
@@ -468,6 +492,30 @@
       "side": 1,
       "message": "The payload might not want to enforce SP to be aligned, and in any case won\u0027t have working exception handlers initially, so having SA set to 0 seems safer.\n\nWe need to disable at least the data cache, right? And C is specified to be 0 on warm reset, so that seems like the correct value to reset it to here.\n\nThe payload may have writable code, so WXN needs to be 0 (though I guess it will set it as needed when setting up its page table anyway).",
       "parentUuid": "b7601146_1494d8f7",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 26
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93af8dbd_ca12c3cf",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2022-06-09T12:41:45Z",
+      "side": 1,
+      "message": "The payload will do whatever it needs to do to put the CPU in the right mode. It doesn\u0027t make a lot of sense to try and anticipate it here.",
+      "parentUuid": "a35c94bc_e6379900",
       "range": {
         "startLine": 36,
         "startChar": 8,
