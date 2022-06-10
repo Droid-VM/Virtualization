@@ -576,6 +576,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "312de5c1_72ed73c7",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-06-10T12:45:52Z",
+      "side": 1,
+      "message": "Not sure U-Boot should be taken as a spotless reference but it flushes D-cache (by VA) before [clearing SCTLR.{C,M}](https://android.googlesource.com/platform/external/u-boot/+/refs/heads/master/arch/arm/cpu/armv8/cache_v8.c#569) and invalidating TLBs. Once we start using WXN following aosp/2107334, that bit will also be cleared.",
+      "parentUuid": "d6056931_83e10c84",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 26
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c0ee5c3_fa3ec938",
         "filename": "pvmfw/payload.S",
         "patchSetId": 4
