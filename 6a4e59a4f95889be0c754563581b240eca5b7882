@@ -359,6 +359,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d768c6ea_e1a67fd1",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-06-10T12:29:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "346c6b24_bd8c5fda",
+      "range": {
+        "startLine": 35,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 40
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff34458c_2e0f4d3f",
@@ -516,6 +540,30 @@
       "side": 1,
       "message": "The payload will do whatever it needs to do to put the CPU in the right mode. It doesn\u0027t make a lot of sense to try and anticipate it here.",
       "parentUuid": "a35c94bc_e6379900",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 26
+      },
+      "revId": "6a4e59a4f95889be0c754563581b240eca5b7882",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6056931_83e10c84",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-06-10T12:29:48Z",
+      "side": 1,
+      "message": "Indeed, but doesn\u0027t the payload need to make at least some assumptions about the state the CPU is in before it can get to that point?\n\nWhat does u-boot currently do?",
+      "parentUuid": "93af8dbd_ca12c3cf",
       "range": {
         "startLine": 36,
         "startChar": 8,
