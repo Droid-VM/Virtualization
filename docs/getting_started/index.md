@@ -43,6 +43,19 @@ fastboot oem pkvm enable
 fastboot reboot
 ```
 
+Due to a bug in Android 13 for these devices, pKVM may stop working after an
+[OTA update](https://source.android.com/devices/tech/ota). To prevent this, it
+is necessary to manually replicate the `pvmfw` partition across A/B slots:
+
+```shell
+adb root
+SLOT=$(adb shell getprop ro.boot.slot_suffix)
+adb pull /dev/block/by-name/pvmfw${SLOT} pvmfw.img
+adb reboot bootloader
+fastboot --slot other flash pvmfw pvmfw.img
+fastboot reboot
+```
+
 ## Running demo app
 
 The instruction is [here](../../demo/README.md).
