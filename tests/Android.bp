@@ -18,7 +18,7 @@ package {
 
 kernel_version = "5.15"
 
-kernel_stem = "kernel_prebuilts-" + kernel_version
+kernel_stem = "microdroid_kernel_prebuilts-" + kernel_version
 
 cc_test {
     // ".64" suffix is to work around cts-unit-test which is demanding that all
@@ -84,7 +84,6 @@ prebuilt_etc {
 android_filesystem {
     name: "virt_test_initramfs",
     deps: [
-        "microdroid_kernel_modules",
         "virt_test_guest_init",
         "virt_test_vsock_guest",
     ],
