@@ -246,11 +246,11 @@ bootimg {
     kernel_prebuilt: "empty_kernel",
     arch: {
         arm64: {
-            kernel_prebuilt: ":kernel_prebuilts-5.10-arm64",
+            kernel_prebuilt: ":microdroid_kernel_prebuilts-5.10-arm64",
             cmdline: microdroid_boot_cmdline,
         },
         x86_64: {
-            kernel_prebuilt: ":kernel_prebuilts-5.10-x86_64",
+            kernel_prebuilt: ":microdroid_kernel_prebuilts-5.10-x86_64",
             cmdline: microdroid_boot_cmdline + [
                 // console=none is to work around the x86 specific u-boot behavior which when
                 // console= option is not found in the kernel commandline console=ttyS0 is
