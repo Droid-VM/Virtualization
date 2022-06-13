@@ -10,9 +10,9 @@ rust_defaults {
     prefer_rlib: true,
     edition: "2018",
     rustlibs: [
-        "libavb_bindgen",
         "liblog_rust",
         "libthiserror",
+        "libvbmeta_rust",
         "libzip",
     ],
 }
