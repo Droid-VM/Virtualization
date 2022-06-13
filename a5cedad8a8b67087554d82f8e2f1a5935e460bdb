@@ -22,6 +22,30 @@
       },
       "revId": "a5cedad8a8b67087554d82f8e2f1a5935e460bdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e948ab72_178df264",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-06-13T13:29:36Z",
+      "side": 1,
+      "message": "We can hack this one with the `microdroid_bootloader` arch-specific selection as well, I think. I\u0027ll look into that and leave this revert going to fix the build.",
+      "parentUuid": "64a2e89e_1f3e23f8",
+      "range": {
+        "startLine": 503,
+        "startChar": 4,
+        "endLine": 504,
+        "endChar": 62
+      },
+      "revId": "a5cedad8a8b67087554d82f8e2f1a5935e460bdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
