@@ -39,6 +39,30 @@
       },
       "revId": "24fb02ba745e4c43ec7c310a0e23ab54db238f23",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43342635_a6a4f5d6",
+        "filename": "docs/getting_started/index.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-06-14T08:17:47Z",
+      "side": 1,
+      "message": "Good point about a developer coming to these docs because the OTA broke their pKVM! I\u0027ve added similar instructions for that use case and also mention the pre-built that can be used to flash the partition; that will only work on unlocked BLs because it isn\u0027t signed but extracting the signed partition from the CI archives doesn\u0027t seem straightforward (but why wouldn\u0027t their BL be unlocked?).",
+      "parentUuid": "50c9570b_8a128f04",
+      "range": {
+        "startLine": 47,
+        "startChar": 59,
+        "endLine": 48,
+        "endChar": 73
+      },
+      "revId": "24fb02ba745e4c43ec7c310a0e23ab54db238f23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
