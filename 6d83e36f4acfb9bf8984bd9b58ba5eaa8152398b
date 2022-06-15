@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b82d0a4d_376b94c7",
+        "filename": "vmbase/example/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-06-15T02:57:49Z",
+      "side": 1,
+      "message": "This binary certainly has a dependency to libc, so I think HWAsan bringing a dependency to libc doesn\u0027t cause any problem?",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 33
+      },
+      "revId": "6d83e36f4acfb9bf8984bd9b58ba5eaa8152398b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
