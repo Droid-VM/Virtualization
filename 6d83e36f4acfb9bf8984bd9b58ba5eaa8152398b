@@ -46,6 +46,30 @@
       },
       "revId": "6d83e36f4acfb9bf8984bd9b58ba5eaa8152398b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4d92484_ed8a2fe6",
+        "filename": "vmbase/example/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-06-16T00:26:35Z",
+      "side": 1,
+      "message": "Hmm, the bug only shows the build error. atexit, pthread_atfork, _Unwind_Backtrace are missing, but AFAIK they are in libc.\n\nCan you explain why the symbols are missing?",
+      "parentUuid": "a8c05ec8_2376b24f",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 33
+      },
+      "revId": "6d83e36f4acfb9bf8984bd9b58ba5eaa8152398b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
