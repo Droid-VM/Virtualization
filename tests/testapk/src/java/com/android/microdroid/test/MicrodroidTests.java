@@ -15,6 +15,8 @@
  */
 package com.android.microdroid.test;
 
+import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
+
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.TruthJUnit.assume;
 
@@ -22,8 +24,10 @@ import static org.junit.Assume.assumeNoException;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
+import android.app.Instrumentation;
 import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.os.SystemProperties;
 import android.sysprop.HypervisorProperties;
@@ -123,6 +127,8 @@ public class MicrodroidTests {
     private boolean mPkvmSupported = false;
     private Inner mInner;
 
+    private Instrumentation mInstrumentation;
+
     @Before
     public void setup() {
         // In case when the virt APEX doesn't exist on the device, classes in the
@@ -149,6 +155,8 @@ public class MicrodroidTests {
         mInner = new Inner(mProtectedVm);
         mInner.mContext = ApplicationProvider.getApplicationContext();
         mInner.mVmm = VirtualMachineManager.getInstance(mInner.mContext);
+
+        mInstrumentation = getInstrumentation();
     }
 
     @After
@@ -606,5 +614,50 @@ public class MicrodroidTests {
         BootResult bootResult = tryBootVm("test_vm_invalid_config");
         assertThat(bootResult.payloadStarted).isFalse();
         assertThat(bootResult.deathReason).isEqualTo(DeathReason.MICRODROID_INVALID_PAYLOAD_CONFIG);
+    }
+
+    private boolean canBootMicrodroidWithMemory(int mem)
+            throws VirtualMachineException, InterruptedException, IOException {
+        final int trialCount = 5;
+
+        // returns true if succeeded at least once.
+        for (int i = 0; i < trialCount; i++) {
+            VirtualMachine existingVm = mInner.mVmm.get("test_vm_minimum_memory");
+            if (existingVm != null) {
+                existingVm.delete();
+            }
+
+            VirtualMachineConfig.Builder builder =
+                    mInner.newVmConfigBuilder("assets/vm_config.json");
+            VirtualMachineConfig normalConfig =
+                    builder.debugLevel(DebugLevel.FULL).memoryMib(mem).build();
+            mInner.mVmm.create("test_vm_minimum_memory", normalConfig);
+
+            if (tryBootVm("test_vm_minimum_memory").payloadStarted) return true;
+        }
+
+        return false;
+    }
+
+    @Test
+    public void testMinimumRequiredRAM()
+            throws VirtualMachineException, InterruptedException, IOException {
+        int lo = 16, hi = 512, minimum = -1;
+
+        while (lo <= hi) {
+            int mid = (lo + hi) / 2;
+            if (canBootMicrodroidWithMemory(mid)) {
+                minimum = mid;
+                hi = mid - 1;
+            } else {
+                lo = mid + 1;
+            }
+        }
+
+        assertThat(minimum).isNotEqualTo(-1);
+
+        Bundle bundle = new Bundle();
+        bundle.putInt("microdroid_minimum_required_memory", minimum);
+        mInstrumentation.sendStatus(0, bundle);
     }
 }
