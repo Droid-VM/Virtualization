@@ -36,6 +36,8 @@ pub enum DeathReason {
     Reboot,
     /// The VM or crosvm crashed.
     Crash,
+    /// The VM was killed due to hangup.
+    Hangup,
     /// The pVM firmware failed to verify the VM because the public key doesn't match.
     PvmFirmwarePublicKeyMismatch,
     /// The pVM firmware failed to verify the VM because the instance image changed.
@@ -58,6 +60,7 @@ impl From<AidlDeathReason> for DeathReason {
             AidlDeathReason::ERROR => Self::Error,
             AidlDeathReason::REBOOT => Self::Reboot,
             AidlDeathReason::CRASH => Self::Crash,
+            AidlDeathReason::HANGUP => Self::Hangup,
             AidlDeathReason::PVM_FIRMWARE_PUBLIC_KEY_MISMATCH => Self::PvmFirmwarePublicKeyMismatch,
             AidlDeathReason::PVM_FIRMWARE_INSTANCE_IMAGE_CHANGED => {
                 Self::PvmFirmwareInstanceImageChanged
@@ -82,6 +85,7 @@ impl Display for DeathReason {
             Self::Error => "Error starting VM.",
             Self::Reboot => "VM tried to reboot, possibly due to a kernel panic.",
             Self::Crash => "VM crashed.",
+            Self::Hangup => "VM hangup.",
             Self::PvmFirmwarePublicKeyMismatch => {
                 "pVM firmware failed to verify the VM because the public key doesn't match."
             }

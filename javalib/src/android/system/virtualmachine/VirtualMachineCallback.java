@@ -66,7 +66,8 @@ public interface VirtualMachineCallback {
         DEATH_REASON_SHUTDOWN,
         DEATH_REASON_ERROR,
         DEATH_REASON_REBOOT,
-        DEATH_REASON_CRASH
+        DEATH_REASON_CRASH,
+        DEATH_REASON_HANGUP,
     })
     @interface DeathReason {}
 
@@ -96,6 +97,9 @@ public interface VirtualMachineCallback {
 
     /** The VM or crosvm crashed. */
     int DEATH_REASON_CRASH = 6;
+
+    /** The VM was killed due to hangup. */
+    int DEATH_REASON_HANGUP = 7;
 
     /** Called when the payload starts in the VM. */
     void onPayloadStarted(@NonNull VirtualMachine vm, @Nullable ParcelFileDescriptor stream);
