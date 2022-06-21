@@ -74,4 +74,9 @@ interface ICompOsService {
      * hardware/interfaces/security/dice/aidl/android/hardware/security/dice/Bcc.aidl.
      */
     byte[] getAttestationChain();
+
+    /**
+    * TODO
+    */
+    oneway void quit();
 }

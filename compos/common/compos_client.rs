@@ -137,6 +137,12 @@ impl ComposClient {
     pub fn get_service(&self) -> Result<Strong<dyn ICompOsService>> {
         self.0.get_service(COMPOS_VSOCK_PORT).context("Connecting to CompOS service")
     }
+
+    pub fn wait_for_vm_stop(&self, timeout: Duration) {
+
+    }
+
+    
 }
 
 fn locate_config_apk(apex_dir: &Path) -> Result<PathBuf> {
