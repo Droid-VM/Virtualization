@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58895ef7_9263c397",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-06-21T06:54:52Z",
+      "side": 1,
+      "message": "Consider changing this to return Result\u003c(), Error\u003e instead of calling process::exit() explicitly. Then this function can be simplified as\n\n```\nfn main() -\u003e Result\u003c...\u003e {\n    scopedguard::defer! { // shutdown };\n    try_main().or_else(|e| { // write to serial, and then return e })\n}\n```",
+      "range": {
+        "startLine": 158,
+        "startChar": 3,
+        "endLine": 158,
+        "endChar": 9
+      },
+      "revId": "1319b1789db96ed6410f2f5e11b9da4263d035ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a753e57f_1d3a5e18",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-06-21T06:54:52Z",
+      "side": 1,
+      "message": "Consider using `scopeguard::defer! {...}`",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 5
+      },
+      "revId": "1319b1789db96ed6410f2f5e11b9da4263d035ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
