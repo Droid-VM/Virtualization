@@ -75,4 +75,9 @@ interface IVirtualMachineService {
      * Error code indicating that the payload config is invalid.
      */
     const int ERROR_PAYLOAD_INVALID_CONFIG = 3;
+
+    /**
+     * Error code indicating that OS hanged during booting.
+     */
+    const int ERROR_HANG_ON_BOOT = 4;
 }

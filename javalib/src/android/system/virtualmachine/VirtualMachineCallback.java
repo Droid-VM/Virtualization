@@ -37,7 +37,8 @@ public interface VirtualMachineCallback {
         ERROR_UNKNOWN,
         ERROR_PAYLOAD_VERIFICATION_FAILED,
         ERROR_PAYLOAD_CHANGED,
-        ERROR_PAYLOAD_INVALID_CONFIG
+        ERROR_PAYLOAD_INVALID_CONFIG,
+        ERROR_HANG_ON_BOOT
     })
     @interface ErrorCode {}
 
@@ -56,6 +57,13 @@ public interface VirtualMachineCallback {
     /** Error code indicating that the payload config is invalid. */
     int ERROR_PAYLOAD_INVALID_CONFIG = 3;
 
+    /**
+     * Error code indicating that the VM is not starting the payload more than 2 seconds. This
+     * occurs only when VirtualMachineAppConfig is used. If this event happens more than 5 times,
+     * the VM is automatically shutdown.
+     */
+    int ERROR_HANG_ON_BOOT = 4;
+
     /** @hide */
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
@@ -66,7 +74,8 @@ public interface VirtualMachineCallback {
         DEATH_REASON_SHUTDOWN,
         DEATH_REASON_ERROR,
         DEATH_REASON_REBOOT,
-        DEATH_REASON_CRASH
+        DEATH_REASON_CRASH,
+        DEATH_REASON_HANGUP,
     })
     @interface DeathReason {}
 
@@ -96,6 +105,9 @@ public interface VirtualMachineCallback {
 
     /** The VM or crosvm crashed. */
     int DEATH_REASON_CRASH = 6;
+
+    /** The VM was killed due to hangup. */
+    int DEATH_REASON_HANGUP = 7;
 
     /** Called when the payload starts in the VM. */
     void onPayloadStarted(@NonNull VirtualMachine vm, @Nullable ParcelFileDescriptor stream);

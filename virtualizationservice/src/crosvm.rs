@@ -18,9 +18,11 @@ use crate::aidl::VirtualMachineCallbacks;
 use crate::Cid;
 use anyhow::{bail, Error};
 use command_fds::CommandFdExt;
+use lazy_static::lazy_static;
 use log::{debug, error, info};
 use semver::{Version, VersionReq};
 use nix::{fcntl::OFlag, unistd::pipe2};
+use rustutils::system_properties;
 use shared_child::SharedChild;
 use std::fs::{remove_dir_all, File};
 use std::io::{self, Read};
@@ -29,12 +31,15 @@ use std::num::NonZeroU32;
 use std::os::unix::io::{AsRawFd, RawFd, FromRawFd};
 use std::path::PathBuf;
 use std::process::{Command, ExitStatus};
-use std::sync::{Arc, Mutex};
+use std::sync::{Arc, Condvar, Mutex};
+use std::time::Duration;
 use std::thread;
 use vsock::VsockStream;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::DeathReason::DeathReason;
 use android_system_virtualmachineservice::binder::Strong;
-use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
+use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::{
+    IVirtualMachineService, ERROR_HANG_ON_BOOT,
+};
 
 const CROSVM_PATH: &str = "/apex/com.android.virt/bin/crosvm";
 
@@ -50,6 +55,24 @@ const CROSVM_ERROR_STATUS: i32 = 1;
 const CROSVM_REBOOT_STATUS: i32 = 32;
 /// The exit status which crosvm returns when it crashes due to an error.
 const CROSVM_CRASH_STATUS: i32 = 33;
+/// The exit status which crosvm returns when it is killed externally
+const CROSVM_SIGKILL_STATUS: i32 = 137;
+
+lazy_static! {
+    /// If the VM doesn't move to the Started state within this amount time, a hang-up error is
+    /// triggered.
+    static ref BOOT_HANGUP_TIMEOUT: Duration = {
+        match system_properties::read("ro.build.product").unwrap().as_deref() {
+            // Nested virtualization is slow, so we need a longer timeout. Check if we are running
+            // on vsoc as a proxy for this.
+            Some("vsoc_x86_64") | Some("vsoc_x86")  => Duration::from_secs(20),
+            _ => Duration::from_secs(2),
+        }
+    };
+}
+
+/// Maximum attempts for detecting boot hangup.
+const BOOT_HANGUP_TIMEOUT_MAX_ATTEMPTS: i32 = 5;
 
 /// Configuration for a VM to run with crosvm.
 #[derive(Debug)]
@@ -69,6 +92,7 @@ pub struct CrosvmConfig {
     pub log_fd: Option<File>,
     pub indirect_files: Vec<File>,
     pub platform_version: VersionReq,
+    pub detect_hangup: bool,
 }
 
 /// A disk image to pass to crosvm for a VM.
@@ -116,6 +140,7 @@ impl VmState {
     fn start(&mut self, instance: Arc<VmInstance>) -> Result<(), Error> {
         let state = mem::replace(self, VmState::Failed);
         if let VmState::NotStarted { config } = state {
+            let detect_hangup = config.detect_hangup;
             let (failure_pipe_read, failure_pipe_write) = create_pipe()?;
 
             // If this fails and returns an error, `self` will be left in the `Failed` state.
@@ -123,7 +148,7 @@ impl VmState {
 
             let child_clone = child.clone();
             thread::spawn(move || {
-                instance.monitor(child_clone, failure_pipe_read);
+                instance.monitor(child_clone, failure_pipe_read, detect_hangup);
             });
 
             // If it started correctly, update the state.
@@ -162,6 +187,8 @@ pub struct VmInstance {
     pub vm_service: Mutex<Option<Strong<dyn IVirtualMachineService>>>,
     /// The latest lifecycle state which the payload reported itself to be in.
     payload_state: Mutex<PayloadState>,
+    /// Represents the condition that payload_state becomes Started
+    payload_started: Condvar,
 }
 
 impl VmInstance {
@@ -188,6 +215,7 @@ impl VmInstance {
             stream: Mutex::new(None),
             vm_service: Mutex::new(None),
             payload_state: Mutex::new(PayloadState::Starting),
+            payload_started: Condvar::new(),
         })
     }
 
@@ -202,7 +230,44 @@ impl VmInstance {
     ///
     /// This takes a separate reference to the `SharedChild` rather than using the one in
     /// `self.vm_state` to avoid holding the lock on `vm_state` while it is running.
-    fn monitor(&self, child: Arc<SharedChild>, mut failure_pipe_read: File) {
+    fn monitor(&self, child: Arc<SharedChild>, mut failure_pipe_read: File, detect_hangup: bool) {
+        let hungup = if detect_hangup {
+            let mut state = self.payload_state.lock().unwrap();
+            let mut attempts = 0;
+            loop {
+                // Payload start is detected
+                if *state >= PayloadState::Started {
+                    break false;
+                }
+                // Crosvm exit is detected
+                if child.try_wait().is_err() {
+                    error!("Early shutdown of the VM detected");
+                    break false;
+                }
+                // Too many attempts
+                if attempts > BOOT_HANGUP_TIMEOUT_MAX_ATTEMPTS {
+                    error!("Microdroid fails to boot. Giving up");
+                    self.kill();
+                    break true;
+                }
+
+                let result =
+                    self.payload_started.wait_timeout(state, *BOOT_HANGUP_TIMEOUT).unwrap();
+                state = result.0;
+                if result.1.timed_out() {
+                    let msg = format!(
+                        "Microdroid hanged up {} secs on boot. Waiting more...",
+                        BOOT_HANGUP_TIMEOUT.as_secs()
+                    );
+                    error!("{}", msg);
+                    self.callbacks.notify_error(self.cid, ERROR_HANG_ON_BOOT, &msg);
+                }
+                attempts += 1;
+            }
+        } else {
+            false
+        };
+
         let result = child.wait();
         match &result {
             Err(e) => error!("Error waiting for crosvm({}) instance to die: {}", child.id(), e),
@@ -214,14 +279,17 @@ impl VmInstance {
         // Ensure that the mutex is released before calling the callbacks.
         drop(vm_state);
 
-        let mut failure_string = String::new();
-        let failure_read_result = failure_pipe_read.read_to_string(&mut failure_string);
-        if let Err(e) = &failure_read_result {
-            error!("Error reading VM failure reason from pipe: {}", e);
-        }
-        if !failure_string.is_empty() {
-            info!("VM returned failure reason '{}'", failure_string);
-        }
+        let failure_string = if hungup {
+            "HANGUP".to_owned()
+        } else {
+            let mut s = String::new();
+            match failure_pipe_read.read_to_string(&mut s) {
+                Err(e) => error!("Error reading VM failure reason from pipe: {}", e),
+                Ok(len) if len > 0 => info!("VM returned failure reason '{}'", &s),
+                _ => (),
+            };
+            s
+        };
 
         self.callbacks.callback_on_died(self.cid, death_reason(&result, &failure_string));
 
@@ -243,6 +311,9 @@ impl VmInstance {
         // the other direction.
         if new_state > *state_locked {
             *state_locked = new_state;
+            if new_state >= PayloadState::Started {
+                self.payload_started.notify_all();
+            }
             Ok(())
         } else {
             bail!("Invalid payload state transition from {:?} to {:?}", *state_locked, new_state)
@@ -289,6 +360,7 @@ fn death_reason(result: &Result<ExitStatus, io::Error>, failure_reason: &str) ->
             "MICRODROID_UNKNOWN_RUNTIME_ERROR" => {
                 return DeathReason::MICRODROID_UNKNOWN_RUNTIME_ERROR
             }
+            "HANGUP" => return DeathReason::HANGUP,
             _ => {}
         }
         match status.code() {
@@ -297,6 +369,10 @@ fn death_reason(result: &Result<ExitStatus, io::Error>, failure_reason: &str) ->
             Some(CROSVM_ERROR_STATUS) => DeathReason::ERROR,
             Some(CROSVM_REBOOT_STATUS) => DeathReason::REBOOT,
             Some(CROSVM_CRASH_STATUS) => DeathReason::CRASH,
+            Some(CROSVM_SIGKILL_STATUS) => match failure_reason {
+                "HANGUP" => DeathReason::HANGUP,
+                _ => DeathReason::UNKNOWN,
+            },
             Some(_) => DeathReason::UNKNOWN,
         }
     } else {
