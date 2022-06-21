@@ -156,16 +156,23 @@ fn get_vms_rpc_binder() -> Result<Strong<dyn IVirtualMachineService>> {
 }
 
 fn main() {
-    if let Err(e) = try_main() {
+    let exit_code = if let Err(e) = try_main() {
         error!("Failed with {:?}. Shutting down...", e);
         if let Err(e) = write_death_reason_to_serial(&e) {
             error!("Failed to write death reason {:?}", e);
         }
-        if let Err(e) = system_properties::write("sys.powerctl", "shutdown") {
-            error!("failed to shutdown {:?}", e);
-        }
-        std::process::exit(1);
+        1
+    } else {
+        info!("Successfully finished the payload. Shutting down...");
+        // We don't write anything to serial. virtualizationservice then parses the exit code.
+        0
+    };
+
+    if let Err(e) = system_properties::write("sys.powerctl", "shutdown") {
+        error!("failed to shutdown {:?}", e);
     }
+
+    std::process::exit(exit_code);
 }
 
 fn try_main() -> Result<()> {
