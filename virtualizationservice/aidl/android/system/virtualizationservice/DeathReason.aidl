@@ -34,22 +34,24 @@ enum DeathReason {
     REBOOT = 5,
     /** The VM or crosvm crashed. */
     CRASH = 6,
+    /** The VM killed due to hangup */
+    HANGUP = 7,
     /** The pVM firmware failed to verify the VM because the public key doesn't match. */
-    PVM_FIRMWARE_PUBLIC_KEY_MISMATCH = 7,
+    PVM_FIRMWARE_PUBLIC_KEY_MISMATCH = 8,
     /** The pVM firmware failed to verify the VM because the instance image changed. */
-    PVM_FIRMWARE_INSTANCE_IMAGE_CHANGED = 8,
+    PVM_FIRMWARE_INSTANCE_IMAGE_CHANGED = 9,
     /** The bootloader failed to verify the VM because the public key doesn't match. */
-    BOOTLOADER_PUBLIC_KEY_MISMATCH = 9,
+    BOOTLOADER_PUBLIC_KEY_MISMATCH = 10,
     /** The bootloader failed to verify the VM because the instance image changed. */
-    BOOTLOADER_INSTANCE_IMAGE_CHANGED = 10,
+    BOOTLOADER_INSTANCE_IMAGE_CHANGED = 11,
     /** The microdroid failed to connect to VirtualizationService's RPC server. */
-    MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE = 11,
+    MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE = 12,
     /** The payload for microdroid is changed. */
-    MICRODROID_PAYLOAD_HAS_CHANGED = 12,
+    MICRODROID_PAYLOAD_HAS_CHANGED = 13,
     /** The microdroid failed to verify given payload APK. */
-    MICRODROID_PAYLOAD_VERIFICATION_FAILED = 13,
+    MICRODROID_PAYLOAD_VERIFICATION_FAILED = 14,
     /** The VM config for microdroid is invalid (e.g. missing tasks). */
-    MICRODROID_INVALID_PAYLOAD_CONFIG = 14,
+    MICRODROID_INVALID_PAYLOAD_CONFIG = 15,
     /** There was a runtime error while running microdroid manager. */
-    MICRODROID_UNKNOWN_RUNTIME_ERROR = 15,
+    MICRODROID_UNKNOWN_RUNTIME_ERROR = 16,
 }
