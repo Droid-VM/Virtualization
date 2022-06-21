@@ -36,6 +36,8 @@ use android_system_virtualizationservice::{
         ParcelFileDescriptor, Result as BinderResult, StatusCode, Strong,
     },
 };
+use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::ERROR_HANG_ON_BOOT;
+
 use log::warn;
 use std::{
     fmt::{self, Debug, Formatter},
@@ -215,8 +217,15 @@ impl IVirtualMachineCallback for VirtualMachineCallback {
         Ok(())
     }
 
-    fn onError(&self, _cid: i32, _error_code: i32, _message: &str) -> BinderResult<()> {
-        self.state.notify_state(VirtualMachineState::FINISHED);
+    fn onError(&self, _cid: i32, error_code: i32, _message: &str) -> BinderResult<()> {
+        match error_code {
+            // Don't transition to the FINISHED state upon ERROR_HANG_ON_BOOT. The device might
+            // just be experiencing a temporary slowdown. If this is a true hangup, the
+            // virtualization service will kill the VM and then we will be notified via onDied
+            // below.
+            ERROR_HANG_ON_BOOT => (),
+            _ => self.state.notify_state(VirtualMachineState::FINISHED),
+        }
         Ok(())
     }
 

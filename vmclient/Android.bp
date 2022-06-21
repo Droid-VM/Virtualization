@@ -9,6 +9,7 @@ rust_library {
     edition: "2021",
     rustlibs: [
         "android.system.virtualizationservice-rust",
+        "android.system.virtualmachineservice-rust",
         "libbinder_rpc_unstable_bindgen",
         "libbinder_rs",
         "liblog_rust",
