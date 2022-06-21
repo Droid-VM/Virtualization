@@ -18,10 +18,15 @@ use crate::aidl::VirtualMachineCallbacks;
 use crate::Cid;
 use anyhow::{bail, Error};
 use command_fds::CommandFdExt;
-use log::{debug, error, info};
-use semver::{Version, VersionReq};
+use log::{debug, error, info, trace, warn};
 use nix::{fcntl::OFlag, unistd::pipe2};
+use semver::{Version, VersionReq};
 use shared_child::SharedChild;
+
+use statslog_virtualization_rust::{
+    vm_booted,
+    vm_exited
+};
 use std::fs::{remove_dir_all, File};
 use std::io::{self, Read};
 use std::mem;
@@ -128,6 +133,9 @@ impl VmState {
 
             // If it started correctly, update the state.
             *self = VmState::Running { child };
+
+            // VmBooted stat record
+            write_vm_booted_stats();
             Ok(())
         } else {
             *self = state;
@@ -208,6 +216,9 @@ impl VmInstance {
             Err(e) => error!("Error waiting for crosvm({}) instance to die: {}", child.id(), e),
             Ok(status) => info!("crosvm({}) exited with status {}", child.id(), status),
         }
+
+        // VmExited stat record
+        write_vm_exited_stats();
 
         let mut vm_state = self.vm_state.lock().unwrap();
         *vm_state = VmState::Dead;
@@ -452,4 +463,24 @@ fn create_pipe() -> Result<(File, File), Error> {
     let read_fd = unsafe { File::from_raw_fd(raw_read) };
     let write_fd = unsafe { File::from_raw_fd(raw_write) };
     Ok((read_fd, write_fd))
+}
+
+/// Write the stats of VmBooted to statsd
+fn write_vm_booted_stats() {
+    match vm_booted::stats_write() {
+        Err(e) => {
+            warn!("statslog_rust failed with error: {}", e);
+        }
+        Ok(_) => trace!("statslog_rust succeeded for virtualization service"),
+    }
+}
+
+/// Write the stats of VmExited to statsd
+fn write_vm_exited_stats() {
+    match vm_exited::stats_write() {
+        Err(e) => {
+            warn!("statslog_rust failed with error: {}", e);
+        }
+        Ok(_) => trace!("statslog_rust succeeded for virtualization service"),
+    }
 }
