@@ -111,6 +111,14 @@ impl VmInstance {
         self.state.wait_while(|state| state.death_reason.is_none()).unwrap().death_reason.unwrap()
     }
 
+    /// Blocks until the VM or the VirtualizationService itself dies, or the given timeout expires.
+    /// Returns the reason why it died if it did so.
+    pub fn wait_for_death_with_timeout(&self, timeout: Duration) -> Option<DeathReason> {
+        let (state, _) =
+            self.state.wait_timeout_while(timeout, |state| state.death_reason.is_none()).unwrap();
+        state.death_reason
+    }
+
     /// Waits until the VM reports that it is ready.
     ///
     /// Returns an error if the VM dies first, or the `timeout` elapses before the VM is ready.
@@ -133,7 +141,7 @@ impl VmInstance {
     }
 
     /// Tries to connect to an RPC Binder service provided by the VM on the given vsock port.
-    pub fn get_service<T: FromIBinder + ?Sized>(
+    pub fn connect_service<T: FromIBinder + ?Sized>(
         &self,
         port: u32,
     ) -> Result<Strong<T>, GetServiceError> {
