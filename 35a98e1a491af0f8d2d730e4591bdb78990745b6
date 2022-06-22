@@ -166,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "849ab950_b8c1fd91",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-06-22T16:19:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ab7de72a_66ade3f2",
+      "range": {
+        "startLine": 47,
+        "startChar": 23,
+        "endLine": 47,
+        "endChar": 30
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79293cba_7e443b40",
@@ -179,6 +203,30 @@
       "writtenOn": "2022-06-22T14:52:14Z",
       "side": 1,
       "message": "OOC, why isn\u0027t this a method in VbMetaImage which returns Result\u003cOption\u003cVec\u003cu8\u003e\u003e?",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 1
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2940d045_2581daee",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-06-22T16:19:48Z",
+      "side": 1,
+      "message": "This logic is specific to the use of the vbmeta image by APEXs. From what I\u0027ve seen, an APEX assumes the root digest for the apex_payload.img comes from the first hashtree descriptor in the descriptor list, regardless of partition name etc., so it\u0027s been left behind in the APEX library.",
+      "parentUuid": "79293cba_7e443b40",
       "range": {
         "startLine": 86,
         "startChar": 0,
@@ -260,6 +308,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b86d6d2a_c5084885",
+        "filename": "libs/vbmeta/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-06-22T16:19:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27caaed6_e3541ba9",
+      "range": {
+        "startLine": 10,
+        "startChar": 4,
+        "endLine": 10,
+        "endChar": 22
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e89723a_6d788855",
@@ -283,6 +355,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0b09722_f3d4890c",
+        "filename": "libs/vbmeta/src/descriptor.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-06-22T16:19:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e89723a_6d788855",
+      "range": {
+        "startLine": 101,
+        "startChar": 11,
+        "endLine": 101,
+        "endChar": 15
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f1e91b3_315e7b1a",
@@ -296,6 +392,30 @@
       "writtenOn": "2022-06-22T10:57:58Z",
       "side": 1,
       "message": "This is new, I think? Is there a use case for such a file?\n\nShould there be some unit tests here, at least for verify_reader_region?",
+      "range": {
+        "startLine": 85,
+        "startChar": 11,
+        "endLine": 85,
+        "endChar": 22
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63738fa2_b1552d9a",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-06-22T16:19:48Z",
+      "side": 1,
+      "message": "I\u0027ve added a few smoke tests that make use of it, and I\u0027m using it in an upcoming CL.",
+      "parentUuid": "8f1e91b3_315e7b1a",
       "range": {
         "startLine": 85,
         "startChar": 11,
@@ -352,6 +472,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9607ca4e_d355b8be",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-06-22T16:19:48Z",
+      "side": 1,
+      "message": "The arguments to this function are assumed to be trusted. But the values in the footer are not so I\u0027ve added some validation that it points to within the expected region of the reader, which was missing from the original code.",
+      "parentUuid": "2447286f_d0414d16",
+      "range": {
+        "startLine": 98,
+        "startChar": 35,
+        "endLine": 98,
+        "endChar": 48
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5446b4d9_f278cf2a",
@@ -365,6 +509,30 @@
       "writtenOn": "2022-06-22T10:57:58Z",
       "side": 1,
       "message": "Why would the final size be different from the original size?",
+      "range": {
+        "startLine": 120,
+        "startChar": 22,
+        "endLine": 120,
+        "endChar": 44
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "975e4c58_a7751c04",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-06-22T16:19:48Z",
+      "side": 1,
+      "message": "The details in the footer are unverified and just give an indication where to find the real vbmeta struct. The true size is calculated here after the image, including size values, have been verified and validated. I\u0027ll add a comment to explain it\u0027s calculating the real size of the verified data.",
+      "parentUuid": "5446b4d9_f278cf2a",
       "range": {
         "startLine": 120,
         "startChar": 22,
@@ -398,6 +566,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80f9a7f3_5decce8e",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-06-22T16:19:48Z",
+      "side": 1,
+      "message": "Yes https://source.corp.google.com/android/external/avb/libavb/avb_vbmeta_image.c;l\u003d150",
+      "parentUuid": "190f8a9a_aff0d803",
+      "range": {
+        "startLine": 127,
+        "startChar": 11,
+        "endLine": 127,
+        "endChar": 81
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "385e33a5_caef1d33",
@@ -421,6 +613,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b1b4587_6fb042a4",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-06-22T16:19:48Z",
+      "side": 1,
+      "message": "The VbMetaImage struct saves a byte-swapped header in order to be able to easily access any of the fields. I need other fields in future [1]. Since the header describes where the public key is, there\u0027s not much benefit from having specially saving the pointer from `avb_vbmeta_image_verify()` that\u0027s calculated in the same way [2] as a convenience so you don\u0027t _have_ to byte-swap the header.\n\n[1] -- https://android-review.googlesource.com/c/platform/packages/modules/Virtualization/+/2104929/11/libs/vbmeta/src/lib.rs#140\n[2] -- https://source.corp.google.com/android/external/avb/libavb/avb_vbmeta_image.c;l\u003d229",
+      "parentUuid": "385e33a5_caef1d33",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 63
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d5b99bf_16d72f26",
@@ -434,6 +650,30 @@
       "writtenOn": "2022-06-22T10:57:58Z",
       "side": 1,
       "message": "Add \", if present, \" ?",
+      "range": {
+        "startLine": 173,
+        "startChar": 17,
+        "endLine": 173,
+        "endChar": 29
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c1ddd62_5ee462b0",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-06-22T16:19:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d5b99bf_16d72f26",
       "range": {
         "startLine": 173,
         "startChar": 17,
@@ -480,6 +720,30 @@
       "writtenOn": "2022-06-22T14:52:14Z",
       "side": 1,
       "message": "The existence of the magic doesn\u0027t necessary tell that this was an avb footer. So I think None is the right answer.",
+      "parentUuid": "123d461b_d3044f52",
+      "range": {
+        "startLine": 193,
+        "startChar": 8,
+        "endLine": 193,
+        "endChar": 16
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f340675a_d30bd945",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-06-22T16:19:48Z",
+      "side": 1,
+      "message": "It hasn\u0027t been in avb_slot_verify.c [1], there they fallback assuming the VBMeta image is at the start which is the behaviour being mimicked here.\n\n[1] -- http://cs/android/external/avb/libavb/avb_slot_verify.c;l\u003d662;rcl\u003dbc496fc70af3ca89c79877854e05b30e8ace5d4c",
       "parentUuid": "123d461b_d3044f52",
       "range": {
         "startLine": 193,
