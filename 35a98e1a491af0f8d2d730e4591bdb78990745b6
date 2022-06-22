@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ab35b12e_245fd5ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-06-22T08:22:26Z",
+      "side": 1,
+      "message": "It does use libavb in a different way to provide and isn\u0027t specialised to the APEX case as it was before. For libapexutil it still verifies, returns the public key and extracts the root digest from the first hashtree descriptor. I\u0027m not sure splitting would make it easier to review as the second change would still be basically the same rewrite. I\u0027ll call on Alan who owes me at least one compound refactoring review.",
+      "parentUuid": "2a93b9ac_c1c931d0",
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "61ee505f_ec651242",
         "filename": "libs/apexutil/src/lib.rs",
         "patchSetId": 5
@@ -31,6 +49,30 @@
       "writtenOn": "2022-06-22T07:16:13Z",
       "side": 1,
       "message": "This is new to me. Just for my own education, could you share a link to this attribute?",
+      "range": {
+        "startLine": 47,
+        "startChar": 23,
+        "endLine": 47,
+        "endChar": 30
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c0474ec_76135fb0",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-06-22T08:22:26Z",
+      "side": 1,
+      "message": "It\u0027s comes from the thiserror [1] crate which is recommended, over anyhow, for errors that will be consumed by code rather than humans. The attribute causes some conversion functions to be generated.\n\n[1] -- https://docs.rs/thiserror/latest/thiserror/",
+      "parentUuid": "61ee505f_ec651242",
       "range": {
         "startLine": 47,
         "startChar": 23,
