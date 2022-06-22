@@ -142,6 +142,53 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b7c8fd3_0404c130",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-06-22T14:52:14Z",
+      "side": 1,
+      "message": "Got it. Thanks!",
+      "parentUuid": "3c0474ec_76135fb0",
+      "range": {
+        "startLine": 47,
+        "startChar": 23,
+        "endLine": 47,
+        "endChar": 30
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79293cba_7e443b40",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-06-22T14:52:14Z",
+      "side": 1,
+      "message": "OOC, why isn\u0027t this a method in VbMetaImage which returns Result\u003cOption\u003cVec\u003cu8\u003e\u003e?",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 1
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27caaed6_e3541ba9",
@@ -155,6 +202,30 @@
       "writtenOn": "2022-06-22T10:57:58Z",
       "side": 1,
       "message": "Use of this seems to be discouraged for libraries (http://cs/android-internal/build/soong/rust/compiler.go?rcl\u003da76acba5537fdde58cb79d3d0cf5cb5a259b631b\u0026l\u003d162) - the choice should be made by the top-level entity.",
+      "range": {
+        "startLine": 10,
+        "startChar": 4,
+        "endLine": 10,
+        "endChar": 22
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f376ba41_6cbfda12",
+        "filename": "libs/vbmeta/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-06-22T14:52:14Z",
+      "side": 1,
+      "message": "+1\n\nlibapexutil_rust which depends on this library already has `prefer_rlib: true` there, so I don\u0027t think this line is needed. Did you actually need this?",
+      "parentUuid": "27caaed6_e3541ba9",
       "range": {
         "startLine": 10,
         "startChar": 4,
@@ -362,6 +433,30 @@
       "writtenOn": "2022-06-22T10:57:58Z",
       "side": 1,
       "message": "If the magic is present but the validation fails, should that be an error?",
+      "range": {
+        "startLine": 193,
+        "startChar": 8,
+        "endLine": 193,
+        "endChar": 16
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e33fe4d6_bf23c45f",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-06-22T14:52:14Z",
+      "side": 1,
+      "message": "The existence of the magic doesn\u0027t necessary tell that this was an avb footer. So I think None is the right answer.",
+      "parentUuid": "123d461b_d3044f52",
       "range": {
         "startLine": 193,
         "startChar": 8,
