@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a02af2b5_1ec5b08d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T14:30:11Z",
+      "side": 1,
+      "message": "I take the point, but adding it (with a sensible default) seems harmless, and testability is a good thing in itself.",
+      "parentUuid": "94de4ed6_e4d65125",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 42
+      },
+      "revId": "2fe0c94911ca33918065aa1c474eb214bed059e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d0045e7_02126eb2",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "These (actually everything from aidl) are internal to AVF and shouldn\u0027t be exposed to the users. Currently, they aren\u0027t, but I\u0027ve filed a bug to make sure that it\u0027s the case. b/236811123",
       "parentUuid": "4d0045e7_02126eb2",
+      "range": {
+        "startLine": 40,
+        "startChar": 39,
+        "endLine": 40,
+        "endChar": 40
+      },
+      "revId": "2fe0c94911ca33918065aa1c474eb214bed059e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5326d8c3_3cf9e0c0",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/DeathReason.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T14:30:11Z",
+      "side": 1,
+      "message": "I left a comment on the bug.\nUnfortunately we have shipped code that logs the numeric values. We should fix that, but I still think we shouldn\u0027t renumber here.",
+      "parentUuid": "62604281_a4010e3c",
       "range": {
         "startLine": 40,
         "startChar": 39,

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6361e10c_1a94594e",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T14:30:11Z",
+      "side": 1,
+      "message": "nit: You could use Cow::from to avoid allocation here",
+      "range": {
+        "startLine": 272,
+        "startChar": 12,
+        "endLine": 272,
+        "endChar": 31
+      },
+      "revId": "5c53d366aeba9ead5d78c5b40c560ab90033bf19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
