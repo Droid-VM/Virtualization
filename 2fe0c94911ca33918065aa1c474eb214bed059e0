@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72e3a15f_fb4dca2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T11:27:53Z",
+      "side": 1,
+      "message": "How should the client handle it?\n\nOver on b/236451404#comment20 you said the client should wait for onDied to make sure logs are complete.\n\nAnd the client doesn\u0027t know why the start is slow either, it can\u0027t really make any decision.\n\nI\u0027d suggest a single reasonably generous timeout without the extra looping.\n\nThis is until we\u0027ve exec\u0027d the payload, so doesn\u0027t include any time taken by the payload to be ready, right?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 41
+      },
+      "revId": "2fe0c94911ca33918065aa1c474eb214bed059e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d47ed18_9395d5e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T11:27:53Z",
+      "side": 1,
+      "message": "Maybe that\u0027s an argument for making the timeout overridable by the client, with a sensible default?",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 42
+      },
+      "revId": "2fe0c94911ca33918065aa1c474eb214bed059e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d0045e7_02126eb2",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/DeathReason.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T11:27:53Z",
+      "side": 1,
+      "message": "Renumbering these seems likely to introduce confusion, e.g. when trying to interpret logs from a different version.\nCan we just make Hangup \u003d 16 and live with the lack of monotonicity?",
+      "range": {
+        "startLine": 40,
+        "startChar": 39,
+        "endLine": 40,
+        "endChar": 40
+      },
+      "revId": "2fe0c94911ca33918065aa1c474eb214bed059e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2676bda1_20f1c3ae",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T11:27:53Z",
+      "side": 1,
+      "message": "Extract this as isVirtualizationNested ?\n(Ideally we\u0027d put this in some common place. packages/modules/Virtualization/compos/common/timeouts.rs is compos-specific though.)",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 43
+      },
+      "revId": "2fe0c94911ca33918065aa1c474eb214bed059e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb8298d0_76bd5c25",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T11:27:53Z",
+      "side": 1,
+      "message": "Maybe\nlet (state, wait_result) \u003d",
+      "range": {
+        "startLine": 254,
+        "startChar": 16,
+        "endLine": 254,
+        "endChar": 27
+      },
+      "revId": "2fe0c94911ca33918065aa1c474eb214bed059e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "420ee55a_0abb2b1c",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T11:27:53Z",
+      "side": 1,
+      "message": "Nit: This doesn\u0027t quite read right, but I can\u0027t find a better formulation (hanged vs hung is complicated).\nMaybe just avoid it: \"Microdroid hasn\u0027t started after ... \"",
+      "range": {
+        "startLine": 259,
+        "startChar": 25,
+        "endLine": 259,
+        "endChar": 45
+      },
+      "revId": "2fe0c94911ca33918065aa1c474eb214bed059e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaa66937_a6093aa3",
+        "filename": "vmclient/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T11:27:53Z",
+      "side": 1,
+      "message": "If we\u0027re going to effectively ignore this anyway, let\u0027s not deliver it to the client? It needs to be logged somewhere, but that isn\u0027t here.",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 21
+      },
+      "revId": "2fe0c94911ca33918065aa1c474eb214bed059e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
