@@ -239,6 +239,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "639b40f1_0eff58e1",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T16:55:49Z",
+      "side": 1,
+      "message": "Worth a comment?",
+      "parentUuid": "2940d045_2581daee",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 1
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27caaed6_e3541ba9",
         "filename": "libs/vbmeta/Android.bp",
         "patchSetId": 5
@@ -745,6 +769,30 @@
       "side": 1,
       "message": "It hasn\u0027t been in avb_slot_verify.c [1], there they fallback assuming the VBMeta image is at the start which is the behaviour being mimicked here.\n\n[1] -- http://cs/android/external/avb/libavb/avb_slot_verify.c;l\u003d662;rcl\u003dbc496fc70af3ca89c79877854e05b30e8ace5d4c",
       "parentUuid": "123d461b_d3044f52",
+      "range": {
+        "startLine": 193,
+        "startChar": 8,
+        "endLine": 193,
+        "endChar": 16
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "251421d0_96a8abb2",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T16:55:49Z",
+      "side": 1,
+      "message": "It looks like avb_footer_validate_and_byteswap can only fail if the magic is wrong (which you already checkd) or the version is larger than we know about.\nI\u0027m not entirely convinced that treating the latter as equivalent to having no footer, but there\u0027s nothing much else we can do.",
+      "parentUuid": "f340675a_d30bd945",
       "range": {
         "startLine": 193,
         "startChar": 8,
