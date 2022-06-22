@@ -36,6 +36,41 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0b0f07f_051d24c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T10:57:58Z",
+      "side": 1,
+      "message": "Oof.",
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44512f9f_384859e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T10:57:58Z",
+      "side": 1,
+      "message": "lol",
+      "parentUuid": "ab35b12e_245fd5ea",
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61ee505f_ec651242",
@@ -78,6 +113,260 @@
         "startChar": 23,
         "endLine": 47,
         "endChar": 30
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab7de72a_66ade3f2",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T10:57:58Z",
+      "side": 1,
+      "message": "thiserror is recommended for libraries in go/android-rust-style.\n(I\u0027ve been largely ignoring it because the only libraries I\u0027ve written have been intended for purely local use, and anyhow is cool.)",
+      "parentUuid": "3c0474ec_76135fb0",
+      "range": {
+        "startLine": 47,
+        "startChar": 23,
+        "endLine": 47,
+        "endChar": 30
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27caaed6_e3541ba9",
+        "filename": "libs/vbmeta/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T10:57:58Z",
+      "side": 1,
+      "message": "Use of this seems to be discouraged for libraries (http://cs/android-internal/build/soong/rust/compiler.go?rcl\u003da76acba5537fdde58cb79d3d0cf5cb5a259b631b\u0026l\u003d162) - the choice should be made by the top-level entity.",
+      "range": {
+        "startLine": 10,
+        "startChar": 4,
+        "endLine": 10,
+        "endChar": 22
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e89723a_6d788855",
+        "filename": "libs/vbmeta/src/descriptor.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T10:57:58Z",
+      "side": 1,
+      "message": "Maybe implement into_iter too?",
+      "range": {
+        "startLine": 101,
+        "startChar": 11,
+        "endLine": 101,
+        "endChar": 15
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f1e91b3_315e7b1a",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T10:57:58Z",
+      "side": 1,
+      "message": "This is new, I think? Is there a use case for such a file?\n\nShould there be some unit tests here, at least for verify_reader_region?",
+      "range": {
+        "startLine": 85,
+        "startChar": 11,
+        "endLine": 85,
+        "endChar": 22
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1df0e603_af4f338d",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T10:57:58Z",
+      "side": 1,
+      "message": "I don\u0027t think I realized that a constructor was valid as a function",
+      "range": {
+        "startLine": 86,
+        "startChar": 44,
+        "endLine": 86,
+        "endChar": 69
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2447286f_d0414d16",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T10:57:58Z",
+      "side": 1,
+      "message": "Should we be using checked_add for all of these offset computations?",
+      "range": {
+        "startLine": 98,
+        "startChar": 35,
+        "endLine": 98,
+        "endChar": 48
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5446b4d9_f278cf2a",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T10:57:58Z",
+      "side": 1,
+      "message": "Why would the final size be different from the original size?",
+      "range": {
+        "startLine": 120,
+        "startChar": 22,
+        "endLine": 120,
+        "endChar": 44
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "190f8a9a_aff0d803",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T10:57:58Z",
+      "side": 1,
+      "message": "Is this check equivalent to checking for AVB_VBMETA_VERIFY_RESULT_OK_NOT_SIGNED? (The documentation is slightly unclear.)\nIt would be awkward if we returned the key even when the signature wasn\u0027t actually present.",
+      "range": {
+        "startLine": 127,
+        "startChar": 11,
+        "endLine": 127,
+        "endChar": 81
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "385e33a5_caef1d33",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T10:57:58Z",
+      "side": 1,
+      "message": "Any particular reason for computing this here, rather than saving the offset + size from avb_vbmeta_image_verify below?",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 63
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d5b99bf_16d72f26",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T10:57:58Z",
+      "side": 1,
+      "message": "Add \", if present, \" ?",
+      "range": {
+        "startLine": 173,
+        "startChar": 17,
+        "endLine": 173,
+        "endChar": 29
+      },
+      "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "123d461b_d3044f52",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-06-22T10:57:58Z",
+      "side": 1,
+      "message": "If the magic is present but the validation fails, should that be an error?",
+      "range": {
+        "startLine": 193,
+        "startChar": 8,
+        "endLine": 193,
+        "endChar": 16
       },
       "revId": "35a98e1a491af0f8d2d730e4591bdb78990745b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
