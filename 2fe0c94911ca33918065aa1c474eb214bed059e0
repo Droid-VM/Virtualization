@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43242f12_be3450d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-06-22T14:06:13Z",
+      "side": 1,
+      "message": "Done. Removed the extra looping and the early reporting via onError. Now, hangup only triggers onDied.",
+      "parentUuid": "72e3a15f_fb4dca2e",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 41
+      },
+      "revId": "2fe0c94911ca33918065aa1c474eb214bed059e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d47ed18_9395d5e0",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-06-22T11:27:53Z",
       "side": 1,
       "message": "Maybe that\u0027s an argument for making the timeout overridable by the client, with a sensible default?",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 42
+      },
+      "revId": "2fe0c94911ca33918065aa1c474eb214bed059e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94de4ed6_e4d65125",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-06-22T14:06:13Z",
+      "side": 1,
+      "message": "Well, apart from teatability, I still don\u0027t think such a flexbility is needed because the timeout value shall be dependent on Microdroid and the device, not the app. So if any flexibility is needed, I guess it would be from a device-specific configuration (e.g. /vendor/etc/avf.conf), which should be a separate bug.",
+      "parentUuid": "5d47ed18_9395d5e0",
       "range": {
         "startLine": 24,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62604281_a4010e3c",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/DeathReason.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-06-22T14:06:13Z",
+      "side": 1,
+      "message": "These (actually everything from aidl) are internal to AVF and shouldn\u0027t be exposed to the users. Currently, they aren\u0027t, but I\u0027ve filed a bug to make sure that it\u0027s the case. b/236811123",
+      "parentUuid": "4d0045e7_02126eb2",
+      "range": {
+        "startLine": 40,
+        "startChar": 39,
+        "endLine": 40,
+        "endChar": 40
+      },
+      "revId": "2fe0c94911ca33918065aa1c474eb214bed059e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2676bda1_20f1c3ae",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-06-22T11:27:53Z",
       "side": 1,
       "message": "Extract this as isVirtualizationNested ?\n(Ideally we\u0027d put this in some common place. packages/modules/Virtualization/compos/common/timeouts.rs is compos-specific though.)",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 43
+      },
+      "revId": "2fe0c94911ca33918065aa1c474eb214bed059e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baff00c7_b634fb8d",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-06-22T14:06:13Z",
+      "side": 1,
+      "message": "Done, but I didn\u0027t move this into a common shared library, which could be done later when we actually see some duplications around different modules.",
+      "parentUuid": "2676bda1_20f1c3ae",
       "range": {
         "startLine": 66,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12f279f3_f32ab5c2",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-06-22T14:06:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb8298d0_76bd5c25",
+      "range": {
+        "startLine": 254,
+        "startChar": 16,
+        "endLine": 254,
+        "endChar": 27
+      },
+      "revId": "2fe0c94911ca33918065aa1c474eb214bed059e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "420ee55a_0abb2b1c",
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2ace4db_cfebac76",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-06-22T14:06:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "420ee55a_0abb2b1c",
+      "range": {
+        "startLine": 259,
+        "startChar": 25,
+        "endLine": 259,
+        "endChar": 45
+      },
+      "revId": "2fe0c94911ca33918065aa1c474eb214bed059e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aaa66937_a6093aa3",
@@ -152,6 +296,30 @@
       "writtenOn": "2022-06-22T11:27:53Z",
       "side": 1,
       "message": "If we\u0027re going to effectively ignore this anyway, let\u0027s not deliver it to the client? It needs to be logged somewhere, but that isn\u0027t here.",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 21
+      },
+      "revId": "2fe0c94911ca33918065aa1c474eb214bed059e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff7f5b60_ee63800d",
+        "filename": "vmclient/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-06-22T14:06:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aaa66937_a6093aa3",
       "range": {
         "startLine": 222,
         "startChar": 0,
