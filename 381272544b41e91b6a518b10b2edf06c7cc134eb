@@ -16,6 +16,23 @@
       "message": "```\nError: make_vbmeta_image\n\nCaused by:\n    No such file or directory (os error 2)\n```\n\nsuggests it isn\u0027t finding avbtool, so I\u0027m trying it with the current directory explicitly as that\u0027s where the data build rule should copy it to.",
       "revId": "381272544b41e91b6a518b10b2edf06c7cc134eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7484fc99_56e65c51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-06-23T13:52:38Z",
+      "side": 1,
+      "message": "That seemed to do the trick.. Can\u0027t say I fully understand and would be able to get it right next time, but hey",
+      "revId": "381272544b41e91b6a518b10b2edf06c7cc134eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
