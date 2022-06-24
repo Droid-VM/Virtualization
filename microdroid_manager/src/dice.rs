@@ -24,6 +24,7 @@ use keystore2_crypto::ZVec;
 use libc::{c_void, mmap, munmap, MAP_FAILED, MAP_PRIVATE, PROT_READ};
 use openssl::hkdf::hkdf;
 use openssl::md::Md;
+use openssl::pkey::{Id, PKey, Private};
 use std::fs;
 use std::os::unix::io::AsRawFd;
 use std::path::{Path, PathBuf};
@@ -36,6 +37,14 @@ pub struct DiceContext {
     pub cdi_attest: [u8; CDI_SIZE],
     pub cdi_seal: [u8; CDI_SIZE],
     pub bcc: Vec<u8>,
+}
+
+impl DiceContext {
+    pub fn attestation_key(&self) -> Result<PKey<Private>> {
+        let seed = OpenDiceCborContext::new().derive_cdi_private_key_seed(&self.cdi_attest)?;
+        let key = PKey::private_key_from_raw_bytes(&seed, Id::ED25519)?;
+        Ok(key)
+    }
 }
 
 /// Artifacts that are mapped into the process address space from the driver.

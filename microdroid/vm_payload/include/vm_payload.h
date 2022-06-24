@@ -73,6 +73,10 @@ bool AVmPayload_getDiceAttestationChain(void *data, size_t size, size_t *total);
  */
 bool AVmPayload_getDiceAttestationCdi(void *data, size_t size, size_t *total);
 
+size_t AVmPayload_getRemotelyAttestedCertificate(const void *public_key, size_t public_key_size,
+                                                 const void *challenge, size_t challenge_size,
+                                                 void *certificate, size_t size);
+
 #ifdef __cplusplus
 } // extern "C"
 #endif

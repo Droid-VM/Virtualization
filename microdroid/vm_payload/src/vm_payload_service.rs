@@ -149,6 +149,44 @@ fn try_get_dice_attestation_cdi() -> Result<Vec<u8>> {
     get_vm_payload_service()?.getDiceAttestationCdi().context("Cannot get attestation CDI")
 }
 
+/// TODO
+///
+/// # Safety
+///
+/// The data must be size bytes big.
+#[no_mangle]
+pub unsafe extern "C" fn AVmPayload_getRemotelyAttestedCertificate(
+    public_key: *const u8,
+    public_key_size: usize,
+    challenge: *const u8,
+    challenge_size: usize,
+    data: *mut u8,
+    size: usize,
+) -> usize {
+    let public_key = std::slice::from_raw_parts(public_key, public_key_size);
+    let challenge = std::slice::from_raw_parts(challenge, challenge_size);
+    match try_get_remotely_attested_certificate(public_key, challenge) {
+        Err(e) => {
+            error!("{:?}", e);
+            0
+        }
+        Ok(certificate) => {
+            if size < certificate.len() {
+                0
+            } else {
+                std::ptr::copy_nonoverlapping(certificate.as_ptr(), data, certificate.len());
+                certificate.len()
+            }
+        }
+    }
+}
+
+fn try_get_remotely_attested_certificate(public_key: &[u8], challenge: &[u8]) -> Result<Vec<u8>> {
+    get_vm_payload_service()?
+        .getRemotelyAttestedCertificate(public_key, challenge)
+        .context("Cannot get remotely attested certificate")
+}
+
 fn get_vm_payload_service() -> Result<Strong<dyn IVmPayloadService>> {
     wait_for_interface(VM_PAYLOAD_SERVICE_NAME)
         .context(format!("Failed to connect to service: {}", VM_PAYLOAD_SERVICE_NAME))

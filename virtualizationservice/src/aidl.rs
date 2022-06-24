@@ -21,6 +21,7 @@ use crate::atom::{
 use crate::composite::make_composite_image;
 use crate::crosvm::{CrosvmConfig, DiskFile, PayloadState, VmInstance, VmState};
 use crate::payload::{add_microdroid_payload_images, add_microdroid_system_images};
+use crate::rkpvm::get_remotely_attested_certificate;
 use crate::selinux::{getfilecon, SeContext};
 use crate::{Cid, FIRST_GUEST_CID, SYSPROP_LAST_CID};
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
@@ -1171,6 +1172,18 @@ impl IVirtualMachineService for VirtualMachineService {
                 Some(format!("cannot find a VM with CID {}", cid)),
             ))
         }
+    }
+
+    fn getRemotelyAttestedCertificate(
+        &self,
+        dice_cert_chain: &[u8],
+        key_to_sign: &[u8],
+        challenge: &[u8],
+    ) -> binder::Result<Vec<u8>> {
+        info!("got a request for rkpvm");
+        get_remotely_attested_certificate(dice_cert_chain, key_to_sign, challenge).map_err(|e| {
+            Status::new_exception_str(ExceptionCode::ILLEGAL_STATE, Some(e.to_string()))
+        })
     }
 }
 

@@ -68,4 +68,20 @@ interface IVirtualMachineService {
      * Notifies the current memory status of the VM.
      */
     void notifyMemStatus(in VirtualMachineMemStatus memStatus);
+
+    /**
+     * Requests a remotely attested certificate chain for the provided public key.
+     *
+     * @param in diceCertChain The DICE certificate chain of the calling VM.
+     *
+     * @param in keyToSign The public key to attest. The signature must be verified by the leaf key
+     * in the diceCertChain to prove knowledge of the DICE leaf key. If the client doesn’t own the
+     * corresponding private key, they will not be able to defend the generated attestation.
+     *
+     * @param in challenge A challenge to include in the attestation certificate chain.
+     *
+     * @return The X.509 encoded certificate chain.
+     */
+    byte[] getRemotelyAttestedCertificate(
+            in byte[] diceCertChain, in byte[] keyToSign, in byte[] challenge);
 }

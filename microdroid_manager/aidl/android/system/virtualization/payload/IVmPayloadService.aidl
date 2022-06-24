@@ -53,4 +53,6 @@ interface IVmPayloadService {
      * of it leaking.
      */
     byte[] getDiceAttestationCdi();
+
+    byte[] getRemotelyAttestedCertificate(in byte[] public_key, in byte[] challenge);
 }

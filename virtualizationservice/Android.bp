@@ -29,8 +29,11 @@ rust_defaults {
         "libapkverify",
         "libbase_rust",
         "libbinder_rs",
+        "libcert_request_validator",
         "libcommand_fds",
+        "libcoset",
         "libdisk",
+        "libforeign_types",
         "liblazy_static",
         "liblog_rust",
         "libmicrodroid_metadata",
@@ -38,7 +41,9 @@ rust_defaults {
         "libnested_virt",
         "libnix",
         "libonce_cell",
+        "libopenssl",
         "libregex",
+        "librkpvm_ext_bindgen",
         "librpcbinder_rs",
         "librustutils",
         "libsemver",
@@ -55,6 +60,7 @@ rust_defaults {
         // TODO(b/202115393) stabilize the interface
         "packagemanager_aidl-rust",
     ],
+    static_libs: ["librkpvm_ext"],
     shared_libs: [
         "libbinder_rpc_unstable",
         "libselinux",
@@ -71,4 +77,37 @@ rust_test {
     name: "virtualizationservice_device_test",
     defaults: ["virtualizationservice_defaults"],
     test_suites: ["general-tests"],
+}
+
+cc_library_static {
+    name: "librkpvm_ext",
+    visibility: ["//packages/modules/Virtualization/virtualizationservice"],
+    apex_available: ["com.android.virt"],
+    srcs: ["src/rkpvm_ext.c"],
+    shared_libs: ["libcrypto"],
+}
+
+rust_bindgen {
+    name: "librkpvm_ext_bindgen",
+    visibility: ["//packages/modules/Virtualization/virtualizationservice"],
+    apex_available: ["com.android.virt"],
+    wrapper_src: "src/rkpvm_ext.h",
+    crate_name: "rkpvm_ext_bindgen",
+    source_stem: "bindings",
+    header_libs: ["libcrypto"],
+    bindgen_flags: [
+        "--size_t-is-usize",
+        "--allowlist-function=generate_avf_extension",
+        "--allowlist-type=avf_extension_details",
+    ],
+}
+
+rust_test {
+    name: "librkpvm_ext_bindgen_test",
+    srcs: [":librkpvm_ext_bindgen"],
+    crate_name: "librkpvm_ext_bindgen_test",
+    test_suites: ["general-tests"],
+    auto_gen_config: true,
+    clippy_lints: "none",
+    lints: "none",
 }

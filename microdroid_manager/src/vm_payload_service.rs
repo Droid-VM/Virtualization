@@ -20,9 +20,12 @@ use android_system_virtualization_payload::aidl::android::system::virtualization
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
 use anyhow::{Context, Result};
 use binder::{Interface, BinderFeatures, ExceptionCode, Status, Strong, add_service};
+use coset::iana::Algorithm;
+use coset::{CborSerializable, CoseSign1Builder, HeaderBuilder};
 use log::error;
 use openssl::hkdf::hkdf;
 use openssl::md::Md;
+use openssl::sign::Signer;
 
 /// Implementation of `IVmPayloadService`.
 struct VmPayloadService {
@@ -59,6 +62,30 @@ impl IVmPayloadService for VmPayloadService {
 
     fn getDiceAttestationCdi(&self) -> binder::Result<Vec<u8>> {
         Ok(self.dice.cdi_attest.to_vec())
+    }
+
+    fn getRemotelyAttestedCertificate(
+        &self,
+        public_key: &[u8],
+        challenge: &[u8],
+    ) -> binder::Result<Vec<u8>> {
+        let attestation_key = self
+            .dice
+            .attestation_key()
+            .map_err(|_| Status::new_service_specific_error(-1, None))?;
+        let sign1 = CoseSign1Builder::new()
+            .protected(HeaderBuilder::new().algorithm(Algorithm::EdDSA).build())
+            .payload(public_key.to_vec())
+            .try_create_signature(&[], |m| {
+                Signer::new_without_digest(&attestation_key)?.sign_oneshot_to_vec(m)
+            })
+            .map_err(|_| Status::new_service_specific_error(-1, None))?
+            .build()
+            .to_vec()
+            .map_err(|_| Status::new_service_specific_error(-1, None))?;
+        self.virtual_machine_service
+            .getRemotelyAttestedCertificate(&self.dice.bcc, &sign1, challenge)
+            .map_err(|_| Status::new_service_specific_error(-1, None))
     }
 }
 
