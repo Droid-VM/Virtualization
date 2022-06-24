@@ -34,6 +34,7 @@ import com.android.tradefed.device.ITestDevice;
 import com.android.tradefed.device.TestDevice;
 import com.android.tradefed.testtype.junit4.BaseHostJUnit4Test;
 import com.android.tradefed.util.CommandResult;
+import com.android.tradefed.util.CommandStatus;
 import com.android.tradefed.util.RunUtil;
 
 import java.io.File;
@@ -128,18 +129,34 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
         return result.getStdout().trim();
     }
 
-    // Same as runOnMicrodroid, but keeps retrying on error till timeout
-    private static String runOnMicrodroidRetryingOnFailure(String... cmd) {
-        final long timeoutMs = 30000; // 30 sec. Microdroid is extremely slow on GCE-on-CF.
-        int attempts = (int) MICRODROID_ADB_CONNECT_TIMEOUT_MINUTES * 60 * 1000 / 500;
-        CommandResult result = RunUtil.getDefault()
-                .runTimedCmdRetry(timeoutMs, 500, attempts,
-                        "adb", "-s", MICRODROID_SERIAL, "shell", join(cmd));
-        assertWithMessage("Command `" + cmd + "` has failed")
+    // Same as runOnHost, but keeps retrying on error for maxTimeMs time
+    // Each attempt with timeoutMs
+    public static String runOnHostRetryingOnFailure(long timeoutMs, long maxTimeMs, String... cmd)
+            throws InterruptedException {
+        long start = System.currentTimeMillis();
+        while (true) {
+            CommandResult result = RunUtil.getDefault().runTimedCmd(timeoutMs, cmd);
+            if (result.getStatus() != CommandStatus.SUCCESS) {
+                if (System.currentTimeMillis() - start > maxTimeMs) {
+                    fail(join(cmd) + " has failed even with retries: " + result);
+                }
+                Thread.sleep(500);
+                continue;
+            }
+            assertWithMessage("Command `" + cmd + "` has failed")
                 .about(command_results())
                 .that(result)
                 .isSuccess();
-        return result.getStdout().trim();
+            return result.getStdout().trim();
+        }
+    }
+
+    // Same as runOnMicrodroid, but keeps retrying on error till maxTimeMs
+    public static String runOnMicrodroidRetryingOnFailure(long timeout, long maxTime,
+            String... cmd)
+            throws InterruptedException {
+        return runOnHostRetryingOnFailure(timeout, maxTime,
+        "adb", "-s", MICRODROID_SERIAL, "shell", join(cmd));
     }
 
     public static CommandResult runOnMicrodroidForResult(String... cmd) {
@@ -328,18 +345,13 @@ public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
         android.run(VIRT_APEX + "bin/vm", "stop", cid);
     }
 
-    public static void rootMicrodroid() {
-        runOnHost("adb", "-s", MICRODROID_SERIAL, "root");
-        runOnHostWithTimeout(
-                MICRODROID_ADB_CONNECT_TIMEOUT_MINUTES * 60 * 1000,
-                "adb",
-                "-s",
-                MICRODROID_SERIAL,
-                "wait-for-device");
-        // There have been tests when adb wait-for-device succeeded but the following command
-        // fails with error: closed. Hence, we run adb shell true in microdroid with retries
+    public static void rootMicrodroid() throws InterruptedException {
+        runOnHostRetryingOnFailure(10000, MICRODROID_ADB_CONNECT_TIMEOUT_MINUTES,
+                "adb", "-s", MICRODROID_SERIAL, "root");
+        // adbd reboots after root. Some commands (including wait-for-device) following this fails
+        // with error: closed. Hence, we run adb shell true in microdroid with retries
         // before returning.
-        runOnMicrodroidRetryingOnFailure("true");
+        runOnMicrodroidRetryingOnFailure(30000, MICRODROID_ADB_CONNECT_TIMEOUT_MINUTES, "true");
     }
 
     // Establish an adb connection to microdroid by letting Android forward the connection to

@@ -384,7 +384,7 @@ public class MicrodroidTestCase extends VirtualizationTestCaseBase {
                         Optional.of(CPU_AFFINITY));
         adbConnectToMicrodroid(getDevice(), cid);
         waitForBootComplete();
-        runOnMicrodroid("logcat -c");
+        runOnMicrodroidRetryingOnFailure(30000, /* 5 mins */ 300000 , "logcat -c");
         // We need root permission to write to /data/tombstones/
         rootMicrodroid();
         // Write a test tombstone file in /data/tombstones
