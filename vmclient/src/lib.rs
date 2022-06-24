@@ -73,11 +73,13 @@ impl VmInstance {
     ) -> BinderResult<Self> {
         let console = console.map(ParcelFileDescriptor::new);
         let log = log.map(ParcelFileDescriptor::new);
-
+        warn!("createVm");
         let vm = service.createVm(config, console.as_ref(), log.as_ref())?;
 
+        warn!("getCid");
         let cid = vm.getCid()?;
 
+        warn!("register death");
         // Register callback before starting VM, in case it dies immediately.
         let state = Arc::new(Monitor::new(VmState::default()));
         let callback = BnVirtualMachineCallback::new_binder(
@@ -87,6 +89,7 @@ impl VmInstance {
         vm.registerCallback(&callback)?;
         let death_recipient = wait_for_binder_death(&mut vm.as_binder(), state.clone())?;
 
+        warn!("created");
         Ok(Self { vm, cid, state, _death_recipient: death_recipient })
     }
 

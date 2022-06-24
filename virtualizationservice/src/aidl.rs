@@ -29,6 +29,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     IVirtualizationService::IVirtualizationService,
     Partition::Partition,
     PartitionType::PartitionType,
+    VirtualMachineAppConfig::DebugLevel::DebugLevel,
     VirtualMachineAppConfig::VirtualMachineAppConfig,
     VirtualMachineConfig::VirtualMachineConfig,
     VirtualMachineDebugInfo::VirtualMachineDebugInfo,
@@ -51,6 +52,7 @@ use disk::QcowFile;
 use idsig::{HashAlgorithm, V4Signature};
 use log::{debug, error, info, warn, trace};
 use microdroid_payload_config::VmPayloadConfig;
+use rkpvm_aidl_interface::aidl::com::android::rkpvm::IRkpVmService::IRkpVmService;
 use rustutils::system_properties;
 use semver::VersionReq;
 use statslog_virtualization_rust::vm_creation_requested::{stats_write, Hypervisor};
@@ -1098,6 +1100,24 @@ impl IVirtualMachineService for VirtualMachineService {
             ))
         }
     }
+
+    fn proxyToRkp(&self) -> binder::Result<()> {
+        let cid = self.cid;
+        if let Some(_vm) = self.state.lock().unwrap().get_vm(cid) {
+            info!("VM having CID {} wants to talk to RKP", cid);
+            ThreadState::with_cleared_calling_identity(|| self.run_rkp()).map_err(|e| {
+                error!("no luck: {}", e.to_string());
+                new_binder_exception(ExceptionCode::SERVICE_SPECIFIC, e.to_string())
+            })?;
+            Ok(())
+        } else {
+            error!("proxyToRpk is called from an unknown CID {}", cid);
+            Err(new_binder_exception(
+                ExceptionCode::SERVICE_SPECIFIC,
+                format!("cannot find a VM with CID {}", cid),
+            ))
+        }
+    }
 }
 
 impl VirtualMachineService {
@@ -1124,4 +1144,92 @@ impl VirtualMachineService {
             BinderFeatures::default(),
         )
     }
+
+    fn run_rkp(&self) -> Result<()> {
+        // TODO: clear callaing ID?
+        let service = vmclient::connect().context("Finding VS")?;
+
+        let instance_path = Path::new("/data/misc/virtualizationservice/rkpvm/instance.img");
+        std::fs::create_dir_all(instance_path.parent().unwrap()).context("create_dir_all")?;
+        let apk = ParcelFileDescriptor::new(
+            File::open(
+                locate_config_apk(Path::new("/apex/com.android.virt"), "RkpVmPayloadApp.apk")
+                    .context("locate_config_apk")?,
+            )
+            .context("open apk")?,
+        );
+        let idsig = prepare_idsig(
+            service.as_ref(),
+            &apk,
+            Path::new("/data/misc/virtualizationservice/rkpvm/idsig"),
+        )
+        .context("prepare_idsig")?;
+        let config = VirtualMachineConfig::AppConfig(VirtualMachineAppConfig {
+            apk: Some(apk),
+            idsig: Some(idsig),
+            extraIdsigs: vec![],
+            instanceImage: Some(ParcelFileDescriptor::new(
+                OpenOptions::new()
+                    .read(true)
+                    .write(true)
+                    .create(true)
+                    .open(instance_path)
+                    .context("Opening RKP instance image")?,
+            )),
+            configPath: String::from("assets/vm_config.json"),
+            debugLevel: DebugLevel::NONE,
+            protectedVm: true,
+            memoryMib: 300,
+            numCpus: 1,
+            cpuAffinity: None,
+            taskProfiles: vec![],
+        });
+        info!("create RKP");
+        let vm = vmclient::VmInstance::create(service.as_ref(), &config, None, None)
+            .context("creating rkp vm")?;
+        info!("start rkp");
+        vm.start().context("starting rkpvm")?;
+        info!("wait for RKP");
+        vm.wait_until_ready(std::time::Duration::new(20, 0)).context("rkpvm waiting")?;
+        info!("call into RKP");
+        let svc: Strong<dyn IRkpVmService> =
+            vm.get_service(6433).context("Connecting to rkpvm service")?;
+        info!("RKP: {}", svc.placeholder().context("call rkp")?);
+        Ok(())
+    }
+}
+
+fn locate_config_apk(apex_dir: &Path, apk: &str) -> Result<PathBuf> {
+    // Our config APK will be in a directory under app, but the name of the directory is at the
+    // discretion of the build system. So just look in each sub-directory until we find it.
+    // (In practice there will be exactly one directory, so this shouldn't take long.)
+    let app_dir = apex_dir.join("app");
+    for dir in std::fs::read_dir(app_dir).context("Reading app dir")? {
+        let apk_file = dir?.path().join(apk);
+        if apk_file.is_file() {
+            return Ok(apk_file);
+        }
+    }
+
+    bail!("Failed to locate {}", apk)
+}
+
+fn prepare_idsig(
+    service: &dyn IVirtualizationService,
+    apk_fd: &ParcelFileDescriptor,
+    idsig_path: &Path,
+) -> Result<ParcelFileDescriptor> {
+    if !idsig_path.exists() {
+        // Prepare idsig file via VirtualizationService
+        let idsig_file = File::create(idsig_path).context("Failed to create idsig file")?;
+        let idsig_fd = ParcelFileDescriptor::new(idsig_file);
+        service
+            .createOrUpdateIdsigFile(apk_fd, &idsig_fd)
+            .context("Failed to update idsig file")?;
+    }
+
+    // Open idsig as read-only
+    let idsig_file = File::open(idsig_path).context("Failed to open idsig file")?;
+    let idsig_fd = ParcelFileDescriptor::new(idsig_file);
+    Ok(idsig_fd)
 }
