@@ -384,12 +384,14 @@ public class MicrodroidTestCase extends VirtualizationTestCaseBase {
                         Optional.of(CPU_AFFINITY));
         adbConnectToMicrodroid(getDevice(), cid);
         waitForBootComplete();
-        runOnMicrodroid("logcat -c");
+        runOnMicrodroidRetryingOnFailure("logcat -c");
         // We need root permission to write to /data/tombstones/
         rootMicrodroid();
         // Write a test tombstone file in /data/tombstones
         runOnMicrodroid("echo -n \'Test tombstone in VM with 34 bytes\'"
                     + "> /data/tombstones/transmit.txt");
+        // assertThat(runOnMicrodroid("cat /data/tombstones/transmit.txt"),
+        //         is("Test tombstone in VM with 34 bytes"));
         // check if the tombstone have been tranferred from VM
         assertNotEquals(runOnMicrodroid("timeout 15s logcat | grep -m 1 "
                             + "'tombstone_transmit.microdroid:.*data/tombstones/transmit.txt'"),
