@@ -1,0 +1,27 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_binary {
+    name: "rkpvm",
+    srcs: ["src/main.rs"],
+
+    // TODO: there's a bunch of apex_available problems with this enabled :/
+    //       but it works if you take this target out of the virt apex
+    //static_executable: true,
+
+    rustlibs: [
+        "android.system.keystore2-V2-rust",
+        "android.hardware.security.keymint-V2-rust",
+        "android.system.virtualmachineservice-rust",
+        "rkpvm_aidl_interface-rust",
+        "libandroid_logger",
+        "libanyhow",
+        "libbinder_rs",
+        "libcert_request_validator",
+	"libcoset",
+        "liblog_rust",
+        "libopenssl",
+    ],
+    apex_available: ["com.android.virt"],
+}
