@@ -75,4 +75,9 @@ interface IVirtualMachineService {
      * Error code indicating that the payload config is invalid.
      */
     const int ERROR_PAYLOAD_INVALID_CONFIG = 3;
+
+    /**
+     * Proxy to the RKP VM.
+     */
+    void proxyToRpk();
 }

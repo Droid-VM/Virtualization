@@ -1098,6 +1098,20 @@ impl IVirtualMachineService for VirtualMachineService {
             ))
         }
     }
+
+    fn proxyToRpk(&self) -> binder::Result<()> {
+        let cid = self.cid;
+        if let Some(_vm) = self.state.lock().unwrap().get_vm(cid) {
+            info!("VM having CID {} wants to talk to RKP", cid);
+            Ok(())
+        } else {
+            error!("proxyToRpk is called from an unknown CID {}", cid);
+            Err(new_binder_exception(
+                ExceptionCode::SERVICE_SPECIFIC,
+                format!("cannot find a VM with CID {}", cid),
+            ))
+        }
+    }
 }
 
 impl VirtualMachineService {
