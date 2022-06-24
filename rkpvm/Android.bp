@@ -1,0 +1,21 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_binary {
+    name: "rkpvm",
+    srcs: ["src/main.rs"],
+
+    rustlibs: [
+        "android.system.virtualmachineservice-rust",
+        "rkpvm_aidl_interface-rust",
+        "libandroid_logger",
+        "libanyhow",
+        "libbinder_rs",
+        "libcert_request_validator",
+        "libcoset",
+        "liblog_rust",
+        "libopenssl",
+    ],
+    apex_available: ["com.android.virt"],
+}
