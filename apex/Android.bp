@@ -50,6 +50,7 @@ apex {
     },
     binaries: [
         "fd_server",
+        "rkpvm",
         "vm",
     ],
     java_libs: [
@@ -60,6 +61,7 @@ apex {
     ],
     apps: [
         "android.system.virtualmachine.res",
+        "RkpClientPayloadApp",
     ],
     prebuilts: [
         "com.android.virt.init.rc",
@@ -90,7 +92,7 @@ android_app_certificate {
 
 prebuilt_etc {
     name: "com.android.virt.init.rc",
-    src: "virtualizationservice.rc",
+    src: "init.rc",
     filename: "init.rc",
     installable: false,
 }

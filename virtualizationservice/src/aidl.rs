@@ -37,7 +37,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
 };
 use binder::{
     self, BinderFeatures, ExceptionCode, Interface, LazyServiceGuard, ParcelFileDescriptor,
-    SpIBinder, Status, StatusCode, Strong, ThreadState,
+    SpIBinder, Status, StatusCode, Strong, ThreadState, wait_for_interface
 };
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::{
         BnVirtualMachineService, IVirtualMachineService, VM_BINDER_SERVICE_PORT,
@@ -50,6 +50,7 @@ use disk::QcowFile;
 use idsig::{HashAlgorithm, V4Signature};
 use log::{debug, error, info, warn};
 use microdroid_payload_config::VmPayloadConfig;
+use rkpvm_aidl_interface::aidl::com::android::rkpvm::IRkpVmService::IRkpVmService;
 use rustutils::system_properties;
 use semver::VersionReq;
 use std::convert::TryInto;
@@ -1136,6 +1137,18 @@ impl IVirtualMachineService for VirtualMachineService {
             ))
         }
     }
+
+    fn getRemotelyAttestedCertificate(
+        &self,
+        dice_cert_chain: &[u8],
+        key_to_sign: &[u8],
+        challenge: &[u8],
+    ) -> binder::Result<Vec<u8>> {
+        info!("got a request for rkpvm");
+        get_remotely_attested_certificate(dice_cert_chain, key_to_sign, challenge).map_err(|e| {
+            Status::new_exception_str(ExceptionCode::ILLEGAL_STATE, Some(e.to_string()))
+        })
+    }
 }
 
 impl VirtualMachineService {
@@ -1156,6 +1169,20 @@ impl VirtualMachineService {
             BinderFeatures::default(),
         )
     }
+}
+
+fn get_remotely_attested_certificate(
+    dice_cert_chain: &[u8],
+    key_to_sign: &[u8],
+    challenge: &[u8],
+) -> Result<Vec<u8>> {
+    const RKPVM_SERVICE: &str = "android.virt.rkpvm";
+    let rkpvm = wait_for_interface::<dyn IRkpVmService>(RKPVM_SERVICE)
+        .with_context(|| format!("Could not find {}", RKPVM_SERVICE))?;
+    info!("send it to rkp");
+    rkpvm
+        .getRemotelyAttestedCertificate(dice_cert_chain, key_to_sign, challenge)
+        .context("call rkp")
 }
 
 #[cfg(test)]
