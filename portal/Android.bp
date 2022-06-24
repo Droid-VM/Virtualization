@@ -1,0 +1,92 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_ffi_static {
+    name: "libportal",
+    crate_name: "portal",
+    srcs: ["src/main.rs"],
+    edition: "2021",
+    no_stdlibs: true,
+    stdlibs: [
+        "libcompiler_builtins.rust_sysroot",
+        "libcore.rust_sysroot",
+    ],
+    rustlibs: [
+        "libbuddy_system_allocator",
+        "libvmbase",
+    ],
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+    apex_available: ["com.android.virt"],
+}
+
+cc_binary {
+    name: "portal_elf",
+    stem: "portal",
+    srcs: [
+        "idmap.S",
+    ],
+    static_libs: [
+        "libvmbase_entry",
+        "libportal",
+    ],
+    static_executable: true,
+    nocrt: true,
+    system_shared_libs: ["libc"],
+    stl: "none",
+    linker_scripts: ["image.ld"],
+    installable: false,
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+    sanitize: {
+        hwaddress: false,
+    },
+    apex_available: ["com.android.virt"],
+}
+
+raw_binary {
+    name: "portal",
+    src: ":portal_elf",
+    stem: "portal.bin",
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+}
+
+rust_test {
+    name: "portal_test",
+    crate_name: "portal_test",
+    srcs: ["tests/test.rs"],
+    prefer_rlib: true,
+    edition: "2021",
+    rustlibs: [
+        "android.system.virtualizationservice-rust",
+        "libanyhow",
+        "libenv_logger",
+        "liblibc",
+        "liblog_rust",
+        "libvmclient",
+    ],
+    data: [
+        ":portal",
+    ],
+    test_suites: ["general-tests"],
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+}
