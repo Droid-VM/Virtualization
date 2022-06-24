@@ -19,6 +19,7 @@ mod atom;
 mod composite;
 mod crosvm;
 mod payload;
+mod rkpvm;
 mod selinux;
 
 use crate::aidl::{VirtualizationService, BINDER_SERVICE_IDENTIFIER, TEMPORARY_DIRECTORY};
