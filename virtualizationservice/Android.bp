@@ -48,11 +48,13 @@ rust_defaults {
         "libshared_child",
         "libstatslog_virtualization_rust",
         "libtombstoned_client_rust",
+        "libvmclient",
         "libvmconfig",
         "libzip",
         "libvsock",
         // TODO(b/202115393) stabilize the interface
         "packagemanager_aidl-rust",
+        "rkpvm_aidl_interface-rust",
     ],
     shared_libs: [
         "libbinder_rpc_unstable",
