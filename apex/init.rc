@@ -19,3 +19,11 @@ service virtualizationservice /apex/com.android.virt/bin/virtualizationservice
     interface aidl android.system.virtualizationservice
     disabled
     oneshot
+
+service rkpvm /apex/com.android.virt/bin/rkpvm
+    class main
+    user root
+    group system
+    interface aidl android.virt.rkpvm
+    disabled
+    oneshot
