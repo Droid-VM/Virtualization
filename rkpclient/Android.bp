@@ -1,0 +1,37 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+android_app {
+    name: "RkpClientPayloadApp",
+    apex_available: ["com.android.virt"],
+    jni_libs: ["librkpclient"],
+    platform_apis: true,
+}
+
+rust_ffi_shared {
+    name: "librkpclient",
+    crate_name: "rkpclient",
+    srcs: ["src/main.rs"],
+    prefer_rlib: true,
+    rustlibs: [
+        "android.hardware.security.dice-V1-rust",
+        "android.security.dice-rust",
+        "android.system.virtualmachineservice-rust",
+        "rkpvm_aidl_interface-rust",
+        "libandroid_logger",
+        "libanyhow",
+        "libbinder_common",
+        "libbinder_rpc_unstable_bindgen",
+        "libbinder_rs",
+        "libdiced_open_dice_cbor",
+        "libkeystore2_crypto_rust",
+        "liblog_rust",
+        "libopenssl",
+        "librkpvmconnection",
+    ],
+    shared_libs: [
+        "libbinder_rpc_unstable",
+    ],
+    apex_available: ["com.android.virt"],
+}

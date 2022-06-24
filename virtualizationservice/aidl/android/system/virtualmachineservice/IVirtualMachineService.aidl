@@ -75,4 +75,24 @@ interface IVirtualMachineService {
      * Error code indicating that the payload config is invalid.
      */
     const int ERROR_PAYLOAD_INVALID_CONFIG = 3;
+
+    /**
+     * Get a key and certificate chain to use for attesting to remote entities.
+     *
+     * The request is routed via the host so an encryption key derived and used
+     * to protect the confidentiality of the exchange.
+     *
+     * TODO: use COSE for a bit of flexibility in the algorithms?
+     *
+     * @param bcc The VM's BCC.
+     * @param ephemeralKey Client's raw, ephemeral X25519 public key for this call.
+     * @param ephemeralKeySignature Raw Ed25519 signature of the client's ephemeral public key.
+     * @param privateKey Raw Alg? private key, encrypted with the negotiated key.
+     * @param certificateChain DER-encoded X.509 certificate chain, leaf to root.
+     *
+     * @return The raw, ephemeral X25519 public key.
+     */
+    byte[] getRemoteAttestationKey(in byte[] bcc, in byte[] ephemeralKey,
+            in byte[] ephemeralKeySignature, in byte[] challenge, out byte[] privateKey,
+            out byte[] certificateChain);
 }

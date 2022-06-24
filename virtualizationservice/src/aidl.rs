@@ -37,7 +37,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
 };
 use android_system_virtualizationservice::binder::{
     self, BinderFeatures, ExceptionCode, Interface, ParcelFileDescriptor, Status, StatusCode, Strong,
-    ThreadState,
+    ThreadState, wait_for_interface
 };
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::{
     IVirtualMachineService::{
@@ -51,6 +51,7 @@ use disk::QcowFile;
 use idsig::{HashAlgorithm, V4Signature};
 use log::{debug, error, info, warn, trace};
 use microdroid_payload_config::VmPayloadConfig;
+use rkpvm_aidl_interface::aidl::com::android::rkpvm::IRkpVmService::IRkpVmService;
 use rustutils::system_properties;
 use semver::VersionReq;
 use statslog_virtualization_rust::vm_creation_requested::{stats_write, Hypervisor};
@@ -1085,7 +1086,7 @@ impl IVirtualMachineService for VirtualMachineService {
     fn notifyError(&self, error_code: i32, message: &str) -> binder::Result<()> {
         let cid = self.cid;
         if let Some(vm) = self.state.lock().unwrap().get_vm(cid) {
-            info!("VM having CID {} encountered an error", cid);
+            info!("VM having CID {} encountered an error: {}", cid, message);
             vm.update_payload_state(PayloadState::Finished)
                 .map_err(|e| new_binder_exception(ExceptionCode::ILLEGAL_STATE, e.to_string()))?;
             vm.callbacks.notify_error(cid, error_code, message);
@@ -1097,6 +1098,27 @@ impl IVirtualMachineService for VirtualMachineService {
                 format!("cannot find a VM with CID {}", cid),
             ))
         }
+    }
+
+    fn getRemoteAttestationKey(
+        &self,
+        bcc: &[u8],
+        ephemeral_key: &[u8],
+        ephemeral_key_signature: &[u8],
+        challenge: &[u8],
+        private_key: &mut Vec<u8>,
+        certificate_chain: &mut Vec<u8>,
+    ) -> binder::Result<Vec<u8>> {
+        info!("got a request for rkpvm");
+        get_remote_attestation_key(
+            bcc,
+            ephemeral_key,
+            ephemeral_key_signature,
+            challenge,
+            private_key,
+            certificate_chain,
+        )
+        .map_err(|e| new_binder_exception(ExceptionCode::ILLEGAL_STATE, e.to_string()))
     }
 }
 
@@ -1124,4 +1146,28 @@ impl VirtualMachineService {
             BinderFeatures::default(),
         )
     }
+}
+
+fn get_remote_attestation_key(
+    bcc: &[u8],
+    ephemeral_key: &[u8],
+    ephemeral_key_signature: &[u8],
+    challenge: &[u8],
+    private_key: &mut Vec<u8>,
+    certificate_chain: &mut Vec<u8>,
+) -> Result<Vec<u8>> {
+    const RKPVM_SERVICE: &str = "android.virt.rkpvm";
+    let rkpvm = wait_for_interface::<dyn IRkpVmService>(RKPVM_SERVICE)
+        .with_context(|| format!("Could not find {}", RKPVM_SERVICE))?;
+    info!("send it to rkp");
+    rkpvm
+        .getRemoteAttestationKey(
+            bcc,
+            ephemeral_key,
+            ephemeral_key_signature,
+            challenge,
+            private_key,
+            certificate_chain,
+        )
+        .context("call rkp")
 }
