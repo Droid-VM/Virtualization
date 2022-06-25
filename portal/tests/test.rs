@@ -23,36 +23,44 @@ use android_system_virtualizationservice::{
 };
 use anyhow::{Context, Error};
 use log::info;
-use std::{
-    fs::File,
-    io,
-    os::unix::io::{AsRawFd, FromRawFd},
-};
+use std::fs::File;
+use std::io::{self, BufRead, BufReader};
+use std::os::unix::io::FromRawFd;
+use std::panic;
+use std::thread;
 use vmclient::{DeathReason, VmInstance};
 
-const PORTAL_PATH: &str =
-    "/data/local/tmp/portal_test/arm64/portal.bin";
+const PORTAL_PATH: &str = "/data/local/tmp/portal_test/arm64/portal.bin";
 
-/// Runs the portal VM as an unprotected VM via VirtualizationService.
+/// Runs a portal VM as a non-protected VM via VirtualizationService.
 #[test]
 fn test_run_portal() -> Result<(), Error> {
-    env_logger::init();
+    android_logger::init_once(
+        android_logger::Config::default()
+            .with_tag("portal")
+            .with_min_level(log::Level::Debug),
+    );
+    // Redirect panic messages to logcat.
+    panic::set_hook(Box::new(|panic_info| {
+        log::error!("{}", panic_info);
+    }));
 
     // We need to start the thread pool for Binder to work properly, especially link_to_death.
     ProcessState::start_thread_pool();
 
     let service = vmclient::connect().context("Failed to find VirtualizationService")?;
 
-    // Start example VM.
-    let bootloader = ParcelFileDescriptor::new(
-        File::open(PORTAL_PATH)
-            .with_context(|| format!("Failed to open VM image {}", PORTAL_PATH))?,
-    );
+    let portal =File::open(PORTAL_PATH)
+        .context(format!("Failed to open {}", PORTAL_PATH))?;
+
+    let console = logging_fd()?;
+    let log = logging_fd()?;
+
     let config = VirtualMachineConfig::RawConfig(VirtualMachineRawConfig {
         kernel: None,
         initrd: None,
         params: None,
-        bootloader: Some(bootloader),
+        bootloader: Some(ParcelFileDescriptor::new(portal)),
         disks: vec![],
         protectedVm: false,
         memoryMib: 300,
@@ -61,10 +69,9 @@ fn test_run_portal() -> Result<(), Error> {
         platformVersion: "~1.0".to_string(),
         taskProfiles: vec![],
     });
-    let console = duplicate_stdout()?;
-    let log = duplicate_stdout()?;
     let vm = VmInstance::create(service.as_ref(), &config, Some(console), Some(log))
         .context("Failed to create VM")?;
+
     vm.start().context("Failed to start VM")?;
     info!("Started example VM.");
 
@@ -75,17 +82,25 @@ fn test_run_portal() -> Result<(), Error> {
     Ok(())
 }
 
-/// Safely duplicate the standard output file descriptor.
-fn duplicate_stdout() -> io::Result<File> {
-    let stdout_fd = io::stdout().as_raw_fd();
-    // Safe because this just duplicates a file descriptor which we know to be valid, and we check
-    // for an error.
-    let dup_fd = unsafe { libc::dup(stdout_fd) };
-    if dup_fd < 0 {
-        Err(io::Error::last_os_error())
-    } else {
-        // Safe because we have just duplicated the file descriptor so we own it, and `from_raw_fd`
-        // takes ownership of it.
-        Ok(unsafe { File::from_raw_fd(dup_fd) })
+fn create_pipe() -> io::Result<(File, File)> {
+    let mut fds = [0; 2];
+    let res = unsafe { libc::pipe(&mut fds as *mut libc::c_int) };
+    if res != 0 {
+        return Err(io::Error::last_os_error());
     }
+
+    let reader = unsafe { File::from_raw_fd(fds[0]) };
+    let writer = unsafe { File::from_raw_fd(fds[1]) };
+    Ok((reader, writer))
+}
+
+fn logging_fd() -> io::Result<File> {
+    let (reader, writer) = create_pipe()?;
+
+    thread::spawn(|| {
+        for line in BufReader::new(reader).lines() {
+            info!("{}", line.unwrap());
+        }
+    });
+    Ok(writer)
 }
