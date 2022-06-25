@@ -64,9 +64,6 @@ SECTIONS
 		rodata_begin = .;
 		*(.rodata.*)
 	} >image
-	.got : {
-		*(.got)
-	} >image
 	rodata_end = .;
 
 	/*

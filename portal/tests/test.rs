@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! Integration test for VM bootloader.
+//! Integration test for Portal kernel.
 
 use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::{
