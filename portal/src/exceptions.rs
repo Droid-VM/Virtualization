@@ -71,9 +71,15 @@ extern "C" fn serr_lower() {
 
 #[inline]
 fn print_esr() {
+    let mut elr: u64;
     let mut esr: u64;
+    let mut far: u64;
     unsafe {
+        asm!("mrs {elr}, elr_el1", elr = out(reg) elr);
         asm!("mrs {esr}, esr_el1", esr = out(reg) esr);
+        asm!("mrs {far}, far_el1", far = out(reg) far);
     }
+    eprintln!("elr={:#08x}", elr);
     eprintln!("esr={:#08x}", esr);
+    eprintln!("far={:#08x}", far);
 }

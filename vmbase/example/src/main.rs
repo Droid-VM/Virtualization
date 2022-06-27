@@ -24,7 +24,7 @@ extern crate alloc;
 
 use alloc::{vec, vec::Vec};
 use buddy_system_allocator::LockedHeap;
-use vmbase::{main, println};
+use vmbase::{fdt, main, println};
 
 static INITIALISED_DATA: [u32; 4] = [1, 2, 3, 4];
 static mut ZEROED_DATA: [u32; 10] = [0; 10];
@@ -49,6 +49,8 @@ pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
     }
 
     check_alloc();
+
+    check_fdt();
 }
 
 fn print_addresses() {
@@ -91,6 +93,16 @@ fn print_addresses() {
             &boot_stack_end as *const u8 as usize - &boot_stack_begin as *const u8 as usize,
         );
     }
+}
+
+fn check_fdt() {
+    let fdt = unsafe {
+        core::slice::from_raw_parts(
+            &dtb_begin as *const u8,
+            &dtb_end as *const u8 as usize - &dtb_begin as *const u8 as usize)
+    };
+    let ret = fdt::check_full(fdt);
+    println!("FDT CHECK => {:?}", ret);
 }
 
 fn check_data() {
