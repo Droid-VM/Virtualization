@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6b431deb_8310fcf3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-06-27T10:37:35Z",
+      "side": 1,
+      "message": "Ack, Sorry I got confused because the comment on the intreface is very confusing - cs.android.com/android/platform/superproject/+/master:tools/tradefederation/core/common_util/com/android/tradefed/util/IRunUtil.java;l\u003d124-133;drc\u003dcd0c21a6cbe3785385bd04fab39cf11139bca5ef;bpv\u003d0;bpt\u003d1.\n\nI have reverted it to use the runTimedCmdRetry but fixing the test by retrying few more commands.",
+      "parentUuid": "eee51beb_9e9af9af",
+      "range": {
+        "startLine": 11,
+        "startChar": 1,
+        "endLine": 11,
+        "endChar": 42
+      },
+      "revId": "decc1d1058833da707b41785e864422dfcab1b9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9aeb0300_22d33242",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
