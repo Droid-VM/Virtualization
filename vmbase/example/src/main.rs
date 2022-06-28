@@ -63,6 +63,12 @@ pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
     idmap.map_range(&DEVICE_REGION, Attributes::DEVICE_NGNRE | Attributes::EXECUTE_NEVER).unwrap();
     idmap
         .map_range(
+            &dtb_range().into(),
+            Attributes::NORMAL | Attributes::READ_ONLY | Attributes::EXECUTE_NEVER,
+        )
+        .unwrap();
+    idmap
+        .map_range(
             &text_range().into(),
             Attributes::NORMAL | Attributes::NON_GLOBAL | Attributes::READ_ONLY,
         )
