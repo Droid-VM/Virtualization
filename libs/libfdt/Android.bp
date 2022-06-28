@@ -1,0 +1,14 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_library {
+    name: "liblibfdt",
+    crate_name: "libfdt",
+    srcs: ["src/lib.rs"],
+    edition: "2021",
+    whole_static_libs: [
+        "libfdt_baremetal",
+    ],
+    apex_available: ["com.android.virt"],
+}

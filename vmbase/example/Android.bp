@@ -14,6 +14,7 @@ rust_ffi_static {
     ],
     rustlibs: [
         "libbuddy_system_allocator",
+        "liblibfdt",
         "libvmbase",
     ],
     enabled: false,
