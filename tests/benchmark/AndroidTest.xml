@@ -29,7 +29,7 @@
     <test class="com.android.tradefed.testtype.AndroidJUnitTest" >
         <option name="package" value="com.android.microdroid.benchmark" />
         <option name="runner" value="androidx.test.runner.AndroidJUnitRunner" />
-        <option name="shell-timeout" value="300000" />
-        <option name="test-timeout" value="300000" />
+        <option name="shell-timeout" value="6000s" />
+        <option name="test-timeout" value="6000s" />
     </test>
 </configuration>
