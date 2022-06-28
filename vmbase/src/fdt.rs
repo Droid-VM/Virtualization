@@ -16,8 +16,7 @@
 
 use libc::{c_char, c_int, c_void, size_t};
 use core::fmt::{self, Display};
-use core::iter::Iterator;
-use core::option::Option;
+use core::convert::TryInto;
 
 // This links to libfdt which handles the creation of the binary blob
 // flattened device tree (fdt) that is passed to the kernel and indicates
@@ -111,10 +110,13 @@ fn get_size_cells(fdt: &[u8], nodeoffset: usize) -> Result<usize> {
     Ok(ret as usize)
 }
 
-const FDT_CELL_SIZE_BITS: usize = 32;
-const FDT_CELL_SIZE : usize = core::mem::size_of::<u32>();
-const FDT_MAX_CELLS : usize = core::mem::size_of::<usize>() / FDT_CELL_SIZE;
+/// Foobar
+pub type FdtCellType = u32;
+const FDT_CELL_BITS : usize = 32;
+const FDT_CELL_BYTES : usize = core::mem::size_of::<FdtCellType>();
+const FDT_MAX_CELLS : usize = core::mem::size_of::<usize>() / FDT_CELL_BYTES;
 
+/// Foobar
 pub struct FdtCellIterator<'a> {
     remaining: &'a [u8],
 }
@@ -126,25 +128,25 @@ impl<'a> FdtCellIterator<'a> {
 }
 
 impl<'a> Iterator for FdtCellIterator<'a> {
-    type Item = u32;
+    type Item = FdtCellType;
 
     fn next(&mut self) -> Option<Self::Item> {
-        if self.remaining.len() < FDT_CELL_SIZE {
-            return None;
-        }
-
-        let next = u32::from_be_bytes(self.remaining[..FDT_CELL_SIZE].try_into().unwrap());
-        self.remaining = &self.remaining[FDT_CELL_SIZE..];
-        Some(next)
+        let bytes : [u8; FDT_CELL_BYTES] = self.remaining[..FDT_CELL_BYTES].try_into().ok()?;
+        let val = FdtCellType::from_be_bytes(bytes);
+        self.remaining = &self.remaining[FDT_CELL_BYTES..];
+        Some(val)
     }
 }
 
+/// Foobar
 pub struct FdtRegIterator<'a> {
     iter: FdtCellIterator<'a>,
     addr_cells: usize,
     size_cells: usize,
 }
 
+/// Foobar
+#[derive(Debug)]
 pub struct FdtMemoryRegion {
     addr: usize,
     size: usize,
@@ -167,7 +169,7 @@ impl<'a> FdtRegIterator<'a> {
         let mut val : usize = 0;
         for _ in 0..cells {
             let next = self.iter.next()?;
-            val <<= FDT_CELL_SIZE_BITS;
+            val <<= FDT_CELL_BITS;
             val |= next as usize;
         }
         Some(val)
@@ -202,6 +204,6 @@ impl<'a> FdtReader<'a> {
         if get_prop(self.fdt, node, b"device_type")? != b"memory\0" {
             return Err(Error::FdtUnexpectedValueError);
         }
-        Ok(FdtRegIterator::new(self.fdt, node)?)
+        FdtRegIterator::new(self.fdt, node)
     }
 }
