@@ -24,7 +24,7 @@ extern crate alloc;
 
 use alloc::{vec, vec::Vec};
 use buddy_system_allocator::LockedHeap;
-use vmbase::{main, println};
+use vmbase::{main, println, fdt::FdtReader};
 
 static INITIALISED_DATA: [u32; 4] = [1, 2, 3, 4];
 static mut ZEROED_DATA: [u32; 10] = [0; 10];
@@ -43,6 +43,7 @@ pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
     println!("x0={:#010x}, x1={:#010x}, x2={:#010x}, x3={:#010x}", arg0, arg1, arg2, arg3);
     print_addresses();
     check_data();
+    check_fdt();
 
     unsafe {
         HEAP_ALLOCATOR.lock().init(&mut HEAP as *mut u8 as usize, HEAP.len());
@@ -123,6 +124,20 @@ fn check_data() {
         assert_eq!(MUTABLE_DATA[0], 42);
     }
     println!("Data looks good");
+}
+
+fn check_fdt() {
+    println!("Checking FDT...");
+    let fdt = unsafe { core::slice::from_raw_parts(
+        &dtb_begin as *const u8,
+        &dtb_end as *const u8 as usize - &dtb_begin as *const u8 as usize) };
+    let reader = FdtReader::new(fdt).unwrap();
+    println!("FDT passed verification.");
+    for reg in reader.memory().unwrap() {
+        println!("memory @ {:#010x} - {:#010x}", reg.addr, reg.addr + reg.size);
+    }
+    println!("FDT checks done.");
+    panic!();
 }
 
 fn check_alloc() {
