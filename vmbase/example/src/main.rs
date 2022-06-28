@@ -28,6 +28,7 @@ use aarch64_paging::{
 };
 use alloc::{vec, vec::Vec};
 use buddy_system_allocator::LockedHeap;
+use libfdt::FdtReader;
 use vmbase::{main, println};
 
 static INITIALISED_DATA: [u32; 4] = [1, 2, 3, 4];
@@ -56,6 +57,7 @@ pub fn main(arg0: u64, arg1: u64, arg2: u64, arg3: u64) {
         assert_eq!(arg0, &dtb_begin as *const u8 as u64);
     }
     check_data();
+    check_fdt();
 
     unsafe {
         HEAP_ALLOCATOR.lock().init(&mut HEAP as *mut u8 as usize, HEAP.len());
@@ -188,6 +190,22 @@ fn check_data() {
         assert_eq!(MUTABLE_DATA[0], 1);
     }
     println!("Data looks good");
+}
+
+fn check_fdt() {
+    println!("Checking FDT...");
+    let fdt = unsafe {
+        core::slice::from_raw_parts(
+            &dtb_begin as *const u8,
+            &dtb_end as *const u8 as usize - &dtb_begin as *const u8 as usize,
+        )
+    };
+    let reader = FdtReader::new(fdt).unwrap();
+    println!("FDT passed verification.");
+    for reg in reader.memory().unwrap() {
+        println!("memory @ {:#010x} - {:#010x}", reg.addr, reg.addr + reg.size);
+    }
+    println!("FDT checks done.");
 }
 
 fn check_alloc() {
