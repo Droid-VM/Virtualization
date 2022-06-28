@@ -47,6 +47,7 @@ cc_defaults {
     static_executable: true,
     static_libs: [
         "libarm-optimized-routines-mem",
+        "libarm-optimized-routines-string-extra",
         "libvmbase_entry",
     ],
     installable: false,
