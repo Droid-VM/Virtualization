@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df7aed3a_0c2bcaca",
+        "filename": "libs/libfdt/src/ffi.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-06-29T18:12:19Z",
+      "side": 1,
+      "message": "I suggest deriving `Copy`, `Clone`, `Eq` and `PartialEq` on this too, for easier use (especially in tests).",
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2bc8a39_02c1ae9e",
         "filename": "libs/libfdt/src/ffi.rs",
         "patchSetId": 4
@@ -66,6 +83,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a81b2c3_55e4804a",
+        "filename": "libs/libfdt/src/ffi.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-06-29T18:12:19Z",
+      "side": 1,
+      "message": "What stops this trying to read beyond the end of the `fdt` slice?",
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c55d1eb_d7fa6d1a",
+        "filename": "libs/libfdt/src/ffi.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-06-29T18:12:19Z",
+      "side": 1,
+      "message": "What happens if this overflows to a negative number?",
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18a5efdc_33e8d8f0",
         "filename": "libs/libfdt/src/ffi.rs",
         "patchSetId": 4
@@ -105,6 +156,131 @@
         "startChar": 69,
         "endLine": 139,
         "endChar": 88
+      },
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea1228ee_0828f965",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-06-29T18:12:19Z",
+      "side": 1,
+      "message": "Would it make sense for this to be `FDT_CELL_BYTES * 8`?",
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4380dd3_d6cc88aa",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-06-29T18:12:19Z",
+      "side": 1,
+      "message": "Derive `Clone`, `Eq` and `PartialEq` here too.",
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1d4be5c_2b92e1c2",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-06-29T18:12:19Z",
+      "side": 1,
+      "message": "Exposing a private type like this in the public API is likely to make life difficult for users of the library. Maybe you want to re-export this type?",
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3980db3_75fbbff0",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-06-29T18:12:19Z",
+      "side": 1,
+      "message": "Derive `Clone`, `Eq` and `PartialEq`, it will be useful for users of the library writing tests.",
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e899029_69903645",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-06-29T18:12:19Z",
+      "side": 1,
+      "message": "I\u0027m not sure this is really the right type. What if you have this code running on a 32-bit system, parsing an FDT intended for a 64-bit system?",
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b901966_01cf1d70",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-06-29T18:12:19Z",
+      "side": 1,
+      "message": "Is it worth checking that it is nonzero too?",
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82a1fa55_603a3b48",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-06-29T18:12:19Z",
+      "side": 1,
+      "message": "Why is this return type `usize`, and what about if `cells \u003e size_of::\u003cusize\u003e()`?",
+      "range": {
+        "startLine": 111,
+        "startChar": 53,
+        "endLine": 111,
+        "endChar": 58
       },
       "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
