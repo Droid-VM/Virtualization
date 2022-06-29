@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-use anyhow::{bail, Context, Result};
+use anyhow::{anyhow, bail, Context, Result};
+use command_fds::CommandFdExt;
 use log::{debug, error, warn};
 use nix::mount::{umount2, MntFlags};
 use nix::sys::statfs::{statfs, FsType};
 use shared_child::SharedChild;
 use std::ffi::{OsStr, OsString};
 use std::fs::{remove_dir, OpenOptions};
+use std::os::unix::io::AsRawFd;
 use std::path::PathBuf;
 use std::process::Command;
 use std::thread::sleep;
@@ -137,6 +139,7 @@ fn run_authfs(
     out_dir_fds: &[OutputDirFdAnnotation],
     debuggable: bool,
 ) -> Result<SharedChild> {
+    let mut preserved_fds = vec![];
     let mut args = vec![mountpoint.to_owned(), OsString::from("--cid=2")];
     args.push(OsString::from("-o"));
     args.push(OsString::from("fscontext=u:object_r:authfs_fuse:s0"));
@@ -151,8 +154,17 @@ fn run_authfs(
         args.push(OsString::from(conf.fd.to_string()));
     }
     for conf in in_dir_fds {
+        let manifest_raw_fd = conf
+            .manifestFd
+            .as_ref()
+            .ok_or_else(|| anyhow!("Missing manifest for input directory fd {}", conf.fd))?
+            .as_raw_fd();
+        preserved_fds.push(manifest_raw_fd);
         args.push(OsString::from("--remote-ro-dir"));
-        args.push(OsString::from(format!("{}:{}:{}", conf.fd, conf.manifestPath, conf.prefix)));
+        args.push(OsString::from(format!(
+            "{}:/dev/fd/{}:{}",
+            conf.fd, manifest_raw_fd, conf.prefix
+        )));
     }
     for conf in out_dir_fds {
         args.push(OsString::from("--remote-new-rw-dir"));
@@ -163,6 +175,7 @@ fn run_authfs(
     }
 
     let mut command = Command::new(AUTHFS_BIN);
+    command.preserved_fds(preserved_fds);
     command.args(&args);
     debug!("Spawn authfs: {:?}", command);
     SharedChild::spawn(&mut command).context("Spawn authfs")

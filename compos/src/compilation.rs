@@ -15,6 +15,7 @@
  */
 
 use anyhow::{anyhow, bail, Context, Result};
+use binder::ParcelFileDescriptor;
 use log::{debug, info, warn};
 use minijail::{self, Minijail};
 use regex::Regex;
@@ -22,6 +23,7 @@ use rustutils::system_properties;
 use std::collections::HashMap;
 use std::env;
 use std::ffi::OsString;
+use std::fs::File;
 use std::path::{self, Path, PathBuf};
 use std::process::Command;
 
@@ -106,14 +108,18 @@ pub fn odrefresh<F>(
 where
     F: FnOnce(PathBuf) -> Result<()>,
 {
+    // 0 is the index of extra_apks in vm_config_extra_apk.json
+    let build_manifest = ParcelFileDescriptor::new(
+        File::open("/mnt/extra-apk/0/assets/build_manifest.pb")
+            .context("Opening build_manifest.pb")?,
+    );
     // Mount authfs (via authfs_service). The authfs instance unmounts once the `authfs` variable
     // is out of scope.
     let authfs_config = AuthFsConfig {
         port: FD_SERVER_PORT,
         inputDirFdAnnotations: vec![InputDirFdAnnotation {
             fd: context.system_dir_fd,
-            // 0 is the index of extra_apks in vm_config_extra_apk.json
-            manifestPath: "/mnt/extra-apk/0/assets/build_manifest.pb".to_string(),
+            manifestFd: Some(build_manifest),
             prefix: "system/".to_string(),
         }],
         outputDirFdAnnotations: vec![

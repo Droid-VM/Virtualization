@@ -43,10 +43,9 @@ parcelable AuthFsConfig {
 
         /**
          * A manifest file that includes serialized protobuf of
-         * android.security.fsverity.FSVerityDigests. The path must be accessible to the
-         * IAuthFsService.
+         * android.security.fsverity.FSVerityDigests.
          */
-        String manifestPath;
+        ParcelFileDescriptor manifestFd;
 
         /**
          * Prefix path that should be stripped from the path in the manifest.
