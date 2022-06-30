@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6149e1d6_4a49c083",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-06-30T17:03:27Z",
+      "side": 1,
+      "message": "That\u0027s what I\u0027m thinking, yes.\n\n[s/stack/writable memory/g](https://android.googlesource.com/platform/packages/modules/Virtualization/+/refs/heads/master/vmbase/entry.S#129) -\u003e I updated the commit message!",
+      "parentUuid": "bb5673d6_65f685e4",
+      "range": {
+        "startLine": 14,
+        "startChar": 33,
+        "endLine": 14,
+        "endChar": 71
+      },
+      "revId": "1e95520906fb9988d73e1643732a855474ad2509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcfdd3ca_1e9db88d",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-06-30T16:34:18Z",
       "side": 1,
       "message": "This would deserve a test case that actually covers the condition you\u0027re concerned about. That\u0027s probably be possible we a simple custom VMM that directly calls /dev/kvm to construct the malicious config?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 4
+      },
+      "revId": "1e95520906fb9988d73e1643732a855474ad2509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2657178d_b81e5277",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-06-30T17:03:27Z",
+      "side": 1,
+      "message": "Agreed; keeping this comment open.",
+      "parentUuid": "bcfdd3ca_1e9db88d",
       "range": {
         "startLine": 17,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7189e4f9_052993d3",
+        "filename": "vmbase/exceptions.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-06-30T17:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c30c33e_3c5187ec",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 3
+      },
+      "revId": "1e95520906fb9988d73e1643732a855474ad2509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3183f063_d4dd4ff6",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-06-30T16:34:18Z",
       "side": 1,
       "message": "Perhaps it should got to a wfi/wfe loop instead so it keeps exiting to the VMM instead of just wasting time while the vCPU is running?",
+      "range": {
+        "startLine": 194,
+        "startChar": 1,
+        "endLine": 194,
+        "endChar": 4
+      },
+      "revId": "1e95520906fb9988d73e1643732a855474ad2509",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d18bc0da_c3a7513b",
+        "filename": "vmbase/exceptions.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-06-30T17:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3183f063_d4dd4ff6",
       "range": {
         "startLine": 194,
         "startChar": 1,
