@@ -176,3 +176,87 @@ fiq_lower_32:
 .balign 0x80
 serr_lower_32:
 	current_exception_spx serr_lower
+
+/**
+ * The following table is intended to trap any fault resulting from the very
+ * first memory accesses. They assume that PSCI v0.2 is available and provides
+ * the PSCI_SYSTEM_RESET call in an attempt to gracefully exit but otherwise
+ * results in the core busy-looping.
+ */
+
+.macro exception_panic
+	mov	x0, 0x80400000
+	add	x0, x0, 9
+	mov	x1, 0
+	mov	x2, 0
+	mov	x3, 0
+	hvc	0
+	b	.
+.endm
+
+.section .text.vector_table_panic, "ax"
+.global vector_table_panic
+.balign 0x800
+vector_table_panic:
+sync_cur_sp0_panic:
+	exception_panic
+
+.balign 0x80
+irq_cur_sp0_panic:
+	exception_panic
+
+.balign 0x80
+fiq_cur_sp0_panic:
+	exception_panic
+
+.balign 0x80
+serr_cur_sp0_panic:
+	exception_panic
+
+.balign 0x80
+sync_cur_spx_panic:
+	exception_panic
+
+.balign 0x80
+irq_cur_spx_panic:
+	exception_panic
+
+.balign 0x80
+fiq_cur_spx_panic:
+	exception_panic
+
+.balign 0x80
+serr_cur_spx_panic:
+	exception_panic
+
+.balign 0x80
+sync_lower_64_panic:
+	exception_panic
+
+.balign 0x80
+irq_lower_64_panic:
+	exception_panic
+
+.balign 0x80
+fiq_lower_64_panic:
+	exception_panic
+
+.balign 0x80
+serr_lower_64_panic:
+	exception_panic
+
+.balign 0x80
+sync_lower_32_panic:
+	exception_panic
+
+.balign 0x80
+irq_lower_32_panic:
+	exception_panic
+
+.balign 0x80
+fiq_lower_32_panic:
+	exception_panic
+
+.balign 0x80
+serr_lower_32_panic:
+	exception_panic
