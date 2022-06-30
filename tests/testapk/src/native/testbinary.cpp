@@ -22,7 +22,6 @@
 #include <android/binder_auto_utils.h>
 #include <android/binder_manager.h>
 #include <fcntl.h>
-#include <fsverity_digests.pb.h>
 #include <linux/vm_sockets.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -159,15 +158,15 @@ Result<void> start_test_service() {
 }
 
 Result<void> verify_apk() {
-    const char* path = "/mnt/extra-apk/0/assets/build_manifest.pb";
+    const char* path = "/mnt/extra-apk/0/assets/hello";
 
     std::string str;
     if (!android::base::ReadFileToString(path, &str)) {
-        return ErrnoError() << "failed to read build_manifest.pb";
+        return ErrnoError() << "failed to read assets/hello";
     }
 
-    if (!android::security::fsverity::FSVerityDigests().ParseFromString(str)) {
-        return Error() << "invalid build_manifest.pb";
+    if (str != "Hello, Microdroid!") {
+        return Error() << "invalid assets/hello";
     }
 
     return {};

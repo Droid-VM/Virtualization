@@ -22,6 +22,7 @@ android_test {
     use_embedded_native_libs: true,
     // We only support 64-bit ABI, but CTS demands all APKs to be multi-ABI.
     compile_multilib: "both",
+    data: [":MicrodroidTestAppExtra"],
 }
 
 // TODO(jiyong): make this a binary, not a shared library
@@ -38,9 +39,7 @@ cc_library_shared {
         "MicrodroidTestNativeLibSub",
     ],
     static_libs: [
-        "libfsverity_digests_proto_cc",
         "liblog",
-        "libprotobuf-cpp-lite-ndk",
     ],
 }
 
