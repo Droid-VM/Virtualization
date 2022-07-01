@@ -90,6 +90,9 @@ android_system_image {
         "microdroid_property_contexts",
         "microdroid_service_contexts",
 
+        "microdroid_kexec",
+        "microdroid_crashdump_kernel",
+
         // TODO(b/195425111) these should be added automatically
         "libcrypto", // used by many (init_second_stage, microdroid_manager, toybox, etc)
         "liblzma", // used by init_second_stage
@@ -102,6 +105,7 @@ android_system_image {
 
                 "microdroid_plat_sepolicy.cil",
                 "microdroid_plat_mapping_file",
+                "microdroid_crashdump_initrd",
             ],
         },
         lib64: {
@@ -239,6 +243,7 @@ microdroid_boot_cmdline = [
     "panic=-1",
     "bootconfig",
     "ioremap_guard",
+    "crashkernel=180M",
 ]
 
 bootimg {
