@@ -133,13 +133,14 @@ impl VmState {
         if let VmState::NotStarted { config } = state {
             let detect_hangup = config.detect_hangup;
             let (failure_pipe_read, failure_pipe_write) = create_pipe()?;
+            let dump = File::create("/data/local/tmp/virt/dump")?;
 
             // If this fails and returns an error, `self` will be left in the `Failed` state.
-            let child = Arc::new(run_vm(config, failure_pipe_write)?);
+            let child = Arc::new(run_vm(config, failure_pipe_write, &dump)?);
 
             let child_clone = child.clone();
             thread::spawn(move || {
-                instance.monitor(child_clone, failure_pipe_read, detect_hangup);
+                instance.monitor(child_clone, failure_pipe_read, dump, detect_hangup);
             });
 
             // If it started correctly, update the state.
@@ -223,7 +224,13 @@ impl VmInstance {
     ///
     /// This takes a separate reference to the `SharedChild` rather than using the one in
     /// `self.vm_state` to avoid holding the lock on `vm_state` while it is running.
-    fn monitor(&self, child: Arc<SharedChild>, mut failure_pipe_read: File, detect_hangup: bool) {
+    fn monitor(
+        &self,
+        child: Arc<SharedChild>,
+        mut failure_pipe_read: File,
+        dump: File,
+        detect_hangup: bool,
+    ) {
         let hungup = if detect_hangup {
             // Wait until payload is started or the crosvm process terminates. The checking of the
             // child process is needed because otherwise we will be waiting for a condition that
@@ -271,6 +278,7 @@ impl VmInstance {
             };
             Cow::from(s)
         };
+        drop(dump);
 
         self.callbacks.callback_on_died(self.cid, death_reason(&result, &failure_string));
 
@@ -358,7 +366,11 @@ fn death_reason(result: &Result<ExitStatus, io::Error>, failure_reason: &str) ->
 }
 
 /// Starts an instance of `crosvm` to manage a new VM.
-fn run_vm(config: CrosvmConfig, failure_pipe_write: File) -> Result<SharedChild, Error> {
+fn run_vm(
+    config: CrosvmConfig,
+    failure_pipe_write: File,
+    dump: &File,
+) -> Result<SharedChild, Error> {
     validate_config(&config)?;
 
     let mut command = Command::new(CROSVM_PATH);
@@ -412,6 +424,7 @@ fn run_vm(config: CrosvmConfig, failure_pipe_write: File) -> Result<SharedChild,
     let console_arg = format_serial_arg(&mut preserved_fds, &config.console_fd);
     let log_arg = format_serial_arg(&mut preserved_fds, &config.log_fd);
     let failure_serial_path = add_preserved_fd(&mut preserved_fds, &failure_pipe_write);
+    let dump_path = add_preserved_fd(&mut preserved_fds, dump);
 
     // Warning: Adding more serial devices requires you to shift the PCI device ID of the boot
     // disks in bootconfig.x86_64. This is because x86 crosvm puts serial devices and the block
@@ -427,6 +440,7 @@ fn run_vm(config: CrosvmConfig, failure_pipe_write: File) -> Result<SharedChild,
     command.arg("--serial=type=sink,hardware=virtio-console,num=2");
     // /dev/hvc2
     command.arg(format!("--serial={},hardware=virtio-console,num=3", &log_arg));
+    command.arg(format!("--serial=type=file,path={},hardware=virtio-console,num=4", &dump_path));
 
     if let Some(bootloader) = &config.bootloader {
         command.arg("--bios").arg(add_preserved_fd(&mut preserved_fds, bootloader));
