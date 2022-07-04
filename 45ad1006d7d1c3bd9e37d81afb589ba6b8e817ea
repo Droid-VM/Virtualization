@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13497023_4aebef12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-04T15:42:59Z",
+      "side": 1,
+      "message": "Yeah, this is a test of authfs, not the application of authfs in compos.",
+      "parentUuid": "d51e75fd_eee0e804",
+      "revId": "45ad1006d7d1c3bd9e37d81afb589ba6b8e817ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c23bb5c_d6e14b81",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-07-04T15:35:33Z",
       "side": 1,
       "message": "Eurrk.\n\nCould we make the build system generate this?\n\nOr at least define it as a textproto and convert it to binary?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 41
+      },
+      "revId": "45ad1006d7d1c3bd9e37d81afb589ba6b8e817ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcb7551f_3cf4120d",
+        "filename": "tests/testapk/assets/input_manifest.pb",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-04T15:42:59Z",
+      "side": 1,
+      "message": "It looks this ugly because git thinks it has enough printable characters to qualify as a text file :/\n\nI don\u0027t see that soong supports embedding generated assets into an APK. And I have a sneaking suspicion that changing that won\u0027t be as easy to hack as it initially sounds.",
+      "parentUuid": "8c23bb5c_d6e14b81",
       "range": {
         "startLine": 1,
         "startChar": 0,
