@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d51e75fd_eee0e804",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-04T15:35:33Z",
+      "side": 1,
+      "message": "The idea seems legit - we\u0027re not exercising the real manifest handling, but that\u0027s covered in the CompOS host \u0026 e2e tests.",
+      "revId": "45ad1006d7d1c3bd9e37d81afb589ba6b8e817ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c23bb5c_d6e14b81",
+        "filename": "tests/testapk/assets/input_manifest.pb",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-04T15:35:33Z",
+      "side": 1,
+      "message": "Eurrk.\n\nCould we make the build system generate this?\n\nOr at least define it as a textproto and convert it to binary?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 41
+      },
+      "revId": "45ad1006d7d1c3bd9e37d81afb589ba6b8e817ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
