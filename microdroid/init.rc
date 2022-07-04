@@ -15,6 +15,19 @@ on early-init
     # set RLIMIT_NICE to allow priorities from 19 to -20
     setrlimit nice 40 40
 
+    # Set up linker config subdirectories based on mount namespaces
+    mkdir /linkerconfig/bootstrap 0755
+    mkdir /linkerconfig/default 0755
+
+    # Generate ld.config.txt for early executed processes
+    exec -- /system/bin/bootstrap/linkerconfig --target /linkerconfig/bootstrap
+    chmod 644 /linkerconfig/bootstrap/ld.config.txt
+    copy /linkerconfig/bootstrap/ld.config.txt /linkerconfig/default/ld.config.txt
+    chmod 644 /linkerconfig/default/ld.config.txt
+
+    # Mount bootstrap linker configuration as current
+    mount none /linkerconfig/bootstrap /linkerconfig bind rec
+
     start ueventd
 
 on init
@@ -62,6 +75,13 @@ on init
     start vendor.dice-microdroid
     start diced
 
+on init && property:ro.boot.logd.enabled=1
+    # Start logd before any other services run to ensure we capture all of their logs.
+    # TODO(b/217796229) set filterspec if debug_level is app_only
+    start logd
+    start seriallogging
+
+on init
     mkdir /mnt/apk 0755 system system
     mkdir /mnt/extra-apk 0755 root root
     # Microdroid_manager starts apkdmverity/zipfuse/apexd
@@ -84,10 +104,6 @@ on init
 on init && property:ro.boot.microdroid.debuggable=1
     # Mount tracefs (with GID=AID_READTRACEFS)
     mount tracefs tracefs /sys/kernel/tracing gid=3012
-
-on init && property:ro.boot.logd.enabled=1
-    # Start logd before any other services run to ensure we capture all of their logs.
-    start logd
 
 on init && property:ro.boot.adb.enabled=1
     start adbd
