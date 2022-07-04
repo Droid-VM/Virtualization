@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33bae6eb_b300f547",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-04T14:27:35Z",
+      "side": 1,
+      "message": "By interaction, I meant more who is responsible for the loading, verification adding to dynamic linker search path etc.\n\nWe either have to say:\n  1) extra APK are pure inputs data, as this CL assumes, or\n  2) extra APKs are part of the payload itself.\n\nIf we want both, then we can start with 1), as that is how compos uses it for build_manifest.pb, and when there\u0027s a need for 2) we can add another microdroid config for that case.\n\nIf we just want 2) then I\u0027ll have to back to trying to pass build_manifest.pb to compos without BuildManifest.apk.",
+      "parentUuid": "823628a2_5ad0aa43",
+      "revId": "cc339a1978ee108ae5d11b60682a6458d05e6059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30e7217a_f16953ba",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
@@ -85,6 +103,30 @@
       "writtenOn": "2022-07-04T14:04:04Z",
       "side": 1,
       "message": "If you want a slightly obscure one-liner:\ncmd.args(noexec.then_some(\"--noexec\")).arg()...",
+      "range": {
+        "startLine": 371,
+        "startChar": 0,
+        "endLine": 373,
+        "endChar": 5
+      },
+      "revId": "cc339a1978ee108ae5d11b60682a6458d05e6059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4471b7e_fdad9041",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-04T14:27:35Z",
+      "side": 1,
+      "message": "It took me 2 round trips to the docs to figure out how this works so I might pass this time around. I\u0027ve not seen those function on `bool` before so I\u0027ve learned something.",
+      "parentUuid": "30e7217a_f16953ba",
       "range": {
         "startLine": 371,
         "startChar": 0,
