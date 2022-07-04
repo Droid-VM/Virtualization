@@ -22,6 +22,30 @@
       },
       "revId": "4cf882a1a5b9341c544ab35173ac7fb3b9dd212b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d90fb3f5_0b35a979",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-07-04T05:36:06Z",
+      "side": 1,
+      "message": "Hmm, I don\u0027t think they are exactly same, because one is run on host (getDevice().getProperty()) and the other on device (SystemProperties.get()).\n\nCan I resolve it with a follow-up change? Let\u0027s fix the test first and then clean it up later. In fact, we also need to dedup the codes on MicrodroidTests and MicrodroidBenchmarks. I think we can resolve them at once.",
+      "parentUuid": "2d12b2a5_a6590c09",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 5
+      },
+      "revId": "4cf882a1a5b9341c544ab35173ac7fb3b9dd212b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
