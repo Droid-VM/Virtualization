@@ -46,6 +46,30 @@
       },
       "revId": "3854e4082d0dafad9d510f36307245cbdb2f805d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "824e58b5_0fb0798a",
+        "filename": "zipfuse/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-04T14:34:13Z",
+      "side": 1,
+      "message": "Ah, I was misreading it; we don\u0027t pass -o to zipfuse at all.\n\nBut for some reason we do ro \u0026 noexec via mount_flags not mount_options?",
+      "parentUuid": "32f20193_9b096c52",
+      "range": {
+        "startLine": 47,
+        "startChar": 23,
+        "endLine": 47,
+        "endChar": 38
+      },
+      "revId": "3854e4082d0dafad9d510f36307245cbdb2f805d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
