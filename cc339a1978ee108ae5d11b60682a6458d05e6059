@@ -52,6 +52,47 @@
       "parentUuid": "f67691f2_bf1f33fe",
       "revId": "cc339a1978ee108ae5d11b60682a6458d05e6059",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "823628a2_5ad0aa43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-04T14:04:04Z",
+      "side": 1,
+      "message": "I agree that it blocks loading shared libraries, and that that is a good thing.\n\nThis is for config APKs. Code being run inside the VM should be part of the VM identity.",
+      "parentUuid": "f67691f2_bf1f33fe",
+      "revId": "cc339a1978ee108ae5d11b60682a6458d05e6059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30e7217a_f16953ba",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-04T14:04:04Z",
+      "side": 1,
+      "message": "If you want a slightly obscure one-liner:\ncmd.args(noexec.then_some(\"--noexec\")).arg()...",
+      "range": {
+        "startLine": 371,
+        "startChar": 0,
+        "endLine": 373,
+        "endChar": 5
+      },
+      "revId": "cc339a1978ee108ae5d11b60682a6458d05e6059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
