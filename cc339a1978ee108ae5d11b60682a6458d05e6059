@@ -34,6 +34,24 @@
       "parentUuid": "903c5a18_25bb6119",
       "revId": "cc339a1978ee108ae5d11b60682a6458d05e6059",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "485c8d44_6ede7006",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-07-04T13:59:55Z",
+      "side": 1,
+      "message": "Then I think it\u0027s the choice of the user who decides whether to allow executable or not in the extra APKs.\n\n\u003e How would that interaction work?\n\nWell, the main APK could locate a file in the extra APK via `/mnt/extra-apk/\u003cnum\u003e`? Yeah, having number in the path doesn\u0027t look good (`num` should actually have been `package_name`) and we currently don\u0027t have such a use case, but I think this CL is too restrictive for the future.",
+      "parentUuid": "f67691f2_bf1f33fe",
+      "revId": "cc339a1978ee108ae5d11b60682a6458d05e6059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
