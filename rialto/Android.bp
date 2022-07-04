@@ -1,0 +1,93 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_ffi_static {
+    name: "librialto",
+    crate_name: "rialto",
+    srcs: ["src/main.rs"],
+    edition: "2021",
+    no_stdlibs: true,
+    stdlibs: [
+        "libcompiler_builtins.rust_sysroot",
+        "libcore.rust_sysroot",
+    ],
+    rustlibs: [
+        "libaarch64_paging",
+        "libbuddy_system_allocator",
+        "libvmbase",
+    ],
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+    apex_available: ["com.android.virt"],
+}
+
+cc_binary {
+    name: "rialto_elf",
+    stem: "rialto",
+    srcs: [
+        "idmap.S",
+    ],
+    static_libs: [
+        "librialto",
+        "libvmbase_entry",
+    ],
+    static_executable: true,
+    nocrt: true,
+    system_shared_libs: ["libc"],
+    stl: "none",
+    linker_scripts: ["image.ld"],
+    installable: false,
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+    sanitize: {
+        hwaddress: false,
+    },
+    apex_available: ["com.android.virt"],
+}
+
+raw_binary {
+    name: "rialto",
+    src: ":rialto_elf",
+    stem: "rialto.bin",
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+}
+
+rust_test {
+    name: "rialto_test",
+    crate_name: "rialto_test",
+    srcs: ["tests/test.rs"],
+    prefer_rlib: true,
+    edition: "2021",
+    rustlibs: [
+        "android.system.virtualizationservice-rust",
+        "libandroid_logger",
+        "libanyhow",
+        "liblibc",
+        "liblog_rust",
+        "libvmclient",
+    ],
+    data: [
+        ":rialto",
+    ],
+    test_suites: ["general-tests"],
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+}
