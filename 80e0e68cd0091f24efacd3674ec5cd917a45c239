@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10b8022b_cada4864",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-04T10:56:22Z",
+      "side": 1,
+      "message": "I\u0027m confused why this wasn\u0027t anywhere in init.rc before this change. Where were we generating linker config?\n\nAlso it says it depends on bootstrap APEXes (for com.android.runtime at least), but we aren\u0027t running apexd-bootstrap anywhere.\n\nAnd could we have a comment on why it needs to happen here?",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 65,
+        "endChar": 24
+      },
+      "revId": "80e0e68cd0091f24efacd3674ec5cd917a45c239",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22fd3c2d_3c0ff688",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-04T10:56:22Z",
+      "side": 1,
+      "message": "That bug is closed; can we re-point this to b/217796229? (Or even fix it?)\n\nAnd can we add a comment why this needs to be done so early, pointing at b/2144621?",
+      "range": {
+        "startLine": 180,
+        "startChar": 12,
+        "endLine": 180,
+        "endChar": 23
+      },
+      "revId": "80e0e68cd0091f24efacd3674ec5cd917a45c239",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
