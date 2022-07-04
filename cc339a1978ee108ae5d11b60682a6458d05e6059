@@ -16,6 +16,24 @@
       "message": "This prevents having an executable in the APK, but doesn\u0027t (rightfully) prevent shared libraries, right?",
       "revId": "cc339a1978ee108ae5d11b60682a6458d05e6059",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f67691f2_bf1f33fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-04T13:40:14Z",
+      "side": 1,
+      "message": "noexec prevents libraries being loaded too.\n\nI\u0027m now confused as to the behaviour I\u0027m aiming for. I was understanding that these extra APKs were just going to be a means to make a tree of data files available within the VM, those files would contain untrusted input data and the payload would be responsible carefully accessing, measuring, validating them as is required by the use case.\n\nBut you\u0027re suggesting here that the extra APKs should be a way to load extra code into the VMs for the payload to execute? How would that interaction work? I\u0027d like to understand properly to tell which parts microdroid_manager should be responsible for and which parts the payload should be responsible for.",
+      "parentUuid": "903c5a18_25bb6119",
+      "revId": "cc339a1978ee108ae5d11b60682a6458d05e6059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
