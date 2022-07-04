@@ -62,6 +62,9 @@ on init
     start vendor.dice-microdroid
     start diced
 
+    # Update linkerconfig to run system/bin/logcat with microdroid_manager.
+    update_linker_config
+
     mkdir /mnt/apk 0755 system system
     mkdir /mnt/extra-apk 0755 root root
     # Microdroid_manager starts apkdmverity/zipfuse/apexd

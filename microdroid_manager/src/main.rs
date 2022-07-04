@@ -176,6 +176,14 @@ fn try_main() -> Result<()> {
     let _ = kernlog::init();
     info!("started.");
 
+    // Start logging if enabled
+    // We need this ASAP to see early kernel logs, in case of try_run_payload failure. That is
+    // because we don't have earlycon, and seriallogging consumes the kernel ring buffer later.
+    // TODO(b/217796229) set filterspec if debug_level is app_only
+    if system_properties::read_bool(LOGD_ENABLED_PROP, false)? {
+        system_properties::write("ctl.start", "seriallogging")?;
+    }
+
     let service = get_vms_rpc_binder()
         .context("cannot connect to VirtualMachineService")
         .map_err(|e| MicrodroidError::FailedToConnectToVirtualizationService(e.to_string()))?;
@@ -591,12 +599,6 @@ fn exec_task(task: &Task, service: &Strong<dyn IVirtualMachineService>) -> Resul
 
     info!("notifying payload started");
     service.notifyPayloadStarted()?;
-
-    // Start logging if enabled
-    // TODO(b/200914564) set filterspec if debug_level is app_only
-    if system_properties::read_bool(LOGD_ENABLED_PROP, false)? {
-        system_properties::write("ctl.start", "seriallogging")?;
-    }
 
     let exit_status = command.spawn()?.wait()?;
     exit_status.code().ok_or_else(|| anyhow!("Failed to get exit_code from the paylaod."))
