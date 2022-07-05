@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8880e58a_a5bf5ad6",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-07-05T14:33:31Z",
+      "side": 1,
+      "message": "I think we don\u0027t have to copy the mistake/bug.",
+      "parentUuid": "2488234b_b7d6abf0",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 13
+      },
+      "revId": "1c16f2bb3cbe524b1f5112e16a1bdee563974f1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "357c28e5_00f05cf8",
         "filename": "microdroid/init.rc",
         "patchSetId": 3
@@ -78,6 +102,30 @@
       "writtenOn": "2022-07-05T11:39:16Z",
       "side": 1,
       "message": "Where is this used?",
+      "range": {
+        "startLine": 26,
+        "startChar": 14,
+        "endLine": 26,
+        "endChar": 49
+      },
+      "revId": "1c16f2bb3cbe524b1f5112e16a1bdee563974f1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75f7ed9e_c80a2c66",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-07-05T14:33:31Z",
+      "side": 1,
+      "message": "This is for the normal case: processes running in the \"default\" mount namespace.",
+      "parentUuid": "357c28e5_00f05cf8",
       "range": {
         "startLine": 26,
         "startChar": 14,
