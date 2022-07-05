@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3a89646_62b88e7c",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-07-05T04:12:03Z",
+      "side": 1,
+      "message": "\u003e I\u0027m confused why this wasn\u0027t anywhere in init.rc before this change. Where were we generating linker config?\n\nIt\u0027s done by perform_apex_config. We need this to run system/bin/logcat.\n\n\u003e Also it says it depends on bootstrap APEXes (for com.android.runtime at least), but we aren\u0027t running apexd-bootstrap anywhere.\n\nAFAIK, actually not. Here, we are running system/bin/linkerconfig which doesn\u0027t depend on com.android.runtime. This is to run system/bin/microdroid_manager and system/bin/logcat which doesn\u0027t depend on com.android.runtime.\n\nkiyoungkim@ and jooyung@ for more details. Added a comment.",
+      "parentUuid": "60f2871e_fd83594c",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 65,
+        "endChar": 24
+      },
+      "revId": "80e0e68cd0091f24efacd3674ec5cd917a45c239",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22fd3c2d_3c0ff688",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2d68b6f_98ba8267",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-07-05T04:12:03Z",
+      "side": 1,
+      "message": "sorry, what\u0027s b/2144621?\n\nanyway, done",
+      "parentUuid": "22fd3c2d_3c0ff688",
+      "range": {
+        "startLine": 180,
+        "startChar": 12,
+        "endLine": 180,
+        "endChar": 23
+      },
+      "revId": "80e0e68cd0091f24efacd3674ec5cd917a45c239",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "650e65d9_e01bcbeb",
@@ -84,6 +132,30 @@
       "writtenOn": "2022-07-04T11:34:00Z",
       "side": 1,
       "message": "Can we move this to init.rc?",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 5
+      },
+      "revId": "80e0e68cd0091f24efacd3674ec5cd917a45c239",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0ceeaf5_05bf9e14",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-07-05T04:12:03Z",
+      "side": 1,
+      "message": "Hmm, I think we can but I\u0027m not sure. I\u0027d like to leave this here to control the timing exactly.",
+      "parentUuid": "650e65d9_e01bcbeb",
       "range": {
         "startLine": 181,
         "startChar": 0,
