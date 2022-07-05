@@ -158,6 +158,30 @@
       },
       "revId": "1c16f2bb3cbe524b1f5112e16a1bdee563974f1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dd30570_ceab1005",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-07-05T23:41:48Z",
+      "side": 1,
+      "message": "Good catch. Bind mind to the default one is done by the init command `enter_default_mount_ns` which is missing in this change. Inseob, please fix this as well.",
+      "parentUuid": "4cdf2069_36447f67",
+      "range": {
+        "startLine": 26,
+        "startChar": 14,
+        "endLine": 26,
+        "endChar": 49
+      },
+      "revId": "1c16f2bb3cbe524b1f5112e16a1bdee563974f1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
