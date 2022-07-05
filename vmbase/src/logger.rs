@@ -12,21 +12,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! Basic functionality for bare-metal binaries to run in a VM under crosvm.
+//! Logger for vmbase.
 
-#![no_std]
+extern crate log;
 
-pub mod console;
-mod entry;
-pub mod logger;
-pub mod power;
-pub mod uart;
+use super::println;
+use log::{LevelFilter, Log, Metadata, Record, SetLoggerError};
 
-use core::panic::PanicInfo;
-use power::reboot;
+struct Logger;
+static LOGGER: Logger = Logger;
 
-#[panic_handler]
-fn panic(info: &PanicInfo) -> ! {
-    eprintln!("{}", info);
-    reboot()
+impl Log for Logger {
+    fn enabled(&self, _metadata: &Metadata) -> bool {
+        true
+    }
+
+    fn log(&self, record: &Record) {
+        println!("[{}] {}", record.level(), record.args());
+    }
+
+    fn flush(&self) {}
+}
+
+/// Initialize vmbase logger with a given max logging level.
+pub fn init(max_level: LevelFilter) -> Result<(), SetLoggerError> {
+    log::set_logger(&LOGGER).map(|()| log::set_max_level(max_level))
 }
