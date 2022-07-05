@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fea6e0c_2183cd8a",
+        "filename": "vmbase/src/logger.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-05T14:37:28Z",
+      "side": 1,
+      "message": "We should maybe have a comment that logging inside an exception or panic handler could go wrong (since we\u0027re not using eprintln - and probably shouldn\u0027t for performance reasons?)",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 31,
+        "endChar": 15
+      },
+      "revId": "a68806804886ea79946ebb850591af9af12d8137",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
