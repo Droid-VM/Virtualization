@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38750ea8_e23eb802",
+        "filename": "vmbase/example/src/layout.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-07-06T12:44:56Z",
+      "side": 1,
+      "message": "Can\u0027t we use `dtb.len()` (same below for `text`, `rodata`, `data`, ...)?",
+      "range": {
+        "startLine": 85,
+        "startChar": 66,
+        "endLine": 85,
+        "endChar": 85
+      },
+      "revId": "153aad9f6facf01b1e30d7efb99533238ba9ce61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28b34a61_c0a6a2bb",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-07-06T12:44:56Z",
+      "side": 1,
+      "message": "IIUC, the `.0` is there to extract the underlying `usize`? Can\u0027t we use `u64::from(dtb_range().start)`?",
+      "range": {
+        "startLine": 53,
+        "startChar": 38,
+        "endLine": 53,
+        "endChar": 40
+      },
+      "revId": "153aad9f6facf01b1e30d7efb99533238ba9ce61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
