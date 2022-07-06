@@ -292,6 +292,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f5db6f37_5ebacbef",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-07-06T15:19:53Z",
+      "side": 1,
+      "message": "I suggest using the `Display` implementation on `VirtualAddress`, like the vmbase example does. It will give you 16 hex digits, which seems reasonable for a 64-bit address.",
+      "parentUuid": "e9dfdad3_80177227",
+      "range": {
+        "startLine": 79,
+        "startChar": 57,
+        "endLine": 79,
+        "endChar": 59
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f016f95_e48f35e7",
         "filename": "rialto/src/main.rs",
         "patchSetId": 1
@@ -343,6 +367,30 @@
       "writtenOn": "2022-07-06T15:08:42Z",
       "side": 1,
       "message": "Should we sanity-check this against TCR.T0SZ?",
+      "range": {
+        "startLine": 105,
+        "startChar": 35,
+        "endLine": 105,
+        "endChar": 45
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "583256fe_e6d281fe",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-07-06T15:19:53Z",
+      "side": 1,
+      "message": "That\u0027s hardcoded in `entry.S` so there doesn\u0027t seem much point in a runtime check, but you could have a comment on the `ROOT_LEVEL` constant I guess.",
+      "parentUuid": "8631ea8b_68ef88f3",
       "range": {
         "startLine": 105,
         "startChar": 35,
