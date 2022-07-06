@@ -89,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "389b95b2_a2390cfb",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-07-06T01:05:33Z",
+      "side": 1,
+      "message": "I removed this whole blob.",
+      "parentUuid": "8880e58a_a5bf5ad6",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 13
+      },
+      "revId": "1c16f2bb3cbe524b1f5112e16a1bdee563974f1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "357c28e5_00f05cf8",
@@ -174,6 +198,30 @@
       "side": 1,
       "message": "Good catch. Bind mind to the default one is done by the init command `enter_default_mount_ns` which is missing in this change. Inseob, please fix this as well.",
       "parentUuid": "4cdf2069_36447f67",
+      "range": {
+        "startLine": 26,
+        "startChar": 14,
+        "endLine": 26,
+        "endChar": 49
+      },
+      "revId": "1c16f2bb3cbe524b1f5112e16a1bdee563974f1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c60dbdc_5faaf478",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-07-06T01:05:33Z",
+      "side": 1,
+      "message": "It turned out that this whole blob is not needed, as the linker uses its default namespace: https://cs.android.com/android/platform/superproject/+/master:bionic/linker/linker.cpp;l\u003d3332;drc\u003d2bac1f81c1a55f99c887ef7e6e0dc717c0339e68",
+      "parentUuid": "7dd30570_ceab1005",
       "range": {
         "startLine": 26,
         "startChar": 14,
