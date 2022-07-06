@@ -3,6 +3,207 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a3a00e4_a8a142e8",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-06T12:41:36Z",
+      "side": 1,
+      "message": "This at least should be extracted into a defaults.\n\n(And maybe we should have one for all the rust stuff)",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 6
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fac8632_19b0500b",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-06T12:41:36Z",
+      "side": 1,
+      "message": "Omit, it\u0027s the default?",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 22
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34b6c29c_ea0cd43d",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-06T12:41:36Z",
+      "side": 1,
+      "message": "I think you\u0027ll need compile_multilib: \"64\" here \n\nHow do we disable this for x64?",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 35
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50c964be_6dd85086",
+        "filename": "rialto/idmap.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-06T12:41:36Z",
+      "side": 1,
+      "message": "An overall comment here would be useful.\n\nThis is the initial idmap set up before we enter Rust, which then changes it - right?",
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b59a7672_9227a395",
+        "filename": "rialto/idmap.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-06T12:41:36Z",
+      "side": 1,
+      "message": "Does it actually matter whether this is marked NG?\nI guess we will also be mapping this address space into EL0, whereas we won\u0027t for the other two?",
+      "range": {
+        "startLine": 33,
+        "startChar": 81,
+        "endLine": 33,
+        "endChar": 83
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ef14a36_e826d4bb",
+        "filename": "rialto/idmap.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-06T12:41:36Z",
+      "side": 1,
+      "message": "Why is this + when all the other addresses are merged in via |  ?",
+      "range": {
+        "startLine": 43,
+        "startChar": 24,
+        "endLine": 43,
+        "endChar": 27
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bdc5dc8_d5daa7aa",
+        "filename": "rialto/idmap.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-06T12:41:36Z",
+      "side": 1,
+      "message": "Could we define suitable constants, so these could be 2*GiB + 2*MiB etc?\n\n(Counting the trailing zeroes is not fun, but it looks like the assembler doesn\u0027t allow e.g. 0x8000_0000)",
+      "range": {
+        "startLine": 47,
+        "startChar": 25,
+        "endLine": 47,
+        "endChar": 35
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "422e5b7b_ba6161cc",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-06T12:41:36Z",
+      "side": 1,
+      "message": "Mention crosvm, if that\u0027s where these rules come from?",
+      "range": {
+        "startLine": 48,
+        "startChar": 4,
+        "endLine": 48,
+        "endChar": 48
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f3444f2_215d0cd8",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-06T12:41:36Z",
+      "side": 1,
+      "message": "Comment on why this is safe",
+      "range": {
+        "startLine": 53,
+        "startChar": 8,
+        "endLine": 53,
+        "endChar": 14
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c73aff0_0c6297c6",
         "filename": "rialto/src/main.rs",
         "patchSetId": 1
@@ -14,6 +215,29 @@
       "writtenOn": "2022-07-06T12:03:33Z",
       "side": 1,
       "message": "Is there any reason why this needs to be a macro rather than just a function?",
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de89cca2_000b1114",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-06T12:41:36Z",
+      "side": 1,
+      "message": "You could use the built-in implementation of display (drop the .0), although it seems to force 18 hex digits which seems slightly excessive.",
+      "range": {
+        "startLine": 79,
+        "startChar": 57,
+        "endLine": 79,
+        "endChar": 59
+      },
       "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -71,6 +295,75 @@
       "writtenOn": "2022-07-06T12:03:33Z",
       "side": 1,
       "message": "Update this comment.",
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d7e7a8a_8c3a4367",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-06T12:41:36Z",
+      "side": 1,
+      "message": "Why not just \u003e\u003d1.0 ?",
+      "range": {
+        "startLine": 65,
+        "startChar": 26,
+        "endLine": 65,
+        "endChar": 30
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66aa9cde_8bd1ad52",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-06T12:41:36Z",
+      "side": 1,
+      "message": "There should probably be a timeout here.\nI\u0027m in the process of adding support for that (very slowly).",
+      "range": {
+        "startLine": 74,
+        "startChar": 26,
+        "endLine": 74,
+        "endChar": 40
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25104925_39b65fe4",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-06T12:41:36Z",
+      "side": 1,
+      "message": "FWIW nix::unistd::pipe2 is a little nicer to use\n\nWe have at least 3 or 4 versions of create_pipe() which is mildly distressing.",
+      "range": {
+        "startLine": 82,
+        "startChar": 23,
+        "endLine": 82,
+        "endChar": 33
+      },
       "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
