@@ -22,6 +22,23 @@
       },
       "revId": "a68806804886ea79946ebb850591af9af12d8137",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60cf5dfb_64a49cd2",
+        "filename": "vmbase/src/logger.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-07-06T14:18:39Z",
+      "side": 1,
+      "message": "Nit: this would be more readable using the question mark operator, like:\n\n```rust\nlog::set_logger(\u0026LOGGER)?;\nlog::set_max_level();\nOk(())\n```",
+      "revId": "a68806804886ea79946ebb850591af9af12d8137",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
