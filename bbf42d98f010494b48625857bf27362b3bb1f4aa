@@ -159,6 +159,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0c53986_4f0106c5",
+        "filename": "rialto/idmap.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-07-06T15:52:23Z",
+      "side": 1,
+      "message": "nit: Could this use `.align 12, 0` (or `.balign 4096, 0`) instead so that we are sure that `0f` remains 4KiB-aligned and can have single-line changes when inserting/removing PTEs?",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 44,
+        "endChar": 6
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4bdc5dc8_d5daa7aa",
         "filename": "rialto/idmap.S",
         "patchSetId": 1
@@ -175,6 +198,29 @@
         "startChar": 25,
         "endLine": 47,
         "endChar": 35
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13f2775f_3a63bf4f",
+        "filename": "rialto/idmap.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-07-06T15:52:23Z",
+      "side": 1,
+      "message": "nit: see above",
+      "range": {
+        "startLine": 50,
+        "startChar": 2,
+        "endLine": 50,
+        "endChar": 6
       },
       "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
