@@ -135,6 +135,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac8364ba_a4af00b7",
+        "filename": "rialto/idmap.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-07-06T15:08:42Z",
+      "side": 1,
+      "message": "Other addresses are literals, this is a label, which might not support bitwise operations?",
+      "parentUuid": "7ef14a36_e826d4bb",
+      "range": {
+        "startLine": 43,
+        "startChar": 24,
+        "endLine": 43,
+        "endChar": 27
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4bdc5dc8_d5daa7aa",
         "filename": "rialto/idmap.S",
         "patchSetId": 1
@@ -244,6 +268,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e9dfdad3_80177227",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-07-06T15:08:42Z",
+      "side": 1,
+      "message": "Given how common this debug message seems to be (here and in vmbase_example), should we `derive(Debug)` once and for all?",
+      "parentUuid": "de89cca2_000b1114",
+      "range": {
+        "startLine": 79,
+        "startChar": 57,
+        "endLine": 79,
+        "endChar": 59
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f016f95_e48f35e7",
         "filename": "rialto/src/main.rs",
         "patchSetId": 1
@@ -277,6 +325,29 @@
         "startChar": 25,
         "endLine": 100,
         "endChar": 41
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8631ea8b_68ef88f3",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-07-06T15:08:42Z",
+      "side": 1,
+      "message": "Should we sanity-check this against TCR.T0SZ?",
+      "range": {
+        "startLine": 105,
+        "startChar": 35,
+        "endLine": 105,
+        "endChar": 45
       },
       "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
