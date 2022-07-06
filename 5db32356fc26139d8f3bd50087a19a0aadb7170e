@@ -16,6 +16,24 @@
       "message": "I still think this will only confuse people. There is simply no reason to care about these bits at this point, and it is far better just to set/clear the ones whose values you care about, and leave the other ones alone.",
       "revId": "5db32356fc26139d8f3bd50087a19a0aadb7170e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0544942a_b52c47d4",
+        "filename": "pvmfw/payload.S",
+        "patchSetId": 10
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-07-06T15:24:04Z",
+      "side": 1,
+      "message": "It seems a bit silly to read the value of `SCTLR` when we have just set it to a hardcoded value ourselves in `entry.S` a short time earlier, so we already know exactly what it is. I don\u0027t mind what we set ITD and SED to, I think it makes sense to clear them along with everything else we don\u0027t care about, but reading the values we just set before just makes this code more complex for no reason, and harder to see what the value we actually start the payload with is.",
+      "parentUuid": "bcf4702f_e5f0f92c",
+      "revId": "5db32356fc26139d8f3bd50087a19a0aadb7170e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
