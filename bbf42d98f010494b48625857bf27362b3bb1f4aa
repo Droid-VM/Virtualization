@@ -403,6 +403,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0cf33e9f_20985744",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-07-06T15:43:53Z",
+      "side": 1,
+      "message": "True but nothing prevents a change in `entry.S` from breaking this code.\n\nIf this Rust code is going to manage the MMU, wouldn\u0027t it make more sense for it to configure the relevant system registers the way it wants them instead of making the unwritten assumption that they hold the right values? The implementation as we have it right now doesn\u0027t feel as robust as it could be.\n\nIn particular, setting `ROOT_LEVEL \u003d 0` would simply not work, right?",
+      "parentUuid": "583256fe_e6d281fe",
+      "range": {
+        "startLine": 105,
+        "startChar": 35,
+        "endLine": 105,
+        "endChar": 45
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "40f0b2fe_7d0902ff",
         "filename": "rialto/tests/test.rs",
         "patchSetId": 1
