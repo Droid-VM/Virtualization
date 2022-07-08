@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2013be4f_16c02452",
+        "filename": "vmbase/src/logger.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:14:24Z",
+      "side": 1,
+      "message": "Sounds like a good idea. I made it use eprintln! for ERROR. LMKWYT",
+      "parentUuid": "5fea6e0c_2183cd8a",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 31,
+        "endChar": 15
+      },
+      "revId": "a68806804886ea79946ebb850591af9af12d8137",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60cf5dfb_64a49cd2",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-07-06T14:18:39Z",
       "side": 1,
       "message": "Nit: this would be more readable using the question mark operator, like:\n\n```rust\nlog::set_logger(\u0026LOGGER)?;\nlog::set_max_level();\nOk(())\n```",
+      "revId": "a68806804886ea79946ebb850591af9af12d8137",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7877d71c_b8b2b4d7",
+        "filename": "vmbase/src/logger.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:14:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60cf5dfb_64a49cd2",
       "revId": "a68806804886ea79946ebb850591af9af12d8137",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
