@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59525c8a_df4afe09",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-08T13:35:41Z",
+      "side": 1,
+      "message": "None means it didn\u0027t exit after the timeout - and I don\u0027t want to wait forever. We can increase the timeout if need be (I just made the current value up).",
+      "parentUuid": "43b9ed1f_b4437175",
+      "range": {
+        "startLine": 136,
+        "startChar": 16,
+        "endLine": 137,
+        "endChar": 86
+      },
+      "revId": "371ba6bedaa9b44f171131227a7cdbfaaff87b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f84054ad_f96e0c02",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-08T12:11:23Z",
       "side": 1,
       "message": "What is the purpose of this renaming? In the binder world, the act of obtaining a handle to a remote interface is often referred to as \u0027getService\u0027.",
+      "range": {
+        "startLine": 144,
+        "startChar": 11,
+        "endLine": 144,
+        "endChar": 26
+      },
+      "revId": "371ba6bedaa9b44f171131227a7cdbfaaff87b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e6111c6_d0ca1aef",
+        "filename": "vmclient/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-08T13:35:41Z",
+      "side": 1,
+      "message": "The get_ name confused me, briefly - e.g. if you call get_service twice you end up with two connections.\n\nThe comment on the function and where it is used describe it as connecting, and the implementation calls connect_... . \n\nIt just seemed like a more accurate name.",
+      "parentUuid": "f84054ad_f96e0c02",
       "range": {
         "startLine": 144,
         "startChar": 11,
