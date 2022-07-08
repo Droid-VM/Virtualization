@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9de635b_aeb4ea0b",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-07-08T02:52:58Z",
+      "side": 1,
+      "message": "It seems like this will run even if ramdump actually didn\u0027t happen, resulting in writing an empty file, doesn\u0027t it?",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 240,
+        "endChar": 1
+      },
+      "revId": "b50d4087d33c9a14e0c718bb96092dccea79ab99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
