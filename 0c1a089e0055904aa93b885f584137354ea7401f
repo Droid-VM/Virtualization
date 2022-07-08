@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a7f68c9_6353332c",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-07-08T13:35:23Z",
+      "side": 1,
+      "message": "The idea was to see that logcat | grep tombstone_transmit.microdroid:.*data/tombstones/transmit.txt is non null\n\n\n\nYou might need assert here too\nassertThat(android.tryRun(\"egrep\", \"\u0027tombstone_transmit.microdroid:.*data/tombstones/transmit.txt\u0027\", LOG_PATH), is(nullValue()));",
+      "range": {
+        "startLine": 398,
+        "startChar": 8,
+        "endLine": 398,
+        "endChar": 15
+      },
+      "revId": "0c1a089e0055904aa93b885f584137354ea7401f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "739437db_774932cd",
         "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
         "patchSetId": 2
