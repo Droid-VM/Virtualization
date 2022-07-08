@@ -22,6 +22,30 @@
       },
       "revId": "b50d4087d33c9a14e0c718bb96092dccea79ab99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4f7def2_5d22cf0c",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-07-08T02:57:48Z",
+      "side": 1,
+      "message": "When there is no ramdump, get_ramdump() returns None. Then this function becomes noop.",
+      "parentUuid": "e9de635b_aeb4ea0b",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 240,
+        "endChar": 1
+      },
+      "revId": "b50d4087d33c9a14e0c718bb96092dccea79ab99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
