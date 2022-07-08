@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43b9ed1f_b4437175",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-07-08T12:11:23Z",
+      "side": 1,
+      "message": "Why don\u0027t we handle the None case which can happen when VM is still running even after the timeout? That might mean truncated log, right? Or we don\u0027t care about truncated log when the task didn\u0027t have a chance to run?",
+      "range": {
+        "startLine": 136,
+        "startChar": 16,
+        "endLine": 137,
+        "endChar": 86
+      },
+      "revId": "371ba6bedaa9b44f171131227a7cdbfaaff87b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f84054ad_f96e0c02",
+        "filename": "vmclient/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-07-08T12:11:23Z",
+      "side": 1,
+      "message": "What is the purpose of this renaming? In the binder world, the act of obtaining a handle to a remote interface is often referred to as \u0027getService\u0027.",
+      "range": {
+        "startLine": 144,
+        "startChar": 11,
+        "endLine": 144,
+        "endChar": 26
+      },
+      "revId": "371ba6bedaa9b44f171131227a7cdbfaaff87b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
