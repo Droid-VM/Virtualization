@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33f2bb83_be5026ac",
+        "filename": "vmbase/src/logger.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-07-08T11:28:36Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s a good idea. `eprintln` will forcibly reset the serial device, interfering with anything that is currently using it, and possibly resulting in data being dropped or bogus data being output. It should really only be used when absolutely needed, such as from an exception handler that might otherwise deadlock. The \u0027e\u0027 in `eprintln` is for \u0027emergency\u0027. I suggest we keep this code as it was, and instead document that:\n\n1. Logging functions must not be called from exception handlers as it might result in deadlock.\n2. Exception handlers which are only dumping debug information before a crash should use `eprintln` directly. After this happens they will never return to normal code anyway, so the state of the UART doesn\u0027t matter.\n3. Exception handlers which need to do some significant work (which might want logging) should instead first switch to some thread context where locks are handled properly. We\u0027ll need something like this anyway if we want to have multiple threads in the VM.",
+      "parentUuid": "2013be4f_16c02452",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 31,
+        "endChar": 15
+      },
+      "revId": "a68806804886ea79946ebb850591af9af12d8137",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60cf5dfb_64a49cd2",
         "filename": "vmbase/src/logger.rs",
         "patchSetId": 1
