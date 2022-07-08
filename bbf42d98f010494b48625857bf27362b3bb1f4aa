@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04f8ba61_0ddfceef",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "Yeah. I wish there were universal defaults across rust/cc/others. And raw_binary doesn\u0027t support defaults either (that we might be able to change).",
+      "parentUuid": "3a3a00e4_a8a142e8",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 6
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0fac8632_19b0500b",
         "filename": "rialto/Android.bp",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-06T12:41:36Z",
       "side": 1,
       "message": "Omit, it\u0027s the default?",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 22
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c93ce1f_86acecd1",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fac8632_19b0500b",
       "range": {
         "startLine": 60,
         "startChar": 4,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17642153_95a49002",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "Do I? I only vaguely understand what these things mean.\n\nx64: The whole target is disabled. That seems to be enough for the vmbase integration test. Do we need more?",
+      "parentUuid": "34b6c29c_ea0cd43d",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 35
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "50c964be_6dd85086",
         "filename": "rialto/idmap.S",
         "patchSetId": 1
@@ -83,6 +155,24 @@
       "writtenOn": "2022-07-06T12:41:36Z",
       "side": 1,
       "message": "An overall comment here would be useful.\n\nThis is the initial idmap set up before we enter Rust, which then changes it - right?",
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da0b13b6_629e92c7",
+        "filename": "rialto/idmap.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50c964be_6dd85086",
       "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -157,6 +247,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cbc1b19_9f414990",
+        "filename": "rialto/idmap.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "It\u0027s because the value of `0f` is unknown at compile time, so the compiler needs to generate a relocation entry for the linker to populate. That entry says to replace the 8 bytes here with `\u003cconst\u003e + \u003caddress of 0f\u003e`. OR cannot be used here because there the object format does not have a relocation entry type for that operator.\n\nIf you\u0027re interested, check out section 5.7.6 of aaelf64.pdf here:\nhttps://github.com/ARM-software/abi-aa/releases",
+      "parentUuid": "ac8364ba_a4af00b7",
+      "range": {
+        "startLine": 43,
+        "startChar": 24,
+        "endLine": 43,
+        "endChar": 27
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0c53986_4f0106c5",
@@ -170,6 +284,30 @@
       "writtenOn": "2022-07-06T15:52:23Z",
       "side": 1,
       "message": "nit: Could this use `.align 12, 0` (or `.balign 4096, 0`) instead so that we are sure that `0f` remains 4KiB-aligned and can have single-line changes when inserting/removing PTEs?",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 44,
+        "endChar": 6
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b17a4aba_94dd002c",
+        "filename": "rialto/idmap.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0c53986_4f0106c5",
       "range": {
         "startLine": 44,
         "startChar": 1,
@@ -203,6 +341,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7c2d6fb_de7b6446",
+        "filename": "rialto/idmap.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bdc5dc8_d5daa7aa",
+      "range": {
+        "startLine": 47,
+        "startChar": 25,
+        "endLine": 47,
+        "endChar": 35
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13f2775f_3a63bf4f",
@@ -216,6 +378,30 @@
       "writtenOn": "2022-07-06T15:52:23Z",
       "side": 1,
       "message": "nit: see above",
+      "range": {
+        "startLine": 50,
+        "startChar": 2,
+        "endLine": 50,
+        "endChar": 6
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ade04ea2_5cb57e0a",
+        "filename": "rialto/idmap.S",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13f2775f_3a63bf4f",
       "range": {
         "startLine": 50,
         "startChar": 2,
@@ -249,6 +435,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3d7e799_2498bf56",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "422e5b7b_ba6161cc",
+      "range": {
+        "startLine": 48,
+        "startChar": 4,
+        "endLine": 48,
+        "endChar": 48
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f3444f2_215d0cd8",
@@ -272,6 +482,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "858c9e42_0e6c7f80",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f3444f2_215d0cd8",
+      "range": {
+        "startLine": 53,
+        "startChar": 8,
+        "endLine": 53,
+        "endChar": 14
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c73aff0_0c6297c6",
@@ -285,6 +519,24 @@
       "writtenOn": "2022-07-06T12:03:33Z",
       "side": 1,
       "message": "Is there any reason why this needs to be a macro rather than just a function?",
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6140182c_063c58b4",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c73aff0_0c6297c6",
       "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -360,6 +612,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "032f9bec_dee7dbe8",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5db6f37_5ebacbef",
+      "range": {
+        "startLine": 79,
+        "startChar": 57,
+        "endLine": 79,
+        "endChar": 59
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f016f95_e48f35e7",
@@ -377,6 +653,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e42e52cb_32fc12a1",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f016f95_e48f35e7",
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea882760_48d379e7",
@@ -390,6 +684,30 @@
       "writtenOn": "2022-07-06T12:03:33Z",
       "side": 1,
       "message": "Nit: add a use statement for this.",
+      "range": {
+        "startLine": 100,
+        "startChar": 25,
+        "endLine": 100,
+        "endChar": 41
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "228982c3_7de026d1",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea882760_48d379e7",
       "range": {
         "startLine": 100,
         "startChar": 25,
@@ -471,6 +789,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17e2b208_82c9a7c9",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cf33e9f_20985744",
+      "range": {
+        "startLine": 105,
+        "startChar": 35,
+        "endLine": 105,
+        "endChar": 45
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40f0b2fe_7d0902ff",
@@ -488,6 +830,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25a5b6bc_2a128fff",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40f0b2fe_7d0902ff",
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d7e7a8a_8c3a4367",
@@ -501,6 +861,30 @@
       "writtenOn": "2022-07-06T12:41:36Z",
       "side": 1,
       "message": "Why not just \u003e\u003d1.0 ?",
+      "range": {
+        "startLine": 65,
+        "startChar": 26,
+        "endLine": 65,
+        "endChar": 30
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d723755_3558b670",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "Ehm, we can always change that but do we know what \u003e1.0 will look like?",
+      "parentUuid": "3d7e7a8a_8c3a4367",
       "range": {
         "startLine": 65,
         "startChar": 26,
@@ -534,6 +918,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c59ceea_a73ee71a",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66aa9cde_8bd1ad52",
+      "range": {
+        "startLine": 74,
+        "startChar": 26,
+        "endLine": 74,
+        "endChar": 40
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25104925_39b65fe4",
@@ -547,6 +955,30 @@
       "writtenOn": "2022-07-06T12:41:36Z",
       "side": 1,
       "message": "FWIW nix::unistd::pipe2 is a little nicer to use\n\nWe have at least 3 or 4 versions of create_pipe() which is mildly distressing.",
+      "range": {
+        "startLine": 82,
+        "startChar": 23,
+        "endLine": 82,
+        "endChar": 33
+      },
+      "revId": "bbf42d98f010494b48625857bf27362b3bb1f4aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30b2b5dd_c9854f73",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-08T11:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25104925_39b65fe4",
       "range": {
         "startLine": 82,
         "startChar": 23,
