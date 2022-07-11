@@ -14,7 +14,7 @@
 
 //! Functions for running instances of `crosvm`.
 
-use crate::aidl::VirtualMachineCallbacks;
+use crate::aidl::{VirtualMachineCallbacks, TEMPORARY_DIRECTORY};
 use crate::Cid;
 use anyhow::{bail, Context, Error};
 use command_fds::CommandFdExt;
@@ -382,7 +382,9 @@ fn run_vm(config: CrosvmConfig, failure_pipe_write: File) -> Result<SharedChild,
         .arg("run")
         .arg("--disable-sandbox")
         .arg("--cid")
-        .arg(config.cid.to_string());
+        .arg(config.cid.to_string())
+        .arg("--socket")
+        .arg(format!("{}/{}/crosvm.sock", TEMPORARY_DIRECTORY, config.cid));
 
     if config.protected {
         command.arg("--protected-vm");
