@@ -53,7 +53,7 @@ use log::{debug, error, info, warn, trace};
 use microdroid_payload_config::VmPayloadConfig;
 use rustutils::system_properties;
 use semver::VersionReq;
-use statslog_virtualization_rust::vm_creation_requested::{stats_write, Hypervisor};
+use statslog_virtualization_rust::vm_creation_requested::{VmCreationRequested, ConfigType, Hypervisor};
 use std::convert::TryInto;
 use std::ffi::CStr;
 use std::fs::{create_dir, File, OpenOptions};
@@ -134,23 +134,7 @@ impl IVirtualizationService for VirtualizationService {
     ) -> binder::Result<Strong<dyn IVirtualMachine>> {
         let mut is_protected = false;
         let ret = self.create_vm_internal(config, console_fd, log_fd, &mut is_protected);
-        match ret {
-            Ok(_) => {
-                let ok_status = Status::ok();
-                write_vm_creation_stats(
-                    is_protected,
-                    /*creation_succeeded*/ true,
-                    ok_status.exception_code() as i32,
-                );
-            }
-            Err(ref e) => {
-                write_vm_creation_stats(
-                    is_protected,
-                    /*creation_succeeded*/ false,
-                    e.exception_code() as i32,
-                );
-            }
-        }
+        write_vm_creation_stats(config, is_protected, &ret);
         ret
     }
 
@@ -504,9 +488,88 @@ impl VirtualizationService {
     }
 }
 
+fn get_vm_payload_config(config: &VirtualMachineAppConfig) -> Result<VmPayloadConfig> {
+    let apk_file = clone_file(config.apk.as_ref().unwrap())?;
+    let mut apk_zip = ZipArchive::new(&apk_file)?;
+    let config_file = apk_zip.by_name(&config.configPath)?;
+    let vm_payload_config: VmPayloadConfig = serde_json::from_reader(config_file)?;
+    Ok(vm_payload_config)
+}
+
 /// Write the stats of VMCreation to statsd
-fn write_vm_creation_stats(is_protected: bool, creation_succeeded: bool, exception_code: i32) {
-    match stats_write(Hypervisor::Pkvm, is_protected, creation_succeeded, exception_code) {
+fn write_vm_creation_stats(
+    config: &VirtualMachineConfig,
+    is_protected: bool,
+    ret: &binder::Result<Strong<dyn IVirtualMachine>>,
+) {
+    let creation_succeeded;
+    let binder_exception_code;
+    match ret {
+        Ok(_) => {
+            creation_succeeded = true;
+            binder_exception_code = Status::ok().exception_code() as i32;
+        }
+        Err(ref e) => {
+            creation_succeeded = false;
+            binder_exception_code = e.exception_code() as i32;
+        }
+    }
+
+    let empty_string = String::new();
+    let mut extra_apks = String::new();
+    let mut apexes = String::new();
+    let vm_creation_requested = match config {
+        VirtualMachineConfig::AppConfig(config) => {
+            let vm_payload_config = get_vm_payload_config(config);
+            VmCreationRequested {
+                hypervisor: Hypervisor::Pkvm,
+                is_protected,
+                creation_succeeded,
+                binder_exception_code,
+                config_type: ConfigType::VirtualMachineAppConfig,
+                num_cpus: config.numCpus,
+                cpu_affinity: config.cpuAffinity.as_ref().unwrap_or(&empty_string),
+                memory_mib: config.memoryMib,
+                // TODO(seungjaeyoo) Fill information about main_apk for app config
+                main_apk: &empty_string,
+                extra_apks: {
+                    if vm_payload_config.is_ok() {
+                        for extra_apk_config in &vm_payload_config.as_ref().unwrap().extra_apks {
+                            extra_apks.push_str(&extra_apk_config.path);
+                            extra_apks.push('\n');
+                        }
+                    }
+                    &extra_apks
+                },
+                apexes: {
+                    if vm_payload_config.is_ok() {
+                        for apexes_config in &vm_payload_config.as_ref().unwrap().apexes {
+                            apexes.push_str(&apexes_config.name);
+                            apexes.push('\n');
+                        }
+                    }
+                    &apexes
+                },
+                // TODO(seungjaeyoo) Fill information about task_profile, user_id, vm_id
+            }
+        }
+        VirtualMachineConfig::RawConfig(config) => VmCreationRequested {
+            hypervisor: Hypervisor::Pkvm,
+            is_protected,
+            creation_succeeded,
+            binder_exception_code,
+            config_type: ConfigType::VirtualMachineRawConfig,
+            num_cpus: config.numCpus,
+            cpu_affinity: config.cpuAffinity.as_ref().unwrap_or(&empty_string),
+            memory_mib: config.memoryMib,
+            main_apk: &empty_string,
+            extra_apks: &empty_string,
+            apexes: &empty_string,
+            // TODO(seungjaeyoo) Fill information about task_profile, user_id, vm_id
+            // TODO(seungjaeyoo) Fill information about disk_image for raw config
+        },
+    };
+    match vm_creation_requested.stats_write() {
         Err(e) => {
             warn!("statslog_rust failed with error: {}", e);
         }
