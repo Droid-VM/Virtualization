@@ -43,7 +43,6 @@ cc_defaults {
 cc_defaults {
     name: "vmbase_elf_defaults",
     defaults: ["vmbase_cc_defaults"],
-    system_shared_libs: ["libc"],
     static_executable: true,
     static_libs: [
         "libvmbase_entry",
@@ -60,6 +59,9 @@ rust_library_rlib {
         "liblog_rust_nostd",
         "libpsci",
         "libspin_nostd",
+    ],
+    whole_static_libs: [
+        "libc_musl_memintr",
     ],
     apex_available: ["com.android.virt"],
 }
