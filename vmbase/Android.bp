@@ -43,7 +43,6 @@ cc_defaults {
 cc_defaults {
     name: "vmbase_elf_defaults",
     defaults: ["vmbase_cc_defaults"],
-    system_shared_libs: ["libc"],
     static_executable: true,
     static_libs: [
         "libvmbase_entry",
@@ -70,6 +69,7 @@ cc_library_static {
     srcs: [
         "entry.S",
         "exceptions.S",
+        ":libc_musl_memintr_arm64_sources",
     ],
     no_libcrt: true,
     apex_available: ["com.android.virt"],
