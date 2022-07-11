@@ -125,7 +125,11 @@ public abstract class MicrodroidDeviceTestBase {
         void forceStop(VirtualMachine vm) {
             try {
                 vm.clearCallback();
-                vm.stop();
+                try {
+                    vm.stop();
+                } catch (VirtualMachineException e) {
+                    // Consume
+                }
                 mExecutorService.shutdown();
             } catch (VirtualMachineException e) {
                 throw new RuntimeException(e);
@@ -202,7 +206,11 @@ public abstract class MicrodroidDeviceTestBase {
             throws VirtualMachineException {
         VirtualMachine existingVm = mVmm.get(name);
         if (existingVm != null) {
-            existingVm.stop();
+            try {
+                existingVm.stop();
+            } catch (VirtualMachineException e) {
+                // Consume
+            }
             existingVm.delete();
         }
         return mVmm.create(name, config);
