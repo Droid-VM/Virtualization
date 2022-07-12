@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3f60a32_9c8bdac0",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-07-12T02:05:30Z",
+      "side": 1,
+      "message": "This path is already constructed at `temporary_directory` in the `VmInstance` struct and I wish we don\u0027t duplicate the path construction logic in multiple places. \n\nHow about passing `temporary_directory` as an argument?",
+      "range": {
+        "startLine": 387,
+        "startChar": 22,
+        "endLine": 387,
+        "endChar": 28
+      },
+      "revId": "9db2c3d6b3398b54ed7ab2339b04b881507ce397",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
