@@ -1,0 +1,17 @@
+java_test_host {
+    name: "RialtoTestCases",
+    srcs: ["java/**/*.java"],
+    libs: [
+        "tradefed",
+        "junit",
+        "tradefed",
+    ],
+    static_libs: [
+        "VirtualizationTestHelper",
+    ],
+    test_suites: ["general-tests"],
+    per_testcase_directory: true,
+    data: [
+        ":rialto",
+    ],
+}
