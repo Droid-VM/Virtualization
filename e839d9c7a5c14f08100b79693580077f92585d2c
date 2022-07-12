@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d3fe8b0_ba84d120",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-07-12T12:15:24Z",
+      "side": 1,
+      "message": "Also memmove and memcmp, I believe.",
+      "revId": "e839d9c7a5c14f08100b79693580077f92585d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5797cec3_1fecefa4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-07-12T12:15:24Z",
+      "side": 1,
+      "message": "Option 4 is https://github.com/ARM-software/optimized-routines, which has assembly implementations of these routines provided by Arm, MIT/Apache licensed.",
+      "revId": "e839d9c7a5c14f08100b79693580077f92585d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f01dbc5_2e787c4d",
+        "filename": "vmbase/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-07-12T12:15:24Z",
+      "side": 1,
+      "message": "I think it makes more sense to put this in the `vmbase_elf_defaults`, as it will be used by any Rust code, not just the `vmbase` library.",
+      "revId": "e839d9c7a5c14f08100b79693580077f92585d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
