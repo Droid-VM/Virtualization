@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f857045b_c100d87c",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-07-12T14:21:41Z",
+      "side": 1,
+      "message": "These would be required for other components later like  syscall_proxy or elf loader. Would make sense moving them to a separate helper module or atleast making them public. For now, we can keep it here.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 60
+      },
+      "revId": "6629b6e5f85bdda1b93d9d3a5fe2799f329462fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
