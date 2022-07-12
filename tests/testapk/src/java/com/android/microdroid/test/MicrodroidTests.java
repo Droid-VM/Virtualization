@@ -551,7 +551,11 @@ public class MicrodroidTests {
         assertThat(offset.isPresent()).isTrue();
 
         flipBit(instanceFile, offset.getAsLong());
-        assertThat(tryBootVm("test_vm_integrity").payloadStarted).isFalse();
+        BootResult result = tryBootVm("test_vm_integrity");
+        assertThat(result.payloadStarted).isFalse();
+
+        // This failure should shut the VM down immediately and shouldn't trigger a hangup.
+        assertThat(result.deathReason).isNotEqualTo(DeathReason.HANGUP);
     }
 
     @Test
