@@ -22,6 +22,30 @@
       },
       "revId": "33effb64f7980361e4c6d1498979c5aa4630b813",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef313f1f_ede7c16f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-07-13T12:51:35Z",
+      "side": 1,
+      "message": "I dont follow: Looking at ReadME doc for init.rc, it just sounds like making it shutdown critical only means it will not be stopped during shutdown.\n\nThe starting of the tombstone_transmit is still guarded by `if config.export_tombstones`\n\n```\nshutdown \u003cshutdown_behavior\u003e\n\nSet shutdown behavior of the service process. When this is not specified, the service is killed during shutdown process by using SIGTERM and SIGKILL. The service with shutdown_behavior of “critical” is not killed during shutdown until shutdown times out. When shutdown times out, even services tagged with “shutdown critical” will be killed. When the service tagged with “shutdown critical” is not running when shut down starts, it will be started.\n```",
+      "parentUuid": "114a1f41_4b8a993a",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 36
+      },
+      "revId": "33effb64f7980361e4c6d1498979c5aa4630b813",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
