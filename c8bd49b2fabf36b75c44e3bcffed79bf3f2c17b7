@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce97d14d_8ef8fa2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-07-13T08:07:28Z",
+      "side": 1,
+      "message": "Also, another thing to note: The source of truth of atoms.proto is internal master. Your change should be cherry picked to your desired branch after it has been merged into the master branch to avoid merge conflicts.\n\nBut because this change does not create any new atom (just modifies the current one), there will be no conflict \u0026 if you want, you can submit both changes to aosp first.",
+      "revId": "c8bd49b2fabf36b75c44e3bcffed79bf3f2c17b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ef1775c_bc4d4cf0",
