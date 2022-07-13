@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a8c28f3_71920ce7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-07-13T08:49:41Z",
+      "side": 1,
+      "message": "do I need to merge change into internal master at first, and cherry-pick to AOSP when creating new atom? - Yes. You can do edit the atoms.proto in internal-master \u003d\u003e then cherry-pick in aosp \u0026 along with the cherry-pick submit the change in virtualization/ package if you want.\n\n\nYou will need to sync everything in google3, because there is where the metric derivation and all are derived for I think. For ex, this is cl/447084082 the change where I sync the binder_exception_code.",
+      "parentUuid": "48160740_618890e8",
+      "revId": "c8bd49b2fabf36b75c44e3bcffed79bf3f2c17b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ef1775c_bc4d4cf0",
