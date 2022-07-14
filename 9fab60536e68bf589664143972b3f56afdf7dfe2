@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e672218f_2819af40",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-14T06:56:24Z",
+      "side": 0,
+      "message": "I didn\u0027t expect it would be so hard to wait on a child with a timeout! There\u0027s the [`wait_timeout`](https://docs.rs/wait-timeout/latest/wait_timeout/) crate but the unix implementation does all kinds of tricks.",
+      "range": {
+        "startLine": 255,
+        "startChar": 27,
+        "endLine": 255,
+        "endChar": 33
+      },
+      "revId": "9fab60536e68bf589664143972b3f56afdf7dfe2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
