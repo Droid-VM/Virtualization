@@ -29,7 +29,7 @@ use std::io::{self, Read};
 use std::mem;
 use std::num::NonZeroU32;
 use std::os::unix::io::{AsRawFd, RawFd, FromRawFd};
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::process::{Command, ExitStatus};
 use std::sync::{Arc, Condvar, Mutex};
 use std::time::Duration;
@@ -136,7 +136,8 @@ impl VmState {
             let (failure_pipe_read, failure_pipe_write) = create_pipe()?;
 
             // If this fails and returns an error, `self` will be left in the `Failed` state.
-            let child = Arc::new(run_vm(config, failure_pipe_write)?);
+            let child =
+                Arc::new(run_vm(config, &instance.temporary_directory, failure_pipe_write)?);
 
             let child_clone = child.clone();
             thread::spawn(move || {
@@ -372,7 +373,11 @@ fn death_reason(result: &Result<ExitStatus, io::Error>, failure_reason: &str) ->
 }
 
 /// Starts an instance of `crosvm` to manage a new VM.
-fn run_vm(config: CrosvmConfig, failure_pipe_write: File) -> Result<SharedChild, Error> {
+fn run_vm(
+    config: CrosvmConfig,
+    temporary_directory: &Path,
+    failure_pipe_write: File,
+) -> Result<SharedChild, Error> {
     validate_config(&config)?;
 
     let mut command = Command::new(CROSVM_PATH);
@@ -382,7 +387,9 @@ fn run_vm(config: CrosvmConfig, failure_pipe_write: File) -> Result<SharedChild,
         .arg("run")
         .arg("--disable-sandbox")
         .arg("--cid")
-        .arg(config.cid.to_string());
+        .arg(config.cid.to_string())
+        .arg("--socket")
+        .arg(temporary_directory.join("crosvm.sock"));
 
     if config.protected {
         command.arg("--protected-vm");
