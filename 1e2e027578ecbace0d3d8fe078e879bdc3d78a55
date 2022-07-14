@@ -22,6 +22,30 @@
       },
       "revId": "1e2e027578ecbace0d3d8fe078e879bdc3d78a55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8730b91_f2a1fbd5",
+        "filename": "tests/hostside/java/android/virt/test/MicrodroidTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-07-14T07:48:19Z",
+      "side": 1,
+      "message": "Maybe \"crosvm has exited normally\" will be much better; this message is seen both on cuttlefish and Pixel. Also we can detect abnormal termination of crosvm I guess.",
+      "parentUuid": "3f3732d4_fdbc3122",
+      "range": {
+        "startLine": 387,
+        "startChar": 0,
+        "endLine": 387,
+        "endChar": 51
+      },
+      "revId": "1e2e027578ecbace0d3d8fe078e879bdc3d78a55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
