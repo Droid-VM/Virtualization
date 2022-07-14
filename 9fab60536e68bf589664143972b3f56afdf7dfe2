@@ -22,6 +22,30 @@
       },
       "revId": "9fab60536e68bf589664143972b3f56afdf7dfe2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e120d678_d262cec2",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-07-14T07:07:00Z",
+      "side": 0,
+      "message": "Yeah, that\u0027s exactly how I felt. I didn\u0027t want to use signal handler. Also, wait_timeout can\u0027t be used because we use SharedChild, not std::process::Child.",
+      "parentUuid": "e672218f_2819af40",
+      "range": {
+        "startLine": 255,
+        "startChar": 27,
+        "endLine": 255,
+        "endChar": 33
+      },
+      "revId": "9fab60536e68bf589664143972b3f56afdf7dfe2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
