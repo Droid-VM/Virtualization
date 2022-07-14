@@ -290,6 +290,35 @@ public class MicrodroidTests {
     }
 
     @Test
+    public void bootFailsWhenLowMem() throws VirtualMachineException, InterruptedException {
+        VirtualMachineConfig lowMemConfig = mInner.newVmConfigBuilder("assets/vm_config.json")
+                .memoryMib(1)
+                .debugLevel(DebugLevel.NONE)
+                .build();
+        mInner.mVm = mInner.mVmm.getOrCreate("low_mem", lowMemConfig);
+        final CompletableFuture<Integer> exception = new CompletableFuture<>();
+        VmEventListener listener =
+                new VmEventListener() {
+                    @Override
+                    public void onPayloadStarted(VirtualMachine vm, ParcelFileDescriptor stream) {
+                        // ??? forceStop(vm);
+                    }
+                    @Override
+                    public void onError(VirtualMachine vm, int errorCode, String message) {
+                        // exception.complete(3 + errorCode);
+                        // forceStop(vm);
+                    }
+                    @Override
+                    public void onDied(VirtualMachine vm, @DeathReason int reason) {
+                        exception.complete(reason);
+                        super.onDied(vm, reason);
+                    }
+                };
+        listener.runToFinish(mInner.mVm);
+        assertThat(exception.getNow(0)).isNotEqualTo(0);  // TODO(b/238324526)
+    }
+
+    @Test
     public void changingDebugLevelInvalidatesVmIdentity()
             throws VirtualMachineException, InterruptedException, IOException {
         assume()
