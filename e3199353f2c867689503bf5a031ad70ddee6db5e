@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f34b280f_89cd800b",
+        "filename": "libs/apkverify/src/v3.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-15T10:44:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "198a9569_8064b5f5",
+      "range": {
+        "startLine": 212,
+        "startChar": 26,
+        "endLine": 212,
+        "endChar": 46
+      },
+      "revId": "e3199353f2c867689503bf5a031ad70ddee6db5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0e233d5_057c4014",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-07-15T07:28:26Z",
       "side": 1,
       "message": "If there was an error, `unwrap()` will panic and abort the process. Since we expect that there could be an error here under the right conditions, it would be better to handle it more gracefully and propagate the error using `?` in place of `unwrap()`.",
+      "range": {
+        "startLine": 216,
+        "startChar": 30,
+        "endLine": 216,
+        "endChar": 38
+      },
+      "revId": "e3199353f2c867689503bf5a031ad70ddee6db5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3c47450_a9be0da0",
+        "filename": "libs/apkverify/src/v3.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-15T10:44:38Z",
+      "side": 1,
+      "message": "Thanks for the suggestion! :) Could you please take a look if this is better?",
+      "parentUuid": "f0e233d5_057c4014",
       "range": {
         "startLine": 216,
         "startChar": 30,
