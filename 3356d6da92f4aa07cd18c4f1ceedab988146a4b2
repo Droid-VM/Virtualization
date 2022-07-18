@@ -88,6 +88,24 @@
       "parentUuid": "5821399e_b0b9604a",
       "revId": "3356d6da92f4aa07cd18c4f1ceedab988146a4b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d93f8649_47471e05",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-18T14:35:22Z",
+      "side": 1,
+      "message": "We will import the hex library to avoid the code duplication here as per discussion offline \u003d\u003e http://b/239413416.",
+      "parentUuid": "d0d60c53_6001cbb8",
+      "revId": "3356d6da92f4aa07cd18c4f1ceedab988146a4b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
