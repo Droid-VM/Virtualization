@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "013c1cfa_20f9ea5b",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-18T12:53:29Z",
+      "side": 1,
+      "message": "Why did this get moved out of the test module? I don\u0027t think it\u0027s something we want to export as part of the apexutil interface.",
+      "revId": "3356d6da92f4aa07cd18c4f1ceedab988146a4b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
