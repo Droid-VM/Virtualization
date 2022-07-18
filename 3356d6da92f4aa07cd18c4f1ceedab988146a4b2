@@ -16,6 +16,24 @@
       "message": "Why did this get moved out of the test module? I don\u0027t think it\u0027s something we want to export as part of the apexutil interface.",
       "revId": "3356d6da92f4aa07cd18c4f1ceedab988146a4b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92dd555e_f3ce5cb3",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-18T13:33:48Z",
+      "side": 1,
+      "message": "Because we will need the same method later, here \u003d\u003e https://r.android.com/c/platform/packages/modules/Virtualization/+/2104929/15/avmd/src/main.rs L27",
+      "parentUuid": "013c1cfa_20f9ea5b",
+      "revId": "3356d6da92f4aa07cd18c4f1ceedab988146a4b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
