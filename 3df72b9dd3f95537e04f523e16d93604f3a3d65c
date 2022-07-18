@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "534bfce5_a47fb85e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-18T17:27:25Z",
+      "side": 1,
+      "message": "Might be good to explain a little context that this is the first commit to set out the general structure and it will be incrementally improved from there. Just for anyone not directly involved that comes across it.",
+      "revId": "3df72b9dd3f95537e04f523e16d93604f3a3d65c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d1bcbf4_16a927ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-18T17:27:25Z",
+      "side": 1,
+      "message": "Adding Alan for Rust and local attestation background.",
+      "revId": "3df72b9dd3f95537e04f523e16d93604f3a3d65c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adce19de_915fad9b",
+        "filename": "avmd/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-18T17:27:25Z",
+      "side": 1,
+      "message": "Can the edition be dropped? I\u0027ve recently not needed to add this and it might let us use the most recent edition, 2021.",
+      "range": {
+        "startLine": 11,
+        "startChar": 4,
+        "endLine": 11,
+        "endChar": 20
+      },
+      "revId": "3df72b9dd3f95537e04f523e16d93604f3a3d65c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b41f08a_4c9f6d39",
+        "filename": "avmd/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-18T17:27:25Z",
+      "side": 1,
+      "message": "Remove until there are some tests?",
+      "revId": "3df72b9dd3f95537e04f523e16d93604f3a3d65c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ee3ba45_9c7d646e",
+        "filename": "avmd/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-18T17:27:25Z",
+      "side": 1,
+      "message": "I don\u0027t know how useful these are without any context. Maybe we should drop them, to be replaced with examples from tests in future?",
+      "range": {
+        "startLine": 148,
+        "startChar": 12,
+        "endLine": 148,
+        "endChar": 46
+      },
+      "revId": "3df72b9dd3f95537e04f523e16d93604f3a3d65c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
