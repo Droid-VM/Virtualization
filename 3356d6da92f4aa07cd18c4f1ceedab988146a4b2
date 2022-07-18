@@ -70,6 +70,24 @@
       "parentUuid": "19582576_c1ec75bb",
       "revId": "3356d6da92f4aa07cd18c4f1ceedab988146a4b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0d60c53_6001cbb8",
+        "filename": "libs/apexutil/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-18T13:49:43Z",
+      "side": 1,
+      "message": "Not for anything this generic under Virtualization, which is probably why there are about 4 implementation of the same logic. I was going to ask on the rust chat if it exists of where it should live to be shared with the rest of Android.",
+      "parentUuid": "5821399e_b0b9604a",
+      "revId": "3356d6da92f4aa07cd18c4f1ceedab988146a4b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
