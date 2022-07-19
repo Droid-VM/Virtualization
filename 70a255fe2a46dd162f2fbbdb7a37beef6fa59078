@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9943ff4_f44da8be",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-07-19T05:41:03Z",
+      "side": 1,
+      "message": "Here\u0027s the combined result by using `statsd_testdrive 409` several times.\n\n```\nmetric_id: 1111\nevent_metrics {\n  data {\n    aggregated_atom_info {\n      atom {\n        vm_creation_requested {\n          hypervisor: PKVM\n          is_protected: false\n          creation_succeeded: true\n          binder_exception_code: 0\n          config_type: VIRTUAL_MACHINE_APP_CONFIG\n          num_cpus: 3\n          cpu_affinity: \"0,1,2\"\n          memory_mib: 196\n          main_apk: \"/data/app/~~QwV4PpbBAOEbY1bhguP90Q\u003d\u003d/com.android.microdroid.test-ZxK0Yar5E3UlSijKMw-QLQ\u003d\u003d/base.apk\"\n          extra_apks: \"/system/etc/security/fsverity/BuildManifest.apk\\n\"\n          apexes: \"com.android.art\\ncom.android.compos\\ncom.android.sdkext\\n{CLASSPATH}\\n\"\n        }\n      }\n      elapsed_timestamp_nanos: 436441133657\n    }\n  }\n}\nis_active: true\n```",
+      "revId": "70a255fe2a46dd162f2fbbdb7a37beef6fa59078",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
