@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0079fb2_ff4d842a",
+        "filename": "avmd/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-19T15:06:10Z",
+      "side": 1,
+      "message": "Do you need this?",
+      "range": {
+        "startLine": 13,
+        "startChar": 9,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5185c23_84b6b9b3",
+        "filename": "avmd/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-19T15:06:10Z",
+      "side": 1,
+      "message": "Nit: avmb -\u003e avmd",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 16
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63b1106c_c486c43b",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-19T15:06:10Z",
+      "side": 1,
+      "message": "Channeling qwandor@ (who is a far better Rust expert than me): Maybe add Debug and Clone, which are generally useful? Ditto for the other structs \u0026 enums.",
+      "range": {
+        "startLine": 20,
+        "startChar": 9,
+        "endLine": 20,
+        "endChar": 31
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c795a43c_e3628c65",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-19T15:06:10Z",
+      "side": 1,
+      "message": "Perhaps \u0026[Descriptor] ?\n\nVec implements Deref so that the conversion happens automatically, and there\u0027s not much you can do with an \u0026Vec that you can\u0027t do with a slice.",
+      "range": {
+        "startLine": 38,
+        "startChar": 33,
+        "endLine": 38,
+        "endChar": 49
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2409869_1678df4f",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-19T15:06:10Z",
+      "side": 1,
+      "message": "Do you need both new() and default()? Maybe just the latter?",
+      "range": {
+        "startLine": 67,
+        "startChar": 11,
+        "endLine": 67,
+        "endChar": 14
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59724fd6_ff41f447",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-19T15:06:10Z",
+      "side": 1,
+      "message": "Uber-nit: Move this after the two descriptors?\nEverywhere else we have things defined after their use, which is quite good for readability.",
+      "range": {
+        "startLine": 88,
+        "startChar": 11,
+        "endLine": 88,
+        "endChar": 29
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d77e4b9b_339be3c0",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-19T15:06:10Z",
+      "side": 1,
+      "message": "Could this be an enum?\nIf not, can we point at the canonical source of the valid values?",
+      "range": {
+        "startLine": 114,
+        "startChar": 32,
+        "endLine": 114,
+        "endChar": 35
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a053861f_a8a1bc51",
+        "filename": "avmd/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-19T15:06:10Z",
+      "side": 1,
+      "message": "It\u0027s (\u003cindex\u003e, \u003cnamespace\u003e, ...) isn\u0027t it?\nI\u0027m not sure what the indexes are though. Could you generate them using Iterator::enumerate?\n\nCould you replace NamespaceNameFileIterator with itertools::tuples() ?",
+      "range": {
+        "startLine": 32,
+        "startChar": 5,
+        "endLine": 32,
+        "endChar": 32
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e40e021_50619b4c",
+        "filename": "avmd/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-19T15:06:10Z",
+      "side": 1,
+      "message": "This feels like it should be a method on Descriptor.\nIdeally as an implementation of Debug, or possibly Display.",
+      "range": {
+        "startLine": 125,
+        "startChar": 7,
+        "endLine": 139,
+        "endChar": 9
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
