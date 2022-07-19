@@ -16,6 +16,23 @@
       "message": "This passes for me locally, but here all MicrodroidTests appear to fail. Will try one more time.",
       "revId": "791fa44a1445fd3b5941640cc8ea66d02b9a1755",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea370412_723bf766",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-07-19T15:09:18Z",
+      "side": 1,
+      "message": "cf tests were failing from b/238679697 - retrying there. Other failure (DeathReason 4 - ERROR instead of 16 - HANGUP on some devices) - still needs to be investigated",
+      "revId": "791fa44a1445fd3b5941640cc8ea66d02b9a1755",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
