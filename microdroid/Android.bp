@@ -302,7 +302,17 @@ android_filesystem {
         "debug_ramdisk",
         "second_stage_resources",
     ],
-    type: "compressed_cpio",
+    type: "cpio",
+}
+
+filegroup {
+    name: "microdroid_bootconfig_normal_src",
+    srcs: ["bootconfig.normal"],
+}
+
+filegroup {
+    name: "microdroid_bootconfig_full_debuggable_src",
+    srcs: ["bootconfig.full_debuggable"],
 }
 
 bootimg {
@@ -345,7 +355,7 @@ android_filesystem {
         "microdroid_fstab",
     ],
     base_dir: "first_stage_ramdisk",
-    type: "compressed_cpio",
+    type: "cpio",
     symlinks: [
         {
             target: "etc/fstab.microdroid",
