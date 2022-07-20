@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b152b96_e72abe50",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-20T13:50:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a472baa_ddeca29c",
+      "revId": "7484fde9ac534261a876a9ffcf5c425cd74aafa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b82f3db_27580ffc",
@@ -136,6 +154,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6edc764a_c411384e",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-20T13:50:17Z",
+      "side": 1,
+      "message": "I see. Thanks for all the suggestion.",
+      "parentUuid": "495157be_77f29d25",
+      "range": {
+        "startLine": 37,
+        "startChar": 13,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "7484fde9ac534261a876a9ffcf5c425cd74aafa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc1cd2bb_d5b0b980",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-20T13:50:17Z",
+      "side": 1,
+      "message": "I\u0027ll remove the collect here. Thanks!",
+      "parentUuid": "71b60c28_d9d2fd4c",
+      "range": {
+        "startLine": 37,
+        "startChar": 9,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "7484fde9ac534261a876a9ffcf5c425cd74aafa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d7620bb_a8a0e33a",
@@ -197,6 +263,30 @@
       "side": 1,
       "message": "I think the two are equivalent in terms of output format.\nBut again there\u0027s no need to create a tempoorary string:\nlet str \u003d format!(\"\u003cformat\u003e\", args); f.write_str(\u0026str);\ncan be done directly as\nwrite!(f, \"\u003cformat\u003e\", args);",
       "parentUuid": "70030ee0_98362eb1",
+      "range": {
+        "startLine": 96,
+        "startChar": 33,
+        "endLine": 97,
+        "endChar": 4
+      },
+      "revId": "7484fde9ac534261a876a9ffcf5c425cd74aafa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cbf422c_1a5e322b",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-20T13:50:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b77e278_740f3f23",
       "range": {
         "startLine": 96,
         "startChar": 33,
