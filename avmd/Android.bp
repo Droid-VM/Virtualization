@@ -19,6 +19,21 @@ rust_library {
     defaults: ["libavmd_defaults"],
 }
 
+rust_test {
+    name: "libavmd_test",
+    crate_name: "libavmd_test",
+    srcs: ["tests/*_test.rs"],
+    test_suites: ["general-tests"],
+    rustlibs: [
+        "libanyhow",
+    ],
+    compile_multilib: "first",
+    data: [
+        ":avmdtool",
+        "tests/data/*",
+    ],
+}
+
 rust_binary {
     name: "avmdtool",
     srcs: ["src/main.rs"],
