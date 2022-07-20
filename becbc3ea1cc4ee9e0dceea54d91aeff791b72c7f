@@ -16,6 +16,24 @@
       "message": "Actually, wouldn\u0027t it be better measuring both cases?",
       "revId": "becbc3ea1cc4ee9e0dceea54d91aeff791b72c7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb6162e3_86035e5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-20T08:38:00Z",
+      "side": 1,
+      "message": "This is coming from my ART upbringing where we did not aim to optimize for the uncommon case of debug mode. Its job is to be usable not performant. I\u0027m happy to add a test as a follow-up but I would not want us to focus too much on those numbers.",
+      "parentUuid": "71616a02_d5bc81c6",
+      "revId": "becbc3ea1cc4ee9e0dceea54d91aeff791b72c7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
