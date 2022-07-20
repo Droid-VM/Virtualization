@@ -22,9 +22,27 @@ rust_library {
 rust_binary {
     name: "avmdtool",
     srcs: ["src/main.rs"],
-    required: ["avbtool"],
     host_supported: true,
     prefer_rlib: true,
+    rustlibs: [
+        "libanyhow",
+        "libapexutil_rust",
+        "libapkverify",
+        "libavmd",
+        "libclap",
+        "libserde",
+        "libserde_cbor",
+        "libvbmeta_rust",
+    ],
+}
+
+rust_test_host {
+    name: "avmdtool_tests",
+    srcs: ["tests/*_test.rs"],
+    test_suites: ["general-tests"],
+    compile_multilib: "first",
+    data_bins: ["avmdtool"],
+    data: ["tests/data/*"],
     rustlibs: [
         "libanyhow",
         "libapexutil_rust",
