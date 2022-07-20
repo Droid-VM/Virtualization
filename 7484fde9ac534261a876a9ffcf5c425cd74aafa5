@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a472baa_ddeca29c",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-20T13:11:18Z",
+      "side": 1,
+      "message": "If Descriptor implements Debug, which it now does, you don\u0027t need to create a temporary string, you can just do `write!(f, \"{}\", descriptor)`, or `descriptor.fmt(f)`.",
+      "revId": "7484fde9ac534261a876a9ffcf5c425cd74aafa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b82f3db_27580ffc",
         "filename": "avmd/src/avmd.rs",
         "patchSetId": 6
@@ -38,6 +55,53 @@
       "side": 1,
       "message": "How should I extract the string written to `f` in the end?",
       "parentUuid": "3b82f3db_27580ffc",
+      "range": {
+        "startLine": 37,
+        "startChar": 13,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "7484fde9ac534261a876a9ffcf5c425cd74aafa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71b60c28_d9d2fd4c",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-20T13:11:18Z",
+      "side": 1,
+      "message": "I agree with Andrew you don\u0027t need a collect here.\n\nBut if you did, you can do it as \n.collect::\u003cVec\u003c_\u003e\u003e()\n\n(The element type can be deduced, even if the container can\u0027t be.)\n\nAlternatively you could write\nlet descriptors: Vec\u003c_\u003e \u003d .....collect();",
+      "range": {
+        "startLine": 37,
+        "startChar": 9,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "7484fde9ac534261a876a9ffcf5c425cd74aafa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08a78071_9de8d121",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-20T13:11:18Z",
+      "side": 1,
+      "message": "You can make multiple calls to write! / writeln!, so you don\u0027t need to accumulate as a string.",
+      "parentUuid": "04938f51_ae56c072",
       "range": {
         "startLine": 37,
         "startChar": 13,
@@ -85,6 +149,30 @@
       "side": 1,
       "message": "This keeps the same format as the previous version.",
       "parentUuid": "3d7620bb_a8a0e33a",
+      "range": {
+        "startLine": 96,
+        "startChar": 33,
+        "endLine": 97,
+        "endChar": 4
+      },
+      "revId": "7484fde9ac534261a876a9ffcf5c425cd74aafa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b77e278_740f3f23",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-20T13:11:18Z",
+      "side": 1,
+      "message": "I think the two are equivalent in terms of output format.\nBut again there\u0027s no need to create a tempoorary string:\nlet str \u003d format!(\"\u003cformat\u003e\", args); f.write_str(\u0026str);\ncan be done directly as\nwrite!(f, \"\u003cformat\u003e\", args);",
+      "parentUuid": "70030ee0_98362eb1",
       "range": {
         "startLine": 96,
         "startChar": 33,
