@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4976c2d4_3092c6ac",
+        "filename": "avmd/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-20T11:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0079fb2_ff4d842a",
+      "range": {
+        "startLine": 13,
+        "startChar": 9,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5185c23_84b6b9b3",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-19T15:06:10Z",
       "side": 1,
       "message": "Nit: avmb -\u003e avmd",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 16
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "144da71d_781f5696",
+        "filename": "avmd/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-20T11:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5185c23_84b6b9b3",
       "range": {
         "startLine": 30,
         "startChar": 8,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae9d6a44_4c309921",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-20T11:40:12Z",
+      "side": 1,
+      "message": "I\u0027ll add Debug. Do we always need Clone? Looks like it\u0027s not needed in this tool for now at least.",
+      "parentUuid": "63b1106c_c486c43b",
+      "range": {
+        "startLine": 20,
+        "startChar": 9,
+        "endLine": 20,
+        "endChar": 31
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c795a43c_e3628c65",
         "filename": "avmd/src/avmd.rs",
         "patchSetId": 4
@@ -83,6 +155,30 @@
       "writtenOn": "2022-07-19T15:06:10Z",
       "side": 1,
       "message": "Perhaps \u0026[Descriptor] ?\n\nVec implements Deref so that the conversion happens automatically, and there\u0027s not much you can do with an \u0026Vec that you can\u0027t do with a slice.",
+      "range": {
+        "startLine": 38,
+        "startChar": 33,
+        "endLine": 38,
+        "endChar": 49
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8668852f_68a20f6f",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-20T11:40:12Z",
+      "side": 1,
+      "message": "Thanks for the suggestion!",
+      "parentUuid": "c795a43c_e3628c65",
       "range": {
         "startLine": 38,
         "startChar": 33,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80bf930a_f80c922b",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-20T11:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2409869_1678df4f",
+      "range": {
+        "startLine": 67,
+        "startChar": 11,
+        "endLine": 67,
+        "endChar": 14
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59724fd6_ff41f447",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-07-19T15:06:10Z",
       "side": 1,
       "message": "Uber-nit: Move this after the two descriptors?\nEverywhere else we have things defined after their use, which is quite good for readability.",
+      "range": {
+        "startLine": 88,
+        "startChar": 11,
+        "endLine": 88,
+        "endChar": 29
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e863e1e4_61ded8f7",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-20T11:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59724fd6_ff41f447",
       "range": {
         "startLine": 88,
         "startChar": 11,
@@ -164,6 +308,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "000594d5_e92b02ff",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-20T11:40:12Z",
+      "side": 1,
+      "message": "\u003e Could this be an enum?\nThis value is passed around in several places. It requires some work to change all the usages to an enum. If you think this is needed, we can do it in a separate cl.\n\n\u003e can we point at the canonical source of the valid values?\nHow to do this?",
+      "parentUuid": "d77e4b9b_339be3c0",
+      "range": {
+        "startLine": 114,
+        "startChar": 32,
+        "endLine": 114,
+        "endChar": 35
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a053861f_a8a1bc51",
         "filename": "avmd/src/main.rs",
         "patchSetId": 4
@@ -187,6 +355,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00cba605_f8183a5f",
+        "filename": "avmd/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-20T11:40:12Z",
+      "side": 1,
+      "message": "\u003e Could you generate them using Iterator::enumerate?\n\nThe indices here are the global indices of the matched arguments[1]. They are not equal to the local enumerate indices of this group. We need the global indices to preserve the original order for the output.\n\n\u003e Could you replace NamespaceNameFileIterator with itertools::tuples()?\nI don\u0027t think we can use itertools::tuples() directly here as `values` is not a continuous array. Each item in `values` corresponds to the first parameter in the triplet (\u003cnamespace\u003e, \u003cname\u003e, \u003cfile\u003e).\n\nIn fact, we could avoid all this complexity here if clap::ArgMatches could provide some simple iter method as suggested in [2], but it looks like this is not available yet.\nAnother option is to use `std::env::args` directly, since we only want to read the args in order with a fixed window. But that\u0027s hard to extend for more use cases later and we also lose other support of clap.\n\nDo you know a simpler way to do this?\n\n[1] https://docs.rs/clap/latest/clap/parser/struct.ArgMatches.html#method.indices_of \n[2] https://github.com/clap-rs/clap/issues/1206",
+      "parentUuid": "a053861f_a8a1bc51",
+      "range": {
+        "startLine": 32,
+        "startChar": 5,
+        "endLine": 32,
+        "endChar": 32
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e40e021_50619b4c",
         "filename": "avmd/src/main.rs",
         "patchSetId": 4
@@ -198,6 +390,30 @@
       "writtenOn": "2022-07-19T15:06:10Z",
       "side": 1,
       "message": "This feels like it should be a method on Descriptor.\nIdeally as an implementation of Debug, or possibly Display.",
+      "range": {
+        "startLine": 125,
+        "startChar": 7,
+        "endLine": 139,
+        "endChar": 9
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9eb148e_de536fb8",
+        "filename": "avmd/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-20T11:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e40e021_50619b4c",
       "range": {
         "startLine": 125,
         "startChar": 7,
