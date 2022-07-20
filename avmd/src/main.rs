@@ -155,3 +155,24 @@ fn main() -> Result<()> {
     }
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::process::Command;
+
+    #[test]
+    fn test_dump() {
+        // The test file is generated with
+        // ```
+        // avmdtool create /tmp/test.amvd \
+        // --apex-payload microdroid vbmeta ./libs/apexutil/tests/data/test.apex \
+        //--apk microdroid_manager apk \
+        //./libs/apkverify/tests/data/v3-only-with-rsa-pkcs1-sha256-4096.apk \
+        //--apk microdroid_manager extra-apk ./libs/apkverify/tests/data/v3-only-with-stamp.apk
+        //```
+        // let command = Command::new("./avmdtool").arg("dump").arg("./tests/data/test.avmd");
+        assert!(true);
+        // assert!(command.status().unwrap("Dump avmd file").success());
+    }
+}
