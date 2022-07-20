@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69c7ff16_9f13e74b",
+        "filename": "tests/ubootless/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-07-20T14:05:39Z",
+      "side": 1,
+      "message": "One downside of this approach is that this is fixed. We need more copies of the ramdisk image for the other configs, and it will cause some waste of storage because microdroid_ramdisk and microdroid_vendor_ramdisk would be identical.\n\nAnyway, it\u0027s too early to resolve that issue at this point.",
+      "range": {
+        "startLine": 14,
+        "startChar": 9,
+        "endLine": 14,
+        "endChar": 53
+      },
+      "revId": "5db9ec631267b17a5b63eceb0df55b7ea32ca73a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d62b91f_39baf5c6",
+        "filename": "tests/ubootless/bootconfig_vbmeta.arm64",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-07-20T14:05:39Z",
+      "side": 1,
+      "message": "by the pvmfw, right?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 28
+      },
+      "revId": "5db9ec631267b17a5b63eceb0df55b7ea32ca73a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76cf833d_a1f29490",
+        "filename": "tests/ubootless/mkbootconfig.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-07-20T14:05:39Z",
+      "side": 1,
+      "message": "So, this is the memory layout of these partitions are loaded by u-boot, right? This composes the layout at build time. Clever.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 52
+      },
+      "revId": "5db9ec631267b17a5b63eceb0df55b7ea32ca73a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27e9b881_1f72bae4",
+        "filename": "tests/ubootless/test.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-07-20T14:05:39Z",
+      "side": 1,
+      "message": "This currently is ignored by pvmfw and the goal is to let pvmfw verity this, am I correct?",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 22
+      },
+      "revId": "5db9ec631267b17a5b63eceb0df55b7ea32ca73a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
