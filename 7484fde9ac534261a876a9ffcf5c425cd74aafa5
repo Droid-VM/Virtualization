@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "495157be_77f29d25",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-20T13:14:41Z",
+      "side": 1,
+      "message": "`f` is like a stream so it accumulates everything you write to it. So something like this should be equivalent:\n\n```\nwriteln!(f, \"Descriptors:\")?;\nfor descriptor in self.descriptors {\n    writeln!(f, ...)?;\n}\nOk(())\n```",
+      "parentUuid": "04938f51_ae56c072",
+      "range": {
+        "startLine": 37,
+        "startChar": 13,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "7484fde9ac534261a876a9ffcf5c425cd74aafa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d7620bb_a8a0e33a",
         "filename": "avmd/src/avmd.rs",
         "patchSetId": 6
