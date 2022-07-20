@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4e76904_57d7078a",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-20T12:35:12Z",
+      "side": 1,
+      "message": "This is part of the library that will be exposed to other clients. Adding clone just means the clients can create a clone if they want to where as without it they just don\u0027t have the ability to do so. As this just contains data, we don\u0027t need to worry about anything special with cloning. Since the struct is of non-trivial size, we\u0027d want to avoid adding `Copy` so make sure duplication is explicit.",
+      "parentUuid": "ae9d6a44_4c309921",
+      "range": {
+        "startLine": 20,
+        "startChar": 9,
+        "endLine": 20,
+        "endChar": 31
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c795a43c_e3628c65",
         "filename": "avmd/src/avmd.rs",
         "patchSetId": 4
@@ -320,6 +344,30 @@
       "side": 1,
       "message": "\u003e Could this be an enum?\nThis value is passed around in several places. It requires some work to change all the usages to an enum. If you think this is needed, we can do it in a separate cl.\n\n\u003e can we point at the canonical source of the valid values?\nHow to do this?",
       "parentUuid": "d77e4b9b_339be3c0",
+      "range": {
+        "startLine": 114,
+        "startChar": 32,
+        "endLine": 114,
+        "endChar": 35
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16ca81dc_0740d385",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-20T12:35:12Z",
+      "side": 1,
+      "message": "It should be one of the values defined in the APK signature scheme https://source.android.com/security/apksigning/v2#signature-algorithm-ids",
+      "parentUuid": "000594d5_e92b02ff",
       "range": {
         "startLine": 114,
         "startChar": 32,

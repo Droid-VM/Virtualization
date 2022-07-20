@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b82f3db_27580ffc",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-20T12:35:12Z",
+      "side": 1,
+      "message": "I don\u0027t think we should need to collect them first, a normal for loop would suffice:\n\n```\nfor descriptor in self.descriptors {\n    writeln!(f, ...);\n}\n```",
+      "range": {
+        "startLine": 37,
+        "startChar": 13,
+        "endLine": 37,
+        "endChar": 37
+      },
+      "revId": "7484fde9ac534261a876a9ffcf5c425cd74aafa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d7620bb_a8a0e33a",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-20T12:35:12Z",
+      "side": 1,
+      "message": "Does this work to insert a newline? You can also use the `write!` macros if you want to split it up.\n\n```\nwriteln!(f, \"  VBMeta descriptor:\");\nwriteln!(f, \"    namespace:             {}\", data.resource.namespace);\nwriteln!(f, \"    name:                  {}\", data.resource.name);\nwriteln!(f, \"    vbmeta digest:         {}\", to_hex_string(\u0026data.vbmeta_digest));\n```",
+      "range": {
+        "startLine": 96,
+        "startChar": 33,
+        "endLine": 97,
+        "endChar": 4
+      },
+      "revId": "7484fde9ac534261a876a9ffcf5c425cd74aafa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4867f2c8_beb8aca3",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-20T12:35:12Z",
+      "side": 1,
+      "message": "nit: Seeing this in the diff reminded me that it\u0027s not true any more, it\u0027s just a string.",
+      "range": {
+        "startLine": 137,
+        "startChar": 4,
+        "endLine": 137,
+        "endChar": 42
+      },
+      "revId": "7484fde9ac534261a876a9ffcf5c425cd74aafa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
