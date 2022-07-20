@@ -5,7 +5,6 @@ package {
 rust_defaults {
     name: "libavmd_defaults",
     crate_name: "avmd",
-    host_supported: true,
     srcs: ["src/lib.rs"],
     prefer_rlib: true,
     rustlibs: [
@@ -22,8 +21,6 @@ rust_library {
 rust_binary {
     name: "avmdtool",
     srcs: ["src/main.rs"],
-    required: ["avbtool"],
-    host_supported: true,
     prefer_rlib: true,
     rustlibs: [
         "libanyhow",
@@ -34,5 +31,19 @@ rust_binary {
         "libserde",
         "libserde_cbor",
         "libvbmeta_rust",
+    ],
+}
+
+rust_test {
+    name: "avmdtool_tests",
+    srcs: ["tests/*_test.rs"],
+    test_suites: ["general-tests"],
+    rustlibs: [
+        "libanyhow",
+    ],
+    compile_multilib: "first",
+    data: [
+        ":avmdtool",
+        "tests/data/*",
     ],
 }
