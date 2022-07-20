@@ -124,6 +124,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfe24cc4_7c6abdc9",
+        "filename": "compos/common/timeouts.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-20T11:35:47Z",
+      "side": 1,
+      "message": "Oops. Relic from the previous update to this file.",
+      "parentUuid": "62eb8873_42d17548",
+      "range": {
+        "startLine": 52,
+        "startChar": 34,
+        "endLine": 52,
+        "endChar": 49
+      },
+      "revId": "371ba6bedaa9b44f171131227a7cdbfaaff87b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5698975a_d35ba962",
@@ -137,6 +161,24 @@
       "writtenOn": "2022-07-08T16:54:04Z",
       "side": 1,
       "message": "Nit: you could instead get the first element of the pair with `.0`.",
+      "revId": "371ba6bedaa9b44f171131227a7cdbfaaff87b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49313c5a_85cd9b2e",
+        "filename": "vmclient/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-20T11:35:47Z",
+      "side": 1,
+      "message": "Mmm, but the result types here are complex - hard to write, and hard to read without any type hints.\nI gave the ignored value a name and added a comment to try to make this more explicable.",
+      "parentUuid": "5698975a_d35ba962",
       "revId": "371ba6bedaa9b44f171131227a7cdbfaaff87b59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -202,6 +244,30 @@
       "side": 1,
       "message": "If you\u0027re renaming this method you should probably also rename `GetServiceError` to match.",
       "parentUuid": "1e6111c6_d0ca1aef",
+      "range": {
+        "startLine": 144,
+        "startChar": 11,
+        "endLine": 144,
+        "endChar": 26
+      },
+      "revId": "371ba6bedaa9b44f171131227a7cdbfaaff87b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5764cd5d_5a55c6fe",
+        "filename": "vmclient/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-20T11:35:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cc4d6b9_4bf52df6",
       "range": {
         "startLine": 144,
         "startChar": 11,
