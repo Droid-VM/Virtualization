@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d62ea101_16b62a6b",
+        "filename": "tests/ubootless/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-20T15:45:53Z",
+      "side": 1,
+      "message": "Correct. I\u0027m mentioning this in the accompanying design doc. The combined ramdisk is 1.6MB. I hope that\u0027s fine to duplicate a few times.",
+      "parentUuid": "69c7ff16_9f13e74b",
+      "range": {
+        "startLine": 14,
+        "startChar": 9,
+        "endLine": 14,
+        "endChar": 53
+      },
+      "revId": "5db9ec631267b17a5b63eceb0df55b7ea32ca73a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d62b91f_39baf5c6",
         "filename": "tests/ubootless/bootconfig_vbmeta.arm64",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-20T14:05:39Z",
       "side": 1,
       "message": "by the pvmfw, right?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 28
+      },
+      "revId": "5db9ec631267b17a5b63eceb0df55b7ea32ca73a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdf702d1_a6a3ad62",
+        "filename": "tests/ubootless/bootconfig_vbmeta.arm64",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-20T15:45:53Z",
+      "side": 1,
+      "message": "This can be extracted from vbmeta.img at compile time",
+      "parentUuid": "4d62b91f_39baf5c6",
       "range": {
         "startLine": 9,
         "startChar": 0,
@@ -83,6 +131,30 @@
       "writtenOn": "2022-07-20T14:05:39Z",
       "side": 1,
       "message": "This currently is ignored by pvmfw and the goal is to let pvmfw verity this, am I correct?",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 22
+      },
+      "revId": "5db9ec631267b17a5b63eceb0df55b7ea32ca73a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45e4ecd4_5dcd7626",
+        "filename": "tests/ubootless/test.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-20T15:45:53Z",
+      "side": 1,
+      "message": "pvmfw does not use this and wouldn\u0027t either. The kernel and ramdisk will need to have an AVB footer, the same way we sign the bootloader today.",
+      "parentUuid": "27e9b881_1f72bae4",
       "range": {
         "startLine": 68,
         "startChar": 0,
