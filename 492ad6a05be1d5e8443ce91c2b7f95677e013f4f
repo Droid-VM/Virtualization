@@ -402,6 +402,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23579763_6b1c2158",
+        "filename": "avmd/src/avmd.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-20T14:40:43Z",
+      "side": 1,
+      "message": "\u003e This value is passed around in several places. It requires some work to change all the usages to an enum. If you think this is needed, we can do it in a separate cl.\n\nI think the enum is probably better, but yeah, not needed for this CL.",
+      "parentUuid": "16ca81dc_0740d385",
+      "range": {
+        "startLine": 114,
+        "startChar": 32,
+        "endLine": 114,
+        "endChar": 35
+      },
+      "revId": "492ad6a05be1d5e8443ce91c2b7f95677e013f4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a053861f_a8a1bc51",
