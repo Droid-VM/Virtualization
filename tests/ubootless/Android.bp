@@ -1,0 +1,76 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+python_binary_host {
+    name: "mkbootconfig",
+    srcs: ["mkbootconfig.py"],
+}
+
+python_binary_host {
+    name: "gen_vbmeta_bootconfig",
+    srcs: ["gen_vbmeta_bootconfig.py"],
+}
+
+// This generates bootconfig with vbmeta hash for Microdroid's 'vbmeta_a'.
+genrule {
+    name: "microdroid_ubootless_vbmeta_bootconfig_gen",
+    srcs: [":microdroid_vbmeta"],
+    out: ["bootconfig_microdroid_vbmeta"],
+    tools: ["gen_vbmeta_bootconfig", "avbtool"],
+    cmd: "$(location gen_vbmeta_bootconfig) $(location avbtool) $(in) > $(out)",
+}
+
+// This concatenates all bootconfigs files.
+genrule {
+    name: "microdroid_ubootless_bootconfig_gen",
+    srcs: [
+        ":microdroid_bootconfig_arm64_gen",
+        ":microdroid_bootconfig_full_debuggable_src",
+        "bootconfig_vbmeta.arm64",
+        ":microdroid_ubootless_vbmeta_bootconfig_gen",
+    ],
+    out: ["microdroid_ubootless_bootconfig"],
+    cmd: "cat $(in) > $(out)",
+}
+
+// This creates a combined ramdisk from 'init_boot', 'vendor_boot' and bootconfigs.
+genrule {
+    name: "microdroid_ubootless_ramdisk",
+    tools: ["mkbootconfig"],
+    srcs: [
+        ":microdroid_ramdisk",
+        ":microdroid_vendor_ramdisk",
+        ":microdroid_ubootless_bootconfig_gen",
+    ],
+    out: ["microdroid_ramdisk.img"],
+    cmd: "$(location mkbootconfig) $(in) > $(out)",
+}
+
+rust_test {
+    name: "microdroid_ubootless_test",
+    crate_name: "microdroid_ubootless_test",
+    srcs: ["test.rs"],
+    prefer_rlib: true,
+    edition: "2021",
+    rustlibs: [
+        "android.system.virtualizationservice-rust",
+        "libandroid_logger",
+        "libanyhow",
+        "liblibc",
+        "liblog_rust",
+        "libnix",
+        "libvmclient",
+    ],
+    data: [
+        ":microdroid_kernel_prebuilts-5.15-arm64",
+        ":microdroid_ubootless_ramdisk",
+    ],
+    test_suites: ["general-tests"],
+    enabled: false,
+    target: {
+        android_arm64: {
+            enabled: true,
+        },
+    },
+}
