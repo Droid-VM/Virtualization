@@ -305,6 +305,16 @@ android_filesystem {
     type: "compressed_cpio",
 }
 
+filegroup {
+    name: "microdroid_bootconfig_normal_src",
+    srcs: ["bootconfig.normal"],
+}
+
+filegroup {
+    name: "microdroid_bootconfig_full_debuggable_src",
+    srcs: ["bootconfig.full_debuggable"],
+}
+
 bootimg {
     name: "microdroid_vendor_boot",
     ramdisk_module: "microdroid_vendor_ramdisk",
