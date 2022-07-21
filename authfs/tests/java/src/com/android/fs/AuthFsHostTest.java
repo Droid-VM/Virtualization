@@ -17,27 +17,16 @@
 package com.android.virt.fs;
 
 import static android.virt.test.CommandResultSubject.assertThat;
-import static android.virt.test.LogArchiver.archiveLogThenDelete;
-
-import static com.android.tradefed.device.TestDevice.MicrodroidBuilder;
-import static com.android.tradefed.testtype.DeviceJUnit4ClassRunner.TestLogData;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-import static org.junit.Assume.assumeTrue;
 
 import android.platform.test.annotations.RootPermissionTest;
 import android.virt.test.CommandRunner;
 
-import com.android.compatibility.common.tradefed.build.CompatibilityBuildHelper;
 import com.android.compatibility.common.util.PollingCheck;
-import com.android.tradefed.build.IBuildInfo;
 import com.android.tradefed.device.DeviceNotAvailableException;
-import com.android.tradefed.device.ITestDevice;
-import com.android.tradefed.device.TestDevice;
 import com.android.tradefed.invoker.TestInformation;
 import com.android.tradefed.log.LogUtil.CLog;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner;
@@ -46,15 +35,10 @@ import com.android.tradefed.testtype.junit4.BaseHostJUnit4Test;
 import com.android.tradefed.testtype.junit4.BeforeClassWithInfo;
 import com.android.tradefed.util.CommandResult;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -111,86 +95,22 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
 
     private static CommandRunner sAndroid;
     private static CommandRunner sMicrodroid;
-    private static boolean sAssumptionFailed;
 
     private ExecutorService mThreadPool = Executors.newCachedThreadPool();
 
-    @Rule public TestLogData mTestLogs = new TestLogData();
-    @Rule public TestName mTestName = new TestName();
+    @Rule public final AuthFsTestRule mAuthFsTestRule = new AuthFsTestRule();
 
     @BeforeClassWithInfo
     public static void beforeClassWithDevice(TestInformation testInfo) throws Exception {
-        assertNotNull(testInfo.getDevice());
-        if (!(testInfo.getDevice() instanceof TestDevice)) {
-            CLog.w("Unexpected type of ITestDevice. Skipping.");
-            return;
-        }
-        TestDevice androidDevice = (TestDevice) testInfo.getDevice();
-        sAndroid = new CommandRunner(androidDevice);
-
-        // NB: We can't use assumeTrue because the assumption exception is NOT handled by the test
-        // infra when it is thrown from a class method (see b/37502066). We need to skip both here
-        // and in setUp.
-        if (!androidDevice.supportsMicrodroid()) {
-            CLog.i("Microdroid not supported. Skipping.");
-            return;
-        }
-
-        // For each test case, boot and adb connect to a new Microdroid
-        CLog.i("Starting the shared VM");
-        ITestDevice microdroidDevice =
-                MicrodroidBuilder
-                        .fromFile(findTestApk(testInfo.getBuildInfo()), VM_CONFIG_PATH_IN_APK)
-                        .debugLevel("full")
-                        .build((TestDevice) androidDevice);
-
-        // From this point on, we need to tear down the Microdroid instance
-        sMicrodroid = new CommandRunner(microdroidDevice);
-
-        // Root because authfs (started from shell in this test) currently require root to open
-        // /dev/fuse and mount the FUSE.
-        assertThat(microdroidDevice.enableAdbRoot()).isTrue();
+        AuthFsTestRule.setUpClass(testInfo);
+        sAndroid = AuthFsTestRule.getAndroid();
+        sMicrodroid = AuthFsTestRule.getMicrodroid();
     }
 
     @AfterClassWithInfo
     public static void afterClassWithDevice(TestInformation testInfo)
             throws DeviceNotAvailableException {
-        assertNotNull(sAndroid);
-
-        if (sMicrodroid != null) {
-            CLog.i("Shutting down shared VM");
-            ((TestDevice) testInfo.getDevice()).shutdownMicrodroid(sMicrodroid.getDevice());
-            sMicrodroid = null;
-        }
-
-        sAndroid = null;
-    }
-
-    @Before
-    public void setUp() throws Exception {
-        assumeTrue(((TestDevice) getDevice()).supportsMicrodroid());
-        sAndroid.run("mkdir " + TEST_OUTPUT_DIR);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        if (sMicrodroid != null) {
-            sMicrodroid.tryRun("killall authfs");
-            sMicrodroid.tryRun("umount " + MOUNT_DIR);
-        }
-
-        assertNotNull(sAndroid);
-        sAndroid.tryRun("killall fd_server");
-
-        // Even though we only run one VM for the whole class, and could have collect the VM log
-        // after all tests are done, TestLogData doesn't seem to work at class level. Hence,
-        // collect recent logs manually for each test method.
-        String vmRecentLog = TEST_OUTPUT_DIR + "/vm_recent.log";
-        sAndroid.tryRun("tail -n 50 " + LOG_PATH + " > " + vmRecentLog);
-        archiveLogThenDelete(mTestLogs, getDevice(), vmRecentLog,
-                "vm_recent.log-" + mTestName.getMethodName());
-
-        sAndroid.run("rm -rf " + TEST_OUTPUT_DIR);
+        AuthFsTestRule.tearDownClass(testInfo);
     }
 
     @Test
@@ -723,15 +643,6 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
         // Magic matches. Has only 2 inodes (root and "/3").
         assertEquals(
                 FUSE_SUPER_MAGIC_HEX + " 2", sMicrodroid.run("stat -f -c '%t %c' " + MOUNT_DIR));
-    }
-
-    private static File findTestApk(IBuildInfo buildInfo) {
-        try {
-            return (new CompatibilityBuildHelper(buildInfo)).getTestFile(TEST_APK_NAME);
-        } catch (FileNotFoundException e) {
-            fail("Missing test file: " + TEST_APK_NAME);
-            return null;
-        }
     }
 
     private void expectBackingFileConsistency(
