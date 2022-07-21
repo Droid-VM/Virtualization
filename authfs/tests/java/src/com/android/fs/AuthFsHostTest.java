@@ -20,6 +20,7 @@ import static com.android.microdroid.test.host.CommandResultSubject.assertThat;
 import static com.android.microdroid.test.host.LogArchiver.archiveLogThenDelete;
 import static com.android.tradefed.device.TestDevice.MicrodroidBuilder;
 import static com.android.tradefed.testtype.DeviceJUnit4ClassRunner.TestLogData;
+import static com.android.tradefed.testtype.DeviceJUnit4ClassRunner.TestMetrics;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -39,6 +40,9 @@ import com.android.tradefed.device.ITestDevice;
 import com.android.tradefed.device.TestDevice;
 import com.android.tradefed.invoker.TestInformation;
 import com.android.tradefed.log.LogUtil.CLog;
+import com.android.tradefed.metrics.proto.MetricMeasurement.DataType;
+import com.android.tradefed.metrics.proto.MetricMeasurement.Measurements;
+import com.android.tradefed.metrics.proto.MetricMeasurement.Metric;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner;
 import com.android.tradefed.testtype.junit4.AfterClassWithInfo;
 import com.android.tradefed.testtype.junit4.BaseHostJUnit4Test;
@@ -117,6 +121,7 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
 
     private ExecutorService mThreadPool = Executors.newCachedThreadPool();
 
+    @Rule public final TestMetrics mTestMetrics = new TestMetrics();
     @Rule public TestLogData mTestLogs = new TestLogData();
     @Rule public TestName mTestName = new TestName();
 
@@ -215,6 +220,39 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
 
         assertEquals("Inconsistent hash from /authfs/6: ", expectedHash4m, actualHashUnverified4m);
         assertEquals("Inconsistent hash from /authfs/3: ", expectedHash4m, actualHash4m);
+    }
+
+    @Test
+    public void testReadWithFsverityVerification() throws Exception {
+        // Setup
+        final double startTime = System.nanoTime();
+        runFdServerOnAndroid(
+                "--open-ro 3:input.4m --open-ro 4:input.4m.fsv_meta --open-ro 6:input.4m",
+                "--ro-fds 3:4 --ro-fds 6");
+
+        runAuthFsOnMicrodroid(
+                "--remote-ro-file-unverified 6 --remote-ro-file 3:"
+                        + DIGEST_4M
+                        + " --cid "
+                        + VMADDR_CID_HOST);
+        final double elapsedMilliseconds = (System.nanoTime() - startTime) / 1_000_000.;
+
+        // Verify
+        String actualHash4m = computeFileHash(sMicrodroid, MOUNT_DIR + "/3");
+        String expectedHash4m = computeFileHash(sAndroid, TEST_DIR + "/input.4m");
+        assertEquals("Inconsistent hash from /authfs/3: ", expectedHash4m, actualHash4m);
+
+        // Report
+        final Metric transferMbPerSec =
+                Metric.newBuilder()
+                        .setType(DataType.RAW)
+                        .setMeasurements(
+                                Measurements.newBuilder()
+                                        .setSingleDouble(4. / elapsedMilliseconds * 1000.))
+                        .build();
+        // Local output: avf_perf/authfs/authfs_read_with_fsverity_mb_per_sec: 14.713714647169299
+        mTestMetrics.addTestMetric(
+                "avf_perf/authfs/authfs_read_with_fsverity_mb_per_sec", transferMbPerSec);
     }
 
     // Separate the test from the above simply because exec in shell does not allow open too many
