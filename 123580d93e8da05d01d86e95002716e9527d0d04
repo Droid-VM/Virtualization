@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ac4d28b_4db26ab9",
+        "filename": "avmd/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-22T19:16:22Z",
+      "side": 1,
+      "message": "nit: I\u0027d go with `avmdtool_test` as you\u0027re testing the tool rather than the library directly.",
+      "range": {
+        "startLine": 23,
+        "startChar": 11,
+        "endLine": 23,
+        "endChar": 23
+      },
+      "revId": "123580d93e8da05d01d86e95002716e9527d0d04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "353dbb14_cc627e8c",
+        "filename": "avmd/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-22T19:16:22Z",
+      "side": 1,
+      "message": "nit: I don\u0027t see why this should be required, but it is :/",
+      "revId": "123580d93e8da05d01d86e95002716e9527d0d04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a13e3c2a_37ff1956",
+        "filename": "avmd/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-22T19:16:22Z",
+      "side": 1,
+      "message": "aside: we don\u0027t have this dependency any more",
+      "revId": "123580d93e8da05d01d86e95002716e9527d0d04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a925694_044e5e5f",
+        "filename": "avmd/TEST_MAPPING",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-22T19:16:22Z",
+      "side": 1,
+      "message": "You\u0027ll want to add an import line in the TEST_MAPPING form the parent directory",
+      "revId": "123580d93e8da05d01d86e95002716e9527d0d04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "674199b4_c78ed31c",
+        "filename": "avmd/tests/avmd_test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-22T19:16:22Z",
+      "side": 1,
+      "message": "In my experience with rust tests in Android, you get much more useful errors if you don\u0027t use anyhow and just cause a panic when the test fails. With anyhow, it can be hard to work out where the problem actually came from whereas the panic give you a file and line obviously. But if I\u0027m just holding it wrong, I\u0027d love to learn!",
+      "range": {
+        "startLine": 22,
+        "startChar": 18,
+        "endLine": 22,
+        "endChar": 28
+      },
+      "revId": "123580d93e8da05d01d86e95002716e9527d0d04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

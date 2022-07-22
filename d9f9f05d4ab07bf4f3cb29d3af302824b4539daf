@@ -22,6 +22,30 @@
       },
       "revId": "d9f9f05d4ab07bf4f3cb29d3af302824b4539daf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d94c1660_828c9f2e",
+        "filename": "avmd/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-22T19:16:22Z",
+      "side": 1,
+      "message": "After some messing around, I feel like this is an atest bug. The two binaries get put in the root directory for the test and it looks like atest tries to run them both, even though one is the test and one is used by the test.\n\nI cheated it by making this rust_test_host, so it only runs on the host. That\u0027s fine for what we need but annoying nonetheless.",
+      "parentUuid": "e04a2684_1b67327d",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 9
+      },
+      "revId": "d9f9f05d4ab07bf4f3cb29d3af302824b4539daf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
