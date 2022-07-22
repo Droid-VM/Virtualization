@@ -16,6 +16,29 @@
       "message": "Hey David, could you take a look at the cl? \n\nPoC for benchmark \u003d\u003e aosp/2162317",
       "revId": "8fccd9f569b02164f7f39238a4f6cf3a08984f24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3703bcbe_e83383cb",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsTestRule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-07-22T12:59:19Z",
+      "side": 1,
+      "message": "I see how this works but I find it clunky. Why not have a common AuthFsTestBase that extends BaseHostJUnit4Test, and then have AuthFsHostTest extend AuthFsTestBase? You could keep the setUp() and tearDown() methods intact.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 49
+      },
+      "revId": "8fccd9f569b02164f7f39238a4f6cf3a08984f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
