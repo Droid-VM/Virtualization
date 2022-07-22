@@ -19,10 +19,11 @@ use crate::Cid;
 use anyhow::{bail, Context, Error};
 use command_fds::CommandFdExt;
 use lazy_static::lazy_static;
-use log::{debug, error, info};
+use log::{debug, error, info, trace, warn};
 use semver::{Version, VersionReq};
 use nix::{fcntl::OFlag, unistd::pipe2};
 use shared_child::SharedChild;
+use statslog_virtualization_rust::vm_exited;
 use std::borrow::Cow;
 use std::fs::{remove_dir_all, File};
 use std::io::{self, Read};
@@ -260,7 +261,10 @@ impl VmInstance {
             };
 
         self.handle_ramdump().unwrap_or_else(|e| error!("Error handling ramdump: {}", e));
-        self.callbacks.callback_on_died(self.cid, death_reason(&result, &failure_reason));
+
+        let death_reason = death_reason(&result, &failure_reason);
+        self.callbacks.callback_on_died(self.cid, death_reason);
+        write_vm_exited_stats(death_reason);
 
         // Delete temporary files.
         if let Err(e) = remove_dir_all(&self.temporary_directory) {
@@ -338,6 +342,55 @@ impl VmInstance {
             self.callbacks.callback_on_ramdump(self.cid, ramdump);
         }
         Ok(())
+    }
+}
+
+fn write_vm_exited_stats(reason: DeathReason) {
+    let vm_exited = vm_exited::VmExited {
+        death_reason: match reason {
+            DeathReason::INFRASTRUCTURE_ERROR => vm_exited::DeathReason::InfrastructureError,
+            DeathReason::KILLED => vm_exited::DeathReason::Killed,
+            DeathReason::UNKNOWN => vm_exited::DeathReason::Unknown,
+            DeathReason::SHUTDOWN => vm_exited::DeathReason::Shutdown,
+            DeathReason::ERROR => vm_exited::DeathReason::Error,
+            DeathReason::REBOOT => vm_exited::DeathReason::Reboot,
+            DeathReason::CRASH => vm_exited::DeathReason::Crash,
+            DeathReason::PVM_FIRMWARE_PUBLIC_KEY_MISMATCH => {
+                vm_exited::DeathReason::PvmFirmwarePublicKeyMismatch
+            }
+            DeathReason::PVM_FIRMWARE_INSTANCE_IMAGE_CHANGED => {
+                vm_exited::DeathReason::PvmFirmwareInstanceImageChanged
+            }
+            DeathReason::BOOTLOADER_PUBLIC_KEY_MISMATCH => {
+                vm_exited::DeathReason::BootloaderPublicKeyMismatch
+            }
+            DeathReason::BOOTLOADER_INSTANCE_IMAGE_CHANGED => {
+                vm_exited::DeathReason::BootloaderInstanceImageChanged
+            }
+            DeathReason::MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE => {
+                vm_exited::DeathReason::MicrodroidFailedToConnectToVirtualizationService
+            }
+            DeathReason::MICRODROID_PAYLOAD_HAS_CHANGED => {
+                vm_exited::DeathReason::MicrodroidPayloadHasChanged
+            }
+            DeathReason::MICRODROID_PAYLOAD_VERIFICATION_FAILED => {
+                vm_exited::DeathReason::MicrodroidPayloadVerificationFailed
+            }
+            DeathReason::MICRODROID_INVALID_PAYLOAD_CONFIG => {
+                vm_exited::DeathReason::MicrodroidInvalidPayloadConfig
+            }
+            DeathReason::MICRODROID_UNKNOWN_RUNTIME_ERROR => {
+                vm_exited::DeathReason::MicrodroidUnknownRuntimeError
+            }
+            DeathReason::HANGUP => vm_exited::DeathReason::Hangup,
+            _ => vm_exited::DeathReason::Unknown,
+        },
+    };
+    match vm_exited.stats_write() {
+        Err(e) => {
+            warn!("statslog_rust failed with error: {}", e);
+        }
+        Ok(_) => trace!("statslog_rust succeeded for virtualization service"),
     }
 }
 
