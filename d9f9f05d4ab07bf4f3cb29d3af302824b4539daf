@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e04a2684_1b67327d",
+        "filename": "avmd/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-22T14:10:43Z",
+      "side": 1,
+      "message": "Hi Andrew,\n\nCould you take a look what I missed here that when running `atest libavmd_test`, I always get the following output?\n\n```\nRunning Tests...\n\narm64-v8a libavmd_test\n----------------------\navmdtool (0 Tests)\nRUNNER ERROR: test did not report any run:\nerror: Found argument \u0027-Z\u0027 which wasn\u0027t expected, or isn\u0027t valid in this context\n\nUSAGE:\navmdtool \u003cSUBCOMMAND\u003e\n\nFor more information try --help\n\n\n\narm64-v8a libavmd_test\n----------------------\nlibavmd_test (1 Test)\n[1/1] libavmd_test#test_dump: PASSED (27ms)\n\nSummary (Test executed with 1 devices.)\n-------\narm64-v8a libavmd_test: Passed: 0, Failed: 0, Ignored: 0, Assumption Failed: 0,   (Completed With ERRORS) \narm64-v8a libavmd_test: Passed: 1, Failed: 0, Ignored: 0, Assumption Failed: 0,    \n\n1 test failed\n```\nWhy there is always the `avmdtool` part?\n\nThanks!",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 9
+      },
+      "revId": "d9f9f05d4ab07bf4f3cb29d3af302824b4539daf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
