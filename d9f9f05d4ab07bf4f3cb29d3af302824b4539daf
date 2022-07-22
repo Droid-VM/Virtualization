@@ -70,6 +70,30 @@
       },
       "revId": "d9f9f05d4ab07bf4f3cb29d3af302824b4539daf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc0ae503_9768845a",
+        "filename": "avmd/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-22T19:37:12Z",
+      "side": 1,
+      "message": "Thanks for the investigation! Actually I followed the example of the zipfuse test config[1]. I wonder what I did so different with that test, why it works alright in their case.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/zipfuse/Android.bp;l\u003d34;drc\u003d217038e1d9c03ce61a042d9327968ee3a25acb57",
+      "parentUuid": "d684c170_b434c93f",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 9
+      },
+      "revId": "d9f9f05d4ab07bf4f3cb29d3af302824b4539daf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
