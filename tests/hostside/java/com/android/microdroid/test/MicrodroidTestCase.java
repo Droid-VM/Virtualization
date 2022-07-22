@@ -63,7 +63,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @RunWith(DeviceJUnit4ClassRunner.class)
-public class MicrodroidTestCase extends VirtualizationTestCaseBase {
+public class MicrodroidTestCase extends MicrodroidHostTestCaseBase {
     private static final String APK_NAME = "MicrodroidTestApp.apk";
     private static final String PACKAGE_NAME = "com.android.microdroid.test";
     private static final String SHELL_PACKAGE_NAME = "com.android.shell";

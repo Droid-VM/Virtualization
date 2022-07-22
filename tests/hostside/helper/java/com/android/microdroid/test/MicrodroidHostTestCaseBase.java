@@ -46,7 +46,7 @@ import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public abstract class VirtualizationTestCaseBase extends BaseHostJUnit4Test {
+public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
     protected static final String TEST_ROOT = "/data/local/tmp/virt/";
     protected static final String VIRT_APEX = "/apex/com.android.virt/";
     protected static final String LOG_PATH = TEST_ROOT + "log.txt";
