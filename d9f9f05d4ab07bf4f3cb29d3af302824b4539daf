@@ -94,6 +94,30 @@
       },
       "revId": "d9f9f05d4ab07bf4f3cb29d3af302824b4539daf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de82d3e5_338d2b85",
+        "filename": "avmd/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-25T12:19:51Z",
+      "side": 1,
+      "message": "authfs has an AndroidTest.xml that seems to describe which files to push and which ones to run, maybe that\u0027s how it prevents it from trying to run the non-test binary?\n\nThese are details that I\u0027m not very familiar with. I have some memory that the build system can automatically generate AndroidTest.xml if you don\u0027t specify one, so maybe something in that process isn\u0027t working as we\u0027d expect? I\u0027m not sure where we can find the generated xml off the top of my head.",
+      "parentUuid": "cc0ae503_9768845a",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 9
+      },
+      "revId": "d9f9f05d4ab07bf4f3cb29d3af302824b4539daf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
