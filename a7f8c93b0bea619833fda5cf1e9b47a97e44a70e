@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fa7f39a0_1bc86a9e",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-07-25T01:55:37Z",
+      "side": 1,
+      "message": "This is based on jiyong\u0027s document.",
+      "parentUuid": "1d3e0191_4578f282",
+      "range": {
+        "startLine": 68,
+        "startChar": 73,
+        "endLine": 68,
+        "endChar": 88
+      },
+      "revId": "a7f8c93b0bea619833fda5cf1e9b47a97e44a70e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd20c75d_aa6e9b2f",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
@@ -54,6 +78,24 @@
       "writtenOn": "2022-07-22T10:59:51Z",
       "side": 1,
       "message": "Will there be anything in place to make sure these are used properly? E.g. an OEM mustn\u0027t ever have this DT node injected into microdroid in production pVMs.",
+      "revId": "a7f8c93b0bea619833fda5cf1e9b47a97e44a70e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dab5b630_9e421229",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-07-25T01:55:37Z",
+      "side": 1,
+      "message": "I think it should be done by pvmfw or ABL?",
+      "parentUuid": "fd20c75d_aa6e9b2f",
       "revId": "a7f8c93b0bea619833fda5cf1e9b47a97e44a70e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -81,6 +123,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "172cca82_72309c84",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-07-25T01:55:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b33a96a_83011660",
+      "range": {
+        "startLine": 291,
+        "startChar": 56,
+        "endLine": 291,
+        "endChar": 62
+      },
+      "revId": "a7f8c93b0bea619833fda5cf1e9b47a97e44a70e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5854d3f_2fe4261b",
@@ -94,6 +160,24 @@
       "writtenOn": "2022-07-22T10:59:51Z",
       "side": 1,
       "message": "On this path, we might save an identity that we never read again? If we change to disabling the whole of verified boot, we can have a more obvious placeholder value that\u0027s just to keep the secrets stable?",
+      "revId": "a7f8c93b0bea619833fda5cf1e9b47a97e44a70e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62a91e59_b1c1e9dd",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-07-25T01:55:37Z",
+      "side": 1,
+      "message": "Mmm, wouldn\u0027t that make unnecessary branchings on other codes using this data?",
+      "parentUuid": "b5854d3f_2fe4261b",
       "revId": "a7f8c93b0bea619833fda5cf1e9b47a97e44a70e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
