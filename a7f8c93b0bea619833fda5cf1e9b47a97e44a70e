@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6bc548d5_7ecb246c",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-25T10:39:59Z",
+      "side": 1,
+      "message": "I\u0027m asking on the doc. I think it\u0027s simpler for us to just have one control to disable verified boot allowing someone to debug by loading whatever they want into the VM.",
+      "parentUuid": "fa7f39a0_1bc86a9e",
+      "range": {
+        "startLine": 68,
+        "startChar": 73,
+        "endLine": 68,
+        "endChar": 88
+      },
+      "revId": "a7f8c93b0bea619833fda5cf1e9b47a97e44a70e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd20c75d_aa6e9b2f",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
@@ -96,6 +120,24 @@
       "side": 1,
       "message": "I think it should be done by pvmfw or ABL?",
       "parentUuid": "fd20c75d_aa6e9b2f",
+      "revId": "a7f8c93b0bea619833fda5cf1e9b47a97e44a70e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f94d3c7_938fefd3",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-25T10:39:59Z",
+      "side": 1,
+      "message": "pmvfw will be responsible for preventing the VMM injecting the DT node. I guess we\u0027d want a CTS test to try and catch cases where this property has been left enabled in production devices, but it will only be a smoke test.",
+      "parentUuid": "dab5b630_9e421229",
       "revId": "a7f8c93b0bea619833fda5cf1e9b47a97e44a70e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
