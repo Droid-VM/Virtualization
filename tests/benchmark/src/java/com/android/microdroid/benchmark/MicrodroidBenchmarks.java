@@ -22,11 +22,14 @@ import static com.google.common.truth.TruthJUnit.assume;
 
 import android.app.Instrumentation;
 import android.os.Bundle;
+import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineConfig;
 import android.system.virtualmachine.VirtualMachineConfig.DebugLevel;
 import android.system.virtualmachine.VirtualMachineException;
+import android.util.Log;
 
 import com.android.microdroid.test.MicrodroidDeviceTestBase;
+import com.android.microdroid.testservice.IReportService;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -38,6 +41,7 @@ import org.junit.runners.Parameterized;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.concurrent.CompletableFuture;
 
 @RunWith(Parameterized.class)
 public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
@@ -159,12 +163,50 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
                 continue;
             }
 
-            String base = name.substring(MICRODROID_IMG_PREFIX.length(),
-                                         name.length() - MICRODROID_IMG_SUFFIX.length());
-            String metric = "avf_perf/microdroid/img_size_" + base + "_MB";
+            String base =
+                    name.substring(
+                            MICRODROID_IMG_PREFIX.length(),
+                            name.length() - MICRODROID_IMG_SUFFIX.length());
+            String metric = "avf_perf/microdroid/img_size_" + base + "_MB" + "+" + name;
             double size = Files.size(file.toPath()) / SIZE_MB;
             bundle.putDouble(metric, size);
         }
+        mInstrumentation.sendStatus(0, bundle);
+    }
+
+    @Test
+    public void testVirtioBlkReadRate() throws Exception {
+        final VirtualMachineConfig.Builder builder =
+                mInner.newVmConfigBuilder("assets/vm_config_io.json");
+        final VirtualMachineConfig config = builder.debugLevel(DebugLevel.FULL).build();
+        mInner.forceCreateNewVirtualMachine("test_vm_io", config);
+        final VirtualMachine vm = mInner.getVirtualMachineManager().get("test_vm_io");
+        final CompletableFuture<Double> seqReadRate = new CompletableFuture<>();
+        final CompletableFuture<Double> randReadRate = new CompletableFuture<>();
+        VmEventListener listener =
+                new VmEventListener() {
+                    @Override
+                    public void onPayloadReady(VirtualMachine vm) {
+                        Log.i(TAG, "onPayloadReady");
+                        try {
+                            IReportService reportService =
+                                    IReportService.Stub.asInterface(
+                                            vm.connectToVsockServer(IReportService.SERVICE_PORT)
+                                                    .get());
+                            seqReadRate.complete(reportService.getSeqReadRate());
+                            randReadRate.complete(reportService.getRandReadRate());
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                        forceStop(vm);
+                    }
+                };
+        listener.runToFinish(TAG, vm);
+        final Bundle bundle = new Bundle();
+        final String metricNamePrefix =
+                "avf_perf/virtio-blk/" + (mProtectedVm ? "protected-vm" : "unprotected-vm");
+        bundle.putDouble(metricNamePrefix + "/seq_read_rate_mb_per_sec", seqReadRate.getNow(-1.));
+        bundle.putDouble(metricNamePrefix + "/rand_read_rate_mb_per_sec", randReadRate.getNow(-1.));
         mInstrumentation.sendStatus(0, bundle);
     }
 }
