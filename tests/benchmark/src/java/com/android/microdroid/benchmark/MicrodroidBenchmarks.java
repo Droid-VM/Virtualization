@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.android.microdroid.benchmark;
 
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
@@ -22,11 +23,13 @@ import static com.google.common.truth.TruthJUnit.assume;
 
 import android.app.Instrumentation;
 import android.os.Bundle;
+import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineConfig;
 import android.system.virtualmachine.VirtualMachineConfig.DebugLevel;
 import android.system.virtualmachine.VirtualMachineException;
 
 import com.android.microdroid.test.MicrodroidDeviceTestBase;
+import com.android.microdroid.testservice.IBenchmarkService;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -38,6 +41,8 @@ import org.junit.runners.Parameterized;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(Parameterized.class)
 public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
@@ -159,12 +164,101 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
                 continue;
             }
 
-            String base = name.substring(MICRODROID_IMG_PREFIX.length(),
-                                         name.length() - MICRODROID_IMG_SUFFIX.length());
-            String metric = "avf_perf/microdroid/img_size_" + base + "_MB";
+            String base =
+                    name.substring(
+                            MICRODROID_IMG_PREFIX.length(),
+                            name.length() - MICRODROID_IMG_SUFFIX.length());
+            String metric = "avf_perf/microdroid/img_size_" + base + "_MB" + "+" + name;
             double size = Files.size(file.toPath()) / SIZE_MB;
             bundle.putDouble(metric, size);
         }
         mInstrumentation.sendStatus(0, bundle);
+    }
+
+    @Test
+    public void testVirtioBlkSeqReadRate() throws Exception {
+        testVirtioBlkReadRate(/*isRand=*/ false);
+    }
+
+    @Test
+    public void testVirtioBlkRandReadRate() throws Exception {
+        testVirtioBlkReadRate(/*isRand=*/ true);
+    }
+
+    private void testVirtioBlkReadRate(boolean isRand) throws Exception {
+        final VirtualMachineConfig.Builder builder =
+                mInner.newVmConfigBuilder("assets/vm_config_io.json");
+        final VirtualMachineConfig config = builder.debugLevel(DebugLevel.FULL).build();
+        final List<Double> readRates = new ArrayList<>();
+        final int trialCount = 5;
+
+        for (int i = 0; i < trialCount; ++i) {
+            final String vmName = "test_vm_io_" + i;
+            mInner.forceCreateNewVirtualMachine(vmName, config);
+            final VirtualMachine vm = mInner.getVirtualMachineManager().get(vmName);
+            final VirtioBlkVmEventListener listener =
+                    new VirtioBlkVmEventListener(readRates, isRand);
+            listener.runToFinish(TAG, vm);
+        }
+        reportMetrics(readRates, isRand);
+    }
+
+    private void reportMetrics(List<Double> readRates, boolean isRand) {
+        double sum = 0;
+        for (double rate : readRates) {
+            sum += rate;
+        }
+        final double mean = sum / readRates.size();
+        double sqSum = 0;
+        for (double rate : readRates) {
+            sqSum += (rate - mean) * (rate - mean);
+        }
+        final double stdEv = Math.sqrt(sqSum / readRates.size());
+
+        final Bundle bundle = new Bundle();
+        final String metricNamePrefix =
+                "avf_perf/virtio-blk/"
+                        + (mProtectedVm ? "protected-vm/" : "unprotected-vm/")
+                        + (isRand ? "rand_read_" : "seq_read_");
+        final String unit = "_mb_per_sec";
+
+        bundle.putDouble(metricNamePrefix + "mean" + unit, mean);
+        bundle.putDouble(metricNamePrefix + "std" + unit, stdEv);
+        mInstrumentation.sendStatus(0, bundle);
+    }
+
+    private static class VirtioBlkVmEventListener extends VmEventListener {
+        private static final String FILENAME = APEX_ETC_FS + "microdroid_super.img";
+
+        private final long mFileSize; // in bytes;
+        private final List<Double> mReadRates;
+        private final boolean mIsRand;
+
+        VirtioBlkVmEventListener(List<Double> readRates, boolean isRand) {
+            final File file = new File(FILENAME);
+            try {
+                mFileSize = Files.size(file.toPath());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            assertThat(mFileSize > 0).isTrue();
+            mReadRates = readRates;
+            mIsRand = isRand;
+        }
+
+        @Override
+        public void onPayloadReady(VirtualMachine vm) {
+            try {
+                final IBenchmarkService benchmarkService =
+                        IBenchmarkService.Stub.asInterface(
+                                vm.connectToVsockServer(IBenchmarkService.SERVICE_PORT).get());
+                final double elapsedSeconds =
+                        benchmarkService.readFile(FILENAME, mFileSize, mIsRand);
+                mReadRates.add(mFileSize / SIZE_MB / elapsedSeconds);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            forceStop(vm);
+        }
     }
 }
