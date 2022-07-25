@@ -26,6 +26,12 @@ android_app_certificate {
     certificate: "com.android.compos",
 }
 
+prebuilt_etc {
+    name: "compos_avmd_prebuilt",
+    src: ":compos_avmd",
+    filename: "compos.avmd",
+}
+
 apex {
     name: "com.android.compos",
     manifest: "manifest.json",
@@ -59,6 +65,7 @@ apex {
 
     prebuilts: [
         "com.android.compos.init.rc",
+        "compos_avmd_prebuilt",
     ],
 }
 

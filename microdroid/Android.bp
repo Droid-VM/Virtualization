@@ -578,3 +578,38 @@ prebuilt_etc {
     filename: "event-log-tags",
     installable: false,
 }
+
+avmd {
+    name: "microdroid_avmd",
+    stem: "microdroid",
+    resources: [
+        {
+	    // TODO: change this to embed a vbmeta struct so image needn't have footer
+            namespace: "pvm",
+            name: "bios",
+            module: "microdroid_bootloader_signed",
+        },
+        {
+            namespace: "abl",
+            name: "vbmeta",
+            module: "microdroid_vbmeta",
+        },
+        {
+            namespace: "abl",
+            name: "vbmeta_bootconfig",
+            module: "microdroid_vbmeta_bootconfig",
+        },
+        {
+            namespace: "abl",
+            name: "uboot_env",
+            module: "microdroid_uboot_env",
+        },
+        {
+            namespace: "abl",
+            name: "bootconfig",
+            // TODO: one AVMD per debug level
+            module: "microdroid_bootconfig_full_debuggable",
+        },
+    ],
+    private_key: ":microdroid_sign_key",
+}

@@ -15,6 +15,12 @@ microdroid_filesystem_images = [
     "microdroid_vendor_boot",
 ]
 
+prebuilt_etc {
+    name: "microdroid_avmd_prebuilt",
+    src: ":microdroid_avmd",
+    filename: "microdroid.avmd",
+}
+
 apex {
     name: "com.android.virt",
 
@@ -63,6 +69,7 @@ apex {
     ],
     prebuilts: [
         "com.android.virt.init.rc",
+        "microdroid_avmd_prebuilt",
         "microdroid.json",
         "microdroid_bootloader",
         "microdroid_bootloader.avbpubkey",

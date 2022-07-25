@@ -7,3 +7,55 @@ android_app {
     sdk_version: "current",
     apex_available: ["com.android.compos"],
 }
+
+// m compos_avmd
+// avmdtool dump $ANDROID_PRODUCT_OUT/system/etc/compos_avmd.avmd
+avmd {
+    name: "compos_avmd",
+    stem: "compos",
+    resources: [
+        // NOTE: from here, there's some overlap with vm_config.json so maybe there
+        //       could be a microdroid_payload build rule to generate both?
+        {
+            namespace: "microdroid_manager",
+            name: "payload",
+            module: "CompOSPayloadApp",
+        },
+        {
+            namespace: "microdroid_manager",
+            name: "com.android.compos",
+            package: "com.android.compos",
+        },
+        {
+            namespace: "microdroid_manager",
+            name: "com.android.art",
+            package: "com.android.art",
+        },
+        {
+            namespace: "microdroid_manager",
+            name: "com.android.sdkext",
+            package: "com.android.sdkext",
+        },
+
+        // TODO: The following should be inputs to the VM as they change at runtime:
+        //  - extra APKs (BuildManifest.apk)
+	//  - {CLASSPATH} (APEXs used as data, discovered on-device)
+    ],
+    chain_partitions: [
+        {
+            name: "microdroid",
+            public_key: ":microdroid_sign_avb_public_key",
+        },
+    ],
+    private_key: ":microdroid_sign_key", // TODO: replace for compos
+}
+
+genrule {
+    name: "microdroid_sign_avb_public_key",
+    tools: ["avbtool"],
+    srcs: [":microdroid_sign_key"],
+    out: ["microdroid_sign_avb_public_key.avbpubkey"],
+    cmd: "$(location avbtool) extract_public_key " +
+        "--key $(location :microdroid_sign_key) "+
+	"--output $(out)"
+}
