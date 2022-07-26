@@ -53,7 +53,10 @@ use log::{debug, error, info, warn, trace};
 use microdroid_payload_config::VmPayloadConfig;
 use rustutils::system_properties;
 use semver::VersionReq;
-use statslog_virtualization_rust::vm_creation_requested::{stats_write, Hypervisor};
+use statslog_virtualization_rust::{
+    vm_creation_requested::{stats_write, Hypervisor},
+    vm_booted,
+};
 use std::convert::TryInto;
 use std::ffi::CStr;
 use std::fs::{create_dir, File, OpenOptions};
@@ -521,6 +524,17 @@ impl VirtualizationService {
 /// Write the stats of VMCreation to statsd
 fn write_vm_creation_stats(is_protected: bool, creation_succeeded: bool, exception_code: i32) {
     match stats_write(Hypervisor::Pkvm, is_protected, creation_succeeded, exception_code) {
+        Err(e) => {
+            warn!("statslog_rust failed with error: {}", e);
+        }
+        Ok(_) => trace!("statslog_rust succeeded for virtualization service"),
+    }
+}
+
+/// Write the stats of VMCreation to statsd
+fn write_vm_booted_stats() {
+    let vm_booted = vm_booted::VmBooted { user_id: 0, vm_id: 0 };
+    match vm_booted.stats_write() {
         Err(e) => {
             warn!("statslog_rust failed with error: {}", e);
         }
@@ -1080,6 +1094,7 @@ impl IVirtualMachineService for VirtualMachineService {
                 .map_err(|e| new_binder_exception(ExceptionCode::ILLEGAL_STATE, e.to_string()))?;
             let stream = vm.stream.lock().unwrap().take();
             vm.callbacks.notify_payload_started(cid, stream);
+            write_vm_booted_stats();
             Ok(())
         } else {
             error!("notifyPayloadStarted is called from an unknown CID {}", cid);
