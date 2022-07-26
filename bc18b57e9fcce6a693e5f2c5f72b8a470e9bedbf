@@ -46,6 +46,30 @@
       },
       "revId": "bc18b57e9fcce6a693e5f2c5f72b8a470e9bedbf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cddb84b_e4f28dbb",
+        "filename": "tests/benchmark/src/native/benchmarkbinary.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-07-26T02:27:47Z",
+      "side": 1,
+      "message": "Wait, I don\u0027t think there is a risk just reading the block devices.\n\nYou can try adding this to system/sepolicy/microdroid/system/private/microdroid_payload.te:\n\n    #allow payload to access virtual disks\n    allow microdroid_payload vd_device:blk_file r_file_perms;",
+      "parentUuid": "bd70de97_a11759bf",
+      "range": {
+        "startLine": 59,
+        "startChar": 36,
+        "endLine": 59,
+        "endChar": 73
+      },
+      "revId": "bc18b57e9fcce6a693e5f2c5f72b8a470e9bedbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
