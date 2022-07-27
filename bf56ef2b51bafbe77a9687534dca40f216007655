@@ -22,6 +22,30 @@
       },
       "revId": "bf56ef2b51bafbe77a9687534dca40f216007655",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b446daa4_a78559dd",
+        "filename": "tests/benchmark/src/native/benchmarkbinary.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-07-27T12:31:26Z",
+      "side": 1,
+      "message": "Thanks for the suggestion! Actually this still doesn\u0027t clean up all the internal cache. When reading the image file sequentially from Microdroid, we have\n\n- without flush, second read: ~7000 Mb/s\n- with flush, second read: ~1700 Mb/s\n- first read: ~190 Mb/s",
+      "parentUuid": "be03eebe_8a383d59",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 148,
+        "endChar": 88
+      },
+      "revId": "bf56ef2b51bafbe77a9687534dca40f216007655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
