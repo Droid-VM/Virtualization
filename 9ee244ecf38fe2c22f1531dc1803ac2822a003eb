@@ -177,6 +177,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af78a96b_f9b76e1c",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-27T14:11:31Z",
+      "side": 1,
+      "message": "Ah, of course.\nI was thinking of the alternate formulation, where you compute sum(n), sum(n^2).",
+      "parentUuid": "1bd68481_470f75d0",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 9
+      },
+      "revId": "9ee244ecf38fe2c22f1531dc1803ac2822a003eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c879b41_34644821",
@@ -261,6 +285,30 @@
       "side": 1,
       "message": "Yep, I was searching for something like that but couldn\u0027t find api doc for this for number comparison. I tried assertThat(mFileSize).greaterThan(0) but it didn\u0027t work. Is there any cheatsheet for common usages of truth?",
       "parentUuid": "2afec627_60a479aa",
+      "range": {
+        "startLine": 244,
+        "startChar": 12,
+        "endLine": 244,
+        "endChar": 46
+      },
+      "revId": "9ee244ecf38fe2c22f1531dc1803ac2822a003eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ef43dfc_d3c55ad7",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-27T14:11:31Z",
+      "side": 1,
+      "message": "I don\u0027t know ... it would be helpful. go/truth/known_types ?\nI generally just code search for \"f:truth \u003csomething\u003eSubject\" - in this case IntegerSubject matches, and its parent ComparableSubject is the one.\n\nBut there\u0027s generally a verb involved - assertThat(x).isBlah, hashBlah etc",
+      "parentUuid": "33cfd247_12082c84",
       "range": {
         "startLine": 244,
         "startChar": 12,
