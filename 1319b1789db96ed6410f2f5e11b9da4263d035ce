@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c845364_40a09726",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2022-07-27T22:08:25Z",
+      "side": 1,
+      "message": "There is duplicate logging here:\n\n1. `try_main` does `error!(\"task terminated: {:?}\", err);`\n2. `main` does `error!(\"Failed with {:?}. Shutting down...\", e);` on the same error\n3. `main` returns that error and normally the rust generated code would log it yet again\n\nI only see (1) and (2) in practice. Maybe (3) doesn\u0027t happen because the shutdown kills the process before it gets a chance?\n\nMaybe delete (1), move the `scopedguard::defer` shutdown into `try_main`, and then go back to the older `main` that just logged and called `exit(1)` on error.",
+      "parentUuid": "413f8622_713c6af8",
+      "range": {
+        "startLine": 158,
+        "startChar": 3,
+        "endLine": 158,
+        "endChar": 9
+      },
+      "revId": "1319b1789db96ed6410f2f5e11b9da4263d035ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a753e57f_1d3a5e18",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 2
