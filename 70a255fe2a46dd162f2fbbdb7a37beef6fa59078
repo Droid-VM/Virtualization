@@ -33,6 +33,24 @@
       "message": "Is it okay to add atom fields like user_id and vm_id which haven\u0027t decided how to implement it and send dummy data instead?\nOf course I\u0027ll write a TODO comment.\n\nCurrently I have lots of concerns with b/236252851 and I want to have a discuss with it, but waiting all changes for that bug takes long time delay..\n\nWe have another option excluding such fields in current changes, but we can\u0027t make VmBooted atom since it\u0027ll be empty without them.",
       "revId": "70a255fe2a46dd162f2fbbdb7a37beef6fa59078",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b13e1cd6_c44b355a",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-07-27T00:39:24Z",
+      "side": 1,
+      "message": "After I had a 1:1 chat with shikhapanwar@, we decided to add it and it\u0027s done in this change.",
+      "parentUuid": "e6b26871_ac799534",
+      "revId": "70a255fe2a46dd162f2fbbdb7a37beef6fa59078",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
