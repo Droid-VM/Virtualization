@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b234196c_df34bc45",
+        "filename": "TEST_MAPPING",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-27T19:57:59Z",
+      "side": 1,
+      "message": "If you define it as a presubmit test here, you don\u0027t need `avmd/TEST_MAPPING`. But if we want to keep the config contained in the subdirectory then you\u0027d get rid of this line and add an entry in the \"imports\" list below to point to the `avmd` directory.",
+      "range": {
+        "startLine": 22,
+        "startChar": 15,
+        "endLine": 22,
+        "endChar": 29
+      },
+      "revId": "7d516015e61aee74e90fc9c0d3ea84adf2e5f6d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77486b3d_052e06a5",
+        "filename": "avmd/tests/avmdtool_test.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-27T19:57:59Z",
+      "side": 1,
+      "message": "Does the anyhow context do anything if you just unwrap the error? I haven\u0027t tried before, but at we\u0027re going to get a line number from the panic automatically.",
+      "range": {
+        "startLine": 38,
+        "startChar": 46,
+        "endLine": 38,
+        "endChar": 53
+      },
+      "revId": "7d516015e61aee74e90fc9c0d3ea84adf2e5f6d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
