@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82eb161f_1ccb1215",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-07-28T09:42:26Z",
+      "side": 1,
+      "message": "I think we don\u0027t see (3) because it is written to stderr rather than logcat.\n\nYour suggestion SGTM, FWIW. Do you want to send a CL?",
+      "parentUuid": "4c845364_40a09726",
+      "range": {
+        "startLine": 158,
+        "startChar": 3,
+        "endLine": 158,
+        "endChar": 9
+      },
+      "revId": "1319b1789db96ed6410f2f5e11b9da4263d035ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a753e57f_1d3a5e18",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 2
