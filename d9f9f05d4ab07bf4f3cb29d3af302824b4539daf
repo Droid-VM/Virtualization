@@ -166,6 +166,30 @@
       },
       "revId": "d9f9f05d4ab07bf4f3cb29d3af302824b4539daf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82228092_8d7fff38",
+        "filename": "avmd/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-07-28T12:59:16Z",
+      "side": 1,
+      "message": "For the host test, we needed to add some shared libraries in data_libs\n\n```\nrust_test_host {\n    name: \"avmdtool_tests\",\n    srcs: [\"tests/*_test.rs\"],\n    test_suites: [\"general-tests\"],\n    prefer_rlib: true,\n    rustlibs: [\n        \"libanyhow\",\n    ],\n    data: [\"tests/data/*\"],\n    data_bins: [\"avmdtool\"],\n    data_libs: [\n        \"libcrypto\",\n        \"libz\",\n    ],\n}\n```",
+      "parentUuid": "b84e9e99_5508a922",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 9
+      },
+      "revId": "d9f9f05d4ab07bf4f3cb29d3af302824b4539daf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
