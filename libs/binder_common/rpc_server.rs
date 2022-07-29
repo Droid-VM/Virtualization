@@ -18,7 +18,7 @@
 
 use binder::unstable_api::AsNative;
 use binder::SpIBinder;
-use std::os::raw;
+use std::{os::raw, ptr::null_mut};
 
 /// Runs a binder RPC server, serving the supplied binder service implementation on the given vsock
 /// port.
@@ -80,5 +80,41 @@ where
         if let Some(on_ready) = self.0.take() {
             on_ready();
         }
+    }
+}
+
+/// Runs a binder RPC server, using the given factory function to construct a binder service
+/// implementation for each connection.
+///
+/// The current thread is joined to the binder thread pool to handle incoming messages.
+///
+/// Returns true if the server has shutdown normally, false if it failed in some way.
+pub fn run_rpc_server_with_factory(
+    port: u32,
+    factory: impl FnMut(u32) -> Option<SpIBinder> + Send + Sync,
+) -> bool {
+    // Double box the factory because trait objects aren't FFI safe.
+    // NB: The type parameter is necessary to ensure that we have a `dyn` rather than an `impl`
+    // inside the Box, removing it will cause runtime failures when we cast back.
+    let boxed_factory =
+        Box::<Box<dyn FnMut(u32) -> Option<SpIBinder> + Send + Sync>>::new(Box::new(factory));
+    let context = Box::into_raw(boxed_factory) as *mut raw::c_void;
+    unsafe {
+        binder_rpc_unstable_bindgen::RunRpcServerWithFactory(Some(factory_wrapper), context, port)
+    }
+}
+
+unsafe extern "C" fn factory_wrapper(
+    cid: u32,
+    context: *mut raw::c_void,
+) -> *mut binder_rpc_unstable_bindgen::AIBinder {
+    let factory_ptr = context as *mut Box<dyn FnMut(u32) -> Option<SpIBinder> + Send + Sync>;
+    let factory: &mut Box<dyn FnMut(u32) -> Option<SpIBinder> + Send + Sync> =
+        factory_ptr.as_mut().unwrap();
+
+    if let Some(mut service) = factory(cid) {
+        service.as_native_mut() as *mut binder_rpc_unstable_bindgen::AIBinder
+    } else {
+        null_mut()
     }
 }
