@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b40d776_5c723f5d",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2022-07-29T16:44:35Z",
+      "side": 1,
+      "message": "Sent https://r.android.com/2169945 to delete (1)\n\nOn second though, moving the `defer` would mess up the order of logging (would see \"shutting down\" -\u003e \"Failed with ...\")\n\n\u003e I think we don\u0027t see (3) because it is written to stderr rather than logcat.\n\nAh, right. I\u0027ll leave that alone then. If we didn\u0027t want the stderr log, we could return a `std::process::ExitCode::FAILURE` from main instead of using `std::process::exit(1)` so that the `defer` runs properly, but it seems minor.\n\nRelated discussion: if the shutdown on exit is really important, then we should probably use a different technique. If this is compiled with `panic\u003dabort`, then it won\u0027t get run on any panic. Also, the usual unix stuff like unhandled signals will skip it.",
+      "parentUuid": "82eb161f_1ccb1215",
+      "range": {
+        "startLine": 158,
+        "startChar": 3,
+        "endLine": 158,
+        "endChar": 9
+      },
+      "revId": "1319b1789db96ed6410f2f5e11b9da4263d035ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a753e57f_1d3a5e18",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 2
