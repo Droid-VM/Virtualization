@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.compos.benchmark;
+package java.com.android.compos.benchmark;
 
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 
@@ -44,12 +44,14 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import java.com.android.compos.annotation.Scenario;
 
+@Scenario // Marks the test as a CUJ that CrystalBall recognizes.
 @RunWith(JUnit4.class)
 public class ComposBenchmark extends MicrodroidDeviceTestBase {
     private static final String TAG = "ComposBenchmark";
     private static final int BUFFER_SIZE = 1024;
-    private static final int ROUND_COUNT = 5;
+    private static final int ROUND_COUNT = 1;
     private static final double NANOS_IN_SEC = 1_000_000_000.0;
     private static final String METRIC_PREFIX = "avf_perf/compos/";
 
@@ -129,19 +131,19 @@ public class ComposBenchmark extends MicrodroidDeviceTestBase {
 
         double[] compileTime = new double[ROUND_COUNT];
 
-        for (int round = 0; round < ROUND_COUNT; ++round) {
-            Long compileStartTime = System.nanoTime();
-            String output = executeCommand(command);
-            Long compileEndTime = System.nanoTime();
+        // for (int round = 0; round < ROUND_COUNT; ++round) {
+        //     Long compileStartTime = System.nanoTime();
+        //     String output = executeCommand(command);
+        //     Long compileEndTime = System.nanoTime();
 
-            Pattern pattern = Pattern.compile("All Ok");
-            Matcher matcher = pattern.matcher(output);
-            assertTrue(matcher.find());
+        //     Pattern pattern = Pattern.compile("All Ok");
+        //     Matcher matcher = pattern.matcher(output);
+        //     assertTrue(matcher.find());
 
-            compileTime[round] = (compileEndTime - compileStartTime) / NANOS_IN_SEC;
-        }
+        //     compileTime[round] = (compileEndTime - compileStartTime) / NANOS_IN_SEC;
+        // }
 
-        reportMetric("guest_compile_time", "s", compileTime);
+        // reportMetric("guest_compile_time", "s", compileTime);
     }
 
     private Timestamp getLatestDex2oatSuccessTime()
@@ -194,5 +196,4 @@ public class ComposBenchmark extends MicrodroidDeviceTestBase {
 
         reportMetric("host_compile_time", "s", compileTime);
     }
-
 }
