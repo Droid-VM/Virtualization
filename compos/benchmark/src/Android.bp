@@ -1,0 +1,22 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+android_test {
+    name: "ComposBenchmarkApp",
+    test_suites: [
+        "general-tests",
+    ],
+    srcs: ["java/**/*.java"],
+    static_libs: [
+        "androidx.test.rules",
+        "collector-device-lib-platform",
+        "ComposBenchmarkAppStaticLib",
+        "microbenchmark-device-lib",
+        "androidx.test.runner",
+        "androidx.test.ext.junit",
+        "MicroroidDeviceTestHelper",
+        "truth-prebuilt",
+    ],
+    data: [":perfetto_artifacts"],
+}
