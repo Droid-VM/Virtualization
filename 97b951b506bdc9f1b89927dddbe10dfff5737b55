@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96c4775b_ea8cb220",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-08-02T00:47:30Z",
+      "side": 1,
+      "message": "I see some TODOs. Do you plan to fix them in this CL, or in follow-up CLs?",
+      "revId": "97b951b506bdc9f1b89927dddbe10dfff5737b55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a8f8416_006c7123",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-08-02T00:47:30Z",
+      "side": 1,
+      "message": "consider using unwrap_or_default() instead.",
+      "range": {
+        "startLine": 84,
+        "startChar": 58,
+        "endLine": 84,
+        "endChar": 83
+      },
+      "revId": "97b951b506bdc9f1b89927dddbe10dfff5737b55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b5c69a5_be210c72",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-08-02T00:47:30Z",
+      "side": 1,
+      "message": "I don\u0027t think this is a good separator. Can we use something else like \u0027:\u0027 or \u0027;\u0027?",
+      "range": {
+        "startLine": 99,
+        "startChar": 44,
+        "endLine": 99,
+        "endChar": 48
+      },
+      "revId": "97b951b506bdc9f1b89927dddbe10dfff5737b55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
