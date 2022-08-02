@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f66c036_f9434f19",
+        "filename": "libs/binder_common/rpc_server.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-08-02T14:51:15Z",
+      "side": 1,
+      "message": "Done. I don\u0027t think it\u0027s possible for the impl one, as that\u0027s not actually a concrete type but sugar for a type parameter.",
+      "parentUuid": "eee8f072_33e4182c",
+      "range": {
+        "startLine": 100,
+        "startChar": 18,
+        "endLine": 100,
+        "endChar": 67
+      },
+      "revId": "f3351e100a30385a84d356a3d16a768bc50b0d73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "808d0940_07a6a0a7",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02c37b77_8b2ad467",
+        "filename": "libs/binder_common/rpc_server.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-08-02T14:51:15Z",
+      "side": 1,
+      "message": "Good point, that works. I had to add an explicit lifetime annotation to make the compiler happy. Taking this approach also means that the inner `Box` (now the only `Box`) is owned by this function, and so will be freed when it returns, which avoids the memory leak.",
+      "parentUuid": "808d0940_07a6a0a7",
+      "range": {
+        "startLine": 101,
+        "startChar": 17,
+        "endLine": 101,
+        "endChar": 46
+      },
+      "revId": "f3351e100a30385a84d356a3d16a768bc50b0d73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe153d2d_f1bbf66a",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-08-02T13:35:29Z",
       "side": 1,
       "message": "Can we have a comment why this is safe?\n(Possibly also below?)",
+      "range": {
+        "startLine": 102,
+        "startChar": 4,
+        "endLine": 102,
+        "endChar": 10
+      },
+      "revId": "f3351e100a30385a84d356a3d16a768bc50b0d73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea0a0ee2_b95cc53e",
+        "filename": "libs/binder_common/rpc_server.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-08-02T14:51:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe153d2d_f1bbf66a",
       "range": {
         "startLine": 102,
         "startChar": 4,
