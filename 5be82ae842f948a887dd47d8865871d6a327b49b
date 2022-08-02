@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b23b15de_98217528",
+        "filename": "tests/benchmark/hostside/java/com/android/microdroid/test/MicrodroidHostBenchmarks.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-08-02T00:47:25Z",
+      "side": 1,
+      "message": "IIUC a test app can\u0027t read logs of other processes, right? To read all logs, the test should be host-driven so we can run logcat?",
+      "parentUuid": "cfb7ef69_67eabbe7",
+      "range": {
+        "startLine": 68,
+        "startChar": 56,
+        "endLine": 68,
+        "endChar": 60
+      },
+      "revId": "5be82ae842f948a887dd47d8865871d6a327b49b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da7391aa_8732c651",
         "filename": "tests/benchmark/hostside/java/com/android/microdroid/test/MicrodroidHostBenchmarks.java",
         "patchSetId": 3
