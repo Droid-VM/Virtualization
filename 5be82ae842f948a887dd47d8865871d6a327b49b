@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfb7ef69_67eabbe7",
+        "filename": "tests/benchmark/hostside/java/com/android/microdroid/test/MicrodroidHostBenchmarks.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-08-02T00:33:29Z",
+      "side": 1,
+      "message": "I don\u0027t understand why this test has to be a host-driven test. Could you elaborate?",
+      "range": {
+        "startLine": 68,
+        "startChar": 56,
+        "endLine": 68,
+        "endChar": 60
+      },
+      "revId": "5be82ae842f948a887dd47d8865871d6a327b49b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da7391aa_8732c651",
+        "filename": "tests/benchmark/hostside/java/com/android/microdroid/test/MicrodroidHostBenchmarks.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-08-02T00:33:29Z",
+      "side": 1,
+      "message": "I think you can use larger memory for this test.",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 50
+      },
+      "revId": "5be82ae842f948a887dd47d8865871d6a327b49b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16e5992e_9f80b82e",
+        "filename": "tests/benchmark/hostside/java/com/android/microdroid/test/MicrodroidHostBenchmarks.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-08-02T00:33:29Z",
+      "side": 1,
+      "message": "Why 3, not 1?\n\nShouldn\u0027t this be parameterized so that we can see the boottime for different number of vCPUs?",
+      "range": {
+        "startLine": 77,
+        "startChar": 41,
+        "endLine": 77,
+        "endChar": 42
+      },
+      "revId": "5be82ae842f948a887dd47d8865871d6a327b49b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
