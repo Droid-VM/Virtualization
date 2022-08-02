@@ -16,12 +16,11 @@
 
 mod death_reason;
 mod errors;
-mod rpc_binder;
 mod sync;
 
 pub use crate::death_reason::DeathReason;
 pub use crate::errors::{ConnectServiceError, VmWaitError};
-use crate::{rpc_binder::VsockFactory, sync::Monitor};
+use crate::sync::Monitor;
 use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::{
         DeathReason::DeathReason as AidlDeathReason,
@@ -36,10 +35,12 @@ use android_system_virtualizationservice::{
         ParcelFileDescriptor, Result as BinderResult, StatusCode, Strong,
     },
 };
+use binder_common::rpc_client::connect_preconnected_rpc_binder;
 use log::warn;
 use std::{
     fmt::{self, Debug, Formatter},
     fs::File,
+    os::unix::io::IntoRawFd,
     sync::Arc,
     time::Duration,
 };
@@ -146,9 +147,19 @@ impl VmInstance {
         &self,
         port: u32,
     ) -> Result<Strong<T>, ConnectServiceError> {
-        let mut vsock_factory = VsockFactory::new(&*self.vm, port);
-
-        let ibinder = vsock_factory.connect_rpc_client()?;
+        let ibinder = connect_preconnected_rpc_binder(|| {
+            match self.vm.connectVsock(port as i32) {
+                Ok(vsock) => {
+                    // Ownership of the fd is transferred to binder
+                    Some(vsock.into_raw_fd())
+                }
+                Err(e) => {
+                    warn!("Vsock connection failed: {}", e);
+                    None
+                }
+            }
+        })
+        .ok_or(ConnectServiceError::ConnectionFailed)?;
 
         FromIBinder::try_from(ibinder).map_err(ConnectServiceError::WrongServiceType)
     }
