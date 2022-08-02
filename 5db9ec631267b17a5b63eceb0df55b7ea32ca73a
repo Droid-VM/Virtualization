@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef875389_c66e70c7",
+        "filename": "tests/ubootless/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-08-02T10:36:19Z",
+      "side": 1,
+      "message": "Yeah, I don\u0027t think the duplication is a deal breaker. Just wanted to mention that the duplication exists.",
+      "parentUuid": "08406dba_793b83a8",
+      "range": {
+        "startLine": 14,
+        "startChar": 9,
+        "endLine": 14,
+        "endChar": 53
+      },
+      "revId": "5db9ec631267b17a5b63eceb0df55b7ea32ca73a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d62b91f_39baf5c6",
@@ -251,6 +275,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "45e4ecd4_5dcd7626",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 22
+      },
+      "revId": "5db9ec631267b17a5b63eceb0df55b7ea32ca73a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "398e2b10_c8c56c1a",
+        "filename": "tests/ubootless/test.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-08-02T10:36:19Z",
+      "side": 1,
+      "message": "Then who will verify the kernel and the ramdisk at runtime?",
+      "parentUuid": "56032640_f358ec05",
       "range": {
         "startLine": 68,
         "startChar": 0,
