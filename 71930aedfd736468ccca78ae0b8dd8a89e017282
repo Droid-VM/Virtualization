@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b82a9a5_f1bd2c83",
+        "filename": "libs/binder_common/rpc_server.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2022-08-02T15:08:50Z",
+      "side": 1,
+      "message": "I am told in chat that this raw pointer is not accessed after `RunRpcServerWithFactory` returns. In that case, you don\u0027t need to use `Box` here. You can just use mutable references on the stack.",
+      "revId": "71930aedfd736468ccca78ae0b8dd8a89e017282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
