@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "159b653a_8e3d7d7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-02T13:35:29Z",
+      "side": 1,
+      "message": "p",
+      "revId": "f3351e100a30385a84d356a3d16a768bc50b0d73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eee8f072_33e4182c",
+        "filename": "libs/binder_common/rpc_server.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-02T13:35:29Z",
+      "side": 1,
+      "message": "Define a type alias for this? It appears 3 times and is quite long.\n(And perhaps also define an alias for the impl one, for symmetry.)",
+      "range": {
+        "startLine": 100,
+        "startChar": 18,
+        "endLine": 100,
+        "endChar": 67
+      },
+      "revId": "f3351e100a30385a84d356a3d16a768bc50b0d73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "808d0940_07a6a0a7",
+        "filename": "libs/binder_common/rpc_server.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-02T13:35:29Z",
+      "side": 1,
+      "message": "This is confusing me. \n1. Why do we create the outer Box only to immediately destroy it? Can we just take a reference to the inner box \u0026 convert that to a pointer?\n2. The documentation for Box::into_raw says the caller is responsible for freeing the memory and dropping the contained value; I don\u0027t see either happening.",
+      "range": {
+        "startLine": 101,
+        "startChar": 17,
+        "endLine": 101,
+        "endChar": 46
+      },
+      "revId": "f3351e100a30385a84d356a3d16a768bc50b0d73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe153d2d_f1bbf66a",
+        "filename": "libs/binder_common/rpc_server.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-02T13:35:29Z",
+      "side": 1,
+      "message": "Can we have a comment why this is safe?\n(Possibly also below?)",
+      "range": {
+        "startLine": 102,
+        "startChar": 4,
+        "endLine": 102,
+        "endChar": 10
+      },
+      "revId": "f3351e100a30385a84d356a3d16a768bc50b0d73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
