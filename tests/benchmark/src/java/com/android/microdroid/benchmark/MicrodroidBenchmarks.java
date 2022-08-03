@@ -123,12 +123,17 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         final int trialCount = 10;
 
         List<Double> bootTimeMetrics = new ArrayList<>();
+        List<Double> bootloaderTimeMetrics = new ArrayList<>();
+        List<Double> kernelBootTimeMetrics = new ArrayList<>();
+        List<Double> userspaceBootTimeMetrics = new ArrayList<>();
 
         for (int i = 0; i < trialCount; i++) {
             VirtualMachineConfig.Builder builder =
                     mInner.newVmConfigBuilder("assets/vm_config.json");
+
+            // To grab boot events from log, set debug mode to FULL
             VirtualMachineConfig normalConfig =
-                    builder.debugLevel(DebugLevel.NONE).memoryMib(256).build();
+                    builder.debugLevel(DebugLevel.FULL).memoryMib(256).build();
             mInner.forceCreateNewVirtualMachine("test_vm_boot_time", normalConfig);
 
             BootResult result = tryBootVm(TAG, "test_vm_boot_time");
@@ -136,9 +141,15 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
 
             final Double nanoToMilli = 1000000.0;
             bootTimeMetrics.add(result.endToEndNanoTime / nanoToMilli);
+            bootloaderTimeMetrics.add(result.getBootloaderElapsedNanoTime() / nanoToMilli);
+            kernelBootTimeMetrics.add(result.getKernelElapsedNanoTime() / nanoToMilli);
+            userspaceBootTimeMetrics.add(result.getUserspaceElapsedNanoTime() / nanoToMilli);
         }
 
-        reportMetrics(bootTimeMetrics, "avf_perf/microdroid/boot_time_", "_ms");
+        reportMetrics(bootTimeMetrics,          "avf_perf/microdroid/boot_time_",           "_ms");
+        reportMetrics(bootloaderTimeMetrics,    "avf_perf/microdroid/bootloader_time_",     "_ms");
+        reportMetrics(kernelBootTimeMetrics,    "avf_perf/microdroid/kernel_boot_time_",    "_ms");
+        reportMetrics(userspaceBootTimeMetrics, "avf_perf/microdroid/userspace_boot_time_", "_ms");
     }
 
     @Test
