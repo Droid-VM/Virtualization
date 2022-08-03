@@ -72,8 +72,7 @@ pub fn write_vm_creation_stats(
         VirtualMachineConfig::AppConfig(config) => {
             let vm_payload_config = get_vm_payload_config(config);
             VmCreationRequested {
-                // TODO(seungjaeyoo) Implement sending proper data about vm_name
-                vm_name: &empty_string,
+                vm_name: &config.name,
                 hypervisor: Hypervisor::Pkvm,
                 is_protected,
                 creation_succeeded,
@@ -113,8 +112,7 @@ pub fn write_vm_creation_stats(
             }
         }
         VirtualMachineConfig::RawConfig(config) => VmCreationRequested {
-            // TODO(seungjaeyoo) Implement sending proper data about vm_name
-            vm_name: &empty_string,
+            vm_name: &config.name,
             hypervisor: Hypervisor::Pkvm,
             is_protected,
             creation_succeeded,
