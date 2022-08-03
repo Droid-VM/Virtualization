@@ -61,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f810d6ac_4a85d6b5",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-03T07:30:32Z",
+      "side": 1,
+      "message": "I tried unwrap_or_default() at first, but I saw the error message below.\n\n```\nthe trait `std::default::Default` is not implemented for `\u0026std::string::String\n```\n\nThere\u0027s another way to using convert method from Option\u003c\u0026String\u003e to Option\u003cString\u003e and convert again from String to \u0026String after unwrapping it, but I don\u0027t think it would be good as well.",
+      "parentUuid": "0a8f8416_006c7123",
+      "range": {
+        "startLine": 84,
+        "startChar": 58,
+        "endLine": 84,
+        "endChar": 83
+      },
+      "revId": "97b951b506bdc9f1b89927dddbe10dfff5737b55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b5c69a5_be210c72",
         "filename": "virtualizationservice/src/atom.rs",
         "patchSetId": 5
@@ -72,6 +96,30 @@
       "writtenOn": "2022-08-02T00:47:30Z",
       "side": 1,
       "message": "I don\u0027t think this is a good separator. Can we use something else like \u0027:\u0027 or \u0027;\u0027?",
+      "range": {
+        "startLine": 99,
+        "startChar": 44,
+        "endLine": 99,
+        "endChar": 48
+      },
+      "revId": "97b951b506bdc9f1b89927dddbe10dfff5737b55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7716e062_a5b33da2",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-03T07:30:32Z",
+      "side": 1,
+      "message": "Thanks for the comment. I changed to \u0027:\u0027.",
+      "parentUuid": "3b5c69a5_be210c72",
       "range": {
         "startLine": 99,
         "startChar": 44,
