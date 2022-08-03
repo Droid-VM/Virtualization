@@ -91,7 +91,10 @@ impl VmConfig {
         } else {
             0
         };
+
+        let vm_name = "VirtualMachineRawConfig";
         Ok(VirtualMachineRawConfig {
+            name: vm_name.to_string(),
             kernel: maybe_open_parcel_file(&self.kernel, false)?,
             initrd: maybe_open_parcel_file(&self.initrd, false)?,
             params: self.params.clone(),
