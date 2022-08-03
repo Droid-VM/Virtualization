@@ -378,7 +378,7 @@ public class VirtualMachine {
                 mLogWriter = pipe[1];
             }
 
-            VirtualMachineAppConfig appConfig = getConfig().toParcel();
+            VirtualMachineAppConfig appConfig = getConfig().toParcel(mPackageName, mName);
 
             // Fill the idsig file by hashing the apk
             service.createOrUpdateIdsigFile(
