@@ -635,6 +635,7 @@ fn load_app_config(
         vm_config.memoryMib = config.memoryMib;
     }
 
+    vm_config.name = config.name.clone();
     vm_config.protectedVm = config.protectedVm;
     vm_config.numCpus = config.numCpus;
     vm_config.cpuAffinity = config.cpuAffinity.clone();

@@ -64,6 +64,7 @@ pub fn write_vm_creation_stats(
         }
     }
 
+    let vm_name;
     let config_type;
     let num_cpus;
     let cpu_affinity;
@@ -74,6 +75,7 @@ pub fn write_vm_creation_stats(
     let empty_string = String::new();
     match config {
         VirtualMachineConfig::AppConfig(config) => {
+            vm_name = &config.name;
             config_type = ConfigType::VirtualMachineAppConfig;
             num_cpus = config.numCpus;
             cpu_affinity = config.cpuAffinity.as_ref().unwrap_or(&empty_string);
@@ -100,6 +102,7 @@ pub fn write_vm_creation_stats(
             }
         }
         VirtualMachineConfig::RawConfig(config) => {
+            vm_name = &config.name;
             config_type = ConfigType::VirtualMachineRawConfig;
             num_cpus = config.numCpus;
             cpu_affinity = config.cpuAffinity.as_ref().unwrap_or(&empty_string);
@@ -108,8 +111,7 @@ pub fn write_vm_creation_stats(
     }
 
     let vm_creation_requested = VmCreationRequested {
-        // TODO(seungjaeyoo) Implement sending proper data about vm_name
-        vm_name: &empty_string,
+        vm_name,
         hypervisor: Hypervisor::Pkvm,
         is_protected,
         creation_succeeded,
