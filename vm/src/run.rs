@@ -96,7 +96,9 @@ pub fn command_run_app(
     let extra_idsig_files: Result<Vec<File>, _> = extra_idsigs.iter().map(File::open).collect();
     let extra_idsig_fds = extra_idsig_files?.into_iter().map(ParcelFileDescriptor::new).collect();
 
+    let vm_name = "VirtualMachineAppConfig";
     let config = VirtualMachineConfig::AppConfig(VirtualMachineAppConfig {
+        name: vm_name.to_string(),
         apk: apk_fd.into(),
         idsig: idsig_fd.into(),
         extraIdsigs: extra_idsig_fds,

@@ -219,7 +219,8 @@ public final class VirtualMachineConfig {
      * service doesn't accept paths as it might not have permission to open app-owned files and that
      * could be abused to run a VM with software that the calling application doesn't own.
      */
-    /* package */ VirtualMachineAppConfig toParcel() throws FileNotFoundException {
+    /* package */ VirtualMachineAppConfig toParcel(String packageName, String name)
+            throws FileNotFoundException {
         VirtualMachineAppConfig parcel = new VirtualMachineAppConfig();
         parcel.apk = ParcelFileDescriptor.open(new File(mApkPath), MODE_READ_ONLY);
         parcel.configPath = mPayloadConfigPath;
@@ -241,6 +242,7 @@ public final class VirtualMachineConfig {
         // Don't allow apps to set task profiles ... at last for now. Also, don't forget to
         // validate the string because these are appended to the cmdline argument.
         parcel.taskProfiles = new String[0];
+        parcel.name = packageName + ":" + name;
         return parcel;
     }
 
