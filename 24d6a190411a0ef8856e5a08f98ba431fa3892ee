@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a2fbdec_2b69d80d",
+        "filename": "libs/binder_common/rpc_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-03T10:17:21Z",
+      "side": 1,
+      "message": "s/get/take ownership of/ ?\nWe should mention the ownership transfer somewhere, since it\u0027s part of the contract of RequestFd. (And then perhaps we don\u0027t need to mention it in the implementing closure, although it certainly does no harm.)",
+      "range": {
+        "startLine": 42,
+        "startChar": 65,
+        "endLine": 42,
+        "endChar": 68
+      },
+      "revId": "24d6a190411a0ef8856e5a08f98ba431fa3892ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87e54d80_4fd52b16",
+        "filename": "libs/binder_common/rpc_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-03T10:17:21Z",
+      "side": 1,
+      "message": "Naming quibbles (and this is all in nit territory):\n\"connect preconnected\" just sounds weird. We don\u0027t really pre-connect; we generate the socket connections on demand. It\u0027s only from the point of view of the code inside binder that the sockets are connected by us not it.\nrequest_fd should probably be called fd_factory, socket_factory, connection_factory?\nAnd maybe the function should be connect_rpc_binder_with_factory, or something?\n\n(Obviously that implies RpcPreconnectedClient is also a bad name, but meh.)",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 39
+      },
+      "revId": "24d6a190411a0ef8856e5a08f98ba431fa3892ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f76b56b_af9dd955",
+        "filename": "libs/binder_common/rpc_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-03T10:17:21Z",
+      "side": 1,
+      "message": "Why return the raw SpIBinder, rather than converting to `T: binder::FromIBinder + ?Sized` as above?\nThe only current caller uses that.",
+      "range": {
+        "startLine": 46,
+        "startChar": 5,
+        "endLine": 46,
+        "endChar": 22
+      },
+      "revId": "24d6a190411a0ef8856e5a08f98ba431fa3892ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7da95ff_54438881",
+        "filename": "libs/binder_common/rpc_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-03T10:17:21Z",
+      "side": 1,
+      "message": "request_fd().unwrap_or(-1)",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 5
+      },
+      "revId": "24d6a190411a0ef8856e5a08f98ba431fa3892ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
