@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "20233a8a_4368d55a",
+        "filename": "libs/binder_common/rpc_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-03T12:54:24Z",
+      "side": 1,
+      "message": "Yeah, fair enough.\nMaybe we can consider renaming across both C \u0026 Rust at some point in the future.",
+      "parentUuid": "dd4c8fa6_e61949b5",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 39
+      },
+      "revId": "24d6a190411a0ef8856e5a08f98ba431fa3892ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f76b56b_af9dd955",
         "filename": "libs/binder_common/rpc_client.rs",
         "patchSetId": 2
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "Whoops, done. This used to have more code but got refactored.",
       "parentUuid": "f7da95ff_54438881",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 5
+      },
+      "revId": "24d6a190411a0ef8856e5a08f98ba431fa3892ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d7761c2_4ef9f8bd",
+        "filename": "libs/binder_common/rpc_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-03T12:54:24Z",
+      "side": 1,
+      "message": "I\u0027m trying to train myself to think of these. I still mostly need to look them up though - I have the Option \u0026 Result documentation on speed dial.",
+      "parentUuid": "cbbb5eb0_d3075d4b",
       "range": {
         "startLine": 68,
         "startChar": 0,
