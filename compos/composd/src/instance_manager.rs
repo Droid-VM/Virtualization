@@ -45,13 +45,13 @@ impl InstanceManager {
         Self { service, state: Default::default() }
     }
 
-    pub fn start_current_instance(&self) -> Result<Arc<CompOsInstance>> {
+    pub fn start_current_instance(&self) -> Result<CompOsInstance> {
         let mut vm_parameters = new_vm_parameters()?;
         vm_parameters.config_path = Some(PREFER_STAGED_VM_CONFIG_PATH.to_owned());
         self.start_instance(CURRENT_INSTANCE_DIR, vm_parameters)
     }
 
-    pub fn start_test_instance(&self, prefer_staged: bool) -> Result<Arc<CompOsInstance>> {
+    pub fn start_test_instance(&self, prefer_staged: bool) -> Result<CompOsInstance> {
         let mut vm_parameters = new_vm_parameters()?;
         vm_parameters.debug_mode = true;
         if prefer_staged {
@@ -64,7 +64,7 @@ impl InstanceManager {
         &self,
         instance_name: &str,
         vm_parameters: VmParameters,
-    ) -> Result<Arc<CompOsInstance>> {
+    ) -> Result<CompOsInstance> {
         let mut state = self.state.lock().unwrap();
         state.mark_starting()?;
         // Don't hold the lock while we start the instance to avoid blocking other callers.
@@ -75,16 +75,15 @@ impl InstanceManager {
 
         let mut state = self.state.lock().unwrap();
         if let Ok(ref instance) = instance {
-            state.mark_started(instance)?;
+            state.mark_started(instance.get_instance_tracker())?;
         } else {
             state.mark_stopped();
         }
         instance
     }
 
-    fn try_start_instance(&self, instance_starter: InstanceStarter) -> Result<Arc<CompOsInstance>> {
-        let compos_instance = instance_starter.start_new_instance(&*self.service)?;
-        Ok(Arc::new(compos_instance))
+    fn try_start_instance(&self, instance_starter: InstanceStarter) -> Result<CompOsInstance> {
+        instance_starter.start_new_instance(&*self.service)
     }
 }
 
@@ -117,7 +116,7 @@ fn new_vm_parameters() -> Result<VmParameters> {
 // In particular nothing the client does should be able to trigger them.
 #[derive(Default)]
 struct State {
-    running_instance: Option<Weak<CompOsInstance>>,
+    running_instance: Option<Weak<()>>,
     is_starting: bool,
 }
 
@@ -146,7 +145,7 @@ impl State {
     }
 
     // Move from Starting to Started.
-    fn mark_started(&mut self, instance: &Arc<CompOsInstance>) -> Result<()> {
+    fn mark_started(&mut self, instance: &Arc<()>) -> Result<()> {
         if !self.is_starting {
             panic!("Tried to mark started when not starting")
         }
