@@ -62,6 +62,7 @@ pub fn write_vm_creation_stats(
         }
     }
 
+    let vm_name;
     let config_type;
     let num_cpus;
     let cpu_affinity;
@@ -73,6 +74,7 @@ pub fn write_vm_creation_stats(
         VirtualMachineConfig::AppConfig(config) => {
             let vm_payload_config = get_vm_payload_config(config);
 
+            vm_name = &config.name;
             config_type = vm_creation_requested::ConfigType::VirtualMachineAppConfig;
             num_cpus = config.numCpus;
             cpu_affinity = config.cpuAffinity.clone().unwrap_or_default();
@@ -97,6 +99,7 @@ pub fn write_vm_creation_stats(
                 .join(":");
         }
         VirtualMachineConfig::RawConfig(config) => {
+            vm_name = &config.name;
             config_type = vm_creation_requested::ConfigType::VirtualMachineRawConfig;
             num_cpus = config.numCpus;
             cpu_affinity = config.cpuAffinity.clone().unwrap_or_default();
@@ -108,10 +111,8 @@ pub fn write_vm_creation_stats(
         }
     }
 
-    let empty_string = String::new();
     let vm_creation_requested = vm_creation_requested::VmCreationRequested {
-        // TODO(seungjaeyoo) Implement sending proper data about vm_name
-        vm_name: &empty_string,
+        vm_name,
         hypervisor: vm_creation_requested::Hypervisor::Pkvm,
         is_protected,
         creation_succeeded,
@@ -136,12 +137,8 @@ pub fn write_vm_creation_stats(
 }
 
 /// Write the stats of VM boot to statsd
-pub fn write_vm_booted_stats() {
-    let empty_string = String::new();
-    let vm_booted = vm_booted::VmBooted {
-        // TODO(seungjaeyoo) Implement sending proper data about vm_name
-        vm_name: &empty_string,
-    };
+pub fn write_vm_booted_stats(name: &String) {
+    let vm_booted = vm_booted::VmBooted { vm_name: name };
     match vm_booted.stats_write() {
         Err(e) => {
             warn!("statslog_rust failed with error: {}", e);
@@ -151,11 +148,9 @@ pub fn write_vm_booted_stats() {
 }
 
 /// Write the stats of VM exit to statsd
-pub fn write_vm_exited_stats(reason: DeathReason) {
-    let empty_string = String::new();
+pub fn write_vm_exited_stats(name: &String, reason: DeathReason) {
     let vm_exited = vm_exited::VmExited {
-        // TODO(seungjaeyoo) Implement sending proper data about vm_name
-        vm_name: &empty_string,
+        vm_name: name,
         death_reason: match reason {
             DeathReason::INFRASTRUCTURE_ERROR => vm_exited::DeathReason::InfrastructureError,
             DeathReason::KILLED => vm_exited::DeathReason::Killed,

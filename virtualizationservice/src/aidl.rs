@@ -449,6 +449,7 @@ impl VirtualizationService {
         // Actually start the VM.
         let crosvm_config = CrosvmConfig {
             cid,
+            name: config.name.clone(),
             bootloader: maybe_clone_file(&config.bootloader)?,
             kernel: maybe_clone_file(&config.kernel)?,
             initrd: maybe_clone_file(&config.initrd)?,
@@ -620,6 +621,7 @@ fn load_app_config(
         vm_config.memoryMib = config.memoryMib;
     }
 
+    vm_config.name = config.name.clone();
     vm_config.protectedVm = config.protectedVm;
     vm_config.numCpus = config.numCpus;
     vm_config.cpuAffinity = config.cpuAffinity.clone();
@@ -1039,7 +1041,8 @@ impl IVirtualMachineService for VirtualMachineService {
                 .map_err(|e| new_binder_exception(ExceptionCode::ILLEGAL_STATE, e.to_string()))?;
             let stream = vm.stream.lock().unwrap().take();
             vm.callbacks.notify_payload_started(cid, stream);
-            write_vm_booted_stats();
+
+            write_vm_booted_stats(&vm.name);
             Ok(())
         } else {
             error!("notifyPayloadStarted is called from an unknown CID {}", cid);

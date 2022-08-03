@@ -53,7 +53,9 @@ fn test_boots() -> Result<(), Error> {
     let console = android_log_fd()?;
     let log = android_log_fd()?;
 
+    let vm_name = "rialtotest";
     let config = VirtualMachineConfig::RawConfig(VirtualMachineRawConfig {
+        name: vm_name.to_string(),
         kernel: None,
         initrd: None,
         params: None,
