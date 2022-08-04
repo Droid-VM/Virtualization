@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60be10c2_c46422ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-08-04T04:08:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ffe06354_17686dc8",
+      "revId": "97b951b506bdc9f1b89927dddbe10dfff5737b55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a8f8416_006c7123",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "I tried unwrap_or_default() at first, but I saw the error message below.\n\n```\nthe trait `std::default::Default` is not implemented for `\u0026std::string::String\n```\n\nThere\u0027s another way to using convert method from Option\u003c\u0026String\u003e to Option\u003cString\u003e and convert again from String to \u0026String after unwrapping it, but I don\u0027t think it would be good as well.",
       "parentUuid": "0a8f8416_006c7123",
+      "range": {
+        "startLine": 84,
+        "startChar": 58,
+        "endLine": 84,
+        "endChar": 83
+      },
+      "revId": "97b951b506bdc9f1b89927dddbe10dfff5737b55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc72763f_5aa4f222",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-08-04T04:08:35Z",
+      "side": 1,
+      "message": "Then why don\u0027t you drop \u0027optional\u0027 from the proto?",
+      "parentUuid": "f810d6ac_4a85d6b5",
       "range": {
         "startLine": 84,
         "startChar": 58,
