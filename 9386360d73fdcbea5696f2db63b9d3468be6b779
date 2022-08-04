@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "170131e7_f914a5b5",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-08-04T10:22:07Z",
+      "side": 1,
+      "message": "Uh. This is certainly a weird way of using a reference counter!\n\nDiscussed offline; keeping an `Arc\u003cJoinHandle\u003e` on the thread that spawns the VM seems a bit nicer to me (as then you can just call `is_finished()` on it), but apparently that is difficult.",
+      "revId": "9386360d73fdcbea5696f2db63b9d3468be6b779",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
