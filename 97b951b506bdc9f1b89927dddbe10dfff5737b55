@@ -127,6 +127,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78f202ab_53a1d0af",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-04T05:56:08Z",
+      "side": 1,
+      "message": "I don\u0027t know why either.. Every field in westworld is required field because of methods like stats_write, but no atom uses \u0027required\u0027 in the proto. Already hundreds of atoms used \u0027optional\u0027 for non-repeated fields, so I just followed it.\n\nhttps://g3doc.corp.google.com/company/teams/androidmetrics/westworld/use-westworld/create-atom.md?cl\u003dhead#step-2-add-your-atom-logging-code",
+      "parentUuid": "bc72763f_5aa4f222",
+      "range": {
+        "startLine": 84,
+        "startChar": 58,
+        "endLine": 84,
+        "endChar": 83
+      },
+      "revId": "97b951b506bdc9f1b89927dddbe10dfff5737b55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b5c69a5_be210c72",
         "filename": "virtualizationservice/src/atom.rs",
         "patchSetId": 5
