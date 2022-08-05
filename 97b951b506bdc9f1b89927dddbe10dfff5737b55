@@ -173,6 +173,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b150ed9_2e5fe337",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-05T03:09:28Z",
+      "side": 1,
+      "message": "Done. But I need to refactor code a lot since I cannot write line below out of the pattern matching block.\n\n```\nlet cpu_affinity \u003d config.cpuAffinity.unwrap_or_default();\n```",
+      "parentUuid": "eca1b3f7_dd08d1a2",
+      "range": {
+        "startLine": 84,
+        "startChar": 58,
+        "endLine": 84,
+        "endChar": 83
+      },
+      "revId": "97b951b506bdc9f1b89927dddbe10dfff5737b55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b5c69a5_be210c72",
