@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8c7f5aa0_88ef56df",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-08-05T08:06:20Z",
+      "side": 1,
+      "message": "get_main_apk_path(config.apk.as_ref().unwrap())\n\nunwrap() here will panic the process. Instead, you are encouraged to use unwrap_or_else to early return the binder exception on error.",
+      "parentUuid": "1675ed59_d6d6b73a",
+      "range": {
+        "startLine": 81,
+        "startChar": 25,
+        "endLine": 81,
+        "endChar": 35
+      },
+      "revId": "1b7b52d150182b9bb523299d41bab0a4e2e25a92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a796479_af8f1426",
         "filename": "virtualizationservice/src/atom.rs",
         "patchSetId": 8
