@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "339adc9b_1ede9512",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-05T07:35:59Z",
+      "side": 1,
+      "message": "When I tried adding \u0027?\u0027, I got following error.\n\n```\nthe `?` operator cannot be applied to type `std::path::PathBuf`\n```",
+      "parentUuid": "e29afdda_ccbef524",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 71
+      },
+      "revId": "1b7b52d150182b9bb523299d41bab0a4e2e25a92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "17ff8d2d_9768fa4d",
         "filename": "virtualizationservice/src/atom.rs",
         "patchSetId": 8
@@ -65,6 +89,54 @@
         "startChar": 0,
         "endLine": 81,
         "endChar": 37
+      },
+      "revId": "1b7b52d150182b9bb523299d41bab0a4e2e25a92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb428552_a3596b27",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-05T07:35:59Z",
+      "side": 1,
+      "message": "Thanks :) I removed the conditional statement regarding another comment. If I need to add conditional statements, and I\u0027ll follow your suggestion.",
+      "parentUuid": "5f3dee0d_b16412d2",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 37
+      },
+      "revId": "1b7b52d150182b9bb523299d41bab0a4e2e25a92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1675ed59_d6d6b73a",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-05T07:35:59Z",
+      "side": 1,
+      "message": "I removed the conditional statement. Or, do I need to handle error when config.apk or vm_payload_config is unexpected value?",
+      "parentUuid": "17ff8d2d_9768fa4d",
+      "range": {
+        "startLine": 81,
+        "startChar": 25,
+        "endLine": 81,
+        "endChar": 35
       },
       "revId": "1b7b52d150182b9bb523299d41bab0a4e2e25a92",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -116,6 +188,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b45bea9e_9510cac7",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-05T07:35:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a796479_af8f1426",
+      "range": {
+        "startLine": 86,
+        "startChar": 32,
+        "endLine": 86,
+        "endChar": 40
+      },
+      "revId": "1b7b52d150182b9bb523299d41bab0a4e2e25a92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44eec239_7c52dcf8",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-05T07:35:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b603bbb2_c542806d",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 42
+      },
+      "revId": "1b7b52d150182b9bb523299d41bab0a4e2e25a92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11ce4f89_8eb6ef28",
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89d15347_3a3d670c",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-05T07:35:59Z",
+      "side": 1,
+      "message": "Thanks :) I missed to change it. I changed it with using map and join.",
+      "parentUuid": "11ce4f89_8eb6ef28",
+      "range": {
+        "startLine": 89,
+        "startChar": 20,
+        "endLine": 89,
+        "endChar": 41
+      },
+      "revId": "1b7b52d150182b9bb523299d41bab0a4e2e25a92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "348fe9d9_45b17bb6",
@@ -152,6 +296,30 @@
       "writtenOn": "2022-08-05T03:36:24Z",
       "side": 1,
       "message": "same here",
+      "range": {
+        "startLine": 94,
+        "startChar": 20,
+        "endLine": 94,
+        "endChar": 37
+      },
+      "revId": "1b7b52d150182b9bb523299d41bab0a4e2e25a92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40e9375c_ac35f02b",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-05T07:35:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "348fe9d9_45b17bb6",
       "range": {
         "startLine": 94,
         "startChar": 20,
