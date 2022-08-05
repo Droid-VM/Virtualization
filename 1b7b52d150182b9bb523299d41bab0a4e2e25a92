@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e29afdda_ccbef524",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-08-05T03:42:01Z",
+      "side": 1,
+      "message": "let link \u003d read_link(...)?;",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 71
+      },
+      "revId": "1b7b52d150182b9bb523299d41bab0a4e2e25a92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "17ff8d2d_9768fa4d",
         "filename": "virtualizationservice/src/atom.rs",
         "patchSetId": 8
@@ -26,6 +49,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f3dee0d_b16412d2",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-08-05T03:42:01Z",
+      "side": 1,
+      "message": "Consider this\n\n    if let Some(apk) \u003d config.apk.as_ref() {\n        ...\n    }",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 37
+      },
+      "revId": "1b7b52d150182b9bb523299d41bab0a4e2e25a92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a796479_af8f1426",
         "filename": "virtualizationservice/src/atom.rs",
         "patchSetId": 8
@@ -42,6 +88,29 @@
         "startChar": 32,
         "endLine": 86,
         "endChar": 40
+      },
+      "revId": "1b7b52d150182b9bb523299d41bab0a4e2e25a92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b603bbb2_c542806d",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-08-05T03:42:01Z",
+      "side": 1,
+      "message": "Consider this\n\n    if let Ok(vm_payload_config) \u003d vm_payload_config {\n        ...\n    }",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 42
       },
       "revId": "1b7b52d150182b9bb523299d41bab0a4e2e25a92",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
