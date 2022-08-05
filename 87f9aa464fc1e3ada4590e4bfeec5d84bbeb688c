@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b07c5daa_3725f7e2",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-08-05T15:47:45Z",
+      "side": 1,
+      "message": "We should skip the bulk of this section if verified boot is disabled because we just want to allow any image to be loaded into the VM, without restriction. We\u0027d use the saved data directly or generate some placeholder data for a fresh VM.",
+      "range": {
+        "startLine": 258,
+        "startChar": 1,
+        "endLine": 297,
+        "endChar": 6
+      },
+      "revId": "87f9aa464fc1e3ada4590e4bfeec5d84bbeb688c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
