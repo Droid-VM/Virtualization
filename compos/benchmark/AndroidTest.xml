@@ -35,7 +35,7 @@
     <test class="com.android.tradefed.testtype.AndroidJUnitTest" >
         <option name="package" value="com.android.compos.benchmark" />
         <option name="runner" value="androidx.test.runner.AndroidJUnitRunner" />
-        <option name="shell-timeout" value="300000" />
+        <option name="shell-timeout" value="600000" />
         <option name="test-timeout" value="1800000" />
     </test>
 </configuration>
