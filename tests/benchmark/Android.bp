@@ -25,6 +25,7 @@ android_test {
 cc_library_shared {
     name: "MicrodroidBenchmarkNativeLib",
     srcs: ["src/native/benchmarkbinary.cpp"],
+    static_libs: ["libiovsock_vm"],
     shared_libs: [
         "android.system.virtualmachineservice-ndk",
         "com.android.microdroid.testservice-ndk",
@@ -32,5 +33,14 @@ cc_library_shared {
         "libbinder_ndk",
         "libbinder_rpc_unstable",
         "liblog",
+    ],
+}
+
+cc_library {
+    name: "libiovsock_vm",
+    srcs: ["src/native/io_vsock.cpp"],
+    export_include_dirs: ["."],
+    shared_libs: [
+        "libbase",
     ],
 }
