@@ -39,6 +39,30 @@
       },
       "revId": "d8e60dae16e27c2cb08af89b12b3e306a75f75fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c0ea61e_9b631461",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-08T09:40:09Z",
+      "side": 1,
+      "message": "Of course it\u0027s possible, but I expect changes within relation chain would be merged together. I need to get AMC approval of the field `vm_name` before submitting such changes, and it would be take about 2 weeks more. So I\u0027m thinking writing and reviewing changes first, and submitting together right after getting AMC approval.\n\nBut, not a strong opinion. I totally agree with your concerns either, so I\u0027ll follow at your decision after you see it.",
+      "parentUuid": "e39b067d_24f14beb",
+      "range": {
+        "startLine": 143,
+        "startChar": 18,
+        "endLine": 143,
+        "endChar": 30
+      },
+      "revId": "d8e60dae16e27c2cb08af89b12b3e306a75f75fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
