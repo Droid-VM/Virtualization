@@ -64,6 +64,31 @@ pub struct VmInstance {
     _death_recipient: DeathRecipient,
 }
 
+/// A trait to be implemented by clients to handle notification of significant changes to the VM
+/// state. Default implementations of all functions are provided so clients only need to handle the
+/// notifications they are interested in.
+pub trait VmCallback {
+    /// Called when the payload has been started within the VM. If present, `_stream` is connected
+    /// to the stdin/stdout of the payload.
+    fn on_payload_started(&self, _cid: i32, _stream: Option<&File>) {}
+
+    /// Callend when the payload has notified Virtualization Service that it is ready to serve
+    /// clients.
+    fn on_payload_ready(&self, _cid: i32) {}
+
+    /// Called when the payload has exited in the VM. `_exit_code` is the exit code of the payload
+    /// process.
+    fn on_payload_finished(&self, _cid: i32, _exit_code: i32) {}
+
+    /// Called when an error has occurred in the VM. The `_error_code` and `_message` may give
+    /// further details.
+    fn on_error(&self, _cid: i32, _error_code: i32, _message: &str) {}
+
+    /// Called when the VM has exited, all resources have been freed, and any logs have been
+    /// written. `_death_reason` gives an indication why the VM exited.
+    fn on_died(&self, _cid: i32, _death_reason: DeathReason) {}
+}
+
 impl VmInstance {
     /// Creates (but doesn't start) a new VM with the given configuration.
     pub fn create(
@@ -71,6 +96,7 @@ impl VmInstance {
         config: &VirtualMachineConfig,
         console: Option<File>,
         log: Option<File>,
+        callback: Option<Box<dyn VmCallback + Send + Sync>>,
     ) -> BinderResult<Self> {
         let console = console.map(ParcelFileDescriptor::new);
         let log = log.map(ParcelFileDescriptor::new);
@@ -82,7 +108,7 @@ impl VmInstance {
         // Register callback before starting VM, in case it dies immediately.
         let state = Arc::new(Monitor::new(VmState::default()));
         let callback = BnVirtualMachineCallback::new_binder(
-            VirtualMachineCallback { state: state.clone() },
+            VirtualMachineCallback { state: state.clone(), client_callback: callback },
             BinderFeatures::default(),
         );
         vm.registerCallback(&callback)?;
@@ -219,9 +245,16 @@ impl Monitor<VmState> {
     }
 }
 
-#[derive(Debug)]
 struct VirtualMachineCallback {
     state: Arc<Monitor<VmState>>,
+    client_callback: Option<Box<dyn VmCallback + Send + Sync>>,
+}
+
+impl Debug for VirtualMachineCallback {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        // client_callback is intentionally omitted.
+        fmt.debug_struct("VirtualMachineCallback").field("state", &self.state).finish()
+    }
 }
 
 impl Interface for VirtualMachineCallback {}
@@ -229,25 +262,37 @@ impl Interface for VirtualMachineCallback {}
 impl IVirtualMachineCallback for VirtualMachineCallback {
     fn onPayloadStarted(
         &self,
-        _cid: i32,
-        _stream: Option<&ParcelFileDescriptor>,
+        cid: i32,
+        stream: Option<&ParcelFileDescriptor>,
     ) -> BinderResult<()> {
         self.state.notify_state(VirtualMachineState::STARTED);
+        if let Some(ref callback) = self.client_callback {
+            callback.on_payload_started(cid, stream.map(ParcelFileDescriptor::as_ref));
+        }
         Ok(())
     }
 
-    fn onPayloadReady(&self, _cid: i32) -> BinderResult<()> {
+    fn onPayloadReady(&self, cid: i32) -> BinderResult<()> {
         self.state.notify_state(VirtualMachineState::READY);
+        if let Some(ref callback) = self.client_callback {
+            callback.on_payload_ready(cid);
+        }
         Ok(())
     }
 
-    fn onPayloadFinished(&self, _cid: i32, _exit_code: i32) -> BinderResult<()> {
+    fn onPayloadFinished(&self, cid: i32, exit_code: i32) -> BinderResult<()> {
         self.state.notify_state(VirtualMachineState::FINISHED);
+        if let Some(ref callback) = self.client_callback {
+            callback.on_payload_finished(cid, exit_code);
+        }
         Ok(())
     }
 
-    fn onError(&self, _cid: i32, _error_code: i32, _message: &str) -> BinderResult<()> {
+    fn onError(&self, cid: i32, error_code: i32, message: &str) -> BinderResult<()> {
         self.state.notify_state(VirtualMachineState::FINISHED);
+        if let Some(ref callback) = self.client_callback {
+            callback.on_error(cid, error_code, message);
+        }
         Ok(())
     }
 
@@ -257,8 +302,12 @@ impl IVirtualMachineCallback for VirtualMachineCallback {
         Ok(())
     }
 
-    fn onDied(&self, _cid: i32, reason: AidlDeathReason) -> BinderResult<()> {
-        self.state.notify_death(reason.into());
+    fn onDied(&self, cid: i32, reason: AidlDeathReason) -> BinderResult<()> {
+        let reason = reason.into();
+        self.state.notify_death(reason);
+        if let Some(ref callback) = self.client_callback {
+            callback.on_died(cid, reason);
+        }
         Ok(())
     }
 }

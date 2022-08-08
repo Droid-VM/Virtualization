@@ -31,9 +31,7 @@ use authfs_aidl_interface::aidl::com::android::virt::fs::AuthFsConfig::{
     OutputDirFdAnnotation::OutputDirFdAnnotation, OutputFdAnnotation::OutputFdAnnotation,
 };
 use authfs_aidl_interface::aidl::com::android::virt::fs::IAuthFs::{BnAuthFs, IAuthFs};
-use authfs_aidl_interface::binder::{
-    self, BinderFeatures, ExceptionCode, Interface, ParcelFileDescriptor, Strong,
-};
+use binder::{self, BinderFeatures, ExceptionCode, Interface, ParcelFileDescriptor, Strong};
 use binder_common::new_binder_exception;
 
 const AUTHFS_BIN: &str = "/system/bin/authfs";
