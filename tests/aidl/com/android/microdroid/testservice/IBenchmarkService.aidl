@@ -22,4 +22,16 @@ interface IBenchmarkService {
 
     /** Reads a file and returns the elapsed seconds for the reading. */
     double readFile(String filename, long fileSizeBytes, boolean isRand);
+
+    /**
+     * Initializes the vsock server on VM.
+     * @return the server socket file descriptor.
+     */
+    int initVsockServer(int port);
+
+    /**
+     * Runs the vsock server on VM and receives data.
+     * @return the time in second when all the data is received.
+     */
+    double runVsockServerAndReceiveData(int serverFd);
 }
