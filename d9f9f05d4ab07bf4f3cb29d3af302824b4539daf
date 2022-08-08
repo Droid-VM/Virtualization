@@ -238,6 +238,30 @@
       },
       "revId": "d9f9f05d4ab07bf4f3cb29d3af302824b4539daf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af8b1699_e6b63519",
+        "filename": "avmd/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-08T15:42:38Z",
+      "side": 1,
+      "message": "Yes I tried. It works locally with this config (without `data_libs`) the following output\n```\nINFO: 1 process: 1 internal.\nINFO: Build completed successfully, 1 total action\n//packages/modules/Virtualization/avmd:avmdtool_tests_host      (cached) PASSED in 2.6s\n\nExecuted 0 out of 1 test: 1 test passes.\nThere were tests whose specified size is too big. Use the --test_verbose_timeout_warnings command line option to see whic\nINFO: Build completed successfully, 1 total action\n```\n\nIf changing the `rustlibs` to `data_libs`, there are lots of errors like\n```\nerror: packages/modules/Virtualization/avmd/Android.bp:39:1: dependency \"libserde\" of \"avmdtool_tests\" missing variant:\n  os:linux_glibc,arch:x86_64,link:shared\navailable variants:\n  os:linux_glibc,arch:x86_64,rust_libraries:rlib,rust_stdlinkage:rlib-std\n  os:linux_glibc,arch:x86_64,rust_libraries:rlib,rust_stdlinkage:dylib-std\n  os:linux_glibc,arch:x86_64,rust_libraries:dylib\n  os:linux_glibc,arch:x86,rust_libraries:rlib,rust_stdlinkage:rlib-std\n  ....\n```",
+      "parentUuid": "63b3c140_2e23e73b",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 9
+      },
+      "revId": "d9f9f05d4ab07bf4f3cb29d3af302824b4539daf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
