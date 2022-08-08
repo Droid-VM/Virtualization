@@ -22,6 +22,30 @@
       },
       "revId": "87f9aa464fc1e3ada4590e4bfeec5d84bbeb688c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20dec7f3_b389383b",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-08-08T03:03:10Z",
+      "side": 1,
+      "message": "verify_payload not only generates data, but also mounts apks with apkdmverity. As I said, I\u0027d rather leave this as-is to refrain from branching.\n\nWDYT?",
+      "parentUuid": "b07c5daa_3725f7e2",
+      "range": {
+        "startLine": 258,
+        "startChar": 1,
+        "endLine": 297,
+        "endChar": 6
+      },
+      "revId": "87f9aa464fc1e3ada4590e4bfeec5d84bbeb688c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
