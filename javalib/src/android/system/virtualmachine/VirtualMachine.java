@@ -575,6 +575,11 @@ public class VirtualMachine {
                 () -> nativeConnectToVsockServer(mVirtualMachine.asBinder(), port));
     }
 
+    /** Open a vsock connection to the CID of the VM on the given port. */
+    public ParcelFileDescriptor connectVsock(int port) throws Exception  {
+        return mVirtualMachine.connectVsock(port);
+    }
+
     @Override
     public String toString() {
         return "VirtualMachine("

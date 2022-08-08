@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-package com.android.microdroid.testservice;
+package com.android.microdroid.benchmark;
 
-/** {@hide} */
-interface IBenchmarkService {
-    const int SERVICE_PORT = 5677;
+class IoVsockHostNative {
+    static {
+        System.loadLibrary("iovsock_host_jni");
+    }
 
-    /** Reads a file and returns the elapsed seconds for the reading. */
-    double readFile(String filename, long fileSizeBytes, boolean isRand);
-
-    int initVsockServer(int port);
-
-    int recvData(int cid, int port, int fd);
+    /**
+     * @return The transfer rates when sending data fom the host to a VM.
+     */
+    static native double sendDataFromHostToVM(int fd, int port);
 }
