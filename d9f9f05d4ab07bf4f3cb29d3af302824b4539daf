@@ -214,6 +214,30 @@
       },
       "revId": "d9f9f05d4ab07bf4f3cb29d3af302824b4539daf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63b3c140_2e23e73b",
+        "filename": "avmd/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-08-08T13:19:33Z",
+      "side": 1,
+      "message": "Did you need to change the rule from the one I gave? The data_libs field is very important because to make it work, it tells the test runner which .so files to install alongside the test. I also found that my local test was being run with the bazel test runner (same as the server) which required the data_libs properties to work locally as well.",
+      "parentUuid": "c64945f9_edc56b3f",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 9
+      },
+      "revId": "d9f9f05d4ab07bf4f3cb29d3af302824b4539daf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
