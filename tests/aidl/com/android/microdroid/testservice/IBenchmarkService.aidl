@@ -25,4 +25,18 @@ interface IBenchmarkService {
 
     /** Returns an entry from /proc/meminfo. */
     long getMemInfoEntry(String name);
+
+    /**
+     * Initializes the vsock server on VM.
+     * @return the server socket file descriptor.
+     */
+    int initVsockServer(int port);
+
+    /**
+     * Runs the vsock server on VM and receives data.
+     *
+     * @param serverFd Server socket file descriptor.
+     * @param numMb Number of MBs the server should receive.
+     */
+    void runVsockServerAndReceiveData(int serverFd, int numMb);
 }
