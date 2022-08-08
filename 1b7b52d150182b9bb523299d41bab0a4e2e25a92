@@ -216,6 +216,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42a2b0a5_7d946ec2",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-08T01:49:34Z",
+      "side": 1,
+      "message": "If we change the return value as `Result\u003c()\u003e`, is it possible to collect stat of VmCreationRequested when `config.apk` is abnormal value? I think we need to collect it with `binder_exception_code` even it contains unexpected value, and I guess your suggestion will skip writing stats when `config.apk` isn\u0027t set well. (As well for VmPayloadConfig)\n\nOf course, I agree with you that current implementation will panic the process.",
+      "parentUuid": "967c45cd_77bd3a9c",
+      "range": {
+        "startLine": 81,
+        "startChar": 25,
+        "endLine": 81,
+        "endChar": 35
+      },
+      "revId": "1b7b52d150182b9bb523299d41bab0a4e2e25a92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a796479_af8f1426",
         "filename": "virtualizationservice/src/atom.rs",
         "patchSetId": 8
