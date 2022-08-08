@@ -33,9 +33,7 @@ use authfs_aidl_interface::aidl::com::android::virt::fs::IAuthFs::IAuthFs;
 use authfs_aidl_interface::aidl::com::android::virt::fs::IAuthFsService::{
     BnAuthFsService, IAuthFsService,
 };
-use authfs_aidl_interface::binder::{
-    self, add_service, BinderFeatures, ExceptionCode, Interface, ProcessState, Strong,
-};
+use binder::{self, add_service, BinderFeatures, ExceptionCode, Interface, ProcessState, Strong};
 use binder_common::new_binder_exception;
 
 const SERVICE_NAME: &str = "authfs_service";
