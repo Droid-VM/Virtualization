@@ -16,6 +16,8 @@
 
 #include <aidl/android/system/virtualmachineservice/IVirtualMachineService.h>
 #include <aidl/com/android/microdroid/testservice/BnBenchmarkService.h>
+#include <android-base/logging.h>
+#include <android-base/parseint.h>
 #include <android-base/result.h>
 #include <android-base/unique_fd.h>
 #include <fcntl.h>
@@ -28,11 +30,12 @@
 #include <random>
 #include <string>
 
-#include "android-base/logging.h"
+#include "io_vsock.h"
 
 using aidl::android::system::virtualmachineservice::IVirtualMachineService;
 using android::base::ErrnoError;
 using android::base::Error;
+using android::base::ParseUint;
 using android::base::Result;
 using android::base::unique_fd;
 
@@ -47,10 +50,23 @@ public:
             *out = res.value();
         } else {
             std::stringstream error;
-            error << "Failed reading file: " << res.error();
+            error << "Cannot read file: " << res.error();
             return ndk::ScopedAStatus::fromExceptionCodeWithMessage(EX_ILLEGAL_ARGUMENT,
                                                                     error.str().c_str());
         }
+        return ndk::ScopedAStatus::ok();
+    }
+
+    ndk::ScopedAStatus runVsockServerAndReceiveData(int32_t port, int64_t* out) override {
+        if (auto res = io_vsock::run_vsock_server_and_receive_data(port); res.ok()) {
+            *out = res.value();
+        } else {
+            std::stringstream error;
+            error << "Cannot run vsock server: " << res.error();
+            return ndk::ScopedAStatus::fromExceptionCodeWithMessage(EX_ILLEGAL_ARGUMENT,
+                                                                    error.str().c_str());
+        }
+
         return ndk::ScopedAStatus::ok();
     }
 

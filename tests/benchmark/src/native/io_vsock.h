@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.microdroid.testservice;
+#pragma once
 
-/** {@hide} */
-interface IBenchmarkService {
-    const int SERVICE_PORT = 5677;
+#include <android-base/result.h>
 
-    /** Reads a file and returns the elapsed seconds for the reading. */
-    double readFile(String filename, long fileSizeBytes, boolean isRand);
-
-    /**
-     * Runs the vsock server on VM and receives data.
-     * @return the timestamp when all the data are received.
-     */
-    long runVsockServerAndReceiveData(int port);
-}
+namespace io_vsock {
+android::base::Result<long> run_vsock_server_and_receive_data(unsigned int port);
+} // namespace io_vsock
