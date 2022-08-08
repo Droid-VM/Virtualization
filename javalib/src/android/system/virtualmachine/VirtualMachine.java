@@ -618,6 +618,15 @@ public class VirtualMachine {
                 () -> nativeConnectToVsockServer(mVirtualMachine.asBinder(), port));
     }
 
+    /**
+     * Opens a vsock connection to the VM on the given port.
+     *
+     * @hide
+     */
+    public ParcelFileDescriptor connectVsock(int port) throws RemoteException {
+        return mVirtualMachine.connectVsock(port);
+    }
+
     @Override
     public String toString() {
         return "VirtualMachine("
