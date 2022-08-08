@@ -16,6 +16,8 @@
 
 #include <aidl/android/system/virtualmachineservice/IVirtualMachineService.h>
 #include <aidl/com/android/microdroid/testservice/BnBenchmarkService.h>
+#include <android-base/logging.h>
+#include <android-base/parseint.h>
 #include <android-base/result.h>
 #include <android-base/unique_fd.h>
 #include <fcntl.h>
@@ -32,10 +34,12 @@
 #include "android-base/logging.h"
 #include "android-base/parseint.h"
 #include "android-base/strings.h"
+#include "io_vsock.h"
 
 using aidl::android::system::virtualmachineservice::IVirtualMachineService;
 using android::base::ErrnoError;
 using android::base::Error;
+using android::base::ParseUint;
 using android::base::Result;
 using android::base::unique_fd;
 
@@ -72,6 +76,19 @@ public:
 
         *out = (int64_t)value.value();
         return ndk::ScopedAStatus::ok();
+    }
+
+    ndk::ScopedAStatus initVsockServer(int32_t port, int32_t* out) override {
+        auto res = io_vsock::init_vsock_server(port);
+        if (res.ok()) {
+            *out = res.value();
+        }
+        return resultStatus(res);
+    }
+
+    ndk::ScopedAStatus runVsockServerAndReceiveData(int32_t server_fd) override {
+        auto res = io_vsock::run_vsock_server_and_receive_data(server_fd);
+        return resultStatus(res);
     }
 
 private:
@@ -170,12 +187,10 @@ extern "C" int android_native_main([[maybe_unused]] int argc, char* argv[]) {
             sleep(1000);
         }
     } else if (strcmp(argv[1], "io") == 0) {
-        if (auto res = run_io_benchmark_tests(); res.ok()) {
-            return 0;
-        } else {
+        if (auto res = run_io_benchmark_tests(); !res.ok()) {
             LOG(ERROR) << "IO benchmark test failed: " << res.error() << "\n";
-            return 1;
+            return EXIT_FAILURE;
         }
     }
-    return 0;
+    return EXIT_SUCCESS;
 }
