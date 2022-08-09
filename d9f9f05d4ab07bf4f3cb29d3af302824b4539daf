@@ -262,6 +262,30 @@
       },
       "revId": "d9f9f05d4ab07bf4f3cb29d3af302824b4539daf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6f9b64b_85dd9bc2",
+        "filename": "avmd/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-08-09T13:17:32Z",
+      "side": 1,
+      "message": "Have you tried _exactly_ (now minus libanyhow after stopping using `.context()`) the rule I gave, which I produces after checking out your CL and figuring out what was needed?\n\n1) You don\u0027t want that whole list of rustlibs as the test doesn\u0027t use any of them, the test just uses the standard library. 2) the `data_libs`, at the moment for this test, are required for avmdtool an you only need the few native libraries that are so-only, the rust libraries are linked as rlibs which is static linking.",
+      "parentUuid": "af8b1699_e6b63519",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 9
+      },
+      "revId": "d9f9f05d4ab07bf4f3cb29d3af302824b4539daf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
