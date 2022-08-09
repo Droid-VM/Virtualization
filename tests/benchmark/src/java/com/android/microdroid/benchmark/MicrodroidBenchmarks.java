@@ -118,10 +118,11 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
     @Test
     public void testMicrodroidBootTime()
             throws VirtualMachineException, InterruptedException, IOException {
-        assume().withMessage("Skip on CF; too slow").that(isCuttlefish()).isFalse();
+        //assume().withMessage("Skip on CF; too slow").that(isCuttlefish()).isFalse();
 
         final int trialCount = 10;
 
+        List<Double> vmStartingTimeMetrics = new ArrayList<>();
         List<Double> bootTimeMetrics = new ArrayList<>();
         List<Double> bootloaderTimeMetrics = new ArrayList<>();
         List<Double> kernelBootTimeMetrics = new ArrayList<>();
@@ -139,13 +140,15 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
             BootResult result = tryBootVm(TAG, "test_vm_boot_time");
             assertThat(result.payloadStarted).isTrue();
 
-            final Double nanoToMilli = 1000000.0;
+            final double nanoToMilli = 1000000.0;
+            vmStartingTimeMetrics.add(result.getVMStartingElapsedNanoTime() / nanoToMilli);
             bootTimeMetrics.add(result.endToEndNanoTime / nanoToMilli);
             bootloaderTimeMetrics.add(result.getBootloaderElapsedNanoTime() / nanoToMilli);
             kernelBootTimeMetrics.add(result.getKernelElapsedNanoTime() / nanoToMilli);
             userspaceBootTimeMetrics.add(result.getUserspaceElapsedNanoTime() / nanoToMilli);
         }
 
+        reportMetrics(vmStartingTimeMetrics,    "avf_perf/microdroid/vm_starting_time_",    "_ms");
         reportMetrics(bootTimeMetrics,          "avf_perf/microdroid/boot_time_",           "_ms");
         reportMetrics(bootloaderTimeMetrics,    "avf_perf/microdroid/bootloader_time_",     "_ms");
         reportMetrics(kernelBootTimeMetrics,    "avf_perf/microdroid/kernel_boot_time_",    "_ms");
