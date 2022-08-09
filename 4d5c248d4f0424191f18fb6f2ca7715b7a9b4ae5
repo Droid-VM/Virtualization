@@ -16,6 +16,74 @@
       "message": "PTAL: I made the callback optional, and fixed the test builds I broke",
       "revId": "4d5c248d4f0424191f18fb6f2ca7715b7a9b4ae5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ce111a8_6fb837b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-08-09T12:32:04Z",
+      "side": 1,
+      "message": "The downside of this approach is that a client can only register a single callback, whereas before it was possible to add more than one. But we don\u0027t have any code which actually does that, so I guess it\u0027s fine.",
+      "revId": "4d5c248d4f0424191f18fb6f2ca7715b7a9b4ae5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "586d8e56_90ab6384",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-08-09T12:32:04Z",
+      "side": 1,
+      "message": "Nit: a blank line after this would be nice.",
+      "revId": "4d5c248d4f0424191f18fb6f2ca7715b7a9b4ae5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41f76901_17b22da2",
+        "filename": "vmclient/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-08-09T12:32:04Z",
+      "side": 1,
+      "message": "Using underscore names for parameters on a public trait like this will look a bit weird in the documentation I think. How about removing the underscores here, and instead have the default implementation do something like\n\n```\n_ \u003d cid;\n_ \u003d stream;\n```\n\nto avoid the warnings about unused parameters?",
+      "revId": "4d5c248d4f0424191f18fb6f2ca7715b7a9b4ae5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "297d6290_9eee1059",
+        "filename": "vmclient/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-08-09T12:32:04Z",
+      "side": 1,
+      "message": "Rather than omitting it entirely, it could be useful to know whether there is one. I.e. print either `None` or `Some(...)`.",
+      "revId": "4d5c248d4f0424191f18fb6f2ca7715b7a9b4ae5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
