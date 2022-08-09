@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "55e027e5_9efea203",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-09T06:55:15Z",
+      "side": 1,
+      "message": "Correct. That\u0027s exactly my idea. I wanted to use the rule to separate benchmark tests in a different class. However, later we found that that measuring the time just on the host side is not so precise. It also has the latency of adb and debug mode Microdroid. So in the end I think it\u0027s better to take a different approach instead of continuing the current cl. I\u0027ll set it as WIP.",
+      "parentUuid": "e34380a7_d648d49a",
+      "range": {
+        "startLine": 10,
+        "startChar": 15,
+        "endLine": 10,
+        "endChar": 32
+      },
+      "revId": "8fccd9f569b02164f7f39238a4f6cf3a08984f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d2cfd64c_f0f2578c",
