@@ -234,6 +234,7 @@ public abstract class MicrodroidDeviceTestBase {
     public static class BootResult {
         public final boolean payloadStarted;
         public final int deathReason;
+        public final long beginNanoTime;
         public final long endToEndNanoTime;
 
         public final OptionalLong vcpuStartedNanoTime;
@@ -243,11 +244,13 @@ public abstract class MicrodroidDeviceTestBase {
 
         BootResult(boolean payloadStarted,
                 int deathReason,
+                long beginNanoTime,
                 long endToEndNanoTime,
                 OptionalLong vcpuStartedNanoTime,
                 OptionalLong kernelStartedNanoTime,
                 OptionalLong initStartedNanoTime,
                 OptionalLong payloadStartedNanoTime) {
+            this.beginNanoTime = beginNanoTime;
             this.payloadStarted = payloadStarted;
             this.deathReason = deathReason;
             this.endToEndNanoTime = endToEndNanoTime;
@@ -271,6 +274,10 @@ public abstract class MicrodroidDeviceTestBase {
 
         private long getPayloadStartedNanoTime() {
             return payloadStartedNanoTime.getAsLong();
+        }
+
+        public long getVMStartingElapsedNanoTime() {
+            return getVcpuStartedNanoTime() - beginNanoTime;
         }
 
         public long getBootloaderElapsedNanoTime() {
@@ -312,6 +319,7 @@ public abstract class MicrodroidDeviceTestBase {
         return new BootResult(
                 payloadStarted.getNow(false),
                 deathReason.getNow(DeathReason.INFRASTRUCTURE_ERROR),
+                beginTime,
                 endTime.getNow(beginTime) - beginTime,
                 listener.getVcpuStartedNanoTime(),
                 listener.getKernelStartedNanoTime(),
