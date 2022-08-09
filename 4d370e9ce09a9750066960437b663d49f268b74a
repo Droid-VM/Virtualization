@@ -22,6 +22,30 @@
       },
       "revId": "4d370e9ce09a9750066960437b663d49f268b74a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae447dde_1940ae70",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-08-09T14:30:20Z",
+      "side": 1,
+      "message": "An error with a meaningful code but no description seems alright, if the code is sufficient to describe it. What we should probably do is introduce meaningful codes rather than just -1, so I figured leaving -1 over the codebase would be a good reminder to do that.",
+      "parentUuid": "d475c78a_e8e80b9a",
+      "range": {
+        "startLine": 179,
+        "startChar": 27,
+        "endLine": 180,
+        "endChar": 32
+      },
+      "revId": "4d370e9ce09a9750066960437b663d49f268b74a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
