@@ -94,6 +94,30 @@
       },
       "revId": "87f9aa464fc1e3ada4590e4bfeec5d84bbeb688c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac08f9c0_197867e2",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-08-09T17:08:31Z",
+      "side": 1,
+      "message": "I\u0027d taken the objective to be removing any obstacle from modifying the code that runs in a VM; verifying the signatures of images (APKs, APEXs, etc) is one of those obstacles.\n\nAPK dm-verity is a further layer of continuous protection after the APK itself has been verified. I consider that an ongoing enforcement of what was verified, rather than verification itself.\n\nIf these assumptions are wrong, then I\u0027m not reviewing the CL correctly.",
+      "parentUuid": "1fc83f19_6ecf4882",
+      "range": {
+        "startLine": 258,
+        "startChar": 1,
+        "endLine": 297,
+        "endChar": 6
+      },
+      "revId": "87f9aa464fc1e3ada4590e4bfeec5d84bbeb688c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
