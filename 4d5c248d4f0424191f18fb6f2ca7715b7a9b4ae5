@@ -35,6 +35,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08484823_a0ddbb07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-09T14:43:21Z",
+      "side": 1,
+      "message": "I tried your impl trick, but ended up in a world of pain - it really didn\u0027t like my use of None, since it couldn\u0027t deduce the type of the thing I wasn\u0027t passing.",
+      "revId": "4d5c248d4f0424191f18fb6f2ca7715b7a9b4ae5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "586d8e56_90ab6384",
@@ -48,6 +65,24 @@
       "writtenOn": "2022-08-09T12:32:04Z",
       "side": 1,
       "message": "Nit: a blank line after this would be nice.",
+      "revId": "4d5c248d4f0424191f18fb6f2ca7715b7a9b4ae5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a673e7c0_4a921240",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-09T14:43:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "586d8e56_90ab6384",
       "revId": "4d5c248d4f0424191f18fb6f2ca7715b7a9b4ae5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -69,6 +104,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dce2d34_fa066fdb",
+        "filename": "vmclient/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-09T14:43:21Z",
+      "side": 1,
+      "message": "I removed the underscores, but just disabled the warnings.",
+      "parentUuid": "41f76901_17b22da2",
+      "revId": "4d5c248d4f0424191f18fb6f2ca7715b7a9b4ae5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "297d6290_9eee1059",
@@ -82,6 +135,24 @@
       "writtenOn": "2022-08-09T12:32:04Z",
       "side": 1,
       "message": "Rather than omitting it entirely, it could be useful to know whether there is one. I.e. print either `None` or `Some(...)`.",
+      "revId": "4d5c248d4f0424191f18fb6f2ca7715b7a9b4ae5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5436f64c_6d7df3b8",
+        "filename": "vmclient/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-09T14:43:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "297d6290_9eee1059",
       "revId": "4d5c248d4f0424191f18fb6f2ca7715b7a9b4ae5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
