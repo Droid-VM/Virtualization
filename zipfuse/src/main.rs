@@ -21,7 +21,7 @@
 mod inode;
 
 use anyhow::{Context as AnyhowContext, Result};
-use clap::{App, Arg};
+use clap::{builder::ValueParser, Arg, ArgAction, Command};
 use fuse::filesystem::*;
 use fuse::mount::*;
 use rustutils::system_properties;
@@ -34,51 +34,53 @@ use std::io::Read;
 use std::mem::size_of;
 use std::os::unix::io::AsRawFd;
 use std::path::Path;
+use std::path::PathBuf;
 use std::sync::Mutex;
 
 use crate::inode::{DirectoryEntry, Inode, InodeData, InodeKind, InodeTable};
 
 fn main() -> Result<()> {
-    let matches = App::new("zipfuse")
+    let matches = clap_command().get_matches();
+
+    let zip_file = matches.get_one::<PathBuf>("ZIPFILE").unwrap();
+    let mount_point = matches.get_one::<PathBuf>("MOUNTPOINT").unwrap();
+    let options = matches.get_one::<String>("options");
+    let noexec = matches.get_flag("noexec");
+    let ready_prop = matches.get_one::<String>("readyprop");
+    run_fuse(zip_file, mount_point, options, noexec, ready_prop)?;
+    Ok(())
+}
+
+fn clap_command() -> Command {
+    Command::new("zipfuse")
         .arg(
-            Arg::with_name("options")
+            Arg::new("options")
                 .short('o')
-                .takes_value(true)
                 .required(false)
                 .help("Comma separated list of mount options"),
         )
         .arg(
-            Arg::with_name("noexec")
+            Arg::new("noexec")
                 .long("noexec")
-                .takes_value(false)
+                .action(ArgAction::SetTrue)
                 .help("Disallow the execution of binary files"),
         )
         .arg(
-            Arg::with_name("readyprop")
+            Arg::new("readyprop")
                 .short('p')
-                .takes_value(true)
                 .help("Specify a property to be set when mount is ready"),
         )
-        .arg(Arg::with_name("ZIPFILE").required(true))
-        .arg(Arg::with_name("MOUNTPOINT").required(true))
-        .get_matches();
-
-    let zip_file = matches.value_of("ZIPFILE").unwrap().as_ref();
-    let mount_point = matches.value_of("MOUNTPOINT").unwrap().as_ref();
-    let options = matches.value_of("options");
-    let noexec = matches.is_present("noexec");
-    let ready_prop = matches.value_of("readyprop");
-    run_fuse(zip_file, mount_point, options, noexec, ready_prop)?;
-    Ok(())
+        .arg(Arg::new("ZIPFILE").value_parser(ValueParser::path_buf()).required(true))
+        .arg(Arg::new("MOUNTPOINT").value_parser(ValueParser::path_buf()).required(true))
 }
 
 /// Runs a fuse filesystem by mounting `zip_file` on `mount_point`.
 pub fn run_fuse(
     zip_file: &Path,
     mount_point: &Path,
-    extra_options: Option<&str>,
+    extra_options: Option<&String>,
     noexec: bool,
-    ready_prop: Option<&str>,
+    ready_prop: Option<&String>,
 ) -> Result<()> {
     const MAX_READ: u32 = 1 << 20; // TODO(jiyong): tune this
     const MAX_WRITE: u32 = 1 << 13; // This is a read-only filesystem
@@ -450,11 +452,11 @@ impl fuse::filesystem::DirectoryIterator for DirIter {
 
 #[cfg(test)]
 mod tests {
-    use anyhow::{bail, Result};
+    use super::*;
+    use anyhow::bail;
     use nix::sys::statfs::{statfs, FsType};
     use std::collections::BTreeSet;
     use std::fs;
-    use std::fs::File;
     use std::io::Write;
     use std::path::{Path, PathBuf};
     use std::time::{Duration, Instant};
@@ -818,5 +820,11 @@ mod tests {
 
         // Start zipfuse over to the loop device (not the zip file)
         run_fuse_and_check_test_zip(&test_dir.path(), &ld.path().unwrap());
+    }
+
+    #[test]
+    fn verify_command() {
+        // Check that the command parsing has been configured in a valid way.
+        clap_command().debug_assert();
     }
 }
