@@ -397,10 +397,10 @@ fn command_info() -> Result<(), Error> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use clap::IntoApp;
+    use clap::CommandFactory;
 
     #[test]
     fn verify_app() {
-        Opt::into_app().debug_assert();
+        Opt::command().debug_assert();
     }
 }
