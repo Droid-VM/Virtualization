@@ -19,7 +19,7 @@
 //! It uses dm_rust lib.
 
 use anyhow::{ensure, Context, Result};
-use clap::{arg, App};
+use clap::arg;
 use dm::{crypt::CipherType, util};
 use log::info;
 use std::ffi::CString;
@@ -41,23 +41,24 @@ fn main() -> Result<()> {
     );
     info!("Starting encryptedstore binary");
 
-    let matches = App::new("encryptedstore")
-        .args(&[
-            arg!(--blkdevice <FILE> "the block device backing the encrypted storage")
-                .required(true),
-            arg!(--key <KEY> "key (in hex) equivalent to 64 bytes)").required(true),
-            arg!(--mountpoint <MOUNTPOINT> "mount point for the storage").required(true),
-        ])
-        .get_matches();
+    let matches = clap_command().get_matches();
 
-    let blkdevice = Path::new(matches.value_of("blkdevice").unwrap());
-    let key = matches.value_of("key").unwrap();
-    let mountpoint = Path::new(matches.value_of("mountpoint").unwrap());
+    let blkdevice = Path::new(matches.get_one::<String>("blkdevice").unwrap());
+    let key = matches.get_one::<String>("key").unwrap();
+    let mountpoint = Path::new(matches.get_one::<String>("mountpoint").unwrap());
     encryptedstore_init(blkdevice, key, mountpoint).context(format!(
         "Unable to initialize encryptedstore on {:?} & mount at {:?}",
         blkdevice, mountpoint
     ))?;
     Ok(())
+}
+
+fn clap_command() -> clap::Command {
+    clap::Command::new("encryptedstore").args(&[
+        arg!(--blkdevice <FILE> "the block device backing the encrypted storage").required(true),
+        arg!(--key <KEY> "key (in hex) equivalent to 64 bytes)").required(true),
+        arg!(--mountpoint <MOUNTPOINT> "mount point for the storage").required(true),
+    ])
 }
 
 fn encryptedstore_init(blkdevice: &Path, key: &str, mountpoint: &Path) -> Result<()> {
@@ -155,5 +156,15 @@ fn mount(source: &Path, mountpoint: &Path) -> Result<()> {
         Err(Error::last_os_error()).context("mount failed")
     } else {
         Ok(())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn verify_command() {
+        clap_command().debug_assert();
     }
 }
