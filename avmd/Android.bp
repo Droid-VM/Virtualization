@@ -38,6 +38,24 @@ rust_binary {
 }
 
 rust_test {
+    name: "avmdtool.test",
+    srcs: ["src/main.rs"],
+    host_supported: true,
+    prefer_rlib: true,
+    rustlibs: [
+        "libanyhow",
+        "libapexutil_rust",
+        "libapkverify",
+        "libavmd",
+        "libclap",
+        "libserde",
+        "libserde_cbor",
+        "libvbmeta_rust",
+    ],
+    test_suites: ["general-tests"],
+}
+
+rust_test {
     name: "avmdtool_tests",
     srcs: ["tests/*_test.rs"],
     test_suites: ["general-tests"],
