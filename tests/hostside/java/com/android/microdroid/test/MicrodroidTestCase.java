@@ -25,12 +25,19 @@ import static com.google.common.truth.Truth.assertWithMessage;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.junit.Assume.assumeTrue;
 
+import android.cts.statsdatom.lib.ConfigUtils;
+import android.cts.statsdatom.lib.DeviceUtils;
+import android.cts.statsdatom.lib.ReportUtils;
+
+import com.android.os.AtomsProto;
+import com.android.os.StatsLog;
 import com.android.tradefed.device.DeviceNotAvailableException;
 import com.android.tradefed.result.TestDescription;
 import com.android.tradefed.result.TestResult;
@@ -438,6 +445,32 @@ public class MicrodroidTestCase extends MicrodroidHostTestCaseBase {
     @Test
     public void testTombstonesAreNotGeneratedIfNotExported() throws Exception {
         assertFalse(isTombstoneGeneratedWithConfig("assets/vm_config_crash_no_tombstone.json"));
+    }
+
+    @Test
+    public void testTelemetryAtoms() throws Exception {
+        ConfigUtils.uploadConfigForPushedAtomWithUid(getDevice(), DeviceUtils.STATSD_ATOM_TEST_PKG,
+                 AtomsProto.Atom.VM_CREATION_REQUESTED_FIELD_NUMBER, true);
+        // DeviceUtils.runDeviceTestsOnStatsdApp(getDevice(), ".AtomTests", "testMicrodroidBoots");
+
+        final String configPath = "assets/vm_config.json"; // path inside the APK
+        final String cid =
+                startMicrodroid(
+                        getDevice(),
+                        getBuild(),
+                        APK_NAME,
+                        PACKAGE_NAME,
+                        configPath,
+                        /* debug */ true,
+                        minMemorySize(),
+                        Optional.of(NUM_VCPUS),
+                        Optional.of(CPU_AFFINITY));
+        adbConnectToMicrodroid(getDevice(), cid);
+        waitForBootComplete();
+        shutdownMicrodroid(getDevice(), cid);
+
+        List<StatsLog.EventMetricData> data = ReportUtils.getEventMetricDataList(getDevice());
+        assertEquals(data.size(), -1);
     }
 
     @Test
