@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "601c99ca_d3fc7fa5",
+        "filename": "authfs/src/file.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-11T15:50:56Z",
+      "side": 1,
+      "message": "I still think connect (or create) is a better name than get. But I realize precedent is against me.\n\nShould it be get_vsock_binder_interface though?",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 25,
+        "endChar": 27
+      },
+      "revId": "6281e70a1ccf33cc4d06e7753c0b3c65fab4a27a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
