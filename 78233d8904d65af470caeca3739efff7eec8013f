@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "75290e67_600a47ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-12T17:00:38Z",
+      "side": 1,
+      "message": "nit: newline",
+      "range": {
+        "startLine": 10,
+        "startChar": 69,
+        "endLine": 10,
+        "endChar": 77
+      },
+      "revId": "78233d8904d65af470caeca3739efff7eec8013f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e6b5c56_18b9c610",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-12T17:00:38Z",
+      "side": 1,
+      "message": "I\u0027d prefer to create a separate class for performance test.",
+      "range": {
+        "startLine": 14,
+        "startChar": 32,
+        "endLine": 14,
+        "endChar": 46
+      },
+      "revId": "78233d8904d65af470caeca3739efff7eec8013f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2bdba9ca_c0bed222",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -43,6 +89,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9bbb2d79_3df00468",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-12T17:00:38Z",
+      "side": 1,
+      "message": "+1.  FWIW, this isn\u0027t a reusable constant, so if you want to inline it to the code, it\u0027s fine by me.",
+      "parentUuid": "7704aa34_23f088ef",
+      "range": {
+        "startLine": 83,
+        "startChar": 32,
+        "endLine": 83,
+        "endChar": 51
+      },
+      "revId": "78233d8904d65af470caeca3739efff7eec8013f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "48b0b82c_45366c8e",
         "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
         "patchSetId": 3
@@ -59,6 +129,29 @@
         "startChar": 29,
         "endLine": 84,
         "endChar": 56
+      },
+      "revId": "78233d8904d65af470caeca3739efff7eec8013f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "823fddc6_71ca9759",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-12T17:00:38Z",
+      "side": 1,
+      "message": "nit: just throwing Exception is fine in this case.  http://go/java-practices/exceptions#test_methods",
+      "range": {
+        "startLine": 145,
+        "startChar": 12,
+        "endLine": 145,
+        "endChar": 68
       },
       "revId": "78233d8904d65af470caeca3739efff7eec8013f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -151,6 +244,29 @@
         "startChar": 40,
         "endLine": 203,
         "endChar": 95
+      },
+      "revId": "78233d8904d65af470caeca3739efff7eec8013f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1aa44f8_78404ee3",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-12T17:00:38Z",
+      "side": 1,
+      "message": "Can this be just `getDevice().waitForBootComplete(timeout);`?",
+      "range": {
+        "startLine": 221,
+        "startChar": 8,
+        "endLine": 221,
+        "endChar": 28
       },
       "revId": "78233d8904d65af470caeca3739efff7eec8013f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
