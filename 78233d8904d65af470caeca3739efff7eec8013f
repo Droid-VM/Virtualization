@@ -16,6 +16,167 @@
       "message": "The change itself LGTM, but I wish we had these benchmark tests in a different (new) test module so that we don\u0027t run benchmarks during presubmit, but during postsubmit.",
       "revId": "78233d8904d65af470caeca3739efff7eec8013f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7704aa34_23f088ef",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-12T16:18:40Z",
+      "side": 1,
+      "message": "Nit: Either change the name to GET_BOOT_COMPLETED_COMMAND, or change the value to just \"sys.boot_completed\".",
+      "range": {
+        "startLine": 83,
+        "startChar": 32,
+        "endLine": 83,
+        "endChar": 51
+      },
+      "revId": "78233d8904d65af470caeca3739efff7eec8013f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48b0b82c_45366c8e",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-12T16:18:40Z",
+      "side": 1,
+      "message": "nit: Include the units in the name.\n(Or use Duration)",
+      "range": {
+        "startLine": 84,
+        "startChar": 29,
+        "endLine": 84,
+        "endChar": 56
+      },
+      "revId": "78233d8904d65af470caeca3739efff7eec8013f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e436d2dd_233e50a0",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-12T16:18:40Z",
+      "side": 1,
+      "message": "Uber nit: CompOS -\u003e CompOs",
+      "range": {
+        "startLine": 147,
+        "startChar": 17,
+        "endLine": 147,
+        "endChar": 35
+      },
+      "revId": "78233d8904d65af470caeca3739efff7eec8013f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65fd75ce_f35726b1",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-12T16:18:40Z",
+      "side": 1,
+      "message": "that(elapsedWithCompOS).isLessThan(elapsedWithoutCompOS)\n\nThe more specific the Truth method you call, the better the failure messages are.",
+      "range": {
+        "startLine": 172,
+        "startChar": 17,
+        "endLine": 172,
+        "endChar": 73
+      },
+      "revId": "78233d8904d65af470caeca3739efff7eec8013f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70b69291_d0fbe3cc",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-12T16:18:40Z",
+      "side": 1,
+      "message": "I think you need to use values.length - 1; you\u0027re estimating the population variance, using an estimate of the population mean.",
+      "range": {
+        "startLine": 193,
+        "startChar": 38,
+        "endLine": 193,
+        "endChar": 51
+      },
+      "revId": "78233d8904d65af470caeca3739efff7eec8013f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17eef6ab_4c7dcd14",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-12T16:18:40Z",
+      "side": 1,
+      "message": "For tests, just use throws Exception everywhere",
+      "range": {
+        "startLine": 203,
+        "startChar": 40,
+        "endLine": 203,
+        "endChar": 95
+      },
+      "revId": "78233d8904d65af470caeca3739efff7eec8013f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be0a96b5_28e44ac3",
+        "filename": "compos/tests/java/android/compos/test/ComposTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-12T16:18:40Z",
+      "side": 1,
+      "message": "that(result).ignoringCase().contains(\"all ok\")",
+      "range": {
+        "startLine": 230,
+        "startChar": 13,
+        "endLine": 230,
+        "endChar": 67
+      },
+      "revId": "78233d8904d65af470caeca3739efff7eec8013f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
