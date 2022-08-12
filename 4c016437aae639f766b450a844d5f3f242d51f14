@@ -79,6 +79,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8af83e05_a1eeb203",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-12T04:03:20Z",
+      "side": 1,
+      "message": "How about getting it out from the method like below?\n\n```\nVirtualMachineAppConfig appConfig \u003d getConfig().toParcel();\nappConfig.name \u003d mPackageName + \":\" + mName;\n```\n\nI considered your suggestion with setting VM name at the constructor of VirtualMachineConfig, but it\u0027s made earlier than defining name. And the number of such cases is about 20-30.\nhttps://source.corp.google.com/android/packages/modules/Virtualization/tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java;l\u003d108",
+      "parentUuid": "38bc7204_abb8d215",
+      "range": {
+        "startLine": 222,
+        "startChar": 51,
+        "endLine": 222,
+        "endChar": 82
+      },
+      "revId": "4c016437aae639f766b450a844d5f3f242d51f14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9aee0c5c_f5227489",
         "filename": "libs/vmconfig/src/lib.rs",
         "patchSetId": 8
