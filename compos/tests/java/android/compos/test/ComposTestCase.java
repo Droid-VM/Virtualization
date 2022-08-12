@@ -16,6 +16,8 @@
 
 package android.compos.test;
 
+import android.platform.test.annotations.RootPermissionTest;
+
 import static com.android.microdroid.test.CommandResultSubject.assertThat;
 import static com.android.microdroid.test.CommandResultSubject.command_results;
 import static com.android.tradefed.testtype.DeviceJUnit4ClassRunner.TestLogData;
@@ -23,10 +25,9 @@ import static com.android.tradefed.testtype.DeviceJUnit4ClassRunner.TestLogData;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 
-import android.platform.test.annotations.RootPermissionTest;
-
 import com.android.microdroid.test.CommandRunner;
 import com.android.microdroid.test.MicrodroidHostTestCaseBase;
+import com.android.tradefed.device.DeviceNotAvailableException;
 import com.android.tradefed.log.LogUtil.CLog;
 import com.android.tradefed.result.FileInputStreamSource;
 import com.android.tradefed.result.LogDataType;
@@ -42,6 +43,8 @@ import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RootPermissionTest
 @RunWith(DeviceJUnit4ClassRunner.class)
@@ -74,6 +77,12 @@ public final class ComposTestCase extends MicrodroidHostTestCaseBase {
     private static final String SYSTEM_SERVER_COMPILER_FILTER_PROP_NAME =
             "dalvik.vm.systemservercompilerfilter";
     private String mBackupSystemServerCompilerFilter;
+
+    /** Boot time related variables */
+    private static final String BOOT_COMPLETED_PROP = "getprop sys.boot_completed";
+    private static final int BOOT_COMPLETE_POLL_INTERVAL = 1000;
+    private static final int BOOT_COMPLETE_POLL_RETRY_COUNT = 45;
+    private static final String BOOT_COMPLETED_VAL = "1";
 
     @Rule public TestLogData mTestLogs = new TestLogData();
     @Rule public TestName mTestName = new TestName();
@@ -125,6 +134,81 @@ public final class ComposTestCase extends MicrodroidHostTestCaseBase {
     public void testOdrefreshSpeedProfile() throws Exception {
         getDevice().setProperty(SYSTEM_SERVER_COMPILER_FILTER_PROP_NAME, "speed-profile");
         testOdrefresh();
+    }
+
+    @Test
+    public void testBootWithAndWithoutCompOS()
+            throws DeviceNotAvailableException, InterruptedException {
+
+        // Boot time with compilation OS test.
+        reInstallApex();
+        compileStagedApex();
+        long start = System.currentTimeMillis();
+        rebootAndWaitBootCompleted();
+        long elapsedWithCompOS = System.currentTimeMillis() - start;
+        CLog.i("Boot time with compilation OS took " + elapsedWithCompOS + "ms");
+
+        // Boot time without compilation OS test.
+        reInstallApex();
+        start = System.currentTimeMillis();
+        rebootAndWaitBootCompleted();
+        long elapsedWithoutCompOS = System.currentTimeMillis() - start;
+        CLog.i("Boot time without compilation OS took " + elapsedWithoutCompOS + "ms");
+
+        assertWithMessage("Boot time with compilation OS is higher than without")
+            .that(elapsedWithCompOS < elapsedWithoutCompOS).isTrue();
+    }
+
+    private void waitForBootCompleted() throws InterruptedException, DeviceNotAvailableException {
+        for (int i = 0; i < BOOT_COMPLETE_POLL_RETRY_COUNT; i++) {
+            if (isBootCompleted()) {
+                return;
+            }
+            Thread.sleep(BOOT_COMPLETE_POLL_INTERVAL);
+        }
+    }
+
+    private boolean isBootCompleted() throws DeviceNotAvailableException {
+        return BOOT_COMPLETED_VAL.equals(
+                getDevice().executeShellCommand(BOOT_COMPLETED_PROP).trim());
+    }
+
+    private void rebootAndWaitBootCompleted()
+            throws InterruptedException, DeviceNotAvailableException {
+        getDevice().nonBlockingReboot();
+        getDevice().waitForDeviceOnline();
+        waitForBootCompleted();
+    }
+
+    private void compileStagedApex() throws DeviceNotAvailableException {
+        CommandRunner android = new CommandRunner(getDevice());
+
+        String result = android.run(
+                COMPOSD_CMD_BIN + " staged-apex-compile");
+        assertWithMessage("Failed to compile staged apex. Reason: " + result)
+            .that(result.toLowerCase().contains("all ok")).isTrue();
+    }
+
+    private void reInstallApex() throws DeviceNotAvailableException {
+        CommandRunner android = new CommandRunner(getDevice());
+
+        String packagesOutput =
+                android.run("pm list packages -f --apex-only");
+
+        Pattern p = Pattern.compile(
+                 "package:(.*)=(com(?:\\.google)?\\.android\\.art)$", Pattern.MULTILINE);
+        Matcher m = p.matcher(packagesOutput);
+        assertWithMessage("ART module not found. Packages are:\n" + packagesOutput)
+            .that(m.find())
+            .isTrue();
+
+        String artApexPath = m.group(1);
+        String artApexName = m.group(2);
+
+        CommandResult result = android.runForResult(
+                 "pm install --apex " + artApexPath);
+        assertWithMessage("Failed to install APEX. Reason: " + result.toString())
+             .that(result.getExitCode()).isEqualTo(0);
     }
 
     private void testOdrefresh() throws Exception {
