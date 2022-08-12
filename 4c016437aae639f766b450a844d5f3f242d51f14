@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e44577a6_49c1818d",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-12T00:27:16Z",
+      "side": 1,
+      "message": "jiyong@google.com\nRegarding creating VM name by \"native\" users, I think we need to concatenate cid number if we want to guarantee uniqueness by VM name only, like `Cid1234:Compos`. How do you think?",
+      "revId": "4c016437aae639f766b450a844d5f3f242d51f14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
