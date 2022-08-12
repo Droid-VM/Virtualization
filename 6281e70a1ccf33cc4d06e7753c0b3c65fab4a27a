@@ -46,6 +46,30 @@
       },
       "revId": "6281e70a1ccf33cc4d06e7753c0b3c65fab4a27a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71234313_3a686a2d",
+        "filename": "authfs/src/file.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-12T12:52:27Z",
+      "side": 1,
+      "message": "I guess I\u0027m still unclear about why we call it RPC Binder (or Binder RPC), rather than, say, Socket Binder.\n\nBut that\u0027s definitely not a problem for this CL.",
+      "parentUuid": "369cf981_adf1e65d",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 25,
+        "endChar": 27
+      },
+      "revId": "6281e70a1ccf33cc4d06e7753c0b3c65fab4a27a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
