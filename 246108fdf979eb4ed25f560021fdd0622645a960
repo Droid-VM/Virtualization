@@ -22,6 +22,29 @@
       },
       "revId": "246108fdf979eb4ed25f560021fdd0622645a960",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3da7a99e_6eba697a",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-08-15T10:20:41Z",
+      "side": 1,
+      "message": "Please remove this. The information is already included in the test parameter. We want the metric name to be the same for protected/non-protected so we can compare them in the dashboard based on the test parameter.",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 78
+      },
+      "revId": "246108fdf979eb4ed25f560021fdd0622645a960",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
