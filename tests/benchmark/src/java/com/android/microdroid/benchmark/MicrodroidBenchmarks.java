@@ -169,7 +169,7 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
                     name.substring(
                             MICRODROID_IMG_PREFIX.length(),
                             name.length() - MICRODROID_IMG_SUFFIX.length());
-            String metric = "avf_perf/microdroid/img_size_" + base + "_MB" + "+" + name;
+            String metric = "avf_perf/microdroid/img_size_" + base + "_MB";
             double size = Files.size(file.toPath()) / SIZE_MB;
             bundle.putDouble(metric, size);
         }
@@ -200,10 +200,7 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
             listener.runToFinish(TAG, vm);
         }
 
-        String metricNamePrefix =
-                "avf_perf/virtio-blk/"
-                        + (mProtectedVm ? "protected-vm/" : "unprotected-vm/")
-                        + (isRand ? "rand_read_" : "seq_read_");
+        String metricNamePrefix = "avf_perf/virtio-blk/" + (isRand ? "rand_read_" : "seq_read_");
         String unit = "_mb_per_sec";
         reportMetrics(readRates, metricNamePrefix, unit);
     }
