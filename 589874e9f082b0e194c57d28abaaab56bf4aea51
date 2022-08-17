@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf1dc3f6_40257609",
+        "filename": "tests/benchmark_hostside/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-17T15:59:20Z",
+      "side": 1,
+      "message": "We shouldn\u0027t need this here.",
+      "range": {
+        "startLine": 13,
+        "startChar": 24,
+        "endLine": 13,
+        "endChar": 37
+      },
+      "revId": "589874e9f082b0e194c57d28abaaab56bf4aea51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5210398c_ca70fb9f",
+        "filename": "tests/benchmark_hostside/AndroidTest.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-17T15:59:20Z",
+      "side": 1,
+      "message": "nit: 2022",
+      "range": {
+        "startLine": 2,
+        "startChar": 19,
+        "endLine": 2,
+        "endChar": 23
+      },
+      "revId": "589874e9f082b0e194c57d28abaaab56bf4aea51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91e92146_77e8f769",
+        "filename": "tests/benchmark_hostside/AndroidTest.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-17T15:59:20Z",
+      "side": 1,
+      "message": "Remove.  This was needed to ensure our compilation is consistent with the \"golden\" output.\n\nFWIW, we haven\u0027t figured out why multiple threads actually slow down the whole flow, but then we can leverage this benchmark to track the progress later.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 22
+      },
+      "revId": "589874e9f082b0e194c57d28abaaab56bf4aea51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90079ef5_3ace5688",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-17T15:59:20Z",
+      "side": 1,
+      "message": "nit: 2022",
+      "range": {
+        "startLine": 2,
+        "startChar": 20,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "589874e9f082b0e194c57d28abaaab56bf4aea51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3adb042_a314e5fd",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-17T15:59:20Z",
+      "side": 1,
+      "message": "It looks like this is only backing up the value without really changing it anywhere.\n\nI was debating myself whether we should simply remove these, or maybe set to \"speed\" to make the benchmark less dependent on the device configuration.  But I\u0027m inclined to use \"speed\" to exploit the benchmark here.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 9
+      },
+      "revId": "589874e9f082b0e194c57d28abaaab56bf4aea51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4b713c2_e2a534b8",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-17T15:59:20Z",
+      "side": 1,
+      "message": "nit: fit in one line",
+      "range": {
+        "startLine": 87,
+        "startChar": 45,
+        "endLine": 88,
+        "endChar": 30
+      },
+      "revId": "589874e9f082b0e194c57d28abaaab56bf4aea51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9320619f_2f1471bf",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-17T15:59:20Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 151,
+        "startChar": 44,
+        "endLine": 152,
+        "endChar": 30
+      },
+      "revId": "589874e9f082b0e194c57d28abaaab56bf4aea51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
