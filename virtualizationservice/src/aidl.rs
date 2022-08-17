@@ -17,6 +17,7 @@
 use crate::composite::make_composite_image;
 use crate::crosvm::{CrosvmConfig, DiskFile, PayloadState, VmInstance, VmState};
 use crate::payload::add_microdroid_images;
+use crate::payload::add_microdroid2_images;
 use crate::{Cid, FIRST_GUEST_CID, SYSPROP_LAST_CID};
 use crate::selinux::{SeContext, getfilecon};
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
@@ -28,7 +29,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     IVirtualizationService::IVirtualizationService,
     Partition::Partition,
     PartitionType::PartitionType,
-    VirtualMachineAppConfig::VirtualMachineAppConfig,
+    VirtualMachineAppConfig::{VirtualMachineAppConfig, DebugLevel::DebugLevel},
     VirtualMachineConfig::VirtualMachineConfig,
     VirtualMachineDebugInfo::VirtualMachineDebugInfo,
     VirtualMachineRawConfig::VirtualMachineRawConfig,
@@ -52,6 +53,7 @@ use log::{debug, error, info, warn, trace};
 use microdroid_payload_config::VmPayloadConfig;
 use rustutils::system_properties;
 use semver::VersionReq;
+use shared_child::SharedChild;
 use statslog_virtualization_rust::vm_creation_requested::{stats_write, Hypervisor};
 use std::convert::TryInto;
 use std::ffi::CStr;
@@ -60,9 +62,11 @@ use std::io::{Error, ErrorKind, Write, Read};
 use std::num::NonZeroU32;
 use std::os::unix::io::{FromRawFd, IntoRawFd};
 use std::path::{Path, PathBuf};
+use std::process::Command;
+use std::ptr::null_mut;
 use std::sync::{Arc, Mutex, Weak};
 use tombstoned_client::{TombstonedConnection, DebuggerdDumpType};
-use vmconfig::VmConfig;
+use vmconfig::{VmConfig, open_parcel_file};
 use vsock::{SockAddr, VsockListener, VsockStream};
 use zip::ZipArchive;
 
@@ -86,6 +90,9 @@ const ANDROID_VM_INSTANCE_VERSION: u16 = 1;
 
 const CHUNK_RECV_MAX_LEN: usize = 1024;
 
+const BOOTCONFIG_ATTACH: &str = "/apex/com.android.virt/bin/initrd_gen";
+// Todo move it to /apex/com.android.virt/etc/fs/...
+const MICRODROID_INITRD_PATH: &str = "/apex/com.android.virt/etc/microdroid_initrd.img";
 /// Implementation of `IVirtualizationService`, the entry point of the AIDL service.
 #[derive(Debug, Default)]
 pub struct VirtualizationService {
@@ -619,6 +626,29 @@ fn assemble_disk_image(
     Ok(DiskFile { image, writable: disk.writable })
 }
 
+fn attach_bootcofig_to_initrd(
+    bootconfig_path: &Path,
+    initrd_with_bootconfig: &Path,
+) -> Result<SharedChild, Error> {
+    // Todo (reviewers?): What should be the behaviour if the file is already present.
+    // For ex, initrd_with_bootconfig.full_debuggable (because it was created for previous Vm run)
+    // I think we should re-use.
+
+    // Todo (reviewers?): Using it as a library instead running a binary would decomplexify this
+    // a bit - but the binary does a lot of IO (initd is some 1.5M). Suggestions?
+    let mut command = Command::new(BOOTCONFIG_ATTACH);
+    command
+        .arg(MICRODROID_INITRD_PATH)
+        .arg(bootconfig_path)
+        // Todo change it to approproate target
+        .arg(initrd_with_bootconfig);
+
+    info!("Running {:?}", command);
+    let result = SharedChild::spawn(&mut command)?;
+    debug!("Spawned crosvm({}).", result.id());
+    Ok(result)
+}
+
 fn load_app_config(
     config: &VirtualMachineAppConfig,
     temporary_directory: &Path,
@@ -632,11 +662,16 @@ fn load_app_config(
     let config_file = apk_zip.by_name(config_path)?;
     let vm_payload_config: VmPayloadConfig = serde_json::from_reader(config_file)?;
 
-    let os_name = &vm_payload_config.os.name;
+    let mut os_name = vm_payload_config.os.name.clone();
 
-    // For now, the only supported "os" value is "microdroid"
-    if os_name != "microdroid" {
+    // For now, the only supported "os" value is "microdroid" & "microdroid2"
+    if os_name != "microdroid" && os_name != "microdroid2" {
         bail!("Unknown OS \"{}\"", os_name);
+    }
+
+    if os_name == "microdroid" && !config.protectedVm {
+        warn!("Silently using microdroid2 configurations instead for non protected mode");
+        os_name = "microdroid2".to_string();
     }
 
     // It is safe to construct a filename based on the os_name because we've already checked that it
@@ -657,6 +692,37 @@ fn load_app_config(
     // Microdroid requires an additional payload disk image and the bootconfig partition.
     if os_name == "microdroid" {
         add_microdroid_images(
+            config,
+            temporary_directory,
+            apk_file,
+            idsig_file,
+            instance_file,
+            &vm_payload_config,
+            &mut vm_config,
+        )?;
+    } else if os_name == "microdroid2" {
+        // Microdroid2 uses teh kernel boot method (i.e, no uboot based bootloader)
+        let debug_suffix = match config.debugLevel {
+            DebugLevel::NONE => "normal",
+            DebugLevel::APP_ONLY => "app_debuggable",
+            DebugLevel::FULL => "full_debuggable",
+            _ => return Err(anyhow!("unsupported debug level: {:?}", config.debugLevel)),
+        };
+        let bootconfig_path =
+            format!("{}/microdroid_bootconfig_kernelboot.{}", TEMPORARY_DIRECTORY, debug_suffix);
+        let initrd_with_bootconfig_file =
+            format!("{}/microdroid_initrd_with_bootconfig.{}", TEMPORARY_DIRECTORY, debug_suffix);
+
+        // Todo(reviewer): Can we reuse initrd built by previous VM run or should we build it everytime?
+        // Todo(reviewer): I think this should be a library instead of a separate binary!
+        let child = Arc::new(attach_bootcofig_to_initrd(
+            Path::new(&bootconfig_path),
+            Path::new(&initrd_with_bootconfig_file),
+        )?);
+        let exit_reason = child.wait()?;
+        info!("exit_reason {:?}", exit_reason);
+        vm_config.initrd = Some(open_parcel_file(Path::new(&initrd_with_bootconfig_file), false)?);
+        add_microdroid2_images(
             config,
             temporary_directory,
             apk_file,

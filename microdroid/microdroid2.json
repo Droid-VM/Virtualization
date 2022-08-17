@@ -1,0 +1,21 @@
+{
+    "kernel": "/apex/com.android.virt/etc/microdroid_kernel_prebuilts",
+    "disks": [
+      {
+        "partitions": [
+          {
+            "label": "vbmeta_a",
+            "path": "/apex/com.android.virt/etc/fs/microdroid_vbmeta.img"
+          },
+          {
+            "label": "super",
+            "path": "/apex/com.android.virt/etc/fs/microdroid_super.img"
+          }
+        ],
+        "writable": false
+      }
+    ],
+    "params": "ioremap_guard panic=-1 bootconfig",
+    "memory_mib": 256,
+    "platform_version": "~1.0"
+  }

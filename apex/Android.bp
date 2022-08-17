@@ -51,6 +51,7 @@ apex {
     binaries: [
         "fd_server",
         "vm",
+        "initrd_gen",
     ],
     java_libs: [
         "android.system.virtualmachine",
@@ -64,8 +65,15 @@ apex {
     prebuilts: [
         "com.android.virt.init.rc",
         "microdroid.json",
+        "microdroid2.json",
         "microdroid_bootloader",
         "microdroid_bootloader.avbpubkey",
+        "microdroid_initrd",
+        // Todo(b/240235430): Reuse "microdroid_boot" instead of sending fresh kernel
+        "microdroid_kernel_prebuilts",
+        "microdroid_bootconfig_kernelboot_app_debuggable",
+        "microdroid_bootconfig_kernelboot_full_debuggable",
+        "microdroid_bootconfig_kernelboot_normal",
     ],
     file_contexts: ":com.android.virt-file_contexts",
     canned_fs_config: "canned_fs_config",
