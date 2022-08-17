@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "495ebe0e_c573beb0",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-17T11:11:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6a065a8d_9864e136",
+      "range": {
+        "startLine": 496,
+        "startChar": 5,
+        "endLine": 496,
+        "endChar": 9
+      },
+      "revId": "b54346516dab5b56f62e9cd3b3216aafccf74a79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26e32e5e_31c51d99",
@@ -114,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "804197bc_70676405",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-17T11:11:35Z",
+      "side": 1,
+      "message": "Sorry, my word was little tricky. I just wanted to ask whether we need to check the values of the fields by expanding test. And, both are okay for me; extending it or separating it into several tests. I\u0027ll extend this test soon.",
+      "parentUuid": "0bc032a3_cefb33c8",
+      "range": {
+        "startLine": 535,
+        "startChar": 0,
+        "endLine": 537,
+        "endChar": 67
+      },
+      "revId": "b54346516dab5b56f62e9cd3b3216aafccf74a79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d3d8ce42_a3bc44d0",
         "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
         "patchSetId": 6
@@ -149,6 +197,30 @@
       "side": 1,
       "message": "I think you need to modify the `vm stop` command so that it returns after the VM is completely shut down.",
       "parentUuid": "d3d8ce42_a3bc44d0",
+      "range": {
+        "startLine": 541,
+        "startChar": 0,
+        "endLine": 541,
+        "endChar": 27
+      },
+      "revId": "b54346516dab5b56f62e9cd3b3216aafccf74a79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e74dc6a_2d7b81b9",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-17T11:11:35Z",
+      "side": 1,
+      "message": "Sounds good. However, I think modifying `vm stop` shouldn\u0027t be included in this change. So, how about leaving a TODO comment on it and implementing it in other change?",
+      "parentUuid": "dca661cd_7ee008c9",
       "range": {
         "startLine": 541,
         "startChar": 0,
