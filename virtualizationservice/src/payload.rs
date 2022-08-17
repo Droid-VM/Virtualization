@@ -342,6 +342,31 @@ fn collect_apex_infos<'a>(
         .collect()
 }
 
+pub fn add_microdroid2_images(
+    config: &VirtualMachineAppConfig,
+    temporary_directory: &Path,
+    apk_file: File,
+    idsig_file: File,
+    instance_file: File,
+    vm_payload_config: &VmPayloadConfig,
+    vm_config: &mut VirtualMachineRawConfig,
+) -> Result<()> {
+    let instance_img = Partition {
+        label: "vm-instance".to_owned(),
+        image: Some(ParcelFileDescriptor::new(instance_file)),
+        writable: true,
+    };
+    vm_config.disks.push(DiskImage { image: None, partitions: vec![instance_img], writable: true });
+    vm_config.disks.push(make_payload_disk(
+        config,
+        apk_file,
+        idsig_file,
+        vm_payload_config,
+        temporary_directory,
+    )?);
+    Ok(())
+}
+
 pub fn add_microdroid_images(
     config: &VirtualMachineAppConfig,
     temporary_directory: &Path,

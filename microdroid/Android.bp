@@ -535,9 +535,15 @@ vbmeta {
     ],
 }
 
+// Todo: Remove this from apex once booting microdroid in kernel mode is enabled
 prebuilt_etc {
     name: "microdroid.json",
     src: "microdroid.json",
+}
+
+prebuilt_etc {
+    name: "microdroid2.json",
+    src: "microdroid2.json",
 }
 
 prebuilt_etc {
@@ -577,4 +583,115 @@ prebuilt_etc {
     src: "microdroid_event-log-tags",
     filename: "event-log-tags",
     installable: false,
+}
+
+genrule {
+    name: "microdroid_initrd_gen",
+    srcs: [
+        ":microdroid_ramdisk",
+        ":microdroid_vendor_ramdisk",
+    ],
+    out: ["microdroid_initrd.img"],
+    cmd: "cat $(in) > $(out)",
+}
+
+// Todo: Convert it into a filesystem image and move to etc/fs in virt apex
+prebuilt_etc {
+    name: "microdroid_initrd",
+    src: ":microdroid_initrd_gen",
+    filename: "microdroid_initrd.img",
+}
+
+// This concatenates all bootconfigs files.
+genrule {
+    name: "microdroid_bootconfig_kernelboot_normal_gen",
+    srcs: [
+        ":microdroid_bootconfig_arm64_gen",
+        ":microdroid_bootconfig_normal_src",
+        "bootconfig_vbmeta.arm64",
+        ":microdroid_ubootless_vbmeta_bootconfig_gen",
+    ],
+    out: ["microdroid_bootconfig_kernelboot.normal"],
+    cmd: "cat $(in) > $(out)",
+}
+
+prebuilt_etc {
+    name: "microdroid_bootconfig_kernelboot_normal",
+    src: ":microdroid_bootconfig_kernelboot_normal_gen",
+    filename: "microdroid_bootconfig_kernelboot.normal",
+}
+
+genrule {
+    name: "microdroid_bootconfig_kernelboot_full_debuggable_gen",
+    srcs: [
+        ":microdroid_bootconfig_arm64_gen",
+        ":microdroid_bootconfig_full_debuggable_src",
+        "bootconfig_vbmeta.arm64",
+        ":microdroid_ubootless_vbmeta_bootconfig_gen",
+    ],
+    out: ["microdroid_bootconfig_kernelboot.full_debuggable"],
+    cmd: "cat $(in) > $(out)",
+}
+
+prebuilt_etc {
+    name: "microdroid_bootconfig_kernelboot_full_debuggable",
+    src: ":microdroid_bootconfig_kernelboot_full_debuggable_gen",
+    filename: "microdroid_bootconfig_kernelboot.full_debuggable",
+}
+
+genrule {
+    name: "microdroid_bootconfig_kernelboot_app_debuggable_gen",
+    srcs: [
+        ":microdroid_bootconfig_arm64_gen",
+        ":microdroid_bootconfig_app_debuggable_src",
+        "bootconfig_vbmeta.arm64",
+        ":microdroid_ubootless_vbmeta_bootconfig_gen",
+    ],
+    out: ["microdroid_bootconfig_kernelboot.app_debuggable"],
+    cmd: "cat $(in) > $(out)",
+}
+
+prebuilt_etc {
+    name: "microdroid_bootconfig_kernelboot_app_debuggable",
+    src: ":microdroid_bootconfig_kernelboot_app_debuggable_gen",
+    filename: "microdroid_bootconfig_kernelboot.app_debuggable",
+}
+
+prebuilt_etc {
+    name: "microdroid_kernel_prebuilts",
+    src: ":microdroid_kernel_prebuilts-5.15-arm64",
+    filename: "microdroid_kernel_prebuilts",
+    installable: true,
+}
+
+filegroup {
+    name: "microdroid_bootconfig_normal_src",
+    srcs: ["bootconfig.normal"],
+}
+
+filegroup {
+    name: "microdroid_bootconfig_app_debuggable_src",
+    srcs: ["bootconfig.app_debuggable"],
+}
+
+filegroup {
+    name: "microdroid_bootconfig_full_debuggable_src",
+    srcs: ["bootconfig.full_debuggable"],
+}
+
+python_binary_host {
+    name: "gen_vbmeta_bootconfig",
+    srcs: ["gen_vbmeta_bootconfig.py"],
+}
+
+// This generates bootconfig with vbmeta hash for Microdroid's 'vbmeta_a'.
+genrule {
+    name: "microdroid_ubootless_vbmeta_bootconfig_gen",
+    srcs: [":microdroid_vbmeta"],
+    out: ["bootconfig_microdroid_vbmeta"],
+    tools: [
+        "gen_vbmeta_bootconfig",
+        "avbtool",
+    ],
+    cmd: "$(location gen_vbmeta_bootconfig) $(location avbtool) $(in) > $(out)",
 }
