@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47bf0d0c_30f5fea1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-17T06:55:57Z",
+      "side": 1,
+      "message": "Lack of the internal change was the reason for the presubmit failure.\nI checked the build works fine with ABTD in git-master branch.\nhttps://android-build.googleplex.com/builds/abtd/run/L19400000955994351\n\nAnd it\u0027s the error message of the presubmit failure.\n```\nerror[E0432]: unresolved import `statslog_virtualization_rust::vm_booted`\n  --\u003e packages/modules/Virtualization/virtualizationservice/src/atom.rs:26:36\n   |\n26 | use statslog_virtualization_rust::{vm_booted, vm_creation_requested};\n   |                                    ^^^^^^^^^ no `vm_booted` in the root\n```",
+      "revId": "632b63c885359c654282a962a482b3a4d61c286a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
