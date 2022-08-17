@@ -30,6 +30,7 @@ import android.system.virtualmachine.VirtualMachineConfig.DebugLevel;
 import android.system.virtualmachine.VirtualMachineException;
 import android.util.Log;
 
+import com.android.compatibility.common.util.CddTest;
 import com.android.microdroid.testservice.ITestService;
 
 import org.junit.Before;
@@ -80,6 +81,10 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     private static final int MIN_MEM_X86_64 = 196;
 
     @Test
+    @CddTest(requirements = {
+            "9.17/C-1-1",
+            "9.17/C-2-1"
+    })
     public void connectToVmService() throws VirtualMachineException, InterruptedException {
         assume()
             .withMessage("SKip on 5.4 kernel. b/218303240")
@@ -157,6 +162,30 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    public void bootFailsWhenLowMem() throws VirtualMachineException, InterruptedException {
+        VirtualMachineConfig lowMemConfig = mInner.newVmConfigBuilder("assets/vm_config.json")
+                .memoryMib(20)
+                .debugLevel(DebugLevel.NONE)
+                .build();
+        VirtualMachine vm = mInner.forceCreateNewVirtualMachine("low_mem", lowMemConfig);
+        final CompletableFuture<Integer> exception = new CompletableFuture<>();
+        VmEventListener listener =
+                new VmEventListener() {
+                    @Override
+                    public void onDied(VirtualMachine vm, @DeathReason int reason) {
+                        exception.complete(reason);
+                        super.onDied(vm, reason);
+                    }
+                };
+        listener.runToFinish(TAG, vm);
+        assertThat(exception.getNow(0)).isAnyOf(DeathReason.REBOOT, DeathReason.HANGUP);
+    }
+
+    @Test
+    @CddTest(requirements = {
+            "9.17/C-1-1",
+            "9.17/C-2-7"
+    })
     public void changingDebugLevelInvalidatesVmIdentity()
             throws VirtualMachineException, InterruptedException, IOException {
         assume()
@@ -232,6 +261,10 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    @CddTest(requirements = {
+            "9.17/C-1-1",
+            "9.17/C-2-7"
+    })
     public void instancesOfSameVmHaveDifferentCdis()
             throws VirtualMachineException, InterruptedException {
         assume()
@@ -256,6 +289,10 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    @CddTest(requirements = {
+            "9.17/C-1-1",
+            "9.17/C-2-7"
+    })
     public void sameInstanceKeepsSameCdis()
             throws VirtualMachineException, InterruptedException {
         assume()
@@ -277,6 +314,10 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    @CddTest(requirements = {
+            "9.17/C-1-1",
+            "9.17/C-2-7"
+    })
     public void bccIsSuperficiallyWellFormed()
             throws VirtualMachineException, InterruptedException, CborException {
         assume()
@@ -397,12 +438,20 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    @CddTest(requirements = {
+            "9.17/C-1-1",
+            "9.17/C-2-7"
+    })
     public void bootFailsWhenMicrodroidDataIsCompromised()
             throws VirtualMachineException, InterruptedException, IOException {
         assertThatBootFailsAfterCompromisingPartition(MICRODROID_PARTITION_UUID);
     }
 
     @Test
+    @CddTest(requirements = {
+            "9.17/C-1-1",
+            "9.17/C-2-7"
+    })
     public void bootFailsWhenUBootAvbDataIsCompromised()
             throws VirtualMachineException, InterruptedException, IOException {
         if (mProtectedVm) {
@@ -414,6 +463,10 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    @CddTest(requirements = {
+            "9.17/C-1-1",
+            "9.17/C-2-7"
+    })
     public void bootFailsWhenUBootEnvDataIsCompromised()
             throws VirtualMachineException, InterruptedException, IOException {
         if (mProtectedVm) {
@@ -425,6 +478,10 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    @CddTest(requirements = {
+            "9.17/C-1-1",
+            "9.17/C-2-7"
+    })
     public void bootFailsWhenPvmFwDataIsCompromised()
             throws VirtualMachineException, InterruptedException, IOException {
         if (mProtectedVm) {

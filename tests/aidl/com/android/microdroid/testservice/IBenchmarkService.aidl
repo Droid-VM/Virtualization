@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,12 @@
  * limitations under the License.
  */
 
-//! Common items useful for binder clients and/or servers.
+package com.android.microdroid.testservice;
 
-pub mod rpc_client;
-pub mod rpc_server;
+/** {@hide} */
+interface IBenchmarkService {
+    const int SERVICE_PORT = 5677;
+
+    /** Reads a file and returns the elapsed seconds for the reading. */
+    double readFile(String filename, long fileSizeBytes, boolean isRand);
+}
