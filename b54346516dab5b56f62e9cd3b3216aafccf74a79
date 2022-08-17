@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6a065a8d_9864e136",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-08-17T10:20:35Z",
+      "side": 1,
+      "message": "It\u0027s explaining what CDD requirement the test is for. If this test doesn\u0027t have a related CDD requirement, you can omit @CddTest.",
+      "parentUuid": "97f7459c_344e913f",
+      "range": {
+        "startLine": 496,
+        "startChar": 5,
+        "endLine": 496,
+        "endChar": 9
+      },
+      "revId": "b54346516dab5b56f62e9cd3b3216aafccf74a79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "26e32e5e_31c51d99",
         "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
         "patchSetId": 6
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0bc032a3_cefb33c8",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-08-17T10:20:35Z",
+      "side": 1,
+      "message": "I don\u0027t think you need new tests for that. Why don\u0027t you extend this test to check the values of the fields?",
+      "parentUuid": "26e32e5e_31c51d99",
+      "range": {
+        "startLine": 535,
+        "startChar": 0,
+        "endLine": 537,
+        "endChar": 67
+      },
+      "revId": "b54346516dab5b56f62e9cd3b3216aafccf74a79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d3d8ce42_a3bc44d0",
         "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
         "patchSetId": 6
@@ -77,6 +125,30 @@
       "writtenOn": "2022-08-16T05:20:58Z",
       "side": 1,
       "message": "Unlike the function `waitForBootComplete`, I just added sleep function instead. Is there any properties for the shutdown like `dev.bootcomplete` for the boot? I want to use it if there is.",
+      "range": {
+        "startLine": 541,
+        "startChar": 0,
+        "endLine": 541,
+        "endChar": 27
+      },
+      "revId": "b54346516dab5b56f62e9cd3b3216aafccf74a79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dca661cd_7ee008c9",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-08-17T10:20:35Z",
+      "side": 1,
+      "message": "I think you need to modify the `vm stop` command so that it returns after the VM is completely shut down.",
+      "parentUuid": "d3d8ce42_a3bc44d0",
       "range": {
         "startLine": 541,
         "startChar": 0,
