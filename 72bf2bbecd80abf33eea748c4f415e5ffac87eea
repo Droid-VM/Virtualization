@@ -68,6 +68,98 @@
       "message": "Forgot to actually add you to reviewer so, adding the message again:\n\nThere are some todo (reviewer), where I could use your input to decide between different options.\n-\u003e Can we reuse initrd built by previous VM run or should we build it everytime?\n-\u003e initrd_gen I think this should be a library instead of a separate binary, but it does some 1M of IO copies. Not sure if it really required a separate binary \u0026 added selinux and all...\n\nI have not included the selinux changes in the topic yet.\n",
       "revId": "72bf2bbecd80abf33eea748c4f415e5ffac87eea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f7d3077_65335f15",
+        "filename": "microdroid/bootconfig_vbmeta.arm64",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-08-17T14:15:22Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 38
+      },
+      "revId": "72bf2bbecd80abf33eea748c4f415e5ffac87eea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f3ef413_5e4784ae",
+        "filename": "microdroid/bootconfig_vbmeta.arm64",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-08-17T14:15:22Z",
+      "side": 1,
+      "message": "This should also be generated from the vbmeta.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 38
+      },
+      "revId": "72bf2bbecd80abf33eea748c4f415e5ffac87eea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3219e354_cd8052ea",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-08-17T14:15:22Z",
+      "side": 1,
+      "message": "I\u0027m questioning whether doing this makes sense - the point is to save APEX disk space but we are writing this to disk anyway, so we\u0027re just using the same amount of space on another partition.\n\nHow about you start without this and we can potentially optimize later? It would also make the initial CL easier to review.",
+      "range": {
+        "startLine": 633,
+        "startChar": 0,
+        "endLine": 633,
+        "endChar": 86
+      },
+      "revId": "72bf2bbecd80abf33eea748c4f415e5ffac87eea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e470782c_580486ea",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-08-17T14:15:22Z",
+      "side": 1,
+      "message": "Suggestion: rename this to `_legacy` and call the new flow just `microdroid`.",
+      "range": {
+        "startLine": 694,
+        "startChar": 8,
+        "endLine": 694,
+        "endChar": 29
+      },
+      "revId": "72bf2bbecd80abf33eea748c4f415e5ffac87eea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
