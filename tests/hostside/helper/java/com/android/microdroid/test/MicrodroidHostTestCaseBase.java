@@ -233,13 +233,14 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
             String apkName,
             String packageName,
             String configPath,
+            boolean protection,
             boolean debug,
             int memoryMib,
             Optional<Integer> numCpus,
             Optional<String> cpuAffinity)
             throws DeviceNotAvailableException {
         return startMicrodroid(androidDevice, buildInfo, apkName, packageName, null, configPath,
-                debug, memoryMib, numCpus, cpuAffinity);
+                protection, debug, memoryMib, numCpus, cpuAffinity);
     }
 
     public static String startMicrodroid(
@@ -249,13 +250,14 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
             String packageName,
             String[] extraIdsigPaths,
             String configPath,
+            boolean protection,
             boolean debug,
             int memoryMib,
             Optional<Integer> numCpus,
             Optional<String> cpuAffinity)
             throws DeviceNotAvailableException {
         return startMicrodroid(androidDevice, buildInfo, apkName, null, packageName,
-                extraIdsigPaths, configPath, debug,
+                extraIdsigPaths, configPath, protection, debug,
                 memoryMib, numCpus, cpuAffinity);
     }
 
@@ -278,6 +280,7 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
             String packageName,
             String[] extraIdsigPaths,
             String configPath,
+            boolean protection,
             boolean debug,
             int memoryMib,
             Optional<Integer> numCpus,
@@ -315,6 +318,7 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
                 "--mem " + memoryMib,
                 numCpus.isPresent() ? "--cpus " + numCpus.get() : "",
                 cpuAffinity.isPresent() ? "--cpu-affinity " + cpuAffinity.get() : "",
+                protection ? "--protected" : "",
                 debugFlag,
                 apkPath,
                 outApkIdsigPath,
