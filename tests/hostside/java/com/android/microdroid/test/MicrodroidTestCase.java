@@ -36,6 +36,7 @@ import com.android.tradefed.device.DeviceNotAvailableException;
 import com.android.tradefed.result.TestDescription;
 import com.android.tradefed.result.TestResult;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner;
+import com.android.tradefed.testtype.DeviceJUnit4ClassRunner.TestMetrics;
 import com.android.tradefed.testtype.junit4.DeviceTestRunOptions;
 import com.android.tradefed.util.CommandResult;
 import com.android.tradefed.util.FileUtil;
@@ -58,6 +59,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -80,6 +82,7 @@ public class MicrodroidTestCase extends MicrodroidHostTestCaseBase {
 
     @Rule public TestLogData mTestLogs = new TestLogData();
     @Rule public TestName mTestName = new TestName();
+    @Rule public TestMetrics mMetrics = new TestMetrics();
 
     private int minMemorySize() throws DeviceNotAvailableException {
         CommandRunner android = new CommandRunner(getDevice());
@@ -540,6 +543,87 @@ public class MicrodroidTestCase extends MicrodroidHostTestCaseBase {
                     .about(command_results())
                     .that(result)
                     .isSuccess();
+        }
+
+        shutdownMicrodroid(getDevice(), cid);
+    }
+
+    public class ProcessInfo {
+        public int mPid;
+        public String mCommand;
+        public Map<String, Long> mMemoryStats;
+
+        public ProcessInfo(int pid, String command) {
+            mPid = pid;
+            mCommand = command;
+            mMemoryStats = new HashMap<>();
+        }
+
+        public void addMemoryStat(String name, long value) {
+            mMemoryStats.put(name, value);
+        }
+    }
+
+    private List<ProcessInfo> getRunningProcessesList() {
+        List<ProcessInfo> list = new ArrayList<ProcessInfo>();
+
+        runOnMicrodroid("ps", "-Ao", "PID,COMMAND").lines().forEach(ps -> {
+            // First line is 'PID COMMAND'.
+            if (ps.startsWith("PID")) return;
+
+            // Each subsequent line is '  <pid> <command>'.
+            ps = ps.trim();
+            int space = ps.indexOf(" ");
+
+            ProcessInfo proc = new ProcessInfo(
+                    Integer.parseInt(ps.substring(0, space)),
+                    ps.substring(space + 1));
+            list.add(proc);
+
+            String path = "/proc/" + proc.mPid + "/smaps_rollup";
+            runOnMicrodroid("cat", path, "||", "true").lines().forEach(smaps -> {
+                // First line describes the virtual address space.
+                if (!smaps.endsWith(" kB")) return;
+
+                // Each subsequent line is '<key>:      <value> kB'.
+                String[] elems = smaps.split("\\s+");
+                assertThat(elems.length).isEqualTo(3);
+                assertTrue(elems[0].endsWith(":"));
+                assertThat(elems[2]).isEqualTo("kB");
+                proc.addMemoryStat(
+                        elems[0].substring(0, elems[0].length() - 1),
+                        Long.parseLong(elems[1]));
+            });
+        });
+
+        return list;
+    }
+
+    @Test
+    public void testMicrodroidRamUsage() throws Exception {
+        final String configPath = "assets/vm_config.json";
+        final String cid =
+                startMicrodroid(
+                        getDevice(),
+                        getBuild(),
+                        APK_NAME,
+                        PACKAGE_NAME,
+                        configPath,
+                        /* debug */ true,
+                        minMemorySize(),
+                        Optional.of(NUM_VCPUS),
+                        Optional.of(CPU_AFFINITY));
+        adbConnectToMicrodroid(getDevice(), cid);
+        waitForBootComplete();
+        rootMicrodroid();
+
+        for (ProcessInfo proc : getRunningProcessesList()) {
+            for (Map.Entry<String, Long> stat : proc.mMemoryStats.entrySet()) {
+                mMetrics.addTestMetric(
+                        "avf_perf/microdroid/userspace_mem_usage/" + stat.getKey().toLowerCase()
+                            + "/" + proc.mCommand.substring(proc.mCommand.lastIndexOf("/") + 1),
+                        stat.getValue().toString());
+            }
         }
 
         shutdownMicrodroid(getDevice(), cid);
