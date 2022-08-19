@@ -272,4 +272,42 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
             forceStop(vm);
         }
     }
+
+    @Test
+    public void testMemoryUsage() throws Exception {
+        final String vmName = "test_vm_mem_usage";
+        VirtualMachineConfig.Builder builder = mInner.newVmConfigBuilder(
+                "assets/vm_config_io.json");
+        VirtualMachineConfig config = builder.debugLevel(DebugLevel.NONE).memoryMib(256).build();
+        mInner.forceCreateNewVirtualMachine(vmName, config);
+        VirtualMachine vm = mInner.getVirtualMachineManager().get(vmName);
+        MemoryUsageListener listener = new MemoryUsageListener();
+        listener.runToFinish(TAG, vm);
+
+        Bundle bundle = new Bundle();
+        bundle.putDouble(METRIC_NAME_PREFIX + "mem_used_MB",
+                         (double) listener.mUsedMemory / 1024.0);
+        bundle.putDouble(METRIC_NAME_PREFIX + "mem_used_critical_MB",
+                         (double) listener.mCriticalUsedMemory / 1024.0);
+        mInstrumentation.sendStatus(0, bundle);
+    }
+
+    private static class MemoryUsageListener extends VmEventListener {
+        public long mUsedMemory;
+        public long mCriticalUsedMemory;
+
+        @Override
+        public void onPayloadReady(VirtualMachine vm) {
+            try {
+                IBenchmarkService service =
+                        IBenchmarkService.Stub.asInterface(
+                                vm.connectToVsockServer(IBenchmarkService.SERVICE_PORT).get());
+                mUsedMemory = service.getUsedMemory();
+                mCriticalUsedMemory = service.getCriticalUsedMemory();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            forceStop(vm);
+        }
+    }
 }

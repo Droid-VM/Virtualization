@@ -22,4 +22,10 @@ interface IBenchmarkService {
 
     /** Reads a file and returns the elapsed seconds for the reading. */
     double readFile(String filename, long fileSizeBytes, boolean isRand);
+
+    /** Reports the amount of currently used memory. */
+    long getUsedMemory();
+
+    /** Reports the amount of currently used memory that cannot be freed. */
+    long getCriticalUsedMemory();
 }
