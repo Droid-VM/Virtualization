@@ -22,6 +22,30 @@
       },
       "revId": "93c7ccceb0ce517f6ff50b3b31164592e2f0e133",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9354a654_4f6de2aa",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-08-19T13:20:41Z",
+      "side": 1,
+      "message": "In RKP, they\u0027re moving away from \"BCC\" [1] in favour of \"DICE chain\" so I was just starting to follow along. There\u0027s a whole slew of places with BCC, including the microdroid-only IDiceDevice that we might be able to get rid of now. I didn\u0027t fixing up everything in one go yet and it\u0027s not inaccurate, just trying to align terms with published specs.\n\n[1] -- https://android-review.googlesource.com/c/platform/hardware/interfaces/+/2178555/4/security/keymint/aidl/android/hardware/security/keymint/IRemotelyProvisionedComponent.aidl#38",
+      "parentUuid": "f156ba99_f9b264c9",
+      "range": {
+        "startLine": 361,
+        "startChar": 27,
+        "endLine": 361,
+        "endChar": 37
+      },
+      "revId": "93c7ccceb0ce517f6ff50b3b31164592e2f0e133",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
