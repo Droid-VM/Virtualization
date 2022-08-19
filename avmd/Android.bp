@@ -36,11 +36,15 @@ rust_binary {
     ],
 }
 
-rust_test {
+rust_test_host {
     name: "avmdtool_tests",
     srcs: ["tests/*_test.rs"],
     test_suites: ["general-tests"],
-    compile_multilib: "first",
-    data_bins: ["avmdtool"],
+    prefer_rlib: true,
     data: ["tests/data/*"],
+    data_bins: ["avmdtool"],
+    data_libs: [
+        "libcrypto",
+        "libz",
+    ],
 }
