@@ -18,6 +18,7 @@
 #![no_std]
 
 mod exceptions;
+mod smccc;
 
 use vmbase::{main, println};
 
@@ -25,6 +26,7 @@ main!(main);
 
 /// Entry point for pVM firmware.
 pub fn main(fdt_address: u64, payload_start: u64, payload_size: u64, arg3: u64) {
+    smccc::mmio_guard_map(0);
     println!("pVM firmware");
     println!(
         "fdt_address={:#018x}, payload_start={:#018x}, payload_size={:#018x}, x3={:#018x}",
