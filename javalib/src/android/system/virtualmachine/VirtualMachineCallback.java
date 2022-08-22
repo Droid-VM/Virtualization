@@ -19,6 +19,8 @@ package android.system.virtualmachine;
 import android.annotation.IntDef;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
+import android.annotation.SuppressLint;
+import android.annotation.SystemApi;
 import android.os.ParcelFileDescriptor;
 
 import java.lang.annotation.Retention;
@@ -30,6 +32,8 @@ import java.lang.annotation.RetentionPolicy;
  *
  * @hide
  */
+@SystemApi
+@SuppressLint("CallbackInterface")  // Guidance has changed, lint is out of date (b/245552641)
 public interface VirtualMachineCallback {
     /** @hide */
     @Retention(RetentionPolicy.SOURCE)
@@ -43,23 +47,20 @@ public interface VirtualMachineCallback {
 
     /** Error code for all other errors not listed below. */
     int ERROR_UNKNOWN = 0;
-
     /**
      * Error code indicating that the payload can't be verified due to various reasons (e.g invalid
      * merkle tree, invalid formats, etc).
      */
     int ERROR_PAYLOAD_VERIFICATION_FAILED = 1;
-
     /** Error code indicating that the payload is verified, but has changed since the last boot. */
     int ERROR_PAYLOAD_CHANGED = 2;
-
     /** Error code indicating that the payload config is invalid. */
     int ERROR_PAYLOAD_INVALID_CONFIG = 3;
 
     /** @hide */
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
-        DEATH_REASON_VIRTUALIZATIONSERVICE_DIED,
+        DEATH_REASON_VIRTUALIZATION_SERVICE_DIED,
         DEATH_REASON_INFRASTRUCTURE_ERROR,
         DEATH_REASON_KILLED,
         DEATH_REASON_UNKNOWN,
@@ -67,15 +68,23 @@ public interface VirtualMachineCallback {
         DEATH_REASON_ERROR,
         DEATH_REASON_REBOOT,
         DEATH_REASON_CRASH,
+        DEATH_REASON_PVM_FIRMWARE_PUBLIC_KEY_MISMATCH,
+        DEATH_REASON_PVM_FIRMWARE_INSTANCE_IMAGE_CHANGED,
+        DEATH_REASON_BOOTLOADER_PUBLIC_KEY_MISMATCH,
+        DEATH_REASON_BOOTLOADER_INSTANCE_IMAGE_CHANGED,
+        DEATH_REASON_MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE,
+        DEATH_REASON_MICRODROID_PAYLOAD_HAS_CHANGED,
+        DEATH_REASON_MICRODROID_PAYLOAD_VERIFICATION_FAILED,
+        DEATH_REASON_MICRODROID_INVALID_PAYLOAD_CONFIG,
+        DEATH_REASON_MICRODROID_UNKNOWN_RUNTIME_ERROR,
         DEATH_REASON_HANGUP,
     })
     @interface DeathReason {}
 
-    /**
-     * virtualizationservice itself died, taking the VM down with it. This is a negative number to
-     * avoid conflicting with the other death reasons which match the ones in the AIDL interface.
-     */
-    int DEATH_REASON_VIRTUALIZATIONSERVICE_DIED = -1;
+    /** The virtualization service itself died, taking the VM down with it. */
+    //  This is a negative number to avoid conflicting with the other death reasons which match
+    //  the ones in the AIDL interface.
+    int DEATH_REASON_VIRTUALIZATION_SERVICE_DIED = -1;
 
     /** There was an error waiting for the VM. */
     int DEATH_REASON_INFRASTRUCTURE_ERROR = 0;
@@ -136,7 +145,7 @@ public interface VirtualMachineCallback {
 
     /**
      * Called when the payload in the VM is ready to serve. See
-     * {@link VirtualMachine#connectToVsockServer(int)} ()}.
+     * {@link VirtualMachine#connectToVsockServer(int)}.
      */
     void onPayloadReady(@NonNull VirtualMachine vm);
 
