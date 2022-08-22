@@ -16,6 +16,8 @@
 
 package com.android.microdroid.demo;
 
+import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_FULL;
+
 import android.app.Application;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -24,7 +26,6 @@ import android.os.RemoteException;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineCallback;
 import android.system.virtualmachine.VirtualMachineConfig;
-import android.system.virtualmachine.VirtualMachineConfig.DebugLevel;
 import android.system.virtualmachine.VirtualMachineException;
 import android.system.virtualmachine.VirtualMachineManager;
 import android.util.Log;
@@ -49,7 +50,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 /**
  * This app is to demonstrate the use of APIs in the android.system.virtualmachine library.
@@ -75,10 +75,11 @@ public class MainActivity extends AppCompatActivity {
         // When the button is clicked, run or stop the VM
         runStopButton.setOnClickListener(
                 v -> {
-                    if (model.getStatus().getValue() == VirtualMachine.Status.RUNNING) {
+                    Integer status = model.getStatus().getValue();
+                    if (status != null && status == VirtualMachine.STATUS_RUNNING) {
                         model.stop();
                     } else {
-                        CheckBox debugModeCheckBox = (CheckBox) findViewById(R.id.debugMode);
+                        CheckBox debugModeCheckBox = findViewById(R.id.debugMode);
                         final boolean debug = debugModeCheckBox.isChecked();
                         model.run(debug);
                     }
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         model.getStatus()
                 .observeForever(
                         status -> {
-                            if (status == VirtualMachine.Status.RUNNING) {
+                            if (status == VirtualMachine.STATUS_RUNNING) {
                                 runStopButton.setText("Stop");
                                 // Clear the outputs from the previous run
                                 consoleView.setText("");
@@ -150,12 +151,12 @@ public class MainActivity extends AppCompatActivity {
         private final MutableLiveData<String> mConsoleOutput = new MutableLiveData<>();
         private final MutableLiveData<String> mLogOutput = new MutableLiveData<>();
         private final MutableLiveData<String> mPayloadOutput = new MutableLiveData<>();
-        private final MutableLiveData<VirtualMachine.Status> mStatus = new MutableLiveData<>();
+        private final MutableLiveData<Integer> mStatus = new MutableLiveData<>();
         private ExecutorService mExecutorService;
 
         public VirtualMachineModel(Application app) {
             super(app);
-            mStatus.setValue(VirtualMachine.Status.DELETED);
+            mStatus.setValue(VirtualMachine.STATUS_DELETED);
         }
 
         /** Runs a VM */
@@ -168,9 +169,8 @@ public class MainActivity extends AppCompatActivity {
                         // store reference to ExecutorService to avoid race condition
                         private final ExecutorService mService = mExecutorService;
 
-                        @Override
-                        public void onPayloadStarted(
-                                VirtualMachine vm, ParcelFileDescriptor stream) {
+                        public void onPayloadStarted(VirtualMachine vm,
+                                ParcelFileDescriptor stream) {
                             if (stream == null) {
                                 mPayloadOutput.postValue("(no output available)");
                                 return;
@@ -180,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
                             mService.execute(new Reader("payload", mPayloadOutput, input));
                         }
 
-                        @Override
                         public void onPayloadReady(VirtualMachine vm) {
                             // This check doesn't 100% prevent race condition or UI hang.
                             // However, it's fine for demo.
@@ -189,25 +188,13 @@ public class MainActivity extends AppCompatActivity {
                             }
                             mPayloadOutput.postValue("(Payload is ready. Testing VM service...)");
 
-                            Future<IBinder> service;
-                            try {
-                                service = vm.connectToVsockServer(ITestService.SERVICE_PORT);
-                            } catch (VirtualMachineException e) {
-                                mPayloadOutput.postValue(
-                                        String.format(
-                                                "(Exception while connecting VM's binder"
-                                                        + " service: %s)",
-                                                e.getMessage()));
-                                return;
-                            }
-
-                            mService.execute(() -> testVMService(service));
+                            mService.execute(() -> testVmService(vm));
                         }
 
-                        private void testVMService(Future<IBinder> service) {
+                        private void testVmService(VirtualMachine vm) {
                             IBinder binder;
                             try {
-                                binder = service.get();
+                                binder = vm.connectToVsockServer(ITestService.SERVICE_PORT);
                             } catch (Exception e) {
                                 if (!Thread.interrupted()) {
                                     mPayloadOutput.postValue(
@@ -234,7 +221,6 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
 
-                        @Override
                         public void onPayloadFinished(VirtualMachine vm, int exitCode) {
                             // This check doesn't 100% prevent race condition, but is fine for demo.
                             if (!mService.isShutdown()) {
@@ -244,7 +230,6 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
 
-                        @Override
                         public void onError(VirtualMachine vm, int errorCode, String message) {
                             // This check doesn't 100% prevent race condition, but is fine for demo.
                             if (!mService.isShutdown()) {
@@ -255,13 +240,11 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
 
-                        @Override
                         public void onDied(VirtualMachine vm, int reason) {
                             mService.shutdownNow();
-                            mStatus.postValue(VirtualMachine.Status.STOPPED);
+                            mStatus.postValue(VirtualMachine.STATUS_STOPPED);
                         }
 
-                        @Override
                         public void onRamdump(VirtualMachine vm, ParcelFileDescriptor ramdump) {
                             if (!mService.isShutdown()) {
                                 mPayloadOutput.postValue("(Kernel panic. Ramdump created)");
@@ -273,7 +256,7 @@ public class MainActivity extends AppCompatActivity {
                 VirtualMachineConfig.Builder builder =
                         new VirtualMachineConfig.Builder(getApplication(), "assets/vm_config.json");
                 if (debug) {
-                    builder.debugLevel(DebugLevel.FULL);
+                    builder.setDebugLevel(DEBUG_LEVEL_FULL);
                 }
                 VirtualMachineConfig config = builder.build();
                 VirtualMachineManager vmm = VirtualMachineManager.getInstance(getApplication());
@@ -285,7 +268,8 @@ public class MainActivity extends AppCompatActivity {
                     mVirtualMachine = vmm.create("demo_vm", config);
                 }
                 mVirtualMachine.run();
-                mVirtualMachine.setCallback(Executors.newSingleThreadExecutor(), callback);
+                mVirtualMachine.setVirtualMachineCallback(Executors.newSingleThreadExecutor(),
+                        callback);
                 mStatus.postValue(mVirtualMachine.getStatus());
 
                 InputStream console = mVirtualMachine.getConsoleOutputStream();
@@ -306,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
             }
             mVirtualMachine = null;
             mExecutorService.shutdownNow();
-            mStatus.postValue(VirtualMachine.Status.STOPPED);
+            mStatus.postValue(VirtualMachine.STATUS_STOPPED);
         }
 
         /** Returns the console output from the VM */
@@ -325,7 +309,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         /** Returns the status of the VM */
-        public LiveData<VirtualMachine.Status> getStatus() {
+        public LiveData<Integer> getStatus() {
             return mStatus;
         }
     }

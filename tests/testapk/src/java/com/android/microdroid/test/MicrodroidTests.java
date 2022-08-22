@@ -15,6 +15,9 @@
  */
 package com.android.microdroid.test;
 
+import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_FULL;
+import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_NONE;
+
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.TruthJUnit.assume;
 
@@ -24,9 +27,7 @@ import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.os.SystemProperties;
 import android.system.virtualmachine.VirtualMachine;
-import android.system.virtualmachine.VirtualMachineCallback;
 import android.system.virtualmachine.VirtualMachineConfig;
-import android.system.virtualmachine.VirtualMachineConfig.DebugLevel;
 import android.system.virtualmachine.VirtualMachineException;
 import android.util.Log;
 
@@ -98,10 +99,10 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             String primaryAbi = Build.SUPPORTED_ABIS[0];
             switch(primaryAbi) {
                 case "x86_64":
-                    builder.memoryMib(MIN_MEM_X86_64);
+                    builder.setMemoryMib(MIN_MEM_X86_64);
                     break;
                 case "arm64-v8a":
-                    builder.memoryMib(MIN_MEM_ARM64);
+                    builder.setMemoryMib(MIN_MEM_ARM64);
                     break;
             }
         }
@@ -123,7 +124,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                     private void testVMService(VirtualMachine vm) {
                         try {
                             ITestService testService = ITestService.Stub.asInterface(
-                                    vm.connectToVsockServer(ITestService.SERVICE_PORT).get());
+                                    vm.connectToVsockServer(ITestService.SERVICE_PORT));
                             testResults.mAddInteger = testService.addInteger(123, 456);
                             testResults.mAppRunProp =
                                     testService.readProperty("debug.microdroid.app.run");
@@ -166,8 +167,8 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     public void bootFailsWhenLowMem() throws VirtualMachineException, InterruptedException {
         for (int memMib : new int[]{ 10, 20, 40 }) {
             VirtualMachineConfig lowMemConfig = mInner.newVmConfigBuilder("assets/vm_config.json")
-                    .memoryMib(memMib)
-                    .debugLevel(DebugLevel.NONE)
+                    .setMemoryMib(memMib)
+                    .setDebugLevel(DEBUG_LEVEL_NONE)
                     .build();
             VirtualMachine vm = mInner.forceCreateNewVirtualMachine("low_mem", lowMemConfig);
             final CompletableFuture<Integer> exception = new CompletableFuture<>();
@@ -180,9 +181,9 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                         }
                     };
             listener.runToFinish(TAG, vm);
-            assertThat(exception.getNow(0)).isAnyOf(VirtualMachineCallback.DEATH_REASON_REBOOT,
-                    VirtualMachineCallback.DEATH_REASON_HANGUP,
-                    VirtualMachineCallback.DEATH_REASON_CRASH);
+            assertThat(exception.getNow(0)).isAnyOf(VmEventListener.DEATH_REASON_REBOOT,
+                    VmEventListener.DEATH_REASON_HANGUP,
+                    VmEventListener.DEATH_REASON_CRASH);
         }
     }
 
@@ -199,7 +200,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             .isNotEqualTo("5.4");
 
         VirtualMachineConfig.Builder builder = mInner.newVmConfigBuilder("assets/vm_config.json");
-        VirtualMachineConfig normalConfig = builder.debugLevel(DebugLevel.NONE).build();
+        VirtualMachineConfig normalConfig = builder.setDebugLevel(DEBUG_LEVEL_NONE).build();
         VirtualMachine vm = mInner.forceCreateNewVirtualMachine("test_vm", normalConfig);
         VmEventListener listener =
                 new VmEventListener() {
@@ -213,7 +214,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         // Launch the same VM with different debug level. The Java API prohibits this (thankfully).
         // For testing, we do that by creating another VM with debug level, and copy the config file
         // from the new VM directory to the old VM directory.
-        VirtualMachineConfig debugConfig = builder.debugLevel(DebugLevel.FULL).build();
+        VirtualMachineConfig debugConfig = builder.setDebugLevel(DEBUG_LEVEL_FULL).build();
         VirtualMachine newVm = mInner.forceCreateNewVirtualMachine("test_debug_vm", debugConfig);
         File vmRoot = new File(getContext().getFilesDir(), "vm");
         File newVmConfig = new File(new File(vmRoot, "test_debug_vm"), "config.xml");
@@ -251,7 +252,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                     public void onPayloadReady(VirtualMachine vm) {
                         try {
                             ITestService testService = ITestService.Stub.asInterface(
-                                    vm.connectToVsockServer(ITestService.SERVICE_PORT).get());
+                                    vm.connectToVsockServer(ITestService.SERVICE_PORT));
                             vmCdis.cdiAttest = testService.insecurelyExposeAttestationCdi();
                             vmCdis.cdiSeal = testService.insecurelyExposeSealingCdi();
                             forceStop(vm);
@@ -278,7 +279,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             .isNotEqualTo("5.4");
 
         VirtualMachineConfig normalConfig = mInner.newVmConfigBuilder("assets/vm_config.json")
-                .debugLevel(DebugLevel.FULL)
+                .setDebugLevel(DEBUG_LEVEL_FULL)
                 .build();
         mInner.forceCreateNewVirtualMachine("test_vm_a", normalConfig);
         mInner.forceCreateNewVirtualMachine("test_vm_b", normalConfig);
@@ -306,7 +307,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             .isNotEqualTo("5.4");
 
         VirtualMachineConfig normalConfig = mInner.newVmConfigBuilder("assets/vm_config.json")
-                .debugLevel(DebugLevel.FULL)
+                .setDebugLevel(DEBUG_LEVEL_FULL)
                 .build();
         mInner.forceCreateNewVirtualMachine("test_vm", normalConfig);
 
@@ -331,7 +332,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             .isNotEqualTo("5.4");
 
         VirtualMachineConfig normalConfig = mInner.newVmConfigBuilder("assets/vm_config.json")
-                .debugLevel(DebugLevel.FULL)
+                .setDebugLevel(DEBUG_LEVEL_FULL)
                 .build();
         VirtualMachine vm = mInner.forceCreateNewVirtualMachine("bcc_vm", normalConfig);
         final VmCdis vmCdis = new VmCdis();
@@ -343,7 +344,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                     public void onPayloadReady(VirtualMachine vm) {
                         try {
                             ITestService testService = ITestService.Stub.asInterface(
-                                    vm.connectToVsockServer(ITestService.SERVICE_PORT).get());
+                                    vm.connectToVsockServer(ITestService.SERVICE_PORT));
                             bcc.complete(testService.getBcc());
                             forceStop(vm);
                         } catch (Exception e) {
@@ -407,7 +408,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     private RandomAccessFile prepareInstanceImage(String vmName)
             throws VirtualMachineException, InterruptedException, IOException {
         VirtualMachineConfig config = mInner.newVmConfigBuilder("assets/vm_config.json")
-                .debugLevel(DebugLevel.FULL)
+                .setDebugLevel(DEBUG_LEVEL_FULL)
                 .build();
 
         mInner.forceCreateNewVirtualMachine(vmName, config);
@@ -439,7 +440,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(result.payloadStarted).isFalse();
 
         // This failure should shut the VM down immediately and shouldn't trigger a hangup.
-        assertThat(result.deathReason).isNotEqualTo(VirtualMachineCallback.DEATH_REASON_HANGUP);
+        assertThat(result.deathReason).isNotEqualTo(VmEventListener.DEATH_REASON_HANGUP);
     }
 
     @Test
@@ -502,12 +503,12 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             throws VirtualMachineException, InterruptedException, IOException {
         VirtualMachineConfig.Builder builder =
                 mInner.newVmConfigBuilder("assets/vm_config_no_task.json");
-        VirtualMachineConfig normalConfig = builder.debugLevel(DebugLevel.FULL).build();
+        VirtualMachineConfig normalConfig = builder.setDebugLevel(DEBUG_LEVEL_FULL).build();
         mInner.forceCreateNewVirtualMachine("test_vm_invalid_config", normalConfig);
 
         BootResult bootResult = tryBootVm(TAG, "test_vm_invalid_config");
         assertThat(bootResult.payloadStarted).isFalse();
         assertThat(bootResult.deathReason).isEqualTo(
-                VirtualMachineCallback.DEATH_REASON_MICRODROID_INVALID_PAYLOAD_CONFIG);
+                VmEventListener.DEATH_REASON_MICRODROID_INVALID_PAYLOAD_CONFIG);
     }
 }
