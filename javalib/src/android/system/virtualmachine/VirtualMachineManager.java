@@ -16,13 +16,16 @@
 
 package android.system.virtualmachine;
 
+import static java.util.Objects.requireNonNull;
+
 import android.annotation.NonNull;
 import android.annotation.Nullable;
+import android.annotation.SuppressLint;
+import android.annotation.SystemApi;
 import android.content.Context;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
-import java.util.Objects;
 import java.util.WeakHashMap;
 
 /**
@@ -30,6 +33,7 @@ import java.util.WeakHashMap;
  *
  * @hide
  */
+@SystemApi
 public class VirtualMachineManager {
     @NonNull private final Context mContext;
 
@@ -45,9 +49,11 @@ public class VirtualMachineManager {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
+    @SuppressLint("ManagerLookup") // Optional API
     public static VirtualMachineManager getInstance(@NonNull Context context) {
-        Objects.requireNonNull(context);
+        requireNonNull(context, "context must not be null");
         synchronized (sInstances) {
             VirtualMachineManager vmm =
                     sInstances.containsKey(context) ? sInstances.get(context).get() : null;
@@ -71,6 +77,7 @@ public class VirtualMachineManager {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public VirtualMachine create(
             @NonNull String name, @NonNull VirtualMachineConfig config)
@@ -86,6 +93,7 @@ public class VirtualMachineManager {
      *
      * @hide
      */
+    @SystemApi
     @Nullable
     public VirtualMachine get(@NonNull String name) throws VirtualMachineException {
         return VirtualMachine.load(mContext, name);
@@ -97,6 +105,7 @@ public class VirtualMachineManager {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public VirtualMachine getOrCreate(
             @NonNull String name, @NonNull VirtualMachineConfig config)
