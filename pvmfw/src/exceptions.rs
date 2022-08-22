@@ -20,7 +20,8 @@ use vmbase::{console::emergency_write_str, eprintln, power::reboot};
 #[no_mangle]
 extern "C" fn sync_exception_current(_elr: u64, _spsr: u64) {
     emergency_write_str("sync_exception_current\n");
-    print_esr();
+    let esr = read_esr();
+    print_esr(esr);
     reboot();
 }
 
@@ -39,14 +40,16 @@ extern "C" fn fiq_current(_elr: u64, _spsr: u64) {
 #[no_mangle]
 extern "C" fn serr_current(_elr: u64, _spsr: u64) {
     emergency_write_str("serr_current\n");
-    print_esr();
+    let esr = read_esr();
+    print_esr(esr);
     reboot();
 }
 
 #[no_mangle]
 extern "C" fn sync_lower(_elr: u64, _spsr: u64) {
     emergency_write_str("sync_lower\n");
-    print_esr();
+    let esr = read_esr();
+    print_esr(esr);
     reboot();
 }
 
@@ -65,15 +68,21 @@ extern "C" fn fiq_lower(_elr: u64, _spsr: u64) {
 #[no_mangle]
 extern "C" fn serr_lower(_elr: u64, _spsr: u64) {
     emergency_write_str("serr_lower\n");
-    print_esr();
+    let esr = read_esr();
+    print_esr(esr);
     reboot();
 }
 
 #[inline]
-fn print_esr() {
+fn read_esr() -> u64 {
     let mut esr: u64;
     unsafe {
         asm!("mrs {esr}, esr_el1", esr = out(reg) esr);
     }
+    esr
+}
+
+#[inline]
+fn print_esr(esr: u64) {
     eprintln!("esr={:#08x}", esr);
 }
