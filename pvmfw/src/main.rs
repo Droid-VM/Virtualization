@@ -18,27 +18,36 @@
 #![no_std]
 
 mod exceptions;
+mod smccc;
 
 use core::fmt;
 
+use vmbase::console::BASE_ADDRESS;
 use vmbase::{main, println};
 
 main!(main_wrapper);
 
 #[derive(Debug, Clone)]
-enum Error {}
+enum Error {
+    /// Failed to configure the UART; no logs available.
+    FailedUartSetup,
+}
 
 impl fmt::Display for Error {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        #[allow(clippy::match_single_binding)]
         let msg = match self {
-            _ => "",
+            Self::FailedUartSetup => "Failed to configure the UART",
         };
         write!(f, "{}", msg)
     }
 }
 
 fn main(fdt_address: u64, payload_start: u64, payload_size: u64, arg3: u64) -> Result<(), Error> {
+    let uart = BASE_ADDRESS as u64;
+    let mmio_granule = smccc::mmio_guard_info().map_err(|_| Error::FailedUartSetup)?;
+    let uart_page = uart & !(mmio_granule - 1);
+    smccc::mmio_guard_map(uart_page).map_err(|_| Error::FailedUartSetup)?;
+
     println!("pVM firmware");
     println!(
         "fdt_address={:#018x}, payload_start={:#018x}, payload_size={:#018x}, x3={:#018x}",
@@ -54,6 +63,8 @@ fn main(fdt_address: u64, payload_start: u64, payload_size: u64, arg3: u64) -> R
 pub fn main_wrapper(fdt_address: u64, payload_start: u64, payload_size: u64, arg3: u64) {
     match main(fdt_address, payload_start, payload_size, arg3) {
         Ok(()) => jump_to_payload(fdt_address, payload_start),
+        Err(Error::FailedUartSetup) => (),
+        #[allow(unreachable_patterns)]
         Err(e) => {
             println!("Boot rejected: {}", e);
         }
