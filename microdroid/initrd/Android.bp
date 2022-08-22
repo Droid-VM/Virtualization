@@ -11,3 +11,193 @@ rust_binary_host {
     ],
     prefer_rlib: true,
 }
+
+python_binary_host {
+    name: "gen_vbmeta_bootconfig",
+    srcs: ["gen_vbmeta_bootconfig.py"],
+}
+
+genrule {
+    name: "microdroid_initrd_gen",
+    srcs: [
+        ":microdroid_ramdisk",
+        ":microdroid_vendor_ramdisk",
+    ],
+    out: ["microdroid_initrd.img"],
+    cmd: "cat $(in) > $(out)",
+}
+
+// This contains vbmeta hashes & related (boot)configs which are passed to kernel/init
+genrule {
+    name: "microdroid_vbmeta_bootconfig_gen",
+    srcs: [":microdroid_vbmeta"],
+    out: ["bootconfig_microdroid_vbmeta"],
+    tools: [
+        "gen_vbmeta_bootconfig",
+        "avbtool",
+    ],
+    cmd: "$(location gen_vbmeta_bootconfig) $(location avbtool) $(in) > $(out)",
+}
+
+bootconfigs_arm64 = [
+    ":microdroid_bootconfig_arm64_gen",
+    ":microdroid_vbmeta_bootconfig_gen",
+]
+
+bootconfigs_x86_64 = [
+    ":microdroid_bootconfig_x86_64_gen",
+    ":microdroid_vbmeta_bootconfig_gen",
+]
+
+genrule {
+    name: "bootconfig_full_debuggable_arm64_gen",
+    srcs: bootconfigs_arm64 + [":microdroid_bootconfig_full_debuggable_src"],
+    out: ["bootconfig_arm64.full_debuggable"],
+    cmd: "cat $(in) > $(out)",
+}
+
+genrule {
+    name: "bootconfig_full_debuggable_x86_64_gen",
+    srcs: bootconfigs_x86_64 + [":microdroid_bootconfig_full_debuggable_src"],
+    out: ["bootconfig_x86_64.full_debuggable"],
+    cmd: "cat $(in) > $(out)",
+}
+
+genrule {
+    name: "bootconfig_app_debuggable_arm64_gen",
+    srcs: bootconfigs_arm64 + [":microdroid_bootconfig_app_debuggable_src"],
+    out: ["bootconfig_arm64.app_debuggable"],
+    cmd: "cat $(in) > $(out)",
+}
+
+genrule {
+    name: "bootconfig_app_debuggable_x86_64_gen",
+    srcs: bootconfigs_x86_64 + [":microdroid_bootconfig_app_debuggable_src"],
+    out: ["bootconfig_x86_64.app_debuggable"],
+    cmd: "cat $(in) > $(out)",
+}
+
+genrule {
+    name: "bootconfig_normal_arm64_gen",
+    srcs: bootconfigs_arm64 + [":microdroid_bootconfig_normal_src"],
+    out: ["bootconfig_arm64.normal"],
+    cmd: "cat $(in) > $(out)",
+}
+
+genrule {
+    name: "bootconfig_normal_x86_64_gen",
+    srcs: bootconfigs_x86_64 + [":microdroid_bootconfig_normal_src"],
+    out: ["bootconfig_x86_64.normal"],
+    cmd: "cat $(in) > $(out)",
+}
+
+genrule {
+    name: "microdroid_initrd_full_debuggable_arm64_gen",
+    tools: ["initrd_bootconfig"],
+    srcs: [
+        ":microdroid_initrd_gen",
+        ":bootconfig_full_debuggable_arm64_gen",
+    ],
+    out: ["microdroid_initrd_full_debuggable_arm64"],
+    cmd: "$(location initrd_bootconfig) $(in) $(out)",
+}
+
+genrule {
+    name: "microdroid_initrd_full_debuggable_x86_64_gen",
+    tools: ["initrd_bootconfig"],
+    srcs: [
+        ":microdroid_initrd_gen",
+        ":bootconfig_full_debuggable_x86_64_gen",
+    ],
+    out: ["microdroid_initrd_full_debuggable_x86_64"],
+    cmd: "$(location initrd_bootconfig) $(in) $(out)",
+}
+
+genrule {
+    name: "microdroid_initrd_app_debuggable_arm64_gen",
+    tools: ["initrd_bootconfig"],
+    srcs: [
+        ":microdroid_initrd_gen",
+        ":bootconfig_app_debuggable_arm64_gen",
+    ],
+    out: ["microdroid_initrd_app_debuggable_arm64"],
+    cmd: "$(location initrd_bootconfig) $(in) $(out)",
+}
+
+genrule {
+    name: "microdroid_initrd_app_debuggable_x86_64_gen",
+    tools: ["initrd_bootconfig"],
+    srcs: [
+        ":microdroid_initrd_gen",
+        ":bootconfig_app_debuggable_x86_64_gen",
+    ],
+    out: ["microdroid_initrd_app_debuggable_x86_64"],
+    cmd: "$(location initrd_bootconfig) $(in) $(out)",
+}
+
+genrule {
+    name: "microdroid_initrd_normal_arm64_gen",
+    tools: ["initrd_bootconfig"],
+    srcs: [
+        ":microdroid_initrd_gen",
+        ":bootconfig_normal_arm64_gen",
+    ],
+    out: ["microdroid_initrd_normal_arm64"],
+    cmd: "$(location initrd_bootconfig) $(in) $(out)",
+}
+
+genrule {
+    name: "microdroid_initrd_normal_x86_64_gen",
+    tools: ["initrd_bootconfig"],
+    srcs: [
+        ":microdroid_initrd_gen",
+        ":bootconfig_normal_x86_64_gen",
+    ],
+    out: ["microdroid_initrd_normal_x86_64"],
+    cmd: "$(location initrd_bootconfig) $(in) $(out)",
+}
+
+prebuilt_etc {
+    name: "microdroid_initrd_full_debuggable",
+    // We don't have ramdisk for architectures other than x86_64 & arm64
+    src: "empty_file",
+    arch: {
+        x86_64: {
+            src: ":microdroid_initrd_full_debuggable_x86_64_gen",
+        },
+        arm64: {
+            src: ":microdroid_initrd_full_debuggable_arm64_gen",
+        },
+    },
+    filename: "microdroid_initrd_full_debuggable.img",
+}
+
+prebuilt_etc {
+    name: "microdroid_initrd_app_debuggable",
+    // We don't have ramdisk for architectures other than x86_64 & arm64
+    src: "empty_file",
+    arch: {
+        x86_64: {
+            src: ":microdroid_initrd_app_debuggable_x86_64_gen",
+        },
+        arm64: {
+            src: ":microdroid_initrd_app_debuggable_arm64_gen",
+        },
+    },
+    filename: "microdroid_initrd_app_debuggable.img",
+}
+
+prebuilt_etc {
+    name: "microdroid_initrd_normal",
+    // We don't have ramdisk for architectures other than x86_64 & arm64
+    src: "empty_file",
+    arch: {
+        x86_64: {
+            src: ":microdroid_initrd_normal_x86_64_gen",
+        },
+        arm64: {
+            src: ":microdroid_initrd_normal_arm64_gen",
+        },
+    },
+    filename: "microdroid_initrd_normal.img",
+}
