@@ -11,3 +11,60 @@ rust_binary_host {
     ],
     prefer_rlib: true,
 }
+
+python_binary_host {
+    name: "gen_vbmeta_bootconfig",
+    srcs: ["gen_vbmeta_bootconfig.py"],
+}
+
+genrule {
+    name: "microdroid_initrd_gen",
+    srcs: [
+        ":microdroid_ramdisk",
+        ":microdroid_vendor_ramdisk",
+    ],
+    out: ["microdroid_initrd.img"],
+    cmd: "cat $(in) > $(out)",
+}
+
+// This contains vbmeta hashes & related (boot)configs which are passed to kernel/init
+genrule {
+    name: "microdroid_vbmeta_bootconfig_gen",
+    srcs: [":microdroid_vbmeta"],
+    out: ["bootconfig_microdroid_vbmeta"],
+    tools: [
+        "gen_vbmeta_bootconfig",
+        "avbtool",
+    ],
+    cmd: "$(location gen_vbmeta_bootconfig) $(location avbtool) $(in) > $(out)",
+}
+
+genrule {
+    name: "microdroid_bootconfig_full_debuggable_kernelboot_gen",
+    srcs: [
+        ":microdroid_bootconfig_arm64_gen",
+        ":microdroid_bootconfig_full_debuggable_src",
+        "bootconfig_vbmeta.arm64",
+        ":microdroid_vbmeta_bootconfig_gen",
+    ],
+    out: ["microdroid_bootconfig_kernelboot.full_debuggable"],
+    cmd: "cat $(in) > $(out)",
+}
+
+genrule {
+    name: "microdroid_initrd_full_debuggable_gen",
+    tools: ["initrd_bootconfig"],
+    srcs: [
+        ":microdroid_initrd_gen",
+        ":microdroid_bootconfig_full_debuggable_kernelboot_gen",
+    ],
+    out: ["microdroid_intit_bootconfig_full_debuggable"],
+    cmd: "$(location initrd_bootconfig) $(in) $(out)",
+}
+
+// Todo(b/240235424) Extend this to app_debuggable & normal mode
+prebuilt_etc {
+    name: "microdroid_initrd_full_debuggable",
+    src: ":microdroid_initrd_full_debuggable_gen",
+    filename: "microdroid_initrd_full_debuggable.img",
+}
