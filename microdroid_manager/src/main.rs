@@ -340,6 +340,8 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
         system_properties::write("ctl.stop", "tombstoned").context("Failed to stop tombstoned")?;
     }
 
+    load_crashkernel_if_supported().context("Failed to load crashkernel")?;
+
     ensure!(
         config.task.is_some(),
         MicrodroidError::InvalidConfig("No task in VM config".to_string())
@@ -608,6 +610,17 @@ fn load_config(path: &Path) -> Result<VmPayloadConfig> {
     info!("loading config from {:?}...", path);
     let file = ioutil::wait_for_file(path, WAIT_TIMEOUT)?;
     Ok(serde_json::from_reader(file)?)
+}
+
+/// Loads the crashkernel into memory using kexec if the VM is loaded with `crashkernel=' parameter
+/// in the cmdline.
+fn load_crashkernel_if_supported() -> Result<()> {
+    let supported = std::fs::read_to_string("/proc/cmdline")?.contains(" crashkernel=");
+    info!("ramdump supported: {}", supported);
+    if supported {
+        Command::new("/system/bin/kexec").spawn()?;
+    }
+    Ok(())
 }
 
 /// Executes the given task. Stdout of the task is piped into the vsock stream to the
