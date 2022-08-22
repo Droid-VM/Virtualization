@@ -15,13 +15,28 @@
 //! Exception handlers.
 
 use core::arch::asm;
-use vmbase::{console::emergency_write_str, eprintln, power::reboot};
+use vmbase::{
+    console::{emergency_write_str, BASE_ADDRESS},
+    eprintln,
+    power::reboot,
+};
+
+const ESR_32BIT_EXT_DABT: u64 = 0x96000010;
+const PAGE_SHIFT: u64 = 12; // Here, we assume 4KiB pages.
+const PAGE_MASK: u64 = !((1 << PAGE_SHIFT) - 1);
+
+fn uart_raises_exceptions(esr: u64, far: u64) -> bool {
+    esr == ESR_32BIT_EXT_DABT && (far & PAGE_MASK) == (BASE_ADDRESS as u64 & PAGE_MASK)
+}
 
 #[no_mangle]
 extern "C" fn sync_exception_current(_elr: u64, _spsr: u64) {
     let esr = read_esr();
-    emergency_write_str("sync_exception_current\n");
-    print_esr(esr);
+    let far = read_far();
+    if !uart_raises_exceptions(esr, far) {
+        emergency_write_str("sync_exception_current\n");
+        print_esr(esr);
+    }
     reboot();
 }
 
@@ -85,4 +100,13 @@ fn read_esr() -> u64 {
 #[inline]
 fn print_esr(esr: u64) {
     eprintln!("esr={:#08x}", esr);
+}
+
+#[inline]
+fn read_far() -> u64 {
+    let mut far: u64;
+    unsafe {
+        asm!("mrs {far}, far_el1", far = out(reg) far);
+    }
+    far
 }
