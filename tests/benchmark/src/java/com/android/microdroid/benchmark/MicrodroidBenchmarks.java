@@ -16,6 +16,9 @@
 
 package com.android.microdroid.benchmark;
 
+import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_FULL;
+import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_NONE;
+
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -27,7 +30,6 @@ import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineConfig;
-import android.system.virtualmachine.VirtualMachineConfig.DebugLevel;
 import android.system.virtualmachine.VirtualMachineException;
 import android.util.Log;
 
@@ -89,7 +91,7 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
             VirtualMachineConfig.Builder builder =
                     mInner.newVmConfigBuilder("assets/vm_config.json");
             VirtualMachineConfig normalConfig =
-                    builder.debugLevel(DebugLevel.NONE).memoryMib(mem).build();
+                    builder.setDebugLevel(DEBUG_LEVEL_NONE).setMemoryMib(mem).build();
             mInner.forceCreateNewVirtualMachine("test_vm_minimum_memory", normalConfig);
 
             if (tryBootVm(TAG, "test_vm_minimum_memory").payloadStarted) return true;
@@ -138,16 +140,14 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         List<Double> userspaceBootTimeMetrics = new ArrayList<>();
 
         for (int i = 0; i < trialCount; i++) {
-            VirtualMachineConfig.Builder builder =
-                    mInner.newVmConfigBuilder("assets/vm_config.json");
 
             // To grab boot events from log, set debug mode to FULL
-            VirtualMachineConfig normalConfig =
-                    builder.debugLevel(DebugLevel.FULL)
-                            .memoryMib(256)
-                            .numCpus(2)
-                            .cpuAffinity("0=0:1=1")
-                            .build();
+            VirtualMachineConfig normalConfig = mInner.newVmConfigBuilder("assets/vm_config.json")
+                    .setDebugLevel(DEBUG_LEVEL_FULL)
+                    .setMemoryMib(256)
+                    .setNumCpus(2)
+                    .setCpuAffinity("0=0:1=1")
+                    .build();
             mInner.forceCreateNewVirtualMachine("test_vm_boot_time", normalConfig);
 
             BootResult result = tryBootVm(TAG, "test_vm_boot_time");
@@ -191,12 +191,11 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
 
     @Test
     public void testVsockTransferFromHostToVM() throws Exception {
-        VirtualMachineConfig config =
-                mInner.newVmConfigBuilder("assets/vm_config_io.json")
-                        .debugLevel(DebugLevel.FULL)
-                        .numCpus(2)
-                        .cpuAffinity("0=0:1=1")
-                        .build();
+        VirtualMachineConfig config = mInner.newVmConfigBuilder("assets/vm_config_io.json")
+                .setDebugLevel(DEBUG_LEVEL_FULL)
+                .setNumCpus(2)
+                .setCpuAffinity("0=0:1=1")
+                .build();
         List<Double> transferRates = new ArrayList<>(IO_TEST_TRIAL_COUNT);
 
         for (int i = 0; i < IO_TEST_TRIAL_COUNT; ++i) {
@@ -220,12 +219,11 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
     }
 
     private void testVirtioBlkReadRate(boolean isRand) throws Exception {
-        VirtualMachineConfig config =
-                mInner.newVmConfigBuilder("assets/vm_config_io.json")
-                        .debugLevel(DebugLevel.FULL)
-                        .numCpus(2)
-                        .cpuAffinity("0=0:1=1")
-                        .build();
+        VirtualMachineConfig config = mInner.newVmConfigBuilder("assets/vm_config_io.json")
+                .setDebugLevel(DEBUG_LEVEL_FULL)
+                .setNumCpus(2)
+                .setCpuAffinity("0=0:1=1")
+                .build();
         List<Double> readRates = new ArrayList<>(IO_TEST_TRIAL_COUNT);
 
         for (int i = 0; i < IO_TEST_TRIAL_COUNT + 1; ++i) {
@@ -286,8 +284,8 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         final String vmName = "test_vm_mem_usage";
         VirtualMachineConfig config =
                 mInner.newVmConfigBuilder("assets/vm_config_io.json")
-                        .debugLevel(DebugLevel.NONE)
-                        .memoryMib(256)
+                        .setDebugLevel(DEBUG_LEVEL_NONE)
+                        .setMemoryMib(256)
                         .build();
         mInner.forceCreateNewVirtualMachine(vmName, config);
         VirtualMachine vm = mInner.getVirtualMachineManager().get(vmName);

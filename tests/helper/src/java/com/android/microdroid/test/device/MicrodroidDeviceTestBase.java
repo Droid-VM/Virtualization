@@ -71,7 +71,7 @@ public abstract class MicrodroidDeviceTestBase {
         /** Create a new VirtualMachineConfig.Builder with the parameterized protection mode. */
         public VirtualMachineConfig.Builder newVmConfigBuilder(String payloadConfigPath) {
             return new VirtualMachineConfig.Builder(mContext, payloadConfigPath)
-                        .protectedVm(mProtectedVm);
+                        .setProtectedVm(mProtectedVm);
         }
 
         /**
@@ -128,7 +128,7 @@ public abstract class MicrodroidDeviceTestBase {
         return SystemProperties.getBoolean("ro.boot.hypervisor.protected_vm.supported", false);
     }
 
-    public abstract static class VmEventListener implements VirtualMachineCallback {
+    public abstract static class VmEventListener extends VirtualMachineCallback {
         private ExecutorService mExecutorService = Executors.newSingleThreadExecutor();
         private OptionalLong mVcpuStartedNanoTime = OptionalLong.empty();
         private OptionalLong mKernelStartedNanoTime = OptionalLong.empty();
@@ -185,7 +185,7 @@ public abstract class MicrodroidDeviceTestBase {
 
         public void runToFinish(String logTag, VirtualMachine vm)
                 throws VirtualMachineException, InterruptedException {
-            vm.setCallback(mExecutorService, this);
+            vm.setVirtualMachineCallback(mExecutorService, this);
             vm.run();
             logVmOutputAndMonitorBootEvents(logTag, vm.getConsoleOutputStream(), "Console");
             logVmOutput(logTag, vm.getLogOutputStream(), "Log");
@@ -210,7 +210,7 @@ public abstract class MicrodroidDeviceTestBase {
 
         protected void forceStop(VirtualMachine vm) {
             try {
-                vm.clearCallback();
+                vm.clearVirtualMachineCallback();
                 vm.stop();
                 mExecutorService.shutdown();
             } catch (VirtualMachineException e) {
@@ -327,7 +327,7 @@ public abstract class MicrodroidDeviceTestBase {
         listener.runToFinish(logTag, vm);
         return new BootResult(
                 payloadStarted.getNow(false),
-                deathReason.getNow(VirtualMachineCallback.DEATH_REASON_INFRASTRUCTURE_ERROR),
+                deathReason.getNow(VmEventListener.DEATH_REASON_INFRASTRUCTURE_ERROR),
                 apiCallNanoTime,
                 endTime.getNow(apiCallNanoTime) - apiCallNanoTime,
                 listener.getVcpuStartedNanoTime(),
