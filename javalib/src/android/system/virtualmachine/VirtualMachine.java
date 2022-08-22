@@ -22,6 +22,7 @@ import static android.os.ParcelFileDescriptor.MODE_READ_WRITE;
 import android.annotation.CallbackExecutor;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
+import android.annotation.SystemApi;
 import android.content.Context;
 import android.os.Binder;
 import android.os.IBinder;
@@ -64,6 +65,7 @@ import java.util.zip.ZipFile;
  *
  * @hide
  */
+@SystemApi
 public class VirtualMachine {
     /** Name of the directory under the files directory where all VMs created for the app exist. */
     private static final String VM_DIR = "vm";
@@ -267,6 +269,7 @@ public class VirtualMachine {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public String getName() {
         return mName;
@@ -281,6 +284,7 @@ public class VirtualMachine {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public VirtualMachineConfig getConfig() {
         return mConfig;
@@ -291,6 +295,7 @@ public class VirtualMachine {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public Status getStatus() throws VirtualMachineException {
         try {
@@ -322,6 +327,7 @@ public class VirtualMachine {
      *
      * @hide
      */
+    @SystemApi
     public void setCallback(
             @NonNull @CallbackExecutor Executor executor,
             @NonNull VirtualMachineCallback callback) {
@@ -336,6 +342,7 @@ public class VirtualMachine {
      *
      * @hide
      */
+    @SystemApi
     public void clearCallback() {
         synchronized (mLock) {
             mCallback = null;
@@ -369,6 +376,7 @@ public class VirtualMachine {
      *
      * @hide
      */
+    @SystemApi
     public void run() throws VirtualMachineException {
         if (getStatus() != Status.STOPPED) {
             throw new VirtualMachineException(this + " is not in stopped state");
@@ -485,6 +493,7 @@ public class VirtualMachine {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public InputStream getConsoleOutputStream() throws VirtualMachineException {
         if (mConsoleReader == null) {
@@ -498,6 +507,7 @@ public class VirtualMachine {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public InputStream getLogOutputStream() throws VirtualMachineException {
         if (mLogReader == null) {
@@ -514,6 +524,7 @@ public class VirtualMachine {
      *
      * @hide
      */
+    @SystemApi
     public void stop() throws VirtualMachineException {
         if (mVirtualMachine == null) return;
         try {
@@ -532,6 +543,7 @@ public class VirtualMachine {
      *
      * @hide
      */
+    @SystemApi
     public void delete() throws VirtualMachineException {
         if (getStatus() != Status.STOPPED) {
             throw new VirtualMachineException("Virtual machine is not stopped");
@@ -551,6 +563,7 @@ public class VirtualMachine {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public Optional<Integer> getCid() throws VirtualMachineException {
         if (getStatus() != Status.RUNNING) {
@@ -576,6 +589,7 @@ public class VirtualMachine {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public VirtualMachineConfig setConfig(@NonNull VirtualMachineConfig newConfig)
             throws VirtualMachineException {
@@ -610,6 +624,7 @@ public class VirtualMachine {
      *
      * @hide
      */
+    @SystemApi
     public Future<IBinder> connectToVsockServer(int port) throws VirtualMachineException {
         if (getStatus() != Status.RUNNING) {
             throw new VirtualMachineException("VM is not running");
@@ -623,6 +638,7 @@ public class VirtualMachine {
      *
      * @hide
      */
+    @SystemApi
     public ParcelFileDescriptor connectVsock(int port) throws VirtualMachineException {
         try {
             return mVirtualMachine.connectVsock(port);
