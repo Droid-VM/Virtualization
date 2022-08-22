@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "557921dc_06a3bb47",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-08-22T07:56:01Z",
+      "side": 1,
+      "message": "Is it safe to call this here? Is it impossible that `callback_on_ramdump` somehow gets stuck or panicked?",
+      "range": {
+        "startLine": 341,
+        "startChar": 0,
+        "endLine": 341,
+        "endChar": 61
+      },
+      "revId": "1612b90f62162796160ea41951d7c4d74200c32d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
