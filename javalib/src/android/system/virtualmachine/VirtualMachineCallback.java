@@ -19,6 +19,7 @@ package android.system.virtualmachine;
 import android.annotation.IntDef;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
+import android.annotation.SystemApi;
 import android.os.ParcelFileDescriptor;
 
 import java.lang.annotation.Retention;
@@ -30,6 +31,7 @@ import java.lang.annotation.RetentionPolicy;
  *
  * @hide
  */
+@SystemApi
 public interface VirtualMachineCallback {
     /** @hide */
     @Retention(RetentionPolicy.SOURCE)
