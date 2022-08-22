@@ -578,3 +578,8 @@ prebuilt_etc {
     filename: "event-log-tags",
     installable: false,
 }
+
+filegroup {
+    name: "microdroid_bootconfig_full_debuggable_src",
+    srcs: ["bootconfig.full_debuggable"],
+}
