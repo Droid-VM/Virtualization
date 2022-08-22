@@ -19,6 +19,7 @@ package android.system.virtualmachine;
 import static android.os.ParcelFileDescriptor.MODE_READ_ONLY;
 
 import android.annotation.NonNull;
+import android.annotation.SystemApi;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.PackageInfoFlags;
@@ -46,6 +47,7 @@ import java.util.regex.Pattern;
  *
  * @hide
  */
+@SystemApi
 public final class VirtualMachineConfig {
     // These defines the schema of the config file persisted on disk.
     private static final int VERSION = 1;
@@ -68,6 +70,7 @@ public final class VirtualMachineConfig {
      *
      * @hide
      */
+    @SystemApi
     public enum DebugLevel {
         /**
          * Not debuggable at all. No log is exported from the VM. Debugger can't be attached to the
@@ -197,6 +200,7 @@ public final class VirtualMachineConfig {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public String getPayloadConfigPath() {
         return mPayloadConfigPath;
@@ -211,6 +215,7 @@ public final class VirtualMachineConfig {
      *
      * @hide
      */
+    @SystemApi
     public boolean isCompatibleWith(@NonNull VirtualMachineConfig other) {
         if (!Arrays.equals(this.mCerts, other.mCerts)) {
             return false;
@@ -261,6 +266,7 @@ public final class VirtualMachineConfig {
      *
      * @hide
      */
+    @SystemApi
     public static class Builder {
         private final Context mContext;
         private final String mPayloadConfigPath;
@@ -275,6 +281,7 @@ public final class VirtualMachineConfig {
          *
          * @hide
          */
+        @SystemApi
         public Builder(@NonNull Context context, @NonNull String payloadConfigPath) {
             mContext = Objects.requireNonNull(context);
             mPayloadConfigPath = Objects.requireNonNull(payloadConfigPath);
@@ -289,6 +296,7 @@ public final class VirtualMachineConfig {
          *
          * @hide
          */
+        @SystemApi
         public Builder debugLevel(DebugLevel debugLevel) {
             mDebugLevel = debugLevel;
             return this;
@@ -299,6 +307,7 @@ public final class VirtualMachineConfig {
          *
          * @hide
          */
+        @SystemApi
         public Builder protectedVm(boolean protectedVm) {
             mProtectedVm = protectedVm;
             return this;
@@ -310,6 +319,7 @@ public final class VirtualMachineConfig {
          *
          * @hide
          */
+        @SystemApi
         public Builder memoryMib(int memoryMib) {
             mMemoryMib = memoryMib;
             return this;
@@ -320,6 +330,7 @@ public final class VirtualMachineConfig {
          *
          * @hide
          */
+        @SystemApi
         public Builder numCpus(int num) {
             mNumCpus = num;
             return this;
@@ -333,6 +344,7 @@ public final class VirtualMachineConfig {
          *
          * @hide
          */
+        @SystemApi
         public Builder cpuAffinity(String affinity) {
             mCpuAffinity = affinity;
             return this;
@@ -343,6 +355,7 @@ public final class VirtualMachineConfig {
          *
          * @hide
          */
+        @SystemApi
         @NonNull
         public VirtualMachineConfig build() {
             final String apkPath = mContext.getPackageCodePath();
