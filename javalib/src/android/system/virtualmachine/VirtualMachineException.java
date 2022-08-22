@@ -16,7 +16,10 @@
 
 package android.system.virtualmachine;
 
+import android.annotation.SystemApi;
+
 /** @hide */
+@SystemApi
 public class VirtualMachineException extends Exception {
     public VirtualMachineException() {
         super();

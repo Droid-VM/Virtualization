@@ -18,6 +18,7 @@ package android.system.virtualmachine;
 
 import android.annotation.NonNull;
 import android.annotation.Nullable;
+import android.annotation.SystemApi;
 import android.content.Context;
 
 import java.lang.ref.WeakReference;
@@ -30,6 +31,7 @@ import java.util.WeakHashMap;
  *
  * @hide
  */
+@SystemApi
 public class VirtualMachineManager {
     @NonNull private final Context mContext;
 
@@ -45,6 +47,7 @@ public class VirtualMachineManager {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public static VirtualMachineManager getInstance(@NonNull Context context) {
         Objects.requireNonNull(context);
@@ -71,6 +74,7 @@ public class VirtualMachineManager {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public VirtualMachine create(
             @NonNull String name, @NonNull VirtualMachineConfig config)
@@ -86,6 +90,7 @@ public class VirtualMachineManager {
      *
      * @hide
      */
+    @SystemApi
     @Nullable
     public VirtualMachine get(@NonNull String name) throws VirtualMachineException {
         return VirtualMachine.load(mContext, name);
@@ -97,6 +102,7 @@ public class VirtualMachineManager {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public VirtualMachine getOrCreate(
             @NonNull String name, @NonNull VirtualMachineConfig config)
