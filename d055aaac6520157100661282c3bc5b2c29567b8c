@@ -16,6 +16,23 @@
       "message": "Mostly a proof of concept; but it does work!",
       "revId": "d055aaac6520157100661282c3bc5b2c29567b8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b35e7b20_5ea4cf74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-23T14:44:50Z",
+      "side": 1,
+      "message": "So although the jarjar stuff works locally, it looks like it doesn\u0027t work in TH - we get consistent failures saying `java.lang.NoSuchMethodError: No static method hypervisor_vm_supported()Ljava/util/Optional; in class Landroid/sysprop/HypervisorProperties; or its super classes (declaration of \u0027android.sysprop.HypervisorProperties\u0027 appears in /system/framework/framework.jar!classes3.dex)`\n\nI need to dig into what\u0027s going on.\n\n",
+      "revId": "d055aaac6520157100661282c3bc5b2c29567b8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
