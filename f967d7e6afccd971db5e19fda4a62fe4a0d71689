@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "164b3eae_93ca7c8c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-23T10:20:39Z",
+      "side": 1,
+      "message": "I think that\u0027s expected - reboot puts you back to the default, because it restarts adbd.",
+      "range": {
+        "startLine": 15,
+        "startChar": 3,
+        "endLine": 16,
+        "endChar": 27
+      },
+      "revId": "f967d7e6afccd971db5e19fda4a62fe4a0d71689",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f4c0815_8a6dc4a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-23T10:20:39Z",
+      "side": 1,
+      "message": "Hmm, that shouldn\u0027t be happening.\nI suspect the problem is that boot isn\u0027t really complete, or at least some of the necessary services haven\u0027t started yet. It seems to be quite difficult to determine when it\u0027s ok.",
+      "range": {
+        "startLine": 17,
+        "startChar": 3,
+        "endLine": 18,
+        "endChar": 54
+      },
+      "revId": "f967d7e6afccd971db5e19fda4a62fe4a0d71689",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32b22a97_b7a47606",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-23T10:20:39Z",
+      "side": 1,
+      "message": "Thanks!\nBTW: A good way to handle this sort of CL is to start by reverting the revert - so you have a new CL which is exactly the same as the original. Then edit the commit message and upload any changes as subsequent patchsets. That makes it easier for reviewers to see what\u0027s changed since the first try.",
+      "revId": "f967d7e6afccd971db5e19fda4a62fe4a0d71689",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
