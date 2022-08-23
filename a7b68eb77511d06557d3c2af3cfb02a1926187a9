@@ -16,6 +16,29 @@
       "message": "thanks for review",
       "revId": "a7b68eb77511d06557d3c2af3cfb02a1926187a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd12a3ff_d9796bbb",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-23T17:35:01Z",
+      "side": 1,
+      "message": "I just noticed some problems:\n1. you don\u0027t need to restore, since the property does not survive after a reboot\n2. for the same reason, L73 won\u0027t really work as expected.  There\u0027s a reboot in the loop at L101, so the property only applies to the first iteration.\n\nMy suggestion is to remove L66-71,87-92, and move L73 to before L105.  WDYT?",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 9
+      },
+      "revId": "a7b68eb77511d06557d3c2af3cfb02a1926187a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
