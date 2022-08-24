@@ -30,6 +30,7 @@ rust_binary {
     name: "zipfuse",
     defaults: ["zipfuse.defaults"],
     bootstrap: true,
+    static_executable: true,
 }
 
 rust_test {
