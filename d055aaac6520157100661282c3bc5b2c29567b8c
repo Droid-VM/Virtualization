@@ -89,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cef0c94_8b826741",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-24T11:56:21Z",
+      "side": 1,
+      "message": "The test APK shouldn\u0027t be calling the renamed HypervisorProperties, that\u0027s definitely an implementation detail.\nSo I\u0027ve temporarily just inlined those calls, with a TODO to fix once we have the right API.",
+      "parentUuid": "18c81a43_8152685a",
+      "revId": "d055aaac6520157100661282c3bc5b2c29567b8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09dfcfaf_005319f1",
