@@ -60,6 +60,7 @@ use std::io::{Error, ErrorKind, Write, Read};
 use std::num::NonZeroU32;
 use std::os::unix::io::{FromRawFd, IntoRawFd};
 use std::path::{Path, PathBuf};
+use std::time::SystemTime;
 use std::sync::{Arc, Mutex, Weak};
 use tombstoned_client::{TombstonedConnection, DebuggerdDumpType};
 use vmconfig::VmConfig;
@@ -347,6 +348,7 @@ impl VirtualizationService {
         let requester_sid = get_calling_sid()?;
         let requester_debug_pid = ThreadState::get_calling_pid();
         let cid = next_cid().or(Err(ExceptionCode::ILLEGAL_STATE))?;
+        let vm_creation_timestamp = SystemTime::now();
 
         // Counter to generate unique IDs for temporary image files.
         let mut next_temporary_image_id = 0;
@@ -477,6 +479,7 @@ impl VirtualizationService {
                 requester_uid,
                 requester_sid,
                 requester_debug_pid,
+                vm_creation_timestamp,
             )
             .map_err(|e| {
                 error!("Failed to create VM with config {:?}: {:?}", config, e);
@@ -1046,7 +1049,7 @@ impl IVirtualMachineService for VirtualMachineService {
             let stream = vm.stream.lock().unwrap().take();
             vm.callbacks.notify_payload_started(cid, stream);
 
-            write_vm_booted_stats(vm.requester_uid as i32, &vm.name);
+            write_vm_booted_stats(vm.requester_uid as i32, &vm.name, &vm.vm_creation_timestamp);
             Ok(())
         } else {
             error!("notifyPayloadStarted is called from an unknown CID {}", cid);
