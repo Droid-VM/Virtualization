@@ -25,6 +25,7 @@ use binder::ThreadState;
 use log::{trace, warn};
 use microdroid_payload_config::VmPayloadConfig;
 use statslog_virtualization_rust::{vm_booted, vm_creation_requested, vm_exited};
+use std::time::SystemTime;
 use zip::ZipArchive;
 
 fn get_vm_payload_config(config: &VirtualMachineAppConfig) -> Result<VmPayloadConfig> {
@@ -116,8 +117,13 @@ pub fn write_vm_creation_stats(
 }
 
 /// Write the stats of VM boot to statsd
-pub fn write_vm_booted_stats(uid: i32, vm_identifier: &String) {
-    let vm_booted = vm_booted::VmBooted { uid, vm_identifier };
+pub fn write_vm_booted_stats(uid: i32, vm_identifier: &String, creation_timestamp: &SystemTime) {
+    let duration = creation_timestamp.elapsed().unwrap_or_default();
+    let vm_booted = vm_booted::VmBooted {
+        uid,
+        vm_identifier,
+        elapsed_time_milli_sec: duration.as_millis() as i64,
+    };
     match vm_booted.stats_write() {
         Err(e) => {
             warn!("statslog_rust failed with error: {}", e);
@@ -127,10 +133,17 @@ pub fn write_vm_booted_stats(uid: i32, vm_identifier: &String) {
 }
 
 /// Write the stats of VM exit to statsd
-pub fn write_vm_exited_stats(uid: i32, vm_identifier: &String, reason: DeathReason) {
+pub fn write_vm_exited_stats(
+    uid: i32,
+    vm_identifier: &String,
+    reason: DeathReason,
+    creation_timestamp: &SystemTime,
+) {
+    let duration = creation_timestamp.elapsed().unwrap_or_default();
     let vm_exited = vm_exited::VmExited {
         uid,
         vm_identifier,
+        elapsed_time_milli_sec: duration.as_millis() as i64,
         death_reason: match reason {
             DeathReason::INFRASTRUCTURE_ERROR => vm_exited::DeathReason::InfrastructureError,
             DeathReason::KILLED => vm_exited::DeathReason::Killed,

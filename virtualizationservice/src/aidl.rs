@@ -1046,7 +1046,7 @@ impl IVirtualMachineService for VirtualMachineService {
             let stream = vm.stream.lock().unwrap().take();
             vm.callbacks.notify_payload_started(cid, stream);
 
-            write_vm_booted_stats(vm.requester_uid as i32, &vm.name);
+            write_vm_booted_stats(vm.requester_uid as i32, &vm.name, &vm.vm_start_timestamp);
             Ok(())
         } else {
             error!("notifyPayloadStarted is called from an unknown CID {}", cid);
