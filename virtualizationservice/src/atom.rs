@@ -25,6 +25,7 @@ use binder::ThreadState;
 use log::{trace, warn};
 use microdroid_payload_config::VmPayloadConfig;
 use statslog_virtualization_rust::{vm_booted, vm_creation_requested, vm_exited};
+use std::time::SystemTime;
 use zip::ZipArchive;
 
 fn get_vm_payload_config(config: &VirtualMachineAppConfig) -> Result<VmPayloadConfig> {
@@ -34,6 +35,11 @@ fn get_vm_payload_config(config: &VirtualMachineAppConfig) -> Result<VmPayloadCo
     let config_file = apk_zip.by_name(&config.configPath)?;
     let vm_payload_config: VmPayloadConfig = serde_json::from_reader(config_file)?;
     Ok(vm_payload_config)
+}
+
+fn get_elapsed_time(creation_timestamp: &SystemTime) -> Result<i64> {
+    let duration = creation_timestamp.elapsed()?;
+    Ok(duration.as_millis() as i64)
 }
 
 /// Write the stats of VMCreation to statsd
@@ -116,8 +122,12 @@ pub fn write_vm_creation_stats(
 }
 
 /// Write the stats of VM boot to statsd
-pub fn write_vm_booted_stats(uid: i32, vm_identifier: &String) {
-    let vm_booted = vm_booted::VmBooted { uid, vm_identifier };
+pub fn write_vm_booted_stats(uid: i32, vm_identifier: &String, creation_timestamp: &SystemTime) {
+    let vm_booted = vm_booted::VmBooted {
+        uid,
+        vm_identifier,
+        elapsed_time_msec: get_elapsed_time(creation_timestamp).unwrap_or_default(),
+    };
     match vm_booted.stats_write() {
         Err(e) => {
             warn!("statslog_rust failed with error: {}", e);
@@ -127,10 +137,16 @@ pub fn write_vm_booted_stats(uid: i32, vm_identifier: &String) {
 }
 
 /// Write the stats of VM exit to statsd
-pub fn write_vm_exited_stats(uid: i32, vm_identifier: &String, reason: DeathReason) {
+pub fn write_vm_exited_stats(
+    uid: i32,
+    vm_identifier: &String,
+    reason: DeathReason,
+    creation_timestamp: &SystemTime,
+) {
     let vm_exited = vm_exited::VmExited {
         uid,
         vm_identifier,
+        elapsed_time_msec: get_elapsed_time(creation_timestamp).unwrap_or_default(),
         death_reason: match reason {
             DeathReason::INFRASTRUCTURE_ERROR => vm_exited::DeathReason::InfrastructureError,
             DeathReason::KILLED => vm_exited::DeathReason::Killed,
