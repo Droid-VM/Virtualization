@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "71651b40_58cb85f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-24T08:51:42Z",
+      "side": 1,
+      "message": "I don\u0027t think so? jarjar is supposed to rename the classes and also all uses of them.\nIt does work just fine locally, and the javalib impl jar contains exactly what I\u0027d expect.",
+      "parentUuid": "0d6ebd75_4789265e",
+      "revId": "d055aaac6520157100661282c3bc5b2c29567b8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09dfcfaf_005319f1",
         "filename": "javalib/jarjar-rules.txt",
         "patchSetId": 2
@@ -66,6 +84,30 @@
       "writtenOn": "2022-08-24T04:05:01Z",
       "side": 1,
       "message": "you don\u0027t intend to expose these APIs to apps, right?",
+      "range": {
+        "startLine": 9,
+        "startChar": 24,
+        "endLine": 9,
+        "endChar": 68
+      },
+      "revId": "d055aaac6520157100661282c3bc5b2c29567b8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffb151d8_35eaf231",
+        "filename": "javalib/jarjar-rules.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-24T08:51:42Z",
+      "side": 1,
+      "message": "That\u0027s right. (Hence com.android.*)\n\nThe plan is to expose some capability query API on top of them.\n\nThe rename here is just to avoid having two classes with the same name on the classpath (the original class is in the framework, even if all the methods are inaccessible.)",
+      "parentUuid": "09dfcfaf_005319f1",
       "range": {
         "startLine": 9,
         "startChar": 24,
