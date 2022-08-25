@@ -17,7 +17,7 @@
 use crate::atom::{write_vm_booted_stats, write_vm_creation_stats};
 use crate::composite::make_composite_image;
 use crate::crosvm::{CrosvmConfig, DiskFile, PayloadState, VmInstance, VmState};
-use crate::payload::add_microdroid_images;
+use crate::payload::{add_microdroid_images};
 use crate::{Cid, FIRST_GUEST_CID, SYSPROP_LAST_CID};
 use crate::selinux::{SeContext, getfilecon};
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
@@ -630,7 +630,7 @@ fn load_app_config(
     vm_config.cpuAffinity = config.cpuAffinity.clone();
     vm_config.taskProfiles = config.taskProfiles.clone();
 
-    // Microdroid requires an additional payload disk image and the bootconfig partition.
+    // Microdroid requires an additional init ramdisk & payload disk image
     if os_name == "microdroid" {
         add_microdroid_images(
             config,
