@@ -351,6 +351,42 @@ pub fn add_microdroid_images(
     vm_payload_config: &VmPayloadConfig,
     vm_config: &mut VirtualMachineRawConfig,
 ) -> Result<()> {
+    let debug_suffix = match config.debugLevel {
+        DebugLevel::NONE => "normal",
+        DebugLevel::APP_ONLY => "app_debuggable",
+        DebugLevel::FULL => "full_debuggable",
+        _ => return Err(anyhow!("unsupported debug level: {:?}", config.debugLevel)),
+    };
+    let initrd_with_bootconfig_file =
+        format!("apex/com.android.virt/etc/microdroid_initrd_{}.img", debug_suffix);
+    vm_config.initrd = Some(open_parcel_file(Path::new(&initrd_with_bootconfig_file), false)?);
+
+    let instance_img = Partition {
+        label: "vm-instance".to_owned(),
+        image: Some(ParcelFileDescriptor::new(instance_file)),
+        writable: true,
+    };
+    vm_config.disks.push(DiskImage { image: None, partitions: vec![instance_img], writable: true });
+    vm_config.disks.push(make_payload_disk(
+        config,
+        apk_file,
+        idsig_file,
+        vm_payload_config,
+        temporary_directory,
+    )?);
+
+    Ok(())
+}
+
+pub fn add_microdroid_images_legacy(
+    config: &VirtualMachineAppConfig,
+    temporary_directory: &Path,
+    apk_file: File,
+    idsig_file: File,
+    instance_file: File,
+    vm_payload_config: &VmPayloadConfig,
+    vm_config: &mut VirtualMachineRawConfig,
+) -> Result<()> {
     vm_config.disks.push(make_payload_disk(
         config,
         apk_file,

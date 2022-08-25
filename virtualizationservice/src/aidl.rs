@@ -16,7 +16,7 @@
 
 use crate::composite::make_composite_image;
 use crate::crosvm::{CrosvmConfig, DiskFile, PayloadState, VmInstance, VmState};
-use crate::payload::add_microdroid_images;
+use crate::payload::{add_microdroid_images, add_microdroid_images_legacy};
 use crate::{Cid, FIRST_GUEST_CID, SYSPROP_LAST_CID};
 use crate::selinux::{SeContext, getfilecon};
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
@@ -641,9 +641,13 @@ fn load_app_config(
 
     // It is safe to construct a filename based on the os_name because we've already checked that it
     // is one of the allowed values.
-    let vm_config_path = PathBuf::from(format!("/apex/com.android.virt/etc/{}.json", os_name));
+    // Protected mode still uses the legacy boot flow - which includes ABL
+    let config_name = if config.protectedVm { "microdroid_legacy.json" } else { "microdroid.json" };
+
+    let vm_config_path = PathBuf::from(format!("/apex/com.android.virt/etc/{}", config_name));
     let vm_config_file = File::open(vm_config_path)?;
     let mut vm_config = VmConfig::load(&vm_config_file)?.to_parcelable()?;
+    info!("config is {:?}:", vm_config);
 
     if config.memoryMib > 0 {
         vm_config.memoryMib = config.memoryMib;
@@ -654,17 +658,30 @@ fn load_app_config(
     vm_config.cpuAffinity = config.cpuAffinity.clone();
     vm_config.taskProfiles = config.taskProfiles.clone();
 
-    // Microdroid requires an additional payload disk image and the bootconfig partition.
+    // Microdroid requires an additional init ramdisk & payload disk image
     if os_name == "microdroid" {
-        add_microdroid_images(
-            config,
-            temporary_directory,
-            apk_file,
-            idsig_file,
-            instance_file,
-            &vm_payload_config,
-            &mut vm_config,
-        )?;
+        // We are using the new Microdroid boot flow (aka kernel boot) non-protected mode
+        if !config.protectedVm {
+            add_microdroid_images(
+                config,
+                temporary_directory,
+                apk_file,
+                idsig_file,
+                instance_file,
+                &vm_payload_config,
+                &mut vm_config,
+            )?;
+        } else {
+            add_microdroid_images_legacy(
+                config,
+                temporary_directory,
+                apk_file,
+                idsig_file,
+                instance_file,
+                &vm_payload_config,
+                &mut vm_config,
+            )?;
+        }
     }
 
     Ok(vm_config)
