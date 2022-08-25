@@ -593,3 +593,17 @@ filegroup {
     name: "microdroid_bootconfig_normal_src",
     srcs: ["bootconfig.normal"],
 }
+
+prebuilt_etc {
+    name: "microdroid_kernel",
+    src: "empty_kernel",
+    filename: "microdroid_kernel",
+    arch: {
+        arm64: {
+            src: ":microdroid_kernel_prebuilts-5.15-arm64",
+        },
+        x86_64: {
+            src: ":microdroid_kernel_prebuilts-5.15-x86_64",
+        },
+    },
+}
