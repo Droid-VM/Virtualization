@@ -553,7 +553,7 @@ public class MicrodroidTestCase extends MicrodroidHostTestCaseBase {
 
         // Pull etc/microdroid.json
         File virtApexDir = FileUtil.createTempDir("virt_apex");
-        File microdroidConfigFile = new File(virtApexDir, "microdroid.json");
+        File microdroidConfigFile = new File(virtApexDir, "microdroid_legacy.json");
         assertTrue(getDevice().pullFile(VIRT_APEX + "etc/microdroid.json", microdroidConfigFile));
         JSONObject config = new JSONObject(FileUtil.readStringFromFile(microdroidConfigFile));
 
