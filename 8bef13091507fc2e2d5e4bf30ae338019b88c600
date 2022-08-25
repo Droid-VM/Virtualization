@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f02d93c_212087dc",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-08-25T11:32:16Z",
+      "side": 1,
+      "message": "storing time as a floating number doesn\u0027t sound right. it at least is very unusal as floating point numbers are not precise.",
+      "parentUuid": "afff9373_d427e306",
+      "range": {
+        "startLine": 42,
+        "startChar": 16,
+        "endLine": 42,
+        "endChar": 27
+      },
+      "revId": "8bef13091507fc2e2d5e4bf30ae338019b88c600",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cb80d7f_21de89a0",
         "filename": "virtualizationservice/src/crosvm.rs",
         "patchSetId": 2
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "That\u0027s right. We can measure the current time in this function as well. \n\nHowever the difference of two options is, including time period of creating VM or not. What I wrote includes the time period for creating VM, but the idea you suggested excludes such period.\n\nHow do you think about it?",
       "parentUuid": "7cb80d7f_21de89a0",
+      "range": {
+        "startLine": 210,
+        "startChar": 7,
+        "endLine": 210,
+        "endChar": 42
+      },
+      "revId": "8bef13091507fc2e2d5e4bf30ae338019b88c600",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53163db4_9dcf4e61",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-08-25T11:32:16Z",
+      "side": 1,
+      "message": "The time between the creation of a VM and the run of the VM can be arbitrary; it could be hours or even days. I think we are more interested in the time span between the \"run (or start)\" of a VM and the exit.\n\nIn that sense, I think recording the time in this construction is too early. We should record it when start() is called.",
+      "parentUuid": "fe188af2_3d745587",
       "range": {
         "startLine": 210,
         "startChar": 7,
