@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00c6937b_45802ed9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-26T19:52:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd7a394f_ef5b76e3",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 10,
+        "endChar": 25
+      },
+      "revId": "09567bfe52e704cf49c9cd67147eca9c1958552c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac4577a4_2a8f677a",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-24T12:19:52Z",
       "side": 1,
       "message": "nit: This sentence is enough. These should be instructions for others to reproduce how you tested the change. No point in telling them that a test will come later.",
+      "range": {
+        "startLine": 18,
+        "startChar": 6,
+        "endLine": 18,
+        "endChar": 44
+      },
+      "revId": "09567bfe52e704cf49c9cd67147eca9c1958552c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ff36223_8583d386",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-26T19:52:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac4577a4_2a8f677a",
       "range": {
         "startLine": 18,
         "startChar": 6,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f482784a_b7f781a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-26T19:52:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b84a292_f7bcf990",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 12
+      },
+      "revId": "09567bfe52e704cf49c9cd67147eca9c1958552c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "481342b2_06e82281",
@@ -83,6 +155,24 @@
       "writtenOn": "2022-08-24T12:19:52Z",
       "side": 1,
       "message": "nit: There shouldn\u0027t be an empty line here",
+      "revId": "09567bfe52e704cf49c9cd67147eca9c1958552c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b60ebcc1_cb0db9a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-26T19:52:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "481342b2_06e82281",
       "revId": "09567bfe52e704cf49c9cd67147eca9c1958552c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -110,6 +200,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8516fa3_ed6b01b5",
+        "filename": "microdroid/initrd/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-26T19:52:41Z",
+      "side": 1,
+      "message": "Done now. The number of build rules required for each arch \u0026 debugging combination explodes - I think something like a for loop in build rule would be nice, but I couldn\u0027t get anything.\n\nIn googl3 we could use - \n[build_rule(\n    name \u003d basename,\n    srcs \u003d [\"avf/\" + basename + \".sql\"],\n) for basename in array]",
+      "parentUuid": "e8bfacaf_ee5b8dfb",
+      "range": {
+        "startLine": 65,
+        "startChar": 3,
+        "endLine": 65,
+        "endChar": 7
+      },
+      "revId": "09567bfe52e704cf49c9cd67147eca9c1958552c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b3da0b4_50bd0b84",
@@ -123,6 +237,30 @@
       "writtenOn": "2022-08-24T12:19:52Z",
       "side": 1,
       "message": "How about we just move this whole file into that Python script? Will make the Android.bp a bit cleaner and it\u0027s all in one place.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 36
+      },
+      "revId": "09567bfe52e704cf49c9cd67147eca9c1958552c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f019a88_56372f77",
+        "filename": "microdroid/initrd/bootconfig_vbmeta.arm64",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-26T19:52:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b3da0b4_50bd0b84",
       "range": {
         "startLine": 1,
         "startChar": 0,
@@ -163,6 +301,48 @@
       "writtenOn": "2022-08-24T12:19:52Z",
       "side": 1,
       "message": "nit: This description isn\u0027t very helpful. What are those \u0027some options\u0027? What is their purpose? I would say something along the lines of \u0027extracting information from vbmeta\u0027 that will be used for bootconfig.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 78
+      },
+      "revId": "09567bfe52e704cf49c9cd67147eca9c1958552c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "024dae14_0673cf3c",
+        "filename": "microdroid/initrd/gen_vbmeta_bootconfig.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-26T19:52:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e854c5cf_ce0b69f2",
+      "revId": "09567bfe52e704cf49c9cd67147eca9c1958552c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e11fc9b_34b1f54c",
+        "filename": "microdroid/initrd/gen_vbmeta_bootconfig.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-26T19:52:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c095d774_ab88ceb0",
       "range": {
         "startLine": 1,
         "startChar": 0,
@@ -219,6 +399,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ebb80a0_7c124afa",
+        "filename": "microdroid/initrd/gen_vbmeta_bootconfig.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-26T19:52:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ea50f0e_c012cc89",
+      "range": {
+        "startLine": 8,
+        "startChar": 20,
+        "endLine": 8,
+        "endChar": 28
+      },
+      "revId": "09567bfe52e704cf49c9cd67147eca9c1958552c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fc027f1_685f0ff3",
+        "filename": "microdroid/initrd/gen_vbmeta_bootconfig.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-26T19:52:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15c507d7_294a6e7c",
+      "range": {
+        "startLine": 8,
+        "startChar": 11,
+        "endLine": 8,
+        "endChar": 19
+      },
+      "revId": "09567bfe52e704cf49c9cd67147eca9c1958552c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfddc352_1033d248",
@@ -232,6 +460,30 @@
       "writtenOn": "2022-08-24T12:19:52Z",
       "side": 1,
       "message": "nit: Why default? You never change it to anything else. It should be a constant.",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 26
+      },
+      "revId": "09567bfe52e704cf49c9cd67147eca9c1958552c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c07b0e4_9f406f16",
+        "filename": "microdroid/initrd/gen_vbmeta_bootconfig.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-26T19:52:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfddc352_1033d248",
       "range": {
         "startLine": 13,
         "startChar": 4,
@@ -265,6 +517,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1edec7c_d4cbcaa4",
+        "filename": "microdroid/initrd/gen_vbmeta_bootconfig.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-26T19:52:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fedf02f_52fae44a",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 21
+      },
+      "revId": "09567bfe52e704cf49c9cd67147eca9c1958552c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98a6b384_7546d9ac",
@@ -278,6 +554,30 @@
       "writtenOn": "2022-08-24T12:19:52Z",
       "side": 1,
       "message": "Here\u0027s the documentation in libavb:\n```\n *   androidboot.vbmeta.avb_version: This is set to the decimal value\n *   of AVB_VERSION_MAJOR followed by a dot followed by the decimal\n *   value of AVB_VERSION_MINOR, for example \"1.0\" or \"1.4\". This\n *   version number represents the vbmeta file format version\n *   supported by libavb copy used in the boot loader. This is not\n *   necessarily the same version number of the on-disk metadata for\n *   the slot that was verified.\n```\nLooking at https://source.corp.google.com/android/external/avb/avbtool.py;l\u003d198, that means you should take the first two out of three numbers, eg. \u00271.2\u0027 not \u00271.2.0\u0027.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 66
+      },
+      "revId": "09567bfe52e704cf49c9cd67147eca9c1958552c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11de6876_1842c426",
+        "filename": "microdroid/initrd/gen_vbmeta_bootconfig.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-26T19:52:41Z",
+      "side": 1,
+      "message": "Gotcha. I thought that 2 numbers are required, but it would be compatible with the full version number as well. But it is not. I\u0027m surprised something like this to be a part of abi",
+      "parentUuid": "98a6b384_7546d9ac",
       "range": {
         "startLine": 21,
         "startChar": 0,
@@ -305,6 +605,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0df57c6a_d85c3ca9",
+        "filename": "microdroid/initrd/gen_vbmeta_bootconfig.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-26T19:52:41Z",
+      "side": 1,
+      "message": "The whole line \u003e 80 chars which is the python recommended length \u0026 pylint detects that.. I can split this better though",
+      "parentUuid": "a720c0ab_c23741b9",
+      "revId": "09567bfe52e704cf49c9cd67147eca9c1958552c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2bf7b03_e6eb880b",
@@ -318,6 +636,30 @@
       "writtenOn": "2022-08-24T12:19:52Z",
       "side": 1,
       "message": "This is a valid name. If you want to show it\u0027s unused, it must be named \u0027_\u0027.",
+      "range": {
+        "startLine": 38,
+        "startChar": 16,
+        "endLine": 38,
+        "endChar": 23
+      },
+      "revId": "09567bfe52e704cf49c9cd67147eca9c1958552c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e386b0d_d14ce5e0",
+        "filename": "microdroid/initrd/gen_vbmeta_bootconfig.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-26T19:52:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2bf7b03_e6eb880b",
       "range": {
         "startLine": 38,
         "startChar": 16,
