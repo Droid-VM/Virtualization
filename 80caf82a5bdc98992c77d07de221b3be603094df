@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41c59987_fdd37ea6",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-08-26T01:56:37Z",
+      "side": 1,
+      "message": "I wish we return Result\u003cDuration\u003e here, and do the conversion only when this is written to atom. The information that we record time in ms unit and in a 64-bit field is specific to the atom.",
+      "range": {
+        "startLine": 40,
+        "startChar": 56,
+        "endLine": 40,
+        "endChar": 67
+      },
+      "revId": "80caf82a5bdc98992c77d07de221b3be603094df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
