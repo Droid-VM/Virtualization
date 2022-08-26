@@ -36,7 +36,7 @@ rust_test_host {
     target: {
         host: {
             // TODO(b/204562227): remove once the build does this automatically
-            data: [":avbtool"],
+            data: [":avbtool_lib"],
             data_libs: [
                 "libc++",
                 "libcrypto",

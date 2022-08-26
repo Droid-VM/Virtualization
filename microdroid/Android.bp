@@ -489,7 +489,7 @@ genrule {
     tools: ["avbtool"],
     srcs: [":microdroid_sign_key"],
     out: ["bootloader.pubkey"],
-    cmd: "$(location avbtool) extract_public_key " +
+    cmd: "$(location avbtool_lib) extract_public_key " +
         "--key $(location :microdroid_sign_key) " +
         "--output $(out)",
 }
