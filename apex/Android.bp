@@ -142,13 +142,13 @@ sh_test_host {
     ],
     data: [
         ":com.android.virt",
-        ":test.com.android.virt.pem",
+        ":test.com.android.virt.pem_lib",
     ],
     test_suites: ["general-tests"],
 }
 
 filegroup {
-    name: "test.com.android.virt.pem",
+    name: "test.com.android.virt.pem_lib",
     srcs: ["test.com.android.virt.pem"],
 }
 
