@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4a59a6c_5d3796c8",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-26T00:29:37Z",
+      "side": 1,
+      "message": "Good. I acknowledged. I\u0027ll change the type of the filed with `int64` soon.",
+      "parentUuid": "2f02d93c_212087dc",
+      "range": {
+        "startLine": 42,
+        "startChar": 16,
+        "endLine": 42,
+        "endChar": 27
+      },
+      "revId": "8bef13091507fc2e2d5e4bf30ae338019b88c600",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cb80d7f_21de89a0",
         "filename": "virtualizationservice/src/crosvm.rs",
         "patchSetId": 2
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "The time between the creation of a VM and the run of the VM can be arbitrary; it could be hours or even days. I think we are more interested in the time span between the \"run (or start)\" of a VM and the exit.\n\nIn that sense, I think recording the time in this construction is too early. We should record it when start() is called.",
       "parentUuid": "fe188af2_3d745587",
+      "range": {
+        "startLine": 210,
+        "startChar": 7,
+        "endLine": 210,
+        "endChar": 42
+      },
+      "revId": "8bef13091507fc2e2d5e4bf30ae338019b88c600",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d97b8a63_988af6cf",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-08-26T00:29:37Z",
+      "side": 1,
+      "message": "Sounds good. I didn\u0027t know such information. Then, it shouldn\u0027t be called in the function `VmInstance::new` as well. I\u0027ll change this soon. Thanks for sharing :)",
+      "parentUuid": "53163db4_9dcf4e61",
       "range": {
         "startLine": 210,
         "startChar": 7,
