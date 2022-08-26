@@ -28,7 +28,7 @@ rust_test_host {
         "libtempfile",
     ],
     data: ["tests/data/*"],
-    required: ["avbtool"],
+    required: ["avbtool_lib"],
     test_suites: ["general-tests"],
     test_options: {
         unit_test: false,
@@ -36,7 +36,7 @@ rust_test_host {
     target: {
         host: {
             // TODO(b/204562227): remove once the build does this automatically
-            data: [":avbtool"],
+            data: [":avbtool_lib"],
             data_libs: [
                 "libc++",
                 "libcrypto",
