@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d010587_197f7976",
+        "filename": "microdroid/initrd/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-08-30T17:52:27Z",
+      "side": 1,
+      "message": "nit: I\u0027d drop the \"_gen\" here. You already use architecture as a suffix.",
+      "range": {
+        "startLine": 95,
+        "startChar": 50,
+        "endLine": 95,
+        "endChar": 54
+      },
+      "revId": "236da702660db31f6e44880ecbfca7f4b0d9c41d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfd0dcec_eca3bd3b",
+        "filename": "microdroid/initrd/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-08-30T17:52:27Z",
+      "side": 1,
+      "message": "Suggestion: change `initrd_bootconfig` to this command line interface:\n```\ninitrd_bootconfig \u003coutput\u003e \u003cinitrd\u003e \u003cbootconfig1\u003e \u003cbootconfig2\u003e ...\n```\nWith that you can fold the \"bootconfig_*_gen\" rules into these \"microdroid_initrd_*_gen\" ones, halving the number of targets. Hope I\u0027m making sense, let me know if not.",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 54
+      },
+      "revId": "236da702660db31f6e44880ecbfca7f4b0d9c41d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "537a18e4_ed6a366f",
+        "filename": "microdroid/initrd/gen_vbmeta_bootconfig.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-08-30T17:52:27Z",
+      "side": 1,
+      "message": "nit: I would print this the same way as the lines above. Easier to read.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 27
+      },
+      "revId": "236da702660db31f6e44880ecbfca7f4b0d9c41d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
