@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df1bb42d_aba5cfc0",
+        "filename": "tests/benchmark/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-30T11:45:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88746daf_5680fe27",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 31
+      },
+      "revId": "fe78fe614820076faa5b64640be3da3298791345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1137e8ba_42b09421",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-08-30T07:53:59Z",
       "side": 1,
       "message": "I don\u0027t think we should read a file. We can allocate memory and send it, because we don\u0027t care about the contents.",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 60
+      },
+      "revId": "fe78fe614820076faa5b64640be3da3298791345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c54e302_6f4d4b37",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-30T11:45:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1137e8ba_42b09421",
       "range": {
         "startLine": 195,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4393d1fc_15af3e31",
+        "filename": "tests/benchmark/src/jni/io_vsock_host_jni.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-30T11:45:26Z",
+      "side": 1,
+      "message": "I\u0027ll remove this here since these methods don\u0027t need to set up socket any more.",
+      "parentUuid": "467dd48d_b78e4856",
+      "range": {
+        "startLine": 22,
+        "startChar": 30,
+        "endLine": 22,
+        "endChar": 72
+      },
+      "revId": "fe78fe614820076faa5b64640be3da3298791345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53ecb7de_3b290279",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-08-30T07:53:59Z",
       "side": 1,
       "message": "Rather than specifying a file, I think we can allocate a memory block and send it, because we don\u0027t care about the contents.",
+      "range": {
+        "startLine": 29,
+        "startChar": 45,
+        "endLine": 29,
+        "endChar": 53
+      },
+      "revId": "fe78fe614820076faa5b64640be3da3298791345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "045e0a9f_58d640e7",
+        "filename": "tests/benchmark/src/jni/io_vsock_host_jni.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-30T11:45:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53ecb7de_3b290279",
       "range": {
         "startLine": 29,
         "startChar": 45,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f2f28dc_13e7edd0",
+        "filename": "tests/benchmark/src/jni/io_vsock_host_jni.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-30T11:45:26Z",
+      "side": 1,
+      "message": "Hmm, as I measured sending and receiving time on both sides, I wanted to make sure that both sides are ready and later replace this later by an ACK from the host side. But if we can measure just on one side, it could be much easier.",
+      "parentUuid": "c84ed799_024f8b92",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 13
+      },
+      "revId": "fe78fe614820076faa5b64640be3da3298791345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9258064_35ce6429",
@@ -146,6 +266,30 @@
       "writtenOn": "2022-08-30T07:53:59Z",
       "side": 1,
       "message": "Rather than calling timespec_get both on host and guest, I think it\u0027s enough to measure it either on host or guest. e.g.\n\n    timespec_get(\u0026begin_ts, ...);\n    if (!WriteStringToFd(...)) {\n        ...\n    }\n    timespec_get(\u0026end_ts, ...);\n    return /* difference between begin_ts and end_ts */",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 32
+      },
+      "revId": "fe78fe614820076faa5b64640be3da3298791345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "610da3e4_e421bfa2",
+        "filename": "tests/benchmark/src/jni/io_vsock_host_jni.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-30T11:45:26Z",
+      "side": 1,
+      "message": "Actually T(host finishes writing) and T(VM finishes reading) are not exactly equal, for example:\n\nT(host finishes writing) \u003d1.6618465880287924E9 \nT(VM finishes reading)  \u003d1.6618465882119844E9 [second]\n\nWhy using T(host finishes writing) is more accurate for this measurement?",
+      "parentUuid": "f9258064_35ce6429",
       "range": {
         "startLine": 37,
         "startChar": 0,

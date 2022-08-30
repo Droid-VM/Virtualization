@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61354f66_f057c361",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-30T11:45:26Z",
+      "side": 1,
+      "message": "Hi Inseob,\n\nThanks for the review! I adjusted the cl. Otherwise the metrics look a bit small, do you have any idea why?\n\n\ncom.android.microdroid.benchmark (2 Tests)\n[1/2] com.android.microdroid.benchmark.MicrodroidBenchmarks#testVsockTransferFromHostToVM[protectedVm\u003dfalse]: PASSED (10.824s)\n        avf_perf/microdroid/vsock/transfer_host_to_vm_min_mb_per_sec: 70.507204681763\n        avf_perf/microdroid/vsock/transfer_host_to_vm_average_mb_per_sec: 81.713506946612\n        avf_perf/microdroid/vsock/transfer_host_to_vm_max_mb_per_sec: 92.09491444629953\n        avf_perf/microdroid/vsock/transfer_host_to_vm_stdev_mb_per_sec: 8.134496475118222\n[2/2] com.android.microdroid.benchmark.MicrodroidBenchmarks#testVsockTransferFromHostToVM[protectedVm\u003dtrue]: PASSED (14.453s)\n        avf_perf/microdroid/vsock/transfer_host_to_vm_min_mb_per_sec: 61.03912533924306\n        avf_perf/microdroid/vsock/transfer_host_to_vm_average_mb_per_sec: 68.14132731001675\n        avf_perf/microdroid/vsock/transfer_host_to_vm_max_mb_per_sec: 74.84186218565236\n        avf_perf/microdroid/vsock/transfer_host_to_vm_stdev_mb_per_sec: 5.173512340421509",
+      "revId": "f99588fa96eddc12e71c50c960638a758f6a5daf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
