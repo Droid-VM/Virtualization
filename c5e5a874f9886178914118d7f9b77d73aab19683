@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8a90e38_b837f180",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-30T10:07:05Z",
+      "side": 1,
+      "message": "Rather than \u0026OwnedFd (which unnecessarily requires the caller to have ownership), prefer BorrowedFd, and use .as_fd() at the call site?\n(Or possibly use \u0026impl AsFd here?)",
+      "range": {
+        "startLine": 402,
+        "startChar": 28,
+        "endLine": 402,
+        "endChar": 36
+      },
+      "revId": "c5e5a874f9886178914118d7f9b77d73aab19683",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
