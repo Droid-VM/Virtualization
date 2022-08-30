@@ -181,7 +181,9 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             listener.runToFinish(TAG, vm);
             assertThat(exception.getNow(0)).isAnyOf(VirtualMachineCallback.DEATH_REASON_REBOOT,
                     VirtualMachineCallback.DEATH_REASON_HANGUP,
-                    VirtualMachineCallback.DEATH_REASON_CRASH);
+                    VirtualMachineCallback.DEATH_REASON_CRASH,
+                    VirtualMachineCallback.DEATH_REASON_ERROR,
+                    VirtualMachineCallback.DEATH_REASON_SHUTDOWN);
         }
     }
 
