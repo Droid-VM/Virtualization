@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acbc484d_d22551a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-08-30T17:34:10Z",
+      "side": 1,
+      "message": "few nits, otherwise LGTM",
+      "revId": "8c18dea7be22a0ff86470f85c416e3c661b40a69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a4161de_ce4e2ba0",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-08-30T17:34:10Z",
+      "side": 1,
+      "message": "nit: use // for license in Rust, look at our other Rust code for examples",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "8c18dea7be22a0ff86470f85c416e3c661b40a69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0512a97_288b1c9c",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-08-30T17:34:10Z",
+      "side": 1,
+      "message": "nit: move consts next to each other",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 38
+      },
+      "revId": "8c18dea7be22a0ff86470f85c416e3c661b40a69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f2f676f_72a3eadd",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-08-30T17:34:10Z",
+      "side": 1,
+      "message": "exactly",
+      "range": {
+        "startLine": 42,
+        "startChar": 19,
+        "endLine": 42,
+        "endChar": 24
+      },
+      "revId": "8c18dea7be22a0ff86470f85c416e3c661b40a69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "914388a2_5fca9ab7",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-08-30T17:34:10Z",
+      "side": 1,
+      "message": "I think this is just:\n```\nFile::open(path)?.bytes().map(|x| x as u32).sum()\n```",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 5
+      },
+      "revId": "8c18dea7be22a0ff86470f85c416e3c661b40a69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
