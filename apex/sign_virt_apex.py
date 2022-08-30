@@ -363,13 +363,18 @@ virt_apex_files = {
     'boot.img': 'etc/fs/microdroid_boot.img',
     'vendor_boot.img': 'etc/fs/microdroid_vendor_boot.img',
     'init_boot.img': 'etc/fs/microdroid_init_boot.img',
+    'initrd.app_debuggable': 'etc/microdroid_initrd_app_debuggable',
+    'initrd.full_debuggable': 'etc/microdroid_initrd_full_debuggable',
+    'initrd.normal': 'etc/microdroid_initrd_normal',
     'super.img': 'etc/fs/microdroid_super.img',
-    'vbmeta.img': 'etc/fs/microdroid_vbmeta_legacy.img',
+    'kernel.img': 'etc/microdroid_kernel',
+    'vbmeta_legacy.img': 'etc/fs/microdroid_vbmeta_legacy.img',
+    'vbmeta.img': 'etc/fs/microdroid_vbmeta.img',
     'vbmeta_bootconfig.img': 'etc/fs/microdroid_vbmeta_bootconfig.img',
     'bootconfig.normal': 'etc/fs/microdroid_bootconfig.normal',
     'bootconfig.app_debuggable': 'etc/fs/microdroid_bootconfig.app_debuggable',
     'bootconfig.full_debuggable': 'etc/fs/microdroid_bootconfig.full_debuggable',
-    'uboot_env.img': 'etc/fs/uboot_env.img'
+    'uboot_env.img': 'etc/fs/uboot_env.img',
 }
 
 
