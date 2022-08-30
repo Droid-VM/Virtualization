@@ -179,9 +179,12 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                         }
                     };
             listener.runToFinish(TAG, vm);
+            // TODO(b/244415717): Do we really need DEATH_REASON_SHUTDOWN here?
             assertThat(exception.getNow(0)).isAnyOf(VirtualMachineCallback.DEATH_REASON_REBOOT,
                     VirtualMachineCallback.DEATH_REASON_HANGUP,
-                    VirtualMachineCallback.DEATH_REASON_CRASH);
+                    VirtualMachineCallback.DEATH_REASON_CRASH,
+                    VirtualMachineCallback.DEATH_REASON_ERROR,
+                    VirtualMachineCallback.DEATH_REASON_SHUTDOWN);
         }
     }
 
