@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8fc8576_f55aa610",
+        "filename": "compos/composd/src/fd_server_helper.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-30T15:50:49Z",
+      "side": 1,
+      "message": "Probably, maybe it could take OwnedFd if the client can pass the ownership. Not sure how the API would look like.\n\nBTW, Minijail\u0027s main branch has recently been moved to chromiumos.",
+      "parentUuid": "6cd7468b_c954e3c7",
+      "range": {
+        "startLine": 57,
+        "startChar": 28,
+        "endLine": 57,
+        "endChar": 37
+      },
+      "revId": "b63f14ce7ac0495f7214bb834cf439fa6ce0bfcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e8a4480_ff5a6102",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-30T09:57:41Z",
       "side": 1,
       "message": "Better to borrow here, and convert to raw at point of use?",
+      "range": {
+        "startLine": 160,
+        "startChar": 42,
+        "endLine": 160,
+        "endChar": 51
+      },
+      "revId": "b63f14ce7ac0495f7214bb834cf439fa6ce0bfcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb11a2ce_61241bc1",
+        "filename": "compos/composd/src/odrefresh_task.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-30T15:50:49Z",
+      "side": 1,
+      "message": "We can\u0027t borrow here because the ownership is passed right after (L166).  Added more comment.",
+      "parentUuid": "4e8a4480_ff5a6102",
       "range": {
         "startLine": 160,
         "startChar": 42,
