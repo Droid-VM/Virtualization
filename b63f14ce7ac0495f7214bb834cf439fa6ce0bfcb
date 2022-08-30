@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cd7468b_c954e3c7",
+        "filename": "compos/composd/src/fd_server_helper.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-30T09:57:41Z",
+      "side": 1,
+      "message": "Ideally these would be BorrowedFd, but that would require a Minijail change, right?",
+      "range": {
+        "startLine": 57,
+        "startChar": 28,
+        "endLine": 57,
+        "endChar": 37
+      },
+      "revId": "b63f14ce7ac0495f7214bb834cf439fa6ce0bfcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e8a4480_ff5a6102",
+        "filename": "compos/composd/src/odrefresh_task.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-30T09:57:41Z",
+      "side": 1,
+      "message": "Better to borrow here, and convert to raw at point of use?",
+      "range": {
+        "startLine": 160,
+        "startChar": 42,
+        "endLine": 160,
+        "endChar": 51
+      },
+      "revId": "b63f14ce7ac0495f7214bb834cf439fa6ce0bfcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
