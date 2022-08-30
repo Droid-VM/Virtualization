@@ -16,6 +16,29 @@
       "message": "Hi Inseob,\n\nThanks for the review! I adjusted the cl. Otherwise the metrics look a bit small, do you have any idea why?\n\n\ncom.android.microdroid.benchmark (2 Tests)\n[1/2] com.android.microdroid.benchmark.MicrodroidBenchmarks#testVsockTransferFromHostToVM[protectedVm\u003dfalse]: PASSED (10.824s)\n        avf_perf/microdroid/vsock/transfer_host_to_vm_min_mb_per_sec: 70.507204681763\n        avf_perf/microdroid/vsock/transfer_host_to_vm_average_mb_per_sec: 81.713506946612\n        avf_perf/microdroid/vsock/transfer_host_to_vm_max_mb_per_sec: 92.09491444629953\n        avf_perf/microdroid/vsock/transfer_host_to_vm_stdev_mb_per_sec: 8.134496475118222\n[2/2] com.android.microdroid.benchmark.MicrodroidBenchmarks#testVsockTransferFromHostToVM[protectedVm\u003dtrue]: PASSED (14.453s)\n        avf_perf/microdroid/vsock/transfer_host_to_vm_min_mb_per_sec: 61.03912533924306\n        avf_perf/microdroid/vsock/transfer_host_to_vm_average_mb_per_sec: 68.14132731001675\n        avf_perf/microdroid/vsock/transfer_host_to_vm_max_mb_per_sec: 74.84186218565236\n        avf_perf/microdroid/vsock/transfer_host_to_vm_stdev_mb_per_sec: 5.173512340421509",
       "revId": "f99588fa96eddc12e71c50c960638a758f6a5daf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f77935bd_6150db75",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-30T11:57:19Z",
+      "side": 1,
+      "message": "Hi Alan,\n\nConcerning the vsock connection we discussed recently, it seems that I cannot close the fd after a rebase today with the following error (it worked before).\n\n```\n08-30 13:33:01.682  5733  5791 W ParcelFileDescriptor: Unable to inform peer: Cannot close socket file descriptor\n08-30 13:33:01.680  5733  5733 W Thread-4: type\u003d1400 audit(0.0:27): avc: denied { getopt } for scontext\u003du:r:untrusted_app:s0:c126,c256,c512,c768 tcontext\u003du:r:virtualizationservice:s0 tclass\u003dvsock_socket permissive\u003d0 app\u003dcom.android.microdroid.benchmark\n08-30 13:33:01.685  5733  5768 I MicrodroidBenchmarks: Log: 08-30 11:33:01.804   131   138 I microdroid_launcher: VM:Finished reading data.\n```\n\nThis code runs on the host. Is there any other way to close the socket file descriptor in the virt package?",
+      "range": {
+        "startLine": 389,
+        "startChar": 16,
+        "endLine": 389,
+        "endChar": 73
+      },
+      "revId": "f99588fa96eddc12e71c50c960638a758f6a5daf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
