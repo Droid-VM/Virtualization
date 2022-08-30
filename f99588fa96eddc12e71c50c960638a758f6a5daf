@@ -39,6 +39,30 @@
       },
       "revId": "f99588fa96eddc12e71c50c960638a758f6a5daf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e97cae62_8e346179",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-30T13:00:23Z",
+      "side": 1,
+      "message": "Hmm, that\u0027s odd. \nIt\u0027s trying to do a getopt, and that\u0027s what\u0027s failing. ParcelFileDescriptor seems to do some weird things on close which presumably include calling getsockopt.\n\nThe fix should just be to add \"getopt\" to the list of things the client is allowed to do with a VS vsock, here: https://cs.android.com/android/platform/superproject/+/master:system/sepolicy/public/te_macros;drc\u003de2dd659d7a1fa5e63e4604d88335730f99184868;l\u003d202\n\nI can\u0027t see any reason why we shouldn\u0027t allow that; make a CL \u0026 I can approve it.",
+      "parentUuid": "f77935bd_6150db75",
+      "range": {
+        "startLine": 389,
+        "startChar": 16,
+        "endLine": 389,
+        "endChar": 73
+      },
+      "revId": "f99588fa96eddc12e71c50c960638a758f6a5daf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
