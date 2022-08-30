@@ -46,6 +46,30 @@
       },
       "revId": "c5e5a874f9886178914118d7f9b77d73aab19683",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44400da1_27bca28d",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-30T16:09:48Z",
+      "side": 1,
+      "message": "Well the caller could just have a BorrowedFd too. Somebody has to be the owner though.",
+      "parentUuid": "6349d2a9_ef25af3d",
+      "range": {
+        "startLine": 402,
+        "startChar": 28,
+        "endLine": 402,
+        "endChar": 36
+      },
+      "revId": "c5e5a874f9886178914118d7f9b77d73aab19683",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

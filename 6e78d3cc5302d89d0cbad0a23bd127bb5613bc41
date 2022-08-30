@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e92eb218_f8c26bff",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-30T16:09:48Z",
+      "side": 1,
+      "message": "You could split this into OwnedFd::from_raw_fd and then File::from\nBut, meh. \nOne day openat will return OwnedFd directly, maybe?",
+      "range": {
+        "startLine": 404,
+        "startChar": 0,
+        "endLine": 405,
+        "endChar": 56
+      },
+      "revId": "6e78d3cc5302d89d0cbad0a23bd127bb5613bc41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
