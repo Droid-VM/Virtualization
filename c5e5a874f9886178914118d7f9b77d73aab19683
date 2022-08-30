@@ -22,6 +22,30 @@
       },
       "revId": "c5e5a874f9886178914118d7f9b77d73aab19683",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6349d2a9_ef25af3d",
+        "filename": "authfs/fd_server/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-30T15:36:58Z",
+      "side": 1,
+      "message": "Done.  I tried `\u0026impl AsFd`, it\u0027ll need an extra, or to be replaced with `\u0026impl AsRawFd`.   I ended up using `BorrowedFd` for simplicity (still requires the caller to have ownership, which I think is desired).",
+      "parentUuid": "a8a90e38_b837f180",
+      "range": {
+        "startLine": 402,
+        "startChar": 28,
+        "endLine": 402,
+        "endChar": 36
+      },
+      "revId": "c5e5a874f9886178914118d7f9b77d73aab19683",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
