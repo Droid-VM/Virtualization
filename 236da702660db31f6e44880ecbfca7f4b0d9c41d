@@ -187,6 +187,30 @@
       },
       "revId": "236da702660db31f6e44880ecbfca7f4b0d9c41d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31a9ea5e_c59bb0c5",
+        "filename": "microdroid/initrd/gen_vbmeta_bootconfig.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-08-31T23:11:27Z",
+      "side": 1,
+      "message": "What multiline strings? I see seven single-line ones :P\n```\nprint(f\u0027androidboot.veritymode \u003d \\\"enforcing\\\"\u0027)\nprint(f\u0027androidboot.vbmeta.invalidate_on_error \u003d \\\"yes\\\"\u0027)\n...\n```",
+      "parentUuid": "284d0f5a_58caad1d",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 27
+      },
+      "revId": "236da702660db31f6e44880ecbfca7f4b0d9c41d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
