@@ -174,7 +174,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             VmEventListener listener =
                     new VmEventListener() {
                         @Override
-                        public void onPayloadReady(int cid) {
+                        public void onPayloadReady(VirtualMachine vm) {
                             payloadReadyExecuted.complete(true);
                             super.onPayloadReady(cid);
                         }
