@@ -457,7 +457,7 @@ public class MicrodroidTestCase extends MicrodroidHostTestCaseBase {
         // Sign everything with key1 except vbmeta
         File key = findTestFile("test.com.android.virt.pem");
         File key2 = findTestFile("test2.com.android.virt.pem");
-        Map<String, File> keyOverrides = Map.of("microdroid_vbmeta.img", key2);
+        Map<String, File> keyOverrides = Map.of("microdroid_vbmeta_legacy.img", key2);
         boolean isProtected = false; // Not interested in pvwfw
         boolean daemonize = true; // Bootloader fails and enters prompts.
         // To be able to stop it, it should be a daemon.
@@ -482,7 +482,7 @@ public class MicrodroidTestCase extends MicrodroidHostTestCaseBase {
         Map<String, File> keyOverrides =
                 Map.of(
                         "microdroid_bootloader", key2,
-                        "microdroid_vbmeta.img", key2,
+                        "microdroid_vbmeta_legacy.img", key2,
                         "microdroid_vbmeta_bootconfig.img", key2);
         boolean isProtected = false; // Not interested in pvwfw
         boolean daemonize = true; // Bootloader should succeed.
