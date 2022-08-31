@@ -356,7 +356,7 @@ def ReplaceBootloaderPubkey(args, key, bootloader, bootloader_pubkey):
         bl_f.seek(pos)
         bl_f.write(new_pubkey)
 
-
+# TODO(244294566): Update the virt apex artifacts that needs signing
 # dict of (key, file) for re-sign/verification. keys are un-versioned for readability.
 virt_apex_files = {
     'bootloader.pubkey': 'etc/microdroid_bootloader.avbpubkey',
@@ -365,7 +365,7 @@ virt_apex_files = {
     'vendor_boot.img': 'etc/fs/microdroid_vendor_boot.img',
     'init_boot.img': 'etc/fs/microdroid_init_boot.img',
     'super.img': 'etc/fs/microdroid_super.img',
-    'vbmeta.img': 'etc/fs/microdroid_vbmeta.img',
+    'vbmeta.img': 'etc/fs/microdroid_vbmeta_legacy.img',
     'vbmeta_bootconfig.img': 'etc/fs/microdroid_vbmeta_bootconfig.img',
     'bootconfig.normal': 'etc/fs/microdroid_bootconfig.normal',
     'bootconfig.app_debuggable': 'etc/fs/microdroid_bootconfig.app_debuggable',
