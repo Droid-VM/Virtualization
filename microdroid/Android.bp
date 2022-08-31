@@ -523,7 +523,7 @@ filegroup {
 }
 
 vbmeta {
-    name: "microdroid_vbmeta",
+    name: "microdroid_vbmeta_legacy",
     partition_name: "vbmeta",
     private_key: ":microdroid_sign_key",
     partitions: [
@@ -532,6 +532,16 @@ vbmeta {
         "microdroid",
         "microdroid_boot",
         "microdroid_init_boot",
+    ],
+}
+
+vbmeta {
+    name: "microdroid_vbmeta",
+    partition_name: "vbmeta",
+    private_key: ":microdroid_sign_key",
+    partitions: [
+        "microdroid_vendor",
+        "microdroid",
     ],
 }
 
