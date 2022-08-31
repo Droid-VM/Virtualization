@@ -16,6 +16,24 @@
       "message": "We\u0027ll ship bcc_validator in some day, right?  I suppose we can remove the data_native_bins dependency when that happens?",
       "revId": "d1772c0c87b0400ba1841000928df109afb226c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d28e17ca_3113c2ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-31T15:56:29Z",
+      "side": 1,
+      "message": "Probably not - we\u0027ll incorporate the library it uses into compos_verify.\nWhich will show up in the e2e tests, but this is probably still useful - it caught at least one weird pvmfw bug, and it runs in presubmit.",
+      "parentUuid": "86348088_e49cc2e3",
+      "revId": "d1772c0c87b0400ba1841000928df109afb226c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
