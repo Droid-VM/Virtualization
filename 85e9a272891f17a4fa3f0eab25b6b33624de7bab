@@ -285,6 +285,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6efca52_95ee0e84",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-31T12:36:01Z",
+      "side": 1,
+      "message": "Ah, good point. Log it here then?",
+      "parentUuid": "b8c93772_d34689a8",
+      "range": {
+        "startLine": 392,
+        "startChar": 0,
+        "endLine": 394,
+        "endChar": 13
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0c599fcb_138dec44",
         "filename": "tests/benchmark/src/jni/io_vsock_host_jni.cpp",
         "patchSetId": 9
@@ -461,6 +485,30 @@
       "side": 1,
       "message": "It doesn\u0027t work with VMADDR_CID_HOST.\n\nI run the VM as server and host as client due to the SELinux restrictions. So this code runs inside VM. We cannot bind the address to host.",
       "parentUuid": "757cc02f_38d6d677",
+      "range": {
+        "startLine": 38,
+        "startChar": 23,
+        "endLine": 38,
+        "endChar": 37
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66148778_f2007f26",
+        "filename": "tests/benchmark/src/native/io_vsock.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-31T12:36:01Z",
+      "side": 1,
+      "message": "Oh, of course.",
+      "parentUuid": "d537c208_d16ff99c",
       "range": {
         "startLine": 38,
         "startChar": 23,

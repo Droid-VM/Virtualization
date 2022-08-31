@@ -16,6 +16,52 @@
       "message": "Hi Alan,\n\nThanks for the review! Could you please take another look?",
       "revId": "0b986ebf9f22c7c99dbc444c60305d6f3e0990a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7661c581_81111a0e",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-31T12:36:01Z",
+      "side": 1,
+      "message": "Can you convert to VirtualMachineException?",
+      "range": {
+        "startLine": 626,
+        "startChar": 62,
+        "endLine": 626,
+        "endChar": 77
+      },
+      "revId": "0b986ebf9f22c7c99dbc444c60305d6f3e0990a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "825f3009_9ec15683",
+        "filename": "tests/benchmark/src/jni/io_vsock_host_jni.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-31T12:36:01Z",
+      "side": 1,
+      "message": "nit: the const here does nothing, best to omit",
+      "range": {
+        "startLine": 29,
+        "startChar": 41,
+        "endLine": 29,
+        "endChar": 46
+      },
+      "revId": "0b986ebf9f22c7c99dbc444c60305d6f3e0990a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
