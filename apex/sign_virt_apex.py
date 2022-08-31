@@ -401,11 +401,10 @@ def SignVirtApex(args):
     # re-sign super.img
     super_img_f = Async(SignSuperImg, args, key, files['super.img'], unpack_dir.name)
 
-    # re-generate vbmeta from re-signed {boot, vendor_boot, init_boot, system_a, vendor_a}.img
+    # re-generate vbmeta from re-signed {system_a, vendor_a}.img
     Async(MakeVbmetaImage, args, key, files['vbmeta.img'],
-          images=[files['boot.img'], files['vendor_boot.img'],
-                  files['init_boot.img'], system_a_img, vendor_a_img],
-          wait=[boot_img_f, vendor_boot_img_f, init_boot_img_f, super_img_f])
+          images=[system_a_img, vendor_a_img],
+          wait=[super_img_f])
 
     # Re-sign bootconfigs and the uboot_env with the same key
     bootconfig_sign_key = key
