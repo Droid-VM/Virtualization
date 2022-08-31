@@ -365,6 +365,7 @@ virt_apex_files = {
     'vendor_boot.img': 'etc/fs/microdroid_vendor_boot.img',
     'init_boot.img': 'etc/fs/microdroid_init_boot.img',
     'super.img': 'etc/fs/microdroid_super.img',
+    'vbmeta_legacy.img': 'etc/fs/microdroid_vbmeta_legacy.img',
     'vbmeta.img': 'etc/fs/microdroid_vbmeta.img',
     'vbmeta_bootconfig.img': 'etc/fs/microdroid_vbmeta_bootconfig.img',
     'bootconfig.normal': 'etc/fs/microdroid_bootconfig.normal',
@@ -401,11 +402,16 @@ def SignVirtApex(args):
     # re-sign super.img
     super_img_f = Async(SignSuperImg, args, key, files['super.img'], unpack_dir.name)
 
-    # re-generate vbmeta from re-signed {boot, vendor_boot, init_boot, system_a, vendor_a}.img
-    Async(MakeVbmetaImage, args, key, files['vbmeta.img'],
+    # re-generate vbmeta_legacy from re-signed {boot, vendor_boot, init_boot, system_a, vendor_a}.img
+    Async(MakeVbmetaImage, args, key, files['vbmeta_legacy.img'],
           images=[files['boot.img'], files['vendor_boot.img'],
                   files['init_boot.img'], system_a_img, vendor_a_img],
           wait=[boot_img_f, vendor_boot_img_f, init_boot_img_f, super_img_f])
+
+    # re-generate vbmeta from re-signed {system_a, vendor_a}.img
+    Async(MakeVbmetaImage, args, key, files['vbmeta.img'],
+          images=[system_a_img, vendor_a_img],
+          wait=[super_img_f])
 
     # Re-sign bootconfigs and the uboot_env with the same key
     bootconfig_sign_key = key
