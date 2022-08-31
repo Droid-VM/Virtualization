@@ -56,7 +56,7 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
     private static final int BOOT_COMPLETE_TIMEOUT_MS = 10 * 60 * 1000;
     private static final double NANOS_IN_SEC = 1_000_000_000.0;
     private static final int ROUND_COUNT = 5;
-    private static final String METRIC_PREFIX = "avf_perf/compos/";
+    private static final String METRIC_PREFIX = "avf_perf/hostside/";
 
     @Before
     public void setUp() throws Exception {
@@ -65,13 +65,43 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
 
     @After
     public void tearDown() throws Exception {
-        // Reboot to prevent previous staged session.
-        rebootAndWaitBootCompleted();
+        // Set PKVM enable and reboot to prevent previous staged session.
+        setPKVMStatus(true);
+        rebootFromBootloaderAndWaitBootCompleted();
 
         CommandRunner android = new CommandRunner(getDevice());
 
         // Clear up any CompOS instance files we created.
         android.tryRun("rm", "-rf", COMPOS_TEST_ROOT);
+    }
+
+    @Test
+    public void testBootEnableAndDisablePKVM() throws Exception {
+
+        double[] bootWithPKVMEnableTime = new double[ROUND_COUNT];
+        double[] bootWithoutPKVMEnableTime = new double[ROUND_COUNT];
+
+        for (int round = 0; round < ROUND_COUNT; ++round) {
+
+            setPKVMStatus(true);
+            long start = System.nanoTime();
+            rebootFromBootloaderAndWaitBootCompleted();
+            long elapsedWithPKVMEnable = System.nanoTime() - start;
+            double elapsedSec = elapsedWithPKVMEnable / NANOS_IN_SEC;
+            bootWithPKVMEnableTime[round] = elapsedSec;
+            CLog.i("Boot time with PKVM enable took " + elapsedSec + "s");
+
+            setPKVMStatus(false);
+            start = System.nanoTime();
+            rebootFromBootloaderAndWaitBootCompleted();
+            long elapsedWithoutPKVMEnable = System.nanoTime() - start;
+            elapsedSec = elapsedWithoutPKVMEnable / NANOS_IN_SEC;
+            bootWithoutPKVMEnableTime[round] = elapsedSec;
+            CLog.i("Boot time with PKVM disable took " + elapsedSec + "s");
+        }
+
+        reportMetric("boot_time_with_pkvm_enable", "s", bootWithPKVMEnableTime);
+        reportMetric("boot_time_with_pkvm_disable", "s", bootWithoutPKVMEnableTime);
     }
 
     @Test
@@ -131,6 +161,39 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
         metrics.addTestMetric(METRIC_PREFIX + name + "_min_" + unit, Double.toString(min));
         metrics.addTestMetric(METRIC_PREFIX + name + "_max_" + unit, Double.toString(max));
         metrics.addTestMetric(METRIC_PREFIX + name + "_stdev_" + unit, Double.toString(stdev));
+    }
+
+    private void setPKVMStatus(boolean isEnable) throws Exception {
+
+        if (!getDevice().isStateBootloaderOrFastbootd()) {
+            getDevice().rebootIntoBootloader();
+        }
+        getDevice().waitForDeviceBootloader();
+
+        CommandResult result;
+        if (isEnable) {
+            result = getDevice().executeFastbootCommand("oem", "pkvm", "enable");
+        } else {
+            result = getDevice().executeFastbootCommand("oem", "pkvm", "disable");
+        }
+
+        result = getDevice().executeFastbootCommand("oem", "pkvm", "status");
+        CLog.i("Gets PKVM status : " + result);
+
+        if (isEnable) {
+            assertWithMessage("Failed to set PKVM status. Reason: " + result)
+                .that(result.toString()).ignoringCase().contains("pkvm is enabled");
+        } else {
+            assertWithMessage("Failed to set PKVM status. Reason: " + result)
+                .that(result.toString()).ignoringCase().contains("pkvm is disabled");
+        }
+    }
+
+    private void rebootFromBootloaderAndWaitBootCompleted() throws Exception {
+        getDevice().executeFastbootCommand("reboot");
+        getDevice().waitForDeviceOnline(BOOT_COMPLETE_TIMEOUT_MS);
+        getDevice().waitForBootComplete(BOOT_COMPLETE_TIMEOUT_MS);
+        getDevice().enableAdbRoot();
     }
 
     private void rebootAndWaitBootCompleted() throws Exception {
