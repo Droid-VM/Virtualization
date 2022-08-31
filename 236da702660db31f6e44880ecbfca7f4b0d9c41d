@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b01b1ff4_f30c89b4",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-31T20:12:17Z",
+      "side": 1,
+      "message": "This require a bit of rework on test side as well (ex, choosing the right vbmeta image for non-protected/protected. Doing it in a separate patch in this topic\n\nr.android.com/c/2202141/1",
+      "parentUuid": "10b11133_8fb67fb1",
+      "range": {
+        "startLine": 525,
+        "startChar": 0,
+        "endLine": 525,
+        "endChar": 8
+      },
+      "revId": "236da702660db31f6e44880ecbfca7f4b0d9c41d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d010587_197f7976",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-30T17:52:27Z",
       "side": 1,
       "message": "nit: I\u0027d drop the \"_gen\" here. You already use architecture as a suffix.",
+      "range": {
+        "startLine": 95,
+        "startChar": 50,
+        "endLine": 95,
+        "endChar": 54
+      },
+      "revId": "236da702660db31f6e44880ecbfca7f4b0d9c41d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cac5ec6b_4e20fa64",
+        "filename": "microdroid/initrd/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-31T20:12:17Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "6d010587_197f7976",
       "range": {
         "startLine": 95,
         "startChar": 50,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "744dd7f3_017fc6e3",
+        "filename": "microdroid/initrd/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-31T20:12:17Z",
+      "side": 1,
+      "message": "Done. Thanks for the suggestion.",
+      "parentUuid": "dfd0dcec_eca3bd3b",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 54
+      },
+      "revId": "236da702660db31f6e44880ecbfca7f4b0d9c41d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "537a18e4_ed6a366f",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-08-30T17:52:27Z",
       "side": 1,
       "message": "nit: I would print this the same way as the lines above. Easier to read.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 27
+      },
+      "revId": "236da702660db31f6e44880ecbfca7f4b0d9c41d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "284d0f5a_58caad1d",
+        "filename": "microdroid/initrd/gen_vbmeta_bootconfig.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-08-31T20:12:17Z",
+      "side": 1,
+      "message": "Printing multi-line strings is tricky.\n\nI either get extra tabs in output or \nthe text inside print statement looks quite out of place.",
+      "parentUuid": "537a18e4_ed6a366f",
       "range": {
         "startLine": 52,
         "startChar": 0,
