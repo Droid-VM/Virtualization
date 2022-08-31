@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "190e5e0f_8ec823cd",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-31T09:45:14Z",
+      "side": 1,
+      "message": "s/the CID of//\n\nCan you add @hide here?\n\nThese files define the API we expose to platform apps, and will expose to priv apps.\n\nAs it happens we were planning to add this API anyway: https://docs.google.com/document/d/18a0MZXwv2U6lpZrTQOKe8KeHoAatEvvbUnEEQaOnujc/edit?resourcekey\u003d0-Z6cTurzqPrF0Wo6DXJrRmA#bookmark\u003did.xvpyqlzhpl70\n\nSo I sent you the relevant bug; can you add it to this CL?",
+      "range": {
+        "startLine": 621,
+        "startChar": 35,
+        "endLine": 621,
+        "endChar": 45
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d6dc23c_d7e1f74a",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-31T09:45:14Z",
+      "side": 1,
+      "message": "\"throws Exception\" is frowned upon (go/java-practices/exceptions#documentation, go/android-api-guidelines#appropriate-exception)\n\nI suggest mapping to VirtualMachineException, along the lines of getCid() above.",
+      "range": {
+        "startLine": 622,
+        "startChar": 62,
+        "endLine": 622,
+        "endChar": 71
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c39678_ae165b90",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/IoVsockHostNative.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-31T09:45:14Z",
+      "side": 1,
+      "message": "Is there a better name for this? measureSendRate, or something?",
+      "range": {
+        "startLine": 28,
+        "startChar": 25,
+        "endLine": 28,
+        "endChar": 33
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9782bc42_ddca6c59",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-31T09:45:14Z",
+      "side": 1,
+      "message": "Inline?",
+      "range": {
+        "startLine": 184,
+        "startChar": 37,
+        "endLine": 184,
+        "endChar": 44
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ee296c8_7bf72391",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-31T09:45:14Z",
+      "side": 1,
+      "message": "Maybe log this? I\u0027m not sure where an exception thrown here ends up.",
+      "range": {
+        "startLine": 381,
+        "startChar": 16,
+        "endLine": 381,
+        "endChar": 46
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6112df8e_364d3843",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-31T09:45:14Z",
+      "side": 1,
+      "message": "Better to include the proper throws on this method?\nThe exception handling strategy can then be in one place, at the top level.",
+      "range": {
+        "startLine": 392,
+        "startChar": 0,
+        "endLine": 394,
+        "endChar": 13
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c599fcb_138dec44",
+        "filename": "tests/benchmark/src/jni/io_vsock_host_jni.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-31T09:45:14Z",
+      "side": 1,
+      "message": "time.h\n(https://en.cppreference.com/w/c/chrono/clock)",
+      "range": {
+        "startLine": 22,
+        "startChar": 10,
+        "endLine": 22,
+        "endChar": 16
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2652ddc0_9263e0ac",
+        "filename": "tests/benchmark/src/jni/io_vsock_host_jni.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-31T09:45:14Z",
+      "side": 1,
+      "message": "Should this be passed in? Especially since we need sender \u0026 receiver to agree.",
+      "range": {
+        "startLine": 32,
+        "startChar": 26,
+        "endLine": 32,
+        "endChar": 28
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9313a71a_561a88f1",
+        "filename": "tests/benchmark/src/native/io_vsock.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-31T09:45:14Z",
+      "side": 1,
+      "message": "I concur with the SOCK_CLOEXEC warning, here and below",
+      "range": {
+        "startLine": 31,
+        "startChar": 67,
+        "endLine": 31,
+        "endChar": 68
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "757cc02f_38d6d677",
+        "filename": "tests/benchmark/src/native/io_vsock.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-31T09:45:14Z",
+      "side": 1,
+      "message": "VMADDR_CID_HOST ?",
+      "range": {
+        "startLine": 38,
+        "startChar": 23,
+        "endLine": 38,
+        "endChar": 37
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15a2bd52_99f68d62",
+        "filename": "tests/benchmark/src/native/io_vsock.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-31T09:45:14Z",
+      "side": 1,
+      "message": "nit: log on failure?",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 12
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
