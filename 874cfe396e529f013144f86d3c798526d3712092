@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "633ca76c_6c18a582",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-08-31T23:08:00Z",
+      "side": 1,
+      "message": "Ah, bytes() iterates over Results. This should avoid the unwrap:\n```\nfn get_checksum(file_path: \u0026PathBuf) -\u003e Result\u003cu32\u003e {\n    File::open(file_path)?.bytes().map(|x| Ok(x? as u32)).sum()\n}\n```",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 71
+      },
+      "revId": "874cfe396e529f013144f86d3c798526d3712092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
