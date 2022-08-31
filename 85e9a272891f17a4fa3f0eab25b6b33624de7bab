@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69f3ef7e_5369bce7",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-31T12:07:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "190e5e0f_8ec823cd",
+      "range": {
+        "startLine": 621,
+        "startChar": 35,
+        "endLine": 621,
+        "endChar": 45
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d6dc23c_d7e1f74a",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-31T09:45:14Z",
       "side": 1,
       "message": "\"throws Exception\" is frowned upon (go/java-practices/exceptions#documentation, go/android-api-guidelines#appropriate-exception)\n\nI suggest mapping to VirtualMachineException, along the lines of getCid() above.",
+      "range": {
+        "startLine": 622,
+        "startChar": 62,
+        "endLine": 622,
+        "endChar": 71
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7df1f4aa_76190e5b",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-31T12:07:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d6dc23c_d7e1f74a",
       "range": {
         "startLine": 622,
         "startChar": 62,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63b83288_17e7be87",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/IoVsockHostNative.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-31T12:07:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18c39678_ae165b90",
+      "range": {
+        "startLine": 28,
+        "startChar": 25,
+        "endLine": 28,
+        "endChar": 33
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9782bc42_ddca6c59",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "304b23b7_7a971e33",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-31T12:07:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9782bc42_ddca6c59",
+      "range": {
+        "startLine": 184,
+        "startChar": 37,
+        "endLine": 184,
+        "endChar": 44
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ee296c8_7bf72391",
@@ -106,6 +202,30 @@
       "writtenOn": "2022-08-31T09:45:14Z",
       "side": 1,
       "message": "Maybe log this? I\u0027m not sure where an exception thrown here ends up.",
+      "range": {
+        "startLine": 381,
+        "startChar": 16,
+        "endLine": 381,
+        "endChar": 46
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52683310_8ba72c43",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-31T12:07:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ee296c8_7bf72391",
       "range": {
         "startLine": 381,
         "startChar": 16,
@@ -141,6 +261,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8c93772_d34689a8",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-31T12:07:10Z",
+      "side": 1,
+      "message": "This method is invoked in a separate thread. The exception cannot be collected outside the thread.",
+      "parentUuid": "6112df8e_364d3843",
+      "range": {
+        "startLine": 392,
+        "startChar": 0,
+        "endLine": 394,
+        "endChar": 13
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0c599fcb_138dec44",
         "filename": "tests/benchmark/src/jni/io_vsock_host_jni.cpp",
         "patchSetId": 9
@@ -152,6 +296,30 @@
       "writtenOn": "2022-08-31T09:45:14Z",
       "side": 1,
       "message": "time.h\n(https://en.cppreference.com/w/c/chrono/clock)",
+      "range": {
+        "startLine": 22,
+        "startChar": 10,
+        "endLine": 22,
+        "endChar": 16
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e139ed1_8a1f19ff",
+        "filename": "tests/benchmark/src/jni/io_vsock_host_jni.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-31T12:07:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c599fcb_138dec44",
       "range": {
         "startLine": 22,
         "startChar": 10,
@@ -185,6 +353,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f43b5ed_4ed6c37a",
+        "filename": "tests/benchmark/src/jni/io_vsock_host_jni.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-31T12:07:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2652ddc0_9263e0ac",
+      "range": {
+        "startLine": 32,
+        "startChar": 26,
+        "endLine": 32,
+        "endChar": 28
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9313a71a_561a88f1",
@@ -198,6 +390,30 @@
       "writtenOn": "2022-08-31T09:45:14Z",
       "side": 1,
       "message": "I concur with the SOCK_CLOEXEC warning, here and below",
+      "range": {
+        "startLine": 31,
+        "startChar": 67,
+        "endLine": 31,
+        "endChar": 68
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bbd090a_af2a32cf",
+        "filename": "tests/benchmark/src/native/io_vsock.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-31T12:07:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9313a71a_561a88f1",
       "range": {
         "startLine": 31,
         "startChar": 67,
@@ -233,6 +449,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d537c208_d16ff99c",
+        "filename": "tests/benchmark/src/native/io_vsock.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-31T12:07:10Z",
+      "side": 1,
+      "message": "It doesn\u0027t work with VMADDR_CID_HOST.\n\nI run the VM as server and host as client due to the SELinux restrictions. So this code runs inside VM. We cannot bind the address to host.",
+      "parentUuid": "757cc02f_38d6d677",
+      "range": {
+        "startLine": 38,
+        "startChar": 23,
+        "endLine": 38,
+        "endChar": 37
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15a2bd52_99f68d62",
         "filename": "tests/benchmark/src/native/io_vsock.cpp",
         "patchSetId": 9
@@ -244,6 +484,30 @@
       "writtenOn": "2022-08-31T09:45:14Z",
       "side": 1,
       "message": "nit: log on failure?",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 12
+      },
+      "revId": "85e9a272891f17a4fa3f0eab25b6b33624de7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96446b05_22e4fc0d",
+        "filename": "tests/benchmark/src/native/io_vsock.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-08-31T12:07:10Z",
+      "side": 1,
+      "message": "The shutdown returns -1 without much information. Otherwise I think we don\u0027t need the shutdown here. The server will shutdown automatically with the VM anyway.",
+      "parentUuid": "15a2bd52_99f68d62",
       "range": {
         "startLine": 68,
         "startChar": 4,
