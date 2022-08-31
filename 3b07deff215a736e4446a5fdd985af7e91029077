@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ccf90e5_734d60f3",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-31T15:37:36Z",
+      "side": 1,
+      "message": "Is there any difference before bootloader is ready in both cases?  I guess not?",
+      "range": {
+        "startLine": 87,
+        "startChar": 17,
+        "endLine": 88,
+        "endChar": 32
+      },
+      "revId": "3b07deff215a736e4446a5fdd985af7e91029077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "681a44da_e0ff14a0",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-31T15:37:36Z",
+      "side": 1,
+      "message": "Prefer to mention more detail in the name, since reboot (and stop at bootloader) is definitely not trivial.  A better name will also make the code in tearDown easier to reason.\n\nsetPkvmStatusWithRebootToBootloader maybe...?",
+      "range": {
+        "startLine": 166,
+        "startChar": 17,
+        "endLine": 166,
+        "endChar": 30
+      },
+      "revId": "3b07deff215a736e4446a5fdd985af7e91029077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "946215b8_29df16ff",
@@ -19,6 +65,29 @@
         "startChar": 0,
         "endLine": 180,
         "endChar": 77
+      },
+      "revId": "3b07deff215a736e4446a5fdd985af7e91029077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f7e68be_7ffa4a28",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-08-31T15:37:36Z",
+      "side": 1,
+      "message": "nit: how about...\n\n if (isEnabled) {\n   expectedOutput \u003d \"pkvm is enabled\";\n } else {\n   expectedOutput \u003d \"pkvm is disabled\";\n }\n assertWithMessage(...).contains(expectedOutput);",
+      "range": {
+        "startLine": 183,
+        "startChar": 7,
+        "endLine": 189,
+        "endChar": 9
       },
       "revId": "3b07deff215a736e4446a5fdd985af7e91029077",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
