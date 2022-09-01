@@ -18,6 +18,75 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a009b4f_119ec1cd",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-01T16:16:00Z",
+      "side": 1,
+      "message": "Why testutil rather than test?\nIs there a more specific name?",
+      "range": {
+        "startLine": 28,
+        "startChar": 30,
+        "endLine": 28,
+        "endChar": 38
+      },
+      "revId": "b272a42a42b785c2b48c52a50c9b071dea0d7de2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ade93ad8_2d4a2c5c",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-01T16:16:00Z",
+      "side": 1,
+      "message": "Nit: Pass in ROUND_COUNT as the initial capacity?",
+      "range": {
+        "startLine": 88,
+        "startChar": 58,
+        "endLine": 88,
+        "endChar": 59
+      },
+      "revId": "b272a42a42b785c2b48c52a50c9b071dea0d7de2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1389d9c0_9bf7c429",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-01T16:16:00Z",
+      "side": 1,
+      "message": "Could this also usefully be extracted as a helper?",
+      "range": {
+        "startLine": 119,
+        "startChar": 1,
+        "endLine": 122,
+        "endChar": 9
+      },
+      "revId": "b272a42a42b785c2b48c52a50c9b071dea0d7de2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0b011a9f_8165eff1",
@@ -31,6 +100,30 @@
       "writtenOn": "2022-09-01T14:34:04Z",
       "side": 1,
       "message": "This is modified automatically by the linter  google-java-format -a .",
+      "range": {
+        "startLine": 176,
+        "startChar": 16,
+        "endLine": 179,
+        "endChar": 51
+      },
+      "revId": "b272a42a42b785c2b48c52a50c9b071dea0d7de2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1461f4e6_05add46e",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-01T16:16:00Z",
+      "side": 1,
+      "message": "We shouldn\u0027t be running that - we use the AOSP checkstyle plugin, since AOSP style diverges from Google style in various ways. (See https://r.android.com/1899017)",
+      "parentUuid": "0b011a9f_8165eff1",
       "range": {
         "startLine": 176,
         "startChar": 16,
