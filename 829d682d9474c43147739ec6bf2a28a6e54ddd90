@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "43aea5e4_a788d7fc",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/BenchmarkVmListener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-01T11:23:07Z",
+      "side": 1,
+      "message": "Somehow all the methods in IBenchmarkService throw RemoteException. Without this throw the code doesn\u0027t compile any more with errors like:\n\n```\n$ atest MicrodroidBenchmarks\n\nerror: unreported exception RemoteException; must be caught or declared to be thrown\ndouble elapsedSeconds \u003d benchmarkService.readFile(FILENAME, mFileSizeBytes, mIsRand);\n```\n\nI also think it\u0027s a bit tedious to have this everywhere. Where can we convert this once for all?",
+      "parentUuid": "0c934507_ef1fe389",
+      "range": {
+        "startLine": 38,
+        "startChar": 15,
+        "endLine": 38,
+        "endChar": 38
+      },
+      "revId": "829d682d9474c43147739ec6bf2a28a6e54ddd90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7b96f94_c481e5df",
         "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/BenchmarkVmListener.java",
         "patchSetId": 2
@@ -54,6 +78,30 @@
       "writtenOn": "2022-09-01T09:55:03Z",
       "side": 1,
       "message": "nit: final ?\nTo emphasize that this is no longer a customization point.",
+      "range": {
+        "startLine": 48,
+        "startChar": 4,
+        "endLine": 48,
+        "endChar": 16
+      },
+      "revId": "829d682d9474c43147739ec6bf2a28a6e54ddd90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f9d96c6_4126147d",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/BenchmarkVmListener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-01T11:23:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7b96f94_c481e5df",
       "range": {
         "startLine": 48,
         "startChar": 4,
