@@ -16,15 +16,16 @@
 
 package android.avf.test;
 
-import android.platform.test.annotations.RootPermissionTest;
-
 import static com.android.tradefed.testtype.DeviceJUnit4ClassRunner.TestMetrics;
 
 import static com.google.common.truth.Truth.assertWithMessage;
 import static com.google.common.truth.TruthJUnit.assume;
 
+import android.platform.test.annotations.RootPermissionTest;
+
 import com.android.microdroid.test.CommandRunner;
 import com.android.microdroid.test.MicrodroidHostTestCaseBase;
+import com.android.microdroid.testutil.MetricsProcessor;
 import com.android.tradefed.log.LogUtil.CLog;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner;
 import com.android.tradefed.util.CommandResult;
@@ -34,6 +35,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -59,6 +63,8 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
     private static final int ROUND_COUNT = 5;
     private static final String METRIC_PREFIX = "avf_perf/compos/";
 
+    private final MetricsProcessor mMetricsProcessor = new MetricsProcessor(METRIC_PREFIX);
+
     @Before
     public void setUp() throws Exception {
         testIfDeviceIsCapable(getDevice());
@@ -79,8 +85,8 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
     public void testBootWithAndWithoutCompOS() throws Exception {
         assume().withMessage("Skip on CF; too slow").that(isCuttlefish()).isFalse();
 
-        double[] bootWithCompOsTime = new double[ROUND_COUNT];
-        double[] bootWithoutCompOsTime = new double[ROUND_COUNT];
+        List<Double> bootWithCompOsTime = new ArrayList<>();
+        List<Double> bootWithoutCompOsTime = new ArrayList<>();
 
         for (int round = 0; round < ROUND_COUNT; ++round) {
 
@@ -91,7 +97,7 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
             rebootAndWaitBootCompleted();
             long elapsedWithCompOS = System.nanoTime() - start;
             double elapsedSec = elapsedWithCompOS / NANOS_IN_SEC;
-            bootWithCompOsTime[round] = elapsedSec;
+            bootWithCompOsTime.add(elapsedSec);
             CLog.i("Boot time with compilation OS took " + elapsedSec + "s");
 
             // Boot time without compilation OS test.
@@ -100,39 +106,20 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
             rebootAndWaitBootCompleted();
             long elapsedWithoutCompOS = System.nanoTime() - start;
             elapsedSec = elapsedWithoutCompOS / NANOS_IN_SEC;
-            bootWithoutCompOsTime[round] = elapsedSec;
+            bootWithoutCompOsTime.add(elapsedSec);
             CLog.i("Boot time without compilation OS took " + elapsedSec + "s");
         }
 
-        reportMetric("boot_time_with_compos", "s", bootWithCompOsTime);
-        reportMetric("boot_time_without_compos", "s", bootWithoutCompOsTime);
+        reportMetric(bootWithCompOsTime, "boot_time_with_compos", "s");
+        reportMetric(bootWithoutCompOsTime, "boot_time_without_compos", "s");
     }
 
-    private void reportMetric(String name, String unit, double[] values) {
-        double sum = 0;
-        double min = Double.MAX_VALUE;
-        double max = Double.MIN_VALUE;
-
-        for (double val : values) {
-            sum += val;
-            min = val < min ? val : min;
-            max = val > max ? val : max;
-        }
-
-        double average = sum / values.length;
-
-        double variance = 0;
-        for (double val : values) {
-            final double tmp = val - average;
-            variance += tmp * tmp;
-        }
-        double stdev = Math.sqrt(variance / (double) (values.length - 1));
-
+    private void reportMetric(List<Double> data, String name, String unit) {
+        Map<String, Double> stats = mMetricsProcessor.computeStats(data, name, unit);
         TestMetrics metrics = new TestMetrics();
-        metrics.addTestMetric(METRIC_PREFIX + name + "_average_" + unit, Double.toString(average));
-        metrics.addTestMetric(METRIC_PREFIX + name + "_min_" + unit, Double.toString(min));
-        metrics.addTestMetric(METRIC_PREFIX + name + "_max_" + unit, Double.toString(max));
-        metrics.addTestMetric(METRIC_PREFIX + name + "_stdev_" + unit, Double.toString(stdev));
+        for (Map.Entry<String, Double> entry : stats.entrySet()) {
+            metrics.addTestMetric(entry.getKey(), Double.toString(entry.getValue()));
+        }
     }
 
     private void rebootAndWaitBootCompleted() throws Exception {
@@ -152,10 +139,11 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
             try {
                 CommandRunner android = new CommandRunner(getDevice());
 
-                String result = android.run(
-                        COMPOSD_CMD_BIN + " staged-apex-compile");
+                String result = android.run(COMPOSD_CMD_BIN + " staged-apex-compile");
                 assertWithMessage("Failed to compile staged APEX. Reason: " + result)
-                    .that(result).ignoringCase().contains("all ok");
+                        .that(result)
+                        .ignoringCase()
+                        .contains("all ok");
 
                 CLog.i("Success to compile staged APEX. Result: " + result);
 
@@ -183,22 +171,23 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
             try {
                 CommandRunner android = new CommandRunner(getDevice());
 
-                String packagesOutput =
-                        android.run("pm list packages -f --apex-only");
+                String packagesOutput = android.run("pm list packages -f --apex-only");
 
-                Pattern p = Pattern.compile(
-                        "package:(.*)=(com(?:\\.google)?\\.android\\.art)$", Pattern.MULTILINE);
+                Pattern p =
+                        Pattern.compile(
+                                "package:(.*)=(com(?:\\.google)?\\.android\\.art)$",
+                                Pattern.MULTILINE);
                 Matcher m = p.matcher(packagesOutput);
                 assertWithMessage("ART module not found. Packages are:\n" + packagesOutput)
-                    .that(m.find())
-                    .isTrue();
+                        .that(m.find())
+                        .isTrue();
 
                 String artApexPath = m.group(1);
 
-                CommandResult result = android.runForResult(
-                        "pm install --apex " + artApexPath);
+                CommandResult result = android.runForResult("pm install --apex " + artApexPath);
                 assertWithMessage("Failed to install APEX. Reason: " + result)
-                    .that(result.getExitCode()).isEqualTo(0);
+                        .that(result.getExitCode())
+                        .isEqualTo(0);
 
                 CLog.i("Success to install APEX. Result: " + result);
 
