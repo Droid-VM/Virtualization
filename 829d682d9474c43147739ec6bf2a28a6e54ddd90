@@ -16,6 +16,52 @@
       "message": "Hi Alan,\n\nCould you please review this cl?",
       "revId": "829d682d9474c43147739ec6bf2a28a6e54ddd90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c934507_ef1fe389",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/BenchmarkVmListener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-01T09:55:03Z",
+      "side": 1,
+      "message": "I think you can remove this everywhere, since none of your implementations need to throw this. (And shouldn\u0027t - they should almost certainly convert any RemoteException to a runtime exception, e.g. via RemoteException#rethrowAsRuntimeException.)\nThe AIDL interface has it because it involves an IPC, but this is purely local.",
+      "range": {
+        "startLine": 38,
+        "startChar": 15,
+        "endLine": 38,
+        "endChar": 38
+      },
+      "revId": "829d682d9474c43147739ec6bf2a28a6e54ddd90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7b96f94_c481e5df",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/BenchmarkVmListener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-01T09:55:03Z",
+      "side": 1,
+      "message": "nit: final ?\nTo emphasize that this is no longer a customization point.",
+      "range": {
+        "startLine": 48,
+        "startChar": 4,
+        "endLine": 48,
+        "endChar": 16
+      },
+      "revId": "829d682d9474c43147739ec6bf2a28a6e54ddd90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
