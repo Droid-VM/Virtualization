@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8af18d7f_ab1399c9",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-01T07:46:37Z",
+      "side": 1,
+      "message": "sorry not quite understand what you mean\nwhen enter rebootFromBootloaderAndWaitBootCompleted, the device is in bootloader state in both enable/disable pkvm case because previous setPKVMStatus() function call will boot to bootloader mode",
+      "parentUuid": "9ccf90e5_734d60f3",
+      "range": {
+        "startLine": 87,
+        "startChar": 17,
+        "endLine": 88,
+        "endChar": 32
+      },
+      "revId": "3b07deff215a736e4446a5fdd985af7e91029077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "681a44da_e0ff14a0",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-31T15:37:36Z",
       "side": 1,
       "message": "Prefer to mention more detail in the name, since reboot (and stop at bootloader) is definitely not trivial.  A better name will also make the code in tearDown easier to reason.\n\nsetPkvmStatusWithRebootToBootloader maybe...?",
+      "range": {
+        "startLine": 166,
+        "startChar": 17,
+        "endLine": 166,
+        "endChar": 30
+      },
+      "revId": "3b07deff215a736e4446a5fdd985af7e91029077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a1473cd_5976a5f8",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-01T07:46:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "681a44da_e0ff14a0",
       "range": {
         "startLine": 166,
         "startChar": 17,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2f7992d_9a6aa973",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-01T07:46:37Z",
+      "side": 1,
+      "message": "add isPKVMStatusSwitchSupported() to check",
+      "parentUuid": "946215b8_29df16ff",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 77
+      },
+      "revId": "3b07deff215a736e4446a5fdd985af7e91029077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f7e68be_7ffa4a28",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-08-31T15:37:36Z",
       "side": 1,
       "message": "nit: how about...\n\n if (isEnabled) {\n   expectedOutput \u003d \"pkvm is enabled\";\n } else {\n   expectedOutput \u003d \"pkvm is disabled\";\n }\n assertWithMessage(...).contains(expectedOutput);",
+      "range": {
+        "startLine": 183,
+        "startChar": 7,
+        "endLine": 189,
+        "endChar": 9
+      },
+      "revId": "3b07deff215a736e4446a5fdd985af7e91029077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "407f99ef_d67bcf00",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-01T07:46:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f7e68be_7ffa4a28",
       "range": {
         "startLine": 183,
         "startChar": 7,
