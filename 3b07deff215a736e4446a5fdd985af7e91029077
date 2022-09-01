@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8c7b272_7d9b4be1",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-01T15:26:09Z",
+      "side": 1,
+      "message": "Since we\u0027re skipping the time between power up and bootloader ready, I was wondering if anything related to pKVM-ness could run conditionally.  In other words, we\u0027re currently measuring the delta after bootloader, and I was curious if the delta before is supposed to be zero.  But I\u0027m guessing it most likely doesn\u0027t matter.",
+      "parentUuid": "8af18d7f_ab1399c9",
+      "range": {
+        "startLine": 87,
+        "startChar": 17,
+        "endLine": 88,
+        "endChar": 32
+      },
+      "revId": "3b07deff215a736e4446a5fdd985af7e91029077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "681a44da_e0ff14a0",
