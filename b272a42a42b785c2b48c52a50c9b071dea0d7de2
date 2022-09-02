@@ -396,6 +396,30 @@
       },
       "revId": "b272a42a42b785c2b48c52a50c9b071dea0d7de2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64e77a4e_99f6b690",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-02T11:07:07Z",
+      "side": 1,
+      "message": "I see. I restored most of the linter-changed code to its original style. Actually I don\u0027t mind which linter we take. Since I usually first edit a file freely and lint it after all the change is done, I only want something that can lint and fix the format in place. It looks like checkstyle.py only reports errors but it cannot fix them[1].\n\nDo we have something similar to `google-java-format -a -i` with `checkstyle.py`?\n\n[1] https://cs.android.com/android/platform/superproject/+/master:prebuilts/checkstyle/checkstyle.py",
+      "parentUuid": "853d0aa1_c28db16f",
+      "range": {
+        "startLine": 176,
+        "startChar": 16,
+        "endLine": 179,
+        "endChar": 51
+      },
+      "revId": "b272a42a42b785c2b48c52a50c9b071dea0d7de2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
