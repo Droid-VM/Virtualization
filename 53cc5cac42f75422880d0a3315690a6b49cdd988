@@ -3,6 +3,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b6d8940_6d4420c2",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-02T00:00:06Z",
+      "side": 1,
+      "message": "Shoudln\u0027t this be Result\u003cbool\u003e because Err can happen only when it was unable to get the type?",
+      "range": {
+        "startLine": 745,
+        "startChar": 46,
+        "endLine": 745,
+        "endChar": 56
+      },
+      "revId": "53cc5cac42f75422880d0a3315690a6b49cdd988",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebf070ed_b68ab1cf",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-02T00:00:06Z",
+      "side": 1,
+      "message": "These are types, not attributes, right? Can\u0027t it be attribute? Otherwise, we will be disallowing files attributed as system_file_type, but has a different concrete type (ex: system_lib_file)",
+      "range": {
+        "startLine": 752,
+        "startChar": 14,
+        "endLine": 752,
+        "endChar": 26
+      },
+      "revId": "53cc5cac42f75422880d0a3315690a6b49cdd988",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcb1f8ac_e5547050",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-02T00:00:06Z",
+      "side": 1,
+      "message": "perhaps, Result\u003c()\u003e because you wanted to show the file label of the partition image?",
+      "range": {
+        "startLine": 758,
+        "startChar": 13,
+        "endLine": 758,
+        "endChar": 50
+      },
+      "revId": "53cc5cac42f75422880d0a3315690a6b49cdd988",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "734fd358_91d5b806",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 2
@@ -14,6 +83,30 @@
       "writtenOn": "2022-09-01T16:24:11Z",
       "side": 1,
       "message": "This is mostly a proposal in the form of a CL.\nWDYT?",
+      "range": {
+        "startLine": 735,
+        "startChar": 0,
+        "endLine": 761,
+        "endChar": 0
+      },
+      "revId": "53cc5cac42f75422880d0a3315690a6b49cdd988",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64f8260b_43e1064d",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-02T00:00:06Z",
+      "side": 1,
+      "message": "LGTM, though I am a bit uncomfortable with staging_data_file which must be from the compos usecase; ideally such a usecase shouldn\u0027t be encoded here.",
+      "parentUuid": "734fd358_91d5b806",
       "range": {
         "startLine": 735,
         "startChar": 0,
