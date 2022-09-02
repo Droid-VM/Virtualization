@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9ec553b0_5e01ab8a",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-02T09:11:18Z",
+      "side": 1,
+      "message": "After some check, it looks like `com.android.microdroid.test` has two separate targets: one for host tests, the other for device tests. It\u0027s a bit confusing but okay for now since the code is relatively simple in them.\n\nWould you like to separate `test` into two packages `test.host` and `test.device`, so that each of them has its own target? I think that should be a different cl if we want to do this.",
+      "parentUuid": "dc9300eb_e28bf552",
+      "range": {
+        "startLine": 28,
+        "startChar": 30,
+        "endLine": 28,
+        "endChar": 38
+      },
+      "revId": "b272a42a42b785c2b48c52a50c9b071dea0d7de2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ade93ad8_2d4a2c5c",
         "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
         "patchSetId": 3
@@ -292,6 +316,30 @@
       "side": 1,
       "message": "Well, checkstyle gets run at repo upload time, which is almost exactly the wrong time.\n\nI think you can run the preupload checks without running repo via `~/android/master/tools/repohooks/pre-upload.py` (there\u0027s a README in that directory). But that\u0027s not much better.\n\nWhat I do is use IntelliJ, which has an AndroidStyle style plugin that seems to do the right thing automatically as you edit, mostly.\n\nIt\u0027s also supported by aidegen.",
       "parentUuid": "ff390528_75e65d75",
+      "range": {
+        "startLine": 176,
+        "startChar": 16,
+        "endLine": 179,
+        "endChar": 51
+      },
+      "revId": "b272a42a42b785c2b48c52a50c9b071dea0d7de2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87ca0299_dbc43241",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-02T09:11:18Z",
+      "side": 1,
+      "message": "Thanks. I wonder if it\u0027s possible to restore the pre-submit google-java-format with the option `--aosp`? It looks like the two linters will do the same thing if both are configured to aosp, but google-java-format can be configured easily as a presubmit hook.",
+      "parentUuid": "33115f4a_03420afc",
       "range": {
         "startLine": 176,
         "startChar": 16,
