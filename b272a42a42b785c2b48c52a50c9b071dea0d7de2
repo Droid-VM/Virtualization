@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc9300eb_e28bf552",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-02T08:17:38Z",
+      "side": 1,
+      "message": "Ah, naming is hard.\nRename test to test.host, rename testutil to test.common ?",
+      "parentUuid": "ffb6dd71_bcafecc0",
+      "range": {
+        "startLine": 28,
+        "startChar": 30,
+        "endLine": 28,
+        "endChar": 38
+      },
+      "revId": "b272a42a42b785c2b48c52a50c9b071dea0d7de2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ade93ad8_2d4a2c5c",
         "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
         "patchSetId": 3
@@ -161,6 +185,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "26b6416a_5b0d46b5",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-02T08:17:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "aee4403a_65391b3e",
+      "range": {
+        "startLine": 119,
+        "startChar": 1,
+        "endLine": 122,
+        "endChar": 9
+      },
+      "revId": "b272a42a42b785c2b48c52a50c9b071dea0d7de2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0b011a9f_8165eff1",
         "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
         "patchSetId": 3
@@ -220,6 +268,30 @@
       "side": 1,
       "message": "Thanks for the pointer! Actually the option `-a` is supposed to follow AOSP style instead of Google style.\n\nAre there any scripts that can run checkstyle aosp lint easily?\n\nOtherwise, I think it can be good to have some pre-submit cl formatter for java. Currently the java linter only checks unused import and some obvious indent issues.",
       "parentUuid": "1461f4e6_05add46e",
+      "range": {
+        "startLine": 176,
+        "startChar": 16,
+        "endLine": 179,
+        "endChar": 51
+      },
+      "revId": "b272a42a42b785c2b48c52a50c9b071dea0d7de2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33115f4a_03420afc",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-02T08:17:38Z",
+      "side": 1,
+      "message": "Well, checkstyle gets run at repo upload time, which is almost exactly the wrong time.\n\nI think you can run the preupload checks without running repo via `~/android/master/tools/repohooks/pre-upload.py` (there\u0027s a README in that directory). But that\u0027s not much better.\n\nWhat I do is use IntelliJ, which has an AndroidStyle style plugin that seems to do the right thing automatically as you edit, mostly.\n\nIt\u0027s also supported by aidegen.",
+      "parentUuid": "ff390528_75e65d75",
       "range": {
         "startLine": 176,
         "startChar": 16,
