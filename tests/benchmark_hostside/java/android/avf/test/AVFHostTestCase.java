@@ -25,8 +25,8 @@ import static com.google.common.truth.TruthJUnit.assume;
 
 import static org.junit.Assume.assumeTrue;
 
-import com.android.microdroid.test.CommandRunner;
-import com.android.microdroid.test.MicrodroidHostTestCaseBase;
+import com.android.microdroid.test.host.CommandRunner;
+import com.android.microdroid.test.host.MicrodroidHostTestCaseBase;
 import com.android.tradefed.log.LogUtil.CLog;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner;
 import com.android.tradefed.util.CommandResult;
