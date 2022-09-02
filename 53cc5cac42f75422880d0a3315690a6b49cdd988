@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01ebd79f_8b3860e1",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-02T08:39:43Z",
+      "side": 1,
+      "message": "I\u0027m mostly following the pattern of the check_* functions above, that return a suitable Err if the thing is not allowed, and Ok(()) if all is well.\nThe messages are helpful for resolving the problem (or at least they are now, once we display them in full).\n\n(My first draft had an is_label_allowed returning bool, but that didn\u0027t work as well.)",
+      "parentUuid": "5b6d8940_6d4420c2",
+      "range": {
+        "startLine": 745,
+        "startChar": 46,
+        "endLine": 745,
+        "endChar": 56
+      },
+      "revId": "53cc5cac42f75422880d0a3315690a6b49cdd988",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebf070ed_b68ab1cf",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cea4c2b8_d782b081",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-02T08:39:43Z",
+      "side": 1,
+      "message": "That\u0027s mostly deliberate.\nI\u0027m open to adding more types if there\u0027s a need.\nAllowing attributes would be a lot more complicated, and also make the check less useful, since it\u0027s pretty easy to add attributes to an arbitrary type.",
+      "parentUuid": "ebf070ed_b68ab1cf",
+      "range": {
+        "startLine": 752,
+        "startChar": 14,
+        "endLine": 752,
+        "endChar": 26
+      },
+      "revId": "53cc5cac42f75422880d0a3315690a6b49cdd988",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dcb1f8ac_e5547050",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 2
@@ -60,6 +108,30 @@
       "writtenOn": "2022-09-02T00:00:06Z",
       "side": 1,
       "message": "perhaps, Result\u003c()\u003e because you wanted to show the file label of the partition image?",
+      "range": {
+        "startLine": 758,
+        "startChar": 13,
+        "endLine": 758,
+        "endChar": 50
+      },
+      "revId": "53cc5cac42f75422880d0a3315690a6b49cdd988",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6135ad5c_0788db5a",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-02T08:39:43Z",
+      "side": 1,
+      "message": "Yes exactly. Success is boring, but failure deserves a helpful message.",
+      "parentUuid": "dcb1f8ac_e5547050",
       "range": {
         "startLine": 758,
         "startChar": 13,
@@ -107,6 +179,30 @@
       "side": 1,
       "message": "LGTM, though I am a bit uncomfortable with staging_data_file which must be from the compos usecase; ideally such a usecase shouldn\u0027t be encoded here.",
       "parentUuid": "734fd358_91d5b806",
+      "range": {
+        "startLine": 735,
+        "startChar": 0,
+        "endLine": 761,
+        "endChar": 0
+      },
+      "revId": "53cc5cac42f75422880d0a3315690a6b49cdd988",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b995efcd_c5dd679f",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-02T08:39:43Z",
+      "side": 1,
+      "message": "Oddly enough, it isn\u0027t just for the compos prefer_staged case.\nFor an updated APEX, the apex image file in /data/apex/active is labeled staging_data_file.",
+      "parentUuid": "64f8260b_43e1064d",
       "range": {
         "startLine": 735,
         "startChar": 0,
