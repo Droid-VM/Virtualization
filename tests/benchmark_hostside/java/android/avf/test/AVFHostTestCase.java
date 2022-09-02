@@ -121,9 +121,8 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
             // Boot time with compilation OS test.
             reInstallApex(REINSTALL_APEX_TIMEOUT_SEC);
             compileStagedApex(COMPILE_STAGED_APEX_TIMEOUT_SEC);
-            getDevice().nonBlockingReboot();
             long start = System.nanoTime();
-            waitForBootCompleted();
+            rebootAndWaitBootCompleted();
             long elapsedWithCompOS = System.nanoTime() - start;
             double elapsedSec = elapsedWithCompOS / NANOS_IN_SEC;
             bootWithCompOsTime[round] = elapsedSec;
@@ -131,9 +130,8 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
 
             // Boot time without compilation OS test.
             reInstallApex(REINSTALL_APEX_TIMEOUT_SEC);
-            getDevice().nonBlockingReboot();
             start = System.nanoTime();
-            waitForBootCompleted();
+            rebootAndWaitBootCompleted();
             long elapsedWithoutCompOS = System.nanoTime() - start;
             elapsedSec = elapsedWithoutCompOS / NANOS_IN_SEC;
             bootWithoutCompOsTime[round] = elapsedSec;
@@ -218,7 +216,8 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
         getDevice().enableAdbRoot();
     }
 
-    private void waitForBootCompleted() throws Exception {
+    private void rebootAndWaitBootCompleted() throws Exception {
+        getDevice().nonBlockingReboot();
         getDevice().waitForDeviceOnline(BOOT_COMPLETE_TIMEOUT_MS);
         getDevice().waitForBootComplete(BOOT_COMPLETE_TIMEOUT_MS);
         getDevice().enableAdbRoot();
