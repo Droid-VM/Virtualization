@@ -16,7 +16,7 @@
 
 package com.android.microdroid.test;
 
-import static com.android.microdroid.test.CommandResultSubject.command_results;
+import static com.android.microdroid.test.host.CommandResultSubject.command_results;
 import static com.android.tradefed.testtype.DeviceJUnit4ClassRunner.TestLogData;
 
 import static com.google.common.truth.Truth.assertThat;
