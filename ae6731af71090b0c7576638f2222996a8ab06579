@@ -22,6 +22,30 @@
       },
       "revId": "ae6731af71090b0c7576638f2222996a8ab06579",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1db52152_45565620",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-02T07:50:26Z",
+      "side": 1,
+      "message": "sorry I am not sure what you mean, all boot time data will be uploaded be below code. Why need to separate to other case?\n\n\n---\nThe\n\n        reportMetric(\"boot_time_with_pkvm_enable\", \"s\", bootWithPKVMEnableTime);\n        reportMetric(\"boot_time_with_pkvm_disable\", \"s\", bootWithoutPKVMEnableTime);\n\n        reportMetric(\"boot_time_with_compos\", \"s\", bootWithCompOsTime);\n        reportMetric(\"boot_time_without_compos\", \"s\", bootWithoutCompOsTime);",
+      "parentUuid": "2f9046fe_375f6f74",
+      "range": {
+        "startLine": 132,
+        "startChar": 12,
+        "endLine": 132,
+        "endChar": 52
+      },
+      "revId": "ae6731af71090b0c7576638f2222996a8ab06579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
