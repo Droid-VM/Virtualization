@@ -32,6 +32,7 @@
 #include <random>
 #include <string>
 
+#include "io_authfs.h"
 #include "io_vsock.h"
 
 using aidl::android::system::virtualmachineservice::IVirtualMachineService;
@@ -87,6 +88,15 @@ public:
     ndk::ScopedAStatus runVsockServerAndReceiveData(int32_t server_fd,
                                                     int32_t num_bytes_to_receive) override {
         auto res = io_vsock::run_vsock_server_and_receive_data(server_fd, num_bytes_to_receive);
+        return resultStatus(res);
+    }
+
+    ndk::ScopedAStatus measureAuthFsReadRate(int remoteFd, int64_t fileSizeBytes, bool isRand,
+                                             double* out) override {
+        auto res = io_authfs::measure_read_rate(remoteFd, fileSizeBytes, isRand);
+        if (res.ok()) {
+            *out = res.value();
+        }
         return resultStatus(res);
     }
 

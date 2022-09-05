@@ -54,11 +54,12 @@ import java.util.concurrent.atomic.AtomicReference;
 public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
     private static final String TAG = "MicrodroidBenchmarks";
     private static final String METRIC_NAME_PREFIX = "avf_perf/microdroid/";
-    private static final int IO_TEST_TRIAL_COUNT = 5;
+    private static final int IO_TEST_TRIAL_COUNT = 2;
 
-    @Rule public Timeout globalTimeout = Timeout.seconds(300);
+    @Rule public Timeout globalTimeout = Timeout.seconds(30);
 
     private static final String APEX_ETC_FS = "/apex/com.android.virt/etc/fs/";
+    private static final String FD_SERVER_BIN = "/apex/com.android.virt/bin/fd_server";
     private static final double SIZE_MB = 1024.0 * 1024.0;
     private static final String MICRODROID_IMG_PREFIX = "microdroid_";
     private static final String MICRODROID_IMG_SUFFIX = ".img";
@@ -201,6 +202,39 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
             BenchmarkVmListener.create(new VsockListener(transferRates, port)).runToFinish(TAG, vm);
         }
         reportMetrics(transferRates, "vsock/transfer_host_to_vm", "mb_per_sec");
+    }
+
+    @Test
+    public void testAuthFsVMSeqRead() throws Exception {
+        String filename = APEX_ETC_FS + "microdroid_super.img";
+        File file = new File(filename);
+        long fileSizeBytes;
+        try {
+            fileSizeBytes = Files.size(file.toPath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        assertThat(fileSizeBytes).isGreaterThan((long) SIZE_MB);
+        // Set up fd server
+        String cmd = FD_SERVER_BIN + " --open-ro 3:" + filename + " --ro-fds 3";
+        mInstrumentation.getUiAutomation().adoptShellPermissionIdentity();
+        mInstrumentation.getUiAutomation().executeShellCommand(cmd);
+        mInstrumentation.getUiAutomation().dropShellPermissionIdentity();
+
+        VirtualMachineConfig config =
+                mInner.newVmConfigBuilder("assets/vm_config_io.json")
+                        .debugLevel(DebugLevel.FULL)
+                        .build();
+        List<Double> rates = new ArrayList<>(IO_TEST_TRIAL_COUNT);
+
+        for (int i = 0; i < IO_TEST_TRIAL_COUNT; ++i) {
+            String vmName = "test_vm_io_" + i;
+            mInner.forceCreateNewVirtualMachine(vmName, config);
+            VirtualMachine vm = mInner.getVirtualMachineManager().get(vmName);
+            BenchmarkVmListener.create(new AuthFsReadListener(rates, 3, fileSizeBytes, false))
+                    .runToFinish(TAG, vm);
+        }
+        reportMetrics(rates, "authfs/seq_read_in_vm", "mb_per_sec");
     }
 
     @Test
@@ -362,6 +396,29 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
                 Log.e(TAG, "Error inside runVsockClientAndSendData():" + e);
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    private static class AuthFsReadListener implements BenchmarkVmListener.InnerListener {
+        private final List<Double> mReadRates;
+        private final int mRemoteFd;
+        private final long mFileSizeBytes;
+        private final boolean mIsRand;
+
+        AuthFsReadListener(
+                List<Double> readRates, int remoteFd, long fileSizeBytes, boolean isRand) {
+            mReadRates = readRates;
+            mRemoteFd = remoteFd;
+            mFileSizeBytes = fileSizeBytes;
+            mIsRand = isRand;
+        }
+
+        @Override
+        public void onPayloadReady(VirtualMachine vm, IBenchmarkService benchmarkService)
+                throws RemoteException {
+            double readRate =
+                    benchmarkService.measureAuthFsReadRate(mRemoteFd, mFileSizeBytes, mIsRand);
+            mReadRates.add(readRate);
         }
     }
 }
