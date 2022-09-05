@@ -34,4 +34,7 @@ interface IBenchmarkService {
 
     /** Runs the vsock server on VM and receives data. */
     void runVsockServerAndReceiveData(int serverFd, int numBytesToReceive);
+
+    /** Measures authfs read rate. */
+    double measureAuthFsReadRate(int remoteFd, long fileSizeBytes, boolean isRand);
 }
