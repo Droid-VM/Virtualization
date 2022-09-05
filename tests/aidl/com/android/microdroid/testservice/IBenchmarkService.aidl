@@ -18,7 +18,7 @@ package com.android.microdroid.testservice;
 
 /** {@hide} */
 interface IBenchmarkService {
-    const int SERVICE_PORT = 5677;
+    const int SERVICE_PORT = 3264;
 
     /**
      * Measures the read rate for reading the given file.
@@ -38,4 +38,7 @@ interface IBenchmarkService {
 
     /** Runs the vsock server on VM and receives data. */
     void runVsockServerAndReceiveData(int serverFd, int numBytesToReceive);
+
+    /** Measures authfs read rate. */
+    double measureAuthFsReadRate(int remoteFd, long fileSizeBytes, boolean isRand);
 }
