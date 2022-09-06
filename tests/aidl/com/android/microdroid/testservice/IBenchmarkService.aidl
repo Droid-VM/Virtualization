@@ -20,8 +20,8 @@ package com.android.microdroid.testservice;
 interface IBenchmarkService {
     const int SERVICE_PORT = 5677;
 
-    /** Reads a file and returns the elapsed seconds for the reading. */
-    double readFile(String filename, long fileSizeBytes, boolean isRand);
+    /** Measures the reading rate for reading the given file. */
+    double measureReadRate(String filename, long fileSizeBytes, boolean isRand);
 
     /** Returns an entry from /proc/meminfo. */
     long getMemInfoEntry(String name);
