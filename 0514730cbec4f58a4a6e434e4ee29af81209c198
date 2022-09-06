@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7310b55_0f4f31ea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-06T16:14:41Z",
+      "side": 1,
+      "message": "nit: per the Git guideline, it\u0027s better to keep the first line under 50 characters if possible, followed by a new line.  Many UIs are designed with this assumption.  Overflow slightly is fine.",
+      "range": {
+        "startLine": 7,
+        "startChar": 1,
+        "endLine": 9,
+        "endChar": 43
+      },
+      "revId": "0514730cbec4f58a4a6e434e4ee29af81209c198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91b514fa_843a930b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-06T16:14:41Z",
+      "side": 1,
+      "message": "nit: poll?",
+      "range": {
+        "startLine": 12,
+        "startChar": 19,
+        "endLine": 12,
+        "endChar": 23
+      },
+      "revId": "0514730cbec4f58a4a6e434e4ee29af81209c198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be431f02_c30cf907",
         "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
         "patchSetId": 6
@@ -257,6 +303,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "35fac480_496d26cd",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-06T16:14:41Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "fd754433_72b7fdec",
+      "range": {
+        "startLine": 212,
+        "startChar": 14,
+        "endLine": 212,
+        "endChar": 37
+      },
+      "revId": "0514730cbec4f58a4a6e434e4ee29af81209c198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5785905_24cf5fd3",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-06T16:14:41Z",
+      "side": 1,
+      "message": "optional: You can also use `new CountDownLatch(1)` which adds a bit more semantics. No big deal though.",
+      "range": {
+        "startLine": 216,
+        "startChar": 12,
+        "endLine": 216,
+        "endChar": 45
+      },
+      "revId": "0514730cbec4f58a4a6e434e4ee29af81209c198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "947ba63a_61e32ee0",
         "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
         "patchSetId": 6
@@ -273,6 +366,29 @@
         "startChar": 57,
         "endLine": 239,
         "endChar": 68
+      },
+      "revId": "0514730cbec4f58a4a6e434e4ee29af81209c198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca06880c_941bdb31",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-06T16:14:41Z",
+      "side": 1,
+      "message": "It\u0027d be great if you can extract this to avoid duplication.",
+      "range": {
+        "startLine": 218,
+        "startChar": 12,
+        "endLine": 244,
+        "endChar": 14
       },
       "revId": "0514730cbec4f58a4a6e434e4ee29af81209c198",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
