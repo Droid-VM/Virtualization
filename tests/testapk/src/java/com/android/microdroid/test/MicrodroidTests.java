@@ -466,6 +466,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     })
     public void bootFailsWhenUBootAvbDataIsCompromised()
             throws VirtualMachineException, InterruptedException, IOException {
+        assume().withMessage("TODO: b/XYZ").that(mProtectedVm).isFalse();
         if (mProtectedVm) {
             assertThatBootFailsAfterCompromisingPartition(U_BOOT_AVB_PARTITION_UUID);
         } else {
@@ -481,6 +482,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     })
     public void bootFailsWhenUBootEnvDataIsCompromised()
             throws VirtualMachineException, InterruptedException, IOException {
+        assume().withMessage("TODO: b/XYZ").that(mProtectedVm).isFalse();
         if (mProtectedVm) {
             assertThatBootFailsAfterCompromisingPartition(U_BOOT_ENV_PARTITION_UUID);
         } else {
@@ -496,6 +498,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     })
     public void bootFailsWhenPvmFwDataIsCompromised()
             throws VirtualMachineException, InterruptedException, IOException {
+        assume().withMessage("TODO: b/XYZ").that(mProtectedVm).isFalse();
         if (mProtectedVm) {
             assertThatBootFailsAfterCompromisingPartition(PVM_FW_PARTITION_UUID);
         } else {
