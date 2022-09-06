@@ -16,6 +16,24 @@
       "message": "Move the `read_esr` call a line lower, in case it causes another exception at least the `emergency_write_str` might get some output out first.",
       "revId": "e1e8b51902e4b7d89c4f0c70a0ddbb28f8290d24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24c2dca9_8ddf0ead",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-06T13:00:02Z",
+      "side": 1,
+      "message": "Is it even possible to raise an exception by accessing the Exception Syndrome?\n\nOTOH, there are many things that can go wrong when writing to UART. Note that I\u0027m reading the ESR first here because that\u0027s what the next patch will require: if the ESR shows that it\u0027s an injected exception, writing to the UART will cause a \"handler-loop\" by raising an exception (see that patch for details).",
+      "parentUuid": "2a885ed2_467a74b6",
+      "revId": "e1e8b51902e4b7d89c4f0c70a0ddbb28f8290d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
