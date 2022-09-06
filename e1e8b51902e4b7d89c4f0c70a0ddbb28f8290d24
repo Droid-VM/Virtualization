@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a885ed2_467a74b6",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-09-06T10:46:58Z",
+      "side": 1,
+      "message": "Move the `read_esr` call a line lower, in case it causes another exception at least the `emergency_write_str` might get some output out first.",
+      "revId": "e1e8b51902e4b7d89c4f0c70a0ddbb28f8290d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
