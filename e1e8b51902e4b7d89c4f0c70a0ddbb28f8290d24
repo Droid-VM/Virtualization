@@ -34,6 +34,24 @@
       "parentUuid": "2a885ed2_467a74b6",
       "revId": "e1e8b51902e4b7d89c4f0c70a0ddbb28f8290d24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ecebb56_9ed0b0d8",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-09-06T13:03:47Z",
+      "side": 1,
+      "message": "Hopefully not? Unless we have somehow ended up at EL0. I was worried about stack corruption, which I definitely have had issues with before, but I guess that\u0027s not an issue with `read_esr` being inline.",
+      "parentUuid": "24c2dca9_8ddf0ead",
+      "revId": "e1e8b51902e4b7d89c4f0c70a0ddbb28f8290d24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
