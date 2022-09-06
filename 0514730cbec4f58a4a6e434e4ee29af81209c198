@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be431f02_c30cf907",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-06T11:42:32Z",
+      "side": 1,
+      "message": "Maybe you can just let MetricProcessor#getStats accept `List\u003c? extends Number\u003e` type as data?",
+      "range": {
+        "startLine": 94,
+        "startChar": 67,
+        "endLine": 94,
+        "endChar": 81
+      },
+      "revId": "0514730cbec4f58a4a6e434e4ee29af81209c198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0edfc640_c100f091",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-06T11:42:32Z",
+      "side": 1,
+      "message": "This doesn\u0027t need to be public. Otherwise, once we inline the method `getRunningProcessesList`, I don\u0027t think we really need this class.",
+      "range": {
+        "startLine": 138,
+        "startChar": 8,
+        "endLine": 138,
+        "endChar": 15
+      },
+      "revId": "0514730cbec4f58a4a6e434e4ee29af81209c198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fcad45ad_0a1c1447",
         "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
         "patchSetId": 6
@@ -14,6 +60,30 @@
       "writtenOn": "2022-09-06T06:48:54Z",
       "side": 1,
       "message": "Please show an example line so that future readers have better understanding about what elems[0] and elems[1] are.",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 45
+      },
+      "revId": "0514730cbec4f58a4a6e434e4ee29af81209c198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a67c8330_4accb00b",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-06T11:42:32Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "fcad45ad_0a1c1447",
       "range": {
         "startLine": 150,
         "startChar": 0,
@@ -49,6 +119,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9929ddb1_1d0131cf",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-06T11:42:32Z",
+      "side": 1,
+      "message": "If you want to write this in FP style, can it be simpler to use `map().collect()` directly?",
+      "range": {
+        "startLine": 170,
+        "startChar": 65,
+        "endLine": 170,
+        "endChar": 72
+      },
+      "revId": "0514730cbec4f58a4a6e434e4ee29af81209c198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15da2f5b_70922b6e",
         "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
         "patchSetId": 6
@@ -72,6 +165,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "53e5c8b0_b261c435",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-06T11:42:32Z",
+      "side": 1,
+      "message": "`Metrics` is not exactly needed in this name. Can we drop it? On the other hand, since this variable is a Map, maybe calling it `maxMemoryPerProcess` could be more readable?",
+      "range": {
+        "startLine": 182,
+        "startChar": 43,
+        "endLine": 182,
+        "endChar": 50
+      },
+      "revId": "0514730cbec4f58a4a6e434e4ee29af81209c198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7d54467_8733772c",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-06T11:42:32Z",
+      "side": 1,
+      "message": "getRunningProcessesList() can be inlined and this conditional can be integrated in front as `.filter().map()...`.",
+      "range": {
+        "startLine": 184,
+        "startChar": 32,
+        "endLine": 185,
+        "endChar": 58
+      },
+      "revId": "0514730cbec4f58a4a6e434e4ee29af81209c198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd940323_7481ada5",
         "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
         "patchSetId": 6
@@ -88,6 +227,75 @@
         "startChar": 8,
         "endLine": 187,
         "endChar": 13
+      },
+      "revId": "0514730cbec4f58a4a6e434e4ee29af81209c198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd754433_72b7fdec",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-06T11:42:32Z",
+      "side": 1,
+      "message": "It\u0027s a bit hard to understand all the data processing with the current `List\u003cMap\u003e` data structure. Can we change this variable type to `Map\u003cString, List\u003cLong\u003e\u003e processMaxMemory`, so that\n\n1/ Inside `updateProcessMaxMemMetrics`, we pass `processMaxMemory` directly.\n2/ When reporting the metrics, we only need to scan the map `processMaxMemory` without any processing.",
+      "range": {
+        "startLine": 212,
+        "startChar": 14,
+        "endLine": 212,
+        "endChar": 37
+      },
+      "revId": "0514730cbec4f58a4a6e434e4ee29af81209c198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "947ba63a_61e32ee0",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-06T11:42:32Z",
+      "side": 1,
+      "message": "This is not needed.",
+      "range": {
+        "startLine": 239,
+        "startChar": 57,
+        "endLine": 239,
+        "endChar": 68
+      },
+      "revId": "0514730cbec4f58a4a6e434e4ee29af81209c198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86c593b2_3b2e141e",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-06T11:42:32Z",
+      "side": 1,
+      "message": "This is not needed.",
+      "range": {
+        "startLine": 330,
+        "startChar": 57,
+        "endLine": 330,
+        "endChar": 68
       },
       "revId": "0514730cbec4f58a4a6e434e4ee29af81209c198",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
