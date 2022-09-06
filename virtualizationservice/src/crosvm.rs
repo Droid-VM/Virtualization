@@ -439,7 +439,7 @@ fn run_vm(config: CrosvmConfig, failure_pipe_write: File) -> Result<SharedChild,
         .arg(config.cid.to_string());
 
     if config.protected {
-        command.arg("--protected-vm");
+        command.arg("--protected-vm-without-firmware");
 
         // 3 virtio-console devices + vsock = 4.
         let virtio_pci_device_count = 4 + config.disks.len();
