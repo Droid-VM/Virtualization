@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "92e62ba7_6514eaf7",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-06T14:24:48Z",
+      "side": 1,
+      "message": "Done; does the ESR decoder provide an ESR-factory macro and the appropriate set of constants?",
+      "parentUuid": "37c9524e_f1af13ea",
+      "range": {
+        "startLine": 24,
+        "startChar": 14,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "f6e30bcde2755ad4ecafa48e0361beb5733d72f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7be5218_c1ed4238",
         "filename": "pvmfw/src/exceptions.rs",
         "patchSetId": 1
@@ -73,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0210b0d3_d0193c9b",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-06T14:24:48Z",
+      "side": 1,
+      "message": "As you noted in your other comment, the PTW would be to retrieve the attributes (to check that 1. it\u0027s mapped and 2. it\u0027s MMIO), not to get the translated address (as we assume MMIO to be id-mapped).",
+      "parentUuid": "583e0405_96b6b687",
+      "range": {
+        "startLine": 27,
+        "startChar": 17,
+        "endLine": 27,
+        "endChar": 20
+      },
+      "revId": "f6e30bcde2755ad4ecafa48e0361beb5733d72f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4dd2cb6c_91cdb937",
         "filename": "pvmfw/src/exceptions.rs",
         "patchSetId": 1
@@ -84,6 +132,24 @@
       "writtenOn": "2022-09-06T13:15:51Z",
       "side": 1,
       "message": "Could this be exploited to make the pVM firmware share arbitrary pages with the host? Could we somehow validate that the page is actually supposed to be an MMIO region and not something else?",
+      "revId": "f6e30bcde2755ad4ecafa48e0361beb5733d72f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e26aedf7_0c662b75",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-06T14:24:48Z",
+      "side": 1,
+      "message": "Marking this as duplicate of https://android-review.googlesource.com/c/platform/packages/modules/Virtualization/+/2207503/comments/f7be5218_c1ed4238",
+      "parentUuid": "4dd2cb6c_91cdb937",
       "revId": "f6e30bcde2755ad4ecafa48e0361beb5733d72f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -101,6 +167,24 @@
       "writtenOn": "2022-09-06T13:15:51Z",
       "side": 1,
       "message": "I\u0027d be inclined to move this constant up to the top of the file and give it a more descriptive name.",
+      "revId": "f6e30bcde2755ad4ecafa48e0361beb5733d72f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce4dbccc_3aad8bfa",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-06T14:24:48Z",
+      "side": 1,
+      "message": "Done; we could even have macros to build such constants (see the FID format in SMCCC and how the kernel defines them in \u003clinux/arm-smccc.h\u003e), which could be provided by `psci` or `smccc` (see other comment).",
+      "parentUuid": "320a9f07_985301d9",
       "revId": "f6e30bcde2755ad4ecafa48e0361beb5733d72f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -142,6 +226,30 @@
       "side": 1,
       "message": "I could make the `psci` crate export it if you like.",
       "parentUuid": "d3ff45ec_dc8d0547",
+      "range": {
+        "startLine": 115,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 9
+      },
+      "revId": "f6e30bcde2755ad4ecafa48e0361beb5733d72f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "499809ff_7a39a2f7",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-06T14:24:48Z",
+      "side": 1,
+      "message": "We could; that\u0027s the use-case I was mentioning the other day about having an `smccc` crate on top of which `psci`, TRNG (upstreamable), these pKVM HVCs (would live in their own module) and other uses of SMCCC could be built. I find it confusing to use a crate named \"`psci`\" to do HVCs that have nothing to do with PSCI but maybe I\u0027m thinking too much into it.",
+      "parentUuid": "2d076f66_8717dd03",
       "range": {
         "startLine": 115,
         "startChar": 4,
