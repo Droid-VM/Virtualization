@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37c9524e_f1af13ea",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-09-06T13:15:51Z",
+      "side": 1,
+      "message": "Make this a constant with a meaningful name.",
+      "range": {
+        "startLine": 24,
+        "startChar": 14,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "f6e30bcde2755ad4ecafa48e0361beb5733d72f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7be5218_c1ed4238",
         "filename": "pvmfw/src/exceptions.rs",
         "patchSetId": 1
@@ -26,6 +49,64 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "583e0405_96b6b687",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-09-06T13:15:51Z",
+      "side": 1,
+      "message": "Currently no, but maybe it would be faster to do a hardware walk with the `at` instruction?",
+      "parentUuid": "f7be5218_c1ed4238",
+      "range": {
+        "startLine": 27,
+        "startChar": 17,
+        "endLine": 27,
+        "endChar": 20
+      },
+      "revId": "f6e30bcde2755ad4ecafa48e0361beb5733d72f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dd2cb6c_91cdb937",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-09-06T13:15:51Z",
+      "side": 1,
+      "message": "Could this be exploited to make the pVM firmware share arbitrary pages with the host? Could we somehow validate that the page is actually supposed to be an MMIO region and not something else?",
+      "revId": "f6e30bcde2755ad4ecafa48e0361beb5733d72f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "320a9f07_985301d9",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-09-06T13:15:51Z",
+      "side": 1,
+      "message": "I\u0027d be inclined to move this constant up to the top of the file and give it a more descriptive name.",
+      "revId": "f6e30bcde2755ad4ecafa48e0361beb5733d72f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d3ff45ec_dc8d0547",
         "filename": "pvmfw/src/exceptions.rs",
         "patchSetId": 1
@@ -37,6 +118,30 @@
       "writtenOn": "2022-09-06T10:11:26Z",
       "side": 1,
       "message": "Can this be imported from somewhere?",
+      "range": {
+        "startLine": 115,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 9
+      },
+      "revId": "f6e30bcde2755ad4ecafa48e0361beb5733d72f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d076f66_8717dd03",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-09-06T13:15:51Z",
+      "side": 1,
+      "message": "I could make the `psci` crate export it if you like.",
+      "parentUuid": "d3ff45ec_dc8d0547",
       "range": {
         "startLine": 115,
         "startChar": 4,
