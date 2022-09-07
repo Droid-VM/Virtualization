@@ -9,6 +9,7 @@ rust_ffi_static {
     srcs: ["src/main.rs"],
     edition: "2021",
     rustlibs: [
+        "liblibfdt",
         "libvmbase",
     ],
     apex_available: ["com.android.virt"],
@@ -22,6 +23,7 @@ cc_binary {
         "payload.S",
     ],
     static_libs: [
+        "libarm-optimized-routines-string-extra",
         "libpvmfw",
     ],
     linker_scripts: [

@@ -47,6 +47,6 @@ idmap:
 0:	.fill		510, 8, 0x0
 	.quad		.L_BLOCK_MEM_XIP | 0x7fc00000	// pVM firmware image
 	.quad		.L_BLOCK_MEM	 | 0x7fe00000	// Writable memory for stack, heap &c.
-1:	.quad		.L_BLOCK_RO	 | 0x80000000	// DT provided by VMM
+1:	.quad		.L_BLOCK_MEM	 | 0x80000000	// DT provided by VMM
 	.quad		.L_BLOCK_RO	 | 0x80200000	// 2 MB of DRAM containing payload image
 	.fill		510, 8, 0x0
