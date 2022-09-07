@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0831494_e740d6d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-07T10:52:24Z",
+      "side": 1,
+      "message": "Hi Michael/Nikita,\nThe proposed Java @systemApi for Virtualization is contained in this CL - see the files under javalib/; VirtualMachineManager is the top level class.\nThe actual changes here are in a sense unimportant - I\u0027m adding @SystemApi to the existing private platform API, with changes to keep API lint happy and to ensure our tests etc build against the API stubs.\nBut I would be very interested in your thoughts on the API itself.",
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
