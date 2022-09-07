@@ -89,6 +89,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a6e2e8b5_9a0f15f2",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-07T13:03:49Z",
+      "side": 1,
+      "message": "Oh, this is implemented. We should update the doc.",
+      "parentUuid": "aba713cb_f750d032",
+      "range": {
+        "startLine": 407,
+        "startChar": 37,
+        "endLine": 407,
+        "endChar": 64
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85773c1c_e05acacb",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
         "patchSetId": 9
@@ -100,6 +124,30 @@
       "writtenOn": "2022-09-07T12:10:07Z",
       "side": 1,
       "message": "Why change this to an abstract class?",
+      "range": {
+        "startLine": 35,
+        "startChar": 7,
+        "endLine": 35,
+        "endChar": 21
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "200fb897_a456d802",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-07T13:03:49Z",
+      "side": 1,
+      "message": "I missed this. +1",
+      "parentUuid": "85773c1c_e05acacb",
       "range": {
         "startLine": 35,
         "startChar": 7,
@@ -158,6 +206,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58ac928a_4748b28b",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-07T13:03:49Z",
+      "side": 1,
+      "message": "1\u003d1 part is ignored ? But as discussed below, I think this shouldn\u0027t be an API.",
+      "parentUuid": "89f3e36e_5a352639",
+      "range": {
+        "startLine": 424,
+        "startChar": 17,
+        "endLine": 424,
+        "endChar": 68
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1dbdbb0_36c782c5",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineException.java",
         "patchSetId": 9
@@ -186,6 +258,30 @@
       "writtenOn": "2022-09-07T12:10:07Z",
       "side": 1,
       "message": "What happens if you try to do this?",
+      "range": {
+        "startLine": 72,
+        "startChar": 76,
+        "endLine": 73,
+        "endChar": 77
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "297f11b9_41a24bca",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-07T13:03:49Z",
+      "side": 1,
+      "message": "VirtualMachineException is thrown",
+      "parentUuid": "f7611d6f_132e75ea",
       "range": {
         "startLine": 72,
         "startChar": 76,

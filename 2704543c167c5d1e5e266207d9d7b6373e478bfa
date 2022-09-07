@@ -205,6 +205,30 @@
       },
       "revId": "2704543c167c5d1e5e266207d9d7b6373e478bfa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd8d8fba_29adb25f",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-07T13:03:49Z",
+      "side": 1,
+      "message": "We could annotate this as @Test, if we don\u0027t like building the tests against platform APIs. \n\n\u003e Calling the API at all requires a privileged permission.\n\nWe can\u0027t, because this API doesn\u0027t invokve any IPC to the service. The check can happen only after the vm config parcel having this information is sent to VS.\n\n\u003e I guess CPU affinity is currently restricted via cgroups?\n\nYes, that\u0027s my understanding.\n\n\u003e How does crosvm implement this thread affinity anyway?\n\nUsing set_schedaffinity. https://cs.android.com/android/platform/superproject/+/master:external/crosvm/src/crosvm/sys/unix/vcpu.rs;drc\u003da6af06cb700f0b2bd17ae36cbc8835aa3e2c8eac;l\u003d125",
+      "parentUuid": "0b543149_fd90ddeb",
+      "range": {
+        "startLine": 426,
+        "startChar": 0,
+        "endLine": 431,
+        "endChar": 9
+      },
+      "revId": "2704543c167c5d1e5e266207d9d7b6373e478bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
