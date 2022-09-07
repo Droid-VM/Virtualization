@@ -330,7 +330,7 @@ def SignSuperImg(args, key, super_img, work_dir):
 
     # 3. re-pack super.img
     partitions = {"system_a": system_a_img, "vendor_a": vendor_a_img}
-    Async(MakeSuperImage, args, partitions, super_img, wait=[system_a_f, vendor_a_f])
+    MakeSuperImage(args, partitions, super_img)
 
 
 def ReplaceBootloaderPubkey(args, key, bootloader, bootloader_pubkey):
