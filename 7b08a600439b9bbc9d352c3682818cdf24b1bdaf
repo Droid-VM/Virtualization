@@ -164,6 +164,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "151948ab_a1fdbf4a",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-07T15:42:34Z",
+      "side": 1,
+      "message": "Honestly I don\u0027t like to throw the base `Exception` in all test methods (fine for the ones with @Test), especially when the calls get deeper.  It\u0027s hard to tell what type of Exception can be thrown here, from the other thread, and whether we need to handle it more carefully (vs swallow it like this).  Otherwise, when something is wrong on TH, it\u0027s hard to dig through the log to identify the root cause.\n\nIs it safe to ignore all exceptions?",
+      "range": {
+        "startLine": 280,
+        "startChar": 18,
+        "endLine": 282,
+        "endChar": 17
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "277860fa_d7b79a5b",
         "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
         "patchSetId": 11
