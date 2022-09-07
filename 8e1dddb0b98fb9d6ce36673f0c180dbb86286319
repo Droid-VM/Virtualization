@@ -16,6 +16,184 @@
       "message": "Hi Michael/Nikita,\nThe proposed Java @systemApi for Virtualization is contained in this CL - see the files under javalib/; VirtualMachineManager is the top level class.\nThe actual changes here are in a sense unimportant - I\u0027m adding @SystemApi to the existing private platform API, with changes to keep API lint happy and to ensure our tests etc build against the API stubs.\nBut I would be very interested in your thoughts on the API itself.",
       "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afc15d1e_d8a93b91",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2022-09-07T12:10:07Z",
+      "side": 1,
+      "message": "Is died STATUS_STOPPED or STATUS_DELETED? Ideally we\u0027d use the same terms in both the callback and here for the status of the VM.",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 0
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5955d0d7_0c71a85c",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2022-09-07T12:10:07Z",
+      "side": 1,
+      "message": "nit: I think `setCallback` is sufficient; it\u0027s already on the `VirtualMachine` class in the `virtualmachine` package, I don\u0027t think we need to endlessly repeat ourselves.",
+      "range": {
+        "startLine": 363,
+        "startChar": 16,
+        "endLine": 363,
+        "endChar": 41
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aba713cb_f750d032",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2022-09-07T12:10:07Z",
+      "side": 1,
+      "message": "Is this still not implemented? If so, we should remove the callback from the API surface as we have a general guideline of not exposing APIs before they\u0027re actually implemented.",
+      "range": {
+        "startLine": 407,
+        "startChar": 37,
+        "endLine": 407,
+        "endChar": 64
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85773c1c_e05acacb",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2022-09-07T12:10:07Z",
+      "side": 1,
+      "message": "Why change this to an abstract class?",
+      "range": {
+        "startLine": 35,
+        "startChar": 7,
+        "endLine": 35,
+        "endChar": 21
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32b8ee5f_d8742502",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2022-09-07T12:10:07Z",
+      "side": 1,
+      "message": "What is the payload config file? Where is it documented?",
+      "range": {
+        "startLine": 356,
+        "startChar": 66,
+        "endLine": 356,
+        "endChar": 92
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89f3e36e_5a352639",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2022-09-07T12:10:07Z",
+      "side": 1,
+      "message": "What happens if you assign more vCPUs than you have configured? e.g. num CPUs \u003d 1, but CPU affinity is \"0\u003d0:1\u003d1\"",
+      "range": {
+        "startLine": 424,
+        "startChar": 17,
+        "endLine": 424,
+        "endChar": 68
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1dbdbb0_36c782c5",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineException.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2022-09-07T12:10:07Z",
+      "side": 1,
+      "message": "Please add docs.",
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7611d6f_132e75ea",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2022-09-07T12:10:07Z",
+      "side": 1,
+      "message": "What happens if you try to do this?",
+      "range": {
+        "startLine": 72,
+        "startChar": 76,
+        "endLine": 73,
+        "endChar": 77
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
