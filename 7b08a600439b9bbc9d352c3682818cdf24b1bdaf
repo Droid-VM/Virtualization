@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c746a2f_05431c5a",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-07T14:14:22Z",
+      "side": 1,
+      "message": "We can just use `Process` here to be consistent with the rest of the code.",
+      "range": {
+        "startLine": 80,
+        "startChar": 23,
+        "endLine": 80,
+        "endChar": 27
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beb90287_18441380",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-07T14:14:22Z",
+      "side": 1,
+      "message": "Instead of copy-pasting these methods from MicrodroidTestCase, could you first move these methods from MicrodroidTestCase to some common class to reuse them?\n\nFor example, you can add a new `ProcessUtil` class in [1] and add them in that class? Please try to avoid duplicating code like this, it will to hard to maintain several copies of the same code later.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/tests/helper/src/java/com/android/microdroid/test/common/",
+      "range": {
+        "startLine": 133,
+        "startChar": 4,
+        "endLine": 169,
+        "endChar": 5
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3d0bec4_58418c54",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-07T14:14:22Z",
+      "side": 1,
+      "message": "Could we drop `Value` in name?",
+      "range": {
+        "startLine": 171,
+        "startChar": 36,
+        "endLine": 171,
+        "endChar": 42
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3242722_688787ad",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-07T14:14:22Z",
+      "side": 1,
+      "message": "This variable is quite redundant. I meant if you inline `getRunningProcessesList()`, you could integrate filter into the stream `.lines().forEach`. But I don\u0027t think streaming here really helps anything, could we just inline the method `getRunningProcessesList()` and write a straightforward for loop instead? \n\nIn that sense, we can get rid of the additional lists and also don\u0027t need the ProcessInfo class.",
+      "range": {
+        "startLine": 174,
+        "startChar": 8,
+        "endLine": 176,
+        "endChar": 46
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4a3a268_0636f49e",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-07T14:14:22Z",
+      "side": 1,
+      "message": "Could we write this as following?\n```\nprocessMemoryValues\n.computeIfAbsent(stat.getKey().toLowerCase(), k -\u003e new ArrayList\u003c\u003e())\n.add(stat.getValue());\n```\n\n[1] https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#computeIfAbsent-K-java.util.function.Function-",
+      "range": {
+        "startLine": 179,
+        "startChar": 16,
+        "endLine": 190,
+        "endChar": 17
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70550aff_42c8bb9d",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-07T14:14:22Z",
+      "side": 1,
+      "message": "This can be final.",
+      "range": {
+        "startLine": 264,
+        "startChar": 15,
+        "endLine": 264,
+        "endChar": 16
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddd372e6_22d06056",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-07T14:14:22Z",
+      "side": 1,
+      "message": "It\u0027s a bit hard to follow this code when there are two copies of the same reference: we retrieve value inside this class but set it outside.\n\nCould we remove the copy of this reference outside the class and change the value via a setter inside this class instead?",
+      "range": {
+        "startLine": 269,
+        "startChar": 16,
+        "endLine": 269,
+        "endChar": 49
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "277860fa_d7b79a5b",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-07T14:14:22Z",
+      "side": 1,
+      "message": "nit: TBH I think the previous name `compileTime` is more readable. If you want to show plural, maybe just change it to `compileTimes`?",
+      "range": {
+        "startLine": 297,
+        "startChar": 27,
+        "endLine": 297,
+        "endChar": 43
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
