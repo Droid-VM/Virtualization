@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68ca3493_1ad94f0b",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-08T14:32:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c746a2f_05431c5a",
+      "range": {
+        "startLine": 80,
+        "startChar": 23,
+        "endLine": 80,
+        "endChar": 27
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "beb90287_18441380",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-07T14:14:22Z",
       "side": 1,
       "message": "Instead of copy-pasting these methods from MicrodroidTestCase, could you first move these methods from MicrodroidTestCase to some common class to reuse them?\n\nFor example, you can add a new `ProcessUtil` class in [1] and add them in that class? Please try to avoid duplicating code like this, it will to hard to maintain several copies of the same code later.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/tests/helper/src/java/com/android/microdroid/test/common/",
+      "range": {
+        "startLine": 133,
+        "startChar": 4,
+        "endLine": 169,
+        "endChar": 5
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea315636_ed34f5ec",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-08T14:32:26Z",
+      "side": 1,
+      "message": "hi Alice I want to consult you a question\n\nFor MicrodroidTestCase, it runs in host side and it calls `RunUtil.getDefault()\n.runTimedCmd()` to run process related command\n\nFor this ComposBenchmark, it runs in devices side and it calls `getInstrumentation().getUiAutomation().executeShellCommand()` to run process related command\n\nIf I extract to ProcessUtil class, do you have any recommendation that how to handle this difference?",
+      "parentUuid": "beb90287_18441380",
       "range": {
         "startLine": 133,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7da4c952_0f8b2dc9",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-08T14:32:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3d0bec4_58418c54",
+      "range": {
+        "startLine": 171,
+        "startChar": 36,
+        "endLine": 171,
+        "endChar": 42
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3242722_688787ad",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-09-07T14:14:22Z",
       "side": 1,
       "message": "This variable is quite redundant. I meant if you inline `getRunningProcessesList()`, you could integrate filter into the stream `.lines().forEach`. But I don\u0027t think streaming here really helps anything, could we just inline the method `getRunningProcessesList()` and write a straightforward for loop instead? \n\nIn that sense, we can get rid of the additional lists and also don\u0027t need the ProcessInfo class.",
+      "range": {
+        "startLine": 174,
+        "startChar": 8,
+        "endLine": 176,
+        "endChar": 46
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ed78218_73602d55",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-08T14:32:26Z",
+      "side": 1,
+      "message": "I try to inline getRunningProcessesList() and remove ProcessInfo. Please help review if my modification is correct or not. Thanks",
+      "parentUuid": "f3242722_688787ad",
       "range": {
         "startLine": 174,
         "startChar": 8,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf80049a_2528a84b",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-08T14:32:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4a3a268_0636f49e",
+      "range": {
+        "startLine": 179,
+        "startChar": 16,
+        "endLine": 190,
+        "endChar": 17
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70550aff_42c8bb9d",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-09-07T14:14:22Z",
       "side": 1,
       "message": "This can be final.",
+      "range": {
+        "startLine": 264,
+        "startChar": 15,
+        "endLine": 264,
+        "endChar": 16
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d44df34_c0c4dfaf",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-08T14:32:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70550aff_42c8bb9d",
       "range": {
         "startLine": 264,
         "startChar": 15,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ff9b860_cd09691d",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-08T14:32:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddd372e6_22d06056",
+      "range": {
+        "startLine": 269,
+        "startChar": 16,
+        "endLine": 269,
+        "endChar": 49
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "151948ab_a1fdbf4a",
@@ -185,6 +353,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f80e853a_98ab5368",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-08T14:32:26Z",
+      "side": 1,
+      "message": "I try to break down exceptions and throw it if it\u0027s not expected exception",
+      "parentUuid": "151948ab_a1fdbf4a",
+      "range": {
+        "startLine": 280,
+        "startChar": 18,
+        "endLine": 282,
+        "endChar": 17
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "277860fa_d7b79a5b",
@@ -198,6 +390,30 @@
       "writtenOn": "2022-09-07T14:14:22Z",
       "side": 1,
       "message": "nit: TBH I think the previous name `compileTime` is more readable. If you want to show plural, maybe just change it to `compileTimes`?",
+      "range": {
+        "startLine": 297,
+        "startChar": 27,
+        "endLine": 297,
+        "endChar": 43
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23b4c634_efded9b1",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-08T14:32:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "277860fa_d7b79a5b",
       "range": {
         "startLine": 297,
         "startChar": 27,
