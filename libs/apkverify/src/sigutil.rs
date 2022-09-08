@@ -287,6 +287,10 @@ pub fn rank_signature_algorithm(algo: u32) -> Result<u32> {
     rank_content_digest_algorithm(to_content_digest_algorithm(algo)?)
 }
 
+/// Accorrding to [apk_digest] in APK Signature Scheme v4, apk_digest is the first
+/// available content digest in this order.
+///
+/// [apk_digest]: https://source.android.com/docs/security/apksigning/v4#apk-digest
 fn rank_content_digest_algorithm(id: u32) -> Result<u32> {
     match id {
         CONTENT_DIGEST_CHUNKED_SHA256 => Ok(0),

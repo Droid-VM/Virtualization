@@ -133,9 +133,7 @@ pub fn pick_v4_apk_digest<R: Read + Seek>(apk: R) -> Result<(u32, Box<[u8]>)> {
     let mut sections = ApkSections::new(apk)?;
     let mut block = sections.find_signature(APK_SIGNATURE_SCHEME_V3_BLOCK_ID)?;
     let signers = block.read::<Signers>()?;
-    if signers.len() != 1 {
-        bail!("should only have one signer");
-    }
+    ensure!(signers.len() == 1, "should only have one signer");
     signers[0].pick_v4_apk_digest()
 }
 
@@ -303,4 +301,23 @@ impl ReadFromBytes for Digest {
 #[inline]
 fn to_hex_string(buf: &[u8]) -> String {
     buf.iter().map(|b| format!("{:02X}", b)).collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::fs::File;
+
+    #[test]
+    fn test_pick_v4_apk_digest() {
+        let apk_filename = "tests/data/v3-only-with-dsa-sha256-1024.apk";
+        let apk_file = File::open(apk_filename).unwrap();
+        let (signature_algorithm_id, apk_digest) = pick_v4_apk_digest(apk_file).unwrap();
+
+        assert_eq!(SIGNATURE_DSA_WITH_SHA256, signature_algorithm_id);
+        assert_eq!(
+            "0DF2426EA33AEDAF495D88E5BE0C6A1663FF0A81C5ED12D5B2929AE4B4300F2F",
+            to_hex_string(apk_digest.as_ref())
+        );
+    }
 }
