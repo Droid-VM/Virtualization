@@ -16,6 +16,24 @@
       "message": "One open question: is it ok to reuse USE_CUSTOM_VIRTUAL_MACHINE here?\nOr should we reserve that for non-Microdroid VMs, and have a different permission for \"Microdroid VM but with advanced config that only platform code should use\".\n\nAnd if the latter, what would be a good name for the permission?",
       "revId": "82f389cc1dc42ee2c299f180b760ae611ac98022",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bb81c53_a9cee3cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-08T15:11:59Z",
+      "side": 1,
+      "message": "We discussed offline:\n- We won\u0027t have a new permission\n- But we will rename the permissions for improved clarity.\n\nBut I\u0027ll do that as another CL.",
+      "parentUuid": "cfb60f8d_84d79961",
+      "revId": "82f389cc1dc42ee2c299f180b760ae611ac98022",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
