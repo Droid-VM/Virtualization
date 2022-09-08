@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "972eb3d1_f0a95727",
+        "filename": "libs/apkverify/src/sigutil.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-08T17:25:58Z",
+      "side": 1,
+      "message": "Let\u0027s avoid internal reference in AOSP. APK Signing Block is an AOSP thing anyway :) https://source.android.com/docs/security/apksigning/v2#apk-signing-block\n\nFWIW, the v2/v3 signing scheme and the frosting structure are contained in the Signing Block.",
+      "range": {
+        "startLine": 58,
+        "startChar": 21,
+        "endLine": 58,
+        "endChar": 121
+      },
+      "revId": "e261457c2a24eee82317817691f0cf1fc80716a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f943d6e_36a3124f",
+        "filename": "libs/apkverify/src/sigutil.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-08T17:25:58Z",
+      "side": 1,
+      "message": "nit: size_of(APK_SIG_BLOCK_MAGIC)",
+      "range": {
+        "startLine": 325,
+        "startChar": 77,
+        "endLine": 325,
+        "endChar": 79
+      },
+      "revId": "e261457c2a24eee82317817691f0cf1fc80716a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
