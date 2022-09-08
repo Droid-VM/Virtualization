@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1a4c096_1b22609f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-09-08T10:13:51Z",
+      "side": 1,
+      "message": "The (re) making of \u0027vbmeta.img\u0027 doesnt have much use. \n\nThe only use case is for testing purpose(#testBootFailsWhenVbMetaDigestDoesNotMatchBootconfig) - when we resign the super partition and but not change the vbmeta bootconfigs \u0026 hence the boot fails.",
+      "revId": "6ed1aa332e3144c8996b9c812654739000ebf541",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
