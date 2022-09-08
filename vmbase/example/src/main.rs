@@ -33,7 +33,8 @@ use aarch64_paging::{
 };
 use alloc::{vec, vec::Vec};
 use buddy_system_allocator::LockedHeap;
-use libfdt::Fdt;
+use core::ffi::{c_int, CStr};
+use libfdt::{Fdt, FdtMut, NodeOffset};
 use log::{info, LevelFilter};
 use vmbase::{logger, main, println};
 
@@ -146,13 +147,36 @@ fn check_data() {
 fn check_fdt() {
     info!("Checking FDT...");
     let fdt = MemoryRegion::from(layout::dtb_range());
-    let fdt = unsafe { core::slice::from_raw_parts(fdt.start().0 as *const u8, fdt.len()) };
+    let fdt = unsafe { core::slice::from_raw_parts_mut(fdt.start().0 as *mut u8, fdt.len()) };
 
     let reader = Fdt::new(fdt).unwrap();
     info!("FDT passed verification.");
     for reg in reader.memory().unwrap() {
         info!("memory @ {reg:#x?}");
     }
+
+    let mut writer = FdtMut::new(fdt).unwrap();
+    writer.unpack().unwrap();
+    info!("FDT successfully unpacked.");
+    let path = CStr::from_bytes_with_nul(b"/memory\0").unwrap();
+    let parent = writer.path_offset(path).unwrap();
+    // Dissociate the offset from the DT to avoid multiple mut references in the next method calls.
+    let parent = NodeOffset::try_from(c_int::from(parent)).unwrap();
+    let name = CStr::from_bytes_with_nul(b"child\0").unwrap();
+    let child = writer.add_subnode(parent, name).unwrap();
+    info!("Created subnode '{}/{}'.", path.to_str().unwrap(), name.to_str().unwrap());
+    let child = NodeOffset::try_from(c_int::from(child)).unwrap();
+    let name = CStr::from_bytes_with_nul(b"str-property\0").unwrap();
+    writer.appendprop(child, name, b"property-value\0").unwrap();
+    info!("Appended property '{}'.", name.to_str().unwrap());
+    let name = CStr::from_bytes_with_nul(b"pair-property\0").unwrap();
+    let addr = 0x0123_4567u64;
+    let size = 0x89ab_cdefu64;
+    writer.appendprop_addrrange(child, name, addr, size).unwrap();
+    info!("Appended property '{}'.", name.to_str().unwrap());
+    writer.pack().unwrap();
+    info!("FDT successfully packed.");
+
     info!("FDT checks done.");
 }
 
