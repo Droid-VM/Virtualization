@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bac2e822_a77a2dc5",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-08T10:55:04Z",
+      "side": 1,
+      "message": "They both exist and are different.\n\nWhen a virtual machine is created is it in STATUS_STOPPED (I added that to the create() documentation).\nFrom there it can transition to STATUS_RUNNING and back to STATUS_STOPPED.\nOnce it moves to STATUS_DELETED that\u0027s the end; you can then re-create, at which point you get a new VirtualMachine in STATUS_STOPPED.\n\nThe callbacks are all about what happens to the VM after the stopped -\u003e running transition.\n\nI guess the most obvious inconsistency is that the callback onDied() should probably be called onStopped(). And we should perhaps have a different and less morbid name for @DeathReason. (Which is easy enough at the Java level; changing it at the lower levels would be a rather massive refactoring.)\n\nThere isn\u0027t a callback for stopped -\u003e deleted because it only happens when delete() is called, rather than spontaneously.",
+      "parentUuid": "afc15d1e_d8a93b91",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 0
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5955d0d7_0c71a85c",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 9
@@ -54,6 +78,30 @@
       "writtenOn": "2022-09-07T12:10:07Z",
       "side": 1,
       "message": "nit: I think `setCallback` is sufficient; it\u0027s already on the `VirtualMachine` class in the `virtualmachine` package, I don\u0027t think we need to endlessly repeat ourselves.",
+      "range": {
+        "startLine": 363,
+        "startChar": 16,
+        "endLine": 363,
+        "endChar": 41
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a795ceb_f66028f1",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-08T10:55:04Z",
+      "side": 1,
+      "message": "Well, I agree, but I was trying to follow the guidelines: go/android-api-guidelines#registering-unregistering-callbacks\n\nIt seems unlikely we will have multiple flavors of callback here.",
+      "parentUuid": "5955d0d7_0c71a85c",
       "range": {
         "startLine": 363,
         "startChar": 16,
@@ -111,6 +159,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc08dd5d_fbcbadec",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-08T10:55:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6e2e8b5_9a0f15f2",
+      "range": {
+        "startLine": 407,
+        "startChar": 37,
+        "endLine": 407,
+        "endChar": 64
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85773c1c_e05acacb",
@@ -158,6 +230,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4de8a474_bf8e82f3",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineCallback.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-08T10:55:04Z",
+      "side": 1,
+      "message": "API Lint told me I should :-(\n\nI only belatedly found that the guidance had changed: go/android-api-guidelines#multi-method-callbacks\n\nReverted.\n\nAnd I raised b/245552641 for API Lint.",
+      "parentUuid": "200fb897_a456d802",
+      "range": {
+        "startLine": 35,
+        "startChar": 7,
+        "endLine": 35,
+        "endChar": 21
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32b8ee5f_d8742502",
@@ -171,6 +267,30 @@
       "writtenOn": "2022-09-07T12:10:07Z",
       "side": 1,
       "message": "What is the payload config file? Where is it documented?",
+      "range": {
+        "startLine": 356,
+        "startChar": 66,
+        "endLine": 356,
+        "endChar": 92
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78b51fbb_e94c37be",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-08T10:55:04Z",
+      "side": 1,
+      "message": "It\u0027s a JSON file somewhere inside the APK which describes various properties of the VM, including where the payload code is.\n\nIt is currently massively under-documented. The plan is to document the parts that will be supported for privileged apps, and block them from accessing the unsupported parts. But I haven\u0027t got there yet.\n\nSee b/243513572, https://docs.google.com/document/d/18a0MZXwv2U6lpZrTQOKe8KeHoAatEvvbUnEEQaOnujc/edit?resourcekey\u003d0-Z6cTurzqPrF0Wo6DXJrRmA#bookmark\u003did.nskq4emfacgb",
+      "parentUuid": "32b8ee5f_d8742502",
       "range": {
         "startLine": 356,
         "startChar": 66,
@@ -245,6 +365,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d5bf1ff_33a57d9e",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineException.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-08T10:55:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1dbdbb0_36c782c5",
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7611d6f_132e75ea",
@@ -282,6 +420,30 @@
       "side": 1,
       "message": "VirtualMachineException is thrown",
       "parentUuid": "f7611d6f_132e75ea",
+      "range": {
+        "startLine": 72,
+        "startChar": 76,
+        "endLine": 73,
+        "endChar": 77
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d5db536_8b621c5a",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-08T10:55:04Z",
+      "side": 1,
+      "message": "I added an @throws to say that, and reworded slightly.",
+      "parentUuid": "297f11b9_41a24bca",
       "range": {
         "startLine": 72,
         "startChar": 76,

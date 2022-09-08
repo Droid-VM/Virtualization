@@ -229,6 +229,30 @@
       },
       "revId": "2704543c167c5d1e5e266207d9d7b6373e478bfa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5aeab448_b3557423",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-08T10:55:04Z",
+      "side": 1,
+      "message": "\u003e We could annotate this as @Test, if we don\u0027t like building the tests against platform APIs. \n\nOh, that\u0027s a good idea. I should have thought of that. We still need an appropriate permission check, but that\u0027s relatively straightforward. I\u0027ll work on getting that to work.\n\n\u003e\u003e Calling the API at all requires a privileged permission.\n\u003e We can\u0027t, because this API doesn\u0027t invoke any IPC to the service. The check can happen only after the vm config parcel having this information is sent to VS.\n\nOh I agree, and that was the plan. But you said we should \"enforcing that overriding cpu affinity needs a privileged permission\"; that\u0027s trivially true already because starting a VM at all requires a privileged permission. We want a different permission here, that is not available to privileged apps. My plan was to re-use the custom virtual machine permission for all the non-exposed config option; see b/243513572.",
+      "parentUuid": "bd8d8fba_29adb25f",
+      "range": {
+        "startLine": 426,
+        "startChar": 0,
+        "endLine": 431,
+        "endChar": 9
+      },
+      "revId": "2704543c167c5d1e5e266207d9d7b6373e478bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
