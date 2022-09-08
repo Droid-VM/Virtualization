@@ -387,3 +387,119 @@ impl<'a> Fdt<'a> {
         self.fdt.as_ptr() as *const c_void
     }
 }
+
+/// Wrapper around low-level read-only libfdt functions.
+#[repr(transparent)]
+pub struct FdtMut<'a> {
+    fdt: &'a mut [u8],
+}
+
+impl<'a> FdtMut<'a> {
+    /// Wraps a slice containing a modifiable flatten device tree.
+    ///
+    /// Fails if the FDT does not pass validation.
+    pub fn new(fdt: &'a mut [u8]) -> Result<Self> {
+        Ok(Self { fdt })
+    }
+
+    /// Make the whole slice containing the DT available to libfdt.
+    pub fn unpack(&mut self) -> Result<()> {
+        let ret = unsafe {
+            libfdt_bindgen::fdt_open_into(
+                self.as_ptr(),
+                self.as_mut_ptr(),
+                self.fdt.len().try_into().map_err(|_| FdtError::Internal)?,
+            )
+        };
+        fdt_err_expect_zero(ret)
+    }
+
+    /// Pack the DT to take a minimum amount of memory.
+    ///
+    /// Doesn't shrink the underlying memory slice.
+    pub fn pack(&mut self) -> Result<()> {
+        let ret = unsafe { libfdt_bindgen::fdt_pack(self.as_mut_ptr()) };
+        fdt_err_expect_zero(ret)
+    }
+
+    /// Add a new subnode to the given node.
+    pub fn add_subnode(&mut self, parent: NodeOffset, name: &CStr) -> Result<NodeOffset> {
+        let ret = unsafe {
+            libfdt_bindgen::fdt_add_subnode(self.as_mut_ptr(), parent.into(), name.as_ptr())
+        };
+
+        ret.try_into()
+    }
+
+    /// Append a property name-value (possibly empty) pair to the given node.
+    pub fn appendprop(&mut self, node: NodeOffset, name: &CStr, value: &[u8]) -> Result<()> {
+        let ret = unsafe {
+            libfdt_bindgen::fdt_appendprop(
+                self.as_mut_ptr(),
+                node.into(),
+                name.as_ptr(),
+                value.as_ptr().cast::<c_void>(),
+                value.len().try_into().map_err(|_| FdtError::BadValue)?,
+            )
+        };
+
+        fdt_err_expect_zero(ret)
+    }
+
+    /// Append a (address, size) pair property to the given node.
+    pub fn appendprop_addrrange(
+        &mut self,
+        node: NodeOffset,
+        name: &CStr,
+        addr: u64,
+        size: u64,
+    ) -> Result<()> {
+        let ret = unsafe {
+            libfdt_bindgen::fdt_appendprop_addrrange(
+                self.as_mut_ptr(),
+                self.parent_offset(node)?.into(),
+                node.into(),
+                name.as_ptr(),
+                addr,
+                size,
+            )
+        };
+
+        fdt_err_expect_zero(ret)
+    }
+
+    /// Get the offset of the node at the given path.
+    ///
+    /// The returned offset should be treated as invalid after having modified the DT.
+    pub fn path_offset(&self, path: &CStr) -> Result<NodeOffset> {
+        let len = path.to_bytes().len().try_into().map_err(|_| FdtError::BadPath)?;
+        let ret = unsafe {
+            // *_namelen functions don't include the trailing nul terminator in 'len'.
+            libfdt_bindgen::fdt_path_offset_namelen(self.as_ptr(), path.as_ptr(), len)
+        };
+
+        ret.try_into()
+    }
+
+    fn parent_offset(&self, node: NodeOffset) -> Result<NodeOffset> {
+        let ret = unsafe { libfdt_bindgen::fdt_parent_offset(self.as_ptr(), node.into()) };
+
+        ret.try_into()
+    }
+
+    fn as_mut_ptr(&mut self) -> *mut c_void {
+        self.fdt.as_mut_ptr() as *mut c_void
+    }
+
+    fn as_ptr(&self) -> *const c_void {
+        self.fdt.as_ptr() as *const c_void
+    }
+}
+
+impl<'a> TryFrom<FdtMut<'a>> for Fdt<'a> {
+    type Error = FdtError;
+
+    fn try_from(fdt: FdtMut<'a>) -> Result<Self> {
+        Self::new(fdt.fdt)
+    }
+}
