@@ -96,6 +96,15 @@ fn fdt_err(val: i32) -> Result<i32> {
     })
 }
 
+fn fdt_err_expects_zero(val: i32) -> Result<()> {
+    let err = fdt_err(val)?;
+    if err == 0 {
+        Ok(())
+    } else {
+        Err(FdtError::Unknown(err))
+    }
+}
+
 type FdtCellType = u32;
 type FdtNodeOffset = c_int;
 type FdtCString = [c_char];
@@ -108,14 +117,13 @@ fn to_ptr(fdt: &[u8]) -> *const c_void {
     fdt.as_ptr() as *const c_void
 }
 
+fn to_mut_ptr(fdt: &mut [u8]) -> *mut c_void {
+    fdt.as_mut_ptr() as *mut c_void
+}
+
 fn check_full(fdt: &[u8]) -> Result<()> {
     let ret = unsafe { libfdt_bindgen::fdt_check_full(to_ptr(fdt), fdt.len()) };
-    let ret = fdt_err(ret)?;
-    if ret == 0 {
-        Ok(())
-    } else {
-        Err(FdtError::Unknown(ret))
-    }
+    fdt_err_expects_zero(ret)
 }
 
 fn path_offset(fdt: &[u8], path: &FdtCString) -> Result<FdtNodeOffset> {
@@ -150,6 +158,70 @@ fn getprop<'a>(fdt: &'a [u8], nodeoffset: FdtNodeOffset, name: &FdtCString) -> R
             usize::try_from(lenp).map_err(|_| FdtError::BadValue)?,
         )
     })
+}
+
+fn open_inplace(fdt: &mut [u8], size: u32) -> Result<()> {
+    let ret = unsafe { libfdt_bindgen::fdt_open_into(to_ptr(fdt), to_mut_ptr(fdt), size as i32) };
+    fdt_err_expects_zero(ret)
+}
+
+fn pack(fdt: &mut [u8]) -> Result<()> {
+    let ret = unsafe { libfdt_bindgen::fdt_pack(to_mut_ptr(fdt)) };
+    fdt_err_expects_zero(ret)
+}
+
+fn add_subnode(fdt: &mut [u8], parent: FdtNodeOffset, name: &FdtCString) -> Result<FdtNodeOffset> {
+    let ret = unsafe { libfdt_bindgen::fdt_add_subnode(to_mut_ptr(fdt), parent, name.as_ptr()) };
+    fdt_err(ret)
+}
+
+fn appendprop(
+    fdt: &mut [u8],
+    node: FdtNodeOffset,
+    name: &FdtCString,
+    value: Option<&FdtCString>,
+) -> Result<()> {
+    let ret = unsafe {
+        if let Some(v) = value {
+            libfdt_bindgen::fdt_appendprop(
+                to_mut_ptr(fdt),
+                node,
+                name.as_ptr(),
+                to_ptr(v),
+                v.len() as i32,
+            )
+        } else {
+            libfdt_bindgen::fdt_appendprop(
+                to_mut_ptr(fdt),
+                node,
+                name.as_ptr(),
+                core::ptr::null(),
+                0,
+            )
+        }
+    };
+    fdt_err_expects_zero(ret)
+}
+
+fn appendprop_addrrange(
+    fdt: &mut [u8],
+    parent: FdtNodeOffset,
+    node: FdtNodeOffset,
+    name: &FdtCString,
+    addr: u64,
+    size: u64,
+) -> Result<()> {
+    let ret = unsafe {
+        libfdt_bindgen::fdt_appendprop_addrrange(
+            to_mut_ptr(fdt),
+            parent,
+            node,
+            name.as_ptr(),
+            addr,
+            size,
+        )
+    };
+    fdt_err_expects_zero(ret)
 }
 
 fn address_cells(fdt: &[u8], nodeoffset: FdtNodeOffset) -> Result<usize> {
@@ -267,5 +339,75 @@ impl<'a> FdtReader<'a> {
             return Err(FdtError::BadValue);
         }
         RegIterator::new(self.fdt, node)
+    }
+}
+
+/// Wrapper around low-level libfdt write functions.
+pub struct FdtWriter<'a> {
+    fdt: &'a mut [u8],
+}
+
+impl<'a> FdtWriter<'a> {
+    /// Create an FdtWriter for a given FDT slice.
+    ///
+    /// Fails if the FDT does not pass validation.
+    pub fn new(fdt: &'a mut [u8]) -> Result<Self> {
+        check_full(fdt)?;
+        Ok(Self { fdt })
+    }
+
+    /// Get the total size of the device tree.
+    pub fn size(&self) -> u32 {
+        u32::from_be(self.header().totalsize)
+    }
+
+    /// Open the device tree in-place.
+    pub fn open_inplace(&mut self, size: u32) -> Result<()> {
+        open_inplace(self.fdt, size)
+    }
+
+    /// Pack an opened device tree.
+    pub fn pack(&mut self) -> Result<()> {
+        pack(self.fdt)
+    }
+
+    /// Add a new subnode to the given node.
+    pub fn add_subnode(
+        &mut self,
+        parent: FdtNodeOffset,
+        name: &FdtCString,
+    ) -> Result<FdtNodeOffset> {
+        add_subnode(self.fdt, parent, name)
+    }
+
+    /// Append a property to the given node.
+    pub fn appendprop(
+        &mut self,
+        node: FdtNodeOffset,
+        name: &FdtCString,
+        value: Option<&FdtCString>,
+    ) -> Result<()> {
+        appendprop(self.fdt, node, name, value)
+    }
+
+    /// Append a 64-bit address-size pair to the given node.
+    pub fn appendprop_addrrange(
+        &mut self,
+        parent: FdtNodeOffset,
+        node: FdtNodeOffset,
+        name: &FdtCString,
+        addr: u64,
+        size: u64,
+    ) -> Result<()> {
+        appendprop_addrrange(self.fdt, parent, node, name, addr, size)
+    }
+
+    /// Return the offset of the node described by the given path.
+    pub fn path_offset(&self, path: &FdtCString) -> Result<FdtNodeOffset> {
+        path_offset(self.fdt, path)
+    }
+
+    fn header(&'a self) -> &'a libfdt_bindgen::fdt_header {
+        unsafe { &*(to_ptr(self.fdt) as *const libfdt_bindgen::fdt_header) }
     }
 }
