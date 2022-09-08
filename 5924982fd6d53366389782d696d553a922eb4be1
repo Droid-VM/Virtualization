@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b95c9ec_22ffe4f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-08T14:54:59Z",
+      "side": 1,
+      "message": "Hi Guile,\n\nThanks for your patience! % comments",
+      "revId": "5924982fd6d53366389782d696d553a922eb4be1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe21ecac_44e9cd1a",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-08T14:54:59Z",
+      "side": 1,
+      "message": "I think a normal for loop like `for(ps:..)` could be more readable when the lambda method is so huge.",
+      "range": {
+        "startLine": 147,
+        "startChar": 64,
+        "endLine": 147,
+        "endChar": 72
+      },
+      "revId": "5924982fd6d53366389782d696d553a922eb4be1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d66ee312_b742f4cc",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-08T14:54:59Z",
+      "side": 1,
+      "message": "Could we just put the try catch around this method before the for loop? So that we can avoid all these indentation here.",
+      "range": {
+        "startLine": 156,
+        "startChar": 56,
+        "endLine": 156,
+        "endChar": 79
+      },
+      "revId": "5924982fd6d53366389782d696d553a922eb4be1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

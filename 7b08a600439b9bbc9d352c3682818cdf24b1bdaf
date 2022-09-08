@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aba65812_cee15206",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-08T14:54:59Z",
+      "side": 1,
+      "message": "Currently the `test.common` package is used in both host and device tests.\n\n\u003e If I extract to ProcessUtil class, do you have any recommendation that how to handle this difference?\n\nWhat about passing the command executor as a Callback\u003cString, String\u003e[1]?\n\n[1] https://docs.oracle.com/javase/10/docs/api/javafx/util/Callback.html",
+      "parentUuid": "ea315636_ed34f5ec",
+      "range": {
+        "startLine": 133,
+        "startChar": 4,
+        "endLine": 169,
+        "endChar": 5
+      },
+      "revId": "7b08a600439b9bbc9d352c3682818cdf24b1bdaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3d0bec4_58418c54",
         "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
         "patchSetId": 11
