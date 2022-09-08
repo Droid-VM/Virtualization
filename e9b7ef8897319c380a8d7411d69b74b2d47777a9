@@ -16,6 +16,69 @@
       "message": "Hi Andrew, could you review this cl?",
       "revId": "e9b7ef8897319c380a8d7411d69b74b2d47777a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69c7ee33_c7f05ec7",
+        "filename": "libs/apkverify/src/sigutil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-08T15:53:47Z",
+      "side": 1,
+      "message": "Might be worth noting that this function has chosen to use the v4 order for its ranking, or merge it into the only call site above which does explain that. Note that he order was initially used for step 3a of the V3 signature verification [1] and it just happens that we\u0027re using the same order as is specified for v4.\n\n[1] -- https://source.android.com/docs/security/apksigning/v3#v3-verification",
+      "range": {
+        "startLine": 290,
+        "startChar": 54,
+        "endLine": 290,
+        "endChar": 58
+      },
+      "revId": "e9b7ef8897319c380a8d7411d69b74b2d47777a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "571246f2_32626785",
+        "filename": "libs/apkverify/src/sigutil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-08T15:53:47Z",
+      "side": 1,
+      "message": "nit: too many \u0027r\u0027s",
+      "range": {
+        "startLine": 290,
+        "startChar": 4,
+        "endLine": 290,
+        "endChar": 14
+      },
+      "revId": "e9b7ef8897319c380a8d7411d69b74b2d47777a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36cf14cb_999d4433",
+        "filename": "libs/apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-08T15:53:47Z",
+      "side": 1,
+      "message": "Are there any examples with multiple signatures where the picking process would be revealed?",
+      "revId": "e9b7ef8897319c380a8d7411d69b74b2d47777a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
