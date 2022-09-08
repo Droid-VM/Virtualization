@@ -16,6 +16,29 @@
       "message": "Thanks for the reviews!\nSee initial responses.",
       "revId": "bdef5ab6d8debc9f84727eb425dae7ab8b3f10d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c367e001_19b3a6fc",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-09-08T14:15:29Z",
+      "side": 1,
+      "message": "nit: if there a range of acceptable values consider adding @IntRange annotation\n\nSee: https://cs.android.com/android/platform/superproject/+/master:frameworks/libs/modules-utils/java/android/annotation/IntRange.java;l\u003d43;drc\u003db240c0780efa55498cef455461dfc74256d5988a",
+      "range": {
+        "startLine": 729,
+        "startChar": 40,
+        "endLine": 729,
+        "endChar": 43
+      },
+      "revId": "bdef5ab6d8debc9f84727eb425dae7ab8b3f10d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
