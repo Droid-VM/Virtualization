@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "766c88c0_5bcf8fe0",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-08T13:46:36Z",
+      "side": 1,
+      "message": "And, looking back, I think I totally misunderstood your question.\n\nAnyway, I have changed onDied to onStopped, which I think is better and certainly gives us consistency.",
+      "parentUuid": "bac2e822_a77a2dc5",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 0
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5955d0d7_0c71a85c",
@@ -338,6 +362,30 @@
       "side": 1,
       "message": "1\u003d1 part is ignored ? But as discussed below, I think this shouldn\u0027t be an API.",
       "parentUuid": "89f3e36e_5a352639",
+      "range": {
+        "startLine": 424,
+        "startChar": 17,
+        "endLine": 424,
+        "endChar": 68
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55ab01b1_990dbca4",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-08T13:46:36Z",
+      "side": 1,
+      "message": "I\u0027ve solved the problem by deleting the method, on the grounds that it shouldn\u0027t be exposed. See Jiyong\u0027s comment for the details.",
+      "parentUuid": "58ac928a_4748b28b",
       "range": {
         "startLine": 424,
         "startChar": 17,

@@ -277,6 +277,30 @@
       },
       "revId": "2704543c167c5d1e5e266207d9d7b6373e478bfa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "143807c2_77496ab3",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-08T13:46:36Z",
+      "side": 1,
+      "message": "As discussed offline: we don\u0027t need to support this in the API at all, so I\u0027ve deleted it.\n\nWe still need a permission check, but I\u0027m handling that separately - https://r.android.com/2211216",
+      "parentUuid": "9cc9153d_631f009b",
+      "range": {
+        "startLine": 426,
+        "startChar": 0,
+        "endLine": 431,
+        "endChar": 9
+      },
+      "revId": "2704543c167c5d1e5e266207d9d7b6373e478bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
