@@ -14,17 +14,24 @@
  * limitations under the License.
  */
 
-//! Utilities for zip handling
+//! Utilities for zip handling of APK files.
+//!
+//! The [APK structure] has four major sections:
+//!
+//! | Zip contents | APK Signing Block | Central directory | EOCD(End of Central Directory) |
+//!
+//! [APK structure]: http://g3doc/java/com/google/android/apps/play/store/g3doc/docs/p2p-frosting-structure#apk-structure
 
 use anyhow::{bail, Result};
 use bytes::{Buf, BufMut};
 use std::io::{Read, Seek, SeekFrom};
 use zip::ZipArchive;
 
-const EOCD_MIN_SIZE: usize = 22;
+const EOCD_SIZE_WITHOUT_COMMENT: usize = 22;
 const EOCD_CENTRAL_DIRECTORY_SIZE_FIELD_OFFSET: usize = 12;
 const EOCD_CENTRAL_DIRECTORY_OFFSET_FIELD_OFFSET: usize = 16;
-const EOCD_MAGIC: u32 = 0x06054b50;
+/// End of Central Directory signature
+const EOCD_SIGNATURE: u32 = 0x06054b50;
 const ZIP64_MARK: u32 = 0xffffffff;
 
 #[derive(Debug, PartialEq, Eq)]
@@ -39,7 +46,7 @@ pub struct ZipSections {
 pub fn zip_sections<R: Read + Seek>(mut reader: R) -> Result<(R, ZipSections)> {
     // open a zip to parse EOCD
     let archive = ZipArchive::new(reader)?;
-    let eocd_size = archive.comment().len() + EOCD_MIN_SIZE;
+    let eocd_size = archive.comment().len() + EOCD_SIZE_WITHOUT_COMMENT;
     if archive.offset() != 0 {
         bail!("Invalid ZIP: offset should be 0, but {}.", archive.offset());
     }
@@ -49,7 +56,7 @@ pub fn zip_sections<R: Read + Seek>(mut reader: R) -> Result<(R, ZipSections)> {
     let eocd_offset = reader.seek(SeekFrom::Current(0))? as u32;
     let mut eocd = vec![0u8; eocd_size as usize];
     reader.read_exact(&mut eocd)?;
-    if (&eocd[0..]).get_u32_le() != EOCD_MAGIC {
+    if (&eocd[0..]).get_u32_le() != EOCD_SIGNATURE {
         bail!("Invalid ZIP: ZipArchive::new() should point EOCD after reading.");
     }
     let (central_directory_size, central_directory_offset) = get_central_directory(&eocd)?;
@@ -72,7 +79,7 @@ pub fn zip_sections<R: Read + Seek>(mut reader: R) -> Result<(R, ZipSections)> {
 }
 
 fn get_central_directory(buf: &[u8]) -> Result<(u32, u32)> {
-    if buf.len() < EOCD_MIN_SIZE {
+    if buf.len() < EOCD_SIZE_WITHOUT_COMMENT {
         bail!("Invalid EOCD size: {}", buf.len());
     }
     let mut buf = &buf[EOCD_CENTRAL_DIRECTORY_SIZE_FIELD_OFFSET..];
@@ -83,7 +90,7 @@ fn get_central_directory(buf: &[u8]) -> Result<(u32, u32)> {
 
 /// Update EOCD's central_directory_offset field.
 pub fn set_central_directory_offset(buf: &mut [u8], value: u32) -> Result<()> {
-    if buf.len() < EOCD_MIN_SIZE {
+    if buf.len() < EOCD_SIZE_WITHOUT_COMMENT {
         bail!("Invalid EOCD size: {}", buf.len());
     }
     (&mut buf[EOCD_CENTRAL_DIRECTORY_OFFSET_FIELD_OFFSET..]).put_u32_le(value);
@@ -94,8 +101,12 @@ pub fn set_central_directory_offset(buf: &mut [u8], value: u32) -> Result<()> {
 mod tests {
     use super::*;
     use crate::testing::assert_contains;
+    use byteorder::{LittleEndian, ReadBytesExt};
+    use std::fs::File;
     use std::io::{Cursor, Write};
     use zip::{write::FileOptions, ZipWriter};
+
+    const CENTRAL_DIRECTORY_FILE_HEADER_SIGNATURE: u32 = 0x02014b50;
 
     fn create_test_zip() -> Cursor<Vec<u8>> {
         let mut writer = ZipWriter::new(Cursor::new(Vec::new()));
@@ -107,7 +118,10 @@ mod tests {
     #[test]
     fn test_zip_sections() {
         let (cursor, sections) = zip_sections(create_test_zip()).unwrap();
-        assert_eq!(sections.eocd_offset, (cursor.get_ref().len() - EOCD_MIN_SIZE) as u32);
+        assert_eq!(
+            sections.eocd_offset,
+            (cursor.get_ref().len() - EOCD_SIZE_WITHOUT_COMMENT) as u32
+        );
     }
 
     #[test]
@@ -118,7 +132,7 @@ mod tests {
         // insert garbage between CD and EOCD.
         // by the way, to mock zip-rs, use CD as garbage. This is implementation detail of zip-rs,
         // which reads CD at (eocd_offset - cd_size) instead of at cd_offset from EOCD.
-        let (pre_eocd, eocd) = buf.split_at(buf.len() - EOCD_MIN_SIZE);
+        let (pre_eocd, eocd) = buf.split_at(buf.len() - EOCD_SIZE_WITHOUT_COMMENT);
         let (_, cd_offset) = get_central_directory(eocd).unwrap();
         let cd = &pre_eocd[cd_offset as usize..];
 
@@ -126,5 +140,28 @@ mod tests {
         let res = zip_sections(Cursor::new([pre_eocd, cd, eocd].concat()));
         assert!(res.is_err());
         assert_contains(&res.err().unwrap().to_string(), "Invalid ZIP: offset should be 0");
+    }
+
+    #[test]
+    fn test_zip_sections_with_apk() {
+        let apk = File::open("tests/data/v3-only-with-stamp.apk").unwrap();
+        let (mut reader, zip_sections) = zip_sections(apk).unwrap();
+
+        reader.seek(SeekFrom::Start(zip_sections.central_directory_offset as u64)).unwrap();
+        assert_eq!(
+            reader.read_u32::<LittleEndian>().unwrap(),
+            CENTRAL_DIRECTORY_FILE_HEADER_SIGNATURE
+        );
+        assert_eq!(
+            zip_sections.central_directory_offset + zip_sections.central_directory_size,
+            zip_sections.eocd_offset
+        );
+
+        reader.seek(SeekFrom::Start(zip_sections.eocd_offset as u64)).unwrap();
+        assert_eq!(reader.read_u32::<LittleEndian>().unwrap(), EOCD_SIGNATURE);
+        assert_eq!(
+            reader.metadata().unwrap().len(),
+            (zip_sections.eocd_offset + zip_sections.eocd_size) as u64
+        );
     }
 }
