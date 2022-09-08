@@ -23,6 +23,7 @@ cc_binary {
     ],
     static_libs: [
         "libpvmfw",
+        "liblibfdt_weak_deps",
     ],
     linker_scripts: [
         "image.ld",

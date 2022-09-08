@@ -23,6 +23,13 @@ rust_bindgen {
     apex_available: ["com.android.virt"],
 }
 
+cc_library {
+    name: "liblibfdt_weak_deps",
+    srcs: [
+        "deps.c",
+    ],
+}
+
 rust_library {
     name: "liblibfdt",
     crate_name: "libfdt",
