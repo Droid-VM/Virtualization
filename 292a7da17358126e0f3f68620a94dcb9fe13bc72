@@ -22,6 +22,30 @@
       },
       "revId": "292a7da17358126e0f3f68620a94dcb9fe13bc72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2261ce83_366548cc",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-09T10:28:41Z",
+      "side": 1,
+      "message": "It is; In theory, we have 1 GiB of MMIO so sharing \"everything\" wouldn\u0027t be viable. See b/245267332 for a better approach. I think we can still keep it as-is today but know that there\u0027s some tech/security debt, hence merging the TODO.",
+      "parentUuid": "67d6ffb4_3e64e6c3",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 61
+      },
+      "revId": "292a7da17358126e0f3f68620a94dcb9fe13bc72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
