@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d79be77_e958ca05",
+        "filename": "apex/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-09-09T14:19:11Z",
+      "side": 1,
+      "message": "I\u0027m planning to do it in a separate patch, other build rule deletion will also be there.",
+      "parentUuid": "65f8cdf1_3476ce3f",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 42
+      },
+      "revId": "698f886fd0a3aa1ce93964d2601c2fdce5c977b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7a9bd2f_5689e07e",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-09T09:54:07Z",
       "side": 1,
       "message": "There is only one entry in that list, remove braces. (The Rust linter should have failed when you tried to upload this)",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 44
+      },
+      "revId": "698f886fd0a3aa1ce93964d2601c2fdce5c977b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d961914_109293e8",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-09-09T14:19:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7a9bd2f_5689e07e",
       "range": {
         "startLine": 20,
         "startChar": 0,
