@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ce2475f_5052fa70",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-09T11:16:24Z",
+      "side": 1,
+      "message": "This should also be a constant, ideally somewhere where we can reuse it from (the paging crate?). Linux calls this PAGE_SHIFT",
+      "range": {
+        "startLine": 27,
+        "startChar": 37,
+        "endLine": 27,
+        "endChar": 39
+      },
+      "revId": "292a7da17358126e0f3f68620a94dcb9fe13bc72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67d6ffb4_3e64e6c3",
         "filename": "pvmfw/src/exceptions.rs",
         "patchSetId": 5
@@ -86,6 +109,30 @@
       "side": 1,
       "message": "Once we have a detailed pVM specification, we can implement (and mandate) this kind of lower-level check, yes. In particular, we should only access MMIO for the UART, and PCI/vsock so could limit the HVC target to those regions; the UART call could even be hardcoded.\n\nBut once we start doing vsock, won\u0027t the device move around dynamically based on the number of vdisks/consoles used by the payload? If that\u0027s the case, we won\u0027t be able to predict it at build time, and it will require discovering where the device is by 1. parsing the DT and 2. querying the bus. In that case, the on-demand approach is neat because we only issue the HVCs for those pages that we actually access.\n\nI might be wrong but I\u0027m under the impression that issuing the HVCs in a stage-1 fault handler will have close to no performance impact as compared with preemptively issuing them at boot, if that\u0027s a worry(?)",
       "parentUuid": "a2a22877_4d83d6b5",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 61
+      },
+      "revId": "292a7da17358126e0f3f68620a94dcb9fe13bc72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a191250d_fb926e2a",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-09T11:16:24Z",
+      "side": 1,
+      "message": "No, the worry is that the MMIO guard becomes useless. It should protect against accidentally/maliciously leaking confidential data via MMIO writes, eg. if you can get pvmfw to overrun a buffer. If at that point pvmfw just automatically disables the guard for that page, then what\u0027s the point?\n\nSo that\u0027s why I\u0027m saying it comes down to creating tighter device mappings. We already create the mappings dynamically. You could completely remove the build-time device mapping, you just won\u0027t get UART until after enabling the dynamically generated page tables (we should do that IMHO). With that you can only map\u0026share the smallest number of pages needed after discovering the devices. Principle of least privilege.",
+      "parentUuid": "96566d3e_d2afdc34",
       "range": {
         "startLine": 29,
         "startChar": 0,
