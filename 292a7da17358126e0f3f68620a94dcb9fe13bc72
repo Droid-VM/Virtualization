@@ -70,6 +70,30 @@
       },
       "revId": "292a7da17358126e0f3f68620a94dcb9fe13bc72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96566d3e_d2afdc34",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-09T10:58:53Z",
+      "side": 1,
+      "message": "Once we have a detailed pVM specification, we can implement (and mandate) this kind of lower-level check, yes. In particular, we should only access MMIO for the UART, and PCI/vsock so could limit the HVC target to those regions; the UART call could even be hardcoded.\n\nBut once we start doing vsock, won\u0027t the device move around dynamically based on the number of vdisks/consoles used by the payload? If that\u0027s the case, we won\u0027t be able to predict it at build time, and it will require discovering where the device is by 1. parsing the DT and 2. querying the bus. In that case, the on-demand approach is neat because we only issue the HVCs for those pages that we actually access.\n\nI might be wrong but I\u0027m under the impression that issuing the HVCs in a stage-1 fault handler will have close to no performance impact as compared with preemptively issuing them at boot, if that\u0027s a worry(?)",
+      "parentUuid": "a2a22877_4d83d6b5",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 61
+      },
+      "revId": "292a7da17358126e0f3f68620a94dcb9fe13bc72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
