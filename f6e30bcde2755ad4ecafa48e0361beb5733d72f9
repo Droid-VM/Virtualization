@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "daf91e4c_e2aca37d",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-09T10:13:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "92e62ba7_6514eaf7",
+      "range": {
+        "startLine": 24,
+        "startChar": 14,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "f6e30bcde2755ad4ecafa48e0361beb5733d72f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7be5218_c1ed4238",
@@ -109,6 +133,30 @@
       "side": 1,
       "message": "As you noted in your other comment, the PTW would be to retrieve the attributes (to check that 1. it\u0027s mapped and 2. it\u0027s MMIO), not to get the translated address (as we assume MMIO to be id-mapped).",
       "parentUuid": "583e0405_96b6b687",
+      "range": {
+        "startLine": 27,
+        "startChar": 17,
+        "endLine": 27,
+        "endChar": 20
+      },
+      "revId": "f6e30bcde2755ad4ecafa48e0361beb5733d72f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42741445_3ad860c8",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-09T10:13:50Z",
+      "side": 1,
+      "message": "The TODO is in the code and we\u0027ll implement it once the crate supports PTWs and/or once b/245267332 gets implemented.",
+      "parentUuid": "0210b0d3_d0193c9b",
       "range": {
         "startLine": 27,
         "startChar": 17,
@@ -189,6 +237,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d018a176_9a559688",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-09T10:13:50Z",
+      "side": 1,
+      "message": "Tracked in b/245889995; not a blocker for this CL.",
+      "parentUuid": "ce4dbccc_3aad8bfa",
+      "revId": "f6e30bcde2755ad4ecafa48e0361beb5733d72f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3ff45ec_dc8d0547",
@@ -250,6 +316,30 @@
       "side": 1,
       "message": "We could; that\u0027s the use-case I was mentioning the other day about having an `smccc` crate on top of which `psci`, TRNG (upstreamable), these pKVM HVCs (would live in their own module) and other uses of SMCCC could be built. I find it confusing to use a crate named \"`psci`\" to do HVCs that have nothing to do with PSCI but maybe I\u0027m thinking too much into it.",
       "parentUuid": "2d076f66_8717dd03",
+      "range": {
+        "startLine": 115,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 9
+      },
+      "revId": "f6e30bcde2755ad4ecafa48e0361beb5733d72f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99b346a5_26ce7c8e",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-09T10:13:50Z",
+      "side": 1,
+      "message": "Tracked in b/245889995; not a blocker for this CL.",
+      "parentUuid": "499809ff_7a39a2f7",
       "range": {
         "startLine": 115,
         "startChar": 4,
