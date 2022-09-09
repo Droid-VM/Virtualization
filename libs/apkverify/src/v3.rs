@@ -160,6 +160,9 @@ impl Signer {
         Ok((digest.signature_algorithm_id, digest.digest.as_ref().to_vec().into_boxed_slice()))
     }
 
+    /// The steps in this method follow AKP Signature Scheme [v3 verification] step 3.
+    ///
+    /// [v3 verification]: https://source.android.com/docs/security/apksigning/v3#v3-verification
     fn verify<R: Read + Seek>(&self, sections: &mut ApkSections<R>) -> Result<Box<[u8]>> {
         // 1. Choose the strongest supported signature algorithm ID from signatures.
         let strongest = self.strongest_signature()?;
