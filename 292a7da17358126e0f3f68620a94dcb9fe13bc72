@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06bb5aad_30115f47",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-09T13:43:25Z",
+      "side": 1,
+      "message": "Yes, I keep re-defining it; it would also be nice for the crate to export higher-level const functions like `page_align{,ed,_down}()`, which would cover most use-cases of these constants.\n\nI\u0027ve defined `PAGE_SHIFT`; do you consider the rest to be a blocker for this CL?",
+      "parentUuid": "6ce2475f_5052fa70",
+      "range": {
+        "startLine": 27,
+        "startChar": 37,
+        "endLine": 27,
+        "endChar": 39
+      },
+      "revId": "292a7da17358126e0f3f68620a94dcb9fe13bc72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67d6ffb4_3e64e6c3",
         "filename": "pvmfw/src/exceptions.rs",
         "patchSetId": 5
@@ -138,6 +162,53 @@
         "startChar": 0,
         "endLine": 29,
         "endChar": 61
+      },
+      "revId": "292a7da17358126e0f3f68620a94dcb9fe13bc72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e6d5bc5_bb2074db",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-09T13:43:25Z",
+      "side": 1,
+      "message": "\u003e No, the worry is that the MMIO guard becomes useless.\n\nBlindly issuing the HVC does that, yes, but I didn\u0027t pretend otherwise as this pvmfw isn\u0027t supposed to be secure anyway, it only tries to replace the U-Boot one from a functional PoV. In fact, it doesn\u0027t verify the image and even leaves its own secrets behind for the guest to read.\n\nOTOH, validating the HVC target based on pre-existing PTEs does make sense (as long as the mappings can be trusted), irrespective of whether the calls are issued from handlers or not and it sounds like we\u0027re mixing up 2 different questions: the code in this CL isn\u0027t unsecure because it issues the HVC from a handler, it is because it doesn\u0027t validate the target.\n\n\n\u003e With that you can only map\u0026share the smallest number of pages needed after discovering the devices. Principle of least privilege.\n\nAgreed; and that makes much more sense (although slightly more expensive in RAM \u0026 TLBs) than a hard-coded 1GiB mapping. However it doesn\u0027t really address the issue you raised earlier of \"putting a tighter bound on our MMIO mappings\" as we\u0027ve now moved the problem from \"should we share this page?\" to \"should we map this page?\" (which will come naturally once we validate the input DT) and isn\u0027t really an argument against doing the sharing \"on-demand\".\n\n\n\u003e You could completely remove the build-time device mapping\n\nI\u0027m not sure what this brings us given that the UART isn\u0027t discovered anyway (it\u0027s hard-coded in `vmbase`)?",
+      "parentUuid": "a191250d_fb926e2a",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 61
+      },
+      "revId": "292a7da17358126e0f3f68620a94dcb9fe13bc72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7a5723d_6bad418a",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-09T13:43:25Z",
+      "side": 1,
+      "message": "BTW, until we get vsock, we will only need this for the UART so I\u0027m happy to hard-code a call before we start using the console but that would require doing so in `rust_entry` which isn\u0027t part of `pvmfw`.",
+      "range": {
+        "startLine": 30,
+        "startChar": 11,
+        "endLine": 30,
+        "endChar": 26
       },
       "revId": "292a7da17358126e0f3f68620a94dcb9fe13bc72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
