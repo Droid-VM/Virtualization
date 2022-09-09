@@ -14,13 +14,14 @@
 
 //! Implementation of the AIDL interface of the VirtualizationService.
 
-use crate::atom::{write_vm_booted_stats, write_vm_creation_stats};
+use crate::atom::{write_vm_booted_stats, write_vm_creation_stats, write_vm_status_stats};
 use crate::composite::make_composite_image;
 use crate::crosvm::{CrosvmConfig, DiskFile, PayloadState, VmInstance, VmState};
 use crate::payload::add_microdroid_images;
+use crate::selinux::{getfilecon, SeContext};
 use crate::{Cid, FIRST_GUEST_CID, SYSPROP_LAST_CID};
-use crate::selinux::{SeContext, getfilecon};
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
+use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon::ErrorCode::ErrorCode;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     DeathReason::DeathReason,
     DiskImage::DiskImage,
@@ -35,32 +36,34 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     VirtualMachineRawConfig::VirtualMachineRawConfig,
     VirtualMachineState::VirtualMachineState,
 };
+use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::{
+    IVirtualMachineService::{
+        BnVirtualMachineService, IVirtualMachineService, VM_BINDER_SERVICE_PORT,
+        VM_STREAM_SERVICE_PORT, VM_TOMBSTONES_SERVICE_PORT,
+    },
+    VirtualMachineStatus::VirtualMachineStatus,
+};
+use anyhow::{anyhow, bail, Context, Result};
 use binder::{
     self, BinderFeatures, ExceptionCode, Interface, LazyServiceGuard, ParcelFileDescriptor,
     SpIBinder, Status, StatusCode, Strong, ThreadState,
 };
-use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::{
-        BnVirtualMachineService, IVirtualMachineService, VM_BINDER_SERVICE_PORT,
-        VM_STREAM_SERVICE_PORT, VM_TOMBSTONES_SERVICE_PORT,
-};
-use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon::ErrorCode::ErrorCode;
-use anyhow::{anyhow, bail, Context, Result};
-use rpcbinder::run_rpc_server_with_factory;
 use disk::QcowFile;
 use idsig::{HashAlgorithm, V4Signature};
 use log::{debug, error, info, warn};
 use microdroid_payload_config::VmPayloadConfig;
+use rpcbinder::run_rpc_server_with_factory;
 use rustutils::system_properties;
 use semver::VersionReq;
 use std::convert::TryInto;
 use std::ffi::CStr;
 use std::fs::{create_dir, File, OpenOptions};
-use std::io::{Error, ErrorKind, Write, Read};
+use std::io::{Error, ErrorKind, Read, Write};
 use std::num::NonZeroU32;
 use std::os::unix::io::{FromRawFd, IntoRawFd};
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, Weak};
-use tombstoned_client::{TombstonedConnection, DebuggerdDumpType};
+use tombstoned_client::{DebuggerdDumpType, TombstonedConnection};
 use vmconfig::VmConfig;
 use vsock::{SockAddr, VsockListener, VsockStream};
 use zip::ZipArchive;
@@ -1130,6 +1133,23 @@ impl IVirtualMachineService for VirtualMachineService {
             Ok(())
         } else {
             error!("notifyError is called from an unknown CID {}", cid);
+            Err(Status::new_service_specific_error_str(
+                -1,
+                Some(format!("cannot find a VM with CID {}", cid)),
+            ))
+        }
+    }
+
+    fn notifyCurrentStatus(&self, status: &VirtualMachineStatus) -> binder::Result<()> {
+        let cid = self.cid;
+        if let Some(vm) = self.state.lock().unwrap().get_vm(cid) {
+            info!("VM having CID {} encountered an error", cid);
+
+            write_vm_status_stats(vm.requester_uid as i32, &vm.name, status);
+
+            Ok(())
+        } else {
+            error!("notifyCurrentStatus is called from an unknown CID {}", cid);
             Err(Status::new_service_specific_error_str(
                 -1,
                 Some(format!("cannot find a VM with CID {}", cid)),
