@@ -49,12 +49,6 @@ cc_defaults {
         "libarm-optimized-routines-mem",
         "libvmbase_entry",
     ],
-    enabled: false,
-    target: {
-        android_arm64: {
-            enabled: true,
-        },
-    },
 }
 
 rust_library_rlib {
