@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65f8cdf1_3476ce3f",
+        "filename": "apex/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-09T09:54:07Z",
+      "side": 1,
+      "message": "Can we remove the unused components in the same CL? No point in keeping them around.",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 42
+      },
+      "revId": "698f886fd0a3aa1ce93964d2601c2fdce5c977b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7a9bd2f_5689e07e",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-09T09:54:07Z",
+      "side": 1,
+      "message": "There is only one entry in that list, remove braces. (The Rust linter should have failed when you tried to upload this)",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 44
+      },
+      "revId": "698f886fd0a3aa1ce93964d2601c2fdce5c977b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f407744a_841dcfba",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-09T09:54:07Z",
+      "side": 1,
+      "message": "super pedantic: Ampersand is not used in writing that much, which is partially why it tends to have special meaning in computing. So people tend to stick to \u0027and\u0027 in commit messages, comments, etc.",
+      "range": {
+        "startLine": 633,
+        "startChar": 54,
+        "endLine": 633,
+        "endChar": 55
+      },
+      "revId": "698f886fd0a3aa1ce93964d2601c2fdce5c977b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
