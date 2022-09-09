@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0974d88b_5a9a76f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-09T21:01:19Z",
+      "side": 1,
+      "message": "```\nSummary (Test executed with 1 devices.)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \n-------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \narm64-v8a MicrodroidTestApp: Passed: 13, Failed: 9, Ignored: 0, Assumption Failed: 0,                                                                                                                                                                                                                                                                                                                                                                                                                                                                               \n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    \n9 tests failed                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      \n--------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      \ncom.android.microdroid.test.MicrodroidTests#bootFailsWhenMicrodroidDataIsCompromised[protectedVm\u003dtrue]                                                                                                                                                                                                                                                                                                                                                                                                                                                              \ncom.android.microdroid.test.MicrodroidTests#bootFailsWhenPvmFwDataIsCompromised[protectedVm\u003dtrue]                                                                                                                                                                                                                                                                                                                                                                                                                                                                   \ncom.android.microdroid.test.MicrodroidTests#bootFailsWhenUBootAvbDataIsCompromised[protectedVm\u003dtrue]                                                                                                                                                                                                                                                                                                                                                                                                                                                                \ncom.android.microdroid.test.MicrodroidTests#bootFailsWhenConfigIsInvalid[protectedVm\u003dtrue]                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \ncom.android.microdroid.test.MicrodroidTests#connectToVmService[protectedVm\u003dtrue]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    \ncom.android.microdroid.test.MicrodroidTests#sameInstanceKeepsSameCdis[protectedVm\u003dtrue]                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \ncom.android.microdroid.test.MicrodroidTests#bootFailsWhenUBootEnvDataIsCompromised[protectedVm\u003dtrue]                                                                                                                                                                                                                                                                                                                                                                                                                                                                \ncom.android.microdroid.test.MicrodroidTests#instancesOfSameVmHaveDifferentCdis[protectedVm\u003dtrue]                                                                                                                                                                                                                                                                                                                                                                                                                                                                    \ncom.android.microdroid.test.MicrodroidTests#bccIsSuperficiallyWellFormed[protectedVm\u003dtrue] \n```",
+      "range": {
+        "startLine": 14,
+        "startChar": 21,
+        "endLine": 14,
+        "endChar": 44
+      },
+      "revId": "82bc420b85d1541bedf2d56b0fdf96542f6d3617",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d63214a8_dae9e792",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-09T21:01:19Z",
+      "side": 1,
+      "message": "From aosp/2211501 but aosp/2211410 could also be used instead.",
+      "range": {
+        "startLine": 26,
+        "startChar": 9,
+        "endLine": 26,
+        "endChar": 47
+      },
+      "revId": "82bc420b85d1541bedf2d56b0fdf96542f6d3617",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
