@@ -24,8 +24,11 @@ use android_hardware_security_dice::aidl::android::hardware::security::dice::{
 };
 use android_security_dice::aidl::android::security::dice::IDiceMaintenance::IDiceMaintenance;
 use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon::ErrorCode::ErrorCode;
-use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::{
-    VM_BINDER_SERVICE_PORT, VM_STREAM_SERVICE_PORT, IVirtualMachineService,
+use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::{
+    IVirtualMachineService::{
+        IVirtualMachineService, VM_BINDER_SERVICE_PORT, VM_STREAM_SERVICE_PORT,
+    },
+    VirtualMachineStatus::VirtualMachineStatus,
 };
 use anyhow::{anyhow, bail, ensure, Context, Error, Result};
 use apkverify::{get_public_key_der, verify};
@@ -50,7 +53,9 @@ use std::os::unix::io::{FromRawFd, IntoRawFd};
 use std::path::Path;
 use std::process::{Child, Command, Stdio};
 use std::str;
+// use std::thread;
 use std::time::{Duration, SystemTime};
+use tokio::time::sleep;
 use vsock::VsockStream;
 
 const WAIT_TIMEOUT: Duration = Duration::from_secs(10);
@@ -86,6 +91,20 @@ enum MicrodroidError {
     PayloadVerificationFailed(String),
     #[error("Payload config is invalid: {0}")]
     InvalidConfig(String),
+}
+
+async fn send_vm_status(service: &Strong<dyn IVirtualMachineService>) -> Result<()> {
+    loop {
+        sleep(Duration::from_secs(1)).await;
+
+        let vm_status = VirtualMachineStatus { dummy: 1357 };
+        service.notifyCurrentStatus(&vm_status)?;
+
+        if system_properties::read_bool("dev.bootcomplete", true)? {
+            break;
+        }
+    }
+    Ok(())
 }
 
 fn translate_error(err: &Error) -> (ErrorCode, String) {
@@ -173,6 +192,11 @@ fn try_main() -> Result<()> {
     let service = get_vms_rpc_binder()
         .context("cannot connect to VirtualMachineService")
         .map_err(|e| MicrodroidError::FailedToConnectToVirtualizationService(e.to_string()))?;
+
+    tokio::spawn(|service| async move {
+        send_vm_status(&service).await;
+    });
+
     match try_run_payload(&service) {
         Ok(code) => {
             info!("notifying payload finished");
