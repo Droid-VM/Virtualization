@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b4675c6_e2d6c7f1",
+        "filename": "libs/apkverify/src/sigutil.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-09T16:12:15Z",
+      "side": 1,
+      "message": "I first thought this can break easily, since any difference of digest algorithm, signing lineage for key rotation, signing info, etc. can change the block size.  Then I figured we\u0027re using a golden APK anyway.\n\noptional: add a comment if you like",
+      "range": {
+        "startLine": 373,
+        "startChar": 36,
+        "endLine": 373,
+        "endChar": 40
+      },
+      "revId": "1fecdd08889041ef8dde499bb294075f80c96d71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
