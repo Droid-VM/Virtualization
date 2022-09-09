@@ -158,6 +158,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eab3648_cefdab11",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-09T08:56:41Z",
+      "side": 1,
+      "message": "+1. We should keep AtomicBoolean here. I meant we just drop the copy of this variable outside this class in the previous patch for readability.",
+      "parentUuid": "dfdda428_0ac9d9ce",
+      "range": {
+        "startLine": 239,
+        "startChar": 16,
+        "endLine": 239,
+        "endChar": 23
+      },
+      "revId": "5924982fd6d53366389782d696d553a922eb4be1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4eb2242e_a62ed3fd",
