@@ -46,6 +46,30 @@
       },
       "revId": "292a7da17358126e0f3f68620a94dcb9fe13bc72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2a22877_4d83d6b5",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-09T10:38:05Z",
+      "side": 1,
+      "message": "Ah, forgot about that 1GB mapping. So what exactly is the point of the MMIO guard if we\u0027re just going to share almost any page with the host automatically? To me the tech debt isn\u0027t about whether we trigger an exception in stage-1 or 2, but about putting a tighter bound on our MMIO mappings. That in turn would allow us to get rid of issuing the HVCs from exception handlers.",
+      "parentUuid": "2261ce83_366548cc",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 61
+      },
+      "revId": "292a7da17358126e0f3f68620a94dcb9fe13bc72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
