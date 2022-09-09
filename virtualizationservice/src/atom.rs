@@ -19,12 +19,13 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     DeathReason::DeathReason, IVirtualMachine::IVirtualMachine,
     VirtualMachineAppConfig::VirtualMachineAppConfig, VirtualMachineConfig::VirtualMachineConfig,
 };
+use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::VirtualMachineStatus::VirtualMachineStatus;
 use android_system_virtualizationservice::binder::{Status, Strong};
 use anyhow::{anyhow, Result};
 use binder::ThreadState;
 use log::{trace, warn};
 use microdroid_payload_config::VmPayloadConfig;
-use statslog_virtualization_rust::{vm_booted, vm_creation_requested, vm_exited};
+use statslog_virtualization_rust::{vm_booted, vm_creation_requested, vm_exited, vm_status};
 use std::time::{Duration, SystemTime};
 use zip::ZipArchive;
 
@@ -195,6 +196,17 @@ pub fn write_vm_exited_stats(
         },
     };
     match vm_exited.stats_write() {
+        Err(e) => {
+            warn!("statslog_rust failed with error: {}", e);
+        }
+        Ok(_) => trace!("statslog_rust succeeded for virtualization service"),
+    }
+}
+
+/// Write the stats of VM status to statsd
+pub fn write_vm_status_stats(uid: i32, vm_identifier: &String, status: &VirtualMachineStatus) {
+    let vm_status = vm_status::VmStatus { uid, vm_identifier, dummy: status.dummy };
+    match vm_status.stats_write() {
         Err(e) => {
             warn!("statslog_rust failed with error: {}", e);
         }
