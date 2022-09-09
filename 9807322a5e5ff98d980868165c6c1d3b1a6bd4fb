@@ -16,6 +16,29 @@
       "message": "Hi Victor, could you review this cl?",
       "revId": "9807322a5e5ff98d980868165c6c1d3b1a6bd4fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4037614_8db6be1c",
+        "filename": "libs/apkverify/src/sigutil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-09T16:16:04Z",
+      "side": 1,
+      "message": "Can this be `format!(\"{:X?}\", digest)`?",
+      "range": {
+        "startLine": 358,
+        "startChar": 12,
+        "endLine": 358,
+        "endChar": 38
+      },
+      "revId": "9807322a5e5ff98d980868165c6c1d3b1a6bd4fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
