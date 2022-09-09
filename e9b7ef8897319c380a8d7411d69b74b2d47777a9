@@ -66,6 +66,54 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "af20a8b7_c3b02b33",
+        "filename": "libs/apkverify/src/sigutil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-09T09:02:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "571246f2_32626785",
+      "range": {
+        "startLine": 290,
+        "startChar": 4,
+        "endLine": 290,
+        "endChar": 14
+      },
+      "revId": "e9b7ef8897319c380a8d7411d69b74b2d47777a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae097769_8201fdeb",
+        "filename": "libs/apkverify/src/sigutil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-09T09:02:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69c7ee33_c7f05ec7",
+      "range": {
+        "startLine": 290,
+        "startChar": 54,
+        "endLine": 290,
+        "endChar": 58
+      },
+      "revId": "e9b7ef8897319c380a8d7411d69b74b2d47777a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "36cf14cb_999d4433",
         "filename": "libs/apkverify/src/v3.rs",
         "patchSetId": 1
@@ -77,6 +125,24 @@
       "writtenOn": "2022-09-08T15:53:47Z",
       "side": 1,
       "message": "Are there any examples with multiple signatures where the picking process would be revealed?",
+      "revId": "e9b7ef8897319c380a8d7411d69b74b2d47777a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30d432ca_b5229ae1",
+        "filename": "libs/apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-09T09:02:16Z",
+      "side": 1,
+      "message": "I checked the apks in the folder `tools/apksig/src/test/resources/com/android/apksig/`. I cannot find any file signed with more than one v3 signers. There are two files signed with v1/v2 or two v2 signers, but they are not suitable for this test since we only check the v3 block.",
+      "parentUuid": "36cf14cb_999d4433",
       "revId": "e9b7ef8897319c380a8d7411d69b74b2d47777a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
