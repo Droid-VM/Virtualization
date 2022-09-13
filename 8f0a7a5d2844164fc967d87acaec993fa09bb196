@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a9565cd_9e32abaa",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-13T08:46:12Z",
+      "side": 1,
+      "message": "Move this out of the loop. No need to compile for every line.",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 84
+      },
+      "revId": "8f0a7a5d2844164fc967d87acaec993fa09bb196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df51a135_446279f6",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-13T08:46:12Z",
+      "side": 1,
+      "message": "Can we please remove this? As Alan said on the bug, this does not measure anything useful due to the exponential back-off in waitForBootComplete().\nSame in the other test cases",
+      "range": {
+        "startLine": 148,
+        "startChar": 12,
+        "endLine": 151,
+        "endChar": 74
+      },
+      "revId": "8f0a7a5d2844164fc967d87acaec993fa09bb196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e30ecbd4_3fc506ee",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-13T08:46:12Z",
+      "side": 1,
+      "message": "I don\u0027t mind breaking this down to individual test cases but it duplicates a lot of code. Could we create a helper that takes true/false as a parameter on whether to use CompOS or not?",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 55
+      },
+      "revId": "8f0a7a5d2844164fc967d87acaec993fa09bb196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
