@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82d47824_6932c8ff",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-13T06:51:10Z",
+      "side": 1,
+      "message": "sorry for debug only. I update it back",
+      "parentUuid": "5cfb183a_50997cd2",
+      "range": {
+        "startLine": 56,
+        "startChar": 43,
+        "endLine": 56,
+        "endChar": 44
+      },
+      "revId": "5924982fd6d53366389782d696d553a922eb4be1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe21ecac_44e9cd1a",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-09-08T14:54:59Z",
       "side": 1,
       "message": "I think a normal for loop like `for(ps:..)` could be more readable when the lambda method is so huge.",
+      "range": {
+        "startLine": 147,
+        "startChar": 64,
+        "endLine": 147,
+        "endChar": 72
+      },
+      "revId": "5924982fd6d53366389782d696d553a922eb4be1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be74a8d5_f5ce5dab",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-13T06:51:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe21ecac_44e9cd1a",
       "range": {
         "startLine": 147,
         "startChar": 64,
@@ -101,6 +149,30 @@
       "side": 1,
       "message": "This try catch doesn\u0027t really help though, since it\u0027s only wrapping any exception with RuntimeException, and this method still throws the base Exception.  If you prefer to keep throwing Exception, I\u0027d say just remove the try catch.",
       "parentUuid": "d66ee312_b742f4cc",
+      "range": {
+        "startLine": 156,
+        "startChar": 56,
+        "endLine": 156,
+        "endChar": 79
+      },
+      "revId": "5924982fd6d53366389782d696d553a922eb4be1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28825ffa_0a3fd766",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-13T06:51:10Z",
+      "side": 1,
+      "message": "thanks for mentoring. I remove the try catch here",
+      "parentUuid": "d7ecdc0b_baaf2c59",
       "range": {
         "startLine": 156,
         "startChar": 56,
@@ -184,6 +256,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "69b7d369_c4754a33",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-13T06:51:10Z",
+      "side": 1,
+      "message": "Change it back to AtomicBoolean",
+      "parentUuid": "0eab3648_cefdab11",
+      "range": {
+        "startLine": 239,
+        "startChar": 16,
+        "endLine": 239,
+        "endChar": 23
+      },
+      "revId": "5924982fd6d53366389782d696d553a922eb4be1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4eb2242e_a62ed3fd",
         "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
         "patchSetId": 12
@@ -195,6 +291,30 @@
       "writtenOn": "2022-09-08T17:12:04Z",
       "side": 1,
       "message": "It\u0027s probably cleaner to merge the thread interaction into the new class.  If you agree, feel free to follow up in the next CL.",
+      "range": {
+        "startLine": 283,
+        "startChar": 12,
+        "endLine": 287,
+        "endChar": 37
+      },
+      "revId": "5924982fd6d53366389782d696d553a922eb4be1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86184416_209849a8",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-13T06:51:10Z",
+      "side": 1,
+      "message": "sure, will do",
+      "parentUuid": "4eb2242e_a62ed3fd",
       "range": {
         "startLine": 283,
         "startChar": 12,
