@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50db2f7b_706d0a98",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-13T15:53:27Z",
+      "side": 1,
+      "message": "nit: Prefer not to enclose the real work in this if block.  Filter out the condition first.  E.g. `if (bad) { continue } do_real_work();`",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 17
+      },
+      "revId": "98f3a421ba0095899ffbb21ec06276ee47e5e9db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d65255c_8ec2ec52",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-13T15:53:27Z",
+      "side": 1,
+      "message": "This can probably be moved out of the loop now.",
+      "range": {
+        "startLine": 142,
+        "startChar": 12,
+        "endLine": 142,
+        "endChar": 47
+      },
+      "revId": "98f3a421ba0095899ffbb21ec06276ee47e5e9db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4170b218_478d83fa",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-13T15:53:27Z",
+      "side": 1,
+      "message": "Though this doesn\u0027t harm, it also doesn\u0027t matter in the CompOS case.  I\u0027d remove this measurement and focus only on the end-to-end boot time here.",
+      "range": {
+        "startLine": 177,
+        "startChar": 12,
+        "endLine": 177,
+        "endChar": 53
+      },
+      "revId": "98f3a421ba0095899ffbb21ec06276ee47e5e9db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
