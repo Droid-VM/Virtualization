@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b92264a3_df27d4fc",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-13T09:13:11Z",
+      "side": 1,
+      "message": "Could you drop `Info` in this name? The name is more clear without it.",
+      "range": {
+        "startLine": 120,
+        "startChar": 35,
+        "endLine": 120,
+        "endChar": 39
+      },
+      "revId": "8f0a7a5d2844164fc967d87acaec993fa09bb196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a9565cd_9e32abaa",
         "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
         "patchSetId": 3
@@ -19,6 +42,29 @@
         "startChar": 0,
         "endLine": 126,
         "endChar": 84
+      },
+      "revId": "8f0a7a5d2844164fc967d87acaec993fa09bb196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6634387_92f4f761",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-13T09:13:11Z",
+      "side": 1,
+      "message": "Could you throw some standard error here? Something like `IllegalArgumentException` for example?\n\n\u003e Do not reuse Exception, RuntimeException, Throwable, or Error directly. Treat these classes as if they were abstract.  -- Effective Java \u003e Item 72: Favor the use of standard exceptions.[1]\n\n[1] https://effectivejava.googleplex.com/third-edition#page\u003d321",
+      "range": {
+        "startLine": 132,
+        "startChar": 14,
+        "endLine": 132,
+        "endChar": 61
       },
       "revId": "8f0a7a5d2844164fc967d87acaec993fa09bb196",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -65,6 +111,53 @@
         "startChar": 0,
         "endLine": 198,
         "endChar": 55
+      },
+      "revId": "8f0a7a5d2844164fc967d87acaec993fa09bb196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd22d4ac_be77b114",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-13T09:13:11Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "e30ecbd4_3fc506ee",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 55
+      },
+      "revId": "8f0a7a5d2844164fc967d87acaec993fa09bb196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "213ec80a_3ed527a8",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-13T09:13:11Z",
+      "side": 1,
+      "message": "This method can be rename as `reportAggregatedMetrics` to be reuse in the other cl (aosp/2206142) as well.",
+      "range": {
+        "startLine": 286,
+        "startChar": 17,
+        "endLine": 286,
+        "endChar": 39
       },
       "revId": "8f0a7a5d2844164fc967d87acaec993fa09bb196",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
