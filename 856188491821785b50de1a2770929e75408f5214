@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94f9cc5c_272a7256",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-13T14:52:13Z",
+      "side": 1,
+      "message": "Hi Guile,\n\nThanks for your patience!",
+      "revId": "856188491821785b50de1a2770929e75408f5214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a77df424_e406f721",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-13T14:52:13Z",
+      "side": 1,
+      "message": "Can we make this method private? It doesn\u0027t need to be public to be passed as argument.",
+      "range": {
+        "startLine": 125,
+        "startChar": 4,
+        "endLine": 125,
+        "endChar": 11
+      },
+      "revId": "856188491821785b50de1a2770929e75408f5214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb787340_62624cb8",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-13T14:52:13Z",
+      "side": 1,
+      "message": "Let\u0027s move private methods/classes after public ones as discussed in the previous patch.",
+      "range": {
+        "startLine": 138,
+        "startChar": 4,
+        "endLine": 138,
+        "endChar": 11
+      },
+      "revId": "856188491821785b50de1a2770929e75408f5214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82db16aa_688b604e",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-13T14:52:13Z",
+      "side": 1,
+      "message": "Let\u0027s move private methods/classes after public ones as discussed in the previous patch.",
+      "range": {
+        "startLine": 224,
+        "startChar": 4,
+        "endLine": 224,
+        "endChar": 11
+      },
+      "revId": "856188491821785b50de1a2770929e75408f5214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74a6820e_3635b06a",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-13T14:52:13Z",
+      "side": 1,
+      "message": "Visible methods should come before private ones as discussed in the previous patch.",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 11
+      },
+      "revId": "856188491821785b50de1a2770929e75408f5214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb599b34_bd7b532b",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-13T14:52:13Z",
+      "side": 1,
+      "message": "nit: This can be in one line to make the code more compact.\n\nIt\u0027s possible to run `google-java-format -a -i` to format the code in place.",
+      "range": {
+        "startLine": 28,
+        "startChar": 26,
+        "endLine": 29,
+        "endChar": 5
+      },
+      "revId": "856188491821785b50de1a2770929e75408f5214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b090a434_0f48be68",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-13T14:52:13Z",
+      "side": 1,
+      "message": "This comment is not needed. You can remove it. It\u0027s clear what the code is doing.\n\n[1] go/java-practices/comments#reasons",
+      "range": {
+        "startLine": 52,
+        "startChar": 12,
+        "endLine": 52,
+        "endChar": 32
+      },
+      "revId": "856188491821785b50de1a2770929e75408f5214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
