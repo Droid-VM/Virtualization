@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cea16361_3e590afd",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-14T18:09:41Z",
+      "side": 1,
+      "message": "@qwandor, wdyt?",
+      "parentUuid": "06bb5aad_30115f47",
+      "range": {
+        "startLine": 27,
+        "startChar": 37,
+        "endLine": 27,
+        "endChar": 39
+      },
+      "revId": "292a7da17358126e0f3f68620a94dcb9fe13bc72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67d6ffb4_3e64e6c3",
         "filename": "pvmfw/src/exceptions.rs",
         "patchSetId": 5
@@ -228,6 +252,30 @@
       "side": 1,
       "message": "Couldn\u0027t you just do it at the start of `main`? There shouldn\u0027t be anything using the console before then, unless there\u0027s an exception.",
       "parentUuid": "f7a5723d_6bad418a",
+      "range": {
+        "startLine": 30,
+        "startChar": 11,
+        "endLine": 30,
+        "endChar": 26
+      },
+      "revId": "292a7da17358126e0f3f68620a94dcb9fe13bc72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "536d94fe_b616be12",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-14T18:09:41Z",
+      "side": 1,
+      "message": "Yes, we could but that\u0027s the issue: if we get an exception before the MMIO page has been shared (and we don\u0027t issue the HVC from the handler), we\u0027re stuck repeatedly entering the handler, which might make some bugs unnecessarily hard to investigate (think crosvm merge CI). What would we gain from implementing it this way?",
+      "parentUuid": "000f545c_bf6bb20c",
       "range": {
         "startLine": 30,
         "startChar": 11,
