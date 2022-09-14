@@ -299,7 +299,7 @@ impl ReadFromBytes for Digest {
 }
 
 #[inline]
-pub(crate) fn to_hex_string(buf: &[u8]) -> String {
+fn to_hex_string(buf: &[u8]) -> String {
     buf.iter().map(|b| format!("{:02X}", b)).collect()
 }
 
