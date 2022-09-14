@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "738f0cf1_a1a4781c",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-14T16:11:31Z",
+      "side": 1,
+      "message": "nit: it\u0027s a bit weird to have a non-blocking reboot, then block immediately after.  I\u0027d prefer a simple .reboot() here and L196, but meh.",
+      "range": {
+        "startLine": 164,
+        "startChar": 24,
+        "endLine": 164,
+        "endChar": 41
+      },
+      "revId": "616acbb3368b82fd3b9bd0f5484792e91400af04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

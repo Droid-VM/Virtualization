@@ -140,6 +140,30 @@
       },
       "revId": "98f3a421ba0095899ffbb21ec06276ee47e5e9db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70f42c61_b7e66f27",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-14T16:11:31Z",
+      "side": 1,
+      "message": "It is sufficient to capture them in testBootEnable/DisablePKVM.  Recording them also in the CompOS case is redundant.",
+      "parentUuid": "0cc0e485_1b5556e8",
+      "range": {
+        "startLine": 177,
+        "startChar": 12,
+        "endLine": 177,
+        "endChar": 53
+      },
+      "revId": "98f3a421ba0095899ffbb21ec06276ee47e5e9db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
