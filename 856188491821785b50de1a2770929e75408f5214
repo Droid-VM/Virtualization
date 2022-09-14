@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68394368_51c47f8c",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-14T16:22:48Z",
+      "side": 1,
+      "message": "What does the exception message say?  I\u0027m guessing it\u0027s related to adoptShellPermissionIdentity that you\u0027re calling.  A race condition maybe?  How about moving adoptShellPermissionIdentity to setup()?",
+      "parentUuid": "89cbff84_005b978c",
+      "range": {
+        "startLine": 129,
+        "startChar": 15,
+        "endLine": 130,
+        "endChar": 57
+      },
+      "revId": "856188491821785b50de1a2770929e75408f5214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb787340_62624cb8",
         "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
         "patchSetId": 15

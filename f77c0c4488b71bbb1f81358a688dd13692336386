@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "039690e0_d0553ea7",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-14T16:22:48Z",
+      "side": 1,
+      "message": "I wish we could avoid this wrapper, since it doesn\u0027t really do anything.  Can you simply replace the call with executeCommand?",
+      "range": {
+        "startLine": 228,
+        "startChar": 19,
+        "endLine": 228,
+        "endChar": 40
+      },
+      "revId": "f77c0c4488b71bbb1f81358a688dd13692336386",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
