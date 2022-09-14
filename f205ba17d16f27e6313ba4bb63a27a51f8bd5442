@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bdf53e4_3fd87ecf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-14T14:10:33Z",
+      "side": 1,
+      "message": "LGTM. Thanks for the patience and really try to make small cls next time. We should just focus on one thing in one cl.",
+      "revId": "f205ba17d16f27e6313ba4bb63a27a51f8bd5442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a376238a_e0b2446a",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-14T14:10:33Z",
+      "side": 1,
+      "message": "This comment is not needed. It just repeats the test name. You can remove it.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 38
+      },
+      "revId": "f205ba17d16f27e6313ba4bb63a27a51f8bd5442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1f14cec_b72bfd65",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-14T14:10:33Z",
+      "side": 1,
+      "message": "Ditto.",
+      "range": {
+        "startLine": 73,
+        "startChar": 55,
+        "endLine": 75,
+        "endChar": 54
+      },
+      "revId": "f205ba17d16f27e6313ba4bb63a27a51f8bd5442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc669934_a3a576aa",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-14T14:10:33Z",
+      "side": 1,
+      "message": "You can name this method `reportAggregatedMetric` and pass the unit as param, so that this method could be used by other tests as well.",
+      "range": {
+        "startLine": 194,
+        "startChar": 17,
+        "endLine": 194,
+        "endChar": 36
+      },
+      "revId": "f205ba17d16f27e6313ba4bb63a27a51f8bd5442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0c468c4_186ac895",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-14T14:10:33Z",
+      "side": 1,
+      "message": "Ditto",
+      "range": {
+        "startLine": 217,
+        "startChar": 91,
+        "endLine": 219,
+        "endChar": 78
+      },
+      "revId": "f205ba17d16f27e6313ba4bb63a27a51f8bd5442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63778504_4be19d87",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-14T14:10:33Z",
+      "side": 1,
+      "message": "Why do you add a new line in the beginning of the method sometimes? Could you remove them?",
+      "range": {
+        "startLine": 281,
+        "startChar": 29,
+        "endLine": 283,
+        "endChar": 28
+      },
+      "revId": "f205ba17d16f27e6313ba4bb63a27a51f8bd5442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6019db2f_4004fce6",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-14T14:10:33Z",
+      "side": 1,
+      "message": "It\u0027s better to make the vocab consistent in the code. \n\nAt some places we call memory `Memory`, at other places we name it `Mem`. What about just use `Memory` everywhere? Same for process, we have both `proc` and `process` in the code. This kind of details decrease readability.",
+      "range": {
+        "startLine": 59,
+        "startChar": 42,
+        "endLine": 59,
+        "endChar": 45
+      },
+      "revId": "f205ba17d16f27e6313ba4bb63a27a51f8bd5442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3475b97_4c6590ac",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-14T14:10:33Z",
+      "side": 1,
+      "message": "nit:When it\u0027s deeply indented or the lamdbda method contains lots of things, maybe a classic for loop could be more clear.",
+      "range": {
+        "startLine": 66,
+        "startChar": 28,
+        "endLine": 66,
+        "endChar": 30
+      },
+      "revId": "f205ba17d16f27e6313ba4bb63a27a51f8bd5442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
