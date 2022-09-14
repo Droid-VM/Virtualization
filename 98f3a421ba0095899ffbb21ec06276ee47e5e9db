@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d3e19ec_61535cff",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-14T08:48:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50db2f7b_706d0a98",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 17
+      },
+      "revId": "98f3a421ba0095899ffbb21ec06276ee47e5e9db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d65255c_8ec2ec52",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db3789d7_b87ab59e",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-14T08:48:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d65255c_8ec2ec52",
+      "range": {
+        "startLine": 142,
+        "startChar": 12,
+        "endLine": 142,
+        "endChar": 47
+      },
+      "revId": "98f3a421ba0095899ffbb21ec06276ee47e5e9db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4170b218_478d83fa",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-09-13T15:53:27Z",
       "side": 1,
       "message": "Though this doesn\u0027t harm, it also doesn\u0027t matter in the CompOS case.  I\u0027d remove this measurement and focus only on the end-to-end boot time here.",
+      "range": {
+        "startLine": 177,
+        "startChar": 12,
+        "endLine": 177,
+        "endChar": 53
+      },
+      "revId": "98f3a421ba0095899ffbb21ec06276ee47e5e9db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cc0e485_1b5556e8",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-14T08:48:51Z",
+      "side": 1,
+      "message": "per https://buganizer.corp.google.com/issues/236799228#comment48, David suggest report bootloader and android boot time\nIf it doesn\u0027t impact anything else, could we leave this measurement?",
+      "parentUuid": "4170b218_478d83fa",
       "range": {
         "startLine": 177,
         "startChar": 12,

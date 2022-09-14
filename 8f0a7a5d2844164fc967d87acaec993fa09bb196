@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60fdaf59_32d07e3a",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-14T08:48:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b92264a3_df27d4fc",
+      "range": {
+        "startLine": 120,
+        "startChar": 35,
+        "endLine": 120,
+        "endChar": 39
+      },
+      "revId": "8f0a7a5d2844164fc967d87acaec993fa09bb196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a9565cd_9e32abaa",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-13T08:46:12Z",
       "side": 1,
       "message": "Move this out of the loop. No need to compile for every line.",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 84
+      },
+      "revId": "8f0a7a5d2844164fc967d87acaec993fa09bb196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c4a41c3_3fb6b58a",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-14T08:48:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a9565cd_9e32abaa",
       "range": {
         "startLine": 126,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edad6b65_45844729",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-14T08:48:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6634387_92f4f761",
+      "range": {
+        "startLine": 132,
+        "startChar": 14,
+        "endLine": 132,
+        "endChar": 61
+      },
+      "revId": "8f0a7a5d2844164fc967d87acaec993fa09bb196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df51a135_446279f6",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-09-13T08:46:12Z",
       "side": 1,
       "message": "Can we please remove this? As Alan said on the bug, this does not measure anything useful due to the exponential back-off in waitForBootComplete().\nSame in the other test cases",
+      "range": {
+        "startLine": 148,
+        "startChar": 12,
+        "endLine": 151,
+        "endChar": 74
+      },
+      "revId": "8f0a7a5d2844164fc967d87acaec993fa09bb196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "248ce88d_0eed52ae",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-14T08:48:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df51a135_446279f6",
       "range": {
         "startLine": 148,
         "startChar": 12,
@@ -140,6 +236,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba8754f8_e4176807",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-14T08:48:51Z",
+      "side": 1,
+      "message": "Add 2 helper function to refactoring the test case\n- enableDisablePKVMTestHelper(boolean isEnable)\n- composTestHelper(boolean isWithCompos)",
+      "parentUuid": "bd22d4ac_be77b114",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 55
+      },
+      "revId": "8f0a7a5d2844164fc967d87acaec993fa09bb196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "213ec80a_3ed527a8",
@@ -153,6 +273,30 @@
       "writtenOn": "2022-09-13T09:13:11Z",
       "side": 1,
       "message": "This method can be rename as `reportAggregatedMetrics` to be reuse in the other cl (aosp/2206142) as well.",
+      "range": {
+        "startLine": 286,
+        "startChar": 17,
+        "endLine": 286,
+        "endChar": 39
+      },
+      "revId": "8f0a7a5d2844164fc967d87acaec993fa09bb196",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c1e4314_944eb470",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-14T08:48:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "213ec80a_3ed527a8",
       "range": {
         "startLine": 286,
         "startChar": 17,
