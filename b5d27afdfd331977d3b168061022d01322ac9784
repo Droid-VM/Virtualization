@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3eea1e8_6fa8c2fb",
+        "filename": "libs/apkverify/src/algorithms.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-15T16:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d457a095_1b2dc901",
+      "range": {
+        "startLine": 98,
+        "startChar": 18,
+        "endLine": 98,
+        "endChar": 35
+      },
+      "revId": "b5d27afdfd331977d3b168061022d01322ac9784",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fbfcf09_8846e68b",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-09-15T15:33:48Z",
       "side": 1,
       "message": "Delete? (yay!)",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 57
+      },
+      "revId": "b5d27afdfd331977d3b168061022d01322ac9784",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bc0971f_4fac4367",
+        "filename": "libs/apkverify/src/sigutil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-15T16:02:10Z",
+      "side": 1,
+      "message": "Yups :) There are still some usages, I\u0027ll delete them once those will be migrated.",
+      "parentUuid": "4fbfcf09_8846e68b",
       "range": {
         "startLine": 34,
         "startChar": 0,
