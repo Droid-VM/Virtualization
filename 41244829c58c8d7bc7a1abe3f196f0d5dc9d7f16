@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb7bd5c9_6a6b4062",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-15T15:16:36Z",
+      "side": 1,
+      "message": "Remove this.  The test doesn\u0027t touch the boot loader, so it will run on cuttlefish (we have another functional test that does the similar thing).",
+      "range": {
+        "startLine": 188,
+        "startChar": 8,
+        "endLine": 188,
+        "endChar": 36
+      },
+      "revId": "41244829c58c8d7bc7a1abe3f196f0d5dc9d7f16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
