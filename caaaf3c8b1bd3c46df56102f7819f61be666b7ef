@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d685a746_a24971b0",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-15T15:13:48Z",
+      "side": 1,
+      "message": "mInstrumentation",
+      "range": {
+        "startLine": 70,
+        "startChar": 8,
+        "endLine": 70,
+        "endChar": 28
+      },
+      "revId": "caaaf3c8b1bd3c46df56102f7819f61be666b7ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c96219b6_65b979dd",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-15T15:13:48Z",
+      "side": 1,
+      "message": "Could you remove the try-catch?  We don\u0027t expect SecurityException anymore.  There\u0027s no point in converting the original InterruptedException and IOException into a RuntimeException.  Basically, the original executeCommand is fine once you remove the shell permisstion identity stuff.",
+      "range": {
+        "startLine": 221,
+        "startChar": 8,
+        "endLine": 221,
+        "endChar": 13
+      },
+      "revId": "caaaf3c8b1bd3c46df56102f7819f61be666b7ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2ce0539_92883a1e",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-15T15:13:48Z",
+      "side": 1,
+      "message": "This shouldn\u0027t happen anymore, so delete these.  (And if it did, just let the exception propagate).",
+      "range": {
+        "startLine": 260,
+        "startChar": 16,
+        "endLine": 263,
+        "endChar": 89
+      },
+      "revId": "caaaf3c8b1bd3c46df56102f7819f61be666b7ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
