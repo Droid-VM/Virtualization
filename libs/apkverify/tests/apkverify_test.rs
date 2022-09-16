@@ -15,7 +15,7 @@
  */
 
 use apkverify::{testing::assert_contains, verify};
-use std::matches;
+use std::{fs, matches, path::Path};
 
 const KEY_NAMES_DSA: &[&str] = &["1024", "2048", "3072"];
 const KEY_NAMES_ECDSA: &[&str] = &["p256", "p384", "p521"];
@@ -34,7 +34,7 @@ fn test_verify_truncated_cd() {
 
 #[test]
 fn test_verify_v3() {
-    assert!(verify("tests/data/test.apex").is_ok());
+    verify_having_valid_result("tests/data/test.apex");
 }
 
 #[test]
@@ -49,32 +49,40 @@ fn test_verify_v3_dsa_sha256() {
 #[test]
 fn test_verify_v3_ecdsa_sha256() {
     for key_name in KEY_NAMES_ECDSA.iter() {
-        assert!(verify(format!("tests/data/v3-only-with-ecdsa-sha256-{}.apk", key_name)).is_ok());
+        verify_having_valid_result(format!(
+            "tests/data/v3-only-with-ecdsa-sha256-{}.apk",
+            key_name
+        ));
     }
 }
 
 #[test]
 fn test_verify_v3_ecdsa_sha512() {
     for key_name in KEY_NAMES_ECDSA.iter() {
-        assert!(verify(format!("tests/data/v3-only-with-ecdsa-sha512-{}.apk", key_name)).is_ok());
+        verify_having_valid_result(format!(
+            "tests/data/v3-only-with-ecdsa-sha512-{}.apk",
+            key_name
+        ));
     }
 }
 
 #[test]
 fn test_verify_v3_rsa_sha256() {
     for key_name in KEY_NAMES_RSA.iter() {
-        assert!(
-            verify(format!("tests/data/v3-only-with-rsa-pkcs1-sha256-{}.apk", key_name)).is_ok()
-        );
+        verify_having_valid_result(format!(
+            "tests/data/v3-only-with-rsa-pkcs1-sha256-{}.apk",
+            key_name
+        ));
     }
 }
 
 #[test]
 fn test_verify_v3_rsa_sha512() {
     for key_name in KEY_NAMES_RSA.iter() {
-        assert!(
-            verify(format!("tests/data/v3-only-with-rsa-pkcs1-sha512-{}.apk", key_name)).is_ok()
-        );
+        verify_having_valid_result(format!(
+            "tests/data/v3-only-with-rsa-pkcs1-sha512-{}.apk",
+            key_name
+        ));
     }
 }
 
@@ -167,20 +175,41 @@ fn test_verify_v3_signatures_and_digests_block_mismatch() {
 
 #[test]
 fn test_verify_v3_unknown_additional_attr() {
-    assert!(verify("tests/data/v3-only-unknown-additional-attr.apk").is_ok());
+    verify_having_valid_result("tests/data/v3-only-unknown-additional-attr.apk");
 }
 
 #[test]
 fn test_verify_v3_unknown_pair_in_apk_sig_block() {
-    assert!(verify("tests/data/v3-only-unknown-pair-in-apk-sig-block.apk").is_ok());
+    verify_having_valid_result("tests/data/v3-only-unknown-pair-in-apk-sig-block.apk");
 }
 
 #[test]
 fn test_verify_v3_ignorable_unsupported_sig_algs() {
-    assert!(verify("tests/data/v3-only-with-ignorable-unsupported-sig-algs.apk").is_ok());
+    verify_having_valid_result("tests/data/v3-only-with-ignorable-unsupported-sig-algs.apk");
 }
 
 #[test]
 fn test_verify_v3_stamp() {
-    assert!(verify("tests/data/v3-only-with-stamp.apk").is_ok());
+    verify_having_valid_result("tests/data/v3-only-with-stamp.apk");
+}
+
+fn verify_having_valid_result<P: AsRef<Path>>(path: P) {
+    let result = verify(path.as_ref());
+    assert!(result.is_ok());
+
+    let verified_public_key_path = format!("{}.der", path.as_ref().to_str().unwrap());
+    assert!(
+        fs::metadata(&verified_public_key_path).is_ok(),
+        "File does not exist. You can re-create it with:\n$ echo -en {} > {}\n",
+        result
+            .as_ref()
+            .unwrap()
+            .as_ref()
+            .iter()
+            .map(|b| format!("\\\\x{:02x}", b))
+            .collect::<String>(),
+        verified_public_key_path
+    );
+    let verified_public_key = fs::read(&verified_public_key_path).unwrap();
+    assert_eq!(verified_public_key, result.unwrap().as_ref(), "{}", verified_public_key_path);
 }
