@@ -100,6 +100,11 @@ fn apks_signed_with_v3_rsa_pkcs1_sha512_are_valid() {
 }
 
 #[test]
+fn apk_signed_with_v3_verity_dsa_sha256_is_valid() {
+    assert!(verify("tests/data/v4-digest-v3-Sha256withDSA-Verity.apk").is_ok());
+}
+
+#[test]
 fn test_verify_v3_sig_does_not_verify() {
     let path_list = [
         "tests/data/v3-only-with-dsa-sha256-2048-sig-does-not-verify.apk",
