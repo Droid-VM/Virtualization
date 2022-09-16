@@ -142,6 +142,30 @@
       },
       "revId": "42e418e4b260599b3c50e94b60a76357e38091e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66eeb7f2_d4ad362b",
+        "filename": "libs/apkverify/src/algorithms.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-16T16:53:29Z",
+      "side": 0,
+      "message": "They are not exactly the same set of algorithms: new_verifier() doesn\u0027t support DsaWithSha256 and VerityDsaWithSha256[1], this one didn\u0027t support VerityRsaPkcs1V15WithSha256, VerityEcdsaWithSha256 and VerityDsaWithSha256.\n\nSo this cl adds support to VerityRsaPkcs1V15WithSha256 and VerityEcdsaWithSha256 in digest computation, but the digests of these two alogrithms were already used to verify signed data[2]. So that should be correct.\n\nI\u0027ll update the commmit message and add some tests later.\n\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/libs/apkverify/src/algorithms.rs;l\u003d90;drc\u003d455b02b9efa5fd03cc50210f57b4d7ca6f18dbf3\n[2] https://cs.android.com/android/_/android/platform/packages/modules/Virtualization/+/455b02b9efa5fd03cc50210f57b4d7ca6f18dbf3:libs/apkverify/src/v3.rs;l\u003d241;drc\u003d5d0f89ab73374955b7b98548ca15ab90f0f28d0d",
+      "parentUuid": "223a7af0_3969073c",
+      "range": {
+        "startLine": 176,
+        "startChar": 36,
+        "endLine": 176,
+        "endChar": 55
+      },
+      "revId": "42e418e4b260599b3c50e94b60a76357e38091e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
