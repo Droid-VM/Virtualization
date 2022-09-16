@@ -118,6 +118,30 @@
       },
       "revId": "42e418e4b260599b3c50e94b60a76357e38091e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "223a7af0_3969073c",
+        "filename": "libs/apkverify/src/algorithms.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-16T16:36:16Z",
+      "side": 0,
+      "message": "Ok, `new_verifier()` still filters out the crypto algorithms explicitly so this CL doesn\u0027t actually change that.",
+      "parentUuid": "4ffd1309_f2ec6d97",
+      "range": {
+        "startLine": 176,
+        "startChar": 36,
+        "endLine": 176,
+        "endChar": 55
+      },
+      "revId": "42e418e4b260599b3c50e94b60a76357e38091e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
