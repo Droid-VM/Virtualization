@@ -33,6 +33,24 @@
       "message": "This is just moving down the file? No code change?",
       "revId": "79e9b4ed5c7549ca307761cdf08edaf5d57122de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c39efe21_8d49ac24",
+        "filename": "libs/apkverify/src/algorithms.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-16T15:47:11Z",
+      "side": 1,
+      "message": "Yes. No code change. Since this method becomes private now, I think it\u0027s better to move it after the public methods for better readability.",
+      "parentUuid": "f73d6bb0_1ee483fc",
+      "revId": "79e9b4ed5c7549ca307761cdf08edaf5d57122de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

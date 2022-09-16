@@ -22,6 +22,30 @@
       },
       "revId": "42e418e4b260599b3c50e94b60a76357e38091e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eb6a8a8_a0cbf653",
+        "filename": "libs/apkverify/src/algorithms.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-16T15:47:11Z",
+      "side": 0,
+      "message": "If the algorithm is sha256, `MessageDigest::sha512()` will return. According to the spec [1], we should be able to extract the digest directly from the signature algorithm. \n\nOtherwise, the `new_message_digest()` method in SignatureAlgorithmID is also used to verify signed data. \n\n[1] https://source.android.com/docs/security/apksigning/v2#signature-algorithm-ids",
+      "parentUuid": "5ae2b2fa_d2a38356",
+      "range": {
+        "startLine": 176,
+        "startChar": 36,
+        "endLine": 176,
+        "endChar": 55
+      },
+      "revId": "42e418e4b260599b3c50e94b60a76357e38091e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
