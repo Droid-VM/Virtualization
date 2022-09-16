@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "65da6056_12796478",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-16T10:17:39Z",
+      "side": 1,
+      "message": "It does at least three things:\n1. ECDSA with SHA2-512\n2. refactors reporting of unsupported algs, TODOs\n3. refactors verify_signed_data()\n\nCould we split it into multiple CLs? It\u0027s hard to review like this. I\u0027ll hold on with reviewing the rest.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "8d9e2e800489953c4599f7c75197d7458fbd7ba3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "69cfd518_085f9968",
@@ -31,6 +54,52 @@
       "writtenOn": "2022-09-16T09:15:50Z",
       "side": 1,
       "message": "Hi Andrew, could you review this cl?",
+      "revId": "8d9e2e800489953c4599f7c75197d7458fbd7ba3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18d4192c_46a08e35",
+        "filename": "libs/apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-16T10:17:39Z",
+      "side": 1,
+      "message": "while you\u0027re touching this, it would also be nice to split the long line",
+      "range": {
+        "startLine": 218,
+        "startChar": 8,
+        "endLine": 218,
+        "endChar": 173
+      },
+      "revId": "8d9e2e800489953c4599f7c75197d7458fbd7ba3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35b67e64_40f3e9c5",
+        "filename": "libs/apkverify/tests/apkverify_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-16T10:17:39Z",
+      "side": 1,
+      "message": "nit: follow the same one-line format as other test cases for consistency",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 29
+      },
       "revId": "8d9e2e800489953c4599f7c75197d7458fbd7ba3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
