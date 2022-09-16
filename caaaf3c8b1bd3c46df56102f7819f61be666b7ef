@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6d8fdca_4306d7a6",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-16T15:32:01Z",
+      "side": 1,
+      "message": "I see.  I\u0027d say it\u0027s cleaner to avoid passing executeCommand as an argument at all. \n We don\u0027t expect the client/app to pass an alternative function, right?  You could just simply move the code into ProcessUtil?\n\nFeel free to follow up on this one though. It\u0027s minor and I\u0027d rather land this sooner. And I\u0027ve been holding you for long enough... :)",
+      "parentUuid": "da4b5eb6_997ea789",
+      "range": {
+        "startLine": 221,
+        "startChar": 8,
+        "endLine": 221,
+        "endChar": 13
+      },
+      "revId": "caaaf3c8b1bd3c46df56102f7819f61be666b7ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2ce0539_92883a1e",
