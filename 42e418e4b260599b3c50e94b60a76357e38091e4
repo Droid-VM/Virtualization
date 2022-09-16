@@ -70,6 +70,30 @@
       },
       "revId": "42e418e4b260599b3c50e94b60a76357e38091e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ec038c7_fc649c4b",
+        "filename": "libs/apkverify/src/algorithms.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-16T16:25:33Z",
+      "side": 0,
+      "message": "Now it won\u0027t raise error in this method. But if the library openssl doesn\u0027t support it, an error will be raised from the library in the process, it\u0027s the same for other algorithms.\n\nI think we had missing algorithms like this in code mostly because we used ring (b/197052981), and now we already migrated to openssl.",
+      "parentUuid": "a6d6f338_260c9d0e",
+      "range": {
+        "startLine": 176,
+        "startChar": 36,
+        "endLine": 176,
+        "endChar": 55
+      },
+      "revId": "42e418e4b260599b3c50e94b60a76357e38091e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
