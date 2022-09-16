@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d7d168f_5a7f2c4f",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-16T00:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d685a746_a24971b0",
+      "range": {
+        "startLine": 70,
+        "startChar": 8,
+        "endLine": 70,
+        "endChar": 28
+      },
+      "revId": "caaaf3c8b1bd3c46df56102f7819f61be666b7ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c96219b6_65b979dd",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da4b5eb6_997ea789",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-16T00:58:15Z",
+      "side": 1,
+      "message": "if throw original exception in executeCommand, compiler will show error when pass function as parameter \n\n```\n error: incompatible thrown types Exception in functional expression\n                ProcessUtil.getProcessMap(this::executeCommand).entrySet()) {\n```\n\nSo I converting original exception to RuntimeException to prevent this error.\n\nSorry I have no idea how to handle this situation, could you give me a light, thanks",
+      "parentUuid": "c96219b6_65b979dd",
+      "range": {
+        "startLine": 221,
+        "startChar": 8,
+        "endLine": 221,
+        "endChar": 13
+      },
+      "revId": "caaaf3c8b1bd3c46df56102f7819f61be666b7ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2ce0539_92883a1e",
         "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
         "patchSetId": 19
@@ -60,6 +108,30 @@
       "writtenOn": "2022-09-15T15:13:48Z",
       "side": 1,
       "message": "This shouldn\u0027t happen anymore, so delete these.  (And if it did, just let the exception propagate).",
+      "range": {
+        "startLine": 260,
+        "startChar": 16,
+        "endLine": 263,
+        "endChar": 89
+      },
+      "revId": "caaaf3c8b1bd3c46df56102f7819f61be666b7ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3fd9679_d1c69633",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-16T00:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2ce0539_92883a1e",
       "range": {
         "startLine": 260,
         "startChar": 16,
