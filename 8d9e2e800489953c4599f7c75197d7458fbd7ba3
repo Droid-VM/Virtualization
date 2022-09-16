@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1e40014f_548b8fc0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-16T10:57:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65da6056_12796478",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "8d9e2e800489953c4599f7c75197d7458fbd7ba3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "69cfd518_085f9968",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -81,6 +105,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69821382_bc97ad5d",
+        "filename": "libs/apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-16T10:57:12Z",
+      "side": 1,
+      "message": "I only want to point the TODO to the correct bug id, since it\u0027s a small change, I just wrapped it in this cl. I\u0027ll separate it in another cl.",
+      "parentUuid": "18d4192c_46a08e35",
+      "range": {
+        "startLine": 218,
+        "startChar": 8,
+        "endLine": 218,
+        "endChar": 173
+      },
+      "revId": "8d9e2e800489953c4599f7c75197d7458fbd7ba3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35b67e64_40f3e9c5",
@@ -94,6 +142,30 @@
       "writtenOn": "2022-09-16T10:17:39Z",
       "side": 1,
       "message": "nit: follow the same one-line format as other test cases for consistency",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 29
+      },
+      "revId": "8d9e2e800489953c4599f7c75197d7458fbd7ba3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29cade4f_a19a72f7",
+        "filename": "libs/apkverify/tests/apkverify_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-16T10:57:12Z",
+      "side": 1,
+      "message": "I\u0027ll leave this change to the subsequent cl. The current cl will be a refactoring without behavior change.",
+      "parentUuid": "35b67e64_40f3e9c5",
       "range": {
         "startLine": 60,
         "startChar": 0,
