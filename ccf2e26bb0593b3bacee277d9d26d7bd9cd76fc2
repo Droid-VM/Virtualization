@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcb6b64c_68bf01b8",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-09-16T14:44:49Z",
+      "side": 1,
+      "message": "resigning the system/vendor image changes the vbmeta.\n\nThis will work after I redo the way signing/resigning work in scope of b/245277660",
+      "parentUuid": "d0496a45_0021bcc0",
+      "range": {
+        "startLine": 375,
+        "startChar": 16,
+        "endLine": 375,
+        "endChar": 88
+      },
+      "revId": "ccf2e26bb0593b3bacee277d9d26d7bd9cd76fc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eac374cf_62a8f5c0",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-30T21:17:49Z",
       "side": 1,
       "message": "We should adapt this to check Microdroid fails to boot when the vbmeta digest doesn\u0027t match bootconfig.",
+      "range": {
+        "startLine": 393,
+        "startChar": 16,
+        "endLine": 393,
+        "endChar": 78
+      },
+      "revId": "ccf2e26bb0593b3bacee277d9d26d7bd9cd76fc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1e7daa2_bddab632",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-09-16T14:44:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eac374cf_62a8f5c0",
       "range": {
         "startLine": 393,
         "startChar": 16,
@@ -83,6 +131,30 @@
       "writtenOn": "2022-08-30T21:17:49Z",
       "side": 1,
       "message": "Remove. This makes no sense in non-protected and won\u0027t work in protected because pvmfw will reject the bootloader.",
+      "range": {
+        "startLine": 416,
+        "startChar": 16,
+        "endLine": 416,
+        "endChar": 74
+      },
+      "revId": "ccf2e26bb0593b3bacee277d9d26d7bd9cd76fc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d99bafa_c869eba4",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-09-16T14:44:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "483499c7_4018f1ae",
       "range": {
         "startLine": 416,
         "startChar": 16,
