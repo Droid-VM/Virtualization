@@ -218,7 +218,9 @@ impl Signer {
             bail!("Public key mismatch between certificate and signature record");
         }
 
-        // TODO(jooyung) 8. If the proof-of-rotation attribute exists for the signer verify that the struct is valid and this signer is the last certificate in the list.
+        // TODO(b/245914104)
+        // 8. If the proof-of-rotation attribute exists for the signer verify that the
+        // struct is valid and this signer is the last certificate in the list.
         Ok(self.public_key.to_vec().into_boxed_slice())
     }
 }
