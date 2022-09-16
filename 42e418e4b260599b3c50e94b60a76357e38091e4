@@ -94,6 +94,30 @@
       },
       "revId": "42e418e4b260599b3c50e94b60a76357e38091e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ffd1309_f2ec6d97",
+        "filename": "libs/apkverify/src/algorithms.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-16T16:28:53Z",
+      "side": 0,
+      "message": "Ok, if this CL is adding support for more algos, it\u0027s worth pointing out in the comment. Are there tests to cover the new cases, I though there was cases that checked these algos already?",
+      "parentUuid": "2ec038c7_fc649c4b",
+      "range": {
+        "startLine": 176,
+        "startChar": 36,
+        "endLine": 176,
+        "endChar": 55
+      },
+      "revId": "42e418e4b260599b3c50e94b60a76357e38091e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
