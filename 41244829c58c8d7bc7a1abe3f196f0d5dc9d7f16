@@ -22,6 +22,30 @@
       },
       "revId": "41244829c58c8d7bc7a1abe3f196f0d5dc9d7f16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c23eda11_137ce618",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-16T00:13:49Z",
+      "side": 1,
+      "message": "sorry a little confuse\nthe assume check is added by David on aosp/2201501 to prevent staged APEX takes too long on Cuttlefish and the test times out in postsubmits\nwondering why remove it?",
+      "parentUuid": "eb7bd5c9_6a6b4062",
+      "range": {
+        "startLine": 188,
+        "startChar": 8,
+        "endLine": 188,
+        "endChar": 36
+      },
+      "revId": "41244829c58c8d7bc7a1abe3f196f0d5dc9d7f16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
