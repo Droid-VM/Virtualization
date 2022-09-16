@@ -16,19 +16,47 @@
 
 use std::fs;
 use std::process::Command;
+use tempfile::TempDir;
 
 #[test]
 fn test_dump() {
     // test.avmd is generated with
     // ```
     // avmdtool create /tmp/test.amvd \
-    // --apex-payload microdroid vbmeta ./libs/apexutil/tests/data/test.apex \
+    // --apex-payload microdroid vbmeta tests/data/test.apex \
     // --apk microdroid_manager apk \
-    // ./libs/apkverify/tests/data/v3-only-with-rsa-pkcs1-sha256-4096.apk \
-    // --apk microdroid_manager extra-apk ./libs/apkverify/tests/data/v3-only-with-stamp.apk
+    // tests/data/v3-only-with-rsa-pkcs1-sha256-4096.apk \
+    // --apk microdroid_manager extra-apk tests/data/v3-only-with-stamp.apk
     //```
     let output =
         Command::new("./avmdtool").args(["dump", "tests/data/test.avmd"]).output().unwrap();
     assert!(output.status.success());
     assert_eq!(output.stdout, fs::read("tests/data/test.avmd.dump").unwrap());
+}
+
+#[test]
+fn test_create() {
+    let test_dir = TempDir::new().unwrap();
+    let test_file_path = test_dir.path().join("tmp_test.amvd");
+    let output = Command::new("./avmdtool")
+        .args([
+            "create",
+            test_file_path.to_str().unwrap(),
+            "--apex-payload",
+            "microdroid",
+            "vbmeta",
+            "tests/data/test.apex",
+            "--apk",
+            "microdroid_manager",
+            "apk",
+            "tests/data/v3-only-with-rsa-pkcs1-sha256-4096.apk",
+            "--apk",
+            "microdroid_manager",
+            "extra-apk",
+            "tests/data/v3-only-with-stamp.apk",
+        ])
+        .output()
+        .unwrap();
+    assert!(output.status.success());
+    assert_eq!(fs::read(test_file_path).unwrap(), fs::read("tests/data/test.avmd").unwrap());
 }
