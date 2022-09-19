@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "237ebd48_9f2787ae",
+        "filename": "libs/apkverify/tests/apkverify_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-19T20:16:25Z",
+      "side": 1,
+      "message": "That\u0027s because the DSA algorithm is not yet supported[1]. This one only checks the apk_digest extracted from apk is expected while the others also verify the whole apk (check signed data, computing digest etc). I tried to enable DSA, but it crashes in openssl with the current implementation, so this test only checks the apk_digest extracted is valid. The test above checks the error in verification. Otherwise, do you know if there\u0027s any spec about validating DSA for Android?\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/libs/apkverify/src/algorithms.rs;l\u003d108",
+      "parentUuid": "a572a968_1f21e0a1",
+      "range": {
+        "startLine": 54,
+        "startChar": 20,
+        "endLine": 55,
+        "endChar": 27
+      },
+      "revId": "7186b26318ec58d72f61a38342ff5306f3cbdf5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "24e7c10a_c7af2c2a",
         "filename": "libs/apkverify/tests/apkverify_test.rs",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2022-09-19T16:27:39Z",
       "side": 1,
       "message": "nit: (you didn\u0027t touch this part, but...) fn doc?\n\n/// Validates ... expected public key *from the corresponding .der file*.",
+      "range": {
+        "startLine": 224,
+        "startChar": 4,
+        "endLine": 224,
+        "endChar": 69
+      },
+      "revId": "7186b26318ec58d72f61a38342ff5306f3cbdf5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddc5e921_a3214bb8",
+        "filename": "libs/apkverify/tests/apkverify_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-19T20:16:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24e7c10a_c7af2c2a",
       "range": {
         "startLine": 224,
         "startChar": 4,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "531bf756_eccc19bd",
+        "filename": "libs/apkverify/tests/apkverify_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-19T20:16:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb161741_d436e720",
+      "range": {
+        "startLine": 244,
+        "startChar": 4,
+        "endLine": 244,
+        "endChar": 6
+      },
+      "revId": "7186b26318ec58d72f61a38342ff5306f3cbdf5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a04b7b3_63911596",
@@ -110,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf76e903_02050f7e",
+        "filename": "libs/apkverify/tests/apkverify_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-19T20:16:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a04b7b3_63911596",
+      "range": {
+        "startLine": 251,
+        "startChar": 40,
+        "endLine": 251,
+        "endChar": 53
+      },
+      "revId": "7186b26318ec58d72f61a38342ff5306f3cbdf5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53f0adc5_61fa3302",
@@ -123,6 +219,30 @@
       "writtenOn": "2022-09-19T16:27:39Z",
       "side": 1,
       "message": "nit: maybe delete this if you create the README.md.  This error message is a bit weird semantically, in a sense that we\u0027re asking the future person to provide what the test expects?",
+      "range": {
+        "startLine": 261,
+        "startChar": 29,
+        "endLine": 261,
+        "endChar": 76
+      },
+      "revId": "7186b26318ec58d72f61a38342ff5306f3cbdf5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0501f45_bd53976d",
+        "filename": "libs/apkverify/tests/apkverify_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-19T20:16:25Z",
+      "side": 1,
+      "message": "This will create the exact bytes string to write into the expected file. It\u0027s convenient to generate this in the code directly so that it could be kept up to date with the code. I cannot include the exact string in the README.md.",
+      "parentUuid": "53f0adc5_61fa3302",
       "range": {
         "startLine": 261,
         "startChar": 29,
