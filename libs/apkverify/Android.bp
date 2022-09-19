@@ -44,6 +44,7 @@ rust_test {
     test_suites: ["general-tests"],
     rustlibs: [
         "libapkverify",
+        "libnum_traits",
         "libzip",
     ],
     data: ["tests/data/*"],
