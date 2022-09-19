@@ -16,6 +16,29 @@
       "message": "Hello Victor, could you please review this cl?",
       "revId": "b1e15cae6556ffdf372987f301557efcbc1b4681",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9eb0559_972577b2",
+        "filename": "libs/apkverify/src/algorithms.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-19T15:55:12Z",
+      "side": 1,
+      "message": "Looks like Eq already implies PartialEq, so this isn\u0027t needed, right?\n\n```\npub trait Eq: PartialEq\u003cSelf\u003e { }\n```",
+      "range": {
+        "startLine": 30,
+        "startChar": 27,
+        "endLine": 30,
+        "endChar": 36
+      },
+      "revId": "b1e15cae6556ffdf372987f301557efcbc1b4681",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
