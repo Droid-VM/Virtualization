@@ -143,6 +143,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13a6f74b_80c9c6ba",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-19T16:41:51Z",
+      "side": 1,
+      "message": "Looks like you could consider create a class and pass the object instead of doing it functionally, to handle the exception and avoid swallowing it.  One possible way could be...\n\n1. Move executeCommand* to a new ShellCommandExecutor.\n2. ComposBenchmark will create and own a ShellCommandExecutor.\n3. ProcessUtil can create or accept a ShellCommandExecutor from constructor.",
+      "parentUuid": "ea2f1626_1285c1c3",
+      "range": {
+        "startLine": 221,
+        "startChar": 8,
+        "endLine": 221,
+        "endChar": 13
+      },
+      "revId": "caaaf3c8b1bd3c46df56102f7819f61be666b7ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2ce0539_92883a1e",
