@@ -20,16 +20,15 @@ use apkverify::pick_v4_apk_digest;
 use avmd::{ApkDescriptor, Avmd, Descriptor, ResourceIdentifier, VbMetaDescriptor};
 use clap::{App, AppSettings, Arg, ArgMatches, SubCommand};
 use serde::ser::Serialize;
-use std::fs::File;
 use vbmeta::VbMetaImage;
 
-fn get_vbmeta_image_hash(file: &str) -> Result<Vec<u8>> {
-    let img = VbMetaImage::verify_path(file)?;
+fn get_vbmeta_image_hash(path: &str) -> Result<Vec<u8>> {
+    let img = VbMetaImage::verify_path(path)?;
     Ok(img.hash().ok_or_else(|| anyhow!("No hash as VBMeta image isn't signed"))?.to_vec())
 }
 
 /// Iterate over a set of argument values, that could be empty or come in
-/// (<index>, <namespace>, <name>, <file>) tuple.
+/// (<index>, <namespace>, <name>, <path>) tuple.
 struct NamespaceNameFileIterator<'a> {
     indices: Option<clap::Indices<'a>>,
     values: Option<clap::Values<'a>>,
@@ -48,8 +47,8 @@ impl<'a> Iterator for NamespaceNameFileIterator<'a> {
         match (self.indices.as_mut(), self.values.as_mut()) {
             (Some(indices), Some(values)) => {
                 match (indices.nth(2), values.next(), values.next(), values.next()) {
-                    (Some(index), Some(namespace), Some(name), Some(file)) => {
-                        Some((index, namespace, name, file))
+                    (Some(index), Some(namespace), Some(name), Some(path)) => {
+                        Some((index, namespace, name, path))
                     }
                     _ => None,
                 }
@@ -63,18 +62,17 @@ fn create(args: &ArgMatches) -> Result<()> {
     // Store descriptors in the order they were given in the arguments
     // TODO: instead, group them by namespace?
     let mut descriptors = std::collections::BTreeMap::new();
-    for (i, namespace, name, file) in NamespaceNameFileIterator::new(args, "vbmeta") {
+    for (i, namespace, name, path) in NamespaceNameFileIterator::new(args, "vbmeta") {
         descriptors.insert(
             i,
             Descriptor::VbMeta(VbMetaDescriptor {
                 resource: ResourceIdentifier::new(namespace, name),
-                vbmeta_digest: get_vbmeta_image_hash(file)?,
+                vbmeta_digest: get_vbmeta_image_hash(path)?,
             }),
         );
     }
-    for (i, namespace, name, file) in NamespaceNameFileIterator::new(args, "apk") {
-        let file = File::open(file)?;
-        let (signature_algorithm_id, apk_digest) = pick_v4_apk_digest(file)?;
+    for (i, namespace, name, path) in NamespaceNameFileIterator::new(args, "apk") {
+        let (signature_algorithm_id, apk_digest) = pick_v4_apk_digest(path)?;
         descriptors.insert(
             i,
             Descriptor::Apk(ApkDescriptor {
@@ -84,12 +82,12 @@ fn create(args: &ArgMatches) -> Result<()> {
             }),
         );
     }
-    for (i, namespace, name, file) in NamespaceNameFileIterator::new(args, "apex-payload") {
+    for (i, namespace, name, path) in NamespaceNameFileIterator::new(args, "apex-payload") {
         descriptors.insert(
             i,
             Descriptor::VbMeta(VbMetaDescriptor {
                 resource: ResourceIdentifier::new(namespace, name),
-                vbmeta_digest: get_payload_vbmeta_image_hash(file)?,
+                vbmeta_digest: get_payload_vbmeta_image_hash(path)?,
             }),
         );
     }
@@ -100,51 +98,51 @@ fn create(args: &ArgMatches) -> Result<()> {
             .packed_format()
             .legacy_enums(),
     )?;
-    std::fs::write(args.value_of("file").unwrap(), &bytes)?;
+    std::fs::write(args.value_of("path").unwrap(), &bytes)?;
     Ok(())
 }
 
 fn dump(args: &ArgMatches) -> Result<()> {
-    let file = std::fs::read(args.value_of("file").unwrap())?;
-    let avmd: Avmd = serde_cbor::from_slice(&file)?;
+    let path = std::fs::read(args.value_of("path").unwrap())?;
+    let avmd: Avmd = serde_cbor::from_slice(&path)?;
     println!("{}", avmd);
     Ok(())
 }
 
 fn main() -> Result<()> {
-    let namespace_name_file = ["namespace", "name", "file"];
+    let namespace_name_path = ["namespace", "name", "path"];
     let app = App::new("avmdtool")
         .setting(AppSettings::SubcommandRequiredElseHelp)
         .subcommand(
             SubCommand::with_name("create")
                 .setting(AppSettings::ArgRequiredElseHelp)
-                .arg(Arg::with_name("file").required(true).takes_value(true))
+                .arg(Arg::with_name("path").required(true).takes_value(true))
                 .arg(
                     Arg::with_name("vbmeta")
                         .long("vbmeta")
                         .takes_value(true)
-                        .value_names(&namespace_name_file)
+                        .value_names(&namespace_name_path)
                         .multiple(true),
                 )
                 .arg(
                     Arg::with_name("apk")
                         .long("apk")
                         .takes_value(true)
-                        .value_names(&namespace_name_file)
+                        .value_names(&namespace_name_path)
                         .multiple(true),
                 )
                 .arg(
                     Arg::with_name("apex-payload")
                         .long("apex-payload")
                         .takes_value(true)
-                        .value_names(&namespace_name_file)
+                        .value_names(&namespace_name_path)
                         .multiple(true),
                 ),
         )
         .subcommand(
             SubCommand::with_name("dump")
                 .setting(AppSettings::ArgRequiredElseHelp)
-                .arg(Arg::with_name("file").required(true).takes_value(true)),
+                .arg(Arg::with_name("path").required(true).takes_value(true)),
         );
 
     let args = app.get_matches();

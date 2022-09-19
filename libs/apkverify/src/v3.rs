@@ -127,7 +127,8 @@ pub fn get_public_key_der<P: AsRef<Path>>(path: P) -> Result<Box<[u8]>> {
 /// Gets the v4 [apk_digest].
 ///
 /// [apk_digest]: https://source.android.com/docs/security/apksigning/v4#apk-digest
-pub fn pick_v4_apk_digest<R: Read + Seek>(apk: R) -> Result<(u32, Box<[u8]>)> {
+pub fn pick_v4_apk_digest<P: AsRef<Path>>(apk_path: P) -> Result<(u32, Box<[u8]>)> {
+    let apk = File::open(apk_path.as_ref())?;
     let mut sections = ApkSections::new(apk)?;
     let mut block = sections.find_signature(APK_SIGNATURE_SCHEME_V3_BLOCK_ID)?;
     let signers = block.read::<Signers>()?;
@@ -282,7 +283,6 @@ pub(crate) fn to_hex_string(buf: &[u8]) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::fs::File;
 
     #[test]
     fn test_pick_v4_apk_digest_only_with_v3_dsa_sha256() {
@@ -303,9 +303,8 @@ mod tests {
         );
     }
 
-    fn check_v4_apk_digest(apk_filename: &str, expected_algorithm: u32, expected_digest: &str) {
-        let apk_file = File::open(apk_filename).unwrap();
-        let (signature_algorithm_id, apk_digest) = pick_v4_apk_digest(apk_file).unwrap();
+    fn check_v4_apk_digest(apk_path: &str, expected_algorithm: u32, expected_digest: &str) {
+        let (signature_algorithm_id, apk_digest) = pick_v4_apk_digest(apk_path).unwrap();
 
         assert_eq!(expected_algorithm, signature_algorithm_id);
         assert_eq!(expected_digest, to_hex_string(apk_digest.as_ref()));
