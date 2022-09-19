@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7973aa99_4f244040",
+        "filename": "libs/apkverify/tests/apkverify_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-19T21:07:52Z",
+      "side": 1,
+      "message": "TL;DR Let\u0027s just add a comment. I don\u0027t think we strictly need to support DSA.\n\nAndroid actually selects the \"best\" algorithm it thinks, and the \"best\" can change between dessert releases.  The platform as a verifier can choose whatever it prefers, unless none of the signatures in the APK are supported, which is unlikely.  Assuming the APK won\u0027t contain only DSA signature, we can just pick other ones.\n\nPS. It looks like the current Android implementation[1] doesn\u0027t really have a preference between signature algorithms (but only maps to the underlying digest algorithm).\n\n[1] http://cs/android-internal/frameworks/base/core/java/android/util/apk/ApkSignatureSchemeV3Verifier.java;l\u003d314;rcl\u003d04c5e8611f47532c59469e0f1f635d3cbcfd57b6",
+      "parentUuid": "237ebd48_9f2787ae",
+      "range": {
+        "startLine": 54,
+        "startChar": 20,
+        "endLine": 55,
+        "endChar": 27
+      },
+      "revId": "7186b26318ec58d72f61a38342ff5306f3cbdf5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "24e7c10a_c7af2c2a",
         "filename": "libs/apkverify/tests/apkverify_test.rs",
         "patchSetId": 1
@@ -243,6 +267,30 @@
       "side": 1,
       "message": "This will create the exact bytes string to write into the expected file. It\u0027s convenient to generate this in the code directly so that it could be kept up to date with the code. I cannot include the exact string in the README.md.",
       "parentUuid": "53f0adc5_61fa3302",
+      "range": {
+        "startLine": 261,
+        "startChar": 29,
+        "endLine": 261,
+        "endChar": 76
+      },
+      "revId": "7186b26318ec58d72f61a38342ff5306f3cbdf5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87311367_2b3ac55b",
+        "filename": "libs/apkverify/tests/apkverify_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-19T21:07:52Z",
+      "side": 1,
+      "message": "I see.  Technically you should be able to use `apksigner verify --min-sdk-version 24 --print-certs-pem test/data/foo.apk` and `openssl` to convert the .pem to .der.  But I wouldn\u0027t block the change on this. \n\nBut I don\u0027t know a way to extract the apk digest... (I might need this one day for another project...)",
+      "parentUuid": "b0501f45_bd53976d",
       "range": {
         "startLine": 261,
         "startChar": 29,
