@@ -39,6 +39,30 @@
       },
       "revId": "b1e15cae6556ffdf372987f301557efcbc1b4681",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd1cc136_5e8482e3",
+        "filename": "libs/apkverify/src/algorithms.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-19T16:43:25Z",
+      "side": 1,
+      "message": "PartialEq is required for Eq. I think we mainly need PartialEq other than Eq for most of the comparison according to the Rust book[1].\n\n[1] https://doc.rust-lang.org/book/appendix-03-derivable-traits.html#partialeq-and-eq-for-equality-comparisons\n\nOtherwise, there\u0027s an error for `libidsig.test` if we remove PartialEq here.\n\n```\nerror[E0277]: can\u0027t compare `algorithms::SignatureAlgorithmID` with `algorithms::SignatureAlgorithmID`\n  --\u003e packages/modules/Virtualization/libs/apkverify/src/algorithms.rs:30:24\n   |\n30 | #[derive(Clone, Debug, Eq, FromPrimitive, ToPrimitive)]\n   |                        ^^ no implementation for `algorithms::SignatureAlgorithmID \u003d\u003d algorithms::SignatureAlgorithmID`\n   |\n   \u003d help: the trait `std::cmp::PartialEq` is not implemented for `algorithms::SignatureAlgorithmID`\nnote: required by a bound in `std::cmp::Eq`\n   \u003d note: this error originates in the derive macro `Eq` (in Nightly builds, run with -Z macro-backtrace for more info)\nhelp: consider annotating `algorithms::SignatureAlgorithmID` with `#[derive(PartialEq)]`\n   |\n32 | #[derive(PartialEq)]\n   |\n```",
+      "parentUuid": "a9eb0559_972577b2",
+      "range": {
+        "startLine": 30,
+        "startChar": 27,
+        "endLine": 30,
+        "endChar": 36
+      },
+      "revId": "b1e15cae6556ffdf372987f301557efcbc1b4681",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
