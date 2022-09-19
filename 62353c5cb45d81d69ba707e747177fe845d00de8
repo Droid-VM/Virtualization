@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30977702_7e842adf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-19T16:01:14Z",
+      "side": 1,
+      "message": "Hi Andrew, thanks for the review!",
+      "revId": "62353c5cb45d81d69ba707e747177fe845d00de8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec8c61c6_3ee433e2",
@@ -31,6 +48,24 @@
       "writtenOn": "2022-09-19T15:36:47Z",
       "side": 1,
       "message": "These aren\u0027t used any more following this CL? Or there\u0027s still a bit to go?",
+      "revId": "62353c5cb45d81d69ba707e747177fe845d00de8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e25838d6_24ea17a2",
+        "filename": "libs/apkverify/src/sigutil.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-19T16:01:14Z",
+      "side": 1,
+      "message": "There are still some usages in tests, but those will be removed with the cl https://r.android.com/2221121. I can remove them together with that cl.",
+      "parentUuid": "ec8c61c6_3ee433e2",
       "revId": "62353c5cb45d81d69ba707e747177fe845d00de8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
