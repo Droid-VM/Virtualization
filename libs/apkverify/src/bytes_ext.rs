@@ -32,6 +32,12 @@ impl<T> Deref for LengthPrefixed<T> {
     }
 }
 
+impl<T> LengthPrefixed<T> {
+    pub fn into_inner(self) -> T {
+        self.inner
+    }
+}
+
 pub trait BytesExt {
     fn read<T: ReadFromBytes>(&mut self) -> Result<T>;
 }
