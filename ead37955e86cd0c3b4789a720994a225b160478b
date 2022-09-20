@@ -16,6 +16,29 @@
       "message": "Hi Andrew, could you review this cl?",
       "revId": "ead37955e86cd0c3b4789a720994a225b160478b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "279b0f8c_20130aa6",
+        "filename": "libs/apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-20T15:37:06Z",
+      "side": 1,
+      "message": "It was there before, but won\u0027t this only be true _after_ the signed data as been verified?",
+      "range": {
+        "startLine": 184,
+        "startChar": 14,
+        "endLine": 184,
+        "endChar": 52
+      },
+      "revId": "ead37955e86cd0c3b4789a720994a225b160478b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
