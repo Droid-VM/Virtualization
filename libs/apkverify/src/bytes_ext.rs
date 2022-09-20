@@ -18,7 +18,7 @@
 
 use anyhow::{ensure, Result};
 use bytes::{Buf, Bytes};
-use std::ops::Deref;
+use std::ops::{Deref, DerefMut};
 
 #[derive(Clone, Debug)]
 pub struct LengthPrefixed<T> {
@@ -29,6 +29,18 @@ impl<T> Deref for LengthPrefixed<T> {
     type Target = T;
     fn deref(&self) -> &Self::Target {
         &self.inner
+    }
+}
+
+impl<T> DerefMut for LengthPrefixed<T> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.inner
+    }
+}
+
+impl<T> LengthPrefixed<T> {
+    pub fn into_inner(self) -> T {
+        self.inner
     }
 }
 
