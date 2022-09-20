@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53d8e999_852f12cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-09-20T13:58:56Z",
+      "side": 1,
+      "message": "Resolved the comments. There is certain discussion on where to put these command line (gki_defconig/ or microdroid fragment), but this patch is unaffected by those. I\u0027ll add them to same topic or add those patches on the top of this.\n\nThe other 2 patches - Update kernel to builds 9047506 are obsolete, since they do not contain `console\u003dttynull` change - r.android.com/2220003",
+      "revId": "c22aca11213cb747ae3135a043e3f9b261f26034",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c64a126e_0cd1c2bb",
@@ -14,6 +31,30 @@
       "writtenOn": "2022-09-16T16:08:30Z",
       "side": 1,
       "message": "Nobody will even find this here. If you want to keep it, move it somewhere meaningful. Otherwise just remove it.",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 128
+      },
+      "revId": "c22aca11213cb747ae3135a043e3f9b261f26034",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b11ae5cb_89b4ea46",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-09-20T13:58:56Z",
+      "side": 1,
+      "message": "Removed it",
+      "parentUuid": "c64a126e_0cd1c2bb",
       "range": {
         "startLine": 241,
         "startChar": 0,

@@ -22,6 +22,30 @@
       },
       "revId": "00dd71f78198f82d988214af7d1b4360052c84c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1a8d3bf_8b993973",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-09-20T13:58:56Z",
+      "side": 0,
+      "message": "This will no more be needed after console\u003dttynull is added the cmdline (in gki_defconfig, it already is added, just need to update the microdroid kernel prebuilt)\n\nI will submit this along with the update only.",
+      "parentUuid": "f7197901_6c464192",
+      "range": {
+        "startLine": 267,
+        "startChar": 0,
+        "endLine": 267,
+        "endChar": 31
+      },
+      "revId": "00dd71f78198f82d988214af7d1b4360052c84c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
