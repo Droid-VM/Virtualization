@@ -89,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0144d50b_56303ba2",
+        "filename": "libs/apkverify/tests/apkverify_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-20T07:30:24Z",
+      "side": 1,
+      "message": "Thanks for the info! But I think the current apkverify implementation doesn\u0027t support this algorithm selection at an early stage. According to the code, it looks like if it found DSA-SHA256, it will just proceed the verification with it till it crashes. Is it WAI?\n\nI\u0027ll add a comment here and we can continue this discussion at b/197052981.",
+      "parentUuid": "7973aa99_4f244040",
+      "range": {
+        "startLine": 54,
+        "startChar": 20,
+        "endLine": 55,
+        "endChar": 27
+      },
+      "revId": "7186b26318ec58d72f61a38342ff5306f3cbdf5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24e7c10a_c7af2c2a",
@@ -291,6 +315,30 @@
       "side": 1,
       "message": "I see.  Technically you should be able to use `apksigner verify --min-sdk-version 24 --print-certs-pem test/data/foo.apk` and `openssl` to convert the .pem to .der.  But I wouldn\u0027t block the change on this. \n\nBut I don\u0027t know a way to extract the apk digest... (I might need this one day for another project...)",
       "parentUuid": "b0501f45_bd53976d",
+      "range": {
+        "startLine": 261,
+        "startChar": 29,
+        "endLine": 261,
+        "endChar": 76
+      },
+      "revId": "7186b26318ec58d72f61a38342ff5306f3cbdf5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1c2d2da_c8ae2d3f",
+        "filename": "libs/apkverify/tests/apkverify_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-20T07:30:24Z",
+      "side": 1,
+      "message": "Thanks! I\u0027ll add this to the README.",
+      "parentUuid": "87311367_2b3ac55b",
       "range": {
         "startLine": 261,
         "startChar": 29,
