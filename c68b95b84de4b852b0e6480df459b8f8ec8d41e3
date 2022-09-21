@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5f514ca_2de1da03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-21T16:26:19Z",
+      "side": 1,
+      "message": "Hi Victor, thanks for the review!",
+      "revId": "c68b95b84de4b852b0e6480df459b8f8ec8d41e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc2585f3_dcec5d63",
@@ -31,6 +48,30 @@
       "writtenOn": "2022-09-21T15:33:51Z",
       "side": 1,
       "message": "nit: Add `#[ignore]` instead?  Then you don\u0027t need to assert the buggy behavior.",
+      "range": {
+        "startLine": 43,
+        "startChar": 33,
+        "endLine": 43,
+        "endChar": 51
+      },
+      "revId": "c68b95b84de4b852b0e6480df459b8f8ec8d41e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d38968b_0d2b4f70",
+        "filename": "libs/apkverify/tests/apkverify_test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-21T16:26:19Z",
+      "side": 1,
+      "message": "Somehow I still want to keep the test running so that it can be updated in the future with the code. I\u0027m afraid that once we mark the test ignored, no one will look at it anymore.",
+      "parentUuid": "fc2585f3_dcec5d63",
       "range": {
         "startLine": 43,
         "startChar": 33,
