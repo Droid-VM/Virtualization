@@ -17,12 +17,65 @@
 package com.android.microdroid.test.common;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
 /** This class provides process utility for both device tests and host tests. */
 public final class ProcessUtil {
+
+    /** A memory map entry from /proc/{pid}/smaps */
+    public static class SMapEntry {
+        public String name;
+        public Map<String, Long> metrics;
+    }
+
+    /** Gets metrics key and values mapping of specified process id */
+    public static List<SMapEntry> getProcessSmaps(int pid, Function<String, String> shellExecutor)
+            throws IOException {
+        String path = "/proc/" + pid + "/smaps";
+
+        List<SMapEntry> entries = new ArrayList<SMapEntry>();
+        for (String line : shellExecutor.apply("cat " + path + " || true").split("\n")) {
+            line = line.trim();
+            if (line.length() == 0) {
+                continue;
+            }
+            if (line.contains(": ")) {
+                if (entries.size() == 0) {
+                    throw new RuntimeException("unexpected line: " + line);
+                }
+                if (line.endsWith(" kB")) line = line.substring(0, line.length() - 3);
+                String[] elems = line.split(":");
+                String name = elems[0].trim();
+                try {
+                    entries.get(entries.size() - 1)
+                            .metrics
+                            .put(name, Long.parseLong(elems[1].trim()));
+                } catch (java.lang.NumberFormatException e) {
+                    // Some entries, like "VmFlags", aren't numbers, just ignore.
+                }
+                continue;
+            }
+            // Parse the header and create a new entry for it.
+            // Some header examples:
+            //     7f644098a000-7f644098c000 rw-p 00000000 00:00 0
+            //     00400000-0048a000 r-xp 00000000 fd:03 960637   /bin/bash
+            //     75e42af000-75f42af000 rw-s 00000000 00:01 235  /memfd:crosvm_guest (deleted)
+            SMapEntry entry = new SMapEntry();
+            String[] parts = line.split("\\s+", 6);
+            if (parts.length >= 6) {
+                entry.name = parts[5];
+            } else {
+                entry.name = "";
+            }
+            entry.metrics = new HashMap<String, Long>();
+            entries.add(entry);
+        }
+        return entries;
+    }
 
     /** Gets metrics key and values mapping of specified process id */
     public static Map<String, Long> getProcessSmapsRollup(

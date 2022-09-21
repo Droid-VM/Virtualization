@@ -32,6 +32,7 @@ import android.system.virtualmachine.VirtualMachineException;
 import android.util.Log;
 
 import com.android.microdroid.test.common.MetricsProcessor;
+import com.android.microdroid.test.common.ProcessUtil;
 import com.android.microdroid.test.device.MicrodroidDeviceTestBase;
 import com.android.microdroid.testservice.IBenchmarkService;
 
@@ -42,13 +43,16 @@ import org.junit.rules.Timeout;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Function;
 
 @RunWith(Parameterized.class)
 public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
@@ -273,6 +277,41 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         }
     }
 
+    // DO NOT SUBMIT: Copied these from ComposBenchmark.java. Maybe move to the base class.
+
+    private byte[] executeCommandBlocking(String command) {
+        try (InputStream is =
+                        new ParcelFileDescriptor.AutoCloseInputStream(
+                                mInstrumentation.getUiAutomation().executeShellCommand(command));
+                ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            byte[] buf = new byte[1024];
+            int length;
+            while ((length = is.read(buf)) >= 0) {
+                out.write(buf, 0, length);
+            }
+            return out.toByteArray();
+        } catch (IOException e) {
+            Log.e(TAG, "Error executing: " + command, e);
+            return null;
+        }
+    }
+
+    private String executeCommand(String command) {
+        try {
+            byte[] output = executeCommandBlocking(command);
+
+            if (output == null) {
+                throw new RuntimeException("Failed to run the command.");
+            } else {
+                String stdout = new String(output, "UTF-8");
+                Log.i(TAG, "Get stdout : " + stdout);
+                return stdout;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error executing: " + command + " , Exception: " + e);
+        }
+    }
+
     @Test
     public void testMemoryUsage() throws Exception {
         final String vmName = "test_vm_mem_usage";
@@ -283,8 +322,12 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
                         .build();
         mInner.forceCreateNewVirtualMachine(vmName, config);
         VirtualMachine vm = mInner.getVirtualMachineManager().get(vmName);
-        MemoryUsageListener listener = new MemoryUsageListener();
+
+        MemoryUsageListener listener = new MemoryUsageListener(this::executeCommand);
         BenchmarkVmListener.create(listener).runToFinish(TAG, vm);
+
+        double mem_host = (double) listener.mHost / 1024.0;
+        double mem_guest = (double) listener.mGuest / 1024.0;
 
         double mem_overall = 256.0;
         double mem_total = (double) listener.mMemTotal / 1024.0;
@@ -299,6 +342,9 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         double mem_unreclaimable = mem_total - mem_avail;
 
         Bundle bundle = new Bundle();
+        bundle.putDouble(METRIC_NAME_PREFIX + "mem_host_MB", mem_host);
+        bundle.putDouble(METRIC_NAME_PREFIX + "mem_guest_MB", mem_guest);
+
         bundle.putDouble(METRIC_NAME_PREFIX + "mem_kernel_MB", mem_kernel);
         bundle.putDouble(METRIC_NAME_PREFIX + "mem_used_MB", mem_used);
         bundle.putDouble(METRIC_NAME_PREFIX + "mem_buffers_MB", mem_buffers);
@@ -309,12 +355,21 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
     }
 
     private static class MemoryUsageListener implements BenchmarkVmListener.InnerListener {
+        MemoryUsageListener(Function<String, String> shellExecutor) {
+            mShellExecutor = shellExecutor;
+        }
+
+        public Function<String, String> mShellExecutor;
+
         public long mMemTotal;
         public long mMemFree;
         public long mMemAvailable;
         public long mBuffers;
         public long mCached;
         public long mSlab;
+
+        public long mHost;
+        public long mGuest;
 
         @Override
         public void onPayloadReady(VirtualMachine vm, IBenchmarkService service)
@@ -325,6 +380,34 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
             mBuffers = service.getMemInfoEntry("Buffers");
             mCached = service.getMemInfoEntry("Cached");
             mSlab = service.getMemInfoEntry("Slab");
+
+            try {
+                List<Integer> crosvmPids =
+                        ProcessUtil.getProcessMap(mShellExecutor).entrySet().stream()
+                                .filter(e -> e.getValue().contains("crosvm"))
+                                .map(e -> e.getKey())
+                                .collect(java.util.stream.Collectors.toList());
+                if (crosvmPids.size() != 1) {
+                    throw new RuntimeException(
+                            "expected to find exactly one crosvm processes, found "
+                                    + crosvmPids.size());
+                }
+
+                mHost = 0;
+                mGuest = 0;
+                for (ProcessUtil.SMapEntry entry :
+                        ProcessUtil.getProcessSmaps(crosvmPids.get(0), mShellExecutor)) {
+                    Long rss = entry.metrics.get("Rss");
+                    if (entry.name.contains("crosvm_guest")) {
+                        mGuest += rss;
+                    } else {
+                        mHost += rss;
+                    }
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "Error inside onPayloadReady():" + e);
+                throw new RuntimeException(e);
+            }
         }
     }
 
