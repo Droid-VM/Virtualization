@@ -97,14 +97,6 @@ impl SignatureAlgorithmID {
         &self,
         public_key: &'a PKey<pkey::Public>,
     ) -> Result<Verifier<'a>> {
-        ensure!(
-            !matches!(
-                self,
-                SignatureAlgorithmID::DsaWithSha256 | SignatureAlgorithmID::VerityDsaWithSha256
-            ),
-            "TODO(b/197052981): Algorithm '{:?}' is not implemented.",
-            self
-        );
         ensure!(public_key.id() == self.pkey_id(), "Public key has the wrong ID");
         let mut verifier = Verifier::new(self.new_message_digest(), public_key)?;
         if public_key.id() == pkey::Id::RSA {

@@ -74,6 +74,16 @@ struct Signature {
     signature: LengthPrefixed<Bytes>,
 }
 
+impl Signature {
+    fn is_signature_algorithm_supported(&self) -> bool {
+        self.signature_algorithm_id.is_some()
+            && !matches!(
+                self.signature_algorithm_id.unwrap(),
+                SignatureAlgorithmID::DsaWithSha256 | SignatureAlgorithmID::VerityDsaWithSha256
+            )
+    }
+}
+
 struct Digest {
     signature_algorithm_id: Option<SignatureAlgorithmID>,
     digest: LengthPrefixed<Bytes>,
@@ -141,7 +151,7 @@ impl Signer {
         Ok(self
             .signatures
             .iter()
-            .filter(|sig| sig.signature_algorithm_id.is_some())
+            .filter(|sig| sig.is_signature_algorithm_supported())
             .max_by_key(|sig| sig.signature_algorithm_id.unwrap().content_digest_algorithm())
             .context("No supported signatures found")?)
     }
