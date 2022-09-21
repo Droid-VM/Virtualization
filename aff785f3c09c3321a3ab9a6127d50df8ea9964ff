@@ -16,6 +16,52 @@
       "message": "Hi Andrew, could you also review this cl?",
       "revId": "aff785f3c09c3321a3ab9a6127d50df8ea9964ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "356d1af2_515a73d9",
+        "filename": "libs/apkverify/src/bytes_ext.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-21T13:24:43Z",
+      "side": 1,
+      "message": "Nice!",
+      "range": {
+        "startLine": 36,
+        "startChar": 3,
+        "endLine": 36,
+        "endChar": 76
+      },
+      "revId": "aff785f3c09c3321a3ab9a6127d50df8ea9964ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "237f779f_753ba8fa",
+        "filename": "libs/apkverify/src/v3.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-21T13:24:43Z",
+      "side": 1,
+      "message": "pop can never fail, given the length check.\nSo just use unwrap()?",
+      "range": {
+        "startLine": 124,
+        "startChar": 23,
+        "endLine": 124,
+        "endChar": 64
+      },
+      "revId": "aff785f3c09c3321a3ab9a6127d50df8ea9964ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
