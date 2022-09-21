@@ -16,6 +16,29 @@
       "message": "Hi Victor, could you review this cl?",
       "revId": "c68b95b84de4b852b0e6480df459b8f8ec8d41e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc2585f3_dcec5d63",
+        "filename": "libs/apkverify/tests/apkverify_test.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-21T15:33:51Z",
+      "side": 1,
+      "message": "nit: Add `#[ignore]` instead?  Then you don\u0027t need to assert the buggy behavior.",
+      "range": {
+        "startLine": 43,
+        "startChar": 33,
+        "endLine": 43,
+        "endChar": 51
+      },
+      "revId": "c68b95b84de4b852b0e6480df459b8f8ec8d41e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
