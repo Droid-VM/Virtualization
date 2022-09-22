@@ -51,6 +51,24 @@
       "parentUuid": "71adeab6_f857baaf",
       "revId": "89adfd9351811002ef42f2c02fd7a661f000a8d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23188db7_6c28ea16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-22T11:29:20Z",
+      "side": 1,
+      "message": "I think it\u0027s strange to half support DSA. We don\u0027t accept v4 from the developer, only v3 which we always have to validate. I\u0027d prefer to be consistent in supporting or not supporting DSA and given we\u0027re going down the path of not supporting it that means our tests shouldn\u0027t expect to pass if they\u0027re using a DSA signed apk.",
+      "parentUuid": "e2a6c8e0_c4ef77b2",
+      "revId": "89adfd9351811002ef42f2c02fd7a661f000a8d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
