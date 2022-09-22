@@ -39,6 +39,30 @@
       },
       "revId": "0a7858c4204144dd31e7ad8678972857dfef6a8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75d33bfb_b34bc0b5",
+        "filename": "libs/idsig/src/apksigv4.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-22T12:45:29Z",
+      "side": 1,
+      "message": "In `digest_from_apk()`, `V4Signature::create()` runs the logic to extract a hashtree from the APK. But that logic is already tested directly so it might not matter if this APK is a degenerate case.",
+      "parentUuid": "e16d7eec_82c5fe43",
+      "range": {
+        "startLine": 329,
+        "startChar": 19,
+        "endLine": 329,
+        "endChar": 23
+      },
+      "revId": "0a7858c4204144dd31e7ad8678972857dfef6a8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
