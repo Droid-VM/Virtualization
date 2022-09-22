@@ -33,6 +33,24 @@
       "message": "We\u0027re saying elsewhere that we\u0027re trying to avoid supporting DSA but in this CL it looks like we\u0027re doing workarounds to keep DSA working in some cases but not others? Would it be better to just commit to avoiding DSA and update the idsig test.apk to one that doesn\u0027t use DSA but uses an algorithm we\u0027ve chosen to support properly?",
       "revId": "89adfd9351811002ef42f2c02fd7a661f000a8d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2a6c8e0_c4ef77b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-22T11:19:57Z",
+      "side": 1,
+      "message": "That\u0027s also possible, but that will somehow cut down the DSA support completely. Actually the algorithm is needed in two places: \n\n1/ signature verification \n2/ digest computation\n\nopenssl doesn\u0027t support DSA for 1/, but there\u0027s no problem with 2/. 1/ only impacts the v3 verification. As v4 and AVMD digest comparison (in the future) only need 2/, we could keep supporting DSA in them. That would allow us to verify apks only signed with DSA with v4 in theory. WDYT?",
+      "parentUuid": "71adeab6_f857baaf",
+      "revId": "89adfd9351811002ef42f2c02fd7a661f000a8d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
