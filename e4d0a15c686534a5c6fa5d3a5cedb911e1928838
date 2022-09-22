@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b217edc_db42ee49",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2022-09-22T23:27:35Z",
+      "side": 1,
+      "message": "Update the commit message. Let me know if you have any concern about the remaining gap or and idea to narrow it more.",
+      "parentUuid": "5ceec941_cb33b1f3",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 7
+      },
+      "revId": "e4d0a15c686534a5c6fa5d3a5cedb911e1928838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5efa209b_b1a00fe4",
@@ -125,6 +149,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "540b219d_c8b260b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2022-09-22T23:27:35Z",
+      "side": 1,
+      "message": "Added PSS as well. Guest PSS is going to always be equal to guest RSS, but I included it for symmetry. We can decide what it worth including on the dashboard separately.",
+      "parentUuid": "3f010cfb_4921afae",
+      "revId": "e4d0a15c686534a5c6fa5d3a5cedb911e1928838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9279648a_302903b8",
@@ -148,6 +190,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6714c843_048c8609",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2022-09-22T23:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9279648a_302903b8",
+      "range": {
+        "startLine": 280,
+        "startChar": 7,
+        "endLine": 280,
+        "endChar": 20
+      },
+      "revId": "e4d0a15c686534a5c6fa5d3a5cedb911e1928838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcb60c54_46f8eded",
@@ -161,6 +227,30 @@
       "writtenOn": "2022-09-22T01:53:13Z",
       "side": 1,
       "message": "How about using https://docs.oracle.com/javase/9/docs/api/java/io/InputStream.html#transferTo-java.io.OutputStream- ?",
+      "range": {
+        "startLine": 287,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 13
+      },
+      "revId": "e4d0a15c686534a5c6fa5d3a5cedb911e1928838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "734775a0_8878bb27",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2022-09-22T23:27:35Z",
+      "side": 1,
+      "message": "Thanks, done in https://r.android.com/2228517.",
+      "parentUuid": "bcb60c54_46f8eded",
       "range": {
         "startLine": 287,
         "startChar": 0,
@@ -218,6 +308,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36eb531e_7a0946bd",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2022-09-22T23:27:35Z",
+      "side": 1,
+      "message": "Moved to https://r.android.com/2228517 and simplified.",
+      "parentUuid": "b25014e9_4d399601",
+      "range": {
+        "startLine": 293,
+        "startChar": 10,
+        "endLine": 296,
+        "endChar": 9
+      },
+      "revId": "e4d0a15c686534a5c6fa5d3a5cedb911e1928838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f6828e2_12b329d8",
@@ -231,6 +345,30 @@
       "writtenOn": "2022-09-22T01:53:13Z",
       "side": 1,
       "message": "... instead of doing this",
+      "range": {
+        "startLine": 303,
+        "startChar": 12,
+        "endLine": 304,
+        "endChar": 73
+      },
+      "revId": "e4d0a15c686534a5c6fa5d3a5cedb911e1928838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f765a10_fc2015ec",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2022-09-22T23:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f6828e2_12b329d8",
       "range": {
         "startLine": 303,
         "startChar": 12,
@@ -264,6 +402,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2aa508e_b43bd793",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2022-09-22T23:27:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4077f797_9478d70f",
+      "range": {
+        "startLine": 400,
+        "startChar": 20,
+        "endLine": 400,
+        "endChar": 24
+      },
+      "revId": "e4d0a15c686534a5c6fa5d3a5cedb911e1928838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0439f6d_94fded29",
@@ -277,6 +439,30 @@
       "writtenOn": "2022-09-22T01:53:13Z",
       "side": 1,
       "message": "it would be great if an example line is presented",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 46
+      },
+      "revId": "e4d0a15c686534a5c6fa5d3a5cedb911e1928838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f76822a0_4fc25e35",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2022-09-22T23:27:35Z",
+      "side": 1,
+      "message": "Done. I merged this with the existing code that was parsing smaps_rollup and took its example.",
+      "parentUuid": "b0439f6d_94fded29",
       "range": {
         "startLine": 50,
         "startChar": 0,
