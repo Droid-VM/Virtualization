@@ -117,30 +117,16 @@ impl ICompOsService for CompOsService {
             ));
         }
 
-        let context = to_binder_result(OdrefreshContext::new(
+        to_binder_result(self.do_odrefresh(
             compilation_mode,
             system_dir_fd,
-            if system_ext_dir_fd >= 0 { Some(system_ext_dir_fd) } else { None },
+            system_ext_dir_fd,
             output_dir_fd,
             staging_dir_fd,
             target_dir_name,
             zygote_arch,
             system_server_compiler_filter,
-        ))?;
-
-        let authfs_service = binder::get_interface(AUTHFS_SERVICE_NAME)?;
-        let exit_code = to_binder_result(
-            odrefresh(&self.odrefresh_path, context, authfs_service, |output_dir| {
-                // authfs only shows us the files we created, so it's ok to just sign everything
-                // under the output directory.
-                let mut artifact_signer = ArtifactSigner::new(&output_dir);
-                add_artifacts(&output_dir, &mut artifact_signer)?;
-
-                artifact_signer.write_info_and_signature(&output_dir.join("compos.info"))
-            })
-            .context("odrefresh failed"),
-        )?;
-        Ok(exit_code as i8)
+        ))
     }
 
     fn getPublicKey(&self) -> BinderResult<Vec<u8>> {
@@ -155,6 +141,45 @@ impl ICompOsService for CompOsService {
         // When our process exits, Microdroid will shut down the VM.
         info!("Received quit request, exiting");
         std::process::exit(0);
+    }
+}
+
+impl CompOsService {
+    #[allow(clippy::too_many_arguments)] // TODO(b/248528901): Fewer arguments
+    fn do_odrefresh(
+        &self,
+        compilation_mode: CompilationMode,
+        system_dir_fd: i32,
+        system_ext_dir_fd: i32,
+        output_dir_fd: i32,
+        staging_dir_fd: i32,
+        target_dir_name: &str,
+        zygote_arch: &str,
+        system_server_compiler_filter: &str,
+    ) -> Result<i8> {
+        let context = OdrefreshContext::new(
+            compilation_mode,
+            system_dir_fd,
+            if system_ext_dir_fd >= 0 { Some(system_ext_dir_fd) } else { None },
+            output_dir_fd,
+            staging_dir_fd,
+            target_dir_name,
+            zygote_arch,
+            system_server_compiler_filter,
+        )?;
+
+        let authfs_service = binder::get_interface(AUTHFS_SERVICE_NAME)
+            .context("Unable to connect to AuthFS service")?;
+        let exit_code = odrefresh(&self.odrefresh_path, context, authfs_service, |output_dir| {
+            // authfs only shows us the files we created, so it's ok to just sign everything
+            // under the output directory.
+            let mut artifact_signer = ArtifactSigner::new(&output_dir);
+            add_artifacts(&output_dir, &mut artifact_signer)?;
+
+            artifact_signer.write_info_and_signature(&output_dir.join("compos.info"))
+        })
+        .context("odrefresh failed")?;
+        Ok(exit_code as i8)
     }
 }
 
