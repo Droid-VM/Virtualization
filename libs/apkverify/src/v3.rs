@@ -135,18 +135,21 @@ fn extract_signer_and_apk_sections<R: Read + Seek>(apk: R) -> Result<(Signer, Ap
 impl Signer {
     /// Select the signature that uses the strongest algorithm according to the preferences of the
     /// v4 signing scheme.
-    fn strongest_signature(&self) -> Result<&Signature> {
+    fn strongest_signature<F>(&self, mut is_algo_valid: F) -> Result<&Signature>
+    where
+        F: FnMut(&Option<SignatureAlgorithmID>) -> bool,
+    {
         Ok(self
             .signatures
             .iter()
-            .filter(|sig| sig.signature_algorithm_id.is_some())
+            .filter(|sig| is_algo_valid(&sig.signature_algorithm_id))
             .max_by_key(|sig| sig.signature_algorithm_id.unwrap().content_digest_algorithm())
             .context("No supported signatures found")?)
     }
 
     fn pick_v4_apk_digest(&self) -> Result<(SignatureAlgorithmID, Box<[u8]>)> {
         let strongest_algorithm_id = self
-            .strongest_signature()?
+            .strongest_signature(|algo| algo.is_some())?
             .signature_algorithm_id
             .context("Strongest signature should contain a valid signature algorithm.")?;
         let signed_data: SignedData = self.signed_data.slice(..).read()?;
@@ -170,7 +173,8 @@ impl Signer {
     /// The steps in this method implements APK Signature Scheme v3 verification step 3.
     fn verify<R: Read + Seek>(&self, sections: &mut ApkSections<R>) -> Result<Box<[u8]>> {
         // 1. Choose the strongest supported signature algorithm ID from signatures.
-        let strongest = self.strongest_signature()?;
+        let strongest =
+            self.strongest_signature(|algo| algo.map_or(false, |algo| algo.is_supported()))?;
 
         // 2. Verify the corresponding signature from signatures against signed data using public key.
         let verified_signed_data = self.verify_signature(strongest)?;
