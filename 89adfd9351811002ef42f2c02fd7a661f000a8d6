@@ -16,6 +16,23 @@
       "message": "Hi Andrew, could you review this cl?",
       "revId": "89adfd9351811002ef42f2c02fd7a661f000a8d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71adeab6_f857baaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-22T11:00:13Z",
+      "side": 1,
+      "message": "We\u0027re saying elsewhere that we\u0027re trying to avoid supporting DSA but in this CL it looks like we\u0027re doing workarounds to keep DSA working in some cases but not others? Would it be better to just commit to avoiding DSA and update the idsig test.apk to one that doesn\u0027t use DSA but uses an algorithm we\u0027ve chosen to support properly?",
+      "revId": "89adfd9351811002ef42f2c02fd7a661f000a8d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
