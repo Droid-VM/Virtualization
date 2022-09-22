@@ -34,6 +34,52 @@
       "parentUuid": "1387ef62_ad4e515e",
       "revId": "507dd927f872d0ffd9d7e763000cb4b3479fcc28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f81eee4c_d0d2f737",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-22T11:39:05Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be an Option ?",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 27
+      },
+      "revId": "507dd927f872d0ffd9d7e763000cb4b3479fcc28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85c36528_2d514135",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-22T11:39:05Z",
+      "side": 1,
+      "message": "These comments are both confusing; we don\u0027t use vm_config_extra_apk.json, and extra_apks doesn\u0027t have an index.\nCan you maybe point at the real JSON files?",
+      "range": {
+        "startLine": 118,
+        "startChar": 8,
+        "endLine": 118,
+        "endChar": 67
+      },
+      "revId": "507dd927f872d0ffd9d7e763000cb4b3479fcc28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
