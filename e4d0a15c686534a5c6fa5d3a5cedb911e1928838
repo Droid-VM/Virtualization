@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f010cfb_4921afae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2022-09-22T16:23:32Z",
+      "side": 1,
+      "message": "\u003e As far as measurements inside the guest don\u0027t add up, you mean why guest kernel + slab etc.. isn\u0027t the full guest?\n\nI mean why they added up to more than the RSS from the host\u0027s perspective. keirf@ pointed out part of the problem in the other comment.",
+      "parentUuid": "9d8d4852_9f860077",
+      "revId": "e4d0a15c686534a5c6fa5d3a5cedb911e1928838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9279648a_302903b8",
         "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
         "patchSetId": 1
@@ -166,6 +184,30 @@
       "writtenOn": "2022-09-22T01:53:13Z",
       "side": 1,
       "message": "Why don\u0027t we pass the exception to the caller?",
+      "range": {
+        "startLine": 293,
+        "startChar": 10,
+        "endLine": 296,
+        "endChar": 9
+      },
+      "revId": "e4d0a15c686534a5c6fa5d3a5cedb911e1928838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b25014e9_4d399601",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2022-09-22T16:23:32Z",
+      "side": 1,
+      "message": "I just copied this code from ComposBenchmark.java. I can make an attempt at cleaning it up. My java skills are slight, so it isn\u0027t obvious to me why it was done this way.",
+      "parentUuid": "185c61d3_8b9189f5",
       "range": {
         "startLine": 293,
         "startChar": 10,
