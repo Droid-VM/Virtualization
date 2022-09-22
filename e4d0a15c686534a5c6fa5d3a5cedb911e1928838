@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ceec941_cb33b1f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2022-09-22T16:16:19Z",
+      "side": 1,
+      "message": "Thanks, it isn\u0027t obvious what some of these derived numbers are suppose to be. go/avf-data\u0027s \"meminfo breakdown\" doesn\u0027t include \"unreclaimable\". Leaving that out gives 110 vs 100.\n\nI suspect some of the memory the guest thinks it is using hasn\u0027t actually been touched yet, so it wouldn\u0027t contribute to the RSS from the host perspective. Not sure if there is an easy way to validate that.",
+      "parentUuid": "f76d1e28_78744ee8",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 7
+      },
+      "revId": "e4d0a15c686534a5c6fa5d3a5cedb911e1928838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5efa209b_b1a00fe4",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
