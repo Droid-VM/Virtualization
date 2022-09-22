@@ -16,6 +16,47 @@
       "message": "Hi. This isn\u0027t exactly submit ready, but I\u0027d like some initial feedback. Does measuring the RSS seem reasonable? Any idea why the measurements from inside the guest don\u0027t match up (I assume it is just because the guest can\u0027t tell if pages are actually resident)?\n\nAlso, let me know if you have an opinions on whether this should be a separate test case, etc\n\nThanks!",
       "revId": "e4d0a15c686534a5c6fa5d3a5cedb911e1928838",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d8d4852_9f860077",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-09-22T01:23:55Z",
+      "side": 1,
+      "message": "RSS will be good for analyzing the cost of crosvm instances across Android, and PSS will be good for analyzing the structure of a single crosvm instance. Right now, they probably don\u0027t matter too much, given we are only running one instance of crosvm.\n\nBoth numbers are good, so feel free to add both, but honestly, from a regression detection standpoint, having either is good, and we can always add what is needed as they are needed.\n\nAs far as measurements inside the guest don\u0027t add up, you mean why guest kernel + slab etc.. isn\u0027t the full guest?",
+      "parentUuid": "5efa209b_b1a00fe4",
+      "revId": "e4d0a15c686534a5c6fa5d3a5cedb911e1928838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9279648a_302903b8",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-09-22T01:23:55Z",
+      "side": 1,
+      "message": ":D",
+      "range": {
+        "startLine": 280,
+        "startChar": 7,
+        "endLine": 280,
+        "endChar": 20
+      },
+      "revId": "e4d0a15c686534a5c6fa5d3a5cedb911e1928838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
