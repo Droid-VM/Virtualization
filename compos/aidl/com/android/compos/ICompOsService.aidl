@@ -42,12 +42,7 @@ interface ICompOsService {
     }
 
     /**
-     * Run odrefresh in the VM context.
-     *
-     * The execution is based on the VM's APEX mounts, files on Android's /system and optionally
-     * /system_ext (by accessing through systemDirFd and systemExtDirFd over AuthFS), and
-     * *CLASSPATH derived in the VM, to generate the same odrefresh output artifacts to the output
-     * directory (through outputDirFd).
+     * Arguments to run odrefresh
      *
      * @param compilationMode The type of compilation to be performed
      * @param systemDirFd An fd referring to /system
@@ -58,11 +53,30 @@ interface ICompOsService {
      *                      written (e.g. dalvik-cache)
      * @param zygoteArch The zygote architecture (ro.zygote)
      * @param systemServerCompilerFilter The compiler filter used to compile system server
+     */
+    parcelable OdrefreshArgs {
+        CompilationMode compilationMode = CompilationMode.NORMAL_COMPILE;
+        int systemDirFd = -1;
+        int systemExtDirFd = -1;
+        int outputDirFd = -1;
+        int stagingDirFd = -1;
+        String targetDirName;
+        String zygoteArch;
+        String systemServerCompilerFilter;
+    }
+
+    /**
+     * Run odrefresh in the VM context.
+     *
+     * The execution is based on the VM's APEX mounts, files on Android's /system and optionally
+     * /system_ext (by accessing through OdrefreshArgs.systemDirFd and OdrefreshArgs.systemExtDirFd
+     * over AuthFS), and *CLASSPATH derived in the VM, to generate the same odrefresh output
+     * artifacts to the output directory (through OdrefreshArgs.outputDirFd).
+     *
+     * @param args Arguments to configure the odrefresh context
      * @return odrefresh exit code
      */
-    byte odrefresh(CompilationMode compilation_mode, int systemDirFd, int systemExtDirFd,
-            int outputDirFd, int stagingDirFd, String targetDirName, String zygoteArch,
-            String systemServerCompilerFilter);
+    byte odrefresh(in OdrefreshArgs args);
 
     /**
      * Returns the current VM's signing key, as an Ed25519 public key
