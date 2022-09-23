@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e3717267_ee5676d7",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-23T15:52:41Z",
+      "side": 1,
+      "message": "\u003e Why not pass a OdrefreshContext? Now we have 3 copies of long list :) I\u0027d think we can leave the argument validation/processing at the entrance.\n\nMmm, yes, good idea. The bug can stay for handling the AIDL itself.\n\n\u003e \n\u003e (The change to this file also doesn\u0027t look relevant to the purpose of making authfs optional)\n\nWell admittedly I have a bad habit of doing random refactorings in passing. The relevant change was adding context if get_interface fails (which really improves the message). And then I decided with 3 calls to to_binder_result it was time to refactor.",
+      "parentUuid": "7266ab96_bf066143",
+      "range": {
+        "startLine": 151,
+        "startChar": 8,
+        "endLine": 158,
+        "endChar": 44
+      },
+      "revId": "ad4aeac6d3771d9a3412a361d4eb5159ad2ac4ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "09fb3ab8_e5beb730",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-23T15:38:00Z",
       "side": 1,
       "message": "optional: Since we\u0027re writing string variable as the system property name, I wonder if it\u0027s better to add `debug_assert!(matches!(str, \"start\" | \"stop\"))` just to be safe. The code in the current shape is simple enough though, so I only feel slightly about it.",
+      "range": {
+        "startLine": 361,
+        "startChar": 39,
+        "endLine": 361,
+        "endChar": 45
+      },
+      "revId": "ad4aeac6d3771d9a3412a361d4eb5159ad2ac4ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2194c0f6_c964a8d5",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-23T15:52:41Z",
+      "side": 1,
+      "message": "Yeah, I did think about that, but as long as the scope of this function stays small I\u0027m not that worried.",
+      "parentUuid": "09fb3ab8_e5beb730",
       "range": {
         "startLine": 361,
         "startChar": 39,
