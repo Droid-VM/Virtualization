@@ -276,7 +276,9 @@ public abstract class MicrodroidDeviceTestBase {
         }
 
         private long getKernelStartedNanoTime() {
-            return kernelStartedNanoTime.getAsLong();
+            // pvm_fw emits log at the end which is used to estimate the kernelStart time.
+            // In case of no pvm_fw run(non-protected mode), use vCPU started time instead.
+            return kernelStartedNanoTime.orElse(vcpuStartedNanoTime.getAsLong());
         }
 
         private long getInitStartedNanoTime() {
