@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7266ab96_bf066143",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-23T15:38:00Z",
+      "side": 1,
+      "message": "Why not pass a OdrefreshContext? Now we have 3 copies of long list :) I\u0027d think we can leave the argument validation/processing at the entrance.\n\n(The change to this file also doesn\u0027t look relevant to the purpose of making authfs optional)",
+      "range": {
+        "startLine": 151,
+        "startChar": 8,
+        "endLine": 158,
+        "endChar": 44
+      },
+      "revId": "ad4aeac6d3771d9a3412a361d4eb5159ad2ac4ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09fb3ab8_e5beb730",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-23T15:38:00Z",
+      "side": 1,
+      "message": "optional: Since we\u0027re writing string variable as the system property name, I wonder if it\u0027s better to add `debug_assert!(matches!(str, \"start\" | \"stop\"))` just to be safe. The code in the current shape is simple enough though, so I only feel slightly about it.",
+      "range": {
+        "startLine": 361,
+        "startChar": 39,
+        "endLine": 361,
+        "endChar": 45
+      },
+      "revId": "ad4aeac6d3771d9a3412a361d4eb5159ad2ac4ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
