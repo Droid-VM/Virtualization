@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8551bc91_78341d35",
+        "filename": "libs/apkverify/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-23T19:58:09Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s a good idea. Otherwise, should we also merge idsig[1] into apkverify as that\u0027s also v4?\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/libs/idsig",
+      "parentUuid": "4ccdff39_c730a8c9",
+      "range": {
+        "startLine": 28,
+        "startChar": 8,
+        "endLine": 28,
+        "endChar": 74
+      },
+      "revId": "b7fba86d1f47ea6d8b3202f30b321726ffd846bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21ec0093_2155b8ca",
         "filename": "libs/apkverify/src/v3.rs",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2022-09-23T15:49:21Z",
       "side": 1,
       "message": "Instead of two APIs, do you think it could be better with `pick_v4_apk_digest(..., verify: bool)`?",
+      "range": {
+        "startLine": 111,
+        "startChar": 7,
+        "endLine": 117,
+        "endChar": 28
+      },
+      "revId": "b7fba86d1f47ea6d8b3202f30b321726ffd846bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60c94bcd_9bf6d39f",
+        "filename": "libs/apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-23T19:58:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21ec0093_2155b8ca",
       "range": {
         "startLine": 111,
         "startChar": 7,
