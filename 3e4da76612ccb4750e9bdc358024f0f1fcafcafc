@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5679e0f_3b2ca1ec",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-23T15:20:15Z",
+      "side": 1,
+      "message": "nit: This class is already used in the app context, so it should always be on a device.  How about `runInShell`?",
+      "range": {
+        "startLine": 342,
+        "startChar": 21,
+        "endLine": 342,
+        "endChar": 32
+      },
+      "revId": "3e4da76612ccb4750e9bdc358024f0f1fcafcafc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
