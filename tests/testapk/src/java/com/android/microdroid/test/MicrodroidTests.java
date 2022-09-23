@@ -35,6 +35,7 @@ import com.android.microdroid.test.device.MicrodroidDeviceTestBase;
 import com.android.microdroid.testservice.ITestService;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;
@@ -451,6 +452,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             "9.17/C-1-1",
             "9.17/C-2-7"
     })
+    @Ignore("b/245277660")
     public void bootFailsWhenUBootAvbDataIsCompromised()
             throws VirtualMachineException, InterruptedException, IOException {
         if (mProtectedVm) {
@@ -466,6 +468,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             "9.17/C-1-1",
             "9.17/C-2-7"
     })
+    @Ignore("b/248552675")
     public void bootFailsWhenUBootEnvDataIsCompromised()
             throws VirtualMachineException, InterruptedException, IOException {
         if (mProtectedVm) {
@@ -481,6 +484,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             "9.17/C-1-1",
             "9.17/C-2-7"
     })
+    @Ignore("b/248552675")
     public void bootFailsWhenPvmFwDataIsCompromised()
             throws VirtualMachineException, InterruptedException, IOException {
         if (mProtectedVm) {
