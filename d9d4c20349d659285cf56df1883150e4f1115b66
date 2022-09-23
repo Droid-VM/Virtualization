@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c75c8ee5_c2288e0d",
+        "filename": "compos/aidl/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-09-23T22:42:30Z",
+      "side": 1,
+      "message": "Consider:\n\n    flags: [\"-Werror\"],\n\nor\n\n    flags: [\"-Weverything\", \"-Werror\"],\n\n(yes, it works here - AIDL implements this by jooyung@)",
+      "revId": "d9d4c20349d659285cf56df1883150e4f1115b66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
