@@ -16,6 +16,69 @@
       "message": "Hi Victor, thanks for the review! Could you take another look?",
       "revId": "d1ff95faa02448c5c6c40fd4d6b8ce0af88ac38d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f57cd697_65fb904e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-23T21:24:02Z",
+      "side": 1,
+      "message": "Thanks Alice!",
+      "revId": "d1ff95faa02448c5c6c40fd4d6b8ce0af88ac38d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5997b630_9759980b",
+        "filename": "avmd/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-23T21:24:02Z",
+      "side": 1,
+      "message": "nit: could you add a brief comment about why it\u0027s ok to skip verification?  I don\u0027t know who\u0027s going to use avmd, but I\u0027m guessing the reason is similar to what we did before: we\u0027re using this value to verify future read on demand (so the current content doesn\u0027t really matter)?  And of course the digest should contribute to DICE, but that\u0027s kind of orthogonal.",
+      "range": {
+        "startLine": 77,
+        "startChar": 72,
+        "endLine": 77,
+        "endChar": 89
+      },
+      "revId": "d1ff95faa02448c5c6c40fd4d6b8ce0af88ac38d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e09c9f4_fe2b0d1d",
+        "filename": "libs/apkverify/src/v3.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-23T21:24:02Z",
+      "side": 1,
+      "message": "Ideally, only v4 should reference to v3, not the other way.  But that can be a future work.",
+      "range": {
+        "startLine": 141,
+        "startChar": 18,
+        "endLine": 141,
+        "endChar": 36
+      },
+      "revId": "d1ff95faa02448c5c6c40fd4d6b8ce0af88ac38d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

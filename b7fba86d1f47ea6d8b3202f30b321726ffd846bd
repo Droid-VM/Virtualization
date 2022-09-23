@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dae4a1b_41452c07",
+        "filename": "libs/apkverify/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-23T21:24:02Z",
+      "side": 1,
+      "message": "Yeah I think it\u0027s a good idea (as an improvement later) to keep all the APK signature things in one place. libapkverify can be the Rust equivalent of `apksig` (we could rename it to libapksig_rust when the time comes).  I wasn\u0027t sure if the code has non-APK thing like APEX or dm-verity, but looks like it\u0027s purely APK.",
+      "parentUuid": "8551bc91_78341d35",
+      "range": {
+        "startLine": 28,
+        "startChar": 8,
+        "endLine": 28,
+        "endChar": 74
+      },
+      "revId": "b7fba86d1f47ea6d8b3202f30b321726ffd846bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21ec0093_2155b8ca",
