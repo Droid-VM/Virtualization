@@ -152,14 +152,13 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
             final double nanoToMilli = 1000000.0;
             vmStartingTimeMetrics.add(result.getVMStartingElapsedNanoTime() / nanoToMilli);
             bootTimeMetrics.add(result.endToEndNanoTime / nanoToMilli);
-            bootloaderTimeMetrics.add(result.getBootloaderElapsedNanoTime() / nanoToMilli);
             kernelBootTimeMetrics.add(result.getKernelElapsedNanoTime() / nanoToMilli);
             userspaceBootTimeMetrics.add(result.getUserspaceElapsedNanoTime() / nanoToMilli);
         }
 
         reportMetrics(vmStartingTimeMetrics, "vm_starting_time", "ms");
         reportMetrics(bootTimeMetrics, "boot_time", "ms");
-        reportMetrics(bootloaderTimeMetrics, "bootloader_time", "ms");
+        // Note: kernel_boot_time includes pvm_fw time in case of protected vm
         reportMetrics(kernelBootTimeMetrics, "kernel_boot_time", "ms");
         reportMetrics(userspaceBootTimeMetrics, "userspace_boot_time", "ms");
     }
