@@ -131,16 +131,12 @@ public abstract class MicrodroidDeviceTestBase {
     public abstract static class VmEventListener implements VirtualMachineCallback {
         private ExecutorService mExecutorService = Executors.newSingleThreadExecutor();
         private OptionalLong mVcpuStartedNanoTime = OptionalLong.empty();
-        private OptionalLong mKernelStartedNanoTime = OptionalLong.empty();
         private OptionalLong mInitStartedNanoTime = OptionalLong.empty();
         private OptionalLong mPayloadStartedNanoTime = OptionalLong.empty();
 
         private void processBootEvents(String log) {
             if (!mVcpuStartedNanoTime.isPresent()) {
                 mVcpuStartedNanoTime = OptionalLong.of(System.nanoTime());
-            }
-            if (log.contains("Starting kernel") && !mKernelStartedNanoTime.isPresent()) {
-                mKernelStartedNanoTime = OptionalLong.of(System.nanoTime());
             }
             if (log.contains("Run /init as init process") && !mInitStartedNanoTime.isPresent()) {
                 mInitStartedNanoTime = OptionalLong.of(System.nanoTime());
@@ -196,10 +192,6 @@ public abstract class MicrodroidDeviceTestBase {
             return mVcpuStartedNanoTime;
         }
 
-        public OptionalLong getKernelStartedNanoTime() {
-            return mKernelStartedNanoTime;
-        }
-
         public OptionalLong getInitStartedNanoTime() {
             return mInitStartedNanoTime;
         }
@@ -246,7 +238,6 @@ public abstract class MicrodroidDeviceTestBase {
         public final long endToEndNanoTime;
 
         public final OptionalLong vcpuStartedNanoTime;
-        public final OptionalLong kernelStartedNanoTime;
         public final OptionalLong initStartedNanoTime;
         public final OptionalLong payloadStartedNanoTime;
 
@@ -255,7 +246,6 @@ public abstract class MicrodroidDeviceTestBase {
                 long apiCallNanoTime,
                 long endToEndNanoTime,
                 OptionalLong vcpuStartedNanoTime,
-                OptionalLong kernelStartedNanoTime,
                 OptionalLong initStartedNanoTime,
                 OptionalLong payloadStartedNanoTime) {
             this.apiCallNanoTime = apiCallNanoTime;
@@ -263,17 +253,12 @@ public abstract class MicrodroidDeviceTestBase {
             this.deathReason = deathReason;
             this.endToEndNanoTime = endToEndNanoTime;
             this.vcpuStartedNanoTime = vcpuStartedNanoTime;
-            this.kernelStartedNanoTime = kernelStartedNanoTime;
             this.initStartedNanoTime = initStartedNanoTime;
             this.payloadStartedNanoTime = payloadStartedNanoTime;
         }
 
         private long getVcpuStartedNanoTime() {
             return vcpuStartedNanoTime.getAsLong();
-        }
-
-        private long getKernelStartedNanoTime() {
-            return kernelStartedNanoTime.getAsLong();
         }
 
         private long getInitStartedNanoTime() {
@@ -288,12 +273,8 @@ public abstract class MicrodroidDeviceTestBase {
             return getVcpuStartedNanoTime() - apiCallNanoTime;
         }
 
-        public long getBootloaderElapsedNanoTime() {
-            return getKernelStartedNanoTime() - getVcpuStartedNanoTime();
-        }
-
         public long getKernelElapsedNanoTime() {
-            return getInitStartedNanoTime() - getKernelStartedNanoTime();
+            return getInitStartedNanoTime() - getVcpuStartedNanoTime();
         }
 
         public long getUserspaceElapsedNanoTime() {
@@ -330,7 +311,6 @@ public abstract class MicrodroidDeviceTestBase {
                 apiCallNanoTime,
                 endTime.getNow(apiCallNanoTime) - apiCallNanoTime,
                 listener.getVcpuStartedNanoTime(),
-                listener.getKernelStartedNanoTime(),
                 listener.getInitStartedNanoTime(),
                 listener.getPayloadStartedNanoTime());
     }
