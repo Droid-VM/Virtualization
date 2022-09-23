@@ -15,7 +15,8 @@
  */
 
 use apkverify::{
-    get_public_key_der, pick_v4_apk_digest, testing::assert_contains, verify, SignatureAlgorithmID,
+    compute_v4_apk_digest, get_public_key_der, pick_v4_apk_digest, testing::assert_contains,
+    verify, SignatureAlgorithmID,
 };
 use std::{fs, matches, path::Path};
 
@@ -221,6 +222,7 @@ fn validate_apk_public_key<P: AsRef<Path>>(apk_path: P) {
 
 /// Validates that the following apk_digest are equal:
 /// * apk_digest directly extracted from apk without computation
+/// * computed apk_digest
 /// * expected apk digest from the corresponding .apk_digest file
 fn validate_apk_digest<P: AsRef<Path>>(apk_path: P, expected_algorithm_id: SignatureAlgorithmID) {
     let apk = fs::File::open(&apk_path).expect("Unabled to open apk file");
@@ -231,6 +233,9 @@ fn validate_apk_digest<P: AsRef<Path>>(apk_path: P, expected_algorithm_id: Signa
     assert_eq!(expected_algorithm_id, signature_algorithm_id);
     let expected_digest_path = format!("{}.apk_digest", apk_path.as_ref().to_str().unwrap());
     assert_bytes_eq_to_data_in_file(&digest_from_apk, expected_digest_path);
+
+    let computed_digest = compute_v4_apk_digest(apk_path).expect("Error when computing digest");
+    assert_eq!(computed_digest, digest_from_apk);
 }
 
 fn assert_bytes_eq_to_data_in_file<P: AsRef<Path> + std::fmt::Display>(

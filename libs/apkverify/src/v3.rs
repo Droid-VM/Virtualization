@@ -113,6 +113,19 @@ pub fn pick_v4_apk_digest<R: Read + Seek>(apk: R) -> Result<(SignatureAlgorithmI
     signer.pick_v4_apk_digest()
 }
 
+/// Computes the v4 [apk_digest].
+pub fn compute_v4_apk_digest<P: AsRef<Path>>(apk_path: P) -> Result<Box<[u8]>> {
+    let apk = File::open(apk_path.as_ref())?;
+    let (signer, mut sections) = extract_signer_and_apk_sections(apk)?;
+    let (signature_algorithm_id, extracted_digest) = signer.pick_v4_apk_digest()?;
+    let computed_digest = sections.compute_digest(signature_algorithm_id)?;
+    ensure!(
+        computed_digest == extracted_digest.as_ref(),
+        "Computed digest does not match the extracted digest."
+    );
+    Ok(computed_digest.into_boxed_slice())
+}
+
 fn extract_signer_and_apk_sections<R: Read + Seek>(apk: R) -> Result<(Signer, ApkSections<R>)> {
     let mut sections = ApkSections::new(apk)?;
     let mut block = sections.find_signature(APK_SIGNATURE_SCHEME_V3_BLOCK_ID).context(
