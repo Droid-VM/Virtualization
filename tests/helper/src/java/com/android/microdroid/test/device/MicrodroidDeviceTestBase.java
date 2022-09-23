@@ -276,9 +276,8 @@ public abstract class MicrodroidDeviceTestBase {
         }
 
         private long getKernelStartedNanoTime() {
-            return kernelStartedNanoTime.getAsLong();
+            return kernelStartedNanoTime.orElse(vcpuStartedNanoTime.getAsLong());
         }
-
         private long getInitStartedNanoTime() {
             return initStartedNanoTime.getAsLong();
         }
