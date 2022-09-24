@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53c35929_894a9497",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-09-24T01:55:53Z",
+      "side": 1,
+      "message": "fd won\u0027t make sense as an int in most cases?\n\nIf this isn\u0027t used across binder, can we add a method to the underlying type rather than in the AIDL interface?",
+      "range": {
+        "startLine": 49,
+        "startChar": 8,
+        "endLine": 49,
+        "endChar": 11
+      },
+      "revId": "94e1691d6c8456dff9ea6220a920efcbb0ba6fcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
