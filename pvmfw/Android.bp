@@ -23,6 +23,8 @@ cc_binary {
     ],
     static_libs: [
         "libpvmfw",
+        "libopen_dice_cbor_baremetal",
+        "libopen_dice_bcc_baremetal",
     ],
     linker_scripts: [
         "image.ld",
