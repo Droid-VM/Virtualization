@@ -22,6 +22,30 @@
       },
       "revId": "5b184b23fdbfbd0c9d4279bc5933efe2169e4faa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82e50875_b181aa9c",
+        "filename": "libs/idsig/src/apksigv4.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-26T13:34:14Z",
+      "side": 0,
+      "message": "What about making this pub later when there are users of it? It\u0027s easy to change from private to public. It\u0027s usually recommended to minimize the visibility of classes and members.",
+      "parentUuid": "d09353d7_e40f2e96",
+      "range": {
+        "startLine": 119,
+        "startChar": 4,
+        "endLine": 119,
+        "endChar": 7
+      },
+      "revId": "5b184b23fdbfbd0c9d4279bc5933efe2169e4faa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
