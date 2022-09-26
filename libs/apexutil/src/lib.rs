@@ -145,7 +145,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_open_apex() {
+    fn apex_verification_returns_valid_result() {
         let res = verify("tests/data/test.apex").unwrap();
         assert_eq!(
             to_hex_string(&res.root_digest),
@@ -154,7 +154,7 @@ mod tests {
     }
 
     #[test]
-    fn test_payload_vbmeta_image_hash() {
+    fn payload_vbmeta_has_valid_image_hash() {
         let result = get_payload_vbmeta_image_hash("tests/data/test.apex").unwrap();
         assert_eq!(
             to_hex_string(&result),
