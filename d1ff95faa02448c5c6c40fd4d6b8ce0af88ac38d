@@ -129,6 +129,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83445b83_f88b11ac",
+        "filename": "libs/apkverify/src/v3.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-26T16:07:14Z",
+      "side": 1,
+      "message": "*Ideally*,v3 shouldn\u0027t know about v4.  IF it doesn\u0027t add much complexity, perhaps this v3 function (`pick_apk_digest`?) could take a Fn, and in v4 you use v3 constants in the callback.",
+      "parentUuid": "dc5337ae_cff3288f",
+      "range": {
+        "startLine": 141,
+        "startChar": 18,
+        "endLine": 141,
+        "endChar": 36
+      },
+      "revId": "d1ff95faa02448c5c6c40fd4d6b8ce0af88ac38d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4a585c9_74e70f59",
