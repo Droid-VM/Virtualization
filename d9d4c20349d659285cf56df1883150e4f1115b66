@@ -33,6 +33,24 @@
       "message": "Consider:\n\n    flags: [\"-Werror\"],\n\nor\n\n    flags: [\"-Weverything\", \"-Werror\"],\n\n(yes, it works here - AIDL implements this by jooyung@)",
       "revId": "d9d4c20349d659285cf56df1883150e4f1115b66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66dfb4fa_0361c61d",
+        "filename": "compos/aidl/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-26T15:50:21Z",
+      "side": 1,
+      "message": "Ack.  I\u0027d prefer to keep this more specific warning (vs a more general ones in your examples) closer to the source code.",
+      "parentUuid": "c75c8ee5_c2288e0d",
+      "revId": "d9d4c20349d659285cf56df1883150e4f1115b66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
