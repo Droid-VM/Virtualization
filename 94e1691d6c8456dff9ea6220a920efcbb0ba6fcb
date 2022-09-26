@@ -22,6 +22,52 @@
       },
       "revId": "94e1691d6c8456dff9ea6220a920efcbb0ba6fcb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e97a2db9_cfeec725",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-26T09:13:16Z",
+      "side": 1,
+      "message": "Why do we want to provide a default here? Especially an invalid one?",
+      "range": {
+        "startLine": 49,
+        "startChar": 23,
+        "endLine": 49,
+        "endChar": 28
+      },
+      "revId": "94e1691d6c8456dff9ea6220a920efcbb0ba6fcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "655a989e_820c8a2f",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-26T09:13:16Z",
+      "side": 1,
+      "message": "I see merge conflicts ahead ...",
+      "range": {
+        "startLine": 101,
+        "startChar": 7,
+        "endLine": 101,
+        "endChar": 16
+      },
+      "revId": "94e1691d6c8456dff9ea6220a920efcbb0ba6fcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
