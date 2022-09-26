@@ -161,4 +161,13 @@ mod tests {
             "296e32a76544de9da01713e471403ab4667705ad527bb4f1fac0cf61e7ce122d"
         );
     }
+
+    #[test]
+    fn apex_verification_returns_valid_result() {
+        let result = verify("tests/data/test.apex").expect("Cannot get verification result");
+        assert_eq!(
+            "fe11ab17da0a3a738b54bdc3a13f6139cbdf91ec32f001f8d4bbbf8938e04e39",
+            to_hex_string(&result.root_digest)
+        );
+    }
 }
