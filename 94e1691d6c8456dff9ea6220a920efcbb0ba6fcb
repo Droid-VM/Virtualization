@@ -47,6 +47,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fab9a384_26acb7f6",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-26T16:04:50Z",
+      "side": 1,
+      "message": "These are the raw fd numbers of the remote fd_server.  We use these raw numbers to configure authfs (in the VM) to map the file on the FUSE filesystem to the remote files (fd in fd_server).\n\nIf fd is too confusing, I guess we could call them \"handle\"? If you do refer this way, I\u0027m happy to follow up later.",
+      "parentUuid": "53c35929_894a9497",
+      "range": {
+        "startLine": 49,
+        "startChar": 8,
+        "endLine": 49,
+        "endChar": 11
+      },
+      "revId": "94e1691d6c8456dff9ea6220a920efcbb0ba6fcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5099ad7_03d9624f",
+        "filename": "compos/aidl/com/android/compos/ICompOsService.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-26T16:04:50Z",
+      "side": 1,
+      "message": "Since this has become a struct (i.e. no longer a function that the caller can\u0027t miss any parameter), it\u0027s easier to forget setting the value when we\u0027re adding a new one.  Setting to an invalid default is kind of a mitigation.",
+      "parentUuid": "e97a2db9_cfeec725",
+      "range": {
+        "startLine": 49,
+        "startChar": 23,
+        "endLine": 49,
+        "endChar": 28
+      },
+      "revId": "94e1691d6c8456dff9ea6220a920efcbb0ba6fcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "655a989e_820c8a2f",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-09-26T09:13:16Z",
       "side": 1,
       "message": "I see merge conflicts ahead ...",
+      "range": {
+        "startLine": 101,
+        "startChar": 7,
+        "endLine": 101,
+        "endChar": 16
+      },
+      "revId": "94e1691d6c8456dff9ea6220a920efcbb0ba6fcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e94e61f5_34627077",
+        "filename": "compos/src/compsvc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-26T16:04:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "655a989e_820c8a2f",
       "range": {
         "startLine": 101,
         "startChar": 7,
