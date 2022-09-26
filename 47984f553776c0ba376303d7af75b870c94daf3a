@@ -22,6 +22,30 @@
       },
       "revId": "47984f553776c0ba376303d7af75b870c94daf3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbc717ab_a26b33ed",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-09-26T16:19:11Z",
+      "side": 0,
+      "message": "tldr: the current bootloaderTime is based on log from bootloader `Starting kernel ...`. So it would be useful to have equivalent from pvm_fw....\n\n\nthe boot time measurements are based on matching console logs.\n\ncs/android-internal/packages/modules/Virtualization/tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java?l\u003d141-155\n\nIt would be nice to get a log line from pvm_fw saying \"Starting kernel ...\" at the end, just like uboot does..  (My current best bet is \"Booting VM instance\" by pvm_fw, see logs link below). Though this will add a bit of complexity to code since this log will not be present in non-protected mode.\n\nWe can then approximate the  time in pvm_fw as time between first console log to log `Starting kernel ...` (Note this will not be accurate, since we miss out on early logs, but that is no different from current, we call the first log time as - mVcpuStartedNanoTime)\n\n\nThis is an example of console logs from a protected VM - go/paste/6584641510178816\nLogs from non-protected VM - go/paste/4788221375414272\n\nI\u0027m waiting to see what logs from protected mode after ubootless looks like ..\nPlease reopen this comment if you think its still a good idea getting apvm_fw time...",
+      "parentUuid": "91e31ac2_79009fc4",
+      "range": {
+        "startLine": 155,
+        "startChar": 12,
+        "endLine": 155,
+        "endChar": 33
+      },
+      "revId": "47984f553776c0ba376303d7af75b870c94daf3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
