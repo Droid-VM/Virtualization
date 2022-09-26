@@ -46,6 +46,30 @@
       },
       "revId": "5b184b23fdbfbd0c9d4279bc5933efe2169e4faa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95d3dc6f_4744e10e",
+        "filename": "libs/idsig/src/apksigv4.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-26T13:46:37Z",
+      "side": 0,
+      "message": "Well, yes, I\u0027m all for YAGNI, but taken to extreme we could just remove the type parameter entirely.\nIt seems reasonable to allow the function necessary to use the library visible?",
+      "parentUuid": "82e50875_b181aa9c",
+      "range": {
+        "startLine": 119,
+        "startChar": 4,
+        "endLine": 119,
+        "endChar": 7
+      },
+      "revId": "5b184b23fdbfbd0c9d4279bc5933efe2169e4faa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
