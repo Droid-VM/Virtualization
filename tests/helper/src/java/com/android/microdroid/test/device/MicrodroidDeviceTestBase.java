@@ -48,6 +48,11 @@ public abstract class MicrodroidDeviceTestBase {
         return VirtualizationTestHelper.isCuttlefish(SystemProperties.get("ro.product.name"));
     }
 
+    public static String getMetricPrefix() {
+        return VirtualizationTestHelper.getMetricPrefix(
+                SystemProperties.get("debug.hypervisor.metrics_tag"));
+    }
+
     // TODO(b/220920264): remove Inner class; this is a hack to hide virt APEX types
     protected static class Inner {
         private final boolean mProtectedVm;

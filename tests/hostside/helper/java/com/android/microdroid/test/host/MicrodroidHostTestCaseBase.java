@@ -97,6 +97,11 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
         return VirtualizationTestHelper.isCuttlefish(getDevice().getProperty("ro.product.name"));
     }
 
+    protected String getMetricPrefix() throws Exception {
+        return VirtualizationTestHelper.getMetricPrefix(
+                getDevice().getProperty("debug.hypervisor.metrics_tag"));
+    }
+
     public static void testIfDeviceIsCapable(ITestDevice androidDevice) throws Exception {
         assumeTrue("Need an actual TestDevice", androidDevice instanceof TestDevice);
         TestDevice testDevice = (TestDevice) androidDevice;
