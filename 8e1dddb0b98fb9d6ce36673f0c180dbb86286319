@@ -327,6 +327,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe074ddb_0b82314d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-26T13:19:54Z",
+      "side": 1,
+      "message": "We have a new plan here: we\u0027re going to remove the config file from the @SystemApi, but possibly make it @TestApi.\nAll the things apps can legitimately do will be done via normal options in the builder here; use of the config file in the underlying AIDL will be restricted to platform signed code via permission check.\nUpdated b/243513572 to say that.",
+      "parentUuid": "78b51fbb_e94c37be",
+      "range": {
+        "startLine": 356,
+        "startChar": 66,
+        "endLine": 356,
+        "endChar": 92
+      },
+      "revId": "8e1dddb0b98fb9d6ce36673f0c180dbb86286319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "89f3e36e_5a352639",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 9

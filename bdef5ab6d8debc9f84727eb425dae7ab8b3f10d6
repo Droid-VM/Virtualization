@@ -39,6 +39,30 @@
       },
       "revId": "bdef5ab6d8debc9f84727eb425dae7ab8b3f10d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dc06ea4_e481bac6",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-26T13:19:54Z",
+      "side": 1,
+      "message": "Interesting - but it seems that any 32 bit value is valid: https://man7.org/linux/man-pages/man7/vsock.7.html",
+      "parentUuid": "c367e001_19b3a6fc",
+      "range": {
+        "startLine": 729,
+        "startChar": 40,
+        "endLine": 729,
+        "endChar": 43
+      },
+      "revId": "bdef5ab6d8debc9f84727eb425dae7ab8b3f10d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

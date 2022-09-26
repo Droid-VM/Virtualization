@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2abad67_9a4ec9e2",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-26T13:19:54Z",
+      "side": 1,
+      "message": "We discussed offline.\nMy preference is to leave it as is; extending it is useless but harmless. \nThe class is effectively final anyway since it has only 1 private constructor.",
+      "parentUuid": "55db1a15_71c1dcbb",
+      "range": {
+        "startLine": 95,
+        "startChar": 7,
+        "endLine": 95,
+        "endChar": 12
+      },
+      "revId": "1b80c47af3cbc41157230cd4688ea7ac247f86a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c59e240e_e3727cd3",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb677282_dc9b2b7f",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-26T13:19:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c59e240e_e3727cd3",
+      "range": {
+        "startLine": 748,
+        "startChar": 49,
+        "endLine": 748,
+        "endChar": 53
+      },
+      "revId": "1b80c47af3cbc41157230cd4688ea7ac247f86a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48113cd8_47c19b50",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-09-08T14:15:29Z",
       "side": 1,
       "message": "I suggest making the VirtualMachineManager a system service, so that developers can access it via context.getSystemService(VirtualMachineManager.class). The getSystemService() already does caching on per-context basis",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 60
+      },
+      "revId": "1b80c47af3cbc41157230cd4688ea7ac247f86a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f42224e9_2704ffc7",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-26T13:19:54Z",
+      "side": 1,
+      "message": "That\u0027s an interesting idea. I need to figure out how we can make sure the service is only ever actually present when the APEX is installed, and otherwise have getSystemService cleanly return null.",
+      "parentUuid": "48113cd8_47c19b50",
       "range": {
         "startLine": 56,
         "startChar": 0,
