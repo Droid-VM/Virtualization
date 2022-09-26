@@ -23,4 +23,10 @@ public abstract class VirtualizationTestHelper {
                         || productName.startsWith("cf_x86")
                         || productName.startsWith("cf_arm"));
     }
+
+    public static String getMetricPrefix(String debugTag) {
+        return "avf_perf"
+            + ((debugTag != null && !debugTag.isEmpty()) ? "[" + debugTag + "]" : "")
+            + "/";
+    }
 }
