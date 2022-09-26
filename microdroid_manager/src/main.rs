@@ -592,8 +592,7 @@ fn wait_for_apex_config_done() -> Result<()> {
 }
 
 fn get_apk_root_hash_from_idsig(path: &str) -> Result<Box<RootHash>> {
-    let mut idsig = File::open(path)?;
-    let idsig = V4Signature::from(&mut idsig)?;
+    let idsig = V4Signature::from_idsig_path(path)?;
     Ok(idsig.hashing_info.raw_root_hash)
 }
 
