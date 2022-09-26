@@ -46,6 +46,30 @@
       },
       "revId": "47984f553776c0ba376303d7af75b870c94daf3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ccf181e_015e7090",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-26T18:58:17Z",
+      "side": 0,
+      "message": "Hmmm, forgot that\u0027s printed by U-Boot. Alright, how about aosp/2232447 and\n\n```\nprivate long getKernelStartedNanoTime() {\n    return kernelStartedNanoTime.isPresent()\n            ? kernelStartedNanoTime.getAsLong()\n            : getVcpuStartedNanoTime();\n}\n```\nIs that simple enough?",
+      "parentUuid": "fbc717ab_a26b33ed",
+      "range": {
+        "startLine": 155,
+        "startChar": 12,
+        "endLine": 155,
+        "endChar": 33
+      },
+      "revId": "47984f553776c0ba376303d7af75b870c94daf3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
