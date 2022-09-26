@@ -16,6 +16,29 @@
       "message": "Hi Alan, could you please review this cl?",
       "revId": "0acb771992e1839948e8a411a4a6c52f4164b60f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44eaafb8_15298598",
+        "filename": "apkdmverity/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-26T12:58:52Z",
+      "side": 1,
+      "message": "How on earth does Rust manage to figure out you mean V4Signature::\u003cFile\u003e:: here?",
+      "range": {
+        "startLine": 356,
+        "startChar": 23,
+        "endLine": 356,
+        "endChar": 51
+      },
+      "revId": "0acb771992e1839948e8a411a4a6c52f4164b60f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
