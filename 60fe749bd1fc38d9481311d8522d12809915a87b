@@ -22,6 +22,30 @@
       },
       "revId": "60fe749bd1fc38d9481311d8522d12809915a87b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15c775df_a90e11e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-27T15:47:04Z",
+      "side": 1,
+      "message": "Right. The payload will have a C API, which will got to microdroid_manager over that not-yet-existing communication channel and microdroid_manager will call this API after collecting all of the details (no need to expose the BCC to the payload!).\n\nThere\u0027s a CL after this one with an example of calling the API. There it\u0027s done from a payload, because that was easier to set up, but the logic would move to microdroid_manager.",
+      "parentUuid": "258bfbee_f49fd1f5",
+      "range": {
+        "startLine": 9,
+        "startChar": 59,
+        "endLine": 9,
+        "endChar": 68
+      },
+      "revId": "60fe749bd1fc38d9481311d8522d12809915a87b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
