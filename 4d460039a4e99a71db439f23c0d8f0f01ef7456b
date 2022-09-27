@@ -33,6 +33,24 @@
       "message": "Can you include this too - r.android.com/2232447. Though presubmits on ubootless topic will pass anyway, so upto you, if you want to drop in again later.",
       "revId": "4d460039a4e99a71db439f23c0d8f0f01ef7456b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a38e7e89_420f78e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-27T11:40:49Z",
+      "side": 1,
+      "message": "I want to do those separately. The change would break our bootloader measurements, so that should go in as part of your topic.",
+      "parentUuid": "bfe9ae69_01244268",
+      "revId": "4d460039a4e99a71db439f23c0d8f0f01ef7456b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
