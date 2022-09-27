@@ -91,6 +91,7 @@ android_system_image {
         // TODO(b/195425111) these should be added automatically
         "libcrypto", // used by many (init_second_stage, microdroid_manager, toybox, etc)
         "liblzma", // used by init_second_stage
+        "mke2fs",
     ] + microdroid_shell_and_utilities,
     multilib: {
         common: {
@@ -106,6 +107,7 @@ android_system_image {
         lib64: {
             deps: [
                 "apkdmverity",
+                "devicemapper",
                 "authfs",
                 "authfs_service",
                 "microdroid_crashdump_kernel",
