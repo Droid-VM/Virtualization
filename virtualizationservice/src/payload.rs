@@ -288,8 +288,14 @@ fn make_payload_disk(
             writable: false,
         });
     }
+    // Push the qCow file as a block storage device
+    partitions.push(Partition {
+        label: "trusted-storage".to_owned(),
+        image: Some(open_parcel_file(Path::new("/data/local/tmp/test/backing_storage.img"), true)?),
+        writable: true,
+    });
 
-    Ok(DiskImage { image: None, partitions, writable: false })
+    Ok(DiskImage { image: None, partitions, writable: true })
 }
 
 fn run_derive_classpath() -> Result<String> {
