@@ -70,6 +70,9 @@ pub const BINDER_SERVICE_IDENTIFIER: &str = "android.system.virtualizationservic
 /// Directory in which to write disk image files used while running VMs.
 pub const TEMPORARY_DIRECTORY: &str = "/data/misc/virtualizationservice";
 
+// The file backing the storage
+pub const TRUSTED_STORAGE_PARTITION: &str = "/data/local/tmp/test/backing_storage.img";
+
 /// The CID representing the host VM
 const VMADDR_CID_HOST: u32 = 2;
 
@@ -324,6 +327,25 @@ impl VirtualizationService {
         service
     }
 
+    fn create_trusted_storage_partition(&self) -> Result<()> {
+        // Limit the max size of the file - or move it to the app' directory
+        let storage_image = OpenOptions::new()
+            .create(true)
+            .truncate(true)
+            .read(true)
+            .write(true)
+            .open(&TRUSTED_STORAGE_PARTITION)
+            .context("Couldn't open the backing storage file")?;
+
+        // TODO: revisit the 10M limit
+        self.initializeWritablePartition(
+            &ParcelFileDescriptor::new(storage_image),
+            10 * 1024 * 1024,
+            PartitionType::RAW,
+        )?;
+        Ok(())
+    }
+
     fn create_vm_internal(
         &self,
         config: &VirtualMachineConfig,
@@ -371,6 +393,17 @@ impl VirtualizationService {
             )
         })?;
 
+        if !Path::new(&TRUSTED_STORAGE_PARTITION).exists() {
+            info!("Creating backing disk - fix this");
+            self.create_trusted_storage_partition().map_err(|e| {
+                error!("Sorry couldn't create the backing storage backing: {:?}", e);
+                Status::new_service_specific_error_str(
+                    -1,
+                    Some(format!("Sorry couldn't create the backing storage backing: {:?}", e)),
+                )
+            })?;
+        }
+
         let is_app_config = matches!(config, VirtualMachineConfig::AppConfig(_));
 
         let config = match config {
@@ -402,6 +435,7 @@ impl VirtualizationService {
             .flat_map(|disk| disk.partitions.iter())
             .filter(|partition| {
                 if is_app_config {
+                    // TODO: figure how this validation passes for /bin/vm run-app
                     !is_safe_app_partition(&partition.label)
                 } else {
                     true // all partitions are checked
@@ -731,6 +765,9 @@ fn check_use_custom_virtual_machine() -> binder::Result<()> {
 
 /// Check if a partition has selinux labels that are not allowed
 fn check_label_for_partition(partition: &Partition) -> Result<()> {
+    if partition.label == "trusted-storage" {
+        return Ok(());
+    };
     let ctx = getfilecon(partition.image.as_ref().unwrap().as_ref())?;
     check_label_is_allowed(&ctx).with_context(|| format!("Partition {} invalid", &partition.label))
 }

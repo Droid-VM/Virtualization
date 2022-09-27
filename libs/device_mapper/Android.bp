@@ -1,0 +1,36 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_defaults {
+    name: "devicemapper.defaults",
+    crate_name: "devicemapper",
+    srcs: ["src/main.rs"],
+    edition: "2021",
+    prefer_rlib: true,
+    rustlibs: [
+        "libanyhow",
+        "libapkverify",
+        "libbitflags",
+        "libclap",
+        "libdata_model",
+        "libitertools",
+        "liblibc",
+        "libnix",
+        "libnum_traits",
+        "libscopeguard",
+        "libuuid",
+    ],
+    proc_macros: ["libnum_derive"],
+    multilib: {
+        lib32: {
+            enabled: false,
+        },
+    },
+}
+
+rust_binary {
+    name: "devicemapper",
+    defaults: ["devicemapper.defaults"],
+    bootstrap: true,
+}

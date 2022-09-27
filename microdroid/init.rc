@@ -89,9 +89,9 @@ on init
 
     setprop ro.debuggable ${ro.boot.microdroid.debuggable:-0}
 
-on property:dev.bootcomplete=1
+# on property:dev.bootcomplete=1
     # Stop ueventd to save memory
-    stop ueventd
+#    stop ueventd
 
 on init && property:ro.boot.microdroid.debuggable=1
     # Mount tracefs (with GID=AID_READTRACEFS)
