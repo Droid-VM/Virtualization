@@ -11,6 +11,7 @@ rust_ffi_static {
     rustlibs: [
         "libaarch64_paging",
         "libbuddy_system_allocator",
+        "libdice_nostd",
         "liblog_rust_nostd",
         "libvmbase",
     ],
@@ -19,7 +20,9 @@ rust_ffi_static {
 
 cc_binary {
     name: "vmbase_example",
-    defaults: ["vmbase_elf_defaults"],
+    defaults: [
+        "vmbase_elf_defaults",
+    ],
     srcs: [
         "idmap.S",
     ],
