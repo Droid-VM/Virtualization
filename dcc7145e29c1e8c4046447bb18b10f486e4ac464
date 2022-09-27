@@ -56,6 +56,30 @@
       },
       "revId": "dcc7145e29c1e8c4046447bb18b10f486e4ac464",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e1366ac_4c8e3660",
+        "filename": "libs/apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-27T17:57:04Z",
+      "side": 1,
+      "message": "Hmm, actually the strongest signature is also used in the v3 verification step 3a[1]. Maybe we should just update the comment here?\n\n[1] https://source.android.com/docs/security/features/apksigning/v3#verification",
+      "parentUuid": "c6ba9da6_84e43af5",
+      "range": {
+        "startLine": 132,
+        "startChar": 18,
+        "endLine": 132,
+        "endChar": 37
+      },
+      "revId": "dcc7145e29c1e8c4046447bb18b10f486e4ac464",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
