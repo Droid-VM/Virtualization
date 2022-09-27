@@ -80,6 +80,30 @@
       },
       "revId": "dcc7145e29c1e8c4046447bb18b10f486e4ac464",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53486a46_b7c33bf9",
+        "filename": "libs/apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-27T18:08:23Z",
+      "side": 1,
+      "message": "LGTM!\n\nAs a side node, when apksig adds a new signature algorithm in the future (e.g. post quantum...), we should keep the code updated (best effort..).  The \"strongest\" doesn\u0027t strictly need to be the same across Android and Microdroid.",
+      "parentUuid": "2e1366ac_4c8e3660",
+      "range": {
+        "startLine": 132,
+        "startChar": 18,
+        "endLine": 132,
+        "endChar": 37
+      },
+      "revId": "dcc7145e29c1e8c4046447bb18b10f486e4ac464",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
