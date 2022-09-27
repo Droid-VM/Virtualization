@@ -10,6 +10,7 @@ rust_ffi_static {
     edition: "2021",
     rustlibs: [
         "libvmbase",
+        "libopen_dice_cbor_bindgen_baremetal",
     ],
     apex_available: ["com.android.virt"],
 }
@@ -23,6 +24,9 @@ cc_binary {
     ],
     static_libs: [
         "libpvmfw",
+        "libopen_dice_bcc_baremetal",
+        "libopen_dice_cbor_baremetal",
+        "libcrypto_baremetal",
     ],
     linker_scripts: [
         "image.ld",

@@ -23,6 +23,29 @@ use vmbase::{main, println};
 
 main!(main);
 
+mod dice {
+    use open_dice_cbor_bindgen::{DiceHash, DiceResult, DiceResult_kDiceResultOk};
+
+    pub const HASH_SIZE: usize = open_dice_cbor_bindgen::DICE_HASH_SIZE as usize;
+
+    fn context() -> *mut core::ffi::c_void {
+        core::ptr::null_mut()
+    }
+
+    pub fn hash(bytes: &[u8]) -> Result<[u8; HASH_SIZE], DiceResult> {
+        let mut output: [u8; HASH_SIZE] = [0; HASH_SIZE];
+        let ret = unsafe { DiceHash(context(), bytes.as_ptr(), bytes.len(), output.as_mut_ptr()) };
+        if ret != DiceResult_kDiceResultOk {
+            return Err(ret);
+        }
+        Ok(output)
+    }
+}
+
+fn test_dice() {
+    println!("hash={:?}", dice::hash(&[0, 1, 2, 3]));
+}
+
 /// Entry point for pVM firmware.
 pub fn main(fdt_address: u64, payload_start: u64, payload_size: u64, arg3: u64) {
     println!("pVM firmware");
@@ -30,6 +53,8 @@ pub fn main(fdt_address: u64, payload_start: u64, payload_size: u64, arg3: u64) 
         "fdt_address={:#018x}, payload_start={:#018x}, payload_size={:#018x}, x3={:#018x}",
         fdt_address, payload_start, payload_size, arg3,
     );
+
+    test_dice();
 
     println!("Starting payload...");
     // Safe because this is a function we have implemented in assembly that matches its signature
