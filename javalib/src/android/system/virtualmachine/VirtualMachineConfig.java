@@ -240,6 +240,7 @@ public final class VirtualMachineConfig {
         // Don't allow apps to set task profiles ... at last for now. Also, don't forget to
         // validate the string because these are appended to the cmdline argument.
         parcel.taskProfiles = new String[0];
+
         return parcel;
     }
 

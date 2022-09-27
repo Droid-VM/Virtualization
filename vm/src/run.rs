@@ -97,6 +97,7 @@ pub fn command_run_app(
         extraIdsigs: extra_idsig_fds,
         instanceImage: open_parcel_file(instance, true /* writable */)?.into(),
         configPath: config_path.to_owned(),
+        payloadConfig: None,
         debugLevel: debug_level,
         protectedVm: protected,
         memoryMib: mem.unwrap_or(0) as i32, // 0 means use the VM default

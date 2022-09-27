@@ -123,6 +123,7 @@ impl ComposClient {
             idsig: Some(idsig_fd),
             instanceImage: Some(instance_fd),
             configPath: config_path,
+            payloadConfig: None,
             debugLevel: debug_level,
             extraIdsigs: extra_idsigs,
             protectedVm: protected_vm,

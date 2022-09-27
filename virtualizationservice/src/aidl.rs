@@ -49,7 +49,7 @@ use rpcbinder::run_rpc_server_with_factory;
 use disk::QcowFile;
 use idsig::{HashAlgorithm, V4Signature};
 use log::{debug, error, info, warn};
-use microdroid_payload_config::VmPayloadConfig;
+use microdroid_payload_config::{VmPayloadConfig, OsConfig, Task, TaskType};
 use rustutils::system_properties;
 use semver::VersionReq;
 use std::convert::TryInto;
@@ -84,6 +84,8 @@ const ANDROID_VM_INSTANCE_MAGIC: &str = "Android-VM-instance";
 const ANDROID_VM_INSTANCE_VERSION: u16 = 1;
 
 const CHUNK_RECV_MAX_LEN: usize = 1024;
+
+const MICRODROID_OS_NAME: &str = "microdroid";
 
 /// Implementation of `IVirtualizationService`, the entry point of the AIDL service.
 #[derive(Debug, Default)]
@@ -604,16 +606,39 @@ fn load_app_config(
     let apk_file = clone_file(config.apk.as_ref().unwrap())?;
     let idsig_file = clone_file(config.idsig.as_ref().unwrap())?;
     let instance_file = clone_file(config.instanceImage.as_ref().unwrap())?;
-    let config_path = &config.configPath;
 
-    let mut apk_zip = ZipArchive::new(&apk_file)?;
-    let config_file = apk_zip.by_name(config_path)?;
-    let vm_payload_config: VmPayloadConfig = serde_json::from_reader(config_file)?;
+    let has_config_path = !config.configPath.is_empty();
+    let vm_payload_config = match (has_config_path, &config.payloadConfig) {
+        (true, None) => {
+            let mut apk_zip = ZipArchive::new(&apk_file)?;
+            let config_file = apk_zip.by_name(&config.configPath)?;
+            serde_json::from_reader(config_file)?
+        }
+        (false, Some(payload_config)) => {
+            // There isn't an actual config file. Construct a synthetic VmPayloadConfig representing
+            // the equivalent; Microdroid will do something equivalent inside the VM using the
+            // payload config that we send it via the metadata file.
+            let task = Task {
+                type_: TaskType::MicrodroidLauncher,
+                command: payload_config.payloadPath.clone(),
+                args: payload_config.args.clone(),
+            };
+            VmPayloadConfig {
+                os: OsConfig { name: MICRODROID_OS_NAME.to_owned() },
+                task: Some(task),
+                apexes: vec![],
+                extra_apks: vec![],
+                prefer_staged: false,
+                export_tombstones: payload_config.exportTombstones,
+                enable_authfs: false,
+            }
+        }
+        _ => bail!("Exactly one of configPath or payloadConfig must be present"),
+    };
 
-    let os_name = &vm_payload_config.os.name;
-
-    // For now, the only supported "os" value is "microdroid"
-    if os_name != "microdroid" {
+    // For now, the only supported OS is Microdroid
+    let os_name = vm_payload_config.os.name.as_str();
+    if os_name != MICRODROID_OS_NAME {
         bail!("Unknown OS \"{}\"", os_name);
     }
 
@@ -633,17 +658,15 @@ fn load_app_config(
     vm_config.taskProfiles = config.taskProfiles.clone();
 
     // Microdroid requires an additional payload disk image and the bootconfig partition.
-    if os_name == "microdroid" {
-        add_microdroid_images(
-            config,
-            temporary_directory,
-            apk_file,
-            idsig_file,
-            instance_file,
-            &vm_payload_config,
-            &mut vm_config,
-        )?;
-    }
+    add_microdroid_images(
+        config,
+        temporary_directory,
+        apk_file,
+        idsig_file,
+        instance_file,
+        &vm_payload_config,
+        &mut vm_config,
+    )?;
 
     Ok(vm_config)
 }

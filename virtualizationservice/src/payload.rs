@@ -22,7 +22,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
 use anyhow::{anyhow, bail, Context, Result};
 use binder::{wait_for_interface, ParcelFileDescriptor};
 use log::{info, warn};
-use microdroid_metadata::{ApexPayload, ApkPayload, Metadata};
+use microdroid_metadata::{ApexPayload, ApkPayload, Metadata, PayloadConfig, PayloadMetadata};
 use microdroid_payload_config::{ApexConfig, VmPayloadConfig};
 use once_cell::sync::OnceCell;
 use packagemanager_aidl::aidl::android::content::pm::IPackageManagerNative::IPackageManagerNative;
@@ -156,11 +156,20 @@ impl PackageManager {
 }
 
 fn make_metadata_file(
-    config_path: &str,
+    app_config: &VirtualMachineAppConfig,
     apex_infos: &[&ApexInfo],
     temporary_directory: &Path,
 ) -> Result<ParcelFileDescriptor> {
-    let metadata_path = temporary_directory.join("metadata");
+    let payload_metadata = if let Some(payload_config) = &app_config.payloadConfig {
+        PayloadMetadata::config(PayloadConfig {
+            payload_binary_path: payload_config.payloadPath.clone(),
+            export_tombstones: payload_config.exportTombstones,
+            args: payload_config.args.clone().into(),
+            ..Default::default()
+        })
+    } else {
+        PayloadMetadata::config_path(format!("/mnt/apk/{}", app_config.configPath))
+    };
     let metadata = Metadata {
         version: 1,
         apexes: apex_infos
@@ -183,11 +192,12 @@ fn make_metadata_file(
             ..Default::default()
         })
         .into(),
-        payload_config_path: format!("/mnt/apk/{}", config_path),
+        payload: Some(payload_metadata),
         ..Default::default()
     };
 
     // Write metadata to file.
+    let metadata_path = temporary_directory.join("metadata");
     let mut metadata_file = OpenOptions::new()
         .create_new(true)
         .read(true)
@@ -235,8 +245,7 @@ fn make_payload_disk(
         collect_apex_infos(&apex_list, &vm_payload_config.apexes, app_config.debugLevel);
     info!("Microdroid payload APEXes: {:?}", apex_infos.iter().map(|ai| &ai.name));
 
-    let metadata_file =
-        make_metadata_file(&app_config.configPath, &apex_infos, temporary_directory)?;
+    let metadata_file = make_metadata_file(app_config, &apex_infos, temporary_directory)?;
     // put metadata at the first partition
     let mut partitions = vec![Partition {
         label: "payload-metadata".to_owned(),
