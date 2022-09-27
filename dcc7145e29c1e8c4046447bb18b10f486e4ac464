@@ -16,6 +16,46 @@
       "message": "Hi Victor, PTAL.",
       "revId": "dcc7145e29c1e8c4046447bb18b10f486e4ac464",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d62d2df6_fab3da79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-27T17:08:58Z",
+      "side": 1,
+      "message": "Thanks for following up Alice!  The change looks generally good to me.  There\u0027s just one thing that we may also be able to split more cleanly.",
+      "revId": "dcc7145e29c1e8c4046447bb18b10f486e4ac464",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6ba9da6_84e43af5",
+        "filename": "libs/apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-27T17:08:58Z",
+      "side": 1,
+      "message": "In my mind, most of the code here is just for reading the file format.  This function looks v4 specific.  Is it possible to make this function somehow iteratable, and let the caller decide what is the strongest?  WDYT?",
+      "range": {
+        "startLine": 132,
+        "startChar": 18,
+        "endLine": 132,
+        "endChar": 37
+      },
+      "revId": "dcc7145e29c1e8c4046447bb18b10f486e4ac464",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
