@@ -16,6 +16,29 @@
       "message": "Hi Victor, could you review this cl?",
       "revId": "95086d404bfb047ecec855db72848a2f47f36320",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d0bdabe_9b87175a",
+        "filename": "apkdmverity/src/dm/verity.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-28T15:54:47Z",
+      "side": 1,
+      "message": "I\u0027m not sure it\u0027s better to reuse the same code in this case.  `apkdmverity` works because we made the Merkle tree in v4 (in Android, userspace) identical to fs-verity, and fs-verity\u0027s Merkle tree is (can be) identical to dm-verity (in kernel).  It\u0027s a bit weird to reuse the code for a file format in the code for the kernel feature.\n\nFor example, the dm-verity setup just happens to expect the string \"sha256\" and \"sha512\".  There\u0027s no problem to impl Display for the algorithm to return the same, but it\u0027s a hidden assumption.\n\nMy suggestion would be to not touch apkdmverity, i.e. it\u0027ll still leverage apkverify to get what it needs, and still convert the format internally.  Then, this change would just move algorithm type to algorithm.rs, which is nice.\n\nWDYT?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 29
+      },
+      "revId": "95086d404bfb047ecec855db72848a2f47f36320",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
