@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3c67107f_91625fd2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-28T07:20:24Z",
+      "side": 1,
+      "message": "You are right. I copied the id from the TODO in the code. I\u0027ll create a new bug for this.",
+      "parentUuid": "c53df7f1_de1cdf72",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 12
+      },
+      "revId": "3faade9a826020067afbb3c4357682710ee3ad1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "52db01d4_42e72d55",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2022-09-27T15:37:43Z",
       "side": 1,
       "message": "What blocks using ProcessUtil here too?",
+      "range": {
+        "startLine": 704,
+        "startChar": 0,
+        "endLine": 708,
+        "endChar": 7
+      },
+      "revId": "3faade9a826020067afbb3c4357682710ee3ad1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd4ece5d_4a60fb64",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-28T07:20:24Z",
+      "side": 1,
+      "message": "Someone has added lots of other stuff in this method in ProcessUtil recently. I\u0027ll ask the owner to take a look and do the migration.",
+      "parentUuid": "2108e481_292696f8",
       "range": {
         "startLine": 704,
         "startChar": 0,
