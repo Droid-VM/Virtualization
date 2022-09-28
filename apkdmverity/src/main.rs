@@ -26,7 +26,7 @@ mod loopdevice;
 mod util;
 
 use anyhow::{bail, Context, Result};
-use apkverify::{HashAlgorithm, V4Signature};
+use apkverify::V4Signature;
 use clap::{App, Arg};
 use itertools::Itertools;
 use std::fmt::Debug;
@@ -122,9 +122,7 @@ fn enable_verity<P: AsRef<Path> + Debug>(
         } else {
             &sig.hashing_info.raw_root_hash
         })
-        .hash_algorithm(match sig.hashing_info.hash_algorithm {
-            HashAlgorithm::SHA256 => dm::DmVerityHashAlgorithm::SHA256,
-        })
+        .hash_algorithm(sig.hashing_info.hash_algorithm)
         .salt(&sig.hashing_info.salt)
         .build()
         .context(format!("Merkle tree in {:?} is not compatible with dm-verity", &idsig))?;
