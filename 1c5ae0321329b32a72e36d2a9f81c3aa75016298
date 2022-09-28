@@ -16,6 +16,24 @@
       "message": "FYI, the failed test was because of the Revert \"Drop prebuilt is up in the commit stack\". All of these were merged together so the test would pass in the top commit anyway.",
       "revId": "1c5ae0321329b32a72e36d2a9f81c3aa75016298",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "203f4807_e28de170",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-09-28T14:42:21Z",
+      "side": 1,
+      "message": "Strike that. The thing is-  patches in this series of reverts has interdependent (no just one-way) \u0026 should\u0027ve gone together as a topic. The merge happened together anyway, so should not be a problem.",
+      "parentUuid": "4a6d40c2_d0dfa5c1",
+      "revId": "1c5ae0321329b32a72e36d2a9f81c3aa75016298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
