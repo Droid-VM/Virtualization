@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a6d40c2_d0dfa5c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-09-28T14:13:19Z",
+      "side": 1,
+      "message": "FYI, the failed test was because of the Revert \"Drop prebuilt is up in the commit stack\". All of these were merged together so the test would pass in the top commit anyway.",
+      "revId": "1c5ae0321329b32a72e36d2a9f81c3aa75016298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
