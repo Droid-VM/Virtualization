@@ -19,6 +19,7 @@
 // which is then given to `DeviceMapper` to create a mapper device.
 
 use anyhow::{bail, Context, Result};
+use apkverify::HashAlgorithm;
 use data_model::DataInit;
 use std::io::Write;
 use std::mem::size_of;
@@ -35,20 +36,13 @@ pub enum DmVerityVersion {
     V1,
 }
 
-/// The hash algorithm to use. SHA256 and SHA512 are supported.
-#[allow(dead_code)]
-pub enum DmVerityHashAlgorithm {
-    SHA256,
-    SHA512,
-}
-
 /// A builder that constructs `DmVerityTarget` struct.
 pub struct DmVerityTargetBuilder<'a> {
     version: DmVerityVersion,
     data_device: Option<&'a Path>,
     data_size: u64,
     hash_device: Option<&'a Path>,
-    hash_algorithm: DmVerityHashAlgorithm,
+    hash_algorithm: HashAlgorithm,
     root_digest: Option<&'a [u8]>,
     salt: Option<&'a [u8]>,
 }
@@ -68,7 +62,7 @@ impl<'a> Default for DmVerityTargetBuilder<'a> {
             data_device: None,
             data_size: 0,
             hash_device: None,
-            hash_algorithm: DmVerityHashAlgorithm::SHA256,
+            hash_algorithm: HashAlgorithm::SHA256,
             root_digest: None,
             salt: None,
         }
@@ -90,7 +84,7 @@ impl<'a> DmVerityTargetBuilder<'a> {
     }
 
     /// Sets the hash algorithm that the merkel tree is using.
-    pub fn hash_algorithm(&mut self, algo: DmVerityHashAlgorithm) -> &mut Self {
+    pub fn hash_algorithm(&mut self, algo: HashAlgorithm) -> &mut Self {
         self.hash_algorithm = algo;
         self
     }
@@ -139,11 +133,6 @@ impl<'a> DmVerityTargetBuilder<'a> {
         let stat = fstat(self.data_device.unwrap())?; // safe; checked just above
         let hash_block_size = stat.st_blksize;
 
-        let hash_algorithm = match self.hash_algorithm {
-            DmVerityHashAlgorithm::SHA256 => "sha256",
-            DmVerityHashAlgorithm::SHA512 => "sha512",
-        };
-
         let root_digest = if let Some(root_digest) = self.root_digest {
             hexstring_from(root_digest)
         } else {
@@ -175,7 +164,7 @@ impl<'a> DmVerityTargetBuilder<'a> {
         write!(&mut body, "{} ", hash_block_size)?;
         write!(&mut body, "{} ", num_data_blocks)?;
         write!(&mut body, "{} ", 0)?; // hash_start_block
-        write!(&mut body, "{} ", hash_algorithm)?;
+        write!(&mut body, "{} ", self.hash_algorithm)?;
         write!(&mut body, "{} ", root_digest)?;
         write!(&mut body, "{}", salt)?;
         write!(&mut body, "\0")?; // null terminator

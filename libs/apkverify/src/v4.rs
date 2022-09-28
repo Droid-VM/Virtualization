@@ -26,7 +26,7 @@ use std::fs;
 use std::io::{copy, Cursor, Read, Seek, SeekFrom, Write};
 use std::path::Path;
 
-use crate::algorithms::SignatureAlgorithmID;
+use crate::algorithms::{HashAlgorithm, SignatureAlgorithmID};
 use crate::hashtree::*;
 use crate::v3::extract_signer_and_apk_sections;
 
@@ -123,26 +123,6 @@ impl Default for Version {
     }
 }
 
-/// Hash algorithm that can be used for idsig file.
-#[derive(Debug, PartialEq, Eq, FromPrimitive, ToPrimitive)]
-#[repr(u32)]
-pub enum HashAlgorithm {
-    /// SHA2-256
-    SHA256 = 1,
-}
-
-impl HashAlgorithm {
-    fn from(val: u32) -> Result<HashAlgorithm> {
-        Self::from_u32(val).ok_or_else(|| anyhow!("{} is an unsupported hash algorithm", val))
-    }
-}
-
-impl Default for HashAlgorithm {
-    fn default() -> Self {
-        HashAlgorithm::SHA256
-    }
-}
-
 impl V4Signature<fs::File> {
     /// Creates a `V4Signature` struct from the given idsig path.
     pub fn from_idsig_path<P: AsRef<Path>>(idsig_path: P) -> Result<Self> {
@@ -180,6 +160,7 @@ impl<R: Read + Seek> V4Signature<R> {
         // Create hash tree (and root hash)
         let algorithm = match algorithm {
             HashAlgorithm::SHA256 => openssl::hash::MessageDigest::sha256(),
+            _ => bail!("Only SHA256 is supported. Found '{}'.", algorithm),
         };
         let hash_tree = HashTree::from(&mut apk, size, salt, block_size, algorithm)?;
 
@@ -238,12 +219,18 @@ impl HashingInfo {
         // Size of the entire hashing_info struct. We don't need this because each variable-sized
         // fields in the struct are also length encoded.
         r.read_u32::<LittleEndian>()?;
-        Ok(HashingInfo {
-            hash_algorithm: HashAlgorithm::from(r.read_u32::<LittleEndian>()?)?,
+        let hashing_info = HashingInfo {
+            hash_algorithm: HashAlgorithm::from_read(&mut r)?,
             log2_blocksize: r.read_u8()?,
             salt: read_sized_array(&mut r)?,
             raw_root_hash: read_sized_array(&mut r)?,
-        })
+        };
+        ensure!(
+            hashing_info.hash_algorithm == HashAlgorithm::SHA256,
+            "Only SHA256 is supported. Found '{}'.",
+            hashing_info.hash_algorithm
+        );
+        Ok(hashing_info)
     }
 
     fn write_into<W: Write + Seek>(&self, mut w: &mut W) -> Result<()> {
