@@ -17,7 +17,9 @@
 //! Algorithms used for APK Signature Scheme.
 
 use anyhow::{ensure, Result};
+use byteorder::{LittleEndian, ReadBytesExt};
 use bytes::{Buf, Bytes};
+use core::fmt;
 use num_derive::{FromPrimitive, ToPrimitive};
 use num_traits::{FromPrimitive, ToPrimitive};
 use openssl::hash::MessageDigest;
@@ -25,6 +27,7 @@ use openssl::pkey::{self, PKey};
 use openssl::rsa::Padding;
 use openssl::sign::Verifier;
 use serde::{Deserialize, Serialize};
+use std::io::Read;
 
 use crate::bytes_ext::ReadFromBytes;
 
@@ -202,4 +205,37 @@ pub(crate) enum ContentDigestAlgorithm {
     ChunkedSha256 = 1,
     VerityChunkedSha256,
     ChunkedSha512,
+}
+
+/// Hash algorithms.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, FromPrimitive, ToPrimitive)]
+#[repr(u32)]
+pub enum HashAlgorithm {
+    /// SHA-256
+    SHA256 = 1,
+    /// SHA-512
+    SHA512,
+}
+
+impl HashAlgorithm {
+    pub(crate) fn from_idsig<R: Read>(idsig: &mut R) -> Result<HashAlgorithm> {
+        let val = idsig.read_u32::<LittleEndian>()?;
+        ensure!(val == 1, "Only 1 == SHA256 is supported. Found '{}'.", val);
+        Ok(Self::from_u32(val).unwrap())
+    }
+}
+
+impl Default for HashAlgorithm {
+    fn default() -> Self {
+        HashAlgorithm::SHA256
+    }
+}
+
+impl fmt::Display for HashAlgorithm {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            HashAlgorithm::SHA256 => write!(f, "sha256"),
+            HashAlgorithm::SHA512 => write!(f, "sha512"),
+        }
+    }
 }
