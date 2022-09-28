@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0881bda_e5bbbf6a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-28T10:03:54Z",
+      "side": 1,
+      "message": "Can you run the ComposHostTestCases too? They exercise the retrieve bcc functionality.",
+      "range": {
+        "startLine": 19,
+        "startChar": 11,
+        "endLine": 19,
+        "endChar": 27
+      },
+      "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53d1b624_ca1fc791",
         "filename": "microdroid/dice/dice-service.microdroid.rc",
         "patchSetId": 3
@@ -42,6 +65,53 @@
         "startChar": 4,
         "endLine": 9,
         "endChar": 41
+      },
+      "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fbb6f61_dacd26e6",
+        "filename": "microdroid/dice/dice-service.microdroid.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-28T10:03:54Z",
+      "side": 1,
+      "message": "I don\u0027t think this does anything useful in Microdroid. (Do we even have cpuset/foreground?)",
+      "parentUuid": "aee389f8_a3ae5b07",
+      "range": {
+        "startLine": 9,
+        "startChar": 4,
+        "endLine": 9,
+        "endChar": 41
+      },
+      "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dec27686_ea47e392",
+        "filename": "microdroid/dice/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-28T10:03:54Z",
+      "side": 1,
+      "message": "Why static? const is more usual in this context; you don\u0027t need a variable, just a value.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 6
       },
       "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -111,6 +181,29 @@
         "startChar": 0,
         "endLine": 299,
         "endChar": 63
+      },
+      "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d22e6825_2c71f911",
+        "filename": "microdroid/dice/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-28T10:03:54Z",
+      "side": 1,
+      "message": "We only have a single thread in the pool (this one).\nIs that intended?\n(Elsewhere we use ProcessState::start_thread_pool(); to have more)",
+      "range": {
+        "startLine": 302,
+        "startChar": 4,
+        "endLine": 302,
+        "endChar": 45
       },
       "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
