@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1178c42_96d37692",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-28T13:36:15Z",
+      "side": 1,
+      "message": "Still passing!",
+      "parentUuid": "d0881bda_e5bbbf6a",
+      "range": {
+        "startLine": 19,
+        "startChar": 11,
+        "endLine": 19,
+        "endChar": 27
+      },
+      "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53d1b624_ca1fc791",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-28T01:55:43Z",
       "side": 1,
       "message": "nit: not needed as this service is started explicitly by its name.",
+      "range": {
+        "startLine": 2,
+        "startChar": 4,
+        "endLine": 2,
+        "endChar": 14
+      },
+      "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32b1f3ef_caf214e4",
+        "filename": "microdroid/dice/dice-service.microdroid.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-28T13:36:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53d1b624_ca1fc791",
       "range": {
         "startLine": 2,
         "startChar": 4,
@@ -94,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6daad58_207ec194",
+        "filename": "microdroid/dice/dice-service.microdroid.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-28T13:36:15Z",
+      "side": 1,
+      "message": "I just coped the init.rc we had from diced but have reverted to what we had for the HAL before.",
+      "parentUuid": "aee389f8_a3ae5b07",
+      "range": {
+        "startLine": 9,
+        "startChar": 4,
+        "endLine": 9,
+        "endChar": 41
+      },
+      "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dec27686_ea47e392",
@@ -107,6 +179,30 @@
       "writtenOn": "2022-09-28T10:03:54Z",
       "side": 1,
       "message": "Why static? const is more usual in this context; you don\u0027t need a variable, just a value.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 6
+      },
+      "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9e683cf_0fdbf4a9",
+        "filename": "microdroid/dice/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-28T13:36:15Z",
+      "side": 1,
+      "message": "Because I confused myself which way around the keywords went. Done.",
+      "parentUuid": "dec27686_ea47e392",
       "range": {
         "startLine": 38,
         "startChar": 0,
@@ -140,6 +236,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9746a941_7d819df9",
+        "filename": "microdroid/dice/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-28T13:36:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b000ea06_b4d16ec8",
+      "range": {
+        "startLine": 256,
+        "startChar": 21,
+        "endLine": 256,
+        "endChar": 32
+      },
+      "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01374030_57fe9949",
@@ -153,6 +273,30 @@
       "writtenOn": "2022-09-28T01:55:43Z",
       "side": 1,
       "message": "It looks like demote_self on DiceManatenance is delegated to demote_self on the node. Can we let microdroid_manager directly interact with the node?",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 71
+      },
+      "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2f48732_1dde7f53",
+        "filename": "microdroid/dice/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-28T13:36:15Z",
+      "side": 1,
+      "message": "That isn\u0027t possible with the current interfaces. I\u0027d expect that we replace these AIDL at some point because they aren\u0027t very suitable for the needs of microdroid. And if this service is going to merge with other persistent processes, maybe even microdroid_maanger, this are going to look very different.",
+      "parentUuid": "01374030_57fe9949",
       "range": {
         "startLine": 292,
         "startChar": 0,
@@ -186,6 +330,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a58aa5d0_ef5ba083",
+        "filename": "microdroid/dice/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-28T13:36:15Z",
+      "side": 1,
+      "message": "Probably, but I\u0027m not sure it\u0027s worth messing with vs replacing the interface with something suitable for microdroid.",
+      "parentUuid": "6d4d49bf_51720acc",
+      "range": {
+        "startLine": 297,
+        "startChar": 0,
+        "endLine": 299,
+        "endChar": 63
+      },
+      "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d22e6825_2c71f911",
@@ -199,6 +367,30 @@
       "writtenOn": "2022-09-28T10:03:54Z",
       "side": 1,
       "message": "We only have a single thread in the pool (this one).\nIs that intended?\n(Elsewhere we use ProcessState::start_thread_pool(); to have more)",
+      "range": {
+        "startLine": 302,
+        "startChar": 4,
+        "endLine": 302,
+        "endChar": 45
+      },
+      "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7b2ef66_a8224117",
+        "filename": "microdroid/dice/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-28T13:36:15Z",
+      "side": 1,
+      "message": "Given the volume of traffic I don\u0027t see a need for more than one thread. But it\u0027d be a fairly easy change if it turns out to be a problem.",
+      "parentUuid": "d22e6825_2c71f911",
       "range": {
         "startLine": 302,
         "startChar": 4,
