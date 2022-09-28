@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53d1b624_ca1fc791",
+        "filename": "microdroid/dice/dice-service.microdroid.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-28T01:55:43Z",
+      "side": 1,
+      "message": "nit: not needed as this service is started explicitly by its name.",
+      "range": {
+        "startLine": 2,
+        "startChar": 4,
+        "endLine": 2,
+        "endChar": 14
+      },
+      "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aee389f8_a3ae5b07",
+        "filename": "microdroid/dice/dice-service.microdroid.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-28T01:55:43Z",
+      "side": 1,
+      "message": "Not sure what\u0027s the purpose of this",
+      "range": {
+        "startLine": 9,
+        "startChar": 4,
+        "endLine": 9,
+        "endChar": 41
+      },
+      "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b000ea06_b4d16ec8",
+        "filename": "microdroid/dice/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-28T01:55:43Z",
+      "side": 1,
+      "message": "to DiceNode ?",
+      "range": {
+        "startLine": 256,
+        "startChar": 21,
+        "endLine": 256,
+        "endChar": 32
+      },
+      "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01374030_57fe9949",
+        "filename": "microdroid/dice/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-28T01:55:43Z",
+      "side": 1,
+      "message": "It looks like demote_self on DiceManatenance is delegated to demote_self on the node. Can we let microdroid_manager directly interact with the node?",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 71
+      },
+      "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d4d49bf_51720acc",
+        "filename": "microdroid/dice/service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-28T01:55:43Z",
+      "side": 1,
+      "message": "Can this be unregistered from service manager after it is demoted?",
+      "range": {
+        "startLine": 297,
+        "startChar": 0,
+        "endLine": 299,
+        "endChar": 63
+      },
+      "revId": "547091df409080e53d360ea718d5ba82f21ae34b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
