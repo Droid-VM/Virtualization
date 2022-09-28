@@ -33,6 +33,29 @@
       "message": "nit: unnecessary change",
       "revId": "1f90101baf677972e6c63fedba5c9c897376e206",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b82242d2_074f4638",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineAppConfig.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-28T13:28:36Z",
+      "side": 1,
+      "message": "The `union` keyword exists in AIDL according to cs/. I\u0027ve never tried to use it but perhaps it would express this relationship?",
+      "range": {
+        "startLine": 45,
+        "startChar": 23,
+        "endLine": 45,
+        "endChar": 46
+      },
+      "revId": "1f90101baf677972e6c63fedba5c9c897376e206",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
