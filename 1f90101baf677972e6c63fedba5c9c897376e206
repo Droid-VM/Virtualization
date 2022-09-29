@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0cb7567_140c1778",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-29T12:43:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "056d916e_5e0c20af",
+      "revId": "1f90101baf677972e6c63fedba5c9c897376e206",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b82242d2_074f4638",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-09-28T13:28:36Z",
       "side": 1,
       "message": "The `union` keyword exists in AIDL according to cs/. I\u0027ve never tried to use it but perhaps it would express this relationship?",
+      "range": {
+        "startLine": 45,
+        "startChar": 23,
+        "endLine": 45,
+        "endChar": 46
+      },
+      "revId": "1f90101baf677972e6c63fedba5c9c897376e206",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4a5ad5b_870d8f69",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineAppConfig.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-29T12:43:21Z",
+      "side": 1,
+      "message": "🤯\nThanks!\nI should have known that, given it\u0027s how VirtualMachineConfig works.\n\nIt looks cleaner now, although I\u0027m not sure the naming is perfect.",
+      "parentUuid": "b82242d2_074f4638",
       "range": {
         "startLine": 45,
         "startChar": 23,
