@@ -36,22 +36,34 @@ public final class ProcessUtil {
     public static List<SMapEntry> getProcessSmaps(int pid, Function<String, String> shellExecutor)
             throws IOException {
         String path = "/proc/" + pid + "/smaps";
-        return parseSmaps(shellExecutor.apply("cat " + path + " || true"));
+        return parseMemoryInfo(shellExecutor.apply("cat " + path + " || true"), false);
     }
 
     /** Gets metrics key and values mapping of specified process id */
     public static Map<String, Long> getProcessSmapsRollup(
             int pid, Function<String, String> shellExecutor) throws IOException {
         String path = "/proc/" + pid + "/smaps_rollup";
-        List<SMapEntry> entries = parseSmaps(shellExecutor.apply("cat " + path + " || true"));
-        if (entries.size() > 1) {
-            throw new RuntimeException(
-                    "expected at most one entry in smaps_rollup, got " + entries.size());
-        }
+        List<SMapEntry> entries = parseMemoryInfo(shellExecutor.apply("cat " + path + " || true"),
+                true);
         if (entries.size() == 1) {
             return entries.get(0).metrics;
         }
         return new HashMap<String, Long>();
+    }
+
+    /** Gets global memory metrics key and values mapping */
+    public static Map<String, Long> getProcessMemoryMap(
+            Function<String, String> shellExecutor) throws IOException {
+        // The input file of parseMemoryInfo need a header string as the key of output entries.
+        // /proc/meminfo doesn't have this line so add one as the key.
+        String header = "device memory info\n";
+        List<SMapEntry> entries = parseMemoryInfo(header + shellExecutor.apply("cat /proc/meminfo"),
+                true);
+        if (entries.size() == 0) {
+            throw new RuntimeException(
+                    "expected one entry in /proc/meminfo but got 0");
+        }
+        return entries.get(0).metrics;
     }
 
     /** Gets process id and process name mapping of the device */
@@ -77,7 +89,7 @@ public final class ProcessUtil {
     // To ensures that only one object is created at a time.
     private ProcessUtil() {}
 
-    private static List<SMapEntry> parseSmaps(String file) {
+    private static List<SMapEntry> parseMemoryInfo(String file, boolean isAtMostOneEntity) {
         List<SMapEntry> entries = new ArrayList<SMapEntry>();
         for (String line : file.split("\n")) {
             line = line.trim();
@@ -116,6 +128,12 @@ public final class ProcessUtil {
             }
             entry.metrics = new HashMap<String, Long>();
             entries.add(entry);
+        }
+        if (isAtMostOneEntity) {
+            if (entries.size() > 1) {
+                throw new RuntimeException(
+                        "expected at most one entry, got " + entries.size());
+            }
         }
         return entries;
     }
