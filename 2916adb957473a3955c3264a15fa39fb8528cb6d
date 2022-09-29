@@ -39,6 +39,30 @@
       },
       "revId": "2916adb957473a3955c3264a15fa39fb8528cb6d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0604312c_fc1413b4",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-29T15:41:46Z",
+      "side": 1,
+      "message": "Looking below, the details are `export_tombstones` and `payload_binary_path`. I think both of these deserve to be called out explicitly rather than hidden behind a hash.\n\n`export_tombstones` is of interest to clients that want to know whether the VM might leak data in tombstones.\n\n`payload_binary_path` is needed by clients to be able to tell what of the VM package is actually executing in the. VM. (Unless we have a fixed entry point, but that might be too restrictive). (Are so paths the interface that\u0027s exposed to clients?).\n\nThat said, we already didn\u0027t have this and wouldn\u0027t use it until attestation.",
+      "parentUuid": "1763e087_89d5b198",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 46
+      },
+      "revId": "2916adb957473a3955c3264a15fa39fb8528cb6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
