@@ -38,11 +38,13 @@ import android.cts.statsdatom.lib.ConfigUtils;
 import android.cts.statsdatom.lib.ReportUtils;
 
 import com.android.compatibility.common.util.CddTest;
+import com.android.microdroid.test.common.ProcessUtil;
 import com.android.microdroid.test.host.CommandRunner;
 import com.android.microdroid.test.host.MicrodroidHostTestCaseBase;
 import com.android.os.AtomsProto;
 import com.android.os.StatsLog;
 import com.android.tradefed.device.DeviceNotAvailableException;
+import com.android.tradefed.log.LogUtil.CLog;
 import com.android.tradefed.result.TestDescription;
 import com.android.tradefed.result.TestResult;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner;
@@ -70,7 +72,6 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -693,69 +694,13 @@ public class MicrodroidTestCase extends MicrodroidHostTestCaseBase {
         }
     }
 
-    // TODO(b/6184548): to be replaced by ProcessUtil
-    /**
-    * @deprecated use ProcessUtil instead.
-    */
-    @Deprecated
-    private Map<String, Long> parseMemInfo(String file) {
-        Map<String, Long> stats = new HashMap<>();
-        file.lines().forEach(line -> {
-            if (line.endsWith(" kB")) line = line.substring(0, line.length() - 3);
-
-            String[] elems = line.split(":");
-            assertThat(elems.length).isEqualTo(2);
-            stats.put(elems[0].trim(), Long.parseLong(elems[1].trim()));
-        });
-        return stats;
-    }
-
-    // TODO(b/6184548): to be replaced by ProcessUtil
-    /**
-    * @deprecated use ProcessUtil instead.
-    */
-    @Deprecated
-    private String skipFirstLine(String str) {
-        int index = str.indexOf("\n");
-        return (index < 0) ? "" : str.substring(index + 1);
-    }
-
-    // TODO(b/6184548): to be replaced by ProcessUtil
-    /**
-    * @deprecated use ProcessUtil instead.
-    */
-    @Deprecated
-    private List<ProcessInfo> getRunningProcessesList() {
-        List<ProcessInfo> list = new ArrayList<ProcessInfo>();
-        skipFirstLine(runOnMicrodroid("ps", "-Ao", "PID,NAME")).lines().forEach(ps -> {
-            // Each line is '  <pid> <name>'.
-            ps = ps.trim();
-            int space = ps.indexOf(" ");
-            list.add(new ProcessInfo(
-                    ps.substring(space + 1),
-                    Integer.parseInt(ps.substring(0, space))));
-        });
-
-        return list;
-    }
-
-    // TODO(b/6184548): to be replaced by ProcessUtil
-    /**
-    * @deprecated use ProcessUtil instead.
-    */
-    @Deprecated
-    private Map<String, Long> getProcMemInfo() {
-        return parseMemInfo(runOnMicrodroid("cat", "/proc/meminfo"));
-    }
-
-    // TODO(b/6184548): to be replaced by ProcessUtil
-    /**
-    * @deprecated use ProcessUtil instead.
-    */
-    @Deprecated
-    private Map<String, Long> getProcSmapsRollup(int pid) {
-        String path = "/proc/" + pid + "/smaps_rollup";
-        return  parseMemInfo(skipFirstLine(runOnMicrodroid("cat", path, "||", "true")));
+    private String executeCommandOnMicrodroid(String command) {
+        try {
+            return runOnMicrodroid(command);
+        } catch (Exception e) {
+            CLog.e("Get exception when execute command on Microdroid: " + e);
+            throw new RuntimeException("Failed to run the command on Microdroid.");
+        }
     }
 
     @Test
@@ -771,21 +716,29 @@ public class MicrodroidTestCase extends MicrodroidHostTestCaseBase {
                         /* debug */ true,
                         minMemorySize(),
                         Optional.of(NUM_VCPUS));
+
         adbConnectToMicrodroid(getDevice(), cid);
         waitForBootComplete();
         rootMicrodroid();
 
-        for (Map.Entry<String, Long> stat : getProcMemInfo().entrySet()) {
+        for (Map.Entry<String, Long> stat :
+                ProcessUtil.getProcMemInfoMap(this::executeCommandOnMicrodroid).entrySet()) {
             mMetrics.addTestMetric(
                     mMetricPrefix + "meminfo/" + stat.getKey().toLowerCase(),
                     stat.getValue().toString());
         }
 
-        for (ProcessInfo proc : getRunningProcessesList()) {
-            for (Map.Entry<String, Long> stat : getProcSmapsRollup(proc.mPid).entrySet()) {
+        for (Map.Entry<Integer, String> process :
+                ProcessUtil.getProcessMap(this::executeCommandOnMicrodroid).entrySet()) {
+            int pId = process.getKey();
+            String pName = process.getValue();
+
+            for (Map.Entry<String, Long> stat :
+                    ProcessUtil.getProcessSmapsRollup(pId, this::executeCommandOnMicrodroid)
+                    .entrySet()) {
                 String name = stat.getKey().toLowerCase();
                 mMetrics.addTestMetric(
-                        mMetricPrefix + "smaps/" + name + "/" + proc.mName,
+                        mMetricPrefix + "smaps/" + name + "/" + pName,
                         stat.getValue().toString());
             }
         }

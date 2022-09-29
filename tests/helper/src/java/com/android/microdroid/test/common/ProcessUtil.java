@@ -54,6 +54,23 @@ public final class ProcessUtil {
         return new HashMap<String, Long>();
     }
 
+    /** Gets global memory metrics key and values mapping */
+    public static Map<String, Long> getProcMemInfoMap(Function<String, String> shellExecutor)
+            throws IOException {
+        Map<String, Long> stats = new HashMap<>();
+        for (String line : shellExecutor.apply("cat /proc/meminfo").split("\n")) {
+            // Each line is '<metrics>:          <value> kB'.
+            // EX : Writeback:          2287156 kB
+            if (line.endsWith(" kB")) line = line.substring(0, line.length() - 3);
+            String[] elems = line.split(":");
+            if (elems.length != 2) {
+                continue;
+            }
+            stats.put(elems[0].trim(), Long.parseLong(elems[1].trim()));
+        }
+        return stats;
+    }
+
     /** Gets process id and process name mapping of the device */
     public static Map<Integer, String> getProcessMap(Function<String, String> shellExecutor)
             throws IOException {
