@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "affb1b59_3180ce9c",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-29T11:42:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6bb17a8_2c635688",
+      "range": {
+        "startLine": 58,
+        "startChar": 39,
+        "endLine": 58,
+        "endChar": 43
+      },
+      "revId": "602b7923e2a5333a9c6c1d8613c39e5524856d76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15c94248_105b8649",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-29T09:15:54Z",
       "side": 1,
       "message": "This method was adapted from the previous `parseMemoryInfo`[1]. `parseMemoryInfo` was used to parse both `/proc/meminfo` and `/proc/[pid]/smaps_rollup`. As the former is what we need here, is it possible to reuse this method instead of creating a new one?\n\n[1] https://r.android.com/2225223",
+      "range": {
+        "startLine": 97,
+        "startChar": 35,
+        "endLine": 97,
+        "endChar": 45
+      },
+      "revId": "602b7923e2a5333a9c6c1d8613c39e5524856d76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57ea9a64_6acb7cc3",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-29T11:42:03Z",
+      "side": 1,
+      "message": "I use parseSmaps() in getProcessMememoryInfoMap() to parse the metrics data. Please help review if meet your expectation, thanks",
+      "parentUuid": "15c94248_105b8649",
       "range": {
         "startLine": 97,
         "startChar": 35,
