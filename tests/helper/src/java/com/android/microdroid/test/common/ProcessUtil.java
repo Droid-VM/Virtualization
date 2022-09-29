@@ -54,6 +54,23 @@ public final class ProcessUtil {
         return new HashMap<String, Long>();
     }
 
+    /** Gets global memory metrics key and values mapping */
+    public static Map<String, Long> getProcessMememoryInfoMap(
+            Function<String, String> shellExecutor) throws IOException {
+        // The input file of parseSmaps need a header string as the key of output entries.
+        // /proc/meminfo doesn't have this line so add one as the key.
+        String header = "device memory info\n";
+        List<SMapEntry> entries = parseSmaps(header + shellExecutor.apply("cat /proc/meminfo"));
+        if (entries.size() > 1) {
+            throw new RuntimeException(
+                    "expected at most one entry in /proc/meminfo, got " + entries.size());
+        }
+        if (entries.size() == 1) {
+            return entries.get(0).metrics;
+        }
+        return new HashMap<String, Long>();
+    }
+
     /** Gets process id and process name mapping of the device */
     public static Map<Integer, String> getProcessMap(Function<String, String> shellExecutor)
             throws IOException {
