@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6bb17a8_2c635688",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-29T09:15:54Z",
+      "side": 1,
+      "message": "Could you use Process to be consistent with the methods\u0027 names above and below? As discussed before, it\u0027s important to name the variable/method in a consistent way: we either call process `Process` everywhere or `Proc` everywhere. Same for memory, let\u0027s just call it `Memory`.",
+      "range": {
+        "startLine": 58,
+        "startChar": 39,
+        "endLine": 58,
+        "endChar": 43
+      },
+      "revId": "602b7923e2a5333a9c6c1d8613c39e5524856d76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15c94248_105b8649",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-29T09:15:54Z",
+      "side": 1,
+      "message": "This method was adapted from the previous `parseMemoryInfo`[1]. `parseMemoryInfo` was used to parse both `/proc/meminfo` and `/proc/[pid]/smaps_rollup`. As the former is what we need here, is it possible to reuse this method instead of creating a new one?\n\n[1] https://r.android.com/2225223",
+      "range": {
+        "startLine": 97,
+        "startChar": 35,
+        "endLine": 97,
+        "endChar": 45
+      },
+      "revId": "602b7923e2a5333a9c6c1d8613c39e5524856d76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
