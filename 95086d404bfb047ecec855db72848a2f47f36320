@@ -39,6 +39,30 @@
       },
       "revId": "95086d404bfb047ecec855db72848a2f47f36320",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed172b47_357bb9fe",
+        "filename": "apkdmverity/src/dm/verity.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-29T07:51:44Z",
+      "side": 1,
+      "message": "I see. Thanks for the explanation :) Actually I made the change because I think a hash algorithm is just a hash algorithm, it\u0027s a bit weird for each package to have its own hash algorithm. Especially they look the same.",
+      "parentUuid": "5d0bdabe_9b87175a",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 29
+      },
+      "revId": "95086d404bfb047ecec855db72848a2f47f36320",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
