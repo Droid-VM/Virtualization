@@ -63,6 +63,30 @@
       },
       "revId": "95086d404bfb047ecec855db72848a2f47f36320",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca6d2746_a4bb5c7b",
+        "filename": "apkdmverity/src/dm/verity.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-09-29T15:53:10Z",
+      "side": 1,
+      "message": "Yes, I agree with you that the hash algorithm should be common.  If there\u0027s another common library that provides the hash algorithm, then both of these two packages could depend on it.  Given the current practice, I\u0027m inclined to avoid the dependency between packages.",
+      "parentUuid": "ed172b47_357bb9fe",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 29
+      },
+      "revId": "95086d404bfb047ecec855db72848a2f47f36320",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
