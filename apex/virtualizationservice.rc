@@ -17,5 +17,8 @@ service virtualizationservice /apex/com.android.virt/bin/virtualizationservice
     user system
     group system
     interface aidl android.system.virtualizationservice
+    interface aidl android.system.virtualizationservice.IRemotelyProvisionedComponent
     disabled
     oneshot
+
+# TODO: how to register with rkpd the first time if APEX init scripts can't https://source.android.com/docs/core/ota/vendor-apex
