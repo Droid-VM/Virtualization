@@ -36,8 +36,10 @@ cc_library_shared {
         "android.system.virtualmachineservice-ndk",
         "com.android.microdroid.testservice-ndk",
         "libbase",
+        "libbinder",
         "libbinder_ndk",
-        "libbinder_rpc_unstable",
+        "libvm_payload",
+        "libutils",
         "MicrodroidTestNativeLibSub",
     ],
     static_libs: [
