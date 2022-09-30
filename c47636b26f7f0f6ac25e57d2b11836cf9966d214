@@ -63,6 +63,30 @@
       },
       "revId": "c47636b26f7f0f6ac25e57d2b11836cf9966d214",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5199efce_fde561dc",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-30T09:12:37Z",
+      "side": 1,
+      "message": "I mean you can check entries.size() \u003e 1 anyway  for both cases **in this function** without this boolean, that was exactly what you did in the patch https://r.android.com/c/2238533/3. Why you suddenly decide to do this check only in one function but not the other?\n\nOtherwise, based on https://r.android.com/c/2238533/3 parseMemoryInfo could return a HashMap\u003cString, Long\u003e() to avoid the same processing in the two callers.",
+      "parentUuid": "574b8e49_191c4328",
+      "range": {
+        "startLine": 92,
+        "startChar": 64,
+        "endLine": 92,
+        "endChar": 89
+      },
+      "revId": "c47636b26f7f0f6ac25e57d2b11836cf9966d214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
