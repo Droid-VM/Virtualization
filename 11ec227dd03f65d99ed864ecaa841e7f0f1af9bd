@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d5598cc_a4c2f127",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-30T15:00:14Z",
+      "side": 1,
+      "message": "No magic numbers. This needs to come from a constant with a clear meaning.",
+      "range": {
+        "startLine": 29,
+        "startChar": 26,
+        "endLine": 29,
+        "endChar": 27
+      },
+      "revId": "11ec227dd03f65d99ed864ecaa841e7f0f1af9bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4f31aae_ddb84908",
+        "filename": "pvmfw/src/smccc.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-30T15:00:14Z",
+      "side": 1,
+      "message": "Uff, not a fan of this API. But that\u0027s a comment I should make on the psci crate.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 55
+      },
+      "revId": "11ec227dd03f65d99ed864ecaa841e7f0f1af9bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2fe9cc1_60501fd2",
+        "filename": "pvmfw/src/smccc.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-30T15:00:14Z",
+      "side": 1,
+      "message": "This is ambiguous - I would either interpret this as a page address (in which case shouldn\u0027t this fail if it\u0027s not page-aligned?) or a page frame number. Which is it? Can we create a corresponding typedef?",
+      "range": {
+        "startLine": 52,
+        "startChar": 22,
+        "endLine": 52,
+        "endChar": 31
+      },
+      "revId": "11ec227dd03f65d99ed864ecaa841e7f0f1af9bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1b3f0db_bb991adb",
+        "filename": "pvmfw/src/smccc.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-30T15:00:14Z",
+      "side": 1,
+      "message": "What\u0027s the return value? Shouldn\u0027t you convert this to a Result and check for errors in the caller?",
+      "range": {
+        "startLine": 56,
+        "startChar": 54,
+        "endLine": 56,
+        "endChar": 57
+      },
+      "revId": "11ec227dd03f65d99ed864ecaa841e7f0f1af9bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
