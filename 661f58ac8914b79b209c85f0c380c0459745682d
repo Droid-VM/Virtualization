@@ -16,6 +16,29 @@
       "message": "This CL crashes with \n\n$ atest com.android.microdroid.benchmark.MicrodroidBenchmarks#testVirtioBlkSeqReadRate\nE: Parcel  : Sending a socket binder over kernel binder is prohibited\n\nDo you know what\u0027s the problem here?",
       "revId": "661f58ac8914b79b209c85f0c380c0459745682d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a461c18_5ca94dee",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachine.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-30T10:49:29Z",
+      "side": 1,
+      "message": "This is the bit that won\u0027t work.\nIVirtualMachine is a connection from the client app to VirtualizationService over kernel binder, so you can\u0027t return an RPC binder over it.\n\nThat probably could be supported (you can send FDs over kernel binder), but I suspect it\u0027s pretty complicated. You could ask Steven.\n\nBTW I\u0027m removing the future part of this in aosp/2192077. And generally making a bunch of API changes.",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 51
+      },
+      "revId": "661f58ac8914b79b209c85f0c380c0459745682d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
