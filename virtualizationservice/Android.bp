@@ -19,7 +19,12 @@ rust_defaults {
         },
     },
     prefer_rlib: true,
+    //defaults: [
+    //    "keymint_use_latest_hal_aidl_rust",
+    //],
     rustlibs: [
+        "android.hardware.security.keymint-V3-rust",
+        "android.security.rkpd-rust",
         "android.system.virtualizationcommon-rust",
         "android.system.virtualizationservice-rust",
         "android.system.virtualmachineservice-rust",

@@ -23,6 +23,8 @@ mod rkpvm;
 mod selinux;
 
 use crate::aidl::{VirtualizationService, BINDER_SERVICE_IDENTIFIER, TEMPORARY_DIRECTORY};
+use crate::rkpvm::{Rkpvm, REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME};
+use android_hardware_security_keymint::aidl::android::hardware::security::keymint::IRemotelyProvisionedComponent::BnRemotelyProvisionedComponent;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualizationService::BnVirtualizationService;
 use binder::{register_lazy_service, BinderFeatures, ProcessState};
 use anyhow::Error;
@@ -53,6 +55,11 @@ fn main() {
     let service = VirtualizationService::init();
     let service = BnVirtualizationService::new_binder(service, BinderFeatures::default());
     register_lazy_service(BINDER_SERVICE_IDENTIFIER, service.as_binder()).unwrap();
+
+    let rkpvm = Rkpvm::init();
+    let rkpvm = BnRemotelyProvisionedComponent::new_binder(rkpvm, BinderFeatures::default());
+    register_lazy_service(REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME, rkpvm.as_binder()).unwrap();
+
     info!("Registered Binder service, joining threadpool.");
     ProcessState::join_thread_pool();
 }

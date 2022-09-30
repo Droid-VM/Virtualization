@@ -16,9 +16,19 @@
 
 //! An RPK service VM for VMs.
 //!
-//! TODO: the logic should all move into an actual VM,
+//! TODO: some of the logic should move into a VM,
 
+use crate::aidl::check_permission;
+use android_hardware_security_keymint::aidl::android::hardware::security::keymint::{
+    DeviceInfo::DeviceInfo,
+    IRemotelyProvisionedComponent::{IRemotelyProvisionedComponent, STATUS_REMOVED},
+    MacedPublicKey::MacedPublicKey,
+    ProtectedData::ProtectedData,
+    RpcHardwareInfo::{RpcHardwareInfo, CURVE_NONE},
+};
+//use android_security_rkpd::aidl::android::security::rkpd::IRegistrar::IRegistrar;
 use anyhow::{anyhow, ensure, Context, Result};
+use binder::{self, ExceptionCode, Interface, Status, StatusCode};
 use cert_request_validator::bcc;
 use coset::{CborSerializable, CoseSign1};
 use foreign_types::ForeignType;
@@ -34,6 +44,24 @@ use rkpvm_ext_bindgen::{
     avf_extension_details, generate_avf_extension, verified_boot_state_UNVERIFIED,
     vm_payload_details, vm_root_of_trust_details,
 };
+use std::ffi::CStr;
+use std::fs::File;
+
+pub static REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME: &str =
+    "android.hardware.security.keymint.IRemotelyProvisionedComponent/avf";
+
+//static RKPD_REGISTRAR_SERVICE_NAME: &str = "rkpd.registrar";
+//        let registrar = wait_for_interface::<dyn IRegistrar>(RKPD_REGISTRAR_SERVICE_NAME)
+//            .with_context(|| format!("Could not find {}", RKPD_REGISTRAR_SERVICE_NAME))?;
+//        let rkp_only = true;
+//        let _registration = registrar
+//            .getRegistration(REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME, rkp_only)
+//            .with_context(|| {
+//                format!(
+//                    "Failed to get registration {}",
+//                    REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME
+//                )
+//            })?;
 
 lazy_static! {
     static ref AVF_EXT_NID: Nid = Nid::create(
@@ -42,6 +70,69 @@ lazy_static! {
         "Android Virtualization Framework Attestation Extension"
     )
     .unwrap_or(Nid::UNDEF);
+}
+
+pub struct Rkpvm {}
+
+impl Rkpvm {
+    pub fn init() -> Self {
+        Self {}
+    }
+}
+
+impl Interface for Rkpvm {
+    fn dump(&self, mut _file: &File, _args: &[&CStr]) -> Result<(), StatusCode> {
+        check_permission("android.permission.DUMP").or(Err(StatusCode::PERMISSION_DENIED))?;
+        // TODO: anything?
+        Ok(())
+    }
+}
+
+impl IRemotelyProvisionedComponent for Rkpvm {
+    fn getHardwareInfo(&self) -> binder::Result<RpcHardwareInfo> {
+        Ok(RpcHardwareInfo {
+            versionNumber: 1,
+            rpcAuthorName: String::from("Android Virtualization Framework"),
+            supportedEekCurve: CURVE_NONE,
+            uniqueId: Some(String::from("Android Virtualization Framework 1")),
+        })
+    }
+
+    fn generateEcdsaP256KeyPair(
+        &self,
+        _test_mode: bool,
+        _maced_public_key: &mut MacedPublicKey,
+    ) -> binder::Result<Vec<u8>> {
+        // TODO: call into VM
+        //   - Ignore test mode from v3
+        //   - Generate a new key
+        //   - mac the key with another key derived from the sealing CDI
+        //   - encrypt the key with a key derived from the sealing CDI
+        Err(Status::new_exception(ExceptionCode::UNSUPPORTED_OPERATION, None))
+    }
+
+    fn generateCertificateRequest(
+        &self,
+        _test_mode: bool,
+        _keys_to_sign: &[MacedPublicKey],
+        _eek: &[u8],
+        _challenge: &[u8],
+        _device_info: &mut DeviceInfo,
+        _protected_data: &mut ProtectedData,
+    ) -> binder::Result<Vec<u8>> {
+        // This methods was deprecated in v3 of the interface.
+        Err(Status::new_service_specific_error(STATUS_REMOVED, None))
+    }
+
+    fn generateCertificateRequestV2(
+        &self,
+        _keys_to_sign: &[MacedPublicKey],
+        _challenge: &[u8],
+    ) -> binder::Result<Vec<u8>> {
+        // TODO: call into VM
+        //   - validate the key macs
+        Err(Status::new_exception(ExceptionCode::UNSUPPORTED_OPERATION, None))
+    }
 }
 
 fn avf_extension(challenge: &[u8]) -> Result<X509Extension> {
