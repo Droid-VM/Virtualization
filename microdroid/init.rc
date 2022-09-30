@@ -177,21 +177,26 @@ on post-fs-data
     mkdir /data/local/tmp 0771 shell shell
 
 service tombstone_transmit /system/bin/tombstone_transmit.microdroid -cid 2 -port 2000 -remove_tombstones_after_transmitting
+    # TODO(b/243633980): check if can run as system
     user root
     group system
     shutdown critical
+    # TODO(b/243633980): remove the capability if tombstone_transmit runs as system
+    capabilities AUDIT_CONTROL
 
 service apexd-vm /system/bin/apexd --vm
     user root
     group system
     oneshot
     disabled
+    capabilities AUDIT_CONTROL CHOWN DAC_OVERRIDE DAC_READ_SEARCH FOWNER SYS_ADMIN
 
 service ueventd /system/bin/ueventd
     class core
     critical
     seclabel u:r:ueventd:s0
     shutdown critical
+    capabilities AUDIT_CONTROL CHOWN DAC_OVERRIDE DAC_READ_SEARCH FOWNER FSETID MKNOD NET_ADMIN SETGID SETUID SYS_MODULE SYS_RAWIO
 
 service console /system/bin/sh
     class core
