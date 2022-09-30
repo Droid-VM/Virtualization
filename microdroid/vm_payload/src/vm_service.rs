@@ -1,0 +1,40 @@
+// Copyright 2022, The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+//! This module handles the interaction with virtual machine service.
+
+use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::{
+    VM_BINDER_SERVICE_PORT, IVirtualMachineService};
+use anyhow::{Context, Result};
+use binder::Strong;
+use rpcbinder::get_vsock_rpc_interface;
+
+/// The CID representing the host VM
+const VMADDR_CID_HOST: u32 = 2;
+
+/// Starts the vsock service (C version).
+#[no_mangle]
+pub extern "C" fn start_vsock_service_c() -> bool {
+    start_vsock_service().is_ok()
+}
+
+/// Starts the vsock service.
+fn start_vsock_service() -> Result<()> {
+    get_vm_service()?.notifyPayloadReady().context("Cannot notify payload ready")
+}
+
+fn get_vm_service() -> Result<Strong<dyn IVirtualMachineService>> {
+    get_vsock_rpc_interface(VMADDR_CID_HOST, VM_BINDER_SERVICE_PORT as u32)
+        .context("Connecting to IVirtualMachineService")
+}
