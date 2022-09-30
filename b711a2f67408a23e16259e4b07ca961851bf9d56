@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c924f8bc_f1ed64ad",
+        "filename": "apex/virtualizationservice.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-30T15:26:04Z",
+      "side": 1,
+      "message": "I\u0027ve assumed that you need to call `getRegistration()` at least once in order for rkpd to start trying to provision keys, please correct me if that\u0027s wrong. I haven\u0027t found the magic set of rules to make that happen yet.\n\nThe best I\u0027ve come up with is having a rule in the system init script to start this service and let it register, but if you\u0027re doing that, why not just hardcode the service name in rkpd?",
+      "revId": "b711a2f67408a23e16259e4b07ca961851bf9d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "918f290d_035bab09",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-09-30T15:26:04Z",
+      "side": 1,
+      "message": "When rkpd starts the registered RPC, the service that implements it connects back to rkpd in order to make sure it\u0027s registered. That works, but the pattern is maybe a little clunky?",
+      "revId": "b711a2f67408a23e16259e4b07ca961851bf9d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
