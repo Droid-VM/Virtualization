@@ -20,7 +20,9 @@
 #include <android-base/properties.h>
 #include <android-base/result.h>
 #include <android/binder_auto_utils.h>
+#include <android/binder_libbinder.h>
 #include <android/binder_manager.h>
+#include <binder/RpcServer.h>
 #include <fcntl.h>
 #include <fsverity_digests.pb.h>
 #include <linux/vm_sockets.h>
@@ -30,14 +32,19 @@
 #include <sys/system_properties.h>
 #include <unistd.h>
 
-#include <binder_rpc_unstable.hpp>
 #include <string>
+
+#include "vmpayload.h"
 
 using aidl::android::hardware::security::dice::BccHandover;
 using aidl::android::security::dice::IDiceNode;
 
 using aidl::android::system::virtualmachineservice::IVirtualMachineService;
 
+using android::OK;
+using android::RpcServer;
+using android::status_t;
+using android::statusToString;
 using android::base::ErrnoError;
 using android::base::Error;
 using android::base::Result;
@@ -131,30 +138,24 @@ Result<void> start_test_service() {
         }
     };
     auto testService = ndk::SharedRefBase::make<TestService>();
+    auto server = RpcServer::make();
+    if (status_t status = server->setupVsockServer(testService->SERVICE_PORT); status != OK) {
+        return Error() << "Failed to set up vsock server with port " << testService->SERVICE_PORT
+                       << " error: " << statusToString(status).c_str();
+    }
+    server->setRootObject(AIBinder_toPlatformBinder(testService->asBinder().get()));
 
-    auto callback = []([[maybe_unused]] void* param) {
-        // Tell microdroid_manager that we're ready.
-        // If we can't, abort in order to fail fast - the host won't proceed without
-        // receiving the onReady signal.
-        ndk::SpAIBinder binder(
-                RpcClient(VMADDR_CID_HOST, IVirtualMachineService::VM_BINDER_SERVICE_PORT));
-        auto virtualMachineService = IVirtualMachineService::fromBinder(binder);
-        if (virtualMachineService == nullptr) {
-            std::cerr << "failed to connect VirtualMachineService\n";
-            abort();
-        }
-        if (auto status = virtualMachineService->notifyPayloadReady(); !status.isOk()) {
-            std::cerr << "failed to notify payload ready to virtualizationservice: "
-                      << status.getDescription() << std::endl;
-            abort();
-        }
-    };
-
-    if (!RunRpcServerCallback(testService->asBinder().get(), testService->SERVICE_PORT, callback,
-                              nullptr)) {
-        return Error() << "RPC Server failed to run";
+    auto vsock_server = setup_vsock_server();
+    if (vsock_server == nullptr) {
+        return Error() << "Cannot setup vsock";
+    }
+    if (!notify_payload_ready(vsock_server)) {
+        return Error() << "Failed to notify payload ready";
     }
 
+    server->join();
+    // Shutdown any open sessions since server failed.
+    (void)server->shutdown();
     return {};
 }
 
