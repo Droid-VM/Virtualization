@@ -18,6 +18,7 @@ rust_ffi_static {
 cc_binary {
     name: "pvmfw",
     defaults: ["vmbase_elf_defaults"],
+    installable: true,
     srcs: [
         "idmap.S",
     ],
