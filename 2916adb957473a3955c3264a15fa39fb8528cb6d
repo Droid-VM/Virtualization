@@ -63,6 +63,30 @@
       },
       "revId": "2916adb957473a3955c3264a15fa39fb8528cb6d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81f2cc4d_54ccc465",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-30T11:33:48Z",
+      "side": 1,
+      "message": "OK, so I went for a map, so it\u0027s easy to add more things later.\n\nI\u0027ve removed export_tombstone; we\u0027re going to handle that separately (see chat). So currently it\u0027s a very small map, but that\u0027s ok.",
+      "parentUuid": "0604312c_fc1413b4",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 46
+      },
+      "revId": "2916adb957473a3955c3264a15fa39fb8528cb6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
