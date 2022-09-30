@@ -46,6 +46,7 @@ class BenchmarkVmListener extends VmEventListener {
 
     @Override
     public final void onPayloadReady(VirtualMachine vm) {
+        Log.i(TAG, "Starting onPayloadReady()...");
         try {
             IBenchmarkService benchmarkService =
                     IBenchmarkService.Stub.asInterface(

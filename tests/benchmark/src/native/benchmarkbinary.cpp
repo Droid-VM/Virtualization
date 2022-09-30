@@ -27,12 +27,12 @@
 #include <time.h>
 #include <unistd.h>
 
-#include <binder_rpc_unstable.hpp>
 #include <fstream>
 #include <random>
 #include <string>
 
 #include "io_vsock.h"
+#include "vmpayload.h"
 
 using aidl::android::system::virtualmachineservice::IVirtualMachineService;
 using android::base::ErrnoError;
@@ -154,31 +154,9 @@ private:
     }
 };
 
-Result<void> run_io_benchmark_tests() {
+void add_io_benchmark_service_to_vms() {
     auto test_service = ndk::SharedRefBase::make<IOBenchmarkService>();
-    auto callback = []([[maybe_unused]] void* param) {
-        // Tell microdroid_manager that we're ready.
-        // If we can't, abort in order to fail fast - the host won't proceed without
-        // receiving the onReady signal.
-        ndk::SpAIBinder binder(
-                RpcClient(VMADDR_CID_HOST, IVirtualMachineService::VM_BINDER_SERVICE_PORT));
-        auto vm_service = IVirtualMachineService::fromBinder(binder);
-        if (vm_service == nullptr) {
-            LOG(ERROR) << "failed to connect VirtualMachineService\n";
-            abort();
-        }
-        if (auto status = vm_service->notifyPayloadReady(); !status.isOk()) {
-            LOG(ERROR) << "failed to notify payload ready to virtualizationservice: "
-                       << status.getDescription();
-            abort();
-        }
-    };
-
-    if (!RunRpcServerCallback(test_service->asBinder().get(), test_service->SERVICE_PORT, callback,
-                              nullptr)) {
-        return Error() << "RPC Server failed to run";
-    }
-    return {};
+    add_service_to_vms(test_service->asBinder().get(), test_service->SERVICE_PORT);
 }
 } // Anonymous namespace
 
@@ -189,10 +167,7 @@ extern "C" int android_native_main([[maybe_unused]] int argc, char* argv[]) {
             sleep(1000);
         }
     } else if (strcmp(argv[1], "io") == 0) {
-        if (auto res = run_io_benchmark_tests(); !res.ok()) {
-            LOG(ERROR) << "IO benchmark test failed: " << res.error() << "\n";
-            return EXIT_FAILURE;
-        }
+        add_io_benchmark_service_to_vms();
     }
     return EXIT_SUCCESS;
 }
