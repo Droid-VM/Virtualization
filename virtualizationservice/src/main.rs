@@ -23,10 +23,11 @@ mod rkpvm;
 mod selinux;
 
 use crate::aidl::{VirtualizationService, BINDER_SERVICE_IDENTIFIER, TEMPORARY_DIRECTORY};
+use crate::rkpvm::{Rkpvm, REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME};
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualizationService::BnVirtualizationService;
-use binder::{register_lazy_service, BinderFeatures, ProcessState};
+use binder::{register_lazy_service, BinderFeatures, ProcessState, Interface};
 use anyhow::Error;
-use log::{info, Level};
+use log::{info, warn, Level};
 use std::fs::{remove_dir_all, remove_file, read_dir};
 
 /// The first CID to assign to a guest VM managed by the VirtualizationService. CIDs lower than this
@@ -56,6 +57,16 @@ fn main() {
         BinderFeatures { set_requesting_sid: true, ..BinderFeatures::default() },
     );
     register_lazy_service(BINDER_SERVICE_IDENTIFIER, service.as_binder()).unwrap();
+
+    //let rkpvm = Rkpvm::init();
+    if let Ok(rkpvm) = Rkpvm::init() {
+        register_lazy_service(REMOTELY_PROVISIONED_COMPONENT_SERVICE_NAME, rkpvm.as_binder())
+            .unwrap();
+        warn!("rkpd bit setup");
+    } else {
+        warn!("Failed to register rkpvm");
+    }
+
     info!("Registered Binder service, joining threadpool.");
     ProcessState::join_thread_pool();
 }
