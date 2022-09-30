@@ -87,6 +87,30 @@
       },
       "revId": "c47636b26f7f0f6ac25e57d2b11836cf9966d214",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fd1f48d_9dfeba52",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1899280
+      },
+      "writtenOn": "2022-09-30T12:30:16Z",
+      "side": 1,
+      "message": "sorry I am a little confuse\n\nparseMemoryInfo() will be called from below 3 functions\n- getProcessSmaps(), the entries size might be 0 to many \n- getProcessSmapsRollup(), the entries size might be 0 to 1. I am not sure if it will be 0 but here I think can keep original logic\n- getProcessMemoryMap(), originally in https://r.android.com/c/2238533/3 I assume the size is 0 to 1, but I think only 1 is possible so I check if size !\u003d 1 in this patch\n\nI think cannot check entries.size() \u003e 1 anyway in parseMemoryInfo() because getProcessSmaps() might be 0 to many \n\nPlease guide me if anything I misunderstand",
+      "parentUuid": "5199efce_fde561dc",
+      "range": {
+        "startLine": 92,
+        "startChar": 64,
+        "endLine": 92,
+        "endChar": 89
+      },
+      "revId": "c47636b26f7f0f6ac25e57d2b11836cf9966d214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
