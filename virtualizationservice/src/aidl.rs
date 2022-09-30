@@ -696,7 +696,7 @@ fn get_calling_sid() -> Result<String, Status> {
 }
 
 /// Checks whether the caller has a specific permission
-fn check_permission(perm: &str) -> binder::Result<()> {
+pub fn check_permission(perm: &str) -> binder::Result<()> {
     let calling_pid = ThreadState::get_calling_pid();
     let calling_uid = ThreadState::get_calling_uid();
     // Root can do anything
