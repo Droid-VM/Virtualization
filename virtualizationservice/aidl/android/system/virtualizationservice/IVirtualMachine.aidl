@@ -43,4 +43,7 @@ interface IVirtualMachine {
 
     /** Open a vsock connection to the CID of the VM on the given port. */
     ParcelFileDescriptor connectVsock(int port);
+
+    /** Connects to an RPC Binder server over vsock on the given port. */
+    @nullable IBinder getVsockRpcService(int port);
 }

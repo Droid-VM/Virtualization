@@ -45,7 +45,7 @@ use android_system_virtualmachineservice::aidl::android::system::virtualmachines
 };
 use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon::ErrorCode::ErrorCode;
 use anyhow::{anyhow, bail, Context, Result};
-use rpcbinder::run_rpc_server_with_factory;
+use rpcbinder::{get_vsock_rpc_service, run_rpc_server_with_factory};
 use disk::QcowFile;
 use apkverify::{HashAlgorithm, V4Signature};
 use log::{debug, error, info, warn};
@@ -831,6 +831,13 @@ impl IVirtualMachine for VirtualMachine {
                 )
             })?;
         Ok(vsock_stream_to_pfd(stream))
+    }
+
+    fn getVsockRpcService(&self, port: i32) -> binder::Result<Option<SpIBinder>> {
+        if !matches!(&*self.instance.vm_state.lock().unwrap(), VmState::Running { .. }) {
+            return Err(Status::new_service_specific_error_str(-1, Some("VM is not running")));
+        }
+        Ok(get_vsock_rpc_service(self.instance.cid, port as u32))
     }
 }
 

@@ -660,8 +660,19 @@ public class VirtualMachine {
         if (getStatus() != Status.RUNNING) {
             throw new VirtualMachineException("VM is not running");
         }
-        return mExecutorService.submit(
-                () -> nativeConnectToVsockServer(mVirtualMachine.asBinder(), port));
+        return mExecutorService.submit(() -> getVsockRpcService(port));
+    }
+
+    private IBinder getVsockRpcService(int port) {
+        try {
+            IBinder binder = mVirtualMachine.getVsockRpcService(port);
+            if (binder == null) {
+                throw new IllegalArgumentException("RPC Binder is null on port: " + port);
+            }
+            return binder;
+        } catch (RemoteException e) {
+            throw new RuntimeException("failed to connect Vsock: ", e);
+        }
     }
 
     /**
