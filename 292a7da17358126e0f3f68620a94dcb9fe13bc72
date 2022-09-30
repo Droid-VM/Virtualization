@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ade6580d_807b6663",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-30T14:41:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "aa5a116e_fa898218",
+      "range": {
+        "startLine": 27,
+        "startChar": 37,
+        "endLine": 27,
+        "endChar": 39
+      },
+      "revId": "292a7da17358126e0f3f68620a94dcb9fe13bc72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67d6ffb4_3e64e6c3",
@@ -229,6 +253,30 @@
       "side": 1,
       "message": "\u003e No, the worry is that the MMIO guard becomes useless.\n\nBlindly issuing the HVC does that, yes, but I didn\u0027t pretend otherwise as this pvmfw isn\u0027t supposed to be secure anyway, it only tries to replace the U-Boot one from a functional PoV. In fact, it doesn\u0027t verify the image and even leaves its own secrets behind for the guest to read.\n\nOTOH, validating the HVC target based on pre-existing PTEs does make sense (as long as the mappings can be trusted), irrespective of whether the calls are issued from handlers or not and it sounds like we\u0027re mixing up 2 different questions: the code in this CL isn\u0027t unsecure because it issues the HVC from a handler, it is because it doesn\u0027t validate the target.\n\n\n\u003e With that you can only map\u0026share the smallest number of pages needed after discovering the devices. Principle of least privilege.\n\nAgreed; and that makes much more sense (although slightly more expensive in RAM \u0026 TLBs) than a hard-coded 1GiB mapping. However it doesn\u0027t really address the issue you raised earlier of \"putting a tighter bound on our MMIO mappings\" as we\u0027ve now moved the problem from \"should we share this page?\" to \"should we map this page?\" (which will come naturally once we validate the input DT) and isn\u0027t really an argument against doing the sharing \"on-demand\".\n\n\n\u003e You could completely remove the build-time device mapping\n\nI\u0027m not sure what this brings us given that the UART isn\u0027t discovered anyway (it\u0027s hard-coded in `vmbase`)?",
       "parentUuid": "a191250d_fb926e2a",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 61
+      },
+      "revId": "292a7da17358126e0f3f68620a94dcb9fe13bc72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cd0171e_2077b3fb",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-09-30T14:41:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0e6d5bc5_bb2074db",
       "range": {
         "startLine": 29,
         "startChar": 0,
