@@ -16,6 +16,29 @@
       "message": "hi Alice, Jiyong\n\nSorry I uncarefully lost aosp/2238533 commit abb150d6a219af67607c84ee0e05c135c7e2aefb in local and no idea how to rescue\n\nSo I create this new cl to continue the review. Many thanks",
       "revId": "c47636b26f7f0f6ac25e57d2b11836cf9966d214",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bd0f361_f89027d2",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-09-30T08:04:12Z",
+      "side": 1,
+      "message": "Do we really need this param here? We can just do the check for both cases as it was done before.\n\nIt\u0027s better to get the test code simpler without unnecessary conditional branches.",
+      "range": {
+        "startLine": 92,
+        "startChar": 64,
+        "endLine": 92,
+        "endChar": 89
+      },
+      "revId": "c47636b26f7f0f6ac25e57d2b11836cf9966d214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
