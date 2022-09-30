@@ -16,6 +16,93 @@
       "message": "Hi Alan, could you take a look whether this corresponds to what we have discussed this morning?",
       "revId": "7e659953f0f72e918199ab5aa7e9e65eb7634609",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f453eb8c_0505b34c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-30T15:19:43Z",
+      "side": 1,
+      "message": "Yeah, this looks like it\u0027s along the right lines",
+      "parentUuid": "001f97d6_29bfd0bb",
+      "revId": "7e659953f0f72e918199ab5aa7e9e65eb7634609",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37fb7e5b_fb4aa059",
+        "filename": "microdroid/vmpayload/include/vmpayload.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-30T15:19:43Z",
+      "side": 1,
+      "message": "Nit: need to put this inside #if C++",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 12
+      },
+      "revId": "7e659953f0f72e918199ab5aa7e9e65eb7634609",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c92959f_6b4ec562",
+        "filename": "microdroid/vmpayload/include/vmpayload.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-30T15:19:43Z",
+      "side": 1,
+      "message": "We should probably make the latter a separate method call.\nPartly on general principle (one function should do one thing), but also because the payload might want to expose multiple binder services, or a raw listening vsock, before it notifies it is ready.",
+      "range": {
+        "startLine": 24,
+        "startChar": 64,
+        "endLine": 24,
+        "endChar": 90
+      },
+      "revId": "7e659953f0f72e918199ab5aa7e9e65eb7634609",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "180d85da_6d66f817",
+        "filename": "microdroid/vmpayload/include/vmpayload.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-30T15:19:43Z",
+      "side": 1,
+      "message": "Name bike-shedding:\n\nWhat\u0027s vms ?\nIdeally this name would relate to connectToVsockServer over in the host.\nstart_vsock_service ?\n\nDoes this method return? If not (if it blocks the thread waiting for connections) we should document that, and probably call it run_vsock_service or something similar.\n\nHow do we signal failure?",
+      "range": {
+        "startLine": 25,
+        "startChar": 5,
+        "endLine": 25,
+        "endChar": 23
+      },
+      "revId": "7e659953f0f72e918199ab5aa7e9e65eb7634609",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
