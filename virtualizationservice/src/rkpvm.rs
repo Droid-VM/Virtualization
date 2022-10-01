@@ -18,16 +18,65 @@
 //!
 //! TODO: the logic should all move into an actual VM,
 
-use anyhow::{anyhow, Context, Result};
+use anyhow::{anyhow, ensure, Context, Result};
 use cert_request_validator::bcc;
 use coset::{CborSerializable, CoseSign1};
+use foreign_types::ForeignType;
+use lazy_static::lazy_static;
 use log::debug;
 use openssl::asn1::{Asn1Integer, Asn1Time};
 use openssl::bn::BigNum;
 use openssl::nid::Nid;
 use openssl::pkey::{PKey, Public};
 use openssl::x509::extension::KeyUsage;
-use openssl::x509::{X509Name, X509};
+use openssl::x509::{X509Extension, X509Name, X509};
+use rkpvm_ext_bindgen::{
+    avf_extension_details, generate_avf_extension, verified_boot_state_UNVERIFIED,
+    vm_payload_details, vm_root_of_trust_details,
+};
+
+lazy_static! {
+    static ref AVF_EXT_NID: Nid = Nid::create(
+        "1.3.6.1.4.1.11129.2.1.29",
+        "avfAttestationExt",
+        "Android Virtualization Framework Attestation Extension"
+    )
+    .unwrap_or(Nid::UNDEF);
+}
+
+fn avf_extension(challenge: &[u8]) -> Result<X509Extension> {
+    ensure!(*AVF_EXT_NID != Nid::UNDEF, "AVF attestation NID not allocated");
+    // TODO: marshal all of the details
+    let details = avf_extension_details {
+        nid: AVF_EXT_NID.as_raw(),
+        challenge: challenge.as_ptr(),
+        challenge_size: challenge.len(),
+        vm_root_of_trust: vm_root_of_trust_details {
+            verified_boot_key: std::ptr::null(),
+            verified_boot_key_size: 0,
+            verified_boot_state: verified_boot_state_UNVERIFIED,
+            device_unlocked: true,
+            debuggable: true,
+        },
+        vm_payload: vm_payload_details {
+            authority: std::ptr::null(),
+            authority_size: 0,
+            digest: std::ptr::null(),
+            digest_size: 0,
+            binary_path: std::ptr::null(),
+            binary_path_size: 0,
+        },
+    };
+    // SAFETY: The extension generationg code only uses the details as inputs and does not keep any
+    // pointers to the details after returning. If the returned pointer is non-null, the ownership
+    // is transferred to the caller.
+    let ptr = unsafe { generate_avf_extension(&details) };
+    ensure!(!ptr.is_null(), "Failed to make extension");
+    // SAFETY: The pointer is an owned allocation that only differs in type due to coming from a
+    // different bindgen, both are boringssl X509_Extension pointers. The X509Extension will ensure
+    // the pointer is freed when it is no longer in use.
+    Ok(unsafe { X509Extension::from_ptr(std::mem::transmute(ptr)) })
+}
 
 fn sign_key(vm_key: PKey<Public>, challenge: &[u8]) -> Result<Vec<u8>> {
     // TODO: get the RKP provisioend key from rkpd
@@ -59,8 +108,7 @@ fn sign_key(vm_key: PKey<Public>, challenge: &[u8]) -> Result<Vec<u8>> {
     builder.set_not_after(Asn1Time::days_from_now(30)?.as_ref())?;
     builder.set_pubkey(&vm_key)?;
     builder.append_extension(KeyUsage::new().digital_signature().build()?)?;
-    // TODO: add AVF extension 1.3.6.1.4.1.11129.2.1.29
-    let _ = challenge;
+    builder.append_extension(avf_extension(challenge)?)?;
 
     // HACK: sign with a random key, not the RKP provisioned key
     let fake_key = PKey::generate_ed25519()?;
