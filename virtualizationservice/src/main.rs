@@ -14,6 +14,9 @@
 
 //! Android VirtualizationService
 
+// TODO(b/245727626) - remove after split from virtmgr
+#![allow(dead_code)]
+
 mod aidl;
 mod atom;
 mod composite;

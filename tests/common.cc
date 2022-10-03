@@ -31,7 +31,7 @@ bool isVmSupported() {
     }
     const std::array<const char *, 2> needed_files = {
             "/apex/com.android.virt/bin/crosvm",
-            "/apex/com.android.virt/bin/virtualizationservice",
+            "/apex/com.android.virt/bin/virtmgr",
     };
     return std::all_of(needed_files.begin(), needed_files.end(),
                        [](const char *file) { return access(file, F_OK) == 0; });
