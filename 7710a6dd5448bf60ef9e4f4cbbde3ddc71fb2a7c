@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "142f26d5_c2b9efa9",
+        "filename": "tests/testapk/src/native/testbinary.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-03T16:34:11Z",
+      "side": 0,
+      "message": "I think the abort() calls here are important, to make sure the host doesn\u0027t just block waiting for a notification that will never arrive.\nUnless something does an abort() if we return an error here? I don\u0027t think otherwise any error gets sent back to the host.",
+      "range": {
+        "startLine": 144,
+        "startChar": 12,
+        "endLine": 144,
+        "endChar": 19
+      },
+      "revId": "7710a6dd5448bf60ef9e4f4cbbde3ddc71fb2a7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
