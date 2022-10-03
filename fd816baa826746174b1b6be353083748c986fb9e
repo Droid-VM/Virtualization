@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5632cfd6_dcbd7af9",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-03T16:11:14Z",
+      "side": 1,
+      "message": "Do all of these things really need AUDIT_CONTROL?\nThey\u0027re allowed it by the policy, but that\u0027s essentially a mistake which we\u0027ll try to fix.",
+      "range": {
+        "startLine": 192,
+        "startChar": 17,
+        "endLine": 192,
+        "endChar": 30
+      },
+      "revId": "fd816baa826746174b1b6be353083748c986fb9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c75f6dbc_96380fd5",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-03T16:11:14Z",
+      "side": 1,
+      "message": "The need for these is partially documented in the sepolicy files.\nI have a vague suspicion we could remove some of these for microdroid, since apexd inside the VM doesn\u0027t do all the things apexd outside the VM.\nBut that\u0027s a separate problem.",
+      "range": {
+        "startLine": 192,
+        "startChar": 31,
+        "endLine": 192,
+        "endChar": 82
+      },
+      "revId": "fd816baa826746174b1b6be353083748c986fb9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f643cf16_8d067cc1",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-03T16:11:14Z",
+      "side": 1,
+      "message": "Oh wow.",
+      "range": {
+        "startLine": 199,
+        "startChar": 17,
+        "endLine": 199,
+        "endChar": 130
+      },
+      "revId": "fd816baa826746174b1b6be353083748c986fb9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
