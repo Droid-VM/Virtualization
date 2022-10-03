@@ -36,6 +36,7 @@ apex {
         arm64: {
             binaries: [
                 "crosvm",
+                "virtmgr",
                 "virtualizationservice",
             ],
             filesystems: microdroid_filesystem_images,
@@ -43,6 +44,7 @@ apex {
         x86_64: {
             binaries: [
                 "crosvm",
+                "virtmgr",
                 "virtualizationservice",
             ],
             filesystems: microdroid_filesystem_images,
