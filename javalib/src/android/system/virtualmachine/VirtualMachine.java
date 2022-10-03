@@ -48,6 +48,7 @@ import android.annotation.IntDef;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.annotation.RequiresPermission;
+import android.annotation.SystemApi;
 import android.content.Context;
 import android.os.Binder;
 import android.os.IBinder;
@@ -94,14 +95,15 @@ import java.util.zip.ZipFile;
 /**
  * Represents an VM instance, with its own configuration and state. Instances are persistent and are
  * created or retrieved via {@link VirtualMachineManager}.
- * <p>
- * The {@link #run} method actually starts up the VM and allows the payload code to execute. It
- * will continue until it exits or {@link #stop} is called. Updates on the state of the VM can
- * be received using {@link #setCallback}. The app can communicate with the VM using
- * {@link #connectToVsockServer} or {@link #connectVsock}.
+ *
+ * <p>The {@link #run} method actually starts up the VM and allows the payload code to execute. It
+ * will continue until it exits or {@link #stop} is called. Updates on the state of the VM can be
+ * received using {@link #setCallback}. The app can communicate with the VM using {@link
+ * #connectToVsockServer} or {@link #connectVsock}.
  *
  * @hide
  */
+@SystemApi
 public class VirtualMachine implements AutoCloseable {
     /** Name of the directory under the files directory where all VMs created for the app exist. */
     private static final String VM_DIR = "vm";
@@ -425,6 +427,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public String getName() {
         return mName;
@@ -439,6 +442,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public VirtualMachineConfig getConfig() {
         synchronized (mLock) {
@@ -451,6 +455,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     @Status
     public int getStatus() {
         IVirtualMachine virtualMachine;
@@ -525,7 +530,9 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
-    public void setCallback(@NonNull @CallbackExecutor Executor executor,
+    @SystemApi
+    public void setCallback(
+            @NonNull @CallbackExecutor Executor executor,
             @NonNull VirtualMachineCallback callback) {
         synchronized (mCallbackLock) {
             mCallback = callback;
@@ -538,6 +545,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     public void clearCallback() {
         synchronized (mCallbackLock) {
             mCallback = null;
@@ -571,9 +579,10 @@ public class VirtualMachine implements AutoCloseable {
      * calling {@code run()}.
      *
      * @throws VirtualMachineException if the virtual machine is not stopped or could not be
-     *         started.
+     *     started.
      * @hide
      */
+    @SystemApi
     @RequiresPermission(MANAGE_VIRTUAL_MACHINE_PERMISSION)
     public void run() throws VirtualMachineException {
         synchronized (mLock) {
@@ -717,6 +726,7 @@ public class VirtualMachine implements AutoCloseable {
      * @throws VirtualMachineException if the stream could not be created.
      * @hide
      */
+    @SystemApi
     @NonNull
     public InputStream getConsoleOutput() throws VirtualMachineException {
         synchronized (mLock) {
@@ -731,6 +741,7 @@ public class VirtualMachine implements AutoCloseable {
      * @throws VirtualMachineException if the stream could not be created.
      * @hide
      */
+    @SystemApi
     @NonNull
     public InputStream getLogOutput() throws VirtualMachineException {
         synchronized (mLock) {
@@ -742,12 +753,12 @@ public class VirtualMachine implements AutoCloseable {
     /**
      * Stops this virtual machine. Stopping a virtual machine is like pulling the plug on a real
      * computer; the machine halts immediately. Software running on the virtual machine is not
-     * notified of the event. A stopped virtual machine can be re-started by calling {@link
-     * #run()}.
+     * notified of the event. A stopped virtual machine can be re-started by calling {@link #run()}.
      *
      * @throws VirtualMachineException if the virtual machine could not be stopped.
      * @hide
      */
+    @SystemApi
     public void stop() throws VirtualMachineException {
         synchronized (mLock) {
             if (mVirtualMachine == null) {
@@ -770,6 +781,7 @@ public class VirtualMachine implements AutoCloseable {
      * @throws VirtualMachineException if the virtual machine could not be stopped.
      * @hide
      */
+    @SystemApi
     @Override
     public void close() throws VirtualMachineException {
         stop();
@@ -802,6 +814,7 @@ public class VirtualMachine implements AutoCloseable {
      * @throws VirtualMachineException if the virtual machine is not running.
      * @hide
      */
+    @SystemApi
     public int getCid() throws VirtualMachineException {
         synchronized (mLock) {
             try {
@@ -817,14 +830,15 @@ public class VirtualMachine implements AutoCloseable {
      * like the number of CPU and size of the RAM, depending on the situation (e.g. the size of the
      * application to run on the virtual machine, etc.)
      *
-     * The new config must be {@link VirtualMachineConfig#isCompatibleWith compatible with} the
+     * <p>The new config must be {@link VirtualMachineConfig#isCompatibleWith compatible with} the
      * existing config.
      *
      * @return the old config
      * @throws VirtualMachineException if the virtual machine is not stopped, or the new config is
-     *         incompatible.
+     *     incompatible.
      * @hide
      */
+    @SystemApi
     @NonNull
     public VirtualMachineConfig setConfig(@NonNull VirtualMachineConfig newConfig)
             throws VirtualMachineException {
@@ -846,13 +860,14 @@ public class VirtualMachine implements AutoCloseable {
     /**
      * Connect to a VM's binder service via vsock and return the root IBinder object. Guest VMs are
      * expected to set up vsock servers in their payload. After the host app receives the {@link
-     * VirtualMachineCallback#onPayloadReady(VirtualMachine)}, it can use this method to
-     * establish a connection to the guest VM.
+     * VirtualMachineCallback#onPayloadReady(VirtualMachine)}, it can use this method to establish a
+     * connection to the guest VM.
      *
      * @throws VirtualMachineException if the virtual machine is not running or the connection
-     *         failed.
+     *     failed.
      * @hide
      */
+    @SystemApi
     @NonNull
     public IBinder connectToVsockServer(int port) throws VirtualMachineException {
         synchronized (mLock) {
@@ -870,6 +885,7 @@ public class VirtualMachine implements AutoCloseable {
      * @throws VirtualMachineException if connecting fails.
      * @hide
      */
+    @SystemApi
     @NonNull
     public ParcelFileDescriptor connectVsock(int port) throws VirtualMachineException {
         synchronized (mLock) {
@@ -892,6 +908,7 @@ public class VirtualMachine implements AutoCloseable {
      *     be captured.
      * @hide
      */
+    @SystemApi
     @NonNull
     public VirtualMachineDescriptor toDescriptor() throws VirtualMachineException {
         synchronized (mLock) {
