@@ -20,6 +20,7 @@ import android.annotation.IntDef;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.annotation.SuppressLint;
+import android.annotation.SystemApi;
 import android.os.ParcelFileDescriptor;
 
 import java.lang.annotation.Retention;
@@ -31,6 +32,7 @@ import java.lang.annotation.RetentionPolicy;
  *
  * @hide
  */
+@SystemApi
 @SuppressLint("CallbackInterface")  // Guidance has changed, lint is out of date (b/245552641)
 public interface VirtualMachineCallback {
     /** @hide */

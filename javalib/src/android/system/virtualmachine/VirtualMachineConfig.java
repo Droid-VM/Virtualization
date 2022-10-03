@@ -22,6 +22,7 @@ import static java.util.Objects.requireNonNull;
 
 import android.annotation.IntDef;
 import android.annotation.NonNull;
+import android.annotation.SystemApi;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.PackageInfoFlags;
@@ -49,6 +50,7 @@ import java.util.List;
  *
  * @hide
  */
+@SystemApi
 public final class VirtualMachineConfig {
     // These defines the schema of the config file persisted on disk.
     private static final int VERSION = 1;
@@ -80,6 +82,7 @@ public final class VirtualMachineConfig {
      *
      * @hide
      */
+    @SystemApi
     public static final int DEBUG_LEVEL_NONE = 0;
 
     /**
@@ -88,6 +91,7 @@ public final class VirtualMachineConfig {
      *
      * @hide
      */
+    @SystemApi
     public static final int DEBUG_LEVEL_APP_ONLY = 1;
 
     /**
@@ -96,6 +100,7 @@ public final class VirtualMachineConfig {
      *
      * @hide
      */
+    @SystemApi
     public static final int DEBUG_LEVEL_FULL = 2;
 
     @DebugLevel private final int mDebugLevel;
@@ -201,6 +206,7 @@ public final class VirtualMachineConfig {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public String getPayloadConfigPath() {
         return mPayloadConfigPath;
@@ -211,6 +217,7 @@ public final class VirtualMachineConfig {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     @DebugLevel
     public int getDebugLevel() {
@@ -222,6 +229,7 @@ public final class VirtualMachineConfig {
      *
      * @hide
      */
+    @SystemApi
     public boolean isProtectedVm() {
         return mProtectedVm;
     }
@@ -231,6 +239,7 @@ public final class VirtualMachineConfig {
      *
      * @hide
      */
+    @SystemApi
     public int getMemoryMib() {
         return mMemoryMib;
     }
@@ -240,6 +249,7 @@ public final class VirtualMachineConfig {
      *
      * @hide
      */
+    @SystemApi
     public int getNumCpus() {
         return mNumCpus;
     }
@@ -253,6 +263,7 @@ public final class VirtualMachineConfig {
      *
      * @hide
      */
+    @SystemApi
     public boolean isCompatibleWith(@NonNull VirtualMachineConfig other) {
         if (!Arrays.equals(this.mCerts, other.mCerts)) {
             return false;
@@ -302,6 +313,7 @@ public final class VirtualMachineConfig {
      *
      * @hide
      */
+    @SystemApi
     public static final class Builder {
         private final Context mContext;
         private final String mPayloadConfigPath;
@@ -315,6 +327,7 @@ public final class VirtualMachineConfig {
          *
          * @hide
          */
+        @SystemApi
         public Builder(@NonNull Context context, @NonNull String payloadConfigPath) {
             mContext = requireNonNull(context, "context must not be null");
             mPayloadConfigPath = requireNonNull(payloadConfigPath,
@@ -329,6 +342,7 @@ public final class VirtualMachineConfig {
          *
          * @hide
          */
+        @SystemApi
         @NonNull
         public Builder setDebugLevel(@DebugLevel int debugLevel) {
             mDebugLevel = debugLevel;
@@ -340,6 +354,7 @@ public final class VirtualMachineConfig {
          *
          * @hide
          */
+        @SystemApi
         @NonNull
         public Builder setProtectedVm(boolean protectedVm) {
             mProtectedVm = protectedVm;
@@ -352,6 +367,7 @@ public final class VirtualMachineConfig {
          *
          * @hide
          */
+        @SystemApi
         @NonNull
         public Builder setMemoryMib(int memoryMib) {
             mMemoryMib = memoryMib;
@@ -363,6 +379,7 @@ public final class VirtualMachineConfig {
          *
          * @hide
          */
+        @SystemApi
         @NonNull
         public Builder setNumCpus(int num) {
             mNumCpus = num;
@@ -374,6 +391,7 @@ public final class VirtualMachineConfig {
          *
          * @hide
          */
+        @SystemApi
         @NonNull
         public VirtualMachineConfig build() {
             final String apkPath = mContext.getPackageCodePath();

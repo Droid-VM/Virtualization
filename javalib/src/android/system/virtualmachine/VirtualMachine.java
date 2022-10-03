@@ -47,6 +47,7 @@ import android.annotation.IntDef;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.annotation.RequiresPermission;
+import android.annotation.SystemApi;
 import android.content.Context;
 import android.os.Binder;
 import android.os.IBinder;
@@ -94,6 +95,7 @@ import java.util.zip.ZipFile;
  *
  * @hide
  */
+@SystemApi
 public class VirtualMachine implements AutoCloseable {
     private static final Map<Context, Map<String, WeakReference<VirtualMachine>>> sInstances =
             new WeakHashMap<>();
@@ -345,6 +347,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public String getName() {
         return mName;
@@ -359,6 +362,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public VirtualMachineConfig getConfig() {
         return mConfig;
@@ -369,6 +373,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     @Status
     public int getStatus() throws VirtualMachineException {
         try {
@@ -400,6 +405,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     public void setCallback(@NonNull @CallbackExecutor Executor executor,
             @NonNull VirtualMachineCallback callback) {
         synchronized (mLock) {
@@ -413,6 +419,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     public void clearCallback() {
         synchronized (mLock) {
             mCallback = null;
@@ -446,6 +453,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     @RequiresPermission(MANAGE_PERMISSION)
     public void run() throws VirtualMachineException {
         if (getStatus() != STATUS_STOPPED) {
@@ -626,6 +634,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public InputStream getConsoleOutputStream() throws VirtualMachineException {
         if (mConsoleReader == null) {
@@ -639,6 +648,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public InputStream getLogOutputStream() throws VirtualMachineException {
         if (mLogReader == null) {
@@ -655,6 +665,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     public void stop() throws VirtualMachineException {
         if (mVirtualMachine == null) return;
         try {
@@ -670,6 +681,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     @Override
     public void close() throws VirtualMachineException {
         stop();
@@ -683,6 +695,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     public void delete() throws VirtualMachineException {
         if (getStatus() != STATUS_STOPPED) {
             throw new VirtualMachineException("Virtual machine is not stopped");
@@ -707,6 +720,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public Optional<Integer> getCid() throws VirtualMachineException {
         if (getStatus() != STATUS_RUNNING) {
@@ -732,6 +746,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public VirtualMachineConfig setConfig(@NonNull VirtualMachineConfig newConfig)
             throws VirtualMachineException {
@@ -766,6 +781,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public IBinder connectToVsockServer(int port) throws VirtualMachineException {
         if (getStatus() != STATUS_RUNNING) {
@@ -779,6 +795,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public ParcelFileDescriptor connectVsock(int port) throws VirtualMachineException {
         try {
