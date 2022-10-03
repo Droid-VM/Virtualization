@@ -36,6 +36,8 @@ use itertools::sorted;
 use log::{error, info};
 use microdroid_metadata::{write_metadata, Metadata, PayloadMetadata};
 use microdroid_payload_config::{Task, TaskType, VmPayloadConfig, OsConfig};
+use nix::sys::wait::{waitpid, WaitStatus};
+use nix::unistd::{fork, ForkResult};
 use openssl::sha::Sha512;
 use payload::{get_apex_data_from_payload, load_metadata, to_metadata};
 use rand::Fill;
@@ -698,6 +700,27 @@ fn exec_task(task: &Task, service: &Strong<dyn IVirtualMachineService>) -> Resul
     info!("notifying payload started");
     service.notifyPayloadStarted()?;
 
+    match unsafe { fork() } {
+        Ok(ForkResult::Parent { child, .. }) => {
+            let status = waitpid(child, None).expect("Failed while waiting for child.");
+            match status {
+                WaitStatus::Exited(_pid, c) => {
+                    return Ok(c)
+                }
+                status => {
+                    bail!("Child did not exit as expected {:?}", status)
+                }
+            }
+        }
+        Ok(ForkResult::Child) => {
+            // TODO(ioffe): drop capabilities here
+            // TODO(ioffe): this should be just execv?
+            command.spawn()?.wait()?;
+        }
+        Err(errno) => {
+            bail!("Failed to fork: {:?}", errno);
+        }
+    }
     let exit_status = command.spawn()?.wait()?;
     exit_status.code().ok_or_else(|| anyhow!("Failed to get exit_code from the paylaod."))
 }
