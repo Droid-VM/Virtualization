@@ -48,6 +48,7 @@ import android.annotation.IntDef;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.annotation.RequiresPermission;
+import android.annotation.SystemApi;
 import android.content.Context;
 import android.os.Binder;
 import android.os.IBinder;
@@ -106,6 +107,7 @@ import java.util.zip.ZipFile;
  *
  * @hide
  */
+@SystemApi
 public class VirtualMachine implements AutoCloseable {
     /** Map from context to a map of all that context's VMs by name. */
     @GuardedBy("sCreateLock")
@@ -469,6 +471,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public String getName() {
         return mName;
@@ -483,6 +486,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     public VirtualMachineConfig getConfig() {
         synchronized (mLock) {
@@ -495,6 +499,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     @Status
     public int getStatus() {
         IVirtualMachine virtualMachine;
@@ -569,6 +574,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     public void setCallback(@NonNull @CallbackExecutor Executor executor,
             @NonNull VirtualMachineCallback callback) {
         synchronized (mCallbackLock) {
@@ -582,6 +588,7 @@ public class VirtualMachine implements AutoCloseable {
      *
      * @hide
      */
+    @SystemApi
     public void clearCallback() {
         synchronized (mCallbackLock) {
             mCallback = null;
@@ -618,6 +625,7 @@ public class VirtualMachine implements AutoCloseable {
      *         started.
      * @hide
      */
+    @SystemApi
     @RequiresPermission(MANAGE_VIRTUAL_MACHINE_PERMISSION)
     public void run() throws VirtualMachineException {
         synchronized (mLock) {
@@ -767,6 +775,7 @@ public class VirtualMachine implements AutoCloseable {
      * @throws VirtualMachineException if the stream could not be created.
      * @hide
      */
+    @SystemApi
     @NonNull
     public InputStream getConsoleOutput() throws VirtualMachineException {
         synchronized (mLock) {
@@ -781,6 +790,7 @@ public class VirtualMachine implements AutoCloseable {
      * @throws VirtualMachineException if the stream could not be created.
      * @hide
      */
+    @SystemApi
     @NonNull
     public InputStream getLogOutput() throws VirtualMachineException {
         synchronized (mLock) {
@@ -798,6 +808,7 @@ public class VirtualMachine implements AutoCloseable {
      * @throws VirtualMachineException if the virtual machine could not be stopped.
      * @hide
      */
+    @SystemApi
     public void stop() throws VirtualMachineException {
         synchronized (mLock) {
             if (mVirtualMachine == null) {
@@ -820,6 +831,7 @@ public class VirtualMachine implements AutoCloseable {
      * @throws VirtualMachineException if the virtual machine could not be stopped.
      * @hide
      */
+    @SystemApi
     @Override
     public void close() throws VirtualMachineException {
         stop();
@@ -852,6 +864,7 @@ public class VirtualMachine implements AutoCloseable {
      * @throws VirtualMachineException if the virtual machine is not running.
      * @hide
      */
+    @SystemApi
     public int getCid() throws VirtualMachineException {
         synchronized (mLock) {
             try {
@@ -875,6 +888,7 @@ public class VirtualMachine implements AutoCloseable {
      *         incompatible.
      * @hide
      */
+    @SystemApi
     @NonNull
     public VirtualMachineConfig setConfig(@NonNull VirtualMachineConfig newConfig)
             throws VirtualMachineException {
@@ -903,6 +917,7 @@ public class VirtualMachine implements AutoCloseable {
      *         failed.
      * @hide
      */
+    @SystemApi
     @NonNull
     public IBinder connectToVsockServer(int port) throws VirtualMachineException {
         synchronized (mLock) {
@@ -920,6 +935,7 @@ public class VirtualMachine implements AutoCloseable {
      * @throws VirtualMachineException if connecting fails.
      * @hide
      */
+    @SystemApi
     @NonNull
     public ParcelFileDescriptor connectVsock(int port) throws VirtualMachineException {
         synchronized (mLock) {
@@ -942,6 +958,7 @@ public class VirtualMachine implements AutoCloseable {
      *     be captured.
      * @hide
      */
+    @SystemApi
     @NonNull
     public VirtualMachineDescriptor toDescriptor() throws VirtualMachineException {
         synchronized (mLock) {

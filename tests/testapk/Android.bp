@@ -19,12 +19,14 @@ android_test {
         "truth-prebuilt",
         "compatibility-common-util-devicesidelib",
     ],
+    // TODO(b/243512044): Remove
     libs: ["framework-virtualization"],
+    sdk_version: "test_current",
     jni_libs: [
         "MicrodroidTestNativeLib",
         "MicrodroidIdleNativeLib",
     ],
-    platform_apis: true,
+    jni_uses_platform_apis: true,
     use_embedded_native_libs: true,
     // We only support 64-bit ABI, but CTS demands all APKs to be multi-ABI.
     compile_multilib: "both",

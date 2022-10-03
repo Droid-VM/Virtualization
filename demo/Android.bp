@@ -15,8 +15,9 @@ android_app {
     libs: [
         "framework-virtualization",
     ],
+    sdk_version: "system_current",
     jni_libs: ["MicrodroidTestNativeLib"],
-    platform_apis: true,
+    jni_uses_platform_apis: true,
     use_embedded_native_libs: true,
     v4_signature: true,
     min_sdk_version: "33",
