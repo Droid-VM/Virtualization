@@ -21,7 +21,7 @@ mod crosvm;
 mod payload;
 mod selinux;
 
-use crate::aidl::{VirtualizationService, BINDER_SERVICE_IDENTIFIER, TEMPORARY_DIRECTORY};
+use crate::aidl::{VirtualizationService, TEMPORARY_DIRECTORY};
 use android_logger::{Config, FilterBuilder};
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualizationService::BnVirtualizationService;
 use anyhow::{bail, Context, Error};
@@ -30,6 +30,8 @@ use log::{info, Level};
 use std::fs::{remove_dir_all, remove_file, read_dir};
 
 const LOG_TAG: &str = "VirtualizationService";
+
+const BINDER_SERVICE_IDENTIFIER: &str = "android.system.virtualizationservice";
 
 fn main() {
     android_logger::init_once(

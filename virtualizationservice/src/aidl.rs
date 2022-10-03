@@ -73,8 +73,6 @@ use zip::ZipArchive;
 /// The unique ID of a VM used (together with a port number) for vsock communication.
 pub type Cid = u32;
 
-pub const BINDER_SERVICE_IDENTIFIER: &str = "android.system.virtualizationservice";
-
 /// Directory in which to write disk image files used while running VMs.
 pub const TEMPORARY_DIRECTORY: &str = "/data/misc/virtualizationservice";
 
