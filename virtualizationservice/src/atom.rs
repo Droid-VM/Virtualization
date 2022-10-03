@@ -16,6 +16,7 @@
 
 use crate::aidl::clone_file;
 use crate::crosvm::VmMetric;
+use crate::get_calling_uid;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     DeathReason::DeathReason,
     IVirtualMachine::IVirtualMachine,
@@ -24,7 +25,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
 };
 use android_system_virtualizationservice::binder::{Status, Strong};
 use anyhow::{anyhow, Result};
-use binder::{ParcelFileDescriptor, ThreadState};
+use binder::ParcelFileDescriptor;
 use log::{trace, warn};
 use microdroid_payload_config::VmPayloadConfig;
 use rustutils::system_properties;
@@ -106,7 +107,7 @@ pub fn write_vm_creation_stats(
         ),
     };
 
-    let uid = ThreadState::get_calling_uid() as i32;
+    let uid = get_calling_uid() as i32;
     thread::spawn(move || {
         let vm_creation_requested = vm_creation_requested::VmCreationRequested {
             uid,
