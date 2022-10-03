@@ -23,6 +23,7 @@ import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.annotation.RequiresPermission;
 import android.annotation.SuppressLint;
+import android.annotation.SystemApi;
 import android.content.Context;
 import android.sysprop.HypervisorProperties;
 
@@ -46,6 +47,7 @@ import java.util.WeakHashMap;
  *
  * @hide
  */
+@SystemApi
 public class VirtualMachineManager {
     @NonNull private final Context mContext;
 
@@ -84,6 +86,7 @@ public class VirtualMachineManager {
      *
      * @hide
      */
+    @SystemApi
     @NonNull
     @SuppressLint("ManagerLookup") // Optional API
     public static VirtualMachineManager getInstance(@NonNull Context context) {
@@ -106,6 +109,7 @@ public class VirtualMachineManager {
      * @see #CAPABILITY_NON_PROTECTED_VM
      * @hide
      */
+    @SystemApi
     @Capability
     public int getCapabilities() {
         @Capability int result = 0;
@@ -131,6 +135,7 @@ public class VirtualMachineManager {
      *         the given name.
      * @hide
      */
+    @SystemApi
     @NonNull
     @RequiresPermission(VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION)
     public VirtualMachine create(
@@ -151,6 +156,7 @@ public class VirtualMachineManager {
      * @hide
      */
     @NonNull
+    @SystemApi
     public VirtualMachine importFromDescriptor(
             @NonNull String name, @NonNull VirtualMachineDescriptor vmDescriptor)
             throws VirtualMachineException {
@@ -167,6 +173,7 @@ public class VirtualMachineManager {
      *                                 retrieved.
      * @hide
      */
+    @SystemApi
     @Nullable
     public VirtualMachine get(@NonNull String name) throws VirtualMachineException {
         synchronized (VirtualMachine.sCreateLock) {
@@ -181,6 +188,7 @@ public class VirtualMachineManager {
      * @throws VirtualMachineException if the virtual machine could not be created or retrieved.
      * @hide
      */
+    @SystemApi
     @NonNull
     public VirtualMachine getOrCreate(
             @NonNull String name, @NonNull VirtualMachineConfig config)
@@ -206,6 +214,7 @@ public class VirtualMachineManager {
      *                                 or cannot be deleted.
      * @hide
      */
+    @SystemApi
     public void delete(@NonNull String name) throws VirtualMachineException {
         requireNonNull(name);
         synchronized (VirtualMachine.sCreateLock) {
