@@ -19,10 +19,15 @@ java_sdk_library {
 
     srcs: ["src/**/*.java"],
     static_libs: [
+        "android.system.virtualizationcommon-java",
         "android.system.virtualizationservice-java",
         // For android.sysprop.HypervisorProperties
         "PlatformProperties",
     ],
+
+    api_lint: {
+        enabled: true,
+    },
 
     apex_available: ["com.android.virt"],
     permitted_packages: [
