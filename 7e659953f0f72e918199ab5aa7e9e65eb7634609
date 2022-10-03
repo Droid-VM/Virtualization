@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db67aa18_3cef8670",
+        "filename": "microdroid/vmpayload/include/vmpayload.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-03T15:23:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37fb7e5b_fb4aa059",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 12
+      },
+      "revId": "7e659953f0f72e918199ab5aa7e9e65eb7634609",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c92959f_6b4ec562",
@@ -82,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "104fe695_901626fa",
+        "filename": "microdroid/vmpayload/include/vmpayload.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-03T15:23:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c92959f_6b4ec562",
+      "range": {
+        "startLine": 24,
+        "startChar": 64,
+        "endLine": 24,
+        "endChar": 90
+      },
+      "revId": "7e659953f0f72e918199ab5aa7e9e65eb7634609",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "180d85da_6d66f817",
@@ -95,6 +143,30 @@
       "writtenOn": "2022-09-30T15:19:43Z",
       "side": 1,
       "message": "Name bike-shedding:\n\nWhat\u0027s vms ?\nIdeally this name would relate to connectToVsockServer over in the host.\nstart_vsock_service ?\n\nDoes this method return? If not (if it blocks the thread waiting for connections) we should document that, and probably call it run_vsock_service or something similar.\n\nHow do we signal failure?",
+      "range": {
+        "startLine": 25,
+        "startChar": 5,
+        "endLine": 25,
+        "endChar": 23
+      },
+      "revId": "7e659953f0f72e918199ab5aa7e9e65eb7634609",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9abd1ccb_be785800",
+        "filename": "microdroid/vmpayload/include/vmpayload.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-03T15:23:14Z",
+      "side": 1,
+      "message": "I adjusted the naming.\n\n\u003e How do we signal failure?\n\nI have checked a couple of usages of rust_ffi in the code base[1]. I don\u0027t see a good way to signal failure like passing Result or using error status code. I think we can return a boolean for void functions or check whether the returned pointer is null to signal failure.\n\nOtherwise if the native library is written in rust, users could get more information from this API.\n\n[1] https://cs.android.com/search?q\u003drust_ffi%20f:bp",
+      "parentUuid": "180d85da_6d66f817",
       "range": {
         "startLine": 25,
         "startChar": 5,
