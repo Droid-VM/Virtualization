@@ -29,7 +29,7 @@ use android_system_virtualmachineservice::aidl::android::system::virtualmachines
 };
 use anyhow::{anyhow, bail, ensure, Context, Error, Result};
 use apkverify::{get_public_key_der, verify, V4Signature};
-use binder::{wait_for_interface, Strong};
+use binder::{ProcessState, wait_for_interface, Strong};
 use diced_utils::cbor::{encode_header, encode_number};
 use glob::glob;
 use itertools::sorted;
@@ -51,6 +51,7 @@ use std::process::{Child, Command, Stdio};
 use std::str;
 use std::time::{Duration, SystemTime};
 use vsock::VsockStream;
+use vm_payload_aidl_impl::register_virtual_machine_payload_service;
 
 const WAIT_TIMEOUT: Duration = Duration::from_secs(10);
 const MAIN_APK_PATH: &str = "/dev/block/by-name/microdroid-apk";
@@ -386,6 +387,8 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
     }
 
     system_properties::write("dev.bootcomplete", "1").context("set dev.bootcomplete")?;
+    register_virtual_machine_payload_service(service.clone())?;
+    ProcessState::start_thread_pool();
     exec_task(task, service)
 }
 
