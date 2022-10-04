@@ -89,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4497c551_2c747c88",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-04T10:30:47Z",
+      "side": 1,
+      "message": "Oh, this file was generated automatically initially. I forgot to remove it in the last version.",
+      "parentUuid": "c522cc8d_c213fb79",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 19
+      },
+      "revId": "78cf1f6647ef2512f67403757ed5a424c93ab52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc9bb90b_de72bb35",
@@ -244,6 +268,30 @@
       "side": 1,
       "message": "I see. In that sense, maybe it\u0027s better to remove host in the method name, like just call it notify_payload_ready()?",
       "parentUuid": "79348242_e5b23a3e",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 1
+      },
+      "revId": "78cf1f6647ef2512f67403757ed5a424c93ab52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fed34e9d_9b46773e",
+        "filename": "microdroid/vm_payload/src/vm_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-04T10:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f89d8cc_14f3e558",
       "range": {
         "startLine": 37,
         "startChar": 0,
