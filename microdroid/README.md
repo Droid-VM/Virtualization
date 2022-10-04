@@ -45,7 +45,7 @@ An app in microdroid is a shared library file embedded in an APK. The shared
 library should have an entry point `android_native_main` as shown below:
 
 ```C++
-extern "C" int android_native_main(int argc, char* argv[]) {
+extern "C" int android_native_main() {
   printf("Hello Microdroid!\n");
 }
 ```

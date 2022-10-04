@@ -9,4 +9,5 @@ cc_binary {
         "libdl",
         "libdl_android",
     ],
+    local_include_dirs: ["include"],
 }

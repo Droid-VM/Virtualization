@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
+#include <android/dlext.h>
 #include <dlfcn.h>
 
 #include <cstdlib>
 #include <iostream>
 #include <string>
 
-#include <android/dlext.h>
+#include "android_native_main.h"
 
 extern "C" {
 enum {
@@ -37,10 +38,13 @@ extern struct android_namespace_t* android_create_namespace(
 
 static void* load(const std::string& libname);
 
+#define NAME_TO_STRING(n) #n
+constexpr char entrypoint_name[] = NAME_TO_STRING(android_native_main);
+
 int main(int argc, char* argv[]) {
-    if (argc < 2) {
+    if (argc != 2) {
         std::cout << "Usage:\n";
-        std::cout << "    " << argv[0] << " LIBNAME [ARGS...]\n";
+        std::cout << "    " << argv[0] << " LIBNAME\n";
         return EXIT_FAILURE;
     }
 
@@ -51,14 +55,14 @@ int main(int argc, char* argv[]) {
         return EXIT_FAILURE;
     }
 
-    int (*entry)(int argc, char* argv[]) = nullptr;
-    entry = reinterpret_cast<decltype(entry)>(dlsym(handle, "android_native_main"));
+    android_native_main_t* entry = nullptr;
+    entry = reinterpret_cast<decltype(entry)>(dlsym(handle, entrypoint_name));
     if (entry == nullptr) {
-        std::cerr << "Failed to find entrypoint `android_native_main`: " << dlerror() << "\n";
+        std::cerr << "Failed to find entrypoint `" << entrypoint_name << "`: " << dlerror() << "\n";
         return EXIT_FAILURE;
     }
 
-    return entry(argc - 1, argv + 1);
+    return entry();
 }
 
 // Create a new linker namespace whose search path is set to the directory of the library. Then
