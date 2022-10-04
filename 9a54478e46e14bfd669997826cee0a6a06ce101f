@@ -118,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4391bb90_050ee1e8",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-04T12:13:20Z",
+      "side": 1,
+      "message": "Oh, I see. Let\u0027s discuss it in the @SystemApi change then? It feels weird to expose to developers a @Nullable method which is effectively a @NonNull, but I need to think a little bit more before formulating any opinion :)",
+      "parentUuid": "ffd23c2d_9dea3fb1",
+      "range": {
+        "startLine": 201,
+        "startChar": 4,
+        "endLine": 202,
+        "endChar": 10
+      },
+      "revId": "9a54478e46e14bfd669997826cee0a6a06ce101f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee3c38bc_ef19a6c0",
@@ -225,6 +249,30 @@
       "side": 1,
       "message": "That says that all constructor parameters must be required, but not that all required parameters must be constructor parameters.\n\nI want to make this really explicit - one mistake one of our clients made was not to ask for protected. And new Builder(ctx).setProtected(false) seems a lot harder to do accidentally than new Builder(ctx, false).",
       "parentUuid": "de8b5b01_84b5d5bc",
+      "range": {
+        "startLine": 410,
+        "startChar": 7,
+        "endLine": 412,
+        "endChar": 34
+      },
+      "revId": "9a54478e46e14bfd669997826cee0a6a06ce101f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b777cde1_16d9efc5",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-04T12:13:20Z",
+      "side": 1,
+      "message": "In general compile time checks that client specifies a required value are preferred over the runtime ones, but I see your point about the the context that setProtected() name gives. The current approach SGTM, we can discuss alternatives in the @SystemApi change (again, need to think a little bit more)",
+      "parentUuid": "d4f60aa1_a6f6fd3f",
       "range": {
         "startLine": 410,
         "startChar": 7,
