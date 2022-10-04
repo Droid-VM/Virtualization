@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "157a55d7_8095f0de",
+        "filename": "demo/java/com/android/microdroid/demo/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-04T16:07:57Z",
+      "side": 1,
+      "message": "I suspect that\u0027s just a Java thing. ClassLoader#findLibrary takes a name without the extension, and then uses https://docs.oracle.com/javase/7/docs/api/java/lang/System.html#mapLibraryName(java.lang.String) to add either \".dll\" or \".so\" depending.\nAnd the NDK is being JNI-like. Or something.\n\nWe could always make the .so optional at some point if there was a need.",
+      "parentUuid": "229de59f_7b472685",
+      "range": {
+        "startLine": 262,
+        "startChar": 46,
+        "endLine": 262,
+        "endChar": 72
+      },
+      "revId": "ca4c685ff3e240b7911fd7a96bdc4b67364134da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec0ef7fa_68320fe9",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-04T15:49:28Z",
       "side": 1,
       "message": "nit: omit",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 6
+      },
+      "revId": "ca4c685ff3e240b7911fd7a96bdc4b67364134da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "440ed713_37e4a069",
+        "filename": "tests/testapk/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-04T16:07:57Z",
+      "side": 1,
+      "message": "Whoops",
+      "parentUuid": "ec0ef7fa_68320fe9",
       "range": {
         "startLine": 56,
         "startChar": 4,
