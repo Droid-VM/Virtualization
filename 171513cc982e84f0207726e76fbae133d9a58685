@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56f8bef8_adb7fbf6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-04T16:34:30Z",
+      "side": 1,
+      "message": "Hi Alan,\n\nCould you take a look if this correspond to what we want? \n\nWe\u0027ll need to add some permission for SELinux to run this code. Error for `atest MicrodroidTests`\n\n```\n10-04 18:19:02.402 10162 17505 17959 I MicrodroidTests: Log: tombstoned I 10-04 16:19:02   121   121 tombstoned.cpp:556] tombstoned successfully initialized\n10-04 18:19:02.437 10162 17505 17959 I MicrodroidTests: Log: SELinux E 10-04 16:19:02   100   100] avc:  denied  { find } for pid\u003d119 uid\u003d0 name\u003dvirtual_machine_payload_service scontext\u003du:r:microdroid_app:s0 tcontext\u003du:object_r:default_android_service:s0 tclass\u003dservice_manager permissive\u003d0\n10-04 18:19:02.437 10162 17505 17959 I MicrodroidTests: Log: \n10-04 18:19:02.437 10162 17505 17959 I MicrodroidTests: Log: SELinux E 10-04 16:19:02   100   100] avc:  denied  { find } for pid\u003d119 uid\u003d0 name\u003dvirtual_machine_payload_service scontext\u003du:r:microdroid_app:s0 tcontext\u003du:object_r:default_android_service:s0 tclass\u003dservice_manager permissive\u003d0\n10-04 18:19:02.437 10162 17505 17959 I MicrodroidTests: Log: \n10-04 18:19:02.438 10162 17505 17959 I MicrodroidTests: Log: ServiceManagerCppClient W 10-04 16:19:02   119   119] Failed to registerForNotifications in waitForService for virtual_machine_payload_service: Status(-1, EX_SECURITY): \u0027\u0027\n10-04 18:19:02.439 10162 17505 17959 I MicrodroidTests: Log: vm_payload E 10-04 16:19:02   119   119] vm_payload::vm_service: Failed to notify ready: Failed to connect to virtual machine payload service\n```",
+      "revId": "171513cc982e84f0207726e76fbae133d9a58685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
