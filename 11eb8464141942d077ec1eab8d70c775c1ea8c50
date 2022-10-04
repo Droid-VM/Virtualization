@@ -3,6 +3,121 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d604c579_6543b7ae",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-04T11:33:20Z",
+      "side": 1,
+      "message": "Please move your benchmark to `packages/modules/Virtualization/tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java`. This class runs in presubmit, we don\u0027t want to take too much time there.",
+      "range": {
+        "startLine": 82,
+        "startChar": 13,
+        "endLine": 82,
+        "endChar": 31
+      },
+      "revId": "11eb8464141942d077ec1eab8d70c775c1ea8c50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29710f5e_d0dc3282",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-04T11:33:20Z",
+      "side": 1,
+      "message": "Please make it repeat a few times, 5 or 10. There is a class called MetricProcessor to compute average/stdev/min/max.",
+      "range": {
+        "startLine": 815,
+        "startChar": 16,
+        "endLine": 815,
+        "endChar": 41
+      },
+      "revId": "11eb8464141942d077ec1eab8d70c775c1ea8c50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92a301ca_e69236ed",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-04T11:33:20Z",
+      "side": 1,
+      "message": "nit: Would /dev/random work? That might keep this benchmark relevant even in the presence of zram.",
+      "range": {
+        "startLine": 821,
+        "startChar": 21,
+        "endLine": 821,
+        "endChar": 30
+      },
+      "revId": "11eb8464141942d077ec1eab8d70c775c1ea8c50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "438ef307_7958dc43",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-04T11:33:20Z",
+      "side": 1,
+      "message": "Why?",
+      "range": {
+        "startLine": 824,
+        "startChar": 8,
+        "endLine": 826,
+        "endChar": 9
+      },
+      "revId": "11eb8464141942d077ec1eab8d70c775c1ea8c50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2b7ea88_4b176127",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-04T11:33:20Z",
+      "side": 1,
+      "message": "nit: Some comments on what this is doing would be nice. IIUC, this allocates memory until it fails, which is why we ignore the exception. Took me a while to figure it out.",
+      "range": {
+        "startLine": 848,
+        "startChar": 0,
+        "endLine": 848,
+        "endChar": 91
+      },
+      "revId": "11eb8464141942d077ec1eab8d70c775c1ea8c50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "100ee237_651b24ff",
         "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
         "patchSetId": 2
@@ -43,6 +158,53 @@
         "startChar": 8,
         "endLine": 859,
         "endChar": 83
+      },
+      "revId": "11eb8464141942d077ec1eab8d70c775c1ea8c50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2197223_8358d338",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-04T11:33:20Z",
+      "side": 1,
+      "message": "+1, and also running *while* the VM is up. \n\nRebooting should be as easy as\n```\ngetDevice().reboot();\nassertTrue(getDevice().waitForBootComplete(1800));\n```\nYou can put it at the beginning of your test function.",
+      "parentUuid": "0bde02ad_5c512af8",
+      "range": {
+        "startLine": 859,
+        "startChar": 8,
+        "endLine": 859,
+        "endChar": 83
+      },
+      "revId": "11eb8464141942d077ec1eab8d70c775c1ea8c50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d7aedd3_32bbf482",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 862,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-04T11:33:20Z",
+      "side": 1,
+      "message": "Give it a namespace and a unit (i\u0027m guessing milliseconds?)\n```\nmMetricPrefix + \"app_startup/total_time_ms\"\n```",
+      "range": {
+        "startLine": 862,
+        "startChar": 31,
+        "endLine": 862,
+        "endChar": 42
       },
       "revId": "11eb8464141942d077ec1eab8d70c775c1ea8c50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
