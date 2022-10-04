@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "229de59f_7b472685",
+        "filename": "demo/java/com/android/microdroid/demo/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-04T15:49:28Z",
+      "side": 1,
+      "message": "Jiyong was comparing our API to NativeActivity at one point, I remember over there that you don\u0027t keep the .so extension when specifying the library name in the manifest [1]. I\u0027m sure why, maybe because of how they discover the library [2], but there might be a reason for us to learn from?\n\n[1] -- https://developer.android.com/ndk/samples/sample_na#am\n[2] -- https://cs.android.com/android/platform/superproject/+/master:frameworks/base/core/java/android/app/NativeActivity.java;l\u003d160;drc\u003d8e742f928e0b3d242a290fb46d80a2c892dd18a3",
+      "range": {
+        "startLine": 262,
+        "startChar": 46,
+        "endLine": 262,
+        "endChar": 72
+      },
+      "revId": "ca4c685ff3e240b7911fd7a96bdc4b67364134da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec0ef7fa_68320fe9",
+        "filename": "tests/testapk/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-04T15:49:28Z",
+      "side": 1,
+      "message": "nit: omit",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 6
+      },
+      "revId": "ca4c685ff3e240b7911fd7a96bdc4b67364134da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
