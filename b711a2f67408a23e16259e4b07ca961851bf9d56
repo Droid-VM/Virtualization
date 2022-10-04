@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "175376a0_e277f2a3",
+        "filename": "apex/virtualizationservice.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-04T11:43:52Z",
+      "side": 1,
+      "message": "Adjusting rkpd to discover the components from the vintf manifest which means there\u0027s no need for the service to be less lazy than it originally was.",
+      "parentUuid": "c924f8bc_f1ed64ad",
+      "revId": "b711a2f67408a23e16259e4b07ca961851bf9d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "918f290d_035bab09",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-09-30T15:26:04Z",
       "side": 1,
       "message": "When rkpd starts the registered RPC, the service that implements it connects back to rkpd in order to make sure it\u0027s registered. That works, but the pattern is maybe a little clunky?",
+      "revId": "b711a2f67408a23e16259e4b07ca961851bf9d56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69a607b1_9f4926ff",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-04T11:43:52Z",
+      "side": 1,
+      "message": "This is also avoided with the manifest discovery.",
+      "parentUuid": "918f290d_035bab09",
       "revId": "b711a2f67408a23e16259e4b07ca961851bf9d56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
