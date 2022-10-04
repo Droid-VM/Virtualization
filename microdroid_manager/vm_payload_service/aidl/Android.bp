@@ -1,0 +1,25 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+aidl_interface {
+    name: "android.system.vm_payload",
+    srcs: ["android/system/vm_payload/*.aidl"],
+    unstable: true,
+    backend: {
+        java: {
+            apex_available: ["com.android.virt"],
+        },
+        ndk: {
+            apex_available: [
+                "com.android.virt",
+            ],
+        },
+        rust: {
+            enabled: true,
+            apex_available: [
+                "com.android.virt",
+            ],
+        },
+    },
+}
