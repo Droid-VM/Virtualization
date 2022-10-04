@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c522cc8d_c213fb79",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-04T08:59:03Z",
+      "side": 1,
+      "message": "Not entirely?",
+      "parentUuid": "8300a26b_52ef989b",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 19
+      },
+      "revId": "78cf1f6647ef2512f67403757ed5a424c93ab52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc9bb90b_de72bb35",
         "filename": "microdroid/vm_payload/include/vm_payload.h",
         "patchSetId": 7
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "I wanted to prepare one API for c code and another for rust code, but maybe one is enough. Can we also call notify_host_of_payload_ready() in [1] for example?\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/compos/src/compsvc_main.rs;l\u003d62;drc\u003d7eb5ca4ff4ca2f47b6936f6470d91c5e0a719968",
       "parentUuid": "fc9bb90b_de72bb35",
+      "range": {
+        "startLine": 26,
+        "startChar": 24,
+        "endLine": 26,
+        "endChar": 26
+      },
+      "revId": "78cf1f6647ef2512f67403757ed5a424c93ab52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e33434fb_f78a7aef",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-04T08:59:03Z",
+      "side": 1,
+      "message": "\u003e I wanted to prepare one API for c code and another for rust code, but maybe one is enough. Can we also call notify_host_of_payload_ready() in [1] for example?\n\u003e \n\u003e [1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/compos/src/compsvc_main.rs;l\u003d62;drc\u003d7eb5ca4ff4ca2f47b6936f6470d91c5e0a719968\n\nI think we initially just need the C API; we can add a Rust wrapper later if we want.\n\nYeah, it should be possible to migrate CompOS, although less urgent - it\u0027s part of the platform so can use the internal APIs.",
+      "parentUuid": "fbc2fbc5_6af35ff9",
       "range": {
         "startLine": 26,
         "startChar": 24,

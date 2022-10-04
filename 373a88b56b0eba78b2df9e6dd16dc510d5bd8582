@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7f00121_e1b0443e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-04T08:59:03Z",
+      "side": 1,
+      "message": "Adding Jiyong who I suspect has more clue than me.",
+      "revId": "373a88b56b0eba78b2df9e6dd16dc510d5bd8582",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47a62ff1_d3fc48fa",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-04T08:59:03Z",
+      "side": 1,
+      "message": "Is that what we want?\n\nI think we want to build a .so, but we want it to be fairly self-contained (so the things we use don\u0027t affect the client).\nWhich seems like something the NDK should do, but I don\u0027t know my way round this very well.",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 15
+      },
+      "revId": "373a88b56b0eba78b2df9e6dd16dc510d5bd8582",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03e0d769_2e9a798f",
+        "filename": "microdroid/vm_payload/src/vm_service.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-04T08:59:03Z",
+      "side": 1,
+      "message": "This assumes that something has initialized the Rust logging appropriately.\nWhich I\u0027m a little nervous about, since we\u0027re running in somebody else\u0027s process.\nBut it seems like logging is a good thing.",
+      "range": {
+        "startLine": 32,
+        "startChar": 8,
+        "endLine": 32,
+        "endChar": 13
+      },
+      "revId": "373a88b56b0eba78b2df9e6dd16dc510d5bd8582",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
