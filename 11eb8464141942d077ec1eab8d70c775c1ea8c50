@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "100ee237_651b24ff",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-10-04T10:02:02Z",
+      "side": 1,
+      "message": "Would it make sense to also run this _before_ fragmenting the stage-2, to report the delta rather than the absolute value? And should we run the startup test multiple times to average things out? Or is it very stable?",
+      "range": {
+        "startLine": 859,
+        "startChar": 8,
+        "endLine": 859,
+        "endChar": 83
+      },
+      "revId": "11eb8464141942d077ec1eab8d70c775c1ea8c50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
