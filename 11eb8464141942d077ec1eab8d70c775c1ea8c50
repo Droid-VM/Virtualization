@@ -22,6 +22,30 @@
       },
       "revId": "11eb8464141942d077ec1eab8d70c775c1ea8c50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bde02ad_5c512af8",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-04T10:41:25Z",
+      "side": 1,
+      "message": "I think that\u0027s a good point to run before \u0026 after to report the delta. We also need to make sure that we reboot the device before running this test. I didn\u0027t cover the device reboot in this test because I am not sure how it behaves when we run `adb shell reboot` during `atest` session. Thanks for the suggestion !",
+      "parentUuid": "100ee237_651b24ff",
+      "range": {
+        "startLine": 859,
+        "startChar": 8,
+        "endLine": 859,
+        "endChar": 83
+      },
+      "revId": "11eb8464141942d077ec1eab8d70c775c1ea8c50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
