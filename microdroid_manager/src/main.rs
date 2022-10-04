@@ -27,9 +27,10 @@ use android_system_virtualizationcommon::aidl::android::system::virtualizationco
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::{
     VM_BINDER_SERVICE_PORT, VM_STREAM_SERVICE_PORT, IVirtualMachineService,
 };
+use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualMachinePayload::IVirtualMachinePayload;
 use anyhow::{anyhow, bail, ensure, Context, Error, Result};
 use apkverify::{get_public_key_der, verify, V4Signature};
-use binder::{wait_for_interface, Strong};
+use binder::{add_service, wait_for_interface, Strong};
 use diced_utils::cbor::{encode_header, encode_number};
 use glob::glob;
 use itertools::sorted;
@@ -74,6 +75,8 @@ const APP_DEBUGGABLE_PROP: &str = "ro.boot.microdroid.app_debuggable";
 
 // SYNC WITH virtualizationservice/src/crosvm.rs
 const FAILURE_SERIAL_DEVICE: &str = "/dev/ttyS1";
+
+const VM_PAYLOAD_SERVICE_NAME: &str = "virtual_machine_payload_service";
 
 #[derive(thiserror::Error, Debug)]
 enum MicrodroidError {
@@ -386,12 +389,27 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
     }
 
     system_properties::write("dev.bootcomplete", "1").context("set dev.bootcomplete")?;
+    register_virtual_machine_payload_service(&service)?;
     exec_task(task, service)
 }
 
 fn control_service(action: &str, service: &str) -> Result<()> {
     system_properties::write(&format!("ctl.{}", action), service)
         .with_context(|| format!("Failed to {} {}", action, service))
+}
+
+fn register_virtual_machine_payload_service(
+    vm_service: &Strong<dyn IVirtualMachineService>,
+) -> Result<()> {
+    ProcessState::start_thread_pool();
+
+    let service = VirtualMachinePayload::new_binder(vm_service).as_binder();
+    add_service(VM_PAYLOAD_SERVICE_NAME, service)
+        .with_context(|| format!("Failed to register service {}", VM_PAYLOAD_SERVICE_NAME))?;
+    info!("{} is running", VM_PAYLOAD_SERVICE_NAME);
+
+    ProcessState::join_thread_pool();
+    Ok(())
 }
 
 struct ApkDmverityArgument<'a> {
