@@ -16,7 +16,7 @@
 
 #include <unistd.h>
 
-extern "C" int android_native_main(int /* argc */, char* /* argv */[]) {
+extern "C" int android_native_main() {
     // do nothing; just leave it alive. good night.
     for (;;) {
         sleep(1000);

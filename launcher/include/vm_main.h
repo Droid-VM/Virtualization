@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
+#pragma once
 
-#include "vm_main.h"
+// TODO(b/249064104): Move this somewhere the payload can include it
 
-// A VM payload that crashes as soon as it starts, to allow us to exercise that error path.
-extern "C" int AVmPayload_main() {
-    printf("test crash!!!!\n");
-    abort();
+#ifdef __cplusplus
+extern "C" {
+typedef int AVmPayload_main_t();
+AVmPayload_main_t AVmPayload_main;
 }
+#else
+    extern int AVmPayload_main(void));
+#endif

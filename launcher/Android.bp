@@ -2,6 +2,11 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
+cc_library_headers {
+    name: "microdroid_vm_main",
+    export_include_dirs: ["include"],
+}
+
 cc_binary {
     name: "microdroid_launcher",
     srcs: ["main.cpp"],
@@ -9,4 +14,5 @@ cc_binary {
         "libdl",
         "libdl_android",
     ],
+    header_libs: ["microdroid_vm_main"],
 }

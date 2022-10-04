@@ -34,6 +34,7 @@ android_test {
 cc_library_shared {
     name: "MicrodroidTestNativeLib",
     srcs: ["src/native/testbinary.cpp"],
+    header_libs: ["microdroid_vm_main"],
     shared_libs: [
         "com.android.microdroid.testservice-ndk",
         "libbase",
@@ -51,6 +52,7 @@ cc_library_shared {
 
 cc_library_shared {
     name: "MicrodroidTestNativeCrashLib",
+    header_libs: ["microdroid_vm_main"],
     srcs: ["src/native/crashbinary.cpp"],
 }
 
