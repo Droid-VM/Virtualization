@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b9e935c_0db02a26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-04T12:20:39Z",
+      "side": 1,
+      "message": "Yes, exactly.\n\nAlthough just to complicate things further we should use David\u0027s new Unix domain socket based RPC binder. (Kernel binder inside the VM is going away.)\nSee https://r.android.com/2240953",
+      "parentUuid": "720a9f11_c6faa6d3",
+      "revId": "373a88b56b0eba78b2df9e6dd16dc510d5bd8582",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47a62ff1_d3fc48fa",
         "filename": "microdroid/vm_payload/Android.bp",
         "patchSetId": 9
@@ -124,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9f83f61_d800c28c",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-04T12:20:39Z",
+      "side": 1,
+      "message": "Fair enough. I like Jiyong\u0027s suggestion anyway; let\u0027s get it working first and figure out the packaging later.\n\n\u003e I don\u0027t see any usages of rust_ffi_shared in cc_library[2].\n\nThere\u0027s a couple more usages in the internal codebase (and a lot of rust_ffi). Not sure if that helps though.",
+      "parentUuid": "7ba10f97_9c4e989d",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 15
+      },
+      "revId": "373a88b56b0eba78b2df9e6dd16dc510d5bd8582",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03e0d769_2e9a798f",
@@ -161,6 +203,30 @@
       "side": 1,
       "message": "We can init the log inside this method. WDYT?",
       "parentUuid": "03e0d769_2e9a798f",
+      "range": {
+        "startLine": 32,
+        "startChar": 8,
+        "endLine": 32,
+        "endChar": 13
+      },
+      "revId": "373a88b56b0eba78b2df9e6dd16dc510d5bd8582",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1376974_f83164cb",
+        "filename": "microdroid/vm_payload/src/vm_service.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-04T12:20:39Z",
+      "side": 1,
+      "message": "I wonder if we want some sort of initialization function, to be called either automatically or explicitly.\n\nAs another thing to think about, although the compos payload is a stand-alone executable, the app payloads (like the test app) are in the form of a .so that is loaded by microdroid launcher. That may or may not be helpful for us.",
+      "parentUuid": "bbb94e67_8e20efdf",
       "range": {
         "startLine": 32,
         "startChar": 8,
