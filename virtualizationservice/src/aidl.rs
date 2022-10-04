@@ -26,6 +26,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     DiskImage::DiskImage,
     IVirtualMachine::{BnVirtualMachine, IVirtualMachine},
     IVirtualMachineCallback::IVirtualMachineCallback,
+    IVirtualMachinePayload::IVirtualMachinePayload,
     IVirtualizationService::IVirtualizationService,
     Partition::Partition,
     PartitionType::PartitionType,
@@ -1177,6 +1178,29 @@ impl VirtualMachineService {
     fn new_binder(state: Arc<Mutex<State>>, cid: Cid) -> Strong<dyn IVirtualMachineService> {
         BnVirtualMachineService::new_binder(
             VirtualMachineService { state, cid },
+            BinderFeatures::default(),
+        )
+    }
+}
+
+/// Implementation of `IVirtualMachinePayload`, the entry point of the AIDL service.
+#[derive(Debug)]
+struct VirtualMachinePayload<'a> {
+    virtual_machine_service: &'a Strong<dyn IVirtualMachineService>,
+}
+
+impl IVirtualMachinePayload for VirtualMachinePayload {
+    fn notifyPayloadReady(&self) -> binder::Result<()> {
+        virtual_machine_service.notifyPayloadReady()
+    }
+}
+
+impl VirtualMachinePayload {
+    fn new_binder(
+        vm_service: &Strong<dyn IVirtualMachineService>,
+    ) -> Strong<dyn IVirtualMachinePayload> {
+        BnVirtualMachinePayload::new_binder(
+            VirtualMachinePayload { virtual_machine_service: vm_service },
             BinderFeatures::default(),
         )
     }

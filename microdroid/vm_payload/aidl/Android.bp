@@ -1,0 +1,37 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+aidl_interface {
+    name: "android.system.vm_payload",
+    srcs: ["android/system/vm_payload/*.aidl"],
+    unstable: true,
+    backend: {
+        java: {
+            apex_available: ["com.android.virt"],
+        },
+        ndk: {
+            apex_available: [
+                "com.android.virt",
+            ],
+        },
+        rust: {
+            enabled: true,
+            apex_available: [
+                "com.android.virt",
+            ],
+        },
+    },
+}
+
+rust_library {
+    name: "libvm_payload_aidl_impl",
+    crate_name: "vm_payload_aidl_impl",
+    srcs: ["src/*.rs"],
+    prefer_rlib: true,
+    rustlibs: [
+        "android.system.virtualmachineservice-rust",
+        "android.system.vm_payload-rust",
+        "libbinder_rs",
+    ],
+}
