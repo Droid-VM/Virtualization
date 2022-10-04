@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8300a26b_52ef989b",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-04T07:50:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a1bd2dd_c94eb94a",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 19
+      },
+      "revId": "78cf1f6647ef2512f67403757ed5a424c93ab52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc9bb90b_de72bb35",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbc2fbc5_6af35ff9",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-04T07:50:54Z",
+      "side": 1,
+      "message": "I wanted to prepare one API for c code and another for rust code, but maybe one is enough. Can we also call notify_host_of_payload_ready() in [1] for example?\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/compos/src/compsvc_main.rs;l\u003d62;drc\u003d7eb5ca4ff4ca2f47b6936f6470d91c5e0a719968",
+      "parentUuid": "fc9bb90b_de72bb35",
+      "range": {
+        "startLine": 26,
+        "startChar": 24,
+        "endLine": 26,
+        "endChar": 26
+      },
+      "revId": "78cf1f6647ef2512f67403757ed5a424c93ab52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfb91f6d_0d42ca89",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-10-03T16:34:11Z",
       "side": 1,
       "message": "It would be nice to log the error somewhere. But I\u0027m not sure how/where.",
+      "range": {
+        "startLine": 29,
+        "startChar": 25,
+        "endLine": 29,
+        "endChar": 33
+      },
+      "revId": "78cf1f6647ef2512f67403757ed5a424c93ab52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8337b6ed_cbecbeed",
+        "filename": "microdroid/vm_payload/src/vm_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-04T07:50:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfb91f6d_0d42ca89",
       "range": {
         "startLine": 29,
         "startChar": 25,
@@ -112,6 +184,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f89d8cc_14f3e558",
+        "filename": "microdroid/vm_payload/src/vm_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-04T07:50:54Z",
+      "side": 1,
+      "message": "I see. In that sense, maybe it\u0027s better to remove host in the method name, like just call it notify_payload_ready()?",
+      "parentUuid": "79348242_e5b23a3e",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 1
+      },
+      "revId": "78cf1f6647ef2512f67403757ed5a424c93ab52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9221bb42_47164fed",
         "filename": "tests/testapk/src/native/testbinary.cpp",
         "patchSetId": 7
@@ -123,6 +219,30 @@
       "writtenOn": "2022-10-03T16:34:11Z",
       "side": 1,
       "message": "This block is pretty much inlining RunRpcServerCallback, isn\u0027t it? Can\u0027t we just call it directly?\n\n(This code will have to move into libvm_payload too in due course, either way.)",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 29
+      },
+      "revId": "78cf1f6647ef2512f67403757ed5a424c93ab52d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1de83178_0197b90f",
+        "filename": "tests/testapk/src/native/testbinary.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-04T07:50:54Z",
+      "side": 1,
+      "message": "I see. I thought that we wanted to get rid of RunRpcServerCallback usages. I\u0027ll put it back.",
+      "parentUuid": "9221bb42_47164fed",
       "range": {
         "startLine": 142,
         "startChar": 0,
