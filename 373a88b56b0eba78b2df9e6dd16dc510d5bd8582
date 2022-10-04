@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7c3af84_cbe5253f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-04T09:07:33Z",
+      "side": 1,
+      "message": "Actually I realise the key thing that is missing here:\n- We don\u0027t want the library to actually do the notification; we want to remove the ability to do so from the app process, which includes the library.\n- Instead, we want the library to talk back to microdroid manager, via binder, and ask it to do the notification on its behalf.",
+      "revId": "373a88b56b0eba78b2df9e6dd16dc510d5bd8582",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47a62ff1_d3fc48fa",
         "filename": "microdroid/vm_payload/Android.bp",
         "patchSetId": 9
