@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32c08cac_965de138",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-04T09:06:31Z",
+      "side": 1,
+      "message": "This effectively creates a new category of APIs. I don\u0027t know what we should call it, but for each NDK library we have a linker script file (*.map.txt) where public symbols in the library is listed. Using the script, a stub library is created and applications are supposed to link against the stub, not the implementation library.\n\nBut that could be done in a follow-up change.",
+      "parentUuid": "47a62ff1_d3fc48fa",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 15
+      },
+      "revId": "373a88b56b0eba78b2df9e6dd16dc510d5bd8582",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03e0d769_2e9a798f",
         "filename": "microdroid/vm_payload/src/vm_service.rs",
         "patchSetId": 9
