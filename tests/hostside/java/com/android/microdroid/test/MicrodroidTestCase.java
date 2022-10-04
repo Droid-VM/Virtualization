@@ -756,6 +756,113 @@ public class MicrodroidTestCase extends MicrodroidHostTestCaseBase {
                                 + " permission");
     }
 
+
+    private int getFreeMemoryInfoMb(CommandRunner android) throws DeviceNotAvailableException {
+        int freeMemory = 0;
+        String content = android.runForResult("cat /proc/meminfo").getStdout().trim();
+        String[] lines = content.split("[\r\n]+");
+
+        for (int i = 0; i < lines.length; i++) {
+            if (lines[i].contains("MemFree:")) {
+                freeMemory = Integer.parseInt(lines[i].replaceAll("\\D+", "")) / 1024;
+                break;
+            }
+        }
+
+        return freeMemory;
+    }
+
+    private void unlockScreen(CommandRunner android)
+            throws DeviceNotAvailableException, InterruptedException {
+        android.run("input keyevent", "KEYCODE_WAKEUP");
+        Thread.sleep(100);
+        final String ret = android.runForResult("dumpsys nfc | grep 'mScreenState='")
+                .getStdout().trim();
+        if (ret != null && ret.contains("ON_LOCKED")) {
+            android.run("input keyevent", "KEYCODE_MENU");
+        }
+    }
+
+    class AmStartupTime {
+        private int mTotalTime;
+        private int mWaitTime;
+
+        AmStartupTime(String startAppLog) {
+            String[] lines = startAppLog.split("[\r\n]+");
+
+            for (int i = 0; i < lines.length; i++) {
+                if (lines[i].contains("TotalTime:")) {
+                    mTotalTime = Integer
+                        .parseInt(lines[i].replaceAll("\\D+", ""));
+                }
+                if (lines[i].contains("WaitTime:")) {
+                    mWaitTime = Integer
+                        .parseInt(lines[i].replaceAll("\\D+", ""));
+                }
+            }
+        }
+
+        public int getTotalTime() {
+            return mTotalTime;
+        }
+
+        public int getWaitTime() {
+            return mWaitTime;
+        }
+    }
+
+    @Test
+    public void testAppStartupTimeAfterVm() throws Exception {
+        final String configPath = "assets/vm_config.json";
+        final String cid;
+        final int vm_mem_mb;
+        final String cmd_consume_mem;
+        cmd_consume_mem = "cd /mnt/ramdisk && truncate -s %dM sprayMemory && "
+            + "dd if=/dev/zero of=sprayMemory bs=1MB count=%d";
+        CommandRunner android = new CommandRunner(getDevice());
+
+        if (isCuttlefish()) {
+            return;
+        }
+
+        // Donate 80% of the available device memory to the VM
+        vm_mem_mb = getFreeMemoryInfoMb(android) * 80 / 100;
+        cid = startMicrodroid(
+                            getDevice(),
+                            getBuild(),
+                            APK_NAME,
+                            PACKAGE_NAME,
+                            configPath,
+                            true,
+                            vm_mem_mb,
+                            Optional.of(NUM_VCPUS),
+                            Optional.of(CPU_AFFINITY));
+        adbConnectToMicrodroid(getDevice(), cid);
+        waitForBootComplete();
+
+        rootMicrodroid();
+
+        runOnMicrodroid("mkdir -p /mnt/ramdisk && chmod 777 /mnt/ramdisk");
+        runOnMicrodroid("mount -t tmpfs -o size=32G tmpfs /mnt/ramdisk");
+        try {
+            runOnMicrodroidForResult(String.format(cmd_consume_mem, vm_mem_mb, vm_mem_mb));
+        } catch (Exception ex) {
+
+        } finally {
+            shutdownMicrodroid(getDevice(), cid);
+        }
+
+        // Make sure we unlock the screen
+        unlockScreen(android);
+
+        // Start after we fragmented stage2 memory and report app startup time
+        String startAppLog = android.run("am", "start -W -S com.android.settings");
+        assertTrue(startAppLog != null && !startAppLog.isEmpty());
+        AmStartupTime metric = new AmStartupTime(startAppLog);
+        mMetrics.addTestMetric("TotalTime", Integer.toString((metric.getTotalTime())));
+        mMetrics.addTestMetric("WaitTime", Integer.toString(metric.getWaitTime()));
+    }
+
     @Before
     public void setUp() throws Exception {
         testIfDeviceIsCapable(getDevice());
