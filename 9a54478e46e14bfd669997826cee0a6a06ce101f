@@ -96,6 +96,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ffd23c2d_9dea3fb1",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-04T07:49:56Z",
+      "side": 1,
+      "message": "Well, the plan is that Payload Config Path will be unavailable to priv apps; it\u0027ll be @TestApi but not @SystemApi, and protected by a different permission.\n\nSo I wasn\u0027t sure whether the documentation for payload binary path should mention it.\n\nBut maybe I should just go for it.",
+      "parentUuid": "8010e28d_0877ce4b",
+      "range": {
+        "startLine": 201,
+        "startChar": 4,
+        "endLine": 202,
+        "endChar": 10
+      },
+      "revId": "9a54478e46e14bfd669997826cee0a6a06ce101f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee3c38bc_ef19a6c0",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 1
@@ -140,6 +164,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07f64c9b_94059c98",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-04T07:49:56Z",
+      "side": 1,
+      "message": "That would be more general, but I don\u0027t think anyone will ever do it.\n(And it\u0027s just as easy to create another config.)",
+      "parentUuid": "1965b6d4_b8e52475",
+      "range": {
+        "startLine": 382,
+        "startChar": 45,
+        "endLine": 382,
+        "endChar": 52
+      },
+      "revId": "9a54478e46e14bfd669997826cee0a6a06ce101f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de8b5b01_84b5d5bc",
@@ -153,6 +201,30 @@
       "writtenOn": "2022-10-04T06:37:12Z",
       "side": 1,
       "message": "Consider putting all required parameters to Builder c-tor. See go/android-api-guidelines#builders-nonnull-constructors",
+      "range": {
+        "startLine": 410,
+        "startChar": 7,
+        "endLine": 412,
+        "endChar": 34
+      },
+      "revId": "9a54478e46e14bfd669997826cee0a6a06ce101f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4f60aa1_a6f6fd3f",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-04T07:49:56Z",
+      "side": 1,
+      "message": "That says that all constructor parameters must be required, but not that all required parameters must be constructor parameters.\n\nI want to make this really explicit - one mistake one of our clients made was not to ask for protected. And new Builder(ctx).setProtected(false) seems a lot harder to do accidentally than new Builder(ctx, false).",
+      "parentUuid": "de8b5b01_84b5d5bc",
       "range": {
         "startLine": 410,
         "startChar": 7,
