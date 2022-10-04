@@ -182,7 +182,7 @@ Result<void> run_io_benchmark_tests() {
 }
 } // Anonymous namespace
 
-extern "C" int android_native_main(int /* argc */, char* /* argv */[]) {
+extern "C" int android_native_main() {
     if (auto res = run_io_benchmark_tests(); !res.ok()) {
         LOG(ERROR) << "IO benchmark test failed: " << res.error() << "\n";
         return EXIT_FAILURE;

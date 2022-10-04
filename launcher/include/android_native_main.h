@@ -14,11 +14,15 @@
  * limitations under the License.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
+#pragma once
 
-// A VM payload that crashes as soon as it starts, to allow us to exercise that error path.
-extern "C" int android_native_main() {
-    printf("test crash!!!!\n");
-    abort();
+// TODO(b/249064104): Move this somewhere the payload can include it
+
+#ifdef __cplusplus
+extern "C" {
+typedef int android_native_main_t();
+android_native_main_t android_native_main;
 }
+#else
+    extern int android_native_main(void));
+#endif

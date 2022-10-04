@@ -139,20 +139,13 @@ Result<void> verify_apk() {
 
 } // Anonymous namespace
 
-extern "C" int android_native_main(int argc, char* argv[]) {
+extern "C" int android_native_main() {
     // disable buffering to communicate seamlessly
     setvbuf(stdin, nullptr, _IONBF, 0);
     setvbuf(stdout, nullptr, _IONBF, 0);
     setvbuf(stderr, nullptr, _IONBF, 0);
 
-    printf("Hello Microdroid ");
-    for (int i = 0; i < argc; i++) {
-        printf("%s", argv[i]);
-        bool last = i == (argc - 1);
-        if (!last) {
-            printf(" ");
-        }
-    }
+    printf("Hello Microdroid");
     testlib_sub();
     printf("\n");
 
