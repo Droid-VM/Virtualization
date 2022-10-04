@@ -69,6 +69,98 @@
       },
       "revId": "9a54478e46e14bfd669997826cee0a6a06ce101f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8010e28d_0877ce4b",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-04T06:37:12Z",
+      "side": 1,
+      "message": "nit: document that either getPayloadBinaryPath() or getPayloadConfigPath() will return a non-null value?",
+      "range": {
+        "startLine": 201,
+        "startChar": 4,
+        "endLine": 202,
+        "endChar": 10
+      },
+      "revId": "9a54478e46e14bfd669997826cee0a6a06ce101f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee3c38bc_ef19a6c0",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-04T06:37:12Z",
+      "side": 1,
+      "message": "nit: document that caller should either call setPayloadConfigPath or setPayloadBinaryPath, but not both (or neither). ditto for setPayloadBinaryPath",
+      "range": {
+        "startLine": 376,
+        "startChar": 11,
+        "endLine": 377,
+        "endChar": 21
+      },
+      "revId": "9a54478e46e14bfd669997826cee0a6a06ce101f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1965b6d4_b8e52475",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-04T06:37:12Z",
+      "side": 1,
+      "message": "Should this be @Nullable to allow app developers to re-use the same builder to create multiple different configs, e.g:\n\nVirtualMachineConfig.Builder configBuilder \u003d new VirtualMachineConfig.Builder(ctx);\nVirtualMachine config1 \u003d\n  configBuilder.setPayloadConfigPath(\"/path/to/payload\").build();\nVirtualMachine config1 \u003d\n  configBuilder\n      .setPayloadConfigPath(null)\n      .setPayloadBinaryPath(\"/path/to/bin\")\n      .build();",
+      "range": {
+        "startLine": 382,
+        "startChar": 45,
+        "endLine": 382,
+        "endChar": 52
+      },
+      "revId": "9a54478e46e14bfd669997826cee0a6a06ce101f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de8b5b01_84b5d5bc",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-04T06:37:12Z",
+      "side": 1,
+      "message": "Consider putting all required parameters to Builder c-tor. See go/android-api-guidelines#builders-nonnull-constructors",
+      "range": {
+        "startLine": 410,
+        "startChar": 7,
+        "endLine": 412,
+        "endChar": 34
+      },
+      "revId": "9a54478e46e14bfd669997826cee0a6a06ce101f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
