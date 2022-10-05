@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2323744c_81d9b4d0",
+        "filename": "virtualizationservice/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-10-05T09:31:07Z",
+      "side": 1,
+      "message": "There will be more crosvm innards imported here soon. I don\u0027t know if grouping and highlighting them is considered a good thing or not. I can remove the comment if it\u0027s not in style.",
+      "parentUuid": "4c7b10fc_a62cc603",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 26
+      },
+      "revId": "cea5395be596cdb9013779fecda04f9c37b6b01e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "feb85b78_3c4f7365",
         "filename": "virtualizationservice/src/crosvm.rs",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-05T09:24:46Z",
       "side": 1,
       "message": "Use add_preserved_fd instead? You may have to change the signature of the function to accept the trait AsRawFd though, but it\u0027s good to avoid duplicating /proc/self/fd/{} logic.",
+      "range": {
+        "startLine": 529,
+        "startChar": 0,
+        "endLine": 530,
+        "endChar": 96
+      },
+      "revId": "cea5395be596cdb9013779fecda04f9c37b6b01e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "272fcbcd_4a3a80b2",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-10-05T09:31:07Z",
+      "side": 1,
+      "message": "Ok makes sense.",
+      "parentUuid": "feb85b78_3c4f7365",
       "range": {
         "startLine": 529,
         "startChar": 0,
