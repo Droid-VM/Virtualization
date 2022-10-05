@@ -26,12 +26,12 @@ use nix::{fcntl::OFlag, unistd::pipe2};
 use shared_child::SharedChild;
 use std::borrow::Cow;
 use std::fs::{remove_dir_all, File};
-use std::io::{self, Read};
+use std::io::{self, Read, BufReader, BufRead};
 use std::mem;
 use std::num::NonZeroU32;
 use std::os::unix::io::{AsRawFd, RawFd, FromRawFd};
 use std::path::{Path, PathBuf};
-use std::process::{Command, ExitStatus};
+use std::process::{Command, ExitStatus, Stdio};
 use std::sync::{Arc, Condvar, Mutex};
 use std::time::{Duration, SystemTime};
 use std::thread;
@@ -240,10 +240,21 @@ impl VmInstance {
     /// handles the event by updating the state, noityfing the event to clients by calling
     /// callbacks, and removing temporary files for the VM.
     fn monitor_vm_exit(&self, child: Arc<SharedChild>, mut failure_pipe_read: File) {
+        let stderr_binding = child.take_stderr();
+        let stderr_pipe = stderr_binding.unwrap();
+        let stderr_reader = BufReader::new(stderr_pipe);
+
         let result = child.wait();
         match &result {
             Err(e) => error!("Error waiting for crosvm({}) instance to die: {}", child.id(), e),
             Ok(status) => info!("crosvm({}) exited with status {}", child.id(), status),
+        }
+
+        for line in stderr_reader.lines() {
+            let str_line = line.unwrap();
+            if str_line.contains("VCPU_STALL_DETECTOR requested reset") {
+                error!("Rebooted because a guest stall is detected {}", str_line);
+            }
         }
 
         let mut vm_state = self.vm_state.lock().unwrap();
@@ -514,6 +525,8 @@ fn run_vm(config: CrosvmConfig, failure_pipe_write: File) -> Result<SharedChild,
     if let Some(kernel) = &config.kernel {
         command.arg(add_preserved_fd(&mut preserved_fds, kernel));
     }
+
+    command.stderr(Stdio::piped());
 
     debug!("Preserving FDs {:?}", preserved_fds);
     command.preserved_fds(preserved_fds);
