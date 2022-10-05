@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b96de990_db8bc8ab",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-05T08:23:44Z",
+      "side": 1,
+      "message": "I have created a constructor that take the reference of IVirtualMachineService as argument.",
+      "parentUuid": "ed2077c8_55c7244a",
+      "range": {
+        "startLine": 406,
+        "startChar": 18,
+        "endLine": 406,
+        "endChar": 63
+      },
+      "revId": "171513cc982e84f0207726e76fbae133d9a58685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4adb8078_14352d01",
@@ -83,6 +107,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97b23982_c824d269",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-05T08:23:44Z",
+      "side": 1,
+      "message": "Yes, I understand that. I think maybe we can first land the cl of interfaces/impl stuff with the usual binder, then change the binder to David\u0027s implementation in a subsequent cl. In case something doesn\u0027t work, it\u0027ll be easier to localize the problem with smaller cls. WDYT?",
+      "parentUuid": "4adb8078_14352d01",
+      "range": {
+        "startLine": 407,
+        "startChar": 4,
+        "endLine": 407,
+        "endChar": 15
+      },
+      "revId": "171513cc982e84f0207726e76fbae133d9a58685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0697e89_9a7cbbe9",
         "filename": "virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachinePayload.aidl",
         "patchSetId": 1
@@ -94,6 +142,30 @@
       "writtenOn": "2022-10-04T16:49:56Z",
       "side": 1,
       "message": "I don\u0027t think this AIDL should go here, nor should it be in virtualizationservice\u0027s aidl.rs.\n\nVS exists in the host, and handles regular binder calls from clients creating VMs (IVirtualizationService etc), and from Microdroid Manager in the VM via RPC binder (IVirtualMachine).\n\nWe want the vm_payload library to talk to Microdroid Manager inside the VM. So I think the AIDL (and implementation) should be over there.\n\nAnd then MM will just forward the call to the existing IVirtualMachine method on VS.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 45
+      },
+      "revId": "171513cc982e84f0207726e76fbae133d9a58685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6b06d7e_0e1e93bb",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachinePayload.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-05T08:23:44Z",
+      "side": 1,
+      "message": "Ok. I\u0027ll leave IVirtualMachinePayloa.aidl and its implementation inside vm_payload, but still register the service in MM. libvm_payload will only depends on the interface to access the service via binder. WDYT?",
+      "parentUuid": "b0697e89_9a7cbbe9",
       "range": {
         "startLine": 16,
         "startChar": 0,
