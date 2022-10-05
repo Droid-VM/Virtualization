@@ -24,6 +24,10 @@ extern "C" {
 /// Returns true if the notification succeeds else false.
 bool notify_payload_ready();
 
+size_t get_dice_attestation_chain(void *data, size_t size);
+size_t get_dice_attestation_cdi(void *data, size_t size);
+size_t get_dice_sealing_cdi(void *data, size_t size);
+
 #ifdef __cplusplus
 } // extern "C"
 #endif
