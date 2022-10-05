@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dc8cdc6_1629ed4a",
+        "filename": "microdroid/vm_payload/aidl/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-05T12:08:48Z",
+      "side": 1,
+      "message": "The implementation would be better placed under microdroid_manager which provides the service, just merging it into m_m directly so the implementation can reference other m_m state when the methods get more complex. I was confused why the implementation was along side the client.",
+      "revId": "b6c18ed48360b24647392aaa1fc316210fd95352",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
