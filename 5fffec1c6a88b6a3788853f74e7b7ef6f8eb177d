@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "abeddd80_176ed2bc",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-10-05T05:54:45Z",
+      "side": 1,
+      "message": "It won\u0027t throw an error unless the host(virtualizationservice) cannot get VM with given cid. I believe this case will happen when the VM is already stopped.\n\n`if let Some(vm) \u003d self.state.lock().unwrap().get_vm(cid) {`",
+      "parentUuid": "a04b09f0_6baf8169",
+      "range": {
+        "startLine": 119,
+        "startChar": 47,
+        "endLine": 119,
+        "endChar": 49
+      },
+      "revId": "5fffec1c6a88b6a3788853f74e7b7ef6f8eb177d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4827a7f8_4867275c",
         "filename": "microdroid_manager/src/procutil.rs",
         "patchSetId": 6
