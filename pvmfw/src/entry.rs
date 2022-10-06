@@ -18,7 +18,7 @@ use crate::helpers::FDT_MAX_SIZE;
 use crate::jump_to_payload;
 use crate::mmio_guard;
 use core::{fmt, slice};
-use log::{trace, LevelFilter};
+use log::{error, trace, LevelFilter};
 use vmbase::{console, logger, main, power::reboot};
 
 #[derive(Debug, Clone)]
@@ -78,6 +78,11 @@ fn main_wrapper(fdt: &mut [u8], payload: &[u8]) -> Result<(), RebootReason> {
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
     crate::main(fdt, payload);
+
+    if let Err(e) = mmio_guard::unmap(console::BASE_ADDRESS) {
+        error!("Failed to unshare UART: {e}");
+        return Err(RebootReason::InternalError);
+    }
 
     Ok(())
 }
