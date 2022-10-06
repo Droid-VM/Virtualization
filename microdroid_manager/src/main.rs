@@ -50,6 +50,7 @@ use std::path::Path;
 use std::process::{Child, Command, Stdio};
 use std::str;
 use std::time::{Duration, SystemTime};
+use std::borrow::Cow::{Borrowed, Owned};
 use vsock::VsockStream;
 
 const WAIT_TIMEOUT: Duration = Duration::from_secs(10);
@@ -110,7 +111,7 @@ fn translate_error(err: &Error) -> (ErrorCode, String) {
 
 fn write_death_reason_to_serial(err: &Error) -> Result<()> {
     let death_reason = if let Some(e) = err.downcast_ref::<MicrodroidError>() {
-        match e {
+        Borrowed(match e {
             MicrodroidError::FailedToConnectToVirtualizationService(_) => {
                 "MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE"
             }
@@ -119,9 +120,9 @@ fn write_death_reason_to_serial(err: &Error) -> Result<()> {
                 "MICRODROID_PAYLOAD_VERIFICATION_FAILED"
             }
             MicrodroidError::InvalidConfig(_) => "MICRODROID_INVALID_PAYLOAD_CONFIG",
-        }
+        })
     } else {
-        "MICRODROID_UNKNOWN_RUNTIME_ERROR"
+        Owned(format!("MICRODROID_UNKNOWN_RUNTIME_ERROR|{:?}", err))
     };
 
     let death_reason_bytes = death_reason.as_bytes();
@@ -353,7 +354,7 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
     )
     .context("Failed to run zipfuse")?;
 
-    let config = load_config(payload_metadata)?;
+    let config = load_config(payload_metadata).context("Failed to load payload metadata")?;
 
     let task = config
         .task
@@ -386,7 +387,7 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
     }
 
     system_properties::write("dev.bootcomplete", "1").context("set dev.bootcomplete")?;
-    exec_task(task, service)
+    exec_task(task, service).context("Failed to run payload")
 }
 
 fn control_service(action: &str, service: &str) -> Result<()> {
@@ -653,7 +654,8 @@ fn load_config(payload_metadata: PayloadMetadata) -> Result<VmPayloadConfig> {
         PayloadMetadata::config_path(path) => {
             let path = Path::new(&path);
             info!("loading config from {:?}...", path);
-            let file = ioutil::wait_for_file(path, WAIT_TIMEOUT)?;
+            let file = ioutil::wait_for_file(path, WAIT_TIMEOUT)
+                .with_context(|| format!("Failed to read {:?}", path))?;
             Ok(serde_json::from_reader(file)?)
         }
         PayloadMetadata::config(payload_config) => {
