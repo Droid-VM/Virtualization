@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b4953d5_7c2de82d",
+        "filename": "microdroid_manager/aidl/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-06T13:53:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75c132e1_2eb243b0",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 10
+      },
+      "revId": "aa7b17346a724022c770b588b312fdc605dab6c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "296f86dc_576e74fd",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-06T13:19:31Z",
       "side": 1,
       "message": "And you probably don\u0027t need this, either, if both ends are Rust",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 10
+      },
+      "revId": "aa7b17346a724022c770b588b312fdc605dab6c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96d26357_f6706c40",
+        "filename": "microdroid_manager/aidl/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-06T13:53:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "296f86dc_576e74fd",
       "range": {
         "startLine": 13,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e54a2a4f_755fe0bc",
+        "filename": "microdroid_manager/aidl/android/system/vm_payload/IVirtualMachinePayload.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-06T13:53:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8deed00f_468455f6",
+      "range": {
+        "startLine": 16,
+        "startChar": 8,
+        "endLine": 16,
+        "endChar": 34
+      },
+      "revId": "aa7b17346a724022c770b588b312fdc605dab6c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3548fc96_3a9d2f8a",
@@ -83,6 +155,24 @@
       "writtenOn": "2022-10-06T13:19:31Z",
       "side": 1,
       "message": "Nit: could we have a comment on the interface itself?",
+      "revId": "aa7b17346a724022c770b588b312fdc605dab6c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b78f3194_7fc7b2dc",
+        "filename": "microdroid_manager/aidl/android/system/vm_payload/IVirtualMachinePayload.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-06T13:53:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3548fc96_3a9d2f8a",
       "revId": "aa7b17346a724022c770b588b312fdc605dab6c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -110,6 +200,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1adf8dc2_5345fdbf",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-06T13:53:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce779cfb_16b7dcf5",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 16
+      },
+      "revId": "aa7b17346a724022c770b588b312fdc605dab6c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe38834f_36ab7625",
@@ -123,6 +237,30 @@
       "writtenOn": "2022-10-06T13:19:31Z",
       "side": 1,
       "message": "Does this not trigger a warning? Normally if you have a function call it tells you to use with_context(|| { stuff }) instead.\nUnless that format! gets expanded to a constant string, I suppose",
+      "range": {
+        "startLine": 54,
+        "startChar": 6,
+        "endLine": 54,
+        "endChar": 16
+      },
+      "revId": "aa7b17346a724022c770b588b312fdc605dab6c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74832610_e11f221d",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-06T13:53:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe38834f_36ab7625",
       "range": {
         "startLine": 54,
         "startChar": 6,
