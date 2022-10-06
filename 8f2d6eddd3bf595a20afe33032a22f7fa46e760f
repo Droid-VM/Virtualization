@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9babeecc_b9dbf252",
+        "filename": "launcher/include/android_native_main.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-06T17:08:14Z",
+      "side": 1,
+      "message": "This up-and-coming vm_payload library seem suitable (I assume it\u0027ll be renamed once we know what to call it)",
+      "revId": "8f2d6eddd3bf595a20afe33032a22f7fa46e760f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85f4466d_da53079f",
@@ -14,6 +31,30 @@
       "writtenOn": "2022-10-06T16:30:43Z",
       "side": 1,
       "message": "I wonder if we should rename this, since we\u0027re changing the prototype. That changes a potential nasty compile-time error into a built-time error for existing ussers.\n\n(Also I\u0027m not convinced it\u0027s the right name - it sounds like it\u0027s more general than it is. vm_main(), vm_entry_point() ?)",
+      "range": {
+        "startLine": 27,
+        "startChar": 15,
+        "endLine": 27,
+        "endChar": 34
+      },
+      "revId": "8f2d6eddd3bf595a20afe33032a22f7fa46e760f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6edd90d_8fa27fc9",
+        "filename": "launcher/include/android_native_main.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-06T17:08:14Z",
+      "side": 1,
+      "message": "I agree a more specific name could be good. Do we have branding for the API yet? What sort of name do we use \u0027publicly\u0027? But a rename could come later too.\n\nAnd I guess we don\u0027t want to allow the caller to specify the entry symbol name themselves, like NativeActivity does? That seem to add another degree of freedom that\u0027s be hard to keep track of.",
+      "parentUuid": "85f4466d_da53079f",
       "range": {
         "startLine": 27,
         "startChar": 15,
