@@ -22,6 +22,30 @@
       },
       "revId": "305d3c03199b30abe0cfed25419e8f7f11696b7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bace0f4e_66c73755",
+        "filename": "microdroid_manager/vm_payload_service/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-06T12:12:07Z",
+      "side": 1,
+      "message": "Yes, I agree. This library is injected into the client process which doesn\u0027t need the implementation end.\n\nThe library should be wrapping the call to the AIDLWhich is what you have.",
+      "parentUuid": "c208fe11_166e79db",
+      "range": {
+        "startLine": 6,
+        "startChar": 11,
+        "endLine": 6,
+        "endChar": 34
+      },
+      "revId": "305d3c03199b30abe0cfed25419e8f7f11696b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
