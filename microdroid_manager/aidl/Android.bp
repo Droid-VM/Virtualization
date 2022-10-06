@@ -10,6 +10,7 @@ aidl_interface {
         rust: {
             enabled: true,
             apex_available: [
+                "com.android.compos",
                 "com.android.virt",
             ],
         },
