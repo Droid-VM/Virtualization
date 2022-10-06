@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75c132e1_2eb243b0",
+        "filename": "microdroid_manager/aidl/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-06T13:19:31Z",
+      "side": 1,
+      "message": "Do you need this? We don\u0027t have any Java uses. (You could mark it enabled: false if it complains)",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 10
+      },
+      "revId": "aa7b17346a724022c770b588b312fdc605dab6c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "296f86dc_576e74fd",
+        "filename": "microdroid_manager/aidl/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-06T13:19:31Z",
+      "side": 1,
+      "message": "And you probably don\u0027t need this, either, if both ends are Rust",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 10
+      },
+      "revId": "aa7b17346a724022c770b588b312fdc605dab6c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8deed00f_468455f6",
+        "filename": "microdroid_manager/aidl/android/system/vm_payload/IVirtualMachinePayload.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-06T13:19:31Z",
+      "side": 1,
+      "message": "android.system is quite a wide namespace, so we should be careful to use names that clearly related to AVF\nMaybe android.system.virtualization[.]payload ?",
+      "range": {
+        "startLine": 16,
+        "startChar": 8,
+        "endLine": 16,
+        "endChar": 34
+      },
+      "revId": "aa7b17346a724022c770b588b312fdc605dab6c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3548fc96_3a9d2f8a",
+        "filename": "microdroid_manager/aidl/android/system/vm_payload/IVirtualMachinePayload.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-06T13:19:31Z",
+      "side": 1,
+      "message": "Nit: could we have a comment on the interface itself?",
+      "revId": "aa7b17346a724022c770b588b312fdc605dab6c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce779cfb_16b7dcf5",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-06T13:19:31Z",
+      "side": 1,
+      "message": "Do you need that? I doubt it tells you anything very interesting",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 16
+      },
+      "revId": "aa7b17346a724022c770b588b312fdc605dab6c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe38834f_36ab7625",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-06T13:19:31Z",
+      "side": 1,
+      "message": "Does this not trigger a warning? Normally if you have a function call it tells you to use with_context(|| { stuff }) instead.\nUnless that format! gets expanded to a constant string, I suppose",
+      "range": {
+        "startLine": 54,
+        "startChar": 6,
+        "endLine": 54,
+        "endChar": 16
+      },
+      "revId": "aa7b17346a724022c770b588b312fdc605dab6c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
