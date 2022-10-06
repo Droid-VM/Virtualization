@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b7e9469_443da41a",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-06T09:38:32Z",
+      "side": 1,
+      "message": "nit1: \"purposes\"\nnit2: put it next to the other constants",
+      "range": {
+        "startLine": 79,
+        "startChar": 35,
+        "endLine": 79,
+        "endChar": 42
+      },
+      "revId": "8d7d75b2825d91249b19613dc27b0445ad4f46dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6315be99_7d32dfe1",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-06T09:38:32Z",
+      "side": 1,
+      "message": "Use `mMetricsProcessor`, same as the other benchmarks here.\n\nI would also prefer to report the raw numbers, not the delta. The delta will be obvious when we display them on the same chart, and reporting the raw numbers means we can also analyze its noisiness.",
+      "range": {
+        "startLine": 134,
+        "startChar": 8,
+        "endLine": 140,
+        "endChar": 46
+      },
+      "revId": "8d7d75b2825d91249b19613dc27b0445ad4f46dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acef456e_410c5877",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-06T09:38:32Z",
+      "side": 1,
+      "message": "Could we instead test that the device supports protected VMs? That would automatically exclude CF and it is less arbitrary.\n\nThere is a function for *device* tests called `hypervisor_protected_vm_supported` in `MicrodroidDeviceTestBase.java`. You can add its equivalent for *hostside* tests into `MicrodroidHostTestCaseBase` and then use it here.",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 50
+      },
+      "revId": "8d7d75b2825d91249b19613dc27b0445ad4f46dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5835011f_5b9ba12d",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-06T09:38:32Z",
+      "side": 1,
+      "message": "Is this a fair comparison? `beforeVmStartApp` is a cold start, `afterVmStartApp` is warm. Shouldn\u0027t we compare numbers after a fresh boot for both?",
+      "range": {
+        "startLine": 207,
+        "startChar": 8,
+        "endLine": 210,
+        "endChar": 51
+      },
+      "revId": "8d7d75b2825d91249b19613dc27b0445ad4f46dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "021c6576_554bfea8",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-06T09:38:32Z",
+      "side": 1,
+      "message": "static class",
+      "range": {
+        "startLine": 215,
+        "startChar": 4,
+        "endLine": 215,
+        "endChar": 9
+      },
+      "revId": "8d7d75b2825d91249b19613dc27b0445ad4f46dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
