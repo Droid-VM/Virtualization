@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c1ac37d_b858d210",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-06T13:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d5598cc_a4c2f127",
+      "range": {
+        "startLine": 29,
+        "startChar": 26,
+        "endLine": 29,
+        "endChar": 27
+      },
+      "revId": "11ec227dd03f65d99ed864ecaa841e7f0f1af9bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b4585db_07e5c8d5",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-03T08:28:19Z",
       "side": 1,
       "message": "Shouldn\u0027t we unmap before this?",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 50
+      },
+      "revId": "11ec227dd03f65d99ed864ecaa841e7f0f1af9bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5be1d23d_a9ceb772",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-06T13:26:21Z",
+      "side": 1,
+      "message": "At the time of b/209797606, I had the same question and was told that pvmfw should not bother with unmapping MMIO pages (we did not in U-Boot). But if it doesn\u0027t represent a prohibitive overhead, I\u0027d rather provide a predictable platform state to the payload by (among other things) unmapping those pages; see aosp/2238683.",
+      "parentUuid": "9b4585db_07e5c8d5",
       "range": {
         "startLine": 40,
         "startChar": 0,
@@ -93,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0c3f976_c47ad771",
+        "filename": "pvmfw/src/smccc.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-06T13:26:21Z",
+      "side": 1,
+      "message": "IMO, these functions (along with `psci`) should only act as a slim easy-to-use \"Rusty\" mean of issuing the SMCs/HVCs and should not add extra logic. MMIO_GUARD_MAP takes an IPA and, therefore, so does this function; if an address is passed that is not granule-aligned, the function should still issue the HVC (with the invalid argument) and pKVM is then responsible for rejecting it, resulting in a `Result::Err`.\n\nBTW, I treat this module as a staging area for what should be turned into a crate (see b/245889995) so would rather limit its dependencies; as an HVC64 takes `u64`s, I can\u0027t think of a better type to represent its parameter.",
+      "parentUuid": "c2fe9cc1_60501fd2",
+      "range": {
+        "startLine": 52,
+        "startChar": 22,
+        "endLine": 52,
+        "endChar": 31
+      },
+      "revId": "11ec227dd03f65d99ed864ecaa841e7f0f1af9bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1b3f0db_bb991adb",
@@ -106,6 +178,30 @@
       "writtenOn": "2022-09-30T15:00:14Z",
       "side": 1,
       "message": "What\u0027s the return value? Shouldn\u0027t you convert this to a Result and check for errors in the caller?",
+      "range": {
+        "startLine": 56,
+        "startChar": 54,
+        "endLine": 56,
+        "endChar": 57
+      },
+      "revId": "11ec227dd03f65d99ed864ecaa841e7f0f1af9bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f47befd_c2085e20",
+        "filename": "pvmfw/src/smccc.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-06T13:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1b3f0db_bb991adb",
       "range": {
         "startLine": 56,
         "startChar": 54,
