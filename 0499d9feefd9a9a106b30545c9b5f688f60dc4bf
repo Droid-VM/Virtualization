@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89ab043b_ce3c640a",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-06T14:03:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecd097d3_50c5c8b7",
+      "revId": "0499d9feefd9a9a106b30545c9b5f688f60dc4bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da6000bd_84054100",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-10-06T13:39:23Z",
       "side": 1,
       "message": "Maybe this should then call `reboot`, so the host knows that it was a failed boot rather than a successful shutdown?",
+      "revId": "0499d9feefd9a9a106b30545c9b5f688f60dc4bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94023e70_7997284f",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-06T14:03:38Z",
+      "side": 1,
+      "message": "Done; I\u0027ll look into supplying it to `main!` (similarly to C\u0027s `atexit`) as we\u0027ll never call `shutdown()` from pvmfw.",
+      "parentUuid": "da6000bd_84054100",
       "revId": "0499d9feefd9a9a106b30545c9b5f688f60dc4bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
