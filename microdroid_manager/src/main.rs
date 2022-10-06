@@ -50,6 +50,7 @@ use std::path::Path;
 use std::process::{Child, Command, Stdio};
 use std::str;
 use std::time::{Duration, SystemTime};
+use std::borrow::Cow::{Borrowed, Owned};
 use vsock::VsockStream;
 
 const WAIT_TIMEOUT: Duration = Duration::from_secs(10);
@@ -110,7 +111,7 @@ fn translate_error(err: &Error) -> (ErrorCode, String) {
 
 fn write_death_reason_to_serial(err: &Error) -> Result<()> {
     let death_reason = if let Some(e) = err.downcast_ref::<MicrodroidError>() {
-        match e {
+        Borrowed(match e {
             MicrodroidError::FailedToConnectToVirtualizationService(_) => {
                 "MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE"
             }
@@ -119,9 +120,9 @@ fn write_death_reason_to_serial(err: &Error) -> Result<()> {
                 "MICRODROID_PAYLOAD_VERIFICATION_FAILED"
             }
             MicrodroidError::InvalidConfig(_) => "MICRODROID_INVALID_PAYLOAD_CONFIG",
-        }
+        })
     } else {
-        "MICRODROID_UNKNOWN_RUNTIME_ERROR"
+        Owned(format!("MICRODROID_UNKNOWN_RUNTIME_ERROR|{:?}", err))
     };
 
     let death_reason_bytes = death_reason.as_bytes();
