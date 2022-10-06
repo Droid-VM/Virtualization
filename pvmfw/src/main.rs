@@ -30,12 +30,15 @@ use vmbase::{console, main, power::reboot, println};
 enum Error {
     /// Failed to configure the UART; no logs available.
     FailedUartSetup,
+    /// Failed a necessary MMIO_GUARD_UNMAP hypercall.
+    FailedUartTeardown,
 }
 
 impl fmt::Display for Error {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let msg = match self {
             Self::FailedUartSetup => "Failed to configure the UART",
+            Self::FailedUartTeardown => "Failed to reset the UART",
         };
         write!(f, "{}", msg)
     }
@@ -49,12 +52,16 @@ fn main(fdt_address: u64, payload_start: u64, payload_size: u64, arg3: u64) -> R
     smccc::mmio_guard_map(uart_page).map_err(|_| Error::FailedUartSetup)?;
 
     println!("pVM firmware");
+    // TODO: This is to test MAP-UNMAP-MAP within pvmfw and shouldn't be merged!
+    smccc::mmio_guard_unmap(uart_page).map_err(|_| Error::FailedUartTeardown)?;
+    smccc::mmio_guard_map(uart_page).map_err(|_| Error::FailedUartSetup)?;
     println!(
         "fdt_address={:#018x}, payload_start={:#018x}, payload_size={:#018x}, x3={:#018x}",
         fdt_address, payload_start, payload_size, arg3,
     );
 
     println!("Starting payload...");
+    smccc::mmio_guard_unmap(uart_page).map_err(|_| Error::FailedUartTeardown)?;
 
     Ok(())
 }

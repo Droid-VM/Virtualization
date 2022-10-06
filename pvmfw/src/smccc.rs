@@ -95,6 +95,7 @@ const fn check_smccc_value(ret: i64) -> Result<u64, Error> {
 
 const VENDOR_HYP_KVM_MMIO_GUARD_INFO_FUNC_ID: u32 = 0xc6000005;
 const VENDOR_HYP_KVM_MMIO_GUARD_MAP_FUNC_ID: u32 = 0xc6000007;
+const VENDOR_HYP_KVM_MMIO_GUARD_UNMAP_FUNC_ID: u32 = 0xc6000008;
 
 /// Issue pKVM-specific MMIO_GUARD_INFO HVC64.
 pub fn mmio_guard_info() -> Result<u64, Error> {
@@ -111,6 +112,16 @@ pub fn mmio_guard_map(ipa: u64) -> Result<(), Error> {
     args[0] = ipa;
 
     let res = hvc64(VENDOR_HYP_KVM_MMIO_GUARD_MAP_FUNC_ID, args);
+
+    check_smccc_err(res[0] as i64)
+}
+
+/// Issue pKVM-specific MMIO_GUARD_UNMAP HVC64.
+pub fn mmio_guard_unmap(ipa: u64) -> Result<(), Error> {
+    let mut args = [0u64; 17];
+    args[0] = ipa;
+
+    let res = hvc64(VENDOR_HYP_KVM_MMIO_GUARD_UNMAP_FUNC_ID, args);
 
     check_smccc_err(res[0] as i64)
 }
