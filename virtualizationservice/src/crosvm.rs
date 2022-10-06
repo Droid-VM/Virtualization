@@ -382,7 +382,12 @@ impl VmInstance {
     }
 }
 
-fn death_reason(result: &Result<ExitStatus, io::Error>, failure_reason: &str) -> DeathReason {
+fn death_reason(result: &Result<ExitStatus, io::Error>, mut failure_reason: &str) -> DeathReason {
+    if let Some(position) = failure_reason.find('|') {
+        let (base, extra) = failure_reason.split_at(position);
+        failure_reason = base;
+        error!("Failure reason: {}", &extra[1..]);
+    }
     if let Ok(status) = result {
         match failure_reason {
             "PVM_FIRMWARE_PUBLIC_KEY_MISMATCH" => {
