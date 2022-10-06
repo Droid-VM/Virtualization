@@ -26,6 +26,8 @@ pub enum Error {
     InfoFailed(smccc::Error),
     /// Failed to MMIO_GUARD_MAP a page.
     MapFailed(smccc::Error),
+    /// Failed to MMIO_GUARD_UNMAP a page.
+    UnmapFailed(smccc::Error),
     /// The MMIO_GUARD granule used by the hypervisor is not supported.
     UnsupportedGranule(usize),
 }
@@ -38,6 +40,7 @@ impl fmt::Display for Error {
             Self::EnrollFailed(e) => write!(f, "Failed to enroll into MMIO_GUARD: {e}"),
             Self::InfoFailed(e) => write!(f, "Failed to get the MMIO_GUARD granule: {e}"),
             Self::MapFailed(e) => write!(f, "Failed to MMIO_GUARD map: {e}"),
+            Self::UnmapFailed(e) => write!(f, "Failed to MMIO_GUARD unmap: {e}"),
             Self::UnsupportedGranule(g) => write!(f, "Unsupported MMIO_GUARD granule: {g}"),
         }
     }
@@ -56,6 +59,10 @@ pub fn map(addr: usize) -> Result<()> {
     mmio_guard_map(helpers::page_4kb_of(addr) as u64).map_err(Error::MapFailed)
 }
 
+pub fn unmap(addr: usize) -> Result<()> {
+    mmio_guard_unmap(helpers::page_4kb_of(addr) as u64).map_err(Error::UnmapFailed)
+}
+
 fn mmio_guard_info() -> smccc::Result<u64> {
     const FUNC_ID: u32 = 0xc6000005;
     let args = [0u64; 17];
@@ -72,6 +79,14 @@ fn mmio_guard_enroll() -> smccc::Result<()> {
 
 fn mmio_guard_map(ipa: u64) -> smccc::Result<()> {
     const FUNC_ID: u32 = 0xc6000007;
+    let mut args = [0u64; 17];
+    args[0] = ipa;
+
+    smccc::checked_hvc64_expect_success(FUNC_ID, args)
+}
+
+fn mmio_guard_unmap(ipa: u64) -> smccc::Result<()> {
+    const FUNC_ID: u32 = 0xc6000008;
     let mut args = [0u64; 17];
     args[0] = ipa;
 
