@@ -2,11 +2,9 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
-rust_ffi_static {
-    name: "libvm_payload",
-    crate_name: "vm_payload",
+rust_defaults {
+    name: "libvm_payload_defaults",
     srcs: ["src/*.rs"],
-    include_dirs: ["include"],
     prefer_rlib: true,
     rustlibs: [
         "android.system.virtualization.payload-rust",
@@ -15,4 +13,20 @@ rust_ffi_static {
         "libbinder_rs",
         "liblog_rust",
     ],
+    apex_available: [
+        "com.android.compos",
+    ],
+}
+
+rust_library {
+    name: "libvm_payload_rs",
+    crate_name: "vm_payload_rs",
+    defaults: ["libvm_payload_defaults"],
+}
+
+rust_ffi_static {
+    name: "libvm_payload",
+    crate_name: "vm_payload",
+    defaults: ["libvm_payload_defaults"],
+    include_dirs: ["include"],
 }
