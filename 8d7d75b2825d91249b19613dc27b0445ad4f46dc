@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a292c8fe_9cb78dce",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-06T14:57:22Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "1b7e9469_443da41a",
+      "range": {
+        "startLine": 79,
+        "startChar": 35,
+        "endLine": 79,
+        "endChar": 42
+      },
+      "revId": "8d7d75b2825d91249b19613dc27b0445ad4f46dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6315be99_7d32dfe1",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-06T09:38:32Z",
       "side": 1,
       "message": "Use `mMetricsProcessor`, same as the other benchmarks here.\n\nI would also prefer to report the raw numbers, not the delta. The delta will be obvious when we display them on the same chart, and reporting the raw numbers means we can also analyze its noisiness.",
+      "range": {
+        "startLine": 134,
+        "startChar": 8,
+        "endLine": 140,
+        "endChar": 46
+      },
+      "revId": "8d7d75b2825d91249b19613dc27b0445ad4f46dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21fb6ce2_68924bd3",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-06T14:57:22Z",
+      "side": 1,
+      "message": "This makes things even simpler. Thanks for the suggestion, I noticed `reportMetric` and the `computeStats` implementation which handles the avg computation. I will report the raw numbers.",
+      "parentUuid": "6315be99_7d32dfe1",
       "range": {
         "startLine": 134,
         "startChar": 8,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f093f79a_ddfacf72",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-06T14:57:22Z",
+      "side": 1,
+      "message": "I added a check and we execute this only for protectedVMs",
+      "parentUuid": "acef456e_410c5877",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 50
+      },
+      "revId": "8d7d75b2825d91249b19613dc27b0445ad4f46dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5835011f_5b9ba12d",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f69bf82d_1ff7a53a",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-06T14:57:22Z",
+      "side": 1,
+      "message": "Hmm, I don\u0027t think it is necessary to reboot the device for a cold start. We can use `echo 3 \u003e /proc/sys/vm/drop_caches` which drops the caches and ensures a cold app startup. This is how DropCachesRule class is implemented.",
+      "parentUuid": "5835011f_5b9ba12d",
+      "range": {
+        "startLine": 207,
+        "startChar": 8,
+        "endLine": 210,
+        "endChar": 51
+      },
+      "revId": "8d7d75b2825d91249b19613dc27b0445ad4f46dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "021c6576_554bfea8",
@@ -106,6 +202,30 @@
       "writtenOn": "2022-10-06T09:38:32Z",
       "side": 1,
       "message": "static class",
+      "range": {
+        "startLine": 215,
+        "startChar": 4,
+        "endLine": 215,
+        "endChar": 9
+      },
+      "revId": "8d7d75b2825d91249b19613dc27b0445ad4f46dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "128f534c_731ab070",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-06T14:57:22Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "021c6576_554bfea8",
       "range": {
         "startLine": 215,
         "startChar": 4,
