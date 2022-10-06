@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6a1347bf_f38fca91",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-06T16:23:35Z",
+      "side": 1,
+      "message": "These HVCs only return `0` or `-1` so tying `FailedUartSetup` to an `smccc::Error` doesn\u0027t add much info but, as `std::error::Error` isn\u0027t available (`no_std`), I\u0027m not sure how to express wrapping \"any error type\"?",
+      "parentUuid": "1e192532_bf321ab1",
+      "revId": "547188324d06eeac7b72f17f5530f567bf3e99bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f03f7084_b4c89ea4",
         "filename": "pvmfw/src/main.rs",
         "patchSetId": 11
