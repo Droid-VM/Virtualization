@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecd097d3_50c5c8b7",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-06T13:39:23Z",
+      "side": 1,
+      "message": "Nit: Maybe move this down next to main_wrapper.",
+      "revId": "0499d9feefd9a9a106b30545c9b5f688f60dc4bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da6000bd_84054100",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-06T13:39:23Z",
+      "side": 1,
+      "message": "Maybe this should then call `reboot`, so the host knows that it was a failed boot rather than a successful shutdown?",
+      "revId": "0499d9feefd9a9a106b30545c9b5f688f60dc4bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
