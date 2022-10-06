@@ -23,7 +23,7 @@ mod mmio;
 mod smccc;
 
 use core::fmt;
-use log::{debug, error, info, LevelFilter};
+use log::{debug, error, info, trace, LevelFilter};
 use vmbase::{console, logger, main, power::reboot};
 
 #[derive(Debug, Clone)]
@@ -59,6 +59,8 @@ pub fn main_wrapper(fdt_address: u64, payload_start: u64, payload_size: u64, arg
         trace!("Failed to configure UART: {e}");
     } else if let Err(e) = main(fdt_address, payload_start, payload_size, arg3) {
         error!("Boot rejected: {e}");
+    } else if let Err(e) = mmio::guard::unmap(console::BASE_ADDRESS) {
+        error!("Failed to unmap UART: {e}");
     } else {
         jump_to_payload(fdt_address, payload_start);
     }
