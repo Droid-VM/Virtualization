@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c208fe11_166e79db",
+        "filename": "microdroid_manager/vm_payload_service/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-06T12:02:14Z",
+      "side": 1,
+      "message": "I\u0027m still of the opinion that the impl should be _directly_ in m_m, I don\u0027t see what the extra library boundary helps with but I can see it hindering integration if internal types start being needed across the boundary.",
+      "range": {
+        "startLine": 6,
+        "startChar": 11,
+        "endLine": 6,
+        "endChar": 34
+      },
+      "revId": "305d3c03199b30abe0cfed25419e8f7f11696b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
