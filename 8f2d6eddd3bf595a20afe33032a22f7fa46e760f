@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85f4466d_da53079f",
+        "filename": "launcher/include/android_native_main.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-06T16:30:43Z",
+      "side": 1,
+      "message": "I wonder if we should rename this, since we\u0027re changing the prototype. That changes a potential nasty compile-time error into a built-time error for existing ussers.\n\n(Also I\u0027m not convinced it\u0027s the right name - it sounds like it\u0027s more general than it is. vm_main(), vm_entry_point() ?)",
+      "range": {
+        "startLine": 27,
+        "startChar": 15,
+        "endLine": 27,
+        "endChar": 34
+      },
+      "revId": "8f2d6eddd3bf595a20afe33032a22f7fa46e760f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
