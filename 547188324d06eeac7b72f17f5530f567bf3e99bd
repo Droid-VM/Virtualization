@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0a69f24_2124fcd4",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-06T14:44:21Z",
+      "side": 1,
+      "message": "Maybe add a comment before these 4 lines explaining briefly what they are doing (i.e. telling the hypervisor to map the UART into the host).",
+      "revId": "547188324d06eeac7b72f17f5530f567bf3e99bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e192532_bf321ab1",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-06T14:44:21Z",
+      "side": 1,
+      "message": "Rather than dropping the details of the error returned, you could have the `FailedUartSetup` variant wrap it and include it in its `Display` implementation.",
+      "revId": "547188324d06eeac7b72f17f5530f567bf3e99bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f03f7084_b4c89ea4",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-06T14:44:21Z",
+      "side": 1,
+      "message": "Maybe it would be worth at least attempting to log the error still, in case the firmmware is being run in an environment where the UART doesn\u0027t need to be mapped (e.g. fake-protected mode)?",
+      "revId": "547188324d06eeac7b72f17f5530f567bf3e99bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
