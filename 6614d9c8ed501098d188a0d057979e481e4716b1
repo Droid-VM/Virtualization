@@ -51,6 +51,47 @@
       "message": "Andrew, Jiyong: Can you help with the build question here?\nWe want a library which exposes a simple C function API (so it can be called from C/C++ as if it was an NDK library) and can also be called from Rust. And the library itself is implemented in Rust.\n\nThe library implementation should be opaque to clients, so I wonder if we need a bindgen wrapper to call the C API via ffi from Rust (even though that seems fairly silly).",
       "revId": "6614d9c8ed501098d188a0d057979e481e4716b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "162338e0_4923aaaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-07T10:11:57Z",
+      "side": 1,
+      "message": "rust_ffi_* produces a *.so and *.a from *.rs files.",
+      "parentUuid": "a06e31af_1b27d490",
+      "revId": "6614d9c8ed501098d188a0d057979e481e4716b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68665b92_b791625d",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-07T10:11:57Z",
+      "side": 1,
+      "message": "If we want to hide the fact that this libvm_payload is built with rust, I think we shouldn\u0027t have this rust library. Rust clients shall use the libvm_payload library via bindgen.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 1
+      },
+      "revId": "6614d9c8ed501098d188a0d057979e481e4716b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
