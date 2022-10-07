@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3607679d_fff969a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-07T07:49:00Z",
+      "side": 1,
+      "message": "Hi Alan,\n\nCould you take a look at this cl? I want to use the same vm_payload API in rust code, somehow it looks like rust_[library|binary] cannot take rust_ffi directly. In that case, what\u0027s the recommended way to use this API in rust code?\n\nThis cl takes the approach of compiling the same source code from vm_payload into two libraries `vm_payload` (for c) and `vm_payload_rs` (for rust). This allows the clients to call exactly the same API methods (`notify...()-\u003ebool`).\n\nAnother option is to extract the rust part of the current vm_payload into a different library vm_payload_rs. Then both vm_payload and the rust clients will depend on vm_payload_rs, while c clients still depend on vm_payload. With this approach, the rust clients will call `try_notify...()-\u003eResult\u003c()\u003e` while the c clients will call `notify...()-\u003ebool`.",
+      "revId": "6614d9c8ed501098d188a0d057979e481e4716b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
