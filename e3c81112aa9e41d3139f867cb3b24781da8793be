@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afd4fccc_0bec499f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-07T09:34:05Z",
+      "side": 1,
+      "message": "Please rebase",
+      "revId": "e3c81112aa9e41d3139f867cb3b24781da8793be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "225db882_e6b8aba3",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-07T09:34:05Z",
+      "side": 1,
+      "message": "Doesn\u0027t this cause a panic when stderr is empty?",
+      "range": {
+        "startLine": 254,
+        "startChar": 27,
+        "endLine": 254,
+        "endChar": 41
+      },
+      "revId": "e3c81112aa9e41d3139f867cb3b24781da8793be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c5054c5_bc80195c",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-07T09:34:05Z",
+      "side": 1,
+      "message": "I think we should do more than logging. This error should be converted into a failure reason which is reported back to the VM owner via callback_on_died below.",
+      "range": {
+        "startLine": 256,
+        "startChar": 16,
+        "endLine": 256,
+        "endChar": 82
+      },
+      "revId": "e3c81112aa9e41d3139f867cb3b24781da8793be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7695ba3c_38d6c23f",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-07T09:34:05Z",
+      "side": 1,
+      "message": "We don\u0027t need to continue the loop once the magic string is detected.",
+      "range": {
+        "startLine": 257,
+        "startChar": 12,
+        "endLine": 257,
+        "endChar": 13
+      },
+      "revId": "e3c81112aa9e41d3139f867cb3b24781da8793be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
