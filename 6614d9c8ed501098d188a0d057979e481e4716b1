@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "308b7d07_45f3a29f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-07T12:01:30Z",
+      "side": 1,
+      "message": "You\u0027ll want `atest ComposHostTestCases` and maybe to install a new com.android.compos APEX in order to test the compos changes.",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 21
+      },
+      "revId": "6614d9c8ed501098d188a0d057979e481e4716b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3607679d_fff969a6",
@@ -252,6 +275,30 @@
       "side": 1,
       "message": "I\u0027d rather leave the library as static for now (but still access it via bindgen) then rewrite in C++.\n\nI added a comment on that bug; Jiyong may also have useful input.",
       "parentUuid": "2ed8f6ab_1c8e6631",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 1
+      },
+      "revId": "6614d9c8ed501098d188a0d057979e481e4716b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "334a0534_e2294df3",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-07T12:01:30Z",
+      "side": 1,
+      "message": "The person who knows the rust FFI rules is on leave and I haven\u0027t found a substitute; will poke more people in MTV time. IMO the most important detail for now is to have the vm_payload.h interface (what will be the stable API) in place and we can sort out microdroid-side impl language, linkage etc a bit down the line, at least after this set of in-flight CLs lands.",
+      "parentUuid": "059785a7_79ad08aa",
       "range": {
         "startLine": 21,
         "startChar": 0,
