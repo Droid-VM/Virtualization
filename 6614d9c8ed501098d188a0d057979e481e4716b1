@@ -188,6 +188,30 @@
       },
       "revId": "6614d9c8ed501098d188a0d057979e481e4716b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a29f4e6_d904e3cc",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-07T11:21:16Z",
+      "side": 1,
+      "message": "Yes, I agree with Jiyong.\n\nThe contract of the library is the set of C functions defined in the header. The fact that the library is written in Rust is an implementation detail \u0026 not guaranteed. So we do want to hide that.\n\nClients should use that interface, rather than talking directly to the Rust implementation. (In this case we control both, but the test APK is designed to test the client interface, so it should be as similar to a normal client as possible.)\n\nSo we will want a rust_ffi_shared, and then access from Rust via bindgen \u0026 a wrapper rlib if desired.",
+      "parentUuid": "b6b51460_b27874e2",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 1
+      },
+      "revId": "6614d9c8ed501098d188a0d057979e481e4716b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
