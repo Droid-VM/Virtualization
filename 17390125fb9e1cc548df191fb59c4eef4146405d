@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be4d612b_8dbccf75",
+        "filename": "pvmfw/src/smccc.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-07T13:09:02Z",
+      "side": 1,
+      "message": "Nit: you could save a line of code by adding a `?` here, and just matching on the `Ok` values.",
+      "revId": "17390125fb9e1cc548df191fb59c4eef4146405d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
