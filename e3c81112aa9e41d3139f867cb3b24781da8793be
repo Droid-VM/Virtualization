@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46309e93_e5d63380",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-07T14:23:45Z",
+      "side": 1,
+      "message": "I rebased the code",
+      "parentUuid": "afd4fccc_0bec499f",
+      "revId": "e3c81112aa9e41d3139f867cb3b24781da8793be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95d32265_7676a503",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca58f0b7_52e9136a",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-07T14:23:45Z",
+      "side": 1,
+      "message": "Thanks for the suggestion, I modified the code in the new patchset(2) and now we don\u0027t read the descriptor anymore(I propagate an error code for stall_detection as we discussed in that meeting). I understand your concern, this can happen if the underlying implementation that writes to stderr (from crosvm) is blocking.",
+      "parentUuid": "95d32265_7676a503",
+      "range": {
+        "startLine": 247,
+        "startChar": 27,
+        "endLine": 247,
+        "endChar": 31
+      },
+      "revId": "e3c81112aa9e41d3139f867cb3b24781da8793be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "225db882_e6b8aba3",
@@ -54,6 +96,30 @@
       "writtenOn": "2022-10-07T09:34:05Z",
       "side": 1,
       "message": "Doesn\u0027t this cause a panic when stderr is empty?",
+      "range": {
+        "startLine": 254,
+        "startChar": 27,
+        "endLine": 254,
+        "endChar": 41
+      },
+      "revId": "e3c81112aa9e41d3139f867cb3b24781da8793be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f697d9b_5195dec7",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-07T14:23:45Z",
+      "side": 1,
+      "message": "I dropped this code",
+      "parentUuid": "225db882_e6b8aba3",
       "range": {
         "startLine": 254,
         "startChar": 27,
@@ -111,6 +177,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee212ace_75f98fda",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-07T14:23:45Z",
+      "side": 1,
+      "message": "Thanks ! I discussed this with Alan and Nikita yesterday and I am spinning a new patch series which notifies the failure reason through `callback_on_died`",
+      "parentUuid": "f5e3bb65_07d3e7da",
+      "range": {
+        "startLine": 256,
+        "startChar": 16,
+        "endLine": 256,
+        "endChar": 82
+      },
+      "revId": "e3c81112aa9e41d3139f867cb3b24781da8793be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7695ba3c_38d6c23f",
@@ -124,6 +214,30 @@
       "writtenOn": "2022-10-07T09:34:05Z",
       "side": 1,
       "message": "We don\u0027t need to continue the loop once the magic string is detected.",
+      "range": {
+        "startLine": 257,
+        "startChar": 12,
+        "endLine": 257,
+        "endChar": 13
+      },
+      "revId": "e3c81112aa9e41d3139f867cb3b24781da8793be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72731597_3fbfb199",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-07T14:23:45Z",
+      "side": 1,
+      "message": "I dropped this code",
+      "parentUuid": "7695ba3c_38d6c23f",
       "range": {
         "startLine": 257,
         "startChar": 12,
