@@ -16,6 +16,58 @@
       "message": "Well, that was fun.",
       "revId": "60f82201e9bd34ed9189fd9c2a494ffa66e08325",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aa0ea3d_f5ba4ba9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-07T16:18:55Z",
+      "side": 1,
+      "message": "How did you even go about working it out?1",
+      "parentUuid": "b2939941_5346bc9b",
+      "revId": "60f82201e9bd34ed9189fd9c2a494ffa66e08325",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1e0883f_54ad0328",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-07T16:18:55Z",
+      "side": 1,
+      "message": "I was wondering if there\u0027s a more direct way to wait for the mount existing in Linux, e.g. watching /proc/mounts, but it seems much more complicated than this.",
+      "revId": "60f82201e9bd34ed9189fd9c2a494ffa66e08325",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85d53f02_cf520e53",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-07T16:18:55Z",
+      "side": 1,
+      "message": "Should we synchronise all the mounts before handing to the payload? These are less likely to race at least.",
+      "revId": "60f82201e9bd34ed9189fd9c2a494ffa66e08325",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
