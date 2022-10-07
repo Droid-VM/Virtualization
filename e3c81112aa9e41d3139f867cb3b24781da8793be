@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95d32265_7676a503",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-07T10:53:07Z",
+      "side": 1,
+      "message": "This will deadlock if crosvm writes more than a pipe buffer\u0027s worth to stderr.\n\nYou could I think sit in the reader loop before calling wait - since when it exits, the pipe will be closed.\n\nOr run it in a different thread, and call join after the wait returns. And somehow communicate the result back to the main thread.",
+      "range": {
+        "startLine": 247,
+        "startChar": 27,
+        "endLine": 247,
+        "endChar": 31
+      },
+      "revId": "e3c81112aa9e41d3139f867cb3b24781da8793be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "225db882_e6b8aba3",
         "filename": "virtualizationservice/src/crosvm.rs",
         "patchSetId": 1
@@ -54,6 +77,30 @@
       "writtenOn": "2022-10-07T09:34:05Z",
       "side": 1,
       "message": "I think we should do more than logging. This error should be converted into a failure reason which is reported back to the VM owner via callback_on_died below.",
+      "range": {
+        "startLine": 256,
+        "startChar": 16,
+        "endLine": 256,
+        "endChar": 82
+      },
+      "revId": "e3c81112aa9e41d3139f867cb3b24781da8793be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5e3bb65_07d3e7da",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-07T10:53:07Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "5c5054c5_bc80195c",
       "range": {
         "startLine": 256,
         "startChar": 16,
