@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e4cd721_e383385c",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-07T09:47:27Z",
+      "side": 1,
+      "message": "Maybe as a follow-up: can\u0027t find it now but I did have `anyhow` without `std` working in vmbase. It requires manually calling `.map_err(Error::msg)` because of some missing traits in `core`, but otherwise was trivial to get working. Could revive it if you\u0027re interested. `thiserror` sadly does not work without `std`.",
+      "parentUuid": "c08de8c8_614cd93b",
+      "revId": "547188324d06eeac7b72f17f5530f567bf3e99bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f03f7084_b4c89ea4",
         "filename": "pvmfw/src/main.rs",
         "patchSetId": 11

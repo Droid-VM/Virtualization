@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b2c9c34_7858d1bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-07T09:47:27Z",
+      "side": 1,
+      "message": "LGTM. Added a few suggestions to improve readability. Feel free to ignore them if you don\u0027t find it helpful.",
+      "revId": "cb2ff9d38dfadb60cbe91a781ec9f61e84842905",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eba731f0_01bab53a",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-07T09:47:27Z",
+      "side": 1,
+      "message": "nit: how about you only import `console` and then refer to this as `console::BASE_ADDRESS` in code?",
+      "range": {
+        "startLine": 29,
+        "startChar": 55,
+        "endLine": 29,
+        "endChar": 67
+      },
+      "revId": "cb2ff9d38dfadb60cbe91a781ec9f61e84842905",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ea5b9a3_b502504c",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-07T09:47:27Z",
+      "side": 1,
+      "message": "Please add a comment why this is needed. I know you have it in the commit msg but should be in the code as well. It\u0027s not obvious to me.\nnit: I find the name confusing. Shouldn\u0027t this be something like `is_uart_exception`?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 42
+      },
+      "revId": "cb2ff9d38dfadb60cbe91a781ec9f61e84842905",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be8def41_de7a90d3",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-07T09:47:27Z",
+      "side": 1,
+      "message": "nit: would be nice to start defining these as helpers, this won\u0027t be the only place where you do this",
+      "range": {
+        "startLine": 46,
+        "startChar": 20,
+        "endLine": 46,
+        "endChar": 47
+      },
+      "revId": "cb2ff9d38dfadb60cbe91a781ec9f61e84842905",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
