@@ -107,6 +107,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2316080_7799bf07",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-07T12:47:46Z",
+      "side": 1,
+      "message": "@dbrazdil@google.com: Yes, good idea. I was also looking into that (as a follow-up) and came across https://crates.io/crates/thiserror-no-std, which we could try out? Let\u0027s also discuss how `anyhow` would be used here (am still ramping up on that).\n\n@qwandor@google.com: I\u0027ve extended `smccc::Error` to unexpected values (when only `0` is expected), to make what you suggest more useful but the issue I was trying to describe above is that I\u0027d like to be able to throw a `FailedUartSetup` for other cases than a failed HVC; for example, when the returned MMIO granule is not a valid page size (see `checked_page_of`), which can\u0027t be expressed through `FailedUartSetup(smccc::Error)`. BTW, could this rework also be done as a follow-up?",
+      "parentUuid": "7e4cd721_e383385c",
+      "revId": "547188324d06eeac7b72f17f5530f567bf3e99bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f03f7084_b4c89ea4",

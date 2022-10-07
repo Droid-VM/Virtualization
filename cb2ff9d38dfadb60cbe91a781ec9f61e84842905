@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5eeecdbc_c3237075",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-07T12:47:46Z",
+      "side": 1,
+      "message": "Yes, I\u0027m never sure which level to import; Done!",
+      "parentUuid": "eba731f0_01bab53a",
+      "range": {
+        "startLine": 29,
+        "startChar": 55,
+        "endLine": 29,
+        "endChar": 67
+      },
+      "revId": "cb2ff9d38dfadb60cbe91a781ec9f61e84842905",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ea5b9a3_b502504c",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d1cc5a9_b0e2a83e",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-07T12:47:46Z",
+      "side": 1,
+      "message": "Agreed; I was going for self-documenting code with this function name (\"if accessing the UART triggers an exception, don\u0027t write to it\") but the name is still confusing. `is_uart_exception` isn\u0027t accurate either as the exception might come from another region (FAR) of that page. I\u0027ve inlined the function and added a comment, instead.",
+      "parentUuid": "5ea5b9a3_b502504c",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 42
+      },
+      "revId": "cb2ff9d38dfadb60cbe91a781ec9f61e84842905",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be8def41_de7a90d3",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-10-07T09:47:27Z",
       "side": 1,
       "message": "nit: would be nice to start defining these as helpers, this won\u0027t be the only place where you do this",
+      "range": {
+        "startLine": 46,
+        "startChar": 20,
+        "endLine": 46,
+        "endChar": 47
+      },
+      "revId": "cb2ff9d38dfadb60cbe91a781ec9f61e84842905",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83f3565c_624e17bf",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-07T12:47:46Z",
+      "side": 1,
+      "message": "Done; and used in the FAR check.",
+      "parentUuid": "be8def41_de7a90d3",
       "range": {
         "startLine": 46,
         "startChar": 20,
