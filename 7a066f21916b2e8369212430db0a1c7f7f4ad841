@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d668ab7_17964db6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-07T14:59:00Z",
+      "side": 1,
+      "message": "Thanks for noticing it, I will update this !",
+      "parentUuid": "0a0b0f55_fdaa57db",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 29
+      },
+      "revId": "7a066f21916b2e8369212430db0a1c7f7f4ad841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8a9721a_d45b2d8e",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-07T14:55:39Z",
       "side": 1,
       "message": "Is the code to generate this already submitted?",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 46
+      },
+      "revId": "7a066f21916b2e8369212430db0a1c7f7f4ad841",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09039e85_b3c97006",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-07T14:59:00Z",
+      "side": 1,
+      "message": "Not yet, I plan to merge the chromium changes for crosvm first and then merge this PR.",
+      "parentUuid": "a8a9721a_d45b2d8e",
       "range": {
         "startLine": 58,
         "startChar": 0,
