@@ -236,6 +236,30 @@
       },
       "revId": "6614d9c8ed501098d188a0d057979e481e4716b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "059785a7_79ad08aa",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-07T11:34:51Z",
+      "side": 1,
+      "message": "I\u0027d rather leave the library as static for now (but still access it via bindgen) then rewrite in C++.\n\nI added a comment on that bug; Jiyong may also have useful input.",
+      "parentUuid": "2ed8f6ab_1c8e6631",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 1
+      },
+      "revId": "6614d9c8ed501098d188a0d057979e481e4716b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
