@@ -31,8 +31,7 @@ struct Ed25519KeyPair {
     PublicKey public_key;
 };
 
-android::base::Result<Ed25519KeyPair> deriveKeyFromSecret(const uint8_t* secret,
-                                                          size_t secret_size);
+android::base::Result<Ed25519KeyPair> keyFromSeed(const std::array<uint8_t, 32>& seed);
 
 android::base::Result<Signature> sign(const PrivateKey& private_key, const uint8_t* data,
                                       size_t data_size);
