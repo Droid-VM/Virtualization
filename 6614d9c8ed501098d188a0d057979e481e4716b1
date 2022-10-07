@@ -212,6 +212,30 @@
       },
       "revId": "6614d9c8ed501098d188a0d057979e481e4716b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ed8f6ab_1c8e6631",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-07T11:26:01Z",
+      "side": 1,
+      "message": "I see. Thanks for the explanation!\n\nThe current libvm_payload is not a shared lib yet. There\u0027s a bug with `rust_ffi_shared` (b/250854486) for some builds. I\u0027ve been checking for a few days but haven\u0027t found a solution yet. In that sense, should we rewrite this library in C to make it shared first, then access it from Rust via bindgen?\n\nIt\u0027s easier to rewrite now as the package is still small.",
+      "parentUuid": "b6b51460_b27874e2",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 1
+      },
+      "revId": "6614d9c8ed501098d188a0d057979e481e4716b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
