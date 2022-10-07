@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f869a9e_3941f975",
+        "filename": "compos/compos_key_helper/compos_key_main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-07T17:57:47Z",
+      "side": 1,
+      "message": "Yeah, the secret can just be used to directly seed the ed25519 key. I\u0027ll leave that as a follow up.",
+      "parentUuid": "c485c5b1_88e5a6b6",
+      "range": {
+        "startLine": 43,
+        "startChar": 23,
+        "endLine": 43,
+        "endChar": 42
+      },
+      "revId": "b0e74b12dfaa7042507c67d1d705993ba1202686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7995a1fc_e004aa2a",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-07T09:38:08Z",
       "side": 1,
       "message": "uint8_t ? Seems like identifier \u0026 data should be consistent.\n\nAnd while talking about consistency - the two below are (data, size) rather than (size, data)",
+      "range": {
+        "startLine": 44,
+        "startChar": 28,
+        "endLine": 44,
+        "endChar": 32
+      },
+      "revId": "b0e74b12dfaa7042507c67d1d705993ba1202686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "057574a1_8f652a4f",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-07T17:57:47Z",
+      "side": 1,
+      "message": "Moved everything to void* (don\u0027t care about the type) and kept it data then size.\n\nAlso added a size of 32-bytes for the secrets to clients can\u0027t request something ridiculous. Increasing the size will be backwards compatible if it comes to that.",
+      "parentUuid": "7995a1fc_e004aa2a",
       "range": {
         "startLine": 44,
         "startChar": 28,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abb9ca87_35aaf0c5",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-07T17:57:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49d6fe0b_22a737a3",
+      "range": {
+        "startLine": 27,
+        "startChar": 7,
+        "endLine": 27,
+        "endChar": 65
+      },
+      "revId": "b0e74b12dfaa7042507c67d1d705993ba1202686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef02498e_d2afd581",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c31f31f_0e893149",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-07T17:57:47Z",
+      "side": 1,
+      "message": "We\u0027d need an infrastructure for in-VM `@TestApi`s, the VM config might be the way to wire that up. I like the suggestion but it\u0027s not happening in this CL ;)",
+      "parentUuid": "ef02498e_d2afd581",
+      "range": {
+        "startLine": 34,
+        "startChar": 7,
+        "endLine": 34,
+        "endChar": 97
+      },
+      "revId": "b0e74b12dfaa7042507c67d1d705993ba1202686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25bc2cc1_43a53889",
@@ -106,6 +202,30 @@
       "writtenOn": "2022-10-07T09:38:08Z",
       "side": 1,
       "message": "This test looks a little weird, both before and after.\nWould testing that VM A\u0027s cdiAttest !\u003d VM A\u0027s instanceSecret make any more sense? Or just delete?",
+      "range": {
+        "startLine": 287,
+        "startChar": 8,
+        "endLine": 287,
+        "endChar": 79
+      },
+      "revId": "b0e74b12dfaa7042507c67d1d705993ba1202686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7945723a_baec195d",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-07T17:57:47Z",
+      "side": 1,
+      "message": "It is weird and with the secret being indirected from the sealing CDI I don\u0027t see that it has any change of catching any questionable provisioning of CDIs so I\u0027ll drop it.",
+      "parentUuid": "25bc2cc1_43a53889",
       "range": {
         "startLine": 287,
         "startChar": 8,
