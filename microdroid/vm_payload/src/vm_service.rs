@@ -44,6 +44,41 @@ fn try_notify_payload_ready() -> Result<()> {
     get_vm_payload_service()?.notifyPayloadReady().context("Cannot notify payload ready")
 }
 
+/// Get a secret that is uniquely bound to this VM instance. The secret will not change over the
+/// lifetime of the VM instance. Returns true on success and false on failure.
+///
+/// # Safety
+///
+/// The identifier must be identifier_size bytes abd data must be size bytes.
+#[no_mangle]
+pub unsafe extern "C" fn get_vm_instance_secret(
+    identifier: *const u8,
+    identifier_size: usize,
+    size: usize,
+    data: *mut u8,
+) -> bool {
+    let identifier = std::slice::from_raw_parts(identifier, identifier_size);
+    match try_get_vm_instance_secret(identifier, size) {
+        Err(e) => {
+            error!("Failed to get VM instance secret: {}", e);
+            false
+        }
+        Ok(secret) => {
+            if secret.len() != size {
+                return false;
+            }
+            std::ptr::copy_nonoverlapping(secret.as_ptr(), data, size);
+            true
+        }
+    }
+}
+
+fn try_get_vm_instance_secret(identifier: &[u8], size: usize) -> Result<Vec<u8>> {
+    get_vm_payload_service()?
+        .getVmInstanceSecret(identifier, i32::try_from(size)?)
+        .context("Cannot get VM instance secret")
+}
+
 /// Get the VM's attestation chain.
 /// Returns the size of data or 0 on failure.
 ///
@@ -98,34 +133,6 @@ pub unsafe extern "C" fn get_dice_attestation_cdi(data: *mut u8, size: usize) ->
 
 fn try_get_dice_attestation_cdi() -> Result<Vec<u8>> {
     get_vm_payload_service()?.getDiceAttestationCdi().context("Cannot get attestation CDI")
-}
-
-/// Get the VM's sealing CDI.
-/// Returns the size of data or 0 on failure.
-///
-/// # Safety
-///
-/// The data must be size bytes big.
-#[no_mangle]
-pub unsafe extern "C" fn get_dice_sealing_cdi(data: *mut u8, size: usize) -> usize {
-    match try_get_dice_sealing_cdi() {
-        Err(e) => {
-            error!("Failed to get attestation chain: {}", e);
-            0
-        }
-        Ok(cdi) => {
-            if size < cdi.len() {
-                0
-            } else {
-                std::ptr::copy_nonoverlapping(cdi.as_ptr(), data, cdi.len());
-                cdi.len()
-            }
-        }
-    }
-}
-
-fn try_get_dice_sealing_cdi() -> Result<Vec<u8>> {
-    get_vm_payload_service()?.getDiceSealingCdi().context("Cannot get sealing CDI")
 }
 
 fn get_vm_payload_service() -> Result<Strong<dyn IVmPayloadService>> {

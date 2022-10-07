@@ -16,6 +16,9 @@
 
 #pragma once
 
+#include <stddef.h>
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -25,6 +28,20 @@ extern "C" {
  * Returns true if the notification succeeds else false.
  */
 bool notify_payload_ready();
+
+/**
+ * Get a secret that is uniquely bound to this VM instance. The secret will not change over the
+ * lifetime of the VM instance.
+ *
+ * \param identifier identifier of the secret to return.
+ * \param identifier_size size of the secret identifier.
+ * \param size number of bytes of the secret to return.
+ * \param data pointer to size bytes where the secret is written.
+ *
+ * \return true on success and false on failure.
+ */
+bool get_vm_instance_secret(const uint8_t* identifier, size_t identifier_size, size_t size,
+                            void* data);
 
 /**
  * Get the VM's attestation chain.
@@ -40,13 +57,6 @@ size_t get_dice_attestation_chain(void *data, size_t size);
  * TODO: don't expose the raw CDI, only derived values
  */
 size_t get_dice_attestation_cdi(void *data, size_t size);
-
-/**
- * Get the VM's sealing CDI.
- * Returns the size of data or 0 on failure.
- * TODO: don't expose the raw CDI, only derived values
- */
-size_t get_dice_sealing_cdi(void *data, size_t size);
 
 #ifdef __cplusplus
 } // extern "C"
