@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "74751f07_f7df6921",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-07T12:23:08Z",
+      "side": 1,
+      "message": "I think this is a good start. We may need more in the future, but that could be done later.\n\nAnd yes, aggregating is a must for this kind of data.",
+      "parentUuid": "b26932ad_a5a14051",
+      "revId": "5fffec1c6a88b6a3788853f74e7b7ef6f8eb177d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a04b09f0_6baf8169",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 6
@@ -90,6 +108,30 @@
       "side": 1,
       "message": "It won\u0027t throw an error unless the host(virtualizationservice) cannot get VM with given cid. I believe this case will happen when the VM is already stopped.\n\n`if let Some(vm) \u003d self.state.lock().unwrap().get_vm(cid) {`",
       "parentUuid": "a04b09f0_6baf8169",
+      "range": {
+        "startLine": 119,
+        "startChar": 47,
+        "endLine": 119,
+        "endChar": 49
+      },
+      "revId": "5fffec1c6a88b6a3788853f74e7b7ef6f8eb177d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee34ce3b_7807b337",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-07T12:23:08Z",
+      "side": 1,
+      "message": "Then why don\u0027t you assert that using .expect(...) ?",
+      "parentUuid": "abeddd80_176ed2bc",
       "range": {
         "startLine": 119,
         "startChar": 47,
@@ -149,6 +191,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a10cd7b6_1bfb14f9",
+        "filename": "microdroid_manager/src/procutil.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-07T12:23:08Z",
+      "side": 1,
+      "message": "... as a comment please.",
+      "parentUuid": "d0c8d694_51d56311",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 59
+      },
+      "revId": "5fffec1c6a88b6a3788853f74e7b7ef6f8eb177d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "948eee91_a64e51f7",
         "filename": "microdroid_manager/src/procutil.rs",
         "patchSetId": 6
@@ -184,6 +250,30 @@
       "side": 1,
       "message": "I brought `/proc/meminfo` from my workstation instead. The format is same, but it has some minor differences like 0 kB for SwapCached in the Microdroid.\n\n```\nMemTotal:       263742736 kB\nMemFree:        37144204 kB\nMemAvailable:   249168700 kB\nBuffers:        10231296 kB\nCached:         189502836 kB\nSwapCached:       113848 kB\nActive:         132266424 kB\nInactive:       73587504 kB\nActive(anon):    1455240 kB\nInactive(anon):  6993584 kB\nActive(file):   130811184 kB\nInactive(file): 66593920 kB\nUnevictable:       56436 kB\nMlocked:           56436 kB\nSwapTotal:      255123452 kB\nSwapFree:       254499068 kB\nDirty:               596 kB\nWriteback:             0 kB\nAnonPages:       5295864 kB\nMapped:          3512608 kB\nShmem:           2282944 kB\nKReclaimable:   16910820 kB\nSlab:           18894308 kB\nSReclaimable:   16910820 kB\nSUnreclaim:      1983488 kB\nKernelStack:      100144 kB\nPageTables:        87288 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    386994820 kB\nCommitted_AS:   29455812 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:      744536 kB\nVmallocChunk:          0 kB\nPercpu:           297984 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:   2859008 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:     5477052 kB\nDirectMap2M:    217702400 kB\nDirectMap1G:    45088768 kB\n```",
       "parentUuid": "948eee91_a64e51f7",
+      "range": {
+        "startLine": 47,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 41
+      },
+      "revId": "5fffec1c6a88b6a3788853f74e7b7ef6f8eb177d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fcae5db_7e8459fd",
+        "filename": "microdroid_manager/src/procutil.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-07T12:23:08Z",
+      "side": 1,
+      "message": "ditto.",
+      "parentUuid": "99fa2f45_607575e1",
       "range": {
         "startLine": 47,
         "startChar": 4,
