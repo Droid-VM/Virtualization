@@ -34,6 +34,24 @@
       "parentUuid": "be4d612b_8dbccf75",
       "revId": "17390125fb9e1cc548df191fb59c4eef4146405d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7636dd5d_87e0062b",
+        "filename": "pvmfw/src/smccc.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-07T13:40:05Z",
+      "side": 1,
+      "message": "Ah okay. I didn\u0027t notice the function was `const`, why does it need to be? You can\u0027t make an SMC call in a const context anyway, so why would you need to handle the return value from one?",
+      "parentUuid": "515486c6_135f3d50",
+      "revId": "17390125fb9e1cc548df191fb59c4eef4146405d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
