@@ -55,6 +55,8 @@ const CROSVM_ERROR_STATUS: i32 = 1;
 const CROSVM_REBOOT_STATUS: i32 = 32;
 /// The exit status which crosvm returns when it crashes due to an error.
 const CROSVM_CRASH_STATUS: i32 = 33;
+/// The exit status which crosvm returns when vcpu is stalled.
+const CROSVM_WATCHDOG_REBOOT_STATUS: i32 = 35;
 
 lazy_static! {
     /// If the VM doesn't move to the Started state within this amount time, a hang-up error is
@@ -243,7 +245,12 @@ impl VmInstance {
         let result = child.wait();
         match &result {
             Err(e) => error!("Error waiting for crosvm({}) instance to die: {}", child.id(), e),
-            Ok(status) => info!("crosvm({}) exited with status {}", child.id(), status),
+            Ok(status) => {
+                info!("crosvm({}) exited with status {}", child.id(), status);
+                if status.code().unwrap() == CROSVM_WATCHDOG_REBOOT_STATUS {
+                    info!("detected vcpu stall on crosvm");
+                }
+            }
         }
 
         let mut vm_state = self.vm_state.lock().unwrap();
@@ -417,6 +424,7 @@ fn death_reason(result: &Result<ExitStatus, io::Error>, failure_reason: &str) ->
             Some(CROSVM_ERROR_STATUS) => DeathReason::ERROR,
             Some(CROSVM_REBOOT_STATUS) => DeathReason::REBOOT,
             Some(CROSVM_CRASH_STATUS) => DeathReason::CRASH,
+            Some(CROSVM_WATCHDOG_REBOOT_STATUS) => DeathReason::WATCHDOG_REBOOT,
             Some(_) => DeathReason::UNKNOWN,
         }
     } else {
