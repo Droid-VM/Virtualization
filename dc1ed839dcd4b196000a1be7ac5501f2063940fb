@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d698f03_7e4c9d91",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-07T09:17:48Z",
+      "side": 1,
+      "message": "Looks to me like you\u0027re volunteering to handle b/243514248 too :-)",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 14
+      },
+      "revId": "dc1ed839dcd4b196000a1be7ac5501f2063940fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56b2d256_689a0bed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-07T09:17:48Z",
+      "side": 1,
+      "message": "LGTM, but would it be good to get someone with better DICE/crypto knowledge than me to check it over?",
+      "revId": "dc1ed839dcd4b196000a1be7ac5501f2063940fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c0a1d46_b389d885",
+        "filename": "microdroid/vm_payload/src/vm_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-07T09:17:48Z",
+      "side": 1,
+      "message": "{:?}\n\nIf you don\u0027t use debug, you don\u0027t get the full chain of causation, only the most recent context.",
+      "range": {
+        "startLine": 57,
+        "startChar": 53,
+        "endLine": 57,
+        "endChar": 55
+      },
+      "revId": "dc1ed839dcd4b196000a1be7ac5501f2063940fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d249de8d_1905c3fb",
+        "filename": "microdroid/vm_payload/src/vm_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-07T09:17:48Z",
+      "side": 1,
+      "message": "copy/paste\nMind you I think you could probably omit the \"failed to x\", since the context will say that anyway?",
+      "range": {
+        "startLine": 85,
+        "startChar": 46,
+        "endLine": 85,
+        "endChar": 51
+      },
+      "revId": "dc1ed839dcd4b196000a1be7ac5501f2063940fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7897834d_1090be39",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-07T09:17:48Z",
+      "side": 1,
+      "message": "Should this be fatal in some contexts, e.g. protected VM?",
+      "range": {
+        "startLine": 61,
+        "startChar": 12,
+        "endLine": 61,
+        "endChar": 22
+      },
+      "revId": "dc1ed839dcd4b196000a1be7ac5501f2063940fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
