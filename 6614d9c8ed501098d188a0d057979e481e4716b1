@@ -116,6 +116,30 @@
       },
       "revId": "6614d9c8ed501098d188a0d057979e481e4716b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6144f8cd_0f002c72",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-07T10:57:52Z",
+      "side": 1,
+      "message": "If you keep having this, libvm_payload_rs becomes \"a part\" of the payload, not a library that the platform (Microdroid) provides to the payload at runtime.",
+      "parentUuid": "c5cb2e1d_08ab9545",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 1
+      },
+      "revId": "6614d9c8ed501098d188a0d057979e481e4716b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
