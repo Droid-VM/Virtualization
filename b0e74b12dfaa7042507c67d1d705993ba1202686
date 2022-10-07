@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c485c5b1_88e5a6b6",
+        "filename": "compos/compos_key_helper/compos_key_main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-07T09:38:08Z",
+      "side": 1,
+      "message": "Can we simplify the key derivation over there, given we are doing one here now?",
+      "range": {
+        "startLine": 43,
+        "startChar": 23,
+        "endLine": 43,
+        "endChar": 42
+      },
+      "revId": "b0e74b12dfaa7042507c67d1d705993ba1202686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7995a1fc_e004aa2a",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-07T09:38:08Z",
+      "side": 1,
+      "message": "uint8_t ? Seems like identifier \u0026 data should be consistent.\n\nAnd while talking about consistency - the two below are (data, size) rather than (size, data)",
+      "range": {
+        "startLine": 44,
+        "startChar": 28,
+        "endLine": 44,
+        "endChar": 32
+      },
+      "revId": "b0e74b12dfaa7042507c67d1d705993ba1202686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49d6fe0b_22a737a3",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-07T09:38:08Z",
+      "side": 1,
+      "message": "Can you document the parameters?",
+      "range": {
+        "startLine": 27,
+        "startChar": 7,
+        "endLine": 27,
+        "endChar": 65
+      },
+      "revId": "b0e74b12dfaa7042507c67d1d705993ba1202686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef02498e_d2afd581",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-07T09:38:08Z",
+      "side": 1,
+      "message": "We could make access to this conditional on some flag in the VM config JSON; priv apps won\u0027t be allowed to specify one of those.",
+      "range": {
+        "startLine": 34,
+        "startChar": 7,
+        "endLine": 34,
+        "endChar": 97
+      },
+      "revId": "b0e74b12dfaa7042507c67d1d705993ba1202686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25bc2cc1_43a53889",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-07T09:38:08Z",
+      "side": 1,
+      "message": "This test looks a little weird, both before and after.\nWould testing that VM A\u0027s cdiAttest !\u003d VM A\u0027s instanceSecret make any more sense? Or just delete?",
+      "range": {
+        "startLine": 287,
+        "startChar": 8,
+        "endLine": 287,
+        "endChar": 79
+      },
+      "revId": "b0e74b12dfaa7042507c67d1d705993ba1202686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
