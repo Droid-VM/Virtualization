@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "28e81751_7e6194c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-07T16:26:56Z",
+      "side": 1,
+      "message": "Well, once I got to the stage where I actually got a useful error message, I was able to narrow down exactly what was wrong - which told me /mnt/apk/lib didn\u0027t exist.\n\nAlso I ran the VM in acloud with full debug on but no other changes, so I could try to look inside it, but that run worked.\n\nThe combination of those two suggested a race condition, and once you start looking for it it\u0027s obvious.",
+      "parentUuid": "8aa0ea3d_f5ba4ba9",
+      "revId": "60f82201e9bd34ed9189fd9c2a494ffa66e08325",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a1e0883f_54ad0328",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 1
@@ -49,6 +67,24 @@
       "writtenOn": "2022-10-07T16:18:55Z",
       "side": 1,
       "message": "I was wondering if there\u0027s a more direct way to wait for the mount existing in Linux, e.g. watching /proc/mounts, but it seems much more complicated than this.",
+      "revId": "60f82201e9bd34ed9189fd9c2a494ffa66e08325",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d56c211_65134daf",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-07T16:26:56Z",
+      "side": 1,
+      "message": "That\u0027s pretty much what I though too.",
+      "parentUuid": "a1e0883f_54ad0328",
       "revId": "60f82201e9bd34ed9189fd9c2a494ffa66e08325",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -66,6 +102,24 @@
       "writtenOn": "2022-10-07T16:18:55Z",
       "side": 1,
       "message": "Should we synchronise all the mounts before handing to the payload? These are less likely to race at least.",
+      "revId": "60f82201e9bd34ed9189fd9c2a494ffa66e08325",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16db54b2_f0c8b8c0",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-07T16:26:56Z",
+      "side": 1,
+      "message": "Yeah, probably, but I\u0027d like to do that as a follow-up.",
+      "parentUuid": "85d53f02_cf520e53",
       "revId": "60f82201e9bd34ed9189fd9c2a494ffa66e08325",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
