@@ -15,12 +15,15 @@
 //! Client library for VirtualizationService.
 
 mod death_reason;
+mod error_code;
 mod errors;
 mod sync;
 
 pub use crate::death_reason::DeathReason;
+pub use crate::error_code::ErrorCode;
 pub use crate::errors::VmWaitError;
 use crate::sync::Monitor;
+use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon::ErrorCode::ErrorCode as AidlErrorCode;
 use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::{
         DeathReason::DeathReason as AidlDeathReason,
@@ -35,8 +38,8 @@ use android_system_virtualizationservice::{
         ParcelFileDescriptor, Result as BinderResult, StatusCode, Strong,
     },
 };
-use binder_common::rpc_client::connect_preconnected_rpc_binder;
 use log::warn;
+use rpcbinder::get_preconnected_rpc_interface;
 use std::{
     fmt::{self, Debug, Formatter},
     fs::File,
@@ -83,7 +86,7 @@ pub trait VmCallback {
 
     /// Called when an error has occurred in the VM. The `error_code` and `message` may give
     /// further details.
-    fn on_error(&self, cid: i32, error_code: i32, message: &str) {}
+    fn on_error(&self, cid: i32, error_code: ErrorCode, message: &str) {}
 
     /// Called when the VM has exited, all resources have been freed, and any logs have been
     /// written. `death_reason` gives an indication why the VM exited.
@@ -174,7 +177,7 @@ impl VmInstance {
         &self,
         port: u32,
     ) -> Result<Strong<T>, StatusCode> {
-        connect_preconnected_rpc_binder(|| {
+        get_preconnected_rpc_interface(|| {
             match self.vm.connectVsock(port as i32) {
                 Ok(vsock) => {
                     // Ownership of the fd is transferred to binder
@@ -294,9 +297,10 @@ impl IVirtualMachineCallback for VirtualMachineCallback {
         Ok(())
     }
 
-    fn onError(&self, cid: i32, error_code: i32, message: &str) -> BinderResult<()> {
+    fn onError(&self, cid: i32, error_code: AidlErrorCode, message: &str) -> BinderResult<()> {
         self.state.notify_state(VirtualMachineState::FINISHED);
         if let Some(ref callback) = self.client_callback {
+            let error_code = error_code.into();
             callback.on_error(cid, error_code, message);
         }
         Ok(())

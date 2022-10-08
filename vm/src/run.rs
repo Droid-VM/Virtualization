@@ -16,9 +16,10 @@
 
 use crate::create_partition::command_create_partition;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
-    IVirtualizationService::IVirtualizationService, PartitionType::PartitionType,
-    VirtualMachineAppConfig::DebugLevel::DebugLevel,
-    VirtualMachineAppConfig::VirtualMachineAppConfig, VirtualMachineConfig::VirtualMachineConfig,
+    IVirtualizationService::IVirtualizationService,
+    PartitionType::PartitionType,
+    VirtualMachineAppConfig::{DebugLevel::DebugLevel, Payload::Payload, VirtualMachineAppConfig},
+    VirtualMachineConfig::VirtualMachineConfig,
     VirtualMachineState::VirtualMachineState,
 };
 use anyhow::{bail, Context, Error};
@@ -28,13 +29,14 @@ use std::fs::File;
 use std::io::{self, BufRead, BufReader};
 use std::os::unix::io::{AsRawFd, FromRawFd};
 use std::path::{Path, PathBuf};
-use vmclient::VmInstance;
+use vmclient::{ErrorCode, VmInstance};
 use vmconfig::{open_parcel_file, VmConfig};
 use zip::ZipArchive;
 
 /// Run a VM from the given APK, idsig, and config.
 #[allow(clippy::too_many_arguments)]
 pub fn command_run_app(
+    name: Option<String>,
     service: &dyn IVirtualizationService,
     apk: &Path,
     idsig: &Path,
@@ -48,7 +50,6 @@ pub fn command_run_app(
     protected: bool,
     mem: Option<u32>,
     cpus: Option<u32>,
-    cpu_affinity: Option<String>,
     task_profiles: Vec<String>,
     extra_idsigs: &[PathBuf],
 ) -> Result<(), Error> {
@@ -91,16 +92,16 @@ pub fn command_run_app(
     let extra_idsig_fds = extra_idsig_files?.into_iter().map(ParcelFileDescriptor::new).collect();
 
     let config = VirtualMachineConfig::AppConfig(VirtualMachineAppConfig {
+        name: name.unwrap_or_else(|| String::from("VmRunApp")),
         apk: apk_fd.into(),
         idsig: idsig_fd.into(),
         extraIdsigs: extra_idsig_fds,
         instanceImage: open_parcel_file(instance, true /* writable */)?.into(),
-        configPath: config_path.to_owned(),
+        payload: Payload::ConfigPath(config_path.to_owned()),
         debugLevel: debug_level,
         protectedVm: protected,
         memoryMib: mem.unwrap_or(0) as i32, // 0 means use the VM default
         numCpus: cpus.unwrap_or(1) as i32,
-        cpuAffinity: cpu_affinity,
         taskProfiles: task_profiles,
     });
     run(
@@ -117,6 +118,7 @@ pub fn command_run_app(
 /// Run a VM from the given configuration file.
 #[allow(clippy::too_many_arguments)]
 pub fn command_run(
+    name: Option<String>,
     service: &dyn IVirtualizationService,
     config_path: &Path,
     daemonize: bool,
@@ -124,7 +126,6 @@ pub fn command_run(
     log_path: Option<&Path>,
     mem: Option<u32>,
     cpus: Option<u32>,
-    cpu_affinity: Option<String>,
     task_profiles: Vec<String>,
 ) -> Result<(), Error> {
     let config_file = File::open(config_path).context("Failed to open config file")?;
@@ -136,7 +137,11 @@ pub fn command_run(
     if let Some(cpus) = cpus {
         config.numCpus = cpus as i32;
     }
-    config.cpuAffinity = cpu_affinity;
+    if let Some(name) = name {
+        config.name = name;
+    } else {
+        config.name = String::from("VmRun");
+    }
     config.taskProfiles = task_profiles;
     run(
         service,
@@ -215,7 +220,7 @@ fn run(
         if let Some(path) = ramdump_path {
             save_ramdump_if_available(path, &vm)?;
         }
-        println!("{}", death_reason);
+        println!("VM ended: {:?}", death_reason);
     }
 
     Ok(())
@@ -245,15 +250,15 @@ impl vmclient::VmCallback for Callback {
     fn on_payload_started(&self, _cid: i32, stream: Option<&File>) {
         // Show the output of the payload
         if let Some(stream) = stream {
-            let mut reader = BufReader::new(stream);
-            loop {
+            let mut reader = BufReader::new(stream.try_clone().unwrap());
+            std::thread::spawn(move || loop {
                 let mut s = String::new();
                 match reader.read_line(&mut s) {
                     Ok(0) => break,
                     Ok(_) => print!("{}", s),
                     Err(e) => eprintln!("error reading from virtual machine: {}", e),
                 };
-            }
+            });
         }
     }
 
@@ -265,8 +270,8 @@ impl vmclient::VmCallback for Callback {
         eprintln!("payload finished with exit code {}", exit_code);
     }
 
-    fn on_error(&self, _cid: i32, error_code: i32, message: &str) {
-        eprintln!("VM encountered an error: code={}, message={}", error_code, message);
+    fn on_error(&self, _cid: i32, error_code: ErrorCode, message: &str) {
+        eprintln!("VM encountered an error: code={:?}, message={}", error_code, message);
     }
 }
 

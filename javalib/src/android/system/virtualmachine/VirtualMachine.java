@@ -45,11 +45,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.WeakHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -65,6 +69,11 @@ import java.util.zip.ZipFile;
  * @hide
  */
 public class VirtualMachine {
+    private static final Map<Context, Map<String, WeakReference<VirtualMachine>>> sInstances =
+            new WeakHashMap<>();
+
+    private static final Object sInstancesLock = new Object();
+
     /** Name of the directory under the files directory where all VMs created for the app exist. */
     private static final String VM_DIR = "vm";
 
@@ -100,21 +109,21 @@ public class VirtualMachine {
     private final Object mLock = new Object();
 
     /** The package which owns this VM. */
-    private final @NonNull String mPackageName;
+    @NonNull private final String mPackageName;
 
     /** Name of this VM within the package. The name should be unique in the package. */
-    private final @NonNull String mName;
+    @NonNull private final String mName;
 
     /**
      * Path to the config file for this VM. The config file is where the configuration is persisted.
      */
-    private final @NonNull File mConfigFilePath;
+    @NonNull private final File mConfigFilePath;
 
     /** Path to the instance image file for this VM. */
-    private final @NonNull File mInstanceFilePath;
+    @NonNull private final File mInstanceFilePath;
 
     /** Path to the idsig file for this VM. */
-    private final @NonNull File mIdsigFilePath;
+    @NonNull private final File mIdsigFilePath;
 
     private static class ExtraApkSpec {
         public final File apk;
@@ -130,32 +139,36 @@ public class VirtualMachine {
      * List of extra apks. Apks are specified by the vm config, and corresponding idsigs are to be
      * generated.
      */
-    private final @NonNull List<ExtraApkSpec> mExtraApks;
+    @NonNull private final List<ExtraApkSpec> mExtraApks;
 
     /** Size of the instance image. 10 MB. */
     private static final long INSTANCE_FILE_SIZE = 10 * 1024 * 1024;
 
     /** The configuration that is currently associated with this VM. */
-    private @NonNull VirtualMachineConfig mConfig;
+    @NonNull private VirtualMachineConfig mConfig;
 
     /** Handle to the "running" VM. */
-    private @Nullable IVirtualMachine mVirtualMachine;
+    @Nullable private IVirtualMachine mVirtualMachine;
 
     /** The registered callback */
     @GuardedBy("mLock")
-    private @Nullable VirtualMachineCallback mCallback;
+    @Nullable
+    private VirtualMachineCallback mCallback;
 
     /** The executor on which the callback will be executed */
     @GuardedBy("mLock")
-    private @Nullable Executor mCallbackExecutor;
+    @Nullable
+    private Executor mCallbackExecutor;
 
-    private @Nullable ParcelFileDescriptor mConsoleReader;
-    private @Nullable ParcelFileDescriptor mConsoleWriter;
+    @Nullable private ParcelFileDescriptor mConsoleReader;
+    @Nullable private ParcelFileDescriptor mConsoleWriter;
 
-    private @Nullable ParcelFileDescriptor mLogReader;
-    private @Nullable ParcelFileDescriptor mLogWriter;
+    @Nullable private ParcelFileDescriptor mLogReader;
+    @Nullable private ParcelFileDescriptor mLogWriter;
 
     private final ExecutorService mExecutorService = Executors.newCachedThreadPool();
+
+    @NonNull private final Context mContext;
 
     static {
         System.loadLibrary("virtualmachine_jni");
@@ -164,6 +177,7 @@ public class VirtualMachine {
     private VirtualMachine(
             @NonNull Context context, @NonNull String name, @NonNull VirtualMachineConfig config)
             throws VirtualMachineException {
+        mContext = context;
         mPackageName = context.getPackageName();
         mName = name;
         mConfig = config;
@@ -181,7 +195,8 @@ public class VirtualMachine {
      * it is persisted until it is deleted by calling {@link #delete()}. The created virtual machine
      * is in {@link Status#STOPPED} state. To run the VM, call {@link #run()}.
      */
-    /* package */ static @NonNull VirtualMachine create(
+    @NonNull
+    static VirtualMachine create(
             @NonNull Context context, @NonNull String name, @NonNull VirtualMachineConfig config)
             throws VirtualMachineException {
         if (config == null) {
@@ -228,11 +243,24 @@ public class VirtualMachine {
             throw new VirtualMachineException("failed to create instance partition", e);
         }
 
+        synchronized (sInstancesLock) {
+            Map<String, WeakReference<VirtualMachine>> instancesMap;
+            if (sInstances.containsKey(context)) {
+                instancesMap = sInstances.get(context);
+            } else {
+                instancesMap = new HashMap<>();
+                sInstances.put(context, instancesMap);
+            }
+
+            instancesMap.put(name, new WeakReference<>(vm));
+        }
+
         return vm;
     }
 
     /** Loads a virtual machine that is already created before. */
-    /* package */ static @Nullable VirtualMachine load(
+    @Nullable
+    static VirtualMachine load(
             @NonNull Context context, @NonNull String name) throws VirtualMachineException {
         File configFilePath = getConfigFilePath(context, name);
         VirtualMachineConfig config;
@@ -245,7 +273,24 @@ public class VirtualMachine {
             throw new VirtualMachineException(e);
         }
 
-        VirtualMachine vm = new VirtualMachine(context, name, config);
+        VirtualMachine vm = null;
+        synchronized (sInstancesLock) {
+            Map<String, WeakReference<VirtualMachine>> instancesMap;
+            if (sInstances.containsKey(context)) {
+                instancesMap = sInstances.get(context);
+            } else {
+                instancesMap = new HashMap<>();
+                sInstances.put(context, instancesMap);
+            }
+
+            if (instancesMap.containsKey(name)) {
+                vm = instancesMap.get(name).get();
+            }
+            if (vm == null) {
+                vm = new VirtualMachine(context, name, config);
+                instancesMap.put(name, new WeakReference<>(vm));
+            }
+        }
 
         // If config file exists, but the instance image file doesn't, it means that the VM is
         // corrupted. That's different from the case that the VM doesn't exist. Throw an exception
@@ -260,8 +305,11 @@ public class VirtualMachine {
     /**
      * Returns the name of this virtual machine. The name is unique in the package and can't be
      * changed.
+     *
+     * @hide
      */
-    public @NonNull String getName() {
+    @NonNull
+    public String getName() {
         return mName;
     }
 
@@ -271,13 +319,21 @@ public class VirtualMachine {
      * isolated from each other; one cannot share its secret to another virtual machine even if they
      * share the same config. It is also possible that a virtual machine can switch its config,
      * which can be done by calling {@link #setConfig(VirtualMachineConfig)}.
+     *
+     * @hide
      */
-    public @NonNull VirtualMachineConfig getConfig() {
+    @NonNull
+    public VirtualMachineConfig getConfig() {
         return mConfig;
     }
 
-    /** Returns the current status of this virtual machine. */
-    public @NonNull Status getStatus() throws VirtualMachineException {
+    /**
+     * Returns the current status of this virtual machine.
+     *
+     * @hide
+     */
+    @NonNull
+    public Status getStatus() throws VirtualMachineException {
         try {
             if (mVirtualMachine != null) {
                 switch (mVirtualMachine.getState()) {
@@ -304,6 +360,8 @@ public class VirtualMachine {
     /**
      * Registers the callback object to get events from the virtual machine. If a callback was
      * already registered, it is replaced with the new one.
+     *
+     * @hide
      */
     public void setCallback(
             @NonNull @CallbackExecutor Executor executor,
@@ -314,7 +372,11 @@ public class VirtualMachine {
         }
     }
 
-    /** Clears the currently registered callback. */
+    /**
+     * Clears the currently registered callback.
+     *
+     * @hide
+     */
     public void clearCallback() {
         synchronized (mLock) {
             mCallback = null;
@@ -345,6 +407,8 @@ public class VirtualMachine {
      * Runs this virtual machine. The returning of this method however doesn't mean that the VM has
      * actually started running or the OS has booted there. Such events can be notified by
      * registering a callback object (not implemented currently).
+     *
+     * @hide
      */
     public void run() throws VirtualMachineException {
         if (getStatus() != Status.STOPPED) {
@@ -379,6 +443,7 @@ public class VirtualMachine {
             }
 
             VirtualMachineAppConfig appConfig = getConfig().toParcel();
+            appConfig.name = mName;
 
             // Fill the idsig file by hashing the apk
             service.createOrUpdateIdsigFile(
@@ -405,13 +470,10 @@ public class VirtualMachine {
             // The VM should only be observed to die once
             AtomicBoolean onDiedCalled = new AtomicBoolean(false);
 
-            IBinder.DeathRecipient deathRecipient = new IBinder.DeathRecipient() {
-                @Override
-                public void binderDied() {
-                    if (onDiedCalled.compareAndSet(false, true)) {
-                        executeCallback((cb) -> cb.onDied(VirtualMachine.this,
-                                VirtualMachineCallback.DEATH_REASON_VIRTUALIZATIONSERVICE_DIED));
-                    }
+            IBinder.DeathRecipient deathRecipient = () -> {
+                if (onDiedCalled.compareAndSet(false, true)) {
+                    executeCallback((cb) -> cb.onDied(VirtualMachine.this,
+                            VirtualMachineCallback.DEATH_REASON_VIRTUALIZATIONSERVICE_DIED));
                 }
             };
 
@@ -454,23 +516,31 @@ public class VirtualMachine {
             );
             service.asBinder().linkToDeath(deathRecipient, 0);
             mVirtualMachine.start();
-        } catch (IOException e) {
-            throw new VirtualMachineException(e);
-        } catch (RemoteException e) {
+        } catch (IOException | RemoteException e) {
             throw new VirtualMachineException(e);
         }
     }
 
-    /** Returns the stream object representing the console output from the virtual machine. */
-    public @NonNull InputStream getConsoleOutputStream() throws VirtualMachineException {
+    /**
+     * Returns the stream object representing the console output from the virtual machine.
+     *
+     * @hide
+     */
+    @NonNull
+    public InputStream getConsoleOutputStream() throws VirtualMachineException {
         if (mConsoleReader == null) {
             throw new VirtualMachineException("Console output not available");
         }
         return new FileInputStream(mConsoleReader.getFileDescriptor());
     }
 
-    /** Returns the stream object representing the log output from the virtual machine. */
-    public @NonNull InputStream getLogOutputStream() throws VirtualMachineException {
+    /**
+     * Returns the stream object representing the log output from the virtual machine.
+     *
+     * @hide
+     */
+    @NonNull
+    public InputStream getLogOutputStream() throws VirtualMachineException {
         if (mLogReader == null) {
             throw new VirtualMachineException("Log output not available");
         }
@@ -482,6 +552,8 @@ public class VirtualMachine {
      * computer; the machine halts immediately. Software running on the virtual machine is not
      * notified with the event. A stopped virtual machine can be re-started by calling {@link
      * #run()}.
+     *
+     * @hide
      */
     public void stop() throws VirtualMachineException {
         if (mVirtualMachine == null) return;
@@ -498,6 +570,8 @@ public class VirtualMachine {
      * associated with it including the per-VM secret. This is an irreversable action. A virtual
      * machine once deleted can never be restored. A new virtual machine created with the same name
      * and the same config is different from an already deleted virtual machine.
+     *
+     * @hide
      */
     public void delete() throws VirtualMachineException {
         if (getStatus() != Status.STOPPED) {
@@ -511,10 +585,20 @@ public class VirtualMachine {
         mInstanceFilePath.delete();
         mIdsigFilePath.delete();
         vmRootDir.delete();
+
+        synchronized (sInstancesLock) {
+            Map<String, WeakReference<VirtualMachine>> instancesMap = sInstances.get(mContext);
+            if (instancesMap != null) instancesMap.remove(mName);
+        }
     }
 
-    /** Returns the CID of this virtual machine, if it is running. */
-    public @NonNull Optional<Integer> getCid() throws VirtualMachineException {
+    /**
+     * Returns the CID of this virtual machine, if it is running.
+     *
+     * @hide
+     */
+    @NonNull
+    public Optional<Integer> getCid() throws VirtualMachineException {
         if (getStatus() != Status.RUNNING) {
             return Optional.empty();
         }
@@ -535,8 +619,11 @@ public class VirtualMachine {
      * when an incompatible config is attempted.
      *
      * @return the old config
+     *
+     * @hide
      */
-    public @NonNull VirtualMachineConfig setConfig(@NonNull VirtualMachineConfig newConfig)
+    @NonNull
+    public VirtualMachineConfig setConfig(@NonNull VirtualMachineConfig newConfig)
             throws VirtualMachineException {
         final VirtualMachineConfig oldConfig = getConfig();
         if (!oldConfig.isCompatibleWith(newConfig)) {
@@ -566,6 +653,8 @@ public class VirtualMachine {
      * expected to set up vsock servers in their payload. After the host app receives the {@link
      * VirtualMachineCallback#onPayloadReady(VirtualMachine)}, it can use this method to
      * establish an RPC session to the guest VMs.
+     *
+     * @hide
      */
     public Future<IBinder> connectToVsockServer(int port) throws VirtualMachineException {
         if (getStatus() != Status.RUNNING) {
@@ -573,6 +662,19 @@ public class VirtualMachine {
         }
         return mExecutorService.submit(
                 () -> nativeConnectToVsockServer(mVirtualMachine.asBinder(), port));
+    }
+
+    /**
+     * Opens a vsock connection to the VM on the given port.
+     *
+     * @hide
+     */
+    public ParcelFileDescriptor connectVsock(int port) throws VirtualMachineException {
+        try {
+            return mVirtualMachine.connectVsock(port);
+        } catch (RemoteException e) {
+            throw new VirtualMachineException("failed to connect Vsock", e);
+        }
     }
 
     @Override
@@ -586,7 +688,7 @@ public class VirtualMachine {
 
     private static List<String> parseExtraApkListFromPayloadConfig(JsonReader reader)
             throws VirtualMachineException {
-        /**
+        /*
          * JSON schema from packages/modules/Virtualization/microdroid/payload/config/src/lib.rs:
          *
          * <p>{ "extra_apks": [ { "path": "/system/app/foo.apk", }, ... ], ... }

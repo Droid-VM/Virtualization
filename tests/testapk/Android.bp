@@ -10,7 +10,7 @@ android_test {
     ],
     srcs: ["src/java/**/*.java"],
     static_libs: [
-        "MicroroidDeviceTestHelper",
+        "MicrodroidDeviceTestHelper",
         "androidx.test.runner",
         "androidx.test.ext.junit",
         "authfs_test_apk_assets",
@@ -25,15 +25,14 @@ android_test {
     use_embedded_native_libs: true,
     // We only support 64-bit ABI, but CTS demands all APKs to be multi-ABI.
     compile_multilib: "both",
+    min_sdk_version: "33",
 }
 
-// TODO(jiyong): make this a binary, not a shared library
 cc_library_shared {
     name: "MicrodroidTestNativeLib",
     srcs: ["src/native/testbinary.cpp"],
     shared_libs: [
         "android.security.dice-ndk",
-        "android.system.virtualmachineservice-ndk",
         "com.android.microdroid.testservice-ndk",
         "libbase",
         "libbinder_ndk",
@@ -44,6 +43,7 @@ cc_library_shared {
         "libfsverity_digests_proto_cc",
         "liblog",
         "libprotobuf-cpp-lite-ndk",
+        "libvm_payload",
     ],
 }
 

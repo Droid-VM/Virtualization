@@ -4,6 +4,7 @@ package {
 
 rust_defaults {
     name: "compsvc_defaults",
+    edition: "2021",
     srcs: ["src/compsvc_main.rs"],
     rustlibs: [
         "android.system.virtualmachineservice-rust",
@@ -11,9 +12,7 @@ rust_defaults {
         "compos_aidl_interface-rust",
         "libandroid_logger",
         "libanyhow",
-        "libbinder_common",
         "libbinder_rs",
-        "libclap",
         "libcompos_common",
         "liblibc",
         "liblog_rust",
@@ -22,6 +21,7 @@ rust_defaults {
         "libodsign_proto_rust",
         "libprotobuf",
         "libregex",
+        "librpcbinder_rs",
         "librustutils",
         "libscopeguard",
     ],

@@ -23,14 +23,15 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.os.SystemProperties;
-import android.system.virtualizationservice.DeathReason;
 import android.system.virtualmachine.VirtualMachine;
+import android.system.virtualmachine.VirtualMachineCallback;
 import android.system.virtualmachine.VirtualMachineConfig;
 import android.system.virtualmachine.VirtualMachineConfig.DebugLevel;
 import android.system.virtualmachine.VirtualMachineException;
 import android.util.Log;
 
 import com.android.compatibility.common.util.CddTest;
+import com.android.microdroid.test.device.MicrodroidDeviceTestBase;
 import com.android.microdroid.testservice.ITestService;
 
 import org.junit.Before;
@@ -163,22 +164,32 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
     @Test
     public void bootFailsWhenLowMem() throws VirtualMachineException, InterruptedException {
-        VirtualMachineConfig lowMemConfig = mInner.newVmConfigBuilder("assets/vm_config.json")
-                .memoryMib(20)
-                .debugLevel(DebugLevel.NONE)
-                .build();
-        VirtualMachine vm = mInner.forceCreateNewVirtualMachine("low_mem", lowMemConfig);
-        final CompletableFuture<Integer> exception = new CompletableFuture<>();
-        VmEventListener listener =
-                new VmEventListener() {
-                    @Override
-                    public void onDied(VirtualMachine vm, @DeathReason int reason) {
-                        exception.complete(reason);
-                        super.onDied(vm, reason);
-                    }
-                };
-        listener.runToFinish(TAG, vm);
-        assertThat(exception.getNow(0)).isAnyOf(DeathReason.REBOOT, DeathReason.HANGUP);
+        for (int memMib : new int[]{ 10, 20, 40 }) {
+            VirtualMachineConfig lowMemConfig = mInner.newVmConfigBuilder("assets/vm_config.json")
+                    .memoryMib(memMib)
+                    .debugLevel(DebugLevel.NONE)
+                    .build();
+            VirtualMachine vm = mInner.forceCreateNewVirtualMachine("low_mem", lowMemConfig);
+            final CompletableFuture<Boolean> onPayloadReadyExecuted = new CompletableFuture<>();
+            final CompletableFuture<Boolean> onDiedExecuted = new CompletableFuture<>();
+            VmEventListener listener =
+                    new VmEventListener() {
+                        @Override
+                        public void onPayloadReady(VirtualMachine vm) {
+                            onPayloadReadyExecuted.complete(true);
+                            super.onPayloadReady(vm);
+                        }
+                        @Override
+                        public void onDied(VirtualMachine vm,  int reason) {
+                            onDiedExecuted.complete(true);
+                            super.onDied(vm, reason);
+                        }
+                    };
+            listener.runToFinish(TAG, vm);
+            // Assert that onDied() was executed but onPayloadReady() was never run
+            assertThat(onDiedExecuted.getNow(false)).isTrue();
+            assertThat(onPayloadReadyExecuted.getNow(false)).isFalse();
+        }
     }
 
     @Test
@@ -195,39 +206,27 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
         VirtualMachineConfig.Builder builder = mInner.newVmConfigBuilder("assets/vm_config.json");
         VirtualMachineConfig normalConfig = builder.debugLevel(DebugLevel.NONE).build();
-        VirtualMachine vm = mInner.forceCreateNewVirtualMachine("test_vm", normalConfig);
-        VmEventListener listener =
-                new VmEventListener() {
-                    @Override
-                    public void onPayloadReady(VirtualMachine vm) {
-                        forceStop(vm);
-                    }
-                };
-        listener.runToFinish(TAG, vm);
+        mInner.forceCreateNewVirtualMachine("test_vm", normalConfig);
+        assertThat(tryBootVm(TAG, "test_vm").payloadStarted).isTrue();
+
+        // Try to run the VM again with the previous instance.img
+        // We need to make sure that no changes on config don't invalidate the identity, to compare
+        // the result with the below "different debug level" test.
+        File vmRoot = new File(getContext().getFilesDir(), "vm");
+        File vmInstance = new File(new File(vmRoot, "test_vm"), "instance.img");
+        File vmInstanceBackup = File.createTempFile("instance", ".img");
+        Files.copy(vmInstance.toPath(), vmInstanceBackup.toPath(), REPLACE_EXISTING);
+        mInner.forceCreateNewVirtualMachine("test_vm", normalConfig);
+        Files.copy(vmInstanceBackup.toPath(), vmInstance.toPath(), REPLACE_EXISTING);
+        assertThat(tryBootVm(TAG, "test_vm").payloadStarted).isTrue();
 
         // Launch the same VM with different debug level. The Java API prohibits this (thankfully).
-        // For testing, we do that by creating another VM with debug level, and copy the config file
-        // from the new VM directory to the old VM directory.
+        // For testing, we do that by creating a new VM with debug level, and copy the old instance
+        // image to the new VM instance image.
         VirtualMachineConfig debugConfig = builder.debugLevel(DebugLevel.FULL).build();
-        VirtualMachine newVm = mInner.forceCreateNewVirtualMachine("test_debug_vm", debugConfig);
-        File vmRoot = new File(getContext().getFilesDir(), "vm");
-        File newVmConfig = new File(new File(vmRoot, "test_debug_vm"), "config.xml");
-        File oldVmConfig = new File(new File(vmRoot, "test_vm"), "config.xml");
-        Files.copy(newVmConfig.toPath(), oldVmConfig.toPath(), REPLACE_EXISTING);
-        newVm.delete();
-        // re-load with the copied-in config file.
-        vm = mInner.getVirtualMachineManager().get("test_vm");
-        final CompletableFuture<Boolean> payloadStarted = new CompletableFuture<>();
-        listener =
-                new VmEventListener() {
-                    @Override
-                    public void onPayloadStarted(VirtualMachine vm, ParcelFileDescriptor stream) {
-                        payloadStarted.complete(true);
-                        forceStop(vm);
-                    }
-                };
-        listener.runToFinish(TAG, vm);
-        assertThat(payloadStarted.getNow(false)).isFalse();
+        mInner.forceCreateNewVirtualMachine("test_vm", debugConfig);
+        Files.copy(vmInstanceBackup.toPath(), vmInstance.toPath(), REPLACE_EXISTING);
+        assertThat(tryBootVm(TAG, "test_vm").payloadStarted).isFalse();
     }
 
     private class VmCdis {
@@ -358,9 +357,9 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         List<DataItem> rootArrayItems = ((Array) dataItems.get(0)).getDataItems();
         assertThat(rootArrayItems.size()).isAtLeast(2); // Public key and one certificate
         if (mProtectedVm) {
-            // When a true BCC is created, microdroid expects entries for at least: the root public
-            // key, pvmfw, u-boot, u-boot-env, microdroid, app payload and the service process.
-            assertThat(rootArrayItems.size()).isAtLeast(7);
+            // When a true DICE chain is created, microdroid expects entries for: u-boot,
+            // u-boot-env, microdroid, app payload and the service process.
+            assertThat(rootArrayItems.size()).isAtLeast(5);
         }
     }
 
@@ -434,7 +433,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(result.payloadStarted).isFalse();
 
         // This failure should shut the VM down immediately and shouldn't trigger a hangup.
-        assertThat(result.deathReason).isNotEqualTo(DeathReason.HANGUP);
+        assertThat(result.deathReason).isNotEqualTo(VirtualMachineCallback.DEATH_REASON_HANGUP);
     }
 
     @Test
@@ -445,36 +444,6 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     public void bootFailsWhenMicrodroidDataIsCompromised()
             throws VirtualMachineException, InterruptedException, IOException {
         assertThatBootFailsAfterCompromisingPartition(MICRODROID_PARTITION_UUID);
-    }
-
-    @Test
-    @CddTest(requirements = {
-            "9.17/C-1-1",
-            "9.17/C-2-7"
-    })
-    public void bootFailsWhenUBootAvbDataIsCompromised()
-            throws VirtualMachineException, InterruptedException, IOException {
-        if (mProtectedVm) {
-            assertThatBootFailsAfterCompromisingPartition(U_BOOT_AVB_PARTITION_UUID);
-        } else {
-            // non-protected VM shouldn't have u-boot avb data
-            assertThatPartitionIsMissing(U_BOOT_AVB_PARTITION_UUID);
-        }
-    }
-
-    @Test
-    @CddTest(requirements = {
-            "9.17/C-1-1",
-            "9.17/C-2-7"
-    })
-    public void bootFailsWhenUBootEnvDataIsCompromised()
-            throws VirtualMachineException, InterruptedException, IOException {
-        if (mProtectedVm) {
-            assertThatBootFailsAfterCompromisingPartition(U_BOOT_ENV_PARTITION_UUID);
-        } else {
-            // non-protected VM shouldn't have u-boot env data
-            assertThatPartitionIsMissing(U_BOOT_ENV_PARTITION_UUID);
-        }
     }
 
     @Test
@@ -502,6 +471,24 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
         BootResult bootResult = tryBootVm(TAG, "test_vm_invalid_config");
         assertThat(bootResult.payloadStarted).isFalse();
-        assertThat(bootResult.deathReason).isEqualTo(DeathReason.MICRODROID_INVALID_PAYLOAD_CONFIG);
+        assertThat(bootResult.deathReason).isEqualTo(
+                VirtualMachineCallback.DEATH_REASON_MICRODROID_INVALID_PAYLOAD_CONFIG);
+    }
+
+    @Test
+    public void sameInstancesShareTheSameVmObject()
+            throws VirtualMachineException, InterruptedException, IOException {
+        VirtualMachineConfig.Builder builder =
+                mInner.newVmConfigBuilder("assets/vm_config.json");
+        VirtualMachineConfig normalConfig = builder.debugLevel(DebugLevel.NONE).build();
+        VirtualMachine vm = mInner.forceCreateNewVirtualMachine("test_vm", normalConfig);
+        VirtualMachine vm2 = mInner.getVirtualMachineManager().get("test_vm");
+        assertThat(vm).isEqualTo(vm2);
+
+        VirtualMachine newVm = mInner.forceCreateNewVirtualMachine("test_vm", normalConfig);
+        VirtualMachine newVm2 = mInner.getVirtualMachineManager().get("test_vm");
+        assertThat(newVm).isEqualTo(newVm2);
+
+        assertThat(vm).isNotEqualTo(newVm);
     }
 }

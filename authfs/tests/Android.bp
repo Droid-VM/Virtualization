@@ -14,11 +14,14 @@ java_test_host {
         "MicrodroidHostTestHelper",
     ],
     test_suites: ["general-tests"],
-    //TODO(b/235263148) use data_device_bins_64
-    data_device_bins_first: ["open_then_run"],
+    data_device_bins_first: [
+        "open_then_run",
+        "fsverity",
+    ],
     per_testcase_directory: true,
     data: [
         ":authfs_test_files",
+        ":CtsApkVerityTestPrebuiltFiles",
         ":MicrodroidTestApp",
     ],
 }
@@ -27,14 +30,14 @@ rust_test {
     name: "open_then_run",
     crate_name: "open_then_run",
     srcs: ["open_then_run.rs"],
-    edition: "2018",
+    edition: "2021",
     rustlibs: [
         "libandroid_logger",
         "libanyhow",
         "libclap",
         "libcommand_fds",
+        "liblibc",
         "liblog_rust",
-        "libnix",
     ],
     test_suites: ["general-tests"],
     test_harness: false,

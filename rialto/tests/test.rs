@@ -54,6 +54,7 @@ fn test_boots() -> Result<(), Error> {
     let log = android_log_fd()?;
 
     let config = VirtualMachineConfig::RawConfig(VirtualMachineRawConfig {
+        name: String::from("RialtoTest"),
         kernel: None,
         initrd: None,
         params: None,
@@ -62,7 +63,6 @@ fn test_boots() -> Result<(), Error> {
         protectedVm: false,
         memoryMib: 300,
         numCpus: 1,
-        cpuAffinity: None,
         platformVersion: "~1.0".to_string(),
         taskProfiles: vec![],
     });
