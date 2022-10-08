@@ -15,8 +15,9 @@
 //! Functions for running instances of `crosvm`.
 
 use crate::aidl::VirtualMachineCallbacks;
+use crate::atom::write_vm_exited_stats;
 use crate::Cid;
-use anyhow::{bail, Context, Error};
+use anyhow::{anyhow, bail, Context, Error};
 use command_fds::CommandFdExt;
 use lazy_static::lazy_static;
 use log::{debug, error, info};
@@ -29,15 +30,19 @@ use std::io::{self, Read};
 use std::mem;
 use std::num::NonZeroU32;
 use std::os::unix::io::{AsRawFd, RawFd, FromRawFd};
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::process::{Command, ExitStatus};
 use std::sync::{Arc, Condvar, Mutex};
-use std::time::Duration;
+use std::time::{Duration, SystemTime};
 use std::thread;
 use vsock::VsockStream;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::DeathReason::DeathReason;
 use binder::Strong;
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
+use tombstoned_client::{TombstonedConnection, DebuggerdDumpType};
+
+/// external/crosvm
+use base::UnixSeqpacketListener;
 
 const CROSVM_PATH: &str = "/apex/com.android.virt/bin/crosvm";
 
@@ -69,6 +74,7 @@ lazy_static! {
 #[derive(Debug)]
 pub struct CrosvmConfig {
     pub cid: Cid,
+    pub name: String,
     pub bootloader: Option<File>,
     pub kernel: Option<File>,
     pub initrd: Option<File>,
@@ -77,7 +83,6 @@ pub struct CrosvmConfig {
     pub protected: bool,
     pub memory_mib: Option<NonZeroU32>,
     pub cpus: Option<NonZeroU32>,
-    pub cpu_affinity: Option<String>,
     pub task_profiles: Vec<String>,
     pub console_fd: Option<File>,
     pub log_fd: Option<File>,
@@ -137,7 +142,8 @@ impl VmState {
             let (failure_pipe_read, failure_pipe_write) = create_pipe()?;
 
             // If this fails and returns an error, `self` will be left in the `Failed` state.
-            let child = Arc::new(run_vm(config, failure_pipe_write)?);
+            let child =
+                Arc::new(run_vm(config, &instance.temporary_directory, failure_pipe_write)?);
 
             let child_clone = child.clone();
             let instance_clone = instance.clone();
@@ -169,6 +175,8 @@ pub struct VmInstance {
     pub vm_state: Mutex<VmState>,
     /// The CID assigned to the VM for vsock communication.
     pub cid: Cid,
+    /// The name of the VM.
+    pub name: String,
     /// Whether the VM is a protected VM.
     pub protected: bool,
     /// Directory of temporary files used by the VM while it is running.
@@ -186,6 +194,8 @@ pub struct VmInstance {
     pub stream: Mutex<Option<VsockStream>>,
     /// VirtualMachineService binder object for the VM.
     pub vm_service: Mutex<Option<Strong<dyn IVirtualMachineService>>>,
+    /// Recorded timestamp when the VM is started.
+    pub vm_start_timestamp: Mutex<Option<SystemTime>>,
     /// The latest lifecycle state which the payload reported itself to be in.
     payload_state: Mutex<PayloadState>,
     /// Represents the condition that payload_state was updated
@@ -203,10 +213,12 @@ impl VmInstance {
     ) -> Result<VmInstance, Error> {
         validate_config(&config)?;
         let cid = config.cid;
+        let name = config.name.clone();
         let protected = config.protected;
         Ok(VmInstance {
             vm_state: Mutex::new(VmState::NotStarted { config }),
             cid,
+            name,
             protected,
             temporary_directory,
             requester_uid,
@@ -215,6 +227,7 @@ impl VmInstance {
             callbacks: Default::default(),
             stream: Mutex::new(None),
             vm_service: Mutex::new(None),
+            vm_start_timestamp: Mutex::new(None),
             payload_state: Mutex::new(PayloadState::Starting),
             payload_state_updated: Condvar::new(),
         })
@@ -223,6 +236,7 @@ impl VmInstance {
     /// Starts an instance of `crosvm` to manage the VM. The `crosvm` instance will be killed when
     /// the `VmInstance` is dropped.
     pub fn start(self: &Arc<Self>) -> Result<(), Error> {
+        *self.vm_start_timestamp.lock().unwrap() = Some(SystemTime::now());
         self.vm_state.lock().unwrap().start(self.clone())
     }
 
@@ -260,7 +274,17 @@ impl VmInstance {
             };
 
         self.handle_ramdump().unwrap_or_else(|e| error!("Error handling ramdump: {}", e));
-        self.callbacks.callback_on_died(self.cid, death_reason(&result, &failure_reason));
+
+        let death_reason = death_reason(&result, &failure_reason);
+        self.callbacks.callback_on_died(self.cid, death_reason);
+
+        let vm_start_timestamp = self.vm_start_timestamp.lock().unwrap();
+        write_vm_exited_stats(
+            self.requester_uid as i32,
+            &self.name,
+            death_reason,
+            *vm_start_timestamp,
+        );
 
         // Delete temporary files.
         if let Err(e) = remove_dir_all(&self.temporary_directory) {
@@ -336,7 +360,28 @@ impl VmInstance {
             let ramdump = File::open(&ramdump_path)
                 .context(format!("Failed to open ramdump {:?} for reading", &ramdump_path))?;
             self.callbacks.callback_on_ramdump(self.cid, ramdump);
+
+            Self::send_ramdump_to_tombstoned(&ramdump_path)?;
         }
+        Ok(())
+    }
+
+    fn send_ramdump_to_tombstoned(ramdump_path: &Path) -> Result<(), Error> {
+        let mut input = File::open(ramdump_path)
+            .context(format!("Failed to open raudmp {:?} for reading", ramdump_path))?;
+
+        let pid = std::process::id() as i32;
+        let conn = TombstonedConnection::connect(pid, DebuggerdDumpType::Tombstone)
+            .context("Failed to connect to tombstoned")?;
+        let mut output = conn
+            .text_output
+            .as_ref()
+            .ok_or_else(|| anyhow!("Could not get file to write the tombstones on"))?;
+
+        std::io::copy(&mut input, &mut output).context("Failed to send ramdump to tombstoned")?;
+        info!("Ramdump {:?} sent to tombstoned", ramdump_path);
+
+        conn.notify_completion()?;
         Ok(())
     }
 }
@@ -384,7 +429,11 @@ fn death_reason(result: &Result<ExitStatus, io::Error>, failure_reason: &str) ->
 }
 
 /// Starts an instance of `crosvm` to manage a new VM.
-fn run_vm(config: CrosvmConfig, failure_pipe_write: File) -> Result<SharedChild, Error> {
+fn run_vm(
+    config: CrosvmConfig,
+    temporary_directory: &Path,
+    failure_pipe_write: File,
+) -> Result<SharedChild, Error> {
     validate_config(&config)?;
 
     let mut command = Command::new(CROSVM_PATH);
@@ -393,6 +442,7 @@ fn run_vm(config: CrosvmConfig, failure_pipe_write: File) -> Result<SharedChild,
         .arg("--extended-status")
         .arg("run")
         .arg("--disable-sandbox")
+        .arg("--no-balloon")
         .arg("--cid")
         .arg(config.cid.to_string());
 
@@ -413,10 +463,6 @@ fn run_vm(config: CrosvmConfig, failure_pipe_write: File) -> Result<SharedChild,
 
     if let Some(cpus) = config.cpus {
         command.arg("--cpus").arg(cpus.to_string());
-    }
-
-    if let Some(cpu_affinity) = config.cpu_affinity {
-        command.arg("--cpu-affinity").arg(cpu_affinity);
     }
 
     if !config.task_profiles.is_empty() {
@@ -477,6 +523,11 @@ fn run_vm(config: CrosvmConfig, failure_pipe_write: File) -> Result<SharedChild,
         command.arg(add_preserved_fd(&mut preserved_fds, kernel));
     }
 
+    let control_server_socket =
+        UnixSeqpacketListener::bind(temporary_directory.join("crosvm.sock"))
+            .context("failed to create control server")?;
+    command.arg("--socket").arg(add_preserved_fd(&mut preserved_fds, &control_server_socket));
+
     debug!("Preserving FDs {:?}", preserved_fds);
     command.preserved_fds(preserved_fds);
 
@@ -509,7 +560,7 @@ fn validate_config(config: &CrosvmConfig) -> Result<(), Error> {
 
 /// Adds the file descriptor for `file` to `preserved_fds`, and returns a string of the form
 /// "/proc/self/fd/N" where N is the file descriptor.
-fn add_preserved_fd(preserved_fds: &mut Vec<RawFd>, file: &File) -> String {
+fn add_preserved_fd(preserved_fds: &mut Vec<RawFd>, file: &dyn AsRawFd) -> String {
     let fd = file.as_raw_fd();
     preserved_fds.push(fd);
     format!("/proc/self/fd/{}", fd)

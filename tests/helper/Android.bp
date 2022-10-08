@@ -9,14 +9,20 @@ java_library_static {
 }
 
 java_library_static {
-    name: "MicroroidDeviceTestHelper",
-    srcs: ["src/java/com/android/microdroid/**/*.java"],
+    name: "MicrodroidTestHelper",
+    srcs: ["src/java/com/android/microdroid/test/common/*.java"],
+    host_supported: true,
+}
+
+java_library_static {
+    name: "MicrodroidDeviceTestHelper",
+    srcs: ["src/java/com/android/microdroid/test/device/*.java"],
     static_libs: [
         "androidx.test.runner",
         "androidx.test.ext.junit",
+        "MicrodroidTestHelper",
         "VirtualizationTestHelper",
         "truth-prebuilt",
     ],
     libs: ["android.system.virtualmachine"],
-    platform_apis: true,
 }

@@ -17,26 +17,31 @@
 mod instance;
 mod ioutil;
 mod payload;
+mod vm_payload_service;
 
 use crate::instance::{ApexData, ApkData, InstanceDisk, MicrodroidData, RootHash};
+use crate::vm_payload_service::register_vm_payload_service;
 use android_hardware_security_dice::aidl::android::hardware::security::dice::{
     Config::Config, InputValues::InputValues, Mode::Mode,
 };
 use android_security_dice::aidl::android::security::dice::IDiceMaintenance::IDiceMaintenance;
+use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon::ErrorCode::ErrorCode;
+use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::{
+    VM_BINDER_SERVICE_PORT, VM_STREAM_SERVICE_PORT, IVirtualMachineService,
+};
 use anyhow::{anyhow, bail, ensure, Context, Error, Result};
-use apkverify::{get_public_key_der, verify};
-use binder::{wait_for_interface, Strong};
-use binder_common::rpc_client::connect_rpc_binder;
-use diced_utils::cbor::encode_header;
+use apkverify::{get_public_key_der, verify, V4Signature};
+use binder::{ProcessState, wait_for_interface, Strong};
+use diced_utils::cbor::{encode_header, encode_number};
 use glob::glob;
-use idsig::V4Signature;
 use itertools::sorted;
 use log::{error, info};
-use microdroid_metadata::{write_metadata, Metadata};
-use microdroid_payload_config::{Task, TaskType, VmPayloadConfig};
+use microdroid_metadata::{write_metadata, Metadata, PayloadMetadata};
+use microdroid_payload_config::{Task, TaskType, VmPayloadConfig, OsConfig};
 use openssl::sha::Sha512;
 use payload::{get_apex_data_from_payload, load_metadata, to_metadata};
 use rand::Fill;
+use rpcbinder::get_vsock_rpc_interface;
 use rustutils::system_properties;
 use rustutils::system_properties::PropertyWatcher;
 use std::convert::TryInto;
@@ -48,10 +53,6 @@ use std::process::{Child, Command, Stdio};
 use std::str;
 use std::time::{Duration, SystemTime};
 use vsock::VsockStream;
-
-use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::{
-    ERROR_PAYLOAD_CHANGED, ERROR_PAYLOAD_VERIFICATION_FAILED, ERROR_PAYLOAD_INVALID_CONFIG, ERROR_UNKNOWN, VM_BINDER_SERVICE_PORT, VM_STREAM_SERVICE_PORT, IVirtualMachineService,
-};
 
 const WAIT_TIMEOUT: Duration = Duration::from_secs(10);
 const MAIN_APK_PATH: &str = "/dev/block/by-name/microdroid-apk";
@@ -88,22 +89,24 @@ enum MicrodroidError {
     InvalidConfig(String),
 }
 
-fn translate_error(err: &Error) -> (i32, String) {
+fn translate_error(err: &Error) -> (ErrorCode, String) {
     if let Some(e) = err.downcast_ref::<MicrodroidError>() {
         match e {
-            MicrodroidError::PayloadChanged(msg) => (ERROR_PAYLOAD_CHANGED, msg.to_string()),
+            MicrodroidError::PayloadChanged(msg) => (ErrorCode::PAYLOAD_CHANGED, msg.to_string()),
             MicrodroidError::PayloadVerificationFailed(msg) => {
-                (ERROR_PAYLOAD_VERIFICATION_FAILED, msg.to_string())
+                (ErrorCode::PAYLOAD_VERIFICATION_FAILED, msg.to_string())
             }
-            MicrodroidError::InvalidConfig(msg) => (ERROR_PAYLOAD_INVALID_CONFIG, msg.to_string()),
+            MicrodroidError::InvalidConfig(msg) => {
+                (ErrorCode::PAYLOAD_CONFIG_INVALID, msg.to_string())
+            }
 
             // Connection failure won't be reported to VS; return the default value
             MicrodroidError::FailedToConnectToVirtualizationService(msg) => {
-                (ERROR_UNKNOWN, msg.to_string())
+                (ErrorCode::UNKNOWN, msg.to_string())
             }
         }
     } else {
-        (ERROR_UNKNOWN, err.to_string())
+        (ErrorCode::UNKNOWN, err.to_string())
     }
 }
 
@@ -141,7 +144,7 @@ fn write_death_reason_to_serial(err: &Error) -> Result<()> {
 }
 
 fn get_vms_rpc_binder() -> Result<Strong<dyn IVirtualMachineService>> {
-    connect_rpc_binder(VMADDR_CID_HOST, VM_BINDER_SERVICE_PORT as u32)
+    get_vsock_rpc_interface(VMADDR_CID_HOST, VM_BINDER_SERVICE_PORT as u32)
         .context("Cannot connect to RPC service")
 }
 
@@ -166,6 +169,8 @@ fn try_main() -> Result<()> {
     let _ = kernlog::init();
     info!("started.");
 
+    load_crashkernel_if_supported().context("Failed to load crashkernel")?;
+
     let service = get_vms_rpc_binder()
         .context("cannot connect to VirtualMachineService")
         .map_err(|e| MicrodroidError::FailedToConnectToVirtualizationService(e.to_string()))?;
@@ -188,7 +193,10 @@ fn try_main() -> Result<()> {
     }
 }
 
-fn dice_derivation(verified_data: &MicrodroidData, payload_config_path: &str) -> Result<()> {
+fn dice_derivation(
+    verified_data: &MicrodroidData,
+    payload_metadata: &PayloadMetadata,
+) -> Result<()> {
     // Calculate compound digests of code and authorities
     let mut code_hash_ctx = Sha512::new();
     let mut authority_hash_ctx = Sha512::new();
@@ -207,15 +215,33 @@ fn dice_derivation(verified_data: &MicrodroidData, payload_config_path: &str) ->
 
     // {
     //   -70002: "Microdroid payload",
-    //   -71000: payload_config_path
+    //   ? -71000: tstr // payload_config_path
+    //   ? -71001: PayloadConfig
     // }
+    // PayloadConfig = {
+    //   1: tstr // payload_binary_path
+    //   // TODO(b/249064104 Either include args, or deprecate them
+    // }
+
     let mut config_desc = vec![
-        0xa2, 0x3a, 0x00, 0x01, 0x11, 0x71, 0x72, 0x4d, 0x69, 0x63, 0x72, 0x6f, 0x64, 0x72, 0x6f,
-        0x69, 0x64, 0x20, 0x70, 0x61, 0x79, 0x6c, 0x6f, 0x61, 0x64, 0x3a, 0x00, 0x01, 0x15, 0x57,
+        0xa2, // map(2)
+        0x3a, 0x00, 0x01, 0x11, 0x71, // -70002
+        0x72, 0x4d, 0x69, 0x63, 0x72, 0x6f, 0x64, 0x72, 0x6f, 0x69, 0x64, 0x20, 0x70, 0x61, 0x79,
+        0x6c, 0x6f, 0x61, 0x64, // "Microdroid payload"
     ];
-    let config_path_bytes = payload_config_path.as_bytes();
-    encode_header(3, config_path_bytes.len().try_into().unwrap(), &mut config_desc)?;
-    config_desc.extend_from_slice(config_path_bytes);
+
+    match payload_metadata {
+        PayloadMetadata::config_path(payload_config_path) => {
+            encode_negative_number(-71000, &mut config_desc)?;
+            encode_tstr(payload_config_path, &mut config_desc)?;
+        }
+        PayloadMetadata::config(payload_config) => {
+            encode_negative_number(-71001, &mut config_desc)?;
+            encode_header(5, 1, &mut config_desc)?; // map(1)
+            encode_number(1, &mut config_desc)?;
+            encode_tstr(&payload_config.payload_binary_path, &mut config_desc)?;
+        }
+    }
 
     // Check app debuggability, conervatively assuming it is debuggable
     let app_debuggable = system_properties::read_bool(APP_DEBUGGABLE_PROP, true)?;
@@ -235,6 +261,19 @@ fn dice_derivation(verified_data: &MicrodroidData, payload_config_path: &str) ->
         }])
         .context("IDiceMaintenance::demoteSelf failed")?;
     Ok(())
+}
+
+fn encode_tstr(tstr: &str, buffer: &mut Vec<u8>) -> Result<()> {
+    let bytes = tstr.as_bytes();
+    encode_header(3, bytes.len().try_into().unwrap(), buffer)?;
+    buffer.extend_from_slice(bytes);
+    Ok(())
+}
+
+fn encode_negative_number(n: i64, buffer: &mut dyn Write) -> Result<()> {
+    ensure!(n < 0);
+    let n = -1 - n;
+    encode_header(1, n.try_into().unwrap(), buffer)
 }
 
 fn is_strict_boot() -> bool {
@@ -298,9 +337,13 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
         verified_data
     };
 
+    let payload_metadata = metadata.payload.ok_or_else(|| {
+        MicrodroidError::InvalidConfig("No payload config in metadata".to_string())
+    })?;
+
     // To minimize the exposure to untrusted data, derive dice profile as soon as possible.
     info!("DICE derivation for payload");
-    dice_derivation(&verified_data, &metadata.payload_config_path)?;
+    dice_derivation(&verified_data, &payload_metadata)?;
 
     // Before reading a file from the APK, start zipfuse
     let noexec = false;
@@ -312,16 +355,16 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
     )
     .context("Failed to run zipfuse")?;
 
-    ensure!(
-        !metadata.payload_config_path.is_empty(),
-        MicrodroidError::InvalidConfig("No payload_config_path in metadata".to_string())
-    );
+    let config = load_config(payload_metadata)?;
 
-    let config = load_config(Path::new(&metadata.payload_config_path))?;
+    let task = config
+        .task
+        .as_ref()
+        .ok_or_else(|| MicrodroidError::InvalidConfig("No task in VM config".to_string()))?;
 
     if config.extra_apks.len() != verified_data.extra_apks_data.len() {
         return Err(anyhow!(
-            "config expects {} extra apks, but found only {}",
+            "config expects {} extra apks, but found {}",
             config.extra_apks.len(),
             verified_data.extra_apks_data.len()
         ));
@@ -334,18 +377,25 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
 
     // Start tombstone_transmit if enabled
     if config.export_tombstones {
-        system_properties::write("ctl.start", "tombstone_transmit")
-            .context("Failed to start tombstone_transmit")?;
+        control_service("start", "tombstone_transmit")?;
     } else {
-        system_properties::write("ctl.stop", "tombstoned").context("Failed to stop tombstoned")?;
+        control_service("stop", "tombstoned")?;
     }
 
-    ensure!(
-        config.task.is_some(),
-        MicrodroidError::InvalidConfig("No task in VM config".to_string())
-    );
+    // Start authfs if enabled
+    if config.enable_authfs {
+        control_service("start", "authfs_service")?;
+    }
+
     system_properties::write("dev.bootcomplete", "1").context("set dev.bootcomplete")?;
-    exec_task(&config.task.unwrap(), service)
+    register_vm_payload_service(service.clone())?;
+    ProcessState::start_thread_pool();
+    exec_task(task, service)
+}
+
+fn control_service(action: &str, service: &str) -> Result<()> {
+    system_properties::write(&format!("ctl.{}", action), service)
+        .with_context(|| format!("Failed to {} {}", action, service))
 }
 
 struct ApkDmverityArgument<'a> {
@@ -467,7 +517,7 @@ fn verify_payload(
         .map(|(i, extra_idsig)| {
             (
                 format!("extra-apk-{}", i),
-                get_apk_root_hash_from_idsig(extra_idsig.to_str().unwrap())
+                get_apk_root_hash_from_idsig(extra_idsig)
                     .expect("Can't find root hash from extra idsig"),
             )
         })
@@ -587,10 +637,8 @@ fn wait_for_apex_config_done() -> Result<()> {
     Ok(())
 }
 
-fn get_apk_root_hash_from_idsig(path: &str) -> Result<Box<RootHash>> {
-    let mut idsig = File::open(path)?;
-    let idsig = V4Signature::from(&mut idsig)?;
-    Ok(idsig.hashing_info.raw_root_hash)
+fn get_apk_root_hash_from_idsig<P: AsRef<Path>>(idsig_path: P) -> Result<Box<RootHash>> {
+    Ok(V4Signature::from_idsig_path(idsig_path)?.hashing_info.raw_root_hash)
 }
 
 fn get_public_key_from_apk(apk: &str, root_hash_trustful: bool) -> Result<Box<[u8]>> {
@@ -604,10 +652,45 @@ fn get_public_key_from_apk(apk: &str, root_hash_trustful: bool) -> Result<Box<[u
     }
 }
 
-fn load_config(path: &Path) -> Result<VmPayloadConfig> {
-    info!("loading config from {:?}...", path);
-    let file = ioutil::wait_for_file(path, WAIT_TIMEOUT)?;
-    Ok(serde_json::from_reader(file)?)
+fn load_config(payload_metadata: PayloadMetadata) -> Result<VmPayloadConfig> {
+    match payload_metadata {
+        PayloadMetadata::config_path(path) => {
+            let path = Path::new(&path);
+            info!("loading config from {:?}...", path);
+            let file = ioutil::wait_for_file(path, WAIT_TIMEOUT)?;
+            Ok(serde_json::from_reader(file)?)
+        }
+        PayloadMetadata::config(payload_config) => {
+            let task = Task {
+                type_: TaskType::MicrodroidLauncher,
+                command: payload_config.payload_binary_path,
+                args: payload_config.args.into_vec(),
+            };
+            Ok(VmPayloadConfig {
+                os: OsConfig { name: "microdroid".to_owned() },
+                task: Some(task),
+                apexes: vec![],
+                extra_apks: vec![],
+                prefer_staged: false,
+                export_tombstones: false,
+                enable_authfs: false,
+            })
+        }
+    }
+}
+
+/// Loads the crashkernel into memory using kexec if the VM is loaded with `crashkernel=' parameter
+/// in the cmdline.
+fn load_crashkernel_if_supported() -> Result<()> {
+    let supported = std::fs::read_to_string("/proc/cmdline")?.contains(" crashkernel=");
+    info!("ramdump supported: {}", supported);
+    if supported {
+        let status = Command::new("/system/bin/kexec_load").status()?;
+        if !status.success() {
+            return Err(anyhow!("Failed to load crashkernel: {:?}", status));
+        }
+    }
+    Ok(())
 }
 
 /// Executes the given task. Stdout of the task is piped into the vsock stream to the

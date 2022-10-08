@@ -16,19 +16,23 @@
 
 #include <aidl/android/system/virtualmachineservice/IVirtualMachineService.h>
 #include <aidl/com/android/microdroid/testservice/BnBenchmarkService.h>
+#include <android-base/logging.h>
+#include <android-base/parseint.h>
 #include <android-base/result.h>
+#include <android-base/strings.h>
 #include <android-base/unique_fd.h>
 #include <fcntl.h>
 #include <linux/vm_sockets.h>
 #include <stdio.h>
+#include <time.h>
 #include <unistd.h>
 
 #include <binder_rpc_unstable.hpp>
-#include <chrono>
+#include <fstream>
 #include <random>
 #include <string>
 
-#include "android-base/logging.h"
+#include "io_vsock.h"
 
 using aidl::android::system::virtualmachineservice::IVirtualMachineService;
 using android::base::ErrnoError;
@@ -38,25 +42,58 @@ using android::base::unique_fd;
 
 namespace {
 constexpr uint64_t kBlockSizeBytes = 4096;
+constexpr uint64_t kNumBytesPerMB = 1024 * 1024;
+
+template <typename T>
+static ndk::ScopedAStatus resultStatus(const T& result) {
+    if (!result.ok()) {
+        std::stringstream error;
+        error << result.error();
+        return ndk::ScopedAStatus::fromExceptionCodeWithMessage(EX_ILLEGAL_ARGUMENT,
+                                                                error.str().c_str());
+    }
+    return ndk::ScopedAStatus::ok();
+}
 
 class IOBenchmarkService : public aidl::com::android::microdroid::testservice::BnBenchmarkService {
 public:
-    ndk::ScopedAStatus readFile(const std::string& filename, int64_t fileSizeBytes, bool isRand,
-                                double* out) override {
-        if (auto res = read_file(filename, fileSizeBytes, isRand); res.ok()) {
+    ndk::ScopedAStatus measureReadRate(const std::string& filename, int64_t fileSizeBytes,
+                                       bool isRand, double* out) override {
+        auto res = measure_read_rate(filename, fileSizeBytes, isRand);
+        if (res.ok()) {
             *out = res.value();
-        } else {
-            std::stringstream error;
-            error << "Failed reading file: " << res.error();
-            return ndk::ScopedAStatus::fromExceptionCodeWithMessage(EX_ILLEGAL_ARGUMENT,
-                                                                    error.str().c_str());
         }
+        return resultStatus(res);
+    }
+
+    ndk::ScopedAStatus getMemInfoEntry(const std::string& name, int64_t* out) override {
+        auto value = read_meminfo_entry(name);
+        if (!value.ok()) {
+            return resultStatus(value);
+        }
+
+        *out = (int64_t)value.value();
         return ndk::ScopedAStatus::ok();
     }
 
+    ndk::ScopedAStatus initVsockServer(int32_t port, int32_t* out) override {
+        auto res = io_vsock::init_vsock_server(port);
+        if (res.ok()) {
+            *out = res.value();
+        }
+        return resultStatus(res);
+    }
+
+    ndk::ScopedAStatus runVsockServerAndReceiveData(int32_t server_fd,
+                                                    int32_t num_bytes_to_receive) override {
+        auto res = io_vsock::run_vsock_server_and_receive_data(server_fd, num_bytes_to_receive);
+        return resultStatus(res);
+    }
+
 private:
-    /** Returns the elapsed seconds for reading the file. */
-    Result<double> read_file(const std::string& filename, int64_t fileSizeBytes, bool is_rand) {
+    /** Measures the read rate for reading the given file. */
+    Result<double> measure_read_rate(const std::string& filename, int64_t fileSizeBytes,
+                                     bool is_rand) {
         const int64_t block_count = fileSizeBytes / kBlockSizeBytes;
         std::vector<uint64_t> offsets;
         if (is_rand) {
@@ -85,7 +122,35 @@ private:
                 return ErrnoError() << "failed to read";
             }
         }
-        return {((double)clock() - start) / CLOCKS_PER_SEC};
+        double elapsed_seconds = ((double)clock() - start) / CLOCKS_PER_SEC;
+        double read_rate = (double)fileSizeBytes / kNumBytesPerMB / elapsed_seconds;
+        return {read_rate};
+    }
+
+    Result<size_t> read_meminfo_entry(const std::string& stat) {
+        std::ifstream fs("/proc/meminfo");
+        if (!fs.is_open()) {
+            return Error() << "could not open /proc/meminfo";
+        }
+
+        std::string line;
+        while (std::getline(fs, line)) {
+            auto elems = android::base::Split(line, ":");
+            if (elems[0] != stat) continue;
+
+            std::string str = android::base::Trim(elems[1]);
+            if (android::base::EndsWith(str, " kB")) {
+                str = str.substr(0, str.length() - 3);
+            }
+
+            size_t value;
+            if (!android::base::ParseUint(str, &value)) {
+                return ErrnoError() << "failed to parse \"" << str << "\" as size_t";
+            }
+            return {value};
+        }
+
+        return Error() << "entry \"" << stat << "\" not found";
     }
 };
 
@@ -124,12 +189,10 @@ extern "C" int android_native_main([[maybe_unused]] int argc, char* argv[]) {
             sleep(1000);
         }
     } else if (strcmp(argv[1], "io") == 0) {
-        if (auto res = run_io_benchmark_tests(); res.ok()) {
-            return 0;
-        } else {
+        if (auto res = run_io_benchmark_tests(); !res.ok()) {
             LOG(ERROR) << "IO benchmark test failed: " << res.error() << "\n";
-            return 1;
+            return EXIT_FAILURE;
         }
     }
-    return 0;
+    return EXIT_SUCCESS;
 }
