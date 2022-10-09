@@ -307,6 +307,30 @@
       },
       "revId": "6614d9c8ed501098d188a0d057979e481e4716b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e1adf39_4f552272",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-09T09:04:51Z",
+      "side": 1,
+      "message": "I am fine with landing this as is and then remove this as a follow-up change. I don\u0027t think we need to rewrite the library in C++. We just shouldn\u0027t use it as a static rust library, but only as a native shared library having a C interface.",
+      "parentUuid": "334a0534_e2294df3",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 1
+      },
+      "revId": "6614d9c8ed501098d188a0d057979e481e4716b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
