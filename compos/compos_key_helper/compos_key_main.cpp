@@ -16,6 +16,8 @@
 
 #include <android-base/file.h>
 #include <android-base/logging.h>
+#include <openssl/evp.h>
+#include <openssl/mem.h>
 #include <unistd.h>
 #include <vm_payload.h>
 
@@ -60,18 +62,30 @@ int write_public_key() {
 }
 
 int write_bcc() {
-    size_t bcc_size;
-    if (!AVmPayload_getDiceAttestationChain(nullptr, 0, &bcc_size)) {
-        LOG(ERROR) << "Failed to measure attestation chain";
-        return 1;
-    }
-    std::vector<uint8_t> bcc(bcc_size);
-    if (!AVmPayload_getDiceAttestationChain(bcc.data(), bcc.size(), &bcc_size)) {
-        LOG(ERROR) << "Failed to get attestation chain";
+    uint8_t cert[2048];
+    const char challenge[] = "Test challenge";
+
+    // TODO: errors
+    EVP_PKEY *key = NULL;
+    EVP_PKEY_CTX *pctx = EVP_PKEY_CTX_new_id(EVP_PKEY_EC, NULL);
+    EVP_PKEY_keygen_init(pctx);
+    EVP_PKEY_CTX_set_ec_paramgen_curve_nid(pctx, NID_X9_62_prime256v1);
+    EVP_PKEY_keygen(pctx, &key);
+    EVP_PKEY_CTX_free(pctx);
+    uint8_t *key_der = NULL;
+    int len = i2d_PUBKEY(key, &key_der);
+    if (len < 0) return 1;
+    EVP_PKEY_free(key);
+
+    size_t size = AVmPayload_getRemotelyAttestedCertificate(key_der, len, challenge,
+                                                            strlen(challenge), cert, sizeof(cert));
+    OPENSSL_free(key_der);
+    if (size == 0) {
+        LOG(ERROR) << "Failed to remotely attested cert";
         return 1;
     }
 
-    if (!WriteFully(STDOUT_FILENO, bcc.data(), bcc.size())) {
+    if (!WriteFully(STDOUT_FILENO, cert, size)) {
         PLOG(ERROR) << "Write failed";
         return 1;
     }
