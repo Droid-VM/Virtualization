@@ -89,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5da27bee_c02a2ade",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-09T08:49:13Z",
+      "side": 1,
+      "message": "Unfortunately, inotify can only monitor unmount events, not mount events. So I think sysprop is the easiest method we could use.",
+      "parentUuid": "0d56c211_65134daf",
+      "revId": "60f82201e9bd34ed9189fd9c2a494ffa66e08325",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85d53f02_cf520e53",
