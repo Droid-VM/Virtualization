@@ -16,6 +16,29 @@
       "message": "Hi Jiyong, Alan,\n\nCould you please review this cl?",
       "revId": "b69ddfff27d8552d7ba625898dd5bb7811606477",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07cf79b3_4fbe7bf5",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-10T10:10:29Z",
+      "side": 1,
+      "message": "nit: Should this be header_libs or even omitted? I didn\u0027t think rust_bindgen did any linking.",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 6
+      },
+      "revId": "b69ddfff27d8552d7ba625898dd5bb7811606477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
