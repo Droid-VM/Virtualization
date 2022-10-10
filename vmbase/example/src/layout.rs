@@ -17,6 +17,7 @@
 use aarch64_paging::paging::{MemoryRegion, VirtualAddress};
 use core::arch::asm;
 use core::ops::Range;
+use vmbase::linker;
 use vmbase::println;
 
 /// The first 1 GiB of memory are used for MMIO.
@@ -25,64 +26,67 @@ pub const DEVICE_REGION: MemoryRegion = MemoryRegion::new(0, 0x40000000);
 /// Memory reserved for the DTB.
 pub fn dtb_range() -> Range<VirtualAddress> {
     unsafe {
-        VirtualAddress(&dtb_begin as *const u8 as usize)
-            ..VirtualAddress(&dtb_end as *const u8 as usize)
+        VirtualAddress(&linker::dtb_begin as *const u8 as usize)
+            ..VirtualAddress(&linker::dtb_end as *const u8 as usize)
     }
 }
 
 /// Executable code.
 pub fn text_range() -> Range<VirtualAddress> {
     unsafe {
-        VirtualAddress(&text_begin as *const u8 as usize)
-            ..VirtualAddress(&text_end as *const u8 as usize)
+        VirtualAddress(&linker::text_begin as *const u8 as usize)
+            ..VirtualAddress(&linker::text_end as *const u8 as usize)
     }
 }
 
 /// Read-only data.
 pub fn rodata_range() -> Range<VirtualAddress> {
     unsafe {
-        VirtualAddress(&rodata_begin as *const u8 as usize)
-            ..VirtualAddress(&rodata_end as *const u8 as usize)
+        VirtualAddress(&linker::rodata_begin as *const u8 as usize)
+            ..VirtualAddress(&linker::rodata_end as *const u8 as usize)
     }
 }
 
 /// Initialised writable data.
 pub fn data_range() -> Range<VirtualAddress> {
     unsafe {
-        VirtualAddress(&data_begin as *const u8 as usize)
-            ..VirtualAddress(&data_end as *const u8 as usize)
+        VirtualAddress(&linker::data_begin as *const u8 as usize)
+            ..VirtualAddress(&linker::data_end as *const u8 as usize)
     }
 }
 
 /// Zero-initialised writable data.
 pub fn bss_range() -> Range<VirtualAddress> {
     unsafe {
-        VirtualAddress(&bss_begin as *const u8 as usize)
-            ..VirtualAddress(&bss_end as *const u8 as usize)
+        VirtualAddress(&linker::bss_begin as *const u8 as usize)
+            ..VirtualAddress(&linker::bss_end as *const u8 as usize)
     }
 }
 
 /// Writable data region for the stack.
 pub fn boot_stack_range() -> Range<VirtualAddress> {
     unsafe {
-        VirtualAddress(&boot_stack_begin as *const u8 as usize)
-            ..VirtualAddress(&boot_stack_end as *const u8 as usize)
+        VirtualAddress(&linker::boot_stack_begin as *const u8 as usize)
+            ..VirtualAddress(&linker::boot_stack_end as *const u8 as usize)
     }
 }
 
 /// Writable data, including the stack.
 pub fn writable_region() -> MemoryRegion {
     unsafe {
-        MemoryRegion::new(&data_begin as *const u8 as usize, &boot_stack_end as *const u8 as usize)
+        MemoryRegion::new(
+            &linker::data_begin as *const u8 as usize,
+            &linker::boot_stack_end as *const u8 as usize,
+        )
     }
 }
 
 fn data_load_address() -> VirtualAddress {
-    unsafe { VirtualAddress(&data_lma as *const u8 as usize) }
+    unsafe { VirtualAddress(&linker::data_lma as *const u8 as usize) }
 }
 
 fn binary_end() -> VirtualAddress {
-    unsafe { VirtualAddress(&bin_end as *const u8 as usize) }
+    unsafe { VirtualAddress(&linker::bin_end as *const u8 as usize) }
 }
 
 pub fn print_addresses() {
@@ -124,23 +128,5 @@ pub fn bionic_tls(off: usize) -> u64 {
 
 /// Value of __stack_chk_guard.
 pub fn stack_chk_guard() -> u64 {
-    unsafe { __stack_chk_guard }
-}
-
-extern "C" {
-    static dtb_begin: u8;
-    static dtb_end: u8;
-    static text_begin: u8;
-    static text_end: u8;
-    static rodata_begin: u8;
-    static rodata_end: u8;
-    static data_begin: u8;
-    static data_end: u8;
-    static data_lma: u8;
-    static bin_end: u8;
-    static bss_begin: u8;
-    static bss_end: u8;
-    static boot_stack_begin: u8;
-    static boot_stack_end: u8;
-    static __stack_chk_guard: u64;
+    unsafe { linker::__stack_chk_guard }
 }
