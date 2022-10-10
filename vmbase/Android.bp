@@ -64,6 +64,7 @@ rust_library_rlib {
     crate_name: "vmbase",
     srcs: ["src/lib.rs"],
     rustlibs: [
+        "libaarch64_paging",
         "liblog_rust_nostd",
         "libpsci",
         "libspin_nostd",
