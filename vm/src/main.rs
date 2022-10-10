@@ -58,6 +58,11 @@ enum Opt {
         #[clap(short, long)]
         daemonize: bool,
 
+        /// Path to the file backing the storage.
+        /// Created if the option is used but the path does not exist in the device.
+        #[clap(long)]
+        storage: Option<PathBuf>,
+
         /// Path to file for VM console output.
         #[clap(long)]
         console: Option<PathBuf>,
@@ -188,6 +193,7 @@ fn main() -> Result<(), Error> {
             apk,
             idsig,
             instance,
+            storage,
             config_path,
             daemonize,
             console,
@@ -205,6 +211,7 @@ fn main() -> Result<(), Error> {
             &apk,
             &idsig,
             &instance,
+            storage.as_deref(),
             config_path.as_deref().unwrap_or(""),
             daemonize,
             console.as_deref(),
