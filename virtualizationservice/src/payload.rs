@@ -250,58 +250,52 @@ fn make_payload_disk(
 
     let metadata_file = make_metadata_file(app_config, &apex_infos, temporary_directory)?;
     // put metadata at the first partition
-    let mut partitions = vec![Partition {
-        label: "payload-metadata".to_owned(),
-        image: Some(metadata_file),
-        writable: false,
-    }];
+    let mut partitions = vec![make_partition("payload-metadata".to_string(), metadata_file, false)];
 
     for (i, apex_info) in apex_infos.iter().enumerate() {
         let apex_file = open_parcel_file(&apex_info.path, false)?;
-        partitions.push(Partition {
-            label: format!("microdroid-apex-{}", i),
-            image: Some(apex_file),
-            writable: false,
-        });
+        partitions.push(make_partition(format!("microdroid-apex-{}", i), apex_file, false));
     }
-    partitions.push(Partition {
-        label: "microdroid-apk".to_owned(),
-        image: Some(ParcelFileDescriptor::new(apk_file)),
-        writable: false,
-    });
-    partitions.push(Partition {
-        label: "microdroid-apk-idsig".to_owned(),
-        image: Some(ParcelFileDescriptor::new(idsig_file)),
-        writable: false,
-    });
+    partitions.push(make_partition(
+        "microdroid-apk".to_string(),
+        ParcelFileDescriptor::new(apk_file),
+        false,
+    ));
+    partitions.push(make_partition(
+        "microdroid-apk-idsig".to_string(),
+        ParcelFileDescriptor::new(idsig_file),
+        false,
+    ));
 
     // we've already checked that extra_apks and extraIdsigs are in the same size.
     let extra_apks = &vm_payload_config.extra_apks;
     let extra_idsigs = &app_config.extraIdsigs;
     for (i, (extra_apk, extra_idsig)) in extra_apks.iter().zip(extra_idsigs.iter()).enumerate() {
-        partitions.push(Partition {
-            label: format!("extra-apk-{}", i),
-            image: Some(ParcelFileDescriptor::new(
-                File::open(PathBuf::from(&extra_apk.path)).with_context(|| {
-                    format!("Failed to open the extra apk #{} {}", i, extra_apk.path)
-                })?,
-            )),
-            writable: false,
-        });
+        let extra_apk_file = File::open(PathBuf::from(&extra_apk.path))
+            .with_context(|| format!("Failed to open the extra apk #{} {}", i, extra_apk.path))?;
+        partitions.push(make_partition(
+            format!("extra-apk-{}", i),
+            ParcelFileDescriptor::new(extra_apk_file),
+            false,
+        ));
 
-        partitions.push(Partition {
-            label: format!("extra-idsig-{}", i),
-            image: Some(ParcelFileDescriptor::new(
+        partitions.push(make_partition(
+            format!("extra-idsig-{}", i),
+            ParcelFileDescriptor::new(
                 extra_idsig
                     .as_ref()
                     .try_clone()
                     .with_context(|| format!("Failed to clone the extra idsig #{}", i))?,
-            )),
-            writable: false,
-        });
+            ),
+            false,
+        ));
     }
 
     Ok(DiskImage { image: None, partitions, writable: false })
+}
+
+fn make_partition(label: String, fd: ParcelFileDescriptor, writable: bool) -> Partition {
+    Partition { label, image: Some(fd), writable }
 }
 
 fn run_derive_classpath() -> Result<String> {
@@ -363,13 +357,10 @@ fn collect_apex_infos<'a>(
         .collect()
 }
 
-pub fn add_microdroid_images(
+pub fn add_microdroid_system_images(
     config: &VirtualMachineAppConfig,
-    temporary_directory: &Path,
-    apk_file: File,
-    idsig_file: File,
     instance_file: File,
-    vm_payload_config: &VmPayloadConfig,
+    storage_backing_file: Option<File>,
     vm_config: &mut VirtualMachineRawConfig,
 ) -> Result<()> {
     let debug_suffix = match config.debugLevel {
@@ -381,12 +372,37 @@ pub fn add_microdroid_images(
     let initrd = format!("/apex/com.android.virt/etc/microdroid_initrd_{}.img", debug_suffix);
     vm_config.initrd = Some(open_parcel_file(Path::new(&initrd), false)?);
 
-    let instance_img = Partition {
-        label: "vm-instance".to_owned(),
-        image: Some(ParcelFileDescriptor::new(instance_file)),
+    let mut writable_partitions = vec![make_partition(
+        "vm-instance".to_string(),
+        ParcelFileDescriptor::new(instance_file),
+        true,
+    )];
+
+    if let Some(file) = storage_backing_file {
+        writable_partitions.push(make_partition(
+            "encrypted-storage".to_string(),
+            ParcelFileDescriptor::new(file),
+            true,
+        ));
+    }
+
+    vm_config.disks.push(DiskImage {
+        image: None,
+        partitions: writable_partitions,
         writable: true,
-    };
-    vm_config.disks.push(DiskImage { image: None, partitions: vec![instance_img], writable: true });
+    });
+
+    Ok(())
+}
+
+pub fn add_microdroid_payload_images(
+    config: &VirtualMachineAppConfig,
+    temporary_directory: &Path,
+    apk_file: File,
+    idsig_file: File,
+    vm_payload_config: &VmPayloadConfig,
+    vm_config: &mut VirtualMachineRawConfig,
+) -> Result<()> {
     vm_config.disks.push(make_payload_disk(
         config,
         apk_file,
