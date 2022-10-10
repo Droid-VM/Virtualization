@@ -1,0 +1,343 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56a09e84_517533cc",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-10T12:36:10Z",
+      "side": 1,
+      "message": "This is now in the wrong place. Mabe just get rid of it?",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 43
+      },
+      "revId": "a0f047d4263864025026088f1db26a46fc8f7b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5d1f58b_b000d1c2",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-10T12:36:10Z",
+      "side": 1,
+      "message": "Just `testAppStartupTime`",
+      "range": {
+        "startLine": 126,
+        "startChar": 16,
+        "endLine": 126,
+        "endChar": 41
+      },
+      "revId": "a0f047d4263864025026088f1db26a46fc8f7b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df33dec7_6471e425",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-10T12:36:10Z",
+      "side": 1,
+      "message": "nit: how about:\n```\n\"app_startup/\" + mCollection.getPkgName() + \"/total_time/before_vm\"\n```\n\nThe dashboards are set up to filter by namespaces separated by \"/\". It will make for nicer legends.",
+      "range": {
+        "startLine": 138,
+        "startChar": 16,
+        "endLine": 138,
+        "endChar": 75
+      },
+      "revId": "a0f047d4263864025026088f1db26a46fc8f7b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0435e776_42ba2872",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-10T12:36:10Z",
+      "side": 1,
+      "message": "Move this to MicrodroidHostTestCaseBase. We put all such helpers there",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 55
+      },
+      "revId": "a0f047d4263864025026088f1db26a46fc8f7b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9599ee50_a56f24b1",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-10T12:36:10Z",
+      "side": 1,
+      "message": "```\nreturn getDevice().getBooleanProperty(\"ro.boot...\");\n```",
+      "range": {
+        "startLine": 159,
+        "startChar": 8,
+        "endLine": 161,
+        "endChar": 82
+      },
+      "revId": "a0f047d4263864025026088f1db26a46fc8f7b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86a4edfb_d9537a42",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-10T12:36:10Z",
+      "side": 1,
+      "message": "There is already a method called `waitForBootCompleted` in this class. Can we name this `microdroidWaitForBootCompleted` or something like that?",
+      "range": {
+        "startLine": 164,
+        "startChar": 17,
+        "endLine": 164,
+        "endChar": 36
+      },
+      "revId": "a0f047d4263864025026088f1db26a46fc8f7b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7851dd6_6a5848d9",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-10T12:36:10Z",
+      "side": 1,
+      "message": "nit: split this into `assertNotNull` and `assertFalse`. We\u0027ll get more detailed errors if it ever fails.",
+      "range": {
+        "startLine": 174,
+        "startChar": 8,
+        "endLine": 174,
+        "endChar": 18
+      },
+      "revId": "a0f047d4263864025026088f1db26a46fc8f7b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b9883e0_40f5799a",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-10T12:36:10Z",
+      "side": 1,
+      "message": "You might want to `getDevice().waitForBootComplete()` here - the device is still booting when only \u0027online\u0027. Setting up a VM might fail, or the results could be skewed.",
+      "revId": "a0f047d4263864025026088f1db26a46fc8f7b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49193dcb_aa3941f5",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-10T12:36:10Z",
+      "side": 1,
+      "message": "nit: small preference to have the command String here, since it\u0027s a formatting literal",
+      "range": {
+        "startLine": 219,
+        "startChar": 51,
+        "endLine": 219,
+        "endChar": 66
+      },
+      "revId": "a0f047d4263864025026088f1db26a46fc8f7b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "951ef033_21c58d25",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-10T12:36:10Z",
+      "side": 1,
+      "message": "I don\u0027t think you need this `finally`, do you? Just end the try/catch here.",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 19
+      },
+      "revId": "a0f047d4263864025026088f1db26a46fc8f7b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9db6a73_1189709a",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-10T12:36:10Z",
+      "side": 1,
+      "message": "nit: this can fit on one line",
+      "range": {
+        "startLine": 242,
+        "startChar": 20,
+        "endLine": 243,
+        "endChar": 67
+      },
+      "revId": "a0f047d4263864025026088f1db26a46fc8f7b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "958be9f9_19cede97",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-10T12:36:10Z",
+      "side": 1,
+      "message": "nit: this can fit on one line",
+      "range": {
+        "startLine": 246,
+        "startChar": 20,
+        "endLine": 247,
+        "endChar": 67
+      },
+      "revId": "a0f047d4263864025026088f1db26a46fc8f7b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6efb90b_80a74ae6",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-10T12:36:10Z",
+      "side": 1,
+      "message": "Why not throw an exception if the MemFree entry was not found?",
+      "range": {
+        "startLine": 309,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 26
+      },
+      "revId": "a0f047d4263864025026088f1db26a46fc8f7b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef84ca55_27b6760f",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-10T12:36:10Z",
+      "side": 1,
+      "message": "Does this actually know that the unlocking was successful? Does it impact results if it wasn\u0027t?",
+      "range": {
+        "startLine": 312,
+        "startChar": 0,
+        "endLine": 312,
+        "endChar": 52
+      },
+      "revId": "a0f047d4263864025026088f1db26a46fc8f7b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e0c37ea_f92675ba",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-10T12:36:10Z",
+      "side": 1,
+      "message": "nit: is this enough? I\u0027d rather wait here for a second if it means less flakiness on slower devices",
+      "range": {
+        "startLine": 315,
+        "startChar": 21,
+        "endLine": 315,
+        "endChar": 24
+      },
+      "revId": "a0f047d4263864025026088f1db26a46fc8f7b95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
