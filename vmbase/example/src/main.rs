@@ -23,14 +23,15 @@ mod layout;
 
 extern crate alloc;
 
-use crate::layout::{
-    bionic_tls, dtb_range, print_addresses, rodata_range, stack_chk_guard, text_range,
-    writable_region, DEVICE_REGION,
-};
+use crate::layout::print_addresses;
 use aarch64_paging::{idmap::IdMap, paging::Attributes};
 use alloc::{vec, vec::Vec};
 use buddy_system_allocator::LockedHeap;
 use log::{info, LevelFilter};
+use vmbase::layout::{
+    bionic_tls, dtb_range, rodata_range, stack_chk_guard, text_range, writable_region,
+    DEVICE_REGION,
+};
 use vmbase::{logger, main, println};
 
 static INITIALISED_DATA: [u32; 4] = [1, 2, 3, 4];
