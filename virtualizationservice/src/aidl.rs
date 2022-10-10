@@ -36,6 +36,10 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     VirtualMachineRawConfig::VirtualMachineRawConfig,
     VirtualMachineState::VirtualMachineState,
 };
+use android_system_virtualizationserviceinternal::aidl::android::system::virtualizationserviceinternal::{
+    IGlobalVmHandle::{BnGlobalVmHandle, IGlobalVmHandle},
+    IVirtualizationServiceInternal::{BnVirtualizationServiceInternal, IVirtualizationServiceInternal},
+};
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::{
         BnVirtualMachineService, IVirtualMachineService, VM_BINDER_SERVICE_PORT,
         VM_TOMBSTONES_SERVICE_PORT,
@@ -47,6 +51,7 @@ use binder::{
     SpIBinder, Status, StatusCode, Strong, ThreadState,
 };
 use disk::QcowFile;
+use lazy_static::lazy_static;
 use libc::VMADDR_CID_HOST;
 use log::{debug, error, info, warn};
 use microdroid_payload_config::{OsConfig, Task, TaskType, VmPayloadConfig};
@@ -93,6 +98,101 @@ const ANDROID_VM_INSTANCE_VERSION: u16 = 1;
 const CHUNK_RECV_MAX_LEN: usize = 1024;
 
 const MICRODROID_OS_NAME: &str = "microdroid";
+
+lazy_static! {
+    static ref GLOBAL_SERVICE: Strong<dyn IVirtualizationServiceInternal> = {
+        let service = VirtualizationServiceInternal::init();
+        BnVirtualizationServiceInternal::new_binder(service, BinderFeatures::default())
+    };
+}
+
+/// Singleton service for allocating globally-unique VM resources, such as the CID, and running
+/// singleton servers, like tombstone receiver.
+#[derive(Debug, Default)]
+pub struct VirtualizationServiceInternal {
+    state: Arc<Mutex<GlobalState>>,
+}
+
+impl VirtualizationServiceInternal {
+    pub fn init() -> VirtualizationServiceInternal {
+        let service = VirtualizationServiceInternal::default();
+
+        std::thread::spawn(|| {
+            if let Err(e) = handle_stream_connection_tombstoned() {
+                warn!("Error receiving tombstone from guest or writing them. Error: {:?}", e);
+            }
+        });
+
+        service
+    }
+}
+
+impl Interface for VirtualizationServiceInternal {}
+
+impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
+    fn createGlobalVmHandle(&self) -> binder::Result<Strong<dyn IGlobalVmHandle>> {
+        let state = &mut *self.state.lock().unwrap();
+        let cid = state.allocate_cid().or(Err(ExceptionCode::ILLEGAL_STATE))?;
+        let instance = Arc::new(GlobalVmInstance { cid });
+        Ok(GlobalVmHandle::create(instance))
+    }
+}
+
+/// The mutable state of the VirtualizationServiceInternal. There should only be one instance
+/// of this struct.
+#[derive(Debug, Default)]
+struct GlobalState {}
+
+impl GlobalState {
+    /// Get the next available CID, or an error if we have run out. The last CID used is stored in
+    /// a system property so that restart of virtualizationservice doesn't reuse CID while the host
+    /// Android is up.
+    fn allocate_cid(&mut self) -> Result<Cid> {
+        let cid = match system_properties::read(SYSPROP_LAST_CID)? {
+            Some(val) => match val.parse::<Cid>() {
+                Ok(num) => num.checked_add(1).ok_or_else(|| anyhow!("ran out of CIDs"))?,
+                Err(_) => {
+                    error!("Invalid value '{}' of property '{}'", val, SYSPROP_LAST_CID);
+                    FIRST_GUEST_CID
+                }
+            },
+            None => FIRST_GUEST_CID,
+        };
+        system_properties::write(SYSPROP_LAST_CID, &format!("{}", cid))?;
+        Ok(cid)
+    }
+}
+
+/// Struct describing the globally-unique resources allocated to a VM.
+#[derive(Debug)]
+struct GlobalVmInstance {
+    /// The unique CID assigned to the VM for vsock communication.
+    cid: Cid,
+}
+
+/// Implementation of the AIDL `IVirtualMachine` interface. Used as a handle to a VM.
+#[derive(Debug)]
+struct GlobalVmHandle {
+    instance: Arc<GlobalVmInstance>,
+    /// Keeps our service process running as long as this VM instance exists.
+    #[allow(dead_code)]
+    lazy_service_guard: LazyServiceGuard,
+}
+
+impl GlobalVmHandle {
+    fn create(instance: Arc<GlobalVmInstance>) -> Strong<dyn IGlobalVmHandle> {
+        let binder = GlobalVmHandle { instance, lazy_service_guard: Default::default() };
+        BnGlobalVmHandle::new_binder(binder, BinderFeatures::default())
+    }
+}
+
+impl Interface for GlobalVmHandle {}
+
+impl IGlobalVmHandle for GlobalVmHandle {
+    fn getCid(&self) -> binder::Result<i32> {
+        Ok(self.instance.cid as i32)
+    }
+}
 
 /// Implementation of `IVirtualizationService`, the entry point of the AIDL service.
 #[derive(Debug, Default)]
@@ -301,12 +401,6 @@ impl VirtualizationService {
     pub fn init() -> VirtualizationService {
         let service = VirtualizationService::default();
 
-        std::thread::spawn(|| {
-            if let Err(e) = handle_stream_connection_tombstoned() {
-                warn!("Error receiving tombstone from guest or writing them. Error: {:?}", e);
-            }
-        });
-
         // binder server for vm
         // reference to state (not the state itself) is copied
         let state = service.state.clone();
@@ -346,12 +440,14 @@ impl VirtualizationService {
             check_use_custom_virtual_machine()?;
         }
 
+        let global_handle = (*GLOBAL_SERVICE).createGlobalVmHandle()?;
+        let cid = global_handle.getCid()? as Cid;
+
         let state = &mut *self.state.lock().unwrap();
         let console_fd = console_fd.map(clone_file).transpose()?;
         let log_fd = log_fd.map(clone_file).transpose()?;
         let requester_uid = ThreadState::get_calling_uid();
         let requester_debug_pid = ThreadState::get_calling_pid();
-        let cid = state.next_cid().or(Err(ExceptionCode::ILLEGAL_STATE))?;
 
         // Counter to generate unique IDs for temporary image files.
         let mut next_temporary_image_id = 0;
@@ -468,14 +564,20 @@ impl VirtualizationService {
             detect_hangup: is_app_config,
         };
         let instance = Arc::new(
-            VmInstance::new(crosvm_config, temporary_directory, requester_uid, requester_debug_pid)
-                .map_err(|e| {
-                    error!("Failed to create VM with config {:?}: {:?}", config, e);
-                    Status::new_service_specific_error_str(
-                        -1,
-                        Some(format!("Failed to create VM: {:?}", e)),
-                    )
-                })?,
+            VmInstance::new(
+                crosvm_config,
+                temporary_directory,
+                requester_uid,
+                requester_debug_pid,
+                global_handle,
+            )
+            .map_err(|e| {
+                error!("Failed to create VM with config {:?}: {:?}", config, e);
+                Status::new_service_specific_error_str(
+                    -1,
+                    Some(format!("Failed to create VM: {:?}", e)),
+                )
+            })?,
         );
         state.add_vm(Arc::downgrade(&instance));
         Ok(VirtualMachine::create(instance))
@@ -943,27 +1045,6 @@ impl State {
         let pos = self.debug_held_vms.iter().position(|vm| vm.getCid() == Ok(cid))?;
         let vm = self.debug_held_vms.swap_remove(pos);
         Some(vm)
-    }
-
-    /// Get the next available CID, or an error if we have run out. The last CID used is stored in
-    /// a system property so that restart of virtualizationservice doesn't reuse CID while the host
-    /// Android is up.
-    fn next_cid(&mut self) -> Result<Cid> {
-        let next = if let Some(val) = system_properties::read(SYSPROP_LAST_CID)? {
-            if let Ok(num) = val.parse::<u32>() {
-                num.checked_add(1).ok_or_else(|| anyhow!("run out of CID"))?
-            } else {
-                error!("Invalid last CID {}. Using {}", &val, FIRST_GUEST_CID);
-                FIRST_GUEST_CID
-            }
-        } else {
-            // First VM since the boot
-            FIRST_GUEST_CID
-        };
-        // Persist the last value for next use
-        let str_val = format!("{}", next);
-        system_properties::write(SYSPROP_LAST_CID, &str_val)?;
-        Ok(next)
     }
 }
 
