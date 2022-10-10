@@ -39,6 +39,30 @@
       },
       "revId": "b69ddfff27d8552d7ba625898dd5bb7811606477",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c72a5ea3_72b555f1",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-10T12:45:46Z",
+      "side": 1,
+      "message": "Mmm, actually after rebasing the change this morning, I don\u0027t know how to include libvm_payload in the bindgen anymore. (When compiling `m compsvc`Before before rebasing, `aosp_arm64-userdebug` worked and `aosp_cf_arm64_phone-userdebug` had errors.). Now when compiling `m compsvc`, both of them have errors. Without `static_libs` or with `header_libs`, the error is\n```\note: ld.lld: error: undefined symbol: notify_payload_ready\n          \u003e\u003e\u003e referenced by compsvc_main.rs:51 (packages/modules/Virtualization/compos/src/compsvc_main.rs:51)\n          \u003e\u003e\u003e               out/soong/.intermediates/packages/modules/Virtualization/compos/compsvc/android_arm64_armv8-a_apex10000/unstripped/compsvc.compsvc_main.ba87965e-cgu.0.rcgu.o:(\u003crpcbinder::server::ReadyNotifier\u003ccompsvc_main::try_main::{closure#1}\u003e\u003e::ready_callback)\n```\n\nWith `static_libs`, the error contains a long list of duplicated symbols like\n```\n\u003d note: ld.lld: error: duplicate symbol: std::panicking::panic_count::GLOBAL_PANIC_COUNT\n          \u003e\u003e\u003e defined at std.67bf6ac5-cgu.0\n          \u003e\u003e\u003e            out/soong/.intermediates/packages/modules/Virtualization/compos/compsvc/android_arm64_armv8-a_apex10000/unstripped/compsvc.libstd.std.67bf6ac5-cgu.0.rcgu.o.rcgu.o:(std::panicking::panic_count::GLOBAL_PANIC_COUNT)\n          \u003e\u003e\u003e defined at std.67bf6ac5-cgu.0\n          \u003e\u003e\u003e            libstd.std.67bf6ac5-cgu.0.rcgu.o:(.bss._RNvNtNtCs27t2zhxnLFx_3std9panicking11panic_count18GLOBAL_PANIC_COUNT+0x0) in archive /usr/local/google/home/aliceywang/aosp/out/soong/.temp/rustchTjxhb/libstd.rlib\n```\n\nDo we miss some bindgen flags here to link the library?",
+      "parentUuid": "07cf79b3_4fbe7bf5",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 6
+      },
+      "revId": "b69ddfff27d8552d7ba625898dd5bb7811606477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
