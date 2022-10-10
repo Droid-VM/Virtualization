@@ -87,6 +87,30 @@
       },
       "revId": "b69ddfff27d8552d7ba625898dd5bb7811606477",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a84077dd_d624e369",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-10T12:59:35Z",
+      "side": 1,
+      "message": "Is there any workaround before libvm_payload becomes a shared library? I cannot include libvm_payload_bindgen in compsvc as static_libs due to the error of missing variant:\n```\ndependency \"libvm_payload_bindgen\" of \"compsvc\" missing variant:\n  os:android,image:,arch:arm64_armv8-a,sdk:,link:static\n```",
+      "parentUuid": "e8e4cb6b_f16554fc",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 6
+      },
+      "revId": "b69ddfff27d8552d7ba625898dd5bb7811606477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
