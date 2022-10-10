@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "610935e7_65fdce6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-10T21:25:05Z",
+      "side": 1,
+      "message": "Yay!\n\nSlightly surprised this doesn\u0027t have merge conflicts with the changes I submitted earlier on; probably a good idea to rebase anyway.",
+      "revId": "8f4ad380fee2eb7f5aea930e790d97d30e880957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a51adc2_d2031759",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-10T21:25:05Z",
+      "side": 1,
+      "message": "We could extract this as a named function and then use it in the 3 places above as well.",
+      "range": {
+        "startLine": 607,
+        "startChar": 50,
+        "endLine": 607,
+        "endChar": 82
+      },
+      "revId": "8f4ad380fee2eb7f5aea930e790d97d30e880957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ee758cc_bba917d1",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-10T21:25:05Z",
+      "side": 1,
+      "message": "Either expand this or delete it, whichever seems more useful",
+      "range": {
+        "startLine": 641,
+        "startChar": 7,
+        "endLine": 641,
+        "endChar": 31
+      },
+      "revId": "8f4ad380fee2eb7f5aea930e790d97d30e880957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21d6f7ef_43498a26",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-10T21:25:05Z",
+      "side": 1,
+      "message": "Extract a helper to construct the Partition?",
+      "range": {
+        "startLine": 388,
+        "startChar": 33,
+        "endLine": 392,
+        "endChar": 10
+      },
+      "revId": "8f4ad380fee2eb7f5aea930e790d97d30e880957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32208342_c63b8d45",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-10T21:25:05Z",
+      "side": 1,
+      "message": "Nit:\n```\nf()?; Ok(())\n```\nReduces to\n```\nf()\n```\ndoesn\u0027t it?\n\nWhich means there\u0027s really very little to this function now - but I think it\u0027s worth keeping because of the naming.",
+      "range": {
+        "startLine": 418,
+        "startChar": 3,
+        "endLine": 420,
+        "endChar": 10
+      },
+      "revId": "8f4ad380fee2eb7f5aea930e790d97d30e880957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "144445a9_da699367",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-10T21:25:05Z",
+      "side": 1,
+      "message": "This should probably be specified by the client. Some will need a lot more, some a lot less.\n(In which case we should probably have a StorageConfig as a member of AppConfig. That will make it easier if we need to add richer config later.)",
+      "range": {
+        "startLine": 93,
+        "startChar": 34,
+        "endLine": 93,
+        "endChar": 50
+      },
+      "revId": "8f4ad380fee2eb7f5aea930e790d97d30e880957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03ecab92_dba11f2e",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-10T21:25:05Z",
+      "side": 1,
+      "message": "We shouldn\u0027t panic on failure here",
+      "range": {
+        "startLine": 106,
+        "startChar": 73,
+        "endLine": 106,
+        "endChar": 79
+      },
+      "revId": "8f4ad380fee2eb7f5aea930e790d97d30e880957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
