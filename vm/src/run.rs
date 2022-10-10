@@ -41,6 +41,7 @@ pub fn command_run_app(
     apk: &Path,
     idsig: &Path,
     instance: &Path,
+    storage_backing: Option<&Path>,
     config_path: &str,
     daemonize: bool,
     console_path: Option<&Path>,
@@ -85,6 +86,16 @@ pub fn command_run_app(
             instance,
             INSTANCE_FILE_SIZE,
             PartitionType::ANDROID_VM_INSTANCE,
+        )?;
+    }
+
+    if storage_backing.is_some() && storage_backing.unwrap().exists() {
+        const STORAGE_SIZE: u64 = 10 * 1024 * 1024;
+        command_create_partition(
+            service,
+            storage_backing.unwrap(),
+            STORAGE_SIZE,
+            PartitionType::RAW,
         )?;
     }
 
