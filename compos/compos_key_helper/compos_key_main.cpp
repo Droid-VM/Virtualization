@@ -14,15 +14,21 @@
  * limitations under the License.
  */
 
+#include <aidl/android/security/dice/IDiceNode.h>
 #include <android-base/file.h>
 #include <android-base/logging.h>
+#include <android/binder_auto_utils.h>
+#include <android/binder_manager.h>
 #include <unistd.h>
-#include <vm_payload.h>
 
 #include <string_view>
 
 #include "compos_key.h"
 
+using aidl::android::hardware::security::dice::Bcc;
+using aidl::android::hardware::security::dice::BccHandover;
+using aidl::android::hardware::security::dice::InputValues;
+using aidl::android::security::dice::IDiceNode;
 using android::base::Error;
 using android::base::ReadFdToString;
 using android::base::Result;
@@ -32,15 +38,22 @@ using compos_key::Ed25519KeyPair;
 
 namespace {
 Result<Ed25519KeyPair> deriveKeyFromDice() {
-    uint8_t cdi_seal[64];
-    size_t cdi_size = get_dice_sealing_cdi(cdi_seal, sizeof(cdi_seal));
-    if (cdi_size == 0) {
-        return Error() << "Failed to get sealing CDI";
+    ndk::SpAIBinder binder{AServiceManager_getService("android.security.dice.IDiceNode")};
+    auto dice_node = IDiceNode::fromBinder(binder);
+    if (!dice_node) {
+        return Error() << "Unable to connect to IDiceNode";
+    }
+
+    const std::vector<InputValues> empty_input_values;
+    BccHandover bcc;
+    auto status = dice_node->derive(empty_input_values, &bcc);
+    if (!status.isOk()) {
+        return Error() << "Derive failed: " << status.getDescription();
     }
 
     // We use the sealing CDI because we want stability - the key needs to be the same
     // for any instance of the "same" VM.
-    return compos_key::deriveKeyFromSecret(cdi_seal, cdi_size);
+    return compos_key::deriveKeyFromSecret(bcc.cdiSeal.data(), bcc.cdiSeal.size());
 }
 
 int write_public_key() {
@@ -57,14 +70,22 @@ int write_public_key() {
 }
 
 int write_bcc() {
-    uint8_t bcc[2048];
-    size_t bcc_size = get_dice_attestation_chain(bcc, sizeof(bcc));
-    if (bcc_size == 0) {
-        LOG(ERROR) << "Failed to get attestation chain";
+    ndk::SpAIBinder binder{AServiceManager_getService("android.security.dice.IDiceNode")};
+    auto dice_node = IDiceNode::fromBinder(binder);
+    if (!dice_node) {
+        LOG(ERROR) << "Unable to connect to IDiceNode";
         return 1;
     }
 
-    if (!WriteFully(STDOUT_FILENO, bcc, bcc_size)) {
+    const std::vector<InputValues> empty_input_values;
+    Bcc bcc;
+    auto status = dice_node->getAttestationChain(empty_input_values, &bcc);
+    if (!status.isOk()) {
+        LOG(ERROR) << "GetAttestationChain failed: " << status.getDescription();
+        return 1;
+    }
+
+    if (!WriteFully(STDOUT_FILENO, bcc.data.data(), bcc.data.size())) {
         PLOG(ERROR) << "Write failed";
         return 1;
     }

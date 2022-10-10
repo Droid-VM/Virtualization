@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+#include <aidl/android/security/dice/IDiceNode.h>
 #include <aidl/com/android/microdroid/testservice/BnTestService.h>
 #include <android-base/file.h>
 #include <android-base/properties.h>
@@ -27,10 +28,14 @@
 #include <sys/ioctl.h>
 #include <sys/system_properties.h>
 #include <unistd.h>
-#include <vm_payload.h>
 
 #include <binder_rpc_unstable.hpp>
 #include <string>
+
+#include "vm_payload.h"
+
+using aidl::android::hardware::security::dice::BccHandover;
+using aidl::android::security::dice::IDiceNode;
 
 using android::base::ErrnoError;
 using android::base::Error;
@@ -74,35 +79,53 @@ Result<void> start_test_service() {
         }
 
         ndk::ScopedAStatus insecurelyExposeSealingCdi(std::vector<uint8_t>* out) override {
-            uint8_t cdi[64];
-            size_t cdi_size = get_dice_sealing_cdi(cdi, sizeof(cdi));
-            if (cdi_size == 0) {
+            ndk::SpAIBinder binder(AServiceManager_getService("android.security.dice.IDiceNode"));
+            auto service = IDiceNode::fromBinder(binder);
+            if (service == nullptr) {
                 return ndk::ScopedAStatus::
-                        fromServiceSpecificErrorWithMessage(0, "Failed to get sealing cdi");
+                        fromServiceSpecificErrorWithMessage(0, "Failed to find diced");
             }
-            *out = {cdi, cdi + cdi_size};
+            BccHandover handover;
+            auto deriveStatus = service->derive({}, &handover);
+            if (!deriveStatus.isOk()) {
+                return ndk::ScopedAStatus::fromServiceSpecificErrorWithMessage(0,
+                                                                               "Failed call diced");
+            }
+            *out = {handover.cdiSeal.begin(), handover.cdiSeal.end()};
             return ndk::ScopedAStatus::ok();
         }
 
         ndk::ScopedAStatus insecurelyExposeAttestationCdi(std::vector<uint8_t>* out) override {
-            uint8_t cdi[64];
-            size_t cdi_size = get_dice_attestation_cdi(cdi, sizeof(cdi));
-            if (cdi_size == 0) {
+            ndk::SpAIBinder binder(AServiceManager_getService("android.security.dice.IDiceNode"));
+            auto service = IDiceNode::fromBinder(binder);
+            if (service == nullptr) {
                 return ndk::ScopedAStatus::
-                        fromServiceSpecificErrorWithMessage(0, "Failed to get attestation cdi");
+                        fromServiceSpecificErrorWithMessage(0, "Failed to find diced");
             }
-            *out = {cdi, cdi + cdi_size};
+            BccHandover handover;
+            auto deriveStatus = service->derive({}, &handover);
+            if (!deriveStatus.isOk()) {
+                return ndk::ScopedAStatus::fromServiceSpecificErrorWithMessage(0,
+                                                                               "Failed call diced");
+            }
+            *out = {handover.cdiAttest.begin(), handover.cdiAttest.end()};
             return ndk::ScopedAStatus::ok();
         }
 
         ndk::ScopedAStatus getBcc(std::vector<uint8_t>* out) override {
-            uint8_t bcc[2048];
-            size_t bcc_size = get_dice_attestation_chain(bcc, sizeof(bcc));
-            if (bcc_size == 0) {
+            ndk::SpAIBinder binder(AServiceManager_getService("android.security.dice.IDiceNode"));
+            auto service = IDiceNode::fromBinder(binder);
+            if (service == nullptr) {
                 return ndk::ScopedAStatus::
-                        fromServiceSpecificErrorWithMessage(0, "Failed to get attestation chain");
+                        fromServiceSpecificErrorWithMessage(0, "Failed to find diced");
             }
-            *out = {bcc, bcc + bcc_size};
+            BccHandover handover;
+            auto deriveStatus = service->derive({}, &handover);
+            if (!deriveStatus.isOk()) {
+                return ndk::ScopedAStatus::fromServiceSpecificErrorWithMessage(0,
+                                                                               "Failed call diced");
+            }
+            *out = {handover.bcc.data.begin(), handover.bcc.data.end()};
             return ndk::ScopedAStatus::ok();
         }
     };
