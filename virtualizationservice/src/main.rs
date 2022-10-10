@@ -24,9 +24,9 @@ mod crosvm;
 mod payload;
 mod selinux;
 
-use crate::aidl::{VirtualizationService, BINDER_SERVICE_IDENTIFIER, TEMPORARY_DIRECTORY};
+use crate::aidl::{VirtualizationServiceInternal, BINDER_SERVICE_IDENTIFIER, TEMPORARY_DIRECTORY};
 use android_logger::{Config, FilterBuilder};
-use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualizationService::BnVirtualizationService;
+use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualizationServiceInternal::BnVirtualizationServiceInternal;
 use anyhow::Error;
 use binder::{register_lazy_service, BinderFeatures, ProcessState, ThreadState};
 use log::{info, Level};
@@ -59,8 +59,8 @@ fn main() {
     remove_memlock_rlimit(RLIMIT_MEMLOCK_MAX).expect("Failed to remove memlock rlimit");
     clear_temporary_files().expect("Failed to delete old temporary files");
 
-    let service = VirtualizationService::init();
-    let service = BnVirtualizationService::new_binder(service, BinderFeatures::default());
+    let service = VirtualizationServiceInternal::init();
+    let service = BnVirtualizationServiceInternal::new_binder(service, BinderFeatures::default());
     register_lazy_service(BINDER_SERVICE_IDENTIFIER, service.as_binder()).unwrap();
     info!("Registered Binder service, joining threadpool.");
     ProcessState::join_thread_pool();
