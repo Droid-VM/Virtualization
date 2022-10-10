@@ -18,6 +18,8 @@
 
 pub mod console;
 mod entry;
+pub mod layout;
+mod linker;
 pub mod logger;
 pub mod power;
 pub mod uart;
