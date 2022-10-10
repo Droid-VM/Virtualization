@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29f81f61_29616025",
+        "filename": "compos/src/compsvc_main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-10T22:11:25Z",
+      "side": 1,
+      "message": "Need a comment on safety for an unsafe block, according to the style guide.\n\n(Which is an argument for having a small Rust library that wraps the raw bindgen, so we can hide away the unsafety, or lack of it.)",
+      "range": {
+        "startLine": 50,
+        "startChar": 63,
+        "endLine": 50,
+        "endChar": 69
+      },
+      "revId": "9e6c00ca67295857ace703c144034cf8093de42e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dae696c_fe6ae8a8",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-10T22:11:25Z",
+      "side": 1,
+      "message": "Nit: I guess if we\u0027re attempting to make this C-compatible this should be\n```\nbool notify_payload_ready(void);\n```",
+      "range": {
+        "startLine": 30,
+        "startChar": 5,
+        "endLine": 30,
+        "endChar": 28
+      },
+      "revId": "9e6c00ca67295857ace703c144034cf8093de42e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
