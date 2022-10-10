@@ -34,6 +34,20 @@ aidl_interface {
 }
 
 aidl_interface {
+    name: "android.system.virtualizationserviceinternal",
+    srcs: ["android/system/virtualizationserviceinternal/**/*.aidl"],
+    unstable: true,
+    backend: {
+        rust: {
+            enabled: true,
+            apex_available: [
+                "com.android.virt",
+            ],
+        },
+    },
+}
+
+aidl_interface {
     name: "android.system.virtualmachineservice",
     srcs: ["android/system/virtualmachineservice/**/*.aidl"],
     imports: ["android.system.virtualizationcommon"],
