@@ -63,6 +63,30 @@
       },
       "revId": "b69ddfff27d8552d7ba625898dd5bb7811606477",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8e4cb6b_f16554fc",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-10T12:51:22Z",
+      "side": 1,
+      "message": "I\u0027d say that you don\u0027t static link from the bindgen, but you do static link libvm_payload from whatever uses libvm_payload_bindgen.\n\nOnce libvm_payload becomes a shared library then it should be neater to handle as you don\u0027t need to worry so much about double linking.",
+      "parentUuid": "c72a5ea3_72b555f1",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 6
+      },
+      "revId": "b69ddfff27d8552d7ba625898dd5bb7811606477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
