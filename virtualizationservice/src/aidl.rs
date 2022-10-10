@@ -31,6 +31,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     IVirtualMachine::{BnVirtualMachine, IVirtualMachine},
     IVirtualMachineCallback::IVirtualMachineCallback,
     IVirtualizationService::IVirtualizationService,
+    IVirtualizationServiceInternal::IVirtualizationServiceInternal,
     Partition::Partition,
     PartitionType::PartitionType,
     VirtualMachineAppConfig::{Payload::Payload, VirtualMachineAppConfig},
@@ -51,10 +52,11 @@ use android_system_virtualmachineservice::aidl::android::system::virtualmachines
 use anyhow::{anyhow, bail, Context, Result};
 use apkverify::{HashAlgorithm, V4Signature};
 use binder::{
-    self, BinderFeatures, ExceptionCode, Interface, LazyServiceGuard, ParcelFileDescriptor,
-    SpIBinder, Status, StatusCode, Strong,
+    self, wait_for_interface, BinderFeatures, ExceptionCode, Interface, LazyServiceGuard,
+    ParcelFileDescriptor, SpIBinder, Status, StatusCode, Strong,
 };
 use disk::QcowFile;
+use lazy_static::lazy_static;
 use libc::VMADDR_CID_HOST;
 use log::{debug, error, info, warn};
 use microdroid_payload_config::{OsConfig, Task, TaskType, VmPayloadConfig};
@@ -101,6 +103,20 @@ const ANDROID_VM_INSTANCE_VERSION: u16 = 1;
 const CHUNK_RECV_MAX_LEN: usize = 1024;
 
 const MICRODROID_OS_NAME: &str = "microdroid";
+
+lazy_static! {
+    static ref GLOBAL_SERVICE: Strong<dyn IVirtualizationServiceInternal> =
+        wait_for_interface(BINDER_SERVICE_IDENTIFIER)
+            .expect("Could not connect to VirtualizationService");
+}
+
+/// Foobar
+#[derive(Debug, Default)]
+pub struct VirtualizationServiceInternal {}
+
+impl Interface for VirtualizationServiceInternal {}
+
+impl IVirtualizationServiceInternal for VirtualizationServiceInternal {}
 
 /// Implementation of `IVirtualizationService`, the entry point of the AIDL service.
 #[derive(Debug, Default)]
