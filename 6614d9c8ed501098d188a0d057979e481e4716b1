@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6f9d28fa_eaecb1b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-10T08:15:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "308b7d07_45f3a29f",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 21
+      },
+      "revId": "6614d9c8ed501098d188a0d057979e481e4716b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3607679d_fff969a6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -323,6 +347,30 @@
       "side": 1,
       "message": "I am fine with landing this as is and then remove this as a follow-up change. I don\u0027t think we need to rewrite the library in C++. We just shouldn\u0027t use it as a static rust library, but only as a native shared library having a C interface.",
       "parentUuid": "334a0534_e2294df3",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 1
+      },
+      "revId": "6614d9c8ed501098d188a0d057979e481e4716b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81297401_6ee76004",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-10T08:15:06Z",
+      "side": 1,
+      "message": "I see. Thanks for all your inputs!\n\nI\u0027ll let the rust clients use the library via bindgen then. We can give some time for b/250854486. Once it\u0027s fixed I\u0027ll land aosp/2243014 to change the rust_ffi to shared, otherwise we always have the option to rewrite this library in C by keeping the same C interface.",
+      "parentUuid": "3e1adf39_4f552272",
       "range": {
         "startLine": 21,
         "startChar": 0,
