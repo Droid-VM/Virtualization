@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c16e9f19_48c311ba",
+        "filename": "microdroid_manager/src/procutil.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-10-11T07:18:34Z",
+      "side": 1,
+      "message": "I couldn\u0027t understand the relationship between this comment and out of index errors. I guess your concern is about touching these while parsing it, but I won\u0027t do anything with these.",
+      "parentUuid": "23462090_bc8df8e2",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 20
+      },
+      "revId": "7c52117e2729643d7fef192e18431e336ffa4ee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5ae7af33_db336ac9",
         "filename": "microdroid_manager/src/procutil.rs",
         "patchSetId": 10
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-11T04:57:25Z",
       "side": 1,
       "message": "So, is this to drop \" kB\"? I would use a regular expression like \".*:\\ *([0-9]+)\\ kB)\" to capture the \"number\" part.",
+      "range": {
+        "startLine": 104,
+        "startChar": 29,
+        "endLine": 104,
+        "endChar": 33
+      },
+      "revId": "7c52117e2729643d7fef192e18431e336ffa4ee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06322634_336f1127",
+        "filename": "microdroid_manager/src/procutil.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-10-11T07:18:34Z",
+      "side": 1,
+      "message": "I changed it to the regular expression. Also, I did it for get_cpu_time to improve readability as well.",
+      "parentUuid": "5ae7af33_db336ac9",
       "range": {
         "startLine": 104,
         "startChar": 29,
