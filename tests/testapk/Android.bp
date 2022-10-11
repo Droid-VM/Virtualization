@@ -20,10 +20,7 @@ android_test {
         "compatibility-common-util-devicesidelib",
     ],
     libs: ["android.system.virtualmachine"],
-    jni_libs: [
-        "MicrodroidTestNativeLib",
-        "MicrodroidTestNativeCrashLib",
-    ],
+    jni_libs: ["MicrodroidTestNativeLib"],
     platform_apis: true,
     use_embedded_native_libs: true,
     // We only support 64-bit ABI, but CTS demands all APKs to be multi-ABI.
@@ -48,11 +45,6 @@ cc_library_shared {
         "liblog",
         "libprotobuf-cpp-lite-ndk",
     ],
-}
-
-cc_library_shared {
-    name: "MicrodroidTestNativeCrashLib",
-    srcs: ["src/native/crashbinary.cpp"],
 }
 
 cc_library_shared {

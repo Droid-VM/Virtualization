@@ -406,11 +406,7 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
             new Thread(() -> sendRate.set(runVsockClientAndSendData(vm))).start();
             benchmarkService.runVsockServerAndReceiveData(serverFd, NUM_BYTES_TO_TRANSFER);
 
-            Double rate = sendRate.get();
-            if (rate == null) {
-                throw new IllegalStateException("runVsockClientAndSendData() failed");
-            }
-            mReadRates.add(rate);
+            mReadRates.add(sendRate.get());
         }
 
         private double runVsockClientAndSendData(VirtualMachine vm) {
