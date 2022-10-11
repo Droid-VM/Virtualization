@@ -77,12 +77,10 @@ public abstract class MicrodroidDeviceTestBase {
             return mContext;
         }
 
-        public VirtualMachineConfig.Builder newVmConfigBuilder() {
-            return new VirtualMachineConfig.Builder(mContext).setProtectedVm(mProtectedVm);
-        }
-
+        /** Create a new VirtualMachineConfig.Builder with the parameterized protection mode. */
         public VirtualMachineConfig.Builder newVmConfigBuilder(String payloadConfigPath) {
-            return newVmConfigBuilder().setPayloadConfigPath(payloadConfigPath);
+            return new VirtualMachineConfig.Builder(mContext, payloadConfigPath)
+                        .setProtectedVm(mProtectedVm);
         }
 
         /**
