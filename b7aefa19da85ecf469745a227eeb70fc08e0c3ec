@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57ba57a4_22c847a9",
+        "filename": "microdroid_manager/src/procutil.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-11T10:40:29Z",
+      "side": 1,
+      "message": "why not use read_line()",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 32
+      },
+      "revId": "b7aefa19da85ecf469745a227eeb70fc08e0c3ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a5bbc49_5778da2d",
+        "filename": "microdroid_manager/src/procutil.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-11T10:40:29Z",
+      "side": 1,
+      "message": "This should actually be a match against regex like `^cpu\\s+(\\ [\\d]+){4,}` will ensure that it starts with a string cpu followed by at least four numbers delimited by a space.",
+      "range": {
+        "startLine": 62,
+        "startChar": 18,
+        "endLine": 62,
+        "endChar": 50
+      },
+      "revId": "b7aefa19da85ecf469745a227eeb70fc08e0c3ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

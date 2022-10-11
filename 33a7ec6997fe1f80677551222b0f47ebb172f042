@@ -46,6 +46,30 @@
       },
       "revId": "33a7ec6997fe1f80677551222b0f47ebb172f042",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12f45bd5_687343f1",
+        "filename": "microdroid_manager/src/procutil.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-11T10:40:29Z",
+      "side": 1,
+      "message": "Just one line with a capture group that matches with the number.\n\n`^.*:\\s*([0-9]+)\\ kB\\s*$`\n\nabove will match the line and the capture #1 (within parenthesis) will be the number.",
+      "parentUuid": "8d91e6aa_d2ff936d",
+      "range": {
+        "startLine": 101,
+        "startChar": 24,
+        "endLine": 101,
+        "endChar": 47
+      },
+      "revId": "33a7ec6997fe1f80677551222b0f47ebb172f042",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
