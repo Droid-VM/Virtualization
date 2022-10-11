@@ -71,7 +71,6 @@ const VMADDR_CID_HOST: u32 = 2;
 
 const APEX_CONFIG_DONE_PROP: &str = "apex_config.done";
 const APP_DEBUGGABLE_PROP: &str = "ro.boot.microdroid.app_debuggable";
-const APK_MOUNT_DONE_PROP: &str = "microdroid_manager.apk.mounted";
 
 // SYNC WITH virtualizationservice/src/crosvm.rs
 const FAILURE_SERIAL_DEVICE: &str = "/dev/ttyS1";
@@ -345,12 +344,12 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
     dice_derivation(&verified_data, &payload_metadata)?;
 
     // Before reading a file from the APK, start zipfuse
+    let noexec = false;
     run_zipfuse(
-        MountForExec::Allowed,
+        noexec,
         "fscontext=u:object_r:zipfusefs:s0,context=u:object_r:system_file:s0",
         Path::new("/dev/block/mapper/microdroid-apk"),
         Path::new("/mnt/apk"),
-        Some(APK_MOUNT_DONE_PROP),
     )
     .context("Failed to run zipfuse")?;
 
@@ -386,9 +385,6 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
         control_service("start", "authfs_service")?;
     }
 
-    // Wait until zipfuse has mounted the APK so we can access the payload
-    wait_for_property_true(APK_MOUNT_DONE_PROP).context("Failed waiting for APK mount done")?;
-
     system_properties::write("dev.bootcomplete", "1").context("set dev.bootcomplete")?;
     exec_task(task, service)
 }
@@ -422,24 +418,10 @@ fn run_apkdmverity(args: &[ApkDmverityArgument]) -> Result<Child> {
     cmd.spawn().context("Spawn apkdmverity")
 }
 
-enum MountForExec {
-    Allowed,
-    Disallowed,
-}
-
-fn run_zipfuse(
-    noexec: MountForExec,
-    option: &str,
-    zip_path: &Path,
-    mount_dir: &Path,
-    ready_prop: Option<&str>,
-) -> Result<Child> {
+fn run_zipfuse(noexec: bool, option: &str, zip_path: &Path, mount_dir: &Path) -> Result<Child> {
     let mut cmd = Command::new(ZIPFUSE_BIN);
-    if let MountForExec::Disallowed = noexec {
+    if noexec {
         cmd.arg("--noexec");
-    }
-    if let Some(property_name) = ready_prop {
-        cmd.args(["-p", property_name]);
     }
     cmd.arg("-o")
         .arg(option)
@@ -626,12 +608,12 @@ fn mount_extra_apks(config: &VmPayloadConfig) -> Result<()> {
         create_dir(Path::new(&mount_dir)).context("Failed to create mount dir for extra apks")?;
 
         // don't wait, just detach
+        let noexec = true;
         run_zipfuse(
-            MountForExec::Disallowed,
+            noexec,
             "fscontext=u:object_r:zipfusefs:s0,context=u:object_r:extra_apk_file:s0",
             Path::new(&format!("/dev/block/mapper/extra-apk-{}", i)),
             Path::new(&mount_dir),
-            None,
         )
         .context("Failed to zipfuse extra apks")?;
     }
@@ -641,14 +623,10 @@ fn mount_extra_apks(config: &VmPayloadConfig) -> Result<()> {
 
 // Waits until linker config is generated
 fn wait_for_apex_config_done() -> Result<()> {
-    wait_for_property_true(APEX_CONFIG_DONE_PROP).context("Failed waiting for apex config done")
-}
-
-fn wait_for_property_true(property_name: &str) -> Result<()> {
-    let mut prop = PropertyWatcher::new(property_name)?;
+    let mut prop = PropertyWatcher::new(APEX_CONFIG_DONE_PROP)?;
     loop {
         prop.wait()?;
-        if system_properties::read_bool(property_name, false)? {
+        if system_properties::read_bool(APEX_CONFIG_DONE_PROP, false)? {
             break;
         }
     }

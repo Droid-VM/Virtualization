@@ -20,11 +20,10 @@
 
 mod inode;
 
-use anyhow::{Context as AnyhowContext, Result};
+use anyhow::Result;
 use clap::{App, Arg};
 use fuse::filesystem::*;
 use fuse::mount::*;
-use rustutils::system_properties;
 use std::collections::HashMap;
 use std::convert::TryFrom;
 use std::ffi::{CStr, CString};
@@ -53,12 +52,6 @@ fn main() -> Result<()> {
                 .takes_value(false)
                 .help("Disallow the execution of binary files"),
         )
-        .arg(
-            Arg::with_name("readyprop")
-                .short('p')
-                .takes_value(true)
-                .help("Specify a property to be set when mount is ready"),
-        )
         .arg(Arg::with_name("ZIPFILE").required(true))
         .arg(Arg::with_name("MOUNTPOINT").required(true))
         .get_matches();
@@ -67,8 +60,7 @@ fn main() -> Result<()> {
     let mount_point = matches.value_of("MOUNTPOINT").unwrap().as_ref();
     let options = matches.value_of("options");
     let noexec = matches.is_present("noexec");
-    let ready_prop = matches.value_of("readyprop");
-    run_fuse(zip_file, mount_point, options, noexec, ready_prop)?;
+    run_fuse(zip_file, mount_point, options, noexec)?;
     Ok(())
 }
 
@@ -78,7 +70,6 @@ pub fn run_fuse(
     mount_point: &Path,
     extra_options: Option<&str>,
     noexec: bool,
-    ready_prop: Option<&str>,
 ) -> Result<()> {
     const MAX_READ: u32 = 1 << 20; // TODO(jiyong): tune this
     const MAX_WRITE: u32 = 1 << 13; // This is a read-only filesystem
@@ -103,11 +94,6 @@ pub fn run_fuse(
     }
 
     fuse::mount(mount_point, "zipfuse", mount_flags, &mount_options)?;
-
-    if let Some(property_name) = ready_prop {
-        system_properties::write(property_name, "1").context("Failed to set readyprop")?;
-    }
-
     let mut config = fuse::FuseConfig::new();
     config.dev_fuse(dev_fuse).max_write(MAX_WRITE).max_read(MAX_READ);
     Ok(config.enter_message_loop(ZipFuse::new(zip_file)?)?)
