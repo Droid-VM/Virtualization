@@ -16,6 +16,24 @@
       "message": "Although this was for a test, I think logging details will always be nice, if there are no possible attacks in terms of security.",
       "revId": "edd56fe63fe36a2224df47767ffca7ce1422e8f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d78ace9_aba70555",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-11T19:42:28Z",
+      "side": 1,
+      "message": "Jiyong: WDYT? I carefully log the message and don\u0027t send it to the client. There\u0027s still some risk of leaking sensitive information, but the failures here occur before the payload runs so perhaps they\u0027re not that risky.",
+      "parentUuid": "aff3206b_74280ea2",
+      "revId": "edd56fe63fe36a2224df47767ffca7ce1422e8f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
