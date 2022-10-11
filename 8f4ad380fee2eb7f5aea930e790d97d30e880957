@@ -161,6 +161,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "22f4128e_0812f47c",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-11T21:08:57Z",
+      "side": 1,
+      "message": "Oh wow, I didn\u0027t realise there were so many places. I was just thinking we could remove the duplication of the to_string and PFD::new calls in these 2 calls.\nNot entirely convinced the fully generic version adds much over just constructing the value - in fact it\u0027s probably worse, since we now have true/false without the \"writable:\".\n\nMaybe better to ignore my suggestion and just go back to what you had?",
+      "parentUuid": "22a02efa_5d0f0a5a",
+      "range": {
+        "startLine": 388,
+        "startChar": 33,
+        "endLine": 392,
+        "endChar": 10
+      },
+      "revId": "8f4ad380fee2eb7f5aea930e790d97d30e880957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32208342_c63b8d45",
         "filename": "virtualizationservice/src/payload.rs",
         "patchSetId": 3
@@ -196,6 +220,30 @@
       "side": 1,
       "message": "f()?; Ok(()) -- true, but the last function doesn\u0027t return Result (vector push), so it does not apply.\n\n\nAgreed about keeping both `add_microdroid_payload_images` \u0026 `make_payload_disk`, given make_payload_disk is a big function too",
       "parentUuid": "32208342_c63b8d45",
+      "range": {
+        "startLine": 418,
+        "startChar": 3,
+        "endLine": 420,
+        "endChar": 10
+      },
+      "revId": "8f4ad380fee2eb7f5aea930e790d97d30e880957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d565a723_12c889d2",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-11T21:08:57Z",
+      "side": 1,
+      "message": "Ahh, I see.",
+      "parentUuid": "e08bb022_91caa2f5",
       "range": {
         "startLine": 418,
         "startChar": 3,
@@ -243,6 +291,30 @@
       "side": 1,
       "message": "This change is in vm tool, I can change it to take the storage size as a flag too \u0026 default to 10M. \n\nThis storage will be specified by the client using the `initializeWritablePartition` function of VS (similar to instance img). This basically mean there is no need for it to be in AppConfig (at least now). We might want to expand the `IVirtualizationService` to include things like expand the backing qcow image for resize_up but that is not in scope right now",
       "parentUuid": "144445a9_da699367",
+      "range": {
+        "startLine": 93,
+        "startChar": 34,
+        "endLine": 93,
+        "endChar": 50
+      },
+      "revId": "8f4ad380fee2eb7f5aea930e790d97d30e880957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a37e654_a363d6fa",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-11T21:08:57Z",
+      "side": 1,
+      "message": "Ah sorry, my misunderstanding again.\nWe\u0027ll want the client to pass it to the Java API, but that\u0027s a whole different thing.",
+      "parentUuid": "4285d676_ed57596c",
       "range": {
         "startLine": 93,
         "startChar": 34,
