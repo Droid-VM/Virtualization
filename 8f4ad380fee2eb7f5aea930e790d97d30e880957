@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08d540a6_31eaf2cf",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-10-11T15:53:59Z",
+      "side": 1,
+      "message": "I changed the code a bit it should not panic even if clone_file() throws error. SO NA anymore",
+      "parentUuid": "5a51adc2_d2031759",
+      "range": {
+        "startLine": 607,
+        "startChar": 50,
+        "endLine": 607,
+        "endChar": 82
+      },
+      "revId": "8f4ad380fee2eb7f5aea930e790d97d30e880957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ee758cc_bba917d1",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-10-10T21:25:05Z",
       "side": 1,
       "message": "Either expand this or delete it, whichever seems more useful",
+      "range": {
+        "startLine": 641,
+        "startChar": 7,
+        "endLine": 641,
+        "endChar": 31
+      },
+      "revId": "8f4ad380fee2eb7f5aea930e790d97d30e880957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ded16519_7d179662",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-10-11T15:53:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee758cc_bba917d1",
       "range": {
         "startLine": 641,
         "startChar": 7,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22a02efa_5d0f0a5a",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-10-11T15:53:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21d6f7ef_43498a26",
+      "range": {
+        "startLine": 388,
+        "startChar": 33,
+        "endLine": 392,
+        "endChar": 10
+      },
+      "revId": "8f4ad380fee2eb7f5aea930e790d97d30e880957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32208342_c63b8d45",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-10-10T21:25:05Z",
       "side": 1,
       "message": "Nit:\n```\nf()?; Ok(())\n```\nReduces to\n```\nf()\n```\ndoesn\u0027t it?\n\nWhich means there\u0027s really very little to this function now - but I think it\u0027s worth keeping because of the naming.",
+      "range": {
+        "startLine": 418,
+        "startChar": 3,
+        "endLine": 420,
+        "endChar": 10
+      },
+      "revId": "8f4ad380fee2eb7f5aea930e790d97d30e880957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e08bb022_91caa2f5",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-10-11T15:53:59Z",
+      "side": 1,
+      "message": "f()?; Ok(()) -- true, but the last function doesn\u0027t return Result (vector push), so it does not apply.\n\n\nAgreed about keeping both `add_microdroid_payload_images` \u0026 `make_payload_disk`, given make_payload_disk is a big function too",
+      "parentUuid": "32208342_c63b8d45",
       "range": {
         "startLine": 418,
         "startChar": 3,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4285d676_ed57596c",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-10-11T15:53:59Z",
+      "side": 1,
+      "message": "This change is in vm tool, I can change it to take the storage size as a flag too \u0026 default to 10M. \n\nThis storage will be specified by the client using the `initializeWritablePartition` function of VS (similar to instance img). This basically mean there is no need for it to be in AppConfig (at least now). We might want to expand the `IVirtualizationService` to include things like expand the backing qcow image for resize_up but that is not in scope right now",
+      "parentUuid": "144445a9_da699367",
+      "range": {
+        "startLine": 93,
+        "startChar": 34,
+        "endLine": 93,
+        "endChar": 50
+      },
+      "revId": "8f4ad380fee2eb7f5aea930e790d97d30e880957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03ecab92_dba11f2e",
@@ -146,6 +266,30 @@
       "writtenOn": "2022-10-10T21:25:05Z",
       "side": 1,
       "message": "We shouldn\u0027t panic on failure here",
+      "range": {
+        "startLine": 106,
+        "startChar": 73,
+        "endLine": 106,
+        "endChar": 79
+      },
+      "revId": "8f4ad380fee2eb7f5aea930e790d97d30e880957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e3b5d90_98878b52",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-10-11T15:53:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03ecab92_dba11f2e",
       "range": {
         "startLine": 106,
         "startChar": 73,
