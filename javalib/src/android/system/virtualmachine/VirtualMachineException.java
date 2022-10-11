@@ -16,27 +16,21 @@
 
 package android.system.virtualmachine;
 
-import android.annotation.Nullable;
-
-/**
- * Exception thrown when operations on virtual machines fail.
- *
- * @hide
- */
+/** @hide */
 public class VirtualMachineException extends Exception {
     public VirtualMachineException() {
         super();
     }
 
-    public VirtualMachineException(@Nullable String message) {
+    public VirtualMachineException(String message) {
         super(message);
     }
 
-    public VirtualMachineException(@Nullable String message, @Nullable Throwable cause) {
+    public VirtualMachineException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public VirtualMachineException(@Nullable Throwable cause) {
+    public VirtualMachineException(Throwable cause) {
         super(cause);
     }
 }

@@ -80,7 +80,7 @@ public abstract class MicrodroidDeviceTestBase {
         /** Create a new VirtualMachineConfig.Builder with the parameterized protection mode. */
         public VirtualMachineConfig.Builder newVmConfigBuilder(String payloadConfigPath) {
             return new VirtualMachineConfig.Builder(mContext, payloadConfigPath)
-                        .setProtectedVm(mProtectedVm);
+                        .protectedVm(mProtectedVm);
         }
 
         /**
@@ -239,7 +239,7 @@ public abstract class MicrodroidDeviceTestBase {
 
         @Override
         @CallSuper
-        public void onStopped(VirtualMachine vm, int reason) {
+        public void onDied(VirtualMachine vm, int reason) {
             vm.clearCallback();
             mExecutorService.shutdown();
         }
@@ -328,16 +328,16 @@ public abstract class MicrodroidDeviceTestBase {
                     }
 
                     @Override
-                    public void onStopped(VirtualMachine vm, int reason) {
+                    public void onDied(VirtualMachine vm, int reason) {
                         deathReason.complete(reason);
-                        super.onStopped(vm, reason);
+                        super.onDied(vm, reason);
                     }
                 };
         long apiCallNanoTime = System.nanoTime();
         listener.runToFinish(logTag, vm);
         return new BootResult(
                 payloadStarted.getNow(false),
-                deathReason.getNow(VmEventListener.STOP_REASON_INFRASTRUCTURE_ERROR),
+                deathReason.getNow(VirtualMachineCallback.DEATH_REASON_INFRASTRUCTURE_ERROR),
                 apiCallNanoTime,
                 endTime.getNow(apiCallNanoTime) - apiCallNanoTime,
                 listener.getVcpuStartedNanoTime(),
