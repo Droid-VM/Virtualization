@@ -16,6 +16,24 @@
       "message": "Since CPU time information is cumulative, so I need to move the collecting logic into the function exec_task. Will do in this CL.",
       "revId": "6453c0204c055d4df4bf3b2497d33bf07520eede",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b23766ec_db987a41",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-10-11T09:38:14Z",
+      "side": 1,
+      "message": "Since there\u0027s lots of unwrap function within this file and it makes panic, I couldn\u0027t move collecting logic because it might not be executed.\n\nInstead I\u0027m planning to use VALUE metric for getting maximum value for each field of VmCpuStatus atom, and it would be the closest one from the termination of VM.",
+      "parentUuid": "4261d292_885ded93",
+      "revId": "6453c0204c055d4df4bf3b2497d33bf07520eede",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
