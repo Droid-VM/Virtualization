@@ -52,6 +52,29 @@
       "parentUuid": "9984cd28_4e62d1ce",
       "revId": "602f8d37e9095a449d7d4ca02febe68e7338dbab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "127f853d_ad304f11",
+        "filename": "microdroid/vm_payload/src/vm_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-11T15:34:29Z",
+      "side": 1,
+      "message": "nit: safety comment\nAlso it\u0027s only the copy below that is actually unsafe, isn\u0027t it?",
+      "range": {
+        "startLine": 86,
+        "startChar": 4,
+        "endLine": 86,
+        "endChar": 10
+      },
+      "revId": "602f8d37e9095a449d7d4ca02febe68e7338dbab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
