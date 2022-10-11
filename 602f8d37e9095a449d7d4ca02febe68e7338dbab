@@ -16,6 +16,24 @@
       "message": "LGTM for the renaming part. Question about the DICE API: Is it possible to return a value as result instead of writing the result to param?",
       "revId": "602f8d37e9095a449d7d4ca02febe68e7338dbab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9984cd28_4e62d1ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-11T14:30:37Z",
+      "side": 1,
+      "message": "You might be able to do something, but C doesn\u0027t make it easy and out pointers are a familiar concept. The DICE APIs are only going to be allowed for test payloads, once Alan has that infrastructure set up, and not part of the public API so it will at least be easier to change.",
+      "parentUuid": "86ebe2d3_883e6054",
+      "revId": "602f8d37e9095a449d7d4ca02febe68e7338dbab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
