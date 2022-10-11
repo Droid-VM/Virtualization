@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba0f4994_1cb476cf",
+        "filename": "microdroid_manager/src/procutil.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-11T07:28:28Z",
+      "side": 1,
+      "message": "Ah I see. So you only need to read the first line. When why do you read the entire line and split all the tokens? I suggest you to read the first line only using read_line or similar and check if it starts with \"cpu\" and then read the next tokens.",
+      "parentUuid": "c16e9f19_48c311ba",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 20
+      },
+      "revId": "7c52117e2729643d7fef192e18431e336ffa4ee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5ae7af33_db336ac9",
         "filename": "microdroid_manager/src/procutil.rs",
         "patchSetId": 10

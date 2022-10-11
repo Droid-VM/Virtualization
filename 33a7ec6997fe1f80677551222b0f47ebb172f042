@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97725bdb_a07e69f5",
+        "filename": "microdroid_manager/src/procutil.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-11T07:28:28Z",
+      "side": 1,
+      "message": "This looks non-conventional. Why don\u0027t you write a regex that matches with the line and collect the capture group #1 to read the number part?",
+      "range": {
+        "startLine": 101,
+        "startChar": 24,
+        "endLine": 101,
+        "endChar": 47
+      },
+      "revId": "33a7ec6997fe1f80677551222b0f47ebb172f042",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
