@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dc81715_be1c0b6b",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-12T12:25:15Z",
+      "side": 1,
+      "message": "consider adding context, and perhaps log this swap-on event using info!",
+      "range": {
+        "startLine": 174,
+        "startChar": 21,
+        "endLine": 174,
+        "endChar": 22
+      },
+      "revId": "715060d5ca9b72d2821490c821ac4603a1f3d605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eae590a7_e8d3d12f",
+        "filename": "microdroid_manager/src/swap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-12T12:25:15Z",
+      "side": 1,
+      "message": "Where is the official definition of this header?",
+      "range": {
+        "startLine": 36,
+        "startChar": 28,
+        "endLine": 36,
+        "endChar": 47
+      },
+      "revId": "715060d5ca9b72d2821490c821ac4603a1f3d605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36cdc175_17dd3251",
+        "filename": "microdroid_manager/src/swap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-12T12:25:15Z",
+      "side": 1,
+      "message": "Do we want to show `dev` in the error message?",
+      "range": {
+        "startLine": 42,
+        "startChar": 18,
+        "endLine": 42,
+        "endChar": 42
+      },
+      "revId": "715060d5ca9b72d2821490c821ac4603a1f3d605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10602f31_21cff041",
+        "filename": "microdroid_manager/src/swap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-12T12:25:15Z",
+      "side": 1,
+      "message": "Please add a comment about why unsafe is allowed here.",
+      "revId": "715060d5ca9b72d2821490c821ac4603a1f3d605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d84c39ef_c0dfa94c",
+        "filename": "microdroid_manager/src/swap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-12T12:25:15Z",
+      "side": 1,
+      "message": "This could be `info_u32.iter().flat_map(|v| v.to_ne_bytes()).collect::\u003cVec\u003cu8\u003e\u003e()`",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 5
+      },
+      "revId": "715060d5ca9b72d2821490c821ac4603a1f3d605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcb40265_3f06ba2c",
+        "filename": "microdroid_manager/src/swap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-12T12:25:15Z",
+      "side": 1,
+      "message": "where is this magic number from?",
+      "range": {
+        "startLine": 66,
+        "startChar": 34,
+        "endLine": 66,
+        "endChar": 36
+      },
+      "revId": "715060d5ca9b72d2821490c821ac4603a1f3d605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74702cf7_79373a31",
+        "filename": "microdroid_manager/src/swap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-12T12:25:15Z",
+      "side": 1,
+      "message": "add a comment about unsafe",
+      "range": {
+        "startLine": 79,
+        "startChar": 14,
+        "endLine": 79,
+        "endChar": 20
+      },
+      "revId": "715060d5ca9b72d2821490c821ac4603a1f3d605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60236580_26952657",
+        "filename": "microdroid_manager/src/swap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-12T12:25:15Z",
+      "side": 1,
+      "message": "this is always -1 for the erro case right?  Can we show `strerror(errno)` instead?",
+      "range": {
+        "startLine": 81,
+        "startChar": 51,
+        "endLine": 81,
+        "endChar": 54
+      },
+      "revId": "715060d5ca9b72d2821490c821ac4603a1f3d605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4106606_960e2ad4",
+        "filename": "microdroid_manager/src/swap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-12T12:25:15Z",
+      "side": 1,
+      "message": "Is this a safe value? Do you think we want to support that this is configurable by the owner of the VM?",
+      "range": {
+        "startLine": 90,
+        "startChar": 34,
+        "endLine": 90,
+        "endChar": 66
+      },
+      "revId": "715060d5ca9b72d2821490c821ac4603a1f3d605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
