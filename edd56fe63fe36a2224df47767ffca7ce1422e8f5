@@ -52,6 +52,24 @@
       "parentUuid": "5d78ace9_aba70555",
       "revId": "edd56fe63fe36a2224df47767ffca7ce1422e8f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2838852d_4ec3cfa2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-12T15:43:07Z",
+      "side": 1,
+      "message": "I thought that was one of my better hacks :-)\n\nThe reason for putting it there is we go to some trouble to make sure that text is fully written before exiting the VM.\n\nWhen the failures occurred, none of the guest-side logging appeared. So I don\u0027t think that\u0027s a solution.\n\n(It occurs to me that we will get this fairly content-free error even if the app developer makes a trivial mistake like misspelling the binary name, so I think we need to do something.)",
+      "parentUuid": "3640da1a_732eb158",
+      "revId": "edd56fe63fe36a2224df47767ffca7ce1422e8f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
