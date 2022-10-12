@@ -409,6 +409,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22d48c20_cf432909",
+        "filename": "microdroid_manager/src/swap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-12T13:59:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d8e5cab3_0dca343e",
+      "range": {
+        "startLine": 66,
+        "startChar": 34,
+        "endLine": 66,
+        "endChar": 36
+      },
+      "revId": "715060d5ca9b72d2821490c821ac4603a1f3d605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74702cf7_79373a31",
@@ -612,6 +636,30 @@
       "side": 1,
       "message": "The overhead is expected to be ~0.1% of the ZRAM disksize, if no swap is actually being used. Eg. 100MB VM -\u003e 100kB ZRAM overhead. So it\u0027s not too bad. But we can cut it a bit (eg. disksize \u003d VM RAM size / 2) if we want.",
       "parentUuid": "7f5e5254_42be7b46",
+      "range": {
+        "startLine": 90,
+        "startChar": 34,
+        "endLine": 90,
+        "endChar": 66
+      },
+      "revId": "715060d5ca9b72d2821490c821ac4603a1f3d605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69868815_a512a037",
+        "filename": "microdroid_manager/src/swap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-12T13:59:03Z",
+      "side": 1,
+      "message": "So, the current setting is tuned for maximum memory saving at the expense of performance, right? I think some VMs may want different values (or perhaps turn zram swap completely off) depending on their workload. I am not saying this initial CL should address that, but wish it could be addressed in a follow-up change (if that makes sense).",
+      "parentUuid": "61294209_73a9cc6c",
       "range": {
         "startLine": 90,
         "startChar": 34,
