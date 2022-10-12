@@ -65,7 +65,7 @@ public class AuthFsTestRule extends TestLogData {
     private static final String TEST_OUTPUT_DIR = "/data/local/tmp/authfs/output_dir";
 
     /** Mount point of authfs on Microdroid during the test */
-    private static final String MOUNT_DIR = "/data/local/tmp";
+    static final String MOUNT_DIR = "/data/local/tmp";
 
     /** VM's log file */
     private static final String LOG_PATH = TEST_OUTPUT_DIR + "/log.txt";
