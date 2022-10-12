@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fff787e_f6ec1945",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-12T11:18:29Z",
+      "side": 1,
+      "message": "So IIUC, the reason why these 3 bullets seem to contain some redundancy is because the compiler supports 2 ways of locating the stack \"cookie\" (through `__stack_chk_guard` (GCC \u0026 default LLVM) or at an offset from `__bionic_tls` (Bionic)) and we want/need to support both?",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 2
+      },
+      "revId": "c5cbc9528d6d9ceb756dcd9a66c31c45ff675d47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f51b947_00dad870",
+        "filename": "vmbase/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-12T11:18:29Z",
+      "side": 1,
+      "message": "Isn\u0027t there a risk of this macro calling a function that also fails the stack check?",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 12
+      },
+      "revId": "c5cbc9528d6d9ceb756dcd9a66c31c45ff675d47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0f65170_b6502e1c",
+        "filename": "vmbase/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-12T11:18:29Z",
+      "side": 1,
+      "message": "`panic!(\"stack guard check failed\")`?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 12
+      },
+      "revId": "c5cbc9528d6d9ceb756dcd9a66c31c45ff675d47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
