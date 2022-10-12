@@ -12,8 +12,6 @@ android_app {
 
 java_sdk_library {
     name: "android.system.virtualmachine",
-    installable: true,
-    compile_dex: true,
 
     jarjar_rules: "jarjar-rules.txt",
 
@@ -24,6 +22,12 @@ java_sdk_library {
         "PlatformProperties",
     ],
 
+    // TODO(ioffe): reuse the framework-module-defaults that make sense.
+    shared_library: false,
+    // On devices that don't support AVF this jar will be conditionally installed on /system.
+    installable: true,
+    compile_dex: true,
+
     apex_available: ["com.android.virt"],
     permitted_packages: [
         "android.system.virtualmachine",
@@ -31,6 +35,24 @@ java_sdk_library {
         // android.sysprop.*, renamed by jarjar
         "com.android.system.virtualmachine.sysprop",
     ],
+}
+
+java_library {
+    name: "android.system.virtualmachine-non-updatable",
+    jarjar_rules: "jarjar-rules.txt",
+
+    srcs: ["src/**/*.java"],
+    static_libs: [
+        "android.system.virtualizationservice-java",
+        // For android.sysprop.HypervisorProperties
+        "PlatformProperties",
+    ],
+
+    // On devices that don't support AVF this jar will be conditionally installed on /system.
+    installable: true,
+    compile_dex: true,
+    system_ext_specific: true,
+    apex_available: ["//apex/available:platform"],
 }
 
 prebuilt_apis {
