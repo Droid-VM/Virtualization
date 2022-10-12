@@ -18,6 +18,7 @@ mod dice;
 mod instance;
 mod ioutil;
 mod payload;
+mod swap;
 mod vm_payload_service;
 
 use crate::dice::{DiceContext, DiceDriver};
@@ -169,6 +170,8 @@ fn try_main() -> Result<()> {
     info!("started.");
 
     load_crashkernel_if_supported().context("Failed to load crashkernel")?;
+
+    swap::init_swap()?;
 
     let service = get_vms_rpc_binder()
         .context("cannot connect to VirtualMachineService")
