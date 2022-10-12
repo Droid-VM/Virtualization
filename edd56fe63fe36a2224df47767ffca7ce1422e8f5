@@ -34,6 +34,24 @@
       "parentUuid": "aff3206b_74280ea2",
       "revId": "edd56fe63fe36a2224df47767ffca7ce1422e8f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3640da1a_732eb158",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-12T07:56:20Z",
+      "side": 1,
+      "message": "I think I am not a big fan of extending the error string with \"|\". But I fully understand the need for the detailed fail reason. \n\nCan we emit the fail reason string to the guest-side log and let the developers read the log for further analysis? Or do you want to have this even for non-debuggable VMs?",
+      "parentUuid": "5d78ace9_aba70555",
+      "revId": "edd56fe63fe36a2224df47767ffca7ce1422e8f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
