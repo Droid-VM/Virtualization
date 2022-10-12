@@ -63,6 +63,7 @@ apex {
     ],
     prebuilts: [
         "com.android.virt.init.rc",
+        "features_com.android.virt.xml",
         "microdroid_initrd_app_debuggable",
         "microdroid_initrd_full_debuggable",
         "microdroid_initrd_normal",
@@ -171,4 +172,12 @@ python_binary_host {
             embedded_launcher: true,
         },
     },
+}
+
+// TODO(ioffe): put this under features/?
+// TODO(ioffe): merge this into /apex/com.android.virt/etc/permissions/android.system.virtualmachine.xml
+prebuilt_etc {
+    name: "features_com.android.virt.xml",
+    sub_dir: "permissions",
+    src: "features_com.android.virt.xml",
 }
