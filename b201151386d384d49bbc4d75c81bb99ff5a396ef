@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b19320b_4036aae2",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-13T22:40:11Z",
+      "side": 1,
+      "message": "I think we might want to migrate to that eventually (Inseob had a related bug, which got closed but then reopened I think).\nBut for now I think this simple version is enough - the app controls both sides, so we don\u0027t need a broker for service discovery, and static port numbers work fine.\n\nI was thinking we ought to reserve some ports for Microdroid, but I think the kernel already restricts ports \u003c 1024. (We should check that payloads really can\u0027t use those though.)",
+      "parentUuid": "8e76fa6b_3f9e4a3c",
+      "range": {
+        "startLine": 36,
+        "startChar": 93,
+        "endLine": 37,
+        "endChar": 7
+      },
+      "revId": "b201151386d384d49bbc4d75c81bb99ff5a396ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9331c00b_ba1c335d",
         "filename": "microdroid/vm_payload/include/vm_payload.h",
         "patchSetId": 3
@@ -157,6 +181,30 @@
         "startChar": 4,
         "endLine": 63,
         "endChar": 10
+      },
+      "revId": "b201151386d384d49bbc4d75c81bb99ff5a396ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a22d3c7_3fe0fb87",
+        "filename": "microdroid/vm_payload/src/vm_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-13T22:40:11Z",
+      "side": 1,
+      "message": "The payload already has those permissions, and that\u0027s fine. Setting up a listening port is allowed; what we want to block is connecting to a vsock in the host.",
+      "parentUuid": "178701f4_e24f82f8",
+      "range": {
+        "startLine": 63,
+        "startChar": 13,
+        "endLine": 63,
+        "endChar": 62
       },
       "revId": "b201151386d384d49bbc4d75c81bb99ff5a396ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
