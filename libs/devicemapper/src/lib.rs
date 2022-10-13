@@ -38,15 +38,18 @@ use std::mem::size_of;
 use std::os::unix::io::AsRawFd;
 use std::path::{Path, PathBuf};
 
+/// Exposes DmCryptTarget & related builder
+pub mod crypt;
 /// Expose util functions
 pub mod util;
 /// Exposes the DmVerityTarget & related builder
 pub mod verity;
 
 mod sys;
+use crypt::DmCryptTarget;
 use sys::*;
 use util::*;
-use verity::*;
+use verity::DmVerityTarget;
 
 nix::ioctl_readwrite!(_dm_dev_create, DM_IOCTL, Cmd::DM_DEV_CREATE, DmIoctl);
 nix::ioctl_readwrite!(_dm_dev_suspend, DM_IOCTL, Cmd::DM_DEV_SUSPEND, DmIoctl);
@@ -149,9 +152,28 @@ impl DeviceMapper {
         Ok(DeviceMapper(f))
     }
 
-    /// Creates a device mapper device and configure it according to the `target` specification.
+    /// Creates a (crypt) device and configure it according to the `target` specification.
+    /// The path to the generated device is "/dev/mapper/<name>".
+    pub fn create_crypt_device(&self, name: &str, target: &DmCryptTarget) -> Result<PathBuf> {
+        self.create_device(name, target.as_slice())
+    }
+
+    /// Creates a (verity) device and configure it according to the `target` specification.
     /// The path to the generated device is "/dev/mapper/<name>".
     pub fn create_verity_device(&self, name: &str, target: &DmVerityTarget) -> Result<PathBuf> {
+        self.create_device(name, target.as_slice())
+    }
+
+    /// Removes a mapper device.
+    pub fn delete_device_deferred(&self, name: &str) -> Result<()> {
+        let mut data = DmIoctl::new(name)?;
+        data.flags |= Flag::DM_DEFERRED_REMOVE;
+        dm_dev_remove(self, &mut data)
+            .context(format!("failed to remove device with name {}", &name))?;
+        Ok(())
+    }
+
+    fn create_device(&self, name: &str, target: &[u8]) -> Result<PathBuf> {
         // Step 1: create an empty device
         let mut data = DmIoctl::new(name)?;
         data.set_uuid(&uuid("apkver".as_bytes())?)?;
@@ -159,7 +181,7 @@ impl DeviceMapper {
             .context(format!("failed to create an empty device with name {}", &name))?;
 
         // Step 2: load table onto the device
-        let payload_size = size_of::<DmIoctl>() + target.as_slice().len();
+        let payload_size = size_of::<DmIoctl>() + target.len();
 
         let mut data = DmIoctl::new(name)?;
         data.data_size = payload_size as u32;
@@ -169,7 +191,7 @@ impl DeviceMapper {
 
         let mut payload = Vec::with_capacity(payload_size);
         payload.extend_from_slice(data.as_slice());
-        payload.extend_from_slice(target.as_slice());
+        payload.extend_from_slice(target);
         dm_table_load(self, payload.as_mut_ptr() as *mut DmIoctl)
             .context("failed to load table")?;
 
@@ -182,15 +204,6 @@ impl DeviceMapper {
         let path = Path::new(MAPPER_DEV_ROOT).join(&name);
         wait_for_path(&path)?;
         Ok(path)
-    }
-
-    /// Removes a mapper device
-    pub fn delete_device_deferred(&self, name: &str) -> Result<()> {
-        let mut data = DmIoctl::new(name)?;
-        data.flags |= Flag::DM_DEFERRED_REMOVE;
-        dm_dev_remove(self, &mut data)
-            .context(format!("failed to remove device with name {}", &name))?;
-        Ok(())
     }
 }
 
