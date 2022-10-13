@@ -12,6 +12,8 @@ rust_ffi_shared {
         "android.system.virtualization.payload-rust",
         "libandroid_logger",
         "libanyhow",
+        "libbinder_rpc_unstable",
+        "libbinder_rpc_unstable_bindgen_sys",
         "libbinder_rs",
         "liblog_rust",
     ],

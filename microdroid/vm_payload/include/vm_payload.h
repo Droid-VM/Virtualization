@@ -19,6 +19,8 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+#include <binder_rpc_unstable.hpp>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -29,6 +31,21 @@ extern "C" {
  * \return true if the notification succeeds else false.
  */
 bool AVmPayload_notifyPayloadReady(void);
+
+/**
+ * Runs a binder RPC server, serving the supplied binder service implementation on the given vsock
+ * port.
+ *
+ * If and when the server is ready for connections (it is listening on the port), `on_ready` is
+ * called to allow appropriate action to be taken - e.g. to notify clients that they may now
+ * attempt to connect.
+ *
+ * The current thread is joined to the binder thread pool to handle incoming messages.
+ *
+ * Returns true if the server has shutdown normally, false if it failed in some way.
+ */
+bool AVmPayload_runVsockRpcServer(AIBinder *service, unsigned int port,
+                                  void (*readyCallback)(void *param), void *param);
 
 /**
  * Get a secret that is uniquely bound to this VM instance. The secrets are 32-byte values and the

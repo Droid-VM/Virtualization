@@ -17,8 +17,9 @@
 use android_system_virtualization_payload::aidl::android::system::virtualization::payload::IVmPayloadService::{
     IVmPayloadService, VM_PAYLOAD_SERVICE_NAME};
 use anyhow::{Context, Result};
-use binder::{wait_for_interface, Strong};
+use binder::{wait_for_interface, Strong, unstable_api::AIBinder};
 use log::{error, info, Level};
+use  std::os::raw::c_void;
 
 /// Notifies the host that the payload is ready.
 /// Returns true if the notification succeeds else false.
@@ -40,6 +41,26 @@ pub extern "C" fn AVmPayload_notifyPayloadReady() -> bool {
 /// Returns a `Result` containing error information if failed.
 fn try_notify_payload_ready() -> Result<()> {
     get_vm_payload_service()?.notifyPayloadReady().context("Cannot notify payload ready")
+}
+
+/// Runs a binder RPC server, serving the supplied binder service implementation on the given vsock
+/// port.
+///
+/// If and when the server is ready for connections (it is listening on the port), `on_ready` is
+/// called to allow appropriate action to be taken - e.g. to notify clients that they may now
+/// attempt to connect.
+///
+/// The current thread is joined to the binder thread pool to handle incoming messages.
+///
+/// Returns true if the server has shutdown normally, false if it failed in some way.
+#[no_mangle]
+pub extern "C" fn AVmPayload_runVsockRpcServer(
+    service: *mut AIBinder,
+    port: u32,
+    on_ready: Option<unsafe extern "C" fn(param: *mut c_void)>,
+    param: *mut c_void,
+) -> bool {
+    unsafe { binder_rpc_unstable_bindgen::RunRpcServerCallback(service, port, on_ready, param) }
 }
 
 /// Get a secret that is uniquely bound to this VM instance.
