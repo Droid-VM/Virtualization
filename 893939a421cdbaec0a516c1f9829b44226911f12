@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f41d1488_78bb4a90",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsBenchmarks.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-13T09:23:24Z",
+      "side": 1,
+      "message": "Ack. I think 4M looks ok for now as the the transfer isn\u0027t very fast.",
+      "parentUuid": "fb132e75_4a9235ce",
+      "range": {
+        "startLine": 51,
+        "startChar": 39,
+        "endLine": 51,
+        "endChar": 41
+      },
+      "revId": "893939a421cdbaec0a516c1f9829b44226911f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "47b92979_296ff590",
         "filename": "authfs/tests/java/src/com/android/fs/AuthFsBenchmarks.java",
         "patchSetId": 3
@@ -54,6 +78,30 @@
       "writtenOn": "2022-10-12T17:24:34Z",
       "side": 1,
       "message": "Just curious, what is this and why do we need it as a prefix?\n\nDoes it need to be done per test (not really a big deal)?",
+      "range": {
+        "startLine": 67,
+        "startChar": 49,
+        "endLine": 67,
+        "endChar": 77
+      },
+      "revId": "893939a421cdbaec0a516c1f9829b44226911f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06b68c8d_7a46e161",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsBenchmarks.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-13T09:23:24Z",
+      "side": 1,
+      "message": "All the metrics are quite noisy before across different devices.\nDavid said that PROTO1.0, PRPOTO1.1, and EVT1.0 don\u0027t have some hardware (idk exactly), which is in EVT1.1 and later devices so he added this filter ag/20024596.",
+      "parentUuid": "47b92979_296ff590",
       "range": {
         "startLine": 67,
         "startChar": 49,
@@ -89,6 +137,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ffd9c913_7f635f06",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsBenchmarks.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-13T09:23:24Z",
+      "side": 1,
+      "message": "Mmm, in that sense should the reads with vs w/o fs-verity still be different? Is the fs-verity done during the setup period?\n\nBTW, the read looks a bit slow. Is that expected?\n\n[1/2] com.android.virt.fs.AuthFsBenchmarks#seqReadWithoutFsverityVerification: PASSED (3.942s)\n        avf_perf[hwrev_a0]/authfs/seq_read_without_fsverity_average_mb_per_sec: 11.78214927453235\n        avf_perf[hwrev_a0]/authfs/seq_read_without_fsverity_max_mb_per_sec: 16.42846454087401\n        avf_perf[hwrev_a0]/authfs/seq_read_without_fsverity_min_mb_per_sec: 7.5006837013831635\n        avf_perf[hwrev_a0]/authfs/seq_read_without_fsverity_stdev_mb_per_sec: 4.065003737722742\n[2/2] com.android.virt.fs.AuthFsBenchmarks#seqReadWithFsverityVerification: PASSED (4.230s)\n        avf_perf[hwrev_a0]/authfs/seq_read_with_fsverity_average_mb_per_sec: 10.242474029709504\n        avf_perf[hwrev_a0]/authfs/seq_read_with_fsverity_max_mb_per_sec: 14.929603281437224\n        avf_perf[hwrev_a0]/authfs/seq_read_with_fsverity_min_mb_per_sec: 6.53422802531805\n        avf_perf[hwrev_a0]/authfs/seq_read_with_fsverity_stdev_mb_per_sec: 3.009292523843612",
+      "parentUuid": "55d6fedb_295696ab",
+      "range": {
+        "startLine": 85,
+        "startChar": 36,
+        "endLine": 85,
+        "endChar": 67
+      },
+      "revId": "893939a421cdbaec0a516c1f9829b44226911f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fcdcb2bc_85380efe",
         "filename": "authfs/tests/java/src/com/android/fs/AuthFsBenchmarks.java",
         "patchSetId": 3
@@ -100,6 +172,30 @@
       "writtenOn": "2022-10-12T17:24:34Z",
       "side": 1,
       "message": "sequential_... (or seq_ if length is a concern)",
+      "range": {
+        "startLine": 88,
+        "startChar": 38,
+        "endLine": 88,
+        "endChar": 42
+      },
+      "revId": "893939a421cdbaec0a516c1f9829b44226911f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41879fa8_0f62570a",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsBenchmarks.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-13T09:23:24Z",
+      "side": 1,
+      "message": "Done. Is there a convenient way to measure random read with host tests?",
+      "parentUuid": "fcdcb2bc_85380efe",
       "range": {
         "startLine": 88,
         "startChar": 38,
