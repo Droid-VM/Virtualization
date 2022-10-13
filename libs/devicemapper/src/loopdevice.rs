@@ -146,6 +146,7 @@ fn try_attach<P: AsRef<Path>>(
         .write(true)
         .open(&device_path)
         .context(format!("failed to open {:?}", &device_path))?;
+
     loop_configure(&device_file, &config)
         .context(format!("Failed to configure {:?}", &device_path))?;
 
