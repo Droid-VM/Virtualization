@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80a3ea5d_2f95dd02",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-13T21:28:16Z",
+      "side": 1,
+      "message": "I think you should just have a #include for the relevant header (binder_ibinder.h?) here.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 16
+      },
+      "revId": "b201151386d384d49bbc4d75c81bb99ff5a396ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9331c00b_ba1c335d",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-13T21:28:16Z",
+      "side": 1,
+      "message": "This should probably reference `AVmPayload_notifyPayloadReady`.\n\nWe should probably also say the callback is called at most once.",
+      "range": {
+        "startLine": 40,
+        "startChar": 49,
+        "endLine": 41,
+        "endChar": 22
+      },
+      "revId": "b201151386d384d49bbc4d75c81bb99ff5a396ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46703e2d_0c6435f0",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-13T21:28:16Z",
+      "side": 1,
+      "message": "\\return\n\nAlso you should probably add \\param directives for each parameter.",
+      "range": {
+        "startLine": 45,
+        "startChar": 3,
+        "endLine": 45,
+        "endChar": 10
+      },
+      "revId": "b201151386d384d49bbc4d75c81bb99ff5a396ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cff768c9_0138eeb3",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-13T21:28:16Z",
+      "side": 1,
+      "message": "For C compatibility this needs to be `struct AIBinder`, unless you add or #include the typedef.",
+      "range": {
+        "startLine": 47,
+        "startChar": 34,
+        "endLine": 47,
+        "endChar": 42
+      },
+      "revId": "b201151386d384d49bbc4d75c81bb99ff5a396ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
