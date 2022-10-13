@@ -70,6 +70,24 @@
       "parentUuid": "3640da1a_732eb158",
       "revId": "edd56fe63fe36a2224df47767ffca7ce1422e8f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ccf8173_4033569c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-13T00:27:13Z",
+      "side": 1,
+      "message": "Actually I think I wholly garbled that.\n\nI was surprised none of the VM logs appeared, but I suspected that may be due to debug not being enabled. I did try running with full debug, but then the bug failed to reproduce.\n\nSo I think actually, yes, I do want this even for non-debuggable. An alternative would be to add a bunch more error codes (or perhaps sub-codes), but that isn\u0027t really as good - I want to know what OS error happened and on what file and in what context.\n\nAs long as we think there\u0027s no significant risk of leaking secrets - and this is before the payload starts - I think something similar to this patch is the way forward. The details of the encoding are negotiable of course.\n\nAnd the extra context() calls would be useful regardless.",
+      "parentUuid": "2838852d_4ec3cfa2",
+      "revId": "edd56fe63fe36a2224df47767ffca7ce1422e8f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
