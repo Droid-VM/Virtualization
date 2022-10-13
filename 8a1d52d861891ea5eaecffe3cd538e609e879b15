@@ -39,6 +39,30 @@
       },
       "revId": "8a1d52d861891ea5eaecffe3cd538e609e879b15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9741f89e_305cf2c0",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsBenchmarks.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-13T16:51:53Z",
+      "side": 1,
+      "message": "Actually I think as I have set up fd_server and authfs inside the loop, the cache gets reset every time. I tried to skip the first read, with the setup inside the loop, that doesn\u0027t change the result so much, skipping the first read or not doesn\u0027t look like a big impact. Here\u0027s the result without the first read.\n```\n[1/1] com.android.virt.fs.AuthFsBenchmarks#seqReadRemoteFile: PASSED (4.499s)\n        avf_perf[hwrev_a0]/authfs/seq_read_average_mb_per_sec: 11.474709693076324\n        avf_perf[hwrev_a0]/authfs/seq_read_max_mb_per_sec: 13.848638302518118\n        avf_perf[hwrev_a0]/authfs/seq_read_min_mb_per_sec: 9.056987113127766\n        avf_perf[hwrev_a0]/authfs/seq_read_stdev_mb_per_sec: 2.0555555880228455\n```\n\nHowever, if I move the setup part outside the loop and do it only once, the read is much faster. That\u0027s what you want as a \"warm\" read here, right?\n```\n[1/1] com.android.virt.fs.AuthFsBenchmarks#seqReadRemoteFile: PASSED (2.511s)\n        avf_perf[hwrev_a0]/authfs/seq_read_without_fsverity_average_mb_per_sec: 54.88744555426907\n        avf_perf[hwrev_a0]/authfs/seq_read_without_fsverity_max_mb_per_sec: 56.134595603917376\n        avf_perf[hwrev_a0]/authfs/seq_read_without_fsverity_min_mb_per_sec: 52.750895921216326\n        avf_perf[hwrev_a0]/authfs/seq_read_without_fsverity_stdev_mb_per_sec: 1.280887707477643\n```\nI also don\u0027t have a strong opinion here. We can keep the second version as benchmark.\n\nNotes about `echo 1 \u003e /proc/sys/vm/drop_caches`: I thought this could clear all the internal cache, but when adding the benchmark for virtio-blk in the past, it looks like the second read with the page cache cleared is still much higher than the first read (See [1] comment)\n\n\n[1] https://r.android.com/c/platform/packages/modules/Virtualization/+/2163081/12/tests/benchmark/src/native/benchmarkbinary.cpp",
+      "parentUuid": "c3cf30f1_018b4fcd",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 93,
+        "endChar": 47
+      },
+      "revId": "8a1d52d861891ea5eaecffe3cd538e609e879b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
