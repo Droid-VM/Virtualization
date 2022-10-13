@@ -16,6 +16,29 @@
       "message": "Hi Victor, thanks for the review! Could you take another look?",
       "revId": "8a1d52d861891ea5eaecffe3cd538e609e879b15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3cf30f1_018b4fcd",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsBenchmarks.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-10-13T15:43:18Z",
+      "side": 1,
+      "message": "TL;DR `cat input.4m \u003e /dev/null` before the loop\n\nInseob\u0027s change reminds me about page cache.  The first iteration might be slower if the file is mostly not in the page cache.\n\nTo make it consistent, we have two options, warm up the cache (just `cat file`) before the loop, or drop the cache before each trial (`echo 1 \u003e /proc/sys/vm/drop_caches`).\n\nI don\u0027t have a strong opinion, but am inclined to warm up the cache first.  The cache status of the backing file isn\u0027t something authfs can control, so maybe we should just exclude that in the benchmark.",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 93,
+        "endChar": 47
+      },
+      "revId": "8a1d52d861891ea5eaecffe3cd538e609e879b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

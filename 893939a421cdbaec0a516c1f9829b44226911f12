@@ -207,6 +207,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96b48897_e043904f",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsBenchmarks.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-10-13T15:43:18Z",
+      "side": 1,
+      "message": "The order of magnitude looks similar to what Inseob measured before.  The filesystem is FUSE-based and is used to access files over a socket, so it\u0027s not fast.  We haven\u0027t spent much time improve the performance since it hasn\u0027t been a problem for our current use case.\n\nThe verification happens in FUSE before serving the content from the (untrusted) host.  It should be as fast as without verification now (but the setup is a bit slower).",
+      "parentUuid": "020634e7_635d9044",
+      "range": {
+        "startLine": 85,
+        "startChar": 36,
+        "endLine": 85,
+        "endChar": 67
+      },
+      "revId": "893939a421cdbaec0a516c1f9829b44226911f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fcdcb2bc_85380efe",
@@ -244,6 +268,30 @@
       "side": 1,
       "message": "Done. Is there a convenient way to measure random read with host tests?",
       "parentUuid": "fcdcb2bc_85380efe",
+      "range": {
+        "startLine": 88,
+        "startChar": 38,
+        "endLine": 88,
+        "endChar": 42
+      },
+      "revId": "893939a421cdbaec0a516c1f9829b44226911f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc1f37bb_4d989051",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsBenchmarks.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-10-13T15:43:18Z",
+      "side": 1,
+      "message": "fio is kind of the standard filesystem benchmarking tool, but it\u0027s no longer in AOSP for some reason.\n\nInseob wrote a simple program and may be reusable.  It\u0027s probably not used anywhere, so if you want, you could modify it to fit your needs.\n\nhttps://android-review.googlesource.com/c/platform/packages/modules/Virtualization/+/1878256/4/tests/benchmark/fs_benchmark.cpp",
+      "parentUuid": "41879fa8_0f62570a",
       "range": {
         "startLine": 88,
         "startChar": 38,
