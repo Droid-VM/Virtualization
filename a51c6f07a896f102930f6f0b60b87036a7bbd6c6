@@ -46,6 +46,40 @@
       },
       "revId": "a51c6f07a896f102930f6f0b60b87036a7bbd6c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8873620d_67a226aa",
+        "filename": "vmbase/example/src/layout.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-13T18:50:50Z",
+      "side": 1,
+      "message": "Add a safety comment.",
+      "revId": "a51c6f07a896f102930f6f0b60b87036a7bbd6c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c935277_5f2762e0",
+        "filename": "vmbase/example/src/layout.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-13T18:50:50Z",
+      "side": 1,
+      "message": "This could result in an unaligned read if `base` or `off` are not 8-byte aligned, so you need to either ensure that they are properly aligned (e.g. with an assertion or bit masking) or mark this function as unsafe.",
+      "revId": "a51c6f07a896f102930f6f0b60b87036a7bbd6c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
