@@ -63,6 +63,30 @@
       },
       "revId": "8a1d52d861891ea5eaecffe3cd538e609e879b15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08f922c3_2857add9",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsBenchmarks.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-10-13T17:05:32Z",
+      "side": 1,
+      "message": "When you move the setup before the loop, each iteration shares the same mount in the guest, and the guest won\u0027t need to re-fetch the file from the host after the first read.\n\nWe want to keep the setup inside the loop, i.e. in the VM we always remount a new filesystem instance to test against.  The cache I was talking about is the host\u0027s, i.e. what fd_server reads from.\n\nRe drop_caches: dropping cache in the guest is only necessary with the same mount in the guest (IIUC from the previous comment), but in this case we\u0027re talking about the host.",
+      "parentUuid": "9741f89e_305cf2c0",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 93,
+        "endChar": 47
+      },
+      "revId": "8a1d52d861891ea5eaecffe3cd538e609e879b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
