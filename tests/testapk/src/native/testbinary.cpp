@@ -29,7 +29,6 @@
 #include <unistd.h>
 #include <vm_payload.h>
 
-#include <binder_rpc_unstable.hpp>
 #include <string>
 
 using android::base::ErrnoError;
@@ -121,8 +120,8 @@ Result<void> start_test_service() {
             abort();
         }
     };
-    if (!RunRpcServerCallback(testService->asBinder().get(), testService->SERVICE_PORT, callback,
-                              nullptr)) {
+    if (!AVmPayload_runVsockRpcServer(testService->asBinder().get(), testService->SERVICE_PORT,
+                                      callback, nullptr)) {
         return Error() << "RPC Server failed to run";
     }
 
