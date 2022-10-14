@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd5f384a_9031b92b",
+        "filename": "authfs/tests/measure_io.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-10-14T16:17:23Z",
+      "side": 1,
+      "message": "Could we derive automatically with stat(2)?",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 42
+      },
+      "revId": "640e4b879af47974d5a714695f7f8919581d9895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eacd3a5a_a98670b4",
+        "filename": "authfs/tests/measure_io.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-10-14T16:17:23Z",
+      "side": 1,
+      "message": "Does this work? `auto fd \u003d std::make_unique(open(...), \u0026close);`?",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 48
+      },
+      "revId": "640e4b879af47974d5a714695f7f8919581d9895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33e43e58_a7f498de",
+        "filename": "authfs/tests/measure_io.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-10-14T16:17:23Z",
+      "side": 1,
+      "message": "You can simplify this with `pread(fd, buf, kBlockSizeBytes, offsets[i])`",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 52
+      },
+      "revId": "640e4b879af47974d5a714695f7f8919581d9895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
