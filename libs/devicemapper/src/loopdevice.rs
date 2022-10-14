@@ -23,9 +23,9 @@
 
 mod sys;
 
+use crate::util::*;
 use anyhow::{Context, Result};
 use data_model::DataInit;
-use dm::util::*;
 use libc::O_DIRECT;
 use std::fs::{File, OpenOptions};
 use std::mem::size_of;
