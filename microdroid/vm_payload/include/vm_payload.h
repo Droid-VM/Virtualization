@@ -73,6 +73,8 @@ bool AVmPayload_getDiceAttestationChain(void *data, size_t size, size_t *total);
  */
 bool AVmPayload_getDiceAttestationCdi(void *data, size_t size, size_t *total);
 
+bool AVmPayload_forwardStdioToHost();
+
 #ifdef __cplusplus
 } // extern "C"
 #endif
