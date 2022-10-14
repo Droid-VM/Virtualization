@@ -17,6 +17,7 @@ java_test_host {
     data_device_bins_first: [
         "open_then_run",
         "fsverity",
+        "measure_read",
     ],
     per_testcase_directory: true,
     data: [
@@ -41,4 +42,15 @@ rust_test {
     ],
     test_suites: ["general-tests"],
     test_harness: false,
+}
+
+cc_binary {
+    name: "measure_read",
+    srcs: [
+        "measure_read.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "liblog",
+    ],
 }

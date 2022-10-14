@@ -36,6 +36,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +46,8 @@ import java.util.Map;
 public class AuthFsBenchmarks extends BaseHostJUnit4Test {
     private static final int TRIAL_COUNT = 5;
     private static final double NANO_SECS_PER_SEC = 1_000_000_000.;
-    private static final double INPUT_SIZE_IN_MB = 4.;
+    private static final int INPUT_SIZE_IN_MB = 4;
+    private static final String MEASURE_READ_BIN = "/data/local/tmp/measure_read";
 
     /** fs-verity digest (sha256) of testdata/input.4m */
     private static final String DIGEST_4M =
@@ -76,27 +78,29 @@ public class AuthFsBenchmarks extends BaseHostJUnit4Test {
 
     @Test
     public void seqReadRemoteFile() throws Exception {
-        List<Double> transferRates = new ArrayList<>(TRIAL_COUNT);
+        File measureReadBin = new File(MEASURE_READ_BIN);
+        mAuthFsTestRule.getMicrodroidDevice().pushFile(measureReadBin, MEASURE_READ_BIN);
         // Cache the file in memory for the host.
         String cmd = "cat " + mAuthFsTestRule.TEST_DIR + "/input.4m > /dev/null";
         mAuthFsTestRule.getAndroid().run(cmd);
+
+        List<Double> transferRates = new ArrayList<>(TRIAL_COUNT);
         for (int i = 0; i < TRIAL_COUNT + 1; ++i) {
             mAuthFsTestRule.runFdServerOnAndroid(
                     "--open-ro 3:input.4m --open-ro 4:input.4m.fsv_meta", "--ro-fds 3:4");
             mAuthFsTestRule.runAuthFsOnMicrodroid("--remote-ro-file 3:" + DIGEST_4M);
-            double elapsedSeconds = measureSeqReadOnMicrodroid("3");
-            transferRates.add(INPUT_SIZE_IN_MB / elapsedSeconds);
+            double transferRate = measureSeqReadOnMicrodroid("3", INPUT_SIZE_IN_MB, "seq");
+            transferRates.add(transferRate);
         }
         reportMetrics(transferRates, "seq_read", "mb_per_sec");
     }
 
-    private double measureSeqReadOnMicrodroid(String filename) throws DeviceNotAvailableException {
-        String cmd = "cat " + mAuthFsTestRule.MOUNT_DIR + "/" + filename + " > /dev/null";
-        // Ideally, we should measure the time in the VM to avoid the adb and host tests latency.
-        double startTime = System.nanoTime();
-        mAuthFsTestRule.getMicrodroid().run(cmd);
-        double elapsedSeconds = (System.nanoTime() - startTime) / NANO_SECS_PER_SEC;
-        return elapsedSeconds;
+    private double measureSeqReadOnMicrodroid(String filename, int fileSizeMb, String readMode)
+            throws DeviceNotAvailableException {
+        String filePath = mAuthFsTestRule.MOUNT_DIR + "/" + filename;
+        String cmd = MEASURE_READ_BIN + " " + filePath + " " + fileSizeMb + " " + readMode;
+        String readRate = mAuthFsTestRule.getMicrodroid().run(cmd);
+        return Double.parseDouble(readRate);
     }
 
     private void reportMetrics(List<Double> metrics, String name, String unit) {
