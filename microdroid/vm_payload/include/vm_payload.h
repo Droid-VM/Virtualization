@@ -107,6 +107,15 @@ bool AVmPayload_getDiceAttestationCdi(void *data, size_t size, size_t *total);
  */
 const char *AVmPayload_getApkContentsPath(void);
 
+/**
+ * Initiates a socket connection with the host and duplicates stdin, stdout and
+ * stderr file descriptors to the socket.
+ *
+ * \return true on success and false on failure. If unsuccessful, the stdio FDs
+ * may be in an inconsistent state.
+ */
+bool AVmPayload_setupStdioProxy();
+
 #ifdef __cplusplus
 } // extern "C"
 #endif
