@@ -23,12 +23,6 @@ import android.system.virtualmachineservice.VirtualMachineMemStatus;
 interface IVirtualMachineService {
     /**
      * Port number that VirtualMachineService listens on connections from the guest VMs for the
-     * payload input and output.
-     */
-    const int VM_STREAM_SERVICE_PORT = 3000;
-
-    /**
-     * Port number that VirtualMachineService listens on connections from the guest VMs for the
      * VirtualMachineService binder service.
      */
     const int VM_BINDER_SERVICE_PORT = 5000;
@@ -68,4 +62,9 @@ interface IVirtualMachineService {
      * Notifies the current memory status of the VM.
      */
     void notifyMemStatus(in VirtualMachineMemStatus memStatus);
+
+    /**
+     * Notifies the current memory status of the VM.
+     */
+    void connectPayloadStdioProxy(int port);
 }
