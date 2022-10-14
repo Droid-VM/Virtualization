@@ -28,12 +28,15 @@ constexpr int kBlockSizeBytes = 4096;
 constexpr int kNumBytesPerMB = 1024 * 1024;
 
 int main(int argc, const char *argv[]) {
-    if (argc != 4 || !(strcmp(argv[3], "rand") == 0 || strcmp(argv[3], "seq") == 0)) {
-        std::cerr << "Usage: " << argv[0] << " <filename> <file_size_mb> <rand|seq>" << std::endl;
+    if (argc != 5 || !(strcmp(argv[3], "rand") == 0 || strcmp(argv[3], "seq") == 0) ||
+        !(strcmp(argv[4], "r") == 0 || strcmp(argv[4], "w") == 0)) {
+        std::cerr << "Usage: " << argv[0] << " <filename> <file_size_mb> <rand|seq> <r|w>"
+                  << std::endl;
         return EXIT_FAILURE;
     }
     int file_size_mb = std::stoi(argv[2]);
     bool is_rand = (strcmp(argv[3], "rand") == 0);
+    bool is_read = (strcmp(argv[4], "r") == 0);
     const int block_count = file_size_mb * kNumBytesPerMB / kBlockSizeBytes;
     std::vector<int> offsets;
     if (is_rand) {
@@ -42,7 +45,7 @@ int main(int argc, const char *argv[]) {
         for (auto i = 0; i < block_count; ++i) offsets.push_back(i * kBlockSizeBytes);
         std::shuffle(offsets.begin(), offsets.end(), rd);
     }
-    int fd(open(argv[1], O_RDONLY | O_CLOEXEC));
+    int fd(open(argv[1], is_read ? O_RDONLY : O_WRONLY | O_CREAT, 0644));
     if (fd == -1) {
         std::cerr << "failed to open file: " << argv[1] << std::endl;
         return EXIT_FAILURE;
@@ -57,7 +60,7 @@ int main(int argc, const char *argv[]) {
                 return EXIT_FAILURE;
             }
         }
-        auto bytes = read(fd, buf, kBlockSizeBytes);
+        auto bytes = is_read ? read(fd, buf, kBlockSizeBytes) : write(fd, buf, kBlockSizeBytes);
         if (bytes == 0) {
             std::cerr << "unexpected end of file" << std::endl;
             return EXIT_FAILURE;
