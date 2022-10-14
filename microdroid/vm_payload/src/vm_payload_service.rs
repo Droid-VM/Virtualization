@@ -19,6 +19,10 @@ use android_system_virtualization_payload::aidl::android::system::virtualization
 use anyhow::{Context, Result};
 use binder::{wait_for_interface, Strong};
 use log::{error, info, Level};
+use std::io;
+use std::fs::File;
+use std::os::unix::prelude::RawFd;
+use std::os::unix::io::AsRawFd;
 
 /// Notifies the host that the payload is ready.
 /// Returns true if the notification succeeds else false.
@@ -147,6 +151,39 @@ pub unsafe extern "C" fn AVmPayload_getDiceAttestationCdi(
 
 fn try_get_dice_attestation_cdi() -> Result<Vec<u8>> {
     get_vm_payload_service()?.getDiceAttestationCdi().context("Cannot get attestation CDI")
+}
+
+/// Notifies the host that the payload is ready.
+/// Returns true if the notification succeeds else false.
+#[no_mangle]
+pub extern "C" fn AVmPayload_forwardStdioToHost() -> bool {
+    if let Err(e) = try_forward_stdio_to_host() {
+        error!("{:?}", e);
+        false
+    } else {
+        info!("Notified host payload ready successfully");
+        true
+    }
+}
+
+fn dup2(old: &File, new: RawFd) -> Result<()> {
+    // SAFETY - old FD is only borrowed, new FD is created without a wrapper object
+    let ret = unsafe { libc::dup2(old.as_raw_fd(), new) };
+    if ret != 0 {
+        Err(io::Error::last_os_error()).context("dup2 failed")?;
+    }
+    Ok(())
+}
+
+/// Notifies the host that the payload is ready.
+/// Returns a `Result` containing error information if failed.
+fn try_forward_stdio_to_host() -> Result<()> {
+    let fd =
+        get_vm_payload_service()?.createHostStdioSocket().context("Cannot notify payload ready")?;
+    dup2(fd.as_ref(), libc::STDIN_FILENO)?;
+    dup2(fd.as_ref(), libc::STDOUT_FILENO)?;
+    dup2(fd.as_ref(), libc::STDERR_FILENO)?;
+    Ok(())
 }
 
 fn get_vm_payload_service() -> Result<Strong<dyn IVmPayloadService>> {
