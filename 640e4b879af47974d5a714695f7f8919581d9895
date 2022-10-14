@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0861ed57_221a2199",
+        "filename": "authfs/tests/measure_io.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-14T17:15:54Z",
+      "side": 1,
+      "message": "I think we can remove this argument for read, but later I\u0027ll still need to add this argument back for write [1]. In that sense, I\u0027d like to keep it here to have the same argument parser for both read/write.\n\n[1] https://r.android.com/c/platform/packages/modules/Virtualization/+/2254302/1/authfs/tests/measure_io.cpp",
+      "parentUuid": "bd5f384a_9031b92b",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 42
+      },
+      "revId": "640e4b879af47974d5a714695f7f8919581d9895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eacd3a5a_a98670b4",
         "filename": "authfs/tests/measure_io.cpp",
         "patchSetId": 6
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-14T16:17:23Z",
       "side": 1,
       "message": "Does this work? `auto fd \u003d std::make_unique(open(...), \u0026close);`?",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 48
+      },
+      "revId": "640e4b879af47974d5a714695f7f8919581d9895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fa41540_c2c8a5a0",
+        "filename": "authfs/tests/measure_io.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-14T17:15:54Z",
+      "side": 1,
+      "message": "You mean make fd like this type `std::unique_ptr\u003cint, void(*)(int*)\u003e`? I\u0027m not sure if make_unique can take a deleter[1]. Maybe it\u0027s easier just to use `android::base::unique_fd` here.\n\n[1]http://go/cppref/cpp/memory/unique_ptr/make_unique",
+      "parentUuid": "eacd3a5a_a98670b4",
       "range": {
         "startLine": 45,
         "startChar": 4,
@@ -60,6 +108,30 @@
       "writtenOn": "2022-10-14T16:17:23Z",
       "side": 1,
       "message": "You can simplify this with `pread(fd, buf, kBlockSizeBytes, offsets[i])`",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 60,
+        "endChar": 52
+      },
+      "revId": "640e4b879af47974d5a714695f7f8919581d9895",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bcd1f4b_550f82ef",
+        "filename": "authfs/tests/measure_io.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-14T17:15:54Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "33e43e58_a7f498de",
       "range": {
         "startLine": 54,
         "startChar": 8,
