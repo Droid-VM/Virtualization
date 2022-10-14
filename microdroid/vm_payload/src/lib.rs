@@ -17,6 +17,7 @@
 mod vm_payload_service;
 
 pub use vm_payload_service::{
-    AVmPayload_getDiceAttestationCdi, AVmPayload_getDiceAttestationChain,
-    AVmPayload_getVmInstanceSecret, AVmPayload_notifyPayloadReady,
+    AVmPayload_forwardStdioToHost, AVmPayload_getDiceAttestationCdi,
+    AVmPayload_getDiceAttestationChain, AVmPayload_getVmInstanceSecret,
+    AVmPayload_notifyPayloadReady,
 };

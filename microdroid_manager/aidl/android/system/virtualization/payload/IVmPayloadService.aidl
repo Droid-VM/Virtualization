@@ -16,6 +16,8 @@
 
 package android.system.virtualization.payload;
 
+import android.os.ParcelFileDescriptor;
+
 /**
  * This interface regroups the tasks that payloads delegate to
  * Microdroid Manager for execution.
@@ -58,4 +60,9 @@ interface IVmPayloadService {
      * @throws SecurityException if the use of test APIs is not permitted.
      */
     byte[] getDiceAttestationCdi();
+
+    /**
+     * Foobar
+     */
+    ParcelFileDescriptor createHostStdioSocket();
 }
