@@ -24,7 +24,6 @@ import static com.google.common.truth.TruthJUnit.assume;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 import android.os.Build;
-import android.os.ParcelFileDescriptor;
 import android.os.SystemProperties;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineCallback;
@@ -45,7 +44,6 @@ import org.junit.runners.Parameterized;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.file.Files;
@@ -507,9 +505,14 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                     }
 
                     @Override
-                    public void onPayloadStarted(VirtualMachine vm, ParcelFileDescriptor stream) {
+                    public void onPayloadStarted(VirtualMachine vm) {
                         Log.i(TAG, "onPayloadStarted");
                         payloadStarted.complete(true);
+                    }
+
+                    @Override
+                    public void onStdioReady(VirtualMachine vm, ParcelFileDescriptor stream) {
+                        Log.i(TAG, "onStdioReady");
                         logVmOutput(TAG, new FileInputStream(stream.getFileDescriptor()),
                                 "Payload");
                     }
