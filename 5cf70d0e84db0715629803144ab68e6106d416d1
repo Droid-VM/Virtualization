@@ -16,6 +16,29 @@
       "message": "Hi Victor,\n\nThanks for the review!",
       "revId": "5cf70d0e84db0715629803144ab68e6106d416d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0fab1d4_31501cc2",
+        "filename": "authfs/tests/measure_io.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-10-14T17:30:47Z",
+      "side": 1,
+      "message": "nit: Should we just use offsets[i] for simplicity? If you initialize unconditionally.\n\n(When read() returns less than the requested size in the middle, it also guarantees to touch every block.  But since it should almost never happen, it shouldn\u0027t matter statistically)",
+      "range": {
+        "startLine": 58,
+        "startChar": 34,
+        "endLine": 58,
+        "endChar": 65
+      },
+      "revId": "5cf70d0e84db0715629803144ab68e6106d416d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
