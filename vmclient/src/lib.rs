@@ -74,7 +74,10 @@ pub struct VmInstance {
 pub trait VmCallback {
     /// Called when the payload has been started within the VM. If present, `stream` is connected
     /// to the stdin/stdout of the payload.
-    fn on_payload_started(&self, cid: i32, stream: Option<&File>) {}
+    fn on_payload_started(&self, cid: i32) {}
+
+    /// Callend when the payload has notified Virtualization Service that it is ready to serve
+    fn on_stdio_ready(&self, cid: i32, fd: &File);
 
     /// Callend when the payload has notified Virtualization Service that it is ready to serve
     /// clients.
@@ -269,14 +272,17 @@ impl Debug for VirtualMachineCallback {
 impl Interface for VirtualMachineCallback {}
 
 impl IVirtualMachineCallback for VirtualMachineCallback {
-    fn onPayloadStarted(
-        &self,
-        cid: i32,
-        stream: Option<&ParcelFileDescriptor>,
-    ) -> BinderResult<()> {
+    fn onPayloadStarted(&self, cid: i32) -> BinderResult<()> {
         self.state.notify_state(VirtualMachineState::STARTED);
         if let Some(ref callback) = self.client_callback {
-            callback.on_payload_started(cid, stream.map(ParcelFileDescriptor::as_ref));
+            callback.on_payload_started(cid);
+        }
+        Ok(())
+    }
+
+    fn onStdioReady(&self, cid: i32, stream: &ParcelFileDescriptor) -> BinderResult<()> {
+        if let Some(ref callback) = self.client_callback {
+            callback.on_stdio_ready(cid, stream.as_ref());
         }
         Ok(())
     }
