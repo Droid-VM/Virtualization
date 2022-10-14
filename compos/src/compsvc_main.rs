@@ -27,7 +27,7 @@ use compos_common::COMPOS_VSOCK_PORT;
 use log::{debug, error};
 use rpcbinder::run_vsock_rpc_server;
 use std::panic;
-use vm_payload_bindgen::AVmPayload_notifyPayloadReady;
+use vm_payload_bindgen::{AVmPayload_notifyPayloadReady, AVmPayload_setupStdioProxy};
 
 fn main() {
     if let Err(e) = try_main() {
@@ -44,6 +44,10 @@ fn try_main() -> Result<()> {
     panic::set_hook(Box::new(|panic_info| {
         error!("{}", panic_info);
     }));
+
+    if (!AVmPayload_setupStdioProxy()) {
+        warn!("Failed to setup stdio proxy");
+    }
 
     let service = compsvc::new_binder()?.as_binder();
     debug!("compsvc is starting as a rpc service.");
