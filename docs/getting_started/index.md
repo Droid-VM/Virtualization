@@ -71,6 +71,15 @@ as long as the bootloader remains unlocked. Otherwise, a fresh install of
 Android 13 followed by the manual steps above for flashing the `other` slot
 should be used as a last resort.
 
+Starting in Android 14, `pvmfw.img` can be built using the Android Build system:
+```
+lunch <target>
+m pvmfw_img
+```
+which packages the image under `${ANDROID_PRODUCT_OUT}/system/etc/pvmfw.img`.
+Note that the result is not intended to be used in Android 13 as not
+backward-compatibility is guaranteed.
+
 ## Running demo app
 
 The instruction is [here](../../demo/README.md).
