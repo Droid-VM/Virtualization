@@ -168,8 +168,10 @@ public class MainActivity extends AppCompatActivity {
                         private final ExecutorService mService = mExecutorService;
 
                         @Override
-                        public void onPayloadStarted(VirtualMachine vm,
-                                ParcelFileDescriptor stream) {
+                        public void onPayloadStarted(VirtualMachine vm) {}
+
+                        @Override
+                        public void onStdioReady(VirtualMachine vm, ParcelFileDescriptor stream) {
                             if (stream == null) {
                                 mPayloadOutput.postValue("(no output available)");
                                 return;

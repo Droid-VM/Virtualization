@@ -147,6 +147,8 @@ Result<void> verify_apk() {
 } // Anonymous namespace
 
 extern "C" int AVmPayload_main() {
+    AVmPayload_forwardStdioToHost();
+
     // disable buffering to communicate seamlessly
     setvbuf(stdin, nullptr, _IONBF, 0);
     setvbuf(stdout, nullptr, _IONBF, 0);

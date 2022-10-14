@@ -19,10 +19,13 @@ use android_system_virtualization_payload::aidl::android::system::virtualization
     BnVmPayloadService, IVmPayloadService, VM_PAYLOAD_SERVICE_NAME};
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
 use anyhow::{Context, Result};
-use binder::{Interface, BinderFeatures, ExceptionCode, Status, Strong, add_service};
+use binder::{Interface, BinderFeatures, ExceptionCode, ParcelFileDescriptor, Status, Strong, add_service};
 use log::error;
 use openssl::hkdf::hkdf;
 use openssl::md::Md;
+use std::fs::File;
+use vsock::VsockListener;
+use std::os::unix::io::{FromRawFd, IntoRawFd};
 
 /// Implementation of `IVmPayloadService`.
 struct VmPayloadService {
@@ -62,6 +65,27 @@ impl IVmPayloadService for VmPayloadService {
     fn getDiceAttestationCdi(&self) -> binder::Result<Vec<u8>> {
         self.check_restricted_apis_allowed()?;
         Ok(self.dice.cdi_attest.to_vec())
+    }
+
+    fn createHostStdioSocket(&self) -> binder::Result<ParcelFileDescriptor> {
+        const PORT: u32 = 12;
+        let listener =
+            VsockListener::bind_with_cid_port(libc::VMADDR_CID_HOST, PORT).map_err(|e| {
+                Status::new_service_specific_error_str(
+                    -1,
+                    Some(format!("Failed to start vsock listener: {:?}", e)),
+                )
+            })?;
+        self.virtual_machine_service.notifyStdioServerReady(PORT as i32)?;
+        let (stream, _) = listener.accept().map_err(|e| {
+            Status::new_service_specific_error_str(
+                -1,
+                Some(format!("Failed to accept vsock connection: {:?}", e)),
+            )
+        })?;
+        // SAFETY: ownership is transferred from stream to f
+        let f = unsafe { File::from_raw_fd(stream.into_raw_fd()) };
+        Ok(ParcelFileDescriptor::new(f))
     }
 }
 
