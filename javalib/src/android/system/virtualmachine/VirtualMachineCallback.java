@@ -18,7 +18,6 @@ package android.system.virtualmachine;
 
 import android.annotation.IntDef;
 import android.annotation.NonNull;
-import android.annotation.Nullable;
 import android.annotation.SuppressLint;
 import android.os.ParcelFileDescriptor;
 
@@ -136,10 +135,9 @@ public interface VirtualMachineCallback {
     int STOP_REASON_HANGUP = 16;
 
     /**
-     * Called when the payload starts in the VM. The stream, if non-null, provides access
-     * to the stdin/stdout of the VM payload.
+     * Called when the payload starts in the VM.
      */
-    void onPayloadStarted(@NonNull VirtualMachine vm, @Nullable ParcelFileDescriptor stream);
+    void onPayloadStarted(@NonNull VirtualMachine vm);
 
     /**
      * Called when the payload in the VM is ready to serve. See

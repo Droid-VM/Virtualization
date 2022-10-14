@@ -42,7 +42,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.android.microdroid.testservice.ITestService;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -168,15 +167,8 @@ public class MainActivity extends AppCompatActivity {
                         private final ExecutorService mService = mExecutorService;
 
                         @Override
-                        public void onPayloadStarted(VirtualMachine vm,
-                                ParcelFileDescriptor stream) {
-                            if (stream == null) {
-                                mPayloadOutput.postValue("(no output available)");
-                                return;
-                            }
-
-                            InputStream input = new FileInputStream(stream.getFileDescriptor());
-                            mService.execute(new Reader("payload", mPayloadOutput, input));
+                        public void onPayloadStarted(VirtualMachine vm) {
+                            mPayloadOutput.postValue("(Payload has started.)");
                         }
 
                         @Override
