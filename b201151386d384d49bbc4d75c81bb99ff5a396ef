@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a652e91_e722a10e",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-14T12:27:18Z",
+      "side": 1,
+      "message": "A forward declaration also means the client doesn\u0027t have to also use the other library if they don\u0027t want to, I\u0027m not opposed to leaving it as it is.",
+      "parentUuid": "1778795a_b8f23a03",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 16
+      },
+      "revId": "b201151386d384d49bbc4d75c81bb99ff5a396ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e76fa6b_3f9e4a3c",
         "filename": "microdroid/vm_payload/include/vm_payload.h",
         "patchSetId": 3
@@ -109,6 +133,30 @@
       "side": 1,
       "message": "About this interface:\n```\nAVmPayload_exportServiceToHost(const char *name, AIBinder *service, ...)\n```\nInstead of letting Microdroid handle the port/name mapping, can we use directly the named Unix domain socket internally? Then we don\u0027t need to process this port/name mapping in Microdroid.\n\n+1 later the host can just call `vm.getService(\"MyVmService\")`.",
       "parentUuid": "1b19320b_4036aae2",
+      "range": {
+        "startLine": 36,
+        "startChar": 93,
+        "endLine": 37,
+        "endChar": 7
+      },
+      "revId": "b201151386d384d49bbc4d75c81bb99ff5a396ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee369d37_2b488317",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-14T12:27:18Z",
+      "side": 1,
+      "message": "For now, we\u0027d still have to implement it with vsock over to the host but maybe there are some other tricks we could play. But the most to do for this CL would be to mark the API as expecting change, if anything.",
+      "parentUuid": "f45a2879_321e86af",
       "range": {
         "startLine": 36,
         "startChar": 93,
