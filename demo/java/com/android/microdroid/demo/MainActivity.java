@@ -168,16 +168,7 @@ public class MainActivity extends AppCompatActivity {
                         private final ExecutorService mService = mExecutorService;
 
                         @Override
-                        public void onPayloadStarted(VirtualMachine vm,
-                                ParcelFileDescriptor stream) {
-                            if (stream == null) {
-                                mPayloadOutput.postValue("(no output available)");
-                                return;
-                            }
-
-                            InputStream input = new FileInputStream(stream.getFileDescriptor());
-                            mService.execute(new Reader("payload", mPayloadOutput, input));
-                        }
+                        public void onPayloadStarted(VirtualMachine vm) {}
 
                         @Override
                         public void onPayloadReady(VirtualMachine vm) {
@@ -189,6 +180,17 @@ public class MainActivity extends AppCompatActivity {
                             mPayloadOutput.postValue("(Payload is ready. Testing VM service...)");
 
                             mService.execute(() -> testVmService(vm));
+                        }
+
+                        @Override
+                        public void onPayloadStdio(VirtualMachine vm, ParcelFileDescriptor stream) {
+                            if (stream == null) {
+                                mPayloadOutput.postValue("(no output available)");
+                                return;
+                            }
+
+                            InputStream input = new FileInputStream(stream.getFileDescriptor());
+                            mService.execute(new Reader("payload", mPayloadOutput, input));
                         }
 
                         private void testVmService(VirtualMachine vm) {
