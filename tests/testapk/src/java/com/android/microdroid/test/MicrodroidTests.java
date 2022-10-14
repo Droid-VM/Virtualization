@@ -695,9 +695,14 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                     }
 
                     @Override
-                    public void onPayloadStarted(VirtualMachine vm, ParcelFileDescriptor stream) {
+                    public void onPayloadStarted(VirtualMachine vm) {
                         Log.i(TAG, "onPayloadStarted");
                         payloadStarted.complete(true);
+                    }
+
+                    @Override
+                    public void onPayloadStdio(VirtualMachine vm, ParcelFileDescriptor stream) {
+                        Log.i(TAG, "onPayloadStdio");
                         logVmOutput(TAG, new FileInputStream(stream.getFileDescriptor()),
                                 "Payload");
                     }
