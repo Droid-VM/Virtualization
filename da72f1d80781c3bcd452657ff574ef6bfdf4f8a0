@@ -16,6 +16,23 @@
       "message": "Hi Inseob,\n\nCould you please review this cl?\n\nAfter I move the timer from host to inside the VM, the read rate changes from ~20Mb/s to ~120Mb/s on my cheetah device locally. Could you take a look if everything is correct?\n\ncom.android.compatibility.common.tradefed.testtype.JarHostTest (2 Tests)\n[1/2] com.android.virt.fs.AuthFsBenchmarks#seqReadRemoteFile: PASSED (5.231s)\n        avf_perf[hwrev_a0]/authfs/seq_read_average_mb_per_sec: 138.63\n        avf_perf[hwrev_a0]/authfs/seq_read_max_mb_per_sec: 148.954\n        avf_perf[hwrev_a0]/authfs/seq_read_min_mb_per_sec: 133.511\n        avf_perf[hwrev_a0]/authfs/seq_read_stdev_mb_per_sec: 5.986625727402708\n[2/2] com.android.virt.fs.AuthFsBenchmarks#randReadRemoteFile: PASSED (5.606s)\n        avf_perf[hwrev_a0]/authfs/rand_read_average_mb_per_sec: 167.81111666666666\n        avf_perf[hwrev_a0]/authfs/rand_read_max_mb_per_sec: 335.937\n        avf_perf[hwrev_a0]/authfs/rand_read_min_mb_per_sec: 78.5947\n        avf_perf[hwrev_a0]/authfs/rand_read_stdev_mb_per_sec: 101.80881811376491",
       "revId": "da72f1d80781c3bcd452657ff574ef6bfdf4f8a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54906c14_a1893a51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-14T14:05:15Z",
+      "side": 1,
+      "message": "Hi Victor,\n\nCould you also review this cl? I moved the timer inside the VM. Now the sequential read rate is around ~120Mb/s.",
+      "revId": "da72f1d80781c3bcd452657ff574ef6bfdf4f8a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
