@@ -16,8 +16,11 @@
 
 #![no_main]
 #![no_std]
+#![feature(ptr_const_cast)] // Stabilized in 1.65.0
+#![feature(variant_count)]
 
 mod avb;
+mod config;
 mod entry;
 mod exceptions;
 mod helpers;
