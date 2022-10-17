@@ -24,6 +24,11 @@ pub const fn align_down(addr: usize, alignment: usize) -> usize {
     addr & !(alignment - 1)
 }
 
+/// Computes the first address larger or equal to the provided one that is aligned.
+pub const fn align(addr: usize, alignment: usize) -> usize {
+    align_down(addr + alignment, alignment)
+}
+
 /// Computes the address of the page containing a given address.
 pub const fn page_of(addr: usize, page_size: usize) -> usize {
     align_down(addr, page_size)
@@ -61,4 +66,11 @@ pub const fn page_align_4kb(addr: usize) -> Option<usize> {
 pub fn locate_appended_payload() -> usize {
     page_align_4kb(layout::binary_end())
         .expect("The page following the binary should never cause an address overflow")
+}
+
+/// Get size of the region that may contain the appended payload.
+pub fn max_appended_payload_size() -> usize {
+    let addr = locate_appended_payload();
+    // pvmfw is contained in a 2MiB region so the payload can't be larger than the 2MiB alignement.
+    align(addr, SIZE_2MB) - addr
 }

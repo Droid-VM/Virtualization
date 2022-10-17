@@ -14,13 +14,16 @@
 
 //! Low-level entry and exit points of pvmfw.
 
+use crate::config;
 use crate::helpers;
 use crate::legacy;
 use crate::mmio_guard;
 use core::arch::asm;
+use core::ptr;
 use core::slice;
 use log::debug;
 use log::error;
+use log::warn;
 use log::LevelFilter;
 use vmbase::{console, logger, main, power::reboot};
 
@@ -28,6 +31,8 @@ use vmbase::{console, logger, main, power::reboot};
 enum RebootReason {
     /// A malformed BCC was received.
     InvalidBcc,
+    /// An invalid configuration was appended to pvmfw.
+    InvalidConfig,
     /// An unexpected internal error happened.
     InternalError,
 }
@@ -80,10 +85,22 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<(), R
         RebootReason::InternalError
     })?;
 
-    let bcc = legacy::take_bcc().ok_or_else(|| {
-        error!("Invalid BCC");
-        RebootReason::InvalidBcc
-    })?;
+    let mut appended_payload = if let Some(cfg) = config::take() {
+        debug!("Found valid configuration at {:?}", ptr::addr_of!(cfg));
+        AppendedPayload::Config(cfg)
+    } else if cfg!(feature = "legacy") {
+        warn!("No valid configuration found; assuming that a raw BCC was appended");
+        let bcc = legacy::take_bcc().ok_or_else(|| {
+            error!("Invalid BCC");
+            RebootReason::InvalidBcc
+        })?;
+        AppendedPayload::LegacyBcc(bcc)
+    } else {
+        error!("No valid configuration found");
+        return Err(RebootReason::InvalidConfig);
+    };
+
+    let bcc = appended_payload.get_bcc_mut();
     // TODO(b/256148034): Use Open-DICE to fail early if BccHandoverParse(bcc) != kDiceResultOk.
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
@@ -154,4 +171,20 @@ fn jump_to_payload(fdt_address: u64, payload_start: u64) -> ! {
             options(nomem, noreturn, nostack),
         );
     };
+}
+
+enum AppendedPayload<'a> {
+    /// Configuration data.
+    Config(config::Config<'a>),
+    /// Deprecated raw BCC, as used in Android T.
+    LegacyBcc(&'a mut [u8]),
+}
+
+impl AppendedPayload<'_> {
+    fn get_bcc_mut(&mut self) -> &mut [u8] {
+        match self {
+            Self::LegacyBcc(ref mut bcc) => bcc,
+            Self::Config(ref mut cfg) => cfg.get_bcc_mut(),
+        }
+    }
 }
