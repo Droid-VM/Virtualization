@@ -131,7 +131,7 @@ public class AuthFsTestRule extends TestLogData {
         return sMicrodroidDevice;
     }
 
-    static void startMicrodroid() throws DeviceNotAvailableException {
+    static void startMicrodroid(boolean protectedVm) throws DeviceNotAvailableException {
         CLog.i("Starting the shared VM");
         assertThat(sMicrodroidDevice).isNull();
         sMicrodroidDevice =
@@ -139,6 +139,7 @@ public class AuthFsTestRule extends TestLogData {
                                 findTestFile(sTestInfo.getBuildInfo(), TEST_APK_NAME),
                                 VM_CONFIG_PATH_IN_APK)
                         .debugLevel("full")
+                        .protectedVm(protectedVm)
                         .build(getDevice());
 
         // From this point on, we need to tear down the Microdroid instance
