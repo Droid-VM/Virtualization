@@ -65,7 +65,7 @@ public class AuthFsBenchmarks extends BaseHostJUnit4Test {
 
     @BeforeClassWithInfo
     public static void beforeClassWithDevice(TestInformation testInfo) throws Exception {
-        AuthFsTestRule.setUpClass(testInfo);
+        AuthFsTestRule.setUpAndroid(testInfo);
     }
 
     @Before
@@ -77,9 +77,8 @@ public class AuthFsBenchmarks extends BaseHostJUnit4Test {
     }
 
     @AfterClassWithInfo
-    public static void afterClassWithDevice(TestInformation testInfo)
-            throws DeviceNotAvailableException {
-        AuthFsTestRule.tearDownClass(testInfo);
+    public static void afterClassWithDevice(TestInformation testInfo) {
+        AuthFsTestRule.tearDownAndroid();
     }
 
     @Test
@@ -93,7 +92,6 @@ public class AuthFsBenchmarks extends BaseHostJUnit4Test {
     }
 
     private void readRemoteFile(String mode) throws DeviceNotAvailableException {
-        pushMeasureIoBinToMicrodroid();
         // Cache the file in memory for the host.
         mAuthFsTestRule
                 .getAndroid()
@@ -103,12 +101,19 @@ public class AuthFsBenchmarks extends BaseHostJUnit4Test {
         String cmd = MEASURE_IO_BIN_PATH + " " + filePath + " " + FILE_SIZE_IN_MB + " " + mode;
         List<Double> rates = new ArrayList<>(TRIAL_COUNT);
         for (int i = 0; i < TRIAL_COUNT + 1; ++i) {
+            // Arrange.
+            AuthFsTestRule.startMicrodroid(getDevice(), getBuild());
+            pushMeasureIoBinToMicrodroid();
             mAuthFsTestRule.runFdServerOnAndroid(
                     "--open-ro 3:input.4m --open-ro 4:input.4m.fsv_meta", "--ro-fds 3:4");
             mAuthFsTestRule.runAuthFsOnMicrodroid("--remote-ro-file 3:" + DIGEST_4M);
 
+            // Action.
             String rate = mAuthFsTestRule.getMicrodroid().run(cmd);
             rates.add(Double.parseDouble(rate));
+
+            // Teardown.
+            AuthFsTestRule.shutdownMicrodroid(getDevice());
         }
         reportMetrics(rates, mode + "_read", "mb_per_sec");
     }
