@@ -16,9 +16,12 @@
 
 package com.android.virt.fs.benchmarks;
 
+import static com.android.microdroid.test.host.MicrodroidHostTestCaseBase.isDeviceCuttlefish;
 import static com.android.tradefed.testtype.DeviceJUnit4ClassRunner.TestMetrics;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.junit.Assume.assumeFalse;
 
 import android.platform.test.annotations.RootPermissionTest;
 
@@ -71,11 +74,13 @@ public class AuthFsBenchmarks extends BaseHostJUnit4Test {
 
     @Before
     public void setUp() throws Exception {
+        assumeFalse("Skip protected VM on CF", isDeviceCuttlefish(getDevice()));
         String metricsPrefix =
                 MetricsProcessor.getMetricPrefix(
                         getDevice().getProperty("debug.hypervisor.metrics_tag"));
         mMetricsProcessor = new MetricsProcessor(metricsPrefix + "authfs/");
-        AuthFsTestRule.startMicrodroid();
+        // TODO(b/236123069): Run benchmark tests in both protected and unprotected VMs.
+        AuthFsTestRule.startMicrodroid(/*protectedVm=*/ true);
     }
 
     @After
