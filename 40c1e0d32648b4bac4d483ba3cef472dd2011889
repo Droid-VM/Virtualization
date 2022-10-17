@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b690b0c2_33684f06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-17T14:07:13Z",
+      "side": 1,
+      "message": "It catches one small class of errors - see my reply to Andrew.",
+      "parentUuid": "e5706a40_718e3096",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 14
+      },
+      "revId": "40c1e0d32648b4bac4d483ba3cef472dd2011889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2337e6e6_42b01ffd",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -81,6 +105,48 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b6658c5_e3f3f43e",
+        "filename": "microdroid/vm_payload/include/vm_main.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-17T14:07:13Z",
+      "side": 1,
+      "message": "Hmm. NDK has no need for \"functions that must be implemented by the client\", I think, and so no convention for them? It\u0027s part of the same API, even if it\u0027s implemented by a different party.\n\nBut TBH I\u0027m assuming the naming and much else will change when we start talking to NDK API council.",
+      "parentUuid": "bbed4968_cd8abc2e",
+      "range": {
+        "startLine": 22,
+        "startChar": 18,
+        "endLine": 22,
+        "endChar": 33
+      },
+      "revId": "40c1e0d32648b4bac4d483ba3cef472dd2011889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0baf3c3f_45147f45",
+        "filename": "microdroid/vm_payload/include/vm_main.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-17T14:07:13Z",
+      "side": 1,
+      "message": "C doesn\u0027t support declaring a function using a function typedef. (And also has the (void) wart.)\nBut I like the typedef because it gives me type safety in launcher/main.cpp, which is known to be C++.\nI guess I should add the typedef, even if I don\u0027t use it in the C version.",
+      "parentUuid": "85ba49d0_a6d15988",
+      "revId": "40c1e0d32648b4bac4d483ba3cef472dd2011889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "519f3847_84f007f3",
@@ -94,6 +160,30 @@
       "writtenOn": "2022-10-17T13:42:52Z",
       "side": 1,
       "message": "nit: did you want this included from vm_payload.h so the declaration will be included by most clients for less change of mistaken prototypes?",
+      "range": {
+        "startLine": 25,
+        "startChar": 15,
+        "endLine": 25,
+        "endChar": 30
+      },
+      "revId": "40c1e0d32648b4bac4d483ba3cef472dd2011889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6d96f21_aac98d39",
+        "filename": "microdroid/vm_payload/include/vm_main.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-17T14:07:13Z",
+      "side": 1,
+      "message": "Oh, that is a good idea. Although TBH it will only catch a mistake in the arguments, not the name or linkage - so\n`extern \"C\" int AVmPayload_main(int)` will fail to compile, but not, say, `int AvmPayload_main()`.",
+      "parentUuid": "519f3847_84f007f3",
       "range": {
         "startLine": 25,
         "startChar": 15,
