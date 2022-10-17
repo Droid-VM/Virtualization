@@ -195,6 +195,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b0e274b_5a2e3001",
+        "filename": "microdroid/vm_payload/include/vm_main.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-17T14:30:05Z",
+      "side": 1,
+      "message": "I wanted to change the name since I was changing the prototype; that turns a subtle error into a clean failure.\n\nThis doesn\u0027t seem very similar to a native activity; we\u0027re not in Android (well, depending on your definitions).\n\nI can\u0027t find any references to android_native_main outside Virtualization? Do you mean android_main(), which has yet another prototype?",
+      "parentUuid": "f74cff96_742362af",
+      "range": {
+        "startLine": 22,
+        "startChar": 18,
+        "endLine": 22,
+        "endChar": 33
+      },
+      "revId": "40c1e0d32648b4bac4d483ba3cef472dd2011889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "519f3847_84f007f3",
