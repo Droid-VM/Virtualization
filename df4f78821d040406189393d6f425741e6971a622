@@ -39,6 +39,30 @@
       },
       "revId": "df4f78821d040406189393d6f425741e6971a622",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02967b54_592d13ca",
+        "filename": "microdroid/vm_payload/src/vm_service.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-17T11:01:57Z",
+      "side": 1,
+      "message": "You are right. This is not exactly needed. It will fail at [1] anyway for port \u003c 1024.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:frameworks/native/libs/binder/RpcServer.cpp;l\u003d542;drc\u003d21c887c5a09040bf41d272a9e729119956e48a3f",
+      "parentUuid": "5f51ad21_c84c742c",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 5
+      },
+      "revId": "df4f78821d040406189393d6f425741e6971a622",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

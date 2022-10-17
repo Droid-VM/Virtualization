@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b272e34_e623d059",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-17T11:01:57Z",
+      "side": 1,
+      "message": "It doesn\u0027t work with `shared_libs: [\"libbinder_ndk\"]`. The compiler still failed to find binder_ibinder.h.\n\n`include_dirs: [\"frameworks/native/libs/binder/include\"]` also doesn\u0027t work.\n\nWith `include_dirs: [\"frameworks/native/libs/binder/include\"]`:\n```\nmodule \"libvm_payload\" variant \"android_x86_64_silvermont_shared\": module source path \"packages/modules/Virtualization/microdroid/vm_payload/frameworks/native/libs/binder/include\" does not exist\n```\nWith `include_dirs: [\"../../../../../frameworks/native/libs/binder/include\"]`:\n```\nmodule \"libvm_payload\" variant \"android_x86_64_silvermont_shared\": Path is outside directory: ../../../../../frameworks/native/libs/binder/include\n```",
+      "parentUuid": "b22371b1_66673d68",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 16
+      },
+      "revId": "b201151386d384d49bbc4d75c81bb99ff5a396ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e76fa6b_3f9e4a3c",
