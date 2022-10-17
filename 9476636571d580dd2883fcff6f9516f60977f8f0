@@ -33,6 +33,24 @@
       "message": "Hi Inseob,\n\nCould you review this cl? Somehow the random io looks much bigger than the sequential ones, could you take a look if I missed something here? Thanks!\n\n```\n```",
       "revId": "9476636571d580dd2883fcff6f9516f60977f8f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ad71a52_c3b4975a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-17T07:22:50Z",
+      "side": 1,
+      "message": "Here\u0027s the local result:\n```\n[1/4] com.android.virt.fs.AuthFsBenchmarks#seqWriteRemoteFile: PASSED (7.321s)\n        avf_perf[hwrev_a0]/authfs/seq_write_average_mb_per_sec: 108.8981599675\n        avf_perf[hwrev_a0]/authfs/seq_write_max_mb_per_sec: 119.517150711\n        avf_perf[hwrev_a0]/authfs/seq_write_min_mb_per_sec: 102.138525375\n        avf_perf[hwrev_a0]/authfs/seq_write_stdev_mb_per_sec: 7.277835481036063\n[2/4] com.android.virt.fs.AuthFsBenchmarks#randWriteRemoteFile: PASSED (6.353s)\n        avf_perf[hwrev_a0]/authfs/rand_write_average_mb_per_sec: 289.8425710143334\n        avf_perf[hwrev_a0]/authfs/rand_write_max_mb_per_sec: 566.973777463\n        avf_perf[hwrev_a0]/authfs/rand_write_min_mb_per_sec: 114.259597806\n        avf_perf[hwrev_a0]/authfs/rand_write_stdev_mb_per_sec: 216.78959498199768\n[3/4] com.android.virt.fs.AuthFsBenchmarks#seqReadRemoteFile: PASSED (4.914s)\n        avf_perf[hwrev_a0]/authfs/seq_read_average_mb_per_sec: 427.7175364495001\n        avf_perf[hwrev_a0]/authfs/seq_read_max_mb_per_sec: 839.806844426\n        avf_perf[hwrev_a0]/authfs/seq_read_min_mb_per_sec: 120.915329041\n        avf_perf[hwrev_a0]/authfs/seq_read_stdev_mb_per_sec: 322.3310608174652\n[4/4] com.android.virt.fs.AuthFsBenchmarks#randReadRemoteFile: PASSED (5.778s)\n        avf_perf[hwrev_a0]/authfs/rand_read_average_mb_per_sec: 200.30398418258332\n        avf_perf[hwrev_a0]/authfs/rand_read_max_mb_per_sec: 413.479429398\n        avf_perf[hwrev_a0]/authfs/rand_read_min_mb_per_sec: 91.2492015695\n        avf_perf[hwrev_a0]/authfs/rand_read_stdev_mb_per_sec: 116.48726839672018\n```",
+      "parentUuid": "78c45582_f178336e",
+      "revId": "9476636571d580dd2883fcff6f9516f60977f8f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
