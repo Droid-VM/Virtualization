@@ -14,15 +14,51 @@
 
 //! Miscellaneous helper functions.
 
+use vmbase::layout;
+
 pub const SIZE_4KB: usize = 4 << 10;
 pub const SIZE_2MB: usize = 2 << 20;
 
+/// Computes the largest multiple of the provided alignment smaller or equal to the address.
+pub const fn align_down(addr: usize, alignment: usize) -> usize {
+    addr & !(alignment - 1)
+}
+
 /// Computes the address of the page containing a given address.
 pub const fn page_of(addr: usize, page_size: usize) -> usize {
-    addr & !(page_size - 1)
+    align_down(addr, page_size)
+}
+
+/// Validates a page size and computes the address of the page containing a given address.
+pub const fn checked_page_of(addr: usize, page_size: usize) -> Option<usize> {
+    if page_size.is_power_of_two() {
+        Some(page_of(addr, page_size))
+    } else {
+        None
+    }
 }
 
 /// Computes the address of the 4KiB page containing a given address.
 pub const fn page_4kb_of(addr: usize) -> usize {
     page_of(addr, SIZE_4KB)
+}
+
+/// Aligns the address to the next page boundary.
+pub const fn page_align(addr: usize, page_size: usize) -> Option<usize> {
+    if let Some(addr_in_next_page) = addr.checked_add(page_size) {
+        checked_page_of(addr_in_next_page, page_size)
+    } else {
+        None
+    }
+}
+
+/// Aligns the address to the next 4KiB page boundary.
+pub const fn page_align_4kb(addr: usize) -> Option<usize> {
+    page_align(addr, SIZE_4KB)
+}
+
+/// Gets a pointer to the first byte of the 4KiB-aligned payload appended to pvmfw's binary.
+pub fn locate_appended_payload() -> usize {
+    page_align_4kb(layout::binary_end())
+        .expect("The page following the binary should never cause an address overflow")
 }

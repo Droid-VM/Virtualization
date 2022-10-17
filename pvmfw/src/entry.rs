@@ -15,14 +15,19 @@
 //! Low-level entry and exit points of pvmfw.
 
 use crate::helpers;
+use crate::legacy;
 use crate::mmio_guard;
 use core::arch::asm;
 use core::slice;
-use log::{debug, error, LevelFilter};
+use log::debug;
+use log::error;
+use log::LevelFilter;
 use vmbase::{console, logger, main, power::reboot};
 
 #[derive(Debug, Clone)]
 enum RebootReason {
+    /// A malformed BCC was received.
+    InvalidBcc,
     /// An unexpected internal error happened.
     InternalError,
 }
@@ -75,8 +80,16 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<(), R
         RebootReason::InternalError
     })?;
 
+    let bcc = legacy::take_bcc().ok_or_else(|| {
+        error!("Invalid BCC");
+        RebootReason::InvalidBcc
+    })?;
+    // TODO(b/256148034): Use Open-DICE to fail early if BccHandoverParse(bcc) != kDiceResultOk.
+
     // This wrapper allows main() to be blissfully ignorant of platform details.
-    crate::main(fdt, payload);
+    crate::main(fdt, payload, bcc);
+
+    // TODO: Overwrite BCC before jumping to payload to avoid leaking our sealing key.
 
     mmio_guard::unmap(console::BASE_ADDRESS).map_err(|e| {
         error!("Failed to unshare the UART: {e}");
