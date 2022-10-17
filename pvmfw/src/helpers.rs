@@ -24,6 +24,13 @@ pub const fn unchecked_align_down(addr: usize, alignment: usize) -> usize {
     addr & !(alignment - 1)
 }
 
+/// Computes the smallest multiple of the provided alignment larger or equal to the address.
+///
+/// Note: the result is undefined if alignement isn't a power of two and may wrap to 0.
+pub const fn unchecked_align(addr: usize, alignment: usize) -> usize {
+    unchecked_align_down(addr + alignment, alignment)
+}
+
 /// Safe wrapper around unchecked_align() that validates its assumptions and doesn't wrap.
 pub const fn align(addr: usize, alignment: usize) -> Option<usize> {
     if !alignment.is_power_of_two() {
