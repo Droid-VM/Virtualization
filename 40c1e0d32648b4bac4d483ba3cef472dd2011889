@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ee4cd870_2ad41f06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-17T14:12:00Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "b690b0c2_33684f06",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 14
+      },
+      "revId": "40c1e0d32648b4bac4d483ba3cef472dd2011889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2337e6e6_42b01ffd",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -143,6 +167,30 @@
       "side": 1,
       "message": "C doesn\u0027t support declaring a function using a function typedef. (And also has the (void) wart.)\nBut I like the typedef because it gives me type safety in launcher/main.cpp, which is known to be C++.\nI guess I should add the typedef, even if I don\u0027t use it in the C version.",
       "parentUuid": "85ba49d0_a6d15988",
+      "revId": "40c1e0d32648b4bac4d483ba3cef472dd2011889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f74cff96_742362af",
+        "filename": "microdroid/vm_payload/include/vm_main.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-17T14:12:00Z",
+      "side": 1,
+      "message": "In native activity, this has been `android_native_main`. Why do we want to deviate from it?",
+      "parentUuid": "1b6658c5_e3f3f43e",
+      "range": {
+        "startLine": 22,
+        "startChar": 18,
+        "endLine": 22,
+        "endChar": 33
+      },
       "revId": "40c1e0d32648b4bac4d483ba3cef472dd2011889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
