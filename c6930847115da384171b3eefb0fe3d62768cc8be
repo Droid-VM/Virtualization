@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84a827cb_fb730e87",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-17T13:33:48Z",
+      "side": 1,
+      "message": "We have a different test here: http://cs/android-internal/packages/modules/Virtualization/libs/nested_virt/src/lib.rs?rcl\u003db3370acc279c39e98823a2dbb9835fe0db615579\u0026l\u003d23\n\nShould that change too?",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 66
+      },
+      "revId": "c6930847115da384171b3eefb0fe3d62768cc8be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
