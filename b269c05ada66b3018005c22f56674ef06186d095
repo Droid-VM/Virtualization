@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a09fc91_f54bdefc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-17T10:20:00Z",
+      "side": 1,
+      "message": "As I mentioned on the other bug, I don\u0027t think we should restrict this to just protected VMs; we also support non-protected, and that may be all that exists on some devices.",
+      "range": {
+        "startLine": 7,
+        "startChar": 35,
+        "endLine": 7,
+        "endChar": 48
+      },
+      "revId": "b269c05ada66b3018005c22f56674ef06186d095",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de8a5840_f09bc765",
         "filename": "apex/permissions/features_com.android.virt.xml",
         "patchSetId": 2
@@ -19,6 +42,53 @@
         "startChar": 27,
         "endLine": 18,
         "endChar": 35
+      },
+      "revId": "b269c05ada66b3018005c22f56674ef06186d095",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e1f81e9_031c55fe",
+        "filename": "apex/permissions/features_com.android.virt.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-17T10:20:00Z",
+      "side": 1,
+      "message": "Well, at least for protected, it needs hardware support. And we need CPU support. Not sure really.",
+      "parentUuid": "de8a5840_f09bc765",
+      "range": {
+        "startLine": 18,
+        "startChar": 27,
+        "endLine": 18,
+        "endChar": 35
+      },
+      "revId": "b269c05ada66b3018005c22f56674ef06186d095",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b65cf900_f987d9dc",
+        "filename": "demo/AndroidManifest.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-17T10:20:00Z",
+      "side": 1,
+      "message": "Do we need this too?",
+      "range": {
+        "startLine": 12,
+        "startChar": 7,
+        "endLine": 12,
+        "endChar": 93
       },
       "revId": "b269c05ada66b3018005c22f56674ef06186d095",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
