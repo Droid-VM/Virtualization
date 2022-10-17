@@ -73,7 +73,7 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
     @BeforeClassWithInfo
     public static void beforeClassWithDevice(TestInformation testInfo) throws Exception {
         AuthFsTestRule.setUpAndroid(testInfo);
-        AuthFsTestRule.startMicrodroid();
+        AuthFsTestRule.startMicrodroid(/*protectedVm=*/ true);
         sAndroid = AuthFsTestRule.getAndroid();
         sMicrodroid = AuthFsTestRule.getMicrodroid();
     }
