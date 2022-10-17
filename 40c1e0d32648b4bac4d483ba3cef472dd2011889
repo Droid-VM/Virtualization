@@ -219,6 +219,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f51dcbf7_f599e49c",
+        "filename": "microdroid/vm_payload/include/vm_main.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-17T14:34:13Z",
+      "side": 1,
+      "message": "Sorry, I meant android_main, not android_native_main. But yes, you are right. It has the android_app* argument and therefore it\u0027s not wise to share the same name for different purposes.",
+      "parentUuid": "8b0e274b_5a2e3001",
+      "range": {
+        "startLine": 22,
+        "startChar": 18,
+        "endLine": 22,
+        "endChar": 33
+      },
+      "revId": "40c1e0d32648b4bac4d483ba3cef472dd2011889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "519f3847_84f007f3",
