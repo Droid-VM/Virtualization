@@ -16,7 +16,7 @@
 
 mod vm_service;
 
-pub use vm_service::{
+pub use vm_payload_service::{
     AVmPayload_getDiceAttestationCdi, AVmPayload_getDiceAttestationChain,
     AVmPayload_getVmInstanceSecret, AVmPayload_notifyPayloadReady,
 };
