@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b22371b1_66673d68",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-17T10:03:33Z",
+      "side": 1,
+      "message": "Does `shared_libs: [\"libbinder_ndk\"]` work?\nOr `include_dirs: [\"frameworks/native/libs/binder/include\"]` ?\n\nIf not, let\u0027s stick with the forward declaration, and add this to the list of things we have to solve to make this public.",
+      "parentUuid": "2a652e91_e722a10e",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 16
+      },
+      "revId": "b201151386d384d49bbc4d75c81bb99ff5a396ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e76fa6b_3f9e4a3c",
         "filename": "microdroid/vm_payload/include/vm_payload.h",
         "patchSetId": 3

@@ -16,6 +16,29 @@
       "message": "Hi Alan, Andrew,\n\nThanks for the review! Could you take another look?",
       "revId": "df4f78821d040406189393d6f425741e6971a622",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f51ad21_c84c742c",
+        "filename": "microdroid/vm_payload/src/vm_service.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-17T10:03:33Z",
+      "side": 1,
+      "message": "If we don\u0027t have this check, does the call fail anyway?\n(I\u0027d expect the kernel to enforce this.)",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 5
+      },
+      "revId": "df4f78821d040406189393d6f425741e6971a622",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
