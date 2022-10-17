@@ -108,7 +108,7 @@ fn main() {
     // We need to start the thread pool for Binder to work properly, especially link_to_death.
     ProcessState::start_thread_pool();
 
-    let service = VirtualizationService::init();
+    let service = VirtualizationService::default();
     let service =
         BnVirtualizationService::new_binder(service, BinderFeatures::default()).as_binder();
 
