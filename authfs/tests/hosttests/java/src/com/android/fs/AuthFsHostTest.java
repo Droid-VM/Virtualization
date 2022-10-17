@@ -17,10 +17,12 @@
 package com.android.virt.fs;
 
 import static com.android.microdroid.test.host.CommandResultSubject.assertThat;
+import static com.android.microdroid.test.host.MicrodroidHostTestCaseBase.isDeviceCuttlefish;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assume.assumeFalse;
 
 import android.platform.test.annotations.RootPermissionTest;
 
@@ -74,7 +76,8 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
     @BeforeClassWithInfo
     public static void beforeClassWithDevice(TestInformation testInfo) throws Exception {
         AuthFsTestRule.setUpAndroid(testInfo);
-        AuthFsTestRule.startMicrodroid();
+        assumeFalse("Skip protected VM on CF", isDeviceCuttlefish(testInfo.getDevice()));
+        AuthFsTestRule.startMicrodroid(/*protectedVm=*/ true);
         sAndroid = AuthFsTestRule.getAndroid();
         sMicrodroid = AuthFsTestRule.getMicrodroid();
     }
@@ -112,7 +115,7 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
         // Setup
         runFdServerOnAndroid(
                 "--open-ro 3:input.4k --open-ro 4:input.4k.fsv_meta --open-ro"
-                    + " 6:input.4k1 --open-ro 7:input.4k1.fsv_meta",
+                        + " 6:input.4k1 --open-ro 7:input.4k1.fsv_meta",
                 "--ro-fds 3:4 --ro-fds 6:7");
         runAuthFsOnMicrodroid(
                 "--remote-ro-file 3:" + DIGEST_4K + " --remote-ro-file 6:" + DIGEST_4K1);
@@ -133,8 +136,7 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
     public void testReadWithFsverityVerification_TamperedMerkleTree() throws Exception {
         // Setup
         runFdServerOnAndroid(
-                "--open-ro 3:input.4m --open-ro 4:input.4m.fsv_meta.bad_merkle",
-                "--ro-fds 3:4");
+                "--open-ro 3:input.4m --open-ro 4:input.4m.fsv_meta.bad_merkle", "--ro-fds 3:4");
         runAuthFsOnMicrodroid("--remote-ro-file 3:" + DIGEST_4M);
 
         // Verify
