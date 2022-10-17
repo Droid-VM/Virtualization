@@ -94,9 +94,12 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
         android.tryRun("rm", "-rf", "/data/misc/virtualizationservice/*");
     }
 
+    public static boolean isDeviceCuttlefish(ITestDevice device) {
+        VirtualizationTestHelper.isCuttlefish(device.getProperty("ro.product.vendor.device"));
+    }
+
     protected boolean isCuttlefish() throws Exception {
-        return VirtualizationTestHelper.isCuttlefish(
-            getDevice().getProperty("ro.product.vendor.device"));
+        return isDeviceCuttlefish(getDevice());
     }
 
     protected String getMetricPrefix() throws Exception {

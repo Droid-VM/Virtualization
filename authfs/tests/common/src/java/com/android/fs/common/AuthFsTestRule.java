@@ -21,6 +21,7 @@ import static com.android.tradefed.device.TestDevice.MicrodroidBuilder;
 import static com.android.tradefed.testtype.DeviceJUnit4ClassRunner.TestLogData;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.TruthJUnit.assume;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
@@ -36,6 +37,7 @@ import com.android.tradefed.device.TestDevice;
 import com.android.tradefed.invoker.TestInformation;
 import com.android.tradefed.log.LogUtil.CLog;
 import com.android.tradefed.util.CommandResult;
+import com.android.virt.VirtualizationTestHelper;
 
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
@@ -131,7 +133,10 @@ public class AuthFsTestRule extends TestLogData {
         return sMicrodroidDevice;
     }
 
-    public static void startMicrodroid() throws DeviceNotAvailableException {
+    public static void startMicrodroid(boolean protectedVm) throws DeviceNotAvailableException {
+        assume().withMessage("Skip protected VM on CF")
+                .that(protectedVm && isCuttlefish())
+                .isFalse();
         CLog.i("Starting the shared VM");
         assertThat(sMicrodroidDevice).isNull();
         sMicrodroidDevice =
@@ -139,6 +144,7 @@ public class AuthFsTestRule extends TestLogData {
                                 findTestFile(sTestInfo.getBuildInfo(), TEST_APK_NAME),
                                 VM_CONFIG_PATH_IN_APK)
                         .debugLevel("full")
+                        .protectedVm(protectedVm)
                         .build(getDevice());
 
         // From this point on, we need to tear down the Microdroid instance
@@ -222,6 +228,11 @@ public class AuthFsTestRule extends TestLogData {
             fail("Missing test file: " + fileName);
             return null;
         }
+    }
+
+    private static boolean isCuttlefish() throws DeviceNotAvailableException {
+        return VirtualizationTestHelper.isCuttlefish(
+                getDevice().getProperty("ro.product.vendor.device"));
     }
 
     private static TestDevice getDevice() {
