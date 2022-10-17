@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1cd59dd_31856d6e",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-17T13:11:06Z",
+      "side": 1,
+      "message": "Agreed.",
+      "parentUuid": "6558115a_8c87584a",
+      "range": {
+        "startLine": 395,
+        "startChar": 28,
+        "endLine": 395,
+        "endChar": 52
+      },
+      "revId": "3ba10fd6a1475da0e15df133d864518f364d195d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "938547df_fc3e5d5c",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-10-17T12:36:56Z",
       "side": 1,
       "message": "nit: will the logs have context that this is related to the vm death reason?",
+      "range": {
+        "startLine": 397,
+        "startChar": 16,
+        "endLine": 397,
+        "endChar": 32
+      },
+      "revId": "3ba10fd6a1475da0e15df133d864518f364d195d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "539ff4e0_bfcbde28",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-17T13:11:06Z",
+      "side": 1,
+      "message": "It\u0027s fairly clear I think:\n```\n10-17 14:07:00.490  3626  3665 I VirtualizationService: virtualizationservice::crosvm: crosvm(3664) exited with status exit status: 0\n10-17 14:07:00.490  3626  3665 I VirtualizationService: virtualizationservice::crosvm: VM returned failure reason \u0027MICRODROID_UNKNOWN_RUNTIME_ERROR|Failed to run payload\n10-17 14:07:00.490  3626  3665 I VirtualizationService: \n10-17 14:07:00.490  3626  3665 I VirtualizationService: Caused by:\n10-17 14:07:00.490  3626  3665 I VirtualizationService:     0: Unable to access /mnt/apk/lib/arm64-v8a/DoesNotExist.so\n10-17 14:07:00.490  3626  3665 I VirtualizationService:     1: No such file or directory (os error 2)\u0027\n10-17 14:07:00.490  3626  3665 E VirtualizationService: virtualizationservice::crosvm: Failure info: Failed to run payload\n10-17 14:07:00.490  3626  3665 E VirtualizationService: \n10-17 14:07:00.490  3626  3665 E VirtualizationService: Caused by:\n10-17 14:07:00.490  3626  3665 E VirtualizationService:     0: Unable to access /mnt/apk/lib/arm64-v8a/DoesNotExist.so\n10-17 14:07:00.490  3626  3665 E VirtualizationService:     1: No such file or directory (os error 2)\n```\n\n(Admittedly if you don\u0027t have the Info logs it\u0027s slightly more terse, but it\u0027s definitely better than not having it.)",
+      "parentUuid": "938547df_fc3e5d5c",
       "range": {
         "startLine": 397,
         "startChar": 16,
