@@ -74,7 +74,8 @@ public class AuthFsBenchmarks extends BaseHostJUnit4Test {
                 MetricsProcessor.getMetricPrefix(
                         getDevice().getProperty("debug.hypervisor.metrics_tag"));
         mMetricsProcessor = new MetricsProcessor(metricsPrefix + "authfs/");
-        AuthFsTestRule.startMicrodroid();
+        // TODO(b/236123069): Run benchmark tests in both protected and unprotected VMs.
+        AuthFsTestRule.startMicrodroid(/*protectedVm=*/ true);
     }
 
     @After
