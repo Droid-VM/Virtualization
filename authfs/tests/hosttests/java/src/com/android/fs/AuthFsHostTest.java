@@ -17,8 +17,10 @@
 package com.android.virt.fs;
 
 import static com.android.microdroid.test.host.CommandResultSubject.assertThat;
+import static com.android.microdroid.test.host.MicrodroidHostTestCaseBase.isDeviceCuttlefish;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.TruthJUnit.assume;
 
 import static org.junit.Assert.assertEquals;
 
@@ -73,8 +75,11 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
 
     @BeforeClassWithInfo
     public static void beforeClassWithDevice(TestInformation testInfo) throws Exception {
+        assume().withMessage("Skip protected VM on CF")
+                .that(isDeviceCuttlefish(testInfo.getDevice()))
+                .isFalse();
         AuthFsTestRule.setUpAndroid(testInfo);
-        AuthFsTestRule.startMicrodroid();
+        AuthFsTestRule.startMicrodroid(/*protectedVm=*/ true);
         sAndroid = AuthFsTestRule.getAndroid();
         sMicrodroid = AuthFsTestRule.getMicrodroid();
     }
