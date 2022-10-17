@@ -16,6 +16,52 @@
       "message": "PTAL - added tests, lost +2",
       "revId": "3ba10fd6a1475da0e15df133d864518f364d195d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6558115a_8c87584a",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-17T12:36:56Z",
+      "side": 1,
+      "message": "On the separator topic, we might want to start using structured data on `failure_pipe_read`, rather than just strings, but that\u0027d just refactoring at this point.",
+      "range": {
+        "startLine": 395,
+        "startChar": 28,
+        "endLine": 395,
+        "endChar": 52
+      },
+      "revId": "3ba10fd6a1475da0e15df133d864518f364d195d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "938547df_fc3e5d5c",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-17T12:36:56Z",
+      "side": 1,
+      "message": "nit: will the logs have context that this is related to the vm death reason?",
+      "range": {
+        "startLine": 397,
+        "startChar": 16,
+        "endLine": 397,
+        "endChar": 32
+      },
+      "revId": "3ba10fd6a1475da0e15df133d864518f364d195d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
