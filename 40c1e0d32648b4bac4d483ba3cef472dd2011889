@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5706a40_718e3096",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-17T13:45:46Z",
+      "side": 1,
+      "message": "Could you elaborate? Programmers can still make a mistake by naming the entrypoint function incorrectly even with the header.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 14
+      },
+      "revId": "40c1e0d32648b4bac4d483ba3cef472dd2011889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2337e6e6_42b01ffd",
@@ -31,6 +54,29 @@
       "writtenOn": "2022-10-17T13:42:52Z",
       "side": 1,
       "message": "The ifdefs look a bit mysterious to me, why do the different languages get different items?",
+      "revId": "40c1e0d32648b4bac4d483ba3cef472dd2011889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbed4968_cd8abc2e",
+        "filename": "microdroid/vm_payload/include/vm_main.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-17T13:45:46Z",
+      "side": 1,
+      "message": "A* APIs belong to NDK and are implemented by the system for apps. Here, it\u0027s the opposite and I don\u0027t think this case deserves the naming convention.",
+      "range": {
+        "startLine": 22,
+        "startChar": 18,
+        "endLine": 22,
+        "endChar": 33
+      },
       "revId": "40c1e0d32648b4bac4d483ba3cef472dd2011889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
