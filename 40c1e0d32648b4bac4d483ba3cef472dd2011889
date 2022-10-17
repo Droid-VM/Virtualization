@@ -16,6 +16,46 @@
       "message": "PTAL - I\u0027ve renamed the entry point, and moved the header to be with the others.",
       "revId": "40c1e0d32648b4bac4d483ba3cef472dd2011889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85ba49d0_a6d15988",
+        "filename": "microdroid/vm_payload/include/vm_main.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-17T13:42:52Z",
+      "side": 1,
+      "message": "The ifdefs look a bit mysterious to me, why do the different languages get different items?",
+      "revId": "40c1e0d32648b4bac4d483ba3cef472dd2011889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "519f3847_84f007f3",
+        "filename": "microdroid/vm_payload/include/vm_main.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-17T13:42:52Z",
+      "side": 1,
+      "message": "nit: did you want this included from vm_payload.h so the declaration will be included by most clients for less change of mistaken prototypes?",
+      "range": {
+        "startLine": 25,
+        "startChar": 15,
+        "endLine": 25,
+        "endChar": 30
+      },
+      "revId": "40c1e0d32648b4bac4d483ba3cef472dd2011889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
