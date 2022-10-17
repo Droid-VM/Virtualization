@@ -69,6 +69,24 @@
       "parentUuid": "0ad71a52_c3b4975a",
       "revId": "9476636571d580dd2883fcff6f9516f60977f8f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ea51cdd_1cea74c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-17T10:14:53Z",
+      "side": 1,
+      "message": "Thanks for the suggestion! I tried it. Actually, I think that doesn\u0027t change much the result of the first test like (e.g. `[1/2] com.android.virt.fs.AuthFsBenchmarks#seqReadRemoteFile` when there are only the two read tests, but it does improve the accuracy of the second test.\n\nHowever, the downside is that if I start and shutdown microdroid like this. Each test takes 5 minutes instead of 5s. This implementation is here https://r.android.com/2257341.\n```\ncom.android.compatibility.common.tradefed.testtype.JarHostTest (2 Tests)\n[1/2] com.android.virt.fs.AuthFsBenchmarks#seqReadRemoteFile: PASSED (04m58.529s)\n        avf_perf[hwrev_a0]/authfs/seq_read_average_mb_per_sec: 127.2394379959\n        avf_perf[hwrev_a0]/authfs/seq_read_max_mb_per_sec: 139.958012596\n        avf_perf[hwrev_a0]/authfs/seq_read_min_mb_per_sec: 96.4645733854\n        avf_perf[hwrev_a0]/authfs/seq_read_stdev_mb_per_sec: 15.723472180161489\n[2/2] com.android.virt.fs.AuthFsBenchmarks#randReadRemoteFile: PASSED (05m0.960s)\n        avf_perf[hwrev_a0]/authfs/rand_read_average_mb_per_sec: 78.16524500856666\n        avf_perf[hwrev_a0]/authfs/rand_read_max_mb_per_sec: 83.2015974707\n        avf_perf[hwrev_a0]/authfs/rand_read_min_mb_per_sec: 64.9667045639\n        avf_perf[hwrev_a0]/authfs/rand_read_stdev_mb_per_sec: 6.6404627120752675\n```     \nThis looks a bit too long. So I also tried to start Microdroid per test. The result looks similar but the running time is around 1 minute (cl: https://r.android.com/c/2257301):\n\n```\n[1/2] com.android.virt.fs.AuthFsBenchmarks#seqReadRemoteFile: PASSED (54.921s)\n        avf_perf[hwrev_a0]/authfs/seq_read_average_mb_per_sec: 128.88482708105002\n        avf_perf[hwrev_a0]/authfs/seq_read_max_mb_per_sec: 151.006077995\n        avf_perf[hwrev_a0]/authfs/seq_read_min_mb_per_sec: 97.6681723843\n        avf_perf[hwrev_a0]/authfs/seq_read_stdev_mb_per_sec: 21.166565029413153\n[2/2] com.android.virt.fs.AuthFsBenchmarks#randReadRemoteFile: PASSED (55.448s)\n        avf_perf[hwrev_a0]/authfs/rand_read_average_mb_per_sec: 87.47666351565\n        avf_perf[hwrev_a0]/authfs/rand_read_max_mb_per_sec: 115.071488162\n        avf_perf[hwrev_a0]/authfs/rand_read_min_mb_per_sec: 72.337962963\n        avf_perf[hwrev_a0]/authfs/rand_read_stdev_mb_per_sec: 14.838027507499595\n```\n\nI think we can first switch to the second version for now. WDYT? 5 minutes per test really looks too long for me.",
+      "parentUuid": "f8f59414_89817050",
+      "revId": "9476636571d580dd2883fcff6f9516f60977f8f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
