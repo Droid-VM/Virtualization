@@ -51,6 +51,24 @@
       "parentUuid": "78c45582_f178336e",
       "revId": "9476636571d580dd2883fcff6f9516f60977f8f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8f59414_89817050",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-10-17T09:01:29Z",
+      "side": 1,
+      "message": "Hmmm, I don\u0027t understand the results. The tests LGTM. One thought is: should we run one VM per one trial? like:\n\n    for (int i \u003d 0; i \u003c TRIAL_COUNT + 1; ++i) {\n        RUN_MICRODROID_HERE;\n        pushMeasureIoBinToMicrodroid();\n        mAuthFsTestRule.runFdServerOnAndroid(\n                \"--open-rw 5:\" + mAuthFsTestRule.TEST_OUTPUT_DIR + \"/out.file\", \"--rw-fds 5\");\n        mAuthFsTestRule.runAuthFsOnMicrodroid(\"--remote-new-rw-file 5\");\n\n        String rate \u003d mAuthFsTestRule.getMicrodroid().run(cmd);\n        rates.add(Double.parseDouble(rate));\n        STOP_MICRODROID_HERE;\n    }",
+      "parentUuid": "0ad71a52_c3b4975a",
+      "revId": "9476636571d580dd2883fcff6f9516f60977f8f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
