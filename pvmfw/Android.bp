@@ -8,6 +8,9 @@ rust_ffi_static {
     defaults: ["vmbase_ffi_defaults"],
     srcs: ["src/main.rs"],
     edition: "2021",
+    features: [
+        "legacy",
+    ],
     rustlibs: [
         "liblog_rust_nostd",
         "libpvmfw_embedded_key",
