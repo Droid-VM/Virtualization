@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "765f9853_3c71352b",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-18T13:10:13Z",
+      "side": 1,
+      "message": "I think doing so would just make the dependencies harder to follow without really gaining us anything.",
+      "parentUuid": "1fce1b4b_bdeed13e",
+      "range": {
+        "startLine": 12,
+        "startChar": 9,
+        "endLine": 12,
+        "endChar": 26
+      },
+      "revId": "8c4aa96e9618e797970e02b4e197f2eaf7b9b372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eff28586_f26c49e1",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-18T12:45:37Z",
       "side": 1,
       "message": "Can we do something like this: https://docs.rs/log/latest/log/#compile-time-filters where the log level would be configured in the .bp and would differ between `userdebug` and release builds?",
+      "range": {
+        "startLine": 66,
+        "startChar": 20,
+        "endLine": 66,
+        "endChar": 38
+      },
+      "revId": "8c4aa96e9618e797970e02b4e197f2eaf7b9b372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96123045_705d6be6",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-18T13:10:13Z",
+      "side": 1,
+      "message": "Sounds like a good idea. Maybe there is some environment variable you can check with the `env!` macro?",
+      "parentUuid": "eff28586_f26c49e1",
       "range": {
         "startLine": 66,
         "startChar": 20,
