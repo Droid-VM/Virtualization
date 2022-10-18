@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7ad4d68_66e8dc67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-18T13:35:21Z",
+      "side": 1,
+      "message": "Done in aosp/2259523",
+      "parentUuid": "698a769c_de7f9907",
+      "revId": "c0f84435a2faeed0867ab61540c01e12da50ae08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50c55ad4_3d856d3f",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-10-18T11:09:51Z",
       "side": 1,
       "message": "I think most of this module (except `print_addresses`) could be moved to the vmbase crate, as it only depends on the vmbase `sections.ld`.",
+      "revId": "c0f84435a2faeed0867ab61540c01e12da50ae08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c7a13e9_d074750d",
+        "filename": "vmbase/example/src/layout.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-18T13:35:21Z",
+      "side": 1,
+      "message": "Done in aosp/2259523",
+      "parentUuid": "50c55ad4_3d856d3f",
       "revId": "c0f84435a2faeed0867ab61540c01e12da50ae08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
