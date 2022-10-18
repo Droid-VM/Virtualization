@@ -93,6 +93,30 @@
       },
       "revId": "8c4aa96e9618e797970e02b4e197f2eaf7b9b372",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb11e844_b611c79a",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-18T13:24:46Z",
+      "side": 1,
+      "message": "I\u0027m surprised that AOSP doesn\u0027t have a standard way to do this through `cfg!`? What do you think of setting [`debug_assertions`](https://doc.rust-lang.org/reference/conditional-compilation.html#debug_assertions)? Even the [Hello Rust Example](https://source.android.com/docs/setup/build/rust/building-rust-modules/hello-rust-example) seems to (unconditionally) use it (through `flags`) ...",
+      "parentUuid": "96123045_705d6be6",
+      "range": {
+        "startLine": 66,
+        "startChar": 20,
+        "endLine": 66,
+        "endChar": 38
+      },
+      "revId": "8c4aa96e9618e797970e02b4e197f2eaf7b9b372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
