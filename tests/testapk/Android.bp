@@ -2,8 +2,8 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
-android_test {
-    name: "MicrodroidTestApp",
+java_defaults {
+    name: "MicrodroidTestDefaults",
     test_suites: [
         "cts",
         "general-tests",
@@ -29,6 +29,18 @@ android_test {
     // We only support 64-bit ABI, but CTS demands all APKs to be multi-ABI.
     compile_multilib: "both",
     min_sdk_version: "33",
+}
+
+android_test {
+    name: "MicrodroidTestApp",
+    defaults: ["MicrodroidTestDefaults"],
+    test_config: "AndroidTest_NoConfig.xml",
+}
+
+android_test {
+    name: "MicrodroidCustomConfigTestApp",
+    defaults: ["MicrodroidTestDefaults"],
+    test_config: "AndroidTest_CustomConfig.xml",
 }
 
 cc_library_shared {

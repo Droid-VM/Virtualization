@@ -53,7 +53,7 @@ import co.nstant.in.cbor.model.MajorType;
  * Microdroid tests that do not require the USE_CUSTOM_VIRTUAL_MACHINE permission.
  */
 @RunWith(Parameterized.class)
-public class MicrodroidTests extends MicrodroidTestsBase {
+public class MicrodroidNoConfigTests extends MicrodroidTestsBase {
 
     @Test
     @CddTest(requirements = {
