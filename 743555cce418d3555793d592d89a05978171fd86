@@ -140,6 +140,30 @@
       },
       "revId": "743555cce418d3555793d592d89a05978171fd86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d349b6f_e3bb357d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-18T12:01:46Z",
+      "side": 1,
+      "message": "I didn\u0027t mean to make this a static method. The suggestion was to have something like `int mCapabilities` as a field in the manager object which is set when constructed and this method just reads it.\n\nI don\u0027t have a strong opinion though. Feel free to ignore.",
+      "parentUuid": "b7b50c8f_5a36e54c",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 22
+      },
+      "revId": "743555cce418d3555793d592d89a05978171fd86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
