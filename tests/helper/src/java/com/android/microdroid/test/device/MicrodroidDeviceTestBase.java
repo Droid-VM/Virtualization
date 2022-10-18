@@ -82,10 +82,6 @@ public abstract class MicrodroidDeviceTestBase {
             return new VirtualMachineConfig.Builder(mContext).setProtectedVm(mProtectedVm);
         }
 
-        public VirtualMachineConfig.Builder newVmConfigBuilder(String payloadConfigPath) {
-            return newVmConfigBuilder().setPayloadConfigPath(payloadConfigPath);
-        }
-
         /**
          * Creates a new virtual machine, potentially removing an existing virtual machine with
          * given name.

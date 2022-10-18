@@ -88,12 +88,14 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
             throws VirtualMachineException, InterruptedException, IOException {
         final int trialCount = 5;
 
+        VirtualMachineConfig normalConfig = mInner.newVmConfigBuilder()
+                .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
+                .setDebugLevel(DEBUG_LEVEL_NONE)
+                .setMemoryMib(mem)
+                .build();
+
         // returns true if succeeded at least once.
         for (int i = 0; i < trialCount; i++) {
-            VirtualMachineConfig.Builder builder =
-                    mInner.newVmConfigBuilder("assets/vm_config.json");
-            VirtualMachineConfig normalConfig =
-                    builder.setDebugLevel(DEBUG_LEVEL_NONE).setMemoryMib(mem).build();
             mInner.forceCreateNewVirtualMachine("test_vm_minimum_memory", normalConfig);
 
             if (tryBootVm(TAG, "test_vm_minimum_memory").payloadStarted) return true;
@@ -144,7 +146,8 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         for (int i = 0; i < trialCount; i++) {
 
             // To grab boot events from log, set debug mode to FULL
-            VirtualMachineConfig normalConfig = mInner.newVmConfigBuilder("assets/vm_config.json")
+            VirtualMachineConfig normalConfig = mInner.newVmConfigBuilder()
+                    .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
                     .setDebugLevel(DEBUG_LEVEL_FULL)
                     .setMemoryMib(256)
                     .build();
@@ -191,7 +194,8 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
 
     @Test
     public void testVsockTransferFromHostToVM() throws Exception {
-        VirtualMachineConfig config = mInner.newVmConfigBuilder("assets/vm_config_io.json")
+        VirtualMachineConfig config = mInner.newVmConfigBuilder()
+                .setPayloadConfigPath("assets/vm_config_io.json")
                 .setDebugLevel(DEBUG_LEVEL_FULL)
                 .build();
         List<Double> transferRates = new ArrayList<>(IO_TEST_TRIAL_COUNT);
@@ -217,7 +221,8 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
     }
 
     private void testVirtioBlkReadRate(boolean isRand) throws Exception {
-        VirtualMachineConfig config = mInner.newVmConfigBuilder("assets/vm_config_io.json")
+        VirtualMachineConfig config = mInner.newVmConfigBuilder()
+                .setPayloadConfigPath("assets/vm_config_io.json")
                 .setDebugLevel(DEBUG_LEVEL_FULL)
                 .build();
         List<Double> readRates = new ArrayList<>(IO_TEST_TRIAL_COUNT);
@@ -283,7 +288,8 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
     public void testMemoryUsage() throws Exception {
         final String vmName = "test_vm_mem_usage";
         VirtualMachineConfig config =
-                mInner.newVmConfigBuilder("assets/vm_config_io.json")
+                mInner.newVmConfigBuilder()
+                        .setPayloadConfigPath("assets/vm_config_io.json")
                         .setDebugLevel(DEBUG_LEVEL_NONE)
                         .setMemoryMib(256)
                         .build();
