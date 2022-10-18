@@ -16,6 +16,24 @@
       "message": "Will this make it harder to read the negative error values?",
       "revId": "56b0038591d2fed600f2125a5b0e3f38ca6ea77e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "406cfa64_f06833ce",
+        "filename": "pvmfw/src/smccc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-18T11:05:51Z",
+      "side": 1,
+      "message": "Right, I guess I should print it twice (\"`{} ({:#x})`\")?",
+      "parentUuid": "b912987f_8bd30471",
+      "revId": "56b0038591d2fed600f2125a5b0e3f38ca6ea77e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
