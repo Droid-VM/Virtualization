@@ -159,6 +159,7 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
             throws DeviceNotAvailableException, InterruptedException {
         CommandRunner android = new CommandRunner(getDevice());
         unlockScreen(android);
+        android.run("am force-stop " + pkgName);
         android.run("echo 3 > /proc/sys/vm/drop_caches");
         String vmStartAppLog = android.run("am", "start -W -S " + pkgName);
         assertNotNull(vmStartAppLog);
@@ -180,6 +181,7 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
 
         // Run the app before the VM run and collect app startup time statistics
         CommandRunner android = new CommandRunner(getDevice());
+        android.tryRun("setenforce 0");
         AmStartupTimeCmdParser beforeVmStartApp = getColdRunStartupTimes(SETTINGS_PACKAGE_NAME);
         metricColector.addStartupTimeMetricBeforeVmRun(beforeVmStartApp);
 
