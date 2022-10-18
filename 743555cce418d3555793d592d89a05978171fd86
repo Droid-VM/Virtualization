@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ba60b3b_37d0a3c7",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-18T10:58:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "522c1c98_c08a58aa",
+      "range": {
+        "startLine": 412,
+        "startChar": 60,
+        "endLine": 412,
+        "endChar": 62
+      },
+      "revId": "743555cce418d3555793d592d89a05978171fd86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5cf405b0_62f6ebed",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46cc310c_36c85954",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-18T10:58:05Z",
+      "side": 1,
+      "message": "Well that\u0027s embarrassing. My javadoc is obviously very rusty.",
+      "parentUuid": "5cf405b0_62f6ebed",
+      "range": {
+        "startLine": 98,
+        "startChar": 44,
+        "endLine": 98,
+        "endChar": 73
+      },
+      "revId": "743555cce418d3555793d592d89a05978171fd86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97283730_28c4de3b",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-10-18T01:29:43Z",
       "side": 1,
       "message": "Can the result be cached? They don\u0027t change during the lifetime of the device.",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 22
+      },
+      "revId": "743555cce418d3555793d592d89a05978171fd86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7b50c8f_5a36e54c",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-18T10:58:05Z",
+      "side": 1,
+      "message": "I\u0027m not convinced it\u0027s worth it. I\u0027d be surprised if any app called this more than once.\n\nI resisted making this a static method because I think it\u0027s important you always start by attempting to obtain an instance, and also because I want implementation flexibility for further capabilities (e.g. trusted storage?).",
+      "parentUuid": "97283730_28c4de3b",
       "range": {
         "startLine": 110,
         "startChar": 0,
