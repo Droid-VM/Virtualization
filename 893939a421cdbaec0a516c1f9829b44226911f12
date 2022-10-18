@@ -255,6 +255,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cc67604_a6fc3df2",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsBenchmarks.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2022-10-18T16:21:16Z",
+      "side": 1,
+      "message": "The verification does happen for each 4K-block read.  The verification is against a Merkle tree (which has DIGEST_4M), and it\u0027s the tree that is fetched during the setup.",
+      "parentUuid": "b563162b_723d1224",
+      "range": {
+        "startLine": 85,
+        "startChar": 36,
+        "endLine": 85,
+        "endChar": 67
+      },
+      "revId": "893939a421cdbaec0a516c1f9829b44226911f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fcdcb2bc_85380efe",
