@@ -16,6 +16,23 @@
       "message": "Why not export the safe functions in layout.rs?",
       "revId": "c0f84435a2faeed0867ab61540c01e12da50ae08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50c55ad4_3d856d3f",
+        "filename": "vmbase/example/src/layout.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-18T11:09:51Z",
+      "side": 1,
+      "message": "I think most of this module (except `print_addresses`) could be moved to the vmbase crate, as it only depends on the vmbase `sections.ld`.",
+      "revId": "c0f84435a2faeed0867ab61540c01e12da50ae08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
