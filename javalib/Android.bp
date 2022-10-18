@@ -15,6 +15,13 @@ java_sdk_library {
     installable: true,
     compile_dex: true,
 
+    system_ext_specific: true,
+    shared_library: false,
+
+    // TODO(b/243512044): use framework-module-defaults
+
+    dist_group: "android",
+
     jarjar_rules: "jarjar-rules.txt",
 
     srcs: ["src/**/*.java"],
@@ -24,7 +31,11 @@ java_sdk_library {
         "PlatformProperties",
     ],
 
-    apex_available: ["com.android.virt"],
+    apex_available: [
+        "//apex_available:platform",
+        "com.android.virt",
+    ],
+
     permitted_packages: [
         "android.system.virtualmachine",
         "android.system.virtualizationservice",
