@@ -24,6 +24,7 @@ import static org.junit.Assert.assertEquals;
 
 import android.platform.test.annotations.RootPermissionTest;
 
+import com.android.microdroid.test.host.AuthFsTestRule;
 import com.android.microdroid.test.host.CommandRunner;
 import com.android.tradefed.device.DeviceNotAvailableException;
 import com.android.tradefed.invoker.TestInformation;
