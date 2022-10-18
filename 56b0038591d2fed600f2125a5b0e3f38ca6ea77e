@@ -52,6 +52,24 @@
       "parentUuid": "406cfa64_f06833ce",
       "revId": "56b0038591d2fed600f2125a5b0e3f38ca6ea77e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ce6dcd5_8e637951",
+        "filename": "pvmfw/src/smccc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-18T12:48:22Z",
+      "side": 1,
+      "message": "I had `0xfffffffd` due to b/253586500, which was awkward to read in decimal but obvious in hex.",
+      "parentUuid": "da8a817c_0b9a5d67",
+      "revId": "56b0038591d2fed600f2125a5b0e3f38ca6ea77e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
