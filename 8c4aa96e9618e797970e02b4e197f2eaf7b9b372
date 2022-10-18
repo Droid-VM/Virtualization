@@ -117,6 +117,30 @@
       },
       "revId": "8c4aa96e9618e797970e02b4e197f2eaf7b9b372",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4f0f03d_299d2dd1",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-18T17:11:16Z",
+      "side": 1,
+      "message": "Can you use `env!(\"TARGET_BUILD_VARIANT\")` instead?",
+      "parentUuid": "bb11e844_b611c79a",
+      "range": {
+        "startLine": 66,
+        "startChar": 20,
+        "endLine": 66,
+        "endChar": 38
+      },
+      "revId": "8c4aa96e9618e797970e02b4e197f2eaf7b9b372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
