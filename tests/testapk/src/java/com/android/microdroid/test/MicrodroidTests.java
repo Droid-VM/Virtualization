@@ -19,33 +19,23 @@ import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_FUL
 import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_NONE;
 
 import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.TruthJUnit.assume;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
-import android.os.Build;
-import android.os.ParcelFileDescriptor;
-import android.os.SystemProperties;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineCallback;
 import android.system.virtualmachine.VirtualMachineConfig;
-import android.util.Log;
 
 import com.android.compatibility.common.util.CddTest;
-import com.android.microdroid.test.device.MicrodroidDeviceTestBase;
 import com.android.microdroid.testservice.ITestService;
 
-import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.Timeout;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.file.Files;
@@ -59,28 +49,11 @@ import co.nstant.in.cbor.model.Array;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.MajorType;
 
+/**
+ * Microdroid tests that do not require the USE_CUSTOM_VIRTUAL_MACHINE permission.
+ */
 @RunWith(Parameterized.class)
-public class MicrodroidTests extends MicrodroidDeviceTestBase {
-    private static final String TAG = "MicrodroidTests";
-
-    @Rule public Timeout globalTimeout = Timeout.seconds(300);
-
-    private static final String KERNEL_VERSION = SystemProperties.get("ro.kernel.version");
-
-    @Parameterized.Parameters(name = "protectedVm={0}")
-    public static Object[] protectedVmConfigs() {
-        return new Object[] { false, true };
-    }
-
-    @Parameterized.Parameter public boolean mProtectedVm;
-
-    @Before
-    public void setup() {
-        prepareTestSetup(mProtectedVm);
-    }
-
-    private static final int MIN_MEM_ARM64 = 150;
-    private static final int MIN_MEM_X86_64 = 196;
+public class MicrodroidTests extends MicrodroidTestsBase {
 
     @Test
     @CddTest(requirements = {
@@ -101,23 +74,6 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(testResults.mAddInteger).isEqualTo(123 + 456);
         assertThat(testResults.mAppRunProp).isEqualTo("true");
         assertThat(testResults.mSublibRunProp).isEqualTo("true");
-    }
-
-    @Test
-    @CddTest(requirements = {
-            "9.17/C-1-1",
-            "9.17/C-2-1"
-    })
-    public void extraApk() throws Exception {
-        assumeSupportedKernel();
-
-        VirtualMachineConfig config = mInner.newVmConfigBuilder("assets/vm_config_extra_apk.json")
-                .setMemoryMib(minMemoryRequired())
-                .build();
-        VirtualMachine vm = mInner.forceCreateNewVirtualMachine("test_vm_extra_apk", config);
-
-        TestResults testResults = runVmTestService(vm);
-        assertThat(testResults.mExtraApkTestProp).isEqualTo("PASS");
     }
 
     @Test
@@ -405,19 +361,6 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
-    public void bootFailsWhenConfigIsInvalid() throws Exception {
-        VirtualMachineConfig.Builder builder =
-                mInner.newVmConfigBuilder("assets/vm_config_no_task.json");
-        VirtualMachineConfig normalConfig = builder.setDebugLevel(DEBUG_LEVEL_FULL).build();
-        mInner.forceCreateNewVirtualMachine("test_vm_invalid_config", normalConfig);
-
-        BootResult bootResult = tryBootVm(TAG, "test_vm_invalid_config");
-        assertThat(bootResult.payloadStarted).isFalse();
-        assertThat(bootResult.deathReason).isEqualTo(
-                VirtualMachineCallback.STOP_REASON_MICRODROID_INVALID_PAYLOAD_CONFIG);
-    }
-
-    @Test
     public void bootFailsWhenBinaryPathIsInvalid() throws Exception {
         VirtualMachineConfig.Builder builder = mInner.newVmConfigBuilder()
                 .setPayloadBinaryPath("DoesNotExist.so");
@@ -448,75 +391,4 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(vm).isNotEqualTo(newVm);
     }
 
-    private int minMemoryRequired() {
-        if (Build.SUPPORTED_ABIS.length > 0) {
-            String primaryAbi = Build.SUPPORTED_ABIS[0];
-            switch (primaryAbi) {
-                case "x86_64":
-                    return MIN_MEM_X86_64;
-                case "arm64-v8a":
-                    return MIN_MEM_ARM64;
-            }
-        }
-        return 0;
-    }
-
-    private void assumeSupportedKernel() {
-        assume()
-                .withMessage("Skip on 5.4 kernel. b/218303240")
-                .that(KERNEL_VERSION)
-                .isNotEqualTo("5.4");
-    }
-
-    static class TestResults {
-        Exception mException;
-        Integer mAddInteger;
-        String mAppRunProp;
-        String mSublibRunProp;
-        String mExtraApkTestProp;
-    }
-
-    private TestResults runVmTestService(VirtualMachine vm) throws Exception {
-        CompletableFuture<Boolean> payloadStarted = new CompletableFuture<>();
-        CompletableFuture<Boolean> payloadReady = new CompletableFuture<>();
-        TestResults testResults = new TestResults();
-        VmEventListener listener =
-                new VmEventListener() {
-                    private void testVMService(VirtualMachine vm) {
-                        try {
-                            ITestService testService = ITestService.Stub.asInterface(
-                                    vm.connectToVsockServer(ITestService.SERVICE_PORT));
-                            testResults.mAddInteger = testService.addInteger(123, 456);
-                            testResults.mAppRunProp =
-                                    testService.readProperty("debug.microdroid.app.run");
-                            testResults.mSublibRunProp =
-                                    testService.readProperty("debug.microdroid.app.sublib.run");
-                            testResults.mExtraApkTestProp =
-                                    testService.readProperty("debug.microdroid.test.extra_apk");
-                        } catch (Exception e) {
-                            testResults.mException = e;
-                        }
-                    }
-
-                    @Override
-                    public void onPayloadReady(VirtualMachine vm) {
-                        Log.i(TAG, "onPayloadReady");
-                        payloadReady.complete(true);
-                        testVMService(vm);
-                        forceStop(vm);
-                    }
-
-                    @Override
-                    public void onPayloadStarted(VirtualMachine vm, ParcelFileDescriptor stream) {
-                        Log.i(TAG, "onPayloadStarted");
-                        payloadStarted.complete(true);
-                        logVmOutput(TAG, new FileInputStream(stream.getFileDescriptor()),
-                                "Payload");
-                    }
-                };
-        listener.runToFinish(TAG, vm);
-        assertThat(payloadStarted.getNow(false)).isTrue();
-        assertThat(payloadReady.getNow(false)).isTrue();
-        return testResults;
-    }
 }
