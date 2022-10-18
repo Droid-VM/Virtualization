@@ -42,8 +42,6 @@ use std::path::{Path, PathBuf};
 pub mod util;
 /// Exposes the DmVerityTarget & related builder
 pub mod verity;
-// Expose loopdevice
-pub mod loopdevice;
 
 mod sys;
 use sys::*;
