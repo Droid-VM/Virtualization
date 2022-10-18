@@ -4,14 +4,13 @@ package {
 
 java_test_host {
     name: "AuthFsHostTest",
-    srcs: ["java/**/*.java"],
+    srcs: ["java/src/com/android/fs/*.java"],
     libs: [
         "tradefed",
-        "compatibility-tradefed",
-        "compatibility-host-util",
     ],
     static_libs: [
         "MicrodroidHostTestHelper",
+        "AuthFsHostTestCommon",
     ],
     test_suites: ["general-tests"],
     data_device_bins_first: [
@@ -23,7 +22,6 @@ java_test_host {
         ":authfs_test_files",
         ":CtsApkVerityTestPrebuiltFiles",
         ":MicrodroidTestApp",
-        ":measure_io",
     ],
 }
 
@@ -42,14 +40,4 @@ rust_test {
     ],
     test_suites: ["general-tests"],
     test_harness: false,
-}
-
-cc_binary {
-    name: "measure_io",
-    srcs: [
-        "measure_io.cpp",
-    ],
-    shared_libs: [
-        "libbase",
-    ],
 }
