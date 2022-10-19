@@ -16,9 +16,10 @@
 
 use crate::helpers::FDT_MAX_SIZE;
 use crate::jump_to_payload;
+use crate::mmio_guard;
 use core::{fmt, slice};
-use log::LevelFilter;
-use vmbase::{logger, main, power::reboot};
+use log::{debug, LevelFilter};
+use vmbase::{console, logger, main, power::reboot};
 
 #[derive(Debug, Clone)]
 enum RebootReason {
@@ -68,8 +69,15 @@ fn main_wrapper(fdt: &mut [u8], payload: &[u8]) -> Result<(), RebootReason> {
     // - the location of inputs (in safe types) can't be trusted
     logger::init(LevelFilter::Info).map_err(|_| RebootReason::InternalError)?;
 
+    if let Err(e) = mmio_guard::setup().map(|_| mmio_guard::map(console::BASE_ADDRESS)) {
+        // We don't want to print to the UART when having failed to initialize it so use debug!()
+        // to have logging exclusively for local builds that have tweaked the logger::init() call.
+        debug!("Failed to configure UART: {e}");
+        return Err(RebootReason::InternalError);
+    }
+
     // This wrapper allows main() to be blissfully ignorant of platform details.
-    crate::main(fdt, payload).map_err(|_| RebootReason::InternalError)?;
+    crate::main(fdt, payload);
 
     Ok(())
 }
