@@ -114,6 +114,20 @@ lazy_static! {
 #[derive(Debug, Default)]
 pub struct VirtualizationServiceInternal {}
 
+impl VirtualizationServiceInternal {
+    pub fn init() -> VirtualizationServiceInternal {
+        let service = VirtualizationServiceInternal::default();
+
+        std::thread::spawn(|| {
+            if let Err(e) = handle_stream_connection_tombstoned() {
+                warn!("Error receiving tombstone from guest or writing them. Error: {:?}", e);
+            }
+        });
+
+        service
+    }
+}
+
 impl Interface for VirtualizationServiceInternal {}
 
 impl IVirtualizationServiceInternal for VirtualizationServiceInternal {}
@@ -324,12 +338,6 @@ fn handle_tombstone(stream: &mut VsockStream) -> Result<()> {
 impl VirtualizationService {
     pub fn init() -> VirtualizationService {
         let service = VirtualizationService::default();
-
-        std::thread::spawn(|| {
-            if let Err(e) = handle_stream_connection_tombstoned() {
-                warn!("Error receiving tombstone from guest or writing them. Error: {:?}", e);
-            }
-        });
 
         // binder server for vm
         // reference to state (not the state itself) is copied
