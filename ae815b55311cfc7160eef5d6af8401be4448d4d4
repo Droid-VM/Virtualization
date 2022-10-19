@@ -128,6 +128,30 @@
       },
       "revId": "ae815b55311cfc7160eef5d6af8401be4448d4d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db62ee78_a1eb1b2b",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-19T10:16:37Z",
+      "side": 1,
+      "message": "Do you mean like this?\n\nSo I convert the service from AIBinder to SpIBinder in this lib, and then librpcbinder_rs changes it back from SpIBinder to AIBinder. Is that okay?",
+      "parentUuid": "f5bb19cf_e800f427",
+      "range": {
+        "startLine": 65,
+        "startChar": 13,
+        "endLine": 65,
+        "endChar": 40
+      },
+      "revId": "ae815b55311cfc7160eef5d6af8401be4448d4d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
