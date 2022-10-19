@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab511112_71d1cc30",
+        "filename": "tests/benchmark/AndroidManifest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-19T16:39:18Z",
+      "side": 1,
+      "message": "I\u0027m not familiar with how permissions work with tests. Here the APK declares it needs USE_CUSTOM_VIRTUAL_MACHINE but you have to explicitly grant that as part of the test setup, it doesn\u0027t just get the permission when the APK is installed?",
+      "revId": "8cc6c1815d83d2ebdc8aa44d3862c6c892d0fb1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1a9bbb91_16688f36",
@@ -37,6 +54,23 @@
         "endLine": 44,
         "endChar": 1
       },
+      "revId": "8cc6c1815d83d2ebdc8aa44d3862c6c892d0fb1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df2a13ed_9ef13e20",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-19T16:39:18Z",
+      "side": 1,
+      "message": "nit: I didn\u0027t know you could do this! I guess it\u0027s preferable since it gives a name to the boolean.",
       "revId": "8cc6c1815d83d2ebdc8aa44d3862c6c892d0fb1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
