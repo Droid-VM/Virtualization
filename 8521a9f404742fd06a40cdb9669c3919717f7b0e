@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "635b4708_0ad35ed5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-19T10:17:32Z",
+      "side": 1,
+      "message": "Thanks!\nBut unfortunately this will conflict slightly with https://r.android.com/2260601",
+      "revId": "8521a9f404742fd06a40cdb9669c3919717f7b0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20d1fdaf_d70b6d70",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-19T10:17:32Z",
+      "side": 1,
+      "message": "TBF isTrue() doesn\u0027t give any huge advantage over assumeTrue().\nBut in most other cases Truth is a massive win, so I\u0027ve no objection to using it everywhere.",
+      "range": {
+        "startLine": 109,
+        "startChar": 90,
+        "endLine": 109,
+        "endChar": 98
+      },
+      "revId": "8521a9f404742fd06a40cdb9669c3919717f7b0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
