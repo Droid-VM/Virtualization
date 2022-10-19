@@ -22,6 +22,30 @@
       },
       "revId": "15b1bda07b21a69cccb913b75d6f494b4e624bbf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64cf0052_7ed2ee0c",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-19T10:10:38Z",
+      "side": 1,
+      "message": "Running the benchmark on my device (Oriole) resulted in :\n```\n10-13 08:15:47.806  1000  3910  3910 E VirtualizationService: virtualizationservice::aidl: Error starting VM with CID 10: failed to create control server\n10-13 08:15:47.806  1000  3910  3910 E VirtualizationService: \n10-13 08:15:47.806  1000  3910  3910 E VirtualizationService: Caused by:\n10-13 08:15:47.806  1000  3910  3910 E VirtualizationService:     Permission denied (os error 13)\n```",
+      "parentUuid": "a48937b2_17446db8",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 39
+      },
+      "revId": "15b1bda07b21a69cccb913b75d6f494b4e624bbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
