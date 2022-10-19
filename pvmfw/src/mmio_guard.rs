@@ -17,6 +17,7 @@
 use crate::helpers;
 use crate::smccc;
 use core::{fmt, result};
+use log::info;
 
 #[derive(Debug, Clone)]
 pub enum Error {
@@ -96,7 +97,12 @@ fn mmio_guard_unmap(ipa: u64) -> smccc::Result<()> {
     let mut args = [0u64; 17];
     args[0] = ipa;
 
+    info!("Handled a bug making MMIO_GUARD_UNMAP return NOT_SUPPORTED on success");
     let res = smccc::hvc64(FUNC_ID, args);
 
-    smccc::check_err(res[0] as i64)
+    // TODO(b/251426790): pKVM currently returns NOT_SUPPORTED for SUCCESS.
+    match smccc::check_err(res[0] as i64) {
+        Err(smccc::Error::NotSupported) | Ok(_) => Ok(()),
+        x => x,
+    }
 }
