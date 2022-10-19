@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2935fc0f_079c3301",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-19T10:13:58Z",
+      "side": 1,
+      "message": "This doesn\u0027t sounds particularly safe. Doesn\u0027t the compiler tell you to make the whole function unsafe and add a safety section in the doc comment because of the pointer argument dereferences?",
+      "range": {
+        "startLine": 70,
+        "startChar": 16,
+        "endLine": 70,
+        "endChar": 70
+      },
+      "revId": "ccab2b946a6a930e90f881843df203407e14162a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

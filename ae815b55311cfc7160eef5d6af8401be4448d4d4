@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef8a021d_fe97633a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-19T10:13:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b9310f4b_5b057a21",
+      "revId": "ae815b55311cfc7160eef5d6af8401be4448d4d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43adb855_66b947d5",
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2bb58292_ae1db0f1",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-19T10:13:58Z",
+      "side": 1,
+      "message": "To help with context, is librpcbinder_rs or the C version part of the NDK?\n\nThis header is going to have to be made public as part of the AVF API for VM developers. If there\u0027s already and exposed NDK API that handles this then I agree that we should just use that directly from the VM payloads.\n\nI\u0027ve also got a feeling that, at a later point, we should abstract the details of vsock and ports from the VM payload and just offer it a way to expose a named binder service to the host. That would give us some flexibility to change the transport used from behind the API and remove some cognitive burden from developers who don\u0027t need to know anything about vsock.",
+      "parentUuid": "43adb855_66b947d5",
+      "range": {
+        "startLine": 56,
+        "startChar": 5,
+        "endLine": 56,
+        "endChar": 33
+      },
+      "revId": "ae815b55311cfc7160eef5d6af8401be4448d4d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f5bb19cf_e800f427",
         "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
         "patchSetId": 7
@@ -54,6 +96,30 @@
       "writtenOn": "2022-10-19T01:32:55Z",
       "side": 1,
       "message": "more specifically, the comment is that librpcbinder_rs should encapsulate all of the use of bindgen",
+      "range": {
+        "startLine": 65,
+        "startChar": 13,
+        "endLine": 65,
+        "endChar": 40
+      },
+      "revId": "ae815b55311cfc7160eef5d6af8401be4448d4d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c005ef8a_d11b1076",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-19T10:13:58Z",
+      "side": 1,
+      "message": "The latest PS looks to have switch to using librpcbinder_rs to address the bindgen concern. Don\u0027t bindgen rules have really strict visibility these days that would have prevented its use here?",
+      "parentUuid": "f5bb19cf_e800f427",
       "range": {
         "startLine": 65,
         "startChar": 13,
