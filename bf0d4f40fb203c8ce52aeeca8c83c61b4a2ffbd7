@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3a8b899_6509a478",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsTestRule.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-19T15:42:52Z",
+      "side": 1,
+      "message": "Please don\u0027t create another copy of this. We worked hard to make sure there is only one copy for host tests and one for device tests. Do the `assume()` in the test class, not in this helper class.",
+      "range": {
+        "startLine": 233,
+        "startChar": 4,
+        "endLine": 237,
+        "endChar": 0
+      },
+      "revId": "bf0d4f40fb203c8ce52aeeca8c83c61b4a2ffbd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
