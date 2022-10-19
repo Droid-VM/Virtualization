@@ -16,6 +16,24 @@
       "message": "The permissions check would previously be done at the very top, is that something we\u0027d want to keep being the case?",
       "revId": "dadac017d332760e1d6fcf364ef6f45beae353c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed5f62e6_0cfdeeee",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-19T16:50:15Z",
+      "side": 0,
+      "message": "I decided I wasn\u0027t that worried about it - we do a bit more work before failing, but that seems to be harmless.",
+      "parentUuid": "5ed475d8_c1379d54",
+      "revId": "dadac017d332760e1d6fcf364ef6f45beae353c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

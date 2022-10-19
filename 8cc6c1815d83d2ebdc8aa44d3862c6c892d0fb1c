@@ -37,6 +37,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "83320839_8cd3aa00",
+        "filename": "tests/benchmark/AndroidManifest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-19T16:50:15Z",
+      "side": 1,
+      "message": "Roughly, this is requesting the permission. It won\u0027t be granted by default because the permission is only available to platform signed code. But it can also be granted explicitly via adb which is what we do.\n\nThe details are complicated: http://cs/android-internal/frameworks/base/core/java/android/permission/Permissions.md",
+      "parentUuid": "ab511112_71d1cc30",
+      "revId": "8cc6c1815d83d2ebdc8aa44d3862c6c892d0fb1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1a9bbb91_16688f36",
         "filename": "tests/testapk/Android.bp",
         "patchSetId": 1
@@ -48,6 +66,30 @@
       "writtenOn": "2022-10-19T14:47:20Z",
       "side": 1,
       "message": "This is building two separate APKs in order to get two tests; there\nshould be a neater way using android_test_helper_app\nandroid_test_import but I couldn\u0027t make that work. (I\u0027ll raise that\nissue separately.)",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 1
+      },
+      "revId": "8cc6c1815d83d2ebdc8aa44d3862c6c892d0fb1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f22fc25_b3840d72",
+        "filename": "tests/testapk/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-19T16:50:15Z",
+      "side": 1,
+      "message": "Actually this only mostly works. CTS doesn\u0027t like having 2 test APKs with the same package name. Sigh.",
+      "parentUuid": "1a9bbb91_16688f36",
       "range": {
         "startLine": 34,
         "startChar": 0,
@@ -71,6 +113,24 @@
       "writtenOn": "2022-10-19T16:39:18Z",
       "side": 1,
       "message": "nit: I didn\u0027t know you could do this! I guess it\u0027s preferable since it gives a name to the boolean.",
+      "revId": "8cc6c1815d83d2ebdc8aa44d3862c6c892d0fb1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0955e31_f052ded5",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-19T16:50:15Z",
+      "side": 1,
+      "message": "I try to avoid it, but it works here. (And Rust even figures out the type for you.)\n\nActually I should probably make it simpler:\n\nlet (is_app_config, config) \u003d match {}",
+      "parentUuid": "df2a13ed_9ef13e20",
       "revId": "8cc6c1815d83d2ebdc8aa44d3862c6c892d0fb1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
