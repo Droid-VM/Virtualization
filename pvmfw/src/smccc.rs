@@ -13,6 +13,7 @@
 // limitations under the License.
 
 use core::{fmt, result};
+use log::info;
 
 // TODO(b/245889995): use psci-0.1.1 crate
 #[inline(always)]
@@ -132,7 +133,12 @@ pub fn mmio_guard_unmap(ipa: u64) -> Result<()> {
     let mut args = [0u64; 17];
     args[0] = ipa;
 
+    info!("Handled a bug making MMIO_GUARD_UNMAP return NOT_SUPPORTED on success");
     let res = hvc64(VENDOR_HYP_KVM_MMIO_GUARD_UNMAP_FUNC_ID, args);
 
-    check_smccc_err(res[0] as i64)
+    // TODO(b/251426790): pKVM currently returns NOT_SUPPORTED for SUCCESS.
+    match check_smccc_err(res[0] as i64) {
+        Err(Error::NotSupported) | Ok(_) => Ok(()),
+        x => x,
+    }
 }
