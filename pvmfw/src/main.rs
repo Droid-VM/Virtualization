@@ -19,35 +19,23 @@
 
 mod exceptions;
 mod helpers;
+mod mmio;
 mod smccc;
 
 use core::fmt;
-use helpers::checked_page_of;
-use log::{debug, error, info, LevelFilter};
+use log::{debug, error, info, trace, LevelFilter};
 use vmbase::{console, logger, main, power::reboot};
 
 #[derive(Debug, Clone)]
-enum Error {
-    /// Failed to configure the UART; no logs available.
-    FailedUartSetup,
-}
+enum Error {}
 
 impl fmt::Display for Error {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        let msg = match self {
-            Self::FailedUartSetup => "Failed to configure the UART",
-        };
-        write!(f, "{}", msg)
+        write!(f, "")
     }
 }
 
 fn main(fdt_address: u64, payload_start: u64, payload_size: u64, arg3: u64) -> Result<(), Error> {
-    // We need to inform the hypervisor that the MMIO page containing the UART may be shared back.
-    let mmio_granule = smccc::mmio_guard_info().map_err(|_| Error::FailedUartSetup)?;
-    let uart_page = checked_page_of(console::BASE_ADDRESS, mmio_granule as usize)
-        .ok_or(Error::FailedUartSetup)?;
-    smccc::mmio_guard_map(uart_page as u64).map_err(|_| Error::FailedUartSetup)?;
-
     info!("pVM firmware");
     debug!(
         "fdt_address={:#018x}, payload_start={:#018x}, payload_size={:#018x}, x3={:#018x}",
@@ -64,6 +52,11 @@ main!(main_wrapper);
 /// Entry point for pVM firmware.
 pub fn main_wrapper(fdt_address: u64, payload_start: u64, payload_size: u64, arg3: u64) {
     if logger::init(LevelFilter::Debug).is_err() {
+        // We need to inform the hypervisor that the MMIO page containing the UART may be shared back.
+    } else if let Err(e) = mmio::guard::setup().map(|_| mmio::guard::map(console::BASE_ADDRESS)) {
+        // We don't want to print to the UART when having failed to initialize it so use trace!()
+        // to have logging exclusively for local builds that have tweaked the logger::init() call.
+        trace!("Failed to configure UART: {e}");
     } else if let Err(e) = main(fdt_address, payload_start, payload_size, arg3) {
         error!("Boot rejected: {e}");
     } else {

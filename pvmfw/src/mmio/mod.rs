@@ -12,16 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! Miscellaneous helper functions.
+//! Support for MMIO.
 
-pub const SIZE_4KB: usize = 4 << 10;
-
-/// Computes the address of the page containing a given address.
-pub const fn page_of(addr: usize, page_size: usize) -> usize {
-    addr & !(page_size - 1)
-}
-
-/// Computes the address of the 4KiB page containing a given address.
-pub const fn page_4kb_of(addr: usize) -> usize {
-    page_of(addr, SIZE_4KB)
-}
+pub mod guard;
