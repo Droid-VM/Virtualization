@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fdfea17_9bc3459f",
+        "filename": "tests/benchmark/AndroidManifest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-19T16:51:27Z",
+      "side": 1,
+      "message": "That\u0027s correct, because these permissions are signature-protected.\n\nThe explicit grant works because the permissions also have \u0027development\u0027 in their protection level.",
+      "parentUuid": "ab511112_71d1cc30",
+      "revId": "8cc6c1815d83d2ebdc8aa44d3862c6c892d0fb1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1a9bbb91_16688f36",
