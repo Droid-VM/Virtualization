@@ -2,12 +2,8 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
-java_defaults {
-    name: "MicrodroidTestDefaults",
-    test_suites: [
-        "cts",
-        "general-tests",
-    ],
+android_test_helper_app {
+    name: "MicrodroidTestApk",
     srcs: ["src/java/**/*.java"],
     static_libs: [
         "MicrodroidDeviceTestHelper",
@@ -31,15 +27,25 @@ java_defaults {
     min_sdk_version: "33",
 }
 
-android_test {
+android_test_import {
     name: "MicrodroidTestApp",
-    defaults: ["MicrodroidTestDefaults"],
+    apk: ":MicrodroidTestApk",
+    presigned: true,
+    test_suites: [
+        "cts",
+        "general-tests",
+    ],
     test_config: "AndroidTest_NoConfig.xml",
 }
 
-android_test {
+android_test_import {
     name: "MicrodroidCustomConfigTestApp",
-    defaults: ["MicrodroidTestDefaults"],
+    apk: ":MicrodroidTestApk",
+    presigned: true,
+    test_suites: [
+        "cts",
+        "general-tests",
+    ],
     test_config: "AndroidTest_CustomConfig.xml",
 }
 
