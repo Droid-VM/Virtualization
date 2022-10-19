@@ -113,5 +113,5 @@ pub fn mmio_guard_map(ipa: u64) -> Result<()> {
 
     let res = hvc64(VENDOR_HYP_KVM_MMIO_GUARD_MAP_FUNC_ID, args);
 
-    check_smccc_err(res[0] as i64)
+    check_smccc_err(res[0] as u32 as i32 as i64) // TODO(b/253586500)
 }
