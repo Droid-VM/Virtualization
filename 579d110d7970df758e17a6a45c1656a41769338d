@@ -16,6 +16,29 @@
       "message": "Hi David, PTAL.",
       "revId": "579d110d7970df758e17a6a45c1656a41769338d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea056402_aff24ab0",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsBenchmarks.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-19T10:40:39Z",
+      "side": 1,
+      "message": "Ah yeah, this won\u0027t work on Cuttlefish - it only supports non-protected mode. So you\u0027ll need to skip the test on CF for now.",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 62
+      },
+      "revId": "579d110d7970df758e17a6a45c1656a41769338d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
