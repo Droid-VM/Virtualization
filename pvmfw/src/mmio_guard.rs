@@ -83,7 +83,19 @@ fn mmio_guard_map(ipa: u64) -> smccc::Result<()> {
     let mut args = [0u64; 17];
     args[0] = ipa;
 
-    smccc::checked_hvc64_expect_zero(VENDOR_HYP_KVM_MMIO_GUARD_MAP_FUNC_ID, args)
+    // TODO(b/253586500): pKVM currently returns a i32 instead of a i64.
+    match smccc::checked_hvc64_expect_zero(VENDOR_HYP_KVM_MMIO_GUARD_MAP_FUNC_ID, args) {
+        Err(smccc::Error::Unexpected(e)) if e <= (u32::MAX as u64) && (e as u32 as i32) < 0 => {
+            info!("Handled a pKVM bug by interpreting the MMIO_GUARD_MAP return value as i32");
+            match e as u32 as i32 {
+                -1 => Err(smccc::Error::NotSupported),
+                -2 => Err(smccc::Error::NotRequired),
+                -3 => Err(smccc::Error::InvalidParameter),
+                ret => Err(smccc::Error::Unknown(ret as i64)),
+            }
+        }
+        res => res,
+    }
 }
 
 fn mmio_guard_unmap(ipa: u64) -> smccc::Result<()> {
