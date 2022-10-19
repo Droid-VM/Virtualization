@@ -141,6 +141,30 @@
       },
       "revId": "8c4aa96e9618e797970e02b4e197f2eaf7b9b372",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4b61a3a_eba9f890",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-19T20:06:55Z",
+      "side": 1,
+      "message": "Unfortunately, Soong doesn\u0027t invalidate object files built with the `env!` macro and reuses them when switching between `userdebug` to `eng`... Furthermore, although it might help with conditional compilation (assuming compiler optimization given that `env!` can\u0027t be compared in `const`), I don\u0027t believe it fully removes excluded levels from the resulting binary as `#[cfg()]` would, which seems to be the goal of https://docs.rs/log/latest/log/#compile-time-filters.\n\nI\u0027ve also tried setting `features: [\"log/max_level_off\"]` in pvmfw\u0027s Android.bp but (unsurprisingly) that doesn\u0027t seem to be possible (it actually looks like the set features for an imported crate need to be fixed and shared by all the users of the crate across AOSP).\n\nLet\u0027s keep this idea as a follow-up as I\u0027m also unsure about the ramifications of having different binaries between the builds w.r.t. testing.",
+      "parentUuid": "f4f0f03d_299d2dd1",
+      "range": {
+        "startLine": 66,
+        "startChar": 20,
+        "endLine": 66,
+        "endChar": 38
+      },
+      "revId": "8c4aa96e9618e797970e02b4e197f2eaf7b9b372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
