@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d98c6a9d_a9fde584",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-19T14:47:20Z",
+      "side": 1,
+      "message": "There will have to be some test config (and dashboard) changes after this.",
+      "revId": "8cc6c1815d83d2ebdc8aa44d3862c6c892d0fb1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a9bbb91_16688f36",
+        "filename": "tests/testapk/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-19T14:47:20Z",
+      "side": 1,
+      "message": "This is building two separate APKs in order to get two tests; there\nshould be a neater way using android_test_helper_app\nandroid_test_import but I couldn\u0027t make that work. (I\u0027ll raise that\nissue separately.)",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 1
+      },
+      "revId": "8cc6c1815d83d2ebdc8aa44d3862c6c892d0fb1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
