@@ -89,7 +89,9 @@ fn mmio_guard_map(ipa: u64) -> smccc::Result<()> {
 
     let res = smccc::hvc64(FUNC_ID, args);
 
-    smccc::check_err(res[0] as i64)
+    // TODO(b/253586500): pKVM currently returns a i32 instead of a i64.
+    info!("Handled a pKVM bug by interpreting the MMIO_GUARD_MAP return value as i32");
+    smccc::check_err(res[0] as u32 as i32 as i64)
 }
 
 fn mmio_guard_unmap(ipa: u64) -> smccc::Result<()> {
