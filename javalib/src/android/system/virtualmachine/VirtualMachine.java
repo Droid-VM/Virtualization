@@ -53,7 +53,6 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.os.ServiceSpecificException;
 import android.system.virtualizationcommon.ErrorCode;
 import android.system.virtualizationservice.DeathReason;
@@ -250,6 +249,34 @@ public class VirtualMachine implements AutoCloseable {
         System.loadLibrary("virtualmachine_jni");
     }
 
+    private static native IBinder nativeSpawnVirtMgr();
+
+    private static IVirtualizationService sVirtualizationService;
+
+    @NonNull
+    private static IVirtualizationService getVirtualizationService()
+            throws VirtualMachineException {
+        if (sVirtualizationService == null) {
+            sVirtualizationService = IVirtualizationService.Stub.asInterface(nativeSpawnVirtMgr());
+            if (sVirtualizationService == null) {
+                throw new IllegalStateException("nativeSpawnVirtMgr should not return null");
+            }
+            try {
+                sVirtualizationService
+                        .asBinder()
+                        .linkToDeath(
+                                () -> {
+                                    sVirtualizationService = null;
+                                },
+                                0);
+            } catch (RemoteException e) {
+                throw new VirtualMachineException(
+                        "failed to link to death of VirtualizationService", e);
+            }
+        }
+        return sVirtualizationService;
+    }
+
     private VirtualMachine(
             @NonNull Context context, @NonNull String name, @NonNull VirtualMachineConfig config)
             throws VirtualMachineException {
@@ -326,9 +353,7 @@ public class VirtualMachine implements AutoCloseable {
                 throw new VirtualMachineException("failed to create instance image", e);
             }
 
-            IVirtualizationService service =
-                    IVirtualizationService.Stub.asInterface(
-                            ServiceManager.waitForService(SERVICE_NAME));
+            IVirtualizationService service = getVirtualizationService();
 
             try {
                 service.initializeWritablePartition(
@@ -589,9 +614,7 @@ public class VirtualMachine implements AutoCloseable {
                 throw new VirtualMachineException("failed to create idsig file", e);
             }
 
-            IVirtualizationService service =
-                    IVirtualizationService.Stub.asInterface(
-                            ServiceManager.waitForService(SERVICE_NAME));
+            IVirtualizationService service = getVirtualizationService();
 
             try {
                 createVmPipes();
