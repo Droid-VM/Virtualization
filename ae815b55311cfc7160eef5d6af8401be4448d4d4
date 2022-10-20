@@ -109,6 +109,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e3b85ad_d52e4547",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-10-20T16:25:28Z",
+      "side": 1,
+      "message": "The bindgen targets aren\u0027t supposed to be used as APIs. This is why libbinder_rs wraps bindgen which wraps libbinder_ndk. There is no such thing as libbinder_rpc_ndk. These APIs have changed this week even - and they are changing as part of this again. The mainline module is not updated, and given that these APIs are still changing, and we still don\u0027t know how they are used, we still want to make sure that this is flexible. It shouldn\u0027t be called \"unstable\" it should be called \"we get to learn from our mistakes without maintaining an API we dislike for 10 years\" :D That\u0027s why we have this unstable side API.\n\nNow - what librpcbinder_rs is the wrapper around bindgen around the unstable C API. It\u0027s unstable because we\u0027re not ready to freeze RPC binder ABI. This library was recently renamed by Andrew Q. The \"right\" way to expose more things from librpcbinder_rs is to expand the unstable API surface, expand the bindgen, and then write a Rust API in librpcbinder_rs.\n\nIn the future, when we need to make this code updatable or we have a better idea of what\u0027s going to happen, all the code will be consolidated in one place. We may create an abstraction around RpcServer and expose it there, or we may keep it similar to what we have now. Certainly we don\u0027t want 3 different versions of \"CreateVsockServer\" \"CreateFooServer\" etc.. so it\u0027s really important all of those are next to each other now, and we can restructure them to the API we want. So when we do that, there are 4 possible architectures we go with. That\u0027s because there are 2 possible designs with the C layer and because there are 2 possible designs with the Rust layer. The C layer - either we keep the unstable C library but rename it into libbinder_rpc_ndk OR we combine this code into libbinder_ndk. The Rust layer - either we keep the code in librpcbinder_rs or we combine it into libbinder_rs. Obviously - fewer libraries are better, so we will try that, but there is some napkin math we need to do in order to determine a few runtime trade-offs.",
+      "parentUuid": "606fecec_e5559fb4",
+      "range": {
+        "startLine": 56,
+        "startChar": 5,
+        "endLine": 56,
+        "endChar": 33
+      },
+      "revId": "ae815b55311cfc7160eef5d6af8401be4448d4d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f5bb19cf_e800f427",
         "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
         "patchSetId": 7
