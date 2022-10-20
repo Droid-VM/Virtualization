@@ -16,16 +16,31 @@
 
 #define LOG_TAG "VirtualMachine"
 
-#include <tuple>
-
-#include <log/log.h>
-
 #include <aidl/android/system/virtualizationservice/IVirtualMachine.h>
+#include <aidl/android/system/virtualizationservice/IVirtualizationService.h>
+#include <android-base/unique_fd.h>
 #include <android/binder_auto_utils.h>
 #include <android/binder_ibinder_jni.h>
-#include <binder_rpc_unstable.hpp>
-
 #include <jni.h>
+#include <log/log.h>
+
+#include <binder_rpc_unstable.hpp>
+#include <tuple>
+
+using namespace android::base;
+
+static jmethodID sVirtualizationServiceCtor;
+
+class RpcSession {
+public:
+    RpcSession() : mHandle(ARpcSession_new()) {}
+    ~RpcSession() { ARpcSession_free(mHandle); }
+
+    ARpcSession* get() { return mHandle; }
+
+private:
+    ARpcSession* mHandle;
+};
 
 JNIEXPORT jobject JNICALL android_system_virtualmachine_VirtualMachine_connectToVsockServer(
         JNIEnv* env, [[maybe_unused]] jclass clazz, jobject vmBinder, jint port) {
@@ -55,22 +70,78 @@ JNIEXPORT jobject JNICALL android_system_virtualmachine_VirtualMachine_connectTo
         return ret;
     };
 
-    auto session = ARpcSession_new();
-    auto client = ARpcSession_setupPreconnectedClient(session, requestFunc, &args);
-    auto obj = AIBinder_toJavaBinder(env, client);
-    // Free the NDK handle. The underlying RpcSession object remains alive.
-    ARpcSession_free(session);
-    return obj;
+    RpcSession session;
+    auto client = ARpcSession_setupPreconnectedClient(session.get(), requestFunc, &args);
+    return AIBinder_toJavaBinder(env, client);
+}
+
+JNIEXPORT jobject JNICALL android_system_virtualmachine_VirtualizationService_spawn(JNIEnv* env,
+                                                                                    jclass clazz) {
+    using aidl::android::system::virtualizationservice::IVirtualizationService;
+    using ndk::ScopedFileDescriptor;
+    using ndk::SpAIBinder;
+
+    unique_fd serverFd, clientFd, waitFd, readyFd, keepAliveFd, shutdownFd;
+    if (!Socketpair(SOCK_STREAM, &serverFd, &clientFd) || !Pipe(&waitFd, &readyFd, 0)) {
+        env->ThrowNew(env->FindClass("android/system/virtualmachine/VirtualMachineException"),
+                      "Failed to create socketpair/pipe");
+        return nullptr;
+    }
+
+    if (fork() == 0) {
+        // Close client's FDs.
+        clientFd.reset();
+        waitFd.reset();
+
+        auto strServerFd = std::to_string(serverFd.get());
+        auto strReadyFd = std::to_string(readyFd.get());
+
+        execl("/apex/com.android.virt/bin/virtmgr", "/apex/com.android.virt/bin/virtmgr",
+              "--rpc-server-fd", strServerFd.c_str(), "--ready-fd", strReadyFd.c_str(), NULL);
+    }
+
+    // Close server's FDs.
+    serverFd.reset();
+    readyFd.reset();
+
+    char buf;
+    if (read(waitFd.get(), &buf, sizeof(buf)) < 0) {
+        env->ThrowNew(env->FindClass("android/system/virtualmachine/VirtualMachineException"),
+                      "Failed to spawn VirtualizationService");
+        return nullptr;
+    }
+
+    return env->NewObject(clazz, sVirtualizationServiceCtor, clientFd.release());
+}
+
+JNIEXPORT jobject JNICALL android_system_virtualmachine_VirtualizationService_connect(
+        JNIEnv* env, [[maybe_unused]] jobject obj, int clientFd) {
+    RpcSession session;
+    ARpcSession_setFileDescriptorTransportMode(session.get(),
+                                               ARpcSession_FileDescriptorTransportMode::Unix);
+    ARpcSession_setMaxIncomingThreads(session.get(), 16);
+    ARpcSession_setMaxOutgoingThreads(session.get(), 16);
+    // SAFETY - ARpcSession_setupUnixDomainBootstrapClient does not take ownership of clientFd.
+    auto client = ARpcSession_setupUnixDomainBootstrapClient(session.get(), clientFd);
+    return AIBinder_toJavaBinder(env, client);
+}
+
+JNIEXPORT void JNICALL android_system_virtualmachine_VirtualizationService_finalize(
+        [[maybe_unused]] JNIEnv* env, [[maybe_unused]] jobject obj, int clientFd) {
+    unique_fd ufd(clientFd);
 }
 
 JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* /*reserved*/) {
     JNIEnv* env;
+    jclass c;
+    int rc;
+
     if (vm->GetEnv(reinterpret_cast<void**>(&env), JNI_VERSION_1_6) != JNI_OK) {
         ALOGE("%s: Failed to get the environment", __FUNCTION__);
         return JNI_ERR;
     }
 
-    jclass c = env->FindClass("android/system/virtualmachine/VirtualMachine");
+    c = env->FindClass("android/system/virtualmachine/VirtualMachine");
     if (c == nullptr) {
         ALOGE("%s: Failed to find class android.system.virtualmachine.VirtualMachine",
               __FUNCTION__);
@@ -78,12 +149,44 @@ JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* /*reserved*/) {
     }
 
     // Register your class' native methods.
-    static const JNINativeMethod methods[] = {
+    static const JNINativeMethod methodsVirtualMachine[] = {
             {"nativeConnectToVsockServer", "(Landroid/os/IBinder;I)Landroid/os/IBinder;",
              reinterpret_cast<void*>(
                      android_system_virtualmachine_VirtualMachine_connectToVsockServer)},
     };
-    int rc = env->RegisterNatives(c, methods, sizeof(methods) / sizeof(JNINativeMethod));
+    rc = env->RegisterNatives(c, methodsVirtualMachine,
+                              sizeof(methodsVirtualMachine) / sizeof(JNINativeMethod));
+    if (rc != JNI_OK) {
+        ALOGE("%s: Failed to register natives", __FUNCTION__);
+        return rc;
+    }
+
+    c = env->FindClass("android/system/virtualmachine/VirtualizationService");
+    if (c == nullptr) {
+        ALOGE("%s: Failed to find class android.system.virtualmachine.VirtualizationService",
+              __FUNCTION__);
+        return JNI_ERR;
+    }
+
+    sVirtualizationServiceCtor = env->GetMethodID(c, "<init>", "(I)V");
+    if (sVirtualizationServiceCtor == nullptr) {
+        ALOGE("%s: Failed to find constructor of class "
+              "android.system.virtualmachine.VirtualizationService",
+              __FUNCTION__);
+        return JNI_ERR;
+    }
+
+    // Register your class' native methods.
+    static const JNINativeMethod methodsVirtualizationService[] = {
+            {"nativeSpawn", "()Landroid/system/virtualmachine/VirtualizationService;",
+             reinterpret_cast<void*>(android_system_virtualmachine_VirtualizationService_spawn)},
+            {"nativeConnect", "(I)Landroid/os/IBinder;",
+             reinterpret_cast<void*>(android_system_virtualmachine_VirtualizationService_connect)},
+            {"nativeFinalize", "(I)V",
+             reinterpret_cast<void*>(android_system_virtualmachine_VirtualizationService_finalize)},
+    };
+    rc = env->RegisterNatives(c, methodsVirtualizationService,
+                              sizeof(methodsVirtualizationService) / sizeof(JNINativeMethod));
     if (rc != JNI_OK) {
         ALOGE("%s: Failed to register natives", __FUNCTION__);
         return rc;
