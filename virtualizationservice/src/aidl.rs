@@ -340,12 +340,6 @@ impl VirtualizationService {
     ) -> binder::Result<Strong<dyn IVirtualMachine>> {
         check_manage_access()?;
 
-        if let VirtualMachineConfig::RawConfig(config) = config {
-            if config.protectedVm {
-                check_use_custom_virtual_machine()?;
-            }
-        }
-
         let state = &mut *self.state.lock().unwrap();
         let console_fd = console_fd.map(clone_file).transpose()?;
         let log_fd = log_fd.map(clone_file).transpose()?;
@@ -377,18 +371,29 @@ impl VirtualizationService {
             )
         })?;
 
-        let is_app_config = matches!(config, VirtualMachineConfig::AppConfig(_));
-
-        let config = match config {
-            VirtualMachineConfig::AppConfig(config) => BorrowedOrOwned::Owned(
-                load_app_config(config, &temporary_directory).map_err(|e| {
+        let (is_app_config, config) = match config {
+            VirtualMachineConfig::AppConfig(config) => {
+                // Some features are reserved for platform apps only, even when using
+                // VirtualMachineAppConfig:
+                // - controlling CPUs;
+                // - specifying a config file in the APK.
+                if !config.taskProfiles.is_empty()
+                    || matches!(config.payload, Payload::ConfigPath(_))
+                {
+                    check_use_custom_virtual_machine()?
+                }
+                let config = load_app_config(config, &temporary_directory).map_err(|e| {
                     *is_protected = config.protectedVm;
                     let message = format!("Failed to load app config: {:?}", e);
                     error!("{}", message);
                     Status::new_service_specific_error_str(-1, Some(message))
-                })?,
-            ),
-            VirtualMachineConfig::RawConfig(config) => BorrowedOrOwned::Borrowed(config),
+                })?;
+                (true, BorrowedOrOwned::Owned(config))
+            }
+            VirtualMachineConfig::RawConfig(config) => {
+                check_use_custom_virtual_machine()?;
+                (false, BorrowedOrOwned::Borrowed(config))
+            }
         };
         let config = config.as_ref();
         *is_protected = config.protectedVm;
@@ -590,12 +595,6 @@ fn load_app_config(
     config: &VirtualMachineAppConfig,
     temporary_directory: &Path,
 ) -> Result<VirtualMachineRawConfig> {
-    // Controlling CPUs is reserved for platform apps only, even when using
-    // VirtualMachineAppConfig.
-    if !config.taskProfiles.is_empty() {
-        check_use_custom_virtual_machine()?
-    }
-
     let apk_file = clone_file(config.apk.as_ref().unwrap())?;
     let idsig_file = clone_file(config.idsig.as_ref().unwrap())?;
     let instance_file = clone_file(config.instanceImage.as_ref().unwrap())?;
