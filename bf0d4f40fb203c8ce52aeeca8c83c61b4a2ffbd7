@@ -22,6 +22,30 @@
       },
       "revId": "bf0d4f40fb203c8ce52aeeca8c83c61b4a2ffbd7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26a344ba_fca2fd02",
+        "filename": "authfs/tests/java/src/com/android/fs/AuthFsTestRule.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-20T09:44:56Z",
+      "side": 1,
+      "message": "It looks like the similar commands used by AuthFs tests are in TestDevice.java(e.g. supportsMicrodroid()[1]). And TestDevice and MicrodroidHostTestCase have lots of similar codes (e.g. startMicrodroid()[2][3]). Is it intended to have such duplication? When we need to add some new functionalities, we should add them to which class?\n\n[1] https://cs.android.com/android/platform/superproject/+/master:tools/tradefederation/core/src/com/android/tradefed/device/TestDevice.java;l\u003d2073;drc\u003db45a2ea782074944f79fc388df20b06e01f265f7\n[2] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java;l\u003d278;drc\u003dc6930847115da384171b3eefb0fe3d62768cc8be\n[3] https://cs.android.com/android/platform/superproject/+/master:tools/tradefederation/core/src/com/android/tradefed/device/TestDevice.java;l\u003d2133;drc\u003db45a2ea782074944f79fc388df20b06e01f265f7",
+      "parentUuid": "d3a8b899_6509a478",
+      "range": {
+        "startLine": 233,
+        "startChar": 4,
+        "endLine": 237,
+        "endChar": 0
+      },
+      "revId": "bf0d4f40fb203c8ce52aeeca8c83c61b4a2ffbd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
