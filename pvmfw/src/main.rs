@@ -16,8 +16,10 @@
 
 #![no_main]
 #![no_std]
+#![feature(default_alloc_error_handler)]
 
 mod exceptions;
+mod heap;
 mod helpers;
 mod smccc;
 
@@ -63,6 +65,8 @@ main!(main_wrapper);
 
 /// Entry point for pVM firmware.
 pub fn main_wrapper(fdt_address: u64, payload_start: u64, payload_size: u64, arg3: u64) {
+    heap::init();
+
     if logger::init(LevelFilter::Debug).is_err() {
     } else if let Err(e) = main(fdt_address, payload_start, payload_size, arg3) {
         error!("Boot rejected: {e}");
