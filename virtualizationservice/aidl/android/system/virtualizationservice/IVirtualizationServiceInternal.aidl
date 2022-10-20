@@ -19,6 +19,12 @@ import android.system.virtualizationservice.ICidHandle;
 
 interface IVirtualizationServiceInternal {
     /**
+     * Overwrites the RLIMIT_MEMLOCK of the caller. The caller should always be
+     * an instance of virtmgr.
+     */
+    boolean setRlimitMemlock();
+
+    /**
      * Allocates a CID for a new VM. The CID will not be recycled as long as
      * there is a strong reference to the returned ICidHandle.
      */
