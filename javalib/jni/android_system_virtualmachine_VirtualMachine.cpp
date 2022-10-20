@@ -16,16 +16,56 @@
 
 #define LOG_TAG "VirtualMachine"
 
-#include <tuple>
-
-#include <log/log.h>
-
 #include <aidl/android/system/virtualizationservice/IVirtualMachine.h>
+#include <aidl/android/system/virtualizationservice/IVirtualizationService.h>
+#include <android-base/unique_fd.h>
 #include <android/binder_auto_utils.h>
 #include <android/binder_ibinder_jni.h>
-#include <binder_rpc_unstable.hpp>
-
 #include <jni.h>
+#include <log/log.h>
+
+#include <binder_rpc_unstable.hpp>
+#include <tuple>
+
+using namespace android::base;
+
+JNIEXPORT jobject JNICALL android_system_virtualmachine_VirtualMachine_spawnVirtMgr(
+        JNIEnv* env, [[maybe_unused]] jclass clazz) {
+    using aidl::android::system::virtualizationservice::IVirtualizationService;
+    using ndk::ScopedFileDescriptor;
+    using ndk::SpAIBinder;
+
+    unique_fd serverFd, clientFd, waitFd, signalFd;
+    if (!Socketpair(AF_UNIX, &serverFd, &clientFd) || !Pipe(&waitFd, &signalFd, /*flags*/ 0)) {
+        env->ThrowNew(env->FindClass("android/system/virtualmachine/VirtualMachineException"),
+                      "Failed to create socketpair/pipe");
+        return nullptr;
+    }
+
+    if (fork() == 0) {
+        clientFd.reset();
+        waitFd.reset();
+
+        auto strServerFd = std::to_string(serverFd.get());
+        auto strSignalFd = std::to_string(signalFd.get());
+
+        execl("/apex/com.android.virt/bin/virtmgr", "/apex/com.android.virt/bin/virtmgr",
+              "--rpc-server-fd", strServerFd.c_str(), "--ready-fd", strSignalFd.c_str(), NULL);
+    }
+
+    serverFd.reset();
+    signalFd.reset();
+
+    char buf;
+    if (read(waitFd.get(), &buf, sizeof(buf)) < 0) {
+        env->ThrowNew(env->FindClass("android/system/virtualmachine/VirtualMachineException"),
+                      "Failed while waiting for readiness signal");
+        return nullptr;
+    }
+
+    // SAFETY - UnixDomainBootstrapRpcClient takes ownership of clientFd.
+    return AIBinder_toJavaBinder(env, UnixDomainBootstrapRpcClient(clientFd.release()));
+}
 
 JNIEXPORT jobject JNICALL android_system_virtualmachine_VirtualMachine_connectToVsockServer(
         JNIEnv* env, [[maybe_unused]] jclass clazz, jobject vmBinder, jint port) {
@@ -77,6 +117,8 @@ JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* /*reserved*/) {
             {"nativeConnectToVsockServer", "(Landroid/os/IBinder;I)Landroid/os/IBinder;",
              reinterpret_cast<void*>(
                      android_system_virtualmachine_VirtualMachine_connectToVsockServer)},
+            {"nativeSpawnVirtMgr", "()Landroid/os/IBinder;",
+             reinterpret_cast<void*>(android_system_virtualmachine_VirtualMachine_spawnVirtMgr)},
     };
     int rc = env->RegisterNatives(c, methods, sizeof(methods) / sizeof(JNINativeMethod));
     if (rc != JNI_OK) {
