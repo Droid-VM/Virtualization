@@ -133,6 +133,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0620f24f_534f582d",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-20T16:35:11Z",
+      "side": 1,
+      "message": "What we\u0027re trying to do here is to expose the ability to host an RPC Binder over VSock server in a VM to 1P / OEM priv apps.\nSo we\u0027re looking for an NDK-like solution callable from C/C++ with a signature like the one shown here.\n\nOur test code happens to be calling it from Rust, but we need something any VM payload can call, which does mean we are offering some stability and means we can\u0027t assume Rust, and what\u0027s in librpcbinder_rs is just an implementation detail.\n\nBut we don\u0027t need much more of the things that libbinder_unstable offers.\n\nSo the choice is whether we tell the payload they can just call the function in libbinder_*_ndk, and move it there, or we expose our version of it here explicitly as for VM payloads. (The function is mostly only callable from VMs anyway - we restrict which processes in the host can listen on vsock pretty heavily.)\n\nOn the whole I\u0027m leaning toward the latter.",
+      "parentUuid": "3e3b85ad_d52e4547",
+      "range": {
+        "startLine": 56,
+        "startChar": 5,
+        "endLine": 56,
+        "endChar": 33
+      },
+      "revId": "ae815b55311cfc7160eef5d6af8401be4448d4d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f5bb19cf_e800f427",
         "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
         "patchSetId": 7
