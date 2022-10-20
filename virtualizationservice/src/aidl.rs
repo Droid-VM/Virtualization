@@ -134,6 +134,21 @@ impl VirtualizationServiceInternal {
 impl Interface for VirtualizationServiceInternal {}
 
 impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
+    fn setRlimitMemlock(&self) -> binder::Result<bool> {
+        const SIZE_4G: libc::rlim_t = 4 * 1024 * 1024 * 1024;
+
+        let caller = get_calling_pid();
+        let new_limit = libc::rlimit { rlim_cur: SIZE_4G, rlim_max: SIZE_4G };
+
+        let ret = unsafe {
+            libc::prlimit(caller, libc::RLIMIT_MEMLOCK, &new_limit, core::ptr::null_mut())
+        };
+        if ret < 0 {
+            return Ok(false);
+        }
+
+        Ok(true)
+    }
     fn allocateCid(&self) -> binder::Result<Strong<dyn ICidHandle>> {
         let state = &mut *self.state.lock().unwrap();
         let cid = state.find_available_cid().or(Err(ExceptionCode::ILLEGAL_STATE))?;
@@ -407,6 +422,10 @@ impl VirtualizationService {
         };
         if is_custom {
             check_use_custom_virtual_machine()?;
+        }
+
+        if !(*GLOBAL_SERVICE).setRlimitMemlock()? {
+            warn!("FAILED TO SET RLIMIT");
         }
 
         let cid_handle = (*GLOBAL_SERVICE).allocateCid()?;
