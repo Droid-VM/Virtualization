@@ -16,16 +16,14 @@
 
 #define LOG_TAG "VirtualMachine"
 
-#include <tuple>
-
-#include <log/log.h>
-
 #include <aidl/android/system/virtualizationservice/IVirtualMachine.h>
 #include <android/binder_auto_utils.h>
 #include <android/binder_ibinder_jni.h>
-#include <binder_rpc_unstable.hpp>
+#include <log/log.h>
 
-#include <jni.h>
+#include <tuple>
+
+#include "common.h"
 
 JNIEXPORT jobject JNICALL android_system_virtualmachine_VirtualMachine_connectToVsockServer(
         JNIEnv* env, [[maybe_unused]] jclass clazz, jobject vmBinder, jint port) {
@@ -55,21 +53,12 @@ JNIEXPORT jobject JNICALL android_system_virtualmachine_VirtualMachine_connectTo
         return ret;
     };
 
-    auto session = ARpcSession_new();
-    auto client = ARpcSession_setupPreconnectedClient(session, requestFunc, &args);
-    auto obj = AIBinder_toJavaBinder(env, client);
-    // Free the NDK handle. The underlying RpcSession object remains alive.
-    ARpcSession_free(session);
-    return obj;
+    RpcSessionHandle session;
+    auto client = ARpcSession_setupPreconnectedClient(session.get(), requestFunc, &args);
+    return AIBinder_toJavaBinder(env, client);
 }
 
-JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* /*reserved*/) {
-    JNIEnv* env;
-    if (vm->GetEnv(reinterpret_cast<void**>(&env), JNI_VERSION_1_6) != JNI_OK) {
-        ALOGE("%s: Failed to get the environment", __FUNCTION__);
-        return JNI_ERR;
-    }
-
+jint JNI_register_android_system_virtualmachine_VirtualMachine(JNIEnv* env) {
     jclass c = env->FindClass("android/system/virtualmachine/VirtualMachine");
     if (c == nullptr) {
         ALOGE("%s: Failed to find class android.system.virtualmachine.VirtualMachine",
@@ -89,5 +78,5 @@ JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* /*reserved*/) {
         return rc;
     }
 
-    return JNI_VERSION_1_6;
+    return JNI_OK;
 }
