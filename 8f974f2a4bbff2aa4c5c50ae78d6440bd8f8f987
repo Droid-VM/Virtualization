@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a4a483a_8b3bfaec",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-20T13:07:14Z",
+      "side": 1,
+      "message": "Just return `void` if you never return an error. You can add those few lines back again later (or better yet - add libanyhow and use its Error type)",
+      "range": {
+        "startLine": 38,
+        "startChar": 76,
+        "endLine": 38,
+        "endChar": 96
+      },
+      "revId": "8f974f2a4bbff2aa4c5c50ae78d6440bd8f8f987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80063430_5c94d605",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-20T13:07:14Z",
+      "side": 1,
+      "message": "This is starting to get hard to read. Usually people do one IF for each check, no ELSE, and throw an error (or reboot) inside the branch. The successful path is the one that never takes a branch.\n\n```\nfn main_wrapper(...) {\n  if mmio::guard::setup().is_err() {\n    reboot();\n  }\n\n  if logger::init(LevelFilter::Debug).is_err() {\n    reboot();\n  }\n\n  ...\n\n  jump_to_payload(fdt, payload);\n}\n```",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 50
+      },
+      "revId": "8f974f2a4bbff2aa4c5c50ae78d6440bd8f8f987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "672f6496_cefac436",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-20T13:07:14Z",
+      "side": 1,
+      "message": "This is what `debug` is for. Change your `LevelFilter` to `info` by default.",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 13
+      },
+      "revId": "8f974f2a4bbff2aa4c5c50ae78d6440bd8f8f987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad82a26e_c1c76ed9",
+        "filename": "pvmfw/src/mmio/guard.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-20T13:07:14Z",
+      "side": 1,
+      "message": "It would be reaaaaaly nice to turn this into a droppable-struct. I know you can\u0027t unmap now, but creating that scoped lifetime will align with mutex APIs and similar.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 39
+      },
+      "revId": "8f974f2a4bbff2aa4c5c50ae78d6440bd8f8f987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "189cd090_74581850",
+        "filename": "pvmfw/src/mmio/guard.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-20T13:07:14Z",
+      "side": 1,
+      "message": "Why don\u0027t you move it into this file? You\u0027ll end up with `smccc` containing all the existing SMCs? I would just expose `hvc64` from it and have the all MMIO guard-specific values and logic here.",
+      "range": {
+        "startLine": 52,
+        "startChar": 11,
+        "endLine": 52,
+        "endChar": 25
+      },
+      "revId": "8f974f2a4bbff2aa4c5c50ae78d6440bd8f8f987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f9380c3_c5572701",
+        "filename": "pvmfw/src/mmio/mod.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-20T13:07:14Z",
+      "side": 1,
+      "message": "What else do you expect in this subcrate? Why not just have `src/mmio_guard.rs`?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 21
+      },
+      "revId": "8f974f2a4bbff2aa4c5c50ae78d6440bd8f8f987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
