@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c7cdd46_a75dc360",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-21T16:43:20Z",
+      "side": 1,
+      "message": "Missed the fact that this wasn\u0027t covering `RebootReason` itself; Done.",
+      "parentUuid": "557a28fd_9c1bd8f3",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 1
+      },
+      "revId": "783ff37dda6c7e19cfda6e06811fa9b12a403f33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30105897_97746190",
