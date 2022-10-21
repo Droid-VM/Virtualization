@@ -157,6 +157,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bd4518f8_ee9fd36a",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-10-21T16:36:03Z",
+      "side": 1,
+      "message": "I just realized this is C++ - libbinder_rpc_unstable should be used then. The bindgen stuff should be considered an implementation detail of the Rust code. The mainline story should be symmetrical with apps. If it\u0027s time that we want to stabilize an NDK API for RPC binder, we should chat. Though, for now, the NDK-level API for RPC binder is libbinder_rpc_unstable. The goal is to stabilize it when it needs to be stabilized (but only then). The C++ libbinder RPC API (the core API) could also be used temporarily.",
+      "parentUuid": "0620f24f_534f582d",
+      "range": {
+        "startLine": 56,
+        "startChar": 5,
+        "endLine": 56,
+        "endChar": 33
+      },
+      "revId": "ae815b55311cfc7160eef5d6af8401be4448d4d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f5bb19cf_e800f427",
         "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
         "patchSetId": 7
