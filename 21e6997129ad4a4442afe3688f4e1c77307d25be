@@ -16,6 +16,236 @@
       "message": "Nikita - can you take a look at the @TestApi changes here?",
       "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9027d5db_c87e7a81",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-21T18:02:38Z",
+      "side": 1,
+      "message": "(Probably for a separate change). An app can only get an instance of this class via VirtualMachineManager APIs, right? If so, then this HashMap should probably be inside VirtualMachineManager...",
+      "range": {
+        "startLine": 101,
+        "startChar": 3,
+        "endLine": 103,
+        "endChar": 0
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d752618b_c1f44b43",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-21T18:02:38Z",
+      "side": 1,
+      "message": "Add @throws tag explaining conditions when an exception is thrown\n\nSame for other methods that can throw a VirtualMachineException",
+      "range": {
+        "startLine": 462,
+        "startChar": 5,
+        "endLine": 462,
+        "endChar": 6
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18060f89_c3fa5c5e",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-21T18:02:38Z",
+      "side": 1,
+      "message": "nit: it\u0027s a little bit confusing for getConsoleOutputStream to return an InputStream :) How about just getConsoleStream?",
+      "range": {
+        "startLine": 648,
+        "startChar": 23,
+        "endLine": 648,
+        "endChar": 45
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11326294_abf3e53f",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-21T18:02:38Z",
+      "side": 1,
+      "message": "nit: ditto",
+      "range": {
+        "startLine": 662,
+        "startChar": 23,
+        "endLine": 662,
+        "endChar": 41
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cbb4f1e_8dca5b40",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-21T18:02:38Z",
+      "side": 1,
+      "message": "It\u0027s not recommended to use Optional\u003c\u003e in API surface. See: go/android-api-guidelines#classes-avoid-optional\n\nIn this case we can probably just return an int, and throw an IllegalStateException of VM is not running",
+      "range": {
+        "startLine": 734,
+        "startChar": 11,
+        "endLine": 734,
+        "endChar": 35
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e45e9fc_83783b59",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-21T18:02:38Z",
+      "side": 1,
+      "message": "nit: extra t :)",
+      "range": {
+        "startLine": 211,
+        "startChar": 15,
+        "endLine": 211,
+        "endChar": 19
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "effb8323_e2eff9f8",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-21T18:02:38Z",
+      "side": 1,
+      "message": "Does it make sense to have an @IntRange for this method and one below? If so, then please also add IntRanges to the corresponding setters.",
+      "range": {
+        "startLine": 250,
+        "startChar": 15,
+        "endLine": 250,
+        "endChar": 27
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b4344bb_e7cb79f7",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-21T18:02:38Z",
+      "side": 1,
+      "message": "Please update the javadoc here. What does \"context (APK)\" mean? :)",
+      "range": {
+        "startLine": 336,
+        "startChar": 9,
+        "endLine": 336,
+        "endChar": 57
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd09ecf8_4b783e3d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-21T18:02:38Z",
+      "side": 1,
+      "message": "This is actually a required parameter, right? If so, we can make this a compile-time enforcement by providing two static factory methods, e.g.:\n\npublic static Builder forProtectedVm(...)\npublic static Builder forUnprotectedVm(...)\n\nI know that guidelines say that all required fields must go in c-tor (https://g3doc.corp.google.com/company/teams/android-api-council/guidelines/index.md?cl\u003dhead#builders), but there were some recent discussions that allowed using static factory methods (e.g. b/254863212)",
+      "range": {
+        "startLine": 442,
+        "startChar": 8,
+        "endLine": 442,
+        "endChar": 60
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "142d2572_ddee6833",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-21T18:02:38Z",
+      "side": 1,
+      "message": "We should add more content to this javadoc :)",
+      "range": {
+        "startLine": 37,
+        "startChar": 3,
+        "endLine": 37,
+        "endChar": 69
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
