@@ -73,9 +73,12 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
     private static final int BOOT_COMPLETE_TIMEOUT_MS = 10 * 60 * 1000;
     private static final double NANOS_IN_SEC = 1_000_000_000.0;
     private static final int ROUND_COUNT = 5;
+    private static final int ROUND_IGNORE_STARTUP_TIME = 3;
     private static final String APK_NAME = "MicrodroidTestApp.apk";
     private static final String PACKAGE_NAME = "com.android.microdroid.test";
     private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
+    private static final String CAMERA_PACKAGE_NAME =
+            "com.google.android.GoogleCamera/com.android.camesra.CameraLauncher";
     private static final int NUM_VCPUS = 3;
 
     private MetricsProcessor mMetricsProcessor;
@@ -124,31 +127,32 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
     @Test
     public void testAppStartupTime() throws Exception {
         assumeTrue("Skip on non-protected VMs", isProtectedVmSupported());
+        String[] testPkgNames = {CAMERA_PACKAGE_NAME, SETTINGS_PACKAGE_NAME};
 
-        StartupTimeMetricCollection mCollection =
-                new StartupTimeMetricCollection(SETTINGS_PACKAGE_NAME, ROUND_COUNT);
-        for (int round = 0; round < ROUND_COUNT; ++round) {
-            getAppStartupTime(mCollection);
+        for (String pkgName: testPkgNames) {
+            StartupTimeMetricCollection mCollection =
+                    new StartupTimeMetricCollection(pkgName, ROUND_COUNT);
+            getAppStartupTime(pkgName, mCollection);
+
+            reportMetric(mCollection.mAppBeforeVmRunTotalTime,
+                    "app_startup/" + mCollection.getPkgName() + "/total_time/before_vm",
+                    "ms");
+            reportMetric(mCollection.mAppBeforeVmRunWaitTime,
+                    "app_startup/" + mCollection.getPkgName() + "/wait_time/before_vm",
+                    "ms");
+            reportMetric(mCollection.mAppDuringVmRunTotalTime,
+                    "app_startup/" + mCollection.getPkgName() + "/total_time/during_vm",
+                    "ms");
+            reportMetric(mCollection.mAppDuringVmRunWaitTime,
+                    "app_startup/" + mCollection.getPkgName() + "/wait_time/during_vm",
+                    "ms");
+            reportMetric(mCollection.mAppAfterVmRunTotalTime,
+                    "app_startup/" + mCollection.getPkgName() + "/total_time/after_vm",
+                    "ms");
+            reportMetric(mCollection.mAppAfterVmRunWaitTime,
+                    "app_startup/" + mCollection.getPkgName() + "/wait_time/after_vm",
+                    "ms");
         }
-
-        reportMetric(mCollection.mAppBeforeVmRunTotalTime,
-                "app_startup/" + mCollection.getPkgName() + "/total_time/before_vm",
-                "ms");
-        reportMetric(mCollection.mAppBeforeVmRunWaitTime,
-                "app_startup/" + mCollection.getPkgName() + "/wait_time/before_vm",
-                "ms");
-        reportMetric(mCollection.mAppDuringVmRunTotalTime,
-                "app_startup/" + mCollection.getPkgName() + "/total_time/during_vm",
-                "ms");
-        reportMetric(mCollection.mAppDuringVmRunWaitTime,
-                "app_startup/" + mCollection.getPkgName() + "/wait_time/during_vm",
-                "ms");
-        reportMetric(mCollection.mAppAfterVmRunTotalTime,
-                "app_startup/" + mCollection.getPkgName() + "/total_time/after_vm",
-                "ms");
-        reportMetric(mCollection.mAppAfterVmRunWaitTime,
-                "app_startup/" + mCollection.getPkgName() + "/wait_time/after_vm",
-                "ms");
     }
 
     private void microdroidWaitForBootComplete() {
@@ -168,22 +172,30 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
 
     // Returns an array of two elements containing the delta between the initial app startup time
     // and the time measured after running the VM.
-    private void getAppStartupTime(StartupTimeMetricCollection metricColector)
+    private void getAppStartupTime(String pkgName, StartupTimeMetricCollection metricColector)
             throws Exception {
         final String configPath = "assets/vm_config.json";
         final String cid;
         final int vm_mem_mb;
+        int i;
 
-        // Reboot the device to run the test without stage2 fragmentation
+        // 1. Reboot the device to run the test without stage2 fragmentation
         getDevice().rebootUntilOnline();
         waitForBootCompleted();
 
-        // Run the app before the VM run and collect app startup time statistics
-        CommandRunner android = new CommandRunner(getDevice());
-        AmStartupTimeCmdParser beforeVmStartApp = getColdRunStartupTimes(SETTINGS_PACKAGE_NAME);
-        metricColector.addStartupTimeMetricBeforeVmRun(beforeVmStartApp);
+        // 2. Start the app and ignore first runs to warm up caches
+        for (i = 0; i < ROUND_IGNORE_STARTUP_TIME; i++) {
+            getColdRunStartupTimes(pkgName);
+        }
+
+        // 3. Run the app before the VM run and collect app startup time statistics
+        for (i = 0; i < ROUND_COUNT; i++) {
+            AmStartupTimeCmdParser beforeVmStartApp = getColdRunStartupTimes(pkgName);
+            metricColector.addStartupTimeMetricBeforeVmRun(beforeVmStartApp);
+        }
 
         // Clear up any test dir
+        CommandRunner android = new CommandRunner(getDevice());
         android.tryRun("rm", "-rf", MicrodroidHostTestCaseBase.TEST_ROOT);
 
         // Donate 80% of the available device memory to the VM
@@ -214,12 +226,19 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
         } catch (Exception ex) {
         }
 
-        AmStartupTimeCmdParser duringVmStartApp = getColdRunStartupTimes(SETTINGS_PACKAGE_NAME);
-        metricColector.addStartupTimeMetricDuringVmRun(duringVmStartApp);
+        // Run the app during the VM run and collect cold startup time.
+        for (i = 0; i < ROUND_COUNT; i++) {
+            AmStartupTimeCmdParser duringVmStartApp = getColdRunStartupTimes(pkgName);
+            metricColector.addStartupTimeMetricDuringVmRun(duringVmStartApp);
+        }
+
         shutdownMicrodroid(getDevice(), cid);
 
-        AmStartupTimeCmdParser afterVmStartApp = getColdRunStartupTimes(SETTINGS_PACKAGE_NAME);
-        metricColector.addStartupTimerMetricAfterVmRun(afterVmStartApp);
+        // Run the app after the VM run and collect cold startup time.
+        for (i = 0; i < ROUND_COUNT; i++) {
+            AmStartupTimeCmdParser afterVmStartApp = getColdRunStartupTimes(pkgName);
+            metricColector.addStartupTimerMetricAfterVmRun(afterVmStartApp);
+        }
     }
 
     static class AmStartupTimeCmdParser {
