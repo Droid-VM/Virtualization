@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57322529_874e4139",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-21T17:24:09Z",
+      "side": 1,
+      "message": "Not true, nor needed, anymore",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 15
+      },
+      "revId": "0d6b861eba263f9b5b02b52d38f3311578bc6db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a8b4769_87706996",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-21T17:24:09Z",
+      "side": 1,
+      "message": "I\u0027d move this before the ttbr0 write. That way it\u0027s also covered by the ISB. A bit paranoid, but hey, doesn\u0027t cost anything...",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 27
+      },
+      "revId": "0d6b861eba263f9b5b02b52d38f3311578bc6db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
