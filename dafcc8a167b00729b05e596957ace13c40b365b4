@@ -22,6 +22,30 @@
       },
       "revId": "dafcc8a167b00729b05e596957ace13c40b365b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59c94ba6_8f7728f0",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-21T13:42:01Z",
+      "side": 0,
+      "message": "Because we assume 4KiB MMIO_GUARD granule as there\u0027s currently no need to support anything else; see `mmio_guard::Error::UnsupportedGranule`.\n\nBut more generally, I think that `allow(dead_code)` (IIRC the name) would make sense for `helpers`; WDYT?",
+      "parentUuid": "f949822b_e095297d",
+      "range": {
+        "startLine": 25,
+        "startChar": 13,
+        "endLine": 25,
+        "endChar": 28
+      },
+      "revId": "dafcc8a167b00729b05e596957ace13c40b365b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

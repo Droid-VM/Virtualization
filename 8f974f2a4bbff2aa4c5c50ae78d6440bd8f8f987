@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6117dd4_a9818910",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-21T13:42:01Z",
+      "side": 1,
+      "message": "Good point; done",
+      "parentUuid": "5a4a483a_8b3bfaec",
+      "range": {
+        "startLine": 38,
+        "startChar": 76,
+        "endLine": 38,
+        "endChar": 96
+      },
+      "revId": "8f974f2a4bbff2aa4c5c50ae78d6440bd8f8f987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80063430_5c94d605",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b858dede_72fc3cdb",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-21T13:42:01Z",
+      "side": 1,
+      "message": "Agreed that it\u0027s getting confusing. The reason for doing it was DRY (single point of `reboot`) and avoid having too many non-`reboot`ing `if` (e.g. for clean-up before `jump_to_payload`), which would be equally confusing and potential sources of bugs ... but I now see that what I actually wanted was `return`!\n\nSo I\u0027ve introduced better abstraction scopes in aosp/2265426 and now `return` on error.",
+      "parentUuid": "80063430_5c94d605",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 50
+      },
+      "revId": "8f974f2a4bbff2aa4c5c50ae78d6440bd8f8f987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "672f6496_cefac436",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-10-20T13:07:14Z",
       "side": 1,
       "message": "This is what `debug` is for. Change your `LevelFilter` to `info` by default.",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 13
+      },
+      "revId": "8f974f2a4bbff2aa4c5c50ae78d6440bd8f8f987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c43cd242_e0e53d33",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-21T13:42:01Z",
+      "side": 1,
+      "message": "Good catch, I was confused in the level order!\n\nDone and changed `LevelFilter` here: aosp/2265427",
+      "parentUuid": "672f6496_cefac436",
       "range": {
         "startLine": 59,
         "startChar": 8,
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "849ed418_c3b81580",
+        "filename": "pvmfw/src/mmio/guard.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-21T13:42:01Z",
+      "side": 1,
+      "message": "Agreed, this is the reason why I was mentioning `Drop::drop` on Tuesday! But I couldn\u0027t figure out from a quick search if calling a `-\u003e !` function would guarantee the objects being dropped so was keeping it as a follow-up. Now that aosp/2265426 adds the necessary scoping to make that irrelevant, I can look into this!\n\nDo you mind keeping it as a follow-up, to keep the ball rolling?",
+      "parentUuid": "ad82a26e_c1c76ed9",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 39
+      },
+      "revId": "8f974f2a4bbff2aa4c5c50ae78d6440bd8f8f987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "189cd090_74581850",
         "filename": "pvmfw/src/mmio/guard.rs",
         "patchSetId": 2
@@ -106,6 +202,30 @@
       "writtenOn": "2022-10-20T13:07:14Z",
       "side": 1,
       "message": "Why don\u0027t you move it into this file? You\u0027ll end up with `smccc` containing all the existing SMCs? I would just expose `hvc64` from it and have the all MMIO guard-specific values and logic here.",
+      "range": {
+        "startLine": 52,
+        "startChar": 11,
+        "endLine": 52,
+        "endChar": 25
+      },
+      "revId": "8f974f2a4bbff2aa4c5c50ae78d6440bd8f8f987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36f1381f_8453e3b4",
+        "filename": "pvmfw/src/mmio/guard.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-21T13:42:01Z",
+      "side": 1,
+      "message": "\u003e You\u0027ll end up with smccc containing all the existing SMCs?\n\nYes that was the exact idea: group up all the trivial-and-boring low-level HVC/SMC calls (all returning `smccc::Result`) and build an extra layer of abstraction on top of these (with the own types, validation, and extra logic) in dedicated modules. What\u0027s wrong with this?",
+      "parentUuid": "189cd090_74581850",
       "range": {
         "startLine": 52,
         "startChar": 11,
@@ -129,6 +249,30 @@
       "writtenOn": "2022-10-20T13:07:14Z",
       "side": 1,
       "message": "What else do you expect in this subcrate? Why not just have `src/mmio_guard.rs`?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 21
+      },
+      "revId": "8f974f2a4bbff2aa4c5c50ae78d6440bd8f8f987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "437a547d_31ab2d48",
+        "filename": "pvmfw/src/mmio/mod.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-21T13:42:01Z",
+      "side": 1,
+      "message": "Good point, I could always move it back into its own directory (while keeping the file\u0027s git history) if/when necessary.",
+      "parentUuid": "3f9380c3_c5572701",
       "range": {
         "startLine": 15,
         "startChar": 0,
