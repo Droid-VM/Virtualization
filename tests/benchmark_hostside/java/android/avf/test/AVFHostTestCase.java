@@ -166,6 +166,27 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
         return new AmStartupTimeCmdParser(vmStartAppLog);
     }
 
+    private AmStartupTimeCmdParser getAverageColdStartupTime(String pkgName)
+            throws DeviceNotAvailableException, InterruptedException {
+        int avgTotalTime = 0;
+        int avgWaitTime = 0;
+
+        // We drop the first startup time result
+        getColdRunStartupTimes(pkgName);
+
+        // Get the average cold startup time from 5 runs
+        for (int i = 0; i < ROUND_COUNT; i++) {
+            AmStartupTimeCmdParser coldAppStartupTime = getColdRunStartupTimes(pkgName);
+            avgTotalTime += coldAppStartupTime.mTotalTime;
+            avgWaitTime += coldAppStartupTime.mWaitTime;
+        }
+
+        avgTotalTime = avgTotalTime / ROUND_COUNT;
+        avgWaitTime = avgWaitTime / ROUND_COUNT;
+
+        return new AmStartupTimeCmdParser(avgTotalTime, avgWaitTime);
+    }
+
     // Returns an array of two elements containing the delta between the initial app startup time
     // and the time measured after running the VM.
     private void getAppStartupTime(StartupTimeMetricCollection metricColector)
@@ -180,7 +201,7 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
 
         // Run the app before the VM run and collect app startup time statistics
         CommandRunner android = new CommandRunner(getDevice());
-        AmStartupTimeCmdParser beforeVmStartApp = getColdRunStartupTimes(SETTINGS_PACKAGE_NAME);
+        AmStartupTimeCmdParser beforeVmStartApp = getAverageColdStartupTime(SETTINGS_PACKAGE_NAME);
         metricColector.addStartupTimeMetricBeforeVmRun(beforeVmStartApp);
 
         // Clear up any test dir
@@ -214,11 +235,11 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
         } catch (Exception ex) {
         }
 
-        AmStartupTimeCmdParser duringVmStartApp = getColdRunStartupTimes(SETTINGS_PACKAGE_NAME);
+        AmStartupTimeCmdParser duringVmStartApp = getAverageColdStartupTime(SETTINGS_PACKAGE_NAME);
         metricColector.addStartupTimeMetricDuringVmRun(duringVmStartApp);
         shutdownMicrodroid(getDevice(), cid);
 
-        AmStartupTimeCmdParser afterVmStartApp = getColdRunStartupTimes(SETTINGS_PACKAGE_NAME);
+        AmStartupTimeCmdParser afterVmStartApp = getAverageColdStartupTime(SETTINGS_PACKAGE_NAME);
         metricColector.addStartupTimerMetricAfterVmRun(afterVmStartApp);
     }
 
@@ -238,6 +259,11 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
                     mWaitTime = Integer.parseInt(lines[i].replaceAll("\\D+", ""));
                 }
             }
+        }
+
+        AmStartupTimeCmdParser(int totalTime, int waitTime) {
+            mTotalTime = totalTime;
+            mWaitTime = waitTime;
         }
     }
 
