@@ -13,5 +13,12 @@ aidl_interface {
         cpp: {
             enabled: true,
         },
+        rust: {
+            enabled: true,
+            apex_available: [
+                "com.android.virt",
+                "com.android.compos",
+            ],
+        },
     },
 }

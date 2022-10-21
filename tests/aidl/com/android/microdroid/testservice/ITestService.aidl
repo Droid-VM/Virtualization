@@ -15,6 +15,8 @@
  */
 package com.android.microdroid.testservice;
 
+import com.android.microdroid.testservice.ITestServiceCallback;
+
 /** {@hide} */
 interface ITestService {
     const int SERVICE_PORT = 5678;
@@ -33,4 +35,8 @@ interface ITestService {
 
     /* get the VM's boot certificate chain (BCC). */
     byte[] getBcc();
+
+    void registerCallback(ITestServiceCallback cb);
+
+    void triggerCallback(int param);
 }

@@ -10,6 +10,7 @@ rust_binary {
     prefer_rlib: true,
     rustlibs: [
         "android.system.virtualizationservice-rust",
+        "com.android.microdroid.testservice-rust",
         "libanyhow",
         "libbinder_rs",
         "libclap",

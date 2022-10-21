@@ -37,6 +37,8 @@ using android::base::ErrnoError;
 using android::base::Error;
 using android::base::Result;
 
+using namespace aidl::com::android::microdroid::testservice;
+
 extern void testlib_sub();
 
 namespace {
@@ -113,6 +115,25 @@ Result<void> start_test_service() {
             }
             return ndk::ScopedAStatus::ok();
         }
+
+        ndk::ScopedAStatus registerCallback(
+                const std::shared_ptr<ITestServiceCallback>& callback) override {
+            mCallback = callback;
+            printf("REGISTERED CALLBACK\n");
+            return ndk::ScopedAStatus::ok();
+        }
+
+        ndk::ScopedAStatus triggerCallback(int32_t param) override {
+            if (mCallback != nullptr) {
+                mCallback->onTrigger(param);
+                printf("TRIGGERED CALLBACK with %d\n", (int)param);
+            } else {
+                printf("NO CALLBACK REGISTERED\n");
+            }
+            return ndk::ScopedAStatus::ok();
+        }
+
+        std::shared_ptr<ITestServiceCallback> mCallback;
     };
     auto testService = ndk::SharedRefBase::make<TestService>();
 
