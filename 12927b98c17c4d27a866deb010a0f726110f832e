@@ -16,6 +16,121 @@
       "message": "I\u0027ll let aosp/2265425 go in first as it will interfere, but this is the sketch I had for restricting APIs inside the VM. IMO it gets a bit messy with the compos part, but lmk what you think.",
       "revId": "12927b98c17c4d27a866deb010a0f726110f832e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fec1879_4732eb90",
+        "filename": "compos/apk/assets/vm_config.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-21T14:12:51Z",
+      "side": 1,
+      "message": "Bikeshed alert!\nTest APIs seems wrong; CompOs isn\u0027t a test.\n\nuse_platform_apis, use_restricted_apis, ... ?\nAlso, s/use/enable/ ?\n\nAnother thought: any use of a config file at all implies platform code or test APIs. So if that\u0027s all you care about you don\u0027t need a flag in the config file; the fact there is a file at all is enough. But not every case where we use a config file will actually need raw BCC access.\n\nSo, enable_raw_DICE_access, or something like that?",
+      "range": {
+        "startLine": 31,
+        "startChar": 3,
+        "endLine": 31,
+        "endChar": 16
+      },
+      "revId": "12927b98c17c4d27a866deb010a0f726110f832e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8dfe9c6_9bfeb8e1",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-21T14:12:51Z",
+      "side": 1,
+      "message": "That may mean we want to move it to a different header.\n\nBut then packaging these APIs is TBD anyway.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 68
+      },
+      "revId": "12927b98c17c4d27a866deb010a0f726110f832e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4148fc3d_743949e4",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-21T14:12:51Z",
+      "side": 1,
+      "message": "This isn\u0027t really documenting the API, just saying it\u0027s terrible.\n\nWhy do we want to prevent access to this? The one above is about privacy; is this just too easy to get wrong? Does that need a permission check, or just a scary warning here?",
+      "range": {
+        "startLine": 53,
+        "startChar": 78,
+        "endLine": 55,
+        "endChar": 98
+      },
+      "revId": "12927b98c17c4d27a866deb010a0f726110f832e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4c18444_1292a3a7",
+        "filename": "tests/testapk/assets/vm_config.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-21T14:12:51Z",
+      "side": 1,
+      "message": "Can we leave vm_config.json as vanilla, and add a vm_config_test_apis with this in it?",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 23
+      },
+      "revId": "12927b98c17c4d27a866deb010a0f726110f832e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa65cf77_17cea7a3",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-21T14:12:51Z",
+      "side": 1,
+      "message": "This will need a little modifying on top of aosp/2265425",
+      "range": {
+        "startLine": 252,
+        "startChar": 0,
+        "endLine": 252,
+        "endChar": 62
+      },
+      "revId": "12927b98c17c4d27a866deb010a0f726110f832e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
