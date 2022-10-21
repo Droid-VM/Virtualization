@@ -86,8 +86,9 @@ public class MicrodroidTestCase extends MicrodroidHostTestCaseBase {
     private static final int MIN_MEM_ARM64 = 145;
     private static final int MIN_MEM_X86_64 = 196;
 
-    // Number of vCPUs for testing purpose
+    // Number of vCPUs and their affinity to host CPUs for testing purpose
     private static final int NUM_VCPUS = 3;
+    private static final String CPU_AFFINITY = "0,1,2";
 
     @Rule public TestLogData mTestLogs = new TestLogData();
     @Rule public TestName mTestName = new TestName();
@@ -509,7 +510,8 @@ public class MicrodroidTestCase extends MicrodroidHostTestCaseBase {
                         configPath,
                         /* debug */ true,
                         minMemorySize(),
-                        Optional.of(NUM_VCPUS));
+                        Optional.of(NUM_VCPUS),
+                        Optional.of(CPU_AFFINITY));
         // check until microdroid is shut down
         CommandRunner android = new CommandRunner(getDevice());
         android.runWithTimeout(15000, "logcat", "-m", "1", "-e", "'crosvm has exited normally'");
@@ -561,7 +563,8 @@ public class MicrodroidTestCase extends MicrodroidHostTestCaseBase {
                         configPath,
                         /* debug */ true,
                         minMemorySize(),
-                        Optional.of(NUM_VCPUS));
+                        Optional.of(NUM_VCPUS),
+                        Optional.of(CPU_AFFINITY));
 
         // Check VmCreationRequested atom and clear the statsd report
         List<StatsLog.EventMetricData> data;
@@ -583,6 +586,7 @@ public class MicrodroidTestCase extends MicrodroidHostTestCaseBase {
                 AtomsProto.VmCreationRequested.ConfigType.VIRTUAL_MACHINE_APP_CONFIG,
                 atomVmCreationRequested.getConfigType());
         assertEquals(NUM_VCPUS, atomVmCreationRequested.getNumCpus());
+        assertEquals(CPU_AFFINITY, atomVmCreationRequested.getCpuAffinity());
         assertEquals(minMemorySize(), atomVmCreationRequested.getMemoryMib());
         assertEquals(
                 "com.android.art:com.android.compos:com.android.sdkext",
@@ -635,7 +639,8 @@ public class MicrodroidTestCase extends MicrodroidHostTestCaseBase {
                         configPath,
                         /* debug */ true,
                         minMemorySize(),
-                        Optional.of(NUM_VCPUS));
+                        Optional.of(NUM_VCPUS),
+                        Optional.of(CPU_AFFINITY));
         adbConnectToMicrodroid(getDevice(), cid);
         waitForBootComplete();
         // Test writing to /data partition
@@ -760,7 +765,8 @@ public class MicrodroidTestCase extends MicrodroidHostTestCaseBase {
                         configPath,
                         /* debug */ true,
                         minMemorySize(),
-                        Optional.of(NUM_VCPUS));
+                        Optional.of(NUM_VCPUS),
+                        Optional.of(CPU_AFFINITY));
         adbConnectToMicrodroid(getDevice(), cid);
         waitForBootComplete();
         rootMicrodroid();
