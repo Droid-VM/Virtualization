@@ -238,6 +238,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c242a87b_830f4176",
+        "filename": "pvmfw/src/mmio/guard.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-21T14:37:04Z",
+      "side": 1,
+      "message": "Well the names are wrong... SMCCC is the SMC Calling Convention, so makes sense to have `hvc64` there that deals with which register is callee/caller-saved and, like the spec, is completely vendor agnostic. MMIO guard is vendor-specific, I don\u0027t see why you don\u0027t put it in the mmio_guard crate 😄",
+      "parentUuid": "36f1381f_8453e3b4",
+      "range": {
+        "startLine": 52,
+        "startChar": 11,
+        "endLine": 52,
+        "endChar": 25
+      },
+      "revId": "8f974f2a4bbff2aa4c5c50ae78d6440bd8f8f987",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f9380c3_c5572701",
         "filename": "pvmfw/src/mmio/mod.rs",
         "patchSetId": 2
