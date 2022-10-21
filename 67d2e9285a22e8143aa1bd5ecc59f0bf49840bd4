@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecd0d34d_c25f4060",
+        "filename": "pvmfw/src/smccc.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-21T17:09:32Z",
+      "side": 1,
+      "message": "how about turning this into `checked_hvc64`? All of your callers first call `hvc64` and then this (directly or indirectly).",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 1
+      },
+      "revId": "67d2e9285a22e8143aa1bd5ecc59f0bf49840bd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
