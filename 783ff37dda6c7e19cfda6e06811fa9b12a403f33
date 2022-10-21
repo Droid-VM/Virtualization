@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "557a28fd_9c1bd8f3",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-21T15:22:51Z",
+      "side": 1,
+      "message": "Not the value but the type is when we `Err(_) \u003d\u003e reboot`; want me to re-introduce it once I pass the reboot reason back to the host? If so, what should the return type of `main_wrapper` be? `Result\u003c(), ()\u003e`?",
+      "parentUuid": "fdc1aff1_db3edadf",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 1
+      },
+      "revId": "783ff37dda6c7e19cfda6e06811fa9b12a403f33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30105897_97746190",
         "filename": "pvmfw/src/entry.rs",
         "patchSetId": 1
@@ -37,6 +61,24 @@
       "writtenOn": "2022-10-21T14:18:42Z",
       "side": 1,
       "message": "nit: empty line after",
+      "revId": "783ff37dda6c7e19cfda6e06811fa9b12a403f33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eb1e234_cc599797",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-21T15:22:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30105897_97746190",
       "revId": "783ff37dda6c7e19cfda6e06811fa9b12a403f33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +96,30 @@
       "writtenOn": "2022-10-21T14:18:42Z",
       "side": 1,
       "message": "Why isn\u0027t this `-\u003e !`?",
+      "range": {
+        "startLine": 39,
+        "startChar": 81,
+        "endLine": 39,
+        "endChar": 83
+      },
+      "revId": "783ff37dda6c7e19cfda6e06811fa9b12a403f33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ad02a08_008e2efb",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-21T15:22:51Z",
+      "side": 1,
+      "message": "cs/aosp-master/packages/modules/Virtualization/vmbase/src/entry.rs;l\u003d53",
+      "parentUuid": "3f78aa13_dde72908",
       "range": {
         "startLine": 39,
         "startChar": 81,
@@ -87,6 +153,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "689eadb4_393c57e6",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-21T15:22:51Z",
+      "side": 1,
+      "message": "I wanted to express that it\u0027s this function that handles the VMM-HV-pvmfw and pvmfw-payload ABIs.",
+      "parentUuid": "944787b6_c59f2af8",
+      "range": {
+        "startLine": 43,
+        "startChar": 9,
+        "endLine": 43,
+        "endChar": 27
+      },
+      "revId": "783ff37dda6c7e19cfda6e06811fa9b12a403f33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17c22f17_747b5df5",
@@ -100,6 +190,30 @@
       "writtenOn": "2022-10-21T14:18:42Z",
       "side": 1,
       "message": "These are `unsafe` because you\u0027re telling Rust to track ownership of memory it has not allocated. So safety comes down to whether this is a unique reference or not, otherwise the borrow checked is useless. You can claim it is safe but you should first check that the slices don\u0027t overlap with pvmfw memory and with each other.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 65
+      },
+      "revId": "783ff37dda6c7e19cfda6e06811fa9b12a403f33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aa2f051_3d0507d4",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-21T15:22:51Z",
+      "side": 1,
+      "message": "Right; I wanted to validate them in `main_wrapper` once we have a logger but I see your point and how I confused security (\"we don\u0027t trust the inputs\") and safety (\"the compiler makes correct assumptions\").\n\nFor now, I\u0027ll pass the inputs to `main_wrapper`, record that validation is a `TODO` and argue that the `SAFETY` comes from `crosvm` not being buggy (which is enough for `pvmfw` in its current state). Validation will be added once we start actually using the inputs, at which point we\u0027ll have logging in `main_wrapper`.",
+      "parentUuid": "17c22f17_747b5df5",
       "range": {
         "startLine": 45,
         "startChar": 0,
@@ -133,6 +247,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79f4d9c7_e600d3a8",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-21T15:22:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4d34408_d4a67bde",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 64
+      },
+      "revId": "783ff37dda6c7e19cfda6e06811fa9b12a403f33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5ac918a_a92cb06d",
@@ -156,6 +294,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee0a3e7b_d0e95331",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-21T15:22:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5ac918a_a92cb06d",
+      "range": {
+        "startLine": 72,
+        "startChar": 30,
+        "endLine": 72,
+        "endChar": 72
+      },
+      "revId": "783ff37dda6c7e19cfda6e06811fa9b12a403f33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fd2450d_e4b40db7",
@@ -169,6 +331,30 @@
       "writtenOn": "2022-10-21T14:18:42Z",
       "side": 1,
       "message": "Shouldn\u0027t you move this to the `entry` crate as well?",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 58
+      },
+      "revId": "783ff37dda6c7e19cfda6e06811fa9b12a403f33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96b97986_d9c841a1",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-21T15:22:51Z",
+      "side": 1,
+      "message": "Yep: aosp/2265428",
+      "parentUuid": "7fd2450d_e4b40db7",
       "range": {
         "startLine": 65,
         "startChar": 0,
