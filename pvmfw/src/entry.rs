@@ -66,7 +66,7 @@ fn main_wrapper(fdt: &mut [u8], payload: &[u8]) -> Result<(), RebootReason> {
     // - only perform logging once the logger has been initialized
     // - only access non-pvmfw memory once (and while) it has been mapped
     // - the location of inputs (in safe types) can't be trusted
-    logger::init(LevelFilter::Debug).map_err(|_| RebootReason::InternalError)?;
+    logger::init(LevelFilter::Info).map_err(|_| RebootReason::InternalError)?;
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
     crate::main(fdt, payload).map_err(|_| RebootReason::InternalError)?;
