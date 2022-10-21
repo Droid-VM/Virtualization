@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdc1aff1_db3edadf",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-21T14:18:42Z",
+      "side": 1,
+      "message": "This is never used, is it?",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 1
+      },
+      "revId": "783ff37dda6c7e19cfda6e06811fa9b12a403f33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30105897_97746190",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-21T14:18:42Z",
+      "side": 1,
+      "message": "nit: empty line after",
+      "revId": "783ff37dda6c7e19cfda6e06811fa9b12a403f33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f78aa13_dde72908",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-21T14:18:42Z",
+      "side": 1,
+      "message": "Why isn\u0027t this `-\u003e !`?",
+      "range": {
+        "startLine": 39,
+        "startChar": 81,
+        "endLine": 39,
+        "endChar": 83
+      },
+      "revId": "783ff37dda6c7e19cfda6e06811fa9b12a403f33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "944787b6_c59f2af8",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-21T14:18:42Z",
+      "side": 1,
+      "message": "what does that mean?",
+      "range": {
+        "startLine": 43,
+        "startChar": 9,
+        "endLine": 43,
+        "endChar": 27
+      },
+      "revId": "783ff37dda6c7e19cfda6e06811fa9b12a403f33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17c22f17_747b5df5",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-21T14:18:42Z",
+      "side": 1,
+      "message": "These are `unsafe` because you\u0027re telling Rust to track ownership of memory it has not allocated. So safety comes down to whether this is a unique reference or not, otherwise the borrow checked is useless. You can claim it is safe but you should first check that the slices don\u0027t overlap with pvmfw memory and with each other.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 65
+      },
+      "revId": "783ff37dda6c7e19cfda6e06811fa9b12a403f33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4d34408_d4a67bde",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-21T14:18:42Z",
+      "side": 1,
+      "message": "huh?",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 64
+      },
+      "revId": "783ff37dda6c7e19cfda6e06811fa9b12a403f33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5ac918a_a92cb06d",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-21T14:18:42Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this print the error from `main`?",
+      "range": {
+        "startLine": 72,
+        "startChar": 30,
+        "endLine": 72,
+        "endChar": 72
+      },
+      "revId": "783ff37dda6c7e19cfda6e06811fa9b12a403f33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fd2450d_e4b40db7",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-21T14:18:42Z",
+      "side": 1,
+      "message": "Shouldn\u0027t you move this to the `entry` crate as well?",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 58
+      },
+      "revId": "783ff37dda6c7e19cfda6e06811fa9b12a403f33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
