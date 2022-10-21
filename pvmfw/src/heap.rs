@@ -12,29 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! pVM firmware.
+//! Heap implementation.
 
-#![no_main]
-#![no_std]
-#![feature(default_alloc_error_handler)]
+use buddy_system_allocator::LockedHeap;
 
-mod entry;
-mod exceptions;
-mod heap;
-mod helpers;
-mod mmio_guard;
-mod smccc;
+#[global_allocator]
+static HEAP_ALLOCATOR: LockedHeap<32> = LockedHeap::<32>::new();
 
-use log::{debug, info};
+static mut HEAP: [u8; 65536] = [0; 65536];
 
-fn main(fdt: &mut [u8], payload: &[u8]) {
-    info!("pVM firmware");
-    debug!(
-        "fdt_address={:#018x}, payload_start={:#018x}, payload_size={:#018x}",
-        fdt.as_ptr() as usize,
-        payload.as_ptr() as usize,
-        payload.len(),
-    );
-
-    info!("Starting payload...");
+pub fn init() {
+    // SAFETY - HEAP is private and fully owned by this module.
+    unsafe {
+        HEAP_ALLOCATOR.lock().init(&mut HEAP as *mut u8 as usize, HEAP.len());
+    }
 }
