@@ -235,10 +235,11 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
             String configPath,
             boolean debug,
             int memoryMib,
-            Optional<Integer> numCpus)
+            Optional<Integer> numCpus,
+            Optional<String> cpuAffinity)
             throws DeviceNotAvailableException {
         return startMicrodroid(androidDevice, buildInfo, apkName, packageName, null, configPath,
-                debug, memoryMib, numCpus);
+                debug, memoryMib, numCpus, cpuAffinity);
     }
 
     public static String startMicrodroid(
@@ -250,11 +251,12 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
             String configPath,
             boolean debug,
             int memoryMib,
-            Optional<Integer> numCpus)
+            Optional<Integer> numCpus,
+            Optional<String> cpuAffinity)
             throws DeviceNotAvailableException {
         return startMicrodroid(androidDevice, buildInfo, apkName, null, packageName,
                 extraIdsigPaths, configPath, debug,
-                memoryMib, numCpus);
+                memoryMib, numCpus, cpuAffinity);
     }
 
     private static void forwardFileToLog(CommandRunner android, String path, String tag)
@@ -278,7 +280,8 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
             String configPath,
             boolean debug,
             int memoryMib,
-            Optional<Integer> numCpus)
+            Optional<Integer> numCpus,
+            Optional<String> cpuAffinity)
             throws DeviceNotAvailableException {
         CommandRunner android = new CommandRunner(androidDevice);
 
@@ -311,6 +314,7 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
                 "--console " + consolePath,
                 "--mem " + memoryMib,
                 numCpus.isPresent() ? "--cpus " + numCpus.get() : "",
+                cpuAffinity.isPresent() ? "--cpu-affinity " + cpuAffinity.get() : "",
                 debugFlag,
                 apkPath,
                 outApkIdsigPath,

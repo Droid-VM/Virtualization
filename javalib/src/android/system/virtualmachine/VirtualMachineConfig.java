@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 /**
  * Represents a configuration of a virtual machine. A configuration consists of hardware
@@ -56,6 +57,7 @@ public final class VirtualMachineConfig {
     private static final String KEY_PROTECTED_VM = "protectedVm";
     private static final String KEY_MEMORY_MIB = "memoryMib";
     private static final String KEY_NUM_CPUS = "numCpus";
+    private static final String KEY_CPU_AFFINITY = "cpuAffinity";
 
     // Paths to the APK file of this application.
     @NonNull private final String mApkPath;
@@ -104,6 +106,13 @@ public final class VirtualMachineConfig {
     private final int mNumCpus;
 
     /**
+     * Comma-separated list of CPUs or CPU ranges to run vCPUs on (e.g. 0,1-3,5), or
+     * colon-separated list of assignments of vCPU to host CPU assignments (e.g. 0=0:1=1:2=2).
+     * Default is no mask which means a vCPU can run on any host CPU.
+     */
+    private final String mCpuAffinity;
+
+    /**
      * Path within the APK to the payload config file that defines software aspects of this config.
      */
     @NonNull private final String mPayloadConfigPath;
@@ -115,7 +124,8 @@ public final class VirtualMachineConfig {
             DebugLevel debugLevel,
             boolean protectedVm,
             int memoryMib,
-            int numCpus) {
+            int numCpus,
+            String cpuAffinity) {
         mApkPath = apkPath;
         mCerts = certs;
         mPayloadConfigPath = payloadConfigPath;
@@ -123,6 +133,7 @@ public final class VirtualMachineConfig {
         mProtectedVm = protectedVm;
         mMemoryMib = memoryMib;
         mNumCpus = numCpus;
+        mCpuAffinity = cpuAffinity;
     }
 
     /** Loads a config from a stream, for example a file. */
@@ -155,8 +166,9 @@ public final class VirtualMachineConfig {
         final boolean protectedVm = b.getBoolean(KEY_PROTECTED_VM);
         final int memoryMib = b.getInt(KEY_MEMORY_MIB);
         final int numCpus = b.getInt(KEY_NUM_CPUS);
+        final String cpuAffinity = b.getString(KEY_CPU_AFFINITY);
         return new VirtualMachineConfig(apkPath, certs, payloadConfigPath, debugLevel, protectedVm,
-                memoryMib, numCpus);
+                memoryMib, numCpus, cpuAffinity);
     }
 
     /** Persists this config to a stream, for example a file. */
@@ -237,6 +249,7 @@ public final class VirtualMachineConfig {
         parcel.protectedVm = mProtectedVm;
         parcel.memoryMib = mMemoryMib;
         parcel.numCpus = mNumCpus;
+        parcel.cpuAffinity = mCpuAffinity;
         // Don't allow apps to set task profiles ... at last for now. Also, don't forget to
         // validate the string because these are appended to the cmdline argument.
         parcel.taskProfiles = new String[0];
@@ -255,6 +268,7 @@ public final class VirtualMachineConfig {
         private boolean mProtectedVm;
         private int mMemoryMib;
         private int mNumCpus;
+        private String mCpuAffinity;
 
         /**
          * Creates a builder for the given context (APK), and the payload config file in APK.
@@ -267,6 +281,7 @@ public final class VirtualMachineConfig {
             mDebugLevel = DebugLevel.NONE;
             mProtectedVm = false;
             mNumCpus = 1;
+            mCpuAffinity = null;
         }
 
         /**
@@ -311,6 +326,19 @@ public final class VirtualMachineConfig {
         }
 
         /**
+         * Sets on which host CPUs the vCPUs can run. The format is a comma-separated list of CPUs
+         * or CPU ranges to run vCPUs on. e.g. "0,1-3,5" to choose host CPUs 0, 1, 2, 3, and 5.
+         * Or this can be a colon-separated list of assignments of vCPU to host CPU assignments.
+         * e.g. "0=0:1=1:2=2" to map vCPU 0 to host CPU 0, and so on.
+         *
+         * @hide
+         */
+        public Builder cpuAffinity(String affinity) {
+            mCpuAffinity = affinity;
+            return this;
+        }
+
+        /**
          * Builds an immutable {@link VirtualMachineConfig}
          *
          * @hide
@@ -337,6 +365,13 @@ public final class VirtualMachineConfig {
                         + "range [1, " + availableCpus + "]");
             }
 
+            if (mCpuAffinity != null
+                    && !Pattern.matches("[\\d]+(-[\\d]+)?(,[\\d]+(-[\\d]+)?)*", mCpuAffinity)
+                    && !Pattern.matches("[\\d]+=[\\d]+(:[\\d]+=[\\d]+)*", mCpuAffinity)) {
+                throw new IllegalArgumentException("CPU affinity [" + mCpuAffinity + "]"
+                        + " is invalid");
+            }
+
             if (mProtectedVm
                     && !HypervisorProperties.hypervisor_protected_vm_supported().orElse(false)) {
                 throw new UnsupportedOperationException(
@@ -349,7 +384,7 @@ public final class VirtualMachineConfig {
 
             return new VirtualMachineConfig(
                     apkPath, certs, mPayloadConfigPath, mDebugLevel, mProtectedVm, mMemoryMib,
-                    mNumCpus);
+                    mNumCpus, mCpuAffinity);
         }
     }
 }
