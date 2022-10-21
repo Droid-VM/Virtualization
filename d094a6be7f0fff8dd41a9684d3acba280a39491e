@@ -16,6 +16,29 @@
       "message": "This replaces my previous 2 CLs. We no longer need to split the tests in two.",
       "revId": "d094a6be7f0fff8dd41a9684d3acba280a39491e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6f3bf12_8d413011",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-21T15:21:45Z",
+      "side": 1,
+      "message": "nit: I guess it gets repetitive to put the permissions check as early as possible?",
+      "range": {
+        "startLine": 383,
+        "startChar": 20,
+        "endLine": 383,
+        "endChar": 52
+      },
+      "revId": "d094a6be7f0fff8dd41a9684d3acba280a39491e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
