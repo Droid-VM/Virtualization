@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c435ea78_a313b02e",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-21T15:08:59Z",
+      "side": 1,
+      "message": "Why don\u0027t you make all of these `mov x__, xzr` in the asm body? You need to do it for three of them already and you wouldn\u0027t have to argue that the compiler does the right thing... I would definitely find it easier to just read assembly, it\u0027s more comforting than figuring out if you\u0027re breaking LLVM or not.",
+      "range": {
+        "startLine": 102,
+        "startChar": 12,
+        "endLine": 129,
+        "endChar": 24
+      },
+      "revId": "07665e7de699250c5a94166e1bef37e05e7264d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
