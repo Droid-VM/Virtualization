@@ -118,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bf2bb25_c88e9d8e",
+        "filename": "tests/testapk/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-10-21T19:04:39Z",
+      "side": 1,
+      "message": "I\u0027d suggest building the common parts of your test in an `android_library`, then including that into two `android_test` modules using `static_libs`.  You can put most of the manifest contents into the `AndroidManifest.xml` of your `android_library`, and then just override the package name in your per-test `AndroidManifest.xml`.",
+      "parentUuid": "5f22fc25_b3840d72",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 1
+      },
+      "revId": "8cc6c1815d83d2ebdc8aa44d3862c6c892d0fb1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "df2a13ed_9ef13e20",
