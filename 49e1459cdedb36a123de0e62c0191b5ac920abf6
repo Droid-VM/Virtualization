@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e17c0cd9_acae380b",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-21T16:33:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11748f11_3e8ccb95",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 89
+      },
+      "revId": "49e1459cdedb36a123de0e62c0191b5ac920abf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9329831b_5cc68817",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-21T14:37:04Z",
       "side": 1,
       "message": "Up to you, but most of our code write this as:\n```\nmmio_guard::map(console::BASE_ADDRESS).map_err(|e| {\n    debug!(\"Failed to map mmio guard of UART: {e}\");\n    RebootReason::InternalError\n});\n```",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 48
+      },
+      "revId": "49e1459cdedb36a123de0e62c0191b5ac920abf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f19a43be_f16dd223",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-21T16:33:47Z",
+      "side": 1,
+      "message": "Neat! Also used this construct in aosp/2265426",
+      "parentUuid": "9329831b_5cc68817",
       "range": {
         "startLine": 76,
         "startChar": 0,
