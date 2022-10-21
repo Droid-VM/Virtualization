@@ -61,15 +61,3 @@ fn main(fdt: &mut [u8], payload: &[u8]) -> Result<(), Error> {
 
     Ok(())
 }
-
-fn jump_to_payload(fdt_address: u64, payload_start: u64) {
-    // Safe because this is a function we have implemented in assembly that matches its signature
-    // here.
-    unsafe {
-        start_payload(fdt_address, payload_start);
-    }
-}
-
-extern "C" {
-    fn start_payload(fdt_address: u64, payload_start: u64) -> !;
-}
