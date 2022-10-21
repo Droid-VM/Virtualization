@@ -47,6 +47,10 @@ pub struct VmPayloadConfig {
     /// files with integrity checking, but not confidentiality.
     #[serde(default)]
     pub enable_authfs: bool,
+
+    /// Whether test APIs are allowed to be used in the VM.
+    #[serde(default)]
+    pub use_test_apis: bool,
 }
 
 /// OS config

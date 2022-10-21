@@ -26,6 +26,7 @@ use openssl::md::Md;
 
 /// Implementation of `IVmPayloadService`.
 struct VmPayloadService {
+    use_test_apis: bool,
     virtual_machine_service: Strong<dyn IVirtualMachineService>,
     dice: DiceContext,
 }
@@ -54,10 +55,12 @@ impl IVmPayloadService for VmPayloadService {
     }
 
     fn getDiceAttestationChain(&self) -> binder::Result<Vec<u8>> {
+        self.check_use_test_api()?;
         Ok(self.dice.bcc.clone())
     }
 
     fn getDiceAttestationCdi(&self) -> binder::Result<Vec<u8>> {
+        self.check_use_test_api()?;
         Ok(self.dice.cdi_attest.to_vec())
     }
 }
@@ -66,18 +69,31 @@ impl Interface for VmPayloadService {}
 
 impl VmPayloadService {
     /// Creates a new `VmPayloadService` instance from the `IVirtualMachineService` reference.
-    fn new(vm_service: Strong<dyn IVirtualMachineService>, dice: DiceContext) -> Self {
-        Self { virtual_machine_service: vm_service, dice }
+    fn new(
+        use_test_apis: bool,
+        vm_service: Strong<dyn IVirtualMachineService>,
+        dice: DiceContext,
+    ) -> Self {
+        Self { use_test_apis, virtual_machine_service: vm_service, dice }
+    }
+
+    fn check_use_test_api(&self) -> binder::Result<()> {
+        if self.use_test_apis {
+            Ok(())
+        } else {
+            Err(Status::new_exception(ExceptionCode::SECURITY, None))
+        }
     }
 }
 
 /// Registers the `IVmPayloadService` service.
 pub(crate) fn register_vm_payload_service(
+    use_test_apis: bool,
     vm_service: Strong<dyn IVirtualMachineService>,
     dice: DiceContext,
 ) -> Result<()> {
     let vm_payload_binder = BnVmPayloadService::new_binder(
-        VmPayloadService::new(vm_service, dice),
+        VmPayloadService::new(use_test_apis, vm_service, dice),
         BinderFeatures::default(),
     );
     add_service(VM_PAYLOAD_SERVICE_NAME, vm_payload_binder.as_binder())

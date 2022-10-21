@@ -439,7 +439,7 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
     // Wait until zipfuse has mounted the APK so we can access the payload
     wait_for_property_true(APK_MOUNT_DONE_PROP).context("Failed waiting for APK mount done")?;
 
-    register_vm_payload_service(service.clone(), dice)?;
+    register_vm_payload_service(config.use_test_apis, service.clone(), dice)?;
     ProcessState::start_thread_pool();
 
     system_properties::write("dev.bootcomplete", "1").context("set dev.bootcomplete")?;
@@ -746,6 +746,7 @@ fn load_config(payload_metadata: PayloadMetadata) -> Result<VmPayloadConfig> {
                 prefer_staged: false,
                 export_tombstones: false,
                 enable_authfs: false,
+                use_test_apis: false,
             })
         }
     }

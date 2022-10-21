@@ -671,6 +671,7 @@ fn create_vm_payload_config(payload_config: &VirtualMachinePayloadConfig) -> VmP
         prefer_staged: false,
         export_tombstones: false,
         enable_authfs: false,
+        use_test_apis: false,
     }
 }
 
