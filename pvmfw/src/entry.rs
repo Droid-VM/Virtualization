@@ -15,7 +15,7 @@
 //! Low-level entry and exit points of pvmfw.
 
 use crate::helpers::FDT_MAX_SIZE;
-use crate::jump_to_payload;
+use core::arch::asm;
 use core::{fmt, slice};
 use log::LevelFilter;
 use vmbase::{logger, main, power::reboot};
@@ -72,4 +72,64 @@ fn main_wrapper(fdt: &mut [u8], payload: &[u8]) -> Result<(), RebootReason> {
     crate::main(fdt, payload).map_err(|_| RebootReason::InternalError)?;
 
     Ok(())
+}
+
+fn jump_to_payload(fdt_address: u64, payload_start: u64) -> ! {
+    const SCTLR_EL1_RES1: usize = (0b11 << 28) | (0b101 << 20) | (0b1 << 11);
+    // Stage 1 instruction access cacheability is unaffected.
+    const SCTLR_EL1_I: usize = 0b1 << 12;
+    // SETEND instruction disabled at EL0 in aarch32 mode.
+    const SCTLR_EL1_SED: usize = 0b1 << 8;
+    // Various IT instructions are disabled at EL0 in aarch32 mode.
+    const SCTLR_EL1_ITD: usize = 0b1 << 7;
+
+    const SCTLR_EL1_VAL: usize = SCTLR_EL1_RES1 | SCTLR_EL1_ITD | SCTLR_EL1_SED | SCTLR_EL1_I;
+
+    // SAFETY - We're exiting pvmfw by passing the register values we need to a noreturn asm!().
+    unsafe {
+        asm!(
+            "msr sctlr_el1, {sctlr_el1_val}",
+            "mov x18, xzr",
+            "mov x19, xzr",
+            "mov x29, xzr",
+            "isb",
+            "msr ttbr0_el1, xzr",
+            "isb",
+            "dsb nsh",
+            "br x30",
+            sctlr_el1_val = in(reg) SCTLR_EL1_VAL,
+            in("x0") fdt_address,
+            in("x1") 0,
+            in("x2") 0,
+            in("x3") 0,
+            in("x4") 0,
+            in("x5") 0,
+            in("x6") 0,
+            in("x7") 0,
+            in("x8") 0,
+            in("x9") 0,
+            in("x10") 0,
+            in("x11") 0,
+            in("x12") 0,
+            in("x13") 0,
+            in("x14") 0,
+            in("x15") 0,
+            in("x16") 0,
+            in("x17") 0,
+            // x18 is a reserved register.
+            // x19 is used internally by LLVM and cannot be used as an operand for inline asm.
+            in("x20") 0,
+            in("x21") 0,
+            in("x22") 0,
+            in("x23") 0,
+            in("x24") 0,
+            in("x25") 0,
+            in("x26") 0,
+            in("x27") 0,
+            in("x28") 0,
+            // the frame pointer cannot be used as an operand for inline asm.
+            in("x30") payload_start,
+            options(nomem, noreturn, nostack),
+        );
+    };
 }
