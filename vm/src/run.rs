@@ -24,11 +24,17 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
 };
 use anyhow::{bail, Context, Error};
 use binder::ParcelFileDescriptor;
+use binder::{BinderFeatures, Interface, Result as BinderResult, Strong};
+use com_android_microdroid_testservice::aidl::com::android::microdroid::testservice::{
+    ITestService::{ITestService, SERVICE_PORT},
+    ITestServiceCallback::{BnTestServiceCallback, ITestServiceCallback},
+};
 use microdroid_payload_config::VmPayloadConfig;
 use std::fs::File;
 use std::io::{self, BufRead, BufReader};
 use std::os::unix::io::{AsRawFd, FromRawFd};
 use std::path::{Path, PathBuf};
+use std::sync::{Arc, Mutex};
 use vmclient::{ErrorCode, VmInstance};
 use vmconfig::{open_parcel_file, VmConfig};
 use zip::ZipArchive;
@@ -54,6 +60,7 @@ pub fn command_run_app(
     cpus: Option<u32>,
     task_profiles: Vec<String>,
     extra_idsigs: &[PathBuf],
+    test_service: bool,
 ) -> Result<(), Error> {
     let extra_apks = parse_extra_apk_list(apk, config_path)?;
     if extra_apks.len() != extra_idsigs.len() {
@@ -129,6 +136,7 @@ pub fn command_run_app(
         console_path,
         log_path,
         ramdump_path,
+        test_service,
     )
 }
 
@@ -168,6 +176,7 @@ pub fn command_run(
         console_path,
         log_path,
         /* ramdump_path */ None,
+        false,
     )
 }
 
@@ -183,6 +192,7 @@ fn state_to_str(vm_state: VirtualMachineState) -> &'static str {
     }
 }
 
+#[allow(clippy::too_many_arguments)]
 fn run(
     service: &dyn IVirtualizationService,
     config: &VirtualMachineConfig,
@@ -191,6 +201,7 @@ fn run(
     console_path: Option<&Path>,
     log_path: Option<&Path>,
     ramdump_path: Option<&Path>,
+    test_service: bool,
 ) -> Result<(), Error> {
     let console = if let Some(console_path) = console_path {
         Some(
@@ -224,6 +235,29 @@ fn run(
         vm.cid(),
         state_to_str(vm.state()?)
     );
+
+    if test_service {
+        println!("ITestService tests");
+        println!("waiting for payload...");
+        vm.wait_until_ready(std::time::Duration::from_secs(15))?;
+        println!("connecting to service...");
+        let service: Strong<dyn ITestService> = vm.connect_service(SERVICE_PORT as u32)?;
+        println!("testing addInteger()...");
+        let add = service.addInteger(123, 456)?;
+        assert_eq!(add, 579);
+        println!("testing registerCallback()...");
+        let received_value = Arc::new(Mutex::new(None));
+        let callback = BnTestServiceCallback::new_binder(
+            TestServiceCallback { value: Arc::clone(&received_value) },
+            BinderFeatures::default(),
+        );
+        service.registerCallback(&callback)?;
+        println!("testing triggerCallback(42)...");
+        service.triggerCallback(42)?;
+        println!("checking callback value...");
+        assert_eq!(*received_value.lock().unwrap(), Some(42));
+        println!("success!");
+    }
 
     if daemonize {
         // Pass the VM reference back to VirtualizationService and have it hold it in the
@@ -304,5 +338,20 @@ fn duplicate_stdout() -> io::Result<File> {
         // Safe because we have just duplicated the file descriptor so we own it, and `from_raw_fd`
         // takes ownership of it.
         Ok(unsafe { File::from_raw_fd(dup_fd) })
+    }
+}
+
+struct TestServiceCallback {
+    value: Arc<Mutex<Option<i32>>>,
+}
+
+impl Interface for TestServiceCallback {}
+
+impl ITestServiceCallback for TestServiceCallback {
+    fn onTrigger(&self, value: i32) -> BinderResult<()> {
+        println!("triggerCallback: {}", value);
+        let mut data = self.value.lock().unwrap();
+        *data = Some(value);
+        Ok(())
     }
 }

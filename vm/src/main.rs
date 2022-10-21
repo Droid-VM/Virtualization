@@ -104,6 +104,9 @@ enum Opt {
         /// Paths to extra idsig files.
         #[clap(long = "extra-idsig")]
         extra_idsigs: Vec<PathBuf>,
+
+        #[clap(long)]
+        test_service: bool,
     },
     /// Run a virtual machine
     Run {
@@ -211,6 +214,7 @@ fn main() -> Result<(), Error> {
             cpus,
             task_profiles,
             extra_idsigs,
+            test_service,
         } => command_run_app(
             name,
             service.as_ref(),
@@ -230,6 +234,7 @@ fn main() -> Result<(), Error> {
             cpus,
             task_profiles,
             &extra_idsigs,
+            test_service,
         ),
         Opt::Run { name, config, daemonize, cpus, task_profiles, console, log } => {
             command_run(

@@ -34,6 +34,7 @@ import android.util.Log;
 import com.android.compatibility.common.util.CddTest;
 import com.android.microdroid.test.device.MicrodroidDeviceTestBase;
 import com.android.microdroid.testservice.ITestService;
+import com.android.microdroid.testservice.ITestServiceCallback;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -101,6 +102,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(testResults.mAddInteger).isEqualTo(123 + 456);
         assertThat(testResults.mAppRunProp).isEqualTo("true");
         assertThat(testResults.mSublibRunProp).isEqualTo("true");
+        assertThat(testResults.mCallbackParam).isEqualTo(43);
     }
 
     @Test
@@ -474,6 +476,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         String mAppRunProp;
         String mSublibRunProp;
         String mExtraApkTestProp;
+        Integer mCallbackParam;
     }
 
     private TestResults runVmTestService(VirtualMachine vm) throws Exception {
@@ -493,6 +496,14 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                                     testService.readProperty("debug.microdroid.app.sublib.run");
                             testResults.mExtraApkTestProp =
                                     testService.readProperty("debug.microdroid.test.extra_apk");
+
+                            testService.registerCallback(new ITestServiceCallback.Stub() {
+                                @Override
+                                public void onTrigger(int param) {
+                                    testResults.mCallbackParam = param;
+                                }
+                            });
+                            testService.triggerCallback(42);
                         } catch (Exception e) {
                             testResults.mException = e;
                         }
