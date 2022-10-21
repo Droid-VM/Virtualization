@@ -436,10 +436,17 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
         control_service("start", "authfs_service")?;
     }
 
+    // Restricted APIs are only allowed if a VM config file is used, which implies that the VM was
+    // created by a platform or test component.
+    let allow_restricted_apis = match payload_metadata {
+        PayloadMetadata::config_path(_) => true,
+        PayloadMetadata::config(_) => false,
+    };
+
     // Wait until zipfuse has mounted the APK so we can access the payload
     wait_for_property_true(APK_MOUNT_DONE_PROP).context("Failed waiting for APK mount done")?;
 
-    register_vm_payload_service(service.clone(), dice)?;
+    register_vm_payload_service(allow_restricted_apis, service.clone(), dice)?;
     ProcessState::start_thread_pool();
 
     system_properties::write("dev.bootcomplete", "1").context("set dev.bootcomplete")?;
