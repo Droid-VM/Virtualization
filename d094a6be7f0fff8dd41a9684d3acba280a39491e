@@ -39,6 +39,30 @@
       },
       "revId": "d094a6be7f0fff8dd41a9684d3acba280a39491e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec426a15_fccdb4d1",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-21T16:16:42Z",
+      "side": 1,
+      "message": "That was my original thought. But maybe it would be better to separate the concerns.\nAnd the check has to be in this function not the ones it calls (otherwise the binder::Result -\u003e anyhow::Result -\u003e binder::Result loses the fact that we want a SecurityException), which was one reason I did it this way initially.\nDone.",
+      "parentUuid": "c6f3bf12_8d413011",
+      "range": {
+        "startLine": 383,
+        "startChar": 20,
+        "endLine": 383,
+        "endChar": 52
+      },
+      "revId": "d094a6be7f0fff8dd41a9684d3acba280a39491e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
