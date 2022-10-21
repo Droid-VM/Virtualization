@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd273956_f8497dae",
+        "filename": "compos/apk/assets/vm_config.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-21T15:43:03Z",
+      "side": 1,
+      "message": "Compos isn\u0027t a test, but it only fetches the DICE chain for testing, so..\n\nBut it\u0027s much less intrusive to just tie it to any VM with a VM config file so use that as the starting point.",
+      "parentUuid": "5fec1879_4732eb90",
+      "range": {
+        "startLine": 31,
+        "startChar": 3,
+        "endLine": 31,
+        "endChar": 16
+      },
+      "revId": "12927b98c17c4d27a866deb010a0f726110f832e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8dfe9c6_9bfeb8e1",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-10-21T14:12:51Z",
       "side": 1,
       "message": "That may mean we want to move it to a different header.\n\nBut then packaging these APIs is TBD anyway.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 68
+      },
+      "revId": "12927b98c17c4d27a866deb010a0f726110f832e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8669f147_cb4105bb",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-21T15:43:03Z",
+      "side": 1,
+      "message": "Both function will want be done in a way that doesn\u0027t expose it in the publicised API. Can\u0027t be bothered with that until the \"right\" way is known.",
+      "parentUuid": "d8dfe9c6_9bfeb8e1",
       "range": {
         "startLine": 52,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf644020_fd1a371e",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-21T15:43:03Z",
+      "side": 1,
+      "message": "It\u0027s something that we don\u0027t need to expose in the system API and is just there for the tests. It does has a permission check; it was added in this CL. The comment is just for guidance for whoever tried to touch it in future.",
+      "parentUuid": "4148fc3d_743949e4",
+      "range": {
+        "startLine": 53,
+        "startChar": 78,
+        "endLine": 55,
+        "endChar": 98
+      },
+      "revId": "12927b98c17c4d27a866deb010a0f726110f832e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4c18444_1292a3a7",
@@ -110,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96808b72_59b0b1e3",
+        "filename": "tests/testapk/assets/vm_config.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-21T15:43:03Z",
+      "side": 1,
+      "message": "Obsolete.",
+      "parentUuid": "d4c18444_1292a3a7",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 23
+      },
+      "revId": "12927b98c17c4d27a866deb010a0f726110f832e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa65cf77_17cea7a3",
@@ -123,6 +219,30 @@
       "writtenOn": "2022-10-21T14:12:51Z",
       "side": 1,
       "message": "This will need a little modifying on top of aosp/2265425",
+      "range": {
+        "startLine": 252,
+        "startChar": 0,
+        "endLine": 252,
+        "endChar": 62
+      },
+      "revId": "12927b98c17c4d27a866deb010a0f726110f832e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac7e0099_28c6b1c4",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-21T15:43:03Z",
+      "side": 1,
+      "message": "Yep, already planning to rebase on that when it lands.",
+      "parentUuid": "fa65cf77_17cea7a3",
       "range": {
         "startLine": 252,
         "startChar": 0,
