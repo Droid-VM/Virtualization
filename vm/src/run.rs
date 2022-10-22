@@ -57,7 +57,7 @@ pub fn command_run_app(
 ) -> Result<(), Error> {
     let apk_file = File::open(apk).context("Failed to open APK file")?;
 
-    let extra_apks = parse_extra_apk_list(apk, config_path)?;
+    let extra_apks = parse_extra_apk_list(&apk_file, config_path)?;
     if extra_apks.len() != extra_idsigs.len() {
         bail!(
             "Found {} extra apks, but there are {} extra idsigs",
@@ -255,8 +255,8 @@ fn save_ramdump_if_available(path: &Path, vm: &VmInstance) -> Result<(), Error> 
     Ok(())
 }
 
-fn parse_extra_apk_list(apk: &Path, config_path: &str) -> Result<Vec<String>, Error> {
-    let mut archive = ZipArchive::new(File::open(apk)?)?;
+fn parse_extra_apk_list(apk_file: &File, config_path: &str) -> Result<Vec<String>, Error> {
+    let mut archive = ZipArchive::new(apk_file)?;
     let config_file = archive.by_name(config_path)?;
     let config: VmPayloadConfig = serde_json::from_reader(config_file)?;
     Ok(config.extra_apks.into_iter().map(|x| x.path).collect())
