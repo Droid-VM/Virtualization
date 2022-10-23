@@ -16,6 +16,29 @@
       "message": "What tests to run for this?",
       "revId": "aac6a31dd8ef358d6e7695a693c5ea173609c510",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b363fd3_7eb4eb16",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-23T04:15:03Z",
+      "side": 1,
+      "message": "I think that sharing FD is not what we want here because parsing a zip updates the file offset in the FD.",
+      "range": {
+        "startLine": 259,
+        "startChar": 38,
+        "endLine": 259,
+        "endChar": 46
+      },
+      "revId": "aac6a31dd8ef358d6e7695a693c5ea173609c510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
