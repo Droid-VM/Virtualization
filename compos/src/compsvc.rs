@@ -18,7 +18,7 @@
 //! file descriptors backed by authfs (via authfs_service) and pass the file descriptors to the
 //! actual compiler.
 
-use anyhow::{bail, Context, Result};
+use anyhow::{anyhow, bail, Context, Result};
 use log::{error, info};
 use rustutils::system_properties;
 use std::default::Default;
@@ -30,14 +30,16 @@ use std::sync::RwLock;
 use crate::artifact_signer::ArtifactSigner;
 use crate::compilation::odrefresh;
 use crate::compos_key;
+use authfs_aidl_interface::aidl::com::android::virt::fs::IAuthFsService::{
+    IAuthFsService, AUTHFS_SERVICE_NAME,
+};
 use binder::{BinderFeatures, ExceptionCode, Interface, Result as BinderResult, Status, Strong};
 use compos_aidl_interface::aidl::com::android::compos::ICompOsService::{
     BnCompOsService, ICompOsService, OdrefreshArgs::OdrefreshArgs,
 };
 use compos_common::binder::to_binder_result;
 use compos_common::odrefresh::{is_system_property_interesting, ODREFRESH_PATH};
-
-const AUTHFS_SERVICE_NAME: &str = "authfs_service";
+use rpcbinder::get_unix_domain_rpc_interface;
 
 /// Constructs a binder object that implements ICompOsService.
 pub fn new_binder() -> Result<Strong<dyn ICompOsService>> {
@@ -127,8 +129,9 @@ impl ICompOsService for CompOsService {
 
 impl CompOsService {
     fn do_odrefresh(&self, args: &OdrefreshArgs) -> Result<i8> {
-        let authfs_service = binder::get_interface(AUTHFS_SERVICE_NAME)
-            .context("Unable to connect to AuthFS service")?;
+        let authfs_service: Strong<dyn IAuthFsService> =
+            get_unix_domain_rpc_interface(AUTHFS_SERVICE_NAME)
+                .with_context(|| anyhow!("Unable to connect to {}", AUTHFS_SERVICE_NAME))?;
         let exit_code = odrefresh(&self.odrefresh_path, args, authfs_service, |output_dir| {
             // authfs only shows us the files we created, so it's ok to just sign everything
             // under the output directory.
