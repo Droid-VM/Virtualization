@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6180effa_bf8c9426",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-24T15:59:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d2d60f4_742bf782",
+      "range": {
+        "startLine": 85,
+        "startChar": 63,
+        "endLine": 85,
+        "endChar": 67
+      },
+      "revId": "276816528a3a76cc8e2c9410423c8093f24ac480",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8161dbf7_95fcfe26",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-24T15:43:54Z",
       "side": 1,
       "message": "It\u0027s slightly non-obvious why this is needed here. Ah well.",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 62
+      },
+      "revId": "276816528a3a76cc8e2c9410423c8093f24ac480",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5983c780_3be3029a",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-24T15:59:40Z",
+      "side": 1,
+      "message": "Ack. The details are all in APIs that can change any time if a better idea comes up.",
+      "parentUuid": "8161dbf7_95fcfe26",
       "range": {
         "startLine": 286,
         "startChar": 0,
