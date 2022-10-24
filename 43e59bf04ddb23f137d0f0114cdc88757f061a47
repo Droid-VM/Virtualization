@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7422faf0_0165e56f",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-24T15:54:25Z",
+      "side": 1,
+      "message": "Nit: I wonder if instead of\n\"/apex/com.android.virt/etc/fs/microdroid_kernel(fd:57)\"\nwe should print something like\n\"/proc/self/fd/57 (/apex/com.android.virt/etc/fs/microdroid_kernel)\"\ni.e. make the real arg very visible, but add context.\n\nBut I don\u0027t feel strongly, and this is totally awesome anyway.",
+      "range": {
+        "startLine": 581,
+        "startChar": 3,
+        "endLine": 581,
+        "endChar": 20
+      },
+      "revId": "43e59bf04ddb23f137d0f0114cdc88757f061a47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
