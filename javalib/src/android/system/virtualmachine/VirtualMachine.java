@@ -61,6 +61,7 @@ import android.system.virtualizationservice.PartitionType;
 import android.system.virtualizationservice.VirtualMachineAppConfig;
 import android.system.virtualizationservice.VirtualMachineState;
 import android.util.JsonReader;
+import android.util.Log;
 
 import com.android.internal.annotations.GuardedBy;
 
@@ -175,6 +176,9 @@ public class VirtualMachine implements AutoCloseable {
     /** Path to the idsig file for this VM. */
     @NonNull private final File mIdsigFilePath;
 
+    /** Path to the idsig file for this VM. */
+    @NonNull private final File mTemporaryDirPath;
+
     private static class ExtraApkSpec {
         public final File apk;
         public final File idsig;
@@ -258,6 +262,7 @@ public class VirtualMachine implements AutoCloseable {
         final File thisVmDir = new File(vmRoot, mName);
         mInstanceFilePath = new File(thisVmDir, INSTANCE_IMAGE_FILE);
         mIdsigFilePath = new File(thisVmDir, IDSIG_FILE);
+        mTemporaryDirPath = new File(thisVmDir, "tmp");
         mExtraApks = setupExtraApks(context, config, thisVmDir);
     }
 
@@ -328,11 +333,13 @@ public class VirtualMachine implements AutoCloseable {
     static VirtualMachine load(
             @NonNull Context context, @NonNull String name) throws VirtualMachineException {
         File configFilePath = getConfigFilePath(context, name);
+        Log.e("XXX", "configFilePath=" + configFilePath);
         VirtualMachineConfig config;
         try (FileInputStream input = new FileInputStream(configFilePath)) {
             config = VirtualMachineConfig.from(input);
         } catch (FileNotFoundException e) {
             // The VM doesn't exist.
+            Log.e("XXX", "VM doesn't exist");
             return null;
         } catch (IOException e) {
             throw new VirtualMachineException(e);
@@ -364,6 +371,7 @@ public class VirtualMachine implements AutoCloseable {
             throw new VirtualMachineException("instance image missing");
         }
 
+        Log.e("XXX", "VM found " + ((vm == null) ? "no" : "yes"));
         return vm;
     }
 
@@ -467,6 +475,18 @@ public class VirtualMachine implements AutoCloseable {
         }
     }
 
+    private static void recursiveDelete(File file) {
+        if (file.exists()) {
+            File[] fileList = file.listFiles();
+            if (fileList != null) {
+                for (File child : fileList) {
+                    recursiveDelete(child);
+                }
+            }
+            file.delete();
+        }
+    }
+
     /**
      * Runs this virtual machine. The returning of this method however doesn't mean that the VM has
      * actually started running or the OS has booted there. Such events can be notified by
@@ -488,6 +508,15 @@ public class VirtualMachine implements AutoCloseable {
         } catch (IOException e) {
             // If the file already exists, exception is not thrown.
             throw new VirtualMachineException("failed to create idsig file", e);
+        }
+
+        try {
+            recursiveDelete(mTemporaryDirPath);
+            Files.createDirectory(mTemporaryDirPath.toPath());
+        } catch (FileAlreadyExistsException e) {
+            throw new VirtualMachineException("temporary directory already exists", e);
+        } catch (IOException e) {
+            throw new VirtualMachineException(e);
         }
 
         IVirtualizationService service = getVirtualizationService();
@@ -539,7 +568,8 @@ public class VirtualMachine implements AutoCloseable {
                 }
             };
 
-            mVirtualMachine = service.createVm(vmConfigParcel, mConsoleWriter, mLogWriter);
+            mVirtualMachine = service.createVm(vmConfigParcel, mTemporaryDirPath.getAbsolutePath(),
+                    mConsoleWriter, mLogWriter);
             mVirtualMachine.registerCallback(
                     new IVirtualMachineCallback.Stub() {
                         @Override
@@ -717,12 +747,14 @@ public class VirtualMachine implements AutoCloseable {
             throw new VirtualMachineException("Virtual machine is not stopped");
         }
         final File vmRootDir = mConfigFilePath.getParentFile();
+        Log.e("XXX", "delete VM " + vmRootDir);
         for (ExtraApkSpec extraApks : mExtraApks) {
             extraApks.idsig.delete();
         }
         mConfigFilePath.delete();
         mInstanceFilePath.delete();
         mIdsigFilePath.delete();
+        recursiveDelete(mTemporaryDirPath);
         vmRootDir.delete();
 
         synchronized (sInstancesLock) {
