@@ -144,6 +144,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "03a0c802_c3b40afb",
+        "filename": "tests/testapk/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-24T08:47:56Z",
+      "side": 1,
+      "message": "Oh, thanks for that. I hadn\u0027t got as far as figuring out how to de-dupe the manifest. But android-library sounds perfect.\n\nOTOH it turns out I don\u0027t need to do any of this anyway - the different work we are doing in the different test.xml files is actually much more neatly done by the test itself at runtime, so I ended up doing that, and therefore keeping a single test module.",
+      "parentUuid": "3bf2bb25_c88e9d8e",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 1
+      },
+      "revId": "8cc6c1815d83d2ebdc8aa44d3862c6c892d0fb1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "df2a13ed_9ef13e20",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 1
