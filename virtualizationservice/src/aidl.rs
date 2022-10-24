@@ -22,6 +22,7 @@ use crate::composite::make_composite_image;
 use crate::crosvm::{CrosvmConfig, DiskFile, PayloadState, VmInstance, VmState};
 use crate::payload::{add_microdroid_payload_images, add_microdroid_system_images};
 use crate::selinux::{getfilecon, SeContext};
+use crate::{get_calling_pid, get_calling_uid};
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
 use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon::ErrorCode::ErrorCode;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
@@ -51,7 +52,7 @@ use anyhow::{anyhow, bail, Context, Result};
 use apkverify::{HashAlgorithm, V4Signature};
 use binder::{
     self, BinderFeatures, ExceptionCode, Interface, LazyServiceGuard, ParcelFileDescriptor,
-    SpIBinder, Status, StatusCode, Strong, ThreadState,
+    SpIBinder, Status, StatusCode, Strong,
 };
 use disk::QcowFile;
 use libc::VMADDR_CID_HOST;
@@ -356,8 +357,8 @@ impl VirtualizationService {
         let state = &mut *self.state.lock().unwrap();
         let console_fd = console_fd.map(clone_file).transpose()?;
         let log_fd = log_fd.map(clone_file).transpose()?;
-        let requester_uid = ThreadState::get_calling_uid();
-        let requester_debug_pid = ThreadState::get_calling_pid();
+        let requester_uid = get_calling_uid();
+        let requester_debug_pid = get_calling_pid();
         let cid = state.next_cid().or(Err(ExceptionCode::ILLEGAL_STATE))?;
 
         // Counter to generate unique IDs for temporary image files.
@@ -674,8 +675,8 @@ struct CompositeImageFilenames {
 
 /// Checks whether the caller has a specific permission
 fn check_permission(perm: &str) -> binder::Result<()> {
-    let calling_pid = ThreadState::get_calling_pid();
-    let calling_uid = ThreadState::get_calling_uid();
+    let calling_pid = get_calling_pid();
+    let calling_uid = get_calling_uid();
     // Root can do anything
     if calling_uid == 0 {
         return Ok(());
