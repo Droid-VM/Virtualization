@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         ScrollView scrollLogView = findViewById(R.id.scrollLogOutput);
 
         VirtualMachineModel model = new ViewModelProvider(this).get(VirtualMachineModel.class);
+                        model.run(true);
 
         // When the button is clicked, run or stop the VM
         runStopButton.setOnClickListener(
@@ -260,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
                 VirtualMachineConfig.Builder builder =
                         new VirtualMachineConfig.Builder(getApplication());
                 builder.setPayloadBinaryPath("MicrodroidTestNativeLib.so");
-                builder.setProtectedVm(true);
+                builder.setProtectedVm(false);
                 if (debug) {
                     builder.setDebugLevel(VirtualMachineConfig.DEBUG_LEVEL_FULL);
                 }
