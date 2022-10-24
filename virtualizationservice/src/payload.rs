@@ -23,7 +23,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
 };
 use anyhow::{anyhow, bail, Context, Result};
 use binder::{wait_for_interface, ParcelFileDescriptor};
-use log::{info, warn};
+use log::warn;
 use microdroid_metadata::{ApexPayload, ApkPayload, Metadata, PayloadConfig, PayloadMetadata};
 use microdroid_payload_config::{ApexConfig, VmPayloadConfig};
 use once_cell::sync::OnceCell;
@@ -245,7 +245,6 @@ fn make_payload_disk(
     // collect APEXes from config
     let apex_infos =
         collect_apex_infos(&apex_list, &vm_payload_config.apexes, app_config.debugLevel);
-    info!("Microdroid payload APEXes: {:?}", apex_infos.iter().map(|ai| &ai.name));
 
     let metadata_file = make_metadata_file(app_config, &apex_infos, temporary_directory)?;
     // put metadata at the first partition
