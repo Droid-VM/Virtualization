@@ -88,7 +88,7 @@ TEST_F(VirtualizationTest, TestVsock) {
 
     VirtualMachineConfig config(std::move(raw_config));
     sp<IVirtualMachine> vm;
-    status = mVirtualizationService->createVm(config, std::nullopt, std::nullopt, &vm);
+    status = mVirtualizationService->createVm(config, "", std::nullopt, std::nullopt, &vm);
     ASSERT_TRUE(status.isOk()) << "Error creating VM: " << status;
 
     int32_t cid;
