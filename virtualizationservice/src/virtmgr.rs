@@ -27,15 +27,30 @@ mod selinux;
 use crate::aidl::VirtualizationService;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualizationService::BnVirtualizationService;
 use binder::BinderFeatures;
+use lazy_static::lazy_static;
 use log::{error, Level};
 use rpcbinder::run_unix_bootstrap_rpc_server;
 use std::os::unix::io::{FromRawFd, OwnedFd, RawFd};
 use clap::Parser;
-use nix::unistd::Pid;
+use nix::unistd::{Pid, Uid};
+use std::os::unix::raw::{pid_t, uid_t};
 
 const LOG_TAG: &str = "virtmgr";
 
 const PID_INIT: Pid = Pid::from_raw(1);
+
+lazy_static! {
+    static ref PID_PARENT: Pid = Pid::parent();
+    static ref UID_CURRENT: Uid = Uid::current();
+}
+
+fn get_calling_pid() -> pid_t {
+    (*PID_PARENT).as_raw()
+}
+
+fn get_calling_uid() -> uid_t {
+    (*UID_CURRENT).as_raw()
+}
 
 #[derive(Parser)]
 struct Args {
@@ -56,8 +71,7 @@ fn parse_fd_arg(raw_fd: RawFd) -> Result<OwnedFd, nix::Error> {
 }
 
 fn register_pdeathsig() -> Result<(), std::io::Error> {
-    let ppid = Pid::parent();
-    if ppid == PID_INIT {
+    if *PID_PARENT == PID_INIT {
         return Err(std::io::Error::new(std::io::ErrorKind::InvalidInput, "parent is init"));
     }
 
@@ -70,7 +84,7 @@ fn register_pdeathsig() -> Result<(), std::io::Error> {
     }
 
     // Check for race.
-    if ppid != Pid::parent() {
+    if *PID_PARENT != Pid::parent() {
         return Err(std::io::Error::new(std::io::ErrorKind::InvalidInput, "parent changed"));
     }
 
