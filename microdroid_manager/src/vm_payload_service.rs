@@ -18,11 +18,13 @@ use crate::dice::DiceContext;
 use android_system_virtualization_payload::aidl::android::system::virtualization::payload::IVmPayloadService::{
     BnVmPayloadService, IVmPayloadService, VM_PAYLOAD_SERVICE_NAME};
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
-use anyhow::{Context, Result};
-use binder::{Interface, BinderFeatures, ExceptionCode, Status, Strong, add_service};
-use log::error;
+use anyhow::Result;
+use binder::{Interface, BinderFeatures, ExceptionCode, Status, Strong};
+use log::{error, info};
 use openssl::hkdf::hkdf;
 use openssl::md::Md;
+use rpcbinder::{run_unix_domain_rpc_server, unlink_unix_domain_socket};
+use std::process::exit;
 
 /// Implementation of `IVmPayloadService`.
 struct VmPayloadService {
@@ -97,8 +99,24 @@ pub(crate) fn register_vm_payload_service(
         VmPayloadService::new(allow_restricted_apis, vm_service, dice),
         BinderFeatures::default(),
     );
-    add_service(VM_PAYLOAD_SERVICE_NAME, vm_payload_binder.as_binder())
-        .with_context(|| format!("Failed to register service {}", VM_PAYLOAD_SERVICE_NAME))?;
-    log::info!("{} is running", VM_PAYLOAD_SERVICE_NAME);
+    std::thread::spawn(move || {
+        let retval =
+            run_unix_domain_rpc_server(vm_payload_binder.as_binder(), VM_PAYLOAD_SERVICE_NAME);
+        if retval {
+            info!("{} is running", VM_PAYLOAD_SERVICE_NAME);
+        } else {
+            error!("Failed to register service {}", VM_PAYLOAD_SERVICE_NAME);
+            exit(1);
+        }
+    });
     Ok(())
+}
+
+/// Unlinks the `IVmPayloadService` service.
+pub(crate) fn unlink_vm_payload_service() {
+    if unlink_unix_domain_socket(VM_PAYLOAD_SERVICE_NAME) {
+        info!("Successfully closed the socket {}", VM_PAYLOAD_SERVICE_NAME);
+    } else {
+        error!("Failed to close the socket {}", VM_PAYLOAD_SERVICE_NAME);
+    }
 }

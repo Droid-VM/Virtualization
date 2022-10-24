@@ -103,6 +103,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         VirtualMachineConfig config = mInner.newVmConfigBuilder()
                 .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
                 .setMemoryMib(minMemoryRequired())
+                .setDebugLevel(DEBUG_LEVEL_FULL)
                 .build();
         VirtualMachine vm = mInner.forceCreateNewVirtualMachine("test_vm_extra_apk", config);
 
