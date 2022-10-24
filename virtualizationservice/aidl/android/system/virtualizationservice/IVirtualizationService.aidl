@@ -28,6 +28,7 @@ interface IVirtualizationService {
      * running in the VM has the logging system. In case of Microdroid, the logging system is logd.
      */
     IVirtualMachine createVm(in VirtualMachineConfig config,
+            in String temporaryDirectory, /* TODO - could this be an FD? use openat() */
             in @nullable ParcelFileDescriptor consoleFd,
             in @nullable ParcelFileDescriptor osLogFd);
 
