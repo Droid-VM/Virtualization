@@ -140,7 +140,7 @@ impl VmInstance {
         let console = console.map(ParcelFileDescriptor::new);
         let log = log.map(ParcelFileDescriptor::new);
 
-        let vm = service.createVm(config, console.as_ref(), log.as_ref())?;
+        let vm = service.createVm(config, "", console.as_ref(), log.as_ref())?;
 
         let cid = vm.getCid()?;
 
