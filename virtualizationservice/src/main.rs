@@ -28,11 +28,20 @@ use crate::aidl::{VirtualizationService, BINDER_SERVICE_IDENTIFIER, TEMPORARY_DI
 use android_logger::{Config, FilterBuilder};
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualizationService::BnVirtualizationService;
 use anyhow::{bail, Context, Error};
-use binder::{register_lazy_service, BinderFeatures, ProcessState};
+use binder::{register_lazy_service, BinderFeatures, ProcessState, ThreadState};
 use log::{info, Level};
 use std::fs::{remove_dir_all, remove_file, read_dir};
+use std::os::unix::raw::{pid_t, uid_t};
 
 const LOG_TAG: &str = "VirtualizationService";
+
+fn get_calling_pid() -> pid_t {
+    ThreadState::get_calling_pid()
+}
+
+fn get_calling_uid() -> uid_t {
+    ThreadState::get_calling_uid()
+}
 
 fn main() {
     android_logger::init_once(
