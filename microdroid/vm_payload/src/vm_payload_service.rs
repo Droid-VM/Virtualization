@@ -17,10 +17,11 @@
 use android_system_virtualization_payload::aidl::android::system::virtualization::payload::IVmPayloadService::{
     IVmPayloadService, VM_PAYLOAD_SERVICE_NAME};
 use anyhow::{Context, Result};
-use binder::{wait_for_interface, Strong, unstable_api::{AIBinder, new_spibinder}};
+use binder::{Strong, unstable_api::{AIBinder, new_spibinder}};
 use log::{error, info, Level};
 use rpcbinder::run_vsock_rpc_server;
 use std::os::raw::c_void;
+use rpcbinder::get_unix_domain_rpc_interface;
 
 /// Notifies the host that the payload is ready.
 /// Returns true if the notification succeeds else false.
@@ -190,6 +191,6 @@ fn try_get_dice_attestation_cdi() -> Result<Vec<u8>> {
 }
 
 fn get_vm_payload_service() -> Result<Strong<dyn IVmPayloadService>> {
-    wait_for_interface(VM_PAYLOAD_SERVICE_NAME)
+    get_unix_domain_rpc_interface(VM_PAYLOAD_SERVICE_NAME)
         .context(format!("Failed to connect to service: {}", VM_PAYLOAD_SERVICE_NAME))
 }

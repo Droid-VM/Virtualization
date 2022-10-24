@@ -18,11 +18,16 @@ use crate::dice::DiceContext;
 use android_system_virtualization_payload::aidl::android::system::virtualization::payload::IVmPayloadService::{
     BnVmPayloadService, IVmPayloadService, VM_PAYLOAD_SERVICE_NAME};
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
-use anyhow::{Context, Result};
-use binder::{Interface, BinderFeatures, ExceptionCode, Status, Strong, add_service};
-use log::error;
+use anyhow::{bail, Result};
+use binder::{Interface, BinderFeatures, ExceptionCode, Status, Strong};
+use log::{error, info};
 use openssl::hkdf::hkdf;
 use openssl::md::Md;
+use rpcbinder::run_unix_domain_rpc_server;
+use std::fs::remove_file;
+use std::sync::{Arc, Mutex, Condvar};
+use std::thread;
+use std::time::Duration;
 
 /// Implementation of `IVmPayloadService`.
 struct VmPayloadService {
@@ -97,8 +102,44 @@ pub(crate) fn register_vm_payload_service(
         VmPayloadService::new(allow_restricted_apis, vm_service, dice),
         BinderFeatures::default(),
     );
-    add_service(VM_PAYLOAD_SERVICE_NAME, vm_payload_binder.as_binder())
-        .with_context(|| format!("Failed to register service {}", VM_PAYLOAD_SERVICE_NAME))?;
-    log::info!("{} is running", VM_PAYLOAD_SERVICE_NAME);
-    Ok(())
+    let pair = Arc::new((Mutex::new(false), Condvar::new()));
+    let pair2 = Arc::clone(&pair);
+
+    thread::spawn(move || {
+        let (lock, cvar) = &*pair2;
+        let retval = run_unix_domain_rpc_server(
+            vm_payload_binder.as_binder(),
+            VM_PAYLOAD_SERVICE_NAME,
+            || {
+                let mut success = lock.lock().unwrap();
+                *success = true;
+                cvar.notify_one();
+            },
+        );
+        if retval {
+            info!("The RPC server at '{}' has shut down gracefully.", VM_PAYLOAD_SERVICE_NAME);
+        } else {
+            error!("Premature termination of the RPC server '{}'.", VM_PAYLOAD_SERVICE_NAME);
+        }
+    });
+
+    let (lock, cvar) = &*pair;
+    let mut success = lock.lock().unwrap();
+    let result = cvar.wait_timeout(success, Duration::from_millis(200)).unwrap();
+    success = result.0;
+    if *success {
+        info!("The RPC server '{}' is running.", VM_PAYLOAD_SERVICE_NAME);
+        Ok(())
+    } else {
+        bail!("Failed to register service '{}'", VM_PAYLOAD_SERVICE_NAME);
+    }
+}
+
+/// Unlinks the `IVmPayloadService` socket file.
+pub(crate) fn unlink_vm_payload_service() {
+    if remove_file(VM_PAYLOAD_SERVICE_NAME).is_ok() {
+        info!("Successfully closed the socket {}", VM_PAYLOAD_SERVICE_NAME);
+    } else {
+        error!("Failed to close the socket {}", VM_PAYLOAD_SERVICE_NAME);
+    }
 }
