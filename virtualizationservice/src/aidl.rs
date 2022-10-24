@@ -65,7 +65,7 @@ use rustutils::system_properties;
 use semver::VersionReq;
 use std::convert::TryInto;
 use std::ffi::CStr;
-use std::fs::{create_dir, File, OpenOptions};
+use std::fs::{File, OpenOptions};
 use std::io::{Error, ErrorKind, Read, Write};
 use std::num::NonZeroU32;
 use std::os::unix::io::{FromRawFd, IntoRawFd};
@@ -80,9 +80,6 @@ use zip::ZipArchive;
 pub type Cid = u32;
 
 pub const BINDER_SERVICE_IDENTIFIER: &str = "android.system.virtualizationservice";
-
-/// Directory in which to write disk image files used while running VMs.
-pub const TEMPORARY_DIRECTORY: &str = "/data/misc/virtualizationservice";
 
 /// The first CID to assign to a guest VM managed by the VirtualizationService. CIDs lower than this
 /// are reserved for the host or other usage.
@@ -235,11 +232,18 @@ impl IVirtualizationService for VirtualizationService {
     fn createVm(
         &self,
         config: &VirtualMachineConfig,
+        temporary_directory: &str,
         console_fd: Option<&ParcelFileDescriptor>,
         log_fd: Option<&ParcelFileDescriptor>,
     ) -> binder::Result<Strong<dyn IVirtualMachine>> {
         let mut is_protected = false;
-        let ret = self.create_vm_internal(config, console_fd, log_fd, &mut is_protected);
+        let ret = self.create_vm_internal(
+            config,
+            temporary_directory.into(),
+            console_fd,
+            log_fd,
+            &mut is_protected,
+        );
         write_vm_creation_stats(config, is_protected, &ret);
         ret
     }
@@ -404,6 +408,7 @@ impl VirtualizationService {
     fn create_vm_internal(
         &self,
         config: &VirtualMachineConfig,
+        temporary_directory: PathBuf,
         console_fd: Option<&ParcelFileDescriptor>,
         log_fd: Option<&ParcelFileDescriptor>,
         is_protected: &mut bool,
@@ -442,24 +447,6 @@ impl VirtualizationService {
         // Files which are referred to from composite images. These must be mapped to the crosvm
         // child process, and not closed before it is started.
         let mut indirect_files = vec![];
-
-        // Make directory for temporary files.
-        let temporary_directory: PathBuf = format!("{}/{}", TEMPORARY_DIRECTORY, cid).into();
-        create_dir(&temporary_directory).map_err(|e| {
-            // At this point, we do not know the protected status of Vm
-            // setting it to false, though this may not be correct.
-            error!(
-                "Failed to create temporary directory {:?} for VM files: {:?}",
-                temporary_directory, e
-            );
-            Status::new_service_specific_error_str(
-                -1,
-                Some(format!(
-                    "Failed to create temporary directory {:?} for VM files: {:?}",
-                    temporary_directory, e
-                )),
-            )
-        })?;
 
         let (is_app_config, config) = match config {
             VirtualMachineConfig::RawConfig(config) => (false, BorrowedOrOwned::Borrowed(config)),
