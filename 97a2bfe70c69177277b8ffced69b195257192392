@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95ebde8a_5c42c28a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-24T16:00:24Z",
+      "side": 1,
+      "message": "PTAL. I had to enable platform_apis to avoid \"error: cannot find symbol    @android.annotation.SystemApi\"\n\n(I thought setting sdk to system_current might be enough, but it didn\u0027t seem to be)",
+      "revId": "97a2bfe70c69177277b8ffced69b195257192392",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
