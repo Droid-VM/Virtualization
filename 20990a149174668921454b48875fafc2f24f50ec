@@ -16,6 +16,24 @@
       "message": "I thought this was fixed by aosp/2240205 ?",
       "revId": "20990a149174668921454b48875fafc2f24f50ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba818bcc_2ca926d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-24T13:41:57Z",
+      "side": 1,
+      "message": "It should be but has that fix reached every downstream kernel we need it to? Looking at [this presubmit](https://android-build.googleplex.com/builds/tests/view?invocationId\u003dI99800010101103103\u0026testResultId\u003dTR64828336085238394) for aosp/2263063, I guess not?\n\nAnyway, it\u0027s lower risk for me to merge this workaround along with aosp/2263063 and revert it in the future than to keep track of kernel patches (and get it wrong). It also makes handling potential breakage once we revert it much simpler/cleaner as the functionality will remain in, even if we need to revert the revert. And there is no risk of a development device being in a broken state with an old kernel but new manually updated pvmfw.\n\nI\u0027ve update the commit message to point to aosp/2240205 (and its child to point to its own fix).",
+      "parentUuid": "84276f89_6c44f0d1",
+      "revId": "20990a149174668921454b48875fafc2f24f50ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
