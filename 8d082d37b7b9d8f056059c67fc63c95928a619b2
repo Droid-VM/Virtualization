@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73a63485_c0685f89",
+        "filename": "pvmfw/src/mmio_guard.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-24T11:16:06Z",
+      "side": 1,
+      "message": "Done (including children)",
+      "parentUuid": "571fe7a8_51eade4f",
+      "range": {
+        "startLine": 56,
+        "startChar": 10,
+        "endLine": 56,
+        "endChar": 17
+      },
+      "revId": "8d082d37b7b9d8f056059c67fc63c95928a619b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7923468_190bcc5e",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-24T10:29:36Z",
       "side": 1,
       "message": "The name of this function is not right. According to the SMCCC, section 7.1\n```\nZero and positive values denote success, and negative values indicate error.\n```\nSo this really should be called \u0027expect zero\u0027 because it filters out other valid successful values. But I do wonder why you insist on getting zero anyway - the HVC happens to return zero on success, but any positive value would have been valid under the SMCCC as well. Why don\u0027t you just get rid of this function altogether?",
+      "range": {
+        "startLine": 80,
+        "startChar": 7,
+        "endLine": 80,
+        "endChar": 35
+      },
+      "revId": "8d082d37b7b9d8f056059c67fc63c95928a619b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5fc6743_e98f79d5",
+        "filename": "pvmfw/src/smccc.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-24T11:16:06Z",
+      "side": 1,
+      "message": "The \"`success`\" in the function name doesn\u0027t refer to the general concept of \"success\" but to \"`SUCCESS`\", a particular return value, defined by the SMCCC section you quote to be zero.\n\n\u003e the HVC happens to return zero on success, but any positive value would have been valid under the SMCCC as well. \n\nI don\u0027t believe this is correct; the phrasing above implies that, if a function has a non-negative value to return, it can do so through x0. Otherwise, I believe it should necessarily return zero. The API defined by the SMCCC itself seems to corroborate this and, in particular, Appendix B shows that the SMCCC authors expect PSCI calls to only have succeeded if they returned `SUCCESS`.\n\nBlindly accepting any positive value saves us a few lines at best but hides potential hypervisor bugs such as b/253586500, which was discovered through this exact mechanism.\n\nI\u0027ve renamed the function to `*_expect_zero` to avoid any confusion.",
+      "parentUuid": "e7923468_190bcc5e",
       "range": {
         "startLine": 80,
         "startChar": 7,
