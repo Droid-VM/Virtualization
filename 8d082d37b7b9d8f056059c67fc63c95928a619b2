@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "571fe7a8_51eade4f",
+        "filename": "pvmfw/src/mmio_guard.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-24T10:29:36Z",
+      "side": 1,
+      "message": "nit: I like that you\u0027re hiding the constants but slight preference to keep the original names. It makes it searchable.",
+      "range": {
+        "startLine": 56,
+        "startChar": 10,
+        "endLine": 56,
+        "endChar": 17
+      },
+      "revId": "8d082d37b7b9d8f056059c67fc63c95928a619b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7923468_190bcc5e",
+        "filename": "pvmfw/src/smccc.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-24T10:29:36Z",
+      "side": 1,
+      "message": "The name of this function is not right. According to the SMCCC, section 7.1\n```\nZero and positive values denote success, and negative values indicate error.\n```\nSo this really should be called \u0027expect zero\u0027 because it filters out other valid successful values. But I do wonder why you insist on getting zero anyway - the HVC happens to return zero on success, but any positive value would have been valid under the SMCCC as well. Why don\u0027t you just get rid of this function altogether?",
+      "range": {
+        "startLine": 80,
+        "startChar": 7,
+        "endLine": 80,
+        "endChar": 35
+      },
+      "revId": "8d082d37b7b9d8f056059c67fc63c95928a619b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
