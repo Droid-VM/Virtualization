@@ -24,7 +24,7 @@ mod vm_payload_service;
 
 use crate::dice::{DiceContext, DiceDriver};
 use crate::instance::{ApexData, ApkData, InstanceDisk, MicrodroidData, RootHash};
-use crate::vm_payload_service::register_vm_payload_service;
+use crate::vm_payload_service::{register_vm_payload_service, unlink_vm_payload_service};
 use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon::ErrorCode::ErrorCode;
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::{
     IVirtualMachineService::{
@@ -36,7 +36,7 @@ use android_system_virtualmachineservice::aidl::android::system::virtualmachines
 use android_system_virtualization_payload::aidl::android::system::virtualization::payload::IVmPayloadService::VM_APK_CONTENTS_PATH;
 use anyhow::{anyhow, bail, ensure, Context, Error, Result};
 use apkverify::{get_public_key_der, verify, V4Signature};
-use binder::{ProcessState, Strong};
+use binder::Strong;
 use diced_utils::cbor::{encode_header, encode_number};
 use glob::glob;
 use itertools::sorted;
@@ -198,6 +198,7 @@ fn get_vms_rpc_binder() -> Result<Strong<dyn IVirtualMachineService>> {
 fn main() -> Result<()> {
     scopeguard::defer! {
         info!("Shutting down...");
+        unlink_vm_payload_service();
         if let Err(e) = system_properties::write("sys.powerctl", "shutdown") {
             error!("failed to shutdown {:?}", e);
         }
@@ -447,7 +448,6 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
     wait_for_property_true(APK_MOUNT_DONE_PROP).context("Failed waiting for APK mount done")?;
 
     register_vm_payload_service(allow_restricted_apis, service.clone(), dice)?;
-    ProcessState::start_thread_pool();
 
     system_properties::write("dev.bootcomplete", "1").context("set dev.bootcomplete")?;
     send_vm_status(service)?;
