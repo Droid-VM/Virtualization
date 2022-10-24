@@ -181,6 +181,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "027da843_0f5f2160",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-24T09:41:05Z",
+      "side": 1,
+      "message": "We do need to stabilize the ability to host a binder server inside a VM - either via this AVmPayload_runVsockRpcServer() or via RunVsockRpcServerWithFactory() or similar in libbinder.\n\nThe aim is to provide the server side API that allows the client-side API connectToVsockServer() to be useful: cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/javalib/src/android/system/virtualmachine/VirtualMachine.java;drc\u003d7bc146c6659d5ea35a8219f5abea1f50950f4417;l\u003d771\n\nI\u0027ll set up a chat.",
+      "parentUuid": "bd4518f8_ee9fd36a",
+      "range": {
+        "startLine": 56,
+        "startChar": 5,
+        "endLine": 56,
+        "endChar": 33
+      },
+      "revId": "ae815b55311cfc7160eef5d6af8401be4448d4d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f5bb19cf_e800f427",
         "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
         "patchSetId": 7
