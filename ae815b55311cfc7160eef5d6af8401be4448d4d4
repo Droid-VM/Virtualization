@@ -229,6 +229,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8879117a_dc75bdbd",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-24T19:54:22Z",
+      "side": 1,
+      "message": "The latest patch uses librpcbinder_rs instead of bindgen. We don\u0027t change the visibility of bindgen anymore.",
+      "parentUuid": "39473d32_773e5c9c",
+      "range": {
+        "startLine": 56,
+        "startChar": 5,
+        "endLine": 56,
+        "endChar": 33
+      },
+      "revId": "ae815b55311cfc7160eef5d6af8401be4448d4d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f5bb19cf_e800f427",
         "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
         "patchSetId": 7
