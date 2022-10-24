@@ -15,6 +15,7 @@
 //! Functions for creating and collecting atoms.
 
 use crate::aidl::clone_file;
+use crate::get_calling_uid;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     DeathReason::DeathReason,
     IVirtualMachine::IVirtualMachine,
@@ -27,7 +28,7 @@ use android_system_virtualmachineservice::aidl::android::system::virtualmachines
     VirtualMachineMemStatus::VirtualMachineMemStatus,
 };
 use anyhow::{anyhow, Result};
-use binder::{ParcelFileDescriptor, ThreadState};
+use binder::ParcelFileDescriptor;
 use log::{trace, warn};
 use microdroid_payload_config::VmPayloadConfig;
 use statslog_virtualization_rust::{
@@ -111,7 +112,7 @@ pub fn write_vm_creation_stats(
     };
 
     let vm_creation_requested = vm_creation_requested::VmCreationRequested {
-        uid: ThreadState::get_calling_uid() as i32,
+        uid: get_calling_uid() as i32,
         vm_identifier,
         hypervisor: vm_creation_requested::Hypervisor::Pkvm,
         is_protected,
