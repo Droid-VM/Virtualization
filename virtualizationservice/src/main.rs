@@ -24,13 +24,11 @@ mod crosvm;
 mod payload;
 mod selinux;
 
-use crate::aidl::{VirtualizationServiceInternal, BINDER_SERVICE_IDENTIFIER, TEMPORARY_DIRECTORY};
+use crate::aidl::{VirtualizationServiceInternal, BINDER_SERVICE_IDENTIFIER};
 use android_logger::{Config, FilterBuilder};
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualizationServiceInternal::BnVirtualizationServiceInternal;
-use anyhow::Error;
 use binder::{register_lazy_service, BinderFeatures, ProcessState, ThreadState};
 use log::{info, Level};
-use std::fs::{remove_dir_all, remove_file, read_dir};
 use std::os::unix::raw::{pid_t, uid_t};
 
 const LOG_TAG: &str = "VirtualizationService";
@@ -56,25 +54,9 @@ fn main() {
             ),
     );
 
-    clear_temporary_files().expect("Failed to delete old temporary files");
-
     let service = VirtualizationServiceInternal::init();
     let service = BnVirtualizationServiceInternal::new_binder(service, BinderFeatures::default());
     register_lazy_service(BINDER_SERVICE_IDENTIFIER, service.as_binder()).unwrap();
     info!("Registered Binder service, joining threadpool.");
     ProcessState::join_thread_pool();
-}
-
-/// Remove any files under `TEMPORARY_DIRECTORY`.
-fn clear_temporary_files() -> Result<(), Error> {
-    for dir_entry in read_dir(TEMPORARY_DIRECTORY)? {
-        let dir_entry = dir_entry?;
-        let path = dir_entry.path();
-        if dir_entry.file_type()?.is_dir() {
-            remove_dir_all(path)?;
-        } else {
-            remove_file(path)?;
-        }
-    }
-    Ok(())
 }
