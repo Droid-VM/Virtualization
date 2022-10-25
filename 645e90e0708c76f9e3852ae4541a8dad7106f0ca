@@ -1,5 +1,40 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6355eed_4fefc35b",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-25T16:00:23Z",
+      "side": 1,
+      "message": "This isn\u0027t a memory address or the length of anything, it\u0027s just a 64-bit value, so use `u64`.",
+      "revId": "645e90e0708c76f9e3852ae4541a8dad7106f0ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e32ca17c_2e45e7d5",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-25T16:00:23Z",
+      "side": 1,
+      "message": "Maybe copy the original comments over here, I think it was useful to have an overview of what these instructions are actually doing and why.",
+      "revId": "645e90e0708c76f9e3852ae4541a8dad7106f0ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
