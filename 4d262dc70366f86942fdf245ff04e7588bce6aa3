@@ -34,6 +34,24 @@
       "parentUuid": "f4f76a9c_e7e8edf3",
       "revId": "4d262dc70366f86942fdf245ff04e7588bce6aa3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b298c9ce_874a0843",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-25T02:49:03Z",
+      "side": 1,
+      "message": "Please bear with me a bit more. The attestion CDI is still local to the VM, right? What privacy risk do they have?\n\n\u003e an implementation detail that can change.\n\nThen I think this must be accompanied by a test to ensure that (unbundled) apps can\u0027t call the APIs. Otherwise, we wouldn\u0027t be able to catch a regression when USE_CUSTOM_VIRTUAL_MACHINE is open to more apps in the future.",
+      "parentUuid": "821eebac_cdf509bf",
+      "revId": "4d262dc70366f86942fdf245ff04e7588bce6aa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
