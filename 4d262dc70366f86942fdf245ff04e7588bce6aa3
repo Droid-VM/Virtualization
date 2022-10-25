@@ -52,6 +52,24 @@
       "parentUuid": "821eebac_cdf509bf",
       "revId": "4d262dc70366f86942fdf245ff04e7588bce6aa3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6880c55d_e13d0ca5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-25T10:28:56Z",
+      "side": 1,
+      "message": "The CDI isn\u0027t an identifier, but the DICE chain is. The DICE chain contains values unique to the device that are the same in different VMs on different user accounts across factory resets.\n\nSo we don\u0027t add the DICE chain into the API. And that means there\u0027s not much point adding the attestation CDI into the API since you can\u0027t really do anything with it without the DICE chain. We only expose them because there are some smoke tests that use them, there\u0027s no application of them that we have where the payload needs the raw values directly.\n\nThere should be a test.",
+      "parentUuid": "b298c9ce_874a0843",
+      "revId": "4d262dc70366f86942fdf245ff04e7588bce6aa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
