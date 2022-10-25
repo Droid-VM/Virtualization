@@ -26,7 +26,7 @@ mod selinux;
 
 use crate::aidl::VirtualizationService;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualizationService::BnVirtualizationService;
-use binder::BinderFeatures;
+use binder::{BinderFeatures, ProcessState};
 use lazy_static::lazy_static;
 use log::{error, Level};
 use rpcbinder::run_unix_bootstrap_rpc_server;
@@ -104,6 +104,9 @@ fn main() {
     let args = Args::parse();
     let ready_fd = parse_fd_arg(args.ready_fd).expect("Invalid ready fd");
     let rpc_server_fd = parse_fd_arg(args.rpc_server_fd).expect("Invalid server fd");
+
+    // We need to start the thread pool for Binder to work properly, especially link_to_death.
+    ProcessState::start_thread_pool();
 
     let service = VirtualizationService::init();
     let service =
