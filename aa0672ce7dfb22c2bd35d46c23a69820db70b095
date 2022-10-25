@@ -33,6 +33,24 @@
       "message": "How do we know that that is a safe thing to do?",
       "revId": "aa0672ce7dfb22c2bd35d46c23a69820db70b095",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4aee2c2d_9d82470e",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-25T13:16:01Z",
+      "side": 1,
+      "message": "Should this whole function be marked as unsafe? If called with the wrong parameters (invalid on_ready, say) it could go badly wrong, which suggests it is not safe.",
+      "parentUuid": "8ade07aa_58a893e5",
+      "revId": "aa0672ce7dfb22c2bd35d46c23a69820db70b095",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
