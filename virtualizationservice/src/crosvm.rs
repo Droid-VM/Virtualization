@@ -148,6 +148,16 @@ impl VmState {
             let child =
                 Arc::new(run_vm(config, &instance.temporary_directory, failure_pipe_write)?);
 
+            // Let crosvm join the cgroup of the requester so that resource usage of the VM is
+            // attributed to that of the requester. Note that requester_debug_pid is trusted at
+            // this moment because we are still in the binder context.
+            if let Err(e) = join_cgroup_of_requester(&child, instance.requester_debug_pid)
+                .context("Failed to adjust cgroup")
+            {
+                child.kill()?;
+                return Err(e);
+            }
+
             let child_clone = child.clone();
             let instance_clone = instance.clone();
             thread::spawn(move || {
@@ -625,4 +635,32 @@ fn create_pipe() -> Result<(File, File), Error> {
     let read_fd = unsafe { File::from_raw_fd(raw_read) };
     let write_fd = unsafe { File::from_raw_fd(raw_write) };
     Ok((read_fd, write_fd))
+}
+
+fn join_cgroup_of_requester(crosvm: &SharedChild, requester_pid: i32) -> Result<(), Error> {
+    let output = Command::new("/apex/com.android.virt/bin/cgroupof")
+        .arg(format!("{}", requester_pid))
+        .output()?;
+    if !output.status.success() {
+        bail!(
+            "Failed to get cgroup for owner (pid:{}): {}",
+            requester_pid,
+            String::from_utf8_lossy(&output.stderr)
+        );
+    }
+    let cgroup = std::str::from_utf8(&output.stdout)?.trim();
+
+    let join_cgroup_path = format!("/sys/fs/cgroup/{}/cgroup.procs", cgroup);
+    std::fs::write(join_cgroup_path, format!("{}", crosvm.id())).context(format!(
+        "Failed to let crosvm (pid: {}) join cgroup {}",
+        crosvm.id(),
+        cgroup
+    ))?;
+    info!(
+        "crosvm (pid:{}) joined cgroup of owner (pid:{}): {}",
+        crosvm.id(),
+        requester_pid,
+        cgroup
+    );
+    Ok(())
 }
