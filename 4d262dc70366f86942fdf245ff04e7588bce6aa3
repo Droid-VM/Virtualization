@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4f76a9c_e7e8edf3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-25T00:55:51Z",
+      "side": 1,
+      "message": "I am confused. Why is the availability of the attestation info tied to the use of custom VM?\n\nA normal priv app (which doesn\u0027t have USE_CUSTOM_VIRTUAL_MACHINE) should be able to access the info, shouldn\u0027t they?",
+      "revId": "4d262dc70366f86942fdf245ff04e7588bce6aa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
