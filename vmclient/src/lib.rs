@@ -34,26 +34,55 @@ use android_system_virtualizationservice::{
         VirtualMachineState::VirtualMachineState,
     },
     binder::{
-        wait_for_interface, BinderFeatures, DeathRecipient, FromIBinder, IBinder, Interface,
-        ParcelFileDescriptor, Result as BinderResult, StatusCode, Strong,
+        BinderFeatures, DeathRecipient, FromIBinder, IBinder, Interface, ParcelFileDescriptor,
+        Result as BinderResult, StatusCode, Strong,
     },
 };
+use command_fds::CommandFdExt;
 use log::warn;
-use rpcbinder::get_preconnected_rpc_interface;
+use rpcbinder::{get_preconnected_rpc_interface, get_unix_bootstrap_rpc_interface};
+use shared_child::SharedChild;
+use std::io::Read;
+use std::process::Command;
 use std::{
     fmt::{self, Debug, Formatter},
     fs::File,
-    os::unix::io::IntoRawFd,
+    os::unix::io::{AsRawFd, FromRawFd, IntoRawFd, OwnedFd},
     sync::Arc,
     time::Duration,
 };
 
-const VIRTUALIZATION_SERVICE_BINDER_SERVICE_IDENTIFIER: &str =
-    "android.system.virtualizationservice";
+fn create_pipe() -> Result<(OwnedFd, OwnedFd), StatusCode> {
+    let (fd1, fd2) = nix::unistd::pipe().or(Err(StatusCode::BAD_VALUE))?;
+    Ok((unsafe { OwnedFd::from_raw_fd(fd1) }, unsafe { OwnedFd::from_raw_fd(fd2) }))
+}
+
+fn create_socketpair() -> Result<(OwnedFd, OwnedFd), StatusCode> {
+    use nix::sys::socket::{socketpair, AddressFamily, SockFlag, SockType};
+
+    let (fd1, fd2) = socketpair(AddressFamily::Unix, SockType::Stream, None, SockFlag::empty())
+        .or(Err(StatusCode::BAD_VALUE))?;
+    Ok((unsafe { OwnedFd::from_raw_fd(fd1) }, unsafe { OwnedFd::from_raw_fd(fd2) }))
+}
 
 /// Connects to the VirtualizationService AIDL service.
 pub fn connect() -> Result<Strong<dyn IVirtualizationService>, StatusCode> {
-    wait_for_interface(VIRTUALIZATION_SERVICE_BINDER_SERVICE_IDENTIFIER)
+    let (wait_fd, signal_fd) = create_pipe()?;
+    let (client_fd, server_fd) = create_socketpair()?;
+
+    let mut command = Command::new("/apex/com.android.virt/bin/virtmgr");
+    command.arg("--rpc-server-fd").arg(format!("{}", server_fd.as_raw_fd()));
+    command.arg("--ready-fd").arg(format!("{}", signal_fd.as_raw_fd()));
+    command.preserved_fds(vec![server_fd.as_raw_fd(), signal_fd.as_raw_fd()]);
+
+    SharedChild::spawn(&mut command).or(Err(StatusCode::BAD_VALUE))?;
+    drop(signal_fd);
+    drop(server_fd);
+
+    // Wait for the child to signal that the RPC server is ready.
+    let _ = File::from(wait_fd).read(&mut [0]).or(Err(StatusCode::BAD_VALUE))?;
+
+    get_unix_bootstrap_rpc_interface(client_fd)
 }
 
 /// A virtual machine which has been started by the VirtualizationService.
