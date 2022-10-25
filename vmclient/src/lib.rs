@@ -35,26 +35,86 @@ use android_system_virtualizationservice::{
         VirtualMachineState::VirtualMachineState,
     },
     binder::{
-        wait_for_interface, BinderFeatures, DeathRecipient, FromIBinder, IBinder, Interface,
-        ParcelFileDescriptor, Result as BinderResult, StatusCode, Strong,
+        BinderFeatures, DeathRecipient, FromIBinder, IBinder, Interface, ParcelFileDescriptor,
+        Result as BinderResult, StatusCode, Strong,
     },
 };
+use command_fds::CommandFdExt;
 use log::warn;
-use rpcbinder::RpcSession;
+use rpcbinder::{FileDescriptorTransportMode, RpcSession};
+use shared_child::SharedChild;
+use std::io::{self, Read};
+use std::process::Command;
 use std::{
     fmt::{self, Debug, Formatter},
     fs::File,
-    os::unix::io::IntoRawFd,
+    os::unix::io::{AsFd, AsRawFd, FromRawFd, IntoRawFd, OwnedFd},
     sync::Arc,
     time::Duration,
 };
 
-const VIRTUALIZATION_SERVICE_BINDER_SERVICE_IDENTIFIER: &str =
-    "android.system.virtualizationservice";
+const VIRTMGR_PATH: &str = "/apex/com.android.virt/bin/virtmgr";
+const VIRTMGR_THREADS: usize = 16;
 
-/// Connects to the VirtualizationService AIDL service.
-pub fn connect() -> Result<Strong<dyn IVirtualizationService>, StatusCode> {
-    wait_for_interface(VIRTUALIZATION_SERVICE_BINDER_SERVICE_IDENTIFIER)
+fn posix_pipe() -> Result<(OwnedFd, OwnedFd), io::Error> {
+    use nix::fcntl::OFlag;
+    use nix::unistd::pipe2;
+
+    let (raw1, raw2) = pipe2(OFlag::O_CLOEXEC)?;
+
+    // SAFETY - Taking ownership of brand new FDs.
+    unsafe { Ok((OwnedFd::from_raw_fd(raw1), OwnedFd::from_raw_fd(raw2))) }
+}
+
+fn posix_socketpair() -> Result<(OwnedFd, OwnedFd), io::Error> {
+    use nix::sys::socket::{socketpair, AddressFamily, SockFlag, SockType};
+
+    let (raw1, raw2) =
+        socketpair(AddressFamily::Unix, SockType::Stream, None, SockFlag::SOCK_CLOEXEC)?;
+
+    // SAFETY - Taking ownership of brand new FDs.
+    unsafe { Ok((OwnedFd::from_raw_fd(raw1), OwnedFd::from_raw_fd(raw2))) }
+}
+
+/// Foobar
+pub struct VirtualizationService {
+    /// Client FD for UDS connection to virtmgr's RpcBinder server.
+    client_fd: OwnedFd,
+}
+
+impl VirtualizationService {
+    /// Foobar
+    pub fn new() -> Result<VirtualizationService, io::Error> {
+        let (wait_fd, ready_fd) = posix_pipe()?;
+        let (client_fd, server_fd) = posix_socketpair()?;
+
+        let mut command = Command::new(VIRTMGR_PATH);
+        command.arg("--rpc-server-fd").arg(format!("{}", server_fd.as_raw_fd()));
+        command.arg("--ready-fd").arg(format!("{}", ready_fd.as_raw_fd()));
+        command.preserved_fds(vec![server_fd.as_raw_fd(), ready_fd.as_raw_fd()]);
+
+        SharedChild::spawn(&mut command)?;
+
+        // Drop FDs that belong to virtmgr.
+        drop(server_fd);
+        drop(ready_fd);
+
+        // Wait for the child to signal that the RpcBinder server is ready.
+        let _ = File::from(wait_fd).read(&mut [0]);
+
+        Ok(VirtualizationService { client_fd })
+    }
+
+    /// Foobar
+    pub fn connect(&self) -> Result<Strong<dyn IVirtualizationService>, io::Error> {
+        let session = RpcSession::new();
+        session.set_file_descriptor_transport_mode(FileDescriptorTransportMode::Unix);
+        session.set_max_incoming_threads(VIRTMGR_THREADS);
+        session.set_max_outgoing_threads(VIRTMGR_THREADS);
+        session
+            .setup_unix_domain_bootstrap_client(self.client_fd.as_fd())
+            .map_err(|_| io::Error::from(io::ErrorKind::ConnectionRefused))
+    }
 }
 
 /// A virtual machine which has been started by the VirtualizationService.
