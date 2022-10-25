@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "174ced08_82acaf96",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-25T15:46:46Z",
+      "side": 1,
+      "message": "crosvm depending on aidl seems like a layering violation.\nYou could move the CID stuff to a cid module?\nBut I\u0027m going to assume this will all come right later.",
+      "range": {
+        "startLine": 17,
+        "startChar": 4,
+        "endLine": 17,
+        "endChar": 15
+      },
+      "revId": "41d1a876189b95e40b6e5b79f654818f70a0ed9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
