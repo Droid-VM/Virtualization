@@ -16,6 +16,24 @@
       "message": "PTAL. I had to enable platform_apis to avoid \"error: cannot find symbol    @android.annotation.SystemApi\"\n\n(I thought setting sdk to system_current might be enough, but it didn\u0027t seem to be)",
       "revId": "97a2bfe70c69177277b8ffced69b195257192392",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "386c9d76_6555fcae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-25T00:20:30Z",
+      "side": 1,
+      "message": "Did `sdk_version: \"module_current\"` work? module_current provides APIs for modules (Mainline modules) to use.",
+      "parentUuid": "95ebde8a_5c42c28a",
+      "revId": "97a2bfe70c69177277b8ffced69b195257192392",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
