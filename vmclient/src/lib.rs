@@ -34,26 +34,132 @@ use android_system_virtualizationservice::{
         VirtualMachineState::VirtualMachineState,
     },
     binder::{
-        wait_for_interface, BinderFeatures, DeathRecipient, FromIBinder, IBinder, Interface,
-        ParcelFileDescriptor, Result as BinderResult, StatusCode, Strong,
+        BinderFeatures, DeathRecipient, FromIBinder, IBinder, Interface, ParcelFileDescriptor,
+        Result as BinderResult, StatusCode, Strong,
     },
 };
+use command_fds::CommandFdExt;
 use log::warn;
-use rpcbinder::RpcSession;
+use rpcbinder::{FileDescriptorTransportMode, RpcSession};
+use shared_child::SharedChild;
+use std::io::{self, Read};
+use std::process::Command;
 use std::{
     fmt::{self, Debug, Formatter},
     fs::File,
-    os::unix::io::IntoRawFd,
-    sync::Arc,
+    os::unix::io::{AsFd, AsRawFd, BorrowedFd, FromRawFd, IntoRawFd, OwnedFd},
+    sync::{Arc, Mutex},
     time::Duration,
 };
 
-const VIRTUALIZATION_SERVICE_BINDER_SERVICE_IDENTIFIER: &str =
-    "android.system.virtualizationservice";
+const VIRTMGR_THREADS: u32 = 16;
+
+fn nix2io_err(err: nix::Error) -> io::Error {
+    io::Error::from_raw_os_error(err as i32)
+}
+
+fn pipe() -> Result<(OwnedFd, OwnedFd), io::Error> {
+    let (raw_fd1, raw_fd2) = nix::unistd::pipe().map_err(nix2io_err)?;
+
+    // SAFETY - Taking ownership of a brand new FD.
+    let owned_fd1 = unsafe { OwnedFd::from_raw_fd(raw_fd1) };
+    let owned_fd2 = unsafe { OwnedFd::from_raw_fd(raw_fd2) };
+    Ok((owned_fd1, owned_fd2))
+}
+
+fn socketpair() -> Result<(OwnedFd, OwnedFd), io::Error> {
+    use nix::sys::socket::{AddressFamily, SockFlag, SockType};
+
+    let (raw_fd1, raw_fd2) = nix::sys::socket::socketpair(
+        AddressFamily::Unix,
+        SockType::Stream,
+        None,
+        SockFlag::empty(),
+    )
+    .map_err(nix2io_err)?;
+
+    // SAFETY - Taking ownership of a brand new FD.
+    let owned_fd1 = unsafe { OwnedFd::from_raw_fd(raw_fd1) };
+    let owned_fd2 = unsafe { OwnedFd::from_raw_fd(raw_fd2) };
+    Ok((owned_fd1, owned_fd2))
+}
+
+fn dup(fd: BorrowedFd) -> Result<OwnedFd, io::Error> {
+    let raw_fd = nix::unistd::dup(fd.as_raw_fd()).map_err(nix2io_err)?;
+
+    // SAFETY - Taking ownership of a brand new FD.
+    let owned_fd = unsafe { OwnedFd::from_raw_fd(raw_fd) };
+    Ok(owned_fd)
+}
+
+struct VirtManager {
+    /// Holding this FD keeps the virtmgr process alive.
+    #[allow(dead_code)]
+    keep_alive_fd: OwnedFd,
+    /// Client FD for UDS connection to virtmgr's RpcBinder server.
+    client_fd: OwnedFd,
+}
+
+impl VirtManager {
+    fn new() -> Result<VirtManager, io::Error> {
+        let (wait_fd, ready_fd) = pipe()?;
+        let (shutdown_fd, keep_alive_fd) = pipe()?;
+        let (client_fd, server_fd) = socketpair()?;
+
+        let mut command = Command::new("/apex/com.android.virt/bin/virtmgr");
+        command.arg("--rpc-server-fd").arg(format!("{}", server_fd.as_raw_fd()));
+        command.arg("--ready-fd").arg(format!("{}", ready_fd.as_raw_fd()));
+        command.arg("--shutdown-fd").arg(format!("{}", shutdown_fd.as_raw_fd()));
+        command.preserved_fds(vec![
+            server_fd.as_raw_fd(),
+            ready_fd.as_raw_fd(),
+            shutdown_fd.as_raw_fd(),
+        ]);
+
+        SharedChild::spawn(&mut command)?;
+
+        // Drop FDs that belong to virtmgr.
+        drop(server_fd);
+        drop(ready_fd);
+        drop(shutdown_fd);
+
+        // Wait for the child to signal that the RpcBinder server is ready.
+        let _ = File::from(wait_fd).read(&mut [0]);
+
+        Ok(VirtManager { keep_alive_fd, client_fd })
+    }
+
+    fn connect(&self) -> Result<Strong<dyn IVirtualizationService>, io::Error> {
+        // Dup the client FD to get a unique FD for the connection.
+        let fd = dup(self.client_fd.as_fd())?;
+        let session = RpcSession::new();
+        session.set_file_descriptor_transport_mode(FileDescriptorTransportMode::Unix);
+        session.set_max_incoming_threads(VIRTMGR_THREADS);
+        session.set_max_outgoing_threads(VIRTMGR_THREADS);
+        session
+            .setup_unix_domain_bootstrap_client(fd)
+            .map_err(|_| io::Error::from(io::ErrorKind::ConnectionRefused))
+    }
+}
 
 /// Connects to the VirtualizationService AIDL service.
-pub fn connect() -> Result<Strong<dyn IVirtualizationService>, StatusCode> {
-    wait_for_interface(VIRTUALIZATION_SERVICE_BINDER_SERVICE_IDENTIFIER)
+pub fn connect() -> Result<Strong<dyn IVirtualizationService>, io::Error> {
+    static INSTANCE: Mutex<Option<VirtManager>> = Mutex::new(None);
+    let mut instance = INSTANCE.lock().unwrap();
+
+    // Check if we can connect to an existing virtmgr instance.
+    if let Some(virtmgr) = &*instance {
+        if let Ok(service) = virtmgr.connect() {
+            return Ok(service);
+        }
+        // Connection failed. Start a new virtmgr instance.
+        *instance = None;
+    }
+
+    let virtmgr = VirtManager::new()?;
+    let service = virtmgr.connect()?;
+    *instance = Some(virtmgr);
+    Ok(service)
 }
 
 /// A virtual machine which has been started by the VirtualizationService.
