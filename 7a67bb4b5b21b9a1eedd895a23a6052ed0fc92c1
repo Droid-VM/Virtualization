@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9fbc49d_8d5d32d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-25T14:27:08Z",
+      "side": 1,
+      "message": "Making `vmbase` require `alloc` just because it uses some wrapper types from `aarch64-paging` is not ideal. How would you feel about just using `usize` instead? It\u0027s a bit less nice API, but at least avoids the dependency.",
+      "revId": "7a67bb4b5b21b9a1eedd895a23a6052ed0fc92c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
