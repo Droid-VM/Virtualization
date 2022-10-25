@@ -36,6 +36,7 @@ use std::sync::{Arc, Condvar, Mutex};
 use std::time::{Duration, SystemTime};
 use std::thread;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::DeathReason::DeathReason;
+use android_system_virtualizationservice::aidl::android::system::virtualizationservice::ICidHandle::ICidHandle;
 use binder::Strong;
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
 use tombstoned_client::{TombstonedConnection, DebuggerdDumpType};
@@ -176,6 +177,9 @@ pub struct VmInstance {
     pub vm_state: Mutex<VmState>,
     /// The CID assigned to the VM for vsock communication.
     pub cid: Cid,
+    /// Foobar
+    #[allow(dead_code)] // we only hold the handle, it's never read
+    cid_handle: Strong<dyn ICidHandle>,
     /// The name of the VM.
     pub name: String,
     /// Whether the VM is a protected VM.
@@ -204,6 +208,7 @@ impl VmInstance {
     pub fn new(
         config: CrosvmConfig,
         temporary_directory: PathBuf,
+        cid_handle: Strong<dyn ICidHandle>,
         requester_uid: u32,
         requester_debug_pid: i32,
     ) -> Result<VmInstance, Error> {
@@ -214,6 +219,7 @@ impl VmInstance {
         Ok(VmInstance {
             vm_state: Mutex::new(VmState::NotStarted { config }),
             cid,
+            cid_handle,
             name,
             protected,
             temporary_directory,

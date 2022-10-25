@@ -15,12 +15,7 @@
  */
 package android.system.virtualizationservice;
 
-import android.system.virtualizationservice.ICidHandle;
-
-interface IVirtualizationServiceInternal {
-    /**
-     * Allocates a CID for a new VM. The CID will not be recycled as long as
-     * there is a strong reference to the returned ICidHandle.
-     */
-    ICidHandle allocateCid();
+interface ICidHandle {
+    /** Get the CID allocated to the VM. */
+    int getCid();
 }
