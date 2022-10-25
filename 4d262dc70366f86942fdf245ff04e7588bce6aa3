@@ -16,6 +16,24 @@
       "message": "I am confused. Why is the availability of the attestation info tied to the use of custom VM?\n\nA normal priv app (which doesn\u0027t have USE_CUSTOM_VIRTUAL_MACHINE) should be able to access the info, shouldn\u0027t they?",
       "revId": "4d262dc70366f86942fdf245ff04e7588bce6aa3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "821eebac_cdf509bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-25T01:00:50Z",
+      "side": 1,
+      "message": "priv apps must not be able to use these which is why they are being restricted. The DICE chain contains privacy breaking identifiers and the attestation CDI has no value without the DICE chain. The easiest way to make these APIs available for tests and not apps was to link it to USE_CUSTOM_VIRTUAL_MACHINE via the use of vm config, but that\u0027s an implementation detail that can change.",
+      "parentUuid": "f4f76a9c_e7e8edf3",
+      "revId": "4d262dc70366f86942fdf245ff04e7588bce6aa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
