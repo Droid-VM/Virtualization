@@ -29,7 +29,7 @@ use std::{
     os::unix::io::FromRawFd,
     panic, thread,
 };
-use vmclient::{DeathReason, VmInstance};
+use vmclient::{DeathReason, VirtualizationService, VmInstance};
 
 const VMBASE_EXAMPLE_PATH: &str =
     "/data/local/tmp/vmbase_example.integration_test/arm64/vmbase_example.bin";
@@ -50,7 +50,8 @@ fn test_run_example_vm() -> Result<(), Error> {
     // We need to start the thread pool for Binder to work properly, especially link_to_death.
     ProcessState::start_thread_pool();
 
-    let service = vmclient::connect().context("Failed to find VirtualizationService")?;
+    let virtmgr = VirtualizationService::new().context("Failed to spawn VirtualizationService")?;
+    let service = virtmgr.connect().context("Failed to find VirtualizationService")?;
 
     // Start example VM.
     let bootloader = ParcelFileDescriptor::new(
