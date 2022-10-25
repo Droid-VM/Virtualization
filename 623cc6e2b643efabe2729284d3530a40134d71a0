@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02dd7589_b71d973b",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-25T16:06:02Z",
+      "side": 1,
+      "message": "If `run_unix_domain_rpc_server()` returns with success, it shut down cleanly and isn\u0027t running so the log is misleading.\n\nIf it failed, is there a cleaner way to report the error than just immediately killing the process? Perhaps you still want to have a callback for the `run_unix_domain_rpc_server()` so you can know when the server is up and running, reporting it to the main thread with a CondVar or similar?",
+      "range": {
+        "startLine": 110,
+        "startChar": 7,
+        "endLine": 110,
+        "endChar": 9
+      },
+      "revId": "623cc6e2b643efabe2729284d3530a40134d71a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "508bd8e9_888cd063",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-25T16:06:02Z",
+      "side": 1,
+      "message": "nit: revert after debugging",
+      "revId": "623cc6e2b643efabe2729284d3530a40134d71a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
