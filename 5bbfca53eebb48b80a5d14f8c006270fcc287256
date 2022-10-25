@@ -1,5 +1,40 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3d3497f_51b4dee7",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-25T15:34:36Z",
+      "side": 1,
+      "message": "This could be `Ok(())` to be clear that you\u0027re not ignoring any return value here.\n\nThough why is the jump_to_payload call here rather than in the main module? It\u0027s a bit of a surprising control flow that the `main` function returning `Ok(())` would cause something significant to happen.",
+      "revId": "5bbfca53eebb48b80a5d14f8c006270fcc287256",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb1064c8_6cbba46b",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-25T15:34:36Z",
+      "side": 1,
+      "message": "Is it guaranteed that nothing else will use the space after the FDT if it is smaller than the max size?",
+      "revId": "5bbfca53eebb48b80a5d14f8c006270fcc287256",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
