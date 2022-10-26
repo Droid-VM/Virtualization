@@ -19,6 +19,7 @@
 #include <android-base/result.h>
 #include <android/binder_auto_utils.h>
 #include <android/binder_manager.h>
+#include <assert.h>
 #include <fcntl.h>
 #include <fsverity_digests.pb.h>
 #include <linux/vm_sockets.h>
@@ -110,6 +111,19 @@ Result<void> start_test_service() {
                 return ndk::ScopedAStatus::
                         fromServiceSpecificErrorWithMessage(0, "Failed to get attestation chain");
             }
+            return ndk::ScopedAStatus::ok();
+        }
+
+        ndk::ScopedAStatus getApkContentsPath(std::string* out) override {
+            const char* path_c = AVmPayload_getApkContentsPath();
+            if (path_c == nullptr) {
+                return ndk::ScopedAStatus::
+                        fromServiceSpecificErrorWithMessage(0, "Failed to get APK contents path");
+            }
+            const char* expected = "/mnt/apk";
+            assert(strcmp(path_c, expected) == 0);
+            std::string path(path_c);
+            *out = path;
             return ndk::ScopedAStatus::ok();
         }
     };

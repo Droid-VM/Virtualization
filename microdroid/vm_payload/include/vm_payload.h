@@ -96,6 +96,13 @@ bool AVmPayload_getDiceAttestationChain(void *data, size_t size, size_t *total);
  */
 bool AVmPayload_getDiceAttestationCdi(void *data, size_t size, size_t *total);
 
+/**
+ * Gets the path to the APK contents.
+ *
+ * \return the path to the APK contents on success and null on failure.
+ */
+const char *AVmPayload_getApkContentsPath();
+
 #ifdef __cplusplus
 } // extern "C"
 #endif
