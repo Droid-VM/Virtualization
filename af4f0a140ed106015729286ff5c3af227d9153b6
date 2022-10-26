@@ -93,6 +93,30 @@
       },
       "revId": "af4f0a140ed106015729286ff5c3af227d9153b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a92f1e4_f366bb19",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-26T14:02:16Z",
+      "side": 1,
+      "message": "\u003e If the requester is killed while we are configuring the cgroup for the crosvm process, the crosvm process will be killed \n\nThat takes a few seconds (and only happens if nobody else is using VS), so I\u0027m not sure it\u0027s a mitigation.\n\n\u003e Perhaps it\u0027s better to kill the feature\n\nDaemonize mode is used in a bunch of our tests (and also is very useful for manually starting a VM and leaving it running to do some exploring with adb), so I\u0027d rather we didn\u0027t kill it.",
+      "parentUuid": "a88d72d2_e4239499",
+      "range": {
+        "startLine": 154,
+        "startChar": 70,
+        "endLine": 154,
+        "endChar": 89
+      },
+      "revId": "af4f0a140ed106015729286ff5c3af227d9153b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
