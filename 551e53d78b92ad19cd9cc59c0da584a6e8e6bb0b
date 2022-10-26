@@ -16,6 +16,24 @@
       "message": "Does std::include_bytes work for this instead?",
       "revId": "551e53d78b92ad19cd9cc59c0da584a6e8e6bb0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f037212f_2966ef2a",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-26T17:15:35Z",
+      "side": 1,
+      "message": "That\u0027s what I initially tried; how would you pass the path to `:pvmfw_embedded_key` to the macro? Hard-code it in the Rust source? I think it would be something like\n```\ncore::include_bytes!(\"../../../../external/avb/test/testkey_pub.bin\")\n```\nwhich seems to make many assumptions about the (relative) location of files and prevents the build system from being aware of the dependency (this is secondary here as the key is unlikely to change). WDYT?",
+      "parentUuid": "8f877cee_8127d2b3",
+      "revId": "551e53d78b92ad19cd9cc59c0da584a6e8e6bb0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
