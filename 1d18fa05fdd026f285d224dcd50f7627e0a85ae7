@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c9dd33d_cdceffa0",
+        "filename": "cgroupof/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-26T13:57:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0126467_c1762a5c",
+      "range": {
+        "startLine": 58,
+        "startChar": 47,
+        "endLine": 58,
+        "endChar": 49
+      },
+      "revId": "1d18fa05fdd026f285d224dcd50f7627e0a85ae7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5c0d45b_e59de1ed",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-26T13:21:37Z",
       "side": 1,
       "message": "Could we use std::string instead of char *?",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 5
+      },
+      "revId": "1d18fa05fdd026f285d224dcd50f7627e0a85ae7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "721438c1_4f9c5d8b",
+        "filename": "cgroupof/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-26T13:57:13Z",
+      "side": 1,
+      "message": "I tried to avoid using stl here to save initialization cost. do you see a problem with this c code?",
+      "parentUuid": "e5c0d45b_e59de1ed",
       "range": {
         "startLine": 69,
         "startChar": 0,
