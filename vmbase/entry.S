@@ -85,6 +85,16 @@ entry:
 	adr x30, vector_table_panic
 	msr vbar_el1, x30
 
+	/*
+	 * Hang if loaded as a different address than intended (page-aligned).
+	 */
+	adrp x30, entry
+	ldr x29, =(entry)
+	cmp x29, x30
+	b.eq 1f
+	reset_then_hang
+1:
+
 	adrp x30, idmap
 	msr ttbr0_el1, x30
 
