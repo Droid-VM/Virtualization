@@ -45,6 +45,54 @@
       },
       "revId": "af4f0a140ed106015729286ff5c3af227d9153b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90807af8_e3de0d4f",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-26T13:57:04Z",
+      "side": 1,
+      "message": "Controlling cgroup needs CAP_SYS_ADMIN which VS already inherits from init.\n\nIn addition, file-level to /sys/fs/cgrouop/* files are allowed to \u0027domain\u0027 already.\n https://cs.android.com/android/platform/superproject/+/master:system/sepolicy/private/domain.te;drc\u003d2ffeca72a639d3a8c7adf80dd7f7abd26546ab47;l\u003d60",
+      "parentUuid": "b3951f8c_7740cdff",
+      "range": {
+        "startLine": 154,
+        "startChar": 28,
+        "endLine": 154,
+        "endChar": 52
+      },
+      "revId": "af4f0a140ed106015729286ff5c3af227d9153b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a88d72d2_e4239499",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-26T13:57:04Z",
+      "side": 1,
+      "message": "Renamed it in the next CL.\n\nIn our case, the pid reuse attack can\u0027t happen because we are in the middle of executing a binder call from the requester. If the requester is killed while we are  configuring the cgroup for the crosvm process, the crosvm process will be killed (due to the binder ref drop).\n\nThe _debug_ was for a testing-purpose case where `vm` can start a VM and exit (while the VM is running). This is `--daemonize` mode and I don\u0027t think we use it. Perhaps it\u0027s better to kill the feature, but that\u0027s for another CL.",
+      "parentUuid": "5c4dd75b_207edd0d",
+      "range": {
+        "startLine": 154,
+        "startChar": 70,
+        "endLine": 154,
+        "endChar": 89
+      },
+      "revId": "af4f0a140ed106015729286ff5c3af227d9153b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
