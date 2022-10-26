@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45b5680b_580f42d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-26T17:39:25Z",
+      "side": 1,
+      "message": "nit: Drop this link. It\u0027s not publicly accessible and this is AOSP. The information that the data is noisy is enough.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 13
+      },
+      "revId": "b7c119a901175b9c5e17119668ea76d3b1a71865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb268d4c_ecacef8f",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-26T17:39:25Z",
+      "side": 1,
+      "message": "Could we get rid of the intent here? It\u0027s going to create very long metric names. I would even be happy with just \u0027camera\u0027 and \u0027settings\u0027, not even the full pkg name.",
+      "range": {
+        "startLine": 153,
+        "startChar": 48,
+        "endLine": 153,
+        "endChar": 55
+      },
+      "revId": "b7c119a901175b9c5e17119668ea76d3b1a71865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a8a3e5a_dc078921",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-26T17:39:25Z",
+      "side": 1,
+      "message": "How about you turn this into (or wrap this in) `String findSupportedPackage(String[] list)`? Then your callers could be:\n\n```\n@Test\npublic void testCamera() {\n    String pkg \u003d findSupportedPackage({\n        \"pkg1\",\n        \"pkg2\"\n    });\n    assume().withMessage(\"No supported camera package\").that(pkg).isNotNull();\n    appStartupHelper(pkg);\n}\n```",
+      "range": {
+        "startLine": 176,
+        "startChar": 20,
+        "endLine": 176,
+        "endChar": 38
+      },
+      "revId": "b7c119a901175b9c5e17119668ea76d3b1a71865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44ee3b2c_6979bf1e",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-26T17:39:25Z",
+      "side": 1,
+      "message": "fits on the previous line",
+      "range": {
+        "startLine": 177,
+        "startChar": 12,
+        "endLine": 177,
+        "endChar": 30
+      },
+      "revId": "b7c119a901175b9c5e17119668ea76d3b1a71865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adbdbbeb_141fc644",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-26T17:39:25Z",
+      "side": 1,
+      "message": "Just `echo $?` and check against `\"0\"`. No point in making it more complicated than it needs to be.",
+      "range": {
+        "startLine": 188,
+        "startChar": 21,
+        "endLine": 188,
+        "endChar": 91
+      },
+      "revId": "b7c119a901175b9c5e17119668ea76d3b1a71865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70e53e9d_007dabdc",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-26T17:39:25Z",
+      "side": 1,
+      "message": "this isn\u0027t C89, you can declare the variable inside the `for` statement ;)",
+      "range": {
+        "startLine": 215,
+        "startChar": 8,
+        "endLine": 215,
+        "endChar": 14
+      },
+      "revId": "b7c119a901175b9c5e17119668ea76d3b1a71865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e780b70_1f2c1b42",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-26T17:39:25Z",
+      "side": 1,
+      "message": "Could we define this just once? It\u0027s now in three different places.",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 63
+      },
+      "revId": "b7c119a901175b9c5e17119668ea76d3b1a71865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
