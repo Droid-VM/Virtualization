@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39b48eb9_01e12180",
+        "filename": "authfs/tests/benchmarks/src/java/com/android/fs/benchmarks/AuthFsBenchmarks.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-26T12:42:41Z",
+      "side": 1,
+      "message": "Sorry for the late comment but looking at the code, this should use `isProtectedVmSupported()` rather than just `isCuttlefish()`. We often skip CF because it\u0027s slow and the tests time out. You\u0027re trying to skip it because it doesn\u0027t support protection but there might be other devices like that.",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 80
+      },
+      "revId": "8398fbf3ce6b88e810793bc6653e703a6ee97f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4a9012c_53ce8182",
+        "filename": "authfs/tests/hosttests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-26T12:42:41Z",
+      "side": 1,
+      "message": "nit: please don\u0027t make unrelated changes in your CL, it clobbers git history and makes reverting harder. If you want to clean up, submit a CL just for that.",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 97
+      },
+      "revId": "8398fbf3ce6b88e810793bc6653e703a6ee97f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
