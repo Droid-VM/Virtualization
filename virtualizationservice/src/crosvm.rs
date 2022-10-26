@@ -149,9 +149,9 @@ impl VmState {
                 Arc::new(run_vm(config, &instance.temporary_directory, failure_pipe_write)?);
 
             // Let crosvm join the cgroup of the requester so that resource usage of the VM is
-            // attributed to that of the requester. Note that requester_debug_pid is trusted at
+            // attributed to that of the requester. Note that requester_pid is trusted at
             // this moment because we are still in the binder context.
-            if let Err(e) = join_cgroup_of_requester(&child, instance.requester_debug_pid)
+            if let Err(e) = join_cgroup_of_requester(&child, instance.requester_pid)
                 .context("Failed to adjust cgroup")
             {
                 child.kill()?;
@@ -198,7 +198,7 @@ pub struct VmInstance {
     pub requester_uid: u32,
     /// The PID of the process which requested the VM. Note that this process may no longer exist
     /// and the PID may have been reused for a different process, so this should not be trusted.
-    pub requester_debug_pid: i32,
+    pub requester_pid: i32,
     /// Callbacks to clients of the VM.
     pub callbacks: VirtualMachineCallbacks,
     /// Input/output stream of the payload run in the VM.
@@ -219,7 +219,7 @@ impl VmInstance {
         config: CrosvmConfig,
         temporary_directory: PathBuf,
         requester_uid: u32,
-        requester_debug_pid: i32,
+        requester_pid: i32,
     ) -> Result<VmInstance, Error> {
         validate_config(&config)?;
         let cid = config.cid;
@@ -232,7 +232,7 @@ impl VmInstance {
             protected,
             temporary_directory,
             requester_uid,
-            requester_debug_pid,
+            requester_pid,
             callbacks: Default::default(),
             stream: Mutex::new(None),
             vm_service: Mutex::new(None),

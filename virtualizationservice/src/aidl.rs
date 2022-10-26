@@ -118,7 +118,7 @@ impl Interface for VirtualizationService {
                 .or(Err(StatusCode::UNKNOWN_ERROR))?;
             writeln!(file, "\trequester_uid: {}", vm.requester_uid)
                 .or(Err(StatusCode::UNKNOWN_ERROR))?;
-            writeln!(file, "\trequester_debug_pid: {}", vm.requester_debug_pid)
+            writeln!(file, "\trequester_pid: {}", vm.requester_pid)
                 .or(Err(StatusCode::UNKNOWN_ERROR))?;
         }
         Ok(())
@@ -222,7 +222,7 @@ impl IVirtualizationService for VirtualizationService {
                 cid: vm.cid as i32,
                 temporaryDirectory: vm.temporary_directory.to_string_lossy().to_string(),
                 requesterUid: vm.requester_uid as i32,
-                requesterPid: vm.requester_debug_pid,
+                requesterPid: vm.requester_pid,
                 state: get_state(&vm),
             })
             .collect();
@@ -357,7 +357,7 @@ impl VirtualizationService {
         let console_fd = console_fd.map(clone_file).transpose()?;
         let log_fd = log_fd.map(clone_file).transpose()?;
         let requester_uid = ThreadState::get_calling_uid();
-        let requester_debug_pid = ThreadState::get_calling_pid();
+        let requester_pid = ThreadState::get_calling_pid();
         let cid = next_cid().or(Err(ExceptionCode::ILLEGAL_STATE))?;
 
         // Counter to generate unique IDs for temporary image files.
@@ -475,7 +475,7 @@ impl VirtualizationService {
             detect_hangup: is_app_config,
         };
         let instance = Arc::new(
-            VmInstance::new(crosvm_config, temporary_directory, requester_uid, requester_debug_pid)
+            VmInstance::new(crosvm_config, temporary_directory, requester_uid, requester_pid)
                 .map_err(|e| {
                     error!("Failed to create VM with config {:?}: {:?}", config, e);
                     Status::new_service_specific_error_str(
