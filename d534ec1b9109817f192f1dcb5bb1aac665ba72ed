@@ -16,6 +16,24 @@
       "message": "How do the thread pools work with rpc binder? Are they single threaded?",
       "revId": "d534ec1b9109817f192f1dcb5bb1aac665ba72ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23a5b56b_cf836b86",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-26T11:42:52Z",
+      "side": 0,
+      "message": "I started a single thread in register_vm_payload_service(). Should we keep using `ProcessState::start_thread_pool()` to start thread pool for RPC binder? Isn\u0027t the method supposed to start IPC binder thread pool[1]?\n\nActually I tried to keep ProcessState::start_thread_pool() here without starting another thread in register_vm_payload_service(), but it doesn\u0027t work.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:frameworks/native/libs/binder/rust/src/state.rs;l\u003d26;drc\u003de268a9fca0994969a577dec6b8687ba0ca7b0c84",
+      "parentUuid": "e7d27922_b41b0f2e",
+      "revId": "d534ec1b9109817f192f1dcb5bb1aac665ba72ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
