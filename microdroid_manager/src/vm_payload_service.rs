@@ -24,6 +24,8 @@ use log::error;
 use openssl::hkdf::hkdf;
 use openssl::md::Md;
 
+pub(crate) const VM_APK_CONTENTS_PATH: &str = "/mnt/apk";
+
 /// Implementation of `IVmPayloadService`.
 struct VmPayloadService {
     allow_restricted_apis: bool,
@@ -62,6 +64,10 @@ impl IVmPayloadService for VmPayloadService {
     fn getDiceAttestationCdi(&self) -> binder::Result<Vec<u8>> {
         self.check_restricted_apis_allowed()?;
         Ok(self.dice.cdi_attest.to_vec())
+    }
+
+    fn getApkContentsPath(&self) -> binder::Result<String> {
+        Ok(VM_APK_CONTENTS_PATH.to_string())
     }
 }
 

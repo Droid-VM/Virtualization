@@ -20,7 +20,8 @@ use anyhow::{Context, Result};
 use binder::{wait_for_interface, Strong, unstable_api::{AIBinder, new_spibinder}};
 use log::{error, info, Level};
 use rpcbinder::run_vsock_rpc_server;
-use std::os::raw::c_void;
+use std::ffi::CString;
+use std::os::raw::{c_char, c_void};
 
 /// Notifies the host that the payload is ready.
 /// Returns true if the notification succeeds else false.
@@ -183,6 +184,35 @@ pub unsafe extern "C" fn AVmPayload_getDiceAttestationCdi(
             true
         }
     }
+}
+
+/// Gets the path to the APK contents.
+#[no_mangle]
+pub extern "C" fn AVmPayload_getApkContentsPath() -> *const c_char {
+    match try_get_apk_contents_path() {
+        Ok(apk_content_path) => {
+            match CString::new(apk_content_path) {
+                Ok(path) => {
+                    let result = path.as_ptr();
+                    // Rust shouldn't free the memory in path.
+                    std::mem::forget(path);
+                    result
+                }
+                Err(e) => {
+                    error!("Failed in CString::new, error: {:?}", e);
+                    std::ptr::null()
+                }
+            }
+        }
+        Err(e) => {
+            error!("Failed to get APK content path, error: {:?}", e);
+            std::ptr::null()
+        }
+    }
+}
+
+fn try_get_apk_contents_path() -> Result<String> {
+    get_vm_payload_service()?.getApkContentsPath().context("Cannot get APK contents path")
 }
 
 fn try_get_dice_attestation_cdi() -> Result<Vec<u8>> {

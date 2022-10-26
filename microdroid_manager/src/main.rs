@@ -24,7 +24,7 @@ mod vm_payload_service;
 
 use crate::dice::{DiceContext, DiceDriver};
 use crate::instance::{ApexData, ApkData, InstanceDisk, MicrodroidData, RootHash};
-use crate::vm_payload_service::register_vm_payload_service;
+use crate::vm_payload_service::{register_vm_payload_service, VM_APK_CONTENTS_PATH};
 use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon::ErrorCode::ErrorCode;
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::{
     IVirtualMachineService::{
@@ -398,7 +398,7 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
         MountForExec::Allowed,
         "fscontext=u:object_r:zipfusefs:s0,context=u:object_r:system_file:s0",
         Path::new("/dev/block/mapper/microdroid-apk"),
-        Path::new("/mnt/apk"),
+        Path::new(VM_APK_CONTENTS_PATH),
         Some(APK_MOUNT_DONE_PROP),
     )
     .context("Failed to run zipfuse")?;
@@ -824,7 +824,7 @@ fn find_library_path(name: &str) -> Result<String> {
     let mut watcher = PropertyWatcher::new("ro.product.cpu.abilist")?;
     let value = watcher.read(|_name, value| Ok(value.trim().to_string()))?;
     let abi = value.split(',').next().ok_or_else(|| anyhow!("no abilist"))?;
-    let path = format!("/mnt/apk/lib/{}/{}", abi, name);
+    let path = format!("{}/lib/{}/{}", VM_APK_CONTENTS_PATH, abi, name);
 
     let metadata = fs::metadata(&path).with_context(|| format!("Unable to access {}", path))?;
     if !metadata.is_file() {

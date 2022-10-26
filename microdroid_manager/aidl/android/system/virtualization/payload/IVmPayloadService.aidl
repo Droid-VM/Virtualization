@@ -58,4 +58,9 @@ interface IVmPayloadService {
      * @throws SecurityException if the use of test APIs is not permitted.
      */
     byte[] getDiceAttestationCdi();
+
+    /**
+     * Gets the path to the APK contents.
+     */
+    String getApkContentsPath();
 }
