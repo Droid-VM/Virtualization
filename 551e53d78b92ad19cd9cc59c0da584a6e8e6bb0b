@@ -34,6 +34,24 @@
       "parentUuid": "8f877cee_8127d2b3",
       "revId": "551e53d78b92ad19cd9cc59c0da584a6e8e6bb0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a3b25c0_79e0f852",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-26T17:25:08Z",
+      "side": 1,
+      "message": "Oh, that\u0027s irritating. Is there a shell command that can convert to.a relative path? Or at least we can avoid FFI and unsafe by generating rust source instead e.g. `const PUBLIC_KEY: \u0026[u8] \u003d \u0026[$(xxd -i \u003c keyfile)];`?",
+      "parentUuid": "f037212f_2966ef2a",
+      "revId": "551e53d78b92ad19cd9cc59c0da584a6e8e6bb0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
