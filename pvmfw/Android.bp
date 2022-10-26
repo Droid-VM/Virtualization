@@ -9,6 +9,7 @@ rust_ffi_static {
     srcs: ["src/main.rs"],
     edition: "2021",
     rustlibs: [
+        "libavb_test_data",
         "liblog_rust_nostd",
         "libvmbase",
     ],

@@ -23,7 +23,7 @@ mod helpers;
 mod mmio_guard;
 mod smccc;
 
-use log::{debug, info};
+use log::{debug, info, trace};
 
 fn main(fdt: &mut [u8], payload: &[u8]) {
     info!("pVM firmware");
@@ -33,6 +33,10 @@ fn main(fdt: &mut [u8], payload: &[u8]) {
         payload.as_ptr() as usize,
         payload.len(),
     );
+
+    let key = avb_test_data::TESTKEY_RSA4096_PUB;
+    debug!("AVB public key: Address: {:?}, size: {:#x}", key.as_ptr(), key.len());
+    trace!("{key:02X?}");
 
     info!("Starting payload...");
 }
