@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db7346b3_f8578acf",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-26T16:22:13Z",
+      "side": 1,
+      "message": "There is a flaw in this argument: what if A and B have the same uid?",
+      "range": {
+        "startLine": 651,
+        "startChar": 0,
+        "endLine": 654,
+        "endChar": 40
+      },
+      "revId": "c3922dcd0f210ece53461c3e8e573509bb9213a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
