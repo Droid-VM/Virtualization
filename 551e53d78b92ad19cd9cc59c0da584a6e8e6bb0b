@@ -52,6 +52,24 @@
       "parentUuid": "f037212f_2966ef2a",
       "revId": "551e53d78b92ad19cd9cc59c0da584a6e8e6bb0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b536d189_1d001f61",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-26T17:37:05Z",
+      "side": 1,
+      "message": "And how do you access `PUBLIC_KEY` from the main source? Make it `no_mangle` and import it with `extern`?\n\nI\u0027ve updated the commit to use `include_bytes` but can revert to the previous PS.",
+      "parentUuid": "2a3b25c0_79e0f852",
+      "revId": "551e53d78b92ad19cd9cc59c0da584a6e8e6bb0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
