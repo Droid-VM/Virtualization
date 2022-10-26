@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0cd0998_23476757",
+        "filename": "authfs/tests/benchmarks/src/java/com/android/fs/benchmarks/AuthFsBenchmarks.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-26T12:52:17Z",
+      "side": 1,
+      "message": "No worries. Can I use `supportMicrodroid(/*protectedVm\u003d*/true)` [1] directly here?\n\n[1] https://cs.android.com/android/platform/superproject/+/master:tools/tradefederation/core/src/com/android/tradefed/device/TestDevice.java;l\u003d2073;drc\u003d36f6d443cb423cca75acaea7898d2810e7d4d71a",
+      "parentUuid": "39b48eb9_01e12180",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 80
+      },
+      "revId": "8398fbf3ce6b88e810793bc6653e703a6ee97f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a4a9012c_53ce8182",
         "filename": "authfs/tests/hosttests/java/src/com/android/fs/AuthFsHostTest.java",
         "patchSetId": 13
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-26T12:42:41Z",
       "side": 1,
       "message": "nit: please don\u0027t make unrelated changes in your CL, it clobbers git history and makes reverting harder. If you want to clean up, submit a CL just for that.",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 97
+      },
+      "revId": "8398fbf3ce6b88e810793bc6653e703a6ee97f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47fe4c22_76a06513",
+        "filename": "authfs/tests/hosttests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-26T12:52:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4a9012c_53ce8182",
       "range": {
         "startLine": 139,
         "startChar": 0,
