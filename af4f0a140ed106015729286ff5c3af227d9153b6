@@ -117,6 +117,30 @@
       },
       "revId": "af4f0a140ed106015729286ff5c3af227d9153b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52e746d7_dd6df5ad",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-26T15:12:15Z",
+      "side": 1,
+      "message": "Ok, let\u0027s not kill it.\n\nI amended the logic a bit so that in case where the original requester (the one who created the VM) is different from the one who is starting the VM, the VM resource is attributed to the one who is starting, because the original requester might have died.",
+      "parentUuid": "9a92f1e4_f366bb19",
+      "range": {
+        "startLine": 154,
+        "startChar": 70,
+        "endLine": 154,
+        "endChar": 89
+      },
+      "revId": "af4f0a140ed106015729286ff5c3af227d9153b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
