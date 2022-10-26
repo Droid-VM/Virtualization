@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3951f8c_7740cdff",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-26T13:25:45Z",
+      "side": 1,
+      "message": "What\u0027s the access control on this?",
+      "range": {
+        "startLine": 154,
+        "startChar": 28,
+        "endLine": 154,
+        "endChar": 52
+      },
+      "revId": "af4f0a140ed106015729286ff5c3af227d9153b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c4dd75b_207edd0d",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-26T13:25:45Z",
+      "side": 1,
+      "message": "Why ...debug_pid? Should we rename it if we\u0027re using it for non-debug purposes?\nWhat about pid reuse attacks?\n(David was thinking about a similar problem, I can\u0027t remember the trick he used.)",
+      "range": {
+        "startLine": 154,
+        "startChar": 70,
+        "endLine": 154,
+        "endChar": 89
+      },
+      "revId": "af4f0a140ed106015729286ff5c3af227d9153b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
