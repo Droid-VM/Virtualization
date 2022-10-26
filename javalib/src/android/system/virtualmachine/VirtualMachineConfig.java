@@ -18,8 +18,6 @@ package android.system.virtualmachine;
 
 import static android.os.ParcelFileDescriptor.MODE_READ_ONLY;
 
-import static java.util.Objects.requireNonNull;
-
 import android.annotation.IntDef;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
@@ -371,7 +369,7 @@ public final class VirtualMachineConfig {
             }
 
             if (!mProtectedVmSet) {
-                throw new IllegalStateException("setProtectedVm(t/f) must be called explicitly");
+                throw new IllegalStateException("setProtectedVm must be called explicitly");
             }
 
             if (mProtectedVm
