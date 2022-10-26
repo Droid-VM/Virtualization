@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1169ec58_d50b579f",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-26T15:35:50Z",
+      "side": 1,
+      "message": "I think we can return the pointer to the static string in this case. WDYT?",
+      "parentUuid": "489836f3_4b25e97b",
+      "range": {
+        "startLine": 197,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 43
+      },
+      "revId": "cfb706dfa11264a480838df508575cd3ac417bbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79a1e097_acc9502a",
         "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
         "patchSetId": 1
@@ -77,6 +101,30 @@
       "writtenOn": "2022-10-26T14:22:24Z",
       "side": 1,
       "message": "We can simplify this by just returning \"/mnt/apk\" here, rather than doing an IPC so microdroid_manager can return the same constant string.",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 1
+      },
+      "revId": "cfb706dfa11264a480838df508575cd3ac417bbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3819035d_ddbd405d",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-26T15:35:50Z",
+      "side": 1,
+      "message": "Yay, good idea!",
+      "parentUuid": "79a1e097_acc9502a",
       "range": {
         "startLine": 214,
         "startChar": 0,
