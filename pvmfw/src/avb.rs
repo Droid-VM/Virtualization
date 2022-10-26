@@ -12,32 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! pVM firmware.
+//! Image verification.
 
-#![no_main]
-#![no_std]
+use core::slice;
 
-mod avb;
-mod entry;
-mod exceptions;
-mod helpers;
-mod mmio_guard;
-mod smccc;
+pub fn get_reference_public_key() -> &'static [u8] {
+    // SAFETY - This function is the only way to access those variables (set by xxd/clang).
+    unsafe { slice::from_raw_parts(&avbpubkey as *const u8, avbpubkey_len) }
+}
 
-use log::{debug, info, trace};
-
-fn main(fdt: &mut [u8], payload: &[u8]) {
-    info!("pVM firmware");
-    debug!(
-        "fdt_address={:#018x}, payload_start={:#018x}, payload_size={:#018x}",
-        fdt.as_ptr() as usize,
-        payload.as_ptr() as usize,
-        payload.len(),
-    );
-
-    let key = avb::get_reference_public_key();
-    debug!("AVB public key: Address: {:?}, size: {:#x}", key.as_ptr(), key.len());
-    trace!("{key:02X?}");
-
-    info!("Starting payload...");
+extern "C" {
+    static avbpubkey: u8;
+    static avbpubkey_len: usize;
 }

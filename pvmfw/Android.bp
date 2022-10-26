@@ -19,6 +19,7 @@ cc_binary {
     name: "pvmfw",
     defaults: ["vmbase_elf_defaults"],
     srcs: [
+        ":pvmfw_embedded_key_c",
         "idmap.S",
     ],
     static_libs: [
@@ -47,6 +48,20 @@ prebuilt_etc {
     name: "pvmfw_embedded_key",
     src: ":avb_testkey_rsa4096_pub_bin",
     installable: false,
+}
+
+cc_genrule {
+    name: "pvmfw_embedded_key_c",
+    srcs: [":pvmfw_embedded_key"],
+    out: ["avbpubkey.c"],
+    cmd: "(" +
+        "    echo '#include <stddef.h>';" +
+        "    echo '#include <stdint.h>';" +
+        "    echo 'const uint8_t avbpubkey[] = {';" +
+        "    xxd -i < $(in);" +
+        "    echo '};';" +
+        "    echo 'const size_t avbpubkey_len = sizeof(avbpubkey);';" +
+        ") > $(out)",
 }
 
 prebuilt_etc {
