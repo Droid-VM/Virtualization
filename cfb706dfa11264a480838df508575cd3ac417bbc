@@ -16,6 +16,75 @@
       "message": "Hi Alan, PTAL.",
       "revId": "cfb706dfa11264a480838df508575cd3ac417bbc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da93c38f_bba5c5b5",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-26T14:22:24Z",
+      "side": 1,
+      "message": "This looks like an inherently unsafe prototype. Who is responsible for freeing this memory?\n\nWe probably need something like what Andrew is doing above.\n(Or whatever the normal NDK convention for returning strings is.)\n\nWe could also guarantee that it\u0027s a static string, but that limits implementation flexibility.\n\nOr perhaps we should just provide it as a constant in the header.",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 44
+      },
+      "revId": "cfb706dfa11264a480838df508575cd3ac417bbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "489836f3_4b25e97b",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-26T14:22:24Z",
+      "side": 1,
+      "message": "This memory is now permanently leaked, I think.",
+      "range": {
+        "startLine": 197,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 43
+      },
+      "revId": "cfb706dfa11264a480838df508575cd3ac417bbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79a1e097_acc9502a",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-26T14:22:24Z",
+      "side": 1,
+      "message": "We can simplify this by just returning \"/mnt/apk\" here, rather than doing an IPC so microdroid_manager can return the same constant string.",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 1
+      },
+      "revId": "cfb706dfa11264a480838df508575cd3ac417bbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
