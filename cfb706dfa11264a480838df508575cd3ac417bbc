@@ -90,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67dc89bb_fc5dbe45",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-26T16:35:18Z",
+      "side": 1,
+      "message": "That only works if it\u0027s a constant, which of course it is in our case.\n\nBut perhaps we should then just include it in the header? Of course then we can never change it. But people may end up hardwiring it anyway.",
+      "parentUuid": "1169ec58_d50b579f",
+      "range": {
+        "startLine": 197,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 43
+      },
+      "revId": "cfb706dfa11264a480838df508575cd3ac417bbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79a1e097_acc9502a",
         "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
         "patchSetId": 1
