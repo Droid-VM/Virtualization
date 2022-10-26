@@ -96,6 +96,14 @@ bool AVmPayload_getDiceAttestationChain(void *data, size_t size, size_t *total);
  */
 bool AVmPayload_getDiceAttestationCdi(void *data, size_t size, size_t *total);
 
+/**
+ * Gets the path to the APK contents.
+ *
+ * \return the path to the APK contents. The returned string is managed by Microdroid
+ * and should not be deleted or freed by the application.
+ */
+const char *AVmPayload_getApkContentsPath();
+
 #ifdef __cplusplus
 } // extern "C"
 #endif
