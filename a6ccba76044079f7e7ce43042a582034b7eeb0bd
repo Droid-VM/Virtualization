@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d029f087_17ffa66f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-27T12:54:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291c51e6_83ecb612",
+      "revId": "a6ccba76044079f7e7ce43042a582034b7eeb0bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d5db404_4723d62d",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-10-27T10:32:54Z",
       "side": 1,
       "message": "This has nothing to do with tracing. What are you trying to achieve here?",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 9
+      },
+      "revId": "a6ccba76044079f7e7ce43042a582034b7eeb0bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78a1da4b_599495fb",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-27T12:54:47Z",
+      "side": 1,
+      "message": "I\u0027m using the key to make sure that the toolchain doesn\u0027t optimize it out.\n\nI\u0027ve tried importing the key with `#[used]` but the key was still stripped from the final `pvmfw.bin` (LTO?) so I\u0027m still `debug!`-ing its address/size to make sure it stays in the image.",
+      "parentUuid": "0d5db404_4723d62d",
       "range": {
         "startLine": 39,
         "startChar": 4,
