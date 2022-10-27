@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45157e2b_f23d57c2",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-27T12:09:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42fc4fe9_4f91a60c",
+      "range": {
+        "startLine": 100,
+        "startChar": 3,
+        "endLine": 100,
+        "endChar": 37
+      },
+      "revId": "4c23785b25d590ce11a79feab0b73f1846f07604",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c98c97f4_2e93c2be",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1cce3bc_765a315d",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-27T12:09:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c98c97f4_2e93c2be",
+      "range": {
+        "startLine": 102,
+        "startChar": 61,
+        "endLine": 103,
+        "endChar": 6
+      },
+      "revId": "4c23785b25d590ce11a79feab0b73f1846f07604",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b0fceb8_283b8a62",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-10-27T11:17:45Z",
       "side": 1,
       "message": "An assert failure will call abort(), which may be hard to diagnose.\n(The second assert is redundant anyway.)\n\nBut you are already checking it on the host side, so just remove this?",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 38
+      },
+      "revId": "4c23785b25d590ce11a79feab0b73f1846f07604",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b541f52_b9ac893b",
+        "filename": "tests/testapk/src/native/testbinary.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-27T12:09:41Z",
+      "side": 1,
+      "message": "Sorry I checked this again, it looks like these asserts are ignored in test.\n\nActually I want to make sure that the string returned by the API is a NULL-terminated C string. There\u0027s a conversion below to change the type to string before passing it to the host. So testing in host somehow hides this problem.\n\nWhen I tested this properly on local, the return of `AVmPayload_getApkContentsPath()` is `/mnt/apk/\\x02\\x00`, instead of `/mnt/apk/\\x00`.\n\nIf we want to return a static string `/mnt/apk/\\x00`, maybe we can create a c layer between the header and rust_ffi and get the static string directly from aidl c interface.\n\nOr we can make an API similar to what Andrew did to write the param. Then we need to add a method to get path length, so that clients can allocate enough memory before calling `getApkContentsPath(char* path)`.\n\nWDYT?",
+      "parentUuid": "3b0fceb8_283b8a62",
       "range": {
         "startLine": 124,
         "startChar": 0,
