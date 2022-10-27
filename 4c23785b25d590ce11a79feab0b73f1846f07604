@@ -164,6 +164,30 @@
       },
       "revId": "4c23785b25d590ce11a79feab0b73f1846f07604",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e5bd982_1bc9862b",
+        "filename": "tests/testapk/src/native/testbinary.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-27T13:17:10Z",
+      "side": 1,
+      "message": "\u003e Can we take the same approach for stable API?\n\nYes.\n\nHowever:\n\u003e If we want to return a static string /mnt/apk/\\x00\n\nWell, we want to return the string \"/mnt/apk\". But at the C level it must be null-terminated.\n\nI have no idea where the \\0x02 is coming from, but that just looks like a bug.",
+      "parentUuid": "feb935ea_c65899bf",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 38
+      },
+      "revId": "4c23785b25d590ce11a79feab0b73f1846f07604",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

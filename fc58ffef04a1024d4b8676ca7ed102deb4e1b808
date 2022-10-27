@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efda50a2_47f55a53",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-27T13:17:10Z",
+      "side": 1,
+      "message": "I think your bug is here.\nYou need to return a pointer to a CString, but what you have is a String.\n\nAnd of course we need it to have static lifetime, and CString::new is allowed to fail.\nI think you can resolve those by having a lazy_static.\n\n(And CString\u0027s as_ptr() returns the write thing already, so we can lose the cast)",
+      "range": {
+        "startLine": 191,
+        "startChar": 4,
+        "endLine": 191,
+        "endChar": 50
+      },
+      "revId": "fc58ffef04a1024d4b8676ca7ed102deb4e1b808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e7945e5_dd758b24",
+        "filename": "tests/testapk/src/native/testbinary.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-27T13:17:10Z",
+      "side": 1,
+      "message": "I still think these checks should be done outside the VM.",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 14
+      },
+      "revId": "fc58ffef04a1024d4b8676ca7ed102deb4e1b808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
