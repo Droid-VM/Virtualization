@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42fc4fe9_4f91a60c",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-27T11:17:45Z",
+      "side": 1,
+      "message": "We could probably expand this a bit.\nIt\u0027s a directory, under which are the unzipped contents of the APK containing the payload, all read-only but accessible to the payload.",
+      "range": {
+        "startLine": 100,
+        "startChar": 3,
+        "endLine": 100,
+        "endChar": 37
+      },
+      "revId": "4c23785b25d590ce11a79feab0b73f1846f07604",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c98c97f4_2e93c2be",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-27T11:17:45Z",
+      "side": 1,
+      "message": "Maybe delete this?",
+      "range": {
+        "startLine": 102,
+        "startChar": 61,
+        "endLine": 103,
+        "endChar": 6
+      },
+      "revId": "4c23785b25d590ce11a79feab0b73f1846f07604",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b0fceb8_283b8a62",
+        "filename": "tests/testapk/src/native/testbinary.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-27T11:17:45Z",
+      "side": 1,
+      "message": "An assert failure will call abort(), which may be hard to diagnose.\n(The second assert is redundant anyway.)\n\nBut you are already checking it on the host side, so just remove this?",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 38
+      },
+      "revId": "4c23785b25d590ce11a79feab0b73f1846f07604",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
