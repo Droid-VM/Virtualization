@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4339691b_4af59979",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-27T13:52:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9918fe40_7a78d4bf",
+      "range": {
+        "startLine": 108,
+        "startChar": 41,
+        "endLine": 108,
+        "endChar": 43
+      },
+      "revId": "fc58ffef04a1024d4b8676ca7ed102deb4e1b808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efda50a2_47f55a53",
@@ -118,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a02edc16_91e7b466",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-27T13:52:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efda50a2_47f55a53",
+      "range": {
+        "startLine": 191,
+        "startChar": 4,
+        "endLine": 191,
+        "endChar": 50
+      },
+      "revId": "fc58ffef04a1024d4b8676ca7ed102deb4e1b808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e7945e5_dd758b24",
@@ -131,6 +179,30 @@
       "writtenOn": "2022-10-27T13:17:10Z",
       "side": 1,
       "message": "I still think these checks should be done outside the VM.",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 14
+      },
+      "revId": "fc58ffef04a1024d4b8676ca7ed102deb4e1b808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59b37c84_7f31e92b",
+        "filename": "tests/testapk/src/native/testbinary.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-27T13:52:05Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s only for debugging. It\u0027s easier to localize the strange \\x02 in the native code. I\u0027ll remove this in the end.",
+      "parentUuid": "0e7945e5_dd758b24",
       "range": {
         "startLine": 124,
         "startChar": 0,
