@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "55cade94_4c63ef82",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-27T09:52:26Z",
+      "side": 1,
+      "message": "\u003e Or perhaps we should just provide it as a constant in the header.\n\nWhen reading the NDK API guideline, it looks like constants cannot change value in later versions once defined[1]. In that sense, maybe it\u0027s still better to keep it a method for the flexibility in the future.\n\n\u003e We probably need something like what Andrew is doing above.\n\nTo pass the string like Andrew did, we also need the length of the string, then we probably need a second method to get the length. And every time we want to pass a string, we\u0027ll need these two methods. That doesn\u0027t look like an easy-to-use API for clients IMHO.\n\nOtherwise, some NDK API also uses `const char*` as return type to pass string[2].\n\n[1] go/android-ndk-api-guidelines#constants-are-forever\n[2] https://cs.android.com/android/platform/superproject/+/master:frameworks/native/libs/binder/ndk/include_ndk/android/binder_status.h;l\u003d277;drc\u003d619a02a6c35ddf13754e5bab764ee8eb76b46fd9",
+      "parentUuid": "da93c38f_bba5c5b5",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 44
+      },
+      "revId": "cfb706dfa11264a480838df508575cd3ac417bbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "489836f3_4b25e97b",
         "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
         "patchSetId": 1
