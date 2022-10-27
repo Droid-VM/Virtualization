@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f97a6c77_1740b265",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-27T13:24:50Z",
+      "side": 1,
+      "message": "Distraction: do we want to return a path or an open file descriptor to the directory that can be used with `openat()`?",
+      "range": {
+        "startLine": 100,
+        "startChar": 12,
+        "endLine": 100,
+        "endChar": 16
+      },
+      "revId": "fc58ffef04a1024d4b8676ca7ed102deb4e1b808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9918fe40_7a78d4bf",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-10-27T13:24:50Z",
+      "side": 1,
+      "message": "nit: (void) for C",
+      "range": {
+        "startLine": 108,
+        "startChar": 41,
+        "endLine": 108,
+        "endChar": 43
+      },
+      "revId": "fc58ffef04a1024d4b8676ca7ed102deb4e1b808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "efda50a2_47f55a53",
         "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
         "patchSetId": 8
