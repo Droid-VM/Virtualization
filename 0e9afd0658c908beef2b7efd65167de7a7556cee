@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34bb3a7e_5f152d86",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-27T16:05:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb4f24b8_e1e20abc",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 7
+      },
+      "revId": "0e9afd0658c908beef2b7efd65167de7a7556cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31cd8095_b47c7193",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-20T13:52:32Z",
       "side": 1,
       "message": "We should get into the habit of adding a SAFETY comment for each `unsafe`. Explain why this is safe.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 12
+      },
+      "revId": "0e9afd0658c908beef2b7efd65167de7a7556cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1b96fee_4845e21c",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-27T16:05:24Z",
+      "side": 1,
+      "message": "Absolutely! Do you know of a way to get the `repo upload` (`git-push`) hook to complain about it using `rustfmt`, `clippy`, ...?",
+      "parentUuid": "31cd8095_b47c7193",
       "range": {
         "startLine": 25,
         "startChar": 0,
