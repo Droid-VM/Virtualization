@@ -16,6 +16,24 @@
       "message": "Are there any restrictions on where the APK can come from? Should it be limited to prevent an arbitrarily downloaded APK being run?",
       "revId": "40dac6d9ac13df6748dd051e4b594b817b74317a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e31ab962_94e60248",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-27T16:18:56Z",
+      "side": 1,
+      "message": "Yes, but those checks shouldn\u0027t be here (this is all client side and thus trivially bypassable).\nWe have cs/android-internal/packages/modules/Virtualization/virtualizationservice/src/aidl.rs?rcl\u003d131c0890397d54a5ee4a94285ce29e6285f9d88f\u0026l\u003d759 to limit what APK (and other) files are allowd. So you can\u0027t just download and write an APK file somewhere arbitrary and run it.\nBut we do allow you to execute code from any installed APK.\nI think that\u0027s OK - priv apps are updatable anyway.",
+      "parentUuid": "e18f1b82_c883de90",
+      "revId": "40dac6d9ac13df6748dd051e4b594b817b74317a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
