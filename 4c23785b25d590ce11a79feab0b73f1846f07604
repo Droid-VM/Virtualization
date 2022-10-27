@@ -140,6 +140,30 @@
       },
       "revId": "4c23785b25d590ce11a79feab0b73f1846f07604",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feb935ea_c65899bf",
+        "filename": "tests/testapk/src/native/testbinary.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-10-27T12:16:06Z",
+      "side": 1,
+      "message": "I see. Andrew\u0027s approach is to call the same API twice\n\n- AVmPayload_getDiceAttestationCdi(nullptr, 0, \u0026cdi_size)): this call will fail but we get the size.\n- AVmPayload_getDiceAttestationCdi(out-\u003edata(), out-\u003esize(), \u0026cdi_size)): real call.\n\nI remember that this API is for test. Can we take the same approach for stable API?",
+      "parentUuid": "9b541f52_b9ac893b",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 38
+      },
+      "revId": "4c23785b25d590ce11a79feab0b73f1846f07604",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
