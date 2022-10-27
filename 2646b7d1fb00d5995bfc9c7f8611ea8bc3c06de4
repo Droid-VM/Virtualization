@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29d4d25b_301b647d",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-27T13:57:46Z",
+      "side": 1,
+      "message": "I don\u0027t think you need this cast now.\nAnd I also don\u0027t think you need the *, since the use of . will trigger auto deref.\n\nSo just APK_CONTENTS_PATH.as_ptr() should work.",
+      "range": {
+        "startLine": 198,
+        "startChar": 34,
+        "endLine": 198,
+        "endChar": 50
+      },
+      "revId": "2646b7d1fb00d5995bfc9c7f8611ea8bc3c06de4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
