@@ -94,6 +94,30 @@
       },
       "revId": "9e37cceff8ed6463418fd2388e45964b5ab4f52a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a163634b_7f52bf11",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-27T14:32:15Z",
+      "side": 1,
+      "message": "But this bit is still wrong: we should use `adr` as what we want is to check that the absolute `entry` (`x29`) was aligned, not the PC-relative one (`x30`). Asserting that `entry` is properly linked at a page-aligned address should in turn be done at build time, most probably in the linker script. As it already hard-codes the address, it seems superfluous to do such a check in the end.",
+      "parentUuid": "b9d72145_3cb706c3",
+      "range": {
+        "startLine": 89,
+        "startChar": 55,
+        "endLine": 89,
+        "endChar": 70
+      },
+      "revId": "9e37cceff8ed6463418fd2388e45964b5ab4f52a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
