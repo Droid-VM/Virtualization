@@ -45,6 +45,30 @@
       },
       "revId": "f4f70508a71623c481ad89e670b02d77fa2f1d5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1760c3af_0bdee860",
+        "filename": "vmbase/common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-27T12:02:32Z",
+      "side": 1,
+      "message": "It\u0027s part of a macro: are local symbols scoped in that case?\n\nWhat would happen if\n```\nb 0f\nreset_or_hang  ; contains a local symbol \"0\"\n```\n? I could use `999` though.",
+      "parentUuid": "43fc0be7_6b6a1b21",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 6
+      },
+      "revId": "f4f70508a71623c481ad89e670b02d77fa2f1d5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
