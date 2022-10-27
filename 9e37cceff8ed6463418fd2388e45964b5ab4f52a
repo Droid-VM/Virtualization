@@ -46,6 +46,30 @@
       },
       "revId": "9e37cceff8ed6463418fd2388e45964b5ab4f52a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e48de88d_b4ad838d",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-10-27T13:39:22Z",
+      "side": 1,
+      "message": "\u003e What enforces that entry is page-aligned?\n\nAs `adrp` effectively page-aligns (down) the symbol, `cmp` can only succeed if `entry` was aligned to begin with.\n\n\u003e Could we remove that assumption\n\nWe could even just use `adr` but why do you want to allow `entry` to be unaligned?",
+      "parentUuid": "5452edea_ad8d48f0",
+      "range": {
+        "startLine": 89,
+        "startChar": 55,
+        "endLine": 89,
+        "endChar": 70
+      },
+      "revId": "9e37cceff8ed6463418fd2388e45964b5ab4f52a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
