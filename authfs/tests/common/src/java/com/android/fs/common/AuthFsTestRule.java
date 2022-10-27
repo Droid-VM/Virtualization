@@ -246,7 +246,9 @@ public class AuthFsTestRule extends TestLogData {
     }
 
     private void setUpTest() throws Exception {
-        sAndroid.run("mkdir -p " + TEST_OUTPUT_DIR);
+        if (sAndroid != null) {
+            sAndroid.run("mkdir -p " + TEST_OUTPUT_DIR);
+        }
     }
 
     private void tearDownTest(String testName) throws Exception {
