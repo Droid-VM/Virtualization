@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5124fd16_0b0c7c53",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-27T13:50:22Z",
+      "side": 1,
+      "message": "\u003e Distraction: do we want to return a path or an open file descriptor to the directory that can be used with openat()?\n\nErrm - maybe a path is just simpler for everyone? fd ownership just complicates things.\n\n\u003e I could only find one example of an NDK API for finding files and that returned the path string\n\nThat one is missing the documentation to say that the lifetime of the result is tied to the AStorageManager object. We don\u0027t have anything similar.\n\nTBH I think we are ok to just return a static string. We don\u0027t want to promise exactly what the path is (although Hyrum\u0027s Law may apply). But we have no need to change it dynamically, certainly not while the payload is running.",
+      "parentUuid": "e435ee00_d3795a78",
+      "range": {
+        "startLine": 100,
+        "startChar": 12,
+        "endLine": 100,
+        "endChar": 16
+      },
+      "revId": "fc58ffef04a1024d4b8676ca7ed102deb4e1b808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9918fe40_7a78d4bf",
         "filename": "microdroid/vm_payload/include/vm_payload.h",
         "patchSetId": 8
