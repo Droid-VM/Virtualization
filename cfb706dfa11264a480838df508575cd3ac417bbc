@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "db6d3af6_435e9824",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-27T09:57:08Z",
+      "side": 1,
+      "message": "Yeah, [1] seems like a problem.\n\n[2] is safe because it specified \"The returned string has the lifetime of the status object passed into this function.\"\n\nWe\u0027d have to guarantee the string we returned was valid for the duration of the VM. But that doesn\u0027t seem unreasonable; changing the path dynamically wouldn\u0027t make anyone happy.",
+      "parentUuid": "55cade94_4c63ef82",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 44
+      },
+      "revId": "cfb706dfa11264a480838df508575cd3ac417bbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "489836f3_4b25e97b",
         "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
         "patchSetId": 1
