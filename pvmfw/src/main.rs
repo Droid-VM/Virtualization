@@ -17,14 +17,12 @@
 #![no_main]
 #![no_std]
 
-mod avb;
 mod entry;
 mod exceptions;
 mod helpers;
 mod mmio_guard;
 mod smccc;
 
-use avb::PUBLIC_KEY;
 use log::{debug, info};
 
 fn main(fdt: &mut [u8], payload: &[u8]) {
@@ -35,6 +33,6 @@ fn main(fdt: &mut [u8], payload: &[u8]) {
         payload.as_ptr() as usize,
         payload.len(),
     );
-    debug!("AVB public key: addr={:?}, size={:#x} ({1})", PUBLIC_KEY.as_ptr(), PUBLIC_KEY.len());
+
     info!("Starting payload...");
 }
