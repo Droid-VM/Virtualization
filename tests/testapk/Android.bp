@@ -39,7 +39,6 @@ cc_library_shared {
         "libbase",
         "libbinder_ndk",
         "MicrodroidTestNativeLibSub",
-        "libvm_payload",
     ],
     static_libs: [
         "libfsverity_digests_proto_cc",
