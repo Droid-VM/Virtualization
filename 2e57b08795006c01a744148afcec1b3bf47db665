@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6f25a1d_42dc1311",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-10-27T17:02:24Z",
+      "side": 1,
+      "message": "It looks like this is necessary but not sufficient - the library isn\u0027t turning up in the APEX.\n\nPerhaps the library needs installable: true ? Or we just need to move to something like cc_prebuilt_library_shared.\n\nHopefully Jiyong has more informed suggestions.",
+      "range": {
+        "startLine": 93,
+        "startChar": 7,
+        "endLine": 93,
+        "endChar": 79
+      },
+      "revId": "2e57b08795006c01a744148afcec1b3bf47db665",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
