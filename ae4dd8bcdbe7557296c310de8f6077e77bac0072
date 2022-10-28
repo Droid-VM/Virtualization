@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10e55452_860e5401",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-10-28T15:17:42Z",
+      "side": 1,
+      "message": "It looks to me like this could cause unsafe behaviour if `init` is called more than once. Is that true? If so we should either prevent that, or mark `init` as `unsafe`.",
+      "revId": "ae4dd8bcdbe7557296c310de8f6077e77bac0072",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
