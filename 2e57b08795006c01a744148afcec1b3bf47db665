@@ -46,6 +46,30 @@
       },
       "revId": "2e57b08795006c01a744148afcec1b3bf47db665",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ade447f7_dc5681c7",
+        "filename": "microdroid/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-28T02:38:24Z",
+      "side": 1,
+      "message": "This works. libvm_payload.so is in the microdroid image.\n\nI am guessing you looked into /apex/com.android.virt/lib64, which is a host-side directory?",
+      "parentUuid": "f6cdb86d_022f8583",
+      "range": {
+        "startLine": 93,
+        "startChar": 7,
+        "endLine": 93,
+        "endChar": 79
+      },
+      "revId": "2e57b08795006c01a744148afcec1b3bf47db665",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
