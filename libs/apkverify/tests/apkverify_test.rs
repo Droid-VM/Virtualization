@@ -246,7 +246,7 @@ fn assert_bytes_eq_to_data_in_file<P: AsRef<Path> + std::fmt::Display>(
     assert!(
         fs::metadata(&expected_data_path).is_ok(),
         "File does not exist. You can re-create it with:\n$ echo -en {} > {}\n",
-        bytes_data.iter().map(|b| format!("\\\\x{:02x}", b)).collect::<String>(),
+        hex::encode(bytes_data),
         expected_data_path
     );
     let expected_data = fs::read(&expected_data_path).unwrap();

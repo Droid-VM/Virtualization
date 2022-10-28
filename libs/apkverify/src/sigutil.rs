@@ -235,7 +235,7 @@ mod tests {
     use std::fs::File;
     use std::mem::size_of_val;
 
-    use crate::v3::{to_hex_string, APK_SIGNATURE_SCHEME_V3_BLOCK_ID};
+    use crate::v3::APK_SIGNATURE_SCHEME_V3_BLOCK_ID;
 
     const CENTRAL_DIRECTORY_HEADER_SIGNATURE: u32 = 0x02014b50;
 
@@ -277,7 +277,7 @@ mod tests {
         let digest = apk_sections.compute_digest(SignatureAlgorithmID::DsaWithSha256).unwrap();
         assert_eq!(
             "0DF2426EA33AEDAF495D88E5BE0C6A1663FF0A81C5ED12D5B2929AE4B4300F2F",
-            to_hex_string(&digest[..])
+            hex::encode(&digest[..])
         );
     }
 
