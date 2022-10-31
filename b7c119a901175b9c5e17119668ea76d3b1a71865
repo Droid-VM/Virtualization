@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "815995c1_338e2e81",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-31T11:33:39Z",
+      "side": 1,
+      "message": "Thanks for letting me know, I will edit the commit message.,",
+      "parentUuid": "45b5680b_580f42d5",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 13
+      },
+      "revId": "b7c119a901175b9c5e17119668ea76d3b1a71865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb268d4c_ecacef8f",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-26T17:39:25Z",
       "side": 1,
       "message": "Could we get rid of the intent here? It\u0027s going to create very long metric names. I would even be happy with just \u0027camera\u0027 and \u0027settings\u0027, not even the full pkg name.",
+      "range": {
+        "startLine": 153,
+        "startChar": 48,
+        "endLine": 153,
+        "endChar": 55
+      },
+      "revId": "b7c119a901175b9c5e17119668ea76d3b1a71865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39424c42_c6cfbfe6",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-31T11:33:39Z",
+      "side": 1,
+      "message": "I dropped the intent.",
+      "parentUuid": "fb268d4c_ecacef8f",
       "range": {
         "startLine": 153,
         "startChar": 48,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d73ef2ee_d10e19ae",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-31T11:33:39Z",
+      "side": 1,
+      "message": "I like this idea. I wanted to do something like this but I changed my mind as we only have multiple packages for the camera app. If this framework will be extended I am happy to implement your suggestion 😊",
+      "parentUuid": "5a8a3e5a_dc078921",
+      "range": {
+        "startLine": 176,
+        "startChar": 20,
+        "endLine": 176,
+        "endChar": 38
+      },
+      "revId": "b7c119a901175b9c5e17119668ea76d3b1a71865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44ee3b2c_6979bf1e",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-10-26T17:39:25Z",
       "side": 1,
       "message": "fits on the previous line",
+      "range": {
+        "startLine": 177,
+        "startChar": 12,
+        "endLine": 177,
+        "endChar": 30
+      },
+      "revId": "b7c119a901175b9c5e17119668ea76d3b1a71865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b0be032_6d4c2dcd",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-31T11:33:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44ee3b2c_6979bf1e",
       "range": {
         "startLine": 177,
         "startChar": 12,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "baa4534d_570c62e5",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-31T11:33:39Z",
+      "side": 1,
+      "message": "Right, I changed that and I also added -w to match an exact word from the list of packages",
+      "parentUuid": "adbdbbeb_141fc644",
+      "range": {
+        "startLine": 188,
+        "startChar": 21,
+        "endLine": 188,
+        "endChar": 91
+      },
+      "revId": "b7c119a901175b9c5e17119668ea76d3b1a71865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70e53e9d_007dabdc",
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da0a8721_25fdedbb",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-31T11:33:39Z",
+      "side": 1,
+      "message": "fixed :-D",
+      "parentUuid": "70e53e9d_007dabdc",
+      "range": {
+        "startLine": 215,
+        "startChar": 8,
+        "endLine": 215,
+        "endChar": 14
+      },
+      "revId": "b7c119a901175b9c5e17119668ea76d3b1a71865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e780b70_1f2c1b42",
@@ -152,6 +296,30 @@
       "writtenOn": "2022-10-26T17:39:25Z",
       "side": 1,
       "message": "Could we define this just once? It\u0027s now in three different places.",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 63
+      },
+      "revId": "b7c119a901175b9c5e17119668ea76d3b1a71865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14cb7e1a_210b01ae",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-10-31T11:33:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e780b70_1f2c1b42",
       "range": {
         "startLine": 233,
         "startChar": 0,
