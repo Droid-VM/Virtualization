@@ -1,0 +1,9 @@
+LIBVM_PAYLOAD {
+  global:
+    AVmPayload_notifyPayloadReady;       # apex
+    AVmPayload_runVsockRpcServer;        # apex
+    AVmPayload_getVmInstanceSecret;      # apex
+    AVmPayload_getDiceAttestationChain;  # apex
+    AVmPayload_getDiceAttestationCdi;    # apex
+    AVmPayload_getApkContentsPath;       # apex
+};
