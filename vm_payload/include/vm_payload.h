@@ -30,6 +30,9 @@ typedef struct AIBinder AIBinder;
 /**
  * Notifies the host that the payload is ready.
  *
+ * If the host app has set a VirtualMachineCallback for the VM, its
+ * `onPayloadReady` method will be called.
+ *
  * \return true if the notification succeeds else false.
  */
 bool AVmPayload_notifyPayloadReady(void);
