@@ -30,6 +30,9 @@ typedef struct AIBinder AIBinder;
 /**
  * Notifies the host that the payload is ready.
  *
+ * If the host app has set a VirtualMachineCallback for the VM, its
+ * `onPayloadReady` method will be called.
+ *
  * \return true if the notification succeeds else false.
  */
 bool AVmPayload_notifyPayloadReady(void);
@@ -83,6 +86,9 @@ const char *AVmPayload_getApkContentsPath(void);
 /**
  * Initiates a socket connection with the host and duplicates stdin, stdout and
  * stderr file descriptors to the socket.
+ *
+ * If the host app has set a VirtualMachineCallback for the VM, its
+ * `onPayloadStdio` method will be called to allow it to access the socket.
  *
  * \return true on success and false on failure. If unsuccessful, the stdio FDs
  * may be in an inconsistent state.
