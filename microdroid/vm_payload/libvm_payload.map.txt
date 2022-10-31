@@ -1,0 +1,9 @@
+LIBVM_PAYLOAD { #introduced=U
+  global: 
+    AVmPayload_notifyPayloadReady;
+    AVmPayload_runVsockRpcServer;
+    AVmPayload_getVmInstanceSecret;
+    AVmPayload_getDiceAttestationChain;
+    AVmPayload_getDiceAttestationCdi;
+    AVmPayload_getApkContentsPath;
+};
