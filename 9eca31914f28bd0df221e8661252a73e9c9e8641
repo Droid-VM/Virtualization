@@ -22,6 +22,30 @@
       },
       "revId": "9eca31914f28bd0df221e8661252a73e9c9e8641",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "954b80e3_ce3cef55",
+        "filename": "compos/composd/src/service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-01T07:22:02Z",
+      "side": 1,
+      "message": "I tested it by `kill -11 $(pidof composd)`. I was able to see the crash in the betterbug app.",
+      "parentUuid": "c8c4cfa3_81c8e394",
+      "range": {
+        "startLine": 70,
+        "startChar": 66,
+        "endLine": 70,
+        "endChar": 88
+      },
+      "revId": "9eca31914f28bd0df221e8661252a73e9c9e8641",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
