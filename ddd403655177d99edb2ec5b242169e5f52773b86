@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a809ca4_817cf013",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-01T17:06:48Z",
+      "side": 1,
+      "message": "In what circumstance would you want to disable this feature flag but not delete the code?",
+      "revId": "ddd403655177d99edb2ec5b242169e5f52773b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d9809d5_09a00ba5",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-01T17:06:48Z",
+      "side": 1,
+      "message": "... to a multiple of the provided alignment.",
+      "revId": "ddd403655177d99edb2ec5b242169e5f52773b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f714799e_e0e4bced",
+        "filename": "pvmfw/src/legacy.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-01T17:06:48Z",
+      "side": 1,
+      "message": "And we know because of how the linker script is written that it doesn\u0027t alias or overlap anything else, and it is (presumably) mapped into the pagetable.",
+      "revId": "ddd403655177d99edb2ec5b242169e5f52773b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
