@@ -14,6 +14,9 @@
 
 //! Miscellaneous helper functions.
 
+use core::arch::asm;
+use zeroize::Zeroize;
+
 pub const SIZE_4KB: usize = 4 << 10;
 pub const SIZE_2MB: usize = 2 << 20;
 
@@ -45,4 +48,39 @@ pub const fn align_up(addr: usize, alignment: usize) -> Option<usize> {
 /// Computes the address of the 4KiB page containing a given address.
 pub const fn page_4kb_of(addr: usize) -> usize {
     unchecked_align_down(addr, SIZE_4KB)
+}
+
+#[inline]
+pub fn min_dcache_line_size() -> usize {
+    const DMINLINE_SHIFT: usize = 16;
+    const DMINLINE_MASK: usize = 0xf;
+    let ctr_el0: usize;
+
+    unsafe { asm!("mrs {x}, ctr_el0", x = out(reg) ctr_el0) }
+
+    // DminLine: log2 of the number of words in the smallest cache line of all the data caches.
+    let dminline = (ctr_el0 >> DMINLINE_SHIFT) & DMINLINE_MASK;
+
+    1 << dminline
+}
+
+#[inline]
+/// Flush data cache over the entire slice.
+pub fn flush_region(reg: &[u8]) {
+    let line_size = min_dcache_line_size();
+
+    let addr = unchecked_align_down(reg.as_ptr() as usize, line_size);
+    let stop = addr + reg.len();
+
+    for line in (addr..stop).step_by(line_size) {
+        // SAFETY - Clearing cache lines shouldn't have Rust-visible side effects.
+        unsafe { asm!("dc cvau, {x}", x = in(reg) line) }
+    }
+}
+
+#[inline]
+/// Overwrites the slice with zeroes, to the point of unification.
+pub fn flushed_zeroize(reg: &mut [u8]) {
+    reg.zeroize();
+    flush_region(reg)
 }
