@@ -14,7 +14,9 @@
 
 //! Miscellaneous helper functions.
 
+use core::arch::asm;
 use vmbase::layout;
+use zeroize::Zeroize;
 
 pub const SIZE_4KB: usize = 4 << 10;
 pub const SIZE_2MB: usize = 2 << 20;
@@ -73,4 +75,40 @@ pub fn max_appended_payload_size() -> usize {
     let addr = locate_appended_payload();
     // pvmfw is contained in a 2MiB region so the payload can't be larger than the 2MiB alignement.
     align(addr, SIZE_2MB) - addr
+}
+
+#[inline]
+pub fn min_dcache_line_size() -> usize {
+    const DMINLINE_SHIFT: usize = 16;
+    const DMINLINE_MASK: usize = 0xf;
+    let ctr_el0: usize;
+
+    unsafe { asm!("mrs {x}, ctr_el0", x = out(reg) ctr_el0) }
+
+    // DminLine: log2 of the number of words in the smallest cache line of all the data caches.
+    let dminline = (ctr_el0 >> DMINLINE_SHIFT) & DMINLINE_MASK;
+
+    1 << dminline
+}
+
+#[inline]
+/// Flush data cache over the entire slice.
+pub fn flush_region(reg: &[u8]) {
+    let line_size = min_dcache_line_size();
+
+    let addr = align_down(reg.as_ptr() as usize, line_size);
+    let stop = addr + reg.len();
+
+    for line in (addr..stop).step_by(line_size) {
+        // SAFETY - Clearing cache lines shouldn't have Rust-visible side effects.
+        unsafe { asm!("dc cvau, {x}", x = in(reg) line) }
+    }
+}
+
+#[inline]
+/// Overwrites the slice with zeroes, to the PoU.
+pub fn flushed_zeroize(reg: &mut [u8]) {
+    reg.zeroize();
+    log::warn!("ZERIOZING {:?} ({:#x} bytes)", reg.as_ptr(), reg.len());
+    flush_region(reg)
 }

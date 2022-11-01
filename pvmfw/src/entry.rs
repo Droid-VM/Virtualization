@@ -106,7 +106,7 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<(), R
     // This wrapper allows main() to be blissfully ignorant of platform details.
     crate::main(fdt, payload, bcc);
 
-    // TODO: Overwrite BCC before jumping to payload to avoid leaking our sealing key.
+    helpers::flushed_zeroize(bcc);
 
     mmio_guard::unmap(console::BASE_ADDRESS).map_err(|e| {
         error!("Failed to unshare the UART: {e}");
