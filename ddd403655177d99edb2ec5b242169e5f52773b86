@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae5e3fd4_eee57b98",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-01T17:41:53Z",
+      "side": 1,
+      "message": "To permit a transition period where not all devices support the new interfaces. The default would become to have the flag disabled but some AOSP fork could have a local revert of that commit and keep tracking master without much clashes while AOSP could keep maintaining that feature, if necessary.",
+      "parentUuid": "2a809ca4_817cf013",
+      "revId": "ddd403655177d99edb2ec5b242169e5f52773b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d9809d5_09a00ba5",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b62c2516_8e061c71",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-01T17:41:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d9809d5_09a00ba5",
+      "revId": "ddd403655177d99edb2ec5b242169e5f52773b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f714799e_e0e4bced",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-11-01T17:06:48Z",
       "side": 1,
       "message": "And we know because of how the linker script is written that it doesn\u0027t alias or overlap anything else, and it is (presumably) mapped into the pagetable.",
+      "revId": "ddd403655177d99edb2ec5b242169e5f52773b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25d21c49_5d875cbf",
+        "filename": "pvmfw/src/legacy.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-01T17:41:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f714799e_e0e4bced",
       "revId": "ddd403655177d99edb2ec5b242169e5f52773b86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
