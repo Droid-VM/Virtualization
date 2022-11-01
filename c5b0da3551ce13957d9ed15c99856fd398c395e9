@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "208271bb_7a63ac3d",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-01T16:59:29Z",
+      "side": 1,
+      "message": "WIP as this write requires support for `paging_aarch64` and rebuilding the PTs as the page(s) containing the BCC are mapped RO in the static mapping.",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 34
+      },
+      "revId": "c5b0da3551ce13957d9ed15c99856fd398c395e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
