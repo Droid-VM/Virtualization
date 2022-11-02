@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27aa2d41_c58bdd01",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-02T00:42:44Z",
+      "side": 1,
+      "message": "I find this weird. It feels like there should be a `is_power_of_two` assertion inside `align_down` (otherwise its output is bogus) and then this function is unnecessary.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 1
+      },
+      "revId": "b207023cdbc967215eeabda71908ac6198afe3eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96297258_d573c29a",
+        "filename": "pvmfw/src/legacy.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-02T00:42:44Z",
+      "side": 1,
+      "message": "Hmm, I see what you\u0027re doing here but (a) no need for atomics since pvmfw is single-threaded, and (b) this looks like you\u0027re implementing Mutex-ish. So I\u0027m wondering - should we build a generic wrapper around UnsafeCell for this? It would be single-threaded at first and we could make it thread-safe if we ever switch pvmfw to multi-threaded. At least we would only have one place to fix up.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 54
+      },
+      "revId": "b207023cdbc967215eeabda71908ac6198afe3eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
