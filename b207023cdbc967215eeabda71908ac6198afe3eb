@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5f2ccdc_e51b9dd1",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-02T16:04:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27aa2d41_c58bdd01",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 1
+      },
+      "revId": "b207023cdbc967215eeabda71908ac6198afe3eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96297258_d573c29a",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2c11f24_9be2af94",
+        "filename": "pvmfw/src/legacy.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-02T16:04:58Z",
+      "side": 1,
+      "message": "Not needed for now if we implement \"reinterpret as BCC/config data\" functions taking ownership of a slice (as per your other comment) but yes, I agree that this feels overkill.",
+      "parentUuid": "96297258_d573c29a",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 54
+      },
+      "revId": "b207023cdbc967215eeabda71908ac6198afe3eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fdb238c_3aa30e3c",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-11-02T01:10:09Z",
       "side": 1,
       "message": "That\u0027s true in this CL but stops being true with the next one. I would expect you to unsafely create the `[pvmfw_end, 2MB_aligned_end)` slice in `main_wrapper()` (perhaps through an unsafe helper) and then try to parse it as either BCC or the new config format. Why not do that?",
+      "range": {
+        "startLine": 30,
+        "startChar": 20,
+        "endLine": 30,
+        "endChar": 72
+      },
+      "revId": "b207023cdbc967215eeabda71908ac6198afe3eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e31615f0_575c75bb",
+        "filename": "pvmfw/src/legacy.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-02T16:04:58Z",
+      "side": 1,
+      "message": "Agreed, I like this approach better; done!",
+      "parentUuid": "2fdb238c_3aa30e3c",
       "range": {
         "startLine": 30,
         "startChar": 20,
