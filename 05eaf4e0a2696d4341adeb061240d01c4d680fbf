@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85467e77_1532b19e",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-02T17:09:58Z",
+      "side": 1,
+      "message": "This seems like a really confusing way of writing\n```rust\nif cfg!(feature \u003d \"legacy\") {\n  Some(\u0026mut data[..BCC_SIZE])\n} else {\n  None\n}\n```",
+      "revId": "05eaf4e0a2696d4341adeb061240d01c4d680fbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20f16226_d7d0effc",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-02T17:09:58Z",
+      "side": 1,
+      "message": "alignment",
+      "range": {
+        "startLine": 22,
+        "startChar": 37,
+        "endLine": 22,
+        "endChar": 47
+      },
+      "revId": "05eaf4e0a2696d4341adeb061240d01c4d680fbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b93dbd0b_21ddb39d",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-02T17:09:58Z",
+      "side": 1,
+      "message": "There is no longer an `unchecked_align` function, I guess this comment is out of date.",
+      "range": {
+        "startLine": 27,
+        "startChar": 24,
+        "endLine": 27,
+        "endChar": 39
+      },
+      "revId": "05eaf4e0a2696d4341adeb061240d01c4d680fbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f82d067_f79daa3d",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-02T17:09:58Z",
+      "side": 1,
+      "message": "Maybe `align_up` would be a clearer name for this.",
+      "range": {
+        "startLine": 28,
+        "startChar": 13,
+        "endLine": 28,
+        "endChar": 18
+      },
+      "revId": "05eaf4e0a2696d4341adeb061240d01c4d680fbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
