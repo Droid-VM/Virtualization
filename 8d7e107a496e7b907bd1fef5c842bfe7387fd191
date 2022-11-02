@@ -16,6 +16,24 @@
       "message": "Can there be some explanation of the hacks and a linked bug so that it can be resolved at some point and the workaround reverted?",
       "revId": "8d7e107a496e7b907bd1fef5c842bfe7387fd191",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9696633_61177389",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1868610
+      },
+      "writtenOn": "2022-11-02T19:14:31Z",
+      "side": 1,
+      "message": "http://b/250854486 gives more details of the original issue raised. This fix was applied for my team (Haiku - Android fuzzing), our bug is: http://b/256166339.\n\nPlease read the comments http://b/250854486#comment14, http://b/250854486#comment15 and http://b/250854486#comment16 for more details of the issue my team faced.\n\nDescription of the hack: http://b/250854486#comment10\n\nThe long term fix is being tracked under http://b/254469782.",
+      "parentUuid": "835c5544_152aa709",
+      "revId": "8d7e107a496e7b907bd1fef5c842bfe7387fd191",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
