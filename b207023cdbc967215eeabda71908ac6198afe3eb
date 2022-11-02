@@ -45,6 +45,29 @@
       },
       "revId": "b207023cdbc967215eeabda71908ac6198afe3eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fdb238c_3aa30e3c",
+        "filename": "pvmfw/src/legacy.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-02T01:10:09Z",
+      "side": 1,
+      "message": "That\u0027s true in this CL but stops being true with the next one. I would expect you to unsafely create the `[pvmfw_end, 2MB_aligned_end)` slice in `main_wrapper()` (perhaps through an unsafe helper) and then try to parse it as either BCC or the new config format. Why not do that?",
+      "range": {
+        "startLine": 30,
+        "startChar": 20,
+        "endLine": 30,
+        "endChar": 72
+      },
+      "revId": "b207023cdbc967215eeabda71908ac6198afe3eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
