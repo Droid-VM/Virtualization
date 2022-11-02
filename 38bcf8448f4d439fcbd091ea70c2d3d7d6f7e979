@@ -16,6 +16,52 @@
       "message": "Hi Alice, Please take a look",
       "revId": "38bcf8448f4d439fcbd091ea70c2d3d7d6f7e979",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b03492ee_b58714b2",
+        "filename": "libs/apkverify/src/v3.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-02T08:59:21Z",
+      "side": 1,
+      "message": "Looks like this line doesn\u0027t compile. Can you check this line locally first? BTW, this is prod code and we need to make sure that the migration doesn\u0027t induce binary regression. So can we first migrate the changes in tests in this cl, then migrate all the usages in prod code while running the benchmark test before and after the change to evaluate the binary impact?",
+      "range": {
+        "startLine": 199,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 35
+      },
+      "revId": "38bcf8448f4d439fcbd091ea70c2d3d7d6f7e979",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63685727_46cb82f5",
+        "filename": "libs/apkverify/tests/apkverify_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-02T08:59:21Z",
+      "side": 1,
+      "message": "I don\u0027t think this will generate the same format as [1]. We want something like `\\\\x30\\\\x59` generate the reference file for new tests. Maybe it\u0027s better not to change this.\n\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/libs/apkverify/tests/data/README.md;drc\u003d676bb4aa418b4af820475d280ae19b3d394748b7",
+      "range": {
+        "startLine": 249,
+        "startChar": 0,
+        "endLine": 249,
+        "endChar": 32
+      },
+      "revId": "38bcf8448f4d439fcbd091ea70c2d3d7d6f7e979",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
