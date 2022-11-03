@@ -36,8 +36,12 @@ import com.android.tradefed.util.CommandResult;
 import com.android.tradefed.util.RunUtil;
 import com.android.virt.VirtualizationTestHelper;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
@@ -240,7 +244,17 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
         return pathLine.substring("package:".length());
     }
 
-    public static String startMicrodroid(
+    public static class VmInstance {
+        public Thread mThread;
+        public String mCid;
+
+        public VmInstance(Thread thread, String cid) {
+            mThread = thread;
+            mCid = cid;
+        }
+    }
+
+    public static VmInstance startMicrodroid(
             ITestDevice androidDevice,
             IBuildInfo buildInfo,
             String apkName,
@@ -249,12 +263,12 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
             boolean debug,
             int memoryMib,
             Optional<Integer> numCpus)
-            throws DeviceNotAvailableException {
+            throws Exception {
         return startMicrodroid(androidDevice, buildInfo, apkName, packageName, null, configPath,
                 debug, memoryMib, numCpus);
     }
 
-    public static String startMicrodroid(
+    public static VmInstance startMicrodroid(
             ITestDevice androidDevice,
             IBuildInfo buildInfo,
             String apkName,
@@ -264,7 +278,7 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
             boolean debug,
             int memoryMib,
             Optional<Integer> numCpus)
-            throws DeviceNotAvailableException {
+            throws Exception {
         return startMicrodroid(androidDevice, buildInfo, apkName, null, packageName,
                 extraIdsigPaths, configPath, debug,
                 memoryMib, numCpus);
@@ -281,7 +295,7 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
                         + " | sed \\'s/^/" + tag + ": /g\\''\""); // add tags in front of lines
     }
 
-    public static String startMicrodroid(
+    public static VmInstance startMicrodroid(
             ITestDevice androidDevice,
             IBuildInfo buildInfo,
             String apkName,
@@ -292,7 +306,7 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
             boolean debug,
             int memoryMib,
             Optional<Integer> numCpus)
-            throws DeviceNotAvailableException {
+            throws Exception {
         CommandRunner android = new CommandRunner(androidDevice);
 
         // Install APK if necessary
@@ -319,7 +333,6 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
         ArrayList<String> args = new ArrayList<>(Arrays.asList(
                 VIRT_APEX + "bin/vm",
                 "run-app",
-                "--daemonize",
                 "--log " + logPath,
                 "--console " + consolePath,
                 "--mem " + memoryMib,
@@ -335,12 +348,25 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
                 args.add(path);
             }
         }
-        String ret = android.run(args.toArray(new String[0]));
+
+        PipedInputStream pis = new PipedInputStream();
+        final PipedOutputStream pos = new PipedOutputStream(pis);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(pis));
+
+        Thread thread = new Thread(
+                () -> {
+                    try {
+                        android.runWithOutput(pos, args.toArray(new String[0]));
+                    } catch (Exception e) {
+                        // Consume
+                    }
+                });
+        thread.start();
 
         // Redirect log.txt and console.txt to logd using logwrapper
         // Keep redirecting as long as the expecting maximum test time. When an adb
         // command times out, it may trigger the device recovery process, which
-        // disconnect adb, which terminates any live adb commands. See an example at
+        // disconnects adb, which terminates any live adb commands. See an example at
         // b/194974010#comment25.
         ExecutorService executor = Executors.newFixedThreadPool(2);
         executor.execute(
@@ -361,19 +387,22 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
                     }
                 });
 
-        // Retrieve the CID from the vm tool output
+        String cid;
         Pattern pattern = Pattern.compile("with CID (\\d+)");
-        Matcher matcher = pattern.matcher(ret);
-        assertWithMessage("Failed to find CID").that(matcher.find()).isTrue();
-        return matcher.group(1);
+        while ((cid = reader.readLine()) != null) {
+            Matcher matcher = pattern.matcher(cid);
+            if (matcher.find()) {
+                cid = matcher.group(1);
+                break;
+            }
+        }
+        assertWithMessage("Failed to find CID").that(cid).isNotNull();
+        return new VmInstance(thread, cid);
     }
 
-    public static void shutdownMicrodroid(ITestDevice androidDevice, String cid)
-            throws DeviceNotAvailableException {
-        CommandRunner android = new CommandRunner(androidDevice);
-
+    public static void shutdownMicrodroid(ITestDevice androidDevice, VmInstance vm) {
         // Shutdown the VM
-        android.run(VIRT_APEX + "bin/vm", "stop", cid);
+        vm.mThread.stop();
     }
 
     public static void rootMicrodroid() throws InterruptedException {
