@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6998286_e8c13fc4",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-11-03T14:38:13Z",
+      "side": 1,
+      "message": "Or Barrier more directly captures the semantics, either achieves synchronization and I don\u0027t think you should need a timeout as the setup looks quite deterministic.\n\nOn the error case, you have to wait for the timeout even if it fails earlier. Maybe it\u0027s not a case to worry about.",
+      "parentUuid": "3ee7c868_cd57b7b8",
+      "range": {
+        "startLine": 110,
+        "startChar": 7,
+        "endLine": 110,
+        "endChar": 9
+      },
+      "revId": "623cc6e2b643efabe2729284d3530a40134d71a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "508bd8e9_888cd063",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 3
