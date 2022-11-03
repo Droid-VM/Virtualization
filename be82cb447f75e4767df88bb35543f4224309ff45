@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "daf627c8_dba7c88e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-03T14:01:49Z",
+      "side": 1,
+      "message": "Do we actually want to remove it, or just remove our dependence on it?\nIt\u0027s occasionally convenient.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 21
+      },
+      "revId": "be82cb447f75e4767df88bb35543f4224309ff45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ca370a94_ec14613e",
@@ -14,6 +37,98 @@
       "writtenOn": "2022-11-03T07:38:23Z",
       "side": 1,
       "message": "Awesome!",
+      "revId": "be82cb447f75e4767df88bb35543f4224309ff45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb3f4317_d8203814",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/CommandRunner.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-03T14:01:49Z",
+      "side": 1,
+      "message": "Doesn\u0027t need to be public?",
+      "range": {
+        "startLine": 53,
+        "startChar": 8,
+        "endLine": 53,
+        "endChar": 14
+      },
+      "revId": "be82cb447f75e4767df88bb35543f4224309ff45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "557fedea_4d718358",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/CommandRunner.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-03T14:01:49Z",
+      "side": 1,
+      "message": "Nit: Can we lose the final?",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 108,
+        "endChar": 13
+      },
+      "revId": "be82cb447f75e4767df88bb35543f4224309ff45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8554243_2759635a",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/CommandRunner.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-03T14:01:49Z",
+      "side": 1,
+      "message": "Ubernit: 2 spaces -\u003e 1",
+      "range": {
+        "startLine": 111,
+        "startChar": 32,
+        "endLine": 111,
+        "endChar": 34
+      },
+      "revId": "be82cb447f75e4767df88bb35543f4224309ff45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52ac88e6_cfb3b453",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/CommandRunner.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-03T14:01:49Z",
+      "side": 1,
+      "message": "Can we have full stack trace? Diagnosing our test failures is generally harder than it should be.\nAnd log at warning/error level",
+      "range": {
+        "startLine": 117,
+        "startChar": 62,
+        "endLine": 117,
+        "endChar": 77
+      },
       "revId": "be82cb447f75e4767df88bb35543f4224309ff45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
