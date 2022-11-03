@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8d14f651_c0052847",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-11-03T14:01:43Z",
+      "side": 1,
+      "message": "Does the binder library not handle the threads for you like it does with kernel binder? Is there a non-joining option when running the server?\n\nShould the error path also notify?",
+      "parentUuid": "73bd3927_69652fa3",
+      "range": {
+        "startLine": 110,
+        "startChar": 7,
+        "endLine": 110,
+        "endChar": 9
+      },
+      "revId": "623cc6e2b643efabe2729284d3530a40134d71a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "508bd8e9_888cd063",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 3

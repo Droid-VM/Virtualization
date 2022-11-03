@@ -34,6 +34,24 @@
       "parentUuid": "e7d27922_b41b0f2e",
       "revId": "d534ec1b9109817f192f1dcb5bb1aac665ba72ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73542167_c3756bbf",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-11-03T14:01:43Z",
+      "side": 0,
+      "message": "I don\u0027t think `ProcessState` would be right but I\u0027m not familiar with the threading model of RPC binder. You can always start single threaded.",
+      "parentUuid": "23a5b56b_cf836b86",
+      "revId": "d534ec1b9109817f192f1dcb5bb1aac665ba72ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
