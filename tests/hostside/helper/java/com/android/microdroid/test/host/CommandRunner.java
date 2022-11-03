@@ -26,6 +26,7 @@ import com.android.tradefed.log.LogUtil.CLog;
 import com.android.tradefed.util.CommandResult;
 import com.android.tradefed.util.CommandStatus;
 
+import java.io.OutputStream;
 import java.util.Arrays;
 
 import javax.annotation.Nonnull;
@@ -48,6 +49,14 @@ public class CommandRunner {
 
     public String run(String... cmd) throws DeviceNotAvailableException {
         CommandResult result = runForResult(cmd);
+        if (result.getStatus() != CommandStatus.SUCCESS) {
+            fail(join(cmd) + " has failed: " + result);
+        }
+        return result.getStdout().trim();
+    }
+
+    public String runWithOutput(OutputStream os, String... cmd) throws DeviceNotAvailableException {
+        CommandResult result = mDevice.executeShellV2Command(join(cmd), os);
         if (result.getStatus() != CommandStatus.SUCCESS) {
             fail(join(cmd) + " has failed: " + result);
         }
