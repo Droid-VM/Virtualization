@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "414b0280_6d6f5e2f",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-03T12:35:47Z",
+      "side": 1,
+      "message": "Are you sure you don\u0027t want `repr(C)`?",
+      "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "795d2435_87820bda",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-03T12:35:47Z",
+      "side": 1,
+      "message": "Is this really an integer, or would it make more sense for it to be a `[u8; 4]`?",
+      "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19e8e512_6edb4060",
         "filename": "pvmfw/src/config.rs",
         "patchSetId": 3
@@ -49,6 +83,74 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "539345ac_366f2685",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-03T12:35:47Z",
+      "side": 1,
+      "message": "Maybe we should also check that the entries don\u0027t overlap with each other?",
+      "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c0d792b_b576d1c3",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-03T12:35:47Z",
+      "side": 1,
+      "message": "What does the caller need to do to ensure that it is safe?",
+      "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "556ac6ba_08d742c5",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-03T12:35:47Z",
+      "side": 1,
+      "message": "`align_to_mut` doesn\u0027t guarantee that the middle slice will be as big as possible, so we probably shouldn\u0027t rely on that.",
+      "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92f8056b_d8ccf7d0",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-03T12:35:47Z",
+      "side": 1,
+      "message": "I think this would be clearer without using `filter` on the `Option`:\n\n```rust\nlet header \u003d headers.first_mut()?;\nif !header.is_valid(max_size) {\n  return None;\n}\n```\n\nIt\u0027s a little longer, but more obvious what you\u0027re doing.",
+      "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "87b645b5_ca818b10",
         "filename": "pvmfw/src/entry.rs",
         "patchSetId": 3
@@ -66,6 +168,86 @@
         "endLine": 89,
         "endChar": 22
       },
+      "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "552cc1ca_4a216a80",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-03T12:35:47Z",
+      "side": 1,
+      "message": "Why is this function unsafe? If add a Rustdoc comment explaining what the caller needs to ensure when calling it.",
+      "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed20d21f_02d21326",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-03T12:35:47Z",
+      "side": 1,
+      "message": "alignment",
+      "range": {
+        "startLine": 29,
+        "startChar": 37,
+        "endLine": 29,
+        "endChar": 47
+      },
+      "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0596c4c6_aeafb252",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-03T12:35:47Z",
+      "side": 1,
+      "message": "Perhaps `unchecked_align_up` would be a clearer name, an consistent with `unchecked_align_down`.",
+      "range": {
+        "startLine": 30,
+        "startChar": 13,
+        "endLine": 30,
+        "endChar": 28
+      },
+      "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e17e06b_40009698",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-03T12:35:47Z",
+      "side": 1,
+      "message": "If the address is already aligned this will do the wrong thing.",
       "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
