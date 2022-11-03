@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19e8e512_6edb4060",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-03T05:04:17Z",
+      "side": 1,
+      "message": "name your constants",
+      "range": {
+        "startLine": 30,
+        "startChar": 27,
+        "endLine": 30,
+        "endChar": 28
+      },
+      "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9e126be_6f4bad4b",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-03T05:04:17Z",
+      "side": 1,
+      "message": "suggestion: You could return `Result\u003c()\u003e`. That way you could add a reason why it failed, which I think we should print on UART.",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 49
+      },
+      "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87b645b5_ca818b10",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-03T05:04:17Z",
+      "side": 1,
+      "message": "Why not give the whole appended-data slice to `main()` and let it do the work?",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 22
+      },
+      "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
