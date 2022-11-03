@@ -17,6 +17,7 @@
 use crate::heap;
 use crate::helpers;
 use crate::mmio_guard;
+use crate::mmu;
 use core::arch::asm;
 use core::slice;
 use log::{debug, error, LevelFilter};
@@ -79,6 +80,23 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<(), R
         debug!("Failed to configure the UART: {e}");
         RebootReason::InternalError
     })?;
+
+    // Up to this point, we were using the built-in static (from .rodata) page tables.
+
+    let mut page_table = mmu::PageTable::from_static_layout().map_err(|e| {
+        error!("Failed to set up the dynamic page tables: {e}");
+        RebootReason::InternalError
+    })?;
+
+    let uart_range = console::BASE_ADDRESS..(console::BASE_ADDRESS + 6);
+    page_table.map_device(uart_range).map_err(|e| {
+        error!("Failed to remap the UART as a dynamic page table entry: {e}");
+        RebootReason::InternalError
+    })?;
+
+    debug!("Activating dynamic page table...");
+    unsafe { page_table.activate() };
+    debug!("... Success!");
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
     crate::main(fdt, payload);
