@@ -26,7 +26,9 @@ use anyhow::{anyhow, Result};
 use binder::{ParcelFileDescriptor, ThreadState};
 use log::{trace, warn};
 use microdroid_payload_config::VmPayloadConfig;
-use statslog_virtualization_rust::{vm_booted, vm_creation_requested, vm_exited};
+use statslog_virtualization_rust::{
+    vm_booted, vm_creation_requested, vm_exited, vm_status_reported,
+};
 use std::time::{Duration, SystemTime};
 use zip::ZipArchive;
 
@@ -200,6 +202,29 @@ pub fn write_vm_exited_stats(
         },
     };
     match vm_exited.stats_write() {
+        Err(e) => {
+            warn!("statslog_rust failed with error: {}", e);
+        }
+        Ok(_) => trace!("statslog_rust succeeded for virtualization service"),
+    }
+}
+
+/// Write the stats of VM memory status to statsd
+pub fn write_vm_status_stats(
+    uid: i32,
+    vm_identifier: &String,
+    guest_time: Option<i64>,
+    rss_vm: Option<i64>,
+    rss_crosvm: Option<i64>,
+) {
+    let vm_status_reported = vm_status_reported::VmStatusReported {
+        uid,
+        vm_identifier,
+        guest_time_millis: guest_time.unwrap_or(0i64),
+        rss_vm_kb: rss_vm.unwrap_or(0i64),
+        rss_crosvm_kb: rss_crosvm.unwrap_or(0i64),
+    };
+    match vm_status_reported.stats_write() {
         Err(e) => {
             warn!("statslog_rust failed with error: {}", e);
         }
