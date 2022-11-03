@@ -17,6 +17,7 @@
 use crate::heap;
 use crate::helpers;
 use crate::mmio_guard;
+use crate::mmu;
 use core::arch::asm;
 use core::slice;
 use log::{debug, error, LevelFilter};
@@ -57,7 +58,7 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<(), R
     // SAFETY - This function should and will only be called once, here.
     unsafe { heap::init() };
 
-    logger::init(LevelFilter::Info).map_err(|_| RebootReason::InternalError)?;
+    logger::init(LevelFilter::Debug).map_err(|_| RebootReason::InternalError)?;
 
     const FDT_MAX_SIZE: usize = helpers::SIZE_2MB;
     // TODO: Check that the FDT is fully contained in RAM.
@@ -77,6 +78,18 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<(), R
 
     mmio_guard::map(console::BASE_ADDRESS).map_err(|e| {
         debug!("Failed to configure the UART: {e}");
+        RebootReason::InternalError
+    })?;
+
+    // Up to this point, we were using the built-in static (from .rodata) page tables.
+
+    let mut idmap = mmu::create_dynamic_table().map_err(|e| {
+        error!("Failed to set up the dynamic page tables: {e}");
+        RebootReason::InternalError
+    })?;
+
+    mmu::map_page(&mut idmap, console::BASE_ADDRESS, mmu::DEVICE).map_err(|e| {
+        debug!("Failed to remap the UART as a dynamic page table entry: {e}");
         RebootReason::InternalError
     })?;
 

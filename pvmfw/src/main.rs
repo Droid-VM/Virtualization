@@ -24,6 +24,7 @@ mod exceptions;
 mod heap;
 mod helpers;
 mod mmio_guard;
+mod mmu;
 mod smccc;
 
 use avb::PUBLIC_KEY;
@@ -31,11 +32,12 @@ use log::{debug, info};
 
 fn main(fdt: &mut [u8], payload: &[u8]) {
     info!("pVM firmware");
+    debug!("FDT@{:?}: magic={:#x}", fdt.as_ptr(), u32::from_be_bytes(fdt[..4].try_into().unwrap()));
     debug!(
-        "fdt_address={:#018x}, payload_start={:#018x}, payload_size={:#018x}",
-        fdt.as_ptr() as usize,
-        payload.as_ptr() as usize,
+        "Payload@{:?} ({:#x} bytes): magic={:#x}",
+        payload.as_ptr(),
         payload.len(),
+        u32::from_le_bytes(payload[56..60].try_into().unwrap())
     );
     debug!("AVB public key: addr={:?}, size={:#x} ({1})", PUBLIC_KEY.as_ptr(), PUBLIC_KEY.len());
     info!("Starting payload...");
