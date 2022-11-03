@@ -34,6 +34,7 @@ import android.cts.statsdatom.lib.ReportUtils;
 import com.android.compatibility.common.util.CddTest;
 import com.android.microdroid.test.common.ProcessUtil;
 import com.android.microdroid.test.host.CommandRunner;
+import com.android.microdroid.test.host.CommandRunner.BackgroundCommand;
 import com.android.microdroid.test.host.MicrodroidHostTestCaseBase;
 import com.android.os.AtomsProto;
 import com.android.os.StatsLog;
@@ -41,6 +42,7 @@ import com.android.tradefed.device.DeviceNotAvailableException;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner.TestMetrics;
 import com.android.tradefed.util.CommandResult;
+import com.android.tradefed.util.CommandStatus;
 import com.android.tradefed.util.FileUtil;
 import com.android.tradefed.util.RunUtil;
 import com.android.tradefed.util.xml.AbstractXmlParser;
@@ -262,7 +264,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         return new ActiveApexInfoList(list);
     }
 
-    private String runMicrodroidWithResignedImages(
+    private VmInstance runMicrodroidWithResignedImages(
             File key,
             Map<String, File> keyOverrides,
             boolean isProtected,
@@ -372,18 +374,28 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         getDevice().pushString(config.toString(), configPath);
 
         final String logPath = LOG_PATH;
-        final String ret =
-                android.runWithTimeout(
-                        60 * 1000,
-                        VIRT_APEX + "bin/vm run",
-                        daemonize ? "--daemonize" : "",
-                        (consolePath != null) ? "--console " + consolePath : "",
-                        "--log " + logPath,
-                        configPath);
+        BackgroundCommand bgCmd = android.runInBackground(
+                VIRT_APEX + "bin/vm run",
+                (consolePath != null) ? "--console " + consolePath : "",
+                "--log " + logPath,
+                configPath);
+
+        String cid;
         Pattern pattern = Pattern.compile("with CID (\\d+)");
-        Matcher matcher = pattern.matcher(ret);
-        assertWithMessage("Failed to find CID").that(matcher.find()).isTrue();
-        return matcher.group(1);
+        while ((cid = bgCmd.mStdout.readLine()) != null) {
+            Matcher matcher = pattern.matcher(cid);
+            if (matcher.find()) {
+                cid = matcher.group(1);
+                break;
+            }
+        }
+        assertWithMessage("Failed to find CID").that(cid).isNotNull();
+
+        if (!daemonize) {
+            CommandStatus status = bgCmd.mStatus.get();
+            assertWithMessage("Failed to run VM").that(status).isEqualTo(CommandStatus.SUCCESS);
+        }
+        return new VmInstance(bgCmd, cid);
     }
 
     @Test
@@ -414,12 +426,12 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         boolean isProtected = false;
         boolean daemonize = true;
         String consolePath = TEST_ROOT + "console";
-        String cid =
+        VmInstance vm =
                 runMicrodroidWithResignedImages(
                         key, keyOverrides, isProtected, daemonize, consolePath);
         // Adb connection to the microdroid means that boot succeeded.
-        adbConnectToMicrodroid(getDevice(), cid);
-        shutdownMicrodroid(getDevice(), cid);
+        adbConnectToMicrodroid(getDevice(), vm);
+        shutdownMicrodroid(getDevice(), vm);
     }
 
     @Test
@@ -433,7 +445,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         boolean daemonize = true; // Bootloader fails and enters prompts.
         // To be able to stop it, it should be a daemon.
         String consolePath = TEST_ROOT + "console";
-        String cid =
+        VmInstance vm =
                 runMicrodroidWithResignedImages(
                         key, keyOverrides, isProtected, daemonize, consolePath);
         // Wait so that init can print errors to console (time in cuttlefish >> in real device)
@@ -441,22 +453,21 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                 100000,
                 () -> getDevice().pullFileContents(consolePath),
                 containsString("init: [libfs_avb]Failed to verify vbmeta digest"));
-        shutdownMicrodroid(getDevice(), cid);
+        shutdownMicrodroid(getDevice(), vm);
     }
 
     private boolean isTombstoneGeneratedWithConfig(String configPath) throws Exception {
         // Note this test relies on logcat values being printed by tombstone_transmit on
         // and the reeceiver on host (virtualization_service)
-        final String cid =
-                startMicrodroid(
-                        getDevice(),
-                        getBuild(),
-                        APK_NAME,
-                        PACKAGE_NAME,
-                        configPath,
-                        /* debug */ true,
-                        minMemorySize(),
-                        Optional.of(NUM_VCPUS));
+        startMicrodroid(
+                getDevice(),
+                getBuild(),
+                APK_NAME,
+                PACKAGE_NAME,
+                configPath,
+                /* debug */ true,
+                minMemorySize(),
+                Optional.of(NUM_VCPUS));
         // check until microdroid is shut down
         CommandRunner android = new CommandRunner(getDevice());
         android.runWithTimeout(15000, "logcat", "-m", "1", "-e", "'crosvm has exited normally'");
@@ -500,7 +511,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
         // Create VM with microdroid
         final String configPath = "assets/vm_config_apex.json"; // path inside the APK
-        final String cid =
+        final VmInstance vm =
                 startMicrodroid(
                         getDevice(),
                         getBuild(),
@@ -533,7 +544,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                 .isEqualTo("com.android.art:com.android.compos:com.android.sdkext");
 
         // Boot VM with microdroid
-        adbConnectToMicrodroid(getDevice(), cid);
+        adbConnectToMicrodroid(getDevice(), vm);
         waitForBootComplete();
 
         // Check VmBooted atom and clear the statsd report
@@ -545,7 +556,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         assertThat(atomVmBooted.getVmIdentifier()).isEqualTo("VmRunApp");
 
         // Shutdown VM with microdroid
-        shutdownMicrodroid(getDevice(), cid);
+        shutdownMicrodroid(getDevice(), vm);
         // TODO: make sure the VM is completely shut down while 'vm stop' command running.
         Thread.sleep(1000);
 
@@ -580,7 +591,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
         // Create VM with microdroid
         final String configPath = "assets/vm_config_apex.json"; // path inside the APK
-        final String cid =
+        final VmInstance vm =
                 startMicrodroid(
                         getDevice(),
                         getBuild(),
@@ -592,7 +603,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         Optional.of(NUM_VCPUS));
 
         // Boot VM with microdroid
-        adbConnectToMicrodroid(getDevice(), cid);
+        adbConnectToMicrodroid(getDevice(), vm);
         waitForBootComplete();
 
         // Check VmCpuStatusReported and VmMemStatusReported atoms and clear the statsd report
@@ -605,14 +616,14 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                 .isEqualTo(AtomsProto.Atom.VM_MEM_STATUS_REPORTED_FIELD_NUMBER);
 
         // Shutdown VM with microdroid
-        shutdownMicrodroid(getDevice(), cid);
+        shutdownMicrodroid(getDevice(), vm);
     }
 
     @Test
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-1-2", "9.17/C/1-3"})
     public void testMicrodroidBoots() throws Exception {
         final String configPath = "assets/vm_config.json"; // path inside the APK
-        final String cid =
+        final VmInstance vm =
                 startMicrodroid(
                         getDevice(),
                         getBuild(),
@@ -622,7 +633,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         /* debug */ true,
                         minMemorySize(),
                         Optional.of(NUM_VCPUS));
-        adbConnectToMicrodroid(getDevice(), cid);
+        adbConnectToMicrodroid(getDevice(), vm);
         waitForBootComplete();
         // Test writing to /data partition
         runOnMicrodroid("echo MicrodroidTest > /data/local/tmp/test.txt");
@@ -679,13 +690,13 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                     .isSuccess();
         }
 
-        shutdownMicrodroid(getDevice(), cid);
+        shutdownMicrodroid(getDevice(), vm);
     }
 
     @Test
     public void testMicrodroidRamUsage() throws Exception {
         final String configPath = "assets/vm_config.json";
-        final String cid =
+        final VmInstance vm =
                 startMicrodroid(
                         getDevice(),
                         getBuild(),
@@ -695,7 +706,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         /* debug */ true,
                         minMemorySize(),
                         Optional.of(NUM_VCPUS));
-        adbConnectToMicrodroid(getDevice(), cid);
+        adbConnectToMicrodroid(getDevice(), vm);
         waitForBootComplete();
         rootMicrodroid();
 
@@ -718,7 +729,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
             }
         }
 
-        shutdownMicrodroid(getDevice(), cid);
+        shutdownMicrodroid(getDevice(), vm);
     }
 
     @Test

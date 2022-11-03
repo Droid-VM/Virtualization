@@ -26,7 +26,15 @@ import com.android.tradefed.log.LogUtil.CLog;
 import com.android.tradefed.util.CommandResult;
 import com.android.tradefed.util.CommandStatus;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
 import java.util.Arrays;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import javax.annotation.Nonnull;
 
@@ -37,6 +45,16 @@ public class CommandRunner {
     private static final long DEFAULT_TIMEOUT = 30000;
 
     private ITestDevice mDevice;
+
+    public static class BackgroundCommand {
+        public final Future<CommandStatus> mStatus;
+        public final BufferedReader mStdout;
+
+        public BackgroundCommand(Future<CommandStatus> status, BufferedReader stdout) {
+            mStatus = status;
+            mStdout = stdout;
+        }
+    }
 
     public CommandRunner(@Nonnull ITestDevice device) {
         mDevice = device;
@@ -83,6 +101,24 @@ public class CommandRunner {
 
     public CommandResult runForResult(String... cmd) throws DeviceNotAvailableException {
         return mDevice.executeShellV2Command(join(cmd));
+    }
+
+    public BackgroundCommand runInBackground(String... cmd) throws IOException {
+        PipedInputStream pis = new PipedInputStream();
+        final PipedOutputStream pos = new PipedOutputStream(pis);
+        BufferedReader stdout = new BufferedReader(new InputStreamReader(pis));
+
+        ExecutorService executor  = Executors.newSingleThreadExecutor();
+        Future<CommandStatus> status = executor.submit(
+                () -> {
+                    try {
+                        return mDevice.executeShellV2Command(join(cmd), pos).getStatus();
+                    } catch (Exception ex) {
+                        CLog.d(join(cmd) + " failed with: " + ex.getMessage());
+                        return CommandStatus.EXCEPTION;
+                    }
+                });
+        return new BackgroundCommand(status, stdout);
     }
 
     public void assumeSuccess(String... cmd) throws DeviceNotAvailableException {
