@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ee7c868_cd57b7b8",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-03T14:20:00Z",
+      "side": 1,
+      "message": "I don\u0027t think rpcbinder handles thread. For run_vsock_rpc_server, most callers invoke the method in a separate process and don\u0027t have anything running after it[1].\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/authfs/fd_server/src/main.rs;l\u003d140;drc\u003d86c88cc6b840f7030854627d407f2529af424354\n\n\n---\nThe error path in line 121? We can only reach here before the callback l112-l116 gets invoked, then the success status will be false. That will lead to the bail in l133.\n\nOtherwise, I think the code looks cleaner if we use channel here instead of condval, wdyt?",
+      "parentUuid": "8d14f651_c0052847",
+      "range": {
+        "startLine": 110,
+        "startChar": 7,
+        "endLine": 110,
+        "endChar": 9
+      },
+      "revId": "623cc6e2b643efabe2729284d3530a40134d71a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "508bd8e9_888cd063",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 3
