@@ -16,6 +16,52 @@
       "message": "Hey, this doesn\u0027t remove --daemonize from ITestDevice but please let me know what you think about this. `Thread.stop()` is deprecated but I don\u0027t know how to make it any nicer.",
       "revId": "6cabc4b6183efb42fd136a8df1a7d85e97d0cbf9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1137aed9_f8a317b9",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-03T05:40:56Z",
+      "side": 1,
+      "message": "nit: add `final`",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 249,
+        "endChar": 27
+      },
+      "revId": "6cabc4b6183efb42fd136a8df1a7d85e97d0cbf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff658864_052fabc9",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-03T05:40:56Z",
+      "side": 1,
+      "message": "I think this pattern is repeated at least twice. Consider having a wrapper like\n\n`InputStream runInBackground(...)`",
+      "range": {
+        "startLine": 382,
+        "startChar": 0,
+        "endLine": 406,
+        "endChar": 9
+      },
+      "revId": "6cabc4b6183efb42fd136a8df1a7d85e97d0cbf9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
