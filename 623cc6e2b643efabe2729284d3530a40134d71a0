@@ -120,6 +120,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "603ce02c_ede71500",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-03T15:07:22Z",
+      "side": 1,
+      "message": "Ack.\n\n\u003e On the error case, you have to wait for the timeout even if it fails earlier.\n\nWe can drop the sender in the error path then the receiver doesn\u0027t need to wait for the whole timeout, but I\u0027m not sure if that\u0027s really a gain here for a timeout of 200ms.",
+      "parentUuid": "c6998286_e8c13fc4",
+      "range": {
+        "startLine": 110,
+        "startChar": 7,
+        "endLine": 110,
+        "endChar": 9
+      },
+      "revId": "623cc6e2b643efabe2729284d3530a40134d71a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "508bd8e9_888cd063",
