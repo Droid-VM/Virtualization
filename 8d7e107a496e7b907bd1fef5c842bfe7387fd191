@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e08d4778_44fc96e7",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-03T10:25:48Z",
+      "side": 1,
+      "message": "The crash of yesterday was with address.  `SANITIZE_TARGET\u003daddress m example_fuzzer` reproduces.\n\nThe error we got with the bug was with hwaddress. Considering that there are other types of sanitizers[1] and the current logic always has the bug of lib name confict. We might still hit other similar crashes.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:build/soong/cc/sanitize.go;l\u003d831;drc\u003db45a2ea782074944f79fc388df20b06e01f265f7",
+      "parentUuid": "3ea815bb_476a19c8",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 15
+      },
+      "revId": "8d7e107a496e7b907bd1fef5c842bfe7387fd191",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "835c5544_152aa709",
         "filename": "microdroid/vm_payload/Android.bp",
         "patchSetId": 2
