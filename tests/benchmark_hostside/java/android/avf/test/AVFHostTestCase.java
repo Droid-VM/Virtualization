@@ -217,8 +217,6 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
     private void getAppStartupTime(String pkgName, StartupTimeMetricCollection metricColector)
             throws Exception {
         final String configPath = "assets/vm_config.json";
-        final String cid;
-        final int vm_mem_mb;
 
         // 1. Reboot the device to run the test without stage2 fragmentation
         getDevice().rebootUntilOnline();
@@ -240,8 +238,8 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
         android.tryRun("rm", "-rf", MicrodroidHostTestCaseBase.TEST_ROOT);
 
         // Donate 80% of the available device memory to the VM
-        vm_mem_mb = getFreeMemoryInfoMb(android) * 80 / 100;
-        cid = startMicrodroid(
+        final int vm_mem_mb = getFreeMemoryInfoMb(android) * 80 / 100;
+        VmInstance vm = startMicrodroid(
                             getDevice(),
                             getBuild(),
                             APK_NAME,
@@ -250,7 +248,7 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
                             true,
                             vm_mem_mb,
                             Optional.of(NUM_VCPUS));
-        adbConnectToMicrodroid(getDevice(), cid);
+        adbConnectToMicrodroid(getDevice(), vm);
         microdroidWaitForBootComplete();
 
         rootMicrodroid();
@@ -273,7 +271,7 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
             metricColector.addStartupTimeMetricDuringVmRun(duringVmStartApp);
         }
 
-        shutdownMicrodroid(getDevice(), cid);
+        shutdownMicrodroid(getDevice(), vm);
 
         // Run the app after the VM run and collect cold startup time.
         for (int i = 0; i < ROUND_COUNT; i++) {
