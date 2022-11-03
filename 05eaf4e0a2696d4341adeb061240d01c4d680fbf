@@ -64,6 +64,29 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0574b683_24610fe8",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-03T05:25:10Z",
+      "side": 1,
+      "message": "Btw, `static_assertions` crate is being imported in b/257108407. That might make things easier for you here.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 27
+      },
+      "revId": "05eaf4e0a2696d4341adeb061240d01c4d680fbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b93dbd0b_21ddb39d",
