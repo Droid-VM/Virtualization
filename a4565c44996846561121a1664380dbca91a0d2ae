@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "52811bfd_263c758e",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-04T09:43:42Z",
+      "side": 1,
+      "message": "It\u0027s the socket name of the service, maybe call it `VM_PAYLOAD_SERVICE_SOCKET_NAME`?",
+      "parentUuid": "28845ca4_a1e7bb2d",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 64
+      },
+      "revId": "a4565c44996846561121a1664380dbca91a0d2ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8af86f1c_57a71c7a",
         "filename": "microdroid_manager/microdroid_manager.rc",
         "patchSetId": 7
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-03T17:16:24Z",
       "side": 1,
       "message": "Do you need the +listen?\nprng_seeder did - to allow connections to start to be made before the process really gets started, I think - but I think we can do the listen ourselves.",
+      "range": {
+        "startLine": 9,
+        "startChar": 36,
+        "endLine": 9,
+        "endChar": 43
+      },
+      "revId": "a4565c44996846561121a1664380dbca91a0d2ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "943934f9_6bbc1069",
+        "filename": "microdroid_manager/microdroid_manager.rc",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-04T09:43:42Z",
+      "side": 1,
+      "message": "I can implement this one in the new API. I listen just to reuse the existing code in CreateSocket() to avoid duplicating it in rpcbinder.",
+      "parentUuid": "8af86f1c_57a71c7a",
       "range": {
         "startLine": 9,
         "startChar": 36,
