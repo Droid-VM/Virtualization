@@ -33,6 +33,24 @@
       "message": "I find the AuthFsTestRule very confusing. Why are so many of the members static? (That doesn\u0027t seem to be documented.)\n\nI know we only ever have one instance, but that\u0027s isn\u0027t a particularly good reason to use a Monostate.\n\nSo maybe we should fix it the other way, by making the members non-static.",
       "revId": "bb6a3a384107d5995b5e94111a8eac283e66f35e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfe3e357_5d8ce8f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-04T16:28:08Z",
+      "side": 1,
+      "message": "AuthFsTestRule actually extracts the authfs tests setup/teardown part. The Host test did part of the setup inside a class setup and part as test setup, so when I extract a rule I preserved this[1]. Now the rule is used in both benchmark test and host test and the setup is a bit different. How would you like to improve it?\n\n[1] https://r.android.com/2162318",
+      "parentUuid": "f990e80c_bc7ac7de",
+      "revId": "bb6a3a384107d5995b5e94111a8eac283e66f35e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
