@@ -22,6 +22,30 @@
       },
       "revId": "7075a223e8feda2f68b77cbc70aee437c2c0443b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8e88541_73f950b4",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-04T17:30:26Z",
+      "side": 1,
+      "message": "But this is necessary to allow the compos clients to reference it, otherwise they can\u0027t build.\n(They only need the stubs, and bindgen, not the actual implementation. But those seem to have the same name?)",
+      "parentUuid": "61967f49_8b2b9f1d",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 6
+      },
+      "revId": "7075a223e8feda2f68b77cbc70aee437c2c0443b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
