@@ -122,11 +122,9 @@ public class AuthFsBenchmarks extends BaseHostJUnit4Test {
     private void readRemoteFile(String mode) throws DeviceNotAvailableException {
         pushMeasureIoBinToMicrodroid();
         // Cache the file in memory for the host.
-        mAuthFsTestRule
-                .getAndroid()
-                .run("cat " + mAuthFsTestRule.TEST_DIR + "/input.4m > /dev/null");
+        AuthFsTestRule.getAndroid().run("cat " + AuthFsTestRule.TEST_DIR + "/input.4m > /dev/null");
 
-        String filePath = mAuthFsTestRule.MOUNT_DIR + "/3";
+        String filePath = AuthFsTestRule.MOUNT_DIR + "/3";
         int fileSizeMb = 4;
         String cmd = MEASURE_IO_BIN_PATH + " " + filePath + " " + fileSizeMb + " " + mode + " r";
         List<Double> rates = new ArrayList<>(TRIAL_COUNT);
@@ -135,7 +133,7 @@ public class AuthFsBenchmarks extends BaseHostJUnit4Test {
                     "--open-ro 3:input.4m --open-ro 4:input.4m.fsv_meta", "--ro-fds 3:4");
             mAuthFsTestRule.runAuthFsOnMicrodroid("--remote-ro-file 3:" + DIGEST_4M);
 
-            String rate = mAuthFsTestRule.getMicrodroid().run(cmd);
+            String rate = AuthFsTestRule.getMicrodroid().run(cmd);
             rates.add(Double.parseDouble(rate));
         }
         reportMetrics(rates, mode + "_read", "mb_per_sec");
@@ -143,16 +141,16 @@ public class AuthFsBenchmarks extends BaseHostJUnit4Test {
 
     private void writeRemoteFile(String mode) throws DeviceNotAvailableException {
         pushMeasureIoBinToMicrodroid();
-        String filePath = mAuthFsTestRule.MOUNT_DIR + "/5";
+        String filePath = AuthFsTestRule.MOUNT_DIR + "/5";
         int fileSizeMb = 8;
         String cmd = MEASURE_IO_BIN_PATH + " " + filePath + " " + fileSizeMb + " " + mode + " w";
         List<Double> rates = new ArrayList<>(TRIAL_COUNT);
         for (int i = 0; i < TRIAL_COUNT + 1; ++i) {
             mAuthFsTestRule.runFdServerOnAndroid(
-                    "--open-rw 5:" + mAuthFsTestRule.TEST_OUTPUT_DIR + "/out.file", "--rw-fds 5");
+                    "--open-rw 5:" + AuthFsTestRule.TEST_OUTPUT_DIR + "/out.file", "--rw-fds 5");
             mAuthFsTestRule.runAuthFsOnMicrodroid("--remote-new-rw-file 5");
 
-            String rate = mAuthFsTestRule.getMicrodroid().run(cmd);
+            String rate = AuthFsTestRule.getMicrodroid().run(cmd);
             rates.add(Double.parseDouble(rate));
         }
         reportMetrics(rates, mode + "_write", "mb_per_sec");
@@ -161,8 +159,8 @@ public class AuthFsBenchmarks extends BaseHostJUnit4Test {
     private void pushMeasureIoBinToMicrodroid() throws DeviceNotAvailableException {
         File measureReadBin = mAuthFsTestRule.findTestFile(getBuild(), MEASURE_IO_BIN_NAME);
         assertThat(measureReadBin.exists()).isTrue();
-        mAuthFsTestRule.getMicrodroidDevice().pushFile(measureReadBin, MEASURE_IO_BIN_PATH);
-        assertThat(mAuthFsTestRule.getMicrodroid().run("ls " + MEASURE_IO_BIN_PATH))
+        AuthFsTestRule.getMicrodroidDevice().pushFile(measureReadBin, MEASURE_IO_BIN_PATH);
+        assertThat(AuthFsTestRule.getMicrodroid().run("ls " + MEASURE_IO_BIN_PATH))
                 .isEqualTo(MEASURE_IO_BIN_PATH);
     }
 
