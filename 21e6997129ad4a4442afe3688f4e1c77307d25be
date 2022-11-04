@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "714f51ef_82ebc8cd",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-04T17:27:05Z",
+      "side": 1,
+      "message": "That might cause some confusion, since VMM already has an sInstances, which is about managing instances of VMM (since there can be one per context).\n\nTBH I don\u0027t have a problem with the current structure - VMM is the public interface, but it delegates most of the VM creation flow to the VM class.\n\nBut anyway, yeah, orthogonal to this CL I think.",
+      "parentUuid": "9027d5db_c87e7a81",
+      "range": {
+        "startLine": 101,
+        "startChar": 3,
+        "endLine": 103,
+        "endChar": 0
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d752618b_c1f44b43",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21070b4c_562baf99",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-04T17:27:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d752618b_c1f44b43",
+      "range": {
+        "startLine": 462,
+        "startChar": 5,
+        "endLine": 462,
+        "endChar": 6
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18060f89_c3fa5c5e",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-10-21T18:02:38Z",
       "side": 1,
       "message": "nit: it\u0027s a little bit confusing for getConsoleOutputStream to return an InputStream :) How about just getConsoleStream?",
+      "range": {
+        "startLine": 648,
+        "startChar": 23,
+        "endLine": 648,
+        "endChar": 45
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1988575c_83101228",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-04T17:27:05Z",
+      "side": 1,
+      "message": "Well, I agree, but it is how you get to see the console output (and getConsoleStream suggests bidirectionality?).\nMaybe getConsoleOutput()?",
+      "parentUuid": "18060f89_c3fa5c5e",
       "range": {
         "startLine": 648,
         "startChar": 23,
@@ -133,6 +205,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77341207_63421f2f",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-04T17:27:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cbb4f1e_8dca5b40",
+      "range": {
+        "startLine": 734,
+        "startChar": 11,
+        "endLine": 734,
+        "endChar": 35
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e45e9fc_83783b59",
@@ -146,6 +242,30 @@
       "writtenOn": "2022-10-21T18:02:38Z",
       "side": 1,
       "message": "nit: extra t :)",
+      "range": {
+        "startLine": 211,
+        "startChar": 15,
+        "endLine": 211,
+        "endChar": 19
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11cfe5c1_4de0a670",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-04T17:27:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e45e9fc_83783b59",
       "range": {
         "startLine": 211,
         "startChar": 15,
@@ -181,6 +301,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6b76650_ae0c7a69",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-04T17:27:05Z",
+      "side": 1,
+      "message": "Done for the setters.\nI haven\u0027t specified an upper limit, since \"it depends\".\nDo we normally do one for the getters too?",
+      "parentUuid": "effb8323_e2eff9f8",
+      "range": {
+        "startLine": 250,
+        "startChar": 15,
+        "endLine": 250,
+        "endChar": 27
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b4344bb_e7cb79f7",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 23
@@ -192,6 +336,30 @@
       "writtenOn": "2022-10-21T18:02:38Z",
       "side": 1,
       "message": "Please update the javadoc here. What does \"context (APK)\" mean? :)",
+      "range": {
+        "startLine": 336,
+        "startChar": 9,
+        "endLine": 336,
+        "endChar": 57
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bb3cf41_7b8edae1",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-04T17:27:05Z",
+      "side": 1,
+      "message": "I deleted \"(APK)\".\nI\u0027m actually unsure what to do here. We only use the context to provide a helpful default for apkPath; perhaps we could just require that - although it\u0027s a tiny bit more work for the caller, and getPackageCodePath() has a comment saying apps shouldn\u0027t generally use it.",
+      "parentUuid": "6b4344bb_e7cb79f7",
       "range": {
         "startLine": 336,
         "startChar": 9,
@@ -227,6 +395,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1945193_21cc22f1",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-04T17:27:05Z",
+      "side": 1,
+      "message": "The guidelines say \"All arguments to builder constructors must be required\", not \"All required fields must be constructor arguments\".\n\nsetPayloadBinaryPath is also required, at least for priv app clients. I\u0027m slightly reluctant to treat protectedVm more specially than we already do.\n\nOmitting setProtected is something clients should only do once (and only if they don\u0027t look at the sample code). We did have some feedback on this, addressed by clarifying the message. (aosp/2265467)",
+      "parentUuid": "dd09ecf8_4b783e3d",
+      "range": {
+        "startLine": 442,
+        "startChar": 8,
+        "endLine": 442,
+        "endChar": 60
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "142d2572_ddee6833",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
         "patchSetId": 23
@@ -238,6 +430,30 @@
       "writtenOn": "2022-10-21T18:02:38Z",
       "side": 1,
       "message": "We should add more content to this javadoc :)",
+      "range": {
+        "startLine": 37,
+        "startChar": 3,
+        "endLine": 37,
+        "endChar": 69
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "276a6dd5_9cbcd9ae",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-04T17:27:05Z",
+      "side": 1,
+      "message": "Nah, this is fine ;-)\n\nI added a bunch of words here and on VirtualMachine. WDYT?",
+      "parentUuid": "142d2572_ddee6833",
       "range": {
         "startLine": 37,
         "startChar": 3,
