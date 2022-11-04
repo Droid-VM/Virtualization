@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42acc593_7d6f353f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-04T10:28:07Z",
+      "side": 1,
+      "message": "The comment applies to other places where we do `new VirtualMachineException(e)`. But feel free to ignore or address later because this doesn\u0027t affect the api signature.",
+      "revId": "34a0da00ede247266fcf4f8acc4671d11904cdf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a637fd9_64583d0a",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-04T10:28:07Z",
+      "side": 1,
+      "message": "not sure if we want to give more context like `new VirtualMachineException(\"Failed to create stream\", e)`.",
+      "range": {
+        "startLine": 590,
+        "startChar": 45,
+        "endLine": 590,
+        "endChar": 47
+      },
+      "revId": "34a0da00ede247266fcf4f8acc4671d11904cdf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
