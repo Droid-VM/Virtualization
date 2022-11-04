@@ -18,15 +18,23 @@ repo sync
 
 For ARM64
 ```bash
-FAST_BUILD=1 BUILD_CONFIG=common-modules/virtual-device/build.config.microdroid.aarch64 build/build.sh
+tools/bazel clean
+tools/bazel run --config=fast --lto=thin //common-modules/virtual-device:microdroid_aarch64_dist -- --dist_dir=out/dis
 ```
 
 For x86\_64,
 ```bash
-FAST_BUILD=1 BUILD_CONFIG=common-modules/virtual-device/build.config.microdroid.x86_64 build/build.sh
+tools/bazel run --config=fast --lto=thin //common-modules/virtual-device:microdroid_x86_64_dist -- --dist_dir=out/dis
 ```
 
-Note that `FAST_BUILD=1` is not mandatory, but will make your build much faster.
+Note that `--config=fast` is not mandatory, but will make your build much faster.
+
+The build may fail in case you are doing an incremental build and the config has changed (b/257288175). Until that issue
+is fixed, do the clean build by invoking `tools/bazel clean` before the build command.
+
+### Change the kernel configs
+
+
 
 ## How to update Microdroid kernel prebuilts
 
@@ -36,12 +44,12 @@ Copy the built kernel image to the Android source tree directly, and build the v
 
 For ARM64,
 ```bash
-cp out/android14-5.15/dist/Image <android_checkout>/packages/modules/Virtualization/microdroid/kernel/arm64/kernel-5.15
+cp out/dist/Image <android_checkout>/packages/modules/Virtualization/microdroid/kernel/arm64/kernel-5.15
 ```
 
 For x86\_64,
 ```bash
-cp out/android14-5.15/dist/bzImage <android_checkout>/packages/modules/Virtualization/microdroid/kernel/arm64/kernel-5.15
+cp out/dist/bzImage <android_checkout>/packages/modules/Virtualization/microdroid/kernel/arm64/kernel-5.15
 ```
 
 ### For official updates
