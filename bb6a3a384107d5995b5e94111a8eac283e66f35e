@@ -16,6 +16,23 @@
       "message": "Hi Alan, PTAL.",
       "revId": "bb6a3a384107d5995b5e94111a8eac283e66f35e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f990e80c_bc7ac7de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-04T14:04:55Z",
+      "side": 1,
+      "message": "I find the AuthFsTestRule very confusing. Why are so many of the members static? (That doesn\u0027t seem to be documented.)\n\nI know we only ever have one instance, but that\u0027s isn\u0027t a particularly good reason to use a Monostate.\n\nSo maybe we should fix it the other way, by making the members non-static.",
+      "revId": "bb6a3a384107d5995b5e94111a8eac283e66f35e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
