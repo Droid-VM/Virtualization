@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63db836b_b7ac2996",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-04T10:49:16Z",
+      "side": 1,
+      "message": "This is a good point. I\u0027m generally happy to omit the context in a doFoo() function - if it fails, it\u0027s because we couldn\u0027t do foo.\nBut some of the places we do this are less obviously related to what the caller requested.\nI\u0027ll add some more text in the next CL.",
+      "parentUuid": "42acc593_7d6f353f",
+      "revId": "34a0da00ede247266fcf4f8acc4671d11904cdf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a637fd9_64583d0a",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-11-04T10:28:07Z",
       "side": 1,
       "message": "not sure if we want to give more context like `new VirtualMachineException(\"Failed to create stream\", e)`.",
+      "range": {
+        "startLine": 590,
+        "startChar": 45,
+        "endLine": 590,
+        "endChar": 47
+      },
+      "revId": "34a0da00ede247266fcf4f8acc4671d11904cdf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac6e178d_6705d7e7",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-04T10:49:16Z",
+      "side": 1,
+      "message": "Will do.",
+      "parentUuid": "8a637fd9_64583d0a",
       "range": {
         "startLine": 590,
         "startChar": 45,
