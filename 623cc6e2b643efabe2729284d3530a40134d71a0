@@ -144,6 +144,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13a492b7_72843cba",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-04T10:34:59Z",
+      "side": 1,
+      "message": "I think the sender is implicitly dropped anyway - you specify move, so ownership is transferred to the closure, and the closure is dropped when the thread exits.",
+      "parentUuid": "603ce02c_ede71500",
+      "range": {
+        "startLine": 110,
+        "startChar": 7,
+        "endLine": 110,
+        "endChar": 9
+      },
+      "revId": "623cc6e2b643efabe2729284d3530a40134d71a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "508bd8e9_888cd063",
