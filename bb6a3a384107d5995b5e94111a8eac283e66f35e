@@ -51,6 +51,24 @@
       "parentUuid": "f990e80c_bc7ac7de",
       "revId": "bb6a3a384107d5995b5e94111a8eac283e66f35e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eec1e503_8d847188",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-04T16:48:40Z",
+      "side": 1,
+      "message": "Ah, I see - so one wants to call methods from the static @BeforeClass, but the other one wants to do the same initialization for every test? And yet we use static variables even for the latter, which looks a little weird.\n\nI wonder if there should be some other class which encapsulates the current static state in the Rule. Then we can either create a static instance of that for the tests or multiple instances for the benchmarks. In each case we can feed the instance in to the Rule which can then store it as a normal member.\n\nWDYT?",
+      "parentUuid": "bfe3e357_5d8ce8f6",
+      "revId": "bb6a3a384107d5995b5e94111a8eac283e66f35e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
