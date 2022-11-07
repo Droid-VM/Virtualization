@@ -69,6 +69,30 @@
       },
       "revId": "dfe8019772bba74a722b27a12c6bb64359dd77d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08ad6664_4b62ffeb",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-11-07T15:40:05Z",
+      "side": 1,
+      "message": "Yes. it matters and it\u0027s what this CL fixes.\n\nPreviously, let\u0027s say we have two sharelibs apexes (apex-info-list.xml)\n\n- com.sharedlibs (is_factory: true, is_active: false, path: /system/apex/..., version: 1)\n- com.sharedlibs (is_factory: false, is_active: true, path: /data/apex/..., version: 2)\n\nNow with a staged one (version 3 at /staged/...), we\u0027d get after overriding\n\n- com.sharedlibs (is_factory: false, is_active: false, path: /staged/..., version: 3)\n- com.sharedlibs (is_factory: false, is_active: true, path: /staged/..., version: 3)\n\nAfter reboot, there\u0027d be two apexes.. in apex-info-list.xml\n\n- com.sharedlibs (is_factory: true, is_active: false, path: /system/apex/..., version: 1)\n- com.sharedlibs (is_factory: false, is_active: true, path: /data/apex/..., version: 3)\n\nSo, updating only if \"is_active: true\" matters.",
+      "parentUuid": "f9a4dc4f_89477800",
+      "range": {
+        "startLine": 125,
+        "startChar": 16,
+        "endLine": 125,
+        "endChar": 38
+      },
+      "revId": "dfe8019772bba74a722b27a12c6bb64359dd77d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
