@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "349dc5d9_98420344",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-07T11:03:26Z",
+      "side": 1,
+      "message": "I interpreted `usize` as \"GPR size\" (which equals sysReg size) but I see your point: done in aosp/2289695",
+      "parentUuid": "f6355eed_4fefc35b",
+      "revId": "645e90e0708c76f9e3852ae4541a8dad7106f0ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e32ca17c_2e45e7d5",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-10-25T16:00:23Z",
       "side": 1,
       "message": "Maybe copy the original comments over here, I think it was useful to have an overview of what these instructions are actually doing and why.",
+      "revId": "645e90e0708c76f9e3852ae4541a8dad7106f0ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84f686da_754465cd",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-07T11:03:26Z",
+      "side": 1,
+      "message": "Done: aosp/2289695",
+      "parentUuid": "e32ca17c_2e45e7d5",
       "revId": "645e90e0708c76f9e3852ae4541a8dad7106f0ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
