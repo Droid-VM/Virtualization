@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "da143c28_b7511754",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-07T15:22:47Z",
+      "side": 1,
+      "message": "Yeah, but I\u0027m taking the position that if an app creates a file/directory anywhere under VM, it deserves trouble. And the bug is about making sure we can delete a VM even if it is corrupt, so vmm.get() fails.\n\nI specifically want to support this, which I think is reasonable:\nvmm.delete(context, name); vmm.create(name, config);\n\nAlthough, I\u0027ll fix b/242999384 while I\u0027m here.",
+      "parentUuid": "448bd880_2d94a3b0",
+      "range": {
+        "startLine": 727,
+        "startChar": 12,
+        "endLine": 727,
+        "endChar": 55
+      },
+      "revId": "d98bedd268d9b9d82ddc4ffcb9e7ba706bfbc1f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "521f3fb3_4cb03a79",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-07T15:14:10Z",
       "side": 1,
       "message": "poor java, why you don\u0027t have this?",
+      "range": {
+        "startLine": 738,
+        "startChar": 24,
+        "endLine": 738,
+        "endChar": 41
+      },
+      "revId": "d98bedd268d9b9d82ddc4ffcb9e7ba706bfbc1f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f563a4c_24c93a9b",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-07T15:22:47Z",
+      "side": 1,
+      "message": "I know!\nThere doesn\u0027t seem to be a single reusable standard copy in Android either.",
+      "parentUuid": "521f3fb3_4cb03a79",
       "range": {
         "startLine": 738,
         "startChar": 24,
