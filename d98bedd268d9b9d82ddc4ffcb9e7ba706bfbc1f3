@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "448bd880_2d94a3b0",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-07T15:14:10Z",
+      "side": 1,
+      "message": "add `if (vm !\u003d null)` condition? In theory, there could be a directory that is not created by AVF. If the name of the directory is given to delete(), it is deleted.",
+      "range": {
+        "startLine": 727,
+        "startChar": 12,
+        "endLine": 727,
+        "endChar": 55
+      },
+      "revId": "d98bedd268d9b9d82ddc4ffcb9e7ba706bfbc1f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "521f3fb3_4cb03a79",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-07T15:14:10Z",
+      "side": 1,
+      "message": "poor java, why you don\u0027t have this?",
+      "range": {
+        "startLine": 738,
+        "startChar": 24,
+        "endLine": 738,
+        "endChar": 41
+      },
+      "revId": "d98bedd268d9b9d82ddc4ffcb9e7ba706bfbc1f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
