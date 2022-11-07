@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "01fb2833_a93c96b0",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-11-07T15:32:23Z",
+      "side": 1,
+      "message": "No, apex_info_list is filtered again after this according to the payload configuration.\n\nWhat to pass to a VM?\n- read apex info list from /apex/apex-info-list.xml\n- if prefer_staged: get staged apex info list from package_native, and override them\n- collect apexes according to the configuration from the list\n\nThis changes the second step.\n\nSharedlibs apexes are handled at step #3.",
+      "parentUuid": "f292c4ea_f44195af",
+      "range": {
+        "startLine": 118,
+        "startChar": 23,
+        "endLine": 118,
+        "endChar": 57
+      },
+      "revId": "dfe8019772bba74a722b27a12c6bb64359dd77d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f9a4dc4f_89477800",
         "filename": "virtualizationservice/src/payload.rs",
         "patchSetId": 1
