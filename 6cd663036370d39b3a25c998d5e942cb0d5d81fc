@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "acd13ba4_157bd0c3",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-11-07T15:26:57Z",
+      "side": 1,
+      "message": "\"add\" is meaningful in the follow CL, but I squashed this to it. Renamed this to `override_staged_apex`.",
+      "parentUuid": "97a79435_3507287f",
+      "range": {
+        "startLine": 107,
+        "startChar": 6,
+        "endLine": 107,
+        "endChar": 22
+      },
+      "revId": "6cd663036370d39b3a25c998d5e942cb0d5d81fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd8f4820_b3171bf0",
         "filename": "virtualizationservice/src/payload.rs",
         "patchSetId": 1
@@ -157,6 +181,30 @@
       "side": 1,
       "message": "We (AVF) might not care, but that indicates something is wrong in apexd. If apex info list doesn\u0027t have B, then B shouldn\u0027t have been allowed to be staged by apexd.",
       "parentUuid": "5deb9207_f9e1b50e",
+      "range": {
+        "startLine": 109,
+        "startChar": 12,
+        "endLine": 109,
+        "endChar": 62
+      },
+      "revId": "6cd663036370d39b3a25c998d5e942cb0d5d81fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b55caaf1_762d2098",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-11-07T15:26:57Z",
+      "side": 1,
+      "message": "Just to keep the original (wrong) behavior for the sake of \"refactoring\". But squashed this into the following.",
+      "parentUuid": "c7099954_aed73740",
       "range": {
         "startLine": 109,
         "startChar": 12,
