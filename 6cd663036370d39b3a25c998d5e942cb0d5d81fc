@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd8f4820_b3171bf0",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-07T14:41:52Z",
+      "side": 1,
+      "message": "what if there\u0027s no matching apex in the list? Should we trigger an error?",
+      "range": {
+        "startLine": 109,
+        "startChar": 12,
+        "endLine": 109,
+        "endChar": 62
+      },
+      "revId": "6cd663036370d39b3a25c998d5e942cb0d5d81fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e43fd49_acd6c58b",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-07T14:41:52Z",
+      "side": 1,
+      "message": "You don\u0027t break the loop after the match. Is that intentional? If so, comment it explicitly.",
+      "range": {
+        "startLine": 117,
+        "startChar": 12,
+        "endLine": 117,
+        "endChar": 13
+      },
+      "revId": "6cd663036370d39b3a25c998d5e942cb0d5d81fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
