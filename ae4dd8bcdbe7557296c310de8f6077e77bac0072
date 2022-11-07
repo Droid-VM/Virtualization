@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d437955_e0df6525",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-07T10:51:32Z",
+      "side": 1,
+      "message": "BTW, I\u0027ve copied this from `vmbase` but do we even need a `LockedHeap`? Given that we\u0027re single threaded, wouldn\u0027t a [`buddy_system_allocator::Heap`](https://docs.rs/buddy_system_allocator/latest/buddy_system_allocator/struct.Heap.html) be enough?",
+      "range": {
+        "startLine": 20,
+        "startChar": 23,
+        "endLine": 20,
+        "endChar": 33
+      },
+      "revId": "ae4dd8bcdbe7557296c310de8f6077e77bac0072",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "10e55452_860e5401",
         "filename": "pvmfw/src/heap.rs",
         "patchSetId": 2
@@ -14,6 +37,24 @@
       "writtenOn": "2022-10-28T15:17:42Z",
       "side": 1,
       "message": "It looks to me like this could cause unsafe behaviour if `init` is called more than once. Is that true? If so we should either prevent that, or mark `init` as `unsafe`.",
+      "revId": "ae4dd8bcdbe7557296c310de8f6077e77bac0072",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74b5e97b_9ac61f0d",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-07T10:51:32Z",
+      "side": 1,
+      "message": "True, I\u0027ll mark it `unsafe`: this isn\u0027t a library, we know the function should only be called once and with the current bootflow, it\u0027s unlikely for it to be called more than once by mistake so `unsafe` should be enough.",
+      "parentUuid": "10e55452_860e5401",
       "revId": "ae4dd8bcdbe7557296c310de8f6077e77bac0072",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
