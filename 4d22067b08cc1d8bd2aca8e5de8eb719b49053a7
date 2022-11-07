@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9953539e_392c6753",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-07T12:03:07Z",
+      "side": 1,
+      "message": "are these some leftover changes?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 100
+      },
+      "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f84a14cf_908171f2",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-07T12:03:07Z",
+      "side": 1,
+      "message": "nit: didn\u0027t you say you wanted one import per line?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 39
+      },
+      "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a984544_2ee57ee6",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-07T12:03:07Z",
+      "side": 1,
+      "message": "nit: why not include ops::Range?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 14
+      },
+      "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e734de1a_8182f6e9",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-07T12:03:07Z",
+      "side": 1,
+      "message": "Do we expect the callers to be able to use `IdMap` directly? This whole file looks like a wrapper around `IdMap` - could we make it official and have it be an internal field of some `PageTable` struct, with `new`, `map_range`, `map_slice` and `map_page` as the only exposed functions?",
+      "range": {
+        "startLine": 35,
+        "startChar": 40,
+        "endLine": 35,
+        "endChar": 45
+      },
+      "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "313261af_ad5ffc0e",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-07T12:03:07Z",
+      "side": 1,
+      "message": "These three TODOs sound like they don\u0027t really depend on anything other than getting it done. Why not just do it?",
+      "range": {
+        "startLine": 64,
+        "startChar": 40,
+        "endLine": 64,
+        "endChar": 86
+      },
+      "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
