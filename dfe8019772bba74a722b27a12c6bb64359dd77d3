@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "414032b1_14853316",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-07T15:50:17Z",
+      "side": 1,
+      "message": "Let\u0027s say apex_info_list returned `{A(is_active:true, is_factory:true, path\u003d/system/...)}` at step 1. `A` is not DCLA. There was a Mainline update for `A`, so the list gets updated to\n\n`{A(path\u003d/data/..., is_active:true,is_factory:false), A(path\u003d/system/..., is_active:false,is_factory:true)}`.\n\nAt step 3, let\u0027s assume that `A` was in the requested apex. Then both `A`s will added to the VM, though we don\u0027t want the is_factory version of A, right?",
+      "parentUuid": "01fb2833_a93c96b0",
+      "range": {
+        "startLine": 118,
+        "startChar": 23,
+        "endLine": 118,
+        "endChar": 57
+      },
+      "revId": "dfe8019772bba74a722b27a12c6bb64359dd77d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f9a4dc4f_89477800",
         "filename": "virtualizationservice/src/payload.rs",
         "patchSetId": 1
