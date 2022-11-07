@@ -74,6 +74,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "97c96c2d_7de6b5ea",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-07T15:46:32Z",
+      "side": 1,
+      "message": "That\u0027s a good thought, although I think we have other problems in that area.\nI\u0027m going to look at b/193471517 next.\n\n(If the app calls create(\"foo\") simultaneously with delete(\"foo\") then I don\u0027t have that much sympathy, but I guess we should try to make sure something vaguely consistent happens.)",
+      "parentUuid": "9188ad49_2216a10e",
+      "range": {
+        "startLine": 727,
+        "startChar": 12,
+        "endLine": 727,
+        "endChar": 55
+      },
+      "revId": "d98bedd268d9b9d82ddc4ffcb9e7ba706bfbc1f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "521f3fb3_4cb03a79",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 1
