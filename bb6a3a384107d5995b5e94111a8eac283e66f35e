@@ -87,6 +87,24 @@
       "parentUuid": "eec1e503_8d847188",
       "revId": "bb6a3a384107d5995b5e94111a8eac283e66f35e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57a66978_7e9abc8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-07T16:35:24Z",
+      "side": 1,
+      "message": "I\u0027m suggesting having 2 different classes. The Rule would remain non-static, but would depend on another object, which would be static or not depending on the use case, and would take over the currently static functions \u0026 variables in the rule.",
+      "parentUuid": "a554ca2d_8af8fe4d",
+      "revId": "bb6a3a384107d5995b5e94111a8eac283e66f35e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
