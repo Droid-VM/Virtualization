@@ -95,6 +95,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2cdc38f9_52e106cb",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-07T13:52:53Z",
+      "side": 1,
+      "message": "This comment applies to the paging crate more generally, but shouldn\u0027t this `create_dynamic_table` function be unsafe? Same as with creating slices of untracked memory, we assume that there is only one instance of this.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 21
+      },
+      "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "313261af_ad5ffc0e",
         "filename": "pvmfw/src/mmu.rs",
         "patchSetId": 2
