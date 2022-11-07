@@ -22,6 +22,29 @@
       },
       "revId": "dfe8019772bba74a722b27a12c6bb64359dd77d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9a4dc4f_89477800",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-07T15:15:55Z",
+      "side": 1,
+      "message": "Previously we would update even if is_active was false. Does that matter?",
+      "range": {
+        "startLine": 125,
+        "startChar": 16,
+        "endLine": 125,
+        "endChar": 38
+      },
+      "revId": "dfe8019772bba74a722b27a12c6bb64359dd77d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
