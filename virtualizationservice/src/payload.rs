@@ -27,7 +27,9 @@ use log::{info, warn};
 use microdroid_metadata::{ApexPayload, ApkPayload, Metadata, PayloadConfig, PayloadMetadata};
 use microdroid_payload_config::{ApexConfig, VmPayloadConfig};
 use once_cell::sync::OnceCell;
-use packagemanager_aidl::aidl::android::content::pm::IPackageManagerNative::IPackageManagerNative;
+use packagemanager_aidl::aidl::android::content::pm::{
+    IPackageManagerNative::IPackageManagerNative, StagedApexInfo::StagedApexInfo,
+};
 use regex::Regex;
 use serde::Deserialize;
 use serde_xml_rs::from_reader;
@@ -101,6 +103,21 @@ impl ApexInfoList {
             Ok(apex_info_list)
         })
     }
+
+    fn add_staged_apex(&mut self, staged_apex_info: &StagedApexInfo) -> Result<()> {
+        for apex_info in self.list.iter_mut() {
+            if staged_apex_info.moduleName == apex_info.name {
+                apex_info.path = PathBuf::from(&staged_apex_info.diskImagePath);
+                apex_info.has_classpath_jar = staged_apex_info.hasClassPathJars;
+                let metadata = metadata(&apex_info.path)?;
+                apex_info.last_update_seconds =
+                    metadata.modified()?.duration_since(SystemTime::UNIX_EPOCH)?.as_secs();
+                // by definition, staged apex can't be a factory apex.
+                apex_info.is_factory = false;
+            }
+        }
+        Ok(())
+    }
 }
 
 impl ApexInfo {
@@ -137,19 +154,11 @@ impl PackageManager {
                     .context("Failed to get service when prefer_staged is set.")?;
             let staged =
                 pm.getStagedApexModuleNames().context("getStagedApexModuleNames failed")?;
-            for apex_info in list.list.iter_mut() {
-                if staged.contains(&apex_info.name) {
-                    if let Some(staged_apex_info) =
-                        pm.getStagedApexInfo(&apex_info.name).context("getStagedApexInfo failed")?
-                    {
-                        apex_info.path = PathBuf::from(staged_apex_info.diskImagePath);
-                        apex_info.has_classpath_jar = staged_apex_info.hasClassPathJars;
-                        let metadata = metadata(&apex_info.path)?;
-                        apex_info.last_update_seconds =
-                            metadata.modified()?.duration_since(SystemTime::UNIX_EPOCH)?.as_secs();
-                        // by definition, staged apex can't be a factory apex.
-                        apex_info.is_factory = false;
-                    }
+            for name in staged {
+                if let Some(staged_apex_info) =
+                    pm.getStagedApexInfo(&name).context("getStagedApexInfo failed")?
+                {
+                    list.add_staged_apex(&staged_apex_info)?;
                 }
             }
         }
