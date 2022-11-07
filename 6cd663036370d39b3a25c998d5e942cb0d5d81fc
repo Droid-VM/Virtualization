@@ -217,6 +217,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a671acc_c9c85808",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-07T15:37:54Z",
+      "side": 1,
+      "message": "\u003e If apex info list doesn\u0027t have B, then B shouldn\u0027t have been allowed to be staged by apexd.\nAh sorry, I was thinking the list was already filtered at this point.",
+      "parentUuid": "b55caaf1_762d2098",
+      "range": {
+        "startLine": 109,
+        "startChar": 12,
+        "endLine": 109,
+        "endChar": 62
+      },
+      "revId": "6cd663036370d39b3a25c998d5e942cb0d5d81fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9e43fd49_acd6c58b",
         "filename": "virtualizationservice/src/payload.rs",
         "patchSetId": 1
