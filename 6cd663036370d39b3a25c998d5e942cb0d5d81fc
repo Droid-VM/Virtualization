@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "863e5ccf_11c7ff57",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-07T15:26:02Z",
+      "side": 1,
+      "message": "We (AVF) might not care, but that indicates something is wrong in apexd. If apex info list doesn\u0027t have B, then B shouldn\u0027t have been allowed to be staged by apexd.",
+      "parentUuid": "5deb9207_f9e1b50e",
+      "range": {
+        "startLine": 109,
+        "startChar": 12,
+        "endLine": 109,
+        "endChar": 62
+      },
+      "revId": "6cd663036370d39b3a25c998d5e942cb0d5d81fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9e43fd49_acd6c58b",
         "filename": "virtualizationservice/src/payload.rs",
         "patchSetId": 1
