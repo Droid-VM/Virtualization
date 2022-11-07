@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ccb302e_af03b947",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-07T10:41:02Z",
+      "side": 1,
+      "message": "I think you should take that up with the author of aosp/1942785 :-)\n\nBut it\u0027s reasonable to disallow needless inefficiency, isn\u0027t it?\n\nAn alternative would be to remove this entirely, and/or make the number of real CPUs the default.\nWe currently deliberately specify only one vCPU for the after reboot CompOS VM.\n\nI\u0027ll handle any change here in a separate CL.",
+      "parentUuid": "d3411b56_0d814d1c",
+      "range": {
+        "startLine": 144,
+        "startChar": 27,
+        "endLine": 144,
+        "endChar": 50
+      },
+      "revId": "6ba9f634982a67dd27fbf059498d243716605e17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "161d0db5_d2ecea55",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-05T08:34:18Z",
       "side": 1,
       "message": "payloadBinaryPath is an internal symbol. Consider \"setPayloadBinaryPath() is not called\".",
+      "range": {
+        "startLine": 156,
+        "startChar": 49,
+        "endLine": 156,
+        "endChar": 78
+      },
+      "revId": "6ba9f634982a67dd27fbf059498d243716605e17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb055b81_5efc2267",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-07T10:41:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "161d0db5_d2ecea55",
       "range": {
         "startLine": 156,
         "startChar": 49,
@@ -65,6 +113,53 @@
         "startChar": 25,
         "endLine": 161,
         "endChar": 42
+      },
+      "revId": "6ba9f634982a67dd27fbf059498d243716605e17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c5bc5e2_e69d7c66",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-07T10:41:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bf98464_60e3afd4",
+      "range": {
+        "startLine": 161,
+        "startChar": 25,
+        "endLine": 161,
+        "endChar": 42
+      },
+      "revId": "6ba9f634982a67dd27fbf059498d243716605e17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae54071a_e75cde80",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-07T10:41:02Z",
+      "side": 1,
+      "message": "I\u0027m adding these IntRange annotations to the getters to, as the original comment suggested, since it seems that\u0027s also a normal usage.",
+      "range": {
+        "startLine": 475,
+        "startChar": 36,
+        "endLine": 475,
+        "endChar": 55
       },
       "revId": "6ba9f634982a67dd27fbf059498d243716605e17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
