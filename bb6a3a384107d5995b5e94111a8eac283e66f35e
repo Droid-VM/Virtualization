@@ -69,6 +69,24 @@
       "parentUuid": "bfe3e357_5d8ce8f6",
       "revId": "bb6a3a384107d5995b5e94111a8eac283e66f35e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a554ca2d_8af8fe4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-07T15:59:37Z",
+      "side": 1,
+      "message": "Yeah, I thought about that approach initially, but there\u0027s another problem. Though the setup is neat, one needs class level setup and the other needs test level. There\u0027s also per test setup/teardown that\u0027s required in both tests[1] (e.g. like clearing the test directory). \nI made a quick test locally. If we make the rule in host test static, the per test setup/teardown won\u0027t work anymore.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/authfs/tests/common/src/java/com/android/fs/common/AuthFsTestRule.java;l\u003d246;drc\u003df31230fb18fa367a62f8815cfb896fb09b41d2cd",
+      "parentUuid": "eec1e503_8d847188",
+      "revId": "bb6a3a384107d5995b5e94111a8eac283e66f35e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
