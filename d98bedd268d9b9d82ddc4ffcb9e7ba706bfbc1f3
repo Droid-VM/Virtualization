@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9188ad49_2216a10e",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-07T15:40:34Z",
+      "side": 1,
+      "message": "Hmm, I realized that simultaneous (not serialized) deletion and creation of VMs having the same name can cause a race condition here.\n\nSpecifically, when a vm is created, the dir and files are created first and then sInstancesMap is updated. So, if the creation happens just between #730 and #732, then #734 will delete the entry added by the creator.\n\nI wonder if such a race condition is worth preventing, but anything can happen in apps...",
+      "parentUuid": "da143c28_b7511754",
+      "range": {
+        "startLine": 727,
+        "startChar": 12,
+        "endLine": 727,
+        "endChar": 55
+      },
+      "revId": "d98bedd268d9b9d82ddc4ffcb9e7ba706bfbc1f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "521f3fb3_4cb03a79",
