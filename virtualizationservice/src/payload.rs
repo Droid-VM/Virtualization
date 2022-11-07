@@ -50,7 +50,7 @@ const APEX_INFO_LIST_PATH: &str = "/apex/apex-info-list.xml";
 const PACKAGE_MANAGER_NATIVE_SERVICE: &str = "package_native";
 
 /// Represents the list of APEXes
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq)]
 struct ApexInfoList {
     #[serde(rename = "apex-info")]
     list: Vec<ApexInfo>,
@@ -104,20 +104,41 @@ impl ApexInfoList {
         })
     }
 
+    // Adding staged apex info by the following rules to simulate updates
+    //   - list has a single apex which is is_factory and is_active:
+    //     => make it is_factory and !is_active and add the staged one as is_active
+    //   - list has two apexes (one is_factory and the other is_active):
+    //     => override the is_active one with the staged one
     fn add_staged_apex(&mut self, staged_apex_info: &StagedApexInfo) -> Result<()> {
+        let mut need_to_add: Option<ApexInfo> = None;
         for apex_info in self.list.iter_mut() {
             if staged_apex_info.moduleName == apex_info.name {
-                apex_info.path = PathBuf::from(&staged_apex_info.diskImagePath);
-                apex_info.has_classpath_jar = staged_apex_info.hasClassPathJars;
-                let metadata = metadata(&apex_info.path)?;
-                apex_info.last_update_seconds =
-                    metadata.modified()?.duration_since(SystemTime::UNIX_EPOCH)?.as_secs();
-                // by definition, staged apex can't be a factory apex.
-                apex_info.is_factory = false;
+                if apex_info.is_active && apex_info.is_factory {
+                    // Copy factory/non-active entry to the end after the loop.
+                    // Typically this step is unncessary, but some apexes (like sharedlibs)
+                    // need to be kept even if it's inactive.
+                    need_to_add.replace(ApexInfo { is_active: false, ..apex_info.clone() });
+                    // And make this one as non-factory/active one
+                    apex_info.is_factory = false;
+                }
+                // Active one is replaced with the staged one.
+                if apex_info.is_active {
+                    apex_info.path = PathBuf::from(&staged_apex_info.diskImagePath);
+                    apex_info.has_classpath_jar = staged_apex_info.hasClassPathJars;
+                    apex_info.last_update_seconds = last_updated(&apex_info.path)?;
+                }
             }
+        }
+        if let Some(info) = need_to_add {
+            self.list.push(info);
         }
         Ok(())
     }
+}
+
+fn last_updated<P: AsRef<Path>>(path: P) -> Result<u64> {
+    let metadata = metadata(path)?;
+    Ok(metadata.modified()?.duration_since(SystemTime::UNIX_EPOCH)?.as_secs())
 }
 
 impl ApexInfo {
@@ -431,6 +452,7 @@ pub fn add_microdroid_payload_images(
 #[cfg(test)]
 mod tests {
     use super::*;
+    use tempfile::NamedTempFile;
 
     #[test]
     fn test_find_apex_names_in_classpath() {
@@ -567,6 +589,85 @@ export OTHER /foo/bar:/baz:/apex/second.valid.apex/:gibberish:"#;
                 &apex_info_list.list[8],
                 &apex_info_list.list[9],
             ]
+        );
+    }
+
+    #[test]
+    fn test_prefer_staged_apex_with_factory_active_apex() {
+        let single_apex = ApexInfo {
+            name: "foo".to_string(),
+            path: PathBuf::from("foo.apex"),
+            is_factory: true,
+            is_active: true,
+            ..Default::default()
+        };
+        let mut apex_info_list = ApexInfoList { list: vec![single_apex.clone()] };
+
+        let staged = NamedTempFile::new().unwrap();
+        apex_info_list
+            .add_staged_apex(&StagedApexInfo {
+                moduleName: "foo".to_string(),
+                diskImagePath: staged.path().to_string_lossy().to_string(),
+                ..Default::default()
+            })
+            .expect("should be ok");
+
+        assert_eq!(
+            apex_info_list,
+            ApexInfoList {
+                list: vec![
+                    ApexInfo {
+                        is_factory: false,
+                        path: staged.path().to_owned(),
+                        last_update_seconds: last_updated(staged.path()).unwrap(),
+                        ..single_apex.clone()
+                    },
+                    ApexInfo { is_active: false, ..single_apex },
+                ],
+            }
+        );
+    }
+
+    #[test]
+    fn test_prefer_staged_apex_with_factory_and_inactive_apex() {
+        let factory_apex = ApexInfo {
+            name: "foo".to_string(),
+            path: PathBuf::from("foo.apex"),
+            is_factory: true,
+            ..Default::default()
+        };
+        let active_apex = ApexInfo {
+            name: "foo".to_string(),
+            path: PathBuf::from("foo.downloaded.apex"),
+            is_active: true,
+            ..Default::default()
+        };
+        let mut apex_info_list =
+            ApexInfoList { list: vec![factory_apex.clone(), active_apex.clone()] };
+
+        let staged = NamedTempFile::new().unwrap();
+        apex_info_list
+            .add_staged_apex(&StagedApexInfo {
+                moduleName: "foo".to_string(),
+                diskImagePath: staged.path().to_string_lossy().to_string(),
+                ..Default::default()
+            })
+            .expect("should be ok");
+
+        assert_eq!(
+            apex_info_list,
+            ApexInfoList {
+                list: vec![
+                    // factory apex isn't touched
+                    factory_apex,
+                    // update active one
+                    ApexInfo {
+                        path: staged.path().to_owned(),
+                        last_update_seconds: last_updated(staged.path()).unwrap(),
+                        ..active_apex
+                    },
+                ],
+            }
         );
     }
 }
