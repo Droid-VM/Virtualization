@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "02c1e88c_27d7316b",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-07T15:17:34Z",
+      "side": 1,
+      "message": "yeah, the name was confusing to me as well.\n\nI\u0027d suggest update_with_staged_apex",
+      "parentUuid": "97a79435_3507287f",
+      "range": {
+        "startLine": 107,
+        "startChar": 6,
+        "endLine": 107,
+        "endChar": 22
+      },
+      "revId": "6cd663036370d39b3a25c998d5e942cb0d5d81fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd8f4820_b3171bf0",
         "filename": "virtualizationservice/src/payload.rs",
         "patchSetId": 1
@@ -61,6 +85,30 @@
       "side": 1,
       "message": "I think that\u0027s ok - it means there is a staged APEX but it\u0027s not one we care about.",
       "parentUuid": "dd8f4820_b3171bf0",
+      "range": {
+        "startLine": 109,
+        "startChar": 12,
+        "endLine": 109,
+        "endChar": 62
+      },
+      "revId": "6cd663036370d39b3a25c998d5e942cb0d5d81fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "026a6c6d_e6f5d265",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-07T15:17:34Z",
+      "side": 1,
+      "message": "I think that\u0027s an assertion fail. There can\u0027t be a staged APEX which doesn\u0027t have the is_factory version of it (because we don\u0027t allow intalling a brand-new APEX)",
+      "parentUuid": "c7099954_aed73740",
       "range": {
         "startLine": 109,
         "startChar": 12,
