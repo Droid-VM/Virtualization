@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97a79435_3507287f",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-07T15:04:46Z",
+      "side": 1,
+      "message": "Bikeshed: This doesn\u0027t actually add anything, AFAICT.\nInstead it changes the existing entry to refer to the staged one.\n\noverride_staged_apex?\nreplace_apex_with_staged?",
+      "range": {
+        "startLine": 107,
+        "startChar": 6,
+        "endLine": 107,
+        "endChar": 22
+      },
+      "revId": "6cd663036370d39b3a25c998d5e942cb0d5d81fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd8f4820_b3171bf0",
         "filename": "virtualizationservice/src/payload.rs",
         "patchSetId": 1
@@ -14,6 +37,30 @@
       "writtenOn": "2022-11-07T14:41:52Z",
       "side": 1,
       "message": "what if there\u0027s no matching apex in the list? Should we trigger an error?",
+      "range": {
+        "startLine": 109,
+        "startChar": 12,
+        "endLine": 109,
+        "endChar": 62
+      },
+      "revId": "6cd663036370d39b3a25c998d5e942cb0d5d81fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7099954_aed73740",
+        "filename": "virtualizationservice/src/payload.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-07T15:04:46Z",
+      "side": 1,
+      "message": "I think that\u0027s ok - it means there is a staged APEX but it\u0027s not one we care about.",
+      "parentUuid": "dd8f4820_b3171bf0",
       "range": {
         "startLine": 109,
         "startChar": 12,
