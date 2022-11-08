@@ -17,6 +17,7 @@
 package com.android.microdroid.test;
 
 import static com.android.microdroid.test.host.CommandResultSubject.command_results;
+import static com.android.tradefed.device.TestDevice.MicrodroidBuilder;
 import static com.android.tradefed.testtype.DeviceJUnit4ClassRunner.TestLogData;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -38,6 +39,8 @@ import com.android.microdroid.test.host.MicrodroidHostTestCaseBase;
 import com.android.os.AtomsProto;
 import com.android.os.StatsLog;
 import com.android.tradefed.device.DeviceNotAvailableException;
+import com.android.tradefed.device.ITestDevice;
+import com.android.tradefed.device.TestDevice;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner.TestMetrics;
 import com.android.tradefed.util.CommandResult;
@@ -64,8 +67,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.Callable;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -97,10 +100,6 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
             return MIN_MEM_X86_64;
         }
         throw new AssertionError("Unsupported ABI: " + abi);
-    }
-
-    private void waitForBootComplete() {
-        runOnMicrodroidForResult("watch -e \"getprop dev.bootcomplete | grep '^0$'\"");
     }
 
     private static JSONObject newPartition(String label, String path) {
@@ -447,16 +446,15 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     private boolean isTombstoneGeneratedWithConfig(String configPath) throws Exception {
         // Note this test relies on logcat values being printed by tombstone_transmit on
         // and the reeceiver on host (virtualization_service)
-        final String cid =
-                startMicrodroid(
-                        getDevice(),
-                        getBuild(),
-                        APK_NAME,
-                        PACKAGE_NAME,
-                        configPath,
-                        /* debug */ true,
-                        minMemorySize(),
-                        Optional.of(NUM_VCPUS));
+        ITestDevice microdroid =
+                MicrodroidBuilder
+                        .fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .numCpus(NUM_VCPUS)
+                        .autoConnect(false)
+                        .build((TestDevice) getDevice());
+
         // check until microdroid is shut down
         CommandRunner android = new CommandRunner(getDevice());
         android.runWithTimeout(15000, "logcat", "-m", "1", "-e", "'crosvm has exited normally'");
@@ -486,6 +484,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     public void testTelemetryPushedAtomsOfEventMetrics() throws Exception {
+        TestDevice device = (TestDevice) getDevice();
+
         // Reset statsd config and report before the test
         ConfigUtils.removeConfig(getDevice());
         ReportUtils.clearReports(getDevice());
@@ -500,21 +500,19 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
         // Create VM with microdroid
         final String configPath = "assets/vm_config_apex.json"; // path inside the APK
-        final String cid =
-                startMicrodroid(
-                        getDevice(),
-                        getBuild(),
-                        APK_NAME,
-                        PACKAGE_NAME,
-                        configPath,
-                        /* debug */ true,
-                        minMemorySize(),
-                        Optional.of(NUM_VCPUS));
+        ITestDevice microdroid =
+                MicrodroidBuilder
+                        .fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .numCpus(NUM_VCPUS)
+                        .build(device);
+        microdroid.waitForBootComplete(30000);
 
         // Check VmCreationRequested atom and clear the statsd report
         List<StatsLog.EventMetricData> data;
         data = ReportUtils.getEventMetricDataList(getDevice());
-        assertThat(data).hasSize(1);
+        assertThat(data).hasSize(2);
         assertThat(data.get(0).getAtom().getPushedCase().getNumber()).isEqualTo(
                 AtomsProto.Atom.VM_CREATION_REQUESTED_FIELD_NUMBER);
         AtomsProto.VmCreationRequested atomVmCreationRequested =
@@ -532,20 +530,14 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         assertThat(atomVmCreationRequested.getApexes())
                 .isEqualTo("com.android.art:com.android.compos:com.android.sdkext");
 
-        // Boot VM with microdroid
-        adbConnectToMicrodroid(getDevice(), cid);
-        waitForBootComplete();
-
         // Check VmBooted atom and clear the statsd report
-        data = ReportUtils.getEventMetricDataList(getDevice());
-        assertThat(data).hasSize(1);
-        assertThat(data.get(0).getAtom().getPushedCase().getNumber())
+        assertThat(data.get(1).getAtom().getPushedCase().getNumber())
                 .isEqualTo(AtomsProto.Atom.VM_BOOTED_FIELD_NUMBER);
-        AtomsProto.VmBooted atomVmBooted = data.get(0).getAtom().getVmBooted();
+        AtomsProto.VmBooted atomVmBooted = data.get(1).getAtom().getVmBooted();
         assertThat(atomVmBooted.getVmIdentifier()).isEqualTo("VmRunApp");
 
         // Shutdown VM with microdroid
-        shutdownMicrodroid(getDevice(), cid);
+        device.shutdownMicrodroid(microdroid);
         // TODO: make sure the VM is completely shut down while 'vm stop' command running.
         Thread.sleep(1000);
 
@@ -567,6 +559,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     public void testTelemetryPushedAtomsOfValueMetrics() throws Exception {
+        TestDevice device = (TestDevice) getDevice();
+
         // Reset statsd config and report before the test
         ConfigUtils.removeConfig(getDevice());
         ReportUtils.clearReports(getDevice());
@@ -580,20 +574,14 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
         // Create VM with microdroid
         final String configPath = "assets/vm_config_apex.json"; // path inside the APK
-        final String cid =
-                startMicrodroid(
-                        getDevice(),
-                        getBuild(),
-                        APK_NAME,
-                        PACKAGE_NAME,
-                        configPath,
-                        /* debug */ true,
-                        minMemorySize(),
-                        Optional.of(NUM_VCPUS));
-
-        // Boot VM with microdroid
-        adbConnectToMicrodroid(getDevice(), cid);
-        waitForBootComplete();
+        ITestDevice microdroid =
+                MicrodroidBuilder
+                        .fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .numCpus(NUM_VCPUS)
+                        .build(device);
+        microdroid.waitForBootComplete(30000);
 
         // Check VmCpuStatusReported and VmMemStatusReported atoms and clear the statsd report
         List<StatsLog.EventMetricData> data;
@@ -605,61 +593,60 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                 .isEqualTo(AtomsProto.Atom.VM_MEM_STATUS_REPORTED_FIELD_NUMBER);
 
         // Shutdown VM with microdroid
-        shutdownMicrodroid(getDevice(), cid);
+        device.shutdownMicrodroid(microdroid);
     }
 
     @Test
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-1-2", "9.17/C/1-3"})
     public void testMicrodroidBoots() throws Exception {
+        TestDevice device = (TestDevice) getDevice();
+
         final String configPath = "assets/vm_config.json"; // path inside the APK
-        final String cid =
-                startMicrodroid(
-                        getDevice(),
-                        getBuild(),
-                        APK_NAME,
-                        PACKAGE_NAME,
-                        configPath,
-                        /* debug */ true,
-                        minMemorySize(),
-                        Optional.of(NUM_VCPUS));
-        adbConnectToMicrodroid(getDevice(), cid);
-        waitForBootComplete();
+        ITestDevice microdroidDevice =
+                MicrodroidBuilder
+                        .fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .numCpus(NUM_VCPUS)
+                        .build(device);
+        microdroidDevice.waitForBootComplete(30000);
+
+        CommandRunner microdroid = new CommandRunner(microdroidDevice);
+
         // Test writing to /data partition
-        runOnMicrodroid("echo MicrodroidTest > /data/local/tmp/test.txt");
-        assertThat(runOnMicrodroid("cat /data/local/tmp/test.txt")).isEqualTo("MicrodroidTest");
+        microdroid.run("echo MicrodroidTest > /data/local/tmp/test.txt");
+        assertThat(microdroid.run("cat /data/local/tmp/test.txt")).isEqualTo("MicrodroidTest");
 
         // Check if the APK & its idsig partitions exist
         final String apkPartition = "/dev/block/by-name/microdroid-apk";
-        assertThat(runOnMicrodroid("ls", apkPartition)).isEqualTo(apkPartition);
+        assertThat(microdroid.run("ls", apkPartition)).isEqualTo(apkPartition);
         final String apkIdsigPartition = "/dev/block/by-name/microdroid-apk-idsig";
-        assertThat(runOnMicrodroid("ls", apkIdsigPartition)).isEqualTo(apkIdsigPartition);
+        assertThat(microdroid.run("ls", apkIdsigPartition)).isEqualTo(apkIdsigPartition);
         // Check the vm-instance partition as well
         final String vmInstancePartition = "/dev/block/by-name/vm-instance";
-        assertThat(runOnMicrodroid("ls", vmInstancePartition)).isEqualTo(vmInstancePartition);
+        assertThat(microdroid.run("ls", vmInstancePartition)).isEqualTo(vmInstancePartition);
 
         // Check if the native library in the APK is has correct filesystem info
-        final String[] abis = runOnMicrodroid("getprop", "ro.product.cpu.abilist").split(",");
+        final String[] abis = microdroid.run("getprop", "ro.product.cpu.abilist").split(",");
         assertThat(abis).hasLength(1);
         final String testLib = "/mnt/apk/lib/" + abis[0] + "/MicrodroidTestNativeLib.so";
         final String label = "u:object_r:system_file:s0";
-        assertThat(runOnMicrodroid("ls", "-Z", testLib)).isEqualTo(label + " " + testLib);
+        assertThat(microdroid.run("ls", "-Z", testLib)).isEqualTo(label + " " + testLib);
 
         // Check that no denials have happened so far
         CommandRunner android = new CommandRunner(getDevice());
         assertThat(android.tryRun("egrep", "'avc:[[:space:]]{1,2}denied'", LOG_PATH)).isNull();
 
-        assertThat(runOnMicrodroid("cat /proc/cpuinfo | grep processor | wc -l"))
+        assertThat(microdroid.run("cat /proc/cpuinfo | grep processor | wc -l"))
                 .isEqualTo(Integer.toString(NUM_VCPUS));
 
         // Check that selinux is enabled
-        assertThat(runOnMicrodroid("getenforce")).isEqualTo("Enforcing");
+        assertThat(microdroid.run("getenforce")).isEqualTo("Enforcing");
 
         // TODO(b/176805428): adb is broken for nested VM
         if (!isCuttlefish()) {
             // Check neverallow rules on microdroid
-            File policyFile = FileUtil.createTempFile("microdroid_sepolicy", "");
-            pullMicrodroidFile("/sys/fs/selinux/policy", policyFile);
-
+            File policyFile = microdroidDevice.pullFile("/sys/fs/selinux/policy");
             File generalPolicyConfFile = findTestFile("microdroid_general_sepolicy.conf");
             File sepolicyAnalyzeBin = findTestFile("sepolicy-analyze");
 
@@ -679,37 +666,45 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                     .isSuccess();
         }
 
-        shutdownMicrodroid(getDevice(), cid);
+        device.shutdownMicrodroid(microdroidDevice);
     }
 
     @Test
     public void testMicrodroidRamUsage() throws Exception {
+        TestDevice device = (TestDevice) getDevice();
+
         final String configPath = "assets/vm_config.json";
-        final String cid =
-                startMicrodroid(
-                        getDevice(),
-                        getBuild(),
-                        APK_NAME,
-                        PACKAGE_NAME,
-                        configPath,
-                        /* debug */ true,
-                        minMemorySize(),
-                        Optional.of(NUM_VCPUS));
-        adbConnectToMicrodroid(getDevice(), cid);
-        waitForBootComplete();
-        rootMicrodroid();
+        ITestDevice microdroid =
+                MicrodroidBuilder
+                        .fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .numCpus(NUM_VCPUS)
+                        .build(device);
+        microdroid.waitForBootComplete(30000);
+        microdroid.enableAdbRoot();
+
+        CommandRunner microdroidCmd = new CommandRunner(microdroid);
+        Function<String, String> microdroidExec =
+                (cmd) -> {
+                    try {
+                        return microdroidCmd.run(cmd);
+                    } catch (Exception ex) {
+                        throw new IllegalStateException(ex);
+                    }
+                };
 
         for (Map.Entry<String, Long> stat :
-                ProcessUtil.getProcessMemoryMap(cmd -> runOnMicrodroid(cmd)).entrySet()) {
+                ProcessUtil.getProcessMemoryMap(microdroidExec).entrySet()) {
             mMetrics.addTestMetric(
                     mMetricPrefix + "meminfo/" + stat.getKey().toLowerCase(),
                     stat.getValue().toString());
         }
 
         for (Map.Entry<Integer, String> proc :
-                ProcessUtil.getProcessMap(cmd -> runOnMicrodroid(cmd)).entrySet()) {
+                ProcessUtil.getProcessMap(microdroidExec).entrySet()) {
             for (Map.Entry<String, Long> stat :
-                    ProcessUtil.getProcessSmapsRollup(proc.getKey(), cmd -> runOnMicrodroid(cmd))
+                    ProcessUtil.getProcessSmapsRollup(proc.getKey(), microdroidExec)
                             .entrySet()) {
                 String name = stat.getKey().toLowerCase();
                 mMetrics.addTestMetric(
@@ -718,7 +713,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
             }
         }
 
-        shutdownMicrodroid(getDevice(), cid);
+        device.shutdownMicrodroid(microdroid);
     }
 
     @Test
