@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc0b5cce_b94c766b",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-08T12:29:07Z",
+      "side": 1,
+      "message": "Maybe it should be `#[repr(C, packed)]` then? Leaving out the `C` means it defaults to the Rust ABI, which is not guaranteed to be stable.",
+      "parentUuid": "4f1543eb_0084ecee",
+      "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "795d2435_87820bda",
         "filename": "pvmfw/src/config.rs",
         "patchSetId": 3
