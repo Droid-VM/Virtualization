@@ -25,15 +25,19 @@ import static org.junit.Assert.assertThrows;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.os.SystemProperties;
+import android.system.virtualmachine.ParcelVirtualMachine;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineCallback;
 import android.system.virtualmachine.VirtualMachineConfig;
 import android.system.virtualmachine.VirtualMachineException;
 import android.system.virtualmachine.VirtualMachineManager;
 import android.util.Log;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.compatibility.common.util.CddTest;
 import com.android.microdroid.test.device.MicrodroidDeviceTestBase;
@@ -54,6 +58,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.OptionalLong;
 import java.util.UUID;
@@ -573,6 +579,41 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(newVm).isEqualTo(newVm2);
 
         assertThat(vm).isNotEqualTo(newVm);
+    }
+
+    @Test
+    public void vmConvertsToValidParcelVm() throws Exception {
+        // Arrange
+        VirtualMachineConfig config =
+                mInner.newVmConfigBuilder()
+                        .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
+                        .setDebugLevel(DEBUG_LEVEL_NONE)
+                        .build();
+        String vmName = "test_vm";
+        VirtualMachine vm = mInner.forceCreateNewVirtualMachine(vmName, config);
+
+        // Action
+        ParcelVirtualMachine parcelVm = vm.toParcelVirtualMachine();
+
+        // Asserts
+        assertFileContentsAreEqual(parcelVm.getConfigFd(), vmName, "config.xml");
+        assertFileContentsAreEqual(parcelVm.getInstanceImgFd(), vmName, "instance.img");
+    }
+
+    private void assertFileContentsAreEqual(
+            ParcelFileDescriptor parcelFd, String vmName, String fileName) throws IOException {
+        File file = getVmFile(vmName, fileName);
+        // Use try-with-resources to close the files automatically after assert.
+        try (FileInputStream input1 = new FileInputStream(parcelFd.getFileDescriptor());
+                FileInputStream input2 = new FileInputStream(file)) {
+            assertThat(input1.readAllBytes()).isEqualTo(input2.readAllBytes());
+        }
+    }
+
+    private File getVmFile(String vmName, String fileName) {
+        Context context = ApplicationProvider.getApplicationContext();
+        Path filePath = Paths.get(context.getDataDir().getPath(), "vm", vmName, fileName);
+        return filePath.toFile();
     }
 
     private int minMemoryRequired() {
