@@ -65,6 +65,7 @@ import android.system.virtualizationservice.VirtualMachineState;
 import android.util.JsonReader;
 
 import com.android.internal.annotations.GuardedBy;
+import com.android.internal.annotations.VisibleForTesting;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -901,6 +902,27 @@ public class VirtualMachine implements AutoCloseable {
         }
     }
 
+    /**
+     * Converts the current virtual machine to a {@link ParcelVirtualMachine} instance.
+     *
+     * @return a {@link ParcelVirtualMachine} instance that wraps read-only file descriptors of
+     *        the virtual machine's state files.
+     * @throws VirtualMachineException if the virtual machine could is not  stopped.
+     */
+    @NonNull
+    public ParcelVirtualMachine toParcelVirtualMachine() throws VirtualMachineException {
+        synchronized (mLock) {
+            checkStopped();
+        }
+        try {
+            return new ParcelVirtualMachine(
+                ParcelFileDescriptor.open(mConfigFilePath, MODE_READ_ONLY),
+                ParcelFileDescriptor.open(mInstanceFilePath, MODE_READ_ONLY));
+        } catch (IOException e) {
+            throw new VirtualMachineException(e);
+        }
+    }
+
     @VirtualMachineCallback.ErrorCode
     private int getTranslatedError(int reason) {
         switch (reason) {
@@ -1049,5 +1071,23 @@ public class VirtualMachine implements AutoCloseable {
         } catch (IOException e) {
             throw new VirtualMachineException("Couldn't parse extra apks from the vm config", e);
         }
+    }
+
+    /**
+     * @return the config.xml file for testing.
+     */
+    @VisibleForTesting
+    @NonNull
+    public File getConfigFilePath() {
+        return mConfigFilePath;
+    }
+
+    /**
+     * @return the instance.img file for testing.
+     */
+    @VisibleForTesting
+    @NonNull
+    public File getInstanceFilePath() {
+        return mInstanceFilePath;
     }
 }

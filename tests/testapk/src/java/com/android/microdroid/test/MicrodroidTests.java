@@ -28,6 +28,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.os.SystemProperties;
+import android.system.virtualmachine.ParcelVirtualMachine;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineCallback;
 import android.system.virtualmachine.VirtualMachineConfig;
@@ -54,6 +55,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.List;
 import java.util.OptionalLong;
 import java.util.UUID;
@@ -573,6 +575,33 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(newVm).isEqualTo(newVm2);
 
         assertThat(vm).isNotEqualTo(newVm);
+    }
+
+    @Test
+    public void vmConvertsToValidParvelVm() throws Exception {
+        // Arrange
+        VirtualMachineConfig config =
+                mInner.newVmConfigBuilder()
+                        .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
+                        .setDebugLevel(DEBUG_LEVEL_NONE)
+                        .build();
+        VirtualMachine vm = mInner.forceCreateNewVirtualMachine("test_vm", config);
+
+        // Action
+        ParcelVirtualMachine parcelVm = vm.toParcelVirtualMachine();
+
+        // Asserts
+        assertFileContentsAreEqual(parcelVm.getConfigFd(), vm.getConfigFilePath());
+        assertFileContentsAreEqual(parcelVm.getInstanceImgFd(), vm.getInstanceFilePath());
+    }
+
+    private void assertFileContentsAreEqual(ParcelFileDescriptor parcelFd, File file)
+            throws IOException {
+        // Use try-with-resources to close the files automatically after assert.
+        try (FileInputStream input1 = new FileInputStream(parcelFd.getFileDescriptor());
+                FileInputStream input2 = new FileInputStream(file)) {
+            assertThat(Arrays.equals(input1.readAllBytes(), input2.readAllBytes())).isTrue();
+        }
     }
 
     private int minMemoryRequired() {
