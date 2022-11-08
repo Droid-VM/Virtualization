@@ -65,6 +65,7 @@ import android.system.virtualizationservice.VirtualMachineState;
 import android.util.JsonReader;
 
 import com.android.internal.annotations.GuardedBy;
+import com.android.internal.annotations.VisibleForTesting;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -757,6 +758,26 @@ public class VirtualMachine implements AutoCloseable {
     }
 
     /**
+     * Converts the current virtual machine to a {@link ParcelVirtualMachine} instance.
+     *
+     * @return a {@link ParcelVirtualMachine} instance that wraps read-only file descriptors of
+     *        the virtual machine's state files.
+     * @throws VirtualMachineException if the virtual machine could is not  stopped.
+     */
+    public @NonNull ParcelVirtualMachine toParcelVirtualMachine() throws VirtualMachineException {
+        if (getStatus() != STATUS_STOPPED) {
+            throw new VirtualMachineException("VM should be stopped");
+        }
+        try {
+            return new ParcelVirtualMachine(
+                ParcelFileDescriptor.open(mConfigFilePath, MODE_READ_ONLY),
+                ParcelFileDescriptor.open(mInstanceFilePath, MODE_READ_ONLY));
+        } catch (IOException e) {
+            throw new VirtualMachineException(e);
+        }
+    }
+
+    /**
      * Returns the CID of this virtual machine, if it is running.
      *
      * @throws VirtualMachineException if the virtual machine is not running.
@@ -952,5 +973,21 @@ public class VirtualMachine implements AutoCloseable {
     private static File getVmDir(Context context, String name) {
         File vmRoot = new File(context.getDataDir(), VM_DIR);
         return new File(vmRoot, name);
+    }
+
+    /**
+     * @return the config.xml file for testing.
+     */
+    @VisibleForTesting
+    public @NonNull File getConfigFilePath() {
+        return mConfigFilePath;
+    }
+
+    /**
+     * @return the instance.img file for testing.
+     */
+    @VisibleForTesting
+    public @NonNull File getInstanceFilePath() {
+        return mInstanceFilePath;
     }
 }
