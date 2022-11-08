@@ -33,6 +33,7 @@ cc_library_shared {
     header_libs: ["vm_payload_headers"],
     shared_libs: [
         "libbase",
+        "liblog",
     ],
 }
 
