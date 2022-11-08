@@ -72,6 +72,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e9c928e9_2e0cd4d0",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-08T15:26:40Z",
+      "side": 1,
+      "message": "Can you just use the `|` operator rather than `union`? It is a bit easier to read.",
+      "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e734de1a_8182f6e9",
         "filename": "pvmfw/src/mmu.rs",
         "patchSetId": 2
@@ -112,6 +129,40 @@
         "endLine": 45,
         "endChar": 21
       },
+      "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38fd56c4_ddb19d01",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-08T15:26:40Z",
+      "side": 1,
+      "message": "Where is this used, and why can\u0027t the caller just use `IdMap::map_range` directly?",
+      "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fdd81ae_5de21d86",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-08T15:26:40Z",
+      "side": 1,
+      "message": "The premise of this function seems a bit dubious, because a slice pointing at unmapped memory shouldn\u0027t exist in the first place. References must always be dereferenceable, and the compiler could choose to dereference them at any time.",
       "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
