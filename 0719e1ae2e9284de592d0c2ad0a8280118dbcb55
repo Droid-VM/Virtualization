@@ -39,6 +39,30 @@
       },
       "revId": "0719e1ae2e9284de592d0c2ad0a8280118dbcb55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b1d435f_2ae10c53",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-09T11:14:03Z",
+      "side": 1,
+      "message": "That\u0027s an excellent question.\nThese annotations are fairly widely used in the framework code, but I\u0027ve never seen any lint warnings, even when the usage is fairly clearly broken.\n\nTBH I\u0027m mostly using them here for documentation purposes. But I\u0027ll see if I can figure out whether there is any such lint.\n\nb/258396046",
+      "parentUuid": "61da1ec0_6444c4e2",
+      "range": {
+        "startLine": 109,
+        "startChar": 5,
+        "endLine": 109,
+        "endChar": 14
+      },
+      "revId": "0719e1ae2e9284de592d0c2ad0a8280118dbcb55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
