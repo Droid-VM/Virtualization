@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48091172_9d41020f",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-09T14:44:31Z",
+      "side": 1,
+      "message": "style: why don\u0027t you create this atom outside of the thread and move it into the thread? That way, you could have avoided the extra indentation.",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 10
+      },
+      "revId": "c4df35ca47f26910188543fc4c3229e82da0aa5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c73fdee_7d761d1a",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-09T14:44:31Z",
+      "side": 1,
+      "message": "Not sure why this sleep is needed. We can wait at #229.",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 52
+      },
+      "revId": "c4df35ca47f26910188543fc4c3229e82da0aa5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
