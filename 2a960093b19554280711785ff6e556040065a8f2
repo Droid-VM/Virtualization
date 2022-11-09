@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0124067_57b7850f",
+        "filename": "javalib/src/android/system/virtualmachine/ParcelVirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-09T14:02:17Z",
+      "side": 1,
+      "message": "Annotate these as @NonNull too",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 54
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "699a21ad_9bed8ee6",
+        "filename": "javalib/src/android/system/virtualmachine/ParcelVirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-09T14:02:17Z",
+      "side": 1,
+      "message": "It looks like you should return CONTENTS_FILE_DESCRIPTOR",
+      "range": {
+        "startLine": 38,
+        "startChar": 15,
+        "endLine": 38,
+        "endChar": 16
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a9312b1_f9afb0cb",
+        "filename": "javalib/src/android/system/virtualmachine/ParcelVirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-09T14:02:17Z",
+      "side": 1,
+      "message": "We should perhaps check for null here (via Objects.requireNonNull). Although that depends if it\u0027s possible for an API user to cause them to be null.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 5
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f07ebb86_f1a2c667",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-09T14:02:17Z",
+      "side": 1,
+      "message": "Nit: It\u0027s not really a conversion. Obtain a PVM representing the current virtual machine?",
+      "range": {
+        "startLine": 906,
+        "startChar": 7,
+        "endLine": 906,
+        "endChar": 15
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "569a06e0_fe1807f5",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-09T14:02:17Z",
+      "side": 1,
+      "message": "Describe the intent rather than the implementation.",
+      "range": {
+        "startLine": 908,
+        "startChar": 59,
+        "endLine": 908,
+        "endChar": 92
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37b32ef2_d3809401",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 910,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-09T14:02:17Z",
+      "side": 1,
+      "message": "Uber-nit: 2 spaces\nAlso s/could //",
+      "range": {
+        "startLine": 910,
+        "startChar": 71,
+        "endLine": 910,
+        "endChar": 83
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5fcfba2_886a8959",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1092,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-09T14:02:17Z",
+      "side": 1,
+      "message": "We already make assumptions about what these paths are in the tests.\n(I know, because the tests broke when I changed the paths.)\nSo I\u0027m not convinced these are needed.",
+      "range": {
+        "startLine": 1076,
+        "startChar": 0,
+        "endLine": 1092,
+        "endChar": 5
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "003cd9d1_40429724",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-09T14:02:17Z",
+      "side": 1,
+      "message": "Parcel",
+      "range": {
+        "startLine": 581,
+        "startChar": 33,
+        "endLine": 581,
+        "endChar": 39
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9517a17e_8103d14c",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-09T14:02:17Z",
+      "side": 1,
+      "message": "assertThat(input1.readAllBytes()).isEqualTo(input2.readAllBytes())  ?\nI guess the error message might be quite large.",
+      "range": {
+        "startLine": 603,
+        "startChar": 12,
+        "endLine": 603,
+        "endChar": 92
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

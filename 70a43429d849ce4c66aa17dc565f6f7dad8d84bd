@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36580540_2b13c76f",
+        "filename": "javalib/src/android/system/virtualmachine/ParcelVirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-09T14:02:17Z",
+      "side": 1,
+      "message": "This comment will be part of the API documentation, so we need to describe it in user-facing terms.\nI think we need to describe the intended usage - you can create one from a VM, pass it to another app, and they can then create a copy of the VM, after which the original may be deleted.\nThe fact that it contain file descriptors is mostly an implementation detail, except that it means if the VM is changed (or, perhaps, deleted) before the copy is made, bad things can happen.\n\nWould be good to @link to the relevant methods in the other classes too.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 92
+      },
+      "revId": "70a43429d849ce4c66aa17dc565f6f7dad8d84bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ed8f268_e21514a6",
+        "filename": "javalib/src/android/system/virtualmachine/ParcelVirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-09T14:02:17Z",
+      "side": 1,
+      "message": "Can you add @hide to these?\nAnd the ones in VirtualMachine.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 7
+      },
+      "revId": "70a43429d849ce4c66aa17dc565f6f7dad8d84bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
