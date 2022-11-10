@@ -279,19 +279,6 @@ public class VirtualMachine implements AutoCloseable {
         mExtraApks = setupExtraApks(context, config, thisVmDir);
     }
 
-    @GuardedBy("sCreateLock")
-    @NonNull
-    private static Map<String, WeakReference<VirtualMachine>> getInstancesMap(Context context) {
-        Map<String, WeakReference<VirtualMachine>> instancesMap;
-        if (sInstances.containsKey(context)) {
-            instancesMap = sInstances.get(context);
-        } else {
-            instancesMap = new HashMap<>();
-            sInstances.put(context, instancesMap);
-        }
-        return instancesMap;
-    }
-
     @NonNull
     private static File getVmDir(Context context, String name) {
         File vmRoot = new File(context.getDataDir(), VM_DIR);
@@ -356,7 +343,8 @@ public class VirtualMachine implements AutoCloseable {
                 throw new VirtualMachineException("failed to create instance partition", e);
             }
 
-            getInstancesMap(context).put(name, new WeakReference<>(vm));
+            sInstances.computeIfAbsent(context, unused -> new HashMap<>())
+                      .put(name, new WeakReference<>(vm));
 
             return vm;
         } catch (VirtualMachineException | RuntimeException e) {
@@ -388,7 +376,8 @@ public class VirtualMachine implements AutoCloseable {
             throw new VirtualMachineException("Failed to read config file", e);
         }
 
-        Map<String, WeakReference<VirtualMachine>> instancesMap = getInstancesMap(context);
+        Map<String, WeakReference<VirtualMachine>> instancesMap =
+                sInstances.computeIfAbsent(context, unused -> new HashMap<>());
 
         VirtualMachine vm = null;
         if (instancesMap.containsKey(name)) {
