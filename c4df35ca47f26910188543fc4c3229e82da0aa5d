@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb24c84b_a2574efc",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-10T01:37:49Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "1d8b072e_e8602f68",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 10
+      },
+      "revId": "c4df35ca47f26910188543fc4c3229e82da0aa5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c73fdee_7d761d1a",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "The property will not exist before statsd is started \u0026 prop.wait() return with None. This is the usual case.",
       "parentUuid": "8c73fdee_7d761d1a",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 52
+      },
+      "revId": "c4df35ca47f26910188543fc4c3229e82da0aa5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e69f751a_ec473543",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-10T01:37:49Z",
+      "side": 1,
+      "message": "prop.wait() returns None when the prop doesn\u0027t exist? That\u0027s against my reading of the code.  https://cs.android.com/android/platform/superproject/+/master:system/librustutils/system_properties.rs;drc\u003d791e679512b450f828e17a05b5df3fe1c3558edd;l\u003d193",
+      "parentUuid": "fef8bace_d25efb81",
       "range": {
         "startLine": 238,
         "startChar": 0,
