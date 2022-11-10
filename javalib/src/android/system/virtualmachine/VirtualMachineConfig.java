@@ -16,6 +16,7 @@
 
 package android.system.virtualmachine;
 
+import static android.os.ParcelFileDescriptor.AutoCloseInputStream;
 import static android.os.ParcelFileDescriptor.MODE_READ_ONLY;
 
 import static java.util.Objects.requireNonNull;
@@ -34,6 +35,7 @@ import android.system.virtualizationservice.VirtualMachinePayloadConfig;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -181,6 +183,18 @@ public final class VirtualMachineConfig {
         mNumCpus = numCpus;
     }
 
+    /** Loads a config from a {@link VirtualMachineDescriptor}. */
+    @NonNull
+    static VirtualMachineConfig from(@NonNull VirtualMachineDescriptor vmDescriptor)
+            throws VirtualMachineException {
+        try (AutoCloseInputStream descriptorConfig =
+                new AutoCloseInputStream(vmDescriptor.getConfigFd())) {
+            return VirtualMachineConfig.from(descriptorConfig);
+        } catch (IOException e) {
+            throw new VirtualMachineException("failed to load the confissg from descriptor", e);
+        }
+    }
+
     /** Loads a config from a stream, for example a file. */
     @NonNull
     static VirtualMachineConfig from(@NonNull InputStream input)
@@ -229,6 +243,15 @@ public final class VirtualMachineConfig {
             b.putInt(KEY_MEMORY_MIB, mMemoryMib);
         }
         b.writeToStream(output);
+    }
+
+    /** Persists this config to a file. */
+    void serialize(@NonNull File file) throws VirtualMachineException {
+        try (FileOutputStream output = new FileOutputStream(file)) {
+            serialize(output);
+        } catch (IOException e) {
+            throw new VirtualMachineException("failed to write VM config", e);
+        }
     }
 
     /**
