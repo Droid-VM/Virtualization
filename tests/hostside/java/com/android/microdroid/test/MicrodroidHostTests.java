@@ -564,8 +564,6 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         // Check UID and elapsed_time by comparing each other.
         assertThat(atomVmBooted.getUid()).isEqualTo(atomVmCreationRequested.getUid());
         assertThat(atomVmExited.getUid()).isEqualTo(atomVmCreationRequested.getUid());
-        assertThat(atomVmBooted.getElapsedTimeMillis())
-                .isLessThan(atomVmExited.getElapsedTimeMillis());
     }
 
     @Test
