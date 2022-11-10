@@ -216,6 +216,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b3b87a32_1f1b9800",
+        "filename": "javalib/src/android/system/virtualmachine/ParcelVirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-10T11:16:31Z",
+      "side": 1,
+      "message": "Nit: It\u0027s fine to static import requireNonNull.\nAnd it returns its argument on success, so these could be e.g.\n        mConfigFd \u003d requireNonNull(in.readFileDescriptor());",
+      "parentUuid": "fbe6a641_696843dd",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 5
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f07ebb86_f1a2c667",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 4
@@ -393,6 +417,30 @@
       "side": 1,
       "message": "I usually edit code freely and use the command `google-java-format -i -a` to format the file int the end.",
       "parentUuid": "60076147_3e41f0b7",
+      "range": {
+        "startLine": 910,
+        "startChar": 71,
+        "endLine": 910,
+        "endChar": 83
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "100b9400_67a71395",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 910,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-10T11:16:31Z",
+      "side": 1,
+      "message": "Ah, I see. I\u0027m not sure what the command-line equivalent is for Android style.\n(We have an upload hook that checks it, but it\u0027s not 100% and it doesn\u0027t fix it.)",
+      "parentUuid": "3f8de39d_9141c24c",
       "range": {
         "startLine": 910,
         "startChar": 71,
