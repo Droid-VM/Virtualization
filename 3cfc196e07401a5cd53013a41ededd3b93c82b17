@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6488c79b_037938d8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-10T16:41:16Z",
+      "side": 1,
+      "message": "I\u0027m guessing you meant to put this on the `canned_fs_config` file?\n\nWeirdly, the parser [1] seems to ignore unrecognized tokens, so anything can be a comment!\n\n[1] https://source.corp.google.com/android-internal/system/core/libcutils/canned_fs_config.cpp;l\u003d89?q\u003dcanned_fs_config.cpp",
+      "parentUuid": "1e56685c_8c9bb2d5",
+      "range": {
+        "startLine": 7,
+        "startChar": 37,
+        "endLine": 7,
+        "endChar": 46
+      },
+      "revId": "3cfc196e07401a5cd53013a41ededd3b93c82b17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "921abb82_dce7acab",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-11-10T15:48:23Z",
       "side": 1,
       "message": "\", because we need to pin a ton of pages\" or something?",
+      "revId": "3cfc196e07401a5cd53013a41ededd3b93c82b17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab8ad4fe_09f3c0c4",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-10T16:41:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "921abb82_dce7acab",
       "revId": "3cfc196e07401a5cd53013a41ededd3b93c82b17",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

@@ -22,6 +22,30 @@
       },
       "revId": "36a58d96e6d7bc35cb0d0d6be1b3f9ee17d74e8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc7135d6_8535fa5e",
+        "filename": "apex/canned_fs_config",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-10T16:41:16Z",
+      "side": 0,
+      "message": "Not necessary - it doesn\u0027t \"exercise\" that capability directly. The `mlock` happens in the kernel as part of /dev/kvm ioctls.",
+      "parentUuid": "a90545e9_d7806552",
+      "range": {
+        "startLine": 1,
+        "startChar": 5,
+        "endLine": 1,
+        "endChar": 11
+      },
+      "revId": "36a58d96e6d7bc35cb0d0d6be1b3f9ee17d74e8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
