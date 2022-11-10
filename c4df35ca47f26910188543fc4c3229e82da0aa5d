@@ -141,6 +141,30 @@
       },
       "revId": "c4df35ca47f26910188543fc4c3229e82da0aa5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b77765fe_6d836b80",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-10T10:42:22Z",
+      "side": 1,
+      "message": "oh you\u0027re right. read() will wait for the prop to be non-null. So, this an impossible code anyway. Using break; n that case.",
+      "parentUuid": "e69f751a_ec473543",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 52
+      },
+      "revId": "c4df35ca47f26910188543fc4c3229e82da0aa5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
