@@ -123,21 +123,39 @@ public class VirtualMachineManager {
      * machine with the same name as an existing virtual machine is an error. The existing virtual
      * machine has to be deleted before its name can be reused.
      *
-     * Each successful call to this method creates a new (and different) virtual machine even if the
-     * name and the config are the same as a deleted one. The new virtual machine will initially
+     * <p>Each successful call to this method creates a new (and different) virtual machine even if
+     * the name and the config are the same as a deleted one. The new virtual machine will initially
      * be stopped.
      *
      * @throws VirtualMachineException if the VM cannot be created, or there is an existing VM with
-     *         the given name.
+     *     the given name.
      * @hide
      */
     @NonNull
     @RequiresPermission(VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION)
-    public VirtualMachine create(
-            @NonNull String name, @NonNull VirtualMachineConfig config)
+    public VirtualMachine create(@NonNull String name, @NonNull VirtualMachineConfig config)
             throws VirtualMachineException {
         synchronized (VirtualMachine.sCreateLock) {
             return VirtualMachine.create(mContext, name, config);
+        }
+    }
+
+    /**
+     * Imports a virtual machine from an {@link VirtualMachineDescriptor} object and associates it
+     * with the given name.
+     *
+     * <p>The new virtual machine will be in the same state as the descriptor indicates.
+     *
+     * @throws VirtualMachineException if the VM cannot be imported.
+     * @hide
+     */
+    @NonNull
+    @RequiresPermission(VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION)
+    public VirtualMachine importFromDescriptor(
+            @NonNull String name, @NonNull VirtualMachineDescriptor vmDescriptor)
+            throws VirtualMachineException {
+        synchronized (VirtualMachine.sCreateLock) {
+            return VirtualMachine.fromDescriptor(mContext, name, vmDescriptor);
         }
     }
 
