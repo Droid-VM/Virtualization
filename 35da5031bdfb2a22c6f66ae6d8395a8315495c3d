@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dc82933_e762798b",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-10T11:28:03Z",
+      "side": 1,
+      "message": "Instead of waiting, we could call getEventMetricDataList() in a loop, Thread.sleep(),till the data has size 3? That could make make it less flaky",
+      "range": {
+        "startLine": 519,
+        "startChar": 0,
+        "endLine": 519,
+        "endChar": 27
+      },
+      "revId": "35da5031bdfb2a22c6f66ae6d8395a8315495c3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
