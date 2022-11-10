@@ -511,6 +511,9 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         minMemorySize(),
                         Optional.of(NUM_VCPUS));
 
+        // getEventMetricDataList() is racy with Virtualization Service actually the atoms.
+        // Sleep & hope the atoms are pushed by the time thread wakes up.
+        Thread.sleep(2000);
         // Check VmCreationRequested atom and clear the statsd report
         List<StatsLog.EventMetricData> data;
         data = ReportUtils.getEventMetricDataList(getDevice());
