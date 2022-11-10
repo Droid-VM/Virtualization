@@ -142,6 +142,25 @@ public class VirtualMachineManager {
     }
 
     /**
+     * Imports a virtual machine from an {@link VirtualMachineDescriptor} object and associates it
+     * with the given name.
+     *
+     * <p>The new virtual machine will be in the same state as the descriptor indicates.
+     *
+     * @throws VirtualMachineException if the VM cannot be imported.
+     * @hide
+     */
+    @NonNull
+    @RequiresPermission(VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION)
+    public VirtualMachine importFromDescriptor(
+            @NonNull String name, @NonNull VirtualMachineDescriptor vmDescriptor)
+            throws VirtualMachineException {
+        synchronized (VirtualMachine.sCreateLock) {
+            return VirtualMachine.fromDescriptor(mContext, name, vmDescriptor);
+        }
+    }
+
+    /**
      * Returns an existing {@link VirtualMachine} with the given name. Returns null if there is no
      * such virtual machine.
      *
