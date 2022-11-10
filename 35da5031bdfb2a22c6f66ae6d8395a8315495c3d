@@ -46,6 +46,30 @@
       },
       "revId": "35da5031bdfb2a22c6f66ae6d8395a8315495c3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e34b8be_8264d0f6",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-11-10T12:38:21Z",
+      "side": 1,
+      "message": "The function `getEventMetricDataList` clears the list of metric. So, it wouldn\u0027t be a possible way.\nhttps://source.corp.google.com/aosp-master/cts/hostsidetests/statsdatom/src/android/cts/statsdatom/lib/ReportUtils.java;l\u003d52\n\nHowever, I got a new idea after reading your comment, how about using a loop and sleep for each atom?",
+      "parentUuid": "9d58dff4_7ea3fdeb",
+      "range": {
+        "startLine": 519,
+        "startChar": 0,
+        "endLine": 519,
+        "endChar": 27
+      },
+      "revId": "35da5031bdfb2a22c6f66ae6d8395a8315495c3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
