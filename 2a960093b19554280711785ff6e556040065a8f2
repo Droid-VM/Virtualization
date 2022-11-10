@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f4a7b95_4c4c47c4",
+        "filename": "javalib/src/android/system/virtualmachine/ParcelVirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-10T10:49:36Z",
+      "side": 1,
+      "message": "Yeah. But the example doesn\u0027t include any file descriptors.",
+      "parentUuid": "edc149d3_3b630012",
+      "range": {
+        "startLine": 38,
+        "startChar": 15,
+        "endLine": 38,
+        "endChar": 16
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a9312b1_f9afb0cb",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "9a9312b1_f9afb0cb",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 5
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25a82cde_34966b83",
+        "filename": "javalib/src/android/system/virtualmachine/ParcelVirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-10T10:49:36Z",
+      "side": 1,
+      "message": "You don\u0027t need the check for in (you dereference it on the next line).\nBut it looks like readFileDescriptor can return null, and I think we should reject that.",
+      "parentUuid": "3e85516e_062cb4c6",
       "range": {
         "startLine": 74,
         "startChar": 0,
@@ -273,6 +321,30 @@
       "side": 1,
       "message": "Done. Sorry I\u0027m used to run a formatter after editing, but cannot do it for this file otherwise all the other lines will be moved...",
       "parentUuid": "37b32ef2_d3809401",
+      "range": {
+        "startLine": 910,
+        "startChar": 71,
+        "endLine": 910,
+        "endChar": 83
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60076147_3e41f0b7",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 910,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-10T10:49:36Z",
+      "side": 1,
+      "message": "Hmm, that shouldn\u0027t happen - I regularly reformat these files.\nI\u0027m using Intellij with the AndroidStyle plugin. (Android style is very different to Google style, especially around import ordering.)",
+      "parentUuid": "fec12fc3_15536bb8",
       "range": {
         "startLine": 910,
         "startChar": 71,
