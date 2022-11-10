@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccc788ec_1a35ae75",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-10T10:56:54Z",
+      "side": 1,
+      "message": "I agree that this test is racy but this doesn\u0027t remove the race - it just makes it less likely to happen the wrong way round. Do you have ideas on how to fix this properly?\n\nI\u0027ve made an attempt here: https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2292297/4/tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java#507\n\nNote that the CL currently only removes the race for the first two atoms, not the last one.",
+      "range": {
+        "startLine": 516,
+        "startChar": 0,
+        "endLine": 516,
+        "endChar": 27
+      },
+      "revId": "59dfbbba1772e390912a0a9931338456cdf38491",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
