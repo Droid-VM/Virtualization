@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7fc2922_c625b9ab",
+        "filename": "javalib/src/android/system/virtualmachine/ParcelVirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-10T09:26:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0124067_57b7850f",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 54
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "699a21ad_9bed8ee6",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-09T14:02:17Z",
       "side": 1,
       "message": "It looks like you should return CONTENTS_FILE_DESCRIPTOR",
+      "range": {
+        "startLine": 38,
+        "startChar": 15,
+        "endLine": 38,
+        "endChar": 16
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edc149d3_3b630012",
+        "filename": "javalib/src/android/system/virtualmachine/ParcelVirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-10T09:26:19Z",
+      "side": 1,
+      "message": "Thanks. I followed the example in their doc[1] here.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:frameworks/base/core/java/android/os/Parcelable.java;l\u003d64;drc\u003d558ba131f962b8e1016f19d74d073d89ad4e0315",
+      "parentUuid": "699a21ad_9bed8ee6",
       "range": {
         "startLine": 38,
         "startChar": 15,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e85516e_062cb4c6",
+        "filename": "javalib/src/android/system/virtualmachine/ParcelVirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-10T09:26:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a9312b1_f9afb0cb",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 5
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f07ebb86_f1a2c667",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-11-09T14:02:17Z",
       "side": 1,
       "message": "Nit: It\u0027s not really a conversion. Obtain a PVM representing the current virtual machine?",
+      "range": {
+        "startLine": 906,
+        "startChar": 7,
+        "endLine": 906,
+        "endChar": 15
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "905f16f3_845ce35a",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-10T09:26:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f07ebb86_f1a2c667",
       "range": {
         "startLine": 906,
         "startChar": 7,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3976038c_1314e07e",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-10T09:26:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "569a06e0_fe1807f5",
+      "range": {
+        "startLine": 908,
+        "startChar": 59,
+        "endLine": 908,
+        "endChar": 92
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37b32ef2_d3809401",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-11-09T14:02:17Z",
       "side": 1,
       "message": "Uber-nit: 2 spaces\nAlso s/could //",
+      "range": {
+        "startLine": 910,
+        "startChar": 71,
+        "endLine": 910,
+        "endChar": 83
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fec12fc3_15536bb8",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 910,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-10T09:26:19Z",
+      "side": 1,
+      "message": "Done. Sorry I\u0027m used to run a formatter after editing, but cannot do it for this file otherwise all the other lines will be moved...",
+      "parentUuid": "37b32ef2_d3809401",
       "range": {
         "startLine": 910,
         "startChar": 71,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d92b4bec_76e30022",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 1092,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-10T09:26:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5fcfba2_886a8959",
+      "range": {
+        "startLine": 1076,
+        "startChar": 0,
+        "endLine": 1092,
+        "endChar": 5
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "003cd9d1_40429724",
@@ -185,6 +353,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed0c3785_b10396d1",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-10T09:26:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "003cd9d1_40429724",
+      "range": {
+        "startLine": 581,
+        "startChar": 33,
+        "endLine": 581,
+        "endChar": 39
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9517a17e_8103d14c",
@@ -198,6 +390,30 @@
       "writtenOn": "2022-11-09T14:02:17Z",
       "side": 1,
       "message": "assertThat(input1.readAllBytes()).isEqualTo(input2.readAllBytes())  ?\nI guess the error message might be quite large.",
+      "range": {
+        "startLine": 603,
+        "startChar": 12,
+        "endLine": 603,
+        "endChar": 92
+      },
+      "revId": "2a960093b19554280711785ff6e556040065a8f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fac89c3_3cbb6c0e",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-10T09:26:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9517a17e_8103d14c",
       "range": {
         "startLine": 603,
         "startChar": 12,
