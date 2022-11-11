@@ -21,10 +21,11 @@ use command_fds::CommandFdExt;
 use lazy_static::lazy_static;
 use log::{debug, error, info};
 use semver::{Version, VersionReq};
-use nix::{fcntl::OFlag, unistd::pipe2};
+use nix::{fcntl::OFlag, unistd::pipe2, unistd::Uid, unistd::User};
 use regex::{Captures, Regex};
 use shared_child::SharedChild;
 use std::borrow::Cow;
+use std::fmt;
 use std::fs::{remove_dir_all, File};
 use std::io::{self, Read};
 use std::mem;
@@ -200,6 +201,12 @@ pub struct VmInstance {
     payload_state: Mutex<PayloadState>,
     /// Represents the condition that payload_state was updated
     payload_state_updated: Condvar,
+    /// The human readable name of requester_uid
+    requester_uid_name: String,
+    // Name of the process that corresponds to requester_debug_pid, at the time when this VM was
+    // created. Currently impossible to get because VS is not in AID_READPROC group which allows
+    // access to /proc/<pid>/comm.
+    //requester_process_name: String,
 }
 
 impl VmInstance {
@@ -214,7 +221,11 @@ impl VmInstance {
         let cid = config.cid;
         let name = config.name.clone();
         let protected = config.protected;
-        Ok(VmInstance {
+        let requester_uid_name = User::from_uid(Uid::from_raw(requester_uid))
+            .with_context(|| format!("failed to get username for uid {}", requester_uid))
+            .unwrap()
+            .map_or_else(|| format!("{}", requester_uid), |u| u.name);
+        let instance = VmInstance {
             vm_state: Mutex::new(VmState::NotStarted { config }),
             cid,
             name,
@@ -228,14 +239,19 @@ impl VmInstance {
             vm_start_timestamp: Mutex::new(None),
             payload_state: Mutex::new(PayloadState::Starting),
             payload_state_updated: Condvar::new(),
-        })
+            requester_uid_name,
+        };
+        info!("{} created", &instance);
+        Ok(instance)
     }
 
     /// Starts an instance of `crosvm` to manage the VM. The `crosvm` instance will be killed when
     /// the `VmInstance` is dropped.
     pub fn start(self: &Arc<Self>) -> Result<(), Error> {
         *self.vm_start_timestamp.lock().unwrap() = Some(SystemTime::now());
-        self.vm_state.lock().unwrap().start(self.clone())
+        let ret = self.vm_state.lock().unwrap().start(self.clone());
+        info!("{} started", &self);
+        ret
     }
 
     /// Monitors the exit of the VM (i.e. termination of the `child` process). When that happens,
@@ -259,6 +275,7 @@ impl VmInstance {
         *vm_state = VmState::Dead;
         // Ensure that the mutex is released before calling the callbacks.
         drop(vm_state);
+        info!("{} stopped", &self);
 
         // Read the pipe to see if any failure reason is written
         let mut failure_reason = String::new();
@@ -388,6 +405,17 @@ impl VmInstance {
 
         conn.notify_completion()?;
         Ok(())
+    }
+}
+
+impl fmt::Display for VmInstance {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let adj = if self.protected { "Protected" } else { "Non-protected" };
+        write!(
+            f,
+            "{} virtual machine \"{}\" (owner: {}, cid: {})",
+            adj, self.name, self.requester_uid_name, self.cid
+        )
     }
 }
 
