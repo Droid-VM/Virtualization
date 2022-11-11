@@ -40,6 +40,7 @@ use android_system_virtualizationserviceinternal::aidl::android::system::virtual
 use binder::Strong;
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
 use tombstoned_client::{TombstonedConnection, DebuggerdDumpType};
+use rpcbinder::RpcServer;
 
 /// external/crosvm
 use base::UnixSeqpacketListener;
@@ -178,6 +179,9 @@ pub struct VmInstance {
     /// Handle to global resources allocated for this VM.
     #[allow(dead_code)] // The handle is never read, we only need to hold it.
     global_handle: Strong<dyn IGlobalVmHandle>,
+    /// Handle to global resources allocated for this VM.
+    #[allow(dead_code)] // The handle is never read, we only need to hold it.
+    vm_server: RpcServer,
     /// The CID assigned to the VM for vsock communication.
     pub cid: Cid,
     /// The name of the VM.
@@ -211,6 +215,7 @@ impl VmInstance {
         requester_uid: u32,
         requester_debug_pid: i32,
         global_handle: Strong<dyn IGlobalVmHandle>,
+        vm_server: RpcServer,
     ) -> Result<VmInstance, Error> {
         validate_config(&config)?;
         let cid = config.cid;
@@ -219,6 +224,7 @@ impl VmInstance {
         Ok(VmInstance {
             vm_state: Mutex::new(VmState::NotStarted { config }),
             global_handle,
+            vm_server,
             cid,
             name,
             protected,
