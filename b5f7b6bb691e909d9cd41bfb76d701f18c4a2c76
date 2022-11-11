@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4ab5b3c_28bcd79f",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-11-11T23:45:59Z",
+      "side": 1,
+      "message": "It\u0027s very curious that we put a failing exit code in Result. Seems this error information should also be lifted into the error object to be slightly more idiomatic, but that would be a much larger change (hence +2).\n\nOne thing I\u0027m wondering - should we lift this dissection of the exit code into the exit code itself? The API of the status here seems error prone - there should be an overall way to get the status, and there should be a way to print error information, so we don\u0027t need to duplicate this for every spawned command.",
+      "range": {
+        "startLine": 737,
+        "startChar": 27,
+        "endLine": 737,
+        "endChar": 40
+      },
+      "revId": "b5f7b6bb691e909d9cd41bfb76d701f18c4a2c76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
