@@ -59,7 +59,7 @@ use rustutils::system_properties;
 use semver::VersionReq;
 use std::convert::TryInto;
 use std::ffi::CStr;
-use std::fs::{create_dir, File, OpenOptions};
+use std::fs::{create_dir, remove_dir_all, File, OpenOptions};
 use std::io::{Error, ErrorKind, Read, Write};
 use std::num::NonZeroU32;
 use std::os::unix::io::{FromRawFd, IntoRawFd};
@@ -127,7 +127,10 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         let cid = state.allocate_cid().map_err(|e| {
             Status::new_exception_str(ExceptionCode::ILLEGAL_STATE, Some(e.to_string()))
         })?;
-        Ok(GlobalVmContext::create(cid))
+        let directory = state.allocate_directory(cid).map_err(|e| {
+            Status::new_exception_str(ExceptionCode::ILLEGAL_STATE, Some(e.to_string()))
+        })?;
+        Ok(GlobalVmContext::create(cid, directory))
     }
 }
 
@@ -154,21 +157,32 @@ impl GlobalState {
         system_properties::write(SYSPROP_LAST_CID, &format!("{}", cid))?;
         Ok(cid)
     }
+
+    fn allocate_directory(&mut self, cid: Cid) -> Result<PathBuf> {
+        let path = PathBuf::from(format!("{}/{}", TEMPORARY_DIRECTORY, cid));
+        if path.exists() {
+            remove_dir_all(&path)?;
+        }
+        create_dir(&path)?;
+        Ok(path)
+    }
 }
 
 /// Implementation of the AIDL `IGlobalVmContext` interface.
-#[derive(Debug, Default)]
+#[derive(Debug)]
 struct GlobalVmContext {
     /// The unique CID assigned to the VM for vsock communication.
     cid: Cid,
+    /// Folder for temporary files of this VM.
+    directory: PathBuf,
     /// Keeps our service process running as long as this VM instance exists.
     #[allow(dead_code)]
     lazy_service_guard: LazyServiceGuard,
 }
 
 impl GlobalVmContext {
-    fn create(cid: Cid) -> Strong<dyn IGlobalVmContext> {
-        let binder = GlobalVmContext { cid, ..Default::default() };
+    fn create(cid: Cid, directory: PathBuf) -> Strong<dyn IGlobalVmContext> {
+        let binder = GlobalVmContext { cid, directory, lazy_service_guard: Default::default() };
         BnGlobalVmContext::new_binder(binder, BinderFeatures::default())
     }
 }
@@ -178,6 +192,18 @@ impl Interface for GlobalVmContext {}
 impl IGlobalVmContext for GlobalVmContext {
     fn getCid(&self) -> binder::Result<i32> {
         Ok(self.cid as i32)
+    }
+
+    fn getDirectory(&self) -> binder::Result<String> {
+        Ok(self.directory.to_string_lossy().to_string())
+    }
+}
+
+impl Drop for GlobalVmContext {
+    fn drop(&mut self) {
+        // Attempt to delete the temporary directory. Ignore errors - worst case it will be
+        // deleted when the CID is recycled, or after reboot.
+        let _ = remove_dir_all(&self.directory);
     }
 }
 
@@ -434,6 +460,7 @@ impl VirtualizationService {
 
         let vm_context = self.global_service.allocateGlobalVmContext()?;
         let cid = vm_context.getCid()? as Cid;
+        let temporary_directory: PathBuf = vm_context.getDirectory()?.into();
 
         let state = &mut *self.state.lock().unwrap();
         let console_fd = console_fd.map(clone_file).transpose()?;
@@ -446,24 +473,6 @@ impl VirtualizationService {
         // Files which are referred to from composite images. These must be mapped to the crosvm
         // child process, and not closed before it is started.
         let mut indirect_files = vec![];
-
-        // Make directory for temporary files.
-        let temporary_directory: PathBuf = format!("{}/{}", TEMPORARY_DIRECTORY, cid).into();
-        create_dir(&temporary_directory).map_err(|e| {
-            // At this point, we do not know the protected status of Vm
-            // setting it to false, though this may not be correct.
-            error!(
-                "Failed to create temporary directory {:?} for VM files: {:?}",
-                temporary_directory, e
-            );
-            Status::new_service_specific_error_str(
-                -1,
-                Some(format!(
-                    "Failed to create temporary directory {:?} for VM files: {:?}",
-                    temporary_directory, e
-                )),
-            )
-        })?;
 
         let (is_app_config, config) = match config {
             VirtualMachineConfig::RawConfig(config) => (false, BorrowedOrOwned::Borrowed(config)),
