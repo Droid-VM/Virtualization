@@ -59,7 +59,7 @@ use rustutils::system_properties;
 use semver::VersionReq;
 use std::convert::TryInto;
 use std::ffi::CStr;
-use std::fs::{create_dir, File, OpenOptions};
+use std::fs::{create_dir, remove_dir_all, File, OpenOptions};
 use std::io::{Error, ErrorKind, Read, Write};
 use std::num::NonZeroU32;
 use std::os::unix::io::{FromRawFd, IntoRawFd};
@@ -125,7 +125,8 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
     fn createGlobalVmHandle(&self) -> binder::Result<Strong<dyn IGlobalVmHandle>> {
         let state = &mut *self.state.lock().unwrap();
         let cid = state.allocate_cid().or(Err(ExceptionCode::ILLEGAL_STATE))?;
-        let instance = Arc::new(GlobalVmInstance { cid });
+        let directory = state.allocate_directory(cid).or(Err(ExceptionCode::ILLEGAL_STATE))?;
+        let instance = Arc::new(GlobalVmInstance { cid, directory });
         Ok(GlobalVmHandle::create(instance))
     }
 }
@@ -153,6 +154,15 @@ impl GlobalState {
         system_properties::write(SYSPROP_LAST_CID, &format!("{}", cid))?;
         Ok(cid)
     }
+
+    fn allocate_directory(&mut self, cid: Cid) -> Result<PathBuf> {
+        let path = PathBuf::from(format!("{}/{}", TEMPORARY_DIRECTORY, cid));
+        if path.exists() {
+            remove_dir_all(&path)?;
+        }
+        create_dir(&path)?;
+        Ok(path)
+    }
 }
 
 /// Struct describing the globally-unique resources allocated to a VM.
@@ -160,6 +170,8 @@ impl GlobalState {
 struct GlobalVmInstance {
     /// The unique CID assigned to the VM for vsock communication.
     cid: Cid,
+    /// Folder for temporary files of this VM.
+    directory: PathBuf,
 }
 
 /// Implementation of the AIDL `IVirtualMachine` interface. Used as a handle to a VM.
@@ -183,6 +195,18 @@ impl Interface for GlobalVmHandle {}
 impl IGlobalVmHandle for GlobalVmHandle {
     fn getCid(&self) -> binder::Result<i32> {
         Ok(self.instance.cid as i32)
+    }
+
+    fn getTemporaryDirectory(&self) -> binder::Result<String> {
+        Ok(self.instance.directory.to_string_lossy().to_string())
+    }
+}
+
+impl Drop for GlobalVmHandle {
+    fn drop(&mut self) {
+        // Attempt to delete the temporary directory. Ignore errors - worst case it will be
+        // deleted when the CID is recycled, or after reboot.
+        let _ = remove_dir_all(&self.instance.directory);
     }
 }
 
@@ -439,6 +463,7 @@ impl VirtualizationService {
 
         let global_handle = self.global_service.createGlobalVmHandle()?;
         let cid = global_handle.getCid()? as Cid;
+        let temporary_directory: PathBuf = global_handle.getTemporaryDirectory()?.into();
 
         let state = &mut *self.state.lock().unwrap();
         let console_fd = console_fd.map(clone_file).transpose()?;
@@ -451,24 +476,6 @@ impl VirtualizationService {
         // Files which are referred to from composite images. These must be mapped to the crosvm
         // child process, and not closed before it is started.
         let mut indirect_files = vec![];
-
-        // Make directory for temporary files.
-        let temporary_directory: PathBuf = format!("{}/{}", TEMPORARY_DIRECTORY, cid).into();
-        create_dir(&temporary_directory).map_err(|e| {
-            // At this point, we do not know the protected status of Vm
-            // setting it to false, though this may not be correct.
-            error!(
-                "Failed to create temporary directory {:?} for VM files: {:?}",
-                temporary_directory, e
-            );
-            Status::new_service_specific_error_str(
-                -1,
-                Some(format!(
-                    "Failed to create temporary directory {:?} for VM files: {:?}",
-                    temporary_directory, e
-                )),
-            )
-        })?;
 
         let (is_app_config, config) = match config {
             VirtualMachineConfig::RawConfig(config) => (false, BorrowedOrOwned::Borrowed(config)),
