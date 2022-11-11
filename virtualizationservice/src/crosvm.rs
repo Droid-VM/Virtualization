@@ -16,7 +16,7 @@
 
 use crate::aidl::{Cid, VirtualMachineCallbacks};
 use crate::atom::write_vm_exited_stats;
-use anyhow::{anyhow, bail, Context, Error};
+use anyhow::{anyhow, bail, Context, Error, Result};
 use command_fds::CommandFdExt;
 use lazy_static::lazy_static;
 use log::{debug, error, info};
@@ -25,7 +25,7 @@ use nix::{fcntl::OFlag, unistd::pipe2};
 use regex::{Captures, Regex};
 use shared_child::SharedChild;
 use std::borrow::Cow;
-use std::fs::{remove_dir_all, File};
+use std::fs::{read_to_string, remove_dir_all, File};
 use std::io::{self, Read};
 use std::mem;
 use std::num::NonZeroU32;
@@ -147,6 +147,12 @@ impl VmState {
             let child =
                 Arc::new(run_vm(config, &instance.temporary_directory, failure_pipe_write)?);
 
+            let instance_monitor_status = instance.clone();
+            let child_monitor_status = child.clone();
+            thread::spawn(move || {
+                instance_monitor_status.clone().monitor_vm_status(child_monitor_status);
+            });
+
             let child_clone = child.clone();
             let instance_clone = instance.clone();
             thread::spawn(move || {
@@ -196,6 +202,12 @@ pub struct VmInstance {
     pub vm_service: Mutex<Option<Strong<dyn IVirtualMachineService>>>,
     /// Recorded timestamp when the VM is started.
     pub vm_start_timestamp: Mutex<Option<SystemTime>>,
+    /// Update guest_time periodically from /proc/[crosvm pid]/stat while VM is running.
+    pub cpu_guest_time: Mutex<Option<i64>>,
+    /// Update maximum RSS of VM periodically from /proc/[crosvm pid]/smaps while VM is running.
+    pub vm_rss: Mutex<Option<i64>>,
+    /// Update maximum RSS of CrosVM periodically from /proc/[crosvm pid]/smaps while VM is running.
+    pub crosvm_rss: Mutex<Option<i64>>,
     /// The latest lifecycle state which the payload reported itself to be in.
     payload_state: Mutex<PayloadState>,
     /// Represents the condition that payload_state was updated
@@ -226,6 +238,9 @@ impl VmInstance {
             stream: Mutex::new(None),
             vm_service: Mutex::new(None),
             vm_start_timestamp: Mutex::new(None),
+            cpu_guest_time: Mutex::new(None),
+            vm_rss: Mutex::new(None),
+            crosvm_rss: Mutex::new(None),
             payload_state: Mutex::new(PayloadState::Starting),
             payload_state_updated: Condvar::new(),
         })
@@ -284,11 +299,17 @@ impl VmInstance {
         self.callbacks.callback_on_died(self.cid, death_reason);
 
         let vm_start_timestamp = self.vm_start_timestamp.lock().unwrap();
+        let cpu_guest_time = self.cpu_guest_time.lock().unwrap();
+        let vm_rss = self.vm_rss.lock().unwrap();
+        let crosvm_rss = self.crosvm_rss.lock().unwrap();
         write_vm_exited_stats(
             self.requester_uid as i32,
             &self.name,
             death_reason,
             *vm_start_timestamp,
+            *cpu_guest_time,
+            *vm_rss,
+            *crosvm_rss,
         );
 
         // Delete temporary files.
@@ -318,6 +339,33 @@ impl VmInstance {
             if let Err(e) = self.kill() {
                 error!("Error stopping timed-out VM with CID {}: {:?}", child.id(), e);
             }
+        }
+    }
+
+    fn monitor_vm_status(&self, child: Arc<SharedChild>) {
+        let pid = child.id();
+
+        loop {
+            // Check VM state
+            {
+                let vm_state = &*self.vm_state.lock().unwrap();
+                if let VmState::Dead = vm_state {
+                    break;
+                }
+            }
+
+            // Get CPU Information
+            if let Ok(guest_time) = get_guest_time(pid) {
+                *self.cpu_guest_time.lock().unwrap() = Some(guest_time);
+            }
+
+            // Get Memory Information
+            if let Ok(rss) = get_rss(pid) {
+                *self.vm_rss.lock().unwrap() = Some(rss.vm);
+                *self.crosvm_rss.lock().unwrap() = Some(rss.crosvm);
+            }
+
+            thread::sleep(Duration::from_secs(1));
         }
     }
 
@@ -389,6 +437,54 @@ impl VmInstance {
         conn.notify_completion()?;
         Ok(())
     }
+}
+
+// Get guest time from /proc/[crosvm pid]/stat
+fn get_guest_time(pid: u32) -> Result<i64> {
+    let file = read_to_string("/proc/".to_owned() + pid.to_string().as_str() + "/stat")?;
+    let data_list: Vec<_> = file.split_whitespace().collect();
+
+    if data_list.len() < 43 {
+        bail!("Failed to parse command result for getting guest time : {}", file);
+    }
+
+    Ok(data_list[42].parse::<i64>()?)
+}
+
+struct Rss {
+    vm: i64,
+    crosvm: i64,
+}
+
+// Get rss from /proc/[crosvm pid]/smaps
+fn get_rss(pid: u32) -> Result<Rss> {
+    let file = read_to_string("/proc/".to_owned() + pid.to_string().as_str() + "/smaps")?;
+    let lines: Vec<_> = file.split('\n').collect();
+
+    let mut rss_vm_total = 0i64;
+    let mut rss_crosvm_total = 0i64;
+    let mut is_vm = false;
+    for line in lines {
+        if line.contains("crosvm_guest") {
+            is_vm = true;
+        } else if line.contains("Rss:") {
+            let data_list: Vec<_> = line.split_whitespace().collect();
+            if data_list.len() < 2 {
+                bail!("Failed to parse command result for getting rss :\n{}", line);
+            }
+            let rss = data_list[1].parse::<i64>()?;
+
+            if is_vm {
+                rss_vm_total += rss;
+                is_vm = false;
+            }
+            rss_crosvm_total += rss;
+        } else {
+            continue;
+        }
+    }
+
+    Ok(Rss { vm: rss_vm_total, crosvm: rss_crosvm_total })
 }
 
 fn death_reason(result: &Result<ExitStatus, io::Error>, mut failure_reason: &str) -> DeathReason {
