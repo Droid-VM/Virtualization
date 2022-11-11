@@ -154,6 +154,9 @@ pub fn write_vm_exited_stats(
     vm_identifier: &String,
     reason: DeathReason,
     vm_start_timestamp: Option<SystemTime>,
+    guest_time: Option<i64>,
+    rss_vm: Option<i64>,
+    rss_crosvm: Option<i64>,
 ) {
     let duration = get_duration(vm_start_timestamp);
     let vm_exited = vm_exited::VmExited {
@@ -198,6 +201,9 @@ pub fn write_vm_exited_stats(
             DeathReason::HANGUP => vm_exited::DeathReason::Hangup,
             _ => vm_exited::DeathReason::Unknown,
         },
+        guest_time_millis: guest_time.unwrap_or(-1i64),
+        rss_vm_kb: rss_vm.unwrap_or(-1i64),
+        rss_crosvm_kb: rss_crosvm.unwrap_or(-1i64),
     };
     match vm_exited.stats_write() {
         Err(e) => {
