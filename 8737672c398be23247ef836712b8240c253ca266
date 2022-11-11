@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5ab449f_b5d6827e",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-11T09:37:14Z",
+      "side": 0,
+      "message": "Nice!\n\nBut I have a slight preference for keeping this function rather than inlining it, even if it becomes a one-liner.\n(The name is clear, I dislike all duplication, and it does mean the knowledge that the inner maps are HashMap is only in one place.)",
+      "range": {
+        "startLine": 284,
+        "startChar": 62,
+        "endLine": 284,
+        "endChar": 77
+      },
+      "revId": "8737672c398be23247ef836712b8240c253ca266",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
