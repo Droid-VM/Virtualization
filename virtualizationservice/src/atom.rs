@@ -15,6 +15,7 @@
 //! Functions for creating and collecting atoms.
 
 use crate::aidl::clone_file;
+use crate::crosvm::{Rss, VmMetric};
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     DeathReason::DeathReason,
     IVirtualMachine::IVirtualMachine,
@@ -153,13 +154,16 @@ pub fn write_vm_exited_stats(
     uid: i32,
     vm_identifier: &String,
     reason: DeathReason,
-    vm_start_timestamp: Option<SystemTime>,
+    vm_metric: VmMetric,
 ) {
-    let duration = get_duration(vm_start_timestamp);
+    let elapsed_time_millis = get_duration(vm_metric.start_timestamp).as_millis() as i64;
+    let guest_time_millis = vm_metric.cpu_guest_time.unwrap_or(-1i64);
+    let rss = vm_metric.rss.unwrap_or(Rss { vm: -1i64, crosvm: -1i64 });
+
     let vm_exited = vm_exited::VmExited {
         uid,
         vm_identifier,
-        elapsed_time_millis: duration.as_millis() as i64,
+        elapsed_time_millis,
         death_reason: match reason {
             DeathReason::INFRASTRUCTURE_ERROR => vm_exited::DeathReason::InfrastructureError,
             DeathReason::KILLED => vm_exited::DeathReason::Killed,
@@ -198,6 +202,9 @@ pub fn write_vm_exited_stats(
             DeathReason::HANGUP => vm_exited::DeathReason::Hangup,
             _ => vm_exited::DeathReason::Unknown,
         },
+        guest_time_millis,
+        rss_vm_kb: rss.vm,
+        rss_crosvm_kb: rss.crosvm,
     };
     match vm_exited.stats_write() {
         Err(e) => {
