@@ -47,7 +47,7 @@ fn main() {
     remove_memlock_rlimit().expect("Failed to remove memlock rlimit");
     clear_temporary_files().expect("Failed to delete old temporary files");
 
-    let service = VirtualizationService::init();
+    let service = VirtualizationService::default();
     let service = BnVirtualizationService::new_binder(service, BinderFeatures::default());
     register_lazy_service(BINDER_SERVICE_IDENTIFIER, service.as_binder()).unwrap();
     info!("Registered Binder service, joining threadpool.");
