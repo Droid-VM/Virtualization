@@ -20,6 +20,7 @@ mod composite;
 mod crosvm;
 mod payload;
 mod selinux;
+mod util;
 
 use crate::aidl::{VirtualizationService, BINDER_SERVICE_IDENTIFIER, TEMPORARY_DIRECTORY};
 use android_logger::{Config, FilterBuilder};
