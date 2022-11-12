@@ -46,6 +46,30 @@
       },
       "revId": "b5f7b6bb691e909d9cd41bfb76d701f18c4a2c76",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2395c37a_9312479e",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2022-11-12T00:44:33Z",
+      "side": 1,
+      "message": "I figure Rust code doesn\u0027t necessarily need to continue with the pattern from the AIDL generated code, but maybe the consistency is worth it?\n\nI would group b/254931669 with your raw exit status concern - though at least it prints the value!",
+      "parentUuid": "f54d235c_44157046",
+      "range": {
+        "startLine": 737,
+        "startChar": 27,
+        "endLine": 737,
+        "endChar": 40
+      },
+      "revId": "b5f7b6bb691e909d9cd41bfb76d701f18c4a2c76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
