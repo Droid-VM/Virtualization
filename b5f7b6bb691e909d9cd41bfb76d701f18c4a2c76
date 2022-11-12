@@ -22,6 +22,30 @@
       },
       "revId": "b5f7b6bb691e909d9cd41bfb76d701f18c4a2c76",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f54d235c_44157046",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2022-11-12T00:20:36Z",
+      "side": 1,
+      "message": "Note that this is running the AVF app process, so it is a bit special.\n\nThe distinction between these two kinds of exit types is baked into the [AIDL service](http://cs/android-internal/packages/modules/Virtualization/virtualizationservice/aidl/android/system/virtualizationservice/IVirtualMachineCallback.aidl;l\u003d40-48;rcl\u003d401cbb57a45e94b1ce9f744e892f9effcbdcb6b0) design. If there is an exit code, whether or not it is 0, it becomes a `IVirtualMachineCallback::onPayloadFinished` call. Otherwise it is a `IVirtualMachineCallback::onError` call.\n\nMaybe we could just send the wait status directly so that the API matches unix?\n\n---\n\nRe duplication for other cases:\n\nThere is a case in this file, `apkdmverity_child.wait()?;`, that might be forgetting to check the exit code by mistake.\n\nThere is an upcoming feature in the stdlib that allows you to do `child.wait()?exit_ok()?` as a shorthand to move the exit status error cases into the Err half of Result: https://doc.rust-lang.org/std/process/struct.ExitStatus.html#method.exit_ok\n\nIt prints out the raw exit status (instead of the exit code, etc), so not ideal IMO. Maybe there is a better option out there.",
+      "parentUuid": "b4ab5b3c_28bcd79f",
+      "range": {
+        "startLine": 737,
+        "startChar": 27,
+        "endLine": 737,
+        "endChar": 40
+      },
+      "revId": "b5f7b6bb691e909d9cd41bfb76d701f18c4a2c76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
