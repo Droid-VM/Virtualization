@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "321b01e4_17f93676",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T12:55:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9953539e_392c6753",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 100
+      },
+      "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f84a14cf_908171f2",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-07T12:03:07Z",
       "side": 1,
       "message": "nit: didn\u0027t you say you wanted one import per line?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 39
+      },
+      "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34404301_37643d49",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T12:55:52Z",
+      "side": 1,
+      "message": "Done; I\u0027ll try to follow [`imports_granularity \u003d Item`](https://rust-lang.github.io/rustfmt/?version\u003dv1.5.1\u0026search\u003d#imports_granularity) (let\u0027s hope they stabilize it soon).",
+      "parentUuid": "f84a14cf_908171f2",
       "range": {
         "startLine": 20,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd18cd30_799b2ae2",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T12:55:52Z",
+      "side": 1,
+      "message": "Done; so what\u0027s the rule regarding importing `core`/`std` modules? For example, I commonly see `mem` or `ptr` be imported instead of their individual items.",
+      "parentUuid": "6a984544_2ee57ee6",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 14
+      },
+      "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9c928e9_2e0cd4d0",
@@ -87,6 +159,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08c511e1_72f25e23",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T12:55:52Z",
+      "side": 1,
+      "message": "Unfortunately not as `core::ops::BitOr::bitor` isn\u0027t `const` (yet?); see https://github.com/bitflags/bitflags/issues/180.",
+      "parentUuid": "e9c928e9_2e0cd4d0",
+      "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e734de1a_8182f6e9",
@@ -100,6 +190,30 @@
       "writtenOn": "2022-11-07T12:03:07Z",
       "side": 1,
       "message": "Do we expect the callers to be able to use `IdMap` directly? This whole file looks like a wrapper around `IdMap` - could we make it official and have it be an internal field of some `PageTable` struct, with `new`, `map_range`, `map_slice` and `map_page` as the only exposed functions?",
+      "range": {
+        "startLine": 35,
+        "startChar": 40,
+        "endLine": 35,
+        "endChar": 45
+      },
+      "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b63ac45_bdbe3a40",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T12:55:52Z",
+      "side": 1,
+      "message": "Good idea; done.",
+      "parentUuid": "e734de1a_8182f6e9",
       "range": {
         "startLine": 35,
         "startChar": 40,
@@ -133,6 +247,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a2246d1_56781077",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T12:55:52Z",
+      "side": 1,
+      "message": "The programming model is slightly different though as the data lives fully inside the Rust machine (Rust is aware of the PTs and all the structures) and unlike the config data or heap functions, `create_dynamic_table` doesn\u0027t deal will the global state; we could have multiple `IdMap` instances without issue as only one is ever \"active\". The \"singleton\" really is the TTBR, which isn\u0027t modeled by the crate.\n\nOTOH, I can see how the crate might want to mark `activate()` as unsafe given its potential side-effects but that\u0027s beyond this CL.",
+      "parentUuid": "2cdc38f9_52e106cb",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 21
+      },
+      "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38fd56c4_ddb19d01",
@@ -146,6 +284,24 @@
       "writtenOn": "2022-11-08T15:26:40Z",
       "side": 1,
       "message": "Where is this used, and why can\u0027t the caller just use `IdMap::map_range` directly?",
+      "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3b3af1d_bdaaf005",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T12:55:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38fd56c4_ddb19d01",
       "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -167,6 +323,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9634950c_de0e32d5",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T12:55:52Z",
+      "side": 1,
+      "message": "\u003e References must always be dereferenceable\n\nI wasn\u0027t aware of that; will make sure the DT/payload slices are created after the regions are mapped!",
+      "parentUuid": "5fdd81ae_5de21d86",
+      "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "313261af_ad5ffc0e",
@@ -180,6 +354,30 @@
       "writtenOn": "2022-11-07T12:03:07Z",
       "side": 1,
       "message": "These three TODOs sound like they don\u0027t really depend on anything other than getting it done. Why not just do it?",
+      "range": {
+        "startLine": 64,
+        "startChar": 40,
+        "endLine": 64,
+        "endChar": 86
+      },
+      "revId": "4d22067b08cc1d8bd2aca8e5de8eb719b49053a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dec66fd1_8bf3df77",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T12:55:52Z",
+      "side": 1,
+      "message": "Done; The `impl` TODOs can only be addressed in `aarch64_paging`, right?",
+      "parentUuid": "313261af_ad5ffc0e",
       "range": {
         "startLine": 64,
         "startChar": 40,
