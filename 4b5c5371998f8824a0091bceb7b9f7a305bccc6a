@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d06ee12_4724922f",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-14T13:22:44Z",
+      "side": 1,
+      "message": "As per Andrew\u0027s comment, you should move this after page table init and create mappings",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 81
+      },
+      "revId": "4b5c5371998f8824a0091bceb7b9f7a305bccc6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "854307ad_f760316d",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-14T13:22:44Z",
+      "side": 1,
+      "message": "SAFETY",
+      "range": {
+        "startLine": 98,
+        "startChar": 4,
+        "endLine": 98,
+        "endChar": 10
+      },
+      "revId": "4b5c5371998f8824a0091bceb7b9f7a305bccc6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "180b8df3_6ab1e37f",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-14T13:22:44Z",
+      "side": 1,
+      "message": "How come clippy didn\u0027t ask you for comments on public declarations?",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 22
+      },
+      "revId": "4b5c5371998f8824a0091bceb7b9f7a305bccc6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19ad0561_7591fd65",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-14T13:22:44Z",
+      "side": 1,
+      "message": "data/code/rodata doesn\u0027t need to be public",
+      "range": {
+        "startLine": 59,
+        "startChar": 4,
+        "endLine": 59,
+        "endChar": 7
+      },
+      "revId": "4b5c5371998f8824a0091bceb7b9f7a305bccc6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
