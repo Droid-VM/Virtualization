@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d558693_3c6cb758",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-14T07:03:05Z",
+      "side": 1,
+      "message": "these are optional fields. so, we could skip setting them if an argument is None?",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 51
+      },
+      "revId": "d94c44ab6f16a1def4dc38aef742df44fbe58922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c2bf150_90cab404",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-14T07:03:05Z",
+      "side": 1,
+      "message": "I would rather make a struct having these fields (without Mutex\u003c...\u003e) and wrap the struct with Mutex and put it here.",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 39
+      },
+      "revId": "d94c44ab6f16a1def4dc38aef742df44fbe58922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69d97391_a1b12092",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-14T07:03:05Z",
+      "side": 1,
+      "message": "Log if this is Err.",
+      "range": {
+        "startLine": 358,
+        "startChar": 19,
+        "endLine": 358,
+        "endChar": 33
+      },
+      "revId": "d94c44ab6f16a1def4dc38aef742df44fbe58922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b68a290d_87909e3a",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-14T07:03:05Z",
+      "side": 1,
+      "message": "This doesn\u0027t need to be probed periodically. Checking once before the death should be enough.",
+      "range": {
+        "startLine": 358,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 13
+      },
+      "revId": "d94c44ab6f16a1def4dc38aef742df44fbe58922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "302bfe07_0a2c912c",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-14T07:03:05Z",
+      "side": 1,
+      "message": "Log if this is Err.",
+      "range": {
+        "startLine": 363,
+        "startChar": 19,
+        "endLine": 363,
+        "endChar": 26
+      },
+      "revId": "d94c44ab6f16a1def4dc38aef742df44fbe58922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7b572ec_a856a585",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-14T07:03:05Z",
+      "side": 1,
+      "message": "Add a comment about where this number is from.",
+      "range": {
+        "startLine": 447,
+        "startChar": 25,
+        "endLine": 447,
+        "endChar": 28
+      },
+      "revId": "d94c44ab6f16a1def4dc38aef742df44fbe58922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e44ef71_e2ec951c",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-14T07:03:05Z",
+      "side": 1,
+      "message": "This as well.",
+      "range": {
+        "startLine": 451,
+        "startChar": 17,
+        "endLine": 451,
+        "endChar": 19
+      },
+      "revId": "d94c44ab6f16a1def4dc38aef742df44fbe58922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acb90110_ca2d4ec0",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-14T07:03:05Z",
+      "side": 1,
+      "message": "no need",
+      "range": {
+        "startLine": 482,
+        "startChar": 9,
+        "endLine": 484,
+        "endChar": 9
+      },
+      "revId": "d94c44ab6f16a1def4dc38aef742df44fbe58922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
