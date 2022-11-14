@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcd3cb45_bb1c2bd6",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T20:24:37Z",
+      "side": 1,
+      "message": "\u003e I\u0027ve added a check on the alignment\n\nBecause it doesn\u0027t matter given what `data` points to, I actually ended up refraining from making the code more complex and instead simply documenting the requirement.",
+      "parentUuid": "9a536a9e_abaf0358",
+      "revId": "05849fa0de0c6a829c4280987c75e2cab79c827b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56e270ce_1ee55eb4",
