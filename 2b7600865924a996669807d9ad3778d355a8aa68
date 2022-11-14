@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a78b5f84_58b8c781",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95eb60c4_5f6aa625",
+      "range": {
+        "startLine": 391,
+        "startChar": 29,
+        "endLine": 391,
+        "endChar": 38
+      },
+      "revId": "2b7600865924a996669807d9ad3778d355a8aa68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6dae4765_4fcdc9d4",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93dbf45d_4f381c20",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6dae4765_4fcdc9d4",
+      "range": {
+        "startLine": 398,
+        "startChar": 46,
+        "endLine": 398,
+        "endChar": 66
+      },
+      "revId": "2b7600865924a996669807d9ad3778d355a8aa68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58af7fe8_3673fe83",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-11-14T12:17:11Z",
       "side": 1,
       "message": "not true",
+      "range": {
+        "startLine": 400,
+        "startChar": 8,
+        "endLine": 400,
+        "endChar": 50
+      },
+      "revId": "2b7600865924a996669807d9ad3778d355a8aa68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f0b02f8_1a29cb8d",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58af7fe8_3673fe83",
       "range": {
         "startLine": 400,
         "startChar": 8,
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "edf6028d_d37ce2cb",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:33Z",
+      "side": 1,
+      "message": "Same [question](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2138640/comment/c93a9306_58d7201d/).",
+      "parentUuid": "4a69da9b_a1812548",
+      "range": {
+        "startLine": 407,
+        "startChar": 0,
+        "endLine": 407,
+        "endChar": 26
+      },
+      "revId": "2b7600865924a996669807d9ad3778d355a8aa68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2a8791a4_dacd2fd1",
         "filename": "libs/libfdt/src/lib.rs",
         "patchSetId": 4
@@ -111,6 +207,53 @@
         "startChar": 8,
         "endLine": 473,
         "endChar": 86
+      },
+      "revId": "2b7600865924a996669807d9ad3778d355a8aa68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9138a105_27704f9b",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:33Z",
+      "side": 1,
+      "message": "That\u0027s what I had initially done but it results in extra (unnecessary) calls to `fdt_path_offset` (which walks the DT). For example, consider\n```\nnode \u003d fdt.path_offset(\"/some/path\");\nfdt.appendprop(node, \"prop1\", value1);\nfdt.appendprop(node, \"prop2\", value2);\nfdt.add_subnode(node, \"name\");\n```\n\nBTW, this comment is now outdated as `NodeOffset::fdt` prevents us from modifying the DT  while we hold the offset (which results in the awkward dance in vmbase/example/src/main.rs, line 165).",
+      "parentUuid": "2a8791a4_dacd2fd1",
+      "range": {
+        "startLine": 473,
+        "startChar": 8,
+        "endLine": 473,
+        "endChar": 86
+      },
+      "revId": "2b7600865924a996669807d9ad3778d355a8aa68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a12afc76_a7a609de",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:33Z",
+      "side": 1,
+      "message": "Is there a way for `FdtMut` to expose the methods of `Fdt` on its `\u0026mut [u8]` instead of having to duplicate them?",
+      "range": {
+        "startLine": 474,
+        "startChar": 11,
+        "endLine": 474,
+        "endChar": 22
       },
       "revId": "2b7600865924a996669807d9ad3778d355a8aa68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
