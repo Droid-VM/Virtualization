@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e1071c8d_a9076104",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-14T15:42:47Z",
+      "side": 1,
+      "message": "This seems like a rather awkward way to use a match expression. How about something like\n\n```rust\nif val \u003e\u003d 0 {\n  Ok(val)\n} else {\n  Err(match -val as _ {\n    libfdt_bindgen::FDT_ERR_NOTFOUND \u003d\u003e FdtError::NotFound,\n    ...\n  })\n}\n```",
+      "revId": "e1ced767a521b7d5e01cef22a53df08a726e7d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f8886cc_9fda46d6",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-14T15:42:47Z",
+      "side": 1,
+      "message": "Why does this return a Result, when it can never return an error?",
+      "range": {
+        "startLine": 163,
+        "startChar": 31,
+        "endLine": 163,
+        "endChar": 37
+      },
+      "revId": "e1ced767a521b7d5e01cef22a53df08a726e7d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "806110f7_a16624b5",
         "filename": "libs/libfdt/src/lib.rs",
         "patchSetId": 16
@@ -42,6 +82,29 @@
         "startChar": 20,
         "endLine": 201,
         "endChar": 62
+      },
+      "revId": "e1ced767a521b7d5e01cef22a53df08a726e7d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c5708ad_0a78c928",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-14T15:42:47Z",
+      "side": 1,
+      "message": "What does \u0027real\u0027 mean here? Physical?",
+      "range": {
+        "startLine": 226,
+        "startChar": 79,
+        "endLine": 226,
+        "endChar": 83
       },
       "revId": "e1ced767a521b7d5e01cef22a53df08a726e7d16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
