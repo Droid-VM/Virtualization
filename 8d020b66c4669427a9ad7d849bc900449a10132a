@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c39d9b1c_c189d611",
+        "filename": "libs/libfdt/src/ffi.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T10:31:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df7aed3a_0c2bcaca",
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2bc8a39_02c1ae9e",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-06-29T11:52:20Z",
       "side": 1,
       "message": "Was there a reason for declaring these manually rather than using bindgen?",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 12
+      },
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "293fe0dc_f06dd925",
+        "filename": "libs/libfdt/src/ffi.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T10:31:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2bc8a39_02c1ae9e",
       "range": {
         "startLine": 84,
         "startChar": 0,
@@ -81,6 +123,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f76ac025_ee8a60d3",
+        "filename": "libs/libfdt/src/ffi.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T10:31:50Z",
+      "side": 1,
+      "message": "I suppose because of encoding: `str` implies UTF-8 but libfdt really only expects ASCII strings. I\u0027ve replaced it with `\u0026CStr` as there\u0027s no need to leak the fact that the implementation calls the `_namelen` variant of the function (which doesn\u0027t reach the `\u0027\\0\u0027`).",
+      "parentUuid": "2b6fa3c1_bfbef0ce",
+      "range": {
+        "startLine": 104,
+        "startChar": 42,
+        "endLine": 104,
+        "endChar": 50
+      },
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a81b2c3_55e4804a",
@@ -94,6 +160,24 @@
       "writtenOn": "2022-06-29T18:12:19Z",
       "side": 1,
       "message": "What stops this trying to read beyond the end of the `fdt` slice?",
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b059cbfd_f3c8e07d",
+        "filename": "libs/libfdt/src/ffi.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T10:31:50Z",
+      "side": 1,
+      "message": "`libfdt` shouldn\u0027t read past the `fdt_header::totalsize`: cs/android/external/dtc/libfdt/fdt.h?l\u003d14, which we can trust if `fdt_check_full` succeeded. The safe wrappers are now methods of a `Fdt` struct that validates the slice in its constructor.",
+      "parentUuid": "9a81b2c3_55e4804a",
       "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -115,6 +199,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed8544f9_e1c2be5a",
+        "filename": "libs/libfdt/src/ffi.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T10:31:50Z",
+      "side": 1,
+      "message": "In this particular case, it returns `FDT_ERR_BADOFFSET`: cs/android/external/dtc/libfdt/fdt.c?l\u003d232\n\nBut, having patched bugs where libfdt happily worked with negative values (such as sizes), I don\u0027t think we should rely on the library to validate its inputs and all bindgen arguments are now `try_into`-ed.",
+      "parentUuid": "9c55d1eb_d7fa6d1a",
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18a5efdc_33e8d8f0",
@@ -128,6 +230,30 @@
       "writtenOn": "2022-06-29T11:52:20Z",
       "side": 1,
       "message": "Could it be negative?",
+      "range": {
+        "startLine": 130,
+        "startChar": 62,
+        "endLine": 130,
+        "endChar": 66
+      },
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f408c19_6aef6814",
+        "filename": "libs/libfdt/src/ffi.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T10:31:50Z",
+      "side": 1,
+      "message": "All bindgen arguments are now `try_into`-ed.",
+      "parentUuid": "18a5efdc_33e8d8f0",
       "range": {
         "startLine": 130,
         "startChar": 62,
@@ -161,6 +287,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d26ecf0_eab42fce",
+        "filename": "libs/libfdt/src/ffi.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T10:31:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "036d9693_e205e48b",
+      "range": {
+        "startLine": 139,
+        "startChar": 69,
+        "endLine": 139,
+        "endChar": 88
+      },
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea1228ee_0828f965",
@@ -174,6 +324,24 @@
       "writtenOn": "2022-06-29T18:12:19Z",
       "side": 1,
       "message": "Would it make sense for this to be `FDT_CELL_BYTES * 8`?",
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bb56c28_88856140",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T10:31:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea1228ee_0828f965",
       "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -195,6 +363,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c6e7060_e48bbe72",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T10:31:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4380dd3_d6cc88aa",
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1d4be5c_2b92e1c2",
@@ -208,6 +394,24 @@
       "writtenOn": "2022-06-29T18:12:19Z",
       "side": 1,
       "message": "Exposing a private type like this in the public API is likely to make life difficult for users of the library. Maybe you want to re-export this type?",
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "686b1627_20ffa040",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T10:31:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1d4be5c_2b92e1c2",
       "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -229,6 +433,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "308b5302_44c071f9",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T10:31:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f3980db3_75fbbff0",
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e899029_69903645",
@@ -246,6 +468,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b46f02a8_207966b5",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T10:31:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8e899029_69903645",
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b901966_01cf1d70",
@@ -259,6 +499,24 @@
       "writtenOn": "2022-06-29T18:12:19Z",
       "side": 1,
       "message": "Is it worth checking that it is nonzero too?",
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e0353d2_15ee28ed",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T10:31:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b901966_01cf1d70",
       "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -286,6 +544,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "999c3cec_b3ad4a08",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T10:31:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "82a1fa55_603a3b48",
+      "range": {
+        "startLine": 111,
+        "startChar": 53,
+        "endLine": 111,
+        "endChar": 58
+      },
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e323573_7728a656",
@@ -299,6 +581,30 @@
       "writtenOn": "2022-06-29T11:52:20Z",
       "side": 1,
       "message": "offset_from() keeps you safer",
+      "range": {
+        "startLine": 135,
+        "startChar": 43,
+        "endLine": 135,
+        "endChar": 44
+      },
+      "revId": "8d020b66c4669427a9ad7d849bc900449a10132a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0860103_9ea8b9e4",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T10:31:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e323573_7728a656",
       "range": {
         "startLine": 135,
         "startChar": 43,
