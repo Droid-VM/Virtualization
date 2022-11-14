@@ -16,6 +16,29 @@
       "message": "Hi Alan, PTAL.",
       "revId": "9389456635a40e6ea416631f181aae8936d5bf46",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba71d632_b400d254",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-14T12:06:22Z",
+      "side": 1,
+      "message": "I\u0027m not convinced this is safe.\nAfter the lambda returns there are no strong references to the new VMM, so the GC is allowed to free it; the call to get() would then return null.",
+      "range": {
+        "startLine": 95,
+        "startChar": 17,
+        "endLine": 95,
+        "endChar": 27
+      },
+      "revId": "9389456635a40e6ea416631f181aae8936d5bf46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
