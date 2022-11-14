@@ -70,6 +70,30 @@
       },
       "revId": "b5f7b6bb691e909d9cd41bfb76d701f18c4a2c76",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bce72f74_dd11dbd2",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-14T01:18:00Z",
+      "side": 1,
+      "message": "We wanted to distinguish errors from the payload (i.e. non-zero exit code whose meaning is \"partially\" defined by the payload), and errors from infra (the VM, microdroid_manager, ...). The former is delivered via onPayloadFinished, and the latter is delivered via onError.\n\nBut, yes, the previous implementation clearly didn\u0027t consider the exit-by-signal case. I wish that the signal is also reported via onPayloadFinished.",
+      "parentUuid": "2395c37a_9312479e",
+      "range": {
+        "startLine": 737,
+        "startChar": 27,
+        "endLine": 737,
+        "endChar": 40
+      },
+      "revId": "b5f7b6bb691e909d9cd41bfb76d701f18c4a2c76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
