@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a536a9e_abaf0358",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T20:21:02Z",
+      "side": 1,
+      "message": "Yes, it is!\n\nI\u0027ve added a check on the alignment (although it shouldn\u0027t matter as the slice is page-aligned).",
+      "parentUuid": "6c34a125_0bb1e34b",
+      "revId": "05849fa0de0c6a829c4280987c75e2cab79c827b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56e270ce_1ee55eb4",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24cfb0de_2f4572a5",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T20:21:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56e270ce_1ee55eb4",
+      "revId": "05849fa0de0c6a829c4280987c75e2cab79c827b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8473d66_9a81fb0c",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-11-08T12:29:07Z",
       "side": 1,
       "message": "Is there any plan for this to be stabilised soon? I\u0027m not super keen on depending on unstable features, it makes the toolchain team\u0027s job harder.",
+      "revId": "05849fa0de0c6a829c4280987c75e2cab79c827b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf97823f_ba302d5b",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T20:21:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8473d66_9a81fb0c",
       "revId": "05849fa0de0c6a829c4280987c75e2cab79c827b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
