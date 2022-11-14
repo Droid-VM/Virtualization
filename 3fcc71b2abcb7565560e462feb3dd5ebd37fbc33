@@ -332,6 +332,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8434cf22_0de48be6",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-14T20:32:12Z",
+      "side": 1,
+      "message": "More or less. You need to make sure the C function can never read beyond the bounds of the slice, write to it (because you only have an immutable reference), retain the pointer to access after the function returns, or otherwise break Rust\u0027s aliasing model or cause undefined behaviour for any possible input that could be caused by safe Rust code.",
+      "parentUuid": "c2472236_070a8b77",
+      "range": {
+        "startLine": 331,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 80
+      },
+      "revId": "3fcc71b2abcb7565560e462feb3dd5ebd37fbc33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2bbafa7_94265972",
         "filename": "libs/libfdt/src/lib.rs",
         "patchSetId": 15
