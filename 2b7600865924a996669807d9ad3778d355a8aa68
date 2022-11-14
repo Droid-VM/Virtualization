@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95eb60c4_5f6aa625",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-14T12:17:11Z",
+      "side": 1,
+      "message": "read-write",
+      "range": {
+        "startLine": 391,
+        "startChar": 29,
+        "endLine": 391,
+        "endChar": 38
+      },
+      "revId": "2b7600865924a996669807d9ad3778d355a8aa68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dae4765_4fcdc9d4",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-14T12:17:11Z",
+      "side": 1,
+      "message": "nit: \"Flattened Device Tree\"",
+      "range": {
+        "startLine": 398,
+        "startChar": 46,
+        "endLine": 398,
+        "endChar": 66
+      },
+      "revId": "2b7600865924a996669807d9ad3778d355a8aa68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58af7fe8_3673fe83",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-14T12:17:11Z",
+      "side": 1,
+      "message": "not true",
+      "range": {
+        "startLine": 400,
+        "startChar": 8,
+        "endLine": 400,
+        "endChar": 50
+      },
+      "revId": "2b7600865924a996669807d9ad3778d355a8aa68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a69da9b_a1812548",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-14T12:17:11Z",
+      "side": 1,
+      "message": "SAFETY",
+      "range": {
+        "startLine": 407,
+        "startChar": 0,
+        "endLine": 407,
+        "endChar": 26
+      },
+      "revId": "2b7600865924a996669807d9ad3778d355a8aa68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a8791a4_dacd2fd1",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-14T12:17:11Z",
+      "side": 1,
+      "message": "I think that calls for an unsafe, but actually... Why don\u0027t you just make that path a parameter of the functions that currently take NodeOffset? Then you call this internally and all your public functions will be safe.",
+      "range": {
+        "startLine": 473,
+        "startChar": 8,
+        "endLine": 473,
+        "endChar": 86
+      },
+      "revId": "2b7600865924a996669807d9ad3778d355a8aa68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
