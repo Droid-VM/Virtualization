@@ -89,13 +89,10 @@ public class VirtualMachineManager {
     public static VirtualMachineManager getInstance(@NonNull Context context) {
         requireNonNull(context, "context must not be null");
         synchronized (sInstances) {
-            VirtualMachineManager vmm =
-                    sInstances.containsKey(context) ? sInstances.get(context).get() : null;
-            if (vmm == null) {
-                vmm = new VirtualMachineManager(context);
-                sInstances.put(context, new WeakReference<>(vmm));
-            }
-            return vmm;
+            return sInstances
+                    .computeIfAbsent(
+                            context, k -> new WeakReference<>(new VirtualMachineManager(k)))
+                    .get();
         }
     }
 
