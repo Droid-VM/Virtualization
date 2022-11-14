@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "782138d1_a56bd5ba",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-11-14T07:17:55Z",
+      "side": 1,
+      "message": "Unfortunally, they aren\u0027t optional fields unlike they were written as optional in atoms.proto. In the function stats_write which is automatically made, these fields are required. That\u0027s why I used default value if they\u0027re None.",
+      "parentUuid": "6d558693_3c6cb758",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 51
+      },
+      "revId": "d94c44ab6f16a1def4dc38aef742df44fbe58922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0c2bf150_90cab404",
         "filename": "virtualizationservice/src/crosvm.rs",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-14T07:03:05Z",
       "side": 1,
       "message": "I would rather make a struct having these fields (without Mutex\u003c...\u003e) and wrap the struct with Mutex and put it here.",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 39
+      },
+      "revId": "d94c44ab6f16a1def4dc38aef742df44fbe58922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a3b0aa3_3801d62d",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-11-14T07:17:55Z",
+      "side": 1,
+      "message": "Sounds good, and it looks better. Will do, thanks!",
+      "parentUuid": "0c2bf150_90cab404",
       "range": {
         "startLine": 204,
         "startChar": 0,
@@ -83,6 +131,30 @@
       "writtenOn": "2022-11-14T07:03:05Z",
       "side": 1,
       "message": "This doesn\u0027t need to be probed periodically. Checking once before the death should be enough.",
+      "range": {
+        "startLine": 358,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 13
+      },
+      "revId": "d94c44ab6f16a1def4dc38aef742df44fbe58922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67c73bc0_434ad909",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-11-14T07:17:55Z",
+      "side": 1,
+      "message": "Sounds good if it\u0027s possible, but how can we do? In the function `monitor_vm_exit`, it checks whether child process(crosvm) is finished or not by waiting it. I think it\u0027s able to check something right after the VM become dead, but not for right before.",
+      "parentUuid": "b68a290d_87909e3a",
       "range": {
         "startLine": 358,
         "startChar": 0,
