@@ -16,6 +16,23 @@
       "message": "(lost prior +2 from Alan)",
       "revId": "b42b47fae2659ee6e2dac44ce053c3c04890bcfa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1073a44d_0a813dff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-14T06:00:57Z",
+      "side": 1,
+      "message": "Huh, there was a segfault inside User::from_uid. Let me fix that first.\n\n  00000000000543d0  __strlen_aarch64 (BuildId: d810f79bcfd3be729c995970bcbd41b4)                                                                                                                                                                                                                                                              external/arm-optimized-routines/string/aarch64/strlen.S:83:0\n  00000000000eaa24  _RNvXs1v_NtCsfnYrDlIVWiR_3nix6unistdNtB6_4UserINtNtCsjcPwNEMpcXh_4core7convert4FromRNtNtNtNtNtCs6wuHbFgUzDs_4libc4unix10linux_like7android3b646passwdE4from+176 (BuildId: 8e09c79ab3208113a101c09eb2cc9ce4)                                                                                                               /apex/com.android.virt/bin/virtualizationservice\n  00000000000eacfc  _RNvMs1x_NtCsfnYrDlIVWiR_3nix6unistdNtB6_4User8from_uid+280 (BuildId: 8e09c79ab3208113a101c09eb2cc9ce4)",
+      "revId": "b42b47fae2659ee6e2dac44ce053c3c04890bcfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
