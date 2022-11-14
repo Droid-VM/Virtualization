@@ -161,6 +161,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "437a186d_96e7d092",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-14T10:44:07Z",
+      "side": 1,
+      "message": "getConsoleOutput() LGTM",
+      "parentUuid": "1988575c_83101228",
+      "range": {
+        "startLine": 648,
+        "startChar": 23,
+        "endLine": 648,
+        "endChar": 45
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11326294_abf3e53f",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 23
@@ -172,6 +196,30 @@
       "writtenOn": "2022-10-21T18:02:38Z",
       "side": 1,
       "message": "nit: ditto",
+      "range": {
+        "startLine": 662,
+        "startChar": 23,
+        "endLine": 662,
+        "endChar": 41
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "371e4843_6bc7b7a8",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-14T10:44:07Z",
+      "side": 1,
+      "message": "How about getLogOutput()? This way it is similar to getConsoleOutput()",
+      "parentUuid": "11326294_abf3e53f",
       "range": {
         "startLine": 662,
         "startChar": 23,
@@ -431,6 +479,30 @@
       "side": 1,
       "message": "The guidelines say \"All arguments to builder constructors must be required\", not \"All required fields must be constructor arguments\".\n\nsetPayloadBinaryPath is also required, at least for priv app clients. I\u0027m slightly reluctant to treat protectedVm more specially than we already do.\n\nOmitting setProtected is something clients should only do once (and only if they don\u0027t look at the sample code). We did have some feedback on this, addressed by clarifying the message. (aosp/2265467)",
       "parentUuid": "dd09ecf8_4b783e3d",
+      "range": {
+        "startLine": 442,
+        "startChar": 8,
+        "endLine": 442,
+        "endChar": 60
+      },
+      "revId": "21e6997129ad4a4442afe3688f4e1c77307d25be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a612878e_33621ff8",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-14T10:44:07Z",
+      "side": 1,
+      "message": "I see, keepings as is LGTM",
+      "parentUuid": "b1945193_21cc22f1",
       "range": {
         "startLine": 442,
         "startChar": 8,
