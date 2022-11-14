@@ -39,6 +39,30 @@
       },
       "revId": "9389456635a40e6ea416631f181aae8936d5bf46",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddf3d803_e7d783a2",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-14T12:24:37Z",
+      "side": 1,
+      "message": "You\u0027re right, this method cannot be changed to this. Also for another reason, the weakRef can return null in the getter.",
+      "parentUuid": "ba71d632_b400d254",
+      "range": {
+        "startLine": 95,
+        "startChar": 17,
+        "endLine": 95,
+        "endChar": 27
+      },
+      "revId": "9389456635a40e6ea416631f181aae8936d5bf46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
