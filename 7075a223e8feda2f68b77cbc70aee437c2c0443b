@@ -46,6 +46,30 @@
       },
       "revId": "7075a223e8feda2f68b77cbc70aee437c2c0443b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b8d0d50_2f021d57",
+        "filename": "microdroid/vm_payload/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-14T14:16:19Z",
+      "side": 1,
+      "message": "Can it be because the compsvc_defaults specifies it as rustlibs? Should it be just in libs now since it\u0027s a cc_library_shared?",
+      "parentUuid": "c8e88541_73f950b4",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 6
+      },
+      "revId": "7075a223e8feda2f68b77cbc70aee437c2c0443b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
