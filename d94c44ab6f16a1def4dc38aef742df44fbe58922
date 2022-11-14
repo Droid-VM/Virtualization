@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef344e5e_8daff245",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-11-14T09:46:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a3b0aa3_3801d62d",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 39
+      },
+      "revId": "d94c44ab6f16a1def4dc38aef742df44fbe58922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69d97391_a1b12092",
@@ -273,6 +297,30 @@
       "writtenOn": "2022-11-14T08:02:03Z",
       "side": 1,
       "message": "Shouldn\u0027t we update the values only if the newly measured values are greater than the previously measured values?",
+      "range": {
+        "startLine": 364,
+        "startChar": 0,
+        "endLine": 365,
+        "endChar": 68
+      },
+      "revId": "d94c44ab6f16a1def4dc38aef742df44fbe58922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71596b34_b21b64ff",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-11-14T09:46:53Z",
+      "side": 1,
+      "message": "Forgot that. Thanks, updated now.",
+      "parentUuid": "61def25d_bc9eef8d",
       "range": {
         "startLine": 364,
         "startChar": 0,
