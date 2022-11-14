@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d1a81ac_763cb472",
+        "filename": "microdroid_manager/microdroid_manager.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-11-14T11:53:40Z",
+      "side": 1,
+      "message": "stdio_to_kmsg is to redirect stdout/stderr to kmsg_debug, while /dev/kmsg is for normal logs like info!\n\nI added comments.",
+      "parentUuid": "d461ea7d_83ff9c94",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 17
+      },
+      "revId": "44b6cf9be0941a5c5c098ac6d610c70904e6d0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a20c96a_ef329d12",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-14T11:46:52Z",
       "side": 1,
       "message": "Comment this?",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 5
+      },
+      "revId": "44b6cf9be0941a5c5c098ac6d610c70904e6d0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49342850_ff03827e",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-11-14T11:53:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a20c96a_ef329d12",
       "range": {
         "startLine": 156,
         "startChar": 0,
