@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98bab061_5cedfa53",
+        "filename": "libs/libfdt/Android.bp",
+        "patchSetId": 15
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:20Z",
+      "side": 1,
+      "message": "Interesting, do you know why the build system would refuse to build `vmbase_example` with this line in but didn\u0027t complain about for this target? Is it because of `edition`?",
+      "parentUuid": "d12c77c7_5d86586c",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 45
+      },
+      "revId": "3fcc71b2abcb7565560e462feb3dd5ebd37fbc33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4787663a_fecf803c",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-14T12:06:09Z",
       "side": 1,
       "message": "Nice. Please explain in a comment",
+      "range": {
+        "startLine": 140,
+        "startChar": 33,
+        "endLine": 140,
+        "endChar": 60
+      },
+      "revId": "3fcc71b2abcb7565560e462feb3dd5ebd37fbc33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8beffa73_2d749cd7",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4787663a_fecf803c",
       "range": {
         "startLine": 140,
         "startChar": 33,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1776e56a_2ebbe097",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3759d0c1_cf3cfc04",
+      "range": {
+        "startLine": 185,
+        "startChar": 4,
+        "endLine": 186,
+        "endChar": 13
+      },
+      "revId": "3fcc71b2abcb7565560e462feb3dd5ebd37fbc33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5049c9ea_7eff02f4",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-11-14T12:06:09Z",
       "side": 1,
       "message": "Is this a general FDT requirement? A comment might be worthwhile.",
+      "range": {
+        "startLine": 241,
+        "startChar": 8,
+        "endLine": 243,
+        "endChar": 9
+      },
+      "revId": "3fcc71b2abcb7565560e462feb3dd5ebd37fbc33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "605505a7_5fd5e0cb",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5049c9ea_7eff02f4",
       "range": {
         "startLine": 241,
         "startChar": 8,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "640af0f9_d9d2b355",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b14c838_d7b24bae",
+      "range": {
+        "startLine": 270,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 54
+      },
+      "revId": "3fcc71b2abcb7565560e462feb3dd5ebd37fbc33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b51594da_e963a412",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-11-14T12:06:09Z",
       "side": 1,
       "message": "flattened, maybe Flattened Device Tree, since that\u0027s a thing",
+      "range": {
+        "startLine": 313,
+        "startChar": 35,
+        "endLine": 313,
+        "endChar": 42
+      },
+      "revId": "3fcc71b2abcb7565560e462feb3dd5ebd37fbc33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93d0a881_e05a9541",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b51594da_e963a412",
       "range": {
         "startLine": 313,
         "startChar": 35,
@@ -164,6 +308,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c2472236_070a8b77",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:20Z",
+      "side": 1,
+      "message": "So what makes these calls `unsafe`? The parameters are already validated by the type system; is it about making sure that the C code can be \"trusted\" to not have side effects and/or respect the constness of its received pointers?",
+      "parentUuid": "c93a9306_58d7201d",
+      "range": {
+        "startLine": 331,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 80
+      },
+      "revId": "3fcc71b2abcb7565560e462feb3dd5ebd37fbc33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2bbafa7_94265972",
         "filename": "libs/libfdt/src/lib.rs",
         "patchSetId": 15
@@ -175,6 +343,30 @@
       "writtenOn": "2022-11-14T12:06:09Z",
       "side": 1,
       "message": "Could we avoid `panic`? It\u0027s always cleaner to return an error. I know our panic handler is pretty simple, but abruptly jumping to it can still create inconsistent state that is difficult to argue about. Returning an error means we properly destroy objects before printing the error message.\n\nYou already have a few places where you convert to FdtError::Internal. Maybe we could give it a string with context? Or create a separate enum value for things like this.",
+      "range": {
+        "startLine": 358,
+        "startChar": 35,
+        "endLine": 358,
+        "endChar": 83
+      },
+      "revId": "3fcc71b2abcb7565560e462feb3dd5ebd37fbc33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9146f1d_b5e9df65",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2bbafa7_94265972",
       "range": {
         "startLine": 358,
         "startChar": 35,
@@ -208,6 +400,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2431c67e_1bc78241",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae70fcb9_f47ca632",
+      "range": {
+        "startLine": 360,
+        "startChar": 48,
+        "endLine": 360,
+        "endChar": 96
+      },
+      "revId": "3fcc71b2abcb7565560e462feb3dd5ebd37fbc33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a60b0809_8cf57e1b",
@@ -221,6 +437,30 @@
       "writtenOn": "2022-11-14T12:06:09Z",
       "side": 1,
       "message": "What does that have to do with the safety requirements in https://doc.rust-lang.org/std/primitive.pointer.html#method.offset_from ?",
+      "range": {
+        "startLine": 361,
+        "startChar": 20,
+        "endLine": 361,
+        "endChar": 91
+      },
+      "revId": "3fcc71b2abcb7565560e462feb3dd5ebd37fbc33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96a8aff1_b1f03f3f",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a60b0809_8cf57e1b",
       "range": {
         "startLine": 361,
         "startChar": 20,

@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c5bda3a_596cb09f",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1071c8d_a9076104",
+      "revId": "e1ced767a521b7d5e01cef22a53df08a726e7d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f8886cc_9fda46d6",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-11-14T15:42:47Z",
       "side": 1,
       "message": "Why does this return a Result, when it can never return an error?",
+      "range": {
+        "startLine": 163,
+        "startChar": 31,
+        "endLine": 163,
+        "endChar": 37
+      },
+      "revId": "e1ced767a521b7d5e01cef22a53df08a726e7d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25e9ac4d_75cf6841",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f8886cc_9fda46d6",
       "range": {
         "startLine": 163,
         "startChar": 31,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b37016f_3ea79599",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "806110f7_a16624b5",
+      "range": {
+        "startLine": 200,
+        "startChar": 16,
+        "endLine": 200,
+        "endChar": 29
+      },
+      "revId": "e1ced767a521b7d5e01cef22a53df08a726e7d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f26b91e7_969fc0fe",
@@ -77,6 +143,30 @@
       "writtenOn": "2022-11-14T12:06:09Z",
       "side": 1,
       "message": "This is a static assertion. Can we do those yet?",
+      "range": {
+        "startLine": 201,
+        "startChar": 20,
+        "endLine": 201,
+        "endChar": 62
+      },
+      "revId": "e1ced767a521b7d5e01cef22a53df08a726e7d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39a7c85d_a4a7dbc7",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f26b91e7_969fc0fe",
       "range": {
         "startLine": 201,
         "startChar": 20,
@@ -110,6 +200,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84358c6a_d9f3b448",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:20Z",
+      "side": 1,
+      "message": "It\u0027s the terminology used by the arch-agnostic spec but should mean the address when no translation is taking place. In our case, it\u0027s IPAs but would be PAs on non-virtualized platforms.",
+      "parentUuid": "6c5708ad_0a78c928",
+      "range": {
+        "startLine": 226,
+        "startChar": 79,
+        "endLine": 226,
+        "endChar": 83
+      },
+      "revId": "e1ced767a521b7d5e01cef22a53df08a726e7d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baeba57b_4cdf6caa",
@@ -123,6 +237,30 @@
       "writtenOn": "2022-11-14T12:06:09Z",
       "side": 1,
       "message": "uber nit: these can fit on on line, but up to you.",
+      "range": {
+        "startLine": 369,
+        "startChar": 8,
+        "endLine": 371,
+        "endChar": 22
+      },
+      "revId": "e1ced767a521b7d5e01cef22a53df08a726e7d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2bcb798_6631de96",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-14T19:16:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baeba57b_4cdf6caa",
       "range": {
         "startLine": 369,
         "startChar": 8,
