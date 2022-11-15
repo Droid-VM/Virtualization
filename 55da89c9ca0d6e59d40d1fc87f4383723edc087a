@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50d5be3f_a83acc9e",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2022-11-15T16:52:38Z",
+      "side": 1,
+      "message": "What is \"the payload\" here? I assume there are other docs that connect the dots for these APIs?",
+      "range": {
+        "startLine": 31,
+        "startChar": 26,
+        "endLine": 31,
+        "endChar": 37
+      },
+      "revId": "55da89c9ca0d6e59d40d1fc87f4383723edc087a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "026e3872_102c2746",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2022-11-15T16:52:38Z",
+      "side": 1,
+      "message": "Can the client do anything in this case? Can it ever transiently fail (i.e. the caller should try again after a wait)?",
+      "revId": "55da89c9ca0d6e59d40d1fc87f4383723edc087a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
