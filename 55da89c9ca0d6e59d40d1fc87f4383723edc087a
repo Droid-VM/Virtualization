@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1267a10_e3d4581e",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T17:03:26Z",
+      "side": 1,
+      "message": "Documentation? In our hour of triumph?\n\nThere will definitely need to be something linking these APIs to the Java APIs in the host, where:\n- host \u003d the Android app creating the VM\n- payload \u003d the native code running inside the VM.\n\nI think we\u0027ll end up with a README.md here and have it link to the host API javadoc and vice versa. But that\u0027ll be a little easier once they both exist.",
+      "parentUuid": "50d5be3f_a83acc9e",
+      "range": {
+        "startLine": 31,
+        "startChar": 26,
+        "endLine": 31,
+        "endChar": 37
+      },
+      "revId": "55da89c9ca0d6e59d40d1fc87f4383723edc087a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "026e3872_102c2746",
         "filename": "microdroid/vm_payload/include/vm_payload.h",
         "patchSetId": 8
@@ -37,6 +61,24 @@
       "writtenOn": "2022-11-15T16:52:38Z",
       "side": 1,
       "message": "Can the client do anything in this case? Can it ever transiently fail (i.e. the caller should try again after a wait)?",
+      "revId": "55da89c9ca0d6e59d40d1fc87f4383723edc087a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59252eec_6b95fc3b",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T17:03:26Z",
+      "side": 1,
+      "message": "Oh now that is a good question. Almost certainly not.\nLooking at our existing clients, one just ignores failure (but the host will kill the VM after a timeout if it doesn\u0027t get the notification), and two call abort.\n\nWhat would you suggest? Document that, or make this return void and abort() itself on failure?",
+      "parentUuid": "026e3872_102c2746",
       "revId": "55da89c9ca0d6e59d40d1fc87f4383723edc087a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
