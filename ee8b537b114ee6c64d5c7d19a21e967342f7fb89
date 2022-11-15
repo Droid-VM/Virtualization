@@ -22,6 +22,30 @@
       },
       "revId": "ee8b537b114ee6c64d5c7d19a21e967342f7fb89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6ac2bd0_6eca0fd3",
+        "filename": "apex/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2022-11-15T18:01:06Z",
+      "side": 1,
+      "message": "I guess there\u0027s no harm in adding it now, but we don\u0027t need to be adding new repositories in prebuilt/module_sdks etc for it, we can save that for when you\u0027re actually becoming a module.",
+      "parentUuid": "b63ca595_87548b53",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 256,
+        "endChar": 0
+      },
+      "revId": "ee8b537b114ee6c64d5c7d19a21e967342f7fb89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
