@@ -189,6 +189,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44904b69_8f91471e",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-15T14:21:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edf6028d_d37ce2cb",
+      "range": {
+        "startLine": 407,
+        "startChar": 0,
+        "endLine": 407,
+        "endChar": 26
+      },
+      "revId": "2b7600865924a996669807d9ad3778d355a8aa68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a8791a4_dacd2fd1",
@@ -226,6 +250,30 @@
       "side": 1,
       "message": "That\u0027s what I had initially done but it results in extra (unnecessary) calls to `fdt_path_offset` (which walks the DT). For example, consider\n```\nnode \u003d fdt.path_offset(\"/some/path\");\nfdt.appendprop(node, \"prop1\", value1);\nfdt.appendprop(node, \"prop2\", value2);\nfdt.add_subnode(node, \"name\");\n```\n\nBTW, this comment is now outdated as `NodeOffset::fdt` prevents us from modifying the DT  while we hold the offset (which results in the awkward dance in vmbase/example/src/main.rs, line 165).",
       "parentUuid": "2a8791a4_dacd2fd1",
+      "range": {
+        "startLine": 473,
+        "startChar": 8,
+        "endLine": 473,
+        "endChar": 86
+      },
+      "revId": "2b7600865924a996669807d9ad3778d355a8aa68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd3f9993_72dfe2c1",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-15T14:21:42Z",
+      "side": 1,
+      "message": "Ack?",
+      "parentUuid": "9138a105_27704f9b",
       "range": {
         "startLine": 473,
         "startChar": 8,
