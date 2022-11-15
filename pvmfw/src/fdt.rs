@@ -12,29 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! pVM firmware.
+//! High-level FDT functions.
 
-#![no_main]
-#![no_std]
-#![feature(default_alloc_error_handler)]
+use core::ffi::CStr;
+use core::ops::Range;
 
-mod avb;
-mod entry;
-mod exceptions;
-mod fdt;
-mod heap;
-mod helpers;
-mod mmio_guard;
-mod mmu;
-mod smccc;
+/// Extract from /chosen the address range containing the pre-loaded ramdisk.
+pub fn initrd_range(fdt: &libfdt::Fdt) -> libfdt::Result<Range<usize>> {
+    let start = CStr::from_bytes_with_nul(b"linux,initrd-start\0").unwrap();
+    let end = CStr::from_bytes_with_nul(b"linux,initrd-end\0").unwrap();
 
-use avb::PUBLIC_KEY;
-use log::{debug, info};
+    let chosen = fdt.chosen()?;
+    let start = chosen.getprop_u32(start)? as usize;
+    let end = chosen.getprop_u32(end)? as usize;
 
-fn main(fdt: &libfdt::Fdt, _payload: &[u8], bcc: &[u8], _ramdisk: Option<&[u8]>) {
-    info!("pVM firmware");
-    debug!("BCC: {:?} ({:#x} bytes)", bcc.as_ptr(), bcc.len());
-    debug!("AVB public key: addr={:?}, size={:#x} ({1})", PUBLIC_KEY.as_ptr(), PUBLIC_KEY.len());
-    debug!("fdt: {:?}", fdt as *const libfdt::Fdt);
-    info!("Starting payload...");
+    Ok(start..end)
 }
