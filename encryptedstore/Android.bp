@@ -1,0 +1,27 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_defaults {
+    name: "encryptedstore.defaults",
+    srcs: ["src/main.rs"],
+    edition: "2021",
+    prefer_rlib: true,
+    rustlibs: [
+        "libanyhow",
+        "libclap",
+        "libnix",
+        "libdm_rust",
+    ],
+    multilib: {
+        lib32: {
+            enabled: false,
+        },
+    },
+}
+
+rust_binary {
+    name: "encryptedstore",
+    defaults: ["encryptedstore.defaults"],
+    //bootstrap: true,
+}

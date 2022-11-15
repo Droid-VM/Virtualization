@@ -111,7 +111,7 @@ impl DiceDriver<'_> {
         })
     }
 
-    pub fn get_sealing_key(&self, identifier: &[u8]) -> Result<ZVec> {
+    pub fn get_sealing_key(&self, identifier: &[u8], keysize: u32) -> Result<ZVec> {
         // Deterministically derive a key to use for sealing data, rather than using the CDI
         // directly, so we have the chance to rotate the key if needed. A salt isn't needed as the
         // input key material is already cryptographically strong.
@@ -120,13 +120,13 @@ impl DiceDriver<'_> {
             Self::Fake(fake) => &fake.cdi_seal,
         };
         let salt = &[];
-        let mut key = ZVec::new(32)?;
+        let mut key = ZVec::new(keysize as usize)?;
         hkdf(&mut key, Md::sha256(), cdi_seal, salt, identifier)?;
         Ok(key)
     }
 
     pub fn derive(
-        self,
+        &self,
         code_hash: [u8; HASH_SIZE],
         config_desc: &[u8],
         authority_hash: [u8; HASH_SIZE],
