@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8663358d_c0dc5628",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-15T16:11:41Z",
+      "side": 1,
+      "message": "`assertThat(bytesArray1).isEqualTo(bytesArray2)` makes the tests crash when showing the diff of two too big arrays.",
+      "range": {
+        "startLine": 664,
+        "startChar": 12,
+        "endLine": 664,
+        "endChar": 92
+      },
+      "revId": "229fc7f9eaac4cefda513da4859a3601ec4f3c50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
