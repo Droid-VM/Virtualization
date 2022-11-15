@@ -248,3 +248,8 @@ bootclasspath_fragment {
         ],
     },
 }
+
+sdk {
+    name: "com.android.virt-sdk",
+    apexes: ["com.android.virt"],
+}

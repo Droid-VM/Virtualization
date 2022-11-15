@@ -78,9 +78,6 @@ java_sdk_library {
     impl_library_visibility: [
         "//frameworks/base",
     ],
-
-    // Temporary workaround, will be removed in a follow-up child cl.
-    unsafe_ignore_missing_latest_api: true,
 }
 
 prebuilt_apis {
