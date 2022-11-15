@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eeb0387_d377738f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-11-15T04:38:01Z",
+      "side": 1,
+      "message": "Example of VmExited, gathered by `atest MicrodroidHostTests#testTelemetryPushedAtoms`\n\nAt least, I think RSS value looks reasonable, compared with values in benchmark tests.\n\n```\nvm_exited {\n  uid: 2000\n  vm_identifier: \"VmRunApp\"\n  death_reason: KILLED\n  elapsed_time_millis: 11180\n  guest_time_millis: 1420\n  rss_vm_kb: 107524\n  rss_crosvm_kb: 117000\n}\n```",
+      "revId": "3ed70b623e541f9a272a977eabdd1d2913064a98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
