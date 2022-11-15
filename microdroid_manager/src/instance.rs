@@ -142,7 +142,7 @@ impl InstanceDisk {
         self.file.read_exact(&mut header)?;
 
         // Decrypt and authenticate the data (along with the header).
-        let key = dice.get_sealing_key(INSTANCE_KEY_IDENTIFIER)?;
+        let key = dice.get_sealing_key(INSTANCE_KEY_IDENTIFIER, 32)?;
         let plaintext =
             decrypt_aead(Cipher::aes_256_gcm(), &key, Some(&nonce), &header, &data, &tag)?;
 
@@ -188,7 +188,7 @@ impl InstanceDisk {
         self.file.write_all(nonce.as_ref())?;
 
         // Then encrypt and sign the data.
-        let key = dice.get_sealing_key(INSTANCE_KEY_IDENTIFIER)?;
+        let key = dice.get_sealing_key(INSTANCE_KEY_IDENTIFIER, 32)?;
         let mut tag = [0; AES_256_GCM_TAG_LENGTH];
         let ciphertext =
             encrypt_aead(Cipher::aes_256_gcm(), &key, Some(&nonce), &header, &data, &mut tag)?;
