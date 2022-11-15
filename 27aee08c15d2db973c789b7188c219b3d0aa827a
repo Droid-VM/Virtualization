@@ -183,6 +183,30 @@
       },
       "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca83b170_f56971e8",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-11-15T16:00:12Z",
+      "side": 1,
+      "message": "I agree with Alan, this shouldn\u0027t derive a value that could easily be replicated though the API, just for an added layer of stopping the payload hurting itself. In the doc comment thread we\u0027d discussed how it should use a context specific salt to the HKDF to make that happen.",
+      "parentUuid": "5bf6e57d_e7a9a65e",
+      "range": {
+        "startLine": 828,
+        "startChar": 13,
+        "endLine": 828,
+        "endChar": 28
+      },
+      "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
