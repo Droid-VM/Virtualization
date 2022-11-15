@@ -33,6 +33,7 @@ import android.system.virtualizationservice.VirtualMachineAppConfig;
 import android.system.virtualizationservice.VirtualMachinePayloadConfig;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -181,9 +182,19 @@ public final class VirtualMachineConfig {
         mNumCpus = numCpus;
     }
 
+    /** Loads a config from a file. */
+    @NonNull
+    static VirtualMachineConfig from(@NonNull File file) throws VirtualMachineException {
+        try (FileInputStream input = new FileInputStream(file)) {
+            return fromInputStream(input);
+        } catch (IOException e) {
+            throw new VirtualMachineException("Failed to read config file", e);
+        }
+    }
+
     /** Loads a config from a stream, for example a file. */
     @NonNull
-    static VirtualMachineConfig from(@NonNull InputStream input)
+    private static VirtualMachineConfig fromInputStream(@NonNull InputStream input)
             throws IOException, VirtualMachineException {
         PersistableBundle b = PersistableBundle.readFromStream(input);
         int version = b.getInt(KEY_VERSION);
