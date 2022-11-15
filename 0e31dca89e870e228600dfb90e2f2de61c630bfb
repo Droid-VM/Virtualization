@@ -16,6 +16,190 @@
       "message": "Hi Alan, PTAL.",
       "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6466073_199b3b6b",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T16:54:11Z",
+      "side": 1,
+      "message": "Nit: Should we just pass vmDescriptor.mConfigFd here? (And similarly for importInstanceFrom() below.) They don\u0027t need anything else in the descriptor.",
+      "range": {
+        "startLine": 313,
+        "startChar": 64,
+        "endLine": 313,
+        "endChar": 76
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ae0496d_57a9e95e",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T16:54:11Z",
+      "side": 1,
+      "message": "Nit: Move this next to getVmDir?\nAnd perhaps they should both be here rather than above",
+      "range": {
+        "startLine": 453,
+        "startChar": 24,
+        "endLine": 453,
+        "endChar": 35
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8072cdd_bc37db4f",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1131,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T16:54:11Z",
+      "side": 1,
+      "message": "These can\u0027t happen, since you\u0027re not calling VS",
+      "range": {
+        "startLine": 1130,
+        "startChar": 10,
+        "endLine": 1131,
+        "endChar": 88
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2d8a349_f570573f",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T16:54:11Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 194,
+        "startChar": 66,
+        "endLine": 194,
+        "endChar": 74
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "224f29d5_bb87cc34",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T16:54:11Z",
+      "side": 1,
+      "message": "I don\u0027t think it does. Which is probably fine - you still need the permission to run it.",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 73
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d087104_794de682",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T16:54:11Z",
+      "side": 1,
+      "message": "I would be tempted to replace this test, and the previous one, with something directly testing our desired outcome:\n- After export/import, the config should be the same\n- After export/import, the CDIs should be the same (see sameInstanceKeepsSameCdis)\n\nAnd at that point we wouldn\u0027t need the @VisibleForTest.\n\nAlso, we aren\u0027t currently testing that vmImport.run() works, and that\u0027s definitely important.\n\nAs a follow-up CL we should do the same test but with 2 different apps, transferring the VM between them via binder or intent or whatever. That\u0027s significantly more complicated.",
+      "range": {
+        "startLine": 622,
+        "startChar": 0,
+        "endLine": 623,
+        "endChar": 69
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd952843_0b9640d4",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T16:54:11Z",
+      "side": 1,
+      "message": "I wonder if we should implement equals() on VirtualMachineConfig; then this could just be assertThat(vmImport.getConfig()).isEqualTo(vmOrig.getConfig());",
+      "range": {
+        "startLine": 644,
+        "startChar": 2,
+        "endLine": 644,
+        "endChar": 83
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75111dea_1add870c",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T16:54:11Z",
+      "side": 1,
+      "message": "Is that because the error message was too long?",
+      "range": {
+        "startLine": 665,
+        "startChar": 7,
+        "endLine": 665,
+        "endChar": 93
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
