@@ -14,14 +14,20 @@
 
 //! Low-level entry and exit points of pvmfw.
 
+use crate::fdt;
 use crate::heap;
 use crate::helpers;
 use crate::mmio_guard;
 use crate::mmu;
 use core::arch::asm;
+use core::mem;
+use core::mem::MaybeUninit;
+use core::num::NonZeroUsize;
+use core::ops::Range;
 use core::slice;
 use log::debug;
 use log::error;
+use log::info;
 use log::LevelFilter;
 use vmbase::{console, layout, logger, main, power::reboot};
 
@@ -31,6 +37,12 @@ enum RebootReason {
     InvalidBcc,
     /// An unexpected internal error happened.
     InternalError,
+    /// The provided FDT was invalid.
+    InvalidFdt,
+    /// The provided payload was invalid.
+    InvalidPayload,
+    /// The provided ramdisk was invalid.
+    InvalidRamdisk,
 }
 
 main!(start);
@@ -49,6 +61,210 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64
     // if we reach this point and return, vmbase::entry::rust_entry() will call power::shutdown().
 }
 
+#[derive(Clone, Debug)]
+enum MemoryRegion {
+    ReadOnly(Range<usize>),
+    ReadWrite(Range<usize>),
+}
+
+impl MemoryRegion {
+    /// Get the address range for the region.
+    pub fn range(&self) -> &Range<usize> {
+        match self {
+            Self::ReadOnly(r) => r,
+            Self::ReadWrite(r) => r,
+        }
+    }
+
+    /// True if the region overlaps with the passed range.
+    pub fn overlaps(&self, range: &Range<usize>) -> bool {
+        self.range().contains(&range.start) || self.range().contains(&(range.end - 1))
+    }
+
+    /// True if the region overlaps with the passed range.
+    pub fn is_within(&self, range: &Range<usize>) -> bool {
+        range.contains(&self.range().start) && range.contains(&(self.range().end - 1))
+    }
+}
+
+const MEMORY_TRACKER_CAPACITY: usize = 5;
+
+/// Tracks non-overlapping slices of main memory.
+pub struct MemoryTracker<'a> {
+    // TODO: Use arrayvec::ArrayVec
+    count: usize,
+    regions: [MaybeUninit<MemoryRegion>; MEMORY_TRACKER_CAPACITY],
+    size: usize,
+    page_table: &'a mut mmu::PageTable,
+}
+
+fn copy_range<T: Copy>(r: &Range<T>) -> Range<T> {
+    r.start..r.end
+}
+
+impl<'a> MemoryTracker<'a> {
+    /// Base of the system's contiguous "main" memory.
+    const BASE: usize = 0x8000_0000;
+    /// First address that can't be translated by a level 1 TTBR0_EL1.
+    const MAX_ADDR: usize = 1 << 39;
+    const MAX_SIZE: usize = Self::MAX_ADDR - Self::BASE;
+
+    /// Create a new instance from an active page table, covering the maximum RAM size.
+    pub fn new(page_table: &'a mut mmu::PageTable) -> Self {
+        Self {
+            size: Self::MAX_SIZE,
+            count: 0,
+            page_table,
+            regions: unsafe { MaybeUninit::uninit().assume_init() },
+        }
+    }
+
+    /// Resize the total RAM size.
+    ///
+    /// This function fails if it contains regions that are not included within the new size.
+    pub fn resize(&mut self, range: &Range<usize>) -> Result<(), ()> {
+        if range.start == Self::BASE && self.regions().iter().all(|r| r.is_within(range)) {
+            self.size = range.len();
+            Ok(())
+        } else {
+            Err(())
+        }
+    }
+
+    /// Allocate the address range for a const slice; returns None if failed.
+    pub fn get_range(&mut self, range: &Range<usize>) -> Option<Range<usize>> {
+        self.page_table.map_rodata(copy_range(range)).ok()?;
+        self.add(MemoryRegion::ReadOnly(copy_range(range)))
+    }
+
+    /// Allocate the address range for a mutable slice; returns None if failed.
+    pub fn get_range_mut(&mut self, range: &Range<usize>) -> Option<Range<usize>> {
+        self.page_table.map_data(copy_range(range)).ok()?;
+        self.add(MemoryRegion::ReadWrite(copy_range(range)))
+    }
+
+    /// Allocate the address range for a const slice; returns None if failed.
+    pub fn get(&mut self, base: usize, size: NonZeroUsize) -> Option<Range<usize>> {
+        self.get_range(&(base..(base + size.get())))
+    }
+
+    /// Allocate the address range for a mutable slice; returns None if failed.
+    pub fn get_mut(&mut self, base: usize, size: NonZeroUsize) -> Option<Range<usize>> {
+        self.get_range_mut(&(base..(base + size.get())))
+    }
+
+    fn regions(&self) -> &[MemoryRegion] {
+        // SAFETY - The first self.count regions have been properly initialized.
+        unsafe { mem::transmute::<_, &[MemoryRegion]>(&self.regions[..self.count]) }
+    }
+
+    fn add(&mut self, region: MemoryRegion) -> Option<Range<usize>> {
+        let range = region.range();
+        if self.contains(range) && self.regions().iter().all(|r| !r.overlaps(range)) {
+            let range = self.regions[self.count].write(region).range();
+            self.count += 1;
+            Some(range.start..range.end)
+        } else {
+            None
+        }
+    }
+
+    fn contains(&self, r: &Range<usize>) -> bool {
+        !r.is_empty() && self.contains_addr(r.start) && self.contains_addr(r.end - 1)
+    }
+
+    fn contains_addr(&self, addr: usize) -> bool {
+        Self::BASE <= addr && addr < Self::BASE + self.size
+    }
+}
+
+struct MemorySlices<'a> {
+    fdt: &'a mut libfdt::Fdt,
+    kernel: &'a [u8],
+    ramdisk: Option<&'a [u8]>,
+}
+
+impl<'a> MemorySlices<'a> {
+    fn new(
+        fdt: usize,
+        payload: usize,
+        payload_size: usize,
+        memory: &mut MemoryTracker,
+    ) -> Result<Self, RebootReason> {
+        // SAFETY - SIZE_2MB is non-zero.
+        const FDT_SIZE: NonZeroUsize = unsafe { NonZeroUsize::new_unchecked(helpers::SIZE_2MB) };
+        // TODO - Only map the FDT as read-only, until we modify it right before jump_to_payload()
+        // e.g. by generating a DTBO for a template DT in main() and, on return, re-map DT as RW,
+        // overwrite with the template DT and apply the DTBO.
+        let range =
+            memory.get_mut(fdt, FDT_SIZE).ok_or(RebootReason::InternalError).map_err(|e| {
+                error!("Failed to obtain the FDT range");
+                e
+            })?;
+
+        // SAFETY - The tracker validated the range to be in main memory, mapped, and not overlap.
+        let fdt = unsafe { slice::from_raw_parts_mut(range.start as *mut u8, range.len()) };
+        let fdt = libfdt::Fdt::from_mut_slice(fdt).map_err(|e| {
+            error!("Failed to spawn the FDT wrapper: {e}");
+            RebootReason::InvalidFdt
+        })?;
+
+        debug!("Fdt passed validation!");
+
+        let memory_range = fdt
+            .memory()
+            .map_err(|e| {
+                error!("Failed to get /memory from the DT: {e}");
+                RebootReason::InvalidFdt
+            })?
+            .next()
+            .ok_or(RebootReason::InternalError)
+            .map_err(|e| {
+                error!("Failed to read the memory size from the FDT");
+                e
+            })?;
+
+        debug!("Resizing MemoryTracker to range {memory_range:#x?}");
+
+        memory.resize(&memory_range).map_err(|_| {
+            error!("Failed to use memory range value from DT: {memory_range:#x?}");
+            RebootReason::InvalidFdt
+        })?;
+
+        let size =
+            NonZeroUsize::new(payload_size).ok_or(RebootReason::InvalidPayload).map_err(|e| {
+                error!("Invalid payload size: {payload_size:#x}");
+                e
+            })?;
+
+        let range = memory.get(payload, size).ok_or(RebootReason::InternalError).map_err(|e| {
+            error!("Failed to obtain the payload range");
+            e
+        })?;
+        // SAFETY - The tracker validated the range to be in main memory, mapped, and not overlap.
+        let kernel = unsafe { slice::from_raw_parts(range.start as *const u8, range.len()) };
+
+        let range = match fdt::initrd_range(fdt) {
+            Ok(r) => {
+                let r = memory.get_range(&r).ok_or(RebootReason::InvalidRamdisk).map_err(|e| {
+                    error!("Failed to obtain the initrd range");
+                    e
+                })?;
+                Some(r)
+            }
+            Err(e) => {
+                info!("Failed to locate ramdisk: {e}");
+                None
+            }
+        };
+        // SAFETY - The region was validated by memory to be in main memory, mapped, and not overlap.
+        let ramdisk =
+            range.map(|r| unsafe { slice::from_raw_parts(r.start as *const u8, r.len()) });
+
+        Ok(Self { fdt, kernel, ramdisk })
+    }
+}
+
 /// Sets up the environment for main() and wraps its result for start().
 ///
 /// Provide the abstractions necessary for start() to abort the pVM boot and for main() to run with
@@ -63,14 +279,6 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<(), R
     unsafe { heap::init() };
 
     logger::init(LevelFilter::Info).map_err(|_| RebootReason::InternalError)?;
-
-    const FDT_MAX_SIZE: usize = helpers::SIZE_2MB;
-    // TODO: Check that the FDT is fully contained in RAM.
-    // SAFETY - We trust the VMM, for now.
-    let fdt = unsafe { slice::from_raw_parts_mut(fdt as *mut u8, FDT_MAX_SIZE) };
-    // TODO: Check that the payload is fully contained in RAM and doesn't overlap with the FDT.
-    // SAFETY - We trust the VMM, for now.
-    let payload = unsafe { slice::from_raw_parts(payload as *const u8, payload_size) };
 
     // Use debug!() to avoid printing to the UART if we failed to configure it as only local
     // builds that have tweaked the logger::init() call will actually attempt to log the message.
@@ -120,8 +328,11 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<(), R
     unsafe { page_table.activate() };
     debug!("... Success!");
 
+    let mut memory = MemoryTracker::new(&mut page_table);
+    let slices = MemorySlices::new(fdt, payload, payload_size, &mut memory)?;
+
     // This wrapper allows main() to be blissfully ignorant of platform details.
-    crate::main(fdt, payload, bcc);
+    crate::main(slices.fdt, slices.kernel, bcc, slices.ramdisk);
 
     // TODO: Overwrite BCC before jumping to payload to avoid leaking our sealing key.
 
