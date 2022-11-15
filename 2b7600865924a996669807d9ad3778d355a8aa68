@@ -329,6 +329,30 @@
       },
       "revId": "2b7600865924a996669807d9ad3778d355a8aa68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa826690_fba65493",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-15T15:43:12Z",
+      "side": 1,
+      "message": "It could implement `Deref\u003cFdt\u003e`, but https://rust-unofficial.github.io/patterns/anti_patterns/deref.html says that\u0027s bad.\n\nYou could put the shared methods on a trait which is implemented by both, potentially as provided methods.\n\nThe other option is you could make `Fdt` an unsized, `repr(transparent)` wrapper around the slice (not the slice reference), a bit like `std::path::Path`. Then you could have two constructors, to construct either an `\u0026mut Fdt` or an `\u0026Fdt`, and have the methods take either `\u0026self` or `\u0026mut self` depending on whether they modify the FDT or not. It does require more unsafe code though, and means you can\u0027t add any more fields to the `Fdt` struct.",
+      "parentUuid": "a12afc76_a7a609de",
+      "range": {
+        "startLine": 474,
+        "startChar": 11,
+        "endLine": 474,
+        "endChar": 22
+      },
+      "revId": "2b7600865924a996669807d9ad3778d355a8aa68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
