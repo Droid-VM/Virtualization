@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "836832fe_94013d8b",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-15T14:49:14Z",
+      "side": 1,
+      "message": "We also need to make sure that the function (and others below) doesn\u0027t keep any pointers around after it returns, as that would violate Rust\u0027s aliasing rules.",
+      "revId": "f96b368e77fa118fe1e2a485f145ff80b64e9701",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
