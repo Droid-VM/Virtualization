@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56598ae2_4aabef21",
+        "filename": "libs/libfdt/Android.bp",
+        "patchSetId": 19
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-15T13:43:07Z",
+      "side": 1,
+      "message": "Added in an attempt to address\n```\nerror: `#[panic_handler]` function required, but not found\n```\non [`aosp_bramble-userdebug` when building `liblibfdt.dylib.so.clippy`](https://android-build.googleplex.com/builds/pending/P44140673/aosp_bramble-userdebug/latest/view/logs/build_error.log)",
+      "range": {
+        "startLine": 25,
+        "startChar": 12,
+        "endLine": 25,
+        "endChar": 17
+      },
+      "revId": "0b9d71c697fef953632b5c40f0b256325ebb2216",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
