@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5e091f5_dcfde589",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-11-15T05:52:25Z",
+      "side": 1,
+      "message": "Could you explain more why this is wrong?\nThe purpose of this is, not to occupy vm_state and vm_metric mutex when this thread is sleeping.",
+      "parentUuid": "bb6beac7_676cd0c7",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 357,
+        "endChar": 13
+      },
+      "revId": "3ed70b623e541f9a272a977eabdd1d2913064a98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e9b31fc4_2b1f10f1",
         "filename": "virtualizationservice/src/crosvm.rs",
         "patchSetId": 7
@@ -89,6 +113,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bc92cadd_d8186673",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-11-15T05:52:25Z",
+      "side": 1,
+      "message": "Does this comment corresponding the comment below about `crosvm_guest`?",
+      "parentUuid": "11cfed88_96be6e9d",
+      "range": {
+        "startLine": 485,
+        "startChar": 4,
+        "endLine": 485,
+        "endChar": 26
+      },
+      "revId": "3ed70b623e541f9a272a977eabdd1d2913064a98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb07430c_bf48aa02",
         "filename": "virtualizationservice/src/crosvm.rs",
         "patchSetId": 7
@@ -100,6 +148,30 @@
       "writtenOn": "2022-11-15T05:40:27Z",
       "side": 1,
       "message": "\u003d is fine. Or do you expect there will be multiple mappings labeled as `crosvm_guest`?",
+      "range": {
+        "startLine": 497,
+        "startChar": 29,
+        "endLine": 497,
+        "endChar": 31
+      },
+      "revId": "3ed70b623e541f9a272a977eabdd1d2913064a98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c930348c_da4c584a",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-11-15T05:52:25Z",
+      "side": 1,
+      "message": "Yes, I saw there were multiple mappings for `crosvm_guest` before. That\u0027s why I used `+\u003d`, not `\u003d`.",
+      "parentUuid": "cb07430c_bf48aa02",
       "range": {
         "startLine": 497,
         "startChar": 29,
