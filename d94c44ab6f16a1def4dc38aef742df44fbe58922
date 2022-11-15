@@ -403,6 +403,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4fa29c0e_ddd79e56",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-11-15T02:30:37Z",
+      "side": 1,
+      "message": "I didn\u0027t know such files, thanks! However I think we don\u0027t need to check inside for measuring guest_time.\n\nI compared data between `/proc/\u003cpid\u003e/stat` and `/proc/\u003cpid\u003e/task/*/stat`, the guest_time of crosvm_vcpu0 was same with the guest_time of entire crosvm process.\nhttps://screenshot.googleplex.com/AaZCidCGAAWZGnE\n\nFYI, definition of guest_time (https://man7.org/linux/man-pages/man5/proc.5.html) : Guest time of the process (time spent running a virtual CPU for a guest operating system), measured in clock ticks (divide by sysconf(_SC_CLK_TCK)).\n\nBy the way, the way you suggested seems quite helpful for checking utime and stime which gaves user/kernel time info in given pid/tid, but I still think guest_time information is closer to our thoughts. HDYT?",
+      "parentUuid": "75579a01_e62aa0c8",
+      "range": {
+        "startLine": 444,
+        "startChar": 30,
+        "endLine": 444,
+        "endChar": 86
+      },
+      "revId": "d94c44ab6f16a1def4dc38aef742df44fbe58922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7b572ec_a856a585",
         "filename": "virtualizationservice/src/crosvm.rs",
         "patchSetId": 2
