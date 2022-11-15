@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26dfa487_6ba07234",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T15:37:28Z",
+      "side": 1,
+      "message": "I don\u0027t think this is true?",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 17,
+        "endChar": 33
+      },
+      "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f96253ee_d6722d4d",
+        "filename": "encryptedstore/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T15:37:28Z",
+      "side": 1,
+      "message": "Delete",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 22
+      },
+      "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab789fb8_f89b4f14",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T15:37:28Z",
+      "side": 1,
+      "message": "Put the path in the error message?\n(Also if metadata() fails).",
+      "range": {
+        "startLine": 49,
+        "startChar": 15,
+        "endLine": 49,
+        "endChar": 26
+      },
+      "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea5eb917_843b9c46",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T15:37:28Z",
+      "side": 1,
+      "message": "You only ever pass \u0026str, so you could just accept that.",
+      "range": {
+        "startLine": 56,
+        "startChar": 16,
+        "endLine": 56,
+        "endChar": 38
+      },
+      "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94fc2dfb_f3a821cf",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T15:37:28Z",
+      "side": 1,
+      "message": "Is the plan to switch to HCTR2 when we have the newer kernel?\nIf so, add a TODO",
+      "range": {
+        "startLine": 67,
+        "startChar": 28,
+        "endLine": 67,
+        "endChar": 37
+      },
+      "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7572f016_ef2cce3a",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T15:37:28Z",
+      "side": 1,
+      "message": "Why return this if we then discard it?",
+      "range": {
+        "startLine": 74,
+        "startChar": 7,
+        "endLine": 74,
+        "endChar": 20
+      },
+      "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2a19edf_00d0b06d",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T15:37:28Z",
+      "side": 1,
+      "message": "Pretty sure we shouldn\u0027t do that; deriving new CDIs should make the old ones unavailable.",
+      "range": {
+        "startLine": 129,
+        "startChar": 8,
+        "endLine": 129,
+        "endChar": 14
+      },
+      "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bf6e57d_e7a9a65e",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T15:37:28Z",
+      "side": 1,
+      "message": "I think rather than using this, you should do something like getVmInstanceSecret does, only using a different random salt (so that the storage key is never the same as anything returned by that function).\n\nTo make that easier we should perhaps migrate the guts of the implementation into DiceContext.",
+      "range": {
+        "startLine": 828,
+        "startChar": 13,
+        "endLine": 828,
+        "endChar": 28
+      },
+      "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
