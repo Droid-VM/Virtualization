@@ -16,6 +16,29 @@
       "message": "Hi Inseob, PTAL.",
       "revId": "3e963dc5a0e4964af20f2946016186c1dcb3040b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5fdf962_886d4e28",
+        "filename": "tests/benchmark/src/native/benchmarkbinary.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-11-15T09:51:39Z",
+      "side": 1,
+      "message": "aha, we should either remove this or change\n\n    offsets.push_back(...)\n    \nto\n\n    offsets[i] \u003d ...",
+      "range": {
+        "startLine": 97,
+        "startChar": 37,
+        "endLine": 97,
+        "endChar": 51
+      },
+      "revId": "3e963dc5a0e4964af20f2946016186c1dcb3040b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
