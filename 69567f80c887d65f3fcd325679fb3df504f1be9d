@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "462e5557_49ec5c32",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-11-15T19:40:49Z",
+      "side": 1,
+      "message": "The closing quote is missing, here and below\n\nBtw, this function is deprecated and you should be using the `arg!` macro instead",
+      "range": {
+        "startLine": 33,
+        "startChar": 28,
+        "endLine": 33,
+        "endChar": 29
+      },
+      "revId": "69567f80c887d65f3fcd325679fb3df504f1be9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c082edc_f0bb9d78",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-11-15T19:40:49Z",
+      "side": 1,
+      "message": "nit: the hex library is not in AOSP and I feel like we should migrate onto it rather than having a bunch of custom hex utils. I\u0027ve added a note to b/239413416.\n\nhttps://docs.rs/hex/latest/hex/fn.decode.html",
+      "revId": "69567f80c887d65f3fcd325679fb3df504f1be9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c27b45e_664d0426",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-11-15T19:40:49Z",
+      "side": 1,
+      "message": "It might be preferred to manage the salts in one place e.g. by having a enum of derivation scopes (vm_payload API, encrypted storage, ..) and this function picks the corresponding salt based on that scope. That way it\u0027s easy to check there\u0027s no collisions.",
+      "range": {
+        "startLine": 42,
+        "startChar": 34,
+        "endLine": 42,
+        "endChar": 45
+      },
+      "revId": "69567f80c887d65f3fcd325679fb3df504f1be9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
