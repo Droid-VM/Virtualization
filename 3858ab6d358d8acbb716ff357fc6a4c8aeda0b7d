@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "65d14f19_b4bd5e43",
+        "filename": "javalib/src/android/system/virtualmachine/ParcelVirtualMachine.java",
+        "patchSetId": 27
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T09:57:02Z",
+      "side": 1,
+      "message": "I\u0027m not sure. They mean different things.\nIt needs to be @TestApi just so that the test can see it, once we start building the tests against the stubs rather than the implementation which this CL does.",
+      "parentUuid": "1412e39a_6c6cc77f",
+      "range": {
+        "startLine": 72,
+        "startChar": 5,
+        "endLine": 72,
+        "endChar": 22
+      },
+      "revId": "3858ab6d358d8acbb716ff357fc6a4c8aeda0b7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a6874f92_6b728002",
         "filename": "javalib/src/android/system/virtualmachine/ParcelVirtualMachine.java",
         "patchSetId": 27
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-15T08:31:15Z",
       "side": 1,
       "message": "Just curious, I think it\u0027s a purely a style issue. Why would you prefer to put @NonNull in front of the method instead of the return type? After all it\u0027s the return type that\u0027s supposed to be non-null.",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 12
+      },
+      "revId": "3858ab6d358d8acbb716ff357fc6a4c8aeda0b7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "000af7e5_fc641a0e",
+        "filename": "javalib/src/android/system/virtualmachine/ParcelVirtualMachine.java",
+        "patchSetId": 27
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-15T09:57:02Z",
+      "side": 1,
+      "message": "It\u0027s part of the Android Java style: https://source.android.com/docs/setup/contribute/code-style#use-standard-java-annotations",
+      "parentUuid": "a6874f92_6b728002",
       "range": {
         "startLine": 73,
         "startChar": 4,
