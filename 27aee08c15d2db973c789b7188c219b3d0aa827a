@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bcc9075_b803d32c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-15T18:21:21Z",
+      "side": 1,
+      "message": "Changed it. Using a randomly generated salt now",
+      "parentUuid": "26dfa487_6ba07234",
+      "range": {
+        "startLine": 16,
+        "startChar": 6,
+        "endLine": 17,
+        "endChar": 33
+      },
+      "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f96253ee_d6722d4d",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-15T15:37:28Z",
       "side": 1,
       "message": "Delete",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 22
+      },
+      "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33109552_dba3b2da",
+        "filename": "encryptedstore/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-15T18:21:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f96253ee_d6722d4d",
       "range": {
         "startLine": 21,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "092e1316_2e0e8ec5",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-15T18:21:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab789fb8_f89b4f14",
+      "range": {
+        "startLine": 49,
+        "startChar": 15,
+        "endLine": 49,
+        "endChar": 26
+      },
+      "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea5eb917_843b9c46",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-11-15T15:37:28Z",
       "side": 1,
       "message": "You only ever pass \u0026str, so you could just accept that.",
+      "range": {
+        "startLine": 56,
+        "startChar": 16,
+        "endLine": 56,
+        "endChar": 38
+      },
+      "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fb877d5_123dc683",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-15T18:21:21Z",
+      "side": 1,
+      "message": "I run into error \"all function arguments must have a statically known size\" with str.  I could use String type if yu like, but \u0026str gets the job done. I could easily reuse parse_hexstring() beacause of that.",
+      "parentUuid": "ea5eb917_843b9c46",
       "range": {
         "startLine": 56,
         "startChar": 16,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac22c81b_d801a7c5",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-15T18:21:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94fc2dfb_f3a821cf",
+      "range": {
+        "startLine": 67,
+        "startChar": 28,
+        "endLine": 67,
+        "endChar": 37
+      },
+      "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7572f016_ef2cce3a",
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf9c319d_3d0427f1",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-15T18:21:21Z",
+      "side": 1,
+      "message": "Fair.. removing it..",
+      "parentUuid": "7572f016_ef2cce3a",
+      "range": {
+        "startLine": 74,
+        "startChar": 7,
+        "endLine": 74,
+        "endChar": 20
+      },
+      "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2a19edf_00d0b06d",
@@ -152,6 +296,30 @@
       "writtenOn": "2022-11-15T15:37:28Z",
       "side": 1,
       "message": "Pretty sure we shouldn\u0027t do that; deriving new CDIs should make the old ones unavailable.",
+      "range": {
+        "startLine": 129,
+        "startChar": 8,
+        "endLine": 129,
+        "endChar": 14
+      },
+      "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b1cd4dc_b8915653",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-15T18:21:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e2a19edf_00d0b06d",
       "range": {
         "startLine": 129,
         "startChar": 8,
@@ -199,6 +367,30 @@
       "side": 1,
       "message": "I agree with Alan, this shouldn\u0027t derive a value that could easily be replicated though the API, just for an added layer of stopping the payload hurting itself. In the doc comment thread we\u0027d discussed how it should use a context specific salt to the HKDF to make that happen.",
       "parentUuid": "5bf6e57d_e7a9a65e",
+      "range": {
+        "startLine": 828,
+        "startChar": 13,
+        "endLine": 828,
+        "endChar": 28
+      },
+      "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "417c60f6_dc916544",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-15T18:21:21Z",
+      "side": 1,
+      "message": "I\u0027ve added a method get_sealing_key() for DiceContext that does the derivation based on salt. Does this look better, if so I can upload a patch where getVmInstanceSecret() also uses this method",
+      "parentUuid": "ca83b170_f56971e8",
       "range": {
         "startLine": 828,
         "startChar": 13,
