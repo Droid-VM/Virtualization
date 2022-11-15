@@ -110,6 +110,30 @@
       },
       "revId": "3858ab6d358d8acbb716ff357fc6a4c8aeda0b7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed2c2474_f05b186c",
+        "filename": "javalib/src/android/system/virtualmachine/ParcelVirtualMachine.java",
+        "patchSetId": 27
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-15T10:20:29Z",
+      "side": 1,
+      "message": "Mmm, the google java style actually suggested to put type annotation immediately before the type.\n\ngo/java-style#s4.8.5.1-type-use-annotation-style",
+      "parentUuid": "000af7e5_fc641a0e",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 12
+      },
+      "revId": "3858ab6d358d8acbb716ff357fc6a4c8aeda0b7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
