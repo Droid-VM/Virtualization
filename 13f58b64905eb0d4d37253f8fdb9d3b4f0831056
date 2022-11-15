@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf26f48f_12cd0f48",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-15T14:50:26Z",
+      "side": 1,
+      "message": "That doesn\u0027t sound very convincing, and I don\u0027t see anything mentioned here: https://devicetree-specification.readthedocs.io/en/latest/chapter2-devicetree-basics.html#address-cells-and-size-cells\n\nBut you\u0027re right that libfdt doesn\u0027t allow it: https://cs.android.com/android/platform/superproject/+/master:external/dtc/libfdt/fdt_addresses.c;l\u003d34\n\nSo actually, this is dead code because BadNCells will be returned on line 233. Could you turn this into more of an assertion and return an Internal error like elsewhere?",
+      "range": {
+        "startLine": 236,
+        "startChar": 43,
+        "endLine": 236,
+        "endChar": 71
+      },
+      "revId": "13f58b64905eb0d4d37253f8fdb9d3b4f0831056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
