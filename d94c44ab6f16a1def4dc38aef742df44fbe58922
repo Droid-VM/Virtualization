@@ -239,6 +239,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4cc6d9a_1e121523",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-16T15:34:51Z",
+      "side": 1,
+      "message": "You would need to register a `SIGCHLD` handler for that. It\u0027s invoked after a child\u0027s state was changed to zombie/defunct, but before the parent removes it from the process table by calling `wait()`. So can be done but definitely not a simple process. I\u0027m happy to start with checking periodically and see if we can optimize later.\n\nhttps://docs.oracle.com/cd/E19455-01/806-4750/signals-7/index.html",
+      "parentUuid": "67c73bc0_434ad909",
+      "range": {
+        "startLine": 358,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 13
+      },
+      "revId": "d94c44ab6f16a1def4dc38aef742df44fbe58922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "302bfe07_0a2c912c",
         "filename": "virtualizationservice/src/crosvm.rs",
         "patchSetId": 2
@@ -415,6 +439,30 @@
       "side": 1,
       "message": "I didn\u0027t know such files, thanks! However I think we don\u0027t need to check inside for measuring guest_time.\n\nI compared data between `/proc/\u003cpid\u003e/stat` and `/proc/\u003cpid\u003e/task/*/stat`, the guest_time of crosvm_vcpu0 was same with the guest_time of entire crosvm process.\nhttps://screenshot.googleplex.com/AaZCidCGAAWZGnE\n\nFYI, definition of guest_time (https://man7.org/linux/man-pages/man5/proc.5.html) : Guest time of the process (time spent running a virtual CPU for a guest operating system), measured in clock ticks (divide by sysconf(_SC_CLK_TCK)).\n\nBy the way, the way you suggested seems quite helpful for checking utime and stime which gaves user/kernel time info in given pid/tid, but I still think guest_time information is closer to our thoughts. HDYT?",
       "parentUuid": "75579a01_e62aa0c8",
+      "range": {
+        "startLine": 444,
+        "startChar": 30,
+        "endLine": 444,
+        "endChar": 86
+      },
+      "revId": "d94c44ab6f16a1def4dc38aef742df44fbe58922",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb7a5c6e_c6669ad0",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-16T15:34:51Z",
+      "side": 1,
+      "message": "Nice, had no idea about guest_time! That\u0027s pretty cool that Linux has that as a first-class citizen.",
+      "parentUuid": "4fa29c0e_ddd79e56",
       "range": {
         "startLine": 444,
         "startChar": 30,
