@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "629fa848_67ca5585",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-16T11:28:53Z",
+      "side": 1,
+      "message": "This should probably be wrapped up in some handy utils library - maybe the rustutils crate? It\u0027s used from a few places already - see e.g. system/security/prng_seeder/src/cutils_socket.rs\n\n(Not necessarily in this CL)",
+      "range": {
+        "startLine": 183,
+        "startChar": 7,
+        "endLine": 183,
+        "endChar": 45
+      },
+      "revId": "1e199d46a1a91a9a7789d039da2da48ef52bba2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
