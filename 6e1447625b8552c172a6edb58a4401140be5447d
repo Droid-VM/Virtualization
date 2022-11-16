@@ -390,6 +390,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "390cbd83_0328f44e",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-16T16:07:20Z",
+      "side": 1,
+      "message": "It feels like `entry` is becoming way too crowded given how many unsafes it contains. Your own comment says that it \"Sets up the environment for main()\". Parsing data is now setting up the environment. Why don\u0027t you keep it just for creating the PT? I don\u0027t see raw byte handling as the same level of \u0027unsafe\u0027 as fiddling with `TTBR0`.",
+      "parentUuid": "b807c0df_89472142",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 22
+      },
+      "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "552cc1ca_4a216a80",
         "filename": "pvmfw/src/entry.rs",
         "patchSetId": 3
