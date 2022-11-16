@@ -28,7 +28,10 @@ use android_system_virtualizationcommon::aidl::android::system::virtualizationco
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::{
         IVirtualMachineService, VM_BINDER_SERVICE_PORT,
 };
-use android_system_virtualization_payload::aidl::android::system::virtualization::payload::IVmPayloadService::VM_APK_CONTENTS_PATH;
+use android_system_virtualization_payload::aidl::android::system::virtualization::payload::IVmPayloadService::{
+    VM_APK_CONTENTS_PATH,
+    VM_PAYLOAD_SERVICE_SOCKET_NAME,
+};
 use anyhow::{anyhow, bail, ensure, Context, Error, Result};
 use apkverify::{get_public_key_der, verify, V4Signature};
 use binder::Strong;
@@ -36,9 +39,10 @@ use diced_utils::cbor::{encode_header, encode_number};
 use glob::glob;
 use itertools::sorted;
 use libc::VMADDR_CID_HOST;
-use log::{error, info};
+use log::{error, info, warn};
 use microdroid_metadata::{write_metadata, Metadata, PayloadMetadata};
 use microdroid_payload_config::{OsConfig, Task, TaskType, VmPayloadConfig};
+use nix::fcntl::{fcntl, F_SETFD, FdFlag};
 use nix::sys::signal::Signal;
 use openssl::sha::Sha512;
 use payload::{get_apex_data_from_payload, load_metadata, to_metadata};
@@ -174,9 +178,22 @@ fn main() -> Result<()> {
     })
 }
 
+fn set_cloexec_on_payload_service_socket() -> Result<()> {
+    let fd =
+        env::var(&format!("ANDROID_SOCKET_{}", VM_PAYLOAD_SERVICE_SOCKET_NAME))?.parse::<i32>()?;
+
+    fcntl(fd, F_SETFD(FdFlag::FD_CLOEXEC))?;
+
+    Ok(())
+}
+
 fn try_main() -> Result<()> {
     let _ = kernlog::init();
     info!("started.");
+
+    if let Err(e) = set_cloexec_on_payload_service_socket() {
+        warn!("Failed to set cloexec on payload socket: {:?}", e);
+    }
 
     load_crashkernel_if_supported().context("Failed to load crashkernel")?;
 
