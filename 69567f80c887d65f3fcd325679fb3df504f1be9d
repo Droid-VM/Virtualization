@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "55ce5bfe_e06e0a07",
+        "filename": "encryptedstore/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-16T14:04:55Z",
+      "side": 1,
+      "message": "Why do we need that?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 6
+      },
+      "revId": "69567f80c887d65f3fcd325679fb3df504f1be9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "462e5557_49ec5c32",
         "filename": "encryptedstore/src/main.rs",
         "patchSetId": 4
@@ -54,6 +77,30 @@
       "writtenOn": "2022-11-15T19:40:49Z",
       "side": 1,
       "message": "It might be preferred to manage the salts in one place e.g. by having a enum of derivation scopes (vm_payload API, encrypted storage, ..) and this function picks the corresponding salt based on that scope. That way it\u0027s easy to check there\u0027s no collisions.",
+      "range": {
+        "startLine": 42,
+        "startChar": 34,
+        "endLine": 42,
+        "endChar": 45
+      },
+      "revId": "69567f80c887d65f3fcd325679fb3df504f1be9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86e2da87_04efc1d2",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-16T14:04:55Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "4c27b45e_664d0426",
       "range": {
         "startLine": 42,
         "startChar": 34,
