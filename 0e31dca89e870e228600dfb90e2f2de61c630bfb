@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24687e88_5cf446de",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-16T09:49:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6466073_199b3b6b",
+      "range": {
+        "startLine": 313,
+        "startChar": 64,
+        "endLine": 313,
+        "endChar": 76
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ae0496d_57a9e95e",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-15T16:54:11Z",
       "side": 1,
       "message": "Nit: Move this next to getVmDir?\nAnd perhaps they should both be here rather than above",
+      "range": {
+        "startLine": 453,
+        "startChar": 24,
+        "endLine": 453,
+        "endChar": 35
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f33e5482_1a5e34d4",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-16T09:49:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ae0496d_57a9e95e",
       "range": {
         "startLine": 453,
         "startChar": 24,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e4d226c_263644f6",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1131,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-16T09:49:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8072cdd_bc37db4f",
+      "range": {
+        "startLine": 1130,
+        "startChar": 10,
+        "endLine": 1131,
+        "endChar": 88
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2d8a349_f570573f",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-11-15T16:54:11Z",
       "side": 1,
       "message": "typo",
+      "range": {
+        "startLine": 194,
+        "startChar": 66,
+        "endLine": 194,
+        "endChar": 74
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23f94b9f_007cae03",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-16T09:49:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2d8a349_f570573f",
       "range": {
         "startLine": 194,
         "startChar": 66,
@@ -135,6 +231,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0467d3e8_23da7720",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-16T09:49:50Z",
+      "side": 1,
+      "message": "Ok. So we can leave it like this, right?",
+      "parentUuid": "224f29d5_bb87cc34",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 73
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d087104_794de682",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 5
@@ -146,6 +266,30 @@
       "writtenOn": "2022-11-15T16:54:11Z",
       "side": 1,
       "message": "I would be tempted to replace this test, and the previous one, with something directly testing our desired outcome:\n- After export/import, the config should be the same\n- After export/import, the CDIs should be the same (see sameInstanceKeepsSameCdis)\n\nAnd at that point we wouldn\u0027t need the @VisibleForTest.\n\nAlso, we aren\u0027t currently testing that vmImport.run() works, and that\u0027s definitely important.\n\nAs a follow-up CL we should do the same test but with 2 different apps, transferring the VM between them via binder or intent or whatever. That\u0027s significantly more complicated.",
+      "range": {
+        "startLine": 622,
+        "startChar": 0,
+        "endLine": 623,
+        "endChar": 69
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e50729f5_2552f21d",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-16T09:49:50Z",
+      "side": 1,
+      "message": "SGTM. I tried to check the CDIs, but got an error like `android.os.ServiceSpecificException: Failed to measure attestation cdi (code 0)` in tests. Since CDI is not the focus of this change, I think we can refine it in a subsequent cl.\n\nOtherwise, I agree that we can remove @VisibleForTesting and the other test. So we just test the observable behavior.\n\nThe test of passing the descriptor from App A to App B sounds reasonable, but it\u0027s definitely not easy. I don\u0027t see any test like this yet. I imagine it should be a host test and we also need to create two apps, the first one sends an intent and the second receives it. I\u0027m also not sure how much effort it\u0027ll take to maintain such a test later (it can be flaky with all this app coordination).",
+      "parentUuid": "4d087104_794de682",
       "range": {
         "startLine": 622,
         "startChar": 0,
@@ -181,6 +325,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c3f981fd_81ff83de",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-16T09:49:50Z",
+      "side": 1,
+      "message": "Yeah, I thought about to implement equals() in Config to compare field to field, but then that will require the future developer to update equals() every time they add a new field to config, otherwise the check is not complete. As it\u0027s not easy to enforce this, comparing bytes could be more strict and we also have less code to maintain.",
+      "parentUuid": "bd952843_0b9640d4",
+      "range": {
+        "startLine": 644,
+        "startChar": 2,
+        "endLine": 644,
+        "endChar": 83
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "75111dea_1add870c",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 5
@@ -192,6 +360,30 @@
       "writtenOn": "2022-11-15T16:54:11Z",
       "side": 1,
       "message": "Is that because the error message was too long?",
+      "range": {
+        "startLine": 665,
+        "startChar": 7,
+        "endLine": 665,
+        "endChar": 93
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a4b24cb_3d6b0081",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-16T09:49:50Z",
+      "side": 1,
+      "message": "Yes. When two arrays are different, isEqualTo() shows two full arrays. That\u0027s too much for this test as we have \u003e1M elements per array. Even that doesn\u0027t make the tests crash, I\u0027m not sure if it\u0027s so useful to print such large arrays on screen.",
+      "parentUuid": "75111dea_1add870c",
       "range": {
         "startLine": 665,
         "startChar": 7,
