@@ -255,6 +255,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cde4ef04_0d34cbf4",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-16T12:52:34Z",
+      "side": 1,
+      "message": "No, it\u0027s stating something that isn\u0027t true.\nEither we should check the permission, or we should remove the annotation. And I think the latter is better.\n(I do wonder if we should actually be checking the permission on create() - we only need it to be able to create the instance image, which doesn\u0027t actually create a VM.)",
+      "parentUuid": "0467d3e8_23da7720",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 73
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d087104_794de682",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 5
@@ -290,6 +314,30 @@
       "side": 1,
       "message": "SGTM. I tried to check the CDIs, but got an error like `android.os.ServiceSpecificException: Failed to measure attestation cdi (code 0)` in tests. Since CDI is not the focus of this change, I think we can refine it in a subsequent cl.\n\nOtherwise, I agree that we can remove @VisibleForTesting and the other test. So we just test the observable behavior.\n\nThe test of passing the descriptor from App A to App B sounds reasonable, but it\u0027s definitely not easy. I don\u0027t see any test like this yet. I imagine it should be a host test and we also need to create two apps, the first one sends an intent and the second receives it. I\u0027m also not sure how much effort it\u0027ll take to maintain such a test later (it can be flaky with all this app coordination).",
       "parentUuid": "4d087104_794de682",
+      "range": {
+        "startLine": 622,
+        "startChar": 0,
+        "endLine": 623,
+        "endChar": 69
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81a629b6_572b3acc",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-16T12:52:34Z",
+      "side": 1,
+      "message": "You won\u0027t be able to access CDIs unless you specify a config file, which also requires enabling the custom VM permission. (And sameInstanceKeepsSameCdis does those.) But I\u0027m ok to add that in a follow-up CL. I do think it\u0027s important we test it, because it\u0027s crucial for the actual use of the feature.\n\nGetting rid of the @VisibleForTesting is cool; it also means I don\u0027t need to make them @TestApi.\n\nI agree the 2-app test is going to be pretty tricky. I think it\u0027s worthwhile, but not urgent.",
+      "parentUuid": "e50729f5_2552f21d",
       "range": {
         "startLine": 622,
         "startChar": 0,
@@ -347,6 +395,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a7960e3_fce1cd47",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-16T12:52:34Z",
+      "side": 1,
+      "message": "Yeah, fair enough.",
+      "parentUuid": "c3f981fd_81ff83de",
+      "range": {
+        "startLine": 644,
+        "startChar": 2,
+        "endLine": 644,
+        "endChar": 83
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75111dea_1add870c",
@@ -384,6 +456,30 @@
       "side": 1,
       "message": "Yes. When two arrays are different, isEqualTo() shows two full arrays. That\u0027s too much for this test as we have \u003e1M elements per array. Even that doesn\u0027t make the tests crash, I\u0027m not sure if it\u0027s so useful to print such large arrays on screen.",
       "parentUuid": "75111dea_1add870c",
+      "range": {
+        "startLine": 665,
+        "startChar": 7,
+        "endLine": 665,
+        "endChar": 93
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "832cd537_f9bc6673",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-16T12:52:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8a4b24cb_3d6b0081",
       "range": {
         "startLine": 665,
         "startChar": 7,
