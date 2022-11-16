@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea30801b_3ff0c04d",
+        "filename": "encryptedstore/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-16T18:16:07Z",
+      "side": 1,
+      "message": "Because libdm_rust is also not enabled for 32 bit (and that because one of its dependency was disabled for 32 bits lib)",
+      "parentUuid": "55ce5bfe_e06e0a07",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 6
+      },
+      "revId": "69567f80c887d65f3fcd325679fb3df504f1be9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "462e5557_49ec5c32",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "834fb835_3ce4d263",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-16T18:16:07Z",
+      "side": 1,
+      "message": "Done (looks prettier too)",
+      "parentUuid": "462e5557_49ec5c32",
+      "range": {
+        "startLine": 33,
+        "startChar": 28,
+        "endLine": 33,
+        "endChar": 29
+      },
+      "revId": "69567f80c887d65f3fcd325679fb3df504f1be9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c082edc_f0bb9d78",
@@ -60,6 +108,24 @@
       "writtenOn": "2022-11-15T19:40:49Z",
       "side": 1,
       "message": "nit: the hex library is not in AOSP and I feel like we should migrate onto it rather than having a bunch of custom hex utils. I\u0027ve added a note to b/239413416.\n\nhttps://docs.rs/hex/latest/hex/fn.decode.html",
+      "revId": "69567f80c887d65f3fcd325679fb3df504f1be9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28523c33_3c760593",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-16T18:16:07Z",
+      "side": 1,
+      "message": "looks like it is in asp now.. libhex...",
+      "parentUuid": "2c082edc_f0bb9d78",
       "revId": "69567f80c887d65f3fcd325679fb3df504f1be9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -101,6 +167,30 @@
       "side": 1,
       "message": "+1",
       "parentUuid": "4c27b45e_664d0426",
+      "range": {
+        "startLine": 42,
+        "startChar": 34,
+        "endLine": 42,
+        "endChar": 45
+      },
+      "revId": "69567f80c887d65f3fcd325679fb3df504f1be9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c10ae18_50d8fa1b",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-16T18:16:07Z",
+      "side": 1,
+      "message": "If I understand this correctly, the SALT will be appropriately picked by the caller of get_sealing_key(). The function remains unchanged. I can do that Salt aggregation in a different patch",
+      "parentUuid": "86e2da87_04efc1d2",
       "range": {
         "startLine": 42,
         "startChar": 34,

@@ -213,6 +213,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5cf5f6a_dc9ae187",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-16T18:16:07Z",
+      "side": 1,
+      "message": "Oh  - I now understood your original comment, I thought you meant taking ownership of str, instead of sending \u0026str... Changed the function signature to take \u0026Path instead",
+      "parentUuid": "0e7c3e5b_422c1ea2",
+      "range": {
+        "startLine": 56,
+        "startChar": 16,
+        "endLine": 56,
+        "endChar": 38
+      },
+      "revId": "27aee08c15d2db973c789b7188c219b3d0aa827a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94fc2dfb_f3a821cf",
