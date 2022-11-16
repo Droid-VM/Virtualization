@@ -5,5 +5,7 @@
 # (This gets rid of all the android.sysprop classes we don't use.)
 keep android.system.virtualmachine.VirtualMachineManager
 
+keep android.system.virtualmachine.VirtualizationModuleFrameworkInitializer
+
 # We statically link PlatformProperties, rename to avoid clashes.
 rule android.sysprop.** com.android.system.virtualmachine.sysprop.@1
