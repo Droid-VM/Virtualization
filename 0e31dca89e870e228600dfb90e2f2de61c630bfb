@@ -277,6 +277,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f39a80dc_1d65e5de",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-16T13:03:48Z",
+      "side": 1,
+      "message": "I see. Thanks for the clarification. I\u0027ll remove this permission then.",
+      "parentUuid": "cde4ef04_0d34cbf4",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 73
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d087104_794de682",
@@ -338,6 +362,30 @@
       "side": 1,
       "message": "You won\u0027t be able to access CDIs unless you specify a config file, which also requires enabling the custom VM permission. (And sameInstanceKeepsSameCdis does those.) But I\u0027m ok to add that in a follow-up CL. I do think it\u0027s important we test it, because it\u0027s crucial for the actual use of the feature.\n\nGetting rid of the @VisibleForTesting is cool; it also means I don\u0027t need to make them @TestApi.\n\nI agree the 2-app test is going to be pretty tricky. I think it\u0027s worthwhile, but not urgent.",
       "parentUuid": "e50729f5_2552f21d",
+      "range": {
+        "startLine": 622,
+        "startChar": 0,
+        "endLine": 623,
+        "endChar": 69
+      },
+      "revId": "0e31dca89e870e228600dfb90e2f2de61c630bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86a62451_7e301632",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-16T13:03:48Z",
+      "side": 1,
+      "message": "Great. I\u0027ll tune the CDI in a subsequent cl later today.",
+      "parentUuid": "81a629b6_572b3acc",
       "range": {
         "startLine": 622,
         "startChar": 0,
