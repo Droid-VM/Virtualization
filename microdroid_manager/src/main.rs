@@ -85,6 +85,7 @@ const ENCRYPTEDSTORE_BACKING_DEVICE: &str = "/dev/block/by-name/encryptedstore";
 const ENCRYPTEDSTORE_BIN: &str = "/system/bin/encryptedstore";
 const ENCRYPTEDSTORE_KEY_IDENTIFIER: &str = "encryptedstore_key";
 const ENCRYPTEDSTORE_KEYSIZE: u32 = 64;
+const ENCRYPTEDSTORE_MOUNTPOINT: &str = "/mnt/encryptedstore";
 
 #[derive(thiserror::Error, Debug)]
 enum MicrodroidError {
@@ -423,6 +424,10 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
     if let Some(mut child) = encryptedstore_child {
         let exitcode = child.wait().expect("Wait for encryptedstore child");
         if !exitcode.success() {
+            error!(
+                "encryptedstore failed. Path exists? {:?}",
+                Path::new(ENCRYPTEDSTORE_MOUNTPOINT).exists()
+            );
             bail!("Unable to prepare encrypted storage. Exitcode={}", exitcode);
         }
     }
@@ -844,6 +849,7 @@ fn prepare_encryptedstore(dice: &DiceContext) -> Result<Child> {
         .arg(ENCRYPTEDSTORE_BACKING_DEVICE)
         .arg("--key")
         .arg(to_hex_string(&key))
+        .args(["--mountpoint", ENCRYPTEDSTORE_MOUNTPOINT])
         .spawn()
         .context("encryptedstore failed")
 }
