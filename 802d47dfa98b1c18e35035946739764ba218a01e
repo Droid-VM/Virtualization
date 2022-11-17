@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e26790c_12923c33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-17T14:15:38Z",
+      "side": 1,
+      "message": "Looks good overall. Just I think it\u0027s a bit risky to change all the RpcServer in one cl, maybe migrate vsock to the new API first?",
+      "revId": "802d47dfa98b1c18e35035946739764ba218a01e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
