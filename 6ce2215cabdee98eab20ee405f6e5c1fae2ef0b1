@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3aa0904_b59a7980",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-17T14:39:37Z",
+      "side": 1,
+      "message": "This is ok as a short-term fix, but we should really change cs/android-internal/tools/tradefederation/core/src/com/android/tradefed/device/TestDevice.java?rcl\u003d4070cfc7cb6f0c6fa8bad133e32cdd4a1aa95e41\u0026l\u003d2112.\n\nAlso: that checks for the hypervisor support properties. Those shouldn\u0027t be set when we only have the dummy virt APEX. I can\u0027t remember how they get set though.\n\n@dbrazdil@google.com might.",
+      "range": {
+        "startLine": 106,
+        "startChar": 53,
+        "endLine": 106,
+        "endChar": 71
+      },
+      "revId": "6ce2215cabdee98eab20ee405f6e5c1fae2ef0b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
