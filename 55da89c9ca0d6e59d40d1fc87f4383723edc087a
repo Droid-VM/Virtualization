@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47553d3b_346a3644",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2022-11-17T16:34:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b1267a10_e3d4581e",
+      "range": {
+        "startLine": 31,
+        "startChar": 26,
+        "endLine": 31,
+        "endChar": 37
+      },
+      "revId": "55da89c9ca0d6e59d40d1fc87f4383723edc087a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "026e3872_102c2746",
@@ -126,6 +150,24 @@
       "side": 1,
       "message": "Oh now that is a good question. Almost certainly not.\nLooking at our existing clients, one just ignores failure (but the host will kill the VM after a timeout if it doesn\u0027t get the notification), and two call abort.\n\nWhat would you suggest? Document that, or make this return void and abort() itself on failure?",
       "parentUuid": "026e3872_102c2746",
+      "revId": "55da89c9ca0d6e59d40d1fc87f4383723edc087a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fc03d1f_e9bbf7ac",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1006497
+      },
+      "writtenOn": "2022-11-17T16:34:22Z",
+      "side": 1,
+      "message": "If the client really can\u0027t do anything, I\u0027d probably make this a `void` function and then implement whatever strategy makes sense internally.\n\nPlease consider the same question for any of the functions returning `bool` below as well, and if clients can do something about the failure, whether you should return an error code instead of a boolean to give more context on the failure type.",
+      "parentUuid": "59252eec_6b95fc3b",
       "revId": "55da89c9ca0d6e59d40d1fc87f4383723edc087a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
