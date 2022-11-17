@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dbf9c79_a92e64ed",
+        "filename": "authfs/aidl/com/android/virt/fs/IAuthFsService.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-17T12:12:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c70ca40_3367a4ca",
+      "range": {
+        "startLine": 24,
+        "startChar": 3,
+        "endLine": 24,
+        "endChar": 63
+      },
+      "revId": "e14ea80791ceaf989f3b9031c5885e86abc41b22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed4f6b16_ddbc62e4",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-17T11:28:45Z",
       "side": 1,
       "message": "Why system, if authfs_service runs as root?\n(Not that it makes much difference)",
+      "range": {
+        "startLine": 3,
+        "startChar": 38,
+        "endLine": 3,
+        "endChar": 51
+      },
+      "revId": "e14ea80791ceaf989f3b9031c5885e86abc41b22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2896eab6_e2907766",
+        "filename": "authfs/service/authfs_service.rc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-17T12:12:43Z",
+      "side": 1,
+      "message": "Do you mean to put root directly? It looks like system is enough for the socket.",
+      "parentUuid": "ed4f6b16_ddbc62e4",
       "range": {
         "startLine": 3,
         "startChar": 38,
