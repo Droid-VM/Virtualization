@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e267d50_dbdb7dc8",
+        "filename": "javalib/jarjar-rules.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-17T21:15:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "912bae8f_262d2214",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 75
+      },
+      "revId": "9da05c89fe08aca0b202e5ec2fabb28a72afc6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b26017e2_d1559c58",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-16T17:46:06Z",
       "side": 1,
       "message": "Should we make this conditional on AVF actually being supported?\nI was assuming Context.getSystemService(VirtualMachineManager.class) would return null in those cases.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 44
+      },
+      "revId": "9da05c89fe08aca0b202e5ec2fabb28a72afc6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ffd5eef_2ed4651c",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualizationModuleFrameworkInitializer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-17T21:15:28Z",
+      "side": 1,
+      "message": "Added a TODO to make this conditional on whether AVF is supported.",
+      "parentUuid": "b26017e2_d1559c58",
       "range": {
         "startLine": 39,
         "startChar": 0,
