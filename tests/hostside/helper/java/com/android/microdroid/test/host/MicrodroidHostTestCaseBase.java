@@ -43,15 +43,9 @@ import java.util.Arrays;
 public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
     protected static final String TEST_ROOT = "/data/local/tmp/virt/";
     protected static final String VIRT_APEX = "/apex/com.android.virt/";
-    protected static final String LOG_PATH = TEST_ROOT + "log.txt";
-    protected static final String CONSOLE_PATH = TEST_ROOT + "console.txt";
     private static final int TEST_VM_ADB_PORT = 8000;
     private static final String MICRODROID_SERIAL = "localhost:" + TEST_VM_ADB_PORT;
     private static final String INSTANCE_IMG = "instance.img";
-
-    // This is really slow on GCE (2m 40s) but fast on localhost or actual Android phones (< 10s).
-    // Then there is time to run the actual task. Set the maximum timeout value big enough.
-    private static final long MICRODROID_MAX_LIFETIME_MINUTES = 20;
 
     private static final long MICRODROID_ADB_CONNECT_TIMEOUT_MINUTES = 5;
     protected static final long MICRODROID_COMMAND_TIMEOUT_MILLIS = 30000;
@@ -191,17 +185,6 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
         assertWithMessage("Package " + packageName + " not found")
                 .that(pathLine).startsWith("package:");
         return pathLine.substring("package:".length());
-    }
-
-    private static void forwardFileToLog(CommandRunner android, String path, String tag)
-            throws DeviceNotAvailableException {
-        android.runWithTimeout(
-                MICRODROID_MAX_LIFETIME_MINUTES * 60 * 1000,
-                "logwrapper",
-                "sh",
-                "-c",
-                "\"$'tail -f -n +0 " + path
-                        + " | sed \\'s/^/" + tag + ": /g\\''\""); // add tags in front of lines
     }
 
     public static void shutdownMicrodroid(ITestDevice androidDevice, String cid)
