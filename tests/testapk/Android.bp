@@ -19,7 +19,7 @@ android_test {
         "truth-prebuilt",
         "compatibility-common-util-devicesidelib",
     ],
-    libs: ["framework-virtualization"],
+    libs: ["android.system.virtualmachine"],
     jni_libs: [
         "MicrodroidTestNativeLib",
         "MicrodroidIdleNativeLib",
