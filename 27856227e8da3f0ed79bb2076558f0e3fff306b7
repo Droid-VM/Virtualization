@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4a4978f_1e98aeaf",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-17T12:04:17Z",
+      "side": 1,
+      "message": "nit: It\u0027s more straightforward and concise to check with `ensure!(condition_is_true)` than `if(!condition_is_true) { bail!() }`.",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 0
+      },
+      "revId": "27856227e8da3f0ed79bb2076558f0e3fff306b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e1b2503_4092d42a",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-17T12:04:17Z",
+      "side": 1,
+      "message": "ditto.",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 5
+      },
+      "revId": "27856227e8da3f0ed79bb2076558f0e3fff306b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7010fef_9c8818e1",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-17T12:04:17Z",
+      "side": 1,
+      "message": "Since hex is already added to microdroid, can we use libhex here. The other method will be removed soon.",
+      "range": {
+        "startLine": 846,
+        "startChar": 13,
+        "endLine": 846,
+        "endChar": 26
+      },
+      "revId": "27856227e8da3f0ed79bb2076558f0e3fff306b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
