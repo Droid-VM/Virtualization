@@ -35,8 +35,8 @@ import androidx.annotation.CallSuper;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import com.android.microdroid.test.common.DeviceProperties;
 import com.android.microdroid.test.common.MetricsProcessor;
-import com.android.virt.VirtualizationTestHelper;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -51,8 +51,7 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class MicrodroidDeviceTestBase {
     public static boolean isCuttlefish() {
-        return VirtualizationTestHelper.isCuttlefish(
-                SystemProperties.get("ro.product.vendor.device"));
+        return DeviceProperties.create(SystemProperties::get).isCuttlefish();
     }
 
     public static String getMetricPrefix() {
