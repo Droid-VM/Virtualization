@@ -16,6 +16,29 @@
       "message": "I lost Alan\u0027s +2 because of some changes. Can anyone review Patchset4/P5?",
       "revId": "3c11f1f7f380db453b8dbb0cc9e4543ebcda67b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0043ee47_20baece4",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-17T11:07:32Z",
+      "side": 1,
+      "message": "data_device seems redundant now\n(Stylistically it would probably be better to do this as two separate let statements now, if we needed both)",
+      "range": {
+        "startLine": 58,
+        "startChar": 2,
+        "endLine": 58,
+        "endChar": 72
+      },
+      "revId": "3c11f1f7f380db453b8dbb0cc9e4543ebcda67b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -130,6 +130,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "acd43ff2_4d337047",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-17T11:07:32Z",
+      "side": 1,
+      "message": "Yeah, seems like @aliceywang@google.com imported it!\nI guess we should fix some of the use cases.",
+      "parentUuid": "28523c33_3c760593",
+      "revId": "69567f80c887d65f3fcd325679fb3df504f1be9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c27b45e_664d0426",
@@ -191,6 +209,30 @@
       "side": 1,
       "message": "If I understand this correctly, the SALT will be appropriately picked by the caller of get_sealing_key(). The function remains unchanged. I can do that Salt aggregation in a different patch",
       "parentUuid": "86e2da87_04efc1d2",
+      "range": {
+        "startLine": 42,
+        "startChar": 34,
+        "endLine": 42,
+        "endChar": 45
+      },
+      "revId": "69567f80c887d65f3fcd325679fb3df504f1be9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72d73c94_e48eaa3d",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-17T11:07:32Z",
+      "side": 1,
+      "message": "Fine to do it in a separate patch.\nBut there\u0027s only a small number of callers, so having an enum \u0026 mapping it to the salt in one place would make it easy to see they\u0027re all different, and what the usages are.",
+      "parentUuid": "7c10ae18_50d8fa1b",
       "range": {
         "startLine": 42,
         "startChar": 34,
