@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "722cb173_2336fd2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-18T11:25:21Z",
+      "side": 1,
+      "message": "1) This kills the VM even if the test crashes. With `--daemonize` the VMs keep a non-zero refcount unless the test properly calls \u0027vm stop \u003ccid\u003e\u0027, so we often end up with \"zombie\" VMs lingering in the background after the test.\n\n2) I want to remove `--daemonize` for b/245727626",
+      "parentUuid": "db2c144e_2406c0f0",
+      "revId": "bcfb3817697d914593196e25f9bef7b1c6726a0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ba2a516_8030a1de",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-11-17T01:38:16Z",
       "side": 1,
       "message": "Should we wait until process finishes?",
+      "range": {
+        "startLine": 444,
+        "startChar": 0,
+        "endLine": 444,
+        "endChar": 99
+      },
+      "revId": "bcfb3817697d914593196e25f9bef7b1c6726a0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc026d21_84803a26",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-18T11:25:21Z",
+      "side": 1,
+      "message": "Good catch! Note that the test is currently disabled and will need to be fixed up when pvmfw starts checking the sigs.",
+      "parentUuid": "2ba2a516_8030a1de",
       "range": {
         "startLine": 444,
         "startChar": 0,
