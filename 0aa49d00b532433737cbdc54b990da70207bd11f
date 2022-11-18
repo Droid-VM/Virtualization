@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d43ec44b_4572a59f",
+        "filename": "demo/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-18T17:27:41Z",
+      "side": 1,
+      "message": "This is only needed while we don\u0027t have system apis. After that apps can go back to linking framework-virtualization which contains API stubs.",
+      "parentUuid": "2f55995a_7554f00b",
+      "range": {
+        "startLine": 16,
+        "startChar": 2,
+        "endLine": 16,
+        "endChar": 27
+      },
+      "revId": "0aa49d00b532433737cbdc54b990da70207bd11f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d7d14af_6ec54176",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-18T15:21:40Z",
       "side": 1,
       "message": "Can you move this comment to just above the relevant line, while you\u0027re here?",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 96
+      },
+      "revId": "0aa49d00b532433737cbdc54b990da70207bd11f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7adfd767_da40dd93",
+        "filename": "javalib/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-18T17:27:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d7d14af_6ec54176",
       "range": {
         "startLine": 37,
         "startChar": 8,
