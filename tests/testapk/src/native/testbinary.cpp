@@ -132,8 +132,8 @@ Result<void> start_test_service() {
             abort();
         }
     };
-    if (!AVmPayload_runVsockRpcServer(testService->asBinder().get(), testService->SERVICE_PORT,
-                                      callback, nullptr)) {
+    if (!AVmPayload_runVsockRpcServer(testService->asBinder().get(), VMADDR_CID_HOST,
+                                      testService->SERVICE_PORT, callback, nullptr)) {
         return Error() << "RPC Server failed to run";
     }
 
