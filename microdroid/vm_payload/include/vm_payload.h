@@ -52,7 +52,7 @@ bool AVmPayload_notifyPayloadReady(void);
  *
  * \return true if the server has shutdown normally, false if it failed in some way.
  */
-bool AVmPayload_runVsockRpcServer(AIBinder *service, unsigned int port,
+bool AVmPayload_runVsockRpcServer(AIBinder *service, unsigned int cid, unsigned int port,
                                   void (*on_ready)(void *param), void *param);
 
 /**
