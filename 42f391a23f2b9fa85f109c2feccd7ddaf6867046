@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9fd857cf_9983d23b",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-18T17:03:16Z",
+      "side": 1,
+      "message": "The lock is internal to VMM, and nothing in this file acquires the lock or is explicitly protected by it. (In fact, I think I can make it private to VMM.)\nBut these functions can\u0027t safely be called unless the lock is held, otherwise we can get messiness where one thread is creating directories while another deletes them. So I\u0027m making that explicit. (I could just delete these GuardedBy and nothing would complain - but then I\u0027d lose the error checking.)\n\nSee also the note on lock ordering above.\n\nI did try moving these functions to VMM, but that gets very messy very quickly, since they are primarily working with VM internal details.",
+      "parentUuid": "673bb196_5d42fb19",
+      "range": {
+        "startLine": 278,
+        "startChar": 4,
+        "endLine": 278,
+        "endChar": 51
+      },
+      "revId": "42f391a23f2b9fa85f109c2feccd7ddaf6867046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa79ccb5_12ead6ce",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
         "patchSetId": 2
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-18T16:46:33Z",
       "side": 1,
       "message": "Do we expect this map to hold a lot of keys? If not, then it\u0027s recommended to use ArrayMap",
+      "range": {
+        "startLine": 70,
+        "startChar": 78,
+        "endLine": 70,
+        "endChar": 85
+      },
+      "revId": "42f391a23f2b9fa85f109c2feccd7ddaf6867046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a563ad7d_f4a8ae25",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-18T17:03:16Z",
+      "side": 1,
+      "message": "Good point. I\u0027d forgotten Android\u0027s traditional paranoia about allocations. And no, I expect roughly 1 entry at most.",
+      "parentUuid": "fa79ccb5_12ead6ce",
       "range": {
         "startLine": 70,
         "startChar": 78,
