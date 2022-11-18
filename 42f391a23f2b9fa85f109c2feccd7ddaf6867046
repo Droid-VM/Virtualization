@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fad4cb1_8a77021e",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-18T17:37:46Z",
+      "side": 1,
+      "message": "I see, I agree that having compile time enforcement is a good thing, just have some bad memories of deadlock bugs that happen just because two different classes depended on each-other locks :)\n\nHaving said that, this change is already an improvement, and I don\u0027t want to block it on making additional improvements. We can always do them in a follow-up change.",
+      "parentUuid": "9fd857cf_9983d23b",
+      "range": {
+        "startLine": 278,
+        "startChar": 4,
+        "endLine": 278,
+        "endChar": 51
+      },
+      "revId": "42f391a23f2b9fa85f109c2feccd7ddaf6867046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa79ccb5_12ead6ce",
