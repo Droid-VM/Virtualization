@@ -90,7 +90,7 @@ fn try_notify_payload_ready() -> Result<()> {
 }
 
 /// Runs a binder RPC server, serving the supplied binder service implementation on the given vsock
-/// port.
+/// port. Only connections from the host are accepted.
 ///
 /// If and when the server is ready for connections (it is listening on the port), `on_ready` is
 /// called to allow appropriate action to be taken - e.g. to notify clients that they may now
@@ -118,7 +118,7 @@ pub unsafe extern "C" fn AVmPayload_runVsockRpcServer(
     // safely be taken by new_spibinder.
     let service = new_spibinder(service);
     if let Some(service) = service {
-        match RpcServer::new_vsock(service, port) {
+        match RpcServer::new_vsock(service, libc::VMADDR_CID_HOST, port) {
             Ok(server) => {
                 if let Some(on_ready) = on_ready {
                     on_ready(param);
