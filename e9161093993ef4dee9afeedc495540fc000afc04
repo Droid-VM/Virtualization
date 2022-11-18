@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d353558b_858baf7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-18T11:27:37Z",
+      "side": 1,
+      "message": "LGTM, with Alan\u0027s comment.\n\nInteresting that vsock wants -1 for an ephemeral port. Zero (the usual POSIX value) seems to work as well.",
+      "revId": "e9161093993ef4dee9afeedc495540fc000afc04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
