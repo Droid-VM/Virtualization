@@ -137,7 +137,7 @@ fn main() -> Result<()> {
 
     debug!("fd_server is starting as a rpc service.");
     let service = FdService::new_binder(fd_pool).as_binder();
-    let server = RpcServer::new_vsock(service, RPC_SERVICE_PORT)?;
+    let server = RpcServer::new_vsock(service, libc::VMADDR_CID_HOST, RPC_SERVICE_PORT)?;
     debug!("fd_server is ready");
 
     // Close the ready-fd if we were given one to signal our readiness.
