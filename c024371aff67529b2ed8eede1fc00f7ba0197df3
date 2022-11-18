@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef15a5b2_7d4c7cc8",
+        "filename": "authfs/tests/benchmarks/src/java/com/android/fs/benchmarks/AuthFsBenchmarks.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-18T10:51:23Z",
+      "side": 1,
+      "message": "Neat",
+      "range": {
+        "startLine": 87,
+        "startChar": 68,
+        "endLine": 87,
+        "endChar": 92
+      },
+      "revId": "c024371aff67529b2ed8eede1fc00f7ba0197df3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d117ea2d_13b3d82d",
+        "filename": "authfs/tests/benchmarks/src/java/com/android/fs/benchmarks/AuthFsBenchmarks.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-18T10:51:23Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be covered by the supportsMicrodroid() call above?\nIdeally we shouldn\u0027t build in assumptions about CF, and CF should correctly report that is only supports non-protected via the hypervisor properties.\n\nActually I suspect the comment is wrong; it should say \"Skip on CF; too slow\" as we do elsewhere - assuming CF \u003d\u003d nested virtualization.",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 88,
+        "endChar": 95
+      },
+      "revId": "c024371aff67529b2ed8eede1fc00f7ba0197df3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

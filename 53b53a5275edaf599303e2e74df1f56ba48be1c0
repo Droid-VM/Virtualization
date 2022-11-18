@@ -16,6 +16,98 @@
       "message": "Hi Alan,\n\nI\u0027d like to create one class to for both host tests and device tests to get properties. Something like this, wdyt?",
       "revId": "53b53a5275edaf599303e2e74df1f56ba48be1c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aebbce2f_c58de0ac",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/DeviceProperties.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-18T10:51:23Z",
+      "side": 1,
+      "message": "@Nullable or @NotNull as appropriate\n(Ditto for getMetricsTag)",
+      "range": {
+        "startLine": 23,
+        "startChar": 15,
+        "endLine": 23,
+        "endChar": 26
+      },
+      "revId": "53b53a5275edaf599303e2e74df1f56ba48be1c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25d19362_dfd3ce73",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/DeviceProperties.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-18T10:51:23Z",
+      "side": 1,
+      "message": "Nit: move this, and the constructor, before the instance methods",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 49
+      },
+      "revId": "53b53a5275edaf599303e2e74df1f56ba48be1c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbeed80f_3e4ec968",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/DeviceProperties.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-18T10:51:23Z",
+      "side": 1,
+      "message": "requireNotNull",
+      "range": {
+        "startLine": 51,
+        "startChar": 26,
+        "endLine": 51,
+        "endChar": 40
+      },
+      "revId": "53b53a5275edaf599303e2e74df1f56ba48be1c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a9c078d_31f071cc",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/DeviceProperties.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-18T10:51:23Z",
+      "side": 1,
+      "message": "Pass e in here so we get the complete chain",
+      "range": {
+        "startLine": 58,
+        "startChar": 22,
+        "endLine": 58,
+        "endChar": 46
+      },
+      "revId": "53b53a5275edaf599303e2e74df1f56ba48be1c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
