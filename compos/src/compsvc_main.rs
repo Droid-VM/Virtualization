@@ -51,7 +51,7 @@ fn try_main() -> Result<()> {
 
     debug!("compsvc is starting as a rpc service.");
     let service = compsvc::new_binder()?.as_binder();
-    let server = RpcServer::new_vsock(service, COMPOS_VSOCK_PORT)?;
+    let server = RpcServer::new_vsock(service, libc::VMADDR_CID_HOST, COMPOS_VSOCK_PORT)?;
     // SAFETY: Invokes a method from the bindgen library `vm_payload_bindgen`.
     unsafe { AVmPayload_notifyPayloadReady() };
     server.join();
