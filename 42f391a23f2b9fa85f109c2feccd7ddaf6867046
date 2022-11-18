@@ -16,6 +16,52 @@
       "message": "I think this is still correct \u0026 thread-safe, but it\u0027s all slightly complicated.",
       "revId": "42f391a23f2b9fa85f109c2feccd7ddaf6867046",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "673bb196_5d42fb19",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-18T16:46:33Z",
+      "side": 1,
+      "message": "Such dependencies are usually an anti-pattern and nasty deadlock bugs waiting to happen. Is there a strong reason why code in VM should be guarded by a VMM lock? Can the lock be internal to VMM?",
+      "range": {
+        "startLine": 278,
+        "startChar": 4,
+        "endLine": 278,
+        "endChar": 51
+      },
+      "revId": "42f391a23f2b9fa85f109c2feccd7ddaf6867046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa79ccb5_12ead6ce",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-18T16:46:33Z",
+      "side": 1,
+      "message": "Do we expect this map to hold a lot of keys? If not, then it\u0027s recommended to use ArrayMap",
+      "range": {
+        "startLine": 70,
+        "startChar": 78,
+        "endLine": 70,
+        "endChar": 85
+      },
+      "revId": "42f391a23f2b9fa85f109c2feccd7ddaf6867046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
