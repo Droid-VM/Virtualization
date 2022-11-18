@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd223616_2b6f2358",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationserviceinternal/IVirtualizationServiceInternal.aidl",
+        "patchSetId": 19
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-18T11:31:42Z",
+      "side": 1,
+      "message": "Bikeshed: Handle seems wrong. Resources, context, info, instance?",
+      "range": {
+        "startLine": 22,
+        "startChar": 26,
+        "endLine": 22,
+        "endChar": 32
+      },
+      "revId": "a55348fa04590be95ab8704c853a728d3289d899",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8043e5c8_8399ba7d",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-18T11:31:42Z",
+      "side": 1,
+      "message": "Why not create this in VirtualizationService.init(), which is called once ?\n\n(\"Just create one\" always beats Singleton.)",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 1
+      },
+      "revId": "a55348fa04590be95ab8704c853a728d3289d899",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "608d27f0_960c3a92",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-18T11:31:42Z",
+      "side": 1,
+      "message": "Move this inside GlobalVmHandle::create?",
+      "range": {
+        "startLine": 136,
+        "startChar": 8,
+        "endLine": 136,
+        "endChar": 58
+      },
+      "revId": "a55348fa04590be95ab8704c853a728d3289d899",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "147537cc_73c27758",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-18T11:31:42Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s true",
+      "range": {
+        "startLine": 173,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 58
+      },
+      "revId": "a55348fa04590be95ab8704c853a728d3289d899",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a64b7fb6_12e8166d",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-18T11:31:42Z",
+      "side": 1,
+      "message": "Does this need to be an Arc? Isn\u0027t there a one-one between instance and handle?\n(Do you need a separate instance struct at all?)",
+      "range": {
+        "startLine": 176,
+        "startChar": 14,
+        "endLine": 176,
+        "endChar": 17
+      },
+      "revId": "a55348fa04590be95ab8704c853a728d3289d899",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
