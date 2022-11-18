@@ -94,6 +94,8 @@ const CHUNK_RECV_MAX_LEN: usize = 1024;
 
 const MICRODROID_OS_NAME: &str = "microdroid";
 
+const UNFORMATTED_STORAGE_MAGIC: &str = "UNFORMATTED-STORAGE";
+
 /// Implementation of `IVirtualizationService`, the entry point of the AIDL service.
 #[derive(Debug, Default)]
 pub struct VirtualizationService {
@@ -173,6 +175,7 @@ impl IVirtualizationService for VirtualizationService {
         match partition_type {
             PartitionType::RAW => Ok(()),
             PartitionType::ANDROID_VM_INSTANCE => format_as_android_vm_instance(&mut part),
+            PartitionType::ENCRYPTEDSTORE => format_as_encryptedstore(&mut part),
             _ => Err(Error::new(
                 ErrorKind::Unsupported,
                 format!("Unsupported partition type {:?}", partition_type),
@@ -529,6 +532,11 @@ fn write_zero_filler(zero_filler_path: &Path) -> Result<()> {
 fn format_as_android_vm_instance(part: &mut dyn Write) -> std::io::Result<()> {
     part.write_all(ANDROID_VM_INSTANCE_MAGIC.as_bytes())?;
     part.write_all(&ANDROID_VM_INSTANCE_VERSION.to_le_bytes())?;
+    part.flush()
+}
+
+fn format_as_encryptedstore(part: &mut dyn Write) -> std::io::Result<()> {
+    part.write_all(UNFORMATTED_STORAGE_MAGIC.as_bytes())?;
     part.flush()
 }
 
