@@ -36,7 +36,7 @@ bool AVmPayload_notifyPayloadReady(void);
 
 /**
  * Runs a binder RPC server, serving the supplied binder service implementation on the given vsock
- * port.
+ * port. Only connections from the host are accepted.
  *
  * If and when the server is ready for connections (it is listening on the port), `on_ready` is
  * called to allow appropriate action to be taken - e.g. to notify clients that they may now
