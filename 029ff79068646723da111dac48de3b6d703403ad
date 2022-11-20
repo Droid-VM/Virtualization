@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bb1eee7_bd2ed19d",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-11-20T13:22:02Z",
+      "side": 1,
+      "message": "Nit: why brackets around crypt?",
+      "revId": "029ff79068646723da111dac48de3b6d703403ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbecd8df_21a34e57",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-11-20T13:22:02Z",
+      "side": 1,
+      "message": "crypt_device and mountpoint are probably useful context for all failures in this function. Perhaps put bulk of this function inside a new function. Then main can call that function and add a `.context()` including crypt_device and mountpoint which automatically adds context to *all* error returns.",
+      "revId": "029ff79068646723da111dac48de3b6d703403ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27098614_b49c9b42",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-11-20T13:22:02Z",
+      "side": 1,
+      "message": "Do you need to overwrite your magic string here? `mkfs.ext4` erases and/or trims block zero anyway. Less code and less race between block zero zapped and mkfs complete.",
+      "revId": "029ff79068646723da111dac48de3b6d703403ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ac58491_8a8c5e09",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-11-20T13:22:02Z",
+      "side": 1,
+      "message": "Some CString::new we add context, some we don\u0027t. Can these realistically fail? Should we just unwrap? I see zipfuse takes that approach. Genuine question: Rust error handling seems a bit ad hoc stylistically to me, sometimes and I\u0027m a rust n00b.",
+      "revId": "029ff79068646723da111dac48de3b6d703403ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
