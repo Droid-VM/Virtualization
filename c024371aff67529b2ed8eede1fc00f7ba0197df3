@@ -45,6 +45,30 @@
       },
       "revId": "c024371aff67529b2ed8eede1fc00f7ba0197df3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4e2835c_260161a3",
+        "filename": "authfs/tests/benchmarks/src/java/com/android/fs/benchmarks/AuthFsBenchmarks.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-21T15:32:46Z",
+      "side": 1,
+      "message": "Actually this is skipped because this test is supported on unprotected VM but is very flaky. Since it\u0027s not needed to collect metrics on CF http://b/258332671, I disabled it. I\u0027ll update the comment.",
+      "parentUuid": "d117ea2d_13b3d82d",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 88,
+        "endChar": 95
+      },
+      "revId": "c024371aff67529b2ed8eede1fc00f7ba0197df3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
