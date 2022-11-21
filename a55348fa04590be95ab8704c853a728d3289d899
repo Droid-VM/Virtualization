@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "847b0d77_d1510a24",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationserviceinternal/IVirtualizationServiceInternal.aidl",
+        "patchSetId": 19
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-21T14:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd223616_2b6f2358",
+      "range": {
+        "startLine": 22,
+        "startChar": 26,
+        "endLine": 22,
+        "endChar": 32
+      },
+      "revId": "a55348fa04590be95ab8704c853a728d3289d899",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8043e5c8_8399ba7d",
@@ -37,6 +61,54 @@
       "writtenOn": "2022-11-18T11:31:42Z",
       "side": 1,
       "message": "Why not create this in VirtualizationService.init(), which is called once ?\n\n(\"Just create one\" always beats Singleton.)",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 1
+      },
+      "revId": "a55348fa04590be95ab8704c853a728d3289d899",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2d6ea9b_d62f8d01",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-21T14:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8043e5c8_8399ba7d",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 1
+      },
+      "revId": "a55348fa04590be95ab8704c853a728d3289d899",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccd9bfcb_191d8515",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-21T14:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8043e5c8_8399ba7d",
       "range": {
         "startLine": 102,
         "startChar": 0,
@@ -94,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e54d5f3_365b288f",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-21T14:07:32Z",
+      "side": 1,
+      "message": "Done, just note that it will be needed soon.",
+      "parentUuid": "7a396812_63a2e9bc",
+      "range": {
+        "startLine": 136,
+        "startChar": 8,
+        "endLine": 136,
+        "endChar": 58
+      },
+      "revId": "a55348fa04590be95ab8704c853a728d3289d899",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "147537cc_73c27758",
@@ -117,6 +213,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95b44d89_0b83a80d",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-21T14:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "147537cc_73c27758",
+      "range": {
+        "startLine": 173,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 58
+      },
+      "revId": "a55348fa04590be95ab8704c853a728d3289d899",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a64b7fb6_12e8166d",
@@ -130,6 +250,30 @@
       "writtenOn": "2022-11-18T11:31:42Z",
       "side": 1,
       "message": "Does this need to be an Arc? Isn\u0027t there a one-one between instance and handle?\n(Do you need a separate instance struct at all?)",
+      "range": {
+        "startLine": 176,
+        "startChar": 14,
+        "endLine": 176,
+        "endChar": 17
+      },
+      "revId": "a55348fa04590be95ab8704c853a728d3289d899",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d4e7748_7c4a039a",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-21T14:07:32Z",
+      "side": 1,
+      "message": "Will be soon. Removed in the meantime.",
+      "parentUuid": "a64b7fb6_12e8166d",
       "range": {
         "startLine": 176,
         "startChar": 14,

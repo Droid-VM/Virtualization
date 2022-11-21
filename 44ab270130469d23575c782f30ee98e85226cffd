@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ad57e16_3e13f5c8",
+        "filename": "virtualizationservice/aidl/Android.bp",
+        "patchSetId": 21
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-21T14:07:32Z",
+      "side": 1,
+      "message": "I\u0027ve made it `_internal` because `.internal` is interpreted by Java as a subdirectory, and I don\u0027t want to put the files in `virtualizationservice/internal`. Hope that still improves readability.",
+      "parentUuid": "2b9c9238_8cc74334",
+      "range": {
+        "startLine": 37,
+        "startChar": 47,
+        "endLine": 37,
+        "endChar": 55
+      },
+      "revId": "44ab270130469d23575c782f30ee98e85226cffd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94d4cf8d_878d49ac",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-21T06:56:59Z",
       "side": 1,
       "message": "same here. `virtualizationservice.internal` rather than `virtualizationserviceinternal`.",
+      "range": {
+        "startLine": 38,
+        "startChar": 48,
+        "endLine": 38,
+        "endChar": 56
+      },
+      "revId": "44ab270130469d23575c782f30ee98e85226cffd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8be1d799_38c17086",
+        "filename": "virtualizationservice/aidl/Android.bp",
+        "patchSetId": 21
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-21T14:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94d4cf8d_878d49ac",
       "range": {
         "startLine": 38,
         "startChar": 48,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "265bbe5d_99183efc",
+        "filename": "virtualizationservice/aidl/Android.bp",
+        "patchSetId": 21
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-21T14:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d204ea3_2c6ca778",
+      "range": {
+        "startLine": 57,
+        "startChar": 12,
+        "endLine": 57,
+        "endChar": 42
+      },
+      "revId": "44ab270130469d23575c782f30ee98e85226cffd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bdc57c8_0b438f6d",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-11-21T06:56:59Z",
       "side": 1,
       "message": "This discards error messages from allocate_cid.",
+      "range": {
+        "startLine": 127,
+        "startChar": 39,
+        "endLine": 127,
+        "endChar": 76
+      },
+      "revId": "44ab270130469d23575c782f30ee98e85226cffd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6578bc9_beb11c89",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-21T14:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bdc57c8_0b438f6d",
       "range": {
         "startLine": 127,
         "startChar": 39,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5fe17dd_2fb845dc",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-21T14:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d21d392_770f7e7f",
+      "range": {
+        "startLine": 143,
+        "startChar": 65,
+        "endLine": 143,
+        "endChar": 66
+      },
+      "revId": "44ab270130469d23575c782f30ee98e85226cffd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e6a265c_c8c02040",
@@ -146,6 +266,30 @@
       "writtenOn": "2022-11-21T06:56:59Z",
       "side": 1,
       "message": "The error message is discarded.",
+      "range": {
+        "startLine": 145,
+        "startChar": 60,
+        "endLine": 145,
+        "endChar": 86
+      },
+      "revId": "44ab270130469d23575c782f30ee98e85226cffd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1e90ff4_0e0db1cd",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-21T14:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e6a265c_c8c02040",
       "range": {
         "startLine": 145,
         "startChar": 60,
@@ -179,6 +323,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14dc3fdb_248a8c14",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-21T14:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3274c12_7a79ccb9",
+      "range": {
+        "startLine": 176,
+        "startChar": 48,
+        "endLine": 176,
+        "endChar": 86
+      },
+      "revId": "44ab270130469d23575c782f30ee98e85226cffd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f893a11f_8c0ac8c0",
@@ -192,6 +360,30 @@
       "writtenOn": "2022-11-21T06:56:59Z",
       "side": 1,
       "message": "`..Default::default()`",
+      "range": {
+        "startLine": 399,
+        "startChar": 62,
+        "endLine": 399,
+        "endChar": 87
+      },
+      "revId": "44ab270130469d23575c782f30ee98e85226cffd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c73cfa4_82c7046f",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-21T14:07:32Z",
+      "side": 1,
+      "message": "This one, sadly, doesn\u0027t work because we can\u0027t derive `Default` for `VirtualizationService` (not implemented for `Strong`).",
+      "parentUuid": "f893a11f_8c0ac8c0",
       "range": {
         "startLine": 399,
         "startChar": 62,
