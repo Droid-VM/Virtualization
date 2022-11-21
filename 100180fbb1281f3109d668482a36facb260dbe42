@@ -56,6 +56,30 @@
       },
       "revId": "100180fbb1281f3109d668482a36facb260dbe42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e360dd97_53360661",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-21T09:35:13Z",
+      "side": 1,
+      "message": "Not sure what these are for. Otherwise for rpc binder the services are still passed as binder. @Jiyong, do we still need this?",
+      "parentUuid": "256e44b6_709726bd",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 38
+      },
+      "revId": "100180fbb1281f3109d668482a36facb260dbe42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
