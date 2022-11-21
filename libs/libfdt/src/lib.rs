@@ -17,6 +17,8 @@
 
 #![no_std]
 
+mod compat;
+
 use core::ffi::{c_int, c_void, CStr};
 use core::fmt;
 use core::mem;
@@ -540,6 +542,17 @@ impl Fdt {
     pub fn pack(&mut self) -> Result<()> {
         // SAFETY - "Closes" the DT in-place by updating its header and relocating its structs.
         let ret = unsafe { libfdt_bindgen::fdt_pack(self.as_mut_ptr()) };
+        fdt_err_expect_zero(ret)
+    }
+
+    /// Applies a DT overlay on the base DT.
+    ///
+    /// # Safety
+    ///
+    /// On failure, the library corrupts the DT and overlay so both must be discarded.
+    pub unsafe fn apply_overlay(&mut self, overlay: &mut Fdt) -> Result<()> {
+        let overlay = overlay.as_mut_ptr() as *mut c_void;
+        let ret = libfdt_bindgen::fdt_overlay_apply(self.as_mut_ptr(), overlay);
         fdt_err_expect_zero(ret)
     }
 
