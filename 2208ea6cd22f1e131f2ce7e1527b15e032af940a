@@ -26,6 +26,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ae103c9_c4d54328",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-21T15:56:36Z",
+      "side": 1,
+      "message": "This is a safe method, what do you mean by this safety comment? Is the caller supposed to check that first somehow?",
+      "revId": "2208ea6cd22f1e131f2ce7e1527b15e032af940a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a477386_74cc4edc",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-21T15:56:36Z",
+      "side": 1,
+      "message": "What happens if it\u0027s not?",
+      "revId": "2208ea6cd22f1e131f2ce7e1527b15e032af940a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d07dea38_07be5df2",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-21T15:56:36Z",
+      "side": 1,
+      "message": "This unsafe block needs a comment to explain why it is correct.",
+      "revId": "2208ea6cd22f1e131f2ce7e1527b15e032af940a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d2659c4_edfe779c",
         "filename": "vmbase/example/idmap.S",
         "patchSetId": 21
