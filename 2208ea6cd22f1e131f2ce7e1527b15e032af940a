@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "20e39e19_3ed0cebc",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-21T18:33:34Z",
+      "side": 1,
+      "message": "Is `OsStr` available to pvmfw (`no_std`)? Regarding building the `\u0026CStr` arguments, the code could be made cleaner by using the [`cstr` crate](https://docs.rs/cstr/latest/cstr/) but I\u0027d rather not block this CL on that.",
+      "parentUuid": "2d283f25_71f78912",
+      "range": {
+        "startLine": 313,
+        "startChar": 32,
+        "endLine": 313,
+        "endChar": 37
+      },
+      "revId": "2208ea6cd22f1e131f2ce7e1527b15e032af940a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ae103c9_c4d54328",
         "filename": "libs/libfdt/src/lib.rs",
         "patchSetId": 21
@@ -37,6 +61,24 @@
       "writtenOn": "2022-11-21T15:56:36Z",
       "side": 1,
       "message": "This is a safe method, what do you mean by this safety comment? Is the caller supposed to check that first somehow?",
+      "revId": "2208ea6cd22f1e131f2ce7e1527b15e032af940a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6b00ca2_7ad51a68",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-21T18:33:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ae103c9_c4d54328",
       "revId": "2208ea6cd22f1e131f2ce7e1527b15e032af940a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -58,6 +100,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f4eeacd_29f0c2a1",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-21T18:33:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a477386_74cc4edc",
+      "revId": "2208ea6cd22f1e131f2ce7e1527b15e032af940a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d07dea38_07be5df2",
@@ -75,6 +135,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "310dfd24_b18a5061",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-21T18:33:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d07dea38_07be5df2",
+      "revId": "2208ea6cd22f1e131f2ce7e1527b15e032af940a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d2659c4_edfe779c",
@@ -88,6 +166,30 @@
       "writtenOn": "2022-11-18T12:01:49Z",
       "side": 1,
       "message": "Shouldn\u0027t this go on the second CL?",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 57
+      },
+      "revId": "2208ea6cd22f1e131f2ce7e1527b15e032af940a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c34455f9_7a631ead",
+        "filename": "vmbase/example/idmap.S",
+        "patchSetId": 21
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-21T18:33:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d2659c4_edfe779c",
       "range": {
         "startLine": 47,
         "startChar": 0,
