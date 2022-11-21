@@ -22,6 +22,9 @@ rust_ffi_static {
         "libtinyvec_nostd",
         "libvmbase",
     ],
+    whole_static_libs: [
+        "libc_libpvmfw_deps",
+    ],
     apex_available: ["com.android.virt"],
 }
 

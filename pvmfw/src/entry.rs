@@ -22,6 +22,7 @@ use crate::memory::MemoryTracker;
 use crate::mmio_guard;
 use crate::mmu;
 use core::arch::asm;
+use core::ffi::CStr;
 use core::num::NonZeroUsize;
 use core::slice;
 use dice::bcc::Handover;
@@ -176,6 +177,51 @@ impl<'a> MemorySlices<'a> {
     }
 }
 
+fn apply_debug_policy(fdt: &mut libfdt::Fdt, debug_policy: &mut [u8]) -> Result<(), RebootReason> {
+    let overlay = libfdt::Fdt::from_mut_slice(debug_policy).map_err(|e| {
+        error!("Failed to load the debug policy overlay: {e}");
+        RebootReason::InvalidConfig
+    })?;
+
+    fdt.unpack().map_err(|e| {
+        error!("Failed to unpack DT for debug policy: {e}");
+        RebootReason::InternalError
+    })?;
+
+    // TODO(b/252950358) Get rid of this just-in-time patching once we move to the AVF DTBO.
+    let names = [
+        CStr::from_bytes_with_nul(b"dpm\0").unwrap(),
+        CStr::from_bytes_with_nul(b"log_arrdumppanic\0").unwrap(),
+        CStr::from_bytes_with_nul(b"log_preslcdump\0").unwrap(),
+        CStr::from_bytes_with_nul(b"log_slcdump\0").unwrap(),
+    ];
+
+    for name in names {
+        fdt.root_mut()
+            .map_err(|e| {
+                error!("Failed to locate root: {e}");
+                RebootReason::InternalError
+            })?
+            .add_subnode(name)
+            .map_err(|e| {
+                error!("Failed to add node {} for debug_policy: {e}", name.to_str().unwrap());
+                RebootReason::InternalError
+            })?;
+    }
+
+    // SAFETY - The function returns if apply_overlay() fails so there is no risk of re-using the
+    // invalid fdt or overlay.
+    let fdt = unsafe { fdt.apply_overlay(overlay) }.map_err(|e| {
+        error!("Failed to apply the debug policy overlay: {e}");
+        RebootReason::InvalidConfig
+    })?;
+
+    fdt.pack().map_err(|e| {
+        error!("Failed to re-pack DT after debug policy: {e}");
+        RebootReason::InternalError
+    })
+}
+
 /// Sets up the environment for main() and wraps its result for start().
 ///
 /// Provide the abstractions necessary for start() to abort the pVM boot and for main() to run with
@@ -246,6 +292,10 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<(), R
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
     crate::main(slices.fdt, slices.kernel, slices.ramdisk, &bcc, &mut memory)?;
+
+    if let Some(debug_policy) = appended.get_debug_policy() {
+        apply_debug_policy(slices.fdt, debug_policy)?;
+    }
 
     // TODO: Overwrite BCC before jumping to payload to avoid leaking our sealing key.
 
