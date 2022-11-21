@@ -1,1 +1,20 @@
 // Signature format: 2.0
+package android.system.virtualmachine {
+
+  public class VirtualMachine implements java.lang.AutoCloseable {
+    method @NonNull public IBinder connectToVsockServer(int) throws android.system.virtualmachine.VirtualMachineException;
+    field public static final String MANAGE_VIRTUAL_MACHINE_PERMISSION = "android.permission.MANAGE_VIRTUAL_MACHINE";
+    field public static final int STATUS_DELETED = 2; // 0x2
+    field public static final int STATUS_RUNNING = 1; // 0x1
+    field public static final int STATUS_STOPPED = 0; // 0x0
+    field public static final String USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION = "android.permission.USE_CUSTOM_VIRTUAL_MACHINE";
+  }
+
+  public class VirtualMachineException extends java.lang.Exception {
+    ctor public VirtualMachineException(@Nullable String);
+    ctor public VirtualMachineException(@Nullable String, @Nullable Throwable);
+    ctor public VirtualMachineException(@Nullable Throwable);
+  }
+
+}
+

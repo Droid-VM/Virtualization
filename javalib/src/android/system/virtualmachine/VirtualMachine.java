@@ -48,6 +48,7 @@ import android.annotation.IntDef;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.annotation.RequiresPermission;
+import android.annotation.SystemApi;
 import android.content.Context;
 import android.os.Binder;
 import android.os.IBinder;
@@ -98,14 +99,15 @@ import java.util.zip.ZipFile;
 /**
  * Represents an VM instance, with its own configuration and state. Instances are persistent and are
  * created or retrieved via {@link VirtualMachineManager}.
- * <p>
- * The {@link #run} method actually starts up the VM and allows the payload code to execute. It
- * will continue until it exits or {@link #stop} is called. Updates on the state of the VM can
- * be received using {@link #setCallback}. The app can communicate with the VM using
- * {@link #connectToVsockServer} or {@link #connectVsock}.
+ *
+ * <p>The {@link #run} method actually starts up the VM and allows the payload code to execute. It
+ * will continue until it exits or {@link #stop} is called. Updates on the state of the VM can be
+ * received using {@link #setCallback}. The app can communicate with the VM using {@link
+ * #connectToVsockServer} or {@link #connectVsock}.
  *
  * @hide
  */
+@SystemApi
 public class VirtualMachine implements AutoCloseable {
     /** Map from context to a map of all that context's VMs by name. */
     @GuardedBy("sCreateLock")
@@ -896,13 +898,14 @@ public class VirtualMachine implements AutoCloseable {
     /**
      * Connect to a VM's binder service via vsock and return the root IBinder object. Guest VMs are
      * expected to set up vsock servers in their payload. After the host app receives the {@link
-     * VirtualMachineCallback#onPayloadReady(VirtualMachine)}, it can use this method to
-     * establish a connection to the guest VM.
+     * VirtualMachineCallback#onPayloadReady(VirtualMachine)}, it can use this method to establish a
+     * connection to the guest VM.
      *
      * @throws VirtualMachineException if the virtual machine is not running or the connection
-     *         failed.
+     *     failed.
      * @hide
      */
+    @SystemApi
     @NonNull
     public IBinder connectToVsockServer(int port) throws VirtualMachineException {
         synchronized (mLock) {
