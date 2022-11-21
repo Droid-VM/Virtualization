@@ -22,6 +22,21 @@ rust_bindgen {
     apex_available: ["com.android.virt"],
 }
 
+cc_library_static {
+    name: "liblibfdt_libc",
+    srcs: [
+        ":liblibfdt_libc_deps",
+        "__errno.cpp",
+    ],
+    stl: "none",
+    sanitize: {
+        address: false,
+        integer_overflow: false,
+        fuzzer: false,
+    },
+    cppflags: ["-Wold-style-cast"],
+}
+
 rust_library_rlib {
     name: "liblibfdt",
     crate_name: "libfdt",
@@ -40,6 +55,7 @@ rust_library_rlib {
     ],
     whole_static_libs: [
         "libfdt",
+        "liblibfdt_libc",
     ],
     apex_available: ["com.android.virt"],
 }
