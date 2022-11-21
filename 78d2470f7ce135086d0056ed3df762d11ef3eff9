@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5adc7c58_8245a962",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-21T17:53:49Z",
+      "side": 1,
+      "message": "I think that\u0027s currently true.\n@shikhapanwar@google.com WDYT?",
+      "parentUuid": "7a96b0c3_c6f76127",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 12
+      },
+      "revId": "78d2470f7ce135086d0056ed3df762d11ef3eff9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "747a97d6_10c8b9e5",
         "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-21T17:46:57Z",
       "side": 1,
       "message": "Nit: I was thinking of sticking with encryptedstore/EncryptedStore name",
+      "range": {
+        "startLine": 236,
+        "startChar": 29,
+        "endLine": 236,
+        "endChar": 48
+      },
+      "revId": "78d2470f7ce135086d0056ed3df762d11ef3eff9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eafaf8b7_56ce0b5a",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-21T17:53:49Z",
+      "side": 1,
+      "message": "Hmm. \"Storage\" is already used quite a lot in Android (e.g. the WRITE_EXTERNAL_STORAGE permission), with a meaning that\u0027s reasonably close to what we want.",
+      "parentUuid": "747a97d6_10c8b9e5",
       "range": {
         "startLine": 236,
         "startChar": 29,
