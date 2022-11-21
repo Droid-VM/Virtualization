@@ -16,6 +16,24 @@
       "message": "Do we have a static initializer in rust? Having to call the same function is not only tedious but also error prone.",
       "revId": "1de426fe333104fb45ab30ad2b5177f94d8143a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b00a326_be027c38",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-21T14:21:02Z",
+      "side": 1,
+      "message": "That sounds like the `init` section of `.so` to me. Rust doesn\u0027t have a means of moving a function there today. You would need a workaround akin to https://internals.rust-lang.org/t/pre-rfc-life-before-main-lib-init/3855/4. I would actually be okay with that. It\u0027s memory safe, the hacky bit is just to access an OS feature not exposed by the language.",
+      "parentUuid": "f8ddf16f_35350a88",
+      "revId": "1de426fe333104fb45ab30ad2b5177f94d8143a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
