@@ -24,6 +24,9 @@ rust_ffi_static {
         "libvmbase",
         "libzeroize_nostd",
     ],
+    whole_static_libs: [
+        "libc_libpvmfw",
+    ],
 }
 
 cc_binary {
