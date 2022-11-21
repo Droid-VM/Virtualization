@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a96b0c3_c6f76127",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-21T17:48:26Z",
+      "side": 1,
+      "message": "I think this return type is okay if the path is a static string, otherwise this might lead to memory leak. Have we decided that encrypted storage will be always be mounted at the same path in long term?",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 12
+      },
+      "revId": "78d2470f7ce135086d0056ed3df762d11ef3eff9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "747a97d6_10c8b9e5",
         "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
         "patchSetId": 1
