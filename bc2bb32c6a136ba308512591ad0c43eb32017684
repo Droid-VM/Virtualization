@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32a7a9c8_0da4a9b9",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-21T16:27:27Z",
+      "side": 1,
+      "message": "What is a `NodeOffset`? Do you mean an `FdtNode`?",
+      "range": {
+        "startLine": 367,
+        "startChar": 31,
+        "endLine": 367,
+        "endChar": 41
+      },
+      "revId": "bc2bb32c6a136ba308512591ad0c43eb32017684",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89832c76_98a3ab2f",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-21T16:27:27Z",
+      "side": 1,
+      "message": "How come this returns an `FdtNode` rather than an `FdtNodeMut`? Where would you use this rather than `FdtNode::parent`?",
+      "range": {
+        "startLine": 418,
+        "startChar": 34,
+        "endLine": 418,
+        "endChar": 41
+      },
+      "revId": "bc2bb32c6a136ba308512591ad0c43eb32017684",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
