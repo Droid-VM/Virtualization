@@ -52,6 +52,24 @@
       "parentUuid": "5b00a326_be027c38",
       "revId": "1de426fe333104fb45ab30ad2b5177f94d8143a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad79a352_2896c245",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-21T14:28:52Z",
+      "side": 1,
+      "message": "There\u0027s lazy_static, but that doesn\u0027t help us here, since it still needs some action to cause it to run.\n\nAnother option would be surface it in the API - caller has to call createFoo, which can do initialization, and then pass the resulting Foo object to all the other methods. But I\u0027m not convinced we really need that.\n\nDavid: I\u0027m slightly wary of that proposal, because running Rust code before main() is called is unsupported, so weird things could happen. The mechanics are straightforward, but we\u0027d run the risk of missing some essential std:: initialization. Note Patrick Walton\u0027s qualms about it on that link.\n\nGiven the API is small and unlikely to grow much in the short term, I\u0027m tempted to create a bug to look at this and leave it for now?",
+      "parentUuid": "5b00a326_be027c38",
+      "revId": "1de426fe333104fb45ab30ad2b5177f94d8143a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
