@@ -34,6 +34,24 @@
       "parentUuid": "f8ddf16f_35350a88",
       "revId": "1de426fe333104fb45ab30ad2b5177f94d8143a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1bf5584_a77357df",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-21T14:26:37Z",
+      "side": 1,
+      "message": "You could also skip the C wrapper they have in the snippet and just add a linker flag to the build target: `-Wl,-init,vm_payload_constructor` or something like that.",
+      "parentUuid": "5b00a326_be027c38",
+      "revId": "1de426fe333104fb45ab30ad2b5177f94d8143a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
