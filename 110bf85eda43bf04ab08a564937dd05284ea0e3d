@@ -1,5 +1,92 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea6ffe6f_b2f067a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-21T09:15:13Z",
+      "side": 1,
+      "message": "Sorry, I\u0027m a bit late for the review.",
+      "revId": "110bf85eda43bf04ab08a564937dd05284ea0e3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62501ea1_f5d63272",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-21T09:15:13Z",
+      "side": 1,
+      "message": "Doesn\u0027t this lock protect mVmsByName according to the usage below?\n\nMaybe call is vmInstanceLock? Since now it is more for the VM instance management. The current name is also a bit misleading as get and delete also use this lock, it\u0027s not just for create.",
+      "range": {
+        "startLine": 52,
+        "startChar": 80,
+        "endLine": 52,
+        "endChar": 99
+      },
+      "revId": "110bf85eda43bf04ab08a564937dd05284ea0e3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9623f854_03d36e57",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-21T09:15:13Z",
+      "side": 1,
+      "message": "nit: Is this needed? The field is final and already initialized with a value.",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 12
+      },
+      "revId": "110bf85eda43bf04ab08a564937dd05284ea0e3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8a5ce3c_3b30b743",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-21T09:15:13Z",
+      "side": 1,
+      "message": "Should we move this check to `getVmByName`?",
+      "range": {
+        "startLine": 246,
+        "startChar": 8,
+        "endLine": 246,
+        "endChar": 29
+      },
+      "revId": "110bf85eda43bf04ab08a564937dd05284ea0e3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
