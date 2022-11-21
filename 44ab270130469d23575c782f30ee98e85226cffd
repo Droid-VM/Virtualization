@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b9c9238_8cc74334",
+        "filename": "virtualizationservice/aidl/Android.bp",
+        "patchSetId": 21
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-21T06:56:59Z",
+      "side": 1,
+      "message": "nit: `.internal` to make it more readable",
+      "range": {
+        "startLine": 37,
+        "startChar": 47,
+        "endLine": 37,
+        "endChar": 55
+      },
+      "revId": "44ab270130469d23575c782f30ee98e85226cffd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94d4cf8d_878d49ac",
+        "filename": "virtualizationservice/aidl/Android.bp",
+        "patchSetId": 21
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-21T06:56:59Z",
+      "side": 1,
+      "message": "same here. `virtualizationservice.internal` rather than `virtualizationserviceinternal`.",
+      "range": {
+        "startLine": 38,
+        "startChar": 48,
+        "endLine": 38,
+        "endChar": 56
+      },
+      "revId": "44ab270130469d23575c782f30ee98e85226cffd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d204ea3_2c6ca778",
+        "filename": "virtualizationservice/aidl/Android.bp",
+        "patchSetId": 21
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-21T06:56:59Z",
+      "side": 1,
+      "message": "We don\u0027t need this for the new AIDL interface?",
+      "range": {
+        "startLine": 57,
+        "startChar": 12,
+        "endLine": 57,
+        "endChar": 42
+      },
+      "revId": "44ab270130469d23575c782f30ee98e85226cffd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bdc57c8_0b438f6d",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-21T06:56:59Z",
+      "side": 1,
+      "message": "This discards error messages from allocate_cid.",
+      "range": {
+        "startLine": 127,
+        "startChar": 39,
+        "endLine": 127,
+        "endChar": 76
+      },
+      "revId": "44ab270130469d23575c782f30ee98e85226cffd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d21d392_770f7e7f",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-21T06:56:59Z",
+      "side": 1,
+      "message": "The error message is discarded.",
+      "range": {
+        "startLine": 143,
+        "startChar": 65,
+        "endLine": 143,
+        "endChar": 66
+      },
+      "revId": "44ab270130469d23575c782f30ee98e85226cffd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e6a265c_c8c02040",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-21T06:56:59Z",
+      "side": 1,
+      "message": "The error message is discarded.",
+      "range": {
+        "startLine": 145,
+        "startChar": 60,
+        "endLine": 145,
+        "endChar": 86
+      },
+      "revId": "44ab270130469d23575c782f30ee98e85226cffd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3274c12_7a79ccb9",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-21T06:56:59Z",
+      "side": 1,
+      "message": "nit: `..Default::default()` as a shorthand.",
+      "range": {
+        "startLine": 176,
+        "startChar": 48,
+        "endLine": 176,
+        "endChar": 86
+      },
+      "revId": "44ab270130469d23575c782f30ee98e85226cffd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f893a11f_8c0ac8c0",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-21T06:56:59Z",
+      "side": 1,
+      "message": "`..Default::default()`",
+      "range": {
+        "startLine": 399,
+        "startChar": 62,
+        "endLine": 399,
+        "endChar": 87
+      },
+      "revId": "44ab270130469d23575c782f30ee98e85226cffd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
