@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f530d7fa_4498005d",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-22T09:46:20Z",
+      "side": 1,
+      "message": "It\u0027s not needed; Arc is about shared ownership, while Mutex is fine for managing shared access.",
+      "parentUuid": "5d211eaf_8c4494ca",
+      "range": {
+        "startLine": 31,
+        "startChar": 35,
+        "endLine": 31,
+        "endChar": 40
+      },
+      "revId": "0cbfdf9264d724ea2641282b34efb39451e04bfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58adf3dc_27bff763",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-22T08:47:24Z",
       "side": 1,
       "message": "Why not use `?` here?",
+      "range": {
+        "startLine": 37,
+        "startChar": 50,
+        "endLine": 37,
+        "endChar": 59
+      },
+      "revId": "0cbfdf9264d724ea2641282b34efb39451e04bfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ab97835_2d31bdeb",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-22T09:46:20Z",
+      "side": 1,
+      "message": "It\u0027s a weird feature of Mutex. The unwrap can only fail if some previous thread died while holding the Mutex. In our case that can\u0027t happen, and in general we tend to treat it as unrecoverable - any invariants protected by the mutex cannot be guaranteed, since we don\u0027t know how far the thread that died got.",
+      "parentUuid": "58adf3dc_27bff763",
       "range": {
         "startLine": 37,
         "startChar": 50,
