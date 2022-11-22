@@ -1,0 +1,19 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+android_app {
+    name: "MicrodroidSampleApp",
+    installable: false,
+    platform_apis: true,
+    jni_libs: ["MicrodroidSampleJniLib"],
+    apex_available: ["com.android.virt"],
+}
+
+cc_library_shared {
+    name: "MicrodroidSampleJniLib",
+    srcs: ["sample_binary.cpp"],
+    shared_libs: ["libvm_payload"],
+    installable: false,
+    apex_available: ["com.android.virt"],
+}

@@ -27,7 +27,7 @@ use binder::ProcessState;
 use clap::Parser;
 use create_idsig::command_create_idsig;
 use create_partition::command_create_partition;
-use run::{command_run, command_run_app};
+use run::{command_run, command_run_app, command_run_microdroid};
 use rustutils::system_properties;
 use std::path::{Path, PathBuf};
 
@@ -109,6 +109,26 @@ enum Opt {
         /// Paths to extra idsig files.
         #[clap(long = "extra-idsig")]
         extra_idsigs: Vec<PathBuf>,
+    },
+    /// Run a virtual machine with Microdroid inside
+    RunMicrodroid {
+        /// Path to the directory where VM-related files (e.g. instance.img, apk.idsig, etc.) will
+        /// be stored. If not specified a random directory under /data/local/tmp/microdroid will be
+        /// created and used.
+        #[clap(long)]
+        work_dir: Option<PathBuf>,
+
+        /// Detach VM from the terminal and run in the background
+        #[clap(short, long)]
+        daemonize: bool,
+
+        /// Debug level of the VM. Supported values: "none" (default), "app_only", and "full".
+        #[clap(long, default_value = "none", value_parser = parse_debug_level)]
+        debug: DebugLevel,
+
+        /// Run VM in protected mode.
+        #[clap(short, long)]
+        protected: bool,
     },
     /// Run a virtual machine
     Run {
@@ -237,6 +257,13 @@ fn main() -> Result<(), Error> {
             cpus,
             task_profiles,
             &extra_idsigs,
+        ),
+        Opt::RunMicrodroid { work_dir, daemonize, debug, protected } => command_run_microdroid(
+            service.as_ref(),
+            work_dir.as_deref(),
+            daemonize,
+            debug,
+            protected,
         ),
         Opt::Run { name, config, daemonize, cpus, task_profiles, console, log } => {
             command_run(

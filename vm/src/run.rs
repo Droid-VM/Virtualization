@@ -144,6 +144,48 @@ pub fn command_run_app(
     run(service, &config, &payload_config_str, daemonize, console_path, log_path, ramdump_path)
 }
 
+/// Run a VM with Microdroid
+pub fn command_run_microdroid(
+    service: &dyn IVirtualizationService,
+    work_dir: Option<&Path>,
+    daemonize: bool,
+    debug_level: DebugLevel,
+    protected: bool,
+) -> Result<(), Error> {
+    let apk = Path::new(
+        "/apex/com.android.virt/app/MicrodroidSampleApp@AOSP.MASTER/MicrodroidSampleApp.apk",
+    );
+    if let Some(work_dir) = work_dir {
+        let idsig = work_dir.join("apk.idsig");
+        let instance_img = work_dir.join("instance.img");
+        let payload_path = "MicrodroidSampleJniLib.so";
+        let extra_sig = [];
+        command_run_app(
+            None,
+            service,
+            apk,
+            &idsig,
+            &instance_img,
+            None,
+            None,
+            None,
+            Some(payload_path.to_owned()),
+            daemonize,
+            None,
+            None,
+            None,
+            debug_level,
+            protected,
+            None,
+            None,
+            Vec::new(),
+            &extra_sig,
+        )
+    } else {
+        bail!("Must specify --work_dir")
+    }
+}
+
 /// Run a VM from the given configuration file.
 #[allow(clippy::too_many_arguments)]
 pub fn command_run(
