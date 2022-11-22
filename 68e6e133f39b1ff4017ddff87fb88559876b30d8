@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "20e4118b_b786439c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-22T15:06:47Z",
+      "side": 1,
+      "message": "Bug?",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "68e6e133f39b1ff4017ddff87fb88559876b30d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09aaeea8_5f108502",
         "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
         "patchSetId": 6
@@ -14,6 +37,30 @@
       "writtenOn": "2022-11-22T14:50:08Z",
       "side": 1,
       "message": "Not sure if you guys want to expose this. Let me know",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 13
+      },
+      "revId": "68e6e133f39b1ff4017ddff87fb88559876b30d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5a594db_d1ae5051",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-22T15:06:47Z",
+      "side": 1,
+      "message": "I don\u0027t think we should change this. The client shouldn\u0027t have to deal with it, and there\u0027s nothing useful they can do with it.\n\nShould we specify VMADDR_CID_HOST rather than VMADDR_ANY though, for all the code running inside the VM? That\u0027s the only thing that should be connecting in.\n\n(And we rely on VS to make sure its an authorized host process, at least in the absence of compromise.)",
+      "parentUuid": "09aaeea8_5f108502",
       "range": {
         "startLine": 98,
         "startChar": 0,
