@@ -85,6 +85,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     private static final String PACKAGE_NAME = "com.android.microdroid.test";
     private static final String SHELL_PACKAGE_NAME = "com.android.shell";
     private static final String VIRT_APEX = "/apex/com.android.virt/";
+    private static final int TEST_VM_ADB_PORT = 8000;
+    private static final String MICRODROID_SERIAL = "localhost:" + TEST_VM_ADB_PORT;
 
     private static final int MIN_MEM_ARM64 = 145;
     private static final int MIN_MEM_X86_64 = 196;
@@ -274,15 +276,11 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     private Process runMicrodroidWithResignedImages(
-            File key,
-            Map<String, File> keyOverrides,
-            boolean isProtected,
-            boolean waitForOnline,
-            String consolePath)
-            throws Exception {
+            File key, Map<String, File> keyOverrides, boolean isProtected) throws Exception {
         CommandRunner android = new CommandRunner(getDevice());
 
         File virtApexDir = FileUtil.createTempDir("virt_apex");
+        String consolePath = TEST_ROOT + "console";
 
         // Pull the virt apex's etc/ directory (which contains images and microdroid.json)
         File virtApexEtcDir = new File(virtApexDir, "etc");
@@ -419,11 +417,6 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                     "Could not find the CID of the VM. Output does not contain the expected"
                             + " pattern.");
         }
-
-        if (waitForOnline) {
-            adbConnectToMicrodroid(getDevice(), cid);
-        }
-
         return process;
     }
 
@@ -439,11 +432,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         File key = findTestFile("test.com.android.virt.pem");
         Map<String, File> keyOverrides = Map.of();
         boolean isProtected = true;
-        boolean waitForOnline = false; // VM should shut down due to boot failure.
-        String consolePath = TEST_ROOT + "console";
-        Process process =
-                runMicrodroidWithResignedImages(
-                        key, keyOverrides, isProtected, waitForOnline, consolePath);
+        Process process = runMicrodroidWithResignedImages(key, keyOverrides, isProtected);
         process.waitFor(5L, TimeUnit.SECONDS);
         assertThat(getDevice().pullFileContents(consolePath), containsString("pvmfw boot failed"));
     }
@@ -458,11 +447,9 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         File key = findTestFile("test.com.android.virt.pem");
         Map<String, File> keyOverrides = Map.of();
         boolean isProtected = false;
-        boolean waitForOnline = true; // Device online means that boot must have succeeded.
-        String consolePath = TEST_ROOT + "console";
-        Process process =
-                runMicrodroidWithResignedImages(
-                        key, keyOverrides, isProtected, waitForOnline, consolePath);
+        Process process = runMicrodroidWithResignedImages(key, keyOverrides, isProtected);
+        // Device online means that boot must have succeeded.
+        getAndroidDevice().adbConnectToMicrodroid(cid, MICRODROID_SERIAL, TEST_VM_ADB_PORT);
         process.destroy();
     }
 
@@ -474,12 +461,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         File key2 = findTestFile("test2.com.android.virt.pem");
         Map<String, File> keyOverrides = Map.of("microdroid_vbmeta.img", key2);
         boolean isProtected = false; // Not interested in pvwfw
-        boolean waitForOnline = false; // Bootloader fails and enters prompts.
         // To be able to stop it, it should be a daemon.
-        String consolePath = TEST_ROOT + "console";
-        Process process =
-                runMicrodroidWithResignedImages(
-                        key, keyOverrides, isProtected, waitForOnline, consolePath);
+        Process process = runMicrodroidWithResignedImages(key, keyOverrides, isProtected);
         // Wait so that init can print errors to console (time in cuttlefish >> in real device)
         assertThatEventually(
                 100000,
