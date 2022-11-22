@@ -226,6 +226,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "64da0c82_8c172b08",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-22T15:14:50Z",
+      "side": 1,
+      "message": "It would be reasonable to switch ? to .unwrap() here, since we know it can\u0027t fail",
+      "parentUuid": "1d9fe941_83e3ab23",
+      "revId": "029ff79068646723da111dac48de3b6d703403ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eae50225_51f892f9",
         "filename": "virtualizationservice/aidl/android/system/virtualizationservice/PartitionType.aidl",
         "patchSetId": 4
@@ -261,6 +279,30 @@
       "side": 1,
       "message": "That\u0027ll be one extra char:P (I\u0027m trying to keep it without `_` because it gets mixed with `-` at places). I\u0027m open to shorter name, I can replace all if you have a shorter suggestion",
       "parentUuid": "eae50225_51f892f9",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 18
+      },
+      "revId": "029ff79068646723da111dac48de3b6d703403ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc5a809a_2189a5b3",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/PartitionType.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-22T15:14:50Z",
+      "side": 1,
+      "message": "Well at least it\u0027s all consistent.",
+      "parentUuid": "03a7046c_fab66bb2",
       "range": {
         "startLine": 35,
         "startChar": 4,
