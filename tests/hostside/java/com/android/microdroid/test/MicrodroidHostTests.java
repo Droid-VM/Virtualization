@@ -51,7 +51,6 @@ import com.android.tradefed.util.RunUtil;
 import com.android.tradefed.util.xml.AbstractXmlParser;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
@@ -432,7 +431,9 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @CddTest(requirements = {"9.17/C-2-1", "9.17/C-2-2", "9.17/C-2-6"})
     public void testBootFailsWhenProtectedVmStartsWithImagesSignedWithDifferentKey()
             throws Exception {
-        assumeTrue("Protected VMs are not supported", isProtectedVmSupported());
+        assumeTrue(
+                "Protected VMs are not supported",
+                getAndroidDevice().supportsMicrodroid(/*protectedVm=*/ true));
 
         File key = findTestFile("test.com.android.virt.pem");
         Map<String, File> keyOverrides = Map.of();
@@ -489,12 +490,12 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     private boolean isTombstoneGeneratedWithConfig(String configPath) throws Exception {
         // Note this test relies on logcat values being printed by tombstone_transmit on
         // and the reeceiver on host (virtualization_service)
-        mMicrodroidDevice = MicrodroidBuilder
-                .fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
-                .debugLevel("full")
-                .memoryMib(minMemorySize())
-                .numCpus(NUM_VCPUS)
-                .build((TestDevice) getDevice());
+        mMicrodroidDevice =
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .numCpus(NUM_VCPUS)
+                        .build(getAndroidDevice());
         mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
         mMicrodroidDevice.enableAdbRoot();
 
@@ -545,7 +546,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         ConfigUtils.uploadConfigForPushedAtoms(getDevice(), PACKAGE_NAME, atomIds);
 
         // Create VM with microdroid
-        TestDevice device = (TestDevice) getDevice();
+        TestDevice device = getAndroidDevice();
         final String configPath = "assets/vm_config_apex.json"; // path inside the APK
         ITestDevice microdroid =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
@@ -613,7 +614,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .debugLevel("full")
                         .memoryMib(minMemorySize())
                         .numCpus(NUM_VCPUS)
-                        .build((TestDevice) getDevice());
+                        .build(getAndroidDevice());
         mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
         CommandRunner microdroid = new CommandRunner(mMicrodroidDevice);
 
@@ -675,12 +676,12 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @Test
     public void testMicrodroidRamUsage() throws Exception {
         final String configPath = "assets/vm_config.json";
-        mMicrodroidDevice = MicrodroidBuilder
-                .fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
-                .debugLevel("full")
-                .memoryMib(minMemorySize())
-                .numCpus(NUM_VCPUS)
-                .build((TestDevice) getDevice());
+        mMicrodroidDevice =
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .numCpus(NUM_VCPUS)
+                        .build(getAndroidDevice());
         mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
         mMicrodroidDevice.enableAdbRoot();
 
@@ -715,9 +716,10 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
-    public void testCustomVirtualMachinePermission()
-            throws DeviceNotAvailableException, IOException, JSONException {
-        assumeTrue("Protected VMs are not supported", isProtectedVmSupported());
+    public void testCustomVirtualMachinePermission() throws Exception {
+        assumeTrue(
+                "Protected VMs are not supported",
+                getAndroidDevice().supportsMicrodroid(/*protectedVm=*/ true));
         CommandRunner android = new CommandRunner(getDevice());
 
         // Pull etc/microdroid.json
@@ -766,7 +768,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @After
     public void shutdown() throws Exception {
         if (mMicrodroidDevice != null) {
-            ((TestDevice) getDevice()).shutdownMicrodroid(mMicrodroidDevice);
+            getAndroidDevice().shutdownMicrodroid(mMicrodroidDevice);
         }
 
         cleanUpVirtualizationTestSetup(getDevice());
@@ -783,5 +785,11 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         "grant",
                         SHELL_PACKAGE_NAME,
                         "android.permission.USE_CUSTOM_VIRTUAL_MACHINE");
+    }
+
+    private TestDevice getAndroidDevice() {
+        TestDevice androidDevice = (TestDevice) getDevice();
+        assertThat(androidDevice).isNotNull();
+        return androidDevice;
     }
 }
