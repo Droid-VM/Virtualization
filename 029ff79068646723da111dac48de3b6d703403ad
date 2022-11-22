@@ -242,6 +242,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8ad36bd_b2d8df03",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-22T16:27:51Z",
+      "side": 1,
+      "message": "technically it can fail if the `source` or `mountpoint` strings contain null byte - go/rs:std::ffi::nulerror\n\nNo harm in using `?`, in my opnion.",
+      "parentUuid": "64da0c82_8c172b08",
+      "revId": "029ff79068646723da111dac48de3b6d703403ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eae50225_51f892f9",
