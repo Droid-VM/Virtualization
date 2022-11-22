@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d211eaf_8c4494ca",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-22T08:47:24Z",
+      "side": 1,
+      "message": "Should we add Arc around Mutex here as PAYLOAD_CONNECTION can be accessed across multiple threads?",
+      "range": {
+        "startLine": 31,
+        "startChar": 35,
+        "endLine": 31,
+        "endChar": 40
+      },
+      "revId": "0cbfdf9264d724ea2641282b34efb39451e04bfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58adf3dc_27bff763",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-22T08:47:24Z",
+      "side": 1,
+      "message": "Why not use `?` here?",
+      "range": {
+        "startLine": 37,
+        "startChar": 50,
+        "endLine": 37,
+        "endChar": 59
+      },
+      "revId": "0cbfdf9264d724ea2641282b34efb39451e04bfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
