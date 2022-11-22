@@ -85,6 +85,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     private static final String PACKAGE_NAME = "com.android.microdroid.test";
     private static final String SHELL_PACKAGE_NAME = "com.android.shell";
     private static final String VIRT_APEX = "/apex/com.android.virt/";
+    private static final int TEST_VM_ADB_PORT = 8000;
+    private static final String MICRODROID_SERIAL = "localhost:" + TEST_VM_ADB_PORT;
 
     private static final int MIN_MEM_ARM64 = 145;
     private static final int MIN_MEM_X86_64 = 196;
@@ -421,7 +423,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         }
 
         if (waitForOnline) {
-            adbConnectToMicrodroid(getDevice(), cid);
+            getAndroidDevice().adbConnectToMicrodroid(cid, MICRODROID_SERIAL, TEST_VM_ADB_PORT);
         }
 
         return process;
