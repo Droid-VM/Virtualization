@@ -26,6 +26,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f50c857_961dbf09",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-22T11:53:08Z",
+      "side": 1,
+      "message": "Seeing as `FdtNode` is now `Copy`, this might as well take `self` by value.",
+      "range": {
+        "startLine": 288,
+        "startChar": 28,
+        "endLine": 288,
+        "endChar": 32
+      },
+      "revId": "000d57919efbbb59d71931052a121a719480cca5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6929575_2ef07061",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-22T11:53:08Z",
+      "side": 1,
+      "message": "Does this need to be public? I would expect clients to use the iterator interface, rather than this method directly.",
+      "range": {
+        "startLine": 288,
+        "startChar": 4,
+        "endLine": 288,
+        "endChar": 7
+      },
+      "revId": "000d57919efbbb59d71931052a121a719480cca5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33783f86_d390dfc1",
         "filename": "libs/libfdt/src/lib.rs",
         "patchSetId": 1
