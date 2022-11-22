@@ -1,0 +1,25 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+android_app {
+    name: "EmptyPayloadApp",
+    installable: true,
+    jni_libs: ["MicrodroidEmptyPayloadJniLib"],
+    apex_available: ["com.android.virt"],
+    sdk_version: "system_current",
+    jni_uses_platform_apis: true,
+    min_sdk_version: "UpsideDownCake",
+    target_sdk_version: "UpsideDownCake",
+    compile_multilib: "both",
+}
+
+cc_library_shared {
+    name: "MicrodroidEmptyPayloadJniLib",
+    srcs: ["empty_binary.cpp"],
+    shared_libs: ["libvm_payload"],
+    installable: true,
+    apex_available: ["com.android.virt"],
+    compile_multilib: "both",
+    stl: "none",
+}
