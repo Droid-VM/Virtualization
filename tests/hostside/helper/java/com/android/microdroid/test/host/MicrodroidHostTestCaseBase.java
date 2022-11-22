@@ -44,8 +44,8 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
     protected static final String TEST_ROOT = "/data/local/tmp/virt/";
     protected static final String LOG_PATH = TEST_ROOT + "log.txt";
     protected static final String CONSOLE_PATH = TEST_ROOT + "console.txt";
-    private static final int TEST_VM_ADB_PORT = 8000;
-    private static final String MICRODROID_SERIAL = "localhost:" + TEST_VM_ADB_PORT;
+    protected static final int TEST_VM_ADB_PORT = 8000;
+    protected static final String MICRODROID_SERIAL = "localhost:" + TEST_VM_ADB_PORT;
     private static final String INSTANCE_IMG = "instance.img";
 
     private static final long MICRODROID_ADB_CONNECT_TIMEOUT_MINUTES = 5;
@@ -188,53 +188,5 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
         assertWithMessage("Package " + packageName + " not found")
                 .that(pathLine).startsWith("package:");
         return pathLine.substring("package:".length());
-    }
-
-    // Establish an adb connection to microdroid by letting Android forward the connection to
-    // microdroid. Wait until the connection is established and microdroid is booted.
-    public static void adbConnectToMicrodroid(ITestDevice androidDevice, String cid) {
-        long start = System.currentTimeMillis();
-        long timeoutMillis = MICRODROID_ADB_CONNECT_TIMEOUT_MINUTES * 60 * 1000;
-        long elapsed = 0;
-
-        // In case there is a stale connection...
-        tryRunOnHost("adb", "disconnect", MICRODROID_SERIAL);
-
-        final String serial = androidDevice.getSerialNumber();
-        final String from = "tcp:" + TEST_VM_ADB_PORT;
-        final String to = "vsock:" + cid + ":5555";
-        runOnHost("adb", "-s", serial, "forward", from, to);
-
-        boolean disconnected = true;
-        while (disconnected) {
-            elapsed = System.currentTimeMillis() - start;
-            timeoutMillis -= elapsed;
-            start = System.currentTimeMillis();
-            String ret = runOnHostWithTimeout(timeoutMillis, "adb", "connect", MICRODROID_SERIAL);
-            disconnected = ret.equals("failed to connect to " + MICRODROID_SERIAL);
-            if (disconnected) {
-                // adb demands us to disconnect if the prior connection was a failure.
-                // b/194375443: this somtimes fails, thus 'try*'.
-                tryRunOnHost("adb", "disconnect", MICRODROID_SERIAL);
-            }
-        }
-
-        elapsed = System.currentTimeMillis() - start;
-        timeoutMillis -= elapsed;
-        runOnHostWithTimeout(timeoutMillis, "adb", "-s", MICRODROID_SERIAL, "wait-for-device");
-
-        boolean dataAvailable = false;
-        while (!dataAvailable && timeoutMillis >= 0) {
-            elapsed = System.currentTimeMillis() - start;
-            timeoutMillis -= elapsed;
-            start = System.currentTimeMillis();
-            final String checkCmd = "if [ -d /data/local/tmp ]; then echo 1; fi";
-            dataAvailable = runOnMicrodroid(checkCmd).equals("1");
-        }
-
-        // Check if it actually booted by reading a sysprop.
-        assertThat(runOnMicrodroidForResult("getprop", "ro.hardware"))
-                .stdoutTrimmed()
-                .isEqualTo("microdroid");
     }
 }
