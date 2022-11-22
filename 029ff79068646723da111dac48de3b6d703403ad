@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91d2f5b6_1119eb5e",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-22T14:40:38Z",
+      "side": 1,
+      "message": "Removed it...",
+      "parentUuid": "6bb1eee7_bd2ed19d",
+      "revId": "029ff79068646723da111dac48de3b6d703403ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbecd8df_21a34e57",
@@ -53,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdcce830_564e3ca8",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-22T14:40:38Z",
+      "side": 1,
+      "message": "Done. (Cant get crypt device name before calling enable_crypt), but I created a wrapper  added blkdevuce \u0026 mount, which will be helpful for debugging",
+      "parentUuid": "622d5b41_72714244",
+      "revId": "029ff79068646723da111dac48de3b6d703403ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27098614_b49c9b42",
@@ -72,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "420f32bc_a898b960",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-22T14:40:38Z",
+      "side": 1,
+      "message": "I haven\u0027t looked at mkfs code, but the Disk layout description says \n\n\"For the special case of block group 0, the first 1024 bytes are unused, to allow for the installation of x86 boot sectors and other oddities. The superblock will start at offset 1024 bytes, whichever block that happens to be (usually 0). However, if for some reason the block size \u003d 1024, then block 0 is marked in use and the superblock goes in block 1. For all other block groups, there is no padding.\"\n\n\nAnd I would 100% like to avoid the possibility of the magic string remaining in the disk because that can lead to data being erased on next VM run. What do you think?\n\nI dont think the writes can be racy because we wait for this function to complete before running mkfs",
+      "parentUuid": "27098614_b49c9b42",
+      "revId": "029ff79068646723da111dac48de3b6d703403ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d026ca7_8bfbbc25",
         "filename": "encryptedstore/src/main.rs",
         "patchSetId": 4
@@ -83,6 +137,30 @@
       "writtenOn": "2022-11-21T11:29:43Z",
       "side": 1,
       "message": "A comment on what metadata_csum does \u0026 why we want it would be good",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 41
+      },
+      "revId": "029ff79068646723da111dac48de3b6d703403ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "368c17e1_3fe8bf78",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-22T14:40:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d026ca7_8bfbbc25",
       "range": {
         "startLine": 120,
         "startChar": 0,
@@ -128,6 +206,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d9fe941_83e3ab23",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-22T14:40:38Z",
+      "side": 1,
+      "message": "Those context are the leftover remains from the time I was doing printf style debugging.. deleting now... also removing String::from",
+      "parentUuid": "a2b77ede_78259cfa",
+      "revId": "029ff79068646723da111dac48de3b6d703403ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eae50225_51f892f9",
@@ -141,6 +237,30 @@
       "writtenOn": "2022-11-21T11:29:43Z",
       "side": 1,
       "message": "It\u0027s probably a bit late, but shouldn\u0027t this be ENCRYPTED_STORE throughout?",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 18
+      },
+      "revId": "029ff79068646723da111dac48de3b6d703403ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03a7046c_fab66bb2",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/PartitionType.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-22T14:40:38Z",
+      "side": 1,
+      "message": "That\u0027ll be one extra char:P (I\u0027m trying to keep it without `_` because it gets mixed with `-` at places). I\u0027m open to shorter name, I can replace all if you have a shorter suggestion",
+      "parentUuid": "eae50225_51f892f9",
       "range": {
         "startLine": 35,
         "startChar": 4,
