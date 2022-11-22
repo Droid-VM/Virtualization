@@ -88,6 +88,24 @@
       "parentUuid": "ad79a352_2896c245",
       "revId": "1de426fe333104fb45ab30ad2b5177f94d8143a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06609fd5_7d18d0c1",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-22T01:09:50Z",
+      "side": 1,
+      "message": "I\u0027ve Googled this a bit and I think not supporting static initializer in Rust seems to be an intentional design decision. (lazy_static! is not considered as a static initialization in this context because its evaluated when it\u0027s first referenced, not when the compilation unit(?) is loaded into memory).",
+      "parentUuid": "370c47d8_857a02cb",
+      "revId": "1de426fe333104fb45ab30ad2b5177f94d8143a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
