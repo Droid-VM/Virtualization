@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9b90195_554edf44",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-23T17:28:53Z",
+      "side": 1,
+      "message": "This comment would make more sense in get_kernel_crypto_name ?",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 98
+      },
+      "revId": "271d9775f9da28072a2591cbbfb95b40c14240a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d4a9a51_51456e90",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-23T17:28:53Z",
+      "side": 1,
+      "message": "This should be in an impl CipherType block, and up near the enum itself.\n(Possibly along with a method to return the key size?)",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 1
+      },
+      "revId": "271d9775f9da28072a2591cbbfb95b40c14240a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f87ae1c_b911eb0c",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-23T17:28:53Z",
+      "side": 1,
+      "message": "Could we move this somewhere that encryptedstore/src/main.rs could also see it?",
+      "range": {
+        "startLine": 90,
+        "startChar": 36,
+        "endLine": 90,
+        "endChar": 39
+      },
+      "revId": "271d9775f9da28072a2591cbbfb95b40c14240a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
