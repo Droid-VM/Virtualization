@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daa8cf97_ed84fc14",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-11-23T20:54:29Z",
+      "side": 1,
+      "message": "HCTR2 is only supported by android14-5.15 and later kernels.  Is that fine for this use case?",
+      "range": {
+        "startLine": 9,
+        "startChar": 17,
+        "endLine": 9,
+        "endChar": 39
+      },
+      "revId": "752dd637fdad296d4bedf90313d63b5a310ce1c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93eba790_7915f03e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-11-23T20:54:29Z",
+      "side": 1,
+      "message": "Write \"sector size\" or \"crypto sector size\", instead of \"block size\".\n\nAlso, have you considered using a sector size of 4096 bytes instead of the default of 512 bytes?  4096-byte sectors are much more efficient, especially with HCTR2 which has more per-message overhead than XTS.\n\nFYI, selecting 4096-byte sectors requires that `sector_size\u003d4096` and `iv_large_sectors` be appended to the dm-crypt target parameters; see the dm-crypt documentation.  And regardless of this, the device-mapper API still requires that sizes be given in multiples of 512 bytes.",
+      "range": {
+        "startLine": 14,
+        "startChar": 21,
+        "endLine": 14,
+        "endChar": 44
+      },
+      "revId": "752dd637fdad296d4bedf90313d63b5a310ce1c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0a0e1d4_8aa8a001",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-11-23T20:54:29Z",
+      "side": 1,
+      "message": "\"plain64\" should be used instead of \"plain\", since \"plain64\" has no real downsides and avoids limiting the maximum block device size.",
+      "range": {
+        "startLine": 16,
+        "startChar": 58,
+        "endLine": 16,
+        "endChar": 63
+      },
+      "revId": "752dd637fdad296d4bedf90313d63b5a310ce1c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ad75701_f28f127f",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-11-23T20:54:29Z",
+      "side": 1,
+      "message": "Replace this line with something like `// AES-256-HCTR2 takes a 32-byte key.`\n                                                                                 \nHCTR2 does not split the key into two parts, and if it did it would be an internal implementation detail of the mode that is not relevant here.",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 83
+      },
+      "revId": "752dd637fdad296d4bedf90313d63b5a310ce1c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caffd58e_510ab72e",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-11-23T20:54:29Z",
+      "side": 1,
+      "message": "Replace this line with something like `// AES-256-XTS takes a 64-byte key.`\n \nThe way that XTS splits the key into two halves is an internal implementation detail of the mode.  Also the second half is not the \"tweak\".  (Sometimes it\u0027s called the \"tweak key\", which is different.)",
+      "revId": "752dd637fdad296d4bedf90313d63b5a310ce1c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
