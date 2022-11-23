@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf3dafb9_7c027b23",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-23T13:28:27Z",
+      "side": 1,
+      "message": "Can we return the actual size here instead directly? I think that\u0027s more intuitive like c read().",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 4
+      },
+      "revId": "45a5a7574538f7a020b07e2b62ca0b53cad4e18b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e934922_94bb35ee",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-23T13:28:27Z",
+      "side": 1,
+      "message": "This sounds a bit like a check method, maybe something like `unwrap_or_panic`?",
+      "range": {
+        "startLine": 65,
+        "startChar": 3,
+        "endLine": 65,
+        "endChar": 17
+      },
+      "revId": "45a5a7574538f7a020b07e2b62ca0b53cad4e18b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
