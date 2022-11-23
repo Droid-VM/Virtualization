@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a40f7ce9_7d09ba22",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-23T10:59:45Z",
+      "side": 0,
+      "message": "Maybe call supportsMicrodroid() here, rather than inlining?\nJust because it makes the call sites cleaner and easier to read.",
+      "range": {
+        "startLine": 242,
+        "startChar": 8,
+        "endLine": 242,
+        "endChar": 98
+      },
+      "revId": "4d73d47a50bccc60f4e05b1d775ee072eb38b2b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
