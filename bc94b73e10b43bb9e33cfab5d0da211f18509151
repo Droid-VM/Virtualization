@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca6ba5b6_075217d3",
+        "filename": "libs/libfdt/src/compat.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-23T15:11:39Z",
+      "side": 1,
+      "message": "I am not sure how much of strtoul is needed by the library, but this isn\u0027t a complete implementation of the function. Can we just copy the Bionic implementation from https://cs.android.com/android/platform/superproject/+/master:bionic/libc/bionic/strtol.cpp;drc\u003deca5d4055ddc915a72c089816f5dc49dccd0457a;l\u003d114 ?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 94
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7c791bf_c0887854",
+        "filename": "libs/libfdt/src/compat.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-23T15:11:39Z",
+      "side": 1,
+      "message": "valid values for range is 0, and 2 to 36.",
+      "range": {
+        "startLine": 21,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 5
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afe0b94d_9fa7f393",
+        "filename": "libs/libfdt/src/compat.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-23T15:11:39Z",
+      "side": 1,
+      "message": "we should check if there\u0027s a leading minus or plus sign. the string may have 0x or O prefix as well.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 55
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69853fca_ec67a027",
+        "filename": "libs/libfdt/src/compat.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-23T15:11:39Z",
+      "side": 1,
+      "message": "Does this need to set errno as well? otherwise, how can the caller distinguish a successful conversion to 0 and an error case?",
+      "range": {
+        "startLine": 50,
+        "startChar": 33,
+        "endLine": 50,
+        "endChar": 45
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c037884b_d0295d11",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-23T15:11:39Z",
+      "side": 1,
+      "message": "remove this?",
+      "range": {
+        "startLine": 479,
+        "startChar": 29,
+        "endLine": 479,
+        "endChar": 38
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b948595_679602a6",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-23T15:11:39Z",
+      "side": 1,
+      "message": "Even after this function successfully returns, the self.bytes slice still points to the original region.",
+      "range": {
+        "startLine": 553,
+        "startChar": 0,
+        "endLine": 557,
+        "endChar": 5
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b294f27_99f1ddc7",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-23T15:11:39Z",
+      "side": 1,
+      "message": "why does the overlay have to be mutable?",
+      "range": {
+        "startLine": 273,
+        "startChar": 60,
+        "endLine": 273,
+        "endChar": 63
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
