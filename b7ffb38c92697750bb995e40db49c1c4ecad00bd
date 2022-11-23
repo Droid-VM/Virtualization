@@ -16,6 +16,52 @@
       "message": "PTAL - after a lot of work by Nikita, this version builds fine.",
       "revId": "b7ffb38c92697750bb995e40db49c1c4ecad00bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07868dbf_268956f0",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 33
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-23T12:40:26Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be guarded by mLock as well? Otherwise there might be a race between toDescriptor() and setConfig().\n\nAlso, should we even allow to change the config after the toDescriptor has been called?",
+      "range": {
+        "startLine": 918,
+        "startChar": 8,
+        "endLine": 920,
+        "endChar": 82
+      },
+      "revId": "b7ffb38c92697750bb995e40db49c1c4ecad00bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db2af135_3642c5a9",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 33
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-23T12:40:26Z",
+      "side": 1,
+      "message": "Add TODO(b/249093790): remove",
+      "range": {
+        "startLine": 102,
+        "startChar": 4,
+        "endLine": 102,
+        "endChar": 50
+      },
+      "revId": "b7ffb38c92697750bb995e40db49c1c4ecad00bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
