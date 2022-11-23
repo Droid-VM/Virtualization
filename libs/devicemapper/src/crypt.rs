@@ -33,8 +33,9 @@ const SECTOR_SIZE: u64 = 512;
 
 /// Supported ciphers
 pub enum CipherType {
-    // TODO(b/253394457) Include ciphers with authenticated modes as well
-    AES256XTS,
+    // HCTR2 mode takes 32 bytes key(16 bytes key for aes key + 16 bytes for tweak)
+    // We use "plain" as the IV/nonce generation/ algorithm, which basically is the sector number.
+    AES256HCTR2,
 }
 
 pub struct DmCryptTarget(Box<[u8]>);
@@ -59,7 +60,7 @@ pub struct DmCryptTargetBuilder<'a> {
 impl<'a> Default for DmCryptTargetBuilder<'a> {
     fn default() -> Self {
         DmCryptTargetBuilder {
-            cipher: CipherType::AES256XTS,
+            cipher: CipherType::AES256HCTR2,
             key: None,
             iv_offset: 0,
             device_path: None,
@@ -148,6 +149,6 @@ impl<'a> DmCryptTargetBuilder<'a> {
 
 fn get_kernel_crypto_name(cipher: &CipherType) -> &str {
     match cipher {
-        CipherType::AES256XTS => "aes-xts-plain64",
+        CipherType::AES256HCTR2 => "aes-hctr2-plain",
     }
 }
