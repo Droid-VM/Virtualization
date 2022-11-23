@@ -14,6 +14,7 @@
 
 //! Implementation of the AIDL interface of the VirtualizationService.
 
+use crate::{get_calling_pid, get_calling_uid};
 use crate::atom::{write_vm_booted_stats, write_vm_creation_stats};
 use crate::composite::make_composite_image;
 use crate::crosvm::{CrosvmConfig, DiskFile, PayloadState, VmInstance, VmState};
@@ -48,7 +49,7 @@ use anyhow::{anyhow, bail, Context, Result};
 use apkverify::{HashAlgorithm, V4Signature};
 use binder::{
     self, BinderFeatures, ExceptionCode, Interface, LazyServiceGuard, ParcelFileDescriptor,
-    SpIBinder, Status, StatusCode, Strong, ThreadState,
+    SpIBinder, Status, StatusCode, Strong,
 };
 use disk::QcowFile;
 use libc::VMADDR_CID_HOST;
@@ -439,8 +440,8 @@ impl VirtualizationService {
         let state = &mut *self.state.lock().unwrap();
         let console_fd = console_fd.map(clone_file).transpose()?;
         let log_fd = log_fd.map(clone_file).transpose()?;
-        let requester_uid = ThreadState::get_calling_uid();
-        let requester_debug_pid = ThreadState::get_calling_pid();
+        let requester_uid = get_calling_uid();
+        let requester_debug_pid = get_calling_pid();
 
         // Counter to generate unique IDs for temporary image files.
         let mut next_temporary_image_id = 0;
@@ -766,8 +767,8 @@ struct CompositeImageFilenames {
 
 /// Checks whether the caller has a specific permission
 fn check_permission(perm: &str) -> binder::Result<()> {
-    let calling_pid = ThreadState::get_calling_pid();
-    let calling_uid = ThreadState::get_calling_uid();
+    let calling_pid = get_calling_pid();
+    let calling_uid = get_calling_uid();
     // Root can do anything
     if calling_uid == 0 {
         return Ok(());

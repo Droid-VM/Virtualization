@@ -25,15 +25,32 @@ use crate::aidl::VirtualizationService;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualizationService::BnVirtualizationService;
 use anyhow::{bail, Error};
 use binder::{BinderFeatures, ProcessState};
+use lazy_static::lazy_static;
 use log::Level;
 use rpcbinder::RpcServer;
 use std::os::unix::io::{FromRawFd, OwnedFd, RawFd};
 use clap::Parser;
-use nix::unistd::Pid;
+use nix::unistd::{Pid, Uid};
+use std::os::unix::raw::{pid_t, uid_t};
 
 const LOG_TAG: &str = "virtmgr";
 
 const PID_INIT: Pid = Pid::from_raw(1);
+
+lazy_static! {
+    static ref PID_PARENT: Pid = Pid::parent();
+    static ref UID_CURRENT: Uid = Uid::current();
+}
+
+fn get_calling_pid() -> pid_t {
+    // The caller is the parent of this process.
+    (*PID_PARENT).as_raw()
+}
+
+fn get_calling_uid() -> uid_t {
+    // The caller and this process share the same UID.
+    (*UID_CURRENT).as_raw()
+}
 
 #[derive(Parser)]
 struct Args {
@@ -54,8 +71,7 @@ fn parse_fd_arg(raw_fd: RawFd) -> Result<OwnedFd, Error> {
 }
 
 fn register_pdeathsig() -> Result<(), Error> {
-    let ppid = Pid::parent();
-    if ppid == PID_INIT {
+    if *PID_PARENT == PID_INIT {
         bail!("The parent process cannot be init. The real parent had likely died");
     }
 
@@ -65,7 +81,7 @@ fn register_pdeathsig() -> Result<(), Error> {
     }
 
     // Check for race.
-    if ppid != Pid::parent() {
+    if *PID_PARENT != Pid::parent() {
         bail!("The parent process has changed during pdeathsig registration");
     }
 
