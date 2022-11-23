@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "324969f5_68ab1d66",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-23T14:24:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8c75d4e_beaf5dc1",
+      "range": {
+        "startLine": 161,
+        "startChar": 8,
+        "endLine": 161,
+        "endChar": 37
+      },
+      "revId": "258cea76e42a6246cd87fccc274e6f90bbb373cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f1180ef_caa54097",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-23T13:14:14Z",
       "side": 1,
       "message": "Wouldn\u0027t it be better try another cid, if the port(\u003dcid) is already occupied (possibly by unrelated process)?",
+      "range": {
+        "startLine": 584,
+        "startChar": 12,
+        "endLine": 589,
+        "endChar": 12
+      },
+      "revId": "258cea76e42a6246cd87fccc274e6f90bbb373cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e09bc422_50473823",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 36
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-23T14:24:02Z",
+      "side": 1,
+      "message": "Hmm, that really shouldn\u0027t happen. But I agree that such a precaution can be useful. Want to keep the individual CLs small in size, so uploaded this as a follow-up: aosp/2314860. Let me know what you think there.",
+      "parentUuid": "0f1180ef_caa54097",
       "range": {
         "startLine": 584,
         "startChar": 12,
