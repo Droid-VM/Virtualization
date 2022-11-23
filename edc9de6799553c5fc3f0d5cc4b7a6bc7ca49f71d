@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55a8ab32_131bc153",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 33
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-23T10:18:56Z",
+      "side": 1,
+      "message": "Maybe we\u0027re getting towards the time we should make this a newtype with a limited set of methods rather than a raw typedef?",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 19
+      },
+      "revId": "edc9de6799553c5fc3f0d5cc4b7a6bc7ca49f71d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfb26105_2e2bdd77",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 33
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-23T10:18:56Z",
+      "side": 1,
+      "message": "Define \"held\" ?",
+      "range": {
+        "startLine": 154,
+        "startChar": 18,
+        "endLine": 154,
+        "endChar": 22
+      },
+      "revId": "edc9de6799553c5fc3f0d5cc4b7a6bc7ca49f71d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95a731da_8eff39dc",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 33
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-23T10:18:56Z",
+      "side": 1,
+      "message": "If the parsed value is out of range we should probably discard it rather than panicking in next_guest_cid below",
+      "range": {
+        "startLine": 165,
+        "startChar": 27,
+        "endLine": 165,
+        "endChar": 30
+      },
+      "revId": "edc9de6799553c5fc3f0d5cc4b7a6bc7ca49f71d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
