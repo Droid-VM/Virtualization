@@ -438,6 +438,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "019fb3cf_988b4e16",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-23T11:15:11Z",
+      "side": 1,
+      "message": "\u003e Parsing data is now setting up the environment.\n\nYes, inputs to the business logic are provided by the \"environment\" (I now see how that was a bad choice of words).\n\n\u003e Why don\u0027t you keep it just for creating the PT?\n\nUnfortunately, the PTs can\u0027t be created in a single step; we need to map the DT, then extract from it the location of other inputs (such as the initrd or PCI regions) and map those before we can access them; see aosp/2314778.\n\nThose individual steps can be extracted into their own functions/modules (if we are worried about the length of `main_wrapper`) but all of it should happen before `main` (i.e. the business logic) can take place.",
+      "parentUuid": "390cbd83_0328f44e",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 22
+      },
+      "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "552cc1ca_4a216a80",
         "filename": "pvmfw/src/entry.rs",
         "patchSetId": 3
