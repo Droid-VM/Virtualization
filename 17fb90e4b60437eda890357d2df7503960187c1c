@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20f2062d_3045d227",
+        "filename": "libs/libfdt/src/compat.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-23T11:11:51Z",
+      "side": 1,
+      "message": "That function doesn\u0027t seem to be available in the ARM library we used for the `string.h` functions so this is currently a fragile workaround ... Is there a better way to address this?",
+      "range": {
+        "startLine": 49,
+        "startChar": 18,
+        "endLine": 49,
+        "endChar": 25
+      },
+      "revId": "17fb90e4b60437eda890357d2df7503960187c1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfb7ea0d_964e187c",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-23T11:11:51Z",
+      "side": 1,
+      "message": "Instead of making this function `unsafe`, I wanted to pass `self` by value (taking ownership) and return `Result\u003cSelf\u003e` so that the instance is lost on failure but how to do this when the caller holds a reference and the struct isn\u0027t `Sized`?",
+      "range": {
+        "startLine": 544,
+        "startChar": 8,
+        "endLine": 544,
+        "endChar": 86
+      },
+      "revId": "17fb90e4b60437eda890357d2df7503960187c1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce50b023_fef4d7fd",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-23T11:11:51Z",
+      "side": 1,
+      "message": "I needed to inject this nodes, which I obtained by decompilation of the DTBO on my device: is there documentation for which nodes/properties are expected?\n\nNote that the DTBO is compiled against the host DT, which has little in common with the guest DT.",
+      "range": {
+        "startLine": 284,
+        "startChar": 8,
+        "endLine": 284,
+        "endChar": 13
+      },
+      "revId": "17fb90e4b60437eda890357d2df7503960187c1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
