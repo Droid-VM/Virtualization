@@ -22,6 +22,30 @@
       },
       "revId": "4d73d47a50bccc60f4e05b1d775ee072eb38b2b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46fb096d_06a40ef4",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-23T12:08:44Z",
+      "side": 0,
+      "message": "Frankly I don\u0027t think inheritance is recommended for code reuse in junit tests [1][2]. It\u0027s also not convenient for our use cases in the long run: it\u0027s hard to build it with some parameter (we\u0027ll need to check its parent and all its children); we also cannot separate the benchmark methods and behavior tests methods, all live together in one class. In that sense, I would prefer to keep this class short without adding new things to it at least.\n\n[1] https://ncorti.com/blog/junit-rules\n[2] https://www.petrikainulainen.net/programming/unit-testing/3-reasons-why-we-should-not-use-inheritance-in-our-tests/",
+      "parentUuid": "a40f7ce9_7d09ba22",
+      "range": {
+        "startLine": 242,
+        "startChar": 8,
+        "endLine": 242,
+        "endChar": 98
+      },
+      "revId": "4d73d47a50bccc60f4e05b1d775ee072eb38b2b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
