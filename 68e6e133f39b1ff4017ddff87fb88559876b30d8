@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48c25ba0_fbb47e8d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-23T09:37:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20e4118b_b786439c",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "68e6e133f39b1ff4017ddff87fb88559876b30d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09aaeea8_5f108502",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "+1. I think when this API was added, our plan was to support string id instead of port maybe one day, like inside VM, we run with a name and in the host we can get the service with the name. vsock is an implementation detail clients do not need to know. With this change, we\u0027ll take the opposite direction.",
       "parentUuid": "09aaeea8_5f108502",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 13
+      },
+      "revId": "68e6e133f39b1ff4017ddff87fb88559876b30d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ba2237e_4671cdfb",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-23T09:37:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "814d3f5a_a6769356",
       "range": {
         "startLine": 98,
         "startChar": 0,
