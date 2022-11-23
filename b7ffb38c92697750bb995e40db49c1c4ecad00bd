@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "733d1537_4098dbca",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 33
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-23T14:35:28Z",
+      "side": 1,
+      "message": "\u003e Shouldn\u0027t this be guarded by mLock as well? Otherwise there might be a race between toDescriptor() and setConfig().\n\nHmm. Initially I didn\u0027t think it was needed.\nYou could still call setConfig() immediately after toDescriptor() returns, which would have the same effect.\n\nHowever, I\u0027ve changed it so that setConfig() explicitly deletes the old file before creating a new one - which would leave this file descriptor pointing at the oprphaned old file and unaffected by the setConfig. So I\u0027ve extended the lock scope here, and in delete.\n\nI\u0027ve also added a scary comment on recommended usage - in practice I think the original VM is likely to be deleted, or at least left unused, until the data is copied. We can\u0027t really enforce that since the copy is allowed to be in the context of a different app.",
+      "parentUuid": "07868dbf_268956f0",
+      "range": {
+        "startLine": 918,
+        "startChar": 8,
+        "endLine": 920,
+        "endChar": 82
+      },
+      "revId": "b7ffb38c92697750bb995e40db49c1c4ecad00bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa5d705c_9ae3cdbb",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6324d504_dd9e65c3",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 33
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-23T14:35:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa5d705c_9ae3cdbb",
+      "range": {
+        "startLine": 522,
+        "startChar": 94,
+        "endLine": 522,
+        "endChar": 98
+      },
+      "revId": "b7ffb38c92697750bb995e40db49c1c4ecad00bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db2af135_3642c5a9",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-11-23T12:40:26Z",
       "side": 1,
       "message": "Add TODO(b/249093790): remove",
+      "range": {
+        "startLine": 102,
+        "startChar": 4,
+        "endLine": 102,
+        "endChar": 50
+      },
+      "revId": "b7ffb38c92697750bb995e40db49c1c4ecad00bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02c0c5a2_452213d5",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineManager.java",
+        "patchSetId": 33
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-23T14:35:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db2af135_3642c5a9",
       "range": {
         "startLine": 102,
         "startChar": 4,
