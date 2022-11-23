@@ -460,6 +460,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0959a32_84cd9de0",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-23T11:37:35Z",
+      "side": 1,
+      "message": "I still disagree because you will need to mix verification and additional mapping, eg. for initrd. So PT modification will need to be part of what you call \"business logic\". But as I said, let\u0027s leave it like this and move on.",
+      "parentUuid": "019fb3cf_988b4e16",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 22
+      },
+      "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "552cc1ca_4a216a80",
