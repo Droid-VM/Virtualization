@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1037bad_af596f96",
+        "filename": "authfs/fd_server/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-23T10:22:20Z",
+      "side": 1,
+      "message": "Alternatively, we should reverse things so the VM listens and we connect in, as we do for other things.",
+      "range": {
+        "startLine": 141,
+        "startChar": 4,
+        "endLine": 141,
+        "endChar": 81
+      },
+      "revId": "d61ac54b34c5d1fb58ce0c98f7ab5cf81fe20b48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "187d9d74_0c285f91",
@@ -14,6 +37,30 @@
       "writtenOn": "2022-11-23T09:49:34Z",
       "side": 1,
       "message": "Should we remove the const here [1]? I don\u0027t think we\u0027ll need it anymore.\n\nhttps://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/compos/common/lib.rs;l\u003d25;drc\u003da61ec2e26fab61439b3c899f6df088fa6025c328",
+      "range": {
+        "startLine": 50,
+        "startChar": 89,
+        "endLine": 50,
+        "endChar": 90
+      },
+      "revId": "d61ac54b34c5d1fb58ce0c98f7ab5cf81fe20b48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0732f60_18720aef",
+        "filename": "compos/src/compsvc_main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-23T10:22:20Z",
+      "side": 1,
+      "message": "And we should use the one from libc anyway if we do need it.",
+      "parentUuid": "187d9d74_0c285f91",
       "range": {
         "startLine": 50,
         "startChar": 89,
