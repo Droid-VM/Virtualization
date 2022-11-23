@@ -484,6 +484,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97e9e976_7478da4d",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-23T14:29:15Z",
+      "side": 1,
+      "message": "Yes, I agree that where we draw the line between \"environment setup\" and \"business logic\" is blurry and depends on how those are defined but, as mentioned above, I don\u0027t understand what the underlying issue is? This code would still have to be `unsafe` after having been moved to `main()` so what are we addressing?",
+      "parentUuid": "b0959a32_84cd9de0",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 22
+      },
+      "revId": "6e1447625b8552c172a6edb58a4401140be5447d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "552cc1ca_4a216a80",
