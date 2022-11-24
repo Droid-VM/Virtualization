@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b56802a_b005dd35",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-24T10:22:58Z",
+      "side": 1,
+      "message": "You can delete it from here now",
+      "parentUuid": "2d1f09e9_8f9ea411",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 98
+      },
+      "revId": "271d9775f9da28072a2591cbbfb95b40c14240a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d4a9a51_51456e90",
         "filename": "libs/devicemapper/src/crypt.rs",
         "patchSetId": 2
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "If it is just for `ENCRYPTEDSTORE_KEYSIZE`, I could move it to libs/devicemapper/crypt.rs \u0026 reference it from here \u0026 from /encryptedstore/. Happy do do it. But then, microdroid_manager binary will use the dm_rust lib, \u0026 loading it just for a variable seems too expensive.\nWhat do you think?",
       "parentUuid": "4f87ae1c_b911eb0c",
+      "range": {
+        "startLine": 90,
+        "startChar": 36,
+        "endLine": 90,
+        "endChar": 39
+      },
+      "revId": "271d9775f9da28072a2591cbbfb95b40c14240a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3268303_81c435af",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-24T10:22:58Z",
+      "side": 1,
+      "message": "It\u0027s an rlib, isn\u0027t it? The cost should then be zero, since it\u0027s just a constant.",
+      "parentUuid": "4f622dc5_1f2a43f8",
       "range": {
         "startLine": 90,
         "startChar": 36,
