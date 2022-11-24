@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "246bb134_78685ae5",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-24T14:48:10Z",
+      "side": 1,
+      "message": "If you make them both mutable references with the same lifetime does that have the effect you want? Or does dropping the returned value let the original reference be used again?",
+      "parentUuid": "cfb7ea0d_964e187c",
+      "range": {
+        "startLine": 544,
+        "startChar": 8,
+        "endLine": 544,
+        "endChar": 86
+      },
+      "revId": "17fb90e4b60437eda890357d2df7503960187c1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce50b023_fef4d7fd",
         "filename": "pvmfw/src/entry.rs",
         "patchSetId": 1

@@ -118,6 +118,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a5bcd20f_ee9a803b",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-24T14:48:10Z",
+      "side": 1,
+      "message": "Isn\u0027t that what `as_mut_ptr()` returns already?",
+      "range": {
+        "startLine": 554,
+        "startChar": 42,
+        "endLine": 554,
+        "endChar": 57
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2b948595_679602a6",
         "filename": "libs/libfdt/src/lib.rs",
         "patchSetId": 2
@@ -158,6 +181,23 @@
         "endLine": 273,
         "endChar": 63
       },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ce9e61e_b4d06b1c",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-24T14:48:10Z",
+      "side": 1,
+      "message": "Does that help? The caller still has the `\u0026mut Fdt` that it passed in, which I guess is now corrupt.\n\n(Though why does failing to apply an overlay result in a corrupt FDT? Maybe we should fix that and make it fail more gracefully?)",
       "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
