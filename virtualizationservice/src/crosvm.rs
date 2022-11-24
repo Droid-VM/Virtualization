@@ -38,7 +38,10 @@ use std::process::{Command, ExitStatus};
 use std::sync::{Arc, Condvar, Mutex};
 use std::time::{Duration, SystemTime};
 use std::thread;
-use android_system_virtualizationservice::aidl::android::system::virtualizationservice::DeathReason::DeathReason;
+use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
+    DeathReason::DeathReason,
+    MemoryTrimLevel::MemoryTrimLevel,
+};
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IGlobalVmContext::IGlobalVmContext;
 use binder::Strong;
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
@@ -47,6 +50,7 @@ use rpcbinder::RpcServer;
 
 /// external/crosvm
 use base::UnixSeqpacketListener;
+use vm_control::{client::handle_request, BalloonControlCommand, VmRequest, VmResponse};
 
 const CROSVM_PATH: &str = "/apex/com.android.virt/bin/crosvm";
 
@@ -437,6 +441,29 @@ impl VmInstance {
         } else {
             bail!("VM is not running")
         }
+    }
+
+    pub fn trim_memory(&self, level: MemoryTrimLevel) -> Result<(), Error> {
+        let socket_path = self.temporary_directory.join("crosvm.sock");
+        let request = VmRequest::BalloonCommand(BalloonControlCommand::Stats {});
+        if let Ok(VmResponse::BalloonStats { stats, balloon_actual: _ }) =
+            handle_request(&request, &socket_path)
+        {
+            if let Some(total_memory) = stats.total_memory {
+                // Reclaim up to 50% of total memory assuming worst case
+                // most memory is anonymous and must be swapped to zram
+                // with an approximate 2:1 compression ratio.
+                let pct = match level {
+                    MemoryTrimLevel::TRIM_MEMORY_RUNNING_CRITICAL => 50,
+                    MemoryTrimLevel::TRIM_MEMORY_RUNNING_LOW => 30,
+                    MemoryTrimLevel::TRIM_MEMORY_RUNNING_MODERATE => 10,
+                    _ => 0,
+                };
+                let command = BalloonControlCommand::Adjust { num_bytes: total_memory * pct / 100 };
+                let _ = handle_request(&VmRequest::BalloonCommand(command), socket_path);
+            };
+        }
+        Ok(())
     }
 
     /// Checks if ramdump has been created. If so, send a notification to the user with the handle
