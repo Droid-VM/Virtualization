@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4d30fac_20fe3795",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-24T15:24:21Z",
+      "side": 1,
+      "message": "Yes. We will have 14-5.15 running inside VM.",
+      "parentUuid": "daa8cf97_ed84fc14",
+      "range": {
+        "startLine": 9,
+        "startChar": 17,
+        "endLine": 9,
+        "endChar": 39
+      },
+      "revId": "752dd637fdad296d4bedf90313d63b5a310ce1c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93eba790_7915f03e",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-23T20:54:29Z",
       "side": 1,
       "message": "Write \"sector size\" or \"crypto sector size\", instead of \"block size\".\n\nAlso, have you considered using a sector size of 4096 bytes instead of the default of 512 bytes?  4096-byte sectors are much more efficient, especially with HCTR2 which has more per-message overhead than XTS.\n\nFYI, selecting 4096-byte sectors requires that `sector_size\u003d4096` and `iv_large_sectors` be appended to the dm-crypt target parameters; see the dm-crypt documentation.  And regardless of this, the device-mapper API still requires that sizes be given in multiples of 512 bytes.",
+      "range": {
+        "startLine": 14,
+        "startChar": 21,
+        "endLine": 14,
+        "endChar": 44
+      },
+      "revId": "752dd637fdad296d4bedf90313d63b5a310ce1c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd6d1b2a_505e7ac4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-24T15:24:21Z",
+      "side": 1,
+      "message": "`Write \"sector size\" or \"crypto sector size\" ` - Ack\nReg sector size: We currently use the default 512B as the sector size of underlying virtual block device. It is customizable though. I\u0027ve summarized some thoughts on b/260329386. The most important thing (according to me) is how thee bigger sector size affect the sparse file usage \u0026 how the fragmentation can cause more (space) overhead in the backing storage.\nLets discuss that in the bug",
+      "parentUuid": "93eba790_7915f03e",
       "range": {
         "startLine": 14,
         "startChar": 21,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8da7fa6_2b083c25",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-24T15:24:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0a0e1d4_8aa8a001",
+      "range": {
+        "startLine": 16,
+        "startChar": 58,
+        "endLine": 16,
+        "endChar": 63
+      },
+      "revId": "752dd637fdad296d4bedf90313d63b5a310ce1c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ad75701_f28f127f",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db1c7594_220b1c5f",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-24T15:24:21Z",
+      "side": 1,
+      "message": "Ack, thanks for clarifying",
+      "parentUuid": "4ad75701_f28f127f",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 83
+      },
+      "revId": "752dd637fdad296d4bedf90313d63b5a310ce1c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "caffd58e_510ab72e",
@@ -106,6 +202,24 @@
       "writtenOn": "2022-11-23T20:54:29Z",
       "side": 1,
       "message": "Replace this line with something like `// AES-256-XTS takes a 64-byte key.`\n \nThe way that XTS splits the key into two halves is an internal implementation detail of the mode.  Also the second half is not the \"tweak\".  (Sometimes it\u0027s called the \"tweak key\", which is different.)",
+      "revId": "752dd637fdad296d4bedf90313d63b5a310ce1c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06c47ed7_fd3f7c7b",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-24T15:24:21Z",
+      "side": 1,
+      "message": "Done. Thanks for clarifying the tweak key/tweak. The XTS confused me a bit.",
+      "parentUuid": "caffd58e_510ab72e",
       "revId": "752dd637fdad296d4bedf90313d63b5a310ce1c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

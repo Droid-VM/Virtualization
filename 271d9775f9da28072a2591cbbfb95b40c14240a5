@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d29cc96b_7022b03d",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-24T15:24:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b56802a_b005dd35",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 98
+      },
+      "revId": "271d9775f9da28072a2591cbbfb95b40c14240a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d4a9a51_51456e90",
@@ -180,6 +204,30 @@
       "side": 1,
       "message": "It\u0027s an rlib, isn\u0027t it? The cost should then be zero, since it\u0027s just a constant.",
       "parentUuid": "4f622dc5_1f2a43f8",
+      "range": {
+        "startLine": 90,
+        "startChar": 36,
+        "endLine": 90,
+        "endChar": 39
+      },
+      "revId": "271d9775f9da28072a2591cbbfb95b40c14240a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91441603_5cef57a0",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-24T15:24:21Z",
+      "side": 1,
+      "message": "That\u0027ll be a bit of changing things around (in libs/devicemapper/crypt.rs, encryptedstore/src/main.rs) \u0026 we\u0027re not even checking key size in crypt module, it is only checked in encryptedstore bin...\n\nThink we can keep the present way?",
+      "parentUuid": "d3268303_81c435af",
       "range": {
         "startLine": 90,
         "startChar": 36,
