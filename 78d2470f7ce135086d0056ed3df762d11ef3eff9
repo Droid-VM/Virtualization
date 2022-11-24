@@ -141,6 +141,30 @@
       },
       "revId": "78d2470f7ce135086d0056ed3df762d11ef3eff9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac444841_19834fc5",
+        "filename": "microdroid/vm_payload/src/vm_payload_service.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-24T10:40:48Z",
+      "side": 1,
+      "message": "Hi Shikha, sorry I just noticed this thread. Agree with Alan, and I also think it\u0027s better to use the name EncryptedStorage in other parts of the code. Because \"store\" usually implies some bundle of key/certificate artifacts in cryptography like truststore or keystore[1], it\u0027s not so intuitive to associate it with storage.\n\n[1] https://docs.oracle.com/cd/E19509-01/820-3503/ggffo/index.html",
+      "parentUuid": "7e794c94_14b3e67d",
+      "range": {
+        "startLine": 236,
+        "startChar": 29,
+        "endLine": 236,
+        "endChar": 48
+      },
+      "revId": "78d2470f7ce135086d0056ed3df762d11ef3eff9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
