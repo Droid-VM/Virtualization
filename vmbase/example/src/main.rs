@@ -167,7 +167,7 @@ fn check_fdt() {
     info!("FDT successfully unpacked.");
 
     let path = CStr::from_bytes_with_nul(b"/memory\0").unwrap();
-    let mut node = writer.node_mut(path).unwrap();
+    let mut node = writer.node_mut(path).unwrap().unwrap();
     let name = CStr::from_bytes_with_nul(b"child\0").unwrap();
     let mut child = node.add_subnode(name).unwrap();
     info!("Created subnode '{}/{}'.", path.to_str().unwrap(), name.to_str().unwrap());
