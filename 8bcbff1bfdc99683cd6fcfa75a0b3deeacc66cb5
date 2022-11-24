@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00eb3610_e97c9599",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-24T05:10:35Z",
+      "side": 1,
+      "message": "We don\u0027t and shouldn\u0027t mutate the header, do we?",
+      "range": {
+        "startLine": 139,
+        "startChar": 32,
+        "endLine": 139,
+        "endChar": 35
+      },
+      "revId": "8bcbff1bfdc99683cd6fcfa75a0b3deeacc66cb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0c66cf8_b5ee2484",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-24T05:10:35Z",
+      "side": 1,
+      "message": "Config::new is called twice. How about ...\n\n```\nlet addr \u003d data.as_ptr();\nmatch config::Config::new(data) {\n  Ok(cfg) \u003d\u003e Some(Self::Config(cfg)),\n  Err(e) \u003d\u003e {\n    warn!(\"Invalid configuration data at {addr:?}: {e}\");\n    if cfg!(feature \u003d \"legacy\") {\n       ...\n    } else {\n       None\n    }   \n  },\n}\n```\n?",
+      "range": {
+        "startLine": 426,
+        "startChar": 0,
+        "endLine": 427,
+        "endChar": 66
+      },
+      "revId": "8bcbff1bfdc99683cd6fcfa75a0b3deeacc66cb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9720e803_0d727b37",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-24T05:10:35Z",
+      "side": 1,
+      "message": "why?",
+      "range": {
+        "startLine": 446,
+        "startChar": 46,
+        "endLine": 446,
+        "endChar": 49
+      },
+      "revId": "8bcbff1bfdc99683cd6fcfa75a0b3deeacc66cb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
