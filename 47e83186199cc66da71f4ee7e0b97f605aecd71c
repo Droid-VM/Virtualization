@@ -16,6 +16,29 @@
       "message": "Hi Alan,\n\nSince the two adbConnect() methods in the cl https://r.android.com/2314638 has some subtle diff, I would like to land the refactoring part separately (this cl), the the migration to the new call will be a one line change. Could you please take a look?",
       "revId": "47e83186199cc66da71f4ee7e0b97f605aecd71c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71199893_04ab68cf",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-24T17:57:35Z",
+      "side": 1,
+      "message": "This could do with a better name - especially since it\u0027s no longer a PipedInputStream here.",
+      "range": {
+        "startLine": 405,
+        "startChar": 53,
+        "endLine": 405,
+        "endChar": 56
+      },
+      "revId": "47e83186199cc66da71f4ee7e0b97f605aecd71c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
