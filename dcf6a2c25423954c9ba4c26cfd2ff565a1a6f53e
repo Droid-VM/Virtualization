@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "979444d2_db371ee8",
+        "filename": "virtualizationservice/src/virtmgr.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-24T16:50:38Z",
+      "side": 1,
+      "message": "Yeah, I\u0027ve noticed that. I can see how that would be hard to debug but not a blocker - you can always keep a thread around.\n\nI\u0027m in two minds about this. If we used a pipe FD instead, thread ID would not be a problem and feels cleaner as well. On the other hand, an app can probably pass its FD to someone else to keep it alive beyond its own death. I guess that\u0027s okay since it\u0027s still the app UID process? Would the child process even get reaped?",
+      "parentUuid": "3bca5f46_d89eba2f",
+      "range": {
+        "startLine": 80,
+        "startChar": 41,
+        "endLine": 80,
+        "endChar": 57
+      },
+      "revId": "dcf6a2c25423954c9ba4c26cfd2ff565a1a6f53e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "452f6a16_7ff10d8d",
         "filename": "virtualizationservice/src/virtmgr.rs",
         "patchSetId": 15
@@ -95,6 +119,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a6d60edf_519c644e",
+        "filename": "virtualizationservice/src/virtmgr.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-24T16:50:38Z",
+      "side": 1,
+      "message": "No kernel Binder here... yet. Will use it to communicate with VirtualizationServiceInternal. I can leave it out for now. Just need to remember that it\u0027s needed because the error message is anything but obvious.",
+      "parentUuid": "452f6a16_7ff10d8d",
+      "range": {
+        "startLine": 114,
+        "startChar": 58,
+        "endLine": 114,
+        "endChar": 81
+      },
+      "revId": "dcf6a2c25423954c9ba4c26cfd2ff565a1a6f53e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a48c8d22_68989441",
         "filename": "virtualizationservice/src/virtmgr.rs",
         "patchSetId": 15
@@ -106,6 +154,30 @@
       "writtenOn": "2022-11-24T16:25:24Z",
       "side": 1,
       "message": "What happens if the signal arrives before we get here?",
+      "range": {
+        "startLine": 130,
+        "startChar": 4,
+        "endLine": 130,
+        "endChar": 22
+      },
+      "revId": "dcf6a2c25423954c9ba4c26cfd2ff565a1a6f53e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c44b825e_81ac39b8",
+        "filename": "virtualizationservice/src/virtmgr.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-11-24T16:50:38Z",
+      "side": 1,
+      "message": "The default handler will kill the process.",
+      "parentUuid": "a48c8d22_68989441",
       "range": {
         "startLine": 130,
         "startChar": 4,
