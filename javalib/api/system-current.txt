@@ -1,7 +1,7 @@
 // Signature format: 2.0
 package android.system.virtualmachine {
 
-  public class VirtualMachine implements java.lang.AutoCloseable {
+  public class VirtualMachine implements java.lang.AutoCloseable android.content.ComponentCallbacks2 {
     method public void clearCallback();
     method public void close() throws android.system.virtualmachine.VirtualMachineException;
     method @NonNull public android.os.IBinder connectToVsockServer(int) throws android.system.virtualmachine.VirtualMachineException;
@@ -12,6 +12,9 @@ package android.system.virtualmachine {
     method @NonNull public java.io.InputStream getLogOutput() throws android.system.virtualmachine.VirtualMachineException;
     method @NonNull public String getName();
     method public int getStatus();
+    method public void onConfigurationChanged(@NonNull android.content.res.Configuration);
+    method public void onLowMemory();
+    method public void onTrimMemory(int);
     method @RequiresPermission(android.system.virtualmachine.VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION) public void run() throws android.system.virtualmachine.VirtualMachineException;
     method public void setCallback(@NonNull java.util.concurrent.Executor, @NonNull android.system.virtualmachine.VirtualMachineCallback);
     method @NonNull public android.system.virtualmachine.VirtualMachineConfig setConfig(@NonNull android.system.virtualmachine.VirtualMachineConfig) throws android.system.virtualmachine.VirtualMachineException;

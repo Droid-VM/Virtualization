@@ -38,7 +38,10 @@ use std::process::{Command, ExitStatus};
 use std::sync::{Arc, Condvar, Mutex};
 use std::time::{Duration, SystemTime};
 use std::thread;
-use android_system_virtualizationservice::aidl::android::system::virtualizationservice::DeathReason::DeathReason;
+use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
+    DeathReason::DeathReason,
+    MemoryTrimLevel::MemoryTrimLevel,
+};
 use android_system_virtualizationservice_internal::aidl::android::system::virtualizationservice_internal::IGlobalVmContext::IGlobalVmContext;
 use binder::Strong;
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
@@ -435,6 +438,11 @@ impl VmInstance {
         } else {
             bail!("VM is not running")
         }
+    }
+
+    pub fn trim_memory(&self, level: MemoryTrimLevel) -> Result<(), Error> {
+        info!("instance::onTrimMemory: {:?}", level);
+        Ok(())
     }
 
     /// Checks if ramdump has been created. If so, send a notification to the user with the handle
