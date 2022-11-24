@@ -49,7 +49,9 @@ import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.annotation.RequiresPermission;
 import android.annotation.SystemApi;
+import android.content.ComponentCallbacks2;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
@@ -61,10 +63,12 @@ import android.system.virtualizationservice.DeathReason;
 import android.system.virtualizationservice.IVirtualMachine;
 import android.system.virtualizationservice.IVirtualMachineCallback;
 import android.system.virtualizationservice.IVirtualizationService;
+import android.system.virtualizationservice.MemoryTrimLevel;
 import android.system.virtualizationservice.PartitionType;
 import android.system.virtualizationservice.VirtualMachineAppConfig;
 import android.system.virtualizationservice.VirtualMachineState;
 import android.util.JsonReader;
+import android.util.Log; /* XXX */
 
 import com.android.internal.annotations.GuardedBy;
 
@@ -197,6 +201,54 @@ public class VirtualMachine implements AutoCloseable {
      */
     @NonNull private final List<ExtraApkSpec> mExtraApks;
 
+    private class APICallbacks implements ComponentCallbacks2 {
+        private APICallbacks(@NonNull Context context) {
+            context.registerComponentCallbacks(this);
+        }
+
+        /* ComponentCallbacks2 */
+        @Override
+        public void onConfigurationChanged(@NonNull Configuration newConfig) {}
+
+        /* ComponentCallbacks2 */
+        @Override
+        public void onLowMemory() {}
+
+        /* ComponentCallbacks2 */
+        @Override
+        public void onTrimMemory(int level) {
+            @MemoryTrimLevel int vm_trim_level;
+
+            Log.w("VirtualMachine", "TrimMemory: " + level);
+
+            switch (level) {
+                case ComponentCallbacks2.TRIM_MEMORY_RUNNING_CRITICAL:
+                    vm_trim_level = MemoryTrimLevel.TRIM_MEMORY_RUNNING_CRITICAL;
+                    break;
+                case ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW:
+                    vm_trim_level = MemoryTrimLevel.TRIM_MEMORY_RUNNING_LOW;
+                    break;
+                case ComponentCallbacks2.TRIM_MEMORY_RUNNING_MODERATE:
+                    vm_trim_level = MemoryTrimLevel.TRIM_MEMORY_RUNNING_MODERATE;
+                    break;
+                default:
+                    /* Ignore other notification types. */
+                    return;
+            }
+
+            synchronized (mLock) {
+                try {
+                    getRunningVm().onTrimMemory(vm_trim_level);
+                } catch (RemoteException | VirtualMachineException e) {
+                    /* Caller doesn't want our exceptions. Log them instead. */
+                    Log.w("VirtualMachine", "TrimMemory failed: " + e);
+                }
+            }
+        }
+    }
+
+    @NonNull private final APICallbacks mAPICallbacks;
+
     /** Size of the instance image. 10 MB. */
     private static final long INSTANCE_FILE_SIZE = 10 * 1024 * 1024;
 
@@ -265,6 +317,7 @@ public class VirtualMachine implements AutoCloseable {
         mInstanceFilePath = new File(thisVmDir, INSTANCE_IMAGE_FILE);
         mIdsigFilePath = new File(thisVmDir, IDSIG_FILE);
         mExtraApks = setupExtraApks(context, config, thisVmDir);
+        mAPICallbacks = this.new APICallbacks(context);
     }
 
     /**
@@ -319,6 +372,7 @@ public class VirtualMachine implements AutoCloseable {
             throws VirtualMachineException {
         File vmDir = createVmDir(context, name);
 
+        Log.w("VirtualMachine", "Running NOW!!!!");
         try {
             VirtualMachine vm = new VirtualMachine(context, name, config);
             config.serialize(vm.mConfigFilePath);
@@ -1090,3 +1144,12 @@ public class VirtualMachine implements AutoCloseable {
         }
     }
 }
+/*
+ * Local variables:
+ * mode: C
+ * c-file-style: "Linux"
+ * c-basic-offset: 4
+ * tab-width: 4
+ * indent-tabs-mode: nil
+ * End:
+ */
