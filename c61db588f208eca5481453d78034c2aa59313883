@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0b227ef_c3930f26",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-25T04:58:08Z",
+      "side": 1,
+      "message": "Why not `use binder::ThreadState::{get_calling_pid, get_calling_uid}`?",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 1
+      },
+      "revId": "c61db588f208eca5481453d78034c2aa59313883",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "406ffbbf_9cff2c9b",
+        "filename": "virtualizationservice/src/virtmgr.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-25T04:58:08Z",
+      "side": 1,
+      "message": "Document",
+      "range": {
+        "startLine": 65,
+        "startChar": 8,
+        "endLine": 65,
+        "endChar": 14
+      },
+      "revId": "c61db588f208eca5481453d78034c2aa59313883",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d62a0f9_20ecc649",
+        "filename": "virtualizationservice/src/virtmgr.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-25T04:58:08Z",
+      "side": 1,
+      "message": "this parsing should better be formed by clap.\n\n```\nstruct Args {\n   #[clap(long, parse(try_from_str \u003d parse_fd_arg))]\n   xxx_fd: OwnedFd,\n}\n\nfn parse_fd_arg(arg: \u0026str) -\u003e Result\u003cOwnedFd, clap::Error\u003e {\n   // Create OwnedFd from str\n}\n```",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 85
+      },
+      "revId": "c61db588f208eca5481453d78034c2aa59313883",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
