@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3abe8c9_eff0878f",
+        "filename": "compos/src/compsvc_main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-25T08:59:46Z",
+      "side": 1,
+      "message": "super nit: this can be inlined to be more compact.",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 32
+      },
+      "revId": "101b6218066d8ca1da33d2055688d39d4cd33b54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "954d660b_514c8d48",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-25T08:59:46Z",
+      "side": 1,
+      "message": "If we panic here, then this method always fail, so the VM invoking this method will always exit with error. That looks a bit strange for me.",
+      "range": {
+        "startLine": 144,
+        "startChar": 16,
+        "endLine": 144,
+        "endChar": 59
+      },
+      "revId": "101b6218066d8ca1da33d2055688d39d4cd33b54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
