@@ -34,6 +34,93 @@
       "parentUuid": "d891a30a_d665df70",
       "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b14f296_1d65c81e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-25T00:23:09Z",
+      "side": 1,
+      "message": "Yeah, overall approach LGTM. I\u0027ve added some minor comments that you could take into consideration while cleaning this CL up.",
+      "parentUuid": "56928a33_237127b6",
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93e3c7f4_845fadd6",
+        "filename": "apex/sample-apk/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-25T00:23:09Z",
+      "side": 1,
+      "message": "EmptyApp or EmptyPayload?",
+      "range": {
+        "startLine": 6,
+        "startChar": 21,
+        "endLine": 6,
+        "endChar": 30
+      },
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba19f18a_929e148d",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-25T00:23:09Z",
+      "side": 1,
+      "message": "We are getting away from daemonize and might eventually remove this feature. aosp/2295059",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 24
+      },
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14634f95_91309686",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-25T00:23:09Z",
+      "side": 1,
+      "message": "I guess this path will be different depending on where the virt APEX was built. You may want to retrieve the path dynamically at runtime.",
+      "range": {
+        "startLine": 156,
+        "startChar": 55,
+        "endLine": 156,
+        "endChar": 67
+      },
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
