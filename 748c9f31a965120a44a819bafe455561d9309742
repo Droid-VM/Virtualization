@@ -110,6 +110,30 @@
       },
       "revId": "748c9f31a965120a44a819bafe455561d9309742",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce8296ca_0aaa172d",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-11-25T14:29:23Z",
+      "side": 1,
+      "message": "sign_virt_apex relies on other tools assuming that they are available. In such cases, other tools get extra arguments pointing those dependencies. But in this case, sign_virt_apex is supposed to be invoked via apex signing process. If you want to delete these lines, you might need to fix that as well.\nhttps://cs.android.com/android/platform/superproject/+/master:build/make/tools/releasetools/apex_utils.py;l\u003d195-204?q\u003d%22ProcessApexFile%22",
+      "parentUuid": "ecb34ca0_b4df278e",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 45
+      },
+      "revId": "748c9f31a965120a44a819bafe455561d9309742",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
