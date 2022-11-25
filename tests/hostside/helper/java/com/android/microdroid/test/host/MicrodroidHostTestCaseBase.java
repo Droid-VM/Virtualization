@@ -28,6 +28,7 @@ import static org.junit.Assume.assumeTrue;
 import com.android.compatibility.common.tradefed.build.CompatibilityBuildHelper;
 import com.android.microdroid.test.common.MetricsProcessor;
 import com.android.tradefed.build.IBuildInfo;
+import com.android.tradefed.config.Option;
 import com.android.tradefed.device.DeviceNotAvailableException;
 import com.android.tradefed.device.ITestDevice;
 import com.android.tradefed.device.TestDevice;
@@ -47,6 +48,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
+
     protected static final String TEST_ROOT = "/data/local/tmp/virt/";
     protected static final String VIRT_APEX = "/apex/com.android.virt/";
     protected static final String LOG_PATH = TEST_ROOT + "log.txt";
@@ -54,6 +56,7 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
     private static final int TEST_VM_ADB_PORT = 8000;
     private static final String MICRODROID_SERIAL = "localhost:" + TEST_VM_ADB_PORT;
     private static final String INSTANCE_IMG = "instance.img";
+    private static final String PVMFW_BIN_PATH = TEST_ROOT + "pvmfw.bin";
 
     // This is really slow on GCE (2m 40s) but fast on localhost or actual Android phones (< 10s).
     // Then there is time to run the actual task. Set the maximum timeout value big enough.
@@ -65,6 +68,16 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
     protected static final int MICRODROID_ADB_CONNECT_MAX_ATTEMPTS =
             (int) (MICRODROID_ADB_CONNECT_TIMEOUT_MINUTES * 60 * 1000
                 / MICRODROID_COMMAND_RETRY_INTERVAL_MILLIS);
+
+    @Option(name = "pvmfw",
+            description = "Custom pvmfw.bin path on host device."
+                    + " If present, it will be pushed to " + PVMFW_BIN_PATH,
+            mandatory = false)
+    public static String customPvmfwPathOnHost = null;
+
+    private static boolean isEmptyText(String str) {
+        return str == null || str.length() == 0;
+    }
 
     public static void prepareVirtualizationTestSetup(ITestDevice androidDevice)
             throws DeviceNotAvailableException {
@@ -78,6 +91,11 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
 
         // remove any leftover files under test root
         android.tryRun("rm", "-rf", TEST_ROOT + "*");
+
+        // prepare custom pvmfw.bin if necessary
+        if (!isEmptyText(customPvmfwPathOnHost)) {
+            runOnHost("adb", "push", customPvmfwPathOnHost, PVMFW_BIN_PATH);
+        }
     }
 
     public static void cleanUpVirtualizationTestSetup(ITestDevice androidDevice)
@@ -323,6 +341,8 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
                 "--log " + logPath,
                 "--console " + consolePath,
                 "--mem " + memoryMib,
+                isEmptyText(customPvmfwPathOnHost)
+                        ? "" : "--protected-vm-with-firmware " + PVMFW_BIN_PATH,
                 numCpus.isPresent() ? "--cpus " + numCpus.get() : "",
                 debugFlag,
                 apkPath,
