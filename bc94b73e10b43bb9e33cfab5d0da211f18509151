@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "53134833_bf6d25ec",
+        "filename": "libs/libfdt/src/compat.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:54Z",
+      "side": 1,
+      "message": "No, you\u0027re right. As I flagged in the other comment, this was a quick hack to get it to work and doesn\u0027t pretend to be a C-compliant implementation. The (unique) call to the function is [here](https://android.googlesource.com/platform/external/dtc/+/0cdd06c5135bd9f46853c2f58ad2ac91b0fa87f3/libfdt/fdt_overlay.c#455):\n```\nindex \u003d strtoul(sep + 1, \u0026endptr, 10);\nif ((*endptr !\u003d \u0027\\0\u0027) || (endptr \u003c\u003d (sep + 1)))\n    return -FDT_ERR_BADOVERLAY;\n```\n\nso `base` is always `10`, `errno` is never used and the input string is the [`\u003coffset\u003e` of `__fixups__` entries](https://android.googlesource.com/platform/external/dtc/+/refs/heads/master/Documentation/dt-object-internal.txt#231), which is a positive offset (no sign, no prefix, always positive).\n\nI like the idea of re-using a proper C-compliant implementation. But we can\u0027t link against Bionic directly; I\u0027ll try to see how much I need to carve out of the library to do so.",
+      "parentUuid": "ca6ba5b6_075217d3",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 94
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7c791bf_c0887854",
         "filename": "libs/libfdt/src/compat.rs",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-23T15:11:39Z",
       "side": 1,
       "message": "valid values for range is 0, and 2 to 36.",
+      "range": {
+        "startLine": 21,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 5
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66189613_fde65ec6",
+        "filename": "libs/libfdt/src/compat.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:54Z",
+      "side": 1,
+      "message": "Yes but only `10` is passed; see this other [comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2314779/comment/ca6ba5b6_075217d3/).",
+      "parentUuid": "f7c791bf_c0887854",
       "range": {
         "startLine": 21,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "780ebfcb_0b1d3d4b",
+        "filename": "libs/libfdt/src/compat.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:54Z",
+      "side": 1,
+      "message": "The string won\u0027t have a prefix, as defined by the `__fixups__` format; see this other [comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2314779/comment/ca6ba5b6_075217d3/).",
+      "parentUuid": "afe0b94d_9fa7f393",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 55
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69853fca_ec67a027",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-11-23T15:11:39Z",
       "side": 1,
       "message": "Does this need to set errno as well? otherwise, how can the caller distinguish a successful conversion to 0 and an error case?",
+      "range": {
+        "startLine": 50,
+        "startChar": 33,
+        "endLine": 50,
+        "endChar": 45
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e978596_05676b97",
+        "filename": "libs/libfdt/src/compat.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:54Z",
+      "side": 1,
+      "message": "A proper implementation would need to but `libfdt` doesn\u0027t read `errno`; see this other [comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2314779/comment/ca6ba5b6_075217d3/).",
+      "parentUuid": "69853fca_ec67a027",
       "range": {
         "startLine": 50,
         "startChar": 33,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f60f0c8_303f1c4f",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c037884b_d0295d11",
+      "range": {
+        "startLine": 479,
+        "startChar": 29,
+        "endLine": 479,
+        "endChar": 38
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5bcd20f_ee9a803b",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-11-24T14:48:10Z",
       "side": 1,
       "message": "Isn\u0027t that what `as_mut_ptr()` returns already?",
+      "range": {
+        "startLine": 554,
+        "startChar": 42,
+        "endLine": 554,
+        "endChar": 57
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "153eec05_28f0214c",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:54Z",
+      "side": 1,
+      "message": "Nice catch, I thought `rustc` complained about pointless casts?",
+      "parentUuid": "a5bcd20f_ee9a803b",
       "range": {
         "startLine": 554,
         "startChar": 42,
@@ -164,6 +308,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a7a8085_1edc88d6",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:54Z",
+      "side": 1,
+      "message": "Not sure I follow: why would we want `self.bytes` to point to something else as `fdt_overlay_apply` modifies the FDT in-place?",
+      "parentUuid": "2b948595_679602a6",
+      "range": {
+        "startLine": 553,
+        "startChar": 0,
+        "endLine": 557,
+        "endChar": 5
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7b294f27_99f1ddc7",
         "filename": "pvmfw/src/entry.rs",
         "patchSetId": 2
@@ -175,6 +343,30 @@
       "writtenOn": "2022-11-23T15:11:39Z",
       "side": 1,
       "message": "why does the overlay have to be mutable?",
+      "range": {
+        "startLine": 273,
+        "startChar": 60,
+        "endLine": 273,
+        "endChar": 63
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81efe782_7d5c1140",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:54Z",
+      "side": 1,
+      "message": "The function signature is\n```\nint fdt_overlay_apply(void *fdt, void *fdto);\n```\nand, even if it isn\u0027t documented in `libfdt.h`, its implementation patches the DTBO to align the phandles (see [here](https://android.googlesource.com/platform/external/dtc/+/0cdd06c5135bd9f46853c2f58ad2ac91b0fa87f3/libfdt/fdt_overlay.c#634)) so either the API requires it to be `mut` or we call the C function on a local copy.",
+      "parentUuid": "7b294f27_99f1ddc7",
       "range": {
         "startLine": 273,
         "startChar": 60,
@@ -198,6 +390,24 @@
       "writtenOn": "2022-11-24T14:48:10Z",
       "side": 1,
       "message": "Does that help? The caller still has the `\u0026mut Fdt` that it passed in, which I guess is now corrupt.\n\n(Though why does failing to apply an overlay result in a corrupt FDT? Maybe we should fix that and make it fail more gracefully?)",
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aa32115_637ba0b2",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:54Z",
+      "side": 1,
+      "message": "\u003e Though why does failing to apply an overlay result in a corrupt FDT?\n\nBecause `fdt_overlay_apply` doesn\u0027t patch the DT atomically so can leave it in an intermediate state. As it patches phandles sequentially, I suppose that running `overlay_fixup_phandle` on only half of a DT would break phandles references between its halves.\n\n\u003e The caller still has the `\u0026mut Fdt` that it passed in, which I guess is now corrupt.\n\nYou\u0027re right! That\u0027s not really an issue with this implementation as the caller then `?` the result, causing the reference to go out of scope, but this still feels fragile.\n\nAny idea on how to address it? Make `apply_debug_policy` unsafe for the same reason? intentionally",
+      "parentUuid": "6ce9e61e_b4d06b1c",
       "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

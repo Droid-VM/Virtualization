@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4637d2a9_85916228",
+        "filename": "libs/libfdt/src/compat.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:54Z",
+      "side": 1,
+      "message": "Marking resolved as a duplicate of this [comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2314779/comment/ca6ba5b6_075217d3/).",
+      "parentUuid": "20f2062d_3045d227",
+      "range": {
+        "startLine": 49,
+        "startChar": 18,
+        "endLine": 49,
+        "endChar": 25
+      },
+      "revId": "17fb90e4b60437eda890357d2df7503960187c1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfb7ea0d_964e187c",
@@ -108,6 +132,30 @@
       "side": 1,
       "message": "These are Pixel-specific stuffs. Why did you have to inject these? What happened when you didn\u0027t have these?",
       "parentUuid": "ce50b023_fef4d7fd",
+      "range": {
+        "startLine": 284,
+        "startChar": 8,
+        "endLine": 284,
+        "endChar": 13
+      },
+      "revId": "17fb90e4b60437eda890357d2df7503960187c1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "726fbe2a_eb43daaa",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:54Z",
+      "side": 1,
+      "message": "Otherwise, `fdt_overlay_apply` returns `FDT_ERR_BADOVERLAY` as it fails to locate the nodes the DTBO tells it to patch so we need to either add them in crosvm (to mimic what\u0027s done in the host DT) or inject them just-in-time when patching the DT (as done here).\n\nIf we go back to using a template DT, this should be a trivial as the DP nodes would be part of it.",
+      "parentUuid": "733f5359_44abc17e",
       "range": {
         "startLine": 284,
         "startChar": 8,
