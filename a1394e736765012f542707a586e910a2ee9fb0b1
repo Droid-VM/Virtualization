@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23b68fc6_43960d08",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:24:46Z",
+      "side": 1,
+      "message": "Done in aosp/2318990.",
+      "parentUuid": "d66aa8b8_972ad05c",
+      "revId": "a1394e736765012f542707a586e910a2ee9fb0b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48b694b3_8f6643fa",
@@ -84,6 +102,24 @@
       "writtenOn": "2022-11-23T17:31:29Z",
       "side": 1,
       "message": "You could get rid of `MaybeUninit` and some unsafe code by just initialising these to some valid default value, maybe `ReadOnly(0..0)` or something like that.",
+      "revId": "a1394e736765012f542707a586e910a2ee9fb0b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b169f497_5160b3a7",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:24:46Z",
+      "side": 1,
+      "message": "Ack; aosp/2318990 will get rid of the unsafe.",
+      "parentUuid": "48b694b3_8f6643fa",
       "revId": "a1394e736765012f542707a586e910a2ee9fb0b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
