@@ -18,6 +18,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2defe52_a1d55d7c",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21ba32c1_52b22bd4",
+      "revId": "a1394e736765012f542707a586e910a2ee9fb0b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f1954e1_ff1f2a21",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21ba32c1_52b22bd4",
+      "revId": "a1394e736765012f542707a586e910a2ee9fb0b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d66aa8b8_972ad05c",
@@ -92,6 +128,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c62c1d3_1af6d2f4",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c58c276f_469688b8",
+      "range": {
+        "startLine": 142,
+        "startChar": 24,
+        "endLine": 142,
+        "endChar": 32
+      },
+      "revId": "a1394e736765012f542707a586e910a2ee9fb0b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd836712_67358e24",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c58c276f_469688b8",
+      "range": {
+        "startLine": 142,
+        "startChar": 24,
+        "endLine": 142,
+        "endChar": 32
+      },
+      "revId": "a1394e736765012f542707a586e910a2ee9fb0b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bf89557_db627a89",
@@ -109,6 +193,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5a311f4_69d4af38",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bf89557_db627a89",
+      "revId": "a1394e736765012f542707a586e910a2ee9fb0b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7339d672_fa0b633e",
@@ -122,6 +224,30 @@
       "writtenOn": "2022-11-25T10:29:27Z",
       "side": 1,
       "message": "Why not implementing this directly in `Fdt`? The structure looks similar to the existing method `memory`\n\nhttps://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/libs/libfdt/src/lib.rs;l\u003d443;drc\u003d41c158eb7064aab8325d85437ce23e09059a7528",
+      "range": {
+        "startLine": 21,
+        "startChar": 7,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "revId": "a1394e736765012f542707a586e910a2ee9fb0b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11ddbe7f_0a82d1d8",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:16Z",
+      "side": 1,
+      "message": "Because `/memory` or `/chosen` are [standard nodes](https://devicetree-specification.readthedocs.io/en/stable/devicenodes.html) while these properties aren\u0027t.",
+      "parentUuid": "7339d672_fa0b633e",
       "range": {
         "startLine": 21,
         "startChar": 7,
