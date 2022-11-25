@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58539a10_c50f4ed5",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-25T09:59:48Z",
+      "side": 1,
+      "message": "Or we can have `use binder::ThreadState::{get_calling_pid, get_calling_uid}` in the caller\u0027s module directly.",
+      "parentUuid": "e0b227ef_c3930f26",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 1
+      },
+      "revId": "c61db588f208eca5481453d78034c2aa59313883",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "406ffbbf_9cff2c9b",
         "filename": "virtualizationservice/src/virtmgr.rs",
         "patchSetId": 16
@@ -65,6 +89,29 @@
         "startChar": 0,
         "endLine": 87,
         "endChar": 85
+      },
+      "revId": "c61db588f208eca5481453d78034c2aa59313883",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24060f9e_db0a4d44",
+        "filename": "virtualizationservice/src/virtmgr.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-25T09:59:48Z",
+      "side": 1,
+      "message": "Does RPC binder also need this? It\u0027s mainly used for the thread management of the kernel binder before mostly.",
+      "range": {
+        "startLine": 89,
+        "startChar": 4,
+        "endLine": 90,
+        "endChar": 38
       },
       "revId": "c61db588f208eca5481453d78034c2aa59313883",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
