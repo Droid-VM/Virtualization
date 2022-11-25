@@ -107,6 +107,29 @@
       "message": "You could do this up on line 253, rather than having a separate map here.",
       "revId": "a1394e736765012f542707a586e910a2ee9fb0b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7339d672_fa0b633e",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-25T10:29:27Z",
+      "side": 1,
+      "message": "Why not implementing this directly in `Fdt`? The structure looks similar to the existing method `memory`\n\nhttps://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/libs/libfdt/src/lib.rs;l\u003d443;drc\u003d41c158eb7064aab8325d85437ce23e09059a7528",
+      "range": {
+        "startLine": 21,
+        "startChar": 7,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "revId": "a1394e736765012f542707a586e910a2ee9fb0b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
