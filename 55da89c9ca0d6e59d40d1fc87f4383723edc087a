@@ -170,6 +170,24 @@
       "parentUuid": "59252eec_6b95fc3b",
       "revId": "55da89c9ca0d6e59d40d1fc87f4383723edc087a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bf6e8cc_0fac5c40",
+        "filename": "microdroid/vm_payload/include/vm_payload.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-25T10:58:33Z",
+      "side": 1,
+      "message": "OK, that was definitely food for thought. It goes against the grain a bit, but after some reflection I think you\u0027re right.\n\nFor most of the functions there isn\u0027t anything useful the client can do and so I\u0027ve changed them to abort on failure and return void - see aosp/2314859.\n\nAnd then I looked again at AVmPayload_runVsockRpcServer. That is even odder - if it fails then again really the client can\u0027t do anything about it. But if it succeeds, it actually never returns - which is the normal behavior.\n\nSo I documented that oddness and also made it panic on failure, over in aosp/2317213. That has the latest version of vm_payload.h in it.\n\n(Since I moved the files around and rebased things the diff here is a bit confusing; sorry about that.)",
+      "parentUuid": "7fc03d1f_e9bbf7ac",
+      "revId": "55da89c9ca0d6e59d40d1fc87f4383723edc087a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
