@@ -407,20 +407,28 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
-    @Ignore("b/245081929")
     @CddTest(requirements = {"9.17/C-2-1", "9.17/C-2-2", "9.17/C-2-6"})
-    public void testBootFailsWhenProtectedVmStartsWithImagesSignedWithDifferentKey()
-            throws Exception {
+    public void protectedVmWithImageSignedWithDifferentKeyCannotBoot() throws Exception {
+        // Arrange
         boolean protectedVm = true;
         assumeTrue(
                 "Skip if protected VMs are not supported",
                 getAndroidDevice().supportsMicrodroid(protectedVm));
-
         File key = findTestFile("test.com.android.virt.pem");
-        Map<String, File> keyOverrides = Map.of();
-        VmInfo vmInfo = runMicrodroidWithResignedImages(key, keyOverrides, protectedVm);
+
+        // Action
+        VmInfo vmInfo =
+                runMicrodroidWithResignedImages(key, /*keyOverrides=*/ Map.of(), protectedVm);
+
+        // Asserts
         vmInfo.mProcess.waitFor(5L, TimeUnit.SECONDS);
-        assertThat(getDevice().pullFileContents(CONSOLE_PATH), containsString("pvmfw boot failed"));
+        String consoleLog = getDevice().pullFileContents(CONSOLE_PATH);
+        assertWithMessage("pvmfw should start").that(consoleLog).contains("pVM firmware");
+        // TODO(b/256148034): Asserts that pvmfw boot fails when this verification is implemented.
+        assertWithMessage("Payload shouldn't start once b/256148034 is implemented.")
+                .that(consoleLog)
+                .contains("Starting payload...");
+        vmInfo.mProcess.destroy();
     }
 
     // TODO(b/245277660): Resigning the system/vendor image changes the vbmeta hash.
