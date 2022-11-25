@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b10a0e2e_bfa7392e",
+        "filename": "compos/src/compsvc_main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-25T09:41:39Z",
+      "side": 1,
+      "message": "I prefer to have the name to make it obvious what it is.",
+      "parentUuid": "c3abe8c9_eff0878f",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 32
+      },
+      "revId": "101b6218066d8ca1da33d2055688d39d4cd33b54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "954d660b_514c8d48",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-25T08:59:46Z",
       "side": 1,
       "message": "If we panic here, then this method always fail, so the VM invoking this method will always exit with error. That looks a bit strange for me.",
+      "range": {
+        "startLine": 144,
+        "startChar": 16,
+        "endLine": 144,
+        "endChar": 59
+      },
+      "revId": "101b6218066d8ca1da33d2055688d39d4cd33b54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eb75313_aeba5679",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-25T09:41:39Z",
+      "side": 1,
+      "message": "Actually in the normal case the function never exits at all - that\u0027s true before my CL.\nThe VM only terminates if it calls exit (which is how CompOS does it) or the host kills the VM (which is what the test APK does). In neither case does this method return.\nIt is a little strange, but I\u0027m just making the strangeness more explicit.",
+      "parentUuid": "954d660b_514c8d48",
       "range": {
         "startLine": 144,
         "startChar": 16,
