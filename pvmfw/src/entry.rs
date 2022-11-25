@@ -25,8 +25,6 @@ use core::cmp::max;
 use core::cmp::min;
 use core::ffi::CStr;
 use core::fmt;
-use core::mem;
-use core::mem::MaybeUninit;
 use core::num::NonZeroUsize;
 use core::ops::Range;
 use core::result;
@@ -72,13 +70,14 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64
 
 type MemoryRange = Range<usize>;
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Default)]
 enum MemoryType {
+    #[default]
     ReadOnly,
     ReadWrite,
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Default)]
 struct MemoryRegion {
     range: MemoryRange,
     mem_type: MemoryType,
@@ -106,9 +105,7 @@ impl AsRef<MemoryRange> for MemoryRegion {
 
 /// Tracks non-overlapping slices of main memory.
 pub struct MemoryTracker<'a> {
-    // TODO: Use tinyvec::ArrayVec
-    count: usize,
-    regions: [MaybeUninit<MemoryRegion>; MemoryTracker::CAPACITY],
+    regions: tinyvec::ArrayVec<[MemoryRegion; MemoryTracker::CAPACITY]>,
     total: MemoryRange,
     page_table: &'a mut mmu::PageTable,
 }
@@ -157,13 +154,7 @@ impl<'a> MemoryTracker<'a> {
 
     /// Create a new instance from an active page table, covering the maximum RAM size.
     pub fn new(page_table: &'a mut mmu::PageTable) -> Self {
-        Self {
-            total: Self::BASE..Self::MAX_ADDR,
-            count: 0,
-            page_table,
-            // SAFETY - MaybeUninit items (of regions) do not require initialization.
-            regions: unsafe { MaybeUninit::uninit().assume_init() },
-        }
+        Self { total: Self::BASE..Self::MAX_ADDR, page_table, regions: tinyvec::ArrayVec::new() }
     }
 
     /// Resize the total RAM size.
@@ -176,7 +167,7 @@ impl<'a> MemoryTracker<'a> {
         if self.total.end < range.end {
             return Err(MemoryTrackerError::SizeTooLarge);
         }
-        if !self.regions().iter().all(|r| r.is_within(range)) {
+        if !self.regions.iter().all(|r| r.is_within(range)) {
             return Err(MemoryTrackerError::SizeTooSmall);
         }
 
@@ -216,31 +207,24 @@ impl<'a> MemoryTracker<'a> {
         self.alloc_range_mut(&(base..(base + size.get())))
     }
 
-    fn regions(&self) -> &[MemoryRegion] {
-        // SAFETY - The first self.count regions have been properly initialized.
-        unsafe { mem::transmute::<_, &[MemoryRegion]>(&self.regions[..self.count]) }
-    }
-
     fn add(&mut self, region: MemoryRegion) -> MemoryTrackerResult<MemoryRange> {
         if !region.is_within(&self.total) {
             return Err(MemoryTrackerError::OutOfRange);
         }
-        if self.regions().iter().any(|r| r.overlaps(region.as_ref())) {
+        if self.regions.iter().any(|r| r.overlaps(region.as_ref())) {
             return Err(MemoryTrackerError::Overlaps);
         }
-        if self.regions.len() == self.count {
+        if self.regions.try_push(region).is_some() {
             return Err(MemoryTrackerError::Full);
         }
 
-        let region = self.regions[self.count].write(region);
-        self.count += 1;
-        Ok(region.as_ref().clone())
+        Ok(self.regions.last().unwrap().as_ref().clone())
     }
 }
 
 impl<'a> Drop for MemoryTracker<'a> {
     fn drop(&mut self) {
-        for region in self.regions().iter() {
+        for region in self.regions.iter() {
             match region.mem_type {
                 MemoryType::ReadWrite => {
                     // TODO: Use page table's dirty bit to only flush pages that were touched.
