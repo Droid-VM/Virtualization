@@ -22,6 +22,30 @@
       },
       "revId": "3d1fe320a7cb5945caae33a6ded9cbaa7e440bde",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3772487f_4b30bd1c",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-25T08:00:47Z",
+      "side": 0,
+      "message": "That\u0027s a good point. I refactored the code to make it clear that this is only called in one test.\nIf there\u0027s a problem in the future, we can just maintain one version of this code.",
+      "parentUuid": "27b90345_2b036b9c",
+      "range": {
+        "startLine": 195,
+        "startChar": 23,
+        "endLine": 195,
+        "endChar": 45
+      },
+      "revId": "3d1fe320a7cb5945caae33a6ded9cbaa7e440bde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
