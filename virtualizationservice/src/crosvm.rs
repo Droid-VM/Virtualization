@@ -601,7 +601,12 @@ fn run_vm(
     }
 
     if config.protected {
-        command.arg("--protected-vm");
+        match system_properties::read("hypervisor.pvmfw.path") {
+            Ok(Some(pvmfw_path)) if !pvmfw_path.is_empty() => {
+                command.arg("--protected-vm-with-firmware").arg(pvmfw_path)
+            }
+            _ => command.arg("--protected-vm"),
+        };
 
         // 3 virtio-console devices + vsock = 4.
         let virtio_pci_device_count = 4 + config.disks.len();
