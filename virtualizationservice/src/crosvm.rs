@@ -22,7 +22,8 @@ use lazy_static::lazy_static;
 use libc::{sysconf, _SC_CLK_TCK};
 use log::{debug, error, info};
 use semver::{Version, VersionReq};
-use nix::{fcntl::OFlag, unistd::pipe2};
+use nix::{fcntl::OFlag};
+use nix::unistd::{pipe2, access, AccessFlags};
 use regex::{Captures, Regex};
 use rustutils::system_properties;
 use shared_child::SharedChild;
@@ -66,6 +67,8 @@ const CROSVM_CRASH_STATUS: i32 = 33;
 const CROSVM_WATCHDOG_REBOOT_STATUS: i32 = 36;
 
 const MILLIS_PER_SEC: i64 = 1000;
+
+const SYSPROP_CUSTOM_PVMFW_PATH: &str = "hypervisor.pvmfw.path";
 
 lazy_static! {
     /// If the VM doesn't move to the Started state within this amount time, a hang-up error is
@@ -601,7 +604,13 @@ fn run_vm(
     }
 
     if config.protected {
-        command.arg("--protected-vm");
+        match system_properties::read(SYSPROP_CUSTOM_PVMFW_PATH)? {
+            Some(pvmfw_path) if !pvmfw_path.is_empty() => {
+                access(pvmfw_path.as_str(), AccessFlags::R_OK)?;
+                command.arg("--protected-vm-with-firmware").arg(pvmfw_path)
+            }
+            _ => command.arg("--protected-vm"),
+        };
 
         // 3 virtio-console devices + vsock = 4.
         let virtio_pci_device_count = 4 + config.disks.len();
