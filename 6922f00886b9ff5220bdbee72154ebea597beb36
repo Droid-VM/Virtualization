@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eafcf058_aab49c00",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:22:59Z",
+      "side": 1,
+      "message": "This doesn\u0027t need the slice to be mut; but could you rebase on https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2211408/12/vmbase/example/src/main.rs to avoid clashes?",
+      "range": {
+        "startLine": 71,
+        "startChar": 30,
+        "endLine": 71,
+        "endChar": 48
+      },
+      "revId": "6922f00886b9ff5220bdbee72154ebea597beb36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
