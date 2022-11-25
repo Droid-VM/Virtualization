@@ -23,6 +23,7 @@ use log::{debug, error, info};
 use semver::{Version, VersionReq};
 use nix::{fcntl::OFlag, unistd::pipe2};
 use regex::{Captures, Regex};
+use rustutils::system_properties;
 use shared_child::SharedChild;
 use std::borrow::Cow;
 use std::fs::{remove_dir_all, File};
@@ -462,7 +463,12 @@ fn run_vm(
         .arg(config.cid.to_string());
 
     if config.protected {
-        command.arg("--protected-vm");
+        match system_properties::read("hypervisor.pvmfw.path") {
+            Err() => command.arg("--protected-vm"),
+            Ok(pvmfw_path) => {
+                command.arg("--protected-vm-with-firmware").arg(pvmfw_path.unwrap_or_default())
+            }
+        }
 
         // 3 virtio-console devices + vsock = 4.
         let virtio_pci_device_count = 4 + config.disks.len();
