@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d88df4f3_c97706ad",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00eb3610_e97c9599",
+      "range": {
+        "startLine": 139,
+        "startChar": 32,
+        "endLine": 139,
+        "endChar": 35
+      },
+      "revId": "8bcbff1bfdc99683cd6fcfa75a0b3deeacc66cb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0c66cf8_b5ee2484",
@@ -60,6 +84,30 @@
       "writtenOn": "2022-11-24T05:10:35Z",
       "side": 1,
       "message": "why?",
+      "range": {
+        "startLine": 446,
+        "startChar": 46,
+        "endLine": 446,
+        "endChar": 49
+      },
+      "revId": "8bcbff1bfdc99683cd6fcfa75a0b3deeacc66cb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06959a11_b344fc20",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-25T21:19:36Z",
+      "side": 1,
+      "message": "Because `fdt_overlay_apply` writes to the DTBO, unfortunately ([related comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2314779/comment/7b294f27_99f1ddc7/))",
+      "parentUuid": "9720e803_0d727b37",
       "range": {
         "startLine": 446,
         "startChar": 46,
