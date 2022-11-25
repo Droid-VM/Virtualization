@@ -234,12 +234,27 @@ fn uuid(node_id: &[u8]) -> Result<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crypt::DmCryptTargetBuilder;
+    use crypt::{CipherType, DmCryptTargetBuilder};
     use std::fs::{read, File, OpenOptions};
     use std::io::Write;
 
-    const KEY: &[u8; 32] = b"thirtytwobyteslongreallylongword";
-    const DIFFERENT_KEY: &[u8; 32] = b"drowgnolyllaergnolsetybowtytriht";
+    // Just a logical set of keys to make testing easy. This has no real meaning.
+    struct KeySet<'a> {
+        cipher: CipherType,
+        key: &'a [u8],
+        different_key: &'a [u8],
+    }
+
+    const KEY_SET_XTS: KeySet = KeySet {
+        cipher: CipherType::AES256XTS,
+        key: b"sixtyfourbyteslongsentencearerarebutletsgiveitatrycantbethathard",
+        different_key: b"drahtahtebtnacyrtatievigsteltuberareraecnetnesgnolsetybruofytxis",
+    };
+    const KEY_SET_HCTR2: KeySet = KeySet {
+        cipher: CipherType::AES256HCTR2,
+        key: b"thirtytwobyteslongreallylongword",
+        different_key: b"drowgnolyllaergnolsetybowtytriht",
+    };
 
     // Create a file in given temp directory with given size
     fn prepare_tmpfile(test_dir: &Path, filename: &str, sz: u64) -> PathBuf {
@@ -260,8 +275,29 @@ mod tests {
         Ok(())
     }
 
+    // TODO(b/250880499): delete_device() doesn't really delete it even without xx flag. Hence, we
+    // have to create new device with a different name. Retrying the test on same machine without
+    // reboot also fails.
     #[test]
-    fn mapping_again_keeps_data() {
+    fn mapping_again_keeps_data_xts() {
+        mapping_again_keeps_data(&KEY_SET_XTS, "name1");
+    }
+
+    #[test]
+    fn mapping_again_keeps_data_hctr2() {
+        mapping_again_keeps_data(&KEY_SET_HCTR2, "name2");
+    }
+    #[test]
+    fn data_inaccessible_with_diff_key_xts() {
+        data_inaccessible_with_diff_key(&KEY_SET_XTS, "name3");
+    }
+
+    #[test]
+    fn data_inaccessible_with_diff_key_hctr2() {
+        data_inaccessible_with_diff_key(&KEY_SET_HCTR2, "name4");
+    }
+
+    fn mapping_again_keeps_data(keyset: &KeySet, device: &str) {
         // This test creates 2 different crypt devices using same key backed by same data_device
         // -> Write data on dev1 -> Check the data is visible & same on dev2
         let dm = DeviceMapper::new().unwrap();
@@ -278,28 +314,33 @@ mod tests {
             /*writable*/ true,
         )
         .unwrap();
+        let device_diff = device.to_owned() + "_diff";
+
         scopeguard::defer! {
             loopdevice::detach(&data_device).unwrap();
-            _ = delete_device(&dm, "crypt1");
-            _ = delete_device(&dm, "crypt2");
+            _ = delete_device(&dm, device);
+            _ = delete_device(&dm, &device_diff);
         }
 
-        let target =
-            DmCryptTargetBuilder::default().data_device(&data_device, sz).key(KEY).build().unwrap();
+        let target = DmCryptTargetBuilder::default()
+            .data_device(&data_device, sz)
+            .cipher(keyset.cipher)
+            .key(keyset.key)
+            .build()
+            .unwrap();
 
-        let mut crypt_device = dm.create_crypt_device("crypt1", &target).unwrap();
+        let mut crypt_device = dm.create_crypt_device(device, &target).unwrap();
         write_to_dev(&crypt_device, inputimg);
 
         // Recreate another device using same target spec & check if the content is the same
-        crypt_device = dm.create_crypt_device("crypt2", &target).unwrap();
+        crypt_device = dm.create_crypt_device(&device_diff, &target).unwrap();
 
         let crypt = read(crypt_device).unwrap();
         assert_eq!(inputimg.len(), crypt.len()); // fail early if the size doesn't match
         assert_eq!(inputimg, crypt.as_slice());
     }
 
-    #[test]
-    fn data_inaccessible_with_diff_key() {
+    fn data_inaccessible_with_diff_key(keyset: &KeySet, device: &str) {
         // This test creates 2 different crypt devices using different keys backed
         // by same data_device -> Write data on dev1 -> Check the data is visible but not the same on dev2
         let dm = DeviceMapper::new().unwrap();
@@ -316,26 +357,32 @@ mod tests {
             /*writable*/ true,
         )
         .unwrap();
+        let device_diff = device.to_owned() + "_diff";
         scopeguard::defer! {
             loopdevice::detach(&data_device).unwrap();
-            _ = delete_device(&dm, "crypt3");
-            _ = delete_device(&dm, "crypt4");
+            _ = delete_device(&dm, device);
+            _ = delete_device(&dm, &device_diff);
         }
 
-        let target =
-            DmCryptTargetBuilder::default().data_device(&data_device, sz).key(KEY).build().unwrap();
+        let target = DmCryptTargetBuilder::default()
+            .data_device(&data_device, sz)
+            .cipher(keyset.cipher)
+            .key(keyset.key)
+            .build()
+            .unwrap();
         let target2 = DmCryptTargetBuilder::default()
             .data_device(&data_device, sz)
-            .key(DIFFERENT_KEY)
+            .cipher(keyset.cipher)
+            .key(keyset.different_key)
             .build()
             .unwrap();
 
-        let mut crypt_device = dm.create_crypt_device("crypt3", &target).unwrap();
+        let mut crypt_device = dm.create_crypt_device(device, &target).unwrap();
 
         write_to_dev(&crypt_device, inputimg);
 
         // Recreate the crypt device again diff key & check if the content is changed
-        crypt_device = dm.create_crypt_device("crypt4", &target2).unwrap();
+        crypt_device = dm.create_crypt_device(&device_diff, &target2).unwrap();
         let crypt = read(crypt_device).unwrap();
         assert_ne!(inputimg, crypt.as_slice());
     }
