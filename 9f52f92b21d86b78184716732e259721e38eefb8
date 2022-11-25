@@ -54,6 +54,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90d81f52_a7bfbfab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-25T09:58:17Z",
+      "side": 1,
+      "message": "Definitely looks good in principle - and useful!",
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93e3c7f4_845fadd6",
@@ -72,6 +89,145 @@
         "startChar": 21,
         "endLine": 6,
         "endChar": 30
+      },
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c2a830c_c5659672",
+        "filename": "apex/sample-apk/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-25T09:58:17Z",
+      "side": 1,
+      "message": "+1. We may want a real sample app at some point, but if we want an empty/null VM that should be separate.",
+      "parentUuid": "93e3c7f4_845fadd6",
+      "range": {
+        "startLine": 6,
+        "startChar": 21,
+        "endLine": 6,
+        "endChar": 30
+      },
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "145a2f96_f0ef68b7",
+        "filename": "apex/sample-apk/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-25T09:58:17Z",
+      "side": 1,
+      "message": "Does it need this? Would be nice to keep it as minimal as possible.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 24
+      },
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc823a87_e0ff3b33",
+        "filename": "apex/sample-apk/AndroidManifest.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-25T09:58:17Z",
+      "side": 1,
+      "message": "34?",
+      "range": {
+        "startLine": 6,
+        "startChar": 37,
+        "endLine": 6,
+        "endChar": 39
+      },
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3544563_b4e682b3",
+        "filename": "apex/sample-apk/sample_binary.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-25T09:58:17Z",
+      "side": 1,
+      "message": "I\u0027m not sure this actually goes anywhere these days.\nLogcat?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 33
+      },
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8543370_2c199aa4",
+        "filename": "apex/sample-apk/sample_binary.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-25T09:58:17Z",
+      "side": 1,
+      "message": "Maybe you should call AVmPayload_notifyPayloadReady() here?\nIt proves we got this far, and should show up in host adb logs.",
+      "range": {
+        "startLine": 13,
+        "startChar": 1,
+        "endLine": 13,
+        "endChar": 72
+      },
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f96c9183_e22bee49",
+        "filename": "apex/sample-apk/sample_binary.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-25T09:58:17Z",
+      "side": 1,
+      "message": "I never knew that existed!",
+      "range": {
+        "startLine": 15,
+        "startChar": 8,
+        "endLine": 15,
+        "endChar": 13
       },
       "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
