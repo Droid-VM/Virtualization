@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06d0482e_3dd49f21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-26T16:46:32Z",
+      "side": 1,
+      "message": "Resolving",
+      "parentUuid": "8b14f296_1d65c81e",
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93e3c7f4_845fadd6",
@@ -118,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db9bf43b_9326b00c",
+        "filename": "apex/sample-apk/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-26T16:46:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c2a830c_c5659672",
+      "range": {
+        "startLine": 6,
+        "startChar": 21,
+        "endLine": 6,
+        "endChar": 30
+      },
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "145a2f96_f0ef68b7",
@@ -131,6 +173,30 @@
       "writtenOn": "2022-11-25T09:58:17Z",
       "side": 1,
       "message": "Does it need this? Would be nice to keep it as minimal as possible.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 24
+      },
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8afe2ce7_046522b1",
+        "filename": "apex/sample-apk/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-26T16:46:32Z",
+      "side": 1,
+      "message": "Changed to jni_uses_platform_apis",
+      "parentUuid": "145a2f96_f0ef68b7",
       "range": {
         "startLine": 8,
         "startChar": 0,
@@ -164,6 +230,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40ffaaf9_27519f62",
+        "filename": "apex/sample-apk/AndroidManifest.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-26T16:46:32Z",
+      "side": 1,
+      "message": "There is no 34 yet :) Removed from the AndroidManifest.xml, and instead put min_sdk_version and target_sdk_version to Android.bp, where we can specify codenames (e.g. UpsideDownCake)",
+      "parentUuid": "dc823a87_e0ff3b33",
+      "range": {
+        "startLine": 6,
+        "startChar": 37,
+        "endLine": 6,
+        "endChar": 39
+      },
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3544563_b4e682b3",
@@ -187,6 +277,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "723a8354_ddfc8b76",
+        "filename": "apex/sample-apk/sample_binary.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-26T16:46:32Z",
+      "side": 1,
+      "message": "I think it prints to the guest logcat, but I might be wrong",
+      "parentUuid": "b3544563_b4e682b3",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 33
+      },
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8543370_2c199aa4",
@@ -200,6 +314,30 @@
       "writtenOn": "2022-11-25T09:58:17Z",
       "side": 1,
       "message": "Maybe you should call AVmPayload_notifyPayloadReady() here?\nIt proves we got this far, and should show up in host adb logs.",
+      "range": {
+        "startLine": 13,
+        "startChar": 1,
+        "endLine": 13,
+        "endChar": 72
+      },
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79b21673_d8eeda6e",
+        "filename": "apex/sample-apk/sample_binary.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-26T16:46:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8543370_2c199aa4",
       "range": {
         "startLine": 13,
         "startChar": 1,
@@ -256,6 +394,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1aa8cc5d_6a617f74",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-26T16:46:32Z",
+      "side": 1,
+      "message": "I see, will keep it in the meantime to preserve parity with the run-app command.",
+      "parentUuid": "ba19f18a_929e148d",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 24
+      },
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14634f95_91309686",
@@ -269,6 +431,30 @@
       "writtenOn": "2022-11-25T00:23:09Z",
       "side": 1,
       "message": "I guess this path will be different depending on where the virt APEX was built. You may want to retrieve the path dynamically at runtime.",
+      "range": {
+        "startLine": 156,
+        "startChar": 55,
+        "endLine": 156,
+        "endChar": 67
+      },
+      "revId": "9f52f92b21d86b78184716732e259721e38eefb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e637b8a_71671255",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-26T16:46:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14634f95_91309686",
       "range": {
         "startLine": 156,
         "startChar": 55,
