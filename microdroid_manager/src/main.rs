@@ -415,6 +415,7 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
         ));
     }
     mount_extra_apks(&config)?;
+    setup_config_sysprops(&config)?;
 
     // Wait until apex config is done. (e.g. linker configuration for apexes)
     // TODO(jooyung): wait until sys.boot_completed?
@@ -427,11 +428,6 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
         control_service("stop", "tombstoned")?;
     }
 
-    // Start authfs if enabled
-    if config.enable_authfs {
-        control_service("start", "authfs_service")?;
-    }
-
     // Wait until zipfuse has mounted the APK so we can access the payload
     wait_for_property_true(APK_MOUNT_DONE_PROP).context("Failed waiting for APK mount done")?;
 
@@ -442,7 +438,8 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
         ensure!(exitcode.success(), "Unable to prepare encrypted storage. Exitcode={}", exitcode);
     }
 
-    system_properties::write("dev.bootcomplete", "1").context("set dev.bootcomplete")?;
+    wait_for_property_true("dev.bootcomplete").context("failed waiting for dev.bootcomplete")?;
+    info!("boot completed, time to run payload");
     exec_task(task, service).context("Failed to run payload")
 }
 
@@ -679,6 +676,18 @@ fn mount_extra_apks(config: &VmPayloadConfig) -> Result<()> {
         .context("Failed to zipfuse extra apks")?;
     }
 
+    Ok(())
+}
+
+fn setup_config_sysprops(config: &VmPayloadConfig) -> Result<()> {
+    if config.enable_authfs {
+        if let Err(e) = system_properties::write("microdroid.config.enable_authfs", "1") {
+            error!("failed to write microdroid.config.enable_authfs {:?}", e);
+        }
+    }
+    if let Err(e) = system_properties::write("microdroid.config_done", "1") {
+        error!("failed to write microdroid.config_done {:?}", e);
+    }
     Ok(())
 }
 
