@@ -17,6 +17,7 @@ package android.system.virtualmachine {
     method @NonNull public android.system.virtualmachine.VirtualMachineConfig setConfig(@NonNull android.system.virtualmachine.VirtualMachineConfig) throws android.system.virtualmachine.VirtualMachineException;
     method public void stop() throws android.system.virtualmachine.VirtualMachineException;
     method @NonNull public android.system.virtualmachine.VirtualMachineDescriptor toDescriptor() throws android.system.virtualmachine.VirtualMachineException;
+    method public void trimMemory();
     field public static final String MANAGE_VIRTUAL_MACHINE_PERMISSION = "android.permission.MANAGE_VIRTUAL_MACHINE";
     field public static final int STATUS_DELETED = 2; // 0x2
     field public static final int STATUS_RUNNING = 1; // 0x1
