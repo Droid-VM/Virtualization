@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11bb3a0e_c5d474c4",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-28T16:02:37Z",
+      "side": 1,
+      "message": "Yeah, that is my inclination, as it avoids losing information. Do you think that makes sense?",
+      "parentUuid": "cf79c392_6d0c401d",
+      "revId": "7e0a16ffa484ad48c1c200afe5f90c8f21e416bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ed1f5ba7_fbbb0fdf",
         "filename": "libs/libfdt/src/lib.rs",
         "patchSetId": 3
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Do you mean like this:\n```\nlet Some(len) \u003d fdt_err_or_option(len)? else {\n    return Ok(None); // Property was not found.\n};\nlet len \u003d usize::try_from(len).map_err(|_| FdtError::Internal)?;\n\nif prop.is_null() {\n    // We expected an error code in len but still received a valid value?!\n    return Err(FdtError::Internal);\n}\n```\n? This seems to compile even without setting `#[feature(let_else)]`?!",
       "parentUuid": "ed1f5ba7_fbbb0fdf",
+      "revId": "7e0a16ffa484ad48c1c200afe5f90c8f21e416bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aec8bad_fb53d84f",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-28T16:02:37Z",
+      "side": 1,
+      "message": "Yes, I think that would be clearer. And huh okay, I thought we weren\u0027t on 1.65 yet, but if it works then great!",
+      "parentUuid": "2fbcc764_ba838ca5",
       "revId": "7e0a16ffa484ad48c1c200afe5f90c8f21e416bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
