@@ -16,6 +16,24 @@
       "message": "Do these run as part of CTS? If not, how do you validate implementations on OEM devices?",
       "revId": "bcc2ec27fe5e722e9ca250e3c7c6125c2f193457",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d312644f_98af1b04",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-28T15:19:18Z",
+      "side": 1,
+      "message": "Yes, they do!\nSee e.g. cs/android-internal/packages/modules/Virtualization/tests/testapk/AndroidTest.xml?l\u003d17\n\nPlus a few others. And we have our own CDD section to justify that: https://source.android.com/docs/compatibility/13/android-13-cdd#917_android_virtualization_framework",
+      "parentUuid": "e73b1080_467bee5e",
+      "revId": "bcc2ec27fe5e722e9ca250e3c7c6125c2f193457",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
