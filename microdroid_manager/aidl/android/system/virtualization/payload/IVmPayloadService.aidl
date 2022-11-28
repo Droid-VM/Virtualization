@@ -27,6 +27,12 @@ interface IVmPayloadService {
     /** Path to the APK contents path. */
     const String VM_APK_CONTENTS_PATH = "/mnt/apk";
 
+    /**
+     * Path to the encrypted storage. Note this will not exists if encryptedstorage
+     * is not enabled (by the config)
+     */
+    const String ENCRYPTEDSTORE_MOUNTPOINT = "/mnt/encryptedstore";
+
     /** Notifies that the payload is ready to serve. */
     void notifyPayloadReady();
 

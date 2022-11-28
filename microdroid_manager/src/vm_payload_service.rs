@@ -24,12 +24,15 @@ use log::{error, info};
 use openssl::hkdf::hkdf;
 use openssl::md::Md;
 use rpcbinder::RpcServer;
+// use std::path::PathBuf;
+// use std::os::unix::ffi::OsStrExt;
 
 /// Implementation of `IVmPayloadService`.
 struct VmPayloadService {
     allow_restricted_apis: bool,
     virtual_machine_service: Strong<dyn IVirtualMachineService>,
     dice: DiceContext,
+    // encrypted_storage_path: Option<PathBuf>,
 }
 
 impl IVmPayloadService for VmPayloadService {
@@ -64,6 +67,11 @@ impl IVmPayloadService for VmPayloadService {
         self.check_restricted_apis_allowed()?;
         Ok(self.dice.cdi_attest.to_vec())
     }
+
+    // fn getEncryptedStoragePath(&self) -> binder::Result<Vec<u8>> {
+    //     self.check_restricted_apis_allowed()?;
+    //     Ok(self.encrypted_storage_path.clone().map_or(vec![], |p| p.as_os_str().as_bytes().to_vec()))
+    // }
 }
 
 impl Interface for VmPayloadService {}
@@ -74,8 +82,10 @@ impl VmPayloadService {
         allow_restricted_apis: bool,
         vm_service: Strong<dyn IVirtualMachineService>,
         dice: DiceContext,
+        // encrypted_storage_path: Option<PathBuf>,
     ) -> Self {
         Self { allow_restricted_apis, virtual_machine_service: vm_service, dice }
+        // Self { allow_restricted_apis, virtual_machine_service: vm_service, dice, encrypted_storage_path }
     }
 
     fn check_restricted_apis_allowed(&self) -> binder::Result<()> {
@@ -93,9 +103,11 @@ pub(crate) fn register_vm_payload_service(
     allow_restricted_apis: bool,
     vm_service: Strong<dyn IVirtualMachineService>,
     dice: DiceContext,
+    // encrypted_storage_path: Option<PathBuf>,
 ) -> Result<()> {
     let vm_payload_binder = BnVmPayloadService::new_binder(
         VmPayloadService::new(allow_restricted_apis, vm_service, dice),
+        // VmPayloadService::new(allow_restricted_apis, vm_service, dice, encrypted_storage_path),
         BinderFeatures::default(),
     );
 
