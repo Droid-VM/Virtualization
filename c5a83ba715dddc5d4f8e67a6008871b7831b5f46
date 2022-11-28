@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc8589c9_69b6b58b",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-28T13:39:20Z",
+      "side": 1,
+      "message": "I got it from [here](https://opensocdebug.readthedocs.io/en/latest/02_spec/07_modules/dem_uart/uartspec.html) after a quick search but now reading the datasheet, the 16550 seems to have 3 bits of register address so I guess it should be `8`.\n\nAnyhow, diving into `vmbase`, note that we actually only use [one single register](https://android.git.corp.google.com/platform/packages/modules/Virtualization/+/refs/heads/master/vmbase/src/uart.rs#44) so that value isn\u0027t representative of what `pvmfw`/`vmbase` actually does.\n\nFurthermore, given the way the `aarch64_paging` crate works, the actual value of `CONSOLE_LEN` has no impact on the behavior of the code as long as\n```\n0 \u003c CONSOLE_LEN \u003c NEXT_PAGE(BASE_ADDRESS) - BASE_ADDRESS\n```\nbecause `map_range` will extend and align its input range to the address range of the pages that contain it. In PS-1, I was using a `map_page` function to avoid having to deal with this detail.\n\nInstead, I\u0027ve set `CONSOLE_LEN` to 1 and added a comment.",
+      "parentUuid": "3e65acb6_1726f570",
+      "range": {
+        "startLine": 99,
+        "startChar": 69,
+        "endLine": 99,
+        "endChar": 70
+      },
+      "revId": "c5a83ba715dddc5d4f8e67a6008871b7831b5f46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de79f5c7_6719f254",
