@@ -29,6 +29,7 @@ use android_system_virtualmachineservice::aidl::android::system::virtualmachines
 use android_system_virtualization_payload::aidl::android::system::virtualization::payload::IVmPayloadService::{
     VM_APK_CONTENTS_PATH,
     VM_PAYLOAD_SERVICE_SOCKET_NAME,
+    ENCRYPTEDSTORE_MOUNTPOINT,
 };
 use anyhow::{anyhow, bail, ensure, Context, Error, Result};
 use apkverify::{get_public_key_der, verify, V4Signature};
@@ -86,7 +87,6 @@ const ENCRYPTEDSTORE_BACKING_DEVICE: &str = "/dev/block/by-name/encryptedstore";
 const ENCRYPTEDSTORE_BIN: &str = "/system/bin/encryptedstore";
 const ENCRYPTEDSTORE_KEY_IDENTIFIER: &str = "encryptedstore_key";
 const ENCRYPTEDSTORE_KEYSIZE: u32 = 32;
-const ENCRYPTEDSTORE_MOUNTPOINT: &str = "/mnt/encryptedstore";
 
 #[derive(thiserror::Error, Debug)]
 enum MicrodroidError {
@@ -435,12 +435,15 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
     // Wait until zipfuse has mounted the APK so we can access the payload
     wait_for_property_true(APK_MOUNT_DONE_PROP).context("Failed waiting for APK mount done")?;
 
-    register_vm_payload_service(allow_restricted_apis, service.clone(), dice_context)?;
-
+    // Wait for encryptedstore to finish mounting the storage (if enabled) before setting
+    // dev.bootcomplete. Reason is init stops uneventd after bootcomplete.
+    // Encryptedstore, however requires ueventd
     if let Some(mut child) = encryptedstore_child {
         let exitcode = child.wait().context("Wait for encryptedstore child")?;
         ensure!(exitcode.success(), "Unable to prepare encrypted storage. Exitcode={}", exitcode);
     }
+
+    register_vm_payload_service(allow_restricted_apis, service.clone(), dice_context)?;
 
     system_properties::write("dev.bootcomplete", "1").context("set dev.bootcomplete")?;
     exec_task(task, service).context("Failed to run payload")
