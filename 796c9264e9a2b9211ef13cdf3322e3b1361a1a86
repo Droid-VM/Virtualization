@@ -16,6 +16,24 @@
       "message": "Hmm. That means the permissions won\u0027t exist on non-AVF devices, which seems like a bad thing?\nMaybe we should instead whitelist it? It\u0027s not exactly big.",
       "revId": "796c9264e9a2b9211ef13cdf3322e3b1361a1a86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b24a64a6_83b78005",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-28T15:36:45Z",
+      "side": 1,
+      "message": "My line of reasoning was: since the API is a no-op on devices without AVF support (e.g. `context.getSystemService(VirtualMachineManager.class)` will return null), then the permissions are not useful as well. \n\nBut I\u0027m OK with allow listing as well. Let me prepare a change",
+      "parentUuid": "95b4f5a9_7e7d5a55",
+      "revId": "796c9264e9a2b9211ef13cdf3322e3b1361a1a86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
