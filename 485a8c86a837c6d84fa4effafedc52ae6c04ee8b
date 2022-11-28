@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "107a7034_a7fe3db6",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-28T19:35:15Z",
+      "side": 1,
+      "message": "Ex.mapping_again_keeps_data() would mov keyset.cipher which is used in other functions too. So this needed a Copy trait.\n\nAdding debug....",
+      "parentUuid": "24d676e0_dc3a37af",
+      "range": {
+        "startLine": 37,
+        "startChar": 16,
+        "endLine": 37,
+        "endChar": 20
+      },
+      "revId": "485a8c86a837c6d84fa4effafedc52ae6c04ee8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65714650_735c6af2",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-28T09:41:44Z",
       "side": 1,
       "message": "Why not just have a function to return the key size?\n\nWhich I think could be marked as a const function (as could get_kernel_crypto_name, probably) which would allow the result still to be used as a constant, and the pub const values above wouldn\u0027t need to be pub any more.",
+      "range": {
+        "startLine": 54,
+        "startChar": 7,
+        "endLine": 54,
+        "endChar": 24
+      },
+      "revId": "485a8c86a837c6d84fa4effafedc52ae6c04ee8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "859685e6_dc2ceb40",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-28T19:35:15Z",
+      "side": 1,
+      "message": "I wanted to do the key validation in crypt module.. The reason being, kernel identifies the underlying block cipher from key size. So, if by mistake the client sends 32 bytes key AES256XTS, the kernel would actually do  AES128XTS without throwing any error.",
+      "parentUuid": "65714650_735c6af2",
       "range": {
         "startLine": 54,
         "startChar": 7,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66e820ac_12897ca9",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-28T19:35:15Z",
+      "side": 1,
+      "message": "Ack. Thanks. Was the result of blindly copying",
+      "parentUuid": "f7e6534f_fda07c01",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 52
+      },
+      "revId": "485a8c86a837c6d84fa4effafedc52ae6c04ee8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e84065f6_af90ce32",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-11-28T09:41:44Z",
       "side": 1,
       "message": "Should this comment be attached to mapping_again_keeps_data() ?",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 280,
+        "endChar": 25
+      },
+      "revId": "485a8c86a837c6d84fa4effafedc52ae6c04ee8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43fde7ae_e69198fe",
+        "filename": "libs/devicemapper/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-28T19:35:15Z",
+      "side": 1,
+      "message": "delete_device()  is used in all tests, so this is more generic comment, lemme move it `delete_device` definition",
+      "parentUuid": "e84065f6_af90ce32",
       "range": {
         "startLine": 278,
         "startChar": 0,
