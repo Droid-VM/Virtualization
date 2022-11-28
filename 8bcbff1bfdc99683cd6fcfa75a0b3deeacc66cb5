@@ -71,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12fd10db_98fa991e",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-28T13:39:40Z",
+      "side": 1,
+      "message": "Yes, calling it twice is far from ideal. I\u0027m tolerating this implementation because we will get rid of `legacy` before the release, removing the need for the second call.\n\nBut unfortunately, the code you suggest (which was my first implementation) is (IMO erroneously) rejected by the borrow checked, as documented in the body of `is_valid_config`, because it sees `data` (a `\u0026mut`) being used in `config::Config::new(data)` and in your \"`...`\" and considers that as multiple mutable borrows:\n```\nerror[E0499]: cannot borrow `*data` as mutable more than once at a time\n   --\u003e packages/modules/Virtualization/pvmfw/src/entry.rs:316:47\n    |\n306 | impl\u003c\u0027a\u003e AppendedPayload\u003c\u0027a\u003e {\n    |      -- lifetime `\u0027a` defined here\n...\n310 |         match config::Config::new(data) {\n    |               -------------------------\n    |               |                   |\n    |               |                   first mutable borrow occurs here\n    |               argument requires that `*data` is borrowed for `\u0027a`\n...\n316 |                     Some(Self::LegacyBcc(\u0026mut data[..BCC_SIZE]))\n    |                                               ^^^^ second mutable borrow occurs here\n```",
+      "parentUuid": "c0c66cf8_b5ee2484",
+      "range": {
+        "startLine": 426,
+        "startChar": 0,
+        "endLine": 427,
+        "endChar": 66
+      },
+      "revId": "8bcbff1bfdc99683cd6fcfa75a0b3deeacc66cb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9720e803_0d727b37",
