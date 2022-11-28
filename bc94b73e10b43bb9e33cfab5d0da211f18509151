@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f9db5c8_c18f8c0e",
+        "filename": "libs/libfdt/src/compat.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-28T22:39:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bf4d380_81f8ef82",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 94
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7c791bf_c0887854",
@@ -528,6 +552,24 @@
       "side": 1,
       "message": "\u003e Though why does failing to apply an overlay result in a corrupt FDT?\n\nBecause `fdt_overlay_apply` doesn\u0027t patch the DT atomically so can leave it in an intermediate state. As it patches phandles sequentially, I suppose that running `overlay_fixup_phandle` on only half of a DT would break phandles references between its halves.\n\n\u003e The caller still has the `\u0026mut Fdt` that it passed in, which I guess is now corrupt.\n\nYou\u0027re right! That\u0027s not really an issue with this implementation as the caller then `?` the result, causing the reference to go out of scope, but this still feels fragile.\n\nAny idea on how to address it? Make `apply_debug_policy` unsafe for the same reason? intentionally",
       "parentUuid": "6ce9e61e_b4d06b1c",
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23d5c1bb_19819d9f",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-28T22:39:45Z",
+      "side": 1,
+      "message": "Ack; see [related comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2314779/comment/cfb7ea0d_964e187c/).",
+      "parentUuid": "9aa32115_637ba0b2",
       "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
