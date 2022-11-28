@@ -1,0 +1,14 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+rust_library {
+    name: "libavb_nostd_rust",
+    crate_name: "avb_nostd",
+    srcs: ["src/lib.rs"],
+    no_stdlibs: true,
+    host_supported: true,
+    rustlibs: [
+        "libavb_bindgen",
+    ],
+}
