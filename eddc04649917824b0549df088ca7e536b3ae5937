@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbb1bbad_5a716249",
+        "filename": "docs/getting_started/index.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-28T16:15:05Z",
+      "side": 1,
+      "message": "So this is what prevents `hypervisor.pvmfw.path` from being used on `eng` devices?",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 8
+      },
+      "revId": "eddc04649917824b0549df088ca7e536b3ae5937",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4abe57dd_71f1e26e",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-28T16:15:05Z",
+      "side": 1,
+      "message": "Noob question regarding SELinux: would it be possible for VS to verify that the arbitrary `pvmfw_path` that it is passing on the CLI is a valid file that can be read by crosvm and, if not, fail early?",
+      "range": {
+        "startLine": 606,
+        "startChar": 64,
+        "endLine": 606,
+        "endChar": 74
+      },
+      "revId": "eddc04649917824b0549df088ca7e536b3ae5937",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9444731a_1d3609bd",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-28T16:15:05Z",
+      "side": 1,
+      "message": "If `read` returns a `Result`, don\u0027t we want to `?` it, or at least log it?\n\ne.g.\n```\nif let Some(pvmfw_path) \u003d system_properties::read(\"hypervisor.pvmfw.path\")? {\n    command.arg(\"--protected-vm-with-firmware\").arg(pvmfw_path)\n} else {\n    command.arg(\"--protected-vm\")\n}\n```",
+      "range": {
+        "startLine": 608,
+        "startChar": 12,
+        "endLine": 608,
+        "endChar": 13
+      },
+      "revId": "eddc04649917824b0549df088ca7e536b3ae5937",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
