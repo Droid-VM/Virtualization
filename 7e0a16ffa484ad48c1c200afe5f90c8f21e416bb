@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7c75c80_4636eb0a",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-28T15:07:10Z",
+      "side": 1,
+      "message": "Is it possible this could return an empty slice? If so, we might want to distinguish that from the property not existing at all. (The same comment applies to `memory(\u0026self)` below.)",
+      "revId": "7e0a16ffa484ad48c1c200afe5f90c8f21e416bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed1f5ba7_fbbb0fdf",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-28T15:07:10Z",
+      "side": 1,
+      "message": "This looks like a good place to use let-else (https://rust-lang.github.io/rfcs/3137-let-else.html), once we\u0027re on Rust 1.65 (http://b/250026064). Leave a TODO for it.",
+      "revId": "7e0a16ffa484ad48c1c200afe5f90c8f21e416bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c06527b1_bd7e47c3",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-11-28T15:07:10Z",
+      "side": 1,
+      "message": "Could you do `node.device_type()? !\u003d Some(device_type)` instead? I think it would be clearer.",
+      "revId": "7e0a16ffa484ad48c1c200afe5f90c8f21e416bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
