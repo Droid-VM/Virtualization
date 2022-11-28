@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c0972ad_8bc0eeef",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-28T13:47:21Z",
+      "side": 1,
+      "message": "\u003e Should we at least log it?\n\nDone\n\n\u003e Also, then you probably don\u0027t want to rethrow the RemoteException? \n\nThat\u0027s different - that should only happen if VS dies, which is definitely not expected.",
+      "parentUuid": "23f44d34_249ffe88",
+      "range": {
+        "startLine": 799,
+        "startChar": 14,
+        "endLine": 800,
+        "endChar": 39
+      },
+      "revId": "959402702ef4cf5f8b9b397f064cb51a794e6b03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c916f359_2af25fa3",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-28T13:20:48Z",
       "side": 1,
       "message": "assetThat(vm.getStatus()).isEqualTo(STATUS_STOPPED)\n\nditto for the assertions below",
+      "range": {
+        "startLine": 165,
+        "startChar": 12,
+        "endLine": 165,
+        "endChar": 57
+      },
+      "revId": "959402702ef4cf5f8b9b397f064cb51a794e6b03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa244d37_4bad1af3",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-28T13:47:21Z",
+      "side": 1,
+      "message": "Well, duh.\n\nErrorProne just told me the same thing, only somewhat belatedly.",
+      "parentUuid": "c916f359_2af25fa3",
       "range": {
         "startLine": 165,
         "startChar": 12,
