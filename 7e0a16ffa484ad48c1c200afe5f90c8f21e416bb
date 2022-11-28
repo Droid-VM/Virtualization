@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f871bc1_1a76dd3a",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-28T22:37:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11bb3a0e_c5d474c4",
+      "revId": "7e0a16ffa484ad48c1c200afe5f90c8f21e416bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed1f5ba7_fbbb0fdf",
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "Yes, I think that would be clearer. And huh okay, I thought we weren\u0027t on 1.65 yet, but if it works then great!",
       "parentUuid": "2fbcc764_ba838ca5",
+      "revId": "7e0a16ffa484ad48c1c200afe5f90c8f21e416bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d51b7b5_12e36500",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-28T22:37:31Z",
+      "side": 1,
+      "message": "\u003e if it works then great!\n\nIt doesn\u0027t, actually...\n\nI updated the code and added `#![feature(let_else)]` to the library.",
+      "parentUuid": "2aec8bad_fb53d84f",
       "revId": "7e0a16ffa484ad48c1c200afe5f90c8f21e416bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
