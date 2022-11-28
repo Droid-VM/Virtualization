@@ -1143,6 +1143,11 @@ public class VirtualMachine implements AutoCloseable {
             throw new VirtualMachineException("failed to transfer instance image", e);
         }
     }
+
+    /* TestAPI to trigger memory reclaim. */
+    public void trimMemory() {
+        mAPICallbacks.onTrimMemory(ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW);
+    }
 }
 /*
  * Local variables:

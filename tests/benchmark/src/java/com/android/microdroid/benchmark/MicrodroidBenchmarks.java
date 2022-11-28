@@ -384,6 +384,115 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         }
     }
 
+    @Test
+    public void testMemoryReclaim() throws Exception {
+        final String vmName = "test_vm_mem_reclaim";
+        VirtualMachineConfig config = mInner.newVmConfigBuilder()
+                .setPayloadConfigPath("assets/vm_config_io.json")
+                .setDebugLevel(DEBUG_LEVEL_NONE)
+                .setMemoryMib(256)
+                .build();
+        mInner.forceCreateNewVirtualMachine(vmName, config);
+        VirtualMachine vm = mInner.getVirtualMachineManager().get(vmName);
+        MemoryReclaimListener listener = new MemoryReclaimListener(this::executeCommand);
+        BenchmarkVmListener.create(listener).runToFinish(TAG, vm);
+
+        double mem_overall = 256.0;
+        double mem_total = (double) listener.mMemTotal / 1024.0;
+        double mem_free = (double) listener.mMemFree / 1024.0;
+        double mem_avail = (double) listener.mMemAvailable / 1024.0;
+        double mem_buffers = (double) listener.mBuffers / 1024.0;
+        double mem_cached = (double) listener.mCached / 1024.0;
+        double mem_slab = (double) listener.mSlab / 1024.0;
+        double mem_crosvm_host_rss = (double) listener.mCrosvmHostRss / 1024.0;
+        double mem_crosvm_host_pss = (double) listener.mCrosvmHostPss / 1024.0;
+        double mem_crosvm_guest_rss = (double) listener.mCrosvmGuestRss / 1024.0;
+        double mem_crosvm_guest_pss = (double) listener.mCrosvmGuestPss / 1024.0;
+
+        double mem_kernel = mem_overall - mem_total;
+        double mem_used = mem_total - mem_free - mem_buffers - mem_cached - mem_slab;
+        double mem_unreclaimable = mem_total - mem_avail;
+
+        Bundle bundle = new Bundle();
+        bundle.putDouble(METRIC_NAME_PREFIX + "mem_kernel_MB", mem_kernel);
+        bundle.putDouble(METRIC_NAME_PREFIX + "mem_used_MB", mem_used);
+        bundle.putDouble(METRIC_NAME_PREFIX + "mem_buffers_MB", mem_buffers);
+        bundle.putDouble(METRIC_NAME_PREFIX + "mem_cached_MB", mem_cached);
+        bundle.putDouble(METRIC_NAME_PREFIX + "mem_slab_MB", mem_slab);
+        bundle.putDouble(METRIC_NAME_PREFIX + "mem_unreclaimable_MB", mem_unreclaimable);
+        bundle.putDouble(METRIC_NAME_PREFIX + "mem_crosvm_host_rss_MB", mem_crosvm_host_rss);
+        bundle.putDouble(METRIC_NAME_PREFIX + "mem_crosvm_host_pss_MB", mem_crosvm_host_pss);
+        bundle.putDouble(METRIC_NAME_PREFIX + "mem_crosvm_guest_rss_MB", mem_crosvm_guest_rss);
+        bundle.putDouble(METRIC_NAME_PREFIX + "mem_crosvm_guest_pss_MB", mem_crosvm_guest_pss);
+        mInstrumentation.sendStatus(0, bundle);
+    }
+
+    private static class MemoryReclaimListener implements BenchmarkVmListener.InnerListener {
+        MemoryReclaimListener(Function<String, String> shellExecutor) {
+            mShellExecutor = shellExecutor;
+        }
+
+        public Function<String, String> mShellExecutor;
+
+        public long mMemTotal;
+        public long mMemFree;
+        public long mMemAvailable;
+        public long mBuffers;
+        public long mCached;
+        public long mSlab;
+
+        public long mCrosvmHostRss;
+        public long mCrosvmHostPss;
+        public long mCrosvmGuestRss;
+        public long mCrosvmGuestPss;
+
+        @Override
+        public void onPayloadReady(VirtualMachine vm, IBenchmarkService service)
+                throws RemoteException {
+            service.allocAnonMemory(256);
+            vm.trimMemory();
+            mMemTotal = service.getMemInfoEntry("MemTotal");
+            mMemFree = service.getMemInfoEntry("MemFree");
+            mMemAvailable = service.getMemInfoEntry("MemAvailable");
+            mBuffers = service.getMemInfoEntry("Buffers");
+            mCached = service.getMemInfoEntry("Cached");
+            mSlab = service.getMemInfoEntry("Slab");
+
+            try {
+                List<Integer> crosvmPids =
+                        ProcessUtil.getProcessMap(mShellExecutor).entrySet().stream()
+                                .filter(e -> e.getValue().contains("crosvm"))
+                                .map(e -> e.getKey())
+                                .collect(java.util.stream.Collectors.toList());
+                if (crosvmPids.size() != 1) {
+                    throw new RuntimeException(
+                            "expected to find exactly one crosvm processes, found "
+                                    + crosvmPids.size());
+                }
+
+                mCrosvmHostRss = 0;
+                mCrosvmHostPss = 0;
+                mCrosvmGuestRss = 0;
+                mCrosvmGuestPss = 0;
+                for (ProcessUtil.SMapEntry entry :
+                        ProcessUtil.getProcessSmaps(crosvmPids.get(0), mShellExecutor)) {
+                    long rss = entry.metrics.get("Rss");
+                    long pss = entry.metrics.get("Pss");
+                    if (entry.name.contains("crosvm_guest")) {
+                        mCrosvmGuestRss += rss;
+                        mCrosvmGuestPss += pss;
+                    } else {
+                        mCrosvmHostRss += rss;
+                        mCrosvmHostPss += pss;
+                    }
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "Error inside onPayloadReady():" + e);
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     private static class VsockListener implements BenchmarkVmListener.InnerListener {
         private static final int NUM_BYTES_TO_TRANSFER = 48 * 1024 * 1024;
 
