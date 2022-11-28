@@ -22,6 +22,30 @@
       },
       "revId": "a60eab3907753c342afd19cdc824a77a7b425653",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1d609e4_090c09b6",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-28T19:34:04Z",
+      "side": 1,
+      "message": "It does actually needs to be 32. Thanks for noticing. We even have a check below to ensure that (:",
+      "parentUuid": "fcf1b493_85b7699f",
+      "range": {
+        "startLine": 48,
+        "startChar": 30,
+        "endLine": 48,
+        "endChar": 65
+      },
+      "revId": "a60eab3907753c342afd19cdc824a77a7b425653",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
