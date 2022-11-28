@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9bf4d380_81f8ef82",
+        "filename": "libs/libfdt/src/compat.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-28T01:20:35Z",
+      "side": 1,
+      "message": "What I suggested isn\u0027t linking the Bionic impl, but copying the file into here.",
+      "parentUuid": "53134833_bf6d25ec",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 94
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7c791bf_c0887854",
         "filename": "libs/libfdt/src/compat.rs",
         "patchSetId": 2
@@ -320,6 +344,30 @@
       "side": 1,
       "message": "Not sure I follow: why would we want `self.bytes` to point to something else as `fdt_overlay_apply` modifies the FDT in-place?",
       "parentUuid": "2b948595_679602a6",
+      "range": {
+        "startLine": 553,
+        "startChar": 0,
+        "endLine": 557,
+        "endChar": 5
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15ae4f4e_07eae353",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-28T01:20:35Z",
+      "side": 1,
+      "message": "I thought fdt_overlay_apply will likely to increase the size of the array (because we are adding more data to it).",
+      "parentUuid": "3a7a8085_1edc88d6",
       "range": {
         "startLine": 553,
         "startChar": 0,
