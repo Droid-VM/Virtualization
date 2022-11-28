@@ -143,6 +143,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f01691c_26d0563f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-11-28T18:57:28Z",
+      "side": 1,
+      "message": "\u003e how thee bigger sector size affect the sparse file usage \u0026 how the fragmentation can cause more (space) overhead in the backing storage.\n\nIt won\u0027t make a difference in those areas, since ext4 already uses 4096-byte blocks by default.",
+      "parentUuid": "dfde1413_d28248a0",
+      "range": {
+        "startLine": 14,
+        "startChar": 21,
+        "endLine": 14,
+        "endChar": 44
+      },
+      "revId": "752dd637fdad296d4bedf90313d63b5a310ce1c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0a0e1d4_8aa8a001",
