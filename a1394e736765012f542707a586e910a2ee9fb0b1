@@ -177,6 +177,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e46876d7_aa41cecd",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-28T13:39:32Z",
+      "side": 1,
+      "message": "Done; I wasn\u0027t sure how to lay it out to simplify adding support for memory sharing and mapping MMIO based on the DT nodes. Overall, I\u0027m not too happy with this architecture and moving forward, we should merge `PageTable` and `MemoryTracker` into a single object memory management object taking care of all these issues.",
+      "parentUuid": "d47cb199_384dc012",
+      "revId": "a1394e736765012f542707a586e910a2ee9fb0b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c58c276f_469688b8",
@@ -320,6 +338,30 @@
       "side": 1,
       "message": "Because `/memory` or `/chosen` are [standard nodes](https://devicetree-specification.readthedocs.io/en/stable/devicenodes.html) while these properties aren\u0027t.",
       "parentUuid": "7339d672_fa0b633e",
+      "range": {
+        "startLine": 21,
+        "startChar": 7,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "revId": "a1394e736765012f542707a586e910a2ee9fb0b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc2da5ba_d42d7592",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-28T13:39:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "11ddbe7f_0a82d1d8",
       "range": {
         "startLine": 21,
         "startChar": 7,
