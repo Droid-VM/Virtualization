@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9682ee0b_1f276aec",
+        "filename": "libs/avb/std/testdata/testkey_rsa8192.pem",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-28T16:40:37Z",
+      "side": 0,
+      "message": "This is out-of-scope for this CL but instead of duplicating these files, could we use (and define, if necessary) the corresponding [`avb_testkey_rsaX`](https://source.corp.google.com/android/external/avb/test/Android.bp;l\u003d47) Soong targets? Can you do it in a parent commit so that we don\u0027t need to drag these around in this CL?",
+      "revId": "bcc2ec27fe5e722e9ca250e3c7c6125c2f193457",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

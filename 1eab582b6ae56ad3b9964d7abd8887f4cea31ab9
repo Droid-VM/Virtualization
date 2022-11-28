@@ -16,6 +16,63 @@
       "message": "Hey Pierre, PTAL.",
       "revId": "1eab582b6ae56ad3b9964d7abd8887f4cea31ab9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf7d2b4f_3cdbdd7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-28T16:40:37Z",
+      "side": 1,
+      "message": "Instead of splitting the crate into 2 independent crates (`_std` depending on `_nostd`), crates typically have a `std` feature and hide any part of the implementation relying on `std` behind that feature e.g.\n```\n#![cfg_attr(not(feature \u003d \"std\"), no_std)]\n```\n\nYou could then have 2 flavors of the crate in the (single) Android.bp: `libavb_nostd`(`_rust`) target wouldn\u0027t enable the `std` feature (but would `no_stdlibs: true`) while a non-`_nostd` Soong target would set `std` but not `no_stdlibs`. As long as the interface provided by `_nostd` is a subset of the other one, they can both be export using the common name `avb` (i.e. no need for a separate `avb_nostd`)!",
+      "revId": "1eab582b6ae56ad3b9964d7abd8887f4cea31ab9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0f77a22_3bcf0357",
+        "filename": "libs/avb/nostd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-28T16:40:37Z",
+      "side": 1,
+      "message": "I can tell that you\u0027ve re-used the \"`_rust`\" suffix from \"`libvbmeta_rust`\" but I haven\u0027t seen another Rust library that had it; could we remove it?",
+      "range": {
+        "startLine": 6,
+        "startChar": 23,
+        "endLine": 6,
+        "endChar": 28
+      },
+      "revId": "1eab582b6ae56ad3b9964d7abd8887f4cea31ab9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b651f17_c273dd05",
+        "filename": "libs/avb/std/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-28T16:40:37Z",
+      "side": 1,
+      "message": "This is a modified version of `libs/vbmeta/src/lib.rs`; do you think you could split this commit into 2 (one that moves the `*.rs` files and the other one that makes use of `no_std`) so that we keep its git history?",
+      "revId": "1eab582b6ae56ad3b9964d7abd8887f4cea31ab9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
