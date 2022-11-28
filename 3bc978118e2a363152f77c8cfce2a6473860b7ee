@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c6a16f1_3861a5fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-28T16:47:42Z",
+      "side": 1,
+      "message": "Nit: \u0026\u0026 is confusing here. Maybe \\ instead?\n\nAnd I\u0027m not sure you need to explain the test line. How about\n\nTest: atest com.android.microdroid.test.MicrodroidHostTests -- \\\\\n    --module-arg MicrodroidHostTestCases:set-option:pvmfw:pvmfw.img",
+      "range": {
+        "startLine": 10,
+        "startChar": 58,
+        "endLine": 10,
+        "endChar": 60
+      },
+      "revId": "3bc978118e2a363152f77c8cfce2a6473860b7ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82690de5_9da94ee9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-28T16:47:42Z",
+      "side": 1,
+      "message": "I\u0027ve never come across @Option before, but it looks like it does the job.",
+      "revId": "3bc978118e2a363152f77c8cfce2a6473860b7ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bed116bf_293622fd",
+        "filename": "docs/getting_started/index.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-28T16:47:42Z",
+      "side": 1,
+      "message": "Maybe put `### Custom pvmfw` on a line before this?\nIt\u0027s a pretty specialized use case.",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 8
+      },
+      "revId": "3bc978118e2a363152f77c8cfce2a6473860b7ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1f0e267_ce69c262",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-28T16:47:42Z",
+      "side": 1,
+      "message": "Nullability is generally a bad idea. Default it to \"\", and then you don\u0027t need the null checks?",
+      "range": {
+        "startLine": 69,
+        "startChar": 49,
+        "endLine": 69,
+        "endChar": 53
+      },
+      "revId": "3bc978118e2a363152f77c8cfce2a6473860b7ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c09bf9bf_497052d2",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/MicrodroidHostTestCaseBase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-28T16:47:42Z",
+      "side": 1,
+      "message": "Does it need to be public? There seem to be examples where it\u0027s private",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 10
+      },
+      "revId": "3bc978118e2a363152f77c8cfce2a6473860b7ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
