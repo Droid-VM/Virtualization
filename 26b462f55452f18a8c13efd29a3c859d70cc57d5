@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5c0ad7a_1feda039",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-28T00:29:54Z",
+      "side": 1,
+      "message": "please fix",
+      "range": {
+        "startLine": 78,
+        "startChar": 11,
+        "endLine": 78,
+        "endChar": 17
+      },
+      "revId": "26b462f55452f18a8c13efd29a3c859d70cc57d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "673a1826_8913a7c7",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-28T00:29:54Z",
+      "side": 1,
+      "message": "Remove this as you define boot, but not early-boot?",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 22
+      },
+      "revId": "26b462f55452f18a8c13efd29a3c859d70cc57d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd2864bd_1b7e8329",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-28T00:29:54Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we return the error to the callee? e.g.\n\n```\nsystem_properties::write(...).context(\"failed to write ...\")?;\n```",
+      "range": {
+        "startLine": 683,
+        "startChar": 0,
+        "endLine": 690,
+        "endChar": 5
+      },
+      "revId": "26b462f55452f18a8c13efd29a3c859d70cc57d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
