@@ -16,6 +16,98 @@
       "message": "I think the hctr2 tests are gonna fail in panther in presubmits because they dont have 14.5* kernel, but lets see. We will disable them for panther",
       "revId": "485a8c86a837c6d84fa4effafedc52ae6c04ee8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24d676e0_dc3a37af",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-28T09:41:44Z",
+      "side": 1,
+      "message": "Probably worth adding Debug too.\n(Supporting Copy seems like a good thing, but why do you actually need it here?)",
+      "range": {
+        "startLine": 37,
+        "startChar": 16,
+        "endLine": 37,
+        "endChar": 20
+      },
+      "revId": "485a8c86a837c6d84fa4effafedc52ae6c04ee8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65714650_735c6af2",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-28T09:41:44Z",
+      "side": 1,
+      "message": "Why not just have a function to return the key size?\n\nWhich I think could be marked as a const function (as could get_kernel_crypto_name, probably) which would allow the result still to be used as a constant, and the pub const values above wouldn\u0027t need to be pub any more.",
+      "range": {
+        "startLine": 54,
+        "startChar": 7,
+        "endLine": 54,
+        "endChar": 24
+      },
+      "revId": "485a8c86a837c6d84fa4effafedc52ae6c04ee8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7e6534f_fda07c01",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-28T09:41:44Z",
+      "side": 1,
+      "message": "Doesn\u0027t seem relevant here.",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 52
+      },
+      "revId": "485a8c86a837c6d84fa4effafedc52ae6c04ee8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e84065f6_af90ce32",
+        "filename": "libs/devicemapper/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-28T09:41:44Z",
+      "side": 1,
+      "message": "Should this comment be attached to mapping_again_keeps_data() ?",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 280,
+        "endChar": 25
+      },
+      "revId": "485a8c86a837c6d84fa4effafedc52ae6c04ee8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
