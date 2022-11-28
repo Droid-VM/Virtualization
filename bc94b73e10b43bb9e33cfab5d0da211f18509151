@@ -427,6 +427,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10947b22_35307e9b",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-28T06:52:36Z",
+      "side": 1,
+      "message": "Got it. Then doesn\u0027t the in-line patch of the DTBO affect other future VMs? Will they see the patched DTBO, or will they see the unpatched DBTO (which implies that  per-VM copies will be automatically made by hyp)?\n\nIf it\u0027s the former, I think it\u0027s risky because what\u0027s happened in VM A has a side effect on other future VMs.",
+      "parentUuid": "81efe782_7d5c1140",
+      "range": {
+        "startLine": 273,
+        "startChar": 60,
+        "endLine": 273,
+        "endChar": 63
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6ce9e61e_b4d06b1c",
         "filename": "pvmfw/src/entry.rs",
         "patchSetId": 2
