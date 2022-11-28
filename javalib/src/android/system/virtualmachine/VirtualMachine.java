@@ -754,7 +754,8 @@ public class VirtualMachine implements AutoCloseable {
      * computer; the machine halts immediately. Software running on the virtual machine is not
      * notified of the event. A stopped virtual machine can be re-started by calling {@link #run()}.
      *
-     * @throws VirtualMachineException if the virtual machine could not be stopped.
+     * @throws VirtualMachineException if the virtual machine is not running or could not be
+     *     stopped.
      * @hide
      */
     @SystemApi
@@ -775,15 +776,30 @@ public class VirtualMachine implements AutoCloseable {
     }
 
     /**
-     * Stops this virtual machine. See {@link #stop()}.
+     * Stops this virtual machine, if it is running.
      *
-     * @throws VirtualMachineException if the virtual machine could not be stopped.
+     * @see #stop()
      * @hide
      */
     @SystemApi
     @Override
-    public void close() throws VirtualMachineException {
-        stop();
+    public void close() {
+        synchronized (mLock) {
+            if (mVirtualMachine == null) {
+                return;
+            }
+            try {
+                if (stateToStatus(mVirtualMachine.getState()) == STATUS_RUNNING) {
+                    mVirtualMachine.stop();
+                    mVirtualMachine = null;
+                }
+            } catch (RemoteException e) {
+                throw e.rethrowAsRuntimeException();
+            } catch (ServiceSpecificException e) {
+                // Deliberately ignored; this almost certainly means the VM exited just as
+                // we tried to stop it.
+            }
+        }
     }
 
     private static void deleteRecursively(File dir) throws IOException {
