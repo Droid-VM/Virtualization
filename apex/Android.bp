@@ -47,10 +47,6 @@ apex_defaults {
     key: "com.android.virt.key",
     certificate: ":com.android.virt.certificate",
 
-    apps: [
-        "android.system.virtualmachine.res",
-    ],
-
     file_contexts: ":com.android.virt-file_contexts",
     canned_fs_config: "canned_fs_config",
 
@@ -103,6 +99,10 @@ apex_defaults {
     ],
     host_required: [
         "vm_shell",
+    ],
+
+    apps: [
+        "android.system.virtualmachine.res",
     ],
 }
 
