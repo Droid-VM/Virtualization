@@ -16,13 +16,15 @@ android_test {
         "com.android.microdroid.testservice-java",
         "truth-prebuilt",
     ],
+    // We need to compile against the .impl library which includes the hidden
+    // APIs.
+    libs: ["framework-virtualization.impl"],
     jni_libs: [
         "MicrodroidBenchmarkNativeLib",
         "MicrodroidIdleNativeLib",
         "libiovsock_host_jni",
     ],
-    jni_uses_platform_apis: true,
-    sdk_version: "test_current",
+    platform_apis: true,
     use_embedded_native_libs: true,
     compile_multilib: "64",
 }
