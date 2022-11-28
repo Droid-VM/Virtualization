@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80efe16c_6a3b26ec",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-28T16:41:34Z",
+      "side": 1,
+      "message": "Nit: You can write this as just\nVM_APK_CONTENTS_PATH_C.as_ptr()\n\nSame with the one above. (Because of automatic dereferencing when you use dot.)",
+      "range": {
+        "startLine": 263,
+        "startChar": 7,
+        "endLine": 263,
+        "endChar": 47
+      },
+      "revId": "f0e888bb0fdd92ccbc3e5deb11135aebd5c8024f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
