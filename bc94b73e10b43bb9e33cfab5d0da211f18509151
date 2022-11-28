@@ -378,6 +378,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5feeb51_e88113a2",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-28T13:40:17Z",
+      "side": 1,
+      "message": "Oh, got it! I now can see how this was confusing!\n\nYes, it will increase the size of the DT (i.e. `self.header.totalsize`) but `self.bytes` is a slice representing the buffer containing the DT, which might be larger than the DT itself (and needs to be if we\u0027re going to extend it, as you noted). When we `unpack` the DT, we let libfdt know the size of the buffer itself (`fdt_open_into` [sets `totalsize` to the buffer size](https://android.git.corp.google.com/platform/external/dtc/+/refs/heads/master/libfdt/fdt_rw.c#479)) so it can assess how much extra space it has for adding new nodes or properties.\n\nAs a result, I\u0027m renaming `self.bytes` as `self.buffer` in aosp/2319816.",
+      "parentUuid": "15ae4f4e_07eae353",
+      "range": {
+        "startLine": 553,
+        "startChar": 0,
+        "endLine": 557,
+        "endChar": 5
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b294f27_99f1ddc7",
@@ -439,6 +463,30 @@
       "side": 1,
       "message": "Got it. Then doesn\u0027t the in-line patch of the DTBO affect other future VMs? Will they see the patched DTBO, or will they see the unpatched DBTO (which implies that  per-VM copies will be automatically made by hyp)?\n\nIf it\u0027s the former, I think it\u0027s risky because what\u0027s happened in VM A has a side effect on other future VMs.",
       "parentUuid": "81efe782_7d5c1140",
+      "range": {
+        "startLine": 273,
+        "startChar": 60,
+        "endLine": 273,
+        "endChar": 63
+      },
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c7af63f_9a436927",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-28T13:40:17Z",
+      "side": 1,
+      "message": "The DTBO that pvmfw receives is, just like the rest of the \"pvmfw blob\" that pKVM pre-loads into pVM memory space, a [copy of the original](https://android.git.corp.google.com/kernel/common/+/refs/heads/android13-5.10/arch/arm64/kvm/hyp/nvhe/mem_protect.c#1136), which can be modified without affecting other pVMs (including the \"same\" pVM on following boots).\n\nIn b/237356251, I suggested a zero-copy version where we would map the **original** pvmfw into guest space. That idea was dropped (AFAIU because the cost of implementing it in the current state of pKVM outweighs the benefits it would bring) but, even in that case, the mapping would be read-only (possibly handled as a CoW) so cross-contamination wouldn\u0027t be possible either.",
+      "parentUuid": "10947b22_35307e9b",
       "range": {
         "startLine": 273,
         "startChar": 60,
