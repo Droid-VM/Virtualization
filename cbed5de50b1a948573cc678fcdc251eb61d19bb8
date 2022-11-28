@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26a4bdea_7e58b5b3",
+        "filename": "apex/empty-payload-apk/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-28T16:29:38Z",
+      "side": 1,
+      "message": "Do we need both?\nWe do for testapk, but only because it\u0027s used in CTS, according to cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/tests/testapk/Android.bp;drc\u003dbcc2ec27fe5e722e9ca250e3c7c6125c2f193457;l\u003d29",
+      "range": {
+        "startLine": 14,
+        "startChar": 23,
+        "endLine": 14,
+        "endChar": 27
+      },
+      "revId": "cbed5de50b1a948573cc678fcdc251eb61d19bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebec96c1_66da45d0",
+        "filename": "apex/empty-payload-apk/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-28T16:29:38Z",
+      "side": 1,
+      "message": "Can you make this\nlibvm_payload#current\n\n(That\u0027s the magic that makes sure libvm_payload.so and dependencies don\u0027t get bundled into your APK.)",
+      "range": {
+        "startLine": 20,
+        "startChar": 19,
+        "endLine": 20,
+        "endChar": 32
+      },
+      "revId": "cbed5de50b1a948573cc678fcdc251eb61d19bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e539fa5_2fd61dad",
+        "filename": "apex/empty-payload-apk/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-28T16:29:38Z",
+      "side": 1,
+      "message": "It\u0027s not independently installable though?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 22
+      },
+      "revId": "cbed5de50b1a948573cc678fcdc251eb61d19bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b359ce90_67a77faa",
+        "filename": "apex/empty-payload-apk/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-28T16:29:38Z",
+      "side": 1,
+      "message": "Do we need this?",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 29
+      },
+      "revId": "cbed5de50b1a948573cc678fcdc251eb61d19bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0103a63c_81faf542",
+        "filename": "apex/empty-payload-apk/Android.bp",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-28T16:29:38Z",
+      "side": 1,
+      "message": "Slightly surprised that works!",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 16
+      },
+      "revId": "cbed5de50b1a948573cc678fcdc251eb61d19bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
