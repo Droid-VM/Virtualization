@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dbd8128_cb9e8a5c",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-29T15:39:26Z",
+      "side": 1,
+      "message": "Urgh :( I guess this is what safe code looks like ...",
+      "range": {
+        "startLine": 78,
+        "startChar": 32,
+        "endLine": 78,
+        "endChar": 66
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "198ba48b_f7a3ba42",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-29T15:39:26Z",
+      "side": 1,
+      "message": "Could you document why we need this (and/or why it isn\u0027t `addr` that\u0027s checked)?",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 60
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0a58a26_16d14340",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-29T15:39:26Z",
+      "side": 1,
+      "message": "OOC: why don\u0027t you use the \"inline syntax\" (not sure what the proper name is) in your code\n```\ninfo!(\"Found {info} at {device_function}, status {status:?} command {command:?}\")\n```\n? Out of habit?",
+      "range": {
+        "startLine": 42,
+        "startChar": 21,
+        "endLine": 42,
+        "endChar": 23
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1826dfd7_8c034816",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-29T15:39:26Z",
+      "side": 1,
+      "message": "nit: could this be turned into a function (e.g. \"`instantiate_virtio_driver(virtio_type, \u0026transport)`\") with a `match` on `DeviceType`, making it git-friendly for extending the example to other drivers?",
+      "range": {
+        "startLine": 53,
+        "startChar": 12,
+        "endLine": 53,
+        "endChar": 49
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e94a4fe2_81164532",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-29T15:39:26Z",
+      "side": 1,
+      "message": "Because the `capacity()` is in 512-byte blocks? This API sounds like an easy source of confusion/bugs :(\n\nIsn\u0027t there a clearer way to express this e.g.\n```\n(blk.capacity() * blk.blk_size()) / 1024\n```\n?",
+      "range": {
+        "startLine": 56,
+        "startChar": 67,
+        "endLine": 56,
+        "endChar": 70
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51444914_2ed95111",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-29T15:39:26Z",
+      "side": 1,
+      "message": "Would it make sense to create a `transparent` `struct` (some \"`PciMemoryFlags`\") to contain those mask \u0026 shifts behind clear methods?\n```\nwhile let Some((bus_address, cpu_physical, size)) \u003d ranges.next() {\n    let flags \u003d PciMemoryFlags::from((bus_address \u003e\u003e 64) as u32);\n    // ...\n        if flags.prefetchable() { \"\" } else { \"non-\" },\n    // ...\n    if (flags.range_type() \u003d\u003d PciRangeType::Memory32 \u0026\u0026 # ...\n```",
+      "range": {
+        "startLine": 78,
+        "startChar": 39,
+        "endLine": 78,
+        "endChar": 49
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "215b46bc_ba04b827",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-29T15:39:26Z",
+      "side": 1,
+      "message": "Could you turn this into a `RangesIterator` implementing the standard [`ranges` format](https://devicetree-specification.readthedocs.io/en/latest/chapter2-devicetree-basics.html#ranges) in `libs/libfdt`, as we have for `reg`? It would make the client code easier to parse and the logic could be re-used from pvmfw.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 93
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c213c64_d25ec252",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-29T15:39:26Z",
+      "side": 1,
+      "message": "PCI noobie question: what are we\u0027re doing exactly here? The kernel docs say\n```\nranges:\n  description:\n    As described in IEEE Std 1275-1994, but must provide at least a\n    definition of non-prefetchable memory. One or both of prefetchable Memory\n    and IO Space may also be provided.\n```\nso the entries in `ranges` have different meanings (unlike say entries in `/memory`) and are distinguished based on their `bus_address` top bits (flags) but we seem to be selecting whichever range that has the largest `size` as our PCI memory irrespective of whether it\u0027s prefetchable, non-prefetchable, or IO?",
+      "range": {
+        "startLine": 94,
+        "startChar": 23,
+        "endLine": 94,
+        "endChar": 51
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a7b4895_0ee0cff7",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-29T15:39:26Z",
+      "side": 1,
+      "message": "Do you think we could wrap the PCI memory range in a buddy allocator instead?",
+      "range": {
+        "startLine": 115,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 17
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07fe3cb4_262b0df6",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-29T15:39:26Z",
+      "side": 1,
+      "message": "Why not return an `Option\u003cu32\u003e` instead? Panicking on not being able to serve a valid (from the PoV of the client) request sounds quite drastic, even if the caller ends up unwrapping it.",
+      "range": {
+        "startLine": 121,
+        "startChar": 8,
+        "endLine": 121,
+        "endChar": 14
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f06d962_235d59ee",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-29T15:39:26Z",
+      "side": 1,
+      "message": "nit: what do you think of (if it compiles)\n```\nmatch address_type {\n    _ if size \u003d\u003d 0 \u003d\u003e {},\n    MemoryBarType::Width32 \u003d\u003e {\n        let address \u003d allocator.allocate_memory_32(size);\n        debug!(\"Allocated address {:#010x}\", address);\n        root.set_bar_32(device_function, bar_index, address);\n    }\n    MemoryBarType::Width64 \u003d\u003e {\n        let address \u003d allocator.allocate_memory_32(size);\n        debug!(\"Allocated address {:#010x}\", address);\n        root.set_bar_64(device_function, bar_index, address);\n    }\n    _ \u003d\u003e panic!(...),\n}\n```\n?",
+      "range": {
+        "startLine": 159,
+        "startChar": 12,
+        "endLine": 159,
+        "endChar": 17
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
