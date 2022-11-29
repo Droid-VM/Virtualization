@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13c5dcd2_001a9fa6",
+        "filename": "docs/getting_started/index.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-29T01:54:02Z",
+      "side": 1,
+      "message": "I think it\u0027s the opposite. This is possible on userdebug/eng devices, but not on user (prod) devices.",
+      "parentUuid": "cbb1bbad_5a716249",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 8
+      },
+      "revId": "eddc04649917824b0549df088ca7e536b3ae5937",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4abe57dd_71f1e26e",
         "filename": "virtualizationservice/src/crosvm.rs",
         "patchSetId": 3
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b1c74a3_9390aee5",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-29T01:54:02Z",
+      "side": 1,
+      "message": "nix::unistd::access could be used",
+      "parentUuid": "4abe57dd_71f1e26e",
+      "range": {
+        "startLine": 606,
+        "startChar": 64,
+        "endLine": 606,
+        "endChar": 74
+      },
+      "revId": "eddc04649917824b0549df088ca7e536b3ae5937",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9444731a_1d3609bd",
         "filename": "virtualizationservice/src/crosvm.rs",
         "patchSetId": 3
@@ -60,6 +108,30 @@
       "writtenOn": "2022-11-28T16:15:05Z",
       "side": 1,
       "message": "If `read` returns a `Result`, don\u0027t we want to `?` it, or at least log it?\n\ne.g.\n```\nif let Some(pvmfw_path) \u003d system_properties::read(\"hypervisor.pvmfw.path\")? {\n    command.arg(\"--protected-vm-with-firmware\").arg(pvmfw_path)\n} else {\n    command.arg(\"--protected-vm\")\n}\n```",
+      "range": {
+        "startLine": 608,
+        "startChar": 12,
+        "endLine": 608,
+        "endChar": 13
+      },
+      "revId": "eddc04649917824b0549df088ca7e536b3ae5937",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de916f71_8483448f",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-29T01:54:02Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "9444731a_1d3609bd",
       "range": {
         "startLine": 608,
         "startChar": 12,
