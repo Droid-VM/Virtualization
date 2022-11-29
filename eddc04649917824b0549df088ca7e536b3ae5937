@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "acefe7e1_213b647d",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2022-11-29T17:58:18Z",
+      "side": 1,
+      "message": "I tried the API, but it doesn\u0027t seem to work. Could you take a look at my new patchset?\n\nHere are more details:\n\nI can see following error when launching vm with custom `pvmfw`.\n`VirtualizationService: virtualizationservice::aidl: Error starting VM with CID 2049: EACCES: Permission denied`\n\nI tested with a new file `/data/local/tmp/a`, and `ls -al /data/local/tmp/a` reports `-rw-rw-rw`. I think that dummy file is enough to test this CL, but it doesn\u0027t work as expected..",
+      "parentUuid": "4b1c74a3_9390aee5",
+      "range": {
+        "startLine": 606,
+        "startChar": 64,
+        "endLine": 606,
+        "endChar": 74
+      },
+      "revId": "eddc04649917824b0549df088ca7e536b3ae5937",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9444731a_1d3609bd",
         "filename": "virtualizationservice/src/crosvm.rs",
         "patchSetId": 3
@@ -252,6 +276,30 @@
       "side": 1,
       "message": "There\u0027s no absolute answer here I believe. Both can be right. However, bailing on error is a common pattern found in AVF. We in general don\u0027t try to recover from an error, but to fail early and explicitly. This is helpful to find our potential issues while in development, and to prevent attackers from abusing the recovery behavior.",
       "parentUuid": "8b02b616_f768d596",
+      "range": {
+        "startLine": 608,
+        "startChar": 12,
+        "endLine": 608,
+        "endChar": 13
+      },
+      "revId": "eddc04649917824b0549df088ca7e536b3ae5937",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f784aeed_0d777b2d",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2022-11-29T17:58:18Z",
+      "side": 1,
+      "message": "Done. Changed to exit.",
+      "parentUuid": "275ce89d_e11967bc",
       "range": {
         "startLine": 608,
         "startChar": 12,
