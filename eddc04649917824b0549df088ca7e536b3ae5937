@@ -236,6 +236,30 @@
       },
       "revId": "eddc04649917824b0549df088ca7e536b3ae5937",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "275ce89d_e11967bc",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-29T13:13:48Z",
+      "side": 1,
+      "message": "There\u0027s no absolute answer here I believe. Both can be right. However, bailing on error is a common pattern found in AVF. We in general don\u0027t try to recover from an error, but to fail early and explicitly. This is helpful to find our potential issues while in development, and to prevent attackers from abusing the recovery behavior.",
+      "parentUuid": "8b02b616_f768d596",
+      "range": {
+        "startLine": 608,
+        "startChar": 12,
+        "endLine": 608,
+        "endChar": 13
+      },
+      "revId": "eddc04649917824b0549df088ca7e536b3ae5937",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
