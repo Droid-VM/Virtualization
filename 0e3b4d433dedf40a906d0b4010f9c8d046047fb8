@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "edd908d2_bbcc9e3b",
+        "filename": "javalib/api/system-current.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-11-29T21:25:42Z",
+      "side": 1,
+      "message": "I did exactly that (because the build system told me to) and this is the result. I assumed I just check that result in, like this?",
+      "parentUuid": "065a6d84_e374dd19",
+      "range": {
+        "startLine": 20,
+        "startChar": 2,
+        "endLine": 20,
+        "endChar": 36
+      },
+      "revId": "0e3b4d433dedf40a906d0b4010f9c8d046047fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1acd4476_181b3360",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 5
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95efc33c_b5e8d44b",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-11-29T21:25:42Z",
+      "side": 1,
+      "message": "Building directly against the JAR sounds easiest. This presumably still requires me to mark this method `public` but annotated `@hide` in the javadoc comment so it gets hidden from the API magic?",
+      "parentUuid": "1acd4476_181b3360",
+      "range": {
+        "startLine": 1164,
+        "startChar": 4,
+        "endLine": 1164,
+        "endChar": 10
+      },
+      "revId": "0e3b4d433dedf40a906d0b4010f9c8d046047fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd4b5426_e79eefb2",
         "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
         "patchSetId": 5
@@ -60,6 +108,30 @@
       "writtenOn": "2022-11-29T17:14:31Z",
       "side": 1,
       "message": "It would be nice to make these final.",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 30
+      },
+      "revId": "0e3b4d433dedf40a906d0b4010f9c8d046047fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "512619c2_adb9cbe5",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-11-29T21:25:42Z",
+      "side": 1,
+      "message": "`public final long`? I\u0027ll give it a go.",
+      "parentUuid": "bd4b5426_e79eefb2",
       "range": {
         "startLine": 283,
         "startChar": 0,
