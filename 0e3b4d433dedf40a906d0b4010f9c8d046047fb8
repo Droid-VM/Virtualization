@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "065a6d84_e374dd19",
+        "filename": "javalib/api/system-current.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-29T17:14:31Z",
+      "side": 1,
+      "message": "These files can be automatically updated, via \n\nm framework-virtualization.stubs.source.system-update-current-api",
+      "range": {
+        "startLine": 20,
+        "startChar": 2,
+        "endLine": 20,
+        "endChar": 36
+      },
+      "revId": "0e3b4d433dedf40a906d0b4010f9c8d046047fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1acd4476_181b3360",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-29T17:14:31Z",
+      "side": 1,
+      "message": "This should be marked @hide (otherwise it\u0027s automatically fully public).\n\nAnd then if you want it to be @SystemApi you need to add that annotation. (Or @TestApi, but for complicated reasons that doesn\u0027t work for us.)\n\nBut tbh I would really, really rather not do that.\n\nInstead, we could build the benchmark app directly against the implementation JAR. That would roughly involve reverting some or all of these changes: https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2192077/34/tests/benchmark/Android.bp.\n\nI want to make sure we don\u0027t do that for the Test APK (we need something that is building against the real APIs clients will use), but the benchmark APK is ok.\n\nThe other alternative would be to leave this as @hide and use reflection to call it (first disabling the mechanism that blocks reflection).",
+      "range": {
+        "startLine": 1164,
+        "startChar": 4,
+        "endLine": 1164,
+        "endChar": 10
+      },
+      "revId": "0e3b4d433dedf40a906d0b4010f9c8d046047fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd4b5426_e79eefb2",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-29T17:14:31Z",
+      "side": 1,
+      "message": "It would be nice to make these final.",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 30
+      },
+      "revId": "0e3b4d433dedf40a906d0b4010f9c8d046047fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
