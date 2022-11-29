@@ -212,6 +212,30 @@
       },
       "revId": "eddc04649917824b0549df088ca7e536b3ae5937",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b02b616_f768d596",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2022-11-29T11:42:28Z",
+      "side": 1,
+      "message": "I meant to log invalid `pvmfw_path` and fallback to the `--protected-vm` as I did similar already. What do you think? I\u0027m asking this because both Jiyong and Pierre\u0027s suggestion seem to return immediately if `system_properties::read` returns Err(), while I think that continuing to launch VM seems acceptable. Correct me if I\u0027m wrong.",
+      "parentUuid": "5025e3d5_6721f1bf",
+      "range": {
+        "startLine": 608,
+        "startChar": 12,
+        "endLine": 608,
+        "endChar": 13
+      },
+      "revId": "eddc04649917824b0549df088ca7e536b3ae5937",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
