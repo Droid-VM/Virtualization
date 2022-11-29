@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6930b0a3_c2b38fcc",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-29T13:04:34Z",
+      "side": 0,
+      "message": "Non Protected VM with re-signed images with different key should ideally boot.\n\nThis test (testBootSucceedsWhenNonProtectedVmStartsWithImagesSignedWithDifferentKey) fails  resigning the the apexes was changing the vbmeta partition, which changes the vbmeta hash. Vbmeta hashes are part of bootconfigs \u0026 early userspace will fail to verify the system/vendor partition, causing the boot fail.\n\nIdeally, SignVirtApex() should sign initrd/kernel and NEED NOT sign super image (system/vendor). This is in scope of b/245277660.\n\nAlternatively, we can change the logic of re-signing here. SignVirtApex() on signing could update the bootconfigs with new vbmeta hash related values (bootconfigs are are appended in initrd). Though will pass the test \u0026 but is a bit unnecessary considering we need not sign the system/vendor img at all. \n\nThis is in scope of",
+      "range": {
+        "startLine": 431,
+        "startChar": 16,
+        "endLine": 431,
+        "endChar": 88
+      },
+      "revId": "bcc2ec27fe5e722e9ca250e3c7c6125c2f193457",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
