@@ -188,6 +188,30 @@
       },
       "revId": "eddc04649917824b0549df088ca7e536b3ae5937",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5025e3d5_6721f1bf",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-29T04:33:45Z",
+      "side": 1,
+      "message": "failing to read the sysprop is a good reason to stop and exit. \n\nNot sure you want to add a log here because the error will anyway be propagated back to the caller and printed there. So, it is a good idea to add some context to the error message by using the .context() method:\n\n```\nif let Some(pvmfw_path) \u003d system_properties::read(\"...\")\n    .context(\"Failed to read xxxx\")? {\n    ...\n}\n```\n\nIf you want to do the logging at here, you could do as follows:\n\n```\nif let Some(pvmfw_path) \u003d system_properties::read(\"...\").map_err(|e| {\n   warning!(\"Failed to read xxxx: {:?}\", e);\n   e\n}\n```",
+      "parentUuid": "9abb68d3_0786106d",
+      "range": {
+        "startLine": 608,
+        "startChar": 12,
+        "endLine": 608,
+        "endChar": 13
+      },
+      "revId": "eddc04649917824b0549df088ca7e536b3ae5937",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
