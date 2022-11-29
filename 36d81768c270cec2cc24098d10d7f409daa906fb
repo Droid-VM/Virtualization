@@ -16,6 +16,24 @@
       "message": "What about a vm name of \"..\" ? Shouldn\u0027t it be better to check if `new File(vmRoot, name).getParent()` is the same as `new File(vmRoot)`?",
       "revId": "36d81768c270cec2cc24098d10d7f409daa906fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bd73b75_444fdfc6",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-29T15:11:58Z",
+      "side": 1,
+      "message": "\u003e What about a vm name of \"..\" ?\n\nI was thinking that attempting to create \"..\" (or \".\") would just fail. But of course they could conceivably be made to work with get(). I modified the tests to demonstrate that.\n\n\u003e Shouldn\u0027t it be better to check if new File(vmRoot, name).getParent() is the same as new File(vmRoot)?\n\nI\u0027m wary of relying too much on path parsing - e.g. I think that could be made to pass with just the right absolute path. So I\u0027ve done something simple if less elegant.",
+      "parentUuid": "31f956c1_24bfa89c",
+      "revId": "36d81768c270cec2cc24098d10d7f409daa906fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
