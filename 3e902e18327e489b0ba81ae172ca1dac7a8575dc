@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1a4c803_f1e0e6fe",
+        "filename": "libs/devicemapper/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-29T11:37:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc9ef34a_5866faf4",
+      "range": {
+        "startLine": 282,
+        "startChar": 14,
+        "endLine": 282,
+        "endChar": 23
+      },
+      "revId": "3e902e18327e489b0ba81ae172ca1dac7a8575dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53c35ef0_4be8c33b",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-29T10:35:02Z",
       "side": 1,
       "message": "nit: This should never happen, abort rather than silently passing?",
+      "range": {
+        "startLine": 291,
+        "startChar": 12,
+        "endLine": 291,
+        "endChar": 17
+      },
+      "revId": "3e902e18327e489b0ba81ae172ca1dac7a8575dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dbb3ce5_801112b5",
+        "filename": "libs/devicemapper/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-29T11:37:02Z",
+      "side": 1,
+      "message": "Well, yeah I could panic! :-)",
+      "parentUuid": "53c35ef0_4be8c33b",
       "range": {
         "startLine": 291,
         "startChar": 12,

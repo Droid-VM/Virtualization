@@ -136,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f2cedcf_d58df62f",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-29T11:37:02Z",
+      "side": 1,
+      "message": "You\u0027re right.. changing... I am also removing the validation from the encryptedstore, because the crypt module will validate it anyway,",
+      "parentUuid": "515c9fd3_732a2fe7",
+      "range": {
+        "startLine": 54,
+        "startChar": 7,
+        "endLine": 54,
+        "endChar": 24
+      },
+      "revId": "485a8c86a837c6d84fa4effafedc52ae6c04ee8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7e6534f_fda07c01",
