@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfff27d5_c5da0823",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-29T17:35:51Z",
+      "side": 1,
+      "message": "You probably don\u0027t need these, the class is small enough it\u0027s not going to confuse anyone.",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 33
+      },
+      "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5c50fab_1c4546d2",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-29T17:35:51Z",
+      "side": 1,
+      "message": "That will throw if the VM isn\u0027t running (which it may well not be). Maybe just check if mVirtualMachine is non-null and if it is use that?",
+      "range": {
+        "startLine": 234,
+        "startChar": 20,
+        "endLine": 234,
+        "endChar": 34
+      },
+      "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe82683a_bad0c5bd",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-29T17:35:51Z",
+      "side": 1,
+      "message": "A comment here would be helpful.",
+      "range": {
+        "startLine": 444,
+        "startChar": 11,
+        "endLine": 444,
+        "endChar": 22
+      },
+      "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c71f130c_079d98a8",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-29T17:35:51Z",
+      "side": 1,
+      "message": "It never actually returns an error though?",
+      "range": {
+        "startLine": 444,
+        "startChar": 54,
+        "endLine": 444,
+        "endChar": 75
+      },
+      "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cac31b2_e0596ddd",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-29T17:35:51Z",
+      "side": 1,
+      "message": "Nit: should we keep a copy of this path somewhere?",
+      "range": {
+        "startLine": 445,
+        "startChar": 26,
+        "endLine": 445,
+        "endChar": 70
+      },
+      "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc9cab25_f75079f9",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-29T17:35:51Z",
+      "side": 1,
+      "message": "Just return here?",
+      "range": {
+        "startLine": 458,
+        "startChar": 20,
+        "endLine": 458,
+        "endChar": 27
+      },
+      "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
