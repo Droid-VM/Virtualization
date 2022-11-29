@@ -22,6 +22,30 @@
       },
       "revId": "03a8770262e22f9a333cc1b8349d08c260e33b08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c712831b_1c8e605a",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-29T14:53:46Z",
+      "side": 0,
+      "message": "We need to wait for the init to finish the boot sequence (e.g. post-fs-data action) before running a payload, otherwise we might start a payload before authfs_service was started, hence I used the dev.bootcomplete property. In doing so I\u0027ve introduced a race condition for encrypted storage :(, sorry about that!\n\nI think we can either:\n\n1. Introduce a way for init to notify microdroid_manager that it\u0027s done with the boot sequence (another sysprop?)\n2. Make microdroid_manager responsible for stopping ueventd.",
+      "parentUuid": "247d8412_d500be8c",
+      "range": {
+        "startLine": 445,
+        "startChar": 5,
+        "endLine": 445,
+        "endChar": 28
+      },
+      "revId": "03a8770262e22f9a333cc1b8349d08c260e33b08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
