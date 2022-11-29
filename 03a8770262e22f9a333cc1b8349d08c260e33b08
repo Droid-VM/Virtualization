@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "247d8412_d500be8c",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-29T14:44:33Z",
+      "side": 0,
+      "message": "Why not set dev.bootcomplete  here \u0026 not have `trigger boot` from init? It kinda makes sense letting microdroid_manager declare bootcomplete \u003d 1. \n\n\nFor ex, the code above `if let Some(mut child) \u003d encryptedstore_child xxxx` needs to happen before dev.bootcomplete is set true because it relies on uneventd which is stopped after boot.complete ......",
+      "range": {
+        "startLine": 445,
+        "startChar": 5,
+        "endLine": 445,
+        "endChar": 28
+      },
+      "revId": "03a8770262e22f9a333cc1b8349d08c260e33b08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
