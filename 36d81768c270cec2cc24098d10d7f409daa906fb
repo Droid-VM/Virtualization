@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31f956c1_24bfa89c",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-29T14:30:10Z",
+      "side": 1,
+      "message": "What about a vm name of \"..\" ? Shouldn\u0027t it be better to check if `new File(vmRoot, name).getParent()` is the same as `new File(vmRoot)`?",
+      "revId": "36d81768c270cec2cc24098d10d7f409daa906fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
