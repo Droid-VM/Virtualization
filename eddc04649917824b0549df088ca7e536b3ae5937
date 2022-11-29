@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11dd4348_077b424d",
+        "filename": "docs/getting_started/index.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2022-11-29T02:30:54Z",
+      "side": 1,
+      "message": "yes. also allows on `userdebug` but not `user` build.",
+      "parentUuid": "cbb1bbad_5a716249",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 8
+      },
+      "revId": "eddc04649917824b0549df088ca7e536b3ae5937",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4abe57dd_71f1e26e",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "+1",
       "parentUuid": "9444731a_1d3609bd",
+      "range": {
+        "startLine": 608,
+        "startChar": 12,
+        "endLine": 608,
+        "endChar": 13
+      },
+      "revId": "eddc04649917824b0549df088ca7e536b3ae5937",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9abb68d3_0786106d",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2022-11-29T02:30:54Z",
+      "side": 1,
+      "message": "Rust newbie\u0027s question back: ? seems to exit the current function (i.e. `run_vm`) immediately and propagate the error outside of the code block. Would you prefer to do so for invalid pvmfw path string? If so, then I\u0027d like to add logging.",
+      "parentUuid": "de916f71_8483448f",
       "range": {
         "startLine": 608,
         "startChar": 12,
