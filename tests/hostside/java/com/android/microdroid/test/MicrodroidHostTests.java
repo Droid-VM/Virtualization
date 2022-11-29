@@ -423,18 +423,25 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         assertThat(getDevice().pullFileContents(CONSOLE_PATH), containsString("pvmfw boot failed"));
     }
 
-    // TODO(b/245277660): Resigning the system/vendor image changes the vbmeta hash.
-    // So, unless vbmeta related bootconfigs are updated the following test will fail
     @Test
-    @Ignore("b/245277660")
     @CddTest(requirements = {"9.17/C-2-2", "9.17/C-2-6"})
-    public void testBootSucceedsWhenNonProtectedVmStartsWithImagesSignedWithDifferentKey()
-            throws Exception {
+    public void nonProtectedVmWithImageSignedWithDifferentKeyCannotBoot() throws Exception {
+        // Arrange
         File key = findTestFile("test.com.android.virt.pem");
-        Map<String, File> keyOverrides = Map.of();
-        VmInfo vmInfo = runMicrodroidWithResignedImages(key, keyOverrides, /*isProtected=*/ false);
-        // Device online means that boot must have succeeded.
-        adbConnectToMicrodroid(getDevice(), vmInfo.mCid);
+
+        // Action
+        VmInfo vmInfo =
+                runMicrodroidWithResignedImages(
+                        key, /*keyOverrides=*/ Map.of(), /*isProtected=*/ false);
+
+        // Asserts
+        assertThatEventually(
+                100000,
+                () -> getDevice().pullFileContents(CONSOLE_PATH),
+                containsString("init: [libfs_avb]vbmeta digest mismatch"));
+        String consoleLog = getDevice().pullFileContents(CONSOLE_PATH);
+        assertThat(consoleLog).contains("init: [libfs_avb]Failed to verify vbmeta digest");
+        assertWithMessage("pvmfw should not start").that(consoleLog).doesNotContain("pVM firmware");
         vmInfo.mProcess.destroy();
     }
 
