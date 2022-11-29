@@ -329,6 +329,18 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    @CddTest(requirements = {"9.17/C-1-1"})
+    public void invalidVmNameIsRejected() {
+        assumeSupportedKernel();
+
+        VirtualMachineConfig config =
+                newVmConfigBuilder().setPayloadBinaryPath("MicrodroidTestNativeLib.so").build();
+
+        VirtualMachineManager vmm = getVirtualMachineManager();
+        assertThrows(IllegalArgumentException.class, () -> vmm.create("../foo", config));
+    }
+
+    @Test
     @CddTest(requirements = {
             "9.17/C-1-1",
             "9.17/C-2-1"
