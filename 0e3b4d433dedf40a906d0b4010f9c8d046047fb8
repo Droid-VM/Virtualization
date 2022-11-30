@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3fc7eb9f_9e5998de",
+        "filename": "javalib/api/system-current.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-30T09:56:27Z",
+      "side": 1,
+      "message": "\u003e I did exactly that (because the build system told me to) and this is the result. I assumed I just check that result in, like this?\n\nYeah, that\u0027s all correct. I\u0027m just surprised it ended up in system-current when it wasn\u0027t marked @SystemApi.",
+      "parentUuid": "5914d8f6_9d32f820",
+      "range": {
+        "startLine": 20,
+        "startChar": 2,
+        "endLine": 20,
+        "endChar": 36
+      },
+      "revId": "0e3b4d433dedf40a906d0b4010f9c8d046047fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1acd4476_181b3360",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 5
@@ -109,6 +133,30 @@
       "side": 1,
       "message": "Building directly against the JAR sounds easiest. This presumably still requires me to mark this method `public` but annotated `@hide` in the javadoc comment so it gets hidden from the API magic?",
       "parentUuid": "1acd4476_181b3360",
+      "range": {
+        "startLine": 1164,
+        "startChar": 4,
+        "endLine": 1164,
+        "endChar": 10
+      },
+      "revId": "0e3b4d433dedf40a906d0b4010f9c8d046047fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72a28207_0dcfb64d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-30T09:56:27Z",
+      "side": 1,
+      "message": "Yes exactly.\n(You could add @VisibleForTesting to say that too, although it doesn\u0027t have any effect right now, I think.)",
+      "parentUuid": "95efc33c_b5e8d44b",
       "range": {
         "startLine": 1164,
         "startChar": 4,
@@ -168,6 +216,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "40f8b632_e7ee01a1",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-30T09:56:27Z",
+      "side": 1,
+      "message": "Yeah. Public fields are a little nasty, but public mutable fields really scare me.",
+      "parentUuid": "512619c2_adb9cbe5",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 30
+      },
+      "revId": "0e3b4d433dedf40a906d0b4010f9c8d046047fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d93f2656_fb37fc7f",
         "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
         "patchSetId": 5
@@ -202,6 +274,30 @@
       "writtenOn": "2022-11-30T06:17:52Z",
       "side": 1,
       "message": "Have a build error here. Could you kindly fix it?",
+      "range": {
+        "startLine": 400,
+        "startChar": 16,
+        "endLine": 400,
+        "endChar": 22
+      },
+      "revId": "0e3b4d433dedf40a906d0b4010f9c8d046047fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0c0f343_554e5332",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-30T09:56:27Z",
+      "side": 1,
+      "message": "Ah yeah, Nikita got rid of mInner in a recent CL.",
+      "parentUuid": "63893f14_a410f7b6",
       "range": {
         "startLine": 400,
         "startChar": 16,
