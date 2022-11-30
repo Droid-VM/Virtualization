@@ -136,6 +136,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(testResults.mEncryptedStoragePath).isEqualTo("");
     }
 
+
     @Test
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
     public void createAndRunNoDebugVm() throws Exception {
@@ -873,6 +874,25 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         TestResults testResults = runVmTestService(vmImport);
         assertThat(testResults.mException).isNull();
         assertThat(testResults.mAddInteger).isEqualTo(123 + 456);
+    }
+
+    @Test
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
+    public void encryptedStorageAvailable() throws Exception {
+        assumeSupportedKernel();
+
+        VirtualMachineConfig config =
+                newVmConfigBuilder()
+                        .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
+                        .setMemoryMib(minMemoryRequired())
+                        .setEncryptedStorageKib(4096)
+                        // Logs from fully debuggable VMs are useful for debugging test failures
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .build();
+        VirtualMachine vm = forceCreateNewVirtualMachine("test_vm", config);
+
+        TestResults testResults = runVmTestService(vm);
+        assertThat(testResults.mEncryptedStoragePath).isEqualTo("/mnt/encryptedstore");
     }
 
     private void assertFileContentsAreEqualInTwoVms(String fileName, String vmName1, String vmName2)
