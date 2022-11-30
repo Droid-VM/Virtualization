@@ -65,6 +65,7 @@ public final class VirtualMachineConfig {
     private static final String KEY_PROTECTED_VM = "protectedVm";
     private static final String KEY_MEMORY_MIB = "memoryMib";
     private static final String KEY_NUM_CPUS = "numCpus";
+    private static final String KEY_ENCRYPTED_STORAGE_SIZE_KIB = "encryptedStorageSizeKib";
 
     /** @hide */
     @Retention(RetentionPolicy.SOURCE)
@@ -129,6 +130,9 @@ public final class VirtualMachineConfig {
      */
     @Nullable private final String mPayloadBinaryPath;
 
+    /** The size of storage in KB. 0 indicates that encryptedStorage is not required */
+    private final int mEncryptedStorageSizeKib;
+
     private VirtualMachineConfig(
             @NonNull String apkPath,
             @Nullable String payloadConfigPath,
@@ -136,7 +140,8 @@ public final class VirtualMachineConfig {
             @DebugLevel int debugLevel,
             boolean protectedVm,
             int memoryMib,
-            int numCpus) {
+            int numCpus,
+            int encryptedStorageSizeKib) {
         requireNonNull(apkPath);
         if (!apkPath.startsWith("/")) {
             throw new IllegalArgumentException("APK path must be an absolute path");
@@ -177,6 +182,9 @@ public final class VirtualMachineConfig {
             throw new UnsupportedOperationException(
                     "Unprotected VMs are not supported on this device.");
         }
+        if (encryptedStorageSizeKib < 0) {
+            throw new IllegalArgumentException("Encrypted Storage size cannot be negative");
+        }
 
         mApkPath = apkPath;
         mPayloadConfigPath = payloadConfigPath;
@@ -185,6 +193,7 @@ public final class VirtualMachineConfig {
         mProtectedVm = protectedVm;
         mMemoryMib = memoryMib;
         mNumCpus = numCpus;
+        mEncryptedStorageSizeKib = encryptedStorageSizeKib;
     }
 
     /** Loads a config from a file. */
@@ -237,9 +246,17 @@ public final class VirtualMachineConfig {
         boolean protectedVm = b.getBoolean(KEY_PROTECTED_VM);
         int memoryMib = b.getInt(KEY_MEMORY_MIB);
         int numCpus = b.getInt(KEY_NUM_CPUS);
+        int encryptedStorageSizeKib = b.getInt(KEY_ENCRYPTED_STORAGE_SIZE_KIB);
 
-        return new VirtualMachineConfig(apkPath, payloadConfigPath, payloadBinaryPath, debugLevel,
-                protectedVm, memoryMib, numCpus);
+        return new VirtualMachineConfig(
+                apkPath,
+                payloadConfigPath,
+                payloadBinaryPath,
+                debugLevel,
+                protectedVm,
+                memoryMib,
+                numCpus,
+                encryptedStorageSizeKib);
     }
 
     /** Persists this config to a file. */
@@ -263,6 +280,9 @@ public final class VirtualMachineConfig {
         b.putInt(KEY_NUM_CPUS, mNumCpus);
         if (mMemoryMib > 0) {
             b.putInt(KEY_MEMORY_MIB, mMemoryMib);
+        }
+        if (mEncryptedStorageSizeKib > 0) {
+            b.putInt(KEY_ENCRYPTED_STORAGE_SIZE_KIB, mEncryptedStorageSizeKib);
         }
         b.writeToStream(output);
     }
@@ -348,6 +368,29 @@ public final class VirtualMachineConfig {
     }
 
     /**
+     * Returns whether encrypted storage is enabled or not. This can also be checked by using
+     * getEncryptedStorageSizeKib() > 0
+     *
+     * @hide
+     */
+    @SystemApi
+    public boolean isEncryptedStorageEnabled() {
+        return mEncryptedStorageSizeKib > 0;
+    }
+
+    /**
+     * Returns the size of encrypted storage (in KB) available in the VM. 0 indicates that encrypted
+     * storage is not enabled.
+     *
+     * @hide
+     */
+    @SystemApi
+    @IntRange(from = 0)
+    public int getEncryptedStorageSizeKib() {
+        return mEncryptedStorageSizeKib;
+    }
+
+    /**
      * Tests if this config is compatible with other config. Being compatible means that the configs
      * can be interchangeably used for the same virtual machine. Compatible changes includes the
      * number of CPUs and the size of the RAM. All other changes (e.g. using a different payload,
@@ -419,6 +462,7 @@ public final class VirtualMachineConfig {
         private boolean mProtectedVmSet;
         private int mMemoryMib;
         private int mNumCpus;
+        private int mEncryptedStorageSizeKib;
 
         /**
          * Creates a builder for the given context.
@@ -430,6 +474,7 @@ public final class VirtualMachineConfig {
             mContext = requireNonNull(context, "context must not be null");
             mDebugLevel = DEBUG_LEVEL_NONE;
             mNumCpus = 1;
+            mEncryptedStorageSizeKib = 0;
         }
 
         /**
@@ -447,8 +492,14 @@ public final class VirtualMachineConfig {
             }
 
             return new VirtualMachineConfig(
-                    apkPath, mPayloadConfigPath, mPayloadBinaryPath, mDebugLevel, mProtectedVm,
-                    mMemoryMib, mNumCpus);
+                    apkPath,
+                    mPayloadConfigPath,
+                    mPayloadBinaryPath,
+                    mDebugLevel,
+                    mProtectedVm,
+                    mMemoryMib,
+                    mNumCpus,
+                    mEncryptedStorageSizeKib);
         }
 
         /**
@@ -542,6 +593,18 @@ public final class VirtualMachineConfig {
         @NonNull
         public Builder setNumCpus(@IntRange(from = 1) int num) {
             mNumCpus = num;
+            return this;
+        }
+
+        /**
+         * Sets the size (in KB) of storage available in VM (encrypted and persistent across boot)
+         *
+         * @hide
+         */
+        @SystemApi
+        @NonNull
+        public Builder setEncryptedStorageSizeKib(@IntRange(from = 0) int encryptedStorageSizeKib) {
+            mEncryptedStorageSizeKib = encryptedStorageSizeKib;
             return this;
         }
     }
