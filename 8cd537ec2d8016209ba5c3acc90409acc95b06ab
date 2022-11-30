@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2a724a3_2628f8a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-30T11:52:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af3e7866_37b1d4ef",
+      "range": {
+        "startLine": 10,
+        "startChar": 13,
+        "endLine": 10,
+        "endChar": 39
+      },
+      "revId": "8cd537ec2d8016209ba5c3acc90409acc95b06ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31b1dcdc_a4b39dbe",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-30T03:47:14Z",
       "side": 1,
       "message": "You don\u0027t need a corresponding change in sepolicy?",
+      "range": {
+        "startLine": 442,
+        "startChar": 21,
+        "endLine": 442,
+        "endChar": 28
+      },
+      "revId": "8cd537ec2d8016209ba5c3acc90409acc95b06ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80dc511d_f9959801",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-30T11:52:10Z",
+      "side": 1,
+      "message": "Adding it to the microdroid_config_prop....\n\nThe error log was interesting, while I was just grepping fr `avc:`. Fixed now 😊\n```\n[   19.371069] init: Unable to set property \u0027microdroid.bootcomplete\u0027 from uid:0 gid:0 pid:134: SELinux permission check failed\n[   19.376021] libc: Unable to set property \"microdroid.bootcomplete\" to \"1\": error code: 0x18\n[   19.390598] microdroid_manager[134]: Failed with set microdroid.bootcomplete\n[   19.390598] \n[   19.390598] Caused by:\n[   19.390598]     __system_property_set failed..\n\n```",
+      "parentUuid": "31b1dcdc_a4b39dbe",
       "range": {
         "startLine": 442,
         "startChar": 21,
