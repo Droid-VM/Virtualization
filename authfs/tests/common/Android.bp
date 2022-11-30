@@ -15,7 +15,7 @@ java_library_host {
     ],
 }
 
-rust_test {
+rust_binary {
     name: "open_then_run",
     crate_name: "open_then_run",
     srcs: ["src/open_then_run.rs"],
@@ -28,8 +28,6 @@ rust_test {
         "liblibc",
         "liblog_rust",
     ],
-    test_suites: ["general-tests"],
-    test_harness: false,
 }
 
 rust_test {
