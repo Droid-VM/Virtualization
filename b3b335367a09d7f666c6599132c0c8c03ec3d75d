@@ -16,6 +16,24 @@
       "message": "This was supposed to receive PS-1 because pvmfw refuses to boot with the current DP DTBO (compiled against the host DT so doesn\u0027t apply cleanly on crosvm DT). Why is `v2/android-kvm-team/avf_presubmit_tests` being skipped? Shouldn\u0027t it be triggered for [any change that touches `platform/packages/modules/Virtualization`](google3/configs/wireless/android/testing/atp/prod/android-kvm-team/config.gcl?l\u003d36)?",
       "revId": "b3b335367a09d7f666c6599132c0c8c03ec3d75d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82df4bf3_50c79464",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-30T17:47:25Z",
+      "side": 1,
+      "message": "I believe this is caused by b/245896220#comment2.",
+      "parentUuid": "7527eafe_61a05ebc",
+      "revId": "b3b335367a09d7f666c6599132c0c8c03ec3d75d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
