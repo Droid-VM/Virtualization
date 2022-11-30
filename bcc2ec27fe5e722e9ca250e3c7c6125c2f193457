@@ -16,6 +16,24 @@
       "message": "This is out-of-scope for this CL but instead of duplicating these files, could we use (and define, if necessary) the corresponding [`avb_testkey_rsaX`](https://source.corp.google.com/android/external/avb/test/Android.bp;l\u003d47) Soong targets? Can you do it in a parent commit so that we don\u0027t need to drag these around in this CL?",
       "revId": "bcc2ec27fe5e722e9ca250e3c7c6125c2f193457",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9538f17e_d8d12505",
+        "filename": "libs/avb/std/testdata/testkey_rsa8192.pem",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-30T10:59:50Z",
+      "side": 0,
+      "message": "I notice that you have implemented this in aosp/2320050.",
+      "parentUuid": "9682ee0b_1f276aec",
+      "revId": "bcc2ec27fe5e722e9ca250e3c7c6125c2f193457",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
