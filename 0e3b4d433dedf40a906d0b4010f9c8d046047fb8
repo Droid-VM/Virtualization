@@ -193,6 +193,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c3e1e280_b337f9d5",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-11-30T10:41:47Z",
+      "side": 1,
+      "message": "This doesn\u0027t yet work. I\u0027ve uploaded the WIP which fails to build (MicrodroidBenchmarks.java simply doesn\u0027t see the method `trimMemory` on `VirtualMachine`)",
+      "parentUuid": "72a28207_0dcfb64d",
+      "range": {
+        "startLine": 1164,
+        "startChar": 4,
+        "endLine": 1164,
+        "endChar": 10
+      },
+      "revId": "0e3b4d433dedf40a906d0b4010f9c8d046047fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd4b5426_e79eefb2",
         "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
         "patchSetId": 5
