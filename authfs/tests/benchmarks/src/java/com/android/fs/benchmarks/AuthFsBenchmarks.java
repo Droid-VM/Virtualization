@@ -140,6 +140,7 @@ public class AuthFsBenchmarks extends BaseHostJUnit4Test {
 
             String rate = mAuthFsTestRule.getMicrodroid().run(cmd);
             rates.add(Double.parseDouble(rate));
+            mAuthFsTestRule.killFdServerOnAndroid();
         }
         reportMetrics(rates, mode + "_read", "mb_per_sec");
     }
@@ -157,6 +158,9 @@ public class AuthFsBenchmarks extends BaseHostJUnit4Test {
 
             String rate = mAuthFsTestRule.getMicrodroid().run(cmd);
             rates.add(Double.parseDouble(rate));
+            mAuthFsTestRule.killFdServerOnAndroid();
+            AuthFsTestRule.getAndroid()
+                    .runForResult("rm", "-rf", mAuthFsTestRule.TEST_OUTPUT_DIR + "/out.file");
         }
         reportMetrics(rates, mode + "_write", "mb_per_sec");
     }
