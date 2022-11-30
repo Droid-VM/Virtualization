@@ -126,6 +126,31 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
+    public void encryptedStoragePathFound() throws Exception {
+        assumeSupportedKernel();
+
+        VirtualMachineConfig config =
+                newVmConfigBuilder()
+                        .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
+                        .setMemoryMib(minMemoryRequired())
+                        // Sometime fails with "Not enough space to build proposed filesystem"
+                        // mkfs failed with ExitStatus(unix_wait_status(256))
+                        .setEncryptedStorageSizeKib(4096)
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .build();
+        VirtualMachine vm = forceCreateNewVirtualMachine("test_vm", config);
+
+        TestResults testResults = runVmTestService(vm);
+        assertThat(testResults.mException).isNull();
+        assertThat(testResults.mAddInteger).isEqualTo(123 + 456);
+        assertThat(testResults.mAppRunProp).isEqualTo("true");
+        assertThat(testResults.mSublibRunProp).isEqualTo("true");
+        assertThat(testResults.mApkContentsPath).isEqualTo("/mnt/apk");
+        assertThat(testResults.mEncryptedStoragePath).isEqualTo("/mnt/encryptedstore");
+    }
+
+    @Test
     @CddTest(requirements = {
             "9.17/C-1-1",
             "9.17/C-1-2",

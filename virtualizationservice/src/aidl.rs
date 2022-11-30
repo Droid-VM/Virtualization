@@ -897,8 +897,9 @@ fn check_label_is_allowed(ctx: &SeContext) -> Result<()> {
     match ctx.selinux_type()? {
         | "system_file" // immutable dm-verity protected partition
         | "apk_data_file" // APKs of an installed app
-        | "staging_data_file" // updated/staged APEX imagess
+        | "staging_data_file" // updated/staged APEX images
         | "shell_data_file" // test files created via adb shell
+        | "app_data_file" // app_data_file, donno why instance image was alright
          => Ok(()),
         _ => bail!("Label {} is not allowed", ctx),
     }
