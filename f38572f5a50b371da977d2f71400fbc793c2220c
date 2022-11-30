@@ -33,6 +33,69 @@
       "message": "Hi Pierre,\n\nCould you review this cl? I\u0027d like to make the test run like this for a while to be sure that at least it\u0027s not flaky without the change. It\u0027ll also get updated when others make changes in this class.",
       "revId": "f38572f5a50b371da977d2f71400fbc793c2220c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78686361_6bb81c54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-30T15:43:37Z",
+      "side": 1,
+      "message": "Adding @inseob@google.com for final review.",
+      "revId": "f38572f5a50b371da977d2f71400fbc793c2220c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e04b939_6019dff2",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-30T15:43:37Z",
+      "side": 1,
+      "message": "OOC: are these 3 comments (`Arrange`, `Action`, `Asserts`) part of a test writing methodology?",
+      "range": {
+        "startLine": 412,
+        "startChar": 8,
+        "endLine": 412,
+        "endChar": 18
+      },
+      "revId": "f38572f5a50b371da977d2f71400fbc793c2220c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9f6b946_86bf6cd9",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-11-30T15:43:37Z",
+      "side": 1,
+      "message": "I find it confusing to have a test that doesn\u0027t actually test anything (VMs booting under normal conditions is already covered by other tests) and, in particular, doesn\u0027t verify what its name implies.",
+      "range": {
+        "startLine": 427,
+        "startChar": 8,
+        "endLine": 427,
+        "endChar": 98
+      },
+      "revId": "f38572f5a50b371da977d2f71400fbc793c2220c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
