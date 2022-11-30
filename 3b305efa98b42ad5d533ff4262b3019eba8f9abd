@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb131080_40d37c77",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-30T05:42:40Z",
+      "side": 1,
+      "message": "consider make this a static inner class. `private static class ...`.",
+      "range": {
+        "startLine": 199,
+        "startChar": 12,
+        "endLine": 199,
+        "endChar": 17
+      },
+      "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2dcff79_19d2b9f4",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-30T05:42:40Z",
+      "side": 1,
+      "message": "nit: ApiCallbacks to conform with Java naming convention.",
+      "range": {
+        "startLine": 199,
+        "startChar": 18,
+        "endLine": 199,
+        "endChar": 30
+      },
+      "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dfff27d5_c5da0823",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 6
@@ -26,6 +72,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d047f00d_b510342e",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-30T05:42:40Z",
+      "side": 1,
+      "message": "nit: vmTrimLevel",
+      "range": {
+        "startLine": 215,
+        "startChar": 33,
+        "endLine": 215,
+        "endChar": 46
+      },
+      "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "162ca962_dd7fb4ec",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-30T05:42:40Z",
+      "side": 1,
+      "message": "Why? I think we should react on other notification types that are triggered when the app is running in background",
+      "range": {
+        "startLine": 228,
+        "startChar": 20,
+        "endLine": 228,
+        "endChar": 58
+      },
+      "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c5c50fab_1c4546d2",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 6
@@ -42,6 +134,99 @@
         "startChar": 20,
         "endLine": 234,
         "endChar": 34
+      },
+      "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be83b110_bbce8591",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-30T05:42:40Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "c5c50fab_1c4546d2",
+      "range": {
+        "startLine": 234,
+        "startChar": 20,
+        "endLine": 234,
+        "endChar": 34
+      },
+      "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4055326d_a7c4a09f",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-30T05:42:40Z",
+      "side": 1,
+      "message": "This doesn\u0027t look like a good name for this.. these have nothing to do with API. `MemoryManagementCallbacks` or just `ComponentCallback`?",
+      "range": {
+        "startLine": 243,
+        "startChar": 27,
+        "endLine": 243,
+        "endChar": 53
+      },
+      "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc4a1cb0_318aec47",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-30T05:42:40Z",
+      "side": 1,
+      "message": "no need if the class is defined as a static inner class.",
+      "range": {
+        "startLine": 320,
+        "startChar": 24,
+        "endLine": 320,
+        "endChar": 29
+      },
+      "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e9bed2c_d1c5f2ef",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-30T05:42:40Z",
+      "side": 1,
+      "message": "explicitly enumerate the list of functions you import?",
+      "range": {
+        "startLine": 53,
+        "startChar": 23,
+        "endLine": 53,
+        "endChar": 26
       },
       "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -118,6 +303,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cbf4f62f_beb6bb47",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-30T05:42:40Z",
+      "side": 1,
+      "message": "I know this is a valid Rust, but is uncommon at least in AVF. Can\u0027t this be `let request \u003d VmRequest::...` and use `\u0026request` when we have to pass a reference?",
+      "range": {
+        "startLine": 446,
+        "startChar": 12,
+        "endLine": 446,
+        "endChar": 23
+      },
+      "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc9cab25_f75079f9",
         "filename": "virtualizationservice/src/crosvm.rs",
         "patchSetId": 6
@@ -134,6 +342,52 @@
         "startChar": 20,
         "endLine": 458,
         "endChar": 27
+      },
+      "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73998c9d_db491d01",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-30T05:42:40Z",
+      "side": 1,
+      "message": "check the result",
+      "range": {
+        "startLine": 461,
+        "startChar": 20,
+        "endLine": 461,
+        "endChar": 21
+      },
+      "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4786f11f_82b5c3e7",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-30T05:42:40Z",
+      "side": 1,
+      "message": "don\u0027t we need to trigger an error (or at least log it) when handle_request failed?",
+      "range": {
+        "startLine": 463,
+        "startChar": 0,
+        "endLine": 463,
+        "endChar": 9
       },
       "revId": "3b305efa98b42ad5d533ff4262b3019eba8f9abd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
