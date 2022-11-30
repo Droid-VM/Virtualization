@@ -22,6 +22,30 @@
       },
       "revId": "3f6f6a55a2f1651b9b34df8a4057586b400c43e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bc8ba2f_3b2d136d",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-11-30T18:04:52Z",
+      "side": 1,
+      "message": "I considered it. We could simply signal ctl.stop to ueventd \u0026 init would stop it. \n\nBut I think it might make sense having microdroid_manager.init_done to indicate MM is done initialization.",
+      "parentUuid": "a7ad05f0_d9157dfb",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 16
+      },
+      "revId": "3f6f6a55a2f1651b9b34df8a4057586b400c43e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
