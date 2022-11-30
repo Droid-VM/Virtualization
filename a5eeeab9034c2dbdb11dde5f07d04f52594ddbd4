@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0ceda72_55aa0ad4",
+        "filename": "compos/verify/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-11-30T09:46:51Z",
+      "side": 1,
+      "message": "This was actually deliberate; the reason for waiting is so that if anything goes wrong we get to see the log messages and have a chance of diagnosing it..\n\nThere\u0027s discussion over on b/236581575#comment5.\n\nMy proposed solution is in b/236581575#comment8. I think we should change things so compos_verify tells odsign all is well immediately, and then shuts down the VM (so it would have to signal odsign some way other than by exit code).\n\nThen change odsign to wait for compos_verify to exit, after it has set the properties that tell init to get on with the boot.",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 58
+      },
+      "revId": "a5eeeab9034c2dbdb11dde5f07d04f52594ddbd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
