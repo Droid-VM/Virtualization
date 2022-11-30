@@ -33,7 +33,10 @@ rust_test {
     name: "libdm_rust.test",
     defaults: ["libdm_rust.defaults"],
     test_suites: ["general-tests"],
+    test_harness: false,
+    cfgs: ["test"],
     rustlibs: [
+        "libignorabletest",
         "librustutils",
         "libscopeguard",
         "libtempfile",
