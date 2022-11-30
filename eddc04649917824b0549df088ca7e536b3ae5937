@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15a02726_43bf8f07",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-30T05:55:47Z",
+      "side": 1,
+      "message": "Ok. I actually don\u0027t think the accessibility check has to be done here because we will anyway experience an error when crosvm actually try to read it. Doing the check here might be incorrect because VS and crosvm run in different selinux domain, so accessibility in this process doesn\u0027t explain the accessibility in crosvm.",
+      "parentUuid": "acefe7e1_213b647d",
+      "range": {
+        "startLine": 606,
+        "startChar": 64,
+        "endLine": 606,
+        "endChar": 74
+      },
+      "revId": "eddc04649917824b0549df088ca7e536b3ae5937",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9444731a_1d3609bd",
         "filename": "virtualizationservice/src/crosvm.rs",
         "patchSetId": 3
