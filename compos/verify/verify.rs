@@ -119,7 +119,8 @@ fn try_main() -> Result<()> {
     let service = vm_instance.connect_service()?;
     let public_key = service.getPublicKey().context("Getting public key");
 
-    vm_instance.shutdown(service);
+    // Request shutdown (and continue; don't need to wait)
+    service.quit().context("Failed to quit vm")?;
 
     if !compos_verify_native::verify(&public_key?, &signature, &info) {
         bail!("Signature verification failed");
