@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7ad05f0_d9157dfb",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-11-30T17:58:33Z",
+      "side": 1,
+      "message": "Hm, do we only need this property to tell init to stop ueventd? If so, then can we move the logic for stopping ueventd to microdroid_manager? Alan, Jiyong WDYT?",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 16
+      },
+      "revId": "3f6f6a55a2f1651b9b34df8a4057586b400c43e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
