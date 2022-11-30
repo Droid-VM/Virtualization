@@ -75,6 +75,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b35d1e9_998f614b",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-30T16:00:25Z",
+      "side": 1,
+      "message": "Yeah, it\u0027s a way to arrange the unit tests[1][2] and I found it pretty clear. Having a single action per test also makes it more readable and easy to maintain.\n\n[1] https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices#arranging-your-tests\n[2] https://java-design-patterns.com/patterns/arrange-act-assert/#intent",
+      "parentUuid": "7e04b939_6019dff2",
+      "range": {
+        "startLine": 412,
+        "startChar": 8,
+        "endLine": 412,
+        "endChar": 18
+      },
+      "revId": "f38572f5a50b371da977d2f71400fbc793c2220c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9f6b946_86bf6cd9",
@@ -88,6 +112,30 @@
       "writtenOn": "2022-11-30T15:43:37Z",
       "side": 1,
       "message": "I find it confusing to have a test that doesn\u0027t actually test anything (VMs booting under normal conditions is already covered by other tests) and, in particular, doesn\u0027t verify what its name implies.",
+      "range": {
+        "startLine": 427,
+        "startChar": 8,
+        "endLine": 427,
+        "endChar": 98
+      },
+      "revId": "f38572f5a50b371da977d2f71400fbc793c2220c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9a4212a_0465f6e1",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-30T16:00:25Z",
+      "side": 1,
+      "message": "It provides a proof that pvmfw runs in the background correctly for now. The two other boot tests below both use unprotectedVm, neither runs pvmfw.\n\nOtherwise, I saw lots of test flakiness reports for this class recently. If we enable it together with the feature, we cannot tell if it\u0027s always like this or the flakiness is caused by the newly added verification part.\n\nAn alternative is to change this test to check the success scenario, and later we add another test to check the verification failure scenario. wdyt?",
+      "parentUuid": "b9f6b946_86bf6cd9",
       "range": {
         "startLine": 427,
         "startChar": 8,
