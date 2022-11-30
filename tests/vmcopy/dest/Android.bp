@@ -1,0 +1,15 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+android_app {
+    name: "VmCopyDestApp",
+    srcs: ["src/**/*.java"],
+    sdk_version: "system_current",
+    jni_libs: ["MicrodroidTestNativeLib"],
+    jni_uses_platform_apis: true,
+    static_libs: [
+        "androidx.appcompat_appcompat",
+        "com.android.microdroid.testservice-java",
+    ],
+}
