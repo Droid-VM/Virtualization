@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b7076e8_9dc2d6ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-30T08:26:40Z",
+      "side": 1,
+      "message": "Hi Inseob,\n\nThanks for the fix!",
+      "revId": "c6358c7aa8bfdc7d2ff977580aae95f40c9d46d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "717e153b_153a1188",
+        "filename": "authfs/tests/benchmarks/src/java/com/android/fs/benchmarks/AuthFsBenchmarks.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-30T08:26:40Z",
+      "side": 1,
+      "message": "I think it\u0027s better to access static fields in a static way like AuthFsTestRule.TEST_OUTPUT_DIR here.",
+      "range": {
+        "startLine": 163,
+        "startChar": 47,
+        "endLine": 163,
+        "endChar": 62
+      },
+      "revId": "c6358c7aa8bfdc7d2ff977580aae95f40c9d46d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dbd6072_504a1593",
+        "filename": "authfs/tests/common/src/java/com/android/fs/common/AuthFsTestRule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-11-30T08:26:40Z",
+      "side": 1,
+      "message": "Since fd_server is killed after each trial, do we still need to run this after the whole test?",
+      "range": {
+        "startLine": 257,
+        "startChar": 8,
+        "endLine": 257,
+        "endChar": 29
+      },
+      "revId": "c6358c7aa8bfdc7d2ff977580aae95f40c9d46d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
