@@ -41,7 +41,10 @@ rust_test {
     defaults: ["apkdmverity.defaults"],
     test_suites: ["general-tests"],
     compile_multilib: "first",
+    test_harness: false,
+    cfgs: ["test"],
     rustlibs: [
+        "libignorabletest",
         "libtempfile",
     ],
     data: [
