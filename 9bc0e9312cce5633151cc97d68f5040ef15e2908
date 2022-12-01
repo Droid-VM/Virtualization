@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e90ba13_80c67a6e",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-12-01T22:22:35Z",
+      "side": 1,
+      "message": "I suppose it\u0027s a question of: Does the onTrimMemory() hook get triggered correctly in this case. Nice to have. I\u0027d also like to do a test that actually tries to simulate a real low-memory condition. I wonder whether there\u0027s a precedent?",
+      "parentUuid": "13a309a4_b0a37f73",
+      "range": {
+        "startLine": 408,
+        "startChar": 16,
+        "endLine": 408,
+        "endChar": 33
+      },
+      "revId": "9bc0e9312cce5633151cc97d68f5040ef15e2908",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3eb0d837_6956aa38",
         "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
         "patchSetId": 9
@@ -54,6 +78,30 @@
       "writtenOn": "2022-12-01T21:31:48Z",
       "side": 1,
       "message": "nit: we should also interrupt the current thread: Thread.currentThread().interrupt()",
+      "range": {
+        "startLine": 473,
+        "startChar": 16,
+        "endLine": 473,
+        "endChar": 53
+      },
+      "revId": "9bc0e9312cce5633151cc97d68f5040ef15e2908",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92fcfc36_770fad1a",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-12-01T22:22:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3eb0d837_6956aa38",
       "range": {
         "startLine": 473,
         "startChar": 16,
