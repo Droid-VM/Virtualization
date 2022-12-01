@@ -325,6 +325,49 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
+    @CddTest(requirements = {"9.17/C-1-1"})
+    public void vmFilesStoredInDeDirWhenCreatedFromDEContext() throws Exception {
+        final Context ctx = getContext().createDeviceProtectedStorageContext();
+        final VirtualMachineManager vmm = ctx.getSystemService(VirtualMachineManager.class);
+        VirtualMachineConfig config =
+                newVmConfigBuilder().setPayloadBinaryPath("binary/path").build();
+        try {
+            VirtualMachine vm = vmm.create("vm-name", config);
+            // TODO(b/261430346): what about non-primary user?
+            assertThat(vm.getRootDir().getAbsolutePath())
+                    .isEqualTo("/data/user_de/0/com.android.microdroid.test/vm/vm-name");
+        } finally {
+            vmm.delete("vm-name");
+        }
+    }
+
+    @Test
+    @CddTest(requirements = {"9.17/C-1-1"})
+    public void vmFilesStoredInCeDirWhenCreatedFromCEContext() throws Exception {
+        final Context ctx = getContext().createCredentialProtectedStorageContext();
+        final VirtualMachineManager vmm = ctx.getSystemService(VirtualMachineManager.class);
+        VirtualMachineConfig config =
+                newVmConfigBuilder().setPayloadBinaryPath("binary/path").build();
+        try {
+            VirtualMachine vm = vmm.create("vm-name", config);
+            // TODO(b/261430346): what about non-primary user?
+            assertThat(vm.getRootDir().getAbsolutePath())
+                    .isEqualTo("/data/user/0/com.android.microdroid.test/vm/vm-name");
+        } finally {
+            vmm.delete("vm-name");
+        }
+    }
+
+    @Test
+    @CddTest(requirements = {"9.17/C-1-1"})
+    public void differentManagersForDifferentContexts() throws Exception {
+        final Context ceCtx = getContext().createCredentialProtectedStorageContext();
+        final Context deCtx = getContext().createDeviceProtectedStorageContext();
+        assertThat(ceCtx.getSystemService(VirtualMachineManager.class))
+                .isNotSameInstanceAs(deCtx.getSystemService(VirtualMachineManager.class));
+    }
+
+    @Test
     @CddTest(requirements = {
             "9.17/C-1-1",
             "9.17/C-1-2",
