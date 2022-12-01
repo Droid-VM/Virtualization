@@ -54,6 +54,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "410e44dd_c7810662",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-01T08:20:30Z",
+      "side": 1,
+      "message": "Hi,\n\nThanks for your reviews! Please take another look.",
+      "revId": "f38572f5a50b371da977d2f71400fbc793c2220c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7e04b939_6019dff2",
         "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
         "patchSetId": 1
@@ -194,6 +211,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1f9761e_e60a5357",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-01T08:20:30Z",
+      "side": 1,
+      "message": "\u003e Do you mean that none of our pre-submit tests run pvmfw (pVMs)?\n\nI cannot say **none** as I didn\u0027t check everything. I just checked other boot tests in this class, they don\u0027t run. I guess some tests definitely run pVMs, but, there\u0027s no proof that anything goes through the pvmfw::main. If someone changes the logic that the main() is bypassed, we won\u0027t even notice it. A test like this guarantees that such changes will be blocked at the early stage.",
+      "parentUuid": "8f5fef22_f1cded71",
+      "range": {
+        "startLine": 427,
+        "startChar": 8,
+        "endLine": 427,
+        "endChar": 98
+      },
+      "revId": "f38572f5a50b371da977d2f71400fbc793c2220c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b995f895_ccd7e900",
@@ -207,6 +248,30 @@
       "writtenOn": "2022-12-01T02:43:27Z",
       "side": 1,
       "message": "Umm, I find it confusing to check `\"Starting payload...\"` here, where the intended behavior is boot failure.\n\n\u003e An alternative is to change this test to check the success scenario, and later we add another test to check the verification failure scenario. wdyt?\n\nAs Pierre said, this looks better. You can comment out the failure scenario along with TODO, like:\n\n    // TODO(b/256148034): ..\n    // runMicrodroidWithResignedImages(...);\n    // assertWithMessage(\"Payload shouldn\u0027t start\").that(log).doesNotContain(...)",
+      "range": {
+        "startLine": 427,
+        "startChar": 0,
+        "endLine": 430,
+        "endChar": 49
+      },
+      "revId": "f38572f5a50b371da977d2f71400fbc793c2220c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39c359df_ed8c6fc3",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-01T08:20:30Z",
+      "side": 1,
+      "message": "\u003e An alternative is to change this test to check the success scenario, and later we add another test to check the verification failure scenario. wdyt?\n\nActually after some thinking, I think we can add a success test in another cl but still keep this test as a placeholder for the failure scenario (I\u0027ll rename it though). Because the `action` of this test `runMicrodroidWithResignedImages()` is quite complex and is never called for protected VM, I\u0027d like to activate it like this to ensure that this method runs without problem before the verification part lands.\n\nI can remove this assert to make it more clear.",
+      "parentUuid": "b995f895_ccd7e900",
       "range": {
         "startLine": 427,
         "startChar": 0,
