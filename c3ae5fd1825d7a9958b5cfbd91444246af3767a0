@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "aa7d63f4_717cb49d",
+        "filename": "launcher/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-01T10:00:48Z",
+      "side": 1,
+      "message": "Yes, that\u0027s intentional. Most of them wouldn\u0027t work anyway, I suspect. Are there any you think should be here?",
+      "parentUuid": "8a18f165_bd3254ce",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 89
+      },
+      "revId": "c3ae5fd1825d7a9958b5cfbd91444246af3767a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1116982c_1365f849",
         "filename": "launcher/main.cpp",
         "patchSetId": 1
@@ -83,6 +107,30 @@
       "writtenOn": "2022-12-01T05:52:27Z",
       "side": 1,
       "message": "nit: discarded return value.",
+      "range": {
+        "startLine": 101,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 27
+      },
+      "revId": "c3ae5fd1825d7a9958b5cfbd91444246af3767a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3580a9a1_cf543a6c",
+        "filename": "launcher/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-01T10:00:48Z",
+      "side": 1,
+      "message": "Yeah, it would be nice to check that.\n\nAlso: could we have a test?",
+      "parentUuid": "836f5337_27cdce74",
       "range": {
         "startLine": 101,
         "startChar": 4,
