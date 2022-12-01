@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2976d46f_f41815d8",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-12-01T20:37:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb03cb2e_59dda3ec",
+      "range": {
+        "startLine": 201,
+        "startChar": 10,
+        "endLine": 201,
+        "endChar": 53
+      },
+      "revId": "4dbed633bd3de30dc940b0030690202910d24342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65625cd7_fdc6fdfc",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-01T14:41:47Z",
       "side": 1,
       "message": "Nit: You probably don\u0027t need this check. onTrimMemory will fail if it\u0027s not running, and you already handle that.",
+      "range": {
+        "startLine": 239,
+        "startChar": 24,
+        "endLine": 239,
+        "endChar": 90
+      },
+      "revId": "4dbed633bd3de30dc940b0030690202910d24342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a41f37a5_c731932a",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-12-01T20:37:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65625cd7_fdc6fdfc",
       "range": {
         "startLine": 239,
         "startChar": 24,
@@ -93,6 +141,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2865bd91_16a04707",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-12-01T20:37:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60d12202_bc13bce6",
+      "range": {
+        "startLine": 244,
+        "startChar": 44,
+        "endLine": 244,
+        "endChar": 69
+      },
+      "revId": "4dbed633bd3de30dc940b0030690202910d24342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83a043c6_6c000051",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-12-01T20:37:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f3faa50_545aeddf",
+      "range": {
+        "startLine": 244,
+        "startChar": 26,
+        "endLine": 244,
+        "endChar": 42
+      },
+      "revId": "4dbed633bd3de30dc940b0030690202910d24342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5717024_f4e548ed",
@@ -106,6 +202,30 @@
       "writtenOn": "2022-12-01T14:41:47Z",
       "side": 1,
       "message": "We never read this; do we actually need it?\n(Context keeps a reference when we register, so it won\u0027t get GC\u0027d.)",
+      "range": {
+        "startLine": 250,
+        "startChar": 0,
+        "endLine": 250,
+        "endChar": 80
+      },
+      "revId": "4dbed633bd3de30dc940b0030690202910d24342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93f9dc1f_f4f8d82b",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-12-01T20:37:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5717024_f4e548ed",
       "range": {
         "startLine": 250,
         "startChar": 0,
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cd3faf7_1720b39c",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-12-01T20:37:50Z",
+      "side": 1,
+      "message": "This doesn\u0027t work, I think because `handle_request` isn\u0027t using `anyhow`. It\u0027s part of crosvm, and we could consider making it more polite via an upstream patch. Anyway, for now I\u0027ve chosen to make it more obvious that this is a \"foreign\" interface by calling it via its fully qualified name.",
+      "parentUuid": "8b166b09_71e9e190",
+      "range": {
+        "startLine": 453,
+        "startChar": 8,
+        "endLine": 453,
+        "endChar": 72
+      },
+      "revId": "4dbed633bd3de30dc940b0030690202910d24342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cdab8d7a_26d4693a",
@@ -152,6 +296,30 @@
       "writtenOn": "2022-12-01T13:40:59Z",
       "side": 1,
       "message": "style: this could be simpler: `handle_request(...).context(\"failed to send balloon adjustment\")?;`",
+      "range": {
+        "startLine": 467,
+        "startChar": 20,
+        "endLine": 472,
+        "endChar": 21
+      },
+      "revId": "4dbed633bd3de30dc940b0030690202910d24342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97bd060c_05036ddf",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2022-12-01T20:37:50Z",
+      "side": 1,
+      "message": "As above.",
+      "parentUuid": "cdab8d7a_26d4693a",
       "range": {
         "startLine": 467,
         "startChar": 20,
