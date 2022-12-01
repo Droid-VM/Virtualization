@@ -3,6 +3,121 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb03cb2e_59dda3ec",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-01T14:41:47Z",
+      "side": 1,
+      "message": "Maybe move this to the call site?",
+      "range": {
+        "startLine": 201,
+        "startChar": 10,
+        "endLine": 201,
+        "endChar": 53
+      },
+      "revId": "4dbed633bd3de30dc940b0030690202910d24342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65625cd7_fdc6fdfc",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-01T14:41:47Z",
+      "side": 1,
+      "message": "Nit: You probably don\u0027t need this check. onTrimMemory will fail if it\u0027s not running, and you already handle that.",
+      "range": {
+        "startLine": 239,
+        "startChar": 24,
+        "endLine": 239,
+        "endChar": 90
+      },
+      "revId": "4dbed633bd3de30dc940b0030690202910d24342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f3faa50_545aeddf",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-01T14:41:47Z",
+      "side": 1,
+      "message": "TAG",
+      "range": {
+        "startLine": 244,
+        "startChar": 26,
+        "endLine": 244,
+        "endChar": 42
+      },
+      "revId": "4dbed633bd3de30dc940b0030690202910d24342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60d12202_bc13bce6",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-01T14:41:47Z",
+      "side": 1,
+      "message": "-\u003e \"TrimMemory failed\", e\n\n(e.toString() isn\u0027t particularly helpful, there are overloads of the log functions that do the right thing with exceptions.)",
+      "range": {
+        "startLine": 244,
+        "startChar": 44,
+        "endLine": 244,
+        "endChar": 69
+      },
+      "revId": "4dbed633bd3de30dc940b0030690202910d24342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5717024_f4e548ed",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-01T14:41:47Z",
+      "side": 1,
+      "message": "We never read this; do we actually need it?\n(Context keeps a reference when we register, so it won\u0027t get GC\u0027d.)",
+      "range": {
+        "startLine": 250,
+        "startChar": 0,
+        "endLine": 250,
+        "endChar": 80
+      },
+      "revId": "4dbed633bd3de30dc940b0030690202910d24342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8b166b09_71e9e190",
         "filename": "virtualizationservice/src/crosvm.rs",
         "patchSetId": 9
