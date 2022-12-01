@@ -70,6 +70,30 @@
       },
       "revId": "e6d1ccde9c6286dc7d7112aa65ea2b4263e89e7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d43b0ff6_c5d836d7",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-01T11:17:27Z",
+      "side": 1,
+      "message": "Thanks for the input! My understanding is that, currently the boot order of the main components and the things they verify are\n\n1/ pvmfw: it is supposed to verify the microdroid_kernel image (public key, vbmeta, partitions) with libavb\n2/ init: verify some slots[3] with libavb[2] (Question: is there an easy way to deploy changes in system/core/init without flashing the whole device?)\n3/ microdroid_manager: verify vbmeta in apexes with libavb, verify apks with apkverify)\n\nA problem for this test is that it resigns all the images[1], so from users\u0027 perspective the boot always fails even when pvmfw does nothing. It\u0027s also hard to tell init fails in *which* image verification. It could be better to resign only the kernel image in this test IMO, and if we want to test init failure, we resign only the image init cares about. We can also get rid of the log-based tests like this, as we only need to check whether Microdroid launches or not instead of parsing the log.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/apex/sign_virt_apex.py;l\u003d16;drc\u003db81e821b3f37e2a67dba1292e1dc2715287d32f4\n[2] https://cs.android.com/android/platform/superproject/+/master:system/core/init/first_stage_mount.cpp;l\u003d785;drc\u003de321b113d6fb0e618edfbc27b5530806ae274ac8\n[3] https://cs.android.com/android/platform/superproject/+/master:system/core/fs_mgr/fs_mgr_slotselect.cpp;l\u003d51;drc\u003d81c34f74fac77836f966ea771c6f9763d4cc4aca",
+      "parentUuid": "cd3b6f90_c4c4c10d",
+      "range": {
+        "startLine": 429,
+        "startChar": 0,
+        "endLine": 429,
+        "endChar": 34
+      },
+      "revId": "e6d1ccde9c6286dc7d7112aa65ea2b4263e89e7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

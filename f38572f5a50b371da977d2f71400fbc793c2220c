@@ -259,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb44f437_691e2fe1",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-01T11:17:27Z",
+      "side": 1,
+      "message": "Agree. We\u0027ll see how flaky it is with this test running like this for some time.\n\nI also think it\u0027s a bit brittle to test based on logging. It\u0027s just better than nothing when there\u0027s no (easy) alternative for now. We can definitely improve this in the future -\u003e see the suggestion in the other comment.",
+      "parentUuid": "146d1587_5c48de4d",
+      "range": {
+        "startLine": 427,
+        "startChar": 8,
+        "endLine": 427,
+        "endChar": 98
+      },
+      "revId": "f38572f5a50b371da977d2f71400fbc793c2220c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b995f895_ccd7e900",
