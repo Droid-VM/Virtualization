@@ -235,6 +235,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "146d1587_5c48de4d",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-01T10:26:23Z",
+      "side": 1,
+      "message": "\u003e If someone changes the logic that the main() is bypassed, we won\u0027t even notice it.\n\nFair enough but basing that on logs is still incredibly brittle and forces us to write to the UART, which has a performance cost/impacts pVM boot times. Anyway, this is beyond the scope of this CL but I\u0027d like us to think about alternatives.",
+      "parentUuid": "d1f9761e_e60a5357",
+      "range": {
+        "startLine": 427,
+        "startChar": 8,
+        "endLine": 427,
+        "endChar": 98
+      },
+      "revId": "f38572f5a50b371da977d2f71400fbc793c2220c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b995f895_ccd7e900",

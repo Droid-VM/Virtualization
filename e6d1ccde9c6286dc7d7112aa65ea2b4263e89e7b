@@ -46,6 +46,30 @@
       },
       "revId": "e6d1ccde9c6286dc7d7112aa65ea2b4263e89e7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd3b6f90_c4c4c10d",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-01T10:26:23Z",
+      "side": 1,
+      "message": "\u003e Here I\u0027m a bit confused, why do we need to duplicate the same check in pvmfw? Anyway this verification will be done in init later.\n\nAs we discussed on Friday, I believe that your confusion comes from an assumption that these checks are validating the same inputs but it\u0027s very unlikely that they are as it wouldn\u0027t make sense to validate the kernel from a userspace process.\n\n\u003e Currently this verification is done in init\n\nCould you share a pointer to that code?\n\n\u003e ... done in init (after pvmfw launches payload, but before the payload actually runs)\n\npvmfw executes the kernel, it doesn\u0027t deal with userspace (init and the payload) beyond validating the ramdisk.",
+      "parentUuid": "c7c46f3b_c0a95729",
+      "range": {
+        "startLine": 429,
+        "startChar": 0,
+        "endLine": 429,
+        "endChar": 34
+      },
+      "revId": "e6d1ccde9c6286dc7d7112aa65ea2b4263e89e7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
