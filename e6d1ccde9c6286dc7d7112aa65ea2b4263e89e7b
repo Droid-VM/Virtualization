@@ -22,6 +22,30 @@
       },
       "revId": "e6d1ccde9c6286dc7d7112aa65ea2b4263e89e7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7c46f3b_c0a95729",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-01T08:52:30Z",
+      "side": 1,
+      "message": "That\u0027s a good question. Currently this verification is done in init (after pvmfw launches payload, but before the payload actually runs). If the verification fails in init, a reboot is triggered. That\u0027s the behavior or both protected and unprotected VMs. Even when the verification fails, we still destroy the process (line 461).\n\nb/256148034 is supposed to do the verification inside pvmfw, and then reboots[1] when it fails. Here I\u0027m a bit confused, why do we need to duplicate the same check in pvmfw? Anyway this verification will be done in init later.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/pvmfw/src/entry.rs;l\u003d60;drc\u003d277c0f15be43a8eeb4cb5dc1e09a582707b4d792",
+      "parentUuid": "fc0cbd92_2c4ff6b4",
+      "range": {
+        "startLine": 429,
+        "startChar": 0,
+        "endLine": 429,
+        "endChar": 34
+      },
+      "revId": "e6d1ccde9c6286dc7d7112aa65ea2b4263e89e7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
