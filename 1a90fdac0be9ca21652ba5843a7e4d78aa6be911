@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c723acab_8ad1fb4a",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-01T21:25:31Z",
+      "side": 1,
+      "message": "nit: switch to just Exception? It will also cover RuntimeException\u0027s that might be thrown from onTrimMemory",
+      "range": {
+        "startLine": 237,
+        "startChar": 25,
+        "endLine": 237,
+        "endChar": 67
+      },
+      "revId": "1a90fdac0be9ca21652ba5843a7e4d78aa6be911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9c40f8b_801334d6",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-01T21:25:31Z",
+      "side": 1,
+      "message": "I think we are leaking the component callback here, see https://cs.android.com/android/platform/superproject/+/master:frameworks/base/core/java/android/content/Context.java;l\u003d714;drc\u003dea76ae6fee90cdac51503b0c6212628e35aec44a.\n\nIf I understand java correctly, that would also mean that the VirtualMachine object itself won\u0027t be GCed, since the application context will hold the reference to the callback.\n\nShould we register the callback when a VM is started, and unregister it when the VM is stopped?",
+      "range": {
+        "startLine": 320,
+        "startChar": 16,
+        "endLine": 320,
+        "endChar": 42
+      },
+      "revId": "1a90fdac0be9ca21652ba5843a7e4d78aa6be911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ef16226_5fbdca6a",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-01T21:25:31Z",
+      "side": 1,
+      "message": "nit: i\u0027m not sure you need \"this.\", just new MemoryManagementCallbacks() should work",
+      "range": {
+        "startLine": 320,
+        "startChar": 43,
+        "endLine": 320,
+        "endChar": 48
+      },
+      "revId": "1a90fdac0be9ca21652ba5843a7e4d78aa6be911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
