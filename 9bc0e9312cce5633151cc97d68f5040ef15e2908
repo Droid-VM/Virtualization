@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d993baf_5aed316b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-01T21:31:48Z",
+      "side": 1,
+      "message": "Apologies for late review",
+      "revId": "9bc0e9312cce5633151cc97d68f5040ef15e2908",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13a309a4_b0a37f73",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-01T21:31:48Z",
+      "side": 1,
+      "message": "Should we also test that memory reclaimed when app goes into background?\n\nNote: not blocking this change, just wondering if it\u0027s a good test to have.",
+      "range": {
+        "startLine": 408,
+        "startChar": 16,
+        "endLine": 408,
+        "endChar": 33
+      },
+      "revId": "9bc0e9312cce5633151cc97d68f5040ef15e2908",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eb0d837_6956aa38",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-01T21:31:48Z",
+      "side": 1,
+      "message": "nit: we should also interrupt the current thread: Thread.currentThread().interrupt()",
+      "range": {
+        "startLine": 473,
+        "startChar": 16,
+        "endLine": 473,
+        "endChar": 53
+      },
+      "revId": "9bc0e9312cce5633151cc97d68f5040ef15e2908",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
