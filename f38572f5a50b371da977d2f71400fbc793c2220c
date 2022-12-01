@@ -192,6 +192,29 @@
       },
       "revId": "f38572f5a50b371da977d2f71400fbc793c2220c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b995f895_ccd7e900",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-12-01T02:43:27Z",
+      "side": 1,
+      "message": "Umm, I find it confusing to check `\"Starting payload...\"` here, where the intended behavior is boot failure.\n\n\u003e An alternative is to change this test to check the success scenario, and later we add another test to check the verification failure scenario. wdyt?\n\nAs Pierre said, this looks better. You can comment out the failure scenario along with TODO, like:\n\n    // TODO(b/256148034): ..\n    // runMicrodroidWithResignedImages(...);\n    // assertWithMessage(\"Payload shouldn\u0027t start\").that(log).doesNotContain(...)",
+      "range": {
+        "startLine": 427,
+        "startChar": 0,
+        "endLine": 430,
+        "endChar": 49
+      },
+      "revId": "f38572f5a50b371da977d2f71400fbc793c2220c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
