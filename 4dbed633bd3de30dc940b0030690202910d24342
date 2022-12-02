@@ -309,6 +309,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d71f7087_c97e8769",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-12-02T01:29:23Z",
+      "side": 1,
+      "message": "oh, I didn\u0027t notice that. then we couldn\u0027t use the context method. but the error case handling could still be simplified.\n\n```\nmatch handle_request(...)\n   .map_err(|e| Err(anyhow!(\"error requesting balloon stats: {:?}\", e)))? {\n   VmResponse::BaloonStats(..) \u003d\u003e\n   VmResponse::Err(..) \u003d\u003e\n}\n```\n\n... but I don\u0027t want you to be blocked on this. This style issue could be handled in a separate CL.",
+      "parentUuid": "9875cf53_a7cc012b",
+      "range": {
+        "startLine": 453,
+        "startChar": 8,
+        "endLine": 453,
+        "endChar": 72
+      },
+      "revId": "4dbed633bd3de30dc940b0030690202910d24342",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cdab8d7a_26d4693a",
         "filename": "virtualizationservice/src/crosvm.rs",
         "patchSetId": 9
