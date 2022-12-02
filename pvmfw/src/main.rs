@@ -19,9 +19,13 @@
 #![feature(default_alloc_error_handler)]
 #![feature(ptr_const_cast)] // Stabilized in 1.65.0
 
+#[macro_use]
+extern crate alloc;
+
 mod avb;
 mod config;
 mod entry;
+mod errors;
 mod exceptions;
 mod fdt;
 mod heap;
