@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49a676f6_1daeae9f",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-02T10:41:01Z",
+      "side": 1,
+      "message": "This will hang the VM.",
+      "range": {
+        "startLine": 155,
+        "startChar": 49,
+        "endLine": 155,
+        "endChar": 84
+      },
+      "revId": "6c840a43020eb719d4ab9ac7f420386ba9c056b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8b3fc09_99d1d37b",
+        "filename": "pvmfw/src/errors.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-02T10:41:01Z",
+      "side": 1,
+      "message": "What happens if we run out of heap?",
+      "range": {
+        "startLine": 29,
+        "startChar": 18,
+        "endLine": 29,
+        "endChar": 24
+      },
+      "revId": "6c840a43020eb719d4ab9ac7f420386ba9c056b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
