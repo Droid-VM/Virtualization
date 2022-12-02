@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a143cb9_20c76957",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-12-02T04:55:47Z",
+      "side": 1,
+      "message": "nit: drop",
+      "range": {
+        "startLine": 10,
+        "startChar": 60,
+        "endLine": 10,
+        "endChar": 61
+      },
+      "revId": "f2f631c9192fccdd5e82f8329b652613dcfa568d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8fcfb612_2b25ba77",
@@ -14,6 +37,52 @@
       "writtenOn": "2022-12-01T16:16:58Z",
       "side": 1,
       "message": "Hi Pierre, PTAL.",
+      "revId": "f2f631c9192fccdd5e82f8329b652613dcfa568d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fb948e7_d15cade3",
+        "filename": "libs/avb/src/avb_ops.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-12-02T04:55:47Z",
+      "side": 1,
+      "message": "ensure that error_code is never AvbSlotVerifyResult_AVB_SLOT_VERIFY_RESULT_OK ?",
+      "range": {
+        "startLine": 84,
+        "startChar": 12,
+        "endLine": 84,
+        "endChar": 16
+      },
+      "revId": "f2f631c9192fccdd5e82f8329b652613dcfa568d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e6e6085_790d2f5d",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-12-02T04:55:47Z",
+      "side": 1,
+      "message": "This doesn\u0027t look right as the payload verification is not the sole task of this function. The function can/could fail for various reasons from the features that will be added in the future (dt sanitization, dice derivation, ...)\n\nShouldn\u0027t this be RebootReason?",
+      "range": {
+        "startLine": 43,
+        "startChar": 16,
+        "endLine": 43,
+        "endChar": 35
+      },
       "revId": "f2f631c9192fccdd5e82f8329b652613dcfa568d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

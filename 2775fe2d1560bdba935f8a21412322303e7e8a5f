@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9339bd33_403ae1e7",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-12-02T04:55:47Z",
+      "side": 0,
+      "message": "memory() returns Result\u003cOption\u003cMemRegIterator\u003e\u003e. So this is for the inner Option.",
+      "parentUuid": "d8e5f305_b92025a5",
+      "range": {
+        "startLine": 104,
+        "startChar": 12,
+        "endLine": 107,
+        "endChar": 15
+      },
+      "revId": "2775fe2d1560bdba935f8a21412322303e7e8a5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ed04ed67_fdaf9f2b",
         "filename": "pvmfw/src/main.rs",
         "patchSetId": 4
