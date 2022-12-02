@@ -15,13 +15,16 @@
 //! Low-level entry and exit points of pvmfw.
 
 use crate::config;
+use crate::errors::RebootReason;
 use crate::fdt;
 use crate::heap;
 use crate::helpers;
 use crate::memory::MemoryTracker;
 use crate::mmio_guard;
 use crate::mmu;
+use alloc::string::{String, ToString};
 use core::arch::asm;
+use core::fmt::Debug;
 use core::num::NonZeroUsize;
 use core::slice;
 use log::debug;
@@ -30,24 +33,6 @@ use log::info;
 use log::warn;
 use log::LevelFilter;
 use vmbase::{console, layout, logger, main, power::reboot};
-
-#[derive(Debug, Clone)]
-enum RebootReason {
-    /// A malformed BCC was received.
-    InvalidBcc,
-    /// An invalid configuration was appended to pvmfw.
-    InvalidConfig,
-    /// An unexpected internal error happened.
-    InternalError,
-    /// The provided FDT was invalid.
-    InvalidFdt,
-    /// The provided payload was invalid.
-    InvalidPayload,
-    /// The provided ramdisk was invalid.
-    InvalidRamdisk,
-    /// Failed to verify the payload.
-    PayloadVerificationError,
-}
 
 main!(start);
 
@@ -59,7 +44,10 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64
 
     match main_wrapper(fdt_address as usize, payload_start as usize, payload_size as usize) {
         Ok(_) => jump_to_payload(fdt_address, payload_start),
-        Err(_) => reboot(),
+        Err(e) => {
+            error!("Starting reboot. Error: {:?}", e);
+            reboot();
+        }
     }
 
     // if we reach this point and return, vmbase::entry::rust_entry() will call power::shutdown().
@@ -84,15 +72,13 @@ impl<'a> MemorySlices<'a> {
         // e.g. by generating a DTBO for a template DT in main() and, on return, re-map DT as RW,
         // overwrite with the template DT and apply the DTBO.
         let range = memory.alloc_mut(fdt, FDT_SIZE).map_err(|e| {
-            error!("Failed to allocate the FDT range: {e}");
-            RebootReason::InternalError
+            RebootReason::InternalError(to_error_message("Failed to allocate the FDT range", e))
         })?;
 
         // SAFETY - The tracker validated the range to be in main memory, mapped, and not overlap.
         let fdt = unsafe { slice::from_raw_parts_mut(range.start as *mut u8, range.len()) };
         let fdt = libfdt::Fdt::from_mut_slice(fdt).map_err(|e| {
-            error!("Failed to spawn the FDT wrapper: {e}");
-            RebootReason::InvalidFdt
+            RebootReason::InvalidFdt(to_error_message("Failed to spawn the FDT wrapper", e))
         })?;
 
         debug!("Fdt passed validation!");
@@ -100,50 +86,45 @@ impl<'a> MemorySlices<'a> {
         let memory_range = fdt
             .memory()
             .map_err(|e| {
-                error!("Failed to get /memory from the DT: {e}");
-                RebootReason::InvalidFdt
+                RebootReason::InvalidFdt(to_error_message("Failed to get /memory from the DT", e))
             })?
-            .ok_or_else(|| {
-                error!("Node /memory was found empty");
-                RebootReason::InvalidFdt
-            })?
+            .ok_or_else(|| RebootReason::InvalidFdt("Node /memory was found empty".to_string()))?
             .next()
             .ok_or_else(|| {
-                error!("Failed to read the memory size from the FDT");
-                RebootReason::InternalError
+                RebootReason::InternalError(
+                    "Failed to read the memory size from the FDT".to_string(),
+                )
             })?;
 
         debug!("Resizing MemoryTracker to range {memory_range:#x?}");
 
         memory.shrink(&memory_range).map_err(|_| {
-            error!("Failed to use memory range value from DT: {memory_range:#x?}");
-            RebootReason::InvalidFdt
+            RebootReason::InvalidFdt(format!(
+                "Failed to use memory range value from DT: {:#x?}",
+                memory_range
+            ))
         })?;
 
-        let payload_size = NonZeroUsize::new(payload_size).ok_or_else(|| {
-            error!("Invalid payload size: {payload_size:#x}");
-            RebootReason::InvalidPayload
-        })?;
+        let payload_size =
+            NonZeroUsize::new(payload_size).ok_or(RebootReason::InvalidPayload(payload_size))?;
 
         let payload_range = memory.alloc(payload, payload_size).map_err(|e| {
-            error!("Failed to obtain the payload range: {e}");
-            RebootReason::InternalError
+            RebootReason::InternalError(to_error_message("Failed to obtain the payload range", e))
         })?;
         // SAFETY - The tracker validated the range to be in main memory, mapped, and not overlap.
         let kernel =
             unsafe { slice::from_raw_parts(payload_range.start as *const u8, payload_range.len()) };
 
         let ramdisk_range = fdt::initrd_range(fdt).map_err(|e| {
-            error!("An error occurred while locating the ramdisk in the device tree: {e}");
-            RebootReason::InternalError
+            RebootReason::InternalError(to_error_message(
+                "An error occurred while locating the ramdisk in the device tree",
+                e,
+            ))
         })?;
 
         let ramdisk = if let Some(r) = ramdisk_range {
             debug!("Located ramdisk at {r:?}");
-            let r = memory.alloc_range(&r).map_err(|e| {
-                error!("Failed to obtain the initrd range: {e}");
-                RebootReason::InvalidRamdisk
-            })?;
+            let r = memory.alloc_range(&r).map_err(RebootReason::InvalidRamdisk)?;
 
             // SAFETY - The region was validated by memory to be in main memory, mapped, and
             // not overlap.
@@ -170,19 +151,18 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<(), R
     // SAFETY - This function should and will only be called once, here.
     unsafe { heap::init() };
 
-    logger::init(LevelFilter::Info).map_err(|_| RebootReason::InternalError)?;
+    logger::init(LevelFilter::Info)
+        .map_err(|_| RebootReason::InternalError("Failed logger::init()".to_string()))?;
 
     // Use debug!() to avoid printing to the UART if we failed to configure it as only local
     // builds that have tweaked the logger::init() call will actually attempt to log the message.
 
     mmio_guard::init().map_err(|e| {
-        debug!("{e}");
-        RebootReason::InternalError
+        RebootReason::InternalError(to_error_message("Failed mmio_guard::init()", e))
     })?;
 
     mmio_guard::map(console::BASE_ADDRESS).map_err(|e| {
-        debug!("Failed to configure the UART: {e}");
-        RebootReason::InternalError
+        RebootReason::InternalError(to_error_message("Failed to configure the UART", e))
     })?;
 
     // SAFETY - We only get the appended payload from here, once. It is mapped and the linker
@@ -192,28 +172,24 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<(), R
     // Up to this point, we were using the built-in static (from .rodata) page tables.
 
     let mut page_table = mmu::PageTable::from_static_layout().map_err(|e| {
-        error!("Failed to set up the dynamic page tables: {e}");
-        RebootReason::InternalError
+        RebootReason::InternalError(to_error_message("Failed to set up the dynamic page tables", e))
     })?;
 
     const CONSOLE_LEN: usize = 1; // vmbase::uart::Uart only uses one u8 register.
     let uart_range = console::BASE_ADDRESS..(console::BASE_ADDRESS + CONSOLE_LEN);
     page_table.map_device(&uart_range).map_err(|e| {
-        error!("Failed to remap the UART as a dynamic page table entry: {e}");
-        RebootReason::InternalError
+        RebootReason::InternalError(to_error_message(
+            "Failed to remap the UART as a dynamic page table entry",
+            e,
+        ))
     })?;
 
     // SAFETY - We only get the appended payload from here, once. It is statically mapped and the
     // linker script prevents it from overlapping with other objects.
-    let mut appended = unsafe { AppendedPayload::new(appended_data) }.ok_or_else(|| {
-        error!("No valid configuration found");
-        RebootReason::InvalidConfig
-    })?;
+    let mut appended =
+        unsafe { AppendedPayload::new(appended_data) }.ok_or(RebootReason::InvalidConfig)?;
 
-    let bcc = appended.get_bcc_mut().ok_or_else(|| {
-        error!("Invalid BCC");
-        RebootReason::InvalidBcc
-    })?;
+    let bcc = appended.get_bcc_mut().ok_or(RebootReason::InvalidBcc)?;
 
     debug!("Activating dynamic page table...");
     // SAFETY - page_table duplicates the static mappings for everything that the Rust code is
@@ -225,19 +201,19 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<(), R
     let slices = MemorySlices::new(fdt, payload, payload_size, &mut memory)?;
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
-    crate::main(slices.fdt, slices.kernel, slices.ramdisk, bcc).map_err(|e| {
-        error!("Failed to verify the payload: {e}");
-        RebootReason::PayloadVerificationError
-    })?;
+    crate::main(slices.fdt, slices.kernel, slices.ramdisk, bcc)?;
 
     // TODO: Overwrite BCC before jumping to payload to avoid leaking our sealing key.
 
     mmio_guard::unmap(console::BASE_ADDRESS).map_err(|e| {
-        error!("Failed to unshare the UART: {e}");
-        RebootReason::InternalError
+        RebootReason::InternalError(to_error_message("Failed to unshare the UART", e))
     })?;
 
     Ok(())
+}
+
+fn to_error_message<T: AsRef<str>, E: Debug>(message: T, e: E) -> String {
+    format!("{}. Error: {:?}", message.as_ref(), e)
 }
 
 fn jump_to_payload(fdt_address: u64, payload_start: u64) -> ! {
