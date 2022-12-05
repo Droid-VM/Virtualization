@@ -143,6 +143,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92a5f652_130503ab",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T21:30:58Z",
+      "side": 1,
+      "message": "Oh please do a sed. I don\u0027t mind rebase :)",
+      "parentUuid": "46e19319_ddcffca7",
+      "range": {
+        "startLine": 434,
+        "startChar": 49,
+        "endLine": 434,
+        "endChar": 64
+      },
+      "revId": "c2f9517a853f08931f5244c2ae527989e5fd5629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "845bd2a0_bfc076cd",
@@ -204,6 +228,30 @@
       "side": 1,
       "message": "\u003e Well, we can move this log to the beginning of [1] to be more sure for now.\n\nNo, we can\u0027t as this would hang the VM.\n\n\u003e Considering that this feature is for Android U\n\n`DeathReason` from post-pvmfw stages (bootloader (now gone), init, ...) is already supported and VS should return `DeathReason::Shutdown` if the VM issues a PSCI_SYSTEM_OFF.\n\nIn turn, this test could expect the shutdown by using the simplest init possible that turns off the VM (an even better approach would be to have a dedicated \"kernel\" that simply PSCI_SYSTEM_OFF but not sure how to integrate that into the testing infra).\n\n\u003e Not sure how to check that DeathReason::Shutdown according to the existing examples ...\n\nMe neither; @shikhapanwar@google.com, any idea?\n\n\u003e ... and how stable that can be.\n\nWhy wouldn\u0027t it be stable? We are checking that the VM performed a clean shutdown.",
       "parentUuid": "e7acc4cf_28a8ebd9",
+      "range": {
+        "startLine": 436,
+        "startChar": 16,
+        "endLine": 436,
+        "endChar": 49
+      },
+      "revId": "c2f9517a853f08931f5244c2ae527989e5fd5629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5b688ea_aea43051",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T21:30:58Z",
+      "side": 1,
+      "message": "Why the VM should issue a PSCI_SYSTEM_OFF after successfully booting pvmfw?\n\n\u003e Why wouldn\u0027t it be stable? \n\nI agree the idea is clean. I mean taking a new approach at this stage can have a high maintenance cost (like we might need to spend lots of time to address the flakiness like [1]), I don\u0027t mean the approach itself, but the intermediate functions we\u0027ll use to connect different pieces together.\n\nBy nature e2e tests have better coverage in comparison with unit test because they test longer flows, but the trade-off is that they are slow, flaky and are often harder to maintain.\n\n[1] the recent automatically reported flakiness of this class http://b/issues?q\u003dMicrodroidHostTestCases%20reporter:android-growler",
+      "parentUuid": "83e3d71a_c1b392ac",
       "range": {
         "startLine": 436,
         "startChar": 16,
