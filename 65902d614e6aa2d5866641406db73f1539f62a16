@@ -33,6 +33,24 @@
       "message": "What do expect this module to contain, beyond `RebootReason`? Why not `use crate::entry::RebootReason`?",
       "revId": "65902d614e6aa2d5866641406db73f1539f62a16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "860dbaa0_bd0716dc",
+        "filename": "pvmfw/src/errors.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T10:31:54Z",
+      "side": 1,
+      "message": "It looks like a circular imports visually. entry.rs depends on main.rs, then main.rs again needs entry. This doesn\u0027t look so clear.\n\nOtherwise other errors can also be added to this module if you want.",
+      "parentUuid": "1b85ca61_0055f1bd",
+      "revId": "65902d614e6aa2d5866641406db73f1539f62a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
