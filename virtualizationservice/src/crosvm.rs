@@ -33,6 +33,7 @@ use std::io::{self, Read};
 use std::mem;
 use std::num::NonZeroU32;
 use std::os::unix::io::{AsRawFd, RawFd, FromRawFd};
+use std::os::unix::process::ExitStatusExt;
 use std::path::{Path, PathBuf};
 use std::process::{Command, ExitStatus};
 use std::sync::{Arc, Condvar, Mutex};
@@ -329,11 +330,17 @@ impl VmInstance {
 
         self.handle_ramdump().unwrap_or_else(|e| error!("Error handling ramdump: {}", e));
 
-        let death_reason = death_reason(&result, &failure_reason);
+        let (death_reason, exit_signal) = death_reason(&result, &failure_reason);
         self.callbacks.callback_on_died(self.cid, death_reason);
 
         let vm_metric = self.vm_metric.lock().unwrap();
-        write_vm_exited_stats(self.requester_uid as i32, &self.name, death_reason, &*vm_metric);
+        write_vm_exited_stats(
+            self.requester_uid as i32,
+            &self.name,
+            death_reason,
+            exit_signal,
+            &*vm_metric,
+        );
 
         // Delete temporary files.
         if let Err(e) = remove_dir_all(&self.temporary_directory) {
@@ -525,52 +532,54 @@ fn get_rss(pid: u32) -> Result<Rss> {
     Ok(Rss { vm: rss_vm_total, crosvm: rss_crosvm_total })
 }
 
-fn death_reason(result: &Result<ExitStatus, io::Error>, mut failure_reason: &str) -> DeathReason {
+fn death_reason(
+    result: &Result<ExitStatus, io::Error>,
+    mut failure_reason: &str,
+) -> (DeathReason, i32) {
     if let Some(position) = failure_reason.find('|') {
         // Separator indicates extra context information is present after the failure name.
         error!("Failure info: {}", &failure_reason[(position + 1)..]);
         failure_reason = &failure_reason[..position];
     }
-    if let Ok(status) = result {
-        match failure_reason {
-            "PVM_FIRMWARE_PUBLIC_KEY_MISMATCH" => {
-                return DeathReason::PVM_FIRMWARE_PUBLIC_KEY_MISMATCH
-            }
+
+    let death_reason = match result {
+        Ok(status) => match failure_reason {
+            "PVM_FIRMWARE_PUBLIC_KEY_MISMATCH" => DeathReason::PVM_FIRMWARE_PUBLIC_KEY_MISMATCH,
             "PVM_FIRMWARE_INSTANCE_IMAGE_CHANGED" => {
-                return DeathReason::PVM_FIRMWARE_INSTANCE_IMAGE_CHANGED
+                DeathReason::PVM_FIRMWARE_INSTANCE_IMAGE_CHANGED
             }
-            "BOOTLOADER_PUBLIC_KEY_MISMATCH" => return DeathReason::BOOTLOADER_PUBLIC_KEY_MISMATCH,
-            "BOOTLOADER_INSTANCE_IMAGE_CHANGED" => {
-                return DeathReason::BOOTLOADER_INSTANCE_IMAGE_CHANGED
-            }
+            "BOOTLOADER_PUBLIC_KEY_MISMATCH" => DeathReason::BOOTLOADER_PUBLIC_KEY_MISMATCH,
+            "BOOTLOADER_INSTANCE_IMAGE_CHANGED" => DeathReason::BOOTLOADER_INSTANCE_IMAGE_CHANGED,
             "MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE" => {
-                return DeathReason::MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE
+                DeathReason::MICRODROID_FAILED_TO_CONNECT_TO_VIRTUALIZATION_SERVICE
             }
-            "MICRODROID_PAYLOAD_HAS_CHANGED" => return DeathReason::MICRODROID_PAYLOAD_HAS_CHANGED,
+            "MICRODROID_PAYLOAD_HAS_CHANGED" => DeathReason::MICRODROID_PAYLOAD_HAS_CHANGED,
             "MICRODROID_PAYLOAD_VERIFICATION_FAILED" => {
-                return DeathReason::MICRODROID_PAYLOAD_VERIFICATION_FAILED
+                DeathReason::MICRODROID_PAYLOAD_VERIFICATION_FAILED
             }
-            "MICRODROID_INVALID_PAYLOAD_CONFIG" => {
-                return DeathReason::MICRODROID_INVALID_PAYLOAD_CONFIG
-            }
-            "MICRODROID_UNKNOWN_RUNTIME_ERROR" => {
-                return DeathReason::MICRODROID_UNKNOWN_RUNTIME_ERROR
-            }
-            "HANGUP" => return DeathReason::HANGUP,
-            _ => {}
-        }
-        match status.code() {
-            None => DeathReason::KILLED,
-            Some(0) => DeathReason::SHUTDOWN,
-            Some(CROSVM_ERROR_STATUS) => DeathReason::ERROR,
-            Some(CROSVM_REBOOT_STATUS) => DeathReason::REBOOT,
-            Some(CROSVM_CRASH_STATUS) => DeathReason::CRASH,
-            Some(CROSVM_WATCHDOG_REBOOT_STATUS) => DeathReason::WATCHDOG_REBOOT,
-            Some(_) => DeathReason::UNKNOWN,
-        }
+            "MICRODROID_INVALID_PAYLOAD_CONFIG" => DeathReason::MICRODROID_INVALID_PAYLOAD_CONFIG,
+            "MICRODROID_UNKNOWN_RUNTIME_ERROR" => DeathReason::MICRODROID_UNKNOWN_RUNTIME_ERROR,
+            "HANGUP" => DeathReason::HANGUP,
+            _ => match status.code() {
+                None => DeathReason::KILLED,
+                Some(0) => DeathReason::SHUTDOWN,
+                Some(CROSVM_ERROR_STATUS) => DeathReason::ERROR,
+                Some(CROSVM_REBOOT_STATUS) => DeathReason::REBOOT,
+                Some(CROSVM_CRASH_STATUS) => DeathReason::CRASH,
+                Some(CROSVM_WATCHDOG_REBOOT_STATUS) => DeathReason::WATCHDOG_REBOOT,
+                Some(_) => DeathReason::UNKNOWN,
+            },
+        },
+        Err(_) => DeathReason::INFRASTRUCTURE_ERROR,
+    };
+
+    let signal = if death_reason == DeathReason::KILLED {
+        result.as_ref().unwrap().signal().unwrap_or_default()
     } else {
-        DeathReason::INFRASTRUCTURE_ERROR
-    }
+        Default::default()
+    };
+
+    (death_reason, signal)
 }
 
 /// Starts an instance of `crosvm` to manage a new VM.
