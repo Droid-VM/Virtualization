@@ -123,6 +123,24 @@
       "parentUuid": "390d9dc4_f3faa640",
       "revId": "65902d614e6aa2d5866641406db73f1539f62a16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26ad3df8_8cab7614",
+        "filename": "pvmfw/src/errors.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-05T11:38:28Z",
+      "side": 1,
+      "message": "Well C codebases are naturally structured differently from Rust codebases but don\u0027t you agree that `std::fmt::Error` is easier to follow than `std::errors::FmtError`?\n\nIn particular, if you make your modules small enough, you can limit them to one `Error` per module, meaning you can also define one `Result` per module e.g. `std::fmt::Result`, which is very convenient inside of it (just `-\u003e Result`) and self-documenting outside (\"`X::Result` is a `Result` of `X::Error`\").",
+      "parentUuid": "55a293df_9c898b17",
+      "revId": "65902d614e6aa2d5866641406db73f1539f62a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
