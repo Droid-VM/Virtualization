@@ -46,6 +46,30 @@
       },
       "revId": "3790383afe321200fc8341e5abea913d6245f8f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71dbae3a_97dff7c2",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T16:25:30Z",
+      "side": 1,
+      "message": "I think it\u0027s also good to have such a test to check the success scenario for pvmfw. Given such valid input, this test should always pass. It proves that pvmfw 1/runs (not bypassed) 2/successfully. The kernel verification is only one of the changes that it guards against, in the future there can be other checks like dt checks. \n\nIn that sense, this test is not that related to image verification I think.",
+      "parentUuid": "b06671e6_4e209997",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 434,
+        "endChar": 67
+      },
+      "revId": "3790383afe321200fc8341e5abea913d6245f8f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
