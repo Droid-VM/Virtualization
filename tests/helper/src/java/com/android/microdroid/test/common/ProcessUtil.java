@@ -99,13 +99,14 @@ public final class ProcessUtil {
             if (line.length() == 0) {
                 continue;
             }
-            if (line.contains(": ")) {
+            // Each line is '<metrics>:        <number> kB'.
+            // EX : Pss_Anon:        70712 kB
+            // EX : Active(file):     5792 kB
+            if (line.matches("[\\w()]+:\\s*\\d+\\ kB")) {
                 if (entries.size() == 0) {
                     throw new RuntimeException("unexpected line: " + line);
                 }
-                // Each line is '<metrics>:        <number> kB'.
-                // EX : Pss_Anon:        70712 kB
-                if (line.endsWith(" kB")) line = line.substring(0, line.length() - 3);
+                line = line.substring(0, line.length() - 3); // drop " kB"
                 String[] elems = line.split(":");
                 String name = elems[0].trim();
                 try {
