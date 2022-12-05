@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "46e19319_ddcffca7",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-05T20:58:37Z",
+      "side": 1,
+      "message": "\u003e We can also change the log to \"Starting kernel...\"\n\nSure, if we also update any test parsing logs for this string.\n\n\u003e Actually I still wonder what \"payload\" in pvmfw means exactly now?\n\nThere\u0027s no exact definition.\n\n\u003e If it\u0027s interchangeable with \"kernel\" ...\n\nIt is for all current uses of the term in pvmfw but, in general, they shouldn\u0027t be interchangeable (IMO) as \"payload\" should also include the ramdisk.\n\n\u003e ... can we just rename all of them to kernel to be more clear?\n\nYes, I was holding off doing that to avoid conflicts with your changes.",
+      "parentUuid": "67c7fe6d_1c09a615",
+      "range": {
+        "startLine": 434,
+        "startChar": 49,
+        "endLine": 434,
+        "endChar": 64
+      },
+      "revId": "c2f9517a853f08931f5244c2ae527989e5fd5629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "845bd2a0_bfc076cd",
         "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
         "patchSetId": 3
@@ -156,6 +180,30 @@
       "side": 1,
       "message": "Well, we can move this log to the beginning of [1] to be more sure for now. Not sure how to check that DeathReason::Shutdown according to the existing examples and how stable that can be. Considering that this feature is for Android U, maybe we can stick with the current solution instead of exploring a new approach for the moment. wdyt?\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/pvmfw/src/entry.rs;l\u003d240;drc\u003dcafb9b966b2de7f8b5cabc91a379997ebc9e8a5a",
       "parentUuid": "845bd2a0_bfc076cd",
+      "range": {
+        "startLine": 436,
+        "startChar": 16,
+        "endLine": 436,
+        "endChar": 49
+      },
+      "revId": "c2f9517a853f08931f5244c2ae527989e5fd5629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83e3d71a_c1b392ac",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-05T20:58:37Z",
+      "side": 1,
+      "message": "\u003e Well, we can move this log to the beginning of [1] to be more sure for now.\n\nNo, we can\u0027t as this would hang the VM.\n\n\u003e Considering that this feature is for Android U\n\n`DeathReason` from post-pvmfw stages (bootloader (now gone), init, ...) is already supported and VS should return `DeathReason::Shutdown` if the VM issues a PSCI_SYSTEM_OFF.\n\nIn turn, this test could expect the shutdown by using the simplest init possible that turns off the VM (an even better approach would be to have a dedicated \"kernel\" that simply PSCI_SYSTEM_OFF but not sure how to integrate that into the testing infra).\n\n\u003e Not sure how to check that DeathReason::Shutdown according to the existing examples ...\n\nMe neither; @shikhapanwar@google.com, any idea?\n\n\u003e ... and how stable that can be.\n\nWhy wouldn\u0027t it be stable? We are checking that the VM performed a clean shutdown.",
+      "parentUuid": "e7acc4cf_28a8ebd9",
       "range": {
         "startLine": 436,
         "startChar": 16,
