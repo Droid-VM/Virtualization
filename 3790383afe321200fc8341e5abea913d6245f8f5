@@ -3,6 +3,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "213bb3ae_52f9448c",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-05T16:51:56Z",
+      "side": 1,
+      "message": "We should test it for all 3 debug levels. Since pvmfw will compare the hash of initrd against different hashes.\n\nBut it will be tricky to use this test for other debug levels. The normal \u0026 app_level debug will not emit logs \u0026 we cannot test `Payload verified. Starting payload` is contained in them. Maybe we use test that boots to payload to verify it - maybe a device test?\n\nThis doesn\u0027t have to go in this patch, but can you add a TODO?",
+      "range": {
+        "startLine": 422,
+        "startChar": 24,
+        "endLine": 422,
+        "endChar": 43
+      },
+      "revId": "3790383afe321200fc8341e5abea913d6245f8f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37f858d2_714d0df0",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-05T16:51:56Z",
+      "side": 1,
+      "message": "Should assert with a message like \"Failed to verify that pvmfw started\"",
+      "range": {
+        "startLine": 431,
+        "startChar": 27,
+        "endLine": 431,
+        "endChar": 32
+      },
+      "revId": "3790383afe321200fc8341e5abea913d6245f8f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "476a1c00_ce687025",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-05T16:51:56Z",
+      "side": 1,
+      "message": "Ditto ^",
+      "range": {
+        "startLine": 432,
+        "startChar": 27,
+        "endLine": 432,
+        "endChar": 32
+      },
+      "revId": "3790383afe321200fc8341e5abea913d6245f8f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1dfe8302_db416776",
         "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
         "patchSetId": 2
