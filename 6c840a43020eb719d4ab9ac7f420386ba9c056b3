@@ -288,6 +288,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dc70f2f_ce9a2be5",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-05T12:11:57Z",
+      "side": 1,
+      "message": "VS will take care of that but it won\u0027t re-use the `enum` directly (which I\u0027m suspecting this is where your confusion is coming from). Anyway, this isn\u0027t directly relevant to b/256148034; just know that your check failing should be propagated to the host.",
+      "parentUuid": "1ddcf0e7_35246042",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 96
+      },
+      "revId": "6c840a43020eb719d4ab9ac7f420386ba9c056b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49a676f6_1daeae9f",
