@@ -141,6 +141,24 @@
       "parentUuid": "55a293df_9c898b17",
       "revId": "65902d614e6aa2d5866641406db73f1539f62a16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9de84614_7b9477b8",
+        "filename": "pvmfw/src/errors.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T12:08:34Z",
+      "side": 1,
+      "message": "\u003e std::fmt::Error is easier to follow than std::errors::FmtError?\n\nFrom outside these two implementations are the same, both will be accessed with `pvmfw::RebootReason`. Internally, when an error is self-contained, it doesn\u0027t matter where to put. (I totally support having RebootReason in entry.rs if that\u0027s the only file who uses it.) When there is some relationship between errors (like some RebootReason can be derived some MemoryTrackerError or ImageVerifyError) or an error has multiple users, grouping them together can make things more neat and also facilitate refactoring IMO.\n\nBut anyway, I think this is only a style preference. I\u0027m not convinced but I can adapt your preference here.",
+      "parentUuid": "26ad3df8_8cab7614",
+      "revId": "65902d614e6aa2d5866641406db73f1539f62a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
