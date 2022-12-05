@@ -51,6 +51,24 @@
       "parentUuid": "1b85ca61_0055f1bd",
       "revId": "65902d614e6aa2d5866641406db73f1539f62a16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1157f918_901551d7",
+        "filename": "pvmfw/src/errors.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-05T10:52:09Z",
+      "side": 1,
+      "message": "But these aren\u0027t C `#include`s where it\u0027s all-or-nothing; `use` cherry-picks the item out of the file: `main()` makes use of `entry::RebootReason` and `entry::main_wrapper()` calls `main()` so no circular dependency? Are you saying you can\u0027t get it to compile?\n\nAFAIK, error types are typically declared within their \"use-case\" module and not grouped in a separate, dedicated module such as `errors`. If you _really_ wanted to move `RebootReason` to its own module, knowing that it won\u0027t contain any other type, why not name the module itself accordingly (e.g. \"`reboot_reason`\")?",
+      "parentUuid": "860dbaa0_bd0716dc",
+      "revId": "65902d614e6aa2d5866641406db73f1539f62a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
