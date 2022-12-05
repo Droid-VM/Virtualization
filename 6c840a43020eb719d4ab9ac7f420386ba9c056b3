@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6655742_ab9c4844",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T09:32:39Z",
+      "side": 1,
+      "message": "It\u0027s possible to compile a nostd version of anyhow and use it here. Something like `bail!()` should work if we only want to have a generic error as indicated in [1]. But I\u0027m not sure why we collected different types of RebootReason and propagate them to `main_warpper`? Is there some consideration for future usage?\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/pvmfw/src/entry.rs;l\u003d62;drc\u003d28cbcf174de0fd43a8ed0784473a601d5a54cfda",
+      "parentUuid": "964328d3_12b98967",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 96
+      },
+      "revId": "6c840a43020eb719d4ab9ac7f420386ba9c056b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "49a676f6_1daeae9f",
         "filename": "pvmfw/src/entry.rs",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-02T10:41:01Z",
       "side": 1,
       "message": "This will hang the VM.",
+      "range": {
+        "startLine": 155,
+        "startChar": 49,
+        "endLine": 155,
+        "endChar": 84
+      },
+      "revId": "6c840a43020eb719d4ab9ac7f420386ba9c056b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29f044c9_41474d79",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T09:32:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "49a676f6_1daeae9f",
       "range": {
         "startLine": 155,
         "startChar": 49,
@@ -84,6 +132,30 @@
       "side": 1,
       "message": "Yeah, chaining the errors might not be a good idea inside pvmfw.",
       "parentUuid": "c8b3fc09_99d1d37b",
+      "range": {
+        "startLine": 29,
+        "startChar": 18,
+        "endLine": 29,
+        "endChar": 24
+      },
+      "revId": "6c840a43020eb719d4ab9ac7f420386ba9c056b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e1f095d_80da1372",
+        "filename": "pvmfw/src/errors.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T09:32:39Z",
+      "side": 1,
+      "message": "I see. Thanks for the review. I\u0027ll just move the RebootReason as it is to a new module in this cl then.",
+      "parentUuid": "e0fdf2e6_c6de7fc7",
       "range": {
         "startLine": 29,
         "startChar": 18,
