@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7449405c_c63ee74d",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-05T19:56:04Z",
+      "side": 1,
+      "message": "I have a slight preference to starting the test names with #testFunctionalityWorks (like most of the tests on this file).\n\nCan we rename this to #testPvmfwBoots?",
+      "range": {
+        "startLine": 411,
+        "startChar": 16,
+        "endLine": 411,
+        "endChar": 36
+      },
+      "revId": "c2f9517a853f08931f5244c2ae527989e5fd5629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81ba0ff8_2d314210",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-05T19:56:04Z",
+      "side": 1,
+      "message": "\"Failed to verify that payload was started by pvmfw\" or rather \"pvmfw failed to start kernel\"? (to differentiate this from VM payload - the userspace stuff)",
+      "range": {
+        "startLine": 434,
+        "startChar": 49,
+        "endLine": 434,
+        "endChar": 64
+      },
+      "revId": "c2f9517a853f08931f5244c2ae527989e5fd5629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
