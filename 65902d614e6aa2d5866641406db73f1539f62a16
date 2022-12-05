@@ -69,6 +69,24 @@
       "parentUuid": "860dbaa0_bd0716dc",
       "revId": "65902d614e6aa2d5866641406db73f1539f62a16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "390d9dc4_f3faa640",
+        "filename": "pvmfw/src/errors.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T11:02:02Z",
+      "side": 1,
+      "message": "\u003e AFAIK, error types are typically declared within their \"use-case\" module and not grouped in a separate, dedicated module such as errors.\n\nCould you share some reference for this?\n\n\u003e so no circular dependency?\n\nAs I said it\u0027s **visually**. The code is easier to read without such visual exceptions.\n\nAnyway, it\u0027s not a big deal. I can remove this class as you prefer.",
+      "parentUuid": "1157f918_901551d7",
+      "revId": "65902d614e6aa2d5866641406db73f1539f62a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
