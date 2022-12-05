@@ -260,6 +260,30 @@
       },
       "revId": "c2f9517a853f08931f5244c2ae527989e5fd5629",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c17207d4_2278ba03",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T21:37:34Z",
+      "side": 1,
+      "message": "Maybe it\u0027s possible to get DeathReason as an event after some search [1], but why should we get ShutDown here?\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java;l\u003d560;drc\u003d28cbcf174de0fd43a8ed0784473a601d5a54cfda",
+      "parentUuid": "d5b688ea_aea43051",
+      "range": {
+        "startLine": 436,
+        "startChar": 16,
+        "endLine": 436,
+        "endChar": 49
+      },
+      "revId": "c2f9517a853f08931f5244c2ae527989e5fd5629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
