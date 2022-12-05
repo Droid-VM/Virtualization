@@ -432,6 +432,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5ad75b9_79ee65d7",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T14:55:48Z",
+      "side": 1,
+      "message": "Okay. So I thought this was already used somewhere somehow. I noticed that it\u0027s created and then dropped in Err(_), then it was not so clear to me why we need it to be a specific type. So, everything is for the future usage. Thanks for adding the todo!",
+      "parentUuid": "8e251acd_104f3c3b",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 96
+      },
+      "revId": "6c840a43020eb719d4ab9ac7f420386ba9c056b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49a676f6_1daeae9f",
