@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afde42cc_70178196",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T18:49:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37f858d2_714d0df0",
+      "range": {
+        "startLine": 431,
+        "startChar": 27,
+        "endLine": 431,
+        "endChar": 32
+      },
+      "revId": "3790383afe321200fc8341e5abea913d6245f8f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "476a1c00_ce687025",
@@ -60,6 +84,30 @@
       "writtenOn": "2022-12-05T16:51:56Z",
       "side": 1,
       "message": "Ditto ^",
+      "range": {
+        "startLine": 432,
+        "startChar": 27,
+        "endLine": 432,
+        "endChar": 32
+      },
+      "revId": "3790383afe321200fc8341e5abea913d6245f8f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31d65ed5_1676b644",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T18:49:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "476a1c00_ce687025",
       "range": {
         "startLine": 432,
         "startChar": 27,
@@ -203,6 +251,30 @@
       "side": 1,
       "message": "\u003e The kernel verification is only one of the changes that it guards against\n\n\u003e This test checks the success scenario and is supposed to stay like this.\n\nIf this test checks that pvmfw boots under \"normal\" conditions, could we then use a more generic name (e.g. `protectedVmRunsPvmfw`)? As Shikha pointed out, the current one may be confusing as it implies that the kernel being properly validated is what matters.",
       "parentUuid": "36e1007f_f857b137",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 434,
+        "endChar": 67
+      },
+      "revId": "3790383afe321200fc8341e5abea913d6245f8f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f0b1159_8381a0f6",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T18:49:32Z",
+      "side": 1,
+      "message": "Sure. I think that\u0027s a good idea. I\u0027ll also drop \"verified\" from the end log.",
+      "parentUuid": "345cca76_045df3c0",
       "range": {
         "startLine": 434,
         "startChar": 0,
