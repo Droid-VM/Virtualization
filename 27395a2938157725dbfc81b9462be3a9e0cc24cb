@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d03b4c72_6e618ca8",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-05T17:56:11Z",
+      "side": 1,
+      "message": "We should probably also check the `addr` in the pVM firmware, to make sure it is within the MMIO region as we expect, but I don\u0027t see much point checking it here. If the size is wrong then something is very confused, maybe we are running with some new version of PCI which we don\u0027t know about, so it doesn\u0027t make sense to continue.",
+      "parentUuid": "198ba48b_f7a3ba42",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 60
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0a58a26_16d14340",
@@ -60,6 +84,30 @@
       "writtenOn": "2022-11-29T15:39:26Z",
       "side": 1,
       "message": "OOC: why don\u0027t you use the \"inline syntax\" (not sure what the proper name is) in your code\n```\ninfo!(\"Found {info} at {device_function}, status {status:?} command {command:?}\")\n```\n? Out of habit?",
+      "range": {
+        "startLine": 42,
+        "startChar": 21,
+        "endLine": 42,
+        "endChar": 23
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b99bb1b_0c98f420",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-05T17:56:11Z",
+      "side": 1,
+      "message": "I don\u0027t really like it, I find it clearer to specify expressions separately to be clear that they are arguments and not just part of a string.",
+      "parentUuid": "b0a58a26_16d14340",
       "range": {
         "startLine": 42,
         "startChar": 21,
@@ -93,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0483b82_fd911203",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-05T17:56:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1826dfd7_8c034816",
+      "range": {
+        "startLine": 53,
+        "startChar": 12,
+        "endLine": 53,
+        "endChar": 49
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e94a4fe2_81164532",
@@ -106,6 +178,30 @@
       "writtenOn": "2022-11-29T15:39:26Z",
       "side": 1,
       "message": "Because the `capacity()` is in 512-byte blocks? This API sounds like an easy source of confusion/bugs :(\n\nIsn\u0027t there a clearer way to express this e.g.\n```\n(blk.capacity() * blk.blk_size()) / 1024\n```\n?",
+      "range": {
+        "startLine": 56,
+        "startChar": 67,
+        "endLine": 56,
+        "endChar": 70
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c60ec3df_15c52d03",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-05T17:56:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e94a4fe2_81164532",
       "range": {
         "startLine": 56,
         "startChar": 67,
@@ -139,6 +235,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb1a1bd6_53560708",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-05T17:56:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51444914_2ed95111",
+      "range": {
+        "startLine": 78,
+        "startChar": 39,
+        "endLine": 78,
+        "endChar": 49
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "215b46bc_ba04b827",
@@ -152,6 +272,30 @@
       "writtenOn": "2022-11-29T15:39:26Z",
       "side": 1,
       "message": "Could you turn this into a `RangesIterator` implementing the standard [`ranges` format](https://devicetree-specification.readthedocs.io/en/latest/chapter2-devicetree-basics.html#ranges) in `libs/libfdt`, as we have for `reg`? It would make the client code easier to parse and the logic could be re-used from pvmfw.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 93
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b022592_c9468252",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-05T17:56:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "215b46bc_ba04b827",
       "range": {
         "startLine": 80,
         "startChar": 0,
@@ -185,6 +329,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2489e64d_b2ba8077",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-05T17:56:11Z",
+      "side": 1,
+      "message": "There is a check that it is a memory range not an IO range. I\u0027ve added a check that it is non-prefetchable.\n\nIn practice, crosvm actually only provides two memory ranges, which are both marked as non-prefetchable 64-bit memory, but then the VirtIO devices ask for non-prefetchable 32-bit memory. So this logic finds the largest memory range which fits entirely within the 32-bit address space, whether it is marked as 64-bit or 32-bit.",
+      "parentUuid": "0c213c64_d25ec252",
+      "range": {
+        "startLine": 94,
+        "startChar": 23,
+        "endLine": 94,
+        "endChar": 51
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a7b4895_0ee0cff7",
@@ -198,6 +366,30 @@
       "writtenOn": "2022-11-29T15:39:26Z",
       "side": 1,
       "message": "Do you think we could wrap the PCI memory range in a buddy allocator instead?",
+      "range": {
+        "startLine": 115,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 17
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34d72237_b7f848ca",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-05T17:56:11Z",
+      "side": 1,
+      "message": "Looks like it could be done with a `buddy_system_allocator::FrameAllocator`. I\u0027ll do that in a separate CL if it\u0027s alright.",
+      "parentUuid": "1a7b4895_0ee0cff7",
       "range": {
         "startLine": 115,
         "startChar": 8,
@@ -231,6 +423,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e2202a5_f52f04dd",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-05T17:56:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07fe3cb4_262b0df6",
+      "range": {
+        "startLine": 121,
+        "startChar": 8,
+        "endLine": 121,
+        "endChar": 14
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f06d962_235d59ee",
@@ -244,6 +460,30 @@
       "writtenOn": "2022-11-29T15:39:26Z",
       "side": 1,
       "message": "nit: what do you think of (if it compiles)\n```\nmatch address_type {\n    _ if size \u003d\u003d 0 \u003d\u003e {},\n    MemoryBarType::Width32 \u003d\u003e {\n        let address \u003d allocator.allocate_memory_32(size);\n        debug!(\"Allocated address {:#010x}\", address);\n        root.set_bar_32(device_function, bar_index, address);\n    }\n    MemoryBarType::Width64 \u003d\u003e {\n        let address \u003d allocator.allocate_memory_32(size);\n        debug!(\"Allocated address {:#010x}\", address);\n        root.set_bar_64(device_function, bar_index, address);\n    }\n    _ \u003d\u003e panic!(...),\n}\n```\n?",
+      "range": {
+        "startLine": 159,
+        "startChar": 12,
+        "endLine": 159,
+        "endChar": 17
+      },
+      "revId": "27395a2938157725dbfc81b9462be3a9e0cc24cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d2f137c_521399ba",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-05T17:56:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f06d962_235d59ee",
       "range": {
         "startLine": 159,
         "startChar": 12,
