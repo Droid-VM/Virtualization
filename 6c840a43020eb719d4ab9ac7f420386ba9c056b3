@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b2bb4ea_4a440316",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T10:41:56Z",
+      "side": 1,
+      "message": "\u003e for example by issuing a PSCI_SYSTEM_RESET2 containing the reason.\n\nThanks. That makes sense. Could you please add a TODO for this with some context (like bug link) to the code? I feel a bit confused when searching RebootReason in our code base now as I only see assignment but cannot find any usage of it.",
+      "parentUuid": "debe292d_cb68538b",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 96
+      },
+      "revId": "6c840a43020eb719d4ab9ac7f420386ba9c056b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "49a676f6_1daeae9f",
         "filename": "pvmfw/src/entry.rs",
         "patchSetId": 4
