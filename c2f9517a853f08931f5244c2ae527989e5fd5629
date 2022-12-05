@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22fc94c9_537d041d",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T20:38:09Z",
+      "side": 1,
+      "message": "I think it used to be common to name tests this way but in the recent years it\u0027s actually more recommended to name the tests as a statement/fact that summarizes the expected behavior[1][2].\n\nIn addition, for Java or Rust, we don\u0027t need \"test\" in test name as the annotation already indicates it\u0027s a test (for some other languages like Python it was mandatary to name a test with \"test\" otherwise the test runner cannot recognize it). The current name also contains one more piece of information that it\u0027s the protected VM that runs pvmfw.\n\n[1] https://enterprisecraftsmanship.com/posts/you-naming-tests-wrong/\n[2] http://go/unit-testing-practices#naming",
+      "parentUuid": "7449405c_c63ee74d",
+      "range": {
+        "startLine": 411,
+        "startChar": 16,
+        "endLine": 411,
+        "endChar": 36
+      },
+      "revId": "c2f9517a853f08931f5244c2ae527989e5fd5629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81ba0ff8_2d314210",
@@ -73,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67c7fe6d_1c09a615",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T20:38:09Z",
+      "side": 1,
+      "message": "+1. We can also change the log to \"Starting kernel...\".\n\nActually I still wonder what \"payload\" in pvmfw means exactly now? If it\u0027s interchangeable with \"kernel\", can we just rename all of them to kernel to be more clear?",
+      "parentUuid": "7108f503_1dee5286",
+      "range": {
+        "startLine": 434,
+        "startChar": 49,
+        "endLine": 434,
+        "endChar": 64
+      },
+      "revId": "c2f9517a853f08931f5244c2ae527989e5fd5629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "845bd2a0_bfc076cd",
         "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
         "patchSetId": 3
@@ -84,6 +132,30 @@
       "writtenOn": "2022-12-05T20:09:45Z",
       "side": 1,
       "message": "BTW, pvmfw can still fail (and reboot) after having printed this log.\n\nWould it be possible to use a log (or signal?) coming from the kernel/init instead? For example checking for [`DeathReason::Shutdown`](http://cs/android/packages/modules/Virtualization/virtualizationservice/aidl/android/system/virtualizationservice/DeathReason.aidl?l\u003d30) would be more thorough but is it possible from this Java code?",
+      "range": {
+        "startLine": 436,
+        "startChar": 16,
+        "endLine": 436,
+        "endChar": 49
+      },
+      "revId": "c2f9517a853f08931f5244c2ae527989e5fd5629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7acc4cf_28a8ebd9",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T20:38:09Z",
+      "side": 1,
+      "message": "Well, we can move this log to the beginning of [1] to be more sure for now. Not sure how to check that DeathReason::Shutdown according to the existing examples and how stable that can be. Considering that this feature is for Android U, maybe we can stick with the current solution instead of exploring a new approach for the moment. wdyt?\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/pvmfw/src/entry.rs;l\u003d240;drc\u003dcafb9b966b2de7f8b5cabc91a379997ebc9e8a5a",
+      "parentUuid": "845bd2a0_bfc076cd",
       "range": {
         "startLine": 436,
         "startChar": 16,
