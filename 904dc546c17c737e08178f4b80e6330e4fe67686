@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a0c601f_0f19658a",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-12-05T08:09:11Z",
+      "side": 1,
+      "message": "no need? but this is fine as-is",
+      "range": {
+        "startLine": 105,
+        "startChar": 47,
+        "endLine": 105,
+        "endChar": 49
+      },
+      "revId": "904dc546c17c737e08178f4b80e6330e4fe67686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ca7687d_aeb6d40c",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/ProcessUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-12-05T08:09:11Z",
+      "side": 1,
+      "message": "Based on https://man7.org/linux/man-pages/man5/proc.5.html \"kB\" is optional. However, this is probably fine as \"kB\" is always attached and this change doesn\u0027t at least create any regressions...",
+      "range": {
+        "startLine": 105,
+        "startChar": 49,
+        "endLine": 105,
+        "endChar": 52
+      },
+      "revId": "904dc546c17c737e08178f4b80e6330e4fe67686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
