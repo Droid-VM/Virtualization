@@ -16,6 +16,23 @@
       "message": "Hi,\n\nThanks for your reviews! Could you take another look?",
       "revId": "65902d614e6aa2d5866641406db73f1539f62a16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b85ca61_0055f1bd",
+        "filename": "pvmfw/src/errors.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-05T10:26:07Z",
+      "side": 1,
+      "message": "What do expect this module to contain, beyond `RebootReason`? Why not `use crate::entry::RebootReason`?",
+      "revId": "65902d614e6aa2d5866641406db73f1539f62a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
