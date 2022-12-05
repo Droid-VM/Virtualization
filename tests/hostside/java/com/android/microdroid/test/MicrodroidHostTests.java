@@ -414,21 +414,24 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         assumeTrue(
                 "Skip if protected VMs are not supported",
                 getAndroidDevice().supportsMicrodroid(protectedVm));
-        File key = findTestFile("test.com.android.virt.pem");
+        final String configPath = "assets/vm_config_apex.json";
 
         // Act
-        // TODO(b/256148034): Do not resign kernel image
-        VmInfo vmInfo =
-                runMicrodroidWithResignedImages(key, /*keyOverrides=*/ Map.of(), protectedVm);
+        mMicrodroidDevice =
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .numCpus(NUM_VCPUS)
+                        .protectedVm(protectedVm)
+                        .build(getAndroidDevice());
 
         // Assert
-        vmInfo.mProcess.waitFor(5L, TimeUnit.SECONDS);
+        mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
         String consoleLog = getDevice().pullFileContents(CONSOLE_PATH);
         assertWithMessage("pvmfw should start").that(consoleLog).contains("pVM firmware");
         assertWithMessage("pvmfw should start payload")
                 .that(consoleLog)
                 .contains("Payload verified. Starting payload...");
-        vmInfo.mProcess.destroy();
     }
 
     @Test
