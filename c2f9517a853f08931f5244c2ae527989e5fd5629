@@ -45,6 +45,53 @@
       },
       "revId": "c2f9517a853f08931f5244c2ae527989e5fd5629",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7108f503_1dee5286",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-05T20:09:45Z",
+      "side": 1,
+      "message": "Yes, please! Let\u0027s refrain from using the term \"payload\" in relation to pvmfw.",
+      "parentUuid": "81ba0ff8_2d314210",
+      "range": {
+        "startLine": 434,
+        "startChar": 49,
+        "endLine": 434,
+        "endChar": 64
+      },
+      "revId": "c2f9517a853f08931f5244c2ae527989e5fd5629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "845bd2a0_bfc076cd",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-05T20:09:45Z",
+      "side": 1,
+      "message": "BTW, pvmfw can still fail (and reboot) after having printed this log.\n\nWould it be possible to use a log (or signal?) coming from the kernel/init instead? For example checking for [`DeathReason::Shutdown`](http://cs/android/packages/modules/Virtualization/virtualizationservice/aidl/android/system/virtualizationservice/DeathReason.aidl?l\u003d30) would be more thorough but is it possible from this Java code?",
+      "range": {
+        "startLine": 436,
+        "startChar": 16,
+        "endLine": 436,
+        "endChar": 49
+      },
+      "revId": "c2f9517a853f08931f5244c2ae527989e5fd5629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
