@@ -360,6 +360,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5755b31_20005ad7",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-05T14:19:13Z",
+      "side": 1,
+      "message": "Currently, `RebootReason` isn\u0027t propagated (hence aosp/2327653); in the future, we\u0027ll need to add support for every new one in the VS parser logic. At that point, it will be cleaner to import the type from VS for DRY and so that `rustc` can spot a missed reason in the parser.",
+      "parentUuid": "2ca34009_b778e71b",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 96
+      },
+      "revId": "6c840a43020eb719d4ab9ac7f420386ba9c056b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49a676f6_1daeae9f",
