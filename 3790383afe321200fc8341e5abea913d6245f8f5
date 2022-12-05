@@ -187,6 +187,30 @@
       },
       "revId": "3790383afe321200fc8341e5abea913d6245f8f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "345cca76_045df3c0",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-05T18:40:00Z",
+      "side": 1,
+      "message": "\u003e The kernel verification is only one of the changes that it guards against\n\n\u003e This test checks the success scenario and is supposed to stay like this.\n\nIf this test checks that pvmfw boots under \"normal\" conditions, could we then use a more generic name (e.g. `protectedVmRunsPvmfw`)? As Shikha pointed out, the current one may be confusing as it implies that the kernel being properly validated is what matters.",
+      "parentUuid": "36e1007f_f857b137",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 434,
+        "endChar": 67
+      },
+      "revId": "3790383afe321200fc8341e5abea913d6245f8f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
