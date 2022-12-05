@@ -105,6 +105,24 @@
       "parentUuid": "390d9dc4_f3faa640",
       "revId": "65902d614e6aa2d5866641406db73f1539f62a16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55a293df_9c898b17",
+        "filename": "pvmfw/src/errors.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-05T11:24:16Z",
+      "side": 1,
+      "message": "I\u0027m not sure if it\u0027s so untypical to gather all the errors in a separate module. Others do this too like in CPython.\n\nhttps://github.com/python/cpython/blob/c8c6113398ee9a7867fe9b08bc539cceb61e2aaa/Objects/exceptions.c",
+      "parentUuid": "390d9dc4_f3faa640",
+      "revId": "65902d614e6aa2d5866641406db73f1539f62a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
