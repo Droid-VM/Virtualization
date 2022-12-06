@@ -15,7 +15,6 @@
  */
 package com.android.microdroid.test;
 
-import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_APP_ONLY;
 import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_FULL;
 import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_NONE;
 
@@ -283,15 +282,6 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-7"})
     public void changingNonDebuggableVmDebuggableInvalidatesVmIdentity() throws Exception {
         changeDebugLevel(DEBUG_LEVEL_NONE, DEBUG_LEVEL_FULL);
-        changeDebugLevel(DEBUG_LEVEL_NONE, DEBUG_LEVEL_APP_ONLY);
-    }
-
-    @Test
-    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-7"})
-    @Ignore("b/260067026")
-    public void changingAppDebuggableVmFullyDebuggableInvalidatesVmIdentity() throws Exception {
-        assume().withMessage("Skip for non-protected VM. b/239158757").that(mProtectedVm).isTrue();
-        changeDebugLevel(DEBUG_LEVEL_APP_ONLY, DEBUG_LEVEL_FULL);
     }
 
     private void changeDebugLevel(int fromLevel, int toLevel) throws Exception {
