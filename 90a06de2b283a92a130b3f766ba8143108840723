@@ -16,6 +16,52 @@
       "message": "Hi Alan/Nikita! PTAL. VmDescriptor \u0026 VM (with storage) transfer to different app is not covered in this patch.",
       "revId": "90a06de2b283a92a130b3f766ba8143108840723",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df52c47c_a7293a63",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-06T15:25:29Z",
+      "side": 1,
+      "message": "nit: wrap in {@code}",
+      "range": {
+        "startLine": 372,
+        "startChar": 6,
+        "endLine": 372,
+        "endChar": 35
+      },
+      "revId": "90a06de2b283a92a130b3f766ba8143108840723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "217c7a53_c7d16718",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-06T15:25:29Z",
+      "side": 1,
+      "message": "nit: move this to own paragraph, e.g:\n\n\u003cp\u003eThe storage image is persisted across reboot and is encrypted with a key that is only available to the VM.\n\nShould we add a test that storage is persisted across reboots?",
+      "range": {
+        "startLine": 600,
+        "startChar": 60,
+        "endLine": 600,
+        "endChar": 98
+      },
+      "revId": "90a06de2b283a92a130b3f766ba8143108840723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
