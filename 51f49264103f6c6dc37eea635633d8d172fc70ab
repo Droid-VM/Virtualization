@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17527c2c_c38af275",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-06T23:39:07Z",
+      "side": 1,
+      "message": "Had wrong bug in the clipboard :(\n\nRemoved the Bug: stanza all together.",
+      "parentUuid": "5dfbdd28_75b6dc93",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 14
+      },
+      "revId": "51f49264103f6c6dc37eea635633d8d172fc70ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cf0d2ff_22dce541",
@@ -273,6 +297,30 @@
       "writtenOn": "2022-12-05T14:59:33Z",
       "side": 1,
       "message": "Hmm. It would be nice if this were slightly less specific. But I don\u0027t know how to do that.\nUnless you just check the path is under ctx.getDataDir(), but then your test is pretty much identical to the code.",
+      "range": {
+        "startLine": 338,
+        "startChar": 21,
+        "endLine": 338,
+        "endChar": 89
+      },
+      "revId": "51f49264103f6c6dc37eea635633d8d172fc70ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3da1f478_c58cbc45",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-06T23:39:07Z",
+      "side": 1,
+      "message": "I think it\u0027s OK to be specific here. The paths for CE/DE app storage dirs are hardcoded in a bunch of places, so it probably will never change.",
+      "parentUuid": "b57673a7_ed9e1b7a",
       "range": {
         "startLine": 338,
         "startChar": 21,
