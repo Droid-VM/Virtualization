@@ -368,7 +368,7 @@ impl VmInstance {
         self.callbacks.callback_on_died(self.cid, death_reason);
 
         let vm_metric = self.vm_metric.lock().unwrap();
-        write_vm_exited_stats(self.requester_uid as i32, &self.name, death_reason, &*vm_metric);
+        write_vm_exited_stats(self.requester_uid as i32, &self.name, death_reason, &vm_metric);
 
         // Delete temporary files.
         if let Err(e) = remove_dir_all(&self.temporary_directory) {
