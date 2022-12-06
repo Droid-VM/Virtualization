@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0ed6b24_f4489ab0",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-12-06T02:04:21Z",
+      "side": 1,
+      "message": "Done. However I used i32 instead because the method signal returns Option\u003ci32\u003e",
+      "parentUuid": "28e4fcc0_832c68d4",
+      "range": {
+        "startLine": 333,
+        "startChar": 26,
+        "endLine": 333,
+        "endChar": 39
+      },
+      "revId": "17102e8578741c77413a04c2b37b118287c87433",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1eee6f19_d4c4ba46",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-05T10:21:30Z",
       "side": 1,
       "message": "This is fragile I think. The fact that death_reason \u003d\u003d KILLED means result.is_ok() is implicit. The entire let-if block could be ...\n\n`result.as_ref().map(|status| status.signal()).unwrap_or_default()",
+      "range": {
+        "startLine": 577,
+        "startChar": 24,
+        "endLine": 577,
+        "endChar": 32
+      },
+      "revId": "17102e8578741c77413a04c2b37b118287c87433",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1248a94f_82c8d920",
+        "filename": "virtualizationservice/src/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-12-06T02:04:21Z",
+      "side": 1,
+      "message": "Thanks. How about using pattern matching like current patchset?",
+      "parentUuid": "1eee6f19_d4c4ba46",
       "range": {
         "startLine": 577,
         "startChar": 24,
