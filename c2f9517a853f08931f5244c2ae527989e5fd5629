@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d53e439_b1605a20",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-06T10:54:22Z",
+      "side": 1,
+      "message": "`pVM` - protected VM (: - but I\u0027m fine with the current name",
+      "parentUuid": "22fc94c9_537d041d",
+      "range": {
+        "startLine": 411,
+        "startChar": 16,
+        "endLine": 411,
+        "endChar": 36
+      },
+      "revId": "c2f9517a853f08931f5244c2ae527989e5fd5629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81ba0ff8_2d314210",
@@ -157,6 +181,30 @@
       "side": 1,
       "message": "Oh please do a sed. I don\u0027t mind rebase :)",
       "parentUuid": "46e19319_ddcffca7",
+      "range": {
+        "startLine": 434,
+        "startChar": 49,
+        "endLine": 434,
+        "endChar": 64
+      },
+      "revId": "c2f9517a853f08931f5244c2ae527989e5fd5629",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9745e986_d742aa3f",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-06T10:54:22Z",
+      "side": 1,
+      "message": "FYI, not changing the to change the log line because `processBootEvents` assumes it.",
+      "parentUuid": "92a5f652_130503ab",
       "range": {
         "startLine": 434,
         "startChar": 49,
