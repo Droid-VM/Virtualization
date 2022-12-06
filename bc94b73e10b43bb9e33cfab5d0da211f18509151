@@ -596,6 +596,24 @@
       "parentUuid": "9aa32115_637ba0b2",
       "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01716d68_63f48453",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-06T12:36:34Z",
+      "side": 1,
+      "message": "Yeah, I guess `apply_debug_policy` should also be unsafe for the same reason as `apply_overlay` is, or it should take the fdt as an `\u0026mut [u8]` rather than an `\u0026mut Fdt`.",
+      "parentUuid": "23d5c1bb_19819d9f",
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
