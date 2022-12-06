@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50dea6db_1e9f4db9",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-12-06T09:07:38Z",
+      "side": 0,
+      "message": "We need a discussion on this kind of thing going forward. It\u0027s not ok to accept new features like this, even if we are 100% sure that they are going to land. Doing so makes compiler updates (and possible reverts) much more complex and costly for everyone else. The code can be written without the feature, and rewritten to use it once the feature is actually stable/official.",
+      "revId": "48de1258ce28bdaba984ed1fd77375ee31d32869",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
