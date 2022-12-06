@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2ffe12f_0e4ded97",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-06T17:57:06Z",
+      "side": 1,
+      "message": "Some improvements require API changes I guess.\n\nIf we keep using an old version then we don\u0027t get bugfixes or other improvements. Also, other external crates depend on the new version, and we don\u0027t want to maintain lots of different versions of each crate in AOSP, so we need to keep everything using the same version.",
+      "parentUuid": "5513c194_bb3fd4f7",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 19
+      },
+      "revId": "c391882d86b4bc8bd9a272bea1a250a54d589e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d6ce095_8620ec93",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-05T14:42:30Z",
       "side": 1,
       "message": "Can we have more info about the change that this is refactoring the   codebase in Virtualization/ to use the new version of clap \u0026 add test etc?",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 0
+      },
+      "revId": "c391882d86b4bc8bd9a272bea1a250a54d589e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5501e8b6_de65502a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-06T17:57:06Z",
+      "side": 1,
+      "message": "Sure, https://github.com/clap-rs/clap/blob/master/CHANGELOG.md#400---2022-09-28 is the changelog.\n\nThe tests should have been added in the upgrade from clap 2 to 3, but were apparently missed then.",
+      "parentUuid": "4d6ce095_8620ec93",
       "range": {
         "startLine": 8,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffad7729_b84e0ed2",
+        "filename": "authfs/tests/common/src/open_then_run.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-06T17:57:06Z",
+      "side": 1,
+      "message": "I don\u0027t know, ask Victor I guess? Looks like it\u0027s been the case since this was first written in https://r.android.com/1865029.",
+      "parentUuid": "5279db20_9658f43e",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 15
+      },
+      "revId": "c391882d86b4bc8bd9a272bea1a250a54d589e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2973c7ea_13f4fbb1",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-12-05T14:42:30Z",
       "side": 1,
       "message": "NIT: I think there is an extra space",
+      "range": {
+        "startLine": 137,
+        "startChar": 7,
+        "endLine": 137,
+        "endChar": 8
+      },
+      "revId": "c391882d86b4bc8bd9a272bea1a250a54d589e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab91acd5_e474e07c",
+        "filename": "authfs/tests/common/src/open_then_run.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-06T17:57:06Z",
+      "side": 1,
+      "message": "This is how rustfmt formatted it, 4 space indentation is standard as far as I can see.",
+      "parentUuid": "2973c7ea_13f4fbb1",
       "range": {
         "startLine": 137,
         "startChar": 7,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba44a386_0070cea3",
+        "filename": "avmd/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-06T17:57:06Z",
+      "side": 1,
+      "message": "\u003e Can you move it to a rust_defaults build rule \u0026 have `avmdtool` \u0026 `avmdtool.test` use it.\n\nDone.\n\n\u003e Alternatively, why don\u0027t we include test in `avmdtool_tests`, `srcs` can take multiple file?\n\navmdtool_tests is integration tests which run the binary as a separate process, so it has different dependencies. I don\u0027t think it makes sense to mix the unit tests with the integration tests.",
+      "parentUuid": "9591d469_fadb41a8",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 0
+      },
+      "revId": "c391882d86b4bc8bd9a272bea1a250a54d589e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1036f59_6f3859c0",
@@ -146,6 +266,30 @@
       "writtenOn": "2022-12-05T14:42:30Z",
       "side": 1,
       "message": "What does it do?",
+      "range": {
+        "startLine": 167,
+        "startChar": 23,
+        "endLine": 167,
+        "endChar": 38
+      },
+      "revId": "c391882d86b4bc8bd9a272bea1a250a54d589e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef735b20_6fbc5a78",
+        "filename": "encryptedstore/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-06T17:57:06Z",
+      "side": 1,
+      "message": "It checks that the `Command` is valid, by running through various assertions that clap has about it. I\u0027ve added a comment.",
+      "parentUuid": "e1036f59_6f3859c0",
       "range": {
         "startLine": 167,
         "startChar": 23,
