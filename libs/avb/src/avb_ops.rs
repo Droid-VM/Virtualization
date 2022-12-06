@@ -14,16 +14,29 @@
 
 //! This module regroups methods related to AvbOps.
 
-#![warn(unsafe_op_in_unsafe_fn)]
+//#![warn(unsafe_op_in_unsafe_fn)]
 // TODO(b/256148034): Remove this when the feature is code complete.
 #![allow(dead_code)]
 #![allow(unused_imports)]
 
 extern crate alloc;
 
-use alloc::ffi::CString;
+use alloc::alloc::{alloc, dealloc, Layout};
+use alloc::ffi::{CString, NulError};
 use avb_bindgen::{
-    avb_slot_verify, AvbHashtreeErrorMode_AVB_HASHTREE_ERROR_MODE_EIO,
+    self,
+    avb_slot_verify,
+    AvbHashtreeErrorMode_AVB_HASHTREE_ERROR_MODE_EIO,
+    AvbIOResult,
+    //   AvbIOResult_AVB_IO_RESULT_ERROR_OOM,
+    AvbIOResult_AVB_IO_RESULT_ERROR_IO,
+    AvbIOResult_AVB_IO_RESULT_OK,
+    //   AvbIOResult_AVB_IO_RESULT_ERROR_NO_SUCH_PARTITION,
+    //   AvbIOResult_AVB_IO_RESULT_ERROR_RANGE_OUTSIDE_PARTITION,
+    //   AvbIOResult_AVB_IO_RESULT_ERROR_NO_SUCH_VALUE,
+    //   AvbIOResult_AVB_IO_RESULT_ERROR_INVALID_VALUE_SIZE,
+    //   AvbIOResult_AVB_IO_RESULT_ERROR_INSUFFICIENT_SPACE,
+    AvbOps,
     AvbSlotVerifyFlags_AVB_SLOT_VERIFY_FLAGS_NO_VBMETA_PARTITION,
     AvbSlotVerifyResult_AVB_SLOT_VERIFY_RESULT_ERROR_INVALID_ARGUMENT,
     AvbSlotVerifyResult_AVB_SLOT_VERIFY_RESULT_ERROR_INVALID_METADATA,
@@ -35,11 +48,11 @@ use avb_bindgen::{
     AvbSlotVerifyResult_AVB_SLOT_VERIFY_RESULT_ERROR_VERIFICATION,
     AvbSlotVerifyResult_AVB_SLOT_VERIFY_RESULT_OK,
 };
-use core::fmt;
+use core::{fmt, mem::size_of, ptr::null_mut};
 use log::debug;
 
 /// Error code from AVB image verification.
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Debug)]
 pub enum AvbImageVerifyError {
     /// AvbSlotVerifyResult_AVB_SLOT_VERIFY_RESULT_ERROR_INVALID_ARGUMENT
     InvalidArgument,
@@ -57,6 +70,8 @@ pub enum AvbImageVerifyError {
     UnsupportedVersion,
     /// AvbSlotVerifyResult_AVB_SLOT_VERIFY_RESULT_ERROR_VERIFICATION
     Verification,
+    /// Invalid CStrings.
+    InvalidCString(NulError),
     /// Unknown error.
     Unknown(u32),
 }
@@ -107,6 +122,7 @@ impl fmt::Display for AvbImageVerifyError {
                 "Some of the metadata requires a newer version of libavb than what is in use."
             ),
             Self::Verification => write!(f, "Data does not verify."),
+            Self::InvalidCString(e) => write!(f, "Invalid CString: {e}."),
             Self::Unknown(e) => write!(f, "Unknown avb_slot_verify error '{e}'"),
         }
     }
@@ -118,36 +134,77 @@ impl fmt::Display for AvbImageVerifyError {
 ///  - The partitions of the image match the descriptors of the verified VBMeta struct.
 /// Returns Ok if everything is verified correctly and the public key is accepted.
 pub fn verify_image(image: &[u8], public_key: &[u8]) -> Result<(), AvbImageVerifyError> {
-    AvbOps::new().verify_image(image, public_key)
+    Ops::new().verify_image(image, public_key)
 }
 
-/// TODO(b/256148034): Make AvbOps a rust wrapper of avb_bindgen::AvbOps using foreign_types.
-struct AvbOps {}
+/// A type that wraps avb_bindgen::AvbOps.
+#[repr(transparent)]
+struct Ops(AvbOps);
 
-impl AvbOps {
+extern "C" fn read_is_device_unlocked(
+    _ops: *mut AvbOps,
+    out_is_unlocked: *mut bool,
+) -> AvbIOResult {
+    unsafe {
+        *out_is_unlocked = false;
+    }
+    AvbIOResult_AVB_IO_RESULT_OK
+}
+
+extern "C" fn validate_vbmeta_public_key(
+    _ops: *mut AvbOps,
+    _public_key_data: *const u8,
+    public_key_length: usize,
+    _public_key_metadata: *const u8,
+    _public_key_metadata_length: usize,
+    _out_is_trusted: *mut bool,
+) -> AvbIOResult {
+    if public_key_length == 0 {
+        return AvbIOResult_AVB_IO_RESULT_ERROR_IO;
+    }
+    AvbIOResult_AVB_IO_RESULT_OK
+}
+
+impl Ops {
     fn new() -> Self {
-        AvbOps {}
+        let avb_ops = AvbOps {
+            user_data: null_mut(),
+            ab_ops: null_mut(),
+            atx_ops: null_mut(),
+            read_from_partition: None,
+            get_preloaded_partition: None,
+            write_to_partition: None,
+            validate_vbmeta_public_key: Some(validate_vbmeta_public_key),
+            read_rollback_index: None,
+            write_rollback_index: None,
+            read_is_device_unlocked: Some(read_is_device_unlocked),
+            get_unique_guid_for_partition: None,
+            get_size_of_partition: None,
+            read_persistent_value: None,
+            write_persistent_value: None,
+            validate_public_key_for_partition: None,
+        };
+        Self(avb_ops)
     }
 
-    fn verify_image(&self, image: &[u8], public_key: &[u8]) -> Result<(), AvbImageVerifyError> {
+    fn verify_image(&mut self, image: &[u8], public_key: &[u8]) -> Result<(), AvbImageVerifyError> {
         debug!("AVB image: addr={:?}, size={:#x} ({1})", image.as_ptr(), image.len());
         debug!(
             "AVB public key: addr={:?}, size={:#x} ({1})",
             public_key.as_ptr(),
             public_key.len()
         );
-        // TODO(b/256148034): Verify the kernel image with avb_slot_verify()
-        // let result = unsafe {
-        //     avb_slot_verify(
-        //         self.as_ptr(),
-        //         requested_partitions.as_ptr(),
-        //         ab_suffix.as_ptr(),
-        //         AvbSlotVerifyFlags_AVB_SLOT_VERIFY_FLAGS_NO_VBMETA_PARTITION,
-        //         AvbHashtreeErrorMode_AVB_HASHTREE_ERROR_MODE_EIO,
-        //         &image.as_ptr(),
-        //     )
-        // };
-        let result = AvbSlotVerifyResult_AVB_SLOT_VERIFY_RESULT_OK;
+        let ab_suffix = CString::new("_a").map_err(AvbImageVerifyError::InvalidCString)?;
+        let result = unsafe {
+            avb_slot_verify(
+                &mut self.0,
+                &image.as_ptr(),
+                ab_suffix.as_ptr(),
+                AvbSlotVerifyFlags_AVB_SLOT_VERIFY_FLAGS_NO_VBMETA_PARTITION,
+                AvbHashtreeErrorMode_AVB_HASHTREE_ERROR_MODE_EIO,
+                null_mut(),
+            )
+        };
         to_avb_verify_result(result)
     }
 }

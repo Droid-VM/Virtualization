@@ -20,9 +20,6 @@ rust_bindgen {
     static_libs: [
         "libavb",
     ],
-    shared_libs: [
-        "libcrypto",
-    ],
     cflags: ["-DBORINGSSL_NO_CXX"],
 }
 
@@ -49,5 +46,9 @@ rust_library_rlib {
     rustlibs: [
         "libavb_bindgen",
         "liblog_rust_nostd",
+    ],
+    whole_static_libs: [
+        "libcrypto_baremetal",
+        "libavb",
     ],
 }
