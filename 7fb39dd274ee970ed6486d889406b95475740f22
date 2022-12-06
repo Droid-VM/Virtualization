@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd35e8ef_e496a2c8",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-06T14:56:56Z",
+      "side": 1,
+      "message": "Done. Btw, this field holds the file, not just the path (same is true for others ex, mInstanceFilePath)",
+      "parentUuid": "ca6c2c31_04879c80",
+      "range": {
+        "startLine": 191,
+        "startChar": 33,
+        "endLine": 191,
+        "endChar": 52
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e30ebef_c68c57f5",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-01T10:54:30Z",
       "side": 1,
       "message": "Nit: braces\n(Or use ?:)",
+      "range": {
+        "startLine": 280,
+        "startChar": 15,
+        "endLine": 281,
+        "endChar": 5
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb73aaae_549c6978",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-06T14:56:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e30ebef_c68c57f5",
       "range": {
         "startLine": 280,
         "startChar": 15,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "707a8036_20181fc6",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-06T14:56:56Z",
+      "side": 1,
+      "message": "Ack, as discussed, doing it in a separate patch",
+      "parentUuid": "f02bb0e5_7bb8bbed",
+      "range": {
+        "startLine": 306,
+        "startChar": 2,
+        "endLine": 309,
+        "endChar": 37
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af167aac_52729a18",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-12-01T10:54:30Z",
       "side": 1,
       "message": "nit: Blank line after not before",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 91
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bff04f5_c30e477a",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-06T14:56:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af167aac_52729a18",
       "range": {
         "startLine": 67,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6849352_9cb053fa",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-06T14:56:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bb96745_efc1d225",
+      "range": {
+        "startLine": 132,
+        "startChar": 31,
+        "endLine": 132,
+        "endChar": 34
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e161ce79_54a9096a",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-12-01T10:54:30Z",
       "side": 1,
       "message": "We should do a similar check for encrypted storage",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 9
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68b237bf_4bb2b760",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-06T14:56:56Z",
+      "side": 1,
+      "message": "Oh, ofcourse. Thanks for pointing, done now (:",
+      "parentUuid": "e161ce79_54a9096a",
       "range": {
         "startLine": 149,
         "startChar": 0,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c486bbfd_c1926dee",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-06T14:56:56Z",
+      "side": 1,
+      "message": "Changed, thanks for pointing out the behaviour of `b.getInt`",
+      "parentUuid": "70812f20_3078a59b",
+      "range": {
+        "startLine": 245,
+        "startChar": 12,
+        "endLine": 245,
+        "endChar": 36
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34481df4_2f44c7db",
@@ -175,6 +343,30 @@
       "writtenOn": "2022-12-01T10:54:30Z",
       "side": 1,
       "message": "Maybe we should only write this if it is not the default value, as for mMemoryMib?",
+      "range": {
+        "startLine": 277,
+        "startChar": 1,
+        "endLine": 277,
+        "endChar": 75
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "004954dc_df80e822",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-06T14:56:56Z",
+      "side": 1,
+      "message": "SG. Done",
+      "parentUuid": "34481df4_2f44c7db",
       "range": {
         "startLine": 277,
         "startChar": 1,
@@ -210,6 +402,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6fc999fe_9497db73",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-06T14:56:56Z",
+      "side": 1,
+      "message": "It\u0027s an easily interpretable interface. This way, caller doesn\u0027t have to give much thought about what size corresponds to `not enabled`. Can you have another look at places where it is used and if you think we should not add this method (`isEncryptedStorageEnabled()`), I will remove it",
+      "parentUuid": "2b532a0d_7ef2b1c2",
+      "range": {
+        "startLine": 364,
+        "startChar": 0,
+        "endLine": 373,
+        "endChar": 0
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae7fccba_da39a52b",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 2
@@ -221,6 +437,30 @@
       "writtenOn": "2022-12-01T10:54:30Z",
       "side": 1,
       "message": "I think this needs some work.\n\nWe should add an @IntRange here.\n\nI suggest we return 0 if there is no such storage, otherwise a positive number.",
+      "range": {
+        "startLine": 374,
+        "startChar": 2,
+        "endLine": 377,
+        "endChar": 6
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27b39b78_b25bcd9f",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-06T14:56:56Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "ae7fccba_da39a52b",
       "range": {
         "startLine": 374,
         "startChar": 2,
@@ -254,6 +494,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f09aab49_e8f93f05",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-06T14:56:56Z",
+      "side": 1,
+      "message": "Ack, out of scope of this patch. Will look into this next!",
+      "parentUuid": "29647d9b_00a05067",
+      "range": {
+        "startLine": 385,
+        "startChar": 0,
+        "endLine": 394,
+        "endChar": 74
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6bb182e_6dc926a5",
@@ -277,6 +541,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "341882a6_ebbba11c",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-06T14:56:56Z",
+      "side": 1,
+      "message": "`Why Kib rather than Mib? Especially since we have setMemoryMib above` - I would like the app to be able to have storages in the order of KB.\n\n\n`maybe lose the \"Size\" too - setEncryptedStorageMib ` - I removed the size from name.",
+      "parentUuid": "b6bb182e_6dc926a5",
+      "range": {
+        "startLine": 591,
+        "startChar": 0,
+        "endLine": 594,
+        "endChar": 0
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "832af36b_f8a04bda",
@@ -290,6 +578,30 @@
       "writtenOn": "2022-12-01T10:54:30Z",
       "side": 1,
       "message": "We absolutely mustn\u0027t allow app_data_file here - that would allow running arbitrary code.\nInstead, add encrypted store to is_safe_app_partition above.\n\nBTW: What selinux label is applies to the mounted encrypted storage? We need to ensure that it doesn\u0027t allow code execution.",
+      "range": {
+        "startLine": 902,
+        "startChar": 0,
+        "endLine": 902,
+        "endChar": 80
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96171f68_9f88c2f0",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-06T14:56:56Z",
+      "side": 1,
+      "message": "I fixed the label bit, by filtering the encryptedstore label.\n\n\nThe /mnt/encryptedstore is currently unlabeled. I need to fix that b/261477008",
+      "parentUuid": "832af36b_f8a04bda",
       "range": {
         "startLine": 902,
         "startChar": 0,
