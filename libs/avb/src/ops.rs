@@ -14,15 +14,16 @@
 
 //! This module regroups methods related to AvbOps.
 
-#![warn(unsafe_op_in_unsafe_fn)]
 // TODO(b/256148034): Remove this when the feature is code complete.
-#![allow(dead_code)]
 #![allow(unused_imports)]
 
-use alloc::ffi::CString;
+use alloc::{ffi::CString, vec::Vec};
 use avb_bindgen::{
-    avb_slot_verify, AvbHashtreeErrorMode_AVB_HASHTREE_ERROR_MODE_EIO,
+    self, avb_slot_verify, AvbHashtreeErrorMode, AvbOps, AvbSlotVerifyFlags,
+    AvbSlotVerifyFlags_AVB_SLOT_VERIFY_FLAGS_ALLOW_VERIFICATION_ERROR,
+    AvbSlotVerifyFlags_AVB_SLOT_VERIFY_FLAGS_NONE,
     AvbSlotVerifyFlags_AVB_SLOT_VERIFY_FLAGS_NO_VBMETA_PARTITION,
+    AvbSlotVerifyFlags_AVB_SLOT_VERIFY_FLAGS_RESTART_CAUSED_BY_HASHTREE_CORRUPTION,
     AvbSlotVerifyResult_AVB_SLOT_VERIFY_RESULT_ERROR_INVALID_ARGUMENT,
     AvbSlotVerifyResult_AVB_SLOT_VERIFY_RESULT_ERROR_INVALID_METADATA,
     AvbSlotVerifyResult_AVB_SLOT_VERIFY_RESULT_ERROR_IO,
@@ -33,11 +34,15 @@ use avb_bindgen::{
     AvbSlotVerifyResult_AVB_SLOT_VERIFY_RESULT_ERROR_VERIFICATION,
     AvbSlotVerifyResult_AVB_SLOT_VERIFY_RESULT_OK,
 };
-use core::fmt;
+use core::{
+    ffi::c_char,
+    fmt,
+    ptr::{null, null_mut},
+};
 use log::debug;
 
 /// Error code from AVB image verification.
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Debug)]
 pub enum AvbImageVerifyError {
     /// AvbSlotVerifyResult_AVB_SLOT_VERIFY_RESULT_ERROR_INVALID_ARGUMENT
     InvalidArgument,
@@ -110,39 +115,34 @@ impl fmt::Display for AvbImageVerifyError {
     }
 }
 
-/// Verifies that for the given image:
-///  - The given public key is acceptable.
-///  - The VBMeta struct is valid.
-///  - The partitions of the image match the descriptors of the verified VBMeta struct.
-/// Returns Ok if everything is verified correctly and the public key is accepted.
-pub fn verify_image(image: &[u8], public_key: &[u8]) -> Result<(), AvbImageVerifyError> {
-    AvbOps::new().verify_image(image, public_key)
-}
+/// A type that wraps avb_bindgen::AvbOps.
+pub struct Ops(AvbOps);
 
-/// TODO(b/256148034): Make AvbOps a rust wrapper of avb_bindgen::AvbOps using foreign_types.
-struct AvbOps {}
-
-impl AvbOps {
-    fn new() -> Self {
-        AvbOps {}
+impl Ops {
+    /// Builds a new `Ops` object.
+    pub fn new(avb_ops: AvbOps) -> Self {
+        Self(avb_ops)
     }
 
-    fn verify_image(&self, image: &[u8], public_key: &[u8]) -> Result<(), AvbImageVerifyError> {
-        debug!("AVB image: addr={:?}, size={:#x} ({1})", image.as_ptr(), image.len());
-        debug!(
-            "AVB public key: addr={:?}, size={:#x} ({1})",
-            public_key.as_ptr(),
-            public_key.len()
-        );
+    /// Invokes `avb_slot_verify` with the inner `AvbOps` object.
+    pub fn verify_slot(
+        &mut self,
+        requested_partitions: &[CString],
+        _ab_suffix: CString,
+        _flags: AvbSlotVerifyFlags,
+        _hashtree_error_mode: AvbHashtreeErrorMode,
+    ) -> Result<(), AvbImageVerifyError> {
+        let _requested_partitions_ptr: *const *const c_char =
+            requested_partitions.iter().map(|s| s.as_ptr()).collect::<Vec<_>>().as_ptr();
         // TODO(b/256148034): Verify the kernel image with avb_slot_verify()
         // let result = unsafe {
         //     avb_slot_verify(
-        //         self.as_ptr(),
-        //         requested_partitions.as_ptr(),
-        //         ab_suffix.as_ptr(),
-        //         AvbSlotVerifyFlags_AVB_SLOT_VERIFY_FLAGS_NO_VBMETA_PARTITION,
-        //         AvbHashtreeErrorMode_AVB_HASHTREE_ERROR_MODE_EIO,
-        //         &image.as_ptr(),
+        //         &mut self.0,
+        //         requested_partitions_ptr,
+        //         ab_suffix.map_or(null(), |s| s.as_ptr()),
+        //         flags,
+        //         hashtree_error_mode,
+        //         null_mut(),
         //     )
         // };
         let result = AvbSlotVerifyResult_AVB_SLOT_VERIFY_RESULT_OK;

@@ -19,6 +19,8 @@
 #![feature(default_alloc_error_handler)]
 #![feature(ptr_const_cast)] // Stabilized in 1.65.0
 
+extern crate alloc;
+
 mod avb;
 mod config;
 mod entry;
@@ -32,11 +34,10 @@ mod mmu;
 mod pci;
 mod smccc;
 
-use crate::{avb::PUBLIC_KEY, entry::RebootReason, memory::MemoryTracker, pci::PciInfo};
-use ::avb::verify_image;
+use crate::{avb::verify_payload, entry::RebootReason, memory::MemoryTracker, pci::PciInfo};
 use dice::bcc;
 use libfdt::Fdt;
-use log::{debug, error, info, trace};
+use log::{debug, info, trace};
 
 fn main(
     fdt: &Fdt,
@@ -60,10 +61,7 @@ fn main(
     info!("PCI: {:#x?}", pci_info);
     pci_info.map(memory)?;
 
-    verify_image(signed_kernel, PUBLIC_KEY).map_err(|e| {
-        error!("Failed to verify the payload: {e}");
-        RebootReason::PayloadVerificationError
-    })?;
+    verify_payload(signed_kernel, ramdisk)?;
     info!("Starting payload...");
     Ok(())
 }

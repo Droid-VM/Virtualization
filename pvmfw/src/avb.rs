@@ -14,4 +14,64 @@
 
 //! Image verification.
 
+use crate::entry::RebootReason;
+use ::avb::Ops;
+use alloc::ffi::CString;
+use avb_bindgen::{
+    AvbHashtreeErrorMode_AVB_HASHTREE_ERROR_MODE_EIO, AvbIOResult, AvbIOResult_AVB_IO_RESULT_OK,
+    AvbOps, AvbSlotVerifyFlags_AVB_SLOT_VERIFY_FLAGS_NO_VBMETA_PARTITION,
+};
+use core::ptr::null_mut;
+use log::error;
 pub use pvmfw_embedded_key::PUBLIC_KEY;
+
+extern "C" fn read_is_device_unlocked(
+    _ops: *mut AvbOps,
+    out_is_unlocked: *mut bool,
+) -> AvbIOResult {
+    // SAFETY: It is safe to update the device state as locked.
+    unsafe {
+        *out_is_unlocked = false;
+    }
+    AvbIOResult_AVB_IO_RESULT_OK
+}
+
+pub(crate) fn verify_payload(_kernel: &[u8], _ramdisk: Option<&[u8]>) -> Result<(), RebootReason> {
+    let avb_ops = AvbOps {
+        user_data: null_mut(),
+        ab_ops: null_mut(),
+        atx_ops: null_mut(),
+        read_from_partition: None,
+        get_preloaded_partition: None,
+        write_to_partition: None,
+        validate_vbmeta_public_key: None,
+        read_rollback_index: None,
+        write_rollback_index: None,
+        read_is_device_unlocked: Some(read_is_device_unlocked),
+        get_unique_guid_for_partition: None,
+        get_size_of_partition: None,
+        read_persistent_value: None,
+        write_persistent_value: None,
+        validate_public_key_for_partition: None,
+    };
+    let requested_partitions = [CString::new("bootloader").map_err(|e| {
+        error!("Invalid CString for requested partitions: {e}");
+        RebootReason::InternalError
+    })?];
+    let ab_suffix = CString::new("_a").map_err(|e| {
+        error!("Invalid CString for ab_suffix: {e}");
+        RebootReason::InternalError
+    })?;
+    Ops::new(avb_ops)
+        .verify_slot(
+            &requested_partitions,
+            ab_suffix,
+            AvbSlotVerifyFlags_AVB_SLOT_VERIFY_FLAGS_NO_VBMETA_PARTITION,
+            AvbHashtreeErrorMode_AVB_HASHTREE_ERROR_MODE_EIO,
+        )
+        .map_err(|e| {
+            error!("Failed to verify the payload: {e}");
+            RebootReason::PayloadVerificationError
+        })?;
+    Ok(())
+}

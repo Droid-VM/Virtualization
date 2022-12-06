@@ -20,4 +20,4 @@ extern crate alloc;
 
 mod ops;
 
-pub use ops::{verify_image, AvbImageVerifyError};
+pub use ops::{AvbImageVerifyError, Ops};
