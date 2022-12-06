@@ -34,13 +34,14 @@ mod smccc;
 use crate::entry::RebootReason;
 use avb::PUBLIC_KEY;
 use avb_nostd::verify_image;
-use log::{debug, error, info};
+use dice::bcc;
+use log::{debug, error, info, trace};
 
 fn main(
     fdt: &libfdt::Fdt,
     signed_kernel: &[u8],
     ramdisk: Option<&[u8]>,
-    bcc: &[u8],
+    bcc: &bcc::Handover,
 ) -> Result<(), RebootReason> {
     info!("pVM firmware");
     debug!("FDT: {:?}", fdt as *const libfdt::Fdt);
@@ -50,7 +51,7 @@ fn main(
     } else {
         debug!("Ramdisk: None");
     }
-    debug!("BCC: {:?} ({:#x} bytes)", bcc.as_ptr(), bcc.len());
+    trace!("BCC: {bcc:x?}");
     verify_image(signed_kernel, PUBLIC_KEY).map_err(|e| {
         error!("Failed to verify the payload: {e}");
         RebootReason::PayloadVerificationError
