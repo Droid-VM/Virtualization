@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60c5eaf0_257cff6f",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-06T16:13:22Z",
+      "side": 1,
+      "message": "Well, \"File\" is kind of badly named, and badly designed. It holds just the path, but it can be used to access the file, if it exists.",
+      "parentUuid": "bd35e8ef_e496a2c8",
+      "range": {
+        "startLine": 191,
+        "startChar": 33,
+        "endLine": 191,
+        "endChar": 52
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e30ebef_c68c57f5",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "Ack, as discussed, doing it in a separate patch",
       "parentUuid": "f02bb0e5_7bb8bbed",
+      "range": {
+        "startLine": 306,
+        "startChar": 2,
+        "endLine": 309,
+        "endChar": 37
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abe0ad8a_43c3f57f",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-06T16:13:22Z",
+      "side": 1,
+      "message": "Add a TODO here?",
+      "parentUuid": "707a8036_20181fc6",
       "range": {
         "startLine": 306,
         "startChar": 2,
@@ -424,6 +472,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "266cdac7_ef05fea9",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-06T16:13:22Z",
+      "side": 1,
+      "message": "OK, fair enough.",
+      "parentUuid": "6fc999fe_9497db73",
+      "range": {
+        "startLine": 364,
+        "startChar": 0,
+        "endLine": 373,
+        "endChar": 0
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae7fccba_da39a52b",
@@ -520,6 +592,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "011fd451_db8b2641",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-06T16:13:22Z",
+      "side": 1,
+      "message": "Hmm. We need to make a decision on this - I\u0027m not sure what the answer should be. And we would need to enforce it inside the VM.\nCan you add a TODO?",
+      "parentUuid": "f09aab49_e8f93f05",
+      "range": {
+        "startLine": 385,
+        "startChar": 0,
+        "endLine": 394,
+        "endChar": 74
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a55e5ba_370bc45d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-06T16:13:22Z",
+      "side": 1,
+      "message": "I was wondering about that.\n4TiB seems like a lot, but is it?\n\nChanging it later would be a lot of work.",
+      "range": {
+        "startLine": 469,
+        "startChar": 46,
+        "endLine": 469,
+        "endChar": 77
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b6bb182e_6dc926a5",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 2
@@ -555,6 +674,30 @@
       "side": 1,
       "message": "`Why Kib rather than Mib? Especially since we have setMemoryMib above` - I would like the app to be able to have storages in the order of KB.\n\n\n`maybe lose the \"Size\" too - setEncryptedStorageMib ` - I removed the size from name.",
       "parentUuid": "b6bb182e_6dc926a5",
+      "range": {
+        "startLine": 591,
+        "startChar": 0,
+        "endLine": 594,
+        "endChar": 0
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75bea4c1_a5b68a1c",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-06T16:13:22Z",
+      "side": 1,
+      "message": "\u003e I would like the app to be able to have storages in the order of KB.\n\nThe file system overhead is much bigger than that, though?",
+      "parentUuid": "341882a6_ebbba11c",
       "range": {
         "startLine": 591,
         "startChar": 0,
