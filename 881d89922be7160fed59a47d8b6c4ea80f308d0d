@@ -16,6 +16,24 @@
       "message": "Hi, if the breakage is only in this branch, why do you need to revert it in AOSP? Can\u0027t you just revert or fix the branch? Is the branch missing other changes from AOSP?",
       "revId": "881d89922be7160fed59a47d8b6c4ea80f308d0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "181246e9_524543ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936454
+      },
+      "writtenOn": "2022-12-06T18:34:57Z",
+      "side": 1,
+      "message": "Seems that we are in an odd situation where the dependency you need for virtio-drivers did not merge because of a breakage during the merge conflict resolution.\n\nI created this CL to determine if the build will pass if we decide to revert it but we haven\u0027t made the decision yet.\n\nI\u0027m also trying to figure out who is working on the merge conflict on the manifest to see if that\u0027s being worked on.\n\nHere are the reverts for reference (and I\u0027ll also update the bug).\nhttps://googleplex-android-review.git.corp.google.com/c/platform/manifest/+/20385225\nhttps://googleplex-android-review.git.corp.google.com/c/platform/manifest/+/20391334",
+      "parentUuid": "00259719_a71ef603",
+      "revId": "881d89922be7160fed59a47d8b6c4ea80f308d0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
