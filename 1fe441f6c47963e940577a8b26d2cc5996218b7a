@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ce89879_f240a41e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-12-07T11:23:50Z",
+      "side": 1,
+      "message": "Nice to see it gone! It\u0027ll be much easier to reason about and there was only a single use of it in the tests!",
+      "revId": "1fe441f6c47963e940577a8b26d2cc5996218b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5c3c5ed_1f052b9a",
+        "filename": "compos/src/compilation.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-12-07T11:23:50Z",
+      "side": 1,
+      "message": "This isn\u0027t just removing app debuggable. `init` will convert `androidboot.*` properties into `ro.boot.*` properties so is this change correct?",
+      "range": {
+        "startLine": 46,
+        "startChar": 55,
+        "endLine": 46,
+        "endChar": 66
+      },
+      "revId": "1fe441f6c47963e940577a8b26d2cc5996218b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc6046aa_e26fb59a",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-12-07T11:23:50Z",
+      "side": 1,
+      "message": "Same about properties in this file",
+      "range": {
+        "startLine": 22,
+        "startChar": 17,
+        "endLine": 22,
+        "endChar": 37
+      },
+      "revId": "1fe441f6c47963e940577a8b26d2cc5996218b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c6343eb_794cca51",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-12-07T11:23:50Z",
+      "side": 1,
+      "message": "Same as other property comment",
+      "range": {
+        "startLine": 79,
+        "startChar": 31,
+        "endLine": 79,
+        "endChar": 42
+      },
+      "revId": "1fe441f6c47963e940577a8b26d2cc5996218b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a0f0bb5_177aefd0",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-12-07T11:23:50Z",
+      "side": 1,
+      "message": "nit: if you\u0027re up for it, could you fix my typo? 😊",
+      "range": {
+        "startLine": 284,
+        "startChar": 28,
+        "endLine": 284,
+        "endChar": 41
+      },
+      "revId": "1fe441f6c47963e940577a8b26d2cc5996218b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5c14f1e_a7cda576",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-12-07T11:23:50Z",
+      "side": 1,
+      "message": "Do we have a FULL -\u003e NONE test?",
+      "revId": "1fe441f6c47963e940577a8b26d2cc5996218b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
