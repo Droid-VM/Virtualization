@@ -47,6 +47,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87994352_a2e47f63",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-07T17:19:39Z",
+      "side": 1,
+      "message": "It looks like crosvm rounds the size down to a whole number of sectors. Bytes beyond that are ignored.",
+      "parentUuid": "60dda97e_d13b5950",
+      "range": {
+        "startLine": 74,
+        "startChar": 8,
+        "endLine": 74,
+        "endChar": 11
+      },
+      "revId": "a8f576fe0953c45e4b40e66ac72a56fe2434507f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d2c7a41_8437186a",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-07T17:19:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2cd95f7d_5da63b3f",
+      "range": {
+        "startLine": 74,
+        "startChar": 23,
+        "endLine": 74,
+        "endChar": 24
+      },
+      "revId": "a8f576fe0953c45e4b40e66ac72a56fe2434507f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8805c5cb_5ab8b74c",
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f0b773f_14f37d37",
+        "filename": "vmbase/example/tests/test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-07T17:19:39Z",
+      "side": 1,
+      "message": "Crosvm doesn\u0027t allow that, and I don\u0027t think there\u0027s any way to express it in the VirtIO specification anyway. Block devices must have an integer number of sectors.",
+      "parentUuid": "8805c5cb_5ab8b74c",
+      "range": {
+        "startLine": 70,
+        "startChar": 23,
+        "endLine": 70,
+        "endChar": 29
+      },
+      "revId": "a8f576fe0953c45e4b40e66ac72a56fe2434507f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "217642f4_b26e2d34",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-12-07T15:18:51Z",
       "side": 1,
       "message": "It would also be good to cover writing to the disk; I suppose this is covered by an upcoming CL?",
+      "range": {
+        "startLine": 72,
+        "startChar": 68,
+        "endLine": 72,
+        "endChar": 73
+      },
+      "revId": "a8f576fe0953c45e4b40e66ac72a56fe2434507f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "172cfdf6_a1605e3d",
+        "filename": "vmbase/example/tests/test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-07T17:19:39Z",
+      "side": 1,
+      "message": "I haven\u0027t written anything to test that yet but can do if needed.",
+      "parentUuid": "217642f4_b26e2d34",
       "range": {
         "startLine": 72,
         "startChar": 68,
