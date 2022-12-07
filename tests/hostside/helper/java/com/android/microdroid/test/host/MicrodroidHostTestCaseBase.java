@@ -90,6 +90,7 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
             runOnHost("adb", "root");
             runOnHost("adb", "push", sCustomPvmfwPathOnHost, PVMFW_IMG_PATH);
             runOnHost("adb", "shell", "setprop", PVMFW_IMG_PATH_PROP, PVMFW_IMG_PATH);
+            runOnHost("adb", "setenforce", "0");
         }
     }
 
@@ -107,6 +108,7 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
 
         if (!isEmptyText(sCustomPvmfwPathOnHost)) {
             runOnHost("adb", "shell", "setprop", PVMFW_IMG_PATH_PROP, "\"\"");
+            runOnHost("adb", "setenforce", "1");
         }
     }
 
