@@ -16,6 +16,24 @@
       "message": "Please remove the bootconfig file for the mode. You will also have to touch some of the Android.bp files that are for building initrd for the mode.\n\nIdeally, this should be a boolean flag (ex: debuggable: bool), not an integer or an enum.",
       "revId": "1091fc9bcbfadab709ab98e1af970d0872830255",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1040ec7f_c7766f7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-12-07T04:37:38Z",
+      "side": 1,
+      "message": "It sounds like I need to touch such files for removing entire app_debug related stuff. Thanks for noticing :)\nhttps://source.corp.google.com/aosp-master/packages/modules/Virtualization/microdroid/bootconfig.app_debuggable\nhttps://source.corp.google.com/aosp-master/packages/modules/Virtualization/microdroid/initrd/Android.bp;l\u003d75",
+      "parentUuid": "c38b0df9_44543d75",
+      "revId": "1091fc9bcbfadab709ab98e1af970d0872830255",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
