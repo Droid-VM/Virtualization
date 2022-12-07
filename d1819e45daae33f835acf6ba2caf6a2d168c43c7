@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc8a779a_d7be7235",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-07T16:55:14Z",
+      "side": 1,
+      "message": "Don\u0027t we also need to validate that `.add` succeeded and unmap the region from the PTs otherwise?\n\nTo avoid that, `.check` could verify that the `ArrayVec` isn\u0027t full, making `.add` a `-\u003e MemoryRange`?",
+      "range": {
+        "startLine": 144,
+        "startChar": 4,
+        "endLine": 144,
+        "endChar": 5
+      },
+      "revId": "d1819e45daae33f835acf6ba2caf6a2d168c43c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
