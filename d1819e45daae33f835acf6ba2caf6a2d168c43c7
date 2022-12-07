@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cb76d83_af6a9e00",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-07T17:18:08Z",
+      "side": 0,
+      "message": "Is this needed by this CL? Otherwise, I\u0027d rather we remove it in a separate CL (which we can autosubmit+1-and-forget) to minimize clashes and document the reason.",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 10
+      },
+      "revId": "d1819e45daae33f835acf6ba2caf6a2d168c43c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
