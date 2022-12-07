@@ -40,6 +40,7 @@ pub fn pci_node(fdt: &Fdt) -> FdtNode {
 
 pub fn check_pci(reg: Reg<u64>, allocator: &mut PciMemory32Allocator) {
     let mut pci_root = unsafe { PciRoot::new(reg.addr as *mut u8, Cam::MmioCam) };
+    let mut checked_virtio_device_count = 0;
     for (device_function, info) in pci_root.enumerate_bus(0) {
         let (status, command) = pci_root.get_status_command(device_function);
         info!("Found {} at {}, status {:?} command {:?}", info, device_function, status, command);
@@ -53,15 +54,29 @@ pub fn check_pci(reg: Reg<u64>, allocator: &mut PciMemory32Allocator) {
                 transport.device_type(),
                 transport.read_device_features(),
             );
-            instantiate_virtio_driver(transport, virtio_type);
+            if check_virtio_device(transport, virtio_type) {
+                checked_virtio_device_count += 1;
+            }
         }
     }
+
+    assert_eq!(checked_virtio_device_count, 1);
 }
 
-fn instantiate_virtio_driver(transport: impl Transport, device_type: DeviceType) {
+/// Checks the given VirtIO device, if we know how to.
+///
+/// Returns true if the device was checked, or false if it was ignored.
+fn check_virtio_device(transport: impl Transport, device_type: DeviceType) -> bool {
     if device_type == DeviceType::Block {
-        let blk = VirtIOBlk::<HalImpl, _>::new(transport).expect("failed to create blk driver");
+        let mut blk = VirtIOBlk::<HalImpl, _>::new(transport).expect("failed to create blk driver");
         info!("Found {} KiB block device.", blk.capacity() * SECTOR_SIZE_BYTES / 1024);
+        let mut data = [0; SECTOR_SIZE_BYTES as usize];
+        blk.read_block(0, &mut data).expect("Failed to read block device.");
+        assert_eq!(&data[0..9], b"Test data");
+        info!("Read expected data from block device.");
+        true
+    } else {
+        false
     }
 }
 
