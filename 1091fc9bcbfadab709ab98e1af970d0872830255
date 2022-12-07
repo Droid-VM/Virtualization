@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c38b0df9_44543d75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-12-07T03:55:43Z",
+      "side": 1,
+      "message": "Please remove the bootconfig file for the mode. You will also have to touch some of the Android.bp files that are for building initrd for the mode.\n\nIdeally, this should be a boolean flag (ex: debuggable: bool), not an integer or an enum.",
+      "revId": "1091fc9bcbfadab709ab98e1af970d0872830255",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
