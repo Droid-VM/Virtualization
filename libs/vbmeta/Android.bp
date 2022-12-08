@@ -12,6 +12,17 @@ rust_defaults {
         "libavb_bindgen",
         "libthiserror",
     ],
+    target: {
+        musl: {
+            enabled: false,
+        },
+        glibc: {
+            enabled: false,
+        },
+        darwin: {
+            enabled: false,
+        },
+    },
 }
 
 rust_library {

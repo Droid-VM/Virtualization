@@ -136,6 +136,23 @@ impl AvbOps {
             public_key.as_ptr(),
             public_key.len()
         );
+        let ab_suffix = CString::new("ab_suffix").unwrap();
+        // Run `m pvmfw_img`
+        // Both methods below are from external/avb/libavb/avb_sysdeps_posix.c
+        debug!(
+            "ab_suffix length: {:?}",
+            unsafe { avb_bindgen::avb_strlen(ab_suffix.as_ptr()) } // This compiles and links without problem.
+        );
+        unsafe {
+            avb_bindgen::avb_abort();
+        }
+        // avb_abort() cannot be linked. Error:
+        // ld.lld: error: undefined symbol: abort
+        // >>> referenced by avb_sysdeps_posix.c:58 (external/avb/libavb/avb_sysdeps_posix.c:58)
+        // >>>               avb_sysdeps_posix.o:(avb_abort) in archive out/soong/.intermediates/packages/modules/Virtualization/pvmfw/libpvmfw/android_arm64_armv8-a_static/libpvmfw.a
+        // clang-16: error: linker command failed with exit code 1 (use -v to see invocation)
+        // 10:33:16 ninja failed with: exit status 1
+
         // TODO(b/256148034): Verify the kernel image with avb_slot_verify()
         // let result = unsafe {
         //     avb_slot_verify(
