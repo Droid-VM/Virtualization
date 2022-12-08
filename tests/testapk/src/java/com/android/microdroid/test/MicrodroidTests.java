@@ -18,8 +18,6 @@ package com.android.microdroid.test;
 import static android.system.virtualmachine.VirtualMachine.STATUS_DELETED;
 import static android.system.virtualmachine.VirtualMachine.STATUS_RUNNING;
 import static android.system.virtualmachine.VirtualMachine.STATUS_STOPPED;
-import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_FULL;
-import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_NONE;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.TruthJUnit.assume;
@@ -122,7 +120,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                 newVmConfigBuilder()
                         .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
                         .setMemoryMib(minMemoryRequired())
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebuggable(true)
                         .build();
         VirtualMachine vm = forceCreateNewVirtualMachine("test_vm", config);
 
@@ -146,7 +144,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                 newVmConfigBuilder()
                         .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
                         .setMemoryMib(minMemoryRequired())
-                        .setDebugLevel(DEBUG_LEVEL_NONE)
+                        .setDebuggable(false)
                         .build();
         VirtualMachine vm = forceCreateNewVirtualMachine("test_vm", config);
 
@@ -189,7 +187,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                 newVmConfigBuilder()
                         .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
                         .setMemoryMib(minMemoryRequired())
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebuggable(true)
                         .build();
 
         try (VirtualMachine vm = forceCreateNewVirtualMachine("test_vm", config)) {
@@ -220,7 +218,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                 newVmConfigBuilder()
                         .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
                         .setMemoryMib(minMemoryRequired())
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebuggable(true)
                         .build();
         VirtualMachine vm = forceCreateNewVirtualMachine("test_vm_vsock", config);
 
@@ -268,7 +266,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                 newVmConfigBuilder().setPayloadBinaryPath("binary/path").build();
 
         assertThat(minimal.getApkPath()).isEqualTo(getContext().getPackageCodePath());
-        assertThat(minimal.getDebugLevel()).isEqualTo(DEBUG_LEVEL_NONE);
+        assertThat(minimal.isDebuggable()).isFalse();
         assertThat(minimal.getMemoryMib()).isEqualTo(0);
         assertThat(minimal.getNumCpus()).isEqualTo(1);
         assertThat(minimal.getPayloadBinaryPath()).isEqualTo("binary/path");
@@ -281,12 +279,12 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                         .setPayloadConfigPath("config/path")
                         .setApkPath("/apk/path")
                         .setNumCpus(maxCpus)
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebuggable(true)
                         .setMemoryMib(42);
         VirtualMachineConfig maximal = maximalBuilder.build();
 
         assertThat(maximal.getApkPath()).isEqualTo("/apk/path");
-        assertThat(maximal.getDebugLevel()).isEqualTo(DEBUG_LEVEL_FULL);
+        assertThat(maximal.isDebuggable()).isTrue();
         assertThat(maximal.getMemoryMib()).isEqualTo(42);
         assertThat(maximal.getNumCpus()).isEqualTo(maxCpus);
         assertThat(maximal.getPayloadBinaryPath()).isNull();
@@ -385,7 +383,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                         .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
                         .setApkPath(getContext().getPackageCodePath())
                         .setMemoryMib(minMemoryRequired())
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebuggable(true)
                         .build();
 
         VirtualMachine vm = forceCreateNewVirtualMachine("test_vm_explicit_apk_path", config);
@@ -403,7 +401,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                 newVmConfigBuilder()
                         .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
                         .setApkPath("relative/path/to.apk")
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebuggable(true)
                         .setMemoryMib(minMemoryRequired());
         assertThrows(IllegalArgumentException.class, () -> builder.build());
     }
@@ -429,7 +427,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                 newVmConfigBuilder()
                         .setPayloadConfigPath("assets/vm_config_extra_apk.json")
                         .setMemoryMib(minMemoryRequired())
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebuggable(true)
                         .build();
         VirtualMachine vm = forceCreateNewVirtualMachine("test_vm_extra_apk", config);
 
@@ -444,7 +442,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                     newVmConfigBuilder()
                             .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
                             .setMemoryMib(memMib)
-                            .setDebugLevel(DEBUG_LEVEL_NONE)
+                            .setDebuggable(false)
                             .build();
             VirtualMachine vm = forceCreateNewVirtualMachine("low_mem", lowMemConfig);
             final CompletableFuture<Boolean> onPayloadReadyExecuted = new CompletableFuture<>();
@@ -472,16 +470,16 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     @Test
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-7"})
     public void changingNonDebuggableVmDebuggableInvalidatesVmIdentity() throws Exception {
-        changeDebugLevel(DEBUG_LEVEL_NONE, DEBUG_LEVEL_FULL);
+        changeDebuggable(false, true);
     }
 
-    private void changeDebugLevel(int fromLevel, int toLevel) throws Exception {
+    private void changeDebuggable(boolean fromLevel, boolean toLevel) throws Exception {
         assumeSupportedKernel();
 
         VirtualMachineConfig.Builder builder =
                 newVmConfigBuilder()
                         .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
-                        .setDebugLevel(fromLevel);
+                        .setDebuggable(fromLevel);
         VirtualMachineConfig normalConfig = builder.build();
         forceCreateNewVirtualMachine("test_vm", normalConfig);
         assertThat(tryBootVm(TAG, "test_vm").payloadStarted).isTrue();
@@ -500,7 +498,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         // (thankfully).
         // For testing, we do that by creating a new VM with debug level, and copy the old instance
         // image to the new VM instance image.
-        VirtualMachineConfig debugConfig = builder.setDebugLevel(toLevel).build();
+        VirtualMachineConfig debugConfig = builder.setDebuggable(toLevel).build();
         forceCreateNewVirtualMachine("test_vm", debugConfig);
         Files.copy(vmInstanceBackup.toPath(), vmInstance.toPath(), REPLACE_EXISTING);
         assertThat(tryBootVm(TAG, "test_vm").payloadStarted).isFalse();
@@ -551,7 +549,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         VirtualMachineConfig normalConfig =
                 newVmConfigBuilder()
                         .setPayloadConfigPath("assets/vm_config.json")
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebuggable(true)
                         .build();
         forceCreateNewVirtualMachine("test_vm_a", normalConfig);
         forceCreateNewVirtualMachine("test_vm_b", normalConfig);
@@ -578,7 +576,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         VirtualMachineConfig normalConfig =
                 newVmConfigBuilder()
                         .setPayloadConfigPath("assets/vm_config.json")
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebuggable(true)
                         .build();
         forceCreateNewVirtualMachine("test_vm", normalConfig);
 
@@ -602,7 +600,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         VirtualMachineConfig normalConfig =
                 newVmConfigBuilder()
                         .setPayloadConfigPath("assets/vm_config.json")
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebuggable(true)
                         .build();
         VirtualMachine vm = forceCreateNewVirtualMachine("bcc_vm", normalConfig);
         final CompletableFuture<byte[]> bcc = new CompletableFuture<>();
@@ -651,7 +649,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         VirtualMachineConfig config =
                 newVmConfigBuilder()
                         .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebuggable(true)
                         .build();
         forceCreateNewVirtualMachine("test_vm", config);
 
@@ -698,7 +696,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         VirtualMachineConfig config =
                 newVmConfigBuilder()
                         .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebuggable(true)
                         .build();
 
         forceCreateNewVirtualMachine(vmName, config);
@@ -759,7 +757,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         VirtualMachineConfig normalConfig =
                 newVmConfigBuilder()
                         .setPayloadConfigPath("assets/vm_config_no_task.json")
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebuggable(true)
                         .build();
         forceCreateNewVirtualMachine("test_vm_invalid_config", normalConfig);
 
@@ -773,7 +771,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     public void bootFailsWhenBinaryPathIsInvalid() throws Exception {
         VirtualMachineConfig.Builder builder =
                 newVmConfigBuilder().setPayloadBinaryPath("DoesNotExist.so");
-        VirtualMachineConfig normalConfig = builder.setDebugLevel(DEBUG_LEVEL_FULL).build();
+        VirtualMachineConfig normalConfig = builder.setDebuggable(true).build();
         forceCreateNewVirtualMachine("test_vm_invalid_binary_path", normalConfig);
 
         BootResult bootResult = tryBootVm(TAG, "test_vm_invalid_binary_path");
@@ -808,7 +806,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         VirtualMachineConfig config =
                 newVmConfigBuilder()
                         .setPayloadConfigPath("assets/vm_config.json")
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebuggable(true)
                         .build();
         String vmNameOrig = "test_vm_orig";
         String vmNameImport = "test_vm_import";
@@ -836,7 +834,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         VirtualMachineConfig config =
                 newVmConfigBuilder()
                         .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebuggable(true)
                         .build();
         String vmNameOrig = "test_vm_orig";
         String vmNameImport = "test_vm_import";

@@ -334,7 +334,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         }
 
         // Add partitions to the second disk
-        final String initrdPath = TEST_ROOT + "etc/microdroid_initrd_full_debuggable.img";
+        final String initrdPath = TEST_ROOT + "etc/microdroid_initrd_debuggable.img";
         config.put("initrd", initrdPath);
         // Add instance image as a partition in disks[1]
         disks.put(new JSONObject()
@@ -419,7 +419,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         // Act
         mMicrodroidDevice =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
-                        .debugLevel("full")
+                        .debuggable(true)
                         .memoryMib(minMemorySize())
                         .numCpus(NUM_VCPUS)
                         .protectedVm(protectedVm)
@@ -497,7 +497,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         // and the reeceiver on host (virtualization_service)
         mMicrodroidDevice =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
-                        .debugLevel("full")
+                        .debuggable(true)
                         .memoryMib(minMemorySize())
                         .numCpus(NUM_VCPUS)
                         .build(getAndroidDevice());
@@ -555,7 +555,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         final String configPath = "assets/vm_config_apex.json"; // path inside the APK
         ITestDevice microdroid =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
-                        .debugLevel("full")
+                        .debuggable(true)
                         .memoryMib(minMemorySize())
                         .numCpus(NUM_VCPUS)
                         .build(device);
@@ -616,7 +616,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         final String configPath = "assets/vm_config.json"; // path inside the APK
         mMicrodroidDevice =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
-                        .debugLevel("full")
+                        .debuggable(true)
                         .memoryMib(minMemorySize())
                         .numCpus(NUM_VCPUS)
                         .build(getAndroidDevice());
@@ -683,7 +683,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         final String configPath = "assets/vm_config.json";
         mMicrodroidDevice =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
-                        .debugLevel("full")
+                        .debuggable(true)
                         .memoryMib(minMemorySize())
                         .numCpus(NUM_VCPUS)
                         .build(getAndroidDevice());
