@@ -35,6 +35,17 @@ rust_binary {
         "libserde_cbor",
         "libvbmeta_rust",
     ],
+    target: {
+        musl: {
+            enabled: false,
+        },
+        glibc: {
+            enabled: false,
+        },
+        darwin: {
+            enabled: false,
+        },
+    },
 }
 
 rust_test {
