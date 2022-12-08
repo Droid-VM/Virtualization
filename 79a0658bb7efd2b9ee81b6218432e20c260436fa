@@ -142,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "963aef8f_dfce17ac",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-08T14:19:59Z",
+      "side": 1,
+      "message": "This feels like splitting hair but I agree with you that both functions should have the same qualifier.\n\nThanks for the link, it\u0027s an interesting read (although I remain convinced that `unsafe` was defined in the context of userspace code (including `std` implementation) and not baremetal code that directly controls and sets up the abstractions provided by the hardware).\n\nI suppose the excerpt relevant to my point above would have been:\n\n\u003e Of course, unsafe functions and traits are free to declare arbitrary other constraints that a program must maintain to avoid Undefined Behavior.\n\nAs the behavior is defined by the exception handler, as you pointed out.\n\n(marking as resolved)",
+      "parentUuid": "750ffe8c_222d872a",
+      "range": {
+        "startLine": 240,
+        "startChar": 44,
+        "endLine": 240,
+        "endChar": 45
+      },
+      "revId": "79a0658bb7efd2b9ee81b6218432e20c260436fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91b76d4b_2ebe1976",
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "`drop` can\u0027t return an error. I put it in a separate method both so that the caller can check for and handle any errors, and so that we can be explicit about when exactly we are unmapping regions from the MMIO guard.",
       "parentUuid": "91b76d4b_2ebe1976",
+      "range": {
+        "startLine": 258,
+        "startChar": 8,
+        "endLine": 258,
+        "endChar": 9
+      },
+      "revId": "79a0658bb7efd2b9ee81b6218432e20c260436fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1aaead80_d21c8eba",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-08T14:19:59Z",
+      "side": 1,
+      "message": "Makes sense",
+      "parentUuid": "0fbb2def_781cfac2",
       "range": {
         "startLine": 258,
         "startChar": 8,
