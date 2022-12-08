@@ -22,6 +22,30 @@
       },
       "revId": "d1819e45daae33f835acf6ba2caf6a2d168c43c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f07cade_f9c8a518",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-08T11:44:07Z",
+      "side": 1,
+      "message": "Done, though if that happens it indicates a programming error (that we made the `ArrayVec` too small), which shouldn\u0027t happen in production.",
+      "parentUuid": "dc8a779a_d7be7235",
+      "range": {
+        "startLine": 144,
+        "startChar": 4,
+        "endLine": 144,
+        "endChar": 5
+      },
+      "revId": "d1819e45daae33f835acf6ba2caf6a2d168c43c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
