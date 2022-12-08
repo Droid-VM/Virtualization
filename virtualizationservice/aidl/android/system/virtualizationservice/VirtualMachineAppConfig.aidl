@@ -56,18 +56,8 @@ parcelable VirtualMachineAppConfig {
     /** Detailed configuration for the VM, specifying how the payload will be run. */
     Payload payload;
 
-    enum DebugLevel {
-        /** Not debuggable at all */
-        NONE,
-        /**
-         * Fully debuggable. All logs are shown, kernel messages are shown, and adb shell is
-         * supported
-         */
-        FULL,
-    }
-
     /** Debug level of the VM */
-    DebugLevel debugLevel = DebugLevel.NONE;
+    boolean debuggable = false;
 
     /** Whether the VM should be a protected VM. */
     boolean protectedVm;

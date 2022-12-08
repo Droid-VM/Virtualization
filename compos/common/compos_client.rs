@@ -23,7 +23,7 @@ use crate::{
 };
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     IVirtualizationService::IVirtualizationService,
-    VirtualMachineAppConfig::{DebugLevel::DebugLevel, Payload::Payload, VirtualMachineAppConfig},
+    VirtualMachineAppConfig::{Payload::Payload, VirtualMachineAppConfig},
     VirtualMachineConfig::VirtualMachineConfig,
 };
 use anyhow::{bail, Context, Result};
@@ -97,18 +97,18 @@ impl ComposClient {
             };
         let config_path = get_vm_config_path(has_system_ext, parameters.prefer_staged);
 
-        let debug_level = if parameters.debug_mode { DebugLevel::FULL } else { DebugLevel::NONE };
+        let debuggable = parameters.debug_mode;
 
-        let (console_fd, log_fd) = if debug_level == DebugLevel::NONE {
-            (None, None)
-        } else {
+        let (console_fd, log_fd) = if debuggable {
             // Console output and the system log output from the VM are redirected to file.
             let console_fd = File::create(data_dir.join("vm_console.log"))
                 .context("Failed to create console log file")?;
             let log_fd = File::create(data_dir.join("vm.log"))
                 .context("Failed to create system log file")?;
-            info!("Running in debug level {:?}", debug_level);
+            info!("Running in debuggable mode");
             (Some(console_fd), Some(log_fd))
+        } else {
+            (None, None)
         };
 
         let config = VirtualMachineConfig::AppConfig(VirtualMachineAppConfig {
@@ -118,7 +118,7 @@ impl ComposClient {
             instanceImage: Some(instance_fd),
             encryptedStorageImage: None,
             payload: Payload::ConfigPath(config_path),
-            debugLevel: debug_level,
+            debuggable: debuggable,
             extraIdsigs: extra_idsigs,
             protectedVm: protected_vm,
             memoryMib: parameters.memory_mib.unwrap_or(0), // 0 means use the default
@@ -133,7 +133,7 @@ impl ComposClient {
         instance.start()?;
 
         let ready = instance.wait_until_ready(TIMEOUTS.vm_max_time_to_ready);
-        if ready == Err(VmWaitError::Finished) && debug_level != DebugLevel::NONE {
+        if ready == Err(VmWaitError::Finished) && debuggable {
             // The payload has (unexpectedly) finished, but the VM is still running. Give it
             // some time to shutdown to maximize our chances of getting useful logs.
             if let Some(death_reason) =

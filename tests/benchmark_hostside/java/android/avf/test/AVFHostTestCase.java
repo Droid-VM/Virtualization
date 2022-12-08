@@ -245,7 +245,7 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
         final int vm_mem_mb = getFreeMemoryInfoMb(android) * 80 / 100;
         ITestDevice microdroidDevice =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
-                        .debugLevel("full")
+                        .debuggable(true)
                         .memoryMib(vm_mem_mb)
                         .numCpus(NUM_VCPUS)
                         .build(device);
