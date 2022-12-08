@@ -49,6 +49,8 @@ pub enum RebootReason {
     /// Failed to verify the payload.
     #[allow(dead_code)]
     PayloadVerificationError,
+    /// DICE layering process failed.
+    SecretDerivationError,
 }
 
 main!(start);
