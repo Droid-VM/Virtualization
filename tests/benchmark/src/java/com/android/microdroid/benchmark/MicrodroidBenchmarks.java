@@ -16,9 +16,6 @@
 
 package com.android.microdroid.benchmark;
 
-import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_FULL;
-import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_NONE;
-
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -92,7 +89,7 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         VirtualMachineConfig normalConfig =
                 newVmConfigBuilder()
                         .setPayloadBinaryPath("MicrodroidIdleNativeLib.so")
-                        .setDebugLevel(DEBUG_LEVEL_NONE)
+                        .setDebuggable(false)
                         .setMemoryMib(mem)
                         .build();
 
@@ -152,7 +149,7 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
             VirtualMachineConfig normalConfig =
                     newVmConfigBuilder()
                             .setPayloadBinaryPath("MicrodroidIdleNativeLib.so")
-                            .setDebugLevel(DEBUG_LEVEL_FULL)
+                            .setDebuggable(true)
                             .setMemoryMib(256)
                             .build();
             forceCreateNewVirtualMachine("test_vm_boot_time", normalConfig);
@@ -201,7 +198,7 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         VirtualMachineConfig config =
                 newVmConfigBuilder()
                         .setPayloadConfigPath("assets/vm_config_io.json")
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebuggable(true)
                         .build();
         List<Double> transferRates = new ArrayList<>(IO_TEST_TRIAL_COUNT);
 
@@ -228,7 +225,7 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         VirtualMachineConfig config =
                 newVmConfigBuilder()
                         .setPayloadConfigPath("assets/vm_config_io.json")
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebuggable(true)
                         .build();
         List<Double> readRates = new ArrayList<>(IO_TEST_TRIAL_COUNT);
 
@@ -338,7 +335,7 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         VirtualMachineConfig config =
                 newVmConfigBuilder()
                         .setPayloadConfigPath("assets/vm_config_io.json")
-                        .setDebugLevel(DEBUG_LEVEL_NONE)
+                        .setDebuggable(false)
                         .setMemoryMib(256)
                         .build();
         VirtualMachine vm = forceCreateNewVirtualMachine(vmName, config);
@@ -410,7 +407,7 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         VirtualMachineConfig config =
                 newVmConfigBuilder()
                         .setPayloadConfigPath("assets/vm_config_io.json")
-                        .setDebugLevel(DEBUG_LEVEL_NONE)
+                        .setDebuggable(false)
                         .setMemoryMib(256)
                         .build();
         VirtualMachine vm = forceCreateNewVirtualMachine(vmName, config);

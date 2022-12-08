@@ -20,7 +20,6 @@ mod run;
 
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     IVirtualizationService::IVirtualizationService, PartitionType::PartitionType,
-    VirtualMachineAppConfig::DebugLevel::DebugLevel,
 };
 use anyhow::{Context, Error};
 use binder::ProcessState;
@@ -85,9 +84,9 @@ enum Opt {
         #[clap(long)]
         ramdump: Option<PathBuf>,
 
-        /// Debug level of the VM. Supported values: "none" (default), and "full".
-        #[clap(long, default_value = "none", value_parser = parse_debug_level)]
-        debug: DebugLevel,
+        /// Debug level of the VM.
+        #[clap(short, long, default_value = "false")]
+        debug: bool,
 
         /// Run VM in protected mode.
         #[clap(short, long)]
@@ -148,9 +147,9 @@ enum Opt {
         #[clap(long)]
         ramdump: Option<PathBuf>,
 
-        /// Debug level of the VM. Supported values: "none" (default), and "full".
-        #[clap(long, default_value = "full", value_parser = parse_debug_level)]
-        debug: DebugLevel,
+        /// Debug level of the VM.
+        #[clap(short, long, default_value = "true")]
+        debug: bool,
 
         /// Run VM in protected mode.
         #[clap(short, long)]
@@ -228,14 +227,6 @@ enum Opt {
         /// Path to idsig of the APK
         path: PathBuf,
     },
-}
-
-fn parse_debug_level(s: &str) -> Result<DebugLevel, String> {
-    match s {
-        "none" => Ok(DebugLevel::NONE),
-        "full" => Ok(DebugLevel::FULL),
-        _ => Err(format!("Invalid debug level {}", s)),
-    }
 }
 
 fn parse_partition_type(s: &str) -> Result<PartitionType, String> {
