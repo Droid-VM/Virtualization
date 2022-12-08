@@ -17,11 +17,10 @@
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     DiskImage::DiskImage,
     Partition::Partition,
-    VirtualMachineAppConfig::DebugLevel::DebugLevel,
     VirtualMachineAppConfig::{Payload::Payload, VirtualMachineAppConfig},
     VirtualMachineRawConfig::VirtualMachineRawConfig,
 };
-use anyhow::{anyhow, bail, Context, Result};
+use anyhow::{bail, Context, Result};
 use binder::{wait_for_interface, ParcelFileDescriptor};
 use log::{info, warn};
 use microdroid_metadata::{ApexPayload, ApkPayload, Metadata, PayloadConfig, PayloadMetadata};
@@ -274,7 +273,7 @@ fn make_payload_disk(
 
     // collect APEXes from config
     let mut apex_infos =
-        collect_apex_infos(&apex_list, &vm_payload_config.apexes, app_config.debugLevel);
+        collect_apex_infos(&apex_list, &vm_payload_config.apexes, app_config.debuggable);
 
     // Pass sorted list of apexes. Sorting key shouldn't use `path` because it will change after
     // reboot with prefer_staged. `last_update_seconds` is added to distinguish "samegrade"
@@ -379,10 +378,10 @@ fn find_apex_names_in_classpath(classpath_vars: &str) -> Result<HashSet<String>>
 fn collect_apex_infos<'a>(
     apex_list: &'a ApexInfoList,
     apex_configs: &[ApexConfig],
-    debug_level: DebugLevel,
+    debuggable: bool,
 ) -> Vec<&'a ApexInfo> {
     let mut additional_apexes: Vec<&str> = MICRODROID_REQUIRED_APEXES.to_vec();
-    if debug_level != DebugLevel::NONE {
+    if debuggable {
         additional_apexes.extend(MICRODROID_REQUIRED_APEXES_DEBUG.to_vec());
     }
 
@@ -403,10 +402,9 @@ pub fn add_microdroid_system_images(
     storage_image: Option<File>,
     vm_config: &mut VirtualMachineRawConfig,
 ) -> Result<()> {
-    let debug_suffix = match config.debugLevel {
-        DebugLevel::NONE => "normal",
-        DebugLevel::FULL => "full_debuggable",
-        _ => return Err(anyhow!("unsupported debug level: {:?}", config.debugLevel)),
+    let debug_suffix = match config.debuggable {
+        false => "normal",
+        true => "debuggable",
     };
     let initrd = format!("/apex/com.android.virt/etc/microdroid_initrd_{}.img", debug_suffix);
     vm_config.initrd = Some(open_parcel_file(Path::new(&initrd), false)?);
@@ -581,7 +579,7 @@ export OTHER /foo/bar:/baz:/apex/second.valid.apex/:gibberish:"#;
             ApexConfig { name: "{CLASSPATH}".to_string() },
         ];
         assert_eq!(
-            collect_apex_infos(&apex_info_list, &apex_configs, DebugLevel::FULL),
+            collect_apex_infos(&apex_info_list, &apex_configs, true),
             vec![
                 // Pass active/required APEXes
                 &apex_info_list.list[0],
