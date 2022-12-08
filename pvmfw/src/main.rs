@@ -21,6 +21,7 @@
 
 mod avb;
 mod config;
+mod dice;
 mod entry;
 mod exceptions;
 mod fdt;
@@ -35,14 +36,18 @@ mod smccc;
 
 use crate::{
     avb::PUBLIC_KEY, // Keep the public key here otherwise the signing script will be broken.
+    dice::derive_next_bcc,
     entry::RebootReason,
+    helpers::SIZE_4KB,
     memory::MemoryTracker,
     pci::{find_virtio_devices, map_mmio},
 };
-use dice::bcc;
+use ::dice::bcc;
 use fdtpci::{PciError, PciInfo};
 use libfdt::Fdt;
 use log::{debug, error, info, trace};
+
+const NEXT_BCC_SIZE: usize = SIZE_4KB;
 
 fn main(
     fdt: &Fdt,
@@ -70,6 +75,18 @@ fn main(
     // called once.
     let mut pci_root = unsafe { pci_info.make_pci_root() };
     find_virtio_devices(&mut pci_root).map_err(handle_pci_error)?;
+
+    let mut scratch_bcc = [0; NEXT_BCC_SIZE];
+    let next_bcc = &mut scratch_bcc; // TODO(b/256827715): Pass result BCC to next stage.
+    let debug_mode = false; // TODO(b/256148034): Derive the DICE mode from the received initrd.
+    let next_bcc_size =
+        derive_next_bcc(bcc, next_bcc, signed_kernel, ramdisk, debug_mode, PUBLIC_KEY).map_err(
+            |e| {
+                error!("Failed to derive next-stage DICE secrets: {e:?}");
+                RebootReason::SecretDerivationError
+            },
+        )?;
+    trace!("Next BCC: {:x?}", bcc::Handover::new(&next_bcc[..next_bcc_size]));
 
     info!("Starting payload...");
     Ok(())
