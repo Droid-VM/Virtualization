@@ -33,6 +33,19 @@ pub unsafe fn init() {
     HEAP_ALLOCATOR.lock().init(HEAP.as_mut_ptr() as usize, HEAP.len());
 }
 
+/// Allocate an unitialized slice of heap that is never deallocated.
+///
+/// # Safety
+///
+/// This function is unsafe as it leaks memory; even if the returned reference is dropped, the
+/// memory is never reclaimed by the allocator.
+pub unsafe fn alloc_leaked_slice(size: usize, align: usize) -> Option<*mut u8> {
+    let size = NonZeroUsize::new(size)?;
+    let layout = Layout::from_size_align(size.get(), align).ok()?;
+    let ptr = HEAP_ALLOCATOR.alloc(layout);
+    NonNull::new(ptr).map(|p| p.as_ptr())
+}
+
 #[no_mangle]
 unsafe extern "C" fn malloc(size: usize) -> *mut c_void {
     malloc_(size).map_or(ptr::null_mut(), |p| p.cast::<c_void>().as_ptr())
