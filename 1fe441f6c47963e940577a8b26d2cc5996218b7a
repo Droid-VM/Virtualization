@@ -405,6 +405,24 @@
       "parentUuid": "a5c14f1e_a7cda576",
       "revId": "1fe441f6c47963e940577a8b26d2cc5996218b7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0dfacc6_308d56fd",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-12-08T10:30:24Z",
+      "side": 1,
+      "message": "That\u0027s my expectation too. Just having a test calling `changeDebugLevel(DEBUG_LEVEL_FULL, DEBUG_LEVEL_NONE)` would be enough to validate that and would give us full coverage of debug level changes since now we only have 2! Feel free to do in a follow up if you prefer.",
+      "parentUuid": "88934b24_6ddf367a",
+      "revId": "1fe441f6c47963e940577a8b26d2cc5996218b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
