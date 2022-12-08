@@ -19,6 +19,8 @@
 #![feature(default_alloc_error_handler)]
 #![feature(ptr_const_cast)] // Stabilized in 1.65.0
 
+extern crate alloc;
+
 mod avb;
 mod config;
 mod dice;
@@ -34,10 +36,14 @@ mod mmu;
 mod pci;
 mod smccc;
 
+use alloc::boxed::Box;
+
 use crate::{
     avb::PUBLIC_KEY, // Keep the public key here otherwise the signing script will be broken.
     dice::derive_next_bcc,
     entry::RebootReason,
+    fdt::add_dice_node,
+    helpers::flush,
     helpers::SIZE_4KB,
     memory::MemoryTracker,
     pci::{find_virtio_devices, map_mmio},
@@ -50,7 +56,7 @@ use log::{debug, error, info, trace};
 const NEXT_BCC_SIZE: usize = SIZE_4KB;
 
 fn main(
-    fdt: &Fdt,
+    fdt: &mut Fdt,
     signed_kernel: &[u8],
     ramdisk: Option<&[u8]>,
     bcc: &bcc::Handover,
@@ -76,8 +82,6 @@ fn main(
     let mut pci_root = unsafe { pci_info.make_pci_root() };
     find_virtio_devices(&mut pci_root).map_err(handle_pci_error)?;
 
-    let mut scratch_bcc = [0; NEXT_BCC_SIZE];
-    let next_bcc = &mut scratch_bcc; // TODO(b/256827715): Pass result BCC to next stage.
     let debug_mode = false; // TODO(b/256148034): Derive the DICE mode from the received initrd.
     const HASH_SIZE: usize = 64;
     let mut hashes = [0; HASH_SIZE * 2]; // TODO(b/256148034): Extract AvbHashDescriptor digests.
@@ -95,12 +99,25 @@ fn main(
     } else {
         &hashes[..HASH_SIZE]
     };
+    let next_bcc = heap::aligned_boxed_slice(NEXT_BCC_SIZE, SIZE_4KB).ok_or_else(|| {
+        error!("Failed to allocate the next-stage BCC");
+        RebootReason::InternalError
+    })?;
+    // By leaking the slice, its content will be left behind for the next stage.
+    let next_bcc = Box::leak(next_bcc);
     let next_bcc_size =
         derive_next_bcc(bcc, next_bcc, code_hash, debug_mode, PUBLIC_KEY).map_err(|e| {
             error!("Failed to derive next-stage DICE secrets: {e:?}");
             RebootReason::SecretDerivationError
         })?;
     trace!("Next BCC: {:x?}", bcc::Handover::new(&next_bcc[..next_bcc_size]));
+
+    flush(next_bcc);
+
+    add_dice_node(fdt, next_bcc.as_ptr() as usize, NEXT_BCC_SIZE).map_err(|e| {
+        error!("Failed to add DICE node to device tree: {e}");
+        RebootReason::InternalError
+    })?;
 
     info!("Starting payload...");
     Ok(())
