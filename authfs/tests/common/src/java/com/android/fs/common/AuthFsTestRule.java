@@ -129,7 +129,7 @@ public class AuthFsTestRule extends TestLogData {
                 MicrodroidBuilder.fromFile(
                                 findTestFile(sTestInfo.getBuildInfo(), TEST_APK_NAME),
                                 VM_CONFIG_PATH_IN_APK)
-                        .debugLevel("full")
+                        .debuggable(true)
                         .protectedVm(protectedVm)
                         .build(getDevice());
 

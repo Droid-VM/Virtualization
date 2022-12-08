@@ -21,7 +21,6 @@ import static android.os.ParcelFileDescriptor.MODE_READ_ONLY;
 
 import static java.util.Objects.requireNonNull;
 
-import android.annotation.IntDef;
 import android.annotation.IntRange;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
@@ -42,8 +41,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /**
@@ -61,39 +58,15 @@ public final class VirtualMachineConfig {
     private static final String KEY_APKPATH = "apkPath";
     private static final String KEY_PAYLOADCONFIGPATH = "payloadConfigPath";
     private static final String KEY_PAYLOADBINARYPATH = "payloadBinaryPath";
-    private static final String KEY_DEBUGLEVEL = "debugLevel";
+    private static final String KEY_DEBUGGABLE = "debuggable";
     private static final String KEY_PROTECTED_VM = "protectedVm";
     private static final String KEY_MEMORY_MIB = "memoryMib";
     private static final String KEY_NUM_CPUS = "numCpus";
 
-    /** @hide */
-    @Retention(RetentionPolicy.SOURCE)
-    @IntDef(prefix = "DEBUG_LEVEL_", value = {
-            DEBUG_LEVEL_NONE,
-            DEBUG_LEVEL_FULL
-    })
-    public @interface DebugLevel {}
-
-    /**
-     * Not debuggable at all. No log is exported from the VM. Debugger can't be attached to the app
-     * process running in the VM. This is the default level.
-     *
-     * @hide
-     */
-    @SystemApi public static final int DEBUG_LEVEL_NONE = 0;
-
-    /**
-     * Fully debuggable. All logs (both logcat and kernel message) are exported. All processes
-     * running in the VM can be attached to the debugger. Rooting is possible.
-     *
-     * @hide
-     */
-    @SystemApi public static final int DEBUG_LEVEL_FULL = 1;
-
     /** Absolute path to the APK file containing the VM payload. */
     @NonNull private final String mApkPath;
 
-    @DebugLevel private final int mDebugLevel;
+    private final boolean mDebuggable;
 
     /**
      * Whether to run the VM in protected mode, so the host can't access its memory.
@@ -115,16 +88,14 @@ public final class VirtualMachineConfig {
      */
     @Nullable private final String mPayloadConfigPath;
 
-    /**
-     * Path within the APK to the payload binary file that will be executed within the VM.
-     */
+    /** Path within the APK to the payload binary file that will be executed within the VM. */
     @Nullable private final String mPayloadBinaryPath;
 
     private VirtualMachineConfig(
             @NonNull String apkPath,
             @Nullable String payloadConfigPath,
             @Nullable String payloadBinaryPath,
-            @DebugLevel int debugLevel,
+            boolean debuggable,
             boolean protectedVm,
             int memoryMib,
             int numCpus) {
@@ -141,10 +112,6 @@ public final class VirtualMachineConfig {
         if (numCpus < 1 || numCpus > availableCpus) {
             throw new IllegalArgumentException("Number of vCPUs (" + numCpus + ") is out of "
                     + "range [1, " + availableCpus + "]");
-        }
-
-        if (debugLevel != DEBUG_LEVEL_NONE && debugLevel != DEBUG_LEVEL_FULL) {
-            throw new IllegalArgumentException("Invalid debugLevel: " + debugLevel);
         }
 
         if (payloadBinaryPath == null) {
@@ -171,7 +138,7 @@ public final class VirtualMachineConfig {
         mApkPath = apkPath;
         mPayloadConfigPath = payloadConfigPath;
         mPayloadBinaryPath = payloadBinaryPath;
-        mDebugLevel = debugLevel;
+        mDebuggable = debuggable;
         mProtectedVm = protectedVm;
         mMemoryMib = memoryMib;
         mNumCpus = numCpus;
@@ -219,16 +186,19 @@ public final class VirtualMachineConfig {
                 throw new VirtualMachineException("No payloadBinaryPath");
             }
         }
-        @DebugLevel int debugLevel = b.getInt(KEY_DEBUGLEVEL);
-        if (debugLevel != DEBUG_LEVEL_NONE && debugLevel != DEBUG_LEVEL_FULL) {
-            throw new VirtualMachineException("Invalid debugLevel: " + debugLevel);
-        }
+        boolean debuggable = b.getBoolean(KEY_DEBUGGABLE);
         boolean protectedVm = b.getBoolean(KEY_PROTECTED_VM);
         int memoryMib = b.getInt(KEY_MEMORY_MIB);
         int numCpus = b.getInt(KEY_NUM_CPUS);
 
-        return new VirtualMachineConfig(apkPath, payloadConfigPath, payloadBinaryPath, debugLevel,
-                protectedVm, memoryMib, numCpus);
+        return new VirtualMachineConfig(
+                apkPath,
+                payloadConfigPath,
+                payloadBinaryPath,
+                debuggable,
+                protectedVm,
+                memoryMib,
+                numCpus);
     }
 
     /** Persists this config to a file. */
@@ -247,7 +217,7 @@ public final class VirtualMachineConfig {
         b.putString(KEY_APKPATH, mApkPath);
         b.putString(KEY_PAYLOADCONFIGPATH, mPayloadConfigPath);
         b.putString(KEY_PAYLOADBINARYPATH, mPayloadBinaryPath);
-        b.putInt(KEY_DEBUGLEVEL, mDebugLevel);
+        b.putBoolean(KEY_DEBUGGABLE, mDebuggable);
         b.putBoolean(KEY_PROTECTED_VM, mProtectedVm);
         b.putInt(KEY_NUM_CPUS, mNumCpus);
         if (mMemoryMib > 0) {
@@ -299,9 +269,8 @@ public final class VirtualMachineConfig {
      */
     @SystemApi
     @NonNull
-    @DebugLevel
-    public int getDebugLevel() {
-        return mDebugLevel;
+    public boolean isDebuggable() {
+        return mDebuggable;
     }
 
     /**
@@ -346,7 +315,7 @@ public final class VirtualMachineConfig {
      */
     @SystemApi
     public boolean isCompatibleWith(@NonNull VirtualMachineConfig other) {
-        return this.mDebugLevel == other.mDebugLevel
+        return this.mDebuggable == other.mDebuggable
                 && this.mProtectedVm == other.mProtectedVm
                 && Objects.equals(this.mPayloadConfigPath, other.mPayloadConfigPath)
                 && Objects.equals(this.mPayloadBinaryPath, other.mPayloadBinaryPath)
@@ -372,14 +341,7 @@ public final class VirtualMachineConfig {
             vsConfig.payload =
                     VirtualMachineAppConfig.Payload.configPath(mPayloadConfigPath);
         }
-        switch (mDebugLevel) {
-            case DEBUG_LEVEL_FULL:
-                vsConfig.debugLevel = VirtualMachineAppConfig.DebugLevel.FULL;
-                break;
-            default:
-                vsConfig.debugLevel = VirtualMachineAppConfig.DebugLevel.NONE;
-                break;
-        }
+        vsConfig.debuggable = mDebuggable;
         vsConfig.protectedVm = mProtectedVm;
         vsConfig.memoryMib = mMemoryMib;
         vsConfig.numCpus = mNumCpus;
@@ -400,7 +362,7 @@ public final class VirtualMachineConfig {
         @Nullable private String mApkPath;
         @Nullable private String mPayloadConfigPath;
         @Nullable private String mPayloadBinaryPath;
-        @DebugLevel private int mDebugLevel;
+        private boolean mDebuggable;
         private boolean mProtectedVm;
         private boolean mProtectedVmSet;
         private int mMemoryMib;
@@ -414,7 +376,7 @@ public final class VirtualMachineConfig {
         @SystemApi
         public Builder(@NonNull Context context) {
             mContext = requireNonNull(context, "context must not be null");
-            mDebugLevel = DEBUG_LEVEL_NONE;
+            mDebuggable = false;
             mNumCpus = 1;
         }
 
@@ -433,8 +395,13 @@ public final class VirtualMachineConfig {
             }
 
             return new VirtualMachineConfig(
-                    apkPath, mPayloadConfigPath, mPayloadBinaryPath, mDebugLevel, mProtectedVm,
-                    mMemoryMib, mNumCpus);
+                    apkPath,
+                    mPayloadConfigPath,
+                    mPayloadBinaryPath,
+                    mDebuggable,
+                    mProtectedVm,
+                    mMemoryMib,
+                    mNumCpus);
         }
 
         /**
@@ -479,14 +446,14 @@ public final class VirtualMachineConfig {
         }
 
         /**
-         * Sets the debug level. Defaults to {@link #DEBUG_LEVEL_NONE}.
+         * Sets the debug level. Defaults as false.
          *
          * @hide
          */
         @SystemApi
         @NonNull
-        public Builder setDebugLevel(@DebugLevel int debugLevel) {
-            mDebugLevel = debugLevel;
+        public Builder setDebuggable(boolean debuggable) {
+            mDebuggable = debuggable;
             return this;
         }
 
