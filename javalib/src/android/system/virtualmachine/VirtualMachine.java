@@ -363,6 +363,15 @@ public class VirtualMachine implements AutoCloseable {
                 throw new VirtualMachineException("failed to create instance image", e);
             }
             vm.importInstanceFrom(vmDescriptor.getInstanceImgFd());
+
+            if (vmDescriptor.getEncryptedStoreFd() != null) {
+                try {
+                    vm.mEncryptedStoreFilePath.createNewFile();
+                } catch (IOException e) {
+                    throw new VirtualMachineException(
+                            "failed to create encrypted storage image", e);
+                }
+            }
             return vm;
         } catch (VirtualMachineException | RuntimeException e) {
             // If anything goes wrong, delete any files created so far and the VM's directory
@@ -1044,7 +1053,10 @@ public class VirtualMachine implements AutoCloseable {
             try {
                 return new VirtualMachineDescriptor(
                         ParcelFileDescriptor.open(mConfigFilePath, MODE_READ_ONLY),
-                        ParcelFileDescriptor.open(mInstanceFilePath, MODE_READ_ONLY));
+                        ParcelFileDescriptor.open(mInstanceFilePath, MODE_READ_ONLY),
+                        mEncryptedStoreFilePath != null
+                                ? ParcelFileDescriptor.open(mEncryptedStoreFilePath, MODE_READ_ONLY)
+                                : null);
             } catch (IOException e) {
                 throw new VirtualMachineException(e);
             }
