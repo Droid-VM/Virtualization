@@ -22,6 +22,30 @@
       },
       "revId": "d1819e45daae33f835acf6ba2caf6a2d168c43c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54d9ae28_b31bb632",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-08T14:05:55Z",
+      "side": 0,
+      "message": "Yes, it\u0027s needed to use it in the `pci` module, weirdly, because otherwise it complains about a non-public type in a public interface.",
+      "parentUuid": "9cb76d83_af6a9e00",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 10
+      },
+      "revId": "d1819e45daae33f835acf6ba2caf6a2d168c43c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
