@@ -709,6 +709,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "106043cd_2974c8fa",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-09T14:24:52Z",
+      "side": 1,
+      "message": "\u003e (We\u0027ve hit some bugs in tests which arose out of integer overflow)\nMmm, we should check for that.\n\n2^64 bytes is definitely big enough.",
+      "parentUuid": "3112dbb9_bb271492",
+      "range": {
+        "startLine": 469,
+        "startChar": 46,
+        "endLine": 469,
+        "endChar": 77
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6bb182e_6dc926a5",
