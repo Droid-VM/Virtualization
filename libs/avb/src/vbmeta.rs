@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! A library to verify and parse VBMeta images.
+//! A module to verify and parse VBMeta images without std.
 
-mod descriptor;
-
+use alloc::boxed::Box;
+use alloc::string::String;
 use avb_bindgen::{
     avb_footer_validate_and_byteswap, avb_vbmeta_image_header_to_host_byte_order,
     avb_vbmeta_image_verify, AvbAlgorithmType_AVB_ALGORITHM_TYPE_NONE, AvbFooter,
@@ -26,52 +26,69 @@ use avb_bindgen::{
     AvbVBMetaVerifyResult_AVB_VBMETA_VERIFY_RESULT_SIGNATURE_MISMATCH,
     AvbVBMetaVerifyResult_AVB_VBMETA_VERIFY_RESULT_UNSUPPORTED_VERSION,
 };
-use std::fs::File;
-use std::io::{self, Read, Seek, SeekFrom};
-use std::mem::{size_of, MaybeUninit};
-use std::os::raw::c_uint;
-use std::path::Path;
-use std::ptr::null_mut;
-use std::slice;
-use thiserror::Error;
+use core::ffi::c_uint;
+use core::fmt;
+use core::mem::{size_of, MaybeUninit};
+use core::option::Option;
+use core::ptr::null_mut;
+use core::result::Result;
+use core::slice;
+
+#[cfg(feature = "std")]
+use std::{
+    fs::File,
+    io::{self, Read, Seek, SeekFrom},
+    path::Path,
+};
 
 pub use crate::descriptor::{Descriptor, Descriptors};
 
 /// Errors from parsing a VBMeta image.
-#[derive(Debug, Error)]
+#[derive(Debug)]
 pub enum VbMetaImageParseError {
-    /// There was an IO error.
-    #[error("IO error")]
-    Io(#[from] io::Error),
-    /// The image footer was invalid.
-    #[error("Invalid footer")]
-    InvalidFooter,
-    /// The image header was invalid.
-    #[error("Invalid header")]
-    InvalidHeader,
-    /// The image version is not supported.
-    #[error("Unsupported version")]
-    UnsupportedVersion,
     /// There was an invalid descriptor in the image.
-    #[error("Invalid descriptor ")]
     InvalidDescriptor,
 }
 
+impl fmt::Display for VbMetaImageParseError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::InvalidDescriptor => write!(f, "Invalid descriptor"),
+        }
+    }
+}
+
 /// Errors from verifying a VBMeta image.
-#[derive(Debug, Error)]
+#[derive(Debug)]
 pub enum VbMetaImageVerificationError {
-    /// There was an error parsing the VBMeta image.
-    #[error("Cannot parse VBMeta image")]
-    ParseError(#[from] VbMetaImageParseError),
+    /// There was an Io error parsing the VBMeta image.
+    Io(String),
+    /// The image header was invalid.
+    InvalidHeader,
+    /// The image footer was invalid.
+    InvalidFooter,
+    /// The image version is not supported.
+    UnsupportedVersion,
     /// The VBMeta image hash did not validate.
-    #[error("Hash mismatch")]
     HashMismatch,
     /// The VBMeta image signature did not validate.
-    #[error("Signature mismatch")]
     SignatureMismatch,
     /// An unexpected libavb error code was returned.
-    #[error("Unknown libavb error: {0}")]
     UnknownLibavbError(c_uint),
+}
+
+impl fmt::Display for VbMetaImageVerificationError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::Io(e) => write!(f, "Cannot parse VBMeta image: {:?}", e),
+            Self::InvalidHeader => write!(f, "Invalid header"),
+            Self::InvalidFooter => write!(f, "Invalid footer"),
+            Self::UnsupportedVersion => write!(f, "Unsupported version"),
+            Self::HashMismatch => write!(f, "Hash mismatch"),
+            Self::SignatureMismatch => write!(f, "Signature mismatch"),
+            Self::UnknownLibavbError(e) => write!(f, "Unknown libavb error: {e}"),
+        }
+    }
 }
 
 /// A VBMeta Image.
@@ -82,34 +99,52 @@ pub struct VbMetaImage {
 
 impl VbMetaImage {
     /// Load and verify a VBMeta image from the given path.
+    #[cfg(feature = "std")]
     pub fn verify_path<P: AsRef<Path>>(path: P) -> Result<Self, VbMetaImageVerificationError> {
-        let file = File::open(path).map_err(VbMetaImageParseError::Io)?;
-        let size = file.metadata().map_err(VbMetaImageParseError::Io)?.len();
+        let file =
+            File::open(path).map_err(|e| VbMetaImageVerificationError::Io(format!("{:?}", e)))?;
+        let size = file
+            .metadata()
+            .map_err(|e| VbMetaImageVerificationError::Io(format!("{:?}", e)))?
+            .len();
         Self::verify_reader_region(file, 0, size)
     }
 
     /// Load and verify a VBMeta image from a region within a reader.
+    #[cfg(feature = "std")]
     pub fn verify_reader_region<R: Read + Seek>(
         mut image: R,
         offset: u64,
         size: u64,
     ) -> Result<Self, VbMetaImageVerificationError> {
         // Check for a footer in the image or assume it's an entire VBMeta image.
-        image.seek(SeekFrom::Start(offset + size)).map_err(VbMetaImageParseError::Io)?;
-        let footer = read_avb_footer(&mut image).map_err(VbMetaImageParseError::Io)?;
+        image
+            .seek(SeekFrom::Start(offset + size))
+            .map_err(|e| VbMetaImageVerificationError::Io(format!("{:?}", e)))?;
+        let footer = read_avb_footer_from_image(&mut image)
+            .map_err(|e| VbMetaImageVerificationError::Io(format!("{:?}", e)))?;
         let (vbmeta_offset, vbmeta_size) = if let Some(footer) = footer {
             if footer.vbmeta_offset > size || footer.vbmeta_size > size - footer.vbmeta_offset {
-                return Err(VbMetaImageParseError::InvalidFooter.into());
+                return Err(VbMetaImageVerificationError::InvalidFooter);
             }
             (footer.vbmeta_offset, footer.vbmeta_size)
         } else {
             (0, size)
         };
-        image.seek(SeekFrom::Start(offset + vbmeta_offset)).map_err(VbMetaImageParseError::Io)?;
+        image
+            .seek(SeekFrom::Start(offset + vbmeta_offset))
+            .map_err(|e| VbMetaImageVerificationError::Io(format!("{:?}", e)))?;
         // Verify the image before examining it to check the size.
         let mut data = vec![0u8; vbmeta_size as usize];
-        image.read_exact(&mut data).map_err(VbMetaImageParseError::Io)?;
-        verify_vbmeta_image(&data)?;
+        image
+            .read_exact(&mut data)
+            .map_err(|e| VbMetaImageVerificationError::Io(format!("{:?}", e)))?;
+        Self::verify_vbmeta(&data)
+    }
+
+    /// Verifies the given vbmeta data.
+    fn verify_vbmeta(data: &[u8]) -> Result<Self, VbMetaImageVerificationError> {
+        verify_vbmeta_image(data)?;
         // SAFETY: the image has been verified so we know there is a valid header at the start.
         let header = unsafe {
             let mut header = MaybeUninit::uninit();
@@ -121,8 +156,8 @@ impl VbMetaImage {
         let vbmeta_size = (size_of::<AvbVBMetaImageHeader>() as u64)
             + header.authentication_data_block_size
             + header.auxiliary_data_block_size;
-        data.truncate(vbmeta_size as usize);
-        Ok(Self { header, data: data.into_boxed_slice() })
+        let vbmeta = data[..(vbmeta_size as usize)].to_vec();
+        Ok(Self { header, data: vbmeta.into_boxed_slice() })
     }
 
     /// Get the public key that verified the VBMeta image. If the image was not signed, there
@@ -171,10 +206,10 @@ fn verify_vbmeta_image(data: &[u8]) -> Result<(), VbMetaImageVerificationError> 
         AvbVBMetaVerifyResult_AVB_VBMETA_VERIFY_RESULT_OK
         | AvbVBMetaVerifyResult_AVB_VBMETA_VERIFY_RESULT_OK_NOT_SIGNED => Ok(()),
         AvbVBMetaVerifyResult_AVB_VBMETA_VERIFY_RESULT_INVALID_VBMETA_HEADER => {
-            Err(VbMetaImageParseError::InvalidHeader.into())
+            Err(VbMetaImageVerificationError::InvalidHeader)
         }
         AvbVBMetaVerifyResult_AVB_VBMETA_VERIFY_RESULT_UNSUPPORTED_VERSION => {
-            Err(VbMetaImageParseError::UnsupportedVersion.into())
+            Err(VbMetaImageVerificationError::UnsupportedVersion)
         }
         AvbVBMetaVerifyResult_AVB_VBMETA_VERIFY_RESULT_HASH_MISMATCH => {
             Err(VbMetaImageVerificationError::HashMismatch)
@@ -186,34 +221,53 @@ fn verify_vbmeta_image(data: &[u8]) -> Result<(), VbMetaImageVerificationError> 
     }
 }
 
-/// Read the AVB footer, if present, given a reader that's positioned at the end of the image.
-fn read_avb_footer<R: Read + Seek>(image: &mut R) -> io::Result<Option<AvbFooter>> {
+/// Reads the AVB footer, if present, given a reader that's positioned at the end of the image.
+#[cfg(feature = "std")]
+fn read_avb_footer_from_image<R: Read + Seek>(image: &mut R) -> io::Result<Option<AvbFooter>> {
     image.seek(SeekFrom::Current(-(size_of::<AvbFooter>() as i64)))?;
     // SAFETY: the slice is the same size as the struct which only contains simple data types.
-    let mut footer = unsafe {
+    let footer = unsafe {
         let mut footer = MaybeUninit::<AvbFooter>::uninit();
         let footer_slice =
             slice::from_raw_parts_mut(&mut footer as *mut _ as *mut u8, size_of::<AvbFooter>());
         image.read_exact(footer_slice)?;
         footer.assume_init()
     };
-    // Check the magic matches "AVBf" to suppress misleading logs from libavb.
+    Ok(validate_avb_footer(footer))
+}
+
+/// Reads AVB footer from the raw image data.
+#[allow(dead_code)] // This method will be used for kernel image verification in pvmfw
+fn read_avb_footer_from_raw_data(image: &[u8]) -> Option<AvbFooter> {
+    // SAFETY: the slice is the same size as the struct which only contains simple data types.
+    let footer = unsafe {
+        let mut footer = MaybeUninit::<AvbFooter>::uninit();
+        let footer_slice =
+            slice::from_raw_parts_mut(&mut footer as *mut _ as *mut u8, size_of::<AvbFooter>());
+        footer_slice.copy_from_slice(&image[(image.len() - size_of::<AvbFooter>())..]);
+        footer.assume_init()
+    };
+    validate_avb_footer(footer)
+}
+
+fn validate_avb_footer(mut footer: AvbFooter) -> Option<AvbFooter> {
+    // Check the magic matches "AVB" to suppress misleading logs from libavb.
     const AVB_FOOTER_MAGIC: [u8; 4] = [0x41, 0x56, 0x42, 0x66];
     if footer.magic != AVB_FOOTER_MAGIC {
-        return Ok(None);
+        return None;
     }
     // SAFETY: the function updates the struct in-place.
     if unsafe { avb_footer_validate_and_byteswap(&footer, &mut footer) } {
-        Ok(Some(footer))
+        Some(footer)
     } else {
-        Ok(None)
+        None
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use anyhow::{Context, Result};
+    use anyhow::{anyhow, Context, Result};
     use std::fs::{self, OpenOptions};
     use std::os::unix::fs::FileExt;
     use std::process::Command;
@@ -233,7 +287,8 @@ mod tests {
         ]);
         let status = cmd.status().context("make_vbmeta_image")?;
         assert!(status.success());
-        let vbmeta = VbMetaImage::verify_path(test_file).context("verify_path")?;
+        let vbmeta = VbMetaImage::verify_path(test_file)
+            .map_err(|e| anyhow!("verify path failed: {}", e))?;
         assert!(vbmeta.public_key().is_none());
         Ok(())
     }
@@ -253,7 +308,8 @@ mod tests {
         ]);
         let status = cmd.status().context("make_vbmeta_image")?;
         assert!(status.success());
-        let vbmeta = VbMetaImage::verify_path(&test_file).context("verify_path")?;
+        let vbmeta = VbMetaImage::verify_path(&test_file)
+            .map_err(|e| anyhow!("verify path failed: {}", e))?;
 
         // The image should contain the public part of the key pair.
         let pubkey = vbmeta.public_key().unwrap();
