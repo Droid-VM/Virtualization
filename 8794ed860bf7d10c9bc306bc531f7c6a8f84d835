@@ -308,6 +308,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ce0ed6c8_c6671541",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-09T16:55:18Z",
+      "side": 1,
+      "message": "\u003e ... for types defined outside of the crate\n\nRight, `AvbFooter` comes from the bindgen, I had missed that ...\n\nBut what about implementing a `Footer` that `repr(transparent)` an `AvbFooter` so that we can add methods and `impl` traits for it, making a proper Rust struct?\n\nWe would then have the constructor `avb::Footer::from_image()` (`std`-only) that would\n```\nlet mut bytes \u003d [0; size_of::\u003cAvbFooter\u003e()];\nimage.read_exact(\u0026mut bytes).map_err(...)?;\nbytes.try_into()\n```\nand the `impl TryFrom\u003c...\u003e` wrapping `avb_footer_validate_and_byteswap`.",
+      "parentUuid": "4e5f2a21_94aeb6e3",
+      "range": {
+        "startLine": 239,
+        "startChar": 7,
+        "endLine": 239,
+        "endChar": 26
+      },
+      "revId": "8794ed860bf7d10c9bc306bc531f7c6a8f84d835",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d189e43d_bd4d89a3",
         "filename": "libs/avb/src/vbmeta.rs",
         "patchSetId": 3

@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3d929bd_6b4d4f1c",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-09T16:55:18Z",
+      "side": 1,
+      "message": "I might be wrong about this but can\u0027t you simply call\n```\nlet mut bytes \u003d [0; size_of::\u003cAvbFooter\u003e()];\nimage.read_exact(\u0026mut bytes).map_err(...)?;\nOk(read_avb_footer_from_bytes(\u0026bytes))\n```\n?",
+      "range": {
+        "startLine": 223,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 6
+      },
+      "revId": "79a3057432f5e3fd54dd539eadeae69cc95ca953",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09e64a75_32a5889e",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-09T16:55:18Z",
+      "side": 1,
+      "message": "My point was that, if we take `bytes` by value, we can transfer the responsibly of copying to the caller, making this (now) convoluted byte cloning unnecessary.\n\nFor example, `read_avb_footer_from_image` could hand over the bytes it owns\n```\nOk(read_avb_footer_from_bytes(bytes))\n```\nor clone them, if it wants to keep the original raw bytes (it doesn\u0027t)\n```\nOk(read_avb_footer_from_bytes(bytes.clone()))\n```",
+      "range": {
+        "startLine": 238,
+        "startChar": 4,
+        "endLine": 245,
+        "endChar": 6
+      },
+      "revId": "79a3057432f5e3fd54dd539eadeae69cc95ca953",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
