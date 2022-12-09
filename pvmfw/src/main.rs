@@ -19,7 +19,6 @@
 #![feature(default_alloc_error_handler)]
 #![feature(ptr_const_cast)] // Stabilized in 1.65.0
 
-mod avb;
 mod config;
 mod entry;
 mod exceptions;
@@ -33,11 +32,11 @@ mod pci;
 mod smccc;
 
 use crate::{entry::RebootReason, memory::MemoryTracker, pci::PciInfo};
-use avb::PUBLIC_KEY;
-use avb_nostd::verify_image;
+use avb::verify_image;
 use dice::bcc;
 use libfdt::Fdt;
 use log::{debug, error, info, trace};
+use pvmfw_embedded_key::PUBLIC_KEY;
 
 fn main(
     fdt: &Fdt,
