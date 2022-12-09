@@ -51,3 +51,50 @@ rust_library_rlib {
         "liblog_rust_nostd",
     ],
 }
+
+rust_defaults {
+    name: "libavb_rs.defaults",
+    crate_name: "avb",
+    host_supported: true,
+    srcs: ["src/lib.rs"],
+    features: ["std"],
+    prefer_rlib: true,
+    rustlibs: [
+        "libavb_bindgen",
+        "liblog_rust",
+    ],
+}
+
+rust_library {
+    name: "libavb_rs",
+    defaults: ["libavb_rs.defaults"],
+}
+
+rust_test_host {
+    name: "libavb_rs.test",
+    defaults: ["libavb_rs.defaults"],
+    rustlibs: [
+        "libanyhow",
+        "libtempfile",
+    ],
+    data: [
+        ":avb_testkey_rsa2048",
+        ":avb_testkey_rsa4096",
+        ":avb_testkey_rsa8192",
+    ],
+    required: ["avbtool"],
+    test_suites: ["general-tests"],
+    test_options: {
+        unit_test: false,
+    },
+    target: {
+        host: {
+            // TODO(b/204562227): remove once the build does this automatically
+            data: [":avbtool"],
+            data_libs: [
+                "libc++",
+                "libcrypto",
+            ],
+        },
+    },
+}
