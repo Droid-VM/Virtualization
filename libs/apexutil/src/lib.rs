@@ -14,10 +14,10 @@
 
 //! Routines for handling APEX payload
 
+use avb::{Descriptor, VbMetaImage, VbMetaImageParseError, VbMetaImageVerificationError};
 use std::fs::File;
 use std::io::{self, Read};
 use thiserror::Error;
-use vbmeta::VbMetaImage;
 use zip::result::ZipError;
 use zip::ZipArchive;
 
@@ -43,8 +43,8 @@ pub enum ApexParseError {
     #[error("Non-hashtree descriptor found in payload's VBMeta image")]
     DescriptorNotHashtree,
     /// There was an error parsing the APEX payload's VBMeta image.
-    #[error("Could not parse payload's VBMeta image")]
-    PayloadVbmetaError(#[from] vbmeta::VbMetaImageParseError),
+    #[error("Could not parse payload's VBMeta image: {0}")]
+    PayloadVbmetaError(VbMetaImageParseError),
 }
 
 /// Errors from verifying an APEX.
@@ -54,8 +54,8 @@ pub enum ApexVerificationError {
     #[error("Cannot parse APEX file")]
     ParseError(#[from] ApexParseError),
     /// There was an error validating the APEX payload's VBMeta image.
-    #[error("Could not parse payload's VBMeta image")]
-    PayloadVbmetaError(#[from] vbmeta::VbMetaImageVerificationError),
+    #[error("Could not parse payload's VBMeta image: {0}")]
+    PayloadVbmetaError(VbMetaImageVerificationError),
     /// The APEX payload was not verified with the apex_pubkey.
     #[error("APEX pubkey mismatch")]
     ApexPubkeyMistmatch,
@@ -73,7 +73,8 @@ pub struct ApexVerificationResult {
 pub fn verify(path: &str) -> Result<ApexVerificationResult, ApexVerificationError> {
     let apex_file = File::open(path).map_err(ApexParseError::Io)?;
     let (public_key, image_offset, image_size) = get_public_key_and_image_info(&apex_file)?;
-    let vbmeta = VbMetaImage::verify_reader_region(apex_file, image_offset, image_size)?;
+    let vbmeta = VbMetaImage::verify_reader_region(apex_file, image_offset, image_size)
+        .map_err(ApexVerificationError::PayloadVbmetaError)?;
     let root_digest = find_root_digest(&vbmeta)?;
     match vbmeta.public_key() {
         Some(payload_public_key) if public_key == payload_public_key => {
@@ -85,9 +86,13 @@ pub fn verify(path: &str) -> Result<ApexVerificationResult, ApexVerificationErro
 
 fn find_root_digest(vbmeta: &VbMetaImage) -> Result<Vec<u8>, ApexParseError> {
     // APEXs use the root digest from the first hashtree descriptor to describe the payload.
-    for descriptor in vbmeta.descriptors()?.iter() {
-        if let vbmeta::Descriptor::Hashtree(_) = descriptor {
-            return Ok(descriptor.to_hashtree()?.root_digest().to_vec());
+    for descriptor in vbmeta.descriptors().map_err(ApexParseError::PayloadVbmetaError)?.iter() {
+        if let Descriptor::Hashtree(_) = descriptor {
+            return Ok(descriptor
+                .to_hashtree()
+                .map_err(ApexParseError::PayloadVbmetaError)?
+                .root_digest()
+                .to_vec());
         }
     }
     Err(ApexParseError::DescriptorNotHashtree)
@@ -97,7 +102,8 @@ fn find_root_digest(vbmeta: &VbMetaImage) -> Result<Vec<u8>, ApexParseError> {
 pub fn get_payload_vbmeta_image_hash(path: &str) -> Result<Vec<u8>, ApexVerificationError> {
     let apex_file = File::open(path).map_err(ApexParseError::Io)?;
     let (_, offset, size) = get_public_key_and_image_info(&apex_file)?;
-    let vbmeta = VbMetaImage::verify_reader_region(apex_file, offset, size)?;
+    let vbmeta = VbMetaImage::verify_reader_region(apex_file, offset, size)
+        .map_err(ApexVerificationError::PayloadVbmetaError)?;
     Ok(vbmeta.hash().ok_or(ApexVerificationError::ApexPubkeyMistmatch)?.to_vec())
 }
 
