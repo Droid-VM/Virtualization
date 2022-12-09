@@ -12,13 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use alloc::vec::{self, Vec};
 use avb_bindgen::{
     avb_descriptor_foreach, avb_descriptor_validate_and_byteswap,
     avb_hashtree_descriptor_validate_and_byteswap, AvbDescriptor, AvbHashtreeDescriptor,
 };
-use std::ffi::c_void;
-use std::mem::{size_of, MaybeUninit};
-use std::slice;
+use core::ffi::c_void;
+use core::mem::{size_of, MaybeUninit};
+use core::slice;
 
 use super::VbMetaImageParseError;
 
@@ -105,7 +106,7 @@ impl Descriptors<'_> {
 
 impl<'a> IntoIterator for Descriptors<'a> {
     type Item = Descriptor<'a>;
-    type IntoIter = std::vec::IntoIter<Self::Item>;
+    type IntoIter = vec::IntoIter<Self::Item>;
 
     fn into_iter(self) -> Self::IntoIter {
         self.descriptors.into_iter()
