@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e56d8560_00926534",
+        "filename": "pvmfw/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-09T17:53:20Z",
+      "side": 1,
+      "message": "If `parse_ranges` returns `Range\u003cusize\u003e` (or `MemoryRange`): `self.bar_range.clone()`?",
+      "range": {
+        "startLine": 55,
+        "startChar": 30,
+        "endLine": 55,
+        "endChar": 88
+      },
+      "revId": "227f550579dc024cee2d00fc0e394ec1f0bc87a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "065a7175_c8640498",
+        "filename": "pvmfw/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-09T17:53:20Z",
+      "side": 1,
+      "message": "If this is an (MMIO) address range, why not `usize`?",
+      "range": {
+        "startLine": 113,
+        "startChar": 52,
+        "endLine": 113,
+        "endChar": 55
+      },
+      "revId": "227f550579dc024cee2d00fc0e394ec1f0bc87a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1f9a7ae_21180408",
+        "filename": "pvmfw/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-09T17:53:20Z",
+      "side": 1,
+      "message": "To be super safe, should we `u32::try_from()` as `range.addr` is `u128`?",
+      "range": {
+        "startLine": 128,
+        "startChar": 35,
+        "endLine": 128,
+        "endChar": 60
+      },
+      "revId": "227f550579dc024cee2d00fc0e394ec1f0bc87a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dfff094_39b09415",
+        "filename": "pvmfw/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-09T17:53:20Z",
+      "side": 1,
+      "message": "Don\u0027t we also need to validate this for `Memory32`? What if the PCI DT lies about the range type?\n\nWDYT of\n```\nif !prefetchable\n    \u0026\u0026 matches!(range_type, PciRangeType::Memory32 | PciRangeType::Memory64)\n    \u0026\u0026 size \u003e memory_size.into()\n    \u0026\u0026 u32::try_from(bus_address + size).is_ok()\n\n```\n?",
+      "range": {
+        "startLine": 149,
+        "startChar": 23,
+        "endLine": 149,
+        "endChar": 59
+      },
+      "revId": "227f550579dc024cee2d00fc0e394ec1f0bc87a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
