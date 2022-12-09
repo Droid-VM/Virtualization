@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d14d5680_b2d324fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-09T23:26:31Z",
+      "side": 1,
+      "message": "This change along with others in the topic are indeed enough to enable the encrypted storage. \n\nBut things like transferring the VM with encryptedstore enabled is not done in this patch. If you like, I can add it to the topic, let me know :)",
+      "parentUuid": "4ab1d881_88c2214f",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "a2ff8c505df75ca94382d13b21d1d3a2f985c2bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "acbff038_00e0429a",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-12-09T20:53:01Z",
       "side": 1,
       "message": "nit: I slightly prefer if this TODO is fixed in the same change, as otherwise we are somewhat regressing the contract of the isCompatibleWith API.\n\nHaving said that, if fixing the TODO is non-trivial, please feel free to do it in a follow up change.",
+      "range": {
+        "startLine": 402,
+        "startChar": 8,
+        "endLine": 402,
+        "endChar": 98
+      },
+      "revId": "a2ff8c505df75ca94382d13b21d1d3a2f985c2bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a19c9686_733e9ada",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-09T23:26:31Z",
+      "side": 1,
+      "message": "Compatibility \u0026 transferring vm from one app to another is a different functionality altogether. The former is a trivial change, just adding another \u0027\u003d\u003d\u0027 in this method, but I would also like to make changes to the tests and all, justifying a separate patch. \n\nr.android.com/2337743 is for the transfer of VM. I can make it a part of the same topic if you like, though I\u0027m trying to fix a bug for r.android.com/2337743 to land that patch.",
+      "parentUuid": "5cb0f5a0_69056666",
       "range": {
         "startLine": 402,
         "startChar": 8,
