@@ -21,6 +21,10 @@ use crate::{
 use core::{ffi::CStr, ops::Range};
 use libfdt::{AddressRange, Fdt, FdtNode};
 use log::{debug, error};
+use virtio_drivers::pci::{
+    bus::{BarInfo, Cam, Command, DeviceFunction, MemoryBarType, PciRoot},
+    virtio_device_type,
+};
 
 /// PCI MMIO configuration region size.
 const PCI_CFG_SIZE: usize = 0x100_0000;
@@ -60,6 +64,18 @@ impl PciInfo {
         )?;
 
         Ok(())
+    }
+
+    /// Returns the `PciRoot` for the memory-mapped CAM found in the FDT. The CAM should be mapped
+    /// before this is called, by calling [`PciInfo::map`].
+    ///
+    /// # Safety
+    ///
+    /// To prevent concurrent access, only one `PciRoot` should exist in the program. Thus this
+    /// method must only be called once, and there must be no other `PciRoot` constructed using the
+    /// same CAM.
+    pub unsafe fn make_pci_root(&self) -> PciRoot {
+        PciRoot::new(self.cam_range.start as *mut u8, Cam::MmioCam)
     }
 }
 
@@ -195,4 +211,109 @@ impl From<u32> for PciRangeType {
             _ => panic!("Tried to convert invalid range type {}", value),
         }
     }
+}
+
+/// Allocates BARs for all VirtIO PCI devices.
+pub fn allocate_all_virtio_bars(
+    pci_root: &mut PciRoot,
+    allocator: &mut PciMemory32Allocator,
+) -> Result<(), RebootReason> {
+    for (device_function, info) in pci_root.enumerate_bus(0) {
+        let (status, command) = pci_root.get_status_command(device_function);
+        debug!(
+            "Found PCI device {} at {}, status {:?} command {:?}",
+            info, device_function, status, command
+        );
+        if let Some(virtio_type) = virtio_device_type(&info) {
+            debug!("  VirtIO {:?}", virtio_type);
+            allocate_bars(pci_root, device_function, allocator)?;
+        }
+    }
+
+    Ok(())
+}
+
+/// Allocates 32-bit memory addresses for PCI BARs.
+#[derive(Debug)]
+pub struct PciMemory32Allocator {
+    /// The start of the available (not yet allocated) address space for PCI BARs.
+    start: u32,
+    /// The end of the available address space.
+    end: u32,
+}
+
+impl PciMemory32Allocator {
+    pub fn new(pci_info: &PciInfo) -> Self {
+        Self { start: pci_info.bar_range.start, end: pci_info.bar_range.end }
+    }
+
+    /// Allocates a 32-bit memory address region for a PCI BAR of the given power-of-2 size.
+    ///
+    /// It will have alignment matching the size. The size must be a power of 2.
+    pub fn allocate_memory_32(&mut self, size: u32) -> Option<u32> {
+        assert!(size.is_power_of_two());
+        let allocated_address = align_up(self.start, size);
+        if allocated_address + size <= self.end {
+            self.start = allocated_address + size;
+            Some(allocated_address)
+        } else {
+            None
+        }
+    }
+}
+
+/// Allocates appropriately-sized memory regions and assigns them to the device's BARs.
+fn allocate_bars(
+    root: &mut PciRoot,
+    device_function: DeviceFunction,
+    allocator: &mut PciMemory32Allocator,
+) -> Result<(), RebootReason> {
+    let mut bar_index = 0;
+    while bar_index < 6 {
+        let info = root.bar_info(device_function, bar_index).map_err(|e| {
+            error!("Error getting PCI BAR information: {}", e);
+            RebootReason::PciError
+        })?;
+        debug!("BAR {}: {}", bar_index, info);
+        // Ignore I/O bars, as they aren't required for the VirtIO driver.
+        if let BarInfo::Memory { address_type, size, .. } = info {
+            match address_type {
+                _ if size == 0 => {}
+                MemoryBarType::Width32 => {
+                    let address = allocator.allocate_memory_32(size).ok_or_else(|| {
+                        error!(
+                            "Failed to allocate memory BAR of size {} for PCI device {}.",
+                            size, device_function
+                        );
+                        RebootReason::PciError
+                    })?;
+                    debug!("Allocated address {:#010x}", address);
+                    root.set_bar_32(device_function, bar_index, address);
+                }
+                _ => {
+                    error!("Memory BAR address type {:?} not supported.", address_type);
+                    return Err(RebootReason::PciError);
+                }
+            }
+        }
+
+        bar_index += 1;
+        if info.takes_two_entries() {
+            bar_index += 1;
+        }
+    }
+
+    // Enable the device to use its BARs.
+    root.set_command(
+        device_function,
+        Command::IO_SPACE | Command::MEMORY_SPACE | Command::BUS_MASTER,
+    );
+    let (status, command) = root.get_status_command(device_function);
+    debug!("Allocated BARs and enabled device, status {:?} command {:?}", status, command);
+
+    Ok(())
+}
+
+const fn align_up(value: u32, alignment: u32) -> u32 {
+    ((value - 1) | (alignment - 1)) + 1
 }
