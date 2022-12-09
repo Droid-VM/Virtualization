@@ -22,6 +22,30 @@
       },
       "revId": "e11eace8a90231667f91ad1ea4cbed1e842ef49e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13ad74d3_e0805f80",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-09T16:31:24Z",
+      "side": 0,
+      "message": "I checked that. thiserror relies heavily on std. I don\u0027t think we can compile a nostd version from the current code. Otherwise core::error::Error trait is still unstable.\n\nhttps://doc.rust-lang.org/beta/src/core/error.rs.html#1-508",
+      "parentUuid": "55a89201_6e92b70d",
+      "range": {
+        "startLine": 41,
+        "startChar": 16,
+        "endLine": 41,
+        "endChar": 21
+      },
+      "revId": "e11eace8a90231667f91ad1ea4cbed1e842ef49e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

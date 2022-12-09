@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba646ee5_6f980e93",
+        "filename": "libs/avb/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-09T16:31:24Z",
+      "side": 1,
+      "message": "Which name would you prefer? \"avb\" or \"avb_rs\" for example?",
+      "parentUuid": "41a416b5_a94a8220",
+      "range": {
+        "startLine": 57,
+        "startChar": 17,
+        "endLine": 57,
+        "endChar": 23
+      },
+      "revId": "8794ed860bf7d10c9bc306bc531f7c6a8f84d835",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "48b11ea2_1e807780",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-09T15:19:03Z",
       "side": 1,
       "message": "Neat!",
+      "range": {
+        "startLine": 20,
+        "startChar": 18,
+        "endLine": 20,
+        "endChar": 25
+      },
+      "revId": "8794ed860bf7d10c9bc306bc531f7c6a8f84d835",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0c4d1ca_6927f75b",
+        "filename": "libs/avb/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-09T16:31:24Z",
+      "side": 1,
+      "message": "mm maybe it\u0027s not needed any more.",
+      "parentUuid": "48b11ea2_1e807780",
       "range": {
         "startLine": 20,
         "startChar": 18,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc8697b3_8ec734d9",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-09T16:31:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4bf35ab_f5987c5c",
+      "range": {
+        "startLine": 15,
+        "startChar": 46,
+        "endLine": 15,
+        "endChar": 58
+      },
+      "revId": "8794ed860bf7d10c9bc306bc531f7c6a8f84d835",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8374b72f_7c98012c",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1df18011_06da24cf",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-09T16:31:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8374b72f_7c98012c",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 20
+      },
+      "revId": "8794ed860bf7d10c9bc306bc531f7c6a8f84d835",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab55fb0f_57f3f624",
@@ -106,6 +202,30 @@
       "writtenOn": "2022-12-09T15:19:03Z",
       "side": 1,
       "message": "As already discussed, I\u0027d refrain from allocating errors on the heap.\n\nAFAICT, `Io` is here to wrap `io::Error` (which we don\u0027t have in pvmfw) so declare it as\n```\n#[cfg(feature \u003d \"std\")]\nIo(io:Error)\n```\n?",
+      "range": {
+        "startLine": 68,
+        "startChar": 7,
+        "endLine": 68,
+        "endChar": 13
+      },
+      "revId": "8794ed860bf7d10c9bc306bc531f7c6a8f84d835",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab473157_f9b1200c",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-09T16:31:24Z",
+      "side": 1,
+      "message": "Done. Good idea!",
+      "parentUuid": "ab55fb0f_57f3f624",
       "range": {
         "startLine": 68,
         "startChar": 7,
@@ -162,6 +282,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e5f2a21_94aeb6e3",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-09T16:31:24Z",
+      "side": 1,
+      "message": "Nice idea! I implemented the first part and the second part gives an error:\n\nerror[E0117]: only traits defined in the current crate can be implemented for types defined outside of the crate",
+      "parentUuid": "fff0c4ea_93e125c3",
+      "range": {
+        "startLine": 239,
+        "startChar": 7,
+        "endLine": 239,
+        "endChar": 26
+      },
+      "revId": "8794ed860bf7d10c9bc306bc531f7c6a8f84d835",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d189e43d_bd4d89a3",
@@ -175,6 +319,30 @@
       "writtenOn": "2022-12-09T15:19:03Z",
       "side": 1,
       "message": "It\u0027s very nice that this starts adding unit test support for pvmfw code!\n\nCould you also add coverage for `read_avb_footer_from_raw_data`?",
+      "range": {
+        "startLine": 270,
+        "startChar": 4,
+        "endLine": 270,
+        "endChar": 9
+      },
+      "revId": "8794ed860bf7d10c9bc306bc531f7c6a8f84d835",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f029ab9d_225ad067",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-09T16:31:24Z",
+      "side": 1,
+      "message": "I took your suggestion to reuse the MaybeUninit, so we don\u0027t need this method anymore.",
+      "parentUuid": "d189e43d_bd4d89a3",
       "range": {
         "startLine": 270,
         "startChar": 4,
