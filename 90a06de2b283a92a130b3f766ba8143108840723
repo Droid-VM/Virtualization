@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04712e8a_f1edd3ad",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-09T14:10:58Z",
+      "side": 1,
+      "message": "Okay. Done.",
+      "parentUuid": "c151b733_409c01ee",
+      "range": {
+        "startLine": 400,
+        "startChar": 25,
+        "endLine": 400,
+        "endChar": 87
+      },
+      "revId": "90a06de2b283a92a130b3f766ba8143108840723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df52c47c_a7293a63",
@@ -87,6 +111,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e469b0ce_9e5c01b3",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-09T14:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f716c4d4_cbe8ccbb",
+      "range": {
+        "startLine": 371,
+        "startChar": 59,
+        "endLine": 372,
+        "endChar": 35
+      },
+      "revId": "90a06de2b283a92a130b3f766ba8143108840723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "030be3a4_5817bd30",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-09T14:10:58Z",
+      "side": 1,
+      "message": "NA anymore",
+      "parentUuid": "df52c47c_a7293a63",
+      "range": {
+        "startLine": 372,
+        "startChar": 6,
+        "endLine": 372,
+        "endChar": 35
+      },
+      "revId": "90a06de2b283a92a130b3f766ba8143108840723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8fe936a_e2744d14",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-12-06T16:13:22Z",
       "side": 1,
       "message": "Maybe rephrase as\n\"in the VM, or 0 if encrypted storage is not enabled\".\n\nThe alternative would be to throw if not enabled, but that seems unfriendly.",
+      "range": {
+        "startLine": 382,
+        "startChar": 72,
+        "endLine": 383,
+        "endChar": 30
+      },
+      "revId": "90a06de2b283a92a130b3f766ba8143108840723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40c27a72_4b58450d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-09T14:10:58Z",
+      "side": 1,
+      "message": "Yes, particularly when not having a storage is supported!",
+      "parentUuid": "b8fe936a_e2744d14",
       "range": {
         "startLine": 382,
         "startChar": 72,
@@ -202,6 +298,102 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "760fd8f5_43f002f0",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-09T14:10:58Z",
+      "side": 1,
+      "message": "Split the text into different para - can you take another look?\n\nWe do need the test for persistence of storage, but that can go in different patch. I am happy to put it in the same topic, but would prefer to land this patch before.",
+      "parentUuid": "217c7a53_c7d16718",
+      "range": {
+        "startLine": 600,
+        "startChar": 60,
+        "endLine": 600,
+        "endChar": 98
+      },
+      "revId": "90a06de2b283a92a130b3f766ba8143108840723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "862a74db_bc2efa22",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-09T14:10:58Z",
+      "side": 1,
+      "message": "Done. Can you have a look at the text again.",
+      "parentUuid": "acdcce08_7d22633f",
+      "range": {
+        "startLine": 600,
+        "startChar": 60,
+        "endLine": 600,
+        "endChar": 98
+      },
+      "revId": "90a06de2b283a92a130b3f766ba8143108840723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6463b8a_e8a846c3",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-09T14:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d93e4cc2_360141b0",
+      "range": {
+        "startLine": 600,
+        "startChar": 36,
+        "endLine": 600,
+        "endChar": 43
+      },
+      "revId": "90a06de2b283a92a130b3f766ba8143108840723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4e9da2c_197dc0ec",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-09T14:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c205f057_a7058aa2",
+      "range": {
+        "startLine": 600,
+        "startChar": 53,
+        "endLine": 600,
+        "endChar": 59
+      },
+      "revId": "90a06de2b283a92a130b3f766ba8143108840723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "650f65d7_18d4152e",
@@ -215,6 +407,30 @@
       "writtenOn": "2022-12-06T16:13:22Z",
       "side": 1,
       "message": "nit: surplus blank line",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 0
+      },
+      "revId": "90a06de2b283a92a130b3f766ba8143108840723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bdaabf7_f723a4c7",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-09T14:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "650f65d7_18d4152e",
       "range": {
         "startLine": 138,
         "startChar": 0,
@@ -248,6 +464,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6f9b711_571f92f0",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-09T14:10:58Z",
+      "side": 1,
+      "message": "Agreed. I was going to cover those in scope of b/260084116. This test covers the storage availability \u0026 basically checks the system api works - it was required because the patch changes the apis. The other tests can go in a separate patch",
+      "parentUuid": "c49d7d87_c9b42898",
+      "range": {
+        "startLine": 881,
+        "startChar": 16,
+        "endLine": 881,
+        "endChar": 41
+      },
+      "revId": "90a06de2b283a92a130b3f766ba8143108840723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3c01ea7_82225b91",
@@ -261,6 +501,30 @@
       "writtenOn": "2022-12-06T16:13:22Z",
       "side": 1,
       "message": "I don\u0027t think you need this comment, we now set full for almost all tests for the same reason",
+      "range": {
+        "startLine": 889,
+        "startChar": 0,
+        "endLine": 889,
+        "endChar": 96
+      },
+      "revId": "90a06de2b283a92a130b3f766ba8143108840723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a42fb64a_9c999bf0",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-09T14:10:58Z",
+      "side": 1,
+      "message": "Fair. There are tests that change behaviour based on debuggability \u0026 should be tested for all of those. This however is not one of those",
+      "parentUuid": "c3c01ea7_82225b91",
       "range": {
         "startLine": 889,
         "startChar": 0,

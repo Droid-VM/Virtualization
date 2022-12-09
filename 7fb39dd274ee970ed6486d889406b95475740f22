@@ -190,6 +190,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfa6a61a_8c909d05",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-09T14:10:58Z",
+      "side": 1,
+      "message": "That patch is almost ready - r.android.com/c/2337743/1, fixing some bug. So, the TODO should not be required. Happy to make it the part of the topic",
+      "parentUuid": "abe0ad8a_43c3f57f",
+      "range": {
+        "startLine": 306,
+        "startChar": 2,
+        "endLine": 309,
+        "endChar": 37
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af167aac_52729a18",
@@ -614,6 +638,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7367b653_af261ad8",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-09T14:10:58Z",
+      "side": 1,
+      "message": "As discussed offline, we are not allowing size changes in encryoted store. \n\nThe patch is almost ready, fixing some bug. So, the TODO should not be required. Happy to make it the part of the topic.",
+      "parentUuid": "011fd451_db8b2641",
+      "range": {
+        "startLine": 385,
+        "startChar": 0,
+        "endLine": 394,
+        "endChar": 74
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a55e5ba_370bc45d",
@@ -627,6 +675,30 @@
       "writtenOn": "2022-12-06T16:13:22Z",
       "side": 1,
       "message": "I was wondering about that.\n4TiB seems like a lot, but is it?\n\nChanging it later would be a lot of work.",
+      "range": {
+        "startLine": 469,
+        "startChar": 46,
+        "endLine": 469,
+        "endChar": 77
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3112dbb9_bb271492",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-09T14:10:58Z",
+      "side": 1,
+      "message": "2TiB because in case of signed int. \n\nI\u0027ll convert it into long. VS supports i64, but size in bytes - but that we can change across releases anyway.\n\n(We\u0027ve hit some bugs in tests which arose out of integer overflow)",
+      "parentUuid": "9a55e5ba_370bc45d",
       "range": {
         "startLine": 469,
         "startChar": 46,
@@ -698,6 +770,30 @@
       "side": 1,
       "message": "\u003e I would like the app to be able to have storages in the order of KB.\n\nThe file system overhead is much bigger than that, though?",
       "parentUuid": "341882a6_ebbba11c",
+      "range": {
+        "startLine": 591,
+        "startChar": 0,
+        "endLine": 594,
+        "endChar": 0
+      },
+      "revId": "7fb39dd274ee970ed6486d889406b95475740f22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f210bc4_cbe63a29",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-09T14:10:58Z",
+      "side": 1,
+      "message": "I haven\u0027t done thorough benchmarks - but I was able to format ext4 on 400KB\u0027 partition. That was without journals though.",
+      "parentUuid": "75bea4c1_a5b68a1c",
       "range": {
         "startLine": 591,
         "startChar": 0,
