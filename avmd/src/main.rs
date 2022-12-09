@@ -17,14 +17,14 @@
 use anyhow::{anyhow, bail, Result};
 use apexutil::get_payload_vbmeta_image_hash;
 use apkverify::get_apk_digest;
+use avb::VbMetaImage;
 use avmd::{ApkDescriptor, Avmd, Descriptor, ResourceIdentifier, VbMetaDescriptor};
 use clap::{App, AppSettings, Arg, ArgMatches, SubCommand};
 use serde::ser::Serialize;
 use std::fs::File;
-use vbmeta::VbMetaImage;
 
 fn get_vbmeta_image_hash(file: &str) -> Result<Vec<u8>> {
-    let img = VbMetaImage::verify_path(file)?;
+    let img = VbMetaImage::verify_path(file).map_err(|e| anyhow!("Cannot verify vbmeta: {e}"))?;
     Ok(img.hash().ok_or_else(|| anyhow!("No hash as VBMeta image isn't signed"))?.to_vec())
 }
 
