@@ -14,8 +14,14 @@
 
 //! This module regroups the rust API for libavb.
 
-#![no_std]
+#![cfg_attr(all(not(feature = "std"), not(test)), no_std)]
 
-mod avb_ops;
+extern crate alloc;
 
-pub use avb_ops::{verify_image, AvbImageVerifyError};
+mod descriptor;
+mod ops;
+mod vbmeta;
+
+pub use descriptor::Descriptor;
+pub use ops::{verify_image, AvbImageVerifyError};
+pub use vbmeta::{VbMetaImage, VbMetaImageParseError, VbMetaImageVerificationError};
