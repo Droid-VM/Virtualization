@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ab1d881_88c2214f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-09T20:53:01Z",
+      "side": 1,
+      "message": "If I understand correctly, this change alone is not enough to enable the encrypted storage, right?\n\nIf so, can we make sure that all changes are merged at the same time. Otherwise somebody might accidentally try to integrate their app with a cut of Android U that has this API enabled, but doesn\u0027t have the full implementation. I suspect that debugging such situation might be quite painful.\n\nNote, while the situation is quite rare, it is not hypothetical.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "a2ff8c505df75ca94382d13b21d1d3a2f985c2bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "acbff038_00e0429a",
@@ -14,6 +37,29 @@
       "writtenOn": "2022-12-09T16:16:46Z",
       "side": 1,
       "message": "Nikita - WDYT?",
+      "revId": "a2ff8c505df75ca94382d13b21d1d3a2f985c2bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cb0f5a0_69056666",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-09T20:53:01Z",
+      "side": 1,
+      "message": "nit: I slightly prefer if this TODO is fixed in the same change, as otherwise we are somewhat regressing the contract of the isCompatibleWith API.\n\nHaving said that, if fixing the TODO is non-trivial, please feel free to do it in a follow up change.",
+      "range": {
+        "startLine": 402,
+        "startChar": 8,
+        "endLine": 402,
+        "endChar": 98
+      },
       "revId": "a2ff8c505df75ca94382d13b21d1d3a2f985c2bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
