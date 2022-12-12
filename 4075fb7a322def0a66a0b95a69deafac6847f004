@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca910bc5_5181bfda",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-12T15:52:06Z",
+      "side": 1,
+      "message": "Can you put this one after protectedVm?\n(We do all the cheap primitive comparisons first before getting into the expensive string compares.)",
+      "range": {
+        "startLine": 407,
+        "startChar": 0,
+        "endLine": 407,
+        "endChar": 75
+      },
+      "revId": "4075fb7a322def0a66a0b95a69deafac6847f004",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "971ced84_2748cb85",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-12T15:52:06Z",
+      "side": 1,
+      "message": "Can you set a non-zero encrypted storage here, and verify that getEncryptedStorageKib returns the same value?\n\n(Minimal is supposed to be the smallest possible config, and maximal specifies everything.)",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 42
+      },
+      "revId": "4075fb7a322def0a66a0b95a69deafac6847f004",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
