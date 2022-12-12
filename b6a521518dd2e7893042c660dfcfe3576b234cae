@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b8082da_f698d04b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-12-12T02:40:43Z",
+      "side": 1,
+      "message": "Can we also patch init.rc and apexd to remove `--vm` flag? For now it is:\n\n    service apexd-vm /system/bin/apexd --vm\n        user root\n        group system\n        oneshot\n        disabled\n        capabilities CHOWN DAC_OVERRIDE DAC_READ_SEARCH FOWNER SYS_ADMIN",
+      "revId": "b6a521518dd2e7893042c660dfcfe3576b234cae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
