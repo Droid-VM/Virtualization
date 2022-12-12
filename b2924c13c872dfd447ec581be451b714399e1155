@@ -22,6 +22,30 @@
       },
       "revId": "b2924c13c872dfd447ec581be451b714399e1155",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96ddc1f4_ab54bdb4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-12T11:30:37Z",
+      "side": 1,
+      "message": "Good point; I checked and, as expected, the linker doesn\u0027t link in any symbol that isn\u0027t already required so this CL has no effect on the size of pvmfw. I\u0027ve mentioned it in the commit message.",
+      "parentUuid": "bab53720_9d72d649",
+      "range": {
+        "startLine": 12,
+        "startChar": 6,
+        "endLine": 12,
+        "endChar": 58
+      },
+      "revId": "b2924c13c872dfd447ec581be451b714399e1155",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
