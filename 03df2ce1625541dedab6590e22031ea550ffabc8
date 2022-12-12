@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "230bb9d8_8160fc4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-12T15:25:38Z",
+      "side": 1,
+      "message": "Could you please split this patch into (at least) 2: one that relocates `vbmeta` into `avb` and one that adds the `no_std` rework? That would simplify the review process, IMO, and would allow merging the first patch.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 32
+      },
+      "revId": "03df2ce1625541dedab6590e22031ea550ffabc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

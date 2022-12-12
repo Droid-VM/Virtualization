@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7bcfa89_f93ef202",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-12T15:25:38Z",
+      "side": 1,
+      "message": "This function is called from `verify_reader_region` so why not make it `#[cfg(feature \u003d \"std\")]`, for now, instead of silencing the linter?",
+      "range": {
+        "startLine": 139,
+        "startChar": 4,
+        "endLine": 139,
+        "endChar": 23
+      },
+      "revId": "c72f7e4b1e38c80c80ecad2d2ef7296183c0fba0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05948e2d_2541e0cf",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-12T15:25:38Z",
+      "side": 1,
+      "message": "Same as above: `#[cfg(feature \u003d \"std\")]`, for now?",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 19
+      },
+      "revId": "c72f7e4b1e38c80c80ecad2d2ef7296183c0fba0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8730be9d_06feb229",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-12T15:25:38Z",
+      "side": 1,
+      "message": "It\u0027s confusing that this doesn\u0027t `SeekFrom::End`.",
+      "range": {
+        "startLine": 223,
+        "startChar": 25,
+        "endLine": 223,
+        "endChar": 32
+      },
+      "revId": "c72f7e4b1e38c80c80ecad2d2ef7296183c0fba0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "798f9b8b_6f970949",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-12T15:25:38Z",
+      "side": 1,
+      "message": "Looking at `avb_footer_validate_and_byteswap`, this check can be removed as [it is superfluous](http://cs/android/external/avb/libavb/avb_footer.c?l\u003d39).",
+      "range": {
+        "startLine": 249,
+        "startChar": 8,
+        "endLine": 251,
+        "endChar": 9
+      },
+      "revId": "c72f7e4b1e38c80c80ecad2d2ef7296183c0fba0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1ffdce1_20587b78",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-12T15:25:38Z",
+      "side": 1,
+      "message": "`Deref` [should only be implemented for smart pointers](https://doc.rust-lang.org/std/ops/trait.Deref.html) but you can implement `AsRef\u003cAvbFooter\u003e`, instead.",
+      "range": {
+        "startLine": 261,
+        "startChar": 5,
+        "endLine": 261,
+        "endChar": 10
+      },
+      "revId": "c72f7e4b1e38c80c80ecad2d2ef7296183c0fba0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

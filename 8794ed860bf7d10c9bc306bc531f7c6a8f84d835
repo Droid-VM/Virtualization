@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7319f3a_ccb66f42",
+        "filename": "libs/avb/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-12T15:25:38Z",
+      "side": 1,
+      "message": "Either `avb` or (as David did for `libfdt`): `libavb` and call the Soong target `liblibavb`.",
+      "parentUuid": "263b7a44_f4c7caf9",
+      "range": {
+        "startLine": 57,
+        "startChar": 17,
+        "endLine": 57,
+        "endChar": 23
+      },
+      "revId": "8794ed860bf7d10c9bc306bc531f7c6a8f84d835",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "48b11ea2_1e807780",
@@ -309,6 +333,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12a2e5be_033851e9",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-12T15:25:38Z",
+      "side": 1,
+      "message": "I see, it would be neater for `VbMetaImage` to wrap a slice (and the caller is free to allocate that slice in a `Vec` if needed) but I agree that it\u0027s not a blocker and would require some refactoring; please add the TODO.",
+      "parentUuid": "b815fc18_6a280bcb",
+      "range": {
+        "startLine": 162,
+        "startChar": 52,
+        "endLine": 162,
+        "endChar": 58
+      },
+      "revId": "8794ed860bf7d10c9bc306bc531f7c6a8f84d835",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fff0c4ea_93e125c3",
         "filename": "libs/avb/src/vbmeta.rs",
         "patchSetId": 3
@@ -392,6 +440,30 @@
       "side": 1,
       "message": "I added `Footer` and `try_from(bytes)` for now.\n\nCurrently, the error from `try_from(bytes)` is not raised as an error in comparison with `try_from(image)`. To make both of them take the `TryInto` form here, maybe we need to add another VbImageVerificationError here and propagate it. I think that will require some investigation and an additional test. I\u0027d prefer to leave it to a different cl, wdyt?",
       "parentUuid": "ce0ed6c8_c6671541",
+      "range": {
+        "startLine": 239,
+        "startChar": 7,
+        "endLine": 239,
+        "endChar": 26
+      },
+      "revId": "8794ed860bf7d10c9bc306bc531f7c6a8f84d835",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d564c616_6b12bad0",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-12T15:25:38Z",
+      "side": 1,
+      "message": "\u003e I added `Footer` and `try_from(bytes)` for now.\n\nGreat!\n\nBTW, (`Try`)`From` typically converts \"by value\" so this should take the array directly instead of `TryFrom\u003c\u0026[...` (as I suggested above).\n\nThe point is was making in [another comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2337745/comment/09e64a75_32a5889e/) was that the convoluted `unsafe{MaybeUninit+copy_nonoverlapping}` you currently have in `try_from` could then be replaced by a trivial and safe cloning in the caller:\n\n```\nOk(Footer::TryFrom(raw_footer.clone()).ok())\n```\n\n\u003e maybe we need to add another VbImageVerificationError here\n\nYes, returning `VbMetaImageVerificationError::InvalidFooter` makes sense, even if we ignore it (`.ok()`) for now. But I agree that plumbing it through can be kept as a TODO.",
+      "parentUuid": "6b6984bf_80e34d0e",
       "range": {
         "startLine": 239,
         "startChar": 7,
