@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87e793ef_48f42e30",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-12T15:44:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3b7ae37_72ee39b5",
+      "range": {
+        "startLine": 46,
+        "startChar": 34,
+        "endLine": 46,
+        "endChar": 53
+      },
+      "revId": "2c1ecc51cd87ec0f7698022a7add7c49407e5024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58035669_285fda91",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-12T15:11:57Z",
       "side": 1,
       "message": "This is a weird type, what is it supposed to represent? It looks like you ignore it anyway.",
+      "range": {
+        "startLine": 54,
+        "startChar": 36,
+        "endLine": 54,
+        "endChar": 46
+      },
+      "revId": "2c1ecc51cd87ec0f7698022a7add7c49407e5024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b0a6b1e_0d86ff16",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-12T15:44:12Z",
+      "side": 1,
+      "message": "I agree, it\u0027s there to allow the implementation to be simplified with `?`; is there a better way?",
+      "parentUuid": "58035669_285fda91",
       "range": {
         "startLine": 54,
         "startChar": 36,
