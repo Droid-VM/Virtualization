@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "291e4829_ac71b41f",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-12T09:21:47Z",
+      "side": 1,
+      "message": "Ah yeah, nice! I tried this before with `footer_size` and it didn\u0027t work.",
+      "parentUuid": "d3d929bd_6b4d4f1c",
+      "range": {
+        "startLine": 223,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 6
+      },
+      "revId": "79a3057432f5e3fd54dd539eadeae69cc95ca953",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09e64a75_32a5889e",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-09T16:55:18Z",
       "side": 1,
       "message": "My point was that, if we take `bytes` by value, we can transfer the responsibly of copying to the caller, making this (now) convoluted byte cloning unnecessary.\n\nFor example, `read_avb_footer_from_image` could hand over the bytes it owns\n```\nOk(read_avb_footer_from_bytes(bytes))\n```\nor clone them, if it wants to keep the original raw bytes (it doesn\u0027t)\n```\nOk(read_avb_footer_from_bytes(bytes.clone()))\n```",
+      "range": {
+        "startLine": 238,
+        "startChar": 4,
+        "endLine": 245,
+        "endChar": 6
+      },
+      "revId": "79a3057432f5e3fd54dd539eadeae69cc95ca953",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d331c43_2f6b554d",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-12T09:21:47Z",
+      "side": 1,
+      "message": "Mm, I can remove the slice here. It does look a bit complicated. I\u0027m not sure I understand what you want here, even in pvmfw we take a byte array, we still need to build an AvbFooter from it by copying them. Let me know if you think this looks better now.",
+      "parentUuid": "09e64a75_32a5889e",
       "range": {
         "startLine": 238,
         "startChar": 4,
