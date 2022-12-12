@@ -340,8 +340,12 @@ enum AppendedPayload<'a> {
 impl<'a> AppendedPayload<'a> {
     /// SAFETY - 'data' should respect the alignment of config::Header.
     unsafe fn new(data: &'a mut [u8]) -> Option<Self> {
-        if Self::is_valid_config(data) {
-            Some(Self::Config(config::Config::new(data).unwrap()))
+        if let Some(valid) = Self::is_valid_config(data) {
+            if valid {
+                Some(Self::Config(config::Config::new(data).unwrap()))
+            } else {
+                None
+            }
         } else if cfg!(feature = "legacy") {
             const BCC_SIZE: usize = helpers::SIZE_4KB;
             warn!("Assuming the appended data at {:?} to be a raw BCC", data.as_ptr());
@@ -351,13 +355,21 @@ impl<'a> AppendedPayload<'a> {
         }
     }
 
-    unsafe fn is_valid_config(data: &mut [u8]) -> bool {
+    unsafe fn is_valid_config(data: &mut [u8]) -> Option<bool> {
         // This function is necessary to prevent the borrow checker from getting confused
         // about the ownership of data in new(); see https://users.rust-lang.org/t/78467.
         let addr = data.as_ptr();
-        config::Config::new(data)
-            .map_err(|e| warn!("Invalid configuration data at {addr:?}: {e}"))
-            .is_ok()
+        match config::Config::new(data) {
+            Err(config::Error::InvalidMagic) => {
+                warn!("No configuration data found at {addr:?}");
+                None
+            }
+            Err(e) => {
+                error!("Invalid configuration data at {addr:?}: {e}");
+                Some(false)
+            }
+            Ok(_) => Some(true),
+        }
     }
 
     #[allow(dead_code)] // TODO(b/232900974)
