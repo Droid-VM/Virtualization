@@ -65,6 +65,7 @@ public final class VirtualMachineConfig {
     private static final String KEY_PROTECTED_VM = "protectedVm";
     private static final String KEY_MEMORY_MIB = "memoryMib";
     private static final String KEY_NUM_CPUS = "numCpus";
+    private static final String[] EMPTY_STRING_ARRAY = {};
 
     /** @hide */
     @Retention(RetentionPolicy.SOURCE)
@@ -128,46 +129,7 @@ public final class VirtualMachineConfig {
             boolean protectedVm,
             int memoryMib,
             int numCpus) {
-        requireNonNull(apkPath);
-        if (!apkPath.startsWith("/")) {
-            throw new IllegalArgumentException("APK path must be an absolute path");
-        }
-
-        if (memoryMib < 0) {
-            throw new IllegalArgumentException("Memory size cannot be negative");
-        }
-
-        int availableCpus = Runtime.getRuntime().availableProcessors();
-        if (numCpus < 1 || numCpus > availableCpus) {
-            throw new IllegalArgumentException("Number of vCPUs (" + numCpus + ") is out of "
-                    + "range [1, " + availableCpus + "]");
-        }
-
-        if (debugLevel != DEBUG_LEVEL_NONE && debugLevel != DEBUG_LEVEL_FULL) {
-            throw new IllegalArgumentException("Invalid debugLevel: " + debugLevel);
-        }
-
-        if (payloadBinaryPath == null) {
-            if (payloadConfigPath == null) {
-                throw new IllegalStateException("setPayloadBinaryPath must be called");
-            }
-        } else {
-            if (payloadConfigPath != null) {
-                throw new IllegalStateException(
-                        "setPayloadBinaryPath and setPayloadConfigPath may not both be called");
-            }
-        }
-
-        if (protectedVm
-                && !HypervisorProperties.hypervisor_protected_vm_supported().orElse(false)) {
-            throw new UnsupportedOperationException(
-                    "Protected VMs are not supported on this device.");
-        }
-        if (!protectedVm && !HypervisorProperties.hypervisor_vm_supported().orElse(false)) {
-            throw new UnsupportedOperationException(
-                    "Unprotected VMs are not supported on this device.");
-        }
-
+        // This is only called from Builder.build(); the builder handles parameter validation.
         mApkPath = apkPath;
         mPayloadConfigPath = payloadConfigPath;
         mPayloadBinaryPath = payloadBinaryPath;
@@ -203,32 +165,43 @@ public final class VirtualMachineConfig {
     private static VirtualMachineConfig fromInputStream(@NonNull InputStream input)
             throws IOException, VirtualMachineException {
         PersistableBundle b = PersistableBundle.readFromStream(input);
+        try {
+            return fromPersistableBundle(b);
+        } catch (NullPointerException | IllegalArgumentException | IllegalStateException e) {
+            throw new VirtualMachineException("Persisted VM config is invalid", e);
+        }
+    }
+
+    @NonNull
+    private static VirtualMachineConfig fromPersistableBundle(PersistableBundle b) {
         int version = b.getInt(KEY_VERSION);
         if (version > VERSION) {
-            throw new VirtualMachineException("Version too high");
+            throw new IllegalArgumentException("Version too high");
         }
-        String apkPath = b.getString(KEY_APKPATH);
-        if (apkPath == null) {
-            throw new VirtualMachineException("No apkPath");
+
+        Builder builder = new Builder();
+        builder.setApkPath(b.getString(KEY_APKPATH));
+
+        String payloadConfigPath = b.getString(KEY_PAYLOADCONFIGPATH);
+        if (payloadConfigPath == null) {
+            builder.setPayloadBinaryPath(b.getString(KEY_PAYLOADBINARYPATH));
+        } else {
+            builder.setPayloadConfigPath(payloadConfigPath);
         }
-        String payloadBinaryPath = b.getString(KEY_PAYLOADBINARYPATH);
-        String payloadConfigPath = null;
-        if (payloadBinaryPath == null) {
-            payloadConfigPath = b.getString(KEY_PAYLOADCONFIGPATH);
-            if (payloadConfigPath == null) {
-                throw new VirtualMachineException("No payloadBinaryPath");
-            }
-        }
+
         @DebugLevel int debugLevel = b.getInt(KEY_DEBUGLEVEL);
         if (debugLevel != DEBUG_LEVEL_NONE && debugLevel != DEBUG_LEVEL_FULL) {
-            throw new VirtualMachineException("Invalid debugLevel: " + debugLevel);
+            throw new IllegalArgumentException("Invalid debugLevel: " + debugLevel);
         }
-        boolean protectedVm = b.getBoolean(KEY_PROTECTED_VM);
+        builder.setDebugLevel(debugLevel);
+        builder.setProtectedVm(b.getBoolean(KEY_PROTECTED_VM));
         int memoryMib = b.getInt(KEY_MEMORY_MIB);
-        int numCpus = b.getInt(KEY_NUM_CPUS);
+        if (memoryMib != 0) {
+            builder.setMemoryMib(memoryMib);
+        }
+        builder.setNumCpus(b.getInt(KEY_NUM_CPUS));
 
-        return new VirtualMachineConfig(apkPath, payloadConfigPath, payloadBinaryPath, debugLevel,
-                protectedVm, memoryMib, numCpus);
+        return builder.build();
     }
 
     /** Persists this config to a file. */
@@ -315,7 +288,8 @@ public final class VirtualMachineConfig {
     }
 
     /**
-     * Returns the amount of RAM that will be made available to the VM.
+     * Returns the amount of RAM that will be made available to the VM, or 0 if the default size
+     * will be used.
      *
      * @hide
      */
@@ -383,9 +357,8 @@ public final class VirtualMachineConfig {
         vsConfig.protectedVm = mProtectedVm;
         vsConfig.memoryMib = mMemoryMib;
         vsConfig.numCpus = mNumCpus;
-        // Don't allow apps to set task profiles ... at last for now. Also, don't forget to
-        // validate the string because these are appended to the cmdline argument.
-        vsConfig.taskProfiles = new String[0];
+        // Don't allow apps to set task profiles ... at least for now.
+        vsConfig.taskProfiles = EMPTY_STRING_ARRAY;
         return vsConfig;
     }
 
@@ -396,15 +369,15 @@ public final class VirtualMachineConfig {
      */
     @SystemApi
     public static final class Builder {
-        private final Context mContext;
+        @Nullable private final Context mContext;
         @Nullable private String mApkPath;
         @Nullable private String mPayloadConfigPath;
         @Nullable private String mPayloadBinaryPath;
-        @DebugLevel private int mDebugLevel;
+        @DebugLevel private int mDebugLevel = DEBUG_LEVEL_NONE;
         private boolean mProtectedVm;
         private boolean mProtectedVmSet;
         private int mMemoryMib;
-        private int mNumCpus;
+        private int mNumCpus = 1;
 
         /**
          * Creates a builder for the given context.
@@ -414,8 +387,14 @@ public final class VirtualMachineConfig {
         @SystemApi
         public Builder(@NonNull Context context) {
             mContext = requireNonNull(context, "context must not be null");
-            mDebugLevel = DEBUG_LEVEL_NONE;
-            mNumCpus = 1;
+        }
+
+        /**
+         * Creates a builder with no associated context; {@link #setApkPath} must be called to
+         * specify which APK contains the payload.
+         */
+        private Builder() {
+            mContext = null;
         }
 
         /**
@@ -426,7 +405,26 @@ public final class VirtualMachineConfig {
         @SystemApi
         @NonNull
         public VirtualMachineConfig build() {
-            String apkPath = (mApkPath == null) ? mContext.getPackageCodePath() : mApkPath;
+            String apkPath;
+            if (mApkPath == null) {
+                if (mContext == null) {
+                    throw new IllegalStateException("apkPath must be specified");
+                }
+                apkPath = mContext.getPackageCodePath();
+            } else {
+                apkPath = mApkPath;
+            }
+
+            if (mPayloadBinaryPath == null) {
+                if (mPayloadConfigPath == null) {
+                    throw new IllegalStateException("setPayloadBinaryPath must be called");
+                }
+            } else {
+                if (mPayloadConfigPath != null) {
+                    throw new IllegalStateException(
+                            "setPayloadBinaryPath and setPayloadConfigPath may not both be called");
+                }
+            }
 
             if (!mProtectedVmSet) {
                 throw new IllegalStateException("setProtectedVm must be called explicitly");
@@ -446,7 +444,11 @@ public final class VirtualMachineConfig {
         @SystemApi
         @NonNull
         public Builder setApkPath(@NonNull String apkPath) {
-            mApkPath = requireNonNull(apkPath);
+            requireNonNull(apkPath, "apkPath must not be null");
+            if (!apkPath.startsWith("/")) {
+                throw new IllegalArgumentException("APK path must be an absolute path");
+            }
+            mApkPath = apkPath;
             return this;
         }
 
@@ -461,7 +463,8 @@ public final class VirtualMachineConfig {
         @TestApi
         @NonNull
         public Builder setPayloadConfigPath(@NonNull String payloadConfigPath) {
-            mPayloadConfigPath = requireNonNull(payloadConfigPath);
+            mPayloadConfigPath =
+                    requireNonNull(payloadConfigPath, "payloadConfigPath must not be null");
             return this;
         }
 
@@ -474,7 +477,8 @@ public final class VirtualMachineConfig {
         @SystemApi
         @NonNull
         public Builder setPayloadBinaryPath(@NonNull String payloadBinaryPath) {
-            mPayloadBinaryPath = requireNonNull(payloadBinaryPath);
+            mPayloadBinaryPath =
+                    requireNonNull(payloadBinaryPath, "payloadBinaryPath must not be null");
             return this;
         }
 
@@ -486,6 +490,9 @@ public final class VirtualMachineConfig {
         @SystemApi
         @NonNull
         public Builder setDebugLevel(@DebugLevel int debugLevel) {
+            if (debugLevel != DEBUG_LEVEL_NONE && debugLevel != DEBUG_LEVEL_FULL) {
+                throw new IllegalArgumentException("Invalid debugLevel: " + debugLevel);
+            }
             mDebugLevel = debugLevel;
             return this;
         }
@@ -500,20 +507,34 @@ public final class VirtualMachineConfig {
         @SystemApi
         @NonNull
         public Builder setProtectedVm(boolean protectedVm) {
+            if (protectedVm) {
+                if (!HypervisorProperties.hypervisor_protected_vm_supported().orElse(false)) {
+                    throw new UnsupportedOperationException(
+                            "Protected VMs are not supported on this device.");
+                }
+            } else {
+                if (!HypervisorProperties.hypervisor_vm_supported().orElse(false)) {
+                    throw new UnsupportedOperationException(
+                            "Unprotected VMs are not supported on this device.");
+                }
+            }
             mProtectedVm = protectedVm;
             mProtectedVmSet = true;
             return this;
         }
 
         /**
-         * Sets the amount of RAM to give the VM, in mebibytes. If zero or not explicitly set then a
-         * default size will be used.
+         * Sets the amount of RAM to give the VM, in mebibytes. If not explicitly set then a default
+         * size will be used.
          *
          * @hide
          */
         @SystemApi
         @NonNull
-        public Builder setMemoryMib(@IntRange(from = 0) int memoryMib) {
+        public Builder setMemoryMib(@IntRange(from = 1) int memoryMib) {
+            if (memoryMib <= 0) {
+                throw new IllegalArgumentException("Memory size must be positive");
+            }
             mMemoryMib = memoryMib;
             return this;
         }
@@ -526,8 +547,18 @@ public final class VirtualMachineConfig {
          */
         @SystemApi
         @NonNull
-        public Builder setNumCpus(@IntRange(from = 1) int num) {
-            mNumCpus = num;
+        public Builder setNumCpus(@IntRange(from = 1) int numCpus) {
+            int availableCpus = Runtime.getRuntime().availableProcessors();
+            if (numCpus < 1 || numCpus > availableCpus) {
+                throw new IllegalArgumentException(
+                        "Number of vCPUs ("
+                                + numCpus
+                                + ") is out of "
+                                + "range [1, "
+                                + availableCpus
+                                + "]");
+            }
+            mNumCpus = numCpus;
             return this;
         }
     }
