@@ -16,6 +16,24 @@
       "message": "Can we also patch init.rc and apexd to remove `--vm` flag? For now it is:\n\n    service apexd-vm /system/bin/apexd --vm\n        user root\n        group system\n        oneshot\n        disabled\n        capabilities CHOWN DAC_OVERRIDE DAC_READ_SEARCH FOWNER SYS_ADMIN",
       "revId": "b6a521518dd2e7893042c660dfcfe3576b234cae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21eae1e7_1a47a7d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2022-12-12T02:43:33Z",
+      "side": 1,
+      "message": "Yeah, I thought of cleaning up these as well. (including renaming the service as `apexd` not `apexd-vm` since there\u0027s no other launch mode in microdroid)\n\nBut, I decided to leave it as it is so that --vm can be looked up later as a clue to distinguish the launch mode.\n\nwdyt?",
+      "parentUuid": "1b8082da_f698d04b",
+      "revId": "b6a521518dd2e7893042c660dfcfe3576b234cae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
