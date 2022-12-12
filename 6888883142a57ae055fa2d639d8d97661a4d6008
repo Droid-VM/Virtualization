@@ -22,6 +22,30 @@
       },
       "revId": "6888883142a57ae055fa2d639d8d97661a4d6008",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2a4552a_8b0abc55",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-12T11:30:30Z",
+      "side": 1,
+      "message": "Does it matter if pvmfw is single threaded? Do you mean you\u0027d like it to be part of the TLS (accessed through MPIDR_EL0)? I\u0027ve tried that but the Bionic way of storing errno in the TLS seemed overkill in the size of the structs it requires. Also, there\u0027s no `core` alternative for `std::thread_local`.",
+      "parentUuid": "6facf0a3_de1b5e7d",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 32
+      },
+      "revId": "6888883142a57ae055fa2d639d8d97661a4d6008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
