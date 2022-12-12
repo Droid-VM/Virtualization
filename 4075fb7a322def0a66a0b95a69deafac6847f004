@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00ebec87_f7e99a68",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-12T16:07:44Z",
+      "side": 1,
+      "message": "Makes sense. Done!",
+      "parentUuid": "ca910bc5_5181bfda",
+      "range": {
+        "startLine": 407,
+        "startChar": 0,
+        "endLine": 407,
+        "endChar": 75
+      },
+      "revId": "4075fb7a322def0a66a0b95a69deafac6847f004",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "971ced84_2748cb85",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-12T15:52:06Z",
       "side": 1,
       "message": "Can you set a non-zero encrypted storage here, and verify that getEncryptedStorageKib returns the same value?\n\n(Minimal is supposed to be the smallest possible config, and maximal specifies everything.)",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 42
+      },
+      "revId": "4075fb7a322def0a66a0b95a69deafac6847f004",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acb2c764_a6a94ece",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-12T16:07:44Z",
+      "side": 1,
+      "message": "Having non-zero storage for maximal would mean it is incompatible with minimal.\nmaximal.isCompatibleWith(maximal) will be false (few lines down) \u0026 it wont be an effective test.\n\nI have instead built another config which is maximalConfig + storage \u0026 compared it with maximal to test the (in-)compatibility.\n\nI can check getEncryptedStorageKib() for the incompatible config instead....",
+      "parentUuid": "971ced84_2748cb85",
       "range": {
         "startLine": 280,
         "startChar": 0,
