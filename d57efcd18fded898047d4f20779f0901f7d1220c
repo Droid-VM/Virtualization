@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "679be568_07577522",
+        "filename": "launcher/main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-12-12T02:16:52Z",
+      "side": 1,
+      "message": "```\nauto handle \u003d load(...);\nif (!handle.ok()) {\n   // log and return\n}\n...\ndlsym(*handle, ...);\n```",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 5
+      },
+      "revId": "d57efcd18fded898047d4f20779f0901f7d1220c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
