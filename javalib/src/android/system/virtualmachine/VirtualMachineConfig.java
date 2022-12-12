@@ -399,12 +399,12 @@ public final class VirtualMachineConfig {
      */
     @SystemApi
     public boolean isCompatibleWith(@NonNull VirtualMachineConfig other) {
-        // TODO(b/254454175): mEncryptedStorageKib being equal is also required for compatibility.
         return this.mDebugLevel == other.mDebugLevel
                 && this.mProtectedVm == other.mProtectedVm
                 && Objects.equals(this.mPayloadConfigPath, other.mPayloadConfigPath)
                 && Objects.equals(this.mPayloadBinaryPath, other.mPayloadBinaryPath)
-                && this.mApkPath.equals(other.mApkPath);
+                && this.mApkPath.equals(other.mApkPath)
+                && this.mEncryptedStorageKib == other.mEncryptedStorageKib;
     }
 
     /**
