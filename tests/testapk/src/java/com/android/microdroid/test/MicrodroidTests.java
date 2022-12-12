@@ -300,6 +300,10 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
         VirtualMachineConfig compatible = maximalBuilder.setNumCpus(1).setMemoryMib(99).build();
         assertThat(compatible.isCompatibleWith(maximal)).isTrue();
+
+        VirtualMachineConfig incompatible = maximalBuilder.setEncryptedStorageKib(1024).build();
+        assertThat(incompatible.getEncryptedStorageKib()).isEqualTo(1024);
+        assertThat(incompatible.isCompatibleWith(maximal)).isFalse();
     }
 
     @Test
