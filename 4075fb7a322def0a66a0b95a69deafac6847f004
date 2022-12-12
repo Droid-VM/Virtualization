@@ -93,6 +93,30 @@
       },
       "revId": "4075fb7a322def0a66a0b95a69deafac6847f004",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8b272fb_bccc18a4",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-12T16:31:50Z",
+      "side": 1,
+      "message": "It\u0027s intentionally incompatible with minimal anyway - see line 297.\n\nSetting it here \u0026 testing the getters for both minimal \u0026 maximal gives you test coverage for those.\n\nI agree you need a variant of maximal with a different size if you want to test just that - which seems like a good idea.",
+      "parentUuid": "acb2c764_a6a94ece",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 42
+      },
+      "revId": "4075fb7a322def0a66a0b95a69deafac6847f004",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
