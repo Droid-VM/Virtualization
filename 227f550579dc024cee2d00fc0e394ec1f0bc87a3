@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f6f34a9_65ba8bb7",
+        "filename": "pvmfw/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-12T12:46:10Z",
+      "side": 1,
+      "message": "`parse_ranges` returns a `Range\u003cu32\u003e`, because it specifically looks for a range that can be used for 32-bit memory BARs.",
+      "parentUuid": "e56d8560_00926534",
+      "range": {
+        "startLine": 55,
+        "startChar": 30,
+        "endLine": 55,
+        "endChar": 88
+      },
+      "revId": "227f550579dc024cee2d00fc0e394ec1f0bc87a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "065a7175_c8640498",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-09T17:53:20Z",
       "side": 1,
       "message": "If this is an (MMIO) address range, why not `usize`?",
+      "range": {
+        "startLine": 113,
+        "startChar": 52,
+        "endLine": 113,
+        "endChar": 55
+      },
+      "revId": "227f550579dc024cee2d00fc0e394ec1f0bc87a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7a2b6e1_1754f143",
+        "filename": "pvmfw/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-12T12:46:10Z",
+      "side": 1,
+      "message": "Because it is specifically a 32-bit address range, to be used for 32-bit memory BARs, and so the type should indicate that.",
+      "parentUuid": "065a7175_c8640498",
       "range": {
         "startLine": 113,
         "startChar": 52,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6c16c83_d360961a",
+        "filename": "pvmfw/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-12T12:46:10Z",
+      "side": 1,
+      "message": "I\u0027m not sure what that would gain us. The first field is three cells, this gets the first one, which is bits 64..96 of the u128.\n\nThough actually, I guess I could just implement FromAddrCells for a different type, I\u0027ll try that.",
+      "parentUuid": "e1f9a7ae_21180408",
+      "range": {
+        "startLine": 128,
+        "startChar": 35,
+        "endLine": 128,
+        "endChar": 60
+      },
+      "revId": "227f550579dc024cee2d00fc0e394ec1f0bc87a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9dfff094_39b09415",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-12-09T17:53:20Z",
       "side": 1,
       "message": "Don\u0027t we also need to validate this for `Memory32`? What if the PCI DT lies about the range type?\n\nWDYT of\n```\nif !prefetchable\n    \u0026\u0026 matches!(range_type, PciRangeType::Memory32 | PciRangeType::Memory64)\n    \u0026\u0026 size \u003e memory_size.into()\n    \u0026\u0026 u32::try_from(bus_address + size).is_ok()\n\n```\n?",
+      "range": {
+        "startLine": 149,
+        "startChar": 23,
+        "endLine": 149,
+        "endChar": 59
+      },
+      "revId": "227f550579dc024cee2d00fc0e394ec1f0bc87a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be93807b_6b888153",
+        "filename": "pvmfw/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-12T12:46:10Z",
+      "side": 1,
+      "message": "If it does then the `try_from` below will fail, but I guess checking here is fine too.",
+      "parentUuid": "9dfff094_39b09415",
       "range": {
         "startLine": 149,
         "startChar": 23,
