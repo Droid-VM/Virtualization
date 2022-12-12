@@ -492,7 +492,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         vmInfo.mProcess.destroy();
     }
 
-    private boolean isTombstoneGeneratedWithConfig(String configPath) throws Exception {
+    private boolean isTombstoneGeneratedWithConfigAndCommand(String configPath, String... cmd)
+            throws Exception {
         // Note this test relies on logcat values being printed by tombstone_transmit on
         // and the reeceiver on host (virtualization_service)
         mMicrodroidDevice =
@@ -505,14 +506,26 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         mMicrodroidDevice.enableAdbRoot();
 
         CommandRunner microdroid = new CommandRunner(mMicrodroidDevice);
-        microdroid.run("kill", "-SIGSEGV", "$(pidof microdroid_launcher)");
+        microdroid.run(cmd);
 
         // check until microdroid is shut down
         CommandRunner android = new CommandRunner(getDevice());
         // TODO: improve crosvm exit check. b/258848245
-        android.runWithTimeout(15000, "logcat", "-m", "1", "-e",
-                              "'virtualizationservice::crosvm.*exited with status exit status: 0'");
+        android.runWithTimeout(
+                15000,
+                "logcat",
+                "-m",
+                "1",
+                "-e",
+                "'virtualizationservice::crosvm.*exited with status exit status:'");
+
         // Check that tombstone is received (from host logcat)
+        String ramdumpRegex =
+                "Received [0-9]+ bytes from guest & wrote to tombstone file|"
+                        + "Ramdump \"[^ ]+/ramdump\" sent to tombstoned";
+
+        // kernel ramdump can be sent *after* crosvm exited. Wait for a second to make sure...
+        Thread.sleep(1000);
         String result =
                 runOnHost(
                         "adb",
@@ -521,19 +534,42 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         "logcat",
                         "-d",
                         "-e",
-                        "Received [0-9]+ bytes from guest & wrote to tombstone file");
+                        ramdumpRegex);
         return !result.trim().isEmpty();
     }
 
     @Test
-    public void testTombstonesAreGeneratedUponCrash() throws Exception {
-        assertThat(isTombstoneGeneratedWithConfig("assets/vm_config_crash.json")).isTrue();
+    public void testTombstonesAreGeneratedUponUserspaceCrash() throws Exception {
+        assertThat(
+                        isTombstoneGeneratedWithConfigAndCommand(
+                                "assets/vm_config_crash.json",
+                                "kill",
+                                "-SIGSEGV",
+                                "$(pidof microdroid_launcher)"))
+                .isTrue();
     }
 
     @Test
-    public void testTombstonesAreNotGeneratedIfNotExported() throws Exception {
-        assertThat(isTombstoneGeneratedWithConfig("assets/vm_config_crash_no_tombstone.json"))
+    public void testTombstonesAreNotGeneratedIfNotExportedUponUserspaceCrash() throws Exception {
+        assertThat(
+                        isTombstoneGeneratedWithConfigAndCommand(
+                                "assets/vm_config_crash_no_tombstone.json",
+                                "kill",
+                                "-SIGSEGV",
+                                "$(pidof microdroid_launcher)"))
                 .isFalse();
+    }
+
+    @Test
+    public void testTombstonesAreGeneratedUponKernelCrash() throws Exception {
+        assertThat(
+                        isTombstoneGeneratedWithConfigAndCommand(
+                                "assets/vm_config_crash.json",
+                                "echo",
+                                "c",
+                                ">",
+                                "/proc/sysrq-trigger"))
+                .isTrue();
     }
 
     @Test
