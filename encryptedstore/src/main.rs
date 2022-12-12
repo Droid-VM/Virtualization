@@ -31,7 +31,7 @@ use std::os::unix::fs::FileTypeExt;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
-const MK2FS_BIN: &str = "/system/bin/mke2fs";
+const MK2FS_BIN: &str = "/system/bin/mke2fs.microdroid";
 const UNFORMATTED_STORAGE_MAGIC: &str = "UNFORMATTED-STORAGE";
 
 fn main() -> Result<()> {
