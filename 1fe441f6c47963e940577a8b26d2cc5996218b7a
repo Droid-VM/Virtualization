@@ -139,6 +139,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac40bb2f_6fa1283e",
+        "filename": "apex/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-12-12T00:16:43Z",
+      "side": 1,
+      "message": "Since the name of debug_level value is `DEBUG_LEVEL_FULL`, I thought that `full_debuggable` makes sense as well. But I don\u0027t have any strong opinion about this. Let me make a change for that.",
+      "parentUuid": "3dbce0c5_773fdb89",
+      "range": {
+        "startLine": 7,
+        "startChar": 27,
+        "endLine": 7,
+        "endChar": 32
+      },
+      "revId": "1fe441f6c47963e940577a8b26d2cc5996218b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b5c3c5ed_1f052b9a",
         "filename": "compos/src/compilation.rs",
         "patchSetId": 4
