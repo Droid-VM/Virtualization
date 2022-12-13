@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e679c624_4188e9d7",
+        "filename": "libs/avb/src/ops.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T15:36:22Z",
+      "side": 1,
+      "message": "Does the library support `NULL` (how does it treat it)? If so, just remove the parameters from the method altogether, define them `const` in the body and document what `None` implies from `avb_slot_verify`\u0027s behavior.",
+      "parentUuid": "a67999af_78e706ba",
+      "range": {
+        "startLine": 121,
+        "startChar": 20,
+        "endLine": 121,
+        "endChar": 33
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "803cc9cc_8597989f",
         "filename": "pvmfw/src/avb.rs",
         "patchSetId": 4
@@ -138,6 +162,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e8f4a11_dc0783ac",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T15:36:22Z",
+      "side": 1,
+      "message": "These are not (Rust) `enum`, they are `const` values of a type alias of `c_int` (i.e. a C `enum`). What I meant was a proper Rust [`enum`](https://doc.rust-lang.org/rust-by-example/custom_types/enum.html) that the compiler can reason about, like what we have for [`FdtError`](http://cs/android/packages/modules/Virtualization/libs/libfdt/src/lib.rs?l\u003d32) or [`dice::Error`](http://cs/android/packages/modules/Virtualization/libs/dice/src/lib.rs?l\u003d42).",
+      "parentUuid": "50b356df_2c954e85",
+      "range": {
+        "startLine": 21,
+        "startChar": 4,
+        "endLine": 21,
+        "endChar": 38
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da1d78e2_f8df972b",
         "filename": "pvmfw/src/avb.rs",
         "patchSetId": 4
@@ -173,6 +221,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "da1d78e2_f8df972b",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 10
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e461249_aa8aacf2",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T15:36:22Z",
+      "side": 1,
+      "message": "`SAFETY` comments should address the reasons why Rust marks the operation as `unsafe`, not application logic (such as the device state). In this case, have a look at [_Dereferencing a Raw Pointer_](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html#dereferencing-a-raw-pointer): `*mut` allow you to bypass `const`-checking performed by the compiler and are therefore very risky.",
+      "parentUuid": "d45da82f_89beff04",
       "range": {
         "startLine": 32,
         "startChar": 4,
@@ -279,6 +351,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad106262_2db5db9d",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T15:36:22Z",
+      "side": 1,
+      "message": "Why not here? This CL doesn\u0027t add any functionality anyway?",
+      "parentUuid": "8e3de05f_9f6bd3d2",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 32
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b2c8a332_dce67d16",
         "filename": "pvmfw/src/avb.rs",
         "patchSetId": 4
@@ -371,6 +467,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b42f94db_9652f2f3",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T15:36:22Z",
+      "side": 1,
+      "message": "Well that\u0027s how I always interpreted the term but that definition is clearly not obvious to everyone (in particular when coming from microdroid, where it might be confused with the app-like \"payload\") so I thought we had agreed that the term should be avoided for that reason.",
+      "parentUuid": "8c77ee94_cfe61708",
+      "range": {
+        "startLine": 52,
+        "startChar": 21,
+        "endLine": 52,
+        "endChar": 29
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79bafe7c_5b724021",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T15:36:22Z",
+      "side": 1,
+      "message": "Yes, SGTM!",
+      "parentUuid": "c813501b_e5cd9bd4",
+      "range": {
+        "startLine": 52,
+        "startChar": 29,
+        "endLine": 52,
+        "endChar": 36
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e4e7b3d_475d7dc0",
@@ -408,6 +552,30 @@
       "side": 1,
       "message": "Neither Default or AvbOps is defined here. Defining Ops as Default also doesn\u0027t help. How can we do this?",
       "parentUuid": "3e4e7b3d_475d7dc0",
+      "range": {
+        "startLine": 57,
+        "startChar": 29,
+        "endLine": 57,
+        "endChar": 33
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89f994ce_2571e421",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T15:36:22Z",
+      "side": 1,
+      "message": "Urgh, I keep missing that! I guess we _could_ limit the fields we expose to client code through `Ops::new()` parameters but this isn\u0027t a big deal, if we\u0027re going to clean up the interface later.",
+      "parentUuid": "7fc4bb94_a4ec77c6",
       "range": {
         "startLine": 57,
         "startChar": 29,
