@@ -16,6 +16,190 @@
       "message": "Hi Pierre,\n\nI moved the AvbOps implementation part to pvmfw. Could you please take a look?",
       "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a2f3a16_189c4273",
+        "filename": "libs/avb/src/ops.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T13:50:00Z",
+      "side": 1,
+      "message": "`CStr` to ensure that we only pass valid C strings.",
+      "range": {
+        "startLine": 121,
+        "startChar": 20,
+        "endLine": 121,
+        "endChar": 33
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "803cc9cc_8597989f",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T13:50:00Z",
+      "side": 1,
+      "message": "Do you mind at least adding the `enum` wrapper for `AvbIOResult`(`Error`), `AvbHashTreeErrorMode`, and `AvbSlotVerifyFlags` (with `From` to their C types) to `libs/avb` to make use of the type system instead of dealing with `c_int` directly e.g. in the signature of `verify_slot`?",
+      "range": {
+        "startLine": 21,
+        "startChar": 4,
+        "endLine": 21,
+        "endChar": 38
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da1d78e2_f8df972b",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T13:50:00Z",
+      "side": 1,
+      "message": "This requires a `SAFETY` comment",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 10
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "834d6ec2_4f592baf",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T13:50:00Z",
+      "side": 1,
+      "message": "I think this function could just be a stub that `log::warn!` the call as `libavb` shouldn\u0027t call it, IIRC. Note: the \"`_vbmeta_`\" in the name refers to the `vbmeta.img` ABL partition, NOT the VBmeta structure of a given image (at least, that\u0027s what I remember).",
+      "range": {
+        "startLine": 38,
+        "startChar": 14,
+        "endLine": 38,
+        "endChar": 40
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa4f0002_6b979a38",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T13:50:00Z",
+      "side": 1,
+      "message": "In terms of implementation (and this will be particularly relevant when the functions grow), would it make sense to have a minimal `extern \"C\" -\u003e AvbIoResult` function that simply calls a Rust function that, in turn, returns a `Result` or `Option`, to allow the use of `?`?",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 32
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2c8a332_dce67d16",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T13:50:00Z",
+      "side": 1,
+      "message": "I thought we were banning this term :^)",
+      "range": {
+        "startLine": 52,
+        "startChar": 21,
+        "endLine": 52,
+        "endChar": 29
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8920b39e_48f2ba18",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T13:50:00Z",
+      "side": 1,
+      "message": "How do you plan to pass this argument to `get_preloaded_partition` and/or `read_from_partition`?",
+      "range": {
+        "startLine": 52,
+        "startChar": 29,
+        "endLine": 52,
+        "endChar": 36
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e4e7b3d_475d7dc0",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T13:50:00Z",
+      "side": 1,
+      "message": "`impl Default for AvbOps` and use `..default::Default()` here? It would make this declaration more readable.",
+      "range": {
+        "startLine": 57,
+        "startChar": 29,
+        "endLine": 57,
+        "endChar": 33
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
