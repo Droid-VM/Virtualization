@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "478b6f46_1db5f4a9",
+        "filename": "virtualizationservice/src/main.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-12-13T19:07:57Z",
+      "side": 1,
+      "message": "@Jiyong: Hmm, that\u0027s a good suggestion but I can\u0027t get it to work. qwandor@ thinks wrappers are needed here, too.\n\n@Alice: I\u0027m trying to abstract those two functions so they can be resolved differently in the new virtmgr binary.\n\n@both: If you don\u0027t mind, I\u0027ll leave it like this for now. I\u0027m only doing this because I\u0027m compiling `aidl.rs` into two binaries. Eventually I will split the file into two and each one will only use the corresponding implementation of these functions. So this is only transitionary.",
+      "parentUuid": "58539a10_c50f4ed5",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 1
+      },
+      "revId": "c61db588f208eca5481453d78034c2aa59313883",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "406ffbbf_9cff2c9b",
@@ -61,6 +85,30 @@
       "writtenOn": "2022-11-25T04:58:08Z",
       "side": 1,
       "message": "Document",
+      "range": {
+        "startLine": 65,
+        "startChar": 8,
+        "endLine": 65,
+        "endChar": 14
+      },
+      "revId": "c61db588f208eca5481453d78034c2aa59313883",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "947151e6_bdd4f7c7",
+        "filename": "virtualizationservice/src/virtmgr.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-12-13T19:07:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "406ffbbf_9cff2c9b",
       "range": {
         "startLine": 65,
         "startChar": 8,
@@ -94,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ae5cdd4_eb9fb2e5",
+        "filename": "virtualizationservice/src/virtmgr.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-12-13T19:07:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d62a0f9_20ecc649",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 85
+      },
+      "revId": "c61db588f208eca5481453d78034c2aa59313883",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24060f9e_db0a4d44",
@@ -107,6 +179,30 @@
       "writtenOn": "2022-11-25T09:59:48Z",
       "side": 1,
       "message": "Does RPC binder also need this? It\u0027s mainly used for the thread management of the kernel binder before mostly.",
+      "range": {
+        "startLine": 89,
+        "startChar": 4,
+        "endLine": 90,
+        "endChar": 38
+      },
+      "revId": "c61db588f208eca5481453d78034c2aa59313883",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ed3bb9a_23f2c41f",
+        "filename": "virtualizationservice/src/virtmgr.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-12-13T19:07:57Z",
+      "side": 1,
+      "message": "This is for kernel Binder. As I told Alan in an earlier comment, virtmgr will need this for talking to the central VS. I can leave it out for now but it\u0027s actually really hard to debug the problems caused by not having this, so I\u0027d rather just put it in now if that\u0027s okay...",
+      "parentUuid": "24060f9e_db0a4d44",
       "range": {
         "startLine": 89,
         "startChar": 4,
