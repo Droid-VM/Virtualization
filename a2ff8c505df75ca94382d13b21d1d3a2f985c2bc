@@ -136,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bb6ec6b_28817fd0",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-13T14:01:45Z",
+      "side": 1,
+      "message": "As discussed, initializeWritablePartition take i64, so overflow should not be a common case. I will add a test/check in the method `initializeWritablePartition()` in the following patch (:",
+      "parentUuid": "43838468_66a0a6a4",
+      "range": {
+        "startLine": 428,
+        "startChar": 28,
+        "endLine": 428,
+        "endChar": 67
+      },
+      "revId": "a2ff8c505df75ca94382d13b21d1d3a2f985c2bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5cb0f5a0_69056666",
