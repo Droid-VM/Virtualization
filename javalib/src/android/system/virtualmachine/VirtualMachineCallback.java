@@ -156,6 +156,14 @@ public interface VirtualMachineCallback {
     /** Called when the VM has stopped. */
     void onStopped(@NonNull VirtualMachine vm, @StopReason int reason);
 
-    /** Called when kernel panic occurs and as a result ramdump is generated from the VM. */
+    /**
+     * Called when a kernel panic occurs in the VM and as a result the VM produces a ramdump.
+     *
+     * <p>{@code ramdump} will be closed, and the data deleted, when {@code onRamdump} returns. Use
+     * {@link ParcelFileDescriptor#dup()} to obtain a longer-lived file descriptor if needed.
+     *
+     * <p>(Note: only a VM configured to use {@link VirtualMachineConfig#DEBUG_LEVEL_FULL} will ever
+     * produce a ramdump.)
+     */
     void onRamdump(@NonNull VirtualMachine vm, @NonNull ParcelFileDescriptor ramdump);
 }

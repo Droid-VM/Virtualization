@@ -536,7 +536,7 @@ impl VmInstance {
 
     fn send_ramdump_to_tombstoned(ramdump_path: &Path) -> Result<(), Error> {
         let mut input = File::open(ramdump_path)
-            .context(format!("Failed to open raudmp {:?} for reading", ramdump_path))?;
+            .context(format!("Failed to open ramdump {:?} for reading", ramdump_path))?;
 
         let pid = std::process::id() as i32;
         let conn = TombstonedConnection::connect(pid, DebuggerdDumpType::Tombstone)

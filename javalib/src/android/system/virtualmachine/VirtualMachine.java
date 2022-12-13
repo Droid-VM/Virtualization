@@ -749,7 +749,14 @@ public class VirtualMachine implements AutoCloseable {
 
                             @Override
                             public void onRamdump(int cid, ParcelFileDescriptor ramdump) {
-                                executeCallback((cb) -> cb.onRamdump(VirtualMachine.this, ramdump));
+                                executeCallback(
+                                        (cb) -> {
+                                            try (ramdump) {
+                                                cb.onRamdump(VirtualMachine.this, ramdump);
+                                            } catch (IOException e) {
+                                                Log.w("Closing rampdump failed", e);
+                                            }
+                                        });
                             }
                         });
                 mContext.registerComponentCallbacks(mMemoryManagementCallbacks);
