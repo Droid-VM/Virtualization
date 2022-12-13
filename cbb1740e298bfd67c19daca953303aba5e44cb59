@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bed61be0_b54be1ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T13:21:53Z",
+      "side": 1,
+      "message": "Thanks for the review!",
+      "revId": "cbb1740e298bfd67c19daca953303aba5e44cb59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f90c81db_fec146d3",
@@ -31,6 +48,30 @@
       "writtenOn": "2022-12-13T13:05:00Z",
       "side": 1,
       "message": "OOC, `transmute::\u003c_, AvbFooter\u003e(raw_footer)` (or `::\u003c_, _\u003e()`) doesn\u0027t work, right?",
+      "range": {
+        "startLine": 194,
+        "startChar": 30,
+        "endLine": 194,
+        "endChar": 83
+      },
+      "revId": "cbb1740e298bfd67c19daca953303aba5e44cb59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc2b7b62_b7c05d11",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T13:21:53Z",
+      "side": 1,
+      "message": "`transmute::\u003c_, AvbFooter\u003e(raw_footer)` works, `::\u003c_, _\u003e()` doesn\u0027t. We can actually use the first to transmute no matter which type to AvbFooter. I think it\u0027s more readable to specify the source type here.",
+      "parentUuid": "f90c81db_fec146d3",
       "range": {
         "startLine": 194,
         "startChar": 30,
