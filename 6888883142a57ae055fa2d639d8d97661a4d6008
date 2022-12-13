@@ -70,6 +70,54 @@
       },
       "revId": "6888883142a57ae055fa2d639d8d97661a4d6008",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53537ef7_e5378972",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T14:17:06Z",
+      "side": 1,
+      "message": "I can\u0027t be with our current ASM anyway (see",
+      "parentUuid": "d46ce7e5_aafd1797",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 32
+      },
+      "revId": "6888883142a57ae055fa2d639d8d97661a4d6008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56e242b7_6922e6b3",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T14:17:06Z",
+      "side": 1,
+      "message": "\u003e I thought vmbase in theory can be used by a multi-threaded client.\n\nI agree that this should be a long-term goal but we currently have none of the necessary support.\n\nFor example, see how our TLS (if I can call it this way) is setup in assembly: [once and for all](http://cs/android/packages/modules/Virtualization/vmbase/entry.S?l\u003d163).\n\nWe don\u0027t have support for context switching, thread states, or (assuming multi-threading beyond SMP) getting other CPUs out of \"reset stand-by\" and lots of work would need to go into making `vmbase` support that use-case.\n\nOnce that\u0027s done, making `errno` thread-local should be straight forward.",
+      "parentUuid": "d46ce7e5_aafd1797",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 32
+      },
+      "revId": "6888883142a57ae055fa2d639d8d97661a4d6008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
