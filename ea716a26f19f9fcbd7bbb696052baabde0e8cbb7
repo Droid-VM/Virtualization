@@ -39,6 +39,30 @@
       },
       "revId": "ea716a26f19f9fcbd7bbb696052baabde0e8cbb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bdd829c_5ae2e2d0",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T10:16:57Z",
+      "side": 1,
+      "message": "\u003e Introduce an enum with 3 states? Or rename the function so it\u0027s obvious (that\u0027s probably a lot harder).\n\nI took the easy option; Done!\n\n\u003e Or just return config::Config::new(data) and let the caller handle the 3 cases directly? Assuming that doesn\u0027t trigger the borrow checker problem.\n\nI\u0027d love to but it won\u0027t compile due to a borrow checker bug (IMO); see comment in `is_valid_config` (now named `guess_config_type`).",
+      "parentUuid": "d18b8c38_dc115815",
+      "range": {
+        "startLine": 358,
+        "startChar": 50,
+        "endLine": 358,
+        "endChar": 62
+      },
+      "revId": "ea716a26f19f9fcbd7bbb696052baabde0e8cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
