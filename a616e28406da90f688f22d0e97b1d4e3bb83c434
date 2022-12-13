@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50b356df_2c954e85",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T15:01:04Z",
+      "side": 1,
+      "message": "Mm, I checked again. For AvbHashTreeErrorMode and AvbSlotVerifyFlags, these fields are already enum of AvbSlotVerifyFlags in bindgen[1]. How would you like to wrap it?\n\n[1] https://cs.android.com/android/platform/superproject/+/master:out/soong/.intermediates/packages/modules/Virtualization/libs/avb/libavb_bindgen/android_x86_64_silvermont_source/bindings.rs;l\u003d1641",
+      "parentUuid": "08074e86_bfea8919",
+      "range": {
+        "startLine": 21,
+        "startChar": 4,
+        "endLine": 21,
+        "endChar": 38
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da1d78e2_f8df972b",
         "filename": "pvmfw/src/avb.rs",
         "patchSetId": 4
