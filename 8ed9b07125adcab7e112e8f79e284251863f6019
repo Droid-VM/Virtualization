@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f06cc9f8_8ddaa03e",
+        "filename": "pvmfw/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-13T13:40:24Z",
+      "side": 1,
+      "message": "What else do we need an MMIO allocator for? Does it have the same constraints as these PCI BARs (i.e. 32-bit addresses, sizes always a power of two, alignment must match size)? I\u0027d rather not generalise this until we need to, and until we know what else we actually want to use it for.",
+      "parentUuid": "ef32df22_57ef042e",
+      "range": {
+        "startLine": 238,
+        "startChar": 11,
+        "endLine": 238,
+        "endChar": 31
+      },
+      "revId": "8ed9b07125adcab7e112e8f79e284251863f6019",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6dc684e6_87922531",
         "filename": "pvmfw/src/pci.rs",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-13T10:42:11Z",
       "side": 1,
       "message": "Why not use a buddy allocator, here? This isn\u0027t CL blocking (feel free to resolve), just OOC.",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 9
+      },
+      "revId": "8ed9b07125adcab7e112e8f79e284251863f6019",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccd64f97_8e9f93b1",
+        "filename": "pvmfw/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-13T13:40:24Z",
+      "side": 1,
+      "message": "`buddy_system_allocator::Heap` uses an intrusive linked list, so only works with writable memory. `buddy_system_allocator::FrameAllocator` doesn\u0027t allow alignment to be specified, which PCI BARs require. I\u0027ll have a look at sending a PR to fix the latter.",
+      "parentUuid": "6dc684e6_87922531",
       "range": {
         "startLine": 255,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "033447d1_27605cd7",
+        "filename": "pvmfw/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-13T13:40:24Z",
+      "side": 1,
+      "message": "That makes it a bit harder to see where the error came from, but done.",
+      "parentUuid": "7c577108_3d29d7fe",
+      "range": {
+        "startLine": 275,
+        "startChar": 12,
+        "endLine": 275,
+        "endChar": 34
+      },
+      "revId": "8ed9b07125adcab7e112e8f79e284251863f6019",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f65d67f3_ebf46970",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-12-13T10:42:11Z",
       "side": 1,
       "message": "Should we make the one in `helpers` generic?",
+      "range": {
+        "startLine": 317,
+        "startChar": 9,
+        "endLine": 317,
+        "endChar": 17
+      },
+      "revId": "8ed9b07125adcab7e112e8f79e284251863f6019",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3835f4a_f3e32f72",
+        "filename": "pvmfw/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-13T13:40:24Z",
+      "side": 1,
+      "message": "We can\u0027t do that without `const_trait_impl` unfortunately, which is not yet stable.",
+      "parentUuid": "f65d67f3_ebf46970",
       "range": {
         "startLine": 317,
         "startChar": 9,
