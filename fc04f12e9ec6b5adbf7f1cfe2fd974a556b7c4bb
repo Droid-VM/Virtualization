@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4516ebe_80fe03f5",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T10:09:15Z",
+      "side": 1,
+      "message": "Ah! Nice catch, thanks.",
+      "parentUuid": "bc0d90cd_2f4c4210",
+      "range": {
+        "startLine": 60,
+        "startChar": 81,
+        "endLine": 60,
+        "endChar": 84
+      },
+      "revId": "fc04f12e9ec6b5adbf7f1cfe2fd974a556b7c4bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe6b7861_8b73db23",
@@ -61,6 +85,30 @@
       "writtenOn": "2022-12-12T15:38:52Z",
       "side": 1,
       "message": "Why is this total_size when we check body_size above?",
+      "range": {
+        "startLine": 135,
+        "startChar": 79,
+        "endLine": 135,
+        "endChar": 89
+      },
+      "revId": "fc04f12e9ec6b5adbf7f1cfe2fd974a556b7c4bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb6d62d2_fbb0d08f",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T10:09:15Z",
+      "side": 1,
+      "message": "It comes from the difference between indexing the whole config data (clearer error message) and indexing the body (simpler implementation): `end \u003c\u003d body_size` expressed using `offset` and `size` is\n```\n(offset - PADDED_SIZE) + size \u003c\u003d body_size\n```\ni.e.\n```\noffset + size \u003c\u003d total_size\n```\nwhere `total_size` is `body_size + PADDED_SIZE`.",
+      "parentUuid": "fe6b7861_8b73db23",
       "range": {
         "startLine": 135,
         "startChar": 79,
