@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9dfed9f_a1670d5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T13:05:00Z",
+      "side": 1,
+      "message": "You might want to already rebase this on aosp/2345768 to get a smooth merge.",
+      "revId": "cbb1740e298bfd67c19daca953303aba5e44cb59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f90c81db_fec146d3",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T13:05:00Z",
+      "side": 1,
+      "message": "OOC, `transmute::\u003c_, AvbFooter\u003e(raw_footer)` (or `::\u003c_, _\u003e()`) doesn\u0027t work, right?",
+      "range": {
+        "startLine": 194,
+        "startChar": 30,
+        "endLine": 194,
+        "endChar": 83
+      },
+      "revId": "cbb1740e298bfd67c19daca953303aba5e44cb59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
