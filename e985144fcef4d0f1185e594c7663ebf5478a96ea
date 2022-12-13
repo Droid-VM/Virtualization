@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c4e7a98_956f0a5d",
+        "filename": "libs/avb/src/avb_ops.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T13:09:55Z",
+      "side": 1,
+      "message": "I moved this part to pvmfw::avb. Actually I think it\u0027s more clear like this.",
+      "parentUuid": "0ea2e60e_ffeed002",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 60
+      },
+      "revId": "e985144fcef4d0f1185e594c7663ebf5478a96ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3551069_ae536a60",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-12T19:38:55Z",
       "side": 1,
       "message": "I think that it would be cleaner to have code in `libs/avb` that simply wraps the library, without making any assumptions about the inputs then have the actual implementation in the client code (just like the C library does with its C clients), which in this case would be `pvmfw`.\n\nSee b/256148034#comment7 for some suggestions on how to make this slightly more \"Rust-y\" (although I\u0027d be fine with an initial implementation where client code deals with raw C function pointers).",
+      "range": {
+        "startLine": 197,
+        "startChar": 8,
+        "endLine": 197,
+        "endChar": 89
+      },
+      "revId": "e985144fcef4d0f1185e594c7663ebf5478a96ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef564013_6d1e2774",
+        "filename": "libs/avb/src/avb_ops.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T13:09:55Z",
+      "side": 1,
+      "message": "As discussed offline, I moved the AvbOps implementation to pvmfw.",
+      "parentUuid": "a3551069_ae536a60",
       "range": {
         "startLine": 197,
         "startChar": 8,
