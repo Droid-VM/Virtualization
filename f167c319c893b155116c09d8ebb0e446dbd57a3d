@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d24b4267_59a8362e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-13T15:38:02Z",
+      "side": 1,
+      "message": "TBH I\u0027m not at all convinced we should expose onRamdump() at all.\nWe already send the ramdump to tombstoned; what else can an app usefully do?\n(Our demo app just logs a message.)",
+      "revId": "f167c319c893b155116c09d8ebb0e446dbd57a3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
