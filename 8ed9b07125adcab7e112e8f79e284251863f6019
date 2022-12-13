@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef32df22_57ef042e",
+        "filename": "pvmfw/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T10:42:11Z",
+      "side": 1,
+      "message": "Does it make sense to turn this into a generic \"MMIO allocator\" and move it to `memory.rs` so that we can refactor it later on into one do-it-all memory manager?",
+      "range": {
+        "startLine": 238,
+        "startChar": 11,
+        "endLine": 238,
+        "endChar": 31
+      },
+      "revId": "8ed9b07125adcab7e112e8f79e284251863f6019",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dc684e6_87922531",
+        "filename": "pvmfw/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T10:42:11Z",
+      "side": 1,
+      "message": "Why not use a buddy allocator, here? This isn\u0027t CL blocking (feel free to resolve), just OOC.",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 9
+      },
+      "revId": "8ed9b07125adcab7e112e8f79e284251863f6019",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c577108_3d29d7fe",
+        "filename": "pvmfw/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T10:42:11Z",
+      "side": 1,
+      "message": "Would it make sense to have a `pci::Error` type with a `Display`, and return that from functions in this module, then `map_err(|e| error!(e); RebootReason::PciError)` in the caller?",
+      "range": {
+        "startLine": 275,
+        "startChar": 12,
+        "endLine": 275,
+        "endChar": 34
+      },
+      "revId": "8ed9b07125adcab7e112e8f79e284251863f6019",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f65d67f3_ebf46970",
+        "filename": "pvmfw/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-13T10:42:11Z",
+      "side": 1,
+      "message": "Should we make the one in `helpers` generic?",
+      "range": {
+        "startLine": 317,
+        "startChar": 9,
+        "endLine": 317,
+        "endChar": 17
+      },
+      "revId": "8ed9b07125adcab7e112e8f79e284251863f6019",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
