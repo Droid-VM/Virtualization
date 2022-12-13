@@ -16,6 +16,24 @@
       "message": "I don\u0027t see the point of this change but please turn this pvmfw patch into its own commit.",
       "revId": "dcf06c5dd4cb7809515e2817c2f020357392624b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d22a389_6d6ee084",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T08:49:48Z",
+      "side": 0,
+      "message": "I removed this module because I renamed the crate as avb, it got a name conflict this one. As I don\u0027t see much content in this module, I think we can remove it for now and add it later when needed.",
+      "parentUuid": "7f32ee2b_97736aea",
+      "revId": "dcf06c5dd4cb7809515e2817c2f020357392624b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

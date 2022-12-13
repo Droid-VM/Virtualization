@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d2b91c3_58beffcd",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T08:49:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7bcfa89_f93ef202",
+      "range": {
+        "startLine": 139,
+        "startChar": 4,
+        "endLine": 139,
+        "endChar": 23
+      },
+      "revId": "c72f7e4b1e38c80c80ecad2d2ef7296183c0fba0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05948e2d_2541e0cf",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-12T15:25:38Z",
       "side": 1,
       "message": "Same as above: `#[cfg(feature \u003d \"std\")]`, for now?",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 19
+      },
+      "revId": "c72f7e4b1e38c80c80ecad2d2ef7296183c0fba0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e01baff_e90296c8",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T08:49:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05948e2d_2541e0cf",
       "range": {
         "startLine": 195,
         "startChar": 0,
@@ -93,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b08b443_a3b97f52",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T08:49:48Z",
+      "side": 1,
+      "message": "Let\u0027s leave the code removal to a separate cl and keep this cl as a code move.",
+      "parentUuid": "798f9b8b_6f970949",
+      "range": {
+        "startLine": 249,
+        "startChar": 8,
+        "endLine": 251,
+        "endChar": 9
+      },
+      "revId": "c72f7e4b1e38c80c80ecad2d2ef7296183c0fba0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1ffdce1_20587b78",
@@ -106,6 +178,30 @@
       "writtenOn": "2022-12-12T15:25:38Z",
       "side": 1,
       "message": "`Deref` [should only be implemented for smart pointers](https://doc.rust-lang.org/std/ops/trait.Deref.html) but you can implement `AsRef\u003cAvbFooter\u003e`, instead.",
+      "range": {
+        "startLine": 261,
+        "startChar": 5,
+        "endLine": 261,
+        "endChar": 10
+      },
+      "revId": "c72f7e4b1e38c80c80ecad2d2ef7296183c0fba0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2665f50_2c336469",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T08:49:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1ffdce1_20587b78",
       "range": {
         "startLine": 261,
         "startChar": 5,

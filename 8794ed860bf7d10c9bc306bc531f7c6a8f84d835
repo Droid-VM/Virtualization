@@ -98,6 +98,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9dec5fab_432ade26",
+        "filename": "libs/avb/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T08:49:48Z",
+      "side": 1,
+      "message": "I renamed this module as avb.",
+      "parentUuid": "e7319f3a_ccb66f42",
+      "range": {
+        "startLine": 57,
+        "startChar": 17,
+        "endLine": 57,
+        "endChar": 23
+      },
+      "revId": "8794ed860bf7d10c9bc306bc531f7c6a8f84d835",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "48b11ea2_1e807780",
         "filename": "libs/avb/src/lib.rs",
         "patchSetId": 3
@@ -355,6 +379,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1699e4e9_f2069de1",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T08:49:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12a2e5be_033851e9",
+      "range": {
+        "startLine": 162,
+        "startChar": 52,
+        "endLine": 162,
+        "endChar": 58
+      },
+      "revId": "8794ed860bf7d10c9bc306bc531f7c6a8f84d835",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fff0c4ea_93e125c3",
@@ -464,6 +512,30 @@
       "side": 1,
       "message": "\u003e I added `Footer` and `try_from(bytes)` for now.\n\nGreat!\n\nBTW, (`Try`)`From` typically converts \"by value\" so this should take the array directly instead of `TryFrom\u003c\u0026[...` (as I suggested above).\n\nThe point is was making in [another comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2337745/comment/09e64a75_32a5889e/) was that the convoluted `unsafe{MaybeUninit+copy_nonoverlapping}` you currently have in `try_from` could then be replaced by a trivial and safe cloning in the caller:\n\n```\nOk(Footer::TryFrom(raw_footer.clone()).ok())\n```\n\n\u003e maybe we need to add another VbImageVerificationError here\n\nYes, returning `VbMetaImageVerificationError::InvalidFooter` makes sense, even if we ignore it (`.ok()`) for now. But I agree that plumbing it through can be kept as a TODO.",
       "parentUuid": "6b6984bf_80e34d0e",
+      "range": {
+        "startLine": 239,
+        "startChar": 7,
+        "endLine": 239,
+        "endChar": 26
+      },
+      "revId": "8794ed860bf7d10c9bc306bc531f7c6a8f84d835",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd816888_06d67c2a",
+        "filename": "libs/avb/src/vbmeta.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T08:49:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d564c616_6b12bad0",
       "range": {
         "startLine": 239,
         "startChar": 7,
