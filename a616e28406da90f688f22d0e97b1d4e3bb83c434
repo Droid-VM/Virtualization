@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a67999af_78e706ba",
+        "filename": "libs/avb/src/ops.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T14:56:04Z",
+      "side": 1,
+      "message": "I\u0027m not so sure this two fields are really needed for pvmfw. It\u0027s convenient to pass a null for now. Let\u0027s handle it later when we\u0027ll use it. wdyt?",
+      "parentUuid": "2a2f3a16_189c4273",
+      "range": {
+        "startLine": 121,
+        "startChar": 20,
+        "endLine": 121,
+        "endChar": 33
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "803cc9cc_8597989f",
         "filename": "pvmfw/src/avb.rs",
         "patchSetId": 4
@@ -54,6 +78,30 @@
       "writtenOn": "2022-12-13T13:50:00Z",
       "side": 1,
       "message": "Do you mind at least adding the `enum` wrapper for `AvbIOResult`(`Error`), `AvbHashTreeErrorMode`, and `AvbSlotVerifyFlags` (with `From` to their C types) to `libs/avb` to make use of the type system instead of dealing with `c_int` directly e.g. in the signature of `verify_slot`?",
+      "range": {
+        "startLine": 21,
+        "startChar": 4,
+        "endLine": 21,
+        "endChar": 38
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08074e86_bfea8919",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T14:56:04Z",
+      "side": 1,
+      "message": "Yeah, I can add enums in a separate cl.",
+      "parentUuid": "803cc9cc_8597989f",
       "range": {
         "startLine": 21,
         "startChar": 4,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d45da82f_89beff04",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T14:56:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da1d78e2_f8df972b",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 10
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "834d6ec2_4f592baf",
@@ -110,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d136fef4_3a4dbcb5",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T14:56:04Z",
+      "side": 1,
+      "message": "I see. I\u0027ll just remove it for now then.",
+      "parentUuid": "834d6ec2_4f592baf",
+      "range": {
+        "startLine": 38,
+        "startChar": 14,
+        "endLine": 38,
+        "endChar": 40
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa4f0002_6b979a38",
@@ -123,6 +219,30 @@
       "writtenOn": "2022-12-13T13:50:00Z",
       "side": 1,
       "message": "In terms of implementation (and this will be particularly relevant when the functions grow), would it make sense to have a minimal `extern \"C\" -\u003e AvbIoResult` function that simply calls a Rust function that, in turn, returns a `Result` or `Option`, to allow the use of `?`?",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 32
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e3de05f_9f6bd3d2",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T14:56:04Z",
+      "side": 1,
+      "message": "Sure. I can address that as follow-up later.",
+      "parentUuid": "fa4f0002_6b979a38",
       "range": {
         "startLine": 46,
         "startChar": 4,
@@ -181,6 +301,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c813501b_e5cd9bd4",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T14:56:04Z",
+      "side": 1,
+      "message": "I\u0027m considering saving the (start, size) in user data and read it from there. wdyt?",
+      "parentUuid": "8920b39e_48f2ba18",
+      "range": {
+        "startLine": 52,
+        "startChar": 29,
+        "endLine": 52,
+        "endChar": 36
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c77ee94_cfe61708",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T14:56:04Z",
+      "side": 1,
+      "message": "I think we said now payload \u003d kernel + ramdisk, which is exactly the case here...",
+      "parentUuid": "b2c8a332_dce67d16",
+      "range": {
+        "startLine": 52,
+        "startChar": 21,
+        "endLine": 52,
+        "endChar": 29
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e4e7b3d_475d7dc0",
         "filename": "pvmfw/src/avb.rs",
         "patchSetId": 4
@@ -192,6 +360,30 @@
       "writtenOn": "2022-12-13T13:50:00Z",
       "side": 1,
       "message": "`impl Default for AvbOps` and use `..default::Default()` here? It would make this declaration more readable.",
+      "range": {
+        "startLine": 57,
+        "startChar": 29,
+        "endLine": 57,
+        "endChar": 33
+      },
+      "revId": "a616e28406da90f688f22d0e97b1d4e3bb83c434",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fc4bb94_a4ec77c6",
+        "filename": "pvmfw/src/avb.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-13T14:56:04Z",
+      "side": 1,
+      "message": "Neither Default or AvbOps is defined here. Defining Ops as Default also doesn\u0027t help. How can we do this?",
+      "parentUuid": "3e4e7b3d_475d7dc0",
       "range": {
         "startLine": 57,
         "startChar": 29,
