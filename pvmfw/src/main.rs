@@ -33,8 +33,9 @@ mod pci;
 mod smccc;
 
 use crate::{entry::RebootReason, memory::MemoryTracker, pci::PciInfo};
+use avb::verify_image;
+#[path = "avb.rs"]
 use avb::PUBLIC_KEY;
-use avb_nostd::verify_image;
 use dice::bcc;
 use libfdt::Fdt;
 use log::{debug, error, info, trace};
