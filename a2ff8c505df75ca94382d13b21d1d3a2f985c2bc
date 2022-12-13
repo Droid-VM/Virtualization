@@ -74,6 +74,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9261e5d4_e5c3e6c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-13T13:37:04Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "8fd76e5a_444434a0",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "a2ff8c505df75ca94382d13b21d1d3a2f985c2bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "acbff038_00e0429a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 10
@@ -85,6 +109,29 @@
       "writtenOn": "2022-12-09T16:16:46Z",
       "side": 1,
       "message": "Nikita - WDYT?",
+      "revId": "a2ff8c505df75ca94382d13b21d1d3a2f985c2bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43838468_66a0a6a4",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-13T13:37:04Z",
+      "side": 1,
+      "message": "Should we check for the potential integer overflow here?",
+      "range": {
+        "startLine": 428,
+        "startChar": 28,
+        "endLine": 428,
+        "endChar": 67
+      },
       "revId": "a2ff8c505df75ca94382d13b21d1d3a2f985c2bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
