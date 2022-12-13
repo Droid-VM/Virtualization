@@ -46,6 +46,30 @@
       },
       "revId": "6888883142a57ae055fa2d639d8d97661a4d6008",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d46ce7e5_aafd1797",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-12-13T01:32:51Z",
+      "side": 1,
+      "message": "I thought vmbase in theory can be used by a multi-threaded client. If you can somehow prohibit multi-threaded clients, it would be great. Anyway, this isn\u0027t an immediate problem, thus let me +2.",
+      "parentUuid": "f2a4552a_8b0abc55",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 32
+      },
+      "revId": "6888883142a57ae055fa2d639d8d97661a4d6008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
