@@ -130,7 +130,7 @@ public final class VirtualMachineConfig {
      */
     @Nullable private final String mPayloadBinaryPath;
 
-    /** The size of storage in KB. 0 indicates that encryptedStorage is not required */
+    /** The size of storage in KiB. 0 indicates that encryptedStorage is not required */
     private final long mEncryptedStorageKib;
 
     private VirtualMachineConfig(
@@ -378,7 +378,7 @@ public final class VirtualMachineConfig {
     }
 
     /**
-     * Returns the size of encrypted storage (in KB) available in the VM, or 0 if encrypted storage
+     * Returns the size of encrypted storage (in KiB) available in the VM, or 0 if encrypted storage
      * is not enabled
      *
      * @hide
@@ -597,7 +597,7 @@ public final class VirtualMachineConfig {
         }
 
         /**
-         * Sets the size (in KB) of encrypted storage available to the VM.
+         * Sets the size (in KiB) of encrypted storage available to the VM.
          *
          * <p>The storage is encrypted with a key deterministically derived from the VM identity
          *
