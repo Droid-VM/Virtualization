@@ -118,6 +118,30 @@
       },
       "revId": "6888883142a57ae055fa2d639d8d97661a4d6008",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e7a7007_a7ac3782",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-12-14T08:25:59Z",
+      "side": 1,
+      "message": "That sounds like __errno() should be defined by the client of vmbase (which could be multi-thread or not), not by vmbase itself.",
+      "parentUuid": "56e242b7_6922e6b3",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 32
+      },
+      "revId": "6888883142a57ae055fa2d639d8d97661a4d6008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
