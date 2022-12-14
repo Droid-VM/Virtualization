@@ -29,7 +29,7 @@ use shared_child::SharedChild;
 use std::borrow::Cow;
 use std::cmp::max;
 use std::fmt;
-use std::fs::{read_to_string, remove_dir_all, File};
+use std::fs::{read_to_string, File};
 use std::io::{self, Read};
 use std::mem;
 use std::num::NonZeroU32;
@@ -378,11 +378,6 @@ impl VmInstance {
             exit_signal,
             &*vm_metric,
         );
-
-        // Delete temporary files.
-        if let Err(e) = remove_dir_all(&self.temporary_directory) {
-            error!("Error removing temporary directory {:?}: {}", self.temporary_directory, e);
-        }
     }
 
     /// Waits until payload is started, or timeout expires. When timeout occurs, kill
