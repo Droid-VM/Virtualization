@@ -16,6 +16,52 @@
       "message": "PTAL",
       "revId": "6be517c56229cfe57f3fd57b0e731fb0bef257b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d88993a4_b02cb320",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-14T13:06:01Z",
+      "side": 1,
+      "message": "This is interesting! I\u0027m presuming the system api layer doesn\u0027t have information about the default value. Why not throw UNKNOWN error",
+      "range": {
+        "startLine": 306,
+        "startChar": 80,
+        "endLine": 307,
+        "endChar": 19
+      },
+      "revId": "6be517c56229cfe57f3fd57b0e731fb0bef257b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7ee1530_41a281cb",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-12-14T13:06:01Z",
+      "side": 1,
+      "message": "Maybe explicitly set this to 0L (even though that is the default?)",
+      "range": {
+        "startLine": 419,
+        "startChar": 40,
+        "endLine": 419,
+        "endChar": 42
+      },
+      "revId": "6be517c56229cfe57f3fd57b0e731fb0bef257b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
