@@ -16,6 +16,24 @@
       "message": "David - WDYT?",
       "revId": "09bb82c841302319059ebea1607e9b46f58e87e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c74e3c43_e0ffab21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-12-14T12:40:21Z",
+      "side": 1,
+      "message": "You\u0027re right that it is just an implementation detail at the moment. And referring to the VM via a handle is better than a recyclable CID... LGTM",
+      "parentUuid": "32195b42_b6d0ee2b",
+      "revId": "09bb82c841302319059ebea1607e9b46f58e87e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
