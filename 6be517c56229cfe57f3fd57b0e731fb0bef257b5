@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce2dfd57_0287170d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-14T13:49:04Z",
+      "side": 1,
+      "message": "Yes, that\u0027s right.\nThrowing wouldn\u0027t really help clients? We don\u0027t let you set 0 explicitly, because it\u0027s pointless, but it\u0027s reasonable to enquire about a VM\u0027s config.",
+      "parentUuid": "d88993a4_b02cb320",
+      "range": {
+        "startLine": 306,
+        "startChar": 80,
+        "endLine": 307,
+        "endChar": 19
+      },
+      "revId": "6be517c56229cfe57f3fd57b0e731fb0bef257b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7ee1530_41a281cb",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-12-14T13:06:01Z",
       "side": 1,
       "message": "Maybe explicitly set this to 0L (even though that is the default?)",
+      "range": {
+        "startLine": 419,
+        "startChar": 40,
+        "endLine": 419,
+        "endChar": 42
+      },
+      "revId": "6be517c56229cfe57f3fd57b0e731fb0bef257b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef9dfca8_c7e001b5",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-14T13:49:04Z",
+      "side": 1,
+      "message": "We rely on the default for all the others though.\nI\u0027m slightly torn between being explicit and avoiding verbosity (Java is bad enough already).\nBut it seems fairly standard practice in Android, so I\u0027m assuming readers will understand.",
+      "parentUuid": "c7ee1530_41a281cb",
       "range": {
         "startLine": 419,
         "startChar": 40,
