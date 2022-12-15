@@ -3,6 +3,69 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "095dae28_e13cbd3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-15T10:17:45Z",
+      "side": 1,
+      "message": "Adding Andrew who may have opinions.\n\nA possible alternative to this would be to import the caps create (https://crates.io/crates/caps, https://docs.rs/caps/latest/caps/)",
+      "revId": "32872ec2cb6d2785bbe9d68733c0e51d52f96aa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2100c8f1_f573d888",
+        "filename": "libs/capabilities/src/caps.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-15T10:17:45Z",
+      "side": 1,
+      "message": "Could you use the originals via bindgen instead?\n\n(In an ideal world these would already be in liblibc, but I don\u0027t think they are.)",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 1
+      },
+      "revId": "32872ec2cb6d2785bbe9d68733c0e51d52f96aa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19282e59_2b465b83",
+        "filename": "libs/capabilities/src/caps.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-15T10:17:45Z",
+      "side": 1,
+      "message": "Needs a safety comment.",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 50,
+        "endChar": 10
+      },
+      "revId": "32872ec2cb6d2785bbe9d68733c0e51d52f96aa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e2577d2_96e1359d",
         "filename": "libs/capabilities/src/caps.rs",
         "patchSetId": 1
