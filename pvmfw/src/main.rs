@@ -19,6 +19,8 @@
 #![feature(default_alloc_error_handler)]
 #![feature(ptr_const_cast)] // Stabilized in 1.65.0
 
+extern crate alloc;
+
 mod avb;
 mod config;
 mod entry;
@@ -33,12 +35,11 @@ mod pci;
 mod smccc;
 
 use crate::{
-    avb::PUBLIC_KEY,
+    avb::verify_payload,
     entry::RebootReason,
     memory::MemoryTracker,
     pci::{allocate_all_virtio_bars, PciError, PciInfo, PciMemory32Allocator},
 };
-use ::avb::verify_image;
 use dice::bcc;
 use libfdt::Fdt;
 use log::{debug, error, info, trace};
@@ -71,10 +72,7 @@ fn main(
     let mut pci_root = unsafe { pci_info.make_pci_root() };
     allocate_all_virtio_bars(&mut pci_root, &mut bar_allocator).map_err(handle_pci_error)?;
 
-    verify_image(signed_kernel, PUBLIC_KEY).map_err(|e| {
-        error!("Failed to verify the payload: {e}");
-        RebootReason::PayloadVerificationError
-    })?;
+    verify_payload()?;
     info!("Starting payload...");
     Ok(())
 }
