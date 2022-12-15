@@ -46,6 +46,30 @@
       },
       "revId": "7eae669bfc4630512ebcf0d776fa2d0bac8459b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "627cc46b_fb7d252e",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-15T18:01:27Z",
+      "side": 0,
+      "message": "The way we deal with these situations is typically by mapping the error to one of the existing values. For example, the CString errors would be mapped to `ERROR_OOM` or `IO` (just like the library would do internally).\n\nAnd this raises a good point: the `map_err` here shouldn\u0027t blindly return `PayloadVerificationError`. Instead, we should `match` the result and only return `VerificationError` when that was the case, other results (such as `ERROR_IO` or `OOM`) should result in `InternalError`. Furthermore, I\u0027d say that `AVB_SLOT_VERIFY_RESULT_ERROR_PUBLIC_KEY_REJECTED` deserves its own `RebootReason`.",
+      "parentUuid": "f6ec4061_29fa35d0",
+      "range": {
+        "startLine": 74,
+        "startChar": 44,
+        "endLine": 77,
+        "endChar": 8
+      },
+      "revId": "7eae669bfc4630512ebcf0d776fa2d0bac8459b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
