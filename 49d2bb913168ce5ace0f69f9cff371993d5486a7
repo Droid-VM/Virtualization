@@ -301,6 +301,30 @@
       },
       "revId": "49d2bb913168ce5ace0f69f9cff371993d5486a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0332f567_fe2cd6a7",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-15T15:54:03Z",
+      "side": 1,
+      "message": "I\u0027m not simply sed-ing, I still checked the refactoring doesn\u0027t break the code :/\n\n\u003e My point is that I don\u0027t want to be calling a function naed verify_vbmeta_image and receive Ok(()) for a payload that wasn\u0027t signed (IIRC the flag), as that would completely defeat the purpose of image validation.\n\nYes, that\u0027s exactly what I said.",
+      "parentUuid": "7d6bfda4_8d867291",
+      "range": {
+        "startLine": 162,
+        "startChar": 10,
+        "endLine": 162,
+        "endChar": 81
+      },
+      "revId": "49d2bb913168ce5ace0f69f9cff371993d5486a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
