@@ -126,6 +126,13 @@ public abstract class MicrodroidDeviceTestBase {
         }
     }
 
+    // This  enum is used to convey the encrypted store related TestService method to call.
+    protected enum EncryptedStoreOperation {
+        NONE,
+        READ,
+        WRITE,
+    }
+
     public abstract static class VmEventListener implements VirtualMachineCallback {
         private ExecutorService mExecutorService = Executors.newSingleThreadExecutor();
         private OptionalLong mVcpuStartedNanoTime = OptionalLong.empty();

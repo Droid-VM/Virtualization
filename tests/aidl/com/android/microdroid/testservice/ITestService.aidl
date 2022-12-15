@@ -46,4 +46,10 @@ interface ITestService {
      * each line reverse.
      */
     void runEchoReverseServer();
+
+    /* write the content into the specified file. */
+    void writeStringToFile(String content, String path);
+
+    /* get the contents of the specified file. */
+    String getFileContent(String path);
 }
