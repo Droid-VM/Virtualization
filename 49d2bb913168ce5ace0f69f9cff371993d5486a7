@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1657011a_db361a5f",
+        "filename": "libs/avb/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-15T11:44:33Z",
+      "side": 1,
+      "message": "Didn\u0027t know about this flag, it\u0027s very convenient!\n\nIt\u0027s a shame that this results in an enum that goes against the Rust naming guidelines i.e. `AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_PUBLIC_KEY_REJECTED` or `vbSlotVerifyFlags::AVB_SLOT_VERIFY_FLAGS_NO_VBMETA_PARTITION` instead of `AvbSlotVerifyResult::PublicKeyRejected` and `vbSlotVerifyFlags::NoVbmetaPartition` but the fact that it\u0027s all generated on the fly and that those enums aren\u0027t intended to be widely used makes this not a huge deal.",
+      "range": {
+        "startLine": 15,
+        "startChar": 9,
+        "endLine": 15,
+        "endChar": 34
+      },
+      "revId": "49d2bb913168ce5ace0f69f9cff371993d5486a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d188901_82786b86",
+        "filename": "libs/avb/src/ops.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-15T11:44:33Z",
+      "side": 1,
+      "message": "I believe these AVB flags are intended to be OR-ed and I don\u0027t think that\u0027s possible with that `enum` so this API doesn\u0027t follow the C API.\n\nBut, as we discussed, given that you want to specialize `libs/avb` to our pvmfw use-case, why not simply hard-code your `flags` and `hashtree_error_mode` as `const` inside `.verify_slot`?",
+      "range": {
+        "startLine": 121,
+        "startChar": 15,
+        "endLine": 121,
+        "endChar": 33
+      },
+      "revId": "49d2bb913168ce5ace0f69f9cff371993d5486a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a01672f_2174f68a",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-15T11:44:33Z",
+      "side": 1,
+      "message": "I know that you are simply `sed`-ing this but could you please double check the validity of this conversion and the security implications of that result?",
+      "range": {
+        "startLine": 162,
+        "startChar": 10,
+        "endLine": 162,
+        "endChar": 81
+      },
+      "revId": "49d2bb913168ce5ace0f69f9cff371993d5486a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
