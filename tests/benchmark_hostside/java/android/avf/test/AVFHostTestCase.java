@@ -205,6 +205,15 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
 
     private AmStartupTimeCmdParser getColdRunStartupTimes(CommandRunner android, String pkgName)
             throws DeviceNotAvailableException, InterruptedException {
+        String cmd =
+                "for p in /sys/devices/system/cpu/cpufreq/policy*; do echo 'echo '$(cat"
+                        + " $p/scaling_governor)' > '$(echo $p/scaling_governor)';';done";
+        // Get the current governor settings as a shell command list.
+        String governorPoliciesCmds = android.run(cmd);
+        // Set the governor to performance mode.
+        android.run(
+                "for p in /sys/devices/system/cpu/cpufreq/policy*; do echo 'performance' >"
+                        + " $p/scaling_governor; done");
         unlockScreen(android);
         // Ensure we are killing the app to get the cold app startup time
         android.run("am force-stop " + pkgName);
@@ -212,7 +221,10 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
         String vmStartAppLog = android.run("am", "start -W -S " + pkgName);
         assertNotNull(vmStartAppLog);
         assumeFalse(vmStartAppLog.isEmpty());
-        return new AmStartupTimeCmdParser(vmStartAppLog);
+        AmStartupTimeCmdParser startupTimes = new AmStartupTimeCmdParser(vmStartAppLog);
+        // Set the governor back to the original setting.
+        android.run(governorPoliciesCmds);
+        return startupTimes;
     }
 
     // Returns an array of two elements containing the delta between the initial app startup time
