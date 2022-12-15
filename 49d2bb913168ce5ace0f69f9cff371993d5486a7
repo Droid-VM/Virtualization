@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "852f9999_932f26e3",
+        "filename": "libs/avb/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-15T15:47:13Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s the whole point of a bindgen wrapper: keep the functionality of the library but make it \"Rusty\". Anyway, as you said, we\u0027re not building a proper wrapping library so this is of little importance.",
+      "parentUuid": "9c36c835_19be336c",
+      "range": {
+        "startLine": 15,
+        "startChar": 9,
+        "endLine": 15,
+        "endChar": 34
+      },
+      "revId": "49d2bb913168ce5ace0f69f9cff371993d5486a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d188901_82786b86",
@@ -245,6 +269,30 @@
       "side": 1,
       "message": "This cl only focuses on enum conversion handling. There\u0027s no behavior change. Your question here is either we should consider a not signed VBMeta as good one, right? \nFirst, I think that\u0027s beyond the scope of this cl, it\u0027s better to file a bug to discuss this.\nSecondly, the struct `VbMetaImage` here is mainly used extract the digest and public key of apexes inside Microdroid. I think it\u0027s good to test this case of unsigned VBMeta in apexutil. Let\u0027s follow up this in a bug(b/262703236) !\n \n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/libs/apexutil/src/lib.rs;l\u003d76;drc\u003d5114f292ba49474752e1de252408e652853f6553",
       "parentUuid": "7fd0acff_a3718ff2",
+      "range": {
+        "startLine": 162,
+        "startChar": 10,
+        "endLine": 162,
+        "endChar": 81
+      },
+      "revId": "49d2bb913168ce5ace0f69f9cff371993d5486a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d6bfda4_8d867291",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-15T15:47:13Z",
+      "side": 1,
+      "message": "\u003e This cl only focuses on enum conversion handling. There\u0027s no behavior change.\n\nThis is literally what I started by saying: \"I know that you are simply sed-ing this but ...\"\n\n\u003e Your question here is either we should consider a not signed VBMeta as good one, right?\n\nMy point is that I don\u0027t want to be calling a function naed `verify_vbmeta_image` and receive `Ok(())` for a payload that wasn\u0027t signed (IIRC the flag), as that would completely defeat the purpose of image validation.\n\nThanks for creating a bug to track this.",
+      "parentUuid": "cba666a4_0da691db",
       "range": {
         "startLine": 162,
         "startChar": 10,
