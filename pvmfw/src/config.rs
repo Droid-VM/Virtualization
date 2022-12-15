@@ -21,13 +21,79 @@ use core::num::NonZeroUsize;
 use core::ops;
 use core::result;
 
+/// Configuration data header.
+///
+/// pvmfw will expect this header to have been appended to its loaded binary image at the next 4KiB
+/// boundary. It describes the configuration data entries that pvmfw will use and, being loaded by
+/// the pvmfw loader, it is necessarily trusted.
+///
+/// The layout of the configuration data is as follows:
+///
+/// +===============================+
+/// |          pvmfw.bin            |
+/// +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+/// |  (Padding to 4KiB alignment)  |
+/// +===============================+ <-- HEAD
+/// |            Magic              |
+/// +-------------------------------+
+/// |           Version             |
+/// +-------------------------------+
+/// |   Total Size = (TAIL - HEAD)  |
+/// +-------------------------------+
+/// |            Flags              |
+/// +-------------------------------+
+/// |           [Entry 0]           |
+/// | - offset = (FIRST - HEAD)     |
+/// | - size = (FIRST_END - FIRST)  |
+/// +-------------------------------+
+/// |           [Entry 1]           |
+/// | - offset = (SECOND - HEAD)    |
+/// | - size = (SECOND_END - SECOND)|
+/// +-------------------------------+
+/// |              ...              |
+/// +-------------------------------+
+/// |           [Entry n]           |
+/// +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+/// | (Padding to 8-byte alignment) |
+/// +===============================+ <-- FIRST
+/// |       {First entry: BCC}      |
+/// +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+ <-- FIRST_END
+/// | (Padding to 8-byte alignment) |
+/// +===============================+ <-- SECOND
+/// |       {Second entry: DP}      |
+/// +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+ <-- SECOND_END
+/// | (Padding to 8-byte alignment) |
+/// +===============================+
+/// |              ...              |
+/// +===============================+ <-- TAIL
+///
+/// The version number uses a "major.minor" format and is encoded as
+///
+///     ((major << 16) | (minor & 0xffff))
+///
+/// It defines the format of the header (which may change between major versions) and, in
+/// particular, the number of supported entries. The header uses the endianness of the virtual
+/// machine.
+///
+/// The internal format of individual entries is entry-specific and isn't relevant to this header.
+/// In version 1.0:
+///
+/// - entry 0 must contain a valid [BCC Handover][]
+/// - entry 1 may contain a device tree overlay to be applied to the pVM device tree.
+///
+/// [BCC Handover]: https://pigweed.googlesource.com/open-dice/+/825e3beb6c6efcd8c35506d818c18d1e73b9834a/src/android/bcc.c#260
 #[repr(C, packed)]
 #[derive(Clone, Copy, Debug)]
 struct Header {
+    /// Magic number; must be `Header::MAGIC`.
     magic: u32,
+    /// Version of the header format.
     version: u32,
+    /// Total size of the configuration data.
     total_size: u32,
+    /// Feature flags; currently reserved and must be zero.
     flags: u32,
+    /// (offset, size) pairs used to locate individual entries appended to the header.
     entries: [HeaderEntry; Entry::COUNT],
 }
 
