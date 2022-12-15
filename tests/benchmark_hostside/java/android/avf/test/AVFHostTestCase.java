@@ -205,14 +205,30 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
 
     private AmStartupTimeCmdParser getColdRunStartupTimes(CommandRunner android, String pkgName)
             throws DeviceNotAvailableException, InterruptedException {
-        unlockScreen(android);
-        // Ensure we are killing the app to get the cold app startup time
-        android.run("am force-stop " + pkgName);
-        android.run("echo 3 > /proc/sys/vm/drop_caches");
-        String vmStartAppLog = android.run("am", "start -W -S " + pkgName);
-        assertNotNull(vmStartAppLog);
-        assumeFalse(vmStartAppLog.isEmpty());
-        return new AmStartupTimeCmdParser(vmStartAppLog);
+        String cmd =
+                "for p in /sys/devices/system/cpu/cpufreq/policy*; do echo 'echo '$(cat"
+                        + " $p/scaling_governor)' > '$(echo $p/scaling_governor)';';done";
+        // Get the current governor settings as a shell command list.
+        String governorPoliciesCmds = android.run(cmd);
+        AmStartupTimeCmdParser startupTimes = null;
+        try {
+            // Set the governor to performance mode.
+            android.run(
+                    "for p in /sys/devices/system/cpu/cpufreq/policy*; do echo 'performance' >"
+                            + " $p/scaling_governor; done");
+            unlockScreen(android);
+            // Ensure we are killing the app to get the cold app startup time
+            android.run("am force-stop " + pkgName);
+            android.run("echo 3 > /proc/sys/vm/drop_caches");
+            String vmStartAppLog = android.run("am", "start -W -S " + pkgName);
+            assertNotNull(vmStartAppLog);
+            assumeFalse(vmStartAppLog.isEmpty());
+            startupTimes = new AmStartupTimeCmdParser(vmStartAppLog);
+        } finally {
+            // Set the governor back to the original setting.
+            android.run(governorPoliciesCmds);
+        }
+        return startupTimes;
     }
 
     // Returns an array of two elements containing the delta between the initial app startup time
