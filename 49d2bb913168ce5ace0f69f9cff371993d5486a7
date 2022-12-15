@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7244adb7_411b632c",
+        "filename": "libs/avb/src/ops.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-15T13:08:25Z",
+      "side": 1,
+      "message": "\u003e Basically we don\u0027t need libavb_nostd for now as pvmfw is the only use case. Let\u0027s just use avb_bindgen directly in pvmfw.\n\nOkay so `libs/avb/src/ops.rs` is (and will remain) dead code, right? Or will pvmfw call `verify_image`?\n\n\u003e But first the C API is also an enum[1][2].\n\nOh, I hadn\u0027t noticed that ... I wonder how C compliant that even is!",
+      "parentUuid": "a34d8ebf_7ff49088",
+      "range": {
+        "startLine": 121,
+        "startChar": 15,
+        "endLine": 121,
+        "endChar": 33
+      },
+      "revId": "49d2bb913168ce5ace0f69f9cff371993d5486a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a01672f_2174f68a",
         "filename": "libs/vbmeta/src/lib.rs",
         "patchSetId": 4
@@ -149,6 +173,30 @@
       "side": 1,
       "message": "Yes, I double checked before submitting even I sed them ;) Otherwise, since now AvbVBMetaVerifyResult is an enum, the compiler ensured that all the possible return results are handled.",
       "parentUuid": "0a01672f_2174f68a",
+      "range": {
+        "startLine": 162,
+        "startChar": 10,
+        "endLine": 162,
+        "endChar": 81
+      },
+      "revId": "49d2bb913168ce5ace0f69f9cff371993d5486a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fd0acff_a3718ff2",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-15T13:08:25Z",
+      "side": 1,
+      "message": "Sure, my question wasn\u0027t about Rust; from a security standpoint, is the logic of returning the same result (`Ok(())`) for both `OK_NOT_SIGNED` and `OK` fine or are we about to let images that have NOT been signed pass validation?\n\nIn a separate CL, could you please add a TODO in the test that resigns the image to also have a case covering the image not having been signed? IIRC, `avbtool` permits adding a VBMeta footer but without signing it but please check.",
+      "parentUuid": "1188f6d9_5b82632a",
       "range": {
         "startLine": 162,
         "startChar": 10,
