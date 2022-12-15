@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cde7a341_9da8be99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-15T15:56:10Z",
+      "side": 1,
+      "message": "Looks great!\nI have many quibbles though.",
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b071e2c_bb75d325",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-15T15:56:10Z",
+      "side": 1,
+      "message": "Nit: delete the leading \"-\" throughout? Since you use it for subtraction, and it doesn\u0027t seem necessary",
+      "range": {
+        "startLine": 46,
+        "startChar": 6,
+        "endLine": 46,
+        "endChar": 7
+      },
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d849bcd5_191b4151",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-15T15:56:10Z",
+      "side": 1,
+      "message": "So an Entry points to an entry? Can we rename one of those?",
+      "range": {
+        "startLine": 59,
+        "startChar": 19,
+        "endLine": 59,
+        "endChar": 24
+      },
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1631e99d_63656b44",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-15T15:56:10Z",
+      "side": 1,
+      "message": "You should probably surround this with ` ``` ` lines.\n\n(I\u0027m not sure we ever actually render the markdown, but if we do it\u0027ll go pretty wrong.)",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 3
+      },
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a00af48c_71ef5b91",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-15T15:56:10Z",
+      "side": 1,
+      "message": "What significance does a minor version bump have?",
+      "range": {
+        "startLine": 74,
+        "startChar": 40,
+        "endLine": 74,
+        "endChar": 81
+      },
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "978c5ed1_0164e700",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-15T15:56:10Z",
+      "side": 1,
+      "message": "I don\u0027t think this should be here?",
+      "range": {
+        "startLine": 81,
+        "startChar": 49,
+        "endLine": 81,
+        "endChar": 51
+      },
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5e3b2be_28cb4110",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-15T15:56:10Z",
+      "side": 1,
+      "message": "How do I know when I\u0027ve reached the last Entry?\nWhat should an Entry look like if it doesn\u0027t refer to anything?",
+      "range": {
+        "startLine": 82,
+        "startChar": 6,
+        "endLine": 82,
+        "endChar": 25
+      },
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44d6ab19_8ac8ace5",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-15T15:56:10Z",
+      "side": 1,
+      "message": "This should maybe be a named constant, just to make it easier for a reader to find.",
+      "range": {
+        "startLine": 221,
+        "startChar": 29,
+        "endLine": 221,
+        "endChar": 50
+      },
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
