@@ -70,6 +70,30 @@
       },
       "revId": "7eae669bfc4630512ebcf0d776fa2d0bac8459b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebd47bb3_81a53784",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-15T18:54:41Z",
+      "side": 0,
+      "message": "Let\u0027s just return `AvbImageVerifyError` for now and handle this when it will be relevant. To return a generic Error from verify_payload, nostd need to support the Error trait first, which is not yet the case. Returning `Result\u003c(), Debug\u003e` won\u0027t look nice.",
+      "parentUuid": "627cc46b_fb7d252e",
+      "range": {
+        "startLine": 74,
+        "startChar": 44,
+        "endLine": 77,
+        "endChar": 8
+      },
+      "revId": "7eae669bfc4630512ebcf0d776fa2d0bac8459b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
