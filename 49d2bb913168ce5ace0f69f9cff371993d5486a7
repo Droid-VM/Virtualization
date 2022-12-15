@@ -136,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "899c4bb5_a5817ec4",
+        "filename": "libs/avb/src/ops.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-15T13:42:04Z",
+      "side": 1,
+      "message": "\u003e Okay so libs/avb/src/ops.rs is (and will remain) dead code, right? Or will pvmfw call verify_image?\n\nWe just move everything in ops.rs to pvmfw. See this cl https://r.android.com/c/2358680/",
+      "parentUuid": "7244adb7_411b632c",
+      "range": {
+        "startLine": 121,
+        "startChar": 15,
+        "endLine": 121,
+        "endChar": 33
+      },
+      "revId": "49d2bb913168ce5ace0f69f9cff371993d5486a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a01672f_2174f68a",
@@ -197,6 +221,30 @@
       "side": 1,
       "message": "Sure, my question wasn\u0027t about Rust; from a security standpoint, is the logic of returning the same result (`Ok(())`) for both `OK_NOT_SIGNED` and `OK` fine or are we about to let images that have NOT been signed pass validation?\n\nIn a separate CL, could you please add a TODO in the test that resigns the image to also have a case covering the image not having been signed? IIRC, `avbtool` permits adding a VBMeta footer but without signing it but please check.",
       "parentUuid": "1188f6d9_5b82632a",
+      "range": {
+        "startLine": 162,
+        "startChar": 10,
+        "endLine": 162,
+        "endChar": 81
+      },
+      "revId": "49d2bb913168ce5ace0f69f9cff371993d5486a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cba666a4_0da691db",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-15T13:42:04Z",
+      "side": 1,
+      "message": "This cl only focuses on enum conversion handling. There\u0027s no behavior change. Your question here is either we should consider a not signed VBMeta as good one, right? \nFirst, I think that\u0027s beyond the scope of this cl, it\u0027s better to file a bug to discuss this.\nSecondly, the struct `VbMetaImage` here is mainly used extract the digest and public key of apexes inside Microdroid. I think it\u0027s good to test this case of unsigned VBMeta in apexutil. Let\u0027s follow up this in a bug(b/262703236) !\n \n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/libs/apexutil/src/lib.rs;l\u003d76;drc\u003d5114f292ba49474752e1de252408e652853f6553",
+      "parentUuid": "7fd0acff_a3718ff2",
       "range": {
         "startLine": 162,
         "startChar": 10,
