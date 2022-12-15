@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4429ac11_71c83577",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-15T15:47:25Z",
+      "side": 0,
+      "message": "Why are you moving this into the function? Just return the `AvbSlotVerifyResult` an keep this the `error!` logging and `RebootReason`s centralized here?",
+      "range": {
+        "startLine": 74,
+        "startChar": 44,
+        "endLine": 77,
+        "endChar": 8
+      },
+      "revId": "7eae669bfc4630512ebcf0d776fa2d0bac8459b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
