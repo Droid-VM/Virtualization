@@ -43,6 +43,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a5b577e9_43df3b36",
+        "filename": "libs/capabilities/src/caps.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-15T14:01:10Z",
+      "side": 1,
+      "message": "Is there any chance the caller will want to handle different errors differently? `anyhow` is probably not the right choice for library error types, usually we define an enum or struct (with the help of `thiserror`) so that the caller can get information about them.",
+      "revId": "32872ec2cb6d2785bbe9d68733c0e51d52f96aa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19282e59_2b465b83",
         "filename": "libs/capabilities/src/caps.rs",
         "patchSetId": 1
