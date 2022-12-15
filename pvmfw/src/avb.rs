@@ -14,4 +14,98 @@
 
 //! Image verification.
 
+use crate::entry::RebootReason;
+use avb_bindgen::AvbSlotVerifyResult;
+use core::fmt;
+use log::error;
+
 pub use pvmfw_embedded_key::PUBLIC_KEY;
+
+/// Error code from AVB image verification.
+#[derive(Clone, Copy, Debug)]
+enum AvbImageVerifyError {
+    /// AVB_SLOT_VERIFY_RESULT_ERROR_INVALID_ARGUMENT
+    InvalidArgument,
+    /// AVB_SLOT_VERIFY_RESULT_ERROR_INVALID_METADATA
+    InvalidMetadata,
+    /// AVB_SLOT_VERIFY_RESULT_ERROR_IO
+    Io,
+    /// AVB_SLOT_VERIFY_RESULT_ERROR_OOM
+    Oom,
+    /// AVB_SLOT_VERIFY_RESULT_ERROR_PUBLIC_KEY_REJECTED
+    PublicKeyRejected,
+    /// AVB_SLOT_VERIFY_RESULT_ERROR_ROLLBACK_INDEX
+    RollbackIndex,
+    /// AVB_SLOT_VERIFY_RESULT_ERROR_UNSUPPORTED_VERSION
+    UnsupportedVersion,
+    /// AVB_SLOT_VERIFY_RESULT_ERROR_VERIFICATION
+    Verification,
+}
+
+impl fmt::Display for AvbImageVerifyError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::InvalidArgument => write!(f, "Invalid parameters."),
+            Self::InvalidMetadata => write!(f, "Invalid metadata."),
+            Self::Io => write!(f, "I/O error while trying to load data or get a rollback index."),
+            Self::Oom => write!(f, "Unable to allocate memory."),
+            Self::PublicKeyRejected => write!(
+                f,
+                "Everything is verified correctly out but the public key is not accepted. \
+                This includes the case where integrity data is not signed."
+            ),
+            Self::RollbackIndex => write!(f, "Rollback index is less than its stored value."),
+            Self::UnsupportedVersion => write!(
+                f,
+                "Some of the metadata requires a newer version of libavb than what is in use."
+            ),
+            Self::Verification => write!(f, "Data does not verify."),
+        }
+    }
+}
+
+fn to_avb_verify_result(result: AvbSlotVerifyResult) -> Result<(), AvbImageVerifyError> {
+    match result {
+        AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_OK => Ok(()),
+        AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_INVALID_ARGUMENT => {
+            Err(AvbImageVerifyError::InvalidArgument)
+        }
+        AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_INVALID_METADATA => {
+            Err(AvbImageVerifyError::InvalidMetadata)
+        }
+        AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_IO => Err(AvbImageVerifyError::Io),
+        AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_OOM => Err(AvbImageVerifyError::Oom),
+        AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_PUBLIC_KEY_REJECTED => {
+            Err(AvbImageVerifyError::PublicKeyRejected)
+        }
+        AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_ROLLBACK_INDEX => {
+            Err(AvbImageVerifyError::RollbackIndex)
+        }
+        AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_UNSUPPORTED_VERSION => {
+            Err(AvbImageVerifyError::UnsupportedVersion)
+        }
+        AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_VERIFICATION => {
+            Err(AvbImageVerifyError::Verification)
+        }
+    }
+}
+
+/// Verifies the payload (signed kernel + initrd) against the trusted public key.
+pub(crate) fn verify_payload() -> Result<(), RebootReason> {
+    // TODO(b/256148034): Verify the kernel image with avb_slot_verify()
+    // let result = unsafe {
+    //     avb_slot_verify(
+    //         &mut avb_ops,
+    //         requested_partitions.as_ptr(),
+    //         ab_suffix.as_ptr(),
+    //         flags,
+    //         hashtree_error_mode,
+    //         null_mut(),
+    //     )
+    // };
+    let result = AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_OK;
+    to_avb_verify_result(result).map_err(|e| {
+        error!("Failed to verify the payload: {e}");
+        RebootReason::PayloadVerificationError
+    })
+}
