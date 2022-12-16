@@ -15,9 +15,21 @@
 //! Low-level compatibility layer between baremetal Rust and Bionic C functions.
 
 use crate::linker;
+use core::ffi::c_char;
+use core::ffi::c_int;
 
 /// Reference to __stack_chk_guard.
 pub static STACK_CHK_GUARD: &u64 = unsafe { &linker::__stack_chk_guard };
+
+#[allow(missing_copy_implementations)]
+pub enum FILE {}
+
+/// Called from C to write a null-terminated string pointed to by `s` to the
+/// stream pointed to by `stream`. The I/O in C is not supported for now.
+#[no_mangle]
+extern "C" fn fputs(_s: *const c_char, _stream: *mut FILE) -> c_int {
+    0
+}
 
 #[no_mangle]
 extern "C" fn __stack_chk_fail() -> ! {
