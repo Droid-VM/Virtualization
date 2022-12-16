@@ -14,8 +14,8 @@
 
 //! pVM firmware.
 
+#![cfg_attr(not(test), no_std)]
 #![no_main]
-#![no_std]
 #![feature(default_alloc_error_handler)]
 #![feature(ptr_const_cast)] // Stabilized in 1.65.0
 

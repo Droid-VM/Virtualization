@@ -104,3 +104,14 @@ pub(crate) fn verify_payload() -> Result<(), AvbImageVerifyError> {
     let result = AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_OK;
     to_avb_verify_result(result)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // TODO(b/256148034): Test verification succeeds with valid payload later.
+    #[test]
+    fn verification_succeeds_with_placeholder_input() {
+        assert!(verify_payload().is_ok());
+    }
+}

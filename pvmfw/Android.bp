@@ -2,15 +2,11 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
-rust_ffi_static {
-    name: "libpvmfw",
+rust_defaults {
+    name: "libpvmfw_defaults",
     crate_name: "pvmfw",
-    defaults: ["vmbase_ffi_defaults"],
     srcs: ["src/main.rs"],
     edition: "2021",
-    features: [
-        "legacy",
-    ],
     rustlibs: [
         "libaarch64_paging",
         "libavb_bindgen",
@@ -24,7 +20,29 @@ rust_ffi_static {
         "libvmbase",
         "libzeroize_nostd",
     ],
+}
+
+rust_ffi_static {
+    name: "libpvmfw",
+    defaults: [
+        "libpvmfw_defaults",
+        "vmbase_ffi_defaults",
+    ],
+    features: [
+        "legacy",
+    ],
     apex_available: ["com.android.virt"],
+}
+
+rust_test {
+    name: "libpvmfw_test",
+    defaults: ["libpvmfw_defaults"],
+    test_suites: ["general-tests"],
+    multilib: {
+        lib32: {
+            enabled: false,
+        },
+    },
 }
 
 cc_binary {
