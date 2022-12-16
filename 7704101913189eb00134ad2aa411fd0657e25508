@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f9211f6_e1b6f839",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-12-16T09:32:22Z",
+      "side": 1,
+      "message": "Build warnings seem like a false positive, since this has successfully built in lots of branches. The symbol complained about was added in aosp/2358619.\n\nRaised b/262838556 for that.",
+      "revId": "7704101913189eb00134ad2aa411fd0657e25508",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
