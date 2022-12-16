@@ -14,11 +14,25 @@
 
 //! This module handles the pvmfw payload verification.
 
-use avb_bindgen::AvbSlotVerifyResult;
-use core::fmt;
+// TODO(b/256148034): Remove these once it's possible to call `avb_slot_verify` in pvmfw.
+#![allow(dead_code)]
+#![allow(unused_imports)]
+#![allow(unused_variables)]
+
+use alloc::ffi::CString;
+use avb_bindgen::{
+    avb_slot_verify, AvbHashtreeErrorMode, AvbIOResult, AvbOps, AvbSlotVerifyFlags,
+    AvbSlotVerifyResult,
+};
+use core::{
+    ffi::{c_char, c_void},
+    fmt,
+    mem::transmute,
+    ptr, slice,
+};
 
 /// Error code from AVB image verification.
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub enum AvbImageVerifyError {
     /// AVB_SLOT_VERIFY_RESULT_ERROR_INVALID_ARGUMENT
     InvalidArgument,
@@ -36,6 +50,8 @@ pub enum AvbImageVerifyError {
     UnsupportedVersion,
     /// AVB_SLOT_VERIFY_RESULT_ERROR_VERIFICATION
     Verification,
+    /// Invalid C String
+    InvalidCString,
 }
 
 impl fmt::Display for AvbImageVerifyError {
@@ -52,6 +68,7 @@ impl fmt::Display for AvbImageVerifyError {
                 "Some of the metadata requires a newer version of libavb than what is in use."
             ),
             Self::Verification => write!(f, "Data does not verify."),
+            Self::InvalidCString => write!(f, "Invalid C String"),
         }
     }
 }
@@ -82,31 +99,272 @@ fn to_avb_verify_result(result: AvbSlotVerifyResult) -> Result<(), AvbImageVerif
     }
 }
 
+extern "C" fn read_is_device_unlocked(
+    _ops: *mut AvbOps,
+    out_is_unlocked: *mut bool,
+) -> AvbIOResult {
+    // SAFETY: The raw pointer `out_is_unlocked` was created to point to a valid a `bool`, so
+    // we know the pointer is not null and the memory it points to is valid and has the layout
+    // of a `bool`, and we are using `core::ptr::write` to dereference it, which performs bounds
+    // checking.
+    unsafe {
+        ptr::write(out_is_unlocked, false);
+    }
+    AvbIOResult::AVB_IO_RESULT_OK
+}
+
+extern "C" fn read_from_partition(
+    ops: *mut AvbOps,
+    partition: *const c_char,
+    offset: i64,
+    num_bytes: usize,
+    buffer: *mut c_void,
+    out_num_read: *mut usize,
+) -> AvbIOResult {
+    let kernel = Payload::from_avb_ops_ptr(ops).kernel();
+    let offset = if offset < 0 {
+        // If offset is negative, interprets its absolute value as the number of bytes from the
+        // end of the partition.
+        kernel.len() as i64 + offset
+    } else {
+        offset
+    };
+    if offset < 0 {
+        return AvbIOResult::AVB_IO_RESULT_ERROR_IO;
+    }
+    let offset = offset as usize;
+    if (offset + num_bytes) > kernel.len() {
+        return AvbIOResult::AVB_IO_RESULT_ERROR_IO;
+    }
+    let data = &kernel[offset..];
+    // SAFETY: It is safe to copy the requested number of bytes to `buffer` as `buffer`
+    // is created to point to the `num_bytes` of bytes in memory.
+    // The raw pointer `out_num_read` was created to point to a valid a `usize` and we
+    // are using `core::ptr::write` to dereference it, which performs bounds checking.
+    unsafe {
+        ptr::copy_nonoverlapping(data.as_ptr(), buffer as *mut u8, num_bytes);
+        ptr::write(out_num_read, num_bytes);
+    }
+    AvbIOResult::AVB_IO_RESULT_OK
+}
+
+extern "C" fn get_size_of_partition(
+    ops: *mut AvbOps,
+    _partition: *const c_char,
+    out_size_num_bytes: *mut u64,
+) -> AvbIOResult {
+    let payload = Payload::from_avb_ops_ptr(ops);
+    // SAFETY: The raw pointer `out_size_num_bytes` was created to point to a valid a `u64`
+    // and we are using `core::ptr::write` to dereference it, which performs bounds checking.
+    unsafe {
+        ptr::write(out_size_num_bytes, payload.kernel_length as u64);
+    }
+    AvbIOResult::AVB_IO_RESULT_OK
+}
+
+extern "C" fn read_rollback_index(
+    ops: *mut AvbOps,
+    rollback_index_location: usize,
+    out_rollback_index: *mut u64,
+) -> AvbIOResult {
+    AvbIOResult::AVB_IO_RESULT_OK
+}
+
+extern "C" fn get_unique_guid_for_partition(
+    ops: *mut AvbOps,
+    partition: *const c_char,
+    guid_buf: *mut c_char,
+    guid_buf_size: usize,
+) -> AvbIOResult {
+    AvbIOResult::AVB_IO_RESULT_OK
+}
+
+extern "C" fn validate_public_key_for_partition(
+    ops: *mut AvbOps,
+    partition: *const c_char,
+    public_key_data: *const u8,
+    public_key_length: usize,
+    public_key_metadata: *const u8,
+    public_key_metadata_length: usize,
+    out_is_trusted: *mut bool,
+    out_rollback_index_location: *mut u32,
+) -> AvbIOResult {
+    if public_key_data.is_null() {
+        return AvbIOResult::AVB_IO_RESULT_ERROR_NO_SUCH_VALUE;
+    }
+    // SAFETY: It is safe to create a slice with the given pointer and length as
+    // `public_key_data` is a valid pointer and it points to an array of length
+    // `public_key_length`.
+    let public_key = unsafe { slice::from_raw_parts(public_key_data, public_key_length) };
+    let trusted_public_key = Payload::from_avb_ops_ptr(ops).trusted_public_key();
+    // SAFETY: The raw pointer `out_is_trusted` was created to point to a valid a `bool`
+    // and we are using `core::ptr::write` to dereference it, which performs bounds checking.
+    unsafe {
+        ptr::write(out_is_trusted, public_key == trusted_public_key);
+    }
+    AvbIOResult::AVB_IO_RESULT_OK
+}
+
+#[repr(C, packed)]
+struct Payload {
+    kernel_data: *const u8,
+    kernel_length: usize,
+    trusted_public_key_data: *const u8,
+    trusted_public_key_length: usize,
+}
+
+impl Payload {
+    fn new(kernel: &[u8], trusted_public_key: &[u8]) -> Self {
+        Self {
+            kernel_data: kernel.as_ptr(),
+            kernel_length: kernel.len(),
+            trusted_public_key_data: trusted_public_key.as_ptr(),
+            trusted_public_key_length: trusted_public_key.len(),
+        }
+    }
+
+    fn from_avb_ops_ptr<'a>(ops: *const AvbOps) -> &'a Self {
+        // SAFETY: It is safe to cast the user_data to Payload as we have saved a pointer to a
+        // valid value of Payload in user_data when creating AvbOps.
+        unsafe {
+            let payload = (*ops).user_data as *const Payload;
+            &*payload
+        }
+    }
+
+    fn kernel(&self) -> &[u8] {
+        // SAFETY: It is safe to create a slice with the saved kernel pointer and length as
+        // `kernel_data` is a valid pointer and it points to an array of length
+        // `kernel_length`.
+        unsafe { slice::from_raw_parts(self.kernel_data, self.kernel_length) }
+    }
+
+    fn trusted_public_key(&self) -> &[u8] {
+        // SAFETY: It is safe to create a slice with the saved public key pointer and length as
+        // `trusted_public_key_data` is a valid pointer and it points to an array of length
+        // `trusted_public_key_length`.
+        unsafe {
+            slice::from_raw_parts(self.trusted_public_key_data, self.trusted_public_key_length)
+        }
+    }
+}
+
 /// Verifies the payload (signed kernel + initrd) against the trusted public key.
-pub fn verify_payload(_public_key: &[u8]) -> Result<(), AvbImageVerifyError> {
-    // TODO(b/256148034): Verify the kernel image with avb_slot_verify()
-    // let result = unsafe {
-    //     avb_slot_verify(
-    //         &mut avb_ops,
-    //         requested_partitions.as_ptr(),
-    //         ab_suffix.as_ptr(),
-    //         flags,
-    //         hashtree_error_mode,
-    //         null_mut(),
-    //     )
-    // };
+pub fn verify_payload(kernel: &[u8], trusted_public_key: &[u8]) -> Result<(), AvbImageVerifyError> {
     let result = AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_OK;
+    to_avb_verify_result(result)
+}
+
+/// TODO(b/256148034): This function is temporary as calling avb_slot_verify() is still
+/// blocked due to missing C definitions. We should make this function `verify_payload`
+/// once it's possible to call avb_slot_verify() in nostd.
+fn verify_payload_temp(
+    kernel: &[u8],
+    trusted_public_key: &[u8],
+) -> Result<(), AvbImageVerifyError> {
+    let mut payload = Payload::new(kernel, trusted_public_key);
+    let mut avb_ops = AvbOps {
+        user_data: &mut payload as *mut _ as *mut c_void,
+        ab_ops: ptr::null_mut(),
+        atx_ops: ptr::null_mut(),
+        read_from_partition: Some(read_from_partition),
+        get_preloaded_partition: None,
+        write_to_partition: None,
+        validate_vbmeta_public_key: None,
+        read_rollback_index: Some(read_rollback_index),
+        write_rollback_index: None,
+        read_is_device_unlocked: Some(read_is_device_unlocked),
+        get_unique_guid_for_partition: Some(get_unique_guid_for_partition),
+        get_size_of_partition: Some(get_size_of_partition),
+        read_persistent_value: None,
+        write_persistent_value: None,
+        validate_public_key_for_partition: Some(validate_public_key_for_partition),
+    };
+    // The partition name is only a placeholder here as the kernel image has only one partition,
+    // we do not need the name to identify the requested partition.
+    let requested_partition =
+        CString::new("bootloader").map_err(|e| AvbImageVerifyError::InvalidCString)?;
+    // NULL is needed to mark the end of the array for now. It can be dropped if later libavb
+    // changes to a safer way to stop looping the requested partitions.
+    let requested_partitions: [*const c_char; 2] = [requested_partition.as_ptr(), ptr::null()];
+    let ab_suffix = CString::new("").map_err(|e| AvbImageVerifyError::InvalidCString)?;
+
+    // SAFETY: It is safe to call `avb_slot_verify()` as the pointer arguments (`ops`,
+    // `requested_partitions` and `ab_suffix`) passed to the method are all valid and
+    // initialized. The last argument `out_data` is allowed to be null so that nothing
+    // will be written to it.
+    let result = unsafe {
+        avb_slot_verify(
+            &mut avb_ops,
+            requested_partitions.as_ptr(),
+            ab_suffix.as_ptr(),
+            AvbSlotVerifyFlags::AVB_SLOT_VERIFY_FLAGS_NO_VBMETA_PARTITION,
+            AvbHashtreeErrorMode::AVB_HASHTREE_ERROR_MODE_RESTART_AND_INVALIDATE,
+            /*out_data=*/ ptr::null_mut(),
+        )
+    };
     to_avb_verify_result(result)
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use anyhow::Result;
+    use std::{fs::File, io::Read, path::Path};
 
-    // TODO(b/256148034): Test verification succeeds with valid payload later.
+    /// This test uses the Microdroid payload compiled on the fly to check that
+    /// the latest payload can be verified successfully.
     #[test]
-    fn verification_succeeds_with_placeholder_input() {
-        let fake_public_key = [0u8; 2];
-        assert!(verify_payload(&fake_public_key).is_ok());
+    fn latest_valid_payload_is_verified_successfully() -> Result<()> {
+        let kernel = load_latest_valid_signed_kernel()?;
+        let public_key = read_file_to_bytes("data/testkey_rsa4096_pub.bin")?;
+
+        assert_eq!(Ok(()), verify_payload_temp(&kernel, &public_key));
+        Ok(())
+    }
+
+    #[test]
+    fn payload_with_an_invalid_public_key_fails_verification() -> Result<()> {
+        let kernel = load_latest_valid_signed_kernel()?;
+        let public_key = [0u8; 512];
+
+        assert_eq!(
+            Err(AvbImageVerifyError::PublicKeyRejected),
+            verify_payload_temp(&kernel, &public_key)
+        );
+        Ok(())
+    }
+
+    #[test]
+    fn payload_with_a_different_valid_public_key_fails_verification() -> Result<()> {
+        let kernel = load_latest_valid_signed_kernel()?;
+        let public_key = read_file_to_bytes("testkey_rsa2048_pub.bin")?;
+
+        assert_eq!(
+            Err(AvbImageVerifyError::PublicKeyRejected),
+            verify_payload_temp(&kernel, &public_key)
+        );
+        Ok(())
+    }
+
+    #[test]
+    fn unsigned_kernel_fails_verification() -> Result<()> {
+        let kernel = read_file_to_bytes("unsigned_test.img")?;
+        let public_key = read_file_to_bytes("data/testkey_rsa4096_pub.bin")?;
+
+        assert_eq!(Err(AvbImageVerifyError::Io), verify_payload_temp(&kernel, &public_key));
+        Ok(())
+    }
+
+    fn load_latest_valid_signed_kernel() -> Result<Vec<u8>> {
+        read_file_to_bytes("microdroid_kernel")
+    }
+
+    fn read_file_to_bytes<P: AsRef<Path>>(file_path: P) -> Result<Vec<u8>> {
+        let mut file = File::open(file_path)?;
+        let length = file.metadata()?.len();
+        let mut data = vec![0u8; length.try_into()?];
+        file.read_exact(&mut data)?;
+        Ok(data)
     }
 }
