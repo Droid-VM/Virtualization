@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57f752fb_39ababce",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2022-12-16T03:01:04Z",
+      "side": 1,
+      "message": "Q: regarding config documentation, what would be the source of truth for any further change? Will it be `config.rs` here? pvmfwcfg.h in the bootloader? or would you like to publish a page in the source.android.com and keep it updated?\n\nIMHO, I would prefer to add `pvmfw.md` and keep details there. Developers may not be familiar with rust and asking developers to find and open relevant source code and follow the guideline seem to be tough for me. But up to your decision.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 30
+      },
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b071e2c_bb75d325",
         "filename": "pvmfw/src/config.rs",
         "patchSetId": 1
@@ -151,6 +174,29 @@
         "startChar": 6,
         "endLine": 82,
         "endChar": 25
+      },
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ce3c40c_ab9fd7a2",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2022-12-16T03:01:04Z",
+      "side": 1,
+      "message": "Q: would you like to document offset\u003d0 \u0026\u0026 size\u003d0 for invalid entry? (or something similar)?\n\nI\u0027m asking this question because this CL seems to be the follow-up of aosp/2353903, and extra protection seems to be required regardless of our documentation.",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 0
       },
       "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
