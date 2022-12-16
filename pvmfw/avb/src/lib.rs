@@ -16,6 +16,8 @@
 
 #![cfg_attr(not(test), no_std)]
 
+extern crate alloc;
+
 mod verify;
 
 pub use verify::{verify_payload, AvbImageVerifyError};
