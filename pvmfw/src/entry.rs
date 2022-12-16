@@ -46,8 +46,6 @@ pub enum RebootReason {
     InvalidPayload,
     /// The provided ramdisk was invalid.
     InvalidRamdisk,
-    /// Failed to verify the payload.
-    PayloadVerificationError,
 }
 
 main!(start);
