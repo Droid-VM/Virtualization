@@ -10,6 +10,9 @@ rust_defaults {
     rustlibs: [
         "libavb_bindgen",
     ],
+    whole_static_libs: [
+        "libavb",
+    ],
 }
 
 rust_library_rlib {
@@ -25,4 +28,11 @@ rust_test {
     name: "libpvmfw_avb.test",
     defaults: ["libpvmfw_avb_nostd_defaults"],
     test_suites: ["general-tests"],
+    data: [
+        ":avb_testkey_rsa4096_pub_bin",
+        ":microdroid_kernel_signed",
+    ],
+    rustlibs: [
+        "libanyhow",
+    ],
 }
