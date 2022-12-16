@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8419241_068b17d0",
+        "filename": "pvmfw/avb/TEST_MAPPING",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-16T11:31:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22af159a_3b198e11",
+      "revId": "2e98bc69f5f9089899e9fa6c3ebcafbecdf2d06f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81bd5523_f4c2b1f0",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-12-16T10:53:12Z",
       "side": 1,
       "message": "nit: I appreciate the amount of detail but it\u0027s not necessary. \"Public key rejected or data not signed\". Also: what are \"integrity data\"?",
+      "range": {
+        "startLine": 50,
+        "startChar": 17,
+        "endLine": 51,
+        "endChar": 73
+      },
+      "revId": "2e98bc69f5f9089899e9fa6c3ebcafbecdf2d06f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eae4a12_e52ab71b",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-16T11:31:23Z",
+      "side": 1,
+      "message": "I think it\u0027s the VbMeta part according to comments in libavb. That should correspond to the failure of matches (1)(2) [here](http://screen/9Nbd6fqsW2VvVz8). I\u0027ll check whether we need to update this string when implementing this part.",
+      "parentUuid": "81bd5523_f4c2b1f0",
       "range": {
         "startLine": 50,
         "startChar": 17,
