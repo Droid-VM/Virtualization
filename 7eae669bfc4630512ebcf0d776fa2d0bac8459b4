@@ -94,6 +94,30 @@
       },
       "revId": "7eae669bfc4630512ebcf0d776fa2d0bac8459b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf9284fb_d712432a",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-16T17:57:07Z",
+      "side": 0,
+      "message": "Could you please add the `match` returning different `RebootReason`s when `verify_payload` fails, though? It would save us from confusing logs on the host once we start propagating it.",
+      "parentUuid": "ebd47bb3_81a53784",
+      "range": {
+        "startLine": 74,
+        "startChar": 44,
+        "endLine": 77,
+        "endChar": 8
+      },
+      "revId": "7eae669bfc4630512ebcf0d776fa2d0bac8459b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
