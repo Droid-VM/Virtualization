@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fec718d_0f4ef1e0",
+        "filename": "libs/capabilities/src/caps.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-16T21:34:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2100c8f1_f573d888",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 1
+      },
+      "revId": "32872ec2cb6d2785bbe9d68733c0e51d52f96aa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5b577e9_43df3b36",
@@ -54,6 +78,24 @@
       "writtenOn": "2022-12-15T14:01:10Z",
       "side": 1,
       "message": "Is there any chance the caller will want to handle different errors differently? `anyhow` is probably not the right choice for library error types, usually we define an enum or struct (with the help of `thiserror`) so that the caller can get information about them.",
+      "revId": "32872ec2cb6d2785bbe9d68733c0e51d52f96aa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53eb6946_2b9a4a85",
+        "filename": "libs/capabilities/src/caps.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-16T21:34:50Z",
+      "side": 1,
+      "message": "Good question. With the current API shape of the library I don\u0027t think that caller  cares about how exactly the function have failed. What is the recommendation for such cases?",
+      "parentUuid": "a5b577e9_43df3b36",
       "revId": "32872ec2cb6d2785bbe9d68733c0e51d52f96aa1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -81,6 +123,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f488f5ad_b3aa71ab",
+        "filename": "libs/capabilities/src/caps.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-16T21:34:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19282e59_2b465b83",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 50,
+        "endChar": 10
+      },
+      "revId": "32872ec2cb6d2785bbe9d68733c0e51d52f96aa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e2577d2_96e1359d",
@@ -94,6 +160,30 @@
       "writtenOn": "2022-12-15T00:47:36Z",
       "side": 1,
       "message": "File a bug, or fix it now. :)",
+      "range": {
+        "startLine": 56,
+        "startChar": 15,
+        "endLine": 56,
+        "endChar": 26
+      },
+      "revId": "32872ec2cb6d2785bbe9d68733c0e51d52f96aa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1cf0c29_73a17797",
+        "filename": "libs/capabilities/src/caps.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-16T21:34:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e2577d2_96e1359d",
       "range": {
         "startLine": 56,
         "startChar": 15,
