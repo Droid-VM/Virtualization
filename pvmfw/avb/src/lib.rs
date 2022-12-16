@@ -15,6 +15,9 @@
 //! A library implementing the payload verification for pvmfw with libavb
 
 #![cfg_attr(not(test), no_std)]
+#![feature(mixed_integer_ops)] // for usize.checked_add_signed(isize)
+
+extern crate alloc;
 
 mod verify;
 
