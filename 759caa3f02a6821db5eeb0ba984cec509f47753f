@@ -22,6 +22,30 @@
       },
       "revId": "759caa3f02a6821db5eeb0ba984cec509f47753f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6117351_524d8477",
+        "filename": "pvmfw/avb/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-16T18:41:09Z",
+      "side": 1,
+      "message": "Sure, that\u0027s a very good point! We definitely should take the up-to-date kernel so that this test can also guard against the inconsistency between kernel and this library. I only want to use a cached kernel during the development, to make compiling faster as I change different part of the code sometimes.\n\nOtherwise I want to prepare some badly signed kernel/initrd(s) in this folder to check different verification failing scenarios as the development progresses.",
+      "parentUuid": "f0f4b6e6_6ed497ef",
+      "range": {
+        "startLine": 31,
+        "startChar": 12,
+        "endLine": 31,
+        "endChar": 22
+      },
+      "revId": "759caa3f02a6821db5eeb0ba984cec509f47753f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
