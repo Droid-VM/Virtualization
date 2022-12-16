@@ -30,7 +30,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     MemoryTrimLevel::MemoryTrimLevel,
     Partition::Partition,
     PartitionType::PartitionType,
-    VirtualMachineAppConfig::{Payload::Payload, VirtualMachineAppConfig},
+    VirtualMachineAppConfig::{DebugLevel::DebugLevel, Payload::Payload, VirtualMachineAppConfig},
     VirtualMachineConfig::VirtualMachineConfig,
     VirtualMachineDebugInfo::VirtualMachineDebugInfo,
     VirtualMachinePayloadConfig::VirtualMachinePayloadConfig,
@@ -54,6 +54,7 @@ use disk::QcowFile;
 use libc::VMADDR_CID_HOST;
 use log::{debug, error, info, warn};
 use microdroid_payload_config::{OsConfig, Task, TaskType, VmPayloadConfig};
+use nix::unistd::pipe;
 use rpcbinder::RpcServer;
 use rustutils::system_properties;
 use semver::VersionReq;
@@ -459,6 +460,51 @@ fn handle_tombstone(stream: &mut VsockStream) -> Result<()> {
     Ok(())
 }
 
+fn prepare_forward_fd(
+    config: &VirtualMachineConfig,
+    fd: &ParcelFileDescriptor,
+    tag: String,
+) -> Result<File, Status> {
+    let is_debuggable = match config {
+        VirtualMachineConfig::AppConfig(config) => config.debugLevel != DebugLevel::NONE,
+        _ => false,
+    };
+
+    let mut file = clone_file(fd)?;
+
+    if !is_debuggable {
+        return Ok(file);
+    }
+
+    // need to write logs both to logd and to fd
+    let (raw_read_fd, raw_write_fd) = pipe().map_err(|e| {
+        Status::new_service_specific_error_str(-1, Some(format!("Failed to create pipe: {:?}", e)))
+    })?;
+
+    // SAFETY: We are the sole owners of these fds as they were just created.
+    let mut read_fd = unsafe { File::from_raw_fd(raw_read_fd) };
+    let write_fd = unsafe { File::from_raw_fd(raw_write_fd) };
+
+    std::thread::spawn(move || loop {
+        let mut buffer = [0; 4096];
+        let size = match read_fd.read(&mut buffer[..]) {
+            Ok(size) => size,
+            Err(e) => {
+                error!("Could not read console pipe: {:?}", e);
+                return;
+            }
+        };
+
+        if let Err(e) = file.write_all(&buffer[0..size]) {
+            error!("failed to write to {:?}: {:?}", file, e);
+        }
+
+        info!("{}: {}", &tag, String::from_utf8_lossy(&buffer[0..size]));
+    });
+
+    Ok(write_fd)
+}
+
 impl VirtualizationService {
     pub fn init() -> VirtualizationService {
         let global_service = VirtualizationServiceInternal::init();
@@ -523,8 +569,11 @@ impl VirtualizationService {
         })?;
 
         let state = &mut *self.state.lock().unwrap();
-        let console_fd = console_fd.map(clone_file).transpose()?;
-        let log_fd = log_fd.map(clone_file).transpose()?;
+        let console_fd = console_fd
+            .map(|fd| prepare_forward_fd(config, fd, format!("Console({})", cid)))
+            .transpose()?;
+        let log_fd =
+            log_fd.map(|fd| prepare_forward_fd(config, fd, format!("Log({})", cid))).transpose()?;
         let requester_uid = ThreadState::get_calling_uid();
         let requester_debug_pid = ThreadState::get_calling_pid();
 
