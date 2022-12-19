@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b39c28f_7623aaeb",
+        "filename": "libs/capabilities/src/caps.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-19T15:05:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5f20ac9_a04e4a69",
+      "revId": "ece05269a4e7796a191d2529ad6530f594781e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13936eb8_ef9c0452",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-12-19T01:40:39Z",
       "side": 1,
       "message": "nit: formatting",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 2
+      },
+      "revId": "ece05269a4e7796a191d2529ad6530f594781e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa50d4bd_1eeba9d8",
+        "filename": "microdroid_manager/microdroid_manager.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-19T15:05:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13936eb8_ef9c0452",
       "range": {
         "startLine": 12,
         "startChar": 0,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b12f34af_3f8d64b1",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-19T15:05:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bc6cda5_55bed971",
+      "range": {
+        "startLine": 800,
+        "startChar": 4,
+        "endLine": 800,
+        "endChar": 12
+      },
+      "revId": "ece05269a4e7796a191d2529ad6530f594781e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51708231_46214796",
@@ -77,6 +143,24 @@
       "writtenOn": "2022-12-19T12:36:59Z",
       "side": 1,
       "message": "Are you sure these log routines will work in the context of the child process?",
+      "revId": "ece05269a4e7796a191d2529ad6530f594781e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ac9f2f1_ba279969",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-19T15:05:42Z",
+      "side": 1,
+      "message": "Yep, I can see them in the VM logs.",
+      "parentUuid": "51708231_46214796",
       "revId": "ece05269a4e7796a191d2529ad6530f594781e31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -98,6 +182,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ffa2a6c_88113ea9",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 809,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-19T15:05:42Z",
+      "side": 1,
+      "message": "Whether a process can actually use the capabilities is controlled by the SELinux, so it should be OK to proceed with execution of the payload.\n\nThis change just adds another defense-in-depth layer. I\u0027ve also added the comment in the code explaining this",
+      "parentUuid": "67f3b772_1a29dd6b",
+      "revId": "ece05269a4e7796a191d2529ad6530f594781e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebc2533e_bfb02d28",
@@ -111,6 +213,30 @@
       "writtenOn": "2022-12-19T12:36:59Z",
       "side": 1,
       "message": "Nit: running _the_ payload...",
+      "range": {
+        "startLine": 50,
+        "startChar": 74,
+        "endLine": 50,
+        "endChar": 81
+      },
+      "revId": "ece05269a4e7796a191d2529ad6530f594781e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "054ac0ca_84af5b08",
+        "filename": "tests/aidl/com/android/microdroid/testservice/ITestService.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-12-19T15:05:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebc2533e_bfb02d28",
       "range": {
         "startLine": 50,
         "startChar": 74,
