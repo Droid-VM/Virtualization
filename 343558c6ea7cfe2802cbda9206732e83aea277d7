@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2254906d_b45a979c",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-19T14:22:18Z",
+      "side": 1,
+      "message": "\u003e IMHO, I would prefer to add pvmfw.md and keep details there.\n\nAbsolutely, I\u0027ve reworked this into a README.md.\n\nBTW:\n\n\u003e pvmfwcfg.h in the bootloader?\n\nThe documentation should be open-source, IMO.\n\n\u003e a page in the source.android.com and keep it updated?\n\nAFAIU, this level of documentation is too low-level to be hosted there but I wouldn\u0027t be against replicating what we\u0027ll have in the README over there. OTOH, a README in our repos is the easiest way to have pretty documentation that we can easily manage.",
+      "parentUuid": "57f752fb_39ababce",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 30
+      },
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b071e2c_bb75d325",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-12-15T15:56:10Z",
       "side": 1,
       "message": "Nit: delete the leading \"-\" throughout? Since you use it for subtraction, and it doesn\u0027t seem necessary",
+      "range": {
+        "startLine": 46,
+        "startChar": 6,
+        "endLine": 46,
+        "endChar": 7
+      },
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05fa68e7_7c62e19d",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-19T14:22:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b071e2c_bb75d325",
       "range": {
         "startLine": 46,
         "startChar": 6,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8919b7bc_47889606",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-19T14:22:18Z",
+      "side": 1,
+      "message": "I now call the append bytes a \"blob\" ... not very technical but I didn\u0027t want to re(re)use \"payload\"; any better suggestion?",
+      "parentUuid": "d849bcd5_191b4151",
+      "range": {
+        "startLine": 59,
+        "startChar": 19,
+        "endLine": 59,
+        "endChar": 24
+      },
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1631e99d_63656b44",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-12-15T15:56:10Z",
       "side": 1,
       "message": "You should probably surround this with ` ``` ` lines.\n\n(I\u0027m not sure we ever actually render the markdown, but if we do it\u0027ll go pretty wrong.)",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 3
+      },
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b165b37_9f52c033",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-19T14:22:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1631e99d_63656b44",
       "range": {
         "startLine": 32,
         "startChar": 0,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aca5ad69_e2cd8fa6",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-19T14:22:18Z",
+      "side": 1,
+      "message": "Adding support for new flags, mostly.",
+      "parentUuid": "a00af48c_71ef5b91",
+      "range": {
+        "startLine": 74,
+        "startChar": 40,
+        "endLine": 74,
+        "endChar": 81
+      },
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "978c5ed1_0164e700",
@@ -146,6 +266,30 @@
       "writtenOn": "2022-12-15T15:56:10Z",
       "side": 1,
       "message": "I don\u0027t think this should be here?",
+      "range": {
+        "startLine": 81,
+        "startChar": 49,
+        "endLine": 81,
+        "endChar": 51
+      },
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fb7c992_56b2c11c",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-19T14:22:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "978c5ed1_0164e700",
       "range": {
         "startLine": 81,
         "startChar": 49,
@@ -179,6 +323,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81db5585_b5a843f1",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-19T14:22:18Z",
+      "side": 1,
+      "message": "For a given version, the number of entries is fixed.\n\nAdded that missing optional entries should have `size\u003d\u003d0`.",
+      "parentUuid": "b5e3b2be_28cb4110",
+      "range": {
+        "startLine": 82,
+        "startChar": 6,
+        "endLine": 82,
+        "endChar": 25
+      },
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ce3c40c_ab9fd7a2",
@@ -202,6 +370,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1b23959_0ff96f48",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-19T14:22:18Z",
+      "side": 1,
+      "message": "We should if we we\u0027re going to keep that case but as we are dropping it (b/262592861), there\u0027s no need to document it.",
+      "parentUuid": "3ce3c40c_ab9fd7a2",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 0
+      },
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44d6ab19_8ac8ace5",
@@ -215,6 +407,30 @@
       "writtenOn": "2022-12-15T15:56:10Z",
       "side": 1,
       "message": "This should maybe be a named constant, just to make it easier for a reader to find.",
+      "range": {
+        "startLine": 221,
+        "startChar": 29,
+        "endLine": 221,
+        "endChar": 50
+      },
+      "revId": "343558c6ea7cfe2802cbda9206732e83aea277d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ef03490_3744e0c9",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-19T14:22:18Z",
+      "side": 1,
+      "message": "Done; aosp/2361087",
+      "parentUuid": "44d6ab19_8ac8ace5",
       "range": {
         "startLine": 221,
         "startChar": 29,
