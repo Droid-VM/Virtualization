@@ -29,7 +29,7 @@ use shared_child::SharedChild;
 use std::borrow::Cow;
 use std::cmp::max;
 use std::fmt;
-use std::fs::{read_to_string, remove_dir_all, File};
+use std::fs::{read_dir, read_to_string, remove_dir_all, remove_file, File};
 use std::io::{self, Read};
 use std::mem;
 use std::num::NonZeroU32;
@@ -379,10 +379,25 @@ impl VmInstance {
             &*vm_metric,
         );
 
-        // Delete temporary files.
-        if let Err(e) = remove_dir_all(&self.temporary_directory) {
-            error!("Error removing temporary directory {:?}: {}", self.temporary_directory, e);
+        // Delete temporary files. The folder itself remains as only VirtualizationServiceInternal
+        // can remove it.
+        self.remove_temp_files().unwrap_or_else(|e| {
+            error!("Error removing temporary files from {:?}: {}", self.temporary_directory, e);
+        });
+    }
+
+    /// Deletes all files inside the temporary folder, not the folder itself.
+    fn remove_temp_files(&self) -> Result<(), Error> {
+        for dir_entry in read_dir(&self.temporary_directory)? {
+            let dir_entry = dir_entry?;
+            let path = dir_entry.path();
+            if dir_entry.file_type()?.is_dir() {
+                remove_dir_all(path)?;
+            } else {
+                remove_file(path)?;
+            }
         }
+        Ok(())
     }
 
     /// Waits until payload is started, or timeout expires. When timeout occurs, kill
