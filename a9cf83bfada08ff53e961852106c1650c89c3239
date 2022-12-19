@@ -73,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6b1cc45_36dccf4f",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2022-12-19T09:39:24Z",
+      "side": 1,
+      "message": "\u003e \u003eThen we have the same log in two places. I don\u0027t think that\u0027s what most people will want.\n\u003e\n\u003e Agreed.\n\nHmm, why? Although I understand your point, there are logs printed to more than one place. e.g. adb logcat and dmesg share some logs.\n\n\u003e But it is up to clients whether they read from those fds, and if so what they do with them.\n\nIt sounds like we should change the API by adding `VirtualMachine.setConsole(fd)` to give users a choice, like:\n\n    VirtualMachine vm \u003d VirtualMachineManager.getOrCreate(config);\n    ParcelFileDescriptor[] pipe \u003d ParcelFileDescriptor.createPipe();\n    vm.setConsole(pipe[1]);\n    vm.run();\n    \n    while (read from pipe[0]) {\n        // do whatever..\n    }\n    \nso, if `setConsole` isn\u0027t called, it\u0027s forwarded to `logd` by `virtualizationservice`. If we want this way, we may want to refactor functions like `createVmPipes`, `getConsoleOutput`, etc. Is it what we want?",
+      "parentUuid": "e50d905e_7bf7c2fd",
+      "range": {
+        "startLine": 479,
+        "startChar": 0,
+        "endLine": 480,
+        "endChar": 58
+      },
+      "revId": "a9cf83bfada08ff53e961852106c1650c89c3239",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d31d82be_a37c82c6",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 1
