@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "263334ba_c45b8cbf",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice_internal/AtomVmCreationRequested.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-12-19T09:04:25Z",
+      "side": 1,
+      "message": "No, it makes sense if nothing else uses the copied one. Thanks for clarifying :)",
+      "parentUuid": "734e1711_48beba98",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 19
+      },
+      "revId": "49f96f56dadbb93af5bd59ced5b78ace21b15e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dac634b3_ac9e477b",
@@ -61,6 +85,24 @@
       "writtenOn": "2022-12-19T01:41:17Z",
       "side": 1,
       "message": "(ditto) Regarding the flow for config type, it looks it converts the type a lot.\n\nDefining the config type as `vm_creation_requested::ConfigType`,\nconverting it to integer, and rolling it back to above type again.",
+      "revId": "49f96f56dadbb93af5bd59ced5b78ace21b15e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57ee99b8_1387d9c7",
+        "filename": "virtualizationservice/src/atom.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-12-19T09:04:25Z",
+      "side": 1,
+      "message": "Acknowledged with above comment.",
+      "parentUuid": "dac634b3_ac9e477b",
       "revId": "49f96f56dadbb93af5bd59ced5b78ace21b15e8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
