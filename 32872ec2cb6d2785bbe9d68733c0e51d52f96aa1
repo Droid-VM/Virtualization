@@ -102,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c330a25d_6fa816f0",
+        "filename": "libs/capabilities/src/caps.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-19T12:36:59Z",
+      "side": 1,
+      "message": "I\u0027d still be inclined to use `thiserror` to define an error struct or enum wrapping the value you get from `errno`, but if there\u0027s only one user of this library and you don\u0027t anticipate it being useful to anyone else then it doesn\u0027t matter that much.",
+      "parentUuid": "53eb6946_2b9a4a85",
+      "revId": "32872ec2cb6d2785bbe9d68733c0e51d52f96aa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19282e59_2b465b83",
         "filename": "libs/capabilities/src/caps.rs",
         "patchSetId": 1
