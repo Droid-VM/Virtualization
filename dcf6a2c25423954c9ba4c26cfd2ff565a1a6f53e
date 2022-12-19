@@ -285,6 +285,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f25b565_7138cecd",
+        "filename": "virtualizationservice/src/virtmgr.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-12-19T22:57:28Z",
+      "side": 1,
+      "message": "This confused people too much. I\u0027ve moved it to the next CL that actually starts using this for kernel binder.",
+      "parentUuid": "74d24d47_20ecad53",
+      "range": {
+        "startLine": 114,
+        "startChar": 58,
+        "endLine": 114,
+        "endChar": 81
+      },
+      "revId": "dcf6a2c25423954c9ba4c26cfd2ff565a1a6f53e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a48c8d22_68989441",
