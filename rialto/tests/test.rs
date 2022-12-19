@@ -29,7 +29,7 @@ use std::os::unix::io::FromRawFd;
 use std::panic;
 use std::thread;
 use std::time::Duration;
-use vmclient::{DeathReason, VmInstance};
+use vmclient::{DeathReason, VirtualizationService, VmInstance};
 
 const RIALTO_PATH: &str = "/data/local/tmp/rialto_test/arm64/rialto.bin";
 
@@ -48,7 +48,9 @@ fn test_boots() -> Result<(), Error> {
     // We need to start the thread pool for Binder to work properly, especially link_to_death.
     ProcessState::start_thread_pool();
 
-    let service = vmclient::connect().context("Failed to find VirtualizationService")?;
+    let virtmgr = VirtualizationService::new().context("Failed to spawn VirtualizationService")?;
+    let service = virtmgr.connect().context("Failed to find VirtualizationService")?;
+
     let rialto = File::open(RIALTO_PATH).context("Failed to open Rialto kernel binary")?;
     let console = android_log_fd()?;
     let log = android_log_fd()?;
