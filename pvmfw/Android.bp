@@ -24,7 +24,6 @@ rust_ffi_static {
         "libvmbase",
         "libzeroize_nostd",
     ],
-    apex_available: ["com.android.virt"],
 }
 
 cc_binary {
@@ -40,7 +39,6 @@ cc_binary {
         "image.ld",
         ":vmbase_sections",
     ],
-    apex_available: ["com.android.virt"],
 }
 
 raw_binary {
