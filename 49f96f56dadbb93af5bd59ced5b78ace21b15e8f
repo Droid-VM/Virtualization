@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "734e1711_48beba98",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice_internal/AtomVmCreationRequested.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-12-19T08:55:34Z",
+      "side": 1,
+      "message": "Unlike `DeathReason`, `vm_creation_requested::ConfigType` only exists in the statsd proto, not in AIDL. I didn\u0027t want to create a copy of the enum that we would need to keep in sync just for this, and casting it to `int` and back is safe. Do you think I should add the AIDL enum?",
+      "parentUuid": "35012928_13aa4530",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 19
+      },
+      "revId": "49f96f56dadbb93af5bd59ced5b78ace21b15e8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dac634b3_ac9e477b",
         "filename": "virtualizationservice/src/atom.rs",
         "patchSetId": 4
