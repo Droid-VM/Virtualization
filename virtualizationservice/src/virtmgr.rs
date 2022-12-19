@@ -21,10 +21,10 @@ mod crosvm;
 mod payload;
 mod selinux;
 
-use crate::aidl::VirtualizationService;
+use crate::aidl::{GLOBAL_SERVICE, VirtualizationService};
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::IVirtualizationService::BnVirtualizationService;
 use anyhow::{bail, Context};
-use binder::BinderFeatures;
+use binder::{BinderFeatures, ProcessState, Status};
 use lazy_static::lazy_static;
 use log::{info, Level};
 use rpcbinder::{FileDescriptorTransportMode, RpcServer};
@@ -86,6 +86,15 @@ fn take_fd_ownership(raw_fd: RawFd, owned_fds: &mut Vec<RawFd>) -> Result<OwnedF
     Ok(unsafe { OwnedFd::from_raw_fd(raw_fd) })
 }
 
+fn remove_memlock_rlimit() -> Result<(), Status> {
+    // No need to change rlimit if we are running as root.
+    if UID_CURRENT.is_root() {
+        return Ok(());
+    }
+
+    GLOBAL_SERVICE.removeMemlockRlimit()
+}
+
 fn main() {
     android_logger::init_once(
         android_logger::Config::default()
@@ -101,6 +110,11 @@ fn main() {
         .expect("Failed to take ownership of rpc_server_fd");
     let ready_fd = take_fd_ownership(args.ready_fd, &mut owned_fds)
         .expect("Failed to take ownership of ready_fd");
+
+    // Start thread pool for kernel Binder connection to VirtualizationServiceInternal.
+    ProcessState::start_thread_pool();
+
+    remove_memlock_rlimit().expect("Failed to remove memlock rlimit");
 
     let service = VirtualizationService::init();
     let service =

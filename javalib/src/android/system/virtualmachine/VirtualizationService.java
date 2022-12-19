@@ -20,11 +20,16 @@ import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 import android.system.virtualizationservice.IVirtualizationService;
 
+import java.lang.ref.SoftReference;
+
 /** A running instance of virtmgr that is hosting a VirtualizationService AIDL service. */
 class VirtualizationService {
     static {
         System.loadLibrary("virtualizationservice_jni");
     }
+
+    /* Soft reference caching the last created instance of this class. */
+    private static SoftReference<VirtualizationService> sInstance;
 
     /*
      * Client FD for UDS connection to virtmgr's RpcBinder server. Closing it
@@ -40,7 +45,7 @@ class VirtualizationService {
      * Spawns a new virtmgr subprocess that will host a VirtualizationService
      * AIDL service.
      */
-    public VirtualizationService() throws VirtualMachineException {
+    private VirtualizationService() throws VirtualMachineException {
         int clientFd = nativeSpawn();
         if (clientFd < 0) {
             throw new VirtualMachineException("Could not spawn VirtualizationService");
@@ -55,5 +60,18 @@ class VirtualizationService {
             throw new VirtualMachineException("Could not connect to VirtualizationService");
         }
         return IVirtualizationService.Stub.asInterface(binder);
+    }
+
+    /* Creates (and caches) a new instance of this class. */
+    public static VirtualizationService createNewInstance() throws VirtualMachineException {
+        VirtualizationService instance = new VirtualizationService();
+        sInstance = new SoftReference(instance);
+        return instance;
+    }
+
+    /* Returns an instance of this class, or creates a new one if one does not exist. */
+    public static VirtualizationService getInstance() throws VirtualMachineException {
+        VirtualizationService instance = (sInstance == null) ? null : sInstance.get();
+        return (instance == null) ? createNewInstance() : instance;
     }
 }

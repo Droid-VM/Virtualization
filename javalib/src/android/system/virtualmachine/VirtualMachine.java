@@ -59,7 +59,6 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.os.ServiceSpecificException;
 import android.system.virtualizationcommon.DeathReason;
 import android.system.virtualizationcommon.ErrorCode;
@@ -321,6 +320,12 @@ public class VirtualMachine implements AutoCloseable {
     @Nullable
     private Executor mCallbackExecutor;
 
+    /* Running instance of virtmgr that hosts VirtualizationService for this VM. */
+    @NonNull private VirtualizationService mVirtualizationServiceProcess;
+
+    /* Binder connection to the VirtualizationService of this VM. */
+    @NonNull private IVirtualizationService mVirtualizationService;
+
     private static class ExtraApkSpec {
         public final File apk;
         public final File idsig;
@@ -354,6 +359,18 @@ public class VirtualMachine implements AutoCloseable {
                 (config.isEncryptedStorageEnabled())
                         ? new File(thisVmDir, ENCRYPTED_STORE_FILE)
                         : null;
+
+        // Try to connect to an existing instance of VirtualizationService, or create
+        // a new one if the first attempt failed, e.g. if a previous instance of
+        // virtmgr had crashed.
+        try {
+            mVirtualizationServiceProcess = VirtualizationService.getInstance();
+            mVirtualizationService = mVirtualizationServiceProcess.connect();
+        } catch (VirtualMachineException ex) {
+            Log.w(TAG, "Failed to connect to VirtualizationService, will retry");
+            mVirtualizationServiceProcess = VirtualizationService.createNewInstance();
+            mVirtualizationService = mVirtualizationServiceProcess.connect();
+        }
     }
 
     /**
@@ -435,12 +452,8 @@ public class VirtualMachine implements AutoCloseable {
                 }
             }
 
-            IVirtualizationService service =
-                    IVirtualizationService.Stub.asInterface(
-                            ServiceManager.waitForService(SERVICE_NAME));
-
             try {
-                service.initializeWritablePartition(
+                vm.mVirtualizationService.initializeWritablePartition(
                         ParcelFileDescriptor.open(vm.mInstanceFilePath, MODE_READ_WRITE),
                         INSTANCE_FILE_SIZE,
                         PartitionType.ANDROID_VM_INSTANCE);
@@ -454,7 +467,7 @@ public class VirtualMachine implements AutoCloseable {
 
             if (config.isEncryptedStorageEnabled()) {
                 try {
-                    service.initializeWritablePartition(
+                    vm.mVirtualizationService.initializeWritablePartition(
                             ParcelFileDescriptor.open(vm.mEncryptedStoreFilePath, MODE_READ_WRITE),
                             config.getEncryptedStorageKib() * 1024L,
                             PartitionType.ENCRYPTEDSTORE);
@@ -738,10 +751,6 @@ public class VirtualMachine implements AutoCloseable {
                 throw new VirtualMachineException("failed to create idsig file", e);
             }
 
-            IVirtualizationService service =
-                    IVirtualizationService.Stub.asInterface(
-                            ServiceManager.waitForService(SERVICE_NAME));
-
             try {
                 createVmPipes();
 
@@ -749,11 +758,11 @@ public class VirtualMachine implements AutoCloseable {
                 appConfig.name = mName;
 
                 // Fill the idsig file by hashing the apk
-                service.createOrUpdateIdsigFile(
+                mVirtualizationService.createOrUpdateIdsigFile(
                         appConfig.apk, ParcelFileDescriptor.open(mIdsigFilePath, MODE_READ_WRITE));
 
                 for (ExtraApkSpec extraApk : mExtraApks) {
-                    service.createOrUpdateIdsigFile(
+                    mVirtualizationService.createOrUpdateIdsigFile(
                             ParcelFileDescriptor.open(extraApk.apk, MODE_READ_ONLY),
                             ParcelFileDescriptor.open(extraApk.idsig, MODE_READ_WRITE));
                 }
@@ -786,7 +795,8 @@ public class VirtualMachine implements AutoCloseable {
                     }
                 };
 
-                mVirtualMachine = service.createVm(vmConfigParcel, mConsoleWriter, mLogWriter);
+                mVirtualMachine =
+                        mVirtualizationService.createVm(vmConfigParcel, mConsoleWriter, mLogWriter);
                 mVirtualMachine.registerCallback(
                         new IVirtualMachineCallback.Stub() {
                             @Override
@@ -820,7 +830,7 @@ public class VirtualMachine implements AutoCloseable {
 
                             @Override
                             public void onDied(int cid, int reason) {
-                                service.asBinder().unlinkToDeath(deathRecipient, 0);
+                                mVirtualizationService.asBinder().unlinkToDeath(deathRecipient, 0);
                                 int translatedReason = getTranslatedReason(reason);
                                 if (onDiedCalled.compareAndSet(false, true)) {
                                     executeCallback(
@@ -831,7 +841,7 @@ public class VirtualMachine implements AutoCloseable {
                             }
                         });
                 mContext.registerComponentCallbacks(mMemoryManagementCallbacks);
-                service.asBinder().linkToDeath(deathRecipient, 0);
+                mVirtualizationService.asBinder().linkToDeath(deathRecipient, 0);
                 mVirtualMachine.start();
             } catch (IOException | IllegalStateException | ServiceSpecificException e) {
                 throw new VirtualMachineException(e);
