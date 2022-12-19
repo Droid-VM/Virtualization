@@ -16,6 +16,24 @@
       "message": "This is what I tried in aosp/2238414 (which I\u0027ll close as duplicate of this CL) but doesn\u0027t this result in pvmfw being packaged in the system.img?",
       "revId": "17b8d7547844d8b0f6cbd96b5581e71e1493a5d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0579994_17deeecc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-12-19T11:50:43Z",
+      "side": 1,
+      "message": "Even with this, pvmfw won\u0027t be included in the system partition unless there is `PRODUCT_PACKAGES +\u003d pvmfw`. We don\u0027t have that.",
+      "parentUuid": "aa2f9c4e_6ac8388f",
+      "revId": "17b8d7547844d8b0f6cbd96b5581e71e1493a5d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
