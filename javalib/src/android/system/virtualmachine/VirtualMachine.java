@@ -59,7 +59,6 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.os.ServiceSpecificException;
 import android.system.virtualizationcommon.DeathReason;
 import android.system.virtualizationcommon.ErrorCode;
@@ -335,6 +334,17 @@ public class VirtualMachine implements AutoCloseable {
         System.loadLibrary("virtualmachine_jni");
     }
 
+    private static VirtualizationService sVirtualizationService;
+
+    @NonNull
+    private static IVirtualizationService getVirtualizationService()
+            throws VirtualMachineException {
+        if (sVirtualizationService == null) {
+            sVirtualizationService = new VirtualizationService();
+        }
+        return sVirtualizationService.connect();
+    }
+
     private VirtualMachine(
             @NonNull Context context, @NonNull String name, @NonNull VirtualMachineConfig config)
             throws VirtualMachineException {
@@ -435,9 +445,7 @@ public class VirtualMachine implements AutoCloseable {
                 }
             }
 
-            IVirtualizationService service =
-                    IVirtualizationService.Stub.asInterface(
-                            ServiceManager.waitForService(SERVICE_NAME));
+            IVirtualizationService service = getVirtualizationService();
 
             try {
                 service.initializeWritablePartition(
@@ -738,9 +746,7 @@ public class VirtualMachine implements AutoCloseable {
                 throw new VirtualMachineException("failed to create idsig file", e);
             }
 
-            IVirtualizationService service =
-                    IVirtualizationService.Stub.asInterface(
-                            ServiceManager.waitForService(SERVICE_NAME));
+            IVirtualizationService service = getVirtualizationService();
 
             try {
                 createVmPipes();
