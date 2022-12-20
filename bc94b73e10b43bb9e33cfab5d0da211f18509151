@@ -614,6 +614,24 @@
       "parentUuid": "23d5c1bb_19819d9f",
       "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6350bd9f_65f4c5cb",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2022-12-20T06:15:48Z",
+      "side": 1,
+      "message": "`fdt_overlay_apply` always breaks overlay, because it overwrites properties after fixups. For an example, [overlay_fixup_one_phandle](https://android.googlesource.com/platform/external/dtc/+/refs/heads/master/libfdt/fdt_overlay.c#353) modifies prop with phandle values.\n\nDue to the reason, [fdt_overlay_apply()](https://android.googlesource.com/platform/external/dtc/+/refs/heads/master/libfdt/fdt_overlay.c#850) always invalidates overlay\u0027s fdt magic, to prevent further uses. `fdtoverlay.c` keeps the copy for preventing data corruption. should we repeat the pattern?\n\n\nnit: `libufdt` seems to have the same problem (tested manually with local changes)",
+      "parentUuid": "01716d68_63f48453",
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
