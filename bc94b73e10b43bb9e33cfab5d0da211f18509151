@@ -632,6 +632,24 @@
       "parentUuid": "01716d68_63f48453",
       "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "615497de_a4dc0a02",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2022-12-20T10:15:13Z",
+      "side": 1,
+      "message": "\u003e I guess `apply_debug_policy` should also be unsafe for the same reason as `apply_overlay`\n\nDone\n\n\u003e should we repeat the pattern?\n\nThe DP DTBO should only be applied once: if it fails, we reboot, and if it succeeds, we boot the kernel. So keeping a copy isn\u0027t necessary, IMO. In terms of Rust API, it would be nice for the `apply_*` functions to consume the overlay, but that\u0027s not possible with `\u0026[u8]`, AFAIK.",
+      "parentUuid": "6350bd9f_65f4c5cb",
+      "revId": "bc94b73e10b43bb9e33cfab5d0da211f18509151",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
