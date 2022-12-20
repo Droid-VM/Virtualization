@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2f1b4c1_3bbcf86c",
+        "filename": "javalib/jni/android_system_virtualmachine_VirtualMachine.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-12-20T15:24:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d4f93a0_24edb3c0",
+      "revId": "1bd0b636b523de29decfee445d906f1adfa1dfa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bef37b52_e57ace53",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-12-20T13:00:19Z",
       "side": 1,
       "message": "nit: would it be useful to pass `strerror(errno)` for better debuggability?",
+      "range": {
+        "startLine": 91,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 58
+      },
+      "revId": "1bd0b636b523de29decfee445d906f1adfa1dfa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "472b6b22_7f866d9f",
+        "filename": "javalib/jni/android_system_virtualmachine_VirtualMachine.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-12-20T15:24:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bef37b52_e57ace53",
       "range": {
         "startLine": 91,
         "startChar": 8,
@@ -81,6 +123,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f1c8481_660e3541",
+        "filename": "javalib/jni/android_system_virtualmachine_VirtualMachine.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-12-20T15:24:58Z",
+      "side": 1,
+      "message": "Oh well spotted. I used to have two FDs here, now we can simplify.",
+      "parentUuid": "aa7b0380_7a2239fe",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 81
+      },
+      "revId": "1bd0b636b523de29decfee445d906f1adfa1dfa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf4a3fab_e8c79021",
@@ -94,6 +160,30 @@
       "writtenOn": "2022-12-20T13:00:19Z",
       "side": 1,
       "message": "`ParcelFileDescriptor.adoptFd(mClientFd).close()`?, or change the type of mClientFd to ParcelFileDescriptor?",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 34
+      },
+      "revId": "1bd0b636b523de29decfee445d906f1adfa1dfa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4812d22_07c0061e",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualizationService.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-12-20T15:24:58Z",
+      "side": 1,
+      "message": "I was looking for a class like that! Thanks!",
+      "parentUuid": "bf4a3fab_e8c79021",
       "range": {
         "startLine": 64,
         "startChar": 8,
