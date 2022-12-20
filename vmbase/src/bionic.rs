@@ -16,8 +16,12 @@
 
 use core::ffi::c_char;
 use core::ffi::c_int;
+use core::ffi::c_void;
 use core::ffi::CStr;
+use core::slice;
+use core::str;
 
+use crate::console;
 use crate::eprintln;
 use crate::linker;
 
@@ -61,4 +65,41 @@ unsafe extern "C" fn async_safe_fatal_va_list(prefix: *const c_char, format: *co
         // We don't bother with printf formatting.
         eprintln!("FATAL BIONIC ERROR: {prefix}: \"{format}\" (unformatted)");
     }
+}
+
+const STDOUT: usize = 0x22f93b267670cf39;
+const STDERR: usize = 0x01eb50c59d11822f;
+
+#[no_mangle]
+static stdout: usize = STDOUT;
+#[no_mangle]
+static stderr: usize = STDERR;
+
+#[no_mangle]
+extern "C" fn fputs(c_str: *const c_char, stream: usize) -> c_int {
+    // SAFETY - Just like libc, we need to assume that `s` is a valid NULL-terminated string.
+    let c_str = unsafe { CStr::from_ptr(c_str) };
+
+    match (c_str.to_str(), stream) {
+        (Ok(s), STDOUT) => console::write_str(s),
+        (Ok(s), STDERR) => console::emergency_write_str(s),
+        _ => return -1, // EOF
+    }
+
+    0
+}
+
+#[no_mangle]
+extern "C" fn fwrite(ptr: *const c_void, size: usize, nmemb: usize, stream: usize) -> usize {
+    let length = size * nmemb;
+    // SAFETY - Just like libc, we need to assume that `ptr` is valid.
+    let s = unsafe { slice::from_raw_parts(ptr as *const u8, length) };
+
+    match (str::from_utf8(s), stream) {
+        (Ok(s), STDOUT) => console::write_str(s),
+        (Ok(s), STDERR) => console::emergency_write_str(s),
+        _ => return 0,
+    }
+
+    length
 }
