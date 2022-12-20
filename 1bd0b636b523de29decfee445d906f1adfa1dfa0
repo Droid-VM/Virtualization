@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fae04936_fe49c532",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-12-20T13:00:19Z",
+      "side": 1,
+      "message": "nice. my comments are nits.",
+      "revId": "1bd0b636b523de29decfee445d906f1adfa1dfa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d4f93a0_24edb3c0",
+        "filename": "javalib/jni/android_system_virtualmachine_VirtualMachine.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-12-20T13:00:19Z",
+      "side": 1,
+      "message": "Perhaps we want to separate this file into two: one for VirtualMachine and the other for VirtualizationService? It looks like in Android we have been having 1:1 relationship between a java class and its jni counterpart.",
+      "revId": "1bd0b636b523de29decfee445d906f1adfa1dfa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bef37b52_e57ace53",
+        "filename": "javalib/jni/android_system_virtualmachine_VirtualMachine.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-12-20T13:00:19Z",
+      "side": 1,
+      "message": "nit: would it be useful to pass `strerror(errno)` for better debuggability?",
+      "range": {
+        "startLine": 91,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 58
+      },
+      "revId": "1bd0b636b523de29decfee445d906f1adfa1dfa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa7b0380_7a2239fe",
+        "filename": "javalib/jni/android_system_virtualmachine_VirtualMachine.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-12-20T13:00:19Z",
+      "side": 1,
+      "message": "Why do you want to create the object under JNI? Can\u0027t this function return clientFd and let the object be created in the Java side?",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 81
+      },
+      "revId": "1bd0b636b523de29decfee445d906f1adfa1dfa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf4a3fab_e8c79021",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualizationService.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-12-20T13:00:19Z",
+      "side": 1,
+      "message": "`ParcelFileDescriptor.adoptFd(mClientFd).close()`?, or change the type of mClientFd to ParcelFileDescriptor?",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 34
+      },
+      "revId": "1bd0b636b523de29decfee445d906f1adfa1dfa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
