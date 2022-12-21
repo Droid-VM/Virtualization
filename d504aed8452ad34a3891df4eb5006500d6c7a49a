@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b765b6ba_5941ea82",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-21T15:57:31Z",
+      "side": 1,
+      "message": "Where do these numbers come from?",
+      "revId": "d504aed8452ad34a3891df4eb5006500d6c7a49a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff2bec3f_beb423b7",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-12-21T15:57:31Z",
+      "side": 1,
+      "message": "Why do you need to use `emergency_write_str` here? Does stderr get used from an interrupt context but stdout doesn\u0027t?",
+      "revId": "d504aed8452ad34a3891df4eb5006500d6c7a49a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
