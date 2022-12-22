@@ -68,6 +68,7 @@ public final class VirtualMachineConfig {
     private static final String KEY_MEMORY_MIB = "memoryMib";
     private static final String KEY_NUM_CPUS = "numCpus";
     private static final String KEY_ENCRYPTED_STORAGE_KIB = "encryptedStorageKib";
+    private static final String KEY_REDIRECT_CONSOLE_OUTPUT_TO_APP = "redirectConsoleOutputToApp";
 
     /** @hide */
     @Retention(RetentionPolicy.SOURCE)
@@ -126,6 +127,8 @@ public final class VirtualMachineConfig {
     /** The size of storage in KiB. 0 indicates that encryptedStorage is not required */
     private final long mEncryptedStorageKib;
 
+    private final boolean mRedirectConsoleOutputToApp;
+
     private VirtualMachineConfig(
             @NonNull String apkPath,
             @Nullable String payloadConfigPath,
@@ -134,7 +137,8 @@ public final class VirtualMachineConfig {
             boolean protectedVm,
             int memoryMib,
             int numCpus,
-            long encryptedStorageKib) {
+            long encryptedStorageKib,
+            boolean redirectConsoleOutputToApp) {
         // This is only called from Builder.build(); the builder handles parameter validation.
         mApkPath = apkPath;
         mPayloadConfigPath = payloadConfigPath;
@@ -144,6 +148,7 @@ public final class VirtualMachineConfig {
         mMemoryMib = memoryMib;
         mNumCpus = numCpus;
         mEncryptedStorageKib = encryptedStorageKib;
+        mRedirectConsoleOutputToApp = redirectConsoleOutputToApp;
     }
 
     /** Loads a config from a file. */
@@ -212,6 +217,7 @@ public final class VirtualMachineConfig {
         if (encryptedStorageKib != 0) {
             builder.setEncryptedStorageKib(encryptedStorageKib);
         }
+        builder.setRedirectConsoleOutputToApp(b.getBoolean(KEY_REDIRECT_CONSOLE_OUTPUT_TO_APP));
 
         return builder.build();
     }
@@ -241,6 +247,7 @@ public final class VirtualMachineConfig {
         if (mEncryptedStorageKib > 0) {
             b.putLong(KEY_ENCRYPTED_STORAGE_KIB, mEncryptedStorageKib);
         }
+        b.putBoolean(KEY_REDIRECT_CONSOLE_OUTPUT_TO_APP, mRedirectConsoleOutputToApp);
         b.writeToStream(output);
     }
 
@@ -348,6 +355,16 @@ public final class VirtualMachineConfig {
     }
 
     /**
+     * Returns whether the app can read the VM console output.
+     *
+     * @hide
+     */
+    @SystemApi
+    public boolean isRedirectConsoleOutputToApp() {
+        return mRedirectConsoleOutputToApp;
+    }
+
+    /**
      * Tests if this config is compatible with other config. Being compatible means that the configs
      * can be interchangeably used for the same virtual machine. Compatible changes includes the
      * number of CPUs and the size of the RAM. All other changes (e.g. using a different payload,
@@ -417,6 +434,7 @@ public final class VirtualMachineConfig {
         private int mMemoryMib;
         private int mNumCpus = 1;
         private long mEncryptedStorageKib;
+        private boolean mRedirectConsoleOutputToApp = false;
 
         /**
          * Creates a builder for the given context.
@@ -477,7 +495,8 @@ public final class VirtualMachineConfig {
                     mProtectedVm,
                     mMemoryMib,
                     mNumCpus,
-                    mEncryptedStorageKib);
+                    mEncryptedStorageKib,
+                    mRedirectConsoleOutputToApp);
         }
 
         /**
@@ -630,6 +649,18 @@ public final class VirtualMachineConfig {
                 throw new IllegalArgumentException("Encrypted Storage size must be positive");
             }
             mEncryptedStorageKib = encryptedStorageKib;
+            return this;
+        }
+
+        /**
+         * Sets whether to allow the app to read the VM console output. Default is false.
+         *
+         * @hide
+         */
+        @SystemApi
+        @NonNull
+        public Builder setRedirectConsoleOutputToApp(boolean redirect) {
+            mRedirectConsoleOutputToApp = redirect;
             return this;
         }
     }

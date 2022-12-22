@@ -321,6 +321,8 @@ public class VirtualMachine implements AutoCloseable {
     @Nullable
     private Executor mCallbackExecutor;
 
+    private final boolean mRedirectConsoleOutputToApp;
+
     private static class ExtraApkSpec {
         public final File apk;
         public final File idsig;
@@ -354,6 +356,7 @@ public class VirtualMachine implements AutoCloseable {
                 (config.isEncryptedStorageEnabled())
                         ? new File(thisVmDir, ENCRYPTED_STORE_FILE)
                         : null;
+        mRedirectConsoleOutputToApp = config.isRedirectConsoleOutputToApp();
     }
 
     /**
@@ -743,7 +746,9 @@ public class VirtualMachine implements AutoCloseable {
                             ServiceManager.waitForService(SERVICE_NAME));
 
             try {
-                createVmPipes();
+                if (mRedirectConsoleOutputToApp) {
+                    createVmPipes();
+                }
 
                 VirtualMachineAppConfig appConfig = getConfig().toVsConfig();
                 appConfig.name = mName;
@@ -861,14 +866,19 @@ public class VirtualMachine implements AutoCloseable {
     }
 
     /**
-     * Returns the stream object representing the console output from the virtual machine.
+     * Returns the stream object representing the console output from the virtual machine. {@link
+     * VirtualMachineConfig#isRedirectConsoleOutputToApp Redirection} must be turned on explicitly.
      *
-     * @throws VirtualMachineException if the stream could not be created.
+     * @throws VirtualMachineException if the stream could not be created, or redirection is turned
+     *     off.
      * @hide
      */
     @SystemApi
     @NonNull
     public InputStream getConsoleOutput() throws VirtualMachineException {
+        if (!mRedirectConsoleOutputToApp) {
+            throw new VirtualMachineException("Redirecting console output is turned off");
+        }
         synchronized (mLock) {
             createVmPipes();
             return new FileInputStream(mConsoleReader.getFileDescriptor());
@@ -876,14 +886,19 @@ public class VirtualMachine implements AutoCloseable {
     }
 
     /**
-     * Returns the stream object representing the log output from the virtual machine.
+     * Returns the stream object representing the log output from the virtual machine. {@link
+     * VirtualMachineConfig#isRedirectConsoleOutputToApp Redirection} must be turned on explicitly.
      *
-     * @throws VirtualMachineException if the stream could not be created.
+     * @throws VirtualMachineException if the stream could not be created, or redirection is turned
+     *     off.
      * @hide
      */
     @SystemApi
     @NonNull
     public InputStream getLogOutput() throws VirtualMachineException {
+        if (!mRedirectConsoleOutputToApp) {
+            throw new VirtualMachineException("Redirecting console output is turned off");
+        }
         synchronized (mLock) {
             createVmPipes();
             return new FileInputStream(mLogReader.getFileDescriptor());
