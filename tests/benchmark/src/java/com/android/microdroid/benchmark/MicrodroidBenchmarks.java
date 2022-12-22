@@ -211,6 +211,7 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
                     newVmConfigBuilder()
                             .setPayloadBinaryPath("MicrodroidIdleNativeLib.so")
                             .setDebugLevel(DEBUG_LEVEL_FULL)
+                            .setVmOutputCaptured(true)
                             .setMemoryMib(256)
                             .build();
             forceCreateNewVirtualMachine("test_vm_boot_time_debug", normalConfig);
