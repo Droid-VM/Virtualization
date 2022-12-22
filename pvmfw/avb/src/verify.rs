@@ -367,6 +367,20 @@ mod tests {
         assert_payload_verification_fails(&kernel, &public_key, AvbImageVerifyError::Io)
     }
 
+    #[test]
+    fn tampered_kernel_fails_verification() -> Result<()> {
+        let mut kernel = load_latest_valid_signed_kernel()?;
+        let tampered_header = [0u8; 100];
+        assert!(
+            tampered_header != kernel[..tampered_header.len()],
+            "Tampered header should be different with the original kernel."
+        );
+        kernel[..tampered_header.len()].copy_from_slice(&tampered_header);
+        let public_key = read_file_to_bytes("data/testkey_rsa4096_pub.bin")?;
+
+        assert_payload_verification_fails(&kernel, &public_key, AvbImageVerifyError::Verification)
+    }
+
     fn assert_payload_verification_fails(
         kernel: &[u8],
         trusted_public_key: &[u8],
