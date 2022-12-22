@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "aa315aed_c6d82590",
+        "filename": "pvmfw/avb/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-22T15:10:54Z",
+      "side": 1,
+      "message": "They run on device and on presubmit. You can find more info in its last successful build, for example [this](https://android-build.googleplex.com/builds/tests/view?invocationId\u003dI09600010119018879\u0026testResultId\u003dTR31428432120757144).",
+      "parentUuid": "01aad6db_7cb57330",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 6
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7aa209b6_f6eeb2c8",
         "filename": "pvmfw/avb/Android.bp",
         "patchSetId": 7
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-22T12:29:10Z",
       "side": 1,
       "message": "This isn\u0027t blocking and can be a clean-up on top of this CL but could you move this to where we\u0027re defining `avb_testkey_rsa4096_pub_bin` and also re-define that target using this `genrule`? Ideally `extract_public_key` could even be turned into its own recipe but not sure how good you Go skills are (I personally have none).",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 1
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21138908_a8d0403b",
+        "filename": "pvmfw/avb/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-22T15:10:54Z",
+      "side": 1,
+      "message": "I\u0027ll address this in a different cl.",
+      "parentUuid": "7aa209b6_f6eeb2c8",
       "range": {
         "startLine": 52,
         "startChar": 0,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd1972f5_825e38f6",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-22T15:10:54Z",
+      "side": 1,
+      "message": "Actually I put this here because almost all the methods in this file need to be marked with these annotations. As the only method in use is `verify_paylod`, it only needs the enum `AvbImageVerifyError`. It will be quite ugly and tedious to mark these in front of everything. Would you mind if I clean up this later, once we can call `avb_slot_verify` in pvmfw?",
+      "parentUuid": "551d5954_4da01cf4",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 27
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e7fa7ff_a1a85cf9",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 7
@@ -83,6 +155,30 @@
       "writtenOn": "2022-12-22T12:29:10Z",
       "side": 1,
       "message": "How? Even if you\u0027ve checked the C code, it might change and bugs could be introduced in the future.\n\nI think that the Rust code should instead validate this assumption (`.is_null` or `NonNull`) and handle the potential error.",
+      "range": {
+        "startLine": 107,
+        "startChar": 7,
+        "endLine": 107,
+        "endChar": 38
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07f0cf30_dd26fe69",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-22T15:10:54Z",
+      "side": 1,
+      "message": "I checked taht the implementations of AvbOps in u-boot or fs_mgr do not have null check for these methods either, and `ptr::write` has both alignment and null check.\n\nI\u0027ll remove this from the comment.",
+      "parentUuid": "3e7fa7ff_a1a85cf9",
       "range": {
         "startLine": 107,
         "startChar": 7,
@@ -118,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69c1d1ad_3b729637",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-22T15:10:54Z",
+      "side": 1,
+      "message": "Why not use `ptr::write`? It\u0027s supposed to be used for such cases and it has both alignment and null checks[1].\n\n[1] https://doc.rust-lang.org/src/core/ptr/mod.rs.html#1320",
+      "parentUuid": "9855f188_91f0ba15",
+      "range": {
+        "startLine": 111,
+        "startChar": 8,
+        "endLine": 111,
+        "endChar": 18
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21331e8a_62a57b4c",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 7
@@ -129,6 +249,30 @@
       "writtenOn": "2022-12-22T12:29:10Z",
       "side": 1,
       "message": "I think this is UB as you re-interpret the bytes with varying signedness and widths.\n\nInstead, I\u0027d recommend using safe conversions and operations e.g.\n```\nfn from_signed_offset(offset: isize, max_offset: usize) -\u003e Option\u003cusize\u003e {\n    offset.try_into().ok().or(max_offset.checked_add_signed(offset))\n}\n```\nthen\n```\nlet offset \u003d if Some(offset) \u003d from_signed_offset(offset, kernel.len()) {\n    offset\n} else {\n    return // ...\n}\n```",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 33
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a3d773d_0ebe9f11",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-22T15:10:54Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "21331e8a_62a57b4c",
       "range": {
         "startLine": 126,
         "startChar": 0,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4be8c77_ad2303a3",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-22T15:10:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d59e654_dec1b410",
+      "range": {
+        "startLine": 137,
+        "startChar": 4,
+        "endLine": 140,
+        "endChar": 33
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3246834d_e6c0d0d3",
@@ -175,6 +343,30 @@
       "writtenOn": "2022-12-22T12:29:10Z",
       "side": 1,
       "message": "Then it would be cleaner to start by creating a `\u0026mut [u8]` wrapping that memory and use it throughout (e.g. replace `num_bytes` with `buffer.len()`).",
+      "range": {
+        "startLine": 141,
+        "startChar": 15,
+        "endLine": 142,
+        "endChar": 65
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "787edac4_2b7befbd",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-22T15:10:54Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "3246834d_e6c0d0d3",
       "range": {
         "startLine": 141,
         "startChar": 15,
@@ -208,6 +400,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9e65d88_7a5044e8",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-22T15:10:54Z",
+      "side": 1,
+      "message": "This addresses the second line using `core::ptr::write`",
+      "parentUuid": "c4c35543_395af9db",
+      "range": {
+        "startLine": 144,
+        "startChar": 55,
+        "endLine": 144,
+        "endChar": 85
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5327627d_8b56940b",
@@ -231,6 +447,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a55f6027_6b0e5c77",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-22T15:10:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5327627d_8b56940b",
+      "range": {
+        "startLine": 146,
+        "startChar": 8,
+        "endLine": 146,
+        "endChar": 78
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dad74b9b_052518f9",
@@ -244,6 +484,30 @@
       "writtenOn": "2022-12-22T12:29:10Z",
       "side": 1,
       "message": "I think this is dangerous as the borrow checker loses track of the slices, AFAICT.\n\nInstead, can\u0027t `Payload` have an explicit lifetime and track the slices directly? This would remove the need for `.kernel()` and `.trusted_public_key()` and reduce the number of members.",
+      "range": {
+        "startLine": 219,
+        "startChar": 12,
+        "endLine": 222,
+        "endChar": 64
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "827dbd96_976b74f3",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-22T15:10:54Z",
+      "side": 1,
+      "message": "Yeah, I thought about trying this in the end.",
+      "parentUuid": "dad74b9b_052518f9",
       "range": {
         "startLine": 219,
         "startChar": 12,
@@ -279,6 +543,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "781b50c3_fb7f371a",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-22T15:10:54Z",
+      "side": 1,
+      "message": "Mmm, I don\u0027t think `AvbOps` should be assimilated to `Payload` tbh. That can be convenient for the current code but it creates lots of confusion when reading it, like why a set of operations (`AvbOps`) gets converted to a data bundle (`Payload`)... It\u0027s also not so extendable in case we want to look at other parts of `AvbOps`.",
+      "parentUuid": "77cc846a_5ea1eac8",
+      "range": {
+        "startLine": 226,
+        "startChar": 7,
+        "endLine": 226,
+        "endChar": 23
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85193a69_fe0e6c48",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 7
@@ -290,6 +578,30 @@
       "writtenOn": "2022-12-22T12:29:10Z",
       "side": 1,
       "message": "Just remove the call from pvmfw and bring it back once `verify_payload` builds with ToT (or, even better, on top of the CLs that provide those missing definitions)?",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 260,
+        "endChar": 58
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0362ac09_dc50288d",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-22T15:10:54Z",
+      "side": 1,
+      "message": "Then this change cannot be merged before those changes. I thought we agreed that I develop this part on top of the normal libc and merge it like this. In the end we just switch pvmfw to call this method.\n\nThere are several advantages of landing this cl separately:\n- This enables the payload verification on the current kernel in CI. It ensures that libpvmfw_avb works with standard libc + up-to-date kernel. Anyone who modifies the kernel signature format also need to consider the verification here.\n- Once the stack of libc CLs is ready, we can just push a simple change to switch pvmfw to call this method, in case that doesn\u0027t work, we know that the problem is not from the pvmfw libc implementation.",
+      "parentUuid": "85193a69_fe0e6c48",
       "range": {
         "startLine": 258,
         "startChar": 0,
@@ -325,6 +637,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed4dd76d_f64efc00",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-22T15:10:54Z",
+      "side": 1,
+      "message": "What\u0027s the advantage of `CStr`? Do you mean convert the \"bootloader\" to bytes and then call `CStr::from_bytes_until_nul`? Why not let rust do this job?",
+      "parentUuid": "68490217_4c56e2c3",
+      "range": {
+        "startLine": 286,
+        "startChar": 8,
+        "endLine": 286,
+        "endChar": 15
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1367b7d8_600c402e",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 7
@@ -336,6 +672,30 @@
       "writtenOn": "2022-12-22T12:29:10Z",
       "side": 1,
       "message": "I don\u0027t think that will ever be possible as the libavb API should be stable, right? So remove this part of the comment?",
+      "range": {
+        "startLine": 287,
+        "startChar": 60,
+        "endLine": 289,
+        "endChar": 0
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea4efccb_6364dc0c",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-22T15:10:54Z",
+      "side": 1,
+      "message": "I don\u0027t know whether it is stable. I hit lots of segmentation fault when trying libavb API with different set of params. I think that API needs to sanitize the input a bit at least.",
+      "parentUuid": "1367b7d8_600c402e",
       "range": {
         "startLine": 287,
         "startChar": 60,
@@ -359,6 +719,30 @@
       "writtenOn": "2022-12-22T12:29:10Z",
       "side": 1,
       "message": "Should we use top-level `const` values for these paths instead, so that they can be re-used?",
+      "range": {
+        "startLine": 317,
+        "startChar": 44,
+        "endLine": 317,
+        "endChar": 74
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e37be252_53af40bb",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2022-12-22T15:10:54Z",
+      "side": 1,
+      "message": "Done. I changed the strings that are reused to const, some strings like `unsigned_test.img` used only once, I left them as literals.",
+      "parentUuid": "48281d8f_1d159b92",
       "range": {
         "startLine": 317,
         "startChar": 44,
