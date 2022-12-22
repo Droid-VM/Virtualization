@@ -58,7 +58,7 @@ public final class VirtualMachineConfig {
     private static final String[] EMPTY_STRING_ARRAY = {};
 
     // These define the schema of the config file persisted on disk.
-    private static final int VERSION = 2;
+    private static final int VERSION = 3;
     private static final String KEY_VERSION = "version";
     private static final String KEY_APKPATH = "apkPath";
     private static final String KEY_PAYLOADCONFIGPATH = "payloadConfigPath";
@@ -68,6 +68,7 @@ public final class VirtualMachineConfig {
     private static final String KEY_MEMORY_MIB = "memoryMib";
     private static final String KEY_NUM_CPUS = "numCpus";
     private static final String KEY_ENCRYPTED_STORAGE_KIB = "encryptedStorageKib";
+    private static final String KEY_VM_OUTPUTS_CAPTURED = "vmOutputsCaptured";
 
     /** @hide */
     @Retention(RetentionPolicy.SOURCE)
@@ -126,6 +127,9 @@ public final class VirtualMachineConfig {
     /** The size of storage in KiB. 0 indicates that encryptedStorage is not required */
     private final long mEncryptedStorageKib;
 
+    /** Whether the app can read console and log output. */
+    private final boolean mVmOutputsCaptured;
+
     private VirtualMachineConfig(
             @NonNull String apkPath,
             @Nullable String payloadConfigPath,
@@ -134,7 +138,8 @@ public final class VirtualMachineConfig {
             boolean protectedVm,
             int memoryMib,
             int numCpus,
-            long encryptedStorageKib) {
+            long encryptedStorageKib,
+            boolean vmOutputsCaptured) {
         // This is only called from Builder.build(); the builder handles parameter validation.
         mApkPath = apkPath;
         mPayloadConfigPath = payloadConfigPath;
@@ -144,6 +149,7 @@ public final class VirtualMachineConfig {
         mMemoryMib = memoryMib;
         mNumCpus = numCpus;
         mEncryptedStorageKib = encryptedStorageKib;
+        mVmOutputsCaptured = vmOutputsCaptured;
     }
 
     /** Loads a config from a file. */
@@ -212,6 +218,7 @@ public final class VirtualMachineConfig {
         if (encryptedStorageKib != 0) {
             builder.setEncryptedStorageKib(encryptedStorageKib);
         }
+        builder.setVmOutputsCaptured(b.getBoolean(KEY_VM_OUTPUTS_CAPTURED));
 
         return builder.build();
     }
@@ -241,6 +248,7 @@ public final class VirtualMachineConfig {
         if (mEncryptedStorageKib > 0) {
             b.putLong(KEY_ENCRYPTED_STORAGE_KIB, mEncryptedStorageKib);
         }
+        b.putBoolean(KEY_VM_OUTPUTS_CAPTURED, mVmOutputsCaptured);
         b.writeToStream(output);
     }
 
@@ -348,6 +356,16 @@ public final class VirtualMachineConfig {
     }
 
     /**
+     * Returns whether the app can read the VM console or log output.
+     *
+     * @hide
+     */
+    @SystemApi
+    public boolean isVmOutputsCaptured() {
+        return mVmOutputsCaptured;
+    }
+
+    /**
      * Tests if this config is compatible with other config. Being compatible means that the configs
      * can be interchangeably used for the same virtual machine; they do not change the VM identity
      * or secrets. Such changes include varying the number of CPUs or the size of the RAM. Changes
@@ -418,6 +436,7 @@ public final class VirtualMachineConfig {
         private int mMemoryMib;
         private int mNumCpus = 1;
         private long mEncryptedStorageKib;
+        private boolean mVmOutputsCaptured = false;
 
         /**
          * Creates a builder for the given context.
@@ -470,6 +489,10 @@ public final class VirtualMachineConfig {
                 throw new IllegalStateException("setProtectedVm must be called explicitly");
             }
 
+            if (mVmOutputsCaptured && mDebugLevel != DEBUG_LEVEL_FULL) {
+                throw new IllegalStateException("debug level must be FULL to capture outputs");
+            }
+
             return new VirtualMachineConfig(
                     apkPath,
                     mPayloadConfigPath,
@@ -478,7 +501,8 @@ public final class VirtualMachineConfig {
                     mProtectedVm,
                     mMemoryMib,
                     mNumCpus,
-                    mEncryptedStorageKib);
+                    mEncryptedStorageKib,
+                    mVmOutputsCaptured);
         }
 
         /**
@@ -631,6 +655,26 @@ public final class VirtualMachineConfig {
                 throw new IllegalArgumentException("Encrypted Storage size must be positive");
             }
             mEncryptedStorageKib = encryptedStorageKib;
+            return this;
+        }
+
+        /**
+         * Sets whether to allow the app to read the VM outputs (console / log). Default is false.
+         *
+         * <p>By default, console and log outputs of a {@link #setDebugLevel debuggable} VM are
+         * automatically forwarded to the host logcat. Setting this as true will allow apps to
+         * directly read {@link VirtualMachine#getConsoleOutput console output} and {@link
+         * VirtualMachine#getLogOutput log output}, instead of forwarding outputs to the host
+         * logcat.
+         *
+         * <p>The {@link #setDebugLevel debug level} must be FULL to be set as true.
+         *
+         * @hide
+         */
+        @SystemApi
+        @NonNull
+        public Builder setVmOutputsCaptured(boolean captured) {
+            mVmOutputsCaptured = captured;
             return this;
         }
     }

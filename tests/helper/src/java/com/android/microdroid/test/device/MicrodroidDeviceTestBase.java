@@ -99,7 +99,10 @@ public abstract class MicrodroidDeviceTestBase {
     }
 
     public VirtualMachineConfig.Builder newVmConfigBuilder() {
-        return new VirtualMachineConfig.Builder(mCtx).setProtectedVm(mProtectedVm);
+        return new VirtualMachineConfig.Builder(mCtx)
+                .setProtectedVm(mProtectedVm)
+                .setDebugLevel(VirtualMachineConfig.DEBUG_LEVEL_FULL)
+                .setVmOutputsCaptured(true);
     }
 
     protected final boolean isProtectedVm() {
@@ -212,9 +215,17 @@ public abstract class MicrodroidDeviceTestBase {
                 throws VirtualMachineException, InterruptedException {
             vm.setCallback(mExecutorService, this);
             vm.run();
-            logVmOutputAndMonitorBootEvents(
-                    logTag, vm.getConsoleOutput(), "Console", mConsoleOutput);
-            logVmOutput(logTag, vm.getLogOutput(), "Log", mLogOutput);
+            try {
+                logVmOutputAndMonitorBootEvents(
+                        logTag, vm.getConsoleOutput(), "Console", mConsoleOutput);
+                logVmOutput(logTag, vm.getLogOutput(), "Log", mLogOutput);
+            } catch (VirtualMachineException e) {
+                if (e.getMessage().contains("Redirecting vm outputs is turned off")) {
+                    // expected for VMs without output redirection
+                } else {
+                    throw e;
+                }
+            }
             mExecutorService.awaitTermination(300, TimeUnit.SECONDS);
         }
 
