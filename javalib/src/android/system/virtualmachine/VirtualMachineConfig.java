@@ -26,6 +26,7 @@ import android.annotation.IntRange;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.annotation.RequiresPermission;
+import android.annotation.SuppressLint;
 import android.annotation.SystemApi;
 import android.annotation.TestApi;
 import android.content.Context;
@@ -68,6 +69,7 @@ public final class VirtualMachineConfig {
     private static final String KEY_MEMORY_MIB = "memoryMib";
     private static final String KEY_NUM_CPUS = "numCpus";
     private static final String KEY_ENCRYPTED_STORAGE_KIB = "encryptedStorageKib";
+    private static final String KEY_REDIRECT_VM_OUTPUTS_TO_APP = "redirectVmOutputsToApp";
 
     /** @hide */
     @Retention(RetentionPolicy.SOURCE)
@@ -126,6 +128,8 @@ public final class VirtualMachineConfig {
     /** The size of storage in KiB. 0 indicates that encryptedStorage is not required */
     private final long mEncryptedStorageKib;
 
+    private final boolean mRedirectVmOutputsToApp;
+
     private VirtualMachineConfig(
             @NonNull String apkPath,
             @Nullable String payloadConfigPath,
@@ -134,7 +138,8 @@ public final class VirtualMachineConfig {
             boolean protectedVm,
             int memoryMib,
             int numCpus,
-            long encryptedStorageKib) {
+            long encryptedStorageKib,
+            boolean redirectVmOutputsToApp) {
         // This is only called from Builder.build(); the builder handles parameter validation.
         mApkPath = apkPath;
         mPayloadConfigPath = payloadConfigPath;
@@ -144,6 +149,7 @@ public final class VirtualMachineConfig {
         mMemoryMib = memoryMib;
         mNumCpus = numCpus;
         mEncryptedStorageKib = encryptedStorageKib;
+        mRedirectVmOutputsToApp = redirectVmOutputsToApp;
     }
 
     /** Loads a config from a file. */
@@ -212,6 +218,7 @@ public final class VirtualMachineConfig {
         if (encryptedStorageKib != 0) {
             builder.setEncryptedStorageKib(encryptedStorageKib);
         }
+        builder.setRedirectVmOutputsToApp(b.getBoolean(KEY_REDIRECT_VM_OUTPUTS_TO_APP));
 
         return builder.build();
     }
@@ -241,6 +248,7 @@ public final class VirtualMachineConfig {
         if (mEncryptedStorageKib > 0) {
             b.putLong(KEY_ENCRYPTED_STORAGE_KIB, mEncryptedStorageKib);
         }
+        b.putBoolean(KEY_REDIRECT_VM_OUTPUTS_TO_APP, mRedirectVmOutputsToApp);
         b.writeToStream(output);
     }
 
@@ -348,6 +356,16 @@ public final class VirtualMachineConfig {
     }
 
     /**
+     * Returns whether the app can read the VM console output.
+     *
+     * @hide
+     */
+    @SystemApi
+    public boolean isVmOutputRedirectedToApp() {
+        return mRedirectVmOutputsToApp;
+    }
+
+    /**
      * Tests if this config is compatible with other config. Being compatible means that the configs
      * can be interchangeably used for the same virtual machine. Compatible changes includes the
      * number of CPUs and the size of the RAM. All other changes (e.g. using a different payload,
@@ -417,6 +435,7 @@ public final class VirtualMachineConfig {
         private int mMemoryMib;
         private int mNumCpus = 1;
         private long mEncryptedStorageKib;
+        private boolean mRedirectVmOutputsToApp = false;
 
         /**
          * Creates a builder for the given context.
@@ -477,7 +496,8 @@ public final class VirtualMachineConfig {
                     mProtectedVm,
                     mMemoryMib,
                     mNumCpus,
-                    mEncryptedStorageKib);
+                    mEncryptedStorageKib,
+                    mRedirectVmOutputsToApp);
         }
 
         /**
@@ -630,6 +650,25 @@ public final class VirtualMachineConfig {
                 throw new IllegalArgumentException("Encrypted Storage size must be positive");
             }
             mEncryptedStorageKib = encryptedStorageKib;
+            return this;
+        }
+
+        /**
+         * Sets whether to allow the app to read the VM outputs (console / log). Default is false.
+         *
+         * <p>By default, console and log outputs of a {@link #setDebugLevel debuggable} VM are
+         * automatically forwarded to the host logcat. Setting this as true will allow apps to
+         * directly read {@link VirtualMachine#getConsoleOutput console output} and {@link
+         * VirtualMachine#getLogOutput log output}, instead of forwarding outputs to the host
+         * logcat.
+         *
+         * @hide
+         */
+        @SystemApi
+        @SuppressLint("MissingGetterMatchingBuilder")
+        @NonNull
+        public Builder setRedirectVmOutputsToApp(boolean redirect) {
+            mRedirectVmOutputsToApp = redirect;
             return this;
         }
     }

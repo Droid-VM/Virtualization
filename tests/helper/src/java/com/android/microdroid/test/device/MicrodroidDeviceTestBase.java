@@ -85,7 +85,9 @@ public abstract class MicrodroidDeviceTestBase {
     }
 
     public VirtualMachineConfig.Builder newVmConfigBuilder() {
-        return new VirtualMachineConfig.Builder(mCtx).setProtectedVm(mProtectedVm);
+        return new VirtualMachineConfig.Builder(mCtx)
+                .setProtectedVm(mProtectedVm)
+                .setRedirectVmOutputsToApp(true);
     }
 
     protected final boolean isProtectedVm() {

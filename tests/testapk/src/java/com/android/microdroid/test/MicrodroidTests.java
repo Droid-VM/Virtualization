@@ -1142,6 +1142,23 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(testResults.mEffectiveCapabilities).isEmpty();
     }
 
+    @Test
+    public void outputsShouldBeExplicitlyForwarded() throws Exception {
+        assumeSupportedKernel();
+
+        final VirtualMachineConfig vmConfig =
+                new VirtualMachineConfig.Builder(ApplicationProvider.getApplicationContext())
+                        .setProtectedVm(mProtectedVm)
+                        .setPayloadBinaryPath("MicrodroidTestNativeLib.so")
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .build();
+        final VirtualMachine vm = forceCreateNewVirtualMachine("test_vm_forward_log", vmConfig);
+        assertThrowsVmExceptionContaining(
+                () -> vm.getConsoleOutput(), "Redirecting vm outputs is turned off");
+        assertThrowsVmExceptionContaining(
+                () -> vm.getLogOutput(), "Redirecting vm outputs is turned off");
+    }
+
     private void assertFileContentsAreEqualInTwoVms(String fileName, String vmName1, String vmName2)
             throws IOException {
         File file1 = getVmFile(vmName1, fileName);
