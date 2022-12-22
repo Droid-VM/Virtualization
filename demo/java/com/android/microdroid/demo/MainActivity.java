@@ -19,7 +19,6 @@ package com.android.microdroid.demo;
 import android.app.Application;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineCallback;
@@ -248,6 +247,7 @@ public class MainActivity extends AppCompatActivity {
                 if (debug) {
                     builder.setDebugLevel(VirtualMachineConfig.DEBUG_LEVEL_FULL);
                 }
+                builder.setVmOutputsCaptured(true);
                 VirtualMachineConfig config = builder.build();
                 VirtualMachineManager vmm =
                         getApplication().getSystemService(VirtualMachineManager.class);

@@ -118,13 +118,13 @@ private:
         }
         char buf[kBlockSizeBytes];
 
-        struct timespec start;
-        if (clock_gettime(CLOCK_MONOTONIC, &start) == -1) {
-            return ErrnoError() << "failed to clock_gettime";
-        }
         unique_fd fd(open(filename.c_str(), O_RDONLY | O_CLOEXEC));
         if (fd.get() == -1) {
             return ErrnoError() << "Read: opening " << filename << " failed";
+        }
+        struct timespec start;
+        if (clock_gettime(CLOCK_MONOTONIC, &start) == -1) {
+            return ErrnoError() << "failed to clock_gettime";
         }
         for (auto i = 0; i < block_count; ++i) {
             auto bytes = pread(fd, buf, kBlockSizeBytes, offsets[i]);
