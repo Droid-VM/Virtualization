@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f2ea060_bf6b2ce8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-12-23T20:25:43Z",
+      "side": 1,
+      "message": "I don\u0027t know that mixing the test setup between the test code and the build rules makes it better, especially when soong takes to long to regenerate. Why did you opt for this vs refactoring the test code?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 20
+      },
+      "revId": "8e33581b34546e7dabaa6118e350a00186835f2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da5fc0a9_02c19c5b",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-12-23T20:25:43Z",
+      "side": 1,
+      "message": "You\u0027re not going to know which file was the problem if you just assert in the loop",
+      "range": {
+        "startLine": 223,
+        "startChar": 12,
+        "endLine": 226,
+        "endChar": 14
+      },
+      "revId": "8e33581b34546e7dabaa6118e350a00186835f2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
