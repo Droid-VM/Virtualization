@@ -19,7 +19,7 @@ rust_library {
     defaults: ["libvbmeta_rust.defaults"],
 }
 
-rust_test_host {
+rust_test {
     name: "libvbmeta_rust.test",
     defaults: ["libvbmeta_rust.defaults"],
     prefer_rlib: true,
@@ -28,11 +28,14 @@ rust_test_host {
         "libtempfile",
     ],
     data: [
-        ":avb_testkey_rsa2048",
-        ":avb_testkey_rsa4096",
-        ":avb_testkey_rsa8192",
+        ":test_unsigned_vbmeta",
+        ":test_rsa2048_signed_vbmeta",
+        ":test_rsa4096_signed_vbmeta",
+        ":test_rsa8192_signed_vbmeta",
+        ":avb_testkey_rsa2048_pub_bin",
+        ":avb_testkey_rsa4096_pub_bin",
+        ":avb_testkey_rsa8192_pub_bin",
     ],
-    required: ["avbtool"],
     test_suites: ["general-tests"],
     test_options: {
         unit_test: false,
@@ -40,11 +43,33 @@ rust_test_host {
     target: {
         host: {
             // TODO(b/204562227): remove once the build does this automatically
-            data: [":avbtool"],
             data_libs: [
                 "libc++",
                 "libcrypto",
             ],
         },
     },
+}
+
+vbmeta {
+    name: "test_rsa2048_signed_vbmeta",
+    algorithm: "SHA256_RSA2048",
+    private_key: ":avb_testkey_rsa2048",
+}
+
+vbmeta {
+    name: "test_rsa4096_signed_vbmeta",
+    algorithm: "SHA256_RSA4096",
+    private_key: ":avb_testkey_rsa4096",
+}
+
+vbmeta {
+    name: "test_rsa8192_signed_vbmeta",
+    algorithm: "SHA256_RSA8192",
+    private_key: ":avb_testkey_rsa8192",
+}
+
+vbmeta {
+    name: "test_unsigned_vbmeta",
+    algorithm: "NONE",
 }

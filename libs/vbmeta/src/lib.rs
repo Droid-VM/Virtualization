@@ -195,92 +195,56 @@ fn read_avb_footer<R: Read + Seek>(image: &mut R) -> Result<AvbFooter, VbMetaIma
 #[cfg(test)]
 mod tests {
     use super::*;
-    use anyhow::{Context, Result};
-    use std::fs::{self, OpenOptions};
-    use std::os::unix::fs::FileExt;
-    use std::process::Command;
-    use tempfile::TempDir;
+    use anyhow::Result;
+    use std::{fs, io::Write, iter::zip};
+
+    const VBMETA_PATHS: [&str; 3] = [
+        "test_rsa2048_signed_vbmeta.img",
+        "test_rsa4096_signed_vbmeta.img",
+        "test_rsa8192_signed_vbmeta.img",
+    ];
+    const EXPECTED_PUBLIC_KEY_PATHS: [&str; 3] = [
+        "data/testkey_rsa2048_pub.bin",
+        "data/testkey_rsa4096_pub.bin",
+        "data/testkey_rsa8192_pub.bin",
+    ];
 
     #[test]
-    fn unsigned_image_does_not_have_public_key() -> Result<()> {
-        let test_dir = TempDir::new().unwrap();
-        let test_file = test_dir.path().join("test.img");
-        let mut cmd = Command::new("./avbtool");
-        cmd.args([
-            "make_vbmeta_image",
-            "--output",
-            test_file.to_str().unwrap(),
-            "--algorithm",
-            "NONE",
-        ]);
-        let status = cmd.status().context("make_vbmeta_image")?;
-        assert!(status.success());
-        let vbmeta = VbMetaImage::verify_path(test_file).context("verify_path")?;
-        assert!(vbmeta.public_key().is_none());
+    fn unsigned_vbmeta_does_not_have_public_key() -> Result<()> {
+        assert_eq!(None, VbMetaImage::verify_path("test_unsigned_vbmeta.img")?.public_key());
         Ok(())
     }
 
-    fn signed_image_has_valid_vbmeta(algorithm: &str, key: &str) -> Result<()> {
-        let test_dir = TempDir::new().unwrap();
-        let test_file = test_dir.path().join("test.img");
-        let mut cmd = Command::new("./avbtool");
-        cmd.args([
-            "make_vbmeta_image",
-            "--output",
-            test_file.to_str().unwrap(),
-            "--algorithm",
-            algorithm,
-            "--key",
-            key,
-        ]);
-        let status = cmd.status().context("make_vbmeta_image")?;
-        assert!(status.success());
-        let vbmeta = VbMetaImage::verify_path(&test_file).context("verify_path")?;
+    #[test]
+    fn signed_vbmeta_has_valid_public_key() -> Result<()> {
+        for (vbmeta_path, expected_public_key_path) in zip(VBMETA_PATHS, EXPECTED_PUBLIC_KEY_PATHS)
+        {
+            let expected_public_key = fs::read(&expected_public_key_path)?;
+            assert_eq!(
+                Some(&expected_public_key[..]),
+                VbMetaImage::verify_path(&vbmeta_path)?.public_key()
+            );
+        }
+        Ok(())
+    }
 
-        // The image should contain the public part of the key pair.
-        let pubkey = vbmeta.public_key().unwrap();
-        let test_pubkey_file = test_dir.path().join("test.pubkey");
-        let mut cmd = Command::new("./avbtool");
-        cmd.args([
-            "extract_public_key",
-            "--key",
-            key,
-            "--output",
-            test_pubkey_file.to_str().unwrap(),
-        ]);
-        let status = cmd.status().context("extract_public_key")?;
-        assert!(status.success());
-        assert_eq!(pubkey, fs::read(test_pubkey_file).context("read public key")?);
+    #[test]
+    fn signed_vbmeta_with_mutated_content_fails_verification() -> Result<()> {
+        for vbmeta_path in VBMETA_PATHS.iter() {
+            assert_vbmeta_with_mutated_content_fails_verification(vbmeta_path)?;
+        }
+        Ok(())
+    }
 
-        // Flip a byte to make verification fail.
-        let file = OpenOptions::new()
-            .read(true)
-            .write(true)
-            .open(&test_file)
-            .context("open image to flip byte")?;
-        let mut data = [0; 1];
-        file.read_exact_at(&mut data, 81).context("read byte from image to flip")?;
-        data[0] = !data[0];
-        file.write_all_at(&data, 81).context("write flipped byte to image")?;
+    fn assert_vbmeta_with_mutated_content_fails_verification(vbmeta_path: &str) -> Result<()> {
+        let mut data = fs::read(vbmeta_path)?;
+        data[80] = !data[80]; // Flip the bits
+        let mut mutated_vbmeta_file = tempfile::NamedTempFile::new()?;
+        mutated_vbmeta_file.write_all(&data)?;
         assert!(matches!(
-            VbMetaImage::verify_path(test_file),
+            VbMetaImage::verify_path(mutated_vbmeta_file),
             Err(VbMetaImageVerificationError::HashMismatch)
         ));
         Ok(())
-    }
-
-    #[test]
-    fn test_rsa2048_signed_image() -> Result<()> {
-        signed_image_has_valid_vbmeta("SHA256_RSA2048", "data/testkey_rsa2048.pem")
-    }
-
-    #[test]
-    fn test_rsa4096_signed_image() -> Result<()> {
-        signed_image_has_valid_vbmeta("SHA256_RSA4096", "data/testkey_rsa4096.pem")
-    }
-
-    #[test]
-    fn test_rsa8192_signed_image() -> Result<()> {
-        signed_image_has_valid_vbmeta("SHA256_RSA8192", "data/testkey_rsa8192.pem")
     }
 }
