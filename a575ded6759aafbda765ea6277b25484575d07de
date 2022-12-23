@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af330ac9_1e4e3075",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-12-23T05:01:47Z",
+      "side": 1,
+      "message": "How can we kill the virtmgr process when all VMs from this app are done? We should better kill the service to save memory, right?",
+      "range": {
+        "startLine": 342,
+        "startChar": 0,
+        "endLine": 344,
+        "endChar": 9
+      },
+      "revId": "a575ded6759aafbda765ea6277b25484575d07de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a164f26f_6190b332",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-12-23T05:01:47Z",
+      "side": 1,
+      "message": "Do we need to delete the dir created just before in case when chown failed?",
+      "range": {
+        "startLine": 307,
+        "startChar": 94,
+        "endLine": 307,
+        "endChar": 95
+      },
+      "revId": "a575ded6759aafbda765ea6277b25484575d07de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddb18688_181366fa",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-12-23T05:01:47Z",
+      "side": 1,
+      "message": "the virtualizationservice?",
+      "range": {
+        "startLine": 311,
+        "startChar": 81,
+        "endLine": 311,
+        "endChar": 94
+      },
+      "revId": "a575ded6759aafbda765ea6277b25484575d07de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
