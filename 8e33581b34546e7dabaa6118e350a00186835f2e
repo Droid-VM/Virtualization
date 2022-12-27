@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5003f048_1a745a3b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-12-27T09:32:48Z",
+      "side": 1,
+      "message": "I meant more that now the test setup is split away, indirected by a file path that isn\u0027t completely obvious where it comes from. It\u0027s not a big deal.",
+      "parentUuid": "7f1b6352_b74c7a10",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 20
+      },
+      "revId": "8e33581b34546e7dabaa6118e350a00186835f2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "53869988_2286b047",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "I can add a string in the assertion here. That\u0027s why I think it makes sense to have some parameterized library[1] so that we can use it here for example, but in rust chat, people suggested to just loop like this. \n\n[1] https://docs.rs/crate/parameterized/latest",
       "parentUuid": "da5fc0a9_02c19c5b",
+      "range": {
+        "startLine": 223,
+        "startChar": 12,
+        "endLine": 226,
+        "endChar": 14
+      },
+      "revId": "8e33581b34546e7dabaa6118e350a00186835f2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0eb780a_9d4ffc8a",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2022-12-27T09:32:48Z",
+      "side": 1,
+      "message": "From what I remember of the thread, parameterized tests shouldn\u0027t be expected any time soon so we\u0027ll want something manual. Either logging some useful context with the assertion or having distinct test functions like before.",
+      "parentUuid": "ef3c234a_20584525",
       "range": {
         "startLine": 223,
         "startChar": 12,
