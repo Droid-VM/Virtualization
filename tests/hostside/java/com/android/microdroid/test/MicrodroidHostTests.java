@@ -75,6 +75,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
@@ -95,6 +96,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     private static final int NUM_VCPUS = 3;
 
     private static final int BOOT_COMPLETE_TIMEOUT = 30000; // 30 seconds
+
+    private static final Pattern sCIDPattern = Pattern.compile("with CID (\\d+)");
 
     private static class VmInfo {
         final Process mProcess;
@@ -387,16 +390,23 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         return new VmInfo(process, extractCidFrom(pis));
     }
 
+    private static Optional<String> tryExtractCidFrom(String str) {
+        Matcher matcher = sCIDPattern.matcher(str);
+        if (matcher.find()) {
+            return Optional.of(matcher.group(1));
+        }
+        return Optional.empty();
+    }
+
     private static String extractCidFrom(InputStream input) throws IOException {
         String cid = null;
-        Pattern pattern = Pattern.compile("with CID (\\d+)");
         String line;
         try (BufferedReader out = new BufferedReader(new InputStreamReader(input))) {
             while ((line = out.readLine()) != null) {
                 CLog.i("VM output: " + line);
-                Matcher matcher = pattern.matcher(line);
-                if (matcher.find()) {
-                    cid = matcher.group(1);
+                Optional<String> result = tryExtractCidFrom(line);
+                if (result.isPresent()) {
+                    cid = result.get();
                     break;
                 }
             }
@@ -793,6 +803,27 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                 .contains(
                         "does not have the android.permission.USE_CUSTOM_VIRTUAL_MACHINE"
                                 + " permission");
+    }
+
+    @Test
+    public void testConsoleIsForwardedToLogcat() throws Exception {
+        CommandRunner android = new CommandRunner(getDevice());
+
+        String vmOutput =
+                android.run(
+                        VIRT_APEX + "bin/vm", "run-microdroid", "--debug", "full", "--daemonize");
+        Optional<String> cid = tryExtractCidFrom(vmOutput);
+        assertThat(cid.isPresent()).isTrue();
+
+        String logcatOutput =
+                android.runWithTimeout(
+                        BOOT_COMPLETE_TIMEOUT,
+                        "logcat",
+                        "-e",
+                        "'virtualizationservice::aidl: Console." + cid.get() + ".:'",
+                        "-m",
+                        "1");
+        assertThat(logcatOutput).isNotEmpty();
     }
 
     @Before
