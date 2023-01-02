@@ -158,6 +158,30 @@
       },
       "revId": "8e33581b34546e7dabaa6118e350a00186835f2e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41d4d0ff_c41e8d12",
+        "filename": "libs/vbmeta/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-02T10:27:18Z",
+      "side": 1,
+      "message": "I\u0027ll move to the previous format. Otherwise there are other tests like this[1], it can be helpful to have parameterized so that all these tests can benefit.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/libs/apkverify/tests/apkverify_test.rs;l\u003d44;drc\u003d0cafa14347b2441638c213879b416c2013c56545",
+      "parentUuid": "e0eb780a_9d4ffc8a",
+      "range": {
+        "startLine": 223,
+        "startChar": 12,
+        "endLine": 226,
+        "endChar": 14
+      },
+      "revId": "8e33581b34546e7dabaa6118e350a00186835f2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
