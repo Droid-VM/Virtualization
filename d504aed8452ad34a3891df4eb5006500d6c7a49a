@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8330b2a_a7638279",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-03T20:23:02Z",
+      "side": 1,
+      "message": "Correct. For now, I\u0027ve used an `enum`, which makes the code clearer but still relies on the same [dodgy assumption](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2366068/comment/dc938fe8_191c1782/).",
+      "parentUuid": "f6c0c814_d25a1971",
+      "revId": "d504aed8452ad34a3891df4eb5006500d6c7a49a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc938fe8_191c1782",
@@ -85,6 +103,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94e0a7f2_98479f68",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-03T20:23:02Z",
+      "side": 1,
+      "message": "Using dummy variables doesn\u0027t seem to be possible:\n```\nerror[E0277]: `*const usize` cannot be shared between threads safely\nnote: shared static variables must have a type that implements `Sync`\n```\n\n\u003e Can you use a pointer to a zero-sized type?\n\nDo you have code pointers on how this could be done? And won\u0027t I run into the issue above?",
+      "parentUuid": "dc938fe8_191c1782",
+      "range": {
+        "startLine": 79,
+        "startChar": 50,
+        "endLine": 79,
+        "endChar": 55
+      },
+      "revId": "d504aed8452ad34a3891df4eb5006500d6c7a49a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11ff33da_c1af686f",
         "filename": "vmbase/src/bionic.rs",
         "patchSetId": 1
@@ -119,6 +161,24 @@
       "writtenOn": "2022-12-21T15:57:31Z",
       "side": 1,
       "message": "Why do you need to use `emergency_write_str` here? Does stderr get used from an interrupt context but stdout doesn\u0027t?",
+      "revId": "d504aed8452ad34a3891df4eb5006500d6c7a49a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90cfa352_99957134",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-03T20:23:02Z",
+      "side": 1,
+      "message": "Thanks, I wasn\u0027t sure what the distinction was and followed the way `println` and `eprintln` are implemented; I\u0027ve used `write_str` for both.\n\nHopefully, we won\u0027t be calling C code from interrupt handlers...",
+      "parentUuid": "ff2bec3f_beb423b7",
       "revId": "d504aed8452ad34a3891df4eb5006500d6c7a49a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -193,6 +253,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a4f41ed_d50d0702",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-03T20:23:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee05c8c_8b568416",
+      "range": {
+        "startLine": 86,
+        "startChar": 27,
+        "endLine": 86,
+        "endChar": 30
+      },
+      "revId": "d504aed8452ad34a3891df4eb5006500d6c7a49a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e05e93a4_b099bdf5",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-03T20:23:02Z",
+      "side": 1,
+      "message": "Done. I hadn\u0027t heard of this before (only `feof`/`ferror`); interestingly, it isn\u0027t required by the C Standard itself but is by POSIX.",
+      "parentUuid": "5cc7f3c8_bbecd404",
+      "range": {
+        "startLine": 86,
+        "startChar": 24,
+        "endLine": 86,
+        "endChar": 30
+      },
+      "revId": "d504aed8452ad34a3891df4eb5006500d6c7a49a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b17c7cc_c1af6213",
@@ -206,6 +314,30 @@
       "writtenOn": "2022-12-22T04:18:01Z",
       "side": 1,
       "message": "should we use checkedMul?",
+      "range": {
+        "startLine": 94,
+        "startChar": 22,
+        "endLine": 94,
+        "endChar": 23
+      },
+      "revId": "d504aed8452ad34a3891df4eb5006500d6c7a49a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42b1a610_b3c57e0e",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-03T20:23:02Z",
+      "side": 1,
+      "message": "Done; splitting hair here but shouldn\u0027t it be a `saturating_mul` so that, instead o failing, we print as much as we can represent (`usize::MAX`), reporting it back to the caller through the return value?",
+      "parentUuid": "7b17c7cc_c1af6213",
       "range": {
         "startLine": 94,
         "startChar": 22,
