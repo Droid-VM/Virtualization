@@ -22,6 +22,30 @@
       },
       "revId": "e828ac05b51c26e75cf5251b88f6b5b5a7c34254",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "294a554c_63d15e57",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-03T02:25:16Z",
+      "side": 1,
+      "message": "Well, this isn\u0027t for that scenario, but for the debuggability to make sure that developers can see outputs from debuggable VMs with bugreport. PTAL aosp/2370496",
+      "parentUuid": "83ff51cb_7fb1a3c7",
+      "range": {
+        "startLine": 662,
+        "startChar": 23,
+        "endLine": 662,
+        "endChar": 52
+      },
+      "revId": "e828ac05b51c26e75cf5251b88f6b5b5a7c34254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
