@@ -61,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "35876941_5ef7e650",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-03T15:32:23Z",
+      "side": 1,
+      "message": "Yeah, this is a bit dodgy. Can you use a pointer to a zero-sized type? i.e., define your `FILE` type to be empty, and have a couple of static instances of it. Or would they end up having the same address?",
+      "parentUuid": "dc938fe8_191c1782",
+      "range": {
+        "startLine": 79,
+        "startChar": 50,
+        "endLine": 79,
+        "endChar": 55
+      },
+      "revId": "d504aed8452ad34a3891df4eb5006500d6c7a49a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11ff33da_c1af686f",
         "filename": "vmbase/src/bionic.rs",
         "patchSetId": 1
@@ -135,6 +159,30 @@
       "writtenOn": "2022-12-22T09:29:45Z",
       "side": 1,
       "message": "Is it worth pulling in `libc` just for [one constant](https://docs.rs/libc/latest/libc/constant.EOF.html)?",
+      "range": {
+        "startLine": 86,
+        "startChar": 27,
+        "endLine": 86,
+        "endChar": 30
+      },
+      "revId": "d504aed8452ad34a3891df4eb5006500d6c7a49a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ee05c8c_8b568416",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-03T15:32:23Z",
+      "side": 1,
+      "message": "I\u0027d be inclined just to define the constant yourself, at the top of the file.",
+      "parentUuid": "8b150e16_54b6a105",
       "range": {
         "startLine": 86,
         "startChar": 27,
