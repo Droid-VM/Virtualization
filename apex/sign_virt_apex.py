@@ -247,6 +247,7 @@ def AddHashTreeFooter(args, key, image_path):
                '--partition_name', partition_name,
                '--partition_size', partition_size,
                '--do_not_generate_fec',
+               '--hash_algorithm', 'sha256',
                '--image', image_path]
         if args.signing_args:
             cmd.extend(shlex.split(args.signing_args))
