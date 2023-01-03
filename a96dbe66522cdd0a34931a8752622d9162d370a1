@@ -216,6 +216,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "849335de_3eb0ada8",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2023-01-03T17:56:27Z",
+      "side": 1,
+      "message": "If something is only used in `#[cfg(test)]` then it should only be declared in `#[cfg(test)]`. You can bundle a bunch of test utilities into a module with that attribute to keep it neater and avoid having to turn off lints.",
+      "parentUuid": "822c656b_4bb079c3",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 27
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e7fa7ff_a1a85cf9",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 7
