@@ -49,6 +49,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa7c03c8_d599812a",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-03T09:04:33Z",
+      "side": 1,
+      "message": "When should the app developer call this? When should they not call it?\nWhat effect does calling it have?",
+      "range": {
+        "startLine": 656,
+        "startChar": 0,
+        "endLine": 656,
+        "endChar": 89
+      },
+      "revId": "e828ac05b51c26e75cf5251b88f6b5b5a7c34254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83ff51cb_7fb1a3c7",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 2
@@ -130,6 +153,30 @@
       "writtenOn": "2023-01-03T06:08:28Z",
       "side": 1,
       "message": "You may use the `ExpectedException` rule and the `expectMessage` method.\n\nhttps://junit.org/junit4/javadoc/4.12/org/junit/rules/ExpectedException.html",
+      "range": {
+        "startLine": 1152,
+        "startChar": 0,
+        "endLine": 1158,
+        "endChar": 100
+      },
+      "revId": "e828ac05b51c26e75cf5251b88f6b5b5a7c34254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44a980f2_39c73828",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1158,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-03T09:04:33Z",
+      "side": 1,
+      "message": "That\u0027s now generally discouraged (go/java-testing/exceptions explains why) in favor of assertThrows - see e.g. line 176.",
+      "parentUuid": "d13fae4c_27031e34",
       "range": {
         "startLine": 1152,
         "startChar": 0,
