@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f316174_479bff45",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-03T12:34:46Z",
+      "side": 1,
+      "message": "Good idea. I\u0027ve made it a SoftReference, PTAL. Could make it a WeakReference if we want to garbage-collect more aggressively.",
+      "parentUuid": "af330ac9_1e4e3075",
+      "range": {
+        "startLine": 342,
+        "startChar": 0,
+        "endLine": 344,
+        "endChar": 9
+      },
+      "revId": "a575ded6759aafbda765ea6277b25484575d07de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a164f26f_6190b332",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "194c40b2_467b7160",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-03T12:34:46Z",
+      "side": 1,
+      "message": "It will just get deleted at the next attempt, added a comment.",
+      "parentUuid": "a164f26f_6190b332",
+      "range": {
+        "startLine": 307,
+        "startChar": 94,
+        "endLine": 307,
+        "endChar": 95
+      },
+      "revId": "a575ded6759aafbda765ea6277b25484575d07de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddb18688_181366fa",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-12-23T05:01:47Z",
       "side": 1,
       "message": "the virtualizationservice?",
+      "range": {
+        "startLine": 311,
+        "startChar": 81,
+        "endLine": 311,
+        "endChar": 94
+      },
+      "revId": "a575ded6759aafbda765ea6277b25484575d07de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f31ecfb_b40115a7",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-03T12:34:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddb18688_181366fa",
       "range": {
         "startLine": 311,
         "startChar": 81,
