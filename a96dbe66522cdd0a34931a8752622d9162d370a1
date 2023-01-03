@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "242e5421_3251d297",
+        "filename": "pvmfw/avb/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-03T17:48:31Z",
+      "side": 1,
+      "message": "Thanks for clearing this up for me!",
+      "parentUuid": "aa315aed_c6d82590",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 6
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7aa209b6_f6eeb2c8",
         "filename": "pvmfw/avb/Android.bp",
         "patchSetId": 7
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "I\u0027ll address this in a different cl.",
       "parentUuid": "7aa209b6_f6eeb2c8",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 1
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c547bb0e_4fb2bc2c",
+        "filename": "pvmfw/avb/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-03T17:48:31Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "21138908_a8d0403b",
       "range": {
         "startLine": 52,
         "startChar": 0,
@@ -144,6 +192,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "822c656b_4bb079c3",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-03T17:48:31Z",
+      "side": 1,
+      "message": "Is that because rustfmt considers functions that are only used by tests as `dead_code`?\n\nIf that\u0027s the case, I understand allowing `dead_code` but why `unused_imports` or `unused_variables`? For example, you\u0027re still importing `mem::transmute`, which isn\u0027t used and should have been caught by the linter.",
+      "parentUuid": "fd1972f5_825e38f6",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 27
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e7fa7ff_a1a85cf9",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 7
@@ -191,6 +263,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf1bd0fd_05935444",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-03T17:48:31Z",
+      "side": 1,
+      "message": "\u003e I checked taht the implementations of AvbOps in u-boot or fs_mgr do not have null check for these methods either\n\nSure, but here (in Rust) checking for non-NULL isn\u0027t only \"good practice\", it\u0027s actually mandated by the language\u0027s standard library through `unsafe`; please either address why the pointer can be used as-is in the `SAFETY` comment (it can\u0027t) or validate it yourself.",
+      "parentUuid": "07f0cf30_dd26fe69",
+      "range": {
+        "startLine": 107,
+        "startChar": 7,
+        "endLine": 107,
+        "endChar": 38
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9855f188_91f0ba15",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 7
@@ -226,6 +322,30 @@
       "side": 1,
       "message": "Why not use `ptr::write`? It\u0027s supposed to be used for such cases and it has both alignment and null checks[1].\n\n[1] https://doc.rust-lang.org/src/core/ptr/mod.rs.html#1320",
       "parentUuid": "9855f188_91f0ba15",
+      "range": {
+        "startLine": 111,
+        "startChar": 8,
+        "endLine": 111,
+        "endChar": 18
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edeaa60a_c4d137eb",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-03T17:48:31Z",
+      "side": 1,
+      "message": "\u003e It\u0027s supposed to be used for such cases and it has both alignment and null checks\n\nBut the documentation says the exact opposite(?):\n\n\u003e Behavior is undefined if any of the following conditions are violated:\n\u003e\n\u003e - dst must be valid for writes.\n\u003e \n\u003e - dst must be properly aligned. Use write_unaligned if this is not the case.\n\u003e \n\u003e Note that even if T has size 0, the pointer must be non-null and properly aligned.\n\nand we shouldn\u0027t rely on an undocumented check in the implementation (in particular as `assert_unsafe_precondition!` can be disabled at `std`/`core` build time, IIUC).",
+      "parentUuid": "69c1d1ad_3b729637",
       "range": {
         "startLine": 111,
         "startChar": 8,
@@ -426,6 +546,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7baea460_a95f68bc",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-03T17:48:31Z",
+      "side": 1,
+      "message": "But Rust gives you no guarantee that `ptr::write` validates your pointer (and the `unsafe` is there to remind you of the opposite; see [this other comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2362320/comment/9855f188_91f0ba15/)) and, even if it did, talking about \"bounds checking\" when referring to a pointer such as `out_is_unlocked` or `out_num_read` doesn\u0027t make sense to me; what do you mean?",
+      "parentUuid": "b9e65d88_7a5044e8",
+      "range": {
+        "startLine": 144,
+        "startChar": 55,
+        "endLine": 144,
+        "endChar": 85
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5327627d_8b56940b",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 7
@@ -567,6 +711,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0199e912_c1fa228d",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-03T17:48:31Z",
+      "side": 1,
+      "message": "It\u0027s just that `from_X` methods usually return a value, not a reference, making `Payload::from_avb_ops_ptr()` unnecessarily confusing.\n\n\u003e It\u0027s also not so extendable in case we want to look at other parts of `AvbOps`.\n\nDoes the borrow checker complain if you re-use the `*AvbOps` after having created a `\u0026Payload` from it?",
+      "parentUuid": "781b50c3_fb7f371a",
+      "range": {
+        "startLine": 226,
+        "startChar": 7,
+        "endLine": 226,
+        "endChar": 23
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85193a69_fe0e6c48",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 7
@@ -602,6 +770,30 @@
       "side": 1,
       "message": "Then this change cannot be merged before those changes. I thought we agreed that I develop this part on top of the normal libc and merge it like this. In the end we just switch pvmfw to call this method.\n\nThere are several advantages of landing this cl separately:\n- This enables the payload verification on the current kernel in CI. It ensures that libpvmfw_avb works with standard libc + up-to-date kernel. Anyone who modifies the kernel signature format also need to consider the verification here.\n- Once the stack of libc CLs is ready, we can just push a simple change to switch pvmfw to call this method, in case that doesn\u0027t work, we know that the problem is not from the pvmfw libc implementation.",
       "parentUuid": "85193a69_fe0e6c48",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 260,
+        "endChar": 58
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46f528d8_9a3362c0",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-03T17:48:31Z",
+      "side": 1,
+      "message": "I\u0027m not sure I follow your point: aren\u0027t we saying the same thing? Remove the call to `verify_payload` from pvmfw now so that you have full freedom to define and use it here without pvmfw dependencies getting in your way, merge this change which will bring CI testing to the verification (but won\u0027t be built into pvmfw), and bring back the `verify_payload` call to pvmfw in its own CL (on top of the libc deps)?",
+      "parentUuid": "0362ac09_dc50288d",
       "range": {
         "startLine": 258,
         "startChar": 0,
@@ -661,6 +853,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "116efa9e_06b59989",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-03T17:48:31Z",
+      "side": 1,
+      "message": "Because it\u0027s then statically allocated in `.rodata` instead of being allocated and populated on the heap at runtime, which is more predictable (note the error handling you need to do?), performant, and robust (RO permissions), at the cost of a slightly more verbose syntax (which, I agree, is more verbose than necessary and hopefully will one day be addressed by the currently-nightly \"`c\"text\"`\" syntax).",
+      "parentUuid": "ed4dd76d_f64efc00",
+      "range": {
+        "startLine": 286,
+        "startChar": 8,
+        "endLine": 286,
+        "endChar": 15
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1367b7d8_600c402e",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 7
@@ -696,6 +912,30 @@
       "side": 1,
       "message": "I don\u0027t know whether it is stable. I hit lots of segmentation fault when trying libavb API with different set of params. I think that API needs to sanitize the input a bit at least.",
       "parentUuid": "1367b7d8_600c402e",
+      "range": {
+        "startLine": 287,
+        "startChar": 60,
+        "endLine": 289,
+        "endChar": 0
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d75860f6_28ed36fd",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-03T17:48:31Z",
+      "side": 1,
+      "message": "I think you can also get rid of the \"for now\", for the same reason.",
+      "parentUuid": "ea4efccb_6364dc0c",
       "range": {
         "startLine": 287,
         "startChar": 60,
