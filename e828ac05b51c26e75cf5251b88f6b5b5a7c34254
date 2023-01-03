@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9bac1bad_b96343e9",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-03T06:08:28Z",
+      "side": 1,
+      "message": "If this is used to control both console and log output, shouldn\u0027t it be named as \u0027mRedirectVmOutputsToApp\u0027 or similar?",
+      "range": {
+        "startLine": 324,
+        "startChar": 35,
+        "endLine": 324,
+        "endChar": 42
+      },
+      "revId": "e828ac05b51c26e75cf5251b88f6b5b5a7c34254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeaa05af_555234b3",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-03T06:08:28Z",
+      "side": 1,
+      "message": "This doesn\u0027t read well. `isVmOutputRedirectedToApp` or similar sounds better.",
+      "range": {
+        "startLine": 363,
+        "startChar": 19,
+        "endLine": 363,
+        "endChar": 47
+      },
+      "revId": "e828ac05b51c26e75cf5251b88f6b5b5a7c34254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83ff51cb_7fb1a3c7",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 2
@@ -43,6 +89,52 @@
         "startChar": 23,
         "endLine": 662,
         "endChar": 52
+      },
+      "revId": "e828ac05b51c26e75cf5251b88f6b5b5a7c34254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aca40a68_dd07b586",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1148,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-03T06:08:28Z",
+      "side": 1,
+      "message": "This should be dropped to check that redirection is turned off by default and has to be explicitly turned on.",
+      "range": {
+        "startLine": 1148,
+        "startChar": 24,
+        "endLine": 1148,
+        "endChar": 61
+      },
+      "revId": "e828ac05b51c26e75cf5251b88f6b5b5a7c34254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d13fae4c_27031e34",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1158,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-03T06:08:28Z",
+      "side": 1,
+      "message": "You may use the `ExpectedException` rule and the `expectMessage` method.\n\nhttps://junit.org/junit4/javadoc/4.12/org/junit/rules/ExpectedException.html",
+      "range": {
+        "startLine": 1152,
+        "startChar": 0,
+        "endLine": 1158,
+        "endChar": 100
       },
       "revId": "e828ac05b51c26e75cf5251b88f6b5b5a7c34254",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
