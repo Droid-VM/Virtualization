@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2668bd3_13705c24",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-03T15:44:51Z",
+      "side": 1,
+      "message": "Regrettably true: https://source.android.com/docs/setup/contribute/code-style#follow-field-naming-conventions",
+      "parentUuid": "7d118e02_596a93d6",
+      "range": {
+        "startLine": 100,
+        "startChar": 33,
+        "endLine": 100,
+        "endChar": 44
+      },
+      "revId": "c5b6a5fbec9d5b26fbc8c514b965dfb3333f9dbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8a8d2339_c78813e9",
         "filename": "virtualizationservice/src/aidl.rs",
         "patchSetId": 3
@@ -42,6 +66,29 @@
         "startChar": 25,
         "endLine": 553,
         "endChar": 16
+      },
+      "revId": "c5b6a5fbec9d5b26fbc8c514b965dfb3333f9dbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d0fe5ba_e0291895",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-03T15:44:51Z",
+      "side": 1,
+      "message": "If we\u0027re doing this, can we remove getConsoleOutput / getLogOutput from the API surface entirely?\n\n(But not from the VS API - compos directs them to file, and I think that\u0027s probably still the right thing for it.)",
+      "range": {
+        "startLine": 551,
+        "startChar": 0,
+        "endLine": 561,
+        "endChar": 10
       },
       "revId": "c5b6a5fbec9d5b26fbc8c514b965dfb3333f9dbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
