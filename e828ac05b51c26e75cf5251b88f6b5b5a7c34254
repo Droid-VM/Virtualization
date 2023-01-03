@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "934f9f4a_6f384cfe",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-03T15:35:27Z",
+      "side": 1,
+      "message": "To expand slightly: I\u0027m not at all convinced this is useful as part of the API service.\nUnless there\u0027s a simple explanation of why it should be used, I don\u0027t think any app developers will do so.",
+      "parentUuid": "aa7c03c8_d599812a",
+      "range": {
+        "startLine": 656,
+        "startChar": 0,
+        "endLine": 656,
+        "endChar": 89
+      },
+      "revId": "e828ac05b51c26e75cf5251b88f6b5b5a7c34254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83ff51cb_7fb1a3c7",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 2
@@ -201,6 +225,30 @@
       "side": 1,
       "message": "Didn\u0027t know about the guideline, which makes sense. Please ignore this thread.",
       "parentUuid": "44a980f2_39c73828",
+      "range": {
+        "startLine": 1152,
+        "startChar": 0,
+        "endLine": 1158,
+        "endChar": 100
+      },
+      "revId": "e828ac05b51c26e75cf5251b88f6b5b5a7c34254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27841b8d_854f9143",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1158,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-03T15:35:27Z",
+      "side": 1,
+      "message": "Well, I would rather this used assertThrows",
+      "parentUuid": "678aed50_05ec0e96",
       "range": {
         "startLine": 1152,
         "startChar": 0,
