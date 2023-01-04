@@ -34,6 +34,47 @@
       "parentUuid": "676c4932_95bd9fbb",
       "revId": "8f3cf0e6a045f016f3b8f1ff64644c787c34dd08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d43a5bfb_f98c829d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2023-01-04T19:10:58Z",
+      "side": 1,
+      "message": "`clock()` is similar to `clock_gettime(CLOCK_PROCESS_CPUTIME_ID, ...)` IIUC, which is generally not what you want in a benchmark (unless you are measuring efficiency?)",
+      "parentUuid": "52c7ed29_350c01df",
+      "revId": "8f3cf0e6a045f016f3b8f1ff64644c787c34dd08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "665915c0_533fe748",
+        "filename": "authfs/tests/benchmarks/src/measure_io.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2023-01-04T19:10:58Z",
+      "side": 1,
+      "message": "this is C++, so maybe simpler as\n\n```\nauto start \u003d std::chrono::steady_clock::now();\n\nauto end \u003d std::chrono::steady_clock::now();\ndouble elapsed_seconds \u003d (end - start).count()\n```",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 99
+      },
+      "revId": "8f3cf0e6a045f016f3b8f1ff64644c787c34dd08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
