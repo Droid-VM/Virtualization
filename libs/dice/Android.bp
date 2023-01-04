@@ -16,7 +16,7 @@ rust_library_rlib {
     ],
     whole_static_libs: [
         "libopen_dice_bcc",
-        "libopen_dice_cbor",
+        "libopen_dice_cbor_baremetal",
         "libcrypto_baremetal",
     ],
     apex_available: ["com.android.virt"],
