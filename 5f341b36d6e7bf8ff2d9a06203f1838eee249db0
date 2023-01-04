@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b47e4f2d_6fc65918",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-04T21:18:33Z",
+      "side": 0,
+      "message": "TBF, to simplify your upcoming patch, just `#[allow(dead_code)]`?",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 50,
+        "endChar": 28
+      },
+      "revId": "5f341b36d6e7bf8ff2d9a06203f1838eee249db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36a87119_ce52d84d",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-04T21:18:33Z",
+      "side": 0,
+      "message": "We need to keep `PUBLIC_KEY` in pvmfw as that would otherwise break the signing scripts (see b/255575669), which are not covered by presubmit; see what aosp/2271766 did to ensure it was part of the binary.",
+      "range": {
+        "startLine": 37,
+        "startChar": 3,
+        "endLine": 37,
+        "endChar": 20
+      },
+      "revId": "5f341b36d6e7bf8ff2d9a06203f1838eee249db0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

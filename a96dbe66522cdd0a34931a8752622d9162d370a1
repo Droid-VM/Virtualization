@@ -1069,6 +1069,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ed3ebd7_96263510",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-04T21:18:33Z",
+      "side": 1,
+      "message": "You\u0027re right but failure of the `CStr` constructor only depends on its input (unlike heap allocation) so, if you\u0027re sure that your byte array is a valid C string, you can `.unwrap()` it in a pretty safe way.",
+      "parentUuid": "871a8e42_c1b46fe1",
+      "range": {
+        "startLine": 286,
+        "startChar": 8,
+        "endLine": 286,
+        "endChar": 15
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1367b7d8_600c402e",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 7

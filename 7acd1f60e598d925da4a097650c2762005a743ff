@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af5741fb_577b98e3",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-04T21:18:33Z",
+      "side": 1,
+      "message": "`impl From\u003cResult\u003c(), AvbIOError\u003e\u003e for AvbIOResult`?",
+      "range": {
+        "startLine": 131,
+        "startChar": 3,
+        "endLine": 131,
+        "endChar": 19
+      },
+      "revId": "7acd1f60e598d925da4a097650c2762005a743ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bedd44c2_e72cf68e",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-04T21:18:33Z",
+      "side": 1,
+      "message": "This approach of\n```\nextern \"C\" fn foo(...) -\u003e AvbIOResult { try_foo(...).into() }\n\nfn try_foo(...) -\u003e Result\u003c(), AvbIOError\u003e { ... }\n```\nwhere you can use `?` in `try_foo` while still returning `AvbIOResult` in the C-compatible functions is neat.",
+      "range": {
+        "startLine": 167,
+        "startChar": 3,
+        "endLine": 167,
+        "endChar": 26
+      },
+      "revId": "7acd1f60e598d925da4a097650c2762005a743ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36af16a5_0cda82a0",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-04T21:18:33Z",
+      "side": 1,
+      "message": "It would make sense to validate this input and return `NoSuchPartition` if it doesn\u0027t match the (currently unique) expected name. In particular, you could define the constant somewhere it can be shared (e.g. `Payload::KERNEL_PARTITION_NAME`) and also use it to populate the `requested_partitions` to `avb_slot_verify`. Then, when we start supporting multiple partitions, we\u0027ll simply add more constants and `match` the input here.",
+      "range": {
+        "startLine": 169,
+        "startChar": 4,
+        "endLine": 169,
+        "endChar": 14
+      },
+      "revId": "7acd1f60e598d925da4a097650c2762005a743ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6e39143_e3682c6c",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-04T21:18:33Z",
+      "side": 1,
+      "message": "nit: as the compiler can figure out the type here, I think you could use the more versatile `.try_into()` instead but TBF, we convert freely between `usize` and `u64` using `as` all across the codebase so this might be overkill.",
+      "range": {
+        "startLine": 223,
+        "startChar": 8,
+        "endLine": 223,
+        "endChar": 11
+      },
+      "revId": "7acd1f60e598d925da4a097650c2762005a743ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72718585_2cac6f38",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-04T21:18:33Z",
+      "side": 1,
+      "message": "Could you please add a comment inside of their bodies explaining why these 2 functions are required (as opposed to building the `AvbOps` with `None` function \"pointers\")?",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 44
+      },
+      "revId": "7acd1f60e598d925da4a097650c2762005a743ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c7bad64_41357983",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-04T21:18:33Z",
+      "side": 1,
+      "message": "Instead of introducing a new function, would it make sense to use the standard `NonNull` e.g.\n```\nlet ops \u003d NonNull::new(ops).ok_or(AvbIOError::NoSuchValue)?;\n```\n? Note that the assignment will then require the use of `.as_ptr()`.",
+      "range": {
+        "startLine": 300,
+        "startChar": 3,
+        "endLine": 300,
+        "endChar": 14
+      },
+      "revId": "7acd1f60e598d925da4a097650c2762005a743ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55d75985_66ba0396",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-04T21:18:33Z",
+      "side": 1,
+      "message": "That\u0027s not required as the struct isn\u0027t accessed by C code.",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 308,
+        "endChar": 10
+      },
+      "revId": "7acd1f60e598d925da4a097650c2762005a743ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
