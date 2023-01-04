@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d03def83_0956fa9a",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-04T09:31:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2668bd3_13705c24",
+      "range": {
+        "startLine": 100,
+        "startChar": 33,
+        "endLine": 100,
+        "endChar": 44
+      },
+      "revId": "c5b6a5fbec9d5b26fbc8c514b965dfb3333f9dbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a8d2339_c78813e9",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec07a65e_6cddf4e6",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-04T09:31:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a8d2339_c78813e9",
+      "range": {
+        "startLine": 551,
+        "startChar": 25,
+        "endLine": 553,
+        "endChar": 16
+      },
+      "revId": "c5b6a5fbec9d5b26fbc8c514b965dfb3333f9dbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d0fe5ba_e0291895",
@@ -84,6 +132,30 @@
       "writtenOn": "2023-01-03T15:44:51Z",
       "side": 1,
       "message": "If we\u0027re doing this, can we remove getConsoleOutput / getLogOutput from the API surface entirely?\n\n(But not from the VS API - compos directs them to file, and I think that\u0027s probably still the right thing for it.)",
+      "range": {
+        "startLine": 551,
+        "startChar": 0,
+        "endLine": 561,
+        "endChar": 10
+      },
+      "revId": "c5b6a5fbec9d5b26fbc8c514b965dfb3333f9dbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c412120c_bea27c00",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-04T09:31:08Z",
+      "side": 1,
+      "message": "Mmm, I don\u0027t have any preference for now. But we should fix tests using those two, which will be quite time-consuming.",
+      "parentUuid": "7d0fe5ba_e0291895",
       "range": {
         "startLine": 551,
         "startChar": 0,
