@@ -29,13 +29,22 @@ constexpr size_t kNumBytesPerMB = 1024 * 1024;
 
 Result<double> measure_send_rate(int fd, int num_bytes_to_send) {
     std::string data;
-    data.assign(num_bytes_to_send, 'a');
+    data.assign(4096, 'a');
     struct timespec start;
     if (clock_gettime(CLOCK_MONOTONIC, &start) == -1) {
         return ErrnoError() << "failed to clock_gettime";
     }
-    if (!WriteStringToFd(data, fd)) {
-        return Error() << "Cannot send data to client";
+    int remaining = num_bytes_to_send;
+    while (remaining > 0) {
+        ssize_t n = TEMP_FAILURE_RETRY(
+                write(fd, data.data(), remaining < data.size() ? remaining : data.size()));
+        if (n < 0) {
+            return Error() << "Cannot send data to client";
+        }
+        if (n == 0) {
+            return Error() << "Unexpected EOF";
+        }
+        remaining -= n;
     }
     struct timespec finish;
     if (clock_gettime(CLOCK_MONOTONIC, &finish) == -1) {
