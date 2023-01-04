@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eacaaf81_5633d4d9",
+        "filename": "pvmfw/avb/src/lib.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-04T16:59:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc4740ea_9dd418f0",
+      "range": {
+        "startLine": 18,
+        "startChar": 30,
+        "endLine": 18,
+        "endChar": 35
+      },
+      "revId": "8e73ffe7ca32500bbb4d4c1b95ea5429106a58ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ec49475_87b2c7ca",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-03T17:48:31Z",
       "side": 1,
       "message": "\"... and assume that the `AvbOps` isn\u0027t used beyond the lifetime of the `Payload` it refers to\" (which can\u0027t be tracked by the borrow checker due to the use of a C-compatible pointer).",
+      "range": {
+        "startLine": 215,
+        "startChar": 67,
+        "endLine": 215,
+        "endChar": 68
+      },
+      "revId": "8e73ffe7ca32500bbb4d4c1b95ea5429106a58ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2153763c_96769658",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-04T16:59:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ec49475_87b2c7ca",
       "range": {
         "startLine": 215,
         "startChar": 67,

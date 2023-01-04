@@ -238,6 +238,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdd8dad9_a49be84d",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-04T16:59:05Z",
+      "side": 1,
+      "message": "Ok. I removed the usage of this library in pvmfw and removed these annotations.",
+      "parentUuid": "849335de_3eb0ada8",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 27
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e7fa7ff_a1a85cf9",
@@ -309,6 +333,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eea66585_5ab10b61",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-04T16:59:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf1bd0fd_05935444",
+      "range": {
+        "startLine": 107,
+        "startChar": 7,
+        "endLine": 107,
+        "endChar": 38
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9855f188_91f0ba15",
@@ -370,6 +418,30 @@
       "side": 1,
       "message": "\u003e It\u0027s supposed to be used for such cases and it has both alignment and null checks\n\nBut the documentation says the exact opposite(?):\n\n\u003e Behavior is undefined if any of the following conditions are violated:\n\u003e\n\u003e - dst must be valid for writes.\n\u003e \n\u003e - dst must be properly aligned. Use write_unaligned if this is not the case.\n\u003e \n\u003e Note that even if T has size 0, the pointer must be non-null and properly aligned.\n\nand we shouldn\u0027t rely on an undocumented check in the implementation (in particular as `assert_unsafe_precondition!` can be disabled at `std`/`core` build time, IIUC).",
       "parentUuid": "69c1d1ad_3b729637",
+      "range": {
+        "startLine": 111,
+        "startChar": 8,
+        "endLine": 111,
+        "endChar": 18
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9cb827e_65987ba9",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-04T16:59:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edeaa60a_c4d137eb",
       "range": {
         "startLine": 111,
         "startChar": 8,
@@ -592,6 +664,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "502538c4_f416686c",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-04T16:59:05Z",
+      "side": 1,
+      "message": "This is removed.",
+      "parentUuid": "7baea460_a95f68bc",
+      "range": {
+        "startLine": 144,
+        "startChar": 55,
+        "endLine": 144,
+        "endChar": 85
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5327627d_8b56940b",
@@ -757,6 +853,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f9d8159_0f314c6a",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-04T16:59:05Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "0199e912_c1fa228d",
+      "range": {
+        "startLine": 226,
+        "startChar": 7,
+        "endLine": 226,
+        "endChar": 23
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85193a69_fe0e6c48",
@@ -818,6 +938,30 @@
       "side": 1,
       "message": "I\u0027m not sure I follow your point: aren\u0027t we saying the same thing? Remove the call to `verify_payload` from pvmfw now so that you have full freedom to define and use it here without pvmfw dependencies getting in your way, merge this change which will bring CI testing to the verification (but won\u0027t be built into pvmfw), and bring back the `verify_payload` call to pvmfw in its own CL (on top of the libc deps)?",
       "parentUuid": "0362ac09_dc50288d",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 260,
+        "endChar": 58
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bdec8b5_b64aec98",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-04T16:59:05Z",
+      "side": 1,
+      "message": "I see. I thought you meant to put this change on top of all the libc changes.",
+      "parentUuid": "46f528d8_9a3362c0",
       "range": {
         "startLine": 258,
         "startChar": 0,
@@ -899,6 +1043,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "871a8e42_c1b46fe1",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-04T16:59:05Z",
+      "side": 1,
+      "message": "I see. But it looks like there\u0027s similar error handling for CStr.",
+      "parentUuid": "116efa9e_06b59989",
+      "range": {
+        "startLine": 286,
+        "startChar": 8,
+        "endLine": 286,
+        "endChar": 15
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1367b7d8_600c402e",
@@ -960,6 +1128,30 @@
       "side": 1,
       "message": "I think you can also get rid of the \"for now\", for the same reason.",
       "parentUuid": "ea4efccb_6364dc0c",
+      "range": {
+        "startLine": 287,
+        "startChar": 60,
+        "endLine": 289,
+        "endChar": 0
+      },
+      "revId": "a96dbe66522cdd0a34931a8752622d9162d370a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5463a194_75befd99",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-04T16:59:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d75860f6_28ed36fd",
       "range": {
         "startLine": 287,
         "startChar": 60,
