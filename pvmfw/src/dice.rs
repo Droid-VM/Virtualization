@@ -14,8 +14,11 @@
 
 //! Support for DICE derivation and BCC generation.
 
+use crate::helpers::flushed_zeroize;
+use core::ffi::c_void;
 use core::ffi::CStr;
 use core::mem::size_of;
+use core::slice;
 use dice::bcc::Handover;
 use dice::Config;
 use dice::DiceMode;
@@ -68,4 +71,11 @@ pub fn derive_next_bcc(
     );
 
     bcc.main_flow(&input_values, next_bcc)
+}
+
+#[no_mangle]
+extern "C" fn DiceClearMemory(_ctx: *mut c_void, size: usize, addr: *mut c_void) {
+    // SAFETY - We must trust that the slice will be valid arrays/variables on the C code stack.
+    let region = unsafe { slice::from_raw_parts_mut(addr as *mut u8, size) };
+    flushed_zeroize(region)
 }
