@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "958f0650_7467f82e",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-04T09:30:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bac1bad_b96343e9",
+      "range": {
+        "startLine": 324,
+        "startChar": 35,
+        "endLine": 324,
+        "endChar": 42
+      },
+      "revId": "e828ac05b51c26e75cf5251b88f6b5b5a7c34254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eeaa05af_555234b3",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-03T06:08:28Z",
       "side": 1,
       "message": "This doesn\u0027t read well. `isVmOutputRedirectedToApp` or similar sounds better.",
+      "range": {
+        "startLine": 363,
+        "startChar": 19,
+        "endLine": 363,
+        "endChar": 47
+      },
+      "revId": "e828ac05b51c26e75cf5251b88f6b5b5a7c34254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d52e92b4_9ab1c165",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-04T09:30:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eeaa05af_555234b3",
       "range": {
         "startLine": 363,
         "startChar": 19,
@@ -120,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ee80f6e_8a2a6eac",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-04T09:30:36Z",
+      "side": 1,
+      "message": "I added more comments.",
+      "parentUuid": "ffcb0d8a_19c60b61",
+      "range": {
+        "startLine": 656,
+        "startChar": 0,
+        "endLine": 656,
+        "endChar": 89
+      },
+      "revId": "e828ac05b51c26e75cf5251b88f6b5b5a7c34254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83ff51cb_7fb1a3c7",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 2
@@ -178,6 +250,30 @@
       "writtenOn": "2023-01-03T06:08:28Z",
       "side": 1,
       "message": "This should be dropped to check that redirection is turned off by default and has to be explicitly turned on.",
+      "range": {
+        "startLine": 1148,
+        "startChar": 24,
+        "endLine": 1148,
+        "endChar": 61
+      },
+      "revId": "e828ac05b51c26e75cf5251b88f6b5b5a7c34254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fe14499_603dc457",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1148,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-04T09:30:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aca40a68_dd07b586",
       "range": {
         "startLine": 1148,
         "startChar": 24,
@@ -273,6 +369,30 @@
       "side": 1,
       "message": "Well, I would rather this used assertThrows",
       "parentUuid": "678aed50_05ec0e96",
+      "range": {
+        "startLine": 1152,
+        "startChar": 0,
+        "endLine": 1158,
+        "endChar": 100
+      },
+      "revId": "e828ac05b51c26e75cf5251b88f6b5b5a7c34254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16561055_3539964a",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1158,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-04T09:30:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27841b8d_854f9143",
       "range": {
         "startLine": 1152,
         "startChar": 0,
