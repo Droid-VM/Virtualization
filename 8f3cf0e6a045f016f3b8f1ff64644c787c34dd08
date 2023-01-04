@@ -16,6 +16,24 @@
       "message": "OOC: Mm, in theory this should indeed give more accurate time, but I remember that I had seen some strange result when trying this at the time. Is the result very different with `clock()` for these tests locally?",
       "revId": "8f3cf0e6a045f016f3b8f1ff64644c787c34dd08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52c7ed29_350c01df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-04T08:55:20Z",
+      "side": 1,
+      "message": "Mmm yes, result with `clock()` was faster about 1.8 times, than `clock_gettime()`. I\u0027m not sure why.\n\nLet\u0027s try landing this, and revert when something bad happens.",
+      "parentUuid": "676c4932_95bd9fbb",
+      "revId": "8f3cf0e6a045f016f3b8f1ff64644c787c34dd08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
