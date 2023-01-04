@@ -118,10 +118,7 @@ private:
         }
         char buf[kBlockSizeBytes];
 
-        struct timespec start;
-        if (clock_gettime(CLOCK_MONOTONIC, &start) == -1) {
-            return ErrnoError() << "failed to clock_gettime";
-        }
+        clock_t start = clock();
         unique_fd fd(open(filename.c_str(), O_RDONLY | O_CLOEXEC));
         if (fd.get() == -1) {
             return ErrnoError() << "Read: opening " << filename << " failed";
@@ -134,12 +131,7 @@ private:
                 return ErrnoError() << "failed to read";
             }
         }
-        struct timespec finish;
-        if (clock_gettime(CLOCK_MONOTONIC, &finish) == -1) {
-            return ErrnoError() << "failed to clock_gettime";
-        }
-        double elapsed_seconds =
-                finish.tv_sec - start.tv_sec + (finish.tv_nsec - start.tv_nsec) / 1e9;
+        double elapsed_seconds = ((double)clock() - start) / CLOCKS_PER_SEC;
         double file_size_mb = (double)file_size_bytes / kNumBytesPerMB;
         return {file_size_mb / elapsed_seconds};
     }
