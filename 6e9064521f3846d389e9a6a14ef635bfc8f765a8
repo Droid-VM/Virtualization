@@ -1,0 +1,274 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad601fd9_76935bfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-04T10:08:24Z",
+      "side": 1,
+      "message": "OK, I\u0027m beginning to warm to this (and understand it better).\nThe default is the app doesn\u0027t need to worry about the logs, but if you want to capture them you can. That seems better than the current state where you have to capture them.",
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8db36db9_36ae3f12",
+        "filename": "demo/java/com/android/microdroid/demo/MainActivity.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-04T10:08:24Z",
+      "side": 1,
+      "message": "It seems to be called setRedirectVmOutputsToApp now",
+      "range": {
+        "startLine": 250,
+        "startChar": 24,
+        "endLine": 250,
+        "endChar": 53
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fe9b8b0_450fea38",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-04T10:08:24Z",
+      "side": 1,
+      "message": "mConsoleWriter might be non-null even if mRedirectVmOutputsToApp is false (if a config change has occurred).\nSo I think you need to check again here. Or clear out the vm pipes at the appropriate point.",
+      "range": {
+        "startLine": 803,
+        "startChar": 67,
+        "endLine": 803,
+        "endChar": 93
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06590521_aac8cd30",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-04T10:08:24Z",
+      "side": 1,
+      "message": "Can you expand this a bit?\nConsole output is only available if the VirtualMachineConfig specifies that it should be redirected, or something like that.",
+      "range": {
+        "startLine": 878,
+        "startChar": 91,
+        "endLine": 879,
+        "endChar": 96
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4c6f9d2_2dcdf317",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-04T10:08:24Z",
+      "side": 1,
+      "message": "Can you bump the version to 3? Older builds won\u0027t look at the new key.",
+      "range": {
+        "startLine": 62,
+        "startChar": 29,
+        "endLine": 62,
+        "endChar": 36
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa9ac2bc_87567e79",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-04T10:08:24Z",
+      "side": 1,
+      "message": "or log",
+      "range": {
+        "startLine": 359,
+        "startChar": 47,
+        "endLine": 359,
+        "endChar": 54
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7870435_be6698a6",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-04T10:08:24Z",
+      "side": 1,
+      "message": "I guess we\u0027re ok with changing the VM redirection being a compatible config change?",
+      "range": {
+        "startLine": 377,
+        "startChar": 0,
+        "endLine": 383,
+        "endChar": 56
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "848d6e98_490937d7",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-04T10:08:24Z",
+      "side": 1,
+      "message": "What happens for a non-debuggable VM?",
+      "range": {
+        "startLine": 659,
+        "startChar": 0,
+        "endLine": 663,
+        "endChar": 18
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8293243a_c65ee8db",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-04T10:08:24Z",
+      "side": 1,
+      "message": "Comment why this is needed.",
+      "range": {
+        "startLine": 668,
+        "startChar": 0,
+        "endLine": 668,
+        "endChar": 53
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98ce7de4_0c8d49a2",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-04T10:08:24Z",
+      "side": 1,
+      "message": "Naming bikeshed:\nI\u0027m not sure redirect is right. And it would be nice to retain the setFoo/isFoo symmetry for setter \u0026 getter.\n\nCapture?\n\nsetVmOutputCaptured / isVmOutputCaptured ?",
+      "range": {
+        "startLine": 670,
+        "startChar": 23,
+        "endLine": 670,
+        "endChar": 48
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f26077f9_cbbe29b8",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-04T10:08:24Z",
+      "side": 1,
+      "message": "Can you add tests for your setter/getter here?\nI suggest minimal has it false, and maximal has it true.",
+      "range": {
+        "startLine": 318,
+        "startChar": 0,
+        "endLine": 350,
+        "endChar": 69
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "802343ca_6c5bfffe",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-04T10:08:24Z",
+      "side": 1,
+      "message": "Can we actually run the VM, to make sure that works?",
+      "range": {
+        "startLine": 1155,
+        "startChar": 0,
+        "endLine": 1159,
+        "endChar": 81
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
