@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b191f866_401dc5b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-05T19:35:56Z",
+      "side": 1,
+      "message": "Hi Frederick,\n\nThank for the fix!",
+      "revId": "d4083dfcf0030d5b2eecccc7b32266c37d183153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b3345a5_38332665",
+        "filename": "tests/benchmark/src/native/io_vsock.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-05T19:35:56Z",
+      "side": 1,
+      "message": "Can we take the same block size as other IO benchmarks [1]?\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/tests/benchmark/src/native/benchmarkbinary.cpp;l\u003d45;drc\u003d8f3cf0e6a045f016f3b8f1ff64644c787c34dd08",
+      "range": {
+        "startLine": 64,
+        "startChar": 13,
+        "endLine": 64,
+        "endChar": 21
+      },
+      "revId": "d4083dfcf0030d5b2eecccc7b32266c37d183153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff228b1d_0066d81c",
+        "filename": "tests/benchmark/src/native/io_vsock.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-05T19:35:56Z",
+      "side": 1,
+      "message": "Could you also change the write to primitive write to see what it gives [1]?\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/tests/benchmark/src/jni/io_vsock_host_jni.cpp;l\u003d37;drc\u003d8f3cf0e6a045f016f3b8f1ff64644c787c34dd08",
+      "range": {
+        "startLine": 65,
+        "startChar": 13,
+        "endLine": 65,
+        "endChar": 14
+      },
+      "revId": "d4083dfcf0030d5b2eecccc7b32266c37d183153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae73d2ce_15cbaa05",
+        "filename": "tests/benchmark/src/native/io_vsock.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-05T19:35:56Z",
+      "side": 1,
+      "message": "I think we don\u0027t need `.get()` here.",
+      "range": {
+        "startLine": 66,
+        "startChar": 53,
+        "endLine": 66,
+        "endChar": 59
+      },
+      "revId": "d4083dfcf0030d5b2eecccc7b32266c37d183153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
