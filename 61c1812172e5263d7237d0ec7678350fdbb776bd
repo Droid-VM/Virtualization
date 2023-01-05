@@ -168,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c7c59c6_eb0e31da",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-05T18:35:50Z",
+      "side": 1,
+      "message": "Hmm, that\u0027s an interesting point - should the properties of vbmeta be captured in the hash? I don\u0027t think so, as ultimately we only care about the state of memory before entering the next stage. So either of your suggestions should be fine, but maybe we can have a look at the bootloader and align with it?",
+      "parentUuid": "a0a05a2e_4901c051",
+      "range": {
+        "startLine": 30,
+        "startChar": 32,
+        "endLine": 30,
+        "endChar": 36
+      },
+      "revId": "61c1812172e5263d7237d0ec7678350fdbb776bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d405f6eb_c9be7766",
         "filename": "pvmfw/src/dice.rs",
         "patchSetId": 1
