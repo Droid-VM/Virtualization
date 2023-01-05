@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ce78ecd2_d229abe6",
+        "filename": "libs/dice/src/bcc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-05T11:40:28Z",
+      "side": 1,
+      "message": "nit: avoid the repeatition?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 48
+      },
+      "revId": "61c1812172e5263d7237d0ec7678350fdbb776bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec24ab85_74841b64",
         "filename": "pvmfw/src/dice.rs",
         "patchSetId": 1
@@ -19,6 +42,29 @@
         "startChar": 32,
         "endLine": 30,
         "endChar": 36
+      },
+      "revId": "61c1812172e5263d7237d0ec7678350fdbb776bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d405f6eb_c9be7766",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-05T11:40:28Z",
+      "side": 1,
+      "message": "we must have calculated this for the verified boot. how can we reuse that?\n\nor can \u0027code\u0027 be the signature of the kernel, not the kernel itself?",
+      "range": {
+        "startLine": 34,
+        "startChar": 20,
+        "endLine": 34,
+        "endChar": 30
       },
       "revId": "61c1812172e5263d7237d0ec7678350fdbb776bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
