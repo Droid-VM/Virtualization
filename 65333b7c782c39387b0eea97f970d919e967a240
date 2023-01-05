@@ -3,6 +3,86 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c221029d_70512b83",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-05T14:07:37Z",
+      "side": 1,
+      "message": "This allows the caller to make arbitrary mutations to the device tree buffer. Isn\u0027t it an invariant of the `Fdt` that the buffer contains a valid device tree, as checked by `from_slice`? If safe code in the caller can use `as_mut_slice` to violate that invariant then the assumptions of the other safe methods (e.g. `header`) are no longer true.",
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d497fc8_5106ec7b",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-05T14:07:37Z",
+      "side": 1,
+      "message": "There is no `new` method, I guess you mean `from_slice`.",
+      "range": {
+        "startLine": 607,
+        "startChar": 45,
+        "endLine": 607,
+        "endChar": 48
+      },
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c85a6dff_a6d3aa9c",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-05T14:07:37Z",
+      "side": 1,
+      "message": "That\u0027s up to the caller, isn\u0027t it? They could choose to deallocate it if they want to.",
+      "range": {
+        "startLine": 36,
+        "startChar": 52,
+        "endLine": 36,
+        "endChar": 69
+      },
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9008874f_9ac2f743",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-05T14:07:37Z",
+      "side": 1,
+      "message": "Leaking memory isn\u0027t unsafe. `core::mem::forget` and `alloc::boxed::Box::leak` are safe, for example.",
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c3b3a3a5_6b32442b",
         "filename": "pvmfw/src/heap.rs",
         "patchSetId": 2
@@ -68,6 +148,74 @@
         "endLine": 41,
         "endChar": 46
       },
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3290e9d7_45226db4",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-05T14:07:37Z",
+      "side": 1,
+      "message": "How about having this return a raw slice, or even a boxed slice? I.e. `Option\u003c*mut [u8]\u003e` or `Option\u003cNonNull\u003c[u8]\u003e\u003e` or `Option\u003cBox\u003c[u8]\u003e\u003e`. The caller is turning it into a slice anyway, so you might as well do that safely here. I\u0027d be inclined to go with `Option\u003cBox\u003c[u8]\u003e\u003e`, then the caller can leak it with `Box::leak` or `Box::into_raw`.",
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa6af553_11644b13",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-05T14:07:37Z",
+      "side": 1,
+      "message": "This seems a round-about way of checking that `size` is not 0. Why do you need to check it, anyway?",
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "badd1cc7_85da0e29",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-05T14:07:37Z",
+      "side": 1,
+      "message": "Why does this need to be a mutable reference?",
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bda2b5d3_4bc10933",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-05T14:07:37Z",
+      "side": 1,
+      "message": "Do you need to flush the device tree too?",
       "revId": "65333b7c782c39387b0eea97f970d919e967a240",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
