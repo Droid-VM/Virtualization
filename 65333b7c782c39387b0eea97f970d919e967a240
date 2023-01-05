@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d7b87a2c_b8841eb3",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-05T14:49:55Z",
+      "side": 1,
+      "message": "It looks like you could work around this by this function consuming `self`, ie. making this `to_mut_slice`? You don\u0027t use the object afterwards anyway.",
+      "parentUuid": "c221029d_70512b83",
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d497fc8_5106ec7b",
         "filename": "libs/libfdt/src/lib.rs",
         "patchSetId": 2
@@ -36,6 +54,29 @@
         "startChar": 45,
         "endLine": 607,
         "endChar": 48
+      },
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3f9407a_70d9384a",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-05T14:49:55Z",
+      "side": 1,
+      "message": "Does it matter that if this function fails, the fdt can be left in an unpacked state? Could it break some error printing? Would it make sense to write a wrapper that calls pack if one of the statements below fails?",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 18
       },
       "revId": "65333b7c782c39387b0eea97f970d919e967a240",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -171,6 +212,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c9198e71_cf56a005",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-05T14:49:55Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this return a slice?",
+      "range": {
+        "startLine": 42,
+        "startChar": 70,
+        "endLine": 42,
+        "endChar": 77
+      },
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa6af553_11644b13",
         "filename": "pvmfw/src/heap.rs",
         "patchSetId": 2
@@ -199,6 +263,52 @@
       "writtenOn": "2023-01-05T14:07:37Z",
       "side": 1,
       "message": "Why does this need to be a mutable reference?",
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c5ca652_8496d7f0",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-05T14:49:55Z",
+      "side": 1,
+      "message": "Do we have a PAGE_SIZE constant somewhere? It won\u0027t be 4K forever...",
+      "range": {
+        "startLine": 90,
+        "startChar": 57,
+        "endLine": 90,
+        "endChar": 65
+      },
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70fc40e1_127d1f12",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-05T14:49:55Z",
+      "side": 1,
+      "message": "Fold this into `alloc_leaked_slice`",
+      "range": {
+        "startLine": 95,
+        "startChar": 19,
+        "endLine": 95,
+        "endChar": 81
+      },
       "revId": "65333b7c782c39387b0eea97f970d919e967a240",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
