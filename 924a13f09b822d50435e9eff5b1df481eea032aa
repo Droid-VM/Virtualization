@@ -22,6 +22,30 @@
       },
       "revId": "924a13f09b822d50435e9eff5b1df481eea032aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f5235fd_bf04e15e",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 22
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-05T12:34:59Z",
+      "side": 1,
+      "message": "No. Because now I can expose the real implementation of `verify_payload` as I removed this library dep from pvmfw. Then everything is used in the real implementation. Previously the real implementation couldn\u0027t be compiled into pvmfw due to missing libc definitions, so pvmfw took the fake one with nothing inside and all the real impl was dead code.",
+      "parentUuid": "20bb8515_18d5562e",
+      "range": {
+        "startLine": 291,
+        "startChar": 7,
+        "endLine": 291,
+        "endChar": 21
+      },
+      "revId": "924a13f09b822d50435e9eff5b1df481eea032aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

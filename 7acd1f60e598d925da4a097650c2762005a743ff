@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8fc81276_36f05ffe",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-05T12:34:59Z",
+      "side": 1,
+      "message": "I tried this first actually. It doesn\u0027t work because neither Result nor AvbIOResult is defined in this scope.",
+      "parentUuid": "af5741fb_577b98e3",
+      "range": {
+        "startLine": 131,
+        "startChar": 3,
+        "endLine": 131,
+        "endChar": 19
+      },
+      "revId": "7acd1f60e598d925da4a097650c2762005a743ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bedd44c2_e72cf68e",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 24
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-04T21:18:33Z",
       "side": 1,
       "message": "This approach of\n```\nextern \"C\" fn foo(...) -\u003e AvbIOResult { try_foo(...).into() }\n\nfn try_foo(...) -\u003e Result\u003c(), AvbIOError\u003e { ... }\n```\nwhere you can use `?` in `try_foo` while still returning `AvbIOResult` in the C-compatible functions is neat.",
+      "range": {
+        "startLine": 167,
+        "startChar": 3,
+        "endLine": 167,
+        "endChar": 26
+      },
+      "revId": "7acd1f60e598d925da4a097650c2762005a743ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42dcd748_e3dda61e",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-05T12:34:59Z",
+      "side": 1,
+      "message": "Thanks",
+      "parentUuid": "bedd44c2_e72cf68e",
       "range": {
         "startLine": 167,
         "startChar": 3,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9df501dc_96b20856",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-05T12:34:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36af16a5_0cda82a0",
+      "range": {
+        "startLine": 169,
+        "startChar": 4,
+        "endLine": 169,
+        "endChar": 14
+      },
+      "revId": "7acd1f60e598d925da4a097650c2762005a743ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6e39143_e3682c6c",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-01-04T21:18:33Z",
       "side": 1,
       "message": "nit: as the compiler can figure out the type here, I think you could use the more versatile `.try_into()` instead but TBF, we convert freely between `usize` and `u64` using `as` all across the codebase so this might be overkill.",
+      "range": {
+        "startLine": 223,
+        "startChar": 8,
+        "endLine": 223,
+        "endChar": 11
+      },
+      "revId": "7acd1f60e598d925da4a097650c2762005a743ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2198c9f_e06cb005",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-05T12:34:59Z",
+      "side": 1,
+      "message": "Well usize can also be u128. I\u0027d like to keep it like this if you don\u0027t mind. This makes the `kernel_size` type more clear, with `into()` we\u0027ll need to search around where it\u0027s used etc. Like this we can tell the type directly.",
+      "parentUuid": "b6e39143_e3682c6c",
       "range": {
         "startLine": 223,
         "startChar": 8,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "893b054f_eff83426",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-05T12:34:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72718585_2cac6f38",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 44
+      },
+      "revId": "7acd1f60e598d925da4a097650c2762005a743ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c7bad64_41357983",
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "352ce2f3_b8dfc660",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-05T12:34:59Z",
+      "side": 1,
+      "message": "Cool! Let\u0027s use NonNull then. I was hesitant about using it as most of NonNull code was marked unstable. I\u0027m not sure of the policy about using unstable code in aosp if it\u0027s recommended to use unstable language features.\n\nOtherwise, NonNull::new takes a `mut` pointer, so we cannot replace everything with it, but it still simplifies several places. Thanks!",
+      "parentUuid": "7c7bad64_41357983",
+      "range": {
+        "startLine": 300,
+        "startChar": 3,
+        "endLine": 300,
+        "endChar": 14
+      },
+      "revId": "7acd1f60e598d925da4a097650c2762005a743ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55d75985_66ba0396",
@@ -152,6 +296,30 @@
       "writtenOn": "2023-01-04T21:18:33Z",
       "side": 1,
       "message": "That\u0027s not required as the struct isn\u0027t accessed by C code.",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 308,
+        "endChar": 10
+      },
+      "revId": "7acd1f60e598d925da4a097650c2762005a743ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fe7e820_909d305f",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 24
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-05T12:34:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55d75985_66ba0396",
       "range": {
         "startLine": 308,
         "startChar": 0,
