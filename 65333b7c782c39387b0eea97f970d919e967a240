@@ -46,6 +46,30 @@
       },
       "revId": "65333b7c782c39387b0eea97f970d919e967a240",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "255c5200_35ed75ef",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-05T13:43:46Z",
+      "side": 1,
+      "message": "Ah I see. By providing \"another\" way to allocate a piece of memory other than the standard `alloc()`.",
+      "parentUuid": "9e146db7_d4941ea1",
+      "range": {
+        "startLine": 41,
+        "startChar": 14,
+        "endLine": 41,
+        "endChar": 46
+      },
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
