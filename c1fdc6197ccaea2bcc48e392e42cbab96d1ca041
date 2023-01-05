@@ -16,6 +16,29 @@
       "message": "Hi Pierre, PTAL.",
       "revId": "c1fdc6197ccaea2bcc48e392e42cbab96d1ca041",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3e5825a_040f100f",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T16:45:01Z",
+      "side": 1,
+      "message": "Could you make this a named `const`? Also, how was `30` picked?",
+      "range": {
+        "startLine": 464,
+        "startChar": 71,
+        "endLine": 464,
+        "endChar": 73
+      },
+      "revId": "c1fdc6197ccaea2bcc48e392e42cbab96d1ca041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
