@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0136470f_2c0d0a52",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-05T14:33:27Z",
+      "side": 1,
+      "message": "So you want to compute `hash(concat(code, ramdisk))`? Doesn\u0027t that ignore where the `code` ends and `ramdisk` begins? Shouldn\u0027t we compute `hash(concat(hash(code), hash(ramdisk)))` or something like that? Does the BCC spec say something about this?",
+      "parentUuid": "ec24ab85_74841b64",
+      "range": {
+        "startLine": 30,
+        "startChar": 32,
+        "endLine": 30,
+        "endChar": 36
+      },
+      "revId": "61c1812172e5263d7237d0ec7678350fdbb776bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d405f6eb_c9be7766",
         "filename": "pvmfw/src/dice.rs",
         "patchSetId": 1
