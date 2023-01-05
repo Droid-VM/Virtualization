@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbae3d45_b41f82d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-05T14:45:11Z",
+      "side": 1,
+      "message": "Mostly nits",
+      "revId": "ec7f2ca811f82f5297c7a75c0b302e097c45c8e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d8e83e6_4b0b97e2",
+        "filename": "tests/aidl/com/android/microdroid/testservice/ITestService.aidl",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-05T14:45:11Z",
+      "side": 1,
+      "message": "The asymmetry of these names is distressing.\nwriteFile / readFile ?",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 39
+      },
+      "revId": "ec7f2ca811f82f5297c7a75c0b302e097c45c8e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "095063b7_be2f8ee3",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1224,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-05T14:45:11Z",
+      "side": 1,
+      "message": "mEncryptedContent, maybe?",
+      "range": {
+        "startLine": 1224,
+        "startChar": 15,
+        "endLine": 1224,
+        "endChar": 27
+      },
+      "revId": "ec7f2ca811f82f5297c7a75c0b302e097c45c8e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37de3ac5_a06d8097",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-05T14:45:11Z",
+      "side": 1,
+      "message": "We should probably extend this idea to other tests - there\u0027s really no reason to add integers on all the tests we do.\n\nSo maybe name the type VmOperation, and the existing enums as READ/WRITE_ENCRYPTED_FILE ?",
+      "range": {
+        "startLine": 1231,
+        "startChar": 59,
+        "endLine": 1231,
+        "endChar": 88
+      },
+      "revId": "ec7f2ca811f82f5297c7a75c0b302e097c45c8e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2d6c38a_5b049596",
+        "filename": "tests/testapk/src/native/testbinary.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-05T14:45:11Z",
+      "side": 1,
+      "message": "Can we fix that? Add an AIDL method to exit the VM?",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 43
+      },
+      "revId": "ec7f2ca811f82f5297c7a75c0b302e097c45c8e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
