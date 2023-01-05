@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9e72480_3e72b6c2",
+        "filename": "libs/dice/src/bcc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T18:07:57Z",
+      "side": 1,
+      "message": "Do you mean\n```\nuse open_dice_bcc_bindgen::{\n    BccConfigValues, BccFormatConfigDescriptor, BccHandoverMainFlow, BccHandoverParse,\n    DiceInputValues, BCC_INPUT_COMPONENT_NAME, BCC_INPUT_COMPONENT_VERSION, BCC_INPUT_RESETTABLE,\n};\n```\n?",
+      "parentUuid": "ce78ecd2_d229abe6",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 48
+      },
+      "revId": "61c1812172e5263d7237d0ec7678350fdbb776bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79d89f37_8f7d6530",
         "filename": "libs/dice/src/lib.rs",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-05T13:30:11Z",
       "side": 1,
       "message": "Nit: I\u0027d be inclined to use `INLINE_CONFIG_SIZE` here.",
+      "range": {
+        "startLine": 138,
+        "startChar": 55,
+        "endLine": 138,
+        "endChar": 85
+      },
+      "revId": "61c1812172e5263d7237d0ec7678350fdbb776bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57f31ac2_4dc36288",
+        "filename": "libs/dice/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T18:07:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79d89f37_8f7d6530",
       "range": {
         "startLine": 138,
         "startChar": 55,
@@ -96,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a0a05a2e_4901c051",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T18:07:57Z",
+      "side": 1,
+      "message": "The spec [describes](https://pigweed.googlesource.com/open-dice/+/HEAD/docs/specification.md#input-values) the code input as being \"computed by hashing the target code\" which I interpret to include the ramdisk, not just the kernel.\n\nOnce we have the AVB code in, we should be computing\n```\nhash(concat(hash(kernel), hash(ramdisk)))\n```\nas `hash(kernel)` and `hash(ramdisk)` can be directly extracted from the VBMeta.\n\nAlternatively, we\u0027ll use the AVB digests i.e.\n```\nhash(concat(hash(vbmeta_kernel), hash(vbmeta_ramdisk)))\n```\nwhere `vbmeta_X` contains `hash(X)` see this [other comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2377172/comment/d405f6eb_c9be7766/).\n\nFor now, are you suggesting I use\n```\nlet mut hashes \u003d [0; HASH_SIZE * 2];\nhashes[..HASH_SIZE] \u003d hash(kernel)?;\nhashes[HASH_SIZE..] \u003d hash(ramdisk)?;\nlet code_hash \u003d hash(hashes)?;\n```\n?",
+      "parentUuid": "0136470f_2c0d0a52",
+      "range": {
+        "startLine": 30,
+        "startChar": 32,
+        "endLine": 30,
+        "endChar": 36
+      },
+      "revId": "61c1812172e5263d7237d0ec7678350fdbb776bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d405f6eb_c9be7766",
         "filename": "pvmfw/src/dice.rs",
         "patchSetId": 1
@@ -107,6 +179,30 @@
       "writtenOn": "2023-01-05T11:40:28Z",
       "side": 1,
       "message": "we must have calculated this for the verified boot. how can we reuse that?\n\nor can \u0027code\u0027 be the signature of the kernel, not the kernel itself?",
+      "range": {
+        "startLine": 34,
+        "startChar": 20,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "61c1812172e5263d7237d0ec7678350fdbb776bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f81af61b_9b7f5ed4",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T18:07:57Z",
+      "side": 1,
+      "message": "Yes, I thought we would use something like what [`avb_slot_verify_data_calculate_vbmeta_digest`](http://cs/android/external/avb/libavb/avb_slot_verify.c?l\u003d1710) does (slightly different as we\u0027d have to filter out partitions that didn\u0027t pass verification; see b/256148034#comment30).\n\nBut now that you mention it, I notice that it might not be correct to use this AVB digest as DICE code input ([input values](https://pigweed.googlesource.com/open-dice/+/HEAD/docs/specification.md#input-values)) as it is a hash of the VBMeta(s) and as those contain more than the image hashes (what the DICE code input should be limited to).\n\nBeyond having potentially irrelevant fields (which might not need to affect the CDIs if they change) they also contain the public key, which should be covered by the DICE authority input only and shouldn\u0027t affect the code input i.e. the same code signed with a different key should result in the same DICE code input.\n\nOTOH, code and authority inputs both contribute to the [attestation CDI](https://pigweed.googlesource.com/open-dice/+/HEAD/docs/specification.md#attestation-cdi) so it might not really matter if the code input is correlated with the authority?",
+      "parentUuid": "d405f6eb_c9be7766",
       "range": {
         "startLine": 34,
         "startChar": 20,
