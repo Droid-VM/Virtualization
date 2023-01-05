@@ -22,6 +22,30 @@
       },
       "revId": "65333b7c782c39387b0eea97f970d919e967a240",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e146db7_d4941ea1",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T13:08:59Z",
+      "side": 1,
+      "message": "Because the result of `.alloc()` is supposed to be passed to `.dealloc()` but we intentionally don\u0027t, meaning that the `HEAP_ALLOCATOR` remains aware of the region and never re-uses it (which would corrupt the BCC).",
+      "parentUuid": "c3b3a3a5_6b32442b",
+      "range": {
+        "startLine": 41,
+        "startChar": 14,
+        "endLine": 41,
+        "endChar": 46
+      },
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
