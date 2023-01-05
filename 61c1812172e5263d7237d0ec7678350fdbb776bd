@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec24ab85_74841b64",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T11:24:25Z",
+      "side": 1,
+      "message": "Unfortunately, [`DiceHash`](http://cs/android/external/open-dice/src/boringssl_hash_kdf_ops.c?l\u003d28) ignores the context so we can\u0027t use it to hash both kernel and ramdisk into a single `code_hash` so will need to find a way to call BSSL\u0027s `SHA*` functions from Rust.",
+      "range": {
+        "startLine": 30,
+        "startChar": 32,
+        "endLine": 30,
+        "endChar": 36
+      },
+      "revId": "61c1812172e5263d7237d0ec7678350fdbb776bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
