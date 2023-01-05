@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2a4ff78_985051cb",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-05T18:51:56Z",
+      "side": 1,
+      "message": "Nit: \"aligned but uninitialized\" sounds better to me.",
+      "range": {
+        "startLine": 38,
+        "startChar": 16,
+        "endLine": 38,
+        "endChar": 41
+      },
+      "revId": "bc915f84edfb78934f9b480658ce07061e83fb03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5780ac04_c0838e25",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-05T18:51:56Z",
+      "side": 1,
+      "message": "I\u0027d be inclined to use `alloc::alloc(layout)` instead, to guarantee that it really is the global allocator being used (as `Box::from_raw` expects).",
+      "revId": "bc915f84edfb78934f9b480658ce07061e83fb03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
