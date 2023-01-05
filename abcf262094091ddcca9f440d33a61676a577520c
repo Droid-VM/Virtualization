@@ -22,6 +22,30 @@
       },
       "revId": "abcf262094091ddcca9f440d33a61676a577520c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1135adaf_c37d3033",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-05T12:29:33Z",
+      "side": 1,
+      "message": "Getting it to s.a.c is a work in progress and may take a while - b/264516149, but I agree. At least this way we have links in both directions between the 2 API surfaces.\n\nOur s.a.c documentation itself has a bunch of links to codesearch.",
+      "parentUuid": "7583dd2e_005be38f",
+      "range": {
+        "startLine": 112,
+        "startChar": 9,
+        "endLine": 112,
+        "endChar": 123
+      },
+      "revId": "abcf262094091ddcca9f440d33a61676a577520c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
