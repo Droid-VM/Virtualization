@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b85cdde6_89abf977",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T18:09:14Z",
+      "side": 1,
+      "message": "Yes, very good point!\n\nNow that `flush` takes a non-`mut` slice, this isn\u0027t required anymore.",
+      "parentUuid": "d7b87a2c_b8841eb3",
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d497fc8_5106ec7b",
@@ -49,6 +67,30 @@
       "writtenOn": "2023-01-05T14:07:37Z",
       "side": 1,
       "message": "There is no `new` method, I guess you mean `from_slice`.",
+      "range": {
+        "startLine": 607,
+        "startChar": 45,
+        "endLine": 607,
+        "endChar": 48
+      },
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62af739b_5c393258",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T18:09:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d497fc8_5106ec7b",
       "range": {
         "startLine": 607,
         "startChar": 45,
@@ -82,6 +124,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83d5851d_da9bcf79",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T18:09:14Z",
+      "side": 1,
+      "message": "A DT remains valid even when unpacked as that is basically equivalent to setting the DT header\u0027s `totalsize` to the size of the buffer containing the DT. As the body (and, in particular, its tags) remains unchanged, it means it now simply contains uninitialized data within `totalsize`, which should never be reached during printing/parsing as it\u0027s beyond the `FDT_END` tag.",
+      "parentUuid": "e3f9407a_70d9384a",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 18
+      },
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c85a6dff_a6d3aa9c",
@@ -105,6 +171,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b05fd01f_cf841501",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T18:09:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c85a6dff_a6d3aa9c",
+      "range": {
+        "startLine": 36,
+        "startChar": 52,
+        "endLine": 36,
+        "endChar": 69
+      },
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9008874f_9ac2f743",
@@ -118,6 +208,24 @@
       "writtenOn": "2023-01-05T14:07:37Z",
       "side": 1,
       "message": "Leaking memory isn\u0027t unsafe. `core::mem::forget` and `alloc::boxed::Box::leak` are safe, for example.",
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29891366_39b90e19",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T18:09:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9008874f_9ac2f743",
       "revId": "65333b7c782c39387b0eea97f970d919e967a240",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -233,6 +341,48 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64b822c9_9be679af",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T18:09:14Z",
+      "side": 1,
+      "message": "Yes, that\u0027s much cleaner. I had initially tried using `Box::leak` but couldn\u0027t get it to work as I didn\u0027t know that `*[T]` existed.",
+      "parentUuid": "3290e9d7_45226db4",
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f11c2ea_b70eaf52",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T18:09:14Z",
+      "side": 1,
+      "message": "Now returns a `Option\u003cBox\u003c[u8]\u003e\u003e`",
+      "parentUuid": "c9198e71_cf56a005",
+      "range": {
+        "startLine": 42,
+        "startChar": 70,
+        "endLine": 42,
+        "endChar": 77
+      },
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa6af553_11644b13",
@@ -246,6 +396,24 @@
       "writtenOn": "2023-01-05T14:07:37Z",
       "side": 1,
       "message": "This seems a round-about way of checking that `size` is not 0. Why do you need to check it, anyway?",
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b6b1ef1_337f7837",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T18:09:14Z",
+      "side": 1,
+      "message": "It\u0027s [required by the `unsafe` `alloc::GlobalAlloc::alloc`](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html#safety-1).",
+      "parentUuid": "fa6af553_11644b13",
       "revId": "65333b7c782c39387b0eea97f970d919e967a240",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -267,6 +435,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32c88b0e_76236932",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T18:09:14Z",
+      "side": 1,
+      "message": "Good point; the idea was that flushing meant having written to the slice, which requires `mut` but that shouldn\u0027t be part of the API.",
+      "parentUuid": "badd1cc7_85da0e29",
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c5ca652_8496d7f0",
@@ -280,6 +466,30 @@
       "writtenOn": "2023-01-05T14:49:55Z",
       "side": 1,
       "message": "Do we have a PAGE_SIZE constant somewhere? It won\u0027t be 4K forever...",
+      "range": {
+        "startLine": 90,
+        "startChar": 57,
+        "endLine": 90,
+        "endChar": 65
+      },
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "668c2e14_275abf4e",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T18:09:14Z",
+      "side": 1,
+      "message": "The issue with PAGE_SIZE is that we have 3:\n\n- hypervisor/host stage-2 \u0026 granularity of HVCs\n- pvmfw stage-1\n- next-stage stage-1\n\nShould we have 3 constants? Should we assume they\u0027re all always equal?",
+      "parentUuid": "5c5ca652_8496d7f0",
       "range": {
         "startLine": 90,
         "startChar": 57,
@@ -313,6 +523,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf3613b8_0192f12b",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T18:09:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70fc40e1_127d1f12",
+      "range": {
+        "startLine": 95,
+        "startChar": 19,
+        "endLine": 95,
+        "endChar": 81
+      },
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bda2b5d3_4bc10933",
@@ -326,6 +560,24 @@
       "writtenOn": "2023-01-05T14:07:37Z",
       "side": 1,
       "message": "Do you need to flush the device tree too?",
+      "revId": "65333b7c782c39387b0eea97f970d919e967a240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a42f7b1_2ec02726",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-05T18:09:14Z",
+      "side": 1,
+      "message": "Yes, it\u0027s done in `main_wrapper`.",
+      "parentUuid": "bda2b5d3_4bc10933",
       "revId": "65333b7c782c39387b0eea97f970d919e967a240",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
