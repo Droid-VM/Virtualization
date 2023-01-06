@@ -1520,15 +1520,46 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             throws Exception {
         CompletableFuture<Boolean> payloadStarted = new CompletableFuture<>();
         CompletableFuture<Boolean> payloadReady = new CompletableFuture<>();
+        CompletableFuture<Boolean> payloadFinished = new CompletableFuture<>();
         TestResults testResults = new TestResults();
         VmEventListener listener =
                 new VmEventListener() {
-                    private void testVMService(VirtualMachine vm) {
+                    ITestService mTestService = null;
+
+                    private void initializeTestService(VirtualMachine vm) {
                         try {
-                            ITestService testService =
+                            mTestService =
                                     ITestService.Stub.asInterface(
                                             vm.connectToVsockServer(ITestService.SERVICE_PORT));
-                            testsToRun.runTests(testService, testResults);
+                            testResults.mAddInteger = testService.addInteger(123, 456);
+                            testResults.mAppRunProp =
+                                    testService.readProperty("debug.microdroid.app.run");
+                            testResults.mSublibRunProp =
+                                    testService.readProperty("debug.microdroid.app.sublib.run");
+                            testResults.mExtraApkTestProp =
+                                    testService.readProperty("debug.microdroid.test.extra_apk");
+                            testResults.mApkContentsPath = testService.getApkContentsPath();
+                            testResults.mEncryptedStoragePath =
+                                    testService.getEncryptedStoragePath();
+                            testResults.mEffectiveCapabilities =
+                                    testService.getEffectiveCapabilities();
+                            if (mode == EncryptedStoreOperation.WRITE) {
+                                testService.writeToFile(
+                                        /*content*/ EXAMPLE_STRING,
+                                        /*path*/ "/mnt/encryptedstore/test_file");
+                            } else if (mode == EncryptedStoreOperation.READ) {
+                                testResults.mFileContent =
+                                        testService.readFromFile("/mnt/encryptedstore/test_file");
+                            }
+                        } catch (Exception e) {
+                            testResults.mException = e;
+                        }
+                    }
+
+                    private void quitVMService(VirtualMachine vm) {
+                        try {
+                            if (mTestService == null) initializeTestService(vm);
+                            mTestService.quit();
                         } catch (Exception e) {
                             testResults.mException = e;
                         }
@@ -1539,7 +1570,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                         Log.i(TAG, "onPayloadReady");
                         payloadReady.complete(true);
                         testVMService(vm);
-                        forceStop(vm);
+                        quitVMService(vm);
                     }
 
                     @Override
@@ -1547,10 +1578,18 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                         Log.i(TAG, "onPayloadStarted");
                         payloadStarted.complete(true);
                     }
+
+                    @Override
+                    public void onPayloadFinished(VirtualMachine vm, int exitCode) {
+                        Log.i(TAG, "onPayloadFinished: " + exitCode);
+                        payloadFinished.complete(true);
+                        forceStop(vm);
+                    }
                 };
         listener.runToFinish(TAG, vm);
         assertThat(payloadStarted.getNow(false)).isTrue();
         assertThat(payloadReady.getNow(false)).isTrue();
+        assertThat(payloadFinished.getNow(false)).isTrue();
         return testResults;
     }
 
