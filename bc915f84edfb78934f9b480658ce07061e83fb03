@@ -81,6 +81,24 @@
       "parentUuid": "5780ac04_c0838e25",
       "revId": "bc915f84edfb78934f9b480658ce07061e83fb03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6066032c_7c996122",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-06T11:43:17Z",
+      "side": 1,
+      "message": "I think it\u0027s better than directly calling our allocator. Once `Global` is stabilised we can move to that.",
+      "parentUuid": "31b9931b_2cb17637",
+      "revId": "bc915f84edfb78934f9b480658ce07061e83fb03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
