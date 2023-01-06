@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fa1663cb_48464b5d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-06T09:07:16Z",
+      "side": 1,
+      "message": "Ah, I didn\u0027t know that we can *change* a config.",
+      "parentUuid": "9fe9b8b0_450fea38",
+      "range": {
+        "startLine": 803,
+        "startChar": 67,
+        "endLine": 803,
+        "endChar": 93
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06590521_aac8cd30",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 3
@@ -158,6 +182,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ebefa2ec_cb073d3d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-06T09:07:16Z",
+      "side": 1,
+      "message": "Umm, this is hard to decide. But my thought is that it\u0027s not ok; changing the VM redirection looks similar to changing the debuggability (like the debug level change). Also, by not allowing such change, the implementation becomes much simpler and less buggy (e.g. your comment on VirtualMachine.java#803).\n\nWDYT?",
+      "parentUuid": "c7870435_be6698a6",
+      "range": {
+        "startLine": 377,
+        "startChar": 0,
+        "endLine": 383,
+        "endChar": 56
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "848d6e98_490937d7",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 3
@@ -169,6 +217,30 @@
       "writtenOn": "2023-01-04T10:08:24Z",
       "side": 1,
       "message": "What happens for a non-debuggable VM?",
+      "range": {
+        "startLine": 659,
+        "startChar": 0,
+        "endLine": 663,
+        "endChar": 18
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b7acfbb_fb33713d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-06T09:07:16Z",
+      "side": 1,
+      "message": "I think this shouldn\u0027t be allowed for non-debuggable VM (because it will have no effect at all). If so, we need to add an assertion that the VM should be debuggable, right?",
+      "parentUuid": "848d6e98_490937d7",
       "range": {
         "startLine": 659,
         "startChar": 0,
