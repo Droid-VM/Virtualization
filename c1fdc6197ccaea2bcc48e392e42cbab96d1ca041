@@ -63,6 +63,30 @@
       },
       "revId": "c1fdc6197ccaea2bcc48e392e42cbab96d1ca041",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6827ce0_142aa402",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-06T10:04:52Z",
+      "side": 1,
+      "message": "The AvbFooter is only there for libavb to locate the VBMeta and isn\u0027t covered by the signing process (nor is it hashed during verification); yes, please look at the libavb implementation for further details. With an offset of 30, you\u0027re corrupting `AvbFooter::vbmeta_size`, which I guess makes the verification reject it. An offset of 1 corrupts the magic, making the footer impossible to find and 10 corrupts its `version_minor`.",
+      "parentUuid": "c3e66c26_b98e7000",
+      "range": {
+        "startLine": 464,
+        "startChar": 71,
+        "endLine": 464,
+        "endChar": 73
+      },
+      "revId": "c1fdc6197ccaea2bcc48e392e42cbab96d1ca041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
