@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "394b53e9_668cf8d5",
+        "filename": "tests/benchmark/src/native/io_vsock.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-06T08:28:58Z",
+      "side": 1,
+      "message": "Actually I think the block size could be a param like in [iperf3](https://software.es.net/iperf/invoking.html#iperf3-manual-page) if we really want to check its impact across all three IO benchmarks we have.",
+      "parentUuid": "ec521b8d_0faa4228",
+      "range": {
+        "startLine": 64,
+        "startChar": 13,
+        "endLine": 64,
+        "endChar": 21
+      },
+      "revId": "d4083dfcf0030d5b2eecccc7b32266c37d183153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff228b1d_0066d81c",
@@ -114,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a55e18d1_e6af2bc0",
+        "filename": "tests/benchmark/src/native/io_vsock.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-06T08:28:58Z",
+      "side": 1,
+      "message": "Thanks for trying it. In fact I was thinking about using write directly to allocate 48 MiB buffer instead of calling WriteFdToString. But we can keep that a different cl so that we can check the impact of Read/Write separately.",
+      "parentUuid": "748cad0f_78764fb0",
+      "range": {
+        "startLine": 65,
+        "startChar": 13,
+        "endLine": 65,
+        "endChar": 14
+      },
+      "revId": "d4083dfcf0030d5b2eecccc7b32266c37d183153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae73d2ce_15cbaa05",
         "filename": "tests/benchmark/src/native/io_vsock.cpp",
         "patchSetId": 1
@@ -149,6 +197,30 @@
       "side": 1,
       "message": "I think you are right, but it seems to be discouraged: https://source.corp.google.com/h/googleplex-android/platform/superproject/+/master:system/libbase/include/android-base/unique_fd.h;l\u003d82-86;drc\u003d7bc8db18d96e9c76d72aefe16826981fbf44fba4",
       "parentUuid": "ae73d2ce_15cbaa05",
+      "range": {
+        "startLine": 66,
+        "startChar": 53,
+        "endLine": 66,
+        "endChar": 59
+      },
+      "revId": "d4083dfcf0030d5b2eecccc7b32266c37d183153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e9cc6c9_165dcb1f",
+        "filename": "tests/benchmark/src/native/io_vsock.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-06T08:28:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3c74b8bb_c25d6b37",
       "range": {
         "startLine": 66,
         "startChar": 53,
