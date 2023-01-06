@@ -53,6 +53,7 @@ use rustutils::system_properties::PropertyWatcher;
 use std::borrow::Cow::{Borrowed, Owned};
 use std::convert::TryInto;
 use std::env;
+use std::ffi::CString;
 use std::fs::{self, create_dir, OpenOptions};
 use std::io::Write;
 use std::os::unix::process::CommandExt;
@@ -216,6 +217,7 @@ fn try_main() -> Result<()> {
     match try_run_payload(&service) {
         Ok(code) => {
             info!("notifying payload finished");
+            post_payload_work()?;
             service.notifyPayloadFinished(code)?;
             if code == 0 {
                 info!("task successfully finished");
@@ -232,6 +234,21 @@ fn try_main() -> Result<()> {
     }
 }
 
+fn post_payload_work() -> Result<()> {
+    // Sync the encrypted storage filesystem (flushes the filesystem caches).
+    if Path::new(ENCRYPTEDSTORE_BACKING_DEVICE).exists() {
+        let mountpoint = CString::new(ENCRYPTEDSTORE_MOUNTPOINT).unwrap();
+
+        let ret = unsafe {
+            let dirfd = libc::open(mountpoint.as_ptr(), libc::O_DIRECTORY | libc::O_RDONLY);
+            let ret = libc::syncfs(dirfd);
+            libc::close(dirfd);
+            ret
+        };
+        ensure!(ret == 0, "failed to sync encrypted storage.");
+    }
+    Ok(())
+}
 fn dice_derivation(
     dice: DiceDriver,
     verified_data: &MicrodroidData,
