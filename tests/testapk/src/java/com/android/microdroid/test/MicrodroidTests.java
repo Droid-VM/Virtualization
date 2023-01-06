@@ -1232,14 +1232,25 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
             throws Exception {
         CompletableFuture<Boolean> payloadStarted = new CompletableFuture<>();
         CompletableFuture<Boolean> payloadReady = new CompletableFuture<>();
+        CompletableFuture<Boolean> payloadFinished = new CompletableFuture<>();
         TestResults testResults = new TestResults();
         VmEventListener listener =
                 new VmEventListener() {
-                    private void testVMService(VirtualMachine vm) {
+                    ITestService testService = null;
+
+                    private void initializeTestService(VirtualMachine vm) {
                         try {
-                            ITestService testService =
+                            testService =
                                     ITestService.Stub.asInterface(
                                             vm.connectToVsockServer(ITestService.SERVICE_PORT));
+                        } catch (Exception e) {
+                            testResults.mException = e;
+                        }
+                    }
+
+                    private void testVMService(VirtualMachine vm) {
+                        try {
+                            if (testService == null) initializeTestService(vm);
                             testResults.mAddInteger = testService.addInteger(123, 456);
                             testResults.mAppRunProp =
                                     testService.readProperty("debug.microdroid.app.run");
@@ -1265,12 +1276,21 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                         }
                     }
 
+                    private void quitVMService(VirtualMachine vm) {
+                        try {
+                            if (testService == null) initializeTestService(vm);
+                            testService.quit();
+                        } catch (Exception e) {
+                            testResults.mException = e;
+                        }
+                    }
+
                     @Override
                     public void onPayloadReady(VirtualMachine vm) {
                         Log.i(TAG, "onPayloadReady");
                         payloadReady.complete(true);
                         testVMService(vm);
-                        forceStop(vm);
+                        quitVMService(vm);
                     }
 
                     @Override
@@ -1278,10 +1298,18 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                         Log.i(TAG, "onPayloadStarted");
                         payloadStarted.complete(true);
                     }
+
+                    @Override
+                    public void onPayloadFinished(VirtualMachine vm, int exitCode) {
+                        Log.i(TAG, "onPayloadFinished: " + exitCode);
+                        payloadFinished.complete(true);
+                        forceStop(vm);
+                    }
                 };
         listener.runToFinish(TAG, vm);
         assertThat(payloadStarted.getNow(false)).isTrue();
         assertThat(payloadReady.getNow(false)).isTrue();
+        assertThat(payloadFinished.getNow(false)).isTrue();
         return testResults;
     }
 }
