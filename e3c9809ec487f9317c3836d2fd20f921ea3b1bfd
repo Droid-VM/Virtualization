@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49f174b1_ad4151e0",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-06T10:22:37Z",
+      "side": 1,
+      "message": "This should go before the \"notifying\" log message.\n\nMore importantly: Even if this fails we should still continue - and either call notifyPayloadFinished or notifyError. And ideally we should still log whether the payload exited cleanly or not (see below).",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 33
+      },
+      "revId": "e3c9809ec487f9317c3836d2fd20f921ea3b1bfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "904926e6_0d4201a9",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-06T10:22:37Z",
+      "side": 1,
+      "message": "This is pre-existing, but I think these should happen before the notify, since the VM may be torn down at any point after the notify.",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 13
+      },
+      "revId": "e3c9809ec487f9317c3836d2fd20f921ea3b1bfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2eec7de_a2768050",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-06T10:22:37Z",
+      "side": 1,
+      "message": "Uber-nit: O_CLOEXEC, since that should always be the default\nAlso: check the return value.",
+      "range": {
+        "startLine": 243,
+        "startChar": 56,
+        "endLine": 243,
+        "endChar": 90
+      },
+      "revId": "e3c9809ec487f9317c3836d2fd20f921ea3b1bfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63517b9d_27def68b",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-06T10:22:37Z",
+      "side": 1,
+      "message": "Would be good to log errno",
+      "range": {
+        "startLine": 248,
+        "startChar": 26,
+        "endLine": 248,
+        "endChar": 63
+      },
+      "revId": "e3c9809ec487f9317c3836d2fd20f921ea3b1bfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08cd4538_b2799ae6",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1239,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-06T10:22:37Z",
+      "side": 1,
+      "message": "Nit: I guess this should be mTestService",
+      "range": {
+        "startLine": 1239,
+        "startChar": 33,
+        "endLine": 1239,
+        "endChar": 44
+      },
+      "revId": "e3c9809ec487f9317c3836d2fd20f921ea3b1bfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "506a5e4b_ae955cf7",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-06T10:22:37Z",
+      "side": 1,
+      "message": "Should we check this is 0?",
+      "range": {
+        "startLine": 1304,
+        "startChar": 59,
+        "endLine": 1304,
+        "endChar": 67
+      },
+      "revId": "e3c9809ec487f9317c3836d2fd20f921ea3b1bfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
