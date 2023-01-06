@@ -39,6 +39,30 @@
       },
       "revId": "c1fdc6197ccaea2bcc48e392e42cbab96d1ca041",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3e66c26_b98e7000",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-06T08:43:13Z",
+      "side": 1,
+      "message": "Done. I just chose a position after footer starting index randomly and this one works.\n\nAnd surprisingly, not all positions trigger InvalidMetadata error. For example,\n\n- `RANDOM_FOOTER_POS`\u003d1, verification returns `Err(InvalidMetadata)`. \n- `RANDOM_FOOTER_POS`\u003d10, verification returns `Ok(())`. \n\nI thought the whole vbmeta data is signed, this somehow doesn\u0027t correspond to this understanding. wdyt? I\u0027ll investigate the code more closely later.",
+      "parentUuid": "c3e5825a_040f100f",
+      "range": {
+        "startLine": 464,
+        "startChar": 71,
+        "endLine": 464,
+        "endChar": 73
+      },
+      "revId": "c1fdc6197ccaea2bcc48e392e42cbab96d1ca041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
