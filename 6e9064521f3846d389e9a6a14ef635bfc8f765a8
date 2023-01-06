@@ -88,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7634f8b7_c85b5055",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-06T10:29:44Z",
+      "side": 1,
+      "message": "I\u0027m not sure anyone does. But running a VM with different RAM / CPUs can be useful. CompOS does.",
+      "parentUuid": "fa1663cb_48464b5d",
+      "range": {
+        "startLine": 803,
+        "startChar": 67,
+        "endLine": 803,
+        "endChar": 93
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06590521_aac8cd30",
@@ -206,6 +230,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80be3d09_fdfa54e9",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-06T10:29:44Z",
+      "side": 1,
+      "message": "\u003e But my thought is that it\u0027s not ok; changing the VM redirection looks similar to changing the debuggability\n\nI don\u0027t agree. Debuggability affects whether the messages come out of the VM or not, so is really fundamental. Where the messages go on the host side is much less significant.\n\n\u003e Also, by not allowing such change, the implementation becomes much simpler and less buggy\n\nI agree with this. The comments on isCompatibleWith are deliberately vague - some things are compatible, some aren\u0027t, but a lot are unspecified. So we could make it incompatible for now and change that in the future if we want.\n\nBut that means adding a check here. (And tests. I have a TODO to add isCompatibleWith tests.)",
+      "parentUuid": "ebefa2ec_cb073d3d",
+      "range": {
+        "startLine": 377,
+        "startChar": 0,
+        "endLine": 383,
+        "endChar": 56
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "848d6e98_490937d7",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 3
@@ -241,6 +289,30 @@
       "side": 1,
       "message": "I think this shouldn\u0027t be allowed for non-debuggable VM (because it will have no effect at all). If so, we need to add an assertion that the VM should be debuggable, right?",
       "parentUuid": "848d6e98_490937d7",
+      "range": {
+        "startLine": 659,
+        "startChar": 0,
+        "endLine": 663,
+        "endChar": 18
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89fdab27_6544ce46",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-06T10:29:44Z",
+      "side": 1,
+      "message": "Yes, and document it.",
+      "parentUuid": "2b7acfbb_fb33713d",
       "range": {
         "startLine": 659,
         "startChar": 0,
