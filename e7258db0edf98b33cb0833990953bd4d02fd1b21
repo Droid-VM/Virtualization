@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0ba1cbc_5c96ef4a",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-06T17:02:20Z",
+      "side": 1,
+      "message": "Can we say - `For a graceful shutdown, ...`\nAlso, can we also mention that this is not the recommended way since it can leave vm in an inconsistent state (for ex. pending writes might to instance image might not complete)",
+      "range": {
+        "startLine": 936,
+        "startChar": 16,
+        "endLine": 936,
+        "endChar": 20
+      },
+      "revId": "e7258db0edf98b33cb0833990953bd4d02fd1b21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
