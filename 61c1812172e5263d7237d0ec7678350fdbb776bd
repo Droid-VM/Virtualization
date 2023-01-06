@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a6b8573_90126a2e",
+        "filename": "libs/dice/src/bcc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-06T00:43:40Z",
+      "side": 1,
+      "message": "yeah",
+      "parentUuid": "b9e72480_3e72b6c2",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 48
+      },
+      "revId": "61c1812172e5263d7237d0ec7678350fdbb776bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79d89f37_8f7d6530",
         "filename": "libs/dice/src/lib.rs",
         "patchSetId": 1
@@ -227,6 +251,30 @@
       "side": 1,
       "message": "Yes, I thought we would use something like what [`avb_slot_verify_data_calculate_vbmeta_digest`](http://cs/android/external/avb/libavb/avb_slot_verify.c?l\u003d1710) does (slightly different as we\u0027d have to filter out partitions that didn\u0027t pass verification; see b/256148034#comment30).\n\nBut now that you mention it, I notice that it might not be correct to use this AVB digest as DICE code input ([input values](https://pigweed.googlesource.com/open-dice/+/HEAD/docs/specification.md#input-values)) as it is a hash of the VBMeta(s) and as those contain more than the image hashes (what the DICE code input should be limited to).\n\nBeyond having potentially irrelevant fields (which might not need to affect the CDIs if they change) they also contain the public key, which should be covered by the DICE authority input only and shouldn\u0027t affect the code input i.e. the same code signed with a different key should result in the same DICE code input.\n\nOTOH, code and authority inputs both contribute to the [attestation CDI](https://pigweed.googlesource.com/open-dice/+/HEAD/docs/specification.md#attestation-cdi) so it might not really matter if the code input is correlated with the authority?",
       "parentUuid": "d405f6eb_c9be7766",
+      "range": {
+        "startLine": 34,
+        "startChar": 20,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "61c1812172e5263d7237d0ec7678350fdbb776bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "044c5e8d_fb3efdac",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-06T00:43:40Z",
+      "side": 1,
+      "message": "AvbHashDescriptor has a digest which is calculated from the input image - the raw kernel and the initrd in our case. It doesn\u0027t have additional information.\n\nOnce slot_verify passed, we can safely assume that the digest written in the descriptor is the same as the digest of the input image (that comparision must have been done by libavb[1]).\n\n[1] https://source.corp.google.com/android/external/avb/libavb/avb_slot_verify.c;rcl\u003d249badbef342187ae2d266693752fbff7ccbf204;l\u003d444",
+      "parentUuid": "f81af61b_9b7f5ed4",
       "range": {
         "startLine": 34,
         "startChar": 20,
