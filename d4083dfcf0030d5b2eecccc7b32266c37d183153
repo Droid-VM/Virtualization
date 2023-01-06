@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec521b8d_0faa4228",
+        "filename": "tests/benchmark/src/native/io_vsock.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2023-01-06T01:11:12Z",
+      "side": 1,
+      "message": "Done\n\n(FWIW, the numbers went down from just this, but that is fine if it is what we want to measure)",
+      "parentUuid": "1b3345a5_38332665",
+      "range": {
+        "startLine": 64,
+        "startChar": 13,
+        "endLine": 64,
+        "endChar": 21
+      },
+      "revId": "d4083dfcf0030d5b2eecccc7b32266c37d183153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff228b1d_0066d81c",
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "748cad0f_78764fb0",
+        "filename": "tests/benchmark/src/native/io_vsock.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2023-01-06T01:11:12Z",
+      "side": 1,
+      "message": "If we want to use a big (48 MiB) pre-allocated buffer, I don\u0027t think I\u0027d change anything about the `WriteStringToFd` implementation, it doesn\u0027t have the same issue as reading.\n\nIf we want to use something more symmetric with the read side, we could do a loop that reuses a 4 KiB buffer. I\u0027ve added that to this CL. FWIW, it gets worse performance, at least with this buffer size.\n\nLet me know what you think.",
+      "parentUuid": "ff228b1d_0066d81c",
+      "range": {
+        "startLine": 65,
+        "startChar": 13,
+        "endLine": 65,
+        "endChar": 14
+      },
+      "revId": "d4083dfcf0030d5b2eecccc7b32266c37d183153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae73d2ce_15cbaa05",
         "filename": "tests/benchmark/src/native/io_vsock.cpp",
         "patchSetId": 1
@@ -77,6 +125,30 @@
       "writtenOn": "2023-01-05T19:35:56Z",
       "side": 1,
       "message": "I think we don\u0027t need `.get()` here.",
+      "range": {
+        "startLine": 66,
+        "startChar": 53,
+        "endLine": 66,
+        "endChar": 59
+      },
+      "revId": "d4083dfcf0030d5b2eecccc7b32266c37d183153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c74b8bb_c25d6b37",
+        "filename": "tests/benchmark/src/native/io_vsock.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2023-01-06T01:11:12Z",
+      "side": 1,
+      "message": "I think you are right, but it seems to be discouraged: https://source.corp.google.com/h/googleplex-android/platform/superproject/+/master:system/libbase/include/android-base/unique_fd.h;l\u003d82-86;drc\u003d7bc8db18d96e9c76d72aefe16826981fbf44fba4",
+      "parentUuid": "ae73d2ce_15cbaa05",
       "range": {
         "startLine": 66,
         "startChar": 53,
