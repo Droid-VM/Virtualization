@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a982119f_04599195",
+        "filename": "pvmfw/avb/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-06T15:26:17Z",
+      "side": 1,
+      "message": "Use `:pvmfw_sign_key`?",
+      "range": {
+        "startLine": 66,
+        "startChar": 18,
+        "endLine": 66,
+        "endChar": 38
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d707d70f_7bb7b087",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-06T15:26:17Z",
+      "side": 1,
+      "message": "I agree that it isn\u0027t neat to expose the NULL-ending element to the Rust code but OTOH, mandating a `Vec` in the API isn\u0027t much better IMO as it forces callers to use the type in their code, even if they don\u0027t require the flexibility of it.\n\nInstead, could we take a `\u0026[\u0026CStr]` (the caller can always create a `Vec` and pass it as a slice), document the need for the NULL and validate\n```\nif !partition_names.last().map(|p| p.is_null()).unwrap_or(false) {\n    return Err(AvbImageVerifyError::InvalidArgument)\n}\n```\n? IMO, the very best way to approach this would be to use a dedicated array-like type (e.g. [`null_terminated`](https://docs.rs/null-terminated)) but this seems overkill here.",
+      "range": {
+        "startLine": 352,
+        "startChar": 25,
+        "endLine": 352,
+        "endChar": 28
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db1742bb_2d5112e4",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-06T15:26:17Z",
+      "side": 1,
+      "message": "You might want to already define `out_data \u003d ptr::null_mut()` as you\u0027re about to make use of the variable in the next patch and, for now, its name will document the field.",
+      "range": {
+        "startLine": 388,
+        "startChar": 16,
+        "endLine": 388,
+        "endChar": 31
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "447084d1_d05f84ca",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-06T15:26:17Z",
+      "side": 1,
+      "message": "How does this differ from `\u0026[]`?",
+      "range": {
+        "startLine": 401,
+        "startChar": 65,
+        "endLine": 401,
+        "endChar": 74
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4bab266_c2e3c1d5",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-06T15:26:17Z",
+      "side": 1,
+      "message": "This raises an interesting question: is having an empty ramdisk equivalent to not having one at all in every aspect ... Why not keep the `Option` in `Payload::initrd`? That would match our future verification cases:\n\n- `None` and have a ramdisk hash descriptor: failed\n- `None` and don\u0027t have a ramdisk hash descriptor: passed\n- `Some` and have a ramdisk hash descriptor: verify it\n- `Some` and don\u0027t have a ramdisk hash descriptor: ??? (failed, I guess)",
+      "range": {
+        "startLine": 401,
+        "startChar": 55,
+        "endLine": 401,
+        "endChar": 64
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e341d692_c80025e9",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-06T15:26:17Z",
+      "side": 1,
+      "message": "In terms of encapsulation, as `Payload` is already aware of what \"partitions\"/slices it has, would it make sense to make `verify_partitions` take no argument and implement `verify_payload` as\n```\n{\n    let payload \u003d Payload {...};\n    payload.verify()\n}\n```\n?",
+      "range": {
+        "startLine": 402,
+        "startChar": 4,
+        "endLine": 404,
+        "endChar": 51
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0399f39_148d9be2",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-06T15:26:17Z",
+      "side": 1,
+      "message": "Note that most people won\u0027t be aware of what a hash descriptor is; could this (and related variables and file) be renamed `kernel_without_initrd`/`kernel_with_no_initrd`/`kernel_alone`/... or am I misinterpreting what the single hash descriptor represents?\n\nThe test referred to by the `TODO` below could then be called `payload_missing_initrd_`[`_normal_`]`fails_verification` (for example).",
+      "range": {
+        "startLine": 432,
+        "startChar": 7,
+        "endLine": 432,
+        "endChar": 45
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e2509e9_4f53af88",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-06T15:26:17Z",
+      "side": 1,
+      "message": "nit: if other tests are `_fails_verification`, should this be `_passes_verification`?",
+      "range": {
+        "startLine": 432,
+        "startChar": 46,
+        "endLine": 432,
+        "endChar": 70
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f261c51_b82b5e27",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-06T15:26:17Z",
+      "side": 1,
+      "message": "Why not build off the structure you started by having a `load_latest_initrd_normal` called by the individual tests and passed to `assert_payload_verification_fails`, which would keep the tests as straightforward as possible (albeit slightly more verbose, but that\u0027s a good thing for tests) while keeping `assert_...` to being an `assert` wrapper.",
+      "range": {
+        "startLine": 490,
+        "startChar": 7,
+        "endLine": 490,
+        "endChar": 39
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
