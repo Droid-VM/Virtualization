@@ -80,9 +80,10 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
     private Instrumentation mInstrumentation;
 
     @Before
-    public void setup() {
+    public void setup() throws IOException {
         grantPermission(VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION);
         grantPermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
+        setTaskProfileOfThread(TASK_PROFILE_TOP_APP);
         prepareTestSetup(mProtectedVm);
         mInstrumentation = getInstrumentation();
     }

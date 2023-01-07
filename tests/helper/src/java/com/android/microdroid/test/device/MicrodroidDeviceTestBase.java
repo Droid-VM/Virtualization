@@ -24,6 +24,7 @@ import android.app.UiAutomation;
 import android.content.Context;
 import android.os.ParcelFileDescriptor;
 import android.os.SystemProperties;
+import android.system.Os;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineCallback;
 import android.system.virtualmachine.VirtualMachineConfig;
@@ -50,6 +51,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public abstract class MicrodroidDeviceTestBase {
+    protected final String TASK_PROFILE_TOP_APP = "CPUSET_SP_TOP_APP";
+
     public static boolean isCuttlefish() {
         return DeviceProperties.create(SystemProperties::get).isCuttlefish();
     }
@@ -71,6 +74,31 @@ public abstract class MicrodroidDeviceTestBase {
         UiAutomation uiAutomation = instrumentation.getUiAutomation();
         uiAutomation.revokeRuntimePermission(instrumentation.getContext().getPackageName(),
                 permission);
+    }
+
+    private String readToString(InputStream is) throws IOException {
+        StringBuilder builder = new StringBuilder();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            if (builder.length() > 0) {
+                builder.append(System.lineSeparator());
+            }
+            builder.append(line);
+        }
+        is.close();
+        return builder.toString();
+    }
+
+    protected final void setTaskProfileOfThread(String name) throws IOException {
+        Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
+        UiAutomation uiAutomation = instrumentation.getUiAutomation();
+        String cmd = "su root settaskprofile " + Os.gettid() + " " + name + "; echo RET=$?";
+        ParcelFileDescriptor pfd = uiAutomation.executeShellCommand(cmd);
+        String out = readToString(new ParcelFileDescriptor.AutoCloseInputStream(pfd));
+        if (!out.endsWith("RET=0")) {
+            throw new IOException("Could not set task profile: \'" + out + "\"");
+        }
     }
 
     private Context mCtx;
