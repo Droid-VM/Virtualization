@@ -139,6 +139,38 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         assume().withMessage("Skip on CF; too slow").that(isCuttlefish()).isFalse();
 
         final int trialCount = 10;
+        final int[] trialNumCpus = {1, 2, 4, 8};
+
+        for (int numCpus : trialNumCpus) {
+            List<Double> bootTimeMetrics = new ArrayList<>();
+            for (int i = 0; i < trialCount; i++) {
+                VirtualMachineConfig normalConfig =
+                        newVmConfigBuilder()
+                                .setPayloadBinaryPath("MicrodroidIdleNativeLib.so")
+                                .setDebugLevel(DEBUG_LEVEL_NONE)
+                                .setMemoryMib(256)
+                                .setNumCpus(numCpus)
+                                .build();
+                forceCreateNewVirtualMachine("test_vm_boot_time", normalConfig);
+
+                BootResult result = tryBootVm(TAG, "test_vm_boot_time");
+                assertThat(result.payloadStarted).isTrue();
+
+                final double nanoToMilli = 1000000.0;
+                bootTimeMetrics.add(result.endToEndNanoTime / nanoToMilli);
+            }
+
+            String metricName = "boot_time" + (numCpus > 1 ? "" : "_" + numCpus + "cpus");
+            reportMetrics(bootTimeMetrics, metricName, "ms");
+        }
+    }
+
+    @Test
+    public void testMicrodroidBootTimeDebug()
+            throws VirtualMachineException, InterruptedException, IOException {
+        assume().withMessage("Skip on CF; too slow").that(isCuttlefish()).isFalse();
+
+        final int trialCount = 10;
 
         List<Double> vmStartingTimeMetrics = new ArrayList<>();
         List<Double> bootTimeMetrics = new ArrayList<>();
