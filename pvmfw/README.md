@@ -145,9 +145,55 @@ of the array. The header uses the endianness of the virtual machine.
 The header format itself is agnostic of the internal format of the individual
 blos it refers to. In version 1.0, it describes two blobs:
 
-- entry 0 must point to a valid [BCC Handover]
+- entry 0 must point to a valid BCC Handover (see below)
 - entry 1 may point to a [DTBO] to be applied to the pVM device tree
 
 [header]: src/config.rs
-[BCC Handover]: https://pigweed.googlesource.com/open-dice/+/825e3beb6c6efcd8c35506d818c18d1e73b9834a/src/android/bcc.c#260
 [DTBO]: https://android.googlesource.com/platform/external/dtc/+/refs/heads/master/Documentation/dt-object-internal.txt
+
+#### Virtual Platform Boot Certificate Chain Handover
+
+The format of the BCC entry mentioned above is [defined][BccHandover] by the
+Open Profile for DICE reference implementation as
+```
+BccHandover = {
+  1 : bstr .size 32,     ; CDI_Attest
+  2 : bstr .size 32,     ; CDI_Seal
+  ? 3 : Bcc,             ; Certificate chain
+}
+```
+
+and contains the _Compound Device Identifiers_ ("CDIs"), used to derive the
+next-stage secret, and an optional certificate chain proper, intended for
+payload attestation.
+
+Although optional in the handover specification, pvmfw mandates the presence of
+the certificate chain. In practice, the pvmfw loader (most probably the device
+bootloader) can generate it as follows:
+
+- if a `BccHandover` is received from a previous boot stage (_e.g._ Trusted
+  Firmware, ROM bootloader, ...), the pvmfw loader may derive the handover to be
+  passed to pvmfw using [`BccHandoverMainFlow`][BccHandoverMainFlow];
+
+- otherwise, if the bootloader acts as the root of the chain, it is recommended
+  to start with generating a `BccHandover` (as an example, see
+  [Trusty][Trusty-BCC]) with both CDIs set to (a key derived from) its UDS and
+  without `Bcc`, so that it can be passed to `BccHandoverMainFlow`, which will
+  both derive the pvmfw CDIs and generate a valid certificate chain.
+
+The recommended DICE inputs at this stage are:
+
+- **Code**: hash of the pvmfw image, hypervisor, and other target code relevant
+  to the execution of pvmfw
+- **Configuration Data**: any extra input relevant to pvmfw security
+- **Authority Data**: public key used to sign and verify the disk partition
+  holding the pvmfw image
+- **Mode Decision**: Normal
+
+This `BccHandover` is then used by pvmfw in a similar way to derive another
+[DICE layer][Layering], passed to the payload through a `/reserved-memory`
+device tree node marked as `compatible=”google,open-dice”`.
+
+[BccHandover]: https://pigweed.googlesource.com/open-dice/+/825e3beb6c/src/android/bcc.c#260
+[Layering]: https://pigweed.googlesource.com/open-dice/+/refs/heads/main/docs/specification.md#layering-details
+[Trusty-BCC]: https://android.googlesource.com/trusty/lib/+/1696be0a8f3a7103/lib/hwbcc/common/swbcc.c#554
