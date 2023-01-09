@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "373501a1_18f2d6df",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-09T07:11:19Z",
+      "side": 1,
+      "message": "Done. I moved notifying part to the end \u0026 consumed the error in post_payload_work if any",
+      "parentUuid": "49f174b1_ad4151e0",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 33
+      },
+      "revId": "e3c9809ec487f9317c3836d2fd20f921ea3b1bfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "904926e6_0d4201a9",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-06T10:22:37Z",
       "side": 1,
       "message": "This is pre-existing, but I think these should happen before the notify, since the VM may be torn down at any point after the notify.",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 13
+      },
+      "revId": "e3c9809ec487f9317c3836d2fd20f921ea3b1bfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f2f00e0_2c2ec29e",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-09T07:11:19Z",
+      "side": 1,
+      "message": "Agreed, in fact it should go before post_payload starts",
+      "parentUuid": "904926e6_0d4201a9",
       "range": {
         "startLine": 222,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c11a6211_5db08849",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-09T07:11:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2eec7de_a2768050",
+      "range": {
+        "startLine": 243,
+        "startChar": 56,
+        "endLine": 243,
+        "endChar": 90
+      },
+      "revId": "e3c9809ec487f9317c3836d2fd20f921ea3b1bfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63517b9d_27def68b",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-01-06T10:22:37Z",
       "side": 1,
       "message": "Would be good to log errno",
+      "range": {
+        "startLine": 248,
+        "startChar": 26,
+        "endLine": 248,
+        "endChar": 63
+      },
+      "revId": "e3c9809ec487f9317c3836d2fd20f921ea3b1bfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7064df08_042e7f92",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-09T07:11:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63517b9d_27def68b",
       "range": {
         "startLine": 248,
         "startChar": 26,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdca5c6e_71011ae9",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1239,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-09T07:11:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08cd4538_b2799ae6",
+      "range": {
+        "startLine": 1239,
+        "startChar": 33,
+        "endLine": 1239,
+        "endChar": 44
+      },
+      "revId": "e3c9809ec487f9317c3836d2fd20f921ea3b1bfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "506a5e4b_ae955cf7",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-01-06T10:22:37Z",
       "side": 1,
       "message": "Should we check this is 0?",
+      "range": {
+        "startLine": 1304,
+        "startChar": 59,
+        "endLine": 1304,
+        "endChar": 67
+      },
+      "revId": "e3c9809ec487f9317c3836d2fd20f921ea3b1bfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3168184d_f42122d6",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-09T07:11:19Z",
+      "side": 1,
+      "message": "I dont think that matters much in testService. On real payload service, yes we should check",
+      "parentUuid": "506a5e4b_ae955cf7",
       "range": {
         "startLine": 1304,
         "startChar": 59,
