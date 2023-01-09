@@ -45,6 +45,29 @@ pvmfw currently only supports AArch64.
 
 ## Integration
 
+### pvmfw Loading
+
+When running pKVM, the physical memory from which the hypervisor loads pvmfw
+into guest address space is not initially populated by the hypervisor itself.
+Instead, it receives a pre-loaded memory region from a trusted pvmfw loader and
+only then becomes responsible for protecting it. As a result, the hypervisor is
+kept generic (beyond AVF) and small as it is not expected (nor necessary) for it
+to know how to interpret or obtain the content of that region.
+
+#### Android Bootloader Support
+
+Starting in Android T, the `PRODUCT_BUILD_PVMFW_IMAGE` build variable controls
+the generation of `pvmfw.img`, a new [ABL partition][ABL-part] containing the
+pvmfw binary and following the internal format of the `boot` partition, intended
+to be verified and loaded by ABL on AVF-compatible devices.
+
+To support pKVM, ABL must load pvmfw at a page-aligned address and add a
+`linux,pkvm-guest-firmware-memory`-compatible reserved memory region to the
+device tree, where the total region size (including the configuration data
+described below) is also page-aligned.
+
+[ABL-part]: https://source.android.com/docs/core/architecture/bootloader/partitions
+
 ### Configuration Data
 
 As part of the process of loading pvmfw, the loader is expected to pass
