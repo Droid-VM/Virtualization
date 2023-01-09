@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66f7e594_788cdd72",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2023-01-09T16:38:38Z",
+      "side": 1,
+      "message": "nit: remove?",
+      "range": {
+        "startLine": 167,
+        "startChar": 53,
+        "endLine": 167,
+        "endChar": 59
+      },
+      "revId": "4854a7600a4fad47a42c36c424d7f2ec6c806185",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2534752_b8a0856d",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2023-01-09T16:38:38Z",
+      "side": 1,
+      "message": "I\u0027d just go straight in with it being required in the CDDL to make it most clear. If you don\u0027t like the conflict, you could perhaps define `PmvfwBccHandoverBlahBlah` here and reference the `BccHandover` for similarity?",
+      "revId": "4854a7600a4fad47a42c36c424d7f2ec6c806185",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7abe5242_8ffe23dd",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2023-01-09T16:38:38Z",
+      "side": 1,
+      "message": "I don\u0027t know whether this is recommended vs an arbitrary root value and then mixing in the FRS as the hidden value (related to next comment)",
+      "range": {
+        "startLine": 180,
+        "startChar": 24,
+        "endLine": 180,
+        "endChar": 74
+      },
+      "revId": "4854a7600a4fad47a42c36c424d7f2ec6c806185",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c46fd9e5_2a8101de",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2023-01-09T16:38:38Z",
+      "side": 1,
+      "message": "You need to mention how to make sure the values change across factory reset so that a VM from before reset cannot be used to derive the same values after the reset.",
+      "revId": "4854a7600a4fad47a42c36c424d7f2ec6c806185",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08651751_99468658",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2023-01-09T16:38:38Z",
+      "side": 1,
+      "message": "I think it should explicitly list the partition that contains the early vendor modules before the etc. I forget which one Quentin said it was :/",
+      "range": {
+        "startLine": 186,
+        "startChar": 53,
+        "endLine": 186,
+        "endChar": 70
+      },
+      "revId": "4854a7600a4fad47a42c36c424d7f2ec6c806185",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a35b8fe0_b0810f83",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2023-01-09T16:38:38Z",
+      "side": 1,
+      "message": "what about the other images?",
+      "range": {
+        "startLine": 190,
+        "startChar": 14,
+        "endLine": 190,
+        "endChar": 25
+      },
+      "revId": "4854a7600a4fad47a42c36c424d7f2ec6c806185",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59e6d551_7f1d3369",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2023-01-09T16:38:38Z",
+      "side": 1,
+      "message": "*Only* if secure boot etc is being properly enforced as it\u0027s loaded, per the spec",
+      "range": {
+        "startLine": 191,
+        "startChar": 21,
+        "endLine": 191,
+        "endChar": 27
+      },
+      "revId": "4854a7600a4fad47a42c36c424d7f2ec6c806185",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
