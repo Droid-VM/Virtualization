@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "05d21c74_4baa0028",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-09T15:53:32Z",
+      "side": 1,
+      "message": "This works but feels convoluted as the point of preferring `\u0026[]` in an API over `Vec` is to move the \"`Vec`-ness\" of the code to the caller (so that the resulting code only relies on `Vec` iff the caller wants it) but here you embed it within the function. Furthermore, not exposing `CStr` in the API adds an implicit requirement that the compiler can\u0027t reason about, which then can make the program `panic` within the `.map`, making it potentially a pain to debug (as the line number won\u0027t point to the data).\n\nTo avoid unnecessary intermediate conversions (`\u0026[]`-to-`Vec`-to`\u0026[]` or `\u0026[u8]`-to-`CStr`-to-`\u0026[u8]`) while still encapsulating the NULL-endianness, would it make sense for `verify_partitions` to take a `\u0026[\u0026CStr]` (so that the compiler can reason about the strings being valid) and populate an internal array of size `MAX_NUMBER_OF_VBMETA_IMAGES` with the pointers, followed by the NULL pointer?\n\nBTW, in the caller, you can take the slice from an array instead of doing the extra work of declaring a `vec!`.",
+      "parentUuid": "e2d81931_0b3654c9",
+      "range": {
+        "startLine": 352,
+        "startChar": 25,
+        "endLine": 352,
+        "endChar": 28
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db1742bb_2d5112e4",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 2
@@ -238,6 +262,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b708098_c73428f4",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-09T15:53:32Z",
+      "side": 1,
+      "message": "\u003e `verify_payload` will handle the logic the logic around whether payload has initrd or not.\n\nAck; that makes sense.\n\n\u003e If we try to read the partition `initrd` when it is empty, an error will be raised in `read_from_partition`.\n\nYes but it would improve error logging to have that error reflect the different cases i.e. to have `read_from_partition(\"initrd\")` return \n\n- `AVB_IO_RESULT_ERROR_NO_SUCH_PARTITION` when `initrd\u003d\u003dNone`\n- `AVB_IO_RESULT_ERROR_RANGE_OUTSIDE_PARTITION` when `initrd\u003d\u003dSome(\u0026[])`\n\nwhich requires keeping track of the `Option`, no?",
+      "parentUuid": "4173024a_deadb685",
+      "range": {
+        "startLine": 401,
+        "startChar": 55,
+        "endLine": 401,
+        "endChar": 64
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e341d692_c80025e9",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 2
@@ -372,6 +420,30 @@
         "startChar": 46,
         "endLine": 432,
         "endChar": 70
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4566bec_ebd04465",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-09T15:53:32Z",
+      "side": 1,
+      "message": "Yes, we agree and picking good names isn\u0027t easy. Here, we need a name that isn\u0027t confusing due to requiring unnecessary extra knowledge but that also clearly differs from other tests.\n\nOverall, my point is that, if a test fails, the test name should immediately give a clear idea of what the test is covering and `with_one_hashdesc` goes against that IMO because it requires low-level/niche knowledge and still doesn\u0027t fully describe the test as the hash descriptor, beyond being unique in the VBMeta, could describe something else than the kernel (in particular when we\u0027ll expand to `with_three_hashdesc`), be invalid, ...\n\nDo you think the following names are too close:\n\n- `payload_with_no_initrd_passes_verification` for a kernel having been signed with no extra hash descriptor\n- `payload_missing_initrd_fails_verification` for a kernel having been signed with `initrd` hash(es), where no `initrd` is loaded\n\n? Because we\u0027ll also need tests for\n\n- `payload_with_unexpected_initrd_fails_verification` for the first case but where the test still loads an initrd\n- `payload_with_invalid_initrd_fails_verification` for the second case where the test loads a corrupted initrd\n- `payload_with_valid_initrd_passes_verification`\n- `payload_with_valid_initrd_debug_passes_verification`\n\nso we need an extensible naming format and I suppose what I\u0027m suggesting is\n```\npayload_(with_(valid|invalid|no)|missing)_(initrd|initrd_debug)_(passes|fails)_verification\n```\n\nhaving this sort of convention will also help with ensuring that we have exhaustive coverage of the test cases.",
+      "parentUuid": "b43cb2e3_b57a2207",
+      "range": {
+        "startLine": 432,
+        "startChar": 7,
+        "endLine": 432,
+        "endChar": 45
       },
       "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"

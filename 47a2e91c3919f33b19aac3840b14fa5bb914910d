@@ -16,6 +16,29 @@
       "message": "Thanks for the review, please take another look.",
       "revId": "47a2e91c3919f33b19aac3840b14fa5bb914910d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3a5da9a_a70d59bd",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-09T15:53:32Z",
+      "side": 1,
+      "message": "Why not just `initrd`? We can\u0027t pass 2 ramdisks to a VM at the same time anyway.",
+      "range": {
+        "startLine": 523,
+        "startChar": 8,
+        "endLine": 523,
+        "endChar": 21
+      },
+      "revId": "47a2e91c3919f33b19aac3840b14fa5bb914910d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
