@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "022f29cd_d57668a3",
+        "filename": "pvmfw/avb/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-09T13:22:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a982119f_04599195",
+      "range": {
+        "startLine": 66,
+        "startChar": 18,
+        "endLine": 66,
+        "endChar": 38
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d707d70f_7bb7b087",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e2d81931_0b3654c9",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-09T13:22:56Z",
+      "side": 1,
+      "message": "what about like this?",
+      "parentUuid": "d707d70f_7bb7b087",
+      "range": {
+        "startLine": 352,
+        "startChar": 25,
+        "endLine": 352,
+        "endChar": 28
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db1742bb_2d5112e4",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 2
@@ -60,6 +108,30 @@
       "writtenOn": "2023-01-06T15:26:17Z",
       "side": 1,
       "message": "You might want to already define `out_data \u003d ptr::null_mut()` as you\u0027re about to make use of the variable in the next patch and, for now, its name will document the field.",
+      "range": {
+        "startLine": 388,
+        "startChar": 16,
+        "endLine": 388,
+        "endChar": 31
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffdddb22_ae8c565b",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-09T13:22:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db1742bb_2d5112e4",
       "range": {
         "startLine": 388,
         "startChar": 16,
@@ -118,6 +190,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4173024a_deadb685",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-09T13:22:56Z",
+      "side": 1,
+      "message": "\u003e having an empty ramdisk equivalent to not having one at all in every aspect\n\nIt\u0027s not exactly the same. If we try to read the partition `initrd` when it is empty, an error will be raised in `read_from_partition`. \n\n\u003e Why not keep the Option in Payload::initrd ?\n\nActually I\u0027d like `Payload::verify_partition()` just to be a pvmfw customized wrapper around `avb_slot_verify` without conditional branches. The method is already pretty long like this. Then then `verify_payload` will handle the logic the logic around whether payload has initrd or not.\n\n- If `initrd` is None, then call `Payload::verify_partition([kernel])` and check the kernel footer has only one hash descriptor with `avb_descriptor_get_all`.\n- If `initrd` is Some, then call `Payload::verify_partition([kernel, initrd_normal, initrd_debug])` and check the result to decide the mode. (Maybe also assert that kernel footer has only three hash descriptors?)",
+      "parentUuid": "c4bab266_c2e3c1d5",
+      "range": {
+        "startLine": 401,
+        "startChar": 55,
+        "endLine": 401,
+        "endChar": 64
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dd15479_e51108d6",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-09T13:22:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "447084d1_d05f84ca",
+      "range": {
+        "startLine": 401,
+        "startChar": 65,
+        "endLine": 401,
+        "endChar": 74
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e341d692_c80025e9",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 2
@@ -129,6 +249,30 @@
       "writtenOn": "2023-01-06T15:26:17Z",
       "side": 1,
       "message": "In terms of encapsulation, as `Payload` is already aware of what \"partitions\"/slices it has, would it make sense to make `verify_partitions` take no argument and implement `verify_payload` as\n```\n{\n    let payload \u003d Payload {...};\n    payload.verify()\n}\n```\n?",
+      "range": {
+        "startLine": 402,
+        "startChar": 4,
+        "endLine": 404,
+        "endChar": 51
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02870889_772306c6",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-09T13:22:56Z",
+      "side": 1,
+      "message": "I\u0027d like to have the initrd logic here and leave` Payload::verify_partition()` a pvmfw customized wrapper. It\u0027s explained in the comment above. Let\u0027s follow up this subject in that comment.",
+      "parentUuid": "e341d692_c80025e9",
       "range": {
         "startLine": 402,
         "startChar": 4,
@@ -187,6 +331,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b43cb2e3_b57a2207",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-09T13:22:56Z",
+      "side": 1,
+      "message": "I mean the hash descriptors in kernel\u0027s footer. I want to test the spec that given no initrd,\n\n1. if the kernel footer has only one hash descriptor \u003d\u003e pass\n2. if the kernel footer has more than one hash descriptor \u003d\u003e fail\n\nThe name `kernel_without_initrd/kernel_with_no_initrd/kernel_alone` doesn\u0027t really distinguish the two scenarios above as both 1. and 2. are `kernel_without_initrd`. I\u0027m open to take a different set of names here, but I\u0027d like to have two names that could reveal the similarities/difference between them.",
+      "parentUuid": "b0399f39_148d9be2",
+      "range": {
+        "startLine": 432,
+        "startChar": 7,
+        "endLine": 432,
+        "endChar": 45
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "271fa718_9962a6c2",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-09T13:22:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e2509e9_4f53af88",
+      "range": {
+        "startLine": 432,
+        "startChar": 46,
+        "endLine": 432,
+        "endChar": 70
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f261c51_b82b5e27",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 2
@@ -198,6 +390,30 @@
       "writtenOn": "2023-01-06T15:26:17Z",
       "side": 1,
       "message": "Why not build off the structure you started by having a `load_latest_initrd_normal` called by the individual tests and passed to `assert_payload_verification_fails`, which would keep the tests as straightforward as possible (albeit slightly more verbose, but that\u0027s a good thing for tests) while keeping `assert_...` to being an `assert` wrapper.",
+      "range": {
+        "startLine": 490,
+        "startChar": 7,
+        "endLine": 490,
+        "endChar": 39
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1e7d509_459c54bb",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-09T13:22:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f261c51_b82b5e27",
       "range": {
         "startLine": 490,
         "startChar": 7,
