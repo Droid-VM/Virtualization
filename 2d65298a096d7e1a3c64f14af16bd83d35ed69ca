@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1520df9f_e69e7abf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-09T19:41:45Z",
+      "side": 1,
+      "message": "This currently fails to run most likely because `libavb` believes it needs to copy the image being verified:\n```\n[TRACE] malloc(0x138\u003d312) \u003d 0x7fe02e08\n[TRACE] malloc(0x400\u003d1024) \u003d 0x7fe12008\n[TRACE] malloc(0x400\u003d1024) \u003d 0x7fe0d008\n[TRACE] malloc(0xa8\u003d168) \u003d 0x7fe02d08\n[TRACE] malloc(0x940\u003d2368) \u003d 0x7fe0e008\navb_slot_verify.c:687: DEBUG: Loading vbmeta struct in footer from partition \u0027bootloader\u0027.\n[TRACE] malloc(0x418\u003d1048) \u003d 0x7fe0d808\n[TRACE] malloc(0x200\u003d512) \u003d 0x7fe12808\n[TRACE] malloc(0x200\u003d512) \u003d 0x7fe0f008\n[TRACE] malloc(0x200\u003d512) \u003d 0x7fe0f408\n[TRACE] malloc(0x200\u003d512) \u003d 0x7fe0f808\n[TRACE] free(0x7fe0f000)\n[TRACE] free(0x7fe0f400)\n[TRACE] free(0x7fe0f800)\n[TRACE] free(0x7fe0d800)\n[TRACE] free(0x7fe12800)\n[TRACE] malloc(0xb\u003d11) \u003d 0x7fe12c08\n[TRACE] malloc(0x18\u003d24) \u003d 0x7fe12c28\n[TRACE] malloc(0xda8808\u003d14321672) \u003d 0x0\navb_util.c:224: ERROR: Failed to allocate memory.\n[TRACE] free(0x7fe12c20)\n[TRACE] free(0x7fe12c00)\n[TRACE] free(0x7fe0e000)\n[TRACE] free(0x7fe12000)\n[TRACE] free(0x7fe0d000)\n[TRACE] free(0x7fe02e00)\n[TRACE] free(0x7fe02d00)\n[ERROR] Failed to verify the payload: Unable to allocate memory.\n```\nwhich I suppose comes from our `AvbOps` [not implementing `get_preloaded_partition`](http://cs/android/packages/modules/Virtualization/pvmfw/avb/src/verify.rs?l\u003d358), which `load_full_partition` [tries to use](http://cs/android/external/avb/libavb/avb_slot_verify.c?l\u003d97) before falling back to loading the partition to RAM.\n\nSee the U-Boot implementation: https://android.googlesource.com/platform/external/u-boot/+/refs/heads/master/board/android/pvmfw-arm64/avb_preloaded.c#199",
+      "revId": "2d65298a096d7e1a3c64f14af16bd83d35ed69ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
