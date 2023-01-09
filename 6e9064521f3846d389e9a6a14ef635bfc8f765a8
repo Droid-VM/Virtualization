@@ -374,6 +374,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bd0c86ba_8864e4cb",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-09T10:41:32Z",
+      "side": 1,
+      "message": "You need to add an explicit check here that this \u0026 other have the same value for redirection.\n\n(And we\u0027ll need to enhance the compatibleConfigTests I\u0027m adding in aosp/2377178).",
+      "parentUuid": "b2192c0d_4fa53df3",
+      "range": {
+        "startLine": 377,
+        "startChar": 0,
+        "endLine": 383,
+        "endChar": 56
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "848d6e98_490937d7",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 3
@@ -551,6 +575,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "98ce7de4_0c8d49a2",
+      "range": {
+        "startLine": 670,
+        "startChar": 23,
+        "endLine": 670,
+        "endChar": 48
+      },
+      "revId": "6e9064521f3846d389e9a6a14ef635bfc8f765a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df495f4f_3776bd40",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-09T10:41:32Z",
+      "side": 1,
+      "message": "Sorry, but can we change it from \"vmOutputsCaptured\" to \"vmOutputCaptured\" throughout?\n\nOtherwise isVmOutputsCaptured looks ungrammatical with a singular/plural mismatch. The trick is that \"output\" can encompass both log and console without needing to be plural.",
+      "parentUuid": "1fb87328_418f0641",
       "range": {
         "startLine": 670,
         "startChar": 23,

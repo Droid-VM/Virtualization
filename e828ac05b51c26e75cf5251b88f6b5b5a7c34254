@@ -261,6 +261,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "212d4c21_1df3ea66",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-09T10:41:32Z",
+      "side": 1,
+      "message": "\u003e I\u0027m not sure I\u0027m following the reasoning behind this API. Are there scenarios when app wouldn\u0027t want to read the console or log output?\n\nMost apps probably won\u0027t - instead they can just let it be automatically be piped to logcat (which is mostly what we do with it).\n\nThe test app needs to capture the logs because some tests check that the CID got written.\n\nAnd the demo app does so because it displays the logs in its UI.\n\nNeither of those are normal requirements though.",
+      "parentUuid": "294a554c_63d15e57",
+      "range": {
+        "startLine": 662,
+        "startChar": 23,
+        "endLine": 662,
+        "endChar": 52
+      },
+      "revId": "e828ac05b51c26e75cf5251b88f6b5b5a7c34254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aca40a68_dd07b586",

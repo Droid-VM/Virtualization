@@ -3,6 +3,98 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "410d9159_6f91a71f",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-09T10:41:32Z",
+      "side": 1,
+      "message": "Uber-nit: Can you move this up with the other private final members above?",
+      "range": {
+        "startLine": 338,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 45
+      },
+      "revId": "0994425c6a6fb5cd734630545d09b13612205408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c04c984e_80510a05",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-09T10:41:32Z",
+      "side": 1,
+      "message": "Can we add \"If not, the VM output is automatically set to logcat.\" (Is that the right terminology?) \n\nAnd/or add an @see to setVmOutputCaptured.",
+      "range": {
+        "startLine": 359,
+        "startChar": 7,
+        "endLine": 359,
+        "endChar": 69
+      },
+      "revId": "0994425c6a6fb5cd734630545d09b13612205408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec7db362_d64b4645",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-09T10:41:32Z",
+      "side": 1,
+      "message": "Nit: can you make all these @link into @linkplain ?\n(The terms shouldn\u0027t be in code font)",
+      "range": {
+        "startLine": 664,
+        "startChar": 57,
+        "endLine": 664,
+        "endChar": 61
+      },
+      "revId": "0994425c6a6fb5cd734630545d09b13612205408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46b789f5_405190d5",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-09T10:41:32Z",
+      "side": 1,
+      "message": "I\u0027m a little unhappy about this.\nIdeally newVmConfigBuillder should produce a minimal builder and we should explicitly add what we need.\nMost tests currently explicitly turn on debuggable, but we have some that deliberately don\u0027t.\n\nCan you add setVmOutputsCaptured explicitly where you need it?",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 44
+      },
+      "revId": "0994425c6a6fb5cd734630545d09b13612205408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "429f3e8f_f29c824f",
         "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
         "patchSetId": 7
@@ -19,6 +111,52 @@
         "startChar": 16,
         "endLine": 223,
         "endChar": 86
+      },
+      "revId": "0994425c6a6fb5cd734630545d09b13612205408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4afadf60_fce06ccc",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-09T10:41:32Z",
+      "side": 1,
+      "message": "Rather than throwing \u0026 catching an exception, check vm.getConfig().isVmOutputCaptured() ?",
+      "range": {
+        "startLine": 223,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 17
+      },
+      "revId": "0994425c6a6fb5cd734630545d09b13612205408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84a285ae_58d84c23",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-09T10:41:32Z",
+      "side": 1,
+      "message": "Can you add tests for your \"no output capture for non-debuggable VMs\" here?",
+      "range": {
+        "startLine": 391,
+        "startChar": 0,
+        "endLine": 399,
+        "endChar": 81
       },
       "revId": "0994425c6a6fb5cd734630545d09b13612205408",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
