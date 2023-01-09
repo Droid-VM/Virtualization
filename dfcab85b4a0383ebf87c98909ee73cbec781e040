@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb8983fd_73842c7c",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-09T17:52:50Z",
+      "side": 1,
+      "message": "Nit: does the threat model actually prevent anything?\nCan we briefly explain the threat model, or link to an explanation?\n\nThe wording seems slightly contorted - rather than \"a threat model considering the host as non-trusted (as used by AVF) should also prevent pVMs from trusting that the virtual platform they are running on has been properly set up\" can we just say something like pVMs must not trust the host, including not to set the VM up properly.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 29
+      },
+      "revId": "dfcab85b4a0383ebf87c98909ee73cbec781e040",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d84b9e6c_1c6cfac8",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-09T17:52:50Z",
+      "side": 1,
+      "message": "Doesn\u0027t the hypervisor address the concerns by guaranteeing that pvmfw is untampered \u0026 the first thing to run? (And providing the secrets.)",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 51
+      },
+      "revId": "dfcab85b4a0383ebf87c98909ee73cbec781e040",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3edb0ffb_f3671bcd",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-09T17:52:50Z",
+      "side": 1,
+      "message": "nit: comma after fails",
+      "range": {
+        "startLine": 33,
+        "startChar": 74,
+        "endLine": 33,
+        "endChar": 79
+      },
+      "revId": "dfcab85b4a0383ebf87c98909ee73cbec781e040",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a72d6cd_007225c2",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-09T17:52:50Z",
+      "side": 1,
+      "message": "Do we call it payload, or guest kernel or similar?\n(I\u0027m used to \"payload\" being the code run by Microdroid, but then that\u0027s several million miles up the abstraction stack.)",
+      "range": {
+        "startLine": 36,
+        "startChar": 40,
+        "endLine": 36,
+        "endChar": 47
+      },
+      "revId": "dfcab85b4a0383ebf87c98909ee73cbec781e040",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdd6ccb2_82ab177b",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-09T17:52:50Z",
+      "side": 1,
+      "message": "Delete \"In practice\"?",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 13
+      },
+      "revId": "dfcab85b4a0383ebf87c98909ee73cbec781e040",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
