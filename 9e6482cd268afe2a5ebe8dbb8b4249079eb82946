@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39c831b0_d8ff9fca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-09T13:58:16Z",
+      "side": 1,
+      "message": "That\u0027s a bug then - the intention is that the APK contents be available to the payload, so it can read assets, dynamically load libraries, etc.\n\nSee e.g. AVmPayload_getApkContentsPath.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 32
+      },
+      "revId": "9e6482cd268afe2a5ebe8dbb8b4249079eb82946",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
