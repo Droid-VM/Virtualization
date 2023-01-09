@@ -523,6 +523,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7a88ede_5678faa0",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-09T17:11:24Z",
+      "side": 1,
+      "message": "What about using `vbmeta` instead of `hashdesc`? It\u0027s less low-level and also clear. Something as following\n\n- payload_with_one_vbmeta_image_and_no_initrd_passes_verification\n- payload_with_two_vbmeta_images_and_no_initrd_fails_verification",
+      "parentUuid": "2ce5fd18_343aaf02",
+      "range": {
+        "startLine": 432,
+        "startChar": 7,
+        "endLine": 432,
+        "endChar": 45
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f261c51_b82b5e27",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 2
