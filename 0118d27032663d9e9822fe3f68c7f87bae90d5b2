@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69eb7bea_6d52cd86",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-09T17:56:01Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the range only be shared if `!buffer.is_null()`?",
+      "range": {
+        "startLine": 315,
+        "startChar": 4,
+        "endLine": 319,
+        "endChar": 59
+      },
+      "revId": "0118d27032663d9e9822fe3f68c7f87bae90d5b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd358b8b_05ed80dd",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-09T17:56:01Z",
+      "side": 1,
+      "message": "Why not take `NonZero` so that the caller calls `unwrap` and panics instead?",
+      "range": {
+        "startLine": 350,
+        "startChar": 4,
+        "endLine": 350,
+        "endChar": 26
+      },
+      "revId": "0118d27032663d9e9822fe3f68c7f87bae90d5b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c978d3a_4bacc10a",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-09T17:56:01Z",
+      "side": 1,
+      "message": "Can\u0027t we issue the HVC once and cache its result at boot, aborting the boot if it isn\u0027t valid, as we do for `mmio_guard::Error::UnsupportedGranule`?",
+      "range": {
+        "startLine": 353,
+        "startChar": 18,
+        "endLine": 353,
+        "endChar": 29
+      },
+      "revId": "0118d27032663d9e9822fe3f68c7f87bae90d5b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7455d03_67d54f2b",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-09T17:56:01Z",
+      "side": 1,
+      "message": "Dont we need to handle a null result?",
+      "range": {
+        "startLine": 12,
+        "startChar": 20,
+        "endLine": 12,
+        "endChar": 38
+      },
+      "revId": "0118d27032663d9e9822fe3f68c7f87bae90d5b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
