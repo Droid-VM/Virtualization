@@ -168,11 +168,13 @@ impl InodeTable {
     pub fn from_zip<R: io::Read + io::Seek>(
         archive: &mut zip::ZipArchive<R>,
     ) -> Result<InodeTable> {
+        const DEFAULT_DIR_MODE: u32 = libc::S_IRUSR | libc::S_IXUSR;
+
         let mut table = InodeTable { table: Vec::new() };
 
         // Add the inodes for the invalid and the root directory
         assert_eq!(INVALID, table.put(InodeData::new_dir(0)));
-        assert_eq!(ROOT, table.put(InodeData::new_dir(0)));
+        assert_eq!(ROOT, table.put(InodeData::new_dir(DEFAULT_DIR_MODE)));
 
         // For each zip file in the archive, create an inode and add it to the table. If the file's
         // parent directories don't have corresponding inodes in the table, handle them too.
@@ -203,12 +205,10 @@ impl InodeTable {
                     // Update the mode if this is a directory leaf.
                     if !is_file && is_leaf {
                         let mut inode = table.get_mut(parent).unwrap();
-                        inode.mode = file.unix_mode().unwrap_or(0);
+                        inode.mode = file.unix_mode().unwrap_or(DEFAULT_DIR_MODE);
                     }
                     continue;
                 }
-
-                const DEFAULT_DIR_MODE: u32 = libc::S_IRUSR | libc::S_IXUSR;
 
                 // No inode found. Create a new inode and add it to the inode table.
                 let inode = if is_file {
