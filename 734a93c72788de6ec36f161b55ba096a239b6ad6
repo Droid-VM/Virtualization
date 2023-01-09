@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "504b586c_39f8f5f2",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-09T16:37:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05d21c74_4baa0028",
+      "range": {
+        "startLine": 352,
+        "startChar": 25,
+        "endLine": 352,
+        "endChar": 28
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db1742bb_2d5112e4",
@@ -284,6 +308,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14d46487_6e01d8cd",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-09T16:37:21Z",
+      "side": 1,
+      "message": "Ok. I\u0027ll keep it as Option here.",
+      "parentUuid": "6b708098_c73428f4",
+      "range": {
+        "startLine": 401,
+        "startChar": 55,
+        "endLine": 401,
+        "endChar": 64
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e341d692_c80025e9",
@@ -439,6 +487,30 @@
       "side": 1,
       "message": "Yes, we agree and picking good names isn\u0027t easy. Here, we need a name that isn\u0027t confusing due to requiring unnecessary extra knowledge but that also clearly differs from other tests.\n\nOverall, my point is that, if a test fails, the test name should immediately give a clear idea of what the test is covering and `with_one_hashdesc` goes against that IMO because it requires low-level/niche knowledge and still doesn\u0027t fully describe the test as the hash descriptor, beyond being unique in the VBMeta, could describe something else than the kernel (in particular when we\u0027ll expand to `with_three_hashdesc`), be invalid, ...\n\nDo you think the following names are too close:\n\n- `payload_with_no_initrd_passes_verification` for a kernel having been signed with no extra hash descriptor\n- `payload_missing_initrd_fails_verification` for a kernel having been signed with `initrd` hash(es), where no `initrd` is loaded\n\n? Because we\u0027ll also need tests for\n\n- `payload_with_unexpected_initrd_fails_verification` for the first case but where the test still loads an initrd\n- `payload_with_invalid_initrd_fails_verification` for the second case where the test loads a corrupted initrd\n- `payload_with_valid_initrd_passes_verification`\n- `payload_with_valid_initrd_debug_passes_verification`\n\nso we need an extensible naming format and I suppose what I\u0027m suggesting is\n```\npayload_(with_(valid|invalid|no)|missing)_(initrd|initrd_debug)_(passes|fails)_verification\n```\n\nhaving this sort of convention will also help with ensuring that we have exhaustive coverage of the test cases.",
       "parentUuid": "b43cb2e3_b57a2207",
+      "range": {
+        "startLine": 432,
+        "startChar": 7,
+        "endLine": 432,
+        "endChar": 45
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ce5fd18_343aaf02",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-09T16:37:21Z",
+      "side": 1,
+      "message": "I agree that we need the four tests you mentioned (or maybe more) about `initrd \u003d Some()` case, but the problem we are discussing is about `initrd \u003d None`. I only want to distinguish when `initrd \u003d None`, footer has one hashdesc or two hashdescs.\n\n\u003e my point is that, if a test fails, the test name should immediately give a clear idea of what the test is covering \n\nI agree. TBH, I don\u0027t think I can tell the difference between `payload_with_no_initrd` and `payload_missing_initrd` without your comments after them. It\u0027s not clear whether `initrd` here means data or the hashdesc in footer? Why when initrd is in footer we use `missing`, for the other we use `with no`?\n\nHaving a united naming format is nice, but we cannot sacrifice the clarity for it.",
+      "parentUuid": "f4566bec_ebd04465",
       "range": {
         "startLine": 432,
         "startChar": 7,
