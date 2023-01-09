@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe553551_3faa9970",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1202,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-09T14:58:11Z",
+      "side": 1,
+      "message": "I just forgot to delete it :) Deleted now",
+      "parentUuid": "0efdacdf_98b019a6",
+      "range": {
+        "startLine": 1202,
+        "startChar": 39,
+        "endLine": 1202,
+        "endChar": 55
+      },
+      "revId": "5e827acb9fcfa890eff75b73f154c352d5e1e6b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ec12b28_d5b9ef42",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f03672a_fac141fe",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1336,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-09T14:58:11Z",
+      "side": 1,
+      "message": "It felt ugly to add another readFromFile call to the runVmTestService only for the sake of asserting on it in one test.\n\nThis method allows us only to have more focused tests: instead of every test calling all the test service functions, and then only asserting on result of some of them, each test now can only call what it needs.\n\nHappy to move other tests to this new approach in a follow up change.",
+      "parentUuid": "3ec12b28_d5b9ef42",
+      "range": {
+        "startLine": 1336,
+        "startChar": 24,
+        "endLine": 1336,
+        "endChar": 40
+      },
+      "revId": "5e827acb9fcfa890eff75b73f154c352d5e1e6b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "648e4cbd_be47a435",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 1
@@ -60,6 +108,30 @@
       "writtenOn": "2023-01-09T09:32:30Z",
       "side": 1,
       "message": "Nit: s/Services/Service/",
+      "range": {
+        "startLine": 1375,
+        "startChar": 14,
+        "endLine": 1375,
+        "endChar": 41
+      },
+      "revId": "5e827acb9fcfa890eff75b73f154c352d5e1e6b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "458de4d3_8283d3a1",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1375,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-09T14:58:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "648e4cbd_be47a435",
       "range": {
         "startLine": 1375,
         "startChar": 14,
