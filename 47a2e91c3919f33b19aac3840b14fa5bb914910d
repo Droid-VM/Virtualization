@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "73c46b01_30f427bc",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-09T17:19:37Z",
+      "side": 1,
+      "message": "Why get rid of this `match`?\n\nIf it\u0027s because of the nested `if` you\u0027ve introduced, you could have\n```\nmatch partition_name.to_bytes_with_nul() {\n    Self::KERNEL_PARTITION_NAME \u003d\u003e Ok(self.kernel),\n    Self::INITRD_NORMAL_PARTITION_NAME |\n    Self::INITRD_DEBUG_PARTITION_NAME if self.initrd.is_some() \u003d\u003e Ok(self.initrd.unwrap()),\n    _ \u003d\u003e Err(AvbIOError::NoSuchPartition),\n}\n```\nor, if you want to avoid `.unwrap()` and as `if let` isn\u0027t currently available in match statements:\n```\nmatch partition_name.to_bytes_with_nul() {\n    Self::KERNEL_PARTITION_NAME \u003d\u003e Ok(self.kernel),\n    Self::INITRD_NORMAL_PARTITION_NAME |\n    Self::INITRD_DEBUG_PARTITION_NAME \u003d\u003e if let Some(initrd) \u003d self.initrd {\n        Ok(initrd)\n    } else {\n        Err(AvbIoError::NoSuchPartition)\n    }\n    _ \u003d\u003e Err(AvbIOError::NoSuchPartition),\n}\n```\nwhich avoids it but needs to duplicate the `_` case.",
+      "range": {
+        "startLine": 344,
+        "startChar": 8,
+        "endLine": 344,
+        "endChar": 13
+      },
+      "revId": "47a2e91c3919f33b19aac3840b14fa5bb914910d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d3a5da9a_a70d59bd",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 3

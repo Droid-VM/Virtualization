@@ -547,6 +547,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8daa28e_e34496c4",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-09T17:19:37Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t think I can tell the difference between `payload_with_no_initrd` and `payload_missing_initrd` without your comments after them\n\nYes, agreed.\n\n\u003e `payload_with_one_vbmeta_image_and_no_initrd_passes_verification`\n\nThe problem here is that you\u0027ll always have exactly one VBMeta, AFAIK.\n\n\u003e Having a united naming format is nice, but we cannot sacrifice the clarity for it.\n\nAbsolutely, clarity is what I\u0027m after; what about\n```\npayload_expecting_(no_|)initrd_(passes|fails)_verification_with_(no_initrd|initrd|initrd_debug|invalid_kernel|invalid_initrd)\n```\nor use the `payload_(passes|fails)_...` prefix for (default) payloads with 3 hash descriptors and the specific `payload_expecting_no_initrd_...` for the unusual case of having only one?",
+      "parentUuid": "2ce5fd18_343aaf02",
+      "range": {
+        "startLine": 432,
+        "startChar": 7,
+        "endLine": 432,
+        "endChar": 45
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f261c51_b82b5e27",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 2
