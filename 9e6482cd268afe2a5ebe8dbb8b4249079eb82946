@@ -22,6 +22,30 @@
       },
       "revId": "9e6482cd268afe2a5ebe8dbb8b4249079eb82946",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42fd9933_7d41aed2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-09T14:29:51Z",
+      "side": 1,
+      "message": "The access was done via adb shell (see the removed test) which I think should be prohibited if this permission check is working. I don\u0027t think the removed check doesn\u0027t provide much value at this moment since many tests rely on the fact that the payload process can successfully execute the so file.",
+      "parentUuid": "39c831b0_d8ff9fca",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 32
+      },
+      "revId": "9e6482cd268afe2a5ebe8dbb8b4249079eb82946",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
