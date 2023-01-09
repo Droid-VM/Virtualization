@@ -120,6 +120,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c4b3346_52e7a6b5",
+        "filename": "libs/dice/src/bcc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-09T18:58:29Z",
+      "side": 1,
+      "message": "\u003e Didn\u0027t know that we are adopting the style guideline.\n\nI wanted to discuss it by submitting a CL modifying our `rustfmt.toml` (as automating this formatting according to agreed upon rules is the way to go, IMO) but customized import formatting flags are mostly still nightly features (see [`imports_granularity`](https://github.com/rust-lang/rustfmt/issues/4991), [`group_imports`](https://github.com/rust-lang/rustfmt/issues/5083), [`imports_layout`](https://github.com/rust-lang/rustfmt/issues/3361), and [`imports_indent`](https://github.com/rust-lang/rustfmt/issues/3360)) so our commit hook can\u0027t make use of them 😞",
+      "parentUuid": "fa6c1f39_1d85483a",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 48
+      },
+      "revId": "61c1812172e5263d7237d0ec7678350fdbb776bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79d89f37_8f7d6530",
@@ -262,6 +286,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4197dc92_8b4eb792",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-09T18:58:29Z",
+      "side": 1,
+      "message": "See Jiyong\u0027s answer in https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2377172/comment/d405f6eb_c9be7766/",
+      "parentUuid": "7c7c59c6_eb0e31da",
+      "range": {
+        "startLine": 30,
+        "startChar": 32,
+        "endLine": 30,
+        "endChar": 36
+      },
+      "revId": "61c1812172e5263d7237d0ec7678350fdbb776bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d405f6eb_c9be7766",
@@ -323,6 +371,30 @@
       "side": 1,
       "message": "AvbHashDescriptor has a digest which is calculated from the input image - the raw kernel and the initrd in our case. It doesn\u0027t have additional information.\n\nOnce slot_verify passed, we can safely assume that the digest written in the descriptor is the same as the digest of the input image (that comparision must have been done by libavb[1]).\n\n[1] https://source.corp.google.com/android/external/avb/libavb/avb_slot_verify.c;rcl\u003d249badbef342187ae2d266693752fbff7ccbf204;l\u003d444",
       "parentUuid": "f81af61b_9b7f5ed4",
+      "range": {
+        "startLine": 34,
+        "startChar": 20,
+        "endLine": 34,
+        "endChar": 30
+      },
+      "revId": "61c1812172e5263d7237d0ec7678350fdbb776bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81438ada_f4dc4985",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-09T18:58:29Z",
+      "side": 1,
+      "message": "I see! I hadn\u0027t realized that there were multiple \"AVB digests\". I\u0027ve modified the function to be agnostic of the details of the `code` input and the caller to pass `concat(hash(kernel), hash(ramdisk)`, for now.\n\nOnce we have the AVB code in, we\u0027ll extract and pass those descriptors instead (tracked with a `TODO`).",
+      "parentUuid": "044c5e8d_fb3efdac",
       "range": {
         "startLine": 34,
         "startChar": 20,
