@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6be8586f_30bb3453",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-10T05:33:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "410d9159_6f91a71f",
+      "range": {
+        "startLine": 338,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 45
+      },
+      "revId": "0994425c6a6fb5cd734630545d09b13612205408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c04c984e_80510a05",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-09T10:41:32Z",
       "side": 1,
       "message": "Can we add \"If not, the VM output is automatically set to logcat.\" (Is that the right terminology?) \n\nAnd/or add an @see to setVmOutputCaptured.",
+      "range": {
+        "startLine": 359,
+        "startChar": 7,
+        "endLine": 359,
+        "endChar": 69
+      },
+      "revId": "0994425c6a6fb5cd734630545d09b13612205408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f2224f9_19dd041b",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-10T05:33:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c04c984e_80510a05",
       "range": {
         "startLine": 359,
         "startChar": 7,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc2667be_97e764af",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-10T05:33:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec7db362_d64b4645",
+      "range": {
+        "startLine": 664,
+        "startChar": 57,
+        "endLine": 664,
+        "endChar": 61
+      },
+      "revId": "0994425c6a6fb5cd734630545d09b13612205408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46b789f5_405190d5",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-01-09T10:41:32Z",
       "side": 1,
       "message": "I\u0027m a little unhappy about this.\nIdeally newVmConfigBuillder should produce a minimal builder and we should explicitly add what we need.\nMost tests currently explicitly turn on debuggable, but we have some that deliberately don\u0027t.\n\nCan you add setVmOutputsCaptured explicitly where you need it?",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 44
+      },
+      "revId": "0994425c6a6fb5cd734630545d09b13612205408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b146215b_6bb69bb4",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-10T05:33:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46b789f5_405190d5",
       "range": {
         "startLine": 104,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55a54582_88ea3935",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-10T05:33:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "429f3e8f_f29c824f",
+      "range": {
+        "startLine": 223,
+        "startChar": 16,
+        "endLine": 223,
+        "endChar": 86
+      },
+      "revId": "0994425c6a6fb5cd734630545d09b13612205408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4afadf60_fce06ccc",
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e6a8e83_0f518f57",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-10T05:33:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4afadf60_fce06ccc",
+      "range": {
+        "startLine": 223,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 17
+      },
+      "revId": "0994425c6a6fb5cd734630545d09b13612205408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84a285ae_58d84c23",
@@ -152,6 +296,30 @@
       "writtenOn": "2023-01-09T10:41:32Z",
       "side": 1,
       "message": "Can you add tests for your \"no output capture for non-debuggable VMs\" here?",
+      "range": {
+        "startLine": 391,
+        "startChar": 0,
+        "endLine": 399,
+        "endChar": 81
+      },
+      "revId": "0994425c6a6fb5cd734630545d09b13612205408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9572259d_07246dd4",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-10T05:33:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84a285ae_58d84c23",
       "range": {
         "startLine": 391,
         "startChar": 0,
