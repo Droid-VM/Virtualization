@@ -22,6 +22,30 @@
       },
       "revId": "6d52c5724503659535312c32900ab0c5f86d8f49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a96d10a_a10a3e4e",
+        "filename": "virtualizationservice/src/virtmgr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-10T16:01:24Z",
+      "side": 1,
+      "message": "It\u0027s a bug in the device, because no device without any hypervisor support should have the virt APEX installed.\n\nIf the virt APEX is not present then user code can check for FEATURE_VIRTUALIZATION_FRAMEWORK, or a null return from Context.getSystemService(VMM.class).",
+      "parentUuid": "3d9962de_8a4288f0",
+      "range": {
+        "startLine": 114,
+        "startChar": 8,
+        "endLine": 114,
+        "endChar": 13
+      },
+      "revId": "6d52c5724503659535312c32900ab0c5f86d8f49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
