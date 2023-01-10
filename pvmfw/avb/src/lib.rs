@@ -20,4 +20,4 @@
 
 mod verify;
 
-pub use verify::{verify_payload, AvbImageVerifyError};
+pub use verify::{verify_payload, AvbImageVerifyError, Mode};
