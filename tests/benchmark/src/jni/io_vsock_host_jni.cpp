@@ -23,18 +23,17 @@
 using android::base::ErrnoError;
 using android::base::Error;
 using android::base::Result;
-using android::base::WriteStringToFd;
 
 constexpr size_t kNumBytesPerMB = 1024 * 1024;
 
 Result<double> measure_send_rate(int fd, int num_bytes_to_send) {
-    std::string data;
-    data.assign(num_bytes_to_send, 'a');
+    char *data = (char *)malloc((num_bytes_to_send + 1) * sizeof(char));
+    memset(data, 'a', num_bytes_to_send);
     struct timespec start;
     if (clock_gettime(CLOCK_MONOTONIC, &start) == -1) {
         return ErrnoError() << "failed to clock_gettime";
     }
-    if (!WriteStringToFd(data, fd)) {
+    if (ssize_t n = write(fd, data, num_bytes_to_send); n != num_bytes_to_send) {
         return Error() << "Cannot send data to client";
     }
     struct timespec finish;
