@@ -15,12 +15,13 @@
 //! This module handles the pvmfw payload verification.
 
 use avb_bindgen::{
-    avb_slot_verify, AvbHashtreeErrorMode, AvbIOResult, AvbOps, AvbSlotVerifyFlags,
-    AvbSlotVerifyResult,
+    avb_descriptor_get_all, avb_slot_verify, AvbHashtreeErrorMode, AvbIOResult, AvbOps,
+    AvbSlotVerifyData, AvbSlotVerifyFlags, AvbSlotVerifyResult,
 };
 use core::{
     ffi::{c_char, c_void, CStr},
     fmt,
+    mem::MaybeUninit,
     ptr::{self, NonNull},
     slice,
 };
@@ -66,9 +67,14 @@ impl fmt::Display for AvbImageVerifyError {
     }
 }
 
-fn to_avb_verify_result(result: AvbSlotVerifyResult) -> Result<(), AvbImageVerifyError> {
+fn to_avb_verify_result_allow_verification_error(
+    result: AvbSlotVerifyResult,
+) -> Result<(), AvbImageVerifyError> {
     match result {
-        AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_OK => Ok(()),
+        AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_OK
+        | AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_PUBLIC_KEY_REJECTED
+        | AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_VERIFICATION
+        | AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_ROLLBACK_INDEX => Ok(()),
         AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_INVALID_ARGUMENT => {
             Err(AvbImageVerifyError::InvalidArgument)
         }
@@ -77,17 +83,8 @@ fn to_avb_verify_result(result: AvbSlotVerifyResult) -> Result<(), AvbImageVerif
         }
         AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_IO => Err(AvbImageVerifyError::Io),
         AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_OOM => Err(AvbImageVerifyError::Oom),
-        AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_PUBLIC_KEY_REJECTED => {
-            Err(AvbImageVerifyError::PublicKeyRejected)
-        }
-        AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_ROLLBACK_INDEX => {
-            Err(AvbImageVerifyError::RollbackIndex)
-        }
         AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_UNSUPPORTED_VERSION => {
             Err(AvbImageVerifyError::UnsupportedVersion)
-        }
-        AvbSlotVerifyResult::AVB_SLOT_VERIFY_RESULT_ERROR_VERIFICATION => {
-            Err(AvbImageVerifyError::Verification)
         }
     }
 }
@@ -391,7 +388,10 @@ impl<'a> Payload<'a> {
         }
     }
 
-    fn verify_partitions(&mut self, partition_names: &[&CStr]) -> Result<(), AvbImageVerifyError> {
+    fn verify_partitions(
+        &mut self,
+        partition_names: &[&CStr],
+    ) -> Result<&'a AvbSlotVerifyData, AvbImageVerifyError> {
         if partition_names.len() > Self::MAX_NUM_OF_HASH_DESCRIPTORS {
             return Err(AvbImageVerifyError::InvalidArgument);
         }
@@ -419,7 +419,9 @@ impl<'a> Payload<'a> {
             validate_public_key_for_partition: Some(validate_public_key_for_partition),
         };
         let ab_suffix = CStr::from_bytes_with_nul(NULL_BYTE).unwrap();
-        let out_data = ptr::null_mut();
+        let flags = AvbSlotVerifyFlags::AVB_SLOT_VERIFY_FLAGS_NO_VBMETA_PARTITION
+            | AvbSlotVerifyFlags::AVB_SLOT_VERIFY_FLAGS_ALLOW_VERIFICATION_ERROR;
+        let mut out_data = MaybeUninit::uninit();
         // SAFETY: It is safe to call `avb_slot_verify()` as the pointer arguments (`ops`,
         // `requested_partitions` and `ab_suffix`) passed to the method are all valid and
         // initialized. The last argument `out_data` is allowed to be null so that nothing
@@ -429,12 +431,20 @@ impl<'a> Payload<'a> {
                 &mut avb_ops,
                 requested_partitions.as_ptr(),
                 ab_suffix.as_ptr(),
-                AvbSlotVerifyFlags::AVB_SLOT_VERIFY_FLAGS_NO_VBMETA_PARTITION,
+                flags,
                 AvbHashtreeErrorMode::AVB_HASHTREE_ERROR_MODE_RESTART_AND_INVALIDATE,
-                out_data,
+                out_data.as_mut_ptr(),
             )
         };
-        to_avb_verify_result(result)
+        to_avb_verify_result_allow_verification_error(result)?;
+        // SAFETY: This is safe because `out_data` has been properly initialized after
+        // calling `avb_slot_verify` when the verification result only has verification
+        // error.
+        let out_data = unsafe { out_data.assume_init() };
+        let out_data = to_nonnull(out_data).map_err(|_| AvbImageVerifyError::Io)?;
+        // SAFETY: It is safe as the raw pointer `out_data` is a nonnull pointer.
+        let out_data = unsafe { out_data.as_ref() };
+        Ok(out_data)
     }
 }
 
@@ -447,7 +457,33 @@ pub fn verify_payload(
     let mut payload = Payload { kernel, initrd, trusted_public_key };
     let kernel = CStr::from_bytes_with_nul(Payload::KERNEL_PARTITION_NAME).unwrap();
     let requested_partitions = [kernel];
-    payload.verify_partitions(&requested_partitions)
+
+    let verify_result = match payload.verify_partitions(&requested_partitions) {
+        Err(e) => return Err(e),
+        Ok(result) => result,
+    };
+    if verify_result.num_vbmeta_images != 1 {
+        return Err(AvbImageVerifyError::InvalidMetadata);
+    }
+    let vbmeta_images = unsafe {
+        slice::from_raw_parts(verify_result.vbmeta_images, verify_result.num_vbmeta_images)
+    };
+    let vbmeta_image = vbmeta_images[0];
+    let mut out_num_descriptors = 0;
+    unsafe {
+        avb_descriptor_get_all(
+            vbmeta_image.vbmeta_data,
+            vbmeta_image.vbmeta_size,
+            &mut out_num_descriptors,
+        );
+    }
+    dbg!(unsafe { CStr::from_ptr(vbmeta_image.partition_name) });
+    dbg!(out_num_descriptors);
+    let expected_num_of_descriptors = if initrd.is_none() { 1 } else { 3 };
+    if expected_num_of_descriptors != out_num_descriptors {
+        return Err(AvbImageVerifyError::InvalidMetadata);
+    }
+    Ok(())
 }
 
 #[cfg(test)]
