@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "841bba4d_d07b32cc",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-10T18:29:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69eb7bea_6d52cd86",
+      "range": {
+        "startLine": 315,
+        "startChar": 4,
+        "endLine": 319,
+        "endChar": 59
+      },
+      "revId": "0118d27032663d9e9822fe3f68c7f87bae90d5b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd358b8b_05ed80dd",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-09T17:56:01Z",
       "side": 1,
       "message": "Why not take `NonZero` so that the caller calls `unwrap` and panics instead?",
+      "range": {
+        "startLine": 350,
+        "startChar": 4,
+        "endLine": 350,
+        "endChar": 26
+      },
+      "revId": "0118d27032663d9e9822fe3f68c7f87bae90d5b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f4d3a71_79fcfe61",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-10T18:29:50Z",
+      "side": 1,
+      "message": "Why? It just means more repeated code, as we have to check in two places rather than one. The whole point of this function is to factor out repeated code.",
+      "parentUuid": "dd358b8b_05ed80dd",
       "range": {
         "startLine": 350,
         "startChar": 4,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94ec4c8e_e9b889e1",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-10T18:29:50Z",
+      "side": 1,
+      "message": "We could do, it would mean adding more global mutable state though, and a lock to access it safely. Making one more HVC to check the granule size doesn\u0027t seem that big a cost when we are already making several to share the region.",
+      "parentUuid": "5c978d3a_4bacc10a",
+      "range": {
+        "startLine": 353,
+        "startChar": 18,
+        "endLine": 353,
+        "endChar": 29
+      },
+      "revId": "0118d27032663d9e9822fe3f68c7f87bae90d5b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7455d03_67d54f2b",
         "filename": "pvmfw/src/virtio/hal.rs",
         "patchSetId": 2
@@ -83,6 +155,30 @@
       "writtenOn": "2023-01-09T17:56:01Z",
       "side": 1,
       "message": "Dont we need to handle a null result?",
+      "range": {
+        "startLine": 12,
+        "startChar": 20,
+        "endLine": 12,
+        "endChar": 38
+      },
+      "revId": "0118d27032663d9e9822fe3f68c7f87bae90d5b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bc80ab9_520a9b0e",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-10T18:29:50Z",
+      "side": 1,
+      "message": "Fixed to make `alloc_shared` return `NonNull`.",
+      "parentUuid": "f7455d03_67d54f2b",
       "range": {
         "startLine": 12,
         "startChar": 20,
