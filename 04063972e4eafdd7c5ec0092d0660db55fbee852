@@ -39,6 +39,30 @@
       },
       "revId": "04063972e4eafdd7c5ec0092d0660db55fbee852",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43c381af_9bf28366",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-10T16:49:28Z",
+      "side": 1,
+      "message": "\u003e It would be nicer if it is mentioned that two VMs having different debug levels are considered different (even though they are running the exact same code) and can\u0027t share the secret.\n\nThat is a very good point. I\u0027ve attempted to say that both for debug level \u0026 protected-ness.\n\n\u003e \n\u003e Also, we may want to recommend that the payload running in the VM should be aware of the debug level and use different secrets.\n\nI don\u0027t think apps have to worry about that - we already incorporate the debug mode into the VM secret.",
+      "parentUuid": "4fd397ee_e4a8f803",
+      "range": {
+        "startLine": 539,
+        "startChar": 1,
+        "endLine": 542,
+        "endChar": 53
+      },
+      "revId": "04063972e4eafdd7c5ec0092d0660db55fbee852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
