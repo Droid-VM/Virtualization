@@ -49,6 +49,15 @@ pub enum AvbImageVerifyError {
     Verification,
 }
 
+/// Running mode of the VM.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub enum Mode {
+    /// Debug mode.
+    Debug,
+    /// Normal mode.
+    Normal,
+}
+
 impl fmt::Display for AvbImageVerifyError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
@@ -287,38 +296,31 @@ extern "C" fn get_unique_guid_for_partition(
     AvbIOResult::AVB_IO_RESULT_OK
 }
 
-extern "C" fn validate_public_key_for_partition(
+unsafe extern "C" fn validate_vbmeta_public_key(
     ops: *mut AvbOps,
-    partition: *const c_char,
     public_key_data: *const u8,
     public_key_length: usize,
     public_key_metadata: *const u8,
     public_key_metadata_length: usize,
     out_is_trusted: *mut bool,
-    out_rollback_index_location: *mut u32,
 ) -> AvbIOResult {
-    to_avb_io_result(try_validate_public_key_for_partition(
+    to_avb_io_result(try_validate_vbmeta_public_key(
         ops,
-        partition,
         public_key_data,
         public_key_length,
         public_key_metadata,
         public_key_metadata_length,
         out_is_trusted,
-        out_rollback_index_location,
     ))
 }
 
-#[allow(clippy::too_many_arguments)]
-fn try_validate_public_key_for_partition(
+fn try_validate_vbmeta_public_key(
     ops: *mut AvbOps,
-    partition: *const c_char,
     public_key_data: *const u8,
     public_key_length: usize,
     _public_key_metadata: *const u8,
     _public_key_metadata_length: usize,
     out_is_trusted: *mut bool,
-    _out_rollback_index_location: *mut u32,
 ) -> Result<(), AvbIOError> {
     is_not_null(public_key_data)?;
     // SAFETY: It is safe to create a slice with the given pointer and length as
@@ -326,8 +328,6 @@ fn try_validate_public_key_for_partition(
     // `public_key_length`.
     let public_key = unsafe { slice::from_raw_parts(public_key_data, public_key_length) };
     let ops = as_ref(ops)?;
-    // Verifies the public key for the known partitions only.
-    ops.as_ref().get_partition(partition)?;
     let trusted_public_key = ops.as_ref().trusted_public_key;
     let out_is_trusted = to_nonnull(out_is_trusted)?;
     // SAFETY: It is safe as the raw pointer `out_is_trusted` is a nonnull pointer.
@@ -373,7 +373,7 @@ impl<'a> AsRef<Payload<'a>> for AvbOps {
 }
 
 impl<'a> Payload<'a> {
-    const KERNEL_PARTITION_NAME: &[u8] = b"bootloader\0";
+    const KERNEL_PARTITION_NAME: &[u8] = b"boot\0";
     const INITRD_NORMAL_PARTITION_NAME: &[u8] = b"initrd_normal\0";
     const INITRD_DEBUG_PARTITION_NAME: &[u8] = b"initrd_debug\0";
 
@@ -424,7 +424,7 @@ impl<'a> Payload<'a> {
             read_from_partition: Some(read_from_partition),
             get_preloaded_partition: Some(get_preloaded_partition),
             write_to_partition: None,
-            validate_vbmeta_public_key: None,
+            validate_vbmeta_public_key: Some(validate_vbmeta_public_key),
             read_rollback_index: Some(read_rollback_index),
             write_rollback_index: None,
             read_is_device_unlocked: Some(read_is_device_unlocked),
@@ -432,9 +432,10 @@ impl<'a> Payload<'a> {
             get_size_of_partition: Some(get_size_of_partition),
             read_persistent_value: None,
             write_persistent_value: None,
-            validate_public_key_for_partition: Some(validate_public_key_for_partition),
+            validate_public_key_for_partition: None,
         };
         let ab_suffix = CStr::from_bytes_with_nul(NULL_BYTE).unwrap();
+        let flags = AvbSlotVerifyFlags::AVB_SLOT_VERIFY_FLAGS_NONE;
         let mut out_data = MaybeUninit::uninit();
         // SAFETY: It is safe to call `avb_slot_verify()` as the pointer arguments (`ops`,
         // `requested_partitions` and `ab_suffix`) passed to the method are all valid and
@@ -445,7 +446,7 @@ impl<'a> Payload<'a> {
                 &mut avb_ops,
                 requested_partitions.as_ptr(),
                 ab_suffix.as_ptr(),
-                AvbSlotVerifyFlags::AVB_SLOT_VERIFY_FLAGS_NO_VBMETA_PARTITION,
+                flags,
                 AvbHashtreeErrorMode::AVB_HASHTREE_ERROR_MODE_RESTART_AND_INVALIDATE,
                 out_data.as_mut_ptr(),
             )
@@ -454,10 +455,7 @@ impl<'a> Payload<'a> {
         // SAFETY: This is safe because `out_data` has been properly initialized after
         // calling `avb_slot_verify` and it returns OK.
         let out_data = unsafe { out_data.assume_init() };
-        let out_data = to_nonnull(out_data).map_err(|_| AvbImageVerifyError::Io)?;
-        // SAFETY: It is safe as the raw pointer `out_data` is a nonnull pointer.
-        let out_data = unsafe { out_data.as_ref() };
-        Ok(out_data)
+        as_ref(out_data).map_err(|_| AvbImageVerifyError::Io)
     }
 
     fn verify_vbmeta(&self, verify_result: &AvbSlotVerifyData) -> Result<(), AvbImageVerifyError> {
@@ -493,15 +491,23 @@ pub fn verify_payload(
     kernel: &[u8],
     initrd: Option<&[u8]>,
     trusted_public_key: &[u8],
-) -> Result<(), AvbImageVerifyError> {
+) -> Result<Mode, AvbImageVerifyError> {
     let mut payload = Payload { kernel, initrd, trusted_public_key };
     let kernel = CStr::from_bytes_with_nul(Payload::KERNEL_PARTITION_NAME).unwrap();
-    let requested_partitions = [kernel];
-    let verify_result = match payload.verify_partitions(&requested_partitions) {
+    let initrd_normal = CStr::from_bytes_with_nul(Payload::INITRD_NORMAL_PARTITION_NAME).unwrap();
+    let initrd_debug = CStr::from_bytes_with_nul(Payload::INITRD_DEBUG_PARTITION_NAME).unwrap();
+    let verify_result = match payload.verify_partitions(&[kernel]) {
         Err(e) => return Err(e),
         Ok(result) => result,
     };
-    payload.verify_vbmeta(verify_result)
+    payload.verify_vbmeta(verify_result)?;
+    if payload.initrd.is_none() || payload.verify_partitions(&[initrd_normal]).is_ok() {
+        Ok(Mode::Normal)
+    } else if payload.verify_partitions(&[initrd_debug]).is_ok() {
+        Ok(Mode::Debug)
+    } else {
+        Err(AvbImageVerifyError::Verification)
+    }
 }
 
 #[cfg(test)]
@@ -513,6 +519,7 @@ mod tests {
 
     const MICRODROID_KERNEL_IMG_PATH: &str = "microdroid_kernel";
     const INITRD_NORMAL_IMG_PATH: &str = "microdroid_initrd_normal.img";
+    const INITRD_DEBUG_IMG_PATH: &str = "microdroid_initrd_debuggable.img";
     const TEST_IMG_WITH_ONE_HASHDESC_PATH: &str = "test_image_with_one_hashdesc.img";
     const UNSIGNED_TEST_IMG_PATH: &str = "unsigned_test.img";
 
@@ -523,12 +530,25 @@ mod tests {
     /// This test uses the Microdroid payload compiled on the fly to check that
     /// the latest payload can be verified successfully.
     #[test]
-    fn latest_valid_payload_passes_verification() -> Result<()> {
+    fn latest_normal_payload_passes_verification() -> Result<()> {
         let kernel = load_latest_signed_kernel()?;
-        let initrd_normal = fs::read(INITRD_NORMAL_IMG_PATH)?;
+        let initrd_normal = load_latest_initrd_normal()?;
         let public_key = fs::read(PUBLIC_KEY_RSA4096_PATH)?;
 
-        assert_eq!(Ok(()), verify_payload(&kernel, Some(&initrd_normal[..]), &public_key));
+        assert_eq!(
+            Ok(Mode::Normal),
+            verify_payload(&kernel, Some(&initrd_normal[..]), &public_key)
+        );
+        Ok(())
+    }
+
+    #[test]
+    fn latest_debug_payload_passes_verification() -> Result<()> {
+        let kernel = load_latest_signed_kernel()?;
+        let initrd_debug = load_latest_initrd_debug()?;
+        let public_key = fs::read(PUBLIC_KEY_RSA4096_PATH)?;
+
+        assert_eq!(Ok(Mode::Debug), verify_payload(&kernel, Some(&initrd_debug[..]), &public_key));
         Ok(())
     }
 
@@ -537,7 +557,7 @@ mod tests {
         let kernel = fs::read(TEST_IMG_WITH_ONE_HASHDESC_PATH)?;
         let public_key = fs::read(PUBLIC_KEY_RSA4096_PATH)?;
 
-        assert_eq!(Ok(()), verify_payload(&kernel, None, &public_key));
+        assert_eq!(Ok(Mode::Normal), verify_payload(&kernel, None, &public_key));
         Ok(())
     }
 
@@ -570,6 +590,16 @@ mod tests {
             &load_latest_initrd_normal()?,
             /*trusted_public_key=*/ &[0u8; 512],
             AvbImageVerifyError::PublicKeyRejected,
+        )
+    }
+
+    #[test]
+    fn payload_with_an_invalid_initrd_fails_verification() -> Result<()> {
+        assert_payload_verification_fails(
+            &load_latest_signed_kernel()?,
+            /*initrd=*/ &fs::read(UNSIGNED_TEST_IMG_PATH)?,
+            &fs::read(PUBLIC_KEY_RSA4096_PATH)?,
+            AvbImageVerifyError::Verification,
         )
     }
 
@@ -636,5 +666,9 @@ mod tests {
 
     fn load_latest_initrd_normal() -> Result<Vec<u8>> {
         Ok(fs::read(INITRD_NORMAL_IMG_PATH)?)
+    }
+
+    fn load_latest_initrd_debug() -> Result<Vec<u8>> {
+        Ok(fs::read(INITRD_DEBUG_IMG_PATH)?)
     }
 }
