@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed8ea5c9_f21fb99b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-10T13:02:41Z",
+      "side": 1,
+      "message": "From the PS run of [`android.compos.test.ComposTestCase#testOdrefreshSpeed`](https://android-build.googleplex.com/builds/tests/view?invocationId\u003dI20600010122352989\u0026testResultId\u003dTR93528451356543721):\n```\n[    0.854151][  T100] microdroid_manager::dice[100]: Using DICE values from driver\n```\n```\n[    0.983515][  T100] microdroid_manager[100]: DICE derivation for payload\n[    0.983912][  T100] ioremap: Failed to register 7fe0d000\n[    0.984083][  T100] ioremap: 7fe0d000 not tracked, left mapped\n```\nso the chain is being used by the guest and its format is validated by the test: http://cs/android/packages/modules/Virtualization/compos/tests/java/android/compos/test/ComposTestCase.java?l\u003d163.",
+      "revId": "af5ce7972a006f67f1ef2609dfc5da1709ed66a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
