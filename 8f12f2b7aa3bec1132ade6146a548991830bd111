@@ -94,6 +94,30 @@
       },
       "revId": "8f12f2b7aa3bec1132ade6146a548991830bd111",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5f23c70_ee3f066f",
+        "filename": "microdroid/payload/metadata.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-10T12:17:08Z",
+      "side": 1,
+      "message": "\u003e That is true, but my comment was more in spirt of starting a conversation around \"should we ensure that we don\u0027t do non-compatible changes to our storage schema\"\n\nYes, that\u0027s a fair point. At the moment the instance image is invalidated by any code change, but we will one day get beyond that. And we should aim for backward compatibility.\n\nAlthough as Jiyong said, renaming a proto field is actually fine.\n\nWe should also be careful about VM config files - so far we\u0027ve been aiming to make sure old configs keep working, but new configs don\u0027t need to work on old builds, which I think is ok.",
+      "parentUuid": "2c0ed209_f4905fbb",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 1
+      },
+      "revId": "8f12f2b7aa3bec1132ade6146a548991830bd111",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
