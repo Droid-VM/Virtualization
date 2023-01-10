@@ -21,7 +21,7 @@ use crate::atom::{
 use crate::composite::make_composite_image;
 use crate::crosvm::{CrosvmConfig, DiskFile, PayloadState, VmContext, VmInstance, VmState};
 use crate::payload::{add_microdroid_payload_images, add_microdroid_system_images};
-use crate::selinux::{getfilecon, SeContext};
+use crate::selinux::getfilecon;
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
 use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon::{
     DeathReason::DeathReason,
@@ -664,6 +664,12 @@ impl VirtualizationService {
             .try_for_each(check_label_for_partition)
             .map_err(|e| Status::new_service_specific_error_str(-1, Some(format!("{:?}", e))))?;
 
+        let kernel = maybe_clone_file(&config.kernel)?;
+        let initrd = maybe_clone_file(&config.initrd)?;
+
+        check_label_for_kernel_files(&kernel, &initrd)
+            .map_err(|e| Status::new_service_specific_error_str(-1, Some(format!("{:?}", e))))?;
+
         let zero_filler_path = temporary_directory.join("zero.img");
         write_zero_filler(&zero_filler_path).map_err(|e| {
             error!("Failed to make composite image: {:?}", e);
@@ -706,8 +712,8 @@ impl VirtualizationService {
             cid,
             name: config.name.clone(),
             bootloader: maybe_clone_file(&config.bootloader)?,
-            kernel: maybe_clone_file(&config.kernel)?,
-            initrd: maybe_clone_file(&config.initrd)?,
+            kernel,
+            initrd,
             disks,
             params: config.params.to_owned(),
             protected: *is_protected,
@@ -971,14 +977,8 @@ fn check_use_custom_virtual_machine() -> binder::Result<()> {
     check_permission("android.permission.USE_CUSTOM_VIRTUAL_MACHINE")
 }
 
-/// Check if a partition has selinux labels that are not allowed
-fn check_label_for_partition(partition: &Partition) -> Result<()> {
-    let ctx = getfilecon(partition.image.as_ref().unwrap().as_ref())?;
-    check_label_is_allowed(&ctx).with_context(|| format!("Partition {} invalid", &partition.label))
-}
-
-// Return whether a partition is exempt from selinux label checks, because we know that it does
-// not contain code and is likely to be generated in an app-writable directory.
+/// Return whether a partition is exempt from selinux label checks, because we know that it does
+/// not contain code and is likely to be generated in an app-writable directory.
 fn is_safe_app_partition(label: &str) -> bool {
     // See add_microdroid_system_images & add_microdroid_payload_images in payload.rs.
     label == "vm-instance"
@@ -988,21 +988,45 @@ fn is_safe_app_partition(label: &str) -> bool {
         || label.starts_with("extra-idsig-")
 }
 
-fn check_label_is_allowed(ctx: &SeContext) -> Result<()> {
-    // We only want to allow code in a VM payload to be sourced from places that apps, and the
-    // system, do not have write access to.
-    // (Note that sepolicy must also grant read access for these types to both virtualization
-    // service and crosvm.)
-    // App private data files are deliberately excluded, to avoid arbitrary payloads being run on
-    // user devices (W^X).
-    match ctx.selinux_type()? {
+/// Check the SELinux label for a file is acceptable.
+///
+/// We only want to allow code in a VM to be sourced from places that apps, and the
+/// system, do not have write access to.
+///
+/// Note that sepolicy must also grant read access for these types to both virtualization
+/// service and crosvm.
+///
+/// App private data files are deliberately excluded, to avoid arbitrary payloads being run on
+/// user devices (W^X).
+fn check_label_is_allowed(file: &File) -> Result<()> {
+    let context = getfilecon(file)?;
+
+    match context.selinux_type()? {
         | "system_file" // immutable dm-verity protected partition
         | "apk_data_file" // APKs of an installed app
         | "staging_data_file" // updated/staged APEX images
         | "shell_data_file" // test files created via adb shell
          => Ok(()),
-        _ => bail!("Label {} is not allowed", ctx),
+        _ => bail!("Label {} is not allowed", context),
     }
+}
+
+fn check_label_for_partition(partition: &Partition) -> Result<()> {
+    let file = partition.image.as_ref().unwrap().as_ref();
+    check_label_is_allowed(file).with_context(|| format!("Partition {} invalid", &partition.label))
+}
+
+fn check_label_for_kernel_files(kernel: &Option<File>, initrd: &Option<File>) -> Result<()> {
+    if let Some(f) = kernel {
+        check_label_for_file(f, "kernel")?;
+    }
+    if let Some(f) = initrd {
+        check_label_for_file(f, "initrd")?;
+    }
+    Ok(())
+}
+fn check_label_for_file(file: &File, name: &str) -> Result<()> {
+    check_label_is_allowed(file).with_context(|| format!("{} file invalid", name))
 }
 
 /// Implementation of the AIDL `IVirtualMachine` interface. Used as a handle to a VM.
