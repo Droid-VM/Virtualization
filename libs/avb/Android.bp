@@ -12,6 +12,7 @@ rust_bindgen {
     source_stem: "bindings",
     bindgen_flags: [
         "--size_t-is-usize",
+        "--constified-enum-module AvbSlotVerifyFlags",
         "--default-enum-style rust",
         "--allowlist-function=.*",
         "--use-core",
