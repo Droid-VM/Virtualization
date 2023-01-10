@@ -34,6 +34,24 @@
       "parentUuid": "1520df9f_e69e7abf",
       "revId": "2d65298a096d7e1a3c64f14af16bd83d35ed69ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea7a6f43_137644b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-10T11:53:22Z",
+      "side": 1,
+      "message": "Verified to boot with aosp/2380697 but `libavb` is quite talkative as it\u0027s [compiled with `-DAVB_ENABLE_DEBUG`](http://cs/android/external/avb/Android.bp?l\u003d70):\n```\navb_slot_verify.c:687: DEBUG: Loading vbmeta struct in footer from partition \u0027bootloader\u0027.\n```",
+      "parentUuid": "9c7b065b_e37ec268",
+      "revId": "2d65298a096d7e1a3c64f14af16bd83d35ed69ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
