@@ -569,6 +569,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3492df6_dcf6c5f6",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-10T09:25:36Z",
+      "side": 1,
+      "message": "SGTM. So I can name these tests:\n\n- payload_expecting_no_initrd_passes_verification_with_no_initrd\n- payload_expecting_initrd_fails_verification_with_no_initrd",
+      "parentUuid": "b8daa28e_e34496c4",
+      "range": {
+        "startLine": 432,
+        "startChar": 7,
+        "endLine": 432,
+        "endChar": 45
+      },
+      "revId": "734a93c72788de6ec36f161b55ba096a239b6ad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f261c51_b82b5e27",
