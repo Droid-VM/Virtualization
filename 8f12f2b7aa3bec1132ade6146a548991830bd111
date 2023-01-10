@@ -22,6 +22,30 @@
       },
       "revId": "8f12f2b7aa3bec1132ade6146a548991830bd111",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3091988_485d80ea",
+        "filename": "microdroid/payload/metadata.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-10T02:29:37Z",
+      "side": 1,
+      "message": "field names are not encoded in protobuf (but field numbers are), so I think this change is safe.",
+      "parentUuid": "97faae5a_1151ebcb",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 1
+      },
+      "revId": "8f12f2b7aa3bec1132ade6146a548991830bd111",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
