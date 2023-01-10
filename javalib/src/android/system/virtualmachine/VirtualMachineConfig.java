@@ -536,6 +536,11 @@ public final class VirtualMachineConfig {
         /**
          * Sets the debug level. Defaults to {@link #DEBUG_LEVEL_NONE}.
          *
+         * <p>If {@link #DEBUG_LEVEL_FULL} is set then logs from inside the VM are exported to the
+         * host and adb connections from the host are possible. This is convenient for debugging but
+         * may compromise the integrity of the VM - including bypassing the protections offered by a
+         * {@linkplain #setProtectedVm protected VM}.
+         *
          * @hide
          */
         @SystemApi
@@ -551,6 +556,10 @@ public final class VirtualMachineConfig {
         /**
          * Sets whether to protect the VM memory from the host. No default is provided, this must be
          * set explicitly.
+         *
+         * <p>Note that if debugging is {@linkplain #setDebugLevel enabled} for a protected VM, the
+         * VM is not truly protected - direct memory access by the host is prevented, but e.g. the
+         * debugger can be used to access the VM's internals.
          *
          * @see VirtualMachineManager#getCapabilities
          * @hide
