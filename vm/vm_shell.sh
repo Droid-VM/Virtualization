@@ -92,7 +92,8 @@ function handle_start_microdroid_cmd() {
         shift
     done
     if [[ "${auto_connect}" == true ]]; then
-        adb shell /apex/com.android.virt/bin/vm run-microdroid -d "${passthrough_args}"
+        adb shell /apex/com.android.virt/bin/vm run-microdroid "${passthrough_args}" >/dev/null &
+        trap "kill $!" EXIT
         sleep 2
         handle_connect_cmd
     else
