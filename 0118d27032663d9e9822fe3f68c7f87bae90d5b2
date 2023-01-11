@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8921b96d_62102963",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-11T17:21:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2f4d3a71_79fcfe61",
+      "range": {
+        "startLine": 350,
+        "startChar": 4,
+        "endLine": 350,
+        "endChar": 26
+      },
+      "revId": "0118d27032663d9e9822fe3f68c7f87bae90d5b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c978d3a_4bacc10a",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "We could do, it would mean adding more global mutable state though, and a lock to access it safely. Making one more HVC to check the granule size doesn\u0027t seem that big a cost when we are already making several to share the region.",
       "parentUuid": "5c978d3a_4bacc10a",
+      "range": {
+        "startLine": 353,
+        "startChar": 18,
+        "endLine": 353,
+        "endChar": 29
+      },
+      "revId": "0118d27032663d9e9822fe3f68c7f87bae90d5b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b8dd6ca_8b5571c4",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-11T17:21:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "94ec4c8e_e9b889e1",
       "range": {
         "startLine": 353,
         "startChar": 18,
