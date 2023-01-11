@@ -372,7 +372,7 @@ impl<'a> AsRef<Payload<'a>> for AvbOps {
 }
 
 impl<'a> Payload<'a> {
-    const KERNEL_PARTITION_NAME: &[u8] = b"bootloader\0";
+    const KERNEL_PARTITION_NAME: &[u8] = b"boot\0";
     const INITRD_NORMAL_PARTITION_NAME: &[u8] = b"initrd_normal\0";
     const INITRD_DEBUG_PARTITION_NAME: &[u8] = b"initrd_debug\0";
 
