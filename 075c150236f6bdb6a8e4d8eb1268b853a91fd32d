@@ -129,6 +129,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e9328d5_cfe24e28",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-11T16:57:29Z",
+      "side": 1,
+      "message": "That\u0027s the terminology libavb uses so we might want to align with them.",
+      "parentUuid": "71cc9e88_2ba0e772",
+      "range": {
+        "startLine": 362,
+        "startChar": 14,
+        "endLine": 362,
+        "endChar": 17
+      },
+      "revId": "075c150236f6bdb6a8e4d8eb1268b853a91fd32d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d159931_7ff6675a",
@@ -213,6 +237,30 @@
       "side": 1,
       "message": "I\u0027m not sure how to build `CStr` instead of `\u0026CStr`. If to implement `impl From\u003cPartitionName\u003e for \u0026CStr`, then we hit the lifetime issue here.\n\nI implemented instead `as_cstr()` inside `PartitionName`. Just that cannot be used inside the `match` with the following error:\n\n```\nerror: expected one of `!`, `(`, `...`, `..\u003d`, `..`, `::`, `\u003d\u003e`, `if`, `{`, or `|`, found `.`\n   --\u003e /usr/local/google/home/aliceywang/codes/aosp/packages/modules/Virtualization/pvmfw/avb/src/verify.rs:384:34\n    |\n384 |             PartitionName::Kernel.as_cstr() \u003d\u003e Ok(Self::Kernel),\n    |                                  ^ expected one of 10 possible tokens\n```",
       "parentUuid": "9a8f1561_9bafb370",
+      "range": {
+        "startLine": 467,
+        "startChar": 17,
+        "endLine": 467,
+        "endChar": 75
+      },
+      "revId": "075c150236f6bdb6a8e4d8eb1268b853a91fd32d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08833d38_af83381a",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-11T16:57:29Z",
+      "side": 1,
+      "message": "Yes, `\u0026CStr` is what I meant (`\u0026\u0027static CStr` to be even more specific).\n\nFor the match, I think you\u0027d have to use the verbose syntax\n```\nx if x \u003d\u003d PartitionName::Kernel.as_cstr() \u003d\u003e ...\n```\nbut the current implementation (sharing the byte arrays as `const`) is clean enough, IMO.",
+      "parentUuid": "cf2adb05_aa5af894",
       "range": {
         "startLine": 467,
         "startChar": 17,
