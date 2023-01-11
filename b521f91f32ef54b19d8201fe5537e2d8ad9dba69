@@ -16,6 +16,52 @@
       "message": "Nikita, can I get API review?",
       "revId": "b521f91f32ef54b19d8201fe5537e2d8ad9dba69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57c336f6_9966f4b5",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-11T11:30:48Z",
+      "side": 1,
+      "message": "s/redirect/capture/ here and below ?",
+      "range": {
+        "startLine": 899,
+        "startChar": 59,
+        "endLine": 899,
+        "endChar": 69
+      },
+      "revId": "b521f91f32ef54b19d8201fe5537e2d8ad9dba69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6493b59c_4220c46d",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-11T11:30:48Z",
+      "side": 1,
+      "message": "Sorry for the late comment:\n\nWe should say here that if you turn on output capture, you must consume data from getConsoleOutput \u0026 getLogOutput - because otherwise the code in the VM may get blocked when the pipe buffer fills up.\n\n(That\u0027s always been true, but we never actually said so.)",
+      "range": {
+        "startLine": 896,
+        "startChar": 0,
+        "endLine": 900,
+        "endChar": 6
+      },
+      "revId": "b521f91f32ef54b19d8201fe5537e2d8ad9dba69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
