@@ -18,9 +18,8 @@ package android.system.virtualizationservice;
 
 parcelable VirtualMachinePayloadConfig {
     /**
-     * Name of the payload executable file in the lib/<ABI> folder of an APK. The payload is in the
-     * form of a .so with a defined entry point; inside the VM this file is loaded and the entry
-     * function invoked.
+     * Path to the payload executable code in an APK. The code is in the form of a .so with a
+     * defined entry point; inside the VM this file is loaded and the entry function invoked.
      */
-    @utf8InCpp String payloadBinaryName;
+    @utf8InCpp String payloadPath;
 }

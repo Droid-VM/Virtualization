@@ -62,7 +62,7 @@ public final class VirtualMachineConfig {
     private static final String KEY_VERSION = "version";
     private static final String KEY_APKPATH = "apkPath";
     private static final String KEY_PAYLOADCONFIGPATH = "payloadConfigPath";
-    private static final String KEY_PAYLOADBINARYNAME = "payloadBinaryPath";
+    private static final String KEY_PAYLOADBINARYPATH = "payloadBinaryPath";
     private static final String KEY_DEBUGLEVEL = "debugLevel";
     private static final String KEY_PROTECTED_VM = "protectedVm";
     private static final String KEY_MEMORY_MIB = "memoryMib";
@@ -118,8 +118,10 @@ public final class VirtualMachineConfig {
      */
     @Nullable private final String mPayloadConfigPath;
 
-    /** Name of the payload binary file within the APK that will be executed within the VM. */
-    @Nullable private final String mPayloadBinaryName;
+    /**
+     * Path within the APK to the payload binary file that will be executed within the VM.
+     */
+    @Nullable private final String mPayloadBinaryPath;
 
     /** The size of storage in KiB. 0 indicates that encryptedStorage is not required */
     private final long mEncryptedStorageKib;
@@ -127,7 +129,7 @@ public final class VirtualMachineConfig {
     private VirtualMachineConfig(
             @NonNull String apkPath,
             @Nullable String payloadConfigPath,
-            @Nullable String payloadBinaryName,
+            @Nullable String payloadBinaryPath,
             @DebugLevel int debugLevel,
             boolean protectedVm,
             int memoryMib,
@@ -136,7 +138,7 @@ public final class VirtualMachineConfig {
         // This is only called from Builder.build(); the builder handles parameter validation.
         mApkPath = apkPath;
         mPayloadConfigPath = payloadConfigPath;
-        mPayloadBinaryName = payloadBinaryName;
+        mPayloadBinaryPath = payloadBinaryPath;
         mDebugLevel = debugLevel;
         mProtectedVm = protectedVm;
         mMemoryMib = memoryMib;
@@ -190,7 +192,7 @@ public final class VirtualMachineConfig {
 
         String payloadConfigPath = b.getString(KEY_PAYLOADCONFIGPATH);
         if (payloadConfigPath == null) {
-            builder.setPayloadBinaryName(b.getString(KEY_PAYLOADBINARYNAME));
+            builder.setPayloadBinaryPath(b.getString(KEY_PAYLOADBINARYPATH));
         } else {
             builder.setPayloadConfigPath(payloadConfigPath);
         }
@@ -229,7 +231,7 @@ public final class VirtualMachineConfig {
         b.putInt(KEY_VERSION, VERSION);
         b.putString(KEY_APKPATH, mApkPath);
         b.putString(KEY_PAYLOADCONFIGPATH, mPayloadConfigPath);
-        b.putString(KEY_PAYLOADBINARYNAME, mPayloadBinaryName);
+        b.putString(KEY_PAYLOADBINARYPATH, mPayloadBinaryPath);
         b.putInt(KEY_DEBUGLEVEL, mDebugLevel);
         b.putBoolean(KEY_PROTECTED_VM, mProtectedVm);
         b.putInt(KEY_NUM_CPUS, mNumCpus);
@@ -267,15 +269,15 @@ public final class VirtualMachineConfig {
     }
 
     /**
-     * Returns the name of the payload binary file, in the {@code lib/<ABI>} directory of the APK,
+     * Returns the path within the {@code lib/<ABI>} directory of the APK to the payload binary file
      * that will be executed within the VM.
      *
      * @hide
      */
     @SystemApi
     @Nullable
-    public String getPayloadBinaryName() {
-        return mPayloadBinaryName;
+    public String getPayloadBinaryPath() {
+        return mPayloadBinaryPath;
     }
 
     /**
@@ -360,7 +362,7 @@ public final class VirtualMachineConfig {
                 && this.mProtectedVm == other.mProtectedVm
                 && this.mEncryptedStorageKib == other.mEncryptedStorageKib
                 && Objects.equals(this.mPayloadConfigPath, other.mPayloadConfigPath)
-                && Objects.equals(this.mPayloadBinaryName, other.mPayloadBinaryName)
+                && Objects.equals(this.mPayloadBinaryPath, other.mPayloadBinaryPath)
                 && this.mApkPath.equals(other.mApkPath);
     }
 
@@ -374,9 +376,9 @@ public final class VirtualMachineConfig {
     VirtualMachineAppConfig toVsConfig() throws FileNotFoundException {
         VirtualMachineAppConfig vsConfig = new VirtualMachineAppConfig();
         vsConfig.apk = ParcelFileDescriptor.open(new File(mApkPath), MODE_READ_ONLY);
-        if (mPayloadBinaryName != null) {
+        if (mPayloadBinaryPath != null) {
             VirtualMachinePayloadConfig payloadConfig = new VirtualMachinePayloadConfig();
-            payloadConfig.payloadBinaryName = mPayloadBinaryName;
+            payloadConfig.payloadPath = mPayloadBinaryPath;
             vsConfig.payload =
                     VirtualMachineAppConfig.Payload.payloadConfig(payloadConfig);
         } else {
@@ -409,7 +411,7 @@ public final class VirtualMachineConfig {
         @Nullable private final Context mContext;
         @Nullable private String mApkPath;
         @Nullable private String mPayloadConfigPath;
-        @Nullable private String mPayloadBinaryName;
+        @Nullable private String mPayloadBinaryPath;
         @DebugLevel private int mDebugLevel = DEBUG_LEVEL_NONE;
         private boolean mProtectedVm;
         private boolean mProtectedVmSet;
@@ -453,14 +455,14 @@ public final class VirtualMachineConfig {
                 apkPath = mApkPath;
             }
 
-            if (mPayloadBinaryName == null) {
+            if (mPayloadBinaryPath == null) {
                 if (mPayloadConfigPath == null) {
-                    throw new IllegalStateException("setPayloadBinaryName must be called");
+                    throw new IllegalStateException("setPayloadBinaryPath must be called");
                 }
             } else {
                 if (mPayloadConfigPath != null) {
                     throw new IllegalStateException(
-                            "setPayloadBinaryName and setPayloadConfigPath may not both be called");
+                            "setPayloadBinaryPath and setPayloadConfigPath may not both be called");
                 }
             }
 
@@ -471,7 +473,7 @@ public final class VirtualMachineConfig {
             return new VirtualMachineConfig(
                     apkPath,
                     mPayloadConfigPath,
-                    mPayloadBinaryName,
+                    mPayloadBinaryPath,
                     mDebugLevel,
                     mProtectedVm,
                     mMemoryMib,
@@ -513,23 +515,16 @@ public final class VirtualMachineConfig {
         }
 
         /**
-         * Sets the name of the payload binary file that will be executed within the VM, e.g.
-         * "payload.so". The file must reside in the {@code lib/<ABI>} directory of the APK.
-         *
-         * <p>Note that VMs only support 64-bit code, even if the owning app is running as a 32-bit
-         * process.
+         * Sets the path within the {@code lib/<ABI>} directory of the APK to the payload binary
+         * file that will be executed within the VM.
          *
          * @hide
          */
         @SystemApi
         @NonNull
-        public Builder setPayloadBinaryName(@NonNull String payloadBinaryName) {
-            if (payloadBinaryName.contains(File.separator)) {
-                throw new IllegalArgumentException(
-                        "Invalid binary file name: " + payloadBinaryName);
-            }
-            mPayloadBinaryName =
-                    requireNonNull(payloadBinaryName, "payloadBinaryName must not be null");
+        public Builder setPayloadBinaryPath(@NonNull String payloadBinaryPath) {
+            mPayloadBinaryPath =
+                    requireNonNull(payloadBinaryPath, "payloadBinaryPath must not be null");
             return this;
         }
 

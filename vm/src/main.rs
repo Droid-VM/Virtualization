@@ -51,10 +51,9 @@ enum Opt {
         #[clap(long)]
         config_path: Option<String>,
 
-        /// Name of VM payload binary within APK (e.g. MicrodroidTestNativeLib.so)
+        /// Path to VM payload binary within APK (e.g. MicrodroidTestNativeLib.so)
         #[clap(long)]
-        #[clap(alias = "payload_path")]
-        payload_binary_name: Option<String>,
+        payload_path: Option<String>,
 
         /// Name of VM
         #[clap(long)]
@@ -259,7 +258,7 @@ fn main() -> Result<(), Error> {
             storage,
             storage_size,
             config_path,
-            payload_binary_name,
+            payload_path,
             daemonize,
             console,
             log,
@@ -278,7 +277,7 @@ fn main() -> Result<(), Error> {
             storage.as_deref(),
             storage_size,
             config_path,
-            payload_binary_name,
+            payload_path,
             daemonize,
             console.as_deref(),
             log.as_deref(),

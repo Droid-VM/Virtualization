@@ -194,7 +194,7 @@ fn make_metadata_file(
 ) -> Result<ParcelFileDescriptor> {
     let payload_metadata = match &app_config.payload {
         Payload::PayloadConfig(payload_config) => PayloadMetadata::config(PayloadConfig {
-            payload_binary_name: payload_config.payloadBinaryName.clone(),
+            payload_binary_path: payload_config.payloadPath.clone(),
             ..Default::default()
         }),
         Payload::ConfigPath(config_path) => {
