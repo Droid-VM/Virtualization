@@ -93,6 +93,30 @@
       },
       "revId": "6d52c5724503659535312c32900ab0c5f86d8f49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c05b85b0_5d3defa5",
+        "filename": "virtualizationservice/src/virtmgr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-11T07:43:15Z",
+      "side": 1,
+      "message": "Yeah, I missed that users wouldn\u0027t be able to have the VMM object on a device without virt APEX. Then yes, this is a config error.",
+      "parentUuid": "5a96d10a_a10a3e4e",
+      "range": {
+        "startLine": 114,
+        "startChar": 8,
+        "endLine": 114,
+        "endChar": 13
+      },
+      "revId": "6d52c5724503659535312c32900ab0c5f86d8f49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
