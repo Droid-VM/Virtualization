@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad634d23_e8196e59",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-11T12:27:44Z",
+      "side": 1,
+      "message": "So I think my confusion comes from having the description in a different order to the flow. And the guarantee that we\u0027re running the correct pvmfw is necessary for pvmfw to be able to do its job. It\u0027s partly a passive/active thing - \"by being the very first code\" is begging the question of who is doing that.\n\nSo I would say something along the lines of \"To address these concerns the hypervisor \u003csecurely loads pvmfw and starts it\u003e and then pvmfw \u003cdoes useful \u0026 important stuff\u003e.\"\n\nBut this is all stylistic, feel free to ignore.",
+      "parentUuid": "21019603_bd668159",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 51
+      },
+      "revId": "dfcab85b4a0383ebf87c98909ee73cbec781e040",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c5848208_dbd29dbd",
         "filename": "pvmfw/README.md",
         "patchSetId": 1
