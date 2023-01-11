@@ -29,6 +29,7 @@ const MICRODROID_KERNEL_IMG_PATH: &str = "microdroid_kernel";
 const INITRD_NORMAL_IMG_PATH: &str = "microdroid_initrd_normal.img";
 const INITRD_DEBUG_IMG_PATH: &str = "microdroid_initrd_debuggable.img";
 const TEST_IMG_WITH_ONE_HASHDESC_PATH: &str = "test_image_with_one_hashdesc.img";
+const TEST_IMG_WITH_NON_INITRD_HASHDESC_PATH: &str = "test_image_with_non_initrd_hashdesc.img";
 const UNSIGNED_TEST_IMG_PATH: &str = "unsigned_test.img";
 
 const PUBLIC_KEY_RSA2048_PATH: &str = "data/testkey_rsa2048_pub.bin";
@@ -64,8 +65,26 @@ fn payload_expecting_no_initrd_passes_verification_with_no_initrd() -> Result<()
     Ok(())
 }
 
-// TODO(b/256148034): Test that kernel with two hashdesc and no initrd fails verification.
-// e.g. payload_expecting_initrd_fails_verification_with_no_initrd
+#[test]
+fn payload_with_non_initrd_descriptor_passes_verification_with_no_initrd() -> Result<()> {
+    let kernel = fs::read(TEST_IMG_WITH_NON_INITRD_HASHDESC_PATH)?;
+    let public_key = fs::read(PUBLIC_KEY_RSA4096_PATH)?;
+
+    assert_eq!(Ok(()), verify_payload(&kernel, None, &public_key));
+    Ok(())
+}
+
+#[test]
+fn payload_expecting_initrd_fails_verification_with_no_initrd() -> Result<()> {
+    let kernel = load_latest_signed_kernel()?;
+    let public_key = fs::read(PUBLIC_KEY_RSA4096_PATH)?;
+
+    assert_eq!(
+        Err(AvbSlotVerifyError::InvalidMetadata),
+        verify_payload(&kernel, None, &public_key)
+    );
+    Ok(())
+}
 
 #[test]
 fn payload_with_empty_public_key_fails_verification() -> Result<()> {
