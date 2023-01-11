@@ -652,6 +652,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @Test
     @CddTest(requirements = {"9.17/C-1-1", "9.17/C-1-2", "9.17/C/1-3"})
     public void testMicrodroidBoots() throws Exception {
+        CommandRunner android = new CommandRunner(getDevice());
+
         final String configPath = "assets/vm_config.json"; // path inside the APK
         mMicrodroidDevice =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
@@ -661,6 +663,10 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         .build(getAndroidDevice());
         mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
         CommandRunner microdroid = new CommandRunner(mMicrodroidDevice);
+
+        String uid = android.run("id -u");
+        String vmList = android.run("/apex/com.android.virt/bin/vm list");
+        assertThat(vmList).contains("requesterUidx: " + uid);
 
         // Test writing to /data partition
         microdroid.run("echo MicrodroidTest > /data/local/tmp/test.txt");
