@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3090a7a8_9ab9f3b0",
+        "filename": "authfs/TEST_MAPPING",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-11T11:58:36Z",
+      "side": 1,
+      "message": "Are the other tests you\u0027re adding also covered by TEST_MAPPING files?\n\n(A lot of tests are just added to the root packages/modules/Virtualization/TEST_MAPPING file)\n\naosp/2377180 recently fixed a bunch of tests which we weren\u0027t actually running.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 5
+      },
+      "revId": "2adb1f394eb4dfa62d39df78ac40431ecb171cdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
