@@ -136,6 +136,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25237c79_58ec06ea",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-11T15:22:45Z",
+      "side": 1,
+      "message": "FWIW I\u0027m not totally convinced by this. We\u0027ve tended to bias towards VME for most things (except for really obvious caller failures like passing invalid port numbers to the config builder).\n\nAnd that includes state-related things like trying to start a running VM.",
+      "parentUuid": "f0449d8a_ff5b39e8",
+      "range": {
+        "startLine": 912,
+        "startChar": 22,
+        "endLine": 912,
+        "endChar": 45
+      },
+      "revId": "b521f91f32ef54b19d8201fe5537e2d8ad9dba69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd085763_db3d736f",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
         "patchSetId": 10
