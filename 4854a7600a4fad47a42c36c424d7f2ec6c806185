@@ -261,6 +261,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58dc10a0_836296d7",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2023-01-11T09:08:16Z",
+      "side": 1,
+      "message": "If there are multiple authorities then it will have to capture them all e.g. with a hash. If there\u0027s a single authority for all the images then it can just be that one e.g. if all the images were verified from the same vbmeta then the vbmeta public key (or a hash of it )would work.",
+      "parentUuid": "6ce25706_d735db8b",
+      "range": {
+        "startLine": 190,
+        "startChar": 14,
+        "endLine": 190,
+        "endChar": 25
+      },
+      "revId": "4854a7600a4fad47a42c36c424d7f2ec6c806185",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59e6d551_7f1d3369",
         "filename": "pvmfw/README.md",
         "patchSetId": 1
