@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0175df0_ce3cc1d9",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-11T15:08:58Z",
+      "side": 1,
+      "message": "nit: {@link VirtualMachineConfig}?",
+      "range": {
+        "startLine": 898,
+        "startChar": 47,
+        "endLine": 898,
+        "endChar": 67
+      },
+      "revId": "b521f91f32ef54b19d8201fe5537e2d8ad9dba69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57c336f6_9966f4b5",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 10
@@ -59,6 +82,168 @@
         "startChar": 0,
         "endLine": 900,
         "endChar": 6
+      },
+      "revId": "b521f91f32ef54b19d8201fe5537e2d8ad9dba69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6fb4341_fbb9fb63",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 900,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-11T15:08:58Z",
+      "side": 1,
+      "message": "+1 on documenting, as this is an unexpected behaviour",
+      "parentUuid": "6493b59c_4220c46d",
+      "range": {
+        "startLine": 896,
+        "startChar": 0,
+        "endLine": 900,
+        "endChar": 6
+      },
+      "revId": "b521f91f32ef54b19d8201fe5537e2d8ad9dba69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0449d8a_ff5b39e8",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-11T15:08:58Z",
+      "side": 1,
+      "message": "nit: this looks more like a IllegalStateException rather than VirtualMachineException.\n\nditt for the getLogOutput below.",
+      "range": {
+        "startLine": 912,
+        "startChar": 22,
+        "endLine": 912,
+        "endChar": 45
+      },
+      "revId": "b521f91f32ef54b19d8201fe5537e2d8ad9dba69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd085763_db3d736f",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-11T15:08:58Z",
+      "side": 1,
+      "message": "nit: {@code false}",
+      "range": {
+        "startLine": 670,
+        "startChar": 92,
+        "endLine": 670,
+        "endChar": 97
+      },
+      "revId": "b521f91f32ef54b19d8201fe5537e2d8ad9dba69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9c3acc1_d768a8a3",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-11T15:08:58Z",
+      "side": 1,
+      "message": "nit: the app",
+      "range": {
+        "startLine": 673,
+        "startChar": 87,
+        "endLine": 673,
+        "endChar": 91
+      },
+      "revId": "b521f91f32ef54b19d8201fe5537e2d8ad9dba69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7834c359_dc6fc3d5",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-11T15:08:58Z",
+      "side": 1,
+      "message": "nit: to {@code true}",
+      "range": {
+        "startLine": 673,
+        "startChar": 68,
+        "endLine": 673,
+        "endChar": 75
+      },
+      "revId": "b521f91f32ef54b19d8201fe5537e2d8ad9dba69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6df9fca_879cce55",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-11T15:08:58Z",
+      "side": 1,
+      "message": "nit: them? outputs sounds a little bit strange here",
+      "range": {
+        "startLine": 675,
+        "startChar": 74,
+        "endLine": 675,
+        "endChar": 81
+      },
+      "revId": "b521f91f32ef54b19d8201fe5537e2d8ad9dba69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a519d8b_f477beea",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-11T15:08:58Z",
+      "side": 1,
+      "message": "nit {linkplan DEBUG_LEVEL_FULL FULL}",
+      "range": {
+        "startLine": 678,
+        "startChar": 66,
+        "endLine": 678,
+        "endChar": 70
       },
       "revId": "b521f91f32ef54b19d8201fe5537e2d8ad9dba69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
