@@ -16,6 +16,115 @@
       "message": "Hello Pierre, PTAL.",
       "revId": "075c150236f6bdb6a8e4d8eb1268b853a91fd32d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55fefce3_c55552dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-11T14:42:36Z",
+      "side": 1,
+      "message": "Neat approach!",
+      "revId": "075c150236f6bdb6a8e4d8eb1268b853a91fd32d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d98d5fe_d9205796",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-11T14:42:36Z",
+      "side": 1,
+      "message": "Should we move these inside the scope of `PartitionTag`?",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 359,
+        "endChar": 61
+      },
+      "revId": "075c150236f6bdb6a8e4d8eb1268b853a91fd32d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "793b4b2e_eccb7501",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-11T14:42:36Z",
+      "side": 1,
+      "message": "Why not `Name`?",
+      "range": {
+        "startLine": 362,
+        "startChar": 14,
+        "endLine": 362,
+        "endChar": 17
+      },
+      "revId": "075c150236f6bdb6a8e4d8eb1268b853a91fd32d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d159931_7ff6675a",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-11T14:42:36Z",
+      "side": 1,
+      "message": "Make this a `CStr` so that we don\u0027t hide an `unsafe` (where the assumption is quite questionable) inside of a conversion method?",
+      "range": {
+        "startLine": 371,
+        "startChar": 39,
+        "endLine": 371,
+        "endChar": 45
+      },
+      "revId": "075c150236f6bdb6a8e4d8eb1268b853a91fd32d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a8f1561_9bafb370",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-11T14:42:36Z",
+      "side": 1,
+      "message": "Why not `impl From\u003cPartitionName\u003e for CStr` and declare\n```\nlet requested_partitions \u003d [PartitionName::Kernel.into()];\n```\n? You could then even use its `.into()` to get the reference values for the `match` inside `try_from`?",
+      "range": {
+        "startLine": 467,
+        "startChar": 17,
+        "endLine": 467,
+        "endChar": 75
+      },
+      "revId": "075c150236f6bdb6a8e4d8eb1268b853a91fd32d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
