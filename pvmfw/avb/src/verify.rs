@@ -459,6 +459,7 @@ mod tests {
 
     const MICRODROID_KERNEL_IMG_PATH: &str = "microdroid_kernel";
     const INITRD_NORMAL_IMG_PATH: &str = "microdroid_initrd_normal.img";
+    const INITRD_DEBUG_IMG_PATH: &str = "microdroid_initrd_debuggable.img";
     const TEST_IMG_WITH_ONE_HASHDESC_PATH: &str = "test_image_with_one_hashdesc.img";
     const UNSIGNED_TEST_IMG_PATH: &str = "unsigned_test.img";
 
@@ -469,12 +470,22 @@ mod tests {
     /// This test uses the Microdroid payload compiled on the fly to check that
     /// the latest payload can be verified successfully.
     #[test]
-    fn latest_valid_payload_passes_verification() -> Result<()> {
+    fn latest_normal_payload_passes_verification() -> Result<()> {
         let kernel = load_latest_signed_kernel()?;
-        let initrd_normal = fs::read(INITRD_NORMAL_IMG_PATH)?;
+        let initrd_normal = load_latest_initrd_normal()?;
         let public_key = fs::read(PUBLIC_KEY_RSA4096_PATH)?;
 
         assert_eq!(Ok(()), verify_payload(&kernel, Some(&initrd_normal[..]), &public_key));
+        Ok(())
+    }
+
+    #[test]
+    fn latest_debug_payload_passes_verification() -> Result<()> {
+        let kernel = load_latest_signed_kernel()?;
+        let initrd_debug = load_latest_initrd_debug()?;
+        let public_key = fs::read(PUBLIC_KEY_RSA4096_PATH)?;
+
+        assert_eq!(Ok(()), verify_payload(&kernel, Some(&initrd_debug[..]), &public_key));
         Ok(())
     }
 
@@ -573,5 +584,9 @@ mod tests {
 
     fn load_latest_initrd_normal() -> Result<Vec<u8>> {
         Ok(fs::read(INITRD_NORMAL_IMG_PATH)?)
+    }
+
+    fn load_latest_initrd_debug() -> Result<Vec<u8>> {
+        Ok(fs::read(INITRD_DEBUG_IMG_PATH)?)
     }
 }
