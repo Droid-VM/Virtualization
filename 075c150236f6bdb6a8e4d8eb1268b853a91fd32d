@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7506b89_42f114d0",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-11T15:24:43Z",
+      "side": 1,
+      "message": "Sure",
+      "parentUuid": "0d98d5fe_d9205796",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 359,
+        "endChar": 61
+      },
+      "revId": "075c150236f6bdb6a8e4d8eb1268b853a91fd32d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "793b4b2e_eccb7501",
@@ -71,6 +95,30 @@
       "writtenOn": "2023-01-11T14:42:36Z",
       "side": 1,
       "message": "Why not `Name`?",
+      "range": {
+        "startLine": 362,
+        "startChar": 14,
+        "endLine": 362,
+        "endChar": 17
+      },
+      "revId": "075c150236f6bdb6a8e4d8eb1268b853a91fd32d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71cc9e88_2ba0e772",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-11T15:24:43Z",
+      "side": 1,
+      "message": "Because they are not exactly name? I don\u0027t have a strong opinion on this. I can change it to name.",
+      "parentUuid": "793b4b2e_eccb7501",
       "range": {
         "startLine": 362,
         "startChar": 14,
@@ -104,6 +152,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0033e8a_7f9af305",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-11T15:24:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d159931_7ff6675a",
+      "range": {
+        "startLine": 371,
+        "startChar": 39,
+        "endLine": 371,
+        "endChar": 45
+      },
+      "revId": "075c150236f6bdb6a8e4d8eb1268b853a91fd32d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a8f1561_9bafb370",
@@ -117,6 +189,30 @@
       "writtenOn": "2023-01-11T14:42:36Z",
       "side": 1,
       "message": "Why not `impl From\u003cPartitionName\u003e for CStr` and declare\n```\nlet requested_partitions \u003d [PartitionName::Kernel.into()];\n```\n? You could then even use its `.into()` to get the reference values for the `match` inside `try_from`?",
+      "range": {
+        "startLine": 467,
+        "startChar": 17,
+        "endLine": 467,
+        "endChar": 75
+      },
+      "revId": "075c150236f6bdb6a8e4d8eb1268b853a91fd32d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf2adb05_aa5af894",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-11T15:24:43Z",
+      "side": 1,
+      "message": "I\u0027m not sure how to build `CStr` instead of `\u0026CStr`. If to implement `impl From\u003cPartitionName\u003e for \u0026CStr`, then we hit the lifetime issue here.\n\nI implemented instead `as_cstr()` inside `PartitionName`. Just that cannot be used inside the `match` with the following error:\n\n```\nerror: expected one of `!`, `(`, `...`, `..\u003d`, `..`, `::`, `\u003d\u003e`, `if`, `{`, or `|`, found `.`\n   --\u003e /usr/local/google/home/aliceywang/codes/aosp/packages/modules/Virtualization/pvmfw/avb/src/verify.rs:384:34\n    |\n384 |             PartitionName::Kernel.as_cstr() \u003d\u003e Ok(Self::Kernel),\n    |                                  ^ expected one of 10 possible tokens\n```",
+      "parentUuid": "9a8f1561_9bafb370",
       "range": {
         "startLine": 467,
         "startChar": 17,
