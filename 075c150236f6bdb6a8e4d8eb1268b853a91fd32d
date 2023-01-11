@@ -153,6 +153,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4da9242d_6579e6ef",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-11T17:51:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7e9328d5_cfe24e28",
+      "range": {
+        "startLine": 362,
+        "startChar": 14,
+        "endLine": 362,
+        "endChar": 17
+      },
+      "revId": "075c150236f6bdb6a8e4d8eb1268b853a91fd32d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d159931_7ff6675a",
@@ -261,6 +285,30 @@
       "side": 1,
       "message": "Yes, `\u0026CStr` is what I meant (`\u0026\u0027static CStr` to be even more specific).\n\nFor the match, I think you\u0027d have to use the verbose syntax\n```\nx if x \u003d\u003d PartitionName::Kernel.as_cstr() \u003d\u003e ...\n```\nbut the current implementation (sharing the byte arrays as `const`) is clean enough, IMO.",
       "parentUuid": "cf2adb05_aa5af894",
+      "range": {
+        "startLine": 467,
+        "startChar": 17,
+        "endLine": 467,
+        "endChar": 75
+      },
+      "revId": "075c150236f6bdb6a8e4d8eb1268b853a91fd32d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f3165cd_2b89606b",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-11T17:51:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "08833d38_af83381a",
       "range": {
         "startLine": 467,
         "startChar": 17,
