@@ -15,12 +15,13 @@
 //! This module handles the pvmfw payload verification.
 
 use avb_bindgen::{
-    avb_slot_verify, AvbHashtreeErrorMode, AvbIOResult, AvbOps, AvbSlotVerifyFlags,
-    AvbSlotVerifyResult,
+    avb_descriptor_get_all, avb_slot_verify, AvbHashtreeErrorMode, AvbIOResult, AvbOps,
+    AvbSlotVerifyData, AvbSlotVerifyFlags, AvbSlotVerifyResult,
 };
 use core::{
     ffi::{c_char, c_void, CStr},
     fmt,
+    mem::MaybeUninit,
     ptr::{self, NonNull},
     slice,
 };
@@ -378,6 +379,18 @@ impl<'a> Payload<'a> {
 
     const MAX_NUM_OF_HASH_DESCRIPTORS: usize = 3;
 
+    const EXPECTED_NUM_OF_VBMETA: usize = 1;
+    const EXPECTED_NUM_OF_HASH_DESCRIPTORS_WITHOUT_INITRD: usize = 1;
+    const EXPECTED_NUM_OF_HASH_DESCRIPTORS_WITH_INITRD: usize = 3;
+
+    fn expected_num_of_hash_descriptors(&self) -> usize {
+        if self.initrd.is_none() {
+            Self::EXPECTED_NUM_OF_HASH_DESCRIPTORS_WITHOUT_INITRD
+        } else {
+            Self::EXPECTED_NUM_OF_HASH_DESCRIPTORS_WITH_INITRD
+        }
+    }
+
     fn get_partition(&self, partition_name: *const c_char) -> Result<&[u8], AvbIOError> {
         is_not_null(partition_name)?;
         // SAFETY: It is safe as the raw pointer `partition_name` is a nonnull pointer.
@@ -391,7 +404,10 @@ impl<'a> Payload<'a> {
         }
     }
 
-    fn verify_partitions(&mut self, partition_names: &[&CStr]) -> Result<(), AvbImageVerifyError> {
+    fn verify_partitions(
+        &mut self,
+        partition_names: &[&CStr],
+    ) -> Result<&'a AvbSlotVerifyData, AvbImageVerifyError> {
         if partition_names.len() > Self::MAX_NUM_OF_HASH_DESCRIPTORS {
             return Err(AvbImageVerifyError::InvalidArgument);
         }
@@ -419,7 +435,7 @@ impl<'a> Payload<'a> {
             validate_public_key_for_partition: Some(validate_public_key_for_partition),
         };
         let ab_suffix = CStr::from_bytes_with_nul(NULL_BYTE).unwrap();
-        let out_data = ptr::null_mut();
+        let mut out_data = MaybeUninit::uninit();
         // SAFETY: It is safe to call `avb_slot_verify()` as the pointer arguments (`ops`,
         // `requested_partitions` and `ab_suffix`) passed to the method are all valid and
         // initialized. The last argument `out_data` is allowed to be null so that nothing
@@ -431,10 +447,44 @@ impl<'a> Payload<'a> {
                 ab_suffix.as_ptr(),
                 AvbSlotVerifyFlags::AVB_SLOT_VERIFY_FLAGS_NO_VBMETA_PARTITION,
                 AvbHashtreeErrorMode::AVB_HASHTREE_ERROR_MODE_RESTART_AND_INVALIDATE,
-                out_data,
+                out_data.as_mut_ptr(),
             )
         };
-        to_avb_verify_result(result)
+        to_avb_verify_result(result)?;
+        // SAFETY: This is safe because `out_data` has been properly initialized after
+        // calling `avb_slot_verify` and it returns OK.
+        let out_data = unsafe { out_data.assume_init() };
+        let out_data = to_nonnull(out_data).map_err(|_| AvbImageVerifyError::Io)?;
+        // SAFETY: It is safe as the raw pointer `out_data` is a nonnull pointer.
+        let out_data = unsafe { out_data.as_ref() };
+        Ok(out_data)
+    }
+
+    fn verify_vbmeta(&self, verify_result: &AvbSlotVerifyData) -> Result<(), AvbImageVerifyError> {
+        if verify_result.num_vbmeta_images != Self::EXPECTED_NUM_OF_VBMETA {
+            return Err(AvbImageVerifyError::InvalidMetadata);
+        }
+        is_not_null(verify_result.vbmeta_images).map_err(|_| AvbImageVerifyError::Io)?;
+        // SAFETY: It is safe as the raw pointer `verify_result.vbmeta_images` is a nonnull pointer.
+        let vbmeta_images = unsafe {
+            slice::from_raw_parts(verify_result.vbmeta_images, verify_result.num_vbmeta_images)
+        };
+        let vbmeta_image = vbmeta_images[0];
+        let mut out_num_descriptors = 0;
+        is_not_null(vbmeta_image.vbmeta_data).map_err(|_| AvbImageVerifyError::Io)?;
+        // SAFETY: It is safe as the raw pointer `vbmeta_image.vbmeta_data` is a nonnull pointer
+        // and `out_num_descriptors` is also valid.
+        unsafe {
+            avb_descriptor_get_all(
+                vbmeta_image.vbmeta_data,
+                vbmeta_image.vbmeta_size,
+                &mut out_num_descriptors,
+            );
+        }
+        if self.expected_num_of_hash_descriptors() != out_num_descriptors {
+            return Err(AvbImageVerifyError::InvalidMetadata);
+        }
+        Ok(())
     }
 }
 
@@ -447,7 +497,11 @@ pub fn verify_payload(
     let mut payload = Payload { kernel, initrd, trusted_public_key };
     let kernel = CStr::from_bytes_with_nul(Payload::KERNEL_PARTITION_NAME).unwrap();
     let requested_partitions = [kernel];
-    payload.verify_partitions(&requested_partitions)
+    let verify_result = match payload.verify_partitions(&requested_partitions) {
+        Err(e) => return Err(e),
+        Ok(result) => result,
+    };
+    payload.verify_vbmeta(verify_result)
 }
 
 #[cfg(test)]
@@ -471,7 +525,7 @@ mod tests {
     #[test]
     fn latest_valid_payload_passes_verification() -> Result<()> {
         let kernel = load_latest_signed_kernel()?;
-        let initrd_normal = fs::read(INITRD_NORMAL_IMG_PATH)?;
+        let initrd_normal = load_latest_initrd_normal()?;
         let public_key = fs::read(PUBLIC_KEY_RSA4096_PATH)?;
 
         assert_eq!(Ok(()), verify_payload(&kernel, Some(&initrd_normal[..]), &public_key));
@@ -487,8 +541,17 @@ mod tests {
         Ok(())
     }
 
-    // TODO(b/256148034): Test that kernel with two hashdesc and no initrd fails verification.
-    // e.g. payload_expecting_initrd_fails_verification_with_no_initrd
+    #[test]
+    fn payload_expecting_initrd_fails_verification_with_no_initrd() -> Result<()> {
+        let kernel = load_latest_signed_kernel()?;
+        let public_key = fs::read(PUBLIC_KEY_RSA4096_PATH)?;
+
+        assert_eq!(
+            Err(AvbImageVerifyError::InvalidMetadata),
+            verify_payload(&kernel, None, &public_key)
+        );
+        Ok(())
+    }
 
     #[test]
     fn payload_with_empty_public_key_fails_verification() -> Result<()> {
