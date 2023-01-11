@@ -19,7 +19,7 @@
 //! specified numbers in the child process.
 
 use anyhow::{bail, Context, Result};
-use clap::{parser::ValuesRef, Arg, ArgAction};
+use clap::{App, Arg, Values};
 use command_fds::{CommandFdExt, FdMapping};
 use log::{debug, error};
 use std::fs::OpenOptions;
@@ -51,7 +51,7 @@ struct Args {
 }
 
 fn parse_and_create_file_mapping<F>(
-    values: Option<ValuesRef<'_, String>>,
+    values: Option<Values<'_>>,
     opener: F,
 ) -> Result<Vec<OwnedFdMapping>>
 where
@@ -75,35 +75,35 @@ where
     }
 }
 
-#[rustfmt::skip]
-fn args_command() -> clap::Command {
-    clap::Command::new("open_then_run")
-        .arg(Arg::new("open-ro")
+fn parse_args() -> Result<Args> {
+    #[rustfmt::skip]
+    let matches = App::new("open_then_run")
+        .arg(Arg::with_name("open-ro")
              .long("open-ro")
              .value_name("FD:PATH")
              .help("Open <PATH> read-only to pass as fd <FD>")
-             .action(ArgAction::Append))
-        .arg(Arg::new("open-rw")
+             .multiple(true)
+             .number_of_values(1))
+        .arg(Arg::with_name("open-rw")
              .long("open-rw")
              .value_name("FD:PATH")
              .help("Open/create <PATH> read-write to pass as fd <FD>")
-             .action(ArgAction::Append))
-        .arg(Arg::new("open-dir")
+             .multiple(true)
+             .number_of_values(1))
+        .arg(Arg::with_name("open-dir")
              .long("open-dir")
              .value_name("FD:DIR")
              .help("Open <DIR> to pass as fd <FD>")
-             .action(ArgAction::Append))
-        .arg(Arg::new("args")
+             .multiple(true)
+             .number_of_values(1))
+        .arg(Arg::with_name("args")
              .help("Command line to execute with pre-opened FD inherited")
              .last(true)
              .required(true)
-             .num_args(0..))
-}
+             .multiple(true))
+        .get_matches();
 
-fn parse_args() -> Result<Args> {
-    let matches = args_command().get_matches();
-
-    let ro_file_fds = parse_and_create_file_mapping(matches.get_many("open-ro"), |path| {
+    let ro_file_fds = parse_and_create_file_mapping(matches.values_of("open-ro"), |path| {
         Ok(OwnedFd::from(
             OpenOptions::new()
                 .read(true)
@@ -112,7 +112,7 @@ fn parse_args() -> Result<Args> {
         ))
     })?;
 
-    let rw_file_fds = parse_and_create_file_mapping(matches.get_many("open-rw"), |path| {
+    let rw_file_fds = parse_and_create_file_mapping(matches.values_of("open-rw"), |path| {
         Ok(OwnedFd::from(
             OpenOptions::new()
                 .read(true)
@@ -123,7 +123,7 @@ fn parse_args() -> Result<Args> {
         ))
     })?;
 
-    let dir_fds = parse_and_create_file_mapping(matches.get_many("open-dir"), |path| {
+    let dir_fds = parse_and_create_file_mapping(matches.values_of("open-dir"), |path| {
         Ok(OwnedFd::from(
             OpenOptions::new()
                 .custom_flags(libc::O_DIRECTORY)
@@ -133,8 +133,7 @@ fn parse_args() -> Result<Args> {
         ))
     })?;
 
-    let cmdline_args: Vec<_> =
-        matches.get_many::<String>("args").unwrap().map(|s| s.to_string()).collect();
+    let cmdline_args: Vec<_> = matches.values_of("args").unwrap().map(|s| s.to_string()).collect();
 
     Ok(Args { ro_file_fds, rw_file_fds, dir_fds, cmdline_args })
 }
@@ -167,16 +166,5 @@ fn main() {
     if let Err(e) = try_main() {
         error!("Failed with {:?}", e);
         std::process::exit(1);
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn verify_command() {
-        // Check that the command parsing has been configured in a valid way.
-        args_command().debug_assert();
     }
 }

@@ -23,7 +23,7 @@
 
 use anyhow::{bail, Context, Result};
 use apkverify::{HashAlgorithm, V4Signature};
-use clap::{arg, Arg, ArgAction, Command};
+use clap::{App, Arg};
 use dm::loopdevice;
 use dm::util;
 use dm::verity::{DmVerityHashAlgorithm, DmVerityTargetBuilder};
@@ -34,12 +34,22 @@ use std::os::unix::fs::FileTypeExt;
 use std::path::{Path, PathBuf};
 
 fn main() -> Result<()> {
-    let matches = clap_command().get_matches();
+    let matches = App::new("apkdmverity")
+        .about("Creates a dm-verity block device out of APK signed with APK signature scheme V4.")
+        .arg(Arg::from_usage(
+            "--apk... <apk_path> <idsig_path> <name> <root_hash> \
+                            'Input APK file, idsig file, name of the block device, and root hash. \
+                            The APK file must be signed using the APK signature scheme 4. The \
+                            block device is created at \"/dev/mapper/<name>\".' root_hash is \
+                            optional; idsig file's root hash will be used if specified as \"none\"."
+            ))
+        .arg(Arg::with_name("verbose").short('v').long("verbose").help("Shows verbose output"))
+        .get_matches();
 
-    let apks = matches.get_many::<String>("apk").unwrap();
+    let apks = matches.values_of("apk").unwrap();
     assert!(apks.len() % 4 == 0);
 
-    let verbose = matches.get_flag("verbose");
+    let verbose = matches.is_present("verbose");
 
     for (apk, idsig, name, roothash) in apks.tuples() {
         let roothash = if roothash != "none" {
@@ -56,28 +66,6 @@ fn main() -> Result<()> {
         }
     }
     Ok(())
-}
-
-fn clap_command() -> Command {
-    Command::new("apkdmverity")
-        .about("Creates a dm-verity block device out of APK signed with APK signature scheme V4.")
-        .arg(
-            arg!(--apk ...
-                "Input APK file, idsig file, name of the block device, and root hash. \
-                The APK file must be signed using the APK signature scheme 4. The \
-                block device is created at \"/dev/mapper/<name>\".' root_hash is \
-                optional; idsig file's root hash will be used if specified as \"none\"."
-            )
-            .action(ArgAction::Append)
-            .value_names(&["apk_path", "idsig_path", "name", "root_hash"]),
-        )
-        .arg(
-            Arg::new("verbose")
-                .short('v')
-                .long("verbose")
-                .action(ArgAction::SetTrue)
-                .help("Shows verbose output"),
-        )
 }
 
 struct VerityResult {
@@ -391,11 +379,5 @@ mod tests {
                 assert_eq!(verity.as_slice(), original.as_slice());
             },
         );
-    }
-
-    #[test]
-    fn verify_command() {
-        // Check that the command parsing has been configured in a valid way.
-        clap_command().debug_assert();
     }
 }

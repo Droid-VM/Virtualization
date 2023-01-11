@@ -20,8 +20,8 @@ rust_library {
     defaults: ["libavmd_defaults"],
 }
 
-rust_defaults {
-    name: "avmdtool.defaults",
+rust_binary {
+    name: "avmdtool",
     srcs: ["src/main.rs"],
     host_supported: true,
     prefer_rlib: true,
@@ -35,17 +35,6 @@ rust_defaults {
         "libserde_cbor",
         "libvbmeta_rust",
     ],
-}
-
-rust_binary {
-    name: "avmdtool",
-    defaults: ["avmdtool.defaults"],
-}
-
-rust_test {
-    name: "avmdtool.test",
-    defaults: ["avmdtool.defaults"],
-    test_suites: ["general-tests"],
 }
 
 rust_test {

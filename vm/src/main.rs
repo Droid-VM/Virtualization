@@ -387,11 +387,10 @@ fn command_info() -> Result<(), Error> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use clap::CommandFactory;
+    use clap::IntoApp;
 
     #[test]
     fn verify_app() {
-        // Check that the command parsing has been configured in a valid way.
-        Opt::command().debug_assert();
+        Opt::into_app().debug_assert();
     }
 }
