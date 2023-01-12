@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e723552_4514c21f",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-12T12:25:24Z",
+      "side": 1,
+      "message": "libavb hardcoded the names vbmeta[3] and boot[2]. So we don\u0027t need to pass `boot` every time. That\u0027s how [1] works.\n\n[1] https://r.android.com/c/platform/packages/modules/Virtualization/+/2383899/3/pvmfw/avb/src/verify.rs \u003e Check verify_payload\n[2] https://cs.android.com/android/platform/superproject/+/master:external/avb/libavb/avb_slot_verify.c;l\u003d720;drc\u003dc0debbfd55f08a755b006550779c23e707d30b6d\n[3] https://cs.android.com/android/platform/superproject/+/master:external/avb/libavb/avb_slot_verify.c;l\u003d1495;drc\u003dc0debbfd55f08a755b006550779c23e707d30b6d",
+      "parentUuid": "cc18b489_1e772a6c",
+      "range": {
+        "startLine": 438,
+        "startChar": 16,
+        "endLine": 438,
+        "endChar": 24
+      },
+      "revId": "d12aed6b1db02c7cbead781ca8876c11fe24fd18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09cde811_e625b681",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 7
