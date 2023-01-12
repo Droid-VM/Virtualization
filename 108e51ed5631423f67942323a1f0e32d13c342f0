@@ -16,6 +16,29 @@
       "message": "Thanks for the review!",
       "revId": "108e51ed5631423f67942323a1f0e32d13c342f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcafe91a_3e71b52b",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-12T12:37:19Z",
+      "side": 1,
+      "message": "Note that you\u0027re leaking memory because of this.\n\nI\u0027d recommend creating a wrapper `struct` around the `*AvbSlotVerifyData` so that you can `impl Drop` to call `avb_slot_verify_data_free`.",
+      "range": {
+        "startLine": 406,
+        "startChar": 16,
+        "endLine": 406,
+        "endChar": 38
+      },
+      "revId": "108e51ed5631423f67942323a1f0e32d13c342f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
