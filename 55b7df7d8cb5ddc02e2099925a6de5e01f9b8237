@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e42c0878_da481e31",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-12T10:44:43Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be simpler to dump the length of the BC and filter search results only in that range? If you didn\u0027t need to replace the size, I would even argue that you could simply find the old hash and replace it with the new one and not worry about the ranges.",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 58
+      },
+      "revId": "55b7df7d8cb5ddc02e2099925a6de5e01f9b8237",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8a3275b_922e081a",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-12T10:44:43Z",
+      "side": 1,
+      "message": "Why would the vbmeta size change?",
+      "range": {
+        "startLine": 317,
+        "startChar": 0,
+        "endLine": 317,
+        "endChar": 45
+      },
+      "revId": "55b7df7d8cb5ddc02e2099925a6de5e01f9b8237",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1e4c2d0_047e16f8",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-12T10:44:43Z",
+      "side": 1,
+      "message": "nit: why add the extension?",
+      "range": {
+        "startLine": 414,
+        "startChar": 22,
+        "endLine": 414,
+        "endChar": 26
+      },
+      "revId": "55b7df7d8cb5ddc02e2099925a6de5e01f9b8237",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fab570b9_577fcdb0",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-12T10:44:43Z",
+      "side": 1,
+      "message": "nit: Why do you map `microdroid_super.img -\u003e super.img` but `microdroid_initrd_normal.img` stays the same? Pick one and do it consistently",
+      "range": {
+        "startLine": 417,
+        "startChar": 5,
+        "endLine": 417,
+        "endChar": 15
+      },
+      "revId": "55b7df7d8cb5ddc02e2099925a6de5e01f9b8237",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41d57353_5f5116ac",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-12T10:44:43Z",
+      "side": 1,
+      "message": "This bug is fixed and those hashes are there, aren\u0027t they?",
+      "range": {
+        "startLine": 455,
+        "startChar": 11,
+        "endLine": 455,
+        "endChar": 22
+      },
+      "revId": "55b7df7d8cb5ddc02e2099925a6de5e01f9b8237",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
