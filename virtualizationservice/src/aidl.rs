@@ -193,6 +193,8 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         &self,
         requester_debug_pid: i32,
     ) -> binder::Result<Strong<dyn IGlobalVmContext>> {
+        check_manage_access()?;
+
         let requester_uid = get_calling_uid();
         let requester_debug_pid = requester_debug_pid as pid_t;
         let state = &mut *self.state.lock().unwrap();
@@ -217,6 +219,8 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
     }
 
     fn debugListVms(&self) -> binder::Result<Vec<VirtualMachineDebugInfo>> {
+        check_debug_access()?;
+
         let state = &mut *self.state.lock().unwrap();
         let cids = state
             .held_contexts
@@ -439,7 +443,6 @@ impl IVirtualizationService for VirtualizationService {
         size: i64,
         partition_type: PartitionType,
     ) -> binder::Result<()> {
-        check_manage_access()?;
         let size = size.try_into().map_err(|e| {
             Status::new_exception_str(
                 ExceptionCode::ILLEGAL_ARGUMENT,
@@ -488,9 +491,6 @@ impl IVirtualizationService for VirtualizationService {
     ) -> binder::Result<()> {
         // TODO(b/193504400): do this only when (1) idsig_fd is empty or (2) the APK digest in
         // idsig_fd is different from APK digest in input_fd
-
-        check_manage_access()?;
-
         create_or_update_idsig_file(input_fd, idsig_fd)
             .map_err(|e| Status::new_service_specific_error_str(-1, Some(format!("{:?}", e))))?;
         Ok(())
@@ -499,7 +499,6 @@ impl IVirtualizationService for VirtualizationService {
     /// Get a list of all currently running VMs. This method is only intended for debug purposes,
     /// and as such is only permitted from the shell user.
     fn debugListVms(&self) -> binder::Result<Vec<VirtualMachineDebugInfo>> {
-        check_debug_access()?;
         GLOBAL_SERVICE.debugListVms()
     }
 }
@@ -593,8 +592,6 @@ impl VirtualizationService {
         log_fd: Option<&ParcelFileDescriptor>,
         is_protected: &mut bool,
     ) -> binder::Result<Strong<dyn IVirtualMachine>> {
-        check_manage_access()?;
-
         let is_custom = match config {
             VirtualMachineConfig::RawConfig(_) => true,
             VirtualMachineConfig::AppConfig(config) => {
