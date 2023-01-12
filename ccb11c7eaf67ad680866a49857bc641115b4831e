@@ -16,6 +16,46 @@
       "message": "Hi Pierre, PTAL",
       "revId": "ccb11c7eaf67ad680866a49857bc641115b4831e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c95ee0dd_68818d11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-12T10:05:52Z",
+      "side": 1,
+      "message": "TBC, this currently passes but the kernel is ignored by `verify_payload` anyway, right? So we should merge this CL first so that PS runs `latest_debug_payload_passes_verification` for aosp/2383895.",
+      "revId": "ccb11c7eaf67ad680866a49857bc641115b4831e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b944b18_eb670f5c",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-12T10:05:52Z",
+      "side": 1,
+      "message": "Introduce `assert_payload_verification_succeeds` then\n```\n      assert_payload_verification_succeeds(\n            \u0026load_latest_signed_kernel()?,\n            \u0026load_latest_initrd_normal()?,\n            fs::read(PUBLIC_KEY_RSA4096_PATH)?,\n        )\n```\nto follow the pattern you\u0027ve introduced for `_fails`?",
+      "range": {
+        "startLine": 478,
+        "startChar": 8,
+        "endLine": 479,
+        "endChar": 14
+      },
+      "revId": "ccb11c7eaf67ad680866a49857bc641115b4831e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
