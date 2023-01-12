@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac4fc9af_a67c684f",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-12T10:29:04Z",
+      "side": 1,
+      "message": "That is one option and that\u0027ll make `verify_vbmeta` more independent. But it also requires more work as we cannot get vbmeta directly, we\u0027ll first need to read (and validate) the footer, then read the vbmeta_offset/size from the footer to get the vbmeta, or maybe still validate it before reading its descriptors. It is more or less what [libs/vbmeta](https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/libs/vbmeta/src/lib.rs;l\u003d89;drc\u003ddc63fe0be17bafdb4ebd08c88000fc81dfa26f2b) tries to do.\n\nIn comparison, what we get from `out_data` is directly a verified vbmeta, so we don\u0027t need to go through all the trouble to locate and validate it before reading.",
+      "parentUuid": "c562ec27_34fcb66f",
+      "range": {
+        "startLine": 438,
+        "startChar": 16,
+        "endLine": 438,
+        "endChar": 24
+      },
+      "revId": "d12aed6b1db02c7cbead781ca8876c11fe24fd18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09cde811_e625b681",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 7
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-12T10:06:52Z",
       "side": 1,
       "message": "I guess the only condition that matters is if `initrd \u003d\u003d None` but we have a initrd hash (meaning that the owner expected the kernel to be booted with a disk). Otherwise, I don\u0027t see why a VBMeta without `initrd_debug` wouldn\u0027t be valid, for example.",
+      "range": {
+        "startLine": 481,
+        "startChar": 0,
+        "endLine": 483,
+        "endChar": 9
+      },
+      "revId": "d12aed6b1db02c7cbead781ca8876c11fe24fd18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ac9180a_b686b2be",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-12T10:29:04Z",
+      "side": 1,
+      "message": "I see. We don\u0027t want to check that in case payload expecting initrd, the VBMeta shouldn\u0027t have too many/not enough descriptors?",
+      "parentUuid": "09cde811_e625b681",
       "range": {
         "startLine": 481,
         "startChar": 0,
@@ -60,6 +108,30 @@
       "writtenOn": "2023-01-12T10:06:52Z",
       "side": 1,
       "message": "isn\u0027t this `?`?",
+      "range": {
+        "startLine": 498,
+        "startChar": 8,
+        "endLine": 500,
+        "endChar": 6
+      },
+      "revId": "d12aed6b1db02c7cbead781ca8876c11fe24fd18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbd21a47_d36ada1a",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-12T10:29:04Z",
+      "side": 1,
+      "message": "Ah right.",
+      "parentUuid": "df5f4956_168d4639",
       "range": {
         "startLine": 498,
         "startChar": 8,
