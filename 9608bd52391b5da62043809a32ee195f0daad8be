@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc5a3c3b_3ddd55be",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-12T11:38:52Z",
+      "side": 1,
+      "message": "This seems a clear case for moving the permission check. But I suspect you want to do that separately.",
+      "range": {
+        "startLine": 505,
+        "startChar": 4,
+        "endLine": 505,
+        "endChar": 30
+      },
+      "revId": "9608bd52391b5da62043809a32ee195f0daad8be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e456de4a_4f8c63a1",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-12T11:38:52Z",
+      "side": 1,
+      "message": "We should delete this (b/265248057)",
+      "range": {
+        "startLine": 511,
+        "startChar": 7,
+        "endLine": 511,
+        "endChar": 21
+      },
+      "revId": "9608bd52391b5da62043809a32ee195f0daad8be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

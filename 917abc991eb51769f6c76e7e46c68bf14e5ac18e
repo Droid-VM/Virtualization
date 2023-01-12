@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2c6eb40_19e4c0dc",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-12T11:38:52Z",
+      "side": 1,
+      "message": "You don\u0027t actually need to materialize into a vector here, since you just immediately convert it to an iterator.\nYou should be able to return something like \"impl Iterator\u003cItem\u003dArc\u003c...\u003e\u003e\".\nBut getting the type system to play nicely may get interesting.",
+      "range": {
+        "startLine": 263,
+        "startChar": 81,
+        "endLine": 263,
+        "endChar": 91
+      },
+      "revId": "917abc991eb51769f6c76e7e46c68bf14e5ac18e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
