@@ -193,6 +193,8 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
         &self,
         requester_debug_pid: i32,
     ) -> binder::Result<Strong<dyn IGlobalVmContext>> {
+        check_manage_access()?;
+
         let requester_uid = get_calling_uid();
         let requester_debug_pid = requester_debug_pid as pid_t;
         let state = &mut *self.state.lock().unwrap();
@@ -217,6 +219,8 @@ impl IVirtualizationServiceInternal for VirtualizationServiceInternal {
     }
 
     fn debugListVms(&self) -> binder::Result<Vec<VirtualMachineDebugInfo>> {
+        check_debug_access()?;
+
         let state = &mut *self.state.lock().unwrap();
         let cids = state
             .held_contexts
@@ -439,7 +443,6 @@ impl IVirtualizationService for VirtualizationService {
         size: i64,
         partition_type: PartitionType,
     ) -> binder::Result<()> {
-        check_manage_access()?;
         let size = size.try_into().map_err(|e| {
             Status::new_exception_str(
                 ExceptionCode::ILLEGAL_ARGUMENT,
@@ -488,9 +491,6 @@ impl IVirtualizationService for VirtualizationService {
     ) -> binder::Result<()> {
         // TODO(b/193504400): do this only when (1) idsig_fd is empty or (2) the APK digest in
         // idsig_fd is different from APK digest in input_fd
-
-        check_manage_access()?;
-
         create_or_update_idsig_file(input_fd, idsig_fd)
             .map_err(|e| Status::new_service_specific_error_str(-1, Some(format!("{:?}", e))))?;
         Ok(())
@@ -499,7 +499,6 @@ impl IVirtualizationService for VirtualizationService {
     /// Get a list of all currently running VMs. This method is only intended for debug purposes,
     /// and as such is only permitted from the shell user.
     fn debugListVms(&self) -> binder::Result<Vec<VirtualMachineDebugInfo>> {
-        check_debug_access()?;
         GLOBAL_SERVICE.debugListVms()
     }
 }
@@ -562,7 +561,10 @@ impl VirtualizationService {
         VirtualizationService::default()
     }
 
-    fn create_vm_context(&self, requester_debug_pid: pid_t) -> Result<(VmContext, Cid, PathBuf)> {
+    fn create_vm_context(
+        &self,
+        requester_debug_pid: pid_t,
+    ) -> binder::Result<(VmContext, Cid, PathBuf)> {
         const NUM_ATTEMPTS: usize = 5;
 
         for _ in 0..NUM_ATTEMPTS {
@@ -583,7 +585,10 @@ impl VirtualizationService {
                 }
             }
         }
-        bail!("Too many attempts to create VM context failed.");
+        Err(Status::new_service_specific_error_str(
+            -1,
+            Some("Too many attempts to create VM context failed."),
+        ))
     }
 
     fn create_vm_internal(
@@ -593,7 +598,11 @@ impl VirtualizationService {
         log_fd: Option<&ParcelFileDescriptor>,
         is_protected: &mut bool,
     ) -> binder::Result<Strong<dyn IVirtualMachine>> {
-        check_manage_access()?;
+        let requester_uid = get_calling_uid();
+        let requester_debug_pid = get_calling_pid();
+
+        // Allocating VM context checks the MANAGE_VIRTUAL_MACHINE permission.
+        let (vm_context, cid, temporary_directory) = self.create_vm_context(requester_debug_pid)?;
 
         let is_custom = match config {
             VirtualMachineConfig::RawConfig(_) => true,
@@ -608,18 +617,6 @@ impl VirtualizationService {
         if is_custom {
             check_use_custom_virtual_machine()?;
         }
-
-        let requester_uid = get_calling_uid();
-        let requester_debug_pid = get_calling_pid();
-
-        let (vm_context, cid, temporary_directory) =
-            self.create_vm_context(requester_debug_pid).map_err(|e| {
-                error!("Failed to create VmContext: {:?}", e);
-                Status::new_service_specific_error_str(
-                    -1,
-                    Some(format!("Failed to create VmContext: {:?}", e)),
-                )
-            })?;
 
         let state = &mut *self.state.lock().unwrap();
         let console_fd = console_fd.map(clone_file).transpose()?;
