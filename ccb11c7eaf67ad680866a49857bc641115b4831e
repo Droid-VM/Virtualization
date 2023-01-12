@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9905cc6_54fafcf2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-12T12:29:58Z",
+      "side": 1,
+      "message": "You mean `initrd` is ignored, right?\n\nWe can, but the cl aosp/2383895 mainly checks initrd is None case, so the initrd is still not verified. Actually I would like to land this test before this cl (aosp/2383899), otherwise I\u0027ll land the test with that cl.",
+      "parentUuid": "c95ee0dd_68818d11",
+      "revId": "ccb11c7eaf67ad680866a49857bc641115b4831e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b944b18_eb670f5c",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-01-12T10:05:52Z",
       "side": 1,
       "message": "Introduce `assert_payload_verification_succeeds` then\n```\n      assert_payload_verification_succeeds(\n            \u0026load_latest_signed_kernel()?,\n            \u0026load_latest_initrd_normal()?,\n            fs::read(PUBLIC_KEY_RSA4096_PATH)?,\n        )\n```\nto follow the pattern you\u0027ve introduced for `_fails`?",
+      "range": {
+        "startLine": 478,
+        "startChar": 8,
+        "endLine": 479,
+        "endChar": 14
+      },
+      "revId": "ccb11c7eaf67ad680866a49857bc641115b4831e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1e4a130_a8becb9e",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-12T12:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b944b18_eb670f5c",
       "range": {
         "startLine": 478,
         "startChar": 8,
