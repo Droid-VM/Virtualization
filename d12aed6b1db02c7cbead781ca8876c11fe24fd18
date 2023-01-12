@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c562ec27_34fcb66f",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-12T10:06:52Z",
+      "side": 1,
+      "message": "Do you think we could instead keep passing `NULL` (avoiding needing to manage the struct on the heap and reducing the amount of work libavb needs to do), as we only seem to use `out_data` to locate the VBMeta, which we\u0027ll need to do manually for `Payload` to support `get_`/`read_partition(\"vbmeta\")` once stop using `NO_VBMETA_PARTITION`.",
+      "range": {
+        "startLine": 438,
+        "startChar": 16,
+        "endLine": 438,
+        "endChar": 24
+      },
+      "revId": "d12aed6b1db02c7cbead781ca8876c11fe24fd18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09cde811_e625b681",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-12T10:06:52Z",
+      "side": 1,
+      "message": "I guess the only condition that matters is if `initrd \u003d\u003d None` but we have a initrd hash (meaning that the owner expected the kernel to be booted with a disk). Otherwise, I don\u0027t see why a VBMeta without `initrd_debug` wouldn\u0027t be valid, for example.",
+      "range": {
+        "startLine": 481,
+        "startChar": 0,
+        "endLine": 483,
+        "endChar": 9
+      },
+      "revId": "d12aed6b1db02c7cbead781ca8876c11fe24fd18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df5f4956_168d4639",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-12T10:06:52Z",
+      "side": 1,
+      "message": "isn\u0027t this `?`?",
+      "range": {
+        "startLine": 498,
+        "startChar": 8,
+        "endLine": 500,
+        "endChar": 6
+      },
+      "revId": "d12aed6b1db02c7cbead781ca8876c11fe24fd18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
