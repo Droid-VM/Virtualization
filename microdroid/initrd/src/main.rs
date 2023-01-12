@@ -147,6 +147,6 @@ mod tests {
     #[test]
     fn verify_args() {
         // Check that the command parsing has been configured in a valid way.
-        Args::command().debug_assert();
+        Opt::command().debug_assert();
     }
 }
