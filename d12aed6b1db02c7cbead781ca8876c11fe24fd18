@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d070cadc_ba860095",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-12T12:07:41Z",
+      "side": 1,
+      "message": "Yes. With `NO_VBMETA_PARTITION`. It first tries to read VBMeta directly from the partition `vbmeta`, if failed, it then tries to parse the footer of `boot` to get the VBMeta offset/size and then read it. After that it loads the requested partition with `get_preloaded_partition` to verify. The log is like this:\n\n```\navb_slot_verify.c:731: DEBUG: Loading vbmeta struct from partition \u0027vbmeta\u0027.\navb_slot_verify.c:751: DEBUG: vbmeta: No such partition. Trying \u0027boot\u0027 instead.\navb_slot_verify.c:726: DEBUG: Loading vbmeta struct in footer from partition \u0027boot\u0027.\navb_slot_verify.c:419: DEBUG: initrd_normal: Loading entire partition.\n...\n```",
+      "parentUuid": "33d26f5b_a13a31ef",
+      "range": {
+        "startLine": 438,
+        "startChar": 16,
+        "endLine": 438,
+        "endChar": 24
+      },
+      "revId": "d12aed6b1db02c7cbead781ca8876c11fe24fd18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09cde811_e625b681",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 7

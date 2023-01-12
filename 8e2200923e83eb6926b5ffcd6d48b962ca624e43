@@ -52,6 +52,24 @@
       "parentUuid": "aaca7154_95300c8e",
       "revId": "8e2200923e83eb6926b5ffcd6d48b962ca624e43",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45f2b8c6_58eacad8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-12T12:07:41Z",
+      "side": 1,
+      "message": "That cl handles the verification of a valid initrd, while this cl mostly focuses on validating initrd is None case. So logically, I would like to have them as two separate cls. Especially hashing the initrd could also have performance impact, in that sense, I\u0027d like to have the initrd verification change as small as possible to better understand the impact.",
+      "parentUuid": "4486b9cb_9e756e64",
+      "revId": "8e2200923e83eb6926b5ffcd6d48b962ca624e43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
