@@ -16,6 +16,75 @@
       "message": "Thanks for the review!",
       "revId": "60ff17d4d531e063b41afb535789417844f323a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e59ee59f_066f9f18",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-12T14:27:02Z",
+      "side": 1,
+      "message": "Turn this into a `AvbSlotVerifyDataWrap::vbmeta_images(\u0026\u0027a self) -\u003e Option\u003c\u0026\u0027a [_]\u003e` then\n```\nlet vbmeta_images \u003d data.vbmeta_images().ok_or(AvbSlotVerifyError::Io)?;\nif vbmeta_images.len() !\u003d 1 {\n    // There can only be one VBMeta, from the \u0027boot\u0027 partition. \n    return Err(AvbSlotVerifyError::InvalidMetadata);\n}\n```",
+      "range": {
+        "startLine": 459,
+        "startChar": 8,
+        "endLine": 463,
+        "endChar": 10
+      },
+      "revId": "60ff17d4d531e063b41afb535789417844f323a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc85f353_cd3a2c36",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-12T14:27:02Z",
+      "side": 1,
+      "message": "This also leaks memory; you could convert the result to a slice wrapped in a `Drop`-able struct.",
+      "range": {
+        "startLine": 470,
+        "startChar": 12,
+        "endLine": 470,
+        "endChar": 34
+      },
+      "revId": "60ff17d4d531e063b41afb535789417844f323a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07a675a8_c34fca0a",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-12T14:27:02Z",
+      "side": 1,
+      "message": "We shouldn\u0027t fail if there are extra descriptors that aren\u0027t `initrd`[`_debug`] hash descriptors. What you could do instead is start by locating those 2 hash descriptors (if any) and raise the error if `initrd.is_none()` but we found a corresponding hash descriptor.\n\nThe `AvbDescriptor` array wrapper could implement `Iterator` on an `AvbDescriptor` enum that properly wraps `avb_descriptor_validate_and_byteswap` and `avb_hash_descriptor_validate_and_byteswap`.",
+      "range": {
+        "startLine": 476,
+        "startChar": 8,
+        "endLine": 476,
+        "endChar": 87
+      },
+      "revId": "60ff17d4d531e063b41afb535789417844f323a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
