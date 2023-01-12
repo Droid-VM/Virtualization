@@ -411,12 +411,19 @@ pub fn verify_payload(
     payload.verify_partitions(&requested_partitions)
 }
 
+// TODO(b/256148034): Move the tests into a separate module.
 #[cfg(test)]
 mod tests {
     use super::*;
     use anyhow::Result;
-    use avb_bindgen::AvbFooter;
-    use std::{fs, mem::size_of};
+    use avb_bindgen::{
+        avb_footer_validate_and_byteswap, avb_vbmeta_image_header_to_host_byte_order, AvbFooter,
+        AvbVBMetaImageHeader,
+    };
+    use std::{
+        fs,
+        mem::{size_of, transmute, MaybeUninit},
+    };
 
     const MICRODROID_KERNEL_IMG_PATH: &str = "microdroid_kernel";
     const INITRD_NORMAL_IMG_PATH: &str = "microdroid_initrd_normal.img";
@@ -518,6 +525,49 @@ mod tests {
         )
     }
 
+    #[test]
+    fn tampered_vbmeta_fails_verification() -> Result<()> {
+        let mut kernel = load_latest_signed_kernel()?;
+        let footer = extract_avb_footer(&kernel)?;
+        let vbmeta_index: usize = (footer.vbmeta_offset + 1).try_into()?;
+
+        kernel[vbmeta_index] = !kernel[vbmeta_index]; // Flip the bits
+
+        assert_payload_verification_fails(
+            &kernel,
+            &load_latest_initrd_normal()?,
+            &fs::read(PUBLIC_KEY_RSA4096_PATH)?,
+            AvbSlotVerifyError::InvalidMetadata,
+        )
+    }
+
+    #[test]
+    fn vbmeta_with_public_key_overwritten_fails_verification() -> Result<()> {
+        let mut kernel = load_latest_signed_kernel()?;
+        let footer = extract_avb_footer(&kernel)?;
+        let vbmeta_offset: usize = footer.vbmeta_offset.try_into()?;
+        let vbmeta_header =
+            extract_vbmeta_header(&kernel, vbmeta_offset, footer.vbmeta_size.try_into()?)?;
+        let public_key_offset: usize = vbmeta_offset
+            + size_of::<AvbVBMetaImageHeader>()
+            + vbmeta_header.authentication_data_block_size as usize
+            + vbmeta_header.public_key_offset as usize;
+        let public_key_size: usize = vbmeta_header.public_key_size.try_into()?;
+        let empty_public_key = vec![0u8; public_key_size];
+
+        kernel[public_key_offset..(public_key_offset + public_key_size)]
+            .copy_from_slice(&empty_public_key);
+
+        assert_payload_verification_fails(
+            &kernel,
+            &load_latest_initrd_normal()?,
+            &empty_public_key,
+            AvbSlotVerifyError::Verification,
+        )
+    }
+
+    // TODO(b/256148034): Test that vbmeta with its verification flag overwritten fails verification.
+
     fn assert_payload_verification_fails(
         kernel: &[u8],
         initrd: &[u8],
@@ -526,6 +576,35 @@ mod tests {
     ) -> Result<()> {
         assert_eq!(Err(expected_error), verify_payload(kernel, Some(initrd), trusted_public_key));
         Ok(())
+    }
+
+    fn extract_avb_footer(kernel: &[u8]) -> Result<AvbFooter> {
+        let footer_start = kernel.len() - size_of::<AvbFooter>();
+        // SAFETY: The slice is the same size as the struct which only contains simple data types.
+        let mut footer = unsafe {
+            transmute::<[u8; size_of::<AvbFooter>()], AvbFooter>(kernel[footer_start..].try_into()?)
+        };
+        // SAFETY: The function updates the struct in-place.
+        unsafe {
+            avb_footer_validate_and_byteswap(&footer, &mut footer);
+        }
+        Ok(footer)
+    }
+
+    fn extract_vbmeta_header(
+        kernel: &[u8],
+        vbmeta_offset: usize,
+        vbmeta_size: usize,
+    ) -> Result<AvbVBMetaImageHeader> {
+        let vbmeta_src = &kernel[vbmeta_offset..(vbmeta_offset + vbmeta_size)];
+        // SAFETY: The latest kernel has a valid VBMeta header at the position specified in footer.
+        let vbmeta_header = unsafe {
+            let mut header = MaybeUninit::uninit();
+            let src = vbmeta_src.as_ptr() as *const _ as *const AvbVBMetaImageHeader;
+            avb_vbmeta_image_header_to_host_byte_order(src, header.as_mut_ptr());
+            header.assume_init()
+        };
+        Ok(vbmeta_header)
     }
 
     fn load_latest_signed_kernel() -> Result<Vec<u8>> {
