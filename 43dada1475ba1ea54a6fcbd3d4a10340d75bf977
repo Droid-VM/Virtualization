@@ -16,6 +16,46 @@
       "message": "Maybe we can try the write() part now?",
       "revId": "43dada1475ba1ea54a6fcbd3d4a10340d75bf977",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff074d0c_9a37df6b",
+        "filename": "tests/benchmark/src/jni/io_vsock_host_jni.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2023-01-12T18:20:48Z",
+      "side": 1,
+      "message": "need to call `free`\n\nor maybe use c++ style `std::unique_ptr\u003cchar[]\u003e p(new char[num_bytes_to_send]);`",
+      "revId": "43dada1475ba1ea54a6fcbd3d4a10340d75bf977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bdf0399_da17100e",
+        "filename": "tests/benchmark/src/jni/io_vsock_host_jni.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2023-01-12T18:20:48Z",
+      "side": 1,
+      "message": "maybe use `android::base::WriteFully` so this doesn\u0027t become flaky if we start getting partial writes https://source.corp.google.com/h/googleplex-android/platform/superproject/+/refs/heads/master:system/libbase/include/android-base/file.h;l\u003d107;drc\u003dd577325de66771cca612ccd56044283d0af390fb\n\nat the least, should do `TEMP_FAILURE_RETRY(write(fd, data, num_bytes_to_send))` to handle EINTR",
+      "range": {
+        "startLine": 36,
+        "startChar": 20,
+        "endLine": 36,
+        "endChar": 54
+      },
+      "revId": "43dada1475ba1ea54a6fcbd3d4a10340d75bf977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
