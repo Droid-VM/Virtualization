@@ -138,6 +138,7 @@ python_binary_host {
     },
     required: [
         "img2simg",
+        "initrd_bootconfig",
         "lpmake",
         "lpunpack",
         "simg2img",

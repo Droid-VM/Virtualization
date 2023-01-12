@@ -55,7 +55,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -464,7 +463,6 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     // TODO(b/245277660): Resigning the system/vendor image changes the vbmeta hash.
     // So, unless vbmeta related bootconfigs are updated the following test will fail
     @Test
-    @Ignore("b/245277660")
     @CddTest(requirements = {"9.17/C-2-2", "9.17/C-2-6"})
     public void testBootSucceedsWhenNonProtectedVmStartsWithImagesSignedWithDifferentKey()
             throws Exception {
