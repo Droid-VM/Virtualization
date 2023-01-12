@@ -22,6 +22,30 @@
       },
       "revId": "863c125c508137d5307c155810b6a92793a39297",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8bdc107_ef06cd25",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-12T14:06:00Z",
+      "side": 0,
+      "message": "I did that at first but uid_t is better for storing in the next CL.",
+      "parentUuid": "f952fa62_97ecac5a",
+      "range": {
+        "startLine": 201,
+        "startChar": 25,
+        "endLine": 201,
+        "endChar": 38
+      },
+      "revId": "863c125c508137d5307c155810b6a92793a39297",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
