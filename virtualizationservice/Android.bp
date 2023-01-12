@@ -82,7 +82,7 @@ rust_binary {
 
 rust_test {
     name: "virtualizationservice_device_test",
-    srcs: ["src/main.rs"],
+    srcs: ["src/virtmgr.rs"],
     defaults: ["virtualizationservice_defaults"],
     rustlibs: [
         "libtempfile",
