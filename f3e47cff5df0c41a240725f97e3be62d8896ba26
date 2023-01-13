@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6958066_b76c016e",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-13T16:35:28Z",
+      "side": 1,
+      "message": "We don\u0027t want the footer to have some descriptors like property or something else? As we already allowed users to have a footer with hash descriptor other than initrd_*, why do we want to block other types of descriptors?\n\nEven if we don\u0027t check this, I\u0027m afraid we still need to keep `AvbDescriptorWrap` to check the tag is `HASH` before converting the `descriptor` to `AvbHashDescriptor`.",
+      "parentUuid": "54beb254_6c6c6d1d",
+      "range": {
+        "startLine": 257,
+        "startChar": 8,
+        "endLine": 257,
+        "endChar": 22
+      },
+      "revId": "f3e47cff5df0c41a240725f97e3be62d8896ba26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e5840b9f_6335a256",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 19
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-13T15:53:01Z",
       "side": 1,
       "message": "nit: This could return Result and then you can use it as `check_is_in_range(index)?`.",
+      "range": {
+        "startLine": 320,
+        "startChar": 0,
+        "endLine": 320,
+        "endChar": 54
+      },
+      "revId": "f3e47cff5df0c41a240725f97e3be62d8896ba26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90087e56_4d729b31",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-13T16:35:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5840b9f_6335a256",
       "range": {
         "startLine": 320,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c267639_c7d33432",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-13T16:35:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a2b92d4_d86824b5",
+      "range": {
+        "startLine": 322,
+        "startChar": 51,
+        "endLine": 322,
+        "endChar": 52
+      },
+      "revId": "f3e47cff5df0c41a240725f97e3be62d8896ba26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15e8c1a9_fa15be52",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-01-13T15:53:01Z",
       "side": 1,
       "message": "checked_add",
+      "range": {
+        "startLine": 328,
+        "startChar": 55,
+        "endLine": 328,
+        "endChar": 56
+      },
+      "revId": "f3e47cff5df0c41a240725f97e3be62d8896ba26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7321ac9_f6bf2995",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-13T16:35:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15e8c1a9_fa15be52",
       "range": {
         "startLine": 328,
         "startChar": 55,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af479092_003e1824",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-13T16:35:28Z",
+      "side": 1,
+      "message": "I think we can just compare the byte str directly to be more efficient. That way we can also avoid allocating any memory.",
+      "parentUuid": "7b8cdebf_421f287a",
+      "range": {
+        "startLine": 345,
+        "startChar": 8,
+        "endLine": 351,
+        "endChar": 50
+      },
+      "revId": "f3e47cff5df0c41a240725f97e3be62d8896ba26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa4f9309_be62a48b",
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c843bb48_97582529",
+        "filename": "pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-13T16:35:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa4f9309_be62a48b",
+      "range": {
+        "startLine": 71,
+        "startChar": 21,
+        "endLine": 71,
+        "endChar": 54
+      },
+      "revId": "f3e47cff5df0c41a240725f97e3be62d8896ba26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8741211f_e205d206",
@@ -152,6 +296,30 @@
       "writtenOn": "2023-01-13T15:53:01Z",
       "side": 1,
       "message": "helper",
+      "range": {
+        "startLine": 80,
+        "startChar": 20,
+        "endLine": 80,
+        "endChar": 54
+      },
+      "revId": "f3e47cff5df0c41a240725f97e3be62d8896ba26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edbb378a_ebc43dc2",
+        "filename": "pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-13T16:35:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8741211f_e205d206",
       "range": {
         "startLine": 80,
         "startChar": 20,
