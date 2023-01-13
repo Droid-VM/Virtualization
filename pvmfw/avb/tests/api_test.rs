@@ -19,7 +19,7 @@ use avb_bindgen::{
     avb_footer_validate_and_byteswap, avb_vbmeta_image_header_to_host_byte_order, AvbFooter,
     AvbVBMetaImageHeader,
 };
-use pvmfw_avb::{verify_payload, AvbSlotVerifyError};
+use pvmfw_avb::{verify_payload, AvbSlotVerifyError, Mode};
 use std::{
     fs,
     mem::{size_of, transmute, MaybeUninit},
@@ -44,6 +44,7 @@ fn latest_normal_payload_passes_verification() -> Result<()> {
         &load_latest_signed_kernel()?,
         &load_latest_initrd_normal()?,
         &load_trusted_public_key()?,
+        Mode::Normal,
     )
 }
 
@@ -53,13 +54,14 @@ fn latest_debug_payload_passes_verification() -> Result<()> {
         &load_latest_signed_kernel()?,
         &load_latest_initrd_debug()?,
         &load_trusted_public_key()?,
+        Mode::Debug,
     )
 }
 
 #[test]
 fn payload_expecting_no_initrd_passes_verification_with_no_initrd() -> Result<()> {
     assert_eq!(
-        Ok(()),
+        Ok(Mode::Normal),
         verify_payload(
             &fs::read(TEST_IMG_WITH_ONE_HASHDESC_PATH)?,
             /*initrd=*/ None,
@@ -72,7 +74,7 @@ fn payload_expecting_no_initrd_passes_verification_with_no_initrd() -> Result<()
 #[test]
 fn payload_with_non_initrd_descriptor_passes_verification_with_no_initrd() -> Result<()> {
     assert_eq!(
-        Ok(()),
+        Ok(Mode::Normal),
         verify_payload(
             &fs::read(TEST_IMG_WITH_NON_INITRD_HASHDESC_PATH)?,
             /*initrd=*/ None,
@@ -121,6 +123,16 @@ fn payload_with_a_different_valid_public_key_fails_verification() -> Result<()> 
         &load_latest_initrd_normal()?,
         &fs::read(PUBLIC_KEY_RSA2048_PATH)?,
         AvbSlotVerifyError::PublicKeyRejected,
+    )
+}
+
+#[test]
+fn payload_with_an_invalid_initrd_fails_verification() -> Result<()> {
+    assert_payload_verification_fails(
+        &load_latest_signed_kernel()?,
+        /*initrd=*/ &fs::read(UNSIGNED_TEST_IMG_PATH)?,
+        &load_trusted_public_key()?,
+        AvbSlotVerifyError::Verification,
     )
 }
 
@@ -249,8 +261,9 @@ fn assert_payload_verification_succeeds(
     kernel: &[u8],
     initrd: &[u8],
     trusted_public_key: &[u8],
+    expected_mode: Mode,
 ) -> Result<()> {
-    assert_eq!(Ok(()), verify_payload(kernel, Some(initrd), trusted_public_key));
+    assert_eq!(Ok(expected_mode), verify_payload(kernel, Some(initrd), trusted_public_key));
     Ok(())
 }
 
