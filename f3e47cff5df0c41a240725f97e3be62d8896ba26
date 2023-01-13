@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54beb254_6c6c6d1d",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T15:53:01Z",
+      "side": 1,
+      "message": "Why ignore? What would the other descriptors be for? If they\u0027re not expected, I would return an error. That would also allow you to remove `AvbDescriptorWrap`",
+      "range": {
+        "startLine": 257,
+        "startChar": 8,
+        "endLine": 257,
+        "endChar": 22
+      },
+      "revId": "f3e47cff5df0c41a240725f97e3be62d8896ba26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5840b9f_6335a256",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T15:53:01Z",
+      "side": 1,
+      "message": "nit: This could return Result and then you can use it as `check_is_in_range(index)?`.",
+      "range": {
+        "startLine": 320,
+        "startChar": 0,
+        "endLine": 320,
+        "endChar": 54
+      },
+      "revId": "f3e47cff5df0c41a240725f97e3be62d8896ba26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a2b92d4_d86824b5",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T15:53:01Z",
+      "side": 1,
+      "message": "checked_add",
+      "range": {
+        "startLine": 322,
+        "startChar": 51,
+        "endLine": 322,
+        "endChar": 52
+      },
+      "revId": "f3e47cff5df0c41a240725f97e3be62d8896ba26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15e8c1a9_fa15be52",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T15:53:01Z",
+      "side": 1,
+      "message": "checked_add",
+      "range": {
+        "startLine": 328,
+        "startChar": 55,
+        "endLine": 328,
+        "endChar": 56
+      },
+      "revId": "f3e47cff5df0c41a240725f97e3be62d8896ba26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b8cdebf_421f287a",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T15:53:01Z",
+      "side": 1,
+      "message": "Could you instead create a `TryFrom\u003c\u0026[u8]\u003e for PartitionName` that does not expect a null-terminated string but compares the slice against constant ones? That would be simpler than constructing a string on the stack.",
+      "range": {
+        "startLine": 345,
+        "startChar": 8,
+        "endLine": 351,
+        "endChar": 50
+      },
+      "revId": "f3e47cff5df0c41a240725f97e3be62d8896ba26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa4f9309_be62a48b",
+        "filename": "pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T15:53:01Z",
+      "side": 1,
+      "message": "helper",
+      "range": {
+        "startLine": 71,
+        "startChar": 21,
+        "endLine": 71,
+        "endChar": 54
+      },
+      "revId": "f3e47cff5df0c41a240725f97e3be62d8896ba26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8741211f_e205d206",
+        "filename": "pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T15:53:01Z",
+      "side": 1,
+      "message": "helper",
+      "range": {
+        "startLine": 80,
+        "startChar": 20,
+        "endLine": 80,
+        "endChar": 54
+      },
+      "revId": "f3e47cff5df0c41a240725f97e3be62d8896ba26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
