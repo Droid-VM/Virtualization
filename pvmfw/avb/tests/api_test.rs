@@ -129,6 +129,19 @@ fn payload_with_an_invalid_initrd_fails_verification() -> Result<()> {
 }
 
 #[test]
+fn payload_with_an_extended_initrd_fails_verification() -> Result<()> {
+    let mut initrd = load_latest_initrd_normal()?;
+    initrd.extend(b"androidboot.microdroid.debuggable=1");
+
+    assert_payload_verification_fails(
+        &load_latest_signed_kernel()?,
+        &initrd,
+        &load_trusted_public_key()?,
+        AvbSlotVerifyError::Verification,
+    )
+}
+
+#[test]
 fn unsigned_kernel_fails_verification() -> Result<()> {
     assert_payload_verification_fails(
         &fs::read(UNSIGNED_TEST_IMG_PATH)?,
