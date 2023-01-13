@@ -315,6 +315,15 @@ fn is_verified_boot() -> bool {
     !Path::new(DEBUG_MICRODROID_NO_VERIFIED_BOOT).exists()
 }
 
+fn should_export_tombstone() -> bool {
+    if system_properties::read_bool(DEBUGGABLE_PROP, true).unwrap_or(false) {
+        return true;
+    }
+
+    // TODO(b/250165198): export if debug policy is on
+    false
+}
+
 fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> {
     let metadata = load_metadata().context("Failed to load payload metadata")?;
     let dice = DiceDriver::new(Path::new("/dev/open-dice0")).context("Failed to load DICE")?;
@@ -423,8 +432,8 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
 
     setup_config_sysprops(&config)?;
 
-    // Start tombstone_transmit if enabled
-    if config.export_tombstones {
+    // Start tombstone_transmit if debuggable
+    if should_export_tombstone() {
         control_service("start", "tombstone_transmit")?;
     } else {
         control_service("stop", "tombstoned")?;
@@ -769,7 +778,6 @@ fn load_config(payload_metadata: PayloadMetadata) -> Result<VmPayloadConfig> {
                 apexes: vec![],
                 extra_apks: vec![],
                 prefer_staged: false,
-                export_tombstones: false,
                 enable_authfs: false,
             })
         }
