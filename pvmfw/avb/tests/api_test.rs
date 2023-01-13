@@ -19,7 +19,7 @@ use avb_bindgen::{
     avb_footer_validate_and_byteswap, avb_vbmeta_image_header_to_host_byte_order, AvbFooter,
     AvbVBMetaImageHeader,
 };
-use pvmfw_avb::{verify_payload, AvbSlotVerifyError};
+use pvmfw_avb::{verify_payload, AvbSlotVerifyError, DebugLevel};
 use std::{
     fs,
     mem::{size_of, transmute, MaybeUninit},
@@ -45,6 +45,7 @@ fn latest_normal_payload_passes_verification() -> Result<()> {
         &load_latest_signed_kernel()?,
         &load_latest_initrd_normal()?,
         &load_trusted_public_key()?,
+        DebugLevel::None,
     )
 }
 
@@ -54,6 +55,7 @@ fn latest_debug_payload_passes_verification() -> Result<()> {
         &load_latest_signed_kernel()?,
         &load_latest_initrd_debug()?,
         &load_trusted_public_key()?,
+        DebugLevel::Full,
     )
 }
 
@@ -62,7 +64,7 @@ fn payload_expecting_no_initrd_passes_verification_with_no_initrd() -> Result<()
     assert_payload_verification_with_no_initrd_eq(
         &fs::read(TEST_IMG_WITH_ONE_HASHDESC_PATH)?,
         &load_trusted_public_key()?,
-        Ok(()),
+        Ok(DebugLevel::None),
     )
 }
 
@@ -71,7 +73,7 @@ fn payload_with_non_initrd_descriptor_passes_verification_with_no_initrd() -> Re
     assert_payload_verification_with_no_initrd_eq(
         &fs::read(TEST_IMG_WITH_NON_INITRD_HASHDESC_PATH)?,
         &load_trusted_public_key()?,
-        Ok(()),
+        Ok(DebugLevel::None),
     )
 }
 
@@ -120,6 +122,17 @@ fn payload_with_a_different_valid_public_key_fails_verification() -> Result<()> 
         &load_latest_initrd_normal()?,
         &fs::read(PUBLIC_KEY_RSA2048_PATH)?,
         AvbSlotVerifyError::PublicKeyRejected,
+    )
+}
+
+#[test]
+fn payload_with_an_invalid_initrd_fails_verification() -> Result<()> {
+    // TODO(b/256148034): This verification should throw verification error.
+    assert_payload_verification_succeeds(
+        &load_latest_signed_kernel()?,
+        /*initrd=*/ &fs::read(UNSIGNED_TEST_IMG_PATH)?,
+        &load_trusted_public_key()?,
+        DebugLevel::Full,
     )
 }
 
@@ -237,7 +250,7 @@ fn extract_vbmeta_header(kernel: &[u8], footer: &AvbFooter) -> Result<AvbVBMetaI
 fn assert_payload_verification_with_no_initrd_eq(
     kernel: &[u8],
     trusted_public_key: &[u8],
-    expected_result: Result<(), AvbSlotVerifyError>,
+    expected_result: Result<DebugLevel, AvbSlotVerifyError>,
 ) -> Result<()> {
     assert_eq!(expected_result, verify_payload(kernel, /*initrd=*/ None, trusted_public_key));
     Ok(())
@@ -257,8 +270,9 @@ fn assert_payload_verification_succeeds(
     kernel: &[u8],
     initrd: &[u8],
     trusted_public_key: &[u8],
+    expected_mode: DebugLevel,
 ) -> Result<()> {
-    assert_eq!(Ok(()), verify_payload(kernel, Some(initrd), trusted_public_key));
+    assert_eq!(Ok(expected_mode), verify_payload(kernel, Some(initrd), trusted_public_key));
     Ok(())
 }
 
