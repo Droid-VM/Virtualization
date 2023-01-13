@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7dfc044d_f3bbe1e6",
+        "filename": "apex/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-01-13T01:32:32Z",
+      "side": 1,
+      "message": "sign_virt_apex should run outside the source tree. Any required tools should be listed in \nhttps://cs.android.com/android/platform/superproject/+/master:build/make/core/Makefile;l\u003d5057?q\u003dbuild%2Fmake%2Fcore%2FMakefile%20 as well.\n\nIt would be nice to leave some comments around here as well to keep two lists in sync.",
+      "range": {
+        "startLine": 141,
+        "startChar": 9,
+        "endLine": 141,
+        "endChar": 26
+      },
+      "revId": "55b7df7d8cb5ddc02e2099925a6de5e01f9b8237",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e42c0878_da481e31",
         "filename": "apex/sign_virt_apex.py",
         "patchSetId": 1
