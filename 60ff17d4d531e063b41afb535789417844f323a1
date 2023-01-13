@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4788e272_b86372ab",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-13T10:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e59ee59f_066f9f18",
+      "range": {
+        "startLine": 459,
+        "startChar": 8,
+        "endLine": 463,
+        "endChar": 10
+      },
+      "revId": "60ff17d4d531e063b41afb535789417844f323a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc85f353_cd3a2c36",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "097bbe2b_9840315b",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-13T10:41:54Z",
+      "side": 1,
+      "message": "Let\u0027s use `avb_descriptor_foreach` to avoid getting any data here.",
+      "parentUuid": "dc85f353_cd3a2c36",
+      "range": {
+        "startLine": 470,
+        "startChar": 12,
+        "endLine": 470,
+        "endChar": 34
+      },
+      "revId": "60ff17d4d531e063b41afb535789417844f323a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07a675a8_c34fca0a",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-01-12T14:27:02Z",
       "side": 1,
       "message": "We shouldn\u0027t fail if there are extra descriptors that aren\u0027t `initrd`[`_debug`] hash descriptors. What you could do instead is start by locating those 2 hash descriptors (if any) and raise the error if `initrd.is_none()` but we found a corresponding hash descriptor.\n\nThe `AvbDescriptor` array wrapper could implement `Iterator` on an `AvbDescriptor` enum that properly wraps `avb_descriptor_validate_and_byteswap` and `avb_hash_descriptor_validate_and_byteswap`.",
+      "range": {
+        "startLine": 476,
+        "startChar": 8,
+        "endLine": 476,
+        "endChar": 87
+      },
+      "revId": "60ff17d4d531e063b41afb535789417844f323a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "498a80e5_a190a92e",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-13T10:41:54Z",
+      "side": 1,
+      "message": "In this case I think we can loop with `avb_descriptor_foreach` to search for the initrd hash desc. I updated the code to reflect this.",
+      "parentUuid": "07a675a8_c34fca0a",
       "range": {
         "startLine": 476,
         "startChar": 8,
