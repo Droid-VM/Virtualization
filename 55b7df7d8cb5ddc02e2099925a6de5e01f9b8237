@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74a79230_a9f0c259",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T10:15:46Z",
+      "side": 1,
+      "message": "Alright, fair enough. Thanks for explaining.",
+      "parentUuid": "d5d28379_00c989f0",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 58
+      },
+      "revId": "55b7df7d8cb5ddc02e2099925a6de5e01f9b8237",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8a3275b_922e081a",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "Well there is no guarantee that it wont. I infact think we should also re-check avb_version too incase the signing infra uses an upgraded version of avbtool than build server. Wdyt?",
       "parentUuid": "f8a3275b_922e081a",
+      "range": {
+        "startLine": 317,
+        "startChar": 0,
+        "endLine": 317,
+        "endChar": 45
+      },
+      "revId": "55b7df7d8cb5ddc02e2099925a6de5e01f9b8237",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f0bb0b0_97892bfd",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T10:15:46Z",
+      "side": 1,
+      "message": "I would find that odd because it means the clients would also need to support a newer avb version. You could make it an assertion so it at least fails loudly but up to you.",
+      "parentUuid": "c205ff75_db0db79d",
       "range": {
         "startLine": 317,
         "startChar": 0,
