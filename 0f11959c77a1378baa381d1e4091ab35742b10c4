@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e6f729b_b3ef5e1c",
+        "filename": "tests/testapk/AndroidManifest.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-13T10:16:17Z",
+      "side": 1,
+      "message": "Do you actually need this? It\u0027s \"signature|privileged|development\" so this app can\u0027t get it unless permitted by shell.\nBut I don\u0027t see any changes here to grant the permission, so I don\u0027t think you have it.",
+      "range": {
+        "startLine": 20,
+        "startChar": 2,
+        "endLine": 20,
+        "endChar": 67
+      },
+      "revId": "0f11959c77a1378baa381d1e4091ab35742b10c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
