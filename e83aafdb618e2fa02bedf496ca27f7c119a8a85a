@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b85442d3_847bbf06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-13T11:08:02Z",
+      "side": 1,
+      "message": "That would affect the Java API, where we declare what permissions are required for each method (e.g. cs/android-internal/packages/modules/Virtualization/javalib/src/android/system/virtualmachine/VirtualMachineManager.java?rcl\u003d7c6fe54062dd3da3437fef3b9880903f0669aac2\u0026l\u003d136)\n\nAnd it would mean, I think, that VirtualMachineManager#create no longer needs to declare the permission - it\u0027s only VirtualMachine#run that would check it.\n\nThat seems slightly worse to me. I don\u0027t think it\u0027s a big deal, but I think it\u0027s reasonable to refuse to create VM ancillary files for an app that doesn\u0027t have the ability to run VMs.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 47
+      },
+      "revId": "e83aafdb618e2fa02bedf496ca27f7c119a8a85a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
