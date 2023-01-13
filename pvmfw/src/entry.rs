@@ -15,15 +15,14 @@
 //! Low-level entry and exit points of pvmfw.
 
 use crate::config;
+use crate::debug_policy::handle_debug_policy;
 use crate::fdt;
 use crate::heap;
 use crate::helpers;
 use crate::memory::MemoryTracker;
 use crate::mmio_guard;
 use crate::mmu;
-use alloc::vec::Vec;
 use core::arch::asm;
-use core::mem;
 use core::num::NonZeroUsize;
 use core::slice;
 use dice::bcc::Handover;
@@ -180,37 +179,6 @@ impl<'a> MemorySlices<'a> {
     }
 }
 
-/// Applies the debug policy device tree overlay to the pVM DT.
-///
-/// # Safety
-///
-/// When an error is returned by this function, the input `Fdt` should be discarded as it may have
-/// have been partially corrupted during the overlay application process.
-unsafe fn apply_debug_policy(
-    fdt: &mut libfdt::Fdt,
-    debug_policy: &mut [u8],
-) -> Result<(), RebootReason> {
-    let overlay = libfdt::Fdt::from_mut_slice(debug_policy).map_err(|e| {
-        error!("Failed to load the debug policy overlay: {e}");
-        RebootReason::InvalidConfig
-    })?;
-
-    fdt.unpack().map_err(|e| {
-        error!("Failed to unpack DT for debug policy: {e}");
-        RebootReason::InternalError
-    })?;
-
-    let fdt = fdt.apply_overlay(overlay).map_err(|e| {
-        error!("Failed to apply the debug policy overlay: {e}");
-        RebootReason::InvalidConfig
-    })?;
-
-    fdt.pack().map_err(|e| {
-        error!("Failed to re-pack DT after debug policy: {e}");
-        RebootReason::InternalError
-    })
-}
-
 /// Sets up the environment for main() and wraps its result for start().
 ///
 /// Provide the abstractions necessary for start() to abort the pVM boot and for main() to run with
@@ -285,18 +253,8 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<(), R
     helpers::flushed_zeroize(bcc_slice);
     helpers::flush(slices.fdt.as_slice());
 
-    if let Some(debug_policy) = appended.get_debug_policy() {
-        let fdt_slices = slices.fdt.as_slice();
-        let mut fdt_backup = Vec::with_capacity(fdt_slices.len());
-        fdt_backup.clone_from_slice(fdt_slices);
-        unsafe {
-            if apply_debug_policy(slices.fdt, debug_policy).is_err() {
-                info!("Ignoring debug policy. Proceed to boot anyway.");
-                fdt_backup
-                    .as_ptr()
-                    .copy_to_nonoverlapping(mem::transmute::<_, _>(&slices.fdt), fdt_backup.len());
-            }
-        }
+    if let Err(err) = handle_debug_policy(slices.fdt, appended.get_debug_policy()) {
+        warn!("Ignoring errors from debug policy: {:?}", err);
     }
 
     info!("Expecting a bug making MMIO_GUARD_UNMAP return NOT_SUPPORTED on success");

@@ -389,6 +389,22 @@ impl<'a> FdtNodeMut<'a> {
         fdt_err_expect_zero(ret)
     }
 
+    /// Creates or changes a property name-value pair to the given node.
+    pub fn setprop(&mut self, name: &CStr, value: &[u8]) -> Result<()> {
+        // SAFETY - New value size is contratined to the existing value.
+        let ret = unsafe {
+            libfdt_bindgen::fdt_setprop(
+                self.fdt.as_mut_ptr(),
+                self.offset,
+                name.as_ptr(),
+                value.as_ptr().cast::<c_void>(),
+                value.len().try_into().map_err(|_| FdtError::BadValue)?,
+            )
+        };
+
+        fdt_err_expect_zero(ret)
+    }
+
     /// Get reference to the containing device tree.
     pub fn fdt(&mut self) -> &mut Fdt {
         self.fdt
@@ -573,6 +589,16 @@ impl Fdt {
     /// Return the device tree as a slice (may be smaller than the containing buffer).
     pub fn as_slice(&self) -> &[u8] {
         &self.buffer[..self.totalsize()]
+    }
+
+    /// Gets the property with node path and property name.
+    pub fn getprop<'a>(&'a self, node_path: &CStr, prop_name: &CStr) -> Result<Option<&'a [u8]>> {
+        let node_res = self.node(node_path)?;
+        if let Some(node) = node_res {
+            node.getprop(prop_name)
+        } else {
+            Ok(None)
+        }
     }
 
     fn path_offset(&self, path: &CStr) -> Result<Option<c_int>> {
