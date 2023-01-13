@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c308ab76_8b8e5fca",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T10:47:01Z",
+      "side": 1,
+      "message": "bootconfig(s)",
+      "range": {
+        "startLine": 30,
+        "startChar": 14,
+        "endLine": 30,
+        "endChar": 24
+      },
+      "revId": "640ee58b22d41c00c2dc394899a051a3b3897911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4334fd32_6b6e042c",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T10:47:01Z",
+      "side": 1,
+      "message": "uber nit: the tool name already has \u0027bootconfig\u0027 in its name, could the commands be just attach/detach to make it less verbose?",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 20
+      },
+      "revId": "640ee58b22d41c00c2dc394899a051a3b3897911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d91beac4_0a7acc77",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T10:47:01Z",
+      "side": 1,
+      "message": "long line",
+      "range": {
+        "startLine": 41,
+        "startChar": 95,
+        "endLine": 41,
+        "endChar": 119
+      },
+      "revId": "640ee58b22d41c00c2dc394899a051a3b3897911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddbff0e6_9efa8e79",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T10:47:01Z",
+      "side": 1,
+      "message": "It would be helpful to make it clear what is input and what is output, either with variable names (\"out_initrd\") or at least the comments",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 14
+      },
+      "revId": "640ee58b22d41c00c2dc394899a051a3b3897911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1d89db6_eaf224ba",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T10:47:01Z",
+      "side": 1,
+      "message": "nit: \"buffer\" is shortened to \"buf\", not \"buff\"",
+      "range": {
+        "startLine": 62,
+        "startChar": 26,
+        "endLine": 62,
+        "endChar": 34
+      },
+      "revId": "640ee58b22d41c00c2dc394899a051a3b3897911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b342e8e4_31b46b40",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T10:47:01Z",
+      "side": 1,
+      "message": "Name your constants, and if they\u0027re tied to a type, get them from the compiler, eg. `const CHECKSUM_LEN: usize \u003d std::mem::size_of::\u003cu32\u003e()`",
+      "range": {
+        "startLine": 71,
+        "startChar": 67,
+        "endLine": 71,
+        "endChar": 68
+      },
+      "revId": "640ee58b22d41c00c2dc394899a051a3b3897911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d98e104_0e27cfe7",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T10:47:01Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 72,
+        "startChar": 36,
+        "endLine": 72,
+        "endChar": 37
+      },
+      "revId": "640ee58b22d41c00c2dc394899a051a3b3897911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d07f7eb_cd7326bb",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T10:47:01Z",
+      "side": 1,
+      "message": "Just create a 4-byte buffer specifically for this. You won\u0027t need the slicing and casting.",
+      "range": {
+        "startLine": 72,
+        "startChar": 30,
+        "endLine": 72,
+        "endChar": 38
+      },
+      "revId": "640ee58b22d41c00c2dc394899a051a3b3897911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff1ecf0b_9af2ad63",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T10:47:01Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 74,
+        "startChar": 33,
+        "endLine": 74,
+        "endChar": 34
+      },
+      "revId": "640ee58b22d41c00c2dc394899a051a3b3897911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c8f4bd3_6563f413",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T10:47:01Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 76,
+        "startChar": 56,
+        "endLine": 76,
+        "endChar": 57
+      },
+      "revId": "640ee58b22d41c00c2dc394899a051a3b3897911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5337eef3_71fad89b",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T10:47:01Z",
+      "side": 1,
+      "message": "nit: this would be a nice helper method you could call twice",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 5
+      },
+      "revId": "640ee58b22d41c00c2dc394899a051a3b3897911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
