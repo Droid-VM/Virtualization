@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "140dc369_7b568c82",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T16:02:45Z",
+      "side": 1,
+      "message": "uber nit: I would move this inside the copyfile2file function. It really only makes sense in that context",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 28
+      },
+      "revId": "3d10f9ca9c696ee89ddaa82ef07e30f3ce38cf1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d491659c_6549d1b7",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T16:02:45Z",
+      "side": 1,
+      "message": "Oh, I meant the comment above. That is picked up by Clap and printed as help on command line. Currently it prints this:\n```\nUsage:\n\nArguments:\n  \u003cINITRD\u003e          Initrd (without bootconfig)\n  [BOOTCONFIGS]...  Bootconfig\n\nOptions:\n      --output \u003cOUTPUT\u003e  Output\n  -h, --help             Print help information\n```",
+      "range": {
+        "startLine": 35,
+        "startChar": 25,
+        "endLine": 35,
+        "endChar": 33
+      },
+      "revId": "3d10f9ca9c696ee89ddaa82ef07e30f3ce38cf1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24f21684_39903852",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T16:02:45Z",
+      "side": 1,
+      "message": "sign_virt_apex.py (primarily the missing underscore)",
+      "range": {
+        "startLine": 44,
+        "startChar": 22,
+        "endLine": 44,
+        "endChar": 36
+      },
+      "revId": "3d10f9ca9c696ee89ddaa82ef07e30f3ce38cf1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed138d03_bdebfd7f",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-13T16:02:45Z",
+      "side": 1,
+      "message": "size_of::\u003cu32\u003e()",
+      "range": {
+        "startLine": 86,
+        "startChar": 27,
+        "endLine": 86,
+        "endChar": 28
+      },
+      "revId": "3d10f9ca9c696ee89ddaa82ef07e30f3ce38cf1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
