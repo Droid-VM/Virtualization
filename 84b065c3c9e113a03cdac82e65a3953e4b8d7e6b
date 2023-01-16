@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d00c0379_5b2368ad",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-16T18:04:01Z",
+      "side": 1,
+      "message": "Naming nit: testNoLongHypervisorSections\nBecause I think that\u0027s the aim?",
+      "range": {
+        "startLine": 139,
+        "startChar": 16,
+        "endLine": 139,
+        "endChar": 42
+      },
+      "revId": "84b065c3c9e113a03cdac82e65a3953e4b8d7e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4027192_8e2eca0c",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-16T18:04:01Z",
+      "side": 1,
+      "message": "Inline?\nOr will this ever be used elsewhere?\n\n(The helpers above are just because we have 2 very similar tests)",
+      "range": {
+        "startLine": 140,
+        "startChar": 8,
+        "endLine": 140,
+        "endChar": 40
+      },
+      "revId": "84b065c3c9e113a03cdac82e65a3953e4b8d7e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b370e8c_00b99334",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-16T18:04:01Z",
+      "side": 1,
+      "message": "threshold\n(Nvr abbrvte)",
+      "range": {
+        "startLine": 486,
+        "startChar": 57,
+        "endLine": 486,
+        "endChar": 62
+      },
+      "revId": "84b065c3c9e113a03cdac82e65a3953e4b8d7e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99fddb80_21ef138b",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-16T18:04:01Z",
+      "side": 1,
+      "message": "You don\u0027t need this. Truth will display the subject of the test (result) if the test fails anyway.\n\n(Truth is awesome; it\u0027s real strength is high quality messages on failure.)",
+      "range": {
+        "startLine": 497,
+        "startChar": 57,
+        "endLine": 497,
+        "endChar": 76
+      },
+      "revId": "84b065c3c9e113a03cdac82e65a3953e4b8d7e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "879e5d7e_4a44cc47",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-16T18:04:01Z",
+      "side": 1,
+      "message": "I\u0027m not convinced this is useful",
+      "range": {
+        "startLine": 499,
+        "startChar": 5,
+        "endLine": 499,
+        "endChar": 72
+      },
+      "revId": "84b065c3c9e113a03cdac82e65a3953e4b8d7e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffc87f8f_604df704",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-16T18:04:01Z",
+      "side": 1,
+      "message": "assertWithMessage(\"...\").that(stats.max()).isAtMost(thres);",
+      "range": {
+        "startLine": 504,
+        "startChar": 0,
+        "endLine": 505,
+        "endChar": 77
+      },
+      "revId": "84b065c3c9e113a03cdac82e65a3953e4b8d7e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
