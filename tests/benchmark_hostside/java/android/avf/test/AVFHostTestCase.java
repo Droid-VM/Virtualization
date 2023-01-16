@@ -28,6 +28,7 @@ import static org.junit.Assume.assumeTrue;
 
 import android.platform.test.annotations.RootPermissionTest;
 
+import com.android.microdroid.test.host.HypTracer;
 import com.android.microdroid.test.common.MetricsProcessor;
 import com.android.microdroid.test.host.CommandRunner;
 import com.android.microdroid.test.host.MicrodroidHostTestCaseBase;
@@ -37,6 +38,7 @@ import com.android.tradefed.device.TestDevice;
 import com.android.tradefed.log.LogUtil.CLog;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner;
 import com.android.tradefed.util.CommandResult;
+import com.android.tradefed.util.SimpleStats;
 
 import org.junit.After;
 import org.junit.Before;
@@ -50,6 +52,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.BufferedReader;
 
 @RootPermissionTest
 @RunWith(DeviceJUnit4ClassRunner.class)
@@ -80,6 +86,8 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
     private static final String APK_NAME = "MicrodroidTestApp.apk";
     private static final String PACKAGE_NAME = "com.android.microdroid.test";
     private static final int NUM_VCPUS = 3;
+
+    private static final double HYP_LONG_SECTIONS_SEC = 0.001;
 
     private MetricsProcessor mMetricsProcessor;
     @Rule public TestMetrics mMetrics = new TestMetrics();
@@ -125,6 +133,11 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
     @Test
     public void testBootWithoutCompOS() throws Exception {
         composTestHelper(false);
+    }
+
+    @Test
+    public void testHypervisorLongSections() throws Exception {
+        hypervisorLongSectionsTestHelper(HYP_LONG_SECTIONS_SEC);
     }
 
     @Test
@@ -468,6 +481,29 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
         }
 
         reportMetric(bootDmesgTime, "dmesg_boot_time_" + suffix, "s");
+    }
+
+    private void hypervisorLongSectionsTestHelper(double thres) throws Exception {
+        assumeTrue("Skip without hypervisor tracing",
+                ((TestDevice) getDevice()).supportsHypTracing());
+        assumeFalse("Skip on CF; too slow", isCuttlefish());
+
+        // Enable hypervisor tracing, and run a compos test to generate
+        // hypervisor traffic
+        HypTracer tracer = new HypTracer(getDevice());
+        tracer.start();
+        CommandRunner android = new CommandRunner(getDevice());
+        String result = android.run(COMPOSD_CMD_BIN + " test-compile");
+        assertWithMessage("Failed to test compilation VM. Reason: " + result)
+            .that(result).ignoringCase().contains("all ok");
+        CLog.i("Success to run compilation VM test. Result: " + result);
+        tracer.stop();
+
+        SimpleStats stats = tracer.getDurationStats();
+        reportMetric(stats.getData(), "hyp_sections", "s");
+        if (stats.max() > thres)
+            throw new AssertionError("Hypervisor traces have long sections");
+        CLog.i("Hypervisor traces parsed successfully, no long sections found");
     }
 
     private void skipIfPKVMStatusSwitchNotSupported() throws Exception {
