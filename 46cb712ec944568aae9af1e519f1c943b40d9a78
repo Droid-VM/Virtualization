@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "503055f7_49cfe7db",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-16T10:38:48Z",
+      "side": 1,
+      "message": "nit: Can I suggest calling this `AvbHashDescriptorRef` to align with foreign_types and rename the fields to `desc` and `ptr`? It took me a while to understand that `hash_desc` is just a buffer for byteswapped header values, not a copy of the whole data structure, which is why you need `raw_desc`. A comment explaining it would go a long way.",
+      "range": {
+        "startLine": 261,
+        "startChar": 7,
+        "endLine": 261,
+        "endChar": 28
+      },
+      "revId": "46cb712ec944568aae9af1e519f1c943b40d9a78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2dbcb1d_5864680b",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-16T10:38:48Z",
+      "side": 1,
+      "message": "nit: no `u32_to_usize`?",
+      "range": {
+        "startLine": 304,
+        "startChar": 67,
+        "endLine": 304,
+        "endChar": 75
+      },
+      "revId": "46cb712ec944568aae9af1e519f1c943b40d9a78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be3e021d_ee96f2e3",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-16T10:38:48Z",
+      "side": 1,
+      "message": "This is not a great helper function. It is safe in the context of today\u0027s users but not in general. It only does what the name says if the input is a null-terminated string, but there is no such requirement or check. It will also panic if you give it an empty slice.\n\nOption 1) Turn it into `PartitionName::as_bytes`, similar to your `as_cstr`, and compare the partition name slice against `PartitionName::InitrdABC.as_bytes()`.\n\nOption 2) Implement this as `PartitionName::from_bytes`. That way you can first convert the partition name slice to an enum value and then have a `PartitionName::is_initrd` to do the final check.\n\nI would actually prefer option 2. `partition_name_matches_initrd` feels like it\u0027s mixing type conversion with policy.",
+      "range": {
+        "startLine": 377,
+        "startChar": 3,
+        "endLine": 377,
+        "endChar": 34
+      },
+      "revId": "46cb712ec944568aae9af1e519f1c943b40d9a78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afb7fdc7_65a7372b",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-16T10:38:48Z",
+      "side": 1,
+      "message": "As a follow-up: I think we should also check that there aren\u0027t any unexpected hash descriptors. Let\u0027s say we introduce `initrd_vendor` in the future. If we find it in the vbmeta, the signer clearly intended for pvmfw to check its integrity but this will just ignore it. So I\u0027d say if we don\u0027t understand the semantics of a descriptor, we should return an error, not be silent about it. WDYT?",
+      "range": {
+        "startLine": 559,
+        "startChar": 0,
+        "endLine": 559,
+        "endChar": 10
+      },
+      "revId": "46cb712ec944568aae9af1e519f1c943b40d9a78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
