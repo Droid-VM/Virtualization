@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a24bedfa_564bbf89",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-16T12:38:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "503055f7_49cfe7db",
+      "range": {
+        "startLine": 261,
+        "startChar": 7,
+        "endLine": 261,
+        "endChar": 28
+      },
+      "revId": "46cb712ec944568aae9af1e519f1c943b40d9a78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2dbcb1d_5864680b",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-16T10:38:48Z",
       "side": 1,
       "message": "nit: no `u32_to_usize`?",
+      "range": {
+        "startLine": 304,
+        "startChar": 67,
+        "endLine": 304,
+        "endChar": 75
+      },
+      "revId": "46cb712ec944568aae9af1e519f1c943b40d9a78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df479087_fa8af72b",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-16T12:38:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2dbcb1d_5864680b",
       "range": {
         "startLine": 304,
         "startChar": 67,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4feca919_9aff8a29",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-16T12:38:11Z",
+      "side": 1,
+      "message": "Done. I kind of mixed the option 1 and 2 you suggested here. I think it\u0027s more clear now.",
+      "parentUuid": "be3e021d_ee96f2e3",
+      "range": {
+        "startLine": 377,
+        "startChar": 3,
+        "endLine": 377,
+        "endChar": 34
+      },
+      "revId": "46cb712ec944568aae9af1e519f1c943b40d9a78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afb7fdc7_65a7372b",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-01-16T10:38:48Z",
       "side": 1,
       "message": "As a follow-up: I think we should also check that there aren\u0027t any unexpected hash descriptors. Let\u0027s say we introduce `initrd_vendor` in the future. If we find it in the vbmeta, the signer clearly intended for pvmfw to check its integrity but this will just ignore it. So I\u0027d say if we don\u0027t understand the semantics of a descriptor, we should return an error, not be silent about it. WDYT?",
+      "range": {
+        "startLine": 559,
+        "startChar": 0,
+        "endLine": 559,
+        "endChar": 10
+      },
+      "revId": "46cb712ec944568aae9af1e519f1c943b40d9a78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cb88727_e3f04242",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 25
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-16T12:38:11Z",
+      "side": 1,
+      "message": "SGTM. I added a TODO to address this in a subsequent cl.",
+      "parentUuid": "afb7fdc7_65a7372b",
       "range": {
         "startLine": 559,
         "startChar": 0,
