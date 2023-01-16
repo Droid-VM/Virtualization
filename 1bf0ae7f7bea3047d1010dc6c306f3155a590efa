@@ -16,6 +16,29 @@
       "message": "Thanks for the review!",
       "revId": "1bf0ae7f7bea3047d1010dc6c306f3155a590efa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5b25a26_9afe8d16",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-16T13:18:17Z",
+      "side": 1,
+      "message": "I actually liked the previous name better. The function does not have the context on what is and isn\u0027t expected. This would make sense if one of the arguments was a `has_initrd` boolean.",
+      "range": {
+        "startLine": 572,
+        "startChar": 8,
+        "endLine": 572,
+        "endChar": 50
+      },
+      "revId": "1bf0ae7f7bea3047d1010dc6c306f3155a590efa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
