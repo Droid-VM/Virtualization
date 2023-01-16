@@ -95,6 +95,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50a2595a_85a14ead",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/HypTracer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-16T18:08:44Z",
+      "side": 1,
+      "message": "Is it enough to run this at stop()? Can we lose events this way? Would it be better to run it in a background thread between start/stop?",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 31
+      },
+      "revId": "2be8cdcd5415f09f893bfc83625481546030bae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "daae1ff3_f46b4c71",
         "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/HypTracer.java",
         "patchSetId": 1
