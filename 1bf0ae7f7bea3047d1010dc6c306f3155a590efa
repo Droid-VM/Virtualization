@@ -39,6 +39,30 @@
       },
       "revId": "1bf0ae7f7bea3047d1010dc6c306f3155a590efa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ea1e5ac_859c5bd7",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-16T13:25:23Z",
+      "side": 1,
+      "message": "I changed the name because I plan to reuse this method for `initrd.is_some()` case later, so we\u0027ll have something like\n\n```\nif payload.initrd.is_none() {\n    verify_vbmeta_has_no_unexpected_descriptor(\u0026vbmeta_images[0], search_initrd_hash_descriptor)?;\nelse {\n    verify_vbmeta_has_no_unexpected_descriptor(\u0026vbmeta_images[0], search_unexpected_descriptor)?;\n}\n```\nwdyt?",
+      "parentUuid": "e5b25a26_9afe8d16",
+      "range": {
+        "startLine": 572,
+        "startChar": 8,
+        "endLine": 572,
+        "endChar": 50
+      },
+      "revId": "1bf0ae7f7bea3047d1010dc6c306f3155a590efa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
