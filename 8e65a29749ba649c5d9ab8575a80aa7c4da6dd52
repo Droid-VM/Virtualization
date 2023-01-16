@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "123be84a_0ce359a9",
+        "filename": "compos/apk/assets/vm_config.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-16T10:00:31Z",
+      "side": 0,
+      "message": "We explicitly want tombstones from CompOS regardless of whether debug mode is enabled.\n\nSee e.g. b/250165198#comment6.\n\nSo we need to retain some way to request that. TBH I\u0027m tempted to keep export_tombstones, but perhaps rename it to force_export_tombstones (just to make it clear that false doesn\u0027t imply no tombstones ever).\n\nOr the alternative is a (restricted) vm_payload API, as suggested by Jiyong.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 28
+      },
+      "revId": "8e65a29749ba649c5d9ab8575a80aa7c4da6dd52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
