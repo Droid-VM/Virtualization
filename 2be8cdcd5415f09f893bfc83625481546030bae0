@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6137e65f_88b4a49c",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/HypTracer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-01-16T18:19:06Z",
+      "side": 1,
+      "message": "Right, I was actually wondering, but figured if another hypervisor ever finds a way to expose things to userspace will respecting the ABI, there is no reason this wouldn\u0027t work.\n\nBut I guess we can always rename this if that happens, so whatever, happy to rename 😊",
+      "parentUuid": "3c212586_b6ac17de",
+      "range": {
+        "startLine": 36,
+        "startChar": 19,
+        "endLine": 36,
+        "endChar": 28
+      },
+      "revId": "2be8cdcd5415f09f893bfc83625481546030bae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17e3b17f_21812045",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5af6f073_b4b5a1a6",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/HypTracer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-01-16T18:19:06Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "17e3b17f_21812045",
+      "range": {
+        "startLine": 40,
+        "startChar": 48,
+        "endLine": 40,
+        "endChar": 55
+      },
+      "revId": "2be8cdcd5415f09f893bfc83625481546030bae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f02cfc0f_0c32b5ec",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-01-16T18:06:28Z",
       "side": 1,
       "message": "Cache this object",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 59
+      },
+      "revId": "2be8cdcd5415f09f893bfc83625481546030bae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cd1f404_c39fb8b3",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/HypTracer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-01-16T18:19:06Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f02cfc0f_0c32b5ec",
       "range": {
         "startLine": 46,
         "startChar": 0,
@@ -129,6 +201,30 @@
       "writtenOn": "2023-01-16T18:06:28Z",
       "side": 1,
       "message": "Should you set enter back to minus one here?",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 26
+      },
+      "revId": "2be8cdcd5415f09f893bfc83625481546030bae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9957adea_d30a4877",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/HypTracer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-01-16T18:19:06Z",
+      "side": 1,
+      "message": "That would mean the trace if malformed, which means we have bigger problems I suppose, but that won\u0027t harm so why not 😊",
+      "parentUuid": "daae1ff3_f46b4c71",
       "range": {
         "startLine": 110,
         "startChar": 0,
