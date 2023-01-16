@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d705a354_431064ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-16T11:20:44Z",
+      "side": 1,
+      "message": "Giving +2, hopefully it will stick(?)",
+      "revId": "848decf5bf1ce25a13012edecff148ff594db8fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "177075b5_7dd59b9d",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-16T11:20:44Z",
+      "side": 1,
+      "message": "nit: could you introduce `SIZE_128KB` in helpers? The larger these values become, the harder it is to know if they are proper powers of 2.",
+      "range": {
+        "startLine": 30,
+        "startChar": 22,
+        "endLine": 30,
+        "endChar": 28
+      },
+      "revId": "848decf5bf1ce25a13012edecff148ff594db8fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
