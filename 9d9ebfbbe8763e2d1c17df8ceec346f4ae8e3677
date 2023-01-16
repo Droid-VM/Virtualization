@@ -39,6 +39,30 @@
       },
       "revId": "9d9ebfbbe8763e2d1c17df8ceec346f4ae8e3677",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f72d379_187a07ae",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-16T14:09:23Z",
+      "side": 1,
+      "message": "I\u0027m also not very sure about the name here, actually this corresponds to VirtualMachineConfig::DebugLevel[1] and will be mapped to dice::Mode[2]. I matched the latter here. Maybe it\u0027s more clear to name it as `DebugLevel`?\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/javalib/src/android/system/virtualmachine/VirtualMachineConfig.java;l\u003d79;drc\u003d8961f108184b6701f9b7131218079a09e9c7ee7d\n[2] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/libs/dice/src/lib.rs;l\u003d95;drc\u003d4f4f5eb3e009260544b939648a6bf7a41e262bdc",
+      "parentUuid": "3b3c15aa_d6a31fb2",
+      "range": {
+        "startLine": 34,
+        "startChar": 9,
+        "endLine": 34,
+        "endChar": 13
+      },
+      "revId": "9d9ebfbbe8763e2d1c17df8ceec346f4ae8e3677",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
