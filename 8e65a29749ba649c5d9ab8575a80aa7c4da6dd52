@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31d78629_cbd3cc3f",
+        "filename": "tests/testapk/src/native/crashbinary.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-16T09:50:52Z",
+      "side": 1,
+      "message": "Hmm. I guess we don\u0027t want to wait for it to start before running the payload.\nBut crashes will sometimes happen early on.",
+      "range": {
+        "startLine": 21,
+        "startChar": 4,
+        "endLine": 21,
+        "endChar": 45
+      },
+      "revId": "8e65a29749ba649c5d9ab8575a80aa7c4da6dd52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
