@@ -21,7 +21,9 @@ use crate::helpers;
 use crate::memory::MemoryTracker;
 use crate::mmio_guard;
 use crate::mmu;
+use alloc::vec::Vec;
 use core::arch::asm;
+use core::mem;
 use core::num::NonZeroUsize;
 use core::slice;
 use dice::bcc::Handover;
@@ -284,8 +286,17 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<(), R
     helpers::flush(slices.fdt.as_slice());
 
     if let Some(debug_policy) = appended.get_debug_policy() {
-        // SAFETY - As we `?` the result, there is no risk of re-using a bad `slices.fdt`.
-        unsafe { apply_debug_policy(slices.fdt, debug_policy) }?;
+        let fdt_slices = slices.fdt.as_slice();
+        let mut fdt_backup = Vec::with_capacity(fdt_slices.len());
+        fdt_backup.clone_from_slice(fdt_slices);
+        unsafe {
+            if apply_debug_policy(slices.fdt, debug_policy).is_err() {
+                info!("Ignoring debug policy. Proceed to boot anyway.");
+                fdt_backup
+                    .as_ptr()
+                    .copy_to_nonoverlapping(mem::transmute::<_, _>(&slices.fdt), fdt_backup.len());
+            }
+        }
     }
 
     info!("Expecting a bug making MMIO_GUARD_UNMAP return NOT_SUPPORTED on success");
