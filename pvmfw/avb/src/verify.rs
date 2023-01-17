@@ -17,8 +17,9 @@
 use crate::error::{slot_verify_result_to_verify_payload_result, AvbSlotVerifyError};
 use avb_bindgen::{
     avb_descriptor_foreach, avb_hash_descriptor_validate_and_byteswap, avb_slot_verify,
-    avb_slot_verify_data_free, AvbDescriptor, AvbHashDescriptor, AvbHashtreeErrorMode, AvbIOResult,
-    AvbOps, AvbSlotVerifyData, AvbSlotVerifyFlags, AvbVBMetaData,
+    avb_slot_verify_data_free, AvbDescriptor, AvbDescriptorForeachFunc, AvbHashDescriptor,
+    AvbHashtreeErrorMode, AvbIOResult, AvbOps, AvbSlotVerifyData, AvbSlotVerifyFlags,
+    AvbVBMetaData,
 };
 use core::{
     ffi::{c_char, c_void, CStr},
@@ -256,6 +257,24 @@ fn try_search_initrd_hash_descriptor(
         hash_desc.partition_name()?.try_into(),
         Ok(PartitionName::InitrdDebug) | Ok(PartitionName::InitrdNormal),
     ) {
+        write(user_data as *mut bool, true)?;
+    }
+    Ok(())
+}
+
+extern "C" fn search_unexpected_hash_descriptor(
+    descriptor: *const AvbDescriptor,
+    user_data: *mut c_void,
+) -> bool {
+    try_search_unexpected_hash_descriptor(descriptor, user_data).is_ok()
+}
+
+fn try_search_unexpected_hash_descriptor(
+    descriptor: *const AvbDescriptor,
+    user_data: *mut c_void,
+) -> Result<(), AvbIOError> {
+    let hash_desc = AvbHashDescriptorRef::try_from(descriptor)?;
+    if PartitionName::try_from(hash_desc.partition_name()?).is_err() {
         write(user_data as *mut bool, true)?;
     }
     Ok(())
@@ -522,8 +541,9 @@ impl<'a> Payload<'a> {
     }
 }
 
-fn verify_vbmeta_has_no_initrd_descriptor(
+fn verify_vbmeta_has_no_unexpected_descriptor(
     vbmeta_image: &AvbVBMetaData,
+    search_unexpected_descriptor: AvbDescriptorForeachFunc,
 ) -> Result<(), AvbSlotVerifyError> {
     is_not_null(vbmeta_image.vbmeta_data).map_err(|_| AvbSlotVerifyError::Io)?;
     let mut has_unexpected_descriptor = false;
@@ -532,7 +552,7 @@ fn verify_vbmeta_has_no_initrd_descriptor(
         avb_descriptor_foreach(
             vbmeta_image.vbmeta_data,
             vbmeta_image.vbmeta_size,
-            Some(search_initrd_hash_descriptor),
+            search_unexpected_descriptor,
             &mut has_unexpected_descriptor as *mut _ as *mut c_void,
         )
     } {
@@ -559,9 +579,15 @@ pub fn verify_payload(
         return Err(AvbSlotVerifyError::InvalidMetadata);
     }
     if payload.initrd.is_none() {
-        verify_vbmeta_has_no_initrd_descriptor(&vbmeta_images[0])?;
+        verify_vbmeta_has_no_unexpected_descriptor(
+            &vbmeta_images[0],
+            Some(search_initrd_hash_descriptor),
+        )?;
+        return Ok(());
     }
-    // TODO(b/256148034): Check the vbmeta doesn't have hash descriptors other than
-    // boot, initrd_normal, initrd_debug.
+    verify_vbmeta_has_no_unexpected_descriptor(
+        &vbmeta_images[0],
+        Some(search_unexpected_hash_descriptor),
+    )?;
     Ok(())
 }
