@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5daf182a_2e75df98",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-17T16:02:25Z",
+      "side": 1,
+      "message": "This is for initrd\u003d\u003dNone case, in this case, the hash descriptors `initrd_debug` or `initrd_normal` are not allowed.\n\nThe check below checks when initrd\u003d\u003dSome, we only allow `initrd_debug` or `initrd_normal`. Basically they are contradictory, how would you like to have them both?",
+      "parentUuid": "88ee4852_11e903ab",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 22
+      },
+      "revId": "7929743c14f1de8bfbcc77824efa301fdd17cda0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8b8735c_8df84774",
         "filename": "pvmfw/avb/tests/api_test.rs",
         "patchSetId": 2
@@ -54,6 +78,30 @@
       "writtenOn": "2023-01-17T15:14:08Z",
       "side": 1,
       "message": "Can you add a second test case with no initrd?",
+      "range": {
+        "startLine": 81,
+        "startChar": 3,
+        "endLine": 81,
+        "endChar": 68
+      },
+      "revId": "7929743c14f1de8bfbcc77824efa301fdd17cda0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cb1149c_a36b9288",
+        "filename": "pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-17T16:02:25Z",
+      "side": 1,
+      "message": "If there\u0027s no initrd hash desc in vbmeta, the verification will fail anyway once this change (https://r.android.com/c/2388176) lands. Can we add this test after that change? Because with the current cl, that test won\u0027t fail yet.",
+      "parentUuid": "a8b8735c_8df84774",
       "range": {
         "startLine": 81,
         "startChar": 3,
