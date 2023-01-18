@@ -259,6 +259,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e47de83_9dcb991e",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-18T11:52:33Z",
+      "side": 1,
+      "message": "Yes. It would also be nice if the `foreach` could modify that list along the way. That would reject multiple hash descriptors with the same name. You could implement it as a u32 bitmap, for example.",
+      "parentUuid": "be5fb8d0_4fe91b16",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 22
+      },
+      "revId": "7929743c14f1de8bfbcc77824efa301fdd17cda0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8b8735c_8df84774",
         "filename": "pvmfw/avb/tests/api_test.rs",
         "patchSetId": 2
