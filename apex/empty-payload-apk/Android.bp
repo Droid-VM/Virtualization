@@ -4,23 +4,24 @@ package {
 
 android_app {
     name: "EmptyPayloadApp",
-    installable: true,
+    installable: false,
     jni_libs: ["MicrodroidEmptyPayloadJniLib"],
     apex_available: ["com.android.virt"],
     sdk_version: "system_current",
     jni_uses_platform_apis: true,
     min_sdk_version: "UpsideDownCake",
-    target_sdk_version: "UpsideDownCake",
-    compile_multilib: "first",
+    target_sdk_version: "current",
+    compile_multilib: "both",
     stl: "none",
 }
 
-cc_library {
+cc_library_shared {
     name: "MicrodroidEmptyPayloadJniLib",
     srcs: ["empty_binary.cpp"],
     shared_libs: ["libvm_payload#current"],
-    installable: true,
+    installable: false,
     apex_available: ["com.android.virt"],
-    compile_multilib: "first",
+    compile_multilib: "both",
     stl: "none",
+    min_sdk_version: "UpsideDownCake",
 }
