@@ -39,6 +39,30 @@
       },
       "revId": "b1612cbee5dacd044b6e354de897edf41877958d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4185610_93840454",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-18T15:37:13Z",
+      "side": 1,
+      "message": "You\u0027re right. Actually I\u0027d like to collect the `HashDescriptor` and eventually extract the digest from the it. It\u0027s true that nothing guarantees the lifetime of the item I get from `foreach` is long enough here.\n\nI can used `avb_descriptor_get_all` to get all the descriptors and indicate that the `HashDescriptor` lives as long as `descriptors`. Like this, wdyt?",
+      "parentUuid": "68d2ee54_73cb90e2",
+      "range": {
+        "startLine": 266,
+        "startChar": 21,
+        "endLine": 266,
+        "endChar": 25
+      },
+      "revId": "b1612cbee5dacd044b6e354de897edf41877958d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
