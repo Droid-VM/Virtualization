@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95e68065_d57291e0",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/KvmHypTracer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-18T13:43:08Z",
+      "side": 1,
+      "message": "Nit: It\u0027s not a list; \"HYP_EVENTS\" maybe?",
+      "range": {
+        "startLine": 38,
+        "startChar": 32,
+        "endLine": 38,
+        "endChar": 46
+      },
+      "revId": "e1283e179403252d42fc41aacb167c8764de726f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57670e8c_2483e703",
         "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/KvmHypTracer.java",
         "patchSetId": 2
@@ -86,6 +109,30 @@
       "side": 1,
       "message": "I think that qualifies as less readable, but alright, I\u0027ll make the linter happy 😊",
       "parentUuid": "bca14f36_e0fdbcfb",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 101
+      },
+      "revId": "e1283e179403252d42fc41aacb167c8764de726f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c42ae50_6988884a",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/KvmHypTracer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-18T13:43:08Z",
+      "side": 1,
+      "message": "We have a presubmit check that should be telling you to run the google-java-format tool, which should deal with this.\n(And yes, there\u0027s no negotiating with it.)\n\nMore significantly - put the Pattern in a static so we only compile it once?",
+      "parentUuid": "17a80654_1b14e1dd",
       "range": {
         "startLine": 65,
         "startChar": 0,
