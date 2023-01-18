@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9cbc1c7b_8c065da2",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-18T10:31:42Z",
+      "side": 1,
+      "message": "Okay, but I\u0027m asking why do we handle the presence of `foobar` differently depending on initrd\u003d\u003dSome/None. From your own asseessment:\n```\nIf initrd \u003d\u003d None:\nhash_desc(kernel) + hash_desc(foobar) \u003d\u003e success\n```\nbut\n```\nIf initrd \u003d\u003d Some:\nhash_desc(kernel) + hash_desc(foobar) \u003d\u003e failure\nhash_desc(kernel) + hash_desc(initrd_normal)+ hash_desc(foobar) \u003d\u003e failure\n```\nIt should result in failure in both cases",
+      "parentUuid": "3b005e9c_82adc4a5",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 22
+      },
+      "revId": "7929743c14f1de8bfbcc77824efa301fdd17cda0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8b8735c_8df84774",
         "filename": "pvmfw/avb/tests/api_test.rs",
         "patchSetId": 2
