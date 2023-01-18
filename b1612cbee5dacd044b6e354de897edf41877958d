@@ -16,6 +16,29 @@
       "message": "Hi David, PTAL.",
       "revId": "b1612cbee5dacd044b6e354de897edf41877958d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68d2ee54_73cb90e2",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-18T12:00:09Z",
+      "side": 1,
+      "message": "How is this linked to the lifetime of the AvbDescriptor? I think your CL only compiles because of the unsafe `slice::from_raw_parts`",
+      "range": {
+        "startLine": 266,
+        "startChar": 21,
+        "endLine": 266,
+        "endChar": 25
+      },
+      "revId": "b1612cbee5dacd044b6e354de897edf41877958d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
