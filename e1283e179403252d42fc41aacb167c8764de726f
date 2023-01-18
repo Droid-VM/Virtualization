@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7c204b0_275e2e6c",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/KvmHypTracer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-01-18T12:27:49Z",
+      "side": 1,
+      "message": "I don\u0027t think making it shorter would help with making things more readable TBH.",
+      "parentUuid": "57670e8c_2483e703",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 101
+      },
+      "revId": "e1283e179403252d42fc41aacb167c8764de726f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b37e9874_c57503c2",
         "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/KvmHypTracer.java",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-18T12:24:31Z",
       "side": 1,
       "message": "Should we throw in `else`? Did you say that meant corruption? Same for the \"enter\" case. But maybe I\u0027m overly paranoid...",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 21
+      },
+      "revId": "e1283e179403252d42fc41aacb167c8764de726f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db92110b_dd1d27e9",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/KvmHypTracer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-01-18T12:27:49Z",
+      "side": 1,
+      "message": "Actually, I\u0027m not sure the trace is guaranteed to _start_ with an \u0027enter\u0027 event ...",
+      "parentUuid": "b37e9874_c57503c2",
       "range": {
         "startLine": 134,
         "startChar": 0,
