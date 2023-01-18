@@ -19,8 +19,9 @@ use crate::error::{
 };
 use crate::partition::PartitionName;
 use crate::utils::{as_ref, is_not_null, to_nonnull, to_usize, usize_checked_add, write};
+use alloc::vec::Vec;
 use avb_bindgen::{
-    avb_descriptor_foreach, avb_hash_descriptor_validate_and_byteswap, avb_slot_verify,
+    avb_descriptor_get_all, avb_free, avb_hash_descriptor_validate_and_byteswap, avb_slot_verify,
     avb_slot_verify_data_free, AvbDescriptor, AvbHashDescriptor, AvbHashtreeErrorMode, AvbIOResult,
     AvbOps, AvbSlotVerifyData, AvbSlotVerifyFlags, AvbVBMetaData,
 };
@@ -202,42 +203,21 @@ fn try_validate_public_key_for_partition(
     write(out_is_trusted, public_key == trusted_public_key)
 }
 
-extern "C" fn search_initrd_hash_descriptor(
-    descriptor: *const AvbDescriptor,
-    user_data: *mut c_void,
-) -> bool {
-    try_search_initrd_hash_descriptor(descriptor, user_data).is_ok()
+/// `desc` only contains the metadata like fields length and flags of the descriptor.
+/// The data itself is contained in `data`.
+struct HashDescriptor<'a> {
+    desc: AvbHashDescriptor,
+    data: &'a [u8],
 }
 
-fn try_search_initrd_hash_descriptor(
-    descriptor: *const AvbDescriptor,
-    user_data: *mut c_void,
-) -> Result<(), AvbIOError> {
-    let hash_desc = AvbHashDescriptorRef::try_from(descriptor)?;
-    if matches!(
-        hash_desc.partition_name()?.try_into(),
-        Ok(PartitionName::InitrdDebug) | Ok(PartitionName::InitrdNormal),
-    ) {
-        write(user_data as *mut bool, true)?;
-    }
-    Ok(())
-}
-
-/// `hash_desc` only contains the metadata like fields length and flags of the descriptor.
-/// The data itself is contained in `ptr`.
-struct AvbHashDescriptorRef {
-    hash_desc: AvbHashDescriptor,
-    ptr: *const AvbDescriptor,
-}
-
-impl TryFrom<*const AvbDescriptor> for AvbHashDescriptorRef {
+impl<'a> TryFrom<*const AvbDescriptor> for HashDescriptor<'a> {
     type Error = AvbIOError;
 
     fn try_from(descriptor: *const AvbDescriptor) -> Result<Self, Self::Error> {
         is_not_null(descriptor)?;
         // SAFETY: It is safe as the raw pointer `descriptor` is a nonnull pointer and
         // we have validated that it is of hash descriptor type.
-        let hash_desc = unsafe {
+        let desc = unsafe {
             let mut desc = MaybeUninit::uninit();
             if !avb_hash_descriptor_validate_and_byteswap(
                 descriptor as *const AvbHashDescriptor,
@@ -247,33 +227,93 @@ impl TryFrom<*const AvbDescriptor> for AvbHashDescriptorRef {
             }
             desc.assume_init()
         };
-        Ok(Self { hash_desc, ptr: descriptor })
+        let total_len = usize_checked_add(
+            size_of::<AvbDescriptor>(),
+            to_usize(desc.parent_descriptor.num_bytes_following)?,
+        )?;
+        // SAFETY: the descriptor has been validated so it is contained within the image.
+        let data = unsafe { slice::from_raw_parts(descriptor as *const u8, total_len) };
+        Ok(Self { desc, data })
     }
 }
 
-impl AvbHashDescriptorRef {
-    fn check_is_in_range(&self, index: usize) -> Result<(), AvbIOError> {
-        let parent_desc = self.hash_desc.parent_descriptor;
-        let total_len = usize_checked_add(
-            size_of::<AvbDescriptor>(),
-            to_usize(parent_desc.num_bytes_following)?,
-        )?;
-        if index <= total_len {
-            Ok(())
-        } else {
-            Err(AvbIOError::Io)
-        }
+impl HashDescriptor<'_> {
+    /// Returns the non null-terminated partition name.
+    fn non_null_terminated_partition_name(&self) -> Result<&[u8], AvbIOError> {
+        let start = size_of::<AvbHashDescriptor>();
+        let end = usize_checked_add(start, to_usize(self.desc.partition_name_len)?)?;
+        self.data.get(start..end).ok_or(AvbIOError::RangeOutsidePartition)
     }
 
-    /// Returns the non null-terminated partition name.
-    fn partition_name(&self) -> Result<&[u8], AvbIOError> {
-        let partition_name_offset = size_of::<AvbHashDescriptor>();
-        let partition_name_len = to_usize(self.hash_desc.partition_name_len)?;
-        self.check_is_in_range(usize_checked_add(partition_name_offset, partition_name_len)?)?;
-        let desc = self.ptr as *const u8;
-        // SAFETY: The descriptor has been validated as nonnull and the partition name is
-        // contained within the image.
-        unsafe { Ok(slice::from_raw_parts(desc.add(partition_name_offset), partition_name_len)) }
+    fn partition_name(&self) -> Result<PartitionName, AvbSlotVerifyError> {
+        self.non_null_terminated_partition_name()
+            .map_err(|_| AvbSlotVerifyError::InvalidMetadata)?
+            .try_into()
+            .map_err(|_| AvbSlotVerifyError::InvalidMetadata)
+    }
+}
+
+struct Descriptors {
+    ptr: *mut *const AvbDescriptor,
+    num_descriptors: usize,
+}
+
+impl TryFrom<AvbVBMetaData> for Descriptors {
+    type Error = AvbSlotVerifyError;
+
+    fn try_from(vbmeta: AvbVBMetaData) -> Result<Self, Self::Error> {
+        is_not_null(vbmeta.vbmeta_data).map_err(|_| AvbSlotVerifyError::Io)?;
+        let mut num_descriptors = 0;
+        // SAFETY: It is safe as the raw pointer `vbmeta.vbmeta_data` is a nonnull pointer.
+        let ptr = unsafe {
+            avb_descriptor_get_all(vbmeta.vbmeta_data, vbmeta.vbmeta_size, &mut num_descriptors)
+        };
+        if num_descriptors == 0 || ptr.is_null() {
+            Err(AvbSlotVerifyError::InvalidMetadata)
+        } else {
+            Ok(Self { ptr, num_descriptors })
+        }
+    }
+}
+
+impl<'a> TryFrom<&'a Descriptors> for Vec<HashDescriptor<'a>> {
+    type Error = AvbSlotVerifyError;
+
+    fn try_from(descriptors: &'a Descriptors) -> Result<Self, Self::Error> {
+        let mut hash_descriptors = Vec::new();
+        let mut seen_partitions = Vec::new();
+        for descriptor in descriptors.iter() {
+            let hash_descriptor = HashDescriptor::try_from(*descriptor)
+                .map_err(|_| AvbSlotVerifyError::InvalidMetadata)?;
+            let partition_name = hash_descriptor.partition_name()?;
+            if seen_partitions.contains(&partition_name) {
+                return Err(AvbSlotVerifyError::InvalidMetadata);
+            }
+            hash_descriptors.push(hash_descriptor);
+            seen_partitions.push(partition_name);
+        }
+        Ok(hash_descriptors)
+    }
+}
+
+impl Drop for Descriptors {
+    fn drop(&mut self) {
+        // SAFETY: This is safe because `self.ptr` is checked nonnull when the
+        // instance is created. We can free this pointer when the instance is
+        // no longer needed.
+        unsafe {
+            avb_free(self.ptr as *mut c_void);
+        }
+    }
+}
+
+impl Descriptors {
+    fn iter(&self) -> slice::Iter<*const AvbDescriptor> {
+        // SAFETY: It is safe as the raw pointer `self.ptr` is a nonnull pointer.
+        let descriptors = unsafe {
+            slice::from_raw_parts(self.ptr as *const *const AvbDescriptor, self.num_descriptors)
+        };
+        descriptors.iter()
     }
 }
 
@@ -390,26 +430,15 @@ impl<'a> Payload<'a> {
     }
 }
 
-fn verify_vbmeta_has_no_initrd_descriptor(
-    vbmeta_image: &AvbVBMetaData,
+fn verify_vbmeta_only_has_kernel_hash_descriptor(
+    hash_descriptors: &[HashDescriptor],
 ) -> Result<(), AvbSlotVerifyError> {
-    is_not_null(vbmeta_image.vbmeta_data).map_err(|_| AvbSlotVerifyError::Io)?;
-    let mut has_unexpected_descriptor = false;
-    // SAFETY: It is safe as the raw pointer `vbmeta_image.vbmeta_data` is a nonnull pointer.
-    if !unsafe {
-        avb_descriptor_foreach(
-            vbmeta_image.vbmeta_data,
-            vbmeta_image.vbmeta_size,
-            Some(search_initrd_hash_descriptor),
-            &mut has_unexpected_descriptor as *mut _ as *mut c_void,
-        )
-    } {
-        return Err(AvbSlotVerifyError::InvalidMetadata);
-    }
-    if has_unexpected_descriptor {
-        Err(AvbSlotVerifyError::InvalidMetadata)
-    } else {
+    if hash_descriptors.len() == 1
+        && PartitionName::Kernel == hash_descriptors[0].partition_name()?
+    {
         Ok(())
+    } else {
+        Err(AvbSlotVerifyError::InvalidMetadata)
     }
 }
 
@@ -437,10 +466,10 @@ pub fn verify_payload(
     }
     let vbmeta_image = vbmeta_images[0];
     verify_vbmeta_is_from_kernel_partition(&vbmeta_image)?;
-    if payload.initrd.is_none() {
-        verify_vbmeta_has_no_initrd_descriptor(&vbmeta_image)?;
+    let descriptors = Descriptors::try_from(vbmeta_image)?;
+    let hash_descriptors = Vec::<HashDescriptor>::try_from(&descriptors)?;
+    if initrd.is_none() {
+        verify_vbmeta_only_has_kernel_hash_descriptor(&hash_descriptors)?;
     }
-    // TODO(b/256148034): Check the vbmeta doesn't have hash descriptors other than
-    // boot, initrd_normal, initrd_debug.
     Ok(())
 }
