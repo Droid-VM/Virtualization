@@ -17,6 +17,10 @@
 use crate::error::AvbIOError;
 use core::ptr::NonNull;
 
+/// Currently we use SHA256 to hash the kernel and initrd, their digest size
+/// is then 256 bits.
+pub(crate) const DIGEST_SIZE: usize = 32;
+
 pub(crate) fn write<T>(ptr: *mut T, value: T) -> Result<(), AvbIOError> {
     let ptr = to_nonnull(ptr)?;
     // SAFETY: It is safe as the raw pointer `ptr` is a nonnull pointer.
