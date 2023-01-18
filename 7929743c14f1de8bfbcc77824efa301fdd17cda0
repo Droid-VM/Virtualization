@@ -235,6 +235,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be5fb8d0_4fe91b16",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-18T11:50:01Z",
+      "side": 1,
+      "message": "Agree. I would prefer to enforce an allowlist here and reject all the unknown desc in both cases, in brief:\n\n- If initrd \u003d\u003d None, allowlist \u003d [kernel]\n- If initrd \u003d\u003d Some, allowlist \u003d [kernel,initrd_normal,initrd_debug]",
+      "parentUuid": "bf8382d5_333c3ba6",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 22
+      },
+      "revId": "7929743c14f1de8bfbcc77824efa301fdd17cda0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8b8735c_8df84774",
         "filename": "pvmfw/avb/tests/api_test.rs",
         "patchSetId": 2
