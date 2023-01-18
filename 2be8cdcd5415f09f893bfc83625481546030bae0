@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43941149_ccd12bb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-18T07:40:14Z",
+      "side": 1,
+      "message": "mostly nits...",
+      "revId": "2be8cdcd5415f09f893bfc83625481546030bae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c212586_b6ac17de",
@@ -97,6 +114,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb474a23_6908247a",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/HypTracer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-18T07:40:14Z",
+      "side": 1,
+      "message": "add final since this is not re-assigned once done in the constructor",
+      "range": {
+        "startLine": 42,
+        "startChar": 11,
+        "endLine": 42,
+        "endChar": 12
+      },
+      "revId": "2be8cdcd5415f09f893bfc83625481546030bae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e877f61b_edf22331",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/HypTracer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-18T07:40:14Z",
+      "side": 1,
+      "message": "You may want to create an empty list, unless you will have to be careful when accessing this variable (otherwise NPE might occur).",
+      "range": {
+        "startLine": 43,
+        "startChar": 29,
+        "endLine": 43,
+        "endChar": 36
+      },
+      "revId": "2be8cdcd5415f09f893bfc83625481546030bae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f02cfc0f_0c32b5ec",
         "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/HypTracer.java",
         "patchSetId": 1
@@ -144,6 +207,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a23f1366_b55e29f3",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/HypTracer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-18T07:40:14Z",
+      "side": 1,
+      "message": "Please respect the linter message",
+      "range": {
+        "startLine": 56,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 58
+      },
+      "revId": "2be8cdcd5415f09f893bfc83625481546030bae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58f8f22c_dffbb529",
         "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/HypTracer.java",
         "patchSetId": 1
@@ -160,6 +246,29 @@
         "startChar": 32,
         "endLine": 59,
         "endChar": 33
+      },
+      "revId": "2be8cdcd5415f09f893bfc83625481546030bae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5850aa4_cd4e1a71",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/HypTracer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-18T07:40:14Z",
+      "side": 1,
+      "message": "`bufSizeKb`",
+      "range": {
+        "startLine": 72,
+        "startChar": 26,
+        "endLine": 72,
+        "endChar": 37
       },
       "revId": "2be8cdcd5415f09f893bfc83625481546030bae0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -231,6 +340,75 @@
         "startChar": 0,
         "endLine": 84,
         "endChar": 31
+      },
+      "revId": "2be8cdcd5415f09f893bfc83625481546030bae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75d6e92c_e21f9bcc",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/HypTracer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-18T07:40:14Z",
+      "side": 1,
+      "message": "+?",
+      "range": {
+        "startLine": 89,
+        "startChar": 60,
+        "endLine": 89,
+        "endChar": 61
+      },
+      "revId": "2be8cdcd5415f09f893bfc83625481546030bae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81f181e3_17a57166",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/HypTracer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-18T07:40:14Z",
+      "side": 1,
+      "message": "why don\u0027t you ensure that this is a floating number?",
+      "range": {
+        "startLine": 89,
+        "startChar": 46,
+        "endLine": 89,
+        "endChar": 50
+      },
+      "revId": "2be8cdcd5415f09f893bfc83625481546030bae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d61f93a4_d5de7bca",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/HypTracer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-18T07:40:14Z",
+      "side": 1,
+      "message": "NPE may occur if this function is called before pullTraces",
+      "range": {
+        "startLine": 92,
+        "startChar": 26,
+        "endLine": 92,
+        "endChar": 33
       },
       "revId": "2be8cdcd5415f09f893bfc83625481546030bae0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
