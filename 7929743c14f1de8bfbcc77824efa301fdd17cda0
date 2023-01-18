@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b005e9c_82adc4a5",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-18T10:16:51Z",
+      "side": 1,
+      "message": "What I understand here is that\n\nIf initrd \u003d\u003d None:\n- hash_desc(kernel) + hash_desc(initrd_normal) \u003d\u003e failure, because we are not expecting any initrd_* descriptor here.\n- hash_desc(kernel) + hash_desc(foobar) \u003d\u003e success\n\nIf initrd \u003d\u003d Some:\n- hash_desc(kernel) + hash_desc(initrd_normal) \u003d\u003e success\n- hash_desc(kernel) + hash_desc(foobar) \u003d\u003e failure\n- hash_desc(kernel) + hash_desc(initrd_normal)+ hash_desc(foobar) \u003d\u003e failure. This is what this cl handles, without this cl, the normal verification will pass.\n\nIn vbmeta has non hash descriptor, then it\u0027s failure in both cases.",
+      "parentUuid": "0dfc3624_f0871749",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 22
+      },
+      "revId": "7929743c14f1de8bfbcc77824efa301fdd17cda0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8b8735c_8df84774",
         "filename": "pvmfw/avb/tests/api_test.rs",
         "patchSetId": 2
