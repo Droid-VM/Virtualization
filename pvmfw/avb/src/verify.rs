@@ -251,7 +251,7 @@ fn try_search_initrd_hash_descriptor(
     descriptor: *const AvbDescriptor,
     user_data: *mut c_void,
 ) -> Result<(), AvbIOError> {
-    let hash_desc = AvbHashDescriptorRef::try_from(descriptor)?;
+    let hash_desc = HashDescriptor::try_from(descriptor)?;
     if matches!(
         hash_desc.partition_name()?.try_into(),
         Ok(PartitionName::InitrdDebug) | Ok(PartitionName::InitrdNormal),
@@ -261,21 +261,21 @@ fn try_search_initrd_hash_descriptor(
     Ok(())
 }
 
-/// `hash_desc` only contains the metadata like fields length and flags of the descriptor.
-/// The data itself is contained in `ptr`.
-struct AvbHashDescriptorRef {
-    hash_desc: AvbHashDescriptor,
-    ptr: *const AvbDescriptor,
+/// `desc` only contains the metadata like fields length and flags of the descriptor.
+/// The data itself is contained in `data`.
+struct HashDescriptor<'a> {
+    desc: AvbHashDescriptor,
+    data: &'a [u8],
 }
 
-impl TryFrom<*const AvbDescriptor> for AvbHashDescriptorRef {
+impl<'a> TryFrom<*const AvbDescriptor> for HashDescriptor<'a> {
     type Error = AvbIOError;
 
     fn try_from(descriptor: *const AvbDescriptor) -> Result<Self, Self::Error> {
         is_not_null(descriptor)?;
         // SAFETY: It is safe as the raw pointer `descriptor` is a nonnull pointer and
         // we have validated that it is of hash descriptor type.
-        let hash_desc = unsafe {
+        let desc = unsafe {
             let mut desc = MaybeUninit::uninit();
             if !avb_hash_descriptor_validate_and_byteswap(
                 descriptor as *const AvbHashDescriptor,
@@ -285,33 +285,22 @@ impl TryFrom<*const AvbDescriptor> for AvbHashDescriptorRef {
             }
             desc.assume_init()
         };
-        Ok(Self { hash_desc, ptr: descriptor })
+        let total_len = usize_checked_add(
+            size_of::<AvbDescriptor>(),
+            to_usize(desc.parent_descriptor.num_bytes_following)?,
+        )?;
+        // SAFETY: the descriptor has been validated so it is contained within the image.
+        let data = unsafe { slice::from_raw_parts(descriptor as *const u8, total_len) };
+        Ok(Self { desc, data })
     }
 }
 
-impl AvbHashDescriptorRef {
-    fn check_is_in_range(&self, index: usize) -> Result<(), AvbIOError> {
-        let parent_desc = self.hash_desc.parent_descriptor;
-        let total_len = usize_checked_add(
-            size_of::<AvbDescriptor>(),
-            to_usize(parent_desc.num_bytes_following)?,
-        )?;
-        if index <= total_len {
-            Ok(())
-        } else {
-            Err(AvbIOError::Io)
-        }
-    }
-
+impl HashDescriptor<'_> {
     /// Returns the non null-terminated partition name.
     fn partition_name(&self) -> Result<&[u8], AvbIOError> {
-        let partition_name_offset = size_of::<AvbHashDescriptor>();
-        let partition_name_len = to_usize(self.hash_desc.partition_name_len)?;
-        self.check_is_in_range(usize_checked_add(partition_name_offset, partition_name_len)?)?;
-        let desc = self.ptr as *const u8;
-        // SAFETY: The descriptor has been validated as nonnull and the partition name is
-        // contained within the image.
-        unsafe { Ok(slice::from_raw_parts(desc.add(partition_name_offset), partition_name_len)) }
+        let start = size_of::<AvbHashDescriptor>();
+        let end = usize_checked_add(start, to_usize(self.desc.partition_name_len)?)?;
+        self.data.get(start..end).ok_or(AvbIOError::RangeOutsidePartition)
     }
 }
 
