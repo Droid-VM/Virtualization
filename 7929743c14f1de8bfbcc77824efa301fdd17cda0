@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0dfc3624_f0871749",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-18T10:09:22Z",
+      "side": 1,
+      "message": "```\nkernel + initrd_normal + foobar \u003d\u003e failure\nkernel + foobar \u003d\u003e success\n```\nam I missing something?",
+      "parentUuid": "5daf182a_2e75df98",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 22
+      },
+      "revId": "7929743c14f1de8bfbcc77824efa301fdd17cda0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8b8735c_8df84774",
         "filename": "pvmfw/avb/tests/api_test.rs",
         "patchSetId": 2
