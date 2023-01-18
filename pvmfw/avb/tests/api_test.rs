@@ -31,6 +31,8 @@ const INITRD_DEBUG_IMG_PATH: &str = "microdroid_initrd_debuggable.img";
 const TEST_IMG_WITH_ONE_HASHDESC_PATH: &str = "test_image_with_one_hashdesc.img";
 const TEST_IMG_WITH_PROP_DESC_PATH: &str = "test_image_with_prop_desc.img";
 const TEST_IMG_WITH_NON_INITRD_HASHDESC_PATH: &str = "test_image_with_non_initrd_hashdesc.img";
+const TEST_IMG_WITH_INITRD_AND_NON_INITRD_DESC_PATH: &str =
+    "test_image_with_initrd_and_non_initrd_desc.img";
 const UNSIGNED_TEST_IMG_PATH: &str = "unsigned_test.img";
 
 const PUBLIC_KEY_RSA2048_PATH: &str = "data/testkey_rsa2048_pub.bin";
@@ -67,11 +69,21 @@ fn payload_expecting_no_initrd_passes_verification_with_no_initrd() -> Result<()
 }
 
 #[test]
-fn payload_with_non_initrd_descriptor_passes_verification_with_no_initrd() -> Result<()> {
+fn payload_with_non_initrd_descriptor_fails_verification_with_no_initrd() -> Result<()> {
     assert_payload_verification_with_no_initrd_eq(
         &fs::read(TEST_IMG_WITH_NON_INITRD_HASHDESC_PATH)?,
         &load_trusted_public_key()?,
-        Ok(()),
+        Err(AvbSlotVerifyError::InvalidMetadata),
+    )
+}
+
+#[test]
+fn payload_with_non_initrd_descriptor_fails_verification_with_initrd() -> Result<()> {
+    assert_payload_verification_fails(
+        &fs::read(TEST_IMG_WITH_INITRD_AND_NON_INITRD_DESC_PATH)?,
+        &load_latest_initrd_normal()?,
+        &load_trusted_public_key()?,
+        AvbSlotVerifyError::InvalidMetadata,
     )
 }
 
