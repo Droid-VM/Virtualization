@@ -187,6 +187,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9ad4024a_64e89f27",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-18T10:48:26Z",
+      "side": 1,
+      "message": "Re Pierre:\nI opt an early return instead of `if...else...` because there are more things to do when initrd is some, aosp/2388176 for example.\n\nRe David:\nI thought it was a feature requirement that when initrd is None, we just don\u0027t want to have `initrd_*` descriptors but anything else is okay according to [these comments](https://r.android.com/c/2383895/11). That\u0027s why I did a `for_each(search_**_existence)` here. Instead, if we want\n\n- When initrd \u003d\u003d None, vbmeta should only contain one hash_desc(kernel), all the other cases should fail (that\u0027s what happens after removing `return Ok(()))`.\n\n- When initrd \u003d\u003d Some, vbmeta should contain only hash_desc(kernel) + one or two of [hash_desc(initrd_normal), hash_desc(initrd_debug)].\n\nThen we should do it differently, just collecting the descriptors to check the total number or look if that\u0027s what we want would be better.",
+      "parentUuid": "faeb37cb_d02fdcd6",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 22
+      },
+      "revId": "7929743c14f1de8bfbcc77824efa301fdd17cda0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8b8735c_8df84774",
         "filename": "pvmfw/avb/tests/api_test.rs",
         "patchSetId": 2
