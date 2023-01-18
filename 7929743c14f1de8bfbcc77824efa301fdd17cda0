@@ -163,6 +163,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5778a7f_03829afe",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-18T10:34:10Z",
+      "side": 1,
+      "message": "Running both checks would be superfluous as `search_initrd_hash_descriptor` checks\n```\npartition_name in (\"initrd_normal\", \"initrd_debug\")\n```\nwhile `search_unexpected_hash_descriptor` checks\n```\npartition_name in (\"kernel\", \"initrd_normal\", \"initrd_debug\")\n```\n\nBut I agree that this could be refactored to merge the 2 paths (TBF, `avb_descriptor_foreach` doesn\u0027t really help with writing clean Rust).\n\n\u003e Basically they are contradictory\n\nA small change that would make this clearer would be to use an `else`, here:\n```\nif payload.initrd.is_some() {\n    verify_vbmeta_has_no_unexpected_descriptor(\n        \u0026vbmeta_images[0],\n        Some(search_unexpected_hash_descriptor),\n    )\n} else {\n    verify_vbmeta_has_no_unexpected_descriptor(\n        \u0026vbmeta_images[0],\n        Some(search_initrd_hash_descriptor),\n    )\n}\n```\nor even\n```\nlet search_func \u003d if payload.initrd.is_some() {\n    Some(search_unexpected_hash_descriptor)\n} else {\n    Some(search_initrd_hash_descriptor)\n};\n\nverify_vbmeta_has_no_unexpected_descriptor(\n    \u0026vbmeta_images[0],\n    search_func,\n)\n```\n\nbut ideally, you\u0027d want these checks to be merged and simply expressed around something like\n```\nlet name \u003d PartitionName::try_from(hash_desc.partition_name()?)?;\n\nif initrd.is_none() \u0026\u0026 matches!(name, PartitionName::InitrdDebug | PartitionName::InitrdNormal) {\n    return Err(AvbSlotVerifyError::InvalidMetadata);\n}\n```\n\nIt would also be nice to be able to distinguish between `InvalidMetadata` originating from libavb and pvmfw itself rejecting the image (at least, through a `log::error!`).",
+      "parentUuid": "5daf182a_2e75df98",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 22
+      },
+      "revId": "7929743c14f1de8bfbcc77824efa301fdd17cda0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8b8735c_8df84774",
         "filename": "pvmfw/avb/tests/api_test.rs",
         "patchSetId": 2
