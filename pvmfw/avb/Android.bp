@@ -37,6 +37,7 @@ rust_test {
         ":microdroid_initrd_debuggable",
         ":test_image_with_one_hashdesc",
         ":test_image_with_non_initrd_hashdesc",
+        ":test_image_with_initrd_and_non_initrd_desc",
         ":test_image_with_prop_desc",
         ":unsigned_test_image",
     ],
@@ -82,6 +83,28 @@ avb_add_hash_footer {
     include_descriptors_from_images: [
         ":test_non_initrd_hashdesc",
     ],
+}
+
+avb_add_hash_footer {
+    name: "test_image_with_initrd_and_non_initrd_desc",
+    src: ":unsigned_test_image",
+    partition_name: "boot",
+    private_key: ":pvmfw_sign_key",
+    salt: "1111",
+    include_descriptors_from_images: [
+        ":microdroid_initrd_normal_hashdesc",
+        ":test_non_initrd_hashdesc",
+    ],
+    enabled: false,
+    arch: {
+        // microdroid_initrd_normal_hashdesc is only available in these architectures.
+        arm64: {
+            enabled: true,
+        },
+        x86_64: {
+            enabled: true,
+        },
+    },
 }
 
 avb_add_hash_footer {
