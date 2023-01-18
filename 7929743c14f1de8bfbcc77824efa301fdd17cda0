@@ -211,6 +211,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf8382d5_333c3ba6",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-18T11:40:03Z",
+      "side": 1,
+      "message": "Yep, I wanted to agree on how we should handle unexpected partitions before suggesting how to do it better. In general, I just want to make sure that the `no initrd \u003d\u003e no initrd hashdesc` check is independent of `no unknown hashdesc`. We should not enforce `no unknown hashdesc` only in some situations. It needs to be consistent.",
+      "parentUuid": "9ad4024a_64e89f27",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 586,
+        "endChar": 22
+      },
+      "revId": "7929743c14f1de8bfbcc77824efa301fdd17cda0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8b8735c_8df84774",
         "filename": "pvmfw/avb/tests/api_test.rs",
         "patchSetId": 2
