@@ -1400,6 +1400,40 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(checkVmOutputIsRedirectedToLogcat(false)).isFalse();
     }
 
+    @Test
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
+    public void payloadCanWriteToData() throws Exception {
+        assumeSupportedKernel();
+
+        VirtualMachineConfig config =
+                newVmConfigBuilder()
+                        .setPayloadBinaryName("MicrodroidTestNativeLib.so")
+                        .setMemoryMib(minMemoryRequired())
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .build();
+        VirtualMachine vm = forceCreateNewVirtualMachine("test_write_to_data", config);
+        TestResults testResults =
+                runVmTestService(
+                        vm,
+                        (ts, tr) -> {
+                            ts.writeToFile(
+                                    /* content= */ EXAMPLE_STRING,
+                                    /* path= */ "/data/local/tmp/test_file");
+                        });
+        assertThat(testResults.mException).isNull();
+
+        // Re-run the same VM & verify the file persisted. Note, the previous `runVmTestService`
+        // stopped the VM
+        testResults =
+                runVmTestService(
+                        vm,
+                        (ts, tr) -> {
+                            tr.mFileContent = ts.readFromFile("/data/local/tmp/test_file");
+                        });
+        assertThat(testResults.mException).isNull();
+        assertThat(testResults.mFileContent).isEqualTo(EXAMPLE_STRING);
+    }
+
     private void assertFileContentsAreEqualInTwoVms(String fileName, String vmName1, String vmName2)
             throws IOException {
         File file1 = getVmFile(vmName1, fileName);
