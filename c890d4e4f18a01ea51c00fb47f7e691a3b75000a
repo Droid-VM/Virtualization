@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "893b463d_8a7b48e3",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-19T21:30:47Z",
+      "side": 1,
+      "message": "I wrote a simple test (aosp/2392904), and right now payload can\u0027t write to data. However, we will probably need to relax that to be able to run CTS tests inside Microdroid.\n\nWhether payload should have a scratch space to write some data to. I think it might be useful, but don\u0027t have strong use cases in mind.\n\nJiyong, WDYT?",
+      "parentUuid": "2bb63573_d8c49300",
+      "range": {
+        "startLine": 101,
+        "startChar": 3,
+        "endLine": 101,
+        "endChar": 68
+      },
+      "revId": "c890d4e4f18a01ea51c00fb47f7e691a3b75000a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d752acb5_4ffaa4bf",
         "filename": "microdroid/init.rc",
         "patchSetId": 1
@@ -108,6 +132,30 @@
       "writtenOn": "2023-01-19T15:25:40Z",
       "side": 1,
       "message": "Payload runs as root, so doesn\u0027t get access?",
+      "range": {
+        "startLine": 104,
+        "startChar": 10,
+        "endLine": 104,
+        "endChar": 23
+      },
+      "revId": "c890d4e4f18a01ea51c00fb47f7e691a3b75000a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4b18db5_517db5b7",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-19T21:30:47Z",
+      "side": 1,
+      "message": "You are correct, the test in aosp/2392904 fails with -EPERM. However, as I mentioned in the comment above, we most likely will need to relax this to be able to run native tests inside Microdroid.",
+      "parentUuid": "d752acb5_4ffaa4bf",
       "range": {
         "startLine": 104,
         "startChar": 10,
@@ -131,6 +179,30 @@
       "writtenOn": "2023-01-19T15:25:40Z",
       "side": 1,
       "message": "Can we give this a name?\n(Ideally refer to some existing constant, but I expect that may be difficult)",
+      "range": {
+        "startLine": 1361,
+        "startChar": 47,
+        "endLine": 1361,
+        "endChar": 48
+      },
+      "revId": "c890d4e4f18a01ea51c00fb47f7e691a3b75000a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bcf6fb5_faaafa6b",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1361,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-19T21:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a25bcf7_e3648dab",
       "range": {
         "startLine": 1361,
         "startChar": 47,
