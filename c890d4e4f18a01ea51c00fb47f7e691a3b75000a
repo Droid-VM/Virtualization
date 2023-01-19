@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bb63573_d8c49300",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-19T15:25:40Z",
+      "side": 1,
+      "message": "Not directly related to this CL: I don\u0027t think we document that this scratch space exists. Should we?\nIs it useful for apps to use directly, or more for the developer when debugging etc?\n(E.g. we have functions in the payload API to return where things are mounted in the file system, but this isn\u0027t included: cs/android-internal/packages/modules/Virtualization/vm_payload/include/vm_payload.h?rcl\u003d6979b5fc0f902174241e989a863ee3b47dddc124\u0026l\u003d100)",
+      "range": {
+        "startLine": 101,
+        "startChar": 3,
+        "endLine": 101,
+        "endChar": 68
+      },
+      "revId": "c890d4e4f18a01ea51c00fb47f7e691a3b75000a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d752acb5_4ffaa4bf",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-19T15:25:40Z",
+      "side": 1,
+      "message": "Payload runs as root, so doesn\u0027t get access?",
+      "range": {
+        "startLine": 104,
+        "startChar": 10,
+        "endLine": 104,
+        "endChar": 23
+      },
+      "revId": "c890d4e4f18a01ea51c00fb47f7e691a3b75000a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a25bcf7_e3648dab",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1361,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-19T15:25:40Z",
+      "side": 1,
+      "message": "Can we give this a name?\n(Ideally refer to some existing constant, but I expect that may be difficult)",
+      "range": {
+        "startLine": 1361,
+        "startChar": 47,
+        "endLine": 1361,
+        "endChar": 48
+      },
+      "revId": "c890d4e4f18a01ea51c00fb47f7e691a3b75000a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11e9b4a2_aed7e21e",
+        "filename": "tests/testapk/src/native/testbinary.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-19T15:25:40Z",
+      "side": 1,
+      "message": "Does this work?\nI can\u0027t see anything that gives the payload access to this in Microdroid sepolic.",
+      "range": {
+        "startLine": 267,
+        "startChar": 36,
+        "endLine": 267,
+        "endChar": 48
+      },
+      "revId": "c890d4e4f18a01ea51c00fb47f7e691a3b75000a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
