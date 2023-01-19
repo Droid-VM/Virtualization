@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3f62857_c476eb32",
+        "filename": "virtualizationservice/src/aidl_vs.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-19T11:12:05Z",
+      "side": 1,
+      "message": "For things like this that remain in both aidl.rs \u0026 aidl_vs.rs, can we have a single common file?\nEspecially things that are pub in both.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 83
+      },
+      "revId": "afc9a9eb4618f9f521098ab521c8335fc26986a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "891a9616_c9a989f8",
+        "filename": "virtualizationservice/src/aidl_vs.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-19T11:12:05Z",
+      "side": 1,
+      "message": "Also common?",
+      "range": {
+        "startLine": 281,
+        "startChar": 7,
+        "endLine": 281,
+        "endChar": 29
+      },
+      "revId": "afc9a9eb4618f9f521098ab521c8335fc26986a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
