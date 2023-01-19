@@ -24,6 +24,7 @@ import static android.system.virtualmachine.VirtualMachineManager.CAPABILITY_NON
 import static android.system.virtualmachine.VirtualMachineManager.CAPABILITY_PROTECTED_VM;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 import static com.google.common.truth.TruthJUnit.assume;
 
 import static org.junit.Assert.assertThrows;
@@ -1336,6 +1337,31 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(checkVmOutputIsRedirectedToLogcat(false)).isFalse();
     }
 
+    @Test
+    public void dataIsMountedWithNoExec() throws Exception {
+        assumeSupportedKernel();
+
+        final VirtualMachineConfig vmConfig =
+                newVmConfigBuilder()
+                        .setPayloadBinaryName("MicrodroidTestNativeLib.so")
+                        .setMemoryMib(minMemoryRequired())
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .build();
+        final VirtualMachine vm = forceCreateNewVirtualMachine("test_vm_data_mount", vmConfig);
+
+        final TestResults testResults =
+                runVmTestService(
+                        vm,
+                        (ts, tr) -> {
+                            tr.mountFlags = ts.getMountFlags("/data");
+                        });
+
+        assertThat(testResults.mException).isNull();
+        assertWithMessage("/data should be mounted with MS_NOEXEC")
+                .that(testResults.mountFlags & 8)
+                .isEqualTo(8);
+    }
+
     private void assertFileContentsAreEqualInTwoVms(String fileName, String vmName1, String vmName2)
             throws IOException {
         File file1 = getVmFile(vmName1, fileName);
@@ -1392,6 +1418,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         String mEncryptedStoragePath;
         String[] mEffectiveCapabilities;
         String mFileContent;
+        int mountFlags;
     }
 
     private TestResults runVmTestService(VirtualMachine vm) throws Exception {
