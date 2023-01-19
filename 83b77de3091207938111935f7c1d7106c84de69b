@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17b22eca_028a89ac",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/KvmHypTracer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-19T01:43:50Z",
+      "side": 1,
+      "message": "consider adding final since you don\u0027t need to re-allocate the arraylist object to this variable",
+      "range": {
+        "startLine": 49,
+        "startChar": 11,
+        "endLine": 49,
+        "endChar": 12
+      },
+      "revId": "83b77de3091207938111935f7c1d7106c84de69b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e691656_837166c5",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/KvmHypTracer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-19T01:43:50Z",
+      "side": 1,
+      "message": "No need because the array was initialized in the constructor. If pullTraces can be called multiple times for this object, you may `mTraces.clear()`.",
+      "range": {
+        "startLine": 56,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 40
+      },
+      "revId": "83b77de3091207938111935f7c1d7106c84de69b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
