@@ -16,6 +16,52 @@
       "message": "Hi Alan, PTAL. Thanks!",
       "revId": "c552ae3bec0ade37971fa9ea17678298aa6a41ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0f85644_105ee389",
+        "filename": "pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-19T11:30:01Z",
+      "side": 1,
+      "message": "It seems odd to move one of these but not the other.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 69
+      },
+      "revId": "c552ae3bec0ade37971fa9ea17678298aa6a41ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40ab4011_af27ac9f",
+        "filename": "pvmfw/avb/tests/utils.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-19T11:30:01Z",
+      "side": 1,
+      "message": "Could we replace these 2 functions with 1, similar to assert_payload_verification_with_no_initrd_eq ?",
+      "range": {
+        "startLine": 35,
+        "startChar": 7,
+        "endLine": 35,
+        "endChar": 43
+      },
+      "revId": "c552ae3bec0ade37971fa9ea17678298aa6a41ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
