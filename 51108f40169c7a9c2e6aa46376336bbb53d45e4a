@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f52a2c4_f0505317",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-19T17:59:36Z",
+      "side": 1,
+      "message": "There are tests like #testBootFailsWhenVbMetaDigestDoesNotMatchBootconfig which use this flag.",
+      "parentUuid": "2acce539_77b388fe",
+      "range": {
+        "startLine": 109,
+        "startChar": 12,
+        "endLine": 109,
+        "endChar": 33
+      },
+      "revId": "51108f40169c7a9c2e6aa46376336bbb53d45e4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfdeafc3_29697641",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-13T16:51:47Z",
       "side": 1,
       "message": "Wouldn\u0027t this fit on one line?",
+      "range": {
+        "startLine": 264,
+        "startChar": 14,
+        "endLine": 268,
+        "endChar": 19
+      },
+      "revId": "51108f40169c7a9c2e6aa46376336bbb53d45e4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e0d39ef_1870e33b",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-19T17:59:36Z",
+      "side": 1,
+      "message": "It did. Changed",
+      "parentUuid": "bfdeafc3_29697641",
       "range": {
         "startLine": 264,
         "startChar": 14,
@@ -93,6 +141,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c00d7595_6e385458",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-19T17:59:36Z",
+      "side": 1,
+      "message": "because bootconfigs can be multiple files, so attach initrd bc1 bc2 --output. Output had to be a non-positional argument. We could move it before initrd/bc, that doesn\u0027t look good.",
+      "parentUuid": "3c83ebed_03c4fff5",
+      "range": {
+        "startLine": 276,
+        "startChar": 17,
+        "endLine": 276,
+        "endChar": 25
+      },
+      "revId": "51108f40169c7a9c2e6aa46376336bbb53d45e4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab8b1522_1f42e6e1",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-19T17:59:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72a93134_412b8187",
+      "range": {
+        "startLine": 272,
+        "startChar": 14,
+        "endLine": 276,
+        "endChar": 38
+      },
+      "revId": "51108f40169c7a9c2e6aa46376336bbb53d45e4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "233a4f52_1f190666",
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f068cfd_c08ad726",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-19T17:59:36Z",
+      "side": 1,
+      "message": "The script is full of such avbtool calls duplication For ex super image creation/vbmeta is duplicate of the code hidden in build infra. Although I agree in this case, we duplicate the size calculation.\n\nI think it is okay to bank on Microdroid tests which use this script to resign the apexes using this script to ensure the script does the right thing as well.",
+      "parentUuid": "233a4f52_1f190666",
+      "range": {
+        "startLine": 299,
+        "startChar": 0,
+        "endLine": 299,
+        "endChar": 27
+      },
+      "revId": "51108f40169c7a9c2e6aa46376336bbb53d45e4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28b30794_bed1a6a2",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-01-13T16:51:47Z",
       "side": 1,
       "message": "spaces around the +",
+      "range": {
+        "startLine": 317,
+        "startChar": 38,
+        "endLine": 317,
+        "endChar": 39
+      },
+      "revId": "51108f40169c7a9c2e6aa46376336bbb53d45e4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1bb731e_841f3608",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-19T17:59:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28b30794_bed1a6a2",
       "range": {
         "startLine": 317,
         "startChar": 38,
