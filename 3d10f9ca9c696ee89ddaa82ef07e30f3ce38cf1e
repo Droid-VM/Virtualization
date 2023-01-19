@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a74827ea_cc4804e9",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-19T17:56:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "140dc369_7b568c82",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 28
+      },
+      "revId": "3d10f9ca9c696ee89ddaa82ef07e30f3ce38cf1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d491659c_6549d1b7",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-13T16:02:45Z",
       "side": 1,
       "message": "Oh, I meant the comment above. That is picked up by Clap and printed as help on command line. Currently it prints this:\n```\nUsage:\n\nArguments:\n  \u003cINITRD\u003e          Initrd (without bootconfig)\n  [BOOTCONFIGS]...  Bootconfig\n\nOptions:\n      --output \u003cOUTPUT\u003e  Output\n  -h, --help             Print help information\n```",
+      "range": {
+        "startLine": 35,
+        "startChar": 25,
+        "endLine": 35,
+        "endChar": 33
+      },
+      "revId": "3d10f9ca9c696ee89ddaa82ef07e30f3ce38cf1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7378173_fe8051cb",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-19T17:56:46Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "d491659c_6549d1b7",
       "range": {
         "startLine": 35,
         "startChar": 25,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2756f14d_b24d0985",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-19T17:56:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24f21684_39903852",
+      "range": {
+        "startLine": 44,
+        "startChar": 22,
+        "endLine": 44,
+        "endChar": 36
+      },
+      "revId": "3d10f9ca9c696ee89ddaa82ef07e30f3ce38cf1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed138d03_bdebfd7f",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-01-13T16:02:45Z",
       "side": 1,
       "message": "size_of::\u003cu32\u003e()",
+      "range": {
+        "startLine": 86,
+        "startChar": 27,
+        "endLine": 86,
+        "endChar": 28
+      },
+      "revId": "3d10f9ca9c696ee89ddaa82ef07e30f3ce38cf1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "891499c3_1e35d032",
+        "filename": "microdroid/initrd/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-19T17:56:46Z",
+      "side": 1,
+      "message": "Done, but u32 is always 4 bytes. Its in the name, no?",
+      "parentUuid": "ed138d03_bdebfd7f",
       "range": {
         "startLine": 86,
         "startChar": 27,
