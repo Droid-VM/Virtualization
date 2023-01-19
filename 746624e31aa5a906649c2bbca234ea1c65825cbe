@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e948e75c_7459f0f9",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-19T09:35:23Z",
+      "side": 1,
+      "message": "Create ot change (without s)",
+      "range": {
+        "startLine": 392,
+        "startChar": 8,
+        "endLine": 392,
+        "endChar": 26
+      },
+      "revId": "746624e31aa5a906649c2bbca234ea1c65825cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "412469a6_0ca9cd09",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-19T09:35:23Z",
+      "side": 1,
+      "message": "How is this guaranteed, especially when there is no such prop and we have to add a new one?\n\nOr, is this guaranteed by the underlying libfdt?",
+      "range": {
+        "startLine": 394,
+        "startChar": 20,
+        "endLine": 394,
+        "endChar": 72
+      },
+      "revId": "746624e31aa5a906649c2bbca234ea1c65825cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bb52080_f0a1e705",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-19T09:35:23Z",
+      "side": 1,
+      "message": "constrained?",
+      "range": {
+        "startLine": 394,
+        "startChar": 38,
+        "endLine": 394,
+        "endChar": 49
+      },
+      "revId": "746624e31aa5a906649c2bbca234ea1c65825cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa10af0e_a0afc242",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-19T09:35:23Z",
+      "side": 1,
+      "message": "This doesn\u0027t necessary mean that ramdump is disabled. We just couldn\u0027t find the chosen node.",
+      "range": {
+        "startLine": 75,
+        "startChar": 12,
+        "endLine": 75,
+        "endChar": 65
+      },
+      "revId": "746624e31aa5a906649c2bbca234ea1c65825cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "409daa35_8f87454b",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-19T09:35:23Z",
+      "side": 1,
+      "message": "ditto. we just didn\u0027t find the bootargs prop.",
+      "range": {
+        "startLine": 83,
+        "startChar": 19,
+        "endLine": 83,
+        "endChar": 107
+      },
+      "revId": "746624e31aa5a906649c2bbca234ea1c65825cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef99145d_291b76f8",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-19T09:35:23Z",
+      "side": 1,
+      "message": "this can be simplified.\n\n```\nlet args \u003d bootargs.to_bytes().split(...).\n    filter(|arg| !arg.startsWith(b\"crashkernel\u003d\")).\n    collect();\n```",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 5
+      },
+      "revId": "746624e31aa5a906649c2bbca234ea1c65825cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fca082b_e055e509",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-19T09:35:23Z",
+      "side": 1,
+      "message": "Why are we converting a byte slice into CStr and then back to a byte slice?",
+      "range": {
+        "startLine": 107,
+        "startChar": 8,
+        "endLine": 107,
+        "endChar": 88
+      },
+      "revId": "746624e31aa5a906649c2bbca234ea1c65825cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25bd67a8_8c633a90",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-19T09:35:23Z",
+      "side": 1,
+      "message": "I think this should be Result\u003cbool\u003e since we want to return an error when the function fails to handle the given fdt.",
+      "range": {
+        "startLine": 121,
+        "startChar": 44,
+        "endLine": 121,
+        "endChar": 48
+      },
+      "revId": "746624e31aa5a906649c2bbca234ea1c65825cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7afb7def_86d6fcc5",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-19T09:35:23Z",
+      "side": 1,
+      "message": "I think debug! is more appropriate",
+      "range": {
+        "startLine": 128,
+        "startChar": 16,
+        "endLine": 128,
+        "endChar": 20
+      },
+      "revId": "746624e31aa5a906649c2bbca234ea1c65825cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d8f38d5_8cef0dc7",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-19T09:35:23Z",
+      "side": 1,
+      "message": "Ditto",
+      "range": {
+        "startLine": 136,
+        "startChar": 16,
+        "endLine": 136,
+        "endChar": 20
+      },
+      "revId": "746624e31aa5a906649c2bbca234ea1c65825cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa2715ff_69420ac6",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-19T09:35:23Z",
+      "side": 1,
+      "message": "move this to inside handle_debug_policy?",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 1
+      },
+      "revId": "746624e31aa5a906649c2bbca234ea1c65825cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6062b15e_6ebbcc5d",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-19T09:35:23Z",
+      "side": 1,
+      "message": "Is this what we want? We will lose the information about whether the failure was due to InternalError or InvalidFdt",
+      "range": {
+        "startLine": 259,
+        "startChar": 20,
+        "endLine": 259,
+        "endChar": 49
+      },
+      "revId": "746624e31aa5a906649c2bbca234ea1c65825cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
