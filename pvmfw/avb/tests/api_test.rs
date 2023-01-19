@@ -23,6 +23,7 @@ use pvmfw_avb::{verify_payload, AvbSlotVerifyError};
 use std::{
     fs,
     mem::{size_of, transmute, MaybeUninit},
+    ptr,
 };
 
 const MICRODROID_KERNEL_IMG_PATH: &str = "microdroid_kernel";
@@ -143,6 +144,49 @@ fn tampered_kernel_fails_verification() -> Result<()> {
         &load_latest_initrd_normal()?,
         &load_trusted_public_key()?,
         AvbSlotVerifyError::Verification,
+    )
+}
+
+#[test]
+fn kernel_footer_with_vbmeta_offset_overwritten_fails_verification() -> Result<()> {
+    // Arrange.
+    let mut kernel = load_latest_signed_kernel()?;
+    let total_len = kernel.len() as u64;
+    let footer = extract_avb_footer(&kernel)?;
+    assert!(footer.vbmeta_offset < total_len);
+    let vbmeta_offset_addr = ptr::addr_of!(footer.vbmeta_offset) as *const u8;
+    // SAFETY: It is safe as both raw pointers `vbmeta_offset_addr` and `footer` are not null.
+    let vbmeta_offset_start =
+        unsafe { vbmeta_offset_addr.offset_from(ptr::addr_of!(footer) as *const u8) };
+    let footer_start = kernel.len() - size_of::<AvbFooter>();
+    let vbmeta_offset_start = footer_start + usize::try_from(vbmeta_offset_start)?;
+
+    // Act 1.
+    kernel[vbmeta_offset_start..(vbmeta_offset_start + size_of::<u64>())]
+        .copy_from_slice(&total_len.to_be_bytes());
+
+    // Assert 1.
+    let footer = extract_avb_footer(&kernel)?;
+    assert_eq!(total_len, footer.vbmeta_offset as u64);
+    assert_payload_verification_fails(
+        &kernel,
+        &load_latest_initrd_normal()?,
+        &load_trusted_public_key()?,
+        AvbSlotVerifyError::Io,
+    )?;
+
+    // Act 2.
+    kernel[vbmeta_offset_start..(vbmeta_offset_start + size_of::<u64>())]
+        .copy_from_slice(&u64::MAX.to_be_bytes());
+
+    // Assert 2.
+    let footer = extract_avb_footer(&kernel)?;
+    assert_eq!(u64::MAX, footer.vbmeta_offset as u64);
+    assert_payload_verification_fails(
+        &kernel,
+        &load_latest_initrd_normal()?,
+        &load_trusted_public_key()?,
+        AvbSlotVerifyError::Io,
     )
 }
 
