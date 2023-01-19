@@ -63,6 +63,30 @@
       },
       "revId": "b1612cbee5dacd044b6e354de897edf41877958d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42291b98_81d0a86c",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-19T11:41:58Z",
+      "side": 1,
+      "message": "I have to say I\u0027m not a fan - we should avoid dynamically allocating memory if we can.\n\nCould introduce a lifetime on the AvbDescriptor pointer that we get from libavb in `search_initrd_hash_descriptor`. It is guaranteed to stay alive during that function. Really the only thing you want to add is a compile-time check that the pointer is not preserved outside of the scope of that function.\n\nAdding qwandor@ who might be able to help, although he said he might not be able to look at this until Monday.",
+      "parentUuid": "e4185610_93840454",
+      "range": {
+        "startLine": 266,
+        "startChar": 21,
+        "endLine": 266,
+        "endChar": 25
+      },
+      "revId": "b1612cbee5dacd044b6e354de897edf41877958d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
