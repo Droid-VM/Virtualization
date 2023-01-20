@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e42d6153_cabdf2e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-20T07:40:25Z",
+      "side": 1,
+      "message": "my comments are for stylistic issues ... Over to Pierre.",
+      "revId": "4ad08c886e03abd6101b25e08ff49a63033612e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7825914b_94d04445",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-20T07:40:25Z",
+      "side": 1,
+      "message": "constrained",
+      "range": {
+        "startLine": 394,
+        "startChar": 38,
+        "endLine": 394,
+        "endChar": 49
+      },
+      "revId": "4ad08c886e03abd6101b25e08ff49a63033612e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b7a43b6_cb5ba679",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-20T07:40:25Z",
+      "side": 1,
+      "message": "Style:\n\n```\nlet chosen \u003d match.fdt.node(chosen_path).\n  map_err(|e| { error!(\"...\"); DebugPolicyError::InvalidFdt })? {\n    Some(node) \u003d\u003e node,\n    _ \u003d\u003e debug!(...); return Ok(());\n  }\n};\n```\n\nwouldn\u0027t this be simpler?",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 6
+      },
+      "revId": "4ad08c886e03abd6101b25e08ff49a63033612e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c14ebd7f_8fd47060",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-20T07:40:25Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 86,
+        "startChar": 4,
+        "endLine": 86,
+        "endChar": 60
+      },
+      "revId": "4ad08c886e03abd6101b25e08ff49a63033612e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "784fd383_a8cb5d07",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-20T07:40:25Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 13
+      },
+      "revId": "4ad08c886e03abd6101b25e08ff49a63033612e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f749713_e38cabda",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-20T07:40:25Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 13
+      },
+      "revId": "4ad08c886e03abd6101b25e08ff49a63033612e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
