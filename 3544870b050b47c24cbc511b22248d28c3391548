@@ -34,6 +34,24 @@
       "parentUuid": "15d88a25_45e1338f",
       "revId": "3544870b050b47c24cbc511b22248d28c3391548",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62c76626_4431254f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:35:53Z",
+      "side": 1,
+      "message": "I think that it\u0027s 99% safe, but you can wait couple of days more for the restore CL with test.\n\nHere\u0027s my reason.\n\nbootloaders are updated with my CL that only copies `avf` node next to the `pvmfw` or does nothing. Currently `dpm.bin` update is delayed, so I expect that overlay wouldn\u0027t happen because of empty debug policy next to the `pvmfw`.",
+      "parentUuid": "4db21653_ff25f201",
+      "revId": "3544870b050b47c24cbc511b22248d28c3391548",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
