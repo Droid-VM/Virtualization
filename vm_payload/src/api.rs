@@ -19,16 +19,19 @@
 
 use android_system_virtualization_payload::aidl::android::system::virtualization::payload::IVmPayloadService::{
     ENCRYPTEDSTORE_MOUNTPOINT, IVmPayloadService, VM_PAYLOAD_SERVICE_SOCKET_NAME, VM_APK_CONTENTS_PATH};
-use anyhow::{ensure, bail, Context, Result};
+use anyhow::{anyhow, ensure, bail, Context, Result};
 use binder::{Strong, unstable_api::{AIBinder, new_spibinder}};
 use lazy_static::lazy_static;
 use log::{error, info, Level};
 use rpcbinder::{RpcSession, RpcServer};
+use rustutils::system_properties;
+use rustutils::system_properties::PropertyWatcher;
 use std::convert::Infallible;
 use std::ffi::CString;
 use std::fmt::Debug;
 use std::os::raw::{c_char, c_void};
 use std::path::Path;
+use std::process::{Command, Stdio};
 use std::ptr;
 use std::sync::{Mutex, atomic::{AtomicBool, Ordering}};
 
@@ -41,6 +44,7 @@ lazy_static! {
 }
 
 static ALREADY_NOTIFIED: AtomicBool = AtomicBool::new(false);
+static ALREADY_ENABLED_TOMBSTONE_EXPORT: AtomicBool = AtomicBool::new(false);
 
 /// Return a connection to the payload service in Microdroid Manager. Uses the existing connection
 /// if there is one, otherwise attempts to create a new one.
@@ -74,6 +78,54 @@ fn unwrap_or_abort<T, E: Debug>(result: Result<T, E>) -> T {
         error!("{msg}");
         panic!("{msg}")
     })
+}
+
+/// Sets up tombstone service for non-debuggable VMs.
+/// Panics on failure.
+#[no_mangle]
+pub extern "C" fn AVmPayload_enableTombstoneExport() {
+    initialize_logging();
+
+    if !ALREADY_ENABLED_TOMBSTONE_EXPORT.swap(true, Ordering::Relaxed) {
+        unwrap_or_abort(try_set_export_tombstone());
+        unwrap_or_abort(try_ramdump_if_supported());
+    }
+}
+
+fn try_set_export_tombstone() -> Result<()> {
+    system_properties::write("ctl.start", "tombstone_transmit")
+        .context("Failed to start tombstone_transmit")?;
+
+    let mut prop = PropertyWatcher::new("tombstone_transmit.init_done")
+        .context("Failed to init property watcher")?;
+
+    loop {
+        prop.wait().context("Failed to wait property")?;
+        if system_properties::read_bool("tombstone_transmit.init_done", false)
+            .context("Failed to read property")?
+        {
+            break;
+        }
+    }
+    Ok(())
+}
+
+fn try_ramdump_if_supported() -> Result<()> {
+    let supported = std::fs::read_to_string("/proc/cmdline")?.contains(" crashkernel=");
+    info!("ramdump supported: {}", supported);
+    if supported {
+        let status = Command::new("/system/bin/kexec_load")
+            .stdin(Stdio::null())
+            .stdout(Stdio::null())
+            .stderr(Stdio::null())
+            .status()
+            .context("Failed to exec kexec_load")?;
+        if !status.success() {
+            return Err(anyhow!("Failed to load crashkernel: {:?}", status));
+        }
+    }
+
+    Ok(())
 }
 
 /// Notifies the host that the payload is ready.
