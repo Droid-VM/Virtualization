@@ -16,6 +16,328 @@
       "message": "Thanks!",
       "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfa51edd_cfd11840",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-20T09:18:06Z",
+      "side": 1,
+      "message": "`fdt.chosen()`?",
+      "range": {
+        "startLine": 74,
+        "startChar": 23,
+        "endLine": 74,
+        "endChar": 44
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "301adfdd_9288ad42",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-20T09:18:06Z",
+      "side": 1,
+      "message": "`DebugPolicyError::FdtError(e)`?",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 76,
+        "endChar": 36
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d83bd936_0dac681e",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-20T09:18:06Z",
+      "side": 1,
+      "message": "Not splitting hair here but this could be confusing as it assumes that ramdump is enabled by default and therefore needs to be disabled (I get where this is coming from but the assumption my not always be true). Instead, could we rephrase it as\n```\nFailed to find /chosen: Skipping",
+      "range": {
+        "startLine": 80,
+        "startChar": 46,
+        "endLine": 80,
+        "endChar": 89
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5aab685e_2eeaff76",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-20T09:18:06Z",
+      "side": 1,
+      "message": "`ramdump`?",
+      "range": {
+        "startLine": 80,
+        "startChar": 61,
+        "endLine": 80,
+        "endChar": 69
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ca8ae3e_d79900b3",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-20T09:18:06Z",
+      "side": 1,
+      "message": "`DebugPolicyError::FdtError(e)`?",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 36
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b866d356_54798fba",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-20T09:18:06Z",
+      "side": 1,
+      "message": "`DebugPolicyError::OverlayError(e)`?",
+      "range": {
+        "startLine": 131,
+        "startChar": 16,
+        "endLine": 133,
+        "endChar": 0
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b55f27d5_bcd01c80",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-20T09:18:06Z",
+      "side": 1,
+      "message": "`DebugPolicyError::OverlayError(e)`?",
+      "range": {
+        "startLine": 143,
+        "startChar": 16,
+        "endLine": 144,
+        "endChar": 55
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7852e5ff_1743c16b",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-20T09:18:06Z",
+      "side": 1,
+      "message": "Should we `Some(1) \u003d\u003e Ok(true)` and still `warn!` (not `debug!`) on other values (`Some(n)`)? Or is it valid to define bool-like DT values as true for any non-zero value?\n\nIf so, I think we should log the unexpected value:\n```\nwarn!(\"Unexpected value for debug policy property /avf/guest/common/ramdump: {n}\")\n```",
+      "range": {
+        "startLine": 149,
+        "startChar": 16,
+        "endLine": 149,
+        "endChar": 21
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f1141a0_3433506e",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-20T09:18:06Z",
+      "side": 1,
+      "message": "Move these 2 `debug` statements to the caller so that we handle all paths that could return `true` or `false`, limit the number of functions that are logging, and possibly detect redundant logging calls.",
+      "range": {
+        "startLine": 153,
+        "startChar": 16,
+        "endLine": 153,
+        "endChar": 85
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31128e04_41b1690a",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-20T09:18:06Z",
+      "side": 1,
+      "message": "(comment originally written for the `warn` of PS2 but still applicable, IMO)\n\nSo `handle_debug_policy` is always called because it patches the DT (`handle_ramdump`) even if we don\u0027t have a DP (`debug_policy\u003d\u003dNone`) but it isn\u0027t an error for a vendor to distribute pvmfw without DP so shouldn\u0027t this be a `debug!` instead?",
+      "range": {
+        "startLine": 173,
+        "startChar": 8,
+        "endLine": 173,
+        "endChar": 12
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d857afd4_024f257c",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-20T09:18:06Z",
+      "side": 1,
+      "message": "FYI, if you wrote this `if`-`else` because a `match` on the `Option` felt overkill (it is!), Rust\u0027s solution is the `if let` statement:\n```\nif let Some(dp) \u003d debug_policy {\n    apply_debug_policy(fdt, dp)?;\n} else {\n    // ...\n}\n```",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 174,
+        "endChar": 5
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a88db318_53ba9f02",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-20T09:18:06Z",
+      "side": 1,
+      "message": "Note that any error returned from this function will be ignored by the caller of `handle_debug_policy` (as it should because failing to _apply_ the DP shouldn\u0027t prevent us from booting, see my comment on `?` in entry.rs) which could result in `crashdump\u003d...` reaching the guest because the caller would \"restore\" it from the host-provided DT.",
+      "range": {
+        "startLine": 181,
+        "startChar": 4,
+        "endLine": 181,
+        "endChar": 24
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28b1531b_708ac1d8",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-20T09:18:06Z",
+      "side": 1,
+      "message": "Could you `impl fmt::Display for DebugPolicyError` and `warn!(\"...: {e}\")` it inside this `map_err`, which would centralize the logging of these errors (I\u0027ve added comments where this could be used in the implementation).\n\nBTW, I don\u0027t think you actually want to \"translate\" these to `RebootReason`s (see comment about `?`) but if you did, `impl From\u003cDebugPolicyError\u003e for RebootReason` would probably be the right way.",
+      "range": {
+        "startLine": 258,
+        "startChar": 69,
+        "endLine": 258,
+        "endChar": 76
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3325d20_97caaf8c",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-20T09:18:06Z",
+      "side": 1,
+      "message": "This `?` makes `main_wrapper` return a `Err(RebootReason::InvalidFdt)` on error, causing pvmfw to reboot the pVM (which we said wasn\u0027t what we wanted, right?).",
+      "range": {
+        "startLine": 262,
+        "startChar": 10,
+        "endLine": 262,
+        "endChar": 11
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
