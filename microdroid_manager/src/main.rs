@@ -428,8 +428,6 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
     if config.export_tombstones {
         system_properties::write("tombstone_transmit.start", "1")
             .context("set tombstone_transmit.start")?;
-    } else {
-        control_service("stop", "tombstoned")?;
     }
 
     // Wait until zipfuse has mounted the APKs so we can access the payload
@@ -456,11 +454,6 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
 
     info!("boot completed, time to run payload");
     exec_task(task, service).context("Failed to run payload")
-}
-
-fn control_service(action: &str, service: &str) -> Result<()> {
-    system_properties::write(&format!("ctl.{}", action), service)
-        .with_context(|| format!("Failed to {} {}", action, service))
 }
 
 struct ApkDmverityArgument<'a> {
