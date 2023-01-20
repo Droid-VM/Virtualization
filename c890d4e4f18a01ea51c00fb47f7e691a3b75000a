@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca703493_9e3e716c",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-20T09:04:14Z",
+      "side": 1,
+      "message": "It\u0027s not doing any great harm I guess. But I\u0027d be ok with removing it.\nIf we want to use it for tests then we\u0027d need to think about how to organise that. Maybe you should ask for it in the config JSON.\nOn the whole I\u0027d rather not expose it to priv apps, absent some compelling use case.",
+      "parentUuid": "eb24b644_fe0b991d",
+      "range": {
+        "startLine": 101,
+        "startChar": 3,
+        "endLine": 101,
+        "endChar": 68
+      },
+      "revId": "c890d4e4f18a01ea51c00fb47f7e691a3b75000a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d752acb5_4ffaa4bf",
         "filename": "microdroid/init.rc",
         "patchSetId": 1
