@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a8be37e_9e032839",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 862,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-20T01:20:25Z",
+      "side": 1,
+      "message": "I don\u0027t think this part is necessary because we (and partners as well) will also run CTS against a production build that went through the resigning infra.",
+      "range": {
+        "startLine": 859,
+        "startChar": 8,
+        "endLine": 862,
+        "endChar": 43
+      },
+      "revId": "9cd2a681885b134ccd5d2936374695861b107616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42660cca_69138327",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-20T01:20:25Z",
+      "side": 1,
+      "message": "Isn\u0027t this too sensitive to the output format?",
+      "range": {
+        "startLine": 891,
+        "startChar": 56,
+        "endLine": 891,
+        "endChar": 64
+      },
+      "revId": "9cd2a681885b134ccd5d2936374695861b107616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5373a67_2df41787",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-20T01:20:25Z",
+      "side": 1,
+      "message": "Consider deduping this by iterating over files we are interested in.",
+      "range": {
+        "startLine": 889,
+        "startChar": 0,
+        "endLine": 897,
+        "endChar": 77
+      },
+      "revId": "9cd2a681885b134ccd5d2936374695861b107616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
