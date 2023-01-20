@@ -165,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae20d14b_55e69256",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:36:25Z",
+      "side": 1,
+      "message": "Thank you for the suggestion. But I\u0027d like to avoid redefining values even though Rust supports it.",
+      "parentUuid": "dec5b76c_7d7493fb",
+      "range": {
+        "startLine": 74,
+        "startChar": 8,
+        "endLine": 74,
+        "endChar": 9
+      },
+      "revId": "746624e31aa5a906649c2bbca234ea1c65825cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa10af0e_a0afc242",
@@ -329,6 +353,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05325b40_264d49ca",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:36:25Z",
+      "side": 1,
+      "message": "I thought that similar, but here\u0027s the error when I omit `[..]`.\n\n```\n12 |     let mut new_bootargs \u003d args.as_slice().join(\u0026b\" \");\n   |                                            ^^^^ the trait `Borrow\u003c[\u0026[u8; 1]]\u003e` is not implemented for `\u0026[u8]`\n   |\n   \u003d help: the trait `Borrow\u003c[T]\u003e` is implemented for `[T; N]`\n   \u003d note: required for `[\u0026[u8]]` to implement `Join\u003c\u0026\u0026[u8; 1]\u003e`\n```\n\nType of `args.as_slice()` is `\u0026[\u0026[u8]]`, and I actually don\u0027t understand how `join()` ends up with creating `alloc::vec::Vec\u003cu8\u003e`.\n\n\nFYI, bit different error with `b\" \"`\n\n```\n12 |     let mut new_bootargs \u003d args.as_slice().join(b\" \");\n   |                                            ^^^^ the trait `Borrow\u003c[[u8; 1]]\u003e` is not implemented for `\u0026[u8]`\n   |\n   \u003d help: the trait `Borrow\u003c[T]\u003e` is implemented for `[T; N]`\n   \u003d note: required for `[\u0026[u8]]` to implement `Join\u003c\u0026[u8; 1]\u003e`\n```",
+      "parentUuid": "961fb150_330764ab",
+      "range": {
+        "startLine": 100,
+        "startChar": 48,
+        "endLine": 100,
+        "endChar": 57
+      },
+      "revId": "746624e31aa5a906649c2bbca234ea1c65825cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7025210d_b49cb070",
@@ -342,6 +390,30 @@
       "writtenOn": "2023-01-20T09:18:06Z",
       "side": 1,
       "message": "Why not get the `node_mut` from the start instead of relying on `unwrap`?",
+      "range": {
+        "startLine": 103,
+        "startChar": 7,
+        "endLine": 103,
+        "endChar": 64
+      },
+      "revId": "746624e31aa5a906649c2bbca234ea1c65825cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8750fe94_3dec4d66",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:36:25Z",
+      "side": 1,
+      "message": "`FdtNodeMut` doesn\u0027t implement `getprop`.",
+      "parentUuid": "7025210d_b49cb070",
       "range": {
         "startLine": 103,
         "startChar": 7,
@@ -459,6 +531,30 @@
       "writtenOn": "2023-01-20T09:18:06Z",
       "side": 1,
       "message": "Is `from_bytes_with_nul_unchecked` the only reason for this `unsafe`? If so, why not use the safe `from_bytes_with_nul().unwrap()`? Hopefully, the compiler is smart enough to figure out that the inputs are const and optimizes away the constructor. Worst case, we have some code that parses a few tens of bytes.",
+      "range": {
+        "startLine": 124,
+        "startChar": 4,
+        "endLine": 124,
+        "endChar": 12
+      },
+      "revId": "746624e31aa5a906649c2bbca234ea1c65825cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d10c74bc_57ed3ecf",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:36:25Z",
+      "side": 1,
+      "message": "Change to use `from_bytes_with_nul().unwrap()` because `unsafe` seems to be the worse than tiny little performance improvement.",
+      "parentUuid": "88d4d80c_88c4ea62",
       "range": {
         "startLine": 124,
         "startChar": 4,

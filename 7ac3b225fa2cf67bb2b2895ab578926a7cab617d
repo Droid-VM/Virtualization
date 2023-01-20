@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e51a29af_8f632280",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:36:25Z",
+      "side": 1,
+      "message": "I just wanted to match with another code below for getting chosen_mut",
+      "parentUuid": "bfa51edd_cfd11840",
+      "range": {
+        "startLine": 74,
+        "startChar": 23,
+        "endLine": 74,
+        "endChar": 44
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "301adfdd_9288ad42",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-01-20T09:18:06Z",
       "side": 1,
       "message": "`DebugPolicyError::FdtError(e)`?",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 76,
+        "endChar": 36
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1f7be2b_df3b1408",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:36:25Z",
+      "side": 1,
+      "message": "Q) Do you recommend to convert detailed `FdtError` to `DebugPolicyError` and return? I thought that telling problematic FDT for reboot reason (`DebugPolicyError::InvalidFdt` vs `DebugPolicyError::InvalidOverlayFdt`) could be useful especially because `FdtError` is logged here. WDYT?",
+      "parentUuid": "301adfdd_9288ad42",
       "range": {
         "startLine": 75,
         "startChar": 8,
@@ -112,6 +160,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39062758_66d392dd",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:36:25Z",
+      "side": 1,
+      "message": "\u003e ramdump is enabled by default and therefore needs to be disabled \n\nThis is true for now, and the message is written to exhibit the behavior. Do you prefer to hide the detail? \u0027ramdump by default\u0027 is implementatoin detail and can be changed later, though.",
+      "parentUuid": "d83bd936_0dac681e",
+      "range": {
+        "startLine": 80,
+        "startChar": 46,
+        "endLine": 80,
+        "endChar": 89
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b9203a5_5476a5ac",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:36:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5aab685e_2eeaff76",
+      "range": {
+        "startLine": 80,
+        "startChar": 61,
+        "endLine": 80,
+        "endChar": 69
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ca8ae3e_d79900b3",
         "filename": "pvmfw/src/debug_policy.rs",
         "patchSetId": 5
@@ -123,6 +219,30 @@
       "writtenOn": "2023-01-20T09:18:06Z",
       "side": 1,
       "message": "`DebugPolicyError::FdtError(e)`?",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 36
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5cba8ba_d6dd7ba4",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:36:25Z",
+      "side": 1,
+      "message": "ditto.",
+      "parentUuid": "8ca8ae3e_d79900b3",
       "range": {
         "startLine": 86,
         "startChar": 8,
@@ -156,6 +276,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6c2a4c9_5bde8d1d",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:36:25Z",
+      "side": 1,
+      "message": "ditto. Let\u0027s discuss above.",
+      "parentUuid": "b866d356_54798fba",
+      "range": {
+        "startLine": 131,
+        "startChar": 16,
+        "endLine": 133,
+        "endChar": 0
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b55f27d5_bcd01c80",
@@ -169,6 +313,30 @@
       "writtenOn": "2023-01-20T09:18:06Z",
       "side": 1,
       "message": "`DebugPolicyError::OverlayError(e)`?",
+      "range": {
+        "startLine": 143,
+        "startChar": 16,
+        "endLine": 144,
+        "endChar": 55
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c41d05ed_3146aafc",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:36:25Z",
+      "side": 1,
+      "message": "ditto. Let\u0027s discuss above.",
+      "parentUuid": "b55f27d5_bcd01c80",
       "range": {
         "startLine": 143,
         "startChar": 16,
@@ -204,6 +372,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d7933ad_1197a36f",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:36:25Z",
+      "side": 1,
+      "message": "I couldn\u0027t find standard for mapping `int` to `bool` in `dpm.bin`, so followed C/C++\u0027s if statement -- `0` for `false`, and other numbers are `true`. Do you have a reason to `1` for `true` and other numbers for `false`?\n\nApplied printing ramdump value with different message, because both `Some(0)` and `Some(1)` are expected.",
+      "parentUuid": "7852e5ff_1743c16b",
+      "range": {
+        "startLine": 149,
+        "startChar": 16,
+        "endLine": 149,
+        "endChar": 21
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f1141a0_3433506e",
         "filename": "pvmfw/src/debug_policy.rs",
         "patchSetId": 5
@@ -215,6 +407,30 @@
       "writtenOn": "2023-01-20T09:18:06Z",
       "side": 1,
       "message": "Move these 2 `debug` statements to the caller so that we handle all paths that could return `true` or `false`, limit the number of functions that are logging, and possibly detect redundant logging calls.",
+      "range": {
+        "startLine": 153,
+        "startChar": 16,
+        "endLine": 153,
+        "endChar": 85
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef8342f8_a122b745",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:36:25Z",
+      "side": 1,
+      "message": "I agree to limit log number for `error` or `warn`, but disagree for `debug`. Isn\u0027t `debug` for intended verbose log because of development purpose?",
+      "parentUuid": "3f1141a0_3433506e",
       "range": {
         "startLine": 153,
         "startChar": 16,
@@ -248,6 +464,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "775fa5ac_66c1f408",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:36:25Z",
+      "side": 1,
+      "message": "You\u0027re correct, because dpm partition can be erased and device can boot without dpm.bin. Pixel team thinks \u0027no dpm\u0027 isn\u0027t a normal situation and shouldn\u0027t be considered as normal case, but I think that vendors may want to ship device without AVF debug policy.\n\nFeel free to reopen if it seems wrong.",
+      "parentUuid": "31128e04_41b1690a",
+      "range": {
+        "startLine": 173,
+        "startChar": 8,
+        "endLine": 173,
+        "endChar": 12
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d857afd4_024f257c",
@@ -271,6 +511,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "318f277b_ba8bb711",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:36:25Z",
+      "side": 1,
+      "message": "Done. Thank you for the proposal.",
+      "parentUuid": "d857afd4_024f257c",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 174,
+        "endChar": 5
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a88db318_53ba9f02",
@@ -284,6 +548,30 @@
       "writtenOn": "2023-01-20T09:18:06Z",
       "side": 1,
       "message": "Note that any error returned from this function will be ignored by the caller of `handle_debug_policy` (as it should because failing to _apply_ the DP shouldn\u0027t prevent us from booting, see my comment on `?` in entry.rs) which could result in `crashdump\u003d...` reaching the guest because the caller would \"restore\" it from the host-provided DT.",
+      "range": {
+        "startLine": 181,
+        "startChar": 4,
+        "endLine": 181,
+        "endChar": 24
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a56a128_5796048a",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:36:25Z",
+      "side": 1,
+      "message": "Replied in comment `entry.rs`. Let\u0027s discuss there if necessary.",
+      "parentUuid": "a88db318_53ba9f02",
       "range": {
         "startLine": 181,
         "startChar": 4,
@@ -319,6 +607,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d0b4621_3e713ab8",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:36:25Z",
+      "side": 1,
+      "message": "Re: `impl fmt::Display for DebugPolicyError`: It seems unnecessary. I\u0027ve logged extra details when I return error in `handle_debug_policy()`, so logging error here seemed to be an unnecessary duplication. Do you prefer to log here or inside the `debug_policy.rs`?\n\nDone for `impl From\u003cDebugPolicyError\u003e`.",
+      "parentUuid": "28b1531b_708ac1d8",
+      "range": {
+        "startLine": 258,
+        "startChar": 69,
+        "endLine": 258,
+        "endChar": 76
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d3325d20_97caaf8c",
         "filename": "pvmfw/src/entry.rs",
         "patchSetId": 5
@@ -330,6 +642,30 @@
       "writtenOn": "2023-01-20T09:18:06Z",
       "side": 1,
       "message": "This `?` makes `main_wrapper` return a `Err(RebootReason::InvalidFdt)` on error, causing pvmfw to reboot the pVM (which we said wasn\u0027t what we wanted, right?).",
+      "range": {
+        "startLine": 262,
+        "startChar": 10,
+        "endLine": 262,
+        "endChar": 11
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7db5cd1b_3091768d",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T16:36:25Z",
+      "side": 1,
+      "message": "Rebooting is WAI in this CL.\n\nI\u0027d like to add preventing rebooting CL together with test. WDYT?",
+      "parentUuid": "d3325d20_97caaf8c",
       "range": {
         "startLine": 262,
         "startChar": 10,
