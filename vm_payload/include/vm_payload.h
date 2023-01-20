@@ -30,6 +30,22 @@ struct AIBinder;
 typedef struct AIBinder AIBinder;
 
 /**
+ * Sets up tombstone service for non-debuggable VMs, which automatically exports generated crash
+ * dumps to the host. Both userspace and kernel crash will be exported.
+ *
+ * This function panics on failure.
+ *
+ * Note that subsequent calls to this function after the first have no effect.
+ *
+ * Note that this function also has no effect for debuggable VMs, as tombstone export is enabled for
+ * debuggable VMs by default.
+ *
+ * \see https://source.android.com/docs/core/tests/debug
+ */
+
+void AVmPayload_enableTombstoneExport(void);
+
+/**
  * Notifies the host that the payload is ready.
  *
  * If the host app has set a `VirtualMachineCallback` for the VM, its
