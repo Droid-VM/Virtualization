@@ -100,7 +100,7 @@ fn try_enable_tombstone_export() -> Result<()> {
 }
 
 fn try_set_export_tombstone() -> Result<()> {
-    system_properties::write("ctl.start", "tombstone_transmit")
+    system_properties::write("tombstone_transmit.start", "1")
         .context("Failed to start tombstone_transmit")?;
 
     let mut prop = PropertyWatcher::new("tombstone_transmit.init_done")
