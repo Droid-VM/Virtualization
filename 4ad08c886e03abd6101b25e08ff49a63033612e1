@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3915eea4_ab0efdb5",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T08:02:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7825914b_94d04445",
+      "range": {
+        "startLine": 394,
+        "startChar": 38,
+        "endLine": 394,
+        "endChar": 49
+      },
+      "revId": "4ad08c886e03abd6101b25e08ff49a63033612e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b7a43b6_cb5ba679",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-01-20T07:40:25Z",
       "side": 1,
       "message": "Style:\n\n```\nlet chosen \u003d match.fdt.node(chosen_path).\n  map_err(|e| { error!(\"...\"); DebugPolicyError::InvalidFdt })? {\n    Some(node) \u003d\u003e node,\n    _ \u003d\u003e debug!(...); return Ok(());\n  }\n};\n```\n\nwouldn\u0027t this be simpler?",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 6
+      },
+      "revId": "4ad08c886e03abd6101b25e08ff49a63033612e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fa12c03_4db14ce8",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T08:02:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b7a43b6_cb5ba679",
       "range": {
         "startLine": 74,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3056158_cf0e2d2e",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T08:02:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c14ebd7f_8fd47060",
+      "range": {
+        "startLine": 86,
+        "startChar": 4,
+        "endLine": 86,
+        "endChar": 60
+      },
+      "revId": "4ad08c886e03abd6101b25e08ff49a63033612e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "784fd383_a8cb5d07",
@@ -110,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac0395ea_3aeb3b3e",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T08:02:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "784fd383_a8cb5d07",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 13
+      },
+      "revId": "4ad08c886e03abd6101b25e08ff49a63033612e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f749713_e38cabda",
@@ -123,6 +219,30 @@
       "writtenOn": "2023-01-20T07:40:25Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 13
+      },
+      "revId": "4ad08c886e03abd6101b25e08ff49a63033612e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7303fec8_6b176672",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-20T08:02:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f749713_e38cabda",
       "range": {
         "startLine": 158,
         "startChar": 0,
