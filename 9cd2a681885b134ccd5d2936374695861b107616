@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93f8b9ca_9b016a7e",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 862,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-20T17:14:15Z",
+      "side": 1,
+      "message": "It would ensure that our presubmits catch it early, but I will remove it if you think that is not so important.",
+      "parentUuid": "9a8be37e_9e032839",
+      "range": {
+        "startLine": 859,
+        "startChar": 8,
+        "endLine": 862,
+        "endChar": 43
+      },
+      "revId": "9cd2a681885b134ccd5d2936374695861b107616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42660cca_69138327",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a1cab15_8556399b",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-20T17:14:15Z",
+      "side": 1,
+      "message": "It indeed it, but avbtool is a very standardized one, so I dont think partners change it. It would be better if we had a java api for avb, but I couldn\u0027t find much.\n\nThe alternative is to write a parser of the info, which is a little complex, got any suggestion of a json parser or something? \ngo/paste/5116612536434688 \u003c- This is what the avbinfo looks like.",
+      "parentUuid": "42660cca_69138327",
+      "range": {
+        "startLine": 891,
+        "startChar": 56,
+        "endLine": 891,
+        "endChar": 64
+      },
+      "revId": "9cd2a681885b134ccd5d2936374695861b107616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e5373a67_2df41787",
         "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
         "patchSetId": 1
@@ -60,6 +108,30 @@
       "writtenOn": "2023-01-20T01:20:25Z",
       "side": 1,
       "message": "Consider deduping this by iterating over files we are interested in.",
+      "range": {
+        "startLine": 889,
+        "startChar": 0,
+        "endLine": 897,
+        "endChar": 77
+      },
+      "revId": "9cd2a681885b134ccd5d2936374695861b107616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d38d00c0_7ff724ff",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-20T17:14:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5373a67_2df41787",
       "range": {
         "startLine": 889,
         "startChar": 0,
