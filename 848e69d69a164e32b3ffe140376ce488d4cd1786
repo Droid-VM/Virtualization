@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "960fc808_e7fbe8d3",
+        "filename": "pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-20T12:42:01Z",
+      "side": 1,
+      "message": "Because when offset \u003d u64::MAX, it should cause integer overflow. When offset is kernel length, we also shouldn\u0027t be able to read anything because that\u0027s the end of the data.",
+      "parentUuid": "1205c535_608f7c46",
+      "range": {
+        "startLine": 166,
+        "startChar": 26,
+        "endLine": 166,
+        "endChar": 49
+      },
+      "revId": "848e69d69a164e32b3ffe140376ce488d4cd1786",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e413d4bb_e11bc6c3",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-01-19T11:39:24Z",
       "side": 1,
       "message": "consider deduping these two by looping around a series of wrong values",
+      "range": {
+        "startLine": 164,
+        "startChar": 1,
+        "endLine": 190,
+        "endChar": 5
+      },
+      "revId": "848e69d69a164e32b3ffe140376ce488d4cd1786",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87d875c7_825ab62b",
+        "filename": "pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-20T12:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e413d4bb_e11bc6c3",
       "range": {
         "startLine": 164,
         "startChar": 1,
