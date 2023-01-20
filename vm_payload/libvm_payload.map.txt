@@ -1,5 +1,6 @@
 LIBVM_PAYLOAD {
   global:
+    AVmPayload_setExportTombstone;       # systemapi
     AVmPayload_notifyPayloadReady;       # systemapi
     AVmPayload_runVsockRpcServer;        # systemapi
     AVmPayload_getVmInstanceSecret;      # systemapi

@@ -30,6 +30,16 @@ struct AIBinder;
 typedef struct AIBinder AIBinder;
 
 /**
+ * Sets up tombstone service, which automatically exports generated crash dumps to the host. Both
+ * userspace and kernel crash will be exported.
+ *
+ * Note that this function is no-op for debuggable VMs, as debuggable VMs export their crash dumps
+ * by default.
+ */
+
+void AVmPayload_setExportTombstone(void);
+
+/**
  * Notifies the host that the payload is ready.
  *
  * If the host app has set a `VirtualMachineCallback` for the VM, its
