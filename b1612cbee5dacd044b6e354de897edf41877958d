@@ -87,6 +87,30 @@
       },
       "revId": "b1612cbee5dacd044b6e354de897edf41877958d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb459189_416fcf7a",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-20T12:29:27Z",
+      "side": 1,
+      "message": "Actually I also want to extract the kernel and initrd hashes to pass them to DICE (b/265897559). I think it\u0027s cleaner to just collect all the descriptors to check and extract information, than to loop with `foreach` and run `check_and_extract_info` for everyone.",
+      "parentUuid": "42291b98_81d0a86c",
+      "range": {
+        "startLine": 266,
+        "startChar": 21,
+        "endLine": 266,
+        "endChar": 25
+      },
+      "revId": "b1612cbee5dacd044b6e354de897edf41877958d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
