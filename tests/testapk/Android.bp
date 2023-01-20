@@ -25,6 +25,8 @@ android_test {
         "MicrodroidIdleNativeLib",
         "MicrodroidEmptyNativeLib",
         "MicrodroidPrivateLinkingNativeLib",
+        "MicrodroidCrashNativeLib",
+        "MicrodroidCrashExportNativeLib",
     ],
     jni_uses_platform_apis: true,
     use_embedded_native_libs: true,
@@ -63,6 +65,20 @@ cc_library_shared {
     name: "MicrodroidIdleNativeLib",
     srcs: ["src/native/idlebinary.cpp"],
     header_libs: ["vm_payload_headers"],
+    stl: "libc++_static",
+}
+
+cc_library_shared {
+    name: "MicrodroidCrashNativeLib",
+    srcs: ["src/native/crashbinary.cpp"],
+    header_libs: ["vm_payload_headers"],
+    stl: "libc++_static",
+}
+
+cc_library_shared {
+    name: "MicrodroidCrashExportNativeLib",
+    srcs: ["src/native/crashexportbinary.cpp"],
+    shared_libs: ["libvm_payload#current"],
     stl: "libc++_static",
 }
 
