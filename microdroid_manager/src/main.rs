@@ -205,7 +205,9 @@ fn try_main() -> Result<()> {
         warn!("Failed to set cloexec on vm payload socket: {:?}", e);
     }
 
-    load_crashkernel_if_supported().context("Failed to load crashkernel")?;
+    if should_export_tombstone_by_default() {
+        load_crashkernel_if_supported().context("Failed to load crashkernel")?;
+    }
 
     swap::init_swap().context("Failed to initialise swap")?;
     info!("swap enabled.");
@@ -316,6 +318,15 @@ fn is_verified_boot() -> bool {
     !Path::new(DEBUG_MICRODROID_NO_VERIFIED_BOOT).exists()
 }
 
+fn should_export_tombstone_by_default() -> bool {
+    if system_properties::read_bool(DEBUGGABLE_PROP, true).unwrap_or(false) {
+        return true;
+    }
+
+    // TODO(b/250165198): export if debug policy is on
+    false
+}
+
 fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> {
     let metadata = load_metadata().context("Failed to load payload metadata")?;
     let dice = DiceDriver::new(Path::new("/dev/open-dice0")).context("Failed to load DICE")?;
@@ -424,11 +435,9 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
 
     setup_config_sysprops(&config)?;
 
-    // Start tombstone_transmit if enabled
-    if config.export_tombstones {
+    // Start tombstone_transmit if debuggable
+    if should_export_tombstone_by_default() {
         control_service("start", "tombstone_transmit")?;
-    } else {
-        control_service("stop", "tombstoned")?;
     }
 
     // Wait until zipfuse has mounted the APKs so we can access the payload
@@ -436,7 +445,7 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
 
     register_vm_payload_service(allow_restricted_apis, service.clone(), dice_context)?;
 
-    if config.export_tombstones {
+    if should_export_tombstone_by_default() {
         wait_for_tombstone_transmit_done()?;
     }
 
@@ -451,6 +460,7 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
     wait_for_property_true("dev.bootcomplete").context("failed waiting for dev.bootcomplete")?;
     system_properties::write("microdroid_manager.init_done", "1")
         .context("set microdroid_manager.init_done")?;
+
     info!("boot completed, time to run payload");
     exec_task(task, service).context("Failed to run payload")
 }
@@ -779,7 +789,6 @@ fn load_config(payload_metadata: PayloadMetadata) -> Result<VmPayloadConfig> {
                 apexes: vec![],
                 extra_apks: vec![],
                 prefer_staged: false,
-                export_tombstones: false,
                 enable_authfs: false,
             })
         }

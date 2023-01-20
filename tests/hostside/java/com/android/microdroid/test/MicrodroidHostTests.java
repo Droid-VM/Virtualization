@@ -503,24 +503,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         vmInfo.mProcess.destroy();
     }
 
-    private boolean isTombstoneGenerated(String configPath, String... crashCommand)
-            throws Exception {
-        // Note this test relies on logcat values being printed by tombstone_transmit on
-        // and the reeceiver on host (virtualization_service)
-        mMicrodroidDevice =
-                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
-                        .debugLevel("full")
-                        .memoryMib(minMemorySize())
-                        .numCpus(NUM_VCPUS)
-                        .build(getAndroidDevice());
-        mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
-        mMicrodroidDevice.enableAdbRoot();
-
-        CommandRunner microdroid = new CommandRunner(mMicrodroidDevice);
-        microdroid.run(crashCommand);
-
-        // check until microdroid is shut down
-        CommandRunner android = new CommandRunner(getDevice());
+    private void waitForCrosvmExit(CommandRunner android) throws Exception {
         // TODO: improve crosvm exit check. b/258848245
         android.runWithTimeout(
                 15000,
@@ -529,8 +512,9 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                 "1",
                 "-e",
                 "'virtualizationmanager::crosvm.*exited with status exit status:'");
+    }
 
-        // Check that tombstone is received (from host logcat)
+    private boolean isTombstoneReceivedFromHostLogcat() throws Exception {
         String ramdumpRegex =
                 "Received [0-9]+ bytes from guest & wrote to tombstone file|"
                         + "Ramdump \"[^ ]+/ramdump\" sent to tombstoned";
@@ -550,38 +534,84 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         return !result.trim().isEmpty();
     }
 
-    @Test
-    public void testTombstonesAreGeneratedUponUserspaceCrash() throws Exception {
-        assertThat(
-                        isTombstoneGenerated(
-                                "assets/vm_config_crash.json",
-                                "kill",
-                                "-SIGSEGV",
-                                "$(pidof microdroid_launcher)"))
-                .isTrue();
+    private void assertThatTombstoneIsGeneratedWithCmd(String configPath, String... crashCommand)
+            throws Exception {
+        // Note this test relies on logcat values being printed by tombstone_transmit on
+        // and the reeceiver on host (virtualization_service)
+        mMicrodroidDevice =
+                MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
+                        .debugLevel("full")
+                        .memoryMib(minMemorySize())
+                        .numCpus(NUM_VCPUS)
+                        .build(getAndroidDevice());
+        mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
+        mMicrodroidDevice.enableAdbRoot();
+
+        CommandRunner microdroid = new CommandRunner(mMicrodroidDevice);
+        microdroid.run(crashCommand);
+
+        // check until microdroid is shut down
+        CommandRunner android = new CommandRunner(getDevice());
+        waitForCrosvmExit(android);
+
+        assertThat(isTombstoneReceivedFromHostLogcat()).isTrue();
     }
 
     @Test
-    public void testTombstonesAreNotGeneratedIfNotExportedUponUserspaceCrash() throws Exception {
-        assertThat(
-                        isTombstoneGenerated(
-                                "assets/vm_config_crash_no_tombstone.json",
-                                "kill",
-                                "-SIGSEGV",
-                                "$(pidof microdroid_launcher)"))
-                .isFalse();
+    public void testTombstonesAreGeneratedUponUserspaceCrash() throws Exception {
+        assertThatTombstoneIsGeneratedWithCmd(
+                "assets/vm_config.json", "kill", "-SIGSEGV", "$(pidof microdroid_launcher)");
     }
 
     @Test
     public void testTombstonesAreGeneratedUponKernelCrash() throws Exception {
         assumeFalse("Cuttlefish is not supported", isCuttlefish());
+        assertThatTombstoneIsGeneratedWithCmd(
+                "assets/vm_config.json", "echo", "c", ">", "/proc/sysrq-trigger");
+    }
+
+    private boolean isTombstoneIsGeneratedWithCrashPayload(String binaryName, boolean debuggable)
+            throws Exception {
+        // we can't use microdroid builder as it wants ADB connection (debuggable)
+        CommandRunner android = new CommandRunner(getDevice());
+
+        android.run("rm", "-rf", TEST_ROOT + "*");
+        android.run("mkdir", "-p", TEST_ROOT + "*");
+
+        final String apkPath = getPathForPackage(PACKAGE_NAME);
+        final String idsigPath = TEST_ROOT + "idsig";
+        final String instanceImgPath = TEST_ROOT + "instance.img";
+        android.run(
+                VIRT_APEX + "bin/vm",
+                "run-app",
+                "--payload-binary-name",
+                binaryName,
+                "--debug",
+                debuggable ? "full" : "none",
+                apkPath,
+                idsigPath,
+                instanceImgPath);
+
+        return isTombstoneReceivedFromHostLogcat();
+    }
+
+    @Test
+    public void testTombstonesAreGeneratedWithCrashPayload() throws Exception {
+        assertThat(isTombstoneIsGeneratedWithCrashPayload("MicrodroidCrashNativeLib.so", true))
+                .isTrue();
+    }
+
+    @Test
+    public void testTombstonesAreNotGeneratedWithCrashPayloadWhenNonDebuggable() throws Exception {
+        assertThat(isTombstoneIsGeneratedWithCrashPayload("MicrodroidCrashNativeLib.so", false))
+                .isFalse();
+    }
+
+    @Test
+    public void testTombstonesAreGeneratedWithExportTombstone() throws Exception {
         assertThat(
-                        isTombstoneGenerated(
-                                "assets/vm_config_crash.json",
-                                "echo",
-                                "c",
-                                ">",
-                                "/proc/sysrq-trigger"))
+                        isTombstoneIsGeneratedWithCrashPayload(
+                                "MicrodroidCrashExportNativeLib.so", false))
                 .isTrue();
     }
 
