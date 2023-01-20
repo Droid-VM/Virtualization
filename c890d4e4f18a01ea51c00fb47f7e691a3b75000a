@@ -169,6 +169,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "890d905c_f6a4b26d",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-20T17:45:49Z",
+      "side": 1,
+      "message": "\u003e Do we have to? The host-side test could execute the bionic tests as root.\n\nI\u0027d prefer to execute tests as close as possible to the environment as close to the environment they payload runs in.\n\nHaving said that, discussion about testing / using /data in payload is a bit tangental to this change. :)\n\nI think it\u0027s useful to enforce that we can\u0027t execute from writable partition, even if currently payload doesn\u0027t have access to it. WDYT?",
+      "parentUuid": "ca703493_9e3e716c",
+      "range": {
+        "startLine": 101,
+        "startChar": 3,
+        "endLine": 101,
+        "endChar": 68
+      },
+      "revId": "c890d4e4f18a01ea51c00fb47f7e691a3b75000a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d752acb5_4ffaa4bf",
         "filename": "microdroid/init.rc",
         "patchSetId": 1
@@ -274,6 +298,30 @@
       "writtenOn": "2023-01-19T15:25:40Z",
       "side": 1,
       "message": "Does this work?\nI can\u0027t see anything that gives the payload access to this in Microdroid sepolic.",
+      "range": {
+        "startLine": 267,
+        "startChar": 36,
+        "endLine": 267,
+        "endChar": 48
+      },
+      "revId": "c890d4e4f18a01ea51c00fb47f7e691a3b75000a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51ea5bc9_2b212828",
+        "filename": "tests/testapk/src/native/testbinary.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-20T17:45:49Z",
+      "side": 1,
+      "message": "/proc/mounts is symlink to /proc/self/mounts, which process has access to",
+      "parentUuid": "11e9b4a2_aed7e21e",
       "range": {
         "startLine": 267,
         "startChar": 36,
