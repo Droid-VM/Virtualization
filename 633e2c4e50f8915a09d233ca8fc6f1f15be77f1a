@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95c5564e_5f9b2be6",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-20T18:40:07Z",
+      "side": 1,
+      "message": "This can be written as \n`[v for (k, v) in pairs if k \u003d\u003d key]`",
+      "range": {
+        "startLine": 211,
+        "startChar": 4,
+        "endLine": 215,
+        "endChar": 17
+      },
+      "revId": "633e2c4e50f8915a09d233ca8fc6f1f15be77f1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "588722f4_c71f4005",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-20T18:40:07Z",
+      "side": 1,
+      "message": "Can we follow [pep8](https://peps.python.org/pep-0008) for new Python code? Especially for the naming, as this Python code has no type information, it\u0027s quite important to use lowercase for function name and CamelCase for class names.",
+      "range": {
+        "startLine": 400,
+        "startChar": 4,
+        "endLine": 400,
+        "endChar": 18
+      },
+      "revId": "633e2c4e50f8915a09d233ca8fc6f1f15be77f1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86915988_a49f0cbc",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-20T18:40:07Z",
+      "side": 1,
+      "message": "why print here?",
+      "range": {
+        "startLine": 406,
+        "startChar": 4,
+        "endLine": 406,
+        "endChar": 15
+      },
+      "revId": "633e2c4e50f8915a09d233ca8fc6f1f15be77f1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd1e8264_8f3d4d5c",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-20T18:40:07Z",
+      "side": 1,
+      "message": "Why not use the soong generated initrd_[normal|debug]_hashdesc[1] directly here?\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/microdroid/Android.bp;l\u003d545;drc\u003d8253ac6b6ef6fec0c398a94f05213c837df4d457",
+      "range": {
+        "startLine": 454,
+        "startChar": 4,
+        "endLine": 463,
+        "endChar": 44
+      },
+      "revId": "633e2c4e50f8915a09d233ca8fc6f1f15be77f1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
