@@ -1,3 +1,4 @@
+void AVmPayload_setExportTombstone() {}
 void AVmPayload_notifyPayloadReady() {}
 void AVmPayload_runVsockRpcServer() {}
 void AVmPayload_getVmInstanceSecret() {}

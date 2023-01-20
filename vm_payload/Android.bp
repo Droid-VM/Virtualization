@@ -19,6 +19,7 @@ rust_ffi_static {
         "liblibc",
         "liblog_rust",
         "librpcbinder_rs",
+        "librustutils",
         "libvsock",
     ],
     // The sanitize section below fixes the fuzzer build in b/256166339.
