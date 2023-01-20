@@ -135,6 +135,30 @@
       },
       "revId": "b1612cbee5dacd044b6e354de897edf41877958d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a561c58_977c3ec9",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-20T12:47:40Z",
+      "side": 1,
+      "message": "I see, then I can do a `foreach` and build inside the loop my own struct like\n\n```\nstruct PartitionData {\n  name: PartitionName,\n  digest: [u8; HASH_SIZE],\n}\n```\n\nI can allocate a static array of 3 elements (there are 3 hash descriptors max) and fill them in `foreach`. wdyt?",
+      "parentUuid": "afff13a8_de185b62",
+      "range": {
+        "startLine": 266,
+        "startChar": 21,
+        "endLine": 266,
+        "endChar": 25
+      },
+      "revId": "b1612cbee5dacd044b6e354de897edf41877958d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
