@@ -111,6 +111,30 @@
       },
       "revId": "b1612cbee5dacd044b6e354de897edf41877958d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afff13a8_de185b62",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-20T12:35:53Z",
+      "side": 1,
+      "message": "Okay, but if you do, then please do it without dynamic memory allocation. Not having to worry about running out of heap memory makes it easier to argue about correctness, and pvmfw\u0027s heap is really small.\n\nYou know the expected number of hash descriptors (2), you know the maximum partition name (13?), so allocate static buffers and reject to copy into them if the input exceeds their size.",
+      "parentUuid": "cb459189_416fcf7a",
+      "range": {
+        "startLine": 266,
+        "startChar": 21,
+        "endLine": 266,
+        "endChar": 25
+      },
+      "revId": "b1612cbee5dacd044b6e354de897edf41877958d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
