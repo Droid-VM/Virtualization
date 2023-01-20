@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb24b644_fe0b991d",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-20T01:04:36Z",
+      "side": 1,
+      "message": "Good catch, Alan. We added this in the early days because some processes we brought from Android needed the existence of /data. I can\u0027t remember what were those, but this clearly isn\u0027t for the payload, which partially explains why the payload still can\u0027t write to here.\n\n\u003e we will probably need to relax\n\nDo we have to? The host-side test could execute the bionic tests as root.",
+      "parentUuid": "893b463d_8a7b48e3",
+      "range": {
+        "startLine": 101,
+        "startChar": 3,
+        "endLine": 101,
+        "endChar": 68
+      },
+      "revId": "c890d4e4f18a01ea51c00fb47f7e691a3b75000a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d752acb5_4ffaa4bf",
         "filename": "microdroid/init.rc",
         "patchSetId": 1
