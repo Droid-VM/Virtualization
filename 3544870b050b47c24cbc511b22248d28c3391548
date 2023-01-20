@@ -16,6 +16,24 @@
       "message": "Pierre, could you submit this CL?\n\nI\u0027d like to work more CLs on top of this, it would be better to have it first.",
       "revId": "3544870b050b47c24cbc511b22248d28c3391548",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4db21653_ff25f201",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-20T09:37:47Z",
+      "side": 1,
+      "message": "Are we now sure that all devices running AVF have received the ABL upgrade making the DP they provide a DTBO compatible with the crosvm DT? Otherwise, `fdt_overlay_apply` will fail, rebooting pvmfw and making it impossible to boot a pVM on those devices.\n\nHappy to submit this change if we understand that risk.",
+      "parentUuid": "15d88a25_45e1338f",
+      "revId": "3544870b050b47c24cbc511b22248d28c3391548",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
