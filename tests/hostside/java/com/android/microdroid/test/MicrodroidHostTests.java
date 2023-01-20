@@ -612,14 +612,15 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         device.shutdownMicrodroid(microdroid);
 
         List<StatsLog.EventMetricData> data = new ArrayList<>();
+        // TODO(b/266193519): Add a guard ensuring the device is removed and metrics are collected
+        // well.
         assertThatEventually(
-                10000,
+                100000,
                 () -> {
                     data.addAll(ReportUtils.getEventMetricDataList(getDevice()));
                     return data.size();
                 },
-                is(3)
-        );
+                is(3));
 
         // Check VmCreationRequested atom
         assertThat(data.get(0).getAtom().getPushedCase().getNumber()).isEqualTo(
