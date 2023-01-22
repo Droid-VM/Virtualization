@@ -63,13 +63,19 @@
 .set .Lsctlrval, .L_SCTLR_ELx_M | .L_SCTLR_ELx_C | .L_SCTLR_ELx_SA | .L_SCTLR_EL1_ITD | .L_SCTLR_EL1_SED
 .set .Lsctlrval, .Lsctlrval | .L_SCTLR_ELx_I | .L_SCTLR_EL1_SPAN | .L_SCTLR_EL1_RES1 | .L_SCTLR_EL1_WXN
 
+/* SMC function IDs */
+.set .SMCCC_VERSION_ID, 0x80000000
+.set .TRNG_VERSION_ID, 0x84000050
+.set .TRNG_FEATURES_ID, 0x84000051
+.set .TRNG_RND_ID, 0xc4000053
+
 /* Bionic-compatible stack protector */
 .section .data.stack_protector, "aw"
 __bionic_tls:
 	.zero	40
 .global __stack_chk_guard
 __stack_chk_guard:
-	.quad	0x23d6d3f3c3b84098 	/* TODO: randomize */
+	.quad	0x23d6d3f3c3b84098  /* Default value in case randomization fails. */
 
 /**
  * This is a generic entry point for an image. It carries out the operations required to prepare the
@@ -162,9 +168,63 @@ entry:
 	adr_l x30, __bionic_tls
 	msr tpidr_el0, x30
 
+    /* Randomize stack protector. */
+    bl rnd_stack_guard
+
 	/* Call into Rust code. */
 	bl rust_entry
 
 	/* Loop forever waiting for interrupts. */
 4:	wfi
 	b 4b
+
+/**
+ * This subroutine randomizes the stack protector value.
+ * If a TRNG backed is not present or if an error occurs, the value remains unchanged.
+ */
+rnd_stack_guard:
+	sub sp, sp, #32
+	stp x0, x1, [sp]
+	stp x2, x3, [sp, #16]
+
+	/* Verify SMCCC version >=1.1 */
+	mov_i x0, .SMCCC_VERSION_ID
+	hvc #0
+	cmp w0, #0
+	blt 0f
+	and w0, w0, 0xff
+	cmp w0, #1
+	blt 0f
+
+	/* Verify TRNG ABI version 1.x */
+	mov_i x0, .TRNG_VERSION_ID
+	hvc #0
+	cmp w0, #0
+	blt 0f
+	ubfx w0, w0, #16, #15
+	cmp w0, #1
+	bne 0f
+
+	/* Call TRNG_FEATURES, ensure TRNG_RND is implemented */
+	mov_i x0, .TRNG_FEATURES_ID
+	mov_i x1, .TRNG_RND_ID
+	hvc #0
+	cmp w0, #0
+	blt 0f
+
+	/* Call TRNG_RND, request 64 bits of entropy */
+	mov_i x0, .TRNG_RND_ID
+	mov x1, #64
+	hvc #0
+	cmp x0, #0
+	blt 0f
+
+	/* Update stack protector value */
+	adr_l x0, __stack_chk_guard
+	str x3, [x0]
+
+0:
+	ldp x0, x1, [sp]
+	ldp x2, x3, [sp, #16]
+	add sp, sp, #32
+	ret

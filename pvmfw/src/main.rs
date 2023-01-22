@@ -124,8 +124,15 @@ fn main(
         RebootReason::InternalError
     })?;
 
+    unsafe {
+        info!("******* CANARY {:#x}", __stack_chk_guard);
+    }
     info!("Starting payload...");
     Ok(())
+}
+
+extern "C" {
+    static mut __stack_chk_guard: u64;
 }
 
 /// Logs the given PCI error and returns the appropriate `RebootReason`.
