@@ -21,6 +21,7 @@ use avb_bindgen::{
     avb_footer_validate_and_byteswap, avb_vbmeta_image_header_to_host_byte_order, AvbFooter,
     AvbVBMetaImageHeader,
 };
+use openssl::sha;
 use pvmfw_avb::{verify_payload, AvbSlotVerifyError, DebugLevel};
 use std::{
     fs,
@@ -49,7 +50,8 @@ pub fn assert_payload_verification_eq(
     trusted_public_key: &[u8],
     expected_result: Result<DebugLevel, AvbSlotVerifyError>,
 ) -> Result<()> {
-    assert_eq!(expected_result, verify_payload(kernel, initrd, trusted_public_key));
+    let verify_result = verify_payload(kernel, initrd, trusted_public_key).map(|v| v.debug_level);
+    assert_eq!(expected_result, verify_result);
     Ok(())
 }
 
@@ -94,4 +96,11 @@ pub fn extract_vbmeta_header(kernel: &[u8], footer: &AvbFooter) -> Result<AvbVBM
         header.assume_init()
     };
     Ok(vbmeta_header)
+}
+
+pub fn compute_sha256_digest(data: &[u8], salt: &[u8]) -> [u8; 32] {
+    let mut digester = sha::Sha256::new();
+    digester.update(salt);
+    digester.update(data);
+    digester.finish()
 }

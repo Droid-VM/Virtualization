@@ -16,9 +16,10 @@
 
 mod utils;
 
-use anyhow::Result;
+use anyhow::{anyhow, Result};
 use avb_bindgen::{AvbFooter, AvbVBMetaImageHeader};
-use pvmfw_avb::{AvbSlotVerifyError, DebugLevel};
+use openssl::sha;
+use pvmfw_avb::{verify_payload, AvbSlotVerifyError, DebugLevel, DIGEST_SIZE};
 use std::{fs, mem::size_of, ptr};
 use utils::*;
 
@@ -35,12 +36,27 @@ const RANDOM_FOOTER_POS: usize = 30;
 /// the latest payload can be verified successfully.
 #[test]
 fn latest_normal_payload_passes_verification() -> Result<()> {
-    assert_payload_verification_with_initrd_eq(
-        &load_latest_signed_kernel()?,
-        &load_latest_initrd_normal()?,
-        &load_trusted_public_key()?,
-        Ok(DebugLevel::None),
-    )
+    let kernel = load_latest_signed_kernel()?;
+    let initrd = load_latest_initrd_normal()?;
+    let verified_data = verify_payload(&kernel, Some(&initrd), &load_trusted_public_key()?)
+        .map_err(|e| anyhow!("Verification failed. Error: {}", e))?;
+
+    assert_eq!(DebugLevel::None, verified_data.debug_level);
+
+    let footer = extract_avb_footer(&kernel)?;
+    let mut salt_digester = sha::Sha256::new();
+    salt_digester.update(b"bootloader");
+    let digest = compute_sha256_digest(
+        &kernel[..usize::try_from(footer.original_image_size)?],
+        &salt_digester.finish(),
+    );
+    assert_eq!(digest, verified_data.digests[..DIGEST_SIZE], "Kernel digest should be equal.");
+
+    let mut salt_digester = sha::Sha256::new();
+    salt_digester.update(b"initrd_normal");
+    let digest = compute_sha256_digest(&initrd, &salt_digester.finish());
+    assert_eq!(digest, verified_data.digests[DIGEST_SIZE..], "initrd digest should be equal.");
+    Ok(())
 }
 
 #[test]
@@ -55,12 +71,18 @@ fn latest_debug_payload_passes_verification() -> Result<()> {
 
 #[test]
 fn payload_expecting_no_initrd_passes_verification_with_no_initrd() -> Result<()> {
-    assert_payload_verification_eq(
+    let verified_data = verify_payload(
         &fs::read(TEST_IMG_WITH_ONE_HASHDESC_PATH)?,
         /*initrd=*/ None,
         &load_trusted_public_key()?,
-        Ok(DebugLevel::None),
     )
+    .map_err(|e| anyhow!("Verification failed. Error: {}", e))?;
+
+    assert_eq!(DebugLevel::None, verified_data.debug_level);
+    let digest = compute_sha256_digest(&fs::read(UNSIGNED_TEST_IMG_PATH)?, &hex::decode("1111")?);
+    assert_eq!(digest, verified_data.digests[..DIGEST_SIZE]);
+    assert_eq!([0u8; DIGEST_SIZE], verified_data.digests[DIGEST_SIZE..]);
+    Ok(())
 }
 
 #[test]
