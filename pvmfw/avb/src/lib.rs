@@ -26,4 +26,4 @@ mod utils;
 mod verify;
 
 pub use error::AvbSlotVerifyError;
-pub use verify::{verify_payload, DebugLevel};
+pub use verify::{verify_payload, DebugLevel, VerifiedData};

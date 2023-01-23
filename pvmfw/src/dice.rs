@@ -21,18 +21,25 @@ use dice::bcc::Handover;
 use dice::hash;
 use dice::ConfigType;
 use dice::InputValues;
+use pvmfw_avb::{DebugLevel, VerifiedData};
+
+fn to_dice_mode(debug_level: DebugLevel) -> dice::Mode {
+    match debug_level {
+        DebugLevel::None => dice::Mode::Normal,
+        DebugLevel::Full => dice::Mode::Debug,
+    }
+}
 
 /// Derive the VM-specific secrets and certificate through DICE.
 pub fn derive_next_bcc(
     bcc: &Handover,
     next_bcc: &mut [u8],
-    code: &[u8],
-    debug_mode: bool,
+    verified_data: &VerifiedData,
     authority: &[u8],
 ) -> dice::Result<usize> {
-    let code_hash = hash(code)?;
+    let code_hash = hash(&verified_data.digests)?;
     let auth_hash = hash(authority)?;
-    let mode = if debug_mode { dice::Mode::Debug } else { dice::Mode::Normal };
+    let mode = to_dice_mode(verified_data.debug_level);
     let component_name = CStr::from_bytes_with_nul(b"vm_entry\0").unwrap();
     let mut config_descriptor_buffer = [0; 128];
     let config_descriptor_size = format_config_descriptor(

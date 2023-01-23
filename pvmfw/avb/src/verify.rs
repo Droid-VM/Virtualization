@@ -14,15 +14,25 @@
 
 //! This module handles the pvmfw payload verification.
 
-use crate::descriptor::HashDescriptors;
+use crate::descriptor::{HashDescriptors, DIGEST_SIZE};
 use crate::error::AvbSlotVerifyError;
 use crate::ops::{Ops, Payload};
 use crate::partition::PartitionName;
 use avb_bindgen::{AvbPartitionData, AvbVBMetaData};
 use core::ffi::c_char;
 
+/// Verified data returned when the payload verification succeeds.
+#[derive(Debug)]
+pub struct VerifiedData {
+    /// DebugLevel of the VM.
+    pub debug_level: DebugLevel,
+    /// `digests` is a concatenation of kernel digest and initrd digest when initrd exists.
+    /// If initrd is none, its corresponding part is all zero.
+    pub digests: [u8; DIGEST_SIZE * 2],
+}
+
 /// This enum corresponds to the `DebugLevel` in `VirtualMachineConfig`.
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum DebugLevel {
     /// Not debuggable at all.
     None,
@@ -87,7 +97,7 @@ pub fn verify_payload(
     kernel: &[u8],
     initrd: Option<&[u8]>,
     trusted_public_key: &[u8],
-) -> Result<DebugLevel, AvbSlotVerifyError> {
+) -> Result<VerifiedData, AvbSlotVerifyError> {
     let mut payload = Payload::new(kernel, initrd, trusted_public_key);
     let mut ops = Ops::from(&mut payload);
     let kernel_verify_result = ops.verify_partition(PartitionName::Kernel.as_cstr())?;
@@ -100,12 +110,13 @@ pub fn verify_payload(
     // which is returned by `avb_slot_verify()` when the verification succeeds. It is
     // guaranteed by libavb to be non-null and to point to a valid VBMeta structure.
     let hash_descriptors = unsafe { HashDescriptors::from_vbmeta(vbmeta_image)? };
-    // TODO(b/265897559): Pass the digest in kernel descriptor to DICE.
-    let _kernel_descriptor = hash_descriptors.find(PartitionName::Kernel)?;
+    let kernel_descriptor = hash_descriptors.find(PartitionName::Kernel)?;
+    let mut digests = [0u8; DIGEST_SIZE * 2];
+    digests[..DIGEST_SIZE].copy_from_slice(&kernel_descriptor.digest);
 
     if initrd.is_none() {
         verify_vbmeta_only_has_kernel_hash_descriptor(&hash_descriptors)?;
-        return Ok(DebugLevel::None);
+        return Ok(VerifiedData { debug_level: DebugLevel::None, digests });
     }
 
     let initrd = initrd.unwrap();
@@ -123,5 +134,7 @@ pub fn verify_payload(
         initrd_partition_name,
         initrd.len(),
     )?;
-    Ok(debug_level)
+    let initrd_descriptor = hash_descriptors.find(initrd_partition_name)?;
+    digests[DIGEST_SIZE..].copy_from_slice(&initrd_descriptor.digest);
+    Ok(VerifiedData { debug_level, digests })
 }
