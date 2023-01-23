@@ -73,6 +73,9 @@ const MILLIS_PER_SEC: i64 = 1000;
 
 const SYSPROP_CUSTOM_PVMFW_PATH: &str = "hypervisor.pvmfw.path";
 
+const CPU_CAPACITY: [(usize, usize); 8] =
+    [(7, 1024), (6, 1024), (5, 763), (4, 763), (3, 158), (2, 158), (1, 158), (0, 158)];
+
 lazy_static! {
     /// If the VM doesn't move to the Started state within this amount time, a hang-up error is
     /// triggered.
@@ -712,6 +715,25 @@ fn run_vm(
 
     if let Some(cpus) = config.cpus {
         command.arg("--cpus").arg(cpus.to_string());
+        let cpus: u32 = cpus.into();
+        command.arg("--cpu-affinity").arg(
+            CPU_CAPACITY
+                .iter()
+                .enumerate()
+                .take(cpus as usize)
+                .map(|(vcpu, (cpu, _))| format!("{}={}", vcpu, cpu))
+                .collect::<Vec<String>>()
+                .join(":"),
+        );
+        command.arg("--cpu-capacity").arg(
+            CPU_CAPACITY
+                .iter()
+                .enumerate()
+                .take(cpus as usize)
+                .map(|(vcpu, (_, capacity))| format!("{}={}", vcpu, capacity))
+                .collect::<Vec<String>>()
+                .join(","),
+        );
     }
 
     if !config.task_profiles.is_empty() {
