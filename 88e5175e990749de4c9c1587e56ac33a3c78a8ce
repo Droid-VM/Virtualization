@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "17995dc3_316b6f3c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-23T10:29:16Z",
+      "side": 1,
+      "message": "\u003e Unfortunately, I do not have an associated bug component for this change at the moment.\n\nCould you create one? It seems appropriate for an effort of this scale, and means you can put the context in one place. (And link to the design doc etc.)\n\n\u003e  But to give you some context regarding this addition, there are ongoing [changes](https://android-review.git.corp.google.com/c/platform/tools/metalava/+/2270406) to enable the generation of Java API stub files using API text files. Based on these changes, Java stub `android.jar` files will be generated using text files-based stub Java files. The `java_api_contribution` modules, which are located in each API domains ([examples](https://android-review.git.corp.google.com/q/java_api_contribution)), provide text files needed for `java_api_library` module to generate the `android.jar` files per API surface.\n\nThanks.",
+      "parentUuid": "3d04a2ef_99b6ac21",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 59
+      },
+      "revId": "88e5175e990749de4c9c1587e56ac33a3c78a8ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b05f8bbf_9ea75200",
