@@ -18,7 +18,7 @@ use crate::error::AvbIOError;
 use crate::utils::is_not_null;
 use core::ffi::{c_char, CStr};
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub(crate) enum PartitionName {
     Kernel,
     InitrdNormal,
