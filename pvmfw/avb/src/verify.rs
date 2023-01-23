@@ -14,7 +14,7 @@
 
 //! This module handles the pvmfw payload verification.
 
-use crate::descriptor::HashDescriptors;
+use crate::descriptor::{HashDescriptors, DIGEST_SIZE};
 use crate::error::{
     slot_verify_result_to_verify_payload_result, to_avb_io_result, AvbIOError, AvbSlotVerifyError,
 };
@@ -31,6 +31,16 @@ use core::{
 };
 
 const NULL_BYTE: &[u8] = b"\0";
+
+/// Verified data returned when the payload verification succeeds.
+#[derive(Debug)]
+pub struct VerifiedData {
+    /// DebugLevel of the VM.
+    pub debug_level: DebugLevel,
+    /// `digests` is a concatenation of kernel digest and initrd digest when initrd exists.
+    /// If initrd is none, its corresponding part is all zero.
+    pub digests: [u8; DIGEST_SIZE * 2],
+}
 
 /// This enum corresponds to the `DebugLevel` in `VirtualMachineConfig`.
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -339,7 +349,7 @@ pub fn verify_payload(
     kernel: &[u8],
     initrd: Option<&[u8]>,
     trusted_public_key: &[u8],
-) -> Result<DebugLevel, AvbSlotVerifyError> {
+) -> Result<VerifiedData, AvbSlotVerifyError> {
     let mut payload = Payload { kernel, initrd, trusted_public_key };
     let kernel_verify_result = payload.verify_partition(PartitionName::Kernel.as_cstr())?;
     let vbmeta_images = kernel_verify_result.vbmeta_images()?;
@@ -350,19 +360,23 @@ pub fn verify_payload(
     let vbmeta_image = vbmeta_images[0];
     verify_vbmeta_is_from_kernel_partition(&vbmeta_image)?;
     let hash_descriptors = HashDescriptors::try_from(vbmeta_image)?;
-    // TODO(b/265897559): Pass the digest in kernel descriptor to DICE.
-    let _kernel_descriptor = hash_descriptors.find(PartitionName::Kernel)?;
+    let kernel_descriptor = hash_descriptors.find(PartitionName::Kernel)?;
+    let mut digests = [0u8; DIGEST_SIZE * 2];
+    digests[..DIGEST_SIZE].copy_from_slice(&kernel_descriptor.digest);
     if initrd.is_none() {
         verify_vbmeta_only_has_kernel_hash_descriptor(&hash_descriptors)?;
-        return Ok(DebugLevel::None);
+        return Ok(VerifiedData { debug_level: DebugLevel::None, digests });
     }
 
-    let debug_level = if payload.verify_partition(PartitionName::InitrdNormal.as_cstr()).is_ok() {
-        DebugLevel::None
-    } else if payload.verify_partition(PartitionName::InitrdDebug.as_cstr()).is_ok() {
-        DebugLevel::Full
-    } else {
-        return Err(AvbSlotVerifyError::Verification);
-    };
-    Ok(debug_level)
+    let (debug_level, initrd_partition_name) =
+        if payload.verify_partition(PartitionName::InitrdNormal.as_cstr()).is_ok() {
+            (DebugLevel::None, PartitionName::InitrdNormal)
+        } else if payload.verify_partition(PartitionName::InitrdDebug.as_cstr()).is_ok() {
+            (DebugLevel::Full, PartitionName::InitrdDebug)
+        } else {
+            return Err(AvbSlotVerifyError::Verification);
+        };
+    let initrd_descriptor = hash_descriptors.find(initrd_partition_name)?;
+    digests[DIGEST_SIZE..].copy_from_slice(&initrd_descriptor.digest);
+    Ok(VerifiedData { debug_level, digests })
 }
