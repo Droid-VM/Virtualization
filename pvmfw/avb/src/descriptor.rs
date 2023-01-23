@@ -33,7 +33,7 @@ use tinyvec::ArrayVec;
 
 /// Currently we use SHA256 to hash the kernel and initrd, their digest size
 /// is then 256 bits.
-const DIGEST_SIZE: usize = 32;
+pub const DIGEST_SIZE: usize = 32;
 
 /// `HashDescriptors` can have maximum one `HashDescriptor` per known partition.
 #[derive(Default)]
@@ -134,8 +134,6 @@ unsafe fn try_check_and_save_descriptor(
 #[derive(Default)]
 pub(crate) struct HashDescriptor {
     partition_name: PartitionName,
-    /// TODO(b/265897559): Pass this digest to DICE.
-    #[allow(dead_code)]
     pub(crate) digest: [u8; DIGEST_SIZE],
 }
 
