@@ -33,6 +33,52 @@
       "message": "Hi Alan, could you review this cl?\n\nMove David to cc as David is busy these days.",
       "revId": "5a7b466d265f2f3126619016e736d5cfed6ea22c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b8ea270_9cac7c66",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-24T11:53:38Z",
+      "side": 1,
+      "message": "nit: I would make this a `[[u8; DIGEST_SIZE]; 2]`. Makes your code cleaner (no need for slices) and you can just call `digest.update()` twice.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 39
+      },
+      "revId": "5a7b466d265f2f3126619016e736d5cfed6ea22c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8680e472_ce70928e",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-24T11:53:38Z",
+      "side": 1,
+      "message": "A corresponding property needs to be checked in the other IF branch. Otherwise the presence of a `foobar` partition is tested inconsistently.",
+      "range": {
+        "startLine": 367,
+        "startChar": 8,
+        "endLine": 367,
+        "endChar": 53
+      },
+      "revId": "5a7b466d265f2f3126619016e736d5cfed6ea22c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
