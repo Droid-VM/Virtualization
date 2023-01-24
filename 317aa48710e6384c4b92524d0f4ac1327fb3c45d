@@ -70,6 +70,30 @@
       },
       "revId": "317aa48710e6384c4b92524d0f4ac1327fb3c45d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "125193e6_322c6bcd",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-24T13:06:19Z",
+      "side": 1,
+      "message": "Yeah, it\u0027s the output of composd_cmd (see line 123). It\u0027s not really a log, just the stdout from the CLI. It either prints \"All Ok\" or a more extensive error message.",
+      "parentUuid": "c7c70857_2194d6c1",
+      "range": {
+        "startLine": 140,
+        "startChar": 46,
+        "endLine": 140,
+        "endChar": 52
+      },
+      "revId": "317aa48710e6384c4b92524d0f4ac1327fb3c45d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
