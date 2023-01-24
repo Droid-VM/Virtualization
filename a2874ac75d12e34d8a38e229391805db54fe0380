@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdf7fc72_fedda900",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-24T18:57:43Z",
+      "side": 1,
+      "message": "I wanted to be explicit about the fact that multiple descriptors could be present in vbmeta \u0026 the first one is being considered here.",
+      "parentUuid": "4b171b73_6c679211",
+      "range": {
+        "startLine": 240,
+        "startChar": 21,
+        "endLine": 240,
+        "endChar": 66
+      },
+      "revId": "a2874ac75d12e34d8a38e229391805db54fe0380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16bbea1d_14cdaced",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-24T13:41:25Z",
       "side": 1,
       "message": "We don\u0027t need salt anymore in the new hash desc?",
+      "range": {
+        "startLine": 397,
+        "startChar": 38,
+        "endLine": 397,
+        "endChar": 39
+      },
+      "revId": "a2874ac75d12e34d8a38e229391805db54fe0380",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d271c9d4_20a53a1f",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-24T18:57:43Z",
+      "side": 1,
+      "message": "If we don\u0027t explicitly specify salt, avbtool will use /dev/urandom which should result in equivalent security. I dont see the use of --use_persistent_digest right?",
+      "parentUuid": "16bbea1d_14cdaced",
       "range": {
         "startLine": 397,
         "startChar": 38,
