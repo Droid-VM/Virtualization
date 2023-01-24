@@ -118,6 +118,30 @@
       },
       "revId": "317aa48710e6384c4b92524d0f4ac1327fb3c45d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02557b25_628ff9e4",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-24T13:31:30Z",
+      "side": 1,
+      "message": "We could actually check the exit code of the process, but it looks like the infrastructure here doesn\u0027t expose that.",
+      "parentUuid": "b0fb0920_fcd4e91d",
+      "range": {
+        "startLine": 140,
+        "startChar": 46,
+        "endLine": 140,
+        "endChar": 52
+      },
+      "revId": "317aa48710e6384c4b92524d0f4ac1327fb3c45d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
