@@ -22,6 +22,30 @@
       },
       "revId": "317aa48710e6384c4b92524d0f4ac1327fb3c45d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9a18e3d_0b48f1ad",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-24T13:00:01Z",
+      "side": 1,
+      "message": "Which log? The output of composd_cmd? \n\nWhen things work as expected we don\u0027t really need more. It\u0027s a lot more verbose on failure. (And if the gory details do matter, they\u0027re in logcat?",
+      "parentUuid": "54a58d45_1de88f85",
+      "range": {
+        "startLine": 140,
+        "startChar": 46,
+        "endLine": 140,
+        "endChar": 52
+      },
+      "revId": "317aa48710e6384c4b92524d0f4ac1327fb3c45d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
