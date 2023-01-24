@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66be1e4e_55562453",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-24T12:04:55Z",
+      "side": 1,
+      "message": "Yes, that\u0027s possible, but then you still need to convert it to `[u8; DIGEST_SIZE * 2]` to pass to DICE no, like [1]? I want to build the param for DICE directly here so that we can decrease the size of pvmfw, which is hard to test.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/pvmfw/src/main.rs;l\u003d93;drc\u003d75269629ae06df0c71a6d697b52c155d181761f6",
+      "parentUuid": "3b8ea270_9cac7c66",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 39
+      },
+      "revId": "5a7b466d265f2f3126619016e736d5cfed6ea22c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8680e472_ce70928e",
         "filename": "pvmfw/avb/src/verify.rs",
         "patchSetId": 2
@@ -71,6 +95,30 @@
       "writtenOn": "2023-01-24T11:53:38Z",
       "side": 1,
       "message": "A corresponding property needs to be checked in the other IF branch. Otherwise the presence of a `foobar` partition is tested inconsistently.",
+      "range": {
+        "startLine": 367,
+        "startChar": 8,
+        "endLine": 367,
+        "endChar": 53
+      },
+      "revId": "5a7b466d265f2f3126619016e736d5cfed6ea22c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3566625_e90e305f",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-24T12:04:55Z",
+      "side": 1,
+      "message": "The presence of a `foobar` is rejected when we build the `HashDescriptor`s as they only take known `PartitionName`. The upstream cl (https://r.android.com/2392892) basically rejects all the unknown/duplicated partition and non hash descriptor.\n\nThe only case we want to prevent here is that when initrd is None, there are initrd hash descriptors.",
+      "parentUuid": "8680e472_ce70928e",
       "range": {
         "startLine": 367,
         "startChar": 8,
