@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30adb9ed_9aa94fbe",
+        "filename": "pvmfw/avb/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-24T13:58:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa84b42a_0621f65f",
+      "range": {
+        "startLine": 93,
+        "startChar": 11,
+        "endLine": 93,
+        "endChar": 15
+      },
+      "revId": "890ba56a9f5c59d16af2392d6b04bc72e14da345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93f07912_3dbb75c8",
@@ -158,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ce3c886_c1e5e38e",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-24T13:58:01Z",
+      "side": 1,
+      "message": "It doesn\u0027t matter much here. Actually this is only called by `check_and_save_descriptor` below, which just returns a boolean.",
+      "parentUuid": "4b06fb18_1643e290",
+      "range": {
+        "startLine": 56,
+        "startChar": 23,
+        "endLine": 56,
+        "endChar": 37
+      },
+      "revId": "890ba56a9f5c59d16af2392d6b04bc72e14da345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92a6ff71_3bf5e524",
@@ -218,6 +266,30 @@
       "writtenOn": "2023-01-24T13:30:13Z",
       "side": 1,
       "message": "You have an `Option\u003cOption\u003c_\u003e\u003e` here, I think? `flatten()` might simplify this.",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 55
+      },
+      "revId": "890ba56a9f5c59d16af2392d6b04bc72e14da345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d025d125_251e8fb0",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-24T13:58:01Z",
+      "side": 1,
+      "message": "Right, thanks. I don\u0027t have nested `Option` any more as I changed the iter below to return `\u0026HashDescriptor` directly.",
+      "parentUuid": "35c45813_d6c939bc",
       "range": {
         "startLine": 77,
         "startChar": 0,
@@ -335,6 +407,30 @@
       "writtenOn": "2023-01-24T13:30:13Z",
       "side": 1,
       "message": "That depends on what is passed as user_data, doesn\u0027t it?\nI think this function (and the previous one) should be marked unsafe, and the safety constraints documented. Or, with David\u0027s suggestion, at least the previous one.\n\n(You might want `#![warn(unsafe_op_in_unsafe_fn)]` to make sure you still have the unsafe blocks inside the function.)",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 14
+      },
+      "revId": "890ba56a9f5c59d16af2392d6b04bc72e14da345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5cda96d_ad2399ba",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-24T13:58:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d0d16fa_f821dc94",
       "range": {
         "startLine": 105,
         "startChar": 0,
