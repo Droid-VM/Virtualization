@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70faf1cc_7742a157",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-24T12:03:00Z",
+      "side": 1,
+      "message": "All good in terms of functionality, I just think we can make this more readable. Feel free to tell me those suggestions are not helpful.",
+      "revId": "cb38445fced6da11d11263f22864b709dce9472d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb621c22_21327a6a",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-24T12:03:00Z",
+      "side": 1,
+      "message": "nit: align this to the \u0027[\u0027, it\u0027s an array, not a function.",
+      "range": {
+        "startLine": 286,
+        "startChar": 15,
+        "endLine": 286,
+        "endChar": 32
+      },
+      "revId": "cb38445fced6da11d11263f22864b709dce9472d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b724de3_b1571e9b",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-24T12:03:00Z",
+      "side": 1,
+      "message": "nit: fits on one line",
+      "range": {
+        "startLine": 293,
+        "startChar": 32,
+        "endLine": 293,
+        "endChar": 54
+      },
+      "revId": "cb38445fced6da11d11263f22864b709dce9472d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64b07b1e_ee970841",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-24T12:03:00Z",
+      "side": 1,
+      "message": "nit: I\u0027d argue putting everything on one line will make this more readable, even if it\u0027s more than 80 chars (still less than 100)",
+      "range": {
+        "startLine": 298,
+        "startChar": 26,
+        "endLine": 298,
+        "endChar": 27
+      },
+      "revId": "cb38445fced6da11d11263f22864b709dce9472d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "106ed85e_57ee45b5",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-24T12:03:00Z",
+      "side": 1,
+      "message": "I know we talked about it but I really think the name here is misleading - it updates the VBMETA digest IN bootconfig. I think this should be called `update_vbmeta_digest` and the `bootconfigs` parameter makes it clear where.",
+      "range": {
+        "startLine": 303,
+        "startChar": 8,
+        "endLine": 303,
+        "endChar": 24
+      },
+      "revId": "cb38445fced6da11d11263f22864b709dce9472d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b514b274_d0a58554",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-24T12:03:00Z",
+      "side": 1,
+      "message": "uber nit: use a formatter",
+      "range": {
+        "startLine": 308,
+        "startChar": 51,
+        "endLine": 309,
+        "endChar": 45
+      },
+      "revId": "cb38445fced6da11d11263f22864b709dce9472d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a23fb7d_4e3d0da3",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-24T12:03:00Z",
+      "side": 1,
+      "message": "For the sake of consistency, should we check that the ramdisks contain the current vbmeta digest?",
+      "range": {
+        "startLine": 494,
+        "startChar": 12,
+        "endLine": 494,
+        "endChar": 20
+      },
+      "revId": "cb38445fced6da11d11263f22864b709dce9472d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
