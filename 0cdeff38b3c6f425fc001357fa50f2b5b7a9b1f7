@@ -277,6 +277,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37fa882d_0d3311ef",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-24T16:03:17Z",
+      "side": 1,
+      "message": "That\u0027s a good point. I\u0027ll add a TODO here and address it in another cl. As this is a refactoring cl, I feel hesistant to introduce behavior change that can potentially break the big e2e tests..",
+      "parentUuid": "9afe04bb_5624c563",
+      "range": {
+        "startLine": 235,
+        "startChar": 0,
+        "endLine": 237,
+        "endChar": 33
+      },
+      "revId": "0cdeff38b3c6f425fc001357fa50f2b5b7a9b1f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "724e20a0_2744b99d",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-24T16:03:17Z",
+      "side": 1,
+      "message": "That\u0027s a good point",
+      "parentUuid": "9afe04bb_5624c563",
+      "range": {
+        "startLine": 235,
+        "startChar": 0,
+        "endLine": 237,
+        "endChar": 33
+      },
+      "revId": "0cdeff38b3c6f425fc001357fa50f2b5b7a9b1f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15667702_5f9800f4",
@@ -348,6 +396,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6338f50_af5175f3",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-24T16:03:17Z",
+      "side": 1,
+      "message": "It cannot be None. There\u0027s a null check for this method in the beginning. I\u0027ll check later if it\u0027s possible to throw an error here instead.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:external/avb/libavb/avb_slot_verify.c;l\u003d1413;drc\u003dcb00b07ed876873aab6a2678d524b31cd0745517",
+      "parentUuid": "44e2e7ed_ffcca24c",
+      "range": {
+        "startLine": 247,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 33
+      },
+      "revId": "0cdeff38b3c6f425fc001357fa50f2b5b7a9b1f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91d86823_ca9d728f",
@@ -409,6 +481,30 @@
       "side": 1,
       "message": "Should we check it\u0027s empty?\nOr perhaps just add a comment.",
       "parentUuid": "3384ee70_329b9942",
+      "range": {
+        "startLine": 272,
+        "startChar": 0,
+        "endLine": 273,
+        "endChar": 39
+      },
+      "revId": "0cdeff38b3c6f425fc001357fa50f2b5b7a9b1f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d8fa0e6_19e2e0dc",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-24T16:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f0024b3_0d9dce39",
       "range": {
         "startLine": 272,
         "startChar": 0,
