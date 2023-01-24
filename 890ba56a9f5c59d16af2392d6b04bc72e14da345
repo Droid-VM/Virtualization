@@ -183,6 +183,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d6a5948_7dbb2855",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-24T15:19:38Z",
+      "side": 1,
+      "message": "Oh I see!",
+      "parentUuid": "22320f1a_29d31220",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 48
+      },
+      "revId": "890ba56a9f5c59d16af2392d6b04bc72e14da345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b06fb18_1643e290",
@@ -432,6 +456,30 @@
       "side": 1,
       "message": "Mmm, not convinced this is better",
       "parentUuid": "f1ebe081_9cf26aef",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 64
+      },
+      "revId": "890ba56a9f5c59d16af2392d6b04bc72e14da345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7006a2e_5a0523e5",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-24T15:19:38Z",
+      "side": 1,
+      "message": "mmm, I returned this to the `try_foo()-\u003eResult\u003c()\u003e` version where we can pipe up the error with `?`, that looks more concise.",
+      "parentUuid": "2405eb48_351df3b0",
       "range": {
         "startLine": 91,
         "startChar": 0,
