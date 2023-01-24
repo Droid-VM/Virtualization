@@ -16,6 +16,167 @@
       "message": "Hi Alan, could you review this cl?\n\nMove David to cc as David is busy these days.",
       "revId": "0cdeff38b3c6f425fc001357fa50f2b5b7a9b1f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cb66c8d_8d1acb1e",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-24T14:02:17Z",
+      "side": 1,
+      "message": "What does an instance of Ops represent?",
+      "range": {
+        "startLine": 34,
+        "startChar": 18,
+        "endLine": 34,
+        "endChar": 21
+      },
+      "revId": "0cdeff38b3c6f425fc001357fa50f2b5b7a9b1f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2953543_7446127c",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-24T14:02:17Z",
+      "side": 1,
+      "message": "But it\u0027s never null here?",
+      "range": {
+        "startLine": 69,
+        "startChar": 23,
+        "endLine": 70,
+        "endChar": 33
+      },
+      "revId": "0cdeff38b3c6f425fc001357fa50f2b5b7a9b1f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80f185dc_eb8e9a28",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-24T14:02:17Z",
+      "side": 1,
+      "message": "Nit: It would be helpful to have this first, otherwise the functions above are hard to understand",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 1
+      },
+      "revId": "0cdeff38b3c6f425fc001357fa50f2b5b7a9b1f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a1e928c_e034dad6",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-24T14:02:17Z",
+      "side": 1,
+      "message": "Can we require \u0026self to have lifetime \u0027a ?",
+      "range": {
+        "startLine": 100,
+        "startChar": 10,
+        "endLine": 101,
+        "endChar": 21
+      },
+      "revId": "0cdeff38b3c6f425fc001357fa50f2b5b7a9b1f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a3a196f_2268b12f",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-24T14:02:17Z",
+      "side": 1,
+      "message": "Isn\u0027t there a requirement to write something to the out parameter?",
+      "range": {
+        "startLine": 235,
+        "startChar": 0,
+        "endLine": 237,
+        "endChar": 33
+      },
+      "revId": "0cdeff38b3c6f425fc001357fa50f2b5b7a9b1f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15667702_5f9800f4",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-24T14:02:17Z",
+      "side": 1,
+      "message": "Ditto",
+      "range": {
+        "startLine": 247,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 33
+      },
+      "revId": "0cdeff38b3c6f425fc001357fa50f2b5b7a9b1f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91d86823_ca9d728f",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-24T14:02:17Z",
+      "side": 1,
+      "message": "Why are these ignored?",
+      "range": {
+        "startLine": 272,
+        "startChar": 0,
+        "endLine": 273,
+        "endChar": 39
+      },
+      "revId": "0cdeff38b3c6f425fc001357fa50f2b5b7a9b1f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
