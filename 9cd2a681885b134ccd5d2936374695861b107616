@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf766616_8715a9ae",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-01-24T05:33:30Z",
+      "side": 1,
+      "message": "If the number of spaces is fixed (i.e. don\u0027t change depending on the actual output), I think this is fine. \n\nParthers changing the tool is okay because the tool will be embedded into CTS anyway and we will be using it instead of partners\u0027.",
+      "parentUuid": "0a1cab15_8556399b",
+      "range": {
+        "startLine": 891,
+        "startChar": 56,
+        "endLine": 891,
+        "endChar": 64
+      },
+      "revId": "9cd2a681885b134ccd5d2936374695861b107616",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5373a67_2df41787",
