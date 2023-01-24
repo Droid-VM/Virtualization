@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "372dbe93_fad93abd",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-24T18:24:12Z",
+      "side": 1,
+      "message": "It looks like you\u0027re re-implementing `tinyvec::ArrayVec`, could you just use that instead? You can depend on `libtinyvec_nostd` for the `no_std` version.",
+      "revId": "6fa2c48cdbc0ea6fa1b7bf9a51acf39543c1a8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d4b16d7_de361ffe",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-24T18:24:12Z",
+      "side": 1,
+      "message": "All unsafe functions should have Rustdoc with a `# Safety` section documenting what the caller must do to avoid undefined behaviour when calling the function.",
+      "revId": "6fa2c48cdbc0ea6fa1b7bf9a51acf39543c1a8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "159cfbe5_28767916",
         "filename": "pvmfw/avb/src/descriptor.rs",
         "patchSetId": 18
@@ -20,6 +54,57 @@
         "endLine": 90,
         "endChar": 32
       },
+      "revId": "6fa2c48cdbc0ea6fa1b7bf9a51acf39543c1a8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bc698cf_f0f03993",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-24T18:24:12Z",
+      "side": 1,
+      "message": "There is no guarantee of that, a safe function could call this with a null or invalid pointer. You need to either check it somehow, or mark this function as unsafe and document the safety requirements for the caller.",
+      "revId": "6fa2c48cdbc0ea6fa1b7bf9a51acf39543c1a8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2c6ec93_9a9f23fa",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-24T18:24:12Z",
+      "side": 1,
+      "message": "Doesn\u0027t it also have to be word-aligned, pointing to allocated memory, not aliasing some other reference, and verified by `avb_vbmeta_image_verify`?",
+      "revId": "6fa2c48cdbc0ea6fa1b7bf9a51acf39543c1a8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87b78304_04b00936",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-24T18:24:12Z",
+      "side": 1,
+      "message": "Again, just because it\u0027s not null doesn\u0027t mean it\u0027s valid. It could be a pointer to uninitialised memory, misaligned, aliasing some other reference, or anything else. Either this needs to be an unsafe function too, which means it can\u0027t be an implementation of `TryFrom` and it needs its safety requirements documented, or it should take a reference (which the caller then needs to construct safely somehow).",
       "revId": "6fa2c48cdbc0ea6fa1b7bf9a51acf39543c1a8d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
