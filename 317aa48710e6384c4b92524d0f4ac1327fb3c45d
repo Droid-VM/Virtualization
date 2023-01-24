@@ -46,6 +46,30 @@
       },
       "revId": "317aa48710e6384c4b92524d0f4ac1327fb3c45d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7c70857_2194d6c1",
+        "filename": "compos/benchmark/src/java/com/android/compos/benchmark/ComposBenchmark.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-24T13:03:50Z",
+      "side": 1,
+      "message": "This \"All Ok\" is from some log, no? It looks like we use the existence of the string \"All Ok\" to decide if the command succeeds or not, and as it\u0027s so generic, it\u0027s hard to tell this \"All Ok\" is actually printed from which step.",
+      "parentUuid": "b9a18e3d_0b48f1ad",
+      "range": {
+        "startLine": 140,
+        "startChar": 46,
+        "endLine": 140,
+        "endChar": 52
+      },
+      "revId": "317aa48710e6384c4b92524d0f4ac1327fb3c45d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
