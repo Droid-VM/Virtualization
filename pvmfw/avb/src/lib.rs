@@ -16,7 +16,6 @@
 
 #![cfg_attr(not(test), no_std)]
 // For usize.checked_add_signed(isize), available in Rust 1.66.0
-#![feature(mixed_integer_ops)]
 
 mod error;
 mod partition;
