@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0bfe00a0_59d20785",
+        "filename": "pvmfw/avb/src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1933736
+      },
+      "writtenOn": "2023-01-25T16:57:08Z",
+      "side": 1,
+      "message": "hm, I\u0027m actually having some trouble with this CL and I\u0027m wondering if it\u0027s `no_std`. It looks like the feature mixed_integer_ops has indeed been stabilized in 1.66.0.",
+      "parentUuid": "f1ed32b6_40426e2b",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 64
+      },
+      "revId": "e06ca015516da9a74449bb1a1c4f768f2d3ca352",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5ef4f812_f2a510c9",
         "filename": "pvmfw/avb/tests/api_test.rs",
         "patchSetId": 3
