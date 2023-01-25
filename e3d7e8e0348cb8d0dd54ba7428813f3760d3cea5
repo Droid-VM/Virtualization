@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b218369_4fe0236e",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-25T17:48:22Z",
+      "side": 1,
+      "message": "I think checking the alignment is good.\nBut this still isn\u0027t enough to make this function safe; we know public_key_data is aligned and non-null, but we don\u0027t know that it\u0027s valid, and we can\u0027t; that\u0027s a constraint we have to impose on callers. And if a function isn\u0027t safe to call with arbitrary parameters, it is by definition unsafe.",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 283,
+        "endChar": 27
+      },
+      "revId": "e3d7e8e0348cb8d0dd54ba7428813f3760d3cea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
