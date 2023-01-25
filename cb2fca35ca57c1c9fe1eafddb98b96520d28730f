@@ -39,6 +39,30 @@
       },
       "revId": "cb2fca35ca57c1c9fe1eafddb98b96520d28730f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01a50227_7e729924",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-25T15:29:44Z",
+      "side": 1,
+      "message": "Yeah, I thought about that, I feel hesitant to take this approach because `HashDescriptor` takes a `PartitionName` enum and its digest. It\u0027s a bit weird to create a default with a random `PartitionName` and 0 digest, then later we might also need to question the validity of the `HashDescriptor` when we receive one.",
+      "parentUuid": "45327853_cd306f76",
+      "range": {
+        "startLine": 40,
+        "startChar": 44,
+        "endLine": 40,
+        "endChar": 50
+      },
+      "revId": "cb2fca35ca57c1c9fe1eafddb98b96520d28730f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
