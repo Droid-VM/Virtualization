@@ -272,6 +272,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9819cca7_dd19fcfd",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-25T09:54:23Z",
+      "side": 1,
+      "message": "Oh, I meant:\n```\n\u0027androidboot.vbmeta.digest \u003d \"{}\"\u0027.format(calc_vbmeta_digest())\n```\nSame for the size below.",
+      "parentUuid": "7030ccd3_ccdc96fd",
+      "range": {
+        "startLine": 308,
+        "startChar": 51,
+        "endLine": 309,
+        "endChar": 45
+      },
+      "revId": "cb38445fced6da11d11263f22864b709dce9472d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a23fb7d_4e3d0da3",
         "filename": "apex/sign_virt_apex.py",
         "patchSetId": 8
@@ -307,6 +331,30 @@
       "side": 1,
       "message": "That can be done but will require a bit of refactoring (taking nested methods out of `UpdateVbmetaBootconfig`). It is already verified via Microdroid CTS. Are you sure we need it in `VerifyVirtApex` (My understanding of the method is that it is a verify minimal check that public key embedded is correct).",
       "parentUuid": "7a23fb7d_4e3d0da3",
+      "range": {
+        "startLine": 494,
+        "startChar": 12,
+        "endLine": 494,
+        "endChar": 20
+      },
+      "revId": "cb38445fced6da11d11263f22864b709dce9472d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e98fccd6_6df654a6",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-25T09:54:23Z",
+      "side": 1,
+      "message": "I\u0027m happy to be explained why it\u0027s not necessary but to me verification is incomplete unless you check that the ramdisk and vbmeta partition are tied together. Without it, you can recompile the disk partitions, forget to update the kernel+ramdisk and this script will tell you that everything is fine. CTS is nice but this is meant to run as part of the build system, that\u0027s not the same.\n\nI\u0027m happy for this to be fixed in a follow-up, but if so, please add a TODO.",
+      "parentUuid": "b0506cf2_ad1a1098",
       "range": {
         "startLine": 494,
         "startChar": 12,
