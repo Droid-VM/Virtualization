@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "404accaa_3701505f",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-25T10:29:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "372dbe93_fad93abd",
+      "revId": "6fa2c48cdbc0ea6fa1b7bf9a51acf39543c1a8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d4b16d7_de361ffe",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-01-24T18:24:12Z",
       "side": 1,
       "message": "All unsafe functions should have Rustdoc with a `# Safety` section documenting what the caller must do to avoid undefined behaviour when calling the function.",
+      "revId": "6fa2c48cdbc0ea6fa1b7bf9a51acf39543c1a8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eb7e2ce_af096c74",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-25T10:29:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d4b16d7_de361ffe",
       "revId": "6fa2c48cdbc0ea6fa1b7bf9a51acf39543c1a8d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -58,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8977bd03_f871880f",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-25T10:29:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "159cfbe5_28767916",
+      "range": {
+        "startLine": 90,
+        "startChar": 3,
+        "endLine": 90,
+        "endChar": 32
+      },
+      "revId": "6fa2c48cdbc0ea6fa1b7bf9a51acf39543c1a8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5bc698cf_f0f03993",
@@ -71,6 +131,24 @@
       "writtenOn": "2023-01-24T18:24:12Z",
       "side": 1,
       "message": "There is no guarantee of that, a safe function could call this with a null or invalid pointer. You need to either check it somehow, or mark this function as unsafe and document the safety requirements for the caller.",
+      "revId": "6fa2c48cdbc0ea6fa1b7bf9a51acf39543c1a8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac046733_89160480",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-25T10:29:24Z",
+      "side": 1,
+      "message": "Actually `descriptor` is non-null is checked in the call above. I\u0027ll mark this function as unsafe.",
+      "parentUuid": "5bc698cf_f0f03993",
       "revId": "6fa2c48cdbc0ea6fa1b7bf9a51acf39543c1a8d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -92,6 +170,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc294b87_c2189efa",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-25T10:29:24Z",
+      "side": 1,
+      "message": "The `vbmeta` here is from [AvbSlotVerifyData](https://cs.android.com/android/platform/superproject/+/master:external/avb/libavb/avb_slot_verify.h;l\u003d308;drc\u003dccda343c4e6d0337c4156ed85c93bb6758c268f9) generated when the verification succeeds, we can use `avb_descriptor_foreach` on it according to the libavb [spec](https://cs.android.com/android/platform/superproject/+/master:external/avb/libavb/avb_slot_verify.h;l\u003d182;drc\u003dccda343c4e6d0337c4156ed85c93bb6758c268f9). I\u0027ll add this to the safety comments.",
+      "parentUuid": "e2c6ec93_9a9f23fa",
+      "revId": "6fa2c48cdbc0ea6fa1b7bf9a51acf39543c1a8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87b78304_04b00936",
@@ -105,6 +201,24 @@
       "writtenOn": "2023-01-24T18:24:12Z",
       "side": 1,
       "message": "Again, just because it\u0027s not null doesn\u0027t mean it\u0027s valid. It could be a pointer to uninitialised memory, misaligned, aliasing some other reference, or anything else. Either this needs to be an unsafe function too, which means it can\u0027t be an implementation of `TryFrom` and it needs its safety requirements documented, or it should take a reference (which the caller then needs to construct safely somehow).",
+      "revId": "6fa2c48cdbc0ea6fa1b7bf9a51acf39543c1a8d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3616a28_abb95c92",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-25T10:29:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87b78304_04b00936",
       "revId": "6fa2c48cdbc0ea6fa1b7bf9a51acf39543c1a8d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
