@@ -39,6 +39,30 @@
       },
       "revId": "e06ca015516da9a74449bb1a1c4f768f2d3ca352",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e07f160d_dfb55b7f",
+        "filename": "pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1933736
+      },
+      "writtenOn": "2023-01-25T01:55:24Z",
+      "side": 1,
+      "message": "Yup, I copied the error before. Let me know if there is a different suggested change. \n\nerror: reference to packed field is unaligned\n   --\u003e packages/modules/Virtualization/pvmfw/avb/tests/api_test.rs:258:5\n    |\n258 | /     assert_eq!(\n259 | |         0, vbmeta_header.flags,\n260 | |         \"The disable flag should not be set in the latest kernel.\"\n261 | |     );\n    | |_____^\n    |\n    \u003d warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!\n    \u003d note: for more information, see issue #82523 \u003chttps://github.com/rust-lang/rust/issues/82523\u003e\n    \u003d note: fields of packed structs are not properly aligned, and creating a misaligned reference is undefined behavior (even if that reference is never d\nereferenced)\n    \u003d help: copy the field contents to a local variable, or replace the reference with a raw pointer and use `read_unaligned`/`write_unaligned` (loads and \nstores via `*p` must be properly aligned even when using raw pointers)\n    \u003d note: this error originates in the macro `assert_eq` (in Nightly builds, run with -Z macro-backtrace for more info)",
+      "parentUuid": "5ef4f812_f2a510c9",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 265,
+        "endChar": 8
+      },
+      "revId": "e06ca015516da9a74449bb1a1c4f768f2d3ca352",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
