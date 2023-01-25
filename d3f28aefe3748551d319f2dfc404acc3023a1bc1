@@ -39,6 +39,30 @@
       },
       "revId": "d3f28aefe3748551d319f2dfc404acc3023a1bc1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd2a1e6a_78b3edf8",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-25T12:06:27Z",
+      "side": 1,
+      "message": "Looks like it\u0027s not. When I removed `\u0026` here, I got\n```\nerror[E0308]: mismatched types\n   --\u003e packages/modules/Virtualization/pvmfw/avb/src/verify.rs:169:44\n    |\n169 |     verify_vbmeta_is_from_kernel_partition(vbmeta_image)?;\n    |     -------------------------------------- ^^^^^^^^^^^^\n    |     |                                      |\n    |     |                                      expected `\u0026avb_bindgen::AvbVBMetaData`, found struct `avb_bindgen::AvbVBMetaData`\n    |     |                                      help: consider borrowing here: `\u0026vbmeta_image`\n    |     arguments to this function are incorrect\n    |\nnote: function defined here\n   --\u003e packages/modules/Virtualization/pvmfw/avb/src/verify.rs:148:4\n    |\n148 | fn verify_vbmeta_is_from_kernel_partition(\n    |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n149 |     vbmeta_image: \u0026AvbVBMetaData,\n    |     ----------------------------\n\nerror: aborting due to previous error\n```",
+      "parentUuid": "8ac105d3_766096e1",
+      "range": {
+        "startLine": 169,
+        "startChar": 43,
+        "endLine": 169,
+        "endChar": 44
+      },
+      "revId": "d3f28aefe3748551d319f2dfc404acc3023a1bc1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
