@@ -15,7 +15,7 @@
 //! Struct and functions relating to well-known partition names.
 
 use crate::error::AvbIOError;
-use crate::utils::is_not_null;
+use crate::utils::is_aligned_and_not_null;
 use core::ffi::{c_char, CStr};
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -52,7 +52,7 @@ impl TryFrom<*const c_char> for PartitionName {
     type Error = AvbIOError;
 
     fn try_from(partition_name: *const c_char) -> Result<Self, Self::Error> {
-        is_not_null(partition_name)?;
+        is_aligned_and_not_null(partition_name)?;
         // SAFETY: It is safe as the raw pointer `partition_name` is a nonnull pointer.
         let partition_name = unsafe { CStr::from_ptr(partition_name) };
         partition_name.try_into()

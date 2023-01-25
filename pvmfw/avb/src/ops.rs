@@ -18,7 +18,7 @@ use crate::error::{
     slot_verify_result_to_verify_payload_result, to_avb_io_result, AvbIOError, AvbSlotVerifyError,
 };
 use crate::partition::PartitionName;
-use crate::utils::{self, as_ref, is_not_null, to_nonnull, write};
+use crate::utils::{self, as_ref, is_aligned_and_not_null, to_nonnull, write};
 use avb_bindgen::{
     avb_slot_verify, avb_slot_verify_data_free, AvbHashtreeErrorMode, AvbIOResult, AvbOps,
     AvbSlotVerifyData, AvbSlotVerifyFlags, AvbVBMetaData,
@@ -277,7 +277,7 @@ fn try_validate_vbmeta_public_key(
     out_is_trusted: *mut bool,
 ) -> utils::Result<()> {
     // The public key metadata is not used when we build the VBMeta.
-    is_not_null(public_key_data)?;
+    is_aligned_and_not_null(public_key_data)?;
     // SAFETY: It is safe to create a slice with the given pointer and length as
     // `public_key_data` is a valid pointer and it points to an array of length
     // `public_key_length`.
@@ -293,7 +293,7 @@ impl TryFrom<*mut AvbSlotVerifyData> for AvbSlotVerifyDataWrap {
     type Error = AvbSlotVerifyError;
 
     fn try_from(data: *mut AvbSlotVerifyData) -> Result<Self, Self::Error> {
-        is_not_null(data).map_err(|_| AvbSlotVerifyError::Io)?;
+        is_aligned_and_not_null(data).map_err(|_| AvbSlotVerifyError::Io)?;
         Ok(Self(data))
     }
 }
@@ -319,7 +319,7 @@ impl AsRef<AvbSlotVerifyData> for AvbSlotVerifyDataWrap {
 impl AvbSlotVerifyDataWrap {
     pub(crate) fn vbmeta_images(&self) -> Result<&[AvbVBMetaData], AvbSlotVerifyError> {
         let data = self.as_ref();
-        is_not_null(data.vbmeta_images).map_err(|_| AvbSlotVerifyError::Io)?;
+        is_aligned_and_not_null(data.vbmeta_images).map_err(|_| AvbSlotVerifyError::Io)?;
         // SAFETY: It is safe as the raw pointer `data.vbmeta_images` is a nonnull pointer.
         let vbmeta_images =
             unsafe { slice::from_raw_parts(data.vbmeta_images, data.num_vbmeta_images) };
