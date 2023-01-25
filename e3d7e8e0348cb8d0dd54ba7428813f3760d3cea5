@@ -22,6 +22,30 @@
       },
       "revId": "e3d7e8e0348cb8d0dd54ba7428813f3760d3cea5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0091524_b2240cee",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-25T17:59:33Z",
+      "side": 1,
+      "message": "Yeah, you are right. After adding the alignment check, I\u0027ll check function by function in this module to mark them unsafe.",
+      "parentUuid": "3b218369_4fe0236e",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 283,
+        "endChar": 27
+      },
+      "revId": "e3d7e8e0348cb8d0dd54ba7428813f3760d3cea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
