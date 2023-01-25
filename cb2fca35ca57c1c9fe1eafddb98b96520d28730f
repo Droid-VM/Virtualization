@@ -16,6 +16,29 @@
       "message": "Hi,\n\nThanks for your reviews! Could you take another look?",
       "revId": "cb2fca35ca57c1c9fe1eafddb98b96520d28730f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45327853_cd306f76",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-25T15:22:18Z",
+      "side": 1,
+      "message": "I guess you\u0027re only using `Option` here because `ArrayVec` requires the element type to implement `Default`? If so, would it be possible to implement `Default` for `HashDescriptor` instead, to simplify the code a bit?",
+      "range": {
+        "startLine": 40,
+        "startChar": 44,
+        "endLine": 40,
+        "endChar": 50
+      },
+      "revId": "cb2fca35ca57c1c9fe1eafddb98b96520d28730f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
