@@ -39,11 +39,11 @@ pub(crate) fn to_nonnull<T>(ptr: *mut T) -> Result<NonNull<T>> {
     NonNull::new(ptr).ok_or(AvbIOError::NoSuchValue)
 }
 
-pub(crate) fn is_not_null<T>(ptr: *const T) -> Result<()> {
-    if ptr.is_null() {
-        Err(AvbIOError::NoSuchValue)
-    } else {
+pub(crate) fn is_aligned_and_not_null<T>(ptr: *const T) -> Result<()> {
+    if !ptr.is_null() && ptr.is_aligned() {
         Ok(())
+    } else {
+        Err(AvbIOError::NoSuchValue)
     }
 }
 

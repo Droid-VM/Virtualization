@@ -17,6 +17,8 @@
 #![cfg_attr(not(test), no_std)]
 // For usize.checked_add_signed(isize), available in Rust 1.66.0
 #![feature(mixed_integer_ops)]
+// To enable ptr.is_aligned()
+#![feature(pointer_is_aligned)]
 
 mod error;
 mod ops;

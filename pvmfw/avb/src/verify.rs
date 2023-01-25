@@ -17,7 +17,7 @@
 use crate::error::{AvbIOError, AvbSlotVerifyError};
 use crate::ops::{Ops, Payload};
 use crate::partition::PartitionName;
-use crate::utils::{is_not_null, to_usize, usize_checked_add, write};
+use crate::utils::{is_aligned_and_not_null, to_usize, usize_checked_add, write};
 use avb_bindgen::{
     avb_descriptor_foreach, avb_hash_descriptor_validate_and_byteswap, AvbDescriptor,
     AvbHashDescriptor, AvbVBMetaData,
@@ -69,7 +69,7 @@ impl TryFrom<*const AvbDescriptor> for AvbHashDescriptorRef {
     type Error = AvbIOError;
 
     fn try_from(descriptor: *const AvbDescriptor) -> Result<Self, Self::Error> {
-        is_not_null(descriptor)?;
+        is_aligned_and_not_null(descriptor)?;
         // SAFETY: It is safe as the raw pointer `descriptor` is a nonnull pointer and
         // we have validated that it is of hash descriptor type.
         let hash_desc = unsafe {
@@ -115,7 +115,7 @@ impl AvbHashDescriptorRef {
 fn verify_vbmeta_has_no_initrd_descriptor(
     vbmeta_image: &AvbVBMetaData,
 ) -> Result<(), AvbSlotVerifyError> {
-    is_not_null(vbmeta_image.vbmeta_data).map_err(|_| AvbSlotVerifyError::Io)?;
+    is_aligned_and_not_null(vbmeta_image.vbmeta_data).map_err(|_| AvbSlotVerifyError::Io)?;
     let mut has_unexpected_descriptor = false;
     // SAFETY: It is safe as the raw pointer `vbmeta_image.vbmeta_data` is a nonnull pointer.
     if !unsafe {
