@@ -16,6 +16,29 @@
       "message": "Hi Alan, PTAL.",
       "revId": "209f2c56ad8b245ac7ad69e65227fd2b93ae548d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d00d2f3b_e9fc6709",
+        "filename": "pvmfw/avb/src/ops.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-25T11:55:20Z",
+      "side": 1,
+      "message": "Really a lot more of this code should be marked unsafe - e.g. this function is, and so is write().\n\nBut that should probably be a separate CL.",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 33
+      },
+      "revId": "209f2c56ad8b245ac7ad69e65227fd2b93ae548d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
