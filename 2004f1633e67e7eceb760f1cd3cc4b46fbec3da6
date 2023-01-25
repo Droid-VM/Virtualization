@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b2b94cd_2e4fdab0",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-01-25T04:37:56Z",
+      "side": 1,
+      "message": "vbmeta contains descriptors from both vendor/system images. So, the check below may pass when system uses sha256 and vendor uses something else (not sha1/sha256). Note that avbInfo contains two hashtree descriptors for vbmeta.img.",
+      "range": {
+        "startLine": 890,
+        "startChar": 29,
+        "endLine": 890,
+        "endChar": 46
+      },
+      "revId": "2004f1633e67e7eceb760f1cd3cc4b46fbec3da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
