@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91618b96_c769b8c0",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-26T14:21:57Z",
+      "side": 1,
+      "message": "Individual components of (VM) boot can and should check that hash_algorithms are the suitable ones - these are best suited to be small tests/unit tests.\n\nThis test in this patch is part of compatibility test suite and they validate devices against the Android CDD. These extend to partners who may not be running the unit tests mentioned above. In fact, I don\u0027t believe we even mandate pvmfw (yet?) \u0026 only use it as a reference. But Android does care deeply about Device Integrity \u0026 mandates verified boot to use `verification algorithms as strong as current recommendations from NIST for hashing algorithms (SHA-256)`. Since Virtualization extends verified boot, we need to ensure \u0027Android\u0027 devices follow these too.",
+      "parentUuid": "f854c145_de5c2228",
+      "range": {
+        "startLine": 888,
+        "startChar": 29,
+        "endLine": 888,
+        "endChar": 46
+      },
+      "revId": "2004f1633e67e7eceb760f1cd3cc4b46fbec3da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b2b94cd_2e4fdab0",
@@ -61,6 +85,30 @@
       "writtenOn": "2023-01-25T04:37:56Z",
       "side": 1,
       "message": "vbmeta contains descriptors from both vendor/system images. So, the check below may pass when system uses sha256 and vendor uses something else (not sha1/sha256). Note that avbInfo contains two hashtree descriptors for vbmeta.img.",
+      "range": {
+        "startLine": 890,
+        "startChar": 29,
+        "endLine": 890,
+        "endChar": 46
+      },
+      "revId": "2004f1633e67e7eceb760f1cd3cc4b46fbec3da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6002cbff_f87a2d83",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-26T14:21:57Z",
+      "side": 1,
+      "message": "That\u0027s interesting. The hashlib used by avbtool supports other weak hashes such as md5 as well as other stronger ones such as sha3_. I\u0027m changing the patch to ensure that hash algorithm is sha256.",
+      "parentUuid": "8b2b94cd_2e4fdab0",
       "range": {
         "startLine": 890,
         "startChar": 29,
