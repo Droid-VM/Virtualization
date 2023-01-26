@@ -63,6 +63,30 @@
       },
       "revId": "cb2fca35ca57c1c9fe1eafddb98b96520d28730f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef9d2f8b_8495a5b4",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-26T12:19:53Z",
+      "side": 1,
+      "message": "You\u0027ll never actually get one though, will you? The `Default` implementation is only used to fill the unused entries in the array.",
+      "parentUuid": "01a50227_7e729924",
+      "range": {
+        "startLine": 40,
+        "startChar": 44,
+        "endLine": 40,
+        "endChar": 50
+      },
+      "revId": "cb2fca35ca57c1c9fe1eafddb98b96520d28730f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
