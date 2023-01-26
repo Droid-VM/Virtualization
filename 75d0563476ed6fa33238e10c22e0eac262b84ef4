@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "885fecb5_d96f1471",
+        "filename": "pvmfw/avb/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-26T17:57:44Z",
+      "side": 0,
+      "message": "Removing this will break the code in 1.65, I believe?\nchecked_add_signed is used in ops.rs.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 30
+      },
+      "revId": "75d0563476ed6fa33238e10c22e0eac262b84ef4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
