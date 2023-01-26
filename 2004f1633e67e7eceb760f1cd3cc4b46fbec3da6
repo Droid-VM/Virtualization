@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6dcb6723_e4f17af1",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-26T07:29:42Z",
+      "side": 1,
+      "message": "The hash algorithm of the signed kernel will also be checked in the `libpvmfw_avb.integration_test` (aosp/2392903).\n\nOtherwise I wonder if we really need e2e test to check the hash algorithm of vbmetas. Our need is just to load the images and check their algorithm, we can parse the vbmeta and check the algorithm with the library `libvbmeta_rust` directly. That\u0027ll make the test much smaller/faster and we don\u0027t need to care about all the flakiness in e2e host test setup. It\u0027s also in line with the small tests recommendation[1].\n\n[1] go/small-tests",
+      "range": {
+        "startLine": 888,
+        "startChar": 29,
+        "endLine": 888,
+        "endChar": 46
+      },
+      "revId": "2004f1633e67e7eceb760f1cd3cc4b46fbec3da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8b2b94cd_2e4fdab0",
         "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
         "patchSetId": 4
