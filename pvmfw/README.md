@@ -213,8 +213,9 @@ another [DICE layer][Layering], passed to the guest through a `/reserved-memory`
 device tree node marked as [`compatible=”google,open-dice”`][dice-dt].
 
 [AVB]: https://source.android.com/docs/security/features/verifiedboot/boot-flow
-[BccHandover]: https://pigweed.googlesource.com/open-dice/+/825e3beb6c/src/android/bcc.c#260
+[`BccHandover`]: https://pigweed.googlesource.com/open-dice/+/825e3beb6c/src/android/bcc.c#260
 [CDDL]: https://datatracker.ietf.org/doc/rfc8610
+[dice-mode]: https://pigweed.googlesource.com/open-dice/+/refs/heads/main/docs/specification.md#Mode-Value-Details
 [dice-dt]: https://www.kernel.org/doc/Documentation/devicetree/bindings/reserved-memory/google%2Copen-dice.yaml
 [Layering]: https://pigweed.googlesource.com/open-dice/+/refs/heads/main/docs/specification.md#layering-details
 [Trusty-BCC]: https://android.googlesource.com/trusty/lib/+/1696be0a8f3a7103/lib/hwbcc/common/swbcc.c#554
