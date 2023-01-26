@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "174042a7_96ca5830",
+        "filename": "compos/common/timeouts.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-26T15:49:41Z",
+      "side": 1,
+      "message": "Sorry, but we shouldn\u0027t change this - it needs to match odrefresh.cc.\nIt shouldn\u0027t be correlated with boot times though.",
+      "range": {
+        "startLine": 47,
+        "startChar": 54,
+        "endLine": 47,
+        "endChar": 57
+      },
+      "revId": "8d18883e96f856d3482b129fd31e6f8c4c14c2d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3161a7f_f073e3f9",
+        "filename": "compos/common/timeouts.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-26T15:49:41Z",
+      "side": 1,
+      "message": "That seems like a lot, and a 3x increase. We should balance making sure the tests work against increasing the time to detect failure.",
+      "range": {
+        "startLine": 48,
+        "startChar": 46,
+        "endLine": 48,
+        "endChar": 48
+      },
+      "revId": "8d18883e96f856d3482b129fd31e6f8c4c14c2d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50941d1d_ae182bc2",
+        "filename": "compos/common/timeouts.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-26T15:49:41Z",
+      "side": 1,
+      "message": "I also think this one shouldn\u0027t change\n(If this timeout expires we just kill the VM, nothing bad happens)",
+      "range": {
+        "startLine": 49,
+        "startChar": 45,
+        "endLine": 49,
+        "endChar": 47
+      },
+      "revId": "8d18883e96f856d3482b129fd31e6f8c4c14c2d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
