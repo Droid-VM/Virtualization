@@ -77,7 +77,8 @@ const DEBUG_MICRODROID_NO_VERIFIED_BOOT: &str =
     "/sys/firmware/devicetree/base/virtualization/guest/debug-microdroid,no-verified-boot";
 
 const APEX_CONFIG_DONE_PROP: &str = "apex_config.done";
-const TOMBSTONE_TRANSMIT_DONE_PROP: &str = "tombstone_transmit.init_done";
+const TOMBSTONE_TRANSMIT_INIT_DONE_PROP: &str = "tombstone_transmit.init_done";
+const TOMBSTONE_TRANSMIT_MKDIR_DONE_PROP: &str = "tombstone_transmit.mkdir_done";
 const DEBUGGABLE_PROP: &str = "ro.boot.microdroid.debuggable";
 
 // SYNC WITH virtualizationservice/src/crosvm.rs
@@ -424,21 +425,10 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
 
     setup_config_sysprops(&config)?;
 
-    // Start tombstone_transmit if enabled
-    if config.export_tombstones {
-        control_service("start", "tombstone_transmit")?;
-    } else {
-        control_service("stop", "tombstoned")?;
-    }
-
     // Wait until zipfuse has mounted the APKs so we can access the payload
     zipfuse.wait_until_done()?;
 
     register_vm_payload_service(allow_restricted_apis, service.clone(), dice_context)?;
-
-    if config.export_tombstones {
-        wait_for_tombstone_transmit_done()?;
-    }
 
     // Wait for encryptedstore to finish mounting the storage (if enabled) before setting
     // microdroid_manager.init_done. Reason is init stops uneventd after that.
@@ -451,6 +441,17 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
     wait_for_property_true("dev.bootcomplete").context("failed waiting for dev.bootcomplete")?;
     system_properties::write("microdroid_manager.init_done", "1")
         .context("set microdroid_manager.init_done")?;
+
+    // Start tombstone_transmit if enabled
+    // Should be after microdroid_manager.init_done since post-fs-data runs after init_done
+    if config.export_tombstones {
+        wait_for_tombstone_transmit_mkdir_done()?;
+        control_service("start", "tombstone_transmit")?;
+        wait_for_tombstone_transmit_init_done()?;
+    } else {
+        control_service("stop", "tombstoned")?;
+    }
+
     info!("boot completed, time to run payload");
     exec_task(task, service).context("Failed to run payload")
 }
@@ -728,9 +729,14 @@ fn wait_for_apex_config_done() -> Result<()> {
     wait_for_property_true(APEX_CONFIG_DONE_PROP).context("Failed waiting for apex config done")
 }
 
-fn wait_for_tombstone_transmit_done() -> Result<()> {
-    wait_for_property_true(TOMBSTONE_TRANSMIT_DONE_PROP)
-        .context("Failed waiting for tombstone transmit done")
+fn wait_for_tombstone_transmit_mkdir_done() -> Result<()> {
+    wait_for_property_true(TOMBSTONE_TRANSMIT_MKDIR_DONE_PROP)
+        .context("Failed waiting for tombstone transmit mkdir done")
+}
+
+fn wait_for_tombstone_transmit_init_done() -> Result<()> {
+    wait_for_property_true(TOMBSTONE_TRANSMIT_INIT_DONE_PROP)
+        .context("Failed waiting for tombstone transmit init done")
 }
 
 fn wait_for_property_true(property_name: &str) -> Result<()> {
