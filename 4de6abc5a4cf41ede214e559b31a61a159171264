@@ -1,0 +1,326 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90951a1a_c1adc59f",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-26T10:24:32Z",
+      "side": 1,
+      "message": "I can\u0027t easily find the documentation for it but the reason why the other symbols defined above start with `.L`[`_`] is to tell the assembler to consider those as \"local\" symbols so you might want to use the same prefix here.",
+      "range": {
+        "startLine": 67,
+        "startChar": 5,
+        "endLine": 67,
+        "endChar": 6
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d26f640_b57bdf11",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-26T10:24:32Z",
+      "side": 1,
+      "message": "nit: `SMCCC_TRNG_*`?",
+      "range": {
+        "startLine": 68,
+        "startChar": 6,
+        "endLine": 68,
+        "endChar": 21
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "905fd637_acfa337f",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-26T10:24:32Z",
+      "side": 1,
+      "message": "nit: `SMCCC_TRNG_RND64_ID` to distinguish it from `RND32`?",
+      "range": {
+        "startLine": 70,
+        "startChar": 6,
+        "endLine": 70,
+        "endChar": 17
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b69cfb7_46ce7782",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-26T10:24:32Z",
+      "side": 1,
+      "message": "If randomization fails, we should abort the boot by issuing a `PSCI_SYSTEM_RESET`. If that also fails, we hang (`b .`).",
+      "range": {
+        "startLine": 78,
+        "startChar": 7,
+        "endLine": 78,
+        "endChar": 74
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d952e85_3da13bd4",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-26T10:24:32Z",
+      "side": 1,
+      "message": "nit: it feels weird to have a function call to set the stack guard; WDYT of defining a macro?",
+      "range": {
+        "startLine": 172,
+        "startChar": 1,
+        "endLine": 172,
+        "endChar": 3
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d97c9f5b_f7c17bcf",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-26T10:24:32Z",
+      "side": 1,
+      "message": "nit: to avoid any access to memory and/or relying on the stack, you could also store those in `x20`-`x28`.",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 22
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "204e77b7_35f0b94c",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-26T10:24:32Z",
+      "side": 1,
+      "message": "nit: I notice that you\u0027ve correctly distinguished between using `w0` and `x0` for SMC32/SMC64; shouldn\u0027t this be `w0`?",
+      "range": {
+        "startLine": 191,
+        "startChar": 7,
+        "endLine": 191,
+        "endChar": 9
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2573af5a_2a31d1a3",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-26T10:24:32Z",
+      "side": 1,
+      "message": "nit: WDYT of defining the `{hvc,smc}{32,64}` macros to streamline this code?",
+      "range": {
+        "startLine": 191,
+        "startChar": 1,
+        "endLine": 192,
+        "endChar": 7
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e3f4cee_fb83ef4b",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-26T10:24:32Z",
+      "side": 1,
+      "message": "nit: could you `b.lt`, to align with the rest of the file?",
+      "range": {
+        "startLine": 194,
+        "startChar": 1,
+        "endLine": 194,
+        "endChar": 4
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08afe10d_594f31e2",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-26T10:24:32Z",
+      "side": 1,
+      "message": "Define `.LSMCCC_VERSION_1_1` and `cmp` the return value of the SMC against it.\n\nBTW, wouldn\u0027t this code accept v0.1?",
+      "range": {
+        "startLine": 196,
+        "startChar": 9,
+        "endLine": 196,
+        "endChar": 11
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf4e9982_0f488fc5",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-26T10:24:32Z",
+      "side": 1,
+      "message": "This (and below) should be an `smc` (§1.3).",
+      "range": {
+        "startLine": 201,
+        "startChar": 1,
+        "endLine": 201,
+        "endChar": 4
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29e40c8a_f6a44d49",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-26T10:24:32Z",
+      "side": 1,
+      "message": "Nice use of `ubfx` but a `cmp` with `.LSMCCC_TRNG_VERSION_1_0` would be clearer and more robust, IMO.",
+      "range": {
+        "startLine": 204,
+        "startChar": 1,
+        "endLine": 205,
+        "endChar": 11
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3204719_d04c4035",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-26T10:24:32Z",
+      "side": 1,
+      "message": "TBH, I don\u0027t understand why the spec says that we need to do this (§2.4.3) but also says that the function is mandatory from v1.0 (§1.3) and can return `NOT_SUPPORTED` (§2.2.1 and §2.5) ...",
+      "range": {
+        "startLine": 208,
+        "startChar": 4,
+        "endLine": 208,
+        "endChar": 54
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47d26291_2b592210",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-26T10:24:32Z",
+      "side": 1,
+      "message": "Can you check if this is using the relocated address (see lines 149-157) over the original? I\u0027d like to avoid any write to the original image to allow the hypervisor to optimize pvmfw loading with CoW so this (and the compiler) should use the relocated version. I wonder if we could even just make `__stack_chk_guard` (and the pseudo-TLS) part of the BSS, instead?",
+      "range": {
+        "startLine": 223,
+        "startChar": 11,
+        "endLine": 223,
+        "endChar": 28
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
