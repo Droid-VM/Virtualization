@@ -49,6 +49,54 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ae46a491_986108ad",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-26T13:07:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73224258_c1812bfb",
+      "range": {
+        "startLine": 39,
+        "startChar": 42,
+        "endLine": 39,
+        "endChar": 54
+      },
+      "revId": "29dd0202a9d0569214970a4d009a7f83613e13de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "323f60ed_49e869ef",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-26T13:07:51Z",
+      "side": 1,
+      "message": "I\u0027ve changed them to `expect` with some descriptive messages.",
+      "parentUuid": "bfc8f182_ff424a13",
+      "range": {
+        "startLine": 39,
+        "startChar": 14,
+        "endLine": 39,
+        "endChar": 75
+      },
+      "revId": "29dd0202a9d0569214970a4d009a7f83613e13de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c2c77824_3fdb920e",
         "filename": "pvmfw/src/virtio/pci.rs",
         "patchSetId": 1
@@ -60,6 +108,30 @@
       "writtenOn": "2023-01-26T10:32:25Z",
       "side": 1,
       "message": "OOC, why is this required if we already own `pci_info`?",
+      "range": {
+        "startLine": 45,
+        "startChar": 34,
+        "endLine": 45,
+        "endChar": 42
+      },
+      "revId": "29dd0202a9d0569214970a4d009a7f83613e13de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "883e9d65_7b637282",
+        "filename": "pvmfw/src/virtio/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-01-26T13:07:51Z",
+      "side": 1,
+      "message": "So that the line below can use it to call `make_pci_root`.",
+      "parentUuid": "c2c77824_3fdb920e",
       "range": {
         "startLine": 45,
         "startChar": 34,
