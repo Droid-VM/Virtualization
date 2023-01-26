@@ -294,6 +294,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5df4d4f_c5de5055",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-26T14:19:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9819cca7_dd19fcfd",
+      "range": {
+        "startLine": 308,
+        "startChar": 51,
+        "endLine": 309,
+        "endChar": 45
+      },
+      "revId": "cb38445fced6da11d11263f22864b709dce9472d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a23fb7d_4e3d0da3",
@@ -355,6 +379,30 @@
       "side": 1,
       "message": "I\u0027m happy to be explained why it\u0027s not necessary but to me verification is incomplete unless you check that the ramdisk and vbmeta partition are tied together. Without it, you can recompile the disk partitions, forget to update the kernel+ramdisk and this script will tell you that everything is fine. CTS is nice but this is meant to run as part of the build system, that\u0027s not the same.\n\nI\u0027m happy for this to be fixed in a follow-up, but if so, please add a TODO.",
       "parentUuid": "b0506cf2_ad1a1098",
+      "range": {
+        "startLine": 494,
+        "startChar": 12,
+        "endLine": 494,
+        "endChar": 20
+      },
+      "revId": "cb38445fced6da11d11263f22864b709dce9472d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35752fe9_047a3f7f",
+        "filename": "apex/sign_virt_apex.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-01-26T14:19:19Z",
+      "side": 1,
+      "message": "Adding a TODO here as I would like to merge some of the patches. The patch stack has gotten bit bigger.",
+      "parentUuid": "e98fccd6_6df654a6",
       "range": {
         "startLine": 494,
         "startChar": 12,
