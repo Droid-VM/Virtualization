@@ -46,6 +46,30 @@
       },
       "revId": "9bffc3b515a466fa83b4d4c22749902178f6253c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b9c286a_b5b9e029",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-26T12:16:55Z",
+      "side": 1,
+      "message": "Yes, creating a context for another package and using VMM APIs with that context should work. If possible, can we add a CTS test for that?",
+      "parentUuid": "12898632_2d859b13",
+      "range": {
+        "startLine": 552,
+        "startChar": 0,
+        "endLine": 567,
+        "endChar": 9
+      },
+      "revId": "9bffc3b515a466fa83b4d4c22749902178f6253c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
