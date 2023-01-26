@@ -22,6 +22,30 @@
       },
       "revId": "ae8b5a25d352779c6b2f5f4f9be3c7cf6404f295",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fccfcd52_672865a2",
+        "filename": "pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1933736
+      },
+      "writtenOn": "2023-01-26T18:32:43Z",
+      "side": 1,
+      "message": "Below is an error copy and pasted, but you can look at a prior CL where it was reviewed by the team.\n\nhttps://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2400699\n\nerror: reference to packed field is unaligned\n--\u003e packages/modules/Virtualization/pvmfw/avb/tests/api_test.rs:258:5\n|\n258 | / assert_eq!(\n259 | | 0, vbmeta_header.flags,\n260 | | \"The disable flag should not be set in the latest kernel.\"\n261 | | );\n| |_____^\n|\n\u003d warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!\n\u003d note: for more information, see issue #82523 \u003chttps://github.com/rust-lang/rust/issues/82523\u003e\n\u003d note: fields of packed structs are not properly aligned, and creating a misaligned reference is undefined behavior (even if that reference is never d\nereferenced)\n\u003d help: copy the field contents to a local variable, or replace the reference with a raw pointer and use read_unaligned/write_unaligned (loads and\nstores via *p must be properly aligned even when using raw pointers)\n\u003d note: this error originates in the macro assert_eq (in Nightly builds, run with -Z macro-backtrace for more info)",
+      "parentUuid": "404cfbf1_fda4eedc",
+      "range": {
+        "startLine": 179,
+        "startChar": 4,
+        "endLine": 179,
+        "endChar": 57
+      },
+      "revId": "ae8b5a25d352779c6b2f5f4f9be3c7cf6404f295",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
