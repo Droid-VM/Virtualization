@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "047f8654_702b1cb9",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-26T14:17:48Z",
+      "side": 1,
+      "message": "We should probably link to https://source.android.com/docs/core/tests/debug.\n\nAnd we should explain the pros \u0026 cons - this may help if something goes wrong, but it also leaks information from inside the VM, potentially compromising data that the VM was trying to keep secret.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 14
+      },
+      "revId": "5a5ef675d6e5372b599ac91a1e521696dcb1b945",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "566e0698_98728969",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-26T14:17:48Z",
+      "side": 1,
+      "message": "bool ?\n\nAlternatively, maybe rename: enableTombstoneExport?",
+      "range": {
+        "startLine": 40,
+        "startChar": 35,
+        "endLine": 40,
+        "endChar": 39
+      },
+      "revId": "5a5ef675d6e5372b599ac91a1e521696dcb1b945",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
