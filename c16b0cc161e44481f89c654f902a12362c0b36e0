@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "509ec2b5_71dd2a3e",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-26T14:28:49Z",
+      "side": 1,
+      "message": "No we shouldn\u0027t move this. There\u0027s no guarantee that tombstoned runs before tombstone_transmit, or vice versa. Tombstoned needs these three directories, while tombstone_transmit needs only one directory.\n\nI think it\u0027d be safer to keep mkdir to both places.",
+      "parentUuid": "e8f19d4f_49d94ddb",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 38
+      },
+      "revId": "c16b0cc161e44481f89c654f902a12362c0b36e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6f18294_d828af3f",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-26T14:02:56Z",
       "side": 1,
       "message": "remove this",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 45
+      },
+      "revId": "c16b0cc161e44481f89c654f902a12362c0b36e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3892477b_d1e4817e",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-26T14:28:49Z",
+      "side": 1,
+      "message": "see my comment above.",
+      "parentUuid": "a6f18294_d828af3f",
       "range": {
         "startLine": 135,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ac4fb4e_188a5972",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-26T14:28:49Z",
+      "side": 1,
+      "message": "see my comment above.",
+      "parentUuid": "634571a8_0da73d80",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 48
+      },
+      "revId": "c16b0cc161e44481f89c654f902a12362c0b36e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bb5d43a_5e3f188f",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-01-26T14:21:16Z",
       "side": 1,
       "message": "Should this happen before we set microdroid_manager.init_done?",
+      "range": {
+        "startLine": 452,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 5
+      },
+      "revId": "c16b0cc161e44481f89c654f902a12362c0b36e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e798ea9b_2e5188ca",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-26T14:28:49Z",
+      "side": 1,
+      "message": "IMO it doesn\u0027t matter. I\u0027ll move if running this prior to microdroid_manager.init_done seems better for you.",
+      "parentUuid": "7bb5d43a_5e3f188f",
       "range": {
         "startLine": 452,
         "startChar": 0,
