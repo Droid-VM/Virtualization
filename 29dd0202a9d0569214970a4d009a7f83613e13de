@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfc8f182_ff424a13",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-26T10:32:25Z",
+      "side": 1,
+      "message": "WDYT of either doing the `unwrap` on different lines (to have different panic messages) or to `.try_into().ok()` and execute the `panic!` below if they aren\u0027t both `Some`?",
+      "range": {
+        "startLine": 39,
+        "startChar": 14,
+        "endLine": 39,
+        "endChar": 75
+      },
+      "revId": "29dd0202a9d0569214970a4d009a7f83613e13de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73224258_c1812bfb",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-26T10:32:25Z",
+      "side": 1,
+      "message": "`checked_add`? I\u0027m not sure what this would result in if we had an overflow, here?",
+      "range": {
+        "startLine": 39,
+        "startChar": 42,
+        "endLine": 39,
+        "endChar": 54
+      },
+      "revId": "29dd0202a9d0569214970a4d009a7f83613e13de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2c77824_3fdb920e",
+        "filename": "pvmfw/src/virtio/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-26T10:32:25Z",
+      "side": 1,
+      "message": "OOC, why is this required if we already own `pci_info`?",
+      "range": {
+        "startLine": 45,
+        "startChar": 34,
+        "endLine": 45,
+        "endChar": 42
+      },
+      "revId": "29dd0202a9d0569214970a4d009a7f83613e13de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
