@@ -55,6 +55,8 @@ unpack_dir = tempfile.TemporaryDirectory()
 tasks = []
 
 # create an async task and return a future value of it.
+
+
 def Async(fn, *args, wait=None, **kwargs):
 
     # wrap a function with AwaitAll()
@@ -72,7 +74,8 @@ def Async(fn, *args, wait=None, **kwargs):
 def AwaitAll(fs):
     if fs:
         for f in fs:
-            f.result()
+            if f is not None:
+                f.result()
 
 
 def ParseArgs(argv):
@@ -106,6 +109,11 @@ def ParseArgs(argv):
         '--do_not_update_bootconfigs',
         action='store_true',
         help='This will NOT update the vbmeta related bootconfigs while signing the apex.\
+            Used for testing only!!')
+    parser.add_argument(
+        '--do_not_update_initrd_hashdesc',
+        action='store_true',
+        help='This will NOT update the initrd_hashdesc in kernel\'s vbmeta footer while signing the apex.\
             Used for testing only!!')
     args = parser.parse_args(argv)
     # preprocess --key_override into a map
@@ -209,6 +217,36 @@ def AvbInfo(args, image_path):
 # The order of those values is maintained.
 def LookUp(pairs, key):
     return [v for (k, v) in pairs if k == key]
+
+
+def AddKernelFooter(args, key, image_path, partition_name, ):
+    initrd_normal_hashdesc = tempfile.NamedTemporaryFile(delete=False)
+    initrd_debug_hashdesc = tempfile.NamedTemporaryFile(delete=False)
+
+    _, descriptors = AvbInfo(args, image_path)
+    print(descriptors)
+    initrd_n_f = initrd_d_f = None
+    if args.do_not_update_initrd_hashdesc:
+        # TODO: Keep the old initrd descriptors - these can be found from avbInfo
+        # for descriptor in descriptors:
+            # if descriptor['']
+        initrd_normal_hashdesc.write(descriptors[0])
+        initrd_debug_hashdesc.write(descriptors[1])
+        initrd_normal_hashdesc.close()
+        initrd_debug_hashdesc.close()
+    else:
+        initrd_n_f = Async(GenVbmetaImage, args, files['initrd_normal.img'],
+                           initrd_normal_hashdesc.name, "initrd_normal",
+                           wait=[vbmeta_bc_f])
+        initrd_d_f = Async(GenVbmetaImage, args, files['initrd_debuggable.img'],
+                           initrd_debug_hashdesc.name, "initrd_debug",
+                           wait=[vbmeta_bc_f])
+
+    Async(AddKernelFooter, args, key, files['kernel'], partition_name="boot",
+                 additional_descriptors=[
+        initrd_normal_hashdesc, initrd_debug_hashdesc],
+        wait=[initrd_n_f, initrd_d_f])
+    # TODO Collect all the futures (created in the method)
 
 
 def AddHashFooter(args, key, image_path, partition_name, additional_descriptors=None):
@@ -364,7 +402,8 @@ def MakeVbmetaImage(args, key, vbmeta_img, images=None, chained_partitions=None)
                 part_key = chained_partitions[part_name]
                 avbpubkey = os.path.join(work_dir, part_name + '.avbpubkey')
                 ExtractAvbPubkey(args, part_key, avbpubkey)
-                cmd.extend(['--chain_partition', f'{part_name}:{ril}:{avbpubkey}'])
+                cmd.extend(
+                    ['--chain_partition', f'{part_name}:{ril}:{avbpubkey}'])
 
         if args.signing_args:
             cmd.extend(shlex.split(args.signing_args))
@@ -405,6 +444,7 @@ def GenVbmetaImage(args, image, output, partition_name):
            '--image', image,
            '--output_vbmeta_image', output]
     RunCommand(args, cmd)
+
 
 # dict of (key, file) for re-sign/verification. keys are un-versioned for readability.
 virt_apex_files = {
@@ -453,18 +493,7 @@ def SignVirtApex(args):
                             wait=[vbmeta_f])
 
     # Re-sign kernel. Note kernel's vbmeta contain addition descriptor from ramdisk(s)
-    initrd_normal_hashdesc = tempfile.NamedTemporaryFile(delete=False).name
-    initrd_debug_hashdesc = tempfile.NamedTemporaryFile(delete=False).name
-    initrd_n_f = Async(GenVbmetaImage, args, files['initrd_normal.img'],
-                       initrd_normal_hashdesc, "initrd_normal",
-                       wait=[vbmeta_bc_f] if vbmeta_bc_f is not None else [])
-    initrd_d_f = Async(GenVbmetaImage, args, files['initrd_debuggable.img'],
-                       initrd_debug_hashdesc, "initrd_debug",
-                       wait=[vbmeta_bc_f] if vbmeta_bc_f is not None else [])
-    Async(AddHashFooter, args, key, files['kernel'], partition_name="boot",
-          additional_descriptors=[
-              initrd_normal_hashdesc, initrd_debug_hashdesc],
-          wait=[initrd_n_f, initrd_d_f])
+    Async(AddKernelFooter, args, key, files['kernel'], partition_name="boot")
 
 
 def VerifyVirtApex(args):

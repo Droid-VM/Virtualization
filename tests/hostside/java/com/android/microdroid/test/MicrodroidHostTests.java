@@ -173,7 +173,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
             File virtApexDir,
             File signingKey,
             Map<String, File> keyOverrides,
-            boolean updateBootconfigs) {
+            AlterImageOperation op) {
         File signVirtApex = findTestFile("sign_virt_apex");
 
         RunUtil runUtil = new RunUtil();
@@ -184,9 +184,18 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
         List<String> command = new ArrayList<>();
         command.add(signVirtApex.getAbsolutePath());
-        if (!updateBootconfigs) {
-            command.add("--do_not_update_bootconfigs");
+
+        switch (op) {
+                case RESIGN_ALL:
+                        break;
+                case RESIGN_ALL_SKIP_INITRD_HASH_DESC_UPDATE:
+                        command.add("--do_not_update_initrd_hashdesc");
+                        break;
+               case RESIGN_ALL_SKIP_VBMETA_DIGEST_UPDATE:
+                        command.add("--do_not_update_bootconfigs");
+                        break;
         }
+
         keyOverrides.forEach(
                 (filename, keyFile) ->
                         command.add("--key_override " + filename + "=" + keyFile.getPath()));
@@ -277,7 +286,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
             File key,
             Map<String, File> keyOverrides,
             boolean isProtected,
-            boolean updateBootconfigs)
+            AlterImageOperation op)
             throws Exception {
         CommandRunner android = new CommandRunner(getDevice());
 
@@ -291,7 +300,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         assertWithMessage("Failed to pull " + VIRT_APEX + "etc")
                 .that(getDevice().pullDir(VIRT_APEX + "etc", virtApexEtcDir)).isTrue();
 
-        resignVirtApex(virtApexDir, key, keyOverrides, updateBootconfigs);
+        resignVirtApex(virtApexDir, key, keyOverrides, op);
 
         // Push back re-signed virt APEX contents and updated microdroid.json
         getDevice().pushDir(virtApexDir, TEST_ROOT);
@@ -448,6 +457,17 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         // TODO(b/260994818): Investigate the feasibility of checking DeathReason.
     }
 
+    protected enum AlterImageOperation {
+        RESIGN_ALL,
+        RESIGN_ALL_SKIP_INITRD_HASH_DESC_UPDATE,
+        RESIGN_ALL_SKIP_VBMETA_DIGEST_UPDATE,
+    }
+    
+    private VmInfo runMicrodroidWithAlteredImages(AlterImageOperation op, boolean isProtected) 
+                throws Exception {
+        File key = findTestFile("test.com.android.virt.pem");
+        return runMicrodroidWithResignedImages(key, Map.of(), isProtected, op);
+    }
     @Test
     @CddTest(requirements = {"9.17/C-2-1", "9.17/C-2-2", "9.17/C-2-6"})
     public void protectedVmWithImageSignedWithDifferentKeyRunsPvmfw() throws Exception {
@@ -456,12 +476,10 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         assumeTrue(
                 "Skip if protected VMs are not supported",
                 getAndroidDevice().supportsMicrodroid(protectedVm));
-        File key = findTestFile("test.com.android.virt.pem");
 
         // Act
         VmInfo vmInfo =
-                runMicrodroidWithResignedImages(
-                        key, /*keyOverrides=*/ Map.of(), protectedVm, /*updateBootconfigs=*/ true);
+                runMicrodroidWithAlteredImages(AlterImageOperation.RESIGN_ALL, true);
 
         // Assert
         vmInfo.mProcess.waitFor(5L, TimeUnit.SECONDS);
@@ -476,11 +494,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     @CddTest(requirements = {"9.17/C-2-2", "9.17/C-2-6"})
     public void testBootSucceedsWhenNonProtectedVmStartsWithImagesSignedWithDifferentKey()
             throws Exception {
-        File key = findTestFile("test.com.android.virt.pem");
-        Map<String, File> keyOverrides = Map.of();
-        VmInfo vmInfo =
-                runMicrodroidWithResignedImages(
-                        key, keyOverrides, /*isProtected=*/ false, /*updateBootconfigs=*/ true);
+        VmInfo vmInfo = runMicrodroidWithAlteredImages(AlterImageOperation.RESIGN_ALL, false);
         // Device online means that boot must have succeeded.
         adbConnectToMicrodroid(getDevice(), vmInfo.mCid);
         vmInfo.mProcess.destroy();
@@ -488,13 +502,10 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     @CddTest(requirements = {"9.17/C-2-2", "9.17/C-2-6"})
-    public void testBootFailsWhenVbMetaDigestDoesNotMatchBootconfig() throws Exception {
-        // Sign everything with key1 except vbmeta
-        File key = findTestFile("test.com.android.virt.pem");
-        // To be able to stop it, it should be a daemon.
-        VmInfo vmInfo =
-                runMicrodroidWithResignedImages(
-                        key, Map.of(), /*isProtected=*/ false, /*updateBootconfigs=*/ false);
+    public void bootFails_VbMetaDigestDoesNotMatchBootconfig() throws Exception {
+
+        VmInfo vmInfo = runMicrodroidWithAlteredImages(AlterImageOperation.RESIGN_ALL_SKIP_VBMETA_DIGEST_UPDATE, false);
+
         // Wait so that init can print errors to console (time in cuttlefish >> in real device)
         assertThatEventually(
                 100000,
