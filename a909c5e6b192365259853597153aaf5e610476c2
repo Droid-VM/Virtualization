@@ -16,6 +16,52 @@
       "message": "Hi David, Andrew,\n\nCould you please continue reviewing this cl?",
       "revId": "a909c5e6b192365259853597153aaf5e610476c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ad6ed7b_3acb9af7",
+        "filename": "libs/avb/Android.bp",
+        "patchSetId": 27
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-30T10:54:40Z",
+      "side": 1,
+      "message": "nit: just import everything, or at least `AVB.*`, we shouldn\u0027t have to modify these every time we want to use a new constant",
+      "range": {
+        "startLine": 17,
+        "startChar": 25,
+        "endLine": 17,
+        "endChar": 32
+      },
+      "revId": "a909c5e6b192365259853597153aaf5e610476c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7e39729_e6ac3f65",
+        "filename": "pvmfw/avb/src/descriptor.rs",
+        "patchSetId": 27
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-30T10:54:40Z",
+      "side": 1,
+      "message": "I find this name confusing - it reads to me like this is the length of the appended data, but it\u0027s actually the size of the whole dynamic data structure. Could we use a better name and add a comment to avoid misuse? FDT calls this `total_size`, or we could stick with Rust\u0027s `len`.",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 48
+      },
+      "revId": "a909c5e6b192365259853597153aaf5e610476c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
