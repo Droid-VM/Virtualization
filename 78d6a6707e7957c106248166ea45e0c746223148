@@ -16,6 +16,75 @@
       "message": "Hi David,\n\nCould you please take another look at this cl?",
       "revId": "78d6a6707e7957c106248166ea45e0c746223148",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec9ab357_043e1f88",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-30T18:52:39Z",
+      "side": 1,
+      "message": "I still think this is a bad practice. This is equivalent to:\n```\nstruct Digest([u8; DIGEST_SIZE]);\nstruct VerifiedData {\n  kernel_digest: Digest,\n  initrd_digest: Digest,\n}\n```\nbut instead of accessing the individual fields, you use offsets everywhere, ie. `digests[..DIGEST_SIZE]` and `digests[DIGEST_SIZE..]`. It will get even more confusing once there is a third or fourth entry. \n\nI get that you\u0027re doing this because you can then hash the whole array in one go, but you could instead update your \"digester\" twice:\n```\nlet mut digester \u003d sha::Sha256::new();\ndigester.update(verified_data.kernel_digest);\ndigester.update(verified_data.initrd_digest);\ndigester.finish()\n```\nThis has the same semantics and does not allocate any more memory. Why not do that?",
+      "range": {
+        "startLine": 31,
+        "startChar": 17,
+        "endLine": 31,
+        "endChar": 39
+      },
+      "revId": "78d6a6707e7957c106248166ea45e0c746223148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbf5e287_760a112a",
+        "filename": "pvmfw/avb/tests/utils.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-30T18:52:39Z",
+      "side": 1,
+      "message": "How about you define this as:\n```\npub fn hash(inputs: \u0026[\u0026[u8]]) -\u003e [u8; DIGEST_SIZE] {\n  let mut digest \u003d sha::Sha256::new();\n  inputs.iter().for_each(|in| digest.update(in));\n  digest.finish()\n}\n```\nand then you can use it more broadly, eg. lines 126-129 above become:\n```\nlet initrd_digest \u003d hash(\u0026[initrd, hash(\u0026[initrd_salt])]);\nassert_eq!(initrd_digest, verified_data.initrd_digest, \"...\");\n```",
+      "range": {
+        "startLine": 136,
+        "startChar": 7,
+        "endLine": 136,
+        "endChar": 28
+      },
+      "revId": "78d6a6707e7957c106248166ea45e0c746223148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a40247d3_bc5b274b",
+        "filename": "pvmfw/avb/tests/utils.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-30T18:52:39Z",
+      "side": 1,
+      "message": "`DIGEST_SIZE`, or better still - why not define `struct Digest([u8; DIGEST_SIZE])`?",
+      "range": {
+        "startLine": 136,
+        "startChar": 63,
+        "endLine": 136,
+        "endChar": 65
+      },
+      "revId": "78d6a6707e7957c106248166ea45e0c746223148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
