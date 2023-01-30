@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "befd31ef_3dc87171",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-01-30T08:55:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90951a1a_c1adc59f",
+      "range": {
+        "startLine": 67,
+        "startChar": 5,
+        "endLine": 67,
+        "endChar": 6
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d26f640_b57bdf11",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-26T10:24:32Z",
       "side": 1,
       "message": "nit: `SMCCC_TRNG_*`?",
+      "range": {
+        "startLine": 68,
+        "startChar": 6,
+        "endLine": 68,
+        "endChar": 21
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18b362cc_74931336",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-01-30T08:55:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d26f640_b57bdf11",
       "range": {
         "startLine": 68,
         "startChar": 6,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1252983_0eef6728",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-01-30T08:55:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "905fd637_acfa337f",
+      "range": {
+        "startLine": 70,
+        "startChar": 6,
+        "endLine": 70,
+        "endChar": 17
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b69cfb7_46ce7782",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-01-26T10:24:32Z",
       "side": 1,
       "message": "If randomization fails, we should abort the boot by issuing a `PSCI_SYSTEM_RESET`. If that also fails, we hang (`b .`).",
+      "range": {
+        "startLine": 78,
+        "startChar": 7,
+        "endLine": 78,
+        "endChar": 74
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffe1a773_7061bd4d",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-01-30T08:55:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b69cfb7_46ce7782",
       "range": {
         "startLine": 78,
         "startChar": 7,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d10ef248_a7e67163",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-01-30T08:55:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d952e85_3da13bd4",
+      "range": {
+        "startLine": 172,
+        "startChar": 1,
+        "endLine": 172,
+        "endChar": 3
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d97c9f5b_f7c17bcf",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-01-26T10:24:32Z",
       "side": 1,
       "message": "nit: to avoid any access to memory and/or relying on the stack, you could also store those in `x20`-`x28`.",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 22
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00639eb9_29d2e663",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-01-30T08:55:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d97c9f5b_f7c17bcf",
       "range": {
         "startLine": 186,
         "startChar": 0,
@@ -164,6 +308,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "236b1072_ded744c7",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-01-30T08:55:36Z",
+      "side": 1,
+      "message": "Both SMC32 and SMC64 calls use `w0` for the first parameter (function ID). So it makes no difference for the call, but allows us to use the `mov_i` macro to write the function ID to the register. The same pattern is already present in `reset_or_hang` macro in `common.h`.",
+      "parentUuid": "204e77b7_35f0b94c",
+      "range": {
+        "startLine": 191,
+        "startChar": 7,
+        "endLine": 191,
+        "endChar": 9
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2573af5a_2a31d1a3",
         "filename": "vmbase/entry.S",
         "patchSetId": 3
@@ -175,6 +343,30 @@
       "writtenOn": "2023-01-26T10:24:32Z",
       "side": 1,
       "message": "nit: WDYT of defining the `{hvc,smc}{32,64}` macros to streamline this code?",
+      "range": {
+        "startLine": 191,
+        "startChar": 1,
+        "endLine": 192,
+        "endChar": 7
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9609781d_ab9939fd",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-01-30T08:55:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2573af5a_2a31d1a3",
       "range": {
         "startLine": 191,
         "startChar": 1,
@@ -208,6 +400,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7024aaa0_6755df66",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-01-30T08:55:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e3f4cee_fb83ef4b",
+      "range": {
+        "startLine": 194,
+        "startChar": 1,
+        "endLine": 194,
+        "endChar": 4
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08afe10d_594f31e2",
@@ -221,6 +437,30 @@
       "writtenOn": "2023-01-26T10:24:32Z",
       "side": 1,
       "message": "Define `.LSMCCC_VERSION_1_1` and `cmp` the return value of the SMC against it.\n\nBTW, wouldn\u0027t this code accept v0.1?",
+      "range": {
+        "startLine": 196,
+        "startChar": 9,
+        "endLine": 196,
+        "endChar": 11
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8e62536_70c06dc2",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-01-30T08:55:36Z",
+      "side": 1,
+      "message": "By itself - yes. However, the function did not exist in earlier versions, so the return value in `w0` would be negative. I have updated it according to your proposition.",
+      "parentUuid": "08afe10d_594f31e2",
       "range": {
         "startLine": 196,
         "startChar": 9,
@@ -256,6 +496,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f66cdddc_d3254bcf",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-01-30T08:55:36Z",
+      "side": 1,
+      "message": "Using `smc` instead of `hvc` breaks tests.",
+      "parentUuid": "cf4e9982_0f488fc5",
+      "range": {
+        "startLine": 201,
+        "startChar": 1,
+        "endLine": 201,
+        "endChar": 4
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29e40c8a_f6a44d49",
         "filename": "vmbase/entry.S",
         "patchSetId": 3
@@ -267,6 +531,30 @@
       "writtenOn": "2023-01-26T10:24:32Z",
       "side": 1,
       "message": "Nice use of `ubfx` but a `cmp` with `.LSMCCC_TRNG_VERSION_1_0` would be clearer and more robust, IMO.",
+      "range": {
+        "startLine": 204,
+        "startChar": 1,
+        "endLine": 205,
+        "endChar": 11
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "febbc3b6_adbcd03f",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-01-30T08:55:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29e40c8a_f6a44d49",
       "range": {
         "startLine": 204,
         "startChar": 1,
