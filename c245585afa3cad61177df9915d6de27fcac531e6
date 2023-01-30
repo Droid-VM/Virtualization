@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfd843fd_6816cc16",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-30T10:27:57Z",
+      "side": 1,
+      "message": "Sorry, I don\u0027t think this trick works here - if 2 calls are made nearly simultaneously then one of them will return more or less instantly, before tombstones are enabled. And I think the contract should be that on return, crash dumps are enabled.\n\nSo I think you have to put the work inside a lazy static, or maybe have a Mutex\u003cbool\u003e a bit like PAYLOAD_CONNECTION.\n\nnotifyReady can get away with this because it\u0027s async anyway.",
+      "range": {
+        "startLine": 89,
+        "startChar": 8,
+        "endLine": 89,
+        "endChar": 40
+      },
+      "revId": "c245585afa3cad61177df9915d6de27fcac531e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
