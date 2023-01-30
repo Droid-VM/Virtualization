@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f57314ba_d928fb5b",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-30T06:47:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "047f8654_702b1cb9",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 14
+      },
+      "revId": "5a5ef675d6e5372b599ac91a1e521696dcb1b945",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "566e0698_98728969",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea4138c0_cb37e70d",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-30T06:47:47Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to provide a way to \"disable\" once enabled. Changed the name to `enableTombstoneExport`.",
+      "parentUuid": "566e0698_98728969",
+      "range": {
+        "startLine": 40,
+        "startChar": 35,
+        "endLine": 40,
+        "endChar": 39
+      },
+      "revId": "5a5ef675d6e5372b599ac91a1e521696dcb1b945",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4df974ff_fb86161a",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-01-26T14:19:27Z",
       "side": 1,
       "message": "What happens if this function is called more than once?",
+      "range": {
+        "startLine": 121,
+        "startChar": 18,
+        "endLine": 121,
+        "endChar": 47
+      },
+      "revId": "5a5ef675d6e5372b599ac91a1e521696dcb1b945",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61dc2555_ec231723",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-01-30T06:47:47Z",
+      "side": 1,
+      "message": "This function should be idempotent. I amended the comment.",
+      "parentUuid": "4df974ff_fb86161a",
       "range": {
         "startLine": 121,
         "startChar": 18,
