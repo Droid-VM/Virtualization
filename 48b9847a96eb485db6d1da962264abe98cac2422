@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fce3804_453c7386",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-30T10:07:38Z",
+      "side": 1,
+      "message": "... crash dumps will ...",
+      "range": {
+        "startLine": 34,
+        "startChar": 48,
+        "endLine": 34,
+        "endChar": 58
+      },
+      "revId": "48b9847a96eb485db6d1da962264abe98cac2422",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0817185e_7718b1a5",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-30T10:07:38Z",
+      "side": 1,
+      "message": "I don\u0027t think you need to say this (we don\u0027t elsewhere). From the caller\u0027s point of view it is infallible. Also, \"panic\" isn\u0027t a C term.\n\nUnless there\u0027s some reasonable case where it could fail, and the caller could do something about it?",
+      "range": {
+        "startLine": 36,
+        "startChar": 3,
+        "endLine": 36,
+        "endChar": 35
+      },
+      "revId": "48b9847a96eb485db6d1da962264abe98cac2422",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae1c60c5_b9bcb10e",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-30T10:07:38Z",
+      "side": 1,
+      "message": "Nit: Move this before the helper functions?",
+      "range": {
+        "startLine": 121,
+        "startChar": 18,
+        "endLine": 121,
+        "endChar": 50
+      },
+      "revId": "48b9847a96eb485db6d1da962264abe98cac2422",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

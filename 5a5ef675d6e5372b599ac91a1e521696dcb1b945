@@ -140,6 +140,30 @@
       },
       "revId": "5a5ef675d6e5372b599ac91a1e521696dcb1b945",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a39d07c_5b05758e",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-30T10:07:38Z",
+      "side": 1,
+      "message": "Maybe we should add a test that calls it twice. \n\nOn a second or subsequent call we still do the same work, which seems a waste, and prone to failure. (And I suspect bad things happen if 2 threads call it at once.)\n\nMaybe use something like a lazy static to ensure that it happens at most once, but that multiple simultaneous calls all block until it is complete?\n\n(I cheated with notifyReady, where there\u0027s no real need to block since the notification is inherently async.)",
+      "parentUuid": "61dc2555_ec231723",
+      "range": {
+        "startLine": 121,
+        "startChar": 18,
+        "endLine": 121,
+        "endChar": 47
+      },
+      "revId": "5a5ef675d6e5372b599ac91a1e521696dcb1b945",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
