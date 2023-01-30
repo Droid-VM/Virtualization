@@ -22,6 +22,30 @@
       },
       "revId": "ff0005fe67498b79a0f284b5b4f8abb477aef40f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8170c2cf_404507b4",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-30T16:52:52Z",
+      "side": 1,
+      "message": "Oooh, nice spot. Or even checked_next_multiple_of.\n\nBut sadly both are currently experimental, which we\u0027re not allowed to use.",
+      "parentUuid": "be3a3f11_3b49d01d",
+      "range": {
+        "startLine": 472,
+        "startChar": 15,
+        "endLine": 472,
+        "endChar": 17
+      },
+      "revId": "ff0005fe67498b79a0f284b5b4f8abb477aef40f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
