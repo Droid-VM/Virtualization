@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf5f12c5_0084db2f",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-31T17:01:15Z",
+      "side": 1,
+      "message": "If we don\u0027t want to give payload an ability to disable the tombstone export, then won\u0027t it make more sense to provide this API on the java layer? I.e. in the VirtualMachineConfig?",
+      "range": {
+        "startLine": 44,
+        "startChar": 5,
+        "endLine": 44,
+        "endChar": 37
+      },
+      "revId": "e603d6bdd992856867d2e73e79d90476ad1799ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1210b83_91331b3c",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-01-31T17:01:15Z",
+      "side": 1,
+      "message": "This sounds a tad too extreme for me. The payload can still execute correctly even if the tombstones are not enabled, should we panic?",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 21
+      },
+      "revId": "e603d6bdd992856867d2e73e79d90476ad1799ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c62cdf56_ec24198e",
