@@ -20,6 +20,7 @@ use dice::bcc::format_config_descriptor;
 use dice::bcc::Handover;
 use dice::hash;
 use dice::ConfigType;
+use dice::DiceMode;
 use dice::InputValues;
 
 /// Derive the VM-specific secrets and certificate through DICE.
@@ -32,7 +33,7 @@ pub fn derive_next_bcc(
 ) -> dice::Result<usize> {
     let code_hash = hash(code)?;
     let auth_hash = hash(authority)?;
-    let mode = if debug_mode { dice::Mode::Debug } else { dice::Mode::Normal };
+    let mode = if debug_mode { DiceMode::kDiceModeDebug } else { DiceMode::kDiceModeNormal };
     let component_name = CStr::from_bytes_with_nul(b"vm_entry\0").unwrap();
     let mut config_descriptor_buffer = [0; 128];
     let config_descriptor_size = format_config_descriptor(
