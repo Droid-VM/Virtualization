@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "654a9d2d_3baba283",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-31T17:41:48Z",
+      "side": 1,
+      "message": "AFAICT, these would result in different BCCs (so attestation, if it didn\u0027t ignore the descriptors, could tell the different between the configurations) but identical CDIs if `hash(kernel | initrd_normal) \u003d\u003d hash(kernel | initrd_vendor)`.\n\n\u003e re initrd: Unclear, but if they needed to be signed by different entities and updated independently, separate partitions would be necessary.\n\nThat particular case should affect the CDIs by having different authority inputs, though.",
+      "parentUuid": "ad3f7174_1b1739e1",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 84
+      },
+      "revId": "352e1cfe7ff73ab1b5c172a6345844b3725eb53f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "575629d7_e7f327c7",
         "filename": "pvmfw/src/dice.rs",
         "patchSetId": 10
