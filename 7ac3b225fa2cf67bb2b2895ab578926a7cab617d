@@ -138,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7fd79ce9_c11e0748",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-31T13:51:29Z",
+      "side": 1,
+      "message": "This isn\u0027t a big deal but the point was to return an error and centralize logging at the call site (as opposed to logging across the code base).\n\n `DebugPolicyError` would wrap a `FdtError` and its `Display` would\n```\nDebugPolicyError(e) \u003d\u003e write!(f, \"Error in Debug Policy DT: {e}\")\n```\n\nYes, this loses part of the context but makes the code leaner; WDYT? Happy to drop this recommendation, if you like.",
+      "parentUuid": "c810d131_20e80b5c",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 76,
+        "endChar": 36
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d83bd936_0dac681e",
         "filename": "pvmfw/src/debug_policy.rs",
         "patchSetId": 5
@@ -799,6 +823,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "908643e8_8a523579",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-31T13:51:29Z",
+      "side": 1,
+      "message": "As mentioned in my other comment, the point is to avoid sprinkling logging calls everywhere by centralizing it at a higher-level call site. Implementing `fmt::Display` allows us to write logging code that\u0027s flexible e.g.\n```\n.map_err(|e| {\n    error!(\"Unexpected error: {e}\");\n    TopLevelError::E\n})?;\n```\nwhere `e` can be any of the variants its `enum` allows.",
+      "parentUuid": "6d0b4621_3e713ab8",
+      "range": {
+        "startLine": 258,
+        "startChar": 69,
+        "endLine": 258,
+        "endChar": 76
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d3325d20_97caaf8c",
         "filename": "pvmfw/src/entry.rs",
         "patchSetId": 5
@@ -834,6 +882,30 @@
       "side": 1,
       "message": "Rebooting is WAI in this CL.\n\nI\u0027d like to add preventing rebooting CL together with test. WDYT?",
       "parentUuid": "d3325d20_97caaf8c",
+      "range": {
+        "startLine": 262,
+        "startChar": 10,
+        "endLine": 262,
+        "endChar": 11
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "426fbd09_f30690f6",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-31T13:51:29Z",
+      "side": 1,
+      "message": "So once we merge this, there will be a risk of breaking some devices, which we\u0027ll address later, right? Why do it in 2 steps and take that risk instead of never being in a state of the pvmfw repo where failing to apply the DP DTBO reboots the device?",
+      "parentUuid": "7db5cd1b_3091768d",
       "range": {
         "startLine": 262,
         "startChar": 10,
