@@ -146,6 +146,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39f32845_c8084edf",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-01-31T18:43:19Z",
+      "side": 1,
+      "message": "Okay, so code_descriptor is not an input into DICE, as it seems. So please ignore what I said on that.\n\nAlice, we all agree to go with the zeroing that you said, so let\u0027s just do that:\n * kernel, Some(initrd_normal), None \u003d | kernel | initrd | 00\n * kernel, None, Some(initrd_vendor) \u003d | kernel | 00 | initrd",
+      "parentUuid": "654a9d2d_3baba283",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 84
+      },
+      "revId": "352e1cfe7ff73ab1b5c172a6345844b3725eb53f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "575629d7_e7f327c7",
         "filename": "pvmfw/src/dice.rs",
         "patchSetId": 10
