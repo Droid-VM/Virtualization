@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f840c12_ee78678f",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-31T14:40:43Z",
+      "side": 1,
+      "message": "Wouldn\u0027t `initrd_vendor` be loaded from disk by the kernel? If not and it\u0027s preloaded by the VMM, could it be packaged and signed at build time and become part of what we now consider `initrd`?\n\nIn general, I wouldn\u0027t include information about what is missing in the DICE inputs. So, for the code input, just hash _everything_ that is relevant to the next stage (and nothing more). Once we start using BCC descriptors, we should start recording which \"partitions\" were actually seen by pvmfw, to make it easy to parse.",
+      "parentUuid": "a842dbf1_0407ab55",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 84
+      },
+      "revId": "352e1cfe7ff73ab1b5c172a6345844b3725eb53f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "575629d7_e7f327c7",
         "filename": "pvmfw/src/dice.rs",
         "patchSetId": 10
