@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a8d1b6f_e74f59a9",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-31T10:41:23Z",
+      "side": 1,
+      "message": "Done. Actually I\u0027m doing this only because I want to pass this type to DICE in pvmfw. `dice::hash` takes one input and hash it directly instead of updating several chunks like this.",
+      "parentUuid": "ec9ab357_043e1f88",
+      "range": {
+        "startLine": 31,
+        "startChar": 17,
+        "endLine": 31,
+        "endChar": 39
+      },
+      "revId": "78d6a6707e7957c106248166ea45e0c746223148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbf5e287_760a112a",
@@ -82,6 +106,54 @@
         "startChar": 63,
         "endLine": 136,
         "endChar": 65
+      },
+      "revId": "78d6a6707e7957c106248166ea45e0c746223148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "644550f3_76f5de04",
+        "filename": "pvmfw/avb/tests/utils.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-31T10:41:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a40247d3_bc5b274b",
+      "range": {
+        "startLine": 136,
+        "startChar": 63,
+        "endLine": 136,
+        "endChar": 65
+      },
+      "revId": "78d6a6707e7957c106248166ea45e0c746223148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a897dfd_d6422e1b",
+        "filename": "pvmfw/avb/tests/utils.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-31T10:41:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbf5e287_760a112a",
+      "range": {
+        "startLine": 136,
+        "startChar": 7,
+        "endLine": 136,
+        "endChar": 28
       },
       "revId": "78d6a6707e7957c106248166ea45e0c746223148",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
