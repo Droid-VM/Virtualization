@@ -46,6 +46,30 @@
       },
       "revId": "5ba3f4f051587d0b791f710b0e01c6141faa121a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7dab24b_662f9d45",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2023-01-31T17:27:03Z",
+      "side": 1,
+      "message": "We should not be testing exact log messages that init writes out, without at least sticking a reference above the logging code that it is being depended on.",
+      "parentUuid": "85b216b9_bbdbf677",
+      "range": {
+        "startLine": 492,
+        "startChar": 32,
+        "endLine": 492,
+        "endChar": 80
+      },
+      "revId": "5ba3f4f051587d0b791f710b0e01c6141faa121a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
