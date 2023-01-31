@@ -160,6 +160,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c67deeca_aad60b22",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-31T19:44:30Z",
+      "side": 1,
+      "message": "Talked offline and agreed to use Display and prefer to log outside as much as possible.",
+      "parentUuid": "7fd79ce9_c11e0748",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 76,
+        "endChar": 36
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d83bd936_0dac681e",
@@ -845,6 +869,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cdff295_ea838329",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-31T19:44:30Z",
+      "side": 1,
+      "message": "Talked offline and agreed to use Display and prefer to log outside as much as possible.",
+      "parentUuid": "908643e8_8a523579",
+      "range": {
+        "startLine": 258,
+        "startChar": 69,
+        "endLine": 258,
+        "endChar": 76
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3325d20_97caaf8c",
@@ -906,6 +954,30 @@
       "side": 1,
       "message": "So once we merge this, there will be a risk of breaking some devices, which we\u0027ll address later, right? Why do it in 2 steps and take that risk instead of never being in a state of the pvmfw repo where failing to apply the DP DTBO reboots the device?",
       "parentUuid": "7db5cd1b_3091768d",
+      "range": {
+        "startLine": 262,
+        "startChar": 10,
+        "endLine": 262,
+        "endChar": 11
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64a5b59b_d920e6b1",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-31T19:44:30Z",
+      "side": 1,
+      "message": "Talked offline, and agreed to work on recovery later.\n\nNote for later reference: Jaewan will work on recovery + test as the next priority in next CL.",
+      "parentUuid": "426fbd09_f30690f6",
       "range": {
         "startLine": 262,
         "startChar": 10,
