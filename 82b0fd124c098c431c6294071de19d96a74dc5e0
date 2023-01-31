@@ -69,6 +69,24 @@
       "parentUuid": "966ceb9b_b0a85620",
       "revId": "82b0fd124c098c431c6294071de19d96a74dc5e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41e6549b_bb6ad334",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-01-31T15:04:09Z",
+      "side": 1,
+      "message": "What do you mean by unexpected behavior? Looks like the example you mentioned is just how we implemented AvbOps, like [extern \"C\" fn read_is_device_unlocked(..) -\u003e AvbIOResult](https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/pvmfw/avb/src/ops.rs;l\u003d124;drc\u003d75d0563476ed6fa33238e10c22e0eac262b84ef4) where `AvbIOResult` is a generated enum.\n\nCurrently we have two versions of such code for several enums (DiceMode, DiceResult, DiceConfig). In the other lib (aosp/2411698), some names also got tweaked a bit. It\u0027s better to have just one type so that they won\u0027t diverge even more. I prefer not to create a new type / conversion for everything and copy-paste them in two places just because there\u0027s a prefix `k` in front of enum name.\n\nIn the long run, maybe we can extract a nostd version of the other lib `diced/open_dice_cbor` and re-used it here after simplifying both code.",
+      "parentUuid": "7bd634a4_1f0de351",
+      "revId": "82b0fd124c098c431c6294071de19d96a74dc5e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
