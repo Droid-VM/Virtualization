@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32796776_88e86a1f",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-31T16:23:14Z",
+      "side": 1,
+      "message": "Now it\u0027s failing in TH because the original CL hasn\u0027t reach git_master yet :-(\n\nIdeally we\u0027d replace this with a regex check that would match both, but Hamcrest isn\u0027t up to that. Really we should use Truth here, but that would be a bigger change.",
+      "range": {
+        "startLine": 492,
+        "startChar": 32,
+        "endLine": 492,
+        "endChar": 80
+      },
+      "revId": "5ba3f4f051587d0b791f710b0e01c6141faa121a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
