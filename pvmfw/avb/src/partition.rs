@@ -20,16 +20,10 @@ use core::ffi::{c_char, CStr};
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub(crate) enum PartitionName {
+    #[default]
     Kernel,
     InitrdNormal,
     InitrdDebug,
-}
-
-/// This is needed to build the default `HashDescriptor`.
-impl Default for PartitionName {
-    fn default() -> Self {
-        Self::Kernel
-    }
 }
 
 impl PartitionName {
