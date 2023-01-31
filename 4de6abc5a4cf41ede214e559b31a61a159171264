@@ -330,6 +330,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e6c50db_4fa29f90",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-31T10:39:53Z",
+      "side": 1,
+      "message": "Yes, exactly; the FID is always a 32-bit value, even on 64-bit systems and using `w0` allows the assembler to catch a potential error. In this case, `mov_i` is a bit overkill because it\u0027ll result in `movk w0, 0` but I\u0027ll resolve to avoid spending more time on optimizing out 2 instructions.\n\n\u003e The same pattern is already present in `reset_or_hang` macro in `common.h`.\n\nI wouldn\u0027t trust the guy that wrote that :^)",
+      "parentUuid": "236b1072_ded744c7",
+      "range": {
+        "startLine": 191,
+        "startChar": 7,
+        "endLine": 191,
+        "endChar": 9
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2573af5a_2a31d1a3",
@@ -518,6 +542,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bebd011e_f96d5d8d",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-31T10:39:53Z",
+      "side": 1,
+      "message": "That\u0027s because the `smc` is rejected by the hypervisor, making the call fail, which reboots the pVM, making the test fail.\n\nLet\u0027s ignore §1.3 and stick to `hvc`s ...",
+      "parentUuid": "f66cdddc_d3254bcf",
+      "range": {
+        "startLine": 201,
+        "startChar": 1,
+        "endLine": 201,
+        "endChar": 4
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29e40c8a_f6a44d49",
@@ -601,6 +649,30 @@
       "writtenOn": "2023-01-26T10:24:32Z",
       "side": 1,
       "message": "Can you check if this is using the relocated address (see lines 149-157) over the original? I\u0027d like to avoid any write to the original image to allow the hypervisor to optimize pvmfw loading with CoW so this (and the compiler) should use the relocated version. I wonder if we could even just make `__stack_chk_guard` (and the pseudo-TLS) part of the BSS, instead?",
+      "range": {
+        "startLine": 223,
+        "startChar": 11,
+        "endLine": 223,
+        "endChar": 28
+      },
+      "revId": "4de6abc5a4cf41ede214e559b31a61a159171264",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76ace5ed_4b163f5a",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-31T10:39:53Z",
+      "side": 1,
+      "message": "Let\u0027s discuss this offline; also, not a blocker for this CL.",
+      "parentUuid": "47d26291_2b592210",
       "range": {
         "startLine": 223,
         "startChar": 11,
