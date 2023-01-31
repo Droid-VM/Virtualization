@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c62cdf56_ec24198e",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-31T11:05:17Z",
+      "side": 1,
+      "message": "It never occurred to me you could put statics (lazy and otherwise) inside a function. Neat.\n\n(My brain obviously poisoned by C++.)",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 54
+      },
+      "revId": "e603d6bdd992856867d2e73e79d90476ad1799ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63ac5448_db6e2f74",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-31T11:05:17Z",
+      "side": 1,
+      "message": "Nit: this could just be\n```\ntry_ramdump_if_supported()\n```",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 10
+      },
+      "revId": "e603d6bdd992856867d2e73e79d90476ad1799ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
