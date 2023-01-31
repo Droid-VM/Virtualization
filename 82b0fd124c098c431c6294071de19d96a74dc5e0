@@ -51,6 +51,24 @@
       "parentUuid": "335f587a_5a314a1b",
       "revId": "82b0fd124c098c431c6294071de19d96a74dc5e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bd634a4_1f0de351",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-31T14:28:00Z",
+      "side": 1,
+      "message": "BTW, on the topic of using `bindgen`\u0027s `--default-enum-style rust`, wouldn\u0027t this C code:\n```\nenum E {\n  E_A,\n  E_B,\n};\n\nenum E foo() {\n    return 5;\n}\n```\ncalled from Rust (\"`extern \"C\" foo() -\u003e E`\") cause UB?\n\nOTOH, the boilerplate code you mention (which, although verbose, isn\u0027t typically very hard to maintain) would implement `TryFrom\u003cDiceMode\u003e` and allow Rust to detect and handle unexpected values, right? This is more than just renaming some constants.\n\nWDYT?",
+      "parentUuid": "966ceb9b_b0a85620",
+      "revId": "82b0fd124c098c431c6294071de19d96a74dc5e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
