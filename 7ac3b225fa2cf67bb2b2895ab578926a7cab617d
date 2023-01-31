@@ -254,6 +254,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "432cf8a3_a439c34b",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-31T12:54:19Z",
+      "side": 1,
+      "message": "Done for here and other places.",
+      "parentUuid": "a8a6fda2_689bab51",
+      "range": {
+        "startLine": 80,
+        "startChar": 46,
+        "endLine": 80,
+        "endChar": 89
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ca8ae3e_d79900b3",
@@ -466,6 +490,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "937bbe79_a2cd0ea8",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-31T12:54:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac287a58_2bdba12b",
+      "range": {
+        "startLine": 149,
+        "startChar": 16,
+        "endLine": 149,
+        "endChar": 21
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f1141a0_3433506e",
@@ -527,6 +575,30 @@
       "side": 1,
       "message": "I think debug can also be lifted to the caller side because the current debug statements are NOT for debugging this function itself.",
       "parentUuid": "ef8342f8_a122b745",
+      "range": {
+        "startLine": 153,
+        "startChar": 16,
+        "endLine": 153,
+        "endChar": 85
+      },
+      "revId": "7ac3b225fa2cf67bb2b2895ab578926a7cab617d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11e22907_9a492f04",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-01-31T12:54:19Z",
+      "side": 1,
+      "message": "Removed verbose log here, because caller also leave logs.",
+      "parentUuid": "af2f74f2_5b52b270",
       "range": {
         "startLine": 153,
         "startChar": 16,
