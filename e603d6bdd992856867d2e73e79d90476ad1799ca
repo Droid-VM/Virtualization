@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "389e01d4_f1efdfdd",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-01-31T17:18:37Z",
+      "side": 1,
+      "message": "Sorry, very late comment: we should explain the downsides of enabling tombstones for non-debuggable - there\u0027s a chance the tombstone could leak something sensitive from inside the protected VM, thereby breaching the protection.\n\n(Because really most VMs shouldn\u0027t do this; CompOS does because its secrets are never held anywhere that might be covered and most of what it does can be public.)",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 29
+      },
+      "revId": "e603d6bdd992856867d2e73e79d90476ad1799ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bf5f12c5_0084db2f",
         "filename": "vm_payload/include/vm_payload.h",
         "patchSetId": 5
