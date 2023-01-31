@@ -104,6 +104,24 @@
       "parentUuid": "7bd634a4_1f0de351",
       "revId": "82b0fd124c098c431c6294071de19d96a74dc5e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9af0a3dd_ddfd5631",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-01-31T17:59:38Z",
+      "side": 1,
+      "message": "I mean this (from the [docs](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)):\n\n\u003e Rust code is incorrect if it exhibits any of the behaviors in the following list.\n\u003e [...]\n\u003e It is the programmer\u0027s responsibility when writing unsafe code to ensure that any safe code interacting with the unsafe code cannot trigger these behaviors.\n\u003e - Producing an invalid value [...] \"Producing\" a value happens any time a value is assigned to or read from a place, passed to a function/primitive operation or returned from a function/primitive operation. The following values are invalid (at their respective type):\n\u003e    - A discriminant in an `enum` not included in the type definition.\n\nThis isn\u0027t about `std`-vs-`no_std` but about safe Rust `enum`s vs unsafe C `enum`s.\n\nYes, we already blindly trust the C code from Rust by using those other enums but my point is that we shouldn\u0027t dismiss writing Rust wrappers for C `enum`s as just adhering to naming conventions; implementing `TryFrom` makes the code actually safe.\n\nI\u0027m going to +2 this CL but note that not \"owning\" those wrappers has already limited us a few times (e.g. not being able to `impl` the traits we wanted) and is now making us violate naming conventions, all the while hiding UB ... I\u0027m simply worried that we keep on adding shortcut after shortcut to our code base to cater to those `bindgen`-generated enums instead of making them our own once and for all, which I wish we had done in the first place.",
+      "parentUuid": "41e6549b_bb6ad334",
+      "revId": "82b0fd124c098c431c6294071de19d96a74dc5e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
