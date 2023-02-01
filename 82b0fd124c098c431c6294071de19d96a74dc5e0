@@ -122,6 +122,24 @@
       "parentUuid": "41e6549b_bb6ad334",
       "revId": "82b0fd124c098c431c6294071de19d96a74dc5e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "299f29c4_1948da65",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-02-01T08:41:01Z",
+      "side": 1,
+      "message": "Thanks for the pointer. I have a few questions:\n\nIs it a risk that rust bindgen can produce a discriminant in an enum not included in the type definition in C code?\n\nWhy implementing `TryFrom { DiceMode::kDiceModeDebug \u003d\u003e Mode::DiceModeDebug ... } makes the code safe?\n\n\u003e already limited us a few times (e.g. not being able to impl the traits we wanted) \n\nThis limitation applies to all the imported libraries. It\u0027s not just for bindgen.",
+      "parentUuid": "9af0a3dd_ddfd5631",
+      "revId": "82b0fd124c098c431c6294071de19d96a74dc5e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
