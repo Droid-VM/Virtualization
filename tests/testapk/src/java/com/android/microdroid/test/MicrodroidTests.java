@@ -1458,6 +1458,33 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(checkVmOutputIsRedirectedToLogcat(false)).isFalse();
     }
 
+    @Test
+    public void testStartVmWithPayloadOfAnotherApp() throws Exception {
+        assumeSupportedKernel();
+
+        Context ctx = ApplicationProvider.getApplicationContext();
+        Context otherAppCtrx = ctx.createPackageContext("com.android.microdroid.test_helper", 0);
+
+        VirtualMachineConfig config =
+                new VirtualMachineConfig.Builder(otherAppCtrx)
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setProtectedVm(false)
+                        .setPayloadBinaryName("MicrodroidTestHelperAppNativeLib.so")
+                        .build();
+
+        try (VirtualMachine vm = forceCreateNewVirtualMachine("vm_from_another_app", config)) {
+            TestResults results =
+                    runVmTestService(
+                            vm,
+                            (ts, tr) -> {
+                                tr.mAddInteger = ts.addInteger(101, 303);
+                            });
+            assertThat(results.mAddInteger).isEqualTo(404);
+        }
+
+        ctx.getSystemService(VirtualMachineManager.class).delete("vm_from_another_app");
+    }
+
     private void assertFileContentsAreEqualInTwoVms(String fileName, String vmName1, String vmName2)
             throws IOException {
         File file1 = getVmFile(vmName1, fileName);

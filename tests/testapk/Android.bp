@@ -32,6 +32,47 @@ android_test {
     // We only support 64-bit ABI, but CTS demands all APKs to be multi-ABI.
     compile_multilib: "both",
     min_sdk_version: "33",
+    required: ["MicrodroidTestHelperApp"],
+}
+
+// Helper app to verify that we can create a VM using others app payload.
+android_test_helper_app {
+    name: "MicrodroidTestHelperApp",
+    test_suites: [
+        "cts",
+        "general-tests",
+    ],
+    sdk_version: "test_current",
+    jni_libs: [
+        "MicrodroidTestHelperAppNativeLib",
+    ],
+    jni_uses_platform_apis: true,
+    use_embedded_native_libs: true,
+    // We only support 64-bit ABI, but CTS demands all APKs to be multi-ABI.
+    compile_multilib: "both",
+    min_sdk_version: "UpsideDownCake",
+    manifest: "AndroidManifest_MicrodroidTestHelperApp.xml",
+    asset_dirs: [],
+}
+
+cc_library_shared {
+    name: "MicrodroidTestHelperAppNativeLib",
+    srcs: ["src/native/testbinary.cpp"],
+    stl: "libc++_static",
+    header_libs: ["vm_payload_restricted_headers"],
+    shared_libs: [
+        "libbinder_ndk",
+        "libcap",
+        "MicrodroidTestNativeLibSub",
+        "libvm_payload#current",
+    ],
+    static_libs: [
+        "com.android.microdroid.testservice-ndk",
+        "libbase",
+        "libfsverity_digests_proto_cc",
+        "liblog",
+        "libprotobuf-cpp-lite-ndk",
+    ],
 }
 
 cc_library_shared {
