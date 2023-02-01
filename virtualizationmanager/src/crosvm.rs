@@ -84,6 +84,12 @@ lazy_static! {
     };
 }
 
+#[derive(Debug)]
+pub enum CrosvmCpuConfig {
+    NumCpus(NonZeroU32),
+    HostCpuTopology,
+}
+
 /// Configuration for a VM to run with crosvm.
 #[derive(Debug)]
 pub struct CrosvmConfig {
@@ -96,7 +102,7 @@ pub struct CrosvmConfig {
     pub params: Option<String>,
     pub protected: bool,
     pub memory_mib: Option<NonZeroU32>,
-    pub cpus: Option<NonZeroU32>,
+    pub cpus: Option<CrosvmCpuConfig>,
     pub task_profiles: Vec<String>,
     pub console_fd: Option<File>,
     pub log_fd: Option<File>,
@@ -663,6 +669,15 @@ fn exit_signal(result: &Result<ExitStatus, io::Error>) -> Option<i32> {
     }
 }
 
+// fn num_logical_cores() -> Result<usize> {
+//     let ret = unsafe { libc::sysconf(libc::_SC_NPROCESSORS_CONF) };
+//     if ret > 0 {
+//         Ok(ret as usize)
+//     } else {
+//         bail!("Could not determine the number of logical cores in the system");
+//     }
+// }
+
 /// Starts an instance of `crosvm` to manage a new VM.
 fn run_vm(
     config: CrosvmConfig,
@@ -710,8 +725,14 @@ fn run_vm(
         command.arg("--mem").arg(memory_mib.to_string());
     }
 
-    if let Some(cpus) = config.cpus {
-        command.arg("--cpus").arg(cpus.to_string());
+    match config.cpus {
+        Some(CrosvmCpuConfig::NumCpus(cpus)) => {
+            command.arg("--cpus").arg(cpus.to_string());
+        }
+        Some(CrosvmCpuConfig::HostCpuTopology) => {
+            command.arg("--host-cpu-topology");
+        }
+        None => (),
     }
 
     if !config.task_profiles.is_empty() {

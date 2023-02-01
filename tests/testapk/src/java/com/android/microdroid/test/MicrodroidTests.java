@@ -349,6 +349,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(minimal.getDebugLevel()).isEqualTo(DEBUG_LEVEL_NONE);
         assertThat(minimal.getMemoryBytes()).isEqualTo(0);
         assertThat(minimal.getNumCpus()).isEqualTo(1);
+        assertThat(minimal.getHostCpuTopology()).isFalse();
         assertThat(minimal.getPayloadBinaryName()).isEqualTo("binary.so");
         assertThat(minimal.getPayloadConfigPath()).isNull();
         assertThat(minimal.isProtectedVm()).isEqualTo(isProtectedVm());
@@ -365,6 +366,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                         .setPayloadConfigPath("config/path")
                         .setApkPath("/apk/path")
                         .setNumCpus(maxCpus)
+                        .setHostCpuTopology(true)
                         .setDebugLevel(DEBUG_LEVEL_FULL)
                         .setMemoryBytes(42)
                         .setEncryptedStorageBytes(1_000_000)
@@ -375,6 +377,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(maximal.getDebugLevel()).isEqualTo(DEBUG_LEVEL_FULL);
         assertThat(maximal.getMemoryBytes()).isEqualTo(42);
         assertThat(maximal.getNumCpus()).isEqualTo(maxCpus);
+        assertThat(maximal.isHostCpuTopology()).isTrue();
         assertThat(maximal.getPayloadBinaryName()).isNull();
         assertThat(maximal.getPayloadConfigPath()).isEqualTo("config/path");
         assertThat(maximal.isProtectedVm()).isEqualTo(isProtectedVm());
@@ -408,6 +411,8 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThrows(IllegalArgumentException.class, () -> builder.setMemoryBytes(0));
         assertThrows(IllegalArgumentException.class, () -> builder.setNumCpus(0));
         assertThrows(IllegalArgumentException.class, () -> builder.setEncryptedStorageBytes(0));
+
+        // TODO
 
         // Consistency checks enforced at build time.
         Exception e;
@@ -443,6 +448,8 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         if (maxCpus > 1) {
             assertConfigCompatible(baseline, newBaselineBuilder().setNumCpus(2)).isTrue();
         }
+
+        // TODO
 
         // Changes that must be incompatible, since they must change the VM identity.
         assertConfigCompatible(baseline, newBaselineBuilder().setDebugLevel(DEBUG_LEVEL_FULL))

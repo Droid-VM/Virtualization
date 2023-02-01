@@ -110,6 +110,7 @@ pub fn write_vm_creation_stats(
             String::new(),
         ),
     };
+    // TODO: log host_cpu_topology
 
     let atom = AtomVmCreationRequested {
         uid: get_calling_uid() as i32,
