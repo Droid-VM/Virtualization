@@ -50,6 +50,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
@@ -136,102 +137,89 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         mInstrumentation.sendStatus(0, bundle);
     }
 
-    @Test
-    public void testMicrodroidBootTime()
+    private enum BootTimeMetric {
+        TOTAL,
+        VM_START,
+        BOOTLOADER,
+        KERNEL,
+        USERSPACE,
+    }
+
+    private Map<BootTimeMetric, List<Double>> runBootTimeTest(
+            String name,
+            Function<VirtualMachineConfig.Builder, VirtualMachineConfig.Builder> fnConfig)
             throws VirtualMachineException, InterruptedException, IOException {
         assume().withMessage("Skip on CF; too slow").that(isCuttlefish()).isFalse();
 
         final int trialCount = 10;
 
-        List<Double> bootTimeMetrics = new ArrayList<>();
-        for (int i = 0; i < trialCount; i++) {
-            VirtualMachineConfig normalConfig =
-                    newVmConfigBuilder()
-                            .setPayloadBinaryName("MicrodroidIdleNativeLib.so")
-                            .setDebugLevel(DEBUG_LEVEL_NONE)
-                            .setMemoryBytes(256 * ONE_MEBI)
-                            .build();
-            forceCreateNewVirtualMachine("test_vm_boot_time", normalConfig);
-
-            BootResult result = tryBootVm(TAG, "test_vm_boot_time");
-            assertThat(result.payloadStarted).isTrue();
-
-            bootTimeMetrics.add(result.endToEndNanoTime / NANO_TO_MILLI);
+        Map<BootTimeMetric, List<Double>> data = new HashMap<>();
+        for (BootTimeMetric metric : BootTimeMetric.values()) {
+            data.put(metric, new ArrayList<>(trialCount));
         }
 
-        reportMetrics(bootTimeMetrics, "boot_time", "ms");
+        for (int i = 0; i < trialCount; i++) {
+            VirtualMachineConfig.Builder builder =
+                    newVmConfigBuilder()
+                            .setPayloadBinaryName("MicrodroidIdleNativeLib.so")
+                            .setMemoryBytes(256 * ONE_MEBI)
+                            .setDebugLevel(DEBUG_LEVEL_NONE);
+            VirtualMachineConfig config = fnConfig.apply(builder).build();
+            forceCreateNewVirtualMachine(name, config);
+
+            BootResult result = tryBootVm(TAG, name);
+            assertThat(result.payloadStarted).isTrue();
+
+            data.get(BootTimeMetric.TOTAL).add(result.endToEndNanoTime / NANO_TO_MILLI);
+            if (config.getDebugLevel() == DEBUG_LEVEL_FULL && config.isVmOutputCaptured()) {
+                data.get(BootTimeMetric.VM_START)
+                        .add(result.getVMStartingElapsedNanoTime() / NANO_TO_MILLI);
+                data.get(BootTimeMetric.BOOTLOADER)
+                        .add(result.getBootloaderElapsedNanoTime() / NANO_TO_MILLI);
+                data.get(BootTimeMetric.KERNEL)
+                        .add(result.getKernelElapsedNanoTime() / NANO_TO_MILLI);
+                data.get(BootTimeMetric.USERSPACE)
+                        .add(result.getUserspaceElapsedNanoTime() / NANO_TO_MILLI);
+            }
+        }
+
+        return data;
+    }
+
+    @Test
+    public void testMicrodroidBootTime()
+            throws VirtualMachineException, InterruptedException, IOException {
+        Map<BootTimeMetric, List<Double>> data =
+                runBootTimeTest("test_vm_boot_time", (builder) -> builder);
+        reportMetrics(data.get(BootTimeMetric.TOTAL), "boot_time", "ms");
     }
 
     @Test
     public void testMicrodroidMulticoreBootTime()
             throws VirtualMachineException, InterruptedException, IOException {
-        assume().withMessage("Skip on CF; too slow").that(isCuttlefish()).isFalse();
-
-        final int trialCount = 10;
-        final int[] trialNumCpus = {2, 4, 8};
-
-        for (int numCpus : trialNumCpus) {
-            List<Double> bootTimeMetrics = new ArrayList<>();
-            for (int i = 0; i < trialCount; i++) {
-                VirtualMachineConfig normalConfig =
-                        newVmConfigBuilder()
-                                .setPayloadBinaryName("MicrodroidIdleNativeLib.so")
-                                .setDebugLevel(DEBUG_LEVEL_NONE)
-                                .setMemoryBytes(256 * ONE_MEBI)
-                                .setNumCpus(numCpus)
-                                .build();
-                forceCreateNewVirtualMachine("test_vm_boot_time_multicore", normalConfig);
-
-                BootResult result = tryBootVm(TAG, "test_vm_boot_time_multicore");
-                assertThat(result.payloadStarted).isTrue();
-
-                bootTimeMetrics.add(result.endToEndNanoTime / NANO_TO_MILLI);
-            }
-
+        for (int numCpus : new int[] {2, 4, 8}) {
+            Map<BootTimeMetric, List<Double>> data =
+                    runBootTimeTest(
+                            "test_vm_boot_time_multicore",
+                            (builder) -> builder.setNumCpus(numCpus));
             String metricName = "boot_time_" + numCpus + "cpus";
-            reportMetrics(bootTimeMetrics, metricName, "ms");
+            reportMetrics(data.get(BootTimeMetric.TOTAL), metricName, "ms");
         }
     }
 
     @Test
     public void testMicrodroidDebugBootTime()
             throws VirtualMachineException, InterruptedException, IOException {
-        assume().withMessage("Skip on CF; too slow").that(isCuttlefish()).isFalse();
-
-        final int trialCount = 10;
-
-        List<Double> vmStartingTimeMetrics = new ArrayList<>();
-        List<Double> bootTimeMetrics = new ArrayList<>();
-        List<Double> bootloaderTimeMetrics = new ArrayList<>();
-        List<Double> kernelBootTimeMetrics = new ArrayList<>();
-        List<Double> userspaceBootTimeMetrics = new ArrayList<>();
-
-        for (int i = 0; i < trialCount; i++) {
-            // To grab boot events from log, set debug mode to FULL
-            VirtualMachineConfig normalConfig =
-                    newVmConfigBuilder()
-                            .setPayloadBinaryName("MicrodroidIdleNativeLib.so")
-                            .setDebugLevel(DEBUG_LEVEL_FULL)
-                            .setVmOutputCaptured(true)
-                            .setMemoryBytes(256 * ONE_MEBI)
-                            .build();
-            forceCreateNewVirtualMachine("test_vm_boot_time_debug", normalConfig);
-
-            BootResult result = tryBootVm(TAG, "test_vm_boot_time_debug");
-            assertThat(result.payloadStarted).isTrue();
-
-            vmStartingTimeMetrics.add(result.getVMStartingElapsedNanoTime() / NANO_TO_MILLI);
-            bootTimeMetrics.add(result.endToEndNanoTime / NANO_TO_MILLI);
-            bootloaderTimeMetrics.add(result.getBootloaderElapsedNanoTime() / NANO_TO_MILLI);
-            kernelBootTimeMetrics.add(result.getKernelElapsedNanoTime() / NANO_TO_MILLI);
-            userspaceBootTimeMetrics.add(result.getUserspaceElapsedNanoTime() / NANO_TO_MILLI);
-        }
-
-        reportMetrics(vmStartingTimeMetrics, "vm_starting_time", "ms");
-        reportMetrics(bootTimeMetrics, "boot_time", "ms");
-        reportMetrics(bootloaderTimeMetrics, "bootloader_time", "ms");
-        reportMetrics(kernelBootTimeMetrics, "kernel_boot_time", "ms");
-        reportMetrics(userspaceBootTimeMetrics, "userspace_boot_time", "ms");
+        Map<BootTimeMetric, List<Double>> data =
+                runBootTimeTest(
+                        "test_vm_boot_time_debug",
+                        (builder) ->
+                                builder.setDebugLevel(DEBUG_LEVEL_FULL).setVmOutputCaptured(true));
+        reportMetrics(data.get(BootTimeMetric.TOTAL), "boot_time", "ms");
+        reportMetrics(data.get(BootTimeMetric.VM_START), "vm_starting_time", "ms");
+        reportMetrics(data.get(BootTimeMetric.BOOTLOADER), "bootloader_time", "ms");
+        reportMetrics(data.get(BootTimeMetric.KERNEL), "kernel_boot_time", "ms");
+        reportMetrics(data.get(BootTimeMetric.USERSPACE), "userspace_boot_time", "ms");
     }
 
     @Test
