@@ -22,6 +22,7 @@ use crate::{
     COMPOS_APEX_ROOT, COMPOS_DATA_ROOT, COMPOS_VSOCK_PORT,
 };
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
+    CpuTopology::CpuTopology,
     IVirtualizationService::IVirtualizationService,
     VirtualMachineAppConfig::{DebugLevel::DebugLevel, Payload::Payload, VirtualMachineAppConfig},
     VirtualMachineConfig::VirtualMachineConfig,
@@ -44,8 +45,8 @@ pub struct ComposClient(VmInstance);
 pub struct VmParameters {
     /// Whether the VM should be debuggable.
     pub debug_mode: bool,
-    /// Number of vCPUs to have in the VM. If None, defaults to 1.
-    pub cpus: Option<NonZeroU32>,
+    /// Run VM with vCPU topology matching that of the host. If unspecified, defaults to 1 vCPU.
+    pub host_cpu_topology: bool,
     /// List of task profiles to apply to the VM
     pub task_profiles: Vec<String>,
     /// If present, overrides the amount of RAM to give the VM
@@ -111,6 +112,9 @@ impl ComposClient {
             (Some(console_fd), Some(log_fd))
         };
 
+        let cpu_topology =
+            if host_cpu_topology { CpuTopology::MATCH_HOST } else { CpuTopology::ONE_CPU };
+
         let config = VirtualMachineConfig::AppConfig(VirtualMachineAppConfig {
             name: String::from("Compos"),
             apk: Some(apk_fd),
@@ -122,7 +126,7 @@ impl ComposClient {
             extraIdsigs: extra_idsigs,
             protectedVm: protected_vm,
             memoryMib: parameters.memory_mib.unwrap_or(0), // 0 means use the default
-            numCpus: parameters.cpus.map_or(1, NonZeroU32::get) as i32,
+            cpuTopology: cpu_topology,
             taskProfiles: parameters.task_profiles.clone(),
         });
 

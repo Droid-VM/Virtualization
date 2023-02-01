@@ -97,6 +97,7 @@ pub struct CrosvmConfig {
     pub protected: bool,
     pub memory_mib: Option<NonZeroU32>,
     pub cpus: Option<NonZeroU32>,
+    pub host_cpu_topology: bool,
     pub task_profiles: Vec<String>,
     pub console_fd: Option<File>,
     pub log_fd: Option<File>,
@@ -712,6 +713,10 @@ fn run_vm(
 
     if let Some(cpus) = config.cpus {
         command.arg("--cpus").arg(cpus.to_string());
+    }
+
+    if config.host_cpu_topology {
+        command.arg("--host-cpu-topology");
     }
 
     if !config.task_profiles.is_empty() {
