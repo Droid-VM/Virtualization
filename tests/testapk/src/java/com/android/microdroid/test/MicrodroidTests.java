@@ -348,7 +348,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(minimal.getApkPath()).isNull();
         assertThat(minimal.getDebugLevel()).isEqualTo(DEBUG_LEVEL_NONE);
         assertThat(minimal.getMemoryBytes()).isEqualTo(0);
-        assertThat(minimal.getNumCpus()).isEqualTo(1);
+        assertThat(minimal.getCpuTopology()).isEqualTo(CPU_TOPOLOGY_ONE_CPU);
         assertThat(minimal.getPayloadBinaryName()).isEqualTo("binary.so");
         assertThat(minimal.getPayloadConfigPath()).isNull();
         assertThat(minimal.isProtectedVm()).isEqualTo(isProtectedVm());
@@ -364,9 +364,9 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                         .setProtectedVm(mProtectedVm)
                         .setPayloadConfigPath("config/path")
                         .setApkPath("/apk/path")
-                        .setNumCpus(maxCpus)
                         .setDebugLevel(DEBUG_LEVEL_FULL)
                         .setMemoryBytes(42)
+                        .setCpuTopology(CPU_TOPOLOGY_MATCH_HOST)
                         .setEncryptedStorageBytes(1_000_000)
                         .setVmOutputCaptured(true);
         VirtualMachineConfig maximal = maximalBuilder.build();
@@ -374,7 +374,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(maximal.getApkPath()).isEqualTo("/apk/path");
         assertThat(maximal.getDebugLevel()).isEqualTo(DEBUG_LEVEL_FULL);
         assertThat(maximal.getMemoryBytes()).isEqualTo(42);
-        assertThat(maximal.getNumCpus()).isEqualTo(maxCpus);
+        assertThat(minimal.getCpuTopology()).isEqualTo(CPU_TOPOLOGY_MATCH_HOST);
         assertThat(maximal.getPayloadBinaryName()).isNull();
         assertThat(maximal.getPayloadConfigPath()).isEqualTo("config/path");
         assertThat(maximal.isProtectedVm()).isEqualTo(isProtectedVm());
@@ -406,8 +406,9 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                 IllegalArgumentException.class, () -> builder.setPayloadBinaryName("dir/file.so"));
         assertThrows(IllegalArgumentException.class, () -> builder.setDebugLevel(-1));
         assertThrows(IllegalArgumentException.class, () -> builder.setMemoryBytes(0));
-        assertThrows(IllegalArgumentException.class, () -> builder.setNumCpus(0));
         assertThrows(IllegalArgumentException.class, () -> builder.setEncryptedStorageBytes(0));
+
+        // TODO
 
         // Consistency checks enforced at build time.
         Exception e;
@@ -431,8 +432,6 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     @Test
     @CddTest(requirements = {"9.17/C-1-1"})
     public void compatibleConfigTests() {
-        int maxCpus = Runtime.getRuntime().availableProcessors();
-
         VirtualMachineConfig baseline = newBaselineBuilder().build();
 
         // A config must be compatible with itself
@@ -440,9 +439,8 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
         // Changes that must always be compatible
         assertConfigCompatible(baseline, newBaselineBuilder().setMemoryBytes(99)).isTrue();
-        if (maxCpus > 1) {
-            assertConfigCompatible(baseline, newBaselineBuilder().setNumCpus(2)).isTrue();
-        }
+
+        // TODO
 
         // Changes that must be incompatible, since they must change the VM identity.
         assertConfigCompatible(baseline, newBaselineBuilder().setDebugLevel(DEBUG_LEVEL_FULL))

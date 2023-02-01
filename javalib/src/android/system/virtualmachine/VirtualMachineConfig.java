@@ -70,6 +70,7 @@ public final class VirtualMachineConfig {
     private static final String KEY_PROTECTED_VM = "protectedVm";
     private static final String KEY_MEMORY_BYTES = "memoryBytes";
     private static final String KEY_NUM_CPUS = "numCpus";
+    private static final String KEY_CPU_TOPOLOGY = "cpuTopology";
     private static final String KEY_ENCRYPTED_STORAGE_BYTES = "encryptedStorageBytes";
     private static final String KEY_VM_OUTPUT_CAPTURED = "vmOutputCaptured";
 
@@ -97,6 +98,30 @@ public final class VirtualMachineConfig {
      */
     @SystemApi public static final int DEBUG_LEVEL_FULL = 1;
 
+    /** @hide */
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef(
+            prefix = "CPU_TOPOLOGY_",
+            value = {
+                CPU_TOPOLOGY_ONE_CPU,
+                CPU_TOPOLOGY_MATCH_HOST,
+            })
+    public @interface CpuTopology {}
+
+    /**
+     * Run VM with 1 vCPU. This is the default vCPU topology.
+     *
+     * @hide
+     */
+    @SystemApi public static final int CPU_TOPOLOGY_ONE_CPU = 0;
+
+    /**
+     * Run VM with vCPU topology matching the physical CPU topology of the host.
+     *
+     * @hide
+     */
+    @SystemApi public static final int CPU_TOPOLOGY_MATCH_HOST = 1;
+
     /** Name of a package whose primary APK contains the VM payload. */
     @Nullable private final String mPackageName;
 
@@ -116,10 +141,8 @@ public final class VirtualMachineConfig {
      */
     private final long mMemoryBytes;
 
-    /**
-     * Number of vCPUs in the VM. Defaults to 1 when not specified.
-     */
-    private final int mNumCpus;
+    /** Strategy for generating vCPU topology of the VM. */
+    @CpuTopology private final int mCpuTopology;
 
     /**
      * Path within the APK to the payload config file that defines software aspects of the VM.
@@ -143,7 +166,7 @@ public final class VirtualMachineConfig {
             @DebugLevel int debugLevel,
             boolean protectedVm,
             long memoryBytes,
-            int numCpus,
+            @CpuTopology int cpuTopology,
             long encryptedStorageBytes,
             boolean vmOutputCaptured) {
         // This is only called from Builder.build(); the builder handles parameter validation.
@@ -154,7 +177,7 @@ public final class VirtualMachineConfig {
         mDebugLevel = debugLevel;
         mProtectedVm = protectedVm;
         mMemoryBytes = memoryBytes;
-        mNumCpus = numCpus;
+        mCpuTopology = cpuTopology;
         mEncryptedStorageBytes = encryptedStorageBytes;
         mVmOutputCaptured = vmOutputCaptured;
     }
@@ -225,7 +248,7 @@ public final class VirtualMachineConfig {
         if (memoryBytes != 0) {
             builder.setMemoryBytes(memoryBytes);
         }
-        builder.setNumCpus(b.getInt(KEY_NUM_CPUS));
+        builder.setCpuTopology(b.getInt(KEY_CPU_TOPOLOGY));
         long encryptedStorageBytes = b.getLong(KEY_ENCRYPTED_STORAGE_BYTES);
         if (encryptedStorageBytes != 0) {
             builder.setEncryptedStorageBytes(encryptedStorageBytes);
@@ -258,7 +281,7 @@ public final class VirtualMachineConfig {
         b.putString(KEY_PAYLOADBINARYNAME, mPayloadBinaryName);
         b.putInt(KEY_DEBUGLEVEL, mDebugLevel);
         b.putBoolean(KEY_PROTECTED_VM, mProtectedVm);
-        b.putInt(KEY_NUM_CPUS, mNumCpus);
+        b.putInt(KEY_CPU_TOPOLOGY, mCpuTopology);
         if (mMemoryBytes > 0) {
             b.putLong(KEY_MEMORY_BYTES, mMemoryBytes);
         }
@@ -341,14 +364,14 @@ public final class VirtualMachineConfig {
     }
 
     /**
-     * Returns the number of vCPUs that the VM will have.
+     * Returns the vCPU topology that will be generated for the VM.
      *
      * @hide
      */
     @SystemApi
-    @IntRange(from = 1)
-    public int getNumCpus() {
-        return mNumCpus;
+    @CpuTopology
+    public int getCpuTopology() {
+        return mCpuTopology;
     }
 
     /**
@@ -455,7 +478,14 @@ public final class VirtualMachineConfig {
         }
         vsConfig.protectedVm = mProtectedVm;
         vsConfig.memoryMib = bytesToMebiBytes(mMemoryBytes);
-        vsConfig.numCpus = mNumCpus;
+        switch (mCpuTopology) {
+            case CPU_TOPOLOGY_MATCH_HOST:
+                vsConfig.cpuTopology = android.system.virtualizationservice.CpuTopology.MATCH_HOST;
+                break;
+            default:
+                vsConfig.cpuTopology = android.system.virtualizationservice.CpuTopology.ONE_CPU;
+                break;
+        }
         // Don't allow apps to set task profiles ... at least for now.
         vsConfig.taskProfiles = EMPTY_STRING_ARRAY;
         return vsConfig;
@@ -486,7 +516,7 @@ public final class VirtualMachineConfig {
         private boolean mProtectedVm;
         private boolean mProtectedVmSet;
         private long mMemoryBytes;
-        private int mNumCpus = 1;
+        @CpuTopology private int mCpuTopology = CPU_TOPOLOGY_ONE_CPU;
         private long mEncryptedStorageBytes;
         private boolean mVmOutputCaptured = false;
 
@@ -555,7 +585,7 @@ public final class VirtualMachineConfig {
                     mDebugLevel,
                     mProtectedVm,
                     mMemoryBytes,
-                    mNumCpus,
+                    mCpuTopology,
                     mEncryptedStorageBytes,
                     mVmOutputCaptured);
         }
@@ -687,25 +717,14 @@ public final class VirtualMachineConfig {
         }
 
         /**
-         * Sets the number of vCPUs in the VM. Defaults to 1. Cannot be more than the number of real
-         * CPUs (as returned by {@link Runtime#availableProcessors}).
+         * Sets the topology of the VM's vCPUs. Defaults to {@link #CPU_TOPOLOGY_ONE_CPU}.
          *
          * @hide
          */
         @SystemApi
         @NonNull
-        public Builder setNumCpus(@IntRange(from = 1) int numCpus) {
-            int availableCpus = Runtime.getRuntime().availableProcessors();
-            if (numCpus < 1 || numCpus > availableCpus) {
-                throw new IllegalArgumentException(
-                        "Number of vCPUs ("
-                                + numCpus
-                                + ") is out of "
-                                + "range [1, "
-                                + availableCpus
-                                + "]");
-            }
-            mNumCpus = numCpus;
+        public Builder setCpuTopology(@CpuTopology int cpuTopology) {
+            mCpuTopology = cpuTopology;
             return this;
         }
 
