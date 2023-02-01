@@ -22,6 +22,7 @@ use crate::{
     COMPOS_APEX_ROOT, COMPOS_DATA_ROOT, COMPOS_VSOCK_PORT,
 };
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
+    CpuTopology::CpuTopology,
     IVirtualizationService::IVirtualizationService,
     VirtualMachineAppConfig::{DebugLevel::DebugLevel, Payload::Payload, VirtualMachineAppConfig},
     VirtualMachineConfig::VirtualMachineConfig,
@@ -32,7 +33,6 @@ use compos_aidl_interface::aidl::com::android::compos::ICompOsService::ICompOsSe
 use log::{info, warn};
 use rustutils::system_properties;
 use std::fs::{self, File};
-use std::num::NonZeroU32;
 use std::path::{Path, PathBuf};
 use vmclient::{DeathReason, ErrorCode, VmInstance, VmWaitError};
 
@@ -120,7 +120,7 @@ impl ComposClient {
             extraIdsigs: extra_idsigs,
             protectedVm: protected_vm,
             memoryMib: parameters.memory_mib.unwrap_or(0), // 0 means use the default
-            numCpus: num_cpus::get() as i32,
+            cpuTopology: CpuTopology::MATCH_HOST,
             taskProfiles: parameters.task_profiles.clone(),
         });
 
