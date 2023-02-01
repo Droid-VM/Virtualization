@@ -18,7 +18,7 @@ use crate::{get_calling_pid, get_calling_uid};
 use crate::atom::{
     write_vm_booted_stats, write_vm_creation_stats};
 use crate::composite::make_composite_image;
-use crate::crosvm::{CrosvmConfig, DiskFile, PayloadState, VmContext, VmInstance, VmState};
+use crate::crosvm::{CrosvmConfig, CrosvmCpuConfig, DiskFile, PayloadState, VmContext, VmInstance, VmState};
 use crate::payload::{add_microdroid_payload_images, add_microdroid_system_images};
 use crate::selinux::{getfilecon, SeContext};
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
@@ -384,6 +384,12 @@ impl VirtualizationService {
             })
             .collect::<Result<Vec<DiskFile>, _>>()?;
 
+        let cpus = if config.hostCpuTopology {
+            Some(CrosvmCpuConfig::HostCpuTopology)
+        } else {
+            config.numCpus.try_into().ok().and_then(NonZeroU32::new).map(CrosvmCpuConfig::NumCpus)
+        };
+
         // Creating this ramdump file unconditionally is not harmful as ramdump will be created
         // only when the VM is configured as such. `ramdump_write` is sent to crosvm and will
         // be the backing store for the /dev/hvc1 where VM will emit ramdump to. `ramdump_read`
@@ -408,7 +414,7 @@ impl VirtualizationService {
             params: config.params.to_owned(),
             protected: *is_protected,
             memory_mib: config.memoryMib.try_into().ok().and_then(NonZeroU32::new),
-            cpus: config.numCpus.try_into().ok().and_then(NonZeroU32::new),
+            cpus,
             task_profiles: config.taskProfiles.clone(),
             console_fd,
             log_fd,
@@ -568,6 +574,7 @@ fn load_app_config(
     vm_config.name = config.name.clone();
     vm_config.protectedVm = config.protectedVm;
     vm_config.numCpus = config.numCpus;
+    vm_config.hostCpuTopology = config.hostCpuTopology;
     vm_config.taskProfiles = config.taskProfiles.clone();
 
     // Microdroid takes additional init ramdisk & (optionally) storage image
