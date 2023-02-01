@@ -55,6 +55,7 @@ pub fn command_run_app(
     protected: bool,
     mem: Option<u32>,
     cpus: Option<u32>,
+    host_cpu_topology: bool,
     task_profiles: Vec<String>,
     extra_idsigs: &[PathBuf],
 ) -> Result<(), Error> {
@@ -142,6 +143,7 @@ pub fn command_run_app(
         protectedVm: protected,
         memoryMib: mem.unwrap_or(0) as i32, // 0 means use the VM default
         numCpus: cpus.unwrap_or(1) as i32,
+        hostCpuTopology: host_cpu_topology,
         taskProfiles: task_profiles,
     });
     run(service, &config, &payload_config_str, console_path, log_path)
@@ -183,6 +185,7 @@ pub fn command_run_microdroid(
     protected: bool,
     mem: Option<u32>,
     cpus: Option<u32>,
+    host_cpu_topology: bool,
     task_profiles: Vec<String>,
 ) -> Result<(), Error> {
     let apk = find_empty_payload_apk_path()?;
@@ -212,6 +215,7 @@ pub fn command_run_microdroid(
         protected,
         mem,
         cpus,
+        host_cpu_topology,
         task_profiles,
         &extra_sig,
     )

@@ -84,6 +84,11 @@ parcelable VirtualMachineAppConfig {
     int numCpus = 1;
 
     /**
+     * Foobar
+     */
+    boolean hostCpuTopology;
+
+    /**
      * List of task profile names to apply for the VM
      *
      * Note: Specifying a value here requires android.permission.USE_CUSTOM_VIRTUAL_MACHINE.
