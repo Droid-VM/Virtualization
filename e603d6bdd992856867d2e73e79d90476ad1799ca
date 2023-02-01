@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf2e31e0_c8ab760a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-02-01T07:12:09Z",
+      "side": 1,
+      "message": "Hey, I just found that this API is broken (not sure why it even worked). `kexec` from `microdroid_payload` fails due to dropped capabilities: aosp/2355429",
+      "revId": "e603d6bdd992856867d2e73e79d90476ad1799ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "389e01d4_f1efdfdd",
         "filename": "vm_payload/include/vm_payload.h",
         "patchSetId": 5
