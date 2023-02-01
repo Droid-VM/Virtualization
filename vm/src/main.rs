@@ -95,6 +95,10 @@ enum Opt {
         #[clap(long)]
         cpus: Option<u32>,
 
+        /// Foobar
+        #[clap(long)]
+        host_cpu_topology: bool,
+
         /// Comma separated list of task profile names to apply to the VM
         #[clap(long)]
         task_profiles: Vec<String>,
@@ -149,6 +153,10 @@ enum Opt {
         /// Number of vCPUs in the VM. If unspecified, defaults to 1.
         #[clap(long)]
         cpus: Option<u32>,
+
+        /// Foobar
+        #[clap(long)]
+        host_cpu_topology: bool,
 
         /// Comma separated list of task profile names to apply to the VM
         #[clap(long)]
@@ -249,6 +257,7 @@ fn main() -> Result<(), Error> {
             protected,
             mem,
             cpus,
+            host_cpu_topology,
             task_profiles,
             extra_idsigs,
         } => command_run_app(
@@ -267,6 +276,7 @@ fn main() -> Result<(), Error> {
             protected,
             mem,
             cpus,
+            host_cpu_topology,
             task_profiles,
             &extra_idsigs,
         ),
@@ -281,6 +291,7 @@ fn main() -> Result<(), Error> {
             protected,
             mem,
             cpus,
+            host_cpu_topology,
             task_profiles,
         } => command_run_microdroid(
             name,
@@ -294,6 +305,7 @@ fn main() -> Result<(), Error> {
             protected,
             mem,
             cpus,
+            host_cpu_topology,
             task_profiles,
         ),
         Opt::Run { name, config, cpus, task_profiles, console, log } => {

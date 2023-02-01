@@ -70,6 +70,7 @@ public final class VirtualMachineConfig {
     private static final String KEY_PROTECTED_VM = "protectedVm";
     private static final String KEY_MEMORY_BYTES = "memoryBytes";
     private static final String KEY_NUM_CPUS = "numCpus";
+    private static final String KEY_HOST_CPU_TOPOLOGY = "hostCpuTopology";
     private static final String KEY_ENCRYPTED_STORAGE_BYTES = "encryptedStorageBytes";
     private static final String KEY_VM_OUTPUT_CAPTURED = "vmOutputCaptured";
 
@@ -121,6 +122,9 @@ public final class VirtualMachineConfig {
      */
     private final int mNumCpus;
 
+    /** Number of vCPUs in the VM. Defaults to 1 when not specified. */
+    private final boolean mHostCpuTopology;
+
     /**
      * Path within the APK to the payload config file that defines software aspects of the VM.
      */
@@ -144,6 +148,7 @@ public final class VirtualMachineConfig {
             boolean protectedVm,
             long memoryBytes,
             int numCpus,
+            boolean hostCpuTopology,
             long encryptedStorageBytes,
             boolean vmOutputCaptured) {
         // This is only called from Builder.build(); the builder handles parameter validation.
@@ -155,6 +160,7 @@ public final class VirtualMachineConfig {
         mProtectedVm = protectedVm;
         mMemoryBytes = memoryBytes;
         mNumCpus = numCpus;
+        mHostCpuTopology = hostCpuTopology;
         mEncryptedStorageBytes = encryptedStorageBytes;
         mVmOutputCaptured = vmOutputCaptured;
     }
@@ -226,6 +232,7 @@ public final class VirtualMachineConfig {
             builder.setMemoryBytes(memoryBytes);
         }
         builder.setNumCpus(b.getInt(KEY_NUM_CPUS));
+        builder.setHostCpuTopology(b.getBoolean(KEY_HOST_CPU_TOPOLOGY));
         long encryptedStorageBytes = b.getLong(KEY_ENCRYPTED_STORAGE_BYTES);
         if (encryptedStorageBytes != 0) {
             builder.setEncryptedStorageBytes(encryptedStorageBytes);
@@ -259,6 +266,7 @@ public final class VirtualMachineConfig {
         b.putInt(KEY_DEBUGLEVEL, mDebugLevel);
         b.putBoolean(KEY_PROTECTED_VM, mProtectedVm);
         b.putInt(KEY_NUM_CPUS, mNumCpus);
+        b.putBoolean(KEY_HOST_CPU_TOPOLOGY, mHostCpuTopology);
         if (mMemoryBytes > 0) {
             b.putLong(KEY_MEMORY_BYTES, mMemoryBytes);
         }
@@ -349,6 +357,16 @@ public final class VirtualMachineConfig {
     @IntRange(from = 1)
     public int getNumCpus() {
         return mNumCpus;
+    }
+
+    /**
+     * Returns the number of vCPUs that the VM will have.
+     *
+     * @hide
+     */
+    @SystemApi
+    public boolean isHostCpuTopology() {
+        return mHostCpuTopology;
     }
 
     /**
@@ -456,6 +474,7 @@ public final class VirtualMachineConfig {
         vsConfig.protectedVm = mProtectedVm;
         vsConfig.memoryMib = bytesToMebiBytes(mMemoryBytes);
         vsConfig.numCpus = mNumCpus;
+        vsConfig.hostCpuTopology = mHostCpuTopology;
         // Don't allow apps to set task profiles ... at least for now.
         vsConfig.taskProfiles = EMPTY_STRING_ARRAY;
         return vsConfig;
@@ -487,6 +506,7 @@ public final class VirtualMachineConfig {
         private boolean mProtectedVmSet;
         private long mMemoryBytes;
         private int mNumCpus = 1;
+        private boolean mHostCpuTopology = false;
         private long mEncryptedStorageBytes;
         private boolean mVmOutputCaptured = false;
 
@@ -556,6 +576,7 @@ public final class VirtualMachineConfig {
                     mProtectedVm,
                     mMemoryBytes,
                     mNumCpus,
+                    mHostCpuTopology,
                     mEncryptedStorageBytes,
                     mVmOutputCaptured);
         }
@@ -706,6 +727,19 @@ public final class VirtualMachineConfig {
                                 + "]");
             }
             mNumCpus = numCpus;
+            return this;
+        }
+
+        /**
+         * Sets the number of vCPUs in the VM. Defaults to 1. Cannot be more than the number of real
+         * CPUs (as returned by {@link Runtime#availableProcessors}).
+         *
+         * @hide
+         */
+        @SystemApi
+        @NonNull
+        public Builder setHostCpuTopology(boolean hostCpuTopology) {
+            mHostCpuTopology = hostCpuTopology;
             return this;
         }
 

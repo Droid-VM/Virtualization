@@ -55,6 +55,11 @@ parcelable VirtualMachineRawConfig {
     int numCpus = 1;
 
     /**
+     * Foobar
+     */
+    boolean hostCpuTopology;
+
+    /**
      * A version or range of versions of the virtual platform that this config is compatible with.
      * The format follows SemVer.
      */

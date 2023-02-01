@@ -123,6 +123,7 @@ impl ComposClient {
             protectedVm: protected_vm,
             memoryMib: parameters.memory_mib.unwrap_or(0), // 0 means use the default
             numCpus: parameters.cpus.map_or(1, NonZeroU32::get) as i32,
+            hostCpuTopology: true,
             taskProfiles: parameters.task_profiles.clone(),
         });
 
