@@ -33,6 +33,52 @@
       "message": "Restarting PS run as aosp/2411276 was merged",
       "revId": "3a9ad538a6900a8257e35751c4d7f613c4203e15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9bfbb21_a63e1568",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-01T10:04:40Z",
+      "side": 1,
+      "message": "ubernit: Would it be too much to ask to try to do such casts with `into/try_into`? One less implicit assumption to worry about...",
+      "range": {
+        "startLine": 64,
+        "startChar": 55,
+        "endLine": 64,
+        "endChar": 60
+      },
+      "revId": "3a9ad538a6900a8257e35751c4d7f613c4203e15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "807c75e2_f9c198d3",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-01T10:04:40Z",
+      "side": 1,
+      "message": "ubernit: Please write this one out: `as usize`, to make it clear that this is a safe cast and not depend on the function signature for safety.",
+      "range": {
+        "startLine": 301,
+        "startChar": 30,
+        "endLine": 301,
+        "endChar": 34
+      },
+      "revId": "3a9ad538a6900a8257e35751c4d7f613c4203e15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
