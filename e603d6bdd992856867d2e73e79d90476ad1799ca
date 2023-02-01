@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "361b0c42_ed2b8a3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-01T12:29:09Z",
+      "side": 1,
+      "message": "s/microdroid_payload/microdroid_manager/ ?",
+      "parentUuid": "bf2e31e0_c8ab760a",
+      "revId": "e603d6bdd992856867d2e73e79d90476ad1799ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "389e01d4_f1efdfdd",
         "filename": "vm_payload/include/vm_payload.h",
         "patchSetId": 5
@@ -102,6 +120,30 @@
       "side": 1,
       "message": "Thinking about it some more, I agree that passing this via VirtualMachineConfig seems more natural.\nAnd we do have some infrastructure for passing such info through to Microdroid Manager - VirtualMachinePayloadConfig.",
       "parentUuid": "26e3f297_263f7a25",
+      "range": {
+        "startLine": 44,
+        "startChar": 5,
+        "endLine": 44,
+        "endChar": 37
+      },
+      "revId": "e603d6bdd992856867d2e73e79d90476ad1799ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfd2bf1c_c4fbdec0",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-01T12:29:09Z",
+      "side": 1,
+      "message": "That sounds better, but we have to make sure that the decision to export tombstone or not is part of the VM identity. Otherwise, one can silently enable tombstone without being noticed.",
+      "parentUuid": "5d07b050_0c54455e",
       "range": {
         "startLine": 44,
         "startChar": 5,
