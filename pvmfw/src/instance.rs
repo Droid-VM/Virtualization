@@ -20,6 +20,7 @@ use crate::dice::PartialInputs;
 use crate::gpt;
 use crate::gpt::Partition;
 use crate::gpt::Partitions;
+use crate::rand;
 use crate::virtio::pci::VirtIOBlkIterator;
 use core::fmt;
 use core::mem::size_of;
@@ -37,6 +38,8 @@ pub enum Error {
     FailedIo(gpt::Error),
     /// Failed to decrypt the entry.
     FailedOpen(crypto::ErrorIterator),
+    /// Failed to generate a random salt to be stored.
+    FailedSaltGeneration(rand::Error),
     /// Failed to encrypt the entry.
     FailedSeal(crypto::ErrorIterator),
     /// Impossible to create a new instance.img entry.
@@ -71,6 +74,7 @@ impl fmt::Display for Error {
                 }
                 Ok(())
             }
+            Self::FailedSaltGeneration(e) => write!(f, "Failed to generate salt: {e}"),
             Self::FailedSeal(e_iter) => {
                 writeln!(f, "Failed to seal the instance.img partition:")?;
                 for e in *e_iter {
@@ -122,7 +126,7 @@ pub fn get_instance_salt(
             Ok(Salt::Found(blk_salt.try_into().unwrap()))
         }
     } else {
-        let salt = [0; size_of::<Hidden>()]; // TODO(b/262393451): Generate using TRNG.
+        let salt = rand::random_array().map_err(Error::FailedSaltGeneration)?;
 
         let (blk_code_hash, blk_auth_hash, blk_salt, blk_mode) = split_entry_mut(&mut blk);
         blk_code_hash.copy_from_slice(&dice_inputs.code_hash);
