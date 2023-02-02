@@ -53,10 +53,11 @@ fn latest_debug_payload_passes_verification() -> Result<()> {
 
 #[test]
 fn payload_expecting_no_initrd_passes_verification_with_no_initrd() -> Result<()> {
+    let public_key = load_trusted_public_key()?;
     let verified_boot_data = verify_payload(
         &fs::read(TEST_IMG_WITH_ONE_HASHDESC_PATH)?,
         /*initrd=*/ None,
-        &load_trusted_public_key()?,
+        &public_key,
     )
     .map_err(|e| anyhow!("Verification failed. Error: {}", e))?;
 
