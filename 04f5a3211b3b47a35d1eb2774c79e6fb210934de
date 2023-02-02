@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38f478d5_70327b08",
+        "filename": "tests/testapk/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-02T11:56:51Z",
+      "side": 1,
+      "message": "Nit: Can we think of something better than \"helper\", which has fairly minimal meaning?\nPartner app, second app, collaborating app ?",
+      "range": {
+        "startLine": 39,
+        "startChar": 13,
+        "endLine": 39,
+        "endChar": 19
+      },
+      "revId": "04f5a3211b3b47a35d1eb2774c79e6fb210934de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34e0acc0_cf6cd188",
+        "filename": "tests/testapk/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-02T11:56:51Z",
+      "side": 1,
+      "message": "Extract some of this to defaults?",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 38
+      },
+      "revId": "04f5a3211b3b47a35d1eb2774c79e6fb210934de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e6a315d_54983369",
+        "filename": "tests/testapk/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-02T11:56:51Z",
+      "side": 1,
+      "message": "This is currently identical to MicrodroidTestNativeLib, can we just reuse the existing one?\nAnd of course this could also benefit from defaults.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 17
+      },
+      "revId": "04f5a3211b3b47a35d1eb2774c79e6fb210934de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6634e24e_30d106ff",
+        "filename": "tests/testapk/AndroidManifest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-02T11:56:51Z",
+      "side": 1,
+      "message": "I suspect you need to copy this or bad things will happen somewhere along the line.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 73
+      },
+      "revId": "04f5a3211b3b47a35d1eb2774c79e6fb210934de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb5137bf_90e91e57",
+        "filename": "tests/testapk/AndroidManifest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-02T11:56:51Z",
+      "side": 1,
+      "message": "Yay!",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 14
+      },
+      "revId": "04f5a3211b3b47a35d1eb2774c79e6fb210934de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5dcb322_208b2ff0",
+        "filename": "tests/testapk/AndroidManifest_MicrodroidTestHelperApp.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-02T11:56:51Z",
+      "side": 1,
+      "message": "You\u0027re going to need at least MANAGE_VIRTUAL_MACHINE permission at some point.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 102
+      },
+      "revId": "04f5a3211b3b47a35d1eb2774c79e6fb210934de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83eb6524_387d6424",
+        "filename": "tests/testapk/AndroidTest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-02T11:56:51Z",
+      "side": 1,
+      "message": "This is the default, so you don\u0027t need it explicitly.\nAnd test-file-name can be repeated (or can be a directory), so you should be able to do both with a single \u003ctarget_preparer\u003e",
+      "range": {
+        "startLine": 26,
+        "startChar": 7,
+        "endLine": 26,
+        "endChar": 51
+      },
+      "revId": "04f5a3211b3b47a35d1eb2774c79e6fb210934de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
