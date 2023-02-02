@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e695b374_b683e5b8",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-02T14:07:34Z",
+      "side": 1,
+      "message": "It feels like this should be result.hasOptionalMetrics(), or just wrapped up in some function with a friendly name.\n\nActually you only need to test isVmOutputCaptured - it\u0027s not possible to set that true unless the VM is debuggable.",
+      "range": {
+        "startLine": 174,
+        "startChar": 16,
+        "endLine": 174,
+        "endChar": 89
+      },
+      "revId": "aea35dbcea207f35ae88aaeb14e88843bef7bda5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c476ec7_c8967983",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-02T14:07:34Z",
+      "side": 1,
+      "message": "This so needs a typedef. Or maybe a wrapper class?",
+      "range": {
+        "startLine": 192,
+        "startChar": 8,
+        "endLine": 192,
+        "endChar": 41
+      },
+      "revId": "aea35dbcea207f35ae88aaeb14e88843bef7bda5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
