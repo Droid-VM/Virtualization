@@ -102,8 +102,9 @@ pub fn assert_latest_payload_verification_passes(
     initrd_salt: &[u8],
     expected_debug_level: DebugLevel,
 ) -> Result<()> {
+    let public_key = load_latest_signed_kernel()?;
     let kernel = load_latest_signed_kernel()?;
-    let verified_boot_data = verify_payload(&kernel, Some(initrd), &load_trusted_public_key()?)
+    let verified_boot_data = verify_payload(&kernel, Some(initrd), &public_key)
         .map_err(|e| anyhow!("Verification failed. Error: {}", e))?;
 
     assert_eq!(expected_debug_level, verified_boot_data.debug_level);
