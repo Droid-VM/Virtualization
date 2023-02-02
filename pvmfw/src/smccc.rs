@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+pub mod trng;
+
 use core::{fmt, result};
 
 // TODO(b/245889995): use psci-0.1.1 crate
