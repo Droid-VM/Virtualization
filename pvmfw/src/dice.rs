@@ -61,10 +61,10 @@ pub fn derive_next_bcc(
     let config = &config_descriptor_buffer[..config_descriptor_size];
 
     let input_values = InputValues::new(
-        &code_hash,
+        code_hash,
         None, // code_descriptor
         Config::Descriptor(config),
-        &auth_hash,
+        auth_hash,
         None, // authority_descriptor
         mode,
         None, // TODO(b/249723852): Get salt from instance.img (virtio-blk) and/or TRNG.
