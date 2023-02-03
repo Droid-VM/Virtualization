@@ -21,7 +21,7 @@
 use core::fmt;
 use core::result;
 
-pub use diced_open_dice::{Config, Hash, InputValues, HASH_SIZE};
+pub use diced_open_dice::{Cdi, Config, Hash, InputValues, CDI_SIZE, HASH_SIZE};
 pub use open_dice_cbor_bindgen::DiceMode;
 
 use open_dice_cbor_bindgen::DiceHash;
@@ -32,11 +32,6 @@ use open_dice_cbor_bindgen::DiceResult_kDiceResultOk as DICE_RESULT_OK;
 use open_dice_cbor_bindgen::DiceResult_kDiceResultPlatformError as DICE_RESULT_PLATFORM_ERROR;
 
 pub mod bcc;
-
-const CDI_SIZE: usize = open_dice_cbor_bindgen::DICE_CDI_SIZE as usize;
-
-/// Array type of CDIs.
-pub type Cdi = [u8; CDI_SIZE];
 
 /// Error type used by DICE.
 pub enum Error {
