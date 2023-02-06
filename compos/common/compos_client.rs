@@ -44,8 +44,6 @@ pub struct ComposClient(VmInstance);
 pub struct VmParameters {
     /// Whether the VM should be debuggable.
     pub debug_mode: bool,
-    /// Number of vCPUs to have in the VM. If None, defaults to 1.
-    pub cpus: Option<NonZeroU32>,
     /// List of task profiles to apply to the VM
     pub task_profiles: Vec<String>,
     /// If present, overrides the amount of RAM to give the VM
@@ -122,7 +120,7 @@ impl ComposClient {
             extraIdsigs: extra_idsigs,
             protectedVm: protected_vm,
             memoryMib: parameters.memory_mib.unwrap_or(0), // 0 means use the default
-            numCpus: parameters.cpus.map_or(1, NonZeroU32::get) as i32,
+            numCpus: num_cpus::get() as i32,
             taskProfiles: parameters.task_profiles.clone(),
         });
 
