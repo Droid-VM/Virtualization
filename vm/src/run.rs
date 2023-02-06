@@ -16,6 +16,7 @@
 
 use crate::create_partition::command_create_partition;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
+    CpuTopology::CpuTopology,
     IVirtualizationService::IVirtualizationService,
     PartitionType::PartitionType,
     VirtualMachineAppConfig::{DebugLevel::DebugLevel, Payload::Payload, VirtualMachineAppConfig},
@@ -54,7 +55,7 @@ pub fn command_run_app(
     debug_level: DebugLevel,
     protected: bool,
     mem: Option<u32>,
-    cpus: Option<u32>,
+    host_cpu_topology: bool,
     task_profiles: Vec<String>,
     extra_idsigs: &[PathBuf],
 ) -> Result<(), Error> {
@@ -112,6 +113,9 @@ pub fn command_run_app(
         None
     };
 
+    let cpu_topology =
+        if host_cpu_topology { CpuTopology::MATCH_HOST } else { CpuTopology::ONE_CPU };
+
     let extra_idsig_files: Result<Vec<File>, _> = extra_idsigs.iter().map(File::open).collect();
     let extra_idsig_fds = extra_idsig_files?.into_iter().map(ParcelFileDescriptor::new).collect();
 
@@ -141,7 +145,7 @@ pub fn command_run_app(
         debugLevel: debug_level,
         protectedVm: protected,
         memoryMib: mem.unwrap_or(0) as i32, // 0 means use the VM default
-        numCpus: cpus.unwrap_or(1) as i32,
+        cpuTopology: cpu_topology,
         taskProfiles: task_profiles,
     });
     run(service, &config, &payload_config_str, console_path, log_path)
@@ -182,7 +186,7 @@ pub fn command_run_microdroid(
     debug_level: DebugLevel,
     protected: bool,
     mem: Option<u32>,
-    cpus: Option<u32>,
+    host_cpu_topology: bool,
     task_profiles: Vec<String>,
 ) -> Result<(), Error> {
     let apk = find_empty_payload_apk_path()?;
@@ -211,7 +215,7 @@ pub fn command_run_microdroid(
         debug_level,
         protected,
         mem,
-        cpus,
+        host_cpu_topology,
         task_profiles,
         &extra_sig,
     )
@@ -226,7 +230,7 @@ pub fn command_run(
     console_path: Option<&Path>,
     log_path: Option<&Path>,
     mem: Option<u32>,
-    cpus: Option<u32>,
+    host_cpu_topology: bool,
     task_profiles: Vec<String>,
 ) -> Result<(), Error> {
     let config_file = File::open(config_path).context("Failed to open config file")?;
@@ -235,8 +239,8 @@ pub fn command_run(
     if let Some(mem) = mem {
         config.memoryMib = mem as i32;
     }
-    if let Some(cpus) = cpus {
-        config.numCpus = cpus as i32;
+    if host_cpu_topology {
+        config.cpuTopology = CpuTopology::MATCH_HOST;
     }
     if let Some(name) = name {
         config.name = name;
