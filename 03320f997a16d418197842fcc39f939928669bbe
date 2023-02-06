@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "65af7a51_9f09ae35",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2023-02-06T17:46:07Z",
+      "side": 1,
+      "message": "Ah, I wrongly assumed no config means 1 vCPU, but now I see the `nproc` call.\n\nNo objection then.  I originally picked `dalvik.vm.boot-dex2oat-threads` to honor the \"existing\" configuration, but that doesn\u0027t make sense now... especially since the compilation runs on idle/plugged, not during boot.",
+      "parentUuid": "060f2214_e3e4f11e",
+      "range": {
+        "startLine": 10,
+        "startChar": 65,
+        "endLine": 12,
+        "endChar": 32
+      },
+      "revId": "03320f997a16d418197842fcc39f939928669bbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "783fad4f_cd864456",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
