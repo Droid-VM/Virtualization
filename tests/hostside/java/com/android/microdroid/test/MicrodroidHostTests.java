@@ -92,9 +92,6 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     private static final int MIN_MEM_ARM64 = 145;
     private static final int MIN_MEM_X86_64 = 196;
 
-    // Number of vCPUs for testing purpose
-    private static final int NUM_VCPUS = 3;
-
     private static final int BOOT_COMPLETE_TIMEOUT = 30000; // 30 seconds
 
     private static final Pattern sCIDPattern = Pattern.compile("with CID (\\d+)");
@@ -443,7 +440,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
                         .debugLevel("full")
                         .memoryMib(minMemorySize())
-                        .numCpus(NUM_VCPUS)
+                        .cpuTopology("match_host")
                         .protectedVm(protectedVm)
                         .build(getAndroidDevice());
 
@@ -522,7 +519,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
                         .debugLevel("full")
                         .memoryMib(minMemorySize())
-                        .numCpus(NUM_VCPUS)
+                        .cpuTopology("match_host")
                         .build(getAndroidDevice());
         mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
         mMicrodroidDevice.enableAdbRoot();
@@ -618,7 +615,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
                         .debugLevel("full")
                         .memoryMib(minMemorySize())
-                        .numCpus(NUM_VCPUS)
+                        .cpuTopology("match_host")
                         .build(device);
         microdroid.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
         device.shutdownMicrodroid(microdroid);
@@ -681,7 +678,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
                         .debugLevel("full")
                         .memoryMib(minMemorySize())
-                        .numCpus(NUM_VCPUS)
+                        .cpuTopology("match_host")
                         .build(getAndroidDevice());
         mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
         CommandRunner microdroid = new CommandRunner(mMicrodroidDevice);
@@ -747,7 +744,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
                         .debugLevel("full")
                         .memoryMib(minMemorySize())
-                        .numCpus(NUM_VCPUS)
+                        .cpuTopology("match_host")
                         .build(getAndroidDevice());
         mMicrodroidDevice.waitForBootComplete(BOOT_COMPLETE_TIMEOUT);
         mMicrodroidDevice.enableAdbRoot();
