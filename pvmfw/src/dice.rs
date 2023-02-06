@@ -18,10 +18,10 @@ use core::ffi::CStr;
 use core::mem::size_of;
 use dice::bcc::format_config_descriptor;
 use dice::bcc::Handover;
-use dice::hash;
 use dice::Config;
 use dice::DiceMode;
 use dice::InputValues;
+use diced_open_dice::hash;
 use pvmfw_avb::{DebugLevel, Digest, VerifiedBootData};
 
 fn to_dice_mode(debug_level: DebugLevel) -> DiceMode {
