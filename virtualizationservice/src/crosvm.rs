@@ -779,7 +779,28 @@ fn run_vm(
     debug!("Preserving FDs {:?}", preserved_fds);
     command.preserved_fds(preserved_fds);
 
-    command.arg("--params").arg("crashkernel=17M");
+    let mut should_configure_ramdump = true;
+    if config.protected {
+        // Protected VM needs ramdump configuration here.
+        // pvmfw will disable ramdump if unnecessary.
+        should_configure_ramdump = true;
+    } else {
+        // ramdump wouldn't be enabled if ramdump is explicitly set to <1>.
+        should_configure_ramdump = false;
+        if let Ok(file) = File::open("/proc/device-tree/avf/guest/common/ramdump") {
+            let mut ramdump: [u8; 4] = [0; 4];
+            if let Ok(read) = file.read(ramdump) {
+                if read == 4 && u32.from_le_bytes(ramdump) == 1 {
+                    should_configure_ramdump = true;
+                }
+            }
+        }
+    }
+
+    if should_configure_ramdump {
+        command.arg("--params").arg("crashkernel=17M");
+    }
+
     print_crosvm_args(&command);
 
     let result = SharedChild::spawn(&mut command)?;
