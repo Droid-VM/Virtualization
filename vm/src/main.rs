@@ -91,9 +91,9 @@ enum Opt {
         #[clap(short, long)]
         mem: Option<u32>,
 
-        /// Number of vCPUs in the VM. If unspecified, defaults to 1.
+        /// Run VM with vCPU topology matching that of the host. If unspecified, defaults to 1 vCPU.
         #[clap(long)]
-        cpus: Option<u32>,
+        host_cpu_topology: bool,
 
         /// Comma separated list of task profile names to apply to the VM
         #[clap(long)]
@@ -146,9 +146,9 @@ enum Opt {
         #[clap(short, long)]
         mem: Option<u32>,
 
-        /// Number of vCPUs in the VM. If unspecified, defaults to 1.
+        /// Run VM with vCPU topology matching that of the host. If unspecified, defaults to 1 vCPU.
         #[clap(long)]
-        cpus: Option<u32>,
+        host_cpu_topology: bool,
 
         /// Comma separated list of task profile names to apply to the VM
         #[clap(long)]
@@ -163,9 +163,9 @@ enum Opt {
         #[clap(long)]
         name: Option<String>,
 
-        /// Number of vCPUs in the VM. If unspecified, defaults to 1.
+        /// Run VM with vCPU topology matching that of the host. If unspecified, defaults to 1 vCPU.
         #[clap(long)]
-        cpus: Option<u32>,
+        host_cpu_topology: bool,
 
         /// Comma separated list of task profile names to apply to the VM
         #[clap(long)]
@@ -248,7 +248,7 @@ fn main() -> Result<(), Error> {
             debug,
             protected,
             mem,
-            cpus,
+            host_cpu_topology,
             task_profiles,
             extra_idsigs,
         } => command_run_app(
@@ -266,7 +266,7 @@ fn main() -> Result<(), Error> {
             debug,
             protected,
             mem,
-            cpus,
+            host_cpu_topology,
             task_profiles,
             &extra_idsigs,
         ),
@@ -280,7 +280,7 @@ fn main() -> Result<(), Error> {
             debug,
             protected,
             mem,
-            cpus,
+            host_cpu_topology,
             task_profiles,
         } => command_run_microdroid(
             name,
@@ -293,10 +293,10 @@ fn main() -> Result<(), Error> {
             debug,
             protected,
             mem,
-            cpus,
+            host_cpu_topology,
             task_profiles,
         ),
-        Opt::Run { name, config, cpus, task_profiles, console, log } => {
+        Opt::Run { name, config, host_cpu_topology, task_profiles, console, log } => {
             command_run(
                 name,
                 service.as_ref(),
@@ -304,7 +304,7 @@ fn main() -> Result<(), Error> {
                 console.as_deref(),
                 log.as_deref(),
                 /* mem */ None,
-                cpus,
+                host_cpu_topology,
                 task_profiles,
             )
         }

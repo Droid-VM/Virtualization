@@ -23,7 +23,6 @@ use anyhow::{bail, Result};
 use binder::Strong;
 use compos_common::compos_client::VmParameters;
 use compos_common::{CURRENT_INSTANCE_DIR, TEST_INSTANCE_DIR};
-use std::num::NonZeroU32;
 use std::sync::{Arc, Mutex, Weak};
 use virtualizationservice::IVirtualizationService::IVirtualizationService;
 
@@ -77,12 +76,8 @@ impl InstanceManager {
 }
 
 fn new_vm_parameters() -> Result<VmParameters> {
-    // By default, dex2oat starts as many threads as there are CPUs. This can be overridden with
-    // a system property. Start the VM with all CPUs and assume the guest will start a suitable
-    // number of dex2oat threads.
-    let cpus = NonZeroU32::new(num_cpus::get() as u32);
     let task_profiles = vec!["SCHED_SP_COMPUTE".to_string()];
-    Ok(VmParameters { cpus, task_profiles, memory_mib: Some(VM_MEMORY_MIB), ..Default::default() })
+    Ok(VmParameters { task_profiles, memory_mib: Some(VM_MEMORY_MIB), ..Default::default() })
 }
 
 // Ensures we only run one instance at a time.
