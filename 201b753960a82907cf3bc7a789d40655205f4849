@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9203188e_9e2af2d5",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-06T12:24:24Z",
+      "side": 1,
+      "message": "let\u0027s return bool or Result\u003cbool\u003e if we want propagate the file IO failures @ L674 and L676 to the caller where they can be logged.",
+      "range": {
+        "startLine": 666,
+        "startChar": 48,
+        "endLine": 666,
+        "endChar": 59
+      },
+      "revId": "201b753960a82907cf3bc7a789d40655205f4849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66b0be63_f9ac593d",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-06T12:24:24Z",
+      "side": 1,
+      "message": "could be `Default::default()` to avoid the repeatition of `4`.",
+      "range": {
+        "startLine": 675,
+        "startChar": 39,
+        "endLine": 675,
+        "endChar": 45
+      },
+      "revId": "201b753960a82907cf3bc7a789d40655205f4849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "263aa1f9_73c5f891",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-06T12:24:24Z",
+      "side": 1,
+      "message": "If we use read_exact, we could avoid this check.",
+      "range": {
+        "startLine": 677,
+        "startChar": 16,
+        "endLine": 677,
+        "endChar": 30
+      },
+      "revId": "201b753960a82907cf3bc7a789d40655205f4849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
