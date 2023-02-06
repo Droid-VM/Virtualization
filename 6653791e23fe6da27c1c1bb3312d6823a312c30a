@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2f4aa83_22a68c11",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-06T17:45:43Z",
+      "side": 0,
+      "message": "We shouldn\u0027t delete this - compos_verify only wants 1 CPU (it does almost no work and wants to be fast) but compos wants all the CPU it can get.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 33
+      },
+      "revId": "6653791e23fe6da27c1c1bb3312d6823a312c30a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
