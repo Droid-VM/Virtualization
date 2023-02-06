@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "060f2214_e3e4f11e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-06T17:39:30Z",
+      "side": 1,
+      "message": "Eh, not sure I follow your question. This removes the sysprop override for vCPU count only, which puts it back to the default of using `nproc` vCPUs. Here\u0027s the breakdown of behaviour:\n```\nBefore:\n * prop not set:  numDex2oatThreads \u003d numVcpus \u003d numHostCpus\n * prop set:      numDex2oatThreads \u003d numVcpus \u003d propValue\n \nAfter:\n * prop not set:  numDex2oatThreads \u003d numVcpus \u003d numHostCpus\n * prop set:      (numDex2oatThreads \u003d propValue) \u003c\u003d (numVcpus \u003d numHostCpus)\n```\nDoes that answer your question?",
+      "parentUuid": "7664635a_2b242e5f",
+      "range": {
+        "startLine": 10,
+        "startChar": 65,
+        "endLine": 12,
+        "endChar": 32
+      },
+      "revId": "03320f997a16d418197842fcc39f939928669bbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "783fad4f_cd864456",
