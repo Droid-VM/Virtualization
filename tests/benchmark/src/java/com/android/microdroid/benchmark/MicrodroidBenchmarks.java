@@ -195,16 +195,13 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
     }
 
     @Test
-    public void testMicrodroidMulticoreBootTime()
+    public void testMicrodroidHostCpuTopologyBootTime()
             throws VirtualMachineException, InterruptedException, IOException {
-        for (int numCpus : new int[] {2, 4, 8}) {
-            BootTimeStats stats =
-                    runBootTimeTest(
-                            "test_vm_boot_time_multicore",
-                            (builder) -> builder.setNumCpus(numCpus));
-            String metricName = "boot_time_" + numCpus + "cpus";
-            reportMetrics(stats.get(BootTimeMetric.TOTAL), metricName, "ms");
-        }
+        BootTimeStats stats =
+                runBootTimeTest(
+                        "test_vm_boot_time_host_topology",
+                        (builder) -> builder.setCpuTopology(CPU_TOPOLOGY_MATCH_HOST));
+        reportMetrics(stats.get(BootTimeMetric.TOTAL), "boot_time", "ms");
     }
 
     @Test
