@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eb2d595_3766c6af",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-02-06T17:01:27Z",
+      "side": 1,
+      "message": "Picked to return bool, because caller (`run_vm`) don\u0027t log for similar cases.",
+      "parentUuid": "9203188e_9e2af2d5",
+      "range": {
+        "startLine": 666,
+        "startChar": 48,
+        "endLine": 666,
+        "endChar": 59
+      },
+      "revId": "201b753960a82907cf3bc7a789d40655205f4849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66b0be63_f9ac593d",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21c94027_9fed912a",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-02-06T17:01:27Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "66b0be63_f9ac593d",
+      "range": {
+        "startLine": 675,
+        "startChar": 39,
+        "endLine": 675,
+        "endChar": 45
+      },
+      "revId": "201b753960a82907cf3bc7a789d40655205f4849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "263aa1f9_73c5f891",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-02-06T12:24:24Z",
       "side": 1,
       "message": "If we use read_exact, we could avoid this check.",
+      "range": {
+        "startLine": 677,
+        "startChar": 16,
+        "endLine": 677,
+        "endChar": 30
+      },
+      "revId": "201b753960a82907cf3bc7a789d40655205f4849",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d70f01b_4a483200",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-02-06T17:01:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "263aa1f9_73c5f891",
       "range": {
         "startLine": 677,
         "startChar": 16,
