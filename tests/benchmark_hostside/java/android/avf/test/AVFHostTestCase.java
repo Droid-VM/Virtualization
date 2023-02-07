@@ -86,6 +86,10 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
 
     @Before
     public void setUp() throws Exception {
+        if (isUserBuild()) {
+            CLog.i("Skipping test because collecting metrics requires adb root");
+            return;
+        }
         testIfDeviceIsCapable(getDevice());
 
         getDevice().installPackage(findTestFile(APK_NAME), /* reinstall */ false);
@@ -109,26 +113,46 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
 
     @Test
     public void testBootEnablePKVM() throws Exception {
+        if (isUserBuild()) {
+            // Skipping test on user build.
+            return;
+        }
         enableDisablePKVMTestHelper(true);
     }
 
     @Test
     public void testBootDisablePKVM() throws Exception {
+        if (isUserBuild()) {
+            // Skipping test on user build.
+            return;
+        }
         enableDisablePKVMTestHelper(false);
     }
 
     @Test
     public void testBootWithCompOS() throws Exception {
+        if (isUserBuild()) {
+            // Skipping test on user build.
+            return;
+        }
         composTestHelper(true);
     }
 
     @Test
     public void testBootWithoutCompOS() throws Exception {
+        if (isUserBuild()) {
+            // Skipping test on user build.
+            return;
+        }
         composTestHelper(false);
     }
 
     @Test
     public void testCameraAppStartupTime() throws Exception {
+        if (isUserBuild()) {
+            // Skipping test on user build.
+            return;
+        }
         String[] launchIntentPackages = {
             "com.android.camera2",
             "com.google.android.GoogleCamera/com.android.camera.CameraLauncher"
@@ -140,6 +164,10 @@ public final class AVFHostTestCase extends MicrodroidHostTestCaseBase {
 
     @Test
     public void testSettingsAppStartupTime() throws Exception {
+        if (isUserBuild()) {
+            // Skipping test on user build.
+            return;
+        }
         String[] launchIntentPackages = {
             "com.android.settings"
         };

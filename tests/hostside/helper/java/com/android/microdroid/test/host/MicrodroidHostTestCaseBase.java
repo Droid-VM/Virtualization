@@ -68,8 +68,21 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
             mandatory = false)
     private static String sCustomPvmfwPathOnHost = "";
 
+    private static Bool sIsUserBuild = null;
+
     private static boolean isEmptyText(String str) {
         return str == null || str.length() == 0;
+    }
+
+    public static boolean isUserBuild() {
+        if (!sIsUserBuild) {
+            synchronized (MicrodroidHostTestCaseBase.class) {
+                if (!sIsUserBuild) {
+                    sIsUserBuild = "user".equals(runOnHost("adb", "getprop", "ro.build.type"));
+                }
+            }
+        }
+        return sIsUserBuild;
     }
 
     public static void prepareVirtualizationTestSetup(ITestDevice androidDevice)

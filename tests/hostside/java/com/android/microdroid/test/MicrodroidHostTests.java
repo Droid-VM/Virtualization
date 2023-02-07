@@ -28,6 +28,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assume.assumeFalse;
 import static org.junit.Assume.assumeTrue;
+import static org.junit.Ignore;
 
 import static java.util.stream.Collectors.toList;
 
@@ -561,6 +562,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+    @Ignore("b/243630590: Temporal workaround until lab devices has flashed new DPM")
     public void testTombstonesAreGeneratedUponUserspaceCrash() throws Exception {
         assertThat(
                         isTombstoneGenerated(
@@ -572,6 +574,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+    @Ignore("b/243630590: Temporal workaround until lab devices has flashed new DPM")
     public void testTombstonesAreNotGeneratedIfNotExportedUponUserspaceCrash() throws Exception {
         assertThat(
                         isTombstoneGenerated(
@@ -583,6 +586,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     }
 
     @Test
+    @Ignore("b/243630590: Temporal workaround until lab devices has flashed new DPM")
     public void testTombstonesAreGeneratedUponKernelCrash() throws Exception {
         assumeFalse("Cuttlefish is not supported", isCuttlefish());
         assertThat(
