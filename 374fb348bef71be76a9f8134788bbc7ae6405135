@@ -16,6 +16,70 @@
       "message": "LGTM modulo Alan\u0027s comments on clearer documentation.\n\nAs a side note, I was (somewhat unpleasantly) surprised to see that a change of this kind cuts across so many files.",
       "revId": "374fb348bef71be76a9f8134788bbc7ae6405135",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14e81d50_60177c91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-07T10:34:21Z",
+      "side": 1,
+      "message": "\u003e As a side note, I was (somewhat unpleasantly) surprised to see that a change of this kind cuts across so many files.\n\nYeah, it is a little scary. We\u0027re changing at least 2 APIs and all their clients though.",
+      "parentUuid": "a1db17a5_ea0a5eda",
+      "revId": "374fb348bef71be76a9f8134788bbc7ae6405135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "601a9e62_2d8a0e60",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-07T10:34:21Z",
+      "side": 1,
+      "message": "Needs updating",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 65
+      },
+      "revId": "374fb348bef71be76a9f8134788bbc7ae6405135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5abeb361_52b53f7a",
+        "filename": "virtualizationmanager/src/atom.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-07T10:34:21Z",
+      "side": 1,
+      "message": "u32 ?",
+      "range": {
+        "startLine": 83,
+        "startChar": 39,
+        "endLine": 83,
+        "endChar": 42
+      },
+      "revId": "374fb348bef71be76a9f8134788bbc7ae6405135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
