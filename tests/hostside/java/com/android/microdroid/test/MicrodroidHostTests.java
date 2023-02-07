@@ -916,6 +916,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         prepareVirtualizationTestSetup(getDevice());
 
         getDevice().installPackage(findTestFile(APK_NAME), /* reinstall */ false);
+        getDevice().executeShellV2Command("mkdir " + TEST_ROOT);
 
         // clear the log
         getDevice().executeShellV2Command("logcat -c");
