@@ -68,6 +68,8 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
             mandatory = false)
     private static String sCustomPvmfwPathOnHost = "";
 
+    private static Boolean sIsUserBuild = null;
+
     private static boolean isEmptyText(String str) {
         return str == null || str.length() == 0;
     }
@@ -108,6 +110,11 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
         if (!isEmptyText(sCustomPvmfwPathOnHost)) {
             runOnHost("adb", "shell", "setprop", PVMFW_IMG_PATH_PROP, "\"\"");
         }
+    }
+
+    public boolean isUserBuild() {
+        CommandRunner android = new CommandRunner(getDevice());
+        return "user".equals(android.run("getprop", "ro.build.type"));
     }
 
     protected boolean isCuttlefish() {
