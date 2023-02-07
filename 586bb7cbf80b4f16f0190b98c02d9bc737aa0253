@@ -22,6 +22,30 @@
       },
       "revId": "586bb7cbf80b4f16f0190b98c02d9bc737aa0253",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80124654_86d50604",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-07T10:12:29Z",
+      "side": 1,
+      "message": "That\u0027s an interesting point, which might be quite relevant given the amount of C/C++ code (and their `str*()` calls) we rely on.",
+      "parentUuid": "ecaaee80_9ed26ab0",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 13
+      },
+      "revId": "586bb7cbf80b4f16f0190b98c02d9bc737aa0253",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
