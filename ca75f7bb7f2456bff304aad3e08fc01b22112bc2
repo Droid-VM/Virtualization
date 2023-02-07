@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4718b870_015c9203",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2023-02-07T23:06:00Z",
+      "side": 1,
+      "message": "This change is just setting the ext4 block size to 4096 bytes, which might be increasing it from 1024 or it might be having no effect.  (mke2fs defaults to 1024-byte blocks for very small filesystems, and 4096-byte blocks otherwise.)  However, it does not change the dm-crypt sector size, which is 512 bytes by default.  Did you intend to increase the dm-crypt sector size instead of, or in addition, to this possible increase in the ext4 block size?\n\nAlso, it seems this code is using AES-HCTR2, not Adiantum.",
+      "range": {
+        "startLine": 12,
+        "startChar": 30,
+        "endLine": 14,
+        "endChar": 19
+      },
+      "revId": "ca75f7bb7f2456bff304aad3e08fc01b22112bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
