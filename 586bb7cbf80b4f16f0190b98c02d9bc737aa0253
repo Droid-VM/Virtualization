@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecaaee80_9ed26ab0",
+        "filename": "vmbase/entry.S",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-02-07T09:41:55Z",
+      "side": 1,
+      "message": "(maybe dumb question) Many canary implementations put NULL byte at the beginning (thus using only 56 random bits) to prevent any possible leaks by truncating a string. Do we want that here too?",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 13
+      },
+      "revId": "586bb7cbf80b4f16f0190b98c02d9bc737aa0253",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
