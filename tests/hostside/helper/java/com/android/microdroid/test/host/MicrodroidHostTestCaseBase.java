@@ -91,6 +91,7 @@ public abstract class MicrodroidHostTestCaseBase extends BaseHostJUnit4Test {
             runOnHost("adb", "push", sCustomPvmfwPathOnHost, PVMFW_IMG_PATH);
             runOnHost("adb", "shell", "setprop", PVMFW_IMG_PATH_PROP, PVMFW_IMG_PATH);
         }
+        getDevice().executeShellV2Command("mkdir " + TEST_ROOT);
     }
 
     public static void cleanUpVirtualizationTestSetup(ITestDevice androidDevice)
