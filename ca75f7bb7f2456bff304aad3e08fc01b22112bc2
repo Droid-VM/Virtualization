@@ -22,6 +22,30 @@
       },
       "revId": "ca75f7bb7f2456bff304aad3e08fc01b22112bc2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29ae4140_252bd093",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-02-08T18:39:06Z",
+      "side": 1,
+      "message": "You\u0027re right this does not change the sector size used by dm-crypt. That will be part of dm-crypt target  `\"sector_size:4096\" \"iv_large_sectors\"`.\n\nAlso, you\u0027re right about encryptedstore using AES-HCTR2. I couldn\u0027t fix the whole thing today (I think I might need to also change vitio sector size, which currently in 512). I\u0027ll fix all this by tomorrow \u0026 send the patch your way. Thanks for your comment :)",
+      "parentUuid": "4718b870_015c9203",
+      "range": {
+        "startLine": 12,
+        "startChar": 30,
+        "endLine": 14,
+        "endChar": 19
+      },
+      "revId": "ca75f7bb7f2456bff304aad3e08fc01b22112bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
