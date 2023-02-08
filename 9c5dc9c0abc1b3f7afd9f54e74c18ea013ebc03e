@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4824315a_04bd8254",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-08T11:17:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d29458a_6115f103",
+      "range": {
+        "startLine": 63,
+        "startChar": 39,
+        "endLine": 63,
+        "endChar": 41
+      },
+      "revId": "9c5dc9c0abc1b3f7afd9f54e74c18ea013ebc03e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98d1dd25_e8d2f3bc",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-02-06T18:24:43Z",
       "side": 1,
       "message": "We should add why this might be a good choice - fastest to boot, and good for loads that don\u0027t need tons of CPU?",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 61
+      },
+      "revId": "9c5dc9c0abc1b3f7afd9f54e74c18ea013ebc03e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc2ddd68_45bdd541",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-08T11:17:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98d1dd25_e8d2f3bc",
       "range": {
         "startLine": 112,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32de7785_2a76ad62",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-08T11:17:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "899b05b9_a8eccb35",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 80
+      },
+      "revId": "9c5dc9c0abc1b3f7afd9f54e74c18ea013ebc03e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa3a3730_0a0098ad",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-02-06T18:24:43Z",
       "side": 1,
       "message": "Can you remove this while you\u0027re here?",
+      "range": {
+        "startLine": 338,
+        "startChar": 0,
+        "endLine": 338,
+        "endChar": 12
+      },
+      "revId": "9c5dc9c0abc1b3f7afd9f54e74c18ea013ebc03e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d050807e_99f60cf8",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-08T11:17:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa3a3730_0a0098ad",
       "range": {
         "startLine": 338,
         "startChar": 0,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ac73a58_5757e9e5",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-08T11:17:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c07f0d2_77e6e39d",
+      "range": {
+        "startLine": 367,
+        "startChar": 46,
+        "endLine": 367,
+        "endChar": 55
+      },
+      "revId": "9c5dc9c0abc1b3f7afd9f54e74c18ea013ebc03e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7bd308f_18bb1ac5",
@@ -146,6 +266,30 @@
       "writtenOn": "2023-02-06T18:24:43Z",
       "side": 1,
       "message": "I think we need to explain what we mean by \"topology\" here. It needs to be somewhere, and here would be a good place.\n\"How many vCPUs are allocated and their relative performance characteristics for scheduling purposes\"?",
+      "range": {
+        "startLine": 720,
+        "startChar": 11,
+        "endLine": 720,
+        "endChar": 47
+      },
+      "revId": "9c5dc9c0abc1b3f7afd9f54e74c18ea013ebc03e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7e0b267_9eedd3a1",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-08T11:17:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7bd308f_18bb1ac5",
       "range": {
         "startLine": 720,
         "startChar": 11,
