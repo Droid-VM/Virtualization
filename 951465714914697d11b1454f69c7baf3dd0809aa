@@ -22,6 +22,30 @@
       },
       "revId": "951465714914697d11b1454f69c7baf3dd0809aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5f0d783_6fa213e3",
+        "filename": "TEST_MAPPING",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-02-08T08:15:11Z",
+      "side": 1,
+      "message": "Other tests uses `assume()` (or `assumeTrue()` / `assumeFalse()`) in Java code to skip if the device doesn\u0027t meet the test requirement.\n\nHowever, in user build, `AVFHostTestCases` doesn\u0027t even start because its `AndroidTest.xml` runs `RootTargetPreparer` (see [code]) which is handled before the any code in the test run.\n\nSo there\u0027s two ways to ignore the test\n\n  - Option 1: Remove `AVFHostTestCases` from postsubmit configuration.\n  - Option 2: Stop using `RootTargetPreparer`, and calls `adb root` in test code.\n  \nI picked option 1 simply because we know that attempt to running the test seemed waste of resources. What do you think? I can revert this CL and change to option 2 if you prefer to have consistency in handling requirement check.\n\n\n[code]: https://android.googlesource.com/platform/packages/modules/Virtualization/+/refs/heads/master/tests/benchmark_hostside/AndroidTest.xml",
+      "parentUuid": "c1565f51_f9c165d0",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 31
+      },
+      "revId": "951465714914697d11b1454f69c7baf3dd0809aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
