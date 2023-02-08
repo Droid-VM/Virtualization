@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18b2180b_8b138a75",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-08T13:38:05Z",
+      "side": 1,
+      "message": "Do we make sure we include this setting in the VM identity? I assume we must do, but I\u0027m hazy about where that actually happens.",
+      "range": {
+        "startLine": 351,
+        "startChar": 17,
+        "endLine": 351,
+        "endChar": 34
+      },
+      "revId": "ab1037d26b6bc7e6e06aa5af5071f70eaba4ce9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41c536ab_4ce71a96",
+        "filename": "tests/testapk/assets/vm_config_no_tombstone.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-08T13:38:05Z",
+      "side": 1,
+      "message": "We should have some test for a config file that omits export_tombstones, I guess?",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 9,
+        "endChar": 28
+      },
+      "revId": "ab1037d26b6bc7e6e06aa5af5071f70eaba4ce9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
