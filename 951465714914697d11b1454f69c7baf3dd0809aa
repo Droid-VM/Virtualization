@@ -46,6 +46,30 @@
       },
       "revId": "951465714914697d11b1454f69c7baf3dd0809aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8c6848d_37822faa",
+        "filename": "TEST_MAPPING",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-08T10:07:16Z",
+      "side": 1,
+      "message": "Option 2 sounds a lot simpler long term in my mind (again, sorry I\u0027m late with this). I\u0027m pretty sure `AVFHostTestCases` already runs `adb root` in code, so you maybe you just need to remove `RootTargetPreparer` from the xml file.",
+      "parentUuid": "e5f0d783_6fa213e3",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 31
+      },
+      "revId": "951465714914697d11b1454f69c7baf3dd0809aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
