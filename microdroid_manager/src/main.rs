@@ -34,6 +34,7 @@ use android_system_virtualization_payload::aidl::android::system::virtualization
 use anyhow::{anyhow, bail, ensure, Context, Error, Result};
 use apkverify::{get_public_key_der, verify, V4Signature};
 use binder::Strong;
+use diced_open_dice_cbor::kdf;
 use diced_utils::cbor::{encode_header, encode_number};
 use glob::glob;
 use itertools::sorted;
@@ -88,7 +89,7 @@ const FAILURE_SERIAL_DEVICE: &str = "/dev/ttyS1";
 const ENCRYPTEDSTORE_BACKING_DEVICE: &str = "/dev/block/by-name/encryptedstore";
 const ENCRYPTEDSTORE_BIN: &str = "/system/bin/encryptedstore";
 const ENCRYPTEDSTORE_KEY_IDENTIFIER: &str = "encryptedstore_key";
-const ENCRYPTEDSTORE_KEYSIZE: u32 = 32;
+const ENCRYPTEDSTORE_KEYSIZE: usize = 32;
 
 #[derive(thiserror::Error, Debug)]
 enum MicrodroidError {
@@ -909,17 +910,19 @@ fn prepare_encryptedstore(dice: &DiceContext) -> Result<Child> {
         0x6F, 0xB3, 0xF9, 0x40, 0xCE, 0xDD, 0x99, 0x40, 0xAA, 0xA7, 0x0E, 0x92, 0x73, 0x90, 0x86,
         0x4A, 0x75,
     ];
-    let key = dice.get_sealing_key(
+    let mut key = [0u8; ENCRYPTEDSTORE_KEYSIZE];
+    kdf(
+        &dice.cdi_seal, // ikm
         &salt,
-        ENCRYPTEDSTORE_KEY_IDENTIFIER.as_bytes(),
-        ENCRYPTEDSTORE_KEYSIZE,
+        ENCRYPTEDSTORE_KEY_IDENTIFIER.as_bytes(), // info
+        &mut key,
     )?;
 
     let mut cmd = Command::new(ENCRYPTEDSTORE_BIN);
     cmd.arg("--blkdevice")
         .arg(ENCRYPTEDSTORE_BACKING_DEVICE)
         .arg("--key")
-        .arg(hex::encode(&*key))
+        .arg(hex::encode(key))
         .args(["--mountpoint", ENCRYPTEDSTORE_MOUNTPOINT])
         .spawn()
         .context("encryptedstore failed")
