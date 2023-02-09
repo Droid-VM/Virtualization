@@ -22,6 +22,30 @@
       },
       "revId": "8fda5ebcefdadc707f6de112a03e4e3c29b09c99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "176ceb9b_ef57e1de",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/Pvmfw.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-02-09T06:16:23Z",
+      "side": 1,
+      "message": "\u003e Where does this number come from? Is this to simplify the implementation of serialize?\n\nYes, it\u0027s just an implementation detail proposed by Pierre. I can remove this if this looks bad.",
+      "parentUuid": "1e3d55ca_8edb652e",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 79
+      },
+      "revId": "8fda5ebcefdadc707f6de112a03e4e3c29b09c99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
