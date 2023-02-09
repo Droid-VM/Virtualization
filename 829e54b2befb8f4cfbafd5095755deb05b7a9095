@@ -22,6 +22,30 @@
       },
       "revId": "829e54b2befb8f4cfbafd5095755deb05b7a9095",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84337fb1_14ade3e7",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-02-09T18:32:04Z",
+      "side": 1,
+      "message": "Thank you for the suggestion, but that seems to be the outside of this CL, and also I don\u0027t have a good idea in naming.\n\n... Actually I think that it should be `bool checkDeviceCapability()` without any exception, and it\u0027s callers decision to wrap it with `assume()`, `assertThat()`, or `if` statement. Failure message in assume() doesn\u0027t seem to propagated to anywhere in the `atest`, so it looked OK for me.\n\nBut in this CL, I didn\u0027t want to make a huge change and only want to focus on one problem. I checked other tests uses `testIfDeviceIsCapable()` but they aren\u0027t using time consuming clean-ups. Happy to discuss further if you want.",
+      "parentUuid": "389c69b8_f1b98244",
+      "range": {
+        "startLine": 99,
+        "startChar": 12,
+        "endLine": 99,
+        "endChar": 33
+      },
+      "revId": "829e54b2befb8f4cfbafd5095755deb05b7a9095",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
