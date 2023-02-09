@@ -220,8 +220,12 @@ entry:
 	adr_l x30, __bionic_tls
 	msr tpidr_el0, x30
 
-	/* Randomize stack protector. */
+	/*
+	 * Randomize stack protector and clear the least significant byte,
+	 * making it act as a string terminator.
+	 */
 	rnd_reg x29
+	bic x29, x29, 0xff
 	adr_l x30, __stack_chk_guard
 	str x29, [x30]
 
