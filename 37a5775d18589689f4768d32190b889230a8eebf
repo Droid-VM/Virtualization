@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea1957eb_7bfd66ee",
+        "filename": "tests/hostside/java/com/android/microdroid/test/PvmfwDebugPolicyHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-09T20:14:51Z",
+      "side": 1,
+      "message": "nit: let\u0027s reserve this suffix for the AVB partition",
+      "range": {
+        "startLine": 46,
+        "startChar": 31,
+        "endLine": 46,
+        "endChar": 35
+      },
+      "revId": "37a5775d18589689f4768d32190b889230a8eebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0433ed5_25b71c30",
+        "filename": "tests/hostside/java/com/android/microdroid/test/PvmfwDebugPolicyHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-09T20:14:51Z",
+      "side": 1,
+      "message": "Can we use `mAndroidDevice`\u0027s `INativeDevice::pushFile`?",
+      "range": {
+        "startLine": 180,
+        "startChar": 9,
+        "endLine": 180,
+        "endChar": 31
+      },
+      "revId": "37a5775d18589689f4768d32190b889230a8eebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c1d4f49_63f08ae0",
+        "filename": "tests/hostside/java/com/android/microdroid/test/PvmfwDebugPolicyHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-09T20:14:51Z",
+      "side": 1,
+      "message": "OOC, why don\u0027t you use a `commandRunner` here (and for the `adb shell` below)? I also see that `INativeDevice::setProperty` exists?",
+      "range": {
+        "startLine": 181,
+        "startChar": 8,
+        "endLine": 181,
+        "endChar": 33
+      },
+      "revId": "37a5775d18589689f4768d32190b889230a8eebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56966687_59cb0369",
+        "filename": "tests/hostside/java/com/android/microdroid/test/PvmfwDebugPolicyHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-09T20:14:51Z",
+      "side": 1,
+      "message": "Not sure what the policies are regarding tests putting devices back in the original state but should this function also delete the image on the device?",
+      "range": {
+        "startLine": 185,
+        "startChar": 39,
+        "endLine": 185,
+        "endChar": 40
+      },
+      "revId": "37a5775d18589689f4768d32190b889230a8eebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "589b0a3f_850ff74b",
+        "filename": "tests/hostside/java/com/android/microdroid/test/PvmfwDebugPolicyHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-09T20:14:51Z",
+      "side": 1,
+      "message": "This is misleading as it might be interpreted as meaning to wait until the VM has shut down could we rephrase it (`WaitUntilReady`, `WaitForBootComplete`, ...)?",
+      "range": {
+        "startLine": 189,
+        "startChar": 44,
+        "endLine": 189,
+        "endChar": 60
+      },
+      "revId": "37a5775d18589689f4768d32190b889230a8eebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a831ac3_d410afa7",
+        "filename": "tests/hostside/java/com/android/microdroid/test/PvmfwDebugPolicyHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-09T20:14:51Z",
+      "side": 1,
+      "message": "cs/addTestArtifacts doesn\u0027t seem to return any hit(?!!); what does that do? If it pushes the custom pvmfw to the device, isn\u0027t is a duplicate of the `adb push` in `useCustomPvmfw`?",
+      "range": {
+        "startLine": 195,
+        "startChar": 24,
+        "endLine": 195,
+        "endChar": 85
+      },
+      "revId": "37a5775d18589689f4768d32190b889230a8eebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
