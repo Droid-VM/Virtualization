@@ -87,6 +87,99 @@
       },
       "revId": "8fda5ebcefdadc707f6de112a03e4e3c29b09c99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0fbb51b_a5c00642",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/Pvmfw.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-09T10:03:34Z",
+      "side": 1,
+      "message": "IIRC, we dropped this part of the spec and neither gpar/427189 nor aosp/2280852 seems to include it so the padding isn\u0027t required here either?",
+      "parentUuid": "9fb1efae_b0ff42a1",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 79
+      },
+      "revId": "8fda5ebcefdadc707f6de112a03e4e3c29b09c99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3e66c06_5035fa19",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/Pvmfw.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-09T10:03:34Z",
+      "side": 1,
+      "message": "So `SIZE_8B`, here?",
+      "range": {
+        "startLine": 81,
+        "startChar": 25,
+        "endLine": 81,
+        "endChar": 40
+      },
+      "revId": "8fda5ebcefdadc707f6de112a03e4e3c29b09c99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f357fc78_4d77be92",
+        "filename": "tests/hostside/helper/java/com/android/microdroid/test/host/Pvmfw.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-09T10:03:34Z",
+      "side": 1,
+      "message": "nit: move this inside the `if`",
+      "range": {
+        "startLine": 83,
+        "startChar": 12,
+        "endLine": 83,
+        "endChar": 34
+      },
+      "revId": "8fda5ebcefdadc707f6de112a03e4e3c29b09c99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "422f8cfa_0478479e",
+        "filename": "tests/hostside/tools/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-09T10:03:34Z",
+      "side": 1,
+      "message": "nit: could we give this a more descriptive name? `pvmfw-packager`, `append-pvmfw-config-data`, ...?",
+      "range": {
+        "startLine": 6,
+        "startChar": 17,
+        "endLine": 6,
+        "endChar": 21
+      },
+      "revId": "8fda5ebcefdadc707f6de112a03e4e3c29b09c99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
