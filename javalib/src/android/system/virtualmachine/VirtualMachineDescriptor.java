@@ -34,6 +34,9 @@ import android.os.Parcelable;
  *
  * @hide
  */
+// TODO(b/259384440): the file descriptors will be shared between two descriptors: one in the
+//  original app, and another app in the app that descriptor was shared with. We should either dup
+//  the descriptors, or explicitly mention this in the documentation.
 @SystemApi
 public final class VirtualMachineDescriptor implements Parcelable {
     @NonNull private final ParcelFileDescriptor mConfigFd;
@@ -49,9 +52,12 @@ public final class VirtualMachineDescriptor implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel out, int flags) {
-        mConfigFd.writeToParcel(out, flags);
-        mInstanceImgFd.writeToParcel(out, flags);
-        if (mEncryptedStoreFd != null) mEncryptedStoreFd.writeToParcel(out, flags);
+        out.writeBoolean(mEncryptedStoreFd != null);
+        out.writeParcelable(mConfigFd, flags);
+        out.writeParcelable(mInstanceImgFd, flags);
+        if (mEncryptedStoreFd != null) {
+            out.writeParcelable(mEncryptedStoreFd, flags);
+        }
     }
 
     @NonNull
@@ -95,14 +101,20 @@ public final class VirtualMachineDescriptor implements Parcelable {
             @NonNull ParcelFileDescriptor configFd,
             @NonNull ParcelFileDescriptor instanceImgFd,
             @Nullable ParcelFileDescriptor encryptedStoreFd) {
-        mConfigFd = configFd;
-        mInstanceImgFd = instanceImgFd;
+        mConfigFd = requireNonNull(configFd);
+        mInstanceImgFd = requireNonNull(instanceImgFd);
         mEncryptedStoreFd = encryptedStoreFd;
     }
 
     private VirtualMachineDescriptor(Parcel in) {
-        mConfigFd = requireNonNull(in.readFileDescriptor());
-        mInstanceImgFd = requireNonNull(in.readFileDescriptor());
-        mEncryptedStoreFd = in.readFileDescriptor();
+        boolean hasEncryptedStore = in.readBoolean();
+        mConfigFd = requireNonNull(readParcelFileDescriptor(in));
+        mInstanceImgFd = requireNonNull(readParcelFileDescriptor(in));
+        mEncryptedStoreFd = hasEncryptedStore ? requireNonNull(readParcelFileDescriptor(in)) : null;
+    }
+
+    private ParcelFileDescriptor readParcelFileDescriptor(Parcel in) {
+        return in.readParcelable(
+                ParcelFileDescriptor.class.getClassLoader(), ParcelFileDescriptor.class);
     }
 }
