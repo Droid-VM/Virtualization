@@ -2,19 +2,10 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
-aidl_interface {
-    name: "com.android.microdroid.test.vmshare_service",
+// Unfortunatelly aidl_interface doesn't work well with .aidl files that depend on java-only
+// parcelables (e.g. Bundle, VirtualMachineDescriptor), hence this java_library.
+java_library {
+    name: "com.android.microdroid.test.vmshare_service-java",
     srcs: ["com/**/*.aidl"],
-    unstable: true,
-    backend: {
-        java: {
-            sdk_version: "module_current",
-        },
-        ndk: {
-            enabled: false,
-        },
-        cpp: {
-            enabled: false,
-        },
-    },
+    sdk_version: "test_current",
 }

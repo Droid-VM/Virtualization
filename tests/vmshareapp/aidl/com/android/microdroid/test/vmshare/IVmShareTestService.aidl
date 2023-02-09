@@ -15,10 +15,10 @@
  */
 package com.android.microdroid.test.vmshare;
 
-import android.os.Bundle;
 import android.os.IBinder;
+import android.system.virtualmachine.VirtualMachineDescriptor;
 
 /** {@hide} */
 interface IVmShareTestService {
-    IBinder shareVm(Bundle bundle);
+    IBinder startVm(in VirtualMachineDescriptor vmDesc);
 }
