@@ -49,9 +49,12 @@ public final class VirtualMachineDescriptor implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel out, int flags) {
+        out.writeBoolean(mEncryptedStoreFd != null);
         mConfigFd.writeToParcel(out, flags);
         mInstanceImgFd.writeToParcel(out, flags);
-        if (mEncryptedStoreFd != null) mEncryptedStoreFd.writeToParcel(out, flags);
+        if (mEncryptedStoreFd != null) {
+            mEncryptedStoreFd.writeToParcel(out, flags);
+        }
     }
 
     @NonNull
@@ -101,8 +104,9 @@ public final class VirtualMachineDescriptor implements Parcelable {
     }
 
     private VirtualMachineDescriptor(Parcel in) {
+        boolean hasEncryptedStore = in.readBoolean();
         mConfigFd = requireNonNull(in.readFileDescriptor());
         mInstanceImgFd = requireNonNull(in.readFileDescriptor());
-        mEncryptedStoreFd = in.readFileDescriptor();
+        mEncryptedStoreFd = hasEncryptedStore ? requireNonNull(in.readFileDescriptor()) : null;
     }
 }

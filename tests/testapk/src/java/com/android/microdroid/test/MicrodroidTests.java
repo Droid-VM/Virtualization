@@ -33,9 +33,11 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.os.Build;
+import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.ParcelFileDescriptor.AutoCloseInputStream;
 import android.os.ParcelFileDescriptor.AutoCloseOutputStream;
+import android.os.Parcelable;
 import android.os.SystemProperties;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineCallback;
@@ -1544,6 +1546,38 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         }
 
         getVirtualMachineManager().delete("vm_from_another_app");
+    }
+
+    @Test
+    public void testVmDescriptorParcelUnparcel_noTrustedStorage() throws Exception {
+        assumeSupportedKernel();
+
+        VirtualMachineConfig config =
+                newVmConfigBuilder()
+                        .setPayloadBinaryName("MicrodroidTestNativeLib.so")
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .build();
+
+        VirtualMachine originalVm = forceCreateNewVirtualMachine("original_vm", config);
+        // Just start & stop the VM.
+        runVmTestService(originalVm, (ts, tr) -> {});
+
+        // Now create the descriptor and manually parcel & unparcel it.
+        VirtualMachineDescriptor vmDescriptor = originalVm.toDescriptor();
+        Parcel parcel = Parcel.obtain();
+        vmDescriptor.writeToParcel(parcel, Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+        VirtualMachineDescriptor unparcelledVmDescriptor =
+                VirtualMachineDescriptor.CREATOR.createFromParcel(parcel);
+
+        getVirtualMachineManager().importFromDescriptor("import_vm", vmDescriptor);
+        getVirtualMachineManager()
+                .importFromDescriptor("import_vm_from_unparcelled", unparcelledVmDescriptor);
+
+        assertFileContentsAreEqualInTwoVms("config.xml", "original_vm", "import_vm");
+        assertFileContentsAreEqualInTwoVms("instance.img", "original_vm", "import_vm");
+        assertFileContentsAreEqualInTwoVms("config.xml", "import_vm", "import_vm_from_unparcelled");
+        assertFileContentsAreEqualInTwoVms(
+                "instance.img", "import_vm", "import_vm_from_unparcelled");
     }
 
     private void assertFileContentsAreEqualInTwoVms(String fileName, String vmName1, String vmName2)
