@@ -71,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce7cc41c_70ade402",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineDescriptor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-10T14:34:38Z",
+      "side": 1,
+      "message": "Oh, you are right. I had a brain freeze when I was writing this comment.\n\n\u003e Do we need a close on VMD? Otherwise, how do the fds ever get closed?\n\nFiled b/268613460 and assigned to myself, but please feel free to take it over, as I have a bunch of other things on my plate.\n\n\u003e But perhaps we should dup as part of parceling for the in-process case\n\nWill handle in the follow-up change.",
+      "parentUuid": "7bf878b0_91980186",
+      "range": {
+        "startLine": 37,
+        "startChar": 3,
+        "endLine": 37,
+        "endChar": 20
+      },
+      "revId": "1803d02d9e4f86a75612a0f8051705a967776d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f69aa3b_8b01f352",
@@ -84,6 +108,30 @@
       "writtenOn": "2023-02-10T09:17:11Z",
       "side": 1,
       "message": "Alternatively we could just omit the if not null below - writeParcelable and readParcelable are perfectly ok with round-tripping null.",
+      "range": {
+        "startLine": 55,
+        "startChar": 8,
+        "endLine": 55,
+        "endChar": 52
+      },
+      "revId": "1803d02d9e4f86a75612a0f8051705a967776d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1539e03_aee91f38",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineDescriptor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-10T14:34:38Z",
+      "side": 1,
+      "message": "Good point, changed.",
+      "parentUuid": "7f69aa3b_8b01f352",
       "range": {
         "startLine": 55,
         "startChar": 8,
@@ -117,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28f2c95b_c8bb61e1",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineDescriptor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-10T14:34:38Z",
+      "side": 1,
+      "message": "That will also work, I just slightly prefer the approach when we write the whole PFD, not just the fd",
+      "parentUuid": "5d999691_42a6f6e1",
+      "range": {
+        "startLine": 56,
+        "startChar": 12,
+        "endLine": 56,
+        "endChar": 27
+      },
+      "revId": "1803d02d9e4f86a75612a0f8051705a967776d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b64b1c53_d8076ee7",
@@ -130,6 +202,30 @@
       "writtenOn": "2023-02-10T09:17:11Z",
       "side": 1,
       "message": "We could add round-tripping to the existing tests, as well, or instead?",
+      "range": {
+        "startLine": 1551,
+        "startChar": 16,
+        "endLine": 1551,
+        "endChar": 63
+      },
+      "revId": "1803d02d9e4f86a75612a0f8051705a967776d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58d5c331_57aed242",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1551,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-10T14:34:38Z",
+      "side": 1,
+      "message": "I slightly prefer separate test, as IMHO it is more readable. When it is a separate test, it is easier to understand what behaviour it tests (in this case that round-tripping works), while if we put into an existing test it will test multiple behaviours at the same time",
+      "parentUuid": "b64b1c53_d8076ee7",
       "range": {
         "startLine": 1551,
         "startChar": 16,
