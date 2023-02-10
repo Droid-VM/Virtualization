@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceb85132_3b379974",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineDescriptor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-02-10T09:04:22Z",
+      "side": 1,
+      "message": "I think the use case we discussed at the time is that the VM_a who sends the descriptor should be stopped before and during the send and also get destroyed after it. It\u0027s not supposed to change state in the process. I think it sounds good to dup the fd just to be sure.",
+      "range": {
+        "startLine": 37,
+        "startChar": 3,
+        "endLine": 37,
+        "endChar": 20
+      },
+      "revId": "1803d02d9e4f86a75612a0f8051705a967776d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d999691_42a6f6e1",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineDescriptor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-02-10T09:04:22Z",
+      "side": 1,
+      "message": "Why not changing this to `writeFileDescriptor` instead?",
+      "range": {
+        "startLine": 56,
+        "startChar": 12,
+        "endLine": 56,
+        "endChar": 27
+      },
+      "revId": "1803d02d9e4f86a75612a0f8051705a967776d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
