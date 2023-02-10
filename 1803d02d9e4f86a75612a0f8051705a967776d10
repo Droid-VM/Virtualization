@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "488fe0c6_46884573",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-10T09:17:11Z",
+      "side": 1,
+      "message": "Oh, nice catch!",
+      "range": {
+        "startLine": 13,
+        "startChar": 21,
+        "endLine": 15,
+        "endChar": 31
+      },
+      "revId": "1803d02d9e4f86a75612a0f8051705a967776d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ceb85132_3b379974",
@@ -26,6 +49,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7bf878b0_91980186",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineDescriptor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-10T09:17:11Z",
+      "side": 1,
+      "message": "I\u0027m not convinced this comment is true, except for the in-process case.\nTwo processes never share the same fds; they may have fds to the same file, but that\u0027s different.\nBut perhaps we should dup as part of parceling for the in-process case.\nDo we need a close on VMD? Otherwise, how do the fds ever get closed?\n\nOr should we close on writeToParcel (via PARCELABLE_WRITE_RETURN_VALUE)? But then calling write twice needs to become an error.",
+      "parentUuid": "ceb85132_3b379974",
+      "range": {
+        "startLine": 37,
+        "startChar": 3,
+        "endLine": 37,
+        "endChar": 20
+      },
+      "revId": "1803d02d9e4f86a75612a0f8051705a967776d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f69aa3b_8b01f352",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineDescriptor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-10T09:17:11Z",
+      "side": 1,
+      "message": "Alternatively we could just omit the if not null below - writeParcelable and readParcelable are perfectly ok with round-tripping null.",
+      "range": {
+        "startLine": 55,
+        "startChar": 8,
+        "endLine": 55,
+        "endChar": 52
+      },
+      "revId": "1803d02d9e4f86a75612a0f8051705a967776d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d999691_42a6f6e1",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachineDescriptor.java",
         "patchSetId": 3
@@ -42,6 +112,29 @@
         "startChar": 12,
         "endLine": 56,
         "endChar": 27
+      },
+      "revId": "1803d02d9e4f86a75612a0f8051705a967776d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b64b1c53_d8076ee7",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 1551,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-10T09:17:11Z",
+      "side": 1,
+      "message": "We could add round-tripping to the existing tests, as well, or instead?",
+      "range": {
+        "startLine": 1551,
+        "startChar": 16,
+        "endLine": 1551,
+        "endChar": 63
       },
       "revId": "1803d02d9e4f86a75612a0f8051705a967776d10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
