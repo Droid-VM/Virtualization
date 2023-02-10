@@ -16,6 +16,24 @@
       "message": "Is it OK to write this even if self.opt_params is empty?",
       "revId": "6337d5befb027003be685f5d26c195177f34c959",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "034038c3_710bb595",
+        "filename": "libs/devicemapper/src/crypt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-02-10T12:09:18Z",
+      "side": 1,
+      "message": "The kernel doc says so - `If there are no optional parameters, the optional parameters section can be skipped or #opt_params can be zero.`",
+      "parentUuid": "da0c2903_65b9d82c",
+      "revId": "6337d5befb027003be685f5d26c195177f34c959",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
