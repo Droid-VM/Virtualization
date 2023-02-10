@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5634f4f_e93408ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-10T16:44:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "997bcffe_54097be7",
+      "range": {
+        "startLine": 7,
+        "startChar": 18,
+        "endLine": 7,
+        "endChar": 26
+      },
+      "revId": "aacb2e3dcba8cb7810f3dce3703c64cfbee63068",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8afa9988_df7bb77b",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-10T11:59:32Z",
       "side": 1,
       "message": "I\u0027m not an expert in Application side of things. Just wondering if the original config should use Ctx and not otherAppCtx?",
+      "range": {
+        "startLine": 1697,
+        "startChar": 0,
+        "endLine": 1697,
+        "endChar": 61
+      },
+      "revId": "aacb2e3dcba8cb7810f3dce3703c64cfbee63068",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c45ebffc_49ac55ae",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1697,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-10T16:44:44Z",
+      "side": 1,
+      "message": "We are starting a VM with the payload from another app, hence otherAppCtx here.",
+      "parentUuid": "8afa9988_df7bb77b",
       "range": {
         "startLine": 1697,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3c98143_66a1ce62",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1709,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-10T16:44:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "803212e9_fa78ef9d",
+      "range": {
+        "startLine": 1709,
+        "startChar": 36,
+        "endLine": 1709,
+        "endChar": 47
+      },
+      "revId": "aacb2e3dcba8cb7810f3dce3703c64cfbee63068",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a47afc4_6c5a7d84",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-02-10T09:24:07Z",
       "side": 1,
       "message": "Do we need to do something to get the other app to stop, or at least to stop its VM?",
+      "range": {
+        "startLine": 1737,
+        "startChar": 0,
+        "endLine": 1737,
+        "endChar": 5
+      },
+      "revId": "aacb2e3dcba8cb7810f3dce3703c64cfbee63068",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "beff7cfb_00ed2bfe",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1737,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-10T16:44:44Z",
+      "side": 1,
+      "message": "We now unbind at the end of the test.",
+      "parentUuid": "6a47afc4_6c5a7d84",
       "range": {
         "startLine": 1737,
         "startChar": 0,
