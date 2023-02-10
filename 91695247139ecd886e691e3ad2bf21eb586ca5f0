@@ -16,6 +16,24 @@
       "message": "LGTM (I guess ARM64 on Android guarantees little endian)",
       "revId": "91695247139ecd886e691e3ad2bf21eb586ca5f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "806828c7_c814c444",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-10T12:39:52Z",
+      "side": 1,
+      "message": "\u003e ARM64 on Android guarantees little endian\n\nNo, it doesn\u0027t (see [`SCTLR_EL1.EE`](https://developer.arm.com/documentation/ddi0595/2021-06/AArch64-Registers/SCTLR-EL1--System-Control-Register--EL1-)) but in practice, the vast majority of implementations are little so you\u0027re right that this code could check that bit and mask (or shift) the MSB/LSB (left/right) accordingly.",
+      "parentUuid": "1b5ece91_a0849b8c",
+      "revId": "91695247139ecd886e691e3ad2bf21eb586ca5f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
