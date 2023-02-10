@@ -16,6 +16,24 @@
       "message": "Can we revert the cl that broke the unbundled build instead?",
       "revId": "3a8b7cba432a3396bc108455976e50fd7b98855c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a65a7e74_59820f6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-02-10T03:43:45Z",
+      "side": 1,
+      "message": "Yes we can. Have you identified the CL? My guess is that the CL set `sdk_version` to some module, which caused \"not install\" in unbundled build in \"system\" partition (in this case, impacting microdroid\u0027s system image).\n\nHowever, IMO, they might not have a proper fix forward after reverting. And setting `sdk_version` should be perfectly fine. Hmm, Probably, they could add a separate module for \"sdk\" variant instead of relying on `sdk_version` property.",
+      "parentUuid": "65a906e1_43ad5dfd",
+      "revId": "3a8b7cba432a3396bc108455976e50fd7b98855c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
