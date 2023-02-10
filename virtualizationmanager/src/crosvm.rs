@@ -105,6 +105,7 @@ pub struct CrosvmConfig {
     pub indirect_files: Vec<File>,
     pub platform_version: VersionReq,
     pub detect_hangup: bool,
+    pub gdb_port: i32,
 }
 
 /// A disk image to pass to crosvm for a VM.
@@ -744,6 +745,10 @@ fn run_vm(
 
     if !config.task_profiles.is_empty() {
         command.arg("--task-profiles").arg(config.task_profiles.join(","));
+    }
+
+    if config.gdb_port > 0 {
+        command.arg("--gdb").arg(config.gdb_port.to_string());
     }
 
     // Keep track of what file descriptors should be mapped to the crosvm process.
