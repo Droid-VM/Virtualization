@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b1a9e83_766d236b",
+        "filename": "tests/hostside/java/com/android/microdroid/test/PvmfwDebugPolicyHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-10T15:11:00Z",
+      "side": 1,
+      "message": "Well we have 3 \"pvmfw\":\n\n- the pvmfw.bin, which is built by stripping the pvmfw ELF\n- the pvmfw.img partition, which is the pvmfw.bin, wrapped in a boot.img format and AVB signed, which ABL loads, verifies and extracts to RAM\n- the \"pvmfw blob\" (doesn\u0027t really have a file name because it was never a file until today) that consists of pvmfw.bin+config data and which is passed to the HV\n\nso I\u0027d rather not call the last one \"pvmfw.img\" as it might be confused with the first one.\n\nTBF, in this comment, I would just say that we\u0027re testing pvmfw (no suffix).",
+      "parentUuid": "ad4746e4_bf9e9fc7",
+      "range": {
+        "startLine": 46,
+        "startChar": 31,
+        "endLine": 46,
+        "endChar": 35
+      },
+      "revId": "37a5775d18589689f4768d32190b889230a8eebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0433ed5_25b71c30",
         "filename": "tests/hostside/java/com/android/microdroid/test/PvmfwDebugPolicyHostTests.java",
         "patchSetId": 3
@@ -273,6 +297,30 @@
       "side": 1,
       "message": "Done. Sorry for not adding topic name in tradefed change.",
       "parentUuid": "4a831ac3_d410afa7",
+      "range": {
+        "startLine": 195,
+        "startChar": 24,
+        "endLine": 195,
+        "endChar": 85
+      },
+      "revId": "37a5775d18589689f4768d32190b889230a8eebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db5e738a_01cb47e8",
+        "filename": "tests/hostside/java/com/android/microdroid/test/PvmfwDebugPolicyHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-10T15:11:00Z",
+      "side": 1,
+      "message": "Oh, that makes sense!\n\nBTW, nit: should the method be called \"`addTestArtifact`\" (singular) as it only takes one artifact?",
+      "parentUuid": "9a445b91_400e0772",
       "range": {
         "startLine": 195,
         "startChar": 24,
