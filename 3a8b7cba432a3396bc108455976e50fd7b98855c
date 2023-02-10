@@ -34,6 +34,24 @@
       "parentUuid": "65a906e1_43ad5dfd",
       "revId": "3a8b7cba432a3396bc108455976e50fd7b98855c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de37d777_92182c64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-10T14:11:10Z",
+      "side": 1,
+      "message": "Re-read the bug more carefully.\n\nI think we should prioritize fixing the actual root cause (bug in soong), otherwise we will keep playing this whack-a-mole game.\n\nIdeally, we should also have some sort of regression test. The simplest approach would be to diff the content of the microdroid system image to the golden output.\n\nHaving said all of that, merging this cl to unbreak the unbundled build",
+      "parentUuid": "a65a7e74_59820f6f",
+      "revId": "3a8b7cba432a3396bc108455976e50fd7b98855c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
