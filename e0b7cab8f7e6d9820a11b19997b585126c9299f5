@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "267f3d3f_4919dd38",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineDescriptor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-10T16:36:12Z",
+      "side": 1,
+      "message": "Because close() throws IOException, which is what Closeable does, and it matches Parcelable.\n\nAnd of course Closeable implies AutoCloseable.",
+      "parentUuid": "0530a398_b87ef7d6",
+      "range": {
+        "startLine": 41,
+        "startChar": 67,
+        "endLine": 41,
+        "endChar": 76
+      },
+      "revId": "e0b7cab8f7e6d9820a11b19997b585126c9299f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8dfe324_a0b37026",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-10T16:33:54Z",
       "side": 1,
       "message": "Shouldn\u0027t this be show in the system-current.txt? Did you forget to run m update-api?",
+      "range": {
+        "startLine": 118,
+        "startChar": 4,
+        "endLine": 118,
+        "endChar": 44
+      },
+      "revId": "e0b7cab8f7e6d9820a11b19997b585126c9299f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6496b27b_7b761fd8",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineDescriptor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-10T16:36:12Z",
+      "side": 1,
+      "message": "\u003e Did you forget to run m update-api?\n\nI did 😞",
+      "parentUuid": "d8dfe324_a0b37026",
       "range": {
         "startLine": 118,
         "startChar": 4,
