@@ -34,6 +34,24 @@
       "parentUuid": "1b5ece91_a0849b8c",
       "revId": "91695247139ecd886e691e3ad2bf21eb586ca5f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a583a78c_3ef91f72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-02-10T12:46:14Z",
+      "side": 1,
+      "message": "Then can we change this line\n\n    str x29, [x30]\n    \t\nto this?\n\n    str x29, [x30]\n    strb 0, [x30]",
+      "parentUuid": "806828c7_c814c444",
+      "revId": "91695247139ecd886e691e3ad2bf21eb586ca5f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
