@@ -71,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "926936d9_c843375b",
+        "filename": "tests/hostside/java/com/android/microdroid/test/PvmfwDebugPolicyHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-02-10T02:44:13Z",
+      "side": 1,
+      "message": "Good to know, but let me remove this. push will be done by `addTestArtifacts()` in the `launchProtectedVmAndWaitForBootCompleted()`",
+      "parentUuid": "c0433ed5_25b71c30",
+      "range": {
+        "startLine": 180,
+        "startChar": 9,
+        "endLine": 180,
+        "endChar": 31
+      },
+      "revId": "37a5775d18589689f4768d32190b889230a8eebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c1d4f49_63f08ae0",
@@ -84,6 +108,30 @@
       "writtenOn": "2023-02-09T20:14:51Z",
       "side": 1,
       "message": "OOC, why don\u0027t you use a `commandRunner` here (and for the `adb shell` below)? I also see that `INativeDevice::setProperty` exists?",
+      "range": {
+        "startLine": 181,
+        "startChar": 8,
+        "endLine": 181,
+        "endChar": 33
+      },
+      "revId": "37a5775d18589689f4768d32190b889230a8eebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00530d47_5289fb20",
+        "filename": "tests/hostside/java/com/android/microdroid/test/PvmfwDebugPolicyHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-02-10T02:44:13Z",
+      "side": 1,
+      "message": "Picked `runOnHost()` just because it\u0027s `static`, so less context was needed.\n\nChanged my mind to specify device, so test can run more reliably. I\u0027ve seen a wierd issue today, so will avoid `runOnHost()` in the future.",
+      "parentUuid": "6c1d4f49_63f08ae0",
       "range": {
         "startLine": 181,
         "startChar": 8,
@@ -117,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "844bd064_87e9a0ac",
+        "filename": "tests/hostside/java/com/android/microdroid/test/PvmfwDebugPolicyHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-02-10T02:44:13Z",
+      "side": 1,
+      "message": "Good point. Added explicit remove. It\u0027s done indirectly by other place, but it\u0027s good to be explicit.",
+      "parentUuid": "56966687_59cb0369",
+      "range": {
+        "startLine": 185,
+        "startChar": 39,
+        "endLine": 185,
+        "endChar": 40
+      },
+      "revId": "37a5775d18589689f4768d32190b889230a8eebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "589b0a3f_850ff74b",
@@ -140,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a565fc6_30bb1c4b",
+        "filename": "tests/hostside/java/com/android/microdroid/test/PvmfwDebugPolicyHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-02-10T02:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "589b0a3f_850ff74b",
+      "range": {
+        "startLine": 189,
+        "startChar": 44,
+        "endLine": 189,
+        "endChar": 60
+      },
+      "revId": "37a5775d18589689f4768d32190b889230a8eebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a831ac3_d410afa7",
@@ -153,6 +249,30 @@
       "writtenOn": "2023-02-09T20:14:51Z",
       "side": 1,
       "message": "cs/addTestArtifacts doesn\u0027t seem to return any hit(?!!); what does that do? If it pushes the custom pvmfw to the device, isn\u0027t is a duplicate of the `adb push` in `useCustomPvmfw`?",
+      "range": {
+        "startLine": 195,
+        "startChar": 24,
+        "endLine": 195,
+        "endChar": 85
+      },
+      "revId": "37a5775d18589689f4768d32190b889230a8eebf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a445b91_400e0772",
+        "filename": "tests/hostside/java/com/android/microdroid/test/PvmfwDebugPolicyHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-02-10T02:44:13Z",
+      "side": 1,
+      "message": "Done. Sorry for not adding topic name in tradefed change.",
+      "parentUuid": "4a831ac3_d410afa7",
       "range": {
         "startLine": 195,
         "startChar": 24,
