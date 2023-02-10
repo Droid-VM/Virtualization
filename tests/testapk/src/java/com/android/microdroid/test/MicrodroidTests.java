@@ -18,23 +18,24 @@ package com.android.microdroid.test;
 import static android.system.virtualmachine.VirtualMachine.STATUS_DELETED;
 import static android.system.virtualmachine.VirtualMachine.STATUS_RUNNING;
 import static android.system.virtualmachine.VirtualMachine.STATUS_STOPPED;
-import static android.system.virtualmachine.VirtualMachineConfig.CPU_TOPOLOGY_ONE_CPU;
 import static android.system.virtualmachine.VirtualMachineConfig.CPU_TOPOLOGY_MATCH_HOST;
+import static android.system.virtualmachine.VirtualMachineConfig.CPU_TOPOLOGY_ONE_CPU;
 import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_FULL;
 import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_NONE;
 import static android.system.virtualmachine.VirtualMachineManager.CAPABILITY_NON_PROTECTED_VM;
 import static android.system.virtualmachine.VirtualMachineManager.CAPABILITY_PROTECTED_VM;
-
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.TruthJUnit.assume;
-
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static org.junit.Assert.assertThrows;
 
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+import com.google.common.base.Strings;
+import com.google.common.truth.BooleanSubject;
 
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.os.Build;
+import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.ParcelFileDescriptor.AutoCloseInputStream;
 import android.os.ParcelFileDescriptor.AutoCloseOutputStream;
@@ -47,14 +48,9 @@ import android.system.virtualmachine.VirtualMachineException;
 import android.system.virtualmachine.VirtualMachineManager;
 import android.util.Log;
 
-import androidx.test.core.app.ApplicationProvider;
-
 import com.android.compatibility.common.util.CddTest;
 import com.android.microdroid.test.device.MicrodroidDeviceTestBase;
 import com.android.microdroid.testservice.ITestService;
-
-import com.google.common.base.Strings;
-import com.google.common.truth.BooleanSubject;
 
 import org.junit.After;
 import org.junit.Before;
@@ -89,6 +85,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicReference;
 
+import androidx.test.core.app.ApplicationProvider;
 import co.nstant.in.cbor.CborDecoder;
 import co.nstant.in.cbor.model.Array;
 import co.nstant.in.cbor.model.DataItem;
@@ -213,7 +210,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
-    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
+    @CddTest(requirements = {"9.17/C-1-1"})
     public void autoCloseVm() throws Exception {
         assumeSupportedKernel();
 
@@ -244,7 +241,61 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
-    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
+    @CddTest(requirements = {"9.17/C-1-1"})
+    public void autoCloseVmDescriptor() throws Exception {
+        VirtualMachineConfig config =
+                newVmConfigBuilder()
+                        .setPayloadBinaryName("MicrodroidTestNativeLib.so")
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .build();
+        VirtualMachine vm = forceCreateNewVirtualMachine("test_vm", config);
+        VirtualMachineDescriptor descriptor = vm.toDescriptor();
+
+        Parcel parcel = Parcel.obtain();
+        try (descriptor) {
+            // It should be ok to use at this point
+            descriptor.writeToParcel(parcel, 0);
+        }
+
+        // But not now - it's been closed.
+        assertThrows(IllegalStateException.class, () -> descriptor.writeToParcel(parcel, 0));
+        assertThrows(
+                IllegalStateException.class,
+                () -> getVirtualMachineManager().importFromDescriptor("imported_vm", descriptor));
+
+        // Closing again is fine.
+        descriptor.close();
+
+        // Tidy up
+        parcel.recycle();
+    }
+
+    @Test
+    @CddTest(requirements = {"9.17/C-1-1"})
+    public void vmDescriptorClosedOnImport() throws Exception {
+        VirtualMachineConfig config =
+                newVmConfigBuilder()
+                        .setPayloadBinaryName("MicrodroidTestNativeLib.so")
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .build();
+        VirtualMachine vm = forceCreateNewVirtualMachine("test_vm", config);
+        VirtualMachineDescriptor descriptor = vm.toDescriptor();
+
+        getVirtualMachineManager().importFromDescriptor("imported_vm", descriptor);
+        try {
+            // Descriptor has been implicitly closed
+            assertThrows(
+                    IllegalStateException.class,
+                    () ->
+                            getVirtualMachineManager()
+                                    .importFromDescriptor("imported_vm2", descriptor));
+        } finally {
+            getVirtualMachineManager().delete("imported_vm");
+        }
+    }
+
+    @Test
+    @CddTest(requirements = {"9.17/C-1-1"})
     public void vmLifecycleChecks() throws Exception {
         assumeSupportedKernel();
 
@@ -1197,7 +1248,6 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         VirtualMachine vmOrig = forceCreateNewVirtualMachine(vmNameOrig, config);
         VmCdis origCdis = launchVmAndGetCdis(vmNameOrig);
         assertThat(origCdis.instanceSecret).isNotNull();
-        VirtualMachineDescriptor descriptor = vmOrig.toDescriptor();
         VirtualMachineManager vmm = getVirtualMachineManager();
         if (vmm.get(vmNameImport) != null) {
             vmm.delete(vmNameImport);
@@ -1205,7 +1255,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
 
         // Action
         // The imported VM will be fetched by name later.
-        VirtualMachine unusedVmImport = vmm.importFromDescriptor(vmNameImport, descriptor);
+        vmm.importFromDescriptor(vmNameImport, vmOrig.toDescriptor());
 
         // Asserts
         VmCdis importCdis = launchVmAndGetCdis(vmNameImport);
@@ -1213,14 +1263,14 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
-    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
+    @CddTest(requirements = {"9.17/C-1-1"})
     public void importedVmIsEqualToTheOriginalVm_WithoutStorage() throws Exception {
         TestResults testResults = importedVmIsEqualToTheOriginalVm(false);
         assertThat(testResults.mEncryptedStoragePath).isEqualTo("");
     }
 
     @Test
-    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
+    @CddTest(requirements = {"9.17/C-1-1"})
     public void importedVmIsEqualToTheOriginalVm_WithStorage() throws Exception {
         TestResults testResults = importedVmIsEqualToTheOriginalVm(true);
         assertThat(testResults.mEncryptedStoragePath).isEqualTo("/mnt/encryptedstore");
@@ -1250,14 +1300,13 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                         });
         assertThat(origTestResults.mException).isNull();
         assertThat(origTestResults.mAddInteger).isEqualTo(123 + 456);
-        VirtualMachineDescriptor descriptor = vmOrig.toDescriptor();
         VirtualMachineManager vmm = getVirtualMachineManager();
         if (vmm.get(vmNameImport) != null) {
             vmm.delete(vmNameImport);
         }
 
         // Action
-        VirtualMachine vmImport = vmm.importFromDescriptor(vmNameImport, descriptor);
+        VirtualMachine vmImport = vmm.importFromDescriptor(vmNameImport, vmOrig.toDescriptor());
 
         // Asserts
         assertFileContentsAreEqualInTwoVms("config.xml", vmNameOrig, vmNameImport);
@@ -1281,7 +1330,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
-    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
+    @CddTest(requirements = {"9.17/C-1-1"})
     public void encryptedStorageAvailable() throws Exception {
         assumeSupportedKernel();
 
@@ -1304,7 +1353,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
-    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
+    @CddTest(requirements = {"9.17/C-1-1"})
     public void encryptedStorageIsInaccessibleToDifferentVm() throws Exception {
         assumeSupportedKernel();
 
@@ -1387,7 +1436,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
-    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
+    @CddTest(requirements = {"9.17/C-1-1"})
     public void encryptedStorageIsPersistent() throws Exception {
         assumeSupportedKernel();
 
