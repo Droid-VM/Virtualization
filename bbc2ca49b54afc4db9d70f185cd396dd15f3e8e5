@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3430c4fb_8b508f8f",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1671,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-10T16:14:53Z",
+      "side": 1,
+      "message": "A service seems more natural than an activity for this, IMHO - there\u0027s no intention of having any UX, and the handshake is likely to be more complex in real client apps.",
+      "parentUuid": "bc0bb704_64ba516a",
+      "range": {
+        "startLine": 1671,
+        "startChar": 26,
+        "endLine": 1671,
+        "endChar": 37
+      },
+      "revId": "bbc2ca49b54afc4db9d70f185cd396dd15f3e8e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "897c5ba8_186c1091",
         "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
         "patchSetId": 2
