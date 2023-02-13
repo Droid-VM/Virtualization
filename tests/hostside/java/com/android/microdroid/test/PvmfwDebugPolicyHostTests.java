@@ -33,6 +33,7 @@ import com.android.tradefed.device.DeviceNotAvailableException;
 import com.android.tradefed.device.TestDevice;
 import com.android.tradefed.device.ITestDevice;
 import com.android.tradefed.testtype.DeviceJUnit4ClassRunner;
+import com.android.tradefed.util.CommandStatus;
 import com.android.tradefed.util.CommandResult;
 import com.android.tradefed.util.FileUtil;
 
@@ -54,6 +55,7 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
     @NonNull private static final String PACKAGE_FILE_NAME = "MicrodroidTestApp.apk";
     @NonNull private static final String PACKAGE_NAME = "com.android.microdroid.test";
     @NonNull private static final String MICRODROID_DEBUG_FULL = "full";
+    @NonNull private static final String MICRODROID_DEBUG_NONE = "none";
     @NonNull private static final String MICRODROID_CONFIG_PATH = "assets/vm_config_apex.json";
     @NonNull private static final String MICRODROID_LOG_PATH = TEST_ROOT + "log.txt";
     private static final int BOOT_COMPLETE_TIMEOUT_MS = 30000; // 30 seconds
@@ -144,7 +146,7 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
     public void testRamdump() throws Exception {
         Pvmfw pvmfw = createPvmfw("avf_debug_policy_with_ramdump.dtbo");
         pvmfw.serialize(mCustomPvmfwBinFileOnHost);
-        mMicrodroidDevice = launchProtectedVmAndWaitForBootCompleted();
+        mMicrodroidDevice = launchProtectedVmAndWaitForBootCompleted(MICRODROID_DEBUG_FULL);
 
         assertThat(readMicrodroidFileAsString(MICRODROID_CMDLINE_PATH)).contains("crashkernel=");
         assertThat(readMicrodroidFileAsString(MICRODROID_DT_BOOTARGS_PATH))
@@ -157,7 +159,7 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
     public void testNoRamdump() throws Exception {
         Pvmfw pvmfw = createPvmfw("avf_debug_policy_without_ramdump.dtbo");
         pvmfw.serialize(mCustomPvmfwBinFileOnHost);
-        mMicrodroidDevice = launchProtectedVmAndWaitForBootCompleted();
+        mMicrodroidDevice = launchProtectedVmAndWaitForBootCompleted(MICRODROID_DEBUG_FULL);
 
         assertThat(readMicrodroidFileAsString(MICRODROID_CMDLINE_PATH))
                 .doesNotContain("crashkernel=");
@@ -191,6 +193,32 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
                 .isFalse();
     }
 
+    @Test
+    public void testNoAdb_boots() throws Exception {
+        Pvmfw pvmfw = createPvmfw("avf_debug_policy_without_adb.dtbo");
+        pvmfw.serialize(mCustomPvmfwBinFileOnHost);
+
+        // VM would boot, but cannot verify directly because of no adbd in the VM.
+        CommandResult result = tryLaunchProtectedNonDebuggableVm();
+        assertThat(result.getStatus()).isEqualTo(CommandStatus.TIMED_OUT);
+        assertWithMessage("Microdroid should have booted")
+                .that(result.getStderr())
+                .contains("payload is ready");
+    }
+
+    @Test
+    public void testNoAdb_noConnection() throws Exception {
+        Pvmfw pvmfw = createPvmfw("avf_debug_policy_without_adb.dtbo");
+        pvmfw.serialize(mCustomPvmfwBinFileOnHost);
+
+        try {
+            launchProtectedVmAndWaitForBootCompleted(MICRODROID_DEBUG_NONE);
+            assertWithMessage("adb shouldn't be available").fail();
+        } catch (Exception e) {
+            // expected exception. passthrough.
+        }
+    }
+
     @NonNull
     private String readMicrodroidFileAsString(@NonNull String path)
             throws DeviceNotAvailableException {
@@ -218,12 +246,12 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
         return result.getStdout().contains("Run /init as init process");
     }
 
-    private ITestDevice launchProtectedVmAndWaitForBootCompleted()
+    private ITestDevice launchProtectedVmAndWaitForBootCompleted(String debugLevel)
             throws DeviceNotAvailableException {
         mMicrodroidDevice =
                 MicrodroidBuilder.fromDevicePath(
                                 getPathForPackage(PACKAGE_NAME), MICRODROID_CONFIG_PATH)
-                        .debugLevel(MICRODROID_DEBUG_FULL)
+                        .debugLevel(debugLevel)
                         .protectedVm(/* protectedVm= */ true)
                         .addBootFile(mCustomPvmfwBinFileOnHost, PVMFW_FILE_NAME)
                         .build(mAndroidDevice);
