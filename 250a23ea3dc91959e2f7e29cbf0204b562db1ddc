@@ -117,6 +117,30 @@
       },
       "revId": "250a23ea3dc91959e2f7e29cbf0204b562db1ddc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b73bc7a0_13edfeab",
+        "filename": "pvmfw/src/virtio/pci.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-13T16:49:21Z",
+      "side": 1,
+      "message": "I agree that this would be a cleaner split but my point above is that by logging in the caller, we would lose logging of the non-`blk` virtio devices (as they are never returned by `next`).\n\nThis `info!` could be turned into a `debug!`, though?",
+      "parentUuid": "185ceeef_b457c711",
+      "range": {
+        "startLine": 105,
+        "startChar": 12,
+        "endLine": 105,
+        "endChar": 16
+      },
+      "revId": "250a23ea3dc91959e2f7e29cbf0204b562db1ddc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
