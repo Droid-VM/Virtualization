@@ -40,7 +40,7 @@ use alloc::boxed::Box;
 use crate::{
     dice::Hashes,
     entry::RebootReason,
-    fdt::add_dice_node,
+    fdt::NextStageConfig,
     helpers::flush,
     helpers::GUEST_PAGE_SIZE,
     memory::MemoryTracker,
@@ -106,8 +106,14 @@ fn main(
     })?;
     flush(next_bcc);
 
-    add_dice_node(fdt, next_bcc.as_ptr() as usize, NEXT_BCC_SIZE).map_err(|e| {
-        error!("Failed to add DICE node to device tree: {e}");
+    let config = NextStageConfig {
+        bcc: (next_bcc.as_ptr() as usize).try_into().unwrap(),
+        bcc_size: NEXT_BCC_SIZE.try_into().unwrap(),
+        new_instance: false, // TODO(b/249723852): Figure it out from instance.img.
+        strict_boot: false,  // TODO(b/268307476): Flip in its own commit to isolate testing.
+    };
+    config.apply_to(fdt).map_err(|e| {
+        error!("Failed to configure device tree: {e}");
         RebootReason::InternalError
     })?;
 
