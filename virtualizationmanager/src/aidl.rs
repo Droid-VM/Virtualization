@@ -62,7 +62,7 @@ use semver::VersionReq;
 use std::convert::TryInto;
 use std::ffi::CStr;
 use std::fs::{read_dir, remove_file, File, OpenOptions};
-use std::io::{BufRead, BufReader, Error, ErrorKind, Write};
+use std::io::{BufRead, BufReader, Error, ErrorKind, Read, Write};
 use std::num::NonZeroU32;
 use std::os::unix::io::{FromRawFd, IntoRawFd};
 use std::os::unix::raw::pid_t;
@@ -966,11 +966,20 @@ fn parse_platform_version_req(s: &str) -> Result<VersionReq, Status> {
     })
 }
 
-fn is_debuggable(config: &VirtualMachineConfig) -> bool {
-    match config {
-        VirtualMachineConfig::AppConfig(config) => config.debugLevel != DebugLevel::NONE,
-        _ => false,
+fn is_loggable(config: &VirtualMachineConfig) -> bool {
+    if let VirtualMachineConfig::AppConfig(app_config) = config {
+        if app_config.debugLevel != DebugLevel::NONE {
+            return true;
+        }
     }
+
+    if let Ok(mut file) = File::open("/proc/device-tree/avf/guest/common/log") {
+        let mut log: [u8; 4] = Default::default();
+        file.read_exact(&mut log).map_err(|_| false).unwrap();
+        // DT spec uses big endian although Android is always little endian.
+        return u32::from_be_bytes(log) == 1;
+    }
+    false
 }
 
 fn clone_or_prepare_logger_fd(
@@ -982,7 +991,7 @@ fn clone_or_prepare_logger_fd(
         return Ok(Some(clone_file(fd)?));
     }
 
-    if !is_debuggable(config) {
+    if !is_loggable(config) {
         return Ok(None);
     }
 
