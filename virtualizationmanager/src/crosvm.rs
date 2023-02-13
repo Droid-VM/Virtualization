@@ -16,6 +16,7 @@
 
 use crate::aidl::{remove_temporary_files, Cid, VirtualMachineCallbacks};
 use crate::atom::write_vm_exited_stats;
+use crate::debug_policy::is_ramdump_allowed;
 use anyhow::{anyhow, bail, Context, Error, Result};
 use command_fds::CommandFdExt;
 use lazy_static::lazy_static;
@@ -664,24 +665,6 @@ fn exit_signal(result: &Result<ExitStatus, io::Error>) -> Option<i32> {
     }
 }
 
-fn should_configure_ramdump(protected: bool) -> bool {
-    if protected {
-        // Protected VM needs ramdump configuration here.
-        // pvmfw will disable ramdump if unnecessary.
-        true
-    } else {
-        // For unprotected VM, ramdump should be handled here.
-        // ramdump wouldn't be enabled if ramdump is explicitly set to <1>.
-        if let Ok(mut file) = File::open("/proc/device-tree/avf/guest/common/ramdump") {
-            let mut ramdump: [u8; 4] = Default::default();
-            file.read_exact(&mut ramdump).map_err(|_| false).unwrap();
-            // DT spec uses big endian although Android is always little endian.
-            return u32::from_be_bytes(ramdump) == 1;
-        }
-        false
-    }
-}
-
 /// Starts an instance of `crosvm` to manage a new VM.
 fn run_vm(
     config: CrosvmConfig,
@@ -802,7 +785,9 @@ fn run_vm(
     debug!("Preserving FDs {:?}", preserved_fds);
     command.preserved_fds(preserved_fds);
 
-    if should_configure_ramdump(config.protected) {
+    if !config.protected || is_ramdump_allowed() {
+        // For protected VM, always configure ramdump here so pvmfw can decide to enable/disable ramdump.
+        // For unprotected VM, only specify ramdump size when debug policy says so.
         command.arg("--params").arg("crashkernel=17M");
     }
 
