@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a377c587_41ea4e0e",
+        "filename": "pvmfw/src/virtio/pci.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-13T12:54:11Z",
+      "side": 1,
+      "message": "Doesn\u0027t need pub?",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 3
+      },
+      "revId": "250a23ea3dc91959e2f7e29cbf0204b562db1ddc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "980ec5b4_67710a5d",
+        "filename": "pvmfw/src/virtio/pci.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-13T12:54:11Z",
+      "side": 1,
+      "message": "nit: It\u0027s a bit odd that this prints info! on behalf of the caller (who also prints info! interleaved with this). The caller gets all the arguments - move the printing there?",
+      "range": {
+        "startLine": 105,
+        "startChar": 12,
+        "endLine": 105,
+        "endChar": 16
+      },
+      "revId": "250a23ea3dc91959e2f7e29cbf0204b562db1ddc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
