@@ -40,7 +40,7 @@ use alloc::boxed::Box;
 use crate::{
     dice::PartialInputs,
     entry::RebootReason,
-    fdt::add_dice_node,
+    fdt::modify_for_next_stage,
     helpers::flush,
     helpers::GUEST_PAGE_SIZE,
     memory::MemoryTracker,
@@ -99,7 +99,7 @@ fn main(
         error!("Failed to compute partial DICE inputs: {e:?}");
         RebootReason::InternalError
     })?;
-    let salt = [0; HIDDEN_SIZE]; // TODO(b/249723852): Get from instance.img and/or TRNG.
+    let (new_instance, salt) = (false, [0; HIDDEN_SIZE]); // TODO(b/249723852): instance.img.
     let dice_inputs = dice_inputs.into_input_values(&salt).map_err(|e| {
         error!("Failed to generate DICE inputs: {e:?}");
         RebootReason::InternalError
@@ -110,8 +110,9 @@ fn main(
     })?;
     flush(next_bcc);
 
-    add_dice_node(fdt, next_bcc.as_ptr() as usize, NEXT_BCC_SIZE).map_err(|e| {
-        error!("Failed to add DICE node to device tree: {e}");
+    let strict_boot = false; // TODO(b/268307476): Flip in its own commit to isolate testing.
+    modify_for_next_stage(fdt, next_bcc, new_instance, strict_boot).map_err(|e| {
+        error!("Failed to configure device tree: {e}");
         RebootReason::InternalError
     })?;
 
