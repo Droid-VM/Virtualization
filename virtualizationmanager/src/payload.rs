@@ -14,6 +14,7 @@
 
 //! Payload disk image
 
+use crate::debug_policy::is_microdroid_debuggable_image_required;
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice::{
     DiskImage::DiskImage,
     Partition::Partition,
@@ -21,7 +22,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     VirtualMachineAppConfig::{Payload::Payload, VirtualMachineAppConfig},
     VirtualMachineRawConfig::VirtualMachineRawConfig,
 };
-use anyhow::{anyhow, bail, Context, Result};
+use anyhow::{bail, Context, Result};
 use binder::{wait_for_interface, ParcelFileDescriptor};
 use log::{info, warn};
 use microdroid_metadata::{ApexPayload, ApkPayload, Metadata, PayloadConfig, PayloadMetadata};
@@ -382,7 +383,7 @@ fn collect_apex_infos<'a>(
     debug_level: DebugLevel,
 ) -> Vec<&'a ApexInfo> {
     let mut additional_apexes: Vec<&str> = MICRODROID_REQUIRED_APEXES.to_vec();
-    if debug_level != DebugLevel::NONE {
+    if is_microdroid_debuggable_image_required(debug_level) {
         additional_apexes.extend(MICRODROID_REQUIRED_APEXES_DEBUG.to_vec());
     }
 
@@ -403,10 +404,9 @@ pub fn add_microdroid_system_images(
     storage_image: Option<File>,
     vm_config: &mut VirtualMachineRawConfig,
 ) -> Result<()> {
-    let debug_suffix = match config.debugLevel {
-        DebugLevel::NONE => "normal",
-        DebugLevel::FULL => "debuggable",
-        _ => return Err(anyhow!("unsupported debug level: {:?}", config.debugLevel)),
+    let debug_suffix = match is_microdroid_debuggable_image_required(config.debugLevel) {
+        true => "debuggable",
+        false => "normal",
     };
     let initrd = format!("/apex/com.android.virt/etc/microdroid_initrd_{}.img", debug_suffix);
     vm_config.initrd = Some(open_parcel_file(Path::new(&initrd), false)?);
