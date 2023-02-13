@@ -21,7 +21,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     VirtualMachineAppConfig::{Payload::Payload, VirtualMachineAppConfig},
     VirtualMachineRawConfig::VirtualMachineRawConfig,
 };
-use anyhow::{anyhow, bail, Context, Result};
+use anyhow::{bail, Context, Result};
 use binder::{wait_for_interface, ParcelFileDescriptor};
 use log::{info, warn};
 use microdroid_metadata::{ApexPayload, ApkPayload, Metadata, PayloadConfig, PayloadMetadata};
@@ -35,6 +35,7 @@ use serde::Deserialize;
 use serde_xml_rs::from_reader;
 use std::collections::HashSet;
 use std::fs::{metadata, File, OpenOptions};
+use std::io::Read;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 use std::time::SystemTime;
@@ -375,6 +376,20 @@ fn find_apex_names_in_classpath(classpath_vars: &str) -> Result<HashSet<String>>
     Ok(apexes)
 }
 
+fn is_debuggable(config: DebugLevel) -> bool {
+    if config != DebugLevel::NONE {
+        return true;
+    }
+
+    if let Ok(mut file) = File::open("/proc/device-tree/avf/guest/microdroid/adb") {
+        let mut log: [u8; 4] = Default::default();
+        file.read_exact(&mut log).map_err(|_| false).unwrap();
+        // DT spec uses big endian although Android is always little endian.
+        return u32::from_be_bytes(log) == 1;
+    }
+    false
+}
+
 // Collect ApexInfos from VM config
 fn collect_apex_infos<'a>(
     apex_list: &'a ApexInfoList,
@@ -382,7 +397,7 @@ fn collect_apex_infos<'a>(
     debug_level: DebugLevel,
 ) -> Vec<&'a ApexInfo> {
     let mut additional_apexes: Vec<&str> = MICRODROID_REQUIRED_APEXES.to_vec();
-    if debug_level != DebugLevel::NONE {
+    if is_debuggable(debug_level) {
         additional_apexes.extend(MICRODROID_REQUIRED_APEXES_DEBUG.to_vec());
     }
 
@@ -403,10 +418,9 @@ pub fn add_microdroid_system_images(
     storage_image: Option<File>,
     vm_config: &mut VirtualMachineRawConfig,
 ) -> Result<()> {
-    let debug_suffix = match config.debugLevel {
-        DebugLevel::NONE => "normal",
-        DebugLevel::FULL => "debuggable",
-        _ => return Err(anyhow!("unsupported debug level: {:?}", config.debugLevel)),
+    let debug_suffix = match is_debuggable(config.debugLevel) {
+        true => "debuggable",
+        false => "normal",
     };
     let initrd = format!("/apex/com.android.virt/etc/microdroid_initrd_{}.img", debug_suffix);
     vm_config.initrd = Some(open_parcel_file(Path::new(&initrd), false)?);

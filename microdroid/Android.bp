@@ -51,6 +51,7 @@ android_system_image {
     deps: [
         "init_second_stage",
         "microdroid_build_prop",
+        "microdroid_init_debug_policy_sh",
         "microdroid_init_rc",
         "microdroid_ueventd_rc",
         "microdroid_launcher",
@@ -134,6 +135,14 @@ prebuilt_etc {
     src: "init.rc",
     relative_install_path: "init/hw",
     installable: false, // avoid collision with system partition's init.rc
+}
+
+prebuilt_etc {
+    name: "microdroid_init_debug_policy_sh",
+    filename: "init_debug_policy.sh",
+    src: "init_debug_policy.sh",
+    relative_install_path: "init/hw",
+    installable: false, // match with microdroid_init_rc.
 }
 
 prebuilt_etc {

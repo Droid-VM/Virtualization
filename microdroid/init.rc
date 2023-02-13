@@ -21,13 +21,8 @@ on early-init
     write /linkerconfig/ld.config.txt \#
     chmod 644 /linkerconfig/ld.config.txt
 
-# If VM is debuggable, send logs to outside ot the VM via the serial console.
-# If non-debuggable, logs are internally consumed at /dev/null
-on early-init && property:ro.boot.microdroid.debuggable=1
-    setprop ro.log.file_logger.path /dev/hvc2
-
-on early-init && property:ro.boot.microdroid.debuggable=0
-    setprop ro.log.file_logger.path /dev/null
+    # Applies debug policy to decide whether to enable adb, adb root, and logcat.
+    exec u:object_r:init_exec:s0 -- /system/etc/init/hw/init_debug_policy.sh
 
 on init
     mkdir /mnt/apk 0755 system system
@@ -47,8 +42,6 @@ on init
     # payloads are not designed to run with bootstrap bionic
     setprop apex_config.done true
 
-    setprop ro.debuggable ${ro.boot.microdroid.debuggable:-0}
-
 on property:microdroid_manager.init_done=1
     # Stop ueventd to save memory
     stop ueventd
@@ -57,7 +50,7 @@ on init && property:ro.boot.microdroid.debuggable=1
     # Mount tracefs (with GID=AID_READTRACEFS)
     mount tracefs tracefs /sys/kernel/tracing gid=3012
 
-on init && property:ro.boot.adb.enabled=1
+on init && property:microdroid.debug_policy.adbd=1
     start adbd
 
 # Mount filesystems and start core system services.
