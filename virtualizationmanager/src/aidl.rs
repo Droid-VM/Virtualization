@@ -19,6 +19,7 @@ use crate::atom::{
     write_vm_booted_stats, write_vm_creation_stats};
 use crate::composite::make_composite_image;
 use crate::crosvm::{CrosvmConfig, DiskFile, PayloadState, VmContext, VmInstance, VmState};
+use crate::debug_policy::is_log_allowed;
 use crate::payload::{add_microdroid_payload_images, add_microdroid_system_images};
 use crate::selinux::{getfilecon, SeContext};
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
@@ -35,7 +36,7 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
     MemoryTrimLevel::MemoryTrimLevel,
     Partition::Partition,
     PartitionType::PartitionType,
-    VirtualMachineAppConfig::{DebugLevel::DebugLevel, Payload::Payload, VirtualMachineAppConfig},
+    VirtualMachineAppConfig::{Payload::Payload, VirtualMachineAppConfig},
     VirtualMachineConfig::VirtualMachineConfig,
     VirtualMachineDebugInfo::VirtualMachineDebugInfo,
     VirtualMachinePayloadConfig::VirtualMachinePayloadConfig,
@@ -966,13 +967,6 @@ fn parse_platform_version_req(s: &str) -> Result<VersionReq, Status> {
     })
 }
 
-fn is_debuggable(config: &VirtualMachineConfig) -> bool {
-    match config {
-        VirtualMachineConfig::AppConfig(config) => config.debugLevel != DebugLevel::NONE,
-        _ => false,
-    }
-}
-
 fn clone_or_prepare_logger_fd(
     config: &VirtualMachineConfig,
     fd: Option<&ParcelFileDescriptor>,
@@ -982,7 +976,11 @@ fn clone_or_prepare_logger_fd(
         return Ok(Some(clone_file(fd)?));
     }
 
-    if !is_debuggable(config) {
+    if let VirtualMachineConfig::AppConfig(app_config) = config {
+        if !is_log_allowed(app_config.debugLevel) {
+            return Ok(None);
+        }
+    } else {
         return Ok(None);
     }
 
