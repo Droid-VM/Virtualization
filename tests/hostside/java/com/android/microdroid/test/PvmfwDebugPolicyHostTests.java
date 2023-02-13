@@ -60,6 +60,8 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
     private static final int BOOT_COMPLETE_TIMEOUT_MS = 30000; // 30 seconds
     private static final int CONSOLE_OUTPUT_WAIT_MS = 5000; // 5 seconds
 
+    private static final Pattern MICRODROID_CID_PATTERN = Pattern.compile("with CID (\\d+)");
+
     @NonNull private static final String CUSTOM_PVMFW_FILE_PREFIX = "pvmfw";
     @NonNull private static final String CUSTOM_PVMFW_FILE_SUFFIX = ".bin";
     @NonNull private static final String CUSTOM_PVMFW_IMG_PATH = TEST_ROOT + PVMFW_FILE_NAME;
@@ -192,6 +194,26 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
                 .isFalse();
     }
 
+    @Test
+    public void testAdb() throws Exception {
+        Pvmfw pvmfw = createPvmfw("avf_debug_policy_with_adb.dtbo");
+        pvmfw.serialize(mCustomPvmfwBinFileOnHost);
+
+        CommandResult result = tryLaunchProtectedNonDebuggableVm();
+
+        assertWithMessage("Microdroid's console message shouldn't have been disabled")
+                .that(hasConsoleOutput(result))
+                .isFalse();
+    }
+
+    @Test
+    public void testNoAdb() throws Exception {
+        Pvmfw pvmfw = createPvmfw("avf_debug_policy_without_adb.dtbo");
+        pvmfw.serialize(mCustomPvmfwBinFileOnHost);
+
+        tryLaunchProtectedNonDebuggableVm();
+    }
+
     @NonNull
     private String readMicrodroidFileAsString(@NonNull String path)
             throws DeviceNotAvailableException {
@@ -217,6 +239,40 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
     @NonNull
     private boolean hasConsoleOutput(CommandResult result) throws DeviceNotAvailableException {
         return result.getStdout().contains("Run /init as init process");
+    }
+
+    @NonNull
+    private boolean hasAdbdStarted(CommandResult result) throws DeviceNotAvailableException {
+        return result.getStdout().contains("starting service 'adbd'");
+    }
+
+    @NonNull
+    private String findCid(CommandResult result) throws DeviceNotAvailableException {
+        Matcher matcher = MICRODROID_CID_PATTERN.matcher(result.getStdout());
+        if (matcher.find()) {
+            return Optional.of(matcher.group(1));
+        }
+        return "";
+    }
+
+    private boolean forwardAdb() {
+        String microdroidSerial;
+        int vmAdbPort = -1;
+        try {
+            ServerSocket microdroidServerSocket = new ServerSocket(0);
+            vmAdbPort = microdroidServerSocket.getLocalPort();
+            microdroidServerSocket.close();
+        } catch (IOException e) {
+            throw new DeviceRuntimeException(
+                    "Unable to get an unused port for Microdroid.",
+                    e,
+                    DeviceErrorIdentifier.DEVICE_UNEXPECTED_RESPONSE);
+        }
+
+        microdroidSerial = "localhost:" + vmAdbPort;
+
+        // disconnect from microdroid
+        getRunUtil().runTimedCmd(10000, deviceManager.getAdbPath(), "disconnect", microdroidSerial);
     }
 
     private ITestDevice launchProtectedVmAndWaitForBootCompleted()
