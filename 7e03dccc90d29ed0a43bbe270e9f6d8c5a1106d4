@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "981c22ce_c55f5b56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-14T11:10:16Z",
+      "side": 1,
+      "message": "Yes, I agree that it would be good to align on big changes like b/267575445 in the future.",
+      "parentUuid": "b8424bb8_deadd3e7",
+      "revId": "7e03dccc90d29ed0a43bbe270e9f6d8c5a1106d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ed53157_fb585b05",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-02-14T09:48:28Z",
       "side": 1,
       "message": "Could you also assert that `verified_boot_data.public_key` equals to `public_key`?\n\nAs you are adding a new field to VerifiedBootData, it\u0027s good to have some test coverage accompanying the change.",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 26
+      },
+      "revId": "7e03dccc90d29ed0a43bbe270e9f6d8c5a1106d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "422aa151_deb67aaf",
+        "filename": "pvmfw/avb/tests/api_test.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-14T11:10:16Z",
+      "side": 1,
+      "message": "Good point, Thanks!\n\nI introduced `Eq` and use a single `assert_eq` in aosp/2434295 to make the compiler catch this kind of omission in the future.",
+      "parentUuid": "7ed53157_fb585b05",
       "range": {
         "startLine": 57,
         "startChar": 8,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd766057_eb99e1a1",
+        "filename": "pvmfw/avb/tests/utils.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-14T11:10:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25e0448c_c8353e91",
+      "range": {
+        "startLine": 107,
+        "startChar": 8,
+        "endLine": 107,
+        "endChar": 26
+      },
+      "revId": "7e03dccc90d29ed0a43bbe270e9f6d8c5a1106d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89c04798_b84ea80f",
@@ -77,6 +143,30 @@
       "writtenOn": "2023-02-14T09:48:28Z",
       "side": 1,
       "message": "not related to this cl: I noticed that this function calls `BccHandoverMainFlow`. As it takes the bcc handover CBOR bundle and [parses](https://cs.android.com/android/platform/superproject/+/master:external/open-dice/src/android/bcc.c;l\u003d211;drc\u003d9b25969d7bf3e31c5b7fec5b34c37a304b6a7fa7) it to produce the next bcc handover, I wonder if we really need to call [BccHandover::new](https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/libs/dice/src/bcc.rs;l\u003d54;drc\u003d54511fda223b4a1eefa5553870d8cb6ae92597c6) to parse the bcc handover before reaching here. The parsed CDIs from the previous boot stage are not used anywhere. \n\nSo, can we remove `BccHandover::new`, just pass the raw bcc handover to main() and call BccHandoverMainFlow on it directly here?",
+      "range": {
+        "startLine": 103,
+        "startChar": 12,
+        "endLine": 103,
+        "endChar": 25
+      },
+      "revId": "7e03dccc90d29ed0a43bbe270e9f6d8c5a1106d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4711286_cceadef7",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-14T11:10:16Z",
+      "side": 1,
+      "message": "The CDIs are used to encrypt/decrypt instance.img entries so `BccHandover::new` shouldn\u0027t be removed.\n\nPlease Cc me on any change that touches this code to avoid overlooking things like this! :)",
+      "parentUuid": "89c04798_b84ea80f",
       "range": {
         "startLine": 103,
         "startChar": 12,
