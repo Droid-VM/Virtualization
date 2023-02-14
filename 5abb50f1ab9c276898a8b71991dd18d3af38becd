@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b480017f_6eeed2c8",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-14T12:54:52Z",
+      "side": 1,
+      "message": "nit: Why isn\u0027t this a function with five arguments? Wouldn\u0027t even need to use the stack and looks a bit inconsistent in the context of all the other functions in this file.",
+      "range": {
+        "startLine": 67,
+        "startChar": 11,
+        "endLine": 67,
+        "endChar": 19
+      },
+      "revId": "5abb50f1ab9c276898a8b71991dd18d3af38becd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c7094b1_5a70c1c7",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-14T12:54:52Z",
+      "side": 1,
+      "message": "Why can\u0027t you handle the error?",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 55
+      },
+      "revId": "5abb50f1ab9c276898a8b71991dd18d3af38becd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3401289f_8dc42b93",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-14T12:54:52Z",
+      "side": 1,
+      "message": "`()`",
+      "range": {
+        "startLine": 113,
+        "startChar": 48,
+        "endLine": 113,
+        "endChar": 50
+      },
+      "revId": "5abb50f1ab9c276898a8b71991dd18d3af38becd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "629feaba_27561d22",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-14T12:54:52Z",
+      "side": 1,
+      "message": "nit: This looks like an implementation detail (the fact that FDT takes `u64`s) that the helper could handle automatically.",
+      "range": {
+        "startLine": 110,
+        "startChar": 42,
+        "endLine": 110,
+        "endChar": 61
+      },
+      "revId": "5abb50f1ab9c276898a8b71991dd18d3af38becd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
