@@ -22,6 +22,20 @@ genrule {
     out: ["avf_debug_policy_without_ramdump.dtbo"],
 }
 
+genrule {
+    name: "test_avf_debug_policy_with_pvmfw_log",
+    defaults: ["test_avf_debug_policy_overlay"],
+    srcs: ["assets/avf_debug_policy_with_pvmfw_log.dts"],
+    out: ["avf_debug_policy_with_pvmfw_log.dtbo"],
+}
+
+genrule {
+    name: "test_avf_debug_policy_without_pvmfw_log",
+    defaults: ["test_avf_debug_policy_overlay"],
+    srcs: ["assets/avf_debug_policy_without_pvmfw_log.dts"],
+    out: ["avf_debug_policy_without_pvmfw_log.dtbo"],
+}
+
 java_test_host {
     name: "MicrodroidHostTestCases",
     srcs: ["java/**/*.java"],

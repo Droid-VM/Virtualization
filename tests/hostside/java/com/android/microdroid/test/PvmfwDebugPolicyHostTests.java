@@ -162,6 +162,24 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
                 .isEqualTo(HEX_STRING_ZERO);
     }
 
+    @Test
+    public void testPvmfwLog() throws Exception {
+        Pvmfw pvmfw = createPvmfw("avf_debug_policy_with_pvmfw_log.dtbo");
+        pvmfw.serialize(mCustomPvmfwBinFileOnHost);
+        mMicrodroidDevice = launchProtectedVmAndWaitForBootCompleted();
+
+        
+    }
+
+    @Test
+    public void testNoPvmfwLog() throws Exception {
+        Pvmfw pvmfw = createPvmfw("avf_debug_policy_without_pvmfw_log.dtbo");
+        pvmfw.serialize(mCustomPvmfwBinFileOnHost);
+        mMicrodroidDevice = launchProtectedVmAndWaitForBootCompleted();
+
+
+    }
+
     @NonNull
     private String readMicrodroidFileAsString(@NonNull String path)
             throws DeviceNotAvailableException {

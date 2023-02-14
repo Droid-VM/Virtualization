@@ -1,0 +1,16 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    fragment@avf {
+        target-path = "/";
+
+        __overlay__ {
+            avf {
+                pvmfw {
+                    log = <1>;
+                };
+            };
+        };
+    };
+};

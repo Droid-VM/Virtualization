@@ -19,6 +19,8 @@ use core::ffi::CStr;
 use core::fmt;
 use libfdt::FdtError;
 use log::info;
+use log::LevelFilter;
+use vmbase::logger;
 
 #[derive(Debug, Clone)]
 pub enum DebugPolicyError {
@@ -28,6 +30,8 @@ pub enum DebugPolicyError {
     DebugPolicyFdt(&'static str, FdtError),
     /// The overlaid result FDT is invalid or malformed, and may be corrupted.
     OverlaidFdt(&'static str, FdtError),
+    /// Failed to apply debug policy.
+    ApplyDebugPolicy(&'static str),
 }
 
 impl fmt::Display for DebugPolicyError {
@@ -36,6 +40,7 @@ impl fmt::Display for DebugPolicyError {
             Self::Fdt(s, e) => write!(f, "Invalid baseline FDT. {s}: {e}"),
             Self::DebugPolicyFdt(s, e) => write!(f, "Invalid overlay FDT. {s}: {e}"),
             Self::OverlaidFdt(s, e) => write!(f, "Invalid overlaid FDT. {s}: {e}"),
+            Self::ApplyDebugPolicy(s) => write!(f, "Failed to apply debug policy. {s}"),
         }
     }
 }
@@ -110,6 +115,24 @@ unsafe fn disable_ramdump(fdt: &mut libfdt::Fdt) -> Result<(), DebugPolicyError>
     })
 }
 
+fn is_pvmfw_log_enabled(fdt: &libfdt::Fdt) -> Result<bool, DebugPolicyError> {
+    let pvmfw = match fdt
+        .node(CStr::from_bytes_with_nul(b"/avf/pvmfw\0").unwrap())
+        .map_err(|e| DebugPolicyError::DebugPolicyFdt("Failed to find /avf/pvmfw node", e))?
+    {
+        Some(node) => node,
+        None => return Ok(false),
+    };
+
+    match pvmfw
+        .getprop_u32(CStr::from_bytes_with_nul(b"log\0").unwrap())
+        .map_err(|e| DebugPolicyError::DebugPolicyFdt("Failed to find log prop", e))?
+    {
+        Some(1) => Ok(true),
+        _ => Ok(false),
+    }
+}
+
 /// Returns true only if fdt has ramdump prop in the /avf/guest/common node with value <1>
 fn is_ramdump_enabled(fdt: &libfdt::Fdt) -> Result<bool, DebugPolicyError> {
     let common = match fdt
@@ -141,6 +164,10 @@ pub unsafe fn handle_debug_policy(
 ) -> Result<(), DebugPolicyError> {
     if let Some(dp) = debug_policy {
         apply_debug_policy(fdt, dp)?;
+    }
+
+    if is_pvmfw_log_enabled(fdt)? {
+        logger::init(LevelFilter::Info).map_err(|_| DebugPolicyError::ApplyDebugPolicy("Failed to enable log"))?;
     }
 
     // Handles ramdump in the debug policy
