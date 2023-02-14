@@ -1,18 +1,6 @@
 {
   "avf-presubmit": [
     {
-      "name": "MicrodroidHostTestCases"
-    },
-    {
-      "name": "ComposHostTestCases"
-    },
-    {
-      "name": "MicrodroidTestApp"
-    },
-    {
-      "name": "art_standalone_dexpreopt_tests"
-    },
-    {
       "name": "composd_cmd.test"
     },
     {
@@ -25,15 +13,29 @@
       "name": "initrd_bootconfig.test"
     }
   ],
-  "avf-postsubmit": [
+  "avf-presubmit-userdebug": [
+    {
+      "name": "MicrodroidHostTestCases"
+    },
+    {
+      "name": "ComposHostTestCases"
+    },
+    {
+      "name": "MicrodroidTestApp"
+    },
+    {
+      "name": "art_standalone_dexpreopt_tests"
+    }
+  ],
+  "avf-postsubmit-userdebug": [
     {
       "name": "odsign_e2e_tests_full"
     },
     {
-      "name": "MicrodroidBenchmarkApp"
+      "name": "ComposBenchmarkApp"
     },
     {
-      "name": "ComposBenchmarkApp"
+      "name": "MicrodroidBenchmarkApp"
     },
     {
       "name": "AVFHostTestCases"
