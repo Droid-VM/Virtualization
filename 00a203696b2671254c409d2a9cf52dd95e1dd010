@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32597ec3_f66462cf",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-02-14T11:23:52Z",
+      "side": 1,
+      "message": "The name `Hashes` is a bit confusing as it contains other information like DiceMode. It\u0027s also unclear why we need to build the input_values in two stages, first with the hashes/mode then with salt. Why not just create one function to build the input_values directly with all the params?",
+      "range": {
+        "startLine": 51,
+        "startChar": 5,
+        "endLine": 51,
+        "endChar": 11
+      },
+      "revId": "00a203696b2671254c409d2a9cf52dd95e1dd010",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
