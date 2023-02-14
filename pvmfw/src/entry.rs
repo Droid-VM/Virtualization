@@ -30,8 +30,7 @@ use log::debug;
 use log::error;
 use log::info;
 use log::warn;
-use log::LevelFilter;
-use vmbase::{console, layout, logger, main, power::reboot};
+use vmbase::{console, layout, main, power::reboot};
 
 #[derive(Debug, Clone)]
 pub enum RebootReason {
@@ -202,10 +201,8 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
     // SAFETY - This function should and will only be called once, here.
     unsafe { heap::init() };
 
-    logger::init(LevelFilter::Info).map_err(|_| RebootReason::InternalError)?;
-
-    // Use debug!() to avoid printing to the UART if we failed to configure it as only local
-    // builds that have tweaked the logger::init() call will actually attempt to log the message.
+    // Use debug!() to avoid printing to the UART if we failed to configure.
+    // debug!() will be ignored here because log is enabled later by debug policy with info level.
 
     mmio_guard::init().map_err(|e| {
         debug!("{e}");
@@ -221,6 +218,24 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
     // script prevents it from overlapping with other objects.
     let appended_data = unsafe { get_appended_data_slice() };
 
+    // SAFETY - We only get the appended payload from here, once. It is statically mapped and the
+    // linker script prevents it from overlapping with other objects.
+    let mut appended = unsafe { AppendedPayload::new(appended_data) }.ok_or_else(|| {
+        error!("No valid configuration found");
+        RebootReason::InvalidConfig
+    })?;
+
+    let mut memory = MemoryTracker::new(page_table);
+    let slices = MemorySlices::new(fdt, payload, payload_size, &mut memory)?;
+
+    // SAFETY - As we `?` the result, there is no risk of using a bad `slices.fdt`.
+    unsafe {
+        handle_debug_policy(slices.fdt, appended.get_debug_policy()).map_err(|e| {
+            error!("Unexpected error when handling debug policy: {e:?}");
+            RebootReason::from(e)
+        })?;
+    }
+
     // Up to this point, we were using the built-in static (from .rodata) page tables.
 
     let mut page_table = mmu::PageTable::from_static_layout().map_err(|e| {
@@ -235,13 +250,6 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
         RebootReason::InternalError
     })?;
 
-    // SAFETY - We only get the appended payload from here, once. It is statically mapped and the
-    // linker script prevents it from overlapping with other objects.
-    let mut appended = unsafe { AppendedPayload::new(appended_data) }.ok_or_else(|| {
-        error!("No valid configuration found");
-        RebootReason::InvalidConfig
-    })?;
-
     let bcc_slice = appended.get_bcc_mut();
     let bcc = Handover::new(bcc_slice).map_err(|e| {
         error!("Invalid BCC Handover: {e:?}");
@@ -254,22 +262,11 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
     unsafe { page_table.activate() };
     debug!("... Success!");
 
-    let mut memory = MemoryTracker::new(page_table);
-    let slices = MemorySlices::new(fdt, payload, payload_size, &mut memory)?;
-
     // This wrapper allows main() to be blissfully ignorant of platform details.
     crate::main(slices.fdt, slices.kernel, slices.ramdisk, &bcc, &mut memory)?;
 
     helpers::flushed_zeroize(bcc_slice);
     helpers::flush(slices.fdt.as_slice());
-
-    // SAFETY - As we `?` the result, there is no risk of using a bad `slices.fdt`.
-    unsafe {
-        handle_debug_policy(slices.fdt, appended.get_debug_policy()).map_err(|e| {
-            error!("Unexpected error when handling debug policy: {e:?}");
-            RebootReason::from(e)
-        })?;
-    }
 
     info!("Expecting a bug making MMIO_GUARD_UNMAP return NOT_SUPPORTED on success");
     memory.mmio_unmap_all().map_err(|e| {
