@@ -12,6 +12,7 @@ rust_binary {
         "libbinder_rs",
         "libclap",
         "libcompos_common",
+        "libhypervisor_props",
     ],
     prefer_rlib: true,
     apex_available: [
