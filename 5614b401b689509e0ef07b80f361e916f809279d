@@ -16,6 +16,24 @@
       "message": "Some questions:\n\n* does this work for protected VMs as well? (I hope not, but please confirm)\n* does adding or removing the option change the identity of the vm? (it should)\n* (if this works also for protected VMs), can pvmfw know if gdb is enabled or not so that it can reject?",
       "revId": "5614b401b689509e0ef07b80f361e916f809279d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc370715_6c8c9910",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-15T09:38:12Z",
+      "side": 1,
+      "message": "pKVM in protected mode will reject the KVM debug ioctls.\n\nThe guest is unaware that it\u0027s being debugged but, if it\u0027s only for non-protected VMs, does it matter? Any secret it contained was already mapped in the VMM\u0027s address space when running without the debugger so changing the identity seems to achieve very little.",
+      "parentUuid": "8248f5ca_48699002",
+      "revId": "5614b401b689509e0ef07b80f361e916f809279d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
