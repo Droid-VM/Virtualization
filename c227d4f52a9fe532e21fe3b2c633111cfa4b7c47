@@ -39,6 +39,76 @@
       },
       "revId": "c227d4f52a9fe532e21fe3b2c633111cfa4b7c47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6cbc46d_e6514e80",
+        "filename": "compos/composd_cmd/composd_cmd.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-15T12:10:34Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "dfef75bd_883b58b5",
+      "range": {
+        "startLine": 131,
+        "startChar": 7,
+        "endLine": 131,
+        "endChar": 95
+      },
+      "revId": "c227d4f52a9fe532e21fe3b2c633111cfa4b7c47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1af0944_14f0fac3",
+        "filename": "libs/hypervisor_props/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-15T12:10:34Z",
+      "side": 1,
+      "message": "I vaguely remember that the build system can automatically create a library that wraps properties like this? Or is that just a figment of my imagination?",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 42
+      },
+      "revId": "c227d4f52a9fe532e21fe3b2c633111cfa4b7c47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fad67e1e_6529496d",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-15T12:10:34Z",
+      "side": 1,
+      "message": "Ah, careful with the reduced scope. IIRC, this will close the socket to virtmgr, which will trigger RpcServer shutdown. It will wait while there are active sessions, but it prints a log message every second.",
+      "range": {
+        "startLine": 233,
+        "startChar": 4,
+        "endLine": 234,
+        "endChar": 97
+      },
+      "revId": "c227d4f52a9fe532e21fe3b2c633111cfa4b7c47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
