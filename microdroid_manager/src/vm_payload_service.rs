@@ -14,6 +14,7 @@
 
 //! Implementation of the AIDL interface `IVmPayloadService`.
 
+use crate::dice::derive_sealing_key;
 use android_system_virtualization_payload::aidl::android::system::virtualization::payload::IVmPayloadService::{
     BnVmPayloadService, IVmPayloadService, VM_PAYLOAD_SERVICE_SOCKET_NAME};
 use android_system_virtualmachineservice::aidl::android::system::virtualmachineservice::IVirtualMachineService::IVirtualMachineService;
@@ -21,8 +22,6 @@ use anyhow::Result;
 use binder::{Interface, BinderFeatures, ExceptionCode, Status, Strong};
 use diced_open_dice::OwnedDiceArtifacts;
 use log::{error, info};
-use openssl::hkdf::hkdf;
-use openssl::md::Md;
 use rpcbinder::RpcServer;
 
 /// Implementation of `IVmPayloadService`.
@@ -48,11 +47,10 @@ impl IVmPayloadService for VmPayloadService {
             0xB7, 0xA8, 0x43, 0x92,
         ];
         let mut secret = vec![0; size.try_into().unwrap()];
-        hkdf(&mut secret, Md::sha256(), &self.dice.cdi_values.cdi_seal, &salt, identifier)
-            .map_err(|e| {
-                error!("Failed to derive VM instance secret: {:?}", e);
-                Status::new_service_specific_error(-1, None)
-            })?;
+        derive_sealing_key(&self.dice, &salt, identifier, &mut secret).map_err(|e| {
+            error!("Failed to derive VM instance secret: {:?}", e);
+            Status::new_service_specific_error(-1, None)
+        })?;
         Ok(secret)
     }
 
