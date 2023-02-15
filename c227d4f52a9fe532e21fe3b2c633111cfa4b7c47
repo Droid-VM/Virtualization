@@ -16,6 +16,29 @@
       "message": "PTAL - now without the test breakage",
       "revId": "c227d4f52a9fe532e21fe3b2c633111cfa4b7c47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfef75bd_883b58b5",
+        "filename": "compos/composd_cmd/composd_cmd.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-15T12:08:29Z",
+      "side": 1,
+      "message": "This check seems to be duplicated between composd_cmd and virtmanager. Should we introduce a any_vm_type_supported function in libhypervisor_props?",
+      "range": {
+        "startLine": 131,
+        "startChar": 7,
+        "endLine": 131,
+        "endChar": 95
+      },
+      "revId": "c227d4f52a9fe532e21fe3b2c633111cfa4b7c47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
