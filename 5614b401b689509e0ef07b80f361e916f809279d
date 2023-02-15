@@ -121,6 +121,29 @@
       },
       "revId": "5614b401b689509e0ef07b80f361e916f809279d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc979ab3_c2e91ec3",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-15T12:35:25Z",
+      "side": 1,
+      "message": "OOC, why make `gdb_port` signed? If it is to detect it having been set, could we turn it into a `Option\u003c_\u003e`?",
+      "range": {
+        "startLine": 750,
+        "startChar": 23,
+        "endLine": 750,
+        "endChar": 26
+      },
+      "revId": "5614b401b689509e0ef07b80f361e916f809279d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
