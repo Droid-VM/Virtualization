@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8248f5ca_48699002",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-15T03:38:51Z",
+      "side": 1,
+      "message": "Some questions:\n\n* does this work for protected VMs as well? (I hope not, but please confirm)\n* does adding or removing the option change the identity of the vm? (it should)\n* (if this works also for protected VMs), can pvmfw know if gdb is enabled or not so that it can reject?",
+      "revId": "5614b401b689509e0ef07b80f361e916f809279d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
