@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e2ceec99_1076bdcd",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-15T01:52:47Z",
+      "side": 1,
+      "message": "+1. \n\nIn addition, for \"most\" methods, the receiver (self) is the target for an operation. So `config.apply_to(fdt)` looked very unusual to me. `fdt.apply(config)` or `modify_fdt_for_next_stage(fdt, config)` looks better if you want to keep the struct.",
+      "parentUuid": "b480017f_6eeed2c8",
+      "range": {
+        "startLine": 67,
+        "startChar": 11,
+        "endLine": 67,
+        "endChar": 19
+      },
+      "revId": "5abb50f1ab9c276898a8b71991dd18d3af38becd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6c7094b1_5a70c1c7",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 8
