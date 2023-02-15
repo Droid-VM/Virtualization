@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7c42c95_76923908",
+        "filename": "compos/composd_cmd/composd_cmd.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-15T13:28:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6cbc46d_e6514e80",
+      "range": {
+        "startLine": 131,
+        "startChar": 7,
+        "endLine": 131,
+        "endChar": 95
+      },
+      "revId": "c227d4f52a9fe532e21fe3b2c633111cfa4b7c47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1af0944_14f0fac3",
@@ -88,6 +112,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e26c7293_7ea9a9aa",
+        "filename": "libs/hypervisor_props/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-15T13:28:56Z",
+      "side": 1,
+      "message": "That happens over in Java land (system/libsysprop/srcs/android/sysprop/HypervisorProperties.sysprop, cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/javalib/src/android/system/virtualmachine/VirtualMachineConfig.java;drc\u003d21873d7778ed1d6d19cb236eff5b03b129098913;l\u003d689)\n\nBut Rust isn\u0027t supported. Hmm, maybe it should be.\n(It wouldn\u0027t get us the any_vm method though.)\n\nWe could bindgen to the generated C++, but that seems worse.",
+      "parentUuid": "d1af0944_14f0fac3",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 42
+      },
+      "revId": "c227d4f52a9fe532e21fe3b2c633111cfa4b7c47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fad67e1e_6529496d",
@@ -101,6 +149,30 @@
       "writtenOn": "2023-02-15T12:10:34Z",
       "side": 1,
       "message": "Ah, careful with the reduced scope. IIRC, this will close the socket to virtmgr, which will trigger RpcServer shutdown. It will wait while there are active sessions, but it prints a log message every second.",
+      "range": {
+        "startLine": 233,
+        "startChar": 4,
+        "endLine": 234,
+        "endChar": 97
+      },
+      "revId": "c227d4f52a9fe532e21fe3b2c633111cfa4b7c47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22fb0b13_af63b56a",
+        "filename": "vm/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-15T13:28:56Z",
+      "side": 1,
+      "message": "We shouldn\u0027t require clients to hold the service object when they don\u0027t need it (CompOS doesn\u0027t, for example).\nThere\u0027s only one log message to say \"Shutdown prevented by forcePersist override flag.\", it doesn\u0027t repeat.",
+      "parentUuid": "fad67e1e_6529496d",
       "range": {
         "startLine": 233,
         "startChar": 4,
