@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51bc1006_dba5cade",
+        "filename": "microdroid/payload/src/com/android/virt/PayloadMetadata.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-02-15T13:48:57Z",
+      "side": 1,
+      "message": "Oh, thanks!",
+      "parentUuid": "aadee6e4_ebcdcecc",
+      "range": {
+        "startLine": 16,
+        "startChar": 8,
+        "endLine": 16,
+        "endChar": 79
+      },
+      "revId": "aeb53c6d9cbcb183f8db1b8e947c73484a394f00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "670a2187_b09402c0",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-15T09:20:34Z",
       "side": 1,
       "message": "Why do we need this, given that the size of message can be inferred from the size of the file?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 36
+      },
+      "revId": "aeb53c6d9cbcb183f8db1b8e947c73484a394f00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61baf3d7_0c8eeade",
+        "filename": "microdroid/payload/src/com/android/virt/PayloadMetadata.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-02-15T13:48:57Z",
+      "side": 1,
+      "message": "Oh, that\u0027s how \"metadata\" partition is designed. The reason for length-prefix is that the filesize can\u0027t be used when accessed inside a VM guest since it\u0027s passed as a partition and the size is rounded up to 4K boundary. The implementation of reader below is wrong in that sense.",
+      "parentUuid": "670a2187_b09402c0",
       "range": {
         "startLine": 17,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f922956_9bd8f155",
+        "filename": "microdroid/payload/src/com/android/virt/PayloadMetadata.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-02-15T13:48:57Z",
+      "side": 1,
+      "message": "For parity. Libs for other languages also have reader/writer. Btw, it was used in the test code, but  it\u0027s gone now. Let\u0027s remove it. (We could add it when it\u0027s necessary)",
+      "parentUuid": "6ef49da4_83eb2f00",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 64
+      },
+      "revId": "aeb53c6d9cbcb183f8db1b8e947c73484a394f00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "995d6b5e_fb8f45c9",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-02-15T09:20:34Z",
       "side": 1,
       "message": "close when done",
+      "range": {
+        "startLine": 26,
+        "startChar": 24,
+        "endLine": 26,
+        "endChar": 26
+      },
+      "revId": "aeb53c6d9cbcb183f8db1b8e947c73484a394f00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6385fbcf_d0093345",
+        "filename": "microdroid/payload/src/com/android/virt/PayloadMetadata.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1415877
+      },
+      "writtenOn": "2023-02-15T13:48:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "995d6b5e_fb8f45c9",
       "range": {
         "startLine": 26,
         "startChar": 24,
