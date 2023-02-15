@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "186e0585_a44dee42",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-15T12:13:26Z",
+      "side": 1,
+      "message": "Where is that check? Just that you need to use the Raw config?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 11
+      },
+      "revId": "5614b401b689509e0ef07b80f361e916f809279d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8248f5ca_48699002",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -32,6 +55,70 @@
       "side": 1,
       "message": "pKVM in protected mode will reject the KVM debug ioctls.\n\nThe guest is unaware that it\u0027s being debugged but, if it\u0027s only for non-protected VMs, does it matter? Any secret it contained was already mapped in the VMM\u0027s address space when running without the debugger so changing the identity seems to achieve very little.",
       "parentUuid": "8248f5ca_48699002",
+      "revId": "5614b401b689509e0ef07b80f361e916f809279d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beefbe44_86b0ab19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-15T12:13:26Z",
+      "side": 1,
+      "message": "Well there\u0027s no reason for us to make it easy to get access. \n\nIf the option won\u0027t work for protected VMs (which does seem pretty important!) should we reject such a config, rather than attempting to start it?",
+      "parentUuid": "dc370715_6c8c9910",
+      "revId": "5614b401b689509e0ef07b80f361e916f809279d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b671050a_9aa83db5",
+        "filename": "docs/debug/gdb.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-15T12:13:26Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Please remove the trailing whitespace.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 1,
+        "startChar": 34,
+        "endLine": 1,
+        "endChar": 35
+      },
+      "revId": "5614b401b689509e0ef07b80f361e916f809279d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6e6196a_4eed9aa0",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-15T12:13:26Z",
+      "side": 1,
+      "message": "Option\u003ci32\u003e would be better; all this `if \u003e 0` is a bit ugly.\nOption\u003cNonZeroI32\u003e if you want to save a byte.\n\nOr indeed Option\u003cNonZeroU16\u003e, since TCP ports are 16 bits and unsigned?",
+      "range": {
+        "startLine": 108,
+        "startChar": 18,
+        "endLine": 108,
+        "endChar": 21
+      },
       "revId": "5614b401b689509e0ef07b80f361e916f809279d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
