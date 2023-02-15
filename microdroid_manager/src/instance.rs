@@ -50,6 +50,9 @@ const INSTANCE_IMAGE_PATH: &str = "/dev/block/by-name/vm-instance";
 /// Identifier for the key used to seal the instance data.
 const INSTANCE_KEY_IDENTIFIER: &[u8] = b"microdroid_manager_key";
 
+/// Length of the instance sealing key in bytes.
+const INSTANCE_SEALING_KEY_LENGTH: usize = 32;
+
 /// Magic string in the instance disk header
 const DISK_HEADER_MAGIC: &str = "Android-VM-instance";
 
@@ -142,7 +145,7 @@ impl InstanceDisk {
         self.file.read_exact(&mut header)?;
 
         // Decrypt and authenticate the data (along with the header).
-        let key = dice.get_sealing_key(INSTANCE_KEY_IDENTIFIER)?;
+        let key = dice.get_sealing_key(INSTANCE_KEY_IDENTIFIER, INSTANCE_SEALING_KEY_LENGTH)?;
         let plaintext =
             decrypt_aead(Cipher::aes_256_gcm(), &key, Some(&nonce), &header, &data, &tag)?;
 
@@ -188,7 +191,7 @@ impl InstanceDisk {
         self.file.write_all(nonce.as_ref())?;
 
         // Then encrypt and sign the data.
-        let key = dice.get_sealing_key(INSTANCE_KEY_IDENTIFIER)?;
+        let key = dice.get_sealing_key(INSTANCE_KEY_IDENTIFIER, INSTANCE_SEALING_KEY_LENGTH)?;
         let mut tag = [0; AES_256_GCM_TAG_LENGTH];
         let ciphertext =
             encrypt_aead(Cipher::aes_256_gcm(), &key, Some(&nonce), &header, &data, &mut tag)?;
