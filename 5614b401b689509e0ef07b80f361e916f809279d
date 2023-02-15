@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "020dfd37_64f64e23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-15T19:02:47Z",
+      "side": 1,
+      "message": "Implemented in virtrualizationmanager/src/aidl.rs\n\n```\n   let is_custom \u003d match config {\n            VirtualMachineConfig::RawConfig(_) \u003d\u003e true,\n            VirtualMachineConfig::AppConfig(config) \u003d\u003e {\n                // Some features are reserved for platform apps only, even when using\n                // VirtualMachineAppConfig:\n                // - controlling CPUs;\n                // - specifying a config file in the APK;\n                // - gdbPort is set, meaning that crosvm will start a gdb server.\n                !config.taskProfiles.is_empty()\n                    || matches!(config.payload, Payload::ConfigPath(_))\n                    || config.gdbPort \u003e 0\n            }\n        };\n```",
+      "parentUuid": "186e0585_a44dee42",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 11
+      },
+      "revId": "5614b401b689509e0ef07b80f361e916f809279d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8248f5ca_48699002",
@@ -77,6 +101,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb7f4d85_9143f487",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-15T19:02:47Z",
+      "side": 1,
+      "message": "Restricted the usage of --gdb flag only to non-protected debuggable VMS.",
+      "parentUuid": "beefbe44_86b0ab19",
+      "revId": "5614b401b689509e0ef07b80f361e916f809279d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b671050a_9aa83db5",
@@ -90,6 +132,30 @@
       "writtenOn": "2023-02-15T12:13:26Z",
       "side": 1,
       "message": "Please fix this WARNING reported by Check Contents: Please remove the trailing whitespace.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 1,
+        "startChar": 34,
+        "endLine": 1,
+        "endChar": 35
+      },
+      "revId": "5614b401b689509e0ef07b80f361e916f809279d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4798ff0b_3face745",
+        "filename": "docs/debug/gdb.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-15T19:02:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b671050a_9aa83db5",
       "range": {
         "startLine": 1,
         "startChar": 34,
@@ -123,6 +189,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cced329a_2a1e1678",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-15T19:02:47Z",
+      "side": 1,
+      "message": "Changed to Option\u003cNonZeroU16\u003e",
+      "parentUuid": "f6e6196a_4eed9aa0",
+      "range": {
+        "startLine": 108,
+        "startChar": 18,
+        "endLine": 108,
+        "endChar": 21
+      },
+      "revId": "5614b401b689509e0ef07b80f361e916f809279d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc979ab3_c2e91ec3",
@@ -136,6 +226,30 @@
       "writtenOn": "2023-02-15T12:35:25Z",
       "side": 1,
       "message": "OOC, why make `gdb_port` signed? If it is to detect it having been set, could we turn it into a `Option\u003c_\u003e`?",
+      "range": {
+        "startLine": 750,
+        "startChar": 23,
+        "endLine": 750,
+        "endChar": 26
+      },
+      "revId": "5614b401b689509e0ef07b80f361e916f809279d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab8d28e4_4874f5e2",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-15T19:02:47Z",
+      "side": 1,
+      "message": "Changed to Option\u003cNonZeroU16\u003e",
+      "parentUuid": "dc979ab3_c2e91ec3",
       "range": {
         "startLine": 750,
         "startChar": 23,
