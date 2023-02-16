@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "000ebb17_b7d28bba",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-16T14:33:57Z",
+      "side": 1,
+      "message": "It looks less readable to me than the current approach. Please LMK if you feel strongly about this.",
+      "parentUuid": "b43a4d5a_3588117c",
+      "range": {
+        "startLine": 311,
+        "startChar": 22,
+        "endLine": 311,
+        "endChar": 48
+      },
+      "revId": "b31d3dfcbee5208eb0ae274395cd8eb549dd9759",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ee20e10_56a46ae6",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-16T13:24:09Z",
       "side": 1,
       "message": "We might end up making 2 permission checks, which I was trying to avoid (since each one is an IPC to permission manager).",
+      "range": {
+        "startLine": 315,
+        "startChar": 12,
+        "endLine": 315,
+        "endChar": 29
+      },
+      "revId": "b31d3dfcbee5208eb0ae274395cd8eb549dd9759",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c0b2b2a_3cd7539f",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-16T14:33:57Z",
+      "side": 1,
+      "message": "Changed is_custom condition to also include || config.gdbPort \u003e 0",
+      "parentUuid": "9ee20e10_56a46ae6",
       "range": {
         "startLine": 315,
         "startChar": 12,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b6a6af0_0c4beffb",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-16T14:33:57Z",
+      "side": 1,
+      "message": "Unfortunately we need to do call check_gdb_access before transforming app config to the RawConfig, since we want to only allow --gdb for fully debuggable app VMs.\n\nIn addition, we can\u0027t use is_debuggable function, since it returns false for raw VMs, while in our case we want to allow --gdb for raw VMs.",
+      "parentUuid": "af8763d7_767147a1",
+      "range": {
+        "startLine": 329,
+        "startChar": 0,
+        "endLine": 340,
+        "endChar": 10
+      },
+      "revId": "b31d3dfcbee5208eb0ae274395cd8eb549dd9759",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa1cdbf7_e1f0cd22",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-02-16T13:24:09Z",
       "side": 1,
       "message": "We have is_debuggable for this on line 979",
+      "range": {
+        "startLine": 1003,
+        "startChar": 0,
+        "endLine": 1006,
+        "endChar": 54
+      },
+      "revId": "b31d3dfcbee5208eb0ae274395cd8eb549dd9759",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9145d904_9422321f",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-16T14:33:57Z",
+      "side": 1,
+      "message": "See my reply above, is_debuggable returns false for raw VMs, while we want to allow --gdb for them.",
+      "parentUuid": "aa1cdbf7_e1f0cd22",
       "range": {
         "startLine": 1003,
         "startChar": 0,
