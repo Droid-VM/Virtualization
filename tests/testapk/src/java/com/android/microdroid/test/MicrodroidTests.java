@@ -164,9 +164,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         assertThat(testResults.mEncryptedStoragePath).isEqualTo("");
     }
 
-    @Test
-    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
-    public void createAndRunNoDebugVm() throws Exception {
+    private void helperCreateAndRunNoDebugVm(int cpuTopology) throws Exception {
         assumeSupportedKernel();
 
         // For most of our tests we use a debug VM so failures can be diagnosed.
@@ -177,6 +175,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                         .setMemoryBytes(minMemoryRequired())
                         .setDebugLevel(DEBUG_LEVEL_NONE)
                         .setVmOutputCaptured(false)
+                        .setCpuTopology(cpuTopology)
                         .build();
         VirtualMachine vm = forceCreateNewVirtualMachine("test_vm", config);
 
@@ -184,6 +183,18 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                 runVmTestService(vm, (ts, tr) -> tr.mAddInteger = ts.addInteger(37, 73));
         testResults.assertNoException();
         assertThat(testResults.mAddInteger).isEqualTo(37 + 73);
+    }
+
+    @Test
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
+    public void createAndRunNoDebugVm() throws Exception {
+        helperCreateAndRunNoDebugVm(CPU_TOPOLOGY_ONE_CPU);
+    }
+
+    @Test
+    @CddTest(requirements = {"9.17/C-1-1", "9.17/C-2-1"})
+    public void createAndRunHostCpuTopologyVm() throws Exception {
+        helperCreateAndRunNoDebugVm(CPU_TOPOLOGY_MATCH_HOST);
     }
 
     @Test
