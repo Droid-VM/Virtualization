@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b43a4d5a_3588117c",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-16T13:24:09Z",
+      "side": 1,
+      "message": "You could include this in the match above\nlet (is_custom, gdb_port) \u003d match config",
+      "range": {
+        "startLine": 311,
+        "startChar": 22,
+        "endLine": 311,
+        "endChar": 48
+      },
+      "revId": "b31d3dfcbee5208eb0ae274395cd8eb549dd9759",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ee20e10_56a46ae6",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-16T13:24:09Z",
+      "side": 1,
+      "message": "We might end up making 2 permission checks, which I was trying to avoid (since each one is an IPC to permission manager).",
+      "range": {
+        "startLine": 315,
+        "startChar": 12,
+        "endLine": 315,
+        "endChar": 29
+      },
+      "revId": "b31d3dfcbee5208eb0ae274395cd8eb549dd9759",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af8763d7_767147a1",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-16T13:24:09Z",
+      "side": 1,
+      "message": "Alternatively, would this be a good point to extract gbp_port?\nThis is where we try to merge the two forms of config into a unified one, so the subsequent logic is easier.",
+      "range": {
+        "startLine": 329,
+        "startChar": 0,
+        "endLine": 340,
+        "endChar": 10
+      },
+      "revId": "b31d3dfcbee5208eb0ae274395cd8eb549dd9759",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa1cdbf7_e1f0cd22",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-16T13:24:09Z",
+      "side": 1,
+      "message": "We have is_debuggable for this on line 979",
+      "range": {
+        "startLine": 1003,
+        "startChar": 0,
+        "endLine": 1006,
+        "endChar": 54
+      },
+      "revId": "b31d3dfcbee5208eb0ae274395cd8eb549dd9759",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
