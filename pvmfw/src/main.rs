@@ -137,7 +137,7 @@ fn main(
         bcc: (next_bcc.as_ptr() as usize).try_into().unwrap(),
         bcc_size: NEXT_BCC_SIZE.try_into().unwrap(),
         new_instance,
-        strict_boot: false, // TODO(b/268307476): Flip in its own commit to isolate testing.
+        strict_boot: true,
     };
     config.apply_to(fdt).map_err(|e| {
         error!("Failed to configure device tree: {e}");
