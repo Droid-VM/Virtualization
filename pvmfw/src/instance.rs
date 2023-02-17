@@ -14,6 +14,8 @@
 
 //! Support for reading and writing to the instance.img.
 
+use crate::crypto;
+use crate::crypto::AeadCtx;
 use crate::dice::PartialInputs;
 use crate::gpt;
 use crate::gpt::Partition;
@@ -34,6 +36,10 @@ pub enum Error {
     EmptyPvmfwEntry,
     /// Unexpected I/O error while accessing the underlying disk.
     FailedIo(gpt::Error),
+    /// Failed to decrypt the entry.
+    FailedOpen(crypto::ErrorIterator),
+    /// Failed to encrypt the entry.
+    FailedSeal(crypto::ErrorIterator),
     /// Impossible to create a new instance.img entry.
     InstanceImageFull,
     /// Badly formatted instance.img header block.
@@ -57,6 +63,20 @@ impl fmt::Display for Error {
         match self {
             Self::EmptyPvmfwEntry => write!(f, "Unexpected empty pvmfw instance.img entry"),
             Self::FailedIo(e) => write!(f, "Failed I/O to disk: {e}"),
+            Self::FailedOpen(e_iter) => {
+                writeln!(f, "Failed to open the instance.img partition:")?;
+                for e in *e_iter {
+                    writeln!(f, "\t{e}")?;
+                }
+                Ok(())
+            }
+            Self::FailedSeal(e_iter) => {
+                writeln!(f, "Failed to seal the instance.img partition:")?;
+                for e in *e_iter {
+                    writeln!(f, "\t{e}")?;
+                }
+                Ok(())
+            }
             Self::InstanceImageFull => write!(f, "Failed to obtain a free instance.img partition"),
             Self::InvalidInstanceImageHeader => write!(f, "instance.img header is invalid"),
             Self::MissingInstanceImage => write!(f, "Failed to find the instance.img partition"),
@@ -74,6 +94,7 @@ pub type Result<T> = core::result::Result<T, Error>;
 pub fn get_instance_salt(
     pci_root: &mut PciRoot,
     dice_inputs: &PartialInputs,
+    key: &[u8],
 ) -> Result<(bool, Hidden)> {
     let (mut partitions, instance_img) = find_instance_img(pci_root)?;
 
@@ -91,9 +112,12 @@ pub fn get_instance_salt(
                 .read_partition_block(&instance_img, payload_index, &mut blk)
                 .map_err(Error::FailedIo)?;
 
-            let payload = &blk[..payload_size]; // TODO(b/249723852): Decrypt entries.
+            let payload = &blk[..payload_size];
+            let mut entry = [0; size_of::<EntryBody>()];
+            let aead = AeadCtx::new_aes_256_gcm_randnonce(key).map_err(Error::FailedOpen)?;
+            let decrypted = aead.open(&mut entry, payload).map_err(Error::FailedOpen)?;
 
-            let body = EntryBody::from_bytes_matching(payload, dice_inputs)?;
+            let body = EntryBody::from_bytes_matching(decrypted, dice_inputs)?;
             Ok((false, body.salt))
         }
         Entry::New { header_index } => {
@@ -103,12 +127,13 @@ pub fn get_instance_salt(
 
             let mut blk = [0; BLK_SIZE];
 
-            if blk.len() < body.len() {
+            let aead = AeadCtx::new_aes_256_gcm_randnonce(key).map_err(Error::FailedSeal)?;
+            if blk.len() < body.len() + aead.aead().unwrap().max_overhead() {
                 // We currently only support single-blk entries.
                 return Err(Error::UnsupportedEntrySize(body.len()));
             }
-            let payload_size = body.len();
-            blk[..payload_size].copy_from_slice(body); // TODO(b/249723852): Encrypt entries.
+            let encrypted = aead.seal(&mut blk, body).map_err(Error::FailedSeal)?;
+            let payload_size = encrypted.len();
             let payload_index = header_index + 1;
             partitions
                 .write_partition_block(&instance_img, payload_index, &blk)

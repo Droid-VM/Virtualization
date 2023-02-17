@@ -21,6 +21,7 @@
 extern crate alloc;
 
 mod config;
+mod crypto;
 mod debug_policy;
 mod dice;
 mod entry;
@@ -34,14 +35,16 @@ mod instance;
 mod memory;
 mod mmio_guard;
 mod mmu;
+mod rand;
 mod smccc;
 mod virtio;
 
 use alloc::boxed::Box;
 
 use crate::{
-    dice::PartialInputs, entry::RebootReason, fdt::modify_for_next_stage, helpers::flush,
-    helpers::GUEST_PAGE_SIZE, instance::get_instance_salt, memory::MemoryTracker, virtio::pci,
+    crypto::hkdf_sh512, dice::PartialInputs, entry::RebootReason, fdt::modify_for_next_stage,
+    helpers::flush, helpers::GUEST_PAGE_SIZE, instance::get_instance_salt, memory::MemoryTracker,
+    virtio::pci,
 };
 use diced_open_dice::{bcc_handover_main_flow, bcc_handover_parse};
 use fdtpci::{PciError, PciInfo};
@@ -95,10 +98,20 @@ fn main(
         error!("Failed to compute partial DICE inputs: {e:?}");
         RebootReason::InternalError
     })?;
-    let (new_instance, salt) = get_instance_salt(&mut pci_root, &dice_inputs).map_err(|e| {
-        error!("Failed to get instance.img salt: {e}");
-        RebootReason::InternalError
-    })?;
+    let key = hkdf_sh512::<32>(bcc_handover.cdi_seal, /*salt=*/ &[], b"vm-instance").map_err(
+        |e_iter| {
+            error!("Failed to derive key for instance.img:");
+            for e in e_iter {
+                error!("\t{e}")
+            }
+            RebootReason::InternalError
+        },
+    )?;
+    let (new_instance, salt) =
+        get_instance_salt(&mut pci_root, &dice_inputs, &key).map_err(|e| {
+            error!("Failed to get instance.img salt: {e}");
+            RebootReason::InternalError
+        })?;
     trace!("Got salt from instance.img: {salt:x?}");
 
     let dice_inputs = dice_inputs.into_input_values(&salt).map_err(|e| {
