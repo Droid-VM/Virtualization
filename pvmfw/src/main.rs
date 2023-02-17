@@ -21,6 +21,7 @@
 extern crate alloc;
 
 mod config;
+mod crypto;
 mod debug_policy;
 mod dice;
 mod entry;
@@ -34,12 +35,14 @@ mod instance;
 mod memory;
 mod mmio_guard;
 mod mmu;
+mod rand;
 mod smccc;
 mod virtio;
 
 use alloc::boxed::Box;
 
 use crate::{
+    crypto::hkdf_sh512,
     dice::PartialInputs,
     entry::RebootReason,
     fdt::NextStageConfig,
@@ -101,7 +104,16 @@ fn main(
         error!("Failed to compute partial DICE inputs: {e:?}");
         RebootReason::InternalError
     })?;
-    let salt = get_instance_salt(&mut pci_root, &dice_inputs).map_err(|e| {
+    let key = hkdf_sh512::<32>(bcc_handover.cdi_seal, /*salt=*/ &[], b"vm-instance").map_err(
+        |e_iter| {
+            error!("Failed to derive key for instance.img:");
+            for e in e_iter {
+                error!("\t{e}")
+            }
+            RebootReason::InternalError
+        },
+    )?;
+    let salt = get_instance_salt(&mut pci_root, &dice_inputs, &key).map_err(|e| {
         error!("Failed to get instance.img salt: {e}");
         RebootReason::InternalError
     })?;

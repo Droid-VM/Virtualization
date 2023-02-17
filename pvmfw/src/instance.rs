@@ -14,6 +14,8 @@
 
 //! Support for reading and writing to the instance.img.
 
+use crate::crypto;
+use crate::crypto::AeadCtx;
 use crate::dice::PartialInputs;
 use crate::gpt;
 use crate::gpt::Partition;
@@ -33,6 +35,10 @@ pub enum Error {
     EmptyPvmfwEntry,
     /// Unexpected I/O error while accessing the underlying disk.
     FailedIo(gpt::Error),
+    /// Failed to decrypt the entry.
+    FailedOpen(crypto::ErrorIterator),
+    /// Failed to encrypt the entry.
+    FailedSeal(crypto::ErrorIterator),
     /// Impossible to create a new instance.img entry.
     InstanceImageFull,
     /// Badly formatted instance.img header block.
@@ -58,6 +64,20 @@ impl fmt::Display for Error {
         match self {
             Self::EmptyPvmfwEntry => write!(f, "Unexpected empty pvmfw instance.img entry"),
             Self::FailedIo(e) => write!(f, "Failed I/O to disk: {e}"),
+            Self::FailedOpen(e_iter) => {
+                writeln!(f, "Failed to open the instance.img partition:")?;
+                for e in *e_iter {
+                    writeln!(f, "\t{e}")?;
+                }
+                Ok(())
+            }
+            Self::FailedSeal(e_iter) => {
+                writeln!(f, "Failed to seal the instance.img partition:")?;
+                for e in *e_iter {
+                    writeln!(f, "\t{e}")?;
+                }
+                Ok(())
+            }
             Self::InstanceImageFull => write!(f, "Failed to obtain a free instance.img partition"),
             Self::InvalidInstanceImageHeader => write!(f, "instance.img header is invalid"),
             Self::MissingInstanceImage => write!(f, "Failed to find the instance.img partition"),
@@ -79,12 +99,16 @@ pub enum Salt {
     Found(Hidden),
 }
 
-pub fn get_instance_salt(pci_root: &mut PciRoot, dice_inputs: &PartialInputs) -> Result<Salt> {
+pub fn get_instance_salt(
+    pci_root: &mut PciRoot,
+    dice_inputs: &PartialInputs,
+    key: &[u8],
+) -> Result<Salt> {
     let (mut partitions, instance_img) = find_instance_img(pci_root)?;
     let mut entry = Entry::locate_in(&mut partitions, &instance_img)?;
 
     let mut blk = [0; BLK_SIZE];
-    if let Some(found) = entry.read_from(&mut partitions, &instance_img, &mut blk)? {
+    if let Some(found) = entry.read_from(&mut partitions, &instance_img, key, &mut blk)? {
         let (blk_code_hash, blk_auth_hash, blk_salt, blk_mode) = split_entry(found);
         let mode = to_dice_mode(u8::from_le_bytes(blk_mode.try_into().unwrap()));
 
@@ -108,7 +132,7 @@ pub fn get_instance_salt(pci_root: &mut PciRoot, dice_inputs: &PartialInputs) ->
 
         let size = blk_code_hash.len() + blk_auth_hash.len() + blk_salt.len() + blk_mode.len();
 
-        entry.write_to(&mut partitions, &instance_img, &blk[..size])?;
+        entry.write_to(&mut partitions, &instance_img, key, &blk[..size])?;
 
         Ok(Salt::New(salt))
     }
@@ -241,6 +265,7 @@ impl Entry {
         &self,
         parts: &mut Partitions,
         part: &Partition,
+        key: &[u8],
         entry: &'a mut [u8],
     ) -> Result<Option<&'a [u8]>> {
         let payload_size = if let Some(size) = self.payload_size {
@@ -258,17 +283,19 @@ impl Entry {
         parts
             .read_partition_block(part, self.payload_index(), &mut blk)
             .map_err(Error::FailedIo)?;
-        // TODO(b/249723852): Decrypt entries.
-        let payload = &mut entry[..payload_size];
-        payload.copy_from_slice(&blk[..payload_size]);
+        let (encrypted, _) = blk.split_at(payload_size);
 
-        Ok(Some(payload))
+        let aead = AeadCtx::new_aes_256_gcm_randnonce(key).map_err(Error::FailedOpen)?;
+        let decrypted = aead.open(entry, encrypted).map_err(Error::FailedOpen)?;
+
+        Ok(Some(decrypted))
     }
 
     pub fn write_to(
         &mut self,
         parts: &mut Partitions,
         part: &Partition,
+        key: &[u8],
         data: &[u8],
     ) -> Result<()> {
         if self.payload_size.is_some() {
@@ -277,13 +304,13 @@ impl Entry {
 
         let mut blk = [0; BLK_SIZE];
 
-        if blk.len() < data.len() {
+        let aead = AeadCtx::new_aes_256_gcm_randnonce(key).map_err(Error::FailedSeal)?;
+        if blk.len() < data.len() + aead.aead().unwrap().max_overhead() {
             // We currently only support single-blk entries.
             return Err(Error::UnsupportedEntrySize(data.len()));
         }
-        // TODO(b/249723852): Encrypt entries.
-        blk[..data.len()].copy_from_slice(data);
-        let payload_size = NonZeroUsize::new(data.len()).ok_or(Error::EmptyPvmfwEntry)?;
+        let encrypted = aead.seal(&mut blk, data).map_err(Error::FailedSeal)?;
+        let payload_size = NonZeroUsize::new(encrypted.len()).ok_or(Error::EmptyPvmfwEntry)?;
         parts.write_partition_block(part, self.payload_index(), &blk).map_err(Error::FailedIo)?;
 
         let (blk_uuid, blk_size, blk_rest) = split_entry_header_mut(&mut blk);
