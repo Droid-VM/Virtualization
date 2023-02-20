@@ -43,6 +43,121 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7028ab22_9f6c6ca7",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T11:39:17Z",
+      "side": 1,
+      "message": "Not a big deal but this will panic if `size_of::\u003cHeader\u003e() \u003e LBA_SIZE`. Have you tried using the `static_assertions` crate? This would be a good build-time assertion to try it on.",
+      "range": {
+        "startLine": 103,
+        "startChar": 36,
+        "endLine": 103,
+        "endChar": 44
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1ee3a05_a2c75080",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T11:39:17Z",
+      "side": 1,
+      "message": "Another candidate for static assert",
+      "range": {
+        "startLine": 111,
+        "startChar": 8,
+        "endLine": 111,
+        "endChar": 17
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0ec783f_8bbbdb9a",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T11:39:17Z",
+      "side": 1,
+      "message": "I kinda get why you pass buffers this way for a whole disk block but here just return it from the function... We routinely copy 70-odd bytes on the stack and most likely the function will get inlined anyway.",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 49
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e6b37f9_e76e0705",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T11:39:17Z",
+      "side": 1,
+      "message": "Give or take safe numerical operations, isn\u0027t this:\n```\nlet num_blocks \u003d (self.entries_count + entries_per_blk - 1) / entries_per_blk;\nfor i in 0..num_blocks {\n  self.read_block(Header::ENTRIES_LBA + i, \u0026mut blk)?;\n```\n?",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 24
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88160037_79934fd5",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T11:39:17Z",
+      "side": 1,
+      "message": "So if there are 4 entries in a block and only 3 are populated, what does the last one look like? Should you test and skip? Or is the name check enough?",
+      "range": {
+        "startLine": 124,
+        "startChar": 22,
+        "endLine": 124,
+        "endChar": 88
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0790418a_f80efb03",
         "filename": "pvmfw/src/gpt.rs",
         "patchSetId": 1
@@ -54,6 +169,30 @@
       "writtenOn": "2023-02-20T04:46:44Z",
       "side": 1,
       "message": "Why don\u0027t we do a full match?",
+      "range": {
+        "startLine": 127,
+        "startChar": 30,
+        "endLine": 127,
+        "endChar": 41
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fcf92e5_4c515e21",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T11:39:17Z",
+      "side": 1,
+      "message": "I think I get it but it took a bit of digging in the GPT docs. Please add some comments around this.",
+      "parentUuid": "0790418a_f80efb03",
       "range": {
         "startLine": 127,
         "startChar": 30,
@@ -89,6 +228,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e256afeb_70be3779",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T11:39:17Z",
+      "side": 1,
+      "message": "Why is this and all its callers `mut`? Can we cut down on the number of mutable references shared?",
+      "range": {
+        "startLine": 157,
+        "startChar": 18,
+        "endLine": 157,
+        "endChar": 27
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52eae17f_dedd7658",
         "filename": "pvmfw/src/gpt.rs",
         "patchSetId": 1
@@ -117,6 +279,236 @@
       "writtenOn": "2023-02-20T04:46:44Z",
       "side": 1,
       "message": "ditto. link to the authority",
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13dd60f5_bc7efbb1",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T11:39:17Z",
+      "side": 1,
+      "message": "This desperately needs unit tests 😞",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 56
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c137d4ab_0c792cb5",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T11:39:17Z",
+      "side": 1,
+      "message": "This is where I think an enum would be better:\n```\nenum PartitionEntry {\n  Existing(usize, usize),\n  New(usize),\n}\n\n...\n\nmatch locate_partition(parts, ...) {\n  case Existing(index, size) \u003d\u003e {\n    read_partition(...)\n  }\n  case New(index) \u003d\u003e {\n    write_partition(...)\n  }\n}\n```\n\nRight now you have to do `locate_in` and then semi-fail `read_from` to figure out you\u0027re in the New case.",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 1
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a8f10ac_53b9d78b",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T11:39:17Z",
+      "side": 1,
+      "message": "What\u0027s wrong with the current state? To me that\u0027s perfect legible.",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 200,
+        "endChar": 85
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9796b77f_641e7c4f",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T11:39:17Z",
+      "side": 1,
+      "message": "`let _` and then you don\u0027t need the `allow`. But please keep the comment",
+      "range": {
+        "startLine": 208,
+        "startChar": 8,
+        "endLine": 208,
+        "endChar": 18
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a453e686_11d29199",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T11:39:17Z",
+      "side": 1,
+      "message": "Could you use iterators for this? Along the lines of:\n```\nwhile let Some(index) \u003d indices.next() {\n  ...\n  match Uuid::from_slice(blk_uuid) {\n    ...\n    _ \u003d\u003e indices.skip(blk_count(payload_size)),\n  }\n}\n```",
+      "range": {
+        "startLine": 210,
+        "startChar": 8,
+        "endLine": 215,
+        "endChar": 13
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "895a6617_f6a9e5d9",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T11:39:17Z",
+      "side": 1,
+      "message": "Please handle the error here. This creates a trivial way for the host to panic pvmfw. I know we handle it but a graceful exit is always better.",
+      "range": {
+        "startLine": 220,
+        "startChar": 31,
+        "endLine": 220,
+        "endChar": 89
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85dcff56_63562a64",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T11:39:17Z",
+      "side": 1,
+      "message": "import",
+      "range": {
+        "startLine": 225,
+        "startChar": 20,
+        "endLine": 225,
+        "endChar": 30
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e8825a6_947c218f",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T11:39:17Z",
+      "side": 1,
+      "message": "When can this happen?",
+      "range": {
+        "startLine": 232,
+        "startChar": 73,
+        "endLine": 232,
+        "endChar": 74
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c25daa1_f8b26dad",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T11:39:17Z",
+      "side": 1,
+      "message": "Why aren\u0027t these a repr[C] struct?",
+      "range": {
+        "startLine": 305,
+        "startChar": 0,
+        "endLine": 335,
+        "endChar": 1
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a353a495_27e9180f",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T11:39:17Z",
+      "side": 1,
+      "message": "Just return a tuple from `get_instance_salt`, or turn it into a struct if you want to give names to the fields. But no point in defining a type only to immediately convert to something else.",
+      "range": {
+        "startLine": 109,
+        "startChar": 31,
+        "endLine": 112,
+        "endChar": 6
+      },
       "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
