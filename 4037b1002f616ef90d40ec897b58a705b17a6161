@@ -45,6 +45,53 @@
       },
       "revId": "4037b1002f616ef90d40ec897b58a705b17a6161",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "526339df_08715634",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T12:55:09Z",
+      "side": 1,
+      "message": "+1. This is a TRNG-specific constant. Why isn\u0027t this whole function and the errors defined above in the `trng` module?",
+      "parentUuid": "c66dea5c_785ebde0",
+      "range": {
+        "startLine": 56,
+        "startChar": 55,
+        "endLine": 56,
+        "endChar": 58
+      },
+      "revId": "4037b1002f616ef90d40ec897b58a705b17a6161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3e2251d_d8abe502",
+        "filename": "pvmfw/src/smccc/trng.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T12:55:09Z",
+      "side": 1,
+      "message": "I am really confused by this file. It feels like it should be a high-level TRNG module built on top of `hvc` and/or `smccc`. But somehow it is the lowest-level child that references `super::` and TRNG-specific constants are defined in `hvc`.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 50
+      },
+      "revId": "4037b1002f616ef90d40ec897b58a705b17a6161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
