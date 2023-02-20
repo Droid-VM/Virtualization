@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e5eb8f5_0bcbb6c2",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-20T02:45:49Z",
+      "side": 1,
+      "message": "document what these two are?",
+      "range": {
+        "startLine": 106,
+        "startChar": 46,
+        "endLine": 106,
+        "endChar": 54
+      },
+      "revId": "4037b1002f616ef90d40ec897b58a705b17a6161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c66dea5c_785ebde0",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-20T02:45:49Z",
+      "side": 1,
+      "message": "where is this from? does this in line with trng_rnd64 returning three u64\u0027s? can we not have the same information in multiple places?",
+      "range": {
+        "startLine": 56,
+        "startChar": 55,
+        "endLine": 56,
+        "endChar": 58
+      },
+      "revId": "4037b1002f616ef90d40ec897b58a705b17a6161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
