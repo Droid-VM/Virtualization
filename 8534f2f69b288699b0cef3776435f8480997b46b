@@ -173,6 +173,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41b5b35a_7d748c6e",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T12:07:39Z",
+      "side": 1,
+      "message": "Oh, I see the comment in the commit msg.",
+      "parentUuid": "3c3d7d47_721d178e",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 49
+      },
+      "revId": "8534f2f69b288699b0cef3776435f8480997b46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18ae282c_0ba9d24d",
@@ -186,6 +210,30 @@
       "writtenOn": "2023-02-20T04:24:12Z",
       "side": 1,
       "message": "not sure how this long match block is implemented in Rust. If it\u0027s a series of if blocks, then the performance would be horrible. Since the input numbers are packed, can this be implemented using an array of string literals? Hope it\u0027s how Rust compiles this.",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 21
+      },
+      "revId": "8534f2f69b288699b0cef3776435f8480997b46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91260d65_f543b6ab",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T12:07:39Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "18ae282c_0ba9d24d",
       "range": {
         "startLine": 133,
         "startChar": 0,
