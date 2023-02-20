@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30e9dcd0_e19f06a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-20T04:46:44Z",
+      "side": 1,
+      "message": "(instance.rs and main.rs not yet reviewed)",
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfad94be_7231ba29",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-20T04:46:44Z",
+      "side": 1,
+      "message": "Is this a correct way of converting utf8 into utf16? A single UTF8 character may be larger than a byte...",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 5
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0790418a_f80efb03",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-20T04:46:44Z",
+      "side": 1,
+      "message": "Why don\u0027t we do a full match?",
+      "range": {
+        "startLine": 127,
+        "startChar": 30,
+        "endLine": 127,
+        "endChar": 41
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0a88604_4c5d8758",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-20T04:46:44Z",
+      "side": 1,
+      "message": "do we check the size of `blk` is within the partition boundary?",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 5
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52eae17f_dedd7658",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-20T04:46:44Z",
+      "side": 1,
+      "message": "A link to the authority?",
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b70fec9_f5680228",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-20T04:46:44Z",
+      "side": 1,
+      "message": "ditto. link to the authority",
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
