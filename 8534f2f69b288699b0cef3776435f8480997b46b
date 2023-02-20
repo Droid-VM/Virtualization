@@ -20,6 +20,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5de7944d_9c3c86c5",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T12:06:42Z",
+      "side": 1,
+      "message": "idea: What would happen if we copied the struct? Could we avoid some of the lifetimes?",
+      "range": {
+        "startLine": 109,
+        "startChar": 26,
+        "endLine": 109,
+        "endChar": 46
+      },
+      "revId": "8534f2f69b288699b0cef3776435f8480997b46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef0c28ed_fdc25982",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T12:06:42Z",
+      "side": 1,
+      "message": "Why is the lifetime linked to a key?",
+      "range": {
+        "startLine": 123,
+        "startChar": 11,
+        "endLine": 123,
+        "endChar": 36
+      },
+      "revId": "8534f2f69b288699b0cef3776435f8480997b46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4a95fe5_cc883da1",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T12:06:42Z",
+      "side": 1,
+      "message": "Why aren\u0027t you using bindgen?",
+      "range": {
+        "startLine": 261,
+        "startChar": 7,
+        "endLine": 261,
+        "endChar": 19
+      },
+      "revId": "8534f2f69b288699b0cef3776435f8480997b46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72625c6b_3228564a",
         "filename": "pvmfw/src/crypto.rs",
         "patchSetId": 1
@@ -31,6 +100,75 @@
       "writtenOn": "2023-02-20T04:24:12Z",
       "side": 1,
       "message": "I guess this is a typo. Please fix.",
+      "revId": "8534f2f69b288699b0cef3776435f8480997b46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50de8c32_9ad3138d",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T12:06:42Z",
+      "side": 1,
+      "message": "Why no bindgen?",
+      "range": {
+        "startLine": 306,
+        "startChar": 0,
+        "endLine": 361,
+        "endChar": 1
+      },
+      "revId": "8534f2f69b288699b0cef3776435f8480997b46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce531e2a_bd1e922f",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T12:06:42Z",
+      "side": 1,
+      "message": "Remove. The first TODO is sufficient",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 65
+      },
+      "revId": "8534f2f69b288699b0cef3776435f8480997b46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c3d7d47_721d178e",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-20T12:06:42Z",
+      "side": 1,
+      "message": "Why aren\u0027t we taking this from libc?",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 49
+      },
       "revId": "8534f2f69b288699b0cef3776435f8480997b46b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
