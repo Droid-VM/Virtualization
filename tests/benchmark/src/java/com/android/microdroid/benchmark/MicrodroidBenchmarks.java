@@ -251,7 +251,7 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         VirtualMachineConfig config =
                 newVmConfigBuilder()
                         .setPayloadConfigPath("assets/vm_config_io.json")
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebugLevel(DEBUG_LEVEL_NONE)
                         .build();
         List<Double> transferRates = new ArrayList<>(IO_TEST_TRIAL_COUNT);
 
@@ -278,7 +278,7 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         VirtualMachineConfig config =
                 newVmConfigBuilder()
                         .setPayloadConfigPath("assets/vm_config_io.json")
-                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .setDebugLevel(DEBUG_LEVEL_NONE)
                         .build();
         List<Double> readRates = new ArrayList<>(IO_TEST_TRIAL_COUNT);
 
