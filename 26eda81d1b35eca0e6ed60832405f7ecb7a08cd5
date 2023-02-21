@@ -557,6 +557,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c64899c0_eb7b1f77",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T16:33:03Z",
+      "side": 1,
+      "message": "This would require getting the crate added to AOSP and approved (not sure how long it takes) but let\u0027s track the idea in b/270144541.",
+      "parentUuid": "bdc47c4f_f6398632",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 29
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed6bf477_ae0242af",
@@ -570,6 +594,30 @@
       "writtenOn": "2023-02-21T01:56:45Z",
       "side": 1,
       "message": "get_or_create_instance_salt ?",
+      "range": {
+        "startLine": 82,
+        "startChar": 7,
+        "endLine": 82,
+        "endChar": 24
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "617d7a2d_e843b97c",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T16:33:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed6bf477_ae0242af",
       "range": {
         "startLine": 82,
         "startChar": 7,
@@ -616,6 +664,24 @@
       "writtenOn": "2023-02-21T01:56:45Z",
       "side": 1,
       "message": "Why isn\u0027t this default to NotInitialized as in https://cs.android.com/android/platform/superproject/+/master:system/security/diced/src/utils.rs;drc\u003d4d3059a1a70ec5fd9115279d9b06ce383d75855c;l\u003d42 ?",
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a61ce41a_06f60431",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T16:33:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "657a2743_06ec6df8",
       "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -679,6 +745,54 @@
       "writtenOn": "2023-02-21T01:56:45Z",
       "side": 1,
       "message": "There can be many \"entries\" (partitions) in the instance disk. This `Entry` is to capture \"the\" entry for pvmfw. So, I recommend you to rename this to `PvmfwEntry`.",
+      "range": {
+        "startLine": 187,
+        "startChar": 7,
+        "endLine": 187,
+        "endChar": 12
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d5c2bc1_d8f27864",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T16:33:03Z",
+      "side": 1,
+      "message": "Yes, I am aware of it and actually used `Entry` intentionally given how much confusion using \"partition\" has already caused.\n\nIt would be nice to centralize the instance.img code and share it between these 2 `instance.rs` (that was my initial plan but given how tightly coupled that `instance.rs` is to `std` and files, I decided to implement the support from scratch instead).\n\nI\u0027ve added a comment referencing that source file.",
+      "parentUuid": "73e1dd16_08224fb0",
+      "range": {
+        "startLine": 187,
+        "startChar": 7,
+        "endLine": 187,
+        "endChar": 12
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6de038a8_2b59794d",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T16:33:03Z",
+      "side": 1,
+      "message": "Yes, you\u0027re right; done.",
+      "parentUuid": "9d68417d_d2c2e9db",
       "range": {
         "startLine": 187,
         "startChar": 7,
