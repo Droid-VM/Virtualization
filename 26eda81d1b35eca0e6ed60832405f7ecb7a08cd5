@@ -651,6 +651,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92e2ff7e_fee00724",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T18:00:19Z",
+      "side": 1,
+      "message": "Done; see other comment.",
+      "parentUuid": "4a5c7a31_3d884756",
+      "range": {
+        "startLine": 84,
+        "startChar": 37,
+        "endLine": 84,
+        "endChar": 53
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "657a2743_06ec6df8",
@@ -699,6 +723,30 @@
       "writtenOn": "2023-02-21T01:56:45Z",
       "side": 1,
       "message": "This doesn\u0027t read well. Can\u0027t `Partition` have a reference to VirtIOBlk in itself?",
+      "range": {
+        "startLine": 172,
+        "startChar": 56,
+        "endLine": 172,
+        "endChar": 77
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e940805b_ea23b198",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T18:00:19Z",
+      "side": 1,
+      "message": "The `VirtIOBlk` instance is created by the iterator inside of the function so would go out of scope before the `Partition` does if that was the case.\n\nInstead, I\u0027ve given ownership of the `Partitions` to `Partition`, which we could extend in the future with `Partition::partitions(self) -\u003e Partitions` to rip out the object for re-use (if required); WDYT?\n\nThe part I don\u0027t like is that `Partitions::get_partition_by_name` now consumes `self` so that the `Partitions` instance is lost on error ... This isn\u0027t a big deal but doesn\u0027t give a clean API, IMO.",
+      "parentUuid": "43251904_c18ab0e6",
       "range": {
         "startLine": 172,
         "startChar": 56,
