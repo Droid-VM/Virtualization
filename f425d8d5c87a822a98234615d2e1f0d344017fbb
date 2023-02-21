@@ -22,6 +22,30 @@
       },
       "revId": "f425d8d5c87a822a98234615d2e1f0d344017fbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "163a4c71_9fe41bff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:19:20Z",
+      "side": 1,
+      "message": "Yes, the host could pass this flag to microdroid in non-protected VMs or protected without pvmfw; is that an issue?\n\nFor protected Vms, pvmfw sets it unconditionally so the host passing it in the first place shouldn\u0027t be an issue. Note that https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2432652/11/pvmfw/src/fdt.rs#105 removed the flag from the input DT until this commit (if `!strict_boot`).",
+      "parentUuid": "f60a5a54_bfed265f",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 47
+      },
+      "revId": "f425d8d5c87a822a98234615d2e1f0d344017fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
