@@ -137,6 +137,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b8cf0fb_5ffe5a72",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-21T13:25:02Z",
+      "side": 1,
+      "message": "This stuff can lead to really nasty bugs, so I\u0027m sorry but I\u0027d say it is a blocker.\n\nCould you at least give it a try? You can always define a thin C wrapper around this and then bindgen that wrapper library if the build system is giving you a hard time.",
+      "parentUuid": "1241a695_98b600b7",
+      "range": {
+        "startLine": 261,
+        "startChar": 7,
+        "endLine": 261,
+        "endChar": 19
+      },
+      "revId": "8534f2f69b288699b0cef3776435f8480997b46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72625c6b_3228564a",
         "filename": "pvmfw/src/crypto.rs",
         "patchSetId": 1
