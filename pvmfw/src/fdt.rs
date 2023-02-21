@@ -58,8 +58,6 @@ pub fn modify_for_next_stage(
     new_instance: bool,
     strict_boot: bool,
 ) -> libfdt::Result<()> {
-    fdt.unpack()?;
-
     add_dice_node(fdt, bcc.as_ptr() as usize, bcc.len())?;
 
     set_or_clear_chosen_flag(
@@ -72,8 +70,6 @@ pub fn modify_for_next_stage(
         CStr::from_bytes_with_nul(b"avf,new-instance\0").unwrap(),
         new_instance,
     )?;
-
-    fdt.pack()?;
 
     Ok(())
 }
