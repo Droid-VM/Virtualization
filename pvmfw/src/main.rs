@@ -45,6 +45,7 @@ use crate::helpers::GUEST_PAGE_SIZE;
 use crate::memory::MemoryTracker;
 use crate::virtio::pci;
 use crate::virtio::pci::find_virtio_devices;
+use debug_policy::{handle_debug_policy, DebugPolicyError};
 use diced_open_dice::{bcc_handover_main_flow, bcc_handover_parse, HIDDEN_SIZE};
 use fdtpci::{PciError, PciInfo};
 use libfdt::Fdt;
@@ -60,6 +61,7 @@ fn main(
     ramdisk: Option<&[u8]>,
     current_bcc_handover: &[u8],
     memory: &mut MemoryTracker,
+    debug_policy: Option<&mut [u8]>,
 ) -> Result<(), RebootReason> {
     info!("pVM firmware");
     debug!("FDT: {:?}", fdt.as_ptr());
@@ -109,11 +111,31 @@ fn main(
     })?;
     flush(next_bcc);
 
+    fdt.unpack().map_err(|e| {
+        error!("Failed to unpack device tree: {e}");
+        RebootReason::InternalError
+    })?;
+
     let strict_boot = false; // TODO(b/268307476): Flip in its own commit to isolate testing.
     modify_for_next_stage(fdt, next_bcc, new_instance, strict_boot).map_err(|e| {
         error!("Failed to configure device tree: {e}");
         RebootReason::InternalError
     })?;
+
+    // SAFETY - As we `?` the result, there is no risk of using a bad `slices.fdt`.
+    unsafe {
+        handle_debug_policy(fdt, debug_policy).map_err(|e| {
+            error!("Unexpected error when handling debug policy: {e:?}");
+            handle_debug_policy_error(e)
+        })?;
+    }
+
+    fdt.pack().map_err(|e| {
+        error!("Failed to pack device tree: {e}");
+        RebootReason::InternalError
+    })?;
+
+    flush(fdt.as_slice());
 
     info!("Starting payload...");
     Ok(())
@@ -134,5 +156,13 @@ fn handle_pci_error(e: PciError) -> RebootReason {
         | PciError::FdtMissingRanges
         | PciError::RangeAddressMismatch { .. }
         | PciError::NoSuitableRange => RebootReason::InvalidFdt,
+    }
+}
+
+fn handle_debug_policy_error(e: DebugPolicyError) -> RebootReason {
+    match e {
+        DebugPolicyError::Fdt(_, _) => RebootReason::InvalidFdt,
+        DebugPolicyError::DebugPolicyFdt(_, _) => RebootReason::InvalidConfig,
+        DebugPolicyError::OverlaidFdt(_, _) => RebootReason::InternalError,
     }
 }
