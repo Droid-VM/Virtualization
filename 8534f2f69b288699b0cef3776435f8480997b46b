@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff073470_12e34128",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:12:01Z",
+      "side": 1,
+      "message": "I\u0027m not fully sure but the correctness of this copy will depend on internal implementation details of the library (what it does with the `EVP_AEAD_CTX::aead`, how it manages the `EVP_AEAD` it returns pointers to, ...), right? So, as the Rust code would be misusing the library (from its perspective), an update to BSSL could break pvmfw, AFAIU. WDYT? Is this just to get rid of the `\u0027static`?",
+      "parentUuid": "5de7944d_9c3c86c5",
+      "range": {
+        "startLine": 109,
+        "startChar": 26,
+        "endLine": 109,
+        "endChar": 46
+      },
+      "revId": "8534f2f69b288699b0cef3776435f8480997b46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef0c28ed_fdc25982",
         "filename": "pvmfw/src/crypto.rs",
         "patchSetId": 1
@@ -89,6 +113,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1241a695_98b600b7",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:12:01Z",
+      "side": 1,
+      "message": "I don\u0027t remember exactly but there was a pain point around making Soong hack CMake hooks, combined with `no_std` requirements so I thought I\u0027d first get this to work before cleaning up their Soong integration.\n\nIs this a blocker for this CL?",
+      "parentUuid": "f4a95fe5_cc883da1",
+      "range": {
+        "startLine": 261,
+        "startChar": 7,
+        "endLine": 261,
+        "endChar": 19
+      },
+      "revId": "8534f2f69b288699b0cef3776435f8480997b46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72625c6b_3228564a",
         "filename": "pvmfw/src/crypto.rs",
         "patchSetId": 1
@@ -100,6 +148,24 @@
       "writtenOn": "2023-02-20T04:24:12Z",
       "side": 1,
       "message": "I guess this is a typo. Please fix.",
+      "revId": "8534f2f69b288699b0cef3776435f8480997b46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d15ae17_e3b99aa9",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:12:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72625c6b_3228564a",
       "revId": "8534f2f69b288699b0cef3776435f8480997b46b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -127,6 +193,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6ff0d89_870afdaa",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:12:01Z",
+      "side": 1,
+      "message": "Resolving as duplicate of https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2443520/comment/f4a95fe5_cc883da1/",
+      "parentUuid": "50de8c32_9ad3138d",
+      "range": {
+        "startLine": 306,
+        "startChar": 0,
+        "endLine": 361,
+        "endChar": 1
+      },
+      "revId": "8534f2f69b288699b0cef3776435f8480997b46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce531e2a_bd1e922f",
@@ -140,6 +230,30 @@
       "writtenOn": "2023-02-20T12:06:42Z",
       "side": 1,
       "message": "Remove. The first TODO is sufficient",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 65
+      },
+      "revId": "8534f2f69b288699b0cef3776435f8480997b46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb38a5b1_4c4253ba",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:12:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce531e2a_bd1e922f",
       "range": {
         "startLine": 23,
         "startChar": 4,
@@ -233,6 +347,30 @@
       "writtenOn": "2023-02-20T12:07:39Z",
       "side": 1,
       "message": "+1",
+      "parentUuid": "18ae282c_0ba9d24d",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 21
+      },
+      "revId": "8534f2f69b288699b0cef3776435f8480997b46b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ccdc803_c4b06430",
+        "filename": "vmbase/src/bionic.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:12:01Z",
+      "side": 1,
+      "message": "Good observation but given how central `match` is to Rust, I would be horrified to see the compiler generate a long string of `if-elif-elif-elif-...`.\n\nIn fact, what this compiles to (almost) exactly what you suggested:\n```\n000000007fc13d70 \u003cstrerror\u003e:\n    7fc13d70:   7102141f        cmp     w0, #0x85\n    7fc13d74:   540000c8        b.hi    7fc13d8c \u003cstrerror+0x1c\u003e  // b.pmore\n    7fc13d78:   d503201f        nop\n    7fc13d7c:   10150a88        adr     x8, 7fc3decc \u003canon.44ec2ef2190491864f9217973fa8ea4c.163.llvm.976358234094013073+0x36\u003e\n    7fc13d80:   b8a05909        ldrsw   x9, [x8, w0, uxtw #2]\n    7fc13d84:   8b090100        add     x0, x8, x9\n    7fc13d88:   d65f03c0        ret\n    7fc13d8c:   d503201f        nop\n    7fc13d90:   1014ac40        adr     x0, 7fc3d318 \u003cstderr+0x8\u003e\n    7fc13d94:   d65f03c0        ret\n```",
       "parentUuid": "18ae282c_0ba9d24d",
       "range": {
         "startLine": 133,
