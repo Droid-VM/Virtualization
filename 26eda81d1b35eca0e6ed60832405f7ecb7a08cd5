@@ -308,6 +308,185 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "47e5a08c_b2f99e46",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-21T01:56:45Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "13dd60f5_bc7efbb1",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 56
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdc47c4f_f6398632",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-21T01:56:45Z",
+      "side": 1,
+      "message": "nit: I am not suggesting strongly, but we may consider using a crate like https://github.com/yaahc/displaydoc.",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 29
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed6bf477_ae0242af",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-21T01:56:45Z",
+      "side": 1,
+      "message": "get_or_create_instance_salt ?",
+      "range": {
+        "startLine": 82,
+        "startChar": 7,
+        "endLine": 82,
+        "endChar": 24
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a5c7a31_3d884756",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-21T01:56:45Z",
+      "side": 1,
+      "message": "Having to provide `partitions` doesn\u0027t look ideal...",
+      "range": {
+        "startLine": 84,
+        "startChar": 37,
+        "endLine": 84,
+        "endChar": 53
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "657a2743_06ec6df8",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-21T01:56:45Z",
+      "side": 1,
+      "message": "Why isn\u0027t this default to NotInitialized as in https://cs.android.com/android/platform/superproject/+/master:system/security/diced/src/utils.rs;drc\u003d4d3059a1a70ec5fd9115279d9b06ce383d75855c;l\u003d42 ?",
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43251904_c18ab0e6",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-21T01:56:45Z",
+      "side": 1,
+      "message": "This doesn\u0027t read well. Can\u0027t `Partition` have a reference to VirtIOBlk in itself?",
+      "range": {
+        "startLine": 172,
+        "startChar": 56,
+        "endLine": 172,
+        "endChar": 77
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73e1dd16_08224fb0",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-21T01:56:45Z",
+      "side": 1,
+      "message": "We, unfortunately, call this a \u0027partition\u0027 :(\n\nWe may document the terminology difference here and add a link to https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/microdroid_manager/src/instance.rs;drc\u003d7e6c93578e4cca57a5841f134faa1e16d4918402;l\u003d15",
+      "range": {
+        "startLine": 187,
+        "startChar": 7,
+        "endLine": 187,
+        "endChar": 12
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d68417d_d2c2e9db",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-21T01:56:45Z",
+      "side": 1,
+      "message": "There can be many \"entries\" (partitions) in the instance disk. This `Entry` is to capture \"the\" entry for pvmfw. So, I recommend you to rename this to `PvmfwEntry`.",
+      "range": {
+        "startLine": 187,
+        "startChar": 7,
+        "endLine": 187,
+        "endChar": 12
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c137d4ab_0c792cb5",
         "filename": "pvmfw/src/instance.rs",
         "patchSetId": 1
