@@ -273,6 +273,12 @@ impl fmt::Display for VmInstance {
     }
 }
 
+impl Drop for VmInstance {
+    fn drop(&mut self) {
+        error!("XXX VmInstance {}", self.name);
+    }
+}
+
 impl VmInstance {
     /// Validates the given config and creates a new `VmInstance` but doesn't start running it.
     pub fn new(

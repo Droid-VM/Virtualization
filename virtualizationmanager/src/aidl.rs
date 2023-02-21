@@ -816,7 +816,7 @@ impl IVirtualMachine for VirtualMachine {
 
 impl Drop for VirtualMachine {
     fn drop(&mut self) {
-        debug!("Dropping {:?}", self);
+        error!("XXX Dropping VirtualMachine {}", self.instance.name);
         if let Err(e) = self.instance.kill() {
             debug!("Error stopping dropped VM with CID {}: {:?}", self.instance.cid, e);
         }
@@ -827,6 +827,12 @@ impl Drop for VirtualMachine {
 /// dies.
 #[derive(Debug, Default)]
 pub struct VirtualMachineCallbacks(Mutex<Vec<Strong<dyn IVirtualMachineCallback>>>);
+
+impl Drop for VirtualMachineCallbacks {
+    fn drop(&mut self) {
+        error!("XXX Dropping VirtualMachineCallbacks");
+    }
+}
 
 impl VirtualMachineCallbacks {
     /// Call all registered callbacks to notify that the payload has started.

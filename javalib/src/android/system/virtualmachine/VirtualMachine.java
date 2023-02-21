@@ -122,6 +122,11 @@ import java.util.zip.ZipFile;
  */
 @SystemApi
 public class VirtualMachine implements AutoCloseable {
+    @Override
+    protected void finalize() {
+        Log.e("XXX", "Finalizing VM " + mName);
+    }
+
     /** The permission needed to create or run a virtual machine. */
     public static final String MANAGE_VIRTUAL_MACHINE_PERMISSION =
             "android.permission.MANAGE_VIRTUAL_MACHINE";
