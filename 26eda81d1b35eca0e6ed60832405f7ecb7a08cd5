@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a69305e_55dcfa0a",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:03:17Z",
+      "side": 1,
+      "message": "It works for ASCII, not any UTF8.\n\nYour comment made me realize that I had missed the standard `encode_utf16()` so using that instead.",
+      "parentUuid": "bfad94be_7231ba29",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 5
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7028ab22_9f6c6ca7",
@@ -110,6 +134,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2be1b5a_9fe68faa",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:03:17Z",
+      "side": 1,
+      "message": "Obsolete",
+      "parentUuid": "d0ec783f_8bbbdb9a",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 49
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e6b37f9_e76e0705",
@@ -133,6 +181,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24c95f80_6abbab0f",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e6b37f9_e76e0705",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 24
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88160037_79934fd5",
@@ -146,6 +218,30 @@
       "writtenOn": "2023-02-20T11:39:17Z",
       "side": 1,
       "message": "So if there are 4 entries in a block and only 3 are populated, what does the last one look like? Should you test and skip? Or is the name check enough?",
+      "range": {
+        "startLine": 124,
+        "startChar": 22,
+        "endLine": 124,
+        "endChar": 88
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eb01096_12f9cdc5",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:03:17Z",
+      "side": 1,
+      "message": "From UEFI:\n\n\u003e If the size of the GUID Partition Entry Array is not an even multiple of the logical block size, then any space left over in the last logical block is Reserved\n\nso it should be skipped.\n\nFrom a Rust safety perspective, it doesn\u0027t change the fact that the primitive types that make up the `Entry` will have _some_ value (which is always valid for them).",
+      "parentUuid": "88160037_79934fd5",
       "range": {
         "startLine": 124,
         "startChar": 22,
@@ -203,6 +299,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "329358e0_85d0cb0a",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:03:17Z",
+      "side": 1,
+      "message": "This is like the difference between `memcmp` and `strcmp`: we know that the `name` slice ends at the terminating character so no need to parse `entry.name` beyond that.\n\nI\u0027m now comparing the whole array so any non-zero character past the 2-byte terminating character (which doesn\u0027t seem to be a well defined as `NULL` in C strings) will cause a mismatch.",
+      "parentUuid": "0790418a_f80efb03",
+      "range": {
+        "startLine": 127,
+        "startChar": 30,
+        "endLine": 127,
+        "endChar": 41
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0a88604_4c5d8758",
@@ -216,6 +336,30 @@
       "writtenOn": "2023-02-20T04:46:44Z",
       "side": 1,
       "message": "do we check the size of `blk` is within the partition boundary?",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 5
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3c35fe3_d83a318d",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:03:17Z",
+      "side": 1,
+      "message": "Yes, `block_index -\u003e Option` validates that the index is within the partition and `virtio-drivers` [asserts the size of `blk`](http://cs/android/external/rust/crates/virtio-drivers/src/device/blk.rs?l\u003d103).",
+      "parentUuid": "f0a88604_4c5d8758",
       "range": {
         "startLine": 137,
         "startChar": 0,
@@ -251,6 +395,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2cba1e6_64a7e97f",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:03:17Z",
+      "side": 1,
+      "message": "Because `self.device` needs to be `mut`: cs/android/external/rust/crates/virtio-drivers/src/device/blk.rs?l\u003d102 ; what do you recommend?",
+      "parentUuid": "e256afeb_70be3779",
+      "range": {
+        "startLine": 157,
+        "startChar": 18,
+        "endLine": 157,
+        "endChar": 27
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52eae17f_dedd7658",
         "filename": "pvmfw/src/gpt.rs",
         "patchSetId": 1
@@ -262,6 +430,24 @@
       "writtenOn": "2023-02-20T04:46:44Z",
       "side": 1,
       "message": "A link to the authority?",
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7e60909_2a19ba78",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52eae17f_dedd7658",
       "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -279,6 +465,24 @@
       "writtenOn": "2023-02-20T04:46:44Z",
       "side": 1,
       "message": "ditto. link to the authority",
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19b62fd7_7bf5ceee",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b70fec9_f5680228",
       "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -508,6 +712,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "adba6d15_f4f07ce2",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c137d4ab_0c792cb5",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 1
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a8f10ac_53b9d78b",
@@ -521,6 +749,30 @@
       "writtenOn": "2023-02-20T11:39:17Z",
       "side": 1,
       "message": "What\u0027s wrong with the current state? To me that\u0027s perfect legible.",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 200,
+        "endChar": 85
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4946182c_d72bfc52",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a8f10ac_53b9d78b",
       "range": {
         "startLine": 200,
         "startChar": 0,
@@ -554,6 +806,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fabfff13_a2a55e0a",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9796b77f_641e7c4f",
+      "range": {
+        "startLine": 208,
+        "startChar": 8,
+        "endLine": 208,
+        "endChar": 18
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a453e686_11d29199",
@@ -567,6 +843,30 @@
       "writtenOn": "2023-02-20T11:39:17Z",
       "side": 1,
       "message": "Could you use iterators for this? Along the lines of:\n```\nwhile let Some(index) \u003d indices.next() {\n  ...\n  match Uuid::from_slice(blk_uuid) {\n    ...\n    _ \u003d\u003e indices.skip(blk_count(payload_size)),\n  }\n}\n```",
+      "range": {
+        "startLine": 210,
+        "startChar": 8,
+        "endLine": 215,
+        "endChar": 13
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07f47150_c080f9ac",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:03:17Z",
+      "side": 1,
+      "message": "Oh, that\u0027s how it\u0027s done! I fell back to this C-like approach after trying with `for`, which doesn\u0027t seem possible.",
+      "parentUuid": "a453e686_11d29199",
       "range": {
         "startLine": 210,
         "startChar": 8,
@@ -600,6 +900,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4f39c90_151fc176",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:03:17Z",
+      "side": 1,
+      "message": "Done; but note that the host has _many_ trivial ways of making pvmfw panic (e.g. PCI and/or virtio backends).",
+      "parentUuid": "895a6617_f6a9e5d9",
+      "range": {
+        "startLine": 220,
+        "startChar": 31,
+        "endLine": 220,
+        "endChar": 89
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85dcff56_63562a64",
@@ -613,6 +937,30 @@
       "writtenOn": "2023-02-20T11:39:17Z",
       "side": 1,
       "message": "import",
+      "range": {
+        "startLine": 225,
+        "startChar": 20,
+        "endLine": 225,
+        "endChar": 30
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01dd7507_b9dbf220",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85dcff56_63562a64",
       "range": {
         "startLine": 225,
         "startChar": 20,
@@ -646,6 +994,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "065b1353_6e5bb13c",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:03:17Z",
+      "side": 1,
+      "message": "If an entry has `payload_size\u003d\u003d0` (which the host can do as the header isn\u0027t encrypted); I\u0027ve reworked this part and removed `NonZeroUsize` so this is probably obsolete.",
+      "parentUuid": "6e8825a6_947c218f",
+      "range": {
+        "startLine": 232,
+        "startChar": 73,
+        "endLine": 232,
+        "endChar": 74
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c25daa1_f8b26dad",
@@ -669,6 +1041,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0bd4c36_7076cca7",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c25daa1_f8b26dad",
+      "range": {
+        "startLine": 305,
+        "startChar": 0,
+        "endLine": 335,
+        "endChar": 1
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a353a495_27e9180f",
@@ -682,6 +1078,30 @@
       "writtenOn": "2023-02-20T11:39:17Z",
       "side": 1,
       "message": "Just return a tuple from `get_instance_salt`, or turn it into a struct if you want to give names to the fields. But no point in defining a type only to immediately convert to something else.",
+      "range": {
+        "startLine": 109,
+        "startChar": 31,
+        "endLine": 112,
+        "endChar": 6
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69f875b6_e9b4a62d",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a353a495_27e9180f",
       "range": {
         "startLine": 109,
         "startChar": 31,
