@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4cf31d5_60f262d8",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:16:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e5eb8f5_0bcbb6c2",
+      "range": {
+        "startLine": 106,
+        "startChar": 46,
+        "endLine": 106,
+        "endChar": 54
+      },
+      "revId": "4037b1002f616ef90d40ec897b58a705b17a6161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c66dea5c_785ebde0",
@@ -73,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "588a9ea8_122bc722",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:16:57Z",
+      "side": 1,
+      "message": "Yes, it\u0027s the number of registers RND64 (and RND32) calls populate.\n\nI\u0027d love to DRY this but not really sure how; I\u0027ve defined a type and taken its `size_of` here but it doesn\u0027t look very clean to me. Alternatively, I could\n```\nlet res \u003d hvc::trng_rnd64((chunk.len() * (u8::BITS as usize)) as _)?;\nassert_eq(MAX_BYTES_PER_CALL, size_of_val(res))\n```\nbut that might leave runtime code behind? WDYT? Is there a better way?\n\n\u003e Why isn\u0027t this whole function and the errors defined above in the `trng` module?\n\nBecause I wanted to add an abstraction layer where users of `rand` wouldn\u0027t need to deal with TRNG details. Should I fully merge `rand` and `trng`, then?",
+      "parentUuid": "c66dea5c_785ebde0",
+      "range": {
+        "startLine": 56,
+        "startChar": 55,
+        "endLine": 56,
+        "endChar": 58
+      },
+      "revId": "4037b1002f616ef90d40ec897b58a705b17a6161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b3e2251d_d8abe502",
         "filename": "pvmfw/src/smccc/trng.rs",
         "patchSetId": 1
@@ -84,6 +132,30 @@
       "writtenOn": "2023-02-20T12:55:09Z",
       "side": 1,
       "message": "I am really confused by this file. It feels like it should be a high-level TRNG module built on top of `hvc` and/or `smccc`. But somehow it is the lowest-level child that references `super::` and TRNG-specific constants are defined in `hvc`.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 50
+      },
+      "revId": "4037b1002f616ef90d40ec897b58a705b17a6161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7090519_850f33d8",
+        "filename": "pvmfw/src/smccc/trng.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-21T13:16:57Z",
+      "side": 1,
+      "message": "The distinction between `smccc` and `smccc::trng` is that the SMCCC TRNG ABI (in particular, return values) doesn\u0027t follow the SMCCC ABI so they need different `Error` types and different `Result`, which in turn means that they need to use different helper functions for the `HVC`.\n\nThe `super::hvc64` call isn\u0027t `smccc::trng` depending on `smccc` but both using the low-level asm wrapper that takes and returns arrays of register values and is expected to be provided by an external crate but is, for now, defined in `smccc`.\n\nSo the hierarchy of wrappers is:\n\n1. wrap the `asm!` in `smccc::hvc64([u64; _]) -\u003e [u64; _]`\n2. wrap the standard return type from `smccc::hvc64` in `smccc::checked_hvc64([u64; _]) -\u003e smccc::Result` and `smccc::trng::hvc64([u64; _]) -\u003e smccc::trng::Result`\n3. wrap the individual functions in `hvc::{mem,mmio_guard,trng}_X` to encapsulate their FID and make Rust aware of their respective API (number of arguments and return value)\n\nI added the high-level functions to `hvc::` to be consistent with what we already had there but agree that they could also have been placed in `smccc::trng`. WDYT?",
+      "parentUuid": "b3e2251d_d8abe502",
       "range": {
         "startLine": 1,
         "startChar": 0,
