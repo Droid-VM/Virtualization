@@ -112,12 +112,15 @@ public abstract class MicrodroidDeviceTestBase {
      */
     public VirtualMachine forceCreateNewVirtualMachine(String name, VirtualMachineConfig config)
             throws VirtualMachineException {
+        forceDropVirtualMachine(name);
+        return getVirtualMachineManager().create(name, config);
+    }
+
+    public void forceDropVirtualMachine(String name) throws VirtualMachineException {
         final VirtualMachineManager vmm = getVirtualMachineManager();
-        VirtualMachine existingVm = vmm.get(name);
-        if (existingVm != null) {
+        if (vmm.get(name) != null) {
             vmm.delete(name);
         }
-        return vmm.create(name, config);
     }
 
     public void prepareTestSetup(boolean protectedVm) {
