@@ -54,13 +54,11 @@ unsafe fn apply_debug_policy(
     let overlay = libfdt::Fdt::from_mut_slice(debug_policy)
         .map_err(|e| DebugPolicyError::DebugPolicyFdt("Failed to load debug policy overlay", e))?;
 
-    fdt.unpack().map_err(|e| DebugPolicyError::Fdt("Failed to unpack", e))?;
-
-    let fdt = fdt
+    let _ = fdt
         .apply_overlay(overlay)
         .map_err(|e| DebugPolicyError::DebugPolicyFdt("Failed to apply overlay", e))?;
 
-    fdt.pack().map_err(|e| DebugPolicyError::OverlaidFdt("Failed to re-pack", e))
+    Ok(())
 }
 
 /// Disables ramdump by removing crashkernel from bootargs in /chosen.
