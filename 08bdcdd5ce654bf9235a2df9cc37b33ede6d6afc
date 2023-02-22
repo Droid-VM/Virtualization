@@ -16,6 +16,23 @@
       "message": "It\u0027s also arguable that getOrCreate should set the config itself in the existing VM case - currently we document that the config parameter is ignored unless we create the VM.\nBut that would prevent uses that seem legitimate if a bit unlikely - e.g. get the VM, read its config and make decisions about it.",
       "revId": "08bdcdd5ce654bf9235a2df9cc37b33ede6d6afc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4ba2f1f_60d198c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-22T16:14:03Z",
+      "side": 1,
+      "message": "Test failure is unrelated: b/270225397",
+      "revId": "08bdcdd5ce654bf9235a2df9cc37b33ede6d6afc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
