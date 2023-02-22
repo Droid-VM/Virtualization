@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc4d8707_d7cf3cb9",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-22T08:17:15Z",
+      "side": 1,
+      "message": "let\u0027s make this function safe and wrap the unsafe calls with `unsafe {...}` inside this function.",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 6
+      },
+      "revId": "74fbfda5c63bd1a8bd62272f8b5cf739e8dcd269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15cadf9e_ae0baeff",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-02-22T08:17:15Z",
+      "side": 1,
+      "message": "why do we have to drop these and add them back? Can\u0027t we just unconditionally push the args?",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 5
+      },
+      "revId": "74fbfda5c63bd1a8bd62272f8b5cf739e8dcd269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
