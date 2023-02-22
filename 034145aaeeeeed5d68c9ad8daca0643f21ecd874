@@ -22,6 +22,30 @@
       },
       "revId": "034145aaeeeeed5d68c9ad8daca0643f21ecd874",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9846eda2_5e12ddfd",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-22T10:46:21Z",
+      "side": 1,
+      "message": "Well spotted ;) That\u0027s because TRNG_RND64 views the 3 registers as one big 192-bit value with its MSB as the MSB of x1 and LSB as LSB of x3 so if we requested less than 192 bits of entropy and want to partially fill up a `[u8]` with entropy starting from index 0, we need to get it from `t`, then `s`, then `r` until it runs out (remaining returned bits are zeroed).\n\nIn this case, it doesn\u0027t matter (as we request 192 bits) but I\u0027ve kept the code identical to when we populate `remainder`, where it does.",
+      "parentUuid": "0f4177af_c02895a2",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 65
+      },
+      "revId": "034145aaeeeeed5d68c9ad8daca0643f21ecd874",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
