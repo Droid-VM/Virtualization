@@ -22,6 +22,30 @@
       },
       "revId": "0515cfd7b0f85c5b17f634e9418457564a579595",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66db20a0_088b0b44",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-22T10:45:53Z",
+      "side": 1,
+      "message": "Agreed and the compiler should (hopefully) treat both as noops in the generated code. We\u0027re using this painfully verbose one instead to avoid hiding any potential truncation on architectures where `size_of::\u003cusize\u003e() !\u003d size_of::\u003cu64\u003e()` (yes, very forward thinking).",
+      "parentUuid": "cf659b9a_efc19738",
+      "range": {
+        "startLine": 97,
+        "startChar": 19,
+        "endLine": 97,
+        "endChar": 39
+      },
+      "revId": "0515cfd7b0f85c5b17f634e9418457564a579595",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
