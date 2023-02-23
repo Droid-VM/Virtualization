@@ -34,7 +34,7 @@ const ROOT: Inode = 1;
 const DEFAULT_DIR_MODE: u32 = libc::S_IRUSR | libc::S_IXUSR;
 // b/264668376 some files in APK don't have unix permissions specified. Default to 400
 // otherwise those files won't be readable even by the owner.
-const DEFAULT_FILE_MODE: u32 = libc::S_IRUSR;
+const DEFAULT_FILE_MODE: u32 = libc::S_IRUSR | libc::S_IXUSR;
 
 /// `InodeData` represents an inode which has metadata about a file or a directory
 #[derive(Debug)]
