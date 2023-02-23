@@ -1,0 +1,228 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4927d491_b9e882a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:24:06Z",
+      "side": 1,
+      "message": "A handful of small nits, overall LGTM!",
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "790c1672_04efec9e",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:24:06Z",
+      "side": 1,
+      "message": "Clever! A brief comment wouldn\u0027t go amiss.",
+      "range": {
+        "startLine": 112,
+        "startChar": 27,
+        "endLine": 112,
+        "endChar": 51
+      },
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cce93e09_65f99ebd",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:24:06Z",
+      "side": 1,
+      "message": "What\u0027s the point of this variable? It has the exact same number of characters and is only used once",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 44
+      },
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e0676d4_37a1f969",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:24:06Z",
+      "side": 1,
+      "message": "unnecessary brackets?",
+      "range": {
+        "startLine": 193,
+        "startChar": 38,
+        "endLine": 193,
+        "endChar": 55
+      },
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7c35405_bafd2eef",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:24:06Z",
+      "side": 1,
+      "message": "long line",
+      "range": {
+        "startLine": 225,
+        "startChar": 100,
+        "endLine": 225,
+        "endChar": 101
+      },
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a1bfe50_24002701",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:24:06Z",
+      "side": 1,
+      "message": "uber nit: `Entry::NAME_LEN / size_of::\u003cu16\u003e()` and make `NAME_LEN` equal to the constant from the spec",
+      "range": {
+        "startLine": 233,
+        "startChar": 16,
+        "endLine": 233,
+        "endChar": 31
+      },
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7e98df6_fe0e6921",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:24:06Z",
+      "side": 1,
+      "message": "nit: move to top, dedup",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 40
+      },
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "239ef5c1_ba7da670",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:24:06Z",
+      "side": 1,
+      "message": "aren\u0027t both of these build time constants?",
+      "range": {
+        "startLine": 104,
+        "startChar": 15,
+        "endLine": 104,
+        "endChar": 37
+      },
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29e58b26_4b3f7f9b",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:24:06Z",
+      "side": 1,
+      "message": "Didn\u0027t you use `align_up` and then divide somewhere else? Could we have just one `ceiling_div` helper for all instances of this?",
+      "range": {
+        "startLine": 183,
+        "startChar": 4,
+        "endLine": 183,
+        "endChar": 79
+      },
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb936878_bebe2732",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:24:06Z",
+      "side": 1,
+      "message": "nit: I would move this to `get_or_generate_instance_salt`. That way the validation is all in one place.",
+      "range": {
+        "startLine": 204,
+        "startChar": 37,
+        "endLine": 204,
+        "endChar": 72
+      },
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

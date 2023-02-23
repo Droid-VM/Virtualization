@@ -465,6 +465,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8476f815_b5fd3acc",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:24:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f2cba1e6_64a7e97f",
+      "range": {
+        "startLine": 157,
+        "startChar": 18,
+        "endLine": 157,
+        "endChar": 27
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52eae17f_dedd7658",
@@ -795,6 +819,30 @@
       "side": 1,
       "message": "The `VirtIOBlk` instance is created by the iterator inside of the function so would go out of scope before the `Partition` does if that was the case.\n\nInstead, I\u0027ve given ownership of the `Partitions` to `Partition`, which we could extend in the future with `Partition::partitions(self) -\u003e Partitions` to rip out the object for re-use (if required); WDYT?\n\nThe part I don\u0027t like is that `Partitions::get_partition_by_name` now consumes `self` so that the `Partitions` instance is lost on error ... This isn\u0027t a big deal but doesn\u0027t give a clean API, IMO.",
       "parentUuid": "43251904_c18ab0e6",
+      "range": {
+        "startLine": 172,
+        "startChar": 56,
+        "endLine": 172,
+        "endChar": 77
+      },
+      "revId": "26eda81d1b35eca0e6ed60832405f7ecb7a08cd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8391159_96bdb016",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:24:06Z",
+      "side": 1,
+      "message": "I agree with Jiyong that this is odd, and I don\u0027t think we should be optimizing for a hypothetical future that would anyway require refactoring.\n\nThe only user of `Partitions` is:\n```\nif let Ok(partitions) \u003d Partitions::new(device) {\n    match partitions.get_partition_by_name(\"vm-instance\") {\n```\n\nI would expect:\n```\nmatch Partition::get_by_name(device, \"vm-instance\") {\n```\n\nYou can even keep the function separation exactly as it is today (to aid potential future refactoring), just hide them inside the `Partition` struct.",
+      "parentUuid": "e940805b_ea23b198",
       "range": {
         "startLine": 172,
         "startChar": 56,
