@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "007dd5fa_283671a4",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-23T18:53:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "790c1672_04efec9e",
+      "range": {
+        "startLine": 112,
+        "startChar": 27,
+        "endLine": 112,
+        "endChar": 51
+      },
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cce93e09_65f99ebd",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-02-23T00:24:06Z",
       "side": 1,
       "message": "What\u0027s the point of this variable? It has the exact same number of characters and is only used once",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 44
+      },
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37c81599_7a91a666",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-23T18:53:20Z",
+      "side": 1,
+      "message": "It addresses this:\n```\nerror: reference to packed field is unaligned\n```\nas `\u003d\u003d` implements a function taking values by reference(?)",
+      "parentUuid": "cce93e09_65f99ebd",
       "range": {
         "startLine": 126,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9b30e92_04aeb16d",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-23T18:53:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e0676d4_37a1f969",
+      "range": {
+        "startLine": 193,
+        "startChar": 38,
+        "endLine": 193,
+        "endChar": 55
+      },
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7c35405_bafd2eef",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-02-23T00:24:06Z",
       "side": 1,
       "message": "long line",
+      "range": {
+        "startLine": 225,
+        "startChar": 100,
+        "endLine": 225,
+        "endChar": 101
+      },
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b674f5d_04978f99",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-23T18:53:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7c35405_bafd2eef",
       "range": {
         "startLine": 225,
         "startChar": 100,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e7ed939_120cab8b",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-23T18:53:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a1bfe50_24002701",
+      "range": {
+        "startLine": 233,
+        "startChar": 16,
+        "endLine": 233,
+        "endChar": 31
+      },
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7e98df6_fe0e6921",
@@ -146,6 +266,30 @@
       "writtenOn": "2023-02-23T00:24:06Z",
       "side": 1,
       "message": "nit: move to top, dedup",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 40
+      },
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64ba0c63_f448706c",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-23T18:53:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7e98df6_fe0e6921",
       "range": {
         "startLine": 84,
         "startChar": 0,
@@ -179,6 +323,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17880abb_c7562405",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-23T18:53:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "239ef5c1_ba7da670",
+      "range": {
+        "startLine": 104,
+        "startChar": 15,
+        "endLine": 104,
+        "endChar": 37
+      },
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29e58b26_4b3f7f9b",
@@ -192,6 +360,30 @@
       "writtenOn": "2023-02-23T00:24:06Z",
       "side": 1,
       "message": "Didn\u0027t you use `align_up` and then divide somewhere else? Could we have just one `ceiling_div` helper for all instances of this?",
+      "range": {
+        "startLine": 183,
+        "startChar": 4,
+        "endLine": 183,
+        "endChar": 79
+      },
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87c672ee_aa3fc7e7",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-23T18:53:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29e58b26_4b3f7f9b",
       "range": {
         "startLine": 183,
         "startChar": 4,
@@ -225,6 +417,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e29119ab_e7f6c4ff",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-23T18:53:20Z",
+      "side": 1,
+      "message": "You\u0027re right, this should be caught when interpreting the bytes as the `EntryBody`.",
+      "parentUuid": "bb936878_bebe2732",
+      "range": {
+        "startLine": 204,
+        "startChar": 37,
+        "endLine": 204,
+        "endChar": 72
+      },
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "269fffdc_8132ed99",
@@ -238,6 +454,24 @@
       "writtenOn": "2023-02-23T12:30:24Z",
       "side": 1,
       "message": "nit: this feels like two functions mashed into one. why not `from_bytes` and `verify`? I almost missed the fact that this does verification when reading the code.",
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28da6192_b1987ce8",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-23T18:53:20Z",
+      "side": 1,
+      "message": "I just inlined it instead as `-\u003e Result\u003c()\u003e` feels hacky.",
+      "parentUuid": "269fffdc_8132ed99",
       "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
