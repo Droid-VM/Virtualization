@@ -285,6 +285,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a576e6c_4ce91dc2",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T23:16:22Z",
+      "side": 1,
+      "message": "Right. Worth having a look what that actually does. I can see how that clears the heap but stack is not as straightforward. Might be worth giving it a wipe.",
+      "parentUuid": "722a8c9c_3bd09dac",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 80,
+        "endChar": 20
+      },
+      "revId": "c11a326c1cba0318e37c6653683bef700bc934b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da9122ea_2f8edef6",
         "filename": "pvmfw/src/main.rs",
         "patchSetId": 7
