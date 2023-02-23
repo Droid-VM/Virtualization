@@ -44,4 +44,12 @@ interface IVirtualMachineService {
      * Notifies that an error has occurred inside the VM.
      */
     void notifyError(ErrorCode errorCode, in String message);
+
+    /**
+     * Gets a certificate using the provided certificate signing request (CSR).
+     *
+     * @param csr the certificate signing request.
+     * @return the X.509 encoded certificate.
+     */
+    byte[] getCertificate(in byte[] csr);
 }
