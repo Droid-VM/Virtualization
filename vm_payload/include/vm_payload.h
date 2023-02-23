@@ -89,6 +89,19 @@ void AVmPayload_getVmInstanceSecret(const void* _Nonnull identifier, size_t iden
                                     void* _Nonnull secret, size_t size);
 
 /**
+ * Gets a certificate using the provided certificate signing request (CSR).
+ *
+ * \param csr A pointer to the CSR buffer.
+ * \param csr_size The size of the CSR buffer.
+ * \param buffer A pointer to the certificate buffer.
+ * \param size number of bytes that can be written to the certificate buffer.
+ *
+ * \return the total size of the certificate
+ */
+size_t AVmPayload_getCertificate(const void* _Nonnull csr, size_t csr_size, void* _Nullable buffer,
+                                 size_t size);
+
+/**
  * Gets the path to the APK contents. It is a directory, under which are
  * the unzipped contents of the APK containing the payload, all read-only
  * but accessible to the payload.

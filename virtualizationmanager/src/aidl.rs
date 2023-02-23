@@ -729,6 +729,8 @@ fn check_label_is_allowed(context: &SeContext) -> Result<()> {
         | "apk_data_file" // APKs of an installed app
         | "staging_data_file" // updated/staged APEX images
         | "shell_data_file" // test files created via adb shell
+        | "virtualizationservice_data_file" // TODO(b/274407309): This is added to allow RKP VM to be launched, consider
+                                            // removing this label once the vm-instance will be exempted from this check.
          => Ok(()),
         _ => bail!("Label {} is not allowed", context),
     }
@@ -1177,6 +1179,32 @@ impl IVirtualMachineService for VirtualMachineService {
             Ok(())
         } else {
             error!("notifyError is called from an unknown CID {}", cid);
+            Err(Status::new_service_specific_error_str(
+                -1,
+                Some(format!("cannot find a VM with CID {}", cid)),
+            ))
+        }
+    }
+
+    fn getCertificate(&self, csr: &[u8]) -> binder::Result<Vec<u8>> {
+        let cid = self.cid;
+        if let Some(vm) = self.state.lock().unwrap().get_vm(cid) {
+            let instance_img_path = vm.temporary_directory.join("rkpvm_instance.img");
+            let instance_img = OpenOptions::new()
+                .create(true)
+                .read(true)
+                .write(true)
+                .open(instance_img_path)
+                .map_err(|e| {
+                    error!("Failed to create rkpvm_instance.img file: {:?}", e);
+                    Status::new_service_specific_error_str(
+                        -1,
+                        Some(format!("Failed to create rkpvm_instance.img file: {:?}", e)),
+                    )
+                })?;
+            GLOBAL_SERVICE.getCertificate(csr, &ParcelFileDescriptor::new(instance_img))
+        } else {
+            error!("getCertificate is called from an unknown CID {cid}");
             Err(Status::new_service_specific_error_str(
                 -1,
                 Some(format!("cannot find a VM with CID {}", cid)),
