@@ -46,6 +46,18 @@ raw_binary {
     },
 }
 
+prebuilt_etc {
+    name: "rialto_bin",
+    filename: "rialto.bin",
+    target: {
+        android_arm64: {
+            src: ":rialto",
+        },
+    },
+    src: "empty_file",
+    installable: false,
+}
+
 rust_test {
     name: "rialto_test",
     crate_name: "rialto_test",

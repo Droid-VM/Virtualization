@@ -1183,6 +1183,10 @@ impl IVirtualMachineService for VirtualMachineService {
             ))
         }
     }
+
+    fn getCertificate(&self, csr: &[u8]) -> binder::Result<Vec<u8>> {
+        GLOBAL_SERVICE.getCertificate(csr)
+    }
 }
 
 impl VirtualMachineService {
