@@ -22,6 +22,7 @@ use crate::crosvm::{CrosvmConfig, DiskFile, PayloadState, VmContext, VmInstance,
 use crate::debug_config::should_prepare_console_output;
 use crate::debug_config::is_ramdump_needed;
 use crate::payload::{add_microdroid_payload_images, add_microdroid_system_images};
+use crate::rkpvm::get_certificate;
 use crate::selinux::{getfilecon, SeContext};
 use android_os_permissions_aidl::aidl::android::os::IPermissionController;
 use android_system_virtualizationcommon::aidl::android::system::virtualizationcommon::{
@@ -1182,6 +1183,13 @@ impl IVirtualMachineService for VirtualMachineService {
                 Some(format!("cannot find a VM with CID {}", cid)),
             ))
         }
+    }
+
+    fn getCertificate(&self, csr: &[u8]) -> binder::Result<Vec<u8>> {
+        info!("Received csr. Generating certificate...");
+        get_certificate(csr).map_err(|e| {
+            Status::new_exception_str(ExceptionCode::ILLEGAL_STATE, Some(e.to_string()))
+        })
     }
 }
 

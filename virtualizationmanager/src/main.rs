@@ -20,6 +20,7 @@ mod composite;
 mod crosvm;
 mod debug_config;
 mod payload;
+mod rkpvm;
 mod selinux;
 
 use crate::aidl::{GLOBAL_SERVICE, VirtualizationService};
