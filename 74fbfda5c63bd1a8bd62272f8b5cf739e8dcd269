@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "268d66b8_b084dcdf",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-02-23T04:19:07Z",
+      "side": 1,
+      "message": "Just dropped `unsafe` for here and other places because calls to `libfdt/libs.rs` aren\u0027t `unsafe`.",
+      "parentUuid": "bc4d8707_d7cf3cb9",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 6
+      },
+      "revId": "74fbfda5c63bd1a8bd62272f8b5cf739e8dcd269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15cadf9e_ae0baeff",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-22T08:17:15Z",
       "side": 1,
       "message": "why do we have to drop these and add them back? Can\u0027t we just unconditionally push the args?",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 5
+      },
+      "revId": "74fbfda5c63bd1a8bd62272f8b5cf739e8dcd269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35ddbd8e_6dc085a0",
+        "filename": "pvmfw/src/debug_policy.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-02-23T04:19:07Z",
+      "side": 1,
+      "message": "Done. I worried about conflicts with existing param, but realized that new args will override old one.",
+      "parentUuid": "15cadf9e_ae0baeff",
       "range": {
         "startLine": 159,
         "startChar": 0,
