@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f160695_b25628b7",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:54:17Z",
+      "side": 1,
+      "message": "nit: Technically this should only return success if result equals 1. Zero is failure and the rest is undefined.",
+      "range": {
+        "startLine": 160,
+        "startChar": 10,
+        "endLine": 160,
+        "endChar": 14
+      },
+      "revId": "c11a326c1cba0318e37c6653683bef700bc934b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7f5bfea_53458dd2",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:54:17Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 203,
+        "startChar": 10,
+        "endLine": 203,
+        "endChar": 14
+      },
+      "revId": "c11a326c1cba0318e37c6653683bef700bc934b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "871f6e1e_cfcf2160",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:54:17Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 238,
+        "startChar": 10,
+        "endLine": 238,
+        "endChar": 14
+      },
+      "revId": "c11a326c1cba0318e37c6653683bef700bc934b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6549cbd2_ee14ee77",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:54:17Z",
+      "side": 1,
+      "message": "What happens in that case?",
+      "range": {
+        "startLine": 279,
+        "startChar": 66,
+        "endLine": 279,
+        "endChar": 92
+      },
+      "revId": "c11a326c1cba0318e37c6653683bef700bc934b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bd99b3b_a878a232",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:54:17Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 296,
+        "startChar": 6,
+        "endLine": 296,
+        "endChar": 10
+      },
+      "revId": "c11a326c1cba0318e37c6653683bef700bc934b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a0cd896_a7d4b5f1",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:54:17Z",
+      "side": 1,
+      "message": "Silly question - do we zero the stack before jumping to payload? And heap?",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 80,
+        "endChar": 20
+      },
+      "revId": "c11a326c1cba0318e37c6653683bef700bc934b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da9122ea_2f8edef6",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T00:54:17Z",
+      "side": 1,
+      "message": "I think this should go inside get_or_generate_instance_salt. How we pick the key is an implementation detail of the instance module.",
+      "range": {
+        "startLine": 108,
+        "startChar": 4,
+        "endLine": 114,
+        "endChar": 8
+      },
+      "revId": "c11a326c1cba0318e37c6653683bef700bc934b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
