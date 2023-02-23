@@ -1,0 +1,39 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+android_app {
+    name: "RkpvmPayloadApp",
+    installable: true,
+    jni_libs: ["librkpvm_payload"],
+    jni_uses_platform_apis: true,
+    use_embedded_native_libs: true,
+    sdk_version: "system_current",
+    compile_multilib: "first",
+    apex_available: ["com.android.virt"],
+}
+
+rust_defaults {
+    name: "rkpvm_payload_defaults",
+    crate_name: "rkpvm_payload",
+    srcs: ["src/rkpvm_main.rs"],
+    prefer_rlib: true,
+    rustlibs: [
+        "android.hardware.security.rkp-V3-rust",
+        "libandroid_logger",
+        "libanyhow",
+        "libbinder_rs",
+        "liblog_rust",
+        "libvm_payload_bindgen",
+    ],
+}
+
+rust_ffi {
+    name: "librkpvm_payload",
+    defaults: ["rkpvm_payload_defaults"],
+    // TODO(b/250854486): Remove the sanitize section once the bug is fixed.
+    sanitize: {
+        address: false,
+        hwaddress: false,
+    },
+}
