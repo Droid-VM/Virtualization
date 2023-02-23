@@ -223,6 +223,23 @@
       },
       "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "269fffdc_8132ed99",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T12:30:24Z",
+      "side": 1,
+      "message": "nit: this feels like two functions mashed into one. why not `from_bytes` and `verify`? I almost missed the fact that this does verification when reading the code.",
+      "revId": "dc155707fa65a399af9f4bf1530e70f99fbabb4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
