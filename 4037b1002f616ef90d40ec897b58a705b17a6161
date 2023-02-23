@@ -212,6 +212,30 @@
       },
       "revId": "4037b1002f616ef90d40ec897b58a705b17a6161",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51c19ee6_e46617a6",
+        "filename": "pvmfw/src/smccc/trng.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-02-23T09:51:51Z",
+      "side": 1,
+      "message": "There is no SMCCC TRNG ABI in the spec. There is TRNG ABI built on SMCCC, which overrides the meaning of SMCCC\u0027s return codes. What you\u0027re saying is that this doesn\u0027t play nice with the automatic conversion of the return code into an enum, and I fully agree that it\u0027s not a very neat design.\n\nWhy don\u0027t you just expose `smccc::hvc64` without the conversion? That\u0027s exactly what this `smccc::trng` module is doing but it just ends up splitting the TRNG logic between two modules. Put all the TRNG logic in `hvc` (or `hvc::trng` if we want to start splitting things up).",
+      "parentUuid": "c7090519_850f33d8",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 50
+      },
+      "revId": "4037b1002f616ef90d40ec897b58a705b17a6161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
