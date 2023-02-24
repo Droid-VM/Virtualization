@@ -86,6 +86,7 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
         assumeTrue(
                 "Skip if protected VMs are not supported",
                 mAndroidDevice.supportsMicrodroid(/* protectedVm= */ true));
+        assumeFalse("Test requires setprop for using custom pvmfw and adb root", isUserBuild());
 
         mAndroidDevice.enableAdbRoot();
 
