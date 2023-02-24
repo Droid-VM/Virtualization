@@ -167,6 +167,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44e205f9_a89ee0e6",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-24T14:36:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e342cf86_94546c09",
+      "range": {
+        "startLine": 56,
+        "startChar": 55,
+        "endLine": 56,
+        "endChar": 58
+      },
+      "revId": "4037b1002f616ef90d40ec897b58a705b17a6161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3e2251d_d8abe502",
@@ -228,6 +252,30 @@
       "side": 1,
       "message": "There is no SMCCC TRNG ABI in the spec. There is TRNG ABI built on SMCCC, which overrides the meaning of SMCCC\u0027s return codes. What you\u0027re saying is that this doesn\u0027t play nice with the automatic conversion of the return code into an enum, and I fully agree that it\u0027s not a very neat design.\n\nWhy don\u0027t you just expose `smccc::hvc64` without the conversion? That\u0027s exactly what this `smccc::trng` module is doing but it just ends up splitting the TRNG logic between two modules. Put all the TRNG logic in `hvc` (or `hvc::trng` if we want to start splitting things up).",
       "parentUuid": "c7090519_850f33d8",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 50
+      },
+      "revId": "4037b1002f616ef90d40ec897b58a705b17a6161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d1ed68e_c93db9ab",
+        "filename": "pvmfw/src/smccc/trng.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-24T14:36:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51c19ee6_e46617a6",
       "range": {
         "startLine": 1,
         "startChar": 0,
