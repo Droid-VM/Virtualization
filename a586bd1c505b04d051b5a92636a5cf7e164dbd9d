@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7c9389f_136b7d1a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-02-24T12:28:51Z",
+      "side": 1,
+      "message": "This CL will change when does the ramdump is enabled, because now unprotected + debuggable VM will enable ramdump even when DP says no. What\u0027s correct between comment and code?",
+      "range": {
+        "startLine": 7,
+        "startChar": 11,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "a586bd1c505b04d051b5a92636a5cf7e164dbd9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ffc65f0_3981f609",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-02-24T12:28:51Z",
+      "side": 1,
+      "message": "Jus to double check, is ignoring `debuggable` intended behavior? If so, can we also update `readme.md` [1] that says \u0027debuggable VM creates a ramdump\u0027?\n\n\n[1]: https://source.corp.google.com/android-internal/packages/modules/Virtualization/docs/debug/ramdump.md?q\u003df:ramdump.md%20debuggable\u0026sq\u003dpackage:%5Eandroid-internal$",
+      "range": {
+        "startLine": 992,
+        "startChar": 8,
+        "endLine": 992,
+        "endChar": 21
+      },
+      "revId": "a586bd1c505b04d051b5a92636a5cf7e164dbd9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b4d0d28_0a28fe43",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 995,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-02-24T12:28:51Z",
+      "side": 1,
+      "message": "can we move these two APIs to `debug_config.rs`? There\u0027s `get_debug_policy_bool()` will help you to to remove boilerplate code below.",
+      "range": {
+        "startLine": 972,
+        "startChar": 3,
+        "endLine": 995,
+        "endChar": 5
+      },
+      "revId": "a586bd1c505b04d051b5a92636a5cf7e164dbd9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
