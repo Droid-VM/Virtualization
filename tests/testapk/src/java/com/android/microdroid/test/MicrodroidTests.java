@@ -45,6 +45,7 @@ import android.os.ParcelFileDescriptor;
 import android.os.ParcelFileDescriptor.AutoCloseInputStream;
 import android.os.ParcelFileDescriptor.AutoCloseOutputStream;
 import android.os.SystemProperties;
+import android.system.OsConstants;
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineCallback;
 import android.system.virtualmachine.VirtualMachineConfig;
@@ -1760,6 +1761,30 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         }
     }
 
+    @Test
+    public void testFileUnderBinHasExecutePermission() throws Exception {
+        assumeSupportedKernel();
+
+        final VirtualMachineConfig vmConfig =
+                newVmConfigBuilder()
+                        .setPayloadBinaryName("MicrodroidTestNativeLib.so")
+                        .setMemoryBytes(minMemoryRequired())
+                        .setDebugLevel(DEBUG_LEVEL_FULL)
+                        .build();
+        final VirtualMachine vm = forceCreateNewVirtualMachine("test_vm_perms", vmConfig);
+
+        final TestResults testResults =
+                runVmTestService(
+                        vm,
+                        (ts, tr) -> {
+                            tr.mFileMode = ts.getFilePermissions("/mnt/apk/bin/measure_io");
+                        });
+
+        testResults.assertNoException();
+        assertThat(testResults.mFileMode & OsConstants.S_IRUSR).isEqualTo(OsConstants.S_IRUSR);
+        assertThat(testResults.mFileMode & OsConstants.S_IXUSR).isEqualTo(OsConstants.S_IXUSR);
+    }
+
     private static class VmShareServiceConnection implements ServiceConnection {
 
         private final CountDownLatch mLatch = new CountDownLatch(1);
@@ -1848,6 +1873,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         String[] mEffectiveCapabilities;
         String mFileContent;
         byte[] mBcc;
+        int mFileMode;
 
         void assertNoException() {
             if (mException != null) {
