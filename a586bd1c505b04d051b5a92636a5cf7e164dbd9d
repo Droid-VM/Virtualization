@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc268cb2_586e4750",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-02-26T14:48:24Z",
+      "side": 1,
+      "message": "Previously ramdump is turned on iff debug policy says so, and debug level was irrelevant. And this CL changes the behavior by allowing non-protected device when debug level \u003d full. So we\u0027re not simply changing preparation but also changes the",
+      "parentUuid": "0b51eee5_9df6be20",
+      "range": {
+        "startLine": 7,
+        "startChar": 11,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "a586bd1c505b04d051b5a92636a5cf7e164dbd9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ffc65f0_3981f609",
         "filename": "virtualizationmanager/src/aidl.rs",
         "patchSetId": 1
