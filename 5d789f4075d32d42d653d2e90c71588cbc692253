@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48a92885_e24b242b",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 14
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-02-26T15:10:07Z",
+      "side": 1,
+      "message": "Shell script can\u0027t be executed in `early-init`, because `sh` is in `apexd`. When it was in `early-init` I got `File not found` error in executing the script. (investigated with inseob last week)\n\nHow important is capturing logs in that early stage? Is there a way to read file and branch the logic without shell script? If it\u0027s not, I can only think one option -- copy the dp\u0027s value to the sysprop via bootconfig or build_prop. What do you think?",
+      "parentUuid": "34e58f99_c0700657",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 44
+      },
+      "revId": "5d789f4075d32d42d653d2e90c71588cbc692253",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a1a6795e_32f6a95a",
         "filename": "microdroid/init.rc",
         "patchSetId": 14
