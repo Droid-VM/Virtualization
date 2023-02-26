@@ -22,6 +22,30 @@
       },
       "revId": "ce03e8f4ebffc2247a7a2d4293acd9973e8a8b7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5efa1fe8_2f631d47",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-26T17:32:39Z",
+      "side": 1,
+      "message": "I tried, but quickly surrender this idea as it required to change too many places. As an example, we will also need to change signapk, because in my local tests it changed the file permissions of the files under bin/ back to 000.\n\n We can look into it as more long term approach (e.g. for V). WDYT?",
+      "parentUuid": "61faf4e9_007aa71d",
+      "range": {
+        "startLine": 216,
+        "startChar": 57,
+        "endLine": 217,
+        "endChar": 30
+      },
+      "revId": "ce03e8f4ebffc2247a7a2d4293acd9973e8a8b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
