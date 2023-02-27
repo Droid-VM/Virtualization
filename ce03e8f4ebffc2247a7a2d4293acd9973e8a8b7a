@@ -1,6 +1,144 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8f98c68_8fcbf05a",
+        "filename": "authfs/tests/benchmarks/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-27T15:06:39Z",
+      "side": 1,
+      "message": "Cunning!",
+      "range": {
+        "startLine": 40,
+        "startChar": 3,
+        "endLine": 40,
+        "endChar": 39
+      },
+      "revId": "ce03e8f4ebffc2247a7a2d4293acd9973e8a8b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26bfcf4f_091d6aec",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1784,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-27T15:06:39Z",
+      "side": 1,
+      "message": "We should add an @CddTest annotation here - pointing at C-1-5 perhaps?",
+      "range": {
+        "startLine": 1784,
+        "startChar": 16,
+        "endLine": 1784,
+        "endChar": 52
+      },
+      "revId": "ce03e8f4ebffc2247a7a2d4293acd9973e8a8b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b815f61_639cbfdf",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1787,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-27T15:06:39Z",
+      "side": 1,
+      "message": "s/final//g",
+      "range": {
+        "startLine": 1787,
+        "startChar": 8,
+        "endLine": 1787,
+        "endChar": 13
+      },
+      "revId": "ce03e8f4ebffc2247a7a2d4293acd9973e8a8b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa0f27c8_104e7faa",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1805,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-27T15:06:39Z",
+      "side": 1,
+      "message": "Are we deliberately ignoring all the other bits? E.g. I\u0027d not expect it to be writable by anyone.",
+      "range": {
+        "startLine": 1804,
+        "startChar": 0,
+        "endLine": 1805,
+        "endChar": 95
+      },
+      "revId": "ce03e8f4ebffc2247a7a2d4293acd9973e8a8b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3c3350a_ff9926a9",
+        "filename": "tests/testapk/src/native/testbinary.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-27T15:06:39Z",
+      "side": 1,
+      "message": "I don\u0027t think you need that, since the lhs is of type string already",
+      "range": {
+        "startLine": 260,
+        "startChar": 57,
+        "endLine": 260,
+        "endChar": 68
+      },
+      "revId": "ce03e8f4ebffc2247a7a2d4293acd9973e8a8b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfd31600_f46dcfa8",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-27T15:06:39Z",
+      "side": 1,
+      "message": "Could we add a helpful comment here, possibly referencing the bug?",
+      "range": {
+        "startLine": 189,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 13
+      },
+      "revId": "ce03e8f4ebffc2247a7a2d4293acd9973e8a8b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61faf4e9_007aa71d",
@@ -67,6 +205,53 @@
         "startChar": 57,
         "endLine": 217,
         "endChar": 30
+      },
+      "revId": "ce03e8f4ebffc2247a7a2d4293acd9973e8a8b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23e36409_a0476871",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-27T15:06:39Z",
+      "side": 1,
+      "message": "I don\u0027t even have a weak objection 😊\n\nBut yeah, would be nice post-U",
+      "parentUuid": "611291e4_008fdff7",
+      "range": {
+        "startLine": 216,
+        "startChar": 57,
+        "endLine": 217,
+        "endChar": 30
+      },
+      "revId": "ce03e8f4ebffc2247a7a2d4293acd9973e8a8b7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74b05897_4e29f558",
+        "filename": "zipfuse/src/inode.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-27T15:06:39Z",
+      "side": 1,
+      "message": "Point this TODO at a bug?",
+      "range": {
+        "startLine": 218,
+        "startChar": 14,
+        "endLine": 218,
+        "endChar": 81
       },
       "revId": "ce03e8f4ebffc2247a7a2d4293acd9973e8a8b7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
