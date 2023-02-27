@@ -1,5 +1,40 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c76ab04_849206b0",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-02-27T03:47:04Z",
+      "side": 1,
+      "message": "Nit: I guess this now assumes that the fdt has already been unpacked, and fails if it has not? That\u0027s fine, but might be worth mentioning in the Rustdoc comment.",
+      "revId": "4ba7966f2d40f2efe22553ee5f94af0b187d2fad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2daf2e1_6a96d3ac",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-02-27T03:47:04Z",
+      "side": 1,
+      "message": "Nit: why not have the two variables on two separate lines? Having them in the same assignment like this just makes it slightly harder to read.",
+      "revId": "4ba7966f2d40f2efe22553ee5f94af0b187d2fad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
