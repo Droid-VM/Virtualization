@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21c8f38f_7ba8a6cd",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-02-27T04:53:48Z",
+      "side": 1,
+      "message": "The `ErrorIterator` looks like it hides some internal global state in the bssl library, which makes it behave in a confusing way: if you have two different `ErrorIterator` instances, calling `next` on one will affect the other as well. Using it as the error type returned from the functions below makes it even worse: if someone calls two different functions, both of which return an error, before iterating through the returned `ErrorIterator` of the first, then when they do iterate through they will get errors from both functions.\n\nI think it would be better to get the errors in the wrapper before returning, to ensure that they are fetched in the right order and associated with the right call.\n\nIs it actually possible for a single function call to result in more than one error?",
+      "revId": "90cd4f158f70ab97f2e3d9e1bab1826315e19125",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
