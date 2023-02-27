@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "944b16e6_91213696",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1815,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-27T17:57:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9b91bb5_882fb10f",
+      "range": {
+        "startLine": 1815,
+        "startChar": 8,
+        "endLine": 1815,
+        "endChar": 13
+      },
+      "revId": "75705ac44524722bf33bd3ab4d51617ad8c6e0da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "405e900e_378f86d5",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85363031_5f3b2779",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1833,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-27T17:57:54Z",
+      "side": 1,
+      "message": "I actually prefer this way, it is closer to the `(mountFlags \u0026 MS_NOEXEC) \u003d\u003d MS_NOEXEC` check.\n\nAnd in general, I think it\u0027s a bit easier to read positive assertions (check mountFlags \u0026 MS_NOEXEC is equal to MS_NOEXEC), than negative ones (check that mountFlags \u0026 MS_NOEXEC is not equal to 0).",
+      "parentUuid": "405e900e_378f86d5",
+      "range": {
+        "startLine": 1833,
+        "startChar": 17,
+        "endLine": 1833,
+        "endChar": 26
+      },
+      "revId": "75705ac44524722bf33bd3ab4d51617ad8c6e0da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "865dc437_7efe54fe",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-02-27T15:15:17Z",
       "side": 1,
       "message": "Wow!\n\nI wonder vaguely if a better test would be to create a 0777 file here, and then check that access(..., X_OK) returns false.\n\nBut I guess that fails anyway since we can\u0027t create the file.\n\nUnless we choose to allow file creation, as discussed on the bug?",
+      "range": {
+        "startLine": 272,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 9
+      },
+      "revId": "75705ac44524722bf33bd3ab4d51617ad8c6e0da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8d9dba9_9ee4837c",
+        "filename": "tests/testapk/src/native/testbinary.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-02-27T17:57:54Z",
+      "side": 1,
+      "message": "We can add such test if we decide to open the /data to the payload",
+      "parentUuid": "865dc437_7efe54fe",
       "range": {
         "startLine": 272,
         "startChar": 0,
