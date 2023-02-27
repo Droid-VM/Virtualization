@@ -1,5 +1,74 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63bdf220_8c8cb77a",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-02-27T04:03:53Z",
+      "side": 1,
+      "message": "If these are essentially three words of entropy, why a triple rather than a `[u64; 3]`?",
+      "revId": "a59103df509a0adb94c4238becdafca38db2a752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "980870ac_2bc31f4b",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-02-27T04:03:53Z",
+      "side": 1,
+      "message": "Nit: seeing as you\u0027re making a `trng` module anyway, I\u0027d be inclined to put these functions (and the constants above) into it too.",
+      "revId": "a59103df509a0adb94c4238becdafca38db2a752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99627fa8_69686c10",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-02-27T04:03:53Z",
+      "side": 1,
+      "message": "Maybe make this a constant `SUPPORTED_TRNG_VERSION` or similar, to avoid having a magic number inline like this.",
+      "revId": "a59103df509a0adb94c4238becdafca38db2a752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fd5887f_88b475d1",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-02-27T04:03:53Z",
+      "side": 1,
+      "message": "That\u0027s something the caller needs to guarantee, so `CRYPTO_sysrand` should be marked as unsafe.",
+      "revId": "a59103df509a0adb94c4238becdafca38db2a752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
