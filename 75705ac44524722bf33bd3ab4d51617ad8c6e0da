@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9b91bb5_882fb10f",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1815,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-27T15:15:17Z",
+      "side": 1,
+      "message": "s/final//g",
+      "range": {
+        "startLine": 1815,
+        "startChar": 8,
+        "endLine": 1815,
+        "endChar": 13
+      },
+      "revId": "75705ac44524722bf33bd3ab4d51617ad8c6e0da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "405e900e_378f86d5",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1833,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-27T15:15:17Z",
+      "side": 1,
+      "message": "Uber-nit: isNotEqualTo(0), to avoid the repetition?",
+      "range": {
+        "startLine": 1833,
+        "startChar": 17,
+        "endLine": 1833,
+        "endChar": 26
+      },
+      "revId": "75705ac44524722bf33bd3ab4d51617ad8c6e0da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "865dc437_7efe54fe",
+        "filename": "tests/testapk/src/native/testbinary.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-27T15:15:17Z",
+      "side": 1,
+      "message": "Wow!\n\nI wonder vaguely if a better test would be to create a 0777 file here, and then check that access(..., X_OK) returns false.\n\nBut I guess that fails anyway since we can\u0027t create the file.\n\nUnless we choose to allow file creation, as discussed on the bug?",
+      "range": {
+        "startLine": 272,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 9
+      },
+      "revId": "75705ac44524722bf33bd3ab4d51617ad8c6e0da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
