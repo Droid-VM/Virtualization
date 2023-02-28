@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f0a80e3_f10a6853",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-28T15:27:59Z",
+      "side": 1,
+      "message": "Of course!",
+      "parentUuid": "110838e2_e1c240f0",
+      "range": {
+        "startLine": 433,
+        "startChar": 35,
+        "endLine": 433,
+        "endChar": 67
+      },
+      "revId": "be237cc48c6b1e94bf921e08b0fad63f7d9278fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c99a170_1c1601f7",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-28T15:04:14Z",
       "side": 1,
       "message": "nit: will it make more sense to wait here instead of the runVmTestService lambda?",
+      "range": {
+        "startLine": 454,
+        "startChar": 28,
+        "endLine": 454,
+        "endChar": 34
+      },
+      "revId": "be237cc48c6b1e94bf921e08b0fad63f7d9278fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f66920c_e32aced4",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-02-28T15:27:59Z",
+      "side": 1,
+      "message": "No - as soon as the lambda returns we tell the VM to quit, which would then cause all sorts of race problems.",
+      "parentUuid": "5c99a170_1c1601f7",
       "range": {
         "startLine": 454,
         "startChar": 28,
