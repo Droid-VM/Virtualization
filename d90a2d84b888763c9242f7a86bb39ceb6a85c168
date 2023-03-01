@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c408d806_e9874f6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-01T12:18:57Z",
+      "side": 1,
+      "message": "It will be interesting to see if this makes any difference on the benchmarks.\n\nI can\u0027t help noticing we have 2 implementations of this, one in C++ and one in Rust. Maybe we should use the Rust version for the JNI - either using the jni crate, or having the C++ just call the Rust one?",
+      "revId": "d90a2d84b888763c9242f7a86bb39ceb6a85c168",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
