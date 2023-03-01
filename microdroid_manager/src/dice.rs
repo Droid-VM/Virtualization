@@ -16,18 +16,20 @@
 
 use anyhow::{anyhow, bail, Context, Error, Result};
 use byteorder::{NativeEndian, ReadBytesExt};
+use ciborium::{
+    ser,
+    value::{Integer, Value},
+};
 use diced_open_dice::{
     bcc_handover_parse, retry_bcc_main_flow, BccHandover, Config, DiceArtifacts, DiceMode, Hash,
     Hidden, InputValues, OwnedDiceArtifacts,
 };
-use diced_utils::cbor::{encode_header, encode_number};
 use keystore2_crypto::ZVec;
 use libc::{c_void, mmap, munmap, MAP_FAILED, MAP_PRIVATE, PROT_READ};
 use microdroid_metadata::PayloadMetadata;
 use openssl::hkdf::hkdf;
 use openssl::md::Md;
 use std::fs;
-use std::io::Write;
 use std::os::unix::io::AsRawFd;
 use std::path::{Path, PathBuf};
 use std::ptr::null_mut;
@@ -172,39 +174,25 @@ impl Drop for DiceDriver<'_> {
 ///   1: tstr // payload_binary_name
 /// }
 pub fn format_payload_config_descriptor(payload_metadata: &PayloadMetadata) -> Result<Vec<u8>> {
-    let mut config_descriptor = vec![
-        0xa2, // map(2)
-        0x3a, 0x00, 0x01, 0x11, 0x71, // -70002
-        0x72, 0x4d, 0x69, 0x63, 0x72, 0x6f, 0x64, 0x72, 0x6f, 0x69, 0x64, 0x20, 0x70, 0x61, 0x79,
-        0x6c, 0x6f, 0x61, 0x64, // "Microdroid payload"
-    ];
-
-    match payload_metadata {
+    let payload_config = match payload_metadata {
         PayloadMetadata::config_path(payload_config_path) => {
-            encode_negative_number(-71000, &mut config_descriptor)?;
-            encode_tstr(payload_config_path, &mut config_descriptor)?;
+            (Value::Integer(Integer::from(-71000)), Value::Text(payload_config_path.to_string()))
         }
         PayloadMetadata::config(payload_config) => {
-            encode_negative_number(-71001, &mut config_descriptor)?;
-            encode_header(5, 1, &mut config_descriptor)?; // map(1)
-            encode_number(1, &mut config_descriptor)?;
-            encode_tstr(&payload_config.payload_binary_name, &mut config_descriptor)?;
+            let payload_binary_name_entry = (
+                Value::Integer(1.into()),
+                Value::Text(payload_config.payload_binary_name.to_string()),
+            );
+            (Value::Integer(Integer::from(-71001)), Value::Map(vec![payload_binary_name_entry]))
         }
-    }
+    };
+    let config_map = Value::Map(vec![
+        (Value::Integer(Integer::from(-70002)), Value::Text("Microdroid payload".to_string())),
+        payload_config,
+    ]);
+    let mut config_descriptor = Vec::new();
+    ser::into_writer(&config_map, &mut config_descriptor)?;
     Ok(config_descriptor)
-}
-
-fn encode_tstr(tstr: &str, buffer: &mut Vec<u8>) -> Result<()> {
-    let bytes = tstr.as_bytes();
-    encode_header(3, bytes.len().try_into().unwrap(), buffer)?;
-    buffer.extend_from_slice(bytes);
-    Ok(())
-}
-
-fn encode_negative_number(n: i64, buffer: &mut dyn Write) -> Result<()> {
-    anyhow::ensure!(n < 0);
-    let n = -1 - n;
-    encode_header(1, n.try_into().unwrap(), buffer)
 }
 
 #[cfg(test)]
