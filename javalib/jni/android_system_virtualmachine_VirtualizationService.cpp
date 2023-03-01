@@ -29,7 +29,7 @@
 using namespace android::base;
 
 static constexpr const char VIRTMGR_PATH[] = "/apex/com.android.virt/bin/virtmgr";
-static constexpr size_t VIRTMGR_THREADS = 16;
+static constexpr size_t VIRTMGR_THREADS = 2;
 
 extern "C" JNIEXPORT jint JNICALL
 Java_android_system_virtualmachine_VirtualizationService_nativeSpawn(
@@ -83,7 +83,10 @@ Java_android_system_virtualmachine_VirtualizationService_nativeConnect(JNIEnv* e
     ARpcSession_setFileDescriptorTransportMode(session.get(),
                                                ARpcSession_FileDescriptorTransportMode::Unix);
     ARpcSession_setMaxIncomingThreads(session.get(), VIRTMGR_THREADS);
+<<<<<<< PATCH SET (6b6302 Reduce virtmgr threads)
+=======
     ARpcSession_setMaxOutgoingConnections(session.get(), VIRTMGR_THREADS);
+>>>>>>> BASE      (668224 Change request for Rust v1.68.0)
     // SAFETY - ARpcSession_setupUnixDomainBootstrapClient does not take ownership of clientFd.
     auto client = ARpcSession_setupUnixDomainBootstrapClient(session.get(), clientFd);
     return AIBinder_toJavaBinder(env, client);
