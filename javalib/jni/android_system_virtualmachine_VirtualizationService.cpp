@@ -29,7 +29,7 @@
 using namespace android::base;
 
 static constexpr const char VIRTMGR_PATH[] = "/apex/com.android.virt/bin/virtmgr";
-static constexpr size_t VIRTMGR_THREADS = 16;
+static constexpr size_t VIRTMGR_THREADS = 2;
 
 extern "C" JNIEXPORT jint JNICALL
 Java_android_system_virtualmachine_VirtualizationService_nativeSpawn(

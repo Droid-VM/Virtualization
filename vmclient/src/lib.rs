@@ -57,7 +57,7 @@ const VIRTUALIZATION_SERVICE_BINDER_SERVICE_IDENTIFIER: &str =
     "android.system.virtualizationservice";
 
 const VIRTMGR_PATH: &str = "/apex/com.android.virt/bin/virtmgr";
-const VIRTMGR_THREADS: usize = 16;
+const VIRTMGR_THREADS: usize = 2;
 
 fn posix_pipe() -> Result<(OwnedFd, OwnedFd), io::Error> {
     use nix::fcntl::OFlag;
