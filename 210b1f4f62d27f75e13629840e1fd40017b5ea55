@@ -52,6 +52,24 @@
       "parentUuid": "26002770_11c8b137",
       "revId": "210b1f4f62d27f75e13629840e1fd40017b5ea55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6b62882_4af5cb4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-02T14:35:08Z",
+      "side": 1,
+      "message": "In my machine, `prefer_rlib: true` generates bigger file. (`11664` -\u003e `77888`). Am I missing something?\n\nHere\u0027s my configurations.\n`microdroid_init_debug_policy` size was `11664` and `microdroid_init_debug_policy1` is `77888`.\n\n\n```\nrust_binary {\n    name: \"microdroid_init_debug_policy\",\n    srcs: [\"src/init_debug_policy.rs\"],\n    stem: \"init_debug_policy\",\n    rustlibs: [\n        \"librustutils\",\n    ],\n    installable: false, // match with microdroid_init_rc.\n    bootstrap: true,\n}\n \nrust_binary {\n    name: \"microdroid_init_debug_policy1\",\n    srcs: [\"src/init_debug_policy.rs\"],\n    stem: \"init_debug_policy1\",\n    rustlibs: [\n        \"librustutils\",\n    ],\n    installable: false, // match with microdroid_init_rc.\n    prefer_rlib: true,\n    bootstrap: true,\n}\n```",
+      "parentUuid": "35ec47df_e8cdbe54",
+      "revId": "210b1f4f62d27f75e13629840e1fd40017b5ea55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
