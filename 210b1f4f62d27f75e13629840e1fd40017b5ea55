@@ -34,6 +34,24 @@
       "parentUuid": "ee2032c4_eaa4f81e",
       "revId": "210b1f4f62d27f75e13629840e1fd40017b5ea55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35ec47df_e8cdbe54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-02T13:32:51Z",
+      "side": 1,
+      "message": "I think you need `prefer_rlib: true`. Without that option, this CL will bring not only your binary, but also its rust lib dependencies (*.dyn.so) to the microdroid image.",
+      "parentUuid": "26002770_11c8b137",
+      "revId": "210b1f4f62d27f75e13629840e1fd40017b5ea55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
