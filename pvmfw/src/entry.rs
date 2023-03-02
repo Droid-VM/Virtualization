@@ -199,9 +199,6 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
     // - only perform logging once the logger has been initialized
     // - only access non-pvmfw memory once (and while) it has been mapped
 
-    // SAFETY - This function should and will only be called once, here.
-    unsafe { heap::init() };
-
     logger::init(LevelFilter::Info).map_err(|_| RebootReason::InternalError)?;
 
     // Use debug!() to avoid printing to the UART if we failed to configure it as only local
@@ -252,6 +249,9 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
 
     let mut memory = MemoryTracker::new(page_table);
     let slices = MemorySlices::new(fdt, payload, payload_size, &mut memory)?;
+
+    // SAFETY - This function should and will only be called once, here.
+    unsafe { heap::init(slices.fdt) };
 
     rand::init().map_err(|e| {
         error!("Failed to initialize rand: {e}");

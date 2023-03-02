@@ -37,6 +37,26 @@ pub fn kernel_range(fdt: &libfdt::Fdt) -> libfdt::Result<Option<Range<usize>>> {
     Ok(None)
 }
 
+fn rdma_node(fdt: &Fdt) -> libfdt::Result<libfdt::FdtNode> {
+    fdt.compatible_nodes(CStr::from_bytes_with_nul(b"restricted-dma-pool\0").unwrap())?
+        .next()
+        .ok_or(libfdt::FdtError::NotFound)
+}
+
+pub fn swiotlb_range(fdt: &libfdt::Fdt) -> libfdt::Result<Range<usize>> {
+    let node = rdma_node(fdt)?;
+
+    let reg = node.reg()?
+        .ok_or(libfdt::FdtError::NotFound)? // TODO: Unique Err values
+        .next()
+        .ok_or(libfdt::FdtError::BadValue)?;
+
+    let addr = reg.addr as usize;
+    let size = reg.size.ok_or(libfdt::FdtError::BadValue)? as usize;
+
+    Ok(addr..(addr + size))
+}
+
 /// Extract from /chosen the address range containing the pre-loaded ramdisk.
 pub fn initrd_range(fdt: &libfdt::Fdt) -> libfdt::Result<Option<Range<usize>>> {
     let start = CStr::from_bytes_with_nul(b"linux,initrd-start\0").unwrap();

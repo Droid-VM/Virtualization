@@ -27,6 +27,8 @@ use core::ptr::NonNull;
 
 use buddy_system_allocator::LockedHeap;
 
+use crate::fdt::swiotlb_range;
+
 #[global_allocator]
 static HEAP_ALLOCATOR: LockedHeap<32> = LockedHeap::<32>::new();
 
@@ -34,8 +36,17 @@ static HEAP_ALLOCATOR: LockedHeap<32> = LockedHeap::<32>::new();
 const HEAP_SIZE: usize = 0x20000;
 static mut HEAP: [u8; HEAP_SIZE] = [0; HEAP_SIZE];
 
-pub unsafe fn init() {
-    HEAP_ALLOCATOR.lock().init(HEAP.as_mut_ptr() as usize, HEAP.len());
+pub unsafe fn init(fdt: &libfdt::Fdt) {
+    let mut addr = HEAP.as_mut_ptr() as usize;
+    let mut len = HEAP.len();
+
+    let swiotlb = swiotlb_range(fdt);
+    if let Ok(range) = swiotlb {
+        addr = range.start;
+        len = range.end - range.start;
+    }
+
+    HEAP_ALLOCATOR.lock().init(addr, len);
 }
 
 /// Allocate an aligned but uninitialized slice of heap.
