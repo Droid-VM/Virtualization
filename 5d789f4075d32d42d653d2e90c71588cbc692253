@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a1bc51b_f1c8dcaa",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 14
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-02T08:13:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5999d13d_ba0f693d",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 44
+      },
+      "revId": "5d789f4075d32d42d653d2e90c71588cbc692253",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1a6795e_32f6a95a",
@@ -85,6 +109,30 @@
       "writtenOn": "2023-02-25T00:31:40Z",
       "side": 1,
       "message": "This sysprop is not added to property_contexts. And I think the name is misleading. It is not set by microdroid, but by the script.",
+      "range": {
+        "startLine": 53,
+        "startChar": 12,
+        "endLine": 53,
+        "endChar": 43
+      },
+      "revId": "5d789f4075d32d42d653d2e90c71588cbc692253",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "950e8ec2_2ddfb8f7",
+        "filename": "microdroid/init.rc",
+        "patchSetId": 14
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-02T08:13:20Z",
+      "side": 1,
+      "message": "changed the name. PTAL.",
+      "parentUuid": "a1a6795e_32f6a95a",
       "range": {
         "startLine": 53,
         "startChar": 12,
