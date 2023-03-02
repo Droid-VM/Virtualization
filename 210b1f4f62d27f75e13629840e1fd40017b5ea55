@@ -16,6 +16,24 @@
       "message": "Bloat Buster seems to be a false alarm; when I checked the binary itself, it only cost `12K` and not `1MB`",
       "revId": "210b1f4f62d27f75e13629840e1fd40017b5ea55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26002770_11c8b137",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-02T12:49:31Z",
+      "side": 1,
+      "message": "Strange enough, As Bloat buster says, size of `microdroid_super.img` is increased from `38523192` to `39682332`, while `init_debug_policy` is `38523192`. I don\u0027t know why it\u0027s increased more than new file size (`11664`).",
+      "parentUuid": "ee2032c4_eaa4f81e",
+      "revId": "210b1f4f62d27f75e13629840e1fd40017b5ea55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
