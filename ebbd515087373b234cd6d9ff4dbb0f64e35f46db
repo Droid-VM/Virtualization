@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bed79120_99cc035b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-03-03T16:55:06Z",
+      "side": 1,
+      "message": "I\u0027ve verified that commands work. Well, to the extent that they trigger a kernel panic, but this is something me and Vincent will look at next week, just wanted to have some docs ready to simplify debugging.\n\nAdded Ryan to verify that Perfetto-side of documentation makes sense",
+      "parentUuid": "93f8e745_c53fadfe",
+      "revId": "ebbd515087373b234cd6d9ff4dbb0f64e35f46db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d48c9389_8969b7c2",
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1591c1c1_c00296cb",
+        "filename": "docs/debug/tracing.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-03-03T16:55:06Z",
+      "side": 1,
+      "message": "Rephrased a little bit. Does it make more sense now?",
+      "parentUuid": "d48c9389_8969b7c2",
+      "range": {
+        "startLine": 10,
+        "startChar": 39,
+        "endLine": 10,
+        "endChar": 46
+      },
+      "revId": "ebbd515087373b234cd6d9ff4dbb0f64e35f46db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f806ca6b_a0fe36d3",
         "filename": "docs/debug/tracing.md",
         "patchSetId": 2
@@ -54,6 +96,30 @@
       "writtenOn": "2023-03-03T16:50:04Z",
       "side": 1,
       "message": "Nit: exhaustive\n\nBlank line after?",
+      "range": {
+        "startLine": 18,
+        "startChar": 28,
+        "endLine": 18,
+        "endChar": 37
+      },
+      "revId": "ebbd515087373b234cd6d9ff4dbb0f64e35f46db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa69b286_82fc3ae7",
+        "filename": "docs/debug/tracing.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-03-03T16:55:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f806ca6b_a0fe36d3",
       "range": {
         "startLine": 18,
         "startChar": 28,
