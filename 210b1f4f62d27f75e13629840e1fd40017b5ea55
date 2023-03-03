@@ -70,6 +70,24 @@
       "parentUuid": "35ec47df_e8cdbe54",
       "revId": "210b1f4f62d27f75e13629840e1fd40017b5ea55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9761b097_6f28520c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-03T02:07:59Z",
+      "side": 1,
+      "message": "Oops. I mistakenly only checked the binary size only and didn\u0027t consider extra dependencies that `prefer_rlib: false` will bring.\n\nAdded `prefer_rlib: true` and total size was removed as you suggested (and also expected).\n\nJust FYI, following files were added without `prefer_rlib`\n- libanyhow.dylib.so\n- librustutils.dylib.so\n- libstd.dylib.so\n- libthiserror.dylib.so",
+      "parentUuid": "f6b62882_4af5cb4d",
+      "revId": "210b1f4f62d27f75e13629840e1fd40017b5ea55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
