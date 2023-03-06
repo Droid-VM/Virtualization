@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc9d2527_1ad8c100",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-06T12:06:27Z",
+      "side": 1,
+      "message": "Agreed; is there no `cc_*` module that wraps the CPP? `cc_genrule`? `gensrcs`? Otherwise, we could make `arm_dt_bindings_headers` a `cc_library_headers` and use it as `header_libs` in that module, generating `preprocessed.dts`.\n\nBTW, what do you think about decomposing this module into 2 (or 3?) other modules to\n- pre-process\n- `dtc`-compile\n- generate the raw Rust data\n\n?\n\nIdeally, we would like a Soong recipe for each of these generic steps ...",
+      "range": {
+        "startLine": 131,
+        "startChar": 72,
+        "endLine": 131,
+        "endChar": 79
+      },
+      "revId": "216793edf93d6cb27a777b9a7d81cd050c28ff81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
