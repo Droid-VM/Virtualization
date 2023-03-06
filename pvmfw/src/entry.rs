@@ -32,6 +32,7 @@ use log::info;
 use log::warn;
 use log::LevelFilter;
 use vmbase::{console, layout, logger, main, power::reboot};
+use crate::hvc;
 
 #[derive(Debug, Clone)]
 pub enum RebootReason {
@@ -252,6 +253,13 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
 
     let mut memory = MemoryTracker::new(page_table);
     let slices = MemorySlices::new(fdt, payload, payload_size, &mut memory)?;
+
+    unsafe {
+    hvc::hypervisor_init(slices.fdt).map_err(|_e| {
+        error!("Failed to detect hypervisor");
+        RebootReason::InternalError
+    })?;
+    }
 
     rand::init().map_err(|e| {
         error!("Failed to initialize rand: {e}");

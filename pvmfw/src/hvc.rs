@@ -1,4 +1,4 @@
-// Copyright 2022, The Android Open Source Project
+// Copyright 2023, The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,10 +14,20 @@
 
 //! Wrappers around calls to the hypervisor.
 
-pub mod trng;
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(warnings)]
 
-use crate::smccc::{self, checked_hvc64, checked_hvc64_expect_zero};
-use log::info;
+use log::error;
+use crate::smccc;
+use core::sync::atomic::{AtomicUsize, Ordering};
+use core::ptr::NonNull;
+use crate::smccc::hvc64;
+use crate::hvc::kvm_hypervisor::is_kvm_hypervisor;
+use crate::hvc::gunyah_hypervisor::is_qcom_gunyah_hypervisor;
+use crate::hvc::kvm_hypervisor::KvmHypervisor;
+use crate::hvc::gunyah_hypervisor::GunyahHypervisor; // TODO: Use Gunyah everywhre
+const ARM_SMCCC_VENDOR_HYP_CALL_UID_FUNC_ID: u32 = 0xc600ff01; 
 
 const ARM_SMCCC_TRNG_VERSION: u32 = 0x8400_0050;
 #[allow(dead_code)]
@@ -27,81 +37,158 @@ const ARM_SMCCC_TRNG_GET_UUID: u32 = 0x8400_0052;
 #[allow(dead_code)]
 const ARM_SMCCC_TRNG_RND32: u32 = 0x8400_0053;
 const ARM_SMCCC_TRNG_RND64: u32 = 0xc400_0053;
-const ARM_SMCCC_KVM_FUNC_HYP_MEMINFO: u32 = 0xc6000002;
-const ARM_SMCCC_KVM_FUNC_MEM_SHARE: u32 = 0xc6000003;
-const ARM_SMCCC_KVM_FUNC_MEM_UNSHARE: u32 = 0xc6000004;
-const VENDOR_HYP_KVM_MMIO_GUARD_INFO_FUNC_ID: u32 = 0xc6000005;
-const VENDOR_HYP_KVM_MMIO_GUARD_ENROLL_FUNC_ID: u32 = 0xc6000006;
-const VENDOR_HYP_KVM_MMIO_GUARD_MAP_FUNC_ID: u32 = 0xc6000007;
-const VENDOR_HYP_KVM_MMIO_GUARD_UNMAP_FUNC_ID: u32 = 0xc6000008;
+
+pub mod trng;
+pub mod kvm_hypervisor;
+pub mod gunyah_hypervisor;
+
+const UNINITIALIZED: usize = 0;
+const INITIALIZING: usize = 1;
+const INITIALIZED: usize = 2;
+
+static HypInitState: AtomicUsize = AtomicUsize::new(0);
+
+pub trait Hypervisor: Send {
+    fn hyp_meminfo(&self) -> smccc::Result<u64>;
+    fn mem_share(&self, base_ipa: u64) -> smccc::Result<()>;
+    fn mem_unshare(&self, base_ipa: u64) -> smccc::Result<()>;
+    fn mmio_guard_info(&self) -> smccc::Result<u64>;
+    fn mmio_guard_enroll(&self) -> smccc::Result<()>;
+    fn mmio_guard_map(&self, ipa: u64) -> smccc::Result<()>;
+    fn mmio_guard_unmap(&self, ipa: u64) -> smccc::Result<()>;
+    fn alloc_shared(&self, size: usize) -> smccc::Result<NonNull<u8>>;
+    unsafe fn dealloc_shared(&self, vaddr: NonNull<u8>, size: usize) -> smccc::Result<()>;
+}
+
+struct UnknownHypervisor;
+
+impl Hypervisor for UnknownHypervisor  {
+    fn hyp_meminfo(&self) -> smccc::Result<u64> {
+        Err(smccc::Error::NotSupported)
+    }
+
+    fn mem_share(&self, base_ipa: u64) -> smccc::Result<()> {
+        Err(smccc::Error::NotSupported)
+    }
+
+    fn mem_unshare(&self, base_ipa: u64) -> smccc::Result<()> {
+        Err(smccc::Error::NotSupported)
+    }
+
+    fn mmio_guard_info(&self) -> smccc::Result<u64> {
+        Err(smccc::Error::NotSupported)
+    }
+
+    fn mmio_guard_enroll(&self) -> smccc::Result<()> {
+        Err(smccc::Error::NotSupported)
+    }
+
+    fn mmio_guard_map(&self, ipa: u64) -> smccc::Result<()> {
+        Err(smccc::Error::NotSupported)
+    }
+
+    fn mmio_guard_unmap(&self, ipa: u64) -> smccc::Result<()>  {
+        Err(smccc::Error::NotSupported)
+    }
+
+    fn alloc_shared(&self, size: usize) -> smccc::Result<NonNull<u8>> {
+        Err(smccc::Error::NotSupported)
+    }
+
+    unsafe fn dealloc_shared(&self, vaddr: NonNull<u8>, size: usize) -> smccc::Result<()> {
+        Err(smccc::Error::NotSupported)
+    }
+}
+
+static mut Cur_Hypervisor: &dyn Hypervisor = &UnknownHypervisor;
+
+pub unsafe fn hypervisor_init(fdt: &libfdt::Fdt) -> Result<(), ()>
+{
+    let old_state = HypInitState.compare_exchange(UNINITIALIZED, INITIALIZING, Ordering::SeqCst, Ordering::SeqCst);
+
+    match old_state {
+            Ok(UNINITIALIZED) => {
+                let args = [0u64; 17];
+                let res = hvc64(ARM_SMCCC_VENDOR_HYP_CALL_UID_FUNC_ID, args);
+
+                if is_kvm_hypervisor(res, fdt) {
+                        Cur_Hypervisor = &KvmHypervisor;
+                } else if is_qcom_gunyah_hypervisor(res, fdt) {
+                        Cur_Hypervisor = &GunyahHypervisor;
+                } else {
+                    error!("Unknown Hypervisor!");
+                    return Err(());
+                }
+
+                HypInitState.compare_exchange(INITIALIZING, INITIALIZED, Ordering::SeqCst, Ordering::SeqCst);
+
+                Ok(())
+            }
+
+            _ =>  {
+                error!("Unexpected state of HypInitState {:?} ", old_state);
+                Err(())
+            }
+    }
+}
 
 /// Queries the memory protection parameters for a protected virtual machine.
 ///
 /// Returns the memory protection granule size in bytes.
 pub fn hyp_meminfo() -> smccc::Result<u64> {
-    let args = [0u64; 17];
-    checked_hvc64(ARM_SMCCC_KVM_FUNC_HYP_MEMINFO, args)
+        unsafe {Cur_Hypervisor.hyp_meminfo()}
 }
 
 /// Shares a region of memory with the KVM host, granting it read, write and execute permissions.
 /// The size of the region is equal to the memory protection granule returned by [`hyp_meminfo`].
 pub fn mem_share(base_ipa: u64) -> smccc::Result<()> {
-    let mut args = [0u64; 17];
-    args[0] = base_ipa;
-
-    checked_hvc64_expect_zero(ARM_SMCCC_KVM_FUNC_MEM_SHARE, args)
+        unsafe {
+            Cur_Hypervisor.mem_share(base_ipa)
+        }
 }
 
 /// Revokes access permission from the KVM host to a memory region previously shared with
 /// [`mem_share`]. The size of the region is equal to the memory protection granule returned by
 /// [`hyp_meminfo`].
 pub fn mem_unshare(base_ipa: u64) -> smccc::Result<()> {
-    let mut args = [0u64; 17];
-    args[0] = base_ipa;
-
-    checked_hvc64_expect_zero(ARM_SMCCC_KVM_FUNC_MEM_UNSHARE, args)
+    unsafe {
+        Cur_Hypervisor.mem_unshare(base_ipa)
+    }
 }
 
 pub fn mmio_guard_info() -> smccc::Result<u64> {
-    let args = [0u64; 17];
-
-    checked_hvc64(VENDOR_HYP_KVM_MMIO_GUARD_INFO_FUNC_ID, args)
+    unsafe {
+        Cur_Hypervisor.mmio_guard_info()
+    }
 }
 
 pub fn mmio_guard_enroll() -> smccc::Result<()> {
-    let args = [0u64; 17];
-
-    checked_hvc64_expect_zero(VENDOR_HYP_KVM_MMIO_GUARD_ENROLL_FUNC_ID, args)
+    unsafe {
+        Cur_Hypervisor.mmio_guard_enroll()
+    }
 }
 
 pub fn mmio_guard_map(ipa: u64) -> smccc::Result<()> {
-    let mut args = [0u64; 17];
-    args[0] = ipa;
-
-    // TODO(b/253586500): pKVM currently returns a i32 instead of a i64.
-    let is_i32_error_code = |n| u32::try_from(n).ok().filter(|v| (*v as i32) < 0).is_some();
-    match checked_hvc64_expect_zero(VENDOR_HYP_KVM_MMIO_GUARD_MAP_FUNC_ID, args) {
-        Err(smccc::Error::Unexpected(e)) if is_i32_error_code(e) => {
-            info!("Handled a pKVM bug by interpreting the MMIO_GUARD_MAP return value as i32");
-            match e as u32 as i32 {
-                -1 => Err(smccc::Error::NotSupported),
-                -2 => Err(smccc::Error::NotRequired),
-                -3 => Err(smccc::Error::InvalidParameter),
-                ret => Err(smccc::Error::Unknown(ret as i64)),
-            }
-        }
-        res => res,
+    unsafe {
+        Cur_Hypervisor.mmio_guard_map(ipa)
     }
 }
 
 pub fn mmio_guard_unmap(ipa: u64) -> smccc::Result<()> {
-    let mut args = [0u64; 17];
-    args[0] = ipa;
+    unsafe {
+        Cur_Hypervisor.mmio_guard_unmap(ipa)
+    }
+}
 
-    // TODO(b/251426790): pKVM currently returns NOT_SUPPORTED for SUCCESS.
-    match checked_hvc64_expect_zero(VENDOR_HYP_KVM_MMIO_GUARD_UNMAP_FUNC_ID, args) {
-        Err(smccc::Error::NotSupported) | Ok(_) => Ok(()),
-        x => x,
+pub fn alloc_shared(size: usize) -> smccc::Result<NonNull<u8>> {
+    unsafe {
+        Cur_Hypervisor.alloc_shared(size)
+    }
+}
+
+pub unsafe fn dealloc_shared(vaddr: NonNull<u8>, size: usize) -> smccc::Result<()> {
+    unsafe {
+        Cur_Hypervisor.dealloc_shared(vaddr, size)
     }
 }
 

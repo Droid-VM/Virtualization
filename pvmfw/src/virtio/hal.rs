@@ -1,5 +1,6 @@
 use super::pci::PCI_INFO;
-use crate::memory::{alloc_shared, dealloc_shared, phys_to_virt, virt_to_phys};
+use crate::memory::{phys_to_virt, virt_to_phys};
+use crate::hvc::{alloc_shared, dealloc_shared};
 use core::{
     ops::Range,
     ptr::{copy_nonoverlapping, NonNull},
