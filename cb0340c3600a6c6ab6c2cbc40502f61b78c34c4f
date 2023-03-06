@@ -87,6 +87,30 @@
       },
       "revId": "cb0340c3600a6c6ab6c2cbc40502f61b78c34c4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beb7ada1_5319a0cd",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-06T12:25:38Z",
+      "side": 1,
+      "message": "\u003e We don\u0027t really have support for WFI-like sleep\n\nWhy not? Just `asm!(\"wfi\")`, no?",
+      "parentUuid": "e113a0eb_f3e5384c",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 5
+      },
+      "revId": "cb0340c3600a6c6ab6c2cbc40502f61b78c34c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
