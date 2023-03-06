@@ -22,6 +22,30 @@
       },
       "revId": "216793edf93d6cb27a777b9a7d81cd050c28ff81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09c5c4a6_efa77777",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-06T12:13:00Z",
+      "side": 1,
+      "message": "There\u0027s no CC module that does the preprocessing only. That\u0027s why I choose this dirty path.\n\nDecomposing this into more modules is possible, but what is the value of it? It makes sense only when some of the intermediate results are used in somewhere else, IMO.\n\nPerhaps, as a follow-up \u0026 clean-up, we could make new module types for (1) dtc compilation (which does the preprocessing and dtc compile) and (2) converting to bytes in Rust, if we think those two actions are needed in several places.",
+      "parentUuid": "fc9d2527_1ad8c100",
+      "range": {
+        "startLine": 131,
+        "startChar": 72,
+        "endLine": 131,
+        "endChar": 79
+      },
+      "revId": "216793edf93d6cb27a777b9a7d81cd050c28ff81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
