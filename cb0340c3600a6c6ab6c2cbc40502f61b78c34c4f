@@ -39,6 +39,30 @@
       },
       "revId": "cb0340c3600a6c6ab6c2cbc40502f61b78c34c4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a880d70_12d9699d",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-06T12:18:31Z",
+      "side": 1,
+      "message": "We don\u0027t really have support for `WFI`-like sleep but we could easily busy sleep; but how would we pick the duration? What are you concerned about? The extra load on the system/host? Hopefully, it shouldn\u0027t be noticeable given how getting entropy is a one-time thing.\n\nTo reduce the number of calls, we could also look into integrating a TRNG-seeded PRNG ...",
+      "parentUuid": "5630d34e_3155ccb9",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 5
+      },
+      "revId": "cb0340c3600a6c6ab6c2cbc40502f61b78c34c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
