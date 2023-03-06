@@ -46,6 +46,30 @@
       },
       "revId": "216793edf93d6cb27a777b9a7d81cd050c28ff81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8220fe33_7324280b",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-06T14:11:37Z",
+      "side": 1,
+      "message": "I meant to identify where those operations are being reused (for example, we also have a \"bytes-to-Rust\" above and are compiling DTs for the DP DTBO in the tests Jaewan has added) and cleanly carve those out one-by-one.\n\nBut I agree that it wouldn\u0027t add much to this CL on its own so resolving.",
+      "parentUuid": "09c5c4a6_efa77777",
+      "range": {
+        "startLine": 131,
+        "startChar": 72,
+        "endLine": 131,
+        "endChar": 79
+      },
+      "revId": "216793edf93d6cb27a777b9a7d81cd050c28ff81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
