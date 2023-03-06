@@ -159,6 +159,30 @@
       },
       "revId": "cb0340c3600a6c6ab6c2cbc40502f61b78c34c4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36149fec_ed417979",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-06T14:27:25Z",
+      "side": 1,
+      "message": "Would WFE get triggered? That\u0027s the one used in spinlocks, but i think it might depend on another thread doing atomic writes.",
+      "parentUuid": "7adcabd5_5908202d",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 5
+      },
+      "revId": "cb0340c3600a6c6ab6c2cbc40502f61b78c34c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
