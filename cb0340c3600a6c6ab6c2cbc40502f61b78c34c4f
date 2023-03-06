@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eea9bc2_eb6a102d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-06T12:09:24Z",
+      "side": 1,
+      "message": "Does this make Oriole work?",
+      "revId": "cb0340c3600a6c6ab6c2cbc40502f61b78c34c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5630d34e_3155ccb9",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-06T12:09:24Z",
+      "side": 1,
+      "message": "Should there be some sort of sleep in this loop between retries? I guess a wait for interrupt isn\u0027t necessarily the right thing.",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 5
+      },
+      "revId": "cb0340c3600a6c6ab6c2cbc40502f61b78c34c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
