@@ -57,23 +57,16 @@ public abstract class MicrodroidDeviceTestBase {
     private final String MAX_PERFORMANCE_TASK_PROFILE = "CPUSET_SP_TOP_APP";
 
     public static boolean isCuttlefish() {
-        return getDeviceProperties().isCuttlefish();
-    }
-
-    public static boolean isGs101() {
-        return getDeviceProperties().isGs101();
+        return DeviceProperties.create(SystemProperties::get).isCuttlefish();
     }
 
     public static boolean isUserBuild() {
-        return getDeviceProperties().isUserBuild();
+        return DeviceProperties.create(SystemProperties::get).isUserBuild();
     }
 
     public static String getMetricPrefix() {
-        return MetricsProcessor.getMetricPrefix(getDeviceProperties().getMetricsTag());
-    }
-
-    private static DeviceProperties getDeviceProperties() {
-        return DeviceProperties.create(SystemProperties::get);
+        return MetricsProcessor.getMetricPrefix(
+                DeviceProperties.create(SystemProperties::get).getMetricsTag());
     }
 
     protected final void grantPermission(String permission) {
