@@ -249,6 +249,30 @@
       },
       "revId": "cb0340c3600a6c6ab6c2cbc40502f61b78c34c4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1a20964_d2cfebc0",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-07T06:53:47Z",
+      "side": 1,
+      "message": "Hmm, does this mean that one can exhaust the entropy by spawning multiple VMs simultaneously? Shouldn\u0027t there be a rate limiting mechanism like increase the waiting time (it could be a busy loop though) exponentially upon failure, and give up after some number of attempts?",
+      "parentUuid": "dc340193_57b0f228",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 5
+      },
+      "revId": "cb0340c3600a6c6ab6c2cbc40502f61b78c34c4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
