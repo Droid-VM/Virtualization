@@ -22,6 +22,30 @@
       },
       "revId": "b0640a500005e5019b851ea5df7b689ab556e478",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "650f938c_77b40532",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-07T12:51:42Z",
+      "side": 1,
+      "message": "Well, that should be impossible: we set the Microdroid version to the same as the host at build time.\n\nBut yes, I\u0027d like to think whether there\u0027s a possible attack here. I suspect the worst would be a signature mismatch, which would just mean we wouldn\u0027t run the APK.",
+      "parentUuid": "7568b6e9_5d6d9706",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 43
+      },
+      "revId": "b0640a500005e5019b851ea5df7b689ab556e478",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
