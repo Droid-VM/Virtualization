@@ -234,3 +234,35 @@ device tree node marked as [`compatible=”google,open-dice”`][dice-dt].
 [dice-dt]: https://www.kernel.org/doc/Documentation/devicetree/bindings/reserved-memory/google%2Copen-dice.yaml
 [Layering]: https://pigweed.googlesource.com/open-dice/+/refs/heads/main/docs/specification.md#layering-details
 [Trusty-BCC]: https://android.googlesource.com/trusty/lib/+/1696be0a8f3a7103/lib/hwbcc/common/swbcc.c#554
+
+#### pVM Device Tree Overlay
+
+Config header can provide a `DTBO` to be overlaid on top of the baseline device
+tree from crosvm.
+
+The `DTBO` may contain debug policies as follows.
+
+```
+/ {
+    fragment@avf {
+        target-path = "/";
+
+        __overlay__ {
+            avf {
+                guest {
+                    common {
+                        log = <1>;
+                        ramdump = <1>;
+                    };
+
+                    microdroid {
+                        adb = <1>;
+                    };
+                };
+            };
+        };
+    };
+}; /* end of avf */
+```
+
+`DTBO` debug policies must match with device tree in the host, so p

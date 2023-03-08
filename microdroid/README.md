@@ -159,12 +159,46 @@ adb shell /apex/com.android.virt/bin/vm stop $CID
 invoked with the `--daemonize` flag. If the flag was not used, press Ctrl+C on
 the console where the `vm run-app` command was invoked.
 
-## ADB
+## Debuggable microdroid
 
-On userdebug builds, you can have an adb connection to microdroid. To do so,
-first, delete `$TEST_ROOT/instance.img`; this is because changing debug settings
-requires a new instance. Then add the `--debug=full` flag to the
-`/apex/com.android.virt/bin/vm run-app` command, and then
+### Debugging features
+Microdroid supports following debugging features:
+
+- Enable console output
+- Enable ramdump
+- Enable `adb` connection and `adb logcat` output
+
+### Enabling debugging features
+There's two ways to enable the debugging features:
+
+#### Option 1) Running microdroid on AVF debug policy configured device
+
+Host OS can built with AVF debug policies in its device tree.
+`virtualizationmanager` would read the device tree and prepare debug features
+from the host side.
+
+Host OS should also send the debug policies to `pvmfw`, so `pvmfw` can prepare
+debug features. See [pvmfw](../pvmfw/README.md) for details about sending debug
+policies to `pvmfw`.
+
+Here are list of device tree properties for debug policies.
+
+- `/avf/guest/common/log`: `<1>` to enable console output. Ignored oxtherwise.
+- `/avf/guest/common/ramdump`: `<1>` to enable ramdump. Ignored otherwise.
+- `/avf/guest/microdroid/adb`: `<1>` to enable `adb` and `adb logcat` output.\
+   Logcat output will be printed to console. Ignored otherwise.
+
+#### Option 2) Lauching microdroid with debug level.
+
+microdroid can be started with debugging features. To do so, first, delete
+`$TEST_ROOT/instance.img`; this is because changing debug settings requires a
+new instance. Then add the `--debug=full` flag to the
+`/apex/com.android.virt/bin/vm run-app` command. This will enable all debugging
+features.
+
+### ADB
+
+If `adb` connection is enabled, launch following command.
 
 ```sh
 vm_shell
@@ -175,7 +209,7 @@ Done. Now you are logged into Microdroid. Have fun!
 Once you have an adb connection with `vm_shell`, `localhost:8000` will be the
 serial of microdroid.
 
-## Debugging the payload on microdroid
+### Debugging the payload on microdroid
 
 Like a normal adb device, you can debug native processes using `lldbclient.py`
 script, either by running a new process, or attaching to an existing process.
