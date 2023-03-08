@@ -47,6 +47,8 @@ class VirtualizationService {
 
     private native boolean nativeIsOk(int clientFd);
 
+    private IVirtualizationService mService = null;
+
     /*
      * Spawns a new virtmgr subprocess that will host a VirtualizationService
      * AIDL service.
@@ -61,11 +63,14 @@ class VirtualizationService {
 
     /* Connects to the VirtualizationService AIDL service. */
     public IVirtualizationService connect() throws VirtualMachineException {
-        IBinder binder = nativeConnect(mClientFd.getFd());
-        if (binder == null) {
-            throw new VirtualMachineException("Could not connect to VirtualizationService");
+        if (mService == null) {
+            IBinder binder = nativeConnect(mClientFd.getFd());
+            if (binder == null) {
+                throw new VirtualMachineException("Could not connect to VirtualizationService");
+            }
+            mService = IVirtualizationService.Stub.asInterface(binder);
         }
-        return IVirtualizationService.Stub.asInterface(binder);
+        return mService;
     }
 
     /*
