@@ -159,12 +159,41 @@ adb shell /apex/com.android.virt/bin/vm stop $CID
 invoked with the `--daemonize` flag. If the flag was not used, press Ctrl+C on
 the console where the `vm run-app` command was invoked.
 
-## ADB
+## Debuggable microdroid
 
-On userdebug builds, you can have an adb connection to microdroid. To do so,
-first, delete `$TEST_ROOT/instance.img`; this is because changing debug settings
-requires a new instance. Then add the `--debug=full` flag to the
-`/apex/com.android.virt/bin/vm run-app` command, and then
+### Debugging features
+Microdroid supports following debugging features
+
+- Enables console output
+- Enables ramdump
+- Enables `adb` connection and `adb logcat` outputs.
+
+### Enables debugging features
+There's two ways to enables the debugging features:
+
+#### Option 1) Run microdroid on AVF debug policy configured device
+
+Host OS can built with AVF debug policy in its device tree as follows.
+
+- `/proc/device-tree/avf/guest/common/log`: Enables/disables console output.
+- `/proc/device-tree/avf/guest/common/ramdump`: Enables/disables ramdump.
+- `/proc/device-tree/avf/guest/microdroid/adb`: Enables/disables adb and\
+  adb logcat outputs. Logcat output will be printed to console.
+
+Explicit value `<1>` is reqiured for debug policies to take effect.
+User build device should not turn on any of debug policy to keep VMs secure.
+
+#### Option 2) Launch microdroid with debug level.
+
+microdroid can be started with debugging features. To do so, first, delete
+`$TEST_ROOT/instance.img`; this is because changing debug settings requires a
+new instance. Then add the `--debug=full` flag to the
+`/apex/com.android.virt/bin/vm run-app` command. This will enables all debugging
+features.
+
+### ADB
+
+If `adb` connection is enabled, launch following command.
 
 ```sh
 vm_shell
@@ -175,7 +204,7 @@ Done. Now you are logged into Microdroid. Have fun!
 Once you have an adb connection with `vm_shell`, `localhost:8000` will be the
 serial of microdroid.
 
-## Debugging the payload on microdroid
+### Debugging the payload on microdroid
 
 Like a normal adb device, you can debug native processes using `lldbclient.py`
 script, either by running a new process, or attaching to an existing process.
