@@ -234,3 +234,44 @@ device tree node marked as [`compatible=”google,open-dice”`][dice-dt].
 [dice-dt]: https://www.kernel.org/doc/Documentation/devicetree/bindings/reserved-memory/google%2Copen-dice.yaml
 [Layering]: https://pigweed.googlesource.com/open-dice/+/refs/heads/main/docs/specification.md#layering-details
 [Trusty-BCC]: https://android.googlesource.com/trusty/lib/+/1696be0a8f3a7103/lib/hwbcc/common/swbcc.c#554
+
+#### pVM Device Tree Overlay
+
+Config header can provide a `DTBO` to be overlaid on top of the baseline device
+tree from crosvm.
+
+The `DTBO` may contain debug policies as follows.
+
+```
+/ {
+    fragment@avf {
+        target-path = "/";
+
+        __overlay__ {
+            avf {
+                guest {
+                    common {
+                        log = <1>;
+                        ramdump = <1>;
+                    };
+
+                    microdroid {
+                        adb = <1>;
+                    };
+                };
+            };
+        };
+    };
+}; /* end of avf */
+```
+
+For specifying `DTBO`, host bootloader should provide the `DTBO` to both host OS's
+device tree and config header of `pvmfw`. Then both `virtualizationmanager`
+and `pvmfw` will prepare for debugging features.
+
+Here are list of device tree properties for debugging features.
+
+- `/avf/guest/common/log`: `<1>` to enable console output. Ignored otherwise.
+- `/avf/guest/common/ramdump`: `<1>` to enable ramdump. Ignored otherwise.
+- `/avf/guest/microdroid/adb`: `<1>` to enable `adb` for microdroid.\
+   Logcat output will be printed to console. Ignored otherwise.
