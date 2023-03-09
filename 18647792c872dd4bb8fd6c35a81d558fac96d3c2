@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9b259bd_db24befb",
+        "filename": "compos/tests/AndroidTest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-09T10:21:51Z",
+      "side": 1,
+      "message": "Does this option have any effect on a host test?",
+      "range": {
+        "startLine": 34,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 50
+      },
+      "revId": "18647792c872dd4bb8fd6c35a81d558fac96d3c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "367cf297_b6250fad",
+        "filename": "compos/tests/AndroidTest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-09T10:21:51Z",
+      "side": 1,
+      "message": "The default 0 means \"don\u0027t apply a timeout\", so doesn\u0027t this increase the chance of the test being killed? cs/android-internal/tools/tradefederation/core/test_framework/com/android/tradefed/testtype/HostTest.java?rcl\u003da3842433f2285b92a67f83649746cea5e9e17670\u0026l\u003d702\n\nThere\u0027s other timeouts involved, I think, but I\u0027m not sure they can be overridden from here.",
+      "range": {
+        "startLine": 35,
+        "startChar": 6,
+        "endLine": 35,
+        "endChar": 55
+      },
+      "revId": "18647792c872dd4bb8fd6c35a81d558fac96d3c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
