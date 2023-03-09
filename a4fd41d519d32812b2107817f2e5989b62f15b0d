@@ -1,0 +1,297 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba33b042_aa7efe0c",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-09T13:59:53Z",
+      "side": 1,
+      "message": "nit: please sort",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 15
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4576736b_6c8f717e",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-09T13:59:53Z",
+      "side": 1,
+      "message": "Every `unsafe` block needs `// SAFETY - the conditions that should be satisfied to keep the code block safe` comment.",
+      "range": {
+        "startLine": 257,
+        "startChar": 4,
+        "endLine": 257,
+        "endChar": 12
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deb11d55_baa324f7",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-09T13:59:53Z",
+      "side": 1,
+      "message": "Why is the error not shown? e.g. `error!(\"Failed to detect hypervisor: {e}\")`",
+      "range": {
+        "startLine": 258,
+        "startChar": 46,
+        "endLine": 258,
+        "endChar": 48
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1d8ef1b_c68b93f3",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-09T13:59:53Z",
+      "side": 1,
+      "message": "why?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 27
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d39b5e9_94b73864",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-09T13:59:53Z",
+      "side": 1,
+      "message": "nit: please sort",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 82
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "902e7969_b722c97b",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-09T13:59:53Z",
+      "side": 1,
+      "message": "why are these import public? I thought the purpose of this `hvc` module is to hide the different hypervisors? can you drop `pub`?",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 26
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6da25b28_648aa7c0",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-09T13:59:53Z",
+      "side": 1,
+      "message": "can this be `Option\u003c\u0026dyn Hypervisor\u003e`? then we don\u0027t need UnknownHypervisor because it would be modeled as `None`.",
+      "range": {
+        "startLine": 103,
+        "startChar": 27,
+        "endLine": 103,
+        "endChar": 42
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f356635_dfec9984",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-09T13:59:53Z",
+      "side": 1,
+      "message": "please specify the conditions to use this function safely as comments.",
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "231ffda6_feb602f3",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-09T13:59:53Z",
+      "side": 1,
+      "message": "The below looks better, IMO.\n\n```\nif let Ok(UNINITIALIZED) \u003d old_state {\n} else {\n}\n```",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 34
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9353f0e_ee9bdb78",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-09T13:59:53Z",
+      "side": 1,
+      "message": "nit: wrong indentation",
+      "range": {
+        "startLine": 110,
+        "startChar": 4,
+        "endLine": 110,
+        "endChar": 12
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d36de32b_877663b8",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-09T13:59:53Z",
+      "side": 1,
+      "message": "where is this number from? Could you make it a const?",
+      "range": {
+        "startLine": 111,
+        "startChar": 34,
+        "endLine": 111,
+        "endChar": 36
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95941bb9_1751c87e",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-09T13:59:53Z",
+      "side": 1,
+      "message": "why is this unsafe?",
+      "range": {
+        "startLine": 139,
+        "startChar": 8,
+        "endLine": 139,
+        "endChar": 14
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a623055_e47a346d",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-09T13:59:53Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 145,
+        "startChar": 8,
+        "endLine": 145,
+        "endChar": 14
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
