@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "75a04302_bb53a7d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-09T15:37:36Z",
+      "side": 1,
+      "message": "\"Bug: 271493784\"",
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90bb1f70_22b264d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-09T15:37:36Z",
+      "side": 1,
+      "message": "Thanks for the contribution!\n\nTo make Gerrit less grumpy, could you please run `rustfmt` on the modified files?",
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba33b042_aa7efe0c",
         "filename": "pvmfw/src/entry.rs",
         "patchSetId": 1
@@ -72,6 +106,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0cd6a9fe_93f1ea49",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-09T15:37:36Z",
+      "side": 1,
+      "message": "Let\u0027s keep the `hvc.rs` file dedicated to low-level HVC function calls. Instead, I\u0027ve prepended those function names with \u0027`kvm_`\" and introduced `hypervisor.rs` in aosp/2480055; could you rebase on top it and add the traits in the top level and back-end implementations as individual sub-modules (i.e. `hypervisor/kvm.rs` \u0026 `hypervisor/gunyah.rs`)?",
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a1d8ef1b_c68b93f3",
         "filename": "pvmfw/src/hvc.rs",
         "patchSetId": 1
@@ -118,6 +169,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2028504e_f5634004",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-09T15:37:36Z",
+      "side": 1,
+      "message": "Why is this a SMC64 (`0xc6...`) when section 6.2 of the SMCCC standard defines the Vendor Specific Hypervisor Call UID Query as an SMC32? AFAICT, `ARM_SMCCC_VENDOR_HYP_CALL_UID_FUNC_ID` is declared as `ARM_SMCCC_SMC_32` in `\u003clinux/arm-smccc.h\u003e`.",
+      "range": {
+        "startLine": 30,
+        "startChar": 51,
+        "endLine": 30,
+        "endChar": 61
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "902e7969_b722c97b",
         "filename": "pvmfw/src/hvc.rs",
         "patchSetId": 1
@@ -134,6 +208,52 @@
         "startChar": 0,
         "endLine": 43,
         "endChar": 26
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf723c89_27afc798",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-09T15:37:36Z",
+      "side": 1,
+      "message": "Instead of a top-level trait, would it make sense to have one `MmioGuard`(`ed`) trait with a default implementation of return `Ok(())` and another `MemorySharing` trait? `Hypervisor` could then be `MmioGuarded + MemorySharing` and we would trivially `impl MmioGuarded for GunyahHypervisor {}`.",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 28
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acdd3f6c_be008653",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-09T15:37:36Z",
+      "side": 1,
+      "message": "Is it still necessary to expose these functions out of the object if we have (`de`)`alloc_shared`?",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 62
       },
       "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -238,6 +358,30 @@
       "writtenOn": "2023-03-09T13:59:53Z",
       "side": 1,
       "message": "where is this number from? Could you make it a const?",
+      "range": {
+        "startLine": 111,
+        "startChar": 34,
+        "endLine": 111,
+        "endChar": 36
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de25334a_ee2ae359",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-09T15:37:36Z",
+      "side": 1,
+      "message": "Better yet, could you introduce a wrapping function that issues the HVC and parses the 4 32-bit values as a single `Uuid` (see SMCCC section 5.3) i.e. `fn() -\u003e smccc::Result\u003cuuid::Uuid\u003e`? `match`-ing on the UUID will then come naturally.",
+      "parentUuid": "d36de32b_877663b8",
       "range": {
         "startLine": 111,
         "startChar": 34,
