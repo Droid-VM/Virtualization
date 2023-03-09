@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffbf5c92_45410ea1",
+        "filename": "microdroid/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-09T13:02:24Z",
+      "side": 1,
+      "message": "This should mention that only passing those DT properties to the host won\u0027t be enough and they must also be passed through pvmfw\u0027s config data. Otherwise, pvmfw will silently drop the corresponding arguments from the guest DT. We could also document this behaviour in `pvmfw/README.md` and link to that section from here.",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 70
+      },
+      "revId": "6a338f5123aa07138d5b3b9d5673a5144dd1353c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ed68a66_c2dd6d08",
+        "filename": "microdroid/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-09T13:02:24Z",
+      "side": 1,
+      "message": "Could we document the behaviour in detail for when it\u0027s `\u003c0\u003e`, `\u003c1\u003e` or neither e.g.\n\n\u003e `/avf/guest/common/log\u003d\u003c1\u003e` enables [...] (disabled otherwise)\n\n(please check the default behaviour)",
+      "range": {
+        "startLine": 178,
+        "startChar": 42,
+        "endLine": 178,
+        "endChar": 43
+      },
+      "revId": "6a338f5123aa07138d5b3b9d5673a5144dd1353c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30669e04_9998abd1",
+        "filename": "microdroid/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-09T13:02:24Z",
+      "side": 1,
+      "message": "IMO, this path shouldn\u0027t be a sysfs path but a DT path i.e. drop the `/proc/device-tree`",
+      "range": {
+        "startLine": 178,
+        "startChar": 3,
+        "endLine": 178,
+        "endChar": 41
+      },
+      "revId": "6a338f5123aa07138d5b3b9d5673a5144dd1353c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6a9327f_f70daeaf",
+        "filename": "microdroid/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-09T13:02:24Z",
+      "side": 1,
+      "message": "\"required\"",
+      "range": {
+        "startLine": 183,
+        "startChar": 24,
+        "endLine": 183,
+        "endChar": 32
+      },
+      "revId": "6a338f5123aa07138d5b3b9d5673a5144dd1353c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f1e3524_760ffa66",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-09T13:02:24Z",
+      "side": 1,
+      "message": "\"Device Tree Overlay\" for consistency",
+      "range": {
+        "startLine": 224,
+        "startChar": 9,
+        "endLine": 224,
+        "endChar": 28
+      },
+      "revId": "6a338f5123aa07138d5b3b9d5673a5144dd1353c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a2b5d8d_03457bc8",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-09T13:02:24Z",
+      "side": 1,
+      "message": "Beyond the supported DP DTBO nodes and properties, it might be good to document here what pvmfw does for each property as users might not understand that \"disable console output\" actually only removes some Linux cmdline args (as opposed to disabling the output at a more fundamental level such as disabling the device).",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 49
+      },
+      "revId": "6a338f5123aa07138d5b3b9d5673a5144dd1353c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e5e3a70_f8d805c8",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-09T13:02:24Z",
+      "side": 1,
+      "message": "\"required\"",
+      "range": {
+        "startLine": 253,
+        "startChar": 24,
+        "endLine": 253,
+        "endChar": 32
+      },
+      "revId": "6a338f5123aa07138d5b3b9d5673a5144dd1353c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
