@@ -31,5 +31,7 @@
 
     <test class="com.android.compatibility.common.tradefed.testtype.JarHostTest" >
         <option name="jar" value="ComposHostTestCases.jar" />
+        <option name="runtime-hint" value="30m" />
+        <option name="test-case-timeout" value="15m" />
     </test>
 </configuration>
