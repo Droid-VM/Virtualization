@@ -440,7 +440,6 @@ public abstract class MicrodroidDeviceTestBase {
                 ByteArrayOutputStream out = new ByteArrayOutputStream()) {
             is.transferTo(out);
             String stdout = out.toString("UTF-8");
-            Log.i(tag, "Got stdout : " + stdout);
             return stdout;
         } catch (IOException e) {
             Log.e(tag, "Error executing: " + command, e);
