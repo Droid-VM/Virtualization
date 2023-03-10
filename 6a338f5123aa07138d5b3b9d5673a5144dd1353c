@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "de946127_5a0cb340",
+        "filename": "microdroid/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-10T15:11:57Z",
+      "side": 1,
+      "message": "What does crashdump mean? Are you talking about tombstone or something else?\n\nIf it\u0027s the tombstone, then debug policy doesn\u0027t support it for now.\n\nI think that we\u0027d better to add new debug policy node for it. What do you think?",
+      "parentUuid": "0a0e87c0_f3e9bc0e",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 49
+      },
+      "revId": "6a338f5123aa07138d5b3b9d5673a5144dd1353c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ffbf5c92_45410ea1",
         "filename": "microdroid/README.md",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-09T13:02:24Z",
       "side": 1,
       "message": "This should mention that only passing those DT properties to the host won\u0027t be enough and they must also be passed through pvmfw\u0027s config data. Otherwise, pvmfw will silently drop the corresponding arguments from the guest DT. We could also document this behaviour in `pvmfw/README.md` and link to that section from here.",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 70
+      },
+      "revId": "6a338f5123aa07138d5b3b9d5673a5144dd1353c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2233d9f_4ae734d5",
+        "filename": "microdroid/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-10T15:11:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffbf5c92_45410ea1",
       "range": {
         "startLine": 176,
         "startChar": 0,
@@ -117,6 +165,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "497d539f_c6e697ac",
+        "filename": "microdroid/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-10T15:11:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ed68a66_c2dd6d08",
+      "range": {
+        "startLine": 178,
+        "startChar": 42,
+        "endLine": 178,
+        "endChar": 43
+      },
+      "revId": "6a338f5123aa07138d5b3b9d5673a5144dd1353c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "744c942b_1e094a0f",
+        "filename": "microdroid/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-10T15:11:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afa12fff_930c5587",
+      "range": {
+        "startLine": 178,
+        "startChar": 3,
+        "endLine": 178,
+        "endChar": 41
+      },
+      "revId": "6a338f5123aa07138d5b3b9d5673a5144dd1353c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6a9327f_f70daeaf",
@@ -130,6 +226,30 @@
       "writtenOn": "2023-03-09T13:02:24Z",
       "side": 1,
       "message": "\"required\"",
+      "range": {
+        "startLine": 183,
+        "startChar": 24,
+        "endLine": 183,
+        "endChar": 32
+      },
+      "revId": "6a338f5123aa07138d5b3b9d5673a5144dd1353c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be3cb157_e9a98122",
+        "filename": "microdroid/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-10T15:11:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6a9327f_f70daeaf",
       "range": {
         "startLine": 183,
         "startChar": 24,
@@ -163,6 +283,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29044384_acab4353",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-10T15:11:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f1e3524_760ffa66",
+      "range": {
+        "startLine": 224,
+        "startChar": 9,
+        "endLine": 224,
+        "endChar": 28
+      },
+      "revId": "6a338f5123aa07138d5b3b9d5673a5144dd1353c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a2b5d8d_03457bc8",
@@ -186,6 +330,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cc4c653_a5671aa6",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-10T15:11:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a2b5d8d_03457bc8",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 49
+      },
+      "revId": "6a338f5123aa07138d5b3b9d5673a5144dd1353c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e5e3a70_f8d805c8",
@@ -199,6 +367,30 @@
       "writtenOn": "2023-03-09T13:02:24Z",
       "side": 1,
       "message": "\"required\"",
+      "range": {
+        "startLine": 253,
+        "startChar": 24,
+        "endLine": 253,
+        "endChar": 32
+      },
+      "revId": "6a338f5123aa07138d5b3b9d5673a5144dd1353c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d71b07bc_75e58699",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-10T15:11:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e5e3a70_f8d805c8",
       "range": {
         "startLine": 253,
         "startChar": 24,
