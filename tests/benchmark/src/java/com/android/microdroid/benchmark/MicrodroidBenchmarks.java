@@ -44,6 +44,7 @@ import com.android.microdroid.test.device.MicrodroidDeviceTestBase;
 import com.android.microdroid.testservice.IBenchmarkService;
 import com.android.microdroid.testservice.ITestService;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -96,6 +97,24 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
 
     private Instrumentation mInstrumentation;
 
+    private boolean mTeardownDebugfs;
+
+    private void setupDebugfs(Function<String, String> shellExecutor) throws IOException {
+        String file = shellExecutor.apply("cat /proc/mounts");
+
+        mTeardownDebugfs = true;
+
+        for (String line : file.split("\n")) {
+            line = line.trim();
+
+            if (line.startsWith("debugfs "))
+                mTeardownDebugfs = false;
+        }
+
+        if (mTeardownDebugfs)
+            shellExecutor.apply("mount -t debugfs none /sys/kernel/debug");
+    }
+
     @Before
     public void setup() throws IOException {
         grantPermission(VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION);
@@ -103,6 +122,16 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         prepareTestSetup(mProtectedVm);
         setMaxPerformanceTaskProfile();
         mInstrumentation = getInstrumentation();
+        setupDebugfs(this::executeCommand);
+    }
+
+    @After
+    public void tearDown() throws IOException {
+        revokePermission(VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION);
+        revokePermission(VirtualMachine.USE_CUSTOM_VIRTUAL_MACHINE_PERMISSION);
+
+        if (mTeardownDebugfs)
+            executeCommand("umount /sys/kernel/debug");
     }
 
     private boolean canBootMicrodroidWithMemory(int mem)
@@ -391,6 +420,53 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         }
     }
 
+    private static class KvmVmStats {
+        public final long mProtectedHyp;
+        public final long mProtectedShared;
+
+        KvmVmStats(Function<String, String> shellExecutor) {
+            List<String> dirs;
+
+            try {
+                dirs = getKvmVmStatDirs(shellExecutor);
+                if (dirs.size() > 1)
+                    throw new RuntimeException(
+                            "expected to find exactly 1 KVM VM, found " +
+                            dirs.size());
+
+                mProtectedHyp =
+                    getKvmVmStat(shellExecutor, dirs.get(0), "protected_hyp_mem");
+                mProtectedShared =
+                    getKvmVmStat(shellExecutor, dirs.get(0), "protected_shared_mem");
+
+            } catch (Exception e) {
+                Log.e(TAG, "Error inside onPayloadReady():" + e);
+                throw new RuntimeException(e);
+            }
+        }
+
+        private List<String> getKvmVmStatDirs(Function<String, String> shellExecutor) {
+            String output = shellExecutor.apply("find /sys/kernel/debug/kvm/ -type d");
+            List<String> dirs = new ArrayList<String>();
+
+            for (String dir : output.split("\n")) {
+                dir = dir.trim();
+
+                if (dir.equals("/sys/kernel/debug/kvm/"))
+                    continue;
+
+                dirs.add(dir);
+            }
+
+            return dirs;
+        }
+
+        private int getKvmVmStat(Function<String, String> shellExecutor,
+                                   String dir, String name) {
+            return Integer.parseInt(shellExecutor.apply("cat " + dir + "/" + name).trim());
+        }
+    }
+
     @Test
     public void testMemoryUsage() throws Exception {
         final String vmName = "test_vm_mem_usage";
@@ -415,6 +491,8 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         double mem_crosvm_host_pss = (double) listener.mCrosvm.mHostPss / 1024.0;
         double mem_crosvm_guest_rss = (double) listener.mCrosvm.mGuestRss / 1024.0;
         double mem_crosvm_guest_pss = (double) listener.mCrosvm.mGuestPss / 1024.0;
+        double mem_protected_shared = (double) listener.mKvm.mProtectedShared / 1048576.0;
+        double mem_protected_hyp = (double) listener.mKvm.mProtectedHyp / 1024.0;
 
         double mem_kernel = mem_overall - mem_total;
         double mem_used = mem_total - mem_free - mem_buffers - mem_cached - mem_slab;
@@ -431,6 +509,8 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         bundle.putDouble(METRIC_NAME_PREFIX + "mem_crosvm_host_pss_MB", mem_crosvm_host_pss);
         bundle.putDouble(METRIC_NAME_PREFIX + "mem_crosvm_guest_rss_MB", mem_crosvm_guest_rss);
         bundle.putDouble(METRIC_NAME_PREFIX + "mem_crosvm_guest_pss_MB", mem_crosvm_guest_pss);
+        bundle.putDouble(METRIC_NAME_PREFIX + "mem_protected_shared_MB", mem_protected_shared);
+        bundle.putDouble(METRIC_NAME_PREFIX + "mem_protected_hyp_kB", mem_protected_hyp);
         mInstrumentation.sendStatus(0, bundle);
     }
 
@@ -449,6 +529,7 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
         public long mSlab;
 
         public CrosvmStats mCrosvm;
+        public KvmVmStats mKvm;
 
         @Override
         public void onPayloadReady(VirtualMachine vm, IBenchmarkService service)
@@ -460,6 +541,7 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
             mCached = service.getMemInfoEntry("Cached");
             mSlab = service.getMemInfoEntry("Slab");
             mCrosvm = new CrosvmStats(mShellExecutor);
+            mKvm = new KvmVmStats(mShellExecutor);
         }
     }
 
