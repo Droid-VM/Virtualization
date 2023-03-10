@@ -57,6 +57,11 @@ unsafe extern "C" fn malloc(size: usize) -> *mut c_void {
 }
 
 #[no_mangle]
+unsafe extern "C" fn calloc(size: usize) -> *mut c_void {
+    calloc_(size).map_or(ptr::null_mut(), |p| p.cast::<c_void>().as_ptr())
+}
+
+#[no_mangle]
 unsafe extern "C" fn free(ptr: *mut c_void) {
     if let Some(ptr) = NonNull::new(ptr).map(|p| p.cast::<usize>().as_ptr().offset(-1)) {
         if let Some(size) = NonZeroUsize::new(*ptr) {
@@ -70,6 +75,14 @@ unsafe extern "C" fn free(ptr: *mut c_void) {
 unsafe fn malloc_(size: usize) -> Option<NonNull<usize>> {
     let size = NonZeroUsize::new(size)?.checked_add(mem::size_of::<usize>())?;
     let ptr = HEAP_ALLOCATOR.alloc(malloc_layout(size)?);
+    let ptr = NonNull::new(ptr)?.cast::<usize>().as_ptr();
+    *ptr = size.get();
+    NonNull::new(ptr.offset(1))
+}
+
+unsafe fn calloc_(size: usize) -> Option<NonNull<usize>> {
+    let size = NonZeroUsize::new(size)?.checked_add(mem::size_of::<usize>())?;
+    let ptr = HEAP_ALLOCATOR.alloc_zeroed(malloc_layout(size)?);
     let ptr = NonNull::new(ptr)?.cast::<usize>().as_ptr();
     *ptr = size.get();
     NonNull::new(ptr.offset(1))
