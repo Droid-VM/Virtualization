@@ -141,6 +141,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe56b158_1184c39b",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-03-13T15:22:09Z",
+      "side": 1,
+      "message": "Looking at CrosvmStats(), it seemed to do the same assumption. I don\u0027t see any way of identifying the VM we\u0027ve just started. Is that expected?\n\nThe VM can be identified with the crossvm PID (and the fd number it got for that VM), but I didn\u0027t use that as I thought the number of crosvm instances was limited anyway.",
+      "parentUuid": "a90e2a12_ac8f2332",
+      "range": {
+        "startLine": 432,
+        "startChar": 0,
+        "endLine": 432,
+        "endChar": 36
+      },
+      "revId": "97e97427370a26349e4cc4e1de3fe198a10e369d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79f22b34_e0a90f3d",
         "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
         "patchSetId": 2
