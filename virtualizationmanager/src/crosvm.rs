@@ -73,7 +73,7 @@ const CROSVM_CRASH_STATUS: i32 = 33;
 /// The exit status which crosvm returns when vcpu is stalled.
 const CROSVM_WATCHDOG_REBOOT_STATUS: i32 = 36;
 /// The size of memory (in MiB) reserved for ramdump
-const RAMDUMP_RESERVED_MIB: u32 = 17;
+const RAMDUMP_RESERVED_MIB: u32 = 25;
 
 const MILLIS_PER_SEC: i64 = 1000;
 
