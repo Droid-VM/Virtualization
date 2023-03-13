@@ -55,6 +55,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c197d582_ca1c120c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-03-13T08:49:01Z",
+      "side": 1,
+      "message": "Thanks for the feedback! Am working on it.",
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba33b042_aa7efe0c",
         "filename": "pvmfw/src/entry.rs",
         "patchSetId": 1
@@ -141,6 +158,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eac92c2d_1fc04b7a",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-03-13T08:49:01Z",
+      "side": 1,
+      "message": "Do you prefer we add \"gunyah_\" related HVC calls in hvc.rs itself? As we add support for other hypervisors, I feel it will get cluttered. Perhaps create hvc/kvm.rs to have KVM specific hvc etc?\n\nOtherwise sounds good. Am working on next version based on this feedback. Thanks!",
+      "parentUuid": "0cd6a9fe_93f1ea49",
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a1d8ef1b_c68b93f3",
         "filename": "pvmfw/src/hvc.rs",
         "patchSetId": 1
@@ -152,6 +187,30 @@
       "writtenOn": "2023-03-09T13:59:53Z",
       "side": 1,
       "message": "why?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 27
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2dfd666_39eb55f0",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-03-13T08:49:01Z",
+      "side": 1,
+      "message": "Will be fixing these in the next version. I just uploaded to get comments on the overall approach. Will be working on submitting the next version shortly with comments addressed.",
+      "parentUuid": "a1d8ef1b_c68b93f3",
       "range": {
         "startLine": 17,
         "startChar": 0,
