@@ -176,6 +176,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a69bab13_fe1d01f0",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-13T09:28:54Z",
+      "side": 1,
+      "message": "Yes, we might need to break down the low-level HVC functions into their own respective files if `hvc.rs` starts getting out of hand but that doesn\u0027t seem to be the case here as this CL doesn\u0027t introduce any Gunyah-specific HVCs, right?\n\nThanks for the update!",
+      "parentUuid": "eac92c2d_1fc04b7a",
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a1d8ef1b_c68b93f3",
         "filename": "pvmfw/src/hvc.rs",
         "patchSetId": 1
