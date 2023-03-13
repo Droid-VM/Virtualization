@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c986ca55_3ce9f093",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-13T09:47:11Z",
+      "side": 1,
+      "message": "nit: This isn\u0027t code so no need for backticks.",
+      "range": {
+        "startLine": 240,
+        "startChar": 28,
+        "endLine": 240,
+        "endChar": 34
+      },
+      "revId": "bef2568aec8b5458ecca54b696102b8bab388b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a1e3db0_ef7b9f02",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-13T09:47:11Z",
+      "side": 1,
+      "message": "\"apply\"?",
+      "range": {
+        "startLine": 268,
+        "startChar": 46,
+        "endLine": 268,
+        "endChar": 53
+      },
+      "revId": "bef2568aec8b5458ecca54b696102b8bab388b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0faafde_a15fbf7d",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-13T09:47:11Z",
+      "side": 1,
+      "message": "See Jiyong\u0027s comment about this README not being an AVF porting guide; although this requirement _should_ be documented somewhere, I\u0027m of the opinion that `pvmfw/README.md` isn\u0027t the right place, as it relates to implementation details of `virtualizationmanager`/host userspace.",
+      "range": {
+        "startLine": 268,
+        "startChar": 39,
+        "endLine": 268,
+        "endChar": 45
+      },
+      "revId": "bef2568aec8b5458ecca54b696102b8bab388b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0702ac69_cb9f4b78",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-13T09:47:11Z",
+      "side": 1,
+      "message": "\"kernel logs\"? The way it\u0027s expressed now may be confusing as the UART will always receive pvmfw output and the console is created by the host.",
+      "range": {
+        "startLine": 274,
+        "startChar": 43,
+        "endLine": 274,
+        "endChar": 51
+      },
+      "revId": "bef2568aec8b5458ecca54b696102b8bab388b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4dc0ae0_1f618a3c",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-13T09:47:11Z",
+      "side": 1,
+      "message": "nit: Isn\u0027t the high-level name of this \"Kdump\"?",
+      "range": {
+        "startLine": 275,
+        "startChar": 47,
+        "endLine": 275,
+        "endChar": 54
+      },
+      "revId": "bef2568aec8b5458ecca54b696102b8bab388b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40cfd33c_025cf871",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-13T09:47:11Z",
+      "side": 1,
+      "message": "nit: just add the newline with the proper indentation?\n```\n- `/avf/guest/microdroid/adb`: `\u003c1\u003e` to enable `adb` for microdroid.\n\n    Logcat output will be printed to console. Ignored otherwise.\n```",
+      "range": {
+        "startLine": 276,
+        "startChar": 68,
+        "endLine": 276,
+        "endChar": 69
+      },
+      "revId": "bef2568aec8b5458ecca54b696102b8bab388b5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
