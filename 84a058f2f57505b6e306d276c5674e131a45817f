@@ -39,6 +39,30 @@
       },
       "revId": "84a058f2f57505b6e306d276c5674e131a45817f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f33eaa51_d8d18844",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-13T13:45:40Z",
+      "side": 1,
+      "message": "\u003e Doesn\u0027t calloc take 2 args?\n\nOops! Thanks for catching that!\n\n\u003e And why not implement it as `malloc(nmemb * size)`?\n\n`calloc` also `memset(0)`, right? We might as well make use of what `LockedHeap` provides?",
+      "parentUuid": "9de82331_11b29587",
+      "range": {
+        "startLine": 60,
+        "startChar": 21,
+        "endLine": 60,
+        "endChar": 27
+      },
+      "revId": "84a058f2f57505b6e306d276c5674e131a45817f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
