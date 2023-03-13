@@ -14,10 +14,19 @@
 
 //! High-level FDT functions.
 
+use crate::helpers::GUEST_PAGE_SIZE;
+use crate::RebootReason;
 use core::ffi::CStr;
 use core::ops::Range;
+use fdtpci::PciMemoryFlags;
+use fdtpci::PciRangeType;
+use libfdt::AddressRange;
+use libfdt::CellIterator;
 use libfdt::Fdt;
 use libfdt::FdtError;
+use log::error;
+
+const RAM_BASE_ADDR: u64 = 0x8000_0000;
 
 /// Extract from /config the address range containing the pre-loaded kernel.
 pub fn kernel_range(fdt: &libfdt::Fdt) -> libfdt::Result<Option<Range<usize>>> {
@@ -49,6 +58,397 @@ pub fn initrd_range(fdt: &libfdt::Fdt) -> libfdt::Result<Option<Range<usize>>> {
     }
 
     Ok(None)
+}
+
+/// Read and validate the size and base address of memory, and returns the size
+fn parse_memory_node(fdt: &libfdt::Fdt) -> Result<usize, RebootReason> {
+    let memory_range = fdt
+        .memory()
+        // Actually, these checks are unnecessary because we read /memory node in entry.rs
+        // where the exactly same checks are done. We are repeating the same check just for
+        // extra safety (in case when the code structure changes in the future).
+        .map_err(|e| {
+            error!("Failed to get /memory from the DT: {e}");
+            RebootReason::InvalidFdt
+        })?
+        .ok_or_else(|| {
+            error!("Node /memory was found empty");
+            RebootReason::InvalidFdt
+        })?
+        .next()
+        .ok_or_else(|| {
+            error!("Failed to read memory range from the DT");
+            RebootReason::InvalidFdt
+        })?;
+
+    let base = memory_range.start;
+    if base as u64 != RAM_BASE_ADDR {
+        error!("Memory base address {:#x} is not {:#x}", base, RAM_BASE_ADDR);
+        return Err(RebootReason::InvalidFdt);
+    }
+
+    let size = memory_range.end - memory_range.start; // end is exclusive
+    if size % GUEST_PAGE_SIZE != 0 {
+        error!("Memory size {:#x} is not a multiple of page size {:#x}", size, GUEST_PAGE_SIZE);
+        return Err(RebootReason::InvalidFdt);
+    }
+    // In the u-boot implementation, we checked if base + size > u64::MAX, but we don't need that
+    // because memory() function uses checked_add when constructing the Range object. If an
+    // overflow happened, we should have gotten None from the next() call above and would have
+    // bailed already.
+
+    Ok(size)
+}
+
+/// Read the number of CPUs
+fn parse_cpu_nodes(fdt: &libfdt::Fdt) -> Result<usize, RebootReason> {
+    Ok(fdt
+        .compatible_nodes(CStr::from_bytes_with_nul(b"arm,arm-v8\0").unwrap())
+        .map_err(|e| {
+            error!("Failed to read compatible nodes \"arm,arm-v8\" from DT: {e}");
+            RebootReason::InvalidFdt
+        })?
+        .count())
+}
+
+#[derive(Debug)]
+#[allow(dead_code)] // TODO: remove this
+struct PciInfo {
+    range_low: Range<u64>,
+    range_high: Range<u64>,
+    num_irq: usize,
+}
+
+/// Read and validate PCI node
+fn parse_pci_nodes(fdt: &libfdt::Fdt) -> Result<PciInfo, RebootReason> {
+    let node = fdt
+        .compatible_nodes(CStr::from_bytes_with_nul(b"pci-host-cam-generic\0").unwrap())
+        .map_err(|e| {
+            error!("Failed to read compatible node \"pci-host-cam-generic\" from DT: {e}");
+            RebootReason::InvalidFdt
+        })?
+        .next()
+        .ok_or_else(|| {
+            error!("Compatible node \"pci-host-cam-generic\" doesn't exist");
+            RebootReason::InvalidFdt // why should this be an error? a VM without any pci is
+                                     // possible?
+        })?;
+
+    let mut iter = node
+        .ranges::<(u32, u64), u64, u64>()
+        .map_err(|e| {
+            error!("Failed to read ranges from PCI node: {e}");
+            RebootReason::InvalidFdt
+        })?
+        .ok_or_else(|| {
+            error!("PCI node missing ranges property");
+            RebootReason::InvalidFdt
+        })?;
+
+    let range_low = iter.next().ok_or_else(|| {
+        error!("Low range missing in PCI node");
+        RebootReason::InvalidFdt
+    })?;
+    let range_low = get_and_validate_pci_range(&range_low)?;
+
+    let range_high = iter.next().ok_or_else(|| {
+        error!("High range missing in PCI node");
+        RebootReason::InvalidFdt
+    })?;
+    let range_high = get_and_validate_pci_range(&range_high)?;
+
+    let num_irq = count_and_validate_pci_irq_masks(&node)?;
+
+    validate_pci_irq_maps(&node)?;
+
+    Ok(PciInfo { range_low, range_high, num_irq })
+}
+
+fn get_and_validate_pci_range(
+    range: &AddressRange<(u32, u64), u64, u64>,
+) -> Result<Range<u64>, RebootReason> {
+    let range_type = PciMemoryFlags(range.addr.0).range_type();
+    let bus_addr = range.addr.1;
+    let cpu_addr = range.parent_addr;
+    let size = range.size;
+    if range_type != PciRangeType::Memory64 {
+        error!("Invalid range type {:?} in PCI node", range_type);
+        return Err(RebootReason::InvalidFdt);
+    }
+    // Enforce ID bus-to-cpu mappings, as used by crosvm.
+    if bus_addr != cpu_addr {
+        error!("PCI bus address: {:#x} is different from CPU address: {:#x}", bus_addr, cpu_addr);
+        return Err(RebootReason::InvalidFdt);
+    }
+    let bus_end = bus_addr.checked_add(size).ok_or_else(|| {
+        error!("PCI address range size {:#x} too big", size);
+        RebootReason::InvalidFdt
+    })?;
+    Ok(bus_addr..bus_end)
+}
+
+/// Iterator that takes N cells as a chunk
+struct CellChunkIterator<'a, const N: usize> {
+    cells: CellIterator<'a>,
+}
+
+impl<'a, const N: usize> CellChunkIterator<'a, N> {
+    fn new(cells: CellIterator<'a>) -> Self {
+        Self { cells }
+    }
+}
+
+impl<'a, const N: usize> Iterator for CellChunkIterator<'a, N> {
+    type Item = [u32; N];
+    fn next(&mut self) -> Option<Self::Item> {
+        let mut ret: Self::Item = [0; N];
+        for i in ret.iter_mut() {
+            if let Some(v) = self.cells.next() {
+                *i = v;
+            } else {
+                // Not enough cells
+                return None;
+            }
+        }
+        Some(ret)
+    }
+}
+
+fn count_and_validate_pci_irq_masks(pci_node: &libfdt::FdtNode) -> Result<usize, RebootReason> {
+    const IRQ_MASK_CELLS: usize = 4;
+    const IRQ_MASK_ADDR_HI: u32 = 0xf800;
+    const IRQ_MASK_ADDR_ME: u32 = 0x0;
+    const IRQ_MASK_ADDR_LO: u32 = 0x0;
+    const IRQ_MASK_ANY_IRQ: u32 = 0x7;
+    const EXPECTED: [u32; IRQ_MASK_CELLS] =
+        [IRQ_MASK_ADDR_HI, IRQ_MASK_ADDR_ME, IRQ_MASK_ADDR_LO, IRQ_MASK_ANY_IRQ];
+    let name = CStr::from_bytes_with_nul(b"interrupt-map-mask\0").unwrap();
+    let mut irq_count: usize = 0;
+    for irq_mask in CellChunkIterator::<IRQ_MASK_CELLS>::new(
+        pci_node
+            .getprop_cells(name)
+            .map_err(|e| {
+                error!("Failed to read interrupt-map-mask property: {e}");
+                RebootReason::InvalidFdt
+            })?
+            .ok_or_else(|| {
+                error!("PCI node missing interrupt-map-mask property");
+                RebootReason::InvalidFdt
+            })?,
+    ) {
+        if irq_mask != EXPECTED {
+            error!("invalid irq mask {:?}", irq_mask);
+            return Err(RebootReason::InvalidFdt);
+        }
+        irq_count += 1;
+    }
+    Ok(irq_count)
+}
+
+fn validate_pci_irq_maps(pci_node: &libfdt::FdtNode) -> Result<(), RebootReason> {
+    const IRQ_MAP_CELLS: usize = 10;
+    const PCI_DEVICE_IDX: usize = 11;
+    const PCI_IRQ_ADDR_ME: u32 = 0;
+    const PCI_IRQ_ADDR_LO: u32 = 0;
+    const PCI_IRQ_INTC: u32 = 1;
+    const AARCH64_IRQ_BASE: u32 = 4; // from external/crosvm/aarch64/src/lib.rs
+    const GIC_SPI: u32 = 0;
+    const IRQ_TYPE_LEVEL_HIGH: u32 = 4;
+
+    let name = CStr::from_bytes_with_nul(b"interrupt-map\0").unwrap();
+    for (i, irq_map) in CellChunkIterator::<IRQ_MAP_CELLS>::new(
+        pci_node
+            .getprop_cells(name)
+            .map_err(|e| {
+                error!("Failed to read interrupt-map property: {e}");
+                RebootReason::InvalidFdt
+            })?
+            .ok_or_else(|| {
+                error!("PCI node missing interrupt-map property");
+                RebootReason::InvalidFdt
+            })?,
+    )
+    .enumerate()
+    {
+        let expected_addr_hi: u32 = (i + 1) as u32 * (0x1 << PCI_DEVICE_IDX);
+        let expected_irq_number: u32 = AARCH64_IRQ_BASE + i as u32;
+
+        let pci_addr_hi = irq_map[0];
+        let pci_addr_mid = irq_map[1];
+        let pci_addr_lo = irq_map[2];
+        let pci_irq_number = irq_map[3];
+        let _controller_phandle = irq_map[4]; // skipped.
+                                              // address-cells is <2> for GIC
+        let gic_addr_hi = irq_map[5];
+        let gic_addr_lo = irq_map[6];
+        // interrupt-cells is <3> for GIC
+        let gic_peripheral_interrupt_type = irq_map[7];
+        let gic_irq_number = irq_map[8];
+        let gic_irq_type = irq_map[9];
+
+        if pci_addr_hi != expected_addr_hi
+            || pci_addr_mid != PCI_IRQ_ADDR_ME
+            || pci_addr_lo != PCI_IRQ_ADDR_LO
+        {
+            error!("PCI device address {:#x} {:#x} {:#x} in interrupt-map is different from expected address \
+                   {:#x} {:#x} {:#x}",
+                   pci_addr_hi, pci_addr_mid, pci_addr_lo,
+                   expected_addr_hi, PCI_IRQ_ADDR_ME, PCI_IRQ_ADDR_LO);
+            return Err(RebootReason::InvalidFdt);
+        }
+        if pci_irq_number != PCI_IRQ_INTC {
+            error!(
+                "PCI INT# {:#x} in interrupt-map is different from expected value {:#x}",
+                pci_irq_number, PCI_IRQ_INTC
+            );
+            return Err(RebootReason::InvalidFdt);
+        }
+        if gic_addr_hi != 0 || gic_addr_lo != 0 {
+            error!(
+                "GIC address {:#x} {:#x} in interrupt-map is different from expected address \
+                   {:#x} {:#x}",
+                gic_addr_hi, gic_addr_lo, 0, 0
+            );
+            return Err(RebootReason::InvalidFdt);
+        }
+        if gic_peripheral_interrupt_type != GIC_SPI {
+            error!("GIC peripheral interrupt type {:#x} in interrupt-map is different from expected value \
+                   {:#x}", gic_peripheral_interrupt_type, GIC_SPI);
+            return Err(RebootReason::InvalidFdt);
+        }
+        if gic_irq_number != expected_irq_number {
+            error!(
+                "GIC irq number {:#x} in interrupt-map is unexpected. Expected {:#x}",
+                gic_irq_number, expected_irq_number
+            );
+            return Err(RebootReason::InvalidFdt);
+        }
+        if gic_irq_type != IRQ_TYPE_LEVEL_HIGH {
+            error!(
+                "IRQ type in {:#x} is invalid. Must be LEVEL_HIGH {:#x}",
+                gic_irq_type, IRQ_TYPE_LEVEL_HIGH
+            );
+            return Err(RebootReason::InvalidFdt);
+        }
+    }
+    Ok(())
+}
+
+const SERIAL_MAX_COUNT: usize = 4;
+#[derive(Default, Debug)]
+#[allow(dead_code)] // TODO: remove this
+pub struct SerialInfo {
+    addrs: [u64; SERIAL_MAX_COUNT],
+    count: usize,
+}
+
+fn parse_serial_nodes(fdt: &libfdt::Fdt) -> Result<SerialInfo, RebootReason> {
+    let mut ret: SerialInfo = Default::default();
+    for (i, node) in fdt
+        .compatible_nodes(CStr::from_bytes_with_nul(b"ns16550a\0").unwrap())
+        .map_err(|e| {
+            error!("Failed to read compatible nodes \"ns16550a\" from DT: {e}");
+            RebootReason::InvalidFdt
+        })?
+        .enumerate()
+    {
+        if i >= SERIAL_MAX_COUNT {
+            error!("Too many serials: {i}");
+            return Err(RebootReason::InvalidFdt);
+        }
+        let reg = node
+            .reg()
+            .map_err(|e| {
+                error!("Failed to read reg property from \"ns16550a\" node: {e}");
+                RebootReason::InvalidFdt
+            })?
+            .ok_or_else(|| {
+                error!("No reg property in \"ns16550a\" node");
+                RebootReason::InvalidFdt
+            })?
+            .next()
+            .ok_or_else(|| {
+                error!("No value in reg property of \"ns16550a\" node");
+                RebootReason::InvalidFdt
+            })?;
+        ret.addrs[i] = reg.addr;
+        ret.count += 1;
+    }
+    Ok(ret)
+}
+
+#[derive(Debug)]
+#[allow(dead_code)] // TODO: remove this
+pub struct SwiotlbInfo {
+    size: u64,
+    align: u64,
+}
+
+fn parse_swiotlb_nodes(fdt: &libfdt::Fdt) -> Result<SwiotlbInfo, RebootReason> {
+    let node = fdt
+        .compatible_nodes(CStr::from_bytes_with_nul(b"restricted-dma-pool\0").unwrap())
+        .map_err(|e| {
+            error!("Failed to read compatible nodes \"restricted-dma-pool\" from DT: {e}");
+            RebootReason::InvalidFdt
+        })?
+        .next()
+        .ok_or_else(|| {
+            error!("No compatible node \"restricted-dma-pool\" in DT");
+            RebootReason::InvalidFdt
+        })?;
+    let size = node
+        .getprop_u64(CStr::from_bytes_with_nul(b"size\0").unwrap())
+        .map_err(|e| {
+            error!("Failed to read \"size\" property of \"restricted-dma-pool\": {e}");
+            RebootReason::InvalidFdt
+        })?
+        .ok_or_else(|| {
+            error!("No \"size\" property in \"restricted-dma-pool\"");
+            RebootReason::InvalidFdt
+        })?;
+
+    let align = node
+        .getprop_u64(CStr::from_bytes_with_nul(b"alignment\0").unwrap())
+        .map_err(|e| {
+            error!("Failed to read \"alignment\" property of \"restricted-dma-pool\": {e}");
+            RebootReason::InvalidFdt
+        })?
+        .ok_or_else(|| {
+            error!("No \"alignment\" property in \"restricted-dma-pool\"");
+            RebootReason::InvalidFdt
+        })?;
+
+    if size == 0 || (size % GUEST_PAGE_SIZE as u64) != 0 {
+        error!("Invalid swiotlb size {:#x}", size);
+        return Err(RebootReason::InvalidFdt);
+    }
+
+    if (align % GUEST_PAGE_SIZE as u64) != 0 {
+        error!("Invalid swiotlb alignment {:#x}", align);
+        return Err(RebootReason::InvalidFdt);
+    }
+
+    Ok(SwiotlbInfo { size, align })
+}
+
+#[derive(Debug)]
+#[allow(dead_code)] // TODO: remove this
+pub struct DeviceTreeInfo {
+    memory_size: usize,
+    num_cpu: usize,
+    pci_info: PciInfo,
+    serial_info: SerialInfo,
+    swiotlb_info: SwiotlbInfo,
+}
+
+pub fn parse_device_tree(fdt: &libfdt::Fdt) -> Result<DeviceTreeInfo, RebootReason> {
+    Ok(DeviceTreeInfo {
+        memory_size: parse_memory_node(fdt)?,
+        num_cpu: parse_cpu_nodes(fdt)?,
+        pci_info: parse_pci_nodes(fdt)?,
+        serial_info: parse_serial_nodes(fdt)?,
+        swiotlb_info: parse_swiotlb_nodes(fdt)?,
+    })
 }
 
 /// Modifies the input DT according to the fields of the configuration.
