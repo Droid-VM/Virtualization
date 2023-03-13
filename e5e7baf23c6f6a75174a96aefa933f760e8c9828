@@ -94,6 +94,30 @@
       },
       "revId": "e5e7baf23c6f6a75174a96aefa933f760e8c9828",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4ec99d7_89a2e511",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-13T15:37:24Z",
+      "side": 0,
+      "message": "I was assuming we\u0027d leave most of them with the logging, and only remove ones that seem excessively verbose.\n\nIn general I\u0027ve had more of an issue with not being able to figure out why something broke than too much logging.",
+      "parentUuid": "9a7367ad_24e868e4",
+      "range": {
+        "startLine": 443,
+        "startChar": 0,
+        "endLine": 443,
+        "endChar": 49
+      },
+      "revId": "e5e7baf23c6f6a75174a96aefa933f760e8c9828",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
