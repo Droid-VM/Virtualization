@@ -70,6 +70,30 @@
       },
       "revId": "e5e7baf23c6f6a75174a96aefa933f760e8c9828",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a7367ad_24e868e4",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-03-13T15:03:56Z",
+      "side": 0,
+      "message": "Would we move everything to the `NoLog` flavour then?\n\nI don\u0027t have a strong opinion here. This line sounded like something that has been missed at some point and polluting the test logs.",
+      "parentUuid": "e31d03ae_c9903410",
+      "range": {
+        "startLine": 443,
+        "startChar": 0,
+        "endLine": 443,
+        "endChar": 49
+      },
+      "revId": "e5e7baf23c6f6a75174a96aefa933f760e8c9828",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
