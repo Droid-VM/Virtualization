@@ -46,6 +46,30 @@
       },
       "revId": "25c8621aeb48348dd342849120fc0c6e045c2465",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98a03ced_0963c93f",
+        "filename": "libs/apkverify/tests/apkverify_test.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-03-13T13:04:48Z",
+      "side": 1,
+      "message": "While this test may indicate that the result is acceptable, it does not provide any insight into its contents. Therefore, if someone were to make an unexpected alteration to the public key in relation to different versions, this test would not be able to detect it.\nHowever, I agree that it is better to have this test than no test at all.",
+      "parentUuid": "ee9d5741_3f2218a6",
+      "range": {
+        "startLine": 121,
+        "startChar": 4,
+        "endLine": 125,
+        "endChar": 25
+      },
+      "revId": "25c8621aeb48348dd342849120fc0c6e045c2465",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
