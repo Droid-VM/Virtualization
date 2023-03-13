@@ -46,6 +46,30 @@
       },
       "revId": "e5e7baf23c6f6a75174a96aefa933f760e8c9828",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e31d03ae_c9903410",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-13T14:58:56Z",
+      "side": 0,
+      "message": "Could we make the logging optional (e.g. add a runInShellNoLog)?\nI sympathize, but I also feel we often have failures where this sort of logging is really helpful.",
+      "parentUuid": "d1317778_5f4efc32",
+      "range": {
+        "startLine": 443,
+        "startChar": 0,
+        "endLine": 443,
+        "endChar": 49
+      },
+      "revId": "e5e7baf23c6f6a75174a96aefa933f760e8c9828",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
