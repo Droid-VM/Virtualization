@@ -16,6 +16,29 @@
       "message": "Thank you!",
       "revId": "84a058f2f57505b6e306d276c5674e131a45817f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9de82331_11b29587",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-13T12:44:28Z",
+      "side": 1,
+      "message": "Doesn\u0027t calloc take 2 args? The POSIX signature is:\n```\nvoid *calloc(size_t nmemb, size_t size);\n```\n\nAnd why not implement it as `malloc(nmemb * size)`?",
+      "range": {
+        "startLine": 60,
+        "startChar": 21,
+        "endLine": 60,
+        "endChar": 27
+      },
+      "revId": "84a058f2f57505b6e306d276c5674e131a45817f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
