@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfa99bc2_8101e3b7",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-13T13:10:18Z",
+      "side": 1,
+      "message": "Just use `executeCommand` directly.",
+      "range": {
+        "startLine": 102,
+        "startChar": 30,
+        "endLine": 102,
+        "endChar": 68
+      },
+      "revId": "97e97427370a26349e4cc4e1de3fe198a10e369d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b276af4d_aa50905d",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-13T13:10:18Z",
+      "side": 1,
+      "message": "```\nmTeardownDebugfs \u003d !file\n    .lines()\n    .filter(line -\u003e line.startsWith(\"debugfs \")\n    .findAny()\n    .isPresent();\n```",
+      "range": {
+        "startLine": 105,
+        "startChar": 8,
+        "endLine": 112,
+        "endChar": 9
+      },
+      "revId": "97e97427370a26349e4cc4e1de3fe198a10e369d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "406b962c_1753d9ab",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-13T13:10:18Z",
+      "side": 1,
+      "message": "Putting it here will mount/unmount before/after every test case. How about you set `mTestdownDebugFs` to false here and call `setupDebugFs` from `testMemoryUsage` only? `tearDown` would stay the same",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 43
+      },
+      "revId": "97e97427370a26349e4cc4e1de3fe198a10e369d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a90e2a12_ac8f2332",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-13T13:10:18Z",
+      "side": 1,
+      "message": "Hmm, this is not a good idea. Android can run VMs in the background while this test is running. It will already do that infrequently for CompOS and Hades and it will only get worse as we add more use cases. Any way how to identify the VM?",
+      "range": {
+        "startLine": 432,
+        "startChar": 0,
+        "endLine": 432,
+        "endChar": 36
+      },
+      "revId": "97e97427370a26349e4cc4e1de3fe198a10e369d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79f22b34_e0a90f3d",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-13T13:10:18Z",
+      "side": 1,
+      "message": "What if `dirs.size() \u003d\u003d 0`?",
+      "range": {
+        "startLine": 438,
+        "startChar": 48,
+        "endLine": 438,
+        "endChar": 59
+      },
+      "revId": "97e97427370a26349e4cc4e1de3fe198a10e369d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e6eb415_da663c38",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-13T13:10:18Z",
+      "side": 1,
+      "message": "Why do you need `shellExecutor` for this? Can we use the Java API for walking directories and reading files? Or does `shellExecutor` give us root?",
+      "range": {
+        "startLine": 449,
+        "startChar": 0,
+        "endLine": 449,
+        "endChar": 87
+      },
+      "revId": "97e97427370a26349e4cc4e1de3fe198a10e369d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad07fb0e_50bf06fe",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-13T13:10:18Z",
+      "side": 1,
+      "message": "Hmm, I know I told you to put it here but just realizing that this adds a dependency on pKVM that we avoided so far.\n\nOption 1: move this to `AVFHostTestCases`, which contrary to its name is a pKVM-specific test. (we should rename it)\n\nOption 2: make these stats optional when another hypervisor is used. I think you have to do that anyway because pre-android14 kernels don\u0027t have the stats, right?\n\nI would lean towards 2 so the stats belong to the same VM already measured.",
+      "range": {
+        "startLine": 532,
+        "startChar": 0,
+        "endLine": 532,
+        "endChar": 31
+      },
+      "revId": "97e97427370a26349e4cc4e1de3fe198a10e369d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
