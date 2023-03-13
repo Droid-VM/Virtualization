@@ -22,6 +22,30 @@
       },
       "revId": "25c8621aeb48348dd342849120fc0c6e045c2465",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee9d5741_3f2218a6",
+        "filename": "libs/apkverify/tests/apkverify_test.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-13T12:29:33Z",
+      "side": 1,
+      "message": "That doesn\u0027t seem related to what this is testing?\n\nI see these as unit tests (despite the file access), and I\u0027d like to have each one fairly focused.\n\nAnd the various tests below seem similar.",
+      "parentUuid": "dca0ba00_eb6d3d71",
+      "range": {
+        "startLine": 121,
+        "startChar": 4,
+        "endLine": 125,
+        "endChar": 25
+      },
+      "revId": "25c8621aeb48348dd342849120fc0c6e045c2465",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
