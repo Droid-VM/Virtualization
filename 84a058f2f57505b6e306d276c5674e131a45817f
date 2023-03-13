@@ -63,6 +63,30 @@
       },
       "revId": "84a058f2f57505b6e306d276c5674e131a45817f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "227cf4f4_b387c6c6",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-13T13:48:48Z",
+      "side": 1,
+      "message": "\u003e We might as well make use of what LockedHeap provides?\n\nAh yeah, fair. But could we still dedup `malloc_` and `calloc_` with a boolean `please_zero` param?",
+      "parentUuid": "f33eaa51_d8d18844",
+      "range": {
+        "startLine": 60,
+        "startChar": 21,
+        "endLine": 60,
+        "endChar": 27
+      },
+      "revId": "84a058f2f57505b6e306d276c5674e131a45817f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
