@@ -420,6 +420,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95ca36fb_1ce1f6dc",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-03-14T14:23:46Z",
+      "side": 1,
+      "message": "One option we have is to avoid this run-time detection of the hypervisor and instead have a compile-time feature that will allow the binary to be built that works either for KVM or Gunyah (and not both). That would let us statically define Cur_Hypervisor to be either Kvm or Gunyah related (and avoid some of the unsafe constructs that it would otherwise require).\n\nThis would also mean that Qualcomm would enable the Gunyah specific feature flag in our build environment and the resulting image would only be used in Qualcomm products using Gunyah hypervisor.\n\nPls let me know if you prefer this static approach or a more dynamic runtime approach to determine current hypervisor.",
+      "parentUuid": "6da25b28_648aa7c0",
+      "range": {
+        "startLine": 103,
+        "startChar": 27,
+        "endLine": 103,
+        "endChar": 42
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f356635_dfec9984",
         "filename": "pvmfw/src/hvc.rs",
         "patchSetId": 1
@@ -886,6 +910,30 @@
       "writtenOn": "2023-03-13T21:01:49Z",
       "side": 1,
       "message": "This is hypervisor agnostic. Even KVM could elect to use the carveout based swiotlb. Could this be moved to hypervisor-agnostic module?",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 5
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e66eeb7c_8e0d7e2e",
+        "filename": "pvmfw/src/hvc/gunyah_hypervisor.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-03-14T14:23:46Z",
+      "side": 1,
+      "message": "Hmm - I think we can defer that until KVM comes around to exercising that path. AFAICS KVM has mem_shar APIs at runtime which it will stick for considerable time and hence no immediate benefite I can see from that abstraction. On similar grounds we decided not to move KVM specific hvcs to hvc/kvm.rs.",
+      "parentUuid": "27a41e3f_cbb580bc",
       "range": {
         "startLine": 76,
         "startChar": 0,
