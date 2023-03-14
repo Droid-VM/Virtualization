@@ -21,6 +21,8 @@ use crate::instance_manager::InstanceManager;
 use crate::odrefresh_task::OdrefreshTask;
 use android_system_composd::aidl::android::system::composd::{
     ICompilationTask::{BnCompilationTask, ICompilationTask},
+    ICompilationTaskCallback::BnCompilationTaskCallback,
+    ICompilationTaskCallback::FailureReason::FailureReason,
     ICompilationTaskCallback::ICompilationTaskCallback,
     IIsolatedCompilationService::{
         ApexSource::ApexSource, BnIsolatedCompilationService, IIsolatedCompilationService,
@@ -33,6 +35,35 @@ use compos_common::binder::to_binder_result;
 use compos_common::odrefresh::{PENDING_ARTIFACTS_SUBDIR, TEST_ARTIFACTS_SUBDIR};
 use rustutils::{users::AID_ROOT, users::AID_SYSTEM};
 use std::sync::Arc;
+
+/// A wrapper to another callback in order to perform extra actions
+struct WrappedCallback {
+    callback: Strong<dyn ICompilationTaskCallback>,
+}
+
+impl Interface for WrappedCallback {}
+
+impl ICompilationTaskCallback for WrappedCallback {
+    fn onSuccess(&self) -> binder::Result<()> {
+        enable_fsverity_recursively("/data/misc/apexdata/com.android.art/compos-pending")?;
+        self.callback.onSuccess()
+    }
+
+    fn onFailure(&self, reason: FailureReason, message: &str) -> binder::Result<()> {
+        self.callback.onFailure(reason, message)
+    }
+}
+
+impl WrappedCallback {
+    fn new(callback: Strong<dyn ICompilationTaskCallback>) -> WrappedCallback {
+        WrappedCallback { callback }
+    }
+}
+
+fn enable_fsverity_recursively(_base_dir: &str) -> binder::Result<()> {
+    // TODO(272587415): implement this
+    Ok(())
+}
 
 pub struct IsolatedCompilationService {
     instance_manager: Arc<InstanceManager>,
@@ -53,7 +84,10 @@ impl IIsolatedCompilationService for IsolatedCompilationService {
         callback: &Strong<dyn ICompilationTaskCallback>,
     ) -> binder::Result<Strong<dyn ICompilationTask>> {
         check_permissions()?;
-        to_binder_result(self.do_start_staged_apex_compile(callback))
+        let wrapped_callback = WrappedCallback::new(callback.clone());
+        let wrapped_callback =
+            BnCompilationTaskCallback::new_binder(wrapped_callback, BinderFeatures::default());
+        to_binder_result(self.do_start_staged_apex_compile(&wrapped_callback))
     }
 
     fn startTestCompile(
