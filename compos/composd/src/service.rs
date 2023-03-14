@@ -17,10 +17,13 @@
 //! Implementation of IIsolatedCompilationService, called from system server when compilation is
 //! desired.
 
+use crate::fsverity;
 use crate::instance_manager::InstanceManager;
 use crate::odrefresh_task::OdrefreshTask;
 use android_system_composd::aidl::android::system::composd::{
     ICompilationTask::{BnCompilationTask, ICompilationTask},
+    ICompilationTaskCallback::BnCompilationTaskCallback,
+    ICompilationTaskCallback::FailureReason::FailureReason,
     ICompilationTaskCallback::ICompilationTaskCallback,
     IIsolatedCompilationService::{
         ApexSource::ApexSource, BnIsolatedCompilationService, IIsolatedCompilationService,
@@ -30,9 +33,63 @@ use anyhow::{Context, Result};
 use binder::{self, BinderFeatures, ExceptionCode, Interface, Status, Strong, ThreadState};
 use compos_aidl_interface::aidl::com::android::compos::ICompOsService::CompilationMode::CompilationMode;
 use compos_common::binder::to_binder_result;
-use compos_common::odrefresh::{PENDING_ARTIFACTS_SUBDIR, TEST_ARTIFACTS_SUBDIR};
+use compos_common::odrefresh::{
+    ODREFRESH_OUTPUT_ROOT_DIR, PENDING_ARTIFACTS_SUBDIR, TEST_ARTIFACTS_SUBDIR,
+};
+use odsign_proto::odsign_info::OdsignInfo;
+use protobuf::Message;
 use rustutils::{users::AID_ROOT, users::AID_SYSTEM};
+use std::fs::File;
+use std::io;
+use std::os::fd::AsFd;
+use std::path::Path;
 use std::sync::Arc;
+
+/// A wrapper to another callback in order to perform extra actions
+struct WrappedCallback {
+    callback: Strong<dyn ICompilationTaskCallback>,
+}
+
+impl Interface for WrappedCallback {}
+
+impl ICompilationTaskCallback for WrappedCallback {
+    fn onSuccess(&self) -> binder::Result<()> {
+        if let Err(e) = enable_fsverity_to_all() {
+            self.callback.onFailure(
+                FailureReason::FailedToEnableFsverity,
+                &format!("Unexpected failure when enabling fs-verity: {:?}", e),
+            )
+        } else {
+            self.callback.onSuccess()
+        }
+    }
+
+    fn onFailure(&self, reason: FailureReason, message: &str) -> binder::Result<()> {
+        self.callback.onFailure(reason, message)
+    }
+}
+
+impl WrappedCallback {
+    fn new(callback: Strong<dyn ICompilationTaskCallback>) -> WrappedCallback {
+        WrappedCallback { callback }
+    }
+}
+
+/// Enable fs-verity to output artifacts according to compos.info in the pending directory. Any
+/// error before the completion will just abort, leaving the previous files enabled.
+fn enable_fsverity_to_all() -> io::Result<()> {
+    let base_dir = Path::new(ODREFRESH_OUTPUT_ROOT_DIR).join(PENDING_ARTIFACTS_SUBDIR);
+    let mut reader = File::open(&base_dir.join("compos.info"))?;
+    let compos_info = OdsignInfo::parse_from_reader(&mut reader)?;
+
+    for path_str in compos_info.file_hashes.keys() {
+        let file = File::open(base_dir.join(path_str))?;
+        // We don't expect error. But when it happens, don't bother handle it here. For simplicity,
+        // just let odsign to the regular check.
+        fsverity::enable(file.as_fd())?;
+    }
+    Ok(())
+}
 
 pub struct IsolatedCompilationService {
     instance_manager: Arc<InstanceManager>,
@@ -53,7 +110,10 @@ impl IIsolatedCompilationService for IsolatedCompilationService {
         callback: &Strong<dyn ICompilationTaskCallback>,
     ) -> binder::Result<Strong<dyn ICompilationTask>> {
         check_permissions()?;
-        to_binder_result(self.do_start_staged_apex_compile(callback))
+        let wrapped_callback = WrappedCallback::new(callback.clone());
+        let wrapped_callback =
+            BnCompilationTaskCallback::new_binder(wrapped_callback, BinderFeatures::default());
+        to_binder_result(self.do_start_staged_apex_compile(&wrapped_callback))
     }
 
     fn startTestCompile(

@@ -19,6 +19,7 @@
 //! them, and orchestrating trusted compilation.
 
 mod fd_server_helper;
+mod fsverity;
 mod instance_manager;
 mod instance_starter;
 mod odrefresh_task;
