@@ -1,0 +1,349 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f82e603d_2393bf62",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-14T15:24:44Z",
+      "side": 1,
+      "message": "WDYT of moving this under `DeviceTreeInfo`?",
+      "range": {
+        "startLine": 29,
+        "startChar": 6,
+        "endLine": 29,
+        "endChar": 19
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9bffb42_84a1fe9d",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-14T15:24:44Z",
+      "side": 1,
+      "message": "`memory_range.len()`?",
+      "range": {
+        "startLine": 90,
+        "startChar": 15,
+        "endLine": 90,
+        "endChar": 73
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9de4378_f24ada72",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-14T15:24:44Z",
+      "side": 1,
+      "message": "This will depend on how the `DeviceTreeInfo::num_cpu` is being used but is it really valid to return `Ok(0)`?",
+      "range": {
+        "startLine": 105,
+        "startChar": 4,
+        "endLine": 105,
+        "endChar": 7
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b2fe83c_7a6268c0",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-14T15:24:44Z",
+      "side": 1,
+      "message": "Given that we don\u0027t really enforce that `range_low \u003c range_high` or `range_low.range_type() \u003d\u003d Memory32` and that the range type is hardcoded in platform.dts as `Memory64`, does it make sense to have this low/high distinction here? The host could swap the regions in the DT and this code wouldn\u0027t detect/be affected by it.\n\nWDYT of having a `[Range\u003cu64\u003e; 2]` instead?",
+      "range": {
+        "startLine": 117,
+        "startChar": 4,
+        "endLine": 118,
+        "endChar": 27
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b8b8adb_1138816e",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-14T15:24:44Z",
+      "side": 1,
+      "message": "pvmfw will fail to boot when it tries to access the (virtio-blk on virtio-pci) instance.img but it\u0027s fair to say that it shouldn\u0027t be the parser\u0027s responsibility to raise that error.\n\nWere you thinking of returning a `Result\u003cOption\u003cPciInfo\u003e\u003e`?",
+      "range": {
+        "startLine": 133,
+        "startChar": 69,
+        "endLine": 134,
+        "endChar": 49
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "118091e6_9326ef5f",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-14T15:24:44Z",
+      "side": 1,
+      "message": "Should we also validate the rest of `range.addr.0`?",
+      "range": {
+        "startLine": 170,
+        "startChar": 49,
+        "endLine": 170,
+        "endChar": 50
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fb2f58b_19726024",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-14T15:24:44Z",
+      "side": 1,
+      "message": "This could one day be implemented using [`iter_next_chunk`](https://github.com/rust-lang/rust/issues/98326) on the `CellIterator`.",
+      "range": {
+        "startLine": 191,
+        "startChar": 7,
+        "endLine": 191,
+        "endChar": 24
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "386b39ce_836917ac",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-14T15:24:44Z",
+      "side": 1,
+      "message": "Is this `*i \u003d self.cells.next()?`?",
+      "range": {
+        "startLine": 206,
+        "startChar": 12,
+        "endLine": 211,
+        "endChar": 13
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dd704ef_fd87e45f",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-14T15:24:44Z",
+      "side": 1,
+      "message": "Am I missing something or is this `(i + 1) as u32 \u003c\u003c PCI_DEVICE_IDX`?\n\nnit: would it make sense for `expected_addr_hi` and `expected_irq_number` to be incremented on each iteration instead, like `irq_count` is above? IMO, it would make the intention here clearer.",
+      "range": {
+        "startLine": 273,
+        "startChar": 36,
+        "endLine": 273,
+        "endChar": 77
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1360eeef_b1dc3736",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-14T15:24:44Z",
+      "side": 1,
+      "message": "nit: `pci_addr` and `gic_addr` could be written as tuples, reducing the number of local variables and simplifying the comparison and logging.\n\n(resolving as it\u0027s mostly a matter of taste)",
+      "range": {
+        "startLine": 289,
+        "startChar": 8,
+        "endLine": 289,
+        "endChar": 10
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b61cd6a_03667d09",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-14T15:24:44Z",
+      "side": 1,
+      "message": "WDYT of moving this under `SerialInfo`?",
+      "range": {
+        "startLine": 337,
+        "startChar": 6,
+        "endLine": 337,
+        "endChar": 22
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ef8a8f4_aef4c5d6",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-14T15:24:44Z",
+      "side": 1,
+      "message": "`ret.addrs.len()`? I\u0027d be surprised if the compiler couldn\u0027t figure out that the array is of constant length!\n\nOr even\n```\nlet addr \u003d ret.addrs.get_mut(i).ok_or_else(|| {\n    error!(\"Too many serials: {i}\");\n    RebootReason::InvalidFdt\n})?;\n```\n? But this is another case where an `ArrayVec` would have been ideal!",
+      "range": {
+        "startLine": 355,
+        "startChar": 16,
+        "endLine": 355,
+        "endChar": 32
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55580ea6_8fc9d6ea",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-14T15:24:44Z",
+      "side": 1,
+      "message": "Note that Gunyah will modify this node in crosvm AFAICT: see b/271493784#comment6 and [`swiotlb_range`](https://r.android.com/c/platform/packages/modules/Virtualization/+/2479400/1/pvmfw/src/hvc/gunyah_hypervisor.rs#53) in aosp/2479400; could this validation also cover that use-case?",
+      "range": {
+        "startLine": 387,
+        "startChar": 3,
+        "endLine": 387,
+        "endChar": 22
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b0a9d10_ae48b098",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-14T15:24:44Z",
+      "side": 1,
+      "message": "Should these 2 fields be `NonZeroUsize`?",
+      "range": {
+        "startLine": 437,
+        "startChar": 4,
+        "endLine": 438,
+        "endChar": 19
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d9fcb5c_ef4b2321",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-14T15:24:44Z",
+      "side": 1,
+      "message": "Could you document that calling `parse_device_tree` here ensures that the DT can\u0027t be abused by the host to attack pvmfw in `pci::initialise`?",
+      "range": {
+        "startLine": 87,
+        "startChar": 4,
+        "endLine": 87,
+        "endChar": 7
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
