@@ -444,6 +444,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f4ddf96_607948b5",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-14T16:13:22Z",
+      "side": 1,
+      "message": "Having a single binary that dynamically detects the current HV is fine (this is what we have for crosvm). We can always revisit the static approach but for now, having a unified implementation is worth the small size increase.",
+      "parentUuid": "95ca36fb_1ce1f6dc",
+      "range": {
+        "startLine": 103,
+        "startChar": 27,
+        "endLine": 103,
+        "endChar": 42
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f356635_dfec9984",
         "filename": "pvmfw/src/hvc.rs",
         "patchSetId": 1
