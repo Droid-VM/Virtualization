@@ -29,13 +29,10 @@ mod gpt;
 mod heap;
 mod helpers;
 mod hvc;
-mod hypervisor;
 mod instance;
 mod memory;
-mod mmio_guard;
 mod mmu;
 mod rand;
-mod smccc;
 mod virtio;
 
 use alloc::boxed::Box;

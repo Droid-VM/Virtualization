@@ -17,10 +17,7 @@
 #![deny(unsafe_op_in_unsafe_fn)]
 
 use crate::helpers::{self, align_down, align_up, page_4kb_of, SIZE_4KB};
-use crate::hypervisor::{hyp_meminfo, mem_share, mem_unshare};
-use crate::mmio_guard;
 use crate::mmu;
-use crate::smccc;
 use alloc::alloc::alloc_zeroed;
 use alloc::alloc::dealloc;
 use alloc::alloc::handle_alloc_error;
@@ -33,6 +30,7 @@ use core::ops::Range;
 use core::ptr::NonNull;
 use core::result;
 use log::error;
+use pkvm::{kvm_hyp_meminfo, kvm_mem_share, kvm_mem_unshare, mmio_guard, smccc};
 use tinyvec::ArrayVec;
 
 /// Base of the system's contiguous "main" memory.
@@ -285,7 +283,7 @@ fn share_range(range: &MemoryRange, granule: usize) -> smccc::Result<()> {
         .expect("Memory protection granule was not a power of two")..range.end)
         .step_by(granule)
     {
-        mem_share(base as u64)?;
+        kvm_mem_share(base as u64)?;
     }
     Ok(())
 }
@@ -298,7 +296,7 @@ fn unshare_range(range: &MemoryRange, granule: usize) -> smccc::Result<()> {
         .expect("Memory protection granule was not a power of two")..range.end)
         .step_by(granule)
     {
-        mem_unshare(base as u64)?;
+        kvm_mem_unshare(base as u64)?;
     }
     Ok(())
 }
@@ -356,7 +354,7 @@ pub unsafe fn dealloc_shared(vaddr: NonNull<u8>, size: usize) -> smccc::Result<(
 /// Panics if `size` is 0.
 fn shared_buffer_layout(size: usize) -> smccc::Result<Layout> {
     assert_ne!(size, 0);
-    let granule = hyp_meminfo()? as usize;
+    let granule = kvm_hyp_meminfo()? as usize;
     let allocated_size =
         align_up(size, granule).expect("Memory protection granule was not a power of two");
     Ok(Layout::from_size_align(allocated_size, granule).unwrap())
