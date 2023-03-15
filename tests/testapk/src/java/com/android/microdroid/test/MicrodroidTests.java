@@ -66,7 +66,6 @@ import com.android.microdroid.testservice.IVmCallback;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.function.ThrowingRunnable;
@@ -1184,7 +1183,6 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     }
 
     @Test
-    @Ignore("b/249723852")
     @CddTest(requirements = {
             "9.17/C-1-1",
             "9.17/C-2-7"
