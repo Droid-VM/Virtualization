@@ -18,6 +18,7 @@
 #![no_std]
 
 mod exceptions;
+mod mmio_guard;
 
 extern crate alloc;
 
@@ -108,7 +109,12 @@ fn init_kernel_pgt(pgt: &mut IdMap) -> Result<(), MapError> {
 
 /// Entry point for Rialto.
 pub fn main(_a0: u64, _a1: u64, _a2: u64, _a3: u64) {
+    // TODO(b/272226230): Add an Error enum to rialto.
     vmbase::logger::init(log::LevelFilter::Debug).unwrap();
+
+    // As pKVM blocks MMIO by default, we need to enable MMIO guard to support logging.
+    mmio_guard::init().unwrap();
+    mmio_guard::map(vmbase::console::BASE_ADDRESS).unwrap();
 
     info!("Welcome to Rialto!");
     init_heap();
