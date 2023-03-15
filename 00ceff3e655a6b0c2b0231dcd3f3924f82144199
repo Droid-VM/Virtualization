@@ -39,6 +39,30 @@
       },
       "revId": "00ceff3e655a6b0c2b0231dcd3f3924f82144199",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1abd0e0e_40c95bc2",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-15T11:08:12Z",
+      "side": 1,
+      "message": "If I drop, I get this:\n\n```\nerror: fields `memory_size`, `num_cpu`, `pci_info`, `serial_info`, and `swiotlb_info` are never read\n   --\u003e packages/modules/Virtualization/pvmfw/src/fdt.rs:440:5\n    |\n439 | pub struct DeviceTreeInfo {\n    |            -------------- fields in this struct\n440 |     memory_size: NonZeroUsize,\n    |     ^^^^^^^^^^^\n441 |     num_cpu: NonZeroUsize,\n    |     ^^^^^^^\n442 |     pci_info: PciInfo,\n    |     ^^^^^^^^\n443 |     serial_info: SerialInfo,\n    |     ^^^^^^^^^^^\n444 |     swiotlb_info: SwiotlbInfo,\n    |     ^^^^^^^^^^^^\n    |\n    \u003d note: `DeviceTreeInfo` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis\n    \u003d note: `-D dead-code` implied by `-D warnings`\n```\n\nApparently, we don\u0027t seem to be building in debug mode, but in release mode. Thus, printing the struct in `debug!(...)` is no op.",
+      "parentUuid": "2706b637_fe9f637e",
+      "range": {
+        "startLine": 122,
+        "startChar": 23,
+        "endLine": 122,
+        "endChar": 27
+      },
+      "revId": "00ceff3e655a6b0c2b0231dcd3f3924f82144199",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
