@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd73cf9c_2b73a1f0",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-15T07:16:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f82e603d_2393bf62",
+      "range": {
+        "startLine": 29,
+        "startChar": 6,
+        "endLine": 29,
+        "endChar": 19
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9bffb42_84a1fe9d",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-14T15:24:44Z",
       "side": 1,
       "message": "`memory_range.len()`?",
+      "range": {
+        "startLine": 90,
+        "startChar": 15,
+        "endLine": 90,
+        "endChar": 73
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd44fcf7_04de2c58",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-15T07:16:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9bffb42_84a1fe9d",
       "range": {
         "startLine": 90,
         "startChar": 15,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13b2de28_449e0cec",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-15T07:16:50Z",
+      "side": 1,
+      "message": "Good point. This now returns error when count is 0.",
+      "parentUuid": "b9de4378_f24ada72",
+      "range": {
+        "startLine": 105,
+        "startChar": 4,
+        "endLine": 105,
+        "endChar": 7
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b2fe83c_7a6268c0",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-03-14T15:24:44Z",
       "side": 1,
       "message": "Given that we don\u0027t really enforce that `range_low \u003c range_high` or `range_low.range_type() \u003d\u003d Memory32` and that the range type is hardcoded in platform.dts as `Memory64`, does it make sense to have this low/high distinction here? The host could swap the regions in the DT and this code wouldn\u0027t detect/be affected by it.\n\nWDYT of having a `[Range\u003cu64\u003e; 2]` instead?",
+      "range": {
+        "startLine": 117,
+        "startChar": 4,
+        "endLine": 118,
+        "endChar": 27
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4da9e689_4846af8a",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-15T07:16:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b2fe83c_7a6268c0",
       "range": {
         "startLine": 117,
         "startChar": 4,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63a80255_eae678a8",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-15T07:16:50Z",
+      "side": 1,
+      "message": "Ok,  instance.img answers my question. I agree with you that it\u0027s not the parser\u0027s responsibility, but failing here isn\u0027t bad anyway. \n\nI\u0027ve updated the comment accordingly.",
+      "parentUuid": "2b8b8adb_1138816e",
+      "range": {
+        "startLine": 133,
+        "startChar": 69,
+        "endLine": 134,
+        "endChar": 49
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "118091e6_9326ef5f",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-03-14T15:24:44Z",
       "side": 1,
       "message": "Should we also validate the rest of `range.addr.0`?",
+      "range": {
+        "startLine": 170,
+        "startChar": 49,
+        "endLine": 170,
+        "endChar": 50
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2963df71_6a1bc191",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-15T07:16:50Z",
+      "side": 1,
+      "message": "Done. Added a check for prefetch-ability.",
+      "parentUuid": "118091e6_9326ef5f",
       "range": {
         "startLine": 170,
         "startChar": 49,
@@ -185,6 +329,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcaf5d98_7152db5b",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-15T07:16:50Z",
+      "side": 1,
+      "message": "Done. Thanks.",
+      "parentUuid": "386b39ce_836917ac",
+      "range": {
+        "startLine": 206,
+        "startChar": 12,
+        "endLine": 211,
+        "endChar": 13
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6dd704ef_fd87e45f",
@@ -198,6 +366,30 @@
       "writtenOn": "2023-03-14T15:24:44Z",
       "side": 1,
       "message": "Am I missing something or is this `(i + 1) as u32 \u003c\u003c PCI_DEVICE_IDX`?\n\nnit: would it make sense for `expected_addr_hi` and `expected_irq_number` to be incremented on each iteration instead, like `irq_count` is above? IMO, it would make the intention here clearer.",
+      "range": {
+        "startLine": 273,
+        "startChar": 36,
+        "endLine": 273,
+        "endChar": 77
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df67fd58_6195264d",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-15T07:16:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6dd704ef_fd87e45f",
       "range": {
         "startLine": 273,
         "startChar": 36,
@@ -231,6 +423,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d43cd4a2_b3c34578",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-15T07:16:50Z",
+      "side": 1,
+      "message": "This is a good advice. Fixed.",
+      "parentUuid": "1360eeef_b1dc3736",
+      "range": {
+        "startLine": 289,
+        "startChar": 8,
+        "endLine": 289,
+        "endChar": 10
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b61cd6a_03667d09",
@@ -244,6 +460,30 @@
       "writtenOn": "2023-03-14T15:24:44Z",
       "side": 1,
       "message": "WDYT of moving this under `SerialInfo`?",
+      "range": {
+        "startLine": 337,
+        "startChar": 6,
+        "endLine": 337,
+        "endChar": 22
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "843b2102_54124081",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-15T07:16:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b61cd6a_03667d09",
       "range": {
         "startLine": 337,
         "startChar": 6,
@@ -277,6 +517,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a08a99ea_cf256c2f",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-15T07:16:50Z",
+      "side": 1,
+      "message": "Switched to ArrayVec.",
+      "parentUuid": "6ef8a8f4_aef4c5d6",
+      "range": {
+        "startLine": 355,
+        "startChar": 16,
+        "endLine": 355,
+        "endChar": 32
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55580ea6_8fc9d6ea",
@@ -290,6 +554,30 @@
       "writtenOn": "2023-03-14T15:24:44Z",
       "side": 1,
       "message": "Note that Gunyah will modify this node in crosvm AFAICT: see b/271493784#comment6 and [`swiotlb_range`](https://r.android.com/c/platform/packages/modules/Virtualization/+/2479400/1/pvmfw/src/hvc/gunyah_hypervisor.rs#53) in aosp/2479400; could this validation also cover that use-case?",
+      "range": {
+        "startLine": 387,
+        "startChar": 3,
+        "endLine": 387,
+        "endChar": 22
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d750412e_f9339a87",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-15T07:16:50Z",
+      "side": 1,
+      "message": "No, this doesn\u0027t cover that case. I will implement that in a follow-up change. We shall accept either size/alignment pair or reg.",
+      "parentUuid": "55580ea6_8fc9d6ea",
       "range": {
         "startLine": 387,
         "startChar": 3,
@@ -323,6 +611,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ccecff0_5c7a386e",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-15T07:16:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b0a9d10_ae48b098",
+      "range": {
+        "startLine": 437,
+        "startChar": 4,
+        "endLine": 438,
+        "endChar": 19
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d9fcb5c_ef4b2321",
@@ -336,6 +648,30 @@
       "writtenOn": "2023-03-14T15:24:44Z",
       "side": 1,
       "message": "Could you document that calling `parse_device_tree` here ensures that the DT can\u0027t be abused by the host to attack pvmfw in `pci::initialise`?",
+      "range": {
+        "startLine": 87,
+        "startChar": 4,
+        "endLine": 87,
+        "endChar": 7
+      },
+      "revId": "45da778a1ecb191d370d4f4e55f39814193dcc2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82fccb9e_3019bcb7",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-15T07:16:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d9fcb5c_ef4b2321",
       "range": {
         "startLine": 87,
         "startChar": 4,
