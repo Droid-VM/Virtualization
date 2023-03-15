@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea856597_32b1526a",
+        "filename": "compos/composd/src/fsverity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-15T11:16:05Z",
+      "side": 1,
+      "message": "Should the code here be combined with packages/modules/Virtualization/authfs/fd_server/src/fsverity.rs and extracted to something under Virtualization/libs ?\n\nThere\u0027s not much duplication, but a common home would prevent any more developing.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 37
+      },
+      "revId": "29b3440e291e29ad2fe4c9bc4f40f5c67d744ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "332829a5_700169ff",
+        "filename": "compos/composd/src/fsverity.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-15T11:16:05Z",
+      "side": 1,
+      "message": "Safety comment pls",
+      "range": {
+        "startLine": 56,
+        "startChar": 7,
+        "endLine": 56,
+        "endChar": 13
+      },
+      "revId": "29b3440e291e29ad2fe4c9bc4f40f5c67d744ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85d2c363_b69fb2fe",
+        "filename": "compos/composd/src/service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-15T11:16:05Z",
+      "side": 1,
+      "message": "Hmm. Or we could just do this in OdrefreshTask, where we call onSuccess() ?",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 1
+      },
+      "revId": "29b3440e291e29ad2fe4c9bc4f40f5c67d744ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e6080ec_d549b9b2",
+        "filename": "compos/composd/src/service.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-15T11:16:05Z",
+      "side": 1,
+      "message": "Nit: to -\u003e do",
+      "range": {
+        "startLine": 88,
+        "startChar": 27,
+        "endLine": 88,
+        "endChar": 29
+      },
+      "revId": "29b3440e291e29ad2fe4c9bc4f40f5c67d744ac3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
