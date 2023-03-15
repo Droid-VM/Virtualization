@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f108bc4_dbb7e42d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-15T10:55:46Z",
+      "side": 1,
+      "message": "Giving +2; if I\u0027m wrong about the `TODO`s, feel free to resolve that comment and merge this CL.",
+      "revId": "00ceff3e655a6b0c2b0231dcd3f3924f82144199",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2706b637_fe9f637e",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-15T10:55:46Z",
+      "side": 1,
+      "message": "Given that we already use the `device_tree_info` by logging it in `main.rs`, can\u0027t these `allow(dead_code)` be removed without waiting for the next CL?\n\nDitto for the other `TODO`s in this CL.",
+      "range": {
+        "startLine": 122,
+        "startChar": 23,
+        "endLine": 122,
+        "endChar": 27
+      },
+      "revId": "00ceff3e655a6b0c2b0231dcd3f3924f82144199",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
