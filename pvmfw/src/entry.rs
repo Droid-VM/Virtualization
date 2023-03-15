@@ -21,7 +21,6 @@ use crate::fdt;
 use crate::heap;
 use crate::helpers;
 use crate::memory::MemoryTracker;
-use crate::mmio_guard;
 use crate::mmu;
 use crate::rand;
 use core::arch::asm;
