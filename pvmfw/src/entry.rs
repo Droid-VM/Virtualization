@@ -20,7 +20,6 @@ use crate::fdt;
 use crate::heap;
 use crate::helpers;
 use crate::memory::MemoryTracker;
-use crate::mmio_guard;
 use crate::mmu;
 use crate::rand;
 use core::arch::asm;
@@ -31,6 +30,7 @@ use log::error;
 use log::info;
 use log::warn;
 use log::LevelFilter;
+use pkvm::mmio_guard;
 use vmbase::{console, layout, logger, main, power::reboot};
 
 #[derive(Debug, Clone)]

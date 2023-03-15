@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//! Structs and functions for making SMCCC calls.
+
 use core::{fmt, result};
 use psci::smccc::hvc64;
 
@@ -42,8 +44,11 @@ impl fmt::Display for Error {
     }
 }
 
+/// Result type with smccc::Error.
 pub type Result<T> = result::Result<T, Error>;
 
+/// Makes a checked HVC64 call to the hypervisor, following the SMC Calling Convention version 1.4.
+/// Returns Ok only when the return code is 0.
 pub fn checked_hvc64_expect_zero(function: u32, args: [u64; 17]) -> Result<()> {
     match checked_hvc64(function, args)? {
         0 => Ok(()),
@@ -51,6 +56,8 @@ pub fn checked_hvc64_expect_zero(function: u32, args: [u64; 17]) -> Result<()> {
     }
 }
 
+/// Makes a checked HVC64 call to the hypervisor, following the SMC Calling Convention version 1.4.
+/// Returns Ok only when the return code >= 0.
 pub fn checked_hvc64(function: u32, args: [u64; 17]) -> Result<u64> {
     match hvc64(function, args)[0] as i64 {
         ret if ret >= 0 => Ok(ret as u64),

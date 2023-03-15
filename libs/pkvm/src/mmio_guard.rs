@@ -14,11 +14,18 @@
 
 //! Safe MMIO_GUARD support.
 
-use crate::helpers;
-use crate::hypervisor::{mmio_guard_enroll, mmio_guard_info, mmio_guard_map, mmio_guard_unmap};
+use crate::hvc;
 use crate::smccc;
 use core::{fmt, result};
 
+const SIZE_4KB: usize = 4 << 10;
+
+/// Computes the low memory page address of the 4KiB page containing a given address.
+const fn page_address(addr: usize) -> u64 {
+    (addr & !(SIZE_4KB - 1)) as u64
+}
+
+/// mmio guard error.
 #[derive(Debug, Clone)]
 pub enum Error {
     /// Failed the necessary MMIO_GUARD_ENROLL call.
@@ -33,8 +40,6 @@ pub enum Error {
     UnsupportedGranule(usize),
 }
 
-type Result<T> = result::Result<T, Error>;
-
 impl fmt::Display for Error {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
@@ -47,19 +52,26 @@ impl fmt::Display for Error {
     }
 }
 
+/// Result type with mmio_guard::Error.
+pub type Result<T> = result::Result<T, Error>;
+
+/// Initializes the KVM hypervisor by enrolling a mmio guard and checking the memory
+/// granule size.
 pub fn init() -> Result<()> {
-    mmio_guard_enroll().map_err(Error::EnrollFailed)?;
-    let mmio_granule = mmio_guard_info().map_err(Error::InfoFailed)? as usize;
-    if mmio_granule != helpers::SIZE_4KB {
+    hvc::kvm_mmio_guard_enroll().map_err(Error::EnrollFailed)?;
+    let mmio_granule = hvc::kvm_mmio_guard_info().map_err(Error::InfoFailed)? as usize;
+    if mmio_granule != SIZE_4KB {
         return Err(Error::UnsupportedGranule(mmio_granule));
     }
     Ok(())
 }
 
+/// Maps a memory address to the KVM hypervisor mmio guard.
 pub fn map(addr: usize) -> Result<()> {
-    mmio_guard_map(helpers::page_4kb_of(addr) as u64).map_err(Error::MapFailed)
+    hvc::kvm_mmio_guard_map(page_address(addr)).map_err(Error::MapFailed)
 }
 
+/// Unmaps a memory address from the KVM hypervisor mmio guard.
 pub fn unmap(addr: usize) -> Result<()> {
-    mmio_guard_unmap(helpers::page_4kb_of(addr) as u64).map_err(Error::UnmapFailed)
+    hvc::kvm_mmio_guard_unmap(page_address(addr)).map_err(Error::UnmapFailed)
 }
