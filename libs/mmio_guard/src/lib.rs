@@ -12,19 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! Wrappers around hypervisor back-ends.
+//! Safe MMIO_GUARD support.
 
-use crate::hvc;
-use mmio_guard::smccc;
+#![no_std]
 
-pub fn hyp_meminfo() -> smccc::Result<u64> {
-    hvc::kvm_hyp_meminfo()
-}
+mod hvc;
+mod mmio_guard;
+pub mod smccc;
 
-pub fn mem_share(base_ipa: u64) -> smccc::Result<()> {
-    hvc::kvm_mem_share(base_ipa)
-}
-
-pub fn mem_unshare(base_ipa: u64) -> smccc::Result<()> {
-    hvc::kvm_mem_unshare(base_ipa)
-}
+pub use mmio_guard::{init, map, unmap, Error};

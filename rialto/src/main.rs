@@ -27,7 +27,8 @@ use aarch64_paging::{
     MapError,
 };
 use buddy_system_allocator::LockedHeap;
-use log::{debug, info};
+use log::{debug, error, info};
+use mmio_guard::smccc;
 use vmbase::main;
 
 const SZ_1K: usize = 1024;
@@ -108,7 +109,15 @@ fn init_kernel_pgt(pgt: &mut IdMap) -> Result<(), MapError> {
 
 /// Entry point for Rialto.
 pub fn main(_a0: u64, _a1: u64, _a2: u64, _a3: u64) {
+    // TODO(b/272226230): Add an Error enum to rialto.
     vmbase::logger::init(log::LevelFilter::Debug).unwrap();
+
+    // As pKVM blocks MMIO by default, we need to enable MMIO guard to support logging.
+    match mmio_guard::init() {
+        Ok(()) => mmio_guard::map(vmbase::console::BASE_ADDRESS).unwrap(),
+        Err(mmio_guard::Error::EnrollFailed(smccc::Error::NotSupported)) => {}
+        Err(e) => error!("Unexpected error for mmio_guard::init() {e}"),
+    };
 
     info!("Welcome to Rialto!");
     init_heap();
