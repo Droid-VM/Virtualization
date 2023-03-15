@@ -63,6 +63,12 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
     private static final int BOOT_FAILURE_WAIT_TIME_MS = 10000; // 10 seconds
     private static final int CONSOLE_OUTPUT_WAIT_MS = 5000; // 5 seconds
 
+    @NonNull
+    private static final String AVF_DEBUG_POLICY_RAMDUMP_DT_PROP_PATH = "/avf/guest/common/ramdump";
+
+    @NonNull
+    private static final String AVF_DEBUG_POLICY_LOG_DT_PROP_PATH = "/avf/guest/common/log";
+
     @NonNull private static final String CUSTOM_PVMFW_FILE_PREFIX = "pvmfw";
     @NonNull private static final String CUSTOM_PVMFW_FILE_SUFFIX = ".bin";
     @NonNull private static final String CUSTOM_PVMFW_IMG_PATH = TEST_ROOT + PVMFW_FILE_NAME;
@@ -147,6 +153,10 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     public void testRamdump() throws Exception {
+        assumeTrue(
+                "Skip if host wouldn't prepare ramdump",
+                isDebugPolicyEnabled(AVF_DEBUG_POLICY_RAMDUMP_DT_PROP_PATH));
+
         Pvmfw pvmfw = createPvmfw("avf_debug_policy_with_ramdump.dtbo");
         pvmfw.serialize(mCustomPvmfwBinFileOnHost);
         mMicrodroidDevice = launchProtectedVmAndWaitForBootCompleted(MICRODROID_DEBUG_FULL);
@@ -174,6 +184,10 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
 
     @Test
     public void testConsoleOutput() throws Exception {
+        assumeTrue(
+                "Skip if host wouldn't prepare ramdump",
+                isDebugPolicyEnabled(AVF_DEBUG_POLICY_LOG_DT_PROP_PATH));
+
         Pvmfw pvmfw = createPvmfw("avf_debug_policy_with_console_output.dtbo");
         pvmfw.serialize(mCustomPvmfwBinFileOnHost);
 
@@ -223,6 +237,17 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
         }
     }
 
+    private boolean isDebugPolicyEnabled(@NonNull String dtPropertyPath)
+            throws DeviceNotAvailableException {
+        CommandRunner runner = new CommandRunner(mAndroidDevice);
+        CommandResult result =
+                runner.runForResult("xxd", "-p", "/proc/device-tree" + dtPropertyPath);
+        if (result.getStatus() == CommandStatus.SUCCESS) {
+            return HEX_STRING_ONE.equals(result.getStdout().trim());
+        }
+        return false;
+    }
+
     @NonNull
     private String readMicrodroidFileAsString(@NonNull String path)
             throws DeviceNotAvailableException {
@@ -245,8 +270,8 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
                 .build();
     }
 
-    @NonNull
-    private boolean hasConsoleOutput(CommandResult result) throws DeviceNotAvailableException {
+    private boolean hasConsoleOutput(@NonNull CommandResult result)
+            throws DeviceNotAvailableException {
         return result.getStdout().contains("Run /init as init process");
     }
 
