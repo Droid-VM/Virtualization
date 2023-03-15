@@ -109,8 +109,6 @@ fn init_kernel_pgt(pgt: &mut IdMap) -> Result<(), MapError> {
 
 /// Entry point for Rialto.
 pub fn main(_a0: u64, _a1: u64, _a2: u64, _a3: u64) {
-    vmbase::logger::init(log::LevelFilter::Debug).unwrap();
-
     info!("Welcome to Rialto!");
     init_heap();
 

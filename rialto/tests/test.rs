@@ -31,11 +31,22 @@ use std::thread;
 use std::time::Duration;
 use vmclient::{DeathReason, VmInstance};
 
-const RIALTO_PATH: &str = "/data/local/tmp/rialto_test/arm64/rialto.bin";
-
-/// Runs the Rialto VM as a non-protected VM via VirtualizationService.
 #[test]
-fn test_boots() -> Result<(), Error> {
+fn boot_rialto_in_unprotected_vm_successfully() -> Result<(), Error> {
+    const UNSIGNED_RIALTO_PATH: &str = "/data/local/tmp/rialto_test/arm64/rialto_unsigned.bin";
+
+    boot_rialto_successfully(false, UNSIGNED_RIALTO_PATH)
+}
+
+#[test]
+fn boot_rialto_in_protected_vm_successfully() -> Result<(), Error> {
+    const SIGNED_RIALTO_PATH: &str = "/data/local/tmp/rialto_test/arm64/rialto.bin";
+
+    boot_rialto_successfully(true, SIGNED_RIALTO_PATH)
+}
+
+/// Runs the Rialto VM via VirtualizationService.
+fn boot_rialto_successfully(protected_vm: bool, rialto_path: &str) -> Result<(), Error> {
     android_logger::init_once(
         android_logger::Config::default().with_tag("rialto").with_min_level(log::Level::Debug),
     );
@@ -52,7 +63,7 @@ fn test_boots() -> Result<(), Error> {
         vmclient::VirtualizationService::new().context("Failed to spawn VirtualizationService")?;
     let service = virtmgr.connect().context("Failed to connect to VirtualizationService")?;
 
-    let rialto = File::open(RIALTO_PATH).context("Failed to open Rialto kernel binary")?;
+    let rialto = File::open(rialto_path).context("Failed to open Rialto kernel binary")?;
     let console = android_log_fd()?;
     let log = android_log_fd()?;
 
@@ -63,7 +74,7 @@ fn test_boots() -> Result<(), Error> {
         params: None,
         bootloader: Some(ParcelFileDescriptor::new(rialto)),
         disks: vec![],
-        protectedVm: false,
+        protectedVm: protected_vm,
         memoryMib: 300,
         cpuTopology: CpuTopology::ONE_CPU,
         platformVersion: "~1.0".to_string(),

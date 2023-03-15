@@ -36,7 +36,7 @@ cc_binary {
 }
 
 raw_binary {
-    name: "rialto",
+    name: "rialto_unsigned",
     src: ":rialto_elf",
     enabled: false,
     target: {
@@ -44,6 +44,37 @@ raw_binary {
             enabled: true,
         },
     },
+}
+
+// python -c "import hashlib; print(hashlib.sha256(b'rialto_salt').hexdigest())"
+rialto_salt = "ea9d8c3ae1785396884d0c16c7652921874e2b8703f336ff23760f2049ee9e29"
+
+avb_add_hash_footer {
+    name: "rialto_signed",
+    src: "empty_file",
+    filename: "rialto",
+    partition_name: "boot",
+    private_key: ":microdroid_sign_key",
+    salt: rialto_salt,
+    enabled: false,
+    arch: {
+        arm64: {
+            src: ":rialto_unsigned",
+            enabled: true,
+        },
+    },
+}
+
+prebuilt_etc {
+    name: "rialto_bin",
+    filename: "rialto.bin",
+    target: {
+        android_arm64: {
+            src: ":rialto_signed",
+        },
+    },
+    src: "empty_file",
+    installable: false,
 }
 
 rust_test {
@@ -62,7 +93,8 @@ rust_test {
         "libvmclient",
     ],
     data: [
-        ":rialto",
+        ":rialto_unsigned",
+        ":rialto_bin",
     ],
     test_suites: ["general-tests"],
     enabled: false,
