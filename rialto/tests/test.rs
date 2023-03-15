@@ -16,7 +16,8 @@
 
 use android_system_virtualizationservice::{
     aidl::android::system::virtualizationservice::{
-        CpuTopology::CpuTopology, VirtualMachineConfig::VirtualMachineConfig,
+        CpuTopology::CpuTopology, DiskImage::DiskImage, Partition::Partition,
+        VirtualMachineConfig::VirtualMachineConfig,
         VirtualMachineRawConfig::VirtualMachineRawConfig,
     },
     binder::{ParcelFileDescriptor, ProcessState},
@@ -33,9 +34,9 @@ use vmclient::{DeathReason, VmInstance};
 
 const RIALTO_PATH: &str = "/data/local/tmp/rialto_test/arm64/rialto.bin";
 
-/// Runs the Rialto VM as a non-protected VM via VirtualizationService.
+/// Runs the Rialto VM as a protected VM via VirtualizationService.
 #[test]
-fn test_boots() -> Result<(), Error> {
+fn boot_rialto_in_protected_vm_successfully() -> Result<(), Error> {
     android_logger::init_once(
         android_logger::Config::default().with_tag("rialto").with_min_level(log::Level::Debug),
     );
@@ -56,14 +57,27 @@ fn test_boots() -> Result<(), Error> {
     let console = android_log_fd()?;
     let log = android_log_fd()?;
 
+    let instance_img = File::options()
+        .create(true)
+        .read(true)
+        .write(true)
+        .truncate(true)
+        .open("/data/local/tmp/rialto_test/arm64/instance.img")?;
+    let instance_img = ParcelFileDescriptor::new(instance_img);
+    let writable_partitions = vec![Partition {
+        label: "vm-instance".to_owned(),
+        image: Some(instance_img),
+        writable: true,
+    }];
+
     let config = VirtualMachineConfig::RawConfig(VirtualMachineRawConfig {
         name: String::from("RialtoTest"),
         kernel: None,
         initrd: None,
         params: None,
         bootloader: Some(ParcelFileDescriptor::new(rialto)),
-        disks: vec![],
-        protectedVm: false,
+        disks: vec![DiskImage { image: None, partitions: writable_partitions, writable: true }],
+        protectedVm: true,
         memoryMib: 300,
         cpuTopology: CpuTopology::ONE_CPU,
         platformVersion: "~1.0".to_string(),
