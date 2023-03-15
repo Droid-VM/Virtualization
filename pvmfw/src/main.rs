@@ -32,7 +32,6 @@ mod hvc;
 mod hypervisor;
 mod instance;
 mod memory;
-mod mmio_guard;
 mod mmu;
 mod rand;
 mod virtio;

@@ -12,16 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! Wrappers around hypervisor back-ends.
+//! This library provides support for ensuring safe management of memory with kvm.
 
-pub fn hyp_meminfo() -> smccc::Result<u64> {
-    pkvm::kvm_hyp_meminfo()
-}
+#![no_std]
 
-pub fn mem_share(base_ipa: u64) -> smccc::Result<()> {
-    pkvm::kvm_mem_share(base_ipa)
-}
+mod hvc;
+pub mod mmio_guard;
 
-pub fn mem_unshare(base_ipa: u64) -> smccc::Result<()> {
-    pkvm::kvm_mem_unshare(base_ipa)
-}
+pub use hvc::{kvm_hyp_meminfo, kvm_mem_share, kvm_mem_unshare};
