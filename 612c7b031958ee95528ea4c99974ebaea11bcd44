@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7639dd2c_edb16f4c",
+        "filename": "compos/composd/aidl/android/system/composd/ICompilationTaskCallback.aidl",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-16T12:13:21Z",
+      "side": 1,
+      "message": "We should teach packages/modules/Virtualization/compos/service/java/com/android/server/compos/IsolatedCompilationJobService.java about this new code.\n\nWhich may involve metrics changes :-(",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 31
+      },
+      "revId": "612c7b031958ee95528ea4c99974ebaea11bcd44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3748ac6_e9abdc78",
+        "filename": "compos/composd/src/odrefresh_task.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-16T12:13:21Z",
+      "side": 1,
+      "message": "Maybe \"CompilationSuccess, fsverity enabled\" ?",
+      "range": {
+        "startLine": 121,
+        "startChar": 39,
+        "endLine": 121,
+        "endChar": 57
+      },
+      "revId": "612c7b031958ee95528ea4c99974ebaea11bcd44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
