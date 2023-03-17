@@ -93,6 +93,30 @@
       },
       "revId": "d417a672a3c262d9f31628c994091fd66090fef8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91d302c0_2e884ba0",
+        "filename": "compos/composd/src/odrefresh_task.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-17T16:13:34Z",
+      "side": 1,
+      "message": "Isn\u0027t it legitimate for the open_dir to fail, if needs_system_ext is false?\n\nI was thinking we could now do\n\nif need_system_ext { open_dir()?; .. } else { ... }",
+      "parentUuid": "93597194_e2799d1d",
+      "range": {
+        "startLine": 178,
+        "startChar": 8,
+        "endLine": 178,
+        "endChar": 43
+      },
+      "revId": "d417a672a3c262d9f31628c994091fd66090fef8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
