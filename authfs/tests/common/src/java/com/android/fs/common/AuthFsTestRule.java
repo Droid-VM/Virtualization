@@ -83,71 +83,71 @@ public class AuthFsTestRule extends TestLogData {
 
     private static final int VMADDR_CID_HOST = 2;
 
-    private static TestInformation sTestInfo;
-    private static ITestDevice sMicrodroidDevice;
-    private static CommandRunner sAndroid;
-    private static CommandRunner sMicrodroid;
+    private TestInformation mTestInfo;
+    private ITestDevice mMicrodroidDevice;
+    private CommandRunner mAndroid;
+    private CommandRunner mMicrodroid;
 
     private ExecutorService mThreadPool;
 
-    public static void setUpAndroid(TestInformation testInfo) throws Exception {
+    public void setUpAndroid(TestInformation testInfo) throws Exception {
         assertNotNull(testInfo.getDevice());
         if (!(testInfo.getDevice() instanceof TestDevice)) {
             CLog.w("Unexpected type of ITestDevice. Skipping.");
             return;
         }
-        sTestInfo = testInfo;
+        mTestInfo = testInfo;
         TestDevice androidDevice = getDevice();
-        sAndroid = new CommandRunner(androidDevice);
+        mAndroid = new CommandRunner(androidDevice);
     }
 
-    public static void tearDownAndroid() {
-        sAndroid = null;
-    }
-
-    /** This method is supposed to be called after {@link #setUpTest()}. */
-    public static CommandRunner getAndroid() {
-        assertThat(sAndroid).isNotNull();
-        return sAndroid;
+    public void tearDownAndroid() {
+        mAndroid = null;
     }
 
     /** This method is supposed to be called after {@link #setUpTest()}. */
-    public static CommandRunner getMicrodroid() {
-        assertThat(sMicrodroid).isNotNull();
-        return sMicrodroid;
+    public CommandRunner getAndroid() {
+        assertThat(mAndroid).isNotNull();
+        return mAndroid;
     }
 
-    public static ITestDevice getMicrodroidDevice() {
-        assertThat(sMicrodroidDevice).isNotNull();
-        return sMicrodroidDevice;
+    /** This method is supposed to be called after {@link #setUpTest()}. */
+    public CommandRunner getMicrodroid() {
+        assertThat(mMicrodroid).isNotNull();
+        return mMicrodroid;
     }
 
-    public static void startMicrodroid(boolean protectedVm) throws DeviceNotAvailableException {
+    public ITestDevice getMicrodroidDevice() {
+        assertThat(mMicrodroidDevice).isNotNull();
+        return mMicrodroidDevice;
+    }
+
+    public void startMicrodroid(boolean protectedVm) throws DeviceNotAvailableException {
         CLog.i("Starting the shared VM");
-        assertThat(sMicrodroidDevice).isNull();
-        sMicrodroidDevice =
+        assertThat(mMicrodroidDevice).isNull();
+        mMicrodroidDevice =
                 MicrodroidBuilder.fromFile(
-                                findTestFile(sTestInfo.getBuildInfo(), TEST_APK_NAME),
+                                findTestFile(mTestInfo.getBuildInfo(), TEST_APK_NAME),
                                 VM_CONFIG_PATH_IN_APK)
                         .debugLevel("full")
                         .protectedVm(protectedVm)
                         .build(getDevice());
 
         // From this point on, we need to tear down the Microdroid instance
-        sMicrodroid = new CommandRunner(sMicrodroidDevice);
+        mMicrodroid = new CommandRunner(mMicrodroidDevice);
 
-        sMicrodroid.runForResult("mkdir -p " + MOUNT_DIR);
+        mMicrodroid.runForResult("mkdir -p " + MOUNT_DIR);
 
         // Root because authfs (started from shell in this test) currently require root to open
         // /dev/fuse and mount the FUSE.
-        assertThat(sMicrodroidDevice.enableAdbRoot()).isTrue();
+        assertThat(mMicrodroidDevice.enableAdbRoot()).isTrue();
     }
 
-    public static void shutdownMicrodroid() throws DeviceNotAvailableException {
-        if (sMicrodroidDevice != null) {
-            getDevice().shutdownMicrodroid(sMicrodroidDevice);
-            sMicrodroidDevice = null;
-            sMicrodroid = null;
+    public void shutdownMicrodroid() throws DeviceNotAvailableException {
+        if (mMicrodroidDevice != null) {
+            getDevice().shutdownMicrodroid(mMicrodroidDevice);
+            mMicrodroidDevice = null;
+            mMicrodroid = null;
         }
     }
 
@@ -178,11 +178,11 @@ public class AuthFsTestRule extends TestLogData {
                         + FD_SERVER_BIN
                         + " "
                         + fdServerFlags;
-        Future<?> unusedFuture = mThreadPool.submit(() -> runForResult(sAndroid, cmd, "fd_server"));
+        Future<?> unusedFuture = mThreadPool.submit(() -> runForResult(mAndroid, cmd, "fd_server"));
     }
 
     public void killFdServerOnAndroid() throws DeviceNotAvailableException {
-        sAndroid.tryRun("killall fd_server");
+        mAndroid.tryRun("killall fd_server");
     }
 
     public void runAuthFsOnMicrodroid(String flags) {
@@ -196,7 +196,7 @@ public class AuthFsTestRule extends TestLogData {
                             // vsock
                             // ("Error: Invalid raw AIBinder"). Just restart if that happens.
                             while (starting.get()) {
-                                runForResult(sMicrodroid, cmd, "authfs");
+                                runForResult(mMicrodroid, cmd, "authfs");
                             }
                         });
         try {
@@ -221,8 +221,8 @@ public class AuthFsTestRule extends TestLogData {
         }
     }
 
-    public static TestDevice getDevice() {
-        return (TestDevice) sTestInfo.getDevice();
+    public TestDevice getDevice() {
+        return (TestDevice) mTestInfo.getDevice();
     }
 
     private void runForResult(CommandRunner cmdRunner, String cmd, String serviceName) {
@@ -237,34 +237,34 @@ public class AuthFsTestRule extends TestLogData {
     }
 
     private boolean isMicrodroidDirectoryOnFuse(String path) throws DeviceNotAvailableException {
-        String fs_type = sMicrodroid.tryRun("stat -f -c '%t' " + path);
+        String fs_type = mMicrodroid.tryRun("stat -f -c '%t' " + path);
         return FUSE_SUPER_MAGIC_HEX.equals(fs_type);
     }
 
     public void setUpTest() throws Exception {
         mThreadPool = Executors.newCachedThreadPool();
-        if (sAndroid != null) {
-            sAndroid.run("mkdir -p " + TEST_OUTPUT_DIR);
+        if (mAndroid != null) {
+            mAndroid.run("mkdir -p " + TEST_OUTPUT_DIR);
         }
     }
 
     private void tearDownTest(String testName) throws Exception {
-        if (sMicrodroid != null) {
-            sMicrodroid.tryRun("killall authfs");
-            sMicrodroid.tryRun("umount " + MOUNT_DIR);
+        if (mMicrodroid != null) {
+            mMicrodroid.tryRun("killall authfs");
+            mMicrodroid.tryRun("umount " + MOUNT_DIR);
         }
 
-        assertNotNull(sAndroid);
+        assertNotNull(mAndroid);
         killFdServerOnAndroid();
 
         // Even though we only run one VM for the whole class, and could have collect the VM log
         // after all tests are done, TestLogData doesn't seem to work at class level. Hence,
         // collect recent logs manually for each test method.
         String vmRecentLog = TEST_OUTPUT_DIR + "/vm_recent.log";
-        sAndroid.tryRun("tail -n 50 " + LOG_PATH + " > " + vmRecentLog);
+        mAndroid.tryRun("tail -n 50 " + LOG_PATH + " > " + vmRecentLog);
         archiveLogThenDelete(this, getDevice(), vmRecentLog, "vm_recent.log-" + testName);
 
-        sAndroid.run("rm -rf " + TEST_OUTPUT_DIR);
+        mAndroid.run("rm -rf " + TEST_OUTPUT_DIR);
 
         if (mThreadPool != null) {
             mThreadPool.shutdownNow();
