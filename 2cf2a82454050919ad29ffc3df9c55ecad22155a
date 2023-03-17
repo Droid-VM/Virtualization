@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef541252_af4e6071",
+        "filename": "microdroid/kdump/kexec.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2023-03-17T21:16:11Z",
+      "side": 1,
+      "message": "You should probably check if this fails, and set the size to zero in that case.",
+      "range": {
+        "startLine": 62,
+        "startChar": 12,
+        "endLine": 62,
+        "endChar": 16
+      },
+      "revId": "2cf2a82454050919ad29ffc3df9c55ecad22155a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e7ff0c7_1d92d450",
+        "filename": "microdroid/kdump/kexec.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2023-03-17T21:16:11Z",
+      "side": 1,
+      "message": "I presume this is never compiled for 32 bit? I think off_t is a different size there, but if this is only 64 bit then this shouldn\u0027t matter.",
+      "range": {
+        "startLine": 66,
+        "startChar": 53,
+        "endLine": 66,
+        "endChar": 55
+      },
+      "revId": "2cf2a82454050919ad29ffc3df9c55ecad22155a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
