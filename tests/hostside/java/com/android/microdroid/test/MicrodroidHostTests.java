@@ -115,6 +115,13 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
     private ITestDevice mMicrodroidDevice;
 
+    @After
+    public void tearDownDroid() {
+        if (mMicrodroidDevice != null) {
+            getAndroidDevice().shutdownMicrodroid(mMicrodroidDevice);
+        }
+    }
+
     private int minMemorySize() throws DeviceNotAvailableException {
         CommandRunner android = new CommandRunner(getDevice());
         String abi = android.run("getprop", "ro.product.cpu.abi");
