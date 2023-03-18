@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efb8a932_0a880a1f",
+        "filename": "microdroid/kdump/kexec.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-18T01:06:15Z",
+      "side": 1,
+      "message": "That actually can never happen in Microdroid because these files are full under our control, but ... done.",
+      "parentUuid": "ef541252_af4e6071",
+      "range": {
+        "startLine": 62,
+        "startChar": 12,
+        "endLine": 62,
+        "endChar": 16
+      },
+      "revId": "2cf2a82454050919ad29ffc3df9c55ecad22155a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e7ff0c7_1d92d450",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-17T21:16:11Z",
       "side": 1,
       "message": "I presume this is never compiled for 32 bit? I think off_t is a different size there, but if this is only 64 bit then this shouldn\u0027t matter.",
+      "range": {
+        "startLine": 66,
+        "startChar": 53,
+        "endLine": 66,
+        "endChar": 55
+      },
+      "revId": "2cf2a82454050919ad29ffc3df9c55ecad22155a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c53014e6_9a7b5753",
+        "filename": "microdroid/kdump/kexec.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-18T01:06:15Z",
+      "side": 1,
+      "message": "yes this is 64bit only.",
+      "parentUuid": "7e7ff0c7_1d92d450",
       "range": {
         "startLine": 66,
         "startChar": 53,
