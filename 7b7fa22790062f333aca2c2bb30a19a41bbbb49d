@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12c533a7_309346fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-03-20T15:21:14Z",
+      "side": 1,
+      "message": "Hi David, could you take a look at this cl?\n\nIt\u0027s convenient to use Rialto as starting point for RKP VM/service VM to build the service VM infrastructure. We don\u0027t need to have the service code inside Rialto. If we want to have the service code inside pvmfw, we can just replace rialto with an empty bootloader in aosp/2479977",
+      "revId": "7b7fa22790062f333aca2c2bb30a19a41bbbb49d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
