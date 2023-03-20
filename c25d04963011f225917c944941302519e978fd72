@@ -16,6 +16,40 @@
       "message": "Needs the merge conflicts to be fixed first,",
       "revId": "c25d04963011f225917c944941302519e978fd72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f27d9d4a_77544261",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-20T10:46:08Z",
+      "side": 1,
+      "message": "Please drop this CL (as it modifies a file that wasn\u0027t shipped in Android 13) and comment on the need to patch the `pvmfw.img` prebuilt.",
+      "revId": "c25d04963011f225917c944941302519e978fd72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc9184eb_5276ebe0",
+        "filename": "pvmfw/pvmfw.img",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-20T10:46:08Z",
+      "side": 1,
+      "message": "This prebuilt is what was shipped as `pvmfw` in Android13; if the BSSL patch needs to be back-ported, this file should be updated from http://go/ab/aosp_u-boot-android13 after upgrading `external/boringssl` in the `u-boot-android13` branch of the `kernel/manifest` (see [the XML](https://android.googlesource.com/kernel/manifest/+/refs/heads/u-boot-android13/default.xml#19)).",
+      "revId": "c25d04963011f225917c944941302519e978fd72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
