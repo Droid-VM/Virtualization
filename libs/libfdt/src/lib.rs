@@ -631,6 +631,17 @@ impl Fdt {
         mem::transmute::<&mut [u8], &mut Self>(fdt)
     }
 
+    /// Update this FDT from a slice containing another FDT
+    pub fn copy_from_slice(&mut self, new_fdt: &[u8]) -> Result<()> {
+        if self.buffer.len() < new_fdt.len() {
+            Err(FdtError::NoSpace)
+        } else {
+            self.buffer[..new_fdt.len()].clone_from_slice(new_fdt);
+            self.buffer[new_fdt.len()..].fill(0_u8);
+            Ok(())
+        }
+    }
+
     /// Make the whole slice containing the DT available to libfdt.
     pub fn unpack(&mut self) -> Result<()> {
         // SAFETY - "Opens" the DT in-place (supported use-case) by updating its header and
