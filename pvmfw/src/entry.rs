@@ -1,4 +1,4 @@
-// Copyright 2022, The Android Open Source Project
+// Copyright 2023, The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ use crate::debug_policy::{handle_debug_policy, DebugPolicyError};
 use crate::fdt;
 use crate::heap;
 use crate::helpers;
+use crate::hypervisor;
 use crate::memory::MemoryTracker;
 use crate::mmio_guard;
 use crate::mmu;
@@ -252,6 +253,11 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
 
     let mut memory = MemoryTracker::new(page_table);
     let slices = MemorySlices::new(fdt, payload, payload_size, &mut memory)?;
+
+    hypervisor::init(slices.fdt).map_err(|e| {
+        error!("Failed to initialize hypervisor: {e}");
+        RebootReason::InternalError
+    })?;
 
     rand::init().map_err(|e| {
         error!("Failed to initialize rand: {e}");
