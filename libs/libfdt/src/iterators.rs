@@ -85,6 +85,27 @@ impl<'a> Iterator for RegIterator<'a> {
     }
 }
 
+impl Reg<u64> {
+    const SIZE_CELLS: usize = 4;
+    /// Converts to the format that is consumable by libfdt
+    pub fn to_cells(&self) -> [u8; Self::SIZE_CELLS * core::mem::size_of::<u32>()] {
+        let mut buf = [0_u32; Self::SIZE_CELLS];
+        buf[0] = ((self.addr >> 32) as u32).to_be();
+        buf[1] = (self.addr as u32).to_be();
+        if let Some(size) = self.size {
+            buf[2] = ((size >> 32) as u32).to_be();
+            buf[3] = (size as u32).to_be();
+        }
+        // SAFETY: the size of the two arrays are the same
+        unsafe {
+            core::mem::transmute::<
+                [u32; Self::SIZE_CELLS],
+                [u8; Self::SIZE_CELLS * core::mem::size_of::<u32>()],
+            >(buf)
+        }
+    }
+}
+
 /// Iterator over the address ranges defined by the /memory/ node.
 #[derive(Debug)]
 pub struct MemRegIterator<'a> {
@@ -200,5 +221,27 @@ impl FromSizeCells for u64 {
             SizeCells::Double => (cells.next()? as Self) << 32 | cells.next()? as Self,
             _ => panic!("Invalid size_cells {:?} for u64", cell_count),
         })
+    }
+}
+
+impl AddressRange<(u32, u64), u64, u64> {
+    const SIZE_CELLS: usize = 7;
+    /// Converts to the format that is consumable by libfdt
+    pub fn to_cells(&self) -> [u8; Self::SIZE_CELLS * core::mem::size_of::<u32>()] {
+        let mut buf = [0_u32; Self::SIZE_CELLS];
+        buf[0] = self.addr.0.to_be();
+        buf[1] = ((self.addr.1 >> 32) as u32).to_be();
+        buf[2] = (self.addr.1 as u32).to_be();
+        buf[3] = ((self.parent_addr >> 32) as u32).to_be();
+        buf[4] = (self.parent_addr as u32).to_be();
+        buf[5] = ((self.size >> 32) as u32).to_be();
+        buf[6] = (self.size as u32).to_be();
+        // SAFETY: the size of the two arrays are the same
+        unsafe {
+            core::mem::transmute::<
+                [u32; Self::SIZE_CELLS],
+                [u8; Self::SIZE_CELLS * core::mem::size_of::<u32>()],
+            >(buf)
+        }
     }
 }
