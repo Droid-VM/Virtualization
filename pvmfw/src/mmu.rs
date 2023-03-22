@@ -29,6 +29,8 @@ const DEVICE: Attributes = Attributes::DEVICE_NGNRE.union(Attributes::EXECUTE_NE
 const CODE: Attributes = MEMORY.union(Attributes::READ_ONLY);
 const DATA: Attributes = MEMORY.union(Attributes::EXECUTE_NEVER);
 const RODATA: Attributes = DATA.union(Attributes::READ_ONLY);
+// Enable DBM and read-only flag section to allow tracking dirty state.
+const DATA_DBM: Attributes = DATA.union(Attributes::DBM).union(Attributes::READ_ONLY);
 
 /// High-level API for managing MMU mappings.
 pub struct PageTable {
@@ -69,6 +71,10 @@ impl PageTable {
 
     pub fn map_data(&mut self, range: &Range<usize>) -> Result<(), MapError> {
         self.map_range(range, DATA)
+    }
+
+    pub fn map_data_dbm(&mut self, range: &Range<usize>) -> Result<(), MapError> {
+        self.map_range(range, DATA_DBM)
     }
 
     pub fn map_code(&mut self, range: &Range<usize>) -> Result<(), MapError> {
