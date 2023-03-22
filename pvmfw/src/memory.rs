@@ -144,6 +144,10 @@ impl MemoryTracker {
     const BASE: usize = 0x8000_0000;
     /// First address that can't be translated by a level 1 TTBR0_EL1.
     const MAX_ADDR: usize = 1 << 39;
+    // Hardware dirty bit management available flag (ID_AA64MMFR1_EL1.HAFDBS[1])
+    const DBM_AVAILABLE: usize = 1 << 1;
+    // TCR_EL1.{HA,HD} bits controlling hardware management of access and dirty state
+    const TCR_EL1_HA_HD_BITS: usize = 3 << 39;
 
     /// Create a new instance from an active page table, covering the maximum RAM size.
     pub fn new(page_table: mmu::PageTable) -> Self {
@@ -188,7 +192,7 @@ impl MemoryTracker {
     pub fn alloc_range_mut(&mut self, range: &MemoryRange) -> Result<MemoryRange> {
         let region = MemoryRegion { range: range.clone(), mem_type: MemoryType::ReadWrite };
         self.check(&region)?;
-        self.page_table.map_data(range).map_err(|e| {
+        self.page_table.map_data_dbm(range).map_err(|e| {
             error!("Error during mutable range allocation: {e}");
             MemoryTrackerError::FailedToMap
         })?;
@@ -276,15 +280,44 @@ impl MemoryTracker {
             MemoryTrackerError::RangeUpdateFailed
         })
     }
+
+    /// Sets up hardware dirty state management if available.
+    pub fn setup_dbm() {
+        let x: usize;
+        // Safe because this only reads the value of memory model feature register.
+        unsafe {
+            asm!("mrs {}, id_aa64mmfr1_el1", out(reg) x);
+        }
+        if (x & Self::DBM_AVAILABLE) != 0 {
+            // Safe because this sets the flags of TCR_EL1 to enable hardware
+            // dirty state management.
+            unsafe {
+                asm!(
+                    "mrs {tcr:x}, tcr_el1",
+                    "orr {tcr:x}, {tcr:x}, {flags}",
+                    "msr tcr_el1, {tcr:x}",
+                    tcr = in(reg) 0usize,
+                    flags = in(reg) Self::TCR_EL1_HA_HD_BITS,
+                );
+            }
+        } else {
+            debug!("hardware DBM not available");
+        }
+    }
 }
 
 impl Drop for MemoryTracker {
     fn drop(&mut self) {
-        for region in &self.regions {
+        // Flush dirty pages.
+        for i in 0..self.regions.len() {
+            let region = &self.regions[i];
             match region.mem_type {
                 MemoryType::ReadWrite => {
-                    // TODO(b/269738062): Use PT's dirty bit to only flush pages that were touched.
-                    helpers::flush_region(region.range.start, region.range.len())
+                    self.modify_range(
+                        &Range { start: region.range.start, end: region.range.end },
+                        &flush_dirty_range,
+                    )
+                    .unwrap();
                 }
                 MemoryType::ReadOnly => {}
             }
@@ -438,6 +471,49 @@ pub fn handle_flagged_page_fault(
                 mmio_guard::map(va).map_err(|e| {
                     error!("{e}");
                 })?;
+            }
+        }
+        Ok(())
+    } else {
+        Err(())
+    }
+}
+
+/// Flushes a memory range the descriptor refers to, if the descriptor is in writable-dirty state.
+fn flush_dirty_range(
+    va_range: &VaRange,
+    desc: &mut Descriptor,
+    level: usize,
+) -> core::result::Result<(), ()> {
+    // Only flush ranges corresponding to dirty leaf PTEs.
+    if let Some(flags) = desc.flags() {
+        if is_block_or_page(desc, level)
+            && flags.contains(Attributes::DBM)
+            && !flags.contains(Attributes::READ_ONLY)
+        {
+            helpers::flush_region(va_range.start().0, va_range.len());
+        }
+    }
+    Ok(())
+}
+
+/// Clears read-only flag on a PTE, making it writable-dirty. Used when dirty state is managed
+/// in software to handle permission faults on read-only descriptors.
+pub fn handle_permission_fault(
+    va_range: &VaRange,
+    desc: &mut Descriptor,
+    level: usize,
+) -> core::result::Result<(), ()> {
+    if let Some(flags) = desc.flags() {
+        if is_block_or_page(desc, level) && flags.contains(Attributes::DBM) {
+            desc.modify_flags(Attributes::empty(), Attributes::READ_ONLY);
+            // Safe because it invalidates TLB and doesn't affect Rust.
+            unsafe {
+                asm!(
+                    "tlbi vae1is, {x}",
+                    "dsb ish",
+                    x = in(reg) 1usize << 48 & va_range.start().0 >> 12,
+                );
             }
         }
         Ok(())
