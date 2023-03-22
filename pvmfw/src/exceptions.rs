@@ -14,23 +14,109 @@
 
 //! Exception handlers.
 
+use crate::memory::{MemoryTrackerError, MEMORY};
 use crate::{helpers::page_4kb_of, read_sysreg};
+use core::fmt;
 use vmbase::console;
+use vmbase::logger;
 use vmbase::{console::emergency_write_str, eprintln, power::reboot};
 
-const ESR_32BIT_EXT_DABT: usize = 0x96000010;
 const UART_PAGE: usize = page_4kb_of(console::BASE_ADDRESS);
+
+#[derive(Debug)]
+enum HandleExceptionError {
+    PageTableUnavailable,
+    PageTableNotInitialized,
+    InternalError(MemoryTrackerError),
+    UnknownException,
+}
+
+impl fmt::Display for HandleExceptionError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::PageTableUnavailable => write!(f, "Page table is not available."),
+            Self::PageTableNotInitialized => write!(f, "Page table is not initialized."),
+            Self::InternalError(e) => write!(f, "Error while updating page table: {e}"),
+            Self::UnknownException => write!(f, "An unknown exception occurred, not handled."),
+        }
+    }
+}
+
+impl From<MemoryTrackerError> for HandleExceptionError {
+    fn from(other: MemoryTrackerError) -> Self {
+        Self::InternalError(other)
+    }
+}
+
+#[derive(Debug, PartialEq, Copy, Clone)]
+enum Esr {
+    DataAbortTranslationFault,
+    DataAbortSyncExternalAbort,
+    Unknown(usize),
+}
+
+impl Esr {
+    const EXT_DABT_32BIT: usize = 0x96000010;
+    const TRANSL_FAULT_BASE_32BIT: usize = 0x96000004;
+    const TRANSL_FAULT_ISS_MASK_32BIT: usize = !0x43;
+}
+
+impl From<usize> for Esr {
+    fn from(esr: usize) -> Self {
+        if esr == Self::EXT_DABT_32BIT {
+            Self::DataAbortSyncExternalAbort
+        } else if esr & Self::TRANSL_FAULT_ISS_MASK_32BIT == Self::TRANSL_FAULT_BASE_32BIT {
+            Self::DataAbortTranslationFault
+        } else {
+            Self::Unknown(esr)
+        }
+    }
+}
+
+impl fmt::Display for Esr {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::DataAbortSyncExternalAbort => write!(f, "Synchronous external abort"),
+            Self::DataAbortTranslationFault => write!(f, "Translation fault"),
+            Self::Unknown(v) => write!(f, "Unknown exception esr={v:#08x}"),
+        }
+    }
+}
+
+fn handle_exception(esr: Esr, far: usize) -> Result<(), HandleExceptionError> {
+    // Handle all translation faults on both read and write, and MMIO guard map
+    // flagged invalid pages or blocks that caused the exception.
+    match esr {
+        Esr::DataAbortTranslationFault => {
+            let mut locked = MEMORY.try_lock().ok_or(HandleExceptionError::PageTableUnavailable)?;
+            let memory = locked.as_mut().ok_or(HandleExceptionError::PageTableNotInitialized)?;
+            Ok(memory.handle_mmio_fault(far)?)
+        }
+        _ => Err(HandleExceptionError::UnknownException),
+    }
+}
+
+#[inline]
+fn handling_uart_exception(esr: Esr, far: usize) -> bool {
+    esr == Esr::DataAbortSyncExternalAbort && page_4kb_of(far) == UART_PAGE
+}
 
 #[no_mangle]
 extern "C" fn sync_exception_current(_elr: u64, _spsr: u64) {
-    let esr = read_sysreg!("esr_el1");
+    // Disable logging in exception handler to prevent unsafe writes to UART.
+    let _guard = logger::suppress();
+    let esr: Esr = read_sysreg!("esr_el1").into();
     let far = read_sysreg!("far_el1");
-    // Don't print to the UART if we're handling the exception it could raise.
-    if esr != ESR_32BIT_EXT_DABT || page_4kb_of(far) != UART_PAGE {
-        emergency_write_str("sync_exception_current\n");
-        eprintln!("esr={esr:#08x}");
+
+    if let Err(e) = handle_exception(esr, far) {
+        // Don't print to the UART if we are handling an exception it could raise.
+        if !handling_uart_exception(esr, far) {
+            emergency_write_str("sync_exception_current\n");
+            eprintln!("{e}");
+            eprintln!("{esr}, far={far:#08x}");
+        }
+        reboot()
     }
-    reboot();
 }
 
 #[no_mangle]
