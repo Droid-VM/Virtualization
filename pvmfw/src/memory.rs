@@ -21,10 +21,12 @@ use crate::hvc::{hyp_meminfo, mem_share, mem_unshare};
 use crate::mmio_guard;
 use crate::mmu;
 use crate::smccc;
+use aarch64_paging::paging::{Attributes, Descriptor, MemoryRegion as VaRange, PteUpdater};
 use alloc::alloc::alloc_zeroed;
 use alloc::alloc::dealloc;
 use alloc::alloc::handle_alloc_error;
 use core::alloc::Layout;
+use core::arch::asm;
 use core::cmp::max;
 use core::cmp::min;
 use core::fmt;
@@ -32,10 +34,16 @@ use core::num::NonZeroUsize;
 use core::ops::Range;
 use core::ptr::NonNull;
 use core::result;
-use log::error;
+use log::{debug, error};
+use spin::mutex::SpinMutex;
 use tinyvec::ArrayVec;
 
 pub type MemoryRange = Range<usize>;
+
+pub static MEMORY: SpinMutex<Option<MemoryTracker>> = SpinMutex::new(None);
+unsafe impl Send for MemoryTracker {}
+
+const MMIO_LAZY_MAP_FLAG: Attributes = Attributes::SWFLAG_0;
 
 #[derive(Clone, Copy, Debug, Default)]
 enum MemoryType {
@@ -101,6 +109,8 @@ pub enum MemoryTrackerError {
     FailedToMap,
     /// Error from an MMIO guard call.
     MmioGuard(mmio_guard::Error),
+    /// Error updating page table entry range.
+    RangeUpdateFailed,
 }
 
 impl fmt::Display for MemoryTrackerError {
@@ -114,6 +124,7 @@ impl fmt::Display for MemoryTrackerError {
             Self::Overlaps => write!(f, "New region overlaps with tracked regions"),
             Self::FailedToMap => write!(f, "Failed to map the new region"),
             Self::MmioGuard(e) => e.fmt(f),
+            Self::RangeUpdateFailed => write!(f, "Failed to update page table range"),
         }
     }
 }
@@ -212,10 +223,7 @@ impl MemoryTracker {
             error!("Error during MMIO device mapping: {e}");
             MemoryTrackerError::FailedToMap
         })?;
-
-        for page_base in page_iterator(&range) {
-            mmio_guard::map(page_base)?;
-        }
+        self.modify_range(&range, &flag_for_mmio_map)?;
 
         if self.mmio_regions.try_push(range).is_some() {
             return Err(MemoryTrackerError::Full);
@@ -259,6 +267,14 @@ impl MemoryTracker {
         }
 
         Ok(())
+    }
+
+    /// Applies the updater function to PTEs corresponding to a virtual address range.
+    pub fn modify_range(&mut self, range: &MemoryRange, f: &PteUpdater) -> Result<()> {
+        self.page_table.modify_range(range, f).map_err(|e| {
+            error!("Error updating page table entries: {e}");
+            MemoryTrackerError::RangeUpdateFailed
+        })
     }
 }
 
@@ -380,4 +396,52 @@ pub fn virt_to_phys(vaddr: NonNull<u8>) -> usize {
 /// Panics if `paddr` is 0.
 pub fn phys_to_virt(paddr: usize) -> NonNull<u8> {
     NonNull::new(paddr as _).unwrap()
+}
+
+/// Checks whether a PTE at given level is a valid page or block descriptor.
+fn is_block_or_page(desc: &Descriptor, level: usize) -> bool {
+    const LEAF_PTE_LEVEL: usize = 3;
+    level == LEAF_PTE_LEVEL && desc.is_table_or_page()
+        || level < LEAF_PTE_LEVEL && !desc.is_table_or_page()
+}
+
+/// Flags a page table entry for later MMIO mapping.
+fn flag_for_mmio_map(
+    va_range: &VaRange,
+    desc: &mut Descriptor,
+    level: usize,
+) -> core::result::Result<(), ()> {
+    if is_block_or_page(desc, level) {
+        desc.modify_flags(MMIO_LAZY_MAP_FLAG, Attributes::VALID);
+        // Safe because it invalidates TLB and doesn't affect Rust.
+        unsafe {
+            asm!(
+                "tlbi vae1is, {x}",
+                "dsb ish",
+                x = in(reg) 1usize << 48 & va_range.start().0 >> 12,
+            );
+        }
+    }
+    Ok(())
+}
+
+/// MMIO maps a page marked with MMIO_MAPPED flag and marks it as valid.
+pub fn handle_flagged_page_fault(
+    va_range: &VaRange,
+    desc: &mut Descriptor,
+    _level: usize,
+) -> core::result::Result<(), ()> {
+    if let Some(flags) = desc.flags() {
+        if flags.contains(MMIO_LAZY_MAP_FLAG) {
+            desc.modify_flags(Attributes::VALID, MMIO_LAZY_MAP_FLAG);
+            for va in page_iterator(&(va_range.start().0..va_range.end().0)) {
+                mmio_guard::map(va).map_err(|e| {
+                    error!("{e}");
+                })?;
+            }
+        }
+        Ok(())
+    } else {
+        Err(())
+    }
 }
