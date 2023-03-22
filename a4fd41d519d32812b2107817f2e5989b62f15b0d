@@ -419,6 +419,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "469ab79b_58f49b85",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-22T14:07:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a62ddf12_e6d40815",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 62
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6da25b28_648aa7c0",
@@ -614,6 +638,30 @@
       "side": 1,
       "message": "I see 17 being used in multiple places already without it being defined as a const. For example:\n\nhttps://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/pvmfw/src/hvc.rs;l\u003d78",
       "parentUuid": "de25334a_ee2ae359",
+      "range": {
+        "startLine": 111,
+        "startChar": 34,
+        "endLine": 111,
+        "endChar": 36
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24c4abc7_956688cd",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-22T14:07:56Z",
+      "side": 1,
+      "message": "Ack; using the wrapping function suggested above would wrap these low-level details.",
+      "parentUuid": "12b1c3bd_12682c7f",
       "range": {
         "startLine": 111,
         "startChar": 34,
