@@ -16,8 +16,7 @@
 
 use crate::helpers;
 use aarch64_paging::idmap::IdMap;
-use aarch64_paging::paging::Attributes;
-use aarch64_paging::paging::MemoryRegion;
+use aarch64_paging::paging::{Attributes, MemoryRegion, PteUpdater};
 use aarch64_paging::MapError;
 use core::ops::Range;
 use vmbase::layout;
@@ -82,5 +81,9 @@ impl PageTable {
 
     fn map_range(&mut self, range: &Range<usize>, attr: Attributes) -> Result<(), MapError> {
         self.idmap.map_range(&MemoryRegion::new(range.start, range.end), attr)
+    }
+
+    pub fn modify_range(&mut self, range: &Range<usize>, f: &PteUpdater) -> Result<(), MapError> {
+        self.idmap.modify_range(&MemoryRegion::new(range.start, range.end), f)
     }
 }

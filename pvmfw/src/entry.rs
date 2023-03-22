@@ -19,7 +19,7 @@ use crate::debug_policy::{handle_debug_policy, DebugPolicyError};
 use crate::fdt;
 use crate::heap;
 use crate::helpers;
-use crate::memory::MemoryTracker;
+use crate::memory::{MemoryTracker, MEMORY};
 use crate::mmio_guard;
 use crate::mmu;
 use crate::rand;
@@ -244,14 +244,15 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
 
     let (bcc_slice, debug_policy) = appended.get_entries();
 
+    MemoryTracker::setup_dbm();
     debug!("Activating dynamic page table...");
     // SAFETY - page_table duplicates the static mappings for everything that the Rust code is
     // aware of so activating it shouldn't have any visible effect.
     unsafe { page_table.activate() };
     debug!("... Success!");
 
-    let mut memory = MemoryTracker::new(page_table);
-    let slices = MemorySlices::new(fdt, payload, payload_size, &mut memory)?;
+    MEMORY.lock().replace(MemoryTracker::new(page_table));
+    let slices = MemorySlices::new(fdt, payload, payload_size, MEMORY.lock().as_mut().unwrap())?;
 
     rand::init().map_err(|e| {
         error!("Failed to initialize rand: {e}");
@@ -259,7 +260,7 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
     })?;
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
-    crate::main(slices.fdt, slices.kernel, slices.ramdisk, bcc_slice, &mut memory)?;
+    crate::main(slices.fdt, slices.kernel, slices.ramdisk, bcc_slice)?;
 
     helpers::flushed_zeroize(bcc_slice);
     helpers::flush(slices.fdt.as_slice());
@@ -273,7 +274,7 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
     }
 
     info!("Expecting a bug making MMIO_GUARD_UNMAP return NOT_SUPPORTED on success");
-    memory.mmio_unmap_all().map_err(|e| {
+    MEMORY.lock().as_mut().unwrap().mmio_unmap_all().map_err(|e| {
         error!("Failed to unshare MMIO ranges: {e}");
         RebootReason::InternalError
     })?;
@@ -281,6 +282,7 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
         error!("Failed to unshare the UART: {e}");
         RebootReason::InternalError
     })?;
+    MEMORY.lock().take().unwrap();
 
     Ok(slices.kernel.as_ptr() as usize)
 }

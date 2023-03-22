@@ -15,12 +15,17 @@
 //! Exception handlers.
 
 use crate::helpers::page_4kb_of;
+use crate::memory::{handle_flagged_page_fault, MEMORY};
+use aarch64_paging::paging::PteUpdater;
 use core::arch::asm;
+use core::ops::Range;
 use vmbase::console;
 use vmbase::{console::emergency_write_str, eprintln, power::reboot};
 
 const ESR_32BIT_EXT_DABT: u64 = 0x96000010;
 const UART_PAGE: usize = page_4kb_of(console::BASE_ADDRESS);
+const ESR_32BIT_TRANSL_FAULT_BASE: u64 = 0x96000004;
+const ESR_32BIT_TRANSL_FAULT_ISS_MASK: u64 = !0x43;
 
 #[no_mangle]
 extern "C" fn sync_exception_current(_elr: u64, _spsr: u64) {
@@ -31,7 +36,44 @@ extern "C" fn sync_exception_current(_elr: u64, _spsr: u64) {
         emergency_write_str("sync_exception_current\n");
         print_esr(esr);
     }
+
+    let range = Range { start: far as usize, end: far as usize + 1 };
+    // Handle all translation faults on both read and write, and MMIO guard map
+    // flagged invalid pages or blocks that caused the exception.
+    // Handle permission faults for DBM flagged entries, and flag them as dirty on write.
+    if esr & ESR_32BIT_TRANSL_FAULT_ISS_MASK == ESR_32BIT_TRANSL_FAULT_BASE
+        && modify_pte_range(&range, &handle_flagged_page_fault).is_ok()
+    {
+        return;
+    }
     reboot();
+}
+
+fn modify_pte_range(va_range: &Range<usize>, f: &PteUpdater) -> Result<(), ()> {
+    let is_uart = (page_4kb_of(va_range.start)..va_range.end).contains(&UART_PAGE);
+    match MEMORY.try_lock() {
+        None => {
+            if !is_uart {
+                eprintln!("page table unavailable");
+            }
+        }
+        Some(mut g) => match g.as_mut() {
+            None => {
+                if !is_uart {
+                    eprintln!("page table not initialized");
+                }
+            }
+            Some(memory) => match memory.modify_range(va_range, f) {
+                Err(e) => {
+                    if !is_uart {
+                        eprintln!("page table update error: {}", e);
+                    }
+                }
+                _ => return Ok(()),
+            },
+        },
+    }
+    Err(())
 }
 
 #[no_mangle]
