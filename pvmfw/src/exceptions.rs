@@ -15,7 +15,7 @@
 //! Exception handlers.
 
 use crate::helpers::page_4kb_of;
-use crate::memory::{handle_flagged_page_fault, MEMORY};
+use crate::memory::{handle_flagged_page_fault, handle_permission_fault, MEMORY};
 use aarch64_paging::paging::PteUpdater;
 use core::arch::asm;
 use core::ops::Range;
@@ -26,6 +26,8 @@ const ESR_32BIT_EXT_DABT: u64 = 0x96000010;
 const UART_PAGE: usize = page_4kb_of(console::BASE_ADDRESS);
 const ESR_32BIT_TRANSL_FAULT_BASE: u64 = 0x96000004;
 const ESR_32BIT_TRANSL_FAULT_ISS_MASK: u64 = !0x43;
+const ESR_32BIT_PERM_FAULT_BASE: u64 = 0x9600004C;
+const ESR_32BIT_PERM_FAULT_ISS_MASK: u64 = !0x3;
 
 #[no_mangle]
 extern "C" fn sync_exception_current(_elr: u64, _spsr: u64) {
@@ -43,6 +45,8 @@ extern "C" fn sync_exception_current(_elr: u64, _spsr: u64) {
     // Handle permission faults for DBM flagged entries, and flag them as dirty on write.
     if esr & ESR_32BIT_TRANSL_FAULT_ISS_MASK == ESR_32BIT_TRANSL_FAULT_BASE
         && modify_pte_range(&range, &handle_flagged_page_fault).is_ok()
+        || esr & ESR_32BIT_PERM_FAULT_ISS_MASK == ESR_32BIT_PERM_FAULT_BASE
+            && modify_pte_range(&range, &handle_permission_fault).is_ok()
     {
         return;
     }
