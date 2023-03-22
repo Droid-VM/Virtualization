@@ -397,6 +397,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a62ddf12_e6d40815",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-03-22T14:03:57Z",
+      "side": 1,
+      "message": "I am keeping these as hypervisor specific methods - as some other hypervisor could benefit from these in place.",
+      "parentUuid": "acdd3f6c_be008653",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 62
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6da25b28_648aa7c0",
         "filename": "pvmfw/src/hvc.rs",
         "patchSetId": 1
@@ -578,6 +602,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12b1c3bd_12682c7f",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-03-22T14:03:57Z",
+      "side": 1,
+      "message": "I see 17 being used in multiple places already without it being defined as a const. For example:\n\nhttps://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/pvmfw/src/hvc.rs;l\u003d78",
+      "parentUuid": "de25334a_ee2ae359",
+      "range": {
+        "startLine": 111,
+        "startChar": 34,
+        "endLine": 111,
+        "endChar": 36
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95941bb9_1751c87e",
         "filename": "pvmfw/src/hvc.rs",
         "patchSetId": 1
@@ -589,6 +637,30 @@
       "writtenOn": "2023-03-09T13:59:53Z",
       "side": 1,
       "message": "why is this unsafe?",
+      "range": {
+        "startLine": 139,
+        "startChar": 8,
+        "endLine": 139,
+        "endChar": 14
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6d1217d_135c7043",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-03-22T14:03:57Z",
+      "side": 1,
+      "message": "error[E0133]: use of mutable static is unsafe and requires unsafe function or block",
+      "parentUuid": "95941bb9_1751c87e",
       "range": {
         "startLine": 139,
         "startChar": 8,
