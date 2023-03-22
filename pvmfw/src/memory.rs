@@ -18,6 +18,7 @@
 
 use crate::helpers::{self, align_down, align_up, page_4kb_of, SIZE_4KB};
 use crate::mmu;
+use aarch64_paging::paging::{Attributes, Descriptor, MemoryRegion as VaRange};
 use alloc::alloc::alloc_zeroed;
 use alloc::alloc::dealloc;
 use alloc::alloc::handle_alloc_error;
@@ -31,6 +32,7 @@ use core::ptr::NonNull;
 use core::result;
 use hyp::{hyp_meminfo, mem_share, mem_unshare, mmio_guard};
 use log::error;
+use spin::mutex::SpinMutex;
 use tinyvec::ArrayVec;
 
 /// Base of the system's contiguous "main" memory.
@@ -39,6 +41,9 @@ pub const BASE_ADDR: usize = 0x8000_0000;
 pub const MAX_ADDR: usize = 1 << 40;
 
 pub type MemoryRange = Range<usize>;
+
+pub static MEMORY: SpinMutex<Option<MemoryTracker>> = SpinMutex::new(None);
+unsafe impl Send for MemoryTracker {}
 
 #[derive(Clone, Copy, Debug, Default)]
 enum MemoryType {
@@ -104,6 +109,8 @@ pub enum MemoryTrackerError {
     FailedToMap,
     /// Error from an MMIO guard call.
     MmioGuard(mmio_guard::Error),
+    /// Error updating page table entry range.
+    RangeUpdateFailed,
 }
 
 impl fmt::Display for MemoryTrackerError {
@@ -117,6 +124,7 @@ impl fmt::Display for MemoryTrackerError {
             Self::Overlaps => write!(f, "New region overlaps with tracked regions"),
             Self::FailedToMap => write!(f, "Failed to map the new region"),
             Self::MmioGuard(e) => e.fmt(f),
+            Self::RangeUpdateFailed => write!(f, "Failed to update page table range"),
         }
     }
 }
@@ -207,14 +215,10 @@ impl MemoryTracker {
             return Err(MemoryTrackerError::Full);
         }
 
-        self.page_table.map_device(&range).map_err(|e| {
+        self.page_table.map_device_lazy(&range).map_err(|e| {
             error!("Error during MMIO device mapping: {e}");
             MemoryTrackerError::FailedToMap
         })?;
-
-        for page_base in page_iterator(&range) {
-            mmio_guard::map(page_base)?;
-        }
 
         if self.mmio_regions.try_push(range).is_some() {
             return Err(MemoryTrackerError::Full);
@@ -258,6 +262,18 @@ impl MemoryTracker {
         }
 
         Ok(())
+    }
+
+    /// Handles translation fault for blocks flagged for lazy MMIO mapping by enabling the page
+    /// table entry and MMIO guard mapping the block. Breaks apart a block entry if required.
+    pub fn handle_mmio_fault(&mut self, addr: usize) -> Result<()> {
+        let page_range = page_4kb_of(addr)..page_4kb_of(addr) + SIZE_4KB;
+        self.page_table
+            .modify_range(&page_range, &verify_lazy_mapped_block)
+            .map_err(|_| MemoryTrackerError::RangeUpdateFailed)?;
+        // Maps a single device page.
+        self.page_table.map_device(&page_range).map_err(|_| MemoryTrackerError::FailedToMap)?;
+        Ok(mmio_guard::map(page_range.start)?)
     }
 }
 
@@ -379,4 +395,32 @@ pub fn virt_to_phys(vaddr: NonNull<u8>) -> usize {
 /// Panics if `paddr` is 0.
 pub fn phys_to_virt(paddr: usize) -> NonNull<u8> {
     NonNull::new(paddr as _).unwrap()
+}
+
+/// Checks whether a PTE at given level is a page or block descriptor.
+fn is_leaf_pte(desc: &Descriptor, level: usize) -> bool {
+    const LEAF_PTE_LEVEL: usize = 3;
+    if let Some(flags) = desc.flags() {
+        level == LEAF_PTE_LEVEL && flags.contains(Attributes::TABLE_OR_PAGE)
+            || level < LEAF_PTE_LEVEL && !flags.contains(Attributes::TABLE_OR_PAGE)
+    } else {
+        false
+    }
+}
+
+/// Checks whether block flags indicate it should be MMIO guard mapped.
+fn verify_lazy_mapped_block(
+    _range: &VaRange,
+    desc: &mut Descriptor,
+    level: usize,
+) -> result::Result<(), ()> {
+    let Some(flags) = desc.flags() else {
+        return Err(());
+    };
+    if !is_leaf_pte(desc, level)
+        || flags.contains(mmu::MMIO_LAZY_MAP_FLAG) && !flags.contains(Attributes::VALID)
+    {
+        return Ok(());
+    }
+    Err(())
 }
