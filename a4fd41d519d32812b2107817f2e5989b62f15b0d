@@ -721,6 +721,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f9f8a40_4af2bca4",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-22T14:36:22Z",
+      "side": 1,
+      "message": "Ah, that\u0027s right. Since pvmfw is single threaded, this actually isn\u0027t unsafe, but rust anyway demands it.\n\nBut seeing lots of unsafe blocks is uncomfortable anyway.\n\nGiven that the variable won\u0027t be mutated after the hypervisor is determined, perhaps you want to add an accessor function that returns immutable reference to it? For example, \n\n```\nfn get_cur_hyp() -\u003e \u0026\u0027static dyn Hypervisor {\n    // SAFETY - this is mutated only once as part of the initialization and \n    // access to this happens only after the initialization\n    unsafe { Cur_Hypervisor }\n}\n\npub fn hyp_meminfo() -\u003e ... {\n    get_cur_hyp().hyp_meminfo() // no unsafe bock here.\n}\n```",
+      "parentUuid": "c6d1217d_135c7043",
+      "range": {
+        "startLine": 139,
+        "startChar": 8,
+        "endLine": 139,
+        "endChar": 14
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8a623055_e47a346d",
         "filename": "pvmfw/src/hvc.rs",
         "patchSetId": 1
