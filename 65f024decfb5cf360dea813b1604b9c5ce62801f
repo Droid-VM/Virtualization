@@ -16,6 +16,52 @@
       "message": "I have uploaded new version. I expect to test it by next week, wanted early feedback on what I had so far! Pls review.",
       "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "045b5097_2ce7c3ad",
+        "filename": "pvmfw/src/hypervisor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2023-03-22T18:46:24Z",
+      "side": 1,
+      "message": "const KVM_UUID: Uuid \u003d uuid!(\"28b46fb6-2ec5-11e9-a9ca-4b564d003a74\");\n\nThen, no need to parse the uuid at runtime.",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 62
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3be19c5b_5b9c1c3e",
+        "filename": "pvmfw/src/hypervisor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2023-03-22T18:46:24Z",
+      "side": 1,
+      "message": "I think this reads better:\n\n```\nlet hypervisor \u003d match get_hyp_uuid() {\n    KVM_UUID \u003d\u003e Ok(\u0026KvmHypervisor),\n    GUNYAH_UUID \u003d\u003e {\n       gunyah::init(fdt).map_err(|_| Error::HypInitFailed)?;\n       Ok(\u0026GunyahHypervisor)\n    },\n    unknown_uuid \u003d\u003e Err(Error::UnknownHypervisorUUID(unknown_uuid)),\n}?;\n\n// Safe as we let this code snipped execute only once\nunsafe {\n   CUR_HYPERVISOR \u003d Some(hypervisor);\n}\n```",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 61
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
