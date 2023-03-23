@@ -121,6 +121,22 @@ public final class ProcessUtil {
         return getSingleChildProcess(virtmgrPid, CROSVM_BIN, shellExecutor);
     }
 
+    public static int getNumThreads(int pid, Function<String, String> shellExecutor) {
+        String cmd = "cat /proc/" + pid + "/status";
+        return shellExecutor
+                .apply(cmd)
+                .trim()
+                .lines()
+                .filter(l -> l.startsWith("Threads:"))
+                .map(l -> l.substring("Threads:".length()).trim())
+                .mapToInt(Integer::parseInt)
+                .findFirst()
+                .orElseThrow(
+                        () ->
+                                new IllegalStateException(
+                                        "Could not find Threads entry for PID " + pid));
+    }
+
     // To ensures that only one object is created at a time.
     private ProcessUtil() {}
 
