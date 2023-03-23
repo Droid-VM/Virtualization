@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8553c64_ec992cfb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T18:33:38Z",
+      "side": 1,
+      "message": "AFAICT, this CL would enable a malicious host to ramdump a non-debuggable pVM; doesn\u0027t this violate our threat model? Should pvmfw be reworked to conditionally remove `crashkernel` iff the DP doesn\u0027t enable `ramdump` **and** the [mode](http://cs/android/packages/modules/Virtualization/pvmfw/src/dice.rs;l\u003d48;rcl\u003d0a3a8c6e8e0a90c05731eaac6dda374cdbead8f0) is \"normal\" (not debug)?",
+      "revId": "1fc6d9a0149ecfa4d123678c006a5eb9b36d3dd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "079c594a_3ca53047",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 3
