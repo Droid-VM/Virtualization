@@ -14,7 +14,7 @@
 
 //! Support for the debug policy overlay in pvmfw
 
-use alloc::{vec, vec::Vec};
+use alloc::vec::Vec;
 use core::ffi::CStr;
 use core::fmt;
 use libfdt::FdtError;
@@ -61,68 +61,6 @@ unsafe fn apply_debug_policy(
         .map_err(|e| DebugPolicyError::DebugPolicyFdt("Failed to apply overlay", e))?;
 
     fdt.pack().map_err(|e| DebugPolicyError::OverlaidFdt("Failed to re-pack", e))
-}
-
-/// Disables ramdump by removing crashkernel from bootargs in /chosen.
-fn disable_ramdump(fdt: &mut libfdt::Fdt) -> Result<(), DebugPolicyError> {
-    let chosen_path = CStr::from_bytes_with_nul(b"/chosen\0").unwrap();
-    let bootargs_name = CStr::from_bytes_with_nul(b"bootargs\0").unwrap();
-
-    let chosen = match fdt
-        .node(chosen_path)
-        .map_err(|e| DebugPolicyError::Fdt("Failed to find /chosen", e))?
-    {
-        Some(node) => node,
-        None => return Ok(()),
-    };
-
-    let bootargs = match chosen
-        .getprop_str(bootargs_name)
-        .map_err(|e| DebugPolicyError::Fdt("Failed to find bootargs prop", e))?
-    {
-        Some(value) if !value.to_bytes().is_empty() => value,
-        _ => return Ok(()),
-    };
-
-    // TODO: Improve add 'crashkernel=17MB' only when it's unnecessary.
-    //       Currently 'crashkernel=17MB' in virtualizationservice and passed by
-    //       chosen node, because it's not exactly a debug policy but a
-    //       configuration. However, it's actually microdroid specific
-    //       so we need a way to generalize it.
-    let mut args = vec![];
-    for arg in bootargs.to_bytes().split(|byte| byte.is_ascii_whitespace()) {
-        if arg.is_empty() || arg.starts_with(b"crashkernel=") {
-            continue;
-        }
-        args.push(arg);
-    }
-    let mut new_bootargs = args.as_slice().join(&b" "[..]);
-    new_bootargs.push(b'\0');
-
-    // We've checked existence of /chosen node at the beginning.
-    let mut chosen_mut = fdt.node_mut(chosen_path).unwrap().unwrap();
-    chosen_mut.setprop(bootargs_name, new_bootargs.as_slice()).map_err(|e| {
-        DebugPolicyError::OverlaidFdt("Failed to remove crashkernel. FDT might be corrupted", e)
-    })
-}
-
-/// Returns true only if fdt has ramdump prop in the /avf/guest/common node with value <1>
-fn is_ramdump_enabled(fdt: &libfdt::Fdt) -> Result<bool, DebugPolicyError> {
-    let common = match fdt
-        .node(CStr::from_bytes_with_nul(b"/avf/guest/common\0").unwrap())
-        .map_err(|e| DebugPolicyError::DebugPolicyFdt("Failed to find /avf/guest/common node", e))?
-    {
-        Some(node) => node,
-        None => return Ok(false),
-    };
-
-    match common
-        .getprop_u32(CStr::from_bytes_with_nul(b"ramdump\0").unwrap())
-        .map_err(|e| DebugPolicyError::DebugPolicyFdt("Failed to find ramdump prop", e))?
-    {
-        Some(1) => Ok(true),
-        _ => Ok(false),
-    }
 }
 
 /// Enables console output by adding kernel.printk.devkmsg and kernel.console to bootargs.
@@ -194,13 +132,6 @@ pub unsafe fn handle_debug_policy(
 ) -> Result<(), DebugPolicyError> {
     if let Some(dp) = debug_policy {
         apply_debug_policy(fdt, dp)?;
-    }
-
-    // Handles ramdump in the debug policy
-    if is_ramdump_enabled(fdt)? {
-        info!("ramdump is enabled by debug policy");
-    } else {
-        disable_ramdump(fdt)?;
     }
 
     // Handles console output in the debug policy
