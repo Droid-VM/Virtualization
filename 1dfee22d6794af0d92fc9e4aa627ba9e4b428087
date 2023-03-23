@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25c30df0_22e234d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-03-23T14:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15b49204_52211c90",
+      "range": {
+        "startLine": 9,
+        "startChar": 16,
+        "endLine": 9,
+        "endChar": 29
+      },
+      "revId": "1dfee22d6794af0d92fc9e4aa627ba9e4b428087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23ae5893_4dcd02ed",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-23T13:18:41Z",
       "side": 1,
       "message": "typo",
+      "range": {
+        "startLine": 13,
+        "startChar": 61,
+        "endLine": 13,
+        "endChar": 63
+      },
+      "revId": "1dfee22d6794af0d92fc9e4aa627ba9e4b428087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e1cf5e1_a58573d3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-03-23T14:58:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23ae5893_4dcd02ed",
       "range": {
         "startLine": 13,
         "startChar": 61,
@@ -156,6 +204,30 @@
       "side": 1,
       "message": "Ack. But thinking again, my idea actually doesn\u0027t sound like a good idea because the core build system shouldn\u0027t be aware of mk files outside of it.",
       "parentUuid": "8c58c738_23fc4e44",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 68
+      },
+      "revId": "1dfee22d6794af0d92fc9e4aa627ba9e4b428087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24b5327f_ce2e1a0d",
+        "filename": "apex/product_packages.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-03-23T14:58:49Z",
+      "side": 1,
+      "message": "Checked with Colin, he is ok with this change (and also is ok with adding  assertion in the build system).\n\nI\u0027m erring towards having both (automatically inherit updatable_apex.mk here, and adding an assertion in the build system), so that they effectively check each-other.",
+      "parentUuid": "38554b16_81074440",
       "range": {
         "startLine": 22,
         "startChar": 0,
