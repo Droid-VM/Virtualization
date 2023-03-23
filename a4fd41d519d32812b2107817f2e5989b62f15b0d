@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "fda2e10f_8f326299",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75a04302_bb53a7d4",
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "90bb1f70_22b264d3",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "writtenOn": "2023-03-13T08:49:01Z",
       "side": 1,
       "message": "Thanks for the feedback! Am working on it.",
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9fdfedd_99f43a8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c197d582_ca1c120c",
       "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -305,6 +341,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19475f7e_ecb7e0ce",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0192f853_84dc1b1c",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1d8ef1b_c68b93f3",
@@ -516,6 +576,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4319c312_b786ac96",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf723c89_27afc798",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 28
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acdd3f6c_be008653",
@@ -648,6 +732,30 @@
       "side": 1,
       "message": "Having a single binary that dynamically detects the current HV is fine (this is what we have for crosvm). We can always revisit the static approach but for now, having a unified implementation is worth the small size increase.",
       "parentUuid": "95ca36fb_1ce1f6dc",
+      "range": {
+        "startLine": 103,
+        "startChar": 27,
+        "endLine": 103,
+        "endChar": 42
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac921595_2eeb80a7",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8f4ddf96_607948b5",
       "range": {
         "startLine": 103,
         "startChar": 27,
@@ -884,6 +992,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ec9224d6_3db9c717",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "Thanks for adding the function; could you move `get_cur_hyp()` under `smccc` and give it a more SMCCC-ish name such as `query_vendor_hyp_call_uid` (verbose but closer to the terminology used by section 5.3)?",
+      "parentUuid": "24c4abc7_956688cd",
+      "range": {
+        "startLine": 111,
+        "startChar": 34,
+        "endLine": 111,
+        "endChar": 36
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95941bb9_1751c87e",
         "filename": "pvmfw/src/hvc.rs",
         "patchSetId": 1
@@ -1061,6 +1193,30 @@
       "writtenOn": "2023-03-13T21:01:49Z",
       "side": 1,
       "message": "Incorrect copyright",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 33
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57336ee5_a1a5a5e1",
+        "filename": "pvmfw/src/hvc/gunyah_hypervisor.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd56d849_b614fbe7",
       "range": {
         "startLine": 1,
         "startChar": 0,
@@ -1349,6 +1505,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8d63c604_b425871b",
+        "filename": "pvmfw/src/hvc/gunyah_hypervisor.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "Would it make sense for pvmfw to support both `QCOM_GUNYAH` and `GUNYAH`? I see that PS2 limits it to only one.",
+      "parentUuid": "2203917e_1ca7fc2f",
+      "range": {
+        "startLine": 69,
+        "startChar": 7,
+        "endLine": 72,
+        "endChar": 61
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27a41e3f_cbb580bc",
         "filename": "pvmfw/src/hvc/gunyah_hypervisor.rs",
         "patchSetId": 1
@@ -1384,6 +1564,30 @@
       "side": 1,
       "message": "Hmm - I think we can defer that until KVM comes around to exercising that path. AFAICS KVM has mem_shar APIs at runtime which it will stick for considerable time and hence no immediate benefite I can see from that abstraction. On similar grounds we decided not to move KVM specific hvcs to hvc/kvm.rs.",
       "parentUuid": "27a41e3f_cbb580bc",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 5
+      },
+      "revId": "a4fd41d519d32812b2107817f2e5989b62f15b0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efc50462_6c857ee1",
+        "filename": "pvmfw/src/hvc/gunyah_hypervisor.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "Note that we still parse the swiotlb region to validate it for the guest (see [`parse_swiotlb_nodes`](https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/pvmfw/src/fdt.rs;l\u003d390;drc\u003db87f330440773513371644387db7616ac3c208f5)) so `swiotlb_range` could be obtained from a validated `DeviceTreeInfo::swiotlb_info` but happy to keep this for a later patch; @jiyong@google.com, WDYT?",
+      "parentUuid": "e66eeb7c_8e0d7e2e",
       "range": {
         "startLine": 76,
         "startChar": 0,

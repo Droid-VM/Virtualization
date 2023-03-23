@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "43f83dd1_14eeb3dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "I can\u0027t do it for you; please then make this clear by marking the CL as WIP (upper-right hamburger button on the CL\u0027s main web page).",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 37
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "66fd4d8e_109902ef",
@@ -35,6 +58,208 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cc9ef0d_fcb830e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "The overall approach looks good but there are a few fundamental issues with PS2 (`hypervisor::init` too late for pKVM\u0027s MMIO_GUARD \u0026 potential risk of page faults when accessing Gunyah\u0027s swiotlb) and many minor points to address.",
+      "parentUuid": "66fd4d8e_109902ef",
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06152880_eb46c164",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this take place earlier? At least before we `mmio_guard::init` for the UART? Otherwise those calls will now panic when `unwrap`-ing the `CUR_HYPERVISOR`, AFAICT.",
+      "range": {
+        "startLine": 257,
+        "startChar": 4,
+        "endLine": 257,
+        "endChar": 21
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "560cf34f_d3ad3bb3",
+        "filename": "pvmfw/src/hypervisor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "nit: Could you introduce `crate::helpers::HYP_PAGE_SIZE\u003dSIZE_4KB` and use that here, instead?",
+      "range": {
+        "startLine": 17,
+        "startChar": 20,
+        "endLine": 17,
+        "endChar": 28
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5611d94_d11954f8",
+        "filename": "pvmfw/src/hypervisor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "nit: could `mod` come before any `use`?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 8
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaf924ee_ef07a19d",
+        "filename": "pvmfw/src/hypervisor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "I know that it\u0027s painfully verbose but could you `.try_into().unwrap()` instead of `as` so that changes in `size_of::\u003cusize\u003e()` are caught by the code?",
+      "range": {
+        "startLine": 59,
+        "startChar": 19,
+        "endLine": 59,
+        "endChar": 26
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea868413_90ee573d",
+        "filename": "pvmfw/src/hypervisor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "Given the way we discover the hypervisor, WDYT of introducing an associated constant `Hypervisor::UUID`? This would force `impl`s of `Hypervisor` to provide a UUID, which could be used in the match in `init`:\n\n    let hypervisor \u003d match hyp_uuid() {\n        KvmHypervisor::UUID \u003d\u003e ...,\n        GunyahHypervisor::UUID \u003d\u003e ...,",
+      "range": {
+        "startLine": 136,
+        "startChar": 10,
+        "endLine": 136,
+        "endChar": 20
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c71c9311_8df2a434",
+        "filename": "pvmfw/src/hypervisor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "`.try_into().unwrap()`",
+      "range": {
+        "startLine": 141,
+        "startChar": 19,
+        "endLine": 141,
+        "endChar": 26
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5256b78b_7524a227",
+        "filename": "pvmfw/src/hypervisor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "If we keep `HYP_INIT_STATE` (see other comment), please turn this into an `enum`.",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 29
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a95ab67e_ee1cddf9",
+        "filename": "pvmfw/src/hypervisor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "What\u0027s the point of this variable now that `CUR_HYPERVISOR` is an `Option`?",
+      "range": {
+        "startLine": 147,
+        "startChar": 7,
+        "endLine": 147,
+        "endChar": 21
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "045b5097_2ce7c3ad",
@@ -53,6 +278,76 @@
         "startChar": 0,
         "endLine": 150,
         "endChar": 62
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86214d36_1d787c58",
+        "filename": "pvmfw/src/hypervisor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "+1 regarding producing the UUID at build time but the `uuid!` macro isn\u0027t available here as AOSP is unfortunately currently stuck with [an older version of the `uuid` crate](https://cs.android.com/android/platform/superproject/+/master:external/rust/crates/uuid/Android.bp;l\u003d46;drc\u003d6bef7d189d0059a30956a0171357ca6cb67c3099) so instead, I\u0027d recommend using [`Uuid::from_u128`](https://docs.rs/uuid/0.8.2/uuid/struct.Uuid.html#method.from_u128) which is `const` and _almost_ as readable.",
+      "parentUuid": "045b5097_2ce7c3ad",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 62
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2333fb72_2916f8a9",
+        "filename": "pvmfw/src/hypervisor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "`as u32 as u128` to ensure that we don\u0027t carry over any upper bit, just in case?",
+      "range": {
+        "startLine": 157,
+        "startChar": 16,
+        "endLine": 157,
+        "endChar": 23
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15c56c01_ed1c4e9e",
+        "filename": "pvmfw/src/hypervisor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "nit: for consistency, use the \"`// SAFETY -`\" prefix.",
+      "range": {
+        "startLine": 179,
+        "startChar": 16,
+        "endLine": 179,
+        "endChar": 18
       },
       "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -100,6 +395,236 @@
         "startChar": 0,
         "endLine": 195,
         "endChar": 61
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "197460e4_19fa69a8",
+        "filename": "pvmfw/src/hypervisor.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "Could you document why this function is `unsafe`?",
+      "range": {
+        "startLine": 232,
+        "startChar": 4,
+        "endLine": 232,
+        "endChar": 10
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfaf4479_c5ab8aaf",
+        "filename": "pvmfw/src/hypervisor/gunyah.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "`{Fdt, FdtError, FdtNode}`?",
+      "range": {
+        "startLine": 22,
+        "startChar": 12,
+        "endLine": 22,
+        "endChar": 15
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d87c7bdc_1d948a88",
+        "filename": "pvmfw/src/hypervisor/gunyah.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "Should this be `unimplemented!` to make the logged error easier to track down, as the `Err` will probably end up in a `panic` anyway?\n\n(same for `mem_unshare`)",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 39
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36d4d892_6efb7aef",
+        "filename": "pvmfw/src/hypervisor/gunyah.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "I might have missed something but don\u0027t we need to map the shared region in pvmfw\u0027s (stage-1) page tables?",
+      "range": {
+        "startLine": 37,
+        "startChar": 57,
+        "endLine": 37,
+        "endChar": 68
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cecb428_e48ea832",
+        "filename": "pvmfw/src/hypervisor/gunyah.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "On error, should this call [`alloc::alloc::handle_alloc_error(layout)`](https://doc.rust-lang.org/alloc/alloc/fn.handle_alloc_error.html)? This use-case is slightly different from what was expected for that function as we\u0027re not allocation from \"the\" heap but it still seems to be covered by the documentation: _Callers of memory allocation APIs wishing to abort computation in response to an allocation error are encouraged to call this function, rather than directly invoking `panic!` or similar._",
+      "range": {
+        "startLine": 40,
+        "startChar": 45,
+        "endLine": 40,
+        "endChar": 54
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b6335ee_4e7e221a",
+        "filename": "pvmfw/src/hypervisor/gunyah.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "I am not familiar with `\u0026dyn` but does `CUR_HYPERVISOR` require the `Hypervisor` to be a ZST? If not, could `SHM_ALLOCATOR` be turned into a member of `GunyahHypervisor` instead?",
+      "range": {
+        "startLine": 54,
+        "startChar": 7,
+        "endLine": 54,
+        "endChar": 20
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebc3984b_3548cb7b",
+        "filename": "pvmfw/src/hypervisor/gunyah.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "We recently added [`crate::helpers::cstr`](https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/pvmfw/src/helpers.rs;l\u003d119;drc\u003db87f330440773513371644387db7616ac3c208f5) so that this could be shortened to\n\n    cstr!(\"restricted-dma-pool\")",
+      "range": {
+        "startLine": 58,
+        "startChar": 26,
+        "endLine": 58,
+        "endChar": 85
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c17817af_32583139",
+        "filename": "pvmfw/src/hypervisor/gunyah.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "`.try_into().unwrap()`",
+      "range": {
+        "startLine": 70,
+        "startChar": 23,
+        "endLine": 70,
+        "endChar": 32
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae7a5448_2e43c109",
+        "filename": "pvmfw/src/hypervisor/gunyah.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "Isn\u0027t this `range.len()`?\n\nAlso, consider `.add_to_heap(range.start, range.end)`, which seems to be identical from the docs.",
+      "range": {
+        "startLine": 97,
+        "startChar": 51,
+        "endLine": 97,
+        "endChar": 74
+      },
+      "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a91d10c_c2fdca3e",
+        "filename": "pvmfw/src/hypervisor/gunyah.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-23T17:46:56Z",
+      "side": 1,
+      "message": "Flatten to\n\n    let range \u003d swiotlb_range(fdt)?;\n    \n    // SAFETY - Assume that SHM_ALLOCATOR is initialized once with the\n    // a range of memory that has been validated in `swiotlb_range`\n    unsafe {\n        SHM_ALLOCATOR.lock().init(range.start, range.end - range.start);\n    }\n    \n    Ok(())\n\n?",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 5
       },
       "revId": "65f024decfb5cf360dea813b1604b9c5ce62801f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
