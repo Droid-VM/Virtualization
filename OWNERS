@@ -25,3 +25,8 @@ serbanc@google.com
 shikhapanwar@google.com
 tabba@google.com
 victorhsieh@google.com
+
+# TEST_MAPPING files are exclusively owned by the people listed below.
+# This is to make sure that any new test names are also added to our test dashboard config file.
+per-file TEST_MAPPING=set noparent
+per-file TEST_MAPPING=jiyong@google.com
