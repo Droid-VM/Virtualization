@@ -18,13 +18,18 @@ package com.android.microdroid.stresstest;
 
 import static android.system.virtualmachine.VirtualMachineConfig.DEBUG_LEVEL_NONE;
 
+import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
+
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 import static com.google.common.truth.TruthJUnit.assume;
 
 import android.system.virtualmachine.VirtualMachine;
 import android.system.virtualmachine.VirtualMachineConfig;
 import android.system.virtualmachine.VirtualMachineException;
+import android.system.Os;
 
+import com.android.microdroid.test.common.ProcessUtil;
 import com.android.microdroid.test.device.MicrodroidDeviceTestBase;
 
 import org.junit.Before;
@@ -86,6 +91,10 @@ public class MicrodroidStressTests extends MicrodroidDeviceTestBase {
         }
     }
 
+    private String executeCommand(String command) {
+        return runInShell(TAG, getInstrumentation().getUiAutomation(), command);
+    }
+
     @Before
     public void setup() throws IOException {
         grantPermission(VirtualMachine.MANAGE_VIRTUAL_MACHINE_PERMISSION);
@@ -99,6 +108,9 @@ public class MicrodroidStressTests extends MicrodroidDeviceTestBase {
 
         final int trialCount = 100;
 
+        int virtmgrPid = 0;
+        int virtmgrInitThreads = 0;
+
         for (int i = 0; i < trialCount; i++) {
             String vmName = "stress_test_vm_" + i;
             forceCreateNewVirtualMachine(
@@ -111,7 +123,20 @@ public class MicrodroidStressTests extends MicrodroidDeviceTestBase {
             BootResult result = tryBootVm(TAG, vmName);
             forceDropVirtualMachine(vmName);
             assertThat(result.payloadStarted).isTrue();
+
+            if (i == 0) {
+                virtmgrPid = ProcessUtil.getVirtmgrPid(Os.getpid(), this::executeCommand);
+                virtmgrInitThreads = ProcessUtil.getNumThreads(virtmgrPid, this::executeCommand);
+            }
         }
+
+        // Assume that the number of virtmgr threads should remain roughly constant as VMs are
+        // started and destroyed. If trialCount is a sufficiently large constant, and the number
+        // of virtmgr threads grows by at least one thread per trial, we most likely have a leak.
+        int virtmgrFinalThreads = ProcessUtil.getNumThreads(virtmgrPid, this::executeCommand);
+        assertWithMessage("Likely thread leak in virtmgr")
+                .that(virtmgrFinalThreads - virtmgrInitThreads)
+                .isLessThan(trialCount);
     }
 
     private void assertCanStartVMsInParallel(final int threadCount, boolean assertPayloadStarted)
