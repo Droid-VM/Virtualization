@@ -55,8 +55,8 @@ use std::borrow::Cow::{Borrowed, Owned};
 use std::convert::TryInto;
 use std::env;
 use std::ffi::CString;
-use std::fs::{self, create_dir, OpenOptions};
-use std::io::Write;
+use std::fs::{self, create_dir, OpenOptions, File};
+use std::io::{Read, Write};
 use std::os::unix::process::CommandExt;
 use std::os::unix::process::ExitStatusExt;
 use std::path::Path;
@@ -312,6 +312,15 @@ fn should_export_tombstones(config: &VmPayloadConfig) -> bool {
         Some(b) => b,
         None => system_properties::read_bool(DEBUGGABLE_PROP, true).unwrap_or(false),
     }
+}
+
+/// Get debug policy value in bool. It's true iff the value is explicitly set to <1>.
+fn get_debug_policy_bool(path: &'static str) -> Option<bool> {
+    let mut file = File::open(path).ok()?;
+    let mut log: [u8; 4] = Default::default();
+    file.read_exact(&mut log).ok()?;
+    // DT spec uses big endian although Android is always little endian.
+    Some(u32::from_be_bytes(log) == 1)
 }
 
 fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> {
@@ -784,8 +793,12 @@ fn load_config(payload_metadata: PayloadMetadata) -> Result<VmPayloadConfig> {
 /// Loads the crashkernel into memory using kexec if the VM is loaded with `crashkernel=' parameter
 /// in the cmdline.
 fn load_crashkernel_if_supported() -> Result<()> {
-    let supported = std::fs::read_to_string("/proc/cmdline")?.contains(" crashkernel=");
-    info!("ramdump supported: {}", supported);
+    let debuggable = system_properties::read_bool(DEBUGGABLE_PROP, true)?;
+    let ramdump =
+        get_debug_policy_bool("/proc/device-tree/avf/guest/common/ramdump").unwrap_or_default();
+    let supported = debuggable | ramdump;
+
+    info!("ramdump supported: {supported} (debuggable={debuggable}, ramdump={ramdump})");
     if supported {
         let status = Command::new("/system/bin/kexec_load").status()?;
         if !status.success() {
