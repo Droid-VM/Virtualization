@@ -52,6 +52,52 @@
       "parentUuid": "ca6e6a12_5294c60a",
       "revId": "8d35160ef501726be947750890129b2f551787a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bfc6791_ff4209c5",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2023-03-24T15:20:32Z",
+      "side": 1,
+      "message": "super-nit/optional/follow-up: it looks like we memory_mib is never None",
+      "range": {
+        "startLine": 84,
+        "startChar": 21,
+        "endLine": 84,
+        "endChar": 25
+      },
+      "revId": "8d35160ef501726be947750890129b2f551787a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32e10257_6d19824a",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2023-03-24T15:20:32Z",
+      "side": 1,
+      "message": "nit: can we avoid _signed (reduce the total) here? although the property should already be unsigned",
+      "range": {
+        "startLine": 103,
+        "startChar": 20,
+        "endLine": 103,
+        "endChar": 27
+      },
+      "revId": "8d35160ef501726be947750890129b2f551787a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
