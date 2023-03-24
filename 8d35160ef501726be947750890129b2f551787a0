@@ -194,6 +194,30 @@
       },
       "revId": "8d35160ef501726be947750890129b2f551787a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c994724_55ae1d73",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2023-03-24T16:54:13Z",
+      "side": 1,
+      "message": "SGTM.  Ideally, we would separate ART, Microdroid usage and vendor adjustment.  We would guarantee ART can get what they need by 1) a restriction of -(vendor adjustment) \u003c\u003d Microdroid usage, and 2) ballooning to ART\u0027s request can always succeed.  But I\u0027m not sure how feasible it is, and like you said, we should monitor the rollout anyway.",
+      "parentUuid": "eae1c033_605a16d7",
+      "range": {
+        "startLine": 103,
+        "startChar": 20,
+        "endLine": 103,
+        "endChar": 27
+      },
+      "revId": "8d35160ef501726be947750890129b2f551787a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
