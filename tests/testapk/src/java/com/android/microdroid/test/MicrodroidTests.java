@@ -1951,6 +1951,20 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
                 .isEqualTo(MS_NOEXEC);
     }
 
+    @Test
+    @VsrTest(requirements = {"VSR-7.1-001.003"})
+    public void kernelVersionRequirement() throws Exception {
+        String[] tokens = KERNEL_VERSION.split(".");
+        int major = Integer.parseInt(tokens[0]);
+        int minor = Integer.parseInt(tokens[1]);
+
+        // Check kernel version >= 5.14
+        assertTrue(major >= 5);
+        if (major == 5) {
+            assertTrue(minor >= 14);
+        }
+    }
+
     private static class VmShareServiceConnection implements ServiceConnection {
 
         private final CountDownLatch mLatch = new CountDownLatch(1);
