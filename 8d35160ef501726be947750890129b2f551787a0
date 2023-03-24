@@ -77,6 +77,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24da9049_13a0fd22",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-24T15:46:36Z",
+      "side": 1,
+      "message": "It is in compos/verify/verify.rs.",
+      "parentUuid": "5bfc6791_ff4209c5",
+      "range": {
+        "startLine": 84,
+        "startChar": 21,
+        "endLine": 84,
+        "endChar": 25
+      },
+      "revId": "8d35160ef501726be947750890129b2f551787a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32e10257_6d19824a",
@@ -90,6 +114,30 @@
       "writtenOn": "2023-03-24T15:20:32Z",
       "side": 1,
       "message": "nit: can we avoid _signed (reduce the total) here? although the property should already be unsigned",
+      "range": {
+        "startLine": 103,
+        "startChar": 20,
+        "endLine": 103,
+        "endChar": 27
+      },
+      "revId": "8d35160ef501726be947750890129b2f551787a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2e8c30a_139d1e5e",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-24T15:46:36Z",
+      "side": 1,
+      "message": "Actually I defined the ART property unsigned, and the vendor one signed. (That\u0027s why the read property fn is generified - there\u0027s 2 types.)\nI want to allow maximum flexibility there, and at least in theory they might have lower overhead than Microdroid. (Although \"caveat vendor\".)",
+      "parentUuid": "32e10257_6d19824a",
       "range": {
         "startLine": 103,
         "startChar": 20,
