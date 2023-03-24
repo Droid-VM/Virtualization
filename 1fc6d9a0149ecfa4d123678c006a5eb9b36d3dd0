@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e13f6eed_ef4771b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-24T15:00:12Z",
+      "side": 1,
+      "message": "Sorry, I mistakenly published the comment instead of discarding.\n\nLet me re-write details from the the scratch.\n\n\nLet me start with security. I think that this CL is more safer because \n`microdroid_manager` can safely read debug level sysprop and device policy device tree. `microdroid_manager` will only load `crashkernel` in the reserved memory based on the trusted input. Malicious host can pass `crashkernel` parameters, but then the reserved memory wouldn\u0027t be used. Tell me if I\u0027m misunderstanding something here or want me to get advise from others.\n\nPlus, this CL also makes `pvmfw` more guest OS agnostic. `crashkernel` is linux specific but `pvmfw` had been read and modify. However, with this CL, `pvmfw` only passes debug policy device tree from safe place and send it to `microdroid` (for ramdump).\n\n\nBTW, you\u0027d told me that you prefer not making `pvmfw` aware of the VM\u0027s debuggability in the email but you\u0027re now suggesting to induce debuggability from dice input. What\u0027s changed meanwhile? Currently VM image is chosen by debug level and debug policy is irrelevant. So I thought that debug level is the same as dice\u0027s debug mode once it\u0027s launched. Am I misunderstanding something here?",
+      "parentUuid": "e5f890fa_2d63bfc0",
+      "revId": "1fc6d9a0149ecfa4d123678c006a5eb9b36d3dd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "079c594a_3ca53047",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 3
