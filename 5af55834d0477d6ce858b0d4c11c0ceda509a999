@@ -22,6 +22,30 @@
       },
       "revId": "5af55834d0477d6ce858b0d4c11c0ceda509a999",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91b47d07_a7922d5d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-24T12:38:45Z",
+      "side": 1,
+      "message": "Yup, true. The point I was trying to make is that virtmgr does not wait for GC in the client. It starts freeing up resources with `stop` and considers the object unusable afterwards.",
+      "parentUuid": "8927bda8_313f0999",
+      "range": {
+        "startLine": 10,
+        "startChar": 25,
+        "endLine": 11,
+        "endChar": 63
+      },
+      "revId": "5af55834d0477d6ce858b0d4c11c0ceda509a999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
