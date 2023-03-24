@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "435e0825_0c39f232",
+        "filename": "TEST_MAPPING",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-24T11:44:13Z",
+      "side": 1,
+      "message": "You\u0027ll need to update cl/518841010 for this",
+      "range": {
+        "startLine": 33,
+        "startChar": 5,
+        "endLine": 34,
+        "endChar": 6
+      },
+      "revId": "400cdf6f9d4d022b47db6f05fe2a468e86436d7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fa9660a_c5ab836f",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/device/MicrodroidDeviceTestBase.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-24T11:44:13Z",
+      "side": 1,
+      "message": "This is useful for tests, but actually a fairly unusual usage pattern.\n\nWe should perhaps also have a stress test that starts \u0026 stops the same VM over and over.",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 5
+      },
+      "revId": "400cdf6f9d4d022b47db6f05fe2a468e86436d7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "199e5690_08ff8cf6",
+        "filename": "tests/stress/AndroidManifest.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-24T11:44:13Z",
+      "side": 1,
+      "message": "You shouldn\u0027t need this.",
+      "range": {
+        "startLine": 19,
+        "startChar": 3,
+        "endLine": 19,
+        "endChar": 84
+      },
+      "revId": "400cdf6f9d4d022b47db6f05fe2a468e86436d7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd25e19f_2ff934a7",
+        "filename": "tests/stress/src/java/com/android/microdroid/stresstest/MicrodroidSerialVmsStressTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-24T11:44:13Z",
+      "side": 1,
+      "message": "Could we have a class comment for this \u0026 the next one with a one-sentence description of what they are intended to do?",
+      "range": {
+        "startLine": 39,
+        "startChar": 13,
+        "endLine": 39,
+        "endChar": 42
+      },
+      "revId": "400cdf6f9d4d022b47db6f05fe2a468e86436d7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "316f2630_52975dd3",
+        "filename": "tests/stress/src/java/com/android/microdroid/stresstest/MicrodroidStressTests.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-24T11:44:13Z",
+      "side": 1,
+      "message": "Nit: move the helper below the tests?",
+      "range": {
+        "startLine": 117,
+        "startChar": 17,
+        "endLine": 117,
+        "endChar": 44
+      },
+      "revId": "400cdf6f9d4d022b47db6f05fe2a468e86436d7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e62795e_ec0f985a",
+        "filename": "tests/stress/src/java/com/android/microdroid/stresstest/MicrodroidStressTests.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-24T11:44:13Z",
+      "side": 1,
+      "message": "s/final//g",
+      "range": {
+        "startLine": 122,
+        "startChar": 8,
+        "endLine": 122,
+        "endChar": 13
+      },
+      "revId": "400cdf6f9d4d022b47db6f05fe2a468e86436d7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da48e72f_40817a2b",
+        "filename": "tests/stress/src/java/com/android/microdroid/stresstest/MicrodroidStressTests.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-24T11:44:13Z",
+      "side": 1,
+      "message": "Why uninterruptibly, when you catch InterrupedException ?",
+      "range": {
+        "startLine": 150,
+        "startChar": 45,
+        "endLine": 150,
+        "endChar": 67
+      },
+      "revId": "400cdf6f9d4d022b47db6f05fe2a468e86436d7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20c2de49_9c6a4945",
+        "filename": "tests/stress/src/java/com/android/microdroid/stresstest/MicrodroidStressTests.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-24T11:44:13Z",
+      "side": 1,
+      "message": "Nit: redundant",
+      "range": {
+        "startLine": 156,
+        "startChar": 36,
+        "endLine": 156,
+        "endChar": 42
+      },
+      "revId": "400cdf6f9d4d022b47db6f05fe2a468e86436d7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36d9e314_0c8ed0fc",
+        "filename": "tests/stress/src/java/com/android/microdroid/stresstest/MicrodroidStressTests.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-24T11:44:13Z",
+      "side": 1,
+      "message": "Initialize on the previous line?",
+      "range": {
+        "startLine": 175,
+        "startChar": 17,
+        "endLine": 175,
+        "endChar": 41
+      },
+      "revId": "400cdf6f9d4d022b47db6f05fe2a468e86436d7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5cea521_d6067c9e",
+        "filename": "tests/stress/src/java/com/android/microdroid/stresstest/MicrodroidStressTests.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-24T11:44:13Z",
+      "side": 1,
+      "message": "RuntimeException at least",
+      "range": {
+        "startLine": 176,
+        "startChar": 26,
+        "endLine": 176,
+        "endChar": 35
+      },
+      "revId": "400cdf6f9d4d022b47db6f05fe2a468e86436d7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8575a39_30164d8c",
+        "filename": "tests/stress/src/java/com/android/microdroid/stresstest/MicrodroidStressTests.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-24T11:44:13Z",
+      "side": 1,
+      "message": "A message here saying that the payload failed to start might be helpful.",
+      "range": {
+        "startLine": 179,
+        "startChar": 15,
+        "endLine": 179,
+        "endChar": 57
+      },
+      "revId": "400cdf6f9d4d022b47db6f05fe2a468e86436d7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
