@@ -170,6 +170,30 @@
       },
       "revId": "8d35160ef501726be947750890129b2f551787a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eae1c033_605a16d7",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-24T16:44:30Z",
+      "side": 1,
+      "message": "I shouldn\u0027t have called out Microdroid specifically - I just assume different hypervisors might lead to different levels of overhead.\n\nI think careful monitoring is going to be necessary anyway - if the vendor sets it to 10, but they should have set it to 20, then problems could arise, just as if they were to erroneously set it to -10.\n\nI think we\u0027ll need to make it clear they need to be very careful.",
+      "parentUuid": "afdecc1f_0cae6f25",
+      "range": {
+        "startLine": 103,
+        "startChar": 20,
+        "endLine": 103,
+        "endChar": 27
+      },
+      "revId": "8d35160ef501726be947750890129b2f551787a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
