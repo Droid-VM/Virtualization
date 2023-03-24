@@ -146,6 +146,30 @@
       },
       "revId": "8d35160ef501726be947750890129b2f551787a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afdecc1f_0cae6f25",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2023-03-24T16:33:48Z",
+      "side": 1,
+      "message": "Then are we still going to have a \"balloon test\" up to `composd.vm.art.memory_mib.config`? If we can\u0027t guarantee ART can use that amount of memory across the boards, the monitoring during a Mainline rollout will be more important.\n\nCan we ask vendors to contribute microdroid improvement back to AOSP? Especially if we still want to make it a Mainline module in the future.",
+      "parentUuid": "c2e8c30a_139d1e5e",
+      "range": {
+        "startLine": 103,
+        "startChar": 20,
+        "endLine": 103,
+        "endChar": 27
+      },
+      "revId": "8d35160ef501726be947750890129b2f551787a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
