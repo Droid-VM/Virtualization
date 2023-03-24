@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5f890fa_2d63bfc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-24T14:08:52Z",
+      "side": 1,
+      "message": "I think that change in `microdroid_manager` does that. `microdroid_manager` can read trusted debug policy device tree and debuggble, so its input would be more trustworth. `microdroid_manager` only reads \n\n`pvmfw` is now reading less from the host OS, I believe that it\u0027s more secure. What do you think?",
+      "parentUuid": "f8553c64_ec992cfb",
+      "revId": "1fc6d9a0149ecfa4d123678c006a5eb9b36d3dd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "079c594a_3ca53047",
         "filename": "microdroid_manager/src/main.rs",
         "patchSetId": 3
@@ -31,6 +49,30 @@
       "writtenOn": "2023-03-23T13:37:13Z",
       "side": 1,
       "message": "This is okay only when the error is due to file being absent. Other errors (ex: permission, or general I/O error) have to be treated critical.",
+      "range": {
+        "startLine": 319,
+        "startChar": 35,
+        "endLine": 319,
+        "endChar": 42
+      },
+      "revId": "1fc6d9a0149ecfa4d123678c006a5eb9b36d3dd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d248a91f_c2299572",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-24T14:08:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "079c594a_3ca53047",
       "range": {
         "startLine": 319,
         "startChar": 35,
@@ -54,6 +96,30 @@
       "writtenOn": "2023-03-23T13:37:13Z",
       "side": 1,
       "message": "same here",
+      "range": {
+        "startLine": 321,
+        "startChar": 29,
+        "endLine": 321,
+        "endChar": 36
+      },
+      "revId": "1fc6d9a0149ecfa4d123678c006a5eb9b36d3dd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "069f10f0_2a8c991f",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-24T14:08:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7829c761_7e80b0ed",
       "range": {
         "startLine": 321,
         "startChar": 29,
@@ -100,6 +166,54 @@
       "writtenOn": "2023-03-23T13:37:13Z",
       "side": 1,
       "message": "why not /sys/firmware/devicetree?",
+      "range": {
+        "startLine": 798,
+        "startChar": 31,
+        "endLine": 798,
+        "endChar": 48
+      },
+      "revId": "1fc6d9a0149ecfa4d123678c006a5eb9b36d3dd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a7d0865_7c2473c2",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-24T14:08:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6eaad3d_7ad40281",
+      "range": {
+        "startLine": 798,
+        "startChar": 30,
+        "endLine": 798,
+        "endChar": 74
+      },
+      "revId": "1fc6d9a0149ecfa4d123678c006a5eb9b36d3dd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40f68c1b_d6b76c7f",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-24T14:08:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a94437ef_c6b2bd3f",
       "range": {
         "startLine": 798,
         "startChar": 31,
