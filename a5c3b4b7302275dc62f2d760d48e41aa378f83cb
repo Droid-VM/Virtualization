@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2bf6bdd_d23d521b",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-24T16:53:44Z",
+      "side": 0,
+      "message": "Probably dumb question (Friday evening!) but don\u0027t we still need to check that the kernel has allocated the region to hold the crash kernel? Or is it just fine to launch `kexec_load` and let it fail (which I suppose is what would happen if DP sets `ramdump` but the host doesn\u0027t pass `crashkernel\u003d`)?",
+      "range": {
+        "startLine": 787,
+        "startChar": 4,
+        "endLine": 787,
+        "endChar": 88
+      },
+      "revId": "a5c3b4b7302275dc62f2d760d48e41aa378f83cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0a87df4_403f43bc",
+        "filename": "tests/hostside/java/com/android/microdroid/test/PvmfwDebugPolicyHostTests.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-24T16:53:44Z",
+      "side": 0,
+      "message": "Do we really want to get rid of this test or should we rework it to actually test the ramdump feature, when triggered by DP? Or do we already get that coverage from another test?\n\nAt the very least, it ensures that the `ramdump` flag is properly passed to Microdroid from pvmfw\u0027s config data.",
+      "range": {
+        "startLine": 154,
+        "startChar": 16,
+        "endLine": 154,
+        "endChar": 27
+      },
+      "revId": "a5c3b4b7302275dc62f2d760d48e41aa378f83cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
