@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5072a58e_fd5d7e9e",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-25T03:26:45Z",
+      "side": 1,
+      "message": "Dear Pierre,\n\nCan we have a secure way for `pvmfw` and/or VM to know whether the device is locked or not? On host, we read sysprop but not sure whether `pvmfw` can read the .\n\nOn Pixels, we wipe DPM when we lock device, but we might not expect the same thing for other devices.\n\nsee: b/238261271 for previous discussion.",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 0
+      },
+      "revId": "292c885184d85818d0607d1de03d1320406c859e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
