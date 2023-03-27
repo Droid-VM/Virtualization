@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "16cc5030_2b2f5022",
+        "filename": "microdroid/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-27T06:57:11Z",
+      "side": 1,
+      "message": "Re Jiyong: Where\u0027s the AVF CTS? Are you suggesting `MicrodroidTestApp`?",
+      "parentUuid": "c4df67a4_4c8ded8a",
+      "range": {
+        "startLine": 184,
+        "startChar": 5,
+        "endLine": 185,
+        "endChar": 17
+      },
+      "revId": "292c885184d85818d0607d1de03d1320406c859e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5072a58e_fd5d7e9e",
         "filename": "pvmfw/README.md",
         "patchSetId": 1
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "pvmfw _has_ to trust ABL but as an extra check we could require ABL to set one of the configuration data flag bits to reflect whether the device is locked or not. Nothing would prevent a faulty ABL from forgetting to set the flag and passing the DTBO but I guess the same could be said about the host\u0027s flag, right? WDYT?",
       "parentUuid": "5072a58e_fd5d7e9e",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 0
+      },
+      "revId": "292c885184d85818d0607d1de03d1320406c859e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0694d94_10af2285",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-27T06:57:11Z",
+      "side": 1,
+      "message": "So you\u0027re proposing AVF debug policy nodes to include extra DT properties to tell host\u0027s locked stated. Am I correct? My gut feeling is that it only increases the manufacturer\u0027s burden when passing debug policies and doesn\u0027t increase security. What do you think?",
+      "parentUuid": "f1eab5a9_1436387c",
       "range": {
         "startLine": 243,
         "startChar": 0,
