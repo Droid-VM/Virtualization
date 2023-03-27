@@ -1,0 +1,349 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1fed3ad_323cad51",
+        "filename": "libs/libfdt/src/iterators.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:26Z",
+      "side": 1,
+      "message": "Why not\n\n```\nlet size \u003d self.size.unwrap_or(0);\nlet mut buf \u003d [\n    ((self.addr \u003e\u003e 32) as u32).to_be(),\n    (self.addr as u32).to_be(),\n    ((size \u003e\u003e 32) as u32).to_be(),\n    (size as u32).to_be(),\n];\n```\n\n?\n\nBut should we really have `\u003c0x0 0x0\u003e` if `self.size.is_none()`?",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 9
+      },
+      "revId": "09ab0a9d8190255d9d1fb513b471c3f150380fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71887295_8973546c",
+        "filename": "libs/libfdt/src/iterators.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:26Z",
+      "side": 1,
+      "message": "Same nit about initializing `buf` directly instead of doing it step-by-step.",
+      "range": {
+        "startLine": 231,
+        "startChar": 22,
+        "endLine": 231,
+        "endChar": 23
+      },
+      "revId": "09ab0a9d8190255d9d1fb513b471c3f150380fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55637bd9_2ba2f824",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:26Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the mutable reference be consumed, here?",
+      "range": {
+        "startLine": 200,
+        "startChar": 27,
+        "endLine": 200,
+        "endChar": 29
+      },
+      "revId": "09ab0a9d8190255d9d1fb513b471c3f150380fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89f7c9d5_ea9e61d4",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:26Z",
+      "side": 1,
+      "message": "Could you extract this into its own private method returning `Result\u003cOption\u003c(NonNull\u003cc_void\u003e, usize)\u003e\u003e` and make use of it here and in `.trimprop()`?",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 314,
+        "endChar": 9
+      },
+      "revId": "09ab0a9d8190255d9d1fb513b471c3f150380fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0ebccd2_434091bc",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:26Z",
+      "side": 1,
+      "message": "I\u0027m not convinced that this shouldn\u0027t be an error (see the \"`interruipt`\" bug).",
+      "range": {
+        "startLine": 463,
+        "startChar": 48,
+        "endLine": 463,
+        "endChar": 52
+      },
+      "revId": "09ab0a9d8190255d9d1fb513b471c3f150380fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffce8e76_8480d3bd",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:26Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Common Typos: Common typo found: \"compatble\" -- should it be \"compatible\"?\n\nAnalyzer Description: Linter for catching common typos motivated by go/todo-fail and go/lol-codesearch. Shared with google3 common typos library go/common-typos.\nOwner: ayeaye-team@google.com\n\nCommon typo found: \"compatble\" -- should it be \"compatible\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 531,
+        "startChar": 29,
+        "endLine": 531,
+        "endChar": 38
+      },
+      "revId": "09ab0a9d8190255d9d1fb513b471c3f150380fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c3f5749_ccf7a101",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:26Z",
+      "side": 1,
+      "message": "This drops the top bits without check; could you `u32::try_from(_).unwrap()`? I don\u0027t think there\u0027s currently a way for the host to pass a value larger than a `u32` (see `read_initrd_range_from()`) so panicking should be enough.",
+      "range": {
+        "startLine": 69,
+        "startChar": 40,
+        "endLine": 69,
+        "endChar": 46
+      },
+      "revId": "09ab0a9d8190255d9d1fb513b471c3f150380fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7d6bbe5_67d81eb6",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:26Z",
+      "side": 1,
+      "message": "For clarity, would it make sense to split this into\n```\nlet mut next \u003d fdt.root_mut()?.next_compatible(cpu)?;\nfor i in 0..num_cpus {\n    next \u003d if let Some(current) \u003d next {\n        current.next_compatible(cpu)?\n    } else {\n        return Err(FdtError::NoSpace)\n    };\n}\n\nwhile let Some(current) \u003d next {\n    next \u003d current.delete_and_next_compatible(cpu)?;\n}\n```\n(untested and I\u0027m not sure Rust will accept the second loop)?",
+      "range": {
+        "startLine": 140,
+        "startChar": 19,
+        "endLine": 140,
+        "endChar": 21
+      },
+      "revId": "09ab0a9d8190255d9d1fb513b471c3f150380fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b39fe096_20cd262e",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:26Z",
+      "side": 1,
+      "message": "\"`interrupt`\"?",
+      "range": {
+        "startLine": 356,
+        "startChar": 25,
+        "endLine": 356,
+        "endChar": 35
+      },
+      "revId": "09ab0a9d8190255d9d1fb513b471c3f150380fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0478fe73_9e938d74",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:26Z",
+      "side": 1,
+      "message": "Oh, this is how the input UART addresses are being validated!",
+      "range": {
+        "startLine": 393,
+        "startChar": 19,
+        "endLine": 393,
+        "endChar": 56
+      },
+      "revId": "09ab0a9d8190255d9d1fb513b471c3f150380fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b967e4a1_67357806",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:26Z",
+      "side": 1,
+      "message": "Not sure it\u0027s much clearer but WDYT of\n```\nfor v in value.iter_mut().skip(2).step_by(CELLS_PER_INTERRUPT) {\n    *v |\u003d cpu_mask;\n}\n```\n?",
+      "range": {
+        "startLine": 471,
+        "startChar": 0,
+        "endLine": 473,
+        "endChar": 5
+      },
+      "revId": "09ab0a9d8190255d9d1fb513b471c3f150380fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "212f26d4_d34a867f",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:26Z",
+      "side": 1,
+      "message": "Could you turn this into a parameterized helper function and re-use it in `Reg::to_cells` and `AddressRange::to_cells`, centralizing the `unsafe` (as transmuting a `uX` into a `[u8; size_of::\u003cuX\u003e()]` should always be safe AFAIK)?",
+      "range": {
+        "startLine": 479,
+        "startChar": 16,
+        "endLine": 479,
+        "endChar": 22
+      },
+      "revId": "09ab0a9d8190255d9d1fb513b471c3f150380fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a46c230_0c479313",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:26Z",
+      "side": 1,
+      "message": "`size_of::\u003cu32\u003e()`?",
+      "range": {
+        "startLine": 482,
+        "startChar": 56,
+        "endLine": 482,
+        "endChar": 57
+      },
+      "revId": "09ab0a9d8190255d9d1fb513b471c3f150380fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71c8b0ca_c4859161",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:26Z",
+      "side": 1,
+      "message": "Would it make sense to express this as a multiple of `SIZE_4KB`?",
+      "range": {
+        "startLine": 505,
+        "startChar": 41,
+        "endLine": 505,
+        "endChar": 48
+      },
+      "revId": "09ab0a9d8190255d9d1fb513b471c3f150380fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e652edd2_dd25860b",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:26Z",
+      "side": 1,
+      "message": "nit: doesn\u0027t this already remove the need for `allow(dead_code)`?",
+      "range": {
+        "startLine": 513,
+        "startChar": 4,
+        "endLine": 513,
+        "endChar": 21
+      },
+      "revId": "09ab0a9d8190255d9d1fb513b471c3f150380fd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
