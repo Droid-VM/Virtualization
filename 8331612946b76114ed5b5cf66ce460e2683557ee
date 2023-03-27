@@ -16,6 +16,29 @@
       "message": "Ping for review. Adding David as well.",
       "revId": "8331612946b76114ed5b5cf66ce460e2683557ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b9744a5_7ace757a",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:19:58Z",
+      "side": 1,
+      "message": "Would sanitizing the DT before we use it prevent the VMM from passing inputs to pvmfw that aren\u0027t intended for the guest kernel (i.e. that pvmfw wouldn\u0027t pass over to the kernel)?\n\nIn a way, `/config/kernel-*` could be such an input (although there\u0027s nothing secret). Once we start supporting custom VMs, I don\u0027t want them to start relying on those inputs and the best way to ensure that will be to strip them. WDYT?",
+      "range": {
+        "startLine": 112,
+        "startChar": 8,
+        "endLine": 112,
+        "endChar": 40
+      },
+      "revId": "8331612946b76114ed5b5cf66ce460e2683557ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
