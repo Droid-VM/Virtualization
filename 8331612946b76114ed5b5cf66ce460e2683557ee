@@ -39,6 +39,30 @@
       },
       "revId": "8331612946b76114ed5b5cf66ce460e2683557ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d778d9b2_84579815",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-27T09:33:36Z",
+      "side": 1,
+      "message": "In the next CLs, `/config/kernel-*` is parsed inside this function and the result is used by pvmvw to locate the kernel. And the nodes are stripped from the DT (because the template DT doesn\u0027t have it)",
+      "parentUuid": "4b9744a5_7ace757a",
+      "range": {
+        "startLine": 112,
+        "startChar": 8,
+        "endLine": 112,
+        "endChar": 40
+      },
+      "revId": "8331612946b76114ed5b5cf66ce460e2683557ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
