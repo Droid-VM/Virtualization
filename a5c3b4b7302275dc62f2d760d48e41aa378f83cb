@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "47bfd5a9_a7f6808a",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-27T05:48:31Z",
+      "side": 0,
+      "message": "kexec_load is very dumb. I think it\u0027s better for microdroid to check the condition before starting it.",
+      "parentUuid": "1aa8c06c_d5fdb366",
+      "range": {
+        "startLine": 787,
+        "startChar": 4,
+        "endLine": 787,
+        "endChar": 88
+      },
+      "revId": "a5c3b4b7302275dc62f2d760d48e41aa378f83cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0a87df4_403f43bc",
         "filename": "tests/hostside/java/com/android/microdroid/test/PvmfwDebugPolicyHostTests.java",
         "patchSetId": 4
