@@ -16,6 +16,29 @@
       "message": "d",
       "revId": "7727b6305d13f87f00dd27b6da7e436150ff0956",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd599543_188b0789",
+        "filename": "pvmfw/platform.dts",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T05:59:23Z",
+      "side": 1,
+      "message": "WDYT of\n\n    #define IRQ_BASE 4\n\nthen have\n\n    0x0800 0x0 0x0 1 \u0026intc 0 0 GIC_SPI (IRQ_BASE + 0) IRQ_TYPE_LEVEL_HIGH\n    0x1000 0x0 0x0 1 \u0026intc 0 0 GIC_SPI (IRQ_BASE + 1) IRQ_TYPE_LEVEL_HIGH\n    0x1800 0x0 0x0 1 \u0026intc 0 0 GIC_SPI (IRQ_BASE + 2) IRQ_TYPE_LEVEL_HIGH\n    ...\n\nfor when http://crrev.com/c/3971137 inevitably happens again?",
+      "range": {
+        "startLine": 217,
+        "startChar": 38,
+        "endLine": 217,
+        "endChar": 39
+      },
+      "revId": "7727b6305d13f87f00dd27b6da7e436150ff0956",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
