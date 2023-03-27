@@ -1,0 +1,303 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47121373_40258d65",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T14:26:33Z",
+      "side": 1,
+      "message": "Nit:\n```\nBug: 245267332\n```",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 16
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1d56517_98fbb48a",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T14:26:33Z",
+      "side": 1,
+      "message": "Move to child commit?",
+      "range": {
+        "startLine": 247,
+        "startChar": 4,
+        "endLine": 247,
+        "endChar": 31
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11e31b01_e0e84165",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T14:26:33Z",
+      "side": 1,
+      "message": "`try_into().unwrap()` for robustness.",
+      "range": {
+        "startLine": 33,
+        "startChar": 24,
+        "endLine": 33,
+        "endChar": 33
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cda44175_853a488c",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T14:26:33Z",
+      "side": 1,
+      "message": "This could be flattened using an actual error type:\n```\nenum PteModificationError {\n    Unavailable,\n    NotInitialized,\n    InternalError(MemoryTrackerError),\n}\n\nimpl Display for PteModificationError {\n    // ....\n}\n\nimpl From\u003cMemoryTrackerError\u003e for PteModificationError {\n    fn from(e) -\u003e ... {\n        Self::InternalError(e)\n    }\n}\n```\nthen `?` makes your code much easier to follow:\n```\nfn modify_pte_range(...) -\u003e Result\u003c(), PteModificationError\u003e {\n    let mut locked \u003d MEMORY.try_lock().ok_or(PteModificationError::Unavailable)?;\n    let memory \u003d locked.as_mut().ok_or(PteModificationError::NotInitialized)?;\n\n    memory.modify_range(va_range, f)\n}\n```\nand centralize logging at the call-site:\n```\nmatch modify_pte_range(\u0026(far..far + 1), \u0026handle_flagged_page_fault) {\n    Ok(()) \u003d\u003e return,\n    Err(e) if !is_uart \u003d\u003e eprintln!(\"{e}\"),\n    _ \u003d\u003e (),\n}\n```\n(BTW, I don\u0027t think `eprintln!` can safely be used from the handler, but might be wrong)",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 9
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbeeb312_8153cc8a",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T14:26:33Z",
+      "side": 1,
+      "message": "Could we keep the function reference parameter private (implementation detail) and instead have 2 methods e.g. `.share_mmio_lazy()` and `.handle_mmio_fault()`?",
+      "range": {
+        "startLine": 273,
+        "startChar": 4,
+        "endLine": 273,
+        "endChar": 7
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f13dbc5_6d1ae963",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T14:26:33Z",
+      "side": 1,
+      "message": "So if `d.is_valid() \u003d\u003d false`, `d.is_table_or_page() \u003d\u003d false` and `is_block_or_page(d, 2) \u003d\u003d true` even though the mapping is invalid? Could we add `Descriptor::is_leaf(\u0026self) -\u003e bool` to the crate?\n\nOr are we assuming that `modify_range` will never call its input function on invalid mappings? If so, could we `assert(desc.is_valid()`?",
+      "range": {
+        "startLine": 405,
+        "startChar": 11,
+        "endLine": 405,
+        "endChar": 61
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53b4b29b_9e63f50e",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T14:26:33Z",
+      "side": 1,
+      "message": "We already `use` `core::result`",
+      "range": {
+        "startLine": 413,
+        "startChar": 6,
+        "endLine": 413,
+        "endChar": 17
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0349fd6_a4ff92c4",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T14:26:33Z",
+      "side": 1,
+      "message": "I\u0027m not familiar with `TLBI` but assume that `{x}` should be a single page; should `flag_for_mmio_map` assert that on `va_range`?",
+      "range": {
+        "startLine": 419,
+        "startChar": 17,
+        "endLine": 419,
+        "endChar": 21
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "622ad6c0_bae0500b",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T14:26:33Z",
+      "side": 1,
+      "message": "I know I should know my operator priorities by heart but could you add some parentheses to make it clear if `X \u0026 Y \u003e\u003e s` is `(X \u0026 Y) \u003e\u003e s` or `X \u0026 (Y \u003e\u003e s)`?",
+      "range": {
+        "startLine": 421,
+        "startChar": 28,
+        "endLine": 421,
+        "endChar": 68
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1afb353c_83e7f1ab",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T14:26:33Z",
+      "side": 1,
+      "message": "What\u0027s this bit for? Would it make sense to turn it into a `const` so that you can document the value through the variable\u0027s name?",
+      "range": {
+        "startLine": 421,
+        "startChar": 28,
+        "endLine": 421,
+        "endChar": 40
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a20aa5a6_49b2d8ca",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T14:26:33Z",
+      "side": 1,
+      "message": "I find this API (and the loop on `page_iterator` in the implementation) confusing as a page fault can only occur for one address at a time; could this be changed to take the FAR directly and/or assert that the `va_range` is indeed only one address?",
+      "range": {
+        "startLine": 430,
+        "startChar": 4,
+        "endLine": 430,
+        "endChar": 12
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8752deb6_5bd57515",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T14:26:33Z",
+      "side": 1,
+      "message": "Flatten to\n```\nlet Some(flags) \u003d desc.flags() else {\n    return Err(());\n};\n```",
+      "range": {
+        "startLine": 434,
+        "startChar": 38,
+        "endLine": 434,
+        "endChar": 39
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62779036_c551b1a5",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T14:26:33Z",
+      "side": 1,
+      "message": "... else panic?",
+      "range": {
+        "startLine": 442,
+        "startChar": 8,
+        "endLine": 442,
+        "endChar": 9
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
