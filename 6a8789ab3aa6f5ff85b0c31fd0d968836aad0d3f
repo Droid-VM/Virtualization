@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9dc73b4_b0fd0e3e",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-27T11:27:08Z",
+      "side": 1,
+      "message": "After this stack of changes are applied, any access to fdt even from inside pvmfw will be after the sanitization; PciInfo::from_fdt is called after it, on the sanitized fdt, not the original one.",
+      "parentUuid": "c043fb5e_596a3b72",
+      "range": {
+        "startLine": 205,
+        "startChar": 4,
+        "endLine": 205,
+        "endChar": 5
+      },
+      "revId": "6a8789ab3aa6f5ff85b0c31fd0d968836aad0d3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9cfcdc4e_6d55e766",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-03-27T09:20:16Z",
       "side": 1,
       "message": "pvmfw might guarantee that UARTs are within device memory or even that they use the PC-standard addresses.\n\nIn particular, this validation is a bit special because pvmfw uses UART `0x3f8` (IIRC) before it starts reading from the DT.",
+      "range": {
+        "startLine": 309,
+        "startChar": 4,
+        "endLine": 309,
+        "endChar": 5
+      },
+      "revId": "6a8789ab3aa6f5ff85b0c31fd0d968836aad0d3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "753ffcc7_3b41cbc8",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-27T11:27:08Z",
+      "side": 1,
+      "message": "The first message is \"pVM firmware\" in main.rs and that is now called after the sanitization is done in entry.rs. Unfortunately, this there\u0027s not check asserting this.\n\nChecking against PC standard address etc is implicitly done during patching; the template DT has four serials with standard addresses, only the devices whose addresses are overlapping between template DT and the input DT survives.",
+      "parentUuid": "9cfcdc4e_6d55e766",
       "range": {
         "startLine": 309,
         "startChar": 4,
