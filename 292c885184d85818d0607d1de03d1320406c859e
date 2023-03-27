@@ -189,6 +189,30 @@
       },
       "revId": "292c885184d85818d0607d1de03d1320406c859e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "423986c4_d63fc565",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T07:02:41Z",
+      "side": 1,
+      "message": "No, I was referring to [these flags](http://cs/android/packages/modules/Virtualization/pvmfw/src/config.rs;l\u003d34;rcl\u003d8b6fca65c6a2731d31d76123edb8e91a0b07d82a) but I agree that adding a check on ABL based on something ABL needs to set isn\u0027t _much_ more solid (more of a best attempt at sanity checking) but what else could pvmfw do?\n\nIt _should_ also be possible to parse the BCC and check which DICE mode ABL has used to sign pvmfw.",
+      "parentUuid": "d0694d94_10af2285",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 0
+      },
+      "revId": "292c885184d85818d0607d1de03d1320406c859e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
