@@ -125,9 +125,10 @@ fn needs_formatting(data_device: &Path) -> Result<bool> {
 
 fn format_ext4(device: &Path) -> Result<()> {
     let mkfs_options = [
-        "-j",               // Create appropriate sized journal
-        "-O metadata_csum", // Metadata checksum for filesystem integrity
-        "-b 4096",          // block size in the filesystem
+        "-j", // Create appropriate sized journal
+        // metadata_csum: enabled for filesystem integrity
+        "-O metadata_csum, extents, 64bit",
+        "-b 4096", // block size in the filesystem
     ];
     let mut cmd = Command::new(MK2FS_BIN);
     let status = cmd
