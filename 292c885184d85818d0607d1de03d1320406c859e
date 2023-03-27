@@ -237,6 +237,30 @@
       },
       "revId": "292c885184d85818d0607d1de03d1320406c859e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "149f6d32_a0659ef8",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-27T07:40:32Z",
+      "side": 1,
+      "message": "\u003e No, I was referring to these flags but I agree that adding a check on ABL based on something ABL needs to set isn\u0027t much more solid (more of a best attempt at sanity checking) but what else could pvmfw do?\n\nUh, I forgot the pvmfw config header. Thank you for point me out that.\n\n\n\u003e It should also be possible to parse the BCC and check which DICE mode ABL has used to sign pvmfw.\n\nThis seems to be awesome. It replies less on the input from host and DICE seems to be very secure to me :). Would it also work for non-Pixel devices?",
+      "parentUuid": "423986c4_d63fc565",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 0
+      },
+      "revId": "292c885184d85818d0607d1de03d1320406c859e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
