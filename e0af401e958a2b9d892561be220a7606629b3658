@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "183397ae_4651418c",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T12:46:53Z",
+      "side": 1,
+      "message": "Well, the host might still lie in `totalsize` ... But my concerns might be unfounded.",
+      "parentUuid": "3d9d33bd_5c875415",
+      "range": {
+        "startLine": 528,
+        "startChar": 8,
+        "endLine": 528,
+        "endChar": 23
+      },
+      "revId": "e0af401e958a2b9d892561be220a7606629b3658",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a52adca_3d2b9c66",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 3
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "Yeah, I think so, since we patch the tree twice: once very early for sanitizing, once again for adding dice values which can\u0027t be done early.",
       "parentUuid": "3a52adca_3d2b9c66",
+      "range": {
+        "startLine": 595,
+        "startChar": 8,
+        "endLine": 595,
+        "endChar": 14
+      },
+      "revId": "e0af401e958a2b9d892561be220a7606629b3658",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad7261e0_5c03f960",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T12:46:53Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "aa3f19bf_792c7b24",
       "range": {
         "startLine": 595,
         "startChar": 8,
