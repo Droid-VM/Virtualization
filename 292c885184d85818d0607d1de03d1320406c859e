@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "24706db7_c40aee2b",
+        "filename": "microdroid/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-03-27T02:23:52Z",
+      "side": 1,
+      "message": "Two questions:\n\nQuestion 1) What kind of test are you suggesting? Do we have a CTS test for the purpose?\n\nIf you\u0027re talking about runtime check, then it may not be useful because compromised host OS make tell fake sysprop for the purpose.\n\nQuestion 2) What should check between `ro.boot.vbmeta.device_state` vs `ro.boot.verifiedbootstate`?\n\nThe latter is used by `adbd` [1] and also documented in SAC [2].\n\n[1]: https://cs.android.com/android/platform/superproject/+/master:packages/modules/adb/daemon/main.cpp?q\u003df:adb%2Fdaemon%2Fmain.cpp%20orange\n[2]: https://source.android.com/docs/core/architecture/bootloader/locking_unlocking",
+      "parentUuid": "46c2dc94_5bee3d1e",
+      "range": {
+        "startLine": 184,
+        "startChar": 5,
+        "endLine": 185,
+        "endChar": 17
+      },
+      "revId": "292c885184d85818d0607d1de03d1320406c859e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5072a58e_fd5d7e9e",
         "filename": "pvmfw/README.md",
         "patchSetId": 1
