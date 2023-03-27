@@ -18,6 +18,8 @@ use crate::cstr;
 use crate::helpers::flatten;
 use crate::helpers::GUEST_PAGE_SIZE;
 use crate::helpers::SIZE_4KB;
+use crate::memory::BASE_ADDR;
+use crate::memory::MAX_ADDR;
 use crate::RebootReason;
 use alloc::ffi::CString;
 use core::ffi::CStr;
@@ -103,8 +105,8 @@ fn read_memory_range_from(fdt: &Fdt) -> libfdt::Result<Range<usize>> {
 /// Check if memory range is ok
 fn validate_memory_range(range: &Range<usize>) -> Result<(), RebootReason> {
     let base = range.start;
-    if base as u64 != DeviceTreeInfo::RAM_BASE_ADDR {
-        error!("Memory base address {:#x} is not {:#x}", base, DeviceTreeInfo::RAM_BASE_ADDR);
+    if base != BASE_ADDR {
+        error!("Memory base address {:#x} is not {:#x}", base, BASE_ADDR);
         return Err(RebootReason::InvalidFdt);
     }
 
@@ -123,10 +125,9 @@ fn validate_memory_range(range: &Range<usize>) -> Result<(), RebootReason> {
 
 fn patch_memory_range(fdt: &mut Fdt, memory_range: &Range<usize>) -> libfdt::Result<()> {
     let size = memory_range.len() as u64;
-    fdt.node_mut(cstr!("/memory"))?.ok_or(FdtError::NotFound)?.setprop_inplace(
-        cstr!("reg"),
-        flatten(&[DeviceTreeInfo::RAM_BASE_ADDR.to_be_bytes(), size.to_be_bytes()]),
-    )
+    fdt.node_mut(cstr!("/memory"))?
+        .ok_or(FdtError::NotFound)?
+        .setprop_inplace(cstr!("reg"), flatten(&[BASE_ADDR.to_be_bytes(), size.to_be_bytes()]))
 }
 
 /// Read the number of CPUs from DT
@@ -260,8 +261,13 @@ fn validate_pci_addr_range(range: &PciAddrRange) -> Result<(), RebootReason> {
         return Err(RebootReason::InvalidFdt);
     }
 
-    if bus_addr.checked_add(size).is_none() {
-        error!("PCI address range size {:#x} too big", size);
+    if let Some(bus_end) = bus_addr.checked_add(size) {
+        if bus_end > MAX_ADDR.try_into().unwrap() {
+            error!("PCI address end {:#x} is outside of translatable range", bus_end);
+            return Err(RebootReason::InvalidFdt);
+        }
+    } else {
+        error!("PCI address range size {:#x} overflows", size);
         return Err(RebootReason::InvalidFdt);
     }
 
@@ -517,7 +523,6 @@ pub struct DeviceTreeInfo {
 }
 
 impl DeviceTreeInfo {
-    const RAM_BASE_ADDR: u64 = 0x8000_0000;
     const GIC_REDIST_SIZE_PER_CPU: u64 = (32 * SIZE_4KB) as u64;
 }
 
