@@ -166,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b011c3b9_c6229934",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-27T13:59:15Z",
+      "side": 1,
+      "message": "But then libfdt would have failed to parse the tree. https://cs.android.com/android/platform/superproject/+/master:external/dtc/libfdt/fdt.c;drc\u003dbca43fa152a84a8c48971b8424a7122c2054f8d4;l\u003d54\n\nSwitched to totalsize.",
+      "parentUuid": "183397ae_4651418c",
+      "range": {
+        "startLine": 528,
+        "startChar": 8,
+        "endLine": 528,
+        "endChar": 23
+      },
+      "revId": "e0af401e958a2b9d892561be220a7606629b3658",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a52adca_3d2b9c66",
