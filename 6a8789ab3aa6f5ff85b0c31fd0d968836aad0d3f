@@ -16,6 +16,52 @@
       "message": "Ping for review. Adding David as well.",
       "revId": "6a8789ab3aa6f5ff85b0c31fd0d968836aad0d3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c043fb5e_596a3b72",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:16Z",
+      "side": 1,
+      "message": "So the implicit assumptions that your code has to deal with are a bit confusing: the `kernel`/`ramdisk`/`memory` ranges don\u0027t need to be validated against the platform assumptions because `MemorySlices` will do so but OTOH device memory ranges (UART and PCI) are NOT validated later and, in the case of PCI, are even [used as-is by pvmfw](http://cs/android/packages/modules/Virtualization/libs/fdtpci/src/lib.rs;l\u003d104;rcl\u003dcdda3967aa9ada05fbac7c0efed291ea72ccdfe0) so need to have been validated beforehand; would `fdt.rs` be the right place to do so? Do we need to extend `MemorySlices` or create an equivalent for devices (knowing that the PCI driver will handle creating the PT entries)?",
+      "range": {
+        "startLine": 205,
+        "startChar": 4,
+        "endLine": 205,
+        "endChar": 5
+      },
+      "revId": "6a8789ab3aa6f5ff85b0c31fd0d968836aad0d3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cfcdc4e_6d55e766",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:16Z",
+      "side": 1,
+      "message": "pvmfw might guarantee that UARTs are within device memory or even that they use the PC-standard addresses.\n\nIn particular, this validation is a bit special because pvmfw uses UART `0x3f8` (IIRC) before it starts reading from the DT.",
+      "range": {
+        "startLine": 309,
+        "startChar": 4,
+        "endLine": 309,
+        "endChar": 5
+      },
+      "revId": "6a8789ab3aa6f5ff85b0c31fd0d968836aad0d3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
