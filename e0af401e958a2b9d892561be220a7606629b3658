@@ -47,6 +47,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9c7dc3b_9edd4ce3",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-27T11:26:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38e67a69_e1a4e570",
+      "range": {
+        "startLine": 93,
+        "startChar": 7,
+        "endLine": 93,
+        "endChar": 11
+      },
+      "revId": "e0af401e958a2b9d892561be220a7606629b3658",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a3a6d76_c0751db7",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-27T11:26:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd3864cf_272f6841",
+      "range": {
+        "startLine": 93,
+        "startChar": 7,
+        "endLine": 93,
+        "endChar": 11
+      },
+      "revId": "e0af401e958a2b9d892561be220a7606629b3658",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3be17446_639e074d",
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3d9d33bd_5c875415",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-27T11:26:43Z",
+      "side": 1,
+      "message": "then what you think about zeroing up to the fdt.totalsize(), which I believe would be much less than 2MB in most cases?",
+      "parentUuid": "3be17446_639e074d",
+      "range": {
+        "startLine": 528,
+        "startChar": 8,
+        "endLine": 528,
+        "endChar": 23
+      },
+      "revId": "e0af401e958a2b9d892561be220a7606629b3658",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a52adca_3d2b9c66",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 3
@@ -83,6 +155,30 @@
       "writtenOn": "2023-03-27T09:20:59Z",
       "side": 1,
       "message": "Should I drop aosp/2449763? I had posted it for this exact purpose.",
+      "range": {
+        "startLine": 595,
+        "startChar": 8,
+        "endLine": 595,
+        "endChar": 14
+      },
+      "revId": "e0af401e958a2b9d892561be220a7606629b3658",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa3f19bf_792c7b24",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-27T11:26:43Z",
+      "side": 1,
+      "message": "Yeah, I think so, since we patch the tree twice: once very early for sanitizing, once again for adding dice values which can\u0027t be done early.",
+      "parentUuid": "3a52adca_3d2b9c66",
       "range": {
         "startLine": 595,
         "startChar": 8,
