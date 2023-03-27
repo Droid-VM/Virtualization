@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c4df67a4_4c8ded8a",
+        "filename": "microdroid/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T05:21:38Z",
+      "side": 1,
+      "message": "Could the test have 2 parts: checking`ro.boot.flash.locked` against the host DT then booting a pVM and checking that the `avf` node isn\u0027t there in the guest DT? Otherwise, a faulty ABL could pass the DTBO to pvmfw without patching the host DT.",
+      "parentUuid": "21ec9c92_cdcddd4a",
+      "range": {
+        "startLine": 184,
+        "startChar": 5,
+        "endLine": 185,
+        "endChar": 17
+      },
+      "revId": "292c885184d85818d0607d1de03d1320406c859e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5072a58e_fd5d7e9e",
         "filename": "pvmfw/README.md",
         "patchSetId": 1
@@ -85,6 +109,30 @@
       "writtenOn": "2023-03-25T03:26:45Z",
       "side": 1,
       "message": "Dear Pierre,\n\nCan we have a secure way for `pvmfw` and/or VM to know whether the device is locked or not? On host, we read sysprop but not sure whether `pvmfw` can read the .\n\nOn Pixels, we wipe DPM when we lock device, but we might not expect the same thing for other devices.\n\nsee: b/238261271 for previous discussion.",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 0
+      },
+      "revId": "292c885184d85818d0607d1de03d1320406c859e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1eab5a9_1436387c",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T05:21:38Z",
+      "side": 1,
+      "message": "pvmfw _has_ to trust ABL but as an extra check we could require ABL to set one of the configuration data flag bits to reflect whether the device is locked or not. Nothing would prevent a faulty ABL from forgetting to set the flag and passing the DTBO but I guess the same could be said about the host\u0027s flag, right? WDYT?",
+      "parentUuid": "5072a58e_fd5d7e9e",
       "range": {
         "startLine": 243,
         "startChar": 0,
