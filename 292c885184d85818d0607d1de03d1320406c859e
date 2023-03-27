@@ -261,6 +261,30 @@
       },
       "revId": "292c885184d85818d0607d1de03d1320406c859e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e34aa11b_836216dd",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:17:35Z",
+      "side": 1,
+      "message": "\u003e Would it also work for non-Pixel devices?\n\nYes, because pvmfw mandates the presence of a BCC in the `BccHandover` and mandates either a config data with a `BccHandover` or a \"raw\" one. The drawback is that we now need to parse the `BccHandover::Bcc` in pvmfw but it sounds like it\u0027s the right thing to do.",
+      "parentUuid": "149f6d32_a0659ef8",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 0
+      },
+      "revId": "292c885184d85818d0607d1de03d1320406c859e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
