@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d54f2471_87036f3c",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T11:31:22Z",
+      "side": 1,
+      "message": "Right but is there something that ensures that the PCI range is actually device memory? Because the code that uses it (see link above) doesn\u0027t seem to(?)",
+      "parentUuid": "a9dc73b4_b0fd0e3e",
+      "range": {
+        "startLine": 205,
+        "startChar": 4,
+        "endLine": 205,
+        "endChar": 5
+      },
+      "revId": "6a8789ab3aa6f5ff85b0c31fd0d968836aad0d3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9cfcdc4e_6d55e766",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 1
