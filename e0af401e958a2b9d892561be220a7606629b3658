@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38e67a69_e1a4e570",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:59Z",
+      "side": 1,
+      "message": "Do we have a bug for this? If not, we might want to create one separate from b/249054080 and tag it in this comment, as it is worthy of its own discussion.",
+      "range": {
+        "startLine": 93,
+        "startChar": 7,
+        "endLine": 93,
+        "endChar": 11
+      },
+      "revId": "e0af401e958a2b9d892561be220a7606629b3658",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd3864cf_272f6841",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:59Z",
+      "side": 1,
+      "message": "Do we have a bug for this? If not, we might create one separate from b/",
+      "range": {
+        "startLine": 93,
+        "startChar": 7,
+        "endLine": 93,
+        "endChar": 11
+      },
+      "revId": "e0af401e958a2b9d892561be220a7606629b3658",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3be17446_639e074d",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:59Z",
+      "side": 1,
+      "message": "Note that, if `RAW.len() \u003c fdt.len()`, the tail of the original DT will still be in memory when the guest runs. This _might_ be a vulnerability but, at the same time, I\u0027d rather not zero the rest of the 2MB memory region that could contain the DT as (1) it increases boot times, mostly due to the resulting page donations, and (2) the pVM physical memory consumption might go up, as a result. WDYT?",
+      "range": {
+        "startLine": 528,
+        "startChar": 8,
+        "endLine": 528,
+        "endChar": 23
+      },
+      "revId": "e0af401e958a2b9d892561be220a7606629b3658",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a52adca_3d2b9c66",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T09:20:59Z",
+      "side": 1,
+      "message": "Should I drop aosp/2449763? I had posted it for this exact purpose.",
+      "range": {
+        "startLine": 595,
+        "startChar": 8,
+        "endLine": 595,
+        "endChar": 14
+      },
+      "revId": "e0af401e958a2b9d892561be220a7606629b3658",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
