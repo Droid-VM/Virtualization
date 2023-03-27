@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02471102_5625dedf",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T12:58:23Z",
+      "side": 1,
+      "message": "nit: this could be flattened using `.ok_or_else()?` or even `let`-`else`-`return`.",
+      "range": {
+        "startLine": 264,
+        "startChar": 7,
+        "endLine": 264,
+        "endChar": 10
+      },
+      "revId": "b23a9f4b2e955268e05b6ed91392b5e036727648",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1c78616_50f0aed8",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-27T12:58:23Z",
+      "side": 1,
+      "message": "But we should also check that it doesn\u0027t overlap with main memory i.e. `\u003c BASE_ADDR` and `\u003e\u003d BASE_ADDR + info.memory_range.len()`.",
+      "range": {
+        "startLine": 266,
+        "startChar": 45,
+        "endLine": 266,
+        "endChar": 74
+      },
+      "revId": "b23a9f4b2e955268e05b6ed91392b5e036727648",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
