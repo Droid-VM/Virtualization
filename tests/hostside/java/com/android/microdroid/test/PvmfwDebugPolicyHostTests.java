@@ -97,9 +97,9 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
     @Before
     public void setUp() throws Exception {
         mAndroidDevice = (TestDevice) Objects.requireNonNull(getDevice());
-        assumeTrue(
-                "Skip if protected VMs are not supported",
-                mAndroidDevice.supportsMicrodroid(/* protectedVm= */ true));
+
+        // Check device capabilities
+        testIfDeviceIsCapable(mAndroidDevice);
         assumeFalse("Test requires setprop for using custom pvmfw and adb root", isUserBuild());
 
         mAndroidDevice.enableAdbRoot();
@@ -111,12 +111,15 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
         mBccFileOnHost =
                 getTestInformation().getDependencyFile(BCC_FILE_NAME, /* targetFirst= */ false);
 
+<<<<<<< PATCH SET (e6f7b5 Remove duplicated device capability checks)
+=======
         // Check device capability
         assumeDeviceIsCapable(mAndroidDevice);
         assumeTrue(
                 "Protected VMs are not supported",
                 mAndroidDevice.supportsMicrodroid(/*protectedVm=*/ true));
 
+>>>>>>> BASE      (ea0d6d Merge "MicrodroidBenchmarks: testMemoryUsage: Add pKVM stati)
         // Prepare for loading pvmfw.bin
         // File will be setup in individual test,
         // and then pushed to device in launchProtectedVmAndWaitForBootCompleted.
