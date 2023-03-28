@@ -46,6 +46,29 @@
       },
       "revId": "5af55834d0477d6ce858b0d4c11c0ceda509a999",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "354a8e25_824f5f61",
+        "filename": "virtualizationmanager/src/crosvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2023-03-28T23:46:13Z",
+      "side": 1,
+      "message": "I wouldn\u0027t consider this \u0027eagerly\u0027 - because you should have to manually shut it down when there are incoming connections",
+      "range": {
+        "startLine": 495,
+        "startChar": 21,
+        "endLine": 495,
+        "endChar": 28
+      },
+      "revId": "5af55834d0477d6ce858b0d4c11c0ceda509a999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
