@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6d0c0f4_172de3a0",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/DeviceProperties.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-29T15:45:55Z",
+      "side": 1,
+      "message": "There seems to be a desire to centralize property checking here; should we introduce `DeviceProperties::isBootloaderLocked()` for `\"ro.boot.flash.locked\"`?",
+      "range": {
+        "startLine": 22,
+        "startChar": 19,
+        "endLine": 22,
+        "endChar": 35
+      },
+      "revId": "c8f5300f249253b714ed77fdad2991c8ec965acc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d6bb4db_516eec5c",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-29T15:45:55Z",
+      "side": 1,
+      "message": "```\nboolean hasDebugPolicy \u003d device.doesFileExist(\"/sys/firmware/devicetree/base/avf\");\nassertThat(hasDebugPolicy).isFalse();\n```\n?",
+      "range": {
+        "startLine": 941,
+        "startChar": 8,
+        "endLine": 943,
+        "endChar": 77
+      },
+      "revId": "c8f5300f249253b714ed77fdad2991c8ec965acc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
