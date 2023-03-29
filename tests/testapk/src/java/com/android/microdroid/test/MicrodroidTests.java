@@ -1142,6 +1142,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
         VirtualMachineConfig config =
                 newVmConfigBuilder()
                         .setPayloadBinaryName("MicrodroidTestNativeLib.so")
+                        .setProtectedVm(mProtectedVm)
                         .setDebugLevel(DEBUG_LEVEL_FULL)
                         .build();
 
