@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "070995bd_17c25b60",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-29T16:39:12Z",
+      "side": 1,
+      "message": "Yes, working on it now - separate CL, will add to the topic.",
+      "parentUuid": "bafc5d5d_03fecda0",
+      "range": {
+        "startLine": 17,
+        "startChar": 51,
+        "endLine": 18,
+        "endChar": 63
+      },
+      "revId": "badc70eb36600cf843a7d1aa0bf321cb4fd50a6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df23d84a_41f17ec2",
@@ -60,6 +84,30 @@
       "writtenOn": "2023-03-29T16:29:24Z",
       "side": 1,
       "message": "For my education, can I take a look so that I know how I can find them the next time?",
+      "range": {
+        "startLine": 21,
+        "startChar": 6,
+        "endLine": 21,
+        "endChar": 53
+      },
+      "revId": "badc70eb36600cf843a7d1aa0bf321cb4fd50a6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e2c959a_3e9de4ed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-29T16:39:12Z",
+      "side": 1,
+      "message": "Here\u0027s an example line:\n03-29 17:06:56.006  4022  4037 I virtmgr : virtualizationmanager::aidl: Log(2048): dex2oat64 W 03-29 16:06:55   429   429 dex2oat.cc:832] Mismatch between dex2oat instruction set features to use (ISA: Arm64 Feature string: a53,crc,-lse,-fp16,-dotprod,-sve) and those from CPP defines (ISA: Arm64 Feature string: -a53,crc,-lse,fp16,dotprod,-sve) for the command line:\n\n\nEverything after Log(2048) is from the VM. (And 2048 is the CID which identifies the VM.)",
+      "parentUuid": "df23d84a_41f17ec2",
       "range": {
         "startLine": 21,
         "startChar": 6,
@@ -100,6 +148,24 @@
       "writtenOn": "2023-03-29T16:30:57Z",
       "side": 1,
       "message": "Do you also need to change [this](http://cs/android-internal/art/dex2oat/dex2oat.cc;l\u003d1049;rcl\u003df00554841250571609604273b309cc540012defa) and [this](http://cs/android-internal/art/odrefresh/odrefresh_main.cc;l\u003d265;rcl\u003df00554841250571609604273b309cc540012defa)?",
+      "revId": "badc70eb36600cf843a7d1aa0bf321cb4fd50a6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db7f7f5e_4a6a8e1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-03-29T16:39:12Z",
+      "side": 1,
+      "message": "No - those are about making sure the logging gets out of the VM; once it does that, it now goes to host logcat rather than file.",
+      "parentUuid": "ad440664_79b5406a",
       "revId": "badc70eb36600cf843a7d1aa0bf321cb4fd50a6b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
