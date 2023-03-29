@@ -16,6 +16,75 @@
       "message": "The TH test result I checked doesn\u0027t use IP.  But on second thought, I\u0027m not sure if \"we don\u0027t run benchmarks over IP\" is a safe assumption in the infra.  Adding more eyes.",
       "revId": "5674cd33ca981cb33142b546509ea474fdba158d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f220d5c_33d3e85e",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-29T10:28:11Z",
+      "side": 1,
+      "message": "Hmm, do we have a bug here? `mNeedTearDown` could already be true from a different test case, right? I think we need to set it to `false` at the top of this function. And same for your new variable.",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 29
+      },
+      "revId": "5674cd33ca981cb33142b546509ea474fdba158d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4880c908_7e4a56f1",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-29T10:28:11Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this go to the top of `setPKVMStatusWithRebootToBootloader`?",
+      "range": {
+        "startLine": 486,
+        "startChar": 0,
+        "endLine": 486,
+        "endChar": 40
+      },
+      "revId": "5674cd33ca981cb33142b546509ea474fdba158d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01857e89_907c008c",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-29T10:28:11Z",
+      "side": 1,
+      "message": "Why not `getDevice().getSerialNumber()`?",
+      "range": {
+        "startLine": 526,
+        "startChar": 0,
+        "endLine": 526,
+        "endChar": 56
+      },
+      "revId": "5674cd33ca981cb33142b546509ea474fdba158d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
