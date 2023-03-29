@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b5ac78f_0e84207c",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2023-03-29T22:20:32Z",
+      "side": 1,
+      "message": "Good catch, done.  The bug should be doing unnecessary tear-down.\n\nThe function names also confused me.  I renamed `skipIfPKVMStatusSwitchNotSupported` to `assumePKVM...`.  Maybe I can rename `testIfDeviceIsCapable` to `assumeDeviceIsPKVMCapable` in a follow-up.",
+      "parentUuid": "1f220d5c_33d3e85e",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 29
+      },
+      "revId": "5674cd33ca981cb33142b546509ea474fdba158d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4880c908_7e4a56f1",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "699a82ab_655f061a",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2023-03-29T22:20:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4880c908_7e4a56f1",
+      "range": {
+        "startLine": 486,
+        "startChar": 0,
+        "endLine": 486,
+        "endChar": 40
+      },
+      "revId": "5674cd33ca981cb33142b546509ea474fdba158d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01857e89_907c008c",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-03-29T10:28:11Z",
       "side": 1,
       "message": "Why not `getDevice().getSerialNumber()`?",
+      "range": {
+        "startLine": 526,
+        "startChar": 0,
+        "endLine": 526,
+        "endChar": 56
+      },
+      "revId": "5674cd33ca981cb33142b546509ea474fdba158d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4977ea03_fb120d77",
+        "filename": "tests/benchmark_hostside/java/android/avf/test/AVFHostTestCase.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2023-03-29T22:20:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01857e89_907c008c",
       "range": {
         "startLine": 526,
         "startChar": 0,
