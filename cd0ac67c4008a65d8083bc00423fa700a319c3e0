@@ -95,6 +95,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8004cdb8_74139231",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-30T12:14:43Z",
+      "side": 1,
+      "message": "According to @willdeacon@google.com, you need a `DSB ISH` before reading the PTE to ensure that page-dirtying writes have been properly ordered w.r.t. the PTE access; see Arm ARM rule \"MKHJS\".",
+      "range": {
+        "startLine": 489,
+        "startChar": 25,
+        "endLine": 489,
+        "endChar": 37
+      },
+      "revId": "cd0ac67c4008a65d8083bc00423fa700a319c3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d93e888f_5ab91aa8",
         "filename": "pvmfw/src/memory.rs",
         "patchSetId": 3
