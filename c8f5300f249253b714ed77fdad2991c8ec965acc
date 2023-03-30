@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10502e35_548be334",
+        "filename": "tests/helper/src/java/com/android/microdroid/test/common/DeviceProperties.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-03-30T15:30:31Z",
+      "side": 1,
+      "message": "SGTM\n\n\u003e BTW, how did you add comment in a file that doesn\u0027t included in CL?\n\nNot sure if this is the best way but here\u0027s how I\u0027ve found how to do it:\n\n1. open a modified file for review\n2. modify the part of the URL that contains the file path\n3. add new comment on unmodified path",
+      "parentUuid": "6f623d81_fe031b32",
+      "range": {
+        "startLine": 22,
+        "startChar": 19,
+        "endLine": 22,
+        "endChar": 35
+      },
+      "revId": "c8f5300f249253b714ed77fdad2991c8ec965acc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d6bb4db_516eec5c",
