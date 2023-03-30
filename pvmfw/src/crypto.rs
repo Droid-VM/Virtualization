@@ -22,6 +22,7 @@ use core::num::NonZeroU32;
 use core::ptr;
 
 use crate::cstr;
+use crate::read_sysreg;
 
 use bssl_ffi::CRYPTO_library_init;
 use bssl_ffi::ERR_get_error_line;
@@ -37,6 +38,8 @@ use bssl_ffi::EVP_sha512;
 use bssl_ffi::EVP_AEAD;
 use bssl_ffi::EVP_AEAD_CTX;
 use bssl_ffi::HKDF;
+use log::error;
+use log::warn;
 
 #[derive(Debug)]
 pub struct Error {
@@ -303,4 +306,74 @@ pub fn hkdf_sh512<const N: usize>(secret: &[u8], salt: &[u8], info: &[u8]) -> Re
 pub fn init() {
     // SAFETY - Configures the internal state of the library - may be called multiple times.
     unsafe { CRYPTO_library_init() }
+}
+
+/// Configure BoringSSL with the detected CPU features.
+///
+/// This function is declared in BSSL's <src/crypto/internal.h> and, if OPENSSL_STATIC_ARMCAP and
+/// OPENSSL_NO_ASM are not in use, is called by CRYPTO_library_init(). The library expects one of
+/// the OS back-ends (Linux, Windows, ...) to implement it but none is used when __TRUSTY__ is
+/// defined, so we provide it here.
+#[no_mangle]
+extern "C" fn OPENSSL_cpuid_setup() {
+    // From <src/include/openssl/arm_arch.h>:
+    const ARMV7_NEON: u32 = 1 << 0;
+    const ARMV8_AES: u32 = 1 << 2;
+    const ARMV8_SHA1: u32 = 1 << 3;
+    const ARMV8_SHA256: u32 = 1 << 4;
+    const ARMV8_PMULL: u32 = 1 << 5;
+    const ARMV8_SHA512: u32 = 1 << 6;
+
+    let mut capmask = 0;
+
+    let id_aa64pfr0_el1 = read_sysreg!("id_aa64pfr0_el1");
+
+    const ID_AA64PFR0_EL1_FP_SHIFT: u32 = 16;
+    match (id_aa64pfr0_el1 >> ID_AA64PFR0_EL1_FP_SHIFT) & 0b1111 {
+        0b0000 | 0b0001 => (), // FP support is implicitly assumed by BoringSSL.
+        0b1111 => {
+            error!("ID_AA64PFR0_EL1 shows no FP support");
+            return;
+        }
+        fp => warn!("Unsupported ID_AA64PFR0_EL1.FP ({fp:#06b})"),
+    }
+
+    const ID_AA64PFR0_EL1_ADVSIMD_SHIFT: u32 = 20;
+    match (id_aa64pfr0_el1 >> ID_AA64PFR0_EL1_ADVSIMD_SHIFT) & 0b1111 {
+        0b0000 | 0b0001 => capmask |= ARMV7_NEON,
+        0b1111 => warn!("ID_AA64PFR0_EL1 shows no AdvSIMD support"),
+        advsimd => warn!("Unsupported ID_AA64PFR0_EL1.AdvSIMD ({advsimd:#06b})"),
+    }
+
+    let id_aa64isar0_el1 = read_sysreg!("id_aa64isar0_el1");
+
+    const ID_AA64ISAR0_EL1_AES_SHIFT: u32 = 4;
+    match (id_aa64isar0_el1 >> ID_AA64ISAR0_EL1_AES_SHIFT) & 0b1111 {
+        0b0000 => (),
+        0b0001 => capmask |= ARMV8_AES,
+        0b0010 => capmask |= ARMV8_AES | ARMV8_PMULL,
+        aes => warn!("Unsupported ID_AA64ISAR0_EL1.AES ({aes:#06b})"),
+    }
+
+    const ID_AA64ISAR0_EL1_SHA1_SHIFT: u32 = 8;
+    match (id_aa64isar0_el1 >> ID_AA64ISAR0_EL1_SHA1_SHIFT) & 0b1111 {
+        0b0000 => (),
+        0b0001 => capmask |= ARMV8_SHA1,
+        sha1 => warn!("Unsupported ID_AA64ISAR0_EL1.SHA1 ({sha1:#06b})"),
+    }
+
+    const ID_AA64ISAR0_EL1_SHA2_SHIFT: u32 = 12;
+    match (id_aa64isar0_el1 >> ID_AA64ISAR0_EL1_SHA2_SHIFT) & 0b1111 {
+        0b0000 => (),
+        0b0001 => capmask |= ARMV8_SHA256,
+        0b0010 => capmask |= ARMV8_SHA256 | ARMV8_SHA512,
+        sha2 => warn!("Unsupported ID_AA64ISAR0_EL1.SHA2 ({sha2:#06b})"),
+    }
+
+    // SAFETY - BSSL only accesses this variable once initialized.
+    unsafe { OPENSSL_armcap_P |= capmask };
+}
+
+extern "C" {
+    static mut OPENSSL_armcap_P: u32;
 }
