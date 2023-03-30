@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c57f7796_7a2c3d42",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-03-30T17:57:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b638700d_0b3a6118",
+      "range": {
+        "startLine": 30,
+        "startChar": 11,
+        "endLine": 30,
+        "endChar": 17
+      },
+      "revId": "3278de6777a609c558cf522888512b967707391b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "798d3ed5_0f5848ba",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-30T16:48:51Z",
       "side": 1,
       "message": "I don\u0027t see the point of this function, let\u0027s just replace it with\n```\neprintln!(\"esr\u003d{esr:#08x}\");\n```",
+      "range": {
+        "startLine": 32,
+        "startChar": 8,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "3278de6777a609c558cf522888512b967707391b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d021ad0_b89589f2",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-03-30T17:57:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "798d3ed5_0f5848ba",
       "range": {
         "startLine": 32,
         "startChar": 8,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2bf8e29_e2af0fe5",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-03-30T17:57:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e6a5da6_ff7bd7ad",
+      "range": {
+        "startLine": 28,
+        "startChar": 13,
+        "endLine": 28,
+        "endChar": 17
+      },
+      "revId": "3278de6777a609c558cf522888512b967707391b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06beccb5_37552423",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-03-30T16:48:51Z",
       "side": 1,
       "message": "Even if it\u0027s a macro, a `SAFETY` comment is required.",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 14
+      },
+      "revId": "3278de6777a609c558cf522888512b967707391b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2534e699_ff73ab2c",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-03-30T17:57:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06beccb5_37552423",
       "range": {
         "startLine": 30,
         "startChar": 8,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eeda5bc_2564e9e7",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-03-30T17:57:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "256ac552_04428a42",
+      "range": {
+        "startLine": 31,
+        "startChar": 12,
+        "endLine": 31,
+        "endChar": 15
+      },
+      "revId": "3278de6777a609c558cf522888512b967707391b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "091c1881_a0892937",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-03-30T16:48:51Z",
       "side": 1,
       "message": "I\u0027m not very familiar with macros but would it add any value to \"type check\" `$val` by first assigning it to a `usize`?",
+      "range": {
+        "startLine": 40,
+        "startChar": 33,
+        "endLine": 40,
+        "endChar": 34
+      },
+      "revId": "3278de6777a609c558cf522888512b967707391b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e165a1d_08d076c7",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-03-30T17:57:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "091c1881_a0892937",
       "range": {
         "startLine": 40,
         "startChar": 33,
