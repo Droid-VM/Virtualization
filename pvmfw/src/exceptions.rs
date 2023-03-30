@@ -14,7 +14,7 @@
 
 //! Exception handlers.
 
-use crate::helpers::page_4kb_of;
+use crate::{helpers::page_4kb_of, read_sysreg};
 use core::arch::asm;
 use vmbase::console;
 use vmbase::{console::emergency_write_str, eprintln, power::reboot};
@@ -24,10 +24,10 @@ const UART_PAGE: usize = page_4kb_of(console::BASE_ADDRESS);
 
 #[no_mangle]
 extern "C" fn sync_exception_current(_elr: u64, _spsr: u64) {
-    let esr = read_esr();
-    let far = read_far();
+    let esr: u64 = read_sysreg!("esr_el1").try_into().unwrap();
+    let far = read_sysreg!("far_el1");
     // Don't print to the UART if we're handling the exception it could raise.
-    if esr != ESR_32BIT_EXT_DABT || page_4kb_of(far as usize) != UART_PAGE {
+    if esr != ESR_32BIT_EXT_DABT || page_4kb_of(far) != UART_PAGE {
         emergency_write_str("sync_exception_current\n");
         print_esr(esr);
     }
@@ -48,7 +48,7 @@ extern "C" fn fiq_current(_elr: u64, _spsr: u64) {
 
 #[no_mangle]
 extern "C" fn serr_current(_elr: u64, _spsr: u64) {
-    let esr = read_esr();
+    let esr: u64 = read_sysreg!("esr_el1").try_into().unwrap();
     emergency_write_str("serr_current\n");
     print_esr(esr);
     reboot();
@@ -56,7 +56,7 @@ extern "C" fn serr_current(_elr: u64, _spsr: u64) {
 
 #[no_mangle]
 extern "C" fn sync_lower(_elr: u64, _spsr: u64) {
-    let esr = read_esr();
+    let esr: u64 = read_sysreg!("esr_el1").try_into().unwrap();
     emergency_write_str("sync_lower\n");
     print_esr(esr);
     reboot();
@@ -76,31 +76,13 @@ extern "C" fn fiq_lower(_elr: u64, _spsr: u64) {
 
 #[no_mangle]
 extern "C" fn serr_lower(_elr: u64, _spsr: u64) {
-    let esr = read_esr();
+    let esr: u64 = read_sysreg!("esr_el1").try_into().unwrap();
     emergency_write_str("serr_lower\n");
     print_esr(esr);
     reboot();
 }
 
 #[inline]
-fn read_esr() -> u64 {
-    let mut esr: u64;
-    unsafe {
-        asm!("mrs {esr}, esr_el1", esr = out(reg) esr);
-    }
-    esr
-}
-
-#[inline]
 fn print_esr(esr: u64) {
     eprintln!("esr={:#08x}", esr);
-}
-
-#[inline]
-fn read_far() -> u64 {
-    let mut far: u64;
-    unsafe {
-        asm!("mrs {far}, far_el1", far = out(reg) far);
-    }
-    far
 }
