@@ -16,6 +16,75 @@
       "message": "Hi Alan,\n\ncould you also take a look?",
       "revId": "ae305dc70b0417b973a6f0ef8f4cbfa427b3d96a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7d2e730_e73f82b8",
+        "filename": "rialto/src/mmio_guard.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-30T14:44:27Z",
+      "side": 1,
+      "message": "Do we have to duplicate this code? Why not extract into a library shared with pvmfw?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 28
+      },
+      "revId": "ae305dc70b0417b973a6f0ef8f4cbfa427b3d96a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8e4365b_c6467134",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-30T14:44:27Z",
+      "side": 1,
+      "message": "There\u0027s already `RIALTO_PATH` at the top. Move next to it?",
+      "range": {
+        "startLine": 65,
+        "startChar": 14,
+        "endLine": 65,
+        "endChar": 62
+      },
+      "revId": "ae305dc70b0417b973a6f0ef8f4cbfa427b3d96a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb533fd1_fce0f016",
+        "filename": "rialto/tests/test.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-30T14:44:27Z",
+      "side": 1,
+      "message": "nit: 10MB sounds like a lot. Isn\u0027t the required size something like few kilobytes? Make it 1MB maybe?",
+      "range": {
+        "startLine": 67,
+        "startChar": 10,
+        "endLine": 67,
+        "endChar": 32
+      },
+      "revId": "ae305dc70b0417b973a6f0ef8f4cbfa427b3d96a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
