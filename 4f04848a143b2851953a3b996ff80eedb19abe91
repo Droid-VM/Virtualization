@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2da5b5a_691585c6",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-03-30T15:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2afa6431_282c5cd4",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 130,
+        "endChar": 29
+      },
+      "revId": "4f04848a143b2851953a3b996ff80eedb19abe91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06032b3e_d4fc4ea7",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-30T14:33:29Z",
       "side": 1,
       "message": "why this? it\u0027s not used outside of the constructor, is it?",
+      "range": {
+        "startLine": 372,
+        "startChar": 8,
+        "endLine": 372,
+        "endChar": 30
+      },
+      "revId": "4f04848a143b2851953a3b996ff80eedb19abe91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4c391e9_f04ee25a",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-03-30T15:29:09Z",
+      "side": 1,
+      "message": "Yes, to create the KvmVmStats() object.",
+      "parentUuid": "06032b3e_d4fc4ea7",
       "range": {
         "startLine": 372,
         "startChar": 8,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fe8a37a_7b0c81e3",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-03-30T15:29:09Z",
+      "side": 1,
+      "message": "Habits...  :)",
+      "parentUuid": "34daa86a_a6457e8c",
+      "range": {
+        "startLine": 420,
+        "startChar": 12,
+        "endLine": 420,
+        "endChar": 23
+      },
+      "revId": "4f04848a143b2851953a3b996ff80eedb19abe91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06dd0e15_9c78f741",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d7e84bf_6996325a",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-03-30T15:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06dd0e15_9c78f741",
+      "range": {
+        "startLine": 436,
+        "startChar": 30,
+        "endLine": 436,
+        "endChar": 39
+      },
+      "revId": "4f04848a143b2851953a3b996ff80eedb19abe91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "741f8c97_f8111514",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-03-30T14:33:29Z",
       "side": 1,
       "message": "This is a lot of logic. Would it be enough to check support by the presence of the KVM_STATS_FS folder?",
+      "range": {
+        "startLine": 451,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 24
+      },
+      "revId": "4f04848a143b2851953a3b996ff80eedb19abe91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fced847_7ea89d5f",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-03-30T15:29:09Z",
+      "side": 1,
+      "message": "That wouldn\u0027t be enough. The folder would be present for any CONFIG_KVM\u003dy kernel.\n\nWe could look for one of the \"protected_hyp_mem\" files... but then it means we could silently fail in case of a problem instead of catching something is wrong with that kernel?",
+      "parentUuid": "741f8c97_f8111514",
       "range": {
         "startLine": 451,
         "startChar": 0,
@@ -162,6 +282,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0095a06_fa4815f9",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-03-30T15:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c01ab27_7a849ce4",
+      "range": {
+        "startLine": 463,
+        "startChar": 40,
+        "endLine": 463,
+        "endChar": 66
+      },
+      "revId": "4f04848a143b2851953a3b996ff80eedb19abe91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f15e1b6b_26bee2fb",
@@ -185,6 +329,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23983920_e40b1eb3",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-03-30T15:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f15e1b6b_26bee2fb",
+      "range": {
+        "startLine": 498,
+        "startChar": 8,
+        "endLine": 498,
+        "endChar": 36
+      },
+      "revId": "4f04848a143b2851953a3b996ff80eedb19abe91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa31e70b_c43798f4",
@@ -198,6 +366,30 @@
       "writtenOn": "2023-03-30T14:33:29Z",
       "side": 1,
       "message": "Might be worth converting this to MB as well. The dashboards can\u0027t do math, just visualize the data, and it would be good to render this together with the other values.",
+      "range": {
+        "startLine": 520,
+        "startChar": 51,
+        "endLine": 520,
+        "endChar": 71
+      },
+      "revId": "4f04848a143b2851953a3b996ff80eedb19abe91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23c3b43f_56b330b0",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-03-30T15:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa31e70b_c43798f4",
       "range": {
         "startLine": 520,
         "startChar": 51,
