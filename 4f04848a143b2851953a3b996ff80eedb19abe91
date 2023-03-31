@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a5c140a_ca62e488",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-31T09:45:08Z",
+      "side": 1,
+      "message": "Ah, ok. Then it would be marginally nicer to get the pid outside of the class and pass it via the constructor, so that `CrosvmStats` and `KvmVmStats` have similar constructor signatures and don\u0027t depend one on the other.",
+      "parentUuid": "b4c391e9_f04ee25a",
+      "range": {
+        "startLine": 372,
+        "startChar": 8,
+        "endLine": 372,
+        "endChar": 30
+      },
+      "revId": "4f04848a143b2851953a3b996ff80eedb19abe91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "34daa86a_a6457e8c",
         "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
         "patchSetId": 7
@@ -238,6 +262,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d7a0b38_07029d0d",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-31T09:45:08Z",
+      "side": 1,
+      "message": "Hmm, makes me uneasy to hardcode this many assumptions into a benchmark - it\u0027s not a kernel unit test and if something stops working, we will see it on the dashboards. The general approach in these tests is to try to collect as much info as available, but at best print a warning when something cannot be found.\n\nAlso, checking `ro.boot.hypervisor.version` doesn\u0027t work. It may be set on Pixel to `kvm.arm-protected` but that\u0027s not dictated anywhere. The string is just for debug.",
+      "parentUuid": "1fced847_7ea89d5f",
+      "range": {
+        "startLine": 451,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 24
+      },
+      "revId": "4f04848a143b2851953a3b996ff80eedb19abe91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e3ed809_fcdfd8a8",
         "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
         "patchSetId": 7
@@ -301,6 +349,30 @@
         "startChar": 40,
         "endLine": 463,
         "endChar": 66
+      },
+      "revId": "4f04848a143b2851953a3b996ff80eedb19abe91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2d8b65d_3776014f",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-31T09:45:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e3ed809_fcdfd8a8",
+      "range": {
+        "startLine": 463,
+        "startChar": 22,
+        "endLine": 463,
+        "endChar": 38
       },
       "revId": "4f04848a143b2851953a3b996ff80eedb19abe91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -413,6 +485,30 @@
       "writtenOn": "2023-03-30T14:33:29Z",
       "side": 1,
       "message": "`KvmVmStats.supported` would be the idiomatic way of calling a static function.\n\nIf you already have a static function, why not move the condition inside?\n```\nmKvm \u003d KvmVmStats.createIfSupported(mCrosvm.mPid, mShellExecutor);\n```",
+      "range": {
+        "startLine": 553,
+        "startChar": 20,
+        "endLine": 553,
+        "endChar": 34
+      },
+      "revId": "4f04848a143b2851953a3b996ff80eedb19abe91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ce196ef_19438d24",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-31T09:45:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6371f127_4b46bc33",
       "range": {
         "startLine": 553,
         "startChar": 20,

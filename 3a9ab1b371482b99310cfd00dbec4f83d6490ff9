@@ -93,6 +93,30 @@
       },
       "revId": "3a9ab1b371482b99310cfd00dbec4f83d6490ff9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f836a92e_278ea00f",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-03-31T09:45:08Z",
+      "side": 1,
+      "message": "And? These just give the permission to start a VM to the running process. You don\u0027t need to revoke - it disappears when the test exits. We also never test without these, so really these are two lines of code we don\u0027t need.",
+      "parentUuid": "dca9e860_258c522c",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 79
+      },
+      "revId": "3a9ab1b371482b99310cfd00dbec4f83d6490ff9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
