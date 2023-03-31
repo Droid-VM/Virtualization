@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a15d339_8204e865",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-03-31T10:32:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8a5c140a_ca62e488",
+      "range": {
+        "startLine": 372,
+        "startChar": 8,
+        "endLine": 372,
+        "endChar": 30
+      },
+      "revId": "4f04848a143b2851953a3b996ff80eedb19abe91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "34daa86a_a6457e8c",
         "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
         "patchSetId": 7
@@ -274,6 +298,30 @@
       "side": 1,
       "message": "Hmm, makes me uneasy to hardcode this many assumptions into a benchmark - it\u0027s not a kernel unit test and if something stops working, we will see it on the dashboards. The general approach in these tests is to try to collect as much info as available, but at best print a warning when something cannot be found.\n\nAlso, checking `ro.boot.hypervisor.version` doesn\u0027t work. It may be set on Pixel to `kvm.arm-protected` but that\u0027s not dictated anywhere. The string is just for debug.",
       "parentUuid": "1fced847_7ea89d5f",
+      "range": {
+        "startLine": 451,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 24
+      },
+      "revId": "4f04848a143b2851953a3b996ff80eedb19abe91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "887d4364_51bc5643",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-03-31T10:32:47Z",
+      "side": 1,
+      "message": "I could remove the `android14` check the, but checking for the presence of the KVM debug will not be enough to verify the hypervisor is pKVM.\n\nIf `boot.hypervisor.version` is not reliable, maybe I can look for `kvm-arm.mode\u003dprotected` in the cmdline?",
+      "parentUuid": "6d7a0b38_07029d0d",
       "range": {
         "startLine": 451,
         "startChar": 0,
