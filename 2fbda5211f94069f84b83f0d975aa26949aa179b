@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61adfe68_f18f474f",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-31T05:46:14Z",
+      "side": 1,
+      "message": "Does getEventMetricDataList consume events? Otherwise, we may end up adding same atom numbers multiple times, like [CREATION, CREATION, BOOTED, CREATION, BOOTED, EXITED].",
+      "range": {
+        "startLine": 689,
+        "startChar": 12,
+        "endLine": 689,
+        "endChar": 73
+      },
+      "revId": "2fbda5211f94069f84b83f0d975aa26949aa179b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
