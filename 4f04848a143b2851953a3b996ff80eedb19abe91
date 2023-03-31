@@ -143,6 +143,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "404fb54c_5a5ccb85",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-03-31T11:20:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a15d339_8204e865",
+      "range": {
+        "startLine": 372,
+        "startChar": 8,
+        "endLine": 372,
+        "endChar": 30
+      },
+      "revId": "4f04848a143b2851953a3b996ff80eedb19abe91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34daa86a_a6457e8c",
@@ -322,6 +346,30 @@
       "side": 1,
       "message": "I could remove the `android14` check the, but checking for the presence of the KVM debug will not be enough to verify the hypervisor is pKVM.\n\nIf `boot.hypervisor.version` is not reliable, maybe I can look for `kvm-arm.mode\u003dprotected` in the cmdline?",
       "parentUuid": "6d7a0b38_07029d0d",
+      "range": {
+        "startLine": 451,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 24
+      },
+      "revId": "4f04848a143b2851953a3b996ff80eedb19abe91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c42d6c10_9326fc1b",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/MicrodroidBenchmarks.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2023-03-31T11:20:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "887d4364_51bc5643",
       "range": {
         "startLine": 451,
         "startChar": 0,
