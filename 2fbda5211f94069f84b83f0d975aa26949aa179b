@@ -22,6 +22,30 @@
       },
       "revId": "2fbda5211f94069f84b83f0d975aa26949aa179b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "810e4081_716bab2b",
+        "filename": "tests/hostside/java/com/android/microdroid/test/MicrodroidHostTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-03-31T06:12:22Z",
+      "side": 1,
+      "message": "Yes, it consumes atoms in statsd. That\u0027s the reason why getting the list periodically.\n\nhttps://source.corp.google.com/aosp-master/cts/hostsidetests/statsdatom/src/android/cts/statsdatom/lib/ReportUtils.java;l\u003d51\n\nIt has another option that `Thread.sleep(60000)` and taking the list once, but it requires much longer time for running test.",
+      "parentUuid": "61adfe68_f18f474f",
+      "range": {
+        "startLine": 689,
+        "startChar": 12,
+        "endLine": 689,
+        "endChar": 73
+      },
+      "revId": "2fbda5211f94069f84b83f0d975aa26949aa179b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
