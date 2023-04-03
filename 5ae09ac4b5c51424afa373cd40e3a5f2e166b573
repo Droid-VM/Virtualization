@@ -1,0 +1,326 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ab7a7c2_e6df2572",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-03T08:27:45Z",
+      "side": 1,
+      "message": "What is the safety condition for this use case?",
+      "range": {
+        "startLine": 611,
+        "startChar": 8,
+        "endLine": 611,
+        "endChar": 26
+      },
+      "revId": "5ae09ac4b5c51424afa373cd40e3a5f2e166b573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9097392a_d00dc589",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-03T08:27:45Z",
+      "side": 1,
+      "message": "Let\u0027s use `\u0026Path` for paths.",
+      "range": {
+        "startLine": 36,
+        "startChar": 31,
+        "endLine": 36,
+        "endChar": 43
+      },
+      "revId": "5ae09ac4b5c51424afa373cd40e3a5f2e166b573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4537fb43_30f7797d",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-03T08:27:45Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be `Result\u003cOption\u003cbool\u003e\u003e`? The only error that will be mapped to `Ok(None)` will be when the file doesn\u0027t exist. We need to capture all other errors.",
+      "range": {
+        "startLine": 36,
+        "startChar": 48,
+        "endLine": 36,
+        "endChar": 54
+      },
+      "revId": "5ae09ac4b5c51424afa373cd40e3a5f2e166b573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19f59241_133973b0",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-03T08:27:45Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 44,
+        "startChar": 45,
+        "endLine": 44,
+        "endChar": 51
+      },
+      "revId": "5ae09ac4b5c51424afa373cd40e3a5f2e166b573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b7bf571_32be1113",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-03T08:27:45Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 44,
+        "startChar": 19,
+        "endLine": 44,
+        "endChar": 24
+      },
+      "revId": "5ae09ac4b5c51424afa373cd40e3a5f2e166b573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca1ae293_ffe0f2ab",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-03T08:27:45Z",
+      "side": 1,
+      "message": "we have `std::fs::read`",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 41
+      },
+      "revId": "5ae09ac4b5c51424afa373cd40e3a5f2e166b573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cf1e8ed_4f7e4ede",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-03T08:27:45Z",
+      "side": 1,
+      "message": "why not vec? then you can remove the size limit.",
+      "range": {
+        "startLine": 58,
+        "startChar": 12,
+        "endLine": 58,
+        "endChar": 53
+      },
+      "revId": "5ae09ac4b5c51424afa373cd40e3a5f2e166b573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f689cd81_87e42003",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-03T08:27:45Z",
+      "side": 1,
+      "message": "This isn\u0027t enough, IMO. This should explain the condition (outside of the block) that needs to be met in order for the following block to be safe.",
+      "range": {
+        "startLine": 69,
+        "startChar": 20,
+        "endLine": 69,
+        "endChar": 64
+      },
+      "revId": "5ae09ac4b5c51424afa373cd40e3a5f2e166b573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd91fbc6_b570d80d",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-03T08:27:45Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 78,
+        "startChar": 20,
+        "endLine": 78,
+        "endChar": 58
+      },
+      "revId": "5ae09ac4b5c51424afa373cd40e3a5f2e166b573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "706d6132_4f96c737",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-03T08:27:45Z",
+      "side": 1,
+      "message": "Errors shouldn\u0027t be silently translated into None.",
+      "range": {
+        "startLine": 83,
+        "startChar": 55,
+        "endLine": 83,
+        "endChar": 61
+      },
+      "revId": "5ae09ac4b5c51424afa373cd40e3a5f2e166b573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "662dd929_35786595",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-03T08:27:45Z",
+      "side": 1,
+      "message": "Use `CString::new` instead.",
+      "range": {
+        "startLine": 86,
+        "startChar": 38,
+        "endLine": 87,
+        "endChar": 71
+      },
+      "revId": "5ae09ac4b5c51424afa373cd40e3a5f2e166b573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e83a512e_8b758641",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-03T08:27:45Z",
+      "side": 1,
+      "message": "This is unsafe because we can\u0027t guarantee that `node_path` has null bytes only at the end of the string.",
+      "range": {
+        "startLine": 87,
+        "startChar": 71,
+        "endLine": 87,
+        "endChar": 81
+      },
+      "revId": "5ae09ac4b5c51424afa373cd40e3a5f2e166b573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dd4cd6b_79ab6da9",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-03T08:27:45Z",
+      "side": 1,
+      "message": "what if `path` ends with `/`?",
+      "range": {
+        "startLine": 90,
+        "startChar": 29,
+        "endLine": 90,
+        "endChar": 38
+      },
+      "revId": "5ae09ac4b5c51424afa373cd40e3a5f2e166b573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ed7516a_46738213",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-03T08:27:45Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 90,
+        "startChar": 51,
+        "endLine": 91,
+        "endChar": 71
+      },
+      "revId": "5ae09ac4b5c51424afa373cd40e3a5f2e166b573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
