@@ -50,9 +50,9 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.io.FileNotFoundException;
 
-/** Tests debug policy of pvmfw.bin with custom debug policy */
+/** Tests debug policy */
 @RunWith(DeviceJUnit4ClassRunner.class)
-public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
+public class DebugPolicyHostTests extends MicrodroidHostTestCaseBase {
     @NonNull private static final String PVMFW_FILE_NAME = "pvmfw_test.bin";
     @NonNull private static final String BCC_FILE_NAME = "bcc.dat";
     @NonNull private static final String PACKAGE_FILE_NAME = "MicrodroidTestApp.apk";
@@ -69,6 +69,10 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
     @NonNull private static final String CUSTOM_PVMFW_FILE_SUFFIX = ".bin";
     @NonNull private static final String CUSTOM_PVMFW_IMG_PATH = TEST_ROOT + PVMFW_FILE_NAME;
     @NonNull private static final String CUSTOM_PVMFW_IMG_PATH_PROP = "hypervisor.pvmfw.path";
+
+    @NonNull private static final String CUSTOM_DEBUG_POLICY_PATH = TEST_ROOT + "debug_policy.dtb";
+    @NonNull private static final String CUSTOM_DEBUG_POLICY_PATH_PROP =
+                "hypervisor.virtualizationmanager.debug_policy.path";
 
     @NonNull
     private static final String AVF_DEBUG_POLICY_ADB_DT_PROP_PATH = "/avf/guest/microdroid/adb";
@@ -118,11 +122,12 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
                 mAndroidDevice.supportsMicrodroid(/*protectedVm=*/ true));
 
         // Prepare for loading pvmfw.bin
-        // File will be setup in individual test,
+        // File will be setup in individual test by setupCustomDebugPolicy()
         // and then pushed to device in launchProtectedVmAndWaitForBootCompleted.
         mCustomPvmfwBinFileOnHost =
                 FileUtil.createTempFile(CUSTOM_PVMFW_FILE_PREFIX, CUSTOM_PVMFW_FILE_SUFFIX);
         mAndroidDevice.setProperty(CUSTOM_PVMFW_IMG_PATH_PROP, CUSTOM_PVMFW_IMG_PATH);
+        mAndroidDevice.setProperty(CUSTOM_DEBUG_POLICY_PATH_PROP, CUSTOM_DEBUG_POLICY_PATH);
 
         // Prepare for launching microdroid
         mAndroidDevice.installPackage(findTestFile(PACKAGE_FILE_NAME), /* reinstall */ false);
@@ -141,7 +146,8 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
         }
         mAndroidDevice.uninstallPackage(PACKAGE_NAME);
 
-        // Cleanup for custom pvmfw.bin
+        // Cleanup for custom debug policies
+        mAndroidDevice.setProperty(CUSTOM_DEBUG_POLICY_PATH_PROP, "");
         mAndroidDevice.setProperty(CUSTOM_PVMFW_IMG_PATH_PROP, "");
         FileUtil.deleteFile(mCustomPvmfwBinFileOnHost);
 
@@ -211,14 +217,17 @@ public class PvmfwDebugPolicyHostTests extends MicrodroidHostTestCaseBase {
         return new CommandRunner(mMicrodroidDevice).run("xxd", "-p", path);
     }
 
-    @NonNull
-    private Pvmfw createPvmfw(@NonNull String debugPolicyFileName) throws FileNotFoundException {
+    private void setupCustomDebugPolicy(@NonNull String debugPolicyFileName) throws FileNotFoundException {
         File file =
                 getTestInformation()
                         .getDependencyFile(debugPolicyFileName, /* targetFirst= */ false);
-        return new Pvmfw.Builder(mPvmfwBinFileOnHost, mBccFileOnHost)
+
+        Pvmfw pvmfw = new Pvmfw.Builder(mPvmfwBinFileOnHost, mBccFileOnHost)
                 .setDebugPolicyOverlay(file)
                 .build();
+        pvmfw.serialize(mCustomPvmfwBinFileOnHost);
+
+        xxx
     }
 
     private boolean hasConsoleOutput(@NonNull CommandResult result)

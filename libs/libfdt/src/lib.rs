@@ -606,6 +606,19 @@ impl Fdt {
         Ok(fdt)
     }
 
+    /// Creates an empty Flattened Device Tree with a mutable slice.
+    pub fn create_empty_tree(fdt: &mut [u8]) -> Result<&mut Self> {
+        let ret = unsafe {
+            libfdt_bindgen::fdt_create_empty_tree(
+                fdt.as_mut_ptr().cast::<c_void>(),
+                fdt.len() as i32)
+        };
+        fdt_err_expect_zero(ret)?;
+
+        let fdt = unsafe { Self::unchecked_from_mut_slice(fdt) };
+        Ok(fdt)
+    }
+
     /// Wraps a slice containing a Flattened Device Tree.
     ///
     /// # Safety
