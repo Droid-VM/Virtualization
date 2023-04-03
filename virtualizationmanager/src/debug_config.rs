@@ -26,28 +26,13 @@ use log::{warn, info};
 use rustutils::system_properties;
 use libfdt::{Fdt, FdtError};
 
-macro_rules! cstr {
-    ($str:literal) => {{
-        // SAFETY -- must only be used for const expaction.
-        unsafe {
-            // CStr::from_bytes_with_nul() is currently 'const: unstable',
-            // so picked `from_bytes_with_nul_unchecked()` although it's unsafe.
-            // Maybe OK because we would only use it for literals.
-            CStr::from_bytes_with_nul_unchecked($str)
-        }
-    }};
-}
-
 const DEBUG_POLICY_LOG_PATH: &str = "/sys/firmware/devicetree/base/avf/guest/common/log";
 const DEBUG_POLICY_RAMDUMP_PATH: &str = "/sys/firmware/devicetree/base/avf/guest/common/ramdump";
 const DEBUG_POLICY_ADB_PATH: &str = "/sys/firmware/devicetree/base/avf/guest/microdroid/adb";
 
-const DEBUG_POLICY_LOG_DT_NODE_PROP: (&CStr, &CStr) =
-    (cstr!(b"/avf/guest/common\0"), cstr!(b"log\0"));
-const DEBUG_POLICY_RAMDUMP_DT_NODE_PROP: (&CStr, &CStr) =
-    (cstr!(b"/avf/guest/common\0"), cstr!(b"ramdump\0"));
-const DEBUG_POLICY_ADB_DT_NODE_PROP: (&CStr, &CStr) =
-    (cstr!(b"/avf/guest/microdroid\0"), cstr!(b"adb\0"));
+const DEBUG_POLICY_LOG_DT_NODE_PROP: (&[u8], &[u8]) = (b"/avf/guest/common\0", b"log\0");
+const DEBUG_POLICY_RAMDUMP_DT_NODE_PROP: (&[u8], &[u8]) = (b"/avf/guest/common\0", b"ramdump\0");
+const DEBUG_POLICY_ADB_DT_NODE_PROP: (&[u8], &[u8]) = (b"/avf/guest/microdroid\0", b"adb\0");
 
 const CUSTOM_DEBUG_POLICY_OVERLAY_SYSPROP: &str =
     "hypervisor.virtualizationmanager.debug_policy.path";
@@ -61,7 +46,7 @@ fn get_debug_policy_bool(path: &Path) -> Result<Option<bool>> {
         Err(error) => Err(error).with_context(|| format!("Failed to open {path:?}"))?,
     };
 
-    let mut value = vec![0_u8, 4];
+    let mut value = Default::default();
     let file_size =
         file.read_to_end(&mut value).with_context(|| format!("Failed to read {:?}", path))?;
     ensure!(
@@ -126,8 +111,10 @@ impl FdtWrapper {
     }
 
     /// Get property value in bool. It's true iff the value is explicitly set to <1>.
-    fn get_fdt_prop_bool(&self, path: (&CStr, &CStr)) -> Result<Option<bool>> {
+    fn get_fdt_prop_bool(&self, path: (&[u8], &[u8])) -> Result<Option<bool>> {
         let (node_path, prop_name) = path;
+        let node_path = CStr::from_bytes_with_nul(node_path).unwrap();
+        let prop_name = CStr::from_bytes_with_nul(prop_name).unwrap();
 
         let node = match self.as_fdt_unchecked().node(node_path) {
             Ok(Some(node)) => node,
