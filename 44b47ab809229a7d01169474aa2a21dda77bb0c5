@@ -22,6 +22,30 @@
       },
       "revId": "44b47ab809229a7d01169474aa2a21dda77bb0c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "328d0553_a1a2690d",
+        "filename": "authfs/tests/benchmarks/AndroidTest.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-03T01:38:58Z",
+      "side": 1,
+      "message": "It\u0027s possible and I already verified locally. But I added in `tradefed` because of two reasons.\n\n  - Reason 1) `tradefed` already have microdroid specific code (e.g. build and launch microdroid)\n  - Reason 2) `tradefed` already have similar preparer `DisableSELinuxPreparer` and custom preparer was quite rare.\n  \nWhat do you think? I don\u0027t have strong opinion, so I can change my mind.",
+      "parentUuid": "7ea519a6_76f0d4a8",
+      "range": {
+        "startLine": 52,
+        "startChar": 28,
+        "endLine": 52,
+        "endChar": 60
+      },
+      "revId": "44b47ab809229a7d01169474aa2a21dda77bb0c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
