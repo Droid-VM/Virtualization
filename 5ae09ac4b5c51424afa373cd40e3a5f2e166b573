@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bdba9c2_a6798e3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-03T15:47:48Z",
+      "side": 1,
+      "message": "One question for clarification. Working on the rest of comments.",
+      "revId": "5ae09ac4b5c51424afa373cd40e3a5f2e166b573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ab7a7c2_e6df2572",
@@ -60,6 +77,30 @@
       "writtenOn": "2023-04-03T08:27:45Z",
       "side": 1,
       "message": "Shouldn\u0027t this be `Result\u003cOption\u003cbool\u003e\u003e`? The only error that will be mapped to `Ok(None)` will be when the file doesn\u0027t exist. We need to capture all other errors.",
+      "range": {
+        "startLine": 36,
+        "startChar": 48,
+        "endLine": 36,
+        "endChar": 54
+      },
+      "revId": "5ae09ac4b5c51424afa373cd40e3a5f2e166b573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae5c4756_679ddfa9",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-03T15:47:48Z",
+      "side": 1,
+      "message": "Do you prefer to leave log as well? Or would it better to differentiate not exist / malformed value / value \u003c0\u003e / value \u003c1\u003e, even when caller only aware of value \u003c1\u003e or not?",
+      "parentUuid": "4537fb43_30f7797d",
       "range": {
         "startLine": 36,
         "startChar": 48,
