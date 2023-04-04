@@ -177,3 +177,31 @@ pub fn dbm_available() -> bool {
     const DBM_AVAILABLE: usize = 1 << 1;
     read_sysreg!("id_aa64mmfr1_el1") & DBM_AVAILABLE != 0
 }
+
+/// Executes a data synchonization barrier.
+#[inline]
+pub fn dsb_ish() {
+    // Safe because this is just a memory barrier and does not affect Rust.
+    unsafe {
+        asm!("dsb ish", options(nomem, nostack, preserves_flags));
+    }
+}
+
+/// Executes an instruction synchonization barrier.
+#[inline]
+pub fn isb() {
+    // Safe because this is just a memory barrier and does not affect Rust.
+    unsafe {
+        asm!("isb", options(nomem, nostack, preserves_flags));
+    }
+}
+
+/// Invalidates cached leaf PTE entries by virtual address.
+#[inline]
+pub fn tlbi_vale1(asid: usize, addr: usize) {
+    // Safe because it invalidates TLB and doesn't affect Rust. When the address matches a
+    // block entry larger than the page size, all translations for the block are invalidated.
+    unsafe {
+        asm!("tlbi vale1, {x}", x = in(reg) (asid << 48) | (addr >> 12));
+    }
+}

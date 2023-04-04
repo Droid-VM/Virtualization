@@ -24,7 +24,6 @@ use alloc::alloc::alloc_zeroed;
 use alloc::alloc::dealloc;
 use alloc::alloc::handle_alloc_error;
 use core::alloc::Layout;
-use core::arch::asm;
 use core::cmp::max;
 use core::cmp::min;
 use core::fmt;
@@ -298,6 +297,14 @@ impl MemoryTracker {
         Ok(())
     }
 
+    /// Handles permission fault for read-only blocks by setting writable-dirty state.
+    /// This method should only be used if `FEAT_HAFDBS` is not implemented.
+    pub fn handle_permission_fault(&mut self, addr: usize) -> Result<()> {
+        self.page_table
+            .modify_range(&(addr..addr + 1), &mark_dirty_block)
+            .map_err(|_| MemoryTrackerError::RangeUpdateFailed)
+    }
+
     /// Enables or disables hardware dirty state management if available.
     pub fn set_dbm_enabled(enabled: bool) {
         if dbm_available() {
@@ -465,12 +472,29 @@ fn flush_dirty_range(
     // Execute a barrier instruction to ensure all hardware updates to the page table have been
     // observed before reading PTE flags to determine dirty state. This should be done right before
     // the page table entry is read.
-    // Safe because this is just a memory barrier and does not affect Rust.
-    unsafe {
-        asm!("dsb ish", options(nomem, nostack, preserves_flags));
-    }
+    helpers::dsb_ish();
     if !desc.flags().unwrap_or(Attributes::empty()).contains(Attributes::READ_ONLY) {
         helpers::flush_region(va_range.start().0, va_range.len());
+    }
+    Ok(())
+}
+
+/// Clears read-only flag on a PTE, making it writable-dirty. Used when dirty state is managed
+/// in software to handle permission faults on read-only descriptors.
+fn mark_dirty_block(
+    va_range: &VaRange,
+    desc: &mut Descriptor,
+    level: usize,
+) -> result::Result<(), ()> {
+    const ASID: usize = 1;
+    let Some(flags) = desc.flags() else {
+        return Err(());
+    };
+    if is_leaf_pte(desc, level) && flags.contains(Attributes::DBM) {
+        desc.modify_flags(Attributes::empty(), Attributes::READ_ONLY);
+        helpers::tlbi_vale1(ASID, va_range.start().0);
+        helpers::dsb_ish();
+        helpers::isb();
     }
     Ok(())
 }
