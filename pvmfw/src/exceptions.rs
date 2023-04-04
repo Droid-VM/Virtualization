@@ -24,6 +24,8 @@ const ESR_32BIT_EXT_DABT: usize = 0x96000010;
 const UART_PAGE: usize = page_4kb_of(console::BASE_ADDRESS);
 const ESR_32BIT_TRANSL_FAULT_BASE: usize = 0x96000004;
 const ESR_32BIT_TRANSL_FAULT_ISS_MASK: usize = !0x43;
+const ESR_32BIT_PERM_FAULT_BASE: usize = 0x9600004C;
+const ESR_32BIT_PERM_FAULT_ISS_MASK: usize = !0x3;
 
 #[derive(Debug)]
 enum HandleExceptionError {
@@ -55,8 +57,11 @@ fn handle_exception(esr: usize, far: usize) -> Result<(), HandleExceptionError> 
     let memory = locked.as_mut().ok_or(HandleExceptionError::PageTableNotInitialized)?;
     // Handle all translation faults on both read and write, and MMIO guard map
     // flagged invalid pages or blocks that caused the exception.
+    // Handle permission faults for DBM flagged entries, and flag them as dirty on write.
     if esr & ESR_32BIT_TRANSL_FAULT_ISS_MASK == ESR_32BIT_TRANSL_FAULT_BASE {
         memory.handle_mmio_fault(far).map_err(|e| e.into())
+    } else if esr & ESR_32BIT_PERM_FAULT_ISS_MASK == ESR_32BIT_PERM_FAULT_BASE {
+        memory.handle_permission_fault(far).map_err(|e| e.into())
     } else {
         Err(HandleExceptionError::UnknownException)
     }
