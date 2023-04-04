@@ -78,18 +78,13 @@ struct MemorySlices<'a> {
 }
 
 impl<'a> MemorySlices<'a> {
-    fn new(
-        fdt: usize,
-        kernel: usize,
-        kernel_size: usize,
-        memory: &mut MemoryTracker,
-    ) -> Result<Self, RebootReason> {
+    fn new(fdt: usize, kernel: usize, kernel_size: usize) -> Result<Self, RebootReason> {
         // SAFETY - SIZE_2MB is non-zero.
         const FDT_SIZE: NonZeroUsize = unsafe { NonZeroUsize::new_unchecked(helpers::SIZE_2MB) };
         // TODO - Only map the FDT as read-only, until we modify it right before jump_to_payload()
         // e.g. by generating a DTBO for a template DT in main() and, on return, re-map DT as RW,
         // overwrite with the template DT and apply the DTBO.
-        let range = memory.alloc_mut(fdt, FDT_SIZE).map_err(|e| {
+        let range = MEMORY.lock().as_mut().unwrap().alloc_mut(fdt, FDT_SIZE).map_err(|e| {
             error!("Failed to allocate the FDT range: {e}");
             RebootReason::InternalError
         })?;
@@ -106,13 +101,13 @@ impl<'a> MemorySlices<'a> {
 
         let memory_range = info.memory_range;
         debug!("Resizing MemoryTracker to range {memory_range:#x?}");
-        memory.shrink(&memory_range).map_err(|e| {
+        MEMORY.lock().as_mut().unwrap().shrink(&memory_range).map_err(|e| {
             error!("Failed to use memory range value from DT: {memory_range:#x?}: {e}");
             RebootReason::InvalidFdt
         })?;
 
         let kernel_range = if let Some(r) = info.kernel_range {
-            memory.alloc_range(&r).map_err(|e| {
+            MEMORY.lock().as_mut().unwrap().alloc_range(&r).map_err(|e| {
                 error!("Failed to obtain the kernel range with DT range: {e}");
                 RebootReason::InternalError
             })?
@@ -124,7 +119,7 @@ impl<'a> MemorySlices<'a> {
                 RebootReason::InvalidPayload
             })?;
 
-            memory.alloc(kernel, kernel_size).map_err(|e| {
+            MEMORY.lock().as_mut().unwrap().alloc(kernel, kernel_size).map_err(|e| {
                 error!("Failed to obtain the kernel range with legacy range: {e}");
                 RebootReason::InternalError
             })?
@@ -139,7 +134,7 @@ impl<'a> MemorySlices<'a> {
 
         let ramdisk = if let Some(r) = info.initrd_range {
             debug!("Located ramdisk at {r:?}");
-            let r = memory.alloc_range(&r).map_err(|e| {
+            let r = MEMORY.lock().as_mut().unwrap().alloc_range(&r).map_err(|e| {
                 error!("Failed to obtain the initrd range: {e}");
                 RebootReason::InvalidRamdisk
             })?;
@@ -223,7 +218,7 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
     debug!("... Success!");
 
     MEMORY.lock().replace(MemoryTracker::new(page_table));
-    let slices = MemorySlices::new(fdt, payload, payload_size, MEMORY.lock().as_mut().unwrap())?;
+    let slices = MemorySlices::new(fdt, payload, payload_size)?;
 
     rand::init().map_err(|e| {
         error!("Failed to initialize rand: {e}");
