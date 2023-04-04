@@ -24,6 +24,7 @@ use crate::mmu;
 use crate::rand;
 use core::arch::asm;
 use core::num::NonZeroUsize;
+use core::ops::Range;
 use core::slice;
 use hyp::mmio_guard;
 use log::debug;
@@ -62,7 +63,7 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64
     // - can't access MMIO (therefore, no logging)
 
     match main_wrapper(fdt_address as usize, payload_start as usize, payload_size as usize) {
-        Ok(entry) => jump_to_payload(fdt_address, entry.try_into().unwrap()),
+        Ok((entry, bcc)) => jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc),
         Err(_) => reboot(), // TODO(b/220071963) propagate the reason back to the host.
     }
 
@@ -158,7 +159,11 @@ impl<'a> MemorySlices<'a> {
 ///
 /// Provide the abstractions necessary for start() to abort the pVM boot and for main() to run with
 /// the assumption that its environment has been properly configured.
-fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize, RebootReason> {
+fn main_wrapper(
+    fdt: usize,
+    payload: usize,
+    payload_size: usize,
+) -> Result<(usize, Range<usize>), RebootReason> {
     // Limitations in this function:
     // - only access MMIO once (and while) it has been mapped and configured
     // - only perform logging once the logger has been initialized
@@ -226,7 +231,14 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
     })?;
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
-    crate::main(slices.fdt, slices.kernel, slices.ramdisk, bcc_slice, debug_policy, &mut memory)?;
+    let next_bcc = crate::main(
+        slices.fdt,
+        slices.kernel,
+        slices.ramdisk,
+        bcc_slice,
+        debug_policy,
+        &mut memory,
+    )?;
 
     helpers::flushed_zeroize(bcc_slice);
     helpers::flush(slices.fdt.as_slice());
@@ -241,10 +253,10 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
         RebootReason::InternalError
     })?;
 
-    Ok(slices.kernel.as_ptr() as usize)
+    Ok((slices.kernel.as_ptr() as usize, next_bcc))
 }
 
-fn jump_to_payload(fdt_address: u64, payload_start: u64) -> ! {
+fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> ! {
     const SCTLR_EL1_RES1: u64 = (0b11 << 28) | (0b101 << 20) | (0b1 << 11);
     // Stage 1 instruction access cacheability is unaffected.
     const SCTLR_EL1_I: u64 = 0b1 << 12;
@@ -255,12 +267,53 @@ fn jump_to_payload(fdt_address: u64, payload_start: u64) -> ! {
 
     const SCTLR_EL1_VAL: u64 = SCTLR_EL1_RES1 | SCTLR_EL1_ITD | SCTLR_EL1_SED | SCTLR_EL1_I;
 
+    let data = layout::data_range();
+    let bss = layout::bss_range();
+    let stack = layout::boot_stack_range();
+
+    let data_end = data.start + data.len();
+    assert_eq!(data_end, bss.start, ".data ({data:#x?}) and .bss ({bss:#x?}) not contiguous");
+    let rwdata = data.start..bss.end;
+    assert!(helpers::range_contains(&rwdata, &bcc));
+
     // Disable the exception vector, caches and page table and then jump to the payload at the
     // given address, passing it the given FDT pointer.
     //
     // SAFETY - We're exiting pvmfw by passing the register values we need to a noreturn asm!().
     unsafe {
         asm!(
+            // Zero .data & .bss until BCC.
+            "0: stp xzr, xzr, [{rwdata}], 16",
+            "cmp {rwdata}, {bcc}",
+            "b.lo 0b",
+
+            // Skip BCC.
+            "mov {rwdata}, {bcc_end}",
+
+            // Keep zeroing .data & .bss.
+            "0: stp xzr, xzr, [{rwdata}], 16",
+            "cmp {rwdata}, {rwdata_end}",
+            "b.lo 0b",
+
+            // Flush .data & .bss (including BCC).
+            "0: dc cvau, {cache_line}",
+            "add {cache_line}, {cache_line}, {dcache_line_size}",
+            "cmp {cache_line}, {rwdata_end}",
+            "b.lo 0b",
+
+            "mov {cache_line}, {stack}",
+            // Zero stack region.
+            "0: stp xzr, xzr, [{stack}], 16",
+            "cmp {stack}, {stack_end}",
+            "b.lo 0b",
+
+            // Flush d-cache over stack region.
+            "0: dc cvau, {cache_line}",
+            "add {cache_line}, {cache_line}, {dcache_line_size}",
+            "cmp {cache_line}, {stack_end}",
+            "b.lo 0b",
+
+            "dsb nsh",
             "msr sctlr_el1, {sctlr_el1_val}",
             "isb",
             "mov x1, xzr",
@@ -297,9 +350,17 @@ fn jump_to_payload(fdt_address: u64, payload_start: u64) -> ! {
             "dsb nsh",
             "br x30",
             sctlr_el1_val = in(reg) SCTLR_EL1_VAL,
+            bcc = in(reg) u64::try_from(bcc.start).unwrap(),
+            bcc_end = in(reg) u64::try_from(bcc.end).unwrap(),
+            cache_line = in(reg) u64::try_from(rwdata.start).unwrap(),
+            rwdata = in(reg) u64::try_from(rwdata.start).unwrap(),
+            rwdata_end = in(reg) u64::try_from(rwdata.end).unwrap(),
+            stack = in(reg) u64::try_from(stack.start).unwrap(),
+            stack_end = in(reg) u64::try_from(stack.end).unwrap(),
+            dcache_line_size = in(reg) u64::try_from(helpers::min_dcache_line_size()).unwrap(),
             in("x0") fdt_address,
             in("x30") payload_start,
-            options(nomem, noreturn, nostack),
+            options(noreturn),
         );
     };
 }
