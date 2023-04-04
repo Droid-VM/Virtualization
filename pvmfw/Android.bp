@@ -10,6 +10,7 @@ rust_ffi_static {
     edition: "2021",
     features: [
         "legacy",
+        "hw_dbm",
     ],
     rustlibs: [
         "libaarch64_paging",
