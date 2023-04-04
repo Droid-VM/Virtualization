@@ -113,6 +113,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dd690d8e_fc5e4fb8",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-04T04:26:43Z",
+      "side": 1,
+      "message": "Logging is good, but not in this function. It should done at the places where the business logic is. ex: where DebugConfig::new is called. Yes, DebugConfig should return Result\u003cSelf\u003e, not Self.",
+      "parentUuid": "ae5c4756_679ddfa9",
+      "range": {
+        "startLine": 36,
+        "startChar": 48,
+        "endLine": 36,
+        "endChar": 54
+      },
+      "revId": "5ae09ac4b5c51424afa373cd40e3a5f2e166b573",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19f59241_133973b0",
         "filename": "virtualizationmanager/src/debug_config.rs",
         "patchSetId": 4
