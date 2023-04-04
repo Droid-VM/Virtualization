@@ -96,6 +96,8 @@ SECTIONS
 		. += 40 * 4096;
 		. = ALIGN(4096);
 		boot_stack_end = .;
+		/* The architecture requires 16-byte alignment. */
+		init_sp = (boot_stack_end - 1) & ~(16 - 1);
 	} >writable_data
 
 	/*
