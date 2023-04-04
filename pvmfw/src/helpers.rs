@@ -15,6 +15,7 @@
 //! Miscellaneous helper functions.
 
 use core::arch::asm;
+use core::ops::Range;
 use zeroize::Zeroize;
 
 pub const SIZE_4KB: usize = 4 << 10;
@@ -110,7 +111,8 @@ pub const fn page_4kb_of(addr: usize) -> usize {
 }
 
 #[inline]
-fn min_dcache_line_size() -> usize {
+/// Read the number of words in the smallest cache line of all the data caches and unified caches.
+pub fn min_dcache_line_size() -> usize {
     const DMINLINE_SHIFT: usize = 16;
     const DMINLINE_MASK: usize = 0xf;
     let ctr_el0 = read_sysreg!("ctr_el0");
@@ -119,6 +121,11 @@ fn min_dcache_line_size() -> usize {
     let dminline = (ctr_el0 >> DMINLINE_SHIFT) & DMINLINE_MASK;
 
     1 << dminline
+}
+
+/// Returns true if the first range contains the second one.
+pub fn range_contains<T: Copy + Ord>(a: &Range<T>, b: &Range<T>) -> bool {
+    a.start <= b.start && b.end <= a.end
 }
 
 /// Flush `size` bytes of data cache by virtual address.
