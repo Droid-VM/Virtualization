@@ -35,6 +35,16 @@ const DEVICE_LAZY: Attributes = DEVICE.union(MMIO_LAZY_MAP_FLAG).difference(Attr
 const CODE: Attributes = MEMORY.union(Attributes::READ_ONLY);
 const DATA: Attributes = MEMORY.union(Attributes::EXECUTE_NEVER);
 const RODATA: Attributes = DATA.union(Attributes::READ_ONLY);
+const DATA_DBM: Attributes = RODATA.union(Attributes::DBM);
+
+fn writable_attr() -> Attributes {
+    // Prevent permission exceptions in data region if dirty state management is not available.
+    if helpers::dbm_available() {
+        DATA_DBM
+    } else {
+        DATA
+    }
+}
 
 /// High-level API for managing MMU mappings.
 pub struct PageTable {
@@ -53,15 +63,21 @@ impl PageTable {
     const ASID: usize = 1;
     const ROOT_LEVEL: usize = 1;
 
+    pub fn get_static_layout() -> [(Range<usize>, Attributes); 4] {
+        [
+            (layout::writable_region(), writable_attr()),
+            (layout::text_range(), CODE),
+            (layout::rodata_range(), RODATA),
+            (appended_payload_range(), writable_attr()),
+        ]
+    }
+
     /// Creates an instance pre-populated with pvmfw's binary layout.
     pub fn from_static_layout() -> Result<Self, MapError> {
         let mut page_table = Self { idmap: IdMap::new(Self::ASID, Self::ROOT_LEVEL) };
-
-        page_table.map_code(&layout::text_range())?;
-        page_table.map_data(&layout::writable_region())?;
-        page_table.map_rodata(&layout::rodata_range())?;
-        page_table.map_data(&appended_payload_range())?;
-
+        for (range, attr) in &Self::get_static_layout() {
+            page_table.map_range(range, *attr)?;
+        }
         Ok(page_table)
     }
 
@@ -78,11 +94,7 @@ impl PageTable {
     }
 
     pub fn map_data(&mut self, range: &Range<usize>) -> Result<(), MapError> {
-        self.map_range(range, DATA)
-    }
-
-    pub fn map_code(&mut self, range: &Range<usize>) -> Result<(), MapError> {
-        self.map_range(range, CODE)
+        self.map_range(range, writable_attr())
     }
 
     pub fn map_rodata(&mut self, range: &Range<usize>) -> Result<(), MapError> {

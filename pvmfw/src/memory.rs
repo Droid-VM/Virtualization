@@ -16,13 +16,15 @@
 
 #![deny(unsafe_op_in_unsafe_fn)]
 
-use crate::helpers::{self, align_down, align_up, page_4kb_of, SIZE_4KB};
+use crate::helpers::{self, align_down, align_up, dbm_available, page_4kb_of, SIZE_4KB};
 use crate::mmu;
+use crate::{read_sysreg, write_sysreg};
 use aarch64_paging::paging::{Attributes, Descriptor, MemoryRegion as VaRange};
 use alloc::alloc::alloc_zeroed;
 use alloc::alloc::dealloc;
 use alloc::alloc::handle_alloc_error;
 use core::alloc::Layout;
+use core::arch::asm;
 use core::cmp::max;
 use core::cmp::min;
 use core::fmt;
@@ -45,7 +47,7 @@ pub type MemoryRange = Range<usize>;
 pub static MEMORY: SpinMutex<Option<MemoryTracker>> = SpinMutex::new(None);
 unsafe impl Send for MemoryTracker {}
 
-#[derive(Clone, Copy, Debug, Default)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
 enum MemoryType {
     #[default]
     ReadOnly,
@@ -140,6 +142,8 @@ type Result<T> = result::Result<T, MemoryTrackerError>;
 impl MemoryTracker {
     const CAPACITY: usize = 5;
     const MMIO_CAPACITY: usize = 5;
+    // TCR_EL1.{HA,HD} bits controlling hardware management of access and dirty state
+    const TCR_EL1_HA_HD_BITS: usize = 3 << 39;
 
     /// Create a new instance from an active page table, covering the maximum RAM size.
     pub fn new(page_table: mmu::PageTable) -> Self {
@@ -275,19 +279,42 @@ impl MemoryTracker {
         self.page_table.map_device(&page_range).map_err(|_| MemoryTrackerError::FailedToMap)?;
         Ok(mmio_guard::map(page_range.start)?)
     }
+
+    /// Flush all memory regions marked as writable-dirty.
+    pub fn flush_dirty_pages(&mut self) -> Result<()> {
+        let writable_regions =
+            self.regions.iter().filter(|r| r.mem_type == MemoryType::ReadWrite).map(|r| &r.range);
+        let static_layout = mmu::PageTable::get_static_layout();
+        let writable_static_regions = static_layout
+            .iter()
+            .filter(|(_, a)| !a.contains(Attributes::READ_ONLY))
+            .map(|(range, _)| range);
+        // Now flush writable-dirty pages.
+        for range in writable_regions.chain(writable_static_regions) {
+            self.page_table
+                .modify_range(range, &flush_dirty_range)
+                .map_err(|_| MemoryTrackerError::RangeUpdateFailed)?;
+        }
+        Ok(())
+    }
+
+    /// Enables or disables hardware dirty state management if available.
+    pub fn set_dbm_enabled(enabled: bool) {
+        if dbm_available() {
+            let mut tcr = read_sysreg!("tcr_el1");
+            if enabled {
+                tcr |= Self::TCR_EL1_HA_HD_BITS
+            } else {
+                tcr &= !Self::TCR_EL1_HA_HD_BITS
+            };
+            write_sysreg!("tcr_el1", tcr);
+        }
+    }
 }
 
 impl Drop for MemoryTracker {
     fn drop(&mut self) {
-        for region in &self.regions {
-            match region.mem_type {
-                MemoryType::ReadWrite => {
-                    // TODO(b/269738062): Use PT's dirty bit to only flush pages that were touched.
-                    helpers::flush_region(region.range.start, region.range.len())
-                }
-                MemoryType::ReadOnly => {}
-            }
-        }
+        self.flush_dirty_pages().unwrap();
     }
 }
 
@@ -423,4 +450,27 @@ fn verify_lazy_mapped_block(
         return Ok(());
     }
     Err(())
+}
+
+/// Flushes a memory range the descriptor refers to, if the descriptor is in writable-dirty state.
+fn flush_dirty_range(
+    va_range: &VaRange,
+    desc: &mut Descriptor,
+    level: usize,
+) -> result::Result<(), ()> {
+    // Only flush ranges corresponding to dirty leaf PTEs.
+    if !is_leaf_pte(desc, level) {
+        return Ok(());
+    }
+    // Execute a barrier instruction to ensure all hardware updates to the page table have been
+    // observed before reading PTE flags to determine dirty state. This should be done right before
+    // the page table entry is read.
+    // Safe because this is just a memory barrier and does not affect Rust.
+    unsafe {
+        asm!("dsb ish", options(nomem, nostack, preserves_flags));
+    }
+    if !desc.flags().unwrap_or(Attributes::empty()).contains(Attributes::READ_ONLY) {
+        helpers::flush_region(va_range.start().0, va_range.len());
+    }
+    Ok(())
 }
