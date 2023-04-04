@@ -32,6 +32,7 @@ use log::info;
 use log::warn;
 use log::LevelFilter;
 use vmbase::{console, layout, logger, main, power::reboot};
+use zeroize::Zeroize;
 
 #[derive(Debug, Clone)]
 pub enum RebootReason {
@@ -104,8 +105,8 @@ impl<'a> MemorySlices<'a> {
 
         let memory_range = info.memory_range;
         debug!("Resizing MemoryTracker to range {memory_range:#x?}");
-        memory.shrink(&memory_range).map_err(|_| {
-            error!("Failed to use memory range value from DT: {memory_range:#x?}");
+        memory.shrink(&memory_range).map_err(|e| {
+            error!("Failed to use memory range value from DT: {memory_range:#x?}: {e}");
             RebootReason::InvalidFdt
         })?;
 
@@ -211,6 +212,7 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
 
     let (bcc_slice, debug_policy) = appended.get_entries();
 
+    MemoryTracker::set_dbm_enabled(true);
     debug!("Activating dynamic page table...");
     // SAFETY - page_table duplicates the static mappings for everything that the Rust code is
     // aware of so activating it shouldn't have any visible effect.
@@ -228,8 +230,8 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
     // This wrapper allows main() to be blissfully ignorant of platform details.
     crate::main(slices.fdt, slices.kernel, slices.ramdisk, bcc_slice, debug_policy)?;
 
-    helpers::flushed_zeroize(bcc_slice);
-    helpers::flush(slices.fdt.as_slice());
+    // Writable-dirty regions will be flushed when MemoryTracker is dropped.
+    bcc_slice.zeroize();
 
     info!("Expecting a bug making MMIO_GUARD_UNMAP return NOT_SUPPORTED on success");
     MEMORY.lock().as_mut().unwrap().mmio_unmap_all().map_err(|e| {
@@ -240,7 +242,9 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
         error!("Failed to unshare the UART: {e}");
         RebootReason::InternalError
     })?;
+
     MEMORY.lock().take().unwrap();
+    MemoryTracker::set_dbm_enabled(false);
 
     Ok(slices.kernel.as_ptr() as usize)
 }
