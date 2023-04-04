@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88d111d5_0416b5e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-04T15:04:29Z",
+      "side": 1,
+      "message": "A couple of quick comments - I haven\u0027t looked at the detail yet",
+      "revId": "e4f6b9d0b9f8bf079026e9f9025eb884e3403173",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c04207f5_760e9644",
+        "filename": "microdroid_manager/src/vm_payload_service.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-04T15:04:29Z",
+      "side": 1,
+      "message": "You need to call check_restricted_apis_allowed() here, since we don\u0027t yet want to expose this to app-created VMs.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 5
+      },
+      "revId": "e4f6b9d0b9f8bf079026e9f9025eb884e3403173",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f33dc96b_dc2e87a3",
+        "filename": "vm_payload/include/vm_payload.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-04T15:04:29Z",
+      "side": 1,
+      "message": "This should go in vm_payload_restricted.h, at least for now; it\u0027s not part of the official API.",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 46
+      },
+      "revId": "e4f6b9d0b9f8bf079026e9f9025eb884e3403173",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
