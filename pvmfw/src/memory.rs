@@ -304,6 +304,14 @@ impl MemoryTracker {
         Ok(())
     }
 
+    /// Handles permission fault for read-only blocks by setting writable-dirty state.
+    /// This method should only be used if `FEAT_HAFDBS` is not implemented.
+    pub fn handle_permission_fault(&mut self, addr: usize) -> Result<()> {
+        self.page_table
+            .modify_range(&(addr..addr + 1), &mark_dirty_block)
+            .map_err(|_| MemoryTrackerError::RangeUpdateFailed)
+    }
+
     /// Enables or disables hardware dirty state management if available.
     pub fn set_dbm_enabled(enabled: bool) {
         if dbm_available() {
@@ -468,6 +476,33 @@ fn flush_dirty_range(
     if let Some(flags) = desc.flags() {
         if is_leaf_pte(desc, level) && !flags.contains(Attributes::READ_ONLY) {
             helpers::flush_region(va_range.start().0, va_range.len());
+        }
+    }
+    Ok(())
+}
+
+/// Clears read-only flag on a PTE, making it writable-dirty. Used when dirty state is managed
+/// in software to handle permission faults on read-only descriptors. TODO: find references in arm arm
+fn mark_dirty_block(
+    va_range: &VaRange,
+    desc: &mut Descriptor,
+    level: usize,
+) -> result::Result<(), ()> {
+    const ASID: usize = 1;
+    let Some(flags) = desc.flags() else {
+        return Err(());
+    };
+    if is_leaf_pte(desc, level) && flags.contains(Attributes::DBM) {
+        desc.modify_flags(Attributes::empty(), Attributes::READ_ONLY);
+        // Safe because it invalidates TLB and doesn't affect Rust. When the address matches a
+        // block entry larger than the page size, all translations for the block are invalidated.
+        unsafe {
+            asm!(
+                "tlbi vale1, {x}",
+                "dsb ish",
+                "isb",
+                x = in(reg) (ASID << 48) | (va_range.start().0 >> 12),
+            );
         }
     }
     Ok(())
