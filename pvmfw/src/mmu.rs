@@ -37,15 +37,6 @@ const DATA: Attributes = MEMORY.union(Attributes::EXECUTE_NEVER);
 const RODATA: Attributes = DATA.union(Attributes::READ_ONLY);
 const DATA_DBM: Attributes = RODATA.union(Attributes::DBM);
 
-fn writable_attr() -> Attributes {
-    // Prevent permission exceptions in data region if dirty state management is not available.
-    if helpers::dbm_available() {
-        DATA_DBM
-    } else {
-        DATA
-    }
-}
-
 /// High-level API for managing MMU mappings.
 pub struct PageTable {
     idmap: IdMap,
@@ -64,11 +55,14 @@ impl PageTable {
     const ROOT_LEVEL: usize = 1;
 
     pub fn get_static_layout() -> [(Range<usize>, Attributes); 4] {
+        // If dirty bit management is not available, mapping the writable region which contains
+        // the stack and the heap as read-only will produce recursive permission faults, so treat
+        // the whole region as writable-dirty.
         [
-            (layout::writable_region(), writable_attr()),
+            (layout::writable_region(), if helpers::dbm_available() { DATA_DBM } else { DATA }),
             (layout::text_range(), CODE),
             (layout::rodata_range(), RODATA),
-            (appended_payload_range(), writable_attr()),
+            (appended_payload_range(), DATA_DBM),
         ]
     }
 
@@ -94,7 +88,7 @@ impl PageTable {
     }
 
     pub fn map_data(&mut self, range: &Range<usize>) -> Result<(), MapError> {
-        self.map_range(range, writable_attr())
+        self.map_range(range, DATA_DBM)
     }
 
     pub fn map_rodata(&mut self, range: &Range<usize>) -> Result<(), MapError> {

@@ -25,6 +25,8 @@ const ESR_32BIT_EXT_DABT: usize = 0x96000010;
 const UART_PAGE: usize = page_4kb_of(console::BASE_ADDRESS);
 const ESR_32BIT_TRANSL_FAULT_BASE: usize = 0x96000004;
 const ESR_32BIT_TRANSL_FAULT_ISS_MASK: usize = !0x43;
+const ESR_32BIT_PERM_FAULT_BASE: usize = 0x9600004C;
+const ESR_32BIT_PERM_FAULT_ISS_MASK: usize = !0x3;
 
 #[derive(Debug)]
 enum HandleExceptionError {
@@ -54,6 +56,7 @@ impl From<MemoryTrackerError> for HandleExceptionError {
 #[derive(Debug, PartialEq, Copy, Clone)]
 enum Esr {
     DataAbortTranslationFault,
+    DataAbortPermissionFault,
     DataAbortSyncExternalAbort,
     Unknown(usize),
 }
@@ -64,6 +67,8 @@ impl From<usize> for Esr {
             Self::DataAbortSyncExternalAbort
         } else if esr & ESR_32BIT_TRANSL_FAULT_ISS_MASK == ESR_32BIT_TRANSL_FAULT_BASE {
             Self::DataAbortTranslationFault
+        } else if esr & ESR_32BIT_PERM_FAULT_ISS_MASK == ESR_32BIT_PERM_FAULT_BASE {
+            Self::DataAbortPermissionFault
         } else {
             Self::Unknown(esr)
         }
@@ -75,6 +80,7 @@ impl fmt::Display for Esr {
         match self {
             Self::DataAbortSyncExternalAbort => write!(f, "Synchronous external abort"),
             Self::DataAbortTranslationFault => write!(f, "Translation fault"),
+            Self::DataAbortPermissionFault => write!(f, "Permission fault"),
             Self::Unknown(v) => write!(f, "Unknown exception esr={v:#08x}"),
         }
     }
@@ -85,8 +91,10 @@ fn handle_exception(esr: Esr, far: usize) -> Result<(), HandleExceptionError> {
     let memory = locked.as_mut().ok_or(HandleExceptionError::PageTableNotInitialized)?;
     // Handle all translation faults on both read and write, and MMIO guard map
     // flagged invalid pages or blocks that caused the exception.
+    // Handle permission faults for DBM flagged entries, and flag them as dirty on write.
     match esr {
         Esr::DataAbortTranslationFault => Ok(memory.handle_mmio_fault(far)?),
+        Esr::DataAbortPermissionFault => Ok(memory.handle_permission_fault(far)?),
         _ => Err(HandleExceptionError::UnknownException),
     }
 }
