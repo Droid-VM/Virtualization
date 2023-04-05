@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dfbebfb_a76ea632",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-05T08:59:28Z",
+      "side": 1,
+      "message": "This should be part of `libcrypto_baremetal`, not `pvmfw`. It\u0027s an internal function of BSSL, with zero dependencies on the rest of pvmfw (it\u0027s not even pvmfw-specific) and hardcoding internal constants and variables of BSSL. Why not have this as a source file linked into `libcrypto_baremetal`?",
+      "range": {
+        "startLine": 318,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 37
+      },
+      "revId": "82e261a120661b197da2556f12a650efea108f3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
