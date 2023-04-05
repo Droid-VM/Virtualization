@@ -22,6 +22,30 @@
       },
       "revId": "82e261a120661b197da2556f12a650efea108f3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b98cb04_c52dbfc0",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-05T15:54:25Z",
+      "side": 1,
+      "message": "I agree with you that BSSL providing a baremetal backend implementing `OPENSSL_cpuid_setup` (its own internal function) is the right thing to do. I didn\u0027t implement it that way at first to avoid having to open that can of worms (this is much easier to merge and doesn\u0027t require ustreaming any change to the library) but ended up having a go at it in aosp/2524165.",
+      "parentUuid": "1dfbebfb_a76ea632",
+      "range": {
+        "startLine": 318,
+        "startChar": 0,
+        "endLine": 318,
+        "endChar": 37
+      },
+      "revId": "82e261a120661b197da2556f12a650efea108f3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
