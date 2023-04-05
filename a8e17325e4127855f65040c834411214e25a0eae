@@ -22,6 +22,30 @@
       },
       "revId": "a8e17325e4127855f65040c834411214e25a0eae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88545882_6d1f15be",
+        "filename": "pvmfw/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-05T08:11:34Z",
+      "side": 1,
+      "message": "I guess that\u0027s hypervisor-specific but for pKVM, the VMM uses a dedicated HVC to pass its address; see [`set_protected_vm_firmware_ipa`](http://cs/android/external/crosvm/hypervisor/src/kvm/aarch64.rs;l\u003d162;rcl\u003d262f56bd051f12d7e0942d15fb81147869ce43ef) in crosvm.",
+      "parentUuid": "b2a72a40_2a57d018",
+      "range": {
+        "startLine": 282,
+        "startChar": 0,
+        "endLine": 285,
+        "endChar": 34
+      },
+      "revId": "a8e17325e4127855f65040c834411214e25a0eae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
