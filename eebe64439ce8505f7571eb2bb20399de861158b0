@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87b70ba7_d89460a3",
+        "filename": "virtualizationmanager/src/atom.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-04-06T09:22:35Z",
+      "side": 0,
+      "message": "Since not spawning thread and writing atom in current thread may create extra latency for the VM lifecycle, I didn\u0027t remove it for VmCreationRequested and VmBooted.",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 27
+      },
+      "revId": "eebe64439ce8505f7571eb2bb20399de861158b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
