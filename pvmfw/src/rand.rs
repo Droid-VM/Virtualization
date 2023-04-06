@@ -14,23 +14,85 @@
 
 mod smccc_trng;
 
-pub use smccc_trng::Error;
-pub use smccc_trng::Result;
+use alloc::boxed::Box;
+use core::fmt;
+use core::fmt::Debug;
+use core::num::NonZeroUsize;
 
-/// Configure the source of entropy.
-pub fn init() -> Result<()> {
-    smccc_trng::init()
+use log::info;
+use once_cell::race::OnceBox;
+
+pub enum Error {
+    /// Failed to initialize a valid source of entropy.
+    NoEntropySource,
+    /// SMCCC TRNG Error.
+    SmcccTrng(smccc_trng::Error),
 }
 
-fn fill_with_entropy(buffer: &mut [u8]) -> Result<()> {
-    let mut written = 0;
-    while written < buffer.len() {
-        if let Some(chunk_size) = smccc_trng::fill_partial(&mut buffer[written..])? {
-            written += chunk_size.get();
+impl From<smccc_trng::Error> for Error {
+    fn from(e: smccc_trng::Error) -> Self {
+        Self::SmcccTrng(e)
+    }
+}
+
+pub type Result<T> = core::result::Result<T, Error>;
+
+impl fmt::Display for Error {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::NoEntropySource => write!(f, "Failed to initialize a valid source of entropy"),
+            Self::SmcccTrng(e) => write!(f, "SMCCC TRNG error: {e}"),
+        }
+    }
+}
+
+trait Entropy: Debug + Send + Sync {
+    /// Discover and initialize the entropy source.
+    fn init(&self) -> Result<()>;
+    /// Obtain as much entropy as possible into a buffer.
+    ///
+    /// Reads one batch of entropy and writes it in the first bytes of the buffer. This function is
+    /// intended to be called in a loop until the buffer is full and returns the number of bytes
+    /// written or None when no entropy was available.
+    fn fill_partial(&self, buffer: &mut [u8]) -> Result<Option<NonZeroUsize>>;
+    /// Fill a buffer with entropy.
+    fn fill(&self, buffer: &mut [u8]) -> Result<()> {
+        let mut written = 0;
+        while written < buffer.len() {
+            if let Some(chunk_size) = self.fill_partial(&mut buffer[written..])? {
+                written += chunk_size.get();
+            }
+        }
+
+        Ok(())
+    }
+}
+
+static ENTROPY: OnceBox<Box<dyn Entropy>> = OnceBox::new();
+
+fn select_entropy() -> Result<Box<dyn Entropy>> {
+    let entropies = [Box::new(smccc_trng::Entropy)];
+
+    for entropy in entropies {
+        if let Err(e) = entropy.init() {
+            info!("Failed to initialize entropy source: {e}")
+        } else {
+            return Ok(entropy);
         }
     }
 
+    Err(Error::NoEntropySource)
+}
+
+/// Configure the source of entropy.
+pub fn init() -> Result<()> {
+    ENTROPY.set(Box::new(select_entropy()?)).unwrap();
+
     Ok(())
+}
+
+fn fill_with_entropy(buffer: &mut [u8]) -> Result<()> {
+    ENTROPY.get().unwrap().fill(buffer)
 }
 
 pub fn random_array<const N: usize>() -> Result<[u8; N]> {
