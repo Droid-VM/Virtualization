@@ -45,35 +45,49 @@ impl fmt::Display for Error {
     }
 }
 
-pub fn init() -> Result<()> {
-    match hvc::trng_version()? {
-        (1, _) => Ok(()),
-        version => Err(Error::UnsupportedSmcccTrngVersion(version)),
+pub struct Entropy;
+
+impl Entropy {
+    fn _init(&self) -> Result<()> {
+        match hvc::trng_version()? {
+            (1, _) => Ok(()),
+            version => Err(Error::UnsupportedSmcccTrngVersion(version)),
+        }
+    }
+
+    fn _fill_partial(&self, s: &mut [u8]) -> Result<Option<NonZeroUsize>> {
+        const MAX_BYTES_PER_CALL: usize = size_of::<hvc::TrngRng64Entropy>();
+
+        let chunk_len = cmp::min(s.len(), MAX_BYTES_PER_CALL);
+        let chunk = &mut s[..chunk_len];
+
+        if !chunk.is_empty() {
+            let mut entropy = [0; MAX_BYTES_PER_CALL];
+            let bits = usize::try_from(u8::BITS).unwrap();
+            let (r0, r1, r2) = match hvc::trng_rnd64((chunk.len() * bits).try_into().unwrap()) {
+                Err(hvc::trng::Error::NoEntropy) => return Ok(None),
+                result => result?,
+            };
+
+            // SMCCC TRNG fills up registers with entropy starting from the "last" one.
+            let mut words = entropy.chunks_exact_mut(size_of::<u64>());
+            words.next().unwrap().clone_from_slice(&r2.to_ne_bytes());
+            words.next().unwrap().clone_from_slice(&r1.to_ne_bytes());
+            words.next().unwrap().clone_from_slice(&r0.to_ne_bytes());
+
+            chunk.clone_from_slice(&entropy[..chunk.len()]);
+        }
+
+        Ok(NonZeroUsize::new(chunk.len()))
     }
 }
 
-pub fn fill_partial(s: &mut [u8]) -> Result<Option<NonZeroUsize>> {
-    const MAX_BYTES_PER_CALL: usize = size_of::<hvc::TrngRng64Entropy>();
-
-    let chunk_len = cmp::min(s.len(), MAX_BYTES_PER_CALL);
-    let chunk = &mut s[..chunk_len];
-
-    if !chunk.is_empty() {
-        let mut entropy = [0; MAX_BYTES_PER_CALL];
-        let bits = usize::try_from(u8::BITS).unwrap();
-        let (r0, r1, r2) = match hvc::trng_rnd64((chunk.len() * bits).try_into().unwrap()) {
-            Err(hvc::trng::Error::NoEntropy) => return Ok(None),
-            result => result?,
-        };
-
-        // SMCCC TRNG fills up registers with entropy starting from the "last" one.
-        let mut words = entropy.chunks_exact_mut(size_of::<u64>());
-        words.next().unwrap().clone_from_slice(&r2.to_ne_bytes());
-        words.next().unwrap().clone_from_slice(&r1.to_ne_bytes());
-        words.next().unwrap().clone_from_slice(&r0.to_ne_bytes());
-
-        chunk.clone_from_slice(&entropy[..chunk.len()]);
+impl super::Entropy for Entropy {
+    fn init(&self) -> super::Result<()> {
+        Ok(self._init()?)
     }
 
-    Ok(NonZeroUsize::new(chunk.len()))
+    fn fill_partial(&self, s: &mut [u8]) -> super::Result<Option<NonZeroUsize>> {
+        Ok(self._fill_partial(s)?)
+    }
 }
