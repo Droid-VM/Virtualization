@@ -12,82 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::hvc;
-use core::fmt;
-use core::mem::size_of;
+mod smccc_trng;
 
-pub enum Error {
-    /// Error during SMCCC TRNG call.
-    Trng(hvc::trng::Error),
-    /// Unsupported SMCCC TRNG version.
-    UnsupportedVersion((u16, u16)),
-}
-
-impl From<hvc::trng::Error> for Error {
-    fn from(e: hvc::trng::Error) -> Self {
-        Self::Trng(e)
-    }
-}
-
-pub type Result<T> = core::result::Result<T, Error>;
-
-impl fmt::Display for Error {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self {
-            Self::Trng(e) => write!(f, "SMCCC TRNG error: {e}"),
-            Self::UnsupportedVersion((x, y)) => {
-                write!(f, "Unsupported SMCCC TRNG version v{x}.{y}")
-            }
-        }
-    }
-}
+pub use smccc_trng::Error;
+pub use smccc_trng::Result;
 
 /// Configure the source of entropy.
 pub fn init() -> Result<()> {
-    match hvc::trng_version()? {
-        (1, _) => Ok(()),
-        version => Err(Error::UnsupportedVersion(version)),
-    }
+    smccc_trng::init()
 }
 
-fn fill_with_entropy(s: &mut [u8]) -> Result<()> {
-    const MAX_BYTES_PER_CALL: usize = size_of::<hvc::TrngRng64Entropy>();
-
-    let (aligned, remainder) = s.split_at_mut(s.len() - s.len() % MAX_BYTES_PER_CALL);
-
-    for chunk in aligned.chunks_exact_mut(MAX_BYTES_PER_CALL) {
-        let (r, s, t) = repeat_trng_rnd(chunk.len())?;
-
-        let mut words = chunk.chunks_exact_mut(size_of::<u64>());
-        words.next().unwrap().clone_from_slice(&t.to_ne_bytes());
-        words.next().unwrap().clone_from_slice(&s.to_ne_bytes());
-        words.next().unwrap().clone_from_slice(&r.to_ne_bytes());
-    }
-
-    if !remainder.is_empty() {
-        let mut entropy = [0; MAX_BYTES_PER_CALL];
-        let (r, s, t) = repeat_trng_rnd(remainder.len())?;
-
-        let mut words = entropy.chunks_exact_mut(size_of::<u64>());
-        words.next().unwrap().clone_from_slice(&t.to_ne_bytes());
-        words.next().unwrap().clone_from_slice(&s.to_ne_bytes());
-        words.next().unwrap().clone_from_slice(&r.to_ne_bytes());
-
-        remainder.clone_from_slice(&entropy[..remainder.len()]);
+fn fill_with_entropy(buffer: &mut [u8]) -> Result<()> {
+    let mut written = 0;
+    while written < buffer.len() {
+        if let Some(chunk_size) = smccc_trng::fill_partial(&mut buffer[written..])? {
+            written += chunk_size.get();
+        }
     }
 
     Ok(())
-}
-
-fn repeat_trng_rnd(n_bytes: usize) -> hvc::trng::Result<hvc::TrngRng64Entropy> {
-    let bits = usize::try_from(u8::BITS).unwrap();
-    let n_bits = (n_bytes * bits).try_into().unwrap();
-    loop {
-        match hvc::trng_rnd64(n_bits) {
-            Err(hvc::trng::Error::NoEntropy) => continue,
-            res => return res,
-        }
-    }
 }
 
 pub fn random_array<const N: usize>() -> Result<[u8; N]> {
