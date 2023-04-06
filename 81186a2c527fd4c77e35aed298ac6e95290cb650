@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44b28b66_eacfb5f4",
+        "filename": "pvmfw/src/rand/smccc_trng.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-06T14:51:04Z",
+      "side": 1,
+      "message": "I don\u0027t like needing to have these ZST `static` instances but how else could we get polymorphism of the (`static`) `ENTROPY` used in `fill_with_entropy`?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 48
+      },
+      "revId": "81186a2c527fd4c77e35aed298ac6e95290cb650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
