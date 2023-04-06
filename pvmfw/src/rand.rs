@@ -15,10 +15,14 @@
 mod smccc_trng;
 
 use core::fmt;
+use core::num::NonZeroUsize;
 
 use crate::hvc;
+use log::info;
 
 pub enum Error {
+    /// Failed to initialize a valid source of entropy.
+    NoEntropySource,
     /// Error during SMCCC TRNG call.
     Trng(hvc::trng::Error),
     /// Unsupported SMCCC TRNG version.
@@ -36,6 +40,7 @@ pub type Result<T> = core::result::Result<T, Error>;
 impl fmt::Display for Error {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
+            Self::NoEntropySource => write!(f, "Failed to initialize a valid source of entropy"),
             Self::Trng(e) => write!(f, "SMCCC TRNG error: {e}"),
             Self::UnsupportedSmcccTrngVersion((x, y)) => {
                 write!(f, "Unsupported SMCCC TRNG version v{x}.{y}")
@@ -44,20 +49,50 @@ impl fmt::Display for Error {
     }
 }
 
-/// Configure the source of entropy.
-pub fn init() -> Result<()> {
-    smccc_trng::init()
+trait Entropy {
+    fn init(&self) -> Result<()>;
+    fn fill_partial(&self, s: &mut [u8]) -> Result<Option<NonZeroUsize>>;
+    fn fill(&self, s: &mut [u8]) -> Result<()> {
+        let mut written = 0;
+        while written < s.len() {
+            if let Some(chunk_size) = self.fill_partial(&mut s[written..])? {
+                written += chunk_size.get();
+            }
+        }
+
+        Ok(())
+    }
 }
 
-fn fill_with_entropy(s: &mut [u8]) -> Result<()> {
-    let mut written = 0;
-    while written < s.len() {
-        if let Some(chunk_size) = smccc_trng::fill_partial(&mut s[written..])? {
-            written += chunk_size.get();
+static mut ENTROPY: Option<&dyn Entropy> = None;
+
+fn select_entropy() -> Result<&'static dyn Entropy> {
+    let entropies = [&smccc_trng::ENTROPY];
+
+    for entropy in entropies {
+        if let Err(e) = entropy.init() {
+            info!("Failed to initialize entropy source: {e}")
+        } else {
+            return Ok(entropy);
         }
     }
 
+    Err(Error::NoEntropySource)
+}
+
+/// Configure the source of entropy.
+pub fn init() -> Result<()> {
+    // SAFETY - Variable only set here and pvmfw is single threaded.
+    unsafe { ENTROPY = Some(select_entropy()?) };
+
     Ok(())
+}
+
+fn fill_with_entropy(s: &mut [u8]) -> Result<()> {
+    // SAFETY - Variable only set here and pvmfw is single threaded.
+    let entropy = unsafe { ENTROPY.unwrap() };
+
+    entropy.fill(s)
 }
 
 pub fn random_array<const N: usize>() -> Result<[u8; N]> {
