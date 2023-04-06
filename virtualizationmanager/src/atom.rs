@@ -207,9 +207,7 @@ pub fn write_vm_exited_stats(
     };
 
     info!("Writing VmExited atom into statsd.");
-    thread::spawn(move || {
-        GLOBAL_SERVICE.atomVmExited(&atom).unwrap_or_else(|e| {
-            warn!("Failed to write VmExited atom: {e}");
-        });
+    GLOBAL_SERVICE.atomVmExited(&atom).unwrap_or_else(|e| {
+        warn!("Failed to write VmExited atom: {e}");
     });
 }
