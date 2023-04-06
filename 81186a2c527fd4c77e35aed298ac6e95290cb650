@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3107922c_609f7e04",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-06T15:25:21Z",
+      "side": 1,
+      "message": "update the comment",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 68
+      },
+      "revId": "81186a2c527fd4c77e35aed298ac6e95290cb650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69b13034_a5c35c36",
+        "filename": "pvmfw/src/rand/smccc_trng.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-06T15:25:21Z",
+      "side": 1,
+      "message": "`Entropy;` for short?",
+      "range": {
+        "startLine": 24,
+        "startChar": 25,
+        "endLine": 24,
+        "endChar": 28
+      },
+      "revId": "81186a2c527fd4c77e35aed298ac6e95290cb650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44b28b66_eacfb5f4",
         "filename": "pvmfw/src/rand/smccc_trng.rs",
         "patchSetId": 1
@@ -14,6 +60,30 @@
       "writtenOn": "2023-04-06T14:51:04Z",
       "side": 1,
       "message": "I don\u0027t like needing to have these ZST `static` instances but how else could we get polymorphism of the (`static`) `ENTROPY` used in `fill_with_entropy`?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 48
+      },
+      "revId": "81186a2c527fd4c77e35aed298ac6e95290cb650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9ca63fe_dacc42d3",
+        "filename": "pvmfw/src/rand/smccc_trng.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-06T15:25:21Z",
+      "side": 1,
+      "message": "`let entropies \u003d [\u0026smccc_trng::ENTROPY];` could be ...\n\n`let entropies: [\u0026dyn Entropy; 2] \u003d [\u0026smccc_trng::Entropy, \u0026other::Entropy];`\n\n.. and you don\u0027t need this static variable.",
+      "parentUuid": "44b28b66_eacfb5f4",
       "range": {
         "startLine": 26,
         "startChar": 0,
