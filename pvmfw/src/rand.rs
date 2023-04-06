@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+mod rndr;
 mod smccc_trng;
 
 use core::fmt;
@@ -23,6 +24,8 @@ use log::info;
 pub enum Error {
     /// Failed to initialize a valid source of entropy.
     NoEntropySource,
+    /// ARMv8.5 FEAT_RND not implemented.
+    RndrUnavailable,
     /// Error during SMCCC TRNG call.
     Trng(hvc::trng::Error),
     /// Unsupported SMCCC TRNG version.
@@ -41,6 +44,7 @@ impl fmt::Display for Error {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             Self::NoEntropySource => write!(f, "Failed to initialize a valid source of entropy"),
+            Self::RndrUnavailable => write!(f, "ARMv8.5 FEAT_RND not implemented"),
             Self::Trng(e) => write!(f, "SMCCC TRNG error: {e}"),
             Self::UnsupportedSmcccTrngVersion((x, y)) => {
                 write!(f, "Unsupported SMCCC TRNG version v{x}.{y}")
@@ -67,7 +71,7 @@ trait Entropy {
 static mut ENTROPY: Option<&dyn Entropy> = None;
 
 fn select_entropy() -> Result<&'static dyn Entropy> {
-    let entropies = [&smccc_trng::ENTROPY];
+    let entropies: [&dyn Entropy; 2] = [&smccc_trng::ENTROPY, &rndr::ENTROPY];
 
     for entropy in entropies {
         if let Err(e) = entropy.init() {
