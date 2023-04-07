@@ -54,7 +54,6 @@ import android.system.virtualmachine.VirtualMachineConfig;
 import android.system.virtualmachine.VirtualMachineDescriptor;
 import android.system.virtualmachine.VirtualMachineException;
 import android.system.virtualmachine.VirtualMachineManager;
-import android.util.Log;
 
 import com.android.compatibility.common.util.CddTest;
 import com.android.compatibility.common.util.VsrTest;
@@ -1623,6 +1622,7 @@ public class MicrodroidTests extends MicrodroidDeviceTestBase {
     @Test
     public void outputIsNotRedirectedToLogcatIfNotDebuggable() throws Exception {
         assumeSupportedDevice();
+        assumeFalse("Debug policy may be turned on in user build", isUserBuild());
 
         assertThat(checkVmOutputIsRedirectedToLogcat(false)).isFalse();
     }
