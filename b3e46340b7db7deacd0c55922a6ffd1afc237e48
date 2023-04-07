@@ -33,6 +33,47 @@
       "message": "TODO: mention the alternative to SMCCC TRNG in README once aosp/2527180 has been merged",
       "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2acba02_948df009",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-07T06:26:21Z",
+      "side": 1,
+      "message": "... that begs a question of \"do we need this now?\"",
+      "parentUuid": "3a7e5032_287da5f3",
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8037b3e_1e835ffe",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-07T06:26:21Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the order be swapped?, otherwise we will prioritize smccc_trng over rndr.",
+      "range": {
+        "startLine": 74,
+        "startChar": 40,
+        "endLine": 74,
+        "endChar": 76
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
