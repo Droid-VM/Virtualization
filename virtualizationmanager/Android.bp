@@ -56,13 +56,18 @@ rust_defaults {
         "libvmconfig",
         "libzip",
         "libvsock",
-        "liblibfdt",
         // TODO(b/202115393) stabilize the interface
         "packagemanager_aidl-rust",
     ],
     shared_libs: [
         "libselinux",
     ],
+    product_variables: {
+        debuggable: {
+            rustlibs: ["liblibfdt"],
+            cfgs: ["custom_debug_policy"],
+        },
+    },
 }
 
 rust_binary {

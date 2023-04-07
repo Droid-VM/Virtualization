@@ -24,7 +24,10 @@ use std::io::ErrorKind;
 use std::path::Path;
 use log::{warn, info};
 use rustutils::system_properties;
+#[cfg(custom_debug_policy)]
 use libfdt::{Fdt, FdtError};
+#[cfg(not(custom_debug_policy))]
+use anyhow::bail;
 
 const DEBUG_POLICY_LOG_PATH: &str = "/sys/firmware/devicetree/base/avf/guest/common/log";
 const DEBUG_POLICY_RAMDUMP_PATH: &str = "/sys/firmware/devicetree/base/avf/guest/common/ramdump";
@@ -65,10 +68,12 @@ fn get_debug_policy_bool(path: &Path) -> Result<Option<bool>> {
 }
 
 /// Fdt wrapper with array backed buffer.
+#[cfg(custom_debug_policy)]
 struct FdtWrapper {
     buffer: Vec<u8>,
 }
 
+#[cfg(custom_debug_policy)]
 impl FdtWrapper {
     fn from_overlay_onto_new_fdt(overlay_file_path: &Path) -> Result<Self> {
         let mut overlay_buf = match fs::read(overlay_file_path) {
@@ -143,7 +148,7 @@ pub struct DebugConfig {
 
 impl DebugConfig {
     pub fn new(debug_level: DebugLevel) -> Self {
-        match system_properties::read(CUSTOM_DEBUG_POLICY_OVERLAY_SYSPROP).unwrap_or_default() {
+        match Self::get_custom_debug_policy_overlay_path() {
             Some(path) if !path.is_empty() => {
                 match Self::from_custom_debug_overlay_policy(debug_level, Path::new(&path)) {
                     Ok(debug_config) => {
@@ -189,7 +194,12 @@ impl DebugConfig {
         self.debug_level != DebugLevel::NONE || self.debug_policy_ramdump
     }
 
-    // TODO: Remove this code path in user build for removing libfdt depenency.
+    #[cfg(custom_debug_policy)]
+    fn get_custom_debug_policy_overlay_path() -> Option<String> {
+        system_properties::read(CUSTOM_DEBUG_POLICY_OVERLAY_SYSPROP).unwrap_or_default()
+    }
+
+    #[cfg(custom_debug_policy)]
     fn from_custom_debug_overlay_policy(debug_level: DebugLevel, path: &Path) -> Result<Self> {
         match FdtWrapper::from_overlay_onto_new_fdt(path) {
             Ok(fdt) => Ok(Self {
@@ -208,6 +218,16 @@ impl DebugConfig {
         }
     }
 
+    #[cfg(not(custom_debug_policy))]
+    fn get_custom_debug_policy_overlay_path() -> Option<String> {
+        None
+    }
+
+    #[cfg(not(custom_debug_policy))]
+    fn from_custom_debug_overlay_policy(debug_level: DebugLevel, path: &Path) -> Result<Self> {
+        bail!("Unreachable code");
+    }
+
     fn from_host(debug_level: DebugLevel) -> Result<Self> {
         Ok(Self {
             debug_level,
@@ -222,7 +242,8 @@ impl DebugConfig {
 }
 
 #[cfg(test)]
-mod tests {
+#[cfg(custom_debug_policy)]
+mod cust_debug_policy_tests {
     use super::*;
 
     fn can_set_sysprop() -> bool {
@@ -346,5 +367,23 @@ mod tests {
             .context("Failed to restore sysprop")?;
 
         test_result
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_new() -> Result<()> {
+        let debug_config = DebugConfig::new(DebugLevel::FULL);
+        let debug_config_host = DebugConfig::from_host(DebugLevel::FULL).unwrap();
+
+        ensure!(debug_config.debug_level == debug_config_host.debug_level);
+        ensure!(debug_config.debug_policy_log == debug_config_host.debug_policy_log);
+        ensure!(debug_config.debug_policy_ramdump == debug_config_host.debug_policy_ramdump);
+        ensure!(debug_config.debug_policy_adb == debug_config_host.debug_policy_adb);
+
+        Ok(())
     }
 }
