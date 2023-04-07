@@ -24,8 +24,8 @@ use std::path::{Path, PathBuf};
 use std::ffi::CStr;
 use log::{warn, info};
 use rustutils::system_properties;
+#[cfg(custom_debug_policy)]
 use libfdt::{Fdt, FdtError};
-use lazy_static::lazy_static;
 
 const CUSTOM_DEBUG_POLICY_OVERLAY_SYSPROP: &str =
     "hypervisor.virtualizationmanager.debug_policy.path";
@@ -115,10 +115,12 @@ fn get_fdt_prop_bool(fdt: &Fdt, path: &DPPath) -> Result<Option<bool>> {
 }
 
 /// Fdt with owned vector.
+#[cfg(custom_debug_policy)]
 struct OwnedFdt {
     buffer: Vec<u8>,
 }
 
+#[cfg(custom_debug_policy)]
 impl OwnedFdt {
     fn from_overlay_onto_new_fdt(overlay_file_path: &Path) -> Result<Self> {
         let mut overlay_buf = match fs::read(overlay_file_path) {
@@ -170,7 +172,7 @@ pub struct DebugConfig {
 
 impl DebugConfig {
     pub fn new(debug_level: DebugLevel) -> Self {
-        match system_properties::read(CUSTOM_DEBUG_POLICY_OVERLAY_SYSPROP).unwrap_or_default() {
+        match Self::get_custom_debug_policy_overlay_path() {
             Some(path) if !path.is_empty() => {
                 match Self::from_custom_debug_overlay_policy(debug_level, Path::new(&path)) {
                     Ok(debug_config) => {
@@ -216,7 +218,12 @@ impl DebugConfig {
         self.debug_level != DebugLevel::NONE || self.debug_policy_ramdump
     }
 
-    // TODO: Remove this code path in user build for removing libfdt depenency.
+    #[cfg(custom_debug_policy)]
+    fn get_custom_debug_policy_overlay_path() -> Option<String> {
+        system_properties::read(CUSTOM_DEBUG_POLICY_OVERLAY_SYSPROP).unwrap_or_default()
+    }
+
+    #[cfg(custom_debug_policy)]
     fn from_custom_debug_overlay_policy(debug_level: DebugLevel, path: &Path) -> Result<Self> {
         match OwnedFdt::from_overlay_onto_new_fdt(path) {
             Ok(fdt) => Ok(Self {
@@ -230,6 +237,16 @@ impl DebugConfig {
             }),
             Err(err) => Err(err),
         }
+    }
+
+    #[cfg(not(custom_debug_policy))]
+    fn get_custom_debug_policy_overlay_path() -> Option<String> {
+        None
+    }
+
+    #[cfg(not(custom_debug_policy))]
+    fn from_custom_debug_overlay_policy(debug_level: DebugLevel, path: &Path) -> Result<Self> {
+        bail!("Unreachable code");
     }
 
     fn from_host(debug_level: DebugLevel) -> Result<Self> {
@@ -246,7 +263,8 @@ impl DebugConfig {
 }
 
 #[cfg(test)]
-mod tests {
+#[cfg(custom_debug_policy)]
+mod cust_debug_policy_tests {
     use super::*;
 
     fn can_set_sysprop() -> bool {
