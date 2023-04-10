@@ -74,6 +74,7 @@ impl ComposClient {
         idsig_manifest_apk: &Path,
         idsig_manifest_ext_apk: &Path,
         parameters: &VmParameters,
+        name: &str,
     ) -> Result<Self> {
         let protected_vm = want_protected_vm()?;
 
@@ -115,7 +116,7 @@ impl ComposClient {
         };
 
         let config = VirtualMachineConfig::AppConfig(VirtualMachineAppConfig {
-            name: String::from("Compos"),
+            name: String::from(name),
             apk: Some(apk_fd),
             idsig: Some(idsig_fd),
             instanceImage: Some(instance_fd),

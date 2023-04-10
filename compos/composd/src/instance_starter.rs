@@ -135,6 +135,7 @@ impl InstanceStarter {
             &self.idsig_manifest_apk,
             &self.idsig_manifest_ext_apk,
             &self.vm_parameters,
+            "ComposComposd",
         )
         .context("Starting VM")?;
         let service = vm_instance.connect_service().context("Connecting to CompOS")?;
