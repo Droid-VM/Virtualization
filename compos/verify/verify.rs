@@ -119,6 +119,7 @@ fn try_main() -> Result<()> {
             debug_mode: args.debug,
             ..Default::default()
         },
+        "ComposVerify",
     )?;
 
     let service = vm_instance.connect_service()?;
