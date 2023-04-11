@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c49260bc_53848f8c",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T11:27:38Z",
+      "side": 1,
+      "message": "I\u0027m a bit nervous about calling code that isn\u0027t in `exceptions.rs` from the exception-handling context; how do we ensure that the code this calls doesn\u0027t end up logging something? Should we distinguish exception handler friendly functions somehow?",
+      "range": {
+        "startLine": 59,
+        "startChar": 15,
+        "endLine": 59,
+        "endChar": 32
+      },
+      "revId": "6e38ff5eb97677b183ef234de85c030be3155eba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2542102_7cbfe323",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T11:27:38Z",
+      "side": 1,
+      "message": "To make this code clearer and scale better, should we introduce an `Esr` enum and turn this into an arm of the `match` below instead of filtering the ESR twice (line 72 then line 58)?",
+      "range": {
+        "startLine": 73,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 56
+      },
+      "revId": "6e38ff5eb97677b183ef234de85c030be3155eba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
