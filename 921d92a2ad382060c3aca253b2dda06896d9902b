@@ -271,6 +271,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "720704d2_4c35718f",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T16:18:21Z",
+      "side": 1,
+      "message": "But they\u0027re not PSCI related?\n(Maybe we should have called the crate smccc ...)",
+      "parentUuid": "9d7a80a5_3fb8feba",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 46
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "345ce884_a7849957",
         "filename": "pvmfw/src/hvc/trng.rs",
         "patchSetId": 11
