@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa82cfe5_437e2c83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47121373_40258d65",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 16
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1d56517_98fbb48a",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-27T14:26:33Z",
       "side": 1,
       "message": "Move to child commit?",
+      "range": {
+        "startLine": 247,
+        "startChar": 4,
+        "endLine": 247,
+        "endChar": 31
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69b7e78c_18d71f01",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1d56517_98fbb48a",
       "range": {
         "startLine": 247,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59e7a4c5_e215727b",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11e31b01_e0e84165",
+      "range": {
+        "startLine": 33,
+        "startChar": 24,
+        "endLine": 33,
+        "endChar": 33
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cda44175_853a488c",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-03-27T14:26:33Z",
       "side": 1,
       "message": "This could be flattened using an actual error type:\n```\nenum PteModificationError {\n    Unavailable,\n    NotInitialized,\n    InternalError(MemoryTrackerError),\n}\n\nimpl Display for PteModificationError {\n    // ....\n}\n\nimpl From\u003cMemoryTrackerError\u003e for PteModificationError {\n    fn from(e) -\u003e ... {\n        Self::InternalError(e)\n    }\n}\n```\nthen `?` makes your code much easier to follow:\n```\nfn modify_pte_range(...) -\u003e Result\u003c(), PteModificationError\u003e {\n    let mut locked \u003d MEMORY.try_lock().ok_or(PteModificationError::Unavailable)?;\n    let memory \u003d locked.as_mut().ok_or(PteModificationError::NotInitialized)?;\n\n    memory.modify_range(va_range, f)\n}\n```\nand centralize logging at the call-site:\n```\nmatch modify_pte_range(\u0026(far..far + 1), \u0026handle_flagged_page_fault) {\n    Ok(()) \u003d\u003e return,\n    Err(e) if !is_uart \u003d\u003e eprintln!(\"{e}\"),\n    _ \u003d\u003e (),\n}\n```\n(BTW, I don\u0027t think `eprintln!` can safely be used from the handler, but might be wrong)",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 9
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "931bf2d9_5e75904a",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:28Z",
+      "side": 1,
+      "message": "Updated with a custom error type.\n\n`eprintln!` uses `emergency_write_str`, which is safe for use in exception handlers.",
+      "parentUuid": "cda44175_853a488c",
       "range": {
         "startLine": 53,
         "startChar": 4,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93703c64_7e7aca93",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbeeb312_8153cc8a",
+      "range": {
+        "startLine": 273,
+        "startChar": 4,
+        "endLine": 273,
+        "endChar": 7
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f13dbc5_6d1ae963",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-03-27T14:26:33Z",
       "side": 1,
       "message": "So if `d.is_valid() \u003d\u003d false`, `d.is_table_or_page() \u003d\u003d false` and `is_block_or_page(d, 2) \u003d\u003d true` even though the mapping is invalid? Could we add `Descriptor::is_leaf(\u0026self) -\u003e bool` to the crate?\n\nOr are we assuming that `modify_range` will never call its input function on invalid mappings? If so, could we `assert(desc.is_valid()`?",
+      "range": {
+        "startLine": 405,
+        "startChar": 11,
+        "endLine": 405,
+        "endChar": 61
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3c5d4ed_a0080649",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:28Z",
+      "side": 1,
+      "message": "Updated the condiiton. `Descriptor` is just a wrapper around `usize` (a page table entry) and has no concept of level it belongs to.",
+      "parentUuid": "3f13dbc5_6d1ae963",
       "range": {
         "startLine": 405,
         "startChar": 11,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da464388_a77ab93d",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53b4b29b_9e63f50e",
+      "range": {
+        "startLine": 413,
+        "startChar": 6,
+        "endLine": 413,
+        "endChar": 17
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0349fd6_a4ff92c4",
@@ -175,6 +343,30 @@
       "writtenOn": "2023-03-27T14:26:33Z",
       "side": 1,
       "message": "I\u0027m not familiar with `TLBI` but assume that `{x}` should be a single page; should `flag_for_mmio_map` assert that on `va_range`?",
+      "range": {
+        "startLine": 419,
+        "startChar": 17,
+        "endLine": 419,
+        "endChar": 21
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65802fac_01ef3d1d",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:28Z",
+      "side": 1,
+      "message": "This function has been removed. \nThe docs seem to suggest all cached entries would be removed.",
+      "parentUuid": "a0349fd6_a4ff92c4",
       "range": {
         "startLine": 419,
         "startChar": 17,
@@ -231,6 +423,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29c9154c_9c4f5aec",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "622ad6c0_bae0500b",
+      "range": {
+        "startLine": 421,
+        "startChar": 28,
+        "endLine": 421,
+        "endChar": 68
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e306b407_8701a4e0",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:28Z",
+      "side": 1,
+      "message": "This is the ASID value, now moved to a `const`.",
+      "parentUuid": "1afb353c_83e7f1ab",
+      "range": {
+        "startLine": 421,
+        "startChar": 28,
+        "endLine": 421,
+        "endChar": 40
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a20aa5a6_49b2d8ca",
@@ -244,6 +484,30 @@
       "writtenOn": "2023-03-27T14:26:33Z",
       "side": 1,
       "message": "I find this API (and the loop on `page_iterator` in the implementation) confusing as a page fault can only occur for one address at a time; could this be changed to take the FAR directly and/or assert that the `va_range` is indeed only one address?",
+      "range": {
+        "startLine": 430,
+        "startChar": 4,
+        "endLine": 430,
+        "endChar": 12
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e07abba1_e1752704",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:28Z",
+      "side": 1,
+      "message": "Updated, replaced `modify_range` with dedicated methods.",
+      "parentUuid": "a20aa5a6_49b2d8ca",
       "range": {
         "startLine": 430,
         "startChar": 4,
@@ -277,6 +541,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f44a72d_fe0fabab",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8752deb6_5bd57515",
+      "range": {
+        "startLine": 434,
+        "startChar": 38,
+        "endLine": 434,
+        "endChar": 39
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62779036_c551b1a5",
@@ -290,6 +578,30 @@
       "writtenOn": "2023-03-27T14:26:33Z",
       "side": 1,
       "message": "... else panic?",
+      "range": {
+        "startLine": 442,
+        "startChar": 8,
+        "endLine": 442,
+        "endChar": 9
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc28e5e5_769fd026",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:28Z",
+      "side": 1,
+      "message": "Updated, replaced this function with `MemoryTracker::handle_mmio_fault`.",
+      "parentUuid": "62779036_c551b1a5",
       "range": {
         "startLine": 442,
         "startChar": 8,
