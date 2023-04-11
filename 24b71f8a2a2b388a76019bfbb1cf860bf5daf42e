@@ -187,6 +187,30 @@
       },
       "revId": "24b71f8a2a2b388a76019bfbb1cf860bf5daf42e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dd8ad56_0dff7ebd",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T07:53:30Z",
+      "side": 1,
+      "message": "If we\u0027ve decided to restore the overlay on error, why not make that a no-op by `fdt.apply_overlay(backup_overlay)`?",
+      "parentUuid": "d4db0dec_6f88b99f",
+      "range": {
+        "startLine": 745,
+        "startChar": 0,
+        "endLine": 745,
+        "endChar": 60
+      },
+      "revId": "24b71f8a2a2b388a76019bfbb1cf860bf5daf42e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
