@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d28b7ba1_17b72498",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:46Z",
+      "side": 1,
+      "message": "Added `MemoryTracker::set_dbm_enabled(false)` to `main_wrapper`, to avoid duplicating code from `vmbase`.",
+      "parentUuid": "14a80b35_a6c2bcc4",
+      "range": {
+        "startLine": 306,
+        "startChar": 8,
+        "endLine": 306,
+        "endChar": 13
+      },
+      "revId": "cd0ac67c4008a65d8083bc00423fa700a319c3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3efd5483_5ba89d09",
         "filename": "pvmfw/src/memory.rs",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-27T14:27:03Z",
       "side": 1,
       "message": "Could you do this operation in Rust instead? I\u0027m also not sure that `tcr` being an `in(reg)` is completely valid.\n\nTo replace this, we could have Rust functions to read and write the register then do the OR in Rust. WDYT of introducing macros that could be used as\n```\nlet tcr_el1 \u003d read_sysreg!(\"tcr_el1\");\nwrite_sysreg!(\"tcr_el1\", tcr_el1 | Self::TCR_EL1_HA_HD_BITS);\n```\nand\n```\n if (read_sysreg!(\"id_aa64mmfr1_el1\") \u0026 Self::DBM_AVAILABLE) !\u003d 0 {\n```\n?",
+      "range": {
+        "startLine": 297,
+        "startChar": 21,
+        "endLine": 297,
+        "endChar": 52
+      },
+      "revId": "cd0ac67c4008a65d8083bc00423fa700a319c3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "662b6b83_ae44b358",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:46Z",
+      "side": 1,
+      "message": "Implemented in [this CL](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2515336).",
+      "parentUuid": "3efd5483_5ba89d09",
       "range": {
         "startLine": 297,
         "startChar": 21,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aebbb1f8_3363cfcd",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:46Z",
+      "side": 1,
+      "message": "Updated (moved to `MemoryTracker::flush_dirty_pages`).",
+      "parentUuid": "4298a42e_dff7a66c",
+      "range": {
+        "startLine": 312,
+        "startChar": 8,
+        "endLine": 312,
+        "endChar": 38
+      },
+      "revId": "cd0ac67c4008a65d8083bc00423fa700a319c3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1705d7b8_74b27cd1",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-03-27T14:27:03Z",
       "side": 1,
       "message": "Same as in the previous commit, could we turn this into `MemoryTracker::flush_dirty_pages`?",
+      "range": {
+        "startLine": 483,
+        "startChar": 3,
+        "endLine": 483,
+        "endChar": 20
+      },
+      "revId": "cd0ac67c4008a65d8083bc00423fa700a319c3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa738822_c6798e36",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1705d7b8_74b27cd1",
       "range": {
         "startLine": 483,
         "startChar": 3,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e72e77d_5516c24e",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:46Z",
+      "side": 1,
+      "message": "Added to `MemoryTracker::flush_dirty_pages`.",
+      "parentUuid": "8004cdb8_74139231",
+      "range": {
+        "startLine": 489,
+        "startChar": 25,
+        "endLine": 489,
+        "endChar": 37
+      },
+      "revId": "cd0ac67c4008a65d8083bc00423fa700a319c3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d93e888f_5ab91aa8",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-03-27T14:27:03Z",
       "side": 1,
       "message": "So is it guaranteed that `va_range` corresponds exactly to the PTE?",
+      "range": {
+        "startLine": 494,
+        "startChar": 21,
+        "endLine": 494,
+        "endChar": 69
+      },
+      "revId": "cd0ac67c4008a65d8083bc00423fa700a319c3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fe5dbc0_21e9e87d",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:46Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "d93e888f_5ab91aa8",
       "range": {
         "startLine": 494,
         "startChar": 21,
@@ -164,6 +308,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4806a85a_2e44ad4f",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:46Z",
+      "side": 1,
+      "message": "I have split it into another [CL](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2527060).\nMaybe we could make it a feature?",
+      "parentUuid": "bc304b16_fae6dbf1",
+      "range": {
+        "startLine": 500,
+        "startChar": 67,
+        "endLine": 500,
+        "endChar": 94
+      },
+      "revId": "cd0ac67c4008a65d8083bc00423fa700a319c3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6de45505_3c781a46",
         "filename": "pvmfw/src/memory.rs",
         "patchSetId": 3
@@ -175,6 +343,30 @@
       "writtenOn": "2023-03-27T14:27:03Z",
       "side": 1,
       "message": "Flatten to\n```\nlet Some(flags) \u003d desc.flags() else {\n    return Err(());\n};\n```",
+      "range": {
+        "startLine": 507,
+        "startChar": 38,
+        "endLine": 507,
+        "endChar": 39
+      },
+      "revId": "cd0ac67c4008a65d8083bc00423fa700a319c3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a13eb81_30461b89",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6de45505_3c781a46",
       "range": {
         "startLine": 507,
         "startChar": 38,
@@ -198,6 +390,30 @@
       "writtenOn": "2023-03-27T14:27:03Z",
       "side": 1,
       "message": "You\u0027re leaving most R/W mappings on the table, here!\n\nWhy introduce `.map_data_dbm`; can\u0027t we add DBM to `.map_data` under the hood?",
+      "range": {
+        "startLine": 57,
+        "startChar": 19,
+        "endLine": 57,
+        "endChar": 27
+      },
+      "revId": "cd0ac67c4008a65d8083bc00423fa700a319c3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd752e75_2e50db76",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-11T09:19:46Z",
+      "side": 1,
+      "message": "Updated, now including `writable_region` and `appended_payload_range`.",
+      "parentUuid": "f75c388f_b3b6beee",
       "range": {
         "startLine": 57,
         "startChar": 19,
