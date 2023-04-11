@@ -424,13 +424,12 @@ fn try_run_payload(service: &Strong<dyn IVirtualMachineService>) -> Result<i32> 
         .as_ref()
         .ok_or_else(|| MicrodroidError::InvalidConfig("No task in VM config".to_string()))?;
 
-    if config.extra_apks.len() != verified_data.extra_apks_data.len() {
-        return Err(anyhow!(
-            "config expects {} extra apks, but found {}",
-            config.extra_apks.len(),
-            verified_data.extra_apks_data.len()
-        ));
-    }
+    ensure!(
+        config.extra_apks.len() == verified_data.extra_apks_data.len(),
+        "config expects {} extra apks, but found {}",
+        config.extra_apks.len(),
+        verified_data.extra_apks_data.len()
+    );
     mount_extra_apks(&config, &mut zipfuse)?;
 
     // Wait until apex config is done. (e.g. linker configuration for apexes)
@@ -556,6 +555,10 @@ fn write_apex_payload_data(
     Ok(())
 }
 
+fn get_file_name(p: &Path) -> Option<&str> {
+    p.file_name().and_then(|name| name.to_str())
+}
+
 // Verify payload before executing it. For APK payload, Full verification (which is slow) is done
 // when the root_hash values from the idsig file and the instance disk are different. This function
 // returns the verified root hash (for APK payload) and pubkeys (for APEX payloads) that can be
@@ -567,9 +570,9 @@ fn verify_payload(
     let start_time = SystemTime::now();
 
     // Verify main APK
-    let root_hash = saved_data.map(|d| &d.apk_data.root_hash);
     let root_hash_from_idsig = get_apk_root_hash_from_idsig(MAIN_APK_IDSIG_PATH)?;
-    let root_hash_trustful = root_hash == Some(&root_hash_from_idsig);
+    let root_hash_trustful =
+        saved_data.map(|d| d.apk_data.root_hash_eq(root_hash_from_idsig.as_ref())).unwrap_or(false);
 
     // If root_hash can be trusted, pass it to apkdmverity so that it uses the passed root_hash
     // instead of the value read from the idsig file.
@@ -597,44 +600,36 @@ fn verify_payload(
         sorted(glob(EXTRA_APK_PATH_PATTERN)?.collect::<Result<Vec<_>, _>>()?).collect::<Vec<_>>();
     let extra_idsigs =
         sorted(glob(EXTRA_IDSIG_PATH_PATTERN)?.collect::<Result<Vec<_>, _>>()?).collect::<Vec<_>>();
-    if extra_apks.len() != extra_idsigs.len() {
-        return Err(anyhow!(
-            "Extra apks/idsigs mismatch: {} apks but {} idsigs",
-            extra_apks.len(),
-            extra_idsigs.len()
-        ));
-    }
-    let extra_apks_count = extra_apks.len();
+    ensure!(
+        extra_apks.len() == extra_idsigs.len(),
+        "Extra apks/idsigs mismatch: {} apks but {} idsigs",
+        extra_apks.len(),
+        extra_idsigs.len()
+    );
 
-    let (extra_apk_names, extra_root_hashes_from_idsig): (Vec<_>, Vec<_>) = extra_idsigs
+    let extra_root_hashes_from_idsig: Vec<_> = extra_idsigs
         .iter()
-        .enumerate()
-        .map(|(i, extra_idsig)| {
-            (
-                format!("extra-apk-{}", i),
-                get_apk_root_hash_from_idsig(extra_idsig)
-                    .expect("Can't find root hash from extra idsig"),
-            )
+        .map(|idsig| {
+            get_apk_root_hash_from_idsig(idsig).expect("Can't find root hash from extra idsig")
         })
-        .unzip();
+        .collect();
 
-    let saved_extra_root_hashes: Vec<_> = saved_data
-        .map(|d| d.extra_apks_data.iter().map(|apk_data| &apk_data.root_hash).collect())
-        .unwrap_or_else(Vec::new);
     let extra_root_hashes_trustful: Vec<_> = extra_root_hashes_from_idsig
         .iter()
         .enumerate()
         .map(|(i, root_hash_from_idsig)| {
-            saved_extra_root_hashes.get(i).copied() == Some(root_hash_from_idsig)
+            saved_data
+                .and_then(|d| d.extra_apk_root_hash_eq(i, root_hash_from_idsig))
+                .unwrap_or(false)
         })
         .collect();
 
-    for i in 0..extra_apks_count {
+    for (i, extra_apk) in extra_apks.iter().enumerate() {
         apkdmverity_arguments.push({
             ApkDmverityArgument {
-                apk: extra_apks[i].to_str().unwrap(),
+                apk: extra_apk.to_str().unwrap(),
                 idsig: extra_idsigs[i].to_str().unwrap(),
-                name: &extra_apk_names[i],
+                name: get_file_name(extra_apk.as_path()).unwrap(),
                 saved_root_hash: if extra_root_hashes_trustful[i] {
                     Some(&extra_root_hashes_from_idsig[i])
                 } else {
@@ -673,7 +668,8 @@ fn verify_payload(
         .into_iter()
         .enumerate()
         .map(|(i, extra_root_hash)| {
-            let mount_path = format!("/dev/block/mapper/{}", &extra_apk_names[i]);
+            let mount_path =
+                format!("/dev/block/mapper/{}", get_file_name(extra_apks[i].as_path()).unwrap());
             let apk_pubkey = get_public_key_from_apk(&mount_path, extra_root_hashes_trustful[i])?;
             Ok(ApkData { root_hash: extra_root_hash, pubkey: apk_pubkey })
         })
