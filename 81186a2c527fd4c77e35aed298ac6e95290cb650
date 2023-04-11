@@ -206,6 +206,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2068ebe_b4d5e150",
+        "filename": "pvmfw/src/rand/smccc_trng.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-11T15:50:41Z",
+      "side": 1,
+      "message": "That is already achieved by `rand.rs` having `mod smccc_trng` rather than `pub mod smccc_trng`.",
+      "parentUuid": "6ecc9368_1c992aa1",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 10
+      },
+      "revId": "81186a2c527fd4c77e35aed298ac6e95290cb650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44b28b66_eacfb5f4",
@@ -267,6 +291,30 @@
       "side": 1,
       "message": "Wow, I didn\u0027t know that it was possible to take references to _classes_!",
       "parentUuid": "c9ca63fe_dacc42d3",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 48
+      },
+      "revId": "81186a2c527fd4c77e35aed298ac6e95290cb650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dca8f73e_fce14676",
+        "filename": "pvmfw/src/rand/smccc_trng.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-11T15:50:41Z",
+      "side": 1,
+      "message": "There are no classes involved, it\u0027s taking a reference to a static instance of zero sized type.",
+      "parentUuid": "b39553a7_c52a0bcb",
       "range": {
         "startLine": 26,
         "startChar": 0,
