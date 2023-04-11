@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f7b4d93c_916e1bd8",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-11T13:21:00Z",
+      "side": 1,
+      "message": "Rather than a `static mut`, can you use a `once_cell::sync::OnceCell`, `once_cell::race::OnceBox` or `spin::Once`? They should allow you to initialise and get the value safely.",
+      "revId": "81186a2c527fd4c77e35aed298ac6e95290cb650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c14dbe58_2f307c8b",
         "filename": "pvmfw/src/rand.rs",
         "patchSetId": 1
@@ -89,6 +106,29 @@
         "startChar": 25,
         "endLine": 24,
         "endChar": 28
+      },
+      "revId": "81186a2c527fd4c77e35aed298ac6e95290cb650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b704834_f49d9b77",
+        "filename": "pvmfw/src/rand/smccc_trng.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-11T13:21:00Z",
+      "side": 1,
+      "message": "`pub(crate)` seems a bit meaningless here, seeing is this is a binary not a library. Why not just `pub`?",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 10
       },
       "revId": "81186a2c527fd4c77e35aed298ac6e95290cb650",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
