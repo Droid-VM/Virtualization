@@ -16,6 +16,213 @@
       "message": "Hello, could you please continue reviewing this cl?",
       "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10923436_2df6b936",
+        "filename": "libs/mmio_guard/src/hvc.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T13:56:02Z",
+      "side": 1,
+      "message": "Or just import Result and Error too?",
+      "range": {
+        "startLine": 17,
+        "startChar": 19,
+        "endLine": 17,
+        "endChar": 23
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3fb2de0_88d78519",
+        "filename": "libs/mmio_guard/src/hvc.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T13:56:02Z",
+      "side": 1,
+      "message": "This bug is marked fixed, maybe we can drop the workaround?",
+      "range": {
+        "startLine": 40,
+        "startChar": 14,
+        "endLine": 40,
+        "endChar": 23
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8c3af53_0788039d",
+        "filename": "libs/mmio_guard/src/hvc.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T13:56:02Z",
+      "side": 1,
+      "message": "This bug is marked fixed, maybe we can drop the workaround?",
+      "range": {
+        "startLine": 57,
+        "startChar": 7,
+        "endLine": 57,
+        "endChar": 23
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f0bc1e9_2ff00b53",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T13:56:02Z",
+      "side": 1,
+      "message": "Would it make sense to move all the trng things into trng.rs?\n(Why do we have the dead constants here - delete?)",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 46
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a832acd4_d4843d2c",
+        "filename": "pvmfw/src/hvc/trng.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T13:56:02Z",
+      "side": 1,
+      "message": "It seems a shame to duplicate what we have elsewhere, if the only difference is that we map Unknown(-3) to NoEntropy.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 1
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ec35d5e_53e3d023",
+        "filename": "pvmfw/src/hypervisor.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T13:56:02Z",
+      "side": 1,
+      "message": "TBH I\u0027d be tempted to move these into the lib too, and call it pkvm rather than mmio_guard",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 1
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f60187a4_41744fb7",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T13:56:02Z",
+      "side": 1,
+      "message": "So shouldn\u0027t we do this before calling logger::init ?",
+      "range": {
+        "startLine": 115,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 87
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3be8e875_ad63d009",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T13:56:02Z",
+      "side": 1,
+      "message": "Why is this ignored?",
+      "range": {
+        "startLine": 118,
+        "startChar": 8,
+        "endLine": 118,
+        "endChar": 78
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66a93101_5a6a3957",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T13:56:02Z",
+      "side": 1,
+      "message": "Should we panic?\n(The logging won\u0027t work, I think?)",
+      "range": {
+        "startLine": 119,
+        "startChar": 18,
+        "endLine": 119,
+        "endChar": 23
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
