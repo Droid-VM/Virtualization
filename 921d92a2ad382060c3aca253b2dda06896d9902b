@@ -83,6 +83,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "190f2050_d1efdada",
+        "filename": "libs/mmio_guard/src/hvc.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T16:15:42Z",
+      "side": 1,
+      "message": "It might make more sense to open a new ticket that\u0027s dedicated to removing this workaround ASAP (and update the `TODO`) than to re-open b/253586500, which tracked the underlying hypervisor bug.",
+      "parentUuid": "d3fb2de0_88d78519",
+      "range": {
+        "startLine": 40,
+        "startChar": 14,
+        "endLine": 40,
+        "endChar": 23
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f8c3af53_0788039d",
         "filename": "libs/mmio_guard/src/hvc.rs",
         "patchSetId": 11
@@ -98,6 +122,53 @@
         "startLine": 57,
         "startChar": 7,
         "endLine": 57,
+        "endChar": 23
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e75445e0_0bc56956",
+        "filename": "libs/mmio_guard/src/hvc.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T16:15:42Z",
+      "side": 1,
+      "message": "It might make more sense to open a new ticket that\u0027s dedicated to removing this workaround ASAP (and update the `TODO`) than to re-open b/251426790, which tracked the underlying hypervisor bug.",
+      "parentUuid": "f8c3af53_0788039d",
+      "range": {
+        "startLine": 57,
+        "startChar": 7,
+        "endLine": 57,
+        "endChar": 23
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1cc0ff1_f11f4017",
+        "filename": "libs/mmio_guard/src/smccc.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T16:15:42Z",
+      "side": 1,
+      "message": "This could be an easy-to-merge standalone commit.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
         "endChar": 23
       },
       "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
@@ -129,6 +200,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c309bd3_b56f10d2",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T16:15:42Z",
+      "side": 1,
+      "message": "The pKVM HVCs being a somewhat standard vendor hypervisor interface, they could arguably also be moved under their own `libpsci` module (e.g. `psci::vendor::kvm`).",
+      "parentUuid": "90a17beb_c88b7a0b",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 21
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f0bc1e9_2ff00b53",
         "filename": "pvmfw/src/hvc.rs",
         "patchSetId": 11
@@ -140,6 +235,30 @@
       "writtenOn": "2023-04-11T13:56:02Z",
       "side": 1,
       "message": "Would it make sense to move all the trng things into trng.rs?\n(Why do we have the dead constants here - delete?)",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 46
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d7a80a5_3fb8feba",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T16:15:42Z",
+      "side": 1,
+      "message": "IMO, it would make even more sense to move them to https://crates.io/crates/psci, which was intended to host this sort of low-level SMCCC functionality.",
+      "parentUuid": "3f0bc1e9_2ff00b53",
       "range": {
         "startLine": 20,
         "startChar": 0,
@@ -239,6 +358,23 @@
         "endLine": 30,
         "endChar": 1
       },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8978a8ea_94905b74",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T16:15:42Z",
+      "side": 1,
+      "message": "Why not have a single empty file as a `filegroup`?",
       "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
