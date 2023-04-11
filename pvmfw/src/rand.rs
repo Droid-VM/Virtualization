@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+mod rndr;
 mod smccc_trng;
 
 use alloc::boxed::Box;
@@ -27,11 +28,19 @@ pub enum Error {
     NoEntropySource,
     /// SMCCC TRNG Error.
     SmcccTrng(smccc_trng::Error),
+    /// ARMv8.5 FEAT_RND Error.
+    Rndr(rndr::Error),
 }
 
 impl From<smccc_trng::Error> for Error {
     fn from(e: smccc_trng::Error) -> Self {
         Self::SmcccTrng(e)
+    }
+}
+
+impl From<rndr::Error> for Error {
+    fn from(e: rndr::Error) -> Self {
+        Self::Rndr(e)
     }
 }
 
@@ -42,6 +51,7 @@ impl fmt::Display for Error {
         match self {
             Self::NoEntropySource => write!(f, "Failed to initialize a valid source of entropy"),
             Self::SmcccTrng(e) => write!(f, "SMCCC TRNG error: {e}"),
+            Self::Rndr(e) => write!(f, "RNDR error: {e}"),
         }
     }
 }
@@ -71,7 +81,7 @@ trait Entropy: Debug + Send + Sync {
 static ENTROPY: OnceBox<Box<dyn Entropy>> = OnceBox::new();
 
 fn select_entropy() -> Result<Box<dyn Entropy>> {
-    let entropies = [Box::new(smccc_trng::Entropy)];
+    let entropies: [Box<dyn Entropy>; 2] = [Box::new(rndr::Entropy), Box::new(smccc_trng::Entropy)];
 
     for entropy in entropies {
         if let Err(e) = entropy.init() {
