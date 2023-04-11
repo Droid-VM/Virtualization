@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7625f404_76eff643",
+        "filename": "pvmfw/src/crypto.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T07:30:19Z",
+      "side": 1,
+      "message": "[Yes](http://cs/android/external/boringssl/Android.bp;l\u003d415;rcl\u003ddd7e8a793313b5c3d359037c33263ddf3a02f271) until aosp/2524164 and its [upstream dependencies](https://boringssl-review.googlesource.com/c/boringssl/+/58586) get merged, which will remove the need for this CL (see b/265125189#comment6).",
+      "parentUuid": "eb6a4ee9_baf53dc8",
+      "range": {
+        "startLine": 315,
+        "startChar": 63,
+        "endLine": 315,
+        "endChar": 94
+      },
+      "revId": "82e261a120661b197da2556f12a650efea108f3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1dfbebfb_a76ea632",
