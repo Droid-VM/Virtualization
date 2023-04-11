@@ -119,6 +119,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "699a0980_533cbfd8",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-11T13:45:04Z",
+      "side": 1,
+      "message": "And in particular, it doesn\u0027t access memory.",
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8d1a4834_ef0b092d",
         "filename": "pvmfw/src/rand/rndr.rs",
         "patchSetId": 1
@@ -204,6 +221,52 @@
         "startChar": 49,
         "endLine": 64,
         "endChar": 55
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb6cca18_e28854c5",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-11T13:45:04Z",
+      "side": 1,
+      "message": "`0b0100` is 4, but you have 8 below.",
+      "range": {
+        "startLine": 64,
+        "startChar": 42,
+        "endLine": 64,
+        "endChar": 48
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b63ee889_4f7b89ca",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-11T13:45:04Z",
+      "side": 1,
+      "message": "This is just `chunk_len`, isn\u0027t it?",
+      "range": {
+        "startLine": 70,
+        "startChar": 12,
+        "endLine": 70,
+        "endChar": 23
       },
       "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
