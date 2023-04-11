@@ -301,7 +301,7 @@ makes use of the following hypervisor calls:
     - `PSCI_SYSTEM_RESET`
     - `PSCI_SYSTEM_SHUTDOWN`
 
-- Arm [True Random Number Generator Firmware Interface][smccc-trng] v1.0:
+- When `FEAT_RNG` (ARMv8.5) is not implemented, Arm [True Random Number Generator Firmware Interface][smccc-trng] v1.0:
 
     - `TRNG_VERSION`
     - `TRNG_FEATURES`

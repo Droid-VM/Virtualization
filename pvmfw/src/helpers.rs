@@ -40,6 +40,29 @@ macro_rules! read_sysreg {
     }};
 }
 
+/// Read a system register that sets PSTATE.NZCV to 0b0000 on success, 0b0100 otherwise.
+///
+/// Returns an Option<usize> and currently only applies to the ARMv8.5 RNDR and RNDRRS registers.
+#[macro_export]
+macro_rules! try_read_sysreg {
+    ($rndr:literal) => {{
+        let mut r: usize;
+        let mut failed: usize;
+        // Safe because it only reads a system register (doesn't access main memory) and we don't
+        // pass options(preserves_flags).
+        unsafe {
+            core::arch::asm!(
+                concat!("mrs {r}, ", $rndr),
+                "cset {failed}, eq",
+                r = out(reg) r,
+                failed = out(reg) failed,
+                options(nomem, nostack),
+            )
+        }
+        if failed == 0 { Some(r) } else { None }
+    }};
+}
+
 /// Write a value to a system register.
 ///
 /// # Safety
