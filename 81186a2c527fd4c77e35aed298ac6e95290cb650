@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8727c0d5_baadccbd",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T15:46:32Z",
+      "side": 1,
+      "message": "If the function panics when called more than once, does it need to be unsafe?",
+      "parentUuid": "4f87b912_0da5e866",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 68
+      },
+      "revId": "81186a2c527fd4c77e35aed298ac6e95290cb650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3107922c_609f7e04",
         "filename": "pvmfw/src/rand.rs",
         "patchSetId": 1
@@ -134,6 +158,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "288e71c4_7025ac5c",
+        "filename": "pvmfw/src/rand/smccc_trng.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T15:46:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69b13034_a5c35c36",
+      "range": {
+        "startLine": 24,
+        "startChar": 25,
+        "endLine": 24,
+        "endChar": 28
+      },
+      "revId": "81186a2c527fd4c77e35aed298ac6e95290cb650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ecc9368_1c992aa1",
+        "filename": "pvmfw/src/rand/smccc_trng.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T15:46:32Z",
+      "side": 1,
+      "message": "I wanted to prevent code outside `rand::` from using the variable directly; should `pub(super)` be used?",
+      "parentUuid": "2b704834_f49d9b77",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 10
+      },
+      "revId": "81186a2c527fd4c77e35aed298ac6e95290cb650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44b28b66_eacfb5f4",
@@ -171,6 +243,30 @@
       "side": 1,
       "message": "`let entropies \u003d [\u0026smccc_trng::ENTROPY];` could be ...\n\n`let entropies: [\u0026dyn Entropy; 2] \u003d [\u0026smccc_trng::Entropy, \u0026other::Entropy];`\n\n.. and you don\u0027t need this static variable.",
       "parentUuid": "44b28b66_eacfb5f4",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 48
+      },
+      "revId": "81186a2c527fd4c77e35aed298ac6e95290cb650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b39553a7_c52a0bcb",
+        "filename": "pvmfw/src/rand/smccc_trng.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T15:46:32Z",
+      "side": 1,
+      "message": "Wow, I didn\u0027t know that it was possible to take references to _classes_!",
+      "parentUuid": "c9ca63fe_dacc42d3",
       "range": {
         "startLine": 26,
         "startChar": 0,
