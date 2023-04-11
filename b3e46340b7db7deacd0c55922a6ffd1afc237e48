@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de2a9150_b4a30565",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T15:46:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9256acfc_0eefcbe6",
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8037b3e_1e835ffe",
@@ -84,6 +102,30 @@
       "writtenOn": "2023-04-07T06:26:21Z",
       "side": 1,
       "message": "Shouldn\u0027t the order be swapped?, otherwise we will prioritize smccc_trng over rndr.",
+      "range": {
+        "startLine": 74,
+        "startChar": 40,
+        "endLine": 74,
+        "endChar": 76
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20a7c6ea_9fbe526b",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T15:46:58Z",
+      "side": 1,
+      "message": "Good point, I set the order this way initially because I was `MRS`-ing the entropy from `RNDR`, which is a PRNG, but now that this CL only reads `RNDRRS`, we are in theory getting entropy of the same quality as what the SMCCC TRNG provides.",
+      "parentUuid": "f8037b3e_1e835ffe",
       "range": {
         "startLine": 74,
         "startChar": 40,
@@ -119,6 +161,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1194fe65_e07c3db7",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T15:46:58Z",
+      "side": 1,
+      "message": "Because there are 2 registers that need to be read in this way (`RNDR` and `RNDRRS`) but yes, as we\u0027re probably never going to read `RNDR`, this macro might be unnecessary. OTOH, it makes the code below more readable, IMO. I could rename it (\"`try_read_sysreg`\") and move it to `helpers` where we already have `{read,write}_sysreg`, WDYT?",
+      "parentUuid": "cc0af124_fd2b4397",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 11
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "699a0980_533cbfd8",
         "filename": "pvmfw/src/rand/rndr.rs",
         "patchSetId": 1
@@ -130,6 +196,24 @@
       "writtenOn": "2023-04-11T13:45:04Z",
       "side": 1,
       "message": "And in particular, it doesn\u0027t access memory.",
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "991c5e04_d20b46ad",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T15:46:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "699a0980_533cbfd8",
       "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -147,6 +231,30 @@
       "writtenOn": "2023-04-11T13:10:17Z",
       "side": 1,
       "message": "{r} might be more readable (and {failed} below)?",
+      "range": {
+        "startLine": 35,
+        "startChar": 29,
+        "endLine": 35,
+        "endChar": 31
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cd204cd_54cf1ee9",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T15:46:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d1a4834_ef0b092d",
       "range": {
         "startLine": 35,
         "startChar": 29,
@@ -180,6 +288,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f62161c_c34a37b9",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T15:46:58Z",
+      "side": 1,
+      "message": "Thanks! Does `rustfmt` ignore `asm!` (or macros in general)?",
+      "parentUuid": "2b29c373_211a6df9",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 41
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cdab168b_b0e39aec",
@@ -193,6 +325,30 @@
       "writtenOn": "2023-04-11T13:10:17Z",
       "side": 1,
       "message": "Should this have a name or a comment?",
+      "range": {
+        "startLine": 52,
+        "startChar": 64,
+        "endLine": 52,
+        "endChar": 67
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e73beca_e7426fb8",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T15:46:58Z",
+      "side": 1,
+      "message": "`ID_AA64ISAR0_EL1` is an ID register so, unlike `ID_AA64ISAR0_EL1_RNDR_SHIFT`, that constant doesn\u0027t need to be field-specific.\n\nFrom _Principles of the ID scheme for fields in ID registers_ in the ARM ARM:\n\n\u003e The Arm architecture specifies a number of ID registers that are characterized as comprising a set of 4-bit ID fields, Each ID field identifies the presence, and possibly the level of support for, a particular feature in an implementation of the architecture.",
+      "parentUuid": "cdab168b_b0e39aec",
       "range": {
         "startLine": 52,
         "startChar": 64,
@@ -249,6 +405,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea54cb60_bc408c11",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T15:46:58Z",
+      "side": 1,
+      "message": "Wow, thanks for catching that!",
+      "parentUuid": "fb6cca18_e28854c5",
+      "range": {
+        "startLine": 64,
+        "startChar": 42,
+        "endLine": 64,
+        "endChar": 48
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f96e8c29_d243e00d",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T15:46:58Z",
+      "side": 1,
+      "message": "You linked to `RNDR` but this `asm!` reads `RNDRRS`.\n\n(I wonder how often Gerrit is used to review machine code!)",
+      "parentUuid": "dde2457d_9fe13e20",
+      "range": {
+        "startLine": 64,
+        "startChar": 49,
+        "endLine": 64,
+        "endChar": 55
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b63ee889_4f7b89ca",
@@ -262,6 +466,30 @@
       "writtenOn": "2023-04-11T13:45:04Z",
       "side": 1,
       "message": "This is just `chunk_len`, isn\u0027t it?",
+      "range": {
+        "startLine": 70,
+        "startChar": 12,
+        "endLine": 70,
+        "endChar": 23
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e31c8095_41e1d47c",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T15:46:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b63ee889_4f7b89ca",
       "range": {
         "startLine": 70,
         "startChar": 12,
