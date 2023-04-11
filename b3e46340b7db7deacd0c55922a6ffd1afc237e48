@@ -185,6 +185,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "456ee01d_335c9b8b",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T16:27:25Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "1194fe65_e07c3db7",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 11
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "699a0980_533cbfd8",
         "filename": "pvmfw/src/rand/rndr.rs",
         "patchSetId": 1
@@ -302,6 +326,30 @@
       "side": 1,
       "message": "Thanks! Does `rustfmt` ignore `asm!` (or macros in general)?",
       "parentUuid": "2b29c373_211a6df9",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 41
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8df5a6a2_68105876",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T16:27:25Z",
+      "side": 1,
+      "message": "Honestly I don\u0027t know; I was a little surprised.",
+      "parentUuid": "8f62161c_c34a37b9",
       "range": {
         "startLine": 37,
         "startChar": 0,
@@ -443,6 +491,30 @@
       "side": 1,
       "message": "You linked to `RNDR` but this `asm!` reads `RNDRRS`.\n\n(I wonder how often Gerrit is used to review machine code!)",
       "parentUuid": "dde2457d_9fe13e20",
+      "range": {
+        "startLine": 64,
+        "startChar": 49,
+        "endLine": 64,
+        "endChar": 55
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3887cc8b_dec2c0a5",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T16:27:25Z",
+      "side": 1,
+      "message": "\u003e You linked to RNDR but this asm! reads RNDRRS.\n\nOh gosh. I\u0027m not entirely sure I understand the difference. (In my defence: I was confused by the use of rndr in the macro, and missed the mention of RNDRSS here.)\n\n\u003e (I wonder how often Gerrit is used to review machine code!)\n\nQuite!",
+      "parentUuid": "f96e8c29_d243e00d",
       "range": {
         "startLine": 64,
         "startChar": 49,
