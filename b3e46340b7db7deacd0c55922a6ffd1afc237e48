@@ -74,6 +74,121 @@
       },
       "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc0af124_fd2b4397",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T13:10:17Z",
+      "side": 1,
+      "message": "If we only ever read one register, why do we need a macro?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 11
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d1a4834_ef0b092d",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T13:10:17Z",
+      "side": 1,
+      "message": "{r} might be more readable (and {failed} below)?",
+      "range": {
+        "startLine": 35,
+        "startChar": 29,
+        "endLine": 35,
+        "endChar": 31
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b29c373_211a6df9",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T13:10:17Z",
+      "side": 1,
+      "message": "Uber-nit: these lines seem to be indented 1 space too far",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 41
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdab168b_b0e39aec",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T13:10:17Z",
+      "side": 1,
+      "message": "Should this have a name or a comment?",
+      "range": {
+        "startLine": 52,
+        "startChar": 64,
+        "endLine": 52,
+        "endChar": 67
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dde2457d_9fe13e20",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T13:10:17Z",
+      "side": 1,
+      "message": "Isn\u0027t op2 0b000? https://developer.arm.com/documentation/ddi0601/2020-12/AArch64-Registers/RNDR--Random-Number",
+      "range": {
+        "startLine": 64,
+        "startChar": 49,
+        "endLine": 64,
+        "endChar": 55
+      },
+      "revId": "b3e46340b7db7deacd0c55922a6ffd1afc237e48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
