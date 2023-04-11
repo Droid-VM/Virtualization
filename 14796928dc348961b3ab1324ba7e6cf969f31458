@@ -16,6 +16,351 @@
       "message": "Hi Alan, could you please take a look at this cl?",
       "revId": "14796928dc348961b3ab1324ba7e6cf969f31458",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd1e63bd_5973d203",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 9
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T14:44:38Z",
+      "side": 1,
+      "message": "In what format? PKCS #10?",
+      "range": {
+        "startLine": 74,
+        "startChar": 18,
+        "endLine": 74,
+        "endChar": 50
+      },
+      "revId": "14796928dc348961b3ab1324ba7e6cf969f31458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63d81694_efe9770c",
+        "filename": "microdroid_manager/aidl/android/system/virtualization/payload/IVmPayloadService.aidl",
+        "patchSetId": 9
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T14:44:38Z",
+      "side": 1,
+      "message": "\"get\" seems a bit weak, especially since this isn\u0027t retrieving something that already exists.\nrequestCertificate? signCertificate ?",
+      "range": {
+        "startLine": 77,
+        "startChar": 11,
+        "endLine": 77,
+        "endChar": 25
+      },
+      "revId": "14796928dc348961b3ab1324ba7e6cf969f31458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "372150cd_4377172a",
+        "filename": "rkpvm/client_apk/AndroidManifest.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T14:44:38Z",
+      "side": 1,
+      "message": "I\u0027d expect you to need MANAGE_VIRTUAL_MACHINE as well",
+      "range": {
+        "startLine": 17,
+        "startChar": 2,
+        "endLine": 17,
+        "endChar": 85
+      },
+      "revId": "14796928dc348961b3ab1324ba7e6cf969f31458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e0390bd_09dbb61f",
+        "filename": "rkpvm/client_apk/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T14:44:38Z",
+      "side": 1,
+      "message": "I think this should also be `extern \"C\"`.\n\n(Very cool - I think this is the first pure Rust payload library?)",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 24
+      },
+      "revId": "14796928dc348961b3ab1324ba7e6cf969f31458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b09090a0_4e345fbe",
+        "filename": "rkpvm/client_apk/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T14:44:38Z",
+      "side": 1,
+      "message": "Maybe this should be in main, since we have logging there? Ditto for the panic hook",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 6
+      },
+      "revId": "14796928dc348961b3ab1324ba7e6cf969f31458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd3b3730_bf86fedd",
+        "filename": "rkpvm/client_apk/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T14:44:38Z",
+      "side": 1,
+      "message": "We might want to wrap the raw payload API in Rust wrappers",
+      "range": {
+        "startLine": 44,
+        "startChar": 3,
+        "endLine": 44,
+        "endChar": 19
+      },
+      "revId": "14796928dc348961b3ab1324ba7e6cf969f31458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "689748dd_50955b07",
+        "filename": "rkpvm/client_apk/src/main.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T14:44:38Z",
+      "side": 1,
+      "message": "Is this valid / safe? Rust often doesn\u0027t like null even for a 0-size slice.\nMight be better just to use a zero-sized array.",
+      "range": {
+        "startLine": 46,
+        "startChar": 76,
+        "endLine": 46,
+        "endChar": 94
+      },
+      "revId": "14796928dc348961b3ab1324ba7e6cf969f31458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf433113_7fa1e573",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T14:44:38Z",
+      "side": 1,
+      "message": "This might be a good place to use `let Some(x) \u003d _ else { ... }`",
+      "range": {
+        "startLine": 1190,
+        "startChar": 8,
+        "endLine": 1190,
+        "endChar": 65
+      },
+      "revId": "14796928dc348961b3ab1324ba7e6cf969f31458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd8f9b34_02837338",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice_internal/IVirtualizationServiceInternal.aidl",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T14:44:38Z",
+      "side": 1,
+      "message": "This needs a comment",
+      "range": {
+        "startLine": 60,
+        "startChar": 65,
+        "endLine": 60,
+        "endChar": 80
+      },
+      "revId": "14796928dc348961b3ab1324ba7e6cf969f31458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ac23e1b_1f58e9e0",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T14:44:38Z",
+      "side": 1,
+      "message": "I think you should probably have a permission check here",
+      "range": {
+        "startLine": 166,
+        "startChar": 6,
+        "endLine": 166,
+        "endChar": 54
+      },
+      "revId": "14796928dc348961b3ab1324ba7e6cf969f31458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "934d38c1_de72cdad",
+        "filename": "virtualizationservice/src/aidl.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T14:44:38Z",
+      "side": 1,
+      "message": "Doesn\u0027t feel quite right. This one should probably be a service-specific error.",
+      "range": {
+        "startLine": 169,
+        "startChar": 38,
+        "endLine": 169,
+        "endChar": 67
+      },
+      "revId": "14796928dc348961b3ab1324ba7e6cf969f31458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0163819_9d8c90ef",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T14:44:38Z",
+      "side": 1,
+      "message": "Nit: Explain what the RKP VM is, briefly.",
+      "range": {
+        "startLine": 15,
+        "startChar": 16,
+        "endLine": 15,
+        "endChar": 19
+      },
+      "revId": "14796928dc348961b3ab1324ba7e6cf969f31458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "634df6ae_93b04f05",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T14:44:38Z",
+      "side": 1,
+      "message": "Do you actually need to specify these? By default the output is sent to logcat anyway, isn\u0027t it?",
+      "range": {
+        "startLine": 88,
+        "startChar": 59,
+        "endLine": 88,
+        "endChar": 83
+      },
+      "revId": "14796928dc348961b3ab1324ba7e6cf969f31458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc78f3f7_ba9809fd",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T14:44:38Z",
+      "side": 1,
+      "message": "It feels like there should be a huge TODO(communicate with VM) here.",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 53
+      },
+      "revId": "14796928dc348961b3ab1324ba7e6cf969f31458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1564826e_f4e925c6",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T14:44:38Z",
+      "side": 1,
+      "message": "We should really extract this out some time.",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 57
+      },
+      "revId": "14796928dc348961b3ab1324ba7e6cf969f31458",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
