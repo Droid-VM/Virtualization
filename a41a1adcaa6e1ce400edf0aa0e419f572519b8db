@@ -34,6 +34,52 @@
       "parentUuid": "4cc98e65_4a529a16",
       "revId": "a41a1adcaa6e1ce400edf0aa0e419f572519b8db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30e7ec2a_a8bc345f",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T10:59:05Z",
+      "side": 1,
+      "message": "Could you put this in VmParameters instead?\nWe already have more parameters than I\u0027d like here, and VmParameters specifically exists to provide a place for client-specific VM config.",
+      "range": {
+        "startLine": 77,
+        "startChar": 8,
+        "endLine": 77,
+        "endChar": 12
+      },
+      "revId": "a41a1adcaa6e1ce400edf0aa0e419f572519b8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a79af03_610ed2ca",
+        "filename": "compos/composd/src/instance_starter.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-11T10:59:05Z",
+      "side": 1,
+      "message": "Bikeshed: Just Composd? Or \"Isolated Compilation\"?",
+      "range": {
+        "startLine": 138,
+        "startChar": 13,
+        "endLine": 138,
+        "endChar": 26
+      },
+      "revId": "a41a1adcaa6e1ce400edf0aa0e419f572519b8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
