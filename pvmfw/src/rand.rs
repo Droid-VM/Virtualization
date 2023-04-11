@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+mod rndr;
 mod smccc_trng;
 
 use core::fmt;
@@ -24,11 +25,19 @@ pub enum Error {
     NoEntropySource,
     /// SMCCC TRNG Error.
     SmcccTrng(smccc_trng::Error),
+    /// ARMv8.5 FEAT_RND Error.
+    Rndr(rndr::Error),
 }
 
 impl From<smccc_trng::Error> for Error {
     fn from(e: smccc_trng::Error) -> Self {
         Self::SmcccTrng(e)
+    }
+}
+
+impl From<rndr::Error> for Error {
+    fn from(e: rndr::Error) -> Self {
+        Self::Rndr(e)
     }
 }
 
@@ -39,6 +48,7 @@ impl fmt::Display for Error {
         match self {
             Self::NoEntropySource => write!(f, "Failed to initialize a valid source of entropy"),
             Self::SmcccTrng(e) => write!(f, "SMCCC TRNG error: {e}"),
+            Self::Rndr(e) => write!(f, "RNDR error: {e}"),
         }
     }
 }
@@ -68,7 +78,7 @@ trait Entropy {
 static mut ENTROPY: Option<&dyn Entropy> = None;
 
 fn select_entropy() -> Result<&'static dyn Entropy> {
-    let entropies = [&smccc_trng::Entropy];
+    let entropies: [&dyn Entropy; 2] = [&rndr::Entropy, &smccc_trng::Entropy];
 
     for entropy in entropies {
         if let Err(e) = entropy.init() {
