@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27b25811_82f249ce",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T11:43:18Z",
+      "side": 1,
+      "message": "Does this require a compiler barrier?",
+      "range": {
+        "startLine": 246,
+        "startChar": 4,
+        "endLine": 247,
+        "endChar": 42
+      },
+      "revId": "bfce365e160b03ffd8d32f65a0a36304c5e90c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b864c0d_1574d068",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T11:43:18Z",
+      "side": 1,
+      "message": "Technically, the DSB should be right before the read for the PTE is issued, as code between here and there could set the dirty bit on new pages.\n\nThis implementation works for pvmfw because all of the sensitive data will have been written to before this method is called but overall, it would be cleaner to have the barrier in the `modify_range` traversal (at a performance cost) and/or document this in the API and a separate comment here; note that these considerations aren\u0027t related with the [reasons why `asm!` is `unsafe`](https://doc.rust-lang.org/reference/inline-assembly.html#rules-for-inline-assembly).",
+      "range": {
+        "startLine": 286,
+        "startChar": 54,
+        "endLine": 286,
+        "endChar": 84
+      },
+      "revId": "bfce365e160b03ffd8d32f65a0a36304c5e90c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd7d0ab7_caab7d5c",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T11:43:18Z",
+      "side": 1,
+      "message": "`options(...)` to slightly reduce the cost of this `dsb`.",
+      "range": {
+        "startLine": 289,
+        "startChar": 26,
+        "endLine": 289,
+        "endChar": 28
+      },
+      "revId": "bfce365e160b03ffd8d32f65a0a36304c5e90c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
