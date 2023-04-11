@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff6c7fab_0e30cc83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-04-11T11:14:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "43ebfef0_6ae306b6",
+      "revId": "a41a1adcaa6e1ce400edf0aa0e419f572519b8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30e7ec2a_a8bc345f",
@@ -61,6 +79,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4333fba_37f1fe35",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-04-11T11:14:37Z",
+      "side": 1,
+      "message": "Sure, but I\u0027m curious how to rename vm_identifier while following VmParameters.\n\nI found below 2 entry functions starting VM instance except verify.\nhttps://source.corp.google.com/aosp-master/packages/modules/Virtualization/compos/composd/src/instance_manager.rs;l\u003d42-52\n\nTo visualize them in the telemetry dashboard, I think it should be distinguished...\nSo how about naming those with `Composd` and `ComposTest`?",
+      "parentUuid": "30e7ec2a_a8bc345f",
+      "range": {
+        "startLine": 77,
+        "startChar": 8,
+        "endLine": 77,
+        "endChar": 12
+      },
+      "revId": "a41a1adcaa6e1ce400edf0aa0e419f572519b8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a79af03_610ed2ca",
         "filename": "compos/composd/src/instance_starter.rs",
         "patchSetId": 2
@@ -72,6 +114,30 @@
       "writtenOn": "2023-04-11T10:59:05Z",
       "side": 1,
       "message": "Bikeshed: Just Composd? Or \"Isolated Compilation\"?",
+      "range": {
+        "startLine": 138,
+        "startChar": 13,
+        "endLine": 138,
+        "endChar": 26
+      },
+      "revId": "a41a1adcaa6e1ce400edf0aa0e419f572519b8db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "685da844_fc9e71e7",
+        "filename": "compos/composd/src/instance_starter.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-04-11T11:14:37Z",
+      "side": 1,
+      "message": "Actually I don\u0027t prefer to use `Isolated Compilation`. Since compos is not running with given package name / version, so vm_identifier is the only option to identifying what the VM is. It\u0027s quite hard to track vm_identifier in telemetry database with such naming.\n\nHowever, `Composd` looks good to me :)",
+      "parentUuid": "3a79af03_610ed2ca",
       "range": {
         "startLine": 138,
         "startChar": 13,
