@@ -211,6 +211,30 @@
       },
       "revId": "24b71f8a2a2b388a76019bfbb1cf860bf5daf42e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5494459e_45c32d15",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-11T12:29:51Z",
+      "side": 1,
+      "message": "AFAIK, `libfdt` implementation is to modify both base `fdt` and overlay `fdt` and don\u0027t recover them in error state. So I think that current behavior looks OK for me -- Our `libfdt` simply follows native libraries behavior, and our Rust code ensures safety.",
+      "parentUuid": "2dd8ad56_0dff7ebd",
+      "range": {
+        "startLine": 745,
+        "startChar": 0,
+        "endLine": 745,
+        "endChar": 60
+      },
+      "revId": "24b71f8a2a2b388a76019bfbb1cf860bf5daf42e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
