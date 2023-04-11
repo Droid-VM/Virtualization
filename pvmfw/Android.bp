@@ -32,6 +32,11 @@ rust_ffi_static {
     ],
 }
 
+filegroup {
+    name: "empty_file",
+    srcs: ["empty_file"],
+}
+
 cc_binary {
     name: "pvmfw",
     defaults: ["vmbase_elf_defaults"],
@@ -81,7 +86,7 @@ prebuilt_etc {
             src: ":pvmfw_bin",
         },
     },
-    src: "empty_file",
+    src: ":empty_file",
     installable: false,
 }
 
