@@ -332,6 +332,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e5f4f3e_1b15b0b6",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-11T11:27:57Z",
+      "side": 1,
+      "message": "Yes, I\u0027m running into the same need for testing hardward-dependent features with aosp/2527741; using dedicated features sounds like a good idea but I\u0027m worried it won\u0027t scale with the Soong syntax as we would require one `\"pvmfw\"` static library per feature permutation, AFAICT, right?",
+      "parentUuid": "4806a85a_2e44ad4f",
+      "range": {
+        "startLine": 500,
+        "startChar": 67,
+        "endLine": 500,
+        "endChar": 94
+      },
+      "revId": "cd0ac67c4008a65d8083bc00423fa700a319c3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6de45505_3c781a46",
         "filename": "pvmfw/src/memory.rs",
         "patchSetId": 3
