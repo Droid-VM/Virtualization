@@ -605,6 +605,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c92be1e3_cd76965d",
+        "filename": "pvmfw/src/hvc/trng.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-12T13:02:17Z",
+      "side": 1,
+      "message": "\u003e This is unfortunately necessary. TRNG redefines the return codes of SMCCC\n\nBut see this comment from @ptosi@google.com: https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2527739/1/pvmfw/src/rand.rs#26",
+      "parentUuid": "a5a29464_651e4d72",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 1
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ec35d5e_53e3d023",
         "filename": "pvmfw/src/hypervisor.rs",
         "patchSetId": 11
