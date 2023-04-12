@@ -16,6 +16,52 @@
       "message": "Could you take another look at the current PS?",
       "revId": "75ea826eff8c0349983b674194a413a0d830c085",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a0477c6_95df45f1",
+        "filename": "libs/pkvm/src/mmio_guard.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-12T14:14:13Z",
+      "side": 1,
+      "message": "nit: \"MMIO\" (it\u0027s an acronym), here and elsewhere",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 8
+      },
+      "revId": "75ea826eff8c0349983b674194a413a0d830c085",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67e4591f_3a82fb27",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-12T14:14:13Z",
+      "side": 1,
+      "message": "You probably want to preserve the `hypervisor` abstraction that already exists in `pvmfw`. Your VM will need to run on all the supported hypervisors.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 21
+      },
+      "revId": "75ea826eff8c0349983b674194a413a0d830c085",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
