@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ed0f12a_87af8d62",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-12T08:55:50Z",
+      "side": 1,
+      "message": "These values are for composd, but this is compos_client, which is shared with compos_verify - and it wants different values.\nThat\u0027s why this code was in composd.",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 65
+      },
+      "revId": "055cf7247e4666e48f91c492ba59eb84b3153eed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88b04972_9e040ed0",
         "filename": "compos/common/compos_client.rs",
         "patchSetId": 1
@@ -60,6 +83,53 @@
         "startChar": 17,
         "endLine": 105,
         "endChar": 27
+      },
+      "revId": "055cf7247e4666e48f91c492ba59eb84b3153eed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc39067e_ae5bca78",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-12T08:55:50Z",
+      "side": 1,
+      "message": "There\u0027s already a helper for reading booleans: https://source.corp.google.com/android-internal/system/librustutils/system_properties.rs;rcl\u003d99e26dddc6464879c1d094a32344b0205115b12b;l\u003d239\n\nThere isn\u0027t one for reading int values, which is why I added this. Given it\u0027s a private local function I don\u0027t think it\u0027s doing much harm.\n\nNote that it is instantiated with T as both i32 and u32.",
+      "parentUuid": "fd21d02c_f61b9317",
+      "range": {
+        "startLine": 105,
+        "startChar": 17,
+        "endLine": 105,
+        "endChar": 27
+      },
+      "revId": "055cf7247e4666e48f91c492ba59eb84b3153eed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52cb66b5_42ca7366",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-12T08:55:50Z",
+      "side": 1,
+      "message": "TBH I prefer the one on the left.\nWhat are false and true here? How can I be sure it shouldn\u0027t be true, false?\nYou need to add comments to explain, which suggests a lack of inherent clarity.\n\nThe reason this struct exists is because there are too many things in it to fit neatly into a list of parameters.",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 71
       },
       "revId": "055cf7247e4666e48f91c492ba59eb84b3153eed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
