@@ -101,9 +101,22 @@ fn patch_bootargs(fdt: &mut Fdt, bootargs: &CStr) -> libfdt::Result<()> {
     node.setprop(cstr!("bootargs"), bootargs.to_bytes_with_nul())
 }
 
-/// Read the first range in /memory node in DT
+/// Read the range(s) in /memory node in DT.
+/// Collapse contiguous ranges into one.
+/// Holes between ranges are not yet supported.
 fn read_memory_range_from(fdt: &Fdt) -> libfdt::Result<Range<usize>> {
-    fdt.memory()?.ok_or(FdtError::NotFound)?.next().ok_or(FdtError::NotFound)
+    fdt.memory()?.ok_or(FdtError::NotFound)?.try_fold(0..0, |prev, next| {
+        if prev == (0..0) {
+            Ok(next)
+        } else if prev.start < next.start && prev.end == next.start {
+            Ok(prev.start..next.end)
+        } else if prev.start > next.start && next.end == prev.start {
+            Ok(next.start..prev.end)
+        } else {
+            error!("Memory ranges not contiguous");
+            Err(FdtError::BadValue)
+        }
+    })
 }
 
 /// Check if memory range is ok
