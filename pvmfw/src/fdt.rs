@@ -445,8 +445,15 @@ fn patch_serial_info(fdt: &mut Fdt, serial_info: &SerialInfo) -> libfdt::Result<
 
 #[derive(Debug)]
 struct SwiotlbInfo {
+    addr: Option<u64>,
     size: u64,
     align: u64,
+}
+
+fn read_swiotlb_addr_from(node: &FdtNode) -> libfdt::Result<Option<u64>> {
+    // 'reg' property specifying address and size is optional in swiotlb node
+    let reg = node.reg()?.ok_or(FdtError::NotFound)?.next().ok_or(FdtError::NotFound)?;
+    Ok(Some(reg.addr))
 }
 
 fn read_swiotlb_info_from(fdt: &Fdt) -> libfdt::Result<SwiotlbInfo> {
@@ -454,10 +461,15 @@ fn read_swiotlb_info_from(fdt: &Fdt) -> libfdt::Result<SwiotlbInfo> {
         fdt.compatible_nodes(cstr!("restricted-dma-pool"))?.next().ok_or(FdtError::NotFound)?;
     let size = node.getprop_u64(cstr!("size"))?.ok_or(FdtError::NotFound)?;
     let align = node.getprop_u64(cstr!("alignment"))?.ok_or(FdtError::NotFound)?;
-    Ok(SwiotlbInfo { size, align })
+    let addr = read_swiotlb_addr_from(&node).unwrap_or(None);
+
+    Ok(SwiotlbInfo { addr, size, align })
 }
 
-fn validate_swiotlb_info(swiotlb_info: &SwiotlbInfo) -> Result<(), RebootReason> {
+fn validate_swiotlb_info(
+    swiotlb_info: &SwiotlbInfo,
+    memory: &Range<usize>,
+) -> Result<(), RebootReason> {
     let size = swiotlb_info.size;
     let align = swiotlb_info.align;
 
@@ -470,6 +482,21 @@ fn validate_swiotlb_info(swiotlb_info: &SwiotlbInfo) -> Result<(), RebootReason>
         error!("Invalid swiotlb alignment {:#x}", align);
         return Err(RebootReason::InvalidFdt);
     }
+
+    if let Some(addr) = swiotlb_info.addr {
+        if addr.checked_add(size).is_none() {
+            error!("swiotlb addr {:#x} size {:#x} overflow", addr, size);
+            return Err(RebootReason::InvalidFdt);
+        }
+
+        let start: usize = addr.try_into().unwrap();
+        let end: usize = (addr + size).try_into().unwrap();
+        if (max(start, memory.start)..min(end, memory.end)) != (start..end) {
+            error!("swiotlb range {:#x}-{:#x} not part of memory range", addr, addr + size);
+            return Err(RebootReason::InvalidFdt);
+        }
+    }
+
     Ok(())
 }
 
@@ -478,6 +505,12 @@ fn patch_swiotlb_info(fdt: &mut Fdt, swiotlb_info: &SwiotlbInfo) -> libfdt::Resu
         fdt.root_mut()?.next_compatible(cstr!("restricted-dma-pool"))?.ok_or(FdtError::NotFound)?;
     node.setprop_inplace(cstr!("size"), &swiotlb_info.size.to_be_bytes())?;
     node.setprop_inplace(cstr!("alignment"), &swiotlb_info.align.to_be_bytes())?;
+
+    if let Some(addr) = swiotlb_info.addr {
+        node.setprop(cstr!("reg"), &addr.to_be_bytes())?;
+        node.appendprop(cstr!("reg"), &swiotlb_info.size.to_be_bytes())?;
+    }
+
     Ok(())
 }
 
@@ -612,7 +645,7 @@ fn parse_device_tree(fdt: &libfdt::Fdt) -> Result<DeviceTreeInfo, RebootReason> 
         error!("Failed to read swiotlb info from DT: {e}");
         RebootReason::InvalidFdt
     })?;
-    validate_swiotlb_info(&swiotlb_info)?;
+    validate_swiotlb_info(&swiotlb_info, &memory_range)?;
 
     Ok(DeviceTreeInfo {
         kernel_range,
