@@ -16,6 +16,29 @@
       "message": "Following change of aosp/2526922.\n\nhttps://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2526922/comment/6e778d7e_c04b9010/",
       "revId": "055cf7247e4666e48f91c492ba59eb84b3153eed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88b04972_9e040ed0",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-12T03:05:20Z",
+      "side": 1,
+      "message": "T shouldn\u0027t be bool here because in Rust only \"true\" or \"false\" can be parsed into a bool, but in Android system properties \"1\", and \"0\" are also accepted.",
+      "range": {
+        "startLine": 105,
+        "startChar": 17,
+        "endLine": 105,
+        "endChar": 27
+      },
+      "revId": "055cf7247e4666e48f91c492ba59eb84b3153eed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
