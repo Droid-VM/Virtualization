@@ -331,6 +331,11 @@ public class MicrodroidBenchmarks extends MicrodroidDeviceTestBase {
     }
 
     private void reportMetrics(List<Double> metrics, String name, String unit) {
+        // b/277591420 - metrics are not visible in test run artifacts currently
+        for (double d : metrics) {
+            Log.e(TAG, "METRIC: " + name + " " + d + " " + unit);
+        }
+
         Map<String, Double> stats = mMetricsProcessor.computeStats(metrics, name, unit);
         Bundle bundle = new Bundle();
         for (Map.Entry<String, Double> entry : stats.entrySet()) {
