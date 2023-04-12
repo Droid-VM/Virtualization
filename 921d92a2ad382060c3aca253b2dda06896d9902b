@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed117e5f_27fcffc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T15:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d32295f_5c2424e6",
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10923436_2df6b936",
@@ -641,6 +659,30 @@
       "side": 1,
       "message": "\u003e This is unfortunately necessary. TRNG redefines the return codes of SMCCC\n\nBut see this comment from @ptosi@google.com: https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2527739/1/pvmfw/src/rand.rs#26",
       "parentUuid": "a5a29464_651e4d72",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 1
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da33e35a_83e783a6",
+        "filename": "pvmfw/src/hvc/trng.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T15:31:04Z",
+      "side": 1,
+      "message": "Let\u0027s address the trng in a different cl. I added a TODO for it in hvc.rs.",
+      "parentUuid": "c92be1e3_cd76965d",
       "range": {
         "startLine": 19,
         "startChar": 0,
