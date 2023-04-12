@@ -22,6 +22,23 @@
       },
       "revId": "0998afce166bb5eef3974e148f7ba45fe6647435",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d87bc4e_a3078d7d",
+        "filename": "pvmfw/src/hypervisor.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T12:23:01Z",
+      "side": 1,
+      "message": "Why is this file being removed? It is used to abstract the hypervisor for aosp/2479400 and doesn\u0027t seem relevant to Rialto running in pVMs (the point of this CL).",
+      "revId": "0998afce166bb5eef3974e148f7ba45fe6647435",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
