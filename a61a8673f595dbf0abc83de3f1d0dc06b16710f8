@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e778d7e_c04b9010",
+        "filename": "compos/composd/src/instance_manager.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-12T01:20:36Z",
+      "side": 1,
+      "message": "I think this is an anti-pattern. name, prefer_staged, and debug_mode should better be arguments to the constructor function, and then vm_parameters doesn\u0027t have to be mutable. I am not forcing you to make a change right away, but you may choose to refactor this in a follow-up change.",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 43
+      },
+      "revId": "a61a8673f595dbf0abc83de3f1d0dc06b16710f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
