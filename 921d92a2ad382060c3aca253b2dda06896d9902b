@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4f04ba2_c4e6bcaa",
+        "filename": "libs/mmio_guard/src/hvc.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T10:26:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10923436_2df6b936",
+      "range": {
+        "startLine": 17,
+        "startChar": 19,
+        "endLine": 17,
+        "endChar": 23
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3fb2de0_88d78519",
@@ -94,6 +118,30 @@
       "writtenOn": "2023-04-11T16:15:42Z",
       "side": 1,
       "message": "It might make more sense to open a new ticket that\u0027s dedicated to removing this workaround ASAP (and update the `TODO`) than to re-open b/253586500, which tracked the underlying hypervisor bug.",
+      "parentUuid": "d3fb2de0_88d78519",
+      "range": {
+        "startLine": 40,
+        "startChar": 14,
+        "endLine": 40,
+        "endChar": 23
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24256053_81798433",
+        "filename": "libs/mmio_guard/src/hvc.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T10:26:57Z",
+      "side": 1,
+      "message": "Done. Let\u0027s follow up this issue in http://b/277859415. I updated the bug ID in another cl aosp/2531646.",
       "parentUuid": "d3fb2de0_88d78519",
       "range": {
         "startLine": 40,
@@ -152,6 +200,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb928b3e_3c6eabcc",
+        "filename": "libs/mmio_guard/src/hvc.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T10:26:57Z",
+      "side": 1,
+      "message": "Done. Let\u0027s follow up this issue in http://b/277860860. I updated the bug ID in another cl aosp/2531646.",
+      "parentUuid": "e75445e0_0bc56956",
+      "range": {
+        "startLine": 57,
+        "startChar": 7,
+        "endLine": 57,
+        "endChar": 23
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1cc0ff1_f11f4017",
@@ -165,6 +237,30 @@
       "writtenOn": "2023-04-11T16:15:42Z",
       "side": 1,
       "message": "This could be an easy-to-merge standalone commit.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 23
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28230243_32e8dbd0",
+        "filename": "libs/mmio_guard/src/smccc.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T10:26:57Z",
+      "side": 1,
+      "message": "Done. Addressed in https://r.android.com/2531644.",
+      "parentUuid": "d1cc0ff1_f11f4017",
       "range": {
         "startLine": 18,
         "startChar": 0,
@@ -212,6 +308,30 @@
       "side": 1,
       "message": "The pKVM HVCs being a somewhat standard vendor hypervisor interface, they could arguably also be moved under their own `libpsci` module (e.g. `psci::vendor::kvm`).",
       "parentUuid": "90a17beb_c88b7a0b",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 21
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fd08ab7_bea56b74",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T10:26:57Z",
+      "side": 1,
+      "message": "libpsci provides the base hvc64() call that is used for psci, mmio_guard and trng. Among them, psci only needs the raw hvc64 call, but mmio_guard and trng add another layer of Error and checked call on top of that. Currently users mostly need the Error/Result from mmio_guard::smccc and trng, it\u0027s a bit weird to put all these in psci.",
+      "parentUuid": "7c309bd3_b56f10d2",
       "range": {
         "startLine": 19,
         "startChar": 4,
@@ -293,6 +413,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "733f52cb_7ab363ad",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T10:26:57Z",
+      "side": 1,
+      "message": "I added a TODO here. We can move all the functions here to trng module and remove hvc.rs in a follow-up cl",
+      "parentUuid": "720704d2_4c35718f",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 46
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "345ce884_a7849957",
@@ -306,6 +450,30 @@
       "writtenOn": "2023-04-11T15:52:40Z",
       "side": 1,
       "message": "This is odd. Now some parts use mmio_guard::smccc and others psci::smccc",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 16
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "640693cc_3f7770b1",
+        "filename": "pvmfw/src/hvc/trng.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T10:26:57Z",
+      "side": 1,
+      "message": "Right. Actually the smccc in psci has the base hvc64 call used by psci, mmio_guard and trng. mmio_guard added error type and checked functions to facilitate the usage. This is the same problem as the other comment [1]. Let\u0027s continue this discussion there let me know how you would like to arrange the smccc part.\n\n[1] https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2489635/comment/90a17beb_c88b7a0b/",
+      "parentUuid": "345ce884_a7849957",
       "range": {
         "startLine": 17,
         "startChar": 0,
@@ -363,6 +531,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5a29464_651e4d72",
+        "filename": "pvmfw/src/hvc/trng.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T10:26:57Z",
+      "side": 1,
+      "message": "Right, actually they follow two different conventions. The smccc changed in this cl follows the spec DEN0028E_SMC_Calling_Convention_1.4, this one implements DEN0098_TRNG_FW_interface_1.",
+      "parentUuid": "a832acd4_d4843d2c",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 1
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ec35d5e_53e3d023",
@@ -376,6 +568,30 @@
       "writtenOn": "2023-04-11T13:56:02Z",
       "side": 1,
       "message": "TBH I\u0027d be tempted to move these into the lib too, and call it pkvm rather than mmio_guard",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 1
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0f14d8c_d53b6a71",
+        "filename": "pvmfw/src/hypervisor.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T10:26:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ec35d5e_53e3d023",
       "range": {
         "startLine": 20,
         "startChar": 0,
@@ -403,6 +619,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b22bd29_fad3b024",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T10:26:57Z",
+      "side": 1,
+      "message": "Done. This is addressed in https://r.android.com/2531643.",
+      "parentUuid": "8978a8ea_94905b74",
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f60187a4_41744fb7",
@@ -416,6 +650,30 @@
       "writtenOn": "2023-04-11T13:56:02Z",
       "side": 1,
       "message": "So shouldn\u0027t we do this before calling logger::init ?",
+      "range": {
+        "startLine": 115,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 87
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26ff0bfd_af33a900",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T10:26:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f60187a4_41744fb7",
       "range": {
         "startLine": 115,
         "startChar": 4,
@@ -449,6 +707,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89f963b8_2d2a5dd6",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T10:26:57Z",
+      "side": 1,
+      "message": "This is not supported in unprotected vm. I\u0027ll add a comment for it.",
+      "parentUuid": "3be8e875_ad63d009",
+      "range": {
+        "startLine": 118,
+        "startChar": 8,
+        "endLine": 118,
+        "endChar": 78
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66a93101_5a6a3957",
@@ -462,6 +744,30 @@
       "writtenOn": "2023-04-11T13:56:02Z",
       "side": 1,
       "message": "Should we panic?\n(The logging won\u0027t work, I think?)",
+      "range": {
+        "startLine": 119,
+        "startChar": 18,
+        "endLine": 119,
+        "endChar": 23
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e7843cb_9f108e3c",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T10:26:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66a93101_5a6a3957",
       "range": {
         "startLine": 119,
         "startChar": 18,
