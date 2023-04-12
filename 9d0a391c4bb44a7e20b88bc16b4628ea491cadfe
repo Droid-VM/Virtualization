@@ -39,6 +39,30 @@
       },
       "revId": "9d0a391c4bb44a7e20b88bc16b4628ea491cadfe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ceb5d4c_57c14ec9",
+        "filename": "libs/smccc/src/smccc.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T12:51:39Z",
+      "side": 1,
+      "message": "We have an existing bug for it http://b/245889995. I\u0027ll check with Andrew if we can just merge the psci::smccc into this lib and upstream it. Or do prefer me to just copy paste the hvc64 function from psci crate to here so that we don\u0027t need to depend on psci?",
+      "parentUuid": "7fcce4f3_f4426641",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 27
+      },
+      "revId": "9d0a391c4bb44a7e20b88bc16b4628ea491cadfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
