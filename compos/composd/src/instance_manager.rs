@@ -19,13 +19,10 @@
 
 use crate::instance_starter::{CompOsInstance, InstanceStarter};
 use android_system_virtualizationservice::aidl::android::system::virtualizationservice;
-use anyhow::{anyhow, bail, Context, Result};
+use anyhow::{bail, Result};
 use binder::Strong;
-use compos_common::compos_client::{VmCpuTopology, VmParameters};
+use compos_common::compos_client::VmParameters;
 use compos_common::{CURRENT_INSTANCE_DIR, TEST_INSTANCE_DIR};
-use log::info;
-use rustutils::system_properties;
-use std::str::FromStr;
 use std::sync::{Arc, Mutex, Weak};
 use virtualizationservice::IVirtualizationService::IVirtualizationService;
 
@@ -40,17 +37,12 @@ impl InstanceManager {
     }
 
     pub fn start_current_instance(&self) -> Result<CompOsInstance> {
-        let mut vm_parameters = new_vm_parameters()?;
-        vm_parameters.name = String::from("Composd");
-        vm_parameters.prefer_staged = true;
+        let vm_parameters = VmParameters::new("Composd", false, true)?;
         self.start_instance(CURRENT_INSTANCE_DIR, vm_parameters)
     }
 
     pub fn start_test_instance(&self, prefer_staged: bool) -> Result<CompOsInstance> {
-        let mut vm_parameters = new_vm_parameters()?;
-        vm_parameters.name = String::from("ComposdTest");
-        vm_parameters.debug_mode = true;
-        vm_parameters.prefer_staged = prefer_staged;
+        let vm_parameters = VmParameters::new("ComposdTest", true, prefer_staged)?;
         self.start_instance(TEST_INSTANCE_DIR, vm_parameters)
     }
 
@@ -75,41 +67,6 @@ impl InstanceManager {
         }
         instance
     }
-}
-
-fn new_vm_parameters() -> Result<VmParameters> {
-    // By default, dex2oat starts as many threads as there are CPUs. This can be overridden with
-    // a system property. Start the VM with all CPUs and assume the guest will start a suitable
-    // number of dex2oat threads.
-    let cpu_topology = VmCpuTopology::MatchHost;
-    let task_profiles = vec!["SCHED_SP_COMPUTE".to_string()];
-    let memory_mib = Some(compos_memory_mib()?);
-    Ok(VmParameters { cpu_topology, task_profiles, memory_mib, ..Default::default() })
-}
-
-fn compos_memory_mib() -> Result<i32> {
-    // Enough memory to complete odrefresh in the VM, for older versions of ART that don't set the
-    // property explicitly.
-    const DEFAULT_MEMORY_MIB: u32 = 400;
-
-    let art_requested_mib =
-        read_property("composd.vm.art.memory_mib.config")?.unwrap_or(DEFAULT_MEMORY_MIB);
-
-    let vm_adjustment_mib = read_property("composd.vm.vendor.memory_mib.config")?.unwrap_or(0);
-
-    info!(
-        "Compilation VM memory: ART requests {art_requested_mib} MiB, \
-        VM adjust is {vm_adjustment_mib}"
-    );
-    art_requested_mib
-        .checked_add_signed(vm_adjustment_mib)
-        .and_then(|x| x.try_into().ok())
-        .context("Invalid vm memory adjustment")
-}
-
-fn read_property<T: FromStr>(name: &str) -> Result<Option<T>> {
-    let str = system_properties::read(name).context("Failed to read {name}")?;
-    str.map(|s| s.parse().map_err(|_| anyhow!("Invalid {name}: {s}"))).transpose()
 }
 
 // Ensures we only run one instance at a time.
