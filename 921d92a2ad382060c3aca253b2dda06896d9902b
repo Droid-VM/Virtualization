@@ -368,6 +368,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d122510b_55613175",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-12T13:00:04Z",
+      "side": 1,
+      "message": "+1 to extracting all of smccc to somewhere that isn\u0027t trng/psci/pkvm specific.\nArguably it should be a separate external crate, like psci - which would allow psci to depend on it.\n(Alternatively, we could just expose the smccc module from psci, and live with the name.)\n@qwandor@google.com might have an opinion",
+      "parentUuid": "6de8e2a8_1164965f",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 21
+      },
+      "revId": "921d92a2ad382060c3aca253b2dda06896d9902b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f0bc1e9_2ff00b53",
         "filename": "pvmfw/src/hvc.rs",
         "patchSetId": 11
