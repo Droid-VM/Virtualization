@@ -68,6 +68,52 @@
       },
       "revId": "bfce365e160b03ffd8d32f65a0a36304c5e90c28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c45fcda8_722bac18",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T08:01:48Z",
+      "side": 1,
+      "message": "Wouldn\u0027t `!a.contains(Attributes::READ_ONLY)` cover both DBM and non-DBM PTEs?",
+      "range": {
+        "startLine": 296,
+        "startChar": 29,
+        "endLine": 296,
+        "endChar": 94
+      },
+      "revId": "bfce365e160b03ffd8d32f65a0a36304c5e90c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7b7fc97_16c893bb",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T08:01:48Z",
+      "side": 1,
+      "message": "Why not keep `DATA` as it is and introduce\n```\nconst DATA_DBM: Attributes \u003d RODATA.union(Attributes::DBM);\n```\nto make the following easier to follow:\n```\nif helpers::dbm_available() { DATA_DBM } else { DATA }\n```\n?",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 36
+      },
+      "revId": "bfce365e160b03ffd8d32f65a0a36304c5e90c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
