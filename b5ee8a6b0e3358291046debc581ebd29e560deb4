@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc261180_d8336998",
+        "filename": "microdroid_manager/src/instance.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T12:01:45Z",
+      "side": 1,
+      "message": "Mmm, just to be strict, bool only indicates the result of comparison, None indicates there\u0027s no comparison. Otherwise, since the only client doesn\u0027t need to distinguish None and Some(false), I\u0027ll just change this to bool.",
+      "parentUuid": "876bd0de_2b8c5721",
+      "range": {
+        "startLine": 283,
+        "startChar": 72,
+        "endLine": 283,
+        "endChar": 84
+      },
+      "revId": "b5ee8a6b0e3358291046debc581ebd29e560deb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8649b779_e3faa61b",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2771847_a53e4ca7",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T12:01:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8649b779_e3faa61b",
+      "range": {
+        "startLine": 558,
+        "startChar": 30,
+        "endLine": 558,
+        "endChar": 36
+      },
+      "revId": "b5ee8a6b0e3358291046debc581ebd29e560deb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec091ada_04be0241",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-04-12T09:48:16Z",
       "side": 1,
       "message": "I don\u0027t understand this change. The original is `format!(\"extra-apk-{}\", i)`.\nI\u0027m not convinced we want a host-controlled name being used as a device name. (What if there was a clash?)",
+      "range": {
+        "startLine": 632,
+        "startChar": 22,
+        "endLine": 632,
+        "endChar": 65
+      },
+      "revId": "b5ee8a6b0e3358291046debc581ebd29e560deb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ca23b84_225e3e9a",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T12:01:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec091ada_04be0241",
       "range": {
         "startLine": 632,
         "startChar": 22,
