@@ -200,6 +200,24 @@
       "parentUuid": "e0586772_52f4f36f",
       "revId": "186ed77a51aa0e8fe0e2fc33af1e12ebc8e8ab7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6a24a14_97f7fe3a",
+        "filename": "pvmfw/src/rand/smccc_trng.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-12T10:37:58Z",
+      "side": 1,
+      "message": "How about making `trng_rnd64` return `[u64; 3]` rather than `(u64, u64, u64)`, and then use `zerocopy::AsBytes` to do something like:\n\n```rust\nlet result \u003d trng_rnd64(...)?;\nchunk.copy_from_slice(\u0026result.as_bytes()[..chunk.len()]);\n```\n\nYou\u0027re already assuming native byte order, so I think that\u0027s equivalent?",
+      "parentUuid": "81bba3a1_6bc0e713",
+      "revId": "186ed77a51aa0e8fe0e2fc33af1e12ebc8e8ab7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
