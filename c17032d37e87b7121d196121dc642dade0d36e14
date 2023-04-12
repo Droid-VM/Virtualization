@@ -16,6 +16,29 @@
       "message": "Hi Pierre, PTAL.",
       "revId": "c17032d37e87b7121d196121dc642dade0d36e14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eed8b54_1e41b75e",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T08:19:02Z",
+      "side": 1,
+      "message": "The bugs are fixed and have been upstreamed (aosp/2254520 \u0026 aosp/2240205). The issue is that we need to be 100% sure that this pvmfw will not run on a kernel that has them, which will only happen once T reaches EoL.\n\nYou could simply rework the comments to specify\n```\npKVM in Android T returns ...\n```",
+      "range": {
+        "startLine": 82,
+        "startChar": 7,
+        "endLine": 82,
+        "endChar": 57
+      },
+      "revId": "c17032d37e87b7121d196121dc642dade0d36e14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
