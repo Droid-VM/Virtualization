@@ -39,6 +39,30 @@
       },
       "revId": "055cf7247e4666e48f91c492ba59eb84b3153eed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd21d02c_f61b9317",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2023-04-12T08:03:59Z",
+      "side": 1,
+      "message": "Then, how about removing generics in this function? The only use case looks like reading a property having integer value, so here\u0027s my suggestion.\n\n```\nfn read_int_property(name: \u0026str) -\u003e Result\u003cOption\u003cint\u003e\u003e\n```",
+      "parentUuid": "88b04972_9e040ed0",
+      "range": {
+        "startLine": 105,
+        "startChar": 17,
+        "endLine": 105,
+        "endChar": 27
+      },
+      "revId": "055cf7247e4666e48f91c492ba59eb84b3153eed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
