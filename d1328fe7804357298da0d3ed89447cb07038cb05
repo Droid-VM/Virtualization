@@ -1,0 +1,389 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47edb4d7_39854961",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T12:02:44Z",
+      "side": 1,
+      "message": "I wonder if we could add some `[test]` to validate bootargs parsing?",
+      "revId": "d1328fe7804357298da0d3ed89447cb07038cb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d07ce376_9d5d6227",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T12:02:44Z",
+      "side": 1,
+      "message": "Why not represent this as a\n```\nstruct BootArg\u003c\u0027a\u003e {\n    arg: \u0026\u0027a [u8],\n    equal_sign: Option\u003cusize\u003e,\n}\n\nimpl AsRef\u003c[u8]\u003e for Bootarg {\n    fn as_ref(\u0026self) -\u003e \u0026[u8] { return self.arg }\n}\n\nimpl Bootarg {\n    pub fn name(\u0026self) -\u003e \u0026[u8] {\n        if let Some(n) \u003d self.equal_sign {\n            self.arg[..n]\n        } else {\n            self.arg\n        };\n    }\n\n    pub fn value(\u0026self) -\u003e Option\u003c\u0026[u8]\u003e {\n        Some(self.arg[self.equal_sign?..])\n    }\n}\n```\nthen\n```\nnew_bootargs.extend_from_slice(arg.as_ref())\n```\n?",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 1
+      },
+      "revId": "d1328fe7804357298da0d3ed89447cb07038cb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94fbad23_992c18d3",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T12:02:44Z",
+      "side": 1,
+      "message": "Why not `str`?",
+      "range": {
+        "startLine": 30,
+        "startChar": 18,
+        "endLine": 30,
+        "endChar": 22
+      },
+      "revId": "d1328fe7804357298da0d3ed89447cb07038cb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73b13eb9_4c7328d4",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T12:02:44Z",
+      "side": 1,
+      "message": "This feels redundant with the internal indices in `BootArgsIterator::bootargs`.\n\nCan\u0027t we use\n```\nlet bootargs \u003d self.bootargs;\n// ...\nself.bootargs \u003d \u0026self.bootargs[n..]\n```\ninstead of\n```\nlet bootargs \u003d self.bootargs[self.index..];\n// ...\nself.index +\u003d n;\n```\n?",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 16
+      },
+      "revId": "d1328fe7804357298da0d3ed89447cb07038cb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73e6d57a_7c67fe5c",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T12:02:44Z",
+      "side": 1,
+      "message": "WDYT of `bootargs.to_str()` and fail the ctor if `!bootargs.to_str().is_ascii()`?",
+      "range": {
+        "startLine": 37,
+        "startChar": 25,
+        "endLine": 37,
+        "endChar": 44
+      },
+      "revId": "d1328fe7804357298da0d3ed89447cb07038cb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b07022b_79fe35e3",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T12:02:44Z",
+      "side": 1,
+      "message": "This could be `.find(|c| !c.is_whitespace())` using a `str`.",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 40
+      },
+      "revId": "d1328fe7804357298da0d3ed89447cb07038cb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22fa4b2b_ce3167b6",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T12:02:44Z",
+      "side": 1,
+      "message": "This could be `.find(|c| c.is_whitespace() || c \u003d\u003d \u0027\u003d\u0027)` using a `str`.",
+      "range": {
+        "startLine": 54,
+        "startChar": 7,
+        "endLine": 54,
+        "endChar": 20
+      },
+      "revId": "d1328fe7804357298da0d3ed89447cb07038cb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01dbb1a9_3220abb1",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T12:02:44Z",
+      "side": 1,
+      "message": "With a `str`, this loop could use `.char_indices()`",
+      "range": {
+        "startLine": 71,
+        "startChar": 8,
+        "endLine": 71,
+        "endChar": 13
+      },
+      "revId": "d1328fe7804357298da0d3ed89447cb07038cb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d28fb9f4_5aabb73e",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T12:02:44Z",
+      "side": 1,
+      "message": "nit: `match *c`?",
+      "range": {
+        "startLine": 72,
+        "startChar": 12,
+        "endLine": 72,
+        "endChar": 18
+      },
+      "revId": "d1328fe7804357298da0d3ed89447cb07038cb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72b2959c_94888c70",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T12:02:44Z",
+      "side": 1,
+      "message": "Why not simply `b\u0027\"\u0027`?",
+      "range": {
+        "startLine": 72,
+        "startChar": 21,
+        "endLine": 72,
+        "endChar": 26
+      },
+      "revId": "d1328fe7804357298da0d3ed89447cb07038cb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97597463_7c4c7fc7",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T12:02:44Z",
+      "side": 1,
+      "message": "So bootarg values can\u0027t have escaped quotes e.g. `arg\u003d\"a \\\"b c\\\" d\"`?",
+      "range": {
+        "startLine": 74,
+        "startChar": 12,
+        "endLine": 74,
+        "endChar": 13
+      },
+      "revId": "d1328fe7804357298da0d3ed89447cb07038cb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13f64787_e2941893",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T12:02:44Z",
+      "side": 1,
+      "message": "This does unnecessary FDT writes and heap allocation; should it instead be replaced by a much simpler `check_bootargs` in `parse_device_tree` that simply tries to build a `CStr` from the optional property?",
+      "range": {
+        "startLine": 635,
+        "startChar": 4,
+        "endLine": 640,
+        "endChar": 5
+      },
+      "revId": "d1328fe7804357298da0d3ed89447cb07038cb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb2d920f_98cbccae",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T12:02:44Z",
+      "side": 1,
+      "message": "Is there a reason for not first checking the boolean:\n```\nif debuggable {\n    if let Some(bootargs) \u003d read_bootargs_from(fdt)? {\n```\n? Also, can\u0027t we \n```\nif debuggable \u0026\u0026 let Some(bootargs) \u003d read_bootargs_from(fdt)? {\n```\nsince https://github.com/rust-lang/rust/pull/94927 ?",
+      "range": {
+        "startLine": 697,
+        "startChar": 4,
+        "endLine": 697,
+        "endChar": 54
+      },
+      "revId": "d1328fe7804357298da0d3ed89447cb07038cb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "943e27a7_a7503809",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T12:02:44Z",
+      "side": 1,
+      "message": "nit: to make this more flexible, could the variable names reflect what they hold instead of how they\u0027re intended to be used i.e.\n```\nlet has_ramdump \u003d read_common_debug_policy(fdt, cstr!(\"ramdump\"))?;\nlet has_log \u003d read_common_debug_policy(fdt, cstr!(\"log\"))?;\n```\n?",
+      "range": {
+        "startLine": 769,
+        "startChar": 4,
+        "endLine": 770,
+        "endChar": 68
+      },
+      "revId": "d1328fe7804357298da0d3ed89447cb07038cb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8a89f2c_43b84c62",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T12:02:44Z",
+      "side": 1,
+      "message": "Why don\u0027t we instead codify this through an enum?\n\nFor example:\n```\nenum BootargValue {\n    Any,\n    Only(\u0026\u0027static str),\n    Empty,\n}\n\nimpl BootargValue {\n    pub fn matches(\u0026self, s: \u0026str) -\u003e bool {\n        match self {\n            Self::Any \u003d\u003e true,\n            Self::Only(only) \u003d\u003e s \u003d\u003d only,\n            Self::Empty \u003d\u003e s.is_empty(),\n        }\n    }\n}\n```\nthen (untested but hopefully, you\u0027ll get the idea)\n```\nlet accepted \u003d [\n    (cstr!(\"crashkernel\"), BootargValue::Any, has_ramdump),\n    (cstr!(\"console\"), BootargValue::Any, has_log),\n    (cstr!(\"panic\"), BootargValue::Only(\"-1\"), true),\n]\nfor arg in BootArgsIterator::new(bootargs) {\n    let Some((name, value, cond)) \u003d accepted.iter().find(|\u0026\u0026t| t.0 \u003d\u003d arg.name) else {\n        continue\n    };\n\n    if cond \u0026\u0026 value.matches(arg.value) {\n        filtered.push(arg);\n    }\n}\n```\n?",
+      "range": {
+        "startLine": 771,
+        "startChar": 4,
+        "endLine": 771,
+        "endChar": 94
+      },
+      "revId": "d1328fe7804357298da0d3ed89447cb07038cb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f13ac871_247a6ead",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T12:02:44Z",
+      "side": 1,
+      "message": "If we don\u0027t abort the boot, shouldn\u0027t we at least log the rejected argument?",
+      "range": {
+        "startLine": 799,
+        "startChar": 21,
+        "endLine": 799,
+        "endChar": 24
+      },
+      "revId": "d1328fe7804357298da0d3ed89447cb07038cb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e414f12d_fb01f242",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-12T12:02:44Z",
+      "side": 1,
+      "message": "nit: `C`",
+      "range": {
+        "startLine": 804,
+        "startChar": 26,
+        "endLine": 804,
+        "endChar": 27
+      },
+      "revId": "d1328fe7804357298da0d3ed89447cb07038cb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
