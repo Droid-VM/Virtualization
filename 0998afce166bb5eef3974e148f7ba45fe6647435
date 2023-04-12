@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69f84116_87caedfe",
+        "filename": "libs/pkvm/src/mmio_guard.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T13:46:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9d16844_abcca347",
+      "range": {
+        "startLine": 25,
+        "startChar": 28,
+        "endLine": 25,
+        "endChar": 35
+      },
+      "revId": "0998afce166bb5eef3974e148f7ba45fe6647435",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d87bc4e_a3078d7d",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-04-12T12:23:01Z",
       "side": 1,
       "message": "Why is this file being removed? It is used to abstract the hypervisor for aosp/2479400 and doesn\u0027t seem relevant to Rialto running in pVMs (the point of this CL).",
+      "revId": "0998afce166bb5eef3974e148f7ba45fe6647435",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "173aea84_8da8b7f3",
+        "filename": "pvmfw/src/hypervisor.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-12T13:46:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d87bc4e_a3078d7d",
       "revId": "0998afce166bb5eef3974e148f7ba45fe6647435",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
