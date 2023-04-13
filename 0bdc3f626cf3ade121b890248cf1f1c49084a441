@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea51bd03_ed68baa6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-13T10:43:05Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "0bdc3f626cf3ade121b890248cf1f1c49084a441",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51cbe129_8d44aeb8",
@@ -14,6 +31,30 @@
       "writtenOn": "2023-04-13T10:21:27Z",
       "side": 1,
       "message": "nit: TRNG",
+      "range": {
+        "startLine": 19,
+        "startChar": 35,
+        "endLine": 19,
+        "endChar": 39
+      },
+      "revId": "0bdc3f626cf3ade121b890248cf1f1c49084a441",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83ac7e71_d82580f6",
+        "filename": "pvmfw/src/hvc.rs",
+        "patchSetId": 17
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-13T10:43:05Z",
+      "side": 1,
+      "message": "Let me fix this in the subsequent cl to get this change land first.",
+      "parentUuid": "51cbe129_8d44aeb8",
       "range": {
         "startLine": 19,
         "startChar": 35,
