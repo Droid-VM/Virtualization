@@ -89,7 +89,7 @@ fn test_run_example_vm() -> Result<(), Error> {
         taskProfiles: vec![],
         gdbPort: 0, // no gdb
     });
-    let console = android_log_fd()?;
+    let (handle, console) = android_log_fd()?;
     let (mut log_reader, log_writer) = pipe()?;
     let vm = VmInstance::create(service.as_ref(), &config, Some(console), Some(log_writer), None)
         .context("Failed to create VM")?;
@@ -99,6 +99,7 @@ fn test_run_example_vm() -> Result<(), Error> {
     // Wait for VM to finish, and check that it shut down cleanly.
     let death_reason = vm.wait_for_death();
     assert_eq!(death_reason, DeathReason::Shutdown);
+    handle.join().unwrap();
 
     // Check that the expected string was written to the log VirtIO console device.
     let expected = "Hello VirtIO console\n";
@@ -109,15 +110,10 @@ fn test_run_example_vm() -> Result<(), Error> {
     Ok(())
 }
 
-fn android_log_fd() -> io::Result<File> {
+fn android_log_fd() -> Result<(thread::JoinHandle<()>, File), io::Error> {
     let (reader, writer) = pipe()?;
-
-    thread::spawn(|| {
-        for line in BufReader::new(reader).lines() {
-            info!("{}", line.unwrap());
-        }
-    });
-    Ok(writer)
+    let handle = thread::spawn(|| VmLogProcessor::new(reader).run().unwrap());
+    Ok((handle, writer))
 }
 
 fn pipe() -> io::Result<(File, File)> {
@@ -128,4 +124,41 @@ fn pipe() -> io::Result<(File, File)> {
     let writer = unsafe { File::from_raw_fd(writer_fd) };
 
     Ok((reader, writer))
+}
+
+struct VmLogProcessor<'a> {
+    reader: Option<File>,
+    expected: &'a [&'a str],
+    had_unexpected: bool,
+}
+
+impl VmLogProcessor<'_> {
+    const EXPECTED_MSGS: &'static [&'static str] = &["Hello world", "Unsuppressed error message"];
+    const UNEXPECTED_MSGS: &'static [&'static str] = &["Suppressed error message"];
+
+    fn new(reader: File) -> Self {
+        Self { reader: Some(reader), expected: Self::EXPECTED_MSGS, had_unexpected: false }
+    }
+
+    fn verify(&mut self, msg: &str) {
+        if !self.expected.is_empty() && msg.contains(self.expected.first().unwrap()) {
+            self.expected = &self.expected[1..];
+        }
+        if !self.had_unexpected && Self::UNEXPECTED_MSGS.iter().any(|m| msg.contains(m)) {
+            self.had_unexpected = true;
+        }
+    }
+
+    fn run(mut self) -> Result<(), &'static str> {
+        for line in BufReader::new(self.reader.take().unwrap()).lines() {
+            let msg = line.unwrap();
+            self.verify(&msg);
+            info!("{msg}");
+        }
+        if self.expected.is_empty() && !self.had_unexpected {
+            Ok(())
+        } else {
+            Err("log contains unexpected messages, or missing expected ones")
+        }
+    }
 }
