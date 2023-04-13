@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe366df5_d998be83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-13T16:43:14Z",
+      "side": 1,
+      "message": "Hi Alan,\n\nThanks for the review! Could you please take another look?",
+      "revId": "a473d45d5544b671caa784b1dda24477eeeb62b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5171b409_4225b401",
@@ -14,6 +31,30 @@
       "writtenOn": "2023-04-13T15:33:43Z",
       "side": 1,
       "message": "Uber-nit: one character too long",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 101
+      },
+      "revId": "a473d45d5544b671caa784b1dda24477eeeb62b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a52fbd77_deaaa03e",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-13T16:43:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5171b409_4225b401",
       "range": {
         "startLine": 34,
         "startChar": 0,
@@ -49,6 +90,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f9c3d44a_ebad9d5f",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-13T16:43:14Z",
+      "side": 1,
+      "message": "Mmm, the function names are from these constant names directly [1] by removing the common prefix `ARM_SMCCC_KVM_FUNC_`\n\n[1] https://source.corp.google.com/h/android/kernel/common/+/android13-5.15:include/linux/arm-smccc.h;l\u003d115;drc\u003d8f997c3ab5de96c1328a8f34f5bbfb57c9ce2500",
+      "parentUuid": "4f9a5429_942ed80b",
+      "range": {
+        "startLine": 45,
+        "startChar": 7,
+        "endLine": 45,
+        "endChar": 18
+      },
+      "revId": "a473d45d5544b671caa784b1dda24477eeeb62b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c4d4b86b_0b2edf22",
         "filename": "libs/hyp/src/hypervisor/mod.rs",
         "patchSetId": 4
@@ -60,6 +125,30 @@
       "writtenOn": "2023-04-13T15:33:43Z",
       "side": 1,
       "message": "It slightly distresses me that we\u0027re injecting a virtual call into every hypervisor interaction. But I guess that\u0027s small compared to the overall cost, and anyway I don\u0027t see any real alternative.",
+      "range": {
+        "startLine": 30,
+        "startChar": 27,
+        "endLine": 30,
+        "endChar": 50
+      },
+      "revId": "a473d45d5544b671caa784b1dda24477eeeb62b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24dca92a_1223463e",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-13T16:43:14Z",
+      "side": 1,
+      "message": "Feel the same. Otherwise I thought making this function private so that we can preserve the current static calls in PS2, but it\u0027s a bit tedious to repeat all the functions of the interface here.",
+      "parentUuid": "c4d4b86b_0b2edf22",
       "range": {
         "startLine": 30,
         "startChar": 27,
