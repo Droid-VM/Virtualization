@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5171b409_4225b401",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-13T15:33:43Z",
+      "side": 1,
+      "message": "Uber-nit: one character too long",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 101
+      },
+      "revId": "a473d45d5544b671caa784b1dda24477eeeb62b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f9a5429_942ed80b",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-13T15:33:43Z",
+      "side": 1,
+      "message": "Why `hyp` here, but nowhere else? \nmem_info, for symmetry?",
+      "range": {
+        "startLine": 45,
+        "startChar": 7,
+        "endLine": 45,
+        "endChar": 18
+      },
+      "revId": "a473d45d5544b671caa784b1dda24477eeeb62b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4d4b86b_0b2edf22",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-13T15:33:43Z",
+      "side": 1,
+      "message": "It slightly distresses me that we\u0027re injecting a virtual call into every hypervisor interaction. But I guess that\u0027s small compared to the overall cost, and anyway I don\u0027t see any real alternative.",
+      "range": {
+        "startLine": 30,
+        "startChar": 27,
+        "endLine": 30,
+        "endChar": 50
+      },
+      "revId": "a473d45d5544b671caa784b1dda24477eeeb62b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
