@@ -130,6 +130,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f967cb1_b6c9d150",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-13T13:57:05Z",
+      "side": 1,
+      "message": "Yeah, I\u0027ve also checked chapter [3.6. of the DT specification](https://devicetree-specification.readthedocs.io/en/latest/chapter3-devicenodes.html#table-7), which states that `/chosen/bootargs` has value type `\u003cstring\u003e`, but [2.2.4.2.](https://devicetree-specification.readthedocs.io/en/latest/chapter2-devicetree-basics.html#table-3) doesn\u0027t clearly define the actual encoding (even though its example unsurprisingly implies ASCII compatibility).",
+      "parentUuid": "be8bddfa_6da664bf",
+      "range": {
+        "startLine": 30,
+        "startChar": 18,
+        "endLine": 30,
+        "endChar": 22
+      },
+      "revId": "d1328fe7804357298da0d3ed89447cb07038cb05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73b13eb9_4c7328d4",

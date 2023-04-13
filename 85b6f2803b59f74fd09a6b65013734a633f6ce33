@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e93305c_df0989f2",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-13T13:57:05Z",
+      "side": 1,
+      "message": "Nit: 2023",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "85b6f2803b59f74fd09a6b65013734a633f6ce33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddf1ac23_6165a2b0",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-13T13:57:05Z",
+      "side": 1,
+      "message": "nit: \"Routines\"",
+      "range": {
+        "startLine": 15,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 11
+      },
+      "revId": "85b6f2803b59f74fd09a6b65013734a633f6ce33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3d25ddc_a80ead4d",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-13T13:57:05Z",
+      "side": 1,
+      "message": "super-nit (but this will be logged to the user): ASCII\n\n(also in the comment above, while we\u0027re at it)",
+      "range": {
+        "startLine": 61,
+        "startChar": 47,
+        "endLine": 61,
+        "endChar": 52
+      },
+      "revId": "85b6f2803b59f74fd09a6b65013734a633f6ce33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90139862_f57af1cc",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-13T13:57:05Z",
+      "side": 1,
+      "message": "nit: `else if`",
+      "range": {
+        "startLine": 74,
+        "startChar": 12,
+        "endLine": 75,
+        "endChar": 14
+      },
+      "revId": "85b6f2803b59f74fd09a6b65013734a633f6ce33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "372966d6_76aa72d8",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-13T13:57:05Z",
+      "side": 1,
+      "message": "Neat way of handling both the end-of-string and end-of-word cases at once!",
+      "range": {
+        "startLine": 102,
+        "startChar": 12,
+        "endLine": 102,
+        "endChar": 13
+      },
+      "revId": "85b6f2803b59f74fd09a6b65013734a633f6ce33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ac510f6_f95d5607",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-13T13:57:05Z",
+      "side": 1,
+      "message": "OOC: we can\u0027t use `cstr!` in tests? Because we use `zeroize` in `helpers.rs`?",
+      "range": {
+        "startLine": 139,
+        "startChar": 14,
+        "endLine": 139,
+        "endChar": 39
+      },
+      "revId": "85b6f2803b59f74fd09a6b65013734a633f6ce33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a219b622_45768376",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-13T13:57:05Z",
+      "side": 1,
+      "message": "Wait, that\u0027s fine?! I thought quotes could only be used _around_ the value i.e. `foo\u003d\"value\"`!",
+      "range": {
+        "startLine": 206,
+        "startChar": 24,
+        "endLine": 206,
+        "endChar": 58
+      },
+      "revId": "85b6f2803b59f74fd09a6b65013734a633f6ce33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
