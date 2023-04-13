@@ -16,6 +16,75 @@
       "message": "Hi Alan, could you please also take a look?",
       "revId": "3171e316773e2bd460e5ee479fd4b4db964b8622",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfd3fb86_47db8f3a",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-13T10:33:43Z",
+      "side": 1,
+      "message": "This layout works for now but you will need to map more than just the console later on (vsock). So you will need to keep the info on whether MMIO guard is needed and conditionally map those pages.",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 30
+      },
+      "revId": "3171e316773e2bd460e5ee479fd4b4db964b8622",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "434ecdbf_800e7fd8",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-13T10:33:43Z",
+      "side": 1,
+      "message": "This is broken - it will try to print to console and loop forever. Have a look at `pvmfw/src/entry.rs` - it has an early setup function that does not panic but reboots.",
+      "range": {
+        "startLine": 115,
+        "startChar": 64,
+        "endLine": 115,
+        "endChar": 74
+      },
+      "revId": "3171e316773e2bd460e5ee479fd4b4db964b8622",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3726199_5f8dc5ef",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-13T10:33:43Z",
+      "side": 1,
+      "message": "Also livelocks, see above",
+      "range": {
+        "startLine": 118,
+        "startChar": 18,
+        "endLine": 118,
+        "endChar": 72
+      },
+      "revId": "3171e316773e2bd460e5ee479fd4b4db964b8622",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
