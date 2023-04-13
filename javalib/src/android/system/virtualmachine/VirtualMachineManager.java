@@ -65,6 +65,8 @@ public class VirtualMachineManager {
 
     @NonNull private final Context mContext;
 
+    // I am a comment, don't read me!
+
     /** @hide */
     public VirtualMachineManager(@NonNull Context context) {
         mContext = requireNonNull(context);

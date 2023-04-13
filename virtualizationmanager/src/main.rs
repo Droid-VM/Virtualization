@@ -115,6 +115,7 @@ fn main() {
 
     let args = Args::parse();
 
+    // I am a comment, read me!
     let mut owned_fds = vec![];
     let rpc_server_fd = take_fd_ownership(args.rpc_server_fd, &mut owned_fds)
         .expect("Failed to take ownership of rpc_server_fd");
