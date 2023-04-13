@@ -20,19 +20,50 @@
 
 extern crate log;
 
-use super::println;
+use crate::console::println;
+use core::sync::atomic::{AtomicBool, Ordering};
 use log::{LevelFilter, Log, Metadata, Record, SetLoggerError};
 
 struct Logger;
 static LOGGER: Logger = Logger;
+static mut ENABLE_LOGGING: AtomicBool = AtomicBool::new(true);
+
+fn set_logging_enabled(enabled: bool) -> bool {
+    // Safe because this modifies an atomic.
+    unsafe { ENABLE_LOGGING.swap(enabled, Ordering::Relaxed) }
+}
+
+fn logging_enabled() -> bool {
+    // Safe because this reads an atomic.
+    unsafe { ENABLE_LOGGING.load(Ordering::Relaxed) }
+}
+
+/// An RAII implementation of a log suppressor. When the instance is dropped, logging is re-enabled.
+pub struct SuppressGuard {
+    old_enabled: bool,
+}
+
+impl SuppressGuard {
+    fn new() -> Self {
+        Self { old_enabled: set_logging_enabled(false) }
+    }
+}
+
+impl Drop for SuppressGuard {
+    fn drop(&mut self) {
+        set_logging_enabled(self.old_enabled);
+    }
+}
 
 impl Log for Logger {
     fn enabled(&self, _metadata: &Metadata) -> bool {
-        true
+        logging_enabled()
     }
 
     fn log(&self, record: &Record) {
-        println!("[{}] {}", record.level(), record.args());
+        if self.enabled(record.metadata()) {
+            println!("[{}] {}", record.level(), record.args());
+        }
     }
 
     fn flush(&self) {}
@@ -43,4 +74,9 @@ pub fn init(max_level: LevelFilter) -> Result<(), SetLoggerError> {
     log::set_logger(&LOGGER)?;
     log::set_max_level(max_level);
     Ok(())
+}
+
+/// Suppress logging until the return value goes out of scope.
+pub fn suppress() -> SuppressGuard {
+    SuppressGuard::new()
 }
