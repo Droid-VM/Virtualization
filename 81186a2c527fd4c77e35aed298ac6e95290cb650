@@ -113,6 +113,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8093ada_2da40567",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-14T14:07:02Z",
+      "side": 1,
+      "message": "Makes sense, thanks!\n\n(marking this comment as resolved and keeping [this one](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2527740/comment/f7b4d93c_916e1bd8/) for using `OnceCell`)",
+      "parentUuid": "33e4e122_de9b2660",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 68
+      },
+      "revId": "81186a2c527fd4c77e35aed298ac6e95290cb650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3107922c_609f7e04",
@@ -126,6 +150,30 @@
       "writtenOn": "2023-04-06T15:25:21Z",
       "side": 1,
       "message": "update the comment",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 68
+      },
+      "revId": "81186a2c527fd4c77e35aed298ac6e95290cb650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c9b2d2c_1e542f48",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-14T14:07:02Z",
+      "side": 1,
+      "message": "Resolving this comment as it will be obsolete once [we start using `OnceCell`](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2527740/comment/f7b4d93c_916e1bd8/).",
+      "parentUuid": "3107922c_609f7e04",
       "range": {
         "startLine": 92,
         "startChar": 0,
