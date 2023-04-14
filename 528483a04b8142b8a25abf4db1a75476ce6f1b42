@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22cf70a3_555514fa",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-14T06:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb01240_043c9255",
+      "range": {
+        "startLine": 611,
+        "startChar": 20,
+        "endLine": 611,
+        "endChar": 68
+      },
+      "revId": "528483a04b8142b8a25abf4db1a75476ce6f1b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b330048e_7e3ae292",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-10T05:16:49Z",
       "side": 1,
       "message": "There are large amount of duplication here, can you dedup?\n\nFor example, \n\n* /sys/firmware/devicetree/base is repeated.\n* avf/gest/[common|microdroid] + \u003cfeature\u003e are repeated.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 93
+      },
+      "revId": "528483a04b8142b8a25abf4db1a75476ce6f1b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7edc5036_c846c2b8",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-14T06:32:19Z",
+      "side": 1,
+      "message": "Done. Some explanation about current code.\n\n- Changed to use `static` with `lazy_static`: `const` didn\u0027t work well. `const` only allows stack memory and `const fn`, so keeping values `const` required lots of extra codes and didn\u0027t look clean. See: go/paste/4921370537361408. There\u0027s external crates for the purpose, but none of them are available in Android.\n\n- Added new `struct DPPath` to keep two `\u0026CStr`\n  - Changed from tuple to add name and convenient method.\n  - Keep `\u0026CStr` to validate whether params are valid `CStr` as early as possible.",
+      "parentUuid": "b330048e_7e3ae292",
       "range": {
         "startLine": 29,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29d84f43_4851098c",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-14T06:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e466b184_68586d0a",
+      "range": {
+        "startLine": 46,
+        "startChar": 68,
+        "endLine": 46,
+        "endChar": 72
+      },
+      "revId": "528483a04b8142b8a25abf4db1a75476ce6f1b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a91f704f_5336cb36",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-04-10T05:16:49Z",
       "side": 1,
       "message": "I don\u0027t think this describes the struct correctly. `struct Fdt` is also an array backed buffer.\n\nI think this struct has to be renamed to `OwnedFdt` to highlight the fact that the buffer is owned by this struct.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 41
+      },
+      "revId": "528483a04b8142b8a25abf4db1a75476ce6f1b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9903178b_b5054e83",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-14T06:32:19Z",
+      "side": 1,
+      "message": "Changed to `OwnedFdt` -- diff doesn\u0027t match line correctly, so see L118 for the change.",
+      "parentUuid": "a91f704f_5336cb36",
       "range": {
         "startLine": 67,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "371d2c95_78940307",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-14T06:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ebf910d_0a08c913",
+      "range": {
+        "startLine": 78,
+        "startChar": 62,
+        "endLine": 78,
+        "endChar": 66
+      },
+      "revId": "528483a04b8142b8a25abf4db1a75476ce6f1b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e135efd3_85f45ce9",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-04-10T05:16:49Z",
       "side": 1,
       "message": "Drop `_unchedked` as this conversion is safe.",
+      "range": {
+        "startLine": 106,
+        "startChar": 13,
+        "endLine": 106,
+        "endChar": 23
+      },
+      "revId": "528483a04b8142b8a25abf4db1a75476ce6f1b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b040fbdf_61f49407",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-14T06:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e135efd3_85f45ce9",
       "range": {
         "startLine": 106,
         "startChar": 13,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f490cdea_25d919c7",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-14T06:32:19Z",
+      "side": 1,
+      "message": "Changed to take `DPPath` that wraps `\u0026CStr`, so type itself tells it\u0027s nul-terminated.",
+      "parentUuid": "8a509230_7ddf4740",
+      "range": {
+        "startLine": 114,
+        "startChar": 60,
+        "endLine": 114,
+        "endChar": 69
+      },
+      "revId": "528483a04b8142b8a25abf4db1a75476ce6f1b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "458855d3_447e91de",
@@ -175,6 +343,30 @@
       "writtenOn": "2023-04-10T05:16:49Z",
       "side": 1,
       "message": "This doesn\u0027t need to be a method of this struct. It could be a function that accepts \u0026Fdt, and perhaps moved to libfdt/lib.rs.",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 5
+      },
+      "revId": "528483a04b8142b8a25abf4db1a75476ce6f1b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9fb3ec1_93a21e08",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-14T06:32:19Z",
+      "side": 1,
+      "message": "Pulled the method outside of the struct.\n\nBut didn\u0027t move to `libfdt/lib.rs` because I expect more generalized APIs there. If we have this API in the `libfdt/lib.rs` we may end up with adding `get_fdt_prop_bool`, `get_fdt_prop_string`, `get_fdt_prop_u32`, and more.",
+      "parentUuid": "458855d3_447e91de",
       "range": {
         "startLine": 112,
         "startChar": 0,
