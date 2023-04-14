@@ -187,7 +187,9 @@ impl<'a> Config<'a> {
     pub unsafe fn new(data: &'a mut [u8]) -> Result<Self> {
         let header = data.get(..Header::PADDED_SIZE).ok_or(Error::BufferTooSmall)?;
 
-        let header = &*(header.as_ptr() as *const Header);
+        // Safety: Header is non-null and the right size, and we require it to be properly aligned
+        // above.
+        let header = unsafe { &*(header.as_ptr() as *const Header) };
 
         if header.magic != Header::MAGIC {
             return Err(Error::InvalidMagic);
