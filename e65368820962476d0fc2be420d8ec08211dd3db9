@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "174ae5dd_e34955cd",
+        "filename": "tests/hostside/java/com/android/microdroid/test/DebugPolicyHostTests.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-14T08:56:19Z",
+      "side": 1,
+      "message": "Why can\u0027t we set the system property \"after\" pushing the file? Setting the system property before will make it look like a dangling pointer.",
+      "range": {
+        "startLine": 128,
+        "startChar": 11,
+        "endLine": 128,
+        "endChar": 39
+      },
+      "revId": "e65368820962476d0fc2be420d8ec08211dd3db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b63c9b0_8b9fc2de",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-14T08:56:19Z",
+      "side": 1,
+      "message": "Can we drop this?",
+      "range": {
+        "startLine": 71,
+        "startChar": 48,
+        "endLine": 71,
+        "endChar": 54
+      },
+      "revId": "e65368820962476d0fc2be420d8ec08211dd3db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5398ec17_6d5a227d",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-14T08:56:19Z",
+      "side": 1,
+      "message": "... if remove Option from the return type\n\nThis could be `Ok(false)` or `Ok(Default::default())` because we always do `unwrap_or_default()` when using this function.",
+      "range": {
+        "startLine": 74,
+        "startChar": 67,
+        "endLine": 74,
+        "endChar": 76
+      },
+      "revId": "e65368820962476d0fc2be420d8ec08211dd3db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a06ca296_37ab756b",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-14T08:56:19Z",
+      "side": 1,
+      "message": "This could be `?`, and then we don\u0027t need the above assertion.",
+      "range": {
+        "startLine": 87,
+        "startChar": 45,
+        "endLine": 87,
+        "endChar": 54
+      },
+      "revId": "e65368820962476d0fc2be420d8ec08211dd3db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46aa19b0_9e257bee",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-14T08:56:19Z",
+      "side": 1,
+      "message": "What is this for?",
+      "range": {
+        "startLine": 103,
+        "startChar": 12,
+        "endLine": 103,
+        "endChar": 32
+      },
+      "revId": "e65368820962476d0fc2be420d8ec08211dd3db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4a829d8_aa15271f",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-14T08:56:19Z",
+      "side": 1,
+      "message": "format this",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 145
+      },
+      "revId": "e65368820962476d0fc2be420d8ec08211dd3db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4418c5e0_99943abd",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-14T08:56:19Z",
+      "side": 1,
+      "message": "We want to remove this type and its methods in user builds.",
+      "revId": "e65368820962476d0fc2be420d8ec08211dd3db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e98446b_264ef74e",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-14T08:56:19Z",
+      "side": 1,
+      "message": "This is super important!",
+      "range": {
+        "startLine": 219,
+        "startChar": 5,
+        "endLine": 219,
+        "endChar": 79
+      },
+      "revId": "e65368820962476d0fc2be420d8ec08211dd3db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f459b61e_0901dae3",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-14T08:56:19Z",
+      "side": 1,
+      "message": "We may remove these. See the comment above.",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 41
+      },
+      "revId": "e65368820962476d0fc2be420d8ec08211dd3db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8783e6b3_c2224c64",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-14T08:56:19Z",
+      "side": 1,
+      "message": "const PREFIX: \u0026str \u003d \"/sys/...\";\nconst COMMON: \u0026Cstr \u003d cstr!(\"/avf/guest/common\");\nconst LOG: \u0026str \u003d \"log\";",
+      "parentUuid": "b330048e_7e3ae292",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 93
+      },
+      "revId": "528483a04b8142b8a25abf4db1a75476ce6f1b42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e466b184_68586d0a",
         "filename": "virtualizationmanager/src/debug_config.rs",
         "patchSetId": 6
