@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f62a7d51_42a10a72",
+        "filename": "pvmfw/src/rand.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-14T15:17:34Z",
+      "side": 1,
+      "message": "I\u0027m slightly baffled why OnceBox requires Sized; I thought that was the point of a Box.\nYou could do OnceBox\u003cBox\u003cdyn Entropy\u003e\u003e, even if that seems a little silly?\n\nHmm: https://github.com/matklad/once_cell/issues/225",
+      "parentUuid": "6ea1d12a_3dde689d",
+      "revId": "81186a2c527fd4c77e35aed298ac6e95290cb650",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c14dbe58_2f307c8b",
         "filename": "pvmfw/src/rand.rs",
         "patchSetId": 1
