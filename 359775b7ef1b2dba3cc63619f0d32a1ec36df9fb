@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ca82afb_284cedde",
+        "filename": "pvmfw/src/rand/smccc_trng.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-14T14:06:42Z",
+      "side": 1,
+      "message": "+1 to getting rid of the boilerplate and `core::Error` sounds like the right way. Once that\u0027s in, `thiserror` will certainly provide some syntactic sugar for no-std to deal with the boilerplate.",
+      "parentUuid": "9e5da17f_fc730b5c",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "359775b7ef1b2dba3cc63619f0d32a1ec36df9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a5667b7_ae2e3d4c",
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "I think the requirement on Rustdoc comments only applies to libraries, but we should do it anyway as good practice.",
       "parentUuid": "0a5667b7_ae2e3d4c",
+      "range": {
+        "startLine": 55,
+        "startChar": 20,
+        "endLine": 55,
+        "endChar": 21
+      },
+      "revId": "359775b7ef1b2dba3cc63619f0d32a1ec36df9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aebe8adf_878129d0",
+        "filename": "pvmfw/src/rand/smccc_trng.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-14T14:06:42Z",
+      "side": 1,
+      "message": "Renamed `s` to `buffer` and documented the functions.",
+      "parentUuid": "cf18f4f7_58d4f316",
       "range": {
         "startLine": 55,
         "startChar": 20,
