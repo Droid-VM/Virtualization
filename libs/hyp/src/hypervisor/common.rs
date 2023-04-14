@@ -16,6 +16,11 @@
 
 use smccc::Result;
 
+/// Trait to declare UUID of hypervisor
+pub trait UniqueID {
+    const UUID: u128;
+}
+
 /// Trait for the hypervisor.
 pub trait Hypervisor {
     /// Returns protected granule size in bytes.
@@ -44,4 +49,7 @@ pub trait Hypervisor {
     ///
     /// Returns the memory protection granule size in bytes.
     fn hyp_meminfo(&self) -> Result<u64>;
+
+    /// Returns the name of hypervisor.
+    fn name(&self) -> &'static str;
 }

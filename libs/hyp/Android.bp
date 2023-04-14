@@ -9,6 +9,7 @@ rust_library_rlib {
     prefer_rlib: true,
     rustlibs: [
         "libsmccc",
+        "liblog_rust_nostd",
     ],
     no_stdlibs: true,
     stdlibs: [

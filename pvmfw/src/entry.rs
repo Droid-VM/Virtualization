@@ -169,6 +169,11 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
 
     logger::init(LevelFilter::Info).map_err(|_| RebootReason::InternalError)?;
 
+    hyp::detect_hypervisor().map_err(|e| {
+        debug!("{e}");
+        RebootReason::InternalError
+    })?;
+
     // Use debug!() to avoid printing to the UART if we failed to configure it as only local
     // builds that have tweaked the logger::init() call will actually attempt to log the message.
 

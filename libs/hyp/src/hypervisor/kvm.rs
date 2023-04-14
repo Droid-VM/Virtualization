@@ -14,7 +14,7 @@
 
 //! Wrappers around calls to the KVM hypervisor.
 
-use super::common::Hypervisor;
+use super::common::{Hypervisor, UniqueID};
 use smccc::{checked_hvc64, checked_hvc64_expect_zero, Error, Result};
 
 const ARM_SMCCC_KVM_FUNC_HYP_MEMINFO: u32 = 0xc6000002;
@@ -27,6 +27,13 @@ const VENDOR_HYP_KVM_MMIO_GUARD_MAP_FUNC_ID: u32 = 0xc6000007;
 const VENDOR_HYP_KVM_MMIO_GUARD_UNMAP_FUNC_ID: u32 = 0xc6000008;
 
 pub(super) struct KvmHypervisor;
+
+const KVM_UUID: u128 = 0x743a004d_564bcaa9_e911c52e_b66fb428;
+const KVM_NAME: &str = "KVM";
+
+impl UniqueID for KvmHypervisor {
+    const UUID: u128 = KVM_UUID;
+}
 
 impl Hypervisor for KvmHypervisor {
     fn mmio_guard_info(&self) -> Result<u64> {
@@ -88,5 +95,9 @@ impl Hypervisor for KvmHypervisor {
     fn hyp_meminfo(&self) -> Result<u64> {
         let args = [0u64; 17];
         checked_hvc64(ARM_SMCCC_KVM_FUNC_HYP_MEMINFO, args)
+    }
+
+    fn name(&self) -> &'static str {
+        KVM_NAME
     }
 }
