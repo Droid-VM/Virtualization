@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "118ebc3c_cdf164f1",
+        "filename": "pvmfw/src/rand/smccc_trng.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-14T11:12:16Z",
+      "side": 1,
+      "message": "It would be useful, but it doesn\u0027t look like it\u0027s really maintained at all. It\u0027s only had 3 releases within a short time of each other a year ago and then hasn\u0027t been touched. I don\u0027t even know what repository the source is in, the crates.io page just links to the original thiserror repository still.\n\nI\u0027d rather push to get a no-std support into upstream thiserror, though that is probably not going to happen until the `Error` trait makes it into `core`.",
+      "parentUuid": "22ec1584_6acd41ed",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "359775b7ef1b2dba3cc63619f0d32a1ec36df9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a5667b7_ae2e3d4c",
         "filename": "pvmfw/src/rand/smccc_trng.rs",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-14T10:33:59Z",
       "side": 1,
       "message": "Nit: this isn\u0027t a great variable name.\n\nAlso - could we have a comment, especially on what the return value means?\n(Normally comments are required on all pub items - is that disabled for pvmfw? It can be a nuisance, but it\u0027s easy to get out of the habit.)",
+      "range": {
+        "startLine": 55,
+        "startChar": 20,
+        "endLine": 55,
+        "endChar": 21
+      },
+      "revId": "359775b7ef1b2dba3cc63619f0d32a1ec36df9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf18f4f7_58d4f316",
+        "filename": "pvmfw/src/rand/smccc_trng.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-14T11:12:16Z",
+      "side": 1,
+      "message": "I think the requirement on Rustdoc comments only applies to libraries, but we should do it anyway as good practice.",
+      "parentUuid": "0a5667b7_ae2e3d4c",
       "range": {
         "startLine": 55,
         "startChar": 20,
