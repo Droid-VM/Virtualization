@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dcd890e_5aa32b58",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-14T15:27:24Z",
+      "side": 1,
+      "message": "This also never returns Err. Shouldn\u0027t it if reading the register fails?\nOtherwise, we sit in an infinite loop reading the register - do we expect it to eventually succeed?",
+      "range": {
+        "startLine": 58,
+        "startChar": 56,
+        "endLine": 58,
+        "endChar": 62
+      },
+      "revId": "960280dda26eaf20132fad082cdf786241e13269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
