@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b38721a4_ce28b615",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-14T14:07:18Z",
+      "side": 1,
+      "message": "I can\u0027t think of a register that would affect Rust when read.\n\nBut yes, good point about writing; addressed in aosp/2537913",
+      "parentUuid": "d2448e2b_fbe0e02b",
+      "revId": "68ec2b491a09fbd4a9148d1d14a94413aff08408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7ea992b_47f0f1fe",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-04-14T10:47:49Z",
       "side": 1,
       "message": "But this never returns Err?",
+      "range": {
+        "startLine": 52,
+        "startChar": 45,
+        "endLine": 52,
+        "endChar": 51
+      },
+      "revId": "68ec2b491a09fbd4a9148d1d14a94413aff08408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4f5db99_0f5ef99a",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-14T14:07:18Z",
+      "side": 1,
+      "message": "Sure, I\u0027ve inlined `_fill_partial` in `fill_partial` given that there\u0027s no need to translate from `Error` to `super::Error`, as you point out.",
+      "parentUuid": "c7ea992b_47f0f1fe",
       "range": {
         "startLine": 52,
         "startChar": 45,
