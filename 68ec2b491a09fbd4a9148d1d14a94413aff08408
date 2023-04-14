@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d2448e2b_fbe0e02b",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-14T13:46:23Z",
+      "side": 1,
+      "message": "Are you sure that\u0027s true for all possible system registers? It\u0027s definitely not true for writing to system registers, because e.g. you could change the MMU configuration. It might be true for reading, but it\u0027s hard to know without going through all of them as they can have side effects.",
+      "revId": "68ec2b491a09fbd4a9148d1d14a94413aff08408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7ea992b_47f0f1fe",
         "filename": "pvmfw/src/rand/rndr.rs",
         "patchSetId": 3
