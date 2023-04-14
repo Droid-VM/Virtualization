@@ -14,7 +14,7 @@
 
 //! Safe MMIO_GUARD support.
 
-use crate::hypervisor::get_hypervisor;
+use crate::hypervisor::{get_hypervisor, HypervisorCap};
 use crate::util::{page_address, SIZE_4KB};
 use core::{fmt, result};
 
@@ -51,6 +51,12 @@ pub type Result<T> = result::Result<T, Error>;
 /// Initializes the hypervisor by enrolling a MMIO guard and checking the memory granule size.
 pub fn init() -> Result<()> {
     let hyp = get_hypervisor();
+    // Some hypervisors could enroll a fixed range of guest memory as MMIO regions
+    // ahead of guest starting its execution.
+    if !hyp.check_capability(HypervisorCap::MmioGuard) {
+        return Ok(());
+    }
+
     hyp.mmio_guard_enroll().map_err(Error::EnrollFailed)?;
     let mmio_granule = hyp.mmio_guard_info().map_err(Error::InfoFailed)? as usize;
     if mmio_granule != SIZE_4KB {
@@ -61,10 +67,16 @@ pub fn init() -> Result<()> {
 
 /// Maps a memory address to the hypervisor MMIO guard.
 pub fn map(addr: usize) -> Result<()> {
+    if !get_hypervisor().check_capability(HypervisorCap::MmioGuard) {
+        return Ok(());
+    }
     get_hypervisor().mmio_guard_map(page_address(addr)).map_err(Error::MapFailed)
 }
 
 /// Unmaps a memory address from the hypervisor MMIO guard.
 pub fn unmap(addr: usize) -> Result<()> {
+    if !get_hypervisor().check_capability(HypervisorCap::MmioGuard) {
+        return Ok(());
+    }
     get_hypervisor().mmio_guard_unmap(page_address(addr)).map_err(Error::UnmapFailed)
 }

@@ -14,7 +14,7 @@
 
 //! Wrappers around calls to the KVM hypervisor.
 
-use super::common::{Hypervisor, UniqueID};
+use super::common::{Hypervisor, HypervisorCap, UniqueID};
 use smccc::{checked_hvc64, checked_hvc64_expect_zero, Error, Result};
 
 const ARM_SMCCC_KVM_FUNC_HYP_MEMINFO: u32 = 0xc6000002;
@@ -95,6 +95,13 @@ impl Hypervisor for KvmHypervisor {
     fn hyp_meminfo(&self) -> Result<u64> {
         let args = [0u64; 17];
         checked_hvc64(ARM_SMCCC_KVM_FUNC_HYP_MEMINFO, args)
+    }
+
+    fn check_capability(&self, cap: HypervisorCap) -> bool {
+        match cap {
+            HypervisorCap::MemShare => true,
+            HypervisorCap::MmioGuard => true,
+        }
     }
 
     fn name(&self) -> &'static str {

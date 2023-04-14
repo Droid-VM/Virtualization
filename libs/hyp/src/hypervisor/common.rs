@@ -16,6 +16,14 @@
 
 use smccc::Result;
 
+/// An enumeration of different hypervisor capabilities
+pub enum HypervisorCap {
+    /// Capability for guest to share its memory with host
+    MemShare,
+    /// Capability for guest to mark its MMIO regions
+    MmioGuard,
+}
+
 /// Trait to declare UUID of hypervisor
 pub trait UniqueID {
     const UUID: u128;
@@ -44,6 +52,9 @@ pub trait Hypervisor {
     /// [`mem_share`]. The size of the region is equal to the memory protection granule returned by
     /// [`hyp_meminfo`].
     fn mem_unshare(&self, base_ipa: u64) -> Result<()>;
+
+    /// Check if a particular capability is supported
+    fn check_capability(&self, cap: HypervisorCap) -> bool;
 
     /// Queries the memory protection parameters for a protected virtual machine.
     ///

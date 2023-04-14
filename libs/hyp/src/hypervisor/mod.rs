@@ -17,8 +17,8 @@
 mod common;
 mod kvm;
 
-pub use common::Hypervisor;
 use common::UniqueID;
+pub use common::{Hypervisor, HypervisorCap};
 use core::{fmt, result};
 use kvm::KvmHypervisor;
 use log::info;

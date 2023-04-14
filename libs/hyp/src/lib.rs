@@ -19,5 +19,5 @@
 mod hypervisor;
 mod util;
 
-pub use hypervisor::{detect_hypervisor, get_hypervisor, Hypervisor};
+pub use hypervisor::{detect_hypervisor, get_hypervisor, Hypervisor, HypervisorCap};
 pub mod mmio_guard;
