@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22ec1584_6acd41ed",
+        "filename": "pvmfw/src/rand/smccc_trng.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-14T10:33:59Z",
+      "side": 1,
+      "message": "I wonder if it would be useful to import the thiserror-no-std crate. It would get rid of this boilerplate, which I seem to have seen a few times now. And it seems to be maintained by the same people as thiserror, which we use.\n\n@qwandor@google.com any thoughts?",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "359775b7ef1b2dba3cc63619f0d32a1ec36df9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a5667b7_ae2e3d4c",
+        "filename": "pvmfw/src/rand/smccc_trng.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-14T10:33:59Z",
+      "side": 1,
+      "message": "Nit: this isn\u0027t a great variable name.\n\nAlso - could we have a comment, especially on what the return value means?\n(Normally comments are required on all pub items - is that disabled for pvmfw? It can be a nuisance, but it\u0027s easy to get out of the habit.)",
+      "range": {
+        "startLine": 55,
+        "startChar": 20,
+        "endLine": 55,
+        "endChar": 21
+      },
+      "revId": "359775b7ef1b2dba3cc63619f0d32a1ec36df9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
