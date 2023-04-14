@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f604f9ad_454708a4",
+        "filename": "tests/hostside/java/com/android/microdroid/test/DebugPolicyHostTests.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-14T13:03:33Z",
+      "side": 1,
+      "message": "Talked offline -- let me keep this as-is for now.",
+      "parentUuid": "174ae5dd_e34955cd",
+      "range": {
+        "startLine": 128,
+        "startChar": 11,
+        "endLine": 128,
+        "endChar": 39
+      },
+      "revId": "e65368820962476d0fc2be420d8ec08211dd3db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b63c9b0_8b9fc2de",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-14T08:56:19Z",
       "side": 1,
       "message": "Can we drop this?",
+      "range": {
+        "startLine": 71,
+        "startChar": 48,
+        "endLine": 71,
+        "endChar": 54
+      },
+      "revId": "e65368820962476d0fc2be420d8ec08211dd3db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c57220f7_16b8c7bb",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-14T13:03:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b63c9b0_8b9fc2de",
       "range": {
         "startLine": 71,
         "startChar": 48,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "375fcd3e_5849f501",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-14T13:03:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5398ec17_6d5a227d",
+      "range": {
+        "startLine": 74,
+        "startChar": 67,
+        "endLine": 74,
+        "endChar": 76
+      },
+      "revId": "e65368820962476d0fc2be420d8ec08211dd3db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a06ca296_37ab756b",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-04-14T08:56:19Z",
       "side": 1,
       "message": "This could be `?`, and then we don\u0027t need the above assertion.",
+      "range": {
+        "startLine": 87,
+        "startChar": 45,
+        "endLine": 87,
+        "endChar": 54
+      },
+      "revId": "e65368820962476d0fc2be420d8ec08211dd3db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98e35632_e1bbcac1",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-14T13:03:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a06ca296_37ab756b",
       "range": {
         "startLine": 87,
         "startChar": 45,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c957c1ac_f7a86020",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-14T13:03:33Z",
+      "side": 1,
+      "message": "This is to map arbitrary `Err` to `anyhow::Error`. `anyhow::Context` is supported for  `std::error::Error`, but `FdtError` wasn\u0027t.",
+      "parentUuid": "46aa19b0_9e257bee",
+      "range": {
+        "startLine": 103,
+        "startChar": 12,
+        "endLine": 103,
+        "endChar": 32
+      },
+      "revId": "e65368820962476d0fc2be420d8ec08211dd3db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4a829d8_aa15271f",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-04-14T08:56:19Z",
       "side": 1,
       "message": "format this",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 145
+      },
+      "revId": "e65368820962476d0fc2be420d8ec08211dd3db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba9cbf72_f1c8cd1a",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-14T13:03:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4a829d8_aa15271f",
       "range": {
         "startLine": 111,
         "startChar": 0,
@@ -156,6 +300,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfc9ad83_2af9ae41",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-14T13:03:33Z",
+      "side": 1,
+      "message": "Talked offline -- jaewan will try some ideas.",
+      "parentUuid": "4418c5e0_99943abd",
+      "revId": "e65368820962476d0fc2be420d8ec08211dd3db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e98446b_264ef74e",
@@ -179,6 +341,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4e5c89c_4df4600d",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-14T13:03:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2e98446b_264ef74e",
+      "range": {
+        "startLine": 219,
+        "startChar": 5,
+        "endLine": 219,
+        "endChar": 79
+      },
+      "revId": "e65368820962476d0fc2be420d8ec08211dd3db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f459b61e_0901dae3",
@@ -192,6 +378,30 @@
       "writtenOn": "2023-04-14T08:56:19Z",
       "side": 1,
       "message": "We may remove these. See the comment above.",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 41
+      },
+      "revId": "e65368820962476d0fc2be420d8ec08211dd3db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f3bcfcf_bc4e00a9",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1019013
+      },
+      "writtenOn": "2023-04-14T13:03:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f459b61e_0901dae3",
       "range": {
         "startLine": 225,
         "startChar": 0,
