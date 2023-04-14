@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e5da17f_fc730b5c",
+        "filename": "pvmfw/src/rand/smccc_trng.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-14T11:39:56Z",
+      "side": 1,
+      "message": "I think https://github.com/rust-lang/rust/issues/103765 is the real answer to this. I hope it can get stabilised soon.",
+      "parentUuid": "fde050d4_a460bba7",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "359775b7ef1b2dba3cc63619f0d32a1ec36df9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a5667b7_ae2e3d4c",
