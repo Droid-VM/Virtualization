@@ -15,11 +15,13 @@
 //! Wrappers around hypervisor back-ends.
 
 mod common;
+mod gunyah;
 mod kvm;
 
 use common::UniqueID;
 pub use common::{Hypervisor, HypervisorCap};
 use core::{fmt, result};
+use gunyah::GunyahHypervisor;
 use kvm::KvmHypervisor;
 use log::info;
 use smccc::hvc64;
@@ -46,6 +48,7 @@ static mut HYPERVISOR: HypervisorBackend = HypervisorBackend::Kvm(KvmHypervisor)
 
 enum HypervisorBackend {
     Kvm(KvmHypervisor),
+    Gunyah(GunyahHypervisor),
 }
 
 const ARM_SMCCC_VENDOR_HYP_CALL_UID_FUNC_ID: u32 = 0x8600ff01;
@@ -66,6 +69,7 @@ pub fn get_hypervisor() -> &'static dyn Hypervisor {
     unsafe {
         match &HYPERVISOR {
             HypervisorBackend::Kvm(h) => h,
+            HypervisorBackend::Gunyah(h) => h,
         }
     }
 }
@@ -83,6 +87,7 @@ fn set_hypervisor(hyp: HypervisorBackend) -> Result<()> {
 pub fn detect_hypervisor() -> Result<()> {
     match query_vendor_hyp_call_uid() {
         KvmHypervisor::UUID => set_hypervisor(HypervisorBackend::Kvm(KvmHypervisor)),
+        GunyahHypervisor::UUID => set_hypervisor(HypervisorBackend::Gunyah(GunyahHypervisor)),
         u => Err(Error::UnknownHypervisorUUID(u)),
     }
 }
