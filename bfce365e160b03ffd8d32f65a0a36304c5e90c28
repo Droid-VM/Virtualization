@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49b61856_0f964655",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-16T20:06:00Z",
+      "side": 1,
+      "message": "While permission fault would still be caught by the exception handler, we should not be relying on that here, so I have added a `compiler_fence`.",
+      "parentUuid": "27b25811_82f249ce",
+      "range": {
+        "startLine": 246,
+        "startChar": 4,
+        "endLine": 247,
+        "endChar": 42
+      },
+      "revId": "bfce365e160b03ffd8d32f65a0a36304c5e90c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b864c0d_1574d068",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-11T11:43:18Z",
       "side": 1,
       "message": "Technically, the DSB should be right before the read for the PTE is issued, as code between here and there could set the dirty bit on new pages.\n\nThis implementation works for pvmfw because all of the sensitive data will have been written to before this method is called but overall, it would be cleaner to have the barrier in the `modify_range` traversal (at a performance cost) and/or document this in the API and a separate comment here; note that these considerations aren\u0027t related with the [reasons why `asm!` is `unsafe`](https://doc.rust-lang.org/reference/inline-assembly.html#rules-for-inline-assembly).",
+      "range": {
+        "startLine": 286,
+        "startChar": 54,
+        "endLine": 286,
+        "endChar": 84
+      },
+      "revId": "bfce365e160b03ffd8d32f65a0a36304c5e90c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5022c144_812d76a8",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-16T20:06:00Z",
+      "side": 1,
+      "message": "Moved to `flush_dirty_range`, right before reading PTE flags.",
+      "parentUuid": "7b864c0d_1574d068",
       "range": {
         "startLine": 286,
         "startChar": 54,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72129e12_7f48fe04",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-16T20:06:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd7d0ab7_caab7d5c",
+      "range": {
+        "startLine": 289,
+        "startChar": 26,
+        "endLine": 289,
+        "endChar": 28
+      },
+      "revId": "bfce365e160b03ffd8d32f65a0a36304c5e90c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c45fcda8_722bac18",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9ede257_21524649",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-16T20:06:00Z",
+      "side": 1,
+      "message": "Yes, updated.",
+      "parentUuid": "c45fcda8_722bac18",
+      "range": {
+        "startLine": 296,
+        "startChar": 29,
+        "endLine": 296,
+        "endChar": 94
+      },
+      "revId": "bfce365e160b03ffd8d32f65a0a36304c5e90c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7b7fc97_16c893bb",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-04-12T08:01:48Z",
       "side": 1,
       "message": "Why not keep `DATA` as it is and introduce\n```\nconst DATA_DBM: Attributes \u003d RODATA.union(Attributes::DBM);\n```\nto make the following easier to follow:\n```\nif helpers::dbm_available() { DATA_DBM } else { DATA }\n```\n?",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 36
+      },
+      "revId": "bfce365e160b03ffd8d32f65a0a36304c5e90c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "533562cd_2309e856",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-16T20:06:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7b7fc97_16c893bb",
       "range": {
         "startLine": 45,
         "startChar": 8,
