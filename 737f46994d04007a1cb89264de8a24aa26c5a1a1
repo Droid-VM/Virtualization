@@ -26,6 +26,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b655019_a20b7ac4",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-16T20:09:23Z",
+      "side": 1,
+      "message": "The smallert",
+      "parentUuid": "56dba691_bcd8a492",
+      "range": {
+        "startLine": 86,
+        "startChar": 20,
+        "endLine": 86,
+        "endChar": 51
+      },
+      "revId": "737f46994d04007a1cb89264de8a24aa26c5a1a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b12d828e_ee452cbd",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-16T20:09:23Z",
+      "side": 1,
+      "message": "The mutex is now only locked when updating the page tables. We should not be modifying `MemoryTracker` during these operations.",
+      "parentUuid": "56dba691_bcd8a492",
+      "range": {
+        "startLine": 86,
+        "startChar": 20,
+        "endLine": 86,
+        "endChar": 51
+      },
+      "revId": "737f46994d04007a1cb89264de8a24aa26c5a1a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "471e606d_d9bb70d8",
         "filename": "pvmfw/src/memory.rs",
         "patchSetId": 3
@@ -37,6 +85,30 @@
       "writtenOn": "2023-04-11T12:07:45Z",
       "side": 1,
       "message": "nit; format:\n```\n/// Clears read-only flag on a PTE, making it writable-dirty.\n///\n/// Used when dirty state is managed in software to handle permission faults\n/// on read-only descriptors.\n// TODO: find references in arm arm\n```",
+      "range": {
+        "startLine": 484,
+        "startChar": 0,
+        "endLine": 485,
+        "endChar": 69
+      },
+      "revId": "737f46994d04007a1cb89264de8a24aa26c5a1a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "951f4786_970e797f",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-16T20:09:23Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "471e606d_d9bb70d8",
       "range": {
         "startLine": 484,
         "startChar": 0,
@@ -70,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea05768f_ab87aca7",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-16T20:09:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98e4e29a_3760407b",
+      "range": {
+        "startLine": 501,
+        "startChar": 0,
+        "endLine": 503,
+        "endChar": 22
+      },
+      "revId": "737f46994d04007a1cb89264de8a24aa26c5a1a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e360f3b5_73d45723",
@@ -93,6 +189,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0e1b410_ecf916fa",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-16T20:09:23Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "e360f3b5_73d45723",
+      "range": {
+        "startLine": 60,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 87
+      },
+      "revId": "737f46994d04007a1cb89264de8a24aa26c5a1a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60eaddee_0e64f11a",
@@ -106,6 +226,30 @@
       "writtenOn": "2023-04-11T12:07:45Z",
       "side": 1,
       "message": "Why not `writable_attr`?",
+      "range": {
+        "startLine": 66,
+        "startChar": 39,
+        "endLine": 66,
+        "endChar": 43
+      },
+      "revId": "737f46994d04007a1cb89264de8a24aa26c5a1a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1d11fd5_8b55d214",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-16T20:09:23Z",
+      "side": 1,
+      "message": "No need, dirty state of `appended_payload_range` will be handled either by `MemoryTracker::handle_permission_fault` (in software), or in hardware. \n\nWe do, however, still need a special case when mapping `writable_region`. Since it contains the stack and the heap, when dirty state is managed in software, unless we map it as writable, we will just keep getting permission faults.",
+      "parentUuid": "60eaddee_0e64f11a",
       "range": {
         "startLine": 66,
         "startChar": 39,
