@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9629a3e_74be78fe",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-16T20:05:40Z",
+      "side": 1,
+      "message": "Resolved in [this](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2537915/1?usp\u003drelated-change) CL.",
+      "parentUuid": "c49260bc_53848f8c",
+      "range": {
+        "startLine": 59,
+        "startChar": 15,
+        "endLine": 59,
+        "endChar": 32
+      },
+      "revId": "6e38ff5eb97677b183ef234de85c030be3155eba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2542102_7cbfe323",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-11T11:27:38Z",
       "side": 1,
       "message": "To make this code clearer and scale better, should we introduce an `Esr` enum and turn this into an arm of the `match` below instead of filtering the ESR twice (line 72 then line 58)?",
+      "range": {
+        "startLine": 73,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 56
+      },
+      "revId": "6e38ff5eb97677b183ef234de85c030be3155eba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de21b84d_f3820464",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-16T20:05:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2542102_7cbfe323",
       "range": {
         "startLine": 73,
         "startChar": 8,
