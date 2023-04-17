@@ -89,15 +89,22 @@ impl fmt::Display for Esr {
     }
 }
 
+/// Macro which locks the global memory tracker instance and performs arbitrary operations with it.
+macro_rules! mem_op {
+    (|$memory:ident| $arg:expr) => {{
+        let mut guard = MEMORY.try_lock().ok_or(HandleExceptionError::PageTableUnavailable)?;
+        let $memory = guard.as_mut().ok_or(HandleExceptionError::PageTableNotInitialized)?;
+        Ok($arg?)
+    }};
+}
+
 fn handle_exception(esr: Esr, far: usize) -> Result<(), HandleExceptionError> {
     // Handle all translation faults on both read and write, and MMIO guard map
     // flagged invalid pages or blocks that caused the exception.
+    // Handle permission faults for DBM flagged entries, and flag them as dirty on write.
     match esr {
-        Esr::DataAbortTranslationFault => {
-            let mut locked = MEMORY.try_lock().ok_or(HandleExceptionError::PageTableUnavailable)?;
-            let memory = locked.as_mut().ok_or(HandleExceptionError::PageTableNotInitialized)?;
-            Ok(memory.handle_mmio_fault(far)?)
-        }
+        Esr::DataAbortTranslationFault => mem_op!(|mem| mem.handle_mmio_fault(far)),
+        Esr::DataAbortPermissionFault => mem_op!(|mem| mem.handle_permission_fault(far)),
         _ => Err(HandleExceptionError::UnknownException),
     }
 }
