@@ -158,6 +158,30 @@
       },
       "revId": "e783eea874b09ce2aa99b645ca376d061cacec9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "557ca0dd_389b571b",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-17T06:45:02Z",
+      "side": 1,
+      "message": "Ok let me add some validation to ensure \u0027size\u0027 is same in both places and avoid adding \u0027size\u0027 property when \u0027reg\u0027 is being added. Thanks!",
+      "parentUuid": "1d1ef877_14d94da2",
+      "range": {
+        "startLine": 511,
+        "startChar": 8,
+        "endLine": 511,
+        "endChar": 73
+      },
+      "revId": "e783eea874b09ce2aa99b645ca376d061cacec9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
