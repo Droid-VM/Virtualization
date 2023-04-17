@@ -91,6 +91,98 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6469a91f_e39b2d3b",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T11:02:47Z",
+      "side": 1,
+      "message": "nit:\n```\nlet start \u003d usize::try_from(addr).unwrap();\nlet size \u003d size.try_into().unwrap();\nlet end \u003d start.checked_add(size).ok_or_else({\n    error!(\"swiotlb addr {addr:#x} size {size:#x} overflow\");\n    Err(RebootReason::InvalidFdt)\n})?;\n```\nbut we might just store `SwiotlbInfo::size`, `SwiotlbInfo::align`, and your new `SwiotlbInfo::addr` as `usize` to avoid littering the code with these conversions back and forth ...",
+      "range": {
+        "startLine": 487,
+        "startChar": 34,
+        "endLine": 487,
+        "endChar": 45
+      },
+      "revId": "e783eea874b09ce2aa99b645ca376d061cacec9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "003e888c_6b331c82",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T11:02:47Z",
+      "side": 1,
+      "message": "That\u0027s a neat implementation!\n\nnit: would you mind introducing `helpers::range_contains(a: \u0026Range\u003cusize\u003e, b: \u0026Range\u003cusize\u003e) -\u003e bool` and use it here? Thanks",
+      "range": {
+        "startLine": 494,
+        "startChar": 60,
+        "endLine": 494,
+        "endChar": 62
+      },
+      "revId": "e783eea874b09ce2aa99b645ca376d061cacec9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b5ccd76_ee3e2d97",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T11:02:47Z",
+      "side": 1,
+      "message": "Nit:\n```\nerror!(\"swiotlb range {start:#x}-{end:#x} not part of memory range\");\n```\nor even\n```\nlet swiotlb \u003d start..end;\nif !range_contains(memory, swiotlb) {\n    error!(\"swiotlb range {swiotlb:#x?} not part of memory range {memory:#x?}\");\n```\n\nAs you\u0027re also doing the extra work of `if let Some(addr) { ... }` in a child commit, WDYT of introducing `SwiotlbInfo::fixed_range(\u0026self) -\u003e Option\u003cRange\u003cusize\u003e\u003e`?",
+      "range": {
+        "startLine": 495,
+        "startChar": 12,
+        "endLine": 495,
+        "endChar": 92
+      },
+      "revId": "e783eea874b09ce2aa99b645ca376d061cacec9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f705fa7d_6ef69e27",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T11:02:47Z",
+      "side": 1,
+      "message": "Simplify this into\n```\nnode.appendprop_addrrange(cstr!(\"reg\"), addr, swiotlb_info.size)?;\n```",
+      "range": {
+        "startLine": 510,
+        "startChar": 13,
+        "endLine": 510,
+        "endChar": 20
+      },
+      "revId": "e783eea874b09ce2aa99b645ca376d061cacec9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3601c6c8_98ed8bf9",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 1
@@ -174,6 +266,30 @@
       "side": 1,
       "message": "Ok let me add some validation to ensure \u0027size\u0027 is same in both places and avoid adding \u0027size\u0027 property when \u0027reg\u0027 is being added. Thanks!",
       "parentUuid": "1d1ef877_14d94da2",
+      "range": {
+        "startLine": 511,
+        "startChar": 8,
+        "endLine": 511,
+        "endChar": 73
+      },
+      "revId": "e783eea874b09ce2aa99b645ca376d061cacec9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7493d0c1_9a753ca2",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T11:02:47Z",
+      "side": 1,
+      "message": "Doesn\u0027t the [Linux documentation](https://www.kernel.org/doc/Documentation/devicetree/bindings/reserved-memory/reserved-memory.yaml) state that it\u0027s either `reg` OR `size`, not both:\n```\noneOf:\n  - oneOf:\n      - required:\n          - reg\n\n      - required:\n          - size\n```\n? Why is crosvm still adding a `\"size\"` property when a `\"reg\"` is being used?\n\nAFAICT, the logic expected by the linux kernel (TBD if that\u0027s what the kernel driver does) is\n```\nlet compatible_nodes \u003d fdt.compatible_nodes(cstr!(\"restricted-dma-pool\"))?;\nlet node \u003d compatible_nodes.next().ok_or(FdtError::NotFound)?;\nlet (addr, size) \u003d if let Some(reg) \u003d node.reg()? {\n    let reg \u003d reg.next().ok_or(FdtError::InvalidFdt)?;\n    (Some(reg.addr), reg.size)\n} else {\n    let size \u003d node.getprop_u64(cstr!(\"size\"))?.ok_or(FdtError::NotFound)?;\n    (None, size)\n}\n```\nIsn\u0027t it?",
+      "parentUuid": "557ca0dd_389b571b",
       "range": {
         "startLine": 511,
         "startChar": 8,
