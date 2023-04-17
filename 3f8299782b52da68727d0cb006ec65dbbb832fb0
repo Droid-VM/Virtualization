@@ -143,6 +143,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "22194c06_8a15f5e6",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-17T09:21:32Z",
+      "side": 1,
+      "message": "Mm, just think that for the uuid \u003d\u003e Hypervisor conversion, maybe we can just implement `impl TryFrom\u003cu128\u003e for HypervisorBackend` or `impl TryFrom\u003cUuid\u003e for HypervisorBackend`?",
+      "parentUuid": "08ee2724_27742630",
+      "range": {
+        "startLine": 85,
+        "startChar": 8,
+        "endLine": 85,
+        "endChar": 27
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "813cd714_33d5f825",
         "filename": "libs/hyp/src/hypervisor/mod.rs",
         "patchSetId": 1
