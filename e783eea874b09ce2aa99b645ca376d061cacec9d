@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d4ea2c2_d7e39ce8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-17T06:19:33Z",
+      "side": 1,
+      "message": "On Gunyah platform, the reg property is always specified. It communicates the range (IPA, size) at which shared memory is available for swiotlb\u0027s use.",
+      "parentUuid": "d35857bf_dec280b0",
+      "range": {
+        "startLine": 9,
+        "startChar": 19,
+        "endLine": 9,
+        "endChar": 29
+      },
+      "revId": "e783eea874b09ce2aa99b645ca376d061cacec9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5d3fa8b6_e62cfa31",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-04-17T06:01:41Z",
       "side": 1,
       "message": "This wasn\u0027t in the original dt, right? This also is redundant as we already have this in the `size` prop. Could you explain why we need this new item in the patched DT?",
+      "range": {
+        "startLine": 511,
+        "startChar": 8,
+        "endLine": 511,
+        "endChar": 73
+      },
+      "revId": "e783eea874b09ce2aa99b645ca376d061cacec9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25c10360_d1ad56a8",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-17T06:19:33Z",
+      "side": 1,
+      "message": "reg property conveys the IPA most importantly that swiotlb driver can use. Without that, guesy will try to allocate from its private memory and \"share\" with host using an API that does not exist on Gunyah. IF the \u0027reg\u0027 property is present, swiotlb driver will instead make use of the suggested range (rather than allocate + share).\n\nRegarding duplicate information in size and reg, do you suggest we remove the \u0027size\u0027 property when \u0027reg\u0027 is being added?",
+      "parentUuid": "3601c6c8_98ed8bf9",
       "range": {
         "startLine": 511,
         "startChar": 8,
