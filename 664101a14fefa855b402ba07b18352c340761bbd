@@ -92,6 +92,30 @@
       },
       "revId": "664101a14fefa855b402ba07b18352c340761bbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60291502_5c6c4a08",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T13:40:38Z",
+      "side": 1,
+      "message": "IMO, implementing `TryFrom\u003cUuid\u003e for Hypervisor` sounds like we would be abusing the meaning of the trait because mapping a UUID to a hypervisor backend is more than a regular type conversion (think `i64` to `i32`).\n\nRegarding making it a `lazy_static`, I think that `OnceCell` (as I recommend [here](https://android-review.googlesource.com/c/platform/packages/modules/Virtualization/+/2537998/1/libs/hyp/src/hypervisor/mod.rs#88), which wouldn\u0027t require `mut` either) would be more fitting as it clearly uses a reader-writer model (initializer writes, other uses read) instead of initializing on first access, which could potential happen when reading if the initializer didn\u0027t run. From the [docs](https://docs.rs/lazy_static/latest/lazy_static/):\n\n\u003e On first deref, `EXPR` gets evaluated and stored internally, such that all further derefs can return a reference to the same object. Note that this can lead to deadlocks if you have multiple lazy statics that depend on each other in their initialization.",
+      "parentUuid": "b63f393b_fcbcc54c",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 9
+      },
+      "revId": "664101a14fefa855b402ba07b18352c340761bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
