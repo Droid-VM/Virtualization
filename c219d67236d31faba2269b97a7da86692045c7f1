@@ -103,6 +103,30 @@
       },
       "revId": "c219d67236d31faba2269b97a7da86692045c7f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22af0d9f_302b6024",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-17T08:52:48Z",
+      "side": 1,
+      "message": "Let\u0027s stick with \"granule\" for both:\n* `hyp_meminfo` - `mem_prot_granule` or something like that?\n* `mmio_guard_info` - `mmio_guard_granule`\n\nI\u0027m looking at the pKVM source and they\u0027re (unsurprisingly) defined as the same constant, although we should not depend on that:\n```\n        case ARM_SMCCC_VENDOR_HYP_KVM_MMIO_GUARD_INFO_FUNC_ID:\n        case ARM_SMCCC_VENDOR_HYP_KVM_HYP_MEMINFO_FUNC_ID:\n                return pkvm_meminfo_call(hyp_vcpu); // returns PAGE_SIZE\n```",
+      "parentUuid": "d21074a7_28926564",
+      "range": {
+        "startLine": 46,
+        "startChar": 7,
+        "endLine": 46,
+        "endChar": 18
+      },
+      "revId": "c219d67236d31faba2269b97a7da86692045c7f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
