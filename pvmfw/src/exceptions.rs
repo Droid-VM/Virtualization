@@ -51,6 +51,7 @@ impl From<MemoryTrackerError> for HandleExceptionError {
 #[derive(Debug, PartialEq, Copy, Clone)]
 enum Esr {
     DataAbortTranslationFault,
+    DataAbortPermissionFault,
     DataAbortSyncExternalAbort,
     Unknown(usize),
 }
@@ -59,6 +60,8 @@ impl Esr {
     const EXT_DABT_32BIT: usize = 0x96000010;
     const TRANSL_FAULT_BASE_32BIT: usize = 0x96000004;
     const TRANSL_FAULT_ISS_MASK_32BIT: usize = !0x43;
+    const PERM_FAULT_BASE_32BIT: usize = 0x9600004C;
+    const PERM_FAULT_ISS_MASK_32BIT: usize = !0x3;
 }
 
 impl From<usize> for Esr {
@@ -67,6 +70,8 @@ impl From<usize> for Esr {
             Self::DataAbortSyncExternalAbort
         } else if esr & Self::TRANSL_FAULT_ISS_MASK_32BIT == Self::TRANSL_FAULT_BASE_32BIT {
             Self::DataAbortTranslationFault
+        } else if esr & Self::PERM_FAULT_ISS_MASK_32BIT == Self::PERM_FAULT_BASE_32BIT {
+            Self::DataAbortPermissionFault
         } else {
             Self::Unknown(esr)
         }
@@ -78,21 +83,25 @@ impl fmt::Display for Esr {
         match self {
             Self::DataAbortSyncExternalAbort => write!(f, "Synchronous external abort"),
             Self::DataAbortTranslationFault => write!(f, "Translation fault"),
+            Self::DataAbortPermissionFault => write!(f, "Permission fault"),
             Self::Unknown(v) => write!(f, "Unknown exception esr={v:#08x}"),
         }
     }
 }
 
 fn handle_exception(esr: Esr, far: usize) -> Result<(), HandleExceptionError> {
+    if esr != Esr::DataAbortPermissionFault && esr != Esr::DataAbortTranslationFault {
+        return Err(HandleExceptionError::UnknownException);
+    }
     // Handle all translation faults on both read and write, and MMIO guard map
     // flagged invalid pages or blocks that caused the exception.
-    match esr {
-        Esr::DataAbortTranslationFault => {
-            let mut locked = MEMORY.try_lock().ok_or(HandleExceptionError::PageTableUnavailable)?;
-            let memory = locked.as_mut().ok_or(HandleExceptionError::PageTableNotInitialized)?;
-            Ok(memory.handle_mmio_fault(far)?)
-        }
-        _ => Err(HandleExceptionError::UnknownException),
+    // Handle permission faults for DBM flagged entries, and flag them as dirty on write.
+    let mut locked = MEMORY.try_lock().ok_or(HandleExceptionError::PageTableUnavailable)?;
+    let memory = locked.as_mut().ok_or(HandleExceptionError::PageTableNotInitialized)?;
+    if esr == Esr::DataAbortTranslationFault {
+        Ok(memory.handle_mmio_fault(far)?)
+    } else {
+        Ok(memory.handle_permission_fault(far)?)
     }
 }
 
