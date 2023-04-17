@@ -16,9 +16,9 @@
 
 #![deny(unsafe_op_in_unsafe_fn)]
 
-use crate::helpers::{self, align_down, align_up, page_4kb_of, SIZE_4KB};
+use crate::helpers::{self, align_down, align_up, dbm_available, page_4kb_of, SIZE_4KB};
 use crate::mmu;
-use crate::{dsb, isb, tlbi};
+use crate::{dsb, isb, read_sysreg, tlbi, write_sysreg};
 use aarch64_paging::paging::{Attributes, Descriptor, MemoryRegion as VaRange};
 use alloc::alloc::alloc_zeroed;
 use alloc::alloc::dealloc;
@@ -31,6 +31,7 @@ use core::num::NonZeroUsize;
 use core::ops::Range;
 use core::ptr::NonNull;
 use core::result;
+use core::sync::atomic::{compiler_fence, Ordering};
 use hyp::get_hypervisor;
 use log::error;
 use spin::mutex::SpinMutex;
@@ -144,6 +145,8 @@ type Result<T> = result::Result<T, MemoryTrackerError>;
 impl MemoryTracker {
     const CAPACITY: usize = 5;
     const MMIO_CAPACITY: usize = 5;
+    // TCR_EL1.{HA,HD} bits controlling hardware management of access and dirty state
+    const TCR_EL1_HA_HD_BITS: usize = 3 << 39;
 
     /// Create a new instance from an active page table, covering the maximum RAM size.
     pub fn new(page_table: mmu::PageTable) -> Self {
@@ -305,11 +308,31 @@ impl MemoryTracker {
             .modify_range(&(addr..addr + 1), &mark_dirty_block)
             .map_err(|_| MemoryTrackerError::RangeUpdateFailed)
     }
+
+    /// Enables hardware dirty state management if available.
+    pub fn track_dirty_pages() {
+        Self::set_dbm_enabled(true)
+    }
+
+    fn set_dbm_enabled(enabled: bool) {
+        if dbm_available() {
+            let mut tcr = read_sysreg!("tcr_el1");
+            if enabled {
+                tcr |= Self::TCR_EL1_HA_HD_BITS
+            } else {
+                tcr &= !Self::TCR_EL1_HA_HD_BITS
+            };
+            // Safe because it writes to a system register and does not affect Rust.
+            unsafe { write_sysreg!("tcr_el1", tcr) }
+            compiler_fence(Ordering::SeqCst);
+        }
+    }
 }
 
 impl Drop for MemoryTracker {
     fn drop(&mut self) {
         self.flush_dirty_pages().unwrap();
+        Self::set_dbm_enabled(false)
     }
 }
 
