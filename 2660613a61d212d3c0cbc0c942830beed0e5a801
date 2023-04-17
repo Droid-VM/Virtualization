@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba6717dd_369c8dca",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-17T06:37:17Z",
+      "side": 1,
+      "message": "At least for the current capabilities that we are adding, its always true for KVM and always false for Gunyah.",
+      "parentUuid": "66486ce6_0f95daaf",
+      "range": {
+        "startLine": 100,
+        "startChar": 54,
+        "endLine": 100,
+        "endChar": 58
+      },
+      "revId": "2660613a61d212d3c0cbc0c942830beed0e5a801",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9f6e432c_bbe9864c",
         "filename": "pvmfw/src/memory.rs",
         "patchSetId": 1
@@ -37,6 +61,24 @@
       "writtenOn": "2023-04-17T06:28:11Z",
       "side": 1,
       "message": "add SAFETY comment",
+      "revId": "2660613a61d212d3c0cbc0c942830beed0e5a801",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "433272fa_bbd22c08",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-17T06:37:17Z",
+      "side": 1,
+      "message": "Sure will add in next version.",
+      "parentUuid": "9f6e432c_bbe9864c",
       "revId": "2660613a61d212d3c0cbc0c942830beed0e5a801",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
