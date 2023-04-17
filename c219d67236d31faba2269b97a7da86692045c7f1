@@ -79,6 +79,30 @@
       },
       "revId": "c219d67236d31faba2269b97a7da86692045c7f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d21074a7_28926564",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-17T08:46:29Z",
+      "side": 1,
+      "message": "We can rename this one `memory_protection_granule()` and the function `mmio_guard_info` as `page_size()` according to its intent. wdyt?",
+      "parentUuid": "f7cad495_1cf35e34",
+      "range": {
+        "startLine": 46,
+        "startChar": 7,
+        "endLine": 46,
+        "endChar": 18
+      },
+      "revId": "c219d67236d31faba2269b97a7da86692045c7f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
