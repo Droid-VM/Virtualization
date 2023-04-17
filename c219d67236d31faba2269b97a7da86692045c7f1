@@ -33,6 +33,52 @@
       "message": "Thanks!",
       "revId": "c219d67236d31faba2269b97a7da86692045c7f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d52f05f_d88333b6",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-17T08:33:50Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 22,
+        "startChar": 7,
+        "endLine": 22,
+        "endChar": 22
+      },
+      "revId": "c219d67236d31faba2269b97a7da86692045c7f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7cad495_1cf35e34",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-17T08:33:50Z",
+      "side": 1,
+      "message": "Can we name this accordingly. I know the KVM hypercall is called this, but the generic name should reflect the actual intent - `get_page_size` or `get_granule`?",
+      "range": {
+        "startLine": 46,
+        "startChar": 7,
+        "endLine": 46,
+        "endChar": 18
+      },
+      "revId": "c219d67236d31faba2269b97a7da86692045c7f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
