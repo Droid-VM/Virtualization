@@ -206,6 +206,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46875d4c_58cc328c",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-17T15:55:38Z",
+      "side": 1,
+      "message": "But the VirtualizationService process.",
+      "parentUuid": "2a0f17f1_bac6e778",
+      "range": {
+        "startLine": 43,
+        "startChar": 54,
+        "endLine": 43,
+        "endChar": 75
+      },
+      "revId": "9bf5726f3bdc59052317e48301f935f7c86d14bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db1b5acb_63c92769",
@@ -337,6 +361,30 @@
       "side": 1,
       "message": "Yeah, I also considered this. However, `initializeWritablePartition` is in `VirtualizationService` instead of the singleton `VirtualizationServiceInternal`. The client cannot call `VirtualizationService` from `VirtualMachineService` easily.\n\nDo you know how do we plan to distinguish `VirtualizationService` and `VirtualizationServiceInternal` in the long run? If we move the implementation of `initializeWritablePartition` from VS to VSInternal, is it against the design of these two services?\n\nI added a TODO here. We can address this in a subsequent cl.",
       "parentUuid": "e0d86be4_3a2f42b3",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 9
+      },
+      "revId": "9bf5726f3bdc59052317e48301f935f7c86d14bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfec1713_b1754361",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-17T15:55:38Z",
+      "side": 1,
+      "message": "VirtualizationService is everything that can be called by the VM owner, and VSI is for virt mgr -\u003e virt service communication.\n\nBut initializeWritablePartition is just a lump of code, it doesn\u0027t need any special permissions. We could actually move it to the client code, but there was no particular need.\n\nI\u0027m sure we can plumb things so that the service impls know about each other, if need be. Or we can expose initializeWritablePartition in multiple places.\n\nBut the important point is that we can\u0027t initialize the partition here, because that will mean that it will be overwritten on the next run, which won\u0027t work.\n\n\u003e  The client cannot call VirtualizationService from VirtualMachineService easily.\n\nWhat\u0027s the client here?",
+      "parentUuid": "d336a135_c33a8a52",
       "range": {
         "startLine": 51,
         "startChar": 4,
