@@ -258,6 +258,30 @@
       },
       "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2450cc7c_a143709e",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-17T11:00:37Z",
+      "side": 1,
+      "message": "If we allow get_hypervisor() to return a Result, then I think it will require all callers of get_hypervisor() to check and handle Err case, as well as add additional Error values. For example:\n\nhttps://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/libs/hyp/src/mmio_guard.rs\n\n/// Maps a memory address to the hypervisor MMIO guard.\npub fn map(addr: usize) -\u003e Result\u003c()\u003e {\n    get_hypervisor().mmio_guard_map(page_address(addr)).map_err(Error::MapFailed)\n}\n\nwill become:\n\n/// Maps a memory address to the hypervisor MMIO guard.\npub fn map(addr: usize) -\u003e Result\u003c()\u003e {    \nget_hypervisor().map_err(Error::UnknownHypervisor)?\n          .mmio_guard_map(page_address(addr)).map_err(Error::MapFailed)\n}\n\nInstead of having to deal with this uncertainity of get_hypervisor() returning Error everytime, IMHO its better to validate the hypervisor we are running very early in entry.rs, fail initialization if its an unknown hypervisor and later have get_hypervisor() return some deterministic result (success every time). I can put an assert!(HYPERVISOR.is_some()) to handle the case where get_hypervisor() is called before hypervisor is detected!",
+      "parentUuid": "d900afe8_5c87c735",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 1
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
