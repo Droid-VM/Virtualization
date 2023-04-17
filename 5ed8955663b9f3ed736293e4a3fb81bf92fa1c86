@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5735786e_82943be2",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T17:11:50Z",
+      "side": 1,
+      "message": "Could this be a macro taking a literal string i.e. `dsb!(\"ish\")`?",
+      "range": {
+        "startLine": 186,
+        "startChar": 14,
+        "endLine": 186,
+        "endChar": 17
+      },
+      "revId": "5ed8955663b9f3ed736293e4a3fb81bf92fa1c86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "529727bd_6af061ea",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T17:11:50Z",
+      "side": 1,
+      "message": "Same here: `tlbi!(\"vale1\", asid, addr)`",
+      "range": {
+        "startLine": 205,
+        "startChar": 19,
+        "endLine": 205,
+        "endChar": 24
+      },
+      "revId": "5ed8955663b9f3ed736293e4a3fb81bf92fa1c86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66b3c44f_df3b6254",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T17:11:50Z",
+      "side": 1,
+      "message": "same as in another commit: `.ok_or(())?`",
+      "range": {
+        "startLine": 490,
+        "startChar": 34,
+        "endLine": 490,
+        "endChar": 40
+      },
+      "revId": "5ed8955663b9f3ed736293e4a3fb81bf92fa1c86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be1d8d6e_ee557667",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T17:11:50Z",
+      "side": 1,
+      "message": "There\u0027s no (easy) way to get that from `aarch64_paging`, I suppose?",
+      "range": {
+        "startLine": 495,
+        "startChar": 28,
+        "endLine": 495,
+        "endChar": 32
+      },
+      "revId": "5ed8955663b9f3ed736293e4a3fb81bf92fa1c86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
