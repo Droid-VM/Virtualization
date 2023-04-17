@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "215c6247_c2784a41",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-17T06:15:17Z",
+      "side": 1,
+      "message": "Yes only the swiotlb range is indicated as a separate range in memory reg property.",
+      "parentUuid": "78fdaffd_7df472b6",
+      "range": {
+        "startLine": 11,
+        "startChar": 54,
+        "endLine": 11,
+        "endChar": 65
+      },
+      "revId": "8b9050ede38cbf1650b51548c7604b9e76a8814b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f890a6bf_57d16858",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-17T06:01:37Z",
       "side": 1,
       "message": "do you have any reason for representing it as a separate range? why can\u0027t crosvm merge the swiotlb range and the main memory range into one?",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 12
+      },
+      "revId": "8b9050ede38cbf1650b51548c7604b9e76a8814b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23ba199b_67a1bf17",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-17T06:15:17Z",
+      "side": 1,
+      "message": "Assuming they are contiguous (which happens to be true in this case - swiotlb is laid immediately after main memory range), I think CrosVM can merge the regions into one. Let me submit a change into CrosVM and check for feedback.",
+      "parentUuid": "f890a6bf_57d16858",
       "range": {
         "startLine": 12,
         "startChar": 0,
