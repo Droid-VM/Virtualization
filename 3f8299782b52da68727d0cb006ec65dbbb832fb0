@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7f04ce1_a548df18",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-17T07:35:34Z",
+      "side": 1,
+      "message": "I don\u0027t think we really need this trait, see the other comment.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 1
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d680187_959468e8",
         "filename": "libs/hyp/src/hypervisor/kvm.rs",
         "patchSetId": 1
@@ -74,6 +97,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7507a54_c3399128",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-17T07:35:34Z",
+      "side": 1,
+      "message": "If the `name()` is only needed for logging, can we log directly in the caller of this function `detect_hypervisor()` to avoid adding an additional method to the trait?",
+      "range": {
+        "startLine": 78,
+        "startChar": 52,
+        "endLine": 78,
+        "endChar": 59
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08ee2724_27742630",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-17T07:35:34Z",
+      "side": 1,
+      "message": "Why not just adding the UUID to the HypervisorBackend enum? we can have something like \n```\nmatch query_vendor_hyp_call_uid() {\nHypervisorBackend::Kvm.uuid() \u003d\u003e ..\n...\n```\nIt\u0027s more straightforward and we don\u0027t need to add another layer of abstraction",
+      "range": {
+        "startLine": 85,
+        "startChar": 8,
+        "endLine": 85,
+        "endChar": 27
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "813cd714_33d5f825",
         "filename": "libs/hyp/src/hypervisor/mod.rs",
         "patchSetId": 1
@@ -133,6 +202,30 @@
       "side": 1,
       "message": "If it\u0027s an option type, we could do something like this:\n\n```\nstatic mut HYPERVISOR: Option\u003cHypervisorBackend\u003e \u003d None;\n\nfn detect_hypervisor() -\u003e Result\u003cHypervisorBackend\u003e {\n    match query_vendor_hyp_call_uid() {\n       KvmHypervisor::UUID \u003d\u003e Ok(HypervisorBackend::Kvm(KvmHypervisor)),\n       OtherHypervisor::UUID \u003d\u003e Ok(HypervisorBackend::Other(OtherHypervisor)),\n       uuid \u003d\u003e Err(...),\n    }\n}\n\nfn get_hypervisor() -\u003e Result\u003c\u0026\u0027static dyn Hyp\u003e {\n    // SAFETY - blah\n    unsafe {\n        match \u0026HYPERVISOR {\n            None \u003d\u003e {\n                HYPERVISOR \u003d Some(detect_hypervisor()?);\n                get_hypervisor() // try again\n            },\n            Some(HypervisorBackend::Kvm(h)) \u003d\u003e Ok(h),\n            Some(HypervisorBackend::Other(h)) \u003d\u003e Ok(h),\n        }\n    }\n}\n```\n\nThere will be no performance penalty because there will be only one match for the happy case.",
       "parentUuid": "f1af053a_a9f693a2",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 1
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d900afe8_5c87c735",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-17T07:35:34Z",
+      "side": 1,
+      "message": "+1. It\u0027s more clear to have HYPERVISOR as `Option` type and rename `detect_hypervisor` to `init_hypervisor`.",
+      "parentUuid": "d642c881_a7284fbc",
       "range": {
         "startLine": 73,
         "startChar": 0,
