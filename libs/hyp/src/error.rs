@@ -14,6 +14,7 @@
 
 //! Error and Result types for hypervisor.
 
+use crate::KvmError;
 use core::{fmt, result};
 
 /// Result type with hypervisor error.
@@ -24,8 +25,8 @@ pub type Result<T> = result::Result<T, Error>;
 pub enum Error {
     /// MMIO guard is not supported.
     MmioGuardNotsupported,
-    /// Failed to invoke a certain HVC function.
-    HvcError(smccc::Error, u32),
+    /// Failed to invoke a certain KVM HVC function.
+    HvcError(KvmError, u32),
     /// The MMIO_GUARD granule used by the hypervisor is not supported.
     UnsupportedMmioGuardGranule(usize),
 }
