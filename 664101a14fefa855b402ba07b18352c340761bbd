@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdaeebc7_e27876bd",
+        "filename": "libs/hyp/src/hypervisor/gunyah.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T11:03:25Z",
+      "side": 1,
+      "message": "Nit: `GunyahHypervisor::UUID` \u0026 `GunyahHypervisor::NAME`",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 35
+      },
+      "revId": "664101a14fefa855b402ba07b18352c340761bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f39d75e_6824b989",
+        "filename": "libs/hyp/src/hypervisor/gunyah.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T11:03:25Z",
+      "side": 1,
+      "message": "`Uuid`",
+      "range": {
+        "startLine": 11,
+        "startChar": 16,
+        "endLine": 11,
+        "endChar": 20
+      },
+      "revId": "664101a14fefa855b402ba07b18352c340761bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2382c78_9bb521ac",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T11:03:25Z",
+      "side": 1,
+      "message": "Could you please restructure this to DRY:\n```\nlet hyp \u003d match query_vendor_hyp_call_uid() {\n    // ...\n    u \u003d\u003e return Err(Error::UnknownHypervisorUUID(u)),\n};\nset_hypervisor(hyp)\n```",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 9
+      },
+      "revId": "664101a14fefa855b402ba07b18352c340761bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
