@@ -116,6 +116,30 @@
       },
       "revId": "664101a14fefa855b402ba07b18352c340761bbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34847a6f_eef015a4",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T13:42:07Z",
+      "side": 1,
+      "message": "But +1 to inlining `set_hypervisor` in `detect_hypervisor` by using a more appropriate wrapping type for `HYPERVISOR`!",
+      "parentUuid": "60291502_5c6c4a08",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 9
+      },
+      "revId": "664101a14fefa855b402ba07b18352c340761bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
