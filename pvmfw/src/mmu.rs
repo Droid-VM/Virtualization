@@ -59,7 +59,7 @@ impl PageTable {
         // the stack and the heap as read-only will produce recursive permission faults, so treat
         // the whole region as writable-dirty.
         [
-            (layout::writable_region(), DATA),
+            (layout::writable_region(), if helpers::dbm_available() { DATA_DBM } else { DATA }),
             (layout::text_range(), CODE),
             (layout::rodata_range(), RODATA),
             (appended_payload_range(), DATA_DBM),
