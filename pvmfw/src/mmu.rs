@@ -35,32 +35,35 @@ const DEVICE_LAZY: Attributes = DEVICE.union(MMIO_LAZY_MAP_FLAG).difference(Attr
 const CODE: Attributes = MEMORY.union(Attributes::READ_ONLY);
 const DATA: Attributes = MEMORY.union(Attributes::EXECUTE_NEVER);
 const RODATA: Attributes = DATA.union(Attributes::READ_ONLY);
+const DATA_DBM: Attributes = RODATA.union(Attributes::DBM);
 
 /// High-level API for managing MMU mappings.
 pub struct PageTable {
     idmap: IdMap,
 }
 
-fn appended_payload_range() -> Range<usize> {
-    let start = helpers::align_up(layout::binary_end(), helpers::SIZE_4KB).unwrap();
-    // pvmfw is contained in a 2MiB region so the payload can't be larger than the 2MiB alignment.
-    let end = helpers::align_up(start, helpers::SIZE_2MB).unwrap();
-
-    start..end
-}
-
 impl PageTable {
-    const ASID: usize = 1;
+    pub const ASID: usize = 1;
     const ROOT_LEVEL: usize = 1;
+
+    /// Returns memory range reserved for the appended payload.
+    pub fn appended_payload_range() -> Range<usize> {
+        let start = helpers::align_up(layout::binary_end(), helpers::SIZE_4KB).unwrap();
+        // pvmfw is contained in a 2MiB region so the payload can't be larger than the 2MiB alignment.
+        let end = helpers::align_up(start, helpers::SIZE_2MB).unwrap();
+        start..end
+    }
 
     /// Creates an instance pre-populated with pvmfw's binary layout.
     pub fn from_static_layout() -> Result<Self, MapError> {
         let mut page_table = Self { idmap: IdMap::new(Self::ASID, Self::ROOT_LEVEL) };
 
+        // 'writable_region' is explicitly zeroed and flushed before jumping to payload, so dirty
+        // state management can be omitted.
+        page_table.map_range(&layout::writable_region(), DATA)?;
         page_table.map_code(&layout::text_range())?;
-        page_table.map_data(&layout::writable_region())?;
         page_table.map_rodata(&layout::rodata_range())?;
-        page_table.map_data(&appended_payload_range())?;
+        page_table.map_data(&Self::appended_payload_range())?;
 
         Ok(page_table)
     }
@@ -78,7 +81,7 @@ impl PageTable {
     }
 
     pub fn map_data(&mut self, range: &Range<usize>) -> Result<(), MapError> {
-        self.map_range(range, DATA)
+        self.map_range(range, DATA_DBM)
     }
 
     pub fn map_code(&mut self, range: &Range<usize>) -> Result<(), MapError> {
