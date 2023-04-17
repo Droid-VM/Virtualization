@@ -32,6 +32,7 @@ use log::info;
 use log::warn;
 use log::LevelFilter;
 use vmbase::{console, layout, logger, main, power::reboot};
+use zeroize::Zeroize;
 
 #[derive(Debug, Clone)]
 pub enum RebootReason {
@@ -76,18 +77,13 @@ struct MemorySlices<'a> {
 }
 
 impl<'a> MemorySlices<'a> {
-    fn new(
-        fdt: usize,
-        kernel: usize,
-        kernel_size: usize,
-        memory: &mut MemoryTracker,
-    ) -> Result<Self, RebootReason> {
+    fn new(fdt: usize, kernel: usize, kernel_size: usize) -> Result<Self, RebootReason> {
         // SAFETY - SIZE_2MB is non-zero.
         const FDT_SIZE: NonZeroUsize = unsafe { NonZeroUsize::new_unchecked(helpers::SIZE_2MB) };
         // TODO - Only map the FDT as read-only, until we modify it right before jump_to_payload()
         // e.g. by generating a DTBO for a template DT in main() and, on return, re-map DT as RW,
         // overwrite with the template DT and apply the DTBO.
-        let range = memory.alloc_mut(fdt, FDT_SIZE).map_err(|e| {
+        let range = MEMORY.lock().as_mut().unwrap().alloc_mut(fdt, FDT_SIZE).map_err(|e| {
             error!("Failed to allocate the FDT range: {e}");
             RebootReason::InternalError
         })?;
@@ -104,13 +100,13 @@ impl<'a> MemorySlices<'a> {
 
         let memory_range = info.memory_range;
         debug!("Resizing MemoryTracker to range {memory_range:#x?}");
-        memory.shrink(&memory_range).map_err(|_| {
-            error!("Failed to use memory range value from DT: {memory_range:#x?}");
+        MEMORY.lock().as_mut().unwrap().shrink(&memory_range).map_err(|e| {
+            error!("Failed to use memory range value from DT: {memory_range:#x?}: {e}");
             RebootReason::InvalidFdt
         })?;
 
         let kernel_range = if let Some(r) = info.kernel_range {
-            memory.alloc_range(&r).map_err(|e| {
+            MEMORY.lock().as_mut().unwrap().alloc_range(&r).map_err(|e| {
                 error!("Failed to obtain the kernel range with DT range: {e}");
                 RebootReason::InternalError
             })?
@@ -122,7 +118,7 @@ impl<'a> MemorySlices<'a> {
                 RebootReason::InvalidPayload
             })?;
 
-            memory.alloc(kernel, kernel_size).map_err(|e| {
+            MEMORY.lock().as_mut().unwrap().alloc(kernel, kernel_size).map_err(|e| {
                 error!("Failed to obtain the kernel range with legacy range: {e}");
                 RebootReason::InternalError
             })?
@@ -137,7 +133,7 @@ impl<'a> MemorySlices<'a> {
 
         let ramdisk = if let Some(r) = info.initrd_range {
             debug!("Located ramdisk at {r:?}");
-            let r = memory.alloc_range(&r).map_err(|e| {
+            let r = MEMORY.lock().as_mut().unwrap().alloc_range(&r).map_err(|e| {
                 error!("Failed to obtain the initrd range: {e}");
                 RebootReason::InvalidRamdisk
             })?;
@@ -218,7 +214,7 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
     debug!("... Success!");
 
     MEMORY.lock().replace(MemoryTracker::new(page_table));
-    let slices = MemorySlices::new(fdt, payload, payload_size, MEMORY.lock().as_mut().unwrap())?;
+    let slices = MemorySlices::new(fdt, payload, payload_size)?;
 
     rand::init().map_err(|e| {
         error!("Failed to initialize rand: {e}");
@@ -228,8 +224,8 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
     // This wrapper allows main() to be blissfully ignorant of platform details.
     crate::main(slices.fdt, slices.kernel, slices.ramdisk, bcc_slice, debug_policy)?;
 
-    helpers::flushed_zeroize(bcc_slice);
-    helpers::flush(slices.fdt.as_slice());
+    // Writable-dirty regions will be flushed when MemoryTracker is dropped.
+    bcc_slice.zeroize();
 
     info!("Expecting a bug making MMIO_GUARD_UNMAP return NOT_SUPPORTED on success");
     MEMORY.lock().as_mut().unwrap().mmio_unmap_all().map_err(|e| {
