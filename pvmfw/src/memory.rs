@@ -278,7 +278,7 @@ impl Drop for MemoryTracker {
 /// Gives the KVM host read, write and execute permissions on the given memory range. If the range
 /// is not aligned with the memory protection granule then it will be extended on either end to
 /// align.
-fn share_range(range: &MemoryRange, granule: usize) -> smccc::Result<()> {
+fn share_range(range: &MemoryRange, granule: usize) -> result::Result<(), hyp::Error> {
     for base in (align_down(range.start, granule)
         .expect("Memory protection granule was not a power of two")..range.end)
         .step_by(granule)
@@ -291,7 +291,7 @@ fn share_range(range: &MemoryRange, granule: usize) -> smccc::Result<()> {
 /// Removes permission from the KVM host to access the given memory range which was previously
 /// shared. If the range is not aligned with the memory protection granule then it will be extended
 /// on either end to align.
-fn unshare_range(range: &MemoryRange, granule: usize) -> smccc::Result<()> {
+fn unshare_range(range: &MemoryRange, granule: usize) -> result::Result<(), hyp::Error> {
     for base in (align_down(range.start, granule)
         .expect("Memory protection granule was not a power of two")..range.end)
         .step_by(granule)
@@ -305,7 +305,7 @@ fn unshare_range(range: &MemoryRange, granule: usize) -> smccc::Result<()> {
 /// with the host. Returns a pointer to the buffer.
 ///
 /// It will be aligned to the memory sharing granule size supported by the hypervisor.
-pub fn alloc_shared(size: usize) -> smccc::Result<NonNull<u8>> {
+pub fn alloc_shared(size: usize) -> result::Result<NonNull<u8>, hyp::Error> {
     let layout = shared_buffer_layout(size)?;
     let granule = layout.align();
 
@@ -333,7 +333,7 @@ pub fn alloc_shared(size: usize) -> smccc::Result<NonNull<u8>> {
 ///
 /// The memory must have been allocated by `alloc_shared` with the same size, and not yet
 /// deallocated.
-pub unsafe fn dealloc_shared(vaddr: NonNull<u8>, size: usize) -> smccc::Result<()> {
+pub unsafe fn dealloc_shared(vaddr: NonNull<u8>, size: usize) -> result::Result<(), hyp::Error> {
     let layout = shared_buffer_layout(size)?;
     let granule = layout.align();
 
@@ -352,7 +352,7 @@ pub unsafe fn dealloc_shared(vaddr: NonNull<u8>, size: usize) -> smccc::Result<(
 /// It will be aligned to the memory sharing granule size supported by the hypervisor.
 ///
 /// Panics if `size` is 0.
-fn shared_buffer_layout(size: usize) -> smccc::Result<Layout> {
+fn shared_buffer_layout(size: usize) -> result::Result<Layout, hyp::Error> {
     assert_ne!(size, 0);
     let granule = hyp_meminfo()? as usize;
     let allocated_size =

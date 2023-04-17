@@ -19,5 +19,5 @@
 mod hypervisor;
 mod util;
 
-pub use hypervisor::{hyp_meminfo, mem_share, mem_unshare};
+pub use hypervisor::{hyp_meminfo, mem_share, mem_unshare, Error};
 pub mod mmio_guard;

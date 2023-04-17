@@ -113,7 +113,7 @@ fn try_init_logger() -> Result<()> {
         // pKVM blocks MMIO by default, we need to enable MMIO guard to support logging.
         Ok(()) => mmio_guard::map(vmbase::console::BASE_ADDRESS)?,
         // MMIO guard enroll is not supported in unprotected VM.
-        Err(mmio_guard::Error::EnrollFailed(smccc::Error::NotSupported)) => {}
+        Err(mmio_guard::Error::EnrollFailed(hyp::Error::NotSupported)) => {}
         Err(e) => return Err(e.into()),
     };
     vmbase::logger::init(log::LevelFilter::Debug).map_err(|_| Error::LoggerInit)
