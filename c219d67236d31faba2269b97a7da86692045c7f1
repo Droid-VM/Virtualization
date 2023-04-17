@@ -127,6 +127,30 @@
       },
       "revId": "c219d67236d31faba2269b97a7da86692045c7f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6e0d865_8aef5861",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-17T08:59:48Z",
+      "side": 1,
+      "message": "Yup, I also checked the pkvm source and it looks like currently they are the same thing. Otherwise we can just call it memory_protection_granule since the original words are not so long.",
+      "parentUuid": "22af0d9f_302b6024",
+      "range": {
+        "startLine": 46,
+        "startChar": 7,
+        "endLine": 46,
+        "endChar": 18
+      },
+      "revId": "c219d67236d31faba2269b97a7da86692045c7f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
