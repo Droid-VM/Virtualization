@@ -68,6 +68,30 @@
       },
       "revId": "664101a14fefa855b402ba07b18352c340761bbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b63f393b_fcbcc54c",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-17T13:03:15Z",
+      "side": 1,
+      "message": "Once `query_vendor_hyp_call_uid()` returns a `Uuid`, we can just implement a `TryFrom` from `Uuid` to `HypervisorBackend`, then this function can just be\n```\npub fn detect_hypervisor() -\u003e Result\u003c()\u003e {\n     HYPERVISOR \u003d query_vendor_hyp_call_uid().try_into()?;\n     Ok(())\n}\n```\n\nbtw, can we just make HYPERVISOR a lazy_static so that it doesn\u0027t need to be mutable?",
+      "parentUuid": "f2382c78_9bb521ac",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 9
+      },
+      "revId": "664101a14fefa855b402ba07b18352c340761bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
