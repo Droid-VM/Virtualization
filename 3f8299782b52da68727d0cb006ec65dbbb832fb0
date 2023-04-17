@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b62829ec_1925b858",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-17T06:35:20Z",
+      "side": 1,
+      "message": "https://github.com/torvalds/linux/blob/master/drivers/firmware/smccc/kvm_guest.c#L24\n\nhttps://github.com/torvalds/linux/blob/master/include/linux/arm-smccc.h#L107\n\n/* KVM UID value: 28b46fb6-2ec5-11e9-a9ca-4b564d003a74 */\n#define ARM_SMCCC_VENDOR_HYP_UID_KVM_REG_0\t0xb66fb428U\n#define ARM_SMCCC_VENDOR_HYP_UID_KVM_REG_1\t0xe911c52eU\n#define ARM_SMCCC_VENDOR_HYP_UID_KVM_REG_2\t0x564bcaa9U\n#define ARM_SMCCC_VENDOR_HYP_UID_KVM_REG_3\t0x743a004dU",
+      "parentUuid": "1d680187_959468e8",
+      "range": {
+        "startLine": 31,
+        "startChar": 23,
+        "endLine": 31,
+        "endChar": 60
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "813cd714_33d5f825",
         "filename": "libs/hyp/src/hypervisor/mod.rs",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-17T06:11:52Z",
       "side": 1,
       "message": "Wouldn\u0027t it be better to do the detection and the setting lazily when `get_hypervisor()` is called the first time?\n\nThat way, we can ensure that clients never get an invalid hypervisor.",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 1
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1af053a_a9f693a2",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-17T06:35:20Z",
+      "side": 1,
+      "message": "That may need slowdown get_hypervisor() a bit? Everytime we need to check if this is the first time get_hypervisor() is called - and then initialize it. \n\nPerhaps make HYPERVISOR to be an option type which is initialized to None and unwrap in get_hypervisor should panic if get_hypervisor() is called before detect_hypervisor() initializes it?",
+      "parentUuid": "813cd714_33d5f825",
       "range": {
         "startLine": 73,
         "startChar": 0,
