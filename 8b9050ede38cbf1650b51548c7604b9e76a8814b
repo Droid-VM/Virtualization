@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "212b8da5_87f926b8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-17T11:29:56Z",
+      "side": 1,
+      "message": "\u003e Doesn\u0027t swiotlb on Gunyah differ from \"normal\" memory in the sense that it is shared with the host? AFAIU, those pages would be R/W-able by the host from the start of the boot process of the guest kernel, which differs drastically from pKVM; is that correct? \n\nYes\n\n\u003e If that\u0027s the case are we assuming that the swiotlb driver is going to take ownership of that subregion, preventing the kernel from using those pages for any other purpose?\n\nYes!\n\n\u003e If we are, how do we guarantee that the guest kernel doesn\u0027t make use of those pages during the window between early boot when it parses /memory and the point where the driver registers its \u003creg\u003e region as reserved?\n\nThe pre-shared range should be visible not just in memory node but also as \"reserved\" memory (under \"reserved-memory\" node). AFAICT that should prevent guest kernel from making use of the pre-shared memory for its generic needs (storing its private data for example)?\n\n\u003e for example, assuming a guest that doesn\u0027t need virtio (e.g. because it has direct access to real hardware devices), we could shrink the guest kernel by removing that support, introducing a fundamental vulnerability on Gunyah.\n\nAgain with the pre-shared range being seen as \"reserved\", it should prevent the guest from using that range for its private memory needs?",
+      "parentUuid": "9350e640_11c2d70e",
+      "range": {
+        "startLine": 11,
+        "startChar": 54,
+        "endLine": 11,
+        "endChar": 65
+      },
+      "revId": "8b9050ede38cbf1650b51548c7604b9e76a8814b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f890a6bf_57d16858",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "Note that we\u0027ve discussed this in the past (https://crrev.com/c/3921604) but I see that we never got around to merging https://crrev.com/c/3932182, which would merge those contiguous regions under the hood.",
       "parentUuid": "23ba199b_67a1bf17",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 12
+      },
+      "revId": "8b9050ede38cbf1650b51548c7604b9e76a8814b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "402eb6da_1164325a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-17T11:29:56Z",
+      "side": 1,
+      "message": "Hmm thanks for pointing me to  https://crrev.com/c/3932182. Do you know why it was not merged? Should we just merge that now - i think that will make swiotlb and main memory region contiguous in memory node for Gunyah.",
+      "parentUuid": "8d02a46b_142ad530",
       "range": {
         "startLine": 12,
         "startChar": 0,
