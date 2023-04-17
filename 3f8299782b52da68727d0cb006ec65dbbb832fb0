@@ -379,6 +379,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "188f59bb_98d6da96",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-17T11:08:08Z",
+      "side": 1,
+      "message": "\u003e Wouldn\u0027t it be better to do the detection and the setting lazily when get_hypervisor() is called the first time?\n\nSorry. I wanted to add +1 to this suggestion.\n\n\u003e That may need slowdown get_hypervisor() a bit? Everytime we need to check if this is the first time get_hypervisor() is called - and then initialize it.\n\nI don\u0027t think it will slowdown get_hypervisor(). `HYPERVISOR` can be a lazy static and we only initialize it the first time.",
+      "parentUuid": "4e93364e_f60a0bf5",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 1
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef041a1c_10cbda03",
         "filename": "libs/hyp/src/lib.rs",
         "patchSetId": 1
