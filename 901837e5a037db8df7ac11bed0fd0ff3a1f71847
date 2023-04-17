@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2361e65_4b6e6974",
+        "filename": "virtualizationmanager/src/debug_config.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-17T00:09:01Z",
+      "side": 1,
+      "message": "error: cannot find macro `ensure` in this scope\n--\u003e packages/modules/Virtualization/virtualizationmanager/src/debug_config.rs:291:9\n|\n291 |         ensure!(debug_config.debug_level \u003d\u003d DebugLevel::NONE);\n|         ^^^^^^\n|\n\u003d help: consider importing this macro:\nanyhow::ensure",
+      "range": {
+        "startLine": 291,
+        "startChar": 0,
+        "endLine": 294,
+        "endChar": 47
+      },
+      "revId": "901837e5a037db8df7ac11bed0fd0ff3a1f71847",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
