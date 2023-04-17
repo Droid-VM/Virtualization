@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9174cb70_9f425c04",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-17T07:14:27Z",
+      "side": 1,
+      "message": "Ack. Thanks. Could you leave a link to there as a comment?",
+      "parentUuid": "b62829ec_1925b858",
+      "range": {
+        "startLine": 31,
+        "startChar": 23,
+        "endLine": 31,
+        "endChar": 60
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "813cd714_33d5f825",
         "filename": "libs/hyp/src/hypervisor/mod.rs",
         "patchSetId": 1
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "That may need slowdown get_hypervisor() a bit? Everytime we need to check if this is the first time get_hypervisor() is called - and then initialize it. \n\nPerhaps make HYPERVISOR to be an option type which is initialized to None and unwrap in get_hypervisor should panic if get_hypervisor() is called before detect_hypervisor() initializes it?",
       "parentUuid": "813cd714_33d5f825",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 1
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d642c881_a7284fbc",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-17T07:14:27Z",
+      "side": 1,
+      "message": "If it\u0027s an option type, we could do something like this:\n\n```\nstatic mut HYPERVISOR: Option\u003cHypervisorBackend\u003e \u003d None;\n\nfn detect_hypervisor() -\u003e Result\u003cHypervisorBackend\u003e {\n    match query_vendor_hyp_call_uid() {\n       KvmHypervisor::UUID \u003d\u003e Ok(HypervisorBackend::Kvm(KvmHypervisor)),\n       OtherHypervisor::UUID \u003d\u003e Ok(HypervisorBackend::Other(OtherHypervisor)),\n       uuid \u003d\u003e Err(...),\n    }\n}\n\nfn get_hypervisor() -\u003e Result\u003c\u0026\u0027static dyn Hyp\u003e {\n    // SAFETY - blah\n    unsafe {\n        match \u0026HYPERVISOR {\n            None \u003d\u003e {\n                HYPERVISOR \u003d Some(detect_hypervisor()?);\n                get_hypervisor() // try again\n            },\n            Some(HypervisorBackend::Kvm(h)) \u003d\u003e Ok(h),\n            Some(HypervisorBackend::Other(h)) \u003d\u003e Ok(h),\n        }\n    }\n}\n```\n\nThere will be no performance penalty because there will be only one match for the happy case.",
+      "parentUuid": "f1af053a_a9f693a2",
       "range": {
         "startLine": 73,
         "startChar": 0,
