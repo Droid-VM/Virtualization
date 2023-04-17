@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aecd87da_736e0452",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T17:08:52Z",
+      "side": 1,
+      "message": "Can\u0027t this be part of `set_dbm_enabled`? I\u0027m not familiar with `compiler_fence`; would doing so allow the compiler to reorder function calls?",
+      "range": {
+        "startLine": 218,
+        "startChar": 4,
+        "endLine": 218,
+        "endChar": 37
+      },
+      "revId": "61e1145cca094ca5b53f3a4d065aabdf503752ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c62b013_19782ac0",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T17:08:52Z",
+      "side": 1,
+      "message": "What about encasulating all the DBM managment in the `MEMORY` instance by `self.dbm_enabled \u003d true` here and then disable DBM in `drop`? That would mean all `main_wrapper` would need to do is\n```\nMEMORY.lock().as_mut().enable_dbm()\n```\nand RAII takes care of the rest? More high-level names such as `.track_dirty_pages` would make sense, here.",
+      "range": {
+        "startLine": 302,
+        "startChar": 26,
+        "endLine": 302,
+        "endChar": 27
+      },
+      "revId": "61e1145cca094ca5b53f3a4d065aabdf503752ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2baad2a_7d6d29e3",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T17:08:52Z",
+      "side": 1,
+      "message": "I\u0027m not sure this is any clearer than returning on `None` (either through a `let-else` or an `if-let`), TBH.",
+      "range": {
+        "startLine": 472,
+        "startChar": 21,
+        "endLine": 472,
+        "endChar": 51
+      },
+      "revId": "61e1145cca094ca5b53f3a4d065aabdf503752ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98cc7df7_f5362fea",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T17:08:52Z",
+      "side": 1,
+      "message": "this could be cached so that the compiler knows it doesn\u0027t need to `MRS` twice.",
+      "range": {
+        "startLine": 68,
+        "startChar": 40,
+        "endLine": 68,
+        "endChar": 55
+      },
+      "revId": "61e1145cca094ca5b53f3a4d065aabdf503752ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -402,6 +402,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce72fbf5_ed4f5070",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T17:08:52Z",
+      "side": 1,
+      "message": "As discussed offline, we can get PS+2 on both features by first adding SW DBM before adding support for HW DBM. This doesn\u0027t remove the need to implement dedicated tests for continuous testing of SW DBM, though.",
+      "parentUuid": "aa42cdbc_882c49ba",
+      "range": {
+        "startLine": 500,
+        "startChar": 67,
+        "endLine": 500,
+        "endChar": 94
+      },
+      "revId": "cd0ac67c4008a65d8083bc00423fa700a319c3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6de45505_3c781a46",
