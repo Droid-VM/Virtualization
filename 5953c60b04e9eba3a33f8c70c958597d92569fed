@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a2f3a8b_f55dfdf7",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-17T09:09:05Z",
+      "side": 1,
+      "message": "protected -\u003e MMIO guard?",
+      "range": {
+        "startLine": 21,
+        "startChar": 16,
+        "endLine": 21,
+        "endChar": 25
+      },
+      "revId": "5953c60b04e9eba3a33f8c70c958597d92569fed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53c438ca_0c19f8d5",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-17T09:09:05Z",
+      "side": 1,
+      "message": "This should be `usize`. In fact, the user of this immediately converts it.",
+      "range": {
+        "startLine": 22,
+        "startChar": 43,
+        "endLine": 22,
+        "endChar": 46
+      },
+      "revId": "5953c60b04e9eba3a33f8c70c958597d92569fed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89f53b82_18d321e9",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-17T09:09:05Z",
+      "side": 1,
+      "message": "This is not wrong but it misses the point. By enrolling all MMIO will be blocked unless allow-listed with `mmio_guard_map`. And IIRC, pVMs are auto-enrolled? We should mention that as well.",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 41
+      },
+      "revId": "5953c60b04e9eba3a33f8c70c958597d92569fed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "498fbba4_f3f09956",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-17T09:09:05Z",
+      "side": 1,
+      "message": "Remove",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 81
+      },
+      "revId": "5953c60b04e9eba3a33f8c70c958597d92569fed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d490d60_b0ec96f4",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-17T09:09:05Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 46,
+        "startChar": 50,
+        "endLine": 46,
+        "endChar": 53
+      },
+      "revId": "5953c60b04e9eba3a33f8c70c958597d92569fed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
