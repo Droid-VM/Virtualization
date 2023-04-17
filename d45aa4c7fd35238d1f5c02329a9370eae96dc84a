@@ -16,6 +16,29 @@
       "message": "Hello Jiyong, could you also review this change so that it won\u0027t be blocking for supporting gunyah hypervisor?",
       "revId": "d45aa4c7fd35238d1f5c02329a9370eae96dc84a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb631652_447f6892",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-17T08:08:13Z",
+      "side": 1,
+      "message": "This could be just `Kvm`. \n\n```\nstatic HYPERVISOR: HypervisorBackend \u003d HypervisorBackend::Kvm;\n\nenum HypervisorBackend {\n   Kvm,\n   Other,\n}\n\npub fn get_hypervisor() -\u003e \u0026`static dyn Hypervisor {\n   match \u0026HYPERVISOR {\n       HypervisorBackend::Kvm \u003d\u003e \u0026KvmHypervisor,\n       HypervisorBackend::Other \u003d\u003e \u0026OtherHypervisor,       \n   }\n}\n```\n`KvmHypervisor` is a zero-sized struct. So, creating it everytime should be very cheap.",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 23
+      },
+      "revId": "d45aa4c7fd35238d1f5c02329a9370eae96dc84a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
