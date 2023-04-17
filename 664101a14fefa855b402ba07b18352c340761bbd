@@ -140,6 +140,30 @@
       },
       "revId": "664101a14fefa855b402ba07b18352c340761bbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "603c16ea_73dc3bd4",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-17T13:52:47Z",
+      "side": 1,
+      "message": "\u003e IMO, implementing TryFrom\u003cUuid\u003e for Hypervisor sounds like we would be abusing the meaning of the trait. \n\nRight, it won\u0027t work with a trait. But with my last refactoring, the `HypervisorBackend` is in fact an enum[1], so we are actually implementing a TryFrom from uuid to the given Enum and HYPERVISOR still keeps the enum.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/libs/hyp/src/hypervisor/mod.rs;l\u003d25;drc\u003d313291123af4ccdcf3210dba0a7e7d2dd278b573",
+      "parentUuid": "34847a6f_eef015a4",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 9
+      },
+      "revId": "664101a14fefa855b402ba07b18352c340761bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
