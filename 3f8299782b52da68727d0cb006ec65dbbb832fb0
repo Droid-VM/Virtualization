@@ -97,6 +97,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ce3cf68_6ac64b65",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T11:03:00Z",
+      "side": 1,
+      "message": "As [discussed previously](https://android-review.googlesource.com/c/platform/packages/modules/Virtualization/+/2479400/2/pvmfw/src/hypervisor.rs#150), could this be a `Uuid`? You might need to add `libuuid_nostd` in the Android.bp.",
+      "range": {
+        "startLine": 31,
+        "startChar": 16,
+        "endLine": 31,
+        "endChar": 20
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a872732b_70aefbb3",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T11:03:00Z",
+      "side": 1,
+      "message": "nit: scope these as `KvmHypervisor::UUID` and `KvmHypervisor::NAME`",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 29
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7347b70c_c110bb37",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T11:03:00Z",
+      "side": 1,
+      "message": "This and line 42 (\"`mmio_guard::Error`\") should be updated as this error type isn\u0027t about MMIO_GUARD.",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 21
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b7507a54_c3399128",
         "filename": "libs/hyp/src/hypervisor/mod.rs",
         "patchSetId": 1
@@ -279,6 +348,76 @@
         "startChar": 0,
         "endLine": 88,
         "endChar": 1
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e93364e_f60a0bf5",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T11:03:00Z",
+      "side": 1,
+      "message": "You could use a `OnceCell` and `unwrap` the result of its `.get`/`.set`.\n\nBTW, why does the library an internal state? Can\u0027t `detect_hypervisor` return a reference and let the client code deal with ensuring it has a singleton?",
+      "parentUuid": "d900afe8_5c87c735",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 1
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef041a1c_10cbda03",
+        "filename": "libs/hyp/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T11:03:00Z",
+      "side": 1,
+      "message": "Shouldn\u0027t `hypervisor::{Error, Result}` also be exported here?\n\nWhy don\u0027t we\n```\npub mod hypervisor;\n```\n?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 68
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d26adc8d_03720af8",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T11:03:00Z",
+      "side": 1,
+      "message": "nit: add this below the comment explaining why you\u0027re using `debug!`",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 8
       },
       "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
