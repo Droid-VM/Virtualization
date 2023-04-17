@@ -207,6 +207,8 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
 
     let (bcc_slice, debug_policy) = appended.get_entries();
 
+    // Activate dirty state management first, otherwise we may immediately get permission faults.
+    MemoryTracker::track_dirty_pages();
     debug!("Activating dynamic page table...");
     // SAFETY - page_table duplicates the static mappings for everything that the Rust code is
     // aware of so activating it shouldn't have any visible effect.
@@ -236,7 +238,9 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
         error!("Failed to unshare the UART: {e}");
         RebootReason::InternalError
     })?;
-    MEMORY.lock().take().unwrap();
+
+    // Drop MemoryTracker and deactivate page table.
+    core::mem::drop(MEMORY.lock().take());
 
     Ok(slices.kernel.as_ptr() as usize)
 }
