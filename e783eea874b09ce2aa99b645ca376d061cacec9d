@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1d27fa33_077efce8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-17T06:40:24Z",
+      "side": 1,
+      "message": "Ack. I thought it\u0027s optional even within gunyah. NVM.",
+      "parentUuid": "2d4ea2c2_d7e39ce8",
+      "range": {
+        "startLine": 9,
+        "startChar": 19,
+        "endLine": 9,
+        "endChar": 29
+      },
+      "revId": "e783eea874b09ce2aa99b645ca376d061cacec9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5d3fa8b6_e62cfa31",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "reg property conveys the IPA most importantly that swiotlb driver can use. Without that, guesy will try to allocate from its private memory and \"share\" with host using an API that does not exist on Gunyah. IF the \u0027reg\u0027 property is present, swiotlb driver will instead make use of the suggested range (rather than allocate + share).\n\nRegarding duplicate information in size and reg, do you suggest we remove the \u0027size\u0027 property when \u0027reg\u0027 is being added?",
       "parentUuid": "3601c6c8_98ed8bf9",
+      "range": {
+        "startLine": 511,
+        "startChar": 8,
+        "endLine": 511,
+        "endChar": 73
+      },
+      "revId": "e783eea874b09ce2aa99b645ca376d061cacec9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d1ef877_14d94da2",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-17T06:40:24Z",
+      "side": 1,
+      "message": "Thanks. I see that this code assumes that the `size` property has the same value as the second cell (size) in the `reg` property in the original DT. Shouldn\u0027t we check that explicitly?\n\n\u003e  do you suggest we remove the \u0027size\u0027 property when \u0027reg\u0027 is being added?\n\nYes, and perhaps doing the same even when parsing - if reg exists, both addr and size are read from there.",
+      "parentUuid": "25c10360_d1ad56a8",
       "range": {
         "startLine": 511,
         "startChar": 8,
