@@ -14,7 +14,7 @@
 
 //! Safe MMIO_GUARD support.
 
-use crate::hypervisor::get_hypervisor;
+use crate::hypervisor::{self, get_hypervisor};
 use crate::util::{page_address, SIZE_4KB};
 use core::{fmt, result};
 
@@ -22,13 +22,13 @@ use core::{fmt, result};
 #[derive(Debug, Clone)]
 pub enum Error {
     /// Failed the necessary MMIO_GUARD_ENROLL call.
-    EnrollFailed(smccc::Error),
+    EnrollFailed(hypervisor::Error),
     /// Failed to obtain the MMIO_GUARD granule size.
-    GranuleQueryFailed(smccc::Error),
+    GranuleQueryFailed(hypervisor::Error),
     /// Failed to MMIO_GUARD_MAP a page.
-    MapFailed(smccc::Error),
+    MapFailed(hypervisor::Error),
     /// Failed to MMIO_GUARD_UNMAP a page.
-    UnmapFailed(smccc::Error),
+    UnmapFailed(hypervisor::Error),
     /// The MMIO_GUARD granule used by the hypervisor is not supported.
     UnsupportedGranule(usize),
 }

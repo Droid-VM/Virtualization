@@ -14,34 +14,34 @@
 
 //! This module regroups some common traits shared by all the hypervisors.
 
-use smccc::Result;
+use crate::Error;
 
 /// Trait for the hypervisor.
 pub trait Hypervisor {
     /// Returns MMIO guard granule size in bytes.
-    fn mmio_guard_granule(&self) -> Result<usize>;
+    fn mmio_guard_granule(&self) -> Result<usize, Error>;
 
     /// Registers to use MMIO guard APIs.
     /// By enrolling, all MMIO will be blocked unless allow-listed with `mmio_guard_map`.
     /// Protected VMs are auto-enrolled.
-    fn mmio_guard_enroll(&self) -> Result<()>;
+    fn mmio_guard_enroll(&self) -> Result<(), Error>;
 
     /// Maps a memory address to the hypervisor MMIO guard.
-    fn mmio_guard_map(&self, ipa: u64) -> Result<()>;
+    fn mmio_guard_map(&self, ipa: u64) -> Result<(), Error>;
 
     /// Unmaps a memory address from the hypervisor MMIO guard.
-    fn mmio_guard_unmap(&self, ipa: u64) -> Result<()>;
+    fn mmio_guard_unmap(&self, ipa: u64) -> Result<(), Error>;
 
     /// Shares a region of memory with host, granting it read, write and execute permissions.
     /// The size of the region is equal to the memory protection granule returned by
     /// [`hyp_meminfo`].
-    fn mem_share(&self, base_ipa: u64) -> Result<()>;
+    fn mem_share(&self, base_ipa: u64) -> Result<(), Error>;
 
     /// Revokes access permission from host to a memory region previously shared with
     /// [`mem_share`]. The size of the region is equal to the memory protection granule returned by
     /// [`hyp_meminfo`].
-    fn mem_unshare(&self, base_ipa: u64) -> Result<()>;
+    fn mem_unshare(&self, base_ipa: u64) -> Result<(), Error>;
 
     /// Returns the memory protection granule size in bytes.
-    fn memory_protection_granule(&self) -> Result<usize>;
+    fn memory_protection_granule(&self) -> Result<usize, Error>;
 }

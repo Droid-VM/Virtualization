@@ -18,6 +18,7 @@ mod common;
 mod kvm;
 
 pub use common::Hypervisor;
+pub use kvm::Error;
 use kvm::KvmHypervisor;
 
 static HYPERVISOR: HypervisorBackend = HypervisorBackend::Kvm;
