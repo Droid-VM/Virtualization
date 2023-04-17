@@ -189,6 +189,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45835102_1d855df7",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T17:05:44Z",
+      "side": 1,
+      "message": "I see, thanks!",
+      "parentUuid": "931bf2d9_5e75904a",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 9
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbeeb312_8153cc8a",
@@ -273,6 +297,30 @@
       "side": 1,
       "message": "Updated the condiiton. `Descriptor` is just a wrapper around `usize` (a page table entry) and has no concept of level it belongs to.",
       "parentUuid": "3f13dbc5_6d1ae963",
+      "range": {
+        "startLine": 405,
+        "startChar": 11,
+        "endLine": 405,
+        "endChar": 61
+      },
+      "revId": "f00b70e2524398515615a3a0e2dc5176bc3d846d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebd64d2d_6cfe34ae",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T17:05:44Z",
+      "side": 1,
+      "message": "Yeah, it would be neat for the library to provide `Descriptor::is_leaf_at_level(\u0026self, usize) -\u003e bool`",
+      "parentUuid": "f3c5d4ed_a0080649",
       "range": {
         "startLine": 405,
         "startChar": 11,
