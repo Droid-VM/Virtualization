@@ -16,6 +16,190 @@
       "message": "Hello,\n\nCould you please take another look?",
       "revId": "9bf5726f3bdc59052317e48301f935f7c86d14bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8583655e_67f1f3fc",
+        "filename": "apex/Android.bp",
+        "patchSetId": 10
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-17T13:29:36Z",
+      "side": 1,
+      "message": "Nit: typo",
+      "range": {
+        "startLine": 95,
+        "startChar": 21,
+        "endLine": 95,
+        "endChar": 26
+      },
+      "revId": "9bf5726f3bdc59052317e48301f935f7c86d14bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34bec627_4aecefa2",
+        "filename": "rkpvm/client_apk/Android.bp",
+        "patchSetId": 10
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-17T13:29:36Z",
+      "side": 1,
+      "message": "I should have said this before, but since we agreed to call it the service VM, we should do that from the start.",
+      "range": {
+        "startLine": 6,
+        "startChar": 11,
+        "endLine": 6,
+        "endChar": 16
+      },
+      "revId": "9bf5726f3bdc59052317e48301f935f7c86d14bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d1217fa_81a616f3",
+        "filename": "rkpvm/client_apk/AndroidManifest.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-17T13:29:36Z",
+      "side": 1,
+      "message": "I suggest inserting \"virt\" in the package name, to ensure this is unambiguous (com.android.virt is our APEX name)",
+      "range": {
+        "startLine": 16,
+        "startChar": 19,
+        "endLine": 16,
+        "endChar": 33
+      },
+      "revId": "9bf5726f3bdc59052317e48301f935f7c86d14bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f759640_0ad97d39",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-17T13:29:36Z",
+      "side": 1,
+      "message": "We\u0027re actually spawning virtualization manager here, I think?\nThe service name is perhaps unhelpful under the circumstances, given that this code is executing inside VirtualizationService. But I suggest using virt mgr throughout.",
+      "range": {
+        "startLine": 43,
+        "startChar": 54,
+        "endLine": 43,
+        "endChar": 75
+      },
+      "revId": "9bf5726f3bdc59052317e48301f935f7c86d14bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db1b5acb_63c92769",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-17T13:29:36Z",
+      "side": 1,
+      "message": "This could do with a TODO - \"Don\u0027t use RIALTO\"",
+      "range": {
+        "startLine": 48,
+        "startChar": 28,
+        "endLine": 48,
+        "endChar": 39
+      },
+      "revId": "9bf5726f3bdc59052317e48301f935f7c86d14bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "238ffdf5_438d5a99",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-17T13:29:36Z",
+      "side": 1,
+      "message": "1 \u003c\u003c 10 is 1k.\n(Also: SIZE -\u003e SIZE_BYTES)",
+      "range": {
+        "startLine": 50,
+        "startChar": 35,
+        "endLine": 50,
+        "endChar": 50
+      },
+      "revId": "9bf5726f3bdc59052317e48301f935f7c86d14bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0d86be4_3a2f42b3",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-17T13:29:36Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the client do this itself?\nAlso: on subsequent runs I suspect we will want to reuse the existing instance image.",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 9
+      },
+      "revId": "9bf5726f3bdc59052317e48301f935f7c86d14bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dfeed7b_a230c65f",
+        "filename": "vm_payload/src/api.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-17T13:29:36Z",
+      "side": 1,
+      "message": "data -\u003e `buffer` ?\nAnd if we do allow null, that should be mentioned in the comment above",
+      "range": {
+        "startLine": 286,
+        "startChar": 24,
+        "endLine": 286,
+        "endChar": 28
+      },
+      "revId": "9bf5726f3bdc59052317e48301f935f7c86d14bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
