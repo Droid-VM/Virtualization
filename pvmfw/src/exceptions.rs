@@ -90,15 +90,18 @@ impl fmt::Display for Esr {
 }
 
 fn handle_exception(esr: Esr, far: usize) -> Result<(), HandleExceptionError> {
+    if esr != Esr::DataAbortPermissionFault && esr != Esr::DataAbortTranslationFault {
+        return Err(HandleExceptionError::UnknownException);
+    }
     // Handle all translation faults on both read and write, and MMIO guard map
     // flagged invalid pages or blocks that caused the exception.
-    match esr {
-        Esr::DataAbortTranslationFault => {
-            let mut locked = MEMORY.try_lock().ok_or(HandleExceptionError::PageTableUnavailable)?;
-            let memory = locked.as_mut().ok_or(HandleExceptionError::PageTableNotInitialized)?;
-            Ok(memory.handle_mmio_fault(far)?)
-        }
-        _ => Err(HandleExceptionError::UnknownException),
+    // Handle permission faults for DBM flagged entries, and flag them as dirty on write.
+    let mut locked = MEMORY.try_lock().ok_or(HandleExceptionError::PageTableUnavailable)?;
+    let memory = locked.as_mut().ok_or(HandleExceptionError::PageTableNotInitialized)?;
+    if esr == Esr::DataAbortTranslationFault {
+        Ok(memory.handle_mmio_fault(far)?)
+    } else {
+        Ok(memory.handle_permission_fault(far)?)
     }
 }
 
