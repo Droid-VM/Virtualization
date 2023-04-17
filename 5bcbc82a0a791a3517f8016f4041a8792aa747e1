@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d46ea10_cc268ac6",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T17:01:34Z",
+      "side": 1,
+      "message": "Thanks for adding tests!\n\nCould you please extend it to cover more levels than just `error!`?",
+      "range": {
+        "startLine": 243,
+        "startChar": 4,
+        "endLine": 243,
+        "endChar": 9
+      },
+      "revId": "5bcbc82a0a791a3517f8016f4041a8792aa747e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45ec102f_72e44edd",
+        "filename": "vmbase/example/tests/test.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T17:01:34Z",
+      "side": 1,
+      "message": "I\u0027m not very familiar with `std` (😜) but couldn\u0027t you simplify this with `std::collections::VecDeque`, in particular `.pop_front()`?",
+      "range": {
+        "startLine": 144,
+        "startChar": 8,
+        "endLine": 146,
+        "endChar": 9
+      },
+      "revId": "5bcbc82a0a791a3517f8016f4041a8792aa747e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56cb5ae5_6df02b49",
+        "filename": "vmbase/example/tests/test.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T17:01:34Z",
+      "side": 1,
+      "message": "... and this with `std::collections::hash_set::HashSet`?",
+      "range": {
+        "startLine": 147,
+        "startChar": 8,
+        "endLine": 149,
+        "endChar": 9
+      },
+      "revId": "5bcbc82a0a791a3517f8016f4041a8792aa747e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59e915bb_c0c3c73d",
+        "filename": "vmbase/example/tests/test.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T17:01:34Z",
+      "side": 1,
+      "message": "As `.verify` may panic, you might want to log `{msg}` first.",
+      "range": {
+        "startLine": 155,
+        "startChar": 12,
+        "endLine": 156,
+        "endChar": 27
+      },
+      "revId": "5bcbc82a0a791a3517f8016f4041a8792aa747e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c48a4a7e_d02ca6b0",
+        "filename": "vmbase/example/tests/test.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T17:01:34Z",
+      "side": 1,
+      "message": "Wrong error message if `!self.expected.is_empty()`",
+      "range": {
+        "startLine": 161,
+        "startChar": 12,
+        "endLine": 161,
+        "endChar": 42
+      },
+      "revId": "5bcbc82a0a791a3517f8016f4041a8792aa747e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34299dcd_4d14af34",
+        "filename": "vmbase/src/logger.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T17:01:34Z",
+      "side": 1,
+      "message": "What about encapsulating this as `Logger::is_enabled` and\n```\nimpl Logger {\n    fn swap_enabled(\u0026mut self, enabled: bool) -\u003e bool {\n        self.is_enabled.swap(enabled)\n    }\n}\nimpl Log for Logger {\n    fn enabled(\u0026self, _metadata: \u0026Metadata) -\u003e bool {\n        self.is_enabled.load()\n    }\n}\n```\n?",
+      "range": {
+        "startLine": 29,
+        "startChar": 11,
+        "endLine": 29,
+        "endChar": 25
+      },
+      "revId": "5bcbc82a0a791a3517f8016f4041a8792aa747e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cc6736f_38688db5",
+        "filename": "vmbase/src/logger.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-17T17:01:34Z",
+      "side": 1,
+      "message": "Cool stuff!",
+      "range": {
+        "startLine": 41,
+        "startChar": 48,
+        "endLine": 41,
+        "endChar": 100
+      },
+      "revId": "5bcbc82a0a791a3517f8016f4041a8792aa747e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
