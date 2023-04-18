@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac0e54bc_2dbc780e",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-18T10:41:03Z",
+      "side": 1,
+      "message": "Is it actually just that single address, or is it implicitly a range of some size starting at the address? If the latter, how large is the range? 4096 bytes? Does the address also need to be aligned somehow? The assumptions should be documented here.",
+      "revId": "90e6f16ad6bd527b71b40dadc7d967ba4c665d7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
