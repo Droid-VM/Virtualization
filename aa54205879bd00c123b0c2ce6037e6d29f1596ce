@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "142e8ea6_05d2e193",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-18T12:33:33Z",
+      "side": 1,
+      "message": "There is no standard set of SMCCC error codes as far as I can see. The Arm Architecture Calls use one set of error codes, PSCI uses a different set, the TRNG uses a different set, and so on. This enum is for the error codes returned by the KVM HVC calls, so I think `KvmError` is a good name for it.",
+      "parentUuid": "923fd3b1_ddb77510",
+      "range": {
+        "startLine": 28,
+        "startChar": 9,
+        "endLine": 28,
+        "endChar": 12
+      },
+      "revId": "aa54205879bd00c123b0c2ce6037e6d29f1596ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5cc47311_8ebc3d29",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-18T12:08:23Z",
       "side": 1,
       "message": "Why don\u0027t we implement -2 \u003d\u003e NotRequired according to the SMCCC spec?",
+      "range": {
+        "startLine": 41,
+        "startChar": 12,
+        "endLine": 41,
+        "endChar": 14
+      },
+      "revId": "aa54205879bd00c123b0c2ce6037e6d29f1596ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "671a2433_d2f0967f",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-18T12:33:33Z",
+      "side": 1,
+      "message": "I guess you\u0027re thinking of the Arm Architecture Calls? There is already an enum `psci::smccc::arch::error::Error` for those, but this error type is for the KVM HVC calls not the Arm Architecture Calls. (Also the Arm Architecture Calls return values are all defined to be 32-bit, while the KVM calls are defined to have 64-bit return values.)\n\nFrom the KVM documentation I\u0027ve found, there seem to be only two possible error values, which I\u0027ve implemented here. According to http://cs/h/android/kernel/common/+/android14-5.15:Documentation/virt/kvm/arm/hypercalls.rst the memory sharing calls can return -3 for invalid parameter, and according to https://source.corp.google.com/h/android/kernel/common/+/android14-5.15:Documentation/virt/kvm/arm/mmio-guard.rst the MMIO guard calls can return -1 for not supported. There are no other error codes documented.",
+      "parentUuid": "5cc47311_8ebc3d29",
       "range": {
         "startLine": 41,
         "startChar": 12,
