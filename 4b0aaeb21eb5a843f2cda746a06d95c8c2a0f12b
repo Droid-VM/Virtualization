@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb65891a_f5810691",
+        "filename": "pvmfw/src/hvc/trng.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-18T13:12:42Z",
+      "side": 1,
+      "message": "nit: Refactor this to\n```\nv if v \u003c 0 \u003d\u003e Error::Unknown(v),\nv \u003d\u003e Error::Unexpected(v as u64),\n```\nto keep the match-pattern structure?",
+      "range": {
+        "startLine": 51,
+        "startChar": 12,
+        "endLine": 57,
+        "endChar": 13
+      },
+      "revId": "4b0aaeb21eb5a843f2cda746a06d95c8c2a0f12b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
