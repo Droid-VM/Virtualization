@@ -403,6 +403,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f14ad6c9_cf83dab0",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-18T13:02:57Z",
+      "side": 1,
+      "message": "\u003e BTW, why does the library an internal state? Can\u0027t detect_hypervisor return a reference and let the client code deal with ensuring it has a singleton?\n\nNot sure I follow you here. Are you suggesting that we don\u0027t need the global variable HYPERZVISOR, which is currently defined as:\n\nstatic HYPERVISOR: HypervisorBackend \u003d HypervisorBackend::Kvm;",
+      "parentUuid": "188f59bb_98d6da96",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 1
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef041a1c_10cbda03",
         "filename": "libs/hyp/src/lib.rs",
         "patchSetId": 1
