@@ -23,10 +23,10 @@ pub trait Hypervisor {
     /// Protected VMs are auto-enrolled.
     fn mmio_guard_init(&self) -> Result<()>;
 
-    /// Maps a memory address to the hypervisor MMIO guard.
+    /// Maps an aligned 4KiB page containing the given memory address to the hypervisor MMIO guard.
     fn mmio_guard_map(&self, addr: usize) -> Result<()>;
 
-    /// Unmaps a memory address from the hypervisor MMIO guard.
+    /// Unmaps an aligned 4KiB page containing the given memory address to the hypervisor MMIO guard.
     fn mmio_guard_unmap(&self, addr: usize) -> Result<()>;
 
     /// Shares a region of memory with host, granting it read, write and execute permissions.
