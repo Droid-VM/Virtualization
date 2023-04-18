@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f97650e5_00d498dd",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-18T12:29:32Z",
+      "side": 1,
+      "message": "That\u0027s not correct as the KVM backend will use the granule size it discovers, which could be larger than 4KiB. In that case, `addr` would probably also need to be aligned to the granule (not just 4KiB).",
+      "range": {
+        "startLine": 26,
+        "startChar": 24,
+        "endLine": 26,
+        "endChar": 28
+      },
+      "revId": "2d9b91edda5382bbcddb032f3c174fa531410c41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8db857fa_8064c541",
         "filename": "libs/hyp/src/hypervisor/common.rs",
         "patchSetId": 1
