@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c879450_0f317166",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-18T12:57:39Z",
+      "side": 1,
+      "message": "I see. In this case, should we rename the `HvcError` in crate error to `KvmError` for example? Since it only covers KVM now.",
+      "parentUuid": "142e8ea6_05d2e193",
+      "range": {
+        "startLine": 28,
+        "startChar": 9,
+        "endLine": 28,
+        "endChar": 12
+      },
+      "revId": "aa54205879bd00c123b0c2ce6037e6d29f1596ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5cc47311_8ebc3d29",
         "filename": "libs/hyp/src/hypervisor/kvm.rs",
         "patchSetId": 3
