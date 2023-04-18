@@ -19,7 +19,7 @@ use crate::{helpers::page_4kb_of, read_sysreg};
 use core::fmt;
 use vmbase::console;
 use vmbase::logger;
-use vmbase::{console::emergency_write_str, eprintln, power::reboot};
+use vmbase::{eprintln, power::reboot};
 
 const UART_PAGE: usize = page_4kb_of(console::BASE_ADDRESS);
 
@@ -120,7 +120,7 @@ extern "C" fn sync_exception_current(_elr: u64, _spsr: u64) {
     if let Err(e) = handle_exception(esr, far) {
         // Don't print to the UART if we are handling an exception it could raise.
         if !handling_uart_exception(esr, far) {
-            emergency_write_str("sync_exception_current\n");
+            eprintln!("sync_exception_current");
             eprintln!("{e}");
             eprintln!("{esr}, far={far:#08x}");
         }
@@ -130,20 +130,20 @@ extern "C" fn sync_exception_current(_elr: u64, _spsr: u64) {
 
 #[no_mangle]
 extern "C" fn irq_current(_elr: u64, _spsr: u64) {
-    emergency_write_str("irq_current\n");
+    eprintln!("irq_current");
     reboot();
 }
 
 #[no_mangle]
 extern "C" fn fiq_current(_elr: u64, _spsr: u64) {
-    emergency_write_str("fiq_current\n");
+    eprintln!("fiq_current");
     reboot();
 }
 
 #[no_mangle]
 extern "C" fn serr_current(_elr: u64, _spsr: u64) {
     let esr = read_sysreg!("esr_el1");
-    emergency_write_str("serr_current\n");
+    eprintln!("serr_current");
     eprintln!("esr={esr:#08x}");
     reboot();
 }
@@ -151,27 +151,27 @@ extern "C" fn serr_current(_elr: u64, _spsr: u64) {
 #[no_mangle]
 extern "C" fn sync_lower(_elr: u64, _spsr: u64) {
     let esr = read_sysreg!("esr_el1");
-    emergency_write_str("sync_lower\n");
+    eprintln!("sync_lower");
     eprintln!("esr={esr:#08x}");
     reboot();
 }
 
 #[no_mangle]
 extern "C" fn irq_lower(_elr: u64, _spsr: u64) {
-    emergency_write_str("irq_lower\n");
+    eprintln!("irq_lower");
     reboot();
 }
 
 #[no_mangle]
 extern "C" fn fiq_lower(_elr: u64, _spsr: u64) {
-    emergency_write_str("fiq_lower\n");
+    eprintln!("fiq_lower");
     reboot();
 }
 
 #[no_mangle]
 extern "C" fn serr_lower(_elr: u64, _spsr: u64) {
     let esr = read_sysreg!("esr_el1");
-    emergency_write_str("serr_lower\n");
+    eprintln!("serr_lower");
     eprintln!("esr={esr:#08x}");
     reboot();
 }
