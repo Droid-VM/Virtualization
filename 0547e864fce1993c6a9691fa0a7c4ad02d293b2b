@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7a9a485_6ac6f97c",
+        "filename": "libs/vsutil/src/file.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-18T13:30:59Z",
+      "side": 1,
+      "message": "Tying this to binder exceptions seems a bit weird; we don\u0027t otherwise use binder here at all.\nOTOH that\u0027s what the existing call site wants.",
+      "range": {
+        "startLine": 21,
+        "startChar": 48,
+        "endLine": 21,
+        "endChar": 62
+      },
+      "revId": "0547e864fce1993c6a9691fa0a7c4ad02d293b2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
