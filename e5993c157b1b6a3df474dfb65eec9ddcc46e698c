@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f74d6bca_f8f6e045",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-18T08:00:08Z",
+      "side": 1,
+      "message": "Thanks, could you please take another look?",
+      "revId": "e5993c157b1b6a3df474dfb65eec9ddcc46e698c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7446fef9_7fc415b7",
@@ -31,6 +48,30 @@
       "writtenOn": "2023-04-18T01:46:23Z",
       "side": 1,
       "message": "can this be \n\n`.map_err(|e| Error::HvcError(e, ...))?`",
+      "range": {
+        "startLine": 58,
+        "startChar": 13,
+        "endLine": 62,
+        "endChar": 9
+      },
+      "revId": "e5993c157b1b6a3df474dfb65eec9ddcc46e698c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d1c191f_e799587f",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-18T08:00:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7446fef9_7fc415b7",
       "range": {
         "startLine": 58,
         "startChar": 13,
