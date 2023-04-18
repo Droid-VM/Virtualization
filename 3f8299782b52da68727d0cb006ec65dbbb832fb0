@@ -427,6 +427,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "693d5f64_2d1fc1fd",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-18T13:37:01Z",
+      "side": 1,
+      "message": "No, we do need a static variable because hypervisor services need to be accessed from the main thread of pvmfw and its exception handlers.\n\nMy point was about software architecture: it\u0027s cleaner to let client code deal with actually ensuring that they have a singleton `Hypervisor` as it removes one extra level of indirection and they best know how they want to deal with the dependencies locking involves.\n\nThis library could then consist of a factory/constructor function (say `get_hypervisor() -\u003e \u0026dyn Hypervisor` or `-\u003e HypervisorBackend`) and the methods of the object (reference) it returns. Note that this matches what you\u0027re asking for above (\"*IMHO its better to validate the hypervisor we are running very early in entry.rs, fail initialization if its an unknown hypervisor and later have get_hypervisor() return some deterministic result*\") as the client code would then simply `.set(get_hypervisor()?)` its singleton during init then make use of it through `.get()`, giving us a properly deduplicated interface between \"discover the hypervisor\" and \"use the previously discovered hypervisor\".\n\nBTW, I know that you\u0027re building on top of what we currently have in the repo and my question above was for all of us as I might have missed the reason why we have to keep this internal library state.",
+      "parentUuid": "f14ad6c9_cf83dab0",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 1
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef041a1c_10cbda03",
         "filename": "libs/hyp/src/lib.rs",
         "patchSetId": 1
