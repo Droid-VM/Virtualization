@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5032afb_508d29d8",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-18T01:34:36Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s a good idea. all we need is a collection of capabilities that a hypervisor supports. ex: `(MemShare | MmioGuard | SomethingElse)`",
+      "parentUuid": "27345504_3de6a60e",
+      "range": {
+        "startLine": 100,
+        "startChar": 54,
+        "endLine": 100,
+        "endChar": 58
+      },
+      "revId": "2660613a61d212d3c0cbc0c942830beed0e5a801",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c8ba4b0_c9dddeca",
         "filename": "libs/hyp/src/mmio_guard.rs",
         "patchSetId": 1
