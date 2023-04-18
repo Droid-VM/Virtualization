@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e607aafe_572a6f26",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-18T13:52:18Z",
+      "side": 1,
+      "message": "VirtualMachineService is just an AIDL interface; the implementation is in virtualization manager.\nCreating the instance image doesn\u0027t need to go via binder at all. It seems right that it should be the responsibility of virtualization service.",
+      "range": {
+        "startLine": 49,
+        "startChar": 56,
+        "endLine": 49,
+        "endChar": 77
+      },
+      "revId": "05e42b2f1c4c7fbf75a163bc2b7b9a0120009e3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
