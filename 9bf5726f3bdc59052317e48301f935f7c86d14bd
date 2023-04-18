@@ -397,6 +397,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8eb6d7e8_a116bd8d",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-18T07:46:24Z",
+      "side": 1,
+      "message": "\u003e What\u0027s the client here?\n\nI just meant we cannot call call VirtualizationService from VirtualMachineService.\n\nSo can we just move `initializeWritablePartition` to VSI so that we can invoke both here or from VirtualMachineService? We can do it in a subsequent cl as the current one is already quite big.",
+      "parentUuid": "dfec1713_b1754361",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 9
+      },
+      "revId": "9bf5726f3bdc59052317e48301f935f7c86d14bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3dfeed7b_a230c65f",
         "filename": "vm_payload/src/api.rs",
         "patchSetId": 10
