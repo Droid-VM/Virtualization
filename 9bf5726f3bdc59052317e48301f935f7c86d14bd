@@ -493,6 +493,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e5d2d83_312bce4b",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-18T08:05:56Z",
+      "side": 1,
+      "message": "You mean virtualization manager and virtualization service?\nI don\u0027t think we have one. I\u0027d just create a new library under libs.",
+      "parentUuid": "0726aa64_f8f9124c",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 9
+      },
+      "revId": "9bf5726f3bdc59052317e48301f935f7c86d14bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3dfeed7b_a230c65f",
         "filename": "vm_payload/src/api.rs",
         "patchSetId": 10
