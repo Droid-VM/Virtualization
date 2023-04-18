@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "923fd3b1_ddb77510",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-18T12:08:23Z",
+      "side": 1,
+      "message": "This is more like the SMCCC return code intepretation than a KvmError, should we call it `SmcccError`?",
+      "range": {
+        "startLine": 28,
+        "startChar": 9,
+        "endLine": 28,
+        "endChar": 12
+      },
+      "revId": "aa54205879bd00c123b0c2ce6037e6d29f1596ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cc47311_8ebc3d29",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-18T12:08:23Z",
+      "side": 1,
+      "message": "Why don\u0027t we implement -2 \u003d\u003e NotRequired according to the SMCCC spec?",
+      "range": {
+        "startLine": 41,
+        "startChar": 12,
+        "endLine": 41,
+        "endChar": 14
+      },
+      "revId": "aa54205879bd00c123b0c2ce6037e6d29f1596ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
