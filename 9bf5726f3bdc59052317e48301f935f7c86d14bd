@@ -421,6 +421,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ece7604d_d33b8e78",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-18T07:52:51Z",
+      "side": 1,
+      "message": "Why not just share the code? It doesn\u0027t need to be accessed via IPC.\n\nWe should create the file only if it doesn\u0027t exist, which is more or less what the client APIs do.",
+      "parentUuid": "8eb6d7e8_a116bd8d",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 9
+      },
+      "revId": "9bf5726f3bdc59052317e48301f935f7c86d14bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4db2202_f115784c",
+        "filename": "virtualizationservice/src/rkpvm.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-18T07:52:51Z",
+      "side": 1,
+      "message": "Why not just share the code? It doesn\u0027t need to be accessed via IPC.",
+      "parentUuid": "8eb6d7e8_a116bd8d",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 9
+      },
+      "revId": "9bf5726f3bdc59052317e48301f935f7c86d14bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3dfeed7b_a230c65f",
         "filename": "vm_payload/src/api.rs",
         "patchSetId": 10
