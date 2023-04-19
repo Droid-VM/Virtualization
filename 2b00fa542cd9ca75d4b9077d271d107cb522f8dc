@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31165cec_8626186b",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-19T17:42:32Z",
+      "side": 1,
+      "message": "Sorry for adding so many reviewers but this is an interesting bug!\n\nWhen comparing `bss.start \u003d\u003d data.end` (not `data_end`!), the compiler optimizes the comparison to `false` (even though it\u0027s true) and removes the rest of the function as it then proves to itself that it is unreachable, leading to awesome panic messages such as:\n\n```\npanicked at \u0027assertion failed: `(left \u003d\u003d right)`\n  left: `2145405760`,\n right: `2145405760`\u0027, packages/modules/Virtualization/pvmfw/src/entry.rs:270:5\n```\n\nAfter discussing this with @alanstokes@google.com and @jakobvukalovic@google.com, it sounds like it might be coming from the fact that `bss.start` and `data.end` are [set using `addr_of!`](http://cs/android/packages/modules/Virtualization/vmbase/src/layout.rs) so that the compiler proves to itself that those values could never be equal because they are the addresses of 2 distinct variables. In turn, this assumption made by the compiler would be wrong because those \"variables\" aren\u0027t real Rust variables but simple symbols [imported](http://cs/android/packages/modules/Virtualization/vmbase/src/linker.rs) from the [linker script](http://cs/android/packages/modules/Virtualization/vmbase/sections.ld).\n\nOTOH, doing the little dance of defining `data_end` seems to confuse the compiler enough that it doesn\u0027t optimize out the comparison.\n\nI\u0027ve tried addressing this by reworking the linker script to define variables that hold the size of the sections (e.g. `data_size \u003d SIZEOF(.data)`) but there\u0027s a circular dependency when adding `rodata_size \u003d SIZEOF(.rodata)` to `.rodata`.",
+      "range": {
+        "startLine": 275,
+        "startChar": 15,
+        "endLine": 275,
+        "endChar": 23
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b06a6cdb_bf65dc0d",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-19T17:42:32Z",
+      "side": 1,
+      "message": "This `DSB` doesn\u0027t seem to be used by Linux and wasn\u0027t used previously but I\u0027m puzzled by it; shouldn\u0027t we prevent any memory access that could still be in flight to go through before we disable the MMU in the next instruction?",
+      "range": {
+        "startLine": 316,
+        "startChar": 13,
+        "endLine": 316,
+        "endChar": 20
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
