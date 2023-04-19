@@ -523,6 +523,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17c9b888_54e548d7",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-19T10:16:05Z",
+      "side": 1,
+      "message": "This seems to work:\n\n```\n/// Gets the hypervisor singleton.\npub fn get_hypervisor() -\u003e \u0026\u0027static dyn Hypervisor {\n    static HYPERVISOR: OnceBox\u003cHypervisorBackend\u003e \u003d OnceBox::new();\n\n    HYPERVISOR\n        .get_or_try_init(|| {\n            Ok::\u003cBox\u003cHypervisorBackend\u003e, Error\u003e(Box::new(\n                query_vendor_hyp_call_uid().try_into().expect(\"Unknown Hypervisor\"),\n            ))\n        })\n        .unwrap()\n        .get_hypervisor()\n}\n\n```",
+      "parentUuid": "bc3903e7_c01af27c",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 1
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef041a1c_10cbda03",
         "filename": "libs/hyp/src/lib.rs",
         "patchSetId": 1
