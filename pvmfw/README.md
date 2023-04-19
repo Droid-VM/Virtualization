@@ -197,16 +197,17 @@ next-stage secret, and a certificate chain, intended for pVM attestation. Note
 that it differs from the `BccHandover` defined by the specification in that its
 `Bcc` field is mandatory (while optional in the original).
 
-Devices that fully implement DICE should provide a certificate rooted at the
-Unique Device Secret (UDS) in a boot stage preceding the pvmfw loader (typically
-ABL), in such a way that it would receive a valid `BccHandover`, that can be
-passed to [`BccHandoverMainFlow`][BccHandoverMainFlow] along with the inputs
-described below.
+Ideally devices that fully implement DICE should provide a certificate rooted at
+the Unique Device Secret (UDS) in a boot stage preceding the pvmfw loader
+(typically ABL), in such a way that it would receive a valid `BccHandover`, that
+can be passed to [`BccHandoverMainFlow`][BccHandoverMainFlow] along with the
+inputs described below. However, there is a limitation in Android 14 that means
+that a UDS-rooted DICE chain must not be used for pvmfw.
 
-Otherwise, as an intermediate step towards supporting DICE throughout the
-software stack of the device, incomplete implementations may root the BCC at the
-pvmfw loader, using an arbitrary constant as initial CDI. The pvmfw loader can
-easily do so by:
+Instead, as an intermediate step towards supporting DICE throughout the
+software stack of the device, implementations should root the BCC at the pvmfw
+loader, using an arbitrary constant as initial CDI. The pvmfw loader can easily
+do so by:
 
 1. Building a BCC-less `BccHandover` using CBOR operations
    ([example][Trusty-BCC]) and containing the constant CDIs
