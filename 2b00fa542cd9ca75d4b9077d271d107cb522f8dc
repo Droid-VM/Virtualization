@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b60ec55f_bad26a9f",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-19T17:45:53Z",
+      "side": 1,
+      "message": "checked_add",
+      "range": {
+        "startLine": 274,
+        "startChar": 30,
+        "endLine": 274,
+        "endChar": 31
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31165cec_8626186b",
         "filename": "pvmfw/src/entry.rs",
         "patchSetId": 1
@@ -19,6 +42,98 @@
         "startChar": 15,
         "endLine": 275,
         "endChar": 23
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "986195f9_b42d84ef",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-19T17:45:53Z",
+      "side": 1,
+      "message": "The comment could use an update. Perhaps mentioning in passing the basic alignment and non-empty assumptions?",
+      "range": {
+        "startLine": 279,
+        "startChar": 0,
+        "endLine": 279,
+        "endChar": 94
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14cd454e_3ba7b6c7",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-19T17:45:53Z",
+      "side": 1,
+      "message": "This assumes BCC is not at the beginning of rwdata",
+      "range": {
+        "startLine": 286,
+        "startChar": 16,
+        "endLine": 286,
+        "endChar": 46
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11b77666_1c1b5ad7",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-19T17:45:53Z",
+      "side": 1,
+      "message": "This assumes that BCC is not at the end of rwdata",
+      "range": {
+        "startLine": 294,
+        "startChar": 0,
+        "endLine": 294,
+        "endChar": 46
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f294bd9b_4e8c1b4e",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-19T17:45:53Z",
+      "side": 1,
+      "message": "No isb before messing with `sctlr_el1`?",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 0
       },
       "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
