@@ -499,6 +499,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bc3903e7_c01af27c",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-19T08:27:48Z",
+      "side": 1,
+      "message": "\u003e You could use a OnceCell and unwrap the result of its .get/.set.\n\nI tried \"use core::cell::OnceCell;\" which seems to be an unstable feature.\n\nerror[E0658]: use of unstable library feature \u0027once_cell\u0027\n  --\u003e packages/modules/Virtualization/libs/hyp/src/hypervisor/mod.rs:65:24\n   |\n65 |     static HYPERVISOR: OnceCell\u003cHypervisorBackend\u003e \u003d OnceCell::new();",
+      "parentUuid": "1b32f107_b7fd82f9",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 1
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef041a1c_10cbda03",
         "filename": "libs/hyp/src/lib.rs",
         "patchSetId": 1
