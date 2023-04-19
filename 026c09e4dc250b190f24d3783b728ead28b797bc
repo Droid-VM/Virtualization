@@ -33,6 +33,75 @@
       "message": "This function should have a safety comment. I guess it can only be called once, or it would make mutable aliases to the same memory.",
       "revId": "026c09e4dc250b190f24d3783b728ead28b797bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77c6c0d7_ca055973",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-19T10:22:27Z",
+      "side": 1,
+      "message": "How could we know that? The C caller could do what C code does by passing a wrong pointer (`void **ptr; *ptr \u003d malloc(4); free(ptr);`), calling `free` twice on a valid pointer, etc ... For an added level of safety, we could check that the pointer is in `HEAP.as_ptr_range()` and add a magic token that we wipe on `free`.",
+      "range": {
+        "startLine": 80,
+        "startChar": 39,
+        "endLine": 80,
+        "endChar": 64
+      },
+      "revId": "026c09e4dc250b190f24d3783b728ead28b797bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b23ff37_40159108",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-19T10:22:27Z",
+      "side": 1,
+      "message": "Note that this introduces a difference in behaviour but arguably for the better.",
+      "range": {
+        "startLine": 85,
+        "startChar": 38,
+        "endLine": 85,
+        "endChar": 47
+      },
+      "revId": "026c09e4dc250b190f24d3783b728ead28b797bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab2a3e28_c195729c",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-19T10:22:27Z",
+      "side": 1,
+      "message": "nit: rename this `max_const_size` to make it clear why you\u0027re not using [`core::cmp::max`](https://doc.rust-lang.org/beta/core/cmp/fn.max.html)?",
+      "range": {
+        "startLine": 118,
+        "startChar": 25,
+        "endLine": 118,
+        "endChar": 33
+      },
+      "revId": "026c09e4dc250b190f24d3783b728ead28b797bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
