@@ -14,14 +14,20 @@
 
 //! Wrappers around hypervisor back-ends.
 
+extern crate alloc;
+
 mod common;
 mod kvm;
 
+use crate::error::{Error, Result};
+use alloc::boxed::Box;
 pub use common::Hypervisor;
 pub use kvm::KvmError;
 use kvm::KvmHypervisor;
-
-static HYPERVISOR: HypervisorBackend = HypervisorBackend::Kvm;
+use log::debug;
+use once_cell::race::OnceBox;
+use psci::smccc::hvc64;
+use uuid::Uuid;
 
 enum HypervisorBackend {
     Kvm,
@@ -35,7 +41,43 @@ impl HypervisorBackend {
     }
 }
 
+impl TryFrom<Uuid> for HypervisorBackend {
+    type Error = Error;
+
+    fn try_from(uuid: Uuid) -> Result<HypervisorBackend> {
+        match uuid {
+            KvmHypervisor::UUID => {
+                debug!("Detected KVM Hypervisor");
+                Ok(HypervisorBackend::Kvm)
+            }
+            u => {
+                debug!("Unknown hypervisor UUID {}", u.urn());
+                Err(Error::UnsupportedHypervisorUuid(u))
+            }
+        }
+    }
+}
+
+const ARM_SMCCC_VENDOR_HYP_CALL_UID_FUNC_ID: u32 = 0x8600ff01;
+
+fn query_vendor_hyp_call_uid() -> Uuid {
+    let args = [0u64; 17];
+    let res = hvc64(ARM_SMCCC_VENDOR_HYP_CALL_UID_FUNC_ID, args);
+    Uuid::from_u128(
+        (res[0] as u32 as u128)
+            | ((res[1] as u32 as u128) << 32)
+            | ((res[2] as u32 as u128) << 64)
+            | ((res[3] as u32 as u128) << 96),
+    )
+}
+
+fn detect_hypervisor() -> HypervisorBackend {
+    query_vendor_hyp_call_uid().try_into().expect("Unknown hypervisor")
+}
+
 /// Gets the hypervisor singleton.
 pub fn get_hypervisor() -> &'static dyn Hypervisor {
-    HYPERVISOR.get_hypervisor()
+    static HYPERVISOR: OnceBox<HypervisorBackend> = OnceBox::new();
+
+    HYPERVISOR.get_or_init(|| Box::new(detect_hypervisor())).get_hypervisor()
 }
