@@ -8,8 +8,7 @@ intended to host headless & native workloads only.
 ## Prerequisites
 
 Any 64-bit target (either x86\_64 or arm64) is supported. 32-bit target is not
-supported. Note that we currently don't support user builds; only userdebug
-builds are supported.
+supported.
 
 The only remaining requirement is that `com.android.virt` APEX has to be
 pre-installed. To do this, add the following line in your product makefile.
@@ -18,10 +17,10 @@ pre-installed. To do this, add the following line in your product makefile.
 $(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)
 ```
 
-Build the target after adding the line, and flash it. This step needs to be done
-only once for the target.
+Build the target product after adding the line, and flash it. This step needs
+to be done only once for the target.
 
-If you are using `aosp_oriole` (Pixel 6) or `aosp_cf_x86_64_phone` (Cuttlefish),
+If you are using Pixel 6 and beyond or Cuttlefish (`aosp_cf_x86_64_phone`)
 adding above line is not necessary as it's already done.
 
 ## Building and installing microdroid
@@ -75,8 +74,8 @@ multiple configuration files if needed.
 ```
 
 The value of `task.command` should match with the name of the shared library
-defined above. If your app requires APEXes to be imported, you can declare the
-list in `apexes` key like following.
+defined above. If your app requires additional APEXes to be imported, you can
+declare the list in `apexes` key like the following:
 
 ```json
 {
@@ -93,7 +92,7 @@ Embed the shared library and the VM configuration file in an APK:
 ```
 android_app {
   name: "MyApp",
-  srcs: ["**/*.java"], // if there is any java code
+  srcs: ["**/*.java"],
   jni_libs: ["MyMicrodroidApp"],
   use_embedded_native_libs: true,
   sdk_version: "current",
@@ -145,20 +144,12 @@ $TEST_ROOT/instance.img \
 --config-path assets/VM_CONFIG_FILE
 ```
 
-The last command lets you know the CID assigned to the VM. The console output
-from the VM is stored to `$TEST_ROOT/console.txt` and logcat is stored to
-`$TEST_ROOT/log.txt` file for debugging purpose. If you omit `--log` or
-`--console` option, they will be emitted to the current console.
+The console output from the VM is stored to `$TEST_ROOT/console.txt` and logcat
+is stored to `$TEST_ROOT/log.txt` file for debugging purpose. If you omit
+`--log` or `--console` option, the console output will be emitted to the
+current console and the logcat logs are sent to the main logcat in Android.
 
-Stopping the VM can be done as follows:
-
-```sh
-adb shell /apex/com.android.virt/bin/vm stop $CID
-```
-
-, where `$CID` is the reported CID value. This works only when the `vm` was
-invoked with the `--daemonize` flag. If the flag was not used, press Ctrl+C on
-the console where the `vm run-app` command was invoked.
+Stopping the VM can be done by pressing `Ctrl+C`.
 
 ## Debuggable microdroid
 
