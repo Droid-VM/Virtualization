@@ -14,6 +14,7 @@
 
 //! Wrappers around calls to the KVM hypervisor.
 
+use super::common::hypervisor_cap::DYNAMIC_MEM_SHARE;
 use super::common::Hypervisor;
 use crate::error::{Error, Result};
 use crate::util::{page_address, SIZE_4KB};
@@ -76,6 +77,7 @@ impl KvmHypervisor {
     // Based on ARM_SMCCC_VENDOR_HYP_UID_KVM_REG values listed in Linux kernel source:
     // https://github.com/torvalds/linux/blob/master/include/linux/arm-smccc.h
     pub const UUID: Uuid = uuid!("28b46fb6-2ec5-11e9-a9ca-4b564d003a74");
+    const CAPABILITIES: u32 = DYNAMIC_MEM_SHARE;
 }
 
 impl Hypervisor for KvmHypervisor {
@@ -128,6 +130,10 @@ impl Hypervisor for KvmHypervisor {
         let args = [0u64; 17];
         let granule = checked_hvc64(ARM_SMCCC_KVM_FUNC_HYP_MEMINFO, args)?;
         Ok(granule.try_into().unwrap())
+    }
+
+    fn has_cap(&self, cap: u32) -> bool {
+        KvmHypervisor::CAPABILITIES & cap != 0
     }
 }
 
