@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eab60311_4068ecc5",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-19T08:58:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f74c078_54aa0315",
+      "range": {
+        "startLine": 84,
+        "startChar": 21,
+        "endLine": 84,
+        "endChar": 38
+      },
+      "revId": "521e1d5ab47b8c8bdb34623b6140a994ea376de3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9bb47e9a_b2a46ad9",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-17T17:05:44Z",
       "side": 1,
       "message": "nit: avoid explicitly `return`-ing with\n```\nif let Err(e) \u003d handle_exception(esr, far) {\n    if !handling_uart_exception(esr, far) {\n        emergency_write_str(\"sync_exception_current\\n\");\n        eprintln!(\"{err}\");\n        eprintln!(\"{esr}, far\u003d{far:#08x}\");\n    }\n    reboot()\n}\n```\nalso, didn\u0027t we decide to use `eprintln!` in place of `emergency_write_str`? Or are you keeping this for a future cleanup?",
+      "range": {
+        "startLine": 103,
+        "startChar": 17,
+        "endLine": 103,
+        "endChar": 23
+      },
+      "revId": "521e1d5ab47b8c8bdb34623b6140a994ea376de3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ed6fc04_46acde7a",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-19T08:58:48Z",
+      "side": 1,
+      "message": "Updated. There is another CL to replace `emergency_write_str` with `eprintln`.",
+      "parentUuid": "9bb47e9a_b2a46ad9",
       "range": {
         "startLine": 103,
         "startChar": 17,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "125bfb60_10316a2a",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-19T08:58:48Z",
+      "side": 1,
+      "message": "Yes, this verifies that the address that caused the translation fault comes from a page flagged for lazy MMIO guard mapping, ie a device page. I have updated the error enum.",
+      "parentUuid": "5db921f6_2e13a460",
+      "range": {
+        "startLine": 271,
+        "startChar": 8,
+        "endLine": 273,
+        "endChar": 65
+      },
+      "revId": "521e1d5ab47b8c8bdb34623b6140a994ea376de3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ff3cf4a_cd96a96e",
         "filename": "pvmfw/src/memory.rs",
         "patchSetId": 8
@@ -83,6 +155,30 @@
       "writtenOn": "2023-04-17T17:05:44Z",
       "side": 1,
       "message": "This is dead code because of the `return Err(())` in `verify_lazy_mapped_block`, right? I\u0027d recommend inlining this function and/or making it take `Attributes` instead of a `Descriptor`.",
+      "range": {
+        "startLine": 407,
+        "startChar": 8,
+        "endLine": 407,
+        "endChar": 13
+      },
+      "revId": "521e1d5ab47b8c8bdb34623b6140a994ea376de3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b38830c3_e2e8126c",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-19T08:58:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ff3cf4a_cd96a96e",
       "range": {
         "startLine": 407,
         "startChar": 8,
@@ -118,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2685f073_af668937",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-19T08:58:48Z",
+      "side": 1,
+      "message": "`.flags()` returns `None` when `Attributes::from_bits` couldn\u0027t even parse the flags of a page table entry (regardless of its `VALID` state). That should never happen here, but the API of the `bitflags` crate we use to handle the flags allows for that case.",
+      "parentUuid": "a55b1c76_feecc1d4",
+      "range": {
+        "startLine": 417,
+        "startChar": 35,
+        "endLine": 417,
+        "endChar": 39
+      },
+      "revId": "521e1d5ab47b8c8bdb34623b6140a994ea376de3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0b057225_1ac4495d",
         "filename": "pvmfw/src/memory.rs",
         "patchSetId": 8
@@ -129,6 +249,30 @@
       "writtenOn": "2023-04-17T17:05:44Z",
       "side": 1,
       "message": "nit: `let flags \u003d desc.flags().ok_or(())?`",
+      "range": {
+        "startLine": 417,
+        "startChar": 4,
+        "endLine": 419,
+        "endChar": 6
+      },
+      "revId": "521e1d5ab47b8c8bdb34623b6140a994ea376de3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4141d52b_c9751824",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-19T08:58:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b057225_1ac4495d",
       "range": {
         "startLine": 417,
         "startChar": 4,
@@ -152,6 +296,30 @@
       "writtenOn": "2023-04-17T17:05:44Z",
       "side": 1,
       "message": "So how does `.modify_range()` work? I thought it was only called on leaf mappings (of any level) covering the range but would it be also called on a non-leaf mapping? e.g. if modifying a 2MiB-aligned 2MiB region with L3 mappings, would it be called more than 512 times i.e. not on the L3 mappings only but also the L2, L1, and L0 mappings? If not, what\u0027s the point of this check?",
+      "range": {
+        "startLine": 420,
+        "startChar": 7,
+        "endLine": 420,
+        "endChar": 8
+      },
+      "revId": "521e1d5ab47b8c8bdb34623b6140a994ea376de3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "009d9e29_e29dada4",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-19T08:58:48Z",
+      "side": 1,
+      "message": "`.modify_range` is called on table entries as well (within given range). Since we are not interested in table entries here, they are skipped.",
+      "parentUuid": "27f15db8_742c820e",
       "range": {
         "startLine": 420,
         "startChar": 7,
