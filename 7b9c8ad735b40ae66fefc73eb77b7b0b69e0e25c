@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "653f7346_a3c8e307",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-19T17:25:34Z",
+      "side": 1,
+      "message": "I\u0027m zeroing and flushing `.data`, `.bss` and the stack in `jump_to_payload` (wasteful because many pages might not be dirty but safer/simpler) in aosp/2548230 so `flush_dirty_pages` only needs to flush `appended_payload_range` from `static_layout`.",
+      "range": {
+        "startLine": 288,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 37
+      },
+      "revId": "7b9c8ad735b40ae66fefc73eb77b7b0b69e0e25c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
