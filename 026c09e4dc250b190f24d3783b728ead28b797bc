@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eaaeb6f_f4e21606",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-19T10:12:02Z",
+      "side": 1,
+      "message": "It needs to also be valid for the lifetime of the reference, and not have any mutable aliases. This is guaranteed by the fact that it was obtained from a reference. But maybe you can use `zerocopy::FromBytes` and `LayoutVerified` to avoid the unsafe block entirely?",
+      "revId": "026c09e4dc250b190f24d3783b728ead28b797bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8f959a1_44eabb48",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-19T10:12:02Z",
+      "side": 1,
+      "message": "This function should have a safety comment. I guess it can only be called once, or it would make mutable aliases to the same memory.",
+      "revId": "026c09e4dc250b190f24d3783b728ead28b797bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
