@@ -16,6 +16,12 @@
 
 use crate::error::Result;
 
+/// Capabilities that Hypervisor backends can declare support for.
+pub mod hypervisor_cap {
+    /// Capability for guest to share its memory with host at runtime
+    pub const DYNAMIC_MEM_SHARE: u32 = 0x1;
+}
+
 /// Trait for the hypervisor.
 pub trait Hypervisor {
     /// Initializes the hypervisor by enrolling a MMIO guard and checking the memory granule size.
@@ -43,4 +49,7 @@ pub trait Hypervisor {
 
     /// Returns the memory protection granule size in bytes.
     fn memory_protection_granule(&self) -> Result<usize>;
+
+    /// Check if required capabilities are supported
+    fn has_cap(&self, cap: u32) -> bool;
 }
