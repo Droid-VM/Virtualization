@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03b424aa_85b91cff",
+        "filename": "pvmfw/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-19T18:10:48Z",
+      "side": 1,
+      "message": "WDYT of re-using the architectural CPU feature names as crate feature names e.g. `cpu_feat_hafdbs` or `cpu_feat_rnd`?",
+      "range": {
+        "startLine": 13,
+        "startChar": 9,
+        "endLine": 13,
+        "endChar": 15
+      },
+      "revId": "242c1b366cb028edda68615265a1d40fc8d5a47a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2928461e_50f3873a",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-19T18:10:48Z",
+      "side": 1,
+      "message": "As discussed offline and [commented here](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2527060/comment/653f7346_a3c8e307/), I don\u0027t think that we\u0027re benefiting from `writable_region` being `DATA_DBM` and flushed.",
+      "range": {
+        "startLine": 62,
+        "startChar": 40,
+        "endLine": 62,
+        "endChar": 94
+      },
+      "revId": "242c1b366cb028edda68615265a1d40fc8d5a47a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
