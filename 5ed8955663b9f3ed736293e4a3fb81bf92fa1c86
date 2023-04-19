@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3407cdf4_6e18fbba",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-19T12:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5735786e_82943be2",
+      "range": {
+        "startLine": 186,
+        "startChar": 14,
+        "endLine": 186,
+        "endChar": 17
+      },
+      "revId": "5ed8955663b9f3ed736293e4a3fb81bf92fa1c86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "529727bd_6af061ea",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-17T17:11:50Z",
       "side": 1,
       "message": "Same here: `tlbi!(\"vale1\", asid, addr)`",
+      "range": {
+        "startLine": 205,
+        "startChar": 19,
+        "endLine": 205,
+        "endChar": 24
+      },
+      "revId": "5ed8955663b9f3ed736293e4a3fb81bf92fa1c86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68971610_845fd9d1",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-19T12:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "529727bd_6af061ea",
       "range": {
         "startLine": 205,
         "startChar": 19,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc0e98b2_14d53d37",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-19T12:43:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66b3c44f_df3b6254",
+      "range": {
+        "startLine": 490,
+        "startChar": 34,
+        "endLine": 490,
+        "endChar": 40
+      },
+      "revId": "5ed8955663b9f3ed736293e4a3fb81bf92fa1c86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be1d8d6e_ee557667",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-04-17T17:11:50Z",
       "side": 1,
       "message": "There\u0027s no (easy) way to get that from `aarch64_paging`, I suppose?",
+      "range": {
+        "startLine": 495,
+        "startChar": 28,
+        "endLine": 495,
+        "endChar": 32
+      },
+      "revId": "5ed8955663b9f3ed736293e4a3fb81bf92fa1c86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1977895f_7a1dc2eb",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-19T12:43:00Z",
+      "side": 1,
+      "message": "Not from `aarch64-paging`, but the value is defined by pvmfw in `mmu::PageTable`. Updated.",
+      "parentUuid": "be1d8d6e_ee557667",
       "range": {
         "startLine": 495,
         "startChar": 28,
