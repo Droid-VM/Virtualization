@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b652ad26_d995d582",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-19T09:59:00Z",
+      "side": 1,
+      "message": "Thanks",
+      "parentUuid": "7ed6fc04_46acde7a",
+      "range": {
+        "startLine": 103,
+        "startChar": 17,
+        "endLine": 103,
+        "endChar": 23
+      },
+      "revId": "521e1d5ab47b8c8bdb34623b6140a994ea376de3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5db921f6_2e13a460",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "Yes, this verifies that the address that caused the translation fault comes from a page flagged for lazy MMIO guard mapping, ie a device page. I have updated the error enum.",
       "parentUuid": "5db921f6_2e13a460",
+      "range": {
+        "startLine": 271,
+        "startChar": 8,
+        "endLine": 273,
+        "endChar": 65
+      },
+      "revId": "521e1d5ab47b8c8bdb34623b6140a994ea376de3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "895790f9_99187497",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-19T09:59:00Z",
+      "side": 1,
+      "message": "Ack; although it sounds like this would be a valid use of `.unwrap`.",
+      "parentUuid": "125bfb60_10316a2a",
       "range": {
         "startLine": 271,
         "startChar": 8,
@@ -226,6 +274,30 @@
       "side": 1,
       "message": "`.flags()` returns `None` when `Attributes::from_bits` couldn\u0027t even parse the flags of a page table entry (regardless of its `VALID` state). That should never happen here, but the API of the `bitflags` crate we use to handle the flags allows for that case.",
       "parentUuid": "a55b1c76_feecc1d4",
+      "range": {
+        "startLine": 417,
+        "startChar": 35,
+        "endLine": 417,
+        "endChar": 39
+      },
+      "revId": "521e1d5ab47b8c8bdb34623b6140a994ea376de3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9f89bcb_6b67ca06",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-19T09:59:00Z",
+      "side": 1,
+      "message": "I see, thanks for the explanation! This also feels like a valid use of `.unwrap`, although it should probably be done inside the crate.",
+      "parentUuid": "2685f073_af668937",
       "range": {
         "startLine": 417,
         "startChar": 35,

@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fa4d3bb_724f2b0b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-19T09:59:00Z",
+      "side": 1,
+      "message": "uber-nit: \"by mapping the pages as invalid\" because they were never mapped in the first place and aren\u0027t being unmapped.",
+      "range": {
+        "startLine": 9,
+        "startChar": 44,
+        "endLine": 10,
+        "endChar": 5
+      },
+      "revId": "8a8a41a92c76fa5483f681f3f8286049cc812997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5e67db0_157e48a9",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-19T09:59:00Z",
+      "side": 1,
+      "message": "nit: I\u0027m tempted to also encapsulate these constants in `Esr`.",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 24
+      },
+      "revId": "8a8a41a92c76fa5483f681f3f8286049cc812997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea74583d_3d08f1cf",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-19T09:59:00Z",
+      "side": 1,
+      "message": "This probably doesn\u0027t matter because pvmfw is single threaded but would you mind doing it in the reverse order so that we\u0027re 100% sure that the moment the stage-1 mapping becomes valid, the backing MMIO page is actually guarded?",
+      "range": {
+        "startLine": 275,
+        "startChar": 8,
+        "endLine": 276,
+        "endChar": 62
+      },
+      "revId": "8a8a41a92c76fa5483f681f3f8286049cc812997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
