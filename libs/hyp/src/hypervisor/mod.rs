@@ -21,6 +21,7 @@ mod kvm;
 
 use crate::error::{Error, Result};
 use alloc::boxed::Box;
+pub use common::hypervisor_cap;
 pub use common::Hypervisor;
 pub use kvm::KvmError;
 use kvm::KvmHypervisor;
