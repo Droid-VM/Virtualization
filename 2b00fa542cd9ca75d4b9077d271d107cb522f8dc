@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a5763b5_a8266903",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-19T17:49:56Z",
+      "side": 1,
+      "message": "Naive question - why don\u0027t we copy `next_bcc` into that buffer and then just zero all of `rwdata`? Doesn\u0027t that kill two birds with one stone (don\u0027t rely on a second place to wipe, simplify the assembly before `jump_to_payload`)?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 17
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b60ec55f_bad26a9f",
         "filename": "pvmfw/src/entry.rs",
         "patchSetId": 1
