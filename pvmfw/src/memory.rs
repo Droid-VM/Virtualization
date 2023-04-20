@@ -21,6 +21,8 @@ use crate::mmu;
 use alloc::alloc::alloc_zeroed;
 use alloc::alloc::dealloc;
 use alloc::alloc::handle_alloc_error;
+use buddy_system_allocator::LockedHeap;
+use core::alloc::GlobalAlloc as _;
 use core::alloc::Layout;
 use core::cmp::max;
 use core::cmp::min;
@@ -29,7 +31,7 @@ use core::num::NonZeroUsize;
 use core::ops::Range;
 use core::ptr::NonNull;
 use core::result;
-use hyp::get_hypervisor;
+use hyp::{get_hypervisor, hypervisor_cap::*};
 use log::error;
 use tinyvec::ArrayVec;
 
@@ -127,6 +129,8 @@ impl From<hyp::Error> for MemoryTrackerError {
 }
 
 type Result<T> = result::Result<T, MemoryTrackerError>;
+
+static SHM_ALLOCATOR: LockedHeap<32> = LockedHeap::<32>::new();
 
 impl MemoryTracker {
     const CAPACITY: usize = 5;
@@ -258,6 +262,26 @@ impl MemoryTracker {
 
         Ok(())
     }
+
+    /// Initialize a separate heap for shared memory allocations.
+    ///
+    /// Some hypervisors such as Gunyah do not support a MemShare API for guest
+    /// to share its memory with host. Instead they allow host to designate part
+    /// of guest memory as "shared" ahead of guest starting its execution. The
+    /// shared memory region is indicated in swiotlb node. On such platforms use
+    /// a separate heap to allocate buffers that can be shared with host.
+    pub fn init_shared_pool(&mut self, range: Range<usize>) -> Result<()> {
+        let size = NonZeroUsize::new(range.len()).unwrap();
+        let range = self.alloc_mut(range.start, size)?;
+
+        // SAFETY - Assume that SHM_ALLOCATOR is initialized once with the
+        // a range of memory that has been validated in `validate_swiotlb_info`
+        unsafe {
+            SHM_ALLOCATOR.lock().init(range.start, range.len());
+        }
+
+        Ok(())
+    }
 }
 
 impl Drop for MemoryTracker {
@@ -308,6 +332,18 @@ pub fn alloc_shared(size: usize) -> hyp::Result<NonNull<u8>> {
     let layout = shared_buffer_layout(size)?;
     let granule = layout.align();
 
+    if !get_hypervisor().has_cap(DYNAMIC_MEM_SHARE) {
+        // Safe because `shared_buffer_layout` panics if the size is 0, so the layout must have a
+        // non-zero size.
+        let buffer = unsafe { SHM_ALLOCATOR.alloc_zeroed(layout) };
+
+        let Some(buffer) = NonNull::new(buffer) else {
+            handle_alloc_error(layout);
+        };
+
+        return Ok(buffer);
+    }
+
     // Safe because `shared_buffer_layout` panics if the size is 0, so the layout must have a
     // non-zero size.
     let buffer = unsafe { alloc_zeroed(layout) };
@@ -335,6 +371,14 @@ pub fn alloc_shared(size: usize) -> hyp::Result<NonNull<u8>> {
 pub unsafe fn dealloc_shared(vaddr: NonNull<u8>, size: usize) -> hyp::Result<()> {
     let layout = shared_buffer_layout(size)?;
     let granule = layout.align();
+
+    if !get_hypervisor().has_cap(DYNAMIC_MEM_SHARE) {
+        // Safe because the memory was allocated by `alloc_shared` above using the same allocator, and
+        // the layout is the same as was used then.
+        unsafe { SHM_ALLOCATOR.dealloc(vaddr.as_ptr(), layout) };
+
+        return Ok(());
+    }
 
     let paddr = virt_to_phys(vaddr);
     unshare_range(&(paddr..paddr + layout.size()), granule)?;
