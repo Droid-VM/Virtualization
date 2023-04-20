@@ -15,6 +15,8 @@
 //! Miscellaneous helper functions.
 
 use core::arch::asm;
+use core::cmp::{max, min};
+use core::ops::Range;
 use zeroize::Zeroize;
 
 pub const SIZE_4KB: usize = 4 << 10;
@@ -160,6 +162,11 @@ pub fn flatten<T, const N: usize>(original: &[[T; N]]) -> &[T] {
     let len = original.len() * N;
     // SAFETY: [T] has the same layout as [T;N]
     unsafe { core::slice::from_raw_parts(original.as_ptr().cast(), len) }
+}
+
+/// Check if range 'a' is within range 'b'
+pub fn range_within(a: &Range<usize>, b: &Range<usize>) -> bool {
+    &(max(a.start, b.start)..min(b.end, a.end)) == a
 }
 
 /// Create &CStr out of &str literal
