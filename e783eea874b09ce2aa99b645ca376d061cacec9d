@@ -112,6 +112,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3a6e278_de1c7e04",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-20T16:47:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6469a91f_e39b2d3b",
+      "range": {
+        "startLine": 487,
+        "startChar": 34,
+        "endLine": 487,
+        "endChar": 45
+      },
+      "revId": "e783eea874b09ce2aa99b645ca376d061cacec9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "003e888c_6b331c82",
@@ -125,6 +149,30 @@
       "writtenOn": "2023-04-17T11:02:47Z",
       "side": 1,
       "message": "That\u0027s a neat implementation!\n\nnit: would you mind introducing `helpers::range_contains(a: \u0026Range\u003cusize\u003e, b: \u0026Range\u003cusize\u003e) -\u003e bool` and use it here? Thanks",
+      "range": {
+        "startLine": 494,
+        "startChar": 60,
+        "endLine": 494,
+        "endChar": 62
+      },
+      "revId": "e783eea874b09ce2aa99b645ca376d061cacec9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bd4ce9d_7e6aa556",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-20T16:47:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "003e888c_6b331c82",
       "range": {
         "startLine": 494,
         "startChar": 60,
@@ -158,6 +206,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa20cd9d_2eb44a11",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-20T16:47:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b5ccd76_ee3e2d97",
+      "range": {
+        "startLine": 495,
+        "startChar": 12,
+        "endLine": 495,
+        "endChar": 92
+      },
+      "revId": "e783eea874b09ce2aa99b645ca376d061cacec9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f705fa7d_6ef69e27",
@@ -171,6 +243,30 @@
       "writtenOn": "2023-04-17T11:02:47Z",
       "side": 1,
       "message": "Simplify this into\n```\nnode.appendprop_addrrange(cstr!(\"reg\"), addr, swiotlb_info.size)?;\n```",
+      "range": {
+        "startLine": 510,
+        "startChar": 13,
+        "endLine": 510,
+        "endChar": 20
+      },
+      "revId": "e783eea874b09ce2aa99b645ca376d061cacec9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a518f66b_abc8cb37",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-20T16:47:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f705fa7d_6ef69e27",
       "range": {
         "startLine": 510,
         "startChar": 13,
@@ -314,6 +410,30 @@
       "side": 1,
       "message": "\u003e Why is crosvm still adding a \"size\" property when a \"reg\" is being used?\n\nYes it should be fixed. @Elliot from our team will submit a fix for it.",
       "parentUuid": "7493d0c1_9a753ca2",
+      "range": {
+        "startLine": 511,
+        "startChar": 8,
+        "endLine": 511,
+        "endChar": 73
+      },
+      "revId": "e783eea874b09ce2aa99b645ca376d061cacec9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3ddf408_d866afe1",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-20T16:47:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9440d5c_a77100ee",
       "range": {
         "startLine": 511,
         "startChar": 8,
