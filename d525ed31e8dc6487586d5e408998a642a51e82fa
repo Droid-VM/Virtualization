@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd429a74_b0d6dbe7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-20T12:29:50Z",
+      "side": 1,
+      "message": "Without the patch `mmio_guard_map` is called for 12288 pages. With the patch it\u0027s 12 pages.\n\n`bootloader_time_average_ms` reported by the test has decreased by 2.8%",
+      "parentUuid": "c6cc4173_b6307c2f",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 8
+      },
+      "revId": "d525ed31e8dc6487586d5e408998a642a51e82fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19d99c02_7b14aa57",
         "filename": "pvmfw/src/exceptions.rs",
         "patchSetId": 11
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-19T15:53:04Z",
       "side": 1,
       "message": "nit: unnecessary prefix now that it\u0027s scoped",
+      "range": {
+        "startLine": 59,
+        "startChar": 10,
+        "endLine": 59,
+        "endChar": 14
+      },
+      "revId": "d525ed31e8dc6487586d5e408998a642a51e82fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "388b97de_4fa2bb6f",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-20T12:29:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19d99c02_7b14aa57",
       "range": {
         "startLine": 59,
         "startChar": 10,
