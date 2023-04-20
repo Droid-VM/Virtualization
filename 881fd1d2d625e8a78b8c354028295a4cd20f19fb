@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "898c073c_769e3e5e",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-20T18:23:52Z",
+      "side": 1,
+      "message": "nit: any reason for this type change? I see many `try_into().unwrap()` because of this.",
+      "range": {
+        "startLine": 439,
+        "startChar": 0,
+        "endLine": 441,
+        "endChar": 17
+      },
+      "revId": "881fd1d2d625e8a78b8c354028295a4cd20f19fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
