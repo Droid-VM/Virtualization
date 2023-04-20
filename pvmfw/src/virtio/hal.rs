@@ -9,7 +9,15 @@ use virtio_drivers::{BufferDirection, Hal, PhysAddr, PAGE_SIZE};
 
 pub struct HalImpl;
 
-impl Hal for HalImpl {
+/// Implements the `Hal` trait for `HalImpl`.
+///
+/// # Safety
+///
+/// This implementation is marked as `unsafe` because it requires direct access to hardware resources
+/// and low-level operations that may result in undefined behavior if not used correctly. It is the
+/// responsibility of the caller to ensure that all safety requirements are met when using this
+/// implementation.
+unsafe impl Hal for HalImpl {
     fn dma_alloc(pages: usize, _direction: BufferDirection) -> (PhysAddr, NonNull<u8>) {
         debug!("dma_alloc: pages={}", pages);
         let size = pages * PAGE_SIZE;
@@ -19,7 +27,19 @@ impl Hal for HalImpl {
         (paddr, vaddr)
     }
 
-    fn dma_dealloc(paddr: PhysAddr, vaddr: NonNull<u8>, pages: usize) -> i32 {
+    /// Deallocates memory that was previously allocated by the `dma_alloc` function using the same
+    /// allocator and layout.
+    ///
+    /// # Safety
+    ///
+    /// This function is marked as `unsafe` because it requires direct access to hardware resources and
+    /// low-level operations that may result in undefined behavior if not used correctly. In particular,
+    /// the caller must ensure that:
+    ///
+    /// - `paddr` is a valid physical address that was previously returned by `dma_alloc`.
+    /// - `vaddr` is a valid non-null pointer that was previously returned by `dma_alloc`.
+    /// - `pages` is the number of pages that were previously allocated by `dma_alloc` using the same layout.
+    unsafe fn dma_dealloc(paddr: PhysAddr, vaddr: NonNull<u8>, pages: usize) -> i32 {
         debug!("dma_dealloc: paddr={:#x}, pages={}", paddr, pages);
         let size = pages * PAGE_SIZE;
         // Safe because the memory was allocated by `dma_alloc` above using the same allocator, and
@@ -30,7 +50,12 @@ impl Hal for HalImpl {
         0
     }
 
-    fn mmio_phys_to_virt(paddr: PhysAddr, size: usize) -> NonNull<u8> {
+    /// Converts a physical address used for MMIO to a virtual address which the driver can access.
+    ///
+    /// # Safety
+    ///
+    /// - The `paddr` and `size` parameters must describe a valid MMIO region.
+    unsafe fn mmio_phys_to_virt(paddr: PhysAddr, size: usize) -> NonNull<u8> {
         let pci_info = PCI_INFO.get().expect("VirtIO HAL used before PCI_INFO was initialised");
         // Check that the region is within the PCI MMIO range that we read from the device tree. If
         // not, the host is probably trying to do something malicious.
@@ -48,7 +73,14 @@ impl Hal for HalImpl {
         phys_to_virt(paddr)
     }
 
-    fn share(buffer: NonNull<[u8]>, direction: BufferDirection) -> PhysAddr {
+    /// Shares the given memory range with the device, and returns the physical address that the
+    /// device can use to access it.
+    ///
+    /// # Safety
+    ///
+    /// - The `buffer` parameter must be a valid pointer to memory which will not be accessed by any
+    /// other thread for the duration of this method call.
+    unsafe fn share(buffer: NonNull<[u8]>, direction: BufferDirection) -> PhysAddr {
         let size = buffer.len();
 
         // TODO: Copy to a pre-shared region rather than allocating and sharing each time.
@@ -63,7 +95,15 @@ impl Hal for HalImpl {
         virt_to_phys(copy)
     }
 
-    fn unshare(paddr: PhysAddr, buffer: NonNull<[u8]>, direction: BufferDirection) {
+    /// Unshares the given memory range from the device and (if necessary) copies it back to the
+    /// original buffer.
+    ///
+    /// # Safety
+    ///
+    /// - The `buffer` parameter must be a valid pointer to memory which will not be accessed by any
+    /// other thread for the duration of this method call.
+    /// - The `paddr` parameter must be the value previously returned by the corresponding `share` call.
+    unsafe fn unshare(paddr: PhysAddr, buffer: NonNull<[u8]>, direction: BufferDirection) {
         let vaddr = phys_to_virt(paddr);
         let size = buffer.len();
         if direction == BufferDirection::DeviceToDriver {
