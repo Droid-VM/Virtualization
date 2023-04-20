@@ -278,6 +278,52 @@
       },
       "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21efc951_dab52b78",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-20T11:39:12Z",
+      "side": 1,
+      "message": "Can we get the linker to put these as pointers in rodata for us? (The cost is the same as 14 instructions, so not a lot)\nThe sin comes from telling Rust they are variables. If instead they are just pointers, the optimizer cannot make assumptions.",
+      "range": {
+        "startLine": 353,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 95
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c1c408d_c31303e4",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-20T11:39:12Z",
+      "side": 1,
+      "message": "Why do you need Copy?",
+      "range": {
+        "startLine": 126,
+        "startChar": 25,
+        "endLine": 126,
+        "endChar": 29
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
