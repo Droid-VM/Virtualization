@@ -16,6 +16,29 @@
       "message": "Can someone test this on KVM? I am not sure if the above bytes need to be reversed!",
       "revId": "65b8a5df09c2801b18d59a96c2c0ed0c2425b15b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2663d951_90a2d810",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1539256
+      },
+      "writtenOn": "2023-04-20T17:11:11Z",
+      "side": 1,
+      "message": "I think this is reversed. Need swap 0,4, and 1,2. Could @Google help verify that KVM is detected with the change?",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 5
+      },
+      "revId": "65b8a5df09c2801b18d59a96c2c0ed0c2425b15b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
