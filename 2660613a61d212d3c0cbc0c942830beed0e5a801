@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14558ccd_677478e4",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-20T16:47:21Z",
+      "side": 1,
+      "message": "Yes you are right - guest\u0027s can share its memory dynamically with host.",
+      "parentUuid": "922ba211_744bf857",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 12
+      },
+      "revId": "2660613a61d212d3c0cbc0c942830beed0e5a801",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65839cdd_bd1d6d4a",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-17T11:03:12Z",
       "side": 1,
       "message": "nit: WDYT of `.has()`?",
+      "range": {
+        "startLine": 57,
+        "startChar": 7,
+        "endLine": 57,
+        "endChar": 23
+      },
+      "revId": "2660613a61d212d3c0cbc0c942830beed0e5a801",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0686246_23eb0ede",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-20T16:47:21Z",
+      "side": 1,
+      "message": "I have made it as has_cap() to be more clear.",
+      "parentUuid": "65839cdd_bd1d6d4a",
       "range": {
         "startLine": 57,
         "startChar": 7,
@@ -166,6 +214,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b575941b_0d666f1f",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-20T16:47:21Z",
+      "side": 1,
+      "message": "\u003e If we\u0027re making this assumption, could this be optimized as a const bit field in the Hypervisor trait?\n\nI have had trouble adding const fields in Hypervisor trait. Get this error:\n\n```\nerror[E0038]: the trait `hypervisor::Hypervisor` cannot be made into an object\n```\n\nI have instead added a const bitfield in KvmHypervisor singleton.",
+      "parentUuid": "b5032afb_508d29d8",
+      "range": {
+        "startLine": 100,
+        "startChar": 54,
+        "endLine": 100,
+        "endChar": 58
+      },
+      "revId": "2660613a61d212d3c0cbc0c942830beed0e5a801",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c8ba4b0_c9dddeca",
@@ -236,6 +308,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75ea2163_23808652",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-20T16:47:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5aa42e17_40b24441",
+      "range": {
+        "startLine": 112,
+        "startChar": 7,
+        "endLine": 112,
+        "endChar": 14
+      },
+      "revId": "2660613a61d212d3c0cbc0c942830beed0e5a801",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "469501ea_d350e33e",
@@ -249,6 +345,30 @@
       "writtenOn": "2023-04-17T11:03:12Z",
       "side": 1,
       "message": "nit: use `.ok_or_else()?`",
+      "range": {
+        "startLine": 118,
+        "startChar": 14,
+        "endLine": 118,
+        "endChar": 20
+      },
+      "revId": "2660613a61d212d3c0cbc0c942830beed0e5a801",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1008ae48_33000d55",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-20T16:47:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "469501ea_d350e33e",
       "range": {
         "startLine": 118,
         "startChar": 14,
@@ -331,6 +451,24 @@
       "side": 1,
       "message": "Can\u0027t you avoid the `unsafe` and extra operations altogether by using `.alloc_zeroed`?",
       "parentUuid": "433272fa_bbd22c08",
+      "revId": "2660613a61d212d3c0cbc0c942830beed0e5a801",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24c44dda_5d4133a7",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-20T16:47:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ecb913f_d96267d9",
       "revId": "2660613a61d212d3c0cbc0c942830beed0e5a801",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
