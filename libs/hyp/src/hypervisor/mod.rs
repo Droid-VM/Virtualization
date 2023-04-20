@@ -17,12 +17,14 @@
 extern crate alloc;
 
 mod common;
+mod gunyah;
 mod kvm;
 
 use crate::error::{Error, Result};
 use alloc::boxed::Box;
 pub use common::Hypervisor;
 pub use common::HypervisorCap;
+use gunyah::GunyahHypervisor;
 pub use kvm::KvmError;
 use kvm::KvmHypervisor;
 use log::debug;
@@ -32,12 +34,14 @@ use uuid::Uuid;
 
 enum HypervisorBackend {
     Kvm,
+    Gunyah,
 }
 
 impl HypervisorBackend {
     fn get_hypervisor(&self) -> &'static dyn Hypervisor {
         match self {
             Self::Kvm => &KvmHypervisor,
+            Self::Gunyah => &GunyahHypervisor,
         }
     }
 }
@@ -50,6 +54,10 @@ impl TryFrom<Uuid> for HypervisorBackend {
             KvmHypervisor::UUID => {
                 debug!("Detected KVM Hypervisor");
                 Ok(HypervisorBackend::Kvm)
+            }
+            GunyahHypervisor::UUID => {
+                debug!("Detected Gunyah Hypervisor");
+                Ok(HypervisorBackend::Gunyah)
             }
             u => {
                 debug!("Unknown hypervisor UUID {}", u.urn());
