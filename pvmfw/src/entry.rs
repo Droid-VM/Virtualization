@@ -226,14 +226,7 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
     })?;
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
-    crate::main(
-        slices.fdt,
-        slices.kernel,
-        slices.ramdisk,
-        bcc_slice,
-        debug_policy,
-        MEMORY.lock().as_mut().unwrap(),
-    )?;
+    crate::main(slices.fdt, slices.kernel, slices.ramdisk, bcc_slice, debug_policy)?;
 
     helpers::flushed_zeroize(bcc_slice);
     helpers::flush(slices.fdt.as_slice());
