@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b659a04b_e2642220",
+        "filename": "pvmfw/src/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-20T15:57:51Z",
+      "side": 1,
+      "message": "I can - thanks! Definitely learned something there.",
+      "parentUuid": "5eaaeb6f_f4e21606",
+      "revId": "026c09e4dc250b190f24d3783b728ead28b797bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8f959a1_44eabb48",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b288103f_2651217d",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-20T15:57:51Z",
+      "side": 1,
+      "message": "There\u0027s definitely a lot more work needed on unsafe functions and blocks. But I don\u0027t want to try to fix it all in this CL. \n\nThis function is indeed only called once during startup.",
+      "parentUuid": "c8f959a1_44eabb48",
+      "revId": "026c09e4dc250b190f24d3783b728ead28b797bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77c6c0d7_ca055973",
@@ -48,6 +84,30 @@
       "writtenOn": "2023-04-19T10:22:27Z",
       "side": 1,
       "message": "How could we know that? The C caller could do what C code does by passing a wrong pointer (`void **ptr; *ptr \u003d malloc(4); free(ptr);`), calling `free` twice on a valid pointer, etc ... For an added level of safety, we could check that the pointer is in `HEAP.as_ptr_range()` and add a magic token that we wipe on `free`.",
+      "range": {
+        "startLine": 80,
+        "startChar": 39,
+        "endLine": 80,
+        "endChar": 64
+      },
+      "revId": "026c09e4dc250b190f24d3783b728ead28b797bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e65e4589_56dd3b2f",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-20T15:57:51Z",
+      "side": 1,
+      "message": "We know it here, because it\u0027s part of the preconditions for this function. If you don\u0027t satisfy that precondition the behavior is undefined, that\u0027s why the function is unsafe.\nIf the calling code misuses free then it\u0027s already invoking undefined behavior at the C level.\nI like the idea of the as_ptr_range check, since it looks cheap, but I\u0027m not sure I want to do anything more heroic. If the code calling this is that broken we have big problems.",
+      "parentUuid": "77c6c0d7_ca055973",
       "range": {
         "startLine": 80,
         "startChar": 39,
@@ -81,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8592659_92a441fb",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-20T15:57:51Z",
+      "side": 1,
+      "message": "Mmm, that\u0027s true. But only if we\u0027re already in undefined behavior land, and changing undefined behavior is allowed. \n\nI think panicking is better than silently ignoring problems here. But it should never happen.",
+      "parentUuid": "9b23ff37_40159108",
+      "range": {
+        "startLine": 85,
+        "startChar": 38,
+        "endLine": 85,
+        "endChar": 47
+      },
+      "revId": "026c09e4dc250b190f24d3783b728ead28b797bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab2a3e28_c195729c",
@@ -94,6 +178,30 @@
       "writtenOn": "2023-04-19T10:22:27Z",
       "side": 1,
       "message": "nit: rename this `max_const_size` to make it clear why you\u0027re not using [`core::cmp::max`](https://doc.rust-lang.org/beta/core/cmp/fn.max.html)?",
+      "range": {
+        "startLine": 118,
+        "startChar": 25,
+        "endLine": 118,
+        "endChar": 33
+      },
+      "revId": "026c09e4dc250b190f24d3783b728ead28b797bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cef69d3e_45596f9f",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-20T15:57:51Z",
+      "side": 1,
+      "message": "Done (ish)",
+      "parentUuid": "ab2a3e28_c195729c",
       "range": {
         "startLine": 118,
         "startChar": 25,
