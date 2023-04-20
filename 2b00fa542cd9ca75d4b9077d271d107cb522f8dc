@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69cd06d1_1a27d80b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-20T10:20:51Z",
+      "side": 1,
+      "message": "what is this in absolute number?",
+      "range": {
+        "startLine": 11,
+        "startChar": 26,
+        "endLine": 11,
+        "endChar": 29
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4a5763b5_a8266903",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -84,6 +107,30 @@
       "side": 1,
       "message": "Yeah, that sounds like a result of alias analysis. \n\n\u003e OTOH, doing the little dance of defining data_end seems to confuse the compiler enough that it doesn\u0027t optimize out the comparison.\n\nThe pesky devs have a habit of making the compilers smarter over time, so that\u0027s typically not a great long-term strategy.\n\nMaybe there is a correct way how to do this in Rust, but I wouldn\u0027t be opposed to a small asm macro like we have for sysregs, or a C file, basically a language that doesn\u0027t make that non-alias assumption.",
       "parentUuid": "31165cec_8626186b",
+      "range": {
+        "startLine": 275,
+        "startChar": 15,
+        "endLine": 275,
+        "endChar": 23
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5358882_efedc4a2",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-20T10:20:51Z",
+      "side": 1,
+      "message": "Interesting. \n\nhttps://doc.rust-lang.org/nomicon/aliasing.html says that the optimizer has an assumption that there\u0027s no alias, but here there is.",
+      "parentUuid": "242ce1bc_1b01c3fe",
       "range": {
         "startLine": 275,
         "startChar": 15,
