@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "685eea2d_628de9ef",
+        "filename": "libs/hyp/src/hypervisor/gunyah.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-20T16:48:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdaeebc7_e27876bd",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 35
+      },
+      "revId": "664101a14fefa855b402ba07b18352c340761bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f39d75e_6824b989",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-17T11:03:25Z",
       "side": 1,
       "message": "`Uuid`",
+      "range": {
+        "startLine": 11,
+        "startChar": 16,
+        "endLine": 11,
+        "endChar": 20
+      },
+      "revId": "664101a14fefa855b402ba07b18352c340761bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40360892_ab36d2c3",
+        "filename": "libs/hyp/src/hypervisor/gunyah.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-20T16:48:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f39d75e_6824b989",
       "range": {
         "startLine": 11,
         "startChar": 16,
@@ -156,6 +204,30 @@
       "side": 1,
       "message": "\u003e IMO, implementing TryFrom\u003cUuid\u003e for Hypervisor sounds like we would be abusing the meaning of the trait. \n\nRight, it won\u0027t work with a trait. But with my last refactoring, the `HypervisorBackend` is in fact an enum[1], so we are actually implementing a TryFrom from uuid to the given Enum and HYPERVISOR still keeps the enum.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/libs/hyp/src/hypervisor/mod.rs;l\u003d25;drc\u003d313291123af4ccdcf3210dba0a7e7d2dd278b573",
       "parentUuid": "34847a6f_eef015a4",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 9
+      },
+      "revId": "664101a14fefa855b402ba07b18352c340761bbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c0753bd_df033ca7",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-20T16:48:28Z",
+      "side": 1,
+      "message": "I have implemented try_from(Uuid)) in latest patchset. Pls check",
+      "parentUuid": "603c16ea_73dc3bd4",
       "range": {
         "startLine": 88,
         "startChar": 4,
