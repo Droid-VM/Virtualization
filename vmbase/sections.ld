@@ -68,6 +68,7 @@ SECTIONS
 	 * mapped as non-executable.
 	 */
 	.data : ALIGN(4096) {
+		scratch_begin = .;
 		data_begin = .;
 		*(.data.*)
 		/*
@@ -89,6 +90,7 @@ SECTIONS
 		*(COMMON)
 		. = ALIGN(16);
 		bss_end = .;
+		scratch_end = .;
 	} >writable_data
 
 	.stack (NOLOAD) : ALIGN(4096) {

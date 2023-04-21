@@ -41,6 +41,10 @@ extern "C" {
     pub static rodata_begin: u8;
     /// First byte beyond the `.rodata` section.
     pub static rodata_end: u8;
+    /// First byte of the allocated region.
+    pub static scratch_begin: u8;
+    /// First byte past the allocated region.
+    pub static scratch_end: u8;
     /// First byte of the `.text` section.
     pub static text_begin: u8;
     /// First byte beyond the `.text` section.
