@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0575812e_2aa29dcc",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-21T10:36:09Z",
+      "side": 1,
+      "message": "That\u0027s not a very helpful safety comment. What you really need to document (here or on the individual methods) is how you know that this implementation of `Hal` follows all the \"implementation safety\" requirements documented for each method on the trait. For example, you need to explain how `dma_alloc` is guaranteed to return a valid pointed aligned to `PAGE_SIZE` that doesn\u0027t alias any other allocations.",
+      "revId": "69f9c580de0e57a04b58664bb356fc73c293f8cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb532347_dcdc13a4",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-21T10:36:09Z",
+      "side": 1,
+      "message": "Safety requirements for the caller don\u0027t need to be documented here, they are already documented on the trait.",
+      "revId": "69f9c580de0e57a04b58664bb356fc73c293f8cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
