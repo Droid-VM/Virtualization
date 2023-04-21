@@ -31,6 +31,8 @@ macro_rules! linker_region {
     ($begin:ident,$end:ident) => {{
         let start = linker_addr!($begin);
         let end = linker_addr!($end);
+        let len = end.checked_sub(start).unwrap();
+        let end = start.checked_add(len).unwrap();
 
         start..end
     }};
