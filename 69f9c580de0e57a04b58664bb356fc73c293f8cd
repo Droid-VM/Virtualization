@@ -69,6 +69,24 @@
       "parentUuid": "eb532347_dcdc13a4",
       "revId": "69f9c580de0e57a04b58664bb356fc73c293f8cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97703d4b_e8a74996",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-21T13:37:59Z",
+      "side": 1,
+      "message": "Yes, I think you can remove the comments from the methods which don\u0027t have implementation safety requirements. What you need is comments either on `dma_alloc` and `mmio_phys_to_virt` or at the top of the trait implementation explaining how they fulfil the safety requirements documented for the trait.",
+      "parentUuid": "00bc9c33_daa68679",
+      "revId": "69f9c580de0e57a04b58664bb356fc73c293f8cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
