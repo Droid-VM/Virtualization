@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20e8c8da_45f74167",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-21T11:51:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0575812e_2aa29dcc",
+      "revId": "69f9c580de0e57a04b58664bb356fc73c293f8cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb532347_dcdc13a4",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-04-21T10:36:09Z",
       "side": 1,
       "message": "Safety requirements for the caller don\u0027t need to be documented here, they are already documented on the trait.",
+      "revId": "69f9c580de0e57a04b58664bb356fc73c293f8cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00bc9c33_daa68679",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-21T11:51:56Z",
+      "side": 1,
+      "message": "I updated this function and `mmio_phys_to_virt`. For `share` and `unshare`, since they don\u0027t have implementation safety requirements, should I just delete the doc instead of repeating the same doc in the trait?",
+      "parentUuid": "eb532347_dcdc13a4",
       "revId": "69f9c580de0e57a04b58664bb356fc73c293f8cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
