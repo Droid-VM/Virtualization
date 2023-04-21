@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbd3b9c4_27cda5ad",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-04-21T14:55:33Z",
+      "side": 1,
+      "message": "Yeah, please add `__INTRODUCED_IN(__ANDROID_API_U__)` to the remaining functions here. Feel free to do this in a follow-up change",
+      "parentUuid": "e25c78d5_397c082e",
+      "range": {
+        "startLine": 64,
+        "startChar": 7,
+        "endLine": 64,
+        "endChar": 36
+      },
+      "revId": "da703899614ac9991c5f526267d8fa09646c84c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fbbfc0a_5386e49a",
