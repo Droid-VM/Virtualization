@@ -24,6 +24,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ffc31a3_1fd87a32",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-21T14:37:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fef1daf4_c504c19c",
+      "range": {
+        "startLine": 64,
+        "startChar": 7,
+        "endLine": 64,
+        "endChar": 36
+      },
+      "revId": "da703899614ac9991c5f526267d8fa09646c84c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e25c78d5_397c082e",
+        "filename": "vm_payload/include-restricted/vm_payload_restricted.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-21T14:37:34Z",
+      "side": 1,
+      "message": "Done. But then this function will be the only one with this suffix, should we just add it to all of them altogether in a different cl?",
+      "parentUuid": "fef1daf4_c504c19c",
+      "range": {
+        "startLine": 64,
+        "startChar": 7,
+        "endLine": 64,
+        "endChar": 36
+      },
+      "revId": "da703899614ac9991c5f526267d8fa09646c84c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fbbfc0a_5386e49a",
@@ -37,6 +85,30 @@
       "writtenOn": "2023-04-21T13:33:13Z",
       "side": 1,
       "message": "nit: please add `introduced\u003dPlatformVersionActiveCodenames`",
+      "range": {
+        "startLine": 10,
+        "startChar": 43,
+        "endLine": 10,
+        "endChar": 52
+      },
+      "revId": "da703899614ac9991c5f526267d8fa09646c84c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df8401fa_7552a924",
+        "filename": "vm_payload/libvm_payload.map.txt",
+        "patchSetId": 14
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-21T14:37:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fbbfc0a_5386e49a",
       "range": {
         "startLine": 10,
         "startChar": 43,
