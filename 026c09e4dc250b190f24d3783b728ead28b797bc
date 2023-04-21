@@ -144,6 +144,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "de126de2_3f138e77",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-21T11:03:22Z",
+      "side": 1,
+      "message": "\u003e I strongly disagree with the argument that UB in C should be allowed to cause UB in Rust.\n\nThat\u0027s not quite what I was saying. I was saying that if a function documents that \"the number you pass must be even\", and you pass an odd number, then that causes UB. This function has a precondition, so inside the body we can assume the precondition is true.\n\n\u003e It\u0027s always the job of unsafe Rust code to check its own invariants and validate its inputs\n\nI disagree with that. If a function is marked unsafe, then it needs to document what it requires in order to be safe. If the caller doesn\u0027t satisfy that condition then the fault is in the caller. And if the caller is in Rust, the safety comment at the call site should address it.\n\nBut it\u0027s fair to say that since the callers are in C, they won\u0027t have that level of checking, and we should probably call that out, as part of the function safety comment. And it\u0027s reasonable to apply some checks, but in general full validation is impossible. I think the heap range check is a good balance - it will catch some errors without excessive complexity.\n\nIt\u0027s still the case that if the C code makes an invalid call to free, that code has UB, regardless of what we do.",
+      "parentUuid": "11c71d86_3da58c2d",
+      "range": {
+        "startLine": 80,
+        "startChar": 39,
+        "endLine": 80,
+        "endChar": 64
+      },
+      "revId": "026c09e4dc250b190f24d3783b728ead28b797bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9b23ff37_40159108",
         "filename": "pvmfw/src/heap.rs",
         "patchSetId": 2
