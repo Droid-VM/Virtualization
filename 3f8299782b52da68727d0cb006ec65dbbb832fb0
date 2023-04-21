@@ -260,6 +260,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4619c710_f78cc634",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-21T14:47:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7347b70c_c110bb37",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 21
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7507a54_c3399128",
@@ -737,6 +761,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66ee676f_364dab56",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-21T14:47:19Z",
+      "side": 1,
+      "message": "Marking Done, if required this can be taken up in a separate patch (moving HYPERVISOR state to pvmfw)",
+      "parentUuid": "9379b347_2fc7c4cf",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 1
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef041a1c_10cbda03",
@@ -821,6 +869,30 @@
       "side": 1,
       "message": "I think we need a hyp::detect_hypervisor() or hyp::init() in entry.rs to validate the hypervisor we are running on very early. That could also go along with moving the HYPERVISOR state variable to pvmfw (rather than libhyp). For now, I have not touched entry.rs with that change. Can be a separate change if there is consensus for same.",
       "parentUuid": "d26adc8d_03720af8",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 8
+      },
+      "revId": "3f8299782b52da68727d0cb006ec65dbbb832fb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8b4b8d0_046a99fe",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-21T14:47:19Z",
+      "side": 1,
+      "message": "Deferring this to a later patch if required. I have removed the need for detect_hypervisor() in the latest patch.",
+      "parentUuid": "43eef436_80fc357a",
       "range": {
         "startLine": 172,
         "startChar": 0,

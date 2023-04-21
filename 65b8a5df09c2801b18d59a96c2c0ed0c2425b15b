@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "064564e5_900740ae",
+        "filename": "libs/hyp/src/error.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-21T14:47:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "653fb158_2d112bd3",
+      "range": {
+        "startLine": 45,
+        "startChar": 27,
+        "endLine": 45,
+        "endChar": 39
+      },
+      "revId": "65b8a5df09c2801b18d59a96c2c0ed0c2425b15b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f764ae53_bfe0a2bf",
@@ -78,6 +102,30 @@
       "side": 1,
       "message": "We could check that by running a presubmit test with this change. I\u0027ve just started it.",
       "parentUuid": "2663d951_90a2d810",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 5
+      },
+      "revId": "65b8a5df09c2801b18d59a96c2c0ed0c2425b15b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ec7b443_2403dac9",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-21T14:47:19Z",
+      "side": 1,
+      "message": "\u003e I think this is reversed. Need swap 0,4, and 1,2. Could @Google help verify that KVM is detected with the change?\n\nThanks for pointing it. It should be fixed now",
+      "parentUuid": "a3053f7f_dd96d261",
       "range": {
         "startLine": 66,
         "startChar": 0,
