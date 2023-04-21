@@ -67,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "60080a9f_2b69441b",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-21T14:49:33Z",
+      "side": 1,
+      "message": "With the fix I made to how Uuid::from_u128() is used, I believe this will work on KVM. Still I would love to hear if the patches work on KVM!",
+      "parentUuid": "f764ae53_bfe0a2bf",
+      "revId": "65b8a5df09c2801b18d59a96c2c0ed0c2425b15b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2663d951_90a2d810",
         "filename": "libs/hyp/src/hypervisor/mod.rs",
         "patchSetId": 2
