@@ -15,6 +15,7 @@
 //! Memory management.
 
 use crate::helpers;
+use crate::helpers::PAGE_SIZE;
 use aarch64_paging::idmap::IdMap;
 use aarch64_paging::paging::Attributes;
 use aarch64_paging::paging::MemoryRegion;
@@ -44,6 +45,12 @@ fn appended_payload_range() -> Range<usize> {
     start..end
 }
 
+fn stack_range() -> Range<usize> {
+    const STACK_PAGES: usize = 40;
+
+    layout::stack_range(STACK_PAGES * PAGE_SIZE)
+}
+
 impl PageTable {
     const ASID: usize = 1;
     const ROOT_LEVEL: usize = 1;
@@ -54,7 +61,7 @@ impl PageTable {
 
         page_table.map_code(&layout::text_range())?;
         page_table.map_data(&layout::scratch_range())?;
-        page_table.map_data(&layout::boot_stack_range())?;
+        page_table.map_data(&stack_range())?;
         page_table.map_rodata(&layout::rodata_range())?;
         page_table.map_data(&appended_payload_range())?;
 
