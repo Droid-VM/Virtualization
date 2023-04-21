@@ -74,7 +74,7 @@ pub fn stack_range(stack_size: usize) -> Range<usize> {
 
 /// Allocated writable data.
 pub fn scratch_range() -> Range<usize> {
-    linker_region!(data_begin, bss_end)
+    linker_region!(eh_stack_limit, bss_end)
 }
 
 /// Read-write data (original).
