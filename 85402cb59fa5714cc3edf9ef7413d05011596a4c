@@ -22,6 +22,30 @@
       },
       "revId": "85402cb59fa5714cc3edf9ef7413d05011596a4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7be6c813_9982cf76",
+        "filename": "pvmfw/src/exceptions.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-04-21T09:23:34Z",
+      "side": 1,
+      "message": "`WnR` field is covered - `DataAbortTranslationFault` will be constructed for both reads and writes. Updated to cover `ISS.CM` as well.",
+      "parentUuid": "f1555d2b_b7444bf5",
+      "range": {
+        "startLine": 58,
+        "startChar": 58,
+        "endLine": 58,
+        "endChar": 90
+      },
+      "revId": "85402cb59fa5714cc3edf9ef7413d05011596a4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
