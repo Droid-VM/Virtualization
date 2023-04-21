@@ -118,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "11c71d86_3da58c2d",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-21T10:36:05Z",
+      "side": 1,
+      "message": "I strongly disagree with the argument that UB in C should be allowed to cause UB in Rust. It\u0027s always the job of `unsafe` Rust code to check its own invariants and validate its inputs, even if those were passed by violating the spec of another language.\n\nIdeally, when using a C-to-Rust interface, C UB - if detectable - should lead to Rust panicking. Otherwise, how can we pretend that we\u0027re using a safe language? :^)\n\nI agree that my comment is beyond the scope of this CL (and is effectively about the pre-existing code, which was written by me), but could we at least state in the `SAFETY` comment it is adding that we\u0027re blindly trusting C to have done the right thing? For example, see the `SAFETY` comments in `vmbase/src/bionic.rs`.",
+      "parentUuid": "e65e4589_56dd3b2f",
+      "range": {
+        "startLine": 80,
+        "startChar": 39,
+        "endLine": 80,
+        "endChar": 64
+      },
+      "revId": "026c09e4dc250b190f24d3783b728ead28b797bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9b23ff37_40159108",
@@ -155,6 +179,30 @@
       "side": 1,
       "message": "Mmm, that\u0027s true. But only if we\u0027re already in undefined behavior land, and changing undefined behavior is allowed. \n\nI think panicking is better than silently ignoring problems here. But it should never happen.",
       "parentUuid": "9b23ff37_40159108",
+      "range": {
+        "startLine": 85,
+        "startChar": 38,
+        "endLine": 85,
+        "endChar": 47
+      },
+      "revId": "026c09e4dc250b190f24d3783b728ead28b797bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28d01df3_3e3651f8",
+        "filename": "pvmfw/src/heap.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-21T10:36:05Z",
+      "side": 1,
+      "message": "\u003e I think panicking is better than silently ignoring problems here.\n\n+1",
+      "parentUuid": "f8592659_92a441fb",
       "range": {
         "startLine": 85,
         "startChar": 38,
