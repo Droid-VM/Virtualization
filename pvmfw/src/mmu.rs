@@ -46,7 +46,7 @@ fn appended_payload_range() -> Range<usize> {
 }
 
 fn stack_range() -> Range<usize> {
-    const STACK_PAGES: usize = 40;
+    const STACK_PAGES: usize = 8;
 
     layout::stack_range(STACK_PAGES * PAGE_SIZE)
 }
