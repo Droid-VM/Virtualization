@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca7157d4_501386e7",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-24T09:52:58Z",
+      "side": 1,
+      "message": "What about just add a method `uuid()` to `HypervisorBackend` and add the constant to `HypervisorBackend` directly?\n\nThen it doesn\u0027t need to be public, and we don\u0027t need to jump back and forth between Hypervisor and HypervisorBackend to read this code.",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 13
+      },
+      "revId": "b2cb8ca8a807d0d1174e3b5e5b1b7a7785b99eed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
