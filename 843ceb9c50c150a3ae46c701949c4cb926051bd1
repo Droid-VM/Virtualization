@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "708d3c40_fb5cf3a6",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-24T16:52:59Z",
+      "side": 1,
+      "message": "How does this differ from GUEST_PAGE_SIZE? Can we encode the answer in the name?",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 19
+      },
+      "revId": "843ceb9c50c150a3ae46c701949c4cb926051bd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a32b78c3_c79496f1",
         "filename": "vmbase/sections.ld",
         "patchSetId": 1
@@ -19,6 +42,53 @@
         "startChar": 2,
         "endLine": 98,
         "endChar": 16
+      },
+      "revId": "843ceb9c50c150a3ae46c701949c4cb926051bd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b53b2e07_cb0ceb19",
+        "filename": "vmbase/sections.ld",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-24T16:52:59Z",
+      "side": 1,
+      "message": "+1 It looks like the stack_bottom to me - but then direction is ambiguous for a downward growing stack.",
+      "parentUuid": "a32b78c3_c79496f1",
+      "range": {
+        "startLine": 98,
+        "startChar": 2,
+        "endLine": 98,
+        "endChar": 16
+      },
+      "revId": "843ceb9c50c150a3ae46c701949c4cb926051bd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de97b670_5aaeaa43",
+        "filename": "vmbase/sections.ld",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-24T16:52:59Z",
+      "side": 1,
+      "message": "I don\u0027t think I understand what this does (mind you, my linker-fu is weak).\nCan we comment the intention?",
+      "range": {
+        "startLine": 99,
+        "startChar": 2,
+        "endLine": 99,
+        "endChar": 25
       },
       "revId": "843ceb9c50c150a3ae46c701949c4cb926051bd1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
