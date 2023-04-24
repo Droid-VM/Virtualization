@@ -22,6 +22,30 @@
       },
       "revId": "b2cb8ca8a807d0d1174e3b5e5b1b7a7785b99eed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac2ac0c4_51ad75bc",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-24T13:30:50Z",
+      "side": 1,
+      "message": "Something like this seems to work:\n\n```\nimpl HypervisorBackend {\n    const fn get_uuid(\u0026self) -\u003e Uuid {                                          \n        match self {\n            Self::Kvm \u003d\u003e uuid!(\"28b46fb6-2ec5-11e9-a9ca-4b564d003a74\"),         \n        }                                                                       \n    }       \n}\n\nimpl TryFrom\u003cUuid\u003e for HypervisorBackend {                                      \n    type Error \u003d Error;                                                         \n    \n    fn try_from(uuid: Uuid) -\u003e Result\u003cHypervisorBackend\u003e {                      \n        match uuid { \n            _x if _x \u003d\u003d HypervisorBackend::Kvm.get_uuid() \u003d\u003e {                  \n                debug!(\"Detected KVM Hypervisor\");                              \n                Ok(HypervisorBackend::Kvm)                                      \n            } \n            u \u003d\u003e {\n                debug!(\"Unknown hypervisor UUID {}\", u.urn());                  \n                Err(Error::UnsupportedHypervisorUuid(u))                        \n            }                                                                   \n        }                                                                       \n    }                                                                           \n}               \n```\n\nDoes that look ok?",
+      "parentUuid": "ca7157d4_501386e7",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 13
+      },
+      "revId": "b2cb8ca8a807d0d1174e3b5e5b1b7a7785b99eed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
