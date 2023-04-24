@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05cacc09_72e2cd7a",
+        "filename": "vmbase/sections.ld",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-04-24T01:35:04Z",
+      "side": 1,
+      "message": "Do you achieve this since only `stack_top..(end_of_writable_data)` is mapped and this 4K is left unmapped?",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 62
+      },
+      "revId": "063b979dc05920c694bcad43865375f193709181",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
