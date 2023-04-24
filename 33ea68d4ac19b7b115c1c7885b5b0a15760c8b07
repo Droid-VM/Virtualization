@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be811e2f_b337105e",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-24T16:18:51Z",
+      "side": 1,
+      "message": "Why not just `scratch.start % ASM_STP_ALIGN \u003d\u003d 0`? Using `checked_rem` seems harder to read for no benefit I can see.",
+      "range": {
+        "startLine": 275,
+        "startChar": 29,
+        "endLine": 275,
+        "endChar": 40
+      },
+      "revId": "33ea68d4ac19b7b115c1c7885b5b0a15760c8b07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7391e312_cd26cebd",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-24T16:18:51Z",
+      "side": 1,
+      "message": "How about calling this `scratch_end`, for consistency?",
+      "range": {
+        "startLine": 375,
+        "startChar": 12,
+        "endLine": 375,
+        "endChar": 22
+      },
+      "revId": "33ea68d4ac19b7b115c1c7885b5b0a15760c8b07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
