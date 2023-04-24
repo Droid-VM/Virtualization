@@ -46,6 +46,30 @@
       },
       "revId": "b2cb8ca8a807d0d1174e3b5e5b1b7a7785b99eed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b09f929_71dbfe6f",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-24T14:48:00Z",
+      "side": 1,
+      "message": "LGTM. Some nits:\n- We can just call it the function uuid() directly.\n- Does the raw pattern match work? Something like\n```\nmatch uuid { \n HypervisorBackend::Kvm.uuid() \u003d\u003e Ok(HypervisorBackend::Kvm)\n}\n```",
+      "parentUuid": "ac2ac0c4_51ad75bc",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 13
+      },
+      "revId": "b2cb8ca8a807d0d1174e3b5e5b1b7a7785b99eed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -95,6 +95,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a0ec353_48abae94",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-24T14:48:00Z",
+      "side": 1,
+      "message": "+1. It\u0027s more clear to call `to_be` or `to_le` here.",
+      "parentUuid": "1ebe2493_baa03c40",
+      "range": {
+        "startLine": 79,
+        "startChar": 29,
+        "endLine": 79,
+        "endChar": 39
+      },
+      "revId": "d4b9a08a208f20bbd3927771ccdf99111cc0193e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85188f40_89e7353f",
         "filename": "libs/hyp/src/hypervisor/mod.rs",
         "patchSetId": 6
@@ -129,6 +153,30 @@
       "writtenOn": "2023-04-24T13:07:35Z",
       "side": 1,
       "message": "(out-of-scope for this CL)\n\n@aliceywang@google.com, we\u0027ll need to re-architect this to expose a `Result` to clients because it\u0027s not fine for the library to panic in this case.",
+      "range": {
+        "startLine": 93,
+        "startChar": 42,
+        "endLine": 93,
+        "endChar": 71
+      },
+      "revId": "d4b9a08a208f20bbd3927771ccdf99111cc0193e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d787510f_a8608c55",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-24T14:48:00Z",
+      "side": 1,
+      "message": "+1. It\u0027s not good to panic.\n\nWhat about splitting the current `get_hypervisor()` into `init_` and `get_`?\nThen every client can call `init_` and handle the error themselves.",
+      "parentUuid": "328ac9bf_24a3e6f4",
       "range": {
         "startLine": 93,
         "startChar": 42,
