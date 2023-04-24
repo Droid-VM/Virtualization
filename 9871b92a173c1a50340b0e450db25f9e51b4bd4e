@@ -22,6 +22,30 @@
       },
       "revId": "9871b92a173c1a50340b0e450db25f9e51b4bd4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8adff98a_14bae191",
+        "filename": "vmbase/src/layout.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-24T16:42:58Z",
+      "side": 1,
+      "message": "Yeah, this doesn\u0027t look that different from the previous version, once the macros expand - even if it bamboozles the current compiler, the optimisers only ever get better.\nI still think you should just have pointers to the various region start \u0026 end, populated by the linker/assembly. If Rust doesn\u0027t know what they point to, it can\u0027t make any inferences about the addresses they contain.",
+      "parentUuid": "54b71f43_3c32d095",
+      "range": {
+        "startLine": 32,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 50
+      },
+      "revId": "9871b92a173c1a50340b0e450db25f9e51b4bd4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
