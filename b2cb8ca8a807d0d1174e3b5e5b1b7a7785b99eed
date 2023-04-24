@@ -142,6 +142,30 @@
       },
       "revId": "b2cb8ca8a807d0d1174e3b5e5b1b7a7785b99eed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d4535f7_4178d5bf",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-24T16:19:36Z",
+      "side": 1,
+      "message": "In fact, I meant something like this.\n\n```\nfn try_from(uuid: Uuid) -\u003e Result\u003cHypervisorBackend\u003e {\n        match uuid {\n            Self::KVM_UUID \u003d\u003e {\n\n            }\n```\nWhat bothers me here is that\n- I don\u0027t like the const to be exposed public in KvmHypervisor.\n- It\u0027s a bit hard to jump back and forth to read this code from HypervisorBackend to XHypervisor.\n\nWhy not just put all the UUID in `HypervisorBackend`, then it can be private and straightforward, and we also don\u0027t need to introduce another class to the readers of the code.\n\nIn the end, it\u0027s just a small detail, if you have very strong opinion on putting the const in KvmHypervisor, then at least adjust its visibility to `pub(super)`",
+      "parentUuid": "455a6984_e66611b8",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 13
+      },
+      "revId": "b2cb8ca8a807d0d1174e3b5e5b1b7a7785b99eed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
