@@ -185,6 +185,30 @@
       },
       "revId": "d4b9a08a208f20bbd3927771ccdf99111cc0193e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c21aa708_a92fd813",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-24T14:59:01Z",
+      "side": 1,
+      "message": "The idea that was being thrown around was instead to have a single getter (a `HypervisorBackend` ctor, maybe?) that would naturally represent this \"use only after having been configured\" contract by exposing the rest of the API through the methods of the instance (very close to what we already do). When necessary, client could then ensure synchronization by wrapping the instance in a thread-safe abstraction and they would be dealing with the singleton (e.g. through `OnceBox`). I\u0027m not sure what the consequences of calling `init_`/ctor multiple times should be but if that\u0027s undesired, we could mark that getter as `unsafe`; WDYT?\n\nI note that you unresolved this comment (probably for visibility); do you agree that this change is out-of-scope for the current CL?",
+      "parentUuid": "d787510f_a8608c55",
+      "range": {
+        "startLine": 93,
+        "startChar": 42,
+        "endLine": 93,
+        "endChar": 71
+      },
+      "revId": "d4b9a08a208f20bbd3927771ccdf99111cc0193e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
