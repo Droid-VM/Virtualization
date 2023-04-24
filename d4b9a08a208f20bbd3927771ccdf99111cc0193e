@@ -117,6 +117,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b549eed_97e0a698",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-24T16:50:45Z",
+      "side": 1,
+      "message": "See other thread on why these `u32::swap_bytes()` are very likely to actually be a `u128::to_be()`.",
+      "parentUuid": "7a0ec353_48abae94",
+      "range": {
+        "startLine": 79,
+        "startChar": 29,
+        "endLine": 79,
+        "endChar": 39
+      },
+      "revId": "d4b9a08a208f20bbd3927771ccdf99111cc0193e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85188f40_89e7353f",
@@ -178,6 +202,30 @@
       "side": 1,
       "message": "\u003e Am I right in understanding that this code is also valid for BE systems \n\nYes I think that code should also be valid for BE systems AFAICT",
       "parentUuid": "ef489a8e_bb902ee7",
+      "range": {
+        "startLine": 85,
+        "startChar": 9,
+        "endLine": 88,
+        "endChar": 31
+      },
+      "revId": "d4b9a08a208f20bbd3927771ccdf99111cc0193e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26da2783_09e39f85",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-24T16:50:45Z",
+      "side": 1,
+      "message": "Thanks for checking!\n\n\u003e So AFAICT we need swap_bytes() here rather than to_be() or to_le()\n\nI agree that the SMCCC states that the respective order of the registers is that W0 holds the lowest-order word and that registers hold their respective word in native order (\"_Bytes 0…3 with byte 0 in the low-order bits_\").\n\nFrom there, I derive that the value\n```\nlet uuid_ne \u003d (res[3] as u32 as u128 \u003c\u003c 96)\n    | (res[2] as u32 as u128 \u003c\u003c 64)\n    | (res[1] as u32 as u128 \u003c\u003c 32)\n    | (res[0] as u32 as u128);\n```\nthen holds the desired UUID in **native order**, for any endianness. In turn, this implies that if we want to pass that value to a function that expects BE (such as `Uuid::from_u128`), it first needs to be byte-swapped on LE but should be kept as-is on BE i.e.\n```\nUUid::from_u128(uuid_ne.to_be())\n```\nNote that, on LE, this is equivalent to your implementation (`u128::to_be` \u003d\u003d `u32::byte_swap` then `(r[0] \u003c\u003c 96) | ... | r[3]`) but not on BE.",
+      "parentUuid": "6b3a9fc0_7395c11d",
       "range": {
         "startLine": 85,
         "startChar": 9,
@@ -273,6 +321,30 @@
       "side": 1,
       "message": "Sure. We can definitely adjust this in a separate cl. I mean, now there are two options for this singleton getter API without panic inside:\n\nOption 1: `get_() -\u003e Result\u003c\u0026Hypervisor\u003e`\nOption 2: `init_() -\u003e Result\u003c()\u003e / get_() -\u003e \u0026Hypervisor`\n\nSo we\u0027d like to choose option 1 since the initialization code is lightweight and just a hypervisor detection, it\u0027s convenient to provide a lazy initialization scheme inside the getter. We just need to add `?` to all the callers. Is this the approach we want to take?",
       "parentUuid": "c21aa708_a92fd813",
+      "range": {
+        "startLine": 93,
+        "startChar": 42,
+        "endLine": 93,
+        "endChar": 71
+      },
+      "revId": "d4b9a08a208f20bbd3927771ccdf99111cc0193e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4798840d_d3cada2e",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-24T16:50:45Z",
+      "side": 1,
+      "message": "\u003e We just need to add `?` to all the callers.\n\nAs a base commit, that would work but would result in the code issuing a hypervisor-discovery HVC every time `get_*()` is called and/or the result of the HVC still being cached inside of the crate.\n\nInstead (or on top of such a commit), I\u0027d expect a change that replaces all occurrences of `get_*()` with a client-private `static` `Hypervisor`(`Backend`?) instance initialized through a single `get_*()` call. The client could then also add locking where necessary and/or embed the instance in a larger singleton object.",
+      "parentUuid": "6d5f1a01_66b489b2",
       "range": {
         "startLine": 93,
         "startChar": 42,
