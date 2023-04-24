@@ -140,6 +140,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef489a8e_bb902ee7",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-24T15:33:26Z",
+      "side": 1,
+      "message": "I checked \"5.3 Unique Identification format\" and \"Table 5-1: UUID register mapping\"  of ARM\u0027s \"SMC Calling Convention\". It describes the mapping of UUID bytes to register and AFAICS its true on both big and little endian ARM systems. So AFAICT we need swap_bytes() here rather than to_be() or to_le()",
+      "parentUuid": "85188f40_89e7353f",
+      "range": {
+        "startLine": 85,
+        "startChar": 9,
+        "endLine": 88,
+        "endChar": 31
+      },
+      "revId": "d4b9a08a208f20bbd3927771ccdf99111cc0193e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "328ac9bf_24a3e6f4",
