@@ -45,6 +45,30 @@
       },
       "revId": "cd4cc4b68e1446805a76440876f81b5b32642f3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37f7a420_170ba26b",
+        "filename": "libs/hyp/src/hypervisor/gunyah.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2023-04-24T16:10:57Z",
+      "side": 1,
+      "message": "\u003e Isn\u0027t that something we\u0027d want pvmfw to support, if the 2 versions provide all the features it requires?\n\nGunyah only reports this UUID. There was some confusion on our end which UUID would be reported (our downstream code had relied only on the DT node).",
+      "parentUuid": "5925ee7d_30fd6758",
+      "range": {
+        "startLine": 9,
+        "startChar": 14,
+        "endLine": 9,
+        "endChar": 18
+      },
+      "revId": "cd4cc4b68e1446805a76440876f81b5b32642f3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
