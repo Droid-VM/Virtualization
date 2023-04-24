@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e11c8449_47559241",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-24T11:52:11Z",
+      "side": 1,
+      "message": "What about\n```\nimpl\u003cT: core::cmp::PartialOrd\u003e RangeExt for Range\u003cT\u003e {\n    fn is_within(\u0026self, other: \u0026Self) -\u003e bool {\n        self.start \u003e\u003d other.start \u0026\u0026 self.end \u003c\u003d other.end\n    }\n}\n```\nThen you don\u0027t need `Copy` or import `min` and `max`.",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 1
+      },
+      "revId": "79c040dc8134fd62f298d5eb8edd7c45bdda8ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
