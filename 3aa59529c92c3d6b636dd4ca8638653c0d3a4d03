@@ -52,6 +52,40 @@
       "parentUuid": "6ef71512_7fd8c375",
       "revId": "3aa59529c92c3d6b636dd4ca8638653c0d3a4d03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d636f424_a6d4b2f9",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-24T16:38:52Z",
+      "side": 1,
+      "message": "I suggest removing this comment on `dma_dealloc` entirely, as it doesn\u0027t add anything. `dma_dealloc` does not have any implementation safety requirements for the trait, and anyone calling it should be looking at the safety requirements for `dma_dealloc` where it is defined on the trait, not here in the implementation. (In fact the callers are all in the `virtio-drivers` crate, where the trait is defined.)",
+      "revId": "3aa59529c92c3d6b636dd4ca8638653c0d3a4d03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a44afd34_c4aaf628",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-24T16:38:52Z",
+      "side": 1,
+      "message": "I suggest calling this `Implementation safety` rather than `Safety`, as it\u0027s about the implementation of the trait rather than about requirements for the caller. What the comment needs to describe is not what the requirement is (that\u0027s already documented on the trait), but how this implementation is guaranteed to satisfy that requirement, given the preconditions it can assume.",
+      "revId": "3aa59529c92c3d6b636dd4ca8638653c0d3a4d03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

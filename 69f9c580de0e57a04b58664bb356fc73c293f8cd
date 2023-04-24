@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09703de7_94535533",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-24T16:38:52Z",
+      "side": 1,
+      "message": "This is not done, you still need to add a comment on `dma_alloc` or here explaining how the implementation ensures that the pointer it returns is valid, aligned to `PAGE_SIZE` and won\u0027t alias any other allocations or references in the program until it is deallocated.",
+      "parentUuid": "20e8c8da_45f74167",
+      "revId": "69f9c580de0e57a04b58664bb356fc73c293f8cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb532347_dcdc13a4",
         "filename": "pvmfw/src/virtio/hal.rs",
         "patchSetId": 3
