@@ -22,6 +22,30 @@
       },
       "revId": "7f0dd199dc7b87630859ca88406905891051814d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a04b4cb_9e86b6ab",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-24T07:00:41Z",
+      "side": 1,
+      "message": "This seems to work:\n\n```\n+/// Trait to check containment of one range within another\n+pub(crate) trait RangeExt {\n+    /// Returns true if \u0027self\u0027 is contained within the \u0027other\u0027 range\n+    fn is_within(\u0026self, other: \u0026Self) -\u003e bool;\n+}\n+\n+impl\u003cT: core::cmp::Ord + Copy\u003e RangeExt for Range\u003cT\u003e {\n+    fn is_within(\u0026self, other: \u0026Self) -\u003e bool {\n+        \u0026(max(self.start, other.start)..min(self.end, other.end)) \u003d\u003d self\n+    }\n+}\n+\n\n```",
+      "parentUuid": "2005ef16_7c5ef873",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 1
+      },
+      "revId": "7f0dd199dc7b87630859ca88406905891051814d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
