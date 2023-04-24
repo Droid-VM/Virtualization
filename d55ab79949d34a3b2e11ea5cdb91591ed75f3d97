@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8411f4d6_db4db4ee",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-24T13:07:46Z",
+      "side": 1,
+      "message": "Could you make this a [`bitflags!` `struct`](https://docs.rs/bitflags/latest/bitflags/macro.bitflags.html) to let the compiler validate arguments to `has_cap`?",
+      "range": {
+        "startLine": 20,
+        "startChar": 4,
+        "endLine": 20,
+        "endChar": 7
+      },
+      "revId": "d55ab79949d34a3b2e11ea5cdb91591ed75f3d97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51c4ae40_0653a6e1",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-24T13:07:46Z",
+      "side": 1,
+      "message": "nit: `Self`",
+      "range": {
+        "startLine": 136,
+        "startChar": 8,
+        "endLine": 136,
+        "endChar": 21
+      },
+      "revId": "d55ab79949d34a3b2e11ea5cdb91591ed75f3d97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
