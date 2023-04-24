@@ -45,6 +45,30 @@
       },
       "revId": "79c040dc8134fd62f298d5eb8edd7c45bdda8ea5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9191509a_c956296c",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-24T13:06:08Z",
+      "side": 1,
+      "message": "+1, if that works.\n\nAlso, aren\u0027t `PartialOrd` and `Ord` part of [the prelude](https://doc.rust-lang.org/beta/core/prelude/v1/index.html), allowing \"`impl\u003cT: PartialOrd\u003e`\"?",
+      "parentUuid": "e11c8449_47559241",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 1
+      },
+      "revId": "79c040dc8134fd62f298d5eb8edd7c45bdda8ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
