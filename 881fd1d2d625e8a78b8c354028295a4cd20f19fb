@@ -46,6 +46,30 @@
       },
       "revId": "881fd1d2d625e8a78b8c354028295a4cd20f19fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd60b9d6_d1fd0493",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-24T13:06:41Z",
+      "side": 1,
+      "message": "This abstracts away the fact that those values are stored as u64 in the DT, allowing higher-level code to simply compare their \"raw\" addresses with the struct fields directly.",
+      "parentUuid": "898c073c_769e3e5e",
+      "range": {
+        "startLine": 439,
+        "startChar": 0,
+        "endLine": 441,
+        "endChar": 17
+      },
+      "revId": "881fd1d2d625e8a78b8c354028295a4cd20f19fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
