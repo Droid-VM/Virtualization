@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c61bcfb_7a14c2b3",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-24T13:08:00Z",
+      "side": 1,
+      "message": "Can you confirm that the check this call performs on its input is the only reason why you\u0027d need the swiotlb region to be part of the `/memory` DT node?",
+      "range": {
+        "startLine": 279,
+        "startChar": 25,
+        "endLine": 279,
+        "endChar": 34
+      },
+      "revId": "15a17099616341957a712f58492b8714bb5697cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

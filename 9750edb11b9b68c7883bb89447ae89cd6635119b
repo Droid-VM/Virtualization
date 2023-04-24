@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2f7ef00_25b0e24f",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-24T13:08:00Z",
+      "side": 1,
+      "message": "Could you turn this into `MemoryTracker::shared_pool: Option\u003cLockedHeap\u003c32\u003e\u003e`?\n\nLocking for `init_shared_pool(\u0026mut self, range: Range\u003cusize\u003e)` would then come naturally from accessing `MEMORY` (see aosp/2548232) and `alloc_shared` and `dealloc_shared` could simply `let Some(pool) \u003d memory.shared_pool` to decide if they allocate from that or the `global_allocator`, abstracting away hypervisor logic.",
+      "range": {
+        "startLine": 137,
+        "startChar": 7,
+        "endLine": 137,
+        "endChar": 20
+      },
+      "revId": "9750edb11b9b68c7883bb89447ae89cd6635119b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
