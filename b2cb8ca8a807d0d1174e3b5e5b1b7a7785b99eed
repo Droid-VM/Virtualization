@@ -70,6 +70,30 @@
       },
       "revId": "b2cb8ca8a807d0d1174e3b5e5b1b7a7785b99eed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6af61871_af519dfd",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-24T15:03:38Z",
+      "side": 1,
+      "message": "```\n    fn try_from(uuid: Uuid) -\u003e Result\u003cHypervisorBackend\u003e {\n        match uuid {\n            HypervisorBackend::Kvm.uuid() \u003d\u003e {\n```\n\nThat doesn\u0027t seem to work:\n\n```\nerror: expected one of `!`, `(`, `...`, `..\u003d`, `..`, `::`, `\u003d\u003e`, `if`, `{`, or `|`, found `.`\n  --\u003e packages/modules/Virtualization/libs/hyp/src/hypervisor/mod.rs:55:35\n   |\n55 |             HypervisorBackend::Kvm.uuid() \u003d\u003e {\n   |                                   ^ expected one of 10 possible tokens\n\n```",
+      "parentUuid": "8b09f929_71dbfe6f",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 13
+      },
+      "revId": "b2cb8ca8a807d0d1174e3b5e5b1b7a7785b99eed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
