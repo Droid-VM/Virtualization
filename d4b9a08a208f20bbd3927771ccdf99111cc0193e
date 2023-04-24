@@ -209,6 +209,30 @@
       },
       "revId": "d4b9a08a208f20bbd3927771ccdf99111cc0193e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d5f1a01_66b489b2",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-24T15:26:46Z",
+      "side": 1,
+      "message": "Sure. We can definitely adjust this in a separate cl. I mean, now there are two options for this singleton getter API without panic inside:\n\nOption 1: `get_() -\u003e Result\u003c\u0026Hypervisor\u003e`\nOption 2: `init_() -\u003e Result\u003c()\u003e / get_() -\u003e \u0026Hypervisor`\n\nSo we\u0027d like to choose option 1 since the initialization code is lightweight and just a hypervisor detection, it\u0027s convenient to provide a lazy initialization scheme inside the getter. We just need to add `?` to all the callers. Is this the approach we want to take?",
+      "parentUuid": "c21aa708_a92fd813",
+      "range": {
+        "startLine": 93,
+        "startChar": 42,
+        "endLine": 93,
+        "endChar": 71
+      },
+      "revId": "d4b9a08a208f20bbd3927771ccdf99111cc0193e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

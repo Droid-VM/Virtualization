@@ -94,6 +94,30 @@
       },
       "revId": "b2cb8ca8a807d0d1174e3b5e5b1b7a7785b99eed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68df771d_3b45c2bf",
+        "filename": "libs/hyp/src/hypervisor/kvm.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-24T15:26:46Z",
+      "side": 1,
+      "message": "Oh okay. Then we can just move the const inside `HypervisorBackend` to keep it private. Thanks for testing it.",
+      "parentUuid": "6af61871_af519dfd",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 13
+      },
+      "revId": "b2cb8ca8a807d0d1174e3b5e5b1b7a7785b99eed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
