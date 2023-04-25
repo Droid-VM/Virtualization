@@ -308,6 +308,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "92949dac_0e5ea2f8",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T11:38:05Z",
+      "side": 1,
+      "message": "\u003e on a BE system, I think res values will be\n\nThe spec says that \"_Bytes 0…3 with byte 0 in the low-order bits_\" so AFAICT `res[0] \u003d\u003d 0x28b46fb6` on both LE **and BE**. I agree that the layout of the bytes in the register **will** be different but that\u0027s being abstracted away by the language when we assign (`\u003d`), compare (`\u003d\u003d`), shift (`\u003c\u003c`), ... allowing the above expression for `uuid_ne` to be endianness-agnostic.\n\nNote that the spec allowing natural endianness (through arguably unusual wording) makes the HVC interface much simpler as neither side needs to deal with byte-swapping, as long as we assume that they use the same endianness (sound).\n\nAs a counter-example, consider the assignment in [arch/arm64/kvm/hypercalls.c](https://github.com/torvalds/linux/blob/master/arch/arm64/kvm/hypercalls.c):\n```\ncase ARM_SMCCC_VENDOR_HYP_CALL_UID_FUNC_ID:\n    val[0] \u003d ARM_SMCCC_VENDOR_HYP_UID_KVM_REG_0;\n    val[1] \u003d ARM_SMCCC_VENDOR_HYP_UID_KVM_REG_1;\n    val[2] \u003d ARM_SMCCC_VENDOR_HYP_UID_KVM_REG_2;\n    val[3] \u003d ARM_SMCCC_VENDOR_HYP_UID_KVM_REG_3;\n```\nlater used to populate the register file on `ERET`; by your logic, shouldn\u0027t they also be manually byte-swapping the values when compiled for BE?",
+      "parentUuid": "c64dbdeb_7a0bca95",
+      "range": {
+        "startLine": 85,
+        "startChar": 9,
+        "endLine": 88,
+        "endChar": 31
+      },
+      "revId": "d4b9a08a208f20bbd3927771ccdf99111cc0193e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "328ac9bf_24a3e6f4",
