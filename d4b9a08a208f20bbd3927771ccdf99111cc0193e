@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffb3ef4c_528be2bd",
+        "filename": "libs/hyp/src/error.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-25T11:18:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be5700fc_1466bcc5",
+      "range": {
+        "startLine": 31,
+        "startChar": 29,
+        "endLine": 31,
+        "endChar": 30
+      },
+      "revId": "d4b9a08a208f20bbd3927771ccdf99111cc0193e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29c9d3e0_912d568c",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-24T13:07:35Z",
       "side": 1,
       "message": "OOC, given that [`Uuid` implements `Display`](https://docs.rs/uuid/latest/uuid/struct.Uuid.html#impl-Display-for-Uuid), why don\u0027t we simply `\"{u}\"`? Do we actually require a URN format?",
+      "range": {
+        "startLine": 45,
+        "startChar": 55,
+        "endLine": 45,
+        "endChar": 57
+      },
+      "revId": "d4b9a08a208f20bbd3927771ccdf99111cc0193e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be96583e_b0609b4d",
+        "filename": "libs/hyp/src/error.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-25T11:18:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29c9d3e0_912d568c",
       "range": {
         "startLine": 45,
         "startChar": 55,
