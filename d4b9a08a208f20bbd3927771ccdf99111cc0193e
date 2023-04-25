@@ -332,6 +332,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "13d19b40_6a398a10",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T11:45:17Z",
+      "side": 1,
+      "message": "TBC, the important point in the above was that `res[0]` would have the same _value_ (but a different _layout_) on both LE and BE but, for completeness, that value would be `0xb66fb428` (`ARM_SMCCC_VENDOR_HYP_UID_KVM_REG_0`), not `0x28b46fb6`.",
+      "parentUuid": "92949dac_0e5ea2f8",
+      "range": {
+        "startLine": 85,
+        "startChar": 9,
+        "endLine": 88,
+        "endChar": 31
+      },
+      "revId": "d4b9a08a208f20bbd3927771ccdf99111cc0193e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "328ac9bf_24a3e6f4",
