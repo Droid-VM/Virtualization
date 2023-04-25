@@ -25,6 +25,7 @@ use static_assertions::const_assert;
 use static_assertions::const_assert_eq;
 use uuid::Uuid;
 use virtio_drivers::device::blk::SECTOR_SIZE;
+use zerocopy::FromBytes;
 
 pub enum Error {
     /// VirtIO error during read operation.
@@ -151,6 +152,7 @@ impl Partitions {
 type Lba = u64;
 
 /// Structure as defined in release 2.10 of the UEFI Specification (5.3.2 GPT Header).
+#[derive(FromBytes)]
 #[repr(C, packed)]
 struct Header {
     signature: u64,
@@ -162,7 +164,7 @@ struct Header {
     backup_lba: Lba,
     first_lba: Lba,
     last_lba: Lba,
-    disk_guid: Uuid,
+    disk_guid: u128,
     entries_lba: Lba,
     entries_count: u32,
     entry_size: u32,
@@ -176,18 +178,10 @@ impl Header {
     const LBA: usize = 1;
     const ENTRIES_LBA: usize = 2;
 
-    fn from_bytes(bytes: &[u8]) -> Option<&Self> {
-        let bytes = bytes.get(..size_of::<Self>())?;
-        // SAFETY - We assume that bytes is properly aligned for Header and have verified above
-        // that it holds enough bytes. All potential values of the slice will produce a valid
-        // Header.
-        let header = unsafe { &*bytes.as_ptr().cast::<Self>() };
+    fn from_bytes(bytes: &[u8]) -> Option<Self> {
+        let header = Self::read_from_prefix(bytes)?;
 
-        if header.is_valid() {
-            Some(header)
-        } else {
-            None
-        }
+        header.is_valid().then_some(header)
     }
 
     fn is_valid(&self) -> bool {
