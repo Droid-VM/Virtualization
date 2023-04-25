@@ -135,6 +135,30 @@
       },
       "revId": "9871b92a173c1a50340b0e450db25f9e51b4bd4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d29e137_b1f88bf9",
+        "filename": "vmbase/src/layout.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T13:34:04Z",
+      "side": 1,
+      "message": "The comparison `addr_of!(data_end) \u003d\u003d addr_of!(bss_start)` was true in _value_ (and would never have been optimized because `rustc` never knows what those addresses are, only the linker does) but for some reason, it was optimized as false in _place_, way before reaching the IR, no?\n\n\u003e You can have a simple C file linked in that contains\n\nTrue; knowing that C saved us from `rustc` would make some people gleeful!\n\nShould we keep this change until we actually make use of it?",
+      "parentUuid": "1788e4b0_b0b7da66",
+      "range": {
+        "startLine": 32,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 50
+      },
+      "revId": "9871b92a173c1a50340b0e450db25f9e51b4bd4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
