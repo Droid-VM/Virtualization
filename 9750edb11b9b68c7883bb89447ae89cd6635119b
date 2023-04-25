@@ -22,6 +22,30 @@
       },
       "revId": "9750edb11b9b68c7883bb89447ae89cd6635119b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64cec106_8e0c50aa",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T15:25:33Z",
+      "side": 1,
+      "message": "Actually, `shared_pool` might not even require locking if it is embedded in `MEMORY` and a `buddy_system_allocator::Heap` might be enough.",
+      "parentUuid": "e2f7ef00_25b0e24f",
+      "range": {
+        "startLine": 137,
+        "startChar": 7,
+        "endLine": 137,
+        "endChar": 20
+      },
+      "revId": "9750edb11b9b68c7883bb89447ae89cd6635119b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
