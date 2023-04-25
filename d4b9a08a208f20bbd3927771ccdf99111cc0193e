@@ -404,6 +404,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c55676ff_0a64f13b",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-25T17:17:11Z",
+      "side": 1,
+      "message": "\u003e Actually, I think you\u0027re right because\n\nOk thanks for confirming ..I felt I am missing something fundamental here :-) \n\n\u003e So should we pass what I called uuid_ne (which should probably be called uuid_le or simply uuid) to Uuid::from_u128_le?\n\nYes that would work and is similar to what I was doing eariler with swap_bytes()!\nUsing from_u128_le() is better and I will use it.\n\nAs per doc on Uuid::from_u128_le:\n\n```\nThe entire value will be flipped to convert into big-endian order. \nThis is based on the endianness of the UUID, rather than the target environment\n*** so bytes will be flipped on both big and little endian machines ***\n```",
+      "parentUuid": "df7fffde_9484205b",
+      "range": {
+        "startLine": 85,
+        "startChar": 9,
+        "endLine": 88,
+        "endChar": 31
+      },
+      "revId": "d4b9a08a208f20bbd3927771ccdf99111cc0193e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "328ac9bf_24a3e6f4",
