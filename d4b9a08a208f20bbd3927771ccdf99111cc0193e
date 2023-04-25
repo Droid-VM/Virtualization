@@ -236,6 +236,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c64dbdeb_7a0bca95",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-25T11:15:58Z",
+      "side": 1,
+      "message": "Taking KVM\u0027s UUID as reference: \"28b46fb6-2ec5-11e9-a9ca-4b564d003a74\" AND considering that we are running on a BE system, I think res values will be:\n\nres[0] \u003d 0xb66fb428;\nres[1] \u003d 0xe911c52e;\nres[2] \u003d 0x564bcaa9;\nres[3] \u003d 0x743a004d;\n\nThis matches  ARM_SMCCC_VENDOR_HYP_UID_KVM_REG* values listed at https://github.com/torvalds/linux/blob/master/include/linux/arm-smccc.h\n\nuuid_ne then becomes:\n\nuuid_ne \u003d 0x743a004d_564bcaa9_e911c52e_b66fb428;\n\nuuid_ne.to_be() will be same as uuid_ne // As we are running on BE system\n\nAFAICS UUid::from_u128(0x743a004d_564bcaa9_e911c52e_b66fb428) will not give\n\"28b46fb6-2ec5-11e9-a9ca-4b564d003a74\".\n\nAm I missing something?",
+      "parentUuid": "26da2783_09e39f85",
+      "range": {
+        "startLine": 85,
+        "startChar": 9,
+        "endLine": 88,
+        "endChar": 31
+      },
+      "revId": "d4b9a08a208f20bbd3927771ccdf99111cc0193e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "328ac9bf_24a3e6f4",
