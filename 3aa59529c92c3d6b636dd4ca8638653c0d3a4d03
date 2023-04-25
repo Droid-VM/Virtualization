@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8adc6510_c8634af3",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-25T09:50:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d636f424_a6d4b2f9",
+      "revId": "3aa59529c92c3d6b636dd4ca8638653c0d3a4d03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a44afd34_c4aaf628",
@@ -84,6 +102,24 @@
       "writtenOn": "2023-04-24T16:38:52Z",
       "side": 1,
       "message": "I suggest calling this `Implementation safety` rather than `Safety`, as it\u0027s about the implementation of the trait rather than about requirements for the caller. What the comment needs to describe is not what the requirement is (that\u0027s already documented on the trait), but how this implementation is guaranteed to satisfy that requirement, given the preconditions it can assume.",
+      "revId": "3aa59529c92c3d6b636dd4ca8638653c0d3a4d03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7f03a33_a0e38e56",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-25T09:50:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a44afd34_c4aaf628",
       "revId": "3aa59529c92c3d6b636dd4ca8638653c0d3a4d03",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
