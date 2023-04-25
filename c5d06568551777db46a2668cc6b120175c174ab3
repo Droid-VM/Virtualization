@@ -134,6 +134,54 @@
       },
       "revId": "c5d06568551777db46a2668cc6b120175c174ab3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d47aa902_e065cc94",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T13:26:14Z",
+      "side": 1,
+      "message": "Yes, please, as this patch currently makes pvmfw hash the kernel twice (once in `verify_payload` then again in `is_service_vm`).",
+      "parentUuid": "3e3dafb1_2785269a",
+      "range": {
+        "startLine": 141,
+        "startChar": 4,
+        "endLine": 141,
+        "endChar": 23
+      },
+      "revId": "c5d06568551777db46a2668cc6b120175c174ab3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f888d1f_02a40c7f",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T13:26:14Z",
+      "side": 1,
+      "message": "pvmfw was always intended to be as payload-agnostic as possible but this does the exact opposite and IMO sends out the wrong signal to vendors. Instead, I\u0027d rather see us use a scalable design that gives some payloads more privileges (it\u0027s not clear from this patch what that would be for the service VM).\n\nHaving said that, if we\u0027re in a hurry to merge this patch, we can always rework the interface/specification later.\n\n\u003e anyone can add a property and claim to be the service VM.\n\nIsn\u0027t the property covered by AVB?",
+      "parentUuid": "b0175e14_d3ea44b3",
+      "range": {
+        "startLine": 141,
+        "startChar": 37,
+        "endLine": 141,
+        "endChar": 64
+      },
+      "revId": "c5d06568551777db46a2668cc6b120175c174ab3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
