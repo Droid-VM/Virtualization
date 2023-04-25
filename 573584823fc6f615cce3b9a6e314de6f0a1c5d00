@@ -46,6 +46,30 @@
       },
       "revId": "573584823fc6f615cce3b9a6e314de6f0a1c5d00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22a95bf8_a954e435",
+        "filename": "vmbase/src/layout.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T10:25:31Z",
+      "side": 1,
+      "message": "Assuming contiguity allows us to simplify the ASM when zeroing memory and the \"scratch\" region can be extended later on with other R/W sections without needing to modify the MMU code.\n\n\u003e why not data_begin and bss_end, to clearly show that scratch \u003d data + bss?\n\nDone",
+      "parentUuid": "d69c147c_c69a5273",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 46
+      },
+      "revId": "573584823fc6f615cce3b9a6e314de6f0a1c5d00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
