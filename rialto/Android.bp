@@ -37,7 +37,7 @@ cc_binary {
 }
 
 raw_binary {
-    name: "rialto_unsigned",
+    name: "raw_rialto_unsigned",
     src: ":rialto_elf",
     enabled: false,
     target: {
@@ -45,6 +45,18 @@ raw_binary {
             enabled: true,
         },
     },
+}
+
+prebuilt_etc {
+    name: "rialto_unsigned",
+    filename: "rialto_unsigned.bin",
+    target: {
+        android_arm64: {
+            src: ":raw_rialto_unsigned",
+        },
+    },
+    src: ":empty_file",
+    installable: false,
 }
 
 // python -c "import hashlib; print(hashlib.sha256(b'rialto_salt').hexdigest())"
@@ -81,6 +93,23 @@ prebuilt_etc {
     },
     src: ":empty_file",
     installable: false,
+}
+
+genrule {
+    name: "rialto_bin.hash",
+    srcs: [":rialto_unsigned"],
+    out: ["lib.rs"],
+    tools: ["rust_hash_constant_generator"],
+    cmd: "$(location rust_hash_constant_generator) $(in) $(out) --salt " + rialto_salt,
+}
+
+rust_library_rlib {
+    name: "librialto_bin_hash",
+    crate_name: "rialto_bin_hash",
+    defaults: ["vmbase_ffi_defaults"],
+    prefer_rlib: true,
+    srcs: [":rialto_bin.hash"],
+    apex_available: ["com.android.virt"],
 }
 
 rust_test {

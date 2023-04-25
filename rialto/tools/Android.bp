@@ -1,0 +1,8 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+python_binary_host {
+    name: "rust_hash_constant_generator",
+    srcs: ["rust_hash_constant_generator.py"],
+}
