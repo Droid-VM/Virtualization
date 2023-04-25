@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3985d743_750cd431",
+        "filename": "vmbase/sections.ld",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T10:26:12Z",
+      "side": 1,
+      "message": "Because the page that precedes `.eh_stack` is either unmapped or part of `.rodata` (mapped RO) so overflowing into it will generate a fault and be caught.",
+      "parentUuid": "a8abaccf_f95d6d8e",
+      "range": {
+        "startLine": 67,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 63
+      },
+      "revId": "063b979dc05920c694bcad43865375f193709181",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05cacc09_72e2cd7a",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-24T01:35:04Z",
       "side": 1,
       "message": "Do you achieve this since only `stack_top..(end_of_writable_data)` is mapped and this 4K is left unmapped?",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 62
+      },
+      "revId": "063b979dc05920c694bcad43865375f193709181",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f13c6103_2f3a6b8a",
+        "filename": "vmbase/sections.ld",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T10:26:12Z",
+      "side": 1,
+      "message": "Yes, these 4KiB _are_ the guard page and accessing it should raise an exception, hence keeping it unmapped.\n\nNote that we could have better error reporting from the fault handler by checking `page_of(far) \u003d\u003d page_of(stack_limit - 1)` but I didn\u0027t want to make these patches more complicated than necessary.",
+      "parentUuid": "05cacc09_72e2cd7a",
       "range": {
         "startLine": 106,
         "startChar": 0,
