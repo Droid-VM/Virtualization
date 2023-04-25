@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4ea2c22_32edc163",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T17:27:12Z",
+      "side": 1,
+      "message": "aosp/2562212",
+      "parentUuid": "8204815d_e2f855bb",
+      "revId": "1cc5eb7ae9c3144b39e21351855397d3b6e46f6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46a1a38c_99c9d027",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-02-27T05:23:36Z",
       "side": 1,
       "message": "Typo: \"alignment\"\n\nI don\u0027t think you can assume that the size matches, don\u0027t you need to check that at runtime? Use `zerocopy::FromBytes` to do that safely.",
+      "range": {
+        "startLine": 158,
+        "startChar": 36,
+        "endLine": 158,
+        "endChar": 46
+      },
+      "revId": "1cc5eb7ae9c3144b39e21351855397d3b6e46f6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "652ccf74_f5796c9e",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T17:27:12Z",
+      "side": 1,
+      "message": "aosp/2562212",
+      "parentUuid": "46a1a38c_99c9d027",
       "range": {
         "startLine": 158,
         "startChar": 36,
@@ -58,6 +100,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ddc9784_5b2b345c",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T17:27:12Z",
+      "side": 1,
+      "message": "aosp/2562212",
+      "parentUuid": "2662b2ef_ee573ecc",
+      "revId": "1cc5eb7ae9c3144b39e21351855397d3b6e46f6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "549a3862_aaa25f03",
@@ -71,6 +131,24 @@
       "writtenOn": "2023-02-27T05:23:36Z",
       "side": 1,
       "message": "Use `zerocopy::AsBytes`.",
+      "revId": "1cc5eb7ae9c3144b39e21351855397d3b6e46f6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7da47991_31fa840c",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T17:27:12Z",
+      "side": 1,
+      "message": "aosp/2562212",
+      "parentUuid": "549a3862_aaa25f03",
       "revId": "1cc5eb7ae9c3144b39e21351855397d3b6e46f6e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -92,6 +170,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61d14906_4f5cb736",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T17:27:12Z",
+      "side": 1,
+      "message": "aosp/2562212",
+      "parentUuid": "66d88d2f_a26eb399",
+      "revId": "1cc5eb7ae9c3144b39e21351855397d3b6e46f6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8bc78b8d_366bbb61",
@@ -105,6 +201,24 @@
       "writtenOn": "2023-02-27T05:23:36Z",
       "side": 1,
       "message": "`zerocopy::AsBytes`",
+      "revId": "1cc5eb7ae9c3144b39e21351855397d3b6e46f6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4445609_88499a20",
+        "filename": "pvmfw/src/instance.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T17:27:12Z",
+      "side": 1,
+      "message": "aosp/2562212",
+      "parentUuid": "8bc78b8d_366bbb61",
       "revId": "1cc5eb7ae9c3144b39e21351855397d3b6e46f6e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
