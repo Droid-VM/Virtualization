@@ -16,6 +16,52 @@
       "message": "Hello, PTAL.",
       "revId": "c5d06568551777db46a2668cc6b120175c174ab3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99b2467f_362e3c2e",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T12:21:21Z",
+      "side": 1,
+      "message": "Instead of hard-coding a hash into pvmfw, can\u0027t we use a vbmeta property to tag the image as a service VM? How\u0027s this setup going to work with updatable VMs?",
+      "range": {
+        "startLine": 141,
+        "startChar": 37,
+        "endLine": 141,
+        "endChar": 64
+      },
+      "revId": "c5d06568551777db46a2668cc6b120175c174ab3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c99d8725_0430cb1a",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T12:21:21Z",
+      "side": 1,
+      "message": "Why can\u0027t we instead validate `verified_boot_data.kernel_digest`?",
+      "range": {
+        "startLine": 141,
+        "startChar": 4,
+        "endLine": 141,
+        "endChar": 23
+      },
+      "revId": "c5d06568551777db46a2668cc6b120175c174ab3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
