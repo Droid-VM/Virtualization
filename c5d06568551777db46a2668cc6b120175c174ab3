@@ -182,6 +182,30 @@
       },
       "revId": "c5d06568551777db46a2668cc6b120175c174ab3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b05fd69a_8b4e4c06",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-25T13:36:58Z",
+      "side": 1,
+      "message": "We\u0027re not actually trying to give the service VM extra privilege, it\u0027s important for the attestation that pvmfw confirms (via the DICE chain) that this is the one true service VM.\nI mentioned you on the design doc, would be interested in your comments.",
+      "parentUuid": "6f888d1f_02a40c7f",
+      "range": {
+        "startLine": 141,
+        "startChar": 37,
+        "endLine": 141,
+        "endChar": 64
+      },
+      "revId": "c5d06568551777db46a2668cc6b120175c174ab3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
