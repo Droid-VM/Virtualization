@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27ebd959_089a7e4c",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T10:25:42Z",
+      "side": 1,
+      "message": "It\u0027s pvmfw\u0027s page size, just like the kernel\u0027s `PAGE_SIZE` macro; wouldn\u0027t \"`PVMFW_PAGE_SIZE`\" be unnecessarily verbose?",
+      "parentUuid": "708d3c40_fb5cf3a6",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 19
+      },
+      "revId": "843ceb9c50c150a3ae46c701949c4cb926051bd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a32b78c3_c79496f1",
         "filename": "vmbase/sections.ld",
         "patchSetId": 1
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1c1efcd_d08c0a79",
+        "filename": "vmbase/sections.ld",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T10:25:42Z",
+      "side": 1,
+      "message": "Using \"`stack_start`\" or \"`stack_begin`\" is confusing given that the stack grows \"downwards\" but `stack_limit` is a great name, thanks!",
+      "parentUuid": "a32b78c3_c79496f1",
+      "range": {
+        "startLine": 98,
+        "startChar": 2,
+        "endLine": 98,
+        "endChar": 16
+      },
+      "revId": "843ceb9c50c150a3ae46c701949c4cb926051bd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de97b670_5aaeaa43",
@@ -84,6 +132,30 @@
       "writtenOn": "2023-04-24T16:52:59Z",
       "side": 1,
       "message": "I don\u0027t think I understand what this does (mind you, my linker-fu is weak).\nCan we comment the intention?",
+      "range": {
+        "startLine": 99,
+        "startChar": 2,
+        "endLine": 99,
+        "endChar": 25
+      },
+      "revId": "843ceb9c50c150a3ae46c701949c4cb926051bd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7438003_feb6d78e",
+        "filename": "vmbase/sections.ld",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T10:25:42Z",
+      "side": 1,
+      "message": "Combined with the assignment **to** `init_stack_pointer`, this includes the rest of `writable_data` in `.stack`.",
+      "parentUuid": "de97b670_5aaeaa43",
       "range": {
         "startLine": 99,
         "startChar": 2,
