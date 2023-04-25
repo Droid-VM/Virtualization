@@ -380,6 +380,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "df7fffde_9484205b",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T17:03:40Z",
+      "side": 1,
+      "message": "\u003e I will go with the code snippet you have suggested as it works on our LE systems ...\n\nThanks for testing it, as stated above, it\u0027s just a refactor on LE.\n\n\u003e ... which is what I am most concerned about!\n\nMakes sense.\n\n\u003e Do you agree it will have the value I listed (on both BE and LE)?\n\nYep!\n\n\u003e UUid::from_u128(uuid_ne.to_be()) will then yield a UUID of \"743a004d-564b-caa9-e911c52eb66fb428\" on BE (as uuid_ne.to_be() is a no-op on BE)\n\nActually, I _think_ you\u0027re right because\n```\n(res[3] as u32 as u128 \u003c\u003c 96)\n    | (res[2] as u32 as u128 \u003c\u003c 64)\n    | (res[1] as u32 as u128 \u003c\u003c 32)\n    | (res[0] as u32 as u128)\n```\nwill always be the LE _value_, won\u0027t it? So should we pass what I called `uuid_ne` (which should probably be called `uuid_le` or simply `uuid`) to `Uuid::from_u128_le`?",
+      "parentUuid": "bcb1cfbc_aa27e399",
+      "range": {
+        "startLine": 85,
+        "startChar": 9,
+        "endLine": 88,
+        "endChar": 31
+      },
+      "revId": "d4b9a08a208f20bbd3927771ccdf99111cc0193e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "328ac9bf_24a3e6f4",
