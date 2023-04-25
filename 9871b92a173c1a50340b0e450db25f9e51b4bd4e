@@ -87,6 +87,30 @@
       },
       "revId": "9871b92a173c1a50340b0e450db25f9e51b4bd4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e632d35b_beca8580",
+        "filename": "vmbase/src/layout.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-04-25T12:37:23Z",
+      "side": 1,
+      "message": "Maybe there is something in the language to prevent this but on the IR level the compiler needs to have two basic pinhole optimizations:\n```\n1) A + B - A \u003d B\n2) if (A \u003d X as uN) and (B \u003d Y as uN) then (A \u003d\u003d B \u003c\u003d\u003e X \u003d\u003d Y)\n```\n(the `checked_add` is probably playing a role here as well).\n\n\u003e I\u0027m not sure how to give a value to a C/Rust variable from the linker script (where variables are addresses) and how to tell the linker to write the size of .rodata in a variable in .rodata(?)\n\nYou can have a simple C file linked in that contains:\n```\nuintptr_t val_rodata_end \u003d (uintptr_t)\u0026rodata_end;\n...\n```\nThis will compile into a relocation populated by the linker.",
+      "parentUuid": "0fc456eb_55ceace4",
+      "range": {
+        "startLine": 32,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 50
+      },
+      "revId": "9871b92a173c1a50340b0e450db25f9e51b4bd4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
