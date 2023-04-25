@@ -22,6 +22,30 @@
       },
       "revId": "960280dda26eaf20132fad082cdf786241e13269",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "162195b4_c0252b36",
+        "filename": "pvmfw/src/rand/rndr.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T18:14:21Z",
+      "side": 1,
+      "message": "\u003e Shouldn\u0027t it if reading the register fails?\n\nThat\u0027s what the `Option` is for: not really a hard error but no entropy was available when we called. The caller (`Entropy::fill`) _could_ keep count of the times `None` was returned and fail at some point but we currently don\u0027t ...\n\n\u003e do we expect it to eventually succeed?\n\nYes, that\u0027s the assumption we\u0027re making.",
+      "parentUuid": "9dcd890e_5aa32b58",
+      "range": {
+        "startLine": 58,
+        "startChar": 56,
+        "endLine": 58,
+        "endChar": 62
+      },
+      "revId": "960280dda26eaf20132fad082cdf786241e13269",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
