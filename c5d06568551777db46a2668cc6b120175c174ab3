@@ -62,6 +62,30 @@
       },
       "revId": "c5d06568551777db46a2668cc6b120175c174ab3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6d8bf59_bc116e08",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-04-25T13:00:54Z",
+      "side": 1,
+      "message": "The Virt APEX already needs to be updated in lockstep with pvmfw - if nothing else, crosvm is in the Virt APEX.\nAnd Rialto also lives in the Virt APEX.",
+      "parentUuid": "99b2467f_362e3c2e",
+      "range": {
+        "startLine": 141,
+        "startChar": 37,
+        "endLine": 141,
+        "endChar": 64
+      },
+      "revId": "c5d06568551777db46a2668cc6b120175c174ab3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
