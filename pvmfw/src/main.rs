@@ -91,6 +91,11 @@ fn main(
         RebootReason::PayloadVerificationError
     })?;
 
+    let is_service_vm = verified_boot_data.kernel_digest == rialto_bin_hash::HASH_VALUE;
+    if is_service_vm {
+        info!("Service VM payload detected");
+    }
+
     let next_bcc = heap::aligned_boxed_slice(NEXT_BCC_SIZE, GUEST_PAGE_SIZE).ok_or_else(|| {
         error!("Failed to allocate the next-stage BCC");
         RebootReason::InternalError
