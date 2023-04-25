@@ -48,6 +48,7 @@ use crate::memory::MemoryTracker;
 use crate::virtio::pci;
 use diced_open_dice::bcc_handover_main_flow;
 use diced_open_dice::bcc_handover_parse;
+use diced_open_dice::hash;
 use diced_open_dice::DiceArtifacts;
 use fdtpci::{PciError, PciInfo};
 use libfdt::Fdt;
@@ -91,6 +92,10 @@ fn main(
         RebootReason::PayloadVerificationError
     })?;
 
+    if is_service_vm(signed_kernel)? {
+        info!("Service VM payload detected");
+    }
+
     let next_bcc = heap::aligned_boxed_slice(NEXT_BCC_SIZE, GUEST_PAGE_SIZE).ok_or_else(|| {
         error!("Failed to allocate the next-stage BCC");
         RebootReason::InternalError
@@ -130,6 +135,13 @@ fn main(
 
     info!("Starting payload...");
     Ok(())
+}
+
+fn is_service_vm(signed_kernel: &[u8]) -> Result<bool, RebootReason> {
+    hash(signed_kernel).map(|h| h == rialto_bin_hash::HASH_VALUE).map_err(|e| {
+        error!("Failed to compute partial DICE inputs: {e:?}");
+        RebootReason::InternalError
+    })
 }
 
 /// Logs the given PCI error and returns the appropriate `RebootReason`.

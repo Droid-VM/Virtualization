@@ -83,6 +83,23 @@ prebuilt_etc {
     installable: false,
 }
 
+genrule {
+    name: "rialto_bin.sha512",
+    srcs: [":rialto_bin"],
+    out: ["lib.rs"],
+    tools: ["rust_hash_constant_generator"],
+    cmd: "$(location rust_hash_constant_generator) $(in) $(out)",
+}
+
+rust_library_rlib {
+    name: "librialto_bin_hash",
+    crate_name: "rialto_bin_hash",
+    defaults: ["vmbase_ffi_defaults"],
+    prefer_rlib: true,
+    srcs: [":rialto_bin.sha512"],
+    apex_available: ["com.android.virt"],
+}
+
 rust_test {
     name: "rialto_test",
     crate_name: "rialto_test",
