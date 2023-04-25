@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd624975_611813e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T10:26:41Z",
+      "side": 1,
+      "message": "I\u0027ve tried very hard to get solid numbers for this but the noise makes it just impossible to measure properly; I don\u0027t even think the \"~3%\" I first quoted was reliable.",
+      "parentUuid": "69cd06d1_1a27d80b",
+      "range": {
+        "startLine": 11,
+        "startChar": 26,
+        "endLine": 11,
+        "endChar": 29
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a5763b5_a8266903",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b67a3175_5c7b705a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T10:26:41Z",
+      "side": 1,
+      "message": "`next_bcc` is allocated on the heap to 1. ensure that it\u0027s properly aligned (guest kernel expects 4KiB alignment while the received input is only aligned to `u64` boundary), 2. reduce the predictability of its address e.g. through Scudo 3. allow the output `BccHandover` to be larger than the input `BccHandover` so we could copy `next_bcc` to the configuration data but, depending on its layout, would need to figure out if we missed the input CDIs anyway and I don\u0027t see the overall complexity going down while we\u0027re introducing a memcpy of at least 1 page.",
+      "parentUuid": "4a5763b5_a8266903",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 17
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b60ec55f_bad26a9f",
@@ -84,6 +132,30 @@
       "writtenOn": "2023-04-19T17:45:53Z",
       "side": 1,
       "message": "checked_add",
+      "range": {
+        "startLine": 274,
+        "startChar": 30,
+        "endLine": 274,
+        "endChar": 31
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "084e10f5_ea6136c7",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T10:26:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b60ec55f_bad26a9f",
       "range": {
         "startLine": 274,
         "startChar": 30,
@@ -165,6 +237,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab829ae4_cf056eb5",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T10:26:41Z",
+      "side": 1,
+      "message": "aosp/2550861",
+      "parentUuid": "c5358882_efedc4a2",
+      "range": {
+        "startLine": 275,
+        "startChar": 15,
+        "endLine": 275,
+        "endChar": 23
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "986195f9_b42d84ef",
@@ -188,6 +284,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c64dfc16_bdb1b9f6",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T10:26:41Z",
+      "side": 1,
+      "message": "Updated the comment and turn the assumptions into assertions.",
+      "parentUuid": "986195f9_b42d84ef",
+      "range": {
+        "startLine": 279,
+        "startChar": 0,
+        "endLine": 279,
+        "endChar": 94
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14cd454e_3ba7b6c7",
@@ -201,6 +321,30 @@
       "writtenOn": "2023-04-19T17:45:53Z",
       "side": 1,
       "message": "This assumes BCC is not at the beginning of rwdata",
+      "range": {
+        "startLine": 286,
+        "startChar": 16,
+        "endLine": 286,
+        "endChar": 46
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a83ecb2a_544a68fe",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T10:26:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14cd454e_3ba7b6c7",
       "range": {
         "startLine": 286,
         "startChar": 16,
@@ -258,6 +402,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcb1ba81_e87ff9b4",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T10:26:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e602a8c8_88ea241c",
+      "range": {
+        "startLine": 294,
+        "startChar": 0,
+        "endLine": 294,
+        "endChar": 46
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f294bd9b_4e8c1b4e",
@@ -271,6 +439,30 @@
       "writtenOn": "2023-04-19T17:45:53Z",
       "side": 1,
       "message": "No isb before messing with `sctlr_el1`?",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 0
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21c82b01_0be17588",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T10:26:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f294bd9b_4e8c1b4e",
       "range": {
         "startLine": 315,
         "startChar": 0,
@@ -327,6 +519,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cb29dae_49533ff0",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T10:26:41Z",
+      "side": 1,
+      "message": "(discussion continued in aosp/2550861)",
+      "parentUuid": "21efc951_dab52b78",
+      "range": {
+        "startLine": 353,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 95
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c1c408d_c31303e4",
@@ -340,6 +556,30 @@
       "writtenOn": "2023-04-20T11:39:12Z",
       "side": 1,
       "message": "Why do you need Copy?",
+      "range": {
+        "startLine": 126,
+        "startChar": 25,
+        "endLine": 126,
+        "endChar": 29
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89fdecc5_63c43ad2",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T10:26:41Z",
+      "side": 1,
+      "message": "(obsolete)",
+      "parentUuid": "5c1c408d_c31303e4",
       "range": {
         "startLine": 126,
         "startChar": 25,
