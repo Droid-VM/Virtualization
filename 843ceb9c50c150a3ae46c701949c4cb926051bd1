@@ -120,6 +120,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "139d73d5_1c0d127f",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T13:50:20Z",
+      "side": 1,
+      "message": "Done\n\n\u003e If guest page size could vary, why is it a constant?\n\nYes, that\u0027s a fair point.\n\npvmfw needs to satisfy page-alignment requirements from the guest kernel (e.g. for the BCC region) so having `GUEST_PAGE_SIZE` in the code instead of a plain `PAGE_SIZE` or `SIZE_4K` allows us to easily grep through the code and locate which \"constants\" would need to be modified to support guests using larger granules. Until then, it\u0027s just a constant.",
+      "parentUuid": "31552571_61bf7554",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 19
+      },
+      "revId": "843ceb9c50c150a3ae46c701949c4cb926051bd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a32b78c3_c79496f1",
