@@ -16,6 +16,24 @@
       "message": "It looks like `uuid` has a `zerocopy` feature, we could enable that if you like.",
       "revId": "3a753ba0742812c8a23bdfd31aa89dda83e03fdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90a606eb_3d8ffbc6",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T17:47:14Z",
+      "side": 0,
+      "message": "`disk_guid` is never used so it\u0027s not important in this case but if there\u0027s no overhead to enabling that feature, why not?",
+      "parentUuid": "b5683168_460febd3",
+      "revId": "3a753ba0742812c8a23bdfd31aa89dda83e03fdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
