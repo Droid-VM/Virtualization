@@ -86,6 +86,54 @@
       },
       "revId": "c5d06568551777db46a2668cc6b120175c174ab3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e3dafb1_2785269a",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-25T13:06:43Z",
+      "side": 1,
+      "message": "Mmm, that\u0027s possible if we only hash the unsigned kernel, integrate the salt and use sha256. Since this only serves to recognize the service VM. We can just hash the unsigned kernel and compare it with `verified_boot_data.kernel_digest`.",
+      "parentUuid": "c99d8725_0430cb1a",
+      "range": {
+        "startLine": 141,
+        "startChar": 4,
+        "endLine": 141,
+        "endChar": 23
+      },
+      "revId": "c5d06568551777db46a2668cc6b120175c174ab3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0175e14_d3ea44b3",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-25T13:06:43Z",
+      "side": 1,
+      "message": "The service VM/RKP VM is supposed to be hardcoded and it will be bundled with pvmfw, so that we can leverage the trust of pvmfw to the service VM.\n\n\u003e Instead of hard-coding a hash into pvmfw, can\u0027t we use a vbmeta property to tag the image as a service VM?\n\nI don\u0027t think so. As we want to leverage the trust of pvmfw to service VM, it\u0027s not secure with a vbmeta property, anyone can add a property and claim to be the service VM.",
+      "parentUuid": "99b2467f_362e3c2e",
+      "range": {
+        "startLine": 141,
+        "startChar": 37,
+        "endLine": 141,
+        "endChar": 64
+      },
+      "revId": "c5d06568551777db46a2668cc6b120175c174ab3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
