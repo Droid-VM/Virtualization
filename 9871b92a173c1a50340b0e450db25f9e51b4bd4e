@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "052138bd_20b5b375",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T10:25:19Z",
+      "side": 1,
+      "message": "As the zeroing and mapping are now using the \"scratch\" region, the `assert!` that was getting wrongly optimized is now gone. I\u0027ve extracted the macros into aosp/2561610 and we could simply drop this commit.",
+      "revId": "9871b92a173c1a50340b0e450db25f9e51b4bd4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "54b71f43_3c32d095",
         "filename": "vmbase/src/layout.rs",
         "patchSetId": 1
@@ -38,6 +55,30 @@
       "side": 1,
       "message": "Yeah, this doesn\u0027t look that different from the previous version, once the macros expand - even if it bamboozles the current compiler, the optimisers only ever get better.\nI still think you should just have pointers to the various region start \u0026 end, populated by the linker/assembly. If Rust doesn\u0027t know what they point to, it can\u0027t make any inferences about the addresses they contain.",
       "parentUuid": "54b71f43_3c32d095",
+      "range": {
+        "startLine": 32,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 50
+      },
+      "revId": "9871b92a173c1a50340b0e450db25f9e51b4bd4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fc456eb_55ceace4",
+        "filename": "vmbase/src/layout.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T10:25:19Z",
+      "side": 1,
+      "message": "To speculate about the language (IANAL), I\u0027d say that the previous\n```\ndata.end \u003d\u003d bss.start\n```\nwas inlined as\n```\naddr_of!(data_end) \u003d\u003d addr_of!(bss_start)\n```\nwhich was a comparison between _place expressions_ (hence optimization through aliasing) while `end` is now forced to store the result of a _value expression_.\n\n\u003e I still think you should just have pointers to the various region start \u0026 end, populated by the linker/assembly. \n\nI\u0027m not sure how to give a _value_ to a C/Rust variable from the linker script (where variables are _addresses_) and how to tell the linker to write the size of `.rodata` in a variable in `.rodata`(?)",
+      "parentUuid": "8adff98a_14bae191",
       "range": {
         "startLine": 32,
         "startChar": 8,
