@@ -33,6 +33,24 @@
       "message": "Is it guaranteed that nothing else will use the space after the FDT if it is smaller than the max size?",
       "revId": "5bbfca53eebb48b80a5d14f8c006270fcc287256",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a712193_771ae2a3",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T17:27:42Z",
+      "side": 1,
+      "message": "It [should be](https://crosvm.dev/book/appendix/memory_layout.html) and pvmfw will refuse to boot if something else (e.g. kernel or ramdisk) overlaps with the 2MiB region.",
+      "parentUuid": "cb1064c8_6cbba46b",
+      "revId": "5bbfca53eebb48b80a5d14f8c006270fcc287256",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
