@@ -45,6 +45,29 @@
       },
       "revId": "3ec0b178fd599cd7d506daa8ecf552515cf0d757",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1242dbdf_f7943bfc",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-25T09:16:33Z",
+      "side": 1,
+      "message": "Note that `bcc_handover.bcc().is_none()` is also considered an error as pvmfw should never be the root of the BCC.",
+      "range": {
+        "startLine": 106,
+        "startChar": 4,
+        "endLine": 106,
+        "endChar": 5
+      },
+      "revId": "3ec0b178fd599cd7d506daa8ecf552515cf0d757",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
