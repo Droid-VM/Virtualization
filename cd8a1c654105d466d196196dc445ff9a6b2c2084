@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83b8f174_7be46ca2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-25T16:35:09Z",
+      "side": 1,
+      "message": "Hi everyone,\n\nI believe we should pause this current CL for now. The reason for recognizing RKP VM in pvmfw is to add a marker to RKP VM\u0027s DICE chain for remote attestation. However, after checking with Andrew and Seth, I learned that the RKP team can actually collect the hashes of RKP VM directly and recognize it. In that sense, we no longer need to proceed with this CL (at least for remote attestation).",
+      "revId": "cd8a1c654105d466d196196dc445ff9a6b2c2084",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

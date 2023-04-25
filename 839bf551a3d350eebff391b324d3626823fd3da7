@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddf9e980_13a3a321",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-25T16:35:09Z",
+      "side": 1,
+      "message": "This is included in the beginning of the kernel to compute the hash in avb footer.\nIt\u0027s from here [1].\n\n[1] https://cs.android.com/android/platform/superproject/+/master:external/avb/avbtool.py;l\u003d3358;drc\u003d93f62ff8bfc1446bb6698ecfc21784bd6581da23",
+      "parentUuid": "8d35937c_79960721",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 11
+      },
+      "revId": "839bf551a3d350eebff391b324d3626823fd3da7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50bf4f4c_d8a7ae63",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-04-25T13:50:18Z",
       "side": 1,
       "message": "s/sha256/hash/ ? The precise hash used doesn\u0027t matter here",
+      "range": {
+        "startLine": 87,
+        "startChar": 22,
+        "endLine": 87,
+        "endChar": 28
+      },
+      "revId": "839bf551a3d350eebff391b324d3626823fd3da7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "225621e6_c4888dc7",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-25T16:35:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50bf4f4c_d8a7ae63",
       "range": {
         "startLine": 87,
         "startChar": 22,
