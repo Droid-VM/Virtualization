@@ -206,6 +206,54 @@
       },
       "revId": "c5d06568551777db46a2668cc6b120175c174ab3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6ce7972_79245555",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-25T13:49:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d47aa902_e065cc94",
+      "range": {
+        "startLine": 141,
+        "startChar": 4,
+        "endLine": 141,
+        "endChar": 23
+      },
+      "revId": "c5d06568551777db46a2668cc6b120175c174ab3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c74f03e6_5c6ad2f4",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-04-25T13:49:37Z",
+      "side": 1,
+      "message": "\u003e\u003e anyone can add a property and claim to be the service VM.\n\n\u003e Isn\u0027t the property covered by AVB?\n\nI meant the AVB property, anyone can add one such property in their footer and claim to be service VM. We need the hash to confirm that it is _the_ service VM we trust.",
+      "parentUuid": "6f888d1f_02a40c7f",
+      "range": {
+        "startLine": 141,
+        "startChar": 37,
+        "endLine": 141,
+        "endChar": 64
+      },
+      "revId": "c5d06568551777db46a2668cc6b120175c174ab3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
