@@ -142,6 +142,30 @@
       },
       "revId": "9750edb11b9b68c7883bb89447ae89cd6635119b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89dda5a8_5e734782",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-26T15:44:35Z",
+      "side": 1,
+      "message": "While testing this, I ran into some locking issue. I *think* we enter fn main() with MEMMORY locked. Later inside that function, while probing PCI devices, we call into alloc_shared(), which does not get the MemoryTracker handle.\n\nMy alloc_shared() changes, which attempted to retrieve the MemoryTracker object from MEMORY hung:\n\n```\npub fn alloc_shared(size: usize) -\u003e hyp::Result\u003cNonNull\u003cu8\u003e\u003e {\n\nMEMORY.lock().as_mut().unwrap().alloc_shared(size);  \n\n}\n\n```\n\nGetting the MemoryTracker handle in alloc_shared() seems messy to me.\n\nDo you have any other suggestions?\n\nI am inclined to go with SHM_ALLOCATOR global variable.",
+      "parentUuid": "206ea71a_b4050be4",
+      "range": {
+        "startLine": 137,
+        "startChar": 7,
+        "endLine": 137,
+        "endChar": 20
+      },
+      "revId": "9750edb11b9b68c7883bb89447ae89cd6635119b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
