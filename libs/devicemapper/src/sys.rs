@@ -72,6 +72,7 @@ pub const DM_UUID_LEN: usize = 129;
 pub const DM_MAX_TYPE_NAME: usize = 16;
 
 bitflags! {
+    #[derive(Copy, Clone)]
     pub struct Flag: u32 {
         const DM_READONLY_FLAG = 1 << 0;
         const DM_SUSPEND_FLAG = 1 << 1;
