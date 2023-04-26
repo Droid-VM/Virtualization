@@ -522,6 +522,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b9061b1_90c333f7",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-04-26T10:20:59Z",
+      "side": 1,
+      "message": "This is all a bit vague, so it\u0027s hard to know exactly what you\u0027re trying to do here.\n\nThe architecture doesn\u0027t require explicit synchronisation to order a prior indirect system register read against a later direct write, so I\u0027m inclined to say that neither the `DSB NSH` nor the following `ISB` are necessary when the MMU is being disabled. The thing to ensure is that the cache maintenance has completed before entering the payload, and the `DSB` right before the indirect branch should take care of that. I don\u0027t understand why you zero the `TTBR` nor why that\u0027s followed up with an `ISB`.",
+      "parentUuid": "1ef6accb_75933146",
+      "range": {
+        "startLine": 316,
+        "startChar": 13,
+        "endLine": 316,
+        "endChar": 20
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21efc951_dab52b78",
         "filename": "pvmfw/src/entry.rs",
         "patchSetId": 1
