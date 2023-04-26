@@ -473,6 +473,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1913fb31_bf2c42cc",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-26T10:53:49Z",
+      "side": 1,
+      "message": "Undone as per @willdeacon@google.com\u0027s [comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2548230/comment/b06a6cdb_bf65dc0d/).",
+      "parentUuid": "21c82b01_0be17588",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 0
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b06a6cdb_bf65dc0d",
@@ -534,6 +558,30 @@
       "side": 1,
       "message": "This is all a bit vague, so it\u0027s hard to know exactly what you\u0027re trying to do here.\n\nThe architecture doesn\u0027t require explicit synchronisation to order a prior indirect system register read against a later direct write, so I\u0027m inclined to say that neither the `DSB NSH` nor the following `ISB` are necessary when the MMU is being disabled. The thing to ensure is that the cache maintenance has completed before entering the payload, and the `DSB` right before the indirect branch should take care of that. I don\u0027t understand why you zero the `TTBR` nor why that\u0027s followed up with an `ISB`.",
       "parentUuid": "1ef6accb_75933146",
+      "range": {
+        "startLine": 316,
+        "startChar": 13,
+        "endLine": 316,
+        "endChar": 20
+      },
+      "revId": "2b00fa542cd9ca75d4b9077d271d107cb522f8dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "485c405e_5fd8d452",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-26T10:53:49Z",
+      "side": 1,
+      "message": "\u003e The architecture doesn\u0027t require explicit synchronisation to order a prior indirect system register read against a later direct write\n\nThanks for confirming!\n\n\u003e neither the `DSB NSH` nor the following `ISB` are necessary\n\nRemoved.\n\n\u003e The thing to ensure is that the cache maintenance has completed before entering the payload\n\nAdded a comment to the `DSB` with this info.\n\n\u003e  I don\u0027t understand why you zero the `TTBR` ...\n\nThe idea was to put the pVM/vCPU back in a state that is as close as possible to its state out of reset but it\u0027s not intended to have any other effect.\n\n\u003e ... nor why that\u0027s followed up with an `ISB`.\n\nIt looks like a [review comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2090005/comment/cac0c58f_db744676/) referring to [the `ISB` above](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2090005/comment/5c0ee5c3_fa3ec938/) was misinterpreted? I\u0027ve removed it.",
+      "parentUuid": "2b9061b1_90c333f7",
       "range": {
         "startLine": 316,
         "startChar": 13,
