@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3276a8ec_683dbfec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-04-26T16:23:31Z",
+      "side": 1,
+      "message": "Let\u0027s derive the full set of traits for future ease of use:\n\n```\n#[derive(Copy, Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]\n```\n\n`#[repr(transparent)]` is probably also a good idea.",
+      "revId": "9283f932854e4cd6b7188462d3d3976c3dd58dfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
