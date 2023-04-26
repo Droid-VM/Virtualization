@@ -339,12 +339,13 @@ fn unshare_range(range: &MemoryRange, granule: usize) -> hyp::Result<()> {
     Ok(())
 }
 
-/// Allocates a memory range of at least the given size that is shared with
-/// host. Returns a pointer to the buffer.
+/// Allocates a memory range of at least the given size and alignment that is shared with the host.
+/// Returns a pointer to the buffer.
 ///
-/// It will be aligned to the memory sharing granule size supported by the hypervisor.
-pub fn alloc_shared(size: usize) -> hyp::Result<NonNull<u8>> {
-    let layout = shared_buffer_layout(size)?;
+/// It will be aligned to the maximum of the given alignment and the memory sharing granule size
+/// supported by the hypervisor.
+pub fn alloc_shared(layout: Layout) -> hyp::Result<NonNull<u8>> {
+    let layout = shared_buffer_layout(layout)?;
     let granule = layout.align();
 
     if let Some(shared_pool) = SHARED_POOL.get() {
@@ -377,14 +378,14 @@ pub fn alloc_shared(size: usize) -> hyp::Result<NonNull<u8>> {
 
 /// Unshares and deallocates a memory range which was previously allocated by `alloc_shared`.
 ///
-/// The size passed in must be the size passed to the original `alloc_shared` call.
+/// The layout passed in must be the same layout passed to the original `alloc_shared` call.
 ///
 /// # Safety
 ///
-/// The memory must have been allocated by `alloc_shared` with the same size, and not yet
+/// The memory must have been allocated by `alloc_shared` with the same layout, and not yet
 /// deallocated.
-pub unsafe fn dealloc_shared(vaddr: NonNull<u8>, size: usize) -> hyp::Result<()> {
-    let layout = shared_buffer_layout(size)?;
+pub unsafe fn dealloc_shared(vaddr: NonNull<u8>, layout: Layout) -> hyp::Result<()> {
+    let layout = shared_buffer_layout(layout)?;
     let granule = layout.align();
 
     if let Some(shared_pool) = SHARED_POOL.get() {
@@ -404,18 +405,17 @@ pub unsafe fn dealloc_shared(vaddr: NonNull<u8>, size: usize) -> hyp::Result<()>
     Ok(())
 }
 
-/// Returns the layout to use for allocating a buffer of at least the given size shared with the
-/// host.
+/// Returns the layout to use for allocating a buffer of at least the given size and alignment
+/// shared with the host.
 ///
-/// It will be aligned to the memory sharing granule size supported by the hypervisor.
+/// It will be aligned to the maximum of the given alignment and the memory sharing granule size
+/// supported by the hypervisor.
 ///
 /// Panics if `size` is 0.
-fn shared_buffer_layout(size: usize) -> hyp::Result<Layout> {
-    assert_ne!(size, 0);
+fn shared_buffer_layout(layout: Layout) -> hyp::Result<Layout> {
+    assert_ne!(layout.size(), 0);
     let granule = get_hypervisor().memory_protection_granule()?;
-    let allocated_size =
-        align_up(size, granule).expect("Memory protection granule was not a power of two");
-    Ok(Layout::from_size_align(allocated_size, granule).unwrap())
+    Ok(layout.align_to(granule).unwrap().pad_to_align())
 }
 
 /// Returns an iterator which yields the base address of each 4 KiB page within the given range.
