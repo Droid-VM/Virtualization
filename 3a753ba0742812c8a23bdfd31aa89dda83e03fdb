@@ -34,6 +34,24 @@
       "parentUuid": "b5683168_460febd3",
       "revId": "3a753ba0742812c8a23bdfd31aa89dda83e03fdb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "316d6a85_bfce4628",
+        "filename": "pvmfw/src/gpt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-26T10:20:04Z",
+      "side": 0,
+      "message": "the `zerocopy` feature of `uuid` [is unstable](https://docs.rs/uuid/latest/uuid/#unstable-features) so I\u0027d rather not enable it as we don\u0027t even need it.",
+      "parentUuid": "90a606eb_3d8ffbc6",
+      "revId": "3a753ba0742812c8a23bdfd31aa89dda83e03fdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
