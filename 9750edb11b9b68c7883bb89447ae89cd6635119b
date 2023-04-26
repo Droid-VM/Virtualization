@@ -70,6 +70,30 @@
       },
       "revId": "9750edb11b9b68c7883bb89447ae89cd6635119b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5a66485_322fb6ce",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-26T06:07:15Z",
+      "side": 1,
+      "message": "\u003e \u003e Actually, `shared_pool` might not even require locking if it is embedded in `MEMORY` and a `buddy_system_allocator::Heap` might be enough.\n\u003e \n\u003e What about alloc_shared() and dealloc_shared()? They will need to call shared_pool.alloc() and without shared_pool being a LockedHeap, we can run into concurrency issues potentially?\n\nCallers of alloc_shared() and dealloc_shared() don\u0027t seem to take MEMORY lock and thus we need LockedHeap?",
+      "parentUuid": "bb10227f_a55e5b6a",
+      "range": {
+        "startLine": 137,
+        "startChar": 7,
+        "endLine": 137,
+        "endChar": 20
+      },
+      "revId": "9750edb11b9b68c7883bb89447ae89cd6635119b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
