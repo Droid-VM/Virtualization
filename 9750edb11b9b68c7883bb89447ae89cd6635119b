@@ -94,6 +94,30 @@
       },
       "revId": "9750edb11b9b68c7883bb89447ae89cd6635119b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "434d1738_16529e83",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-26T06:30:54Z",
+      "side": 1,
+      "message": "Hmmm in the KVM case also, alloc_shared() just calls alloc_zeroed(). Can we count on the Heap\u0027s alloc() method being thread-safe? Perhaps the backend implementation of it in toolchain provides for that.",
+      "parentUuid": "c5a66485_322fb6ce",
+      "range": {
+        "startLine": 137,
+        "startChar": 7,
+        "endLine": 137,
+        "endChar": 20
+      },
+      "revId": "9750edb11b9b68c7883bb89447ae89cd6635119b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
