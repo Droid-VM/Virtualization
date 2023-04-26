@@ -19,6 +19,7 @@
 
 extern crate alloc;
 
+mod bcc;
 mod bootargs;
 mod config;
 mod crypto;
@@ -36,9 +37,7 @@ mod mmu;
 mod rand;
 mod virtio;
 
-use alloc::boxed::Box;
-use alloc::string::ToString;
-
+use crate::bcc::Bcc;
 use crate::dice::PartialInputs;
 use crate::entry::RebootReason;
 use crate::fdt::modify_for_next_stage;
@@ -47,10 +46,9 @@ use crate::helpers::GUEST_PAGE_SIZE;
 use crate::instance::get_or_generate_instance_salt;
 use crate::memory::MemoryTracker;
 use crate::virtio::pci;
-use ciborium::{de::from_reader, value::Value};
+use alloc::borrow::{Cow, ToOwned};
+use alloc::boxed::Box;
 use diced_open_dice::bcc_handover_main_flow;
-use diced_open_dice::bcc_handover_parse;
-use diced_open_dice::DiceArtifacts;
 use fdtpci::{PciError, PciInfo};
 use libfdt::Fdt;
 use log::{debug, error, info, trace};
@@ -60,25 +58,12 @@ use pvmfw_embedded_key::PUBLIC_KEY;
 
 const NEXT_BCC_SIZE: usize = GUEST_PAGE_SIZE;
 
-type CiboriumError = ciborium::de::Error<ciborium_io::EndOfFile>;
-
-/// Decodes the provided binary CBOR-encoded value and returns a
-/// ciborium::Value struct wrapped in Result.
-fn value_from_bytes(mut bytes: &[u8]) -> Result<Value, CiboriumError> {
-    let value = from_reader(&mut bytes)?;
-    // Ciborium tries to read one Value, but doesn't care if there is trailing data. We do.
-    if !bytes.is_empty() {
-        return Err(CiboriumError::Semantic(Some(0), "unexpected trailing data".to_string()));
-    }
-    Ok(value)
-}
-
 fn main(
     fdt: &mut Fdt,
     signed_kernel: &[u8],
     ramdisk: Option<&[u8]>,
     current_bcc_handover: &[u8],
-    debug_policy: Option<&mut [u8]>,
+    mut debug_policy: Option<&mut [u8]>,
     memory: &mut MemoryTracker,
 ) -> Result<(), RebootReason> {
     info!("pVM firmware");
@@ -90,22 +75,17 @@ fn main(
     } else {
         debug!("Ramdisk: None");
     }
-    let bcc_handover = bcc_handover_parse(current_bcc_handover).map_err(|e| {
+
+    let bcc: Bcc = Bcc::new(current_bcc_handover).map_err(|e| {
         error!("Invalid BCC Handover: {e:?}");
         RebootReason::InvalidBcc
     })?;
-    trace!("BCC: {bcc_handover:x?}");
 
-    // Minimal BCC verification - check the BCC exists & is valid CBOR.
-    // TODO(alanstokes): Do something more useful.
-    if let Some(bytes) = bcc_handover.bcc() {
-        let _ = value_from_bytes(bytes).map_err(|e| {
-            error!("Invalid BCC: {e:?}");
-            RebootReason::InvalidBcc
-        })?;
-    } else {
-        error!("Missing BCC");
-        return Err(RebootReason::InvalidBcc);
+    // The bootloader should never pass us a debug policy when the boot is secure (the bootloader
+    // is locked). If it gets it wrong, disregard it & log it, to avoid it causing problems.
+    if debug_policy.is_some() && !bcc.is_debug_mode() {
+        error!("Ignoring debug policy, BCC does not indicate Debug mode");
+        debug_policy = None;
     }
 
     // Set up PCI bus for VirtIO devices.
@@ -118,6 +98,19 @@ fn main(
         RebootReason::PayloadVerificationError
     })?;
 
+    let sanitised = bcc.sanitise().map_err(|e| {
+        error!("Failed to sanitise BCC: {e:?}");
+        RebootReason::InternalError
+    })?;
+
+    let (cdi_seal, current_bcc_handover) = if let Some(handover) = sanitised {
+        let cdi_seal = bcc.cdi_seal().to_owned();
+        drop(bcc);
+        (Cow::from(cdi_seal), Cow::from(handover))
+    } else {
+        (Cow::from(bcc.cdi_seal()), Cow::from(current_bcc_handover))
+    };
+
     let next_bcc = heap::aligned_boxed_slice(NEXT_BCC_SIZE, GUEST_PAGE_SIZE).ok_or_else(|| {
         error!("Failed to allocate the next-stage BCC");
         RebootReason::InternalError
@@ -129,9 +122,8 @@ fn main(
         error!("Failed to compute partial DICE inputs: {e:?}");
         RebootReason::InternalError
     })?;
-    let cdi_seal = DiceArtifacts::cdi_seal(&bcc_handover);
-    let (new_instance, salt) = get_or_generate_instance_salt(&mut pci_root, &dice_inputs, cdi_seal)
-        .map_err(|e| {
+    let (new_instance, salt) =
+        get_or_generate_instance_salt(&mut pci_root, &dice_inputs, &cdi_seal).map_err(|e| {
             error!("Failed to get instance.img salt: {e}");
             RebootReason::InternalError
         })?;
@@ -141,7 +133,7 @@ fn main(
         error!("Failed to generate DICE inputs: {e:?}");
         RebootReason::InternalError
     })?;
-    let _ = bcc_handover_main_flow(current_bcc_handover, &dice_inputs, next_bcc).map_err(|e| {
+    let _ = bcc_handover_main_flow(&current_bcc_handover, &dice_inputs, next_bcc).map_err(|e| {
         error!("Failed to derive next-stage DICE secrets: {e:?}");
         RebootReason::SecretDerivationError
     })?;
