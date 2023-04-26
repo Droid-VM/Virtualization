@@ -118,6 +118,30 @@
       },
       "revId": "9750edb11b9b68c7883bb89447ae89cd6635119b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "206ea71a_b4050be4",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-26T09:16:33Z",
+      "side": 1,
+      "message": "\u003e Callers of alloc_shared() and dealloc_shared() don\u0027t seem to take MEMORY lock and thus we need LockedHeap?\n\nMy point was that it would be these functions taking the lock on `MEMORY` to access `MEMORY.shared_pool` so that there doesn\u0027t seem to be a need for it to be a `LockedHeap`.\n\n\u003e Can we count on the Heap\u0027s alloc() method being thread-safe? Perhaps the backend implementation of it in toolchain provides for that.\n\n[Yes](https://docs.rs/buddy_system_allocator/latest/src/buddy_system_allocator/lib.rs.html#257-263)",
+      "parentUuid": "434d1738_16529e83",
+      "range": {
+        "startLine": 137,
+        "startChar": 7,
+        "endLine": 137,
+        "endChar": 20
+      },
+      "revId": "9750edb11b9b68c7883bb89447ae89cd6635119b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
