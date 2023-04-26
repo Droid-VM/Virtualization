@@ -1,55 +1,58 @@
 use super::pci::PCI_INFO;
 use crate::memory::{alloc_shared, dealloc_shared, phys_to_virt, virt_to_phys};
 use core::{
+    alloc::Layout,
     ops::Range,
     ptr::{copy_nonoverlapping, NonNull},
 };
 use log::debug;
 use virtio_drivers::{BufferDirection, Hal, PhysAddr, PAGE_SIZE};
 
+/// The alignment to use for the temporary buffers allocated by `HalImpl::share`. There doesn't seem
+/// to be any particular alignment required by VirtIO for these, so 16 bytes should be enough to
+/// allow appropriate alignment for whatever fields are accessed. `alloc_shared` will increase the
+/// alignment to the memory sharing granule size anyway.
+const SHARED_BUFFER_ALIGNMENT: usize = 16;
+
 pub struct HalImpl;
 
-/// Implements the `Hal` trait for `HalImpl`.
-///
 /// # Safety
 ///
-/// Callers of this implementatation must follow the safety requirements documented for the unsafe
-/// methods.
+/// See the 'Implementation Safety' comments on methods below for how they fulfill the safety
+/// requirements of the unsafe `Hal` trait.
 unsafe impl Hal for HalImpl {
-    /// Allocates the given number of contiguous physical pages of DMA memory for VirtIO use.
-    ///
     /// # Implementation Safety
     ///
     /// `dma_alloc` ensures the returned DMA buffer is not aliased with any other allocation or
-    ///  reference in the program until it is deallocated by `dma_dealloc` by allocating a unique
-    ///  block of memory using `alloc_shared` and returning a non-null pointer to it that is
-    ///  aligned to `PAGE_SIZE`.
+    /// reference in the program until it is deallocated by `dma_dealloc` by allocating a unique
+    /// block of memory using `alloc_shared`, which is guaranteed to allocate valid and unique
+    /// memory. We request an alignment of at least `PAGE_SIZE` from `alloc_shared`.
     fn dma_alloc(pages: usize, _direction: BufferDirection) -> (PhysAddr, NonNull<u8>) {
         debug!("dma_alloc: pages={}", pages);
-        let size = pages * PAGE_SIZE;
+        let layout = Layout::from_size_align(pages * PAGE_SIZE, PAGE_SIZE).unwrap();
         let vaddr =
-            alloc_shared(size).expect("Failed to allocate and share VirtIO DMA range with host");
+            alloc_shared(layout).expect("Failed to allocate and share VirtIO DMA range with host");
         let paddr = virt_to_phys(vaddr);
         (paddr, vaddr)
     }
 
     unsafe fn dma_dealloc(paddr: PhysAddr, vaddr: NonNull<u8>, pages: usize) -> i32 {
         debug!("dma_dealloc: paddr={:#x}, pages={}", paddr, pages);
-        let size = pages * PAGE_SIZE;
+        let layout = Layout::from_size_align(pages * PAGE_SIZE, PAGE_SIZE).unwrap();
         // Safe because the memory was allocated by `dma_alloc` above using the same allocator, and
         // the layout is the same as was used then.
         unsafe {
-            dealloc_shared(vaddr, size).expect("Failed to unshare VirtIO DMA range with host");
+            dealloc_shared(vaddr, layout).expect("Failed to unshare VirtIO DMA range with host");
         }
         0
     }
 
-    /// Converts a physical address used for MMIO to a virtual address which the driver can access.
-    ///
     /// # Implementation Safety
     ///
-    /// `mmio_phys_to_virt` satisfies the requirement by checking that the mapped memory region
-    /// is within the PCI MMIO range.
+    /// The returned pointer must be valid because the `paddr` describes a valid MMIO region, we
+    /// check that it is within the PCI MMIO range, and we previously mapped the entire PCI MMIO
+    /// range. It can't alias any other allocations because we previously validated in
+    /// `map_mmio_range` that the PCI MMIO range didn't overlap with any other memory ranges.
     unsafe fn mmio_phys_to_virt(paddr: PhysAddr, size: usize) -> NonNull<u8> {
         let pci_info = PCI_INFO.get().expect("VirtIO HAL used before PCI_INFO was initialised");
         // Check that the region is within the PCI MMIO range that we read from the device tree. If
@@ -73,8 +76,9 @@ unsafe impl Hal for HalImpl {
 
         // TODO: Copy to a pre-shared region rather than allocating and sharing each time.
         // Allocate a range of pages, copy the buffer if necessary, and share the new range instead.
+        let layout = Layout::from_size_align(size, SHARED_BUFFER_ALIGNMENT).unwrap();
         let copy =
-            alloc_shared(size).expect("Failed to allocate and share VirtIO buffer with host");
+            alloc_shared(layout).expect("Failed to allocate and share VirtIO buffer with host");
         if direction == BufferDirection::DriverToDevice {
             unsafe {
                 copy_nonoverlapping(buffer.as_ptr() as *mut u8, copy.as_ptr(), size);
@@ -86,6 +90,7 @@ unsafe impl Hal for HalImpl {
     unsafe fn unshare(paddr: PhysAddr, buffer: NonNull<[u8]>, direction: BufferDirection) {
         let vaddr = phys_to_virt(paddr);
         let size = buffer.len();
+        let layout = Layout::from_size_align(size, SHARED_BUFFER_ALIGNMENT).unwrap();
         if direction == BufferDirection::DeviceToDriver {
             debug!(
                 "Copying VirtIO buffer back from {:#x} to {:#x}.",
@@ -102,7 +107,7 @@ unsafe impl Hal for HalImpl {
         // Safe because the memory was allocated by `share` using `alloc_shared`, and the size is
         // the same as was used then.
         unsafe {
-            dealloc_shared(vaddr, size).expect("Failed to unshare VirtIO buffer with host");
+            dealloc_shared(vaddr, layout).expect("Failed to unshare VirtIO buffer with host");
         }
     }
 }
