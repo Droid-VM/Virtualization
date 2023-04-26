@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53557fb6_9ceda0d9",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-26T17:20:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86d2caee_4dad1d6e",
+      "range": {
+        "startLine": 169,
+        "startChar": 24,
+        "endLine": 169,
+        "endChar": 25
+      },
+      "revId": "79c040dc8134fd62f298d5eb8edd7c45bdda8ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e11c8449_47559241",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "\u003e What about\n\nThanks ..this works:\n\n```\nimpl\u003cT: PartialOrd\u003e RangeExt for Range\u003cT\u003e { \n    fn is_within(\u0026self, other: \u0026Self) -\u003e bool {\n        self.start \u003e\u003d other.start \u0026\u0026 self.end \u003c\u003d other.end\n    }\n}\n```",
       "parentUuid": "9191509a_c956296c",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 1
+      },
+      "revId": "79c040dc8134fd62f298d5eb8edd7c45bdda8ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a55185e8_39ac692b",
+        "filename": "pvmfw/src/helpers.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-26T17:20:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ba888db_e8cfcfd1",
       "range": {
         "startLine": 173,
         "startChar": 0,
