@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db46b9e6_2a7e8856",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-26T18:00:31Z",
+      "side": 1,
+      "message": "I know that I mentioned `Option` earlier but I see that you used a `OnceBox` in aosp/2537998; WDYT of doing the same for `SHARED_POOL` to get rid of these `unsafe`?",
+      "range": {
+        "startLine": 283,
+        "startChar": 20,
+        "endLine": 283,
+        "endChar": 65
+      },
+      "revId": "16cd41d6e5db7e655ce26afc37fbaa82beb94540",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
