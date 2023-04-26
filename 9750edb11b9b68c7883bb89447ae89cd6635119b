@@ -190,6 +190,30 @@
       },
       "revId": "9750edb11b9b68c7883bb89447ae89cd6635119b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f7bb4e7_7b44e3e3",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-26T16:03:23Z",
+      "side": 1,
+      "message": "Yes, we\u0027ll need to untangle that ...\n\n\u003e I am inclined to go with SHM_ALLOCATOR global variable.\n\nSure, could you still make it an `Option` to only check hypervisor capabilities at the call site of `init_shared_pool`?",
+      "parentUuid": "89dda5a8_5e734782",
+      "range": {
+        "startLine": 137,
+        "startChar": 7,
+        "endLine": 137,
+        "endChar": 20
+      },
+      "revId": "9750edb11b9b68c7883bb89447ae89cd6635119b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
