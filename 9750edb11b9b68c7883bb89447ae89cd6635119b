@@ -166,6 +166,30 @@
       },
       "revId": "9750edb11b9b68c7883bb89447ae89cd6635119b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d162a823_a0679f40",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-04-26T15:46:59Z",
+      "side": 1,
+      "message": "\u003e Getting the MemoryTracker handle in alloc_shared() seems messy to me.\n\nClarifying that bit more:\n\nGetting the MemoryTracker handle as an argument into alloc_shared() seems messy to me",
+      "parentUuid": "89dda5a8_5e734782",
+      "range": {
+        "startLine": 137,
+        "startChar": 7,
+        "endLine": 137,
+        "endChar": 20
+      },
+      "revId": "9750edb11b9b68c7883bb89447ae89cd6635119b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
