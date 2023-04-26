@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00dc402c_0e81fe11",
+        "filename": "libs/hyp/src/error.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-26T17:53:24Z",
+      "side": 1,
+      "message": "uber-nit but is user-facing as part of the logs: \"UUID\"",
+      "range": {
+        "startLine": 45,
+        "startChar": 50,
+        "endLine": 45,
+        "endChar": 54
+      },
+      "revId": "cd85ce8616db7bf0c32d19946004ffd07c57ad41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66e621ab_2aeb65ff",
+        "filename": "libs/hyp/src/hypervisor/mod.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-26T17:53:24Z",
+      "side": 1,
+      "message": "Please remove these 2 `debug!` as we try to limit the number of locations from which we log as there are parts of the code where doing so would crash pvmfw. In particular, logging from a `TryFrom` feels excessive as `try_from` returns a `Result` that the caller can log and the (only?) caller `.expect()` the result anyway.",
+      "range": {
+        "startLine": 50,
+        "startChar": 16,
+        "endLine": 50,
+        "endChar": 50
+      },
+      "revId": "cd85ce8616db7bf0c32d19946004ffd07c57ad41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
