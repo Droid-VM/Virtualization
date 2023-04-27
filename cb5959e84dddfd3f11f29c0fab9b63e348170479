@@ -16,6 +16,24 @@
       "message": "\u003e TreeHugger finished with: 53 passed, 2 failed, 1 warning, 3 ignored, 29 skipped.\n\nI am not able to get the details of failed testcases. I think only Google folks can get the details of the failed tests? Pls let me know if any changes are needed in the patch to address failure.",
       "revId": "cb5959e84dddfd3f11f29c0fab9b63e348170479",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d778428f_e8c36e2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-27T15:21:14Z",
+      "side": 1,
+      "message": "The build used to run the tests seems to have been missing aosp/2567870, I\u0027ve successfully run the failing tests locally so will restart a presubmit run.",
+      "parentUuid": "51354df3_9dfaa50a",
+      "revId": "cb5959e84dddfd3f11f29c0fab9b63e348170479",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
