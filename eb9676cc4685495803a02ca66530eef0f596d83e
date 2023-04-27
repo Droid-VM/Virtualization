@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8b3e870_c44f6aa5",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-27T08:11:31Z",
+      "side": 1,
+      "message": "Update this now that `SHARED_POOL` is safe e.g. \"`range` has been validated in `validate_swiotlb_info` and isn\u0027t used by other Rust code\"",
+      "range": {
+        "startLine": 288,
+        "startChar": 20,
+        "endLine": 289,
+        "endChar": 80
+      },
+      "revId": "eb9676cc4685495803a02ca66530eef0f596d83e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42dcae5e_ca471bda",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-04-27T08:11:31Z",
+      "side": 1,
+      "message": "No need as the returned `SharedPoolSetFailure` will be logged by the caller of `init_shared_pool`.",
+      "range": {
+        "startLine": 295,
+        "startChar": 12,
+        "endLine": 295,
+        "endChar": 48
+      },
+      "revId": "eb9676cc4685495803a02ca66530eef0f596d83e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
