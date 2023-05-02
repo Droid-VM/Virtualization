@@ -84,8 +84,6 @@ unsafe impl Hal for HalImpl {
     unsafe fn share(buffer: NonNull<[u8]>, direction: BufferDirection) -> PhysAddr {
         let size = buffer.len();
 
-        // TODO: Copy to a pre-shared region rather than allocating and sharing each time.
-        // Allocate a range of pages, copy the buffer if necessary, and share the new range instead.
         let vaddr = alloc_shared(bb_layout(size))
             .expect("Failed to allocate and share VirtIO buffer with host");
         let paddr = virt_to_phys(vaddr);
