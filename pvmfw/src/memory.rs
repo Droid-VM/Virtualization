@@ -21,9 +21,9 @@ use crate::mmu;
 use alloc::alloc::alloc_zeroed;
 use alloc::alloc::dealloc;
 use alloc::alloc::handle_alloc_error;
-use alloc::boxed::Box;
+use alloc::vec::Vec;
+use buddy_system_allocator::Heap;
 use buddy_system_allocator::LockedHeap;
-use core::alloc::GlobalAlloc as _;
 use core::alloc::Layout;
 use core::cmp::max;
 use core::cmp::min;
@@ -34,7 +34,6 @@ use core::ptr::NonNull;
 use core::result;
 use hyp::get_hypervisor;
 use log::error;
-use once_cell::race::OnceBox;
 use spin::mutex::SpinMutex;
 use tinyvec::ArrayVec;
 
@@ -111,8 +110,6 @@ pub enum MemoryTrackerError {
     FailedToMap,
     /// Error from the interaction with the hypervisor.
     Hypervisor(hyp::Error),
-    /// Failure to set `SHARED_POOL`.
-    SharedPoolSetFailure,
 }
 
 impl fmt::Display for MemoryTrackerError {
@@ -126,7 +123,6 @@ impl fmt::Display for MemoryTrackerError {
             Self::Overlaps => write!(f, "New region overlaps with tracked regions"),
             Self::FailedToMap => write!(f, "Failed to map the new region"),
             Self::Hypervisor(e) => e.fmt(f),
-            Self::SharedPoolSetFailure => write!(f, "Failed to set SHARED_POOL"),
         }
     }
 }
@@ -139,7 +135,7 @@ impl From<hyp::Error> for MemoryTrackerError {
 
 type Result<T> = result::Result<T, MemoryTrackerError>;
 
-static SHARED_POOL: OnceBox<LockedHeap<32>> = OnceBox::new();
+static SHARED_POOL: LockedHeap<32> = LockedHeap::new();
 
 impl MemoryTracker {
     const CAPACITY: usize = 5;
@@ -283,17 +279,10 @@ impl MemoryTracker {
     pub fn init_shared_pool(&mut self, range: Range<usize>) -> Result<()> {
         let size = NonZeroUsize::new(range.len()).unwrap();
         let range = self.alloc_mut(range.start, size)?;
-        let shared_pool = LockedHeap::<32>::new();
 
         // SAFETY - `range` should be a valid region of memory as validated by
         // `validate_swiotlb_info` and not used by any other rust code.
-        unsafe {
-            shared_pool.lock().init(range.start, range.len());
-        }
-
-        SHARED_POOL
-            .set(Box::new(shared_pool))
-            .map_err(|_| MemoryTrackerError::SharedPoolSetFailure)?;
+        unsafe { SHARED_POOL.lock().init(range.start, range.len()) }
 
         Ok(())
     }
@@ -309,6 +298,54 @@ impl Drop for MemoryTracker {
                 }
                 MemoryType::ReadOnly => {}
             }
+        }
+    }
+}
+
+pub static SHARED_MEMORY: SpinMutex<Option<MemorySharer>> = SpinMutex::new(None);
+
+/// Allocates memory on the heap and shares it with the host.
+///
+/// Unshares all pages when dropped.
+pub struct MemorySharer {
+    granule: usize,
+    shared_regions: Vec<(usize, Layout)>,
+}
+
+impl MemorySharer {
+    pub fn new(granule: usize) -> Self {
+        assert!(granule.is_power_of_two());
+        Self { granule, shared_regions: Vec::new() }
+    }
+
+    /// Get from the global allocator a granule-aligned region that suits `hint` and share it.
+    pub fn refill(&mut self, pool: &mut Heap<32>, hint: Layout) {
+        let layout = hint.align_to(self.granule).unwrap().pad_to_align();
+        assert_ne!(layout.size(), 0);
+        // SAFETY - layout has non-zero size.
+        let Some(shared) = NonNull::new(unsafe { alloc_zeroed(layout) }) else {
+            handle_alloc_error(layout);
+        };
+
+        let addr = shared.as_ptr() as usize;
+        let range = addr..addr.checked_add(layout.size()).unwrap();
+        share_range(&range, self.granule).unwrap();
+
+        self.shared_regions.push((addr, layout));
+
+        // SAFETY - The underlying memory range is owned by self and reserved for this pool.
+        unsafe { pool.add_to_heap(range.start, range.end) };
+    }
+}
+
+impl Drop for MemorySharer {
+    fn drop(&mut self) {
+        while let Some((addr, layout)) = self.shared_regions.pop() {
+            let range = addr..addr.checked_add(layout.size()).unwrap();
+            unshare_range(&range, self.granule).unwrap();
+
+            // SAFETY - The region was obtained from alloc_zeroed() with the recorded layout.
+            unsafe { dealloc(addr as *mut _, layout) };
         }
     }
 }
@@ -345,32 +382,17 @@ fn unshare_range(range: &MemoryRange, granule: usize) -> hyp::Result<()> {
 /// It will be aligned to the memory sharing granule size supported by the hypervisor.
 pub fn alloc_shared(size: usize) -> hyp::Result<NonNull<u8>> {
     let layout = shared_buffer_layout(size)?;
-    let granule = layout.align();
+    let mut shared_pool = SHARED_POOL.lock();
 
-    if let Some(shared_pool) = SHARED_POOL.get() {
-        // Safe because `shared_buffer_layout` panics if the size is 0, so the
-        // layout must have a non-zero size.
-        let buffer = unsafe { shared_pool.alloc_zeroed(layout) };
-
-        let Some(buffer) = NonNull::new(buffer) else {
-            handle_alloc_error(layout);
-        };
-
-        return Ok(buffer);
-    }
-
-    // Safe because `shared_buffer_layout` panics if the size is 0, so the layout must have a
-    // non-zero size.
-    let buffer = unsafe { alloc_zeroed(layout) };
-
-    let Some(buffer) = NonNull::new(buffer) else {
-        handle_alloc_error(layout);
-    };
-
-    let paddr = virt_to_phys(buffer);
-    // If share_range fails then we will leak the allocation, but that seems better than having it
-    // be reused while maybe still partially shared with the host.
-    share_range(&(paddr..paddr + layout.size()), granule)?;
+    let buffer = shared_pool
+        .alloc(layout)
+        .or_else(|_| {
+            SHARED_MEMORY.lock().as_mut().ok_or(()).and_then(|shm| {
+                shm.refill(&mut shared_pool, layout);
+                shared_pool.alloc(layout)
+            })
+        })
+        .expect("Failed shared allocation");
 
     Ok(buffer)
 }
@@ -385,21 +407,7 @@ pub fn alloc_shared(size: usize) -> hyp::Result<NonNull<u8>> {
 /// deallocated.
 pub unsafe fn dealloc_shared(vaddr: NonNull<u8>, size: usize) -> hyp::Result<()> {
     let layout = shared_buffer_layout(size)?;
-    let granule = layout.align();
-
-    if let Some(shared_pool) = SHARED_POOL.get() {
-        // Safe because the memory was allocated by `alloc_shared` above using
-        // the same allocator, and the layout is the same as was used then.
-        unsafe { shared_pool.dealloc(vaddr.as_ptr(), layout) };
-
-        return Ok(());
-    }
-
-    let paddr = virt_to_phys(vaddr);
-    unshare_range(&(paddr..paddr + layout.size()), granule)?;
-    // Safe because the memory was allocated by `alloc_shared` above using the same allocator, and
-    // the layout is the same as was used then.
-    unsafe { dealloc(vaddr.as_ptr(), layout) };
+    SHARED_POOL.lock().dealloc(vaddr, layout);
 
     Ok(())
 }
