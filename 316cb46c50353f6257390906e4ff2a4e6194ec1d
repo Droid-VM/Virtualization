@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11a915b0_125d72b0",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-02T14:27:06Z",
+      "side": 1,
+      "message": "I don\u0027t think so. The bcc_handover just stores the bytes of the BCC; it has no need to decode it, and looking at the code it doesn\u0027t appear to.",
+      "parentUuid": "7dd744cf_abca6130",
+      "range": {
+        "startLine": 80,
+        "startChar": 37,
+        "endLine": 80,
+        "endChar": 93
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1b67f72_2f77baac",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-05-02T12:22:20Z",
       "side": 1,
       "message": "So this _copies_ the CDIs inside wherever the `Bcc` instance lives (stack, heap, ...), right? Could we track the reference instead?",
+      "range": {
+        "startLine": 96,
+        "startChar": 46,
+        "endLine": 96,
+        "endChar": 66
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef8eb909_162224dc",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-02T14:27:06Z",
+      "side": 1,
+      "message": "I got here because I was originally planning to mutate the CDIs.\nI tried making it a reference, but the compiler wasn\u0027t having it.\nThe CDIs aren\u0027t that big, and Bcc is on the stack.",
+      "parentUuid": "e1b67f72_2f77baac",
       "range": {
         "startLine": 96,
         "startChar": 46,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77c4cd24_103f3626",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-02T14:27:06Z",
+      "side": 1,
+      "message": "I was going to use \"truncate\", but it\u0027s more decapitation (and I didn\u0027t think that was a great term).\n\nMaybe Censor?\n\nI was looking for something that described the goal rather than the way we do it; we\u0027re cleaning (sanitising) the incoming BCC of its UDS.",
+      "parentUuid": "d5b5d6b7_4a4e76cc",
+      "range": {
+        "startLine": 113,
+        "startChar": 11,
+        "endLine": 113,
+        "endChar": 19
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "90290fcb_536a055b",
         "filename": "pvmfw/src/bcc.rs",
         "patchSetId": 2
@@ -83,6 +155,30 @@
       "writtenOn": "2023-05-02T12:22:20Z",
       "side": 1,
       "message": "So we assume that, if `bcc_entries.len() \u003d\u003d 1`, the CDIs aren\u0027t the UDS?",
+      "range": {
+        "startLine": 115,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 22
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81908154_9a3500d3",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-02T14:27:06Z",
+      "side": 1,
+      "message": "Yes, I\u0027m assuming that. It would seem an odd thing to do.\nBut we could if necessary do something else in the case of only 1, e.g. derive a second node and then remove the original.",
+      "parentUuid": "90290fcb_536a055b",
       "range": {
         "startLine": 115,
         "startChar": 8,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4647950_68a2850f",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-02T14:27:06Z",
+      "side": 1,
+      "message": "That\u0027s a non-mutable slice.\nAlso note this is a temporary that gets dropped at the end of this function; Ciborium wants a Vec passed by value, so that seems unavoidable.\n\nThe Vec returned by value_to_bytes below is also allocated by Ciborium. I could instead use a mutable slice, if we\u0027re willing to pick a maximum size. But why?",
+      "parentUuid": "af809713_26dc3864",
+      "range": {
+        "startLine": 151,
+        "startChar": 26,
+        "endLine": 151,
+        "endChar": 29
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f43b3c29_973ca3f3",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-05-02T12:22:20Z",
       "side": 1,
       "message": "`else` there\u0027s a problem because the `BccPayload` doesn\u0027t have a mode, which should be mandatory, right?",
+      "range": {
+        "startLine": 209,
+        "startChar": 8,
+        "endLine": 209,
+        "endChar": 9
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a77efbd8_775792fc",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-02T14:27:06Z",
+      "side": 1,
+      "message": "It\u0027s optional (that\u0027s what the ? in the CDDL above means).\nNot present is supposed to be interpreted as Unknown, which is !\u003d Debug.",
+      "parentUuid": "f43b3c29_973ca3f3",
       "range": {
         "startLine": 209,
         "startChar": 8,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "571395c3_cc34995e",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-02T14:27:06Z",
+      "side": 1,
+      "message": "That gets us closer to what hwtrust has - except that the code there greedily parses most of the interesting fields in the BCC (but does it in a single pass).\n\nBut let me try; it should get us closer to unifying the two. And it\u0027s definitely more OO.",
+      "parentUuid": "f8edc987_a9968f39",
+      "range": {
+        "startLine": 214,
+        "startChar": 42,
+        "endLine": 214,
+        "endChar": 50
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78e71ace_5d163ac8",
@@ -185,6 +353,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2f989ab_f1b3fa2c",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-02T14:27:06Z",
+      "side": 1,
+      "message": "I didn\u0027t implement Display for BccError. That seems fairly standard for Error types, at least in no_std. That\u0027s why I need to use :? in most places in the Debug impl of BccError.",
+      "parentUuid": "78e71ace_5d163ac8",
+      "range": {
+        "startLine": 80,
+        "startChar": 15,
+        "endLine": 80,
+        "endChar": 44
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8460082_fcee809f",
@@ -198,6 +390,30 @@
       "writtenOn": "2023-05-02T12:22:20Z",
       "side": 1,
       "message": "`warn!` as we\u0027re not rebooting",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 13
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f802760f_4d03f63d",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-02T14:27:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8460082_fcee809f",
       "range": {
         "startLine": 87,
         "startChar": 8,
