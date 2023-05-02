@@ -19,7 +19,7 @@ use crate::crypto;
 use crate::fdt;
 use crate::heap;
 use crate::helpers;
-use crate::memory::{MemoryTracker, MEMORY};
+use crate::memory::{MemorySharer, MemoryTracker, MEMORY, SHARED_MEMORY};
 use crate::mmu;
 use crate::rand;
 use core::arch::asm;
@@ -109,7 +109,13 @@ impl<'a> MemorySlices<'a> {
             RebootReason::InvalidFdt
         })?;
 
-        if !get_hypervisor().has_cap(HypervisorCap::DYNAMIC_MEM_SHARE) {
+        if get_hypervisor().has_cap(HypervisorCap::DYNAMIC_MEM_SHARE) {
+            let granule = get_hypervisor().memory_protection_granule().map_err(|e| {
+                error!("Failed to obtain memory protection granule: {e}");
+                RebootReason::InternalError
+            })?;
+            SHARED_MEMORY.lock().replace(MemorySharer::new(granule));
+        } else {
             let range = info.swiotlb_info.fixed_range().ok_or_else(|| {
                 error!("Pre-shared pool range not specified in swiotlb node");
                 RebootReason::InvalidFdt
@@ -250,6 +256,8 @@ fn main_wrapper(fdt: usize, payload: usize, payload_size: usize) -> Result<usize
     helpers::flushed_zeroize(bcc_slice);
     helpers::flush(slices.fdt.as_slice());
 
+    // Dropping the MemorySharer from SHARED_MEMORY will unshare all dynamically shared memory.
+    let _ = SHARED_MEMORY.lock().take();
     info!("Expecting a bug making MMIO_GUARD_UNMAP return NOT_SUPPORTED on success");
     MEMORY.lock().as_mut().unwrap().mmio_unmap_all().map_err(|e| {
         error!("Failed to unshare MMIO ranges: {e}");
