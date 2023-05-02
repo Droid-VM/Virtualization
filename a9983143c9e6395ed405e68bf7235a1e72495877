@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1df2125d_9bf6d252",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T17:27:15Z",
+      "side": 1,
+      "message": "WDYT of starting with applying the DP DTBO in `modify_for_next_stage` before the other modifications i.e.\n```\nfn modify_for_next_stage(...) {\n    if let Some(debug_policy) \u003d debug_policy {\n        let backup \u003d Vec::from(fdt.as_slice());\n        fdt.unpack()?;\n        let backup_fdt \u003d Fdt::from_slice(backup.as_slice()).unwrap();\n        if apply_debug_policy(fdt, backup_fdt, debug_policy)? {\n            info!(\"Debug policy applied.\");\n        } else {\n            // apply_debug_policy restored fdt to backup_fdt so unpack it again.\n            fdt.unpack()?;\n        }\n    } else {\n        info!(\"No debug policy found.\");\n        fdt.unpack()?;\n    }\n\n    // ...\n\n    fdt.pack()?;\n\n    Ok(())\n}\n```\nso that we only have extra packing/unpacking on the (hopefully rare) error path? This however requires being able to assume that the DTBO doesn\u0027t apply to nodes added by pvmfw itself.",
+      "parentUuid": "126d2aac_0c601def",
+      "range": {
+        "startLine": 11,
+        "startChar": 13,
+        "endLine": 11,
+        "endChar": 43
+      },
+      "revId": "a9983143c9e6395ed405e68bf7235a1e72495877",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4728e1bf_185835c9",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-05-02T14:38:17Z",
       "side": 1,
       "message": "Before it has been unpacked?",
+      "range": {
+        "startLine": 741,
+        "startChar": 37,
+        "endLine": 741,
+        "endChar": 62
+      },
+      "revId": "a9983143c9e6395ed405e68bf7235a1e72495877",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36cb277a_db1af937",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T17:27:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4728e1bf_185835c9",
       "range": {
         "startLine": 741,
         "startChar": 37,
