@@ -793,7 +793,7 @@ impl Fdt {
 
     fn header(&self) -> &libfdt_bindgen::fdt_header {
         // SAFETY - A valid FDT (verified by constructor) must contain a valid fdt_header.
-        unsafe { &*(&self as *const _ as *const libfdt_bindgen::fdt_header) }
+        unsafe { &*self.as_ptr().cast::<_>() }
     }
 
     fn totalsize(&self) -> usize {
