@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70834acf_41d2c9aa",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2023-05-02T21:57:25Z",
+      "side": 1,
+      "message": "nit: BCC is a term that we\u0027re trying to stop using in favour of just calling it a DICE chain, so there can be less confusion and fewer terms of the same thing.",
+      "range": {
+        "startLine": 15,
+        "startChar": 35,
+        "endLine": 15,
+        "endChar": 38
+      },
+      "revId": "397203d8d18deb15ca02202aa3bd0e15a30ea03b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbd2b695_03b1684c",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2023-05-02T21:57:25Z",
+      "side": 1,
+      "message": "nit: is it more direct to just drop all the entries and just add the one for the payload that pvmfw will generate?",
+      "range": {
+        "startLine": 111,
+        "startChar": 66,
+        "endLine": 111,
+        "endChar": 89
+      },
+      "revId": "397203d8d18deb15ca02202aa3bd0e15a30ea03b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9b6341a_31434439",
@@ -65,6 +111,29 @@
         "startChar": 12,
         "endLine": 249,
         "endChar": 31
+      },
+      "revId": "397203d8d18deb15ca02202aa3bd0e15a30ea03b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed04d27d_8fcfde3a",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2023-05-02T21:57:25Z",
+      "side": 1,
+      "message": "nit: if it\u0027s enforced here, is there any point producing this warning? It doesn\u0027t seem to matter what the bootloader does so is there any need to give the bootloader requirements?",
+      "range": {
+        "startLine": 86,
+        "startChar": 3,
+        "endLine": 88,
+        "endChar": 28
       },
       "revId": "397203d8d18deb15ca02202aa3bd0e15a30ea03b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
