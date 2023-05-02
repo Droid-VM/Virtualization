@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dd744cf_abca6130",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T12:22:20Z",
+      "side": 1,
+      "message": "Isn\u0027t that already checked by `bcc_handover_parse`? I agree that we should `?` as the comment suggests, but it\u0027s confusing to mention an invalid CBOR here if it\u0027s validated above (or did I miss something?)",
+      "range": {
+        "startLine": 80,
+        "startChar": 37,
+        "endLine": 80,
+        "endChar": 93
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1b67f72_2f77baac",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T12:22:20Z",
+      "side": 1,
+      "message": "So this _copies_ the CDIs inside wherever the `Bcc` instance lives (stack, heap, ...), right? Could we track the reference instead?",
+      "range": {
+        "startLine": 96,
+        "startChar": 46,
+        "endLine": 96,
+        "endChar": 66
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5b5d6b7_4a4e76cc",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T12:22:20Z",
+      "side": 1,
+      "message": "nit: Should we use another term that better describes the action here (e.g. \"`crop`\", \"`trim`\", \"`clip`\", ...)?",
+      "range": {
+        "startLine": 113,
+        "startChar": 11,
+        "endLine": 113,
+        "endChar": 19
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90290fcb_536a055b",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T12:22:20Z",
+      "side": 1,
+      "message": "So we assume that, if `bcc_entries.len() \u003d\u003d 1`, the CDIs aren\u0027t the UDS?",
+      "range": {
+        "startLine": 115,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 22
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af809713_26dc3864",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T12:22:20Z",
+      "side": 1,
+      "message": "Why allocate this on the heap and return it from the method instead of replacing the `BccHandover::Bcc` in-place in the original?",
+      "range": {
+        "startLine": 151,
+        "startChar": 26,
+        "endLine": 151,
+        "endChar": 29
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f43b3c29_973ca3f3",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T12:22:20Z",
+      "side": 1,
+      "message": "`else` there\u0027s a problem because the `BccPayload` doesn\u0027t have a mode, which should be mandatory, right?",
+      "range": {
+        "startLine": 209,
+        "startChar": 8,
+        "endLine": 209,
+        "endChar": 9
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8edc987_a9968f39",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T12:22:20Z",
+      "side": 1,
+      "message": "WDYT of introducing a\n```\n#[repr(transparent)]\nstruct BccEntry(Value)\n```\nso that `Bcc::bcc_entries` can be `Vec\u003cBccEntry\u003e` (validated in the ctor) and higher-level code such as `is_any_entry_debug_mode` can use accessors:\n```\nif let Some(value) \u003d entry.payload().mode() {\n```\n? (same about `BccPayload`)",
+      "range": {
+        "startLine": 214,
+        "startChar": 42,
+        "endLine": 214,
+        "endChar": 50
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78e71ace_5d163ac8",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T12:22:20Z",
+      "side": 1,
+      "message": "`\"{e}\"`?",
+      "range": {
+        "startLine": 80,
+        "startChar": 15,
+        "endLine": 80,
+        "endChar": 44
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8460082_fcee809f",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T12:22:20Z",
+      "side": 1,
+      "message": "`warn!` as we\u0027re not rebooting",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 13
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
