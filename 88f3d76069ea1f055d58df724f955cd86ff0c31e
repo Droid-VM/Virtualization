@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0649bf09_032464b2",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T17:27:37Z",
+      "side": 1,
+      "message": "Done\n\n\u003e (I\u0027m slightly surprised that casting self to *const works at all, and not entirely sure what the semantics are.)\n\nIt\u0027s always valid to cast a `\u0026T` to a `*const T` as Rust guarantees that the reference is never dangling. Note that is actually the only way to get a pointer from a reference in one operation (Rust forbids `\u0026T as *const U`) hence the double-`as` where `_` is `Self`.",
+      "parentUuid": "6d3ce466_fda6bfe8",
+      "range": {
+        "startLine": 783,
+        "startChar": 8,
+        "endLine": 783,
+        "endChar": 24
+      },
+      "revId": "88f3d76069ea1f055d58df724f955cd86ff0c31e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "779c3701_5125ec96",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-05-02T14:48:39Z",
       "side": 1,
       "message": "At least some of this could be outside the unsafe {} ?",
+      "range": {
+        "startLine": 796,
+        "startChar": 19,
+        "endLine": 796,
+        "endChar": 44
+      },
+      "revId": "88f3d76069ea1f055d58df724f955cd86ff0c31e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51e7226a_66829ebf",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T17:27:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "779c3701_5125ec96",
       "range": {
         "startLine": 796,
         "startChar": 19,
