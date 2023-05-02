@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8def99c8_56a95155",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T16:06:34Z",
+      "side": 1,
+      "message": "I\u0027m not concerned about performance but about pvmfw leaving one of the copies of the CDIs behind when jumping to the guest OS. aosp/2548230 should mitigate this but I would still be more comfortable with the CDIs being only access by reference.",
+      "parentUuid": "ef8eb909_162224dc",
+      "range": {
+        "startLine": 96,
+        "startChar": 46,
+        "endLine": 96,
+        "endChar": 66
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5b5d6b7_4a4e76cc",
@@ -285,6 +309,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76ff4b75_f99f7b9f",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T16:06:34Z",
+      "side": 1,
+      "message": "\u003e Not present is supposed to be interpreted as Unknown\n\nAh, I see! could you add a comment documenting this?",
+      "parentUuid": "a77efbd8_775792fc",
+      "range": {
+        "startLine": 209,
+        "startChar": 8,
+        "endLine": 209,
+        "endChar": 9
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f8edc987_a9968f39",
         "filename": "pvmfw/src/bcc.rs",
         "patchSetId": 2
@@ -367,6 +415,30 @@
       "side": 1,
       "message": "I didn\u0027t implement Display for BccError. That seems fairly standard for Error types, at least in no_std. That\u0027s why I need to use :? in most places in the Debug impl of BccError.",
       "parentUuid": "78e71ace_5d163ac8",
+      "range": {
+        "startLine": 80,
+        "startChar": 15,
+        "endLine": 80,
+        "endChar": 44
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d766c61_fd2c6082",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T16:06:34Z",
+      "side": 1,
+      "message": "Why not? I\u0027ve implemented `Display` for most error types in pvmfw; should I have implemented `Debug` instead?\n\nMy point here was that the \"`Invalid BCC Handover:`\" string is probably redundant.",
+      "parentUuid": "c2f989ab_f1b3fa2c",
       "range": {
         "startLine": 80,
         "startChar": 15,

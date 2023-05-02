@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9b6341a_31434439",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T16:06:34Z",
+      "side": 1,
+      "message": "Would it make sense to get this value from the bindgen of [`DiceMode`](http://cs/android/external/open-dice/include/dice/dice.h?l\u003d39) exported [by `libdiced_open_dice`](http://cs/android/system/security/diced/open_dice/src/lib.rs?l\u003d36) as a [`rustified-enum`](http://cs/android/system/security/diced/open_dice/Android.bp?l\u003d130)?",
+      "range": {
+        "startLine": 200,
+        "startChar": 23,
+        "endLine": 200,
+        "endChar": 24
+      },
+      "revId": "397203d8d18deb15ca02202aa3bd0e15a30ea03b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bf38894_eea03aac",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T16:06:34Z",
+      "side": 1,
+      "message": "Why not\n```\npub fn [dice_]mode(\u0026self) -\u003e Result\u003cDiceMode\u003e\n```\nwhich would clearly document the \"Unknown\" value when the key is absent and make the code below more flexible.",
+      "range": {
+        "startLine": 203,
+        "startChar": 4,
+        "endLine": 203,
+        "endChar": 49
+      },
+      "revId": "397203d8d18deb15ca02202aa3bd0e15a30ea03b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ce5ae3e_5b102a79",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T16:06:34Z",
+      "side": 1,
+      "message": "Is this equivalent to `if k.as_integer() \u003d\u003d Some(key.into())`?",
+      "range": {
+        "startLine": 248,
+        "startChar": 12,
+        "endLine": 249,
+        "endChar": 31
+      },
+      "revId": "397203d8d18deb15ca02202aa3bd0e15a30ea03b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
