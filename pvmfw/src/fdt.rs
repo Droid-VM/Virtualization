@@ -729,14 +729,6 @@ pub fn modify_for_next_stage(
     set_or_clear_chosen_flag(fdt, cstr!("avf,strict-boot"), strict_boot)?;
     set_or_clear_chosen_flag(fdt, cstr!("avf,new-instance"), new_instance)?;
 
-    if let Some(debug_policy) = debug_policy {
-        if apply_debug_policy(fdt, debug_policy)? {
-            info!("Debug policy applied.");
-        }
-    } else {
-        info!("No debug policy found.");
-    }
-
     if debuggable {
         if let Some(bootargs) = read_bootargs_from(fdt)? {
             filter_out_dangerous_bootargs(fdt, &bootargs)?;
@@ -744,6 +736,19 @@ pub fn modify_for_next_stage(
     }
 
     fdt.pack()?;
+
+    if let Some(debug_policy) = debug_policy {
+        // Take a snapshot of the DT before unpacking it to limit the amount of heap needed.
+        let backup = Vec::from(fdt.as_slice());
+        fdt.unpack()?;
+        let backup_fdt = Fdt::from_slice(backup.as_slice()).unwrap();
+        if apply_debug_policy(fdt, backup_fdt, debug_policy)? {
+            info!("Debug policy applied.");
+            fdt.pack()?;
+        } // No need to repack on failure as apply_debug_policy has restored fdt to backup_fdt.
+    } else {
+        info!("No debug policy found.");
+    }
 
     Ok(())
 }
@@ -779,9 +784,11 @@ fn set_or_clear_chosen_flag(fdt: &mut Fdt, flag: &CStr, value: bool) -> libfdt::
 /// Apply the debug policy overlay to the guest DT.
 ///
 /// Returns Ok(true) on success, Ok(false) on recovered failure and Err(_) on corruption of the DT.
-fn apply_debug_policy(fdt: &mut Fdt, debug_policy: &[u8]) -> libfdt::Result<bool> {
-    let backup_fdt = Vec::from(fdt.as_slice());
-
+fn apply_debug_policy(
+    fdt: &mut Fdt,
+    backup_fdt: &Fdt,
+    debug_policy: &[u8],
+) -> libfdt::Result<bool> {
     let mut debug_policy = Vec::from(debug_policy);
     let overlay = match Fdt::from_mut_slice(debug_policy.as_mut_slice()) {
         Ok(overlay) => overlay,
