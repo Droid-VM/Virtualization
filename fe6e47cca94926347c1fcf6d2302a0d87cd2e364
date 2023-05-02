@@ -16,6 +16,24 @@
       "message": "Why?",
       "revId": "fe6e47cca94926347c1fcf6d2302a0d87cd2e364",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a883cc09_08c05e89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-02T16:08:54Z",
+      "side": 1,
+      "message": "Good practice: it\u0027s cleaner to only import names that are used in the code; here, the trait is imported to use the method is defines, implemented for `Range` and is never used directly so doesn\u0027t need to pollute the namespace.",
+      "parentUuid": "46ef18a7_9ab89460",
+      "revId": "fe6e47cca94926347c1fcf6d2302a0d87cd2e364",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
