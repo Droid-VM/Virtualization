@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8cbd894_ad1c1ccb",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-03T09:34:18Z",
+      "side": 1,
+      "message": "If this returns Some it would indicate a fairly serious error; worth checking?",
+      "range": {
+        "startLine": 120,
+        "startChar": 33,
+        "endLine": 120,
+        "endChar": 40
+      },
+      "revId": "7438c8d4e63d51f250424e6e7e433916549011e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78af85b3_9a525482",
         "filename": "pvmfw/src/entry.rs",
         "patchSetId": 2
@@ -31,6 +54,30 @@
       "writtenOn": "2023-05-03T07:05:25Z",
       "side": 1,
       "message": "is this equivalent to `drop(SHARED_MEMORY.lock().take())`?",
+      "range": {
+        "startLine": 267,
+        "startChar": 4,
+        "endLine": 267,
+        "endChar": 40
+      },
+      "revId": "7438c8d4e63d51f250424e6e7e433916549011e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11eab10d_7907a969",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-03T09:34:18Z",
+      "side": 1,
+      "message": "Calling drop() would definitely be clearer.\n\n(I gather there are moves afoot to change the slightly unexpected semantics of `let _ \u003d`)",
+      "parentUuid": "78af85b3_9a525482",
       "range": {
         "startLine": 267,
         "startChar": 4,
@@ -59,6 +106,29 @@
         "startChar": 0,
         "endLine": 138,
         "endChar": 55
+      },
+      "revId": "7438c8d4e63d51f250424e6e7e433916549011e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3fc9c29_db8226de",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-03T09:34:18Z",
+      "side": 1,
+      "message": "I think you also need to guarantee this is only called once.",
+      "range": {
+        "startLine": 282,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 71
       },
       "revId": "7438c8d4e63d51f250424e6e7e433916549011e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
