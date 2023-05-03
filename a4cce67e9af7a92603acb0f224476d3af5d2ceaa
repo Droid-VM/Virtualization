@@ -22,6 +22,30 @@
       },
       "revId": "a4cce67e9af7a92603acb0f224476d3af5d2ceaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb8c32dd_6dccc59e",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-03T19:02:49Z",
+      "side": 0,
+      "message": "Good catch, I inlined it in the calls to the hypervisor, which are the only place where we should be dealing with IPAs, here.",
+      "parentUuid": "f9967b20_83adf3a3",
+      "range": {
+        "startLine": 370,
+        "startChar": 4,
+        "endLine": 370,
+        "endChar": 37
+      },
+      "revId": "a4cce67e9af7a92603acb0f224476d3af5d2ceaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

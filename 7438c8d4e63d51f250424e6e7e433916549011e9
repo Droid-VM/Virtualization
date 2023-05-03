@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8dc13b9_d2901179",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-03T19:02:49Z",
+      "side": 1,
+      "message": "b/280644106",
+      "parentUuid": "b61bd650_b3a356d9",
+      "revId": "7438c8d4e63d51f250424e6e7e433916549011e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8cbd894_ad1c1ccb",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-05-03T09:34:18Z",
       "side": 1,
       "message": "If this returns Some it would indicate a fairly serious error; worth checking?",
+      "range": {
+        "startLine": 120,
+        "startChar": 33,
+        "endLine": 120,
+        "endChar": 40
+      },
+      "revId": "7438c8d4e63d51f250424e6e7e433916549011e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3857752c_29cc43a5",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-03T19:02:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8cbd894_ad1c1ccb",
       "range": {
         "startLine": 120,
         "startChar": 33,
@@ -88,6 +130,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ad678b8_a87463fc",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-03T19:02:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11eab10d_7907a969",
+      "range": {
+        "startLine": 267,
+        "startChar": 4,
+        "endLine": 267,
+        "endChar": 40
+      },
+      "revId": "7438c8d4e63d51f250424e6e7e433916549011e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0c440fd_4204ae2f",
@@ -101,6 +167,30 @@
       "writtenOn": "2023-05-03T07:05:25Z",
       "side": 1,
       "message": "this could have been a separate change, correct? (I am not asking you to do that though).",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 55
+      },
+      "revId": "7438c8d4e63d51f250424e6e7e433916549011e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ed3c6d6_a586aa8c",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-03T19:02:49Z",
+      "side": 1,
+      "message": "Correct; I brought back the `OnceBox` (see Alan\u0027s comment).",
+      "parentUuid": "f0c440fd_4204ae2f",
       "range": {
         "startLine": 138,
         "startChar": 0,
@@ -134,6 +224,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2131631d_bb4e6a54",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-03T19:02:49Z",
+      "side": 1,
+      "message": "Done; brought back the `OnceBox`.",
+      "parentUuid": "b3fc9c29_db8226de",
+      "range": {
+        "startLine": 282,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 71
+      },
+      "revId": "7438c8d4e63d51f250424e6e7e433916549011e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c0f5a45_b5472e67",
@@ -157,6 +271,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bed96f6_80018569",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-03T19:02:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c0f5a45_b5472e67",
+      "range": {
+        "startLine": 318,
+        "startChar": 40,
+        "endLine": 318,
+        "endChar": 50
+      },
+      "revId": "7438c8d4e63d51f250424e6e7e433916549011e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f822461_c70fa6ec",
@@ -170,6 +308,30 @@
       "writtenOn": "2023-05-03T07:05:25Z",
       "side": 1,
       "message": "interesting to see that the borrow checker allows this. I thought shared_pool is already borrowed at L387. perhaps this is allowed because this is executed only when the first alloc has failed?",
+      "range": {
+        "startLine": 391,
+        "startChar": 27,
+        "endLine": 391,
+        "endChar": 43
+      },
+      "revId": "7438c8d4e63d51f250424e6e7e433916549011e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0da3d255_e8fafb5b",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-03T19:02:49Z",
+      "side": 1,
+      "message": "My understanding is that this code is equivalent to:\n```\nlet r \u003d shared_pool.alloc(layout);\nlet buffer \u003d r.or_else(|_| { \u0026mut shared_pool })\n```\nwhich isn\u0027t borrowing `shared_pool` anymore when it needs to borrow it again in the closure.",
+      "parentUuid": "9f822461_c70fa6ec",
       "range": {
         "startLine": 391,
         "startChar": 27,
