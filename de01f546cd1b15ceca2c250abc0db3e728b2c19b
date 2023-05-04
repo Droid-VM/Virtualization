@@ -16,6 +16,29 @@
       "message": "PTAL - this has changed fairly substantially",
       "revId": "de01f546cd1b15ceca2c250abc0db3e728b2c19b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdedccaa_5d2297bc",
+        "filename": "tests/testapk/src/java/com/android/microdroid/test/MicrodroidTests.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 1092,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2023-05-04T19:13:24Z",
+      "side": 1,
+      "message": "I think this can be `isEqualTo(3)` now to ensure that there are none of the earlier certificate in the chain.",
+      "range": {
+        "startLine": 1092,
+        "startChar": 46,
+        "endLine": 1092,
+        "endChar": 55
+      },
+      "revId": "de01f546cd1b15ceca2c250abc0db3e728b2c19b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
