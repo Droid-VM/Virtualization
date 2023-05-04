@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3b97784_5694549f",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-04T11:28:50Z",
+      "side": 1,
+      "message": "Add a bug\n\nWhy is that hard? Does logging use alloc?",
+      "range": {
+        "startLine": 26,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 7
+      },
+      "revId": "7fc5e5957c878830aa77f6aa102dfed144dc2ba9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "593a232a_e94fc993",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-04T11:28:50Z",
+      "side": 1,
+      "message": "documented in the Hal trait?\nLots of the unsafe functions below don\u0027t have safety comments.",
+      "range": {
+        "startLine": 31,
+        "startChar": 73,
+        "endLine": 31,
+        "endChar": 83
+      },
+      "revId": "7fc5e5957c878830aa77f6aa102dfed144dc2ba9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
