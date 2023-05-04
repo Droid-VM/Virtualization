@@ -22,6 +22,29 @@
       },
       "revId": "07af22f94306367acdf824d7520ba21221f3f507",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3aefe01f_a70dc7d3",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1984376
+      },
+      "writtenOn": "2023-05-04T11:47:23Z",
+      "side": 1,
+      "message": "LGTM for Gunyah. A note that this or_else() path does not make sense on Gunyah. Once we have exhausted the static shared pool - there is no other means to satisy the allocation request. We would have called handle_alloc_error() earlier (before this patch) and now would hit unimplemented!() when a call to shm.refill() -\u003e mem_share() is made on Gunyah ..both leading to same outcome of panic.",
+      "range": {
+        "startLine": 407,
+        "startChar": 17,
+        "endLine": 407,
+        "endChar": 18
+      },
+      "revId": "07af22f94306367acdf824d7520ba21221f3f507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
