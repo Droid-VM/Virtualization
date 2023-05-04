@@ -166,6 +166,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8216737_813ae472",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-04T11:12:25Z",
+      "side": 1,
+      "message": "Changed again, since it now does something very different.",
+      "parentUuid": "77c4cd24_103f3626",
+      "range": {
+        "startLine": 113,
+        "startChar": 11,
+        "endLine": 113,
+        "endChar": 19
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90290fcb_536a055b",
@@ -203,6 +227,30 @@
       "side": 1,
       "message": "Yes, I\u0027m assuming that. It would seem an odd thing to do.\nBut we could if necessary do something else in the case of only 1, e.g. derive a second node and then remove the original.",
       "parentUuid": "90290fcb_536a055b",
+      "range": {
+        "startLine": 115,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 22
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb097e55_e8da1c13",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-04T11:12:25Z",
+      "side": 1,
+      "message": "N/A now",
+      "parentUuid": "81908154_9a3500d3",
       "range": {
         "startLine": 115,
         "startChar": 8,
@@ -331,6 +379,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13e9d918_7277ec68",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-04T11:12:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76ff4b75_f99f7b9f",
+      "range": {
+        "startLine": 209,
+        "startChar": 8,
+        "endLine": 209,
+        "endChar": 9
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8edc987_a9968f39",
@@ -439,6 +511,30 @@
       "side": 1,
       "message": "Why not? I\u0027ve implemented `Display` for most error types in pvmfw; should I have implemented `Debug` instead?\n\nMy point here was that the \"`Invalid BCC Handover:`\" string is probably redundant.",
       "parentUuid": "c2f989ab_f1b3fa2c",
+      "range": {
+        "startLine": 80,
+        "startChar": 15,
+        "endLine": 80,
+        "endChar": 44
+      },
+      "revId": "316cb46c50353f6257390906e4ff2a4e6194ec1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42102897_bfe0ebc2",
+        "filename": "pvmfw/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-04T11:12:25Z",
+      "side": 1,
+      "message": "Aha! Yes, agreed.",
+      "parentUuid": "8d766c61_fd2c6082",
       "range": {
         "startLine": 80,
         "startChar": 15,
