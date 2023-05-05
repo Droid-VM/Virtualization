@@ -93,6 +93,30 @@
       },
       "revId": "7fc5e5957c878830aa77f6aa102dfed144dc2ba9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6350dcc0_b68b085a",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-05T12:59:52Z",
+      "side": 1,
+      "message": "Yeah, duplicating would be bad. But it wouldn\u0027t hurt to point to the Hal trait documentation - since the safety requirements are in 2 places, and that isn\u0027t immediately clear.",
+      "parentUuid": "769b1b5c_5cd81a20",
+      "range": {
+        "startLine": 31,
+        "startChar": 73,
+        "endLine": 31,
+        "endChar": 83
+      },
+      "revId": "7fc5e5957c878830aa77f6aa102dfed144dc2ba9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
