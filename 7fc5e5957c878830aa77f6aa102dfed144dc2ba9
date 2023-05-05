@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "496ad867_3d4d54cf",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-05T11:55:47Z",
+      "side": 1,
+      "message": "Gone; this was a TODO for myself, which I forgot to remove before pushing the commit for review!",
+      "parentUuid": "b3b97784_5694549f",
+      "range": {
+        "startLine": 26,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 7
+      },
+      "revId": "7fc5e5957c878830aa77f6aa102dfed144dc2ba9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "593a232a_e94fc993",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-05-04T11:28:50Z",
       "side": 1,
       "message": "documented in the Hal trait?\nLots of the unsafe functions below don\u0027t have safety comments.",
+      "range": {
+        "startLine": 31,
+        "startChar": 73,
+        "endLine": 31,
+        "endChar": 83
+      },
+      "revId": "7fc5e5957c878830aa77f6aa102dfed144dc2ba9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "769b1b5c_5cd81a20",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-05T11:55:47Z",
+      "side": 1,
+      "message": "[Yes](https://docs.rs/virtio-drivers/latest/virtio_drivers/trait.Hal.html#safety), only the \"implementation safety\" have been documented here as documenting safety requirements for callers would duplicate what the crate already provides (DRY).",
+      "parentUuid": "593a232a_e94fc993",
       "range": {
         "startLine": 31,
         "startChar": 73,
