@@ -69,6 +69,30 @@
       },
       "revId": "07af22f94306367acdf824d7520ba21221f3f507",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccaa91a6_07edac4d",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-05T11:56:13Z",
+      "side": 1,
+      "message": "\u003e LGTM for Gunyah.\n\nAwesome, thanks!\n\n\u003e there is no other means to satisy the allocation request.\n\nYes, that\u0027s tracked by `SHARED_MEMORY` being `None`.\n\n\u003e now would hit unimplemented!() when a call to shm.refill() -\u003e mem_share() is made on Gunyah\n\nNot exactly as the `.ok_or` will prevent `.and_then` from running the closure (`shm.refill`), instead returning early from the `.or_else` straight into the `.except`.\n\nI\u0027ve tested this code path on pKVM with:\n```\ndiff --git a/pvmfw/src/memory.rs b/pvmfw/src/memory.rs\nindex 69777b89..f1429f8e 100644\n--- a/pvmfw/src/memory.rs\n+++ b/pvmfw/src/memory.rs\n@@ -336,12 +336,6 @@ impl MemoryTracker {\n \n     /// Initialize the shared heap to dynamically share memory from the global allocator.\n     pub fn init_dynamic_shared_pool(\u0026mut self) -\u003e Result\u003c()\u003e {\n-        let granule \u003d get_hypervisor().memory_protection_granule()?;\n-        let previous \u003d SHARED_MEMORY.lock().replace(MemorySharer::new(granule));\n-        if previous.is_some() {\n-            return Err(MemoryTrackerError::SharedMemorySetFailure);\n-        }\n-\n         SHARED_POOL\n             .set(Box::new(LockedHeap::empty()))\n             .map_err(|_| MemoryTrackerError::SharedPoolSetFailure)?;\n```\n\nBut TBF I realize that these methods don\u0027t make the code flow very obvious and have refactored this code to simply use an extra function (see latest patchset).\n\n\u003e We would have called handle_alloc_error() earlier (before this patch) \n\nGood point; instead of panicking with `.except`, the latest patchset now calls `handle_alloc_error`; thanks!",
+      "parentUuid": "35169ea4_75afefa6",
+      "range": {
+        "startLine": 407,
+        "startChar": 17,
+        "endLine": 407,
+        "endChar": 18
+      },
+      "revId": "07af22f94306367acdf824d7520ba21221f3f507",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
