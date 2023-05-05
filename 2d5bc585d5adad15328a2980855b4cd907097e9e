@@ -16,6 +16,24 @@
       "message": "Asserting that the size is non-zero here as well seems like a good idea.",
       "revId": "2d5bc585d5adad15328a2980855b4cd907097e9e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6af49da3_46f605ed",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-05T17:26:33Z",
+      "side": 1,
+      "message": "This function is `unsafe` because the caller must pass the same `layout` that was passed to `alloc_shared` so asserting that the size is non-zero doesn\u0027t make the code less `unsafe` because it (or the alignment) could still be different and we would have no way to tell. OTOH, if the caller respects the safety requirement, the `assert` in `alloc_shared` prevents the size from being zero here.",
+      "parentUuid": "a7bc9845_360a5f7f",
+      "revId": "2d5bc585d5adad15328a2980855b4cd907097e9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
