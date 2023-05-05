@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a196feb_b0875f87",
+        "filename": "authfs/tests/hosttests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-05T09:46:00Z",
+      "side": 1,
+      "message": "It might be better to rm -rf it first.\nThe test is checking that files get created, we want to make sure they aren\u0027t ones left over from last time.\nAnd should we move that to an @Before ?",
+      "range": {
+        "startLine": 308,
+        "startChar": 1,
+        "endLine": 308,
+        "endChar": 53
+      },
+      "revId": "8ae3db395047c3e46f72a779f35e5ae8cbb34265",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
