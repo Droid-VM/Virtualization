@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07366500_9641911d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2023-05-05T16:19:35Z",
+      "side": 1,
+      "message": "http://cs/android-internal/packages/modules/Virtualization/authfs/tests/common/src/java/com/android/fs/common/AuthFsTestRule.java;l\u003d267;rcl\u003deeae447b7baf32568765801cb304d72dadfcd739",
+      "revId": "681e5ac97c8224b04ecad0dbba8d064b25e3d5ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bf64c32_c5e706a8",
+        "filename": "authfs/tests/hosttests/java/src/com/android/fs/AuthFsHostTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2023-05-05T16:19:35Z",
+      "side": 1,
+      "message": "Looks like the directory is supposed to be deleted AuthFsTestRule, but it didn\u0027t (probably due to some exception earlier):\n\nhttp://cs/android-internal/packages/modules/Virtualization/authfs/tests/common/src/java/com/android/fs/common/AuthFsTestRule.java;l\u003d267;rcl\u003deeae447b7baf32568765801cb304d72dadfcd739\n\nGiven that, I\u0027d suggest to make the code there more robust... something like\n```\ntry {\n  ...\n} finally {\n  sAndroid.run(\"rm -rf \" + TEST_OUTPUT_DIR);\n}\n```",
+      "range": {
+        "startLine": 51,
+        "startChar": 50,
+        "endLine": 51,
+        "endChar": 80
+      },
+      "revId": "681e5ac97c8224b04ecad0dbba8d064b25e3d5ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
