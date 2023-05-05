@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb96ec66_f226aeec",
+        "filename": "pvmfw/src/dice.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-05-05T11:34:02Z",
+      "side": 1,
+      "message": "I would expect a method called \"into_*\" to return the thing it\u0027s converting into. Maybe something like \"write_next_bcc\" would be a better name, if that\u0027s what it\u0027s doing?",
+      "range": {
+        "startLine": 61,
+        "startChar": 11,
+        "endLine": 61,
+        "endChar": 24
+      },
+      "revId": "2896d92b650d68081466e6433a036d6f2520531d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
