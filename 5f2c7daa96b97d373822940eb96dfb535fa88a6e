@@ -16,6 +16,24 @@
       "message": "I maybe call this `copy_vaddr`, if you don\u0027t think `copy` alone is clear enough? It\u0027s not just any virtual address, it\u0027s a pointer to the region we allocated to use for a copy of the buffer.",
       "revId": "5f2c7daa96b97d373822940eb96dfb535fa88a6e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a594300d_b5bf7266",
+        "filename": "pvmfw/src/virtio/hal.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-05T17:09:14Z",
+      "side": 1,
+      "message": "It was mostly to have a symmetry with `unshare` which receives `paddr`, converts it to `vaddr` and copies _from_ it, while `share` would return `paddr`, converted from the `vaddr` it copied _to_.\n\nI agree that it\u0027s better to give a meaningful name to a variable rather than \"`vaddr`\" (all dereferenceable variables are VAs, after all) and would be happy to rename both to `copy`. Although I\u0027d rather use the term \"bounce buffer\" (\"`bounce`\") to clarify the reason for which we\u0027re copying it; WDYT?",
+      "parentUuid": "4ecae3ab_2f6644dc",
+      "revId": "5f2c7daa96b97d373822940eb96dfb535fa88a6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
