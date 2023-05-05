@@ -88,6 +88,18 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
         AuthFsTestRule.tearDownAndroid();
     }
 
+    @Before
+    public void createAndroidOutputDir() {
+        String androidOutputDir = TEST_OUTPUT_DIR + "/dir";
+        sAndroid.run("mkdir " + androidOutputDir);
+    }
+
+    @After
+    public void removeAndroidOutputDir() {
+        String androidOutputDir = TEST_OUTPUT_DIR + "/dir";
+        sAndroid.run("rm -fr " + androidOutputDir);
+    }
+
     @Test
     public void testReadWithFsverityVerification_RemoteFile() throws Exception {
         // Setup
@@ -305,7 +317,6 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
         // Setup
         String androidOutputDir = TEST_OUTPUT_DIR + "/dir";
         String authfsOutputDir = MOUNT_DIR + "/3";
-        sAndroid.run("mkdir " + androidOutputDir);
         runFdServerOnAndroid("--open-dir 3:" + androidOutputDir, "--rw-dirs 3");
         runAuthFsOnMicrodroid("--remote-new-rw-dir 3");
 
@@ -334,7 +345,6 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
         // Setup
         String androidOutputDir = TEST_OUTPUT_DIR + "/dir";
         String authfsOutputDir = MOUNT_DIR + "/3";
-        sAndroid.run("mkdir " + androidOutputDir);
         runFdServerOnAndroid("--open-dir 3:" + androidOutputDir, "--rw-dirs 3");
         runAuthFsOnMicrodroid("--remote-new-rw-dir 3");
 
@@ -368,7 +378,6 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
         // Setup
         String androidOutputDir = TEST_OUTPUT_DIR + "/dir";
         String authfsOutputDir = MOUNT_DIR + "/3";
-        sAndroid.run("mkdir " + androidOutputDir);
         runFdServerOnAndroid("--open-dir 3:" + androidOutputDir, "--rw-dirs 3");
         runAuthFsOnMicrodroid("--remote-new-rw-dir 3");
 
@@ -389,7 +398,6 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
         // Setup
         String androidOutputDir = TEST_OUTPUT_DIR + "/dir";
         String authfsOutputDir = MOUNT_DIR + "/3";
-        sAndroid.run("mkdir " + androidOutputDir);
         runFdServerOnAndroid("--open-dir 3:" + androidOutputDir, "--rw-dirs 3");
         runAuthFsOnMicrodroid("--remote-new-rw-dir 3");
 
@@ -408,7 +416,6 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
         // Setup
         String androidOutputDir = TEST_OUTPUT_DIR + "/dir";
         String authfsOutputDir = MOUNT_DIR + "/3";
-        sAndroid.run("mkdir " + androidOutputDir);
         runFdServerOnAndroid("--open-dir 3:" + androidOutputDir, "--rw-dirs 3");
         runAuthFsOnMicrodroid("--remote-new-rw-dir 3");
 
@@ -434,7 +441,6 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
         // Setup
         String androidOutputDir = TEST_OUTPUT_DIR + "/dir";
         String authfsOutputDir = MOUNT_DIR + "/3";
-        sAndroid.run("mkdir " + androidOutputDir);
         runFdServerOnAndroid("--open-dir 3:" + androidOutputDir, "--rw-dirs 3");
         runAuthFsOnMicrodroid("--remote-new-rw-dir 3");
 
@@ -458,7 +464,6 @@ public final class AuthFsHostTest extends BaseHostJUnit4Test {
         // Setup
         String authfsOutputDir = MOUNT_DIR + "/3";
         String androidOutputDir = TEST_OUTPUT_DIR + "/dir";
-        sAndroid.run("mkdir " + androidOutputDir);
         runFdServerOnAndroid("--open-dir 3:" + androidOutputDir, "--rw-dirs 3");
         runAuthFsOnMicrodroid("--remote-new-rw-dir 3");
 
