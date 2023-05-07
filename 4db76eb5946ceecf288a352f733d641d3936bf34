@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c436fb63_40504a3f",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1139038
+      },
+      "writtenOn": "2023-05-07T21:16:13Z",
+      "side": 1,
+      "message": "If the mode entry isn\u0027t present, it\u0027s assumed to not be debuggable? The mode is only optional for degenerate chains i.e. those that have a self-signed root because they are rooted in software, not hardware.\n\nThis approximation is probably good enough for the non-critical smoke test you\u0027re trying to perform here.",
+      "revId": "4db76eb5946ceecf288a352f733d641d3936bf34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
