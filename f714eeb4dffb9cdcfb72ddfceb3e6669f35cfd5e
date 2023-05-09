@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be549cbb_68ee9d9f",
+        "filename": "apkdmverity/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-09T14:47:40Z",
+      "side": 1,
+      "message": "This worries me, since it would be really easy to add a new test without noticing this.\n(Especially since we\u0027re suppressing the unused warning.)\nIs there any way to avoid that?",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 6
+      },
+      "revId": "f714eeb4dffb9cdcfb72ddfceb3e6669f35cfd5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
