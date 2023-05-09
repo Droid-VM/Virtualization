@@ -16,6 +16,24 @@
       "message": "Using a `LockedHeap` for the shared pool is not secure, because it uses an intrusive linked list to store metadata within the unallocated memory. A malicious host could modify this to manipulate the `LockedHeap` into returning allocations of arbitrary guest memory instead. You should use a `FrameAllocator` or `LockedFrameAllocator` instead.",
       "revId": "f19c0e600c62a9415608512360f41701667a40d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3522e34_2f5242a0",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-05-09T15:31:12Z",
+      "side": 1,
+      "message": "I\u0027ve sent https://r.android.com/2584471 to fix this.",
+      "parentUuid": "3101fcb3_23addbed",
+      "revId": "f19c0e600c62a9415608512360f41701667a40d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
