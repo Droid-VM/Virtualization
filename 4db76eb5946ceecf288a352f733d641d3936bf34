@@ -16,6 +16,24 @@
       "message": "If the mode entry isn\u0027t present, it\u0027s assumed to not be debuggable? The mode is only optional for degenerate chains i.e. those that have a self-signed root because they are rooted in software, not hardware.\n\nThis approximation is probably good enough for the non-critical smoke test you\u0027re trying to perform here.",
       "revId": "4db76eb5946ceecf288a352f733d641d3936bf34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a22db8d3_89f16b2e",
+        "filename": "pvmfw/src/bcc.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-09T07:57:52Z",
+      "side": 1,
+      "message": "The CDDL says it\u0027s optional, and https://pigweed.googlesource.com/open-dice/+/refs/heads/main/docs/specification.md#Mode-Value-Details seems to suggest that Not Configured is different from Debug.\n\nI\u0027m trying to be conservative in when we allow debug policy, so I decided to  require an explicit debug indication.",
+      "parentUuid": "c436fb63_40504a3f",
+      "revId": "4db76eb5946ceecf288a352f733d641d3936bf34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
