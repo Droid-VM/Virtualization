@@ -49,7 +49,9 @@ public final class DeviceProperties {
      */
     public boolean isCuttlefish() {
         String vendorDeviceName = getProperty(KEY_VENDOR_DEVICE);
-        return vendorDeviceName != null && vendorDeviceName.startsWith(CUTTLEFISH_DEVICE_PREFIX);
+        return vendorDeviceName != null
+                && (vendorDeviceName.startsWith(CUTTLEFISH_DEVICE_PREFIX)
+                        || vendorDeviceName.equals("trusty"));
     }
 
     /**

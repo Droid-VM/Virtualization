@@ -25,7 +25,7 @@ pub fn is_nested_virtualization() -> Result<bool> {
     // So we just need to check for vsoc.
     if let Some(value) = system_properties::read("ro.product.vendor.device")? {
         // Fuzzy matching to allow for vsoc_x86, vsoc_x86_64, vsoc_x86_64_only, ...
-        Ok(value.starts_with("vsoc_"))
+        Ok(value.starts_with("vsoc_") || value == "trusty")
     } else {
         Ok(false)
     }
