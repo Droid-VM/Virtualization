@@ -56,6 +56,24 @@
       "message": "I assume this is in the context of https://r.android.com/2573450. Dan, maybe you can add a bug to all these changes so people have context for what you\u0027re doing?",
       "revId": "ae4819800dfb7bd425be6e8e7dfad0ad6567d8bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6f21240_c34ac065",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2023-05-09T19:45:09Z",
+      "side": 1,
+      "message": "I got approval from the rust team before starting on this. I unfortunately can\u0027t link it because the discussion was in Chat. I can get a bug filed for tracking once someone tells me what component is appropriate.\n\nThere is a lint, and I\u0027m trying to enable it: https://android-review.git.corp.google.com/c/platform/build/soong/+/2573450. That\u0027s the motivation for this change: turning on the lint flags this code.",
+      "parentUuid": "81ebc4c2_5ed28d79",
+      "revId": "ae4819800dfb7bd425be6e8e7dfad0ad6567d8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
