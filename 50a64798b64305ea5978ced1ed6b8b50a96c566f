@@ -189,6 +189,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d1bfe7b_f8e73909",
+        "filename": "demo_native/main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-05-10T15:17:16Z",
+      "side": 1,
+      "message": "Well, there\u0027s a middle way too.\nVirtualMachineAppConfig with VirtualMachinePayloadConfig, as demo\u0027d here\nVirtualMachineRawConfig, where you can do anything, which I agree we shouldn\u0027t attempt to demo.\nVirtualMachineAppConfig with JSON Config file, as used by CompOS, but left as @hide in the Java APIs.\n\nThat third one is what I was thinking we should at least mention.",
+      "parentUuid": "f06e66fc_bcf3d819",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 52
+      },
+      "revId": "50a64798b64305ea5978ced1ed6b8b50a96c566f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4d15822a_609e8add",
