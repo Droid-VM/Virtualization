@@ -8,6 +8,7 @@ rust_library {
     edition: "2021",
     rustlibs: [
         "liblibtest_mimic",
+        "liblinkme",
     ],
     proc_macros: ["libpaste"],
     apex_available: [
@@ -22,5 +23,10 @@ rust_defaults {
     cfgs: ["test"],
     rustlibs: [
         "libignorabletest",
+        "liblinkme",
+    ],
+    ld_flags: [
+        "-z",
+        "nostart-stop-gc",
     ],
 }
