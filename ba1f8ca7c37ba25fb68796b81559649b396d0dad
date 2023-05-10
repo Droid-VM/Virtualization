@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0e6eeffe_7e6e9931",
+        "filename": "demo_native/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-10T15:26:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27603fc6_a2d7bb0c",
+      "range": {
+        "startLine": 8,
+        "startChar": 34,
+        "endLine": 8,
+        "endChar": 40
+      },
+      "revId": "ba1f8ca7c37ba25fb68796b81559649b396d0dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2fa0e92d_16700c03",
         "filename": "demo_native/main.cpp",
         "patchSetId": 3
@@ -60,6 +84,30 @@
       "writtenOn": "2023-05-10T15:17:16Z",
       "side": 1,
       "message": "Doesn\u0027t this always fail? After we get OnDead we then call getState, but that will fail?",
+      "range": {
+        "startLine": 386,
+        "startChar": 14,
+        "endLine": 386,
+        "endChar": 59
+      },
+      "revId": "ba1f8ca7c37ba25fb68796b81559649b396d0dad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0da1dac_ba9f745c",
+        "filename": "demo_native/main.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-10T15:26:47Z",
+      "side": 1,
+      "message": "It didn\u0027t fail. (See my log in README.md)\n\nIVirtualMachine binder object is still alive even after onDead returns.",
+      "parentUuid": "d531dcc8_b705288a",
       "range": {
         "startLine": 386,
         "startChar": 14,
