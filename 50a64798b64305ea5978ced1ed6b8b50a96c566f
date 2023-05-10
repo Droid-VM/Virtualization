@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8309a2ff_d280f131",
+        "filename": "demo_native/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-10T14:51:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0dae105d_f5a2ed66",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 80
+      },
+      "revId": "50a64798b64305ea5978ced1ed6b8b50a96c566f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b055c003_0abe9e90",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-05-10T13:57:20Z",
       "side": 1,
       "message": "Maybe point at system/sepolicy/private/composd.te as an example? E.g. that has virtualizationservice_use(composd) which will be helpful.\n\nThey might also have to configure sepolicy inside Microdroid.",
+      "range": {
+        "startLine": 38,
+        "startChar": 29,
+        "endLine": 38,
+        "endChar": 71
+      },
+      "revId": "50a64798b64305ea5978ced1ed6b8b50a96c566f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00904c9e_b0cbd2e5",
+        "filename": "demo_native/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-10T14:51:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b055c003_0abe9e90",
       "range": {
         "startLine": 38,
         "startChar": 29,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "418d906a_fc8c1023",
+        "filename": "demo_native/main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-10T14:51:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d5df089_77177bf0",
+      "range": {
+        "startLine": 144,
+        "startChar": 49,
+        "endLine": 144,
+        "endChar": 85
+      },
+      "revId": "50a64798b64305ea5978ced1ed6b8b50a96c566f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df49f3e3_664b12ec",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-05-10T13:57:20Z",
       "side": 1,
       "message": "Should we mention the config file here? If you\u0027re running platform signed code, then that is available.",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 52
+      },
+      "revId": "50a64798b64305ea5978ced1ed6b8b50a96c566f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f06e66fc_bcf3d819",
+        "filename": "demo_native/main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-10T14:51:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df49f3e3_664b12ec",
       "range": {
         "startLine": 176,
         "startChar": 0,
@@ -139,6 +235,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbcecbd6_923a8f3d",
+        "filename": "demo_native/main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-10T14:51:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fa4b188_cf82ddb4",
+      "range": {
+        "startLine": 266,
+        "startChar": 4,
+        "endLine": 266,
+        "endChar": 35
+      },
+      "revId": "50a64798b64305ea5978ced1ed6b8b50a96c566f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "293bf06f_f080ddab",
@@ -152,6 +272,30 @@
       "writtenOn": "2023-05-10T13:57:20Z",
       "side": 1,
       "message": "This implicitly drops the IVirtualMachine, killing the VM. But we don\u0027t recommend that. Shouldn\u0027t we call quit() via Binder and then use your (currently redundant) wait_for_vm_death?",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 377,
+        "endChar": 14
+      },
+      "revId": "50a64798b64305ea5978ced1ed6b8b50a96c566f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6d8ab05_36049c7d",
+        "filename": "demo_native/main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-10T14:51:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "293bf06f_f080ddab",
       "range": {
         "startLine": 376,
         "startChar": 0,
