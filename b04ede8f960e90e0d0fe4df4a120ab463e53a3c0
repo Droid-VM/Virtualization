@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05d0101c_acd5fd9a",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-11T19:13:45Z",
+      "side": 1,
+      "message": "I don\u0027t have a strong opinion about this one but DRY would suggest\n```suggestion\n    if flags.contains(Attributes::TABLE_OR_PAGE) {\n        level \u003d\u003d LEAF_PTE_LEVEL\n    } else {\n        level \u003c LEAF_PTE_LEVEL\n    }\n```\n(feel free to ack and ignore)",
+      "range": {
+        "startLine": 463,
+        "startChar": 4,
+        "endLine": 464,
+        "endChar": 79
+      },
+      "revId": "b04ede8f960e90e0d0fe4df4a120ab463e53a3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76bc7439_05f80f7a",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-11T19:13:45Z",
+      "side": 1,
+      "message": "Just `.unwrap` or `.expect(\"Unsupported PTE flags set\")` or\n```\nlet Some(flags) \u003d desc.flags() else {\n    panic!(\"Unsupported PTE flags set: {:?}\", desc)\n};\n```\n(which could possibly be wrapped in a function)\n?",
+      "range": {
+        "startLine": 473,
+        "startChar": 29,
+        "endLine": 473,
+        "endChar": 39
+      },
+      "revId": "b04ede8f960e90e0d0fe4df4a120ab463e53a3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeef3f32_29a94f9c",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-11T19:13:45Z",
+      "side": 1,
+      "message": "nit: I know that this is functionally equivalent but could you separate this into its own documented `if`:\n```\nif !is_leaf_pte(\u0026flags, level) {\n    return Ok(()) // Skip block PTEs as they aren\u0027t tagged with MMIO_LAZY_MAP_FLAG.\n}\n\nif flags.contains(mmu::MMIO_LAZY_MAP_FLAG) \u0026\u0026 !flags.contains(Attributes::VALID) {\n    Ok(())\n} else {\n    Err(())\n}\n```\nas it took me some time to understand why this is there (before I remembered that `.map_range()` is called on ALL mappings, including block mappings).",
+      "range": {
+        "startLine": 474,
+        "startChar": 7,
+        "endLine": 474,
+        "endChar": 34
+      },
+      "revId": "b04ede8f960e90e0d0fe4df4a120ab463e53a3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee06295b_88cb28db",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-11T19:13:45Z",
+      "side": 1,
+      "message": "nit: is this\n```suggestion\n        \u0026\u0026 flags.contains(mmu::MMIO_LAZY_MAP_FLAG | Attributes::VALID)\n```\nor even (for a `const` argument)\n```\nflags.contains(mmu::MMIO_LAZY_MAP_FLAG.union(Attributes::VALID))\n```\n?\n\nBut, isn\u0027t this also a case were we want to `assert!(flags.contains(...))` (inside of the `if`) as this function should never be called on leafs that haven\u0027t been tagged, right? Instead, this currently returns `Ok` in that case.",
+      "range": {
+        "startLine": 490,
+        "startChar": 11,
+        "endLine": 491,
+        "endChar": 44
+      },
+      "revId": "b04ede8f960e90e0d0fe4df4a120ab463e53a3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e670b162_68d79341",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-11T19:13:45Z",
+      "side": 1,
+      "message": "nit: use `PVMFW_PAGE_SIZE`\n\nAlso, if this should never happen, just `assert` it:\n```suggestion\n        assert_eq!(va_range.len(), PVMFW_PAGE_SIZE,\n                   \"Failed to break down block mapping before MMIO guard mapping\");\n```",
+      "range": {
+        "startLine": 493,
+        "startChar": 8,
+        "endLine": 497,
+        "endChar": 9
+      },
+      "revId": "b04ede8f960e90e0d0fe4df4a120ab463e53a3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16f185ca_59814178",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-11T19:13:45Z",
+      "side": 1,
+      "message": "Like for the size, let\u0027s `assert` it if it should never happen:\n```suggestion\n        let page_base \u003d va_range.start().0;\n        assert_eq!(page_base % PVMFW_PAGE_SIZE, 0);\n```",
+      "range": {
+        "startLine": 498,
+        "startChar": 8,
+        "endLine": 498,
+        "endChar": 56
+      },
+      "revId": "b04ede8f960e90e0d0fe4df4a120ab463e53a3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40e4821b_d6d9acb6",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-11T19:13:45Z",
+      "side": 1,
+      "message": "I learned from my `MEM_SHARE` changes that we\u0027re trying to flag any VA-to-IPA conversion by using `virt_to_phys` (in case we move to a non-ID mapping) BUT, as that function assumes that VAs can be represented as `NonNull` and as `0x0` is a valid MMIO page, I\u0027d rather not call\n```\nNonNull::new(va_range.start().0 as *mut _).unwrap()\n```\n... At least, could you mention here the fact that we _should_ be calling `virt_to_phys` as `va_range` are VAs (while `mmio_guard_unmap` takes IPAs) but we can\u0027t?",
+      "range": {
+        "startLine": 499,
+        "startChar": 42,
+        "endLine": 499,
+        "endChar": 51
+      },
+      "revId": "b04ede8f960e90e0d0fe4df4a120ab463e53a3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
