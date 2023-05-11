@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "142b62e7_c4d60684",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-05-11T18:02:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3122b125_851740d1",
+      "range": {
+        "startLine": 11,
+        "startChar": 67,
+        "endLine": 11,
+        "endChar": 68
+      },
+      "revId": "90d7818d59e19f8fcb8679bdb651ae1aeb16375d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec32f385_3635e46f",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-05-11T17:14:11Z",
       "side": 1,
       "message": "As discussed offline (and based on the profiling you\u0027ve performed), this should only `MMIO_GUARD_UNSHARE` pages that have previously been shared, which could be achieved by keeping the SW bit set and performing a PTW, unsharing pages that have a valid PTE with `MMIO_LAZY_MAP_FLAG` set.",
+      "range": {
+        "startLine": 330,
+        "startChar": 8,
+        "endLine": 330,
+        "endChar": 9
+      },
+      "revId": "90d7818d59e19f8fcb8679bdb651ae1aeb16375d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "137a96c8_175ea96a",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-05-11T18:02:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec32f385_3635e46f",
       "range": {
         "startLine": 330,
         "startChar": 8,
