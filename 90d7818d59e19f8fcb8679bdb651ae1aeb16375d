@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3122b125_851740d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-11T17:14:11Z",
+      "side": 1,
+      "message": "Please document the gains you\u0027ve measure, in terms of number of HVCs and boot time, as you\u0027ve shared in another comment.",
+      "range": {
+        "startLine": 11,
+        "startChar": 67,
+        "endLine": 11,
+        "endChar": 68
+      },
+      "revId": "90d7818d59e19f8fcb8679bdb651ae1aeb16375d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec32f385_3635e46f",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 18
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-11T17:14:11Z",
+      "side": 1,
+      "message": "As discussed offline (and based on the profiling you\u0027ve performed), this should only `MMIO_GUARD_UNSHARE` pages that have previously been shared, which could be achieved by keeping the SW bit set and performing a PTW, unsharing pages that have a valid PTE with `MMIO_LAZY_MAP_FLAG` set.",
+      "range": {
+        "startLine": 330,
+        "startChar": 8,
+        "endLine": 330,
+        "endChar": 9
+      },
+      "revId": "90d7818d59e19f8fcb8679bdb651ae1aeb16375d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
