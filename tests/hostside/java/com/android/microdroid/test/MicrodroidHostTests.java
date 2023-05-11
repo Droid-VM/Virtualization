@@ -471,7 +471,10 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                 runMicrodroidWithResignedImages(
                         key, keyOverrides, /*isProtected=*/ false, /*updateBootconfigs=*/ true);
         // Device online means that boot must have succeeded.
-        adbConnectToMicrodroid(getDevice(), vmInfo.mCid);
+        vmInfo.mProcess.waitFor(5L, TimeUnit.SECONDS);
+        String consoleLog = getDevice().pullFileContents(CONSOLE_PATH);
+        assertWithMessage("pvmfw should start").that(consoleLog).contains("kuch bhi");
+
         vmInfo.mProcess.destroy();
     }
 
