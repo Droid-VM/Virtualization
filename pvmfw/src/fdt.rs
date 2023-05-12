@@ -726,7 +726,7 @@ pub fn modify_for_next_stage(
         let backup = Vec::from(fdt.as_slice());
         fdt.unpack()?;
         let backup_fdt = Fdt::from_slice(backup.as_slice()).unwrap();
-        if apply_debug_policy(fdt, backup_fdt, debug_policy)? {
+        if apply_debug_policy(fdt, backup_fdt, debug_policy) {
             info!("Debug policy applied.");
         } else {
             // apply_debug_policy restored fdt to backup_fdt so unpack it again.
@@ -783,18 +783,14 @@ fn set_or_clear_chosen_flag(fdt: &mut Fdt, flag: &CStr, value: bool) -> libfdt::
 
 /// Apply the debug policy overlay to the guest DT.
 ///
-/// Returns Ok(true) on success, Ok(false) on recovered failure and Err(_) on corruption of the DT.
-fn apply_debug_policy(
-    fdt: &mut Fdt,
-    backup_fdt: &Fdt,
-    debug_policy: &[u8],
-) -> libfdt::Result<bool> {
+/// Returns true on success, false on failure.
+fn apply_debug_policy(fdt: &mut Fdt, backup_fdt: &Fdt, debug_policy: &[u8]) -> bool {
     let mut debug_policy = Vec::from(debug_policy);
     let overlay = match Fdt::from_mut_slice(debug_policy.as_mut_slice()) {
         Ok(overlay) => overlay,
         Err(e) => {
             warn!("Corrupted debug policy found: {e}. Not applying.");
-            return Ok(false);
+            return false;
         }
     };
 
@@ -804,9 +800,9 @@ fn apply_debug_policy(
         fdt.copy_from_slice(backup_fdt.as_slice())?;
         // A successful restoration is considered success because an invalid debug policy
         // shouldn't DOS the pvmfw
-        Ok(false)
+        false
     } else {
-        Ok(true)
+        true
     }
 }
 
