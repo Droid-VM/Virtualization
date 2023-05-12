@@ -70,6 +70,30 @@
       },
       "revId": "b1836f3b21ad87e52b06c9ed7f58c47ffadab6ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57c64834_37375685",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2023-05-12T14:08:49Z",
+      "side": 1,
+      "message": "I wouldn\u0027t worry too much about it, that function for ex gets vmAdbPort dynamically. The one in MicrodroidHostTestCaseBase takes hardcode values, which could be the reason why see `Address already in use` type of errors.",
+      "parentUuid": "3c73ce20_032b289c",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 22
+      },
+      "revId": "b1836f3b21ad87e52b06c9ed7f58c47ffadab6ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
