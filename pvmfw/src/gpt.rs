@@ -15,6 +15,7 @@
 //! Support for parsing GUID partition tables.
 
 use crate::helpers::ceiling_div;
+use crate::time_this as tt;
 use crate::virtio::pci::VirtIOBlk;
 use core::cmp::min;
 use core::fmt;
@@ -58,7 +59,7 @@ pub struct Partition {
 
 impl Partition {
     pub fn get_by_name(device: VirtIOBlk, name: &str) -> Result<Option<Self>> {
-        Partitions::new(device)?.get_partition_by_name(name)
+        tt!(Partitions::new(device))?.get_partition_by_name(name)
     }
 
     fn new(partitions: Partitions, entry: &Entry) -> Self {

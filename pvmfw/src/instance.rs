@@ -23,6 +23,7 @@ use crate::gpt::Partition;
 use crate::gpt::Partitions;
 use crate::helpers::ceiling_div;
 use crate::rand;
+use crate::time_this as tt;
 use crate::virtio::pci::VirtIOBlkIterator;
 use core::fmt;
 use core::mem::size_of;
@@ -100,12 +101,12 @@ pub fn get_or_generate_instance_salt(
     dice_inputs: &PartialInputs,
     secret: &[u8],
 ) -> Result<(bool, Hidden)> {
-    let mut instance_img = find_instance_img(pci_root)?;
+    let mut instance_img = tt!(find_instance_img(pci_root))?;
 
-    let entry = locate_entry(&mut instance_img)?;
+    let entry = tt!(locate_entry(&mut instance_img))?;
     trace!("Found pvmfw instance.img entry: {entry:?}");
 
-    let key = hkdf_sh512::<32>(secret, /*salt=*/ &[], b"vm-instance");
+    let key = tt!(hkdf_sh512::<32>(secret, /*salt=*/ &[], b"vm-instance"));
     let mut blk = [0; BLK_SIZE];
     match entry {
         PvmfwEntry::Existing { header_index, payload_size } => {
@@ -114,15 +115,15 @@ pub fn get_or_generate_instance_salt(
                 return Err(Error::UnsupportedEntrySize(payload_size));
             }
             let payload_index = header_index + 1;
-            instance_img.read_block(payload_index, &mut blk).map_err(Error::FailedIo)?;
+            tt!(instance_img.read_block(payload_index, &mut blk)).map_err(Error::FailedIo)?;
 
             let payload = &blk[..payload_size];
             let mut entry = [0; size_of::<EntryBody>()];
             let key = key.map_err(Error::FailedOpen)?;
-            let aead = AeadCtx::new_aes_256_gcm_randnonce(&key).map_err(Error::FailedOpen)?;
-            let decrypted = aead.open(&mut entry, payload).map_err(Error::FailedOpen)?;
+            let aead = tt!(AeadCtx::new_aes_256_gcm_randnonce(&key)).map_err(Error::FailedOpen)?;
+            let decrypted = tt!(aead.open(&mut entry, payload)).map_err(Error::FailedOpen)?;
 
-            let body = EntryBody::read_from(decrypted).unwrap();
+            let body = tt!(EntryBody::read_from(decrypted)).unwrap();
             if body.code_hash != dice_inputs.code_hash {
                 Err(Error::RecordedCodeHashMismatch)
             } else if body.auth_hash != dice_inputs.auth_hash {
@@ -134,23 +135,24 @@ pub fn get_or_generate_instance_salt(
             }
         }
         PvmfwEntry::New { header_index } => {
-            let salt = rand::random_array().map_err(Error::FailedSaltGeneration)?;
-            let body = EntryBody::new(dice_inputs, &salt);
+            let salt = tt!(rand::random_array()).map_err(Error::FailedSaltGeneration)?;
+            let body = tt!(EntryBody::new(dice_inputs, &salt));
 
             let key = key.map_err(Error::FailedSeal)?;
-            let aead = AeadCtx::new_aes_256_gcm_randnonce(&key).map_err(Error::FailedSeal)?;
+            let aead = tt!(AeadCtx::new_aes_256_gcm_randnonce(&key)).map_err(Error::FailedSeal)?;
+
             // We currently only support single-blk entries.
             let plaintext = body.as_bytes();
             assert!(plaintext.len() + aead.aead().unwrap().max_overhead() < blk.len());
-            let encrypted = aead.seal(&mut blk, plaintext).map_err(Error::FailedSeal)?;
+            let encrypted = tt!(aead.seal(&mut blk, plaintext)).map_err(Error::FailedSeal)?;
             let payload_size = encrypted.len();
             let payload_index = header_index + 1;
-            instance_img.write_block(payload_index, &blk).map_err(Error::FailedIo)?;
+            tt!(instance_img.write_block(payload_index, &blk)).map_err(Error::FailedIo)?;
 
-            let header = EntryHeader::new(PvmfwEntry::UUID, payload_size);
-            header.write_to_prefix(blk.as_mut_slice()).unwrap();
-            blk[header.as_bytes().len()..].fill(0);
-            instance_img.write_block(header_index, &blk).map_err(Error::FailedIo)?;
+            let header = tt!(EntryHeader::new(PvmfwEntry::UUID, payload_size));
+            tt!(header.write_to_prefix(blk.as_mut_slice())).unwrap();
+            tt!(blk[header.as_bytes().len()..].fill(0));
+            tt!(instance_img.write_block(header_index, &blk)).map_err(Error::FailedIo)?;
 
             Ok((true, salt))
         }
@@ -178,8 +180,8 @@ impl Header {
 }
 
 fn find_instance_img(pci_root: &mut PciRoot) -> Result<Partition> {
-    for device in VirtIOBlkIterator::new(pci_root) {
-        match Partition::get_by_name(device, "vm-instance") {
+    for device in tt!(VirtIOBlkIterator::new(pci_root)) {
+        match tt!(Partition::get_by_name(device, "vm-instance")) {
             Ok(Some(p)) => return Ok(p),
             Ok(None) => {}
             Err(e) => log::warn!("error while reading from disk: {e}"),
@@ -205,17 +207,17 @@ fn locate_entry(partition: &mut Partition) -> Result<PvmfwEntry> {
     let mut blk = [0; BLK_SIZE];
     let mut indices = partition.indices();
     let header_index = indices.next().ok_or(Error::MissingInstanceImageHeader)?;
-    partition.read_block(header_index, &mut blk).map_err(Error::FailedIo)?;
+    tt!(partition.read_block(header_index, &mut blk)).map_err(Error::FailedIo)?;
     // The instance.img header is only used for discovery/validation.
-    let header = Header::read_from_prefix(blk.as_slice()).unwrap();
-    if !header.is_valid() {
+    let header = tt!(Header::read_from_prefix(blk.as_slice())).unwrap();
+    if !tt!(header.is_valid()) {
         return Err(Error::InvalidInstanceImageHeader);
     }
 
     while let Some(header_index) = indices.next() {
-        partition.read_block(header_index, &mut blk).map_err(Error::FailedIo)?;
+        tt!(partition.read_block(header_index, &mut blk)).map_err(Error::FailedIo)?;
 
-        let header = EntryHeader::read_from_prefix(blk.as_slice()).unwrap();
+        let header = tt!(EntryHeader::read_from_prefix(blk.as_slice())).unwrap();
         match (header.uuid(), header.payload_size()) {
             (uuid, _) if uuid.is_nil() => return Ok(PvmfwEntry::New { header_index }),
             (PvmfwEntry::UUID, payload_size) => {

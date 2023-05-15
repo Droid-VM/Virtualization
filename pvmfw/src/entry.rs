@@ -25,6 +25,7 @@ use crate::mmu;
 use crate::rand;
 use crate::time;
 use crate::time::log_recorded_times;
+use crate::time_this as tt;
 use core::arch::asm;
 use core::mem::size_of;
 use core::num::NonZeroUsize;
@@ -80,7 +81,7 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, boot_clk: 
     time::record_time_delta("heap::init()", rust_start_clk, after_heap_init);
     time::record_time_delta("time::init()", after_heap_init, after_time_init);
 
-    match main_wrapper(fdt_address as usize, payload_start as usize, payload_size as usize) {
+    match tt!(main_wrapper(fdt_address as usize, payload_start as usize, payload_size as usize)) {
         Ok((entry, bcc)) => jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc, boot_clk),
         Err(_) => reboot(), // TODO(b/220071963) propagate the reason back to the host.
     }
@@ -204,88 +205,89 @@ fn main_wrapper(
     // - only perform logging once the logger has been initialized
     // - only access non-pvmfw memory once (and while) it has been mapped
 
-    logger::init(LevelFilter::Info).map_err(|_| RebootReason::InternalError)?;
+    tt!(logger::init(LevelFilter::Info)).map_err(|_| RebootReason::InternalError)?;
 
     // Use debug!() to avoid printing to the UART if we failed to configure it as only local
     // builds that have tweaked the logger::init() call will actually attempt to log the message.
 
-    get_hypervisor().mmio_guard_init().map_err(|e| {
+    tt!(get_hypervisor().mmio_guard_init()).map_err(|e| {
         debug!("{e}");
         RebootReason::InternalError
     })?;
 
-    get_hypervisor().mmio_guard_map(console::BASE_ADDRESS).map_err(|e| {
+    tt!(get_hypervisor().mmio_guard_map(console::BASE_ADDRESS)).map_err(|e| {
         debug!("Failed to configure the UART: {e}");
         RebootReason::InternalError
     })?;
 
-    crypto::init();
+    tt!(crypto::init());
 
     // SAFETY - We only get the appended payload from here, once. It is mapped and the linker
     // script prevents it from overlapping with other objects.
-    let appended_data = unsafe { get_appended_data_slice() };
+    let appended_data = unsafe { tt!(get_appended_data_slice()) };
 
     // Up to this point, we were using the built-in static (from .rodata) page tables.
 
-    let mut page_table = mmu::PageTable::from_static_layout().map_err(|e| {
+    let mut page_table = tt!(mmu::PageTable::from_static_layout()).map_err(|e| {
         error!("Failed to set up the dynamic page tables: {e}");
         RebootReason::InternalError
     })?;
 
     const CONSOLE_LEN: usize = 1; // vmbase::uart::Uart only uses one u8 register.
     let uart_range = console::BASE_ADDRESS..(console::BASE_ADDRESS + CONSOLE_LEN);
-    page_table.map_device(&uart_range).map_err(|e| {
+    tt!(page_table.map_device(&uart_range)).map_err(|e| {
         error!("Failed to remap the UART as a dynamic page table entry: {e}");
         RebootReason::InternalError
     })?;
 
     // SAFETY - We only get the appended payload from here, once. It is statically mapped and the
     // linker script prevents it from overlapping with other objects.
-    let mut appended = unsafe { AppendedPayload::new(appended_data) }.ok_or_else(|| {
+    let mut appended = unsafe { tt!(AppendedPayload::new(appended_data)) }.ok_or_else(|| {
         error!("No valid configuration found");
         RebootReason::InvalidConfig
     })?;
 
-    let (bcc_slice, debug_policy) = appended.get_entries();
+    let (bcc_slice, debug_policy) = tt!(appended.get_entries());
 
-    debug!("Activating dynamic page table...");
+    tt!(debug!("Activating dynamic page table..."));
     // SAFETY - page_table duplicates the static mappings for everything that the Rust code is
     // aware of so activating it shouldn't have any visible effect.
-    unsafe { page_table.activate() };
-    debug!("... Success!");
+    unsafe { tt!(page_table.activate()) };
+    tt!(debug!("... Success!"));
 
-    MEMORY.lock().replace(MemoryTracker::new(page_table));
-    let slices = MemorySlices::new(fdt, payload, payload_size, MEMORY.lock().as_mut().unwrap())?;
+    tt!(MEMORY.lock().replace(MemoryTracker::new(page_table)));
+    let slices =
+        tt!(MemorySlices::new(fdt, payload, payload_size, MEMORY.lock().as_mut().unwrap()))?;
 
-    rand::init().map_err(|e| {
+    tt!(rand::init()).map_err(|e| {
         error!("Failed to initialize rand: {e}");
         RebootReason::InternalError
     })?;
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
-    let next_bcc = crate::main(
+    let next_bcc = tt!(crate::main(
         slices.fdt,
         slices.kernel,
         slices.ramdisk,
         bcc_slice,
         debug_policy,
         MEMORY.lock().as_mut().unwrap(),
-    )?;
+    ))?;
 
-    helpers::flushed_zeroize(bcc_slice);
+    tt!(helpers::flushed_zeroize(bcc_slice));
 
-    info!("Expecting a bug making MMIO_GUARD_UNMAP return NOT_SUPPORTED on success");
-    MEMORY.lock().as_mut().unwrap().mmio_unmap_all().map_err(|e| {
+    tt!(info!("Expecting a bug making MMIO_GUARD_UNMAP return NOT_SUPPORTED on success"));
+    tt!(MEMORY.lock().as_mut().unwrap().mmio_unmap_all()).map_err(|e| {
         error!("Failed to unshare MMIO ranges: {e}");
         RebootReason::InternalError
     })?;
     // Call unshare_all_memory here (instead of relying on the dtor) while UART is still mapped.
-    MEMORY.lock().as_mut().unwrap().unshare_all_memory();
-    get_hypervisor().mmio_guard_unmap(console::BASE_ADDRESS).map_err(|e| {
+    tt!(MEMORY.lock().as_mut().unwrap().unshare_all_memory());
+    tt!(get_hypervisor().mmio_guard_unmap(console::BASE_ADDRESS)).map_err(|e| {
         error!("Failed to unshare the UART: {e}");
         RebootReason::InternalError
     })?;
-    MEMORY.lock().take().unwrap();
+    tt!(MEMORY.lock().take().unwrap());
 
     Ok((slices.kernel.as_ptr() as usize, next_bcc))
 }
