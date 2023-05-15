@@ -32,6 +32,7 @@ pub mod logger;
 pub mod memory;
 pub mod power;
 pub mod rand;
+pub mod time;
 pub mod uart;
 pub mod util;
 pub mod virtio;

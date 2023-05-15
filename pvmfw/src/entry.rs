@@ -296,6 +296,14 @@ fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> !
     assert_eq!(stack.start.0 % ASM_STP_ALIGN, 0, "Misaligned stack region.");
     assert_eq!(stack.end.0 % ASM_STP_ALIGN, 0, "Misaligned stack region.");
 
+    if let Some(mmio_guard) = hyp::get_mmio_guard() {
+        mmio_guard.map(vmbase::console::BASE_ADDRESS).unwrap();
+        vmbase::time::log_recorded_times();
+        mmio_guard.unmap(vmbase::console::BASE_ADDRESS).unwrap();
+    } else {
+        vmbase::time::log_recorded_times();
+    }
+
     // Zero all memory that could hold secrets and that can't be safely written to from Rust.
     // Disable the exception vector, caches and page table and then jump to the payload at the
     // given address, passing it the given FDT pointer.
