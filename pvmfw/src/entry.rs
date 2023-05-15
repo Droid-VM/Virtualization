@@ -23,6 +23,8 @@ use crate::helpers::RangeExt as _;
 use crate::memory::{MemoryTracker, MEMORY};
 use crate::mmu;
 use crate::rand;
+use crate::time;
+use crate::time::log_recorded_times;
 use core::arch::asm;
 use core::mem::size_of;
 use core::num::NonZeroUsize;
@@ -66,6 +68,8 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64
 
     // SAFETY - This function should and will only be called once, here.
     unsafe { heap::init() };
+
+    time::init();
 
     match main_wrapper(fdt_address as usize, payload_start as usize, payload_size as usize) {
         Ok((entry, bcc)) => jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc),
@@ -304,6 +308,10 @@ fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> !
     assert_ne!(stack.len(), 0, "stack region is empty.");
     assert_eq!(stack.start % ASM_STP_ALIGN, 0, "Misaligned stack region.");
     assert_eq!(stack.end % ASM_STP_ALIGN, 0, "Misaligned stack region.");
+
+    get_hypervisor().mmio_guard_map(console::BASE_ADDRESS).unwrap();
+    log_recorded_times();
+    get_hypervisor().mmio_guard_unmap(console::BASE_ADDRESS).unwrap();
 
     // Zero all memory that could hold secrets and that can't be safely written to from Rust.
     // Disable the exception vector, caches and page table and then jump to the payload at the

@@ -35,6 +35,7 @@ mod instance;
 mod memory;
 mod mmu;
 mod rand;
+mod time;
 mod virtio;
 
 use crate::bcc::Bcc;
