@@ -53,6 +53,7 @@ use vmbase::heap;
 use vmbase::memory::flush;
 use vmbase::memory::MEMORY;
 use vmbase::rand;
+use vmbase::time_this as tt;
 use vmbase::virtio::pci;
 
 const NEXT_BCC_SIZE: usize = GUEST_PAGE_SIZE;
@@ -64,7 +65,7 @@ fn main(
     current_bcc_handover: &[u8],
     mut debug_policy: Option<&[u8]>,
 ) -> Result<Range<usize>, RebootReason> {
-    info!("pVM firmware");
+    tt!(info!("pVM firmware"));
     debug!("FDT: {:?}", fdt.as_ptr());
     debug!("Signed kernel: {:?} ({:#x} bytes)", signed_kernel.as_ptr(), signed_kernel.len());
     debug!("AVB public key: addr={:?}, size={:#x} ({1})", PUBLIC_KEY.as_ptr(), PUBLIC_KEY.len());
@@ -74,7 +75,7 @@ fn main(
         debug!("Ramdisk: None");
     }
 
-    let bcc_handover = bcc_handover_parse(current_bcc_handover).map_err(|e| {
+    let bcc_handover = tt!(bcc_handover_parse(current_bcc_handover)).map_err(|e| {
         error!("Invalid BCC Handover: {e:?}");
         RebootReason::InvalidBcc
     })?;
@@ -82,7 +83,7 @@ fn main(
 
     let cdi_seal = bcc_handover.cdi_seal();
 
-    let bcc = Bcc::new(bcc_handover.bcc()).map_err(|e| {
+    let bcc = tt!(Bcc::new(bcc_handover.bcc())).map_err(|e| {
         error!("{e}");
         RebootReason::InvalidBcc
     })?;
@@ -95,17 +96,19 @@ fn main(
     }
 
     // Set up PCI bus for VirtIO devices.
-    let pci_info = PciInfo::from_fdt(fdt).map_err(handle_pci_error)?;
+    let pci_info = tt!(PciInfo::from_fdt(fdt)).map_err(handle_pci_error)?;
     debug!("PCI: {:#x?}", pci_info);
-    let mut pci_root = pci::initialize(pci_info, MEMORY.lock().as_mut().unwrap()).map_err(|e| {
-        error!("Failed to initialize PCI: {e}");
-        RebootReason::InternalError
-    })?;
+    let mut pci_root =
+        tt!(pci::initialize(pci_info, MEMORY.lock().as_mut().unwrap())).map_err(|e| {
+            error!("Failed to initialize PCI: {e}");
+            RebootReason::InternalError
+        })?;
 
-    let verified_boot_data = verify_payload(signed_kernel, ramdisk, PUBLIC_KEY).map_err(|e| {
-        error!("Failed to verify the payload: {e}");
-        RebootReason::PayloadVerificationError
-    })?;
+    let verified_boot_data =
+        tt!(verify_payload(signed_kernel, ramdisk, PUBLIC_KEY)).map_err(|e| {
+            error!("Failed to verify the payload: {e}");
+            RebootReason::PayloadVerificationError
+        })?;
     let debuggable = verified_boot_data.debug_level != DebugLevel::None;
     if debuggable {
         info!("Successfully verified a debuggable payload.");
@@ -139,19 +142,20 @@ fn main(
         };
     }
 
-    let next_bcc = heap::aligned_boxed_slice(NEXT_BCC_SIZE, GUEST_PAGE_SIZE).ok_or_else(|| {
-        error!("Failed to allocate the next-stage BCC");
-        RebootReason::InternalError
-    })?;
+    let next_bcc =
+        tt!(heap::aligned_boxed_slice(NEXT_BCC_SIZE, GUEST_PAGE_SIZE)).ok_or_else(|| {
+            error!("Failed to allocate the next-stage BCC");
+            RebootReason::InternalError
+        })?;
     // By leaking the slice, its content will be left behind for the next stage.
-    let next_bcc = Box::leak(next_bcc);
+    let next_bcc = tt!(Box::leak(next_bcc));
 
-    let dice_inputs = PartialInputs::new(&verified_boot_data).map_err(|e| {
+    let dice_inputs = tt!(PartialInputs::new(&verified_boot_data)).map_err(|e| {
         error!("Failed to compute partial DICE inputs: {e:?}");
         RebootReason::InternalError
     })?;
-    let (new_instance, salt) = get_or_generate_instance_salt(&mut pci_root, &dice_inputs, cdi_seal)
-        .map_err(|e| {
+    let (new_instance, salt) =
+        tt!(get_or_generate_instance_salt(&mut pci_root, &dice_inputs, cdi_seal)).map_err(|e| {
             error!("Failed to get instance.img salt: {e}");
             RebootReason::InternalError
         })?;
@@ -165,25 +169,25 @@ fn main(
         // entire chain we were given and taint the CDIs. Note that the resulting CDIs are
         // still deterministically derived from those we received, so will vary iff they do.
         // TODO(b/280405545): Remove this post Android 14.
-        let truncated_bcc_handover = bcc::truncate(bcc_handover).map_err(|e| {
+        let truncated_bcc_handover = tt!(bcc::truncate(bcc_handover)).map_err(|e| {
             error!("{e}");
             RebootReason::InternalError
         })?;
         Cow::Owned(truncated_bcc_handover)
     };
 
-    dice_inputs.write_next_bcc(new_bcc_handover.as_ref(), &salt, next_bcc).map_err(|e| {
+    tt!(dice_inputs.write_next_bcc(new_bcc_handover.as_ref(), &salt, next_bcc)).map_err(|e| {
         error!("Failed to derive next-stage DICE secrets: {e:?}");
         RebootReason::SecretDerivationError
     })?;
-    flush(next_bcc);
+    tt!(flush(next_bcc));
 
     let kaslr_seed = u64::from_ne_bytes(rand::random_array().map_err(|e| {
         error!("Failed to generated guest KASLR seed: {e}");
         RebootReason::InternalError
     })?);
     let strict_boot = true;
-    modify_for_next_stage(
+    tt!(modify_for_next_stage(
         fdt,
         next_bcc,
         new_instance,
@@ -191,13 +195,13 @@ fn main(
         debug_policy,
         debuggable,
         kaslr_seed,
-    )
+    ))
     .map_err(|e| {
         error!("Failed to configure device tree: {e}");
         RebootReason::InternalError
     })?;
 
-    info!("Starting payload...");
+    tt!(info!("Starting payload..."));
 
     let bcc_range = {
         let r = next_bcc.as_ptr_range();

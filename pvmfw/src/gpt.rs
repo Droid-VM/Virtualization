@@ -23,6 +23,7 @@ use static_assertions::const_assert;
 use static_assertions::const_assert_eq;
 use uuid::Uuid;
 use virtio_drivers::device::blk::SECTOR_SIZE;
+use vmbase::time_this as tt;
 use vmbase::util::ceiling_div;
 use vmbase::virtio::{pci, HalImpl};
 use zerocopy::FromBytes;
@@ -61,7 +62,7 @@ pub struct Partition {
 
 impl Partition {
     pub fn get_by_name(device: VirtIOBlk, name: &str) -> Result<Option<Self>> {
-        Partitions::new(device)?.get_partition_by_name(name)
+        tt!(Partitions::new(device))?.get_partition_by_name(name)
     }
 
     fn new(partitions: Partitions, entry: &Entry) -> Self {

@@ -36,6 +36,7 @@ use vmbase::{
     main,
     memory::{min_dcache_line_size, MemoryTracker, MEMORY, SIZE_128KB, SIZE_4KB},
     power::reboot,
+    time_this as tt,
 };
 use zeroize::Zeroize;
 
@@ -68,7 +69,7 @@ pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, arg3: u64)
     // - can't access non-pvmfw memory (only statically-mapped memory)
     // - can't access MMIO (therefore, no logging)
 
-    match main_wrapper(fdt_address as usize, payload_start as usize, payload_size as usize) {
+    match tt!(main_wrapper(fdt_address as usize, payload_start as usize, payload_size as usize)) {
         Ok((entry, bcc)) => jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc, arg3),
         Err(_) => reboot(), // TODO(b/220071963) propagate the reason back to the host.
     }
@@ -201,24 +202,24 @@ fn main_wrapper(
     // internally.
     // SAFETY: Configures the internal state of the library - may be called multiple times.
     unsafe {
-        CRYPTO_library_init();
+        tt!(CRYPTO_library_init());
     }
 
-    let page_table = memory::init_page_table().map_err(|e| {
+    let page_table = tt!(memory::init_page_table().map_err(|e| {
         error!("Failed to set up the dynamic page tables: {e}");
         RebootReason::InternalError
-    })?;
+    }))?;
 
     // SAFETY: We only get the appended payload from here, once. The region was statically mapped,
     // then remapped by `init_page_table()`.
-    let appended_data = unsafe { get_appended_data_slice() };
+    let appended_data = unsafe { tt!(get_appended_data_slice()) };
 
-    let appended = AppendedPayload::new(appended_data).ok_or_else(|| {
+    let appended = tt!(AppendedPayload::new(appended_data)).ok_or_else(|| {
         error!("No valid configuration found");
         RebootReason::InvalidConfig
     })?;
 
-    let config_entries = appended.get_entries();
+    let config_entries = tt!(appended.get_entries());
 
     // Up to this point, we were using the built-in static (from .rodata) page tables.
     MEMORY.lock().replace(MemoryTracker::new(
@@ -237,24 +238,24 @@ fn main_wrapper(
     )?;
 
     // This wrapper allows main() to be blissfully ignorant of platform details.
-    let next_bcc = crate::main(
+    let next_bcc = tt!(crate::main(
         slices.fdt,
         slices.kernel,
         slices.ramdisk,
         config_entries.bcc,
         config_entries.debug_policy,
-    )?;
+    ))?;
 
     // Writable-dirty regions will be flushed when MemoryTracker is dropped.
-    config_entries.bcc.zeroize();
+    tt!(config_entries.bcc.zeroize());
 
-    info!("Expecting a bug making MMIO_GUARD_UNMAP return NOT_SUPPORTED on success");
-    MEMORY.lock().as_mut().unwrap().mmio_unmap_all().map_err(|e| {
+    tt!(info!("Expecting a bug making MMIO_GUARD_UNMAP return NOT_SUPPORTED on success"));
+    tt!(MEMORY.lock().as_mut().unwrap().mmio_unmap_all()).map_err(|e| {
         error!("Failed to unshare MMIO ranges: {e}");
         RebootReason::InternalError
     })?;
     // Call unshare_all_memory here (instead of relying on the dtor) while UART is still mapped.
-    MEMORY.lock().as_mut().unwrap().unshare_all_memory();
+    tt!(MEMORY.lock().as_mut().unwrap().unshare_all_memory());
     if let Some(mmio_guard) = get_mmio_guard() {
         mmio_guard.unmap(console::BASE_ADDRESS).map_err(|e| {
             error!("Failed to unshare the UART: {e}");
