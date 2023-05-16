@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8e4303a_7b715ffc",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-16T13:48:06Z",
+      "side": 1,
+      "message": "Should this actually be `MemoryTrackerError::FailedToUnmap` as that function now panics on invalid PTEs?",
+      "range": {
+        "startLine": 329,
+        "startChar": 49,
+        "endLine": 329,
+        "endChar": 59
+      },
+      "revId": "327166d8d2405b58c73fb11f9b76e0890eca6c02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
