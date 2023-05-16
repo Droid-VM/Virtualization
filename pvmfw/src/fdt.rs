@@ -820,12 +820,10 @@ fn read_common_debug_policy(fdt: &Fdt, debug_feature_name: &CStr) -> libfdt::Res
 }
 
 fn filter_out_dangerous_bootargs(fdt: &mut Fdt, bootargs: &CStr) -> libfdt::Result<()> {
-    let has_crashkernel = read_common_debug_policy(fdt, cstr!("ramdump"))?;
     let has_console = read_common_debug_policy(fdt, cstr!("log"))?;
 
     let accepted: &[(&str, Box<dyn Fn(Option<&str>) -> bool>)] = &[
         ("panic", Box::new(|v| if let Some(v) = v { v == "=-1" } else { false })),
-        ("crashkernel", Box::new(|_| has_crashkernel)),
         ("console", Box::new(|_| has_console)),
     ];
 
