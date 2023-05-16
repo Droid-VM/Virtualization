@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f506098_3eb6d150",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-05-16T13:06:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05d0101c_acd5fd9a",
+      "range": {
+        "startLine": 463,
+        "startChar": 4,
+        "endLine": 464,
+        "endChar": 79
+      },
+      "revId": "b04ede8f960e90e0d0fe4df4a120ab463e53a3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76bc7439_05f80f7a",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-05-11T19:13:45Z",
       "side": 1,
       "message": "Just `.unwrap` or `.expect(\"Unsupported PTE flags set\")` or\n```\nlet Some(flags) \u003d desc.flags() else {\n    panic!(\"Unsupported PTE flags set: {:?}\", desc)\n};\n```\n(which could possibly be wrapped in a function)\n?",
+      "range": {
+        "startLine": 473,
+        "startChar": 29,
+        "endLine": 473,
+        "endChar": 39
+      },
+      "revId": "b04ede8f960e90e0d0fe4df4a120ab463e53a3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "495ed0f2_5314b805",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-05-16T13:06:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76bc7439_05f80f7a",
       "range": {
         "startLine": 473,
         "startChar": 29,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0df765cc_9d5d2deb",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-05-16T13:06:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aeef3f32_29a94f9c",
+      "range": {
+        "startLine": 474,
+        "startChar": 7,
+        "endLine": 474,
+        "endChar": 34
+      },
+      "revId": "b04ede8f960e90e0d0fe4df4a120ab463e53a3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee06295b_88cb28db",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-05-11T19:13:45Z",
       "side": 1,
       "message": "nit: is this\n```suggestion\n        \u0026\u0026 flags.contains(mmu::MMIO_LAZY_MAP_FLAG | Attributes::VALID)\n```\nor even (for a `const` argument)\n```\nflags.contains(mmu::MMIO_LAZY_MAP_FLAG.union(Attributes::VALID))\n```\n?\n\nBut, isn\u0027t this also a case were we want to `assert!(flags.contains(...))` (inside of the `if`) as this function should never be called on leafs that haven\u0027t been tagged, right? Instead, this currently returns `Ok` in that case.",
+      "range": {
+        "startLine": 490,
+        "startChar": 11,
+        "endLine": 491,
+        "endChar": 44
+      },
+      "revId": "b04ede8f960e90e0d0fe4df4a120ab463e53a3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ff77cbc_109e37f1",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-05-16T13:06:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee06295b_88cb28db",
       "range": {
         "startLine": 490,
         "startChar": 11,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c704d9be_80fdbf18",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-05-16T13:06:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e670b162_68d79341",
+      "range": {
+        "startLine": 493,
+        "startChar": 8,
+        "endLine": 497,
+        "endChar": 9
+      },
+      "revId": "b04ede8f960e90e0d0fe4df4a120ab463e53a3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16f185ca_59814178",
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "868856f8_f6e4f1c4",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-05-16T13:06:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16f185ca_59814178",
+      "range": {
+        "startLine": 498,
+        "startChar": 8,
+        "endLine": 498,
+        "endChar": 56
+      },
+      "revId": "b04ede8f960e90e0d0fe4df4a120ab463e53a3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40e4821b_d6d9acb6",
@@ -152,6 +296,30 @@
       "writtenOn": "2023-05-11T19:13:45Z",
       "side": 1,
       "message": "I learned from my `MEM_SHARE` changes that we\u0027re trying to flag any VA-to-IPA conversion by using `virt_to_phys` (in case we move to a non-ID mapping) BUT, as that function assumes that VAs can be represented as `NonNull` and as `0x0` is a valid MMIO page, I\u0027d rather not call\n```\nNonNull::new(va_range.start().0 as *mut _).unwrap()\n```\n... At least, could you mention here the fact that we _should_ be calling `virt_to_phys` as `va_range` are VAs (while `mmio_guard_unmap` takes IPAs) but we can\u0027t?",
+      "range": {
+        "startLine": 499,
+        "startChar": 42,
+        "endLine": 499,
+        "endChar": 51
+      },
+      "revId": "b04ede8f960e90e0d0fe4df4a120ab463e53a3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00306214_236fa3ef",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-05-16T13:06:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40e4821b_d6d9acb6",
       "range": {
         "startLine": 499,
         "startChar": 42,
