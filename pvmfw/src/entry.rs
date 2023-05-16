@@ -63,13 +63,13 @@ main!(start);
 configure_heap!(SIZE_128KB);
 
 /// Entry point for pVM firmware.
-pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64) {
+pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, arg3: u64) {
     // Limitations in this function:
     // - can't access non-pvmfw memory (only statically-mapped memory)
     // - can't access MMIO (therefore, no logging)
 
     match main_wrapper(fdt_address as usize, payload_start as usize, payload_size as usize) {
-        Ok((entry, bcc)) => jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc),
+        Ok((entry, bcc)) => jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc, arg3),
         Err(_) => reboot(), // TODO(b/220071963) propagate the reason back to the host.
     }
 
@@ -268,7 +268,7 @@ fn main_wrapper(
     Ok((slices.kernel.as_ptr() as usize, next_bcc))
 }
 
-fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> ! {
+fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>, boot_clk: u64) -> ! {
     const ASM_STP_ALIGN: usize = size_of::<u64>() * 2;
     const SCTLR_EL1_RES1: u64 = (0b11 << 28) | (0b101 << 20) | (0b1 << 11);
     // Stage 1 instruction access cacheability is unaffected.
@@ -296,6 +296,7 @@ fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> !
     assert_eq!(stack.start.0 % ASM_STP_ALIGN, 0, "Misaligned stack region.");
     assert_eq!(stack.end.0 % ASM_STP_ALIGN, 0, "Misaligned stack region.");
 
+    vmbase::time::record_time_since("TOTAL", boot_clk.try_into().unwrap());
     if let Some(mmio_guard) = hyp::get_mmio_guard() {
         mmio_guard.map(vmbase::console::BASE_ADDRESS).unwrap();
         vmbase::time::log_recorded_times();

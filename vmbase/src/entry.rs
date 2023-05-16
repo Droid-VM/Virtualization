@@ -17,7 +17,7 @@
 use crate::{
     bionic, console, heap, logger,
     power::{reboot, shutdown},
-    rand,
+    rand, time,
 };
 use core::mem::size_of;
 use hyp::{self, get_mmio_guard};
@@ -37,8 +37,11 @@ fn try_console_init() -> Result<(), hyp::Error> {
 /// This is the entry point to the Rust code, called from the binary entry point in `entry.S`.
 #[no_mangle]
 extern "C" fn rust_entry(x0: u64, x1: u64, x2: u64, x3: u64) -> ! {
+    let rust_start_clk = time::now();
+
     // SAFETY: Only called once, from here, and inaccessible to client code.
     unsafe { heap::init() };
+    let after_heap_init = time::now();
 
     if try_console_init().is_err() {
         // Don't panic (or log) here to avoid accessing the console.
@@ -62,6 +65,10 @@ extern "C" fn rust_entry(x0: u64, x1: u64, x2: u64, x3: u64) -> ! {
     }
 
     bionic::__get_tls().stack_guard = u64::from_ne_bytes(stack_guard);
+
+    let boot_clk = x3.try_into().unwrap();
+    time::record_time_delta("entry.S", boot_clk, rust_start_clk);
+    time::record_time_delta("heap::init()", rust_start_clk, after_heap_init);
 
     // Note: If rust_entry ever returned (which it shouldn't by being -> !), the compiler-injected
     // stack guard comparison would detect a mismatch and call __stack_chk_fail.
