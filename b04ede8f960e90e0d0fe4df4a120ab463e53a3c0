@@ -191,6 +191,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c96f2fc2_35fbf6d8",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 19
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-16T13:34:06Z",
+      "side": 1,
+      "message": "Could we also use this:\n```\nif !is_leaf_pte(\u0026flags, level) {\n    return Ok(()); // Skip table PTEs as they aren\u0027t tagged with MMIO_LAZY_MAP_FLAG.\n}\n```\nhere? Only the `mmio_guard_unmap` call would then need to be wrapped in the `if VALID` as the assertions should apply to any received leaf, as indicated in the function name. TBH, I wish the crate gave you a way to express that you only want your callback to be called on leaves at the `.modify_range` call site.\n\nAlso, could you please document why `mmio_guard_unmap_page` could still be called on invalid mappings i.e. that those pages were \"mapped\" but never accessed so never shared and therefore don\u0027t need to be unshared?",
+      "parentUuid": "2ff77cbc_109e37f1",
+      "range": {
+        "startLine": 490,
+        "startChar": 11,
+        "endLine": 491,
+        "endChar": 44
+      },
+      "revId": "b04ede8f960e90e0d0fe4df4a120ab463e53a3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e670b162_68d79341",
         "filename": "pvmfw/src/memory.rs",
         "patchSetId": 19
