@@ -103,7 +103,7 @@ unsafe impl Hal for HalImpl {
         debug!("dma_alloc: pages={}", pages);
         let layout = Layout::from_size_align(pages * PAGE_SIZE, PAGE_SIZE).unwrap();
         // Safe because the layout has a non-zero size.
-        let vaddr = unsafe { alloc(layout) };
+        let vaddr = unsafe { alloc_zeroed(layout) };
         let vaddr =
             if let Some(vaddr) = NonNull::new(vaddr) { vaddr } else { handle_alloc_error(layout) };
         let paddr = virt_to_phys(vaddr);
