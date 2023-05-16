@@ -69,6 +69,29 @@
       },
       "revId": "327166d8d2405b58c73fb11f9b76e0890eca6c02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55689e50_654b0f21",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-16T14:23:47Z",
+      "side": 1,
+      "message": "Actually, why don\u0027t we get the IPA out of `desc`? This will result in the most flexible implementation possible (w.r.t. how memory is mapped).",
+      "range": {
+        "startLine": 506,
+        "startChar": 8,
+        "endLine": 508,
+        "endChar": 62
+      },
+      "revId": "327166d8d2405b58c73fb11f9b76e0890eca6c02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
