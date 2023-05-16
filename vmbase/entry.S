@@ -152,6 +152,7 @@ entry:
 	b.eq 1f
 	reset_or_hang
 1:
+	mrs x3, cntpct_el0
 
 	adrp x30, idmap
 	msr ttbr0_el1, x30

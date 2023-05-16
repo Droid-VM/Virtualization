@@ -14,8 +14,6 @@
 
 //! Support for tracking time.
 
-#![allow(unused)]
-
 use crate::read_sysreg;
 use alloc::vec::Vec;
 use spin::mutex::SpinMutex;
@@ -44,13 +42,20 @@ macro_rules! time_this {
 
 /// log all the recorded times.
 pub fn log_recorded_times() {
+    let total = if let Some((_, _, record)) = RECORDED_TIMES.lock().last() {
+        *record as f64
+    } else {
+        return;
+    };
+
     let freq = read_sysreg!("CNTFRQ_EL0") as f64 / 1_000_000.; // 1/us
     for (shift, tag, record) in RECORDED_TIMES.lock().iter() {
         let align = " ".repeat(*shift * 2);
         let fname = get_recorded_time_fname(tag);
         let ticks = *record as f64;
         let time = ticks / freq; // us
-        log::info!("{time:>7.0} {align}{fname}");
+        let percentage = (ticks / total) * 100.; // %
+        log::info!("{time:>7.0} ({percentage:>7.3}%) {align}{fname}");
     }
 }
 

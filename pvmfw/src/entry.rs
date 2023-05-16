@@ -61,18 +61,27 @@ pub enum RebootReason {
 main!(start);
 
 /// Entry point for pVM firmware.
-pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64) {
+pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, boot_clk: u64) {
     // Limitations in this function:
     // - can't access non-pvmfw memory (only statically-mapped memory)
     // - can't access MMIO (therefore, no logging)
 
+    let rust_start_clk = time::now();
+
     // SAFETY - This function should and will only be called once, here.
     unsafe { heap::init() };
+    let after_heap_init = time::now();
 
     time::init();
+    let after_time_init = time::now();
+
+    let boot_clk = boot_clk.try_into().unwrap();
+    time::record_time_delta("entry.S", boot_clk, rust_start_clk);
+    time::record_time_delta("heap::init()", rust_start_clk, after_heap_init);
+    time::record_time_delta("time::init()", after_heap_init, after_time_init);
 
     match main_wrapper(fdt_address as usize, payload_start as usize, payload_size as usize) {
-        Ok((entry, bcc)) => jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc),
+        Ok((entry, bcc)) => jump_to_payload(fdt_address, entry.try_into().unwrap(), bcc, boot_clk),
         Err(_) => reboot(), // TODO(b/220071963) propagate the reason back to the host.
     }
 
@@ -281,7 +290,7 @@ fn main_wrapper(
     Ok((slices.kernel.as_ptr() as usize, next_bcc))
 }
 
-fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> ! {
+fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>, boot_clk: usize) -> ! {
     const ASM_STP_ALIGN: usize = size_of::<u64>() * 2;
     const SCTLR_EL1_RES1: u64 = (0b11 << 28) | (0b101 << 20) | (0b1 << 11);
     // Stage 1 instruction access cacheability is unaffected.
@@ -309,6 +318,7 @@ fn jump_to_payload(fdt_address: u64, payload_start: u64, bcc: Range<usize>) -> !
     assert_eq!(stack.start % ASM_STP_ALIGN, 0, "Misaligned stack region.");
     assert_eq!(stack.end % ASM_STP_ALIGN, 0, "Misaligned stack region.");
 
+    time::record_time_since("TOTAL", boot_clk);
     get_hypervisor().mmio_guard_map(console::BASE_ADDRESS).unwrap();
     log_recorded_times();
     get_hypervisor().mmio_guard_unmap(console::BASE_ADDRESS).unwrap();
