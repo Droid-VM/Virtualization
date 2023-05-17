@@ -14,6 +14,7 @@ rust_defaults {
         "--default-enum-style rust",
         "--allowlist-function=.*",
         "--allowlist-var=AVB.*",
+        "--allowlist-type=AvbDescriptorTag",
         "--use-core",
         "--raw-line=#![no_std]",
         "--ctypes-prefix=core::ffi",
