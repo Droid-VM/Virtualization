@@ -54,6 +54,7 @@ use libfdt::Fdt;
 use log::{debug, error, info, trace, warn};
 use pvmfw_avb::verify_payload;
 use pvmfw_avb::DebugLevel;
+use pvmfw_avb::VmType;
 use pvmfw_embedded_key::PUBLIC_KEY;
 
 const NEXT_BCC_SIZE: usize = GUEST_PAGE_SIZE;
@@ -105,6 +106,10 @@ fn main(
         error!("Failed to verify the payload: {e}");
         RebootReason::PayloadVerificationError
     })?;
+
+    if verified_boot_data.vm_type == VmType::Service {
+        info!("Service VM detected");
+    }
 
     let next_bcc = heap::aligned_boxed_slice(NEXT_BCC_SIZE, GUEST_PAGE_SIZE).ok_or_else(|| {
         error!("Failed to allocate the next-stage BCC");
