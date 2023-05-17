@@ -103,6 +103,12 @@ fn main(
     debug!("PCI: {:#x?}", pci_info);
     let mut pci_root = tt!(pci::initialise(pci_info, memory))?;
 
+    // Fault these in before `verify_payload` to measure the impact on boot-time.
+    tt!(fault_in_kernel(signed_kernel));
+    if let Some(rd) = ramdisk {
+        tt!(fault_in_ramdisk(rd));
+    }
+
     let verified_boot_data =
         tt!(verify_payload(signed_kernel, ramdisk, PUBLIC_KEY)).map_err(|e| {
             error!("Failed to verify the payload: {e}");
@@ -180,4 +186,23 @@ fn handle_pci_error(e: PciError) -> RebootReason {
         | PciError::RangeAddressMismatch { .. }
         | PciError::NoSuitableRange => RebootReason::InvalidFdt,
     }
+}
+
+fn fault_in(bytes: &[u8]) {
+    // Can't use bytes.as_ptr_range().step_by() due to error:
+    // "doesn't satisfy `core::ops::Range<*const u8>: core::iter::Iterator`"
+    // so use this backwards implementation instead:
+    let ptr_range = bytes.as_ptr_range();
+    let addr_range = (ptr_range.start as usize)..(ptr_range.end as usize);
+    for addr in addr_range.step_by(crate::helpers::PVMFW_PAGE_SIZE) {
+        let _ = unsafe { (addr as *const u8).read_volatile() };
+    }
+}
+
+// Use dedicated names for better readability in the timing report.
+fn fault_in_ramdisk(ramdisk: &[u8]) {
+    fault_in(ramdisk)
+}
+fn fault_in_kernel(kernel: &[u8]) {
+    fault_in(kernel)
 }
