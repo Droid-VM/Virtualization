@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95eb3f7d_199e50c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-17T06:50:46Z",
+      "side": 1,
+      "message": "This change actually drops `crashkernel\u003d` unconditionally.\n\nI think we should revert the condition here [1]. It was a mistake.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/pvmfw/src/fdt.rs;drc\u003d8ec05d17a90d359412fc0a011c93d9ba4d7d0269;l\u003d745",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 4
+      },
+      "revId": "5e81bd96babe149fe74aff4e61ba65f149e0660b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
