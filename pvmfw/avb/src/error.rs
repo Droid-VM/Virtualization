@@ -39,6 +39,8 @@ pub enum AvbSlotVerifyError {
     UnsupportedVersion,
     /// AVB_SLOT_VERIFY_RESULT_ERROR_VERIFICATION
     Verification,
+    /// Invalid vbmeta property
+    InvalidVbmetaProperty,
 }
 
 impl fmt::Display for AvbSlotVerifyError {
@@ -55,6 +57,7 @@ impl fmt::Display for AvbSlotVerifyError {
                 "Some of the metadata requires a newer version of libavb than what is in use."
             ),
             Self::Verification => write!(f, "Data does not verify."),
+            Self::InvalidVbmetaProperty => write!(f, "Invalid vbmeta property"),
         }
     }
 }
@@ -93,7 +96,6 @@ pub(crate) enum AvbIOError {
     #[allow(dead_code)]
     Oom,
     /// AVB_IO_RESULT_ERROR_IO,
-    #[allow(dead_code)]
     Io,
     /// AVB_IO_RESULT_ERROR_NO_SUCH_PARTITION,
     NoSuchPartition,

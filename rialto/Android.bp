@@ -62,6 +62,12 @@ avb_add_hash_footer {
     partition_name: "boot",
     private_key: ":rialto_sign_key",
     salt: rialto_salt,
+    props: [
+        {
+            name: "vm_type",
+            value: "service_vm",
+        },
+    ],
     enabled: false,
     arch: {
         arm64: {
