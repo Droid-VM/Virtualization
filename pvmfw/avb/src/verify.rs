@@ -14,12 +14,26 @@
 
 //! This module handles the pvmfw payload verification.
 
-use crate::descriptor::{Digest, HashDescriptors};
+use crate::descriptor::{Descriptors, Digest};
 use crate::error::AvbSlotVerifyError;
 use crate::ops::{Ops, Payload};
 use crate::partition::PartitionName;
 use avb_bindgen::{AvbPartitionData, AvbVBMetaData};
 use core::ffi::c_char;
+
+/// VM type. A VM can only have one type.
+#[derive(Debug, PartialEq, Eq)]
+pub enum VmType {
+    /// Ordinary VM
+    Ordinary,
+    /// Service VM
+    Service,
+}
+
+impl VmType {
+    const VM_TYPE_KEY: &[u8] = b"vm_type";
+    const SERVICE_VM_VALUE: &[u8] = b"service_vm";
+}
 
 /// Verified data returned when the payload verification succeeds.
 #[derive(Debug, PartialEq, Eq)]
@@ -32,6 +46,8 @@ pub struct VerifiedBootData<'a> {
     pub initrd_digest: Option<Digest>,
     /// Trusted public key.
     pub public_key: &'a [u8],
+    /// VM type.
+    pub vm_type: VmType,
 }
 
 /// This enum corresponds to the `DebugLevel` in `VirtualMachineConfig`.
@@ -63,9 +79,9 @@ fn verify_vbmeta_is_from_kernel_partition(
 }
 
 fn verify_vbmeta_has_only_one_hash_descriptor(
-    hash_descriptors: &HashDescriptors,
+    descriptors: &Descriptors,
 ) -> Result<(), AvbSlotVerifyError> {
-    if hash_descriptors.len() == 1 {
+    if descriptors.num_hash_descriptor() == 1 {
         Ok(())
     } else {
         Err(AvbSlotVerifyError::InvalidMetadata)
@@ -95,6 +111,20 @@ fn verify_loaded_partition_has_expected_length(
     }
 }
 
+/// Verifies that the vbmeta contains at most one property descriptor and it indicates the vm type is
+/// service VM.
+fn verify_property_and_get_vm_type(
+    descriptors: &Descriptors,
+) -> Result<VmType, AvbSlotVerifyError> {
+    if descriptors.num_property_descriptor() == 0 {
+        return Ok(VmType::Ordinary);
+    }
+    match descriptors.find_property_value(VmType::VM_TYPE_KEY) {
+        Some(VmType::SERVICE_VM_VALUE) => Ok(VmType::Service),
+        _ => Err(AvbSlotVerifyError::InvalidVbmetaProperty),
+    }
+}
+
 /// Verifies the payload (signed kernel + initrd) against the trusted public key.
 pub fn verify_payload<'a>(
     kernel: &[u8],
@@ -112,16 +142,18 @@ pub fn verify_payload<'a>(
     // SAFETY: It is safe because the `vbmeta_image` is collected from `AvbSlotVerifyData`,
     // which is returned by `avb_slot_verify()` when the verification succeeds. It is
     // guaranteed by libavb to be non-null and to point to a valid VBMeta structure.
-    let hash_descriptors = unsafe { HashDescriptors::from_vbmeta(vbmeta_image)? };
-    let kernel_descriptor = hash_descriptors.find(PartitionName::Kernel)?;
+    let descriptors = unsafe { Descriptors::from_vbmeta(vbmeta_image)? };
+    let vm_type = verify_property_and_get_vm_type(&descriptors)?;
+    let kernel_descriptor = descriptors.find_hash_descriptor(PartitionName::Kernel)?;
 
     if initrd.is_none() {
-        verify_vbmeta_has_only_one_hash_descriptor(&hash_descriptors)?;
+        verify_vbmeta_has_only_one_hash_descriptor(&descriptors)?;
         return Ok(VerifiedBootData {
             debug_level: DebugLevel::None,
             kernel_digest: kernel_descriptor.digest,
             initrd_digest: None,
             public_key: trusted_public_key,
+            vm_type,
         });
     }
 
@@ -140,11 +172,12 @@ pub fn verify_payload<'a>(
         initrd_partition_name,
         initrd.len(),
     )?;
-    let initrd_descriptor = hash_descriptors.find(initrd_partition_name)?;
+    let initrd_descriptor = descriptors.find_hash_descriptor(initrd_partition_name)?;
     Ok(VerifiedBootData {
         debug_level,
         kernel_digest: kernel_descriptor.digest,
         initrd_digest: Some(initrd_descriptor.digest),
         public_key: trusted_public_key,
+        vm_type,
     })
 }

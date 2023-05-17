@@ -22,7 +22,7 @@ use avb_bindgen::{
     AvbVBMetaImageHeader,
 };
 use openssl::sha;
-use pvmfw_avb::{verify_payload, AvbSlotVerifyError, DebugLevel, Digest, VerifiedBootData};
+use pvmfw_avb::{verify_payload, AvbSlotVerifyError, DebugLevel, Digest, VerifiedBootData, VmType};
 use std::{
     fs,
     mem::{size_of, transmute, MaybeUninit},
@@ -116,6 +116,7 @@ pub fn assert_latest_payload_verification_passes(
         kernel_digest,
         initrd_digest,
         public_key: &public_key,
+        vm_type: VmType::Ordinary,
     };
     assert_eq!(expected_boot_data, verified_boot_data);
 
