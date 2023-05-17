@@ -16,6 +16,7 @@
 
 use super::common::get_valid_descriptor;
 use super::hash::HashDescriptor;
+use super::property::PropertyDescriptor;
 use crate::error::{AvbIOError, AvbSlotVerifyError};
 use crate::partition::PartitionName;
 use crate::utils::{self, is_not_null, to_nonnull, to_usize, usize_checked_add};
@@ -31,6 +32,7 @@ use tinyvec::ArrayVec;
 #[derive(Default)]
 pub(crate) struct Descriptors<'a> {
     hash_descriptors: ArrayVec<[HashDescriptor<'a>; PartitionName::NUM_OF_KNOWN_PARTITIONS]>,
+    prop_descriptor: Option<PropertyDescriptor<'a>>,
 }
 
 impl<'a> Descriptors<'a> {
@@ -77,9 +79,18 @@ impl<'a> Descriptors<'a> {
             .ok_or(AvbSlotVerifyError::InvalidMetadata)
     }
 
+    pub(crate) fn num_property_descriptor(&self) -> usize {
+        self.prop_descriptor.as_ref().map_or(0, |_| 1)
+    }
+
+    pub(crate) fn find_property_value(&self, key: &[u8]) -> Option<&[u8]> {
+        self.prop_descriptor.as_ref().filter(|desc| desc.key == key).map(|desc| desc.value)
+    }
+
     fn push(&mut self, descriptor: Descriptor<'a>) -> utils::Result<()> {
         match descriptor {
             Descriptor::Hash(d) => self.push_hash_descriptor(d),
+            Descriptor::Property(d) => self.push_property_descriptor(d),
         }
     }
 
@@ -88,6 +99,17 @@ impl<'a> Descriptors<'a> {
             return Err(AvbIOError::Io);
         }
         self.hash_descriptors.push(descriptor);
+        Ok(())
+    }
+
+    fn push_property_descriptor(
+        &mut self,
+        descriptor: PropertyDescriptor<'a>,
+    ) -> utils::Result<()> {
+        if self.prop_descriptor.is_some() {
+            return Err(AvbIOError::Io);
+        }
+        self.prop_descriptor.replace(descriptor);
         Ok(())
     }
 }
@@ -127,6 +149,7 @@ unsafe fn try_check_and_save_descriptor(
 
 enum Descriptor<'a> {
     Hash(HashDescriptor<'a>),
+    Property(PropertyDescriptor<'a>),
 }
 
 impl<'a> Descriptor<'a> {
@@ -152,6 +175,13 @@ impl<'a> Descriptor<'a> {
                 // pointer pointing to a valid struct.
                 let descriptor = unsafe { HashDescriptor::from_descriptor_ptr(descriptor, data)? };
                 Ok(Self::Hash(descriptor))
+            }
+            Ok(AvbDescriptorTag::AVB_DESCRIPTOR_TAG_PROPERTY) => {
+                // SAFETY: It is safe because the caller ensures that `descriptor` is a non-null
+                // pointer pointing to a valid struct.
+                let descriptor =
+                    unsafe { PropertyDescriptor::from_descriptor_ptr(descriptor, data)? };
+                Ok(Self::Property(descriptor))
             }
             _ => Err(AvbIOError::NoSuchValue),
         }

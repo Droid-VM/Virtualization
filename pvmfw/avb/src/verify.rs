@@ -32,6 +32,8 @@ pub struct VerifiedBootData<'a> {
     pub initrd_digest: Option<Digest>,
     /// Trusted public key.
     pub public_key: &'a [u8],
+    /// Capability.
+    pub capability: Option<Capability>,
 }
 
 /// This enum corresponds to the `DebugLevel` in `VirtualMachineConfig`.
@@ -41,6 +43,25 @@ pub enum DebugLevel {
     None,
     /// Fully debuggable.
     Full,
+}
+
+/// VM Capability.
+#[derive(Debug, PartialEq, Eq)]
+pub enum Capability {
+    /// Service VM.
+    ServiceVm,
+}
+
+impl Capability {
+    const VM_TYPE_KEY: &[u8] = b"com.android.build.vmtype.security_patch";
+    const VM_TYPE_SERVICE: &[u8] = b"service";
+
+    fn from_key_value(key: &[u8], value: &[u8]) -> Result<Self, AvbSlotVerifyError> {
+        match (key, value) {
+            (Self::VM_TYPE_KEY, Self::VM_TYPE_SERVICE) => Ok(Self::ServiceVm),
+            _ => Err(AvbSlotVerifyError::UnknownVbmetaProperty),
+        }
+    }
 }
 
 fn verify_only_one_vbmeta_exists(
@@ -95,6 +116,23 @@ fn verify_loaded_partition_has_expected_length(
     }
 }
 
+/// Verifies that the vbmeta contains at most one property descriptor and it indicates the
+/// vm type is service VM.
+fn verify_property_and_get_capability(
+    descriptors: &Descriptors,
+) -> Result<Option<Capability>, AvbSlotVerifyError> {
+    match descriptors.num_property_descriptor() {
+        0 => Ok(None),
+        1 => {
+            let value = descriptors
+                .find_property_value(Capability::VM_TYPE_KEY)
+                .ok_or(AvbSlotVerifyError::UnknownVbmetaProperty)?;
+            Ok(Some(Capability::from_key_value(Capability::VM_TYPE_KEY, value)?))
+        }
+        _ => Err(AvbSlotVerifyError::InvalidMetadata),
+    }
+}
+
 /// Verifies the payload (signed kernel + initrd) against the trusted public key.
 pub fn verify_payload<'a>(
     kernel: &[u8],
@@ -113,6 +151,7 @@ pub fn verify_payload<'a>(
     // which is returned by `avb_slot_verify()` when the verification succeeds. It is
     // guaranteed by libavb to be non-null and to point to a valid VBMeta structure.
     let descriptors = unsafe { Descriptors::from_vbmeta(vbmeta_image)? };
+    let capability = verify_property_and_get_capability(&descriptors)?;
     let kernel_descriptor = descriptors.find_hash_descriptor(PartitionName::Kernel)?;
 
     if initrd.is_none() {
@@ -122,6 +161,7 @@ pub fn verify_payload<'a>(
             kernel_digest: *kernel_descriptor.digest,
             initrd_digest: None,
             public_key: trusted_public_key,
+            capability,
         });
     }
 
@@ -146,5 +186,6 @@ pub fn verify_payload<'a>(
         kernel_digest: *kernel_descriptor.digest,
         initrd_digest: Some(*initrd_descriptor.digest),
         public_key: trusted_public_key,
+        capability,
     })
 }

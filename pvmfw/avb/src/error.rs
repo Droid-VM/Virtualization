@@ -39,6 +39,8 @@ pub enum AvbSlotVerifyError {
     UnsupportedVersion,
     /// AVB_SLOT_VERIFY_RESULT_ERROR_VERIFICATION
     Verification,
+    /// Unknown vbmeta property
+    UnknownVbmetaProperty,
 }
 
 impl fmt::Display for AvbSlotVerifyError {
@@ -55,6 +57,7 @@ impl fmt::Display for AvbSlotVerifyError {
                 "Some of the metadata requires a newer version of libavb than what is in use."
             ),
             Self::Verification => write!(f, "Data does not verify."),
+            Self::UnknownVbmetaProperty => write!(f, "Unknown vbmeta property"),
         }
     }
 }
