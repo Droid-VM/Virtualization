@@ -25,4 +25,4 @@ mod verify;
 
 pub use descriptor::Digest;
 pub use error::AvbSlotVerifyError;
-pub use verify::{verify_payload, DebugLevel, VerifiedBootData};
+pub use verify::{verify_payload, DebugLevel, VerifiedBootData, VmType};
