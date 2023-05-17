@@ -104,11 +104,18 @@ fn main(
             RebootReason::InternalError
         })?;
 
+    // Fault these in before `verify_payload` to measure the impact on boot-time.
+    tt!(fault_in_kernel(signed_kernel));
+    if let Some(rd) = ramdisk {
+        tt!(fault_in_ramdisk(rd));
+    }
+
     let verified_boot_data =
         tt!(verify_payload(signed_kernel, ramdisk, PUBLIC_KEY)).map_err(|e| {
             error!("Failed to verify the payload: {e}");
             RebootReason::PayloadVerificationError
         })?;
+
     let debuggable = verified_boot_data.debug_level != DebugLevel::None;
     if debuggable {
         info!("Successfully verified a debuggable payload.");
@@ -227,4 +234,24 @@ fn handle_pci_error(e: PciError) -> RebootReason {
         | PciError::RangeAddressMismatch { .. }
         | PciError::NoSuitableRange => RebootReason::InvalidFdt,
     }
+}
+
+fn fault_in(bytes: &[u8]) {
+    let ptr_range = bytes.as_ptr_range();
+
+    let mut ptr = ptr_range.start;
+    while ptr_range.contains(&ptr) {
+        // SAFETY: ...
+        let _ = unsafe { ptr.read_volatile() };
+        // SAFETY: ...
+        ptr = unsafe { ptr.byte_add(crate::helpers::PVMFW_PAGE_SIZE) };
+    }
+}
+
+// Use dedicated names for better readability in the timing report.
+fn fault_in_ramdisk(ramdisk: &[u8]) {
+    fault_in(ramdisk)
+}
+fn fault_in_kernel(kernel: &[u8]) {
+    fault_in(kernel)
 }
