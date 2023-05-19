@@ -16,6 +16,24 @@
       "message": "Why the `union` method rather than the `|` operator here?",
       "revId": "50559dfbc0e17bb49d7e6ffe4d4fbe1cfa81722f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8c9a93d_ced258bf",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-05-19T17:47:39Z",
+      "side": 1,
+      "message": "Bitwise or cannot be used in const expressions with `Attributes`, so `const PROT_DEV: Attributes \u003d Attributes::DEVICE_NGNRE | Attributes::EXECUTE_NEVER | Attributes::VALID;` doesn\u0027t compile. \n`Attributes::union` is a `const fn` and it\u0027s a bit nicer.",
+      "parentUuid": "cf549bd3_52fb7836",
+      "revId": "50559dfbc0e17bb49d7e6ffe4d4fbe1cfa81722f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
