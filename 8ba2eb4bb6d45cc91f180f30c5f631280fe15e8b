@@ -16,6 +16,24 @@
       "message": "Hi Colin, is it possible to get the clang version used here from soong?",
       "revId": "8ba2eb4bb6d45cc91f180f30c5f631280fe15e8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "749c841b_5824a0b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-05-19T20:51:23Z",
+      "side": 1,
+      "message": "We could pass it as an environment variable to cc_genrule modules, but that seems like it would cause even more support problems for you.  Or you could add a filegroup in prebuilts/clang/host/linux-x86 to export the path to clang.  None of this will work when extra sandboxing is enabled in Soong or in Bazel though.\n\nCould this be done with a cc_object module with \"-E\" in cflags, similar to https://cs.android.com/android/platform/superproject/+/master:art/tools/cpp-define-generator/Android.bp;l\u003d39;drc\u003de10abe7d84ed44d61401d24073f01d1c7777e17c?",
+      "parentUuid": "07549232_adf886e6",
+      "revId": "8ba2eb4bb6d45cc91f180f30c5f631280fe15e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
