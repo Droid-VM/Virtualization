@@ -48,15 +48,18 @@ impl<'a> Descriptors<'a> {
         let mut descriptors = Self::default();
         // SAFETY: It is safe as the raw pointer `vbmeta.vbmeta_data` is a non-null pointer and
         // points to a valid VBMeta structure.
-        if !unsafe {
+        let output = unsafe {
             avb_descriptor_foreach(
                 vbmeta.vbmeta_data,
                 vbmeta.vbmeta_size,
                 Some(check_and_save_descriptor),
-                &mut descriptors as *mut _ as *mut c_void,
+                &mut result as *mut _ as *mut c_void,
             )
-        } {
-            return Err(AvbSlotVerifyError::InvalidMetadata);
+        };
+        if output == result.is_ok() {
+            result.map_err(AvbSlotVerifyError::InvalidDescriptors)
+        } else {
+            Err(AvbSlotVerifyError::InvalidMetadata)
         }
         Ok(descriptors)
     }
@@ -96,29 +99,40 @@ impl<'a> Descriptors<'a> {
 ///
 /// Behavior is undefined if any of the following conditions are violated:
 /// * The `descriptor` pointer must be non-null and points to a valid `AvbDescriptor` struct.
-/// * The `user_data` pointer must be non-null and points to a valid `Descriptors` struct.
+/// * The `user_data` pointer must be non-null, points to a valid `Result<Descriptors, AvbIOError>`
+///  struct and is initialized.
 unsafe extern "C" fn check_and_save_descriptor(
     descriptor: *const AvbDescriptor,
     user_data: *mut c_void,
 ) -> bool {
-    // SAFETY: It is safe because the caller must ensure that the `descriptor` pointer and
-    // the `user_data` are non-null and valid.
-    unsafe { try_check_and_save_descriptor(descriptor, user_data).is_ok() }
+    let result = user_data as *mut Result<Descriptors, AvbIOError>;
+    // SAFETY: It is safe because the caller ensures that `user_data` points to a valid struct and
+    // is initialized.
+    let Some(Ok(descriptors)) = (unsafe { result.as_mut() }) else {
+        return false;
+    };
+    // SAFETY: It is safe because the caller must ensure that the `descriptor` pointer is non-null
+    // and valid.
+    if let Err(e) = unsafe { try_check_and_save_descriptor(descriptor, descriptors) } {
+        // SAFETY: It is safe because the caller must ensure that `user_data` points to a valid
+        // `Result<Descriptors, AvbIOError>` struct.
+        unsafe {
+            *result = Err(e);
+        }
+        false
+    } else {
+        true
+    }
 }
 
 /// # Safety
 ///
 /// Behavior is undefined if any of the following conditions are violated:
 /// * The `descriptor` pointer must be non-null and points to a valid `AvbDescriptor` struct.
-/// * The `user_data` pointer must be non-null and points to a valid `Descriptors` struct.
 unsafe fn try_check_and_save_descriptor(
     descriptor: *const AvbDescriptor,
-    user_data: *mut c_void,
+    descriptors: &mut Descriptors,
 ) -> utils::Result<()> {
-    let mut descriptors = to_nonnull(user_data as *mut Descriptors)?;
-    // SAFETY: It is safe because the caller ensures that `user_data` is a non-null pointer
-    // pointing to a valid struct.
-    let descriptors = unsafe { descriptors.as_mut() };
     // SAFETY: It is safe because the caller ensures that `descriptor` is a non-null pointer
     // pointing to a valid struct.
     let descriptor = unsafe { Descriptor::from_descriptor_ptr(descriptor)? };
