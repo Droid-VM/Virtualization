@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3deef693_95966bd0",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-22T15:48:22Z",
+      "side": 1,
+      "message": "This is defining an ABI between pvmfw and the pVM owner and will ideally need to be forward and backward compatible so let\u0027s try to make it as flexible (yet simple) as possible.\n\nCould the `VmType` instead be a set of permissions (think Linux capabilities) so that pvmfw doesn\u0027t need to track what each VM type can/can\u0027t do? For example, once/if we start supporting multiple keys (e.g. 3P guest OSes), this will allow cleanly filtering/validating permissions based on the pVM owner (pubkey), orthogonal from the pVM use-case.\n\n(out-of-scope but such an ABI could then be extended to support features that aren\u0027t even related with RKP e.g. telling pvmfw to keep the MMU on)",
+      "parentUuid": "4fad7119_11bae426",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 12
+      },
+      "revId": "eebe294aaebc63aff20d1b7c3a48485fd41c038c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc1935c9_dc3e3ab5",
         "filename": "rialto/Android.bp",
         "patchSetId": 5
