@@ -16,6 +16,29 @@
       "message": "Hi David, could you also take a look?",
       "revId": "7998551baaf2d8498b3b03346aa1828dff808d4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d407ecfa_e13f0e79",
+        "filename": "pvmfw/avb/src/descriptor/mod.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-22T14:45:33Z",
+      "side": 1,
+      "message": "Tpe `Descriptors` in module `descriptor`, and type `Descriptors` in module `descriptor::descriptors` are confusing to me :(",
+      "range": {
+        "startLine": 39,
+        "startChar": 5,
+        "endLine": 39,
+        "endChar": 16
+      },
+      "revId": "7998551baaf2d8498b3b03346aa1828dff808d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
