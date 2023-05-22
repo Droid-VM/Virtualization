@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51f8fdee_5b84d655",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-05-22T18:04:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8e4303a_7b715ffc",
+      "range": {
+        "startLine": 329,
+        "startChar": 49,
+        "endLine": 329,
+        "endChar": 59
+      },
+      "revId": "327166d8d2405b58c73fb11f9b76e0890eca6c02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "305cf9f5_d70b3d6b",
@@ -71,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f669631_f3bd23f6",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-05-22T18:04:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c4dab9e_a5a32396",
+      "range": {
+        "startLine": 383,
+        "startChar": 36,
+        "endLine": 383,
+        "endChar": 37
+      },
+      "revId": "327166d8d2405b58c73fb11f9b76e0890eca6c02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55689e50_654b0f21",
@@ -84,6 +132,30 @@
       "writtenOn": "2023-05-16T14:23:47Z",
       "side": 1,
       "message": "Actually, why don\u0027t we get the IPA out of `desc`? This will result in the most flexible implementation possible (w.r.t. how memory is mapped).",
+      "range": {
+        "startLine": 506,
+        "startChar": 8,
+        "endLine": 508,
+        "endChar": 62
+      },
+      "revId": "327166d8d2405b58c73fb11f9b76e0890eca6c02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b6cb26c_9ec90e4a",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-05-22T18:04:18Z",
+      "side": 1,
+      "message": "`Descriptor::output_address` is private, unfortunately.",
+      "parentUuid": "55689e50_654b0f21",
       "range": {
         "startLine": 506,
         "startChar": 8,
