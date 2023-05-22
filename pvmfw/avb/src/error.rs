@@ -93,6 +93,7 @@ pub(crate) enum AvbIOError {
     #[allow(dead_code)]
     Oom,
     /// AVB_IO_RESULT_ERROR_IO,
+    #[allow(dead_code)]
     Io,
     /// AVB_IO_RESULT_ERROR_NO_SUCH_PARTITION,
     NoSuchPartition,
