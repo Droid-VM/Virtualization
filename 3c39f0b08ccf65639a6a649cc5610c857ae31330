@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b41d145_ca606d70",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-23T12:57:31Z",
+      "side": 1,
+      "message": "The back-and-forth between `MemoryTracker` and `page_table` here is confusing; WDYT of moving `page_table.activate` inside of `MemoryTracker::new` and call `track_dirty_pages` (or `set_dbm_enabled(true)` as there\u0027s no need for a generic name if the API is private) from there?",
+      "range": {
+        "startLine": 237,
+        "startChar": 4,
+        "endLine": 237,
+        "endChar": 17
+      },
+      "revId": "3c39f0b08ccf65639a6a649cc5610c857ae31330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c676e58_9d2b09d4",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-23T12:57:31Z",
+      "side": 1,
+      "message": "Explicitly dropping the object is much better, thanks!\n\nCould you `use core::mem::drop`?",
+      "range": {
+        "startLine": 272,
+        "startChar": 4,
+        "endLine": 272,
+        "endChar": 42
+      },
+      "revId": "3c39f0b08ccf65639a6a649cc5610c857ae31330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba6f2e70_54fe39be",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-23T12:57:31Z",
+      "side": 1,
+      "message": "Would it make sense to call this before we flush?",
+      "range": {
+        "startLine": 444,
+        "startChar": 8,
+        "endLine": 444,
+        "endChar": 37
+      },
+      "revId": "3c39f0b08ccf65639a6a649cc5610c857ae31330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
