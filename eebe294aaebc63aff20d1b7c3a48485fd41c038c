@@ -146,6 +146,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bcace970_1532282f",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-23T13:41:06Z",
+      "side": 1,
+      "message": "Capabilities can be represented through the VBMeta properties in 2 ways:\n\n1. Have one property per capabilitiy e.g. `com.android.virt.cap.rpmb`, `com.android.virt.cap.mmu_on`, ... which is easy to parse but slightly larger in image size (negligible) and might not be consistent with libavb (do they use properties without values?)\n\n1. Have all of them in a single property:\n\n    - as a human-readable string (requires more parsing but more in-line with what seems to be done in existing VBMeta properties) e.g. `rpmb:mmu_on`\n    - as a bitfield represented as an unsigned value, which is the easiest to parse and as compact as possible, seems to be consistent with libavb given the existence of [`avb_property_lookup_uint64`](http://cs/android-internal/external/avb/libavb/avb_property_descriptor.h;l\u003d49;rcl\u003deeae447b7baf32568765801cb304d72dadfcd739), but isn\u0027t very user-friendly to `avbtool info_image` and friends.\n\n@jiyong@google.com, which one do we prefer?",
+      "parentUuid": "7d55cff0_23766ceb",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 12
+      },
+      "revId": "eebe294aaebc63aff20d1b7c3a48485fd41c038c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc1935c9_dc3e3ab5",
         "filename": "rialto/Android.bp",
         "patchSetId": 5
@@ -204,6 +228,30 @@
       "writtenOn": "2023-05-23T13:32:30Z",
       "side": 1,
       "message": "Which name are you suggesting?",
+      "parentUuid": "8c851c38_0bdb02f5",
+      "range": {
+        "startLine": 67,
+        "startChar": 19,
+        "endLine": 67,
+        "endChar": 26
+      },
+      "revId": "eebe294aaebc63aff20d1b7c3a48485fd41c038c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71f84db7_ca41ba7e",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-23T13:41:06Z",
+      "side": 1,
+      "message": "I am not aware of any guidelines regarding naming these properties (please share if you manage to find some documentation!) but I\u0027d personally avoid re-using the `com.android.build` namespace and instead introduce our own (\"`com.android.virt`\"?) and would also re-using the property name \"`security_patch`\" as it has a very specific meaning under `com.android.build.$PART` (i.e. the date of the latest applied security patch) which wouldn\u0027t match what you want our new property to represent.\n\n@jiyong@google.com, our system properties use the namespace `hypervisor` (see [`CUSTOM_PVMFW_IMG_PATH_PROP`](http://cs/android/packages/modules/Virtualization/tests/hostside/java/com/android/microdroid/test/DebugPolicyHostTests.java;l\u003d70;rcl\u003d1b72e263c246e9bc991a2dd393622c59a9260c59), `CUSTOM_DEBUG_POLICY_PATH_PROP`, and [`KEY_METRICS_TAG`](http://cs/android/packages/modules/Virtualization/tests/helper/src/java/com/android/microdroid/test/common/DeviceProperties.java;l\u003d31;rcl\u003d1b72e263c246e9bc991a2dd393622c59a9260c59)), would that be preferred over \"`virt`\"?",
       "parentUuid": "8c851c38_0bdb02f5",
       "range": {
         "startLine": 67,
