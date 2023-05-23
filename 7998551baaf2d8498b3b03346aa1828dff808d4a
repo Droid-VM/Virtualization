@@ -39,6 +39,30 @@
       },
       "revId": "7998551baaf2d8498b3b03346aa1828dff808d4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90971bd6_e78f8a51",
+        "filename": "pvmfw/avb/src/descriptor/mod.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-05-23T07:33:58Z",
+      "side": 1,
+      "message": "What about organising like this in `src/descriptor`?\n\n- collection.rs: contains Descriptors struct and `enum Descriptor`;\n- hash.rs: contains `HashDescriptor`, `HashDescriptorHeader` etc;\n- property.rs: contains `PropertyDescriptor`",
+      "parentUuid": "d407ecfa_e13f0e79",
+      "range": {
+        "startLine": 39,
+        "startChar": 5,
+        "endLine": 39,
+        "endChar": 16
+      },
+      "revId": "7998551baaf2d8498b3b03346aa1828dff808d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
