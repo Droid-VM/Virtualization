@@ -170,6 +170,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3a7f478_8410cd53",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-05-23T15:26:12Z",
+      "side": 1,
+      "message": "Option 1 is consistent with the way properties are currently set up in [core](http://cs/android-internal/build/make/core/Makefile;l\u003d4294;rcl\u003dd29e822310b591a9f46d4a0af4f57148ec971001) where each property takes a single value and it suits our current use case. I don\u0027t see anyone set up the property without value, I don\u0027t think it bothers so much to specify the vm_type here.\n\nIn the future, if someone wants to set up a group of similar properties, we can consider option 2. For example, if someone wants to pass a sets of public keys, they can add a property like\n```\n`com.android.virt.cap.pubkeys: \"key1|key2|...\"\n```",
+      "parentUuid": "bcace970_1532282f",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 12
+      },
+      "revId": "eebe294aaebc63aff20d1b7c3a48485fd41c038c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc1935c9_dc3e3ab5",
         "filename": "rialto/Android.bp",
         "patchSetId": 5
@@ -277,6 +301,30 @@
       "side": 1,
       "message": "Or `com.android.guest.$PROP`?",
       "parentUuid": "71f84db7_ca41ba7e",
+      "range": {
+        "startLine": 67,
+        "startChar": 19,
+        "endLine": 67,
+        "endChar": 26
+      },
+      "revId": "eebe294aaebc63aff20d1b7c3a48485fd41c038c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ef37e2c_298ff64a",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-05-23T15:26:12Z",
+      "side": 1,
+      "message": "I changed this to `com.android.virt.cap.vmtype`.",
+      "parentUuid": "ff7b6a32_ab5d54b9",
       "range": {
         "startLine": 67,
         "startChar": 19,
