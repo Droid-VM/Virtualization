@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d564843_4d4489c8",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-23T12:59:49Z",
+      "side": 1,
+      "message": "This can only return 0 or 1. Shouldn\u0027t it be has_property_descriptor() -\u003e bool?",
+      "range": {
+        "startLine": 82,
+        "startChar": 18,
+        "endLine": 82,
+        "endChar": 57
+      },
+      "revId": "db6117ac04b84a1cc673459839c26a19513f4ab2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0637ab40_0ec8e763",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-23T12:59:49Z",
+      "side": 1,
+      "message": "I thought Pierre\u0027s ask was to make this a collection of capabilities.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 39
+      },
+      "revId": "db6117ac04b84a1cc673459839c26a19513f4ab2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
