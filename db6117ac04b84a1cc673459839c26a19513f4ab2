@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cb48abc_b907e93f",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-05-23T13:23:31Z",
+      "side": 1,
+      "message": "Done. Actually I wanted to have a similar API for property descriptor as for hash descriptor and keep the fact that property descriptor is an `Option` as an implementation detail for the descriptors class.",
+      "parentUuid": "3d564843_4d4489c8",
+      "range": {
+        "startLine": 82,
+        "startChar": 18,
+        "endLine": 82,
+        "endChar": 57
+      },
+      "revId": "db6117ac04b84a1cc673459839c26a19513f4ab2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0637ab40_0ec8e763",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-05-23T12:59:49Z",
       "side": 1,
       "message": "I thought Pierre\u0027s ask was to make this a collection of capabilities.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 39
+      },
+      "revId": "db6117ac04b84a1cc673459839c26a19513f4ab2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13d1a0d2_510a7daf",
+        "filename": "pvmfw/avb/src/verify.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-05-23T13:23:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0637ab40_0ec8e763",
       "range": {
         "startLine": 36,
         "startChar": 0,
