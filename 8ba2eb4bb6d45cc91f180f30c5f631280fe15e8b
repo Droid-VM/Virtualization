@@ -52,6 +52,24 @@
       "parentUuid": "749c841b_5824a0b0",
       "revId": "8ba2eb4bb6d45cc91f180f30c5f631280fe15e8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e7161b6_737e629d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-23T04:23:49Z",
+      "side": 1,
+      "message": "I\u0027ve just tried that, but didn\u0027t work. A few obstacles:\n\n(1) I had to explicitly allow-list `-x assembler-with-cpp` in cc/check.go. Not sure if that\u0027s acceptable or not.\n\n(2) cc_object couldn\u0027t be used as srcs of a genrule. \n\n```\nerror: packages/modules/Virtualization/pvmfw/Android.bp:170:1: dependency \"pvmfw_platform.dts.preprocessed\" of \"pvmfw_fdt_template_rs\" missing variant:\n  \navailable variants:\n  os:android,image:,arch:arm64_armv8-a (alias to os:android,image:,arch:arm64_armv8-a,sdk:)\n  os:android,image:,arch:arm64_armv8-a,sdk:\n  os:android,image:,arch:arm_armv8-a (alias to os:android,image:,arch:arm_armv8-a,sdk:)\n  os:android,image:,arch:arm_armv8-a,sdk:\n```\n\nThis seems to be WAI because cc_object is for the device, while the genrule is for host (because it\u0027s to generate a source file lib.rs)\n\nAny thoughts?",
+      "parentUuid": "fdfa0312_9ad055c9",
+      "revId": "8ba2eb4bb6d45cc91f180f30c5f631280fe15e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
