@@ -117,6 +117,30 @@
       },
       "revId": "3acd12e835f74966e787a3a5bbedd927904c6fed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eab361e5_809a28be",
+        "filename": "pvmfw/avb/fuzz/with_footer_verify_fuzzer.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-05-24T12:06:48Z",
+      "side": 1,
+      "message": "I don\u0027t copy the data to vbmeta anymore. The input represents kernel + vbmeta now. Only a footer is added to the input so that the fuzzing won\u0027t fail at footer parsing.",
+      "parentUuid": "6ffd27cb_06cca894",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 89
+      },
+      "revId": "3acd12e835f74966e787a3a5bbedd927904c6fed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
