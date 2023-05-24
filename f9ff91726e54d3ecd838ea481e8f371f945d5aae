@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42198b2f_7f05c4ba",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-05-24T13:48:25Z",
+      "side": 1,
+      "message": "I don\u0027t think so. This one is passed to avb_descriptor_foreach() directly as the parameter `foreach_func`. It is supposed to have the type of [AvbDescriptorForeachFunc](https://cs.android.com/android/platform/superproject/+/master:external/avb/libavb/avb_descriptor.h;l\u003d84;drc\u003d4b6a634e48353da1e119ebe0287299f7b919d778).\nEspecially the pointer `*const AvbDescriptor` cannot be converted to a valid reference before calling `avb_descriptor_validate_and_byteswap` on it.",
+      "parentUuid": "67bdf301_7bd4d3f7",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 27
+      },
+      "revId": "f9ff91726e54d3ecd838ea481e8f371f945d5aae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5ff8864_550eb013",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-05-24T12:47:04Z",
       "side": 1,
       "message": "You can just unwrap if result is guaranteed to be non-null.",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 110,
+        "endChar": 12
+      },
+      "revId": "f9ff91726e54d3ecd838ea481e8f371f945d5aae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25639006_f77b59bf",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-05-24T13:48:25Z",
+      "side": 1,
+      "message": "This is passed from libavb, I think it\u0027s still safer to have some nonnull check.",
+      "parentUuid": "e5ff8864_550eb013",
       "range": {
         "startLine": 110,
         "startChar": 8,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15a7a359_153f3cb7",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-05-24T13:48:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b80992c_91ed1f88",
+      "range": {
+        "startLine": 116,
+        "startChar": 8,
+        "endLine": 117,
+        "endChar": 52
+      },
+      "revId": "f9ff91726e54d3ecd838ea481e8f371f945d5aae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f966ebb5_4e063a52",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-05-24T12:47:04Z",
       "side": 1,
       "message": "Does libavb guarantee this? Then this can be made a safe function by converting *const AvbDescriptor to \u0026AvbDescriptor.",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 93
+      },
+      "revId": "f9ff91726e54d3ecd838ea481e8f371f945d5aae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b7bab54_68a08e33",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-05-24T13:48:25Z",
+      "side": 1,
+      "message": "libavb guarantees this[1]. But the pointer `*const AvbDescriptor` cannot be converted to `\u0026AvbDescriptor` directly even it\u0027s not null. The function `avb_descriptor_validate_and_byteswap` must to be called to validate the struct and convert all the number fields from be to host byte order. This is called in line 154 below.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:external/avb/libavb/avb_descriptor.c;l\u003d127;drc\u003d8491a425bc47375a8bf1450689bcab30db7343bc",
+      "parentUuid": "f966ebb5_4e063a52",
       "range": {
         "startLine": 130,
         "startChar": 0,
