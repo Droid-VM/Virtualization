@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "983d0e15_9085dea7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-24T12:47:04Z",
+      "side": 1,
+      "message": "I feel a bit uncomfortable to see so many `unsafe`s here. Can we fix it?",
+      "revId": "f9ff91726e54d3ecd838ea481e8f371f945d5aae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67bdf301_7bd4d3f7",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-24T12:47:04Z",
+      "side": 1,
+      "message": "Can these be made to references?",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 27
+      },
+      "revId": "f9ff91726e54d3ecd838ea481e8f371f945d5aae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5ff8864_550eb013",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-24T12:47:04Z",
+      "side": 1,
+      "message": "You can just unwrap if result is guaranteed to be non-null.",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 110,
+        "endChar": 12
+      },
+      "revId": "f9ff91726e54d3ecd838ea481e8f371f945d5aae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b80992c_91ed1f88",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-24T12:47:04Z",
+      "side": 1,
+      "message": "I think this actually isn\u0027t enough. We need to make sure that the memory pointed by `descriptors` has no user.. before doing `*result \u003d ...`.",
+      "range": {
+        "startLine": 116,
+        "startChar": 8,
+        "endLine": 117,
+        "endChar": 52
+      },
+      "revId": "f9ff91726e54d3ecd838ea481e8f371f945d5aae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f966ebb5_4e063a52",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-24T12:47:04Z",
+      "side": 1,
+      "message": "Does libavb guarantee this? Then this can be made a safe function by converting *const AvbDescriptor to \u0026AvbDescriptor.",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 93
+      },
+      "revId": "f9ff91726e54d3ecd838ea481e8f371f945d5aae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
