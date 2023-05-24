@@ -93,6 +93,30 @@
       },
       "revId": "3acd12e835f74966e787a3a5bbedd927904c6fed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ffd27cb_06cca894",
+        "filename": "pvmfw/avb/fuzz/with_footer_verify_fuzzer.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-05-24T11:49:31Z",
+      "side": 1,
+      "message": "Doesn\u0027t the fuzzer mutate the inputs to increase coverage? You copying the same data into two different places creates aliasing. So curious what the implications are.",
+      "parentUuid": "9533fc18_f6cd4523",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 89
+      },
+      "revId": "3acd12e835f74966e787a3a5bbedd927904c6fed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
