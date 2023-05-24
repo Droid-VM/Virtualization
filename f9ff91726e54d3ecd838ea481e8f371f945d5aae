@@ -222,6 +222,30 @@
       },
       "revId": "f9ff91726e54d3ecd838ea481e8f371f945d5aae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10e67fea_e5784704",
+        "filename": "pvmfw/avb/src/descriptor/collection.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-05-24T14:14:24Z",
+      "side": 1,
+      "message": "I see. So it\u0027s to prohibit dereferencing the pointer before it\u0027s validated. Got it.",
+      "parentUuid": "2b7bab54_68a08e33",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 93
+      },
+      "revId": "f9ff91726e54d3ecd838ea481e8f371f945d5aae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
