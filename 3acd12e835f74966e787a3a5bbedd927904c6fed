@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c56394ff_5623a542",
+        "filename": "pvmfw/avb/fuzz/with_footer_verify_fuzzer.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-05-24T11:09:12Z",
+      "side": 1,
+      "message": "No magic numbers, please, in multiple places in this file. Give it a name if it\u0027s an arbitrary constant, or use `sizeof` if it corresponds to a type.",
+      "range": {
+        "startLine": 29,
+        "startChar": 58,
+        "endLine": 29,
+        "endChar": 59
+      },
+      "revId": "3acd12e835f74966e787a3a5bbedd927904c6fed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b7cc03d_ffabd2f7",
+        "filename": "pvmfw/avb/fuzz/with_footer_verify_fuzzer.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-05-24T11:09:12Z",
+      "side": 1,
+      "message": "Do I understand correctly that the resulting VBMeta is a prefix of the kernel image? Wouldn\u0027t that confuse the fuzzer? It cannot modify one without the other.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 89
+      },
+      "revId": "3acd12e835f74966e787a3a5bbedd927904c6fed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
