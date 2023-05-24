@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e570b750_14461993",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-05-24T16:41:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b41d145_ca606d70",
+      "range": {
+        "startLine": 237,
+        "startChar": 4,
+        "endLine": 237,
+        "endChar": 17
+      },
+      "revId": "3c39f0b08ccf65639a6a649cc5610c857ae31330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c676e58_9d2b09d4",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc67a46b_e9857027",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-05-24T16:41:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c676e58_9d2b09d4",
+      "range": {
+        "startLine": 272,
+        "startChar": 4,
+        "endLine": 272,
+        "endChar": 42
+      },
+      "revId": "3c39f0b08ccf65639a6a649cc5610c857ae31330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba6f2e70_54fe39be",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-05-23T12:57:31Z",
       "side": 1,
       "message": "Would it make sense to call this before we flush?",
+      "range": {
+        "startLine": 444,
+        "startChar": 8,
+        "endLine": 444,
+        "endChar": 37
+      },
+      "revId": "3c39f0b08ccf65639a6a649cc5610c857ae31330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1239133f_bd8d288c",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1986725
+      },
+      "writtenOn": "2023-05-24T16:41:35Z",
+      "side": 1,
+      "message": "Agreed, it makes more sense to first disable DBM, and then flush dirty regions.",
+      "parentUuid": "ba6f2e70_54fe39be",
       "range": {
         "startLine": 444,
         "startChar": 8,
