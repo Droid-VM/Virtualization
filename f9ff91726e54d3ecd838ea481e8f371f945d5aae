@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f7c57f7b_fa0c1dc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-05-24T14:04:00Z",
+      "side": 1,
+      "message": "Euh, I agree. But due to module\u0027s heavy reliance on the libavb C library and unsafe pointer parameters, it\u0027s difficult to determine which function to eliminate. We actually rely on the callers to ensure that the pointers are aligned and initialized even we can check that they are nonnull, which is why there are so many \u0027unsafe\u0027 functions.",
+      "parentUuid": "983d0e15_9085dea7",
+      "revId": "f9ff91726e54d3ecd838ea481e8f371f945d5aae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67bdf301_7bd4d3f7",
         "filename": "pvmfw/avb/src/descriptor/collection.rs",
         "patchSetId": 6
