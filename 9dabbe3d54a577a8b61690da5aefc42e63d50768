@@ -128,6 +128,30 @@
       },
       "revId": "9dabbe3d54a577a8b61690da5aefc42e63d50768",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25b84564_8e41bfd1",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-05-25T09:53:25Z",
+      "side": 1,
+      "message": "Ok. I changed this to remote_attest to make it more clear. Otherwise as there\u0027ll just be one service VM for both remote attestation and rpmb, even we have two tags, they still just indicate one thing in pvmfw.",
+      "parentUuid": "9c731c91_9bfaba08",
+      "range": {
+        "startLine": 68,
+        "startChar": 20,
+        "endLine": 68,
+        "endChar": 30
+      },
+      "revId": "9dabbe3d54a577a8b61690da5aefc42e63d50768",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
