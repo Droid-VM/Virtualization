@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "913a6496_91047622",
+        "filename": "rialto/src/error.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-05-25T15:41:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "405671ee_072aa444",
+      "range": {
+        "startLine": 47,
+        "startChar": 57,
+        "endLine": 47,
+        "endChar": 58
+      },
+      "revId": "60c58a9c116cb95299b3b5d0654547a510eda08b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce9b1404_c307dfed",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-05-25T15:29:51Z",
       "side": 1,
       "message": "That\u0027s a precondition that the caller needs to guarantee, so I guess `try_main` should be marked as unsafe.",
+      "revId": "60c58a9c116cb95299b3b5d0654547a510eda08b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f1e64ba_74240c45",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-05-25T15:41:42Z",
+      "side": 1,
+      "message": "Then we must change this macro here and all its callers, right?\n\nhttps://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/vmbase/src/entry.rs;l\u003d56;drc\u003def99629345d4b0d572b341001b3312b567576a01",
+      "parentUuid": "ce9b1404_c307dfed",
       "revId": "60c58a9c116cb95299b3b5d0654547a510eda08b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
