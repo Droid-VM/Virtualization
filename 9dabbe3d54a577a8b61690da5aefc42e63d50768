@@ -176,6 +176,30 @@
       },
       "revId": "9dabbe3d54a577a8b61690da5aefc42e63d50768",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58818c61_eec83491",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-05-25T11:04:29Z",
+      "side": 1,
+      "message": "For remote attestation, we mostly want to add a marker in the DICE chain[1] in pvmfw. \n[1] http://doc/1SetVcA-i6MyyWpgXc1fULkklDAUsOQBVYpYJfspfsF8#heading\u003dh.76x4zw6dnnm\n\n---\nThe service VM is a special type of baremetal VM that doesn\u0027t have Microdroid. We aim to make it a singleton to service various needs such as RPMB and remote attestation. Using multiple capabilities in the latest PS actually makes it appear like a usual Microdroid VM with additional capabilities.\n\nHaving only the service_vm capability makes it easier for pvmfw. pvmfw simply needs to identify the service_vm and perform operations A, B, and C. Although with multiple tags, pvmfw can distinguish between operations like cap_a for A, cap_b for B, etc., it\u0027s artificial and misleading. It implies that we sometimes perform A or B, while in reality, all three operations (A, B, and C) are performed together or not at all.\n\nIt\u0027s unclear why pvmfw needs to know the internal details of the service VM. From a coding perspective, more tags also create more scenarios to handle for both pvmfw and the client code, such as when cap_a is on, but cap_b and cap_c are missing.",
+      "parentUuid": "c5d2f584_5c892bf7",
+      "range": {
+        "startLine": 68,
+        "startChar": 20,
+        "endLine": 68,
+        "endChar": 30
+      },
+      "revId": "9dabbe3d54a577a8b61690da5aefc42e63d50768",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
