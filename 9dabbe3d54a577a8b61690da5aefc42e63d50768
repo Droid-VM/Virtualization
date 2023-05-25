@@ -56,6 +56,30 @@
       },
       "revId": "9dabbe3d54a577a8b61690da5aefc42e63d50768",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5cf0e5b_dc2ce610",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-05-25T09:20:28Z",
+      "side": 1,
+      "message": "Actually since both remote attestation and RPMB just need to enable the service VM, pvmfw doesn\u0027t need to distinguish them at this point.\n\n@dbrazdil@google.com, wdyt?",
+      "parentUuid": "c3e7fe68_0a632154",
+      "range": {
+        "startLine": 68,
+        "startChar": 20,
+        "endLine": 68,
+        "endChar": 30
+      },
+      "revId": "9dabbe3d54a577a8b61690da5aefc42e63d50768",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
