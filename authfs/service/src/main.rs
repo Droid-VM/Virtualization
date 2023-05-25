@@ -24,9 +24,12 @@ mod authfs;
 
 use anyhow::{bail, Result};
 use log::*;
+use nix::fcntl::{fcntl, FdFlag, F_SETFD};
 use rpcbinder::RpcServer;
+use rustutils::sockets::android_get_control_socket;
 use std::ffi::OsString;
 use std::fs::{create_dir, read_dir, remove_dir_all, remove_file};
+use std::os::unix::io::RawFd;
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 use authfs_aidl_interface::aidl::com::android::virt::fs::AuthFsConfig::AuthFsConfig;
@@ -106,6 +109,16 @@ fn clean_up_working_directory() -> Result<()> {
     Ok(())
 }
 
+fn prepare_authfs_service_socket() -> Result<RawFd> {
+    let fd = android_get_control_socket(AUTHFS_SERVICE_SOCKET_NAME)?;
+
+    if let Err(e) = fcntl(fd, F_SETFD(FdFlag::FD_CLOEXEC)) {
+        warn!("Failed to set cloexec on authfs socket: {:?}", e);
+    }
+
+    Ok(fd)
+}
+
 fn try_main() -> Result<()> {
     let debuggable = env!("TARGET_BUILD_VARIANT") != "user";
     let log_level = if debuggable { log::Level::Trace } else { log::Level::Info };
@@ -115,9 +128,10 @@ fn try_main() -> Result<()> {
 
     clean_up_working_directory()?;
 
+    let socket_fd = prepare_authfs_service_socket()?;
     let service = AuthFsService::new_binder(debuggable).as_binder();
     debug!("{} is starting as a rpc service.", AUTHFS_SERVICE_SOCKET_NAME);
-    let server = RpcServer::new_init_unix_domain(service, AUTHFS_SERVICE_SOCKET_NAME)?;
+    let server = RpcServer::new_raw_socket(service, socket_fd)?;
     info!("The RPC server '{}' is running.", AUTHFS_SERVICE_SOCKET_NAME);
     server.join();
     info!("The RPC server at '{}' has shut down gracefully.", AUTHFS_SERVICE_SOCKET_NAME);
