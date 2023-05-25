@@ -16,7 +16,9 @@
 
 use aarch64_paging::MapError;
 use core::{fmt, result};
+use fdtpci::PciError;
 use hyp::Error as HypervisorError;
+use libfdt::FdtError;
 
 pub type Result<T> = result::Result<T, Error>;
 
@@ -28,6 +30,10 @@ pub enum Error {
     PageTableMapping(MapError),
     /// Failed to initialize the logger.
     LoggerInit,
+    /// Invalid FDT.
+    InvalidFdt(FdtError),
+    /// Invalid PCI.
+    InvalidPci(PciError),
 }
 
 impl fmt::Display for Error {
@@ -38,6 +44,8 @@ impl fmt::Display for Error {
                 write!(f, "Failed when attempting to map some range in the page table: {e}.")
             }
             Self::LoggerInit => write!(f, "Failed to initialize the logger."),
+            Self::InvalidFdt(e) => write!(f, "Invalid FDT. {e}"),
+            Self::InvalidPci(e) => write!(f, "Invalid PCI. {e}"),
         }
     }
 }
@@ -51,5 +59,17 @@ impl From<HypervisorError> for Error {
 impl From<MapError> for Error {
     fn from(e: MapError) -> Self {
         Self::PageTableMapping(e)
+    }
+}
+
+impl From<FdtError> for Error {
+    fn from(e: FdtError) -> Self {
+        Self::InvalidFdt(e)
+    }
+}
+
+impl From<PciError> for Error {
+    fn from(e: PciError) -> Self {
+        Self::InvalidPci(e)
     }
 }

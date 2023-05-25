@@ -28,7 +28,8 @@ use aarch64_paging::{
     paging::{Attributes, MemoryRegion},
 };
 use buddy_system_allocator::LockedHeap;
-use core::ops::Range;
+use core::{ops::Range, slice};
+use fdtpci::PciInfo;
 use hyp::get_hypervisor;
 use log::{debug, error, info};
 use vmbase::{layout, main, power::reboot};
@@ -113,8 +114,14 @@ fn try_init_logger() -> Result<()> {
     vmbase::logger::init(log::LevelFilter::Debug).map_err(|_| Error::LoggerInit)
 }
 
-fn try_main() -> Result<()> {
+fn try_main(fdt_addr: usize) -> Result<()> {
     info!("Welcome to Rialto!");
+    // SAFETY: It is safe as `fdt_addr` is supposed to be a valid pointer that
+    // points to the device tree.
+    let fdt = unsafe { slice::from_raw_parts(fdt_addr as *mut u8, SZ_1M) };
+    let fdt = libfdt::Fdt::from_slice(fdt)?;
+    let pci_info = PciInfo::from_fdt(fdt)?;
+    debug!("PCI: {:#x?}", pci_info);
 
     let mut pgt = IdMap::new(PT_ASID, PT_ROOT_LEVEL);
     init_kernel_pgt(&mut pgt)?;
@@ -122,13 +129,13 @@ fn try_main() -> Result<()> {
 }
 
 /// Entry point for Rialto.
-pub fn main(_a0: u64, _a1: u64, _a2: u64, _a3: u64) {
+pub fn main(fdt_addr: u64, _a1: u64, _a2: u64, _a3: u64) {
     init_heap();
     if try_init_logger().is_err() {
         // Don't log anything if the logger initialization fails.
         reboot();
     }
-    match try_main() {
+    match try_main(fdt_addr as usize) {
         Ok(()) => info!("Rialto ends successfully."),
         Err(e) => {
             error!("Rialto failed with {e}");
