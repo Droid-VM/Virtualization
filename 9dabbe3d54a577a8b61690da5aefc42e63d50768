@@ -104,6 +104,30 @@
       },
       "revId": "9dabbe3d54a577a8b61690da5aefc42e63d50768",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c731c91_9bfaba08",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-25T09:32:44Z",
+      "side": 1,
+      "message": "pvmfw needs to know the individual operations it has to perform for that VM anyway so why not enumerate them here instead of embedding knowledge in the pvmfw code about what being the \"service VM\" means?",
+      "parentUuid": "d5cf0e5b_dc2ce610",
+      "range": {
+        "startLine": 68,
+        "startChar": 20,
+        "endLine": 68,
+        "endChar": 30
+      },
+      "revId": "9dabbe3d54a577a8b61690da5aefc42e63d50768",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
