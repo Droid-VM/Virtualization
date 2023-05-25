@@ -16,6 +16,46 @@
       "message": "Hi Andrew, could you take a look?",
       "revId": "60c58a9c116cb95299b3b5d0654547a510eda08b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "405671ee_072aa444",
+        "filename": "rialto/src/error.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-05-25T15:29:51Z",
+      "side": 1,
+      "message": "Nit: a colon is probably more appropriate than a full stop, here and on the next line.",
+      "range": {
+        "startLine": 47,
+        "startChar": 57,
+        "endLine": 47,
+        "endChar": 58
+      },
+      "revId": "60c58a9c116cb95299b3b5d0654547a510eda08b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce9b1404_c307dfed",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-05-25T15:29:51Z",
+      "side": 1,
+      "message": "That\u0027s a precondition that the caller needs to guarantee, so I guess `try_main` should be marked as unsafe.",
+      "revId": "60c58a9c116cb95299b3b5d0654547a510eda08b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
