@@ -152,6 +152,30 @@
       },
       "revId": "9dabbe3d54a577a8b61690da5aefc42e63d50768",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5d2f584_5c892bf7",
+        "filename": "rialto/Android.bp",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-25T10:14:26Z",
+      "side": 1,
+      "message": "The point that Jiyong and I are trying to get across is that, even though there might only ever be one payload that has those distinct capabilities, and even if those capabilities end up always being given to the same VM, there\u0027s no need to make pvmfw unnecessarily more complex with this information. Having a set of one-to-one mappings between IDs and operations is much easier, clearer, and cleaner to deal with than one-to-many, in particular when we start combining them.\n\nTo make this less theoretical, could you list what pvmfw would need to perform for the service VM that it wouldn\u0027t for Microdroid? I\u0027m aware of the need to pass the RPMB key but not sure what \"`remote_attest`\" would involve.",
+      "parentUuid": "25b84564_8e41bfd1",
+      "range": {
+        "startLine": 68,
+        "startChar": 20,
+        "endLine": 68,
+        "endChar": 30
+      },
+      "revId": "9dabbe3d54a577a8b61690da5aefc42e63d50768",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
