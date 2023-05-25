@@ -25,8 +25,10 @@ mod authfs;
 use anyhow::{bail, Result};
 use log::*;
 use rpcbinder::RpcServer;
+use rustutils::sockets::android_get_control_socket;
 use std::ffi::OsString;
 use std::fs::{create_dir, read_dir, remove_dir_all, remove_file};
+use std::os::unix::io::{FromRawFd, OwnedFd};
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 use authfs_aidl_interface::aidl::com::android::virt::fs::AuthFsConfig::AuthFsConfig;
@@ -106,6 +108,19 @@ fn clean_up_working_directory() -> Result<()> {
     Ok(())
 }
 
+fn prepare_authfs_service_socket() -> Result<OwnedFd> {
+    let raw_fd = android_get_control_socket(AUTHFS_SERVICE_SOCKET_NAME)?;
+
+    // Creating OwnedFd for stdio FDs is not safe.
+    if [libc::STDIN_FILENO, libc::STDOUT_FILENO, libc::STDERR_FILENO].contains(&raw_fd) {
+        bail!("File descriptor {raw_fd} is standard I/O descriptor");
+    }
+    // SAFETY - Initializing OwnedFd for a RawFd created by the init.
+    // We checked that the integer value corresponds to a valid FD and that this
+    // is the first argument to claim its ownership.
+    Ok(unsafe { OwnedFd::from_raw_fd(raw_fd) })
+}
+
 fn try_main() -> Result<()> {
     let debuggable = env!("TARGET_BUILD_VARIANT") != "user";
     let log_level = if debuggable { log::Level::Trace } else { log::Level::Info };
@@ -115,9 +130,10 @@ fn try_main() -> Result<()> {
 
     clean_up_working_directory()?;
 
+    let socket_fd = prepare_authfs_service_socket()?;
     let service = AuthFsService::new_binder(debuggable).as_binder();
     debug!("{} is starting as a rpc service.", AUTHFS_SERVICE_SOCKET_NAME);
-    let server = RpcServer::new_init_unix_domain(service, AUTHFS_SERVICE_SOCKET_NAME)?;
+    let server = RpcServer::new_bound_socket(service, socket_fd)?;
     info!("The RPC server '{}' is running.", AUTHFS_SERVICE_SOCKET_NAME);
     server.join();
     info!("The RPC server at '{}' has shut down gracefully.", AUTHFS_SERVICE_SOCKET_NAME);
