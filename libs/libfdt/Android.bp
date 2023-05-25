@@ -44,3 +44,17 @@ rust_library_rlib {
     ],
     apex_available: ["com.android.virt"],
 }
+
+rust_test {
+    name: "liblibfdt.integration_test",
+    crate_name: "libfdt_test",
+    srcs: ["tests/*.rs"],
+    test_suites: ["general-tests"],
+    data: [
+        "tests/data/*",
+    ],
+    prefer_rlib: true,
+    rustlibs: [
+        "liblibfdt",
+    ],
+}
