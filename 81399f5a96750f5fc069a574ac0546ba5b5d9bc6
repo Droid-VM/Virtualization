@@ -46,6 +46,30 @@
       },
       "revId": "81399f5a96750f5fc069a574ac0546ba5b5d9bc6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1d8f802_51e1bb9c",
+        "filename": "pvmfw/src/bootargs.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-05-30T09:09:50Z",
+      "side": 1,
+      "message": "`helpers` now depends on `vmbase`. This test is compiled with `std`. It cannot compile with `vmbase`.",
+      "parentUuid": "860e039a_ea45c6aa",
+      "range": {
+        "startLine": 112,
+        "startChar": 4,
+        "endLine": 116,
+        "endChar": 5
+      },
+      "revId": "81399f5a96750f5fc069a574ac0546ba5b5d9bc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
