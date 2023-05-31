@@ -26,7 +26,6 @@ use alloc::alloc::handle_alloc_error;
 use alloc::boxed::Box;
 use alloc::vec::Vec;
 use buddy_system_allocator::{FrameAllocator, LockedFrameAllocator};
-use crate::mmu::{PageTable, MMIO_LAZY_MAP_FLAG};
 use core::alloc::Layout;
 use core::cmp::max;
 use core::cmp::min;
@@ -42,7 +41,11 @@ use log::{debug, error};
 use once_cell::race::OnceBox;
 use spin::mutex::SpinMutex;
 use tinyvec::ArrayVec;
-use vmbase::{dsb, isb, layout, memory::set_dbm_enabled, tlbi};
+use vmbase::{
+    dsb, isb, layout,
+    memory::{set_dbm_enabled, PageTable, MMIO_LAZY_MAP_FLAG},
+    tlbi,
+};
 
 /// Base of the system's contiguous "main" memory.
 pub const BASE_ADDR: usize = 0x8000_0000;
