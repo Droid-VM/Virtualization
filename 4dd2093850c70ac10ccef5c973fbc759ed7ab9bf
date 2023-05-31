@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2990723_682e56b0",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-31T15:03:28Z",
+      "side": 0,
+      "message": "Changes adding and removing tens or even hundreds of lines of code that are 95% similar are very hard to review as the differences are easy to miss; for example, this `unsafe` was removed without explanation (and arguably wrongly).\n\nAs we\u0027ve already reviewed quite a few CLs of this nature and as we\u0027ll have to move a good chunk of the code from `pvmfw/` to `vmbase/` for re-use, may I ask you to start splitting changes like this one in:\n\n1. a commit that renames the files, limiting changes to what\u0027s absolutely necessary to prevent the build from breaking\n1. one or more commits that apply the extra modifications/clean-up you consider necessary\n\n? This will result in a less clobbered history (`git-blame`) as 1. will make Git aware of the file being moved, while 2. will lead to a better review process (and code quality) by allowing reviewers to easily identify those small differences.",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 80,
+        "endChar": 14
+      },
+      "revId": "4dd2093850c70ac10ccef5c973fbc759ed7ab9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
