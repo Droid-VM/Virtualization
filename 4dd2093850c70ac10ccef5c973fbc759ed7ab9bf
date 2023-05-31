@@ -46,6 +46,30 @@
       },
       "revId": "4dd2093850c70ac10ccef5c973fbc759ed7ab9bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec0c1693_14cfba60",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 11
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-05-31T17:30:52Z",
+      "side": 0,
+      "message": "Extracting the changes under `rialto/` into its own commit isn\u0027t what the comment above was describing.\n\nAs my explanation above wasn\u0027t clear enough, I\u0027ve instead implemented the changes it was describing, so that the benefits can be clearly illustrated: For a reviewer perspective, note how Gerrit in aosp/2609089 shows a clear diff of [`pvmfw/src/mmu.rs`](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2609089/1/pvmfw/src/mmu.rs) (as opposed to having to manually find the differences between [`pvmfw/src/mmu.rs`](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2605450/13/pvmfw/src/mmu.rs) and [`vmbase/src/memory/page_table.rs`](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2605450/13/vmbase/src/memory/page_table.rs) in this CL) and how easy it is to review the trivial renaming of the file in aosp/2609090.\n\nRegarding the history, I stand corrected as Git seems to have become much better at figuring out that a commit moved AND modified a file at once (AFAIK, it didn\u0027t use to be this good):\n```\n$ git --version\ngit version 2.41.0.rc0.172.g3f132b7071-goog\n```\n```\n$ git show change-2605450\n[...]\ndiff --git a/pvmfw/src/mmu.rs b/vmbase/src/memory/page_table.rs\nsimilarity index 56%\nrename from pvmfw/src/mmu.rs\nrename to vmbase/src/memory/page_table.rs\nindex c72ceeae..37ed845b 100644\n--- a/pvmfw/src/mmu.rs\n+++ b/vmbase/src/memory/page_table.rs\n@@ -1,4 +1,4 @@\n-// Copyright 2022, The Android Open Source Project\n+// Copyright 2023, The Android Open Source Project\n[...]\n```\nso it can track the file\u0027s history even for this commit:\n```\n$ git log --oneline --follow change-2605450 -- vmbase/src/memory/page_table.rs\n22fc321b [pvmfw] Move PageTable struct to vmbase for reuse\n44b1ce35 pvmfw: Implement software dirty state handling\nb99905d3 pvmfw: Optimize MMIO guard map\n50559dfb vmbase: Explicitly map valid memory ranges\n97f52490 pvmfw: Zero all scratch memory before guest runs\n443cebea pvmfw: Resize stack region to 8 pages\n23aba521 vmbase: Move stack to end of writable_data\n8bb3d725 vmbase: Map .bss, .data, \u0026 stack separately\n20b60961 pvmfw: Add support for appended configuration data\na8a4a20b pvmfw: Support managing page tables dynamically\n```\nand `git-blame` will therefore link to the commits that modified the original file! But note that Gerrit is still unable to identify the CL as a rename+modification, possibly due to it relying on an older version of Git.",
+      "parentUuid": "997d8742_7f420ad1",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 80,
+        "endChar": 14
+      },
+      "revId": "4dd2093850c70ac10ccef5c973fbc759ed7ab9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
