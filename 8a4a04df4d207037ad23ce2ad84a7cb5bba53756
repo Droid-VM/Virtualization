@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4301d2a_e0a05c3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-01T14:21:14Z",
+      "side": 1,
+      "message": "I can update this cl but I cannot own it unless we change the Change-Id. You already owned the current change Id.\nI also cannot review it as it\u0027s like reviewing my own cl.",
+      "parentUuid": "ca5c5ede_2a738ef6",
+      "revId": "8a4a04df4d207037ad23ce2ad84a7cb5bba53756",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6b583c4_36601572",
@@ -49,6 +67,30 @@
       "writtenOn": "2023-06-01T13:12:26Z",
       "side": 1,
       "message": "Note that these are private (undocumented) constants; WDYT of detailing what they mean e.g.\n```\n... as {invalid,} nGnRE device memory.\n```\nand\n```\n... as {read-only,executable,writeable,writeable-clean} normal memory.\n```\n?",
+      "range": {
+        "startLine": 63,
+        "startChar": 79,
+        "endLine": 63,
+        "endChar": 92
+      },
+      "revId": "8a4a04df4d207037ad23ce2ad84a7cb5bba53756",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "babbf024_8b6d65a3",
+        "filename": "pvmfw/src/mmu.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-01T14:21:14Z",
+      "side": 1,
+      "message": "How to explain the DATA_DBM flag? Why does it have DBM and read-only simultaneously?",
+      "parentUuid": "e6b583c4_36601572",
       "range": {
         "startLine": 63,
         "startChar": 79,
