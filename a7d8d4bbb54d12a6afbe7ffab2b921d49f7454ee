@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4270d991_a1e504a0",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-02T19:37:58Z",
+      "side": 1,
+      "message": "nit: the linter seems to be happy about this but I thought that safety notes in function docs needed to be under their own Markdown-like section e.g. (from clippy\u0027s [`missing_safety_doc`](https://rust-lang.github.io/rust-clippy/master/index.html#missing_safety_doc) illustration)\n```\n/// # Safety\n///\n/// This function should not be called before the horsemen are ready.\npub unsafe fn start_apocalypse(u: \u0026mut Universe) {\n```\n?",
+      "range": {
+        "startLine": 380,
+        "startChar": 4,
+        "endLine": 380,
+        "endChar": 11
+      },
+      "revId": "a7d8d4bbb54d12a6afbe7ffab2b921d49f7454ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
