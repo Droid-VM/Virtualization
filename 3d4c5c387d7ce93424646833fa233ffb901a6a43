@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c0e66d5_55c8cd53",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-02T11:24:34Z",
+      "side": 0,
+      "message": "Nit: We\u0027re losing this nice error message, which seems a shame.\nAnd indeed all the page_table map_* functions just return the aarch64 error without any context. Is it worth doing more? Or do these just never fail in practice?",
+      "range": {
+        "startLine": 218,
+        "startChar": 1,
+        "endLine": 218,
+        "endChar": 78
+      },
+      "revId": "3d4c5c387d7ce93424646833fa233ffb901a6a43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
