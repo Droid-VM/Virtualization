@@ -14,9 +14,14 @@
 
 //! Functions to scan the PCI bus for VirtIO devices.
 
-use super::hal::HalImpl;
-use crate::{entry::RebootReason, memory::MemoryTracker};
+use super::hal::{HalImpl, VirtIOHal};
+use crate::{
+    entry::RebootReason,
+    memory::{alloc_shared, dealloc_shared, MemoryTracker},
+};
 use alloc::boxed::Box;
+use core::alloc::Layout;
+use core::ptr::NonNull;
 use fdtpci::PciInfo;
 use log::{debug, error};
 use once_cell::race::OnceBox;
@@ -31,7 +36,25 @@ use virtio_drivers::{
     },
 };
 
-pub(super) static PCI_INFO: OnceBox<PciInfo> = OnceBox::new();
+static PCI_INFO: OnceBox<PciInfo> = OnceBox::new();
+
+pub struct VirtIOHalImpl;
+
+unsafe impl VirtIOHal for VirtIOHalImpl {
+    fn alloc_shared(layout: Layout) -> Option<NonNull<u8>> {
+        alloc_shared(layout).ok()
+    }
+
+    unsafe fn dealloc_shared(vaddr: NonNull<u8>, layout: Layout) -> Option<()> {
+        // SAFETY: The caller must ensure that the memory has been allocated by
+        // `alloc_shared` with the same layout, and not yet deallocated.
+        unsafe { dealloc_shared(vaddr, layout).ok() }
+    }
+
+    fn pci_info() -> Option<&'static PciInfo> {
+        PCI_INFO.get()
+    }
+}
 
 /// Prepares to use VirtIO PCI devices.
 ///
@@ -69,7 +92,7 @@ fn map_mmio(pci_info: &PciInfo, memory: &mut MemoryTracker) -> Result<(), Reboot
     Ok(())
 }
 
-pub type VirtIOBlk = blk::VirtIOBlk<HalImpl, PciTransport>;
+pub type VirtIOBlk = blk::VirtIOBlk<HalImpl<VirtIOHalImpl>, PciTransport>;
 
 pub struct VirtIOBlkIterator<'a> {
     pci_root: &'a mut PciRoot,
@@ -101,7 +124,8 @@ impl<'a> Iterator for VirtIOBlkIterator<'a> {
             debug!("  VirtIO {:?}", virtio_type);
 
             let mut transport =
-                PciTransport::new::<HalImpl>(self.pci_root, device_function).unwrap();
+                PciTransport::new::<HalImpl<VirtIOHalImpl>>(self.pci_root, device_function)
+                    .unwrap();
             debug!(
                 "Detected virtio PCI device with device type {:?}, features {:#018x}",
                 transport.device_type(),
