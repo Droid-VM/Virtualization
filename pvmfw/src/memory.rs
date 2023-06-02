@@ -14,8 +14,6 @@
 
 //! Low-level allocation and tracking of main memory.
 
-#![deny(unsafe_op_in_unsafe_fn)]
-
 use crate::helpers::{self, page_4kb_of, RangeExt, PVMFW_PAGE_SIZE, SIZE_4MB};
 use aarch64_paging::idmap::IdMap;
 use aarch64_paging::paging::{Attributes, Descriptor, MemoryRegion as VaRange};
@@ -55,7 +53,6 @@ const PT_ASID: usize = 1;
 pub type MemoryRange = Range<usize>;
 
 pub static MEMORY: SpinMutex<Option<MemoryTracker>> = SpinMutex::new(None);
-unsafe impl Send for MemoryTracker {}
 
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 enum MemoryType {
