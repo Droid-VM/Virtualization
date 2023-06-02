@@ -16,6 +16,8 @@
 
 mod dbm;
 mod page_table;
+mod shared;
 
 pub use dbm::set_dbm_enabled;
 pub use page_table::{PageTable, MMIO_LAZY_MAP_FLAG};
+pub use shared::{phys_to_virt, virt_to_phys, MemorySharer};
