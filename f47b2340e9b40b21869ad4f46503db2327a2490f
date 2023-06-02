@@ -16,6 +16,24 @@
       "message": "Why don\u0027t we simply move `pvmfw/src/memory.rs` to `vmbase` as a whole after generalizing the few pvmfw-specific details (such as `PVMFW_RANGE`)?",
       "revId": "f47b2340e9b40b21869ad4f46503db2327a2490f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbbdfb29_0b0b0bf2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-02T15:22:46Z",
+      "side": 1,
+      "message": "My plan is indeed to move most the code from `memory.rs` to vmbase. However, the code is quite lengthy and contains some pvmfw-specific stuff. Since this requires some refactoring, I have moved them by small cls to minimize the impact.\n\nBTW, can we move the static variables MEMORY, SHARED_POOL, and SHARED_MEMORY to `libvmbase`?\n\nAnd would you mind if we proceed with this change for now and I can refactor and move the remaining code later?",
+      "parentUuid": "a8d0bdf7_395d4b9f",
+      "revId": "f47b2340e9b40b21869ad4f46503db2327a2490f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
