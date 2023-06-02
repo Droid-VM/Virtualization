@@ -640,6 +640,7 @@ pub fn init_page_table() -> result::Result<PageTable, MapError> {
     page_table.map_code(&layout::text_range())?;
     page_table.map_rodata(&layout::rodata_range())?;
     page_table.map_data_dbm(&appended_payload_range())?;
+    page_table.map_device(&layout::uart_range())?;
 
     Ok(page_table)
 }
