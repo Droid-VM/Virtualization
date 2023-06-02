@@ -16,6 +16,23 @@
       "message": "Hi, PTAL",
       "revId": "a6e75fabd094e4738f4a47cb86e2e7e9e64b4790",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e85c0e2_acb0b57a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-02T14:58:38Z",
+      "side": 1,
+      "message": "As for aosp/2611051, there doesn\u0027t seem to be anything pvmfw-specific in `pvmfw/src/virtio`, why don\u0027t we move all of the VirtIO/PCI and memory/MMIO sharing to vmbase?",
+      "revId": "a6e75fabd094e4738f4a47cb86e2e7e9e64b4790",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
