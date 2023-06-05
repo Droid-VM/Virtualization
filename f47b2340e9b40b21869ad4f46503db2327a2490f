@@ -56,6 +56,41 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "12c86733_d7c195d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-05T09:31:56Z",
+      "side": 1,
+      "message": "\u003e IMO, it would make sense to have all these low-level static variables in vmbase and only keep higher-level functionality (I guess mostly main?) in pvmfw.\n\nAgree. I also thought so.",
+      "parentUuid": "fb9810c2_d34c4be6",
+      "revId": "f47b2340e9b40b21869ad4f46503db2327a2490f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d914967_9cd0f1bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-05T09:31:56Z",
+      "side": 1,
+      "message": "Thanks for the review!",
+      "revId": "f47b2340e9b40b21869ad4f46503db2327a2490f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "20f60f63_d6ee44e2",
         "filename": "vmbase/src/memory/util.rs",
         "patchSetId": 3
@@ -67,6 +102,30 @@
       "writtenOn": "2023-06-05T09:23:18Z",
       "side": 1,
       "message": "These functions are tied to how the page tables are configured, which is controlled by `MemoryTracker` so them now being in a separate crate is quite confusing; I\u0027ll +2 this CL under the assumption that the related code it is leaving behind (in pvmfw) will be moved to vmbase very soon.",
+      "range": {
+        "startLine": 23,
+        "startChar": 7,
+        "endLine": 23,
+        "endChar": 19
+      },
+      "revId": "f47b2340e9b40b21869ad4f46503db2327a2490f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c17a9c0_2594e7d7",
+        "filename": "vmbase/src/memory/util.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-05T09:31:56Z",
+      "side": 1,
+      "message": "Sure, I\u0027ll change them to private once the most of the module `memory.rs` to `vmbase`.",
+      "parentUuid": "20f60f63_d6ee44e2",
       "range": {
         "startLine": 23,
         "startChar": 7,
