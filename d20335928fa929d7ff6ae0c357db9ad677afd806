@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fba4298_f68ee0a6",
+        "filename": "authfs/service/src/main.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-05T16:44:58Z",
+      "side": 1,
+      "message": "Not sure I understand that.\n\nWhat matter is that this is the only place where we take ownership of this FD.\n\nAlso: that means prepare_authfs_service_socket() needs to be marked unsafe, with a requirement that it only be called once.",
+      "range": {
+        "startLine": 119,
+        "startChar": 67,
+        "endLine": 120,
+        "endChar": 52
+      },
+      "revId": "d20335928fa929d7ff6ae0c357db9ad677afd806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
