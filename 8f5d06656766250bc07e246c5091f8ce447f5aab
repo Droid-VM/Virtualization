@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4d094ee_757bc592",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-05T14:47:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6d34aed_5c630bad",
+      "range": {
+        "startLine": 172,
+        "startChar": 50,
+        "endLine": 172,
+        "endChar": 56
+      },
+      "revId": "8f5d06656766250bc07e246c5091f8ce447f5aab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "991b67c2_5d5a8e5a",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4de3c257_229adc6c",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-05T14:47:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "991b67c2_5d5a8e5a",
+      "range": {
+        "startLine": 549,
+        "startChar": 55,
+        "endLine": 549,
+        "endChar": 61
+      },
+      "revId": "8f5d06656766250bc07e246c5091f8ce447f5aab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf2e84fd_eaa7825b",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-06-05T14:24:26Z",
       "side": 1,
       "message": "It\u0027s a bit confusing that these arithmetic operations, that don\u0027t depend on anything memory-related and can be used outside of the context of memory management need to be imported from a module name \"`memory`\". Furthermore, `flatten` below is syntactic sugar around a `transmute`-like `unsafe` and has absolutely nothing to do with memory management. WDYT of introducing one or two other module(s) for them (e.g. \"`vmbase::math`\", \"`vmbase::utils`\", ...)?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 1
+      },
+      "revId": "8f5d06656766250bc07e246c5091f8ce447f5aab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a507941_0044adb4",
+        "filename": "vmbase/src/memory/util.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-05T14:47:20Z",
+      "side": 1,
+      "message": "Sure. I added a `util` module in `vmbase/src` and moved these functions there.",
+      "parentUuid": "cf2e84fd_eaa7825b",
       "range": {
         "startLine": 26,
         "startChar": 0,
