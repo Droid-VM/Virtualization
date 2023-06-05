@@ -16,6 +16,75 @@
 
 use core::ptr::NonNull;
 
+/// The size of a 4KB memory in bytes.
+pub const SIZE_4KB: usize = 4 << 10;
+/// The size of a 2MB memory in bytes.
+pub const SIZE_2MB: usize = 2 << 20;
+/// The size of a 4MB memory in bytes.
+pub const SIZE_4MB: usize = 4 << 20;
+
+/// Computes the largest multiple of the provided alignment smaller or equal to the address.
+///
+/// Note: the result is undefined if alignment isn't a power of two.
+pub const fn unchecked_align_down(addr: usize, alignment: usize) -> usize {
+    addr & !(alignment - 1)
+}
+
+/// Computes the smallest multiple of the provided alignment larger or equal to the address.
+///
+/// Note: the result is undefined if alignment isn't a power of two and may wrap to 0.
+pub const fn unchecked_align_up(addr: usize, alignment: usize) -> usize {
+    unchecked_align_down(addr + alignment - 1, alignment)
+}
+
+/// Safe wrapper around unchecked_align_up() that validates its assumptions and doesn't wrap.
+pub const fn align_up(addr: usize, alignment: usize) -> Option<usize> {
+    if !alignment.is_power_of_two() {
+        None
+    } else if let Some(s) = addr.checked_add(alignment - 1) {
+        Some(unchecked_align_down(s, alignment))
+    } else {
+        None
+    }
+}
+
+/// Aligns the given address to the given alignment, if it is a power of two.
+///
+/// Returns `None` if the alignment isn't a power of two.
+#[allow(dead_code)] // Currently unused but might be needed again.
+const fn align_down(addr: usize, alignment: usize) -> Option<usize> {
+    if !alignment.is_power_of_two() {
+        None
+    } else {
+        Some(unchecked_align_down(addr, alignment))
+    }
+}
+
+/// Performs an integer division rounding up.
+///
+/// Note: Returns None if den isn't a power of two.
+pub const fn ceiling_div(num: usize, den: usize) -> Option<usize> {
+    let Some(r) = align_up(num, den) else {
+        return None;
+    };
+
+    r.checked_div(den)
+}
+
+/// Computes the address of the 4KiB page containing a given address.
+pub const fn page_4kb_of(addr: usize) -> usize {
+    unchecked_align_down(addr, SIZE_4KB)
+}
+
+/// Flatten [[T; N]] into &[T]
+/// TODO: use slice::flatten when it graduates from experimental
+pub fn flatten<T, const N: usize>(original: &[[T; N]]) -> &[T] {
+    // SAFETY: no overflow because original (whose size is len()*N) is already in memory
+    let len = original.len() * N;
+    // SAFETY: [T] has the same layout as [T;N]
+    unsafe { core::slice::from_raw_parts(original.as_ptr().cast(), len) }
+}
+
 /// Returns the intermediate physical address corresponding to the given virtual address.
 ///
 /// As we use identity mapping for everything, this is just a cast, but it's useful to use it to be
