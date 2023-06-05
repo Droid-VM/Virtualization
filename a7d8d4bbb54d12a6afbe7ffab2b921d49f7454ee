@@ -22,6 +22,30 @@
       },
       "revId": "a7d8d4bbb54d12a6afbe7ffab2b921d49f7454ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "846130e4_e3bd7e34",
+        "filename": "pvmfw/src/entry.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-05T08:38:11Z",
+      "side": 1,
+      "message": "Good point; done. The style guide also requires it.\n\nI suspect the lint doesn\u0027t trigger because this isn\u0027t public, so doc comments aren\u0027t technically required.",
+      "parentUuid": "4270d991_a1e504a0",
+      "range": {
+        "startLine": 380,
+        "startChar": 4,
+        "endLine": 380,
+        "endChar": 11
+      },
+      "revId": "a7d8d4bbb54d12a6afbe7ffab2b921d49f7454ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
