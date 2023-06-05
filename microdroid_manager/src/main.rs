@@ -38,11 +38,10 @@ use diced_open_dice::OwnedDiceArtifacts;
 use glob::glob;
 use itertools::sorted;
 use libc::VMADDR_CID_HOST;
-use log::{error, info, warn};
+use log::{error, info};
 use keystore2_crypto::ZVec;
 use microdroid_metadata::{write_metadata, Metadata, PayloadMetadata};
 use microdroid_payload_config::{OsConfig, Task, TaskType, VmPayloadConfig};
-use nix::fcntl::{fcntl, F_SETFD, FdFlag};
 use nix::sys::signal::Signal;
 use openssl::sha::Sha512;
 use payload::{get_apex_data_from_payload, load_metadata, to_metadata};
@@ -191,10 +190,8 @@ fn main() -> Result<()> {
     })
 }
 
-fn set_cloexec_on_vm_payload_service_socket() -> Result<()> {
-    let fd = android_get_control_socket(VM_PAYLOAD_SERVICE_SOCKET_NAME)?;
-
-    fcntl(fd, F_SETFD(FdFlag::FD_CLOEXEC))?;
+fn prepare_vm_payload_service_socket() -> Result<()> {
+    android_get_control_socket(VM_PAYLOAD_SERVICE_SOCKET_NAME)?;
 
     Ok(())
 }
@@ -203,9 +200,7 @@ fn try_main() -> Result<()> {
     let _ignored = kernlog::init();
     info!("started.");
 
-    if let Err(e) = set_cloexec_on_vm_payload_service_socket() {
-        warn!("Failed to set cloexec on vm payload socket: {:?}", e);
-    }
+    prepare_vm_payload_service_socket()?;
 
     load_crashkernel_if_supported().context("Failed to load crashkernel")?;
 
