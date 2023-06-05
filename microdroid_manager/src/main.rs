@@ -42,13 +42,12 @@ use log::{error, info, warn};
 use keystore2_crypto::ZVec;
 use microdroid_metadata::{write_metadata, Metadata, PayloadMetadata};
 use microdroid_payload_config::{OsConfig, Task, TaskType, VmPayloadConfig};
-use nix::fcntl::{fcntl, F_SETFD, FdFlag};
 use nix::sys::signal::Signal;
 use openssl::sha::Sha512;
 use payload::{get_apex_data_from_payload, load_metadata, to_metadata};
 use rand::Fill;
 use rpcbinder::RpcSession;
-use rustutils::sockets::android_get_control_socket;
+use rustutils::sockets::{android_get_control_socket, SocketError};
 use rustutils::system_properties;
 use rustutils::system_properties::PropertyWatcher;
 use std::borrow::Cow::{Borrowed, Owned};
@@ -191,21 +190,22 @@ fn main() -> Result<()> {
     })
 }
 
-fn set_cloexec_on_vm_payload_service_socket() -> Result<()> {
-    let fd = android_get_control_socket(VM_PAYLOAD_SERVICE_SOCKET_NAME)?;
-
-    fcntl(fd, F_SETFD(FdFlag::FD_CLOEXEC))?;
-
-    Ok(())
+fn prepare_vm_payload_service_socket() -> Result<()> {
+    match android_get_control_socket(VM_PAYLOAD_SERVICE_SOCKET_NAME) {
+        Ok(_) => Ok(()),
+        Err(SocketError::FcntlFailed(e)) => {
+            warn!("Failed to set CLOEXEC on vm payload socket: {:?}", e);
+            Ok(())
+        }
+        Err(e) => Err(e.into()),
+    }
 }
 
 fn try_main() -> Result<()> {
     let _ignored = kernlog::init();
     info!("started.");
 
-    if let Err(e) = set_cloexec_on_vm_payload_service_socket() {
-        warn!("Failed to set cloexec on vm payload socket: {:?}", e);
-    }
+    prepare_vm_payload_service_socket()?;
 
     load_crashkernel_if_supported().context("Failed to load crashkernel")?;
 
