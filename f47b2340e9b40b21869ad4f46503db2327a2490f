@@ -34,6 +34,47 @@
       "parentUuid": "a8d0bdf7_395d4b9f",
       "revId": "f47b2340e9b40b21869ad4f46503db2327a2490f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb9810c2_d34c4be6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-05T09:23:18Z",
+      "side": 1,
+      "message": "Ack\n\n\u003e BTW, can we move the static variables MEMORY, SHARED_POOL, and SHARED_MEMORY to `libvmbase`?\n\nYes, please; IMO, it would make sense to have all these low-level static variables in vmbase and only keep higher-level functionality (I guess mostly `main`?) in pvmfw.",
+      "parentUuid": "bbbdfb29_0b0b0bf2",
+      "revId": "f47b2340e9b40b21869ad4f46503db2327a2490f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20f60f63_d6ee44e2",
+        "filename": "vmbase/src/memory/util.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-05T09:23:18Z",
+      "side": 1,
+      "message": "These functions are tied to how the page tables are configured, which is controlled by `MemoryTracker` so them now being in a separate crate is quite confusing; I\u0027ll +2 this CL under the assumption that the related code it is leaving behind (in pvmfw) will be moved to vmbase very soon.",
+      "range": {
+        "startLine": 23,
+        "startChar": 7,
+        "endLine": 23,
+        "endChar": 19
+      },
+      "revId": "f47b2340e9b40b21869ad4f46503db2327a2490f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
