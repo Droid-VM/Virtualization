@@ -94,4 +94,11 @@ parcelable VirtualMachineAppConfig {
      * Note: Specifying a value here requires android.permission.USE_CUSTOM_VIRTUAL_MACHINE.
      */
     String[] taskProfiles;
+
+    /**
+     * If specified, boot Microdroid VM with the given kernel.
+     *
+     * Note: Specifying a value here requires android.permission.USE_CUSTOM_VIRTUAL_MACHINE.
+     */
+    @nullable ParcelFileDescriptor customKernelImage;
 }
