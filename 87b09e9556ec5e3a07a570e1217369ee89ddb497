@@ -16,6 +16,75 @@
       "message": "Hi, PTAL.",
       "revId": "87b09e9556ec5e3a07a570e1217369ee89ddb497",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c13f7c4a_62d9648b",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-06T13:10:37Z",
+      "side": 1,
+      "message": "These values are crosvm-specific and could be shared between users of vmbase e.g. as `vmbase::platform::crosvm::BASE_ADDR` (as opposed to `vmbase::platform::qemu` for QEMU values) or under a sub-module of `vmbase::layout`, WDYT? That would also apply to `MMIO_RANGE`.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 41
+      },
+      "revId": "87b09e9556ec5e3a07a570e1217369ee89ddb497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb941ba3_463ee2cd",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-06T13:10:37Z",
+      "side": 1,
+      "message": "I believe this [should be `0x4000_0000`](https://crosvm.dev/book/appendix/memory_layout.html#common-layout).",
+      "range": {
+        "startLine": 57,
+        "startChar": 39,
+        "endLine": 57,
+        "endChar": 59
+      },
+      "revId": "87b09e9556ec5e3a07a570e1217369ee89ddb497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4bc8bfc_9749b7d8",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-06T13:10:37Z",
+      "side": 1,
+      "message": "This is definitely an improvement but, to make the code even easier to follow, could this be a `MemoryRange`, allowing\n```\nif !range.is_within(self.mmio_range) {\n    return Err(MemoryTrackerError::OutOfRange);\n}\n```\nand\n```\nassert!(!overlaps(mmio_range, total))\n```\nbelow?",
+      "range": {
+        "startLine": 109,
+        "startChar": 25,
+        "endLine": 109,
+        "endChar": 30
+      },
+      "revId": "87b09e9556ec5e3a07a570e1217369ee89ddb497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
