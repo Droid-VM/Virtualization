@@ -16,6 +16,29 @@
       "message": "Hi, PTAL",
       "revId": "d2dea94aceeecc8395fc68426288030e04dfcc9f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96e61b1c_fa5ee971",
+        "filename": "vmbase/src/memory/util.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-06T12:39:08Z",
+      "side": 1,
+      "message": "This name was rejected in pvmfw (see [this thread](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2550863/comment/708d3c40_fb5cf3a6/) on aosp/2550863) because it is ambiguous as pvmfw needs to deal with (at least) 3 page sizes: its own S1 size, the S1 size that the guest will use, and the S2 size of the hyp running. Could we keep the alias\n```\npub const PVMFW_PAGE_SIZE: usize \u003d vmbase::memory::PAGE_SIZE;\n```\n?",
+      "range": {
+        "startLine": 31,
+        "startChar": 10,
+        "endLine": 31,
+        "endChar": 19
+      },
+      "revId": "d2dea94aceeecc8395fc68426288030e04dfcc9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
