@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fa08a465_cb30a543",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-06T15:40:47Z",
+      "side": 1,
+      "message": "Their variable naming uses a more restrictive definition of \"MMIO\", I guess? The UART (see `AARCH64_SERIAL_SIZE`) at page `0x0`, RTC (`AARCH64_RTC_ADDR`) or watchdog (`AARCH64_VMWDT_ADDR`) would all count as (virtual) MMIO devices. For the range above (`0x400_0000` to `0x4000_0000`), it\u0027s less clear but it is fair to assume that we shouldn\u0027t have more normal memory there (they already have the memory-mapped vGIC) and, as crosvm devs have modified their platform layout to accommodate new devices in the past, I\u0027d rather have a flexible implementation which we don\u0027t need to tweak unnecessarily, TBH.",
+      "parentUuid": "d2d95320_e00c6632",
+      "range": {
+        "startLine": 57,
+        "startChar": 39,
+        "endLine": 57,
+        "endChar": 59
+      },
+      "revId": "87b09e9556ec5e3a07a570e1217369ee89ddb497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b4bc8bfc_9749b7d8",
         "filename": "pvmfw/src/memory.rs",
         "patchSetId": 1
