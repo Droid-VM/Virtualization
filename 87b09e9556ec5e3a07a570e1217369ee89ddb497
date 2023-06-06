@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "992dfacc_30bd5d6c",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-06T15:24:00Z",
+      "side": 1,
+      "message": "Ok. I\u0027ll do this change first https://r.android.com/2617449.",
+      "parentUuid": "c13f7c4a_62d9648b",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 41
+      },
+      "revId": "87b09e9556ec5e3a07a570e1217369ee89ddb497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb941ba3_463ee2cd",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-06-06T13:10:37Z",
       "side": 1,
       "message": "I believe this [should be `0x4000_0000`](https://crosvm.dev/book/appendix/memory_layout.html#common-layout).",
+      "range": {
+        "startLine": 57,
+        "startChar": 39,
+        "endLine": 57,
+        "endChar": 59
+      },
+      "revId": "87b09e9556ec5e3a07a570e1217369ee89ddb497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2d95320_e00c6632",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-06T15:24:00Z",
+      "side": 1,
+      "message": "Why the range is not 0x1_0000 - 0x400_0000 (AARCH64_MMIO_BASE + AARCH64_MMIO_SIZE) [1]?\n\n[1] https://source.chromium.org/chromiumos/chromiumos/codesearch/+/main:src/platform/crosvm/aarch64/src/lib.rs;l\u003d202;drc\u003d4a70373f29bd06cc6ca46ee6823f370e6a906496",
+      "parentUuid": "fb941ba3_463ee2cd",
       "range": {
         "startLine": 57,
         "startChar": 39,
