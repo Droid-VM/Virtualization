@@ -18,7 +18,6 @@ use core::ops::Range;
 use vmbase::memory::SIZE_4KB;
 
 pub const GUEST_PAGE_SIZE: usize = SIZE_4KB;
-pub const PVMFW_PAGE_SIZE: usize = SIZE_4KB;
 
 /// Trait to check containment of one range within another.
 pub(crate) trait RangeExt {

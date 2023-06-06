@@ -16,7 +16,7 @@
 
 #![deny(unsafe_op_in_unsafe_fn)]
 
-use crate::helpers::{RangeExt, PVMFW_PAGE_SIZE};
+use crate::helpers::RangeExt;
 use aarch64_paging::idmap::IdMap;
 use aarch64_paging::paging::{Attributes, Descriptor, MemoryRegion as VaRange};
 use aarch64_paging::MapError;
@@ -42,7 +42,7 @@ use vmbase::{
     dsb, isb, layout,
     memory::{
         flush_dirty_range, is_leaf_pte, page_4kb_of, set_dbm_enabled, MemorySharer, PageTable,
-        MMIO_LAZY_MAP_FLAG, SIZE_2MB, SIZE_4KB, SIZE_4MB,
+        MMIO_LAZY_MAP_FLAG, PAGE_SIZE, SIZE_2MB, SIZE_4KB, SIZE_4MB,
     },
     tlbi,
     util::align_up,
@@ -354,7 +354,7 @@ impl MemoryTracker {
     /// Handles translation fault for blocks flagged for lazy MMIO mapping by enabling the page
     /// table entry and MMIO guard mapping the block. Breaks apart a block entry if required.
     pub fn handle_mmio_fault(&mut self, addr: usize) -> Result<()> {
-        let page_range = page_4kb_of(addr)..page_4kb_of(addr) + PVMFW_PAGE_SIZE;
+        let page_range = page_4kb_of(addr)..page_4kb_of(addr) + PAGE_SIZE;
         self.page_table
             .modify_range(&page_range, &verify_lazy_mapped_block)
             .map_err(|_| MemoryTrackerError::InvalidPte)?;
@@ -477,11 +477,11 @@ fn mmio_guard_unmap_page(
         );
         assert_eq!(
             va_range.len(),
-            PVMFW_PAGE_SIZE,
+            PAGE_SIZE,
             "Failed to break down block mapping before MMIO guard mapping"
         );
         let page_base = va_range.start().0;
-        assert_eq!(page_base % PVMFW_PAGE_SIZE, 0);
+        assert_eq!(page_base % PAGE_SIZE, 0);
         // Since mmio_guard_map takes IPAs, if pvmfw moves non-ID address mapping, page_base
         // should be converted to IPA. However, since 0x0 is a valid MMIO address, we don't use
         // virt_to_phys here, and just pass page_base instead.
@@ -532,7 +532,7 @@ pub fn appended_payload_range() -> Range<usize> {
 pub fn stack_range() -> Range<usize> {
     const STACK_PAGES: usize = 8;
 
-    layout::stack_range(STACK_PAGES * PVMFW_PAGE_SIZE)
+    layout::stack_range(STACK_PAGES * PAGE_SIZE)
 }
 
 pub fn init_page_table() -> result::Result<PageTable, MapError> {
