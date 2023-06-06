@@ -223,7 +223,11 @@ fn main_wrapper(
     let (bcc_slice, debug_policy) = appended.get_entries();
 
     // Up to this point, we were using the built-in static (from .rodata) page tables.
-    MEMORY.lock().replace(MemoryTracker::new(page_table));
+    MEMORY.lock().replace(MemoryTracker::new(
+        page_table,
+        memory::BASE_ADDR..memory::MAX_ADDR,
+        memory::MMIO_RANGE_END_ADDR,
+    ));
 
     let slices = MemorySlices::new(fdt, payload, payload_size)?;
 

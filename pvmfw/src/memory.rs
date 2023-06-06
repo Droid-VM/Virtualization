@@ -53,6 +53,9 @@ pub const BASE_ADDR: usize = 0x8000_0000;
 /// First address that can't be translated by a level 1 TTBR0_EL1.
 pub const MAX_ADDR: usize = 1 << 40;
 
+/// Maximum end address for the MMIO space range.
+pub const MMIO_RANGE_END_ADDR: usize = BASE_ADDR - SIZE_4MB;
+
 const PT_ROOT_LEVEL: usize = 1;
 const PT_ASID: usize = 1;
 
@@ -103,6 +106,7 @@ pub struct MemoryTracker {
     page_table: PageTable,
     regions: ArrayVec<[MemoryRegion; MemoryTracker::CAPACITY]>,
     mmio_regions: ArrayVec<[MemoryRange; MemoryTracker::MMIO_CAPACITY]>,
+    mmio_range_end_addr: usize,
 }
 
 /// Errors for MemoryTracker operations.
@@ -173,10 +177,14 @@ static SHARED_MEMORY: SpinMutex<Option<MemorySharer>> = SpinMutex::new(None);
 impl MemoryTracker {
     const CAPACITY: usize = 5;
     const MMIO_CAPACITY: usize = 5;
-    const PVMFW_RANGE: MemoryRange = (BASE_ADDR - SIZE_4MB)..BASE_ADDR;
 
     /// Create a new instance from an active page table, covering the maximum RAM size.
-    pub fn new(mut page_table: PageTable) -> Self {
+    pub fn new(mut page_table: PageTable, total: MemoryRange, mmio_range_end_addr: usize) -> Self {
+        assert!(
+            mmio_range_end_addr < total.start,
+            "MMIO space should be below the main memory region."
+        );
+
         // Activate dirty state management first, otherwise we may get permission faults immediately
         // after activating the new page table. This has no effect before the new page table is
         // activated because none of the entries in the initial idmap have the DBM flag.
@@ -189,10 +197,11 @@ impl MemoryTracker {
         debug!("... Success!");
 
         Self {
-            total: BASE_ADDR..MAX_ADDR,
+            total,
             page_table,
             regions: ArrayVec::new(),
             mmio_regions: ArrayVec::new(),
+            mmio_range_end_addr,
         }
     }
 
@@ -249,8 +258,7 @@ impl MemoryTracker {
     /// Checks that the given range of addresses is within the MMIO region, and then maps it
     /// appropriately.
     pub fn map_mmio_range(&mut self, range: MemoryRange) -> Result<()> {
-        // MMIO space is below the main memory region.
-        if range.end > self.total.start || overlaps(&Self::PVMFW_RANGE, &range) {
+        if range.end > self.mmio_range_end_addr {
             return Err(MemoryTrackerError::OutOfRange);
         }
         if self.mmio_regions.iter().any(|r| overlaps(r, &range)) {
