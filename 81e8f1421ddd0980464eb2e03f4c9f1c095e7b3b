@@ -39,6 +39,30 @@
       },
       "revId": "81e8f1421ddd0980464eb2e03f4c9f1c095e7b3b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e28aac73_1842ba63",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-06T13:27:49Z",
+      "side": 1,
+      "message": "It\u0027s fine because this field and the struct `MemoryRegion` are only used in this module.",
+      "parentUuid": "58d22c40_7d8f19ff",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 9
+      },
+      "revId": "81e8f1421ddd0980464eb2e03f4c9f1c095e7b3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
