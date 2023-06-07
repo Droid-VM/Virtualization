@@ -16,6 +16,29 @@
       "message": "Hi Alan, PTAL.",
       "revId": "353d1166a65466e62a5dcf29398060bd54423e88",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2962acb7_2529f1d6",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-07T14:59:11Z",
+      "side": 1,
+      "message": "This should be in main(), because:\n- It\u0027s undoing try_init_logger which is there\n- You want it to run even if anything here fails\n- You don\u0027t want to do any logging afterwards, but there is some in the Err(e) branch below.\n\nAlso - what if MmioGuardNotsupported ?\n\nShould try_init_logger return an RAII type, to make this more automatic/failsafe?",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 70
+      },
+      "revId": "353d1166a65466e62a5dcf29398060bd54423e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
