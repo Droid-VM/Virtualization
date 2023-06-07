@@ -39,6 +39,30 @@
       },
       "revId": "353d1166a65466e62a5dcf29398060bd54423e88",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aef09c3_43cef235",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-07T15:40:34Z",
+      "side": 1,
+      "message": "\u003e You don\u0027t want to do any logging afterwards, but there is some in the Err(e) branch below.\n\nAbout the log in Err(e): Since unmapping UART is the last command in try_main(), if this or anything before it fails, we can log.\n\n\u003e what if MmioGuardNotsupported ?\n\nThis happens in unprotected VM, in this case, calling map will break the program but it looks like calling unmap is okay.",
+      "parentUuid": "2962acb7_2529f1d6",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 70
+      },
+      "revId": "353d1166a65466e62a5dcf29398060bd54423e88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
