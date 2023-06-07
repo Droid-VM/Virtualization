@@ -99,6 +99,11 @@ unsafe fn try_main(fdt_addr: usize) -> Result<()> {
     debug!("PCI: {:#x?}", pci_info);
 
     init_page_table()?;
+
+    info!("Starting unsharing memory...");
+
+    // No logging after unmapping UART.
+    get_hypervisor().mmio_guard_unmap(vmbase::console::BASE_ADDRESS)?;
     Ok(())
 }
 
@@ -112,7 +117,7 @@ pub fn main(fdt_addr: u64, _a1: u64, _a2: u64, _a3: u64) {
     // SAFETY: `fdt_addr` is supposed to be a valid pointer and points to
     // a valid `Fdt`.
     match unsafe { try_main(fdt_addr as usize) } {
-        Ok(()) => info!("Rialto ends successfully."),
+        Ok(()) => {},
         Err(e) => {
             error!("Rialto failed with {e}");
             reboot()
