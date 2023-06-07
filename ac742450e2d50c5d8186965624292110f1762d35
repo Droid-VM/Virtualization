@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c7ffd36_fcfea6d7",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-07T14:36:26Z",
+      "side": 1,
+      "message": "Can you update this too?",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 312,
+        "endChar": 81
+      },
+      "revId": "ac742450e2d50c5d8186965624292110f1762d35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60bc6025_f9815a35",
+        "filename": "virtualizationservice/aidl/android/system/virtualizationservice/VirtualMachineAppConfig.aidl",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-07T14:36:26Z",
+      "side": 1,
+      "message": "Hmm. I\u0027m not sure I like adding things to AppConfig, especially if it\u0027s just for testing, since it affects all clients, and it isn\u0027t something an app can use.\n\nIf we are going to do this, maybe we should move this, gdbport (which is missing the permission comment) \u0026 taskProfiles into some sub-struct, CustomConfig say?",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 53
+      },
+      "revId": "ac742450e2d50c5d8186965624292110f1762d35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d15b5a2_95b542c6",
+        "filename": "vm/src/run.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-07T14:36:26Z",
+      "side": 1,
+      "message": "How did you get this past the upload hook?\n\n----\n\nPlease fix this WARNING reported by RustFormatter: Please reformat the following line(s) to:\n\n\u003e | Analyzer | Finding Category | Owner |\n\u003e | :-- | :-- | :-- |\n\u003e | \"RustFormatter\" | _RustFormatter_ | chiw@google.com |\n\u003e\n\u003e | Description |\n\u003e | :-- |\n\u003e | Offers Rust formatting Suggestions |\n\nPlease reformat the following line(s) to:\n\n            None\n        };\n\n        let kernel \u003d if let Some(path) \u003d kernel { Some(open_parcel_file(path, false)?) } else { None };\n\n        let extra_idsig_files: Result\u0026lt;Vec\u0026lt;File\u0026gt;, _\u0026gt; \u003d extra_idsigs.iter().map(File::open).collect();\n        let extra_idsig_fds \u003d extra_idsig_files?.into_iter().map(ParcelFileDescriptor::new).collect();",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 0
+      },
+      "revId": "ac742450e2d50c5d8186965624292110f1762d35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
