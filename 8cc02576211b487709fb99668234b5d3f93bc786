@@ -16,6 +16,70 @@
       "message": "Thanks for the review. What about like this?",
       "revId": "8cc02576211b487709fb99668234b5d3f93bc786",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a46a0016_9227e187",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-07T15:58:30Z",
+      "side": 1,
+      "message": "Mmm. I think an RAII might be nicer, but it\u0027s a lot of boilerplate, and this does the job.",
+      "parentUuid": "15fe8e33_3dbd23dd",
+      "revId": "8cc02576211b487709fb99668234b5d3f93bc786",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fe661d1_06b1db4a",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-07T15:58:30Z",
+      "side": 1,
+      "message": "We\u0027re not really unsharing all memory though, are we?\n\nThis is disable_logger / disable_console?\n\n(And the name matters, in that we need it to be obvious that after this succeeds we mustn\u0027t try to do any logging.)",
+      "range": {
+        "startLine": 103,
+        "startChar": 3,
+        "endLine": 103,
+        "endChar": 25
+      },
+      "revId": "8cc02576211b487709fb99668234b5d3f93bc786",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42901b32_528bc183",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-07T15:58:30Z",
+      "side": 1,
+      "message": "Given this only has one place where it can fail, you could just inline it?",
+      "range": {
+        "startLine": 115,
+        "startChar": 20,
+        "endLine": 115,
+        "endChar": 42
+      },
+      "revId": "8cc02576211b487709fb99668234b5d3f93bc786",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
