@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c56b157c_ca902b63",
+        "filename": "vmbase/src/memory/dbm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-07T16:36:39Z",
+      "side": 1,
+      "message": "aosp/2617453",
+      "parentUuid": "f2b80f07_4c912867",
+      "range": {
+        "startLine": 94,
+        "startChar": 23,
+        "endLine": 94,
+        "endChar": 30
+      },
+      "revId": "b73a81b85c6ad5ed75a33819ced8c2f103241316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6c17b499_0d147ae8",
         "filename": "vmbase/src/memory/shared.rs",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2023-06-07T15:19:42Z",
       "side": 1,
       "message": "I know that this used to be `PVMFW_PAGE_SIZE` (which is `PAGE_SIZE`) but it really should have been the MMIO guard granule size; let me add an assert.",
+      "range": {
+        "startLine": 131,
+        "startChar": 31,
+        "endLine": 131,
+        "endChar": 40
+      },
+      "revId": "b73a81b85c6ad5ed75a33819ced8c2f103241316",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e48c0d6_454a091d",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-07T16:36:39Z",
+      "side": 1,
+      "message": "aosp/2617452",
+      "parentUuid": "6c17b499_0d147ae8",
       "range": {
         "startLine": 131,
         "startChar": 31,
