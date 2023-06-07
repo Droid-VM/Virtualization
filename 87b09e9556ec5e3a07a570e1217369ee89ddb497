@@ -136,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8771e9d3_6d5cbab8",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-07T07:30:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa08a465_cb30a543",
+      "range": {
+        "startLine": 57,
+        "startChar": 39,
+        "endLine": 57,
+        "endChar": 59
+      },
+      "revId": "87b09e9556ec5e3a07a570e1217369ee89ddb497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4bc8bfc_9749b7d8",
@@ -149,6 +173,30 @@
       "writtenOn": "2023-06-06T13:10:37Z",
       "side": 1,
       "message": "This is definitely an improvement but, to make the code even easier to follow, could this be a `MemoryRange`, allowing\n```\nif !range.is_within(self.mmio_range) {\n    return Err(MemoryTrackerError::OutOfRange);\n}\n```\nand\n```\nassert!(!overlaps(mmio_range, total))\n```\nbelow?",
+      "range": {
+        "startLine": 109,
+        "startChar": 25,
+        "endLine": 109,
+        "endChar": 30
+      },
+      "revId": "87b09e9556ec5e3a07a570e1217369ee89ddb497",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ada0333_df05b356",
+        "filename": "pvmfw/src/memory.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-07T07:30:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4bc8bfc_9749b7d8",
       "range": {
         "startLine": 109,
         "startChar": 25,
