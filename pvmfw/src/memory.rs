@@ -17,7 +17,6 @@
 #![deny(unsafe_op_in_unsafe_fn)]
 
 use crate::helpers::{RangeExt, PVMFW_PAGE_SIZE};
-use aarch64_paging::idmap::IdMap;
 use aarch64_paging::paging::{Attributes, Descriptor, MemoryRegion as VaRange};
 use aarch64_paging::MapError;
 use alloc::alloc::handle_alloc_error;
@@ -41,7 +40,7 @@ use vmbase::{
     layout::{self, crosvm::MEM_START},
     memory::{
         flush_dirty_range, is_leaf_pte, page_4kb_of, set_dbm_enabled, MemorySharer, PageTable,
-        MMIO_LAZY_MAP_FLAG, SIZE_2MB, SIZE_4KB, SIZE_4MB,
+        MMIO_LAZY_MAP_FLAG, PT_ASID, SIZE_2MB, SIZE_4KB, SIZE_4MB,
     },
     tlbi,
     util::align_up,
@@ -49,9 +48,6 @@ use vmbase::{
 
 /// First address that can't be translated by a level 1 TTBR0_EL1.
 pub const MAX_ADDR: usize = 1 << 40;
-
-const PT_ROOT_LEVEL: usize = 1;
-const PT_ASID: usize = 1;
 
 pub type MemoryRange = Range<usize>;
 
@@ -510,7 +506,7 @@ pub fn stack_range() -> Range<usize> {
 }
 
 pub fn init_page_table() -> result::Result<PageTable, MapError> {
-    let mut page_table: PageTable = IdMap::new(PT_ASID, PT_ROOT_LEVEL).into();
+    let mut page_table = PageTable::default();
 
     // Stack and scratch ranges are explicitly zeroed and flushed before jumping to payload,
     // so dirty state management can be omitted.
