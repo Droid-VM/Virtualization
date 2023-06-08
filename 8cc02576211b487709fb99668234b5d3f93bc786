@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ffba3aa_d85fb4f0",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-08T07:47:30Z",
+      "side": 1,
+      "message": "Actually once I get the memory tracker in rialto, I plan to unshare all the memory here. I\u0027ll add a TODO here.",
+      "parentUuid": "9fe661d1_06b1db4a",
+      "range": {
+        "startLine": 103,
+        "startChar": 3,
+        "endLine": 103,
+        "endChar": 25
+      },
+      "revId": "8cc02576211b487709fb99668234b5d3f93bc786",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42901b32_528bc183",
@@ -72,6 +96,30 @@
       "writtenOn": "2023-06-07T15:58:30Z",
       "side": 1,
       "message": "Given this only has one place where it can fail, you could just inline it?",
+      "range": {
+        "startLine": 115,
+        "startChar": 20,
+        "endLine": 115,
+        "endChar": 42
+      },
+      "revId": "8cc02576211b487709fb99668234b5d3f93bc786",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc7ebef6_1e57cea4",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-08T07:47:30Z",
+      "side": 1,
+      "message": "There\u0027ll be more things in this function once we have the memory tracker. I added a TODO.",
+      "parentUuid": "42901b32_528bc183",
       "range": {
         "startLine": 115,
         "startChar": 20,
