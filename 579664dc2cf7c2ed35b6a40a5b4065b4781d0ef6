@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b7176a5_c2de14e4",
+        "filename": "vmbase/src/memory/page_table.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-08T10:23:31Z",
+      "side": 1,
+      "message": "The gerrit upload hook should complain if you need to run rustfmt?\n----\n\nPlease fix this WARNING reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n\n    //! Page table management.\n\n    use crate::read_sysreg;\n    use aarch64_paging::idmap::IdMap;\n    use aarch64_paging::paging::{Attributes, MemoryRegion, PteUpdater};\n    use aarch64_paging::MapError;",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 0
+      },
+      "revId": "579664dc2cf7c2ed35b6a40a5b4065b4781d0ef6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4cb4216_c45d4db7",
+        "filename": "vmbase/src/memory/page_table.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-08T10:23:31Z",
+      "side": 1,
+      "message": "I think you\u0027re very close to the point where you want to define a standard mechanism for extracting bitfields.\nconst TCR_EL1_TG0: bitfield \u003d { bits: 2, shift: 14 };",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 97
+      },
+      "revId": "579664dc2cf7c2ed35b6a40a5b4065b4781d0ef6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
