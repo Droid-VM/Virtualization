@@ -50,6 +50,9 @@ fn dbm_available() -> bool {
 }
 
 /// Flushes a memory range the descriptor refers to, if the descriptor is in writable-dirty state.
+/// As the return type is required by the crate `aarch64_paging`, we cannot address the lint
+/// issue `clippy::result_unit_err`.
+#[allow(clippy::result_unit_err)]
 pub(super) fn flush_dirty_range(
     va_range: &MemoryRegion,
     desc: &mut Descriptor,
@@ -68,6 +71,9 @@ pub(super) fn flush_dirty_range(
 
 /// Clears read-only flag on a PTE, making it writable-dirty. Used when dirty state is managed
 /// in software to handle permission faults on read-only descriptors.
+/// As the return type is required by the crate `aarch64_paging`, we cannot address the lint
+/// issue `clippy::result_unit_err`.
+#[allow(clippy::result_unit_err)]
 pub(super) fn mark_dirty_block(
     va_range: &MemoryRegion,
     desc: &mut Descriptor,

@@ -405,6 +405,9 @@ impl Drop for MemorySharer {
 }
 
 /// Checks whether block flags indicate it should be MMIO guard mapped.
+/// As the return type is required by the crate `aarch64_paging`, we cannot address the lint
+/// issue `clippy::result_unit_err`.
+#[allow(clippy::result_unit_err)]
 fn verify_lazy_mapped_block(
     _range: &VaRange,
     desc: &mut Descriptor,
@@ -422,6 +425,9 @@ fn verify_lazy_mapped_block(
 }
 
 /// MMIO guard unmaps page
+/// As the return type is required by the crate `aarch64_paging`, we cannot address the lint
+/// issue `clippy::result_unit_err`.
+#[allow(clippy::result_unit_err)]
 fn mmio_guard_unmap_page(
     va_range: &VaRange,
     desc: &mut Descriptor,
