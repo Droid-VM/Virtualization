@@ -16,6 +16,52 @@
       "message": "Hi, PTAL.",
       "revId": "43a43d1c19d0aca4c00942645c62af3fe48f7209",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1580500_59b47eb9",
+        "filename": "pvmfw/src/virtio/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-08T13:37:03Z",
+      "side": 1,
+      "message": "nit: the \"`Pci`\" prefix is redundant when naming of the variants of `PciError`, IMO",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 7
+      },
+      "revId": "43a43d1c19d0aca4c00942645c62af3fe48f7209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36acc5d0_39939cf0",
+        "filename": "pvmfw/src/virtio/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-08T13:37:03Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it make more sense for this check to be the first thing the `initialise` function does, instead of starting with mapping the MMIO?",
+      "range": {
+        "startLine": 75,
+        "startChar": 44,
+        "endLine": 75,
+        "endChar": 52
+      },
+      "revId": "43a43d1c19d0aca4c00942645c62af3fe48f7209",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
