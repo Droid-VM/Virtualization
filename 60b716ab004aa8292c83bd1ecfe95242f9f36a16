@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "988cd830_154a1c1e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-06-09T04:33:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2e41892_f1e41862",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 34
+      },
+      "revId": "60b716ab004aa8292c83bd1ecfe95242f9f36a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd02a2fe_e064a36f",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47df845c_8316f10d",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/BenchmarkVmListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-06-09T04:33:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd02a2fe_e064a36f",
+      "range": {
+        "startLine": 38,
+        "startChar": 18,
+        "endLine": 38,
+        "endChar": 44
+      },
+      "revId": "60b716ab004aa8292c83bd1ecfe95242f9f36a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d077bbcd_943c05a0",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-06-09T02:38:44Z",
       "side": 1,
       "message": "Is this enough? It just ensures that onPayloadReady was called. What if an error occurs \"after\" the event? In other words, how do we ensure that onError was not called during benchmark?",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 57
+      },
+      "revId": "60b716ab004aa8292c83bd1ecfe95242f9f36a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a905e24d_80e63bc5",
+        "filename": "tests/benchmark/src/java/com/android/microdroid/benchmark/BenchmarkVmListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2023-06-09T04:33:02Z",
+      "side": 1,
+      "message": "onError throws an runtime error, which will terminate the test. So if we successfully reach here, we can ensure that onError has not been called.",
+      "parentUuid": "d077bbcd_943c05a0",
       "range": {
         "startLine": 82,
         "startChar": 0,
