@@ -39,6 +39,29 @@
       },
       "revId": "9eea5226fa904b643989a2e48058548cf314a513",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "210d2e62_1476e50f",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-12T10:47:08Z",
+      "side": 1,
+      "message": "If it\u0027s easy enough to do, there\u0027s other cases we could include:\n- valid fdt with no memory\n- valid fdt with empty memory (it seems to be possible for the iterator to be empty?)\n- valid fdt with \u003e 1 memory range.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 74
+      },
+      "revId": "9eea5226fa904b643989a2e48058548cf314a513",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
