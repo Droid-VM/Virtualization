@@ -29,9 +29,11 @@ use fdtpci::PciInfo;
 use hyp::get_hypervisor;
 use log::{debug, error, info};
 use vmbase::{
-    layout, main,
-    memory::{PageTable, PAGE_SIZE},
+    layout::{self, crosvm},
+    main,
+    memory::{MemoryTracker, PageTable, MEMORY, PAGE_SIZE},
     power::reboot,
+    util::align_up,
 };
 
 const SZ_1K: usize = 1024;
@@ -51,7 +53,7 @@ fn init_heap() {
     }
 }
 
-fn init_page_table() -> Result<()> {
+fn init_page_table() -> Result<PageTable> {
     let mut page_table = PageTable::default();
 
     // The first 1 GiB of address space is used by crosvm for MMIO.
@@ -62,11 +64,7 @@ fn init_page_table() -> Result<()> {
     page_table.map_rodata(&layout::rodata_range())?;
     page_table.map_device(&layout::console_uart_range())?;
 
-    // SAFETY: It is safe to activate the page table by setting `TTBR0_EL1` to point to
-    // it as this is the first time we activate the page table.
-    unsafe { page_table.activate() }
-    info!("Activated kernel page table.");
-    Ok(())
+    Ok(page_table)
 }
 
 fn try_init_logger() -> Result<bool> {
@@ -96,20 +94,33 @@ unsafe fn try_main(fdt_addr: usize) -> Result<()> {
     let pci_info = PciInfo::from_fdt(fdt)?;
     debug!("PCI: {:#x?}", pci_info);
 
-    init_page_table()?;
+    let page_table = init_page_table()?;
+
+    // First address that can't be translated by a level 1 TTBR0_EL1.
+    const MAX_ADDR: usize = 1 << 40;
+    // Riatlo doesn't have any payload for now.
+    let payload_start = align_up(layout::binary_end(), PAGE_SIZE).unwrap();
+    let payload_range = payload_start..payload_start;
+    MEMORY.lock().replace(MemoryTracker::new(
+        page_table,
+        crosvm::MEM_START..MAX_ADDR,
+        crosvm::MMIO_START..crosvm::MMIO_END,
+        payload_range,
+    ));
     Ok(())
 }
 
 fn try_unshare_all_memory(mmio_guard_supported: bool) -> Result<()> {
-    if !mmio_guard_supported {
-        return Ok(());
-    }
     info!("Starting unsharing memory...");
 
     // TODO(b/284462758): Unshare all the memory here.
 
     // No logging after unmapping UART.
-    get_hypervisor().mmio_guard_unmap(vmbase::console::BASE_ADDRESS)?;
+    if mmio_guard_supported {
+        get_hypervisor().mmio_guard_unmap(vmbase::console::BASE_ADDRESS)?;
+    }
+    // Drop MemoryTracker and deactivate page table.
+    drop(MEMORY.lock().take());
     Ok(())
 }
 
