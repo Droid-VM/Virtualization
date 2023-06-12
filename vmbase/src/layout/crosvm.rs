@@ -27,3 +27,6 @@ pub const MMIO_RANGE: Range<usize> = MMIO_START..MMIO_END;
 
 /// The start of the system's contiguous "main" memory.
 pub const MEM_START: usize = 0x8000_0000;
+
+/// The size of FDT should be 2MiB.
+pub const FDT_SIZE: usize = 2 << 20;
