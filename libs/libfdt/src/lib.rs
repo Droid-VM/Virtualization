@@ -25,6 +25,7 @@ use core::cmp::max;
 use core::ffi::{c_int, c_void, CStr};
 use core::fmt;
 use core::mem;
+use core::ops::Range;
 use core::result;
 use zerocopy::AsBytes as _;
 
@@ -719,7 +720,7 @@ impl Fdt {
     /// Return an iterator of memory banks specified the "/memory" node.
     ///
     /// NOTE: This does not support individual "/memory@XXXX" banks.
-    pub fn memory(&self) -> Result<Option<MemRegIterator>> {
+    pub fn memory(&self) -> Result<MemRegIterator> {
         let memory = CStr::from_bytes_with_nul(b"/memory\0").unwrap();
         let device_type = CStr::from_bytes_with_nul(b"memory\0").unwrap();
 
@@ -729,10 +730,15 @@ impl Fdt {
             }
             let reg = node.reg()?.ok_or(FdtError::BadValue)?;
 
-            Ok(Some(MemRegIterator::new(reg)))
+            Ok(MemRegIterator::new(reg))
         } else {
-            Ok(None)
+            Err(FdtError::NotFound)
         }
+    }
+
+    /// Returns the first memory range in the `/memory` node.
+    pub fn first_memory_range(&self) -> Result<Range<usize>> {
+        self.memory()?.next().ok_or(FdtError::NotFound)
     }
 
     /// Retrieve the standard /chosen node.
