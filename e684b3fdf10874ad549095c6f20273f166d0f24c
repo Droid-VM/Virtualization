@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2b2c278_ede7f583",
+        "filename": "vmbase/src/virtio/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-06-12T14:36:10Z",
+      "side": 1,
+      "message": "Nit: add a blank line before this line.",
+      "revId": "e684b3fdf10874ad549095c6f20273f166d0f24c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b50ce8f6_1247090f",
         "filename": "vmbase/src/virtio/pci.rs",
         "patchSetId": 3
@@ -14,6 +31,30 @@
       "writtenOn": "2023-06-12T14:19:37Z",
       "side": 1,
       "message": "The point of `VirtIOBlkIterator` was to iterate over `virtio-blk` devices, as pvmfw needs to locate _a_ blk device that contains the instance.img. I\u0027m not sure how you plan to use this `VirtIODeviceIterator` but surely it isn\u0027t going to run an operation on every blk or socket device? Instead, I assume that you\u0027ll want to locate _a_ socket that matches some criteria? If that\u0027s the case, WDYT of introducing an iterator that would only return devices of a given `DeviceType`? pvmfw would ask for all `DeviceType::Block` devices while Rialto would ask for all `DeviceType::Socket`.\n\nIMO, it is confusing that an iterator named \"`VirtIODeviceIterator`\" doesn\u0027t actually iterate over all virtio devices but instead only returns an undocumented subset of device types (blk \u0026 socket), silently (ignoring `debug!`) dropping everything else.",
+      "range": {
+        "startLine": 111,
+        "startChar": 22,
+        "endLine": 111,
+        "endChar": 42
+      },
+      "revId": "e684b3fdf10874ad549095c6f20273f166d0f24c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ba4a3f3_3c58205e",
+        "filename": "vmbase/src/virtio/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-06-12T14:36:10Z",
+      "side": 1,
+      "message": "I agree with Pierre that the approach taken here with the `VirtIODevice` enum is confusing and a bit arbitrary. Having an iterator that returns all devices of a requested type would be reasonable, though letting it be used more than once is a bit dubious. (That is to say, constructing two drivers pointing to the same device is incorrect and possibly unsound.)\n\nThe other approach you could take is to make the iterator just return instances of `PciTransport`, and then the caller can check the device type and construct the appropriate device if desired.",
+      "parentUuid": "b50ce8f6_1247090f",
       "range": {
         "startLine": 111,
         "startChar": 22,
