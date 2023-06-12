@@ -16,6 +16,29 @@
       "message": "Hi, PTAL. Thanks!",
       "revId": "89d295964b5f6d6772cf815f346cafb1cd40013f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fc54d0c_5e4b2ab0",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-12T10:11:54Z",
+      "side": 1,
+      "message": "(IIRC, this should be 2MiB and the size could also come from `vmbase::layout::crosvm::FDT_SIZE` and be shared with pvmfw)",
+      "range": {
+        "startLine": 93,
+        "startChar": 66,
+        "endLine": 93,
+        "endChar": 71
+      },
+      "revId": "89d295964b5f6d6772cf815f346cafb1cd40013f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
