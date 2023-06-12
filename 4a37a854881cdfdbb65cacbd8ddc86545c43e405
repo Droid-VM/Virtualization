@@ -39,6 +39,53 @@
       },
       "revId": "4a37a854881cdfdbb65cacbd8ddc86545c43e405",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e0bb581_966caa19",
+        "filename": "vmbase/src/layout/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-12T12:51:17Z",
+      "side": 1,
+      "message": "\u003e Also, I would recommend not stating the value of a constant in its documentation.\n\n\u003cstrong agreement\u003e\n\nIt\u0027s part of the fundamental Don\u0027t Repeat Yourself principle.",
+      "parentUuid": "d14e6f41_8820774f",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 35
+      },
+      "revId": "4a37a854881cdfdbb65cacbd8ddc86545c43e405",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e64ac20f_d4a74beb",
+        "filename": "vmbase/src/layout/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-12T12:51:17Z",
+      "side": 1,
+      "message": "Following Pierre-Clément\u0027s point, rename to FDT_MAX_SIZE.",
+      "range": {
+        "startLine": 32,
+        "startChar": 10,
+        "endLine": 32,
+        "endChar": 18
+      },
+      "revId": "4a37a854881cdfdbb65cacbd8ddc86545c43e405",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
