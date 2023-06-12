@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22626e1b_1c28b13a",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-12T15:14:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee7d451f_c243eb06",
+      "range": {
+        "startLine": 727,
+        "startChar": 0,
+        "endLine": 737,
+        "endChar": 9
+      },
+      "revId": "d1cda5b97e53ce64d8fe0cc9cb5c14a09314152d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d84fb816_f8d5aa03",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-06-12T14:36:07Z",
       "side": 1,
       "message": "Could this be DRY-ed using the `/include/` DTS directive? For example, `test_tree_no_memory_node.dts` is currently missing the empty `/chosen` node that all the other trees have for seemingly no reason related to the test.",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 0
+      },
+      "revId": "d1cda5b97e53ce64d8fe0cc9cb5c14a09314152d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cad02bd_c7b2f355",
+        "filename": "libs/libfdt/tests/data/test_tree_empty_memory_range.dts",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-12T15:14:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d84fb816_f8d5aa03",
       "range": {
         "startLine": 5,
         "startChar": 0,
