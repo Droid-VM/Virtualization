@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "055aa660_e8a35968",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-12T12:11:22Z",
+      "side": 1,
+      "message": "I think it would be clearer to return `NotFound` in both cases. Users can choose ignore this error if they want to.\n\nIn fact we could convert most of the result type `Result\u003cOption\u003cT\u003e\u003e` to `Result\u003cT\u003e` by throwing a `NotFound` error in case of `None`. That\u0027s also what the client code does in many places [1] today. wdyt?\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/pvmfw/src/fdt.rs;drc\u003d4be4dd0e3744b7f69c8201408c88c766a12f7fbe",
+      "parentUuid": "1a45f7ee_7baa9210",
+      "range": {
+        "startLine": 740,
+        "startChar": 40,
+        "endLine": 740,
+        "endChar": 60
+      },
+      "revId": "9eea5226fa904b643989a2e48058548cf314a513",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "210d2e62_1476e50f",
         "filename": "libs/libfdt/tests/api_test.rs",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2023-06-12T10:47:08Z",
       "side": 1,
       "message": "If it\u0027s easy enough to do, there\u0027s other cases we could include:\n- valid fdt with no memory\n- valid fdt with empty memory (it seems to be possible for the iterator to be empty?)\n- valid fdt with \u003e 1 memory range.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 74
+      },
+      "revId": "9eea5226fa904b643989a2e48058548cf314a513",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da1151d2_37f0bf94",
+        "filename": "libs/libfdt/tests/api_test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-12T12:11:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "210d2e62_1476e50f",
       "range": {
         "startLine": 32,
         "startChar": 0,
