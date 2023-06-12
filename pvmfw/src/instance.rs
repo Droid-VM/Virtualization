@@ -31,7 +31,7 @@ use log::trace;
 use uuid::Uuid;
 use virtio_drivers::transport::pci::bus::PciRoot;
 use vmbase::util::ceiling_div;
-use vmbase::virtio::pci::VirtIOBlkIterator;
+use vmbase::virtio::pci::{VirtIODevice, VirtIODeviceIterator};
 use zerocopy::AsBytes;
 use zerocopy::FromBytes;
 
@@ -178,12 +178,17 @@ impl Header {
 }
 
 fn find_instance_img(pci_root: &mut PciRoot) -> Result<Partition> {
-    for device in VirtIOBlkIterator::new(pci_root) {
-        match Partition::get_by_name(device, "vm-instance") {
-            Ok(Some(p)) => return Ok(p),
-            Ok(None) => {}
-            Err(e) => log::warn!("error while reading from disk: {e}"),
-        };
+    for device in VirtIODeviceIterator::new(pci_root) {
+        match device {
+            VirtIODevice::Block(d) => {
+                match Partition::get_by_name(d, "vm-instance") {
+                    Ok(Some(p)) => return Ok(p),
+                    Ok(None) => {}
+                    Err(e) => log::warn!("error while reading from disk: {e}"),
+                };
+            }
+            VirtIODevice::Socket(_) => log::debug!("Virtio Socket device detected."),
+        }
     }
 
     Err(Error::MissingInstanceImage)

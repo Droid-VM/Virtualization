@@ -22,7 +22,7 @@ use fdtpci::PciInfo;
 use log::debug;
 use once_cell::race::OnceBox;
 use virtio_drivers::{
-    device::blk,
+    device::{blk, socket},
     transport::{
         pci::{
             bus::{BusDeviceIterator, PciRoot},
@@ -80,14 +80,27 @@ pub fn initialise(pci_info: PciInfo, memory: &mut MemoryTracker) -> Result<PciRo
 
 /// Virtio Block device.
 pub type VirtIOBlk = blk::VirtIOBlk<HalImpl, PciTransport>;
+/// Virtio Socket device.
+///
+/// Spec: https://docs.oasis-open.org/virtio/virtio/v1.2/csd01/virtio-v1.2-csd01.html 5.10
+pub type VirtIOSocket = socket::VirtIOSocket<HalImpl, PciTransport>;
 
-/// Virtio Block device iterator.
-pub struct VirtIOBlkIterator<'a> {
+/// Virtio devices.
+#[allow(clippy::large_enum_variant)]
+pub enum VirtIODevice {
+    /// Virtio Block device.
+    Block(VirtIOBlk),
+    /// Virtio Socket device.
+    Socket(VirtIOSocket),
+}
+
+/// Virtio device iterator.
+pub struct VirtIODeviceIterator<'a> {
     pci_root: &'a mut PciRoot,
     bus: BusDeviceIterator,
 }
 
-impl<'a> VirtIOBlkIterator<'a> {
+impl<'a> VirtIODeviceIterator<'a> {
     /// Creates a new iterator.
     pub fn new(pci_root: &'a mut PciRoot) -> Self {
         let bus = pci_root.enumerate_bus(0);
@@ -95,8 +108,8 @@ impl<'a> VirtIOBlkIterator<'a> {
     }
 }
 
-impl<'a> Iterator for VirtIOBlkIterator<'a> {
-    type Item = VirtIOBlk;
+impl<'a> Iterator for VirtIODeviceIterator<'a> {
+    type Item = VirtIODevice;
 
     fn next(&mut self) -> Option<Self::Item> {
         loop {
@@ -120,8 +133,17 @@ impl<'a> Iterator for VirtIOBlkIterator<'a> {
                 transport.read_device_features(),
             );
 
-            if virtio_type == DeviceType::Block {
-                return Some(Self::Item::new(transport).expect("failed to create blk driver"));
+            match virtio_type {
+                DeviceType::Block => {
+                    let device = VirtIOBlk::new(transport).expect("failed to create blk driver");
+                    return Some(VirtIODevice::Block(device));
+                }
+                DeviceType::Socket => {
+                    let device =
+                        VirtIOSocket::new(transport).expect("failed to create socket driver");
+                    return Some(VirtIODevice::Socket(device));
+                }
+                _ => {}
             }
         }
     }
