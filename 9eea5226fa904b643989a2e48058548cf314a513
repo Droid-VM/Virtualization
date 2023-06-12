@@ -16,6 +16,29 @@
       "message": "Hi, PTAL.",
       "revId": "9eea5226fa904b643989a2e48058548cf314a513",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a45f7ee_7baa9210",
+        "filename": "libs/libfdt/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-06-12T08:50:46Z",
+      "side": 1,
+      "message": "uber nit: Not sure which is better, but the return type of this and `memory` is inconsistent. When there are no parsing errors but no entry is found, `memory` returns `Ok(None)` but this returns `Err(NotFound)`. Could we unify them?",
+      "range": {
+        "startLine": 740,
+        "startChar": 40,
+        "endLine": 740,
+        "endChar": 60
+      },
+      "revId": "9eea5226fa904b643989a2e48058548cf314a513",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
