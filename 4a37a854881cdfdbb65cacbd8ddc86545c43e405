@@ -16,6 +16,29 @@
       "message": "Hi, PTAL.",
       "revId": "4a37a854881cdfdbb65cacbd8ddc86545c43e405",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d14e6f41_8820774f",
+        "filename": "vmbase/src/layout/crosvm.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-12T12:46:20Z",
+      "side": 1,
+      "message": "2MiB is the size of the region that can hold the FDT (i.e. its maximum size) and NOT its size i.e. its `totalsize` header field.\n\nAlso, I would recommend not stating the value of a constant in its documentation.\n\nAs you\u0027ve already linked to the crosvm docs for its memory layout (neat!), this could simply say \"Size of the FDT region as defined by crosvm, both in kernel and BIOS modes\". IMO, it\u0027s useful to explicitly mention those modes as they place the DT in different locations but still use the same maximum size.",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 35
+      },
+      "revId": "4a37a854881cdfdbb65cacbd8ddc86545c43e405",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
