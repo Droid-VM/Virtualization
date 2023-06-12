@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "490618b9_1b16be9b",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-12T09:53:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d414f1d_b57f6bed",
+      "range": {
+        "startLine": 60,
+        "startChar": 28,
+        "endLine": 60,
+        "endChar": 36
+      },
+      "revId": "e20a5c46f7e7f1d161ffbebc3ca59fcffadaeabe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9fc77da3_e3d38bc0",
         "filename": "rialto/src/main.rs",
         "patchSetId": 1
@@ -87,6 +111,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12f9f662_baa42fb0",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-12T09:53:35Z",
+      "side": 1,
+      "message": "I moved this field to `vmbase`. https://r.android.com/2619460",
+      "parentUuid": "a17cf282_5d60f996",
+      "range": {
+        "startLine": 100,
+        "startChar": 10,
+        "endLine": 100,
+        "endChar": 18
+      },
+      "revId": "e20a5c46f7e7f1d161ffbebc3ca59fcffadaeabe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2888c6e6_703d016b",
@@ -110,6 +158,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c40dc01_0e22d611",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-12T09:53:35Z",
+      "side": 1,
+      "message": "Done https://r.android.com/2619459",
+      "parentUuid": "2888c6e6_703d016b",
+      "range": {
+        "startLine": 101,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 47
+      },
+      "revId": "e20a5c46f7e7f1d161ffbebc3ca59fcffadaeabe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f73f2fa_4f347caf",
@@ -123,6 +195,30 @@
       "writtenOn": "2023-06-12T08:44:58Z",
       "side": 1,
       "message": "I don\u0027t see where memory is being shared but, if done through `MEMORY`, doesn\u0027t the `drop` below address this TODO?",
+      "range": {
+        "startLine": 116,
+        "startChar": 4,
+        "endLine": 116,
+        "endChar": 54
+      },
+      "revId": "e20a5c46f7e7f1d161ffbebc3ca59fcffadaeabe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "287c93b3_1c9b5cff",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-12T09:53:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f73f2fa_4f347caf",
       "range": {
         "startLine": 116,
         "startChar": 4,
