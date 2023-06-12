@@ -16,6 +16,29 @@
       "message": "Hi, PTAL.",
       "revId": "41f56b5d3c610b1c43c1219ab030d223361c4c97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4492e4f8_768acbb6",
+        "filename": "vmbase/src/layout/mod.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-12T10:17:56Z",
+      "side": 1,
+      "message": "This name is a bit misleading because this value is one-past the maximum address that the MMU allows the CPU to access (through TTBR0), which is likely to cover normal memory, device memory, and (mostly) invalid addresses; in particular, it isn\u0027t the \"end\" of the (normal) memory region, which \"`MEM_END`\" might imply.\n\nGiven how infrequently this constant will be used, WDYT of giving it a longer, more explicit name such as `ADDRESSABLE_LIMIT` or `MAX_VIRT_ADDR`?",
+      "range": {
+        "startLine": 24,
+        "startChar": 10,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "41f56b5d3c610b1c43c1219ab030d223361c4c97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
