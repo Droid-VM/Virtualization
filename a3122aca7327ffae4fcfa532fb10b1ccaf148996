@@ -16,6 +16,29 @@
       "message": "Hi Alan, PTAL.",
       "revId": "a3122aca7327ffae4fcfa532fb10b1ccaf148996",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "556cac43_85e032fc",
+        "filename": "libs/libfdt/tests/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-06-12T08:43:10Z",
+      "side": 1,
+      "message": "We do have `dtc` prebuilt in the tree. Could we check in the DTS and compile to DTB as a dependency of the test?",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 56
+      },
+      "revId": "a3122aca7327ffae4fcfa532fb10b1ccaf148996",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
