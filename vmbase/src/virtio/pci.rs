@@ -22,13 +22,10 @@ use fdtpci::PciInfo;
 use log::debug;
 use once_cell::race::OnceBox;
 use virtio_drivers::{
-    device::blk,
-    transport::{
-        pci::{
-            bus::{BusDeviceIterator, PciRoot},
-            virtio_device_type, PciTransport,
-        },
-        DeviceType, Transport,
+    device::{blk, socket},
+    transport::pci::{
+        bus::{BusDeviceIterator, PciRoot},
+        virtio_device_type, PciTransport,
     },
 };
 
@@ -81,13 +78,18 @@ pub fn initialise(pci_info: PciInfo, memory: &mut MemoryTracker) -> Result<PciRo
 /// Virtio Block device.
 pub type VirtIOBlk = blk::VirtIOBlk<HalImpl, PciTransport>;
 
-/// Virtio Block device iterator.
-pub struct VirtIOBlkIterator<'a> {
+/// Virtio Socket device.
+///
+/// Spec: https://docs.oasis-open.org/virtio/virtio/v1.2/csd01/virtio-v1.2-csd01.html 5.10
+pub type VirtIOSocket = socket::VirtIOSocket<HalImpl, PciTransport>;
+
+/// An iterator that iterates over the PCI transport for each device.
+pub struct PciTransportIterator<'a> {
     pci_root: &'a mut PciRoot,
     bus: BusDeviceIterator,
 }
 
-impl<'a> VirtIOBlkIterator<'a> {
+impl<'a> PciTransportIterator<'a> {
     /// Creates a new iterator.
     pub fn new(pci_root: &'a mut PciRoot) -> Self {
         let bus = pci_root.enumerate_bus(0);
@@ -95,8 +97,8 @@ impl<'a> VirtIOBlkIterator<'a> {
     }
 }
 
-impl<'a> Iterator for VirtIOBlkIterator<'a> {
-    type Item = VirtIOBlk;
+impl<'a> Iterator for PciTransportIterator<'a> {
+    type Item = PciTransport;
 
     fn next(&mut self) -> Option<Self::Item> {
         loop {
@@ -112,17 +114,7 @@ impl<'a> Iterator for VirtIOBlkIterator<'a> {
             };
             debug!("  VirtIO {:?}", virtio_type);
 
-            let mut transport =
-                PciTransport::new::<HalImpl>(self.pci_root, device_function).unwrap();
-            debug!(
-                "Detected virtio PCI device with device type {:?}, features {:#018x}",
-                transport.device_type(),
-                transport.read_device_features(),
-            );
-
-            if virtio_type == DeviceType::Block {
-                return Some(Self::Item::new(transport).expect("failed to create blk driver"));
-            }
+            return PciTransport::new::<HalImpl>(self.pci_root, device_function).ok();
         }
     }
 }
