@@ -25,6 +25,7 @@ use core::cmp::max;
 use core::ffi::{c_int, c_void, CStr};
 use core::fmt;
 use core::mem;
+use core::ops::Range;
 use core::result;
 use zerocopy::AsBytes as _;
 
@@ -733,6 +734,11 @@ impl Fdt {
         } else {
             Ok(None)
         }
+    }
+
+    /// Returns the first memory range in the `/memory` node.
+    pub fn first_memory_range(&self) -> Result<Range<usize>> {
+        self.memory()?.ok_or(FdtError::NotFound)?.next().ok_or(FdtError::NotFound)
     }
 
     /// Retrieve the standard /chosen node.

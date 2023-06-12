@@ -18,6 +18,7 @@
 
 use libfdt::Fdt;
 use std::fs;
+use std::ops::Range;
 
 const TEST_TREE1_PATH: &str = "tests/data/test_tree1.dtb";
 
@@ -27,5 +28,8 @@ fn parse_well_formed_fdt_successfully() {
     let fdt = Fdt::from_slice(&data).unwrap();
 
     let mut memory = fdt.memory().unwrap().unwrap();
-    assert_eq!(memory.next(), Some(0..256));
+
+    const EXPECTED_FIRST_MEMORY_RANGE: Range<usize> = 0..256;
+    assert_eq!(memory.next(), Some(EXPECTED_FIRST_MEMORY_RANGE));
+    assert_eq!(fdt.first_memory_range(), Ok(EXPECTED_FIRST_MEMORY_RANGE));
 }
