@@ -186,6 +186,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a1ed5f4c_9d5051ea",
+        "filename": "vmbase/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-13T15:56:58Z",
+      "side": 1,
+      "message": "+1; this constructor could simply attempt to extract the information concerning the swiotlb from the DT, even if it ends up overflowing. It would then be the responsibility of the caller to decide if they trust (Rialto) or not (pvmfw) the source of the fields and validate the resulting struct. This would also address Alan\u0027s original point (nicely spotted!) that `checked_add` should be performed on the target type _only_.\n\nBTW, `checked_add` in `.fixed_range` isn\u0027t a good approach as it would cause a seemingly incoherent result where a fixed range (i.e. `.addr.is_some()` \u0026 `.align.is_none()`) has `.fixed_range().is_none()`; if you _really_ want to add an extra check there, I\u0027d recommend panicking on overflow.",
+      "parentUuid": "be863c1e_e23600c5",
+      "range": {
+        "startLine": 41,
+        "startChar": 21,
+        "endLine": 41,
+        "endChar": 32
+      },
+      "revId": "25ff3035897f0783eabc3dcea916e5c6ca021a85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "acf41cc7_c5d1284a",
         "filename": "vmbase/src/fdt.rs",
         "patchSetId": 2
