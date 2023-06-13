@@ -89,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20667e19_ab4e72ef",
+        "filename": "vmbase/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-13T15:22:02Z",
+      "side": 1,
+      "message": "Cool - and the different name makes that more obvious.",
+      "parentUuid": "3098b892_cb47377a",
+      "range": {
+        "startLine": 34,
+        "startChar": 11,
+        "endLine": 34,
+        "endChar": 23
+      },
+      "revId": "25ff3035897f0783eabc3dcea916e5c6ca021a85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a314947f_7d661b4d",
@@ -138,6 +162,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be863c1e_e23600c5",
+        "filename": "vmbase/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-13T15:22:02Z",
+      "side": 1,
+      "message": "So do we need the checked_add here at all?\n(But could still usefully have a comment saying that)",
+      "parentUuid": "55430d21_08dbe4ae",
+      "range": {
+        "startLine": 41,
+        "startChar": 21,
+        "endLine": 41,
+        "endChar": 32
+      },
+      "revId": "25ff3035897f0783eabc3dcea916e5c6ca021a85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "acf41cc7_c5d1284a",
         "filename": "vmbase/src/fdt.rs",
         "patchSetId": 2
@@ -173,6 +221,30 @@
       "side": 1,
       "message": "The values are actually validated in pvmfw [1] immediately after the extraction. I think we can just use the FD as it is in rialto since it\u0027s already validated in pvmfw.\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/pvmfw/src/fdt.rs;l\u003d464;drc\u003d2422bdc31e7be8ce73a9b1ed1e39c2f6db925b18",
       "parentUuid": "acf41cc7_c5d1284a",
+      "range": {
+        "startLine": 53,
+        "startChar": 29,
+        "endLine": 53,
+        "endChar": 51
+      },
+      "revId": "25ff3035897f0783eabc3dcea916e5c6ca021a85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "964c6174_d940f70f",
+        "filename": "vmbase/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-13T15:22:02Z",
+      "side": 1,
+      "message": "I\u0027m confused; this is vmbase rather than Rialto.\n\nIf the checks are already done, we don\u0027t need the checked_add here? (But should comment why.)",
+      "parentUuid": "eb26e959_bb90a0d9",
       "range": {
         "startLine": 53,
         "startChar": 29,
