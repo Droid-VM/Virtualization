@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9db1aa7a_0896ac51",
+        "filename": "vmbase/src/virtio/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-13T08:11:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2b2c278_ede7f583",
+      "revId": "e684b3fdf10874ad549095c6f20273f166d0f24c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b50ce8f6_1247090f",
@@ -55,6 +73,30 @@
       "side": 1,
       "message": "I agree with Pierre that the approach taken here with the `VirtIODevice` enum is confusing and a bit arbitrary. Having an iterator that returns all devices of a requested type would be reasonable, though letting it be used more than once is a bit dubious. (That is to say, constructing two drivers pointing to the same device is incorrect and possibly unsound.)\n\nThe other approach you could take is to make the iterator just return instances of `PciTransport`, and then the caller can check the device type and construct the appropriate device if desired.",
       "parentUuid": "b50ce8f6_1247090f",
+      "range": {
+        "startLine": 111,
+        "startChar": 22,
+        "endLine": 111,
+        "endChar": 42
+      },
+      "revId": "e684b3fdf10874ad549095c6f20273f166d0f24c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79570744_a8cb0bcc",
+        "filename": "vmbase/src/virtio/pci.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-13T08:11:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ba4a3f3_3c58205e",
       "range": {
         "startLine": 111,
         "startChar": 22,
