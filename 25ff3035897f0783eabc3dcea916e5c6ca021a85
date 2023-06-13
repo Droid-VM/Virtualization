@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c1a3b7ca_1b29805b",
+        "filename": "vmbase/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-13T14:08:24Z",
+      "side": 1,
+      "message": "`TryFrom::try_from` takes a `T`, not a `\u0026T`. Also, this isn\u0027t converting the DT into a somewhat equivalent type, it\u0027s extracting a small subset of the information contained in the DT into a Rust struct.\n\nI agree that `SwiotlbInfo::new_from_fdt` would be a more fitting name.",
+      "parentUuid": "90f0ea60_e14635ca",
+      "range": {
+        "startLine": 34,
+        "startChar": 11,
+        "endLine": 34,
+        "endChar": 23
+      },
+      "revId": "25ff3035897f0783eabc3dcea916e5c6ca021a85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a314947f_7d661b4d",
         "filename": "vmbase/src/fdt.rs",
         "patchSetId": 2
