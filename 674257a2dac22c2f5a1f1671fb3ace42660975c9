@@ -22,6 +22,30 @@
       },
       "revId": "674257a2dac22c2f5a1f1671fb3ace42660975c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f281d9e_4b072e04",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-13T13:10:21Z",
+      "side": 1,
+      "message": "In general, [no](https://devicetree-specification.readthedocs.io/en/latest/chapter3-devicenodes.html#memory-node):\n\n\u003e A memory device node is required for all devicetrees and describes the physical memory layout for the system. If a system has multiple ranges of memory, multiple memory nodes can be created, or the ranges can be specified in the reg property of a single memory node.\n\nBut in the particular case of crosvm, [yes](https://cs.android.com/android/platform/superproject/+/master:external/crosvm/aarch64/src/fdt.rs;l\u003d97;drc\u003da14178eb6923378baa1cd48dc1ec14afd99d3890).",
+      "parentUuid": "9e53fe4d_6a568cc1",
+      "range": {
+        "startLine": 109,
+        "startChar": 23,
+        "endLine": 109,
+        "endChar": 49
+      },
+      "revId": "674257a2dac22c2f5a1f1671fb3ace42660975c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
