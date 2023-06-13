@@ -27,7 +27,7 @@ use buddy_system_allocator::LockedHeap;
 use core::num::NonZeroUsize;
 use core::slice;
 use fdtpci::PciInfo;
-use hyp::get_hypervisor;
+use hyp::{get_hypervisor, KvmError};
 use log::{debug, error, info};
 use vmbase::{
     layout::{self, crosvm},
@@ -65,18 +65,18 @@ fn new_page_table() -> Result<PageTable> {
 }
 
 fn try_init_logger() -> Result<bool> {
-    let mmio_guard_supported = match get_hypervisor().mmio_guard_init() {
+    let kvm_supported = match get_hypervisor().mmio_guard_init() {
         // pKVM blocks MMIO by default, we need to enable MMIO guard to support logging.
         Ok(()) => {
             get_hypervisor().mmio_guard_map(vmbase::console::BASE_ADDRESS)?;
             true
         }
-        // MMIO guard enroll is not supported in unprotected VM.
-        Err(hyp::Error::MmioGuardNotsupported) => false,
+        // KVM call is not supported in unprotected VM.
+        Err(hyp::Error::KvmError(KvmError::NotSupported, _)) => false,
         Err(e) => return Err(e.into()),
     };
     vmbase::logger::init(log::LevelFilter::Debug).map_err(|_| Error::LoggerInit)?;
-    Ok(mmio_guard_supported)
+    Ok(kvm_supported)
 }
 
 /// # Safety
@@ -114,11 +114,11 @@ unsafe fn try_main(fdt_addr: usize) -> Result<()> {
     Ok(())
 }
 
-fn try_unshare_all_memory(mmio_guard_supported: bool) -> Result<()> {
+fn try_unshare_all_memory(kvm_supported: bool) -> Result<()> {
     info!("Starting unsharing memory...");
 
     // No logging after unmapping UART.
-    if mmio_guard_supported {
+    if kvm_supported {
         get_hypervisor().mmio_guard_unmap(vmbase::console::BASE_ADDRESS)?;
     }
     // Unshares all memory and deactivates page table.
@@ -126,8 +126,8 @@ fn try_unshare_all_memory(mmio_guard_supported: bool) -> Result<()> {
     Ok(())
 }
 
-fn unshare_all_memory(mmio_guard_supported: bool) {
-    if let Err(e) = try_unshare_all_memory(mmio_guard_supported) {
+fn unshare_all_memory(kvm_supported: bool) {
+    if let Err(e) = try_unshare_all_memory(kvm_supported) {
         error!("Failed to unshare the memory: {e}");
     }
 }
@@ -135,17 +135,17 @@ fn unshare_all_memory(mmio_guard_supported: bool) {
 /// Entry point for Rialto.
 pub fn main(fdt_addr: u64, _a1: u64, _a2: u64, _a3: u64) {
     init_heap();
-    let Ok(mmio_guard_supported) = try_init_logger() else {
+    let Ok(kvm_supported) = try_init_logger() else {
         // Don't log anything if the logger initialization fails.
         reboot();
     };
     // SAFETY: `fdt_addr` is supposed to be a valid pointer and points to
     // a valid `Fdt`.
     match unsafe { try_main(fdt_addr as usize) } {
-        Ok(()) => unshare_all_memory(mmio_guard_supported),
+        Ok(()) => unshare_all_memory(kvm_supported),
         Err(e) => {
             error!("Rialto failed with {e}");
-            unshare_all_memory(mmio_guard_supported);
+            unshare_all_memory(kvm_supported);
             reboot()
         }
     }
