@@ -105,6 +105,12 @@ unsafe fn try_main(fdt_addr: usize) -> Result<()> {
     let pci_info = PciInfo::from_fdt(fdt)?;
     debug!("PCI: {:#x?}", pci_info);
 
+    // We do not need to validate the DT since it is already validated in pvmfw.
+    let memory_range = fdt.first_memory_range()?;
+    if let Err(e) = MEMORY.lock().as_mut().unwrap().shrink(&memory_range) {
+        error!("Failed to use memory range value from DT: {memory_range:#x?}: {e}");
+        return Err(e.into());
+    }
     Ok(())
 }
 
