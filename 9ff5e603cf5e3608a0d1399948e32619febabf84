@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e336c4c4_42a7605b",
+        "filename": "rialto/src/error.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-13T11:09:31Z",
+      "side": 1,
+      "message": "This could be misleading; WDYT of \"Failed memory operation\"?",
+      "range": {
+        "startLine": 52,
+        "startChar": 66,
+        "endLine": 52,
+        "endChar": 78
+      },
+      "revId": "9ff5e603cf5e3608a0d1399948e32619febabf84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "859a4bc9_69190948",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-13T11:09:31Z",
+      "side": 1,
+      "message": "nit:\n```suggestion\n    debug!(\"PCI: {pci_info:#x?}\");\n```\nto be consistent with other logging statements?",
+      "range": {
+        "startLine": 106,
+        "startChar": 4,
+        "endLine": 106,
+        "endChar": 36
+      },
+      "revId": "9ff5e603cf5e3608a0d1399948e32619febabf84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
