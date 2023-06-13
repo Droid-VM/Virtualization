@@ -87,6 +87,30 @@
       },
       "revId": "674257a2dac22c2f5a1f1671fb3ace42660975c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02f5e1d8_9df8f952",
+        "filename": "rialto/src/main.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-13T14:40:48Z",
+      "side": 1,
+      "message": "OK, so we should change first_memory_range to fail if there is more than one? (And perhaps rename it.)\n\nBut that can be a different CL.",
+      "parentUuid": "b1012179_bd4c7970",
+      "range": {
+        "startLine": 109,
+        "startChar": 23,
+        "endLine": 109,
+        "endChar": 49
+      },
+      "revId": "674257a2dac22c2f5a1f1671fb3ace42660975c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
