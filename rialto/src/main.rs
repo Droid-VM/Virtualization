@@ -27,9 +27,11 @@ use buddy_system_allocator::LockedHeap;
 use core::num::NonZeroUsize;
 use core::slice;
 use fdtpci::PciInfo;
-use hyp::get_hypervisor;
+use hyp::{get_hypervisor, HypervisorCap};
+use libfdt::FdtError;
 use log::{debug, error, info};
 use vmbase::{
+    fdt::SwiotlbInfo,
     layout::{self, crosvm},
     main,
     memory::{MemoryTracker, PageTable, MEMORY, PAGE_SIZE},
@@ -65,7 +67,7 @@ fn new_page_table() -> Result<PageTable> {
 }
 
 fn try_init_logger() -> Result<bool> {
-    let mmio_guard_supported = match get_hypervisor().mmio_guard_init() {
+    let kvm_supported = match get_hypervisor().mmio_guard_init() {
         // pKVM blocks MMIO by default, we need to enable MMIO guard to support logging.
         Ok(()) => {
             get_hypervisor().mmio_guard_map(vmbase::console::BASE_ADDRESS)?;
@@ -76,14 +78,14 @@ fn try_init_logger() -> Result<bool> {
         Err(e) => return Err(e.into()),
     };
     vmbase::logger::init(log::LevelFilter::Debug).map_err(|_| Error::LoggerInit)?;
-    Ok(mmio_guard_supported)
+    Ok(kvm_supported)
 }
 
 /// # Safety
 ///
 /// Behavior is undefined if any of the following conditions are violated:
 /// * The `fdt_addr` must be a valid pointer and points to a valid `Fdt`.
-unsafe fn try_main(fdt_addr: usize) -> Result<()> {
+unsafe fn try_main(fdt_addr: usize, kvm_supported: bool) -> Result<()> {
     info!("Welcome to Rialto!");
     let page_table = new_page_table()?;
 
@@ -111,14 +113,32 @@ unsafe fn try_main(fdt_addr: usize) -> Result<()> {
         error!("Failed to use memory range value from DT: {memory_range:#x?}");
         e
     })?;
+
+    if get_hypervisor().has_cap(HypervisorCap::DYNAMIC_MEM_SHARE) {
+        let granule =
+            if kvm_supported { get_hypervisor().memory_protection_granule()? } else { PAGE_SIZE };
+        MEMORY.lock().as_mut().unwrap().init_dynamic_shared_pool(granule).map_err(|e| {
+            error!("Failed to initialize dynamically shared pool.");
+            e
+        })?;
+    } else {
+        let range = SwiotlbInfo::try_from_fdt(fdt)?.fixed_range().ok_or_else(|| {
+            error!("Pre-shared pool range not specified in swiotlb node");
+            Error::from(FdtError::BadValue)
+        })?;
+        MEMORY.lock().as_mut().unwrap().init_static_shared_pool(range).map_err(|e| {
+            error!("Failed to initialize pre-shared pool.");
+            e
+        })?;
+    }
     Ok(())
 }
 
-fn try_unshare_all_memory(mmio_guard_supported: bool) -> Result<()> {
+fn try_unshare_all_memory(kvm_supported: bool) -> Result<()> {
     info!("Starting unsharing memory...");
 
     // No logging after unmapping UART.
-    if mmio_guard_supported {
+    if kvm_supported {
         get_hypervisor().mmio_guard_unmap(vmbase::console::BASE_ADDRESS)?;
     }
     // Unshares all memory and deactivates page table.
@@ -126,8 +146,8 @@ fn try_unshare_all_memory(mmio_guard_supported: bool) -> Result<()> {
     Ok(())
 }
 
-fn unshare_all_memory(mmio_guard_supported: bool) {
-    if let Err(e) = try_unshare_all_memory(mmio_guard_supported) {
+fn unshare_all_memory(kvm_supported: bool) {
+    if let Err(e) = try_unshare_all_memory(kvm_supported) {
         error!("Failed to unshare the memory: {e}");
     }
 }
@@ -135,17 +155,17 @@ fn unshare_all_memory(mmio_guard_supported: bool) {
 /// Entry point for Rialto.
 pub fn main(fdt_addr: u64, _a1: u64, _a2: u64, _a3: u64) {
     init_heap();
-    let Ok(mmio_guard_supported) = try_init_logger() else {
+    let Ok(kvm_supported) = try_init_logger() else {
         // Don't log anything if the logger initialization fails.
         reboot();
     };
     // SAFETY: `fdt_addr` is supposed to be a valid pointer and points to
     // a valid `Fdt`.
-    match unsafe { try_main(fdt_addr as usize) } {
-        Ok(()) => unshare_all_memory(mmio_guard_supported),
+    match unsafe { try_main(fdt_addr as usize, kvm_supported) } {
+        Ok(()) => unshare_all_memory(kvm_supported),
         Err(e) => {
             error!("Rialto failed with {e}");
-            unshare_all_memory(mmio_guard_supported);
+            unshare_all_memory(kvm_supported);
             reboot()
         }
     }
