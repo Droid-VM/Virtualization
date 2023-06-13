@@ -22,6 +22,30 @@
       },
       "revId": "cf9333e6f69fce5081aa8decebb71a85120a7f06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65cbe574_1cabf538",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-06-13T13:03:49Z",
+      "side": 1,
+      "message": "`Hal::dma_alloc` is not used for buffers added to the queue; they go through `Hal::share` and `Hal::unshare`. `dma_alloc` is used for the queue itself (and the frame and cursor buffers, in the case of the GPU driver), which do need to be zero-initialised. `virtio-drivers` was already assuming that these were zeroed, it just wasn\u0027t documenting this assumption. Having the allocator responsible for zeroing is in fact an optimisation, as it may be able to allocate from a pool of already-zero memory rather than zeroing it out at allocation time. This is presumably why the `alloc` crate has a separate `alloc_zeroed` method, which we use below.",
+      "parentUuid": "ca252fba_10163a6e",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 51
+      },
+      "revId": "cf9333e6f69fce5081aa8decebb71a85120a7f06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
