@@ -16,6 +16,75 @@
       "message": "Hi, PTAL.",
       "revId": "25ff3035897f0783eabc3dcea916e5c6ca021a85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90f0ea60_e14635ca",
+        "filename": "vmbase/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-13T14:00:48Z",
+      "side": 1,
+      "message": "Given that name, why not impl TryFrom ?",
+      "range": {
+        "startLine": 34,
+        "startChar": 11,
+        "endLine": 34,
+        "endChar": 23
+      },
+      "revId": "25ff3035897f0783eabc3dcea916e5c6ca021a85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a314947f_7d661b4d",
+        "filename": "vmbase/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-13T14:00:48Z",
+      "side": 1,
+      "message": "Do we need to validate that the add doesn\u0027t wrap in the target type as well as / instead of the source type?",
+      "range": {
+        "startLine": 41,
+        "startChar": 21,
+        "endLine": 41,
+        "endChar": 32
+      },
+      "revId": "25ff3035897f0783eabc3dcea916e5c6ca021a85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acf41cc7_c5d1284a",
+        "filename": "vmbase/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-13T14:00:48Z",
+      "side": 1,
+      "message": "Might be nice to have comment about why we don\u0027t need to worry about overflow here",
+      "range": {
+        "startLine": 53,
+        "startChar": 29,
+        "endLine": 53,
+        "endChar": 51
+      },
+      "revId": "25ff3035897f0783eabc3dcea916e5c6ca021a85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
