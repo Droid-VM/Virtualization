@@ -45,6 +45,30 @@
       },
       "revId": "3424f7c869cf917a93547695a7e3fca7463282a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c98da2c9_a6829722",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-13T15:39:02Z",
+      "side": 1,
+      "message": "Agreed, using `RebootReason` outside of the reboot code breaks encapsulation for no obvious benefit. Note that we want the function to return a (`libfdt::`)`Result` to be able to `?` from any `libfdt` operations.\n\nHaving said that, this CL is consistent with the existing code so don\u0027t you consider refactoring it (and all the other functions) to return `libfdt::Result` to be out-of-scope here?",
+      "parentUuid": "e3228a68_3feb9442",
+      "range": {
+        "startLine": 110,
+        "startChar": 48,
+        "endLine": 110,
+        "endChar": 81
+      },
+      "revId": "3424f7c869cf917a93547695a7e3fca7463282a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
