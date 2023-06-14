@@ -24,6 +24,7 @@ use alloc::vec::Vec;
 use core::cmp::max;
 use core::cmp::min;
 use core::ffi::CStr;
+use core::fmt;
 use core::mem::size_of;
 use core::ops::Range;
 use fdtpci::PciMemoryFlags;
@@ -42,6 +43,26 @@ use vmbase::layout::{crosvm::MEM_START, MAX_VIRT_ADDR};
 use vmbase::memory::SIZE_4KB;
 use vmbase::util::flatten;
 use vmbase::util::RangeExt as _;
+
+/// An enumeration of errors that can occur during the FDT validation.
+#[derive(Clone, Debug)]
+pub enum FdtValidationError {
+    /// Zero CPU found in the FDT.
+    ZeroCpu,
+    /// Too many CPUs for GIC.
+    TooManyCpusForGIC(usize),
+}
+
+impl fmt::Display for FdtValidationError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::ZeroCpu => write!(f, "Number of CPU can't be 0."),
+            Self::TooManyCpusForGIC(num_cpus) => {
+                write!(f, "Too many CPUs for GIC: actual number of CPUs={num_cpus}.")
+            }
+        }
+    }
+}
 
 /// Extract from /config the address range containing the pre-loaded kernel. Absence of /config is
 /// not an error.
@@ -140,14 +161,12 @@ fn read_num_cpus_from(fdt: &Fdt) -> libfdt::Result<usize> {
 }
 
 /// Validate number of CPUs
-fn validate_num_cpus(num_cpus: usize) -> Result<(), RebootReason> {
+fn validate_num_cpus(num_cpus: usize) -> Result<(), FdtValidationError> {
     if num_cpus == 0 {
-        error!("Number of CPU can't be 0");
-        return Err(RebootReason::InvalidFdt);
+        return Err(FdtValidationError::ZeroCpu);
     }
     if DeviceTreeInfo::GIC_REDIST_SIZE_PER_CPU.checked_mul(num_cpus.try_into().unwrap()).is_none() {
-        error!("Too many CPUs for gic: {}", num_cpus);
-        return Err(RebootReason::InvalidFdt);
+        return Err(FdtValidationError::TooManyCpusForGIC(num_cpus));
     }
     Ok(())
 }
@@ -623,7 +642,10 @@ fn parse_device_tree(fdt: &libfdt::Fdt) -> Result<DeviceTreeInfo, RebootReason> 
         error!("Failed to read num cpus from DT: {e}");
         RebootReason::InvalidFdt
     })?;
-    validate_num_cpus(num_cpus)?;
+    validate_num_cpus(num_cpus).map_err(|e| {
+        error!("Failed to validate num cpus from DT: {e}");
+        RebootReason::InvalidFdt
+    })?;
 
     let pci_info = read_pci_info_from(fdt).map_err(|e| {
         error!("Failed to read pci info from DT: {e}");
