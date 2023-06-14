@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70f00990_367ec52c",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-14T11:17:02Z",
+      "side": 1,
+      "message": "Could you please also update this comment? It shouldn\u0027t have said `SAFETY` (panicking isn\u0027t `unsafe`, quite the opposite) and it refers to an operation that\u0027s now wrapped by `gic_patched_size` so \"validate_num_cpus checked that this wouldn\u0027t panic\" should be enough.",
+      "range": {
+        "startLine": 531,
+        "startChar": 7,
+        "endLine": 531,
+        "endChar": 62
+      },
+      "revId": "1637c9de4fcbc7407fcf6b4c794366ad2be92489",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b353df5_2d6dd413",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-14T11:17:02Z",
+      "side": 1,
+      "message": "nit: superfluous type information.",
+      "range": {
+        "startLine": 532,
+        "startChar": 12,
+        "endLine": 532,
+        "endChar": 17
+      },
+      "revId": "1637c9de4fcbc7407fcf6b4c794366ad2be92489",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5fca5ba_434be903",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-14T11:17:02Z",
+      "side": 1,
+      "message": "let\u0027s limit non-`usize` types to very low-level operations that manipulate the DT directly and make this a `-\u003e Option\u003cusize\u003e` (removing the back-and-forth casting in its body) and `.try_into().unwrap()` once in `patch_gic`.",
+      "range": {
+        "startLine": 595,
+        "startChar": 51,
+        "endLine": 595,
+        "endChar": 54
+      },
+      "revId": "1637c9de4fcbc7407fcf6b4c794366ad2be92489",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
