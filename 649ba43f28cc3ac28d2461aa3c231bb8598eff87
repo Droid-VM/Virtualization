@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d22066fb_e6d7bb78",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-06-14T08:52:35Z",
+      "side": 1,
+      "message": "I don\u0027t think you should try to collate those - they are separate features and nothing in KVM guarantees that the subset of features available in various modes is not going to change. Maybe you can represent it as a capability bitmap? One boolean will not be enough.",
+      "parentUuid": "7f22c980_2df97a47",
+      "range": {
+        "startLine": 12,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 16
+      },
+      "revId": "649ba43f28cc3ac28d2461aa3c231bb8598eff87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "682094d0_1466871c",
