@@ -280,6 +280,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36c26caf_6b8abd06",
+        "filename": "vmbase/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-14T11:12:47Z",
+      "side": 1,
+      "message": "There is already a SWIOTLB validation function. To resolve the issue, we simply need to remove L41 from the current function and add it to the beginning of validate_swiotlb_info() [1].\n\n[1] https://cs.android.com/android/platform/superproject/+/master:packages/modules/Virtualization/pvmfw/src/fdt.rs;l\u003d470;drc\u003d2422bdc31e7be8ce73a9b1ed1e39c2f6db925b18",
+      "parentUuid": "b1a5b065_a778e93e",
+      "range": {
+        "startLine": 41,
+        "startChar": 21,
+        "endLine": 41,
+        "endChar": 32
+      },
+      "revId": "25ff3035897f0783eabc3dcea916e5c6ca021a85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acf41cc7_c5d1284a",
