@@ -16,6 +16,98 @@
       "message": "Thanks for the review. Could you take another look?",
       "revId": "1b3c8ceb6e633a28ea6f3adf5c7ce216c539f56a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a681eb62_9f5f97f6",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-14T13:15:13Z",
+      "side": 1,
+      "message": "I realized that in [this comment](https://android-review.git.corp.google.com/c/platform/packages/modules/Virtualization/+/2624329/comment/9e53fe4d_6a568cc1/), I got confused between the number of `/memory` **nodes** (the DT spec allows having multiple, probably for backward compatibility) and **ranges**, which can also come as multiple (addr, size) pairs in a single `\u003creg\u003e`. As crosvm supports multi-range `\u003creg\u003e` in its single `/memory` node, this statement is wrong.",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 93
+      },
+      "revId": "1b3c8ceb6e633a28ea6f3adf5c7ce216c539f56a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73364ef9_765fb2e7",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-14T13:15:13Z",
+      "side": 1,
+      "message": "```suggestion\n    let range \u003d memory.next().ok_or_else(|| {\n        error!(\"The /memory node in the DT contains no range.\");\n        RebootReason::InvalidFdt\n    })?;\n```",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 6
+      },
+      "revId": "1b3c8ceb6e633a28ea6f3adf5c7ce216c539f56a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a5e4013_e9d0094f",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-14T13:15:13Z",
+      "side": 1,
+      "message": "Is this new line (and padding) going to end up in the logs?",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 13
+      },
+      "revId": "1b3c8ceb6e633a28ea6f3adf5c7ce216c539f56a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6dcdc88_2e79fc3c",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-14T13:15:13Z",
+      "side": 1,
+      "message": "The current behaviour of pvmfw is to ignore the extra ranges and silently strip them from the DT when filling in the template in `patch_memory_range`. To avoid breaking potential use-cases where this went unnoticed, why don\u0027t we simply log (`warn!`) all the discarded ranges?\n\nWhat kind of attack are we worried about here?",
+      "range": {
+        "startLine": 128,
+        "startChar": 8,
+        "endLine": 128,
+        "endChar": 45
+      },
+      "revId": "1b3c8ceb6e633a28ea6f3adf5c7ce216c539f56a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
