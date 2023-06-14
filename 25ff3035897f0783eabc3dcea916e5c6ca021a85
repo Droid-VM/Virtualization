@@ -256,6 +256,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1a5b065_a778e93e",
+        "filename": "vmbase/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-14T10:56:04Z",
+      "side": 1,
+      "message": "If you want to implement this in more than one commit, it would probably have been easier to rework `read_swiotlb_info_from` to extract the non-verifying DT parsing into a constructor first (in pvmfw only) e.g.\n```\nfn read_swiotlb_info_from(fdt: \u0026Fdt) -\u003e libfdt::Result\u003cSwiotlbInfo\u003e {\n    let swiotlb \u003d Swiotlb::new_from_fdt(fdt)?;\n    if let Some(addr) \u003d swiotlb.addr {\n        if addr.checked_add(swiotlb.size).is_none() {\n        return Err(FdtError::BadValue);\n    }\n\n    Ok(swiotlb)\n}\n```\nbefore moving `SwiotlbInfo` to vmbase as a whole than removing the function and creating the constructor in `vmbase::...::SwiotlbInfo::new_from_fdt` then reintroducing the function and modifying the constructor, IMO.",
+      "parentUuid": "26b0ff1c_58de4e35",
+      "range": {
+        "startLine": 41,
+        "startChar": 21,
+        "endLine": 41,
+        "endChar": 32
+      },
+      "revId": "25ff3035897f0783eabc3dcea916e5c6ca021a85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acf41cc7_c5d1284a",
