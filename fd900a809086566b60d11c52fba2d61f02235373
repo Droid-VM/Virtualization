@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f7fddd8_d8ab357a",
+        "filename": "libs/hyp/src/hypervisor/geniezone.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-14T10:19:32Z",
+      "side": 1,
+      "message": "This crate was renamed, please `use smccc::{` instead.",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 15
+      },
+      "revId": "fd900a809086566b60d11c52fba2d61f02235373",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "791e92fc_9f5cbcf5",
         "filename": "libs/hyp/src/hypervisor/geniezone.rs",
         "patchSetId": 2
