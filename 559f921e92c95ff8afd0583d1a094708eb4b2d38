@@ -16,6 +16,75 @@
       "message": "Hi, PTAL.",
       "revId": "559f921e92c95ff8afd0583d1a094708eb4b2d38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25e7afe8_eb191beb",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-14T15:54:39Z",
+      "side": 1,
+      "message": "Looks like you\u0027d need to change the cstr macro to allow this.\nMight be a good idea - the underlying concat! macro allows expr rather than requiring a literal.",
+      "range": {
+        "startLine": 750,
+        "startChar": 28,
+        "endLine": 750,
+        "endChar": 32
+      },
+      "revId": "559f921e92c95ff8afd0583d1a094708eb4b2d38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b48376d_0312a4fc",
+        "filename": "vmbase/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-14T15:54:39Z",
+      "side": 1,
+      "message": "\"This node contains the Open DICE handover information.\" maybe?",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 25,
+        "endChar": 69
+      },
+      "revId": "559f921e92c95ff8afd0583d1a094708eb4b2d38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "726bdcec_2b300c5d",
+        "filename": "vmbase/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-14T15:54:39Z",
+      "side": 1,
+      "message": "s/pvmfw/open/\n\nIt\u0027s not pvmfw specific: https://www.kernel.org/doc/Documentation/devicetree/bindings/reserved-memory/google%2Copen-dice.yaml",
+      "range": {
+        "startLine": 26,
+        "startChar": 10,
+        "endLine": 26,
+        "endChar": 30
+      },
+      "revId": "559f921e92c95ff8afd0583d1a094708eb4b2d38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
