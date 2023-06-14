@@ -18,6 +18,13 @@ use crate::cstr;
 use core::ops::Range;
 use libfdt::{self, Fdt, FdtError};
 
+/// Node name of the reserved-memory node.
+pub const RESERVED_MEMORY_NODE_NAME: &str = "/reserved-memory";
+
+/// DICE node is a subnode of the reserved-memory node.
+/// This node contains the region of the DICE chain written by pvmfw.
+pub const PVMFW_DICE_NODE_NAME: &str = "google,open-dice";
+
 /// Represents information about a SWIOTLB buffer.
 #[derive(Debug)]
 pub struct SwiotlbInfo {
