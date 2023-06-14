@@ -24,6 +24,7 @@ use alloc::vec::Vec;
 use core::cmp::max;
 use core::cmp::min;
 use core::ffi::CStr;
+use core::fmt;
 use core::mem::size_of;
 use core::ops::Range;
 use fdtpci::PciMemoryFlags;
@@ -42,6 +43,21 @@ use vmbase::layout::{crosvm::MEM_START, MAX_VIRT_ADDR};
 use vmbase::memory::SIZE_4KB;
 use vmbase::util::flatten;
 use vmbase::util::RangeExt as _;
+
+/// An enumeration of errors that can occur during the FDT validation.
+#[derive(Clone, Debug)]
+pub enum FdtValidationError {
+    /// Invalid CPU count.
+    InvalidCpuCount(usize),
+}
+
+impl fmt::Display for FdtValidationError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::InvalidCpuCount(num_cpus) => write!(f, "Invalid CPU count: {num_cpus}"),
+        }
+    }
+}
 
 /// Extract from /config the address range containing the pre-loaded kernel. Absence of /config is
 /// not an error.
@@ -140,16 +156,12 @@ fn read_num_cpus_from(fdt: &Fdt) -> libfdt::Result<usize> {
 }
 
 /// Validate number of CPUs
-fn validate_num_cpus(num_cpus: usize) -> Result<(), RebootReason> {
-    if num_cpus == 0 {
-        error!("Number of CPU can't be 0");
-        return Err(RebootReason::InvalidFdt);
+fn validate_num_cpus(num_cpus: usize) -> Result<(), FdtValidationError> {
+    if num_cpus == 0 || DeviceTreeInfo::gic_patched_size(num_cpus).is_none() {
+        Err(FdtValidationError::InvalidCpuCount(num_cpus))
+    } else {
+        Ok(())
     }
-    if DeviceTreeInfo::GIC_REDIST_SIZE_PER_CPU.checked_mul(num_cpus.try_into().unwrap()).is_none() {
-        error!("Too many CPUs for gic: {}", num_cpus);
-        return Err(RebootReason::InvalidFdt);
-    }
-    Ok(())
 }
 
 /// Patch DT by keeping `num_cpus` number of arm,arm-v8 compatible nodes, and pruning the rest.
@@ -517,8 +529,7 @@ fn patch_gic(fdt: &mut Fdt, num_cpus: usize) -> libfdt::Result<()> {
 
     let addr = range0.addr;
     // SAFETY - doesn't overflow. checked in validate_num_cpus
-    let size: u64 =
-        DeviceTreeInfo::GIC_REDIST_SIZE_PER_CPU.checked_mul(num_cpus.try_into().unwrap()).unwrap();
+    let size: u64 = DeviceTreeInfo::gic_patched_size(num_cpus).unwrap();
 
     // range1 is just below range0
     range1.addr = addr - size;
@@ -582,6 +593,10 @@ pub struct DeviceTreeInfo {
 
 impl DeviceTreeInfo {
     const GIC_REDIST_SIZE_PER_CPU: u64 = (32 * SIZE_4KB) as u64;
+
+    fn gic_patched_size(num_cpus: usize) -> Option<u64> {
+        Self::GIC_REDIST_SIZE_PER_CPU.checked_mul(num_cpus.try_into().unwrap())
+    }
 }
 
 pub fn sanitize_device_tree(fdt: &mut Fdt) -> Result<DeviceTreeInfo, RebootReason> {
@@ -623,7 +638,10 @@ fn parse_device_tree(fdt: &libfdt::Fdt) -> Result<DeviceTreeInfo, RebootReason> 
         error!("Failed to read num cpus from DT: {e}");
         RebootReason::InvalidFdt
     })?;
-    validate_num_cpus(num_cpus)?;
+    validate_num_cpus(num_cpus).map_err(|e| {
+        error!("Failed to validate num cpus from DT: {e}");
+        RebootReason::InvalidFdt
+    })?;
 
     let pci_info = read_pci_info_from(fdt).map_err(|e| {
         error!("Failed to read pci info from DT: {e}");
