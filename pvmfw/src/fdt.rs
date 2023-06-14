@@ -39,7 +39,7 @@ use log::info;
 use log::warn;
 use tinyvec::ArrayVec;
 use vmbase::cstr;
-use vmbase::fdt::SwiotlbInfo;
+use vmbase::fdt::{SwiotlbInfo, OPEN_DICE_NODE_NAME, RESERVED_MEMORY_NODE_NAME};
 use vmbase::layout::{crosvm::MEM_START, MAX_VIRT_ADDR};
 use vmbase::memory::SIZE_4KB;
 use vmbase::util::flatten;
@@ -747,9 +747,9 @@ pub fn modify_for_next_stage(
 fn patch_dice_node(fdt: &mut Fdt, addr: usize, size: usize) -> libfdt::Result<()> {
     // We reject DTs with missing reserved-memory node as validation should have checked that the
     // "swiotlb" subnode (compatible = "restricted-dma-pool") was present.
-    let node = fdt.node_mut(cstr!("/reserved-memory"))?.ok_or(libfdt::FdtError::NotFound)?;
+    let node = fdt.node_mut(RESERVED_MEMORY_NODE_NAME)?.ok_or(FdtError::NotFound)?;
 
-    let mut node = node.next_compatible(cstr!("google,open-dice"))?.ok_or(FdtError::NotFound)?;
+    let mut node = node.next_compatible(OPEN_DICE_NODE_NAME)?.ok_or(FdtError::NotFound)?;
 
     let addr: u64 = addr.try_into().unwrap();
     let size: u64 = size.try_into().unwrap();

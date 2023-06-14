@@ -15,8 +15,22 @@
 //! High-level FDT functions.
 
 use crate::cstr;
+use core::ffi::CStr;
 use core::ops::Range;
 use libfdt::{self, Fdt, FdtError};
+
+/// Node name of the reserved-memory node.
+/// SAFETY: The provided slice is nul-terminated and contains no interior nul bytes.
+pub const RESERVED_MEMORY_NODE_NAME: &CStr =
+    unsafe { CStr::from_bytes_with_nul_unchecked(b"/reserved-memory\0") };
+
+/// DICE node is a subnode of the reserved-memory node.
+/// This node contains the Open DICE handover information.
+///
+/// https://www.kernel.org/doc/Documentation/devicetree/bindings/reserved-memory/google%2Copen-dice.yaml
+/// SAFETY: The provided slice is nul-terminated and contains no interior nul bytes.
+pub const OPEN_DICE_NODE_NAME: &CStr =
+    unsafe { CStr::from_bytes_with_nul_unchecked(b"google,open-dice\0") };
 
 /// Represents information about a SWIOTLB buffer.
 #[derive(Debug)]
