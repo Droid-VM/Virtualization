@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "801d58d9_d922fea8",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-14T09:33:35Z",
+      "side": 1,
+      "message": "IMO, yes; the point is that we\u0027re rejecting the number because it simply doesn\u0027t make sense, which should be obvious to the user (either for `0` or something like \"`Invalid CPU count: 2395235871`\"); the underlying criteria to us determining what _too large_ means is an implementation detail.",
+      "parentUuid": "4a1a7e86_ed204505",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 1
+      },
+      "revId": "ad28b03c34345c10888006e39cc6573b5a62ebd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d760cac_fb09a148",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 2
