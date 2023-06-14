@@ -208,6 +208,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36be8d50_53982bd1",
+        "filename": "vmbase/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-14T07:28:36Z",
+      "side": 1,
+      "message": "I\u0027ll just keep this code as it was in this cl as it is just a code move. We can delete this line in a different cl. (same for fixed_range())",
+      "parentUuid": "a1ed5f4c_9d5051ea",
+      "range": {
+        "startLine": 41,
+        "startChar": 21,
+        "endLine": 41,
+        "endChar": 32
+      },
+      "revId": "25ff3035897f0783eabc3dcea916e5c6ca021a85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acf41cc7_c5d1284a",
@@ -293,6 +317,30 @@
       "side": 1,
       "message": "We can keep the checked_add function. Both pvmfw and Rialto require parsing SwiotlbInfo from the DT, but pvmfw also needs to validate all the details of the data before using it, while Rialto simply reads and uses it. That\u0027s why the reading part has been moved to the vmbase module to facilitate reuse.\n\nOtherwise it\u0027s reasonable to keep some simple checks, such as checked_add.\n\nIn general, pvmfw should validate the DT and rialto can just use it as it\u0027s already validated by pvmfw.",
       "parentUuid": "964c6174_d940f70f",
+      "range": {
+        "startLine": 53,
+        "startChar": 29,
+        "endLine": 53,
+        "endChar": 51
+      },
+      "revId": "25ff3035897f0783eabc3dcea916e5c6ca021a85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c61e065e_f2e76f24",
+        "filename": "vmbase/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-14T07:28:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e0f0fc0_3932d28e",
       "range": {
         "startLine": 53,
         "startChar": 29,
