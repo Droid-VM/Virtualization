@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b000e4eb_d90c513e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-06-14T08:25:54Z",
+      "side": 1,
+      "message": "I feel like there is some misunderstanding. The NOT_SUPPORTED return code only related to MMIO_GUARD_* HVCs. There is still a KVM hypervisor and it sill supports other HVCs.",
+      "range": {
+        "startLine": 12,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 16
+      },
+      "revId": "649ba43f28cc3ac28d2461aa3c231bb8598eff87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "682094d0_1466871c",
