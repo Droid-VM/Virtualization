@@ -44,17 +44,39 @@ use vmbase::memory::SIZE_4KB;
 use vmbase::util::flatten;
 use vmbase::util::RangeExt as _;
 
+#[derive(Clone, Debug)]
+pub enum FdtNodeName {
+    Cpu,
+}
+
+impl FdtNodeName {
+    fn str(&self) -> &str {
+        match self {
+            Self::Cpu => "arm,arm-v8\0",
+        }
+    }
+
+    fn cstr(&self) -> &CStr {
+        CStr::from_bytes_with_nul(self.str().as_bytes()).unwrap()
+    }
+}
+
 /// An enumeration of errors that can occur during the FDT validation.
 #[derive(Clone, Debug)]
 pub enum FdtValidationError {
     /// Invalid CPU count.
     InvalidCpuCount(usize),
+    /// Failed to parse a node in the FDT.
+    ParsingNodeFailed(FdtNodeName, FdtError),
 }
 
 impl fmt::Display for FdtValidationError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             Self::InvalidCpuCount(num_cpus) => write!(f, "Invalid CPU count: {num_cpus}"),
+            Self::ParsingNodeFailed(fdt_node_name, e) => {
+                write!(f, "Failed to parse the node '{}': {}", fdt_node_name.str(), e)
+            }
         }
     }
 }
@@ -150,23 +172,22 @@ fn patch_memory_range(fdt: &mut Fdt, memory_range: &Range<usize>) -> libfdt::Res
         .setprop_inplace(cstr!("reg"), flatten(&[MEM_START.to_be_bytes(), size.to_be_bytes()]))
 }
 
-/// Read the number of CPUs from DT
-fn read_num_cpus_from(fdt: &Fdt) -> libfdt::Result<usize> {
-    Ok(fdt.compatible_nodes(cstr!("arm,arm-v8"))?.count())
-}
-
-/// Validate number of CPUs
-fn validate_num_cpus(num_cpus: usize) -> Result<(), FdtValidationError> {
+/// Reads and validates the number of CPUs from DT
+fn read_and_validate_num_cpus_from(fdt: &Fdt) -> Result<usize, FdtValidationError> {
+    let num_cpus = fdt
+        .compatible_nodes(FdtNodeName::Cpu.cstr())
+        .map_err(|e| FdtValidationError::ParsingNodeFailed(FdtNodeName::Cpu, e))?
+        .count();
     if num_cpus == 0 || DeviceTreeInfo::gic_patched_size(num_cpus).is_none() {
         Err(FdtValidationError::InvalidCpuCount(num_cpus))
     } else {
-        Ok(())
+        Ok(num_cpus)
     }
 }
 
 /// Patch DT by keeping `num_cpus` number of arm,arm-v8 compatible nodes, and pruning the rest.
 fn patch_num_cpus(fdt: &mut Fdt, num_cpus: usize) -> libfdt::Result<()> {
-    let cpu = cstr!("arm,arm-v8");
+    let cpu = FdtNodeName::Cpu.cstr();
     let mut next = fdt.root_mut()?.next_compatible(cpu)?;
     for _ in 0..num_cpus {
         next = if let Some(current) = next {
@@ -634,12 +655,8 @@ fn parse_device_tree(fdt: &libfdt::Fdt) -> Result<DeviceTreeInfo, RebootReason> 
         RebootReason::InvalidFdt
     })?;
 
-    let num_cpus = read_num_cpus_from(fdt).map_err(|e| {
-        error!("Failed to read num cpus from DT: {e}");
-        RebootReason::InvalidFdt
-    })?;
-    validate_num_cpus(num_cpus).map_err(|e| {
-        error!("Failed to validate num cpus from DT: {e}");
+    let num_cpus = read_and_validate_num_cpus_from(fdt).map_err(|e| {
+        error!("Failed to read and validate num cpus from DT: {e}");
         RebootReason::InvalidFdt
     })?;
 
