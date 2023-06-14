@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ed41fe9_0d3f8a7d",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-14T13:25:18Z",
+      "side": 1,
+      "message": "Does crosvm ever actually do that in our use case?\n(Does the answer depend on the platform?)",
+      "parentUuid": "a681eb62_9f5f97f6",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 93
+      },
+      "revId": "1b3c8ceb6e633a28ea6f3adf5c7ce216c539f56a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73364ef9_765fb2e7",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 2
@@ -89,6 +113,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "63a6fd23_5ce65a40",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-14T13:25:18Z",
+      "side": 1,
+      "message": "That can be avoided by ending the first line with \\\nhttps://doc.rust-lang.org/stable/reference/tokens.html#string-literals",
+      "parentUuid": "5a5e4013_e9d0094f",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 13
+      },
+      "revId": "1b3c8ceb6e633a28ea6f3adf5c7ce216c539f56a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a6dcdc88_2e79fc3c",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 2
@@ -100,6 +148,30 @@
       "writtenOn": "2023-06-14T13:15:13Z",
       "side": 1,
       "message": "The current behaviour of pvmfw is to ignore the extra ranges and silently strip them from the DT when filling in the template in `patch_memory_range`. To avoid breaking potential use-cases where this went unnoticed, why don\u0027t we simply log (`warn!`) all the discarded ranges?\n\nWhat kind of attack are we worried about here?",
+      "range": {
+        "startLine": 128,
+        "startChar": 8,
+        "endLine": 128,
+        "endChar": 45
+      },
+      "revId": "1b3c8ceb6e633a28ea6f3adf5c7ce216c539f56a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c988c824_6eaf0002",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-14T13:25:18Z",
+      "side": 1,
+      "message": "I\u0027m concerned about correctness rather than attack.\n\nIf crosvm gives us memory split over more than one range, shouldn\u0027t we just use them all?\n\nIf not, warning or failing to boot is better than ignoring.",
+      "parentUuid": "a6dcdc88_2e79fc3c",
       "range": {
         "startLine": 128,
         "startChar": 8,
