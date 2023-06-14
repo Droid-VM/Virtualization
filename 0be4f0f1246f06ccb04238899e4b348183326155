@@ -70,6 +70,30 @@
       },
       "revId": "0be4f0f1246f06ccb04238899e4b348183326155",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d472600_873d1a75",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-14T09:25:45Z",
+      "side": 0,
+      "message": "Why wouldn\u0027t it add a second (or subsequent) range to the heap?\n\nIf it won\u0027t happen it\u0027s somewhat academic, but if there will only ever be one range then \"give me the only range\" does the same as \"give me the first range\" and we end up with less code overall.",
+      "parentUuid": "8227484f_15bf17e3",
+      "range": {
+        "startLine": 611,
+        "startChar": 27,
+        "endLine": 611,
+        "endChar": 45
+      },
+      "revId": "0be4f0f1246f06ccb04238899e4b348183326155",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
