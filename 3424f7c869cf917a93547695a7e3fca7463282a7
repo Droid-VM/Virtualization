@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4b28ae7_769173dd",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-14T07:49:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "055e57bf_c0a6c514",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 51
+      },
+      "revId": "3424f7c869cf917a93547695a7e3fca7463282a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3228a68_3feb9442",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Oh yes, just a passing comment. Doesn\u0027t need to be in this CL, but could be, whatever works.",
       "parentUuid": "c98da2c9_a6829722",
+      "range": {
+        "startLine": 110,
+        "startChar": 48,
+        "endLine": 110,
+        "endChar": 81
+      },
+      "revId": "3424f7c869cf917a93547695a7e3fca7463282a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd12696f_65579a69",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-14T07:49:31Z",
+      "side": 1,
+      "message": "I filed a bug for this issue b/287172103. I\u0027ll close this thread then. Let\u0027s continue the discussion around the refactoring there.",
+      "parentUuid": "fecd166e_7e9500a7",
       "range": {
         "startLine": 110,
         "startChar": 48,
