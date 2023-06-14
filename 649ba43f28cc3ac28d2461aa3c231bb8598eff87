@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f22c980_2df97a47",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-14T08:41:46Z",
+      "side": 1,
+      "message": "Another KVM call ARM_SMCCC_KVM_FUNC_HYP_MEMINFO is also not supported in unprotected VMs. Actually my objective is to find a boolean to signal that it is an unprotected VM so that we can use it to avoid all such calls instead of checking them one by one (e.g. [1]). Do you have any suggestion?\n\n[1] https://r.android.com/c/platform/packages/modules/Virtualization/+/2624252/1/rialto/src/main.rs: L119",
+      "parentUuid": "b000e4eb_d90c513e",
+      "range": {
+        "startLine": 12,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 16
+      },
+      "revId": "649ba43f28cc3ac28d2461aa3c231bb8598eff87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "682094d0_1466871c",
