@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "395c422d_015dda00",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-14T11:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70f00990_367ec52c",
+      "range": {
+        "startLine": 531,
+        "startChar": 7,
+        "endLine": 531,
+        "endChar": 62
+      },
+      "revId": "1637c9de4fcbc7407fcf6b4c794366ad2be92489",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b353df5_2d6dd413",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7ee5352_b49dcd0c",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-14T11:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b353df5_2d6dd413",
+      "range": {
+        "startLine": 532,
+        "startChar": 12,
+        "endLine": 532,
+        "endChar": 17
+      },
+      "revId": "1637c9de4fcbc7407fcf6b4c794366ad2be92489",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5fca5ba_434be903",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-06-14T11:17:02Z",
       "side": 1,
       "message": "let\u0027s limit non-`usize` types to very low-level operations that manipulate the DT directly and make this a `-\u003e Option\u003cusize\u003e` (removing the back-and-forth casting in its body) and `.try_into().unwrap()` once in `patch_gic`.",
+      "range": {
+        "startLine": 595,
+        "startChar": 51,
+        "endLine": 595,
+        "endChar": 54
+      },
+      "revId": "1637c9de4fcbc7407fcf6b4c794366ad2be92489",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bef36042_6429d42a",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-14T11:34:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5fca5ba_434be903",
       "range": {
         "startLine": 595,
         "startChar": 51,
