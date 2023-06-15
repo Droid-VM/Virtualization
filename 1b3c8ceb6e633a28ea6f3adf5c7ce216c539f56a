@@ -187,6 +187,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4506ef02_7a32ff28",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-15T11:42:42Z",
+      "side": 1,
+      "message": "\u003e IMO (as I write in another comment thread), it would make sense for this CL to be slightly reworked to only `warn!` if `memory.next().is_some()` instead of aborting the boot. Then, we can make this stricter in the future.\n\n+1\n\n\u003e But fundamentally, I think that the question is: if crosvm supports multiple memory regions, should we consider reworking pvmfw to also do so? And what would the security implications of that be? Which is obviously out-of-scope for this CL.\n\nAlso +1. A bug would be a good start.",
+      "parentUuid": "8a0d8fd4_068187c8",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 93
+      },
+      "revId": "1b3c8ceb6e633a28ea6f3adf5c7ce216c539f56a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73364ef9_765fb2e7",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 2
