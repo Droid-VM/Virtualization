@@ -163,6 +163,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a0d8fd4_068187c8",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-15T09:52:37Z",
+      "side": 1,
+      "message": "Sorry, I misread your previous comment; scratch mine.\n\n\u003e So we don\u0027t need this cl if multiple ranges in one /memory node is supported by crosvm after all.\n\npvmfw - due to its DT template - currently assumes that there\u0027s only one range so if there are more, it silently drops the extra ranges that were passed. AFAIU, Alan\u0027s point is that we should detect cases where this assumption doesn\u0027t hold and act accordingly (either by logging a warning or refusing to boot).\n\nIMO (as I write in another comment thread), it would make sense for this CL to be slightly reworked to only `warn!` if `memory.next().is_some()` instead of aborting the boot. Then, we can make this stricter in the future.\n\nBut fundamentally, I think that the question is: if crosvm supports multiple memory regions, should we consider reworking pvmfw to also do so? And what would the security implications of that be? Which is obviously out-of-scope for this CL.",
+      "parentUuid": "f2f708e5_174252bc",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 93
+      },
+      "revId": "1b3c8ceb6e633a28ea6f3adf5c7ce216c539f56a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73364ef9_765fb2e7",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 2
