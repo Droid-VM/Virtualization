@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "14ee3b48_08b354c0",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-15T09:06:48Z",
+      "side": 1,
+      "message": "Gunyah wanted to at some point, I\u0027m not sure what the current status is.",
+      "parentUuid": "6ed41fe9_0d3f8a7d",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 93
+      },
+      "revId": "1b3c8ceb6e633a28ea6f3adf5c7ce216c539f56a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73364ef9_765fb2e7",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 2
@@ -137,6 +161,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ceb6c69_1db6ee71",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-15T09:06:48Z",
+      "side": 1,
+      "message": "Oh, cool!",
+      "parentUuid": "63a6fd23_5ce65a40",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 13
+      },
+      "revId": "1b3c8ceb6e633a28ea6f3adf5c7ce216c539f56a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a6dcdc88_2e79fc3c",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 2
@@ -172,6 +220,30 @@
       "side": 1,
       "message": "I\u0027m concerned about correctness rather than attack.\n\nIf crosvm gives us memory split over more than one range, shouldn\u0027t we just use them all?\n\nIf not, warning or failing to boot is better than ignoring.",
       "parentUuid": "a6dcdc88_2e79fc3c",
+      "range": {
+        "startLine": 128,
+        "startChar": 8,
+        "endLine": 128,
+        "endChar": 45
+      },
+      "revId": "1b3c8ceb6e633a28ea6f3adf5c7ce216c539f56a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7601b7ac_94c37c59",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-15T09:06:48Z",
+      "side": 1,
+      "message": "\u003e If not, warning or failing to boot is better than ignoring.\n\nI absolutely agree. My worry with starting to panic is that we\u0027ve effectively shipped an ABI where extra `\u003creg\u003e` entries were being dropped and starting to panic _might_ break platforms inadvertently using it.\n\nWhat we might do is warn in this patch then add a separate revert-friendly patch that starts panicking. Even if we ever need to backport some of our patches to UDC, we won\u0027t port that one and, if we get reports that AVF starting failing after an upgrade, it will be easy to recommend reverting it (and then get the warning).\n\n\u003e If crosvm gives us memory split over more than one range, shouldn\u0027t we just use them all?\n\nNot necessarily, what if we have enough with the first slice? But we should definitely be aware of all the subregions, I agree.\n\n\u003e I\u0027m concerned about correctness rather than attack.\n\nSure but then we\u0027re still only partially addressing the issue because the VMM could still pass multiple `/memory` node and we would never know, right?",
+      "parentUuid": "c988c824_6eaf0002",
       "range": {
         "startLine": 128,
         "startChar": 8,
