@@ -16,6 +16,52 @@
       "message": "Hi, could you take a look?",
       "revId": "95a3044bce09d10c8e449129dd19da42d081050a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4d1e38a_7430e8b8",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-15T09:16:16Z",
+      "side": 1,
+      "message": "I haven\u0027t looked at the whole file so let me know if this doesn\u0027t work for everything but I notice that most functions take a string literal so what about having one or two type for any generic libfdt error e.g.\n\n- `FdtValidationError::FdtNodeError(\u0026\u0027static CStr, FdtError)`\n- `FdtValidationError::FdtPropError(\u0026\u0027static CStr, \u0026\u0027static CStr, FdtError)` \n\nthat could be used as\n\n```\nfdt.compatible_nodes(compatible)\n   .map_err(|e| FdtValidationError::FdtNodeError(compatible, e))?\n```\n```\nnode.getprop_cells(prop)\n    .map_err(|e| FdtValidationError::FdtPropError(compatible, prop, e))?\n```\n\nwhich could perhaps be wrapped in functions?\n\nI\u0027m not convinced this will result in less verbose code but the error type should be pretty versatile, WDYT?\n\nAlternatively, we could maybe have one `FdtError`-wrapping `FdtValidationError` variant per node type e.g. `FdtValidationError::CpuError(e)`, `FdtValidationError::KernelError(e)`, `FdtValidationError::RamdiskError(e)`, ... to get an error message referring to the cause node (but not property, which is probably overkill anyway) without the verbosity at the call-site?",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 21
+      },
+      "revId": "95a3044bce09d10c8e449129dd19da42d081050a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9ce7088_1c39e35f",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-15T09:16:16Z",
+      "side": 1,
+      "message": "IIUC the intention, your final goal (beyond this CL) is to `?` from here (and all other calls in this function), right?",
+      "range": {
+        "startLine": 655,
+        "startChar": 54,
+        "endLine": 655,
+        "endChar": 56
+      },
+      "revId": "95a3044bce09d10c8e449129dd19da42d081050a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
