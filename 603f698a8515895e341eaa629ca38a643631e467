@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4ced4c5_ccb83bcf",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-15T13:24:16Z",
+      "side": 1,
+      "message": "This function doesn\u0027t deal with regular properties but with the sub-category of \"flags\" i.e. properties that are either present (true) or absent (false) and never have a value; could you please revert to using the original `_flag` name?",
+      "range": {
+        "startLine": 761,
+        "startChar": 18,
+        "endLine": 761,
+        "endChar": 22
+      },
+      "revId": "603f698a8515895e341eaa629ca38a643631e467",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
