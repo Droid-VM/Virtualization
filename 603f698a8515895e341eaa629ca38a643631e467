@@ -22,6 +22,30 @@
       },
       "revId": "603f698a8515895e341eaa629ca38a643631e467",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e8ed4b4_a335e056",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-15T13:27:09Z",
+      "side": 1,
+      "message": "... or, if intended to be used on generic properties, rename it to something like `empty_or_delete_prop` as it isn\u0027t clear what \"resetting\" a property would mean.",
+      "parentUuid": "c4ced4c5_ccb83bcf",
+      "range": {
+        "startLine": 761,
+        "startChar": 18,
+        "endLine": 761,
+        "endChar": 22
+      },
+      "revId": "603f698a8515895e341eaa629ca38a643631e467",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
