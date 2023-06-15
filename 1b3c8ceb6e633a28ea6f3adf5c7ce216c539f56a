@@ -139,6 +139,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2f708e5_174252bc",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-15T09:38:21Z",
+      "side": 1,
+      "message": "According to the code you pointed in crosvm[1], it is possible to have multiple range in the /memory node. Then do we still need this change?\n\n[1] https://cs.android.com/android/platform/superproject/+/master:external/crosvm/aarch64/src/fdt.rs;l\u003d97;drc\u003da14178eb6923378baa1cd48dc1ec14afd99d3890",
+      "parentUuid": "a543e991_1f6c790b",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 93
+      },
+      "revId": "1b3c8ceb6e633a28ea6f3adf5c7ce216c539f56a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73364ef9_765fb2e7",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 2
