@@ -756,19 +756,15 @@ fn patch_dice_node(fdt: &mut Fdt, addr: usize, size: usize) -> libfdt::Result<()
     node.setprop_inplace(cstr!("reg"), flatten(&[addr.to_be_bytes(), size.to_be_bytes()]))
 }
 
-fn set_or_clear_chosen_flag(fdt: &mut Fdt, flag: &CStr, value: bool) -> libfdt::Result<()> {
-    // TODO(b/249054080): Refactor to not panic if the DT doesn't contain a /chosen node.
-    let mut chosen = fdt.chosen_mut()?.unwrap();
-    if value {
-        chosen.setprop_empty(flag)?;
+fn set_or_clear_chosen_flag(fdt: &mut Fdt, flag: &CStr, keep_flag: bool) -> libfdt::Result<()> {
+    let Some(mut chosen) = fdt.chosen_mut()? else {
+        return Ok(());
+    };
+    if keep_flag {
+        chosen.setprop_empty(flag)
     } else {
-        match chosen.delprop(flag) {
-            Ok(()) | Err(FdtError::NotFound) => (),
-            Err(e) => return Err(e),
-        }
+        chosen.delprop(flag).or_else(|e| if e == FdtError::NotFound { Ok(()) } else { Err(e) })
     }
-
-    Ok(())
 }
 
 /// Apply the debug policy overlay to the guest DT.
