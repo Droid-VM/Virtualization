@@ -16,6 +16,29 @@
       "message": "Hi, PTAL.",
       "revId": "bb34616a9cb03a0b290239a6eca084c39af96189",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceddb098_5fae8443",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-15T10:14:00Z",
+      "side": 1,
+      "message": "While we\u0027re refactoring this, why not make this function more generic as\n```\nfn set_or_clear_flag(node: \u0026mut FdtNode, flag: \u0026CStr, keep_flag: bool)\n```\nso that `/chosen` only needs to be located once (and we potentially could re-use the function elsewhere in the DT)?\n\nThis would allow the caller to \n```\nif let Some(mut chosen) \u003d fdt.chosen_mut()? {\n    set_or_clear_flag(chosen, ...)?;\n    set_or_clear_flag(chosen, ...)?;\n}\n```",
+      "range": {
+        "startLine": 759,
+        "startChar": 3,
+        "endLine": 759,
+        "endChar": 27
+      },
+      "revId": "bb34616a9cb03a0b290239a6eca084c39af96189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
