@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12b384db_f142644e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-15T08:59:04Z",
+      "side": 1,
+      "message": "I believe this is one of the rare cases where DRY and self-documentation clash as the literals are not only forced by the DT spec to never change but most are (to some extent) standard and someone with experience with DTs will immediately understand what `fdt.next_compatible(cstr!(\"google,open-dice\"))` does, where the extra level of indirection of `PVMFW_DICE_NODE_NAME` seems to add confusion (in particular because - to be pedantic - it isn\u0027t a DT node name).\n\nWhat are you worried about? catching typos in the literal?\n\n(tagging @alanstokes@google.com to get his thoughts)",
+      "revId": "05204738bfb42f08570c2bd5d07a533c4942a9a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
