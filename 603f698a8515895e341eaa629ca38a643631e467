@@ -46,6 +46,30 @@
       },
       "revId": "603f698a8515895e341eaa629ca38a643631e467",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2de7b6e1_f3e5c309",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-15T13:39:48Z",
+      "side": 1,
+      "message": "I would prefer to keep the `_prop` name as this function provides a generic capability to reset or delete a property. The caller can then decide whether to use it on a \"flag\" property based on their own usage policy. This effectively separates the capability and policy in the implementation.",
+      "parentUuid": "c4ced4c5_ccb83bcf",
+      "range": {
+        "startLine": 761,
+        "startChar": 18,
+        "endLine": 761,
+        "endChar": 22
+      },
+      "revId": "603f698a8515895e341eaa629ca38a643631e467",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
