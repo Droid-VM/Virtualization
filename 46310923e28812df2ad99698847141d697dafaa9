@@ -1,0 +1,251 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdc165a6_678a7ccc",
+        "filename": "git-command",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-19T09:40:27Z",
+      "side": 1,
+      "message": "This file was probably added to the commit by mistake?",
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb759a96_e36ce313",
+        "filename": "libs/hyp/src/error.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-19T09:40:27Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n\n    //! Error and Result types for hypervisor.\n\n    use crate::GeniezoneError;\n    use crate::KvmError;\n    use core::{fmt, result};\n    use uuid::Uuid;",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 0
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da9a92f5_01cb7277",
+        "filename": "libs/hyp/src/error.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-19T09:40:27Z",
+      "side": 1,
+      "message": "`GenieZone`",
+      "range": {
+        "startLine": 32,
+        "startChar": 25,
+        "endLine": 32,
+        "endChar": 34
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99ee951d_1b585420",
+        "filename": "libs/hyp/src/error.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-19T09:40:27Z",
+      "side": 1,
+      "message": "`GenieZone`",
+      "range": {
+        "startLine": 48,
+        "startChar": 44,
+        "endLine": 48,
+        "endChar": 53
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70c0d3da_d574d9cd",
+        "filename": "libs/hyp/src/error.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-19T09:40:27Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n                    write!(f, \"Failed to invoke the HVC function with function ID {function_id}: {e}\")\n                }\n                Self::GeniezoneError(e, function_id) \u003d\u003e {\n                    write!(\n                        f,\n                        \"Failed to invoke geniezone HVC function with function ID {function_id}: {e}\"\n                    )\n                }\n                Self::UnsupportedHypervisorUuid(u) \u003d\u003e {\n                    write!(f, \"Unsupported Hypervisor UUID {u}\")",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 0
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc7c06b3_3c5b162f",
+        "filename": "libs/hyp/src/hypervisor/geniezone.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-19T09:40:27Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n\n    //! Wrappers around calls to the GenieZone hypervisor.\n\n    use super::common::{Hypervisor, HypervisorCap, MMIO_GUARD_GRANULE_SIZE};\n    use crate::error::{Error, Result};\n    use crate::util::page_address;\n    use core::fmt::{self, Display, Formatter};\n    use smccc::{\n        error::{positive_or_error_64, success_or_error_32, success_or_error_64},\n        hvc64,",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 0
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ba24330_eb8825e3",
+        "filename": "libs/hyp/src/hypervisor/geniezone.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-19T09:40:27Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n    };\n    use uuid::{uuid, Uuid};\n\n    pub(super) struct GeniezoneHypervisor;",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 0
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb58be41_15748be8",
+        "filename": "libs/hyp/src/hypervisor/geniezone.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-19T09:40:27Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n        }\n    }\n\n    impl Hypervisor for GeniezoneHypervisor {\n        fn mmio_guard_init(\u0026self) -\u003e Result\u003c()\u003e {\n            mmio_guard_enroll()?;\n            let mmio_granule \u003d mmio_guard_granule()?;",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 0
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1126dd21_5a4db7b4",
+        "filename": "libs/hyp/src/hypervisor/geniezone.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-19T09:40:27Z",
+      "side": 1,
+      "message": "Please replace this with a call to `checked_hvc64_expect_zero`.",
+      "range": {
+        "startLine": 106,
+        "startChar": 8,
+        "endLine": 109,
+        "endChar": 9
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44b80a15_04763b08",
+        "filename": "libs/hyp/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-19T09:40:27Z",
+      "side": 1,
+      "message": "Do we really need this type to be made public?",
+      "range": {
+        "startLine": 24,
+        "startChar": 37,
+        "endLine": 24,
+        "endChar": 51
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a902d1c3_80707b92",
+        "filename": "libs/hyp/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-19T09:40:27Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n    mod util;\n\n    pub use error::{Error, Result};\n    pub use hypervisor::{\n        get_hypervisor, GeniezoneError, Hypervisor, HypervisorCap, KvmError, MMIO_GUARD_GRANULE_SIZE,\n    };",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
