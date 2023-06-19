@@ -337,6 +337,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1095a91a_abc28c5d",
+        "filename": "libs/hyp/src/hypervisor/geniezone.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-19T09:52:42Z",
+      "side": 1,
+      "message": "(Un-resolving as this comment was for `mmio_guard_map` while the one on PS4 is for `mmio_guard_unmap`)\n\nI believe that you are using `success_or_error_32` here due the KVM back-end using it as a workaround for a KVM bug discovered post-release (errors were returned through `w0` instead of `x0`, making them 32-bit instead of 64-bit). As I suppose that GZ doesn\u0027t have the same bug, there\u0027s no need for the work-around either and `checked_hvc64_expect_zero` should be used. Please let me know if I\u0027m missing something.",
+      "parentUuid": "13c29e9a_3469559a",
+      "range": {
+        "startLine": 82,
+        "startChar": 8,
+        "endLine": 82,
+        "endChar": 89
+      },
+      "revId": "fd900a809086566b60d11c52fba2d61f02235373",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33529a96_ae188714",
         "filename": "libs/hyp/src/hypervisor/geniezone.rs",
         "patchSetId": 2
