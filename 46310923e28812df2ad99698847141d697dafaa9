@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93961bdf_ff81c9f6",
+        "filename": "git-command",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-06-20T08:04:43Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "cdc165a6_678a7ccc",
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb759a96_e36ce313",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-06-19T09:40:27Z",
       "side": 1,
       "message": "Please fix this WARNING reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n\n    //! Error and Result types for hypervisor.\n\n    use crate::GeniezoneError;\n    use crate::KvmError;\n    use core::{fmt, result};\n    use uuid::Uuid;",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 0
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85528d9f_3f55f15a",
+        "filename": "libs/hyp/src/error.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-06-20T08:04:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb759a96_e36ce313",
       "range": {
         "startLine": 14,
         "startChar": 0,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63e1e4d4_b89260a3",
+        "filename": "libs/hyp/src/error.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-06-20T08:04:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da9a92f5_01cb7277",
+      "range": {
+        "startLine": 32,
+        "startChar": 25,
+        "endLine": 32,
+        "endChar": 34
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99ee951d_1b585420",
@@ -77,6 +143,30 @@
       "writtenOn": "2023-06-19T09:40:27Z",
       "side": 1,
       "message": "`GenieZone`",
+      "range": {
+        "startLine": 48,
+        "startChar": 44,
+        "endLine": 48,
+        "endChar": 53
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31adc6d5_491a81fe",
+        "filename": "libs/hyp/src/error.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-06-20T08:04:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99ee951d_1b585420",
       "range": {
         "startLine": 48,
         "startChar": 44,
@@ -110,6 +200,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e61b3e4_c9600744",
+        "filename": "libs/hyp/src/error.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-06-20T08:04:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70c0d3da_d574d9cd",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 0
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc7c06b3_3c5b162f",
@@ -123,6 +237,30 @@
       "writtenOn": "2023-06-19T09:40:27Z",
       "side": 1,
       "message": "Please fix this WARNING reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n\n    //! Wrappers around calls to the GenieZone hypervisor.\n\n    use super::common::{Hypervisor, HypervisorCap, MMIO_GUARD_GRANULE_SIZE};\n    use crate::error::{Error, Result};\n    use crate::util::page_address;\n    use core::fmt::{self, Display, Formatter};\n    use smccc::{\n        error::{positive_or_error_64, success_or_error_32, success_or_error_64},\n        hvc64,",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 0
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5b1a4de_6dd9d590",
+        "filename": "libs/hyp/src/hypervisor/geniezone.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-06-20T08:04:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc7c06b3_3c5b162f",
       "range": {
         "startLine": 14,
         "startChar": 0,
@@ -156,6 +294,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c36c7a68_ebd5045f",
+        "filename": "libs/hyp/src/hypervisor/geniezone.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-06-20T08:04:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ba24330_eb8825e3",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 0
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81356cdf_8175cce9",
@@ -169,6 +331,30 @@
       "writtenOn": "2023-06-19T09:52:42Z",
       "side": 1,
       "message": "BTW, I notice that this UUID has changed between PS3 and PS4, would it be possible to add a comment documenting where this value comes from?",
+      "range": {
+        "startLine": 39,
+        "startChar": 34,
+        "endLine": 39,
+        "endChar": 70
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "166dc365_e0886c39",
+        "filename": "libs/hyp/src/hypervisor/geniezone.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-06-20T08:04:43Z",
+      "side": 1,
+      "message": "Comment added as suggested.",
+      "parentUuid": "81356cdf_8175cce9",
       "range": {
         "startLine": 39,
         "startChar": 34,
@@ -202,6 +388,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e88f3e6_94ba2530",
+        "filename": "libs/hyp/src/hypervisor/geniezone.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-06-20T08:04:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb58be41_15748be8",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 0
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1126dd21_5a4db7b4",
@@ -215,6 +425,30 @@
       "writtenOn": "2023-06-19T09:40:27Z",
       "side": 1,
       "message": "Please replace this with a call to `checked_hvc64_expect_zero`.",
+      "range": {
+        "startLine": 106,
+        "startChar": 8,
+        "endLine": 109,
+        "endChar": 9
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ed5bfd8_4197cb87",
+        "filename": "libs/hyp/src/hypervisor/geniezone.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-06-20T08:04:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1126dd21_5a4db7b4",
       "range": {
         "startLine": 106,
         "startChar": 8,
@@ -248,6 +482,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6122fb6_25db9424",
+        "filename": "libs/hyp/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-06-20T08:04:43Z",
+      "side": 1,
+      "message": "No need for now.",
+      "parentUuid": "44b80a15_04763b08",
+      "range": {
+        "startLine": 24,
+        "startChar": 37,
+        "endLine": 24,
+        "endChar": 51
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a902d1c3_80707b92",
@@ -261,6 +519,30 @@
       "writtenOn": "2023-06-19T09:40:27Z",
       "side": 1,
       "message": "Please fix this WARNING reported by RustFormatter: Please reformat the following line(s) to:\n\nAnalyzer Description: Offers Rust formatting Suggestions\nOwner: chiw@google.com\n\nPlease reformat the following line(s) to:\n\n    mod util;\n\n    pub use error::{Error, Result};\n    pub use hypervisor::{\n        get_hypervisor, GeniezoneError, Hypervisor, HypervisorCap, KvmError, MMIO_GUARD_GRANULE_SIZE,\n    };",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "46310923e28812df2ad99698847141d697dafaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c918fc3c_7dab8213",
+        "filename": "libs/hyp/src/lib.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-06-20T08:04:43Z",
+      "side": 1,
+      "message": "No need to modify the original `pub use hypervisor`.",
+      "parentUuid": "a902d1c3_80707b92",
       "range": {
         "startLine": 21,
         "startChar": 0,
