@@ -401,13 +401,13 @@ fn try_run_payload(
         verified_data
     };
 
-    let payload_metadata = metadata.payload.ok_or_else(|| {
+    let payload = metadata.payload.ok_or_else(|| {
         MicrodroidError::InvalidConfig("No payload config in metadata".to_string())
     })?;
 
     // To minimize the exposure to untrusted data, derive dice profile as soon as possible.
     info!("DICE derivation for payload");
-    let dice_artifacts = dice_derivation(dice, &verified_data, &payload_metadata)?;
+    let dice_artifacts = dice_derivation(dice, &verified_data, &payload)?;
 
     // Run encryptedstore binary to prepare the storage
     let encryptedstore_child = if Path::new(ENCRYPTEDSTORE_BACKING_DEVICE).exists() {
@@ -430,12 +430,13 @@ fn try_run_payload(
 
     // Restricted APIs are only allowed to be used by platform or test components. Infer this from
     // the use of a VM config file since those can only be used by platform and test components.
-    let allow_restricted_apis = match payload_metadata {
-        PayloadMetadata::config_path(_) => true,
-        PayloadMetadata::config(_) => false,
+    let allow_restricted_apis = match payload {
+        PayloadMetadata::ConfigPath(_) => true,
+        PayloadMetadata::Config(_) => false,
+        _ => false, // default is false for safety
     };
 
-    let config = load_config(payload_metadata).context("Failed to load payload metadata")?;
+    let config = load_config(payload).context("Failed to load payload metadata")?;
 
     let task = config
         .task
@@ -786,16 +787,16 @@ fn get_current_sdk() -> Result<u32> {
     current_sdk.parse().context("Malformed SDK version")
 }
 
-fn load_config(payload_metadata: PayloadMetadata) -> Result<VmPayloadConfig> {
-    match payload_metadata {
-        PayloadMetadata::config_path(path) => {
+fn load_config(payload: PayloadMetadata) -> Result<VmPayloadConfig> {
+    match payload {
+        PayloadMetadata::ConfigPath(path) => {
             let path = Path::new(&path);
             info!("loading config from {:?}...", path);
             let file = ioutil::wait_for_file(path, WAIT_TIMEOUT)
                 .with_context(|| format!("Failed to read {:?}", path))?;
             Ok(serde_json::from_reader(file)?)
         }
-        PayloadMetadata::config(payload_config) => {
+        PayloadMetadata::Config(payload_config) => {
             let task = Task {
                 type_: TaskType::MicrodroidLauncher,
                 command: payload_config.payload_binary_name,
@@ -810,6 +811,7 @@ fn load_config(payload_metadata: PayloadMetadata) -> Result<VmPayloadConfig> {
                 enable_authfs: false,
             })
         }
+        _ => bail!("Failed to match config against a config type."),
     }
 }
 
