@@ -23,7 +23,7 @@ use diced_open_dice::{
 };
 use keystore2_crypto::ZVec;
 use libc::{c_void, mmap, munmap, MAP_FAILED, MAP_PRIVATE, PROT_READ};
-use microdroid_metadata::PayloadMetadata;
+use microdroid_metadata::Payload;
 use openssl::hkdf::hkdf;
 use openssl::md::Md;
 use std::fs;
@@ -170,18 +170,19 @@ impl Drop for DiceDriver<'_> {
 /// PayloadConfig = {
 ///   1: tstr // payload_binary_name
 /// }
-pub fn format_payload_config_descriptor(payload_metadata: &PayloadMetadata) -> Result<Vec<u8>> {
+pub fn format_payload_config_descriptor(payload: &Payload) -> Result<Vec<u8>> {
     const MICRODROID_PAYLOAD_COMPONENT_NAME: &str = "Microdroid payload";
 
-    let config_descriptor_cbor_value = match payload_metadata {
-        PayloadMetadata::config_path(payload_config_path) => cbor!({
+    let config_descriptor_cbor_value = match payload {
+        Payload::ConfigPath(payload_config_path) => cbor!({
             -70002 => MICRODROID_PAYLOAD_COMPONENT_NAME,
             -71000 => payload_config_path
         }),
-        PayloadMetadata::config(payload_config) => cbor!({
+        Payload::Config(payload_config) => cbor!({
             -70002 => MICRODROID_PAYLOAD_COMPONENT_NAME,
             -71001 => {1 => payload_config.payload_binary_name}
         }),
+        _ => unimplemented!(),
     }
     .context("Failed to build a CBOR Value from payload metadata")?;
     let mut config_descriptor = Vec::new();
