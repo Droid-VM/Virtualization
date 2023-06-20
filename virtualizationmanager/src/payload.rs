@@ -25,7 +25,9 @@ use android_system_virtualizationservice::aidl::android::system::virtualizations
 use anyhow::{anyhow, bail, Context, Result};
 use binder::{wait_for_interface, ParcelFileDescriptor};
 use log::{info, warn};
-use microdroid_metadata::{ApexPayload, ApkPayload, Metadata, PayloadConfig, PayloadMetadata};
+use microdroid_metadata::{
+    ApexPayload, ApkPayload, Metadata, Payload as microdroid_Payload, PayloadConfig,
+};
 use microdroid_payload_config::{ApexConfig, VmPayloadConfig};
 use once_cell::sync::OnceCell;
 use packagemanager_aidl::aidl::android::content::pm::{
@@ -193,13 +195,13 @@ fn make_metadata_file(
     apex_infos: &[&ApexInfo],
     temporary_directory: &Path,
 ) -> Result<ParcelFileDescriptor> {
-    let payload_metadata = match &app_config.payload {
-        Payload::PayloadConfig(payload_config) => PayloadMetadata::config(PayloadConfig {
+    let payload = match &app_config.payload {
+        Payload::PayloadConfig(payload_config) => microdroid_Payload::Config(PayloadConfig {
             payload_binary_name: payload_config.payloadBinaryName.clone(),
             ..Default::default()
         }),
         Payload::ConfigPath(config_path) => {
-            PayloadMetadata::config_path(format!("/mnt/apk/{}", config_path))
+            microdroid_Payload::ConfigPath(format!("/mnt/apk/{}", config_path))
         }
     };
 
@@ -225,7 +227,7 @@ fn make_metadata_file(
             ..Default::default()
         })
         .into(),
-        payload: Some(payload_metadata),
+        payload: Some(payload),
         ..Default::default()
     };
 

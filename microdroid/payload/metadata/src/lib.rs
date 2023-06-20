@@ -24,7 +24,7 @@ use std::io::Read;
 use std::io::Write;
 
 pub use microdroid_metadata::metadata::{
-    ApexPayload, ApkPayload, Metadata, Metadata_oneof_payload as PayloadMetadata, PayloadConfig,
+    ApexPayload, ApkPayload, Metadata, PayloadConfig, metadata::Payload
 };
 
 /// Reads a metadata from a reader
