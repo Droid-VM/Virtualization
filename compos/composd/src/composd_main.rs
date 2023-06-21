@@ -56,10 +56,7 @@ fn try_main() -> Result<()> {
         .context("Registering composd service")?;
 
     info!("Registered services, joining threadpool");
-    ProcessState::join_thread_pool();
-
-    info!("Exiting");
-    Ok(())
+    ProcessState::join_thread_pool()
 }
 
 fn main() {
