@@ -34,7 +34,11 @@ static mut HEAP: [u8; HEAP_SIZE] = [0; HEAP_SIZE];
 #[global_allocator]
 static HEAP_ALLOCATOR: LockedHeap<32> = LockedHeap::<32>::new();
 
-/// SAFETY: Must be called no more than once.
+/// Initialize the global allocator.
+///
+/// # Safety
+///
+/// Must be called no more than once.
 pub unsafe fn init() {
     // SAFETY: Nothing else accesses this memory, and we hand it over to the heap to manage and
     // never touch it again. The heap is locked, so there cannot be any races.
