@@ -17,6 +17,7 @@
 use crate::config;
 use crate::crypto;
 use crate::fdt;
+use crate::global_allocator_size;
 use crate::heap;
 use crate::memory;
 use crate::rand;
@@ -36,7 +37,7 @@ use vmbase::{
     console,
     layout::{self, crosvm},
     logger, main,
-    memory::{min_dcache_line_size, MemoryTracker, MEMORY, SIZE_4KB},
+    memory::{min_dcache_line_size, MemoryTracker, MEMORY, SIZE_128KB, SIZE_4KB},
     power::reboot,
 };
 use zeroize::Zeroize;
@@ -62,6 +63,7 @@ pub enum RebootReason {
 }
 
 main!(start);
+global_allocator_size!(SIZE_128KB);
 
 /// Entry point for pVM firmware.
 pub fn start(fdt_address: u64, payload_start: u64, payload_size: u64, _arg3: u64) {
