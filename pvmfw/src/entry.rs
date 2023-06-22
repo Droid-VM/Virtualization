@@ -17,7 +17,6 @@
 use crate::config;
 use crate::crypto;
 use crate::fdt;
-use crate::heap;
 use crate::memory;
 use crate::rand;
 use core::arch::asm;

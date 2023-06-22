@@ -23,6 +23,7 @@ mod bionic;
 pub mod console;
 mod entry;
 pub mod fdt;
+pub mod heap;
 pub mod layout;
 mod linker;
 pub mod logger;
