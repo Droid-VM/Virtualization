@@ -32,7 +32,7 @@ use libfdt::FdtError;
 use log::{debug, error, info};
 use vmbase::{
     fdt::SwiotlbInfo,
-    global_allocator_size, heap,
+    global_allocator_size,
     layout::{self, crosvm},
     main,
     memory::{MemoryTracker, PageTable, MEMORY, PAGE_SIZE, SIZE_64KB},
@@ -148,9 +148,6 @@ fn unshare_all_memory(mmio_guard_supported: bool) {
 
 /// Entry point for Rialto.
 pub fn main(fdt_addr: u64, _a1: u64, _a2: u64, _a3: u64) {
-    // SAFETY - Only called once, from here.
-    unsafe { heap::init() };
-
     let Ok(mmio_guard_supported) = try_init_logger() else {
         // Don't log anything if the logger initialization fails.
         reboot();
