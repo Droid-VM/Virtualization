@@ -16,6 +16,98 @@
       "message": "As requested in https://r.android.com/c/platform/packages/modules/Virtualization/+/2332348/1..2/vmbase/example/tests/test.rs#b70",
       "revId": "fafab2e523d1bcc4ea1fb0945cd015c7a70e25bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e41a14d3_a96d6dd8",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-26T15:12:16Z",
+      "side": 1,
+      "message": "Do you also want to\n```\nassert_eq!(block_device_index, 2);\n```\n? (and, for consistency, maybe rename the variable to `block_device_count`?)",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 66,
+        "endChar": 13
+      },
+      "revId": "fafab2e523d1bcc4ea1fb0945cd015c7a70e25bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "410e3674_3ea24a90",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-26T15:12:16Z",
+      "side": 1,
+      "message": "uber-nit: could we unify the function names to one of\n\n- `check_virtio_block` \u0026 `check_virtio_console`\n- `check_virtio_block_device` \u0026 `check_virtio_console_device`\n\n?",
+      "range": {
+        "startLine": 70,
+        "startChar": 21,
+        "endLine": 70,
+        "endChar": 28
+      },
+      "revId": "fafab2e523d1bcc4ea1fb0945cd015c7a70e25bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b814d48_43d60b2c",
+        "filename": "vmbase/example/src/pci.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-26T15:12:16Z",
+      "side": 1,
+      "message": "Could we try to `blk.read_block()` to improve the coverage of the test?",
+      "range": {
+        "startLine": 87,
+        "startChar": 12,
+        "endLine": 87,
+        "endChar": 42
+      },
+      "revId": "fafab2e523d1bcc4ea1fb0945cd015c7a70e25bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "491cdf1e_b59b1f3b",
+        "filename": "vmbase/example/tests/test.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-26T15:12:16Z",
+      "side": 1,
+      "message": "Is this necessary to create the file?",
+      "range": {
+        "startLine": 85,
+        "startChar": 9,
+        "endLine": 85,
+        "endChar": 20
+      },
+      "revId": "fafab2e523d1bcc4ea1fb0945cd015c7a70e25bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
