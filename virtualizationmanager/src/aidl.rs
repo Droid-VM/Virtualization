@@ -306,15 +306,12 @@ impl VirtualizationService {
             VirtualMachineConfig::RawConfig(_) => true,
             VirtualMachineConfig::AppConfig(config) => {
                 // Some features are reserved for platform apps only, even when using
-                // VirtualMachineAppConfig:
+                // VirtualMachineAppConfig. These features are grouped in the CustomConfig struct
                 // - controlling CPUs;
                 // - specifying a config file in the APK;
                 // - gdbPort is set, meaning that crosvm will start a gdb server;
                 // - using anything other than the default kernel.
-                !config.taskProfiles.is_empty()
-                    || matches!(config.payload, Payload::ConfigPath(_))
-                    || config.gdbPort > 0
-                    || config.customKernelImage.as_ref().is_some()
+                config.customConfig.is_some() || matches!(config.payload, Payload::ConfigPath(_))
             }
         };
         if is_custom {
@@ -595,8 +592,12 @@ fn load_app_config(
     let vm_config_file = File::open(vm_config_path)?;
     let mut vm_config = VmConfig::load(&vm_config_file)?.to_parcelable()?;
 
-    if let Some(file) = config.customKernelImage.as_ref() {
-        vm_config.kernel = Some(ParcelFileDescriptor::new(clone_file(file)?))
+    if let Some(custom_config) = &config.customConfig {
+        if let Some(file) = custom_config.customKernelImage.as_ref() {
+            vm_config.kernel = Some(ParcelFileDescriptor::new(clone_file(file)?))
+        }
+        vm_config.taskProfiles = custom_config.taskProfiles.clone();
+        vm_config.gdbPort = custom_config.gdbPort;
     }
 
     if config.memoryMib > 0 {
@@ -606,8 +607,6 @@ fn load_app_config(
     vm_config.name = config.name.clone();
     vm_config.protectedVm = config.protectedVm;
     vm_config.cpuTopology = config.cpuTopology;
-    vm_config.taskProfiles = config.taskProfiles.clone();
-    vm_config.gdbPort = config.gdbPort;
 
     // Microdroid takes additional init ramdisk & (optionally) storage image
     add_microdroid_system_images(config, instance_file, storage_image, &mut vm_config)?;
@@ -1042,7 +1041,9 @@ fn check_gdb_allowed(config: &VirtualMachineConfig) -> binder::Result<()> {
 fn extract_gdb_port(config: &VirtualMachineConfig) -> Option<NonZeroU16> {
     match config {
         VirtualMachineConfig::RawConfig(config) => NonZeroU16::new(config.gdbPort as u16),
-        VirtualMachineConfig::AppConfig(config) => NonZeroU16::new(config.gdbPort as u16),
+        VirtualMachineConfig::AppConfig(config) => {
+            NonZeroU16::new(config.customConfig.as_ref().map(|c| c.gdbPort).unwrap_or(0) as u16)
+        }
     }
 }
 
