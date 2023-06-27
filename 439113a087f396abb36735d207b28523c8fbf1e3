@@ -22,6 +22,30 @@
       },
       "revId": "439113a087f396abb36735d207b28523c8fbf1e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b0486a4_807306d7",
+        "filename": "vmbase/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-27T15:04:04Z",
+      "side": 1,
+      "message": "Yes, thanks for bringing my attention to this!\n\nLooking into `vmbase_ffi_defaults` and `vmbase_nostd_defaults` a bit deeper it isn\u0027t clear what the distinction between the two is (and, if there\u0027s a clear one, we haven\u0027t been very diligent in respecting it) so I\u0027ve pushed aosp/2640051 to try and untangle (and document) that.",
+      "parentUuid": "0539fd43_8231e99a",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 21
+      },
+      "revId": "439113a087f396abb36735d207b28523c8fbf1e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
