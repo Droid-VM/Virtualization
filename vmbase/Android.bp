@@ -2,11 +2,18 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
+// Used by intermediate rust_library_rlib, then grouped as one rust_ffi_static.
 rust_defaults {
-    name: "vmbase_rust_defaults",
+    name: "vmbase_rlib_defaults",
     edition: "2021",
+    prefer_rlib: true,
     host_supported: false,
     enabled: false,
+    no_stdlibs: true,
+    stdlibs: [
+        "libcompiler_builtins.rust_sysroot",
+        "libcore.rust_sysroot",
+    ],
     target: {
         android_arm64: {
             enabled: true,
@@ -14,19 +21,17 @@ rust_defaults {
     },
 }
 
+// Used by "top-level" rust_ffi_static linked into the final cc_binary.
 rust_defaults {
     name: "vmbase_ffi_defaults",
-    defaults: ["vmbase_rust_defaults"],
-    no_stdlibs: true,
-    stdlibs: [
-        "libcompiler_builtins.rust_sysroot",
-        "libcore.rust_sysroot",
-    ],
+    defaults: ["vmbase_rlib_defaults"],
 }
 
+// Used by extra cc_library_static linked into the final ELF.
 cc_defaults {
     name: "vmbase_cc_defaults",
     nocrt: true,
+    no_libcrt: true,
     system_shared_libs: [],
     stl: "none",
     installable: false,
@@ -39,8 +44,10 @@ cc_defaults {
     sanitize: {
         hwaddress: false,
     },
+    native_coverage: false,
 }
 
+// Used by cc_binary linking the rust_ffi_static & other C libs into final ELF.
 cc_defaults {
     name: "vmbase_elf_defaults",
     defaults: ["vmbase_cc_defaults"],
@@ -48,18 +55,11 @@ cc_defaults {
     static_libs: [
         "libvmbase_entry",
     ],
-    installable: false,
-    enabled: false,
-    target: {
-        android_arm64: {
-            enabled: true,
-        },
-    },
 }
 
 rust_library_rlib {
     name: "libvmbase",
-    defaults: ["vmbase_rust_defaults"],
+    defaults: ["vmbase_rlib_defaults"],
     crate_name: "vmbase",
     srcs: ["src/lib.rs"],
     rustlibs: [
@@ -76,7 +76,6 @@ rust_library_rlib {
         "libvirtio_drivers",
         "libzeroize_nostd",
     ],
-    no_stdlibs: true,
     whole_static_libs: [
         "librust_baremetal",
     ],
@@ -94,7 +93,6 @@ cc_library_static {
         "exceptions.S",
         "exceptions_panic.S",
     ],
-    no_libcrt: true,
     apex_available: ["com.android.virt"],
 }
 
