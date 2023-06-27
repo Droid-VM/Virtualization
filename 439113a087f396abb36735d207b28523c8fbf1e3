@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0539fd43_8231e99a",
+        "filename": "vmbase/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-27T12:23:58Z",
+      "side": 1,
+      "message": "Can we just rename \"vmbase_ffi_defaults\" at line 18 to \"vmbase_nostd_defaults\" and use it as default for this library?",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 21
+      },
+      "revId": "439113a087f396abb36735d207b28523c8fbf1e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
