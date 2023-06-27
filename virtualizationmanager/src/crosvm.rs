@@ -708,7 +708,7 @@ fn run_vm(
             Some(pvmfw_path) if !pvmfw_path.is_empty() => {
                 command.arg("--protected-vm-with-firmware").arg(pvmfw_path)
             }
-            _ => command.arg("--protected-vm"),
+            _ => command.arg("--protected-vm-without-firmware"),
         };
 
         // 3 virtio-console devices + vsock = 4.
