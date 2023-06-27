@@ -22,6 +22,30 @@
       },
       "revId": "8d192953ad30ae696e8e2ca4227a4ded46f693d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51e35a15_7c966076",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-27T02:25:28Z",
+      "side": 1,
+      "message": "It means that idsig file was corrupted (intentionally?). The VM will fail to boot and it\u0027s an expected behavior.",
+      "parentUuid": "405ce5e7_bf483f4d",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 79
+      },
+      "revId": "8d192953ad30ae696e8e2ca4227a4ded46f693d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
