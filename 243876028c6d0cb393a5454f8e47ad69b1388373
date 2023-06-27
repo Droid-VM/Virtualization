@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63ebd02e_0e8722b3",
+        "filename": "libs/ignorabletest/src/runner.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-27T10:58:05Z",
+      "side": 1,
+      "message": "I\u0027d expect .with_tag(\"something\") here. Not sure what it does without it, but being explicit this is test logging seems good?\nIf you could get hold of the actual test module name that\u0027d be even better, but I suspect that is hard.",
+      "range": {
+        "startLine": 19,
+        "startChar": 3,
+        "endLine": 19,
+        "endChar": 73
+      },
+      "revId": "243876028c6d0cb393a5454f8e47ad69b1388373",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
