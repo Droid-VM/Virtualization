@@ -16,6 +16,24 @@
       "message": "It might be a good idea to specifically list the other possible branches here, to see when new enum are added in future versions",
       "revId": "c2922d9945c37b62ce0baff49b1e28b36793ec51",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6250bc8d_19b2b3a6",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1939360
+      },
+      "writtenOn": "2023-06-27T07:59:19Z",
+      "side": 1,
+      "message": "As discussed, this has to be done since the enum is tagged ![non_exhaustive]. Thanks for the review",
+      "parentUuid": "3fea8ca8_b8337f6b",
+      "revId": "c2922d9945c37b62ce0baff49b1e28b36793ec51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
