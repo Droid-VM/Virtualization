@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ba2b700_20eb527d",
+        "filename": "compos/common/compos_client.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-27T14:05:33Z",
+      "side": 1,
+      "message": "Can we use ...:Default::Default() here? Or does it not implement Default?",
+      "range": {
+        "startLine": 136,
+        "startChar": 10,
+        "endLine": 137,
+        "endChar": 40
+      },
+      "revId": "c7da9f2d88c1414e7f83d44db093f8ffcb9e26d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e11ca2bb_274bfc4e",
+        "filename": "javalib/src/android/system/virtualmachine/VirtualMachineConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-27T14:05:33Z",
+      "side": 1,
+      "message": "Either delete this comment, or maybe change it to say that we don\u0027t allow apps to set anything in CustomConfig?",
+      "range": {
+        "startLine": 484,
+        "startChar": 5,
+        "endLine": 484,
+        "endChar": 70
+      },
+      "revId": "c7da9f2d88c1414e7f83d44db093f8ffcb9e26d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cfcdd91_3d87d43a",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-27T14:05:33Z",
+      "side": 1,
+      "message": "This one isn\u0027t in the struct (and that\u0027s fine).",
+      "range": {
+        "startLine": 311,
+        "startChar": 18,
+        "endLine": 311,
+        "endChar": 57
+      },
+      "revId": "c7da9f2d88c1414e7f83d44db093f8ffcb9e26d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3de8701_d99ebf2f",
+        "filename": "virtualizationmanager/src/aidl.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-27T14:05:33Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand why you need this, but then I\u0027m frequently baffled by these things.",
+      "range": {
+        "startLine": 1045,
+        "startChar": 47,
+        "endLine": 1045,
+        "endChar": 56
+      },
+      "revId": "c7da9f2d88c1414e7f83d44db093f8ffcb9e26d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
