@@ -35,6 +35,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62cb36aa_258fef11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1939360
+      },
+      "writtenOn": "2023-06-28T08:02:25Z",
+      "side": 1,
+      "message": "Thanks Alan!",
+      "revId": "c2922d9945c37b62ce0baff49b1e28b36793ec51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d4b9d03_86de77e8",
@@ -48,6 +65,30 @@
       "writtenOn": "2023-06-27T11:24:07Z",
       "side": 1,
       "message": "Can we make this \"as PayloadMetadata\". The old name is IMHO better - this doesn\u0027t represent the payload, it is just the metadata associated with it.",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 21
+      },
+      "revId": "c2922d9945c37b62ce0baff49b1e28b36793ec51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "772be6e4_2404c34a",
+        "filename": "microdroid/payload/metadata/src/lib.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1939360
+      },
+      "writtenOn": "2023-06-28T08:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d4b9d03_86de77e8",
       "range": {
         "startLine": 27,
         "startChar": 4,
@@ -111,6 +152,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3000eaee_97490ef7",
+        "filename": "microdroid_manager/src/dice.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1939360
+      },
+      "writtenOn": "2023-06-28T08:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "588e1831_c9ba24fd",
+      "revId": "c2922d9945c37b62ce0baff49b1e28b36793ec51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5e18022_73eeb9f2",
@@ -134,6 +193,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e523105_e444b95c",
+        "filename": "microdroid_manager/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 1939360
+      },
+      "writtenOn": "2023-06-28T08:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5e18022_73eeb9f2",
+      "range": {
+        "startLine": 814,
+        "startChar": 43,
+        "endLine": 814,
+        "endChar": 60
+      },
+      "revId": "c2922d9945c37b62ce0baff49b1e28b36793ec51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25e8bdd9_25d55237",
@@ -147,6 +230,30 @@
       "writtenOn": "2023-06-27T11:24:07Z",
       "side": 1,
       "message": "And I\u0027d rather we kept the PayloadMetadata name here, which I think is easier with the change above.",
+      "range": {
+        "startLine": 29,
+        "startChar": 50,
+        "endLine": 29,
+        "endChar": 68
+      },
+      "revId": "c2922d9945c37b62ce0baff49b1e28b36793ec51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df1459c3_b68fa4c8",
+        "filename": "virtualizationmanager/src/payload.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1939360
+      },
+      "writtenOn": "2023-06-28T08:02:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25e8bdd9_25d55237",
       "range": {
         "startLine": 29,
         "startChar": 50,
