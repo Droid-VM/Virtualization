@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6178d14a_4cd512fc",
+        "filename": "vmbase/example/src/main.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2023-06-28T15:04:05Z",
+      "side": 1,
+      "message": "nit: I see this is already merged in, but could we call this `configure_heap`? We configure global allocator but initialize heap, it\u0027s confusing to read.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 31
+      },
+      "revId": "c332fae87213be4d18e799277720d1a128efd30e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
