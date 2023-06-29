@@ -24,7 +24,6 @@ mod kvm;
 use crate::error::{Error, Result};
 use alloc::boxed::Box;
 pub use common::Hypervisor;
-pub use common::HypervisorCap;
 pub use common::MMIO_GUARD_GRANULE_SIZE;
 pub use geniezone::GeniezoneError;
 use geniezone::GeniezoneHypervisor;
