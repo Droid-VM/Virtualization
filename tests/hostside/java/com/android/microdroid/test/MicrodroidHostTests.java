@@ -55,7 +55,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -71,6 +70,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -496,7 +498,8 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         vmInfo.mProcess.destroy();
     }
 
-    private void waitForCrosvmExit(CommandRunner android) throws Exception {
+    private void waitForCrosvmExit(CommandRunner android, LocalDateTime testStartTime)
+            throws Exception {
         // TODO: improve crosvm exit check. b/258848245
         android.runWithTimeout(
                 15000,
@@ -504,10 +507,13 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                 "-m",
                 "1",
                 "-e",
-                "'virtualizationmanager::crosvm.*exited with status exit status:'");
+                "'virtualizationmanager::crosvm.*exited with status exit status:'",
+                "-T",
+                testStartTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")));
     }
 
-    private boolean isTombstoneReceivedFromHostLogcat() throws Exception {
+    private boolean isTombstoneReceivedFromHostLogcat(LocalDateTime testStartTime)
+            throws Exception {
         // Note this method relies on logcat values being printed by the receiver on host
         // userspace crash log: virtualizationservice/src/aidl.rs
         // kernel ramdump log: virtualizationmanager/src/crosvm.rs
@@ -526,12 +532,16 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
                         "-m",
                         "1",
                         "-e",
-                        ramdumpRegex);
+                        ramdumpRegex,
+                        "-T",
+                        testStartTime.format(
+                                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")));
         return !result.trim().isEmpty();
     }
 
     private boolean isTombstoneGeneratedWithCmd(
             boolean protectedVm, String configPath, String... crashCommand) throws Exception {
+        LocalDateTime testStartTime = LocalDateTime.now(ZoneId.systemDefault());
         mMicrodroidDevice =
                 MicrodroidBuilder.fromDevicePath(getPathForPackage(PACKAGE_NAME), configPath)
                         .debugLevel("full")
@@ -547,9 +557,9 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
 
         // check until microdroid is shut down
         CommandRunner android = new CommandRunner(getDevice());
-        waitForCrosvmExit(android);
+        waitForCrosvmExit(android, testStartTime);
 
-        return isTombstoneReceivedFromHostLogcat();
+        return isTombstoneReceivedFromHostLogcat(testStartTime);
     }
 
     @Test
@@ -606,6 +616,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
     private boolean isTombstoneGeneratedWithVmRunApp(boolean debuggable, String... additionalArgs)
             throws Exception {
         // we can't use microdroid builder as it wants ADB connection (debuggable)
+        LocalDateTime testStartTime = LocalDateTime.now(ZoneId.systemDefault());
         CommandRunner android = new CommandRunner(getDevice());
 
         android.run("rm", "-rf", TEST_ROOT + "*");
@@ -627,7 +638,7 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         Collections.addAll(cmd, additionalArgs);
 
         android.run(cmd.toArray(new String[0]));
-        return isTombstoneReceivedFromHostLogcat();
+        return isTombstoneReceivedFromHostLogcat(testStartTime);
     }
 
     private boolean isTombstoneGeneratedWithCrashPayload(boolean debuggable) throws Exception {
@@ -960,9 +971,6 @@ public class MicrodroidHostTests extends MicrodroidHostTestCaseBase {
         prepareVirtualizationTestSetup(getDevice());
 
         getDevice().installPackage(findTestFile(APK_NAME), /* reinstall */ false);
-
-        // clear the log
-        getDevice().executeShellV2Command("logcat -c");
     }
 
     @After
