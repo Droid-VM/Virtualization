@@ -172,10 +172,17 @@ impl MemoryTracker {
             return Err(MemoryTrackerError::Full);
         }
 
-        self.page_table.map_device_lazy(&range).map_err(|e| {
-            error!("Error during MMIO device mapping: {e}");
-            MemoryTrackerError::FailedToMap
-        })?;
+        if get_hypervisor().has_cap(HypervisorCap::MMIO_GUARD) {
+            self.page_table.map_device_lazy(&range).map_err(|e| {
+                error!("Error during lazy MMIO device mapping: {e}");
+                MemoryTrackerError::FailedToMap
+            })?;
+        } else {
+            self.page_table.map_device(&range).map_err(|e| {
+                error!("Error during MMIO device mapping: {e}");
+                MemoryTrackerError::FailedToMap
+            })?;
+        }
 
         if self.mmio_regions.try_push(range).is_some() {
             return Err(MemoryTrackerError::Full);
@@ -212,10 +219,12 @@ impl MemoryTracker {
     ///
     /// Note that they are not unmapped from the page table.
     pub fn mmio_unmap_all(&mut self) -> Result<()> {
-        for range in &self.mmio_regions {
-            self.page_table
-                .modify_range(range, &mmio_guard_unmap_page)
-                .map_err(|_| MemoryTrackerError::FailedToUnmap)?;
+        if get_hypervisor().has_cap(HypervisorCap::MMIO_GUARD) {
+            for range in &self.mmio_regions {
+                self.page_table
+                    .modify_range(range, &mmio_guard_unmap_page)
+                    .map_err(|_| MemoryTrackerError::FailedToUnmap)?;
+            }
         }
         Ok(())
     }
@@ -279,6 +288,7 @@ impl MemoryTracker {
     /// table entry and MMIO guard mapping the block. Breaks apart a block entry if required.
     pub fn handle_mmio_fault(&mut self, addr: usize) -> Result<()> {
         let page_range = page_4kb_of(addr)..page_4kb_of(addr) + MMIO_GUARD_GRANULE_SIZE;
+        assert!(get_hypervisor().has_cap(HypervisorCap::MMIO_GUARD));
         self.page_table
             .modify_range(&page_range, &verify_lazy_mapped_block)
             .map_err(|_| MemoryTrackerError::InvalidPte)?;
@@ -466,6 +476,7 @@ fn mmio_guard_unmap_page(
         // Since mmio_guard_map takes IPAs, if pvmfw moves non-ID address mapping, page_base
         // should be converted to IPA. However, since 0x0 is a valid MMIO address, we don't use
         // virt_to_phys here, and just pass page_base instead.
+        assert!(get_hypervisor().has_cap(HypervisorCap::MMIO_GUARD));
         get_hypervisor().mmio_guard_unmap(page_base).map_err(|e| {
             error!("Error MMIO guard unmapping: {e}");
         })?;
