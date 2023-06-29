@@ -14,7 +14,9 @@
 
 //! Wrappers around calls to the KVM hypervisor.
 
-use super::common::{MemSharingHypervisor, MmioGuardedHypervisor, MMIO_GUARD_GRANULE_SIZE};
+use super::common::{
+    Hypervisor, MemSharingHypervisor, MmioGuardedHypervisor, MMIO_GUARD_GRANULE_SIZE,
+};
 use crate::error::{Error, Result};
 use crate::util::page_address;
 use core::fmt::{self, Display, Formatter};
@@ -78,7 +80,11 @@ impl KvmHypervisor {
     pub(super) const UUID: Uuid = uuid!("28b46fb6-2ec5-11e9-a9ca-4b564d003a74");
 }
 
-impl MmioGuardedHypervisor for KvmHypervisor {
+impl Hypervisor for KvmHypervisor {}
+
+pub(super) struct ProtectedKvmHypervisor;
+
+impl MmioGuardedHypervisor for ProtectedKvmHypervisor {
     fn init(&self) -> Result<()> {
         mmio_guard_enroll()?;
         let mmio_granule = mmio_guard_granule()?;
@@ -111,7 +117,7 @@ impl MmioGuardedHypervisor for KvmHypervisor {
     }
 }
 
-impl MemSharingHypervisor for KvmHypervisor {
+impl MemSharingHypervisor for ProtectedKvmHypervisor {
     fn share(&self, base_ipa: u64) -> Result<()> {
         let mut args = [0u64; 17];
         args[0] = base_ipa;
