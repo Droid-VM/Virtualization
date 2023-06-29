@@ -64,6 +64,7 @@ pub fn command_run_app(
     extra_idsigs: &[PathBuf],
     gdb: Option<NonZeroU16>,
     kernel: Option<&Path>,
+    vendor: Option<&Path>,
 ) -> Result<(), Error> {
     let apk_file = File::open(apk).context("Failed to open APK file")?;
 
@@ -121,6 +122,8 @@ pub fn command_run_app(
 
     let kernel = kernel.map(|p| open_parcel_file(p, false)).transpose()?;
 
+    let vendor = vendor.map(|p| open_parcel_file(p, false)).transpose()?;
+
     let extra_idsig_files: Result<Vec<File>, _> = extra_idsigs.iter().map(File::open).collect();
     let extra_idsig_fds = extra_idsig_files?.into_iter().map(ParcelFileDescriptor::new).collect();
 
@@ -143,6 +146,7 @@ pub fn command_run_app(
         customKernelImage: kernel,
         gdbPort: gdb.map(u16::from).unwrap_or(0) as i32, // 0 means no gdb
         taskProfiles: task_profiles,
+        vendorImage: vendor,
     };
 
     let config = VirtualMachineConfig::AppConfig(VirtualMachineAppConfig {
@@ -201,6 +205,7 @@ pub fn command_run_microdroid(
     task_profiles: Vec<String>,
     gdb: Option<NonZeroU16>,
     kernel: Option<&Path>,
+    vendor: Option<&Path>,
 ) -> Result<(), Error> {
     let apk = find_empty_payload_apk_path()?;
     println!("found path {}", apk.display());
@@ -233,6 +238,7 @@ pub fn command_run_microdroid(
         &extra_sig,
         gdb,
         kernel,
+        vendor,
     )
 }
 

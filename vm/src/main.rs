@@ -111,6 +111,10 @@ enum Opt {
         /// Path to custom kernel image to use when booting Microdroid.
         #[clap(long)]
         kernel: Option<PathBuf>,
+
+        /// Path to disk image containing vendor-specific modules.
+        #[clap(long)]
+        vendor: Option<PathBuf>,
     },
     /// Run a virtual machine with Microdroid inside
     RunMicrodroid {
@@ -171,6 +175,10 @@ enum Opt {
         /// Path to custom kernel image to use when booting Microdroid.
         #[clap(long)]
         kernel: Option<PathBuf>,
+
+        /// Path to disk image containing vendor-specific modules.
+        #[clap(long)]
+        vendor: Option<PathBuf>,
     },
     /// Run a virtual machine
     Run {
@@ -286,6 +294,7 @@ fn main() -> Result<(), Error> {
             extra_idsigs,
             gdb,
             kernel,
+            vendor,
         } => command_run_app(
             name,
             get_service()?.as_ref(),
@@ -306,6 +315,7 @@ fn main() -> Result<(), Error> {
             &extra_idsigs,
             gdb,
             kernel.as_deref(),
+            vendor.as_deref(),
         ),
         Opt::RunMicrodroid {
             name,
@@ -321,6 +331,7 @@ fn main() -> Result<(), Error> {
             task_profiles,
             gdb,
             kernel,
+            vendor,
         } => command_run_microdroid(
             name,
             get_service()?.as_ref(),
@@ -336,6 +347,7 @@ fn main() -> Result<(), Error> {
             task_profiles,
             gdb,
             kernel.as_deref(),
+            vendor.as_deref(),
         ),
         Opt::Run { name, config, cpu_topology, task_profiles, console, log, gdb } => {
             command_run(
