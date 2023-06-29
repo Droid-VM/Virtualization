@@ -39,6 +39,30 @@
       },
       "revId": "4894b43084338090d56614550367116a9839bd91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a64092d_0f061f68",
+        "filename": "vmbase/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-06-29T09:44:38Z",
+      "side": 1,
+      "message": "To leave the opportunity to customize all \"top-level\" static libraries at once (which are in essence different from the rlibs) and clarify the step-by-step use-case of each `defaults`, unlike what we previously had. The fact that `ffi` currently wraps `rlib` is an implementation detail and I don\u0027t think its cost (effectively 4 extra lines of Android.bp) outweighs the benefits mentioned above. BTW (and nit), all vmbase-based software has to be `no_std` so I personally don\u0027t find the name `vmbase_nostd` to be very informative.",
+      "parentUuid": "56934c8c_f2af484b",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 39
+      },
+      "revId": "4894b43084338090d56614550367116a9839bd91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
