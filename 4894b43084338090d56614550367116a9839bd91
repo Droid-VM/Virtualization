@@ -1,5 +1,46 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93f91d87_db3b1ad9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-29T09:33:49Z",
+      "side": 1,
+      "message": "Sorry I was OOO yesterday.",
+      "revId": "4894b43084338090d56614550367116a9839bd91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56934c8c_f2af484b",
+        "filename": "vmbase/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-06-29T09:33:49Z",
+      "side": 1,
+      "message": "Why not just have a single `vmbase_nostd_defaults` and use it in both ffi and rlib definitions?",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 39
+      },
+      "revId": "4894b43084338090d56614550367116a9839bd91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
