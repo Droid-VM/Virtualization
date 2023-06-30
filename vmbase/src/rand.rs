@@ -14,10 +14,11 @@
 
 //! Functions and drivers for obtaining true entropy.
 
-use crate::hvc::{self, TrngRng64Entropy};
 use core::fmt;
 use core::mem::size_of;
 use smccc::{self, Hvc};
+
+type TrngRng64Entropy = [u64; 3];
 
 /// Error type for rand operations.
 pub enum Error {
@@ -26,11 +27,11 @@ pub enum Error {
     /// Error during architectural SMCCC call.
     Smccc(smccc::arch::Error),
     /// Error during SMCCC TRNG call.
-    Trng(hvc::trng::Error),
+    Trng(smccc::trng::Error),
     /// Unsupported SMCCC version.
     UnsupportedSmcccVersion(smccc::arch::Version),
     /// Unsupported SMCCC TRNG version.
-    UnsupportedTrngVersion(hvc::trng::Version),
+    UnsupportedTrngVersion(smccc::trng::Version),
 }
 
 impl From<smccc::arch::Error> for Error {
@@ -39,8 +40,8 @@ impl From<smccc::arch::Error> for Error {
     }
 }
 
-impl From<hvc::trng::Error> for Error {
-    fn from(e: hvc::trng::Error) -> Self {
+impl From<smccc::trng::Error> for Error {
+    fn from(e: smccc::trng::Error) -> Self {
         Self::Trng(e)
     }
 }
@@ -75,14 +76,14 @@ pub(crate) fn init() -> Result<()> {
     }
 
     // TRNG_RND requires SMCCC TRNG v1.0.
-    match hvc::trng_version()? {
-        hvc::trng::Version { major: 1, minor: _ } => (),
+    match smccc::trng::version::<Hvc>()? {
+        smccc::trng::Version { major: 1, minor: _ } => (),
         version => return Err(Error::UnsupportedTrngVersion(version)),
     }
 
     // TRNG_RND64 doesn't define any special capabilities so ignore the successful result.
-    let _ = hvc::trng_features(hvc::ARM_SMCCC_TRNG_RND64).map_err(|e| {
-        if e == hvc::trng::Error::NotSupported {
+    let _ = smccc::trng::features::<Hvc>(smccc::trng::TRNG_RND64).map_err(|e| {
+        if e == smccc::trng::Error::NotSupported {
             // SMCCC TRNG is currently our only source of entropy.
             Error::NoEntropySource
         } else {
@@ -100,22 +101,22 @@ pub fn fill_with_entropy(s: &mut [u8]) -> Result<()> {
     let (aligned, remainder) = s.split_at_mut(s.len() - s.len() % MAX_BYTES_PER_CALL);
 
     for chunk in aligned.chunks_exact_mut(MAX_BYTES_PER_CALL) {
-        let (r, s, t) = repeat_trng_rnd(chunk.len())?;
+        let rnd = repeat_trng_rnd(chunk.len())?;
 
         let mut words = chunk.chunks_exact_mut(size_of::<u64>());
-        words.next().unwrap().clone_from_slice(&t.to_ne_bytes());
-        words.next().unwrap().clone_from_slice(&s.to_ne_bytes());
-        words.next().unwrap().clone_from_slice(&r.to_ne_bytes());
+        words.next().unwrap().clone_from_slice(&rnd[2].to_ne_bytes());
+        words.next().unwrap().clone_from_slice(&rnd[1].to_ne_bytes());
+        words.next().unwrap().clone_from_slice(&rnd[0].to_ne_bytes());
     }
 
     if !remainder.is_empty() {
         let mut entropy = [0; MAX_BYTES_PER_CALL];
-        let (r, s, t) = repeat_trng_rnd(remainder.len())?;
+        let rnd = repeat_trng_rnd(remainder.len())?;
 
         let mut words = entropy.chunks_exact_mut(size_of::<u64>());
-        words.next().unwrap().clone_from_slice(&t.to_ne_bytes());
-        words.next().unwrap().clone_from_slice(&s.to_ne_bytes());
-        words.next().unwrap().clone_from_slice(&r.to_ne_bytes());
+        words.next().unwrap().clone_from_slice(&rnd[2].to_ne_bytes());
+        words.next().unwrap().clone_from_slice(&rnd[1].to_ne_bytes());
+        words.next().unwrap().clone_from_slice(&rnd[0].to_ne_bytes());
 
         remainder.clone_from_slice(&entropy[..remainder.len()]);
     }
@@ -125,11 +126,10 @@ pub fn fill_with_entropy(s: &mut [u8]) -> Result<()> {
 
 fn repeat_trng_rnd(n_bytes: usize) -> Result<TrngRng64Entropy> {
     let bits = usize::try_from(u8::BITS).unwrap();
-    let n_bits = (n_bytes * bits).try_into().unwrap();
     loop {
-        match hvc::trng_rnd64(n_bits) {
+        match smccc::trng::rnd64::<Hvc>(n_bytes * bits) {
             Ok(entropy) => return Ok(entropy),
-            Err(hvc::trng::Error::NoEntropy) => (),
+            Err(smccc::trng::Error::NoEntropy) => (),
             Err(e) => return Err(e.into()),
         }
     }
