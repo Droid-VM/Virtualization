@@ -21,7 +21,7 @@ use super::util::{page_4kb_of, virt_to_phys};
 use crate::dsb;
 use crate::util::RangeExt as _;
 use aarch64_paging::paging::{Attributes, Descriptor, MemoryRegion as VaRange};
-use alloc::alloc::{alloc_zeroed, dealloc, handle_alloc_error};
+use alloc::alloc::{alloc, alloc_zeroed, dealloc, handle_alloc_error};
 use alloc::boxed::Box;
 use alloc::vec::Vec;
 use buddy_system_allocator::{FrameAllocator, LockedFrameAllocator};
@@ -321,15 +321,20 @@ pub fn alloc_shared(layout: Layout) -> hyp::Result<NonNull<u8>> {
 }
 
 fn try_shared_alloc(layout: Layout) -> Option<NonNull<u8>> {
-    let mut shared_pool = SHARED_POOL.get().unwrap().lock();
-
-    if let Some(buffer) = shared_pool.alloc_aligned(layout) {
-        Some(NonNull::new(buffer as _).unwrap())
-    } else if let Some(shared_memory) = SHARED_MEMORY.lock().as_mut() {
-        shared_memory.refill(&mut shared_pool, layout);
-        shared_pool.alloc_aligned(layout).map(|buffer| NonNull::new(buffer as _).unwrap())
+    if let Some(shared_pool) = SHARED_POOL.get() {
+        let mut shared_pool = shared_pool.lock();
+        if let Some(buffer) = shared_pool.alloc_aligned(layout) {
+            Some(NonNull::new(buffer as _).unwrap())
+        } else if let Some(shared_memory) = SHARED_MEMORY.lock().as_mut() {
+            shared_memory.refill(&mut shared_pool, layout);
+            shared_pool.alloc_aligned(layout).map(|buffer| NonNull::new(buffer as _).unwrap())
+        } else {
+            None
+        }
     } else {
-        None
+        // No SHARED_POOL means all shared memory (incl. heap) is already shared.
+        // SAFETY - layout has non-zero size.
+        NonNull::new(unsafe { alloc(layout) })
     }
 }
 
@@ -342,7 +347,13 @@ fn try_shared_alloc(layout: Layout) -> Option<NonNull<u8>> {
 /// The memory must have been allocated by `alloc_shared` with the same layout, and not yet
 /// deallocated.
 pub unsafe fn dealloc_shared(vaddr: NonNull<u8>, layout: Layout) -> hyp::Result<()> {
-    SHARED_POOL.get().unwrap().lock().dealloc_aligned(vaddr.as_ptr() as usize, layout);
+    if let Some(shared_pool) = SHARED_POOL.get() {
+        shared_pool.lock().dealloc_aligned(vaddr.as_ptr() as usize, layout);
+    } else {
+        // No SHARED_POOL means the shared buffer came from the heap.
+        // SAFETY - Safety comment must be respected by caller.
+        unsafe { dealloc(vaddr.as_ptr(), layout) }
+    }
 
     trace!("Deallocated shared buffer at {vaddr:?} with {layout:?}");
     Ok(())
