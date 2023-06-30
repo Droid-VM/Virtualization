@@ -73,14 +73,6 @@
 .set .L_SMCCC_VERSION_1_1, 0x0101
 .set .L_SMCCC_TRNG_VERSION_1_0, 0x0100
 
-/* Bionic-compatible stack protector */
-.section .data.stack_protector, "aw"
-__bionic_tls:
-	.zero	40
-.global __stack_chk_guard
-__stack_chk_guard:
-	.quad	0
-
 /**
  * This macro stores a random value into a register.
  * If a TRNG backed is not present or if an error occurs, the value remains unchanged.
