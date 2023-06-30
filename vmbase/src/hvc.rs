@@ -18,11 +18,10 @@ pub mod trng;
 use self::trng::Error;
 use smccc::{
     error::{positive_or_error_64, success_or_error_64},
-    hvc64,
+    hvc64, Hvc,
 };
 
 const ARM_SMCCC_TRNG_VERSION: u32 = 0x8400_0050;
-#[allow(dead_code)]
 const ARM_SMCCC_TRNG_FEATURES: u32 = 0x8400_0051;
 #[allow(dead_code)]
 const ARM_SMCCC_TRNG_GET_UUID: u32 = 0x8400_0052;
@@ -48,4 +47,26 @@ pub fn trng_rnd64(nbits: u64) -> trng::Result<TrngRng64Entropy> {
     success_or_error_64::<Error>(regs[0])?;
 
     Ok((regs[1], regs[2], regs[3]))
+}
+
+fn trng_features(fid: u32) -> trng::Result<u64> {
+    let mut args = [0u64; 17];
+    args[0] = fid as u64;
+
+    positive_or_error_64::<Error>(hvc64(ARM_SMCCC_TRNG_FEATURES, args)[0])
+}
+
+pub fn trng_has_rnd64() -> trng::Result<bool> {
+    match trng_features(ARM_SMCCC_TRNG_RND64) {
+        Ok(0) => Ok(true),
+        // TRNG_FEATURES re-purposes an error code to return a result!
+        Err(Error::NotSupported) => Ok(false),
+        // Not special capabilities defined for TRNG_RND64.
+        Ok(n) => Err(Error::Unexpected(n)),
+        Err(e) => Err(e),
+    }
+}
+
+pub fn smccc_version() -> Result<smccc::arch::Version, smccc::arch::Error> {
+    smccc::arch::version::<Hvc>()
 }
