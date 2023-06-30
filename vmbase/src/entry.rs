@@ -15,8 +15,9 @@
 //! Rust entry point.
 
 use crate::{
-    console, heap, logger,
+    bionic, console, heap, logger,
     power::{reboot, shutdown},
+    rand,
 };
 use hyp::{self, get_hypervisor};
 
@@ -43,6 +44,13 @@ extern "C" fn rust_entry(x0: u64, x1: u64, x2: u64, x3: u64) -> ! {
 
     logger::init().expect("Failed to initialize the logger");
     // We initialize the logger to Off (like the log crate) and clients should log::set_max_level.
+
+    rand::init().expect("Failed to initialize a source of entropy");
+    let stack_guard = rand::random_array().expect("Failed to get stack canary entropy");
+    bionic::__get_tls().stack_guard = u64::from_ne_bytes(stack_guard);
+
+    // Note: If rust_entry ever returned (which it shouldn't by being -> !), the compiler-injected
+    // stack guard comparison would detect a mismatch and call __stack_chk_fail.
 
     unsafe {
         main(x0, x1, x2, x3);
