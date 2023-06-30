@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2608318_3ac5a3f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-30T09:12:04Z",
+      "side": 1,
+      "message": "Hi Michael, \n\nYou reviewed AVF APIs last year. Here, I am adding a few test APIs. Could you take a look and review?\n\nThe new test APIs were designed after the following existing system APIs which are for the console output. The added APIs are for the console input.\n\n* InputStream getConsoleOutput()\n* boolean isVmOutputCaptured()\n* VirtualMachineConfig.Builder setVmOutputCaptured(boolean)",
+      "revId": "92e3472f1b11ff42f5fa3eae22bcbf7204abe676",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11dd515c_49edf757",
         "filename": "javalib/src/android/system/virtualmachine/VirtualMachine.java",
         "patchSetId": 4
