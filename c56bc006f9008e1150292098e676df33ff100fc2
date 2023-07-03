@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de27cd28_68455a9b",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-03T08:26:36Z",
+      "side": 1,
+      "message": "Should we drop the `get_` prefix here? It\u0027s less verbose without it.\n\nhttps://rust-lang.github.io/api-guidelines/naming.html#getter-names-follow-rust-convention-c-getter",
+      "range": {
+        "startLine": 26,
+        "startChar": 7,
+        "endLine": 26,
+        "endChar": 11
+      },
+      "revId": "c56bc006f9008e1150292098e676df33ff100fc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab0ae937_a7c92748",
+        "filename": "libs/hyp/src/hypervisor/common.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-03T08:26:36Z",
+      "side": 1,
+      "message": "Should we make this separate as following the make the code even less decoupled and easier to extend?\n\n```\nimpl\u003cT: MmioGuardedHypervisor\u003e Hypervisor for T {\n    fn get_mmio_guard(\u0026self) -\u003e Option\u003c\u0026dyn MmioGuardedHypervisor\u003e {\n        Some(self)\n    }\n}\n\nimpl\u003cT: MemSharingHypervisor\u003e Hypervisor for T {\n    fn get_mem_share(\u0026self) -\u003e Option\u003c\u0026dyn MemSharingHypervisor\u003e {\n        Some(self)\n    }\n}\n```",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 1
+      },
+      "revId": "c56bc006f9008e1150292098e676df33ff100fc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4677b591_0e02e555",
+        "filename": "vmbase/src/memory/shared.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-03T08:26:36Z",
+      "side": 1,
+      "message": "nit: Maybe just call the trait `MemSharer` so that here we\u0027ll have `mem_sharer.share()`? This would make this code easier to read.",
+      "range": {
+        "startLine": 404,
+        "startChar": 16,
+        "endLine": 404,
+        "endChar": 25
+      },
+      "revId": "c56bc006f9008e1150292098e676df33ff100fc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
