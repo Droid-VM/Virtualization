@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a5231573_92989cde",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-03T11:11:56Z",
+      "side": 1,
+      "message": "It can be verbose and tedious to do this mapping at the level of `fdt.compatible_nodes` and `node.getprop_cells`.\n\nActually my idea is to intervene at a higher level, not to touch the functions that return `libfdt::Result` such as\n```\nfn read_pci_info_from(fdt: \u0026Fdt) -\u003e libfdt::Result\u003cPciInfo\u003e\nfn patch_pci_info(fdt: \u0026mut Fdt, pci_info: \u0026PciInfo) -\u003e libfdt::Result\u003c()\u003e\n```\nI\u0027ll just add a tag to error to mark that these are the `FdtError` from the `PCI` node for example. So the caller will switch from \n```\npatch_pci_info(fdt, \u0026info.pci_info).map_err(|e| {\n        error!(\"Failed to patch pci info to DT: {e}\");\n        RebootReason::InvalidFdt\n    })?;\n```\nto\n```\npatch_pci_info(fdt, \u0026info.pci_info).map_err(|e| FdtValidationError::ParsingNodeFailed(\"PCI\", FdtError) \n```",
+      "parentUuid": "c4d1e38a_7430e8b8",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 21
+      },
+      "revId": "95a3044bce09d10c8e449129dd19da42d081050a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c9ce7088_1c39e35f",
         "filename": "pvmfw/src/fdt.rs",
         "patchSetId": 3
@@ -54,6 +78,30 @@
       "writtenOn": "2023-06-15T09:16:16Z",
       "side": 1,
       "message": "IIUC the intention, your final goal (beyond this CL) is to `?` from here (and all other calls in this function), right?",
+      "range": {
+        "startLine": 655,
+        "startChar": 54,
+        "endLine": 655,
+        "endChar": 56
+      },
+      "revId": "95a3044bce09d10c8e449129dd19da42d081050a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a37d8f9_60b220ff",
+        "filename": "pvmfw/src/fdt.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1958315
+      },
+      "writtenOn": "2023-07-03T11:11:56Z",
+      "side": 1,
+      "message": "Yes. My goal is to move all the `RebootReason::InvalidFdt` from this module to `entry.rs`\u0027s `fdt::sanitize_device_tree(fdt)` and only log the error there is possible, as discussed in the previous cl.",
+      "parentUuid": "c9ce7088_1c39e35f",
       "range": {
         "startLine": 655,
         "startChar": 54,
